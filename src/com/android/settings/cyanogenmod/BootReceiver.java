@@ -40,6 +40,9 @@ import com.android.settings.location.LocationSettings;
 
 import java.util.Arrays;
 import java.util.List;
+import java.io.IOException;
+import java.io.DataOutputStream;
+import java.io.DataInputStream;
 
 public class BootReceiver extends BroadcastReceiver {
 
@@ -49,6 +52,8 @@ public class BootReceiver extends BroadcastReceiver {
     private static final String IOSCHED_SETTINGS_PROP = "sys.iosched.restored";
     private static final String PERF_PROFILE_SETTINGS_PROP = "sys.perf.profile.restored";
     private static final String KSM_SETTINGS_PROP = "sys.ksm.restored";
+    private static final String UNDERVOLTING_PROP = "persist.sys.undervolt";
+    private static String UV_MODULE;
 
     private static final String SWAP_FILE = "/mnt/external_sd/.CrystalPA.swp";
     private static final String SWAP_FILE_STAGING = "/mnt/secure/staging/.CrystalPA.swp";
@@ -177,8 +182,20 @@ public class BootReceiver extends BroadcastReceiver {
 
         if (prefs.getBoolean(Processor.SOB_PREF, false) == false) {
             Log.i(TAG, "CPU restore disabled by user preference.");
+            SystemProperties.set(UNDERVOLTING_PROP, "0");
+            Log.i(TAG, "Restore disabled by user preference.");
             return;
         }
+
+        UV_MODULE = ctx.getResources().getString(com.android.settings.R.string.undervolting_module);
+	    if (SystemProperties.getBoolean(UNDERVOLTING_PROP, false) == true) {
+            // insmod undervolting module
+            insmod(UV_MODULE, true);
+        }
+        else {
+            // remove undervolting module
+            //insmod(UV_MODULE, false);
+	}
 
         String governor = prefs.getString(Processor.GOV_PREF, null);
         String minFrequency = prefs.getString(Processor.FREQ_MIN_PREF, null);
@@ -270,5 +287,31 @@ public class BootReceiver extends BroadcastReceiver {
 
         Utils.fileWriteOneLine(MemoryManagement.KSM_RUN_FILE, ksm ? "1" : "0");
         Log.d(TAG, "KSM settings restored.");
+    }
+
+    private static boolean insmod(String module, boolean insert) {
+        String command;
+    if (insert)
+        command = "/system/bin/insmod /system/lib/modules/" + module;
+    else
+        command = "/system/bin/rmmod " + module;
+        try {
+            Process process = Runtime.getRuntime().exec("su");
+            Log.e(TAG, "Executing: " + command);
+            DataOutputStream outputStream = new DataOutputStream(process.getOutputStream()); 
+            DataInputStream inputStream = new DataInputStream(process.getInputStream());
+            outputStream.writeBytes(command + "\n");
+            outputStream.flush();
+            outputStream.writeBytes("exit\n");
+            outputStream.flush();
+            process.waitFor();
+        }
+        catch (IOException e) {
+            return false;
+        }
+        catch (InterruptedException e) {
+            return false;
+        }
+        return true;
     }
 }

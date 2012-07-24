@@ -41,6 +41,11 @@
         android:title="@string/cpu_max_freq_title" />
 
     <CheckBoxPreference
+        android:key="pref_cpu_undervolt"
+        android:dialogTitle="@string/cpu_undervolt"
+        android:title="@string/cpu_undervolt_summary"/>
+
+    <CheckBoxPreference
         android:key="pref_cpu_set_on_boot"
         android:title="@string/cpu_set_on_boot"
         android:summary="@string/cpu_set_on_boot_summary"/>

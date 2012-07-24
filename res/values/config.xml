@@ -29,25 +29,7 @@
          very long strings too. -->
     <integer name="maximum_user_dictionary_word_length" translatable="false">48</integer>
 
-    <!-- **** CYANOGENMOD ADDITIONS START **** -->
+    <!-- Undervolting module -->
+    <string name="undervolting_module"></string>
 
-    <!-- Home button Wake Support. Some devices do not support this.
-         Setting to false will disable Home button Wake support -->
-    <bool name="config_show_homeWake">false</bool>
-
-    <!-- Volume rocker support. Some devices do not have a volume rocker. -->
-    <bool name="has_volume_rocker">true</bool>
-
-    <!-- Volume Rocker Wake Support. Some devices do not support (PMU) this.
-         Setting to false will disable Volume Rocker Wake support -->
-    <bool name="config_show_volumeRockerWake">false</bool>
-
-    <!-- Whether the device support custom performance profiles. Leave empty when
-         the device do not support it. -->
-    <string name="config_perf_profile_prop" translatable="false"></string>
-    <!-- When config_perf_profile_prop = true, then this value MUST be one of the
-         values listed in cm_arrays for perf_profile_values -->
-    <string name="config_perf_profile_default_entry" translatable="false"></string>
-
-    <!-- **** CYANOGENMOD ADDITIONS END **** -->
 </resources>
