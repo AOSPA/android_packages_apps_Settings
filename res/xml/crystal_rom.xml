@@ -30,6 +30,12 @@
         android:fragment="com.android.settings.crystalroms.cpustats.TimeInState"
         android:title="@string/cat_cpustates" />
 
+    <PreferenceScreen android:key="swap_settings" android:title="@string/swap_title" android:summary="@string/swap_summary">
+       <intent android:action="android.intent.action.MAIN"
+           android:targetPackage="com.android.settings"
+           android:targetClass="com.android.settings.crystalroms.SWAPActivity" />
+    </PreferenceScreen>
+
 
     <SwitchPreference
         android:key="pref_disable_boot_animation"

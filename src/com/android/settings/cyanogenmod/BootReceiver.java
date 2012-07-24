@@ -21,9 +21,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.SystemProperties;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.settings.DisplaySettings;
 import com.android.settings.R;
@@ -45,8 +49,15 @@ public class BootReceiver extends BroadcastReceiver {
     private static final String PERF_PROFILE_SETTINGS_PROP = "sys.perf.profile.restored";
     private static final String KSM_SETTINGS_PROP = "sys.ksm.restored";
 
+    private static final String SWAP_FILE = "/mnt/external_sd/.CrystalPA.swp";
+    private static final String SWAP_FILE_STAGING = "/mnt/secure/staging/.CrystalPA.swp";
+    private static final String SWAP_ENABLED_PROP = "persist.sys.swap.enabled";
+    private static final String SWAP_SIZE_PROP = "persist.sys.swap.size";
+    private static Context myContext;
+
     @Override
     public void onReceive(Context ctx, Intent intent) {
+        myContext = ctx;
         if (SystemProperties.getBoolean(CPU_SETTINGS_PROP, false) == false
                 && intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
             SystemProperties.set(CPU_SETTINGS_PROP, "true");
@@ -87,7 +98,77 @@ public class BootReceiver extends BroadcastReceiver {
         VibratorIntensity.restore(ctx);
         DisplaySettings.restore(ctx);
         LocationSettings.restore(ctx);
+
+        if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) || intent.getAction().equals(Intent.ACTION_MEDIA_MOUNTED)) {
+            if (SystemProperties.get(SWAP_ENABLED_PROP).equals("1")) {
+                Log.d(TAG, "SWAP_ENABLED_PROP: " + SWAP_ENABLED_PROP);
+                String command = "swapon " + SWAP_FILE;
+                mrunShellCommand = new runShellCommand(command, ctx.getResources().getString(com.android.settings.R.string.swap_toast_swap_enabled));
+                mrunShellCommand.start();
+            }
+        }
+
+        else if ( intent.getAction().equals(Intent.ACTION_SHUTDOWN) || intent.getAction().equals(Intent.ACTION_MEDIA_EJECT)) {
+            if (SystemProperties.get(SWAP_ENABLED_PROP).equals("1")) {
+                Log.d(TAG, "SWAP_ENABLED_PROP: " + SWAP_ENABLED_PROP);
+                String command = "swapoff " + SWAP_FILE_STAGING;
+                mrunShellCommand = new runShellCommand(command, ctx.getResources().getString(com.android.settings.R.string.swap_toast_swap_disabled));
+                mrunShellCommand.start();
+            }
+        }
+
     }
+
+    private class runShellCommand extends Thread {
+        private String command = "";
+        private String toastMessage = "";
+
+        public runShellCommand(String command, String toastMessage) {
+            this.command = command;
+            this.toastMessage = toastMessage;
+        }
+
+        @Override
+        public void run() {
+        try {
+            if (!command.equals("")) {
+                Process process = Runtime.getRuntime().exec("su");
+                Log.d(TAG, "Executing: " + command);
+                DataOutputStream outputStream = new DataOutputStream(process.getOutputStream());
+                DataInputStream inputStream = new DataInputStream(process.getInputStream());
+                outputStream.writeBytes(command + "\n");
+                outputStream.flush();
+                outputStream.writeBytes("exit\n");
+                outputStream.flush();
+                process.waitFor();
+            }
+            } catch (IOException e) {
+                Log.e(TAG, "Thread IOException");
+            }
+            catch (InterruptedException e) {
+                Log.e(TAG, "Thread InterruptedException");
+            }
+            Message messageToThread = new Message();
+            Bundle messageData = new Bundle();
+            messageToThread.what = 0;
+            messageData.putString("toastMessage", toastMessage);
+            messageToThread.setData(messageData);
+            mrunShellCommandHandler.sendMessage(messageToThread);
+        }
+    };
+
+    private runShellCommand mrunShellCommand;
+
+    private Handler mrunShellCommandHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            CharSequence text="";
+            Bundle messageData = msg.getData();
+            text = messageData.getString("toastMessage", "");
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(myContext, text, duration);
+            toast.show();
+        }
+    };
 
     private void configureCPU(Context ctx) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
@@ -162,6 +243,23 @@ public class BootReceiver extends BroadcastReceiver {
         if (prefs.getBoolean(PerformanceProfile.SOB_PREF, false) == false) {
             Log.i(TAG, "Performance profile restore disabled by user preference.");
             return;
+
+    private static boolean insmod(String module, boolean insert) {
+        String command;
+    if (insert)
+        command = "/system/bin/insmod /system/lib/modules/" + module;
+    else
+        command = "/system/bin/rmmod " + module;
+        try {
+            Process process = Runtime.getRuntime().exec("su");
+            Log.d(TAG, "Executing: " + command);
+            DataOutputStream outputStream = new DataOutputStream(process.getOutputStream()); 
+            DataInputStream inputStream = new DataInputStream(process.getInputStream());
+            outputStream.writeBytes(command + "\n");
+            outputStream.flush();
+            outputStream.writeBytes("exit\n");
+            outputStream.flush();
+            process.waitFor();
         }
 
         String perfProfileProp = res.getString(R.string.config_perf_profile_prop);
