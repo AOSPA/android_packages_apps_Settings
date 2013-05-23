@@ -29,7 +29,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.preference.PreferenceDrawerActivity;
 import android.preference.PreferenceFragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -307,13 +307,13 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
 
     public boolean startFragment(
             Fragment caller, String fragmentClass, int requestCode, Bundle extras) {
-        if (getActivity() instanceof PreferenceActivity) {
-            PreferenceActivity preferenceActivity = (PreferenceActivity)getActivity();
+        if (getActivity() instanceof PreferenceDrawerActivity) {
+            PreferenceDrawerActivity preferenceActivity = (PreferenceDrawerActivity)getActivity();
             preferenceActivity.startPreferencePanel(fragmentClass, extras,
                     R.string.lock_settings_picker_title, null, caller, requestCode);
             return true;
         } else {
-            Log.w(TAG, "Parent isn't PreferenceActivity, thus there's no way to launch the "
+            Log.w(TAG, "Parent isn't PreferenceDrawerActivity, thus there's no way to launch the "
                     + "given Fragment (name: " + fragmentClass + ", requestCode: " + requestCode
                     + ")");
             return false;

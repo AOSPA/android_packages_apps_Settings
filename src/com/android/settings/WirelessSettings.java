@@ -99,7 +99,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
     }
     /**
      * Invoked on each preference click in this hierarchy, overrides
-     * PreferenceActivity's implementation.  Used to make sure we track the
+     * PreferenceDrawerActivity's implementation.  Used to make sure we track the
      * preference click events.
      */
     @Override

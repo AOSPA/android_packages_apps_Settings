@@ -89,7 +89,7 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.preference.PreferenceDrawerActivity;
 import android.provider.Settings;
 import android.telephony.MSimTelephonyManager;
 import android.telephony.TelephonyManager;
@@ -558,7 +558,7 @@ public class DataUsageSummary extends Fragment {
                 return true;
             }
             case R.id.data_usage_menu_metered: {
-                final PreferenceActivity activity = (PreferenceActivity) getActivity();
+                final PreferenceDrawerActivity activity = (PreferenceDrawerActivity) getActivity();
                 activity.startPreferencePanel(DataUsageMeteredSettings.class.getCanonicalName(), null,
                         R.string.data_usage_metered_title, null, this, 0);
                 return true;

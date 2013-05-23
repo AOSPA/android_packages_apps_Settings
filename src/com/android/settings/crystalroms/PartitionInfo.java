@@ -27,7 +27,7 @@ import android.os.StatFs;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.preference.PreferenceDrawerActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -45,7 +45,7 @@ import java.util.regex.Pattern;
 
 import com.android.settings.R;
 
-public class PartitionInfo extends PreferenceActivity {
+public class PartitionInfo extends PreferenceDrawerActivity {
     private static final String TAG = "PartitionInfo";
     private static final String SYSTEM_PART_SIZE = "system_part_info";
     private static final String DATA_PART_SIZE = "data_part_info";

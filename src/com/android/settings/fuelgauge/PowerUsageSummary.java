@@ -27,8 +27,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Parcel;
 import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.preference.Preference;h
+import android.preference.PreferenceDrawerActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
@@ -151,7 +151,7 @@ public class PowerUsageSummary extends PreferenceFragment {
             byte[] histData = hist.marshall();
             Bundle args = new Bundle();
             args.putByteArray(BatteryHistoryDetail.EXTRA_STATS, histData);
-            PreferenceActivity pa = (PreferenceActivity)getActivity();
+            PreferenceDrawerActivity pa = (PreferenceDrawerActivity)getActivity();
             pa.startPreferencePanel(BatteryHistoryDetail.class.getName(), args,
                     R.string.history_details_title, null, null, 0);
             return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -367,3 +367,4 @@ public class PowerUsageSummary extends PreferenceFragment {
         }
     };
 }
+

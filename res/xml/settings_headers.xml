@@ -79,10 +79,6 @@
         android:fragment="com.android.settings.WirelessSettings"
         android:icon="@drawable/empty_icon" />
 
-    <!-- DEVICE -->
-    <header android:id="@+id/device_section"
-        android:title="@string/header_category_device" />
-
     <!-- Crystal -->
     <header android:id="@+id/crystal_rom"
         android:title="@string/crystal_title" />
@@ -125,6 +121,10 @@
             android:targetPackage="com.android.settings"
             android:targetClass="com.android.settings.crystalroms.PartitionInfo" />
     </header>
+
+    <!-- DEVICE -->
+    <header android:id="@+id/device_section"
+        android:title="@string/header_category_device" />
 
     <!-- Home -->
     <header
