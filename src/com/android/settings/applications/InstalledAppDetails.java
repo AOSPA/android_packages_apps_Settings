@@ -18,6 +18,7 @@ package com.android.settings.applications;
 
 import com.android.internal.telephony.ISms;
 import com.android.internal.telephony.SmsUsageMonitor;
+import com.android.settings.DevelopmentSettings;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -581,6 +582,12 @@ public class InstalledAppDetails extends Fragment
         // Set application name.
         TextView label = (TextView) appSnippet.findViewById(R.id.app_name);
         label.setText(mAppEntry.label);
+        // Set application package name.
+        TextView packageName = (TextView) appSnippet.findViewById(R.id.app_pkgname);
+        packageName.setText(mAppEntry.info.packageName);
+        packageName.setVisibility(getActivity().getSharedPreferences(DevelopmentSettings.PREF_FILE,
+                Context.MODE_PRIVATE).getBoolean(DevelopmentSettings.PREF_SHOW,
+                android.os.Build.TYPE.equals("eng")) ? View.VISIBLE : View.GONE);
         // Version number of application
         mAppVersion = (TextView) appSnippet.findViewById(R.id.app_size);
 
