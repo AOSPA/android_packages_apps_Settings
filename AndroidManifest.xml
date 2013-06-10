@@ -81,7 +81,8 @@
 
         <!-- Settings -->
 
-        <activity android:name="Settings"
+        <activity android:name="MainSettings"
+                android:theme="@android:style/Theme.Holo.NoActionBar"
                 android:label="@string/settings_label_launcher"
                 android:taskAffinity="com.android.settings"
                 android:launchMode="singleTask">
@@ -90,6 +91,16 @@
                 <action android:name="android.settings.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="Settings"
+            android:label="@string/settings_label_launcher" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
@@ -1765,6 +1776,11 @@
         <!-- CrystalRoms -->
 
         <activity android:name=".crystalroms.BatteryBarMenu" />
+
+        <activity android:name=".AccountSettingsTab" />
+        <activity android:name=".ConnectionSettingsTab" />
+        <activity android:name=".DeviceSettingsTab" />
+        <activity android:name=".MoreSettingsTab" />
 
         <activity android:name=".crystalroms.PartitionInfo"
                 android:label="@string/partition_info_title">
