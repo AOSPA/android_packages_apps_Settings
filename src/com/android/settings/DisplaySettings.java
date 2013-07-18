@@ -60,12 +60,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_ADAPTIVE_BACKLIGHT = "adaptive_backlight";
     private static final String KEY_ADVANCED_DISPLAY_SETTINGS = "advanced_display_settings";
+    private static final String KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED = "wake_when_plugged_or_unplugged";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
     private CheckBoxPreference mAccelerometer;
     private FontDialogPreference mFontSizePref;
     private PreferenceScreen mNotificationPulse;
+    private CheckBoxPreference mWakeWhenPluggedOrUnplugged;
 
     private final Configuration mCurConfig = new Configuration();
 
@@ -133,6 +135,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
                 getPreferenceScreen(), KEY_ADVANCED_DISPLAY_SETTINGS);
+
+        mWakeWhenPluggedOrUnplugged =
+                (CheckBoxPreference) findPreference(KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED);
+
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -209,9 +215,19 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         RotationPolicy.registerRotationPolicyListener(getActivity(),
                 mRotationPolicyListener);
 
+        final ContentResolver resolver = getContentResolver();
+
         if (mAdaptiveBacklight != null) {
             mAdaptiveBacklight.setChecked(AdaptiveBacklight.isEnabled());
         }
+
+        // Default value for wake-on-plug behavior from config.xml
+        boolean wakeUpWhenPluggedOrUnpluggedConfig = getResources().getBoolean(
+                com.android.internal.R.bool.config_unplugTurnsOnScreen);
+
+        mWakeWhenPluggedOrUnplugged.setChecked(Settings.Global.getInt(resolver,
+                Settings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
+                (wakeUpWhenPluggedOrUnpluggedConfig ? 1 : 0)) == 1);
 
         updateState();
     }
@@ -289,6 +305,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     getActivity(), !mAccelerometer.isChecked());
         } else if (preference == mAdaptiveBacklight) {
             return AdaptiveBacklight.setEnabled(mAdaptiveBacklight.isChecked());
+        } else if (preference == mWakeWhenPluggedOrUnplugged) {
+            Settings.Global.putInt(getContentResolver(),
+                    Settings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
+                    mWakeWhenPluggedOrUnplugged.isChecked() ? 1 : 0);
+            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
