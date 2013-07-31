@@ -1672,6 +1672,10 @@
         <activity android:name=".chameleonos.labs.gestureanywhere.GestureAnywhereBuilderActivity" />
         <activity android:name=".chameleonos.labs.gestureanywhere.GestureAnywhereCreateGestureActivity" />
 
+        <activity android:name=".cyanogenmod.AutoBrightnessSetup"
+                android:excludeFromRecents="true"
+                android:theme="@*android:style/Theme.Holo.Dialog.Alert" />
+
 	<activity android:name=".AOSPAL.RamBar" />
 
    	<!-- Pseudo-activity used to provide an intent-filter entry point to ass display rotation config -->
@@ -1684,6 +1688,7 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.AOSPAL.RamBar" />
         </activity>
+
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
         <activity android:name="Settings$CryptKeeperSettingsActivity"
                 android:label="@string/crypt_keeper_encrypt_title">
