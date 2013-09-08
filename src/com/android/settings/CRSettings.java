@@ -65,12 +65,16 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private static final String FORCE_HIGHEND_GFX_PREF = "pref_force_highend_gfx";
     private static final String FORCE_HIGHEND_GFX_PERSIST_PROP = "persist.sys.force_highendgfx";
     private static final String KONSTA_NAVBAR = "konsta_navbar";
+    private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
+    private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
 
     private final Configuration mCurrentConfig = new Configuration();
 
     private CheckBoxPreference mDisableBootanimPref;
     private CheckBoxPreference mForceHighEndGfx;
     private CheckBoxPreference mKonstaNavbar;
+    private ListPreference mListViewAnimation;
+    private ListPreference mListViewInterpolator;
 
     private Context mContext;
 
@@ -80,6 +84,21 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         addPreferencesFromResource(R.xml.crystal_rom);
 
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        mListViewAnimation = (ListPreference) prefSet.findPreference(KEY_LISTVIEW_ANIMATION);
+        int listviewanimation = Settings.System.getInt(getContentResolver(),
+                Settings.System.LISTVIEW_ANIMATION, 0);
+        mListViewAnimation.setValue(String.valueOf(listviewanimation));
+        mListViewAnimation.setSummary(mListViewAnimation.getEntry());
+        mListViewAnimation.setOnPreferenceChangeListener(this);
+
+        mListViewInterpolator = (ListPreference) prefSet.findPreference(KEY_LISTVIEW_INTERPOLATOR);
+        int listviewinterpolator = Settings.System.getInt(getContentResolver(),
+                Settings.System.LISTVIEW_INTERPOLATOR, 0);
+        mListViewInterpolator.setValue(String.valueOf(listviewinterpolator));
+        mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
+        mListViewInterpolator.setOnPreferenceChangeListener(this);
+        mListViewInterpolator.setEnabled(listviewanimation > 0);
 
         mKonstaNavbar = (CheckBoxPreference) findPreference(KONSTA_NAVBAR);
         mKonstaNavbar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
@@ -133,6 +152,30 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                     .show();
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+        final String key = preference.getKey();
+        if (KEY_LISTVIEW_ANIMATION.equals(key)) {
+            int value = Integer.parseInt((String) objValue);
+            int index = mListViewAnimation.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.LISTVIEW_ANIMATION,
+                    value);
+            mListViewAnimation.setSummary(mListViewAnimation.getEntries()[index]);
+            mListViewInterpolator.setEnabled(value > 0);
+        }
+        if (KEY_LISTVIEW_INTERPOLATOR.equals(key)) {
+            int value = Integer.parseInt((String) objValue);
+            int index = mListViewInterpolator.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.LISTVIEW_INTERPOLATOR,
+                    value);
+            mListViewInterpolator.setSummary(mListViewInterpolator.getEntries()[index]);
+        }
+
+        return true;
     }
 
     @Override

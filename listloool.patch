@@ -1,0 +1,211 @@
+commit 87269b4001bebe5ef12d11a744b40de305652f90
+Author: jkl5616 <jkl5616@gmail.com>
+Date:   Sun Sep 8 03:18:04 2013 +0200
+
+    Return: Listanimation views and interpolator [2/2]
+    
+    Hard Rebase
+    
+    Change-Id: Ia7917ab646d8d05bae8042ecd9cbb7ec722077a7
+
+diff --git a/res/values/slim_arrays.xml b/res/values/slim_arrays.xml
+index e0eebd4..9133fd7 100644
+--- a/res/values/slim_arrays.xml
++++ b/res/values/slim_arrays.xml
+@@ -937,4 +937,56 @@
+         <item>2</item>
+     </string-array>
+ 
++    <!-- Listview animation -->
++    <string-array name="listview_animation_entries">
++        <item>@string/listview_off</item>
++        <item>@string/listview_wave_left</item>
++        <item>@string/listview_wave_right</item>
++        <item>@string/listview_scale</item>
++        <item>@string/listview_alpha</item>
++        <item>@string/listview_stack_top</item>
++        <item>@string/listview_stack_bottom</item>
++        <item>@string/listview_unfold</item>
++        <item>@string/listview_fold</item>
++        <item>@string/listview_translate_left</item>
++        <item>@string/listview_translate_right</item>
++    </string-array>
++
++    <string-array name="listview_animation_values">
++        <item>0</item>
++        <item>1</item>
++        <item>2</item>
++        <item>3</item>
++        <item>4</item>
++        <item>5</item>
++        <item>6</item>
++        <item>7</item>
++        <item>8</item>
++        <item>9</item>
++        <item>10</item>
++    </string-array>
++
++    <!-- Listview Interpolator -->
++    <string-array name="listview_interpolator_entries">
++        <item>@string/listview_off</item>
++        <item>@string/listview_accelerate_interpolator</item>
++        <item>@string/listview_decelerate_interpolator</item>
++        <item>@string/listview_accelerate_decelerate_interpolator</item>
++        <item>@string/listview_anticipate_interpolator</item>
++        <item>@string/listview_overshoot_interpolator</item>
++        <item>@string/listview_anticipate_overshoot_interpolator</item>
++        <item>@string/listview_bounce_interpolator</item>
++    </string-array>
++
++    <string-array name="listview_interpolator_values">
++        <item>0</item>
++        <item>1</item>
++        <item>2</item>
++        <item>3</item>
++        <item>4</item>
++        <item>5</item>
++        <item>6</item>
++        <item>7</item>
++    </string-array>
++
+ </resources>
+diff --git a/res/values/slim_strings.xml b/res/values/slim_strings.xml
+index 82dae40..ade09e0 100644
+--- a/res/values/slim_strings.xml
++++ b/res/values/slim_strings.xml
+@@ -910,4 +910,29 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+     <!-- Minimum Vibration Duration -->
+     <string name="minimum_vibration_duration">Minimum vibration duration</string>
+ 
++    <!-- ListView animation -->
++    <string name="interface_settings_animation_title">Animation options</string>
++    <string name="listview_animation_title">ListView animation</string>
++    <string name="listview_off">Default</string>
++    <string name="listview_wave_left">Wave (left)</string>
++    <string name="listview_wave_right">Wave (right)</string>
++    <string name="listview_alpha">Alpha</string>
++    <string name="listview_scale">Scale</string>
++    <string name="listview_stack_top">Stack (top)</string>
++    <string name="listview_stack_bottom">Stack (bottom)</string>
++    <string name="listview_unfold">Unfold</string>
++    <string name="listview_fold">Fold</string>
++    <string name="listview_translate_left">Translate (left)</string>
++    <string name="listview_translate_right">Translate (right)</string>
++
++    <!-- ListView interpolator -->
++    <string name="listview_interpolator_title">ListView interpolator</string>
++    <string name="listview_accelerate_interpolator">Accelerate</string>
++    <string name="listview_decelerate_interpolator">Decelerate</string>
++    <string name="listview_accelerate_decelerate_interpolator">Accelerate and decelerate</string>
++    <string name="listview_anticipate_interpolator">Anticipate</string>
++    <string name="listview_overshoot_interpolator">Overshoot</string>
++    <string name="listview_anticipate_overshoot_interpolator">Anticipate and overshoot</string>
++    <string name="listview_bounce_interpolator">Bounce</string>
++
+ </resources>
+diff --git a/res/xml/display_settings.xml b/res/xml/display_settings.xml
+index 961e3bf..08518d2 100644
+--- a/res/xml/display_settings.xml
++++ b/res/xml/display_settings.xml
+@@ -69,6 +69,22 @@
+             android:entries="@array/entries_system_power_crt_mode"
+             android:entryValues="@array/values_system_power_crt_mode" />
+ 
++        <ListPreference
++            android:key="listview_animation"
++            android:dialogTitle="@string/listview_animation_title"
++            android:title="@string/listview_animation_title"
++            android:entries="@array/listview_animation_entries"
++            android:entryValues="@array/listview_animation_values"
++            android:defaultValue="0" />
++
++        <ListPreference
++            android:key="listview_interpolator"
++            android:dialogTitle="@string/listview_interpolator_title"
++            android:title="@string/listview_interpolator_title"
++            android:entries="@array/listview_interpolator_entries"
++            android:entryValues="@array/listview_interpolator_values"
++            android:defaultValue="0" />
++
+     </PreferenceCategory>
+ 
+         <PreferenceCategory
+diff --git a/src/com/android/settings/DisplaySettings.java b/src/com/android/settings/DisplaySettings.java
+index 31e1f31..06b1914 100644
+--- a/src/com/android/settings/DisplaySettings.java
++++ b/src/com/android/settings/DisplaySettings.java
+@@ -62,6 +62,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
+     private static final String KEY_SCREEN_SAVER = "screensaver";
+     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
+     private static final String KEY_ANIMATION_OPTIONS = "category_animation_options";
++    private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
++    private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
+     private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
+     private static final String KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
+     private static final String KEY_WAKEUP_CATEGORY = "category_wakeup_options";
+@@ -81,15 +83,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
+     private PreferenceScreen mBatteryPulse;
+     private CheckBoxPreference mVolumeWake;
+     private ListPreference mCrtMode;
++    private ListPreference mListViewAnimation;
++    private ListPreference mListViewInterpolator;
+     private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
+     private PreferenceCategory mWakeUpOptions;
+ 
+     private final Configuration mCurConfig = new Configuration();
+-    
++
+     private ListPreference mScreenTimeoutPreference;
+     private Preference mScreenSaverPreference;
+ 
+-    private ContentObserver mAccelerometerRotationObserver = 
++    private ContentObserver mAccelerometerRotationObserver =
+             new ContentObserver(new Handler()) {
+         @Override
+         public void onChange(boolean selfChange) {
+@@ -207,6 +211,21 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
+         } else if (animationOptions != null) {
+             prefSet.removePreference(animationOptions);
+         }
++
++        mListViewAnimation = (ListPreference) prefSet.findPreference(KEY_LISTVIEW_ANIMATION);
++        int listviewanimation = Settings.System.getInt(getContentResolver(),
++                Settings.System.LISTVIEW_ANIMATION, 0);
++        mListViewAnimation.setValue(String.valueOf(listviewanimation));
++        mListViewAnimation.setSummary(mListViewAnimation.getEntry());
++        mListViewAnimation.setOnPreferenceChangeListener(this);
++
++        mListViewInterpolator = (ListPreference) prefSet.findPreference(KEY_LISTVIEW_INTERPOLATOR);
++        int listviewinterpolator = Settings.System.getInt(getContentResolver(),
++                Settings.System.LISTVIEW_INTERPOLATOR, 0);
++        mListViewInterpolator.setValue(String.valueOf(listviewinterpolator));
++        mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
++        mListViewInterpolator.setOnPreferenceChangeListener(this);
++        mListViewInterpolator.setEnabled(listviewanimation > 0);
+     }
+ 
+     private void updateTimeoutPreferenceDescription(long currentTimeout) {
+@@ -467,6 +486,23 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
+                     value);
+             mCrtMode.setSummary(mCrtMode.getEntries()[index]);
+         }
++        if (KEY_LISTVIEW_ANIMATION.equals(key)) {
++            int value = Integer.parseInt((String) objValue);
++            int index = mListViewAnimation.findIndexOfValue((String) objValue);
++            Settings.System.putInt(getContentResolver(),
++                    Settings.System.LISTVIEW_ANIMATION,
++                    value);
++            mListViewAnimation.setSummary(mListViewAnimation.getEntries()[index]);
++            mListViewInterpolator.setEnabled(value > 0);
++        }
++        if (KEY_LISTVIEW_INTERPOLATOR.equals(key)) {
++            int value = Integer.parseInt((String) objValue);
++            int index = mListViewInterpolator.findIndexOfValue((String) objValue);
++            Settings.System.putInt(getContentResolver(),
++                    Settings.System.LISTVIEW_INTERPOLATOR,
++                    value);
++            mListViewInterpolator.setSummary(mListViewInterpolator.getEntries()[index]);
++        }
+         if (KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED.equals(key)) {
+             Settings.System.putInt(getContentResolver(),
+                     Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED,

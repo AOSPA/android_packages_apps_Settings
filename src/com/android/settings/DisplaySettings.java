@@ -104,7 +104,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (!RotationPolicy.isRotationSupported(getActivity())
                 || RotationPolicy.isRotationLockToggleSupported(getActivity())) {
             // If rotation lock is supported, then we do not provide this option in
-            // Display settings.  However, is still available in Accessibility settings,
+            // Display settings. However, is still available in Accessibility settings,
             // if the device supports rotation.
             getPreferenceScreen().removePreference(mAccelerometer);
         }
@@ -301,8 +301,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     /**
-     * Reads the current font size and sets the value in the summary text
-     */
+* Reads the current font size and sets the value in the summary text
+*/
     public void readFontSizePreference(Preference pref) {
         try {
             mCurConfig.updateFrom(ActivityManagerNative.getDefault().getConfiguration());
@@ -376,9 +376,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     /**
-     * Restore the properties associated with this preference on boot
-     * @param ctx A valid context
-     */
+* Restore the properties associated with this preference on boot
+* @param ctx A valid context
+*/
     public static void restore(Context ctx) {
         if (isAdaptiveBacklightSupported()) {
             final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
