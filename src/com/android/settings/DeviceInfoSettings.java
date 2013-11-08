@@ -80,6 +80,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String PROPERTY_QGP_VERSION = "persist.qgp.version";
     private static final String MBN_VERSION_PATH = "/persist/speccfg/mbnversion";
     private static final String QGP_VERSION_PATH = "/persist/speccfg/devicetype";
+    private static final String KEY_PA_VERSION = "pa_version";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
@@ -144,6 +145,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         if(TextUtils.isEmpty(mMbnVersion)){
             getPreferenceScreen().removePreference(findPreference(KEY_MBN_VERSION));
         }
+        findPreference(KEY_KERNEL_VERSION).setSummary(DeviceInfoUtils.getFormattedKernelVersion());
+        setValueSummary(KEY_PA_VERSION, "ro.pa.version");
 
         if (!SELinux.isSELinuxEnabled()) {
             String status = getResources().getString(R.string.selinux_status_disabled);
