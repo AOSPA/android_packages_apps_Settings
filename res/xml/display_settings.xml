@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2010 The Android Open Source Project
+     Copyright 2013 The ParanoidAndroid Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -61,5 +62,16 @@
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
+
+    <PreferenceCategory
+        android:key="smart_cover_category"
+        android:title="@string/smart_cover_category_title">
+
+        <CheckBoxPreference
+             android:key="smart_cover_wake"
+             android:title="@string/smart_cover_wake_title"
+             android:summary="@string/smart_cover_wake_summary" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
