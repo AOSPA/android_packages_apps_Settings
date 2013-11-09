@@ -177,6 +177,11 @@
     <!-- UI debug setting: show cpu usage summary [CHAR LIMIT=50] -->
     <string name="show_cpu_info_summary">Screen overlay showing current CPU info</string>
 
+     <!-- General strings -->
+     <string name="ok">OK</string>
+     <string name="reset">Reset</string>
+     <string name="attention">Attention</string>
+
    <!-- Android debugging over WiFi -->
     <string name="adb_over_network">ADB over network</string>
     <string name="adb_over_network_summary">Enable TCP/IP debugging over network interfaces (Wi-Fi, 
@@ -194,5 +199,10 @@ USB networks). This setting is reset on reboot</string>
     <string name="wifi_setting_countrycode_error">There was a problem setting the region code.</string>
     <!-- Wi-Fi settings diables message if Wifi is off-->
     <string name="wifi_setting_countrycode_disabled">Enable Wi-Fi to change this option.</string>
+
+    <!-- Safe headset volume restore checkbox -->
+    <string name="safe_headset_volume_title">Safe headset volume</string>
+    <string name="safe_headset_volume_summary">Prevent loud volume levels when headset is first plugged in</string>
+    <string name="safe_headset_volume_warning_dialog_text">Listening at high volume for long periods may damage your hearing. Disable it with caution.</string>
 
 </resources>

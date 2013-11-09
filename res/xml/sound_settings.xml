@@ -104,6 +104,12 @@
         android:summary="@string/volume_wake_summary"
         android:defaultValue="false" />
 
+    <CheckBoxPreference
+            android:key="safe_headset_volume"
+            android:title="@string/safe_headset_volume_title"
+            android:summary="@string/safe_headset_volume_summary"
+            android:defaultValue="true" />
+
     <!-- Dock -->
     <PreferenceCategory
         android:key="dock_category"
