@@ -100,12 +100,18 @@
                 style="?android:preferenceInformationStyle"
                 android:title="@string/model_number"
                 android:summary="@string/device_info_default"/>
-                
+
         <!-- Device firmware version -->
         <Preference android:key="firmware_version" 
                 style="?android:preferenceInformationStyle"
                 android:title="@string/firmware_version"
                 android:summary="@string/device_info_default"/>
+
+        <!-- Device PA version -->
+        <Preference android:key="pa_version"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/pa_version"
+                android:summary="@string/pa_version_default" />
 
         <!-- Device FCC equipment id -->
         <Preference android:key="fcc_equipment_id"
