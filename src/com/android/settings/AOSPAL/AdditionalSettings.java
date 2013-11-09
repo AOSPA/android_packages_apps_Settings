@@ -28,11 +28,12 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String BUTTON_HEADSETHOOK_LAUNCH_VOICE = "button_headsethook_launch_voice";
     private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
     private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
-    private static final String KEY_DUAL_PANEL = "force_dualpanel"; 
+    private static final String KEY_DUAL_PANEL = "force_dualpanel";
     private static final String KEY_REVERSE_DEFAULT_APP_PICKER = "reverse_default_app_picker";
     private static final String LOCKSCREEN_POWER_MENU = "lockscreen_power_menu";
     private static final String KEY_NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
     private static final String KEY_CATEGORY_QS_STATUSBAR = "qs_statusbar";
+    private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
 
     ListPreference mQuickPulldown;
     ListPreference mSmartPulldown;
@@ -40,6 +41,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mLockScreenPowerMenu;
     private CheckBoxPreference mDualPanel;
     private CheckBoxPreference mReverseDefaultAppPicker;
+    private CheckBoxPreference mStatusBarBrightnessControl;
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
     private SeekBarPreference mNavigationBarHeight;
@@ -118,6 +120,19 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
                     Settings.System.NAVIGATION_BAR_HEIGHT, 1f) * 100));
         mNavigationBarHeight.setTitle(getResources().getText(R.string.navigation_bar_height) + " " + mNavigationBarHeight.getProgress() + "%");
         mNavigationBarHeight.setOnPreferenceChangeListener(this);
+
+        // Status bar brightness control
+
+        // Start observing for changes on auto brightness
+        StatusBarBrightnessChangedObserver statusBarBrightnessChangedObserver =
+            new StatusBarBrightnessChangedObserver(new Handler());
+        statusBarBrightnessChangedObserver.startObserving();
+
+        mStatusBarBrightnessControl =
+            (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_BRIGHTNESS_CONTROL);
+        mStatusBarBrightnessControl.setChecked((Settings.System.getInt(getContentResolver(),
+                            Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0) == 1));
+        mStatusBarBrightnessControl.setOnPreferenceChangeListener(this);
     }
 
     private boolean isToggled(Preference pref) {
@@ -127,6 +142,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        updateStatusBarBrightnessControl();
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -143,6 +159,11 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(), Settings.System.QS_SMART_PULLDOWN,
                     smartPulldown);
             updateSmartPulldownSummary(smartPulldown);
+        } else if (preference == mStatusBarBrightnessControl) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL,
+                    (Boolean) newValue ? 1 : 0);
+             return true;
         } else if (KEY_LISTVIEW_ANIMATION.equals(key)) {
             int value = Integer.parseInt((String) newValue);
             int index = mListViewAnimation.findIndexOfValue((String) newValue);
@@ -216,5 +237,41 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
             mSmartPulldown.setSummary(res.getString(R.string.smart_pulldown_summary, type));
         }
     }
-}
 
+    private void updateStatusBarBrightnessControl() {
+        try {
+            if (mStatusBarBrightnessControl != null) {
+                int mode = Settings.System.getIntForUser(getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS_MODE,
+                    Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+
+                if (mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+                    mStatusBarBrightnessControl.setEnabled(false);
+                    mStatusBarBrightnessControl.setSummary(R.string.status_bar_toggle_info);
+                } else {
+                    mStatusBarBrightnessControl.setEnabled(true);
+                    mStatusBarBrightnessControl.setSummary(
+                        R.string.status_bar_toggle_brightness_summary);
+                }
+            }
+        } catch (SettingNotFoundException e) {
+        }
+    }
+
+    private class StatusBarBrightnessChangedObserver extends ContentObserver {
+        public StatusBarBrightnessChangedObserver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            updateStatusBarBrightnessControl();
+        }
+
+        public void startObserving() {
+            getContentResolver().registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS_MODE),
+                    false, this);
+        }
+    }
+}
