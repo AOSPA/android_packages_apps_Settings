@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * This code has been modified. Portions copyright (C) 2013, ParanoidAndroid Project.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,6 +40,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
+import android.preference.ListPreference;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -68,6 +70,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
     private static final String KEY_SMS_APPLICATION = "sms_application";
     private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
+    private static final String KEY_NFC_POLLING_MODE = "nfc_polling_mode";
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -77,6 +80,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
     private NfcEnabler mNfcEnabler;
     private NfcAdapter mNfcAdapter;
     private NsdEnabler mNsdEnabler;
+    private ListPreference mNfcPollingMode;
 
     private ConnectivityManager mCm;
     private TelephonyManager mTm;
@@ -235,6 +239,18 @@ public class WirelessSettings extends RestrictedSettingsFragment
         Log.d(TAG, s);
     }
 
+    
+@Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mNfcPollingMode) {
+            int newVal = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NFC_POLLING_MODE, newVal);
+            updateNfcPolling();
+            return true;
+        }
+        return false;
+    }
     public static boolean isRadioAllowed(Context context, String type) {
         if (!AirplaneModeEnabler.isAirplaneModeOn(context)) {
             return true;
@@ -271,8 +287,14 @@ public class WirelessSettings extends RestrictedSettingsFragment
         PreferenceScreen androidBeam = (PreferenceScreen) findPreference(KEY_ANDROID_BEAM_SETTINGS);
         CheckBoxPreference nsd = (CheckBoxPreference) findPreference(KEY_TOGGLE_NSD);
 
+        mNfcPollingMode = (ListPreference) findPreference(KEY_NFC_POLLING_MODE);
+        mNfcPollingMode.setOnPreferenceChangeListener(this);
+        mNfcPollingMode.setValue(String.valueOf(Settings.System.getInt(activity.getContentResolver(), 
+                Settings.System.NFC_POLLING_MODE, 3)));
+        updateNfcPolling();
+
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
-        mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
+        mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam, mNfcPollingMode);
 
         mSmsApplicationPreference = (SmsListPreference) findPreference(KEY_SMS_APPLICATION);
         mSmsApplicationPreference.setOnPreferenceChangeListener(this);
@@ -324,6 +346,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
         mNfcAdapter = NfcAdapter.getDefaultAdapter(activity);
         if (mNfcAdapter == null) {
             getPreferenceScreen().removePreference(nfc);
+            getPreferenceScreen().removePreference(mNfcPollingMode);
             getPreferenceScreen().removePreference(androidBeam);
             mNfcEnabler = null;
         }
@@ -392,6 +415,25 @@ public class WirelessSettings extends RestrictedSettingsFragment
         super.onStart();
 
         initSmsApplicationSetting();
+    }
+
+    private void updateNfcPolling() {
+        int resId;
+        String value = Settings.System.getString(getContentResolver(),
+                Settings.System.NFC_POLLING_MODE);
+        String[] pollingArray = getResources().getStringArray(R.array.nfc_polling_mode_values);
+
+        if (pollingArray[0].equals(value)) {
+            resId = R.string.nfc_polling_mode_screen_off;
+            mNfcPollingMode.setValueIndex(0);
+        } else if (pollingArray[1].equals(value)) {
+            resId = R.string.nfc_polling_mode_screen_locked;
+            mNfcPollingMode.setValueIndex(1);
+        } else {
+            resId = R.string.nfc_polling_mode_screen_unlocked;
+            mNfcPollingMode.setValueIndex(2);
+        }
+        mNfcPollingMode.setSummary(getResources().getString(resId));
     }
 
     @Override
