@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
+ * This code has been modified. Portions copyright (C) 2013, ParanoidAndroid Project.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,12 +46,14 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 import android.provider.Settings.System;
 import android.text.TextUtils;
 import android.view.InputDevice;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -65,6 +68,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private static final String KEY_CURRENT_INPUT_METHOD = "current_input_method";
     private static final String KEY_INPUT_METHOD_SELECTOR = "input_method_selector";
     private static final String KEY_USER_DICTIONARY_SETTINGS = "key_user_dictionary_settings";
+    private static final String KEY_DISABLE_FULLSCREEN_KEYBOARD = "disable_fullscreen_keyboard";
     // false: on ICS or later
     private static final boolean SHOW_INPUT_METHOD_SWITCHER_SETTINGS = false;
 
@@ -93,6 +97,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private SettingsObserver mSettingsObserver;
     private Intent mIntentWaitingForResult;
     private InputMethodSettingValuesWrapper mInputMethodSettingValues;
+    private CheckBoxPreference mDisableFullscreenKeyboard;
 
     private final OnPreferenceChangeListener mOnImePreferenceChangedListener =
             new OnPreferenceChangeListener() {
@@ -178,6 +183,11 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         if (scp != null) {
             scp.setFragmentIntent(this, intent);
         }
+
+        // Disable Full Screen Keyboard
+        mDisableFullscreenKeyboard = (CheckBoxPreference) findPreference(KEY_DISABLE_FULLSCREEN_KEYBOARD);
+        mDisableFullscreenKeyboard.setChecked(Settings.System.getInt(getContentResolver(), 
+                Settings.System.DISABLE_FULLSCREEN_KEYBOARD, 0) == 1);
 
         mHandler = new Handler();
         mSettingsObserver = new SettingsObserver(mHandler, getActivity());
@@ -346,6 +356,11 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             }
         } else if (preference instanceof CheckBoxPreference) {
             final CheckBoxPreference chkPref = (CheckBoxPreference) preference;
+            if (chkPref == mDisableFullscreenKeyboard.findPreference("disable_fullscreen_keyboard")) {
+                System.putInt(getContentResolver(), Settings.System.DISABLE_FULLSCREEN_KEYBOARD,
+                        chkPref.isChecked() ? 1 : 0);
+                return true;
+            }
             if (!mHardKeyboardPreferenceList.isEmpty()) {
                 for (int i = 0; i < sHardKeyboardKeys.length; ++i) {
                     if (chkPref == mHardKeyboardCategory.findPreference(sHardKeyboardKeys[i])) {
