@@ -31,6 +31,11 @@
             android:key="accelerometer"
             android:title="@string/accelerometer_title"/>
 
+        <PreferenceScreen
+                android:key="screen_recorder"
+                android:title="@string/screen_recorder_title"
+                android:fragment="com.android.settings.chameleonos.ScreenRecorderSettings" />
+
         <ListPreference
                 android:key="screen_timeout"
                 android:title="@string/screen_timeout"
