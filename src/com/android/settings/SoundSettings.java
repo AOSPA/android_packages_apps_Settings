@@ -177,11 +177,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                 Settings.System.LOCKSCREEN_SOUNDS_ENABLED, 1) != 0);
 
         mVolumeWakeScreen = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE_SCREEN);
-        mVolumeWakeScreen.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+        mVolumeWakeScreen.setChecked(Settings.System.getInt(resolver,
                 Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
 
         mVolumeMusicCtrl = (CheckBoxPreference) findPreference(KEY_VOLUME_MUSIC_CONTROLS);
-        mVolumeMusicCtrl.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+        mVolumeMusicCtrl.setChecked(Settings.System.getInt(resolver,
                 Settings.System.VOLUME_MUSIC_CONTROLS, 0) == 1);
 
         mRingtonePreference = findPreference(KEY_RINGTONE);
@@ -316,15 +316,12 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                     mLockSounds.isChecked() ? 1 : 0);
 
         } else if (preference == mVolumeWakeScreen) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.VOLUME_WAKE_SCREEN,
-                    mVolumeWakeScreen.isChecked()
-                    ? 1 : 0);
+            Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
+                    mVolumeWakeScreen.isChecked() ? 1 : 0);
+
         } else if (preference == mVolumeMusicCtrl) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.VOLUME_MUSIC_CONTROLS,
-                    mVolumeMusicCtrl.isChecked()
-                    ? 1 : 0);
+            Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_MUSIC_CONTROLS,
+                    mVolumeMusicCtrl.isChecked() ? 1 : 0);
 
         } else if (preference == mMusicFx) {
             // let the framework fire off the intent
