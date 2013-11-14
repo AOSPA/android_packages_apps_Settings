@@ -14,6 +14,8 @@
 -keep class com.android.settings.users.*
 -keep class com.android.settings.NotificationStation
 -keep class com.android.settings.nfc.*
+-keep class com.cyanogenmod.settings.device.*
+-keep class com.cyanogenmod.*
 
 # Keep click responders
 -keepclassmembers class com.android.settings.inputmethod.UserDictionaryAddWordActivity {
