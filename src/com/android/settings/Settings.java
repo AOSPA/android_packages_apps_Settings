@@ -601,6 +601,10 @@ public class Settings extends PreferenceActivity
                 if (!showDev) {
                     target.remove(i);
                 }
+            } else if (id == R.id.performance_settings) {
+                if (!showDev) {
+                    target.remove(i);
+                }
             } else if (id == R.id.account_add) {
                 if (um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
                     target.remove(i);
