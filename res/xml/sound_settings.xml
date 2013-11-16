@@ -104,6 +104,16 @@
         android:summary="@string/volume_music_controls_summary"
         android:persistent="false" />
 
+    <!--Launch music on headset connection-->
+    <PreferenceCategory
+        android:title="@string/headset_category" >
+
+    <CheckBoxPreference
+        android:key="headset_connect_player"
+        android:title="@string/headset_connect_player_title"
+        android:summary="@string/headset_connect_player_summary"
+        android:persistent="false" />
+
     <!-- Dock -->
     <PreferenceCategory
         android:key="dock_category"
