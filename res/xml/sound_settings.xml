@@ -81,6 +81,12 @@
             android:key="haptic_feedback"
             android:title="@string/haptic_feedback_enable_title"
             android:defaultValue="true" />
+    <!--Launch music on headset connection-->
+    <CheckBoxPreference
+            android:key="headset_connect_player"
+            android:title="@string/headset_connect_player_title"
+            android:summary="@string/headset_connect_player_summary"
+            android:persistent="false" />
 
     <ListPreference
             android:key="emergency_tone"
