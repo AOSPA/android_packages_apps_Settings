@@ -36,4 +36,57 @@
          per-device overlay. Required to build on non-hardware tunable devices -->
     <string-array name="gamma_descriptors" translatable="false">
     </string-array>
+
+    <!-- Performance settings -->
+    <string-array name="pref_zram_size_entries">
+        <item>Disabled</item>
+        <item>10%</item>
+        <item>18% (default)</item>
+        <item>26%</item>
+    </string-array>
+
+    <string-array name="pref_zram_size_values" translatable="false">
+        <item>0</item>
+        <item>10</item>
+        <item>18</item>
+        <item>26</item>
+    </string-array>
+
+    <!-- Stylus Gestures -->
+    <string-array name="gestures_entries" translatable="false">
+        <item>@string/gestures_action_empty</item>
+        <item>@string/gestures_action_home</item>
+        <item>@string/gestures_action_back</item>
+        <item>@string/gestures_action_menu</item>
+        <item>@string/gestures_action_search</item>
+        <item>@string/gestures_action_recent</item>
+    </string-array>
+
+    <string-array name="gestures_values" translatable="false">
+        <item>1000</item>
+        <item>1001</item>
+        <item>1002</item>
+        <item>1003</item>
+        <item>1004</item>
+        <item>1005</item>
+    </string-array>
+
+    <!-- Hardware key rebinding -->
+    <string-array name="hardware_keys_action_entries" translatable="false">
+        <item>@string/hardware_keys_action_nothing</item>
+        <item>@string/hardware_keys_action_menu</item>
+        <item>@string/hardware_keys_action_app_switch</item>
+        <item>@string/hardware_keys_action_search</item>
+        <item>@string/hardware_keys_action_voice_search</item>
+        <item>@string/hardware_keys_action_in_app_search</item>
+    </string-array>
+
+    <string-array name="hardware_keys_action_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 </resources>

@@ -69,7 +69,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_EMERGENCY_TONE = "emergency_tone";
     private static final String KEY_SOUND_SETTINGS = "sound_settings";
     private static final String KEY_LOCK_SOUNDS = "lock_sounds";
-    private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
     private static final String KEY_RINGTONE = "ringtone";
     private static final String KEY_NOTIFICATION_SOUND = "notification_sound";
     private static final String KEY_CATEGORY_CALLS = "category_calls_and_notification";
@@ -77,7 +76,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOCK_AUDIO_SETTINGS = "dock_audio";
     private static final String KEY_DOCK_SOUNDS = "dock_sounds";
     private static final String KEY_DOCK_AUDIO_MEDIA_ENABLED = "dock_audio_media_enabled";
-    private static final String KEY_VOLUME_WAKE_SCREEN = "volume_wake_screen";
+    private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
 
     private static final String[] NEED_VOICE_CAPABILITY = {
             KEY_RINGTONE, KEY_DTMF_TONE, KEY_CATEGORY_CALLS,
@@ -95,7 +94,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mLockSounds;
     private Preference mRingtonePreference;
     private Preference mNotificationPreference;
-    private CheckBoxPreference mVolumeWakeScreen;
     private CheckBoxPreference mVolumeAdjustSound;
 
     private Runnable mRingtoneLookupRunnable;
@@ -176,10 +174,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mLockSounds.setPersistent(false);
         mLockSounds.setChecked(Settings.System.getInt(resolver,
                 Settings.System.LOCKSCREEN_SOUNDS_ENABLED, 1) != 0);
-
-        mVolumeWakeScreen = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE_SCREEN);
-        mVolumeWakeScreen.setChecked(Settings.System.getInt(resolver,
-                Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
 
         mVolumeAdjustSound = (CheckBoxPreference) findPreference(KEY_VOLUME_ADJUST_SOUNDS);
         mVolumeAdjustSound.setPersistent(false);
@@ -317,9 +311,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SOUNDS_ENABLED,
                     mLockSounds.isChecked() ? 1 : 0);
 
-        } else if (preference == mVolumeWakeScreen) {
-            Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
-                    mVolumeWakeScreen.isChecked() ? 1 : 0);
         } else if (preference == mVolumeAdjustSound) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED,
                     mVolumeAdjustSound.isChecked() ? 1 : 0);
