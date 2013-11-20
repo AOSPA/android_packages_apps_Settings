@@ -3,5 +3,15 @@
     android:title="@string/additional_settings_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+     <PreferenceCategory
+          android:title="@string/additional_settings_interface_title">
+  
+        <!-- Recents RAM bar -->
+          <PreferenceScreen
+            android:key="recents_ram_bar"
+            android:fragment="com.android.settings.AOSPAL.RamBar"
+            android:title="@string/ram_bar" /> 
+
+     </PreferenceCategory>
 
 </PreferenceScreen>
