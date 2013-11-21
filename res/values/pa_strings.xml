@@ -83,4 +83,59 @@
     <string name="blur_behind_summary">Adds a nice blur effect to the background</string>
     <string name="blur_radius_title">Blur Radius</string>
     <string name="blur_radius_summary">Set the blur radius for the blur effect</string>
+
+    <!-- Navigation bar settings -->
+    <string name="navigation_bar">Navigation Bar</string>
+    <string name="navigation_ring_title">Shortcuts</string>
+
+    <!-- Navigation ring shortcuts -->
+    <string name="navring_target_reset_message">Delete all user created navigation bar shortcuts and restore to default?</string>
+    <string name="navring_target_reset">Navigation bar shortcuts reset to default</string>
+    <string name="navring_target_save">Navigation bar shortcuts saved</string>
+    <string name="navring_action_open_ime_switcher">Open IME Switcher</string>
+    <string name="navring_action_kill_app">Kill app</string>
+    <string name="navring_action_none">None</string>
+    <string name="navring_action_take_screenshot">Take screenshot</string>
+    <string name="navring_action_ring_vibrate">Ring/Vibration</string>
+    <string name="navring_action_ring_silent">Ring/Silent</string>
+    <string name="navring_action_ring_vibrate_silent">Ring/Vibration/Silent</string>
+    <string name="navring_action_screen_off">Screen off</string>
+    <string name="navring_action_torch">Toggle torch</string>
+    <string name="navring_action_google_now">Google Now</string>
+    <string name="navring_choose_action_title">Choose action</string>
+
+    <string name="lockscreen_target_info">Drag the slider to targets to assign shortcuts</string>
+    <!-- Description of the unlock target in the Slide unlock screen. [CHAR LIMIT=NONE] --> 
+    <string name="description_target_unlock">Unlock</string>
+    <!-- Description of the unlock target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
+    <string name="description_target_search">Search</string>
+    <!-- Description of the sound on target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
+    <string name="description_target_soundon">Sound on</string>
+    <!-- Description of the silent target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
+    <string name="description_target_silent">Silent</string>
+    <!-- Description of the camera target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
+    <string name="description_target_camera">Camera</string>
+    <!-- Description of the up direction in which one can to slide the handle in the Slide unlock       screen. [CHAR LIMIT=NONE] -->
+    <string name="description_direction_up">Slide up for <xliff:g id="target_description"               example="Unlock">%s</xliff:g>.</string>
+    <!-- Description of the down direction in which one can to slide the handle in the Slide unlock     screen. [CHAR LIMIT=NONE] -->
+    <string name="description_direction_down">Slide down for <xliff:g id="target_description"           example="Unlock">%s</xliff:g>.</string>
+    <!-- Description of the left direction in which one can to slide the handle in the Slide unlock     screen. [CHAR LIMIT=NONE] -->
+    <string name="description_direction_left">"Slide left for <xliff:g id="target_description"          example="Unlock">%s</xliff:g>.</string>
+    <!-- Description of the right direction in which one can to slide the handle in the Slide unlock    screen. [CHAR LIMIT=NONE] -->
+    <string name="description_direction_right">Slide right for <xliff:g id="target_description"         example="Unlock">%s</xliff:g>.</string>
+
+    <!-- Reset Profiles -->
+    <string name="profile_reset_title">Reset</string>
+    <string name="profile_reset_message">Delete all user created profiles and app groups and restore them to default?</string>
+
+    <!-- Lock Screen Shortcuts -->
+    <string name="lockscreen_target_reset_title">Reset</string>
+    <string name="lockscreen_target_reset_message">Delete all user created lock screen shortcuts and restore to default?</string>
+    <string name="lockscreen_target_empty">Empty</string>
+    <string name="picker_activities">Activities</string>
+    <string name="select_custom_app_title">Select custom app</string>
+    <string name="select_custom_activity_title">Select custom activity</string>
+
+    <!-- Title for application group setting screen -->
+    <string name="profile_applist_title">Apps</string>
 </resources>
