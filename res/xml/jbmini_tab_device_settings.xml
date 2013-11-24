@@ -29,6 +29,13 @@
         android:title="@string/crystal_title"
         android:icon="@drawable/ic_action_set" />
 
+    <!-- Active display -->	
+    <header	
+        android:key="active_display"	
+        android:fragment="com.android.settings.crdroid.ActiveDisplaySettings"	
+        android:title="@string/ad_settings_title"	
+        android:summary="@string/ad_settings_summary" />   
+
     <!-- Dark UI -->
     <header
         android:id="@+id/theme_settings"

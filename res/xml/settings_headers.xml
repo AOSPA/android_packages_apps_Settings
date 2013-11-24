@@ -79,6 +79,13 @@
             android:targetPackage="com.android.settings"
             android:targetClass="com.android.settings.crystalroms.PartitionInfo" />
     </header>
+    
+    <!-- Active display -->	
+    <header	
+        android:key="active_display"	
+        android:fragment="com.android.settings.crdroid.ActiveDisplaySettings"	
+        android:title="@string/ad_settings_title"	
+        android:summary="@string/ad_settings_summary" />    
 
     <!-- DEVICE -->
     <header android:id="@+id/device_section"
