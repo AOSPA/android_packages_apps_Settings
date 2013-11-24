@@ -107,6 +107,42 @@
     <string name="battery_circle">Circle</string>
     <string name="battery_circle_percent">Circle &amp; percent</string>
 
+    <!-- Halo -->
+    <string name="halo_settings_title">Halo</string>
+    <string name="halo_behavior_title">Halo Behavior</string>
+    <string name="halo_hide_title">Hide Halo after activity</string>
+    <string name="halo_hide_summary">Halo will appear for incoming tasks and scroll out of sight after a while</string>
+    <string name="halo_state_title">Halo policy</string>
+    <string name="halo_state_summary">Enables black/white listing notifications</string>
+    <string name="halo_state_black">Black list</string>
+    <string name="halo_state_white">White list</string>
+    <string name="halo_pause_title">Pause active app</string>
+    <string name="halo_pause_summary">When opening an app with Halo the underlying app will get paused</string>
+    <string name="halo_notification_msgbox_title">Enable message pop-up</string>
+    <string name="halo_notification_msgbox_summary">Show message box for incoming notifications</string>
+    <string name="halo_unlock_ping_title">Ping on unlock</string>
+    <string name="halo_unlock_ping_summary">Halo will ping when device is unlocked if new notifications were received</string>
+
+    <string name="halo_size_title">Halo size</string>
+    <string name="halo_size_summary">Defines how big Halo is going to be</string>
+    <string name="halo_size_miniscule">Miniscule</string>
+    <string name="halo_size_small">Small</string>
+    <string name="halo_size_default">Normal (default)</string>
+    <string name="halo_size_large">Large</string>
+    <string name="halo_size_gigantic">Gigantic</string>
+    <string name="halo_size_monster">Monster</string>
+
+    <string name="halo_notification_count_title">Notification count</string>
+    <string name="halo_notification_count_summary">Display notification counts on Halo</string>
+    <string name="halo_notification_count_none">None</string>
+    <string name="halo_notification_count_total">Total</string>
+    <string name="halo_notification_count_individual">Per app</string>
+    <string name="halo_notification_count_both">Both</string>
+
+    <!-- Label for are-halo-notifications-allowed checkbox in app details [CHAR LIMIT=20] -->
+    <string name="app_halo_label_black">Blacklist from HALO</string>
+    <string name="app_halo_label_white">Whitelist from HALO</string>
+
     <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
     <string name="custom_runtime_warning_title">Warning</string>
     <string name="custom_runtime_warning_message">ART is not supported by the ParanoidAndroid team. This setting is included for experimentation only and has the potential to cause instability, crashes, data loss or prevent the proper boot of your device. Visit &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt; for more information.&lt;br/&gt;&lt;br/&gt;We request you do not file bug reports if you have enabled ART as your runtime.&lt;br/&gt;&lt;br/&gt;Are you sure you want to reboot to change runtime from <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> to <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
