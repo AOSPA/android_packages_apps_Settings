@@ -43,6 +43,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.System;
@@ -66,6 +67,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private static final String KEY_INPUT_METHOD_SELECTOR = "input_method_selector";
     private static final String KEY_USER_DICTIONARY_SETTINGS = "key_user_dictionary_settings";
     private static final String KEY_VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
+    private static final String KEY_POINTER_SETTINGS_CATEGORY = "pointer_settings_category";
     private static final String KEY_STYLUS_GESTURES = "stylus_gestures";
     // false: on ICS or later
     private static final boolean SHOW_INPUT_METHOD_SWITCHER_SETTINGS = false;
@@ -84,6 +86,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private PreferenceCategory mHardKeyboardCategory;
     private PreferenceCategory mGameControllerCategory;
     private Preference mLanguagePref;
+    private PreferenceScreen mStylusGestures;
     private final ArrayList<InputMethodPreference> mInputMethodPreferenceList =
             new ArrayList<InputMethodPreference>();
     private final ArrayList<PreferenceScreen> mHardKeyboardPreferenceList =
@@ -173,9 +176,12 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         mIm = (InputManager)getActivity().getSystemService(Context.INPUT_SERVICE);
         updateInputDevices();
 
+        mStylusGestures = (PreferenceScreen) findPreference(KEY_STYLUS_GESTURES);
         // remove stylus preference for non stylus devices
         if (!getResources().getBoolean(com.android.internal.R.bool.config_stylusGestures)) {
-            getPreferenceScreen().removePreference(findPreference(KEY_STYLUS_GESTURES));
+            PreferenceGroup pointerSettingsCategory = (PreferenceGroup)
+                    findPreference(KEY_POINTER_SETTINGS_CATEGORY);
+            pointerSettingsCategory.removePreference(mStylusGestures);
         }
 
         // Spell Checker
