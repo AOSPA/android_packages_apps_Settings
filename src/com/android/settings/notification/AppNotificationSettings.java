@@ -60,6 +60,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     private static final String KEY_SENSITIVE = "sensitive";
     private static final String KEY_APP_SETTINGS = "app_settings";
     private static final String KEY_FLOATING = "floating";
+    private static final String KEY_HALO = "halo";
 
     private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
             = new Intent(Intent.ACTION_MAIN)
@@ -73,6 +74,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
     private SwitchPreference mPeekable;
     private SwitchPreference mSensitive;
     private SwitchPreference mFloating;
+    private SwitchPreference mHalo;
     private AppRow mAppRow;
     private boolean mCreated;
     private boolean mIsSystemPackage;
@@ -141,6 +143,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         mPeekable = (SwitchPreference) findPreference(KEY_PEEKABLE);
         mSensitive = (SwitchPreference) findPreference(KEY_SENSITIVE);
         mFloating = (SwitchPreference) findPreference(KEY_FLOATING);
+        mHalo = (SwitchPreference) findPreference(KEY_HALO);
 
         mAppRow = mBackend.loadAppRow(pm, info.applicationInfo);
 
@@ -155,6 +158,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         mPeekable.setChecked(mAppRow.peekable);
         mSensitive.setChecked(mAppRow.sensitive);
         mFloating.setChecked(mAppRow.floating);
+        mHalo.setChecked(mAppRow.halo);
 
         mBlock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
@@ -192,6 +196,14 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean floating = (Boolean) newValue;
                 return mBackend.setFloating(mPkg, mUid, floating);
+            }
+        });
+
+        mHalo.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final boolean halo = (Boolean) newValue;
+                return mBackend.setHalo(mPkg, mUid, halo);
             }
         });
 
@@ -236,6 +248,7 @@ public class AppNotificationSettings extends SettingsPreferenceFragment {
         setVisible(mPriority, mIsSystemPackage || !banned);
         setVisible(mPeekable, mIsSystemPackage || !banned);
         setVisible(mFloating, mIsSystemPackage || !banned);
+        setVisible(mHalo, mIsSystemPackage || !banned);
         setVisible(mSensitive, mIsSystemPackage || !banned && lockscreenSecure
                 && lockscreenNotificationsEnabled && allowPrivate);
     }
