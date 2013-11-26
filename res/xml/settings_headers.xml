@@ -58,9 +58,36 @@
         android:fragment="com.android.settings.WirelessSettings"
         android:icon="@drawable/empty_icon" />
 
+<<<<<<< HEAD
     <!-- DEVICE -->
     <header android:id="@+id/device_section"
         android:title="@string/header_category_device" />
+=======
+    <header android:title="@string/header_category_rom_settings" />
+
+    <!--User Interface -->
+    <header
+        android:id="@+id/interface_settings"
+        android:icon="@drawable/ic_settings_about_beanstalk"
+        android:fragment="com.android.settings.beanstalk.InterfaceSettings"
+        android:title="@string/interface_settings_title" />
+
+    <!-- HALO -->
+    <header
+        android:id="@+id/halo_settings"
+        android:fragment="com.android.settings.beanstalk.Halo"
+        android:icon="@drawable/ic_settings_halo" 
+        android:title="@string/halo_settings_title" />
+
+    <!-- TRDS -->
+    <header
+        android:id="@+id/trds_settings"
+        android:icon="@drawable/ic_settings_backup"
+        android:title="@string/trds_settings_title" />
+
+    <!-- INTERFACE -->
+    <header android:title="@string/header_category_interface" />
+>>>>>>> 1de4dc9... [1/2] Settings: HALO
 
     <!-- Home -->
     <header
@@ -129,6 +156,16 @@
     <header android:id="@+id/personal_section"
         android:title="@string/header_category_personal" />
 
+<<<<<<< HEAD
+=======
+    <!-- Profiles -->
+    <header
+        android:id="@+id/profiles_settings"
+        android:icon="@drawable/ic_settings_profiles"
+        android:fragment="com.android.settings.profiles.ProfilesSettings"
+        android:title="@string/profiles_settings_title" />
+    
+>>>>>>> 1de4dc9... [1/2] Settings: HALO
     <!-- Location -->
     <header
         android:fragment="com.android.settings.location.LocationSettings"
