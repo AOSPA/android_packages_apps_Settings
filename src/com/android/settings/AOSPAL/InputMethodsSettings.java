@@ -62,7 +62,7 @@ public class InputMethodsSettings extends SettingsPreferenceFragment implements
         mDisableFullscreenKeyboard =
             (CheckBoxPreference) findPreference(PREF_DISABLE_FULLSCREEN_KEYBOARD);
         mDisableFullscreenKeyboard.setChecked(Settings.System.getInt(getContentResolver(),
-                Settings.System.DISABLE_FULLSCREEN_KEYBOARD, 0) == 1);
+                Settings.System.DISABLE_FULLSCREEN_KEYBOARD, 1) == 1);
         mDisableFullscreenKeyboard.setOnPreferenceChangeListener(this);
 
         // Enable or disable mStatusBarImeSwitcher based on boolean value: config_show_cmIMESwitcher

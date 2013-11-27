@@ -76,6 +76,14 @@ public class BootReceiver extends BroadcastReceiver {
         }
     }
 
+    private void initFreqCapFiles(Context ctx)
+    {
+        if (Processor.freqCapFilesInitialized) return;
+        Processor.FREQ_MAX_FILE = ctx.getResources().getString(R.string.max_cpu_freq_file);
+        Processor.FREQ_MIN_FILE = ctx.getResources().getString(R.string.min_cpu_freq_file);
+        Processor.freqCapFilesInitialized = true;
+    }
+
     private void configureCPU(Context ctx) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
 
@@ -97,20 +105,21 @@ public class BootReceiver extends BroadcastReceiver {
         if (noSettings) {
             Log.d(TAG, "No CPU settings saved. Nothing to restore.");
         } else {
+            initFreqCapFiles(ctx);
             if (availableGovernorsLine != null){
                 governors = Arrays.asList(availableGovernorsLine.split(" "));
             }
             if (availableFrequenciesLine != null){
                 frequencies = Arrays.asList(availableFrequenciesLine.split(" "));
             }
-            if (governor != null && governors != null && governors.contains(governor)) {
-                Utils.fileWriteOneLine(Processor.GOV_FILE, governor);
-            }
             if (maxFrequency != null && frequencies != null && frequencies.contains(maxFrequency)) {
                 Utils.fileWriteOneLine(Processor.FREQ_MAX_FILE, maxFrequency);
             }
             if (minFrequency != null && frequencies != null && frequencies.contains(minFrequency)) {
                 Utils.fileWriteOneLine(Processor.FREQ_MIN_FILE, minFrequency);
+            }
+            if (governor != null && governors != null && governors.contains(governor)) {
+                Utils.fileWriteOneLine(Processor.GOV_FILE, governor);
             }
             Log.d(TAG, "CPU settings restored.");
         }

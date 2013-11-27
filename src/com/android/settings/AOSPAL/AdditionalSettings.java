@@ -67,8 +67,8 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         if (mListViewAnimation != null) {
            int listViewAnimation = Settings.System.getInt(getContentResolver(),
                     Settings.System.LISTVIEW_ANIMATION, 1);
-           mListViewAnimation.setSummary(mListViewAnimation.getEntry());
            mListViewAnimation.setValue(String.valueOf(listViewAnimation));
+           mListViewAnimation.setSummary(mListViewAnimation.getEntry());
         }
         mListViewAnimation.setOnPreferenceChangeListener(this);
 
@@ -76,8 +76,8 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         if (mListViewInterpolator != null) {
            int listViewInterpolator = Settings.System.getInt(getContentResolver(),
                     Settings.System.LISTVIEW_INTERPOLATOR, 1);
-           mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
            mListViewInterpolator.setValue(String.valueOf(listViewInterpolator));
+           mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
         }
         mListViewInterpolator.setOnPreferenceChangeListener(this);
 
@@ -115,14 +115,16 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.LISTVIEW_ANIMATION,
                     value);
-            mListViewAnimation.setSummary(mListViewAnimation.getEntries()[index]);
+            mListViewAnimation.setValue(String.valueOf(value));
+            mListViewAnimation.setSummary(mListViewAnimation.getEntry());
         } else if (KEY_LISTVIEW_INTERPOLATOR.equals(key)) {
             int value = Integer.parseInt((String) newValue);
             int index = mListViewInterpolator.findIndexOfValue((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.LISTVIEW_INTERPOLATOR,
                     value);
-            mListViewInterpolator.setSummary(mListViewInterpolator.getEntries()[index]);
+            mListViewInterpolator.setValue(String.valueOf(value));
+            mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
         }
         return false;
     }

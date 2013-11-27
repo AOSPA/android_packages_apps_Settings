@@ -32,6 +32,9 @@
     <string name="qs_pulldown_summary">Allows to use the left or right side of the status bar to open the QuickSettings</string>
     <string name="statusbar_network_summary">Enables the network speed to appear in the Statusbar</string>
 
+    <!-- Anonymous Statistics #CM -->
+    <string name="anonymous_statistics_title">CyanogenMod statistics</string>
+
     <!-- Volume Key Cursor Control -->
     <string name="volume_key_cursor_control_title">Volume Key Cursor Control</string>
     <string name="volume_key_cursor_control_off">Off</string>
@@ -498,6 +501,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="expanded_view_summary">Add possibility to toggle between normal and expanded view by longpress. The expanded view sometimes shows more private information so you might want to disable it.</string>
     <string name="force_expanded_view">Force expanded view</string>
     <string name="force_expanded_view_summary">Show notifications expanded by default. You still will be able to toggle between expanded and normal view.</string>
+    <string name="wake_on_notification">Wake on notification</string>
+    <string name="wake_on_notification_summary">Wake device when a new notification is received</string>
+    <string name="notifications_height">Notification count</string>
+    <string name="notifications_height_summary">Number of notifications displayed at once</string>
 
     <!-- Network stats custm colors -->
     <string name="status_bar_network_usage_color_style">Color style</string>
@@ -565,12 +572,28 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="lockscreen_use_widget_container_carousel_title">Enable portrait widget carousel</string>
     <string name="lockscreen_use_widget_container_carousel_summary">Use carousel animation in portrait when switching between lock screen widgets</string>
 
+    <!-- Title for PreferenceScreen to change encryption password [CHAR LIMIT=22] -->
+    <string name="change_crypt_password_title">Change password</string>
+    <!-- Summary for PreferenceScreen to change encryption password [CHAR LIMIT=45] -->
+    <string name="change_crypt_password_summary">Change the password used for device encryption</string>
+
+    <!-- Header on first screen of choose encryption password [CHAR LIMIT=30] -->
+    <string name="encryptionpassword_choose_your_password_header">Set encryption password</string>
+
+    <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
+    <string name="custom_runtime_warning_title">Warning</string>
+    <string name="custom_runtime_warning_message">ART is not supported by Paranoid Android. This setting is included for experimentation only and has the potential to cause instability, crashes, data loss or prevent the proper boot of your device. Visit &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt; for more information.&lt;br/&gt;&lt;br/&gt;We request you do not file bug reports if you have enabled ART as your runtime.&lt;br/&gt;&lt;br/&gt;Are you sure you want to reboot to change runtime from <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> to <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
+
     <!-- Performance settings  -->
     <string name="performance_settings_title">Performance</string>
 
     <!-- Performance Settings : Warning dialog  -->
     <string name="performance_settings_warning_title">Proceed with Caution</string>
     <string name="performance_settings_warning">These settings are included for experimentation and any changes made to them have the potential to cause instability, crashes, data loss or hardware failures.\n\nWe request you do not file bug reports if any of these settings have been changed from the defaults.</string>
+
+    <!-- Performance Settings : Set on boot option -->
+    <string name="performance_set_on_boot">Set on boot</string>
+    <string name="performance_set_on_boot_summary">Restore the settings on boot</string>
 
     <!-- Performance Settings : Processor Settings -->
     <!-- Performance Settings : Processor settings title -->
@@ -631,5 +654,4 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="perf_profile_pwrsv">Power save</string>
     <string name="perf_profile_bal">Balanced</string>
     <string name="perf_profile_perf">Performance</string>
-
 </resources>
