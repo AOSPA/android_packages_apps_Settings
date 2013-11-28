@@ -68,9 +68,12 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
     private static final String KEY_OWNER_INFO_SETTINGS = "owner_info_settings";
     private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
+
     private static final String KEY_SEE_TRHOUGH = "see_through";
     private static final String KEY_BLUR_BEHIND = "blur_behind";
     private static final String KEY_BLUR_RADIUS = "blur_radius";
+
+    private static final String LOCK_NUMPAD_RANDOM = "lock_numpad_random";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
@@ -111,11 +114,14 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private DialogInterface mWarnInstallApps;
     private CheckBoxPreference mToggleVerifyApps;
     private CheckBoxPreference mPowerButtonInstantlyLocks;
+
     private CheckBoxPreference mEnableKeyguardWidgets;
     private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mBlurBehind;
     
     private SeekBarPreference mBlurRadius;
+
+    private ListPreference mLockNumpadRandom;
 
     private Preference mNotificationAccess;
 
@@ -257,6 +263,16 @@ public class SecuritySettings extends RestrictedSettingsFragment
             if (securityCategory != null && mVisiblePattern != null) {
                 securityCategory.removePreference(root.findPreference(KEY_VISIBLE_PATTERN));
             }
+        }
+
+        // Lock Numpad Random
+        mLockNumpadRandom = (ListPreference) root.findPreference(LOCK_NUMPAD_RANDOM);
+        if (mLockNumpadRandom != null) {
+            mLockNumpadRandom.setValue(String.valueOf(
+                    Settings.Secure.getInt(getContentResolver(),
+                    Settings.Secure.LOCK_NUMPAD_RANDOM, 0)));
+            mLockNumpadRandom.setSummary(mLockNumpadRandom.getEntry());
+            mLockNumpadRandom.setOnPreferenceChangeListener(this);
         }
 
         // Append the rest of the settings
@@ -664,6 +680,12 @@ public class SecuritySettings extends RestrictedSettingsFragment
             updateLockAfterPreferenceSummary();
         } else if (preference == mBlurRadius) {
         	Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_BLUR_RADIUS, (Integer)value);
+        } else if (preference == mLockNumpadRandom) {
+            Settings.Secure.putInt(getContentResolver(),
+                    Settings.Secure.LOCK_NUMPAD_RANDOM,
+                    Integer.valueOf((String) value));
+            mLockNumpadRandom.setValue(String.valueOf(value));
+            mLockNumpadRandom.setSummary(mLockNumpadRandom.getEntry());
         }
         return true;
     }
