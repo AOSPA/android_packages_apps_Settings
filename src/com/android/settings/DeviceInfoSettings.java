@@ -390,6 +390,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
             }
         }
         return false;
+    }
 
     private String getMemInfo() {
         String result = null;
