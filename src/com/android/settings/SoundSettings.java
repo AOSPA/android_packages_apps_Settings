@@ -219,6 +219,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         if (vibrator == null || !vibrator.hasVibrator()) {
             removePreference(KEY_VIBRATE);
             removePreference(KEY_HAPTIC_FEEDBACK);
+            removePreference(KEY_POWER_NOTIFICATIONS_VIBRATE);
         }
 
         if (TelephonyManager.PHONE_TYPE_CDMA == activePhoneType) {
@@ -275,11 +276,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mPowerSoundsVibrate = (CheckBoxPreference) findPreference(KEY_POWER_NOTIFICATIONS_VIBRATE);
         mPowerSoundsVibrate.setChecked(Settings.Global.getInt(getContentResolver(),
                 Settings.Global.POWER_NOTIFICATIONS_VIBRATE, 0) != 0);
-
-        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (vibrator == null || !vibrator.hasVibrator()) {
-            removePreference(KEY_POWER_NOTIFICATIONS_VIBRATE);
-        }
 
         mPowerSoundsRingtone = findPreference(KEY_POWER_NOTIFICATIONS_RINGTONE);
         String currentPowerRingtonePath =
