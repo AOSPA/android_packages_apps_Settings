@@ -16,13 +16,6 @@
    limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!--Volume buttons category-->
-    <string name="volume_buttons_category">Volume buttons</string>
-
-    <!--Volume buttons wake-->
-    <string name="volume_wake_title">Volume buttons wake</string>
-    <string name="volume_wake_summary">Pressing either volume button will wake your device</string>
-
     <!-- Volume Key Cursor Control -->
     <string name="volume_key_cursor_control_title">Volume Key Cursor Control</string>
     <string name="volume_key_cursor_control_off">Off</string>
@@ -31,13 +24,6 @@
 
     <!--Additional keyboard settings-->
     <string name="settings_additional_category">Additional settings</string>
-
-    <!--Lockscreen see through-->
-    <string name="see_through_title">See through</string>
-    <string name="see_through_summary">Shows the content behind your lockscreen. Your data may be visible to those around you</string>
-
-    <!--AppOps-->
-    <string name="appops_settings_title">App privacy</string>
 
     <!--Notification LED category header-->
     <string name="notification_led_category_title">Notification LED</string>
@@ -80,10 +66,6 @@
     <string name="pulse_speed_normal">Normal</string>
     <string name="pulse_speed_slow">Slow</string>
     <string name="pulse_speed_very_slow">Very slow</string>
-
-    <!--PA version-->
-    <string name="pa_version">ParanoidAndroid version</string>
-    <string name="pa_version_default">Unknown</string>
     
     <!--Lockscreen blur-->
     <string name="blur_behind_title">Blur Lockscreen Background</string>
@@ -271,4 +253,37 @@ USB networks). This setting is reset on reboot</string>
     <string name="lock_pattern_size_4">4x4</string>
     <string name="lock_pattern_size_5">5x5</string>
     <string name="lock_pattern_size_6">6x6</string>
+
+    <!-- Volume adjust sounds -->
+    <string name="volume_adjust_sounds_enable_title">Volume adjust sound</string>
+    <string name="volume_adjust_sounds_enable_summary">Play sound when adjusting volume with hard keys</string>
+
+    <!-- Link volumes -->
+    <string name="link_volume_ringtones">Link ringtone &amp; notifications volumes</string>
+    <string name="volume_ring_only_description">Ringtone</string>
+
+    <!--Volume buttons category-->
+    <string name="volume_buttons_category">Volume buttons</string>
+
+    <!--Volume buttons wake-->
+    <string name="volume_wake_title">Volume buttons wake</string>
+    <string name="volume_wake_summary">Pressing either volume button will wake your device</string>
+
+    <!--Lockscreen see through-->
+    <string name="see_through_title">See through</string>
+    <string name="see_through_summary">Shows the content behind your lockscreen. Your data may be visible to those around you</string>
+
+    <!--AppOps-->
+    <string name="appops_settings_title">App privacy</string>
+
+    <!--Battery Icon selection-->
+    <string name="battery_status_icon_title">Status icon</string>
+    <string name="battery_bar">Battery bar</string>
+    <string name="battery_bar_percent">Battery bar &amp; percent</string>
+    <string name="battery_circle">Battery circle</string>
+    <string name="battery_circle_percent">Battery circle &amp; percent</string>
+
+    <!--PA version-->
+    <string name="pa_version">ParanoidAndroid version</string>
+    <string name="pa_version_default">Unknown</string>
 </resources>

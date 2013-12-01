@@ -119,6 +119,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mPowerSoundsVibrate;
     private Preference mPowerSoundsRingtone;
 
+
     private Runnable mRingtoneLookupRunnable;
 
     private AudioManager mAudioManager;
