@@ -56,9 +56,12 @@ import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.DisplayInfo;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
@@ -95,6 +98,14 @@ public class Utils {
      * to specify the icon that should be displayed for the preference.
      */
     private static final String META_DATA_PREFERENCE_ICON = "com.android.settings.icon";
+
+    // Device types
+    private static final int DEVICE_PHONE = 0;
+    private static final int DEVICE_HYBRID = 1;
+    private static final int DEVICE_TABLET = 2;
+
+    // Device type reference
+    private static int sDeviceType = -1;
 
     /**
      * Name of the meta-data item that should be set in the AndroidManifest.xml
@@ -647,6 +658,40 @@ public class Utils {
     public static boolean hasMultipleUsers(Context context) {
         return ((UserManager) context.getSystemService(Context.USER_SERVICE))
                 .getUsers().size() > 1;
+    }
+
+    private static int getScreenType(Context context) {
+        if (sDeviceType == -1) {
+            WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+            DisplayInfo outDisplayInfo = new DisplayInfo();
+            wm.getDefaultDisplay().getDisplayInfo(outDisplayInfo);
+            int shortSize = Math.min(outDisplayInfo.logicalHeight, outDisplayInfo.logicalWidth);
+            int shortSizeDp = shortSize * DisplayMetrics.DENSITY_DEFAULT
+                    / outDisplayInfo.logicalDensityDpi;
+            if (shortSizeDp < 600) {
+                // 0-599dp: "phone" UI with a separate status & navigation bar
+                sDeviceType =  DEVICE_PHONE;
+            } else if (shortSizeDp < 720) {
+                // 600-719dp: "phone" UI with modifications for larger screens
+                sDeviceType = DEVICE_HYBRID;
+            } else {
+                // 720dp: "tablet" UI with a single combined status & navigation bar
+                sDeviceType = DEVICE_TABLET;
+            }
+        }
+        return sDeviceType;
+    }
+
+    public static boolean isPhone(Context context) {
+        return getScreenType(context) == DEVICE_PHONE;
+    }
+
+    public static boolean isHybrid(Context context) {
+        return getScreenType(context) == DEVICE_HYBRID;
+    }
+
+    public static boolean isTablet(Context context) {
+        return getScreenType(context) == DEVICE_TABLET;
     }
 
     /* returns whether the device has volume rocker or not. */
