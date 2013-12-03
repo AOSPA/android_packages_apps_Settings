@@ -301,11 +301,6 @@ public class Settings extends PreferenceActivity
         }
     }
 
-    @Override
-    public boolean onIsMultiPane() {
-        return false;
-    }
-
     private static final String[] ENTRY_FRAGMENTS = {
         WirelessSettings.class.getName(),
         WifiSettings.class.getName(),
@@ -351,7 +346,10 @@ public class Settings extends PreferenceActivity
         PrintJobSettingsFragment.class.getName(),
         TrustedCredentialsSettings.class.getName(),
         PaymentSettings.class.getName(),
-        KeyboardLayoutPickerFragment.class.getName()
+        KeyboardLayoutPickerFragment.class.getName(),
+        BlacklistSettings.class.getName(),
+        ApnSettings.class.getName(),
+        HomeSettings.class.getName(),
     };
 
     @Override
