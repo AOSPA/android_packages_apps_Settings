@@ -86,6 +86,11 @@
             android:title="@string/lockscreen_power_menu_title"
             android:summary="@string/lockscreen_power_menu_summary" />
 
+         <PreferenceScreen
+            android:key="keyguard_style"
+            android:fragment="com.android.settings.AOSPAL.LockscreenStyle"
+            android:title="@string/lockscreen_style_title"/>
+
         <!-- Lock clock -->
         <PreferenceScreen
         android:key="lock_clock"
