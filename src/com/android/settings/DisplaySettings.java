@@ -78,9 +78,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private DisplayManager mDisplayManager;
 
+<<<<<<< HEAD
+    private CheckBoxPreference mAccelerometer;
     private CheckBoxPreference mWakeWhenPluggedOrUnplugged;
-
+=======
     private PreferenceScreen mDisplayRotationPreference;
+>>>>>>> 6322dfe... Settings: Configurable 0, 90, 180 and 270 degree rotation (2/2)
     private WarnedListPreference mFontSizePref;
 
     private final Configuration mCurConfig = new Configuration();
@@ -93,10 +96,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private WifiDisplayStatus mWifiDisplayStatus;
     private Preference mWifiDisplayPreference;
 
+<<<<<<< HEAD
     private ListPreference mCrtMode;
 
+    private final RotationPolicy.RotationPolicyListener mRotationPolicyListener =
+            new RotationPolicy.RotationPolicyListener() {
+=======
     private ContentObserver mAccelerometerRotationObserver = 
             new ContentObserver(new Handler()) {
+>>>>>>> 6322dfe... Settings: Configurable 0, 90, 180 and 270 degree rotation (2/2)
         @Override
         public void onChange(boolean selfChange) {
             updateDisplayRotationPreferenceDescription();
@@ -111,10 +119,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.display_settings);
 
+<<<<<<< HEAD
+        mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
+        mAccelerometer.setPersistent(false);
+=======
         PreferenceScreen prefSet = getPreferenceScreen();
 
         mDisplayRotationPreference = (PreferenceScreen) findPreference(KEY_DISPLAY_ROTATION);
-
+>>>>>>> 6322dfe... Settings: Configurable 0, 90, 180 and 270 degree rotation (2/2)
         if (!RotationPolicy.isRotationSupported(getActivity())
                 || RotationPolicy.isRotationLockToggleSupported(getActivity())) {
             // If rotation lock is supported, then we do not provide this option in
@@ -368,12 +380,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mWakeWhenPluggedOrUnplugged) {
+        if (preference == mAccelerometer) {
+            RotationPolicy.setRotationLockForAccessibility(
+                    getActivity(), !mAccelerometer.isChecked());
+        } else if (preference == mWakeWhenPluggedOrUnplugged) {
             Settings.Global.putInt(getContentResolver(),
                     Settings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
                     mWakeWhenPluggedOrUnplugged.isChecked() ? 1 : 0);
         }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     private void updateDisplayRotationPreferenceDescription() {
@@ -416,6 +430,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             summary.append(" " + getString(R.string.display_rotation_unit));
         }
         preference.setSummary(summary);
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mNotificationPulse) {
+            boolean value = mNotificationPulse.isChecked();
+            Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE,
+                    value ? 1 : 0);
+            return true;
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
