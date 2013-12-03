@@ -152,7 +152,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem syncNow = menu.add(0, MENU_SYNC_NOW_ID, 0,
                 getString(R.string.sync_menu_sync_now))
-                .setIcon(R.drawable.ic_menu_refresh_holo_dark);
+                .setIcon(R.drawable.ic_action_refresh);
         MenuItem syncCancel = menu.add(0, MENU_SYNC_CANCEL_ID, 0,
                 getString(R.string.sync_menu_sync_cancel))
                 .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
