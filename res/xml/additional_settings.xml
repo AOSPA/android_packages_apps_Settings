@@ -14,4 +14,17 @@
 
      </PreferenceCategory>
 
+
+     <PreferenceCategory
+          android:title="@string/additional_settings_interface_title">
+
+        <ListPreference
+            android:key="quick_pulldown"
+            android:title="@string/title_quick_pulldown"
+            android:entries="@array/quick_pulldown_entries"
+            android:entryValues="@array/quick_pulldown_values"
+            android:persistent="false" />
+
+     </PreferenceCategory>
+
 </PreferenceScreen>
