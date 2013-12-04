@@ -125,6 +125,15 @@
         <intent android:action="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
     </header>
 
+
+    <!-- Additional Settings -->
+    <header
+        android:id="@+id/interface_settings"
+        android:fragment="com.android.settings.AOSPAL.AdditionalSettings"
+        android:title="@string/additional_settings_title" 
+        android:icon="@drawable/ic_settings_system" />
+
+
     <!-- PERSONAL -->
     <header android:id="@+id/personal_section"
         android:title="@string/header_category_personal" />
