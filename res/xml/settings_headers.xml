@@ -138,13 +138,6 @@
     <header android:id="@+id/personal_section"
         android:title="@string/header_category_personal" />
 
-    <!-- Navigation Bar -->
-    <header
-        android:id="@+id/navigation_bar_settings"
-        android:icon="@drawable/ic_sysbar_home"
-        android:fragment="com.android.settings.NavigationBarSettings"
-        android:title="@string/navigation_bar" />
-
     <!-- Location -->
     <header
         android:fragment="com.android.settings.location.LocationSettings"

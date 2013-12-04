@@ -3,21 +3,33 @@
     android:title="@string/additional_settings_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-     <PreferenceCategory
-          android:title="@string/additional_settings_interface_title">
-  
+    <PreferenceCategory
+        android:title="@string/additional_settings_interface_title">
+
         <!-- Recents RAM bar -->
-          <PreferenceScreen
+        <PreferenceScreen
             android:key="recents_ram_bar"
             android:fragment="com.android.settings.AOSPAL.RamBar"
             android:title="@string/ram_bar" /> 
+    </PreferenceCategory>
 
-     </PreferenceCategory>
+
+    <PreferenceCategory
+         android:title="@string/navigation_bar">
+
+         <!-- Navring Targets -->
+         <PreferenceScreen
+             android:fragment="com.android.settings.cyanogenmod.NavRing"
+             android:key="navigation_ring_shortcuts"
+             android:title="@string/navigation_ring_title"/>
+
+   </PreferenceCategory>
 
 
-     <PreferenceCategory
-          android:title="@string/additional_settings_interface_title">
+   <PreferenceCategory
+          android:title="@string/additional_settings_qs_title">
 
+        <!-- Quick Settings Pulldown -->
         <ListPreference
             android:key="quick_pulldown"
             android:title="@string/title_quick_pulldown"
@@ -25,6 +37,6 @@
             android:entryValues="@array/quick_pulldown_values"
             android:persistent="false" />
 
-     </PreferenceCategory>
+   </PreferenceCategory>
 
 </PreferenceScreen>
