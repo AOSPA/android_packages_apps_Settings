@@ -75,7 +75,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_EMERGENCY_TONE = "emergency_tone";
     private static final String KEY_SOUND_SETTINGS = "sound_settings";
     private static final String KEY_LOCK_SOUNDS = "lock_sounds";
-    private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
     private static final String KEY_RINGTONE = "ringtone";
     private static final String KEY_NOTIFICATION_SOUND = "notification_sound";
     private static final String KEY_CATEGORY_CALLS = "category_calls_and_notification";
@@ -113,7 +112,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private Preference mRingtonePreference;
     private Preference mNotificationPreference;
     private CheckBoxPreference mVolumeWakeScreen;
-    private CheckBoxPreference mVolumeAdjustSound;
 
     private CheckBoxPreference mPowerSounds;
     private CheckBoxPreference mPowerSoundsVibrate;
@@ -202,11 +200,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mVolumeWakeScreen = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE_SCREEN);
         mVolumeWakeScreen.setChecked(Settings.System.getInt(resolver,
                 Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
-
-        mVolumeAdjustSound = (CheckBoxPreference) findPreference(KEY_VOLUME_ADJUST_SOUNDS);
-        mVolumeAdjustSound.setPersistent(false);
-        mVolumeAdjustSound.setChecked(Settings.System.getInt(resolver,
-                Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 1) == 1);
 
         mSafeHeadsetVolume = (CheckBoxPreference) findPreference(KEY_SAFE_HEADSET_VOLUME);
         mSafeHeadsetVolume.setChecked(Settings.System.getInt(getContentResolver(),
@@ -379,9 +372,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else if (preference == mVolumeWakeScreen) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
                     mVolumeWakeScreen.isChecked() ? 1 : 0);
-        } else if (preference == mVolumeAdjustSound) {
-            Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED,
-                    mVolumeAdjustSound.isChecked() ? 1 : 0);
         } else if (preference == mMusicFx) {
             // let the framework fire off the intent
             return false;
