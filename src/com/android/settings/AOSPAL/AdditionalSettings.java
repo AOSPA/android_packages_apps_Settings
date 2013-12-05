@@ -22,7 +22,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String QUICK_PULLDOWN = "quick_pulldown";
 
 
-    ListPreference mQuickPulldown
+    ListPreference mQuickPulldown;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
