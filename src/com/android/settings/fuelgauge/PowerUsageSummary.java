@@ -165,7 +165,7 @@ public class PowerUsageSummary extends PreferenceFragment {
                     .setAlphabeticShortcut('t');
         }
         MenuItem refresh = menu.add(0, MENU_STATS_REFRESH, 0, R.string.menu_stats_refresh)
-                .setIcon(R.drawable.ic_menu_refresh_holo_dark)
+                .setIcon(R.drawable.ic_action_refresh)
                 .setAlphabeticShortcut('r');
         refresh.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
@@ -182,7 +182,7 @@ public class PowerUsageSummary extends PreferenceFragment {
         batteryStyle.setGroupCheckable(1, true, true);
 
         MenuItem batteryIcon = batteryStyle.getItem();
-        batteryIcon.setIcon(R.drawable.ic_settings_battery)
+        batteryIcon.setIcon(R.drawable.ic_action_battery_status)
                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
         String helpUrl;

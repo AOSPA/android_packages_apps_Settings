@@ -186,6 +186,7 @@ public class RingerVolumePreference extends VolumePreference {
             mCheckBoxes[i] = checkbox;
         }
 
+        // Volumes link checkbox
         final CheckBox linkCheckBox = (CheckBox) view.findViewById(R.id.link_ring_and_volume);
 
         final View ringerSection = view.findViewById(R.id.ringer_section);
@@ -231,6 +232,32 @@ public class RingerVolumePreference extends VolumePreference {
             ringerSection.setVisibility(View.GONE);
             linkVolumesSection.setVisibility(View.GONE);
         }
+
+        // Volume adjust sound checkbox
+        final CheckBox adjustCheckBox = (CheckBox) view.findViewById(R.id.volume_adjust_sound);
+        final View volumeAdjustSection = view.findViewById(R.id.volume_adjust_section);
+
+        if (System.getInt(getContext().getContentResolver(),
+                System.VOLUME_ADJUST_SOUNDS_ENABLED, 1) == 1) {
+            adjustCheckBox.setChecked(true);
+        } else {
+            adjustCheckBox.setChecked(false);
+        }
+
+        adjustCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Settings.System.putInt(buttonView.getContext().getContentResolver(),
+                            Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 1);
+                } else {
+                    Settings.System.putInt(buttonView.getContext().getContentResolver(),
+                            Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 0);
+                }
+                updateSlidersAndMutedStates();
+            }
+        });
 
         // Load initial states from AudioManager
         updateSlidersAndMutedStates();
