@@ -54,7 +54,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_NOTIFICATION_LED = "notification_led";
     private static final String KEY_SCREEN_SAVER = "screensaver";
-    private static final String KEY_WIFI_DISPLAY = "wifi_display";
     private static final String KEY_ANIMATION_OPTIONS = "category_animation_options";
     private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
     private static final String KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED = "wake_when_plugged_or_unplugged";
@@ -72,9 +71,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
-
-    private WifiDisplayStatus mWifiDisplayStatus;
-    private Preference mWifiDisplayPreference;
 
     private ListPreference mCrtMode;
 
@@ -138,16 +134,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mNotificationLed = (PreferenceScreen) findPreference(KEY_NOTIFICATION_LED);
         if (!hasNotificationLed) {
             getPreferenceScreen().removePreference(mNotificationLed);
-        }
-
-        mDisplayManager = (DisplayManager)getActivity().getSystemService(
-                Context.DISPLAY_SERVICE);
-        mWifiDisplayStatus = mDisplayManager.getWifiDisplayStatus();
-        mWifiDisplayPreference = (Preference)findPreference(KEY_WIFI_DISPLAY);
-        if (mWifiDisplayStatus.getFeatureState()
-                == WifiDisplayStatus.FEATURE_STATE_UNAVAILABLE) {
-            getPreferenceScreen().removePreference(mWifiDisplayPreference);
-            mWifiDisplayPreference = null;
         }
 
         // respect device default configuration
