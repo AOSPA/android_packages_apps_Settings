@@ -70,7 +70,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
 
     private static final String KEY_SEE_TRHOUGH = "see_through";
-    private static final String KEY_BLUR_BEHIND = "blur_behind";
     private static final String KEY_BLUR_RADIUS = "blur_radius";
 
     private static final String LOCK_NUMPAD_RANDOM = "lock_numpad_random";
@@ -118,7 +117,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
     private CheckBoxPreference mEnableKeyguardWidgets;
     private CheckBoxPreference mSeeThrough;
-    private CheckBoxPreference mBlurBehind;
     
     private SeekBarPreference mBlurRadius;
 
@@ -227,15 +225,11 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
         // lockscreen see through
         mSeeThrough = (CheckBoxPreference) root.findPreference(KEY_SEE_TRHOUGH);
-        mBlurBehind = (CheckBoxPreference) root.findPreference(KEY_BLUR_BEHIND);
-        mBlurBehind.setChecked(Settings.System.getInt(getContentResolver(), 
-        		Settings.System.LOCKSCREEN_BLUR_BEHIND, 0) == 1);
-        mBlurBehind.setEnabled(mSeeThrough.isChecked());
         mBlurRadius = (SeekBarPreference) root.findPreference(KEY_BLUR_RADIUS);
         mBlurRadius.setProgress(Settings.System.getInt(getContentResolver(), 
         		Settings.System.LOCKSCREEN_BLUR_RADIUS, 12));
         mBlurRadius.setOnPreferenceChangeListener(this);
-        mBlurRadius.setEnabled(mBlurBehind.isChecked() && mBlurBehind.isEnabled());
+        mBlurRadius.setEnabled(mSeeThrough.isChecked() && mSeeThrough.isEnabled());
 
         // Add the additional Omni settings
         mLockRingBattery = (CheckBoxPreference) root
@@ -637,12 +631,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
         } else if (preference == mSeeThrough) {
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH,
                     mSeeThrough.isChecked() ? 1 : 0);
-            mBlurBehind.setEnabled(mSeeThrough.isChecked());
-            mBlurRadius.setEnabled(mBlurBehind.isChecked() && mBlurBehind.isEnabled());
-        } else if (preference == mBlurBehind) {
-            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_BLUR_BEHIND,
-                    mBlurBehind.isChecked() ? 1 : 0);
-            mBlurRadius.setEnabled(mBlurBehind.isChecked());
+            mBlurRadius.setEnabled(mSeeThrough.isChecked());
         } else if (KEY_TOGGLE_VERIFY_APPLICATIONS.equals(key)) {
             Settings.Global.putInt(getContentResolver(), Settings.Global.PACKAGE_VERIFIER_ENABLE,
                     mToggleVerifyApps.isChecked() ? 1 : 0);
