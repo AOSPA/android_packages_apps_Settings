@@ -39,7 +39,7 @@ public class MagneticCenterSeekBar extends SeekBar {
     }
 
     @Override
-    protected void onProgressRefresh(float scale, boolean fromUser) {
+    public void onProgressRefresh(float scale, boolean fromUser) {
         super.onProgressRefresh(scale, fromUser);
         updateTouchProgress(mLastProgress, getProgress());
         mLastProgress = getProgress();
