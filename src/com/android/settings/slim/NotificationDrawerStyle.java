@@ -37,7 +37,7 @@ import android.util.Log;
 import android.view.Display;
 import android.widget.Toast;
 
-import com.android.internal.util.AOSPAL.DeviceUtils;
+import com.android.internal.util.slim.DeviceUtils;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -58,15 +58,12 @@ public class NotificationDrawerStyle extends SettingsPreferenceFragment implemen
             "notification_wallpaper_landscape";
     private static final String PREF_NOTIFICATION_WALLPAPER_ALPHA =
             "notification_wallpaper_alpha";
-    private static final String PREF_NOTIFICATION_ALPHA =
-            "notification_alpha";
 
     private static final int DLG_PICK_COLOR = 0;
 
     private ListPreference mNotificationWallpaper;
     private ListPreference mNotificationWallpaperLandscape;
     SeekBarPreference mWallpaperAlpha;
-    SeekBarPreference mNotificationAlpha;
 
     private File mImageTmp;
 
@@ -99,32 +96,19 @@ public class NotificationDrawerStyle extends SettingsPreferenceFragment implemen
             prefSet.removePreference(mNotificationWallpaperLandscape);
         }
 
-        float transparency;
+        float wallpaperTransparency;
         try{
-            transparency = Settings.System.getFloat(getContentResolver(),
+            wallpaperTransparency = Settings.System.getFloat(getContentResolver(),
                     Settings.System.NOTIFICATION_BACKGROUND_ALPHA);
-        } catch (Exception e) {
-            transparency = 0;
+        }catch (Exception e) {
+            wallpaperTransparency = 0;
             Settings.System.putFloat(getContentResolver(),
                     Settings.System.NOTIFICATION_BACKGROUND_ALPHA, 0.1f);
         }
         mWallpaperAlpha = (SeekBarPreference) findPreference(PREF_NOTIFICATION_WALLPAPER_ALPHA);
-        mWallpaperAlpha.setInitValue((int) (transparency * 100));
+        mWallpaperAlpha.setInitValue((int) (wallpaperTransparency * 100));
         mWallpaperAlpha.setProperty(Settings.System.NOTIFICATION_BACKGROUND_ALPHA);
         mWallpaperAlpha.setOnPreferenceChangeListener(this);
-
-        try{
-            transparency = Settings.System.getFloat(getContentResolver(),
-                    Settings.System.NOTIFICATION_ALPHA);
-        } catch (Exception e) {
-            transparency = 0;
-            Settings.System.putFloat(getContentResolver(),
-                    Settings.System.NOTIFICATION_ALPHA, 0.0f);
-        }
-        mNotificationAlpha = (SeekBarPreference) findPreference(PREF_NOTIFICATION_ALPHA);
-        mNotificationAlpha.setInitValue((int) (transparency * 100));
-        mNotificationAlpha.setProperty(Settings.System.NOTIFICATION_ALPHA);
-        mNotificationAlpha.setOnPreferenceChangeListener(this);
 
         updateCustomBackgroundSummary();
     }
@@ -263,13 +247,8 @@ public class NotificationDrawerStyle extends SettingsPreferenceFragment implemen
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mWallpaperAlpha) {
             float valNav = Float.parseFloat((String) newValue);
-            Settings.System.putFloat(getContentResolver(),
+            Settings.System.putFloat(getActivity().getContentResolver(),
                     Settings.System.NOTIFICATION_BACKGROUND_ALPHA, valNav / 100);
-            return true;
-        } else if (preference == mNotificationAlpha) {
-            float valNav = Float.parseFloat((String) newValue);
-            Settings.System.putFloat(getContentResolver(),
-                    Settings.System.NOTIFICATION_ALPHA, valNav / 100);
             return true;
         }else if (preference == mNotificationWallpaper) {
             int indexOf = mNotificationWallpaper.findIndexOfValue(newValue.toString());
