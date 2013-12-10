@@ -39,15 +39,4 @@
 
    </PreferenceCategory>
 
-   <PreferenceCategory
-          android:title="@string/additional_settings_notification_title">
-
-     <Preference
-         android:fragment="com.android.settings.slim.NotificationDrawerStyle"
-         android:key="notification_style"
-         android:title="@string/notification_style_title"
-         android:summary="@string/notification_style_summary" />
-
-   </PreferenceCategory>
-
 </PreferenceScreen>
