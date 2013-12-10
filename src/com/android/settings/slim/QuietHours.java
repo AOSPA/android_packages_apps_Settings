@@ -17,11 +17,13 @@
 package com.android.settings.slim;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -47,6 +49,8 @@ public class QuietHours extends SettingsPreferenceFragment implements
     private CheckBoxPreference mQuietHoursDim;
     private CheckBoxPreference mQuietHoursHaptic;
     private TimeRangePreference mQuietHoursTimeRange;
+
+    private Context mContext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
