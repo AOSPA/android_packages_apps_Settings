@@ -50,8 +50,6 @@ public class QuietHours extends SettingsPreferenceFragment implements
     private CheckBoxPreference mQuietHoursHaptic;
     private TimeRangePreference mQuietHoursTimeRange;
 
-    private Context mContext;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +106,7 @@ public class QuietHours extends SettingsPreferenceFragment implements
             mQuietHoursHaptic.setOnPreferenceChangeListener(this);
 
             TelephonyManager telephonyManager =
-                    (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+                    (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
             if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE) {
                 prefSet.removePreference(mQuietHoursRing);
             }
