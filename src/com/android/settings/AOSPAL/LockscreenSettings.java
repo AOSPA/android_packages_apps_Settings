@@ -56,6 +56,8 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
     private static final String KEY_LOCKSCREEN_WALLPAPER = "lockscreen_wallpaper";
     private static final String KEY_SELECT_LOCKSCREEN_WALLPAPER = "select_lockscreen_wallpaper";
     private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
+    private static final String KEY_LOCK_CLOCK = "lock_clock";
+    private static final String PERSONALIZE_CATEGORY = "personalize_category";
 
     private static final String KEY_SEE_THROUGH = "see_through";
     private static final String KEY_BLUR_RADIUS = "blur_radius";
@@ -123,6 +125,13 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                 Settings.System.LOCKSCREEN_BLUR_RADIUS, 12));
         mBlurRadius.setOnPreferenceChangeListener(this);
         mBlurRadius.setEnabled(mSeeThrough.isChecked() && mSeeThrough.isEnabled());
+
+        PreferenceCategory personalizeCategory = (PreferenceCategory) findPreference(PERSONALIZE_CATEGORY);
+
+        // Only add if device has LockClock installed
+        if (!isPackageInstalled("com.cyanogenmod.lockclock")) {
+            personalizeCategory.removePreference(findPreference(KEY_LOCK_CLOCK));
+        }
 
     }
 
