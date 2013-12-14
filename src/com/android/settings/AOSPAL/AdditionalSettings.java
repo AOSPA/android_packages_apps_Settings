@@ -22,10 +22,14 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String QUICK_PULLDOWN = "quick_pulldown";
     private static final String CATEGORY_HEADSETHOOK = "button_headsethook";
     private static final String BUTTON_HEADSETHOOK_LAUNCH_VOICE = "button_headsethook_launch_voice";
+    private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
+    private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
 
 
     ListPreference mQuickPulldown;
     private CheckBoxPreference mHeadsetHookLaunchVoice;
+    private ListPreference mListViewAnimation;
+    private ListPreference mListViewInterpolator;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,25 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         mHeadsetHookLaunchVoice = (CheckBoxPreference) findPreference(BUTTON_HEADSETHOOK_LAUNCH_VOICE);
         mHeadsetHookLaunchVoice.setChecked(Settings.System.getInt(resolver,
                 Settings.System.HEADSETHOOK_LAUNCH_VOICE, 1) == 1);
+
+        //ListView Animations
+        mListViewAnimation = (ListPreference) prefSet.findPreference(KEY_LISTVIEW_ANIMATION);
+        if (mListViewAnimation != null) {
+           int listViewAnimation = Settings.System.getInt(getContentResolver(),
+                    Settings.System.LISTVIEW_ANIMATION, 1);
+           mListViewAnimation.setSummary(mListViewAnimation.getEntry());
+           mListViewAnimation.setValue(String.valueOf(listViewAnimation));
+        }
+        mListViewAnimation.setOnPreferenceChangeListener(this);
+
+        mListViewInterpolator = (ListPreference) prefSet.findPreference(KEY_LISTVIEW_INTERPOLATOR);
+        if (mListViewInterpolator != null) {
+           int listViewInterpolator = Settings.System.getInt(getContentResolver(),
+                    Settings.System.LISTVIEW_INTERPOLATOR, 1);
+           mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
+           mListViewInterpolator.setValue(String.valueOf(listViewInterpolator));
+        }
+        mListViewInterpolator.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -65,6 +88,20 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
                     statusQuickPulldown);
             updatePulldownSummary();
             return true;
+        } else if (KEY_LISTVIEW_ANIMATION.equals(key)) {
+            int value = Integer.parseInt((String) newValue);
+            int index = mListViewAnimation.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.LISTVIEW_ANIMATION,
+                    value);
+            mListViewAnimation.setSummary(mListViewAnimation.getEntries()[index]);
+        } else if (KEY_LISTVIEW_INTERPOLATOR.equals(key)) {
+            int value = Integer.parseInt((String) newValue);
+            int index = mListViewInterpolator.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.LISTVIEW_INTERPOLATOR,
+                    value);
+            mListViewInterpolator.setSummary(mListViewInterpolator.getEntries()[index]);
         }
         return false;
     }
