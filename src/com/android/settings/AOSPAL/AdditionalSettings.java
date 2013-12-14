@@ -20,9 +20,12 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
     private static final String QUICK_PULLDOWN = "quick_pulldown";
+    private static final String CATEGORY_HEADSETHOOK = "button_headsethook";
+    private static final String BUTTON_HEADSETHOOK_LAUNCH_VOICE = "button_headsethook_launch_voice";
 
 
     ListPreference mQuickPulldown;
+    private CheckBoxPreference mHeadsetHookLaunchVoice;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,13 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
             mQuickPulldown.setValue(String.valueOf(statusQuickPulldown));
             updatePulldownSummary();
         }
+
+        final PreferenceCategory headsethookCategory =
+                (PreferenceCategory) prefScreen.findPreference(CATEGORY_HEADSETHOOK);
+
+        mHeadsetHookLaunchVoice = (CheckBoxPreference) findPreference(BUTTON_HEADSETHOOK_LAUNCH_VOICE);
+        mHeadsetHookLaunchVoice.setChecked(Settings.System.getInt(resolver,
+                Settings.System.HEADSETHOOK_LAUNCH_VOICE, 1) == 1);
     }
 
     @Override
@@ -57,6 +67,18 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mHeadsetHookLaunchVoice) {
+            boolean checked = ((CheckBoxPreference)preference).isChecked();
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.HEADSETHOOK_LAUNCH_VOICE, checked ? 1:0);
+
+            return true;
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     private void updatePulldownSummary() {

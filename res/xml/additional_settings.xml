@@ -39,4 +39,16 @@
 
    </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="button_headsethook"
+        android:title="@string/button_headsethook_title" >
+
+        <CheckBoxPreference
+            android:key="button_headsethook_launch_voice"
+            android:title="@string/button_headsethook_launch_voice_title"
+            android:summary="@string/button_headsethook_launch_voice_summary"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
