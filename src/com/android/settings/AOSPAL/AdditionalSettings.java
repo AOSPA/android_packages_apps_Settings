@@ -1,6 +1,7 @@
 package com.android.settings.AOSPAL;
 
 import android.app.ActivityManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.additional_settings);
         PreferenceScreen prefs = getPreferenceScreen();
+        final ContentResolver resolver = getActivity().getContentResolver();
 
         mQuickPulldown = (ListPreference) findPreference(QUICK_PULLDOWN);
         if (!Utils.isPhone(getActivity())) {
@@ -50,14 +52,14 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         }
 
         final PreferenceCategory headsethookCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_HEADSETHOOK);
+                (PreferenceCategory) prefs.findPreference(CATEGORY_HEADSETHOOK);
 
         mHeadsetHookLaunchVoice = (CheckBoxPreference) findPreference(BUTTON_HEADSETHOOK_LAUNCH_VOICE);
         mHeadsetHookLaunchVoice.setChecked(Settings.System.getInt(resolver,
                 Settings.System.HEADSETHOOK_LAUNCH_VOICE, 1) == 1);
 
         //ListView Animations
-        mListViewAnimation = (ListPreference) prefSet.findPreference(KEY_LISTVIEW_ANIMATION);
+        mListViewAnimation = (ListPreference) prefs.findPreference(KEY_LISTVIEW_ANIMATION);
         if (mListViewAnimation != null) {
            int listViewAnimation = Settings.System.getInt(getContentResolver(),
                     Settings.System.LISTVIEW_ANIMATION, 1);
@@ -66,7 +68,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         }
         mListViewAnimation.setOnPreferenceChangeListener(this);
 
-        mListViewInterpolator = (ListPreference) prefSet.findPreference(KEY_LISTVIEW_INTERPOLATOR);
+        mListViewInterpolator = (ListPreference) prefs.findPreference(KEY_LISTVIEW_INTERPOLATOR);
         if (mListViewInterpolator != null) {
            int listViewInterpolator = Settings.System.getInt(getContentResolver(),
                     Settings.System.LISTVIEW_INTERPOLATOR, 1);
@@ -82,6 +84,8 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final String key = preference.getKey();
+
         if (preference == mQuickPulldown) {
             int statusQuickPulldown = Integer.valueOf((String) newValue);
             Settings.System.putInt(getContentResolver(), Settings.System.QS_QUICK_PULLDOWN,
