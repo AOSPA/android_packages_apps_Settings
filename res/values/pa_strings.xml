@@ -80,7 +80,7 @@
     <string name="pulse_speed_normal">Normal</string>
     <string name="pulse_speed_slow">Slow</string>
     <string name="pulse_speed_very_slow">Very slow</string>
-    
+
     <!--Lockscreen blur-->
     <string name="blur_behind_title">Blur Lockscreen Background</string>
     <string name="blur_behind_summary">Adds a nice blur effect to the background</string>
@@ -108,7 +108,7 @@
     <string name="navring_choose_action_title">Choose action</string>
 
     <string name="lockscreen_target_info">Drag the slider to targets to assign shortcuts</string>
-    <!-- Description of the unlock target in the Slide unlock screen. [CHAR LIMIT=NONE] --> 
+    <!-- Description of the unlock target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
     <string name="description_target_unlock">Unlock</string>
     <!-- Description of the unlock target in the Slide unlock screen. [CHAR LIMIT=NONE] -->
     <string name="description_target_search">Search</string>
@@ -170,7 +170,7 @@
 
    <!-- Android debugging over WiFi -->
     <string name="adb_over_network">ADB over network</string>
-    <string name="adb_over_network_summary">Enable TCP/IP debugging over network interfaces (Wi-Fi, 
+    <string name="adb_over_network_summary">Enable TCP/IP debugging over network interfaces (Wi-Fi,
 USB networks). This setting is reset on reboot</string>
     <!-- Warning for Adb over Network -->
     <string name="adb_over_network_warning">WARNING: When ADB over network is enabled, your phone is
@@ -390,7 +390,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="ram_bar_button_help">Help</string>
     <string name="ram_bar_button_reset">Reset colors</string>
     <string name="ram_bar_reset">Reset</string>
-    <string name="ram_bar_reset_message">Reset RAM bar style to default?</string>   
+    <string name="ram_bar_reset_message">Reset RAM bar style to default?</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
@@ -478,6 +478,24 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="status_bar_network_title">Network traffic</string>
     <string name="status_bar_show_network_stats_title">Show network speeds</string>
     <string name="status_bar_network_stats_update_title">Update frequency</string>    
+
+    <!-- Lockscreen Notifications -->
+    <string name="lockscreen_notifications">Lockscreen notifications</string>
+    <string name="lockscreen_notifications_summary">Show pending notifications on lockscreen</string>
+    <string name="pocket_mode">Pocket mode</string>
+    <string name="pocket_mode_summary">Turn screen on and show all notifications when device is pulled out of pocket. Turn screen off when device gets back into pocket.</string>
+    <string name="show_always">Show always</string>
+    <string name="show_always_summary">Always turn screen on when pulled out of pocket, even when there are no notifications pending</string>
+    <string name="hide_low_priority">Hide low priority</string>
+    <string name="hide_low_priority_summary">Hide low priority notifications such as google now weather notifications</string>
+    <string name="hide_non_clearable">Hide non clearable</string>
+    <string name="hide_non_clearable_summary">Hide all non clearable notifications</string>
+    <string name="dismiss_all">Allow dismissing all notifications</string>
+    <string name="dismiss_all_summary">Allow dismissing even non clearable notifications. Of course, they\'re just hidden from lockscreen and not from the notification panel.</string>
+    <string name="expanded_view">Expanded notification view</string>
+    <string name="expanded_view_summary">Add possibility to toggle between normal and expanded view by longpress. The expanded view sometimes shows more private information so you might want to disable it.</string>
+    <string name="force_expanded_view">Force expanded view</string>
+    <string name="force_expanded_view_summary">Show notifications expanded by default. You still will be able to toggle between expanded and normal view.</string>
 
     <!-- Network stats custm colors -->
     <string name="status_bar_network_usage_color_style">Color style</string>

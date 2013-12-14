@@ -47,6 +47,11 @@
             android:summary="@string/blur_radius_summary"
             android:max="25"
             android:defaultValue="12" />
+ 
+        <PreferenceScreen
+            android:title="@string/lockscreen_notifications"
+            android:fragment="com.android.settings.AOSPAL.LockscreenNotifications" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
