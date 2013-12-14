@@ -1834,6 +1834,11 @@
 
         <activity android:name=".ApnEditor" />
 
+        <activity
+            android:name=".slim.themes.ThemeSettings"
+            android:label="@string/theme_settings_title" >
+        </activity>
+
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
                 android:exported="false"
