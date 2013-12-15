@@ -39,7 +39,8 @@
          <PreferenceScreen
              android:fragment="com.android.settings.cyanogenmod.NavRing"
              android:key="navigation_ring_shortcuts"
-             android:title="@string/navigation_ring_title"/>
+             android:title="@string/navigation_ring_title"
+             android:summary="@string/additional_settings_navigation_ring_summary" />
 
    </PreferenceCategory>
 
@@ -51,6 +52,7 @@
         <ListPreference
             android:key="quick_pulldown"
             android:title="@string/title_quick_pulldown"
+            android:summary="additional_settings_qs_pulldown_summary"
             android:entries="@array/quick_pulldown_entries"
             android:entryValues="@array/quick_pulldown_values"
             android:persistent="false" />
