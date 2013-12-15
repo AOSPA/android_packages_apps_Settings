@@ -20,7 +20,7 @@
             android:entryValues="@array/listview_animation_values"
             android:defaultValue="0" />
 
-         <ListPreference
+        <ListPreference
             android:key="listview_interpolator"
             android:dialogTitle="@string/listview_interpolator_title"
             android:title="@string/listview_interpolator_title"
@@ -28,6 +28,16 @@
             android:entryValues="@array/listview_interpolator_values"
             android:defaultValue="0"
             android:dependency="listview_animation" />
+
+        <!-- Lock clock -->
+        <PreferenceScreen
+        android:key="lock_clock"
+        android:title="@string/lock_clock_title"
+        android:summary="@string/lock_clock_summary">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.cyanogenmod.lockclock"
+                android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
+        </PreferenceScreen>
 
     </PreferenceCategory>
 

@@ -41,7 +41,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         final ContentResolver resolver = getActivity().getContentResolver();
 
         mQuickPulldown = (ListPreference) findPreference(QUICK_PULLDOWN);
-        if (!Utils.isPhone(getActivity())) {
+        if (!Utils.isTablet(getActivity())) {
             prefs.removePreference(mQuickPulldown);
         } else {
             mQuickPulldown.setOnPreferenceChangeListener(this);
