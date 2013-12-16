@@ -66,6 +66,7 @@ import com.android.settings.accessibility.ToggleCaptioningPreferenceFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
+import com.android.settings.AOSPAL.AdditionalSettings;
 import com.android.settings.applications.AppOpsSummary;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ProcessStatsUi;
@@ -349,6 +350,9 @@ public class Settings extends PreferenceActivity
         KeyboardLayoutPickerFragment.class.getName(),
         ApnSettings.class.getName(),
         HomeSettings.class.getName(),
+        AdditionalSettings.class.getName(),
+        AppOpsSummary.class.getName(),
+        
     };
 
     @Override
