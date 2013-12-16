@@ -25,10 +25,12 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String BUTTON_HEADSETHOOK_LAUNCH_VOICE = "button_headsethook_launch_voice";
     private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
     private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
+    private static final String KEY_DUAL_PANEL = "force_dualpanel"; 
 
 
     ListPreference mQuickPulldown;
     private CheckBoxPreference mHeadsetHookLaunchVoice;
+    private CheckBoxPreference mDualPanel;
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
 
@@ -76,6 +78,9 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
            mListViewInterpolator.setValue(String.valueOf(listViewInterpolator));
         }
         mListViewInterpolator.setOnPreferenceChangeListener(this);
+
+        mDualPanel = (CheckBoxPreference) findPreference(KEY_DUAL_PANEL);
+        mDualPanel.setChecked(Settings.System.getBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL, false));
     }
 
     @Override
@@ -118,6 +123,9 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
                     Settings.System.HEADSETHOOK_LAUNCH_VOICE, checked ? 1:0);
 
             return true;
+        } else if (preference == mDualPanel) {
+            Settings.System.putBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL, ((CheckBoxPreference) preference).isChecked());
+            return true; 
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
