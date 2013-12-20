@@ -26,10 +26,11 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
     private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
     private static final String KEY_DUAL_PANEL = "force_dualpanel"; 
-
+    private static final String LOCKSCREEN_POWER_MENU = "lockscreen_power_menu";
 
     ListPreference mQuickPulldown;
     private CheckBoxPreference mHeadsetHookLaunchVoice;
+    private CheckBoxPreference mLockScreenPowerMenu;
     private CheckBoxPreference mDualPanel;
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
@@ -81,6 +82,13 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
 
         mDualPanel = (CheckBoxPreference) findPreference(KEY_DUAL_PANEL);
         mDualPanel.setChecked(Settings.System.getBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL, false));
+
+        mLockScreenPowerMenu = (CheckBoxPreference) root.findPreference(LOCKSCREEN_POWER_MENU);
+        if (mLockScreenPowerMenu != null) {
+            mLockScreenPowerMenu.setChecked(Settings.Secure.getInt(getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_POWER_MENU, 1) == 1);
+            mLockScreenPowerMenu.setOnPreferenceChangeListener(this);
+        }
     }
 
     @Override
@@ -121,11 +129,13 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
             boolean checked = ((CheckBoxPreference)preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HEADSETHOOK_LAUNCH_VOICE, checked ? 1:0);
-
             return true;
         } else if (preference == mDualPanel) {
             Settings.System.putBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL, ((CheckBoxPreference) preference).isChecked());
             return true; 
+        } else if (preference == mLockScreenPowerMenu) {
+            Settings.Secure.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_POWER_MENU, isToggled(preference) ? 1 : 0);
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }

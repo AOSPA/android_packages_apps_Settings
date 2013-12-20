@@ -41,16 +41,6 @@
             android:summary="@string/header_summary_animation"  
             android:fragment="com.android.settings.AOSPAL.fragments.AnimationControls" />
 
-        <!-- Lock clock -->
-        <PreferenceScreen
-        android:key="lock_clock"
-        android:title="@string/lock_clock_title"
-        android:summary="@string/lock_clock_summary">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.cyanogenmod.lockclock"
-                android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
-        </PreferenceScreen>
-
     </PreferenceCategory>
 
 
@@ -92,6 +82,26 @@
             android:summary="@string/statusbar_network_summary" /> 
 
    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/additional_settings_lockscreen_title" >
+
+        <CheckBoxPreference
+            android:key="lockscreen_power_menu"
+            android:title="@string/lockscreen_power_menu_title"
+            android:summary="@string/lockscreen_power_menu_summary" />
+
+        <!-- Lock clock -->
+        <PreferenceScreen
+        android:key="lock_clock"
+        android:title="@string/lock_clock_title"
+        android:summary="@string/lock_clock_summary">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.cyanogenmod.lockclock"
+                android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
+        </PreferenceScreen>
+
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="button_headsethook"
