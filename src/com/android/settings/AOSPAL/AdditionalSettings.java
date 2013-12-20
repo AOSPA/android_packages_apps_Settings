@@ -83,12 +83,16 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         mDualPanel = (CheckBoxPreference) findPreference(KEY_DUAL_PANEL);
         mDualPanel.setChecked(Settings.System.getBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL, false));
 
-        mLockScreenPowerMenu = (CheckBoxPreference) root.findPreference(LOCKSCREEN_POWER_MENU);
+        mLockScreenPowerMenu = (CheckBoxPreference) prefs.findPreference(LOCKSCREEN_POWER_MENU);
         if (mLockScreenPowerMenu != null) {
             mLockScreenPowerMenu.setChecked(Settings.Secure.getInt(getContentResolver(),
                     Settings.Secure.LOCK_SCREEN_POWER_MENU, 1) == 1);
             mLockScreenPowerMenu.setOnPreferenceChangeListener(this);
         }
+    }
+
+    private boolean isToggled(Preference pref) {
+        return ((CheckBoxPreference) pref).isChecked();
     }
 
     @Override
