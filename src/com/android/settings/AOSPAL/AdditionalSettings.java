@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -44,12 +45,12 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         final ContentResolver resolver = getActivity().getContentResolver();
 
         mQuickPulldown = (ListPreference) findPreference(QUICK_PULLDOWN);
-        if (!Utils.isTablet(getActivity())) {
+        if (Utils.isTablet(getActivity())) {
             prefs.removePreference(mQuickPulldown);
         } else {
             mQuickPulldown.setOnPreferenceChangeListener(this);
-            int statusQuickPulldown = Settings.System.getInt(getContentResolver(),
-                    Settings.System.QS_QUICK_PULLDOWN, 0);
+            int statusQuickPulldown = Settings.System.getIntForUser(getContentResolver(),
+                    Settings.System.QS_QUICK_PULLDOWN, 1, UserHandle.USER_CURRENT);
             mQuickPulldown.setValue(String.valueOf(statusQuickPulldown));
             updatePulldownSummary();
         }
@@ -105,8 +106,8 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
 
         if (preference == mQuickPulldown) {
             int statusQuickPulldown = Integer.valueOf((String) newValue);
-            Settings.System.putInt(getContentResolver(), Settings.System.QS_QUICK_PULLDOWN,
-                    statusQuickPulldown);
+            Settings.System.putIntForUser(getContentResolver(), Settings.System.QS_QUICK_PULLDOWN,
+                    statusQuickPulldown, UserHandle.USER_CURRENT);
             updatePulldownSummary();
             return true;
         } else if (KEY_LISTVIEW_ANIMATION.equals(key)) {
@@ -148,8 +149,8 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         int summaryId;
         int directionId;
         summaryId = R.string.summary_quick_pulldown;
-        String value = Settings.System.getString(getContentResolver(),
-                Settings.System.QS_QUICK_PULLDOWN);
+        String value = String.valueOf(Settings.System.getIntForUser(getContentResolver(),
+                Settings.System.QS_QUICK_PULLDOWN, 1, UserHandle.USER_CURRENT));
         String[] pulldownArray = getResources().getStringArray(R.array.quick_pulldown_values);
         if (pulldownArray[0].equals(value)) {
             directionId = R.string.quick_pulldown_off;
