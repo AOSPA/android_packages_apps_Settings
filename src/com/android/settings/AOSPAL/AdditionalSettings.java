@@ -88,7 +88,6 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         if (mLockScreenPowerMenu != null) {
             mLockScreenPowerMenu.setChecked(Settings.Secure.getInt(getContentResolver(),
                     Settings.Secure.LOCK_SCREEN_POWER_MENU, 1) == 1);
-            mLockScreenPowerMenu.setOnPreferenceChangeListener(this);
         }
     }
 
