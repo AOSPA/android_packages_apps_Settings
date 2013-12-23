@@ -32,15 +32,13 @@ import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
-import android.preference.SwitchPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.os.Handler;
 import android.util.Log;
 import android.net.Uri;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.view.IWindowManager;
 import android.os.ServiceManager;
 import android.os.IBinder;
@@ -57,7 +55,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CRSettings extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
+public class CRSettings extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "CR_Settings";
     private static final boolean DEBUG = true;
@@ -70,9 +68,9 @@ public class CRSettings extends SettingsPreferenceFragment implements OnPreferen
 
     private final Configuration mCurrentConfig = new Configuration();
 
-    private SwitchPreference mDisableBootanimPref;
-    private SwitchPreference mForceHighEndGfx;
-    private SwitchPreference mKonstaNavbar;
+    private CheckBoxPreference mDisableBootanimPref;
+    private CheckBoxPreference mForceHighEndGfx;
+    private CheckBoxPreference mKonstaNavbar;
 
     private Context mContext;
 
@@ -83,19 +81,19 @@ public class CRSettings extends SettingsPreferenceFragment implements OnPreferen
 
         PreferenceScreen prefSet = getPreferenceScreen();
 
-        mKonstaNavbar = (SwitchPreference) findPreference(KONSTA_NAVBAR);
+        mKonstaNavbar = (CheckBoxPreference) findPreference(KONSTA_NAVBAR);
         mKonstaNavbar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.KONSTA_NAVBAR, 0) == 1);
 
         if (ActivityManager.isLowRamDeviceStatic()) {
-            mForceHighEndGfx = (SwitchPreference) prefSet.findPreference(FORCE_HIGHEND_GFX_PREF);
+            mForceHighEndGfx = (CheckBoxPreference) prefSet.findPreference(FORCE_HIGHEND_GFX_PREF);
             String forceHighendGfx = SystemProperties.get(FORCE_HIGHEND_GFX_PERSIST_PROP, "false");
             mForceHighEndGfx.setChecked("true".equals(forceHighendGfx));
         } else {
             prefSet.removePreference(findPreference(FORCE_HIGHEND_GFX_PREF));
         }
 
-        mDisableBootanimPref = (SwitchPreference) prefSet.findPreference(DISABLE_BOOTANIMATION_PREF);
+        mDisableBootanimPref = (CheckBoxPreference) prefSet.findPreference(DISABLE_BOOTANIMATION_PREF);
         mDisableBootanimPref.setChecked("1".equals(SystemProperties.get(DISABLE_BOOTANIMATION_PERSIST_PROP, "0")));
     }
 
