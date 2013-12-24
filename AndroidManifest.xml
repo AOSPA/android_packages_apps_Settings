@@ -1585,7 +1585,7 @@
                 android:excludeFromRecents="true"
                 android:theme="@*android:style/Theme.Holo.Dialog.Alert" />
 
-	<activity android:name=".AOSPAL.RamBar" />  
+	<activity android:name=".AOSPAL.RamBar" />
 
    	<!-- Pseudo-activity used to provide an intent-filter entry point to ass display rotation config -->
         <activity android:name="Settings$ASSRamBarActivity"
@@ -1720,6 +1720,29 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+
+        <!-- Telo -->
+
+        <activity android:name=".AOSPAL.teloradio.TeloRadioSettings"
+            android:label="@string/telo_radio_settings_title"
+            android:launchMode="singleTask"
+            android:process="com.android.phone">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".AOSPAL.teloradio.TeloRadioBoot">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Telo - FIN -->
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
