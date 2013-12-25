@@ -19,6 +19,11 @@
         android:summary="@string/show_always_summary" />
 
     <CheckBoxPreference
+        android:key="wake_on_notification"
+        android:title="@string/wake_on_notification"
+        android:summary="@string/wake_on_notification_summary" />
+
+    <CheckBoxPreference
         android:key="hide_low_priority"
         android:title="@string/hide_low_priority"
         android:summary="@string/hide_low_priority_summary" />

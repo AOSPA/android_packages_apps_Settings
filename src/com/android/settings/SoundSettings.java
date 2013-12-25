@@ -405,6 +405,16 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else if (preference == mDockAudioMediaEnabled) {
             Settings.Global.putInt(getContentResolver(), Settings.Global.DOCK_AUDIO_MEDIA_ENABLED,
                     mDockAudioMediaEnabled.isChecked() ? 1 : 0);
+        } else if (preference == mPowerSounds) {
+            Settings.Global.putInt(getContentResolver(), Settings.Global.POWER_NOTIFICATIONS_ENABLED,
+                    mPowerSounds.isChecked() ? 1 : 0);
+        } else if (preference == mPowerSoundsVibrate) {
+            Settings.Global.putInt(getContentResolver(), Settings.Global.POWER_NOTIFICATIONS_VIBRATE,
+                    mPowerSoundsVibrate.isChecked() ? 1 : 0);
+        } else if (preference == mPowerSoundsRingtone) {
+            launchNotificationSoundPicker(REQUEST_CODE_POWER_NOTIFICATIONS_RINGTONE,
+                    Settings.Global.getString(getContentResolver(),
+                            Settings.Global.POWER_NOTIFICATIONS_RINGTONE));
         }
         return true;
     }
@@ -427,23 +437,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             } else {
                 showDialogInner(DLG_SAFE_HEADSET_VOLUME);
             }
-        }
-        if (KEY_POWER_NOTIFICATIONS.equals(key)) {
-            Settings.Global.putInt(getContentResolver(),
-                    Settings.Global.POWER_NOTIFICATIONS_ENABLED,
-                    (Boolean) objValue ? 1 : 0);
-
-        }
-        if (KEY_POWER_NOTIFICATIONS_VIBRATE.equals(key)) {
-            Settings.Global.putInt(getContentResolver(),
-                    Settings.Global.POWER_NOTIFICATIONS_VIBRATE,
-                    (Boolean) objValue ? 1 : 0);
-
-        }
-        if (KEY_POWER_NOTIFICATIONS_RINGTONE.equals(key)) {
-            launchNotificationSoundPicker(REQUEST_CODE_POWER_NOTIFICATIONS_RINGTONE,
-                    Settings.Global.getString(getContentResolver(),
-                            Settings.Global.POWER_NOTIFICATIONS_RINGTONE));
         }
         return true;
     }
