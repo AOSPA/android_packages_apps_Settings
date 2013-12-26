@@ -48,4 +48,10 @@
         android:title="@string/force_expanded_view"
         android:summary="@string/force_expanded_view_summary" />
 
+    <com.android.settings.AOSPAL.NumberPickerPreference
+        android:key="notifications_height"
+        android:dialogMessage="@string/notifications_height"
+        android:title="@string/notifications_height"
+        android:summary="@string/notifications_height_summary" />
+
 </PreferenceScreen>
