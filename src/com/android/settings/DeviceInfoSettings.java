@@ -71,7 +71,6 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
     long[] mHits = new long[3];
-    long[] mTaps = new long[3];
     int mDevHitCountdown;
     Toast mDevHitToast;
 
@@ -198,7 +197,9 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
             System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
             mHits[mHits.length-1] = SystemClock.uptimeMillis();
             if (mHits[0] >= (SystemClock.uptimeMillis()-500)) {
-                Intent intent = new Intent(getActivity(), BeanBag.class);
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setClassName("android",
+                        com.android.internal.app.PAWorldActivity.class.getName());
                 try {
                     startActivity(intent);
                 } catch (Exception e) {
