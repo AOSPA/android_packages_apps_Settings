@@ -46,6 +46,12 @@
             android:summary="@string/header_summary_animation"
             android:fragment="com.android.settings.AOSPAL.fragments.AnimationControls" />
 
+         <PreferenceScreen
+            android:key="gesture_anywhere"
+            android:fragment="com.android.settings.chameleonos.labs.gestureanywhere.GestureAnywhereSettings"
+            android:icon="@drawable/ic_dt_gesture_anywhere"
+            android:title="@string/gesture_anywhere_title" />
+
     </PreferenceCategory>
 
 
