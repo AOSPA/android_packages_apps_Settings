@@ -30,6 +30,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
@@ -134,6 +135,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String DEBUG_APPLICATIONS_CATEGORY_KEY = "debug_applications_category";
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
 
+    private static final String ENABLE_QUICKBOOT_KEY = "enable_quickboot";
+    private static final String QUICKBOOT_PACKAGE_NAME = "com.qapp.quickboot";
+
     private static final String ROOT_ACCESS_KEY = "root_access";
     private static final String ROOT_ACCESS_PROPERTY = "persist.sys.root_access";
 
@@ -169,6 +173,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private CheckBoxPreference mBugreportInPower;
     private CheckBoxPreference mKeepScreenOn;
     private CheckBoxPreference mBtHciSnoopLog;
+    private CheckBoxPreference mQuickBoot;
     private CheckBoxPreference mAllowMockLocation;
     private PreferenceScreen mPassword;
 
@@ -265,6 +270,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBugreportInPower = findAndInitCheckboxPref(BUGREPORT_IN_POWER_KEY);
         mKeepScreenOn = findAndInitCheckboxPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitCheckboxPref(BT_HCI_SNOOP_LOG);
+        mQuickBoot = findAndInitCheckboxPref(ENABLE_QUICKBOOT_KEY);
         mAllowMockLocation = findAndInitCheckboxPref(ALLOW_MOCK_LOCATION);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
@@ -274,6 +280,11 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             disableForUser(mClearAdbKeys);
             disableForUser(mEnableTerminal);
             disableForUser(mPassword);
+            disableForUser(mQuickBoot);
+        }
+
+        if (!isPackageInstalled(getActivity(), QUICKBOOT_PACKAGE_NAME)) {
+            removePreference(mQuickBoot);
         }
 
         mDebugAppPref = findPreference(DEBUG_APP_KEY);
@@ -499,6 +510,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 Settings.Secure.BLUETOOTH_HCI_LOG, 0) != 0);
         updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
+        updateCheckBox(mQuickBoot, Settings.Global.getInt(cr,
+                Settings.Global.ENABLE_QUICKBOOT, 0) != 0);
         updateRuntimeValue();
         updateHdcpValues();
         updatePasswordSummary();
@@ -1272,6 +1285,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.ALLOW_MOCK_LOCATION,
                     mAllowMockLocation.isChecked() ? 1 : 0);
+        } else if (preference == mQuickBoot) {
+            Settings.Global.putInt(getActivity().getContentResolver(),
+                    Settings.Global.ENABLE_QUICKBOOT,
+                    mQuickBoot.isChecked() ? 1 : 0);
         } else if (preference == mDebugAppPref) {
             startActivityForResult(new Intent(getActivity(), AppPicker.class), RESULT_DEBUG_APP);
         } else if (preference == mWaitForDebugger) {
@@ -1525,11 +1542,18 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
     }
 
-    private static boolean isPackageInstalled(Context context, String packageName) {
-        try {
-            return context.getPackageManager().getPackageInfo(packageName, 0) != null;
-        } catch (NameNotFoundException e) {
-            return false;
+    public static boolean isPackageInstalled(Context context, String pkg) {
+        if (pkg != null) {
+            try {
+                PackageInfo pi = context.getPackageManager().getPackageInfo(pkg, 0);
+                if (!pi.applicationInfo.enabled) {
+                    return false;
+                }
+            } catch (NameNotFoundException e) {
+                return false;
+            }
         }
+
+        return true;
     }
 }
