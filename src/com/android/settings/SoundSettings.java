@@ -415,6 +415,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             launchNotificationSoundPicker(REQUEST_CODE_POWER_NOTIFICATIONS_RINGTONE,
                     Settings.Global.getString(getContentResolver(),
                             Settings.Global.POWER_NOTIFICATIONS_RINGTONE));
+        } else {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
         return true;
     }
