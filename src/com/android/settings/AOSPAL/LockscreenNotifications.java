@@ -105,6 +105,7 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
         mNotificationsHeight.setMinValue(1);
         mNotificationsHeight.setMaxValue(max);
         mNotificationsHeight.setOnPreferenceChangeListener(this);
+        mNotificationsHeight.setEnabled(mLockscreenNotifications.isChecked());
     }
 
     @Override
@@ -121,6 +122,7 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
             mDismissAll.setEnabled(!mHideNonClearable.isChecked() && mLockscreenNotifications.isChecked());
             mExpandedView.setEnabled(mLockscreenNotifications.isChecked());
             mForceExpandedView.setEnabled(mLockscreenNotifications.isChecked() && mExpandedView.isChecked());
+            mNotificationsHeight.setEnabled(mLockscreenNotifications.isChecked());
         } else if (preference == mPocketMode) {
             Settings.System.putInt(cr, Settings.System.LOCKSCREEN_NOTIFICATIONS_POCKET_MODE,
                     mPocketMode.isChecked() ? 1 : 0);
