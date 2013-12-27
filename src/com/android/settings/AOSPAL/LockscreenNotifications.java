@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -106,6 +107,12 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
         mNotificationsHeight.setMaxValue(max);
         mNotificationsHeight.setOnPreferenceChangeListener(this);
         mNotificationsHeight.setEnabled(mLockscreenNotifications.isChecked());
+
+        boolean hasProximitySensor = getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_PROXIMITY);
+        if (!hasProximitySensor) {
+            prefs.removePreference(mPocketMode);
+            prefs.removePreference(mShowAlways);
+        }
     }
 
     @Override
