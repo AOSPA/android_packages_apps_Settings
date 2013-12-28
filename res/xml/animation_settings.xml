@@ -4,5 +4,28 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="animation_settings">
 
+    <PreferenceScreen
+        android:key="interface_animation_system"
+        android:fragment="com.android.settings.AOSPAL.aokp.SystemAnimationInterfaceSettings"
+        android:title="@string/system_animation_title"
+        android:summary="@string/system_animation_summary" />
+
+    <PreferenceScreen
+        android:key="interface_animation_listview"
+        android:fragment="com.android.settings.AOSPAL.aokp.ListViewAnimationInterfaceSettings"
+        android:title="@string/listview_title"
+        android:summary="@string/listview_summary" />
+
+    <PreferenceScreen
+        android:key="interface_animation_scroll"
+        android:fragment="com.android.settings.AOSPAL.aokp.ScrollAnimationInterfaceSettings"
+        android:title="@string/scrolling_title"
+        android:summary="@string/scrolling_summary" />
+
+    <PreferenceScreen
+        android:key="interface_animation_keyboard"
+        android:fragment="com.android.settings.AOSPAL.aokp.KeyboardAnimationInterfaceSettings"
+        android:title="@string/ime_animation_title"
+        android:summary="@string/ime_animation_summary" />
 
 </PreferenceScreen>

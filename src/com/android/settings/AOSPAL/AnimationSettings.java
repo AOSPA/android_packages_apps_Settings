@@ -65,7 +65,6 @@ public class AnimationSettings extends SettingsPreferenceFragment implements
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final String key = preference.getKey();
-        }
         return true;
     }
 }
