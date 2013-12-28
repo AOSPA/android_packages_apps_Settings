@@ -26,11 +26,15 @@
                 android:key="wallpaper"
                 android:title="@string/wallpaper_settings_title"
                 android:fragment="com.android.settings.WallpaperTypeSettings" />
-    
+
         <PreferenceScreen
-            android:key="display_rotation"
-            android:fragment="com.android.settings.cyanogenmod.DisplayRotation"
-            android:title="@string/display_rotation_title" />
+                android:key="quiet_hours_settings"
+                android:fragment="com.android.settings.slim.QuietHours"
+                android:title="@string/quiet_hours_title" />
+
+        <CheckBoxPreference
+            android:key="accelerometer"
+            android:title="@string/accelerometer_title"/>
 
         <ListPreference
                 android:key="screen_timeout"
