@@ -103,6 +103,11 @@
             android:dependency="enable_adb"/>
 
         <CheckBoxPreference
+            android:key="adb_tile"
+            android:title="@string/adb_tile"
+            android:summary="@string/adb_tile_summary" />
+
+        <CheckBoxPreference
             android:key="bugreport_in_power"
             android:title="@string/bugreport_in_power"
             android:summary="@string/bugreport_in_power_summary"/>
