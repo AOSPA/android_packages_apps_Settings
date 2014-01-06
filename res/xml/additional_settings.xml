@@ -52,6 +52,12 @@
     <PreferenceCategory
          android:title="@string/navigation_bar">
 
+         <CheckBoxPreference
+            android:key="enable_nav_bar"
+            android:title="@string/navigation_bar"
+            android:summary="@string/navigation_bar_summary"
+            android:defaultValue="true" /> 
+
          <!-- Navring Targets -->
          <PreferenceScreen
              android:fragment="com.android.settings.cyanogenmod.NavRing"

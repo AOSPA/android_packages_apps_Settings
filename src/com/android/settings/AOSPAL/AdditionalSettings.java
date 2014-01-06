@@ -29,11 +29,13 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DUAL_PANEL = "force_dualpanel"; 
     private static final String KEY_REVERSE_DEFAULT_APP_PICKER = "reverse_default_app_picker";
     private static final String LOCKSCREEN_POWER_MENU = "lockscreen_power_menu";
+    private static final String ENABLE_NAVIGATION_BAR = "enable_nav_bar";
 
     ListPreference mQuickPulldown;
     private CheckBoxPreference mHeadsetHookLaunchVoice;
     private CheckBoxPreference mLockScreenPowerMenu;
     private CheckBoxPreference mDualPanel;
+    private CheckBoxPreference mEnableNavigationBar;
     private CheckBoxPreference mReverseDefaultAppPicker;
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
@@ -95,6 +97,14 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
             mLockScreenPowerMenu.setChecked(Settings.Secure.getInt(getContentResolver(),
                     Settings.Secure.LOCK_SCREEN_POWER_MENU, 1) == 1);
         }
+
+        boolean hasNavBarByDefault = getResources().getBoolean(
+                com.android.internal.R.bool.config_showNavigationBar);
+        boolean enableNavigationBar = Settings.System.getInt(getContentResolver(),
+                Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault ? 1 : 0) == 1;
+        mEnableNavigationBar = (CheckBoxPreference) findPreference(ENABLE_NAVIGATION_BAR);
+        mEnableNavigationBar.setChecked(enableNavigationBar);
+        mEnableNavigationBar.setOnPreferenceChangeListener(this);
     }
 
     private boolean isToggled(Preference pref) {
@@ -131,6 +141,11 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
                     value);
             mListViewInterpolator.setValue(String.valueOf(value));
             mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
+        } else if (preference == mEnableNavigationBar) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_SHOW,
+                    ((Boolean) newValue) ? 1 : 0);
+            return true;
         }
         return false;
     }
