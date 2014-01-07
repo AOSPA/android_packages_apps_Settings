@@ -30,14 +30,12 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DUAL_PANEL = "force_dualpanel"; 
     private static final String KEY_REVERSE_DEFAULT_APP_PICKER = "reverse_default_app_picker";
     private static final String LOCKSCREEN_POWER_MENU = "lockscreen_power_menu";
-    private static final String ENABLE_NAVIGATION_BAR = "enable_nav_bar";
     private static final String KEY_NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
 
     ListPreference mQuickPulldown;
     private CheckBoxPreference mHeadsetHookLaunchVoice;
     private CheckBoxPreference mLockScreenPowerMenu;
     private CheckBoxPreference mDualPanel;
-    private CheckBoxPreference mEnableNavigationBar;
     private CheckBoxPreference mReverseDefaultAppPicker;
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
@@ -100,19 +98,9 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
             mLockScreenPowerMenu.setChecked(Settings.Secure.getInt(getContentResolver(),
                     Settings.Secure.LOCK_SCREEN_POWER_MENU, 1) == 1);
         }
-
-        boolean hasNavBarByDefault = getResources().getBoolean(
-                com.android.internal.R.bool.config_showNavigationBar);
-        boolean enableNavigationBar = Settings.System.getInt(getContentResolver(),
-                Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault ? 1 : 0) == 1;
-        mEnableNavigationBar = (CheckBoxPreference) findPreference(ENABLE_NAVIGATION_BAR);
-        mEnableNavigationBar.setChecked(enableNavigationBar);
-        mEnableNavigationBar.setOnPreferenceChangeListener(this);
-
         mNavigationBarHeight = (SeekBarPreference) findPreference(KEY_NAVIGATION_BAR_HEIGHT);
         mNavigationBarHeight.setProgress((int)(Settings.System.getFloat(getContentResolver(),
                     Settings.System.NAVIGATION_BAR_HEIGHT, 1f) * 100));
-        mNavigationBarHeight.setEnabled(mEnableNavigationBar.isChecked());
         mNavigationBarHeight.setTitle(getResources().getText(R.string.navigation_bar_height) + " " + mNavigationBarHeight.getProgress() + "%");
         mNavigationBarHeight.setOnPreferenceChangeListener(this);
     }
@@ -150,11 +138,6 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
                     value);
             mListViewInterpolator.setValue(String.valueOf(value));
             mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
-        } else if (preference == mEnableNavigationBar) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.NAVIGATION_BAR_SHOW,
-                    ((Boolean) newValue) ? 1 : 0);
-            mNavigationBarHeight.setEnabled((Boolean)newValue);
         } else if (preference == mNavigationBarHeight) {
             Settings.System.putFloat(getActivity().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_HEIGHT, (Integer)newValue / 100f);
