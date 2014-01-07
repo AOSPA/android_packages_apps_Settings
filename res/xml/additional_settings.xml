@@ -58,6 +58,12 @@
             android:summary="@string/navigation_bar_summary"
             android:defaultValue="true" /> 
 
+         <SeekBarPreference
+             android:key="navigation_bar_height"
+             android:title="@string/navigation_bar_height"
+             android:max="100"
+             android:defaultValue="100" />
+
          <!-- Navring Targets -->
          <PreferenceScreen
              android:fragment="com.android.settings.cyanogenmod.NavRing"

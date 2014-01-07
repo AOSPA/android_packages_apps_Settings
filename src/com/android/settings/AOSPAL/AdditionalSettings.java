@@ -13,6 +13,7 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.SeekBarPreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -30,6 +31,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String KEY_REVERSE_DEFAULT_APP_PICKER = "reverse_default_app_picker";
     private static final String LOCKSCREEN_POWER_MENU = "lockscreen_power_menu";
     private static final String ENABLE_NAVIGATION_BAR = "enable_nav_bar";
+    private static final String KEY_NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
 
     ListPreference mQuickPulldown;
     private CheckBoxPreference mHeadsetHookLaunchVoice;
@@ -39,6 +41,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mReverseDefaultAppPicker;
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
+    private SeekBarPreference mNavigationBarHeight;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,6 +108,13 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         mEnableNavigationBar = (CheckBoxPreference) findPreference(ENABLE_NAVIGATION_BAR);
         mEnableNavigationBar.setChecked(enableNavigationBar);
         mEnableNavigationBar.setOnPreferenceChangeListener(this);
+
+        mNavigationBarHeight = (SeekBarPreference) findPreference(KEY_NAVIGATION_BAR_HEIGHT);
+        mNavigationBarHeight.setProgress((int)(Settings.System.getFloat(getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_HEIGHT, 1f) * 100));
+        mNavigationBarHeight.setEnabled(mEnableNavigationBar.isChecked());
+        mNavigationBarHeight.setTitle(getResources().getText(R.string.navigation_bar_height) + " " + mNavigationBarHeight.getProgress() + "%");
+        mNavigationBarHeight.setOnPreferenceChangeListener(this);
     }
 
     private boolean isToggled(Preference pref) {
@@ -124,7 +134,6 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
             Settings.System.putIntForUser(getContentResolver(), Settings.System.QS_QUICK_PULLDOWN,
                     statusQuickPulldown, UserHandle.USER_CURRENT);
             updatePulldownSummary();
-            return true;
         } else if (KEY_LISTVIEW_ANIMATION.equals(key)) {
             int value = Integer.parseInt((String) newValue);
             int index = mListViewAnimation.findIndexOfValue((String) newValue);
@@ -145,9 +154,15 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_SHOW,
                     ((Boolean) newValue) ? 1 : 0);
-            return true;
+            mNavigationBarHeight.setEnabled((Boolean)newValue);
+        } else if (preference == mNavigationBarHeight) {
+            Settings.System.putFloat(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_HEIGHT, (Integer)newValue / 100f);
+            mNavigationBarHeight.setTitle(getResources().getText(R.string.navigation_bar_height) + " " + (Integer)newValue + "%");
+        } else {
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override
