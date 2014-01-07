@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2010 The Android Open Source Project
+     This code has been modified. Portions copyright (C) 2013, ParanoidAndroid Project.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -68,7 +69,6 @@
                 android:title="@string/wifi_display_settings_title"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
 
-
     <PreferenceCategory
         android:key="category_animation_options"
         android:title="@string/display_category_animation_options_title" >
@@ -81,5 +81,10 @@
             android:entryValues="@array/values_system_power_crt_mode" />
  
     </PreferenceCategory>
+
+    <PreferenceScreen
+        android:fragment="com.android.settings.paranoid.NavBar"
+        android:key="navigation_bar"
+        android:title="@string/navigation_bar_title" />
 
 </PreferenceScreen>

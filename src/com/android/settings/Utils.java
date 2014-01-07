@@ -24,6 +24,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -59,6 +60,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.DisplayInfo;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -647,5 +649,34 @@ public class Utils {
 
     public static boolean isTablet(Context con) {
         return getScreenType(con) == DEVICE_TABLET;
+    }
+
+    /**
+     * Locks the activity orientation to the current device orientation
+     * @param act
+     */
+    public static void lockCurrentOrientation(Activity act) {
+        int currentRotation = act.getWindowManager().getDefaultDisplay().getRotation();
+        int frozenRotation = 0;
+        boolean isTablet = isTablet(act);
+        switch(currentRotation) {
+                case Surface.ROTATION_0:
+                        frozenRotation = isTablet ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE :
+                            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+                    break;
+                case Surface.ROTATION_90:
+                        frozenRotation = isTablet ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT :
+                            ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+                    break;
+                case Surface.ROTATION_180:
+                        frozenRotation = isTablet ? ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE :
+                            ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+                    break;
+                case Surface.ROTATION_270:
+                        frozenRotation = isTablet ? ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT :
+                            ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
+                    break;
+            }
+        act.setRequestedOrientation(frozenRotation);
     }
 }
