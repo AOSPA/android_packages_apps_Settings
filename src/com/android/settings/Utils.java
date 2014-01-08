@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2007 Google Inc.
+ * This code has been modified. Portions copyright (C) 2014, ParanoidAndroid Project.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -24,6 +25,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -56,9 +58,13 @@ import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.DisplayInfo;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
@@ -101,6 +107,14 @@ public class Utils {
      * to specify the summary text that should be displayed for the preference.
      */
     private static final String META_DATA_PREFERENCE_SUMMARY = "com.android.settings.summary";
+
+    // Device types
+    private static final int DEVICE_PHONE = 0;
+    private static final int DEVICE_HYBRID = 1;
+    private static final int DEVICE_TABLET = 2;
+
+    // Device type reference
+    private static int mDeviceType = -1;
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -602,5 +616,68 @@ public class Utils {
     public static boolean hasMultipleUsers(Context context) {
         return ((UserManager) context.getSystemService(Context.USER_SERVICE))
                 .getUsers().size() > 1;
+    }
+
+
+    private static int getScreenType(Context con) {
+        if (mDeviceType == -1) {
+            WindowManager wm = (WindowManager)con.getSystemService(Context.WINDOW_SERVICE);
+            DisplayInfo outDisplayInfo = new DisplayInfo();
+            wm.getDefaultDisplay().getDisplayInfo(outDisplayInfo);
+            int shortSize = Math.min(outDisplayInfo.logicalHeight, outDisplayInfo.logicalWidth);
+            int shortSizeDp = shortSize * DisplayMetrics.DENSITY_DEFAULT / outDisplayInfo.logicalDensityDpi;
+            if (shortSizeDp < 600) {
+                // 0-599dp: "phone" UI with a separate status & navigation bar
+                mDeviceType =  DEVICE_PHONE;
+            } else if (shortSizeDp < 720) {
+                // 600-719dp: "phone" UI with modifications for larger screens
+                mDeviceType = DEVICE_HYBRID;
+            } else {
+                // 720dp: "tablet" UI with a single combined status & navigation bar
+                mDeviceType = DEVICE_TABLET;
+            }
+        }
+        return mDeviceType;
+    }
+
+    public static boolean isPhone(Context con) {
+        return getScreenType(con) == DEVICE_PHONE;
+    }
+
+    public static boolean isHybrid(Context con) {
+        return getScreenType(con) == DEVICE_HYBRID;
+    }
+
+    public static boolean isTablet(Context con) {
+        return getScreenType(con) == DEVICE_TABLET;
+    }
+
+    /**
+     * Locks the activity orientation to the current device orientation
+     * @param act
+     */
+    public static void lockCurrentOrientation(Activity act) {
+        int currentRotation = act.getWindowManager().getDefaultDisplay().getRotation();
+        int frozenRotation = 0;
+        boolean isTablet = isTablet(act);
+        switch(currentRotation) {
+                case Surface.ROTATION_0:
+                        frozenRotation = isTablet ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE :
+                            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+                    break;
+                case Surface.ROTATION_90:
+                        frozenRotation = isTablet ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT :
+                            ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+                    break;
+                case Surface.ROTATION_180:
+                        frozenRotation = isTablet ? ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE :
+                            ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+                    break;
+                case Surface.ROTATION_270:
+                        frozenRotation = isTablet ? ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT :
+                            ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
+                    break;
+            }
+        act.setRequestedOrientation(frozenRotation);
     }
 }
