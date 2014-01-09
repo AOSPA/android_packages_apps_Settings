@@ -93,6 +93,17 @@
             android:title="@string/status_bar_network_cat"
             android:summary="@string/statusbar_network_summary" /> 
 
+        <com.android.settings.AOSPAL.CustomCarrier
+            android:key="notification_custom_carrier_label"
+            android:title="@string/notification_custom_carrier_label_title"
+            android:dialogTitle="@string/notification_custom_carrier_label_title"
+            android:positiveButtonText="@string/wifi_save"
+            android:negativeButtonText="@string/wifi_cancel"
+            android:selectAllOnFocus="true"
+            android:imeOptions="actionDone"
+            android:inputType="textNoSuggestions"
+            android:persistent="false" />
+   
    </PreferenceCategory>
 
     <PreferenceCategory
