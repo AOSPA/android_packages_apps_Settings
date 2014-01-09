@@ -16,10 +16,15 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.SeekBarPreference;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.WindowManager;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LockscreenNotifications extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
 
@@ -36,6 +41,7 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
     private static final String KEY_PRIVACY_MODE = "privacy_mode";
     private static final String KEY_OFFSET_TOP = "offset_top";
     private static final String KEY_CATEGORY_GENERAL = "category_general";
+    private static final String KEY_EXCLUDED_APPS = "excluded_apps";
 
     private CheckBoxPreference mLockscreenNotifications;
     private CheckBoxPreference mPocketMode;
@@ -49,6 +55,7 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
     private NumberPickerPreference mNotificationsHeight;
     private CheckBoxPreference mPrivacyMode;
     private SeekBarPreference mOffsetTop;
+    private AppMultiSelectListPreference mExcludedAppsPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,6 +133,11 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
         mNotificationsHeight.setMaxValue(max);
         mNotificationsHeight.setOnPreferenceChangeListener(this);
         mNotificationsHeight.setEnabled(mLockscreenNotifications.isChecked());
+
+        mExcludedAppsPref = (AppMultiSelectListPreference) findPreference(KEY_EXCLUDED_APPS);
+        Set<String> excludedApps = getExcludedApps();
+        if (excludedApps != null) mExcludedAppsPref.setValues(excludedApps);
+        mExcludedAppsPref.setOnPreferenceChangeListener(this);
 
         boolean hasProximitySensor = getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_PROXIMITY);
         if (!hasProximitySensor) {
@@ -205,9 +217,33 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
             int max = Math.round((float)displaySize.y * (1f - (mOffsetTop.getProgress() / 100f)) /
                     (float)mContext.getResources().getDimensionPixelSize(R.dimen.notification_row_min_height));
             mNotificationsHeight.setMaxValue(max);
+        } else if (pref == mExcludedAppsPref) {
+            storeExcludedApps((Set<String>) value);
+            return true;
         } else {
             return false;
         }
         return true;
+    }
+
+    private Set<String> getExcludedApps() {
+        String excluded = Settings.System.getString(getContentResolver(),
+                Settings.System.LOCKSCREEN_NOTIFICATIONS_EXCLUDED_APPS);
+        if (TextUtils.isEmpty(excluded))
+            return null;
+
+        return new HashSet<String>(Arrays.asList(excluded.split("\\|")));
+    }
+
+    private void storeExcludedApps(Set<String> values) {
+        StringBuilder builder = new StringBuilder();
+        String delimiter = "";
+        for (String value : values) {
+            builder.append(delimiter);
+            builder.append(value);
+            delimiter = "|";
+        }
+        Settings.System.putString(getContentResolver(),
+                Settings.System.LOCKSCREEN_NOTIFICATIONS_EXCLUDED_APPS, builder.toString());
     }
 }

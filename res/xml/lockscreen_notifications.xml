@@ -41,6 +41,13 @@
             android:title="@string/dismiss_all"
             android:summary="@string/dismiss_all_summary" />
 
+        <com.android.settings.AOSPAL.AppMultiSelectListPreference
+            android:key="excluded_apps"
+            android:persistent="false"
+            android:title="@string/excluded_apps_title"
+            android:dependency="lockscreen_notifications"
+            android:summary="@string/excluded_apps_summary" />
+
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/layout" >
