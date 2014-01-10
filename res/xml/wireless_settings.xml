@@ -92,5 +92,11 @@
             android:targetPackage="com.android.cellbroadcastreceiver"
             android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings" />
     </PreferenceScreen>
+    
+    <CheckBoxPreference
+        android:key="toggle_power_saver"
+        android:title="@string/power_saver_title"
+        android:summary="@string/power_saver_summary"
+        android:persistent="false" />
 
 </PreferenceScreen>
