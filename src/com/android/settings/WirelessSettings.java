@@ -68,9 +68,12 @@ public class WirelessSettings extends RestrictedSettingsFragment
     private static final String KEY_SMS_APPLICATION = "sms_application";
     private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
+    private static final String KEY_POWER_SAVER = "toggle_power_saver";
 
+    private static final String STORED_BATTERY_SAVER_STATUS = "battery_saver_status";
+    
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
-    public static final int REQUEST_CODE_EXIT_ECM = 1;
+    public static final int REQUEST_CODE_EXIT_ECM = 1;  
 
     private AirplaneModeEnabler mAirplaneModeEnabler;
     private CheckBoxPreference mAirplaneModePreference;
@@ -395,6 +398,17 @@ public class WirelessSettings extends RestrictedSettingsFragment
             if (ps != null) root.removePreference(ps);
         }
         protectByRestrictions(KEY_CELL_BROADCAST_SETTINGS);
+        
+        CheckBoxPreference powerSaver = (CheckBoxPreference) findPreference(KEY_POWER_SAVER);
+        powerSaver.setChecked(Settings.System.getInt(getContentResolver(), 
+                STORED_BATTERY_SAVER_STATUS, 0) == 1);
+        powerSaver.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                Settings.System.putInt(getContentResolver(), 
+                        STORED_BATTERY_SAVER_STATUS, (Boolean)newValue ? 1 : 0);
+            }
+        });
     }
 
     @Override
