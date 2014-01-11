@@ -87,6 +87,11 @@
             android:title="@string/status_bar_network_cat"
             android:summary="@string/statusbar_network_summary" /> 
 
+        <PreferenceScreen
+            android:key="omni_features"
+            android:fragment="com.android.settings.AOSPAL.OmniFeatures"
+            android:title="@string/additional_settings_qs_omni" />
+
    </PreferenceCategory>
 
     <PreferenceCategory
