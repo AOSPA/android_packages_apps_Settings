@@ -55,6 +55,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
 
     private static final String LOCKSCREEN_POWER_MENU = "lockscreen_power_menu";
     private static final String KEY_LOCKSCREEN_WALLPAPER = "lockscreen_wallpaper";
+    private static final String KEY_ALWAYS_BATTERY_PREF = "lockscreen_battery_status";
     private static final String KEY_SELECT_LOCKSCREEN_WALLPAPER = "select_lockscreen_wallpaper";
     private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
 
@@ -64,6 +65,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mLockScreenPowerMenu;
     private CheckBoxPreference mLockscreenWallpaper;
     private CheckBoxPreference mLockRingBattery;
+    private CheckBoxPreference mBatteryStatus;
     private CheckBoxPreference mSeeThrough;
 
     private SeekBarPreference mBlurRadius;
@@ -132,6 +134,8 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         mBlurRadius.setOnPreferenceChangeListener(this);
         mBlurRadius.setEnabled(mSeeThrough.isChecked() && mSeeThrough.isEnabled());
 
+            mBatteryStatus = (CheckBoxPreference) prefs.findPreference(KEY_ALWAYS_BATTERY_PREF);
+
     }
 
     private boolean isToggled(Preference pref) {
@@ -141,6 +145,13 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+
+        if (mBatteryStatus != null) {
+            mBatteryStatus.setChecked(Settings.System.getIntForUser(getContentResolver(),
+                    Settings.System.LOCKSCREEN_ALWAYS_SHOW_BATTERY, 0,
+                    UserHandle.USER_CURRENT) != 0);
+            mBatteryStatus.setOnPreferenceChangeListener(this);
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode,
@@ -169,6 +180,10 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object value) {
         if (preference == mBlurRadius) {
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_BLUR_RADIUS, (Integer)value);
+        } else if (preference == mBatteryStatus) {
+            Settings.System.putIntForUser(getContentResolver(),
+                    Settings.System.LOCKSCREEN_ALWAYS_SHOW_BATTERY,
+                    ((Boolean) value) ? 1 : 0, UserHandle.USER_CURRENT);
         }
         return true;
     }

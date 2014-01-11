@@ -13,6 +13,11 @@
                 android:summary="@string/lockscreen_power_menu_summary" />
 
             <CheckBoxPreference
+                android:key="lockscreen_battery_status"
+                android:title="@string/lockscreen_battery_status_title"
+                android:summary="@string/lockscreen_battery_status_summary" />
+
+            <CheckBoxPreference
                 android:key="battery_around_lockscreen_ring"
                 android:title="@string/battery_around_lockscreen_ring"
                 android:defaultValue="true" />
