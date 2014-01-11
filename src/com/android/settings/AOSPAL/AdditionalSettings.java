@@ -17,7 +17,7 @@ import android.preference.SeekBarPreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
+import com.android.internal.util.paranoid.DeviceUtils;
 
 public class AdditionalSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -31,6 +31,8 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String KEY_REVERSE_DEFAULT_APP_PICKER = "reverse_default_app_picker";
     private static final String LOCKSCREEN_POWER_MENU = "lockscreen_power_menu";
     private static final String KEY_NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
+    private static final String KEY_CATEGORY_QS_STATUSBAR = "qs_statusbar";
+    private static final String KEY_OMNI_FEATURES = "omni_features";
 
     ListPreference mQuickPulldown;
     private CheckBoxPreference mHeadsetHookLaunchVoice;
@@ -50,14 +52,17 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         final ContentResolver resolver = getActivity().getContentResolver();
 
         mQuickPulldown = (ListPreference) findPreference(QUICK_PULLDOWN);
-        if (Utils.isTablet(getActivity())) {
-            prefs.removePreference(mQuickPulldown);
-        } else {
-            mQuickPulldown.setOnPreferenceChangeListener(this);
-            int statusQuickPulldown = Settings.System.getIntForUser(getContentResolver(),
-                    Settings.System.QS_QUICK_PULLDOWN, 1, UserHandle.USER_CURRENT);
-            mQuickPulldown.setValue(String.valueOf(statusQuickPulldown));
-            updatePulldownSummary();
+        mQuickPulldown.setOnPreferenceChangeListener(this);
+        int statusQuickPulldown = Settings.System.getIntForUser(getContentResolver(),
+                Settings.System.QS_QUICK_PULLDOWN, 1, UserHandle.USER_CURRENT);
+        mQuickPulldown.setValue(String.valueOf(statusQuickPulldown));
+        updatePulldownSummary();
+
+        PreferenceCategory qsStatusbar =
+            (PreferenceCategory) findPreference(KEY_CATEGORY_QS_STATUSBAR);
+        if (!DeviceUtils.isPhone(getActivity())) {
+            qsStatusbar.removePreference(findPreference(QUICK_PULLDOWN));
+            qsStatusbar.removePreference(findPreference(KEY_OMNI_FEATURES));
         }
 
         final PreferenceCategory headsethookCategory =
