@@ -315,4 +315,16 @@
         <item>10000</item>
     </integer-array>
 
+    <!-- Nfc Polling Mode -->
+    <string-array name="nfc_polling_entries" translatable="false">
+        <item>@string/nfc_polling_always</item>
+        <item>@string/nfc_polling_screenon_lock</item>
+        <item>@string/nfc_polling_screenon_unlock</item>
+    </string-array>
+    <string-array name="nfc_polling_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
 </resources>
