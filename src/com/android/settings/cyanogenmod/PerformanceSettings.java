@@ -16,6 +16,7 @@
 
 package com.android.settings.cyanogenmod;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -41,7 +42,12 @@ public class PerformanceSettings extends SettingsPreferenceFragment {
     private static final String USE_16BPP_ALPHA_PROP = "persist.sys.use_16bpp_alpha";
 
     private Preference mPerfProfilePref;
+
+    private static final String FORCE_HIGHEND_GFX_PREF = "pref_force_highend_gfx";
+    private static final String FORCE_HIGHEND_GFX_PERSIST_PROP = "persist.sys.force_highendgfx";
+
     private CheckBoxPreference mUse16bppAlphaPref;
+    private CheckBoxPreference mForceHighEndGfx;
 
     private AlertDialog alertDialog;
 
@@ -60,11 +66,19 @@ public class PerformanceSettings extends SettingsPreferenceFragment {
             String perfProfileProp = getString(R.string.config_perf_profile_prop);
             if (mPerfProfilePref != null && TextUtils.isEmpty(perfProfileProp)) {
                 prefSet.removePreference(mPerfProfilePref);
-            }
+        }
 
             mUse16bppAlphaPref = (CheckBoxPreference) prefSet.findPreference(USE_16BPP_ALPHA_PREF);
             String use16bppAlpha = SystemProperties.get(USE_16BPP_ALPHA_PROP, "0");
             mUse16bppAlphaPref.setChecked("1".equals(use16bppAlpha));
+
+        if (ActivityManager.isLowRamDeviceStatic()) {
+            mForceHighEndGfx = (CheckBoxPreference) prefSet.findPreference(FORCE_HIGHEND_GFX_PREF);
+            String forceHighendGfx = SystemProperties.get(FORCE_HIGHEND_GFX_PERSIST_PROP, "false");
+            mForceHighEndGfx.setChecked("true".equals(forceHighendGfx));
+        } else {
+            prefSet.removePreference(findPreference(FORCE_HIGHEND_GFX_PREF));
+        }
 
             /* Display the warning dialog */
             alertDialog = new AlertDialog.Builder(getActivity()).create();
@@ -91,6 +105,9 @@ public class PerformanceSettings extends SettingsPreferenceFragment {
         if (preference == mUse16bppAlphaPref) {
             SystemProperties.set(USE_16BPP_ALPHA_PROP,
                     mUse16bppAlphaPref.isChecked() ? "1" : "0");
+        } else if (preference == mForceHighEndGfx) {
+            SystemProperties.set(FORCE_HIGHEND_GFX_PERSIST_PROP,
+                    mForceHighEndGfx.isChecked() ? "true" : "false");
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
