@@ -143,6 +143,7 @@ import com.android.settings.net.UidDetailProvider;
 import com.android.settings.widget.ChartDataUsageView;
 import com.android.settings.widget.ChartDataUsageView.DataUsageChartListener;
 import com.android.settings.widget.PieChartView;
+import org.omnirom.omnigears.batterysaver.BatterySaverHelper;
 import com.google.android.collect.Lists;
 
 import libcore.util.Objects;
@@ -218,6 +219,8 @@ public class DataUsageSummary extends Fragment {
     private LinearLayout mNetworkSwitches;
     private Switch mDataEnabled;
     private View mDataEnabledView;
+    private Switch mBatterySaverEnabled;
+    private View mBatterySaverEnabledView;
     private CheckBox mDisableAtLimit;
     private View mDisableAtLimitView;
 
@@ -359,6 +362,11 @@ public class DataUsageSummary extends Fragment {
             mDataEnabledView = inflatePreference(inflater, mNetworkSwitches, mDataEnabled);
             mDataEnabled.setOnCheckedChangeListener(mDataEnabledListener);
             mNetworkSwitches.addView(mDataEnabledView);
+
+            mBatterySaverEnabled = new Switch(inflater.getContext());
+            mBatterySaverEnabledView = inflatePreference(inflater, mNetworkSwitches, mBatterySaverEnabled);
+            mBatterySaverEnabled.setOnCheckedChangeListener(mBatterySaverEnabledListener);
+            mNetworkSwitches.addView(mBatterySaverEnabledView);
 
             mDisableAtLimit = new CheckBox(inflater.getContext());
             mDisableAtLimit.setClickable(false);
@@ -578,6 +586,7 @@ public class DataUsageSummary extends Fragment {
     @Override
     public void onDestroy() {
         mDataEnabledView = null;
+        mBatterySaverEnabledView = null;
         mDisableAtLimitView = null;
 
         mUidDetailProvider.clearCache();
@@ -728,12 +737,14 @@ public class DataUsageSummary extends Fragment {
         if (LOGD) Log.d(TAG, "updateBody() with currentTab=" + currentTab);
 
         mDataEnabledView.setVisibility(isOwner ? View.VISIBLE : View.GONE);
+        mBatterySaverEnabledView.setVisibility(isOwner ? View.VISIBLE : View.GONE);
 
         // TODO: remove mobile tabs when SIM isn't ready
         final TelephonyManager tele = TelephonyManager.from(context);
 
         if (TAB_MOBILE.equals(currentTab)) {
             setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_mobile);
+            setPreferenceTitle(mBatterySaverEnabledView, R.string.data_usage_enable_batterysaver);
             setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_mobile_limit);
             mTemplate = buildTemplateMobileAll(getActiveSubscriberId(context));
 
@@ -750,12 +761,14 @@ public class DataUsageSummary extends Fragment {
             }
         } else if (TAB_3G.equals(currentTab)) {
             setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_3g);
+            mBatterySaverEnabledView.setVisibility(View.GONE);
             setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_3g_limit);
             // TODO: bind mDataEnabled to 3G radio state
             mTemplate = buildTemplateMobile3gLower(getActiveSubscriberId(context));
 
         } else if (TAB_4G.equals(currentTab)) {
             setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_4g);
+            mBatterySaverEnabledView.setVisibility(View.GONE);
             setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_4g_limit);
             // TODO: bind mDataEnabled to 4G radio state
             mTemplate = buildTemplateMobile4g(getActiveSubscriberId(context));
@@ -763,12 +776,14 @@ public class DataUsageSummary extends Fragment {
         } else if (TAB_WIFI.equals(currentTab)) {
             // wifi doesn't have any controls
             mDataEnabledView.setVisibility(View.GONE);
+            mBatterySaverEnabledView.setVisibility(View.GONE);
             mDisableAtLimitView.setVisibility(View.GONE);
             mTemplate = buildTemplateWifiWildcard();
 
         } else if (TAB_ETHERNET.equals(currentTab)) {
             // ethernet doesn't have any controls
             mDataEnabledView.setVisibility(View.GONE);
+            mBatterySaverEnabledView.setVisibility(View.GONE);
             mDisableAtLimitView.setVisibility(View.GONE);
             mTemplate = buildTemplateEthernet();
 
@@ -903,6 +918,11 @@ public class DataUsageSummary extends Fragment {
         }
     }
 
+    private boolean isBatterySaverEnabled() {
+        final ContentResolver resolver = getActivity().getContentResolver();
+        return Settings.Global.getInt(resolver, Settings.Global.BATTERY_SAVER_OPTION, 0) != 0;
+    }
+
     private void setMobileDataEnabled(boolean enabled) {
         if (LOGD) Log.d(TAG, "setMobileDataEnabled()");
         if (mCurrentTab.startsWith(TAB_SIM)) {
@@ -921,6 +941,14 @@ public class DataUsageSummary extends Fragment {
             mMobileDataEnabled = enabled;
         }
         updatePolicy(false);
+    }
+
+    private void setBatterySaverModeEnabled(boolean enabled) {
+        if (LOGD) Log.d(TAG, "setBatterySaverModeEnabled()");
+        final Context context = getActivity();
+        BatterySaverHelper.setBatterySaverActive(context, enabled ? 1 : 0);
+        BatterySaverHelper.scheduleService(context);
+        updatePolicy(enabled);
     }
 
     private boolean isNetworkPolicyModifiable(NetworkPolicy policy) {
@@ -1005,6 +1033,7 @@ public class DataUsageSummary extends Fragment {
         if (TAB_MOBILE.equals(mCurrentTab) || mCurrentTab.startsWith(TAB_SIM)) {
             mBinding = true;
             mDataEnabled.setChecked(isMobileDataEnabled());
+            mBatterySaverEnabled.setChecked(isBatterySaverEnabled());
             mBinding = false;
         }
 
@@ -1119,6 +1148,20 @@ public class DataUsageSummary extends Fragment {
             }
 
             updatePolicy(false);
+        }
+    };
+
+    private OnCheckedChangeListener mBatterySaverEnabledListener = new OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (mBinding) return;
+
+            final Context context = getActivity();
+            final boolean BatterySaverEnabled = isChecked;
+            final String currentTab = mCurrentTab;
+            if (TAB_MOBILE.equals(currentTab)) {
+                setBatterySaverModeEnabled(BatterySaverEnabled);
+            }
         }
     };
 

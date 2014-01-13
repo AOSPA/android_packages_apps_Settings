@@ -17,6 +17,16 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/battery_since_unplugged"
         android:key="app_list">
+
+    <PreferenceCategory
+        android:key="battery_prefs"
+        android:title="@string/battery_prefs_title" />
+
+    <PreferenceScreen
+        android:key="pref_battery_saver"
+        android:fragment="com.android.settings.crystalroms.BatterySaverSettings"
+        android:title="@string/battery_saver_title" />
+
     <Preference
         style="?android:attr/preferenceInformationStyle"
         android:key="battery_status"
