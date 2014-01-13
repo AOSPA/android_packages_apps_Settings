@@ -54,6 +54,18 @@
     <string name="volume_adjust_sounds_enable_summary">Reproducir sonido al ajustar el volumen con las teclas físicas</string>
     <string name="link_volume_ringtones">Vincular volúmenes</string>
     <string name="volume_ring_only_description">Tono</string>
+    <string name="increasing_ring_title">Volumen ascendente</string>
+    <string name="checkbox_increasing_ring">Activar</string>
+    <string name="increasing_ring_min_volume_title">Volumen inicial</string>
+    <string name="increasing_ring_volume_notice">Nota:\nSi el volumen inicial se establece más alto que el volumen de llamada, prevalecerá el volumen de llamada</string>
+    <string name="increasing_ring_interval_title">Intervalo de incremento</string>
+    <string name="increasing_ring_interval_eachring">En cada tono</string>
+    <string name="increasing_ring_interval_half_second">Medio segundo</string>
+    <string name="increasing_ring_interval_1second">1 segundo</string>
+    <string name="increasing_ring_interval_2seconds">2 segundos</string>
+    <string name="increasing_ring_interval_3seconds">3 segundos</string>
+    <string name="increasing_ring_interval_5seconds">5 segundos</string>
+    <string name="increasing_ring_interval_10seconds">10 segundos</string>
     <string name="volume_buttons_category">Botones de volumen</string>
     <string name="volume_wake_title">Despertar</string>
     <string name="volume_wake_summary">Presionando los botones de control de volumen, el dispositivo saldrá del modo en espera</string>
@@ -67,8 +79,8 @@
     <string name="battery_bar_percent">Barra y porcentaje</string>
     <string name="battery_circle">Circulo</string>
     <string name="battery_circle_percent">Circulo y porcentaje</string>
-    <string name="pa_version">Versión de ParanoidAndroid</string>
-    <string name="pa_version_default">Desconocida</string>
     <string name="custom_runtime_warning_title">Advertencia</string>
     <string name="custom_runtime_warning_message">ART no es soportado por ParanoidAndroid. Esta configuración se incluye sólo para experimentación y tiene el potencial de causar inestabilidad, pérdida de datos o incluso evitar el inicio correcto del dispositivo. Visite &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introduciendo ART&lt;/a&gt; para mas información.&lt;br/&gt;&lt;br/&gt;Le pedimos que no presente informes de error si ha habilitado ART como su tiempo de ejecución.&lt;br/&gt;&lt;br/&gt;¿Seguro que desea reiniciar para cambiar el tiempo de ejecución de <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> a <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
+    <string name="pa_version">Versión de ParanoidAndroid</string>
+    <string name="pa_version_default">Desconocida</string>
 </resources>
