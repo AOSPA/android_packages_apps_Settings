@@ -65,7 +65,12 @@
              android:title="@string/navigation_ring_title"
              android:summary="@string/navigation_ring_summary" />
 
-   </PreferenceCategory>
+        <PreferenceScreen
+            android:fragment="com.android.settings.paranoid.NavBar"
+            android:key="navigation_bar"
+            android:title="@string/navigation_bar_title" />
+
+    </PreferenceCategory>
 
 
    <PreferenceCategory
