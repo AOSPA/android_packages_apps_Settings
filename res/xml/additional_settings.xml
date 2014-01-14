@@ -58,6 +58,12 @@
              android:max="100"
              android:defaultValue="100" />
 
+        <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+            android:key="navigation_bar_left"
+            android:title="@string/navigation_bar_left_title"
+            android:summary="@string/navigation_bar_left_summary"
+            android:defaultValue="false" />
+
          <!-- Navring Targets -->
          <PreferenceScreen
              android:fragment="com.android.settings.cyanogenmod.NavRing"
