@@ -32,7 +32,6 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String LOCKSCREEN_POWER_MENU = "lockscreen_power_menu";
     private static final String KEY_NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
     private static final String KEY_CATEGORY_QS_STATUSBAR = "qs_statusbar";
-    private static final String KEY_OMNI_FEATURES = "omni_features";
 
     ListPreference mQuickPulldown;
     private CheckBoxPreference mHeadsetHookLaunchVoice;
@@ -62,7 +61,6 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
             (PreferenceCategory) findPreference(KEY_CATEGORY_QS_STATUSBAR);
         if (!DeviceUtils.isPhone(getActivity())) {
             qsStatusbar.removePreference(findPreference(QUICK_PULLDOWN));
-            qsStatusbar.removePreference(findPreference(KEY_OMNI_FEATURES));
         }
 
         final PreferenceCategory headsethookCategory =
