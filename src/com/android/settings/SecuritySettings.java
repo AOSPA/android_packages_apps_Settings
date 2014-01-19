@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -42,7 +43,10 @@ import android.preference.SeekBarPreference;
 import android.provider.Settings;
 import android.security.KeyStore;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.DisplayInfo;
+import android.view.WindowManager;
 
 import com.android.internal.widget.LockPatternUtils;
 
@@ -91,6 +95,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_CREDENTIALS_MANAGER = "credentials_management";
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
+    private static final String LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
 
     // Omni Additions
     private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
@@ -116,12 +121,12 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private CheckBoxPreference mToggleVerifyApps;
     private CheckBoxPreference mPowerButtonInstantlyLocks;
 
-    private CheckBoxPreference mSeeThrough;
-    
+    private CheckBoxPreference mSeeThrough;  
     private SeekBarPreference mBlurRadius;
 
     private ListPreference mLockNumpadRandom;
     private CheckBoxPreference mLockBeforeUnlock;
+    private CheckBoxPreference mMaximizeKeyguardWidgets;
 
     private Preference mNotificationAccess;
 
@@ -323,6 +328,21 @@ public class SecuritySettings extends RestrictedSettingsFragment
                             R.string.security_enable_widgets_disabled_summary);
                 }
                 mEnableKeyguardWidgets.setEnabled(!disabled);
+            }
+        }
+
+        mMaximizeKeyguardWidgets = (CheckBoxPreference) root.findPreference(LOCKSCREEN_MAXIMIZE_WIDGETS);
+        if (mMaximizeKeyguardWidgets != null) {
+            if (isTablet()) {
+                PreferenceGroup securityCategory
+                        = (PreferenceGroup) root.findPreference(KEY_SECURITY_CATEGORY);
+                if (securityCategory != null) {
+                    securityCategory.removePreference(root.findPreference(LOCKSCREEN_MAXIMIZE_WIDGETS));
+                    mMaximizeKeyguardWidgets = null;
+                }
+            } else {
+                mMaximizeKeyguardWidgets.setChecked(Settings.System.getInt(getContentResolver(),
+                        Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, 0) == 1);
             }
         }
 
@@ -710,5 +730,11 @@ public class SecuritySettings extends RestrictedSettingsFragment
         Intent intent = new Intent();
         intent.setClassName("com.android.facelock", "com.android.facelock.AddToSetup");
         startActivity(intent);
+    }
+
+    private boolean isTablet() {
+    return (getActivity().getApplicationContext().getResources().getConfiguration().screenLayout
+            & Configuration.SCREENLAYOUT_SIZE_MASK)
+            >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 }

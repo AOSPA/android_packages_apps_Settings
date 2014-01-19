@@ -165,11 +165,15 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
         ContentResolver resolver = getContentResolver();
         int activePhoneType = TelephonyManager.getDefault().getCurrentPhoneType();
-
+        boolean aospDialer = Settings.System.getInt(resolver, Settings.System.AOSP_DIALER, 0) == 1;
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         mVib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         addPreferencesFromResource(R.xml.sound_settings);
+
+        if (!aospDialer) {
+            getPreferenceScreen().removePreference(findPreference(KEY_INCREASING_RING));
+        }
 
         if (TelephonyManager.PHONE_TYPE_CDMA != activePhoneType) {
             // device is not CDMA, do not display CDMA emergency_tone

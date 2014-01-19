@@ -27,7 +27,6 @@
     <string name="default_string">Default</string>
     <string name="enabled">Enabled</string>
     <string name="performance_settings">Performance</string>
-    <string name="menu_cancel">Discard</string>
 
     <!-- Additional Settings - Summaries -->
     <string name="navigation_ring_summary">Set custom navigation bar targets besides than Google Now</string>
@@ -271,6 +270,12 @@ USB networks). This setting is reset on reboot</string>
     <!--AppOps-->
     <string name="appops_settings_title">App privacy</string>
 
+    <!--User preferences settings-->
+    <string name="personalization">Personalization</string>
+    <string name="reset_user_preferences_title">Reset preferences</string>
+    <string name="reset_user_preferences_summary">Restores user interface preferences to default values</string>
+    <string name="reset_user_preferences_dialog">Are you sure you want to reset your preferences?</string>
+
     <!--Battery icon selection-->
     <string name="battery_status_icon_title">Status icon</string>
     <string name="battery_bar">Bar</string>
@@ -288,10 +293,6 @@ USB networks). This setting is reset on reboot</string>
     <string name="navigation_bar_reset_toast">Navigation bar reset to default</string>
     <string name="navigation_bar_menu_editable">Editable</string>
     <string name="navigation_bar_menu_locked">Locked</string>
-
-    <!--PA version-->
-    <string name="pa_version">ParanoidAndroid version</string>
-    <string name="pa_version_default">Unknown</string>
 
     <!-- Quiet hours -->
     <string name="quiet_hours_title">Quiet hours</string>
@@ -669,4 +670,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="clock_date_style_uppercase">Uppercase</string>
     <string name="clock_date_format_custom">Custom java format</string>
     <string name="status_bar_clock_style_reset_message">Reset clock color?</string>
+
+    <!-- Lockscreen widgets -->
+    <string name="security_maximize_widgets_title">Maximize widgets</string>
 </resources>
