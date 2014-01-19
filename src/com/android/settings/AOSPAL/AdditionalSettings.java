@@ -23,6 +23,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
     private static final String QUICK_PULLDOWN = "quick_pulldown";
+    private static final String SMART_PULLDOWN = "smart_pulldown";
     private static final String CATEGORY_HEADSETHOOK = "button_headsethook";
     private static final String BUTTON_HEADSETHOOK_LAUNCH_VOICE = "button_headsethook_launch_voice";
     private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
@@ -34,6 +35,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String KEY_CATEGORY_QS_STATUSBAR = "qs_statusbar";
 
     ListPreference mQuickPulldown;
+    ListPreference mSmartPulldown;
     private CheckBoxPreference mHeadsetHookLaunchVoice;
     private CheckBoxPreference mLockScreenPowerMenu;
     private CheckBoxPreference mDualPanel;
@@ -51,16 +53,26 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         final ContentResolver resolver = getActivity().getContentResolver();
 
         mQuickPulldown = (ListPreference) findPreference(QUICK_PULLDOWN);
+        mSmartPulldown = (ListPreference) findPreference(SMART_PULLDOWN);
+
         mQuickPulldown.setOnPreferenceChangeListener(this);
         int statusQuickPulldown = Settings.System.getIntForUser(getContentResolver(),
                 Settings.System.QS_QUICK_PULLDOWN, 1, UserHandle.USER_CURRENT);
         mQuickPulldown.setValue(String.valueOf(statusQuickPulldown));
-        updatePulldownSummary();
+        updateQuickPulldownSummary(statusQuickPulldown);
+
+        // Smart Pulldown
+        mSmartPulldown.setOnPreferenceChangeListener(this);
+        int smartPulldown = Settings.System.getIntForUser(getContentResolver(),
+                Settings.System.QS_SMART_PULLDOWN, 0, UserHandle.USER_CURRENT);
+        mSmartPulldown.setValue(String.valueOf(smartPulldown));
+        updateSmartPulldownSummary(smartPulldown);
 
         PreferenceCategory qsStatusbar =
             (PreferenceCategory) findPreference(KEY_CATEGORY_QS_STATUSBAR);
         if (!DeviceUtils.isPhone(getActivity())) {
             qsStatusbar.removePreference(findPreference(QUICK_PULLDOWN));
+            qsStatusbar.removePreference(findPreference(SMART_PULLDOWN));
         }
 
         final PreferenceCategory headsethookCategory =
@@ -124,7 +136,13 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
             int statusQuickPulldown = Integer.valueOf((String) newValue);
             Settings.System.putIntForUser(getContentResolver(), Settings.System.QS_QUICK_PULLDOWN,
                     statusQuickPulldown, UserHandle.USER_CURRENT);
-            updatePulldownSummary();
+            updateQuickPulldownSummary(statusQuickPulldown);
+            return true;
+        } else if (preference == mSmartPulldown) {
+            int smartPulldown = Integer.valueOf((String) newValue);
+            Settings.System.putInt(getContentResolver(), Settings.System.QS_SMART_PULLDOWN,
+                    smartPulldown);
+            updateSmartPulldownSummary(smartPulldown);
         } else if (KEY_LISTVIEW_ANIMATION.equals(key)) {
             int value = Integer.parseInt((String) newValue);
             int index = mListViewAnimation.findIndexOfValue((String) newValue);
@@ -171,7 +189,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         return true;
     }
 
-    private void updatePulldownSummary() {
+    private void updateQuickPulldownSummary(int value) {
         int summaryId;
         int directionId;
         summaryId = R.string.summary_quick_pulldown;
@@ -192,6 +210,20 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
             mQuickPulldown.setValueIndex(2);
             mQuickPulldown.setSummary(getResources().getString(directionId)
                     + " " + getResources().getString(summaryId));
+        }
+    }
+
+    private void updateSmartPulldownSummary(int value) {
+        Resources res = getResources();
+
+        if (value == 0) {
+            // Smart pulldown deactivated
+            mSmartPulldown.setSummary(res.getString(R.string.smart_pulldown_off));
+        } else {
+            String type = res.getString(value == 2
+                    ? R.string.smart_pulldown_persistent
+                    : R.string.smart_pulldown_dismissable);
+            mSmartPulldown.setSummary(res.getString(R.string.smart_pulldown_summary, type));
         }
     }
 }
