@@ -28,7 +28,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
@@ -42,13 +41,11 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     private static final String GSETTINGS_PROVIDER = "com.google.settings";
     private static final String BACKUP_CATEGORY = "backup_category";
     private static final String BACKUP_DATA = "backup_data";
-    private static final String RESET_PREFERENCES = "user_preferences_reset";
     private static final String AUTO_RESTORE = "auto_restore";
     private static final String CONFIGURE_ACCOUNT = "configure_account";
     private IBackupManager mBackupManager;
     private CheckBoxPreference mBackup;
     private CheckBoxPreference mAutoRestore;
-    private Preference mResetUserPreferences;
     private Dialog mConfirmDialog;
     private PreferenceScreen mConfigure;
 
@@ -67,30 +64,6 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         mBackup = (CheckBoxPreference) screen.findPreference(BACKUP_DATA);
         mAutoRestore = (CheckBoxPreference) screen.findPreference(AUTO_RESTORE);
         mConfigure = (PreferenceScreen) screen.findPreference(CONFIGURE_ACCOUNT);
-        mResetUserPreferences = screen.findPreference(RESET_PREFERENCES);
-        mResetUserPreferences.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-             public boolean onPreferenceClick(Preference preference) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(R.string.reset_user_preferences_title);
-                builder.setMessage(R.string.reset_user_preferences_dialog);
-                builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        for(String setting : Settings.System.SETTINGS_TO_RESET) {
-                            Settings.System.putInt(getContentResolver(), setting, 0);
-                        }
-                    }
-                });
-                builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog alert = builder.create();
-                alert.show();
-                return true;
-             }
-         });
 
         // Vendor specific
         if (getActivity().getPackageManager().

@@ -48,12 +48,4 @@
         android:summary="@string/master_clear_summary"
         android:fragment="com.android.settings.MasterClear" />
 
-    <PreferenceCategory
-            android:title="@string/personalization">
-        <Preference
-                android:key="user_preferences_reset"
-                android:title="@string/reset_user_preferences_title"
-                android:summary="@string/reset_user_preferences_summary" />
-    </PreferenceCategory>
-
 </PreferenceScreen>
