@@ -190,26 +190,16 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     }
 
     private void updateQuickPulldownSummary(int value) {
-        int summaryId;
-        int directionId;
-        summaryId = R.string.summary_quick_pulldown;
-        String value = String.valueOf(Settings.System.getIntForUser(getContentResolver(),
-                Settings.System.QS_QUICK_PULLDOWN, 1, UserHandle.USER_CURRENT));
-        String[] pulldownArray = getResources().getStringArray(R.array.quick_pulldown_values);
-        if (pulldownArray[0].equals(value)) {
-            directionId = R.string.quick_pulldown_off;
-            mQuickPulldown.setValueIndex(0);
-            mQuickPulldown.setSummary(getResources().getString(directionId));
-        } else if (pulldownArray[1].equals(value)) {
-            directionId = R.string.quick_pulldown_right;
-            mQuickPulldown.setValueIndex(1);
-            mQuickPulldown.setSummary(getResources().getString(directionId)
-                    + " " + getResources().getString(summaryId));
+        Resources res = getResources();
+
+        if (value == 0) {
+            // quick pulldown deactivated
+            mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_off));
         } else {
-            directionId = R.string.quick_pulldown_left;
-            mQuickPulldown.setValueIndex(2);
-            mQuickPulldown.setSummary(getResources().getString(directionId)
-                    + " " + getResources().getString(summaryId));
+            String direction = res.getString(value == 2
+                    ? R.string.quick_pulldown_left
+                    : R.string.quick_pulldown_right);
+            mQuickPulldown.setSummary(res.getString(R.string.summary_quick_pulldown, direction));
         }
     }
 
