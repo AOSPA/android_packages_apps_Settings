@@ -87,4 +87,11 @@
         android:title="@string/status_bar_double_tap_to_sleep_title"
         android:summary="@string/status_bar_double_tap_to_sleep_summary"
         android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="double_tap_wake_gesture"
+            android:title="@string/double_tap_to_wake_title"
+            android:summary="@string/double_tap_to_wake_summary"
+            android:defaultValue="false" />
+
 </PreferenceScreen>
