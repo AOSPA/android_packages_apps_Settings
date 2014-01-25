@@ -9,6 +9,10 @@
         android:title="@string/status_bar_network_header">
 
         <CheckBoxPreference
+            android:key="status_bar_network_indicators"
+            android:title="@string/status_bar_network_indicators" />
+
+        <CheckBoxPreference
             android:key="status_bar_show_network_stats"
             android:title="@string/status_bar_show_network_stats_title"
             android:defaultValue="false" />

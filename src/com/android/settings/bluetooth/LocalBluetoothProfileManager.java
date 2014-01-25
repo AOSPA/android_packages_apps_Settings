@@ -31,6 +31,7 @@ import android.os.ParcelUuid;
 import android.util.Log;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemProperties;
 
 import java.util.ArrayList;
 import java.util.Collection;
