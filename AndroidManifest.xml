@@ -1761,5 +1761,14 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <!-- started from ... somewhere -->
+        <activity
+            android:name=".BeanBag"
+            android:label="BeanBag"
+            android:icon="@drawable/redbean2"
+            android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true" />
     </application>
 </manifest>
