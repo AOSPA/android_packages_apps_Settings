@@ -54,6 +54,18 @@
     <string name="volume_adjust_sounds_enable_summary">Reproduir so en ajustar el volum amb les tecles físiques</string>
     <string name="link_volume_ringtones">Vincular volums</string>
     <string name="volume_ring_only_description">To</string>
+    <string name="increasing_ring_title">Volum ascendent</string>
+    <string name="checkbox_increasing_ring">Activar</string>
+    <string name="increasing_ring_min_volume_title">Volum inicial</string>
+    <string name="increasing_ring_volume_notice">Nota:\nSi el volum inicial s\'estableix més alt que el volum de trucada, prevaldrà el volum de trucada</string>
+    <string name="increasing_ring_interval_title">Intèrval d\'increment</string>
+    <string name="increasing_ring_interval_eachring">A cada to</string>
+    <string name="increasing_ring_interval_half_second">Mig segon</string>
+    <string name="increasing_ring_interval_1second">1 segon</string>
+    <string name="increasing_ring_interval_2seconds">2 segons</string>
+    <string name="increasing_ring_interval_3seconds">3 segons</string>
+    <string name="increasing_ring_interval_5seconds">5 segons</string>
+    <string name="increasing_ring_interval_10seconds">10 segons</string>
     <string name="volume_buttons_category">Botons de volum</string>
     <string name="volume_wake_title">Despertar</string>
     <string name="volume_wake_summary">Prement els botons de control de volum, el dispositiu sortirà del mode en espera</string>
@@ -62,13 +74,18 @@
     <string name="see_through_title">Veure a través</string>
     <string name="see_through_summary">Mostra el contingut darrere la pantalla de bloqueig. Les teves dades poden ser visibles per als qui t\'envolten</string>
     <string name="appops_settings_title">Privacitat d\'aplicacions</string>
+    <string name="personalization">Personalització</string>
+    <string name="reset_user_preferences_title">Restablir configuració</string>
+    <string name="reset_user_preferences_summary">Restaura les preferències d\'interfície d\'usuari als valors predeterminats</string>
+    <string name="reset_user_preferences_dialog">Segur que vols restablir totes les teves preferències?</string>
     <string name="battery_status_icon_title">Icona d\'estat</string>
     <string name="battery_bar">Barra</string>
     <string name="battery_bar_percent">Barra i percentatge</string>
     <string name="battery_circle">Cercle</string>
     <string name="battery_circle_percent">Cercle i percentatge</string>
-    <string name="pa_version">Versió de ParanoidAndroid</string>
-    <string name="pa_version_default">Desconeguda</string>
     <string name="custom_runtime_warning_title">Advertència</string>
     <string name="custom_runtime_warning_message">ART no és suportat per ParanoidAndroid. Aquesta configuració s\'inclou només per a experimentació i té el potencial de causar inestabilitat, pèrdua de dades o inclús evitar l\'inici correcte del dispositiu. Visiti &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introduint ART&lt;/a&gt; per més informació.&lt;br/&gt;&lt;br/&gt;Li demanam que no presenti informes d\'error si ha habilitat ART com el seu temps d\'execució.&lt;br/&gt;&lt;br/&gt;Segur que vol reiniciar per canviar el temps d\'execució de <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> a <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
+    <string name="security_maximize_widgets_title">Maximitzar widgets</string>
+    <string name="pa_version">Versió de ParanoidAndroid</string>
+    <string name="pa_version_default">Desconeguda</string>
 </resources>
