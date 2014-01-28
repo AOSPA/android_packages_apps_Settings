@@ -51,17 +51,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_ACCELEROMETER = "accelerometer";
     private static final String KEY_FONT_SIZE = "font_size";
-    private static final String KEY_NOTIFICATION_LED = "notification_led";
+    private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_SCREEN_SAVER = "screensaver";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
     private CheckBoxPreference mAccelerometer;
     private WarnedListPreference mFontSizePref;
+    private PreferenceScreen mNotificationPulse;
 
     private final Configuration mCurConfig = new Configuration();
-
-    private PreferenceScreen mNotificationLed;
     
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
@@ -112,9 +111,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         boolean hasNotificationLed = getResources().getBoolean(
                 com.android.internal.R.bool.config_intrusiveNotificationLed);
-        mNotificationLed = (PreferenceScreen) findPreference(KEY_NOTIFICATION_LED);
+        mNotificationPulse = (PreferenceScreen) findPreference(KEY_NOTIFICATION_PULSE);
         if (!hasNotificationLed) {
-            getPreferenceScreen().removePreference(mNotificationLed);
+            getPreferenceScreen().removePreference(mNotificationPulse);
         }
     }
 
