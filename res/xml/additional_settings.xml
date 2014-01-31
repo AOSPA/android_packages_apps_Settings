@@ -132,10 +132,18 @@
             android:title="@string/lockscreen_power_menu_title"
             android:summary="@string/lockscreen_power_menu_summary" />
 
-         <PreferenceScreen
+        <PreferenceScreen
             android:key="keyguard_style"
             android:fragment="com.android.settings.AOSPAL.LockscreenStyle"
             android:title="@string/lockscreen_style_title"/>
+
+        <CheckBoxPreference
+            android:key="lockscreen_wallpaper"
+            android:title="@string/lockscreen_wallpaper" />
+
+        <Preference
+            android:key="select_lockscreen_wallpaper"
+            android:title="@string/select_wallpaper" />
 
         <!-- Lock clock -->
         <PreferenceScreen
