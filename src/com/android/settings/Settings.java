@@ -558,6 +558,11 @@ public class Settings extends PreferenceActivity
                 if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
                     target.remove(i);
                 }
+            } else if (id == R.id.telo_radio_settings) {
+                // Remove ConnectionManager if the device does not have Telephony.
+                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
+                    target.remove(i);
+                }
             } else if (id == R.id.data_usage_settings) {
                 // Remove data usage when kernel module not enabled
                 final INetworkManagementService netManager = INetworkManagementService.Stub
@@ -1144,5 +1149,5 @@ public class Settings extends PreferenceActivity
     public static class PaymentSettingsActivity extends Settings { /* empty */ }
     public static class PrintSettingsActivity extends Settings { /* empty */ }
     public static class PrintJobSettingsActivity extends Settings { /* empty */ }
-    public static class ASSRamBarActivity extends Settings { /* empty */ } 
+    public static class ASSRamBarActivity extends Settings { /* empty */ }
 }
