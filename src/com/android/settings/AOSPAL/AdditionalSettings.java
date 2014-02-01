@@ -65,6 +65,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String KEY_NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
     private static final String KEY_CATEGORY_QS_STATUSBAR = "qs_statusbar";
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
+    private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
 
     ListPreference mQuickPulldown;
     ListPreference mSmartPulldown;
@@ -74,6 +75,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mReverseDefaultAppPicker;
     private CheckBoxPreference mStatusBarBrightnessControl;
     private CheckBoxPreference mLockscreenWallpaper;
+    private CheckBoxPreference mLockRingBattery;
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
     private SeekBarPreference mNavigationBarHeight;
@@ -196,6 +198,13 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         mSelectLockscreenWallpaper = findPreference(KEY_SELECT_LOCKSCREEN_WALLPAPER);
         mSelectLockscreenWallpaper.setEnabled(mLockscreenWallpaper.isChecked());
         mWallpaperTemporary = new File(getActivity().getCacheDir() + "/lockwallpaper.tmp");
+
+        mLockRingBattery = (CheckBoxPreference) prefs
+                .findPreference(BATTERY_AROUND_LOCKSCREEN_RING);
+        if (mLockRingBattery != null) {
+            mLockRingBattery.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.BATTERY_AROUND_LOCKSCREEN_RING, 0) == 1);
+        }
     }
 
     private boolean isToggled(Preference pref) {
@@ -282,6 +291,9 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         } else if (preference == mLockScreenPowerMenu) {
             Settings.Secure.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.Secure.LOCK_SCREEN_POWER_MENU, isToggled(preference) ? 1 : 0);
+        } else if (preference == mLockRingBattery) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.BATTERY_AROUND_LOCKSCREEN_RING, isToggled(preference) ? 1 : 0);
         } else if (preference == mLockscreenWallpaper) {
             if (!mLockscreenWallpaper.isChecked()) setWallpaper(null);
             else Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_WALLPAPER, 1);
