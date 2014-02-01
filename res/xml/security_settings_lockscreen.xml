@@ -31,11 +31,6 @@
             android:fragment="com.android.settings.AOSPAL.LockscreenWidgets"
             android:title="@string/lockscreen_widgets_title"/>
 
-        <CheckBoxPreference
-            android:key="lockscreen_maximize_widgets"
-            android:title="@string/security_maximize_widgets_title"
-            android:enabled="false"/>
-
         <PreferenceScreen
             android:fragment="com.android.settings.OwnerInfoSettings"
             android:key="owner_info_settings"

@@ -31,11 +31,6 @@
             android:fragment="com.android.settings.AOSPAL.LockscreenWidgets"
             android:title="@string/lockscreen_widgets_title"/>
 
-        <CheckBoxPreference
-            android:key="battery_around_lockscreen_ring"
-            android:title="@string/battery_around_lockscreen_ring"
-            android:defaultValue="true" />
-
         <ListPreference
             android:key="lock_after_timeout"
             android:title="@string/lock_after_timeout"
@@ -47,11 +42,6 @@
         <CheckBoxPreference
             android:key="power_button_instantly_locks"
             android:title="@string/lockpattern_settings_enable_power_button_instantly_locks"/>
-
-        <CheckBoxPreference
-            android:key="lockscreen_maximize_widgets"
-            android:title="@string/security_maximize_widgets_title"
-            android:enabled="false"/>
 
         <PreferenceScreen
             android:fragment="com.android.settings.OwnerInfoSettings"
