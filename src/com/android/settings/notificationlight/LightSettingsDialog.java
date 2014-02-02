@@ -397,6 +397,7 @@ public class LightSettingsDialog extends AlertDialog implements
                 }
                 mColorPicker.setColor(color);
                 mNewColor.setColor(color);
+                updateLed();
                 if (mListener != null) {
                     mListener.onColorChanged(color);
                 }
