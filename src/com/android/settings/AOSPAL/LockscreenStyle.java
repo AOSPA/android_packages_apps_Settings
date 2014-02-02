@@ -291,7 +291,7 @@ public class LockscreenStyle extends SettingsPreferenceFragment
         intent.putExtra("outputX", px);
         intent.putExtra("outputY", px);
         intent.putExtra("scale", true);
-        intent.putExtra("scaleUpIfNeeded", false);
+        intent.putExtra("scaleUpIfNeeded", true);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
 
         try {
