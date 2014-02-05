@@ -17,9 +17,7 @@
 package com.android.settings.AOSPAL;
 
 import android.content.ContentResolver;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.provider.Settings;
@@ -32,11 +30,9 @@ public class ScreenRecorderSettings extends SettingsPreferenceFragment implement
 
     private static final String KEY_VIDEO_SIZE = "screen_recorder_size";
     private static final String KEY_VIDEO_BITRATE = "screen_recorder_bitrate";
-    private static final String KEY_RECORD_AUDIO = "screen_recorder_record_audio";
 
     private ListPreference mVideoSizePref;
     private ListPreference mVideoBitratePref;
-    private CheckBoxPreference mRecordAudioPref;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -55,12 +51,6 @@ public class ScreenRecorderSettings extends SettingsPreferenceFragment implement
         String rate= Settings.System.getString(resolver,
                 Settings.System.SCREEN_RECORDER_BITRATE);
         updateVideoBitratePreference(rate);
-
-        mRecordAudioPref = (CheckBoxPreference) findPreference(KEY_RECORD_AUDIO);
-        mRecordAudioPref.setChecked(Settings.System.getInt(resolver,
-                Settings.System.SCREEN_RECORDER_RECORD_AUDIO, 0) == 1);
-        mRecordAudioPref.setOnPreferenceChangeListener(this);
-        if (!hasMicrophone()) getPreferenceScreen().removePreference(mRecordAudioPref);
     }
 
     @Override
@@ -70,11 +60,6 @@ public class ScreenRecorderSettings extends SettingsPreferenceFragment implement
             return true;
         } else if (preference == mVideoBitratePref) {
             updateVideoBitratePreference((String) o);
-            return true;
-        } else if (preference == mRecordAudioPref) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.SCREEN_RECORDER_RECORD_AUDIO,
-                    Boolean.TRUE.equals((Boolean)o) ? 1 : 0);
             return true;
         }
         return false;
@@ -96,10 +81,5 @@ public class ScreenRecorderSettings extends SettingsPreferenceFragment implement
         Settings.System.putInt(getContentResolver(),
                 Settings.System.SCREEN_RECORDER_BITRATE,
                 Integer.valueOf(value));
-    }
-
-    private boolean hasMicrophone() {
-        return getActivity().getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_MICROPHONE);
     }
 }
