@@ -32,11 +32,6 @@
             android:key="accelerometer"
             android:title="@string/accelerometer_title"/>
 
-        <PreferenceScreen
-                android:key="screen_recorder"
-                android:title="@string/screen_recorder_title"
-                android:fragment="com.android.settings.AOSPAL.ScreenRecorderSettings" />
-
         <ListPreference
                 android:key="screen_timeout"
                 android:title="@string/screen_timeout"
@@ -84,7 +79,7 @@
             android:title="@string/system_power_crt_mode_title"
             android:entries="@array/entries_system_power_crt_mode"
             android:entryValues="@array/values_system_power_crt_mode" />
-
+ 
     </PreferenceCategory>
 
 </PreferenceScreen>
