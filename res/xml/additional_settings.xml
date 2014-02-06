@@ -11,6 +11,12 @@
         android:icon="@drawable/ic_dt_gesture_anywhere"
         android:title="@string/gesture_anywhere_title" />
 
+    <PreferenceScreen
+        android:id="@+id/wakelock_blocker"
+        android:layout="@layout/preference_wakelockblocker"
+        android:title="@string/wakelock_blocker"
+        android:fragment="com.android.settings.AOSPAL.WakeLockBlocker" />
+
     <PreferenceCategory
         android:title="@string/additional_settings_interface_title">
 
