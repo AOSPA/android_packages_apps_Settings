@@ -180,6 +180,14 @@
         android:icon="@drawable/ic_app_ops"
         android:title="@string/appops_settings_title"
         android:id="@+id/appops_settings" />
+	
+	<!-- Wakelock blocker -->
+    <header
+        android:id="@+id/wakelock_blocker"
+        android:title="@string/wakelock_blocker"
+        android:fragment="com.android.settings.wakelock.WakeLockBlocker"
+        android:icon="@drawable/ic_settings_wakelock_blocker"
+        android:layout="@layout/preference_wakelockblocker" />
 
     <!-- Date & Time -->
     <header
