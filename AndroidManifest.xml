@@ -1040,8 +1040,6 @@
         <!-- Lock screen settings -->
         <activity android:name="ConfirmLockPattern"/>
 
-        <activity android:name="ConfirmLockGesture"/>
-
         <activity android:name="ConfirmLockPassword"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
@@ -1062,8 +1060,6 @@
         <activity android:name="ChooseLockPatternSize" android:exported="false"/>
 
         <activity android:name="ChooseLockPattern" android:exported="false"/>
-
-        <activity android:name="ChooseLockGesture" android:exported="false"/>
 
         <activity android:name="ChooseLockPassword" android:exported="false"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
