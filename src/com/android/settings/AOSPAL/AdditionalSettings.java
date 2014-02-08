@@ -67,6 +67,8 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String KEY_CATEGORY_QS_STATUSBAR = "qs_statusbar";
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
     private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
+    private static final String NAVIGATION_BAR_CATEGORY = "navigation_bar";
+    private static final String NAVIGATION_BAR_LEFT = "navigation_bar_left";
 
     ListPreference mQuickPulldown;
     ListPreference mSmartPulldown;
@@ -132,9 +134,14 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
 
         PreferenceCategory qsStatusbar =
             (PreferenceCategory) findPreference(KEY_CATEGORY_QS_STATUSBAR);
+
+        PreferenceCategory navbarCategory =
+            (PreferenceCategory) findPreference(NAVIGATION_BAR_CATEGORY);
+
         if (!DeviceUtils.isPhone(getActivity())) {
             qsStatusbar.removePreference(findPreference(QUICK_PULLDOWN));
             qsStatusbar.removePreference(findPreference(SMART_PULLDOWN));
+            navbarCategory.removePreference(findPreference(NAVIGATION_BAR_LEFT));
         }
 
         final PreferenceCategory headsethookCategory =
