@@ -132,18 +132,10 @@ public class HomeSettings extends SettingsPreferenceFragment {
             }
         }
 
-        boolean hasSettingsPanel = false;
-        for (HomeAppPreference pref : mPrefs) {
-            if (pref.prefsIntent != null) {
-                hasSettingsPanel = true;
-                break;
-            }
-        }
-
         // If we're down to just one possible home app, back out of this settings
         // fragment and show a dialog explaining to the user that they won't see
         // 'Home' settings now until such time as there are multiple available.
-        if (mPrefs.size() < 2 && !hasSettingsPanel) {
+        if (mPrefs.size() < 2) {
             if (mShowNotice) {
                 mShowNotice = false;
                 Settings.requestHomeNotice();
