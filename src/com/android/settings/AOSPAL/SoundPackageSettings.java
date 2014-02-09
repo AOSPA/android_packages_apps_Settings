@@ -62,6 +62,13 @@ public class SoundPackageSettings extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.sound_package_settings);
 
+        //create SoundPacks folder if it doesn't exists
+        File SOUND_PACKS_LOCATION_FOLDER = new File(SOUND_PACKS_LOCATION);
+
+        if (!SOUND_PACKS_LOCATION_FOLDER.exists()) {
+            	SOUND_PACKS_LOCATION_FOLDER.mkdir();
+	}
+
         PreferenceScreen prefSet = getPreferenceScreen();
 
         mInstallSoundPack = (ListPreference) prefSet
