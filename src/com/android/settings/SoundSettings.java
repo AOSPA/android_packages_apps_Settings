@@ -17,7 +17,7 @@
 
 package com.android.settings;
 
-import com.android.settings.bluetooth.DockEventReceiver;    
+import com.android.settings.bluetooth.DockEventReceiver;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -440,6 +440,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                     Settings.Global.getString(getContentResolver(),
                             Settings.Global.POWER_NOTIFICATIONS_RINGTONE));
         } else {
+            // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
         return true;
@@ -675,4 +676,3 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         }
     }
 }
-
