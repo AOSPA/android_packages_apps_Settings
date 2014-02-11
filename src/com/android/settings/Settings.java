@@ -93,6 +93,7 @@ import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.WifiEnabler;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
+import com.android.settings.paranoid.QuietHours;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -354,6 +355,7 @@ public class Settings extends PreferenceActivity
         PaymentSettings.class.getName(),
         KeyboardLayoutPickerFragment.class.getName(),
         ApnSettings.class.getName()
+        QuietHours.class.getName()
     };
 
     @Override
@@ -1101,6 +1103,7 @@ public class Settings extends PreferenceActivity
     public static class LocalePickerActivity extends Settings { /* empty */ }
     public static class UserDictionarySettingsActivity extends Settings { /* empty */ }
     public static class SoundSettingsActivity extends Settings { /* empty */ }
+    public static class QuietHoursSettingsActivity extends Settings { /* empty */ }
     public static class DisplaySettingsActivity extends Settings { /* empty */ }
     public static class DeviceInfoSettingsActivity extends Settings { /* empty */ }
     public static class ApplicationSettingsActivity extends Settings { /* empty */ }
