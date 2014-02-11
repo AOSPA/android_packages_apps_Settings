@@ -109,11 +109,6 @@
             android:entries="@array/emergency_tone_entries"
             android:entryValues="@array/emergency_tone_values" />
 
-    <PreferenceScreen
-            android:key="quiet_hours_settings"
-            android:fragment="com.android.settings.slim.QuietHours"
-            android:title="@string/quiet_hours_title" />
-
     <!-- Volume Rocker -->
     <PreferenceCategory
         android:title="@string/volume_buttons_category"/>
