@@ -354,7 +354,7 @@ public class Settings extends PreferenceActivity
         TrustedCredentialsSettings.class.getName(),
         PaymentSettings.class.getName(),
         KeyboardLayoutPickerFragment.class.getName(),
-        ApnSettings.class.getName()
+        ApnSettings.class.getName(),
         QuietHours.class.getName()
     };
 
