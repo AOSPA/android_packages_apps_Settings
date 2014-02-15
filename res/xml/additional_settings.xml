@@ -1,7 +1,15 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/additional_settings_title"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:key="additional_settings">
+
+
+    <PreferenceScreen
+        android:key="gesture_anywhere"
+        android:fragment="com.android.settings.chameleonos.labs.gestureanywhere.GestureAnywhereSettings"
+        android:icon="@drawable/ic_dt_gesture_anywhere"
+        android:title="@string/gesture_anywhere_title" />
 
     <PreferenceCategory
         android:title="@string/additional_settings_interface_title">
@@ -23,6 +31,17 @@
             android:fragment="com.android.settings.AOSPAL.RamBar"
             android:title="@string/ram_bar" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/additional_settings_animations_title">
+
+        <PreferenceScreen
+            android:id="@+id/animations"
+            android:title="@string/title_animation_controls"
+            android:summary="@string/header_summary_animation"
+            android:fragment="com.android.settings.AOSPAL.fragments.AnimationControls" />
+
         <ListPreference
             android:key="listview_animation"
             android:dialogTitle="@string/listview_animation_title"
@@ -39,18 +58,6 @@
             android:entryValues="@array/listview_interpolator_values"
             android:defaultValue="0"
             android:dependency="listview_animation" />
-
-        <PreferenceScreen
-            android:id="@+id/animations"
-            android:title="@string/title_animation_controls"
-            android:summary="@string/header_summary_animation"
-            android:fragment="com.android.settings.AOSPAL.fragments.AnimationControls" />
-
-         <PreferenceScreen
-            android:key="gesture_anywhere"
-            android:fragment="com.android.settings.chameleonos.labs.gestureanywhere.GestureAnywhereSettings"
-            android:icon="@drawable/ic_dt_gesture_anywhere"
-            android:title="@string/gesture_anywhere_title" />
 
     </PreferenceCategory>
 
@@ -87,24 +94,7 @@
 
 
    <PreferenceCategory
-          android:title="@string/additional_settings_qs_statusbar_title"
-          android:key="qs_statusbar">
-
-        <!-- Quick Settings Pulldown -->
-        <ListPreference
-            android:key="quick_pulldown"
-            android:title="@string/title_quick_pulldown"
-            android:summary="@string/qs_pulldown_summary"
-            android:entries="@array/quick_pulldown_entries"
-            android:entryValues="@array/quick_pulldown_values"
-            android:persistent="false" />
-
-        <ListPreference
-            android:key="smart_pulldown"
-            android:title="@string/smart_pulldown_title"
-            android:entries="@array/smart_pulldown_entries"
-            android:entryValues="@array/smart_pulldown_values"
-            android:persistent="false" />
+          android:title="@string/additional_settings_statusbar_title">
 
         <!-- Network usage stats -->
         <PreferenceScreen
@@ -141,6 +131,28 @@
             android:title="@string/status_bar_clock" />
 
    </PreferenceCategory>
+
+   <PreferenceCategory
+          android:title="@string/additional_settings_qs_title"
+          android:key="quicksettings">
+
+        <!-- Quick Settings Pulldown -->
+        <ListPreference
+            android:key="quick_pulldown"
+            android:title="@string/title_quick_pulldown"
+            android:summary="@string/qs_pulldown_summary"
+            android:entries="@array/quick_pulldown_entries"
+            android:entryValues="@array/quick_pulldown_values"
+            android:persistent="false" />
+
+        <ListPreference
+            android:key="smart_pulldown"
+            android:title="@string/smart_pulldown_title"
+            android:entries="@array/smart_pulldown_entries"
+            android:entryValues="@array/smart_pulldown_values"
+            android:persistent="false" />
+
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/additional_settings_lockscreen_title" >

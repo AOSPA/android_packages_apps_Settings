@@ -52,6 +52,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
 
     private static final int REQUEST_CODE_BG_WALLPAPER = 1024;
 
+    private static final String ADDITIONAL_SETTINGS= "additional_settings";
     private static final String QUICK_PULLDOWN = "quick_pulldown";
     private static final String SMART_PULLDOWN = "smart_pulldown";
     private static final String CATEGORY_HEADSETHOOK = "button_headsethook";
@@ -64,7 +65,7 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
     private static final String KEY_LOCKSCREEN_WALLPAPER = "lockscreen_wallpaper";
     private static final String KEY_SELECT_LOCKSCREEN_WALLPAPER = "select_lockscreen_wallpaper";
     private static final String KEY_NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
-    private static final String KEY_CATEGORY_QS_STATUSBAR = "qs_statusbar";
+    private static final String KEY_QUICKSETTINGS_CATEGORY = "quicksettings";
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
     private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
     private static final String NAVIGATION_BAR_CATEGORY = "navigation_bar";
@@ -132,15 +133,17 @@ public class AdditionalSettings extends SettingsPreferenceFragment implements
         mSmartPulldown.setValue(String.valueOf(smartPulldown));
         updateSmartPulldownSummary(smartPulldown);
 
-        PreferenceCategory qsStatusbar =
-            (PreferenceCategory) findPreference(KEY_CATEGORY_QS_STATUSBAR);
+        PreferenceScreen additionalSettings =
+            (PreferenceScreen) findPreference(ADDITIONAL_SETTINGS);
+
+        PreferenceCategory quicksettings =
+            (PreferenceCategory) prefs.findPreference(KEY_QUICKSETTINGS_CATEGORY);
 
         PreferenceCategory navbarCategory =
             (PreferenceCategory) findPreference(NAVIGATION_BAR_CATEGORY);
 
         if (!DeviceUtils.isPhone(getActivity())) {
-            qsStatusbar.removePreference(findPreference(QUICK_PULLDOWN));
-            qsStatusbar.removePreference(findPreference(SMART_PULLDOWN));
+            additionalSettings.removePreference(quicksettings);
             navbarCategory.removePreference(findPreference(NAVIGATION_BAR_LEFT));
         }
 
