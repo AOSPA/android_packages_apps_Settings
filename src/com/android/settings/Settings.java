@@ -66,12 +66,14 @@ import com.android.settings.accessibility.ToggleCaptioningPreferenceFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
-import com.android.settings.AOSPAL.AdditionalSettings;
+import com.android.settings.AOSPAL.RemixSettings;
+import com.android.settings.AOSPAL.WakeLockBlocker;
 import com.android.settings.applications.AppOpsSummary;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.chameleonos.labs.gestureanywhere.GestureAnywhereSettings;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -355,9 +357,11 @@ public class Settings extends PreferenceActivity
         KeyboardLayoutPickerFragment.class.getName(),
         ApnSettings.class.getName(),
         HomeSettings.class.getName(),
-        AdditionalSettings.class.getName(),
+        RemixSettings.class.getName(),
         AppOpsSummary.class.getName(),
-        QuietHours.class.getName()
+        QuietHours.class.getName(),
+        GestureAnywhereSetttings.class.getName(),
+        WakeLockBlocker.class.getName()
     };
 
     @Override

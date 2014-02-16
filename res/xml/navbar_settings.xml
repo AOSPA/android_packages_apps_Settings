@@ -1,0 +1,31 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/navigation_bar"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:key="navbar_settings">
+
+         <SeekBarPreference
+             android:key="navigation_bar_height"
+             android:title="@string/navigation_bar_height"
+             android:max="100"
+             android:defaultValue="100" />
+
+        <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+            android:key="navigation_bar_left"
+            android:title="@string/navigation_bar_left_title"
+            android:summary="@string/navigation_bar_left_summary"
+            android:defaultValue="false" />
+
+         <!-- Navring Targets -->
+         <PreferenceScreen
+             android:fragment="com.android.settings.cyanogenmod.NavRing"
+             android:key="navigation_ring_shortcuts"
+             android:title="@string/navigation_ring_title"
+             android:summary="@string/navigation_ring_summary" />
+
+        <PreferenceScreen
+            android:fragment="com.android.settings.paranoid.NavBar"
+            android:key="navigation_bar"
+            android:title="@string/navigation_bar_title" />
+
+</PreferenceScreen>
