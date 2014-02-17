@@ -20,6 +20,7 @@ package com.android.settings.paranoid.service;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.provider.ContactsContract.PhoneLookup;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -287,6 +288,12 @@ public class SmsCallHelper {
                 context, requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
+    public static void setQuietHoursActive(Context context, int value) {
+        final ContentResolver resolver = context.getContentResolver();
+        Settings.System.putInt(resolver,
+                  Settings.System.QUIET_HOURS_ENABLED, value);
+    }
+
     /*
      * Called when:
      * QuietHours Toggled
@@ -297,19 +304,22 @@ public class SmsCallHelper {
      * AutoSMS service Stopped - Schedule again for next day
      */
     public static void scheduleService(Context context) {
-        boolean quietHoursEnabled = Settings.System.getIntForUser(context.getContentResolver(),
+        final ContentResolver resolver = context.getContentResolver();
+        final int quietHoursActive = Settings.System.getIntForUser(resolver,
                 Settings.System.QUIET_HOURS_ENABLED, 0,
-                UserHandle.USER_CURRENT_OR_SELF) != 0;
-        int quietHoursStart = Settings.System.getIntForUser(context.getContentResolver(),
+                UserHandle.USER_CURRENT_OR_SELF);
+        final boolean quietHoursEnabled = quietHoursActive != 0;
+        final boolean quietHoursStopped = quietHoursActive == 2;
+        final int quietHoursStart = Settings.System.getIntForUser(resolver,
                 Settings.System.QUIET_HOURS_START, 0,
                 UserHandle.USER_CURRENT_OR_SELF);
-        int quietHoursEnd = Settings.System.getIntForUser(context.getContentResolver(),
+        final int quietHoursEnd = Settings.System.getIntForUser(resolver,
                 Settings.System.QUIET_HOURS_END, 0,
                 UserHandle.USER_CURRENT_OR_SELF);
-        int autoCall = returnUserAutoCall(context);
-        int autoText = returnUserAutoText(context);
-        int callBypass = returnUserCallBypass(context);
-        int smsBypass = returnUserTextBypass(context);
+        final int autoCall = returnUserAutoCall(context);
+        final int autoText = returnUserAutoText(context);
+        final int callBypass = returnUserCallBypass(context);
+        final int smsBypass = returnUserTextBypass(context);
         Intent serviceTriggerIntent = new Intent(context, SmsCallService.class);
         PendingIntent startIntent = makeServiceIntent(context, SCHEDULE_SERVICE_COMMAND, 1);
         PendingIntent stopIntent = makeServiceIntent(context, SCHEDULE_SERVICE_COMMAND, 2);
@@ -329,6 +339,9 @@ public class SmsCallHelper {
 
         if (quietHoursStart == quietHoursEnd) {
             // 24 hours, start without stop
+            if (quietHoursStopped) {
+                setQuietHoursActive(context, 1);
+            }
             context.startService(serviceTriggerIntent);
             return;
         }
@@ -379,8 +392,12 @@ public class SmsCallHelper {
         }
 
         if (inQuietHours) {
+            if (quietHoursStopped) {
+                setQuietHoursActive(context, 1);
+            }
             context.startService(serviceTriggerIntent);
-        } else {
+        } else if (!quietHoursStopped) {
+            setQuietHoursActive(context, 2);
             context.stopService(serviceTriggerIntent);
         }
 
