@@ -39,6 +39,13 @@
         android:fragment="com.android.settings.crystalroms.RecentsPanel"
         android:title="@string/recent_apps_panel_title" />
 
+    <!-- Progress Bar -->
+    <PreferenceScreen
+        android:key="progressbar_settings"
+        android:layout="@layout/preference_progressbar"
+        android:fragment="com.android.settings.axxion.ProgressBar"
+        android:title="@string/progressbar_title" />
+
     <!-- Vibrator Intensity -->
     <com.android.settings.hardware.VibratorIntensity
         android:key="vibration_intensity"
