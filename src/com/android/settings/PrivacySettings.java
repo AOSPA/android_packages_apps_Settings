@@ -31,6 +31,11 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.util.SparseBooleanArray;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Gesture lock pattern settings.
@@ -52,6 +57,8 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     private Dialog mConfirmDialog;
     private PreferenceScreen mConfigure;
 
+    List<String> customPrefs = new ArrayList<String>();
+
     private static final int DIALOG_ERASE_BACKUP = 2;
     private int mDialogType;
 
@@ -70,24 +77,12 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         mResetUserPreferences = screen.findPreference(RESET_PREFERENCES);
         mResetUserPreferences.setOnPreferenceClickListener(new OnPreferenceClickListener() {
              public boolean onPreferenceClick(Preference preference) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(R.string.reset_user_preferences_title);
-                builder.setMessage(R.string.reset_user_preferences_dialog);
-                builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        for(String setting : Settings.System.SETTINGS_TO_RESET) {
-                            Settings.System.putInt(getContentResolver(), setting, 0);
-                        }
-                    }
-                });
-                builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog alert = builder.create();
-                alert.show();
+                updateActiveCustomPreferences();
+                if (customPrefs.size() > 1) {
+                    showResetList();
+                } else {
+                    showResetDialog();
+                }
                 return true;
              }
          });
@@ -180,7 +175,84 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         mConfigure.setEnabled(configureEnabled);
         mConfigure.setIntent(configIntent);
         setConfigureSummary(configSummary);
-}
+    }
+
+    private void showResetDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.reset_user_preferences_title);
+        builder.setMessage(R.string.reset_user_preferences_dialog);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                for(String setting : Settings.System.SETTINGS_TO_RESET) {
+                    Settings.System.putInt(getContentResolver(), setting, 0);
+                }
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void showResetList() {
+        final CharSequence[] cs = customPrefs.toArray(new CharSequence[customPrefs.size()]);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.reset_user_preferences_title)
+               .setMultiChoiceItems(cs, null, null)
+               .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        AlertDialog ad = ((AlertDialog) dialog);
+                        ListView resetList = ad.getListView();
+                        int resetCount = resetList.getCheckedItemCount();
+                        if (resetCount > 0) {
+                            SparseBooleanArray checked = resetList.getCheckedItemPositions();
+                            for (int i = 0; i < resetList.getCount(); i++) {
+                                if (checked.get(i)) {
+                                    String setting = resetList.getItemAtPosition(i).toString();
+                                    Settings.System.putInt(getContentResolver(),
+                                            formatForSettings(setting), 0);
+                                }
+                            }
+                        }
+                        dialog.dismiss();
+                    }
+                })
+               .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void updateActiveCustomPreferences() {
+        customPrefs.clear();
+        for(String setting : Settings.System.SETTINGS_TO_RESET) {
+            if (!(Settings.System.getInt(getContentResolver(), setting, 0) == 0)) {
+                customPrefs.add(formatForDialog(setting));
+            }
+        }
+    }
+
+    private String formatForDialog(String str) {
+        str = str.replace("_"," ");
+        str = Character.toUpperCase(str.charAt(0)) + str.substring(1);
+        return str;
+    }
+
+    private String formatForSettings(String str) {
+        str = str.replace(" ","_");
+        str = Character.toLowerCase(str.charAt(0)) + str.substring(1);
+        return str;
+    }
 
     private void setConfigureSummary(String summary) {
         if (summary != null) {
