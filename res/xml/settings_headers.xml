@@ -132,13 +132,12 @@
         <intent android:action="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
     </header>
 
-
-    <!-- Additional Settings -->
+    <!-- Remix Settings -->
     <header
         android:id="@+id/interface_settings"
-        android:fragment="com.android.settings.AOSPAL.AdditionalSettings"
-        android:title="@string/additional_settings_title"
-        android:icon="@drawable/ic_settings_system" />
+        android:title="@string/remix_settings_title"
+        android:icon="@drawable/ic_settings_system"
+        android:fragment="com.android.settings.AOSPAL.RemixSettings" />
 
 
     <!-- PERSONAL -->
@@ -235,6 +234,19 @@
         android:fragment="com.android.settings.DevelopmentSettings"
         android:icon="@drawable/ic_settings_development"
         android:title="@string/development_settings_title" />
+
+    <header
+        android:id="@+id/gesture_anywhere"
+        android:fragment="com.android.settings.chameleonos.labs.gestureanywhere.GestureAnywhereSettings"
+        android:icon="@drawable/ic_dt_gesture_anywhere"
+        android:title="@string/gesture_anywhere_title" />
+
+    <header
+        android:id="@+id/wakelock_blocker"
+        android:title="@string/wakelock_blocker"
+        android:icon="@drawable/ic_settings_wakelock_blocker"
+        android:fragment="com.android.settings.AOSPAL.WakeLockBlocker" />
+
 
     <!-- Performance Controls -->
     <header

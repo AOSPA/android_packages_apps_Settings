@@ -137,6 +137,11 @@ public class AnimationControls extends SettingsPreferenceFragment implements OnP
         mAnimationDuration.setOnPreferenceChangeListener(this);
     }
     @Override
+    public void onStop(){
+        setTitle(R.string.settings_label);
+        super.onStop();
+    }
+    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
                                          Preference preference) {
        if (preference == mAnimNoOverride) {

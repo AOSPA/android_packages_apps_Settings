@@ -1,0 +1,50 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/remix_settings_lockscreen_title"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:key="lockscreen_settings">
+
+    <PreferenceCategory
+        android:title="@string/general">
+
+            <CheckBoxPreference
+                android:key="lockscreen_power_menu"
+                android:title="@string/lockscreen_power_menu_title"
+                android:summary="@string/lockscreen_power_menu_summary" />
+
+            <CheckBoxPreference
+                android:key="battery_around_lockscreen_ring"
+                android:title="@string/battery_around_lockscreen_ring"
+                android:defaultValue="true" />
+
+            <!-- Lock clock -->
+            <PreferenceScreen
+            android:key="lock_clock"
+            android:title="@string/lock_clock_title"
+            android:summary="@string/lock_clock_summary">
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="com.cyanogenmod.lockclock"
+                    android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
+            </PreferenceScreen>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/personalize">
+
+            <PreferenceScreen
+                android:key="keyguard_style"
+                android:fragment="com.android.settings.AOSPAL.LockscreenStyle"
+                android:title="@string/lockscreen_style_title"/>
+
+            <CheckBoxPreference
+                android:key="lockscreen_wallpaper"
+                android:title="@string/lockscreen_wallpaper" />
+
+            <Preference
+                android:key="select_lockscreen_wallpaper"
+                android:title="@string/select_wallpaper" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
