@@ -89,8 +89,8 @@ public class RemixSettings extends SettingsPreferenceFragment {
             frags[0] = new UserInterfaceSettings();
             frags[1] = new StatusBarSettings();
             frags[2] = new NavBarSettings();
-            frags[4] = new LockscreenSettings();
-            frags[5] = new AnimationSettings();
+            frags[3] = new LockscreenSettings();
+            frags[4] = new AnimationSettings();
         }
 
         @Override
