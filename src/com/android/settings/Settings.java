@@ -360,7 +360,7 @@ public class Settings extends PreferenceActivity
         RemixSettings.class.getName(),
         AppOpsSummary.class.getName(),
         QuietHours.class.getName(),
-        GestureAnywhereSetttings.class.getName(),
+        GestureAnywhereSettings.class.getName(),
         WakeLockBlocker.class.getName()
     };
 
