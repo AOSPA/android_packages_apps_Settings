@@ -4,12 +4,6 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="animation_settings">
 
-        <PreferenceScreen
-            android:id="@+id/animations"
-            android:title="@string/title_animation_controls"
-            android:summary="@string/header_summary_animation"
-            android:fragment="com.android.settings.AOSPAL.fragments.AnimationControls" />
-
         <ListPreference
             android:key="listview_animation"
             android:dialogTitle="@string/listview_animation_title"
