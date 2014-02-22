@@ -49,37 +49,12 @@ import java.io.IOException;
 public class AnimationSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
-    private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
-    private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
-
-    private ListPreference mListViewAnimation;
-    private ListPreference mListViewInterpolator;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.animation_settings);
         PreferenceScreen prefs = getPreferenceScreen();
-
-        //ListView Animations
-        mListViewAnimation = (ListPreference) prefs.findPreference(KEY_LISTVIEW_ANIMATION);
-        if (mListViewAnimation != null) {
-           int listViewAnimation = Settings.System.getInt(getContentResolver(),
-                    Settings.System.LISTVIEW_ANIMATION, 1);
-           mListViewAnimation.setValue(String.valueOf(listViewAnimation));
-           mListViewAnimation.setSummary(mListViewAnimation.getEntry());
-        }
-        mListViewAnimation.setOnPreferenceChangeListener(this);
-
-        mListViewInterpolator = (ListPreference) prefs.findPreference(KEY_LISTVIEW_INTERPOLATOR);
-        if (mListViewInterpolator != null) {
-           int listViewInterpolator = Settings.System.getInt(getContentResolver(),
-                    Settings.System.LISTVIEW_INTERPOLATOR, 1);
-           mListViewInterpolator.setValue(String.valueOf(listViewInterpolator));
-           mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
-        }
-        mListViewInterpolator.setOnPreferenceChangeListener(this);
 
     }
 
@@ -90,24 +65,6 @@ public class AnimationSettings extends SettingsPreferenceFragment implements
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final String key = preference.getKey();
-
-        if (KEY_LISTVIEW_ANIMATION.equals(key)) {
-            int value = Integer.parseInt((String) newValue);
-            int index = mListViewAnimation.findIndexOfValue((String) newValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.LISTVIEW_ANIMATION,
-                    value);
-            mListViewAnimation.setValue(String.valueOf(value));
-            mListViewAnimation.setSummary(mListViewAnimation.getEntry());
-        } else if (KEY_LISTVIEW_INTERPOLATOR.equals(key)) {
-            int value = Integer.parseInt((String) newValue);
-            int index = mListViewInterpolator.findIndexOfValue((String) newValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.LISTVIEW_INTERPOLATOR,
-                    value);
-            mListViewInterpolator.setValue(String.valueOf(value));
-            mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
-            return false;
         }
         return true;
     }
