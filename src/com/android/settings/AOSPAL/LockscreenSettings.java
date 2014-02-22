@@ -58,9 +58,15 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SELECT_LOCKSCREEN_WALLPAPER = "select_lockscreen_wallpaper";
     private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
 
+    private static final String KEY_SEE_THROUGH = "see_through";
+    private static final String KEY_BLUR_RADIUS = "blur_radius";
+
     private CheckBoxPreference mLockScreenPowerMenu;
     private CheckBoxPreference mLockscreenWallpaper;
     private CheckBoxPreference mLockRingBattery;
+    private CheckBoxPreference mSeeThrough;
+
+    private SeekBarPreference mBlurRadius;
     private Preference mSelectLockscreenWallpaper;
 
     private File mWallpaperTemporary;
@@ -114,6 +120,18 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
                     Settings.System.BATTERY_AROUND_LOCKSCREEN_RING, 0) == 1);
         }
 
+        // lockscreen see through
+        mSeeThrough = (CheckBoxPreference) prefs.findPreference(KEY_SEE_THROUGH);
+        if (mSeeThrough != null) {
+            mSeeThrough.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.LOCKSCREEN_SEE_THROUGH, 0) == 1);
+        }
+        mBlurRadius = (SeekBarPreference) prefs.findPreference(KEY_BLUR_RADIUS);
+        mBlurRadius.setProgress(Settings.System.getInt(getContentResolver(),
+                Settings.System.LOCKSCREEN_BLUR_RADIUS, 12));
+        mBlurRadius.setOnPreferenceChangeListener(this);
+        mBlurRadius.setEnabled(mSeeThrough.isChecked() && mSeeThrough.isEnabled());
+
     }
 
     private boolean isToggled(Preference pref) {
@@ -147,8 +165,12 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         if (mWallpaperTemporary.exists()) mWallpaperTemporary.delete();
     }
 
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return false;
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object value) {
+        if (preference == mBlurRadius) {
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_BLUR_RADIUS, (Integer)value);
+        }
+        return true;
     }
 
     @Override
@@ -193,6 +215,12 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
             } catch (ActivityNotFoundException e) {
                 // Do nothing here
             }
+        } else if (preference == mSeeThrough) {
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH,
+                    mSeeThrough.isChecked() ? 1 : 0);
+            if (mSeeThrough.isChecked())
+                Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_WALLPAPER, 0);
+            mBlurRadius.setEnabled(mSeeThrough.isChecked());
         }else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }

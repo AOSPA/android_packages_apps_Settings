@@ -61,22 +61,6 @@
             android:title="@string/owner_info_settings_title"
             android:summary="@string/owner_info_settings_summary"/>
 
-        <CheckBoxPreference
-            android:key="see_through"
-            android:title="@string/see_through_title"
-            android:summary="@string/see_through_summary" />
-
-        <SeekBarPreference
-            android:key="blur_radius"
-            android:title="@string/blur_radius_title"
-            android:summary="@string/blur_radius_summary"
-            android:max="25"
-            android:defaultValue="12" />
-
-        <PreferenceScreen
-            android:title="@string/lockscreen_notifications"
-            android:fragment="com.android.settings.AOSPAL.LockscreenNotifications" />
-
     </PreferenceCategory>
 
 </PreferenceScreen>

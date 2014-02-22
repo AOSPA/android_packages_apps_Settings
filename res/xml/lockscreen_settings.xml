@@ -17,6 +17,18 @@
                 android:title="@string/battery_around_lockscreen_ring"
                 android:defaultValue="true" />
 
+            <CheckBoxPreference
+                android:key="see_through"
+                android:title="@string/see_through_title"
+                android:summary="@string/see_through_summary" />
+
+            <SeekBarPreference
+                android:key="blur_radius"
+                android:title="@string/blur_radius_title"
+                android:summary="@string/blur_radius_summary"
+                android:max="25"
+                android:defaultValue="12" />
+
             <!-- Lock clock -->
             <PreferenceScreen
             android:key="lock_clock"
@@ -31,6 +43,10 @@
 
     <PreferenceCategory
         android:title="@string/personalize">
+
+            <PreferenceScreen
+                android:title="@string/lockscreen_notifications"
+                android:fragment="com.android.settings.AOSPAL.LockscreenNotifications" />
 
             <Preference
                 android:fragment="com.android.settings.cyanogenmod.LockscreenTargets"

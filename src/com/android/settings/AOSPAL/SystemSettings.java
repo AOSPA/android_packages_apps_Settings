@@ -19,10 +19,10 @@ import com.android.internal.util.paranoid.DeviceUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class UserInterfaceSettings extends SettingsPreferenceFragment implements
+public class SystemSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
-    private static final String INTERFACE_SETTINGS = "interface_settings";
+    private static final String SYSTEM_SETTINGS = "system_settings";
 
     private static final String KEY_DUAL_PANEL = "force_dualpanel";
     private static final String KEY_REVERSE_DEFAULT_APP_PICKER = "reverse_default_app_picker";
@@ -40,7 +40,7 @@ public class UserInterfaceSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.interface_settings);
+        addPreferencesFromResource(R.xml.system_settings);
 
         final ContentResolver resolver = getActivity().getContentResolver();
         PreferenceScreen prefs = getPreferenceScreen();
@@ -68,11 +68,11 @@ public class UserInterfaceSettings extends SettingsPreferenceFragment implements
         mSmartPulldown.setValue(String.valueOf(smartPulldown));
         updateSmartPulldownSummary(smartPulldown);
 
-        PreferenceScreen interfaceSettings = (PreferenceScreen) findPreference(INTERFACE_SETTINGS);
+        PreferenceScreen systemSettings = (PreferenceScreen) findPreference(SYSTEM_SETTINGS);
         PreferenceCategory qsCategory = (PreferenceCategory) prefs.findPreference(QS_CATEGORY);
 
         if (!DeviceUtils.isPhone(getActivity())) {
-            interfaceSettings.removePreference(qsCategory);
+            systemSettings.removePreference(qsCategory);
         }
     }
 

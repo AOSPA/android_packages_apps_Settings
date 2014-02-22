@@ -26,8 +26,8 @@ import com.android.internal.util.paranoid.DeviceUtils;
 import com.android.settings.AOSPAL.AnimationSettings;
 import com.android.settings.AOSPAL.NavBarSettings;
 import com.android.settings.AOSPAL.StatusBarSettings;
+import com.android.settings.AOSPAL.SystemSettings;
 import com.android.settings.AOSPAL.LockscreenSettings;
-import com.android.settings.AOSPAL.UserInterfaceSettings;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -86,7 +86,7 @@ public class RemixSettings extends SettingsPreferenceFragment {
 
         public StatusBarAdapter(FragmentManager fm) {
             super(fm);
-            frags[0] = new UserInterfaceSettings();
+            frags[0] = new SystemSettings();
             frags[1] = new StatusBarSettings();
             frags[2] = new NavBarSettings();
             frags[3] = new LockscreenSettings();
@@ -112,7 +112,7 @@ public class RemixSettings extends SettingsPreferenceFragment {
     private String[] getTitles() {
         String titleString[];
         titleString = new String[]{
-                    getString(R.string.remix_settings_interface_title),
+                    getString(R.string.remix_settings_system_title),
                     getString(R.string.remix_settings_statusbar_title),
                     getString(R.string.navigation_bar),
                     getString(R.string.remix_settings_lockscreen_title),
