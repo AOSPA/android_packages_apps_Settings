@@ -1,0 +1,56 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/remix_settings_system_title"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:key="notification_drawer_qs_settings">
+
+   <PreferenceCategory
+        android:key="qs_category"
+        android:title="@string/remix_settings_qs_title">
+
+        <!-- Quick Settings Pulldown -->
+        <ListPreference
+            android:key="quick_pulldown"
+            android:title="@string/title_quick_pulldown"
+            android:summary="@string/qs_pulldown_summary"
+            android:entries="@array/quick_pulldown_entries"
+            android:entryValues="@array/quick_pulldown_values"
+            android:persistent="false" />
+
+        <ListPreference
+            android:key="smart_pulldown"
+            android:title="@string/smart_pulldown_title"
+            android:entries="@array/smart_pulldown_entries"
+            android:entryValues="@array/smart_pulldown_values"
+            android:persistent="false" />
+
+   </PreferenceCategory>
+
+   <PreferenceCategory
+            android:title="@string/remix_settings_notification_drawer_qs">
+
+        <CheckBoxPreference
+            android:key="noti_reminder_enabled"
+            android:title="@string/noti_reminder_enable_title"
+            android:summaryOn="@string/enabled"
+            android:summaryOff="@string/disabled"
+            android:defaultValue="false" />
+
+        <ListPreference
+            android:key="noti_reminder_sound"
+            android:defaultValue="0"
+            android:title="@string/noti_reminder_sound_title"
+            android:entries="@array/noti_reminder_sound_entries"
+            android:entryValues="@array/noti_reminder_sound_values"
+            android:dependency="noti_reminder_enabled" />
+
+        <RingtonePreference
+            android:key="noti_reminder_ringtone"
+            android:title="@string/noti_reminder_ringtone"
+            android:ringtoneType="all"
+            android:showSilent="false"
+            android:dependency="noti_reminder_enabled" />
+
+   </PreferenceCategory>
+
+</PreferenceScreen>
