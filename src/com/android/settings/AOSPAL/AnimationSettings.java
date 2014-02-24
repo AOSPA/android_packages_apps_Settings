@@ -49,6 +49,10 @@ import java.io.IOException;
 public class AnimationSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
+    private static final String KEY_TOAST_ANIMATION = "toast_animation";
+
+    private ListPreference mToastAnimation;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,12 @@ public class AnimationSettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.animation_settings);
         PreferenceScreen prefs = getPreferenceScreen();
 
+	mToastAnimation = (ListPreference) findPreference(KEY_TOAST_ANIMATION);
+	mToastAnimation.setSummary(mToastAnimation.getEntry());
+	int CurrentToastAnimation = Settings.System.getInt(getContentResolver(), Settings.System.ACTIVITY_ANIMATION_CONTROLS[10], 1);
+	mToastAnimation.setValueIndex(CurrentToastAnimation); //set to index of default value
+	mToastAnimation.setSummary(mToastAnimation.getEntries()[CurrentToastAnimation]);
+	mToastAnimation.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -63,8 +73,14 @@ public class AnimationSettings extends SettingsPreferenceFragment implements
         super.onResume();
     }
 
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final String key = preference.getKey();
-        return true;
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+	if (preference == mToastAnimation) {
+            int index = mToastAnimation.findIndexOfValue((String) objValue);
+            Settings.System.putString(getContentResolver(), Settings.System.ACTIVITY_ANIMATION_CONTROLS[10], (String) objValue);
+            mToastAnimation.setSummary(mToastAnimation.getEntries()[index]);
+            Toast.makeText(mContext, "Toast Test", Toast.LENGTH_SHORT).show();
+            return true;
+	}
+        return false;
     }
 }
