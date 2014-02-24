@@ -1,6 +1,5 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/remix_settings_system_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="notification_drawer_qs_settings">
 
@@ -27,7 +26,7 @@
    </PreferenceCategory>
 
    <PreferenceCategory
-            android:title="@string/remix_settings_notification_drawer_qs">
+            android:title="@string/noti_reminder_category">
 
         <CheckBoxPreference
             android:key="noti_reminder_enabled"

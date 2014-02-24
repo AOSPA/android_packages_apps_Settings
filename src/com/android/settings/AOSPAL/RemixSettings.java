@@ -117,7 +117,11 @@ public class RemixSettings extends SettingsPreferenceFragment {
                     getString(R.string.remix_settings_system_title),
                     getString(R.string.remix_settings_statusbar_title),
                     getString(R.string.navigation_bar),
-                    getString(R.string.remix_settings_notification_drawer_qs),
+                    if (!DeviceUtils.isPhone(getActivity())) {
+                        getString(R.string.remix_settings_notification_drawer),
+                    } else {
+                        getString(R.string.remix_settings_notification_drawer_qs),
+                    }
                     getString(R.string.remix_settings_lockscreen_title),
                     getString(R.string.remix_settings_animations_title)};
         return titleString;
