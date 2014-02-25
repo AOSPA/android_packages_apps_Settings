@@ -113,17 +113,23 @@ public class RemixSettings extends SettingsPreferenceFragment {
 
     private String[] getTitles() {
         String titleString[];
+        if (!DeviceUtils.isPhone(getActivity())) {
         titleString = new String[]{
                     getString(R.string.remix_settings_system_title),
                     getString(R.string.remix_settings_statusbar_title),
                     getString(R.string.navigation_bar),
-                    if (!DeviceUtils.isPhone(getActivity())) {
-                        getString(R.string.remix_settings_notification_drawer),
-                    } else {
-                        getString(R.string.remix_settings_notification_drawer_qs),
-                    }
+                    getString(R.string.remix_settings_notification_drawer),
                     getString(R.string.remix_settings_lockscreen_title),
                     getString(R.string.remix_settings_animations_title)};
+        } else {
+        titleString = new String[]{
+                    getString(R.string.remix_settings_system_title),
+                    getString(R.string.remix_settings_statusbar_title),
+                    getString(R.string.navigation_bar),
+                    getString(R.string.remix_settings_notification_drawer_qs),
+                    getString(R.string.remix_settings_lockscreen_title),
+                    getString(R.string.remix_settings_animations_title)};
+        }
         return titleString;
     }
 }
