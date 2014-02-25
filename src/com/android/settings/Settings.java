@@ -86,6 +86,7 @@ import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintServiceSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.AOSPAL.teloradio.TeloRadioSettings;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
@@ -357,7 +358,8 @@ public class Settings extends PreferenceActivity
         HomeSettings.class.getName(),
         RemixSettings.class.getName(),
         AppOpsSummary.class.getName(),
-        QuietHours.class.getName()
+        QuietHours.class.getName(),
+        TeloRadioSettings.class.getName()
     };
 
     @Override
