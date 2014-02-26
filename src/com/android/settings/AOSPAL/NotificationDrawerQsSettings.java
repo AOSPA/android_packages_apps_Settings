@@ -53,6 +53,7 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment imp
 
     private static final String PREF_NOTI_REMINDER_SOUND = "noti_reminder_sound";
     private static final String PREF_NOTI_REMINDER_ENABLED = "noti_reminder_enabled";
+    private static final String PREF_NOTI_REMINDER_INTERVAL = "noti_reminder_interval";
     private static final String PREF_NOTI_REMINDER_RINGTONE = "noti_reminder_ringtone";
 
     private static final String QS_CATEGORY = "qs_category";
@@ -63,6 +64,7 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment imp
     ListPreference mReminderMode;
     ListPreference mQuickPulldown;
     ListPreference mSmartPulldown;
+    ListPreference mReminderInterval;
 
     RingtonePreference mReminderRingtone;
 
@@ -125,6 +127,12 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment imp
         mReminderRingtone.setOnPreferenceChangeListener(this);
         mReminderRingtone.setEnabled(mode != 0);
 
+        mReminderInterval = (ListPreference) findPreference(PREF_NOTI_REMINDER_INTERVAL);
+        int interval = Settings.System.getIntForUser(getContentResolver(),
+                Settings.System.REMINDER_ALERT_INTERVAL, 0, UserHandle.USER_CURRENT);
+        mReminderInterval.setOnPreferenceChangeListener(this);
+        updateReminderIntervalSummary(interval);
+
     }
 
     @Override
@@ -167,6 +175,12 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment imp
                     Settings.System.REMINDER_ALERT_RINGER,
                     val.toString(), UserHandle.USER_CURRENT);
             return true;
+       } else if (preference == mReminderInterval) {
+            int interval = Integer.valueOf((String) newValue);
+            Settings.System.putIntForUser(getContentResolver(),
+                    Settings.System.REMINDER_ALERT_INTERVAL,
+                    interval, UserHandle.USER_CURRENT);
+            updateReminderIntervalSummary(interval);
         }
         return false;
     }
@@ -197,6 +211,35 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment imp
                     : R.string.smart_pulldown_dismissable);
             mSmartPulldown.setSummary(res.getString(R.string.smart_pulldown_summary, type));
         }
+    }
+
+    private void updateReminderIntervalSummary(int value) {
+        int resId;
+        switch (value) {
+            case 1000:
+                resId = R.string.noti_reminder_interval_1s;
+                 break;
+            case 2000:
+                resId = R.string.noti_reminder_interval_2s;
+                break;
+            case 2500:
+                resId = R.string.noti_reminder_interval_2dot5s;
+                break;
+            case 3000:
+                resId = R.string.noti_reminder_interval_3s;
+                break;
+            case 3500:
+                resId = R.string.noti_reminder_interval_3dot5s;
+                break;
+            case 4000:
+                resId = R.string.noti_reminder_interval_4s;
+                break;
+            default:
+                resId = R.string.noti_reminder_interval_1dot5s;
+                break;
+        }
+        mReminderInterval.setValue(Integer.toString(value));
+        mReminderInterval.setSummary(getResources().getString(resId));
     }
 
     private void updateReminderModeSummary(int value) {
