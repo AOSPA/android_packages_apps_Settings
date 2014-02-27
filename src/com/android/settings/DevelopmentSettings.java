@@ -268,6 +268,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mClearAdbKeys = findPreference(CLEAR_ADB_KEYS);
         if (!SystemProperties.getBoolean("ro.adb.secure", false)) {
             if (debugDebuggingCategory != null) {
+                debugDebuggingCategory.removePreference(mAdbParanoid);
                 debugDebuggingCategory.removePreference(mClearAdbKeys);
             }
         }
