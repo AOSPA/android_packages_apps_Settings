@@ -26,35 +26,6 @@
    </PreferenceCategory>
 
    <PreferenceCategory
-        android:title="@string/remix_settings_notification_background_transparency">
-
-        <ListPreference
-            android:key="notification_wallpaper"
-            android:persistent="false"
-            android:dialogTitle="@string/notification_wallpaper_title"
-            android:title="@string/notification_wallpaper_title"
-            android:entries="@array/notification_wallpaper_entries"
-            android:entryValues="@array/notification_wallpaper_values"/>
-
-        <ListPreference
-            android:key="notification_wallpaper_landscape"
-            android:persistent="false"
-            android:dialogTitle="@string/notification_wallpaper_landscape_title"
-            android:title="@string/notification_wallpaper_landscape_title"
-            android:entries="@array/notification_wallpaper_landscape_entries"
-            android:entryValues="@array/notification_wallpaper_landscape_values"/>
-
-        <com.android.settings.slim.SeekBarPreference
-             android:key="notification_wallpaper_alpha"
-             android:title="@string/notif_wallpaper_alpha_title" />
-
-        <com.android.settings.slim.SeekBarPreference
-             android:key="notification_alpha"
-             android:title="@string/notif_alpha_title" />
-
-   </PreferenceCategory>
-
-   <PreferenceCategory
             android:title="@string/noti_reminder_category">
 
         <CheckBoxPreference
