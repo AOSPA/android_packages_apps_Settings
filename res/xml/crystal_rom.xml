@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="crystal_rom"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <PreferenceCategory
+        android:key="cr_settings"
+        android:title="@string/crystal_title" >
+
+    <PreferenceScreen
+        android:key="batterybar_menu"
+        android:fragment="com.android.settings.crystalroms.BatteryBarMenu"
+        android:title="@string/cat_battery_bar" />
+
+    <PreferenceScreen
+        android:key="cpustat_menu"
+        android:fragment="com.android.settings.crystalroms.cpustats.TimeInState"
+        android:title="@string/cat_cpustates" />
+
+    <PreferenceScreen
+        android:key="other_settings"
+        android:fragment="com.android.settings.crystalroms.OtherSettings"
+        android:title="@string/other_settings" />
+
+    <CheckBoxPreference
+        android:key="pref_disable_boot_animation"
+        android:title="@string/pref_disable_boot_animation_title"
+        android:summary="@string/pref_disable_boot_animation_summary"
+        android:defaultValue="false" />
+
+    <CheckBoxPreference
+        android:key="pref_force_highend_gfx"
+        android:title="@string/pref_force_highend_gfx_title"
+        android:summary="@string/pref_force_highend_gfx_summary" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
+

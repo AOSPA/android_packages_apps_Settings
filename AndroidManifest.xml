@@ -1623,6 +1623,19 @@
                 android:resource="@id/display_settings" />
         </activity>
 
+        <!-- CrystalRoms -->
+
+        <activity android:name=".crystalroms.BatteryBarMenu" />
+
+        <activity android:name=".crystalroms.PartitionInfo"
+                android:label="@string/partition_info_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="Settings$UserSettingsActivity"
                 android:uiOptions="splitActionBarWhenNarrow"
                 android:label="@string/user_settings_title"
