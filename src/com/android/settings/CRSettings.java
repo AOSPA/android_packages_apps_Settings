@@ -70,6 +70,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
 
     private CheckBoxPreference mDisableBootanimPref;
     private CheckBoxPreference mForceHighEndGfx;
+    private CheckBoxPreference mKonstaNavbar;
 
     private Context mContext;
 
