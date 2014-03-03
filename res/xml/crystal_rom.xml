@@ -19,10 +19,6 @@
         android:fragment="com.android.settings.crystalroms.cpustats.TimeInState"
         android:title="@string/cat_cpustates" />
 
-    <PreferenceScreen
-        android:key="other_settings"
-        android:fragment="com.android.settings.crystalroms.OtherSettings"
-        android:title="@string/other_settings" />
 
     <CheckBoxPreference
         android:key="pref_disable_boot_animation"

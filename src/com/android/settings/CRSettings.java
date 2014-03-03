@@ -64,6 +64,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private static final String DISABLE_BOOTANIMATION_PERSIST_PROP = "persist.sys.nobootanimation";
     private static final String FORCE_HIGHEND_GFX_PREF = "pref_force_highend_gfx";
     private static final String FORCE_HIGHEND_GFX_PERSIST_PROP = "persist.sys.force_highendgfx";
+    private static final String KONSTA_NAVBAR = "konsta_navbar";
 
     private final Configuration mCurrentConfig = new Configuration();
 
@@ -78,6 +79,10 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         addPreferencesFromResource(R.xml.crystal_rom);
 
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        mKonstaNavbar = (CheckBoxPreference) findPreference(KONSTA_NAVBAR);
+        mKonstaNavbar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.KONSTA_NAVBAR, 0) == 1);
 
         if (ActivityManager.isLowRamDeviceStatic()) {
             mForceHighEndGfx = (CheckBoxPreference) prefSet.findPreference(FORCE_HIGHEND_GFX_PREF);
@@ -99,6 +104,31 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     @Override
     public void onPause() {
         super.onPause();
+    }
+
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+
+        if (preference == mKonstaNavbar) {
+            Settings.System.putInt(getContentResolver(), Settings.System.KONSTA_NAVBAR,
+                    mKonstaNavbar.isChecked() ? 1 : 0);
+
+            new AlertDialog.Builder(getActivity())
+                    .setTitle(getResources().getString(R.string.konsta_navbar_dialog_title))
+                    .setMessage(getResources().getString(R.string.konsta_navbar_dialog_msg))
+                    .setNegativeButton(getResources().getString(R.string.konsta_navbar_dialog_negative), null)
+                    .setCancelable(false)
+                    .setPositiveButton(getResources().getString(R.string.konsta_navbar_dialog_positive), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+                            powerManager.reboot(null);
+                        }
+                    })
+                    .create()
+                    .show();
+        } else {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        }
+        return true;
     }
 
     @Override
