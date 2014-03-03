@@ -16,15 +16,12 @@
         android:icon="@drawable/ic_settings_wakelock_blocker"
         android:fragment="com.android.settings.AOSPAL.WakeLockBlocker" />
 
+    <!-- Performance Controls -->
     <PreferenceScreen
         android:key="@+id/performance_controls"
+        android:fragment="com.brewcrewfoo.performance.activities.MainActivity"
         android:icon="@drawable/ic_settings_performance"
-        android:title="@string/performance_settings" >
-    <intent
-        android:targetPackage="com.brewcrewfoo.performance"
-        android:action="android.intent.action.MAIN"
-        android:targetClass="com.brewcrewfoo.performance.activities.MainActivity" />
-    </PreferenceScreen>
+        android:title="@string/performance_settings" />
 
     <PreferenceCategory
         android:title="@string/remix_settings_interface_title">
