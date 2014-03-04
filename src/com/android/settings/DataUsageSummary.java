@@ -867,7 +867,7 @@ public class DataUsageSummary extends Fragment {
         if (LOGD) Log.d(TAG, "setMobileDataEnabled()");
         mConnService.setMobileDataEnabled(enabled);
         mMobileDataEnabled = enabled;
-        updatePolicy(true);
+        updatePolicy(false);
     }
 
     private boolean isNetworkPolicyModifiable(NetworkPolicy policy) {
@@ -1043,6 +1043,8 @@ public class DataUsageSummary extends Fragment {
                     ConfirmDataDisableFragment.show(DataUsageSummary.this);
                 }
             }
+
+            updatePolicy(false);
         }
     };
 
