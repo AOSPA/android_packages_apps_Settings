@@ -107,8 +107,8 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         super.onPause();
     }
 
+    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-
         if (preference == mKonstaNavbar) {
             Settings.System.putInt(getContentResolver(), Settings.System.KONSTA_NAVBAR,
                     mKonstaNavbar.isChecked() ? 1 : 0);
