@@ -31,6 +31,11 @@
             android:key="accelerometer"
             android:title="@string/accelerometer_title"/>
 
+        <PreferenceScreen
+                android:key="screen_recorder"
+                android:title="@string/screen_recorder_title"
+                android:fragment="com.android.settings.chameleonos.ScreenRecorderSettings" />
+
         <ListPreference
                 android:key="screen_timeout"
                 android:title="@string/screen_timeout"
@@ -44,12 +49,10 @@
                 android:title="@string/screensaver_settings_title"
                 android:fragment="com.android.settings.DreamSettings" />
 
-        <com.android.settings.WarnedListPreference
+        <com.android.settings.FontDialogPreference
                 android:key="font_size"
                 android:title="@string/title_font_size"
                 android:summary="@string/summary_font_size"
-                android:entries="@array/entries_font_size"
-                android:entryValues="@array/entryvalues_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
 
         <PreferenceScreen
@@ -58,8 +61,47 @@
                 android:title="@string/notification_led_category_title" />
 
         <PreferenceScreen
+                android:key="battery_light"
+                android:title="@string/battery_light_title"
+                android:fragment="com.android.settings.notificationlight.BatteryLightSettings" />
+
+        <PreferenceScreen
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
+
+        <CheckBoxPreference
+                android:key="adaptive_backlight"
+                android:title="@string/adaptive_backlight_title"
+                android:summary="@string/adaptive_backlight_summary"
+                android:defaultValue="true" />
+
+        <!-- DeviceParts Device Specific Display settings -->
+        <Preference
+            android:key="advanced_display_settings"
+            android:title="@string/advanced_settings_title">
+            <intent
+                android:action="com.cyanogenmod.action.LAUNCH_DEVICE_SETTINGS"
+                android:targetPackage="com.cyanogenmod.settings.device"
+                android:targetClass="com.cyanogenmod.settings.device.DisplaySettings" />
+        </Preference>
+
+        <CheckBoxPreference
+            android:key="wake_when_plugged_or_unplugged"
+            android:title="@string/wake_when_plugged_or_unplugged_title"
+            android:summary="@string/wake_when_plugged_or_unplugged_summary"
+            android:defaultValue="false" />
+
+        <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="double_tap_sleep_gesture"
+        android:title="@string/status_bar_double_tap_to_sleep_title"
+        android:summary="@string/status_bar_double_tap_to_sleep_summary"
+        android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="double_tap_wake_gesture"
+            android:title="@string/double_tap_to_wake_title"
+            android:summary="@string/double_tap_to_wake_summary"
+            android:defaultValue="false" />
 
 </PreferenceScreen>
