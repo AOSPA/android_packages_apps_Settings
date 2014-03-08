@@ -3,6 +3,7 @@ package com.android.settings.AOSPAL;
 import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -26,6 +27,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_DUAL_PANEL = "force_dualpanel";
     private static final String KEY_REVERSE_DEFAULT_APP_PICKER = "reverse_default_app_picker";
+    private static final String TELO_RADIO_SETTINGS = "telo_radio_settings";
 
     private CheckBoxPreference mDualPanel;
     private CheckBoxPreference mReverseDefaultAppPicker;
@@ -38,6 +40,12 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
         final ContentResolver resolver = getActivity().getContentResolver();
         PreferenceScreen prefs = getPreferenceScreen();
+
+        PreferenceScreen systemSettings = (PreferenceScreen) findPreference(SYSTEM_SETTINGS);
+
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
+            systemSettings.removePreference(TELO_RADIO_SETTINGS);
+        }
 
         mDualPanel = (CheckBoxPreference) findPreference(KEY_DUAL_PANEL);
         mDualPanel.setChecked(Settings.System.getBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL, false));

@@ -86,7 +86,6 @@ import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintServiceSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
-import com.android.settings.AOSPAL.teloradio.TeloRadioSettings;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
@@ -361,7 +360,6 @@ public class Settings extends PreferenceActivity
         RemixSettings.class.getName(),
         AppOpsSummary.class.getName(),
         QuietHours.class.getName(),
-        TeloRadioSettings.class.getName(),
         com.brewcrewfoo.performance.activities.MainActivity.class.getName()
     };
 
@@ -563,11 +561,6 @@ public class Settings extends PreferenceActivity
             } else if (id == R.id.bluetooth_settings) {
                 // Remove Bluetooth Settings if Bluetooth service is not available.
                 if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
-                    target.remove(i);
-                }
-            } else if (id == R.id.telo_radio_settings) {
-                // Remove ConnectionManager if the device does not have Telephony.
-                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
                     target.remove(i);
                 }
             } else if (id == R.id.data_usage_settings) {

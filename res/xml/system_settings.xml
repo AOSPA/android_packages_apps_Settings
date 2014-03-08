@@ -4,6 +4,13 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="system_settings">
 
+    <!-- TeloRadio -->
+    <PreferenceScreen
+        android:key="@+id/telo_radio_settings"
+        android:fragment="com.android.settings.AOSPAL.teloradio.TeloRadioSettings"
+        android:title="@string/telo_radio_settings_title"
+        android:icon="@drawable/ic_settings_teloradio" />
+
     <PreferenceScreen
         android:key="@+id/gesture_anywhere"
         android:fragment="com.android.settings.chameleonos.labs.gestureanywhere.GestureAnywhereSettings"
