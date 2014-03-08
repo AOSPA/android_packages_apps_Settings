@@ -58,15 +58,22 @@
         android:fragment="com.android.settings.WirelessSettings"
         android:icon="@drawable/empty_icon" />
 
-    <!-- DEVICE -->
-    <header android:id="@+id/device_section"
-        android:title="@string/header_category_device" />
+    <!-- Crystal -->
+    <header android:id="@+id/crystal_rom"
+        android:title="@string/crystal_title" />
 
     <header
         android:id="@+id/cr_settings"
         android:fragment="com.android.settings.CRSettings"
         android:title="@string/crystal_title"
         android:icon="@drawable/ic_action_set" />
+
+    <!-- HALO -->
+    <header
+        android:id="@+id/halo_settings"
+        android:fragment="com.android.settings.paranoid.Halo"
+        android:icon="@drawable/ic_settings_halo"
+        android:title="@string/halo_settings_title" />
 
     <!-- Partition info -->
     <header
@@ -77,6 +84,10 @@
             android:targetPackage="com.android.settings"
             android:targetClass="com.android.settings.crystalroms.PartitionInfo" />
     </header>
+
+    <!-- DEVICE -->
+    <header android:id="@+id/device_section"
+        android:title="@string/header_category_device" />
 
     <!-- Multi Sim Settings - this is in the settings process -->
     <header
@@ -184,13 +195,6 @@
     <!-- PERSONAL -->
     <header android:id="@+id/personal_section"
         android:title="@string/header_category_personal" />
-
-    <!-- HALO -->
-    <header
-        android:id="@+id/halo_settings"
-        android:fragment="com.android.settings.paranoid.Halo"
-        android:icon="@drawable/ic_settings_halo"
-        android:title="@string/halo_settings_title" />
 
     <!-- Location -->
     <header
