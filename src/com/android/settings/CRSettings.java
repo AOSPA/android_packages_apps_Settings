@@ -109,7 +109,12 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mKonstaNavbar) {
+        if (preference == mDisableBootanimPref) {
+            SystemProperties.set(DISABLE_BOOTANIMATION_PERSIST_PROP, mDisableBootanimPref.isChecked() ? "1" : "0");
+        } else if (preference == mForceHighEndGfx) {
+            SystemProperties.set(FORCE_HIGHEND_GFX_PERSIST_PROP,
+                    mForceHighEndGfx.isChecked() ? "true" : "false");
+        } else if (preference == mKonstaNavbar) {
             Settings.System.putInt(getContentResolver(), Settings.System.KONSTA_NAVBAR,
                     mKonstaNavbar.isChecked() ? 1 : 0);
 
@@ -126,19 +131,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                     })
                     .create()
                     .show();
-        } else {
-            return super.onPreferenceTreeClick(preferenceScreen, preference);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mDisableBootanimPref) {
-            SystemProperties.set(DISABLE_BOOTANIMATION_PERSIST_PROP, mDisableBootanimPref.isChecked() ? "1" : "0");
-        } else if (preference == mForceHighEndGfx) {
-            SystemProperties.set(FORCE_HIGHEND_GFX_PERSIST_PROP,
-                    mForceHighEndGfx.isChecked() ? "true" : "false");
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
