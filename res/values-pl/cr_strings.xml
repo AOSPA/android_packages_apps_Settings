@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2012-2013 The CrystalRoms Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+
+    <string name="crystal_title">CrystalRom</string>
+
+    <!-- Navigation Bar Height -->
+    <string name="navigation_bar_height">Wysokość paska nawigacji</string>
+    <string name="navigation_bar_height_48">48dp</string>
+    <string name="navigation_bar_height_44">44dp</string>
+    <string name="navigation_bar_height_40">40dp</string>
+    <string name="navigation_bar_height_36">36dp</string>
+    <string name="navigation_bar_height_32">32dp</string>
+    <string name="navigation_bar_height_28">28dp</string>
+    <string name="navigation_bar_height_24">24dp</string>
+
+    <!-- Navbar -->
+    <string name="konsta_navbar">Pasek nawigacji</string>
+    <string name="konsta_navbar_dialog_title">zalecany reboot</string>
+    <string name="konsta_navbar_dialog_msg">Aby włączyć/wyłączyć pasek nawigacji musisz zresetować urządzenie</string>
+    <string name="konsta_navbar_dialog_negative">Zresetuj potem</string>
+    <string name="konsta_navbar_dialog_positive">Zresetuj teraz</string>
+
+    <!-- Partition Info -->
+    <string name="partition_info_title">Informacje o partycjach</string>
+    <string name="partition_info_system">/system</string>
+    <string name="partition_info_data">/data</string>
+    <string name="partition_info_cache">/cache</string>
+    <string name="partition_info_sdcard">/sdcard (FAT)</string>
+    <string name="partition_info_sdext">/sd-ext (EXT)</string>
+    <string name="partition_info_used_of">/</string>
+    <string name="partition_info_signs">Znaki</string>
+    <string name="partition_info_signs_summary">U -> Używane | W -> Wolne | W -> Wielkość</string>
+
+    <!-- Battery Bar -->
+    <string name="cat_battery_bar">Pasek baterii</string>
+    <string name="pref_battery_bar">Pasek baterii</string>
+    <string name="pref_battery_bar_color">Kolor paska baterii</string>
+    <string name="pref_battery_bar_style_title">Styl paska baterii</string>
+    <string name="pref_battery_bar_thickness_title">Grubość paska baterii</string>
+    <string name="pref_battery_bar_animate_title">Animacja ładowania</string>
+    <string name="pref_battery_bar_animate_summary"></string>
+    <string name="pref_regular">Normalny</string>
+    <string name="pref_center_mirror">Środkowy</string>
+
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Wybór koloru</string>
+    <string name="press_color_to_apply">Kliknij na kolor aby włączyć</string>
+    <string name="arrow_right">-</string>
+    <string name="arrow_down">|</string>
+    <string name="hex">Hex:</string>
+    <string name="hex_hint">#FF000000</string>
+    <string name="set">Ustaw</string>
+    <string name="ics_color">Holo</string>
+
+    <!-- Performance : Disable bootanimation -->
+    <string name="pref_disable_boot_animation_title">Wyłącz bootanimację</string>
+    <string name="pref_disable_boot_animation_summary">Nie włącza bootanimacji aby tel. się szybciej uruchamiał.</string>
+
+    <!-- Status bar -->
+    <string name="status_bar_title">Pasek Stanu</string>
+    <string name="status_bar_style_title">Style</string>
+
+    <!-- Status bar | Clock -->
+    <string name="status_bar_clock">Zegar i data</string>
+    <string name="status_bar_clock_title">Styl zegara i daty</string>
+    <string name="clock_title_enable">Położenie zegara</string>
+    <string name="clock_enabled">Włączony</string>
+    <string name="clock_disabled">Wyłączony</string>
+    <string name="clock_color_title">Kolor</string>
+    <string name="status_bar_clock_style_reset">Zresetuj kolor</string>
+    <string name="status_bar_show_clock_title">Pokaż zegar i datę</string>
+    <string name="status_bar_am_pm_title">AM/PM</string>
+    <string name="status_bar_am_pm_info">24-Godzinny zegar włączony</string>
+    <string name="enable_clock_weekday">Dzień tygodnia</string>
+    <string name="enable_clock_weekday_summary">Skrócony dzień tygodnia</string>
+    <string name="right_clock">Zegar na prawo</string>
+    <string name="center_clock">Zegar na środku</string>
+    <string name="dont_show">Nie pokazuj</string>
+    <string name="clock_date_display">Data</string>
+    <string name="clock_date_display_summary">Wyświetl niestandardową datę przed zegarem</string>
+    <string name="clock_date_style">Styl daty</string>
+    <string name="clock_date_format">Format daty</string>
+    <string name="clock_date_string_edittext_title">Musi być w MM/dd/yy</string>
+    <string name="clock_date_string_edittext_summary">Ustaw</string>
+    <string name="am_pm_clock_normal">Normalna wielkość czcionki</string>
+    <string name="am_pm_clock_small">Mała wielkość czcionki</string>
+    <string name="am_pm_clock_none">Nie pokazuj</string>
+    <string name="clock_date_display_none">Nie pokazuj</string>
+    <string name="clock_date_display_small">Mała wielkość czcionki</string>
+    <string name="clock_date_display_normal">Normalna wielkość czcionki</string>
+    <string name="clock_date_style_normal">Normalne</string>
+    <string name="clock_date_style_lowercase">Małe</string>
+    <string name="clock_date_style_uppercase">Duże</string>
+    <string name="clock_date_format_custom">Niestandardoy format javy</string>
+    <string name="status_bar_clock_style_reset_message">Zresetuj kolor zegara</string>
+    <string name="color_default">Orginalny kolor</string>
+
+    <!-- CPU Time in States -->
+    <string name="cat_cpustates">Użycie stanów procesora</string>
+    <string name="mt_refresh">Odśwież</string>
+    <string name="mt_reset">Reset</string>
+    <string name="mt_restore">Przywróć</string>
+    <string name="time_in_state">UŻYCIE STANÓW W CZASIE</string>
+    <string name="unused_cpu_states">NIEUŻYWANE STANY CPU</string>
+    <string name="total_state_time">CAŁY CZAS UŻYWANIA CPU</string>
+    <string name="no_states_file_found">Brak pliku stanów, skontaktuj się z developerem</string>
+    <string name="deep_sleep">"Uśpienie"</string> 
+
+    <!-- Performance : Force high-end graphics -->
+    <string name="pref_force_highend_gfx_title">Włącz wszystkie efekty graficzne</string>
+    <string name="pref_force_highend_gfx_summary">Włącza efekty graficzne takie jak przezroczysty pasek stanu</string>
+
+    <string name="clock_font_style_title">Font</string>
+    <string name="clock_font_bold">Bold</string>
+    <string name="clock_font_condensed">Condensed</string>
+    <string name="clock_font_light">Light</string>
+    <string name="clock_font_light_italic">Light Italic</string>
+    <string name="clock_font_normal">Normal</string>
+</resources>
