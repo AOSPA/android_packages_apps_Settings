@@ -96,8 +96,6 @@ import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settings.paranoid.QuietHours;
 
-import com.brewcrewfoo.performance.activities.MainActivity;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -359,8 +357,7 @@ public class Settings extends PreferenceActivity
         HomeSettings.class.getName(),
         RemixSettings.class.getName(),
         AppOpsSummary.class.getName(),
-        QuietHours.class.getName(),
-        com.brewcrewfoo.performance.activities.MainActivity.class.getName()
+        QuietHours.class.getName()
     };
 
     @Override
@@ -1151,5 +1148,4 @@ public class Settings extends PreferenceActivity
     public static class PrintSettingsActivity extends Settings { /* empty */ }
     public static class PrintJobSettingsActivity extends Settings { /* empty */ }
     public static class ASSRamBarActivity extends Settings { /* empty */ }
-    public static class MainActivity extends Settings { /* empty */ }
 }

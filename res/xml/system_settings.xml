@@ -23,12 +23,14 @@
         android:icon="@drawable/ic_settings_wakelock_blocker"
         android:fragment="com.android.settings.AOSPAL.WakeLockBlocker" />
 
-    <!-- Performance Controls -->
     <PreferenceScreen
-        android:key="@+id/performance_controls"
-        android:fragment="com.brewcrewfoo.performance.activities.MainActivity"
-        android:icon="@drawable/ic_settings_performance"
-        android:title="@string/performance_settings" />
+        android:key="@+id/kernel_tweaker"
+        android:title="@string/kernel_tweaker_title"
+        android:icon="@drawable/ic_settings_performance" >
+        <intent android:action="android.intent.action.MAIN"
+                android:targetClass="com.dsht.kerneltweaker.MainActivity"
+                android:targetPackage="com.dsht.kerneltweaker" />
+    </PreferenceScreen>
 
     <PreferenceCategory
         android:title="@string/remix_settings_interface_title">
