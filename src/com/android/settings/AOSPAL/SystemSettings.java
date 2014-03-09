@@ -1,6 +1,5 @@
 package com.android.settings.AOSPAL;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -44,7 +43,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
         PreferenceScreen systemSettings = (PreferenceScreen) findPreference(SYSTEM_SETTINGS);
 
-        if (!DeviceUtils.isPhone(getActivity())) {
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
             systemSettings.removePreference(findPreference(TELO_RADIO_SETTINGS));
         }
 
