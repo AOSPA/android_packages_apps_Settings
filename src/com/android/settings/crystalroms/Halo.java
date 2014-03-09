@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.paranoid;
+package com.android.settings.crystalroms;
 
 import android.app.ActivityManager;
 import android.app.INotificationManager;
