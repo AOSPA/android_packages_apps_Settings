@@ -114,6 +114,12 @@
                 android:title="@string/pa_version"
                 android:summary="@string/pa_version_default" />
 
+        <!-- CrystalPA -->
+        <Preference android:key="crystalpa"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/crystalpa_version"
+                android:summary="@string/crystalpa_default" />
+
         <!-- Device FCC equipment id -->
         <Preference android:key="fcc_equipment_id"
                 style="?android:preferenceInformationStyle"
