@@ -119,14 +119,6 @@ public class Utils {
      */
     private static final String META_DATA_PREFERENCE_SUMMARY = "com.android.settings.summary";
 
-    // Device types
-    private static final int DEVICE_PHONE = 0;
-    private static final int DEVICE_HYBRID = 1;
-    private static final int DEVICE_TABLET = 2;
-
-    // Device type reference
-    private static int sDeviceType = -1;
-
     /**
      * Finds a matching activity for a preference's intent. If a matching
      * activity is not found, it will remove the preference.
