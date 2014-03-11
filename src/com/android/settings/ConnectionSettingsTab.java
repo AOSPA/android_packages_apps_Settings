@@ -35,7 +35,6 @@ import android.os.Bundle;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.UserId;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceActivity.Header;
