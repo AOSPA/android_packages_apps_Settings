@@ -61,13 +61,15 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment imp
     private static final String PREF_NOTI_REMINDER_ENABLED = "noti_reminder_enabled";
     private static final String PREF_NOTI_REMINDER_INTERVAL = "noti_reminder_interval";
     private static final String PREF_NOTI_REMINDER_RINGTONE = "noti_reminder_ringtone";
+    private static final String PREF_NOTIFICATION_HIDE_CARRIER = "notification_hide_carrier";
     private static final String QS_CATEGORY = "qs_category";
     private static final String QUICK_PULLDOWN = "quick_pulldown";
     private static final String SMART_PULLDOWN = "smart_pulldown";
     private static final String CLOCK_SHORTCUT = "clock_shortcut";
-     private static final String CALENDAR_SHORTCUT = "calendar_shortcut";
+    private static final String CALENDAR_SHORTCUT = "calendar_shortcut";
 
     CheckBoxPreference mReminder;
+    CheckBoxPreference mHideCarrier;
     ListPreference mReminderMode;
     ListPreference mQuickPulldown;
     ListPreference mSmartPulldown;
@@ -142,6 +144,12 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment imp
         mReminderInterval.setOnPreferenceChangeListener(this);
         updateReminderIntervalSummary(interval);
 
+       mHideCarrier = (CheckBoxPreference) findPreference(PREF_NOTIFICATION_HIDE_CARRIER);
+        boolean hideCarrier = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.NOTIFICATION_HIDE_CARRIER, 0) == 1;
+        mHideCarrier.setChecked(hideCarrier);
+        mHideCarrier.setOnPreferenceChangeListener(this);
+
         mClockShortcut = (AppSelectListPreference) findPreference(CLOCK_SHORTCUT);
         mClockShortcut.setOnPreferenceChangeListener(this);
 
@@ -209,6 +217,11 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment imp
             // a value of null means to use the default
             Settings.System.putString(getContentResolver(), Settings.System.CALENDAR_SHORTCUT, value);
             updateClockCalendarSummary();
+            return true;
+        } else if (preference == mHideCarrier) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NOTIFICATION_HIDE_CARRIER,
+                    (Boolean) objValue ? 1 : 0);
             return true;
         }
         return false;
