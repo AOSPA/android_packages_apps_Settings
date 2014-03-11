@@ -349,8 +349,8 @@ public class ConnectionSettingsTab extends PreferenceActivity
                 if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI)) {
                     target.remove(header);
                 }
-            } else if (id == R.id.operator_settings || id == R.id.manufacturer_settings ||
-                    id == R.id.advanced_settings) {
+            } else if (id == R.id.operator_settings || 
+                    id == R.id.manufacturer_settings) {
                 Utils.updateHeaderToSpecificActivityFromMetaDataOrRemove(this, target, header);
             } else if (id == R.id.bluetooth_settings) {
                 // Remove Bluetooth Settings if Bluetooth service is not available.
@@ -368,11 +368,6 @@ public class ConnectionSettingsTab extends PreferenceActivity
                 } catch (RemoteException e) {
                     // ignored
                 }
-            }
-
-            if (UserId.MU_ENABLED && UserId.myUserId() != 0
-                    && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
-                target.remove(header);
             }
 
             // Increment if the current one wasn't removed by the Utils code.

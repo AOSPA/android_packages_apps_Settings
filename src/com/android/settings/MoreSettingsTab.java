@@ -381,11 +381,8 @@ public class MoreSettingsTab extends PreferenceActivity
             Header header = target.get(i);
             // Ids are integers, so downcasting
             int id = (int) header.id;
-            if (id == R.id.dock_settings) {
-                if (!needsDockSettings())
-                    target.remove(header);
-            } else if (id == R.id.operator_settings || id == R.id.manufacturer_settings ||
-                    id == R.id.advanced_settings) {
+            if (id == R.id.operator_settings || 
+                    id == R.id.manufacturer_settings) {
                 Utils.updateHeaderToSpecificActivityFromMetaDataOrRemove(this, target, header);
             } else if (id == R.id.launcher_settings) {
                 Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
@@ -429,16 +426,11 @@ public class MoreSettingsTab extends PreferenceActivity
                 int headerIndex = i + 1;
                 i = insertAccountsHeaders(target, headerIndex);
             } else if (id == R.id.user_settings) {
-                if (!mEnableUserManagement
-                        || !UserId.MU_ENABLED || UserId.myUserId() != 0
-                        || !getResources().getBoolean(R.bool.enable_user_management)
+                if (!UserHandle.MU_ENABLED
+                        || !UserManager.supportsMultipleUsers()
                         || Utils.isMonkeyRunning()) {
-                    target.remove(header);
+                    target.remove(i);
                 }
-            }
-            if (UserId.MU_ENABLED && UserId.myUserId() != 0
-                    && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
-                target.remove(header);
             }
 
             // Increment if the current one wasn't removed by the Utils code.
@@ -622,7 +614,7 @@ public class MoreSettingsTab extends PreferenceActivity
             // Switches inflated from their layouts. Must be done before adapter is set in super
             mWifiEnabler = new WifiEnabler(context, new Switch(context));
             mBluetoothEnabler = new BluetoothEnabler(context, new Switch(context));
-            mProfileEnabler = new ProfileEnabler(context, null, new Switch(context));
+            mProfileEnabler = new ProfileEnabler(context, new Switch(context));
         }
 
         @Override
