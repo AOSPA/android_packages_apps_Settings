@@ -31,18 +31,18 @@
         android:title="@string/cat_cpustates" />
 
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="pref_disable_boot_animation"
         android:title="@string/pref_disable_boot_animation_title"
         android:summary="@string/pref_disable_boot_animation_summary"
         android:defaultValue="false" />
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="pref_force_highend_gfx"
         android:title="@string/pref_force_highend_gfx_title"
         android:summary="@string/pref_force_highend_gfx_summary" />
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="konsta_navbar"
         android:title="@string/konsta_navbar"
         android:summary="@string/konsta_navbar_reboot"
