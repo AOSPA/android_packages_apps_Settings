@@ -42,7 +42,6 @@ import android.os.Bundle;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.UserId;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceActivity.Header;
@@ -425,12 +424,6 @@ public class MoreSettingsTab extends PreferenceActivity
             } else if (id == R.id.account_settings) {
                 int headerIndex = i + 1;
                 i = insertAccountsHeaders(target, headerIndex);
-            } else if (id == R.id.user_settings) {
-                if (!UserHandle.MU_ENABLED
-                        || !UserManager.supportsMultipleUsers()
-                        || Utils.isMonkeyRunning()) {
-                    target.remove(i);
-                }
             }
 
             // Increment if the current one wasn't removed by the Utils code.

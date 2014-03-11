@@ -36,7 +36,6 @@ import android.os.Bundle;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.UserId;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceActivity.Header;
@@ -349,10 +348,6 @@ public class AccountSettingsTab extends PreferenceActivity
             if (id == R.id.account_settings) {
                 int headerIndex = i + 1;
                 i = insertAccountsHeaders(target, headerIndex);
-            }
-            if (UserId.MU_ENABLED && UserId.myUserId() != 0
-                    && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
-                target.remove(header);
             }
 
             // Increment if the current one wasn't removed by the Utils code.
