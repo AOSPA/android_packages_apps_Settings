@@ -24,7 +24,6 @@ import com.android.settings.applications.ManageApplications;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.fuelgauge.PowerUsageSummary;
-import com.android.settings.profiles.ProfileEnabler;
 import com.android.settings.wifi.WifiEnabler;
 
 import android.accounts.Account;
@@ -533,8 +532,7 @@ public class DeviceSettingsTab extends PreferenceActivity
             if (header.fragment == null && header.intent == null) {
                 return HEADER_TYPE_CATEGORY;
             } else if (header.id == R.id.wifi_settings
-                    || header.id == R.id.bluetooth_settings
-                    || header.id == R.id.profiles_settings) {
+                    || header.id == R.id.bluetooth_settings) {
                 return HEADER_TYPE_SWITCH;
             } else {
                 return HEADER_TYPE_NORMAL;
@@ -637,8 +635,6 @@ public class DeviceSettingsTab extends PreferenceActivity
                         mWifiEnabler.setSwitch(holder.switch_);
                     } else if (header.id == R.id.bluetooth_settings) {
                         mBluetoothEnabler.setSwitch(holder.switch_);
-                    } else if (header.id == R.id.profiles_settings) {
-                        mProfileEnabler.setSwitch(holder.switch_);
                     }
                     // No break, fall through on purpose to update common fields
 
@@ -785,7 +781,6 @@ public class DeviceSettingsTab extends PreferenceActivity
     public static class LockscreenMenuActivity extends Settings { /* empty */ }
     public static class SoundMenuActivity extends Settings { /* empty */ }
     public static class RecentsMenuActivity extends Settings { /* empty */ }
-    public static class ProfilesSettingsActivity extends Settings { /* empty */ }
     public static class QuietHoursSettingsActivity extends Settings { /* empty */ }
     public static class SystemSettingsActivity extends Settings { /* empty */ }
 }
