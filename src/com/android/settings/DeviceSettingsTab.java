@@ -515,7 +515,6 @@ public class DeviceSettingsTab extends PreferenceActivity
 
         private final WifiEnabler mWifiEnabler;
         private final BluetoothEnabler mBluetoothEnabler;
-        private final ProfileEnabler mProfileEnabler;
 
         private AuthenticatorHelper mAuthHelper;
 
@@ -576,7 +575,6 @@ public class DeviceSettingsTab extends PreferenceActivity
             // Switches inflated from their layouts. Must be done before adapter is set in super
             mWifiEnabler = new WifiEnabler(context, new Switch(context));
             mBluetoothEnabler = new BluetoothEnabler(context, new Switch(context));
-            mProfileEnabler = new ProfileEnabler(context, new Switch(context));
         }
 
         @Override
@@ -671,13 +669,11 @@ public class DeviceSettingsTab extends PreferenceActivity
         public void resume() {
             mWifiEnabler.resume();
             mBluetoothEnabler.resume();
-            mProfileEnabler.resume();
         }
 
         public void pause() {
             mWifiEnabler.pause();
             mBluetoothEnabler.pause();
-            mProfileEnabler.pause();
         }
     }
 
