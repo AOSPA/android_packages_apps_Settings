@@ -446,9 +446,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             boolean checked = ((CheckBoxPreference)preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HEADSETHOOK_LAUNCH_VOICE, checked ? 1:0);
-        } else {
-            // If we didn't handle it, let preferences handle it.
-            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
         return true;
     }
