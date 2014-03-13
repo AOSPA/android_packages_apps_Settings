@@ -40,6 +40,13 @@
             android:targetClass="com.paranoid.preferences.MainActivity" />
     </header>
 
+    <!-- Performance -->
+    <header
+        android:id="@+id/performance_settings"
+        android:fragment="com.android.settings.cyanogenmod.PerformanceSettings"
+        android:icon="@drawable/ic_settings_performance"
+        android:title="@string/performance_settings_title" />
+
     <!-- Launcher -->
     <header
         android:id="@+id/launcher_settings"
@@ -80,12 +87,12 @@
         android:icon="@drawable/ic_settings_development"
         android:title="@string/development_settings_title" />
 
-    <!-- Performance -->
+    <!-- Print -->
     <header
-        android:id="@+id/performance_settings"
-        android:fragment="com.android.settings.cyanogenmod.PerformanceSettings"
-        android:icon="@drawable/ic_settings_performance"
-        android:title="@string/performance_settings_title" />
+        android:id="@+id/print_settings"
+        android:fragment="com.android.settings.print.PrintSettingsFragment"
+        android:icon="@*android:drawable/ic_print"
+        android:title="@string/print_settings" />
 
     <!-- Accessibility feedback -->
     <header
