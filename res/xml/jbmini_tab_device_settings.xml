@@ -29,6 +29,17 @@
         android:title="@string/crystal_title"
         android:icon="@drawable/ic_action_set" />
 
+    <!-- Hybrid options -->
+    <header
+        android:id="@+id/hybrid_settings"
+        android:icon="@drawable/ic_settings_hybrid"
+        android:title="@string/hybrid_settings">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.paranoid.preferences"
+            android:targetClass="com.paranoid.preferences.MainActivity" />
+    </header>
+
     <!-- Launcher -->
     <header
         android:id="@+id/launcher_settings"
