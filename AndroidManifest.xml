@@ -1233,8 +1233,7 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.print.PrintSettingsFragment" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/print_settings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID" />
         </activity>
 
         <activity android:name="Settings$PrintJobSettingsActivity"
@@ -1248,8 +1247,7 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.print.PrintJobSettingsFragment" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/print_settings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID" />
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -1748,8 +1746,7 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.users.UserSettings" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/user_settings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID" />
         </activity>
 
         <activity android:name="Settings$PaymentSettingsActivity"
@@ -1764,8 +1761,7 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.nfc.PaymentSettings" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/nfc_payment_settings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID" />
         </activity>
         <activity android:name=".nfc.PaymentDefaultDialog"
                   android:label="@string/nfc_payment_set_default_label"
