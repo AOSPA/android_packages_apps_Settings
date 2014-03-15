@@ -53,13 +53,23 @@
                 android:dialogTitle="@string/dialog_title_font_size" />
 
         <PreferenceScreen
-                android:fragment="com.android.settings.notificationlight.NotificationLightSettings"
-                android:key="notification_pulse"
-                android:title="@string/notification_led_category_title" />
-
-        <PreferenceScreen
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
+
+        <!-- Notifications -->
+        <PreferenceCategory
+            android:key="notification_category"
+            android:title="@string/notification_category"/>
+
+        <CheckBoxPreference
+            android:key="notification_peek"
+            android:title="@string/notification_peek_title"
+            android:summary="@string/notification_peek_summary" />
+
+        <PreferenceScreen
+                android:fragment="com.android.settings.notificationlight.NotificationLightSettings"
+                android:key="notification_pulse"
+                android:title="@string/notification_led_category_title" />
 
 </PreferenceScreen>
