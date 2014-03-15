@@ -17,14 +17,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/about_settings">
 
-        <PreferenceScreen android:key="paranoidota_settings"
-                android:title="@string/system_update_settings_list_item_title" 
-                android:summary="@string/system_update_settings_list_item_summary">
-            <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="com.paranoid.paranoidota"
-                    android:targetClass="com.paranoid.paranoidota.activities.SystemActivity" />
-        </PreferenceScreen>
-
 
         <PreferenceScreen android:key="additional_system_update_settings"
                           android:title="@string/additional_system_update_settings_list_item_title">
@@ -108,14 +100,8 @@
                 android:title="@string/firmware_version"
                 android:summary="@string/device_info_default"/>
 
-        <!-- Device PA version -->
-        <Preference android:key="pa_version"
-                style="?android:preferenceInformationStyle"
-                android:title="@string/pa_version"
-                android:summary="@string/pa_version_default" />
-
-        <!-- CrystalPA -->
-        <Preference android:key="crystalpa"
+        <!-- Device CrystalPA version -->
+        <Preference android:key="cpa_version"
                 style="?android:preferenceInformationStyle"
                 android:title="@string/crystalpa_version"
                 android:summary="@string/crystalpa_default" />

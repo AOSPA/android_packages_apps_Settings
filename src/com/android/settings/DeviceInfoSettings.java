@@ -66,9 +66,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
     private static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
     private static final String KEY_EQUIPMENT_ID = "fcc_equipment_id";
     private static final String PROPERTY_EQUIPMENT_ID = "ro.ril.fccid";
-    private static final String KEY_PA_VERSION = "pa_version";
-    private static final String KEY_CRYSTALPA_VERSION = "crystalpa_version";
-    private static final String KEY_PARANOIDOTA = "paranoidota_settings";
+    private static final String KEY_PA_VERSION = "cpa_version";
     private static final String KEY_STATUS = "status_info";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
@@ -101,8 +99,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
         findPreference(KEY_BUILD_NUMBER).setEnabled(true);
         findPreference(KEY_KERNEL_VERSION).setSummary(getFormattedKernelVersion());
         findPreference(KEY_PA_VERSION).setEnabled(true);
-        setValueSummary(KEY_PA_VERSION, "ro.pa.version");
-        setValueSummary(KEY_CRYSTALPA_VERSION, "ro.crystalpa.version");
+        setValueSummary(KEY_PA_VERSION, "ro.cpa.version");
 
         if (!SELinux.isSELinuxEnabled()) {
             String status = getResources().getString(R.string.selinux_status_disabled);
@@ -133,12 +130,6 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
         if (Utils.isWifiOnly(getActivity())
                 || (MSimTelephonyManager.getDefault().isMultiSimEnabled())) {
             getPreferenceScreen().removePreference(findPreference(KEY_BASEBAND_VERSION));
-        }
-
-        if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
-            removePreferenceIfPackageNotInstalled(findPreference(KEY_PARANOIDOTA));
-        } else {
-            getPreferenceScreen().removePreference(findPreference(KEY_PARANOIDOTA));
         }
 
         /*
@@ -203,20 +194,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
                     Log.e(LOG_TAG, "Unable to start activity " + intent.toString());
                 }
             }
-        } else if (preference.getKey().equals(KEY_PA_VERSION)) {
-            System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
-            mHits[mHits.length-1] = SystemClock.uptimeMillis();
-            if (mHits[0] >= (SystemClock.uptimeMillis()-500)) {
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setClassName("android",
-                        com.android.internal.app.PAWorldActivity.class.getName());
-                try {
-                    startActivity(intent);
-                } catch (Exception e) {
-                    Log.e(LOG_TAG, "Unable to start activity " + intent.toString());
-                }
-            }
-        } else if (preference.getKey().equals(KEY_CRYSTALPA_VERSION)) {
+        } else if (preference.getKey().equals(KEY_CPA_VERSION)) {
             System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
             mHits[mHits.length-1] = SystemClock.uptimeMillis();
             if (mHits[0] >= (SystemClock.uptimeMillis()-500)) {
