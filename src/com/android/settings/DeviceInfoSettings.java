@@ -66,7 +66,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
     private static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
     private static final String KEY_EQUIPMENT_ID = "fcc_equipment_id";
     private static final String PROPERTY_EQUIPMENT_ID = "ro.ril.fccid";
-    private static final String KEY_PA_VERSION = "cpa_version";
+    private static final String KEY_CPA_VERSION = "cpa_version";
     private static final String KEY_STATUS = "status_info";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
