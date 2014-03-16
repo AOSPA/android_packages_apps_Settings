@@ -25,7 +25,6 @@ import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.wifi.WifiEnabler;
-import com.android.settings.slim.themes.ThemeEnabler;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -37,7 +36,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
-import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.INetworkManagementService;
@@ -95,8 +93,6 @@ public class DeviceSettingsTab extends PreferenceActivity
     private Header mCurrentHeader;
     private Header mParentHeader;
     private boolean mInLocalHeaderSwitch;
-
-    private int mCurrentState = 0;
 
     // Show only these settings for restricted users
     private int[] SETTINGS_FOR_RESTRICTED = {
@@ -519,7 +515,6 @@ public class DeviceSettingsTab extends PreferenceActivity
 
         private final WifiEnabler mWifiEnabler;
         private final BluetoothEnabler mBluetoothEnabler;
-        public static ThemeEnabler mThemeEnabler;
 
         private AuthenticatorHelper mAuthHelper;
 
@@ -533,12 +528,10 @@ public class DeviceSettingsTab extends PreferenceActivity
         private LayoutInflater mInflater;
 
         static int getHeaderType(Header header) {
-            if (header.fragment == null && header.intent == null
-                    && header.id != R.id.theme_settings) {
+            if (header.fragment == null && header.intent == null) {
                 return HEADER_TYPE_CATEGORY;
             } else if (header.id == R.id.wifi_settings
-                    || header.id == R.id.bluetooth_settings
-                    || header.id == R.id.theme_settings) {
+                    || header.id == R.id.bluetooth_settings) {
                 return HEADER_TYPE_SWITCH;
             } else {
                 return HEADER_TYPE_NORMAL;
@@ -582,7 +575,6 @@ public class DeviceSettingsTab extends PreferenceActivity
             // Switches inflated from their layouts. Must be done before adapter is set in super
             mWifiEnabler = new WifiEnabler(context, new Switch(context));
             mBluetoothEnabler = new BluetoothEnabler(context, new Switch(context));
-            mThemeEnabler = new ThemeEnabler(context, new Switch(context));
         }
 
         @Override
@@ -641,8 +633,6 @@ public class DeviceSettingsTab extends PreferenceActivity
                         mWifiEnabler.setSwitch(holder.switch_);
                     } else if (header.id == R.id.bluetooth_settings) {
                         mBluetoothEnabler.setSwitch(holder.switch_);
-                    } else if (header.id == R.id.theme_settings) {
-                        mThemeEnabler.setSwitch(holder.switch_);
                     }
                     // No break, fall through on purpose to update common fields
 
@@ -679,13 +669,11 @@ public class DeviceSettingsTab extends PreferenceActivity
         public void resume() {
             mWifiEnabler.resume();
             mBluetoothEnabler.resume();
-            mThemeEnabler.resume();
         }
 
         public void pause() {
             mWifiEnabler.pause();
             mBluetoothEnabler.pause();
-            mThemeEnabler.resume();
         }
     }
 
@@ -734,16 +722,6 @@ public class DeviceSettingsTab extends PreferenceActivity
     public void onAccountsUpdated(Account[] accounts) {
         mAuthenticatorHelper.onAccountsUpdated(this, accounts);
         invalidateHeaders();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        if (newConfig.uiThemeMode != mCurrentState && HeaderAdapter.mThemeEnabler != null) {
-            mCurrentState = newConfig.uiThemeMode;
-            HeaderAdapter.mThemeEnabler.setSwitchState();
-        }
     }
 
     /*
