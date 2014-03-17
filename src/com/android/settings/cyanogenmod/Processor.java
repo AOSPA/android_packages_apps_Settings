@@ -296,10 +296,10 @@ public class Processor extends SettingsPreferenceFragment implements
             outputStream.flush();
             process.waitFor();
         }
-        catch (IOException) {
+        catch (IOException e) {
             return false;
         }
-        catch (InterruptedException) {
+        catch (InterruptedException e) {
             return false;
         }
         return true;
