@@ -31,6 +31,7 @@ import com.android.settings.Utils;
 
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
+import java.io.IOException; 
 
 //
 // CPU Related Settings
