@@ -288,7 +288,6 @@ public class Processor extends SettingsPreferenceFragment implements
         command = "/system/bin/rmmod " + module;
         try {
             Process process = Runtime.getRuntime().exec("su");
-            Log.e(TAG, "Executing: " + command);
             DataOutputStream outputStream = new DataOutputStream(process.getOutputStream());
             DataInputStream inputStream = new DataInputStream(process.getInputStream());
             outputStream.writeBytes(command + "\n");
@@ -297,10 +296,10 @@ public class Processor extends SettingsPreferenceFragment implements
             outputStream.flush();
             process.waitFor();
         }
-        catch (IOException e) {
+        catch (IOException) {
             return false;
         }
-        catch (InterruptedException e) {
+        catch (InterruptedException) {
             return false;
         }
         return true;
