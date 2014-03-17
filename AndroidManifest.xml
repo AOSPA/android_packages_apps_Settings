@@ -1720,13 +1720,13 @@
 
         <!-- CrystalRoms -->
 
-        <activity android:name=".cyanogenmod.SWAPActivity"
+        <activity android:name=".crystalroms.SWAPActivity"
                 android:label="@string/swap_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
-        <activity android:name=".cyanogenmod.SWAPInfo"
+        <activity android:name=".crystalroms.SWAPInfo"
                 android:label="@string/swap_info_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

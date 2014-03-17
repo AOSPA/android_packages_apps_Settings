@@ -244,22 +244,6 @@ public class BootReceiver extends BroadcastReceiver {
             Log.i(TAG, "Performance profile restore disabled by user preference.");
             return;
 
-    private static boolean insmod(String module, boolean insert) {
-        String command;
-    if (insert)
-        command = "/system/bin/insmod /system/lib/modules/" + module;
-    else
-        command = "/system/bin/rmmod " + module;
-        try {
-            Process process = Runtime.getRuntime().exec("su");
-            Log.d(TAG, "Executing: " + command);
-            DataOutputStream outputStream = new DataOutputStream(process.getOutputStream()); 
-            DataInputStream inputStream = new DataInputStream(process.getInputStream());
-            outputStream.writeBytes(command + "\n");
-            outputStream.flush();
-            outputStream.writeBytes("exit\n");
-            outputStream.flush();
-            process.waitFor();
         }
 
         String perfProfileProp = res.getString(R.string.config_perf_profile_prop);
