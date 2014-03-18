@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+   Copyright 2014 The AOSPAL Project
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!--Volume buttons cursor control-->
+    <string-array name="volume_key_cursor_control_entries">
+        <item>@string/volume_key_cursor_control_off</item>
+        <item>@string/volume_key_cursor_control_on</item>
+        <item>@string/volume_key_cursor_control_on_reverse</item>
+    </string-array>
+
+    <string-array name="volume_key_cursor_control_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- CRT off animation mode -->
+    <string-array name="entries_system_power_crt_mode">
+        <item>@string/system_power_crt_mode_off</item>
+        <item>@string/system_power_crt_mode_horizontal</item>
+        <item>@string/system_power_crt_mode_vertical</item>
+        <item>@string/system_power_crt_mode_both</item>
+        <item>@string/system_power_crt_mode_scale</item>
+    </string-array>
+
+    <string-array name="values_system_power_crt_mode" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- Wi-Fi settings. Presented as a list dialog to the user to choose the Wi-Fi region code. -->
+    <string-array name="wifi_countrycode_entries">
+        <item>United States</item>
+        <item>Canada, Taiwan</item>
+        <item>Germany</item>
+        <item>Europe</item>
+        <item>Japan, Russia</item>
+        <item>Australia</item>
+        <item>China</item>
+        <item>Korea</item>
+        <item>Turkey</item>
+        <item>Singapore</item>
+        <item>Brazil</item>
+    </string-array>
+
+    <string-array name="wifi_countrycode_values" translatable="false">
+        <item>US</item>
+        <item>CA</item>
+        <item>DE</item>
+        <item>GB</item>
+        <item>JP</item>
+        <item>AU</item>
+        <item>CN</item>
+        <item>KR</item>
+        <item>TR</item>
+        <item>SG</item>
+        <item>BR</item>
+    </string-array>
+
+    <!-- MediaScanner behavior on boot -->
+    <string-array name="media_scanner_on_boot_entries">
+        <item>@string/media_scanner_on_boot_enabled</item>
+        <item>@string/media_scanner_on_boot_ask</item>
+        <item>@string/media_scanner_on_boot_disabled</item>
+    </string-array>
+
+    <string-array name="media_scanner_on_boot_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Random PIN lock view -->
+    <string-array name="lock_numpad_random_entries">
+        <item>@string/lock_numpad_random_off</item>
+        <item>@string/lock_numpad_random_always</item>
+        <item>@string/lock_numpad_random_on_request</item>
+    </string-array>
+
+    <string-array name="lock_numpad_random_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Auto-brightness sensitivity -->
+    <string-array name="auto_brightness_sensitivity_entries" translatable="false">
+        <item>@string/auto_brightness_sensitivity_verylow</item>
+        <item>@string/auto_brightness_sensitivity_low</item>
+        <item>@string/auto_brightness_sensitivity_medium</item>
+        <item>@string/auto_brightness_sensitivity_high</item>
+        <item>@string/auto_brightness_sensitivity_veryhigh</item>
+    </string-array>
+
+    <integer-array name="auto_brightness_sensitivity_values">
+        <item>150</item>
+        <item>125</item>
+        <item>100</item>
+        <item>50</item>
+        <item>25</item>
+    </integer-array>
+
+    <!-- Recents RAM bar-->
+    <string-array name="entries_ram_bar_mode">
+        <item>@string/ram_bar_none</item>
+        <item>@string/ram_bar_apps</item>
+        <item>@string/ram_bar_cache</item>
+        <item>@string/ram_bar_other</item>
+    </string-array>
+
+    <string-array name="values_ram_bar_mode" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Quick pulldown -->
+    <string-array name="quick_pulldown_entries" translatable="false">
+        <item>@string/quick_pulldown_off</item>
+        <item>@string/quick_pulldown_right</item>
+        <item>@string/quick_pulldown_left</item>
+    </string-array>
+
+    <string-array name="quick_pulldown_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Auto keyboard rotation -->
+    <string-array name="keyboard_rotation_timeout_entries" translatable="false">
+        <item>2s</item>
+        <item>5s</item>
+        <item>10s</item>
+        <item>20s</item>
+        <item>30s</item>
+        <item>60s</item>
+    </string-array>
+
+    <string-array name="keyboard_rotation_timeout_values" translatable="false">
+        <item>2000</item>
+        <item>5000</item>
+        <item>10000</item>
+        <item>20000</item>
+        <item>30000</item>
+        <item>60000</item>
+    </string-array>
+
+    <!-- Network usage stats -->
+    <string-array name="entries_status_bar_network_stats_update">
+        <item>&#189; second</item>
+        <item>1 second</item>
+        <item>2 seconds</item>
+        <item>5 seconds</item>
+    </string-array>
+
+    <string-array name="values_status_bar_network_stats_update" translatable="false">
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>5000</item>
+    </string-array>
+
+    <!-- Lockscreen lock icon values -->
+    <string-array name="lock_icon_entries">
+        <item>@string/lockscreen_lock_icon_custom</item>
+        <item>@string/lockscreen_lock_icon_default</item>
+    </string-array>
+
+    <string-array name="lock_icon_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Nfc Polling Mode -->
+    <string-array name="nfc_polling_entries" translatable="false">
+        <item>@string/nfc_polling_always</item>
+        <item>@string/nfc_polling_screenon_lock</item>
+        <item>@string/nfc_polling_screenon_unlock</item>
+    </string-array>
+    <string-array name="nfc_polling_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Statusbar clock -->
+
+    <string-array name="clock_style_entries" translatable="false">
+        <item>@string/right_clock</item>
+        <item>@string/center_clock</item>
+    </string-array>
+
+    <string-array name="clock_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="entries_status_bar_am_pm">
+        <item>@string/am_pm_clock_none</item>
+        <item>@string/am_pm_clock_small</item>
+        <item>@string/am_pm_clock_normal</item>
+    </string-array>
+
+    <string-array name="values_status_bar_am_pm" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="clock_date_display_entries">
+        <item>@string/clock_date_display_none</item>
+        <item>@string/clock_date_display_small</item>
+        <item>@string/clock_date_display_normal</item>
+    </string-array>
+
+    <string-array name="clock_date_display_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="clock_date_style_entries">
+        <item>@string/clock_date_style_normal</item>
+        <item>@string/clock_date_style_lowercase</item>
+        <item>@string/clock_date_style_uppercase</item>
+    </string-array>
+
+    <string-array name="clock_date_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="clock_date_format_entries_values">
+        <item>dd/MM/yy</item>
+        <item>MM/dd/yy</item>
+        <item>yyyy-MM-dd</item>
+        <item>yyyy-dd-MM</item>
+        <item>dd-MM-yyyy</item>
+        <item>MM-dd-yyyy</item>
+        <item>MMM dd</item>
+        <item>MMM dd, yyyy</item>
+        <item>MMMM dd, yyyy</item>
+        <item>EEE</item>
+        <item>EEE dd</item>
+        <item>EEE dd/MM</item>
+        <item>EEE MM/dd</item>
+        <item>EEE dd MMM</item>
+        <item>EEE MMM dd</item>
+        <item>EEE MMMM dd</item>
+        <item>EEEE dd/MM</item>
+        <item>EEEE MM/dd</item>
+        <item>@string/clock_date_format_custom</item>
+    </string-array>
+
+    <!-- Smart pulldown -->
+    <string-array name="smart_pulldown_entries" translatable="false">
+        <item>@string/smart_pulldown_off</item>
+        <item>@string/smart_pulldown_dismissable</item>
+        <item>@string/smart_pulldown_persistent</item>
+    </string-array>
+
+    <string-array name="smart_pulldown_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="telo_radio_2g_screenoff_values" translatable="false">
+        <item>30000</item>
+        <item>60000</item>
+        <item>180000</item>
+        <item>300000</item>
+        <item>600000</item>
+        <item>900000</item>
+        <item>1200000</item>
+    </string-array>
+
+    <string-array name="telo_radio_2g_screenoff_entries" translatable="false">
+        <item>@string/telo_radio_2g_30secs</item>
+        <item>@string/telo_radio_2g_1min</item>
+        <item>@string/telo_radio_2g_3min</item>
+        <item>@string/telo_radio_2g_5min</item>
+        <item>@string/telo_radio_2g_10min</item>
+        <item>@string/telo_radio_2g_15min</item>
+        <item>@string/telo_radio_2g_20min</item>
+    </string-array>
+
+    <!-- Gesture Anywhere -->
+    <string-array name="gesture_anywhere_position_entries" translatable="false">
+        <item>@string/gesture_anywhere_position_left</item>
+        <item>@string/gesture_anywhere_position_right</item>
+    </string-array>
+
+    <string-array name="gesture_anywhere_position_values" translatable="false">
+        <item>3</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="lockscreen_icon_picker_labels" translatable="false">
+        <item>@string/icon_picker_alarm</item>
+        <item>@string/icon_picker_browser</item>
+        <item>@string/icon_picker_calendar</item>
+        <item>@string/icon_picker_camera</item>
+        <item>@string/icon_picker_chrome</item>
+        <item>@string/icon_picker_contacts</item>
+        <item>@string/icon_picker_email</item>
+        <item>@string/icon_picker_email2</item>
+        <item>@string/icon_picker_facebook</item>
+        <item>@string/icon_picker_gallery</item>
+        <item>@string/icon_picker_google_small</item>
+        <item>@string/icon_picker_googleplus</item>
+        <item>@string/icon_picker_googletalk</item>
+        <item>@string/icon_picker_maps</item>
+        <item>@string/icon_picker_sms</item>
+        <item>@string/icon_picker_movie</item>
+        <item>@string/icon_picker_music</item>
+        <item>@string/icon_picker_nav_normal</item>
+        <item>@string/icon_picker_phone</item>
+        <item>@string/icon_picker_podcast</item>
+        <item>@string/icon_picker_rss</item>
+        <item>@string/icon_picker_search</item>
+        <item>@string/icon_picker_twitter</item>
+    </string-array>
+
+    <string-array name="lockscreen_icon_picker_icons" translatable="false">
+        <item>ic_lockscreen_alarm_normal</item>
+        <item>ic_lockscreen_browser_normal</item>
+        <item>ic_lockscreen_calendar_normal</item>
+        <item>ic_lockscreen_camera_normal</item>
+        <item>ic_lockscreen_chrome_normal</item>
+        <item>ic_lockscreen_contacts_normal</item>
+        <item>ic_lockscreen_email_normal</item>
+        <item>ic_lockscreen_email2_normal</item>
+        <item>ic_lockscreen_facebook_normal</item>
+        <item>ic_lockscreen_gallery_normal</item>
+        <item>ic_lockscreen_google_small_normal</item>
+        <item>ic_lockscreen_gplus_normal</item>
+        <item>ic_lockscreen_gtalk_normal</item>
+        <item>ic_lockscreen_maps_normal</item>
+        <item>ic_lockscreen_sms_normal</item>
+        <item>ic_lockscreen_movie_normal</item>
+        <item>ic_lockscreen_music_normal</item>
+        <item>ic_lockscreen_nav_normal</item>
+        <item>ic_lockscreen_phone_normal</item>
+        <item>ic_lockscreen_podcast_normal</item>
+        <item>ic_lockscreen_rss_normal</item>
+        <item>ic_lockscreen_google_normal</item>
+        <item>ic_lockscreen_twitter_normal</item>
+    </string-array>
+
+    <!-- Listview animation -->
+    <string-array name="listview_animation_entries">
+        <item>@string/listview_off</item>
+        <item>@string/listview_wave_left</item>
+        <item>@string/listview_wave_right</item>
+        <item>@string/listview_scale</item>
+        <item>@string/listview_alpha</item>
+        <item>@string/listview_stack_top</item>
+        <item>@string/listview_stack_bottom</item>
+        <item>@string/listview_unfold</item>
+        <item>@string/listview_fold</item>
+        <item>@string/listview_translate_left</item>
+        <item>@string/listview_translate_right</item>
+    </string-array>
+
+    <string-array name="listview_animation_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+   <!-- Listview animation cache -->
+    <string-array name="listview_cache_entries">
+        <item>@string/listview_cache_none</item>
+        <item>@string/listview_cache_anim</item>
+        <item>@string/listview_cache_scroll</item>
+        <item>@string/listview_cache_all</item>
+    </string-array>
+
+    <string-array name="listview_cache_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Listview Interpolator -->
+    <string-array name="listview_interpolator_entries">
+        <item>@string/listview_off</item>
+        <item>@string/listview_accelerate_interpolator</item>
+        <item>@string/listview_decelerate_interpolator</item>
+        <item>@string/listview_accelerate_decelerate_interpolator</item>
+        <item>@string/listview_anticipate_interpolator</item>
+        <item>@string/listview_overshoot_interpolator</item>
+        <item>@string/listview_anticipate_overshoot_interpolator</item>
+        <item>@string/listview_bounce_interpolator</item>
+        <item>@string/listview_cycle_interpolator</item>
+        <item>@string/listview_linear_interpolator</item>
+    </string-array>
+
+    <string-array name="listview_interpolator_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+    <string-array name="anim_controls_entries">
+        <item>@string/animation_default</item>
+        <item>@string/animation_fade</item>
+        <item>@string/animation_slide_right</item>
+        <item>@string/animation_slide_left</item>
+        <item>@string/animation_slide_right_no_fade</item>
+        <item>@string/animation_slide_left_no_fade</item>
+        <item>@string/animation_slide_up</item>
+        <item>@string/animation_slide_down</item>
+        <item>@string/animation_translucent</item>
+        <item>@string/animation_grow_shrink</item>
+        <item>@string/animation_grow_shrink_center</item>
+        <item>@string/animation_grow_shrink_bottom</item>
+        <item>@string/animation_grow_shrink_left</item>
+        <item>@string/animation_grow_shrink_right</item>
+        <item>@string/animation_random</item>
+        </string-array>
+
+    <string-array name="anim_controls_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Status bar clock font style -->
+    <string-array name="clock_font_style_entries">
+        <item>@string/clock_font_bold</item>
+        <item>@string/clock_font_condensed</item>
+        <item>@string/clock_font_light</item>
+        <item>@string/clock_font_light_italic</item>
+        <item>@string/clock_font_normal</item>
+    </string-array>
+
+    <string-array name="clock_font_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- Notification reminder sounds -->
+    <string-array name="noti_reminder_sound_entries">
+        <item>@string/disabled</item>
+        <item>@string/enabled</item>
+        <item>@string/noti_reminder_sound_looping</item>
+    </string-array>
+
+    <string-array name="noti_reminder_sound_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- ProgressBar -->
+    <string-array name="progressbar_interpolators_entries">
+        <item>@string/progressbar_none</item>
+        <item>@string/progressbar_acclerate</item>
+        <item>@string/progressbar_linear</item>
+        <item>@string/progressbar_acceleratedecelerate</item>
+        <item>@string/progressbar_decelerate</item>
+    </string-array>
+
+    <string-array name="progressbar_interpolators_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- Toast Animation -->
+    <string-array name="toast_animation_entries">
+        <item>@string/toast_none_animation</item>
+        <item>@string/toast_default_animation</item>
+        <item>@string/toast_fade_animation</item>
+        <item>@string/toast_SlideRight_animation</item>
+        <item>@string/toast_SlideLeft_animation</item>
+        <item>@string/toast_Xylon_animation</item>
+        <item>@string/toast_Toko_animation</item>
+        <item>@string/toast_Tn_animation</item>
+        <item>@string/toast_Honami_animation</item>
+        <item>@string/toast_FastFade_animation</item>
+        <item>@string/toast_GrowFade_animation</item>
+        <item>@string/toast_GrowFadeCenter_animation</item>
+        <item>@string/toast_GrowFadeBottom_animation</item>
+        <item>@string/toast_Translucent_animation</item>
+        <item>@string/toast_SlideLeftRight_animation</item>
+        <item>@string/toast_SlideRightLeft_animation</item>
+    </string-array>
+
+    <string-array name="toast_animation_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+    </string-array>
+
+    <!-- Screen recorder video sizes -->
+    <string-array name="screen_recorder_video_sizes">
+        <item>@string/screen_recorder_size_240x400</item>
+        <item>@string/screen_recorder_size_360x640</item>
+        <item>@string/screen_recorder_size_480x800</item>
+        <item>@string/screen_recorder_size_480x854</item>
+        <item>@string/screen_recorder_size_540x960</item>
+        <item>@string/screen_recorder_size_600x1024</item>
+        <item>@string/screen_recorder_size_720x1280</item>
+    </string-array>
+
+    <!-- Screen recorder bitrates -->
+    <string-array name="screen_recorder_bitrate_entries">
+        <item>@string/screen_recorder_bitrate_title_100000</item>
+        <item>@string/screen_recorder_bitrate_title_250000</item>
+        <item>@string/screen_recorder_bitrate_title_500000</item>
+        <item>@string/screen_recorder_bitrate_title_1000000</item>
+        <item>@string/screen_recorder_bitrate_title_2000000</item>
+        <item>@string/screen_recorder_bitrate_title_3000000</item>
+        <item>@string/screen_recorder_bitrate_title_4000000</item>
+        <item>@string/screen_recorder_bitrate_title_5000000</item>
+        <item>@string/screen_recorder_bitrate_title_10000000</item>
+        <item>@string/screen_recorder_bitrate_title_20000000</item>
+        <item>@string/screen_recorder_bitrate_title_50000000</item>
+        <item>@string/screen_recorder_bitrate_title_100000000</item>
+    </string-array>
+    <string-array name="screen_recorder_bitrate_values">
+        <item>@string/screen_recorder_bitrate_100000</item>
+        <item>@string/screen_recorder_bitrate_250000</item>
+        <item>@string/screen_recorder_bitrate_500000</item>
+        <item>@string/screen_recorder_bitrate_1000000</item>
+        <item>@string/screen_recorder_bitrate_2000000</item>
+        <item>@string/screen_recorder_bitrate_3000000</item>
+        <item>@string/screen_recorder_bitrate_4000000</item>
+        <item>@string/screen_recorder_bitrate_5000000</item>
+        <item>@string/screen_recorder_bitrate_10000000</item>
+        <item>@string/screen_recorder_bitrate_20000000</item>
+        <item>@string/screen_recorder_bitrate_50000000</item>
+        <item>@string/screen_recorder_bitrate_100000000</item>
+    </string-array>
+
+    <!-- Notification reminder flip interval -->
+    <string-array name="noti_reminder_interval_entries">
+        <item>@string/noti_reminder_interval_1s</item>
+        <item>@string/noti_reminder_interval_1dot5s</item>
+        <item>@string/noti_reminder_interval_2s</item>
+        <item>@string/noti_reminder_interval_2dot5s</item>
+        <item>@string/noti_reminder_interval_3s</item>
+        <item>@string/noti_reminder_interval_3dot5s</item>
+        <item>@string/noti_reminder_interval_4s</item>
+    </string-array>
+
+    <string-array name="noti_reminder_interval_values">
+        <item>1000</item>
+        <item>1500</item>
+        <item>2000</item>
+        <item>2500</item>
+        <item>3000</item>
+        <item>3500</item>
+        <item>4000</item>
+    </string-array>
+
+    <!-- Volume step options. -->
+    <string-array name="volume_steps_entries" translatable="false">
+	<item>@string/volume_steps_60</item>
+        <item>@string/volume_steps_45</item>
+        <item>@string/volume_steps_30</item>
+        <item>@string/volume_steps_15</item>
+        <item>@string/volume_steps_7</item>
+        <item>@string/volume_steps_5</item>
+    </string-array>
+</resources>
