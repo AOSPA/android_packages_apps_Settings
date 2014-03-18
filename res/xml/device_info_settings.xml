@@ -114,6 +114,18 @@
                 android:title="@string/pa_version"
                 android:summary="@string/pa_version_default" />
 
+        <!-- Device PSD version -->
+        <Preference android:key="psd_version"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/psd_version"
+                android:summary="@string/psd_version_default" />
+
+        <!-- Saber Build versions -->
+        <Preference android:key="sm_android"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/sm_android"
+                android:summary="@string/sm_android_default" />
+
         <!-- Device FCC equipment id -->
         <Preference android:key="fcc_equipment_id"
                 style="?android:preferenceInformationStyle"
@@ -132,6 +144,11 @@
                 android:title="@string/kernel_version"
                 android:summary="@string/device_info_default"/>
 
+        <Preference android:key="sm_arm"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/sm_arm"
+                android:summary="@string/sm_arm_default" />
+
         <!-- Device cpu info -->
         <Preference android:key="device_cpu"
                 style="?android:preferenceInformationStyle"
@@ -149,6 +166,12 @@
                 style="?android:preferenceInformationStyle"
                 android:title="@string/build_number"
                 android:summary="@string/device_info_default"/>
+
+        <!-- Detailed build date -->
+        <Preference android:key="build_date"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/build_date"
+                android:summary="@string/build_date_default" />
 
         <!-- SELinux status information -->
         <Preference android:key="selinux_status"
