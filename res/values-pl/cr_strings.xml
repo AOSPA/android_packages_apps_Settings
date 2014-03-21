@@ -154,4 +154,54 @@
 
     <!-- Launcher settings  -->
     <string name="launcher_settings_title">Pulpit</string>
+
+    <!-- SWAP -->
+    <string name="swap_settings_title">Ustawienia SWAP'u</string>
+    <string name="swap_title">Ustawienia SWAP'u</string>
+    <string name="swap_summary">Dodatkowa pamięć SWAP</string>
+    <string name="swap_mode_summary">%S</string>
+    <string name="swap_modes_title">SWAP na karcie SD</string>
+    <string name="swap_sizes_title">Wielkość SWAP'u</string>
+    <string name="swap_sizes_summary">%S MB</string>
+    <string name="swap_toast_swap_removed">Wcześniejszy plik SWAP usunięty</string>
+    <string name="swap_toast_swap_created">SWAP zrobiony</string>
+    <string name="swap_toast_swap_enabled">SWAP włączony</string>
+    <string name="swap_toast_swap_disabled">SWAP wyłączony</string>
+    <string name="swap_toast_wait">Prosze czekać...</string>
+    <string name="swap_info_title">Informacje o SWAP'ie</string>
+    <string name="swap_dialog">Informacje o SWAP'ie</string>
+    <string name="swap_loading">Ładowanie informacji o SWAP'ie\u2026</string>
+    <string name="swap_error">Błąd przy ładowaniu SWAP'u\u2026</string>
+
+    <string name="cpu_undervolt">Undervolt</string>
+    <string name="cpu_undervolt_summary">Zmniejsza napięcie na CPU (Pomaga baterii)</string>
+
+    <!-- Themes -->
+    <string name="theme_settings_title">Ciemny Crystal</string>
+    <string name="theme_auto_mode_title">Wybierz wygląd</string>
+    <string name="theme_auto_mode_off">Manualnie</string>
+    <string name="theme_auto_mode_lightsensor">Włączenie na zmiane światła</string>
+    <string name="theme_auto_mode_twilight">W dzień</string>
+    <string name="theme_auto_switch_mode_error">Automatyczne włączanie wyglądu jest włączone!</string>
+
+    <string name="performance_settings_title">Wydajność</string>
+    <string name="performance_settings_warning_title">Postępuj ostrożnie!</string>
+    <string name="performance_settings_warning">Ustawienia te są przeznaczone do eksperymentów i wszelkie zmiany mogą skutkować niestabilnością, błędami, utratą danych, a nawet uszkodzeniem sprzętu.\n\nProsimy o nie zgłaszanie błędów po zmianie tych ustawień.</string>
+    <string name="performance_set_on_boot">Ustaw przy starcie</string>
+    <string name="performance_set_on_boot_summary">Zastosuj te ustawienia po uruchomieniu urządzenia</string>
+    <string name="processor_title">Procesor</string>
+    <string name="cpu_cur_freq_title">Aktualna częstotliwość</string>
+    <string name="cpu_governors_title">Zarządca</string>
+    <string name="cpu_min_freq_title">Minimalna częstotliwość</string>
+    <string name="cpu_max_freq_title">Maksymalna częstotliwość</string>
+    <string name="io_scheds_title">Zarządca I/O</string>
+    <string name="io_sched_title">Zarządca I/O</string>
+    <string name="perf_profile_title">Profil</string>
+    <string name="memory_management_title">Zarządzanie pamięcią</string>
+    <string name="pref_ksm_title">Kernel Samepage Merging</string>
+    <string name="pref_ksm_summary">KSM zmniejsza fizyczne wymagania pamięci i poprawia wydajność</string>
+    <string name="pref_purgeable_assets_title">Pozwól na czyszczenie bitmap</string>
+    <string name="pref_purgeable_assets_summary">Czyszczenie bitmapowych zbiorów pamięci umożliwia uwolnienie więcej RAM-u, gdy zachodzi potrzeba (wymaga restartu)</string>
+    <string name="pref_use_16bpp_alpha_title">16-bitowa przeźroczystość</string>
+    <string name="pref_use_16bpp_alpha_summary">Lepsza wydajność graficzna kosztem jakości. Może wywoływać artefakty (wymaga restartu)</string>
 </resources>
