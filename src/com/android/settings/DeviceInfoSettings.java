@@ -108,10 +108,6 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
         findPreference(KEY_BUILD_NUMBER).setEnabled(true);
         findPreference(KEY_KERNEL_VERSION).setSummary(getFormattedKernelVersion());
         findPreference(KEY_PA_VERSION).setEnabled(true);
-        findPreference(KEY_PSD_VERSION).setEnabled(true);
-        findPreference(KEY_SM_AND).setEnabled(true);
-        findPreference(KEY_SM_ARM).setEnabled(true);
-        findPreference(KEY_BUILD_DATE).setEnabled(true);
         setValueSummary(KEY_PA_VERSION, "ro.pa.version");
         setValueSummary(KEY_PSD_VERSION, "ro.psd.version");
         setValueSummary(KEY_SM_AND, "ro.sm.android");
