@@ -177,10 +177,5 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
 
         return true;
     }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return false;
-    }
 }
 
