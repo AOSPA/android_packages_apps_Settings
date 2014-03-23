@@ -37,6 +37,27 @@
     </PreferenceScreen>
 
     </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="category_omniswitch"
+            android:title="@string/omniswitch_category"/>
+
+    <CheckBoxPreference
+            android:key="recents_use_omniswitch"
+            android:title="@string/recents_use_omniswitch_title"
+            android:summary="@string/recents_use_omniswitch_summary" />
+
+    <Preference
+            android:key="omniswitch_start_settings"
+            android:title="@string/omniswitch_start_settings_title"
+            android:summary="@string/omniswitch_start_settings_summary" />
+
+    <CheckBoxPreference
+            android:key="recents_use_slim"
+            android:title="@string/recents_use_slim_title"
+            android:summary="@string/recents_use_slim_summary" />
+
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/listview_title" >
 
     <ListPreference
