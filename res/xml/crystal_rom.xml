@@ -36,6 +36,9 @@
            android:targetClass="com.android.settings.crystalroms.SWAPActivity" />
     </PreferenceScreen>
 
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/listview_title" >
+
     <ListPreference
         android:key="listview_animation"
         android:dialogTitle="@string/listview_animation_title"
@@ -51,6 +54,9 @@
         android:entries="@array/listview_interpolator_entries"
         android:entryValues="@array/listview_interpolator_values"
         android:defaultValue="0" />
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/other_title" >
 
     <CheckBoxPreference
         android:key="pref_disable_boot_animation"
