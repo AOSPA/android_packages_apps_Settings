@@ -169,15 +169,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mOmniSwitchSettings) {
-            startActivity(INTENT_OMNISWITCH_SETTINGS);
-            return true;
-        }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
-     }
-
-    @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mDisableBootanimPref) {
             SystemProperties.set(DISABLE_BOOTANIMATION_PERSIST_PROP, mDisableBootanimPref.isChecked() ? "1" : "0");
         } else if (preference == mForceHighEndGfx) {
@@ -200,6 +191,9 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                     })
                     .create()
                     .show();
+        } else if (preference == mOmniSwitchSettings) {
+            startActivity(INTENT_OMNISWITCH_SETTINGS);
+            return true;
         } else if (preference == mRecentsUseOmniSwitch) {
             boolean omniSwitchEnabled = (Boolean) newValue;
 
