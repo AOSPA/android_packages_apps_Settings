@@ -32,6 +32,16 @@
                 android:targetPackage="com.dsht.kerneltweaker" />
     </PreferenceScreen>
 
+    <PreferenceScreen
+        android:key="screen_recorder"
+        android:title="@string/screen_recorder_title"
+        android:fragment="com.android.settings.chameleonos.ScreenRecorderSettings" />
+
+    <PreferenceScreen
+        android:key="blacklist"
+        android:title="@string/blacklist_title"
+        android:fragment="com.android.settings.blacklist.BlacklistSettings" />
+
     <PreferenceCategory
         android:title="@string/remix_settings_interface_title">
 
