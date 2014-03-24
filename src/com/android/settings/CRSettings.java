@@ -50,8 +50,6 @@ import android.os.SystemProperties;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.internal.util.omni.OmniSwitchConstants;
-import com.android.settings.util.Helpers;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -69,16 +67,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private static final String KONSTA_NAVBAR = "konsta_navbar";
     private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
     private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
-    private static final String RECENTS_USE_OMNISWITCH = "recents_use_omniswitch";
-    private static final String OMNISWITCH_START_SETTINGS = "omniswitch_start_settings";
-    private static final String RECENTS_USE_SLIM = "recents_use_slim";
-
-    // Package name of the omnniswitch app
-    public static final String OMNISWITCH_PACKAGE_NAME = "org.omnirom.omniswitch";
-
-    // Intent for launching the omniswitch settings actvity
-    public static Intent INTENT_OMNISWITCH_SETTINGS = new Intent(Intent.ACTION_MAIN)
-         .setClassName(OMNISWITCH_PACKAGE_NAME, OMNISWITCH_PACKAGE_NAME + ".SettingsActivity");
 
     private final Configuration mCurrentConfig = new Configuration();
 
@@ -87,10 +75,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private CheckBoxPreference mKonstaNavbar;
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
-    private CheckBoxPreference mRecentsUseOmniSwitch;
-    private Preference mOmniSwitchSettings;
-    private boolean mOmniSwitchStarted;
-    private CheckBoxPreference mRecentsUseSlim;
 
     private Context mContext;
 
@@ -100,31 +84,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         addPreferencesFromResource(R.xml.crystal_rom);
 
         PreferenceScreen prefSet = getPreferenceScreen();
-
-        boolean useOmniSwitch = false;
-        boolean useSlimRecents = false;
-        try {
-            useOmniSwitch = Settings.System.getInt(getContentResolver(), Settings.System.RECENTS_USE_OMNISWITCH) == 1
-                                && isOmniSwitchServiceRunning();
-            useSlimRecents = Settings.System.getInt(getContentResolver(), Settings.System.RECENTS_USE_SLIM) == 1;
-        } catch(SettingNotFoundException e) {
-               e.printStackTrace();
-        }
-
-        // OmniSwitch
-        mRecentsUseOmniSwitch = (CheckBoxPreference) prefSet.findPreference(RECENTS_USE_OMNISWITCH);
-        mRecentsUseOmniSwitch.setChecked(useOmniSwitch);
-        mRecentsUseOmniSwitch.setOnPreferenceChangeListener(this);
-        mRecentsUseOmniSwitch.setEnabled(!useSlimRecents);
-
-        mOmniSwitchSettings = (Preference) prefSet.findPreference(OMNISWITCH_START_SETTINGS);
-        mOmniSwitchSettings.setEnabled(useOmniSwitch);
-
-        // Slim recents
-        mRecentsUseSlim = (CheckBoxPreference) prefSet.findPreference(RECENTS_USE_SLIM);
-        mRecentsUseSlim.setChecked(useSlimRecents);
-        mRecentsUseSlim.setOnPreferenceChangeListener(this);
-        mRecentsUseSlim.setEnabled(!useOmniSwitch);
 
         mListViewAnimation = (ListPreference) prefSet.findPreference(KEY_LISTVIEW_ANIMATION);
         int listviewanimation = Settings.System.getInt(getContentResolver(),
@@ -191,73 +150,8 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                     })
                     .create()
                     .show();
-        } else if (preference == mOmniSwitchSettings) {
-            startActivity(INTENT_OMNISWITCH_SETTINGS);
-            return true;
-        } else if (preference == mRecentsUseOmniSwitch) {
-            boolean omniSwitchEnabled = (Boolean) newValue;
-
-            // Give user information that OmniSwitch service is not running
-            if (omniSwitchEnabled && !isOmniSwitchServiceRunning()) {
-                openOmniSwitchFirstTimeWarning();
-            }
-
-            Settings.System.putInt(getContentResolver(), Settings.System.RECENTS_USE_OMNISWITCH, omniSwitchEnabled ? 1 : 0);
-
-            // Update OmniSwitch UI components
-            mRecentsUseOmniSwitch.setChecked(omniSwitchEnabled);
-            mOmniSwitchSettings.setEnabled(omniSwitchEnabled);
-
-            // Update Slim recents UI components
-            mRecentsUseSlim.setEnabled(!omniSwitchEnabled);
-            return true;
-        } else if (preference == mRecentsUseSlim) {
-            boolean useSlimRecents = (Boolean) newValue;
-
-            Settings.System.putInt(getContentResolver(), Settings.System.RECENTS_USE_SLIM,
-                    useSlimRecents ? 1 : 0);
-
-            // Give user information that Slim Recents needs restart SystemUI
-            openSlimRecentsWarning();
-
-            // Update OmniSwitch UI components
-            mRecentsUseOmniSwitch.setEnabled(!useSlimRecents);
-            mRecentsUseSlim.setChecked(useSlimRecents);
-            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
-    }
-
-    private boolean isOmniSwitchServiceRunning() {
-        String serviceName = "org.omnirom.omniswitch.SwitchService";
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceName.equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void openOmniSwitchFirstTimeWarning() {
-        new AlertDialog.Builder(getActivity())
-            .setTitle(getResources().getString(R.string.omniswitch_first_time_title))
-            .setMessage(getResources().getString(R.string.omniswitch_first_time_message))
-            .setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                }
-            }).show();
-    }
-
-    private void openSlimRecentsWarning() {
-        new AlertDialog.Builder(getActivity())
-            .setTitle(getResources().getString(R.string.slim_recents_warning_title))
-            .setMessage(getResources().getString(R.string.slim_recents_warning_message))
-            .setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    Helpers.restartSystemUI();
-                }
-            }).show();
     }
 
     @Override
@@ -284,4 +178,5 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         return true;
     }
 }
+
 
