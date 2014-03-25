@@ -54,6 +54,7 @@ public class RemixSettings extends SettingsPreferenceFragment {
         mViewPager = (ViewPager) view.findViewById(R.id.viewPager);
         mPagerTabStrip = (PagerTabStrip) view.findViewById(R.id.pagerTabStrip);
         mPagerTabStrip.setDrawFullUnderline(true);
+        mPagerTabStrip.setTabIndicatorColorResource(android.R.color.holo_blue_light);
 
         StatusBarAdapter StatusBarAdapter = new StatusBarAdapter(getFragmentManager());
         mViewPager.setAdapter(StatusBarAdapter);
