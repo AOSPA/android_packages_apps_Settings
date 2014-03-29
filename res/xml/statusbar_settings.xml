@@ -4,6 +4,9 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="statusbar_settings">
 
+    <PreferenceCategory
+        android:title="@string/display_settings_title" >
+
         <!-- Network usage stats -->
         <PreferenceScreen
             android:key="network_usage_stats"
@@ -27,15 +30,17 @@
             android:inputType="textNoSuggestions"
             android:persistent="false" />
 
-        <PreferenceCategory
-            android:title="@string/controls">
+    </PreferenceCategory>
 
-            <CheckBoxPreference
-                android:key="status_bar_brightness_control"
-                android:title="@string/status_bar_toggle_brightness"
-                android:summary="@string/status_bar_toggle_brightness_summary"
-                android:defaultValue="false" />
+    <PreferenceCategory
+        android:title="@string/controls">
 
-        </PreferenceCategory>
+        <CheckBoxPreference
+            android:key="status_bar_brightness_control"
+            android:title="@string/status_bar_toggle_brightness"
+            android:summary="@string/status_bar_toggle_brightness_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

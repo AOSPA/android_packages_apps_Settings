@@ -49,9 +49,12 @@ import java.io.IOException;
 public class AnimationSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
+    private static final String KEY_MORE_OPTIONS = "more_options";
     private static final String KEY_TOAST_ANIMATION = "toast_animation";
+    private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
 
     private ListPreference mToastAnimation;
+    private ListPreference mCrtMode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,23 @@ public class AnimationSettings extends SettingsPreferenceFragment implements
 	mToastAnimation.setValueIndex(CurrentToastAnimation); //set to index of default value
 	mToastAnimation.setSummary(mToastAnimation.getEntries()[CurrentToastAnimation]);
 	mToastAnimation.setOnPreferenceChangeListener(this);
+
+        // respect device default configuration
+        // true fades while false animates
+        boolean electronBeamFadesConfig = getResources().getBoolean(
+                com.android.internal.R.bool.config_animateScreenLights);
+        PreferenceCategory moreOptions =
+            (PreferenceCategory) findPreference(KEY_MORE_OPTIONS);
+        mCrtMode = (ListPreference) findPreference(KEY_POWER_CRT_MODE);
+        if (!electronBeamFadesConfig && mCrtMode != null) {
+            int crtMode = Settings.System.getInt(getContentResolver(),
+                    Settings.System.SYSTEM_POWER_CRT_MODE, 1);
+            mCrtMode.setValue(String.valueOf(crtMode));
+            mCrtMode.setSummary(mCrtMode.getEntry());
+            mCrtMode.setOnPreferenceChangeListener(this);
+        } else if (moreOptions != null) {
+            prefs.removePreference(mCrtMode);
+        }
     }
 
     @Override
@@ -79,6 +99,14 @@ public class AnimationSettings extends SettingsPreferenceFragment implements
             Settings.System.putString(getContentResolver(), Settings.System.ACTIVITY_ANIMATION_CONTROLS[10], (String) objValue);
             mToastAnimation.setSummary(mToastAnimation.getEntries()[index]);
             Toast.makeText(mContext, "Toast Test", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (KEY_POWER_CRT_MODE.equals(key)) {
+            int value = Integer.parseInt((String) objValue);
+            int index = mCrtMode.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.SYSTEM_POWER_CRT_MODE,
+                    value);
+            mCrtMode.setSummary(mCrtMode.getEntries()[index]);
             return true;
 	}
         return false;

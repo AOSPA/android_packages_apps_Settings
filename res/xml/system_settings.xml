@@ -53,17 +53,6 @@
             android:summary="@string/force_dualpanel_summary"
             android:defaultValue="false" />
 
-        <CheckBoxPreference
-            android:key="reverse_default_app_picker"
-            android:title="@string/reverse_default_app_picker"
-            android:summary="@string/reverse_default_app_picker_summary" />
-
-        <com.android.settings.preference.SystemCheckBoxPreference
-            android:key="double_tap_sleep_gesture"
-            android:title="@string/double_tap_to_sleep_title"
-            android:summary="@string/double_tap_to_sleep_summary"
-            android:defaultValue="false" />
-
         <!-- Recents RAM bar -->
         <PreferenceScreen
             android:key="recents_ram_bar"
@@ -74,6 +63,22 @@
             android:key="progressbar_settings"
             android:fragment="com.android.settings.cyanogenmod.ProgressBar"
             android:title="@string/progressbar_title" />
+
+   </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/general">
+
+        <CheckBoxPreference
+            android:key="reverse_default_app_picker"
+            android:title="@string/reverse_default_app_picker"
+            android:summary="@string/reverse_default_app_picker_summary" />
+
+        <com.android.settings.preference.SystemCheckBoxPreference
+            android:key="double_tap_sleep_gesture"
+            android:title="@string/double_tap_to_sleep_title"
+            android:summary="@string/double_tap_to_sleep_summary"
+            android:defaultValue="false" />
 
    </PreferenceCategory>
 
