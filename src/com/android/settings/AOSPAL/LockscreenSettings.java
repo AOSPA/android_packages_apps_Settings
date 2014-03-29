@@ -47,14 +47,12 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
 
     private final static String TAG = "LockscreenSettings";
 
-    private static final String LOCKSCREEN_POWER_MENU = "lockscreen_power_menu";
     private static final String KEY_ALWAYS_BATTERY_PREF = "lockscreen_battery_status";
     private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
 
     private static final String KEY_SEE_THROUGH = "see_through";
     private static final String KEY_BLUR_RADIUS = "blur_radius";
 
-    private CheckBoxPreference mLockScreenPowerMenu;
     private CheckBoxPreference mLockRingBattery;
     private CheckBoxPreference mBatteryStatus;
     private CheckBoxPreference mSeeThrough;
@@ -68,12 +66,6 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.lockscreen_settings);
 
         PreferenceScreen prefs = getPreferenceScreen();
-
-        mLockScreenPowerMenu = (CheckBoxPreference) prefs.findPreference(LOCKSCREEN_POWER_MENU);
-        if (mLockScreenPowerMenu != null) {
-            mLockScreenPowerMenu.setChecked(Settings.Secure.getInt(getContentResolver(),
-                    Settings.Secure.LOCK_SCREEN_POWER_MENU, 1) == 1);
-        }
 
         mLockRingBattery = (CheckBoxPreference) prefs.findPreference(BATTERY_AROUND_LOCKSCREEN_RING);
         if (mLockRingBattery != null) {
@@ -127,10 +119,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mLockScreenPowerMenu) {
-            Settings.Secure.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.Secure.LOCK_SCREEN_POWER_MENU, isToggled(preference) ? 1 : 0);
-        } else if (preference == mLockRingBattery) {
+        if (preference == mLockRingBattery) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.BATTERY_AROUND_LOCKSCREEN_RING, isToggled(preference) ? 1 : 0);
         } else if (preference == mSeeThrough) {
