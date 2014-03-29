@@ -35,11 +35,13 @@
     <PreferenceScreen
         android:key="screen_recorder"
         android:title="@string/screen_recorder_title"
+        android:icon="@drawable/ic_settings_src"
         android:fragment="com.android.settings.chameleonos.ScreenRecorderSettings" />
 
     <PreferenceScreen
         android:key="blacklist"
         android:title="@string/blacklist_title"
+        android:icon="@drawable/ic_settings_blacklist"
         android:fragment="com.android.settings.blacklist.BlacklistSettings" />
 
     <PreferenceCategory
