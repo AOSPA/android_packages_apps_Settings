@@ -1,5 +1,6 @@
 package com.android.settings.AOSPAL;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -49,6 +50,8 @@ public class RemixSettings extends SettingsPreferenceFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContainer = container;
+        ActionBar actionBar = getActivity().getActionBar();
+        actionBar.setIcon(R.drawable.ic_settings_system);
 
         View view = inflater.inflate(R.layout.remix_settings, container, false);
         mViewPager = (ViewPager) view.findViewById(R.id.viewPager);
