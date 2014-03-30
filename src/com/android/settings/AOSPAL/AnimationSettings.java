@@ -94,6 +94,7 @@ public class AnimationSettings extends SettingsPreferenceFragment implements
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
+        final String key = preference.getKey();
 	if (preference == mToastAnimation) {
             int index = mToastAnimation.findIndexOfValue((String) objValue);
             Settings.System.putString(getContentResolver(), Settings.System.ACTIVITY_ANIMATION_CONTROLS[10], (String) objValue);
