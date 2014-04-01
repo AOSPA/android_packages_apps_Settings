@@ -75,9 +75,13 @@
             android:summary="@string/reverse_default_app_picker_summary" />
 
         <com.android.settings.preference.SystemCheckBoxPreference
-            android:key="double_tap_sleep_gesture"
-            android:title="@string/double_tap_to_sleep_title"
-            android:summary="@string/double_tap_to_sleep_summary"
+            android:key="double_tap_sleep_status_bar"
+            android:title="@string/double_tap_to_sleep_status_bar_title"
+            android:defaultValue="false" />
+
+        <com.android.settings.preference.SystemCheckBoxPreference
+            android:key="double_tap_sleep_lockscreen"
+            android:title="@string/double_tap_to_sleep_lockscreen_title"
             android:defaultValue="false" />
 
    </PreferenceCategory>
