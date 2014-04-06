@@ -58,6 +58,11 @@
                 android:title="@string/notification_led_category_title" />
 
         <PreferenceScreen
+                android:fragment="com.android.settings.notificationlight.BatteryLightSettings"
+                android:key="battery_light"
+                android:title="@string/battery_light_title" />
+
+        <PreferenceScreen
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />

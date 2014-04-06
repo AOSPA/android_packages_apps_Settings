@@ -31,6 +31,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
@@ -52,6 +53,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_ACCELEROMETER = "accelerometer";
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
+    private static final String KEY_BATTERY_LIGHT = "battery_light";
     private static final String KEY_SCREEN_SAVER = "screensaver";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
@@ -59,6 +61,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mAccelerometer;
     private WarnedListPreference mFontSizePref;
     private PreferenceScreen mNotificationPulse;
+    private PreferenceScreen mBatteryPulse;
 
     private final Configuration mCurConfig = new Configuration();
     
@@ -115,6 +118,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (!hasNotificationLed) {
             getPreferenceScreen().removePreference(mNotificationPulse);
         }
+
+        boolean hasBatteryLed = getResources().getBoolean(
+                com.android.internal.R.bool.config_intrusiveBatteryLed);
+        mBatteryPulse = (PreferenceScreen) findPreference(KEY_BATTERY_LIGHT);
+        if (!hasBatteryLed) {
+            getPreferenceScreen().removePreference(mBatteryPulse);
+        }
+
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -208,6 +219,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
     }
 
+    private void updateBatteryPulseSummary() {
+        if (mBatteryPulse != null) {
+            if (Settings.System.getInt(getActivity().getContentResolver(),
+                    Settings.System.BATTERY_LIGHT_ENABLED, 1) == 1) {
+                mBatteryPulse.setSummary(R.string.notification_light_enabled);
+            } else {
+                mBatteryPulse.setSummary(R.string.notification_light_disabled);
+            }
+        }
+    }
+
     public void readFontSizePreference(ListPreference pref) {
         try {
             mCurConfig.updateFrom(ActivityManagerNative.getDefault().getConfiguration());
@@ -263,6 +285,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         readFontSizePreference(mFontSizePref);
         updateScreenSaverSummary();
         updateLightPulseSummary();
+        updateBatteryPulseSummary();
     }
 
     private void updateScreenSaverSummary() {
