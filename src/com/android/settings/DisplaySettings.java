@@ -196,7 +196,18 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
         return indices.length-1;
     }
-    
+
+    private void updateLightPulseSummary() {
+        if (mNotificationPulse != null) {
+            if (Settings.System.getInt(getActivity().getContentResolver(),
+                    Settings.System.NOTIFICATION_LIGHT_PULSE, 0) == 1) {
+                mNotificationPulse.setSummary(R.string.notification_light_enabled);
+            } else {
+                mNotificationPulse.setSummary(R.string.notification_light_disabled);
+            }
+        }
+    }
+
     public void readFontSizePreference(ListPreference pref) {
         try {
             mCurConfig.updateFrom(ActivityManagerNative.getDefault().getConfiguration());
@@ -251,6 +262,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         updateAccelerometerRotationCheckbox();
         readFontSizePreference(mFontSizePref);
         updateScreenSaverSummary();
+        updateLightPulseSummary();
     }
 
     private void updateScreenSaverSummary() {
