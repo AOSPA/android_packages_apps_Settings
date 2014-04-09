@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+   Copyright 2013 The ParanoidAndroid Project
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!--Notification LED category header-->
+    <string name="notification_led_category_title">Индикатор событий</string>
+
+    <!--Notification light dialogs-->
+    <string name="edit_light_settings">Изменение настроек индикатора</string>
+    <string name="pulse_speed_title">Длительность и скорость мигания</string>
+    <string name="default_time">Средне</string>
+    <string name="custom_time">Не задано</string>
+    <string name="dialog_test">Проверка</string>
+    <string name="dialog_delete_title">Удалить?</string>
+    <string name="dialog_delete_message">Настройки индикатора для этого приложения будут удалены.</string>
+    <string name="dialog_test_message">Выключите экран, чтобы увидеть выбранные настройки индикатора в действии.</string>
+    <string name="dialog_test_button">Отмена</string>
+
+    <!--Display settings screen, notification light settings-->
+    <string name="notification_light_ok">OK</string>
+    <string name="notification_light_reset">Отмена</string>
+    <string name="notification_light_general_title">General</string>
+    <string name="notification_light_applist_title">Applications</string>
+    <string name="notification_light_phonelist_title">Phone</string>
+    <string name="notification_light_use_custom">Use custom values</string>
+    <string name="notification_light_default_value">Default</string>
+    <string name="notification_light_enabled">Enabled</string>
+    <string name="notification_light_disabled">Disabled</string>
+    <string name="notification_light_missed_call_title">Missed call</string>
+    <string name="notification_light_voicemail_title">Voicemail</string>
+    <string name="notification_light_choose_app">Выберите приложение</string>
+    <string name="notification_light_add">Добавить</string>
+	
+    <!--Values for the notification light pulse spinners-->
+	<string name="pulse_length_always_on">Вкл. постоянно</string>
+    <string name="pulse_length_very_short">Очень коротко</string>
+    <string name="pulse_length_short">Коротко</string>
+    <string name="pulse_length_normal">Средне</string>
+    <string name="pulse_length_long">Долго</string>
+    <string name="pulse_length_very_long">Очень долго</string>
+    <string name="pulse_speed_very_fast">Очень быстро</string>
+    <string name="pulse_speed_fast">Быстро</string>
+    <string name="pulse_speed_normal">Средне</string>
+    <string name="pulse_speed_slow">Медленно</string>
+    <string name="pulse_speed_very_slow">Очень медленно</string>
+
+    <!-- Volume adjust sounds -->
+    <string name="volume_adjust_sounds_enable_summary">Воспроизводить звук при изменении громкости соответствующими клавишами</string>
+
+    <!-- Link volumes -->
+    <string name="link_volume_ringtones">Объединить громкость рингтона и оповещений</string>
+    <string name="volume_ring_only_description">Рингтон</string>
+
+    <string name="increasing_ring_title">Возрастающая громкость звонка</string>
+    <!-- Sound settings screen, the caption of the checkbox for making incoming calls increase in volume -->
+    <string name="checkbox_increasing_ring">Включить</string>
+    <!-- Sound settings screen, the title of the volume bar to adjust the minimum increasing ring volume -->
+    <string name="increasing_ring_min_volume_title">Начальная громкость звонка</string>
+    <string name="increasing_ring_volume_notice">Примечание:\nЕсли начальная громкость выше установленной в данный момент, звонок будет воспроизведён на громкости, установленной в системе.</string>
+    <string name="increasing_ring_interval_title">Интервал увеличения</string>
+    <string name="increasing_ring_interval_eachring">При каждом гудке</string>
+    <string name="increasing_ring_interval_half_second">0,5 секунды</string>
+    <string name="increasing_ring_interval_1second">1 секунда</string>
+    <string name="increasing_ring_interval_2seconds">2 секунды</string>
+    <string name="increasing_ring_interval_3seconds">3 секунды</string>
+    <string name="increasing_ring_interval_5seconds">5 секунд</string>
+    <string name="increasing_ring_interval_10seconds">10 секунд</string>
+
+    <!--Volume buttons category-->
+    <string name="volume_buttons_category">Клавиши громкости</string>
+
+	<string name="volume_wake_title">Включение кнопками громкости</string>
+    <string name="volume_wake_summary">Включать экран при нажатии кнопок регулировки громкости</string>
+
+    <!--Lockscreen see through-->
+    <string name="see_through_title">Полупрозрачный блокировщик</string>
+    <string name="see_through_summary">Отображать происходящее за экраном блокировки. Ваши действия могут быть увидены кем-то кроме Вас</string>
+
+    <!--AppOps-->
+    <string name="appops_settings_title">Права приложений</string>
+
+    <!--User preferences settings-->
+    <string name="personalization">Персонализация</string>
+    <string name="reset_user_preferences_title">Сброс параметров</string>
+    <string name="reset_user_preferences_summary">Сброс пользовательских предпочтений, связанных с интерфейсом</string>
+    <string name="reset_user_preferences_dialog">Вы действительно хотите сбросить эти настройки?</string>
+
+    <!--Battery icon selection-->
+    <string name="battery_status_icon_title">Индикатор батареи</string>
+    <string name="battery_bar">Батарея</string>
+    <string name="battery_bar_percent">Батарея с процентами</string>
+    <string name="battery_circle">Круг</string>
+    <string name="battery_circle_percent">Круг с процентами</string>
+
+    <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
+    <string name="custom_runtime_warning_title">Внимание</string>
+    <string name="custom_runtime_warning_message">ART не поддерживается командой ParanoidAndroid. Эта настройка является экспериментальной и может повлечь за собой нестабильность, вылеты, потерю данных и даже препятствовать запуску устройства. Прочтите статью &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Представляем ART (на англ.)&lt;/a&gt; для получения большей информации.&lt;br/&gt;&lt;br/&gt;Просим Вас не присылать отчёты об ошибках, если вы используете среду ART.&lt;br/&gt;&lt;br/&gt;Вы дейтвительно хотите перезагрузиться для смены <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> на <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
+
+    <!-- Lockscreen widgets -->
+    <string name="security_maximize_widgets_title">Разворачивать виджеты</string>
+
+    <!--PA version-->
+    <string name="pa_version">Версия ParanoidAndroid</string>
+    <string name="pa_version_default">Неизвестна</string>
+</resources>
