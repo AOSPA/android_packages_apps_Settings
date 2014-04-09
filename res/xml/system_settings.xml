@@ -44,11 +44,6 @@
         android:icon="@drawable/ic_settings_blacklist"
         android:fragment="com.android.settings.blacklist.BlacklistSettings" />
 
-    <PreferenceScreen
-        android:key="interface_battery_saver"
-        android:title="@string/battery_saver_title"
-        android:fragment="com.android.settings.AOSPAL.BatterySaverSettings" />
-
     <PreferenceCategory
         android:title="@string/remix_settings_interface_title">
 

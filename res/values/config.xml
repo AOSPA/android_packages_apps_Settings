@@ -39,7 +39,4 @@
     <!-- Processor menu, freq cap files -->
     <string name="max_cpu_freq_file" translatable="false">/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq</string>
     <string name="min_cpu_freq_file" translatable="false">/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq</string>
-
-    <!-- Whether or not the app is meant to be run as a system app, bypassing the need of busybox/su -->
-    <bool name="config_isSystemApp">true</bool>
 </resources>
