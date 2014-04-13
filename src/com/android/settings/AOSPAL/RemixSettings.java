@@ -20,6 +20,7 @@ import android.preference.PreferenceManager;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -114,7 +115,7 @@ public class RemixSettings extends SettingsPreferenceFragment {
         }
     }
 
-    class StatusBarAdapter extends FragmentPagerAdapter {
+    class StatusBarAdapter extends FragmentStatePagerAdapter {
         String titles[] = getTitles();
         private Fragment frags[] = new Fragment[titles.length];
 
