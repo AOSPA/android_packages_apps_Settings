@@ -140,6 +140,14 @@
             android:summary="@string/button_headsethook_launch_voice_summary"
             android:persistent="false" />
 
+        <com.android.settings.preference.AppSelectListPreference
+            android:key="headset_plug"
+            android:title="@string/headset_plug_enable_title"
+            android:positiveButtonText="@string/headset_plug_positive_title"
+            settings:neutralButtonText="@string/headset_plug_neutral_title"
+            settings:neutralButtonValue="SYSTEM_DEFAULT"
+            android:persistent="false"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>
