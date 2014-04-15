@@ -19,6 +19,13 @@
         android:key="clock_style_pref"
         android:title="@string/status_bar_clock" />
 
+    <!-- Active display -->	
+    <PreferenceScreen	
+        android:key="active_display"	
+        android:fragment="com.android.settings.crdroid.ActiveDisplaySettings"	
+        android:title="@string/ad_settings_title"	
+        android:summary="@string/ad_settings_summary" />
+
     <PreferenceScreen
         android:key="recents_apps_panel"
         android:fragment="com.android.settings.crystalroms.RecentsPanel"
