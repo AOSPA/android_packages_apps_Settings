@@ -67,8 +67,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private static final String KONSTA_NAVBAR = "konsta_navbar";
     private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
     private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
-    // Omni Additions
-    private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
 
     private final Configuration mCurrentConfig = new Configuration();
 
@@ -77,8 +75,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private CheckBoxPreference mKonstaNavbar;
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
-    // Omni Additions
-    private CheckBoxPreference mLockRingBattery;
 
     private Context mContext;
 
@@ -88,14 +84,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         addPreferencesFromResource(R.xml.crystal_rom);
 
         PreferenceScreen prefSet = getPreferenceScreen();
-
-        // Add the additional Omni settings
-        mLockRingBattery = (CheckBoxPreference) root
-                .findPreference(BATTERY_AROUND_LOCKSCREEN_RING);
-        if (mLockRingBattery != null) {
-            mLockRingBattery.setChecked(Settings.System.getInt(getContentResolver(),
-                    Settings.System.BATTERY_AROUND_LOCKSCREEN_RING, 0) == 1);
-        }
 
         mListViewAnimation = (ListPreference) prefSet.findPreference(KEY_LISTVIEW_ANIMATION);
         int listviewanimation = Settings.System.getInt(getContentResolver(),
@@ -145,9 +133,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         } else if (preference == mForceHighEndGfx) {
             SystemProperties.set(FORCE_HIGHEND_GFX_PERSIST_PROP,
                     mForceHighEndGfx.isChecked() ? "true" : "false");
-        } else if (preference == mLockRingBattery) {
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.BATTERY_AROUND_LOCKSCREEN_RING, isToggled(preference) ? 1 : 0);
         } else if (preference == mKonstaNavbar) {
             Settings.System.putInt(getContentResolver(), Settings.System.KONSTA_NAVBAR,
                     mKonstaNavbar.isChecked() ? 1 : 0);
