@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+   Copyright 2013 The ParanoidAndroid Project
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!--Notification LED category header-->
+    <string name="notification_led_category_title">Notificação LED</string>
+
+    <!--Notification light dialogs-->
+    <string name="edit_light_settings">Editar configurações de luz</string>
+    <string name="pulse_speed_title">Duração do pulso e velocidade</string>
+    <string name="default_time">Normal</string>
+    <string name="custom_time">Customizado</string>
+    <string name="dialog_test">Teste</string>
+    <string name="dialog_delete_title">Apagar</string>
+    <string name="dialog_delete_message">Remover item selecionado?</string>
+    <string name="dialog_test_message">Desligar o visor para ver a cor da notificação selecionada na ação ou descartar este diálogo para parar o teste</string>
+    <string name="dialog_test_button">Dispensar</string>
+
+    <!--Display settings screen, notification light settings-->
+    <string name="notification_light_ok">OK</string>
+    <string name="notification_light_reset">Resete</string>
+    <string name="notification_light_general_title">Geral</string>
+    <string name="notification_light_applist_title">Aplicações</string>
+    <string name="notification_light_phonelist_title">Fone</string>
+    <string name="notification_light_use_custom">Usar valores customizados</string>
+    <string name="notification_light_default_value">Normal</string>
+    <string name="notification_light_enabled">Habilitado</string>
+    <string name="notification_light_disabled">Desabilitado</string>
+    <string name="notification_light_missed_call_title">Ligação perdida</string>
+    <string name="notification_light_voicemail_title">Correio de voz</string>
+    <string name="notification_light_choose_app">Escolher aplicação</string>
+    <string name="notification_light_add">Adicionar</string>
+
+    <!--Values for the notification light pulse spinners-->
+    <string name="pulse_length_always_on">Sempre ligado</string>
+    <string name="pulse_length_very_short">Muito curto</string>
+    <string name="pulse_length_short">Curto</string>
+    <string name="pulse_length_normal">Normal</string>
+    <string name="pulse_length_long">Longo</string>
+    <string name="pulse_length_very_long">Muito longo</string>
+    <string name="pulse_speed_very_fast">Muito rápido</string>
+    <string name="pulse_speed_fast">Rápido</string>
+    <string name="pulse_speed_normal">Normal</string>
+    <string name="pulse_speed_slow">Devagar</string>
+    <string name="pulse_speed_very_slow">Muito devagar</string>
+
+    <!-- Volume adjust sounds -->
+    <string name="volume_adjust_sounds_enable_summary">Reproduzir som ao ajustar toques com os botões de volume</string>
+
+    <!-- Link volumes -->
+    <string name="link_volume_ringtones">Ligar toque &amp; volume das notificações</string>
+    <string name="volume_ring_only_description">Toque</string>
+
+    <string name="increasing_ring_title">Toque crescente</string>
+    <!-- Sound settings screen, the caption of the checkbox for making incoming calls increase in volume -->
+    <string name="checkbox_increasing_ring">Habilitado</string>
+    <!-- Sound settings screen, the title of the volume bar to adjust the minimum increasing ring volume -->
+    <string name="increasing_ring_min_volume_title">Volume do início do toque</string>
+    <string name="increasing_ring_volume_notice">Aviso:\nSe o volume inicial for maior que volume padrão definido do toque, o toque irá reproduzir usando o volume padrão definido</string>
+    <string name="increasing_ring_interval_title">Intervalo de aumento</string>
+    <string name="increasing_ring_interval_eachring">Em cada toque</string>
+    <string name="increasing_ring_interval_half_second">Meio segundo</string>
+    <string name="increasing_ring_interval_1second">1 segundo</string>
+    <string name="increasing_ring_interval_2seconds">2 segundos</string>
+    <string name="increasing_ring_interval_3seconds">3 segundos</string>
+    <string name="increasing_ring_interval_5seconds">5 segundos</string>
+    <string name="increasing_ring_interval_10seconds">10 segundos</string>
+
+    <!--Volume buttons category-->
+    <string name="volume_buttons_category">Botões de volume</string>
+
+    <!--Volume buttons wake-->
+    <string name="volume_wake_title">Acordar com os botões de volume</string>
+    <string name="volume_wake_summary">Ao pressionar um dos botões de volume, seu dispositivo irá acordar</string>
+
+    <!--Lockscreen see through-->
+    <string name="see_through_title">Enxergar através</string>
+    <string name="see_through_summary">Mostra o conteúdo por trás de sua tela de bloqueio. Seus dados podem ser visíveis para aqueles aos seu redor</string>
+
+    <!--AppOps-->
+    <string name="appops_settings_title">Privacidade dos Apps</string>
+
+    <!--User preferences settings-->
+    <string name="personalization">Personalização</string>
+    <string name="reset_user_preferences_title">Reiniciar preferências</string>
+    <string name="reset_user_preferences_summary">Restaura as preferências de interface de usuário para os valores padrão</string>
+    <string name="reset_user_preferences_dialog">Têm certeza que deseja restaurar suas preferências?</string>
+
+    <!--Battery icon selection-->
+    <string name="battery_status_icon_title">Ícone da barra de status</string>
+    <string name="battery_bar">Barra</string>
+    <string name="battery_bar_percent">Barra &amp; percentual</string>
+    <string name="battery_circle">Círculo</string>
+    <string name="battery_circle_percent">Círculo &amp; percentual</string>
+
+    <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
+    <string name="custom_runtime_warning_title">Aviso</string>
+    <string name="custom_runtime_warning_message">ART é suportada pela equipe ParanoidAndroid. Esta configuração está incluída somente para experimentação e tem o potencial de causar instabilidade, quedas, perda de dados ou prevenir o funcionamento correto de inicialização de seu dispositivo. Visite &lt; href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt; para mais informações.&lt;br/&gt;&lt;br/&gt; Nós pedimos que você não envie relatórios de erros se você tiver com o ART habilitado.&lt;br/&gt;&lt;br/&gt;Têm certeza que deseja reniciar o sistema para alterar o tempo de execução para <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> to <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
+
+    <!-- Lockscreen widgets -->
+    <string name="security_maximize_widgets_title">Maximizar widgets</string>
+
+    <!--PA version-->
+    <string name="pa_version">Versão ParanoidAndroid</string>
+    <string name="pa_version_default">Desconhecida</string>
+</resources>
