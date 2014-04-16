@@ -173,8 +173,8 @@ public class PowerUsageSummary extends PreferenceFragment {
 
         batteryStyle.add(1, SUBMENU_BATTERY_BAR, 1, R.string.battery_bar)
                     .setChecked(selectedIcon == 0);
-        /*batteryStyle.add(1, SUBMENU_BATTERY_BAR_PERCENT, 2, R.string.battery_bar_percent)
-                    .setChecked(selectedIcon == 1);*/
+        batteryStyle.add(1, SUBMENU_BATTERY_BAR_PERCENT, 2, R.string.battery_bar_percent)
+                    .setChecked(selectedIcon == 1);
         batteryStyle.add(1, SUBMENU_BATTERY_CIRCLE, 3, R.string.battery_circle)
                     .setChecked(selectedIcon == 2);
         batteryStyle.add(1, SUBMENU_BATTERY_CIRCLE_PERCENT, 4, R.string.battery_circle_percent)
