@@ -42,16 +42,12 @@
         android:title="@string/security_settings_title"
         android:id="@+id/security_settings" />
 
-    <!-- SuperSU -->
+    <!-- Superuser -->
     <header
-        android:id="@+id/supersu_settings"
-        android:icon="@drawable/ic_settings_supersu"
-        android:title="@string/supersu_title">
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="eu.chainfire.supersu"
-            android:targetClass="eu.chainfire.supersu.MainActivity" />
-    </header>
+        android:id="@+id/superuser"
+        android:fragment="com.koushikdutta.superuser.PolicyNativeFragment"
+        android:icon="@drawable/ic_action_permission"
+        android:title="@string/superuser" />
 
     <!-- DEVICE MANAGER section -->
     <header android:title="@string/header_device_manager" />
