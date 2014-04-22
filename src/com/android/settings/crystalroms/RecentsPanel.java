@@ -47,6 +47,7 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
 
     private static final String RECENTS_USE_OMNISWITCH = "recents_use_omniswitch";
     private static final String OMNISWITCH_START_SETTINGS = "omniswitch_start_settings";
+    private static final String SENSE4_STYLE_RECENTS_PROP = "pref_sense4_style_recents";
 
     private static final String RECENTS_USE_SLIM = "recents_use_slim";
 
@@ -61,6 +62,7 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
     private Preference mOmniSwitchSettings;
     private boolean mOmniSwitchStarted;
     private CheckBoxPreference mRecentsUseSlim;
+    private SwitchPreference mSense4RecentsPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,8 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
         addPreferencesFromResource(R.xml.recents_apps_panel);
 
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        mSense4RecentsPref = (SwitchPreference) prefSet.findPreference(SENSE4_STYLE_RECENTS_PROP);
 
         boolean useOmniSwitch = false;
         boolean useSlimRecents = false;
@@ -95,6 +99,20 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
         mRecentsUseSlim.setChecked(useSlimRecents);
         mRecentsUseSlim.setOnPreferenceChangeListener(this);
         mRecentsUseSlim.setEnabled(!useOmniSwitch);
+
+        updateSense4Recents();
+    }
+
+    /* Update functions */
+    private void updateSense4Recents() {
+        mSense4RecentsPref.setChecked(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.SENSE4_RECENT_APPS, 0) == 1);
+        mSense4RecentsPref.setOnPreferenceChangeListener(this);
+    }
+
+    /* Write functions */
+    private void writeSense4Recents(Object NewVal) {
+        Settings.System.putInt(getActivity().getContentResolver(), Settings.System.SENSE4_RECENT_APPS, (Boolean) NewVal ? 1 : 0);
+        Helpers.restartSystemUI();
     }
 
     @Override
@@ -136,6 +154,9 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
             // Update OmniSwitch UI components
             mRecentsUseOmniSwitch.setEnabled(!useSlimRecents);
             mRecentsUseSlim.setChecked(useSlimRecents);
+            return true;
+        } else if (preference == mSense4RecentsPref) {
+            writeSense4Recents(newValue);
             return true;
         }
         return false;
