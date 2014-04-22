@@ -26,12 +26,10 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
     private static final String SYSTEM_SETTINGS = "system_settings";
 
-    private static final String KEY_DUAL_PANEL = "force_dualpanel";
     private static final String KEY_REVERSE_DEFAULT_APP_PICKER = "reverse_default_app_picker";
     private static final String TELO_RADIO_SETTINGS = "telo_radio_settings";
     private static final String KEY_BLACKLIST = "blacklist";
 
-    private CheckBoxPreference mDualPanel;
     private CheckBoxPreference mReverseDefaultAppPicker;
     private PreferenceScreen mBlacklist;
 
@@ -49,9 +47,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
             systemSettings.removePreference(findPreference(TELO_RADIO_SETTINGS));
         }
-
-        mDualPanel = (CheckBoxPreference) findPreference(KEY_DUAL_PANEL);
-        mDualPanel.setChecked(Settings.System.getBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL, false));
 
         mReverseDefaultAppPicker = (CheckBoxPreference) findPreference(KEY_REVERSE_DEFAULT_APP_PICKER);
         mReverseDefaultAppPicker.setChecked(Settings.System.getInt(getContentResolver(),
@@ -78,9 +73,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mDualPanel) {
-            Settings.System.putBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL, ((CheckBoxPreference) preference).isChecked());
-        } else if (preference == mReverseDefaultAppPicker) {
+        if (preference == mReverseDefaultAppPicker) {
             Settings.System.putInt(getContentResolver(), Settings.System.REVERSE_DEFAULT_APP_PICKER,
                     mReverseDefaultAppPicker.isChecked() ? 1 : 0);
         }else {
