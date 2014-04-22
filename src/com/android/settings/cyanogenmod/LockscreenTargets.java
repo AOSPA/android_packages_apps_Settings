@@ -252,9 +252,18 @@ public class LockscreenTargets extends Fragment implements
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        Settings.System.putInt(mActivity.getContentResolver(),
+                                Settings.System.LOCKSCREEN_TARGETS, 0);
+                        // make sure to remove all drawables
+                        for (File image : mActivity.getFilesDir().listFiles()) {
+                            if (image.getName().startsWith("lockscreen_")) {
+                                image.delete();
+                            }
+                        }
+                        // re-init view
                         initializeView(null);
-                        Settings.System.putString(mActivity.getContentResolver(),
-                                Settings.System.LOCKSCREEN_TARGETS, null);
+                        // store empty targets
+                        saveAll();
                         Toast.makeText(mActivity, R.string.lockscreen_target_reset,
                                 Toast.LENGTH_LONG).show();
                     }
