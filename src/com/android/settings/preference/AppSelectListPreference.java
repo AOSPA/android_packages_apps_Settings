@@ -16,6 +16,7 @@
 package com.android.settings.preference;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -51,14 +52,34 @@ import java.util.Set;
 
 /**
  * A preference that lists installed applications, with icons, as a single select list.
- * It will return an intent as string if an app is clicked or null
- * if the positive button is pressed
+ * It will return the launch intent as string if an app is clicked
+ *
+ * if the positive button is pressed it will return positiveButtonValue or null
+ *
+ * a neutral button can be added optional by adding the neutralButtonText
+ * attribute. Pressing it will return neutralButtonValue or null
+ *
+ * e.g.
+ *         <com.android.settings.preference.AppSelectListPreference
+ *               android:key="calendar_shortcut"
+ *               android:title="@string/calendar_shortcut_title"
+ *               android:positiveButtonText="@string/default_shortcut"
+ *               settings:neutralButtonText="@string/default_shortcut2"
+ *               settings:neutralButtonValue="DEFAULT"
+ *               android:persistent="false"/>
  *
  */
 public class AppSelectListPreference extends DialogPreference {
     private final List<MyApplicationInfo> mPackageInfoList = new ArrayList<MyApplicationInfo>();
     private AppListAdapter mAdapter;
-    private String mIntent;
+    private CharSequence mReturnValue;
+    private CharSequence mNeutralButtonText;
+    private CharSequence mNeutralButtonValue;
+    private CharSequence mPositiveButtonValue;
+    private AlertDialog.Builder mBuilder;
+    private boolean mNeutralButtonPressed;
+
+    private static final String SETTINGS = "http://schemas.android.com/apk/res/com.android.settings";
 
     public AppSelectListPreference(Context context) {
         this(context, null);
@@ -66,6 +87,8 @@ public class AppSelectListPreference extends DialogPreference {
 
     public AppSelectListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        setValuesFromXml(attrs);
 
         final Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -79,6 +102,38 @@ public class AppSelectListPreference extends DialogPreference {
             mPackageInfoList.add(myInfo);
         }
         Collections.sort(mPackageInfoList, sDisplayNameComparator);
+    }
+
+    private void setValuesFromXml(AttributeSet attrs) {
+        final TypedArray typedArray = getContext().obtainStyledAttributes(
+                      attrs, R.styleable.AppSelectListPreference);
+
+        mNeutralButtonText = getAttributeStringValue(attrs, SETTINGS, "neutralButtonText", null);
+        Integer id = typedArray.getResourceId(R.styleable.AppSelectListPreference_neutralButtonText, 0);
+        if (id > 0) {
+            mNeutralButtonText = getContext().getResources().getString(id);
+        }
+
+        mNeutralButtonValue = getAttributeStringValue(attrs, SETTINGS, "neutralButtonValue", null);
+        id = typedArray.getResourceId(R.styleable.AppSelectListPreference_neutralButtonValue, 0);
+        if (id > 0) {
+            mNeutralButtonValue = getContext().getResources().getString(id);
+        }
+
+        mPositiveButtonValue = getAttributeStringValue(attrs, SETTINGS, "positiveButtonValue", null);
+        id = typedArray.getResourceId(R.styleable.AppSelectListPreference_positiveButtonValue, 0);
+        if (id > 0) {
+            mPositiveButtonValue = getContext().getResources().getString(id);
+        }
+        typedArray.recycle();
+    }
+
+    private String getAttributeStringValue(AttributeSet attrs, String namespace, String name, String defaultValue) {
+        String value = attrs.getAttributeValue(namespace, name);
+        if(value == null) {
+            value = defaultValue;
+        }
+        return value;
     }
 
     @Override
@@ -106,7 +161,7 @@ public class AppSelectListPreference extends DialogPreference {
         super.showDialog(state);
         final AlertDialog dialog = (AlertDialog) getDialog();
         final ListView listView = dialog.getListView();
-        mIntent = null;
+        mReturnValue = mPositiveButtonValue;
         listView.setItemsCanFocus(false);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -119,7 +174,7 @@ public class AppSelectListPreference extends DialogPreference {
                 Intent intent = getIntentForResolveInfo(info, Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_LAUNCHER);
 
-                mIntent = intent.toUri(0).toString();
+                mReturnValue = intent.toUri(0).toString();
                 onClick(dialog, DialogInterface.BUTTON_POSITIVE);
                 dialog.dismiss();
             }
@@ -127,12 +182,21 @@ public class AppSelectListPreference extends DialogPreference {
     }
 
     @Override
+    public void onClick(DialogInterface dialog, int which) {
+        if (which == DialogInterface.BUTTON_NEUTRAL){
+            mReturnValue = mNeutralButtonValue;
+            mNeutralButtonPressed = true;
+        }
+        super.onClick(dialog, which);
+    }
+
+    @Override
     protected void onDialogClosed(boolean positiveResult) {
         super.onDialogClosed(positiveResult);
 
-        // can be null or an intent
-        if (positiveResult) {
-            callChangeListener(mIntent);
+        // can be null an intent or whatever set as mNeutralButtonValue
+        if (positiveResult || mNeutralButtonPressed) {
+            callChangeListener(mReturnValue);
         }
     }
 
@@ -208,4 +272,31 @@ public class AppSelectListPreference extends DialogPreference {
             return collator.compare(a.label, b.label);
         }
     };
+
+    protected Dialog createDialog() {
+        super.createDialog();
+        Context context = getContext();
+
+        mBuilder = new AlertDialog.Builder(context)
+            .setTitle(getDialogTitle())
+            .setIcon(getDialogIcon())
+            .setPositiveButton(getPositiveButtonText(), this)
+            .setNegativeButton(getNegativeButtonText(), this);
+
+        if (mNeutralButtonText != null){
+            mBuilder.setNeutralButton(mNeutralButtonText, this);
+        }
+
+        View contentView = onCreateDialogView();
+        if (contentView != null) {
+            onBindDialogView(contentView);
+            mBuilder.setView(contentView);
+        } else {
+            mBuilder.setMessage(getDialogMessage());
+        }
+
+        onPrepareDialogBuilder(mBuilder);
+
+        return mBuilder.create();
+    }
 }
