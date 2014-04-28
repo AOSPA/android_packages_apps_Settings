@@ -43,7 +43,11 @@
         android:title="@string/network_settings_title"
         android:dependency="toggle_airplane">
         <intent
-            android:action="android.settings.DATA_ROAMING_SETTINGS" />
+            android:action="android.settings.DATA_ROAMING_SETTINGS" >
+        <extra android:name="PACKAGE" android:value="com.android.phone" />
+        <extra android:name="TARGET_CLASS"
+               android:value="com.android.phone.MSimMobileNetworkSubSettings" />
+        </intent>
     </header>
 
     <!-- Data Usage -->
@@ -59,14 +63,6 @@
         android:id="@+id/operator_settings">
         <intent android:action="com.android.settings.OPERATOR_APPLICATION_SETTING" />
     </header>
-
-    <!-- Other wireless and network controls -->
-    <header
-        android:id="@+id/wireless_settings"
-        android:title="@string/radio_controls_title"
-        android:breadCrumbTitle="@string/wireless_networks_settings_title"
-        android:fragment="com.android.settings.WirelessSettings"
-        android:icon="@drawable/empty_icon" />
 
     <!-- Crystal -->
     <header android:id="@+id/crystal_rom"
@@ -111,6 +107,18 @@
             android:targetPackage="com.android.settings"
             android:targetClass="com.android.settings.MultiSimSettings" />
     </header>
+
+    <!-- Other wireless and network controls -->
+    <header
+        android:id="@+id/wireless_settings"
+        android:title="@string/radio_controls_title"
+        android:breadCrumbTitle="@string/wireless_networks_settings_title"
+        android:fragment="com.android.settings.WirelessSettings"
+        android:icon="@drawable/empty_icon" />
+
+    <!-- DEVICE -->
+    <header android:id="@+id/device_section"
+        android:title="@string/header_category_device" />
 
     <!-- Home -->
     <header
