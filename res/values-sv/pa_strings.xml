@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+   Copyright 2013 The ParanoidAndroid Project
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!--Notification LED category header-->
+    <string name="notification_led_category_title">Notifikations LED</string>
+
+    <!--Notification light dialogs-->
+    <string name="edit_light_settings">Redigera ljus inställningar</string>
+    <string name="pulse_speed_title">Pulserings längd och hastighet</string>
+    <string name="default_time">Normal</string>
+    <string name="custom_time">Anpassad</string>
+    <string name="dialog_test">Testa</string>
+    <string name="dialog_delete_title">Radera</string>
+    <string name="dialog_delete_message">Radera markerat objekt?</string>
+    <string name="dialog_test_message">Stäng av skärmen för att se den valda notifikationen eller avvisa denna dialog för att stoppa testet</string>
+    <string name="dialog_test_button">Avvisa</string>
+
+    <!--Display settings screen, notification light settings-->
+    <string name="notification_light_ok">OK</string>
+    <string name="notification_light_reset">Återställ</string>
+    <string name="notification_light_general_title">Allmän</string>
+    <string name="notification_light_applist_title">Applikationer</string>
+    <string name="notification_light_phonelist_title">Telefon</string>
+    <string name="notification_light_use_custom">Använd anpassade värden</string>
+    <string name="notification_light_default_value">Standardvärde</string>
+    <string name="notification_light_enabled">Aktiverad</string>
+    <string name="notification_light_disabled">Avaktiverad</string>
+    <string name="notification_light_missed_call_title">Missat samtal</string>
+    <string name="notification_light_voicemail_title">Röstbrevlåda</string>
+    <string name="notification_light_choose_app">Välj applikation</string>
+    <string name="notification_light_add">Lägg till</string>
+
+    <!--Values for the notification light pulse spinners-->
+    <string name="pulse_length_always_on">Alltid på</string>
+    <string name="pulse_length_very_short">Mycket kort</string>
+    <string name="pulse_length_short">Kort</string>
+    <string name="pulse_length_normal">Normal</string>
+    <string name="pulse_length_long">Lång</string>
+    <string name="pulse_length_very_long">Mycket lång</string>
+    <string name="pulse_speed_very_fast">Mycket snabb</string>
+    <string name="pulse_speed_fast">Snabb</string>
+    <string name="pulse_speed_normal">Normal</string>
+    <string name="pulse_speed_slow">Långsam</string>
+    <string name="pulse_speed_very_slow">Mycket långsam</string>
+
+    <!-- Volume adjust sounds -->
+    <string name="volume_adjust_sounds_enable_summary">Spela upp ljud vid justering av ringsignal med volymknappar</string>
+
+    <!-- Link volumes -->
+    <string name="link_volume_ringtones">Länka ringsignal &amp; notifikations volym</string>
+    <string name="volume_ring_only_description">Ringsignal</string>
+
+    <string name="increasing_ring_title">Stigande ringsignal</string>
+    <!-- Sound settings screen, the caption of the checkbox for making incoming calls increase in volume -->
+    <string name="checkbox_increasing_ring">Aktivera</string>
+    <!-- Sound settings screen, the title of the volume bar to adjust the minimum increasing ring volume -->
+    <string name="increasing_ring_min_volume_title">Ringsignalstartvolym</string>
+    <string name="increasing_ring_volume_notice">Notera:\nAs startvolymen är inställd högre änn den vanliga ringvolymem, ringsignalen spelas upp med hjälp av volymen på ringsignalen</string>
+    <string name="increasing_ring_interval_title">Öka intervall</string>
+    <string name="increasing_ring_interval_eachring">På varje ringing</string>
+    <string name="increasing_ring_interval_half_second">En halv sekund</string>
+    <string name="increasing_ring_interval_1second">1 sekund</string>
+    <string name="increasing_ring_interval_2seconds">2 sekunder</string>
+    <string name="increasing_ring_interval_3seconds">3 sekunder</string>
+    <string name="increasing_ring_interval_5seconds">5 sekunder</string>
+    <string name="increasing_ring_interval_10seconds">10 sekunder</string>
+
+    <!--Volume buttons category-->
+    <string name="volume_buttons_category">Volymknappar</string>
+
+    <!--Volume buttons wake-->
+    <string name="volume_wake_title">Volymknappar vaknar enheten</string>
+    <string name="volume_wake_summary">Genom att trycka på någon av volymknapparna vaknar enheten</string>
+
+    <!--Lockscreen see through-->
+    <string name="see_through_title">Genomskinlig</string>
+    <string name="see_through_summary">Visar innehållet bakom ditt skärmlås. Dina uppgifter kan vara synliga för dem omkring dig</string>
+
+    <!--AppOps-->
+    <string name="appops_settings_title">App säkerhet</string>
+
+    <!--User preferences settings-->
+    <string name="personalization">Anpassning</string>
+    <string name="reset_user_preferences_title">Återställ PA inst.</string>
+    <string name="reset_user_preferences_summary">Raderar alla inställningar relaterade till ParanoidAndroid på telefonen</string>
+    <string name="reset_user_preferences_dialog">Är du säker på att du vill radera alla inställningar?</string>
+
+    <!--Battery icon selection-->
+    <string name="battery_status_icon_title">Status ikon</string>
+    <string name="battery_bar">Batteri</string>
+    <string name="battery_bar_percent">Batteri &amp; procent</string>
+    <string name="battery_circle">Cirkel</string>
+    <string name="battery_circle_percent">Cirkel &amp; procent</string>
+
+    <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
+    <string name="custom_runtime_warning_title">Varning</string>
+    <string name="custom_runtime_warning_message">ART stöds ej officielt av ParanoidAndroid teamet! Denna inställning kan orsaka instabilitet, krascher, data förluster och förhindra uppstart av telefonen.  Besök &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt; för mer information.&lt;br/&gt;&lt;br/&gt;Vi begär att du ej skriver fellraporter om du har aktiverat ART som din körningstid.&lt;br/&gt;&lt;br/&gt;Är du säker att du vill starta om för att byta körningstid från <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> till <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
+
+    <!-- Lockscreen widgets -->
+    <string name="security_maximize_widgets_title">Maximera widgets</string>
+
+    <!--PA version-->
+    <string name="pa_version">ParanoidAndroid-version</string>
+    <string name="pa_version_default">Unknown</string>
+</resources>
