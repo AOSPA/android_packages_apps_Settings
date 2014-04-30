@@ -26,6 +26,10 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+<<<<<<< HEAD
+=======
+import android.net.Uri;
+>>>>>>> PA/kitkat
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
@@ -57,6 +61,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_SCREEN_SAVER = "screensaver";
+<<<<<<< HEAD
     private static final String KEY_ANIMATION_OPTIONS = "category_animation_options";
     private static final String KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED = "wake_when_plugged_or_unplugged";
 
@@ -70,6 +75,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private PreferenceScreen mDisplayRotationPreference;
     private CheckBoxPreference mWakeWhenPluggedOrUnplugged;
+=======
+    private static final String KEY_PEEK = "notification_peek";
+
+    private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
+
+    private CheckBoxPreference mAccelerometer;
+    private CheckBoxPreference mNotificationPeek;
+>>>>>>> PA/kitkat
     private WarnedListPreference mFontSizePref;
     private PreferenceScreen mNotificationPulse;
 
@@ -127,6 +140,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref = (WarnedListPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
         mFontSizePref.setOnPreferenceClickListener(this);
+
+        mNotificationPeek = (CheckBoxPreference) findPreference(KEY_PEEK);
+        mNotificationPeek.setPersistent(false);
 
         boolean hasNotificationLed = getResources().getBoolean(
                 com.android.internal.R.bool.config_intrusiveNotificationLed);
@@ -280,6 +296,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         readFontSizePreference(mFontSizePref);
         updateScreenSaverSummary();
         updateLightPulseSummary();
+        updatePeekCheckbox();
     }
 
     private void updateScreenSaverSummary() {
@@ -287,6 +304,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mScreenSaverPreference.setSummary(
                     DreamSettings.getSummaryTextWithDreamName(getActivity()));
         }
+    }
+
+    private void updatePeekCheckbox() {
+        boolean enabled = Settings.System.getInt(getContentResolver(),
+                Settings.System.PEEK_STATE, 0) == 1;
+        mNotificationPeek.setChecked(enabled);
     }
 
     public void writeFontSizePreference(Object objValue) {
@@ -353,11 +376,20 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+<<<<<<< HEAD
         if (preference == mWakeWhenPluggedOrUnplugged) {
             Settings.Global.putInt(getContentResolver(),
                     Settings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
                     mWakeWhenPluggedOrUnplugged.isChecked() ? 1 : 0);
             return true;
+=======
+        if (preference == mAccelerometer) {
+            RotationPolicy.setRotationLockForAccessibility(
+                    getActivity(), !mAccelerometer.isChecked());
+        } else if (preference == mNotificationPeek) {
+            Settings.System.putInt(getContentResolver(), Settings.System.PEEK_STATE,
+                    mNotificationPeek.isChecked() ? 1 : 0);
+>>>>>>> PA/kitkat
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
