@@ -332,7 +332,7 @@ public class ConnectionSettingsTab extends PreferenceActivity
      */
     @Override
     public void onBuildHeaders(List<Header> headers) {
-        loadHeadersFromResource(R.xml.jbmini_tab_connection_settings, headers);
+        loadHeadersFromResource(R.xml.tab_connection_settings, headers);
 
         updateHeaderList(headers);
     }

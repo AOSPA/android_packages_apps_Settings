@@ -372,7 +372,7 @@ public class DeviceSettingsTab extends PreferenceActivity
      */
     @Override
     public void onBuildHeaders(List<Header> headers) {
-        loadHeadersFromResource(R.xml.jbmini_tab_device_settings, headers);
+        loadHeadersFromResource(R.xml.tab_device_settings, headers);
 
         updateHeaderList(headers);
     }

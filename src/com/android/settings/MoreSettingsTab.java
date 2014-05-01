@@ -368,7 +368,7 @@ public class MoreSettingsTab extends PreferenceActivity
      */
     @Override
     public void onBuildHeaders(List<Header> headers) {
-        loadHeadersFromResource(R.xml.jbmini_tab_more_settings, headers);
+        loadHeadersFromResource(R.xml.tab_more_settings, headers);
 
         updateHeaderList(headers);
     }
