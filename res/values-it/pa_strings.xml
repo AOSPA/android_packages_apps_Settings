@@ -16,6 +16,12 @@
    limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!--Notification category-->
+    <string name="notification_category">Notifiche</string>
+
+    <!--Notification peek-->
+    <string name="notification_peek_title">Notifica peek</string>
+    <string name="notification_peek_summary">Mostra l\'ultima notifica dopo aver preso in mano il tuo dispositivo</string>
     <!--Notification LED category header-->
     <string name="notification_led_category_title">LED di notifica</string>
 
@@ -113,7 +119,9 @@
 
     <!-- Lockscreen widgets -->
     <string name="security_maximize_widgets_title">Massimizza widget</string>
-
+    <!-- Whether to display the IME switcher notifcation -->
+    <string name="ime_switcher_notify">Selettore notifica</string>
+    <string name="ime_switcher_notify_summary">Mostra sul display il metodo di immissione</string>
     <!--PA version-->
     <string name="pa_version">Versione ParanoidAndroid</string>
     <string name="pa_version_default">Sconosciuta</string>
