@@ -224,9 +224,12 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory
         }
 
         final boolean isRemovable = mVolume != null ? mVolume.isRemovable() : false;
+        final boolean isUsbStorage = mVolume != null ? (mVolume.getDescription(context).equals(
+                Resources.getSystem().getString(Resources.getSystem().getIdentifier(
+                "storage_usb", "string", "android"))) ? true : false) : false;
         // Always create the preference since many code rely on it existing
         mMountTogglePreference = new Preference(context);
-        if (isRemovable) {
+        if (isRemovable && (isUsbStorage)) {
             mMountTogglePreference.setTitle(R.string.sd_eject);
             mMountTogglePreference.setSummary(R.string.sd_eject_summary);
             addPreference(mMountTogglePreference);
