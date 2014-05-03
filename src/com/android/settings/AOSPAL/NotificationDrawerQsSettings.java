@@ -156,16 +156,16 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment imp
         super.onResume();
     }
 
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+        ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mQuickPulldown) {
-            int statusQuickPulldown = Integer.valueOf((String) newValue);
+            int statusQuickPulldown = Integer.valueOf((String) objValue);
             Settings.System.putIntForUser(getContentResolver(), Settings.System.QS_QUICK_PULLDOWN,
                     statusQuickPulldown, UserHandle.USER_CURRENT);
             updateQuickPulldownSummary(statusQuickPulldown);
             return true;
         } else if (preference == mSmartPulldown) {
-            int smartPulldown = Integer.valueOf((String) newValue);
+            int smartPulldown = Integer.valueOf((String) objValue);
             Settings.System.putInt(getContentResolver(), Settings.System.QS_SMART_PULLDOWN,
                     smartPulldown);
             updateSmartPulldownSummary(smartPulldown);
@@ -173,10 +173,10 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment imp
         } else if (preference == mReminder) {
             Settings.System.putIntForUser(getContentResolver(),
                     Settings.System.REMINDER_ALERT_ENABLED,
-                    (Boolean) newValue ? 1 : 0, UserHandle.USER_CURRENT);
+                    (Boolean) objValue ? 1 : 0, UserHandle.USER_CURRENT);
             return true;
         } else if (preference == mReminderMode) {
-            int mode = Integer.valueOf((String) newValue);
+            int mode = Integer.valueOf((String) objValue);
             Settings.System.putIntForUser(getContentResolver(),
                     Settings.System.REMINDER_ALERT_NOTIFY,
                     mode, UserHandle.USER_CURRENT);
@@ -184,7 +184,7 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment imp
             mReminderRingtone.setEnabled(mode != 0);
             return true;
         } else if (preference == mReminderRingtone) {
-            Uri val = Uri.parse((String) newValue);
+            Uri val = Uri.parse((String) objValue);
             Ringtone ringtone = RingtoneManager.getRingtone(getActivity(), val);
             mReminderRingtone.setSummary(ringtone.getTitle(getActivity()));
             Settings.System.putStringForUser(getContentResolver(),
@@ -192,23 +192,22 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment imp
                     val.toString(), UserHandle.USER_CURRENT);
             return true;
        } else if (preference == mReminderInterval) {
-            int interval = Integer.valueOf((String) newValue);
+            int interval = Integer.valueOf((String) objValue);
             Settings.System.putIntForUser(getContentResolver(),
                     Settings.System.REMINDER_ALERT_INTERVAL,
                     interval, UserHandle.USER_CURRENT);
             updateReminderIntervalSummary(interval);
+            return true;
         } else if (preference == mClockShortcut) {
-            Uri val = Uri.parse((String) newValue);
-            Settings.System.putStringForUser(getContentResolver(),
-                    Settings.System.CLOCK_SHORTCUT,
-                    val.toString());
+            String value = (String) objValue;
+            // a value of null means to use the default
+            Settings.System.putString(getContentResolver(), Settings.System.CLOCK_SHORTCUT, value);
             updateClockCalendarSummary();
             return true;
         } else if (preference == mCalendarShortcut) {
-            Uri val = Uri.parse((String) newValue);
-            Settings.System.putStringForUser(getContentResolver(),
-                    Settings.System.CALENDAR_SHORTCUT,
-                    val.toString());
+            String value = (String) objValue;
+            // a value of null means to use the default
+            Settings.System.putString(getContentResolver(), Settings.System.CALENDAR_SHORTCUT, value);
             updateClockCalendarSummary();
             return true;
         }
