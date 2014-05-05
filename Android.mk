@@ -10,6 +10,13 @@ LOCAL_SRC_FILES := \
         $(call all-java-files-under, src) \
         src/com/android/settings/EventLogTags.logtags
 
+LOCAL_SRC_FILES += $(call all-java-files-under, ../RemixSettings/src)
+
+LOCAL_RESOURCE_DIR += $(LOCAL_PATH)/res
+LOCAL_RESOURCE_DIR += packages/apps/RemixSettings/res
+LOCAL_AAPT_FLAGS := --auto-add-overlay \
+	--extra-packages org.aospal.remixsettings
+
 LOCAL_PACKAGE_NAME := Settings
 LOCAL_CERTIFICATE := platform
 LOCAL_PRIVILEGED_MODULE := true
