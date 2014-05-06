@@ -118,6 +118,15 @@
     <string name="custom_runtime_warning_title">Warning</string>
     <string name="custom_runtime_warning_message">ART is not supported by the ParanoidAndroid team. This setting is included for experimentation only and has the potential to cause instability, crashes, data loss or prevent the proper boot of your device. Visit &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt; for more information.&lt;br/&gt;&lt;br/&gt;We request you do not file bug reports if you have enabled ART as your runtime.&lt;br/&gt;&lt;br/&gt;Are you sure you want to reboot to change runtime from <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> to <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
 
+    <!-- Setting checkbox title for root access -->
+    <string name="root_access">Root access</string>
+    <string name="root_access_warning_title">Allow root access?</string>
+    <string name="root_access_warning_message">Allowing applications to request root access is very dangerous and could compromise the security of your system!</string>
+    <string name="root_access_none">Disabled</string>
+    <string name="root_access_apps">Apps only</string>
+    <string name="root_access_adb">ADB only</string>
+    <string name="root_access_all">Apps and ADB</string>
+
     <!--PA version-->
     <string name="pa_version">ParanoidAndroid version</string>
     <string name="pa_version_default">Unknown</string>
