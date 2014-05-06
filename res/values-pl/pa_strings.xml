@@ -16,6 +16,13 @@
    limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<!--Notification category-->
+    <string name="notification_category">Powiadomienia</string>
+
+    <!--Notification peek-->
+    <string name="notification_peek_title">Podgląd powiadomień</string>
+    <string name="notification_peek_summary">Pokaż ostatnie powiadomienie po podniesieniu urządzenia</string>
+	
     <!--Notification LED category header-->
     <string name="notification_led_category_title">Dioda Powiadomień</string>
 
@@ -109,10 +116,14 @@
 
     <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
     <string name="custom_runtime_warning_title">Ostrzeżenie</string>
-    <string name="custom_runtime_warning_message">ART nie jest wspierany przez CyanogenMod. To ustawienie jest eksperymentalne i może powodować braki stabilności, błędy w działaniu niektórych aplikacji, utratę danych lub spowodować brak możliwości włączenia urządzenia. Po więcej informacji odwiedź &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;Prosimy o nieprzesyłanie raportów o błędach jeśli ART jest aktywowany.&lt;br/&gt;&lt;br/&gt;Czy jesteś pewień, że chcesz zrestartować urządzenie w celu zmiany <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> na <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
+    <string name="custom_runtime_warning_message">ART nie jest wspierany przez ParanoidAndroid. To ustawienie jest eksperymentalne i może powodować braki stabilności, błędy w działaniu niektórych aplikacji, utratę danych lub spowodować brak możliwości włączenia urządzenia. Po więcej informacji odwiedź &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;Prosimy o nieprzesyłanie raportów o błędach jeśli ART jest aktywowany.&lt;br/&gt;&lt;br/&gt;Czy jesteś pewien, że chcesz zrestartować urządzenie w celu zmiany <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> na <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
 
     <!-- Lockscreen widgets -->
     <string name="security_maximize_widgets_title">Maksymalizuj widgety</string>
+
+    <!-- Whether to display the IME switcher notifcation -->
+    <string name="ime_switcher_notify">Wybór metody wprowadzania</string>
+    <string name="ime_switcher_notify_summary">Pokazuj powiadomienie wyboru metody wprowadzania</string>
 
     <!--PA version-->
     <string name="pa_version">Wersja ParanoidAndroid</string>
