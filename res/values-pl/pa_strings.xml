@@ -16,6 +16,13 @@
    limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!--Notification category-->
+    <string name="notification_category">Powiadomienia</string>
+
+    <!--Notification peek-->
+    <string name="notification_peek_title">Podgląd powiadomień</string>
+    <string name="notification_peek_summary">Pokaż ostatnie powiadomienie po podniesieniu urządzenia</string>
+
     <!--Notification LED category header-->
     <string name="notification_led_category_title">Dioda Powiadomień</string>
 
@@ -75,10 +82,10 @@
     <string name="increasing_ring_interval_eachring">Przy każdym sygnale</string>
     <string name="increasing_ring_interval_half_second">Co pół sekundy</string>
     <string name="increasing_ring_interval_1second">1 sekunda</string>
-    <string name="increasing_ring_interval_2seconds">2 sekunda</string>
-    <string name="increasing_ring_interval_3seconds">3 sekunda</string>
-    <string name="increasing_ring_interval_5seconds">5 sekunda</string>
-    <string name="increasing_ring_interval_10seconds">10 sekunda</string>
+    <string name="increasing_ring_interval_2seconds">2 sekundy</string>
+    <string name="increasing_ring_interval_3seconds">3 sekundy</string>
+    <string name="increasing_ring_interval_5seconds">5 sekund</string>
+    <string name="increasing_ring_interval_10seconds">10 sekund</string>
 
     <!--Volume buttons category-->
     <string name="volume_buttons_category">Przyciski głośnośći</string>
@@ -92,7 +99,7 @@
     <string name="see_through_summary">Pokazuje zawartość ekranu będąca za ekranem blokady. Twoje dane mogą być widoczne dla osób postronnych</string>
 
     <!--AppOps-->
-    <string name="appops_settings_title">Prywatność aplikacji</string>
+    <string name="appops_settings_title">Uprawnienia aplikacji</string>
 
     <!--User preferences settings-->
     <string name="personalization">Personalizacja</string>
@@ -109,10 +116,31 @@
 
     <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
     <string name="custom_runtime_warning_title">Ostrzeżenie</string>
-    <string name="custom_runtime_warning_message">ART nie jest wspierany przez CyanogenMod. To ustawienie jest eksperymentalne i może powodować braki stabilności, błędy w działaniu niektórych aplikacji, utratę danych lub spowodować brak możliwości włączenia urządzenia. Po więcej informacji odwiedź &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;Prosimy o nieprzesyłanie raportów o błędach jeśli ART jest aktywowany.&lt;br/&gt;&lt;br/&gt;Czy jesteś pewień, że chcesz zrestartować urządzenie w celu zmiany <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> na <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
+    <string name="custom_runtime_warning_message">ART nie jest wspierany przez ParanoidAndroid. To ustawienie jest eksperymentalne i może powodować braki stabilności, błędy w działaniu niektórych aplikacji, utratę danych lub spowodować brak możliwości włączenia urządzenia. Po więcej informacji odwiedź &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;Prosimy o nieprzesyłanie raportów o błędach jeśli ART jest aktywowany.&lt;br/&gt;&lt;br/&gt;Czy jesteś pewien, że chcesz zrestartować urządzenie w celu zmiany <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> na <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
 
     <!-- Lockscreen widgets -->
     <string name="security_maximize_widgets_title">Maksymalizuj widgety</string>
+
+    <!-- Whether to display the IME switcher notifcation -->
+    <string name="ime_switcher_notify">Wybór metody wprowadzania</string>
+    <string name="ime_switcher_notify_summary">Pokazuj powiadomienie wyboru metody wprowadzania</string>
+
+    <!-- Setting checkbox title for root access -->
+    <string name="root_access">Dostęp do roota</string>
+    <string name="root_access_warning_title">Zezwolić na dostęp do roota?</string>
+    <string name="root_access_warning_message">Pozwolenie aplikacjom na dostęp do rotta jest bardzo niebiezpieczne i może zmniejszyć bezpieczeństwo systemu!</string>
+    <string name="root_access_none">Wyłaczony</string>
+    <string name="root_access_apps">Tylko aplikacje</string>
+    <string name="root_access_adb">Tylko ADB</string>
+    <string name="root_access_all">Aplikacje i ADB</string>
+
+    <!-- Low battery warning policy -->
+    <string name="low_battery_warning_policy_title">Ostrzeżenie o niskim poziomie baterii</string>
+    <string name="low_battery_warning_policy_popup_sound">Wyskakujące okienko i dźwięk</string>
+    <string name="low_battery_warning_policy_notif_sound">Powiadomienie i dźwięk</string>
+    <string name="low_battery_warning_policy_popup">Tylko wyskakujące okienko</string>
+    <string name="low_battery_warning_policy_notif">Tylko powiadomienie</string>
+    <string name="low_battery_warning_policy_sound">Tylko dźwięk</string>
 
     <!--PA version-->
     <string name="pa_version">Wersja ParanoidAndroid</string>
