@@ -223,7 +223,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         if (mVib == null || !mVib.hasVibrator()) {
             removePreference(KEY_VIBRATE);
             removePreference(KEY_HAPTIC_FEEDBACK);
-            removePreference(KEY_POWER_NOTIFICATIONS_VIBRATE);
             removePreference(KEY_VIBRATION_DURATION);
         }
 
