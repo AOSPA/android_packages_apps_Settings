@@ -24,15 +24,6 @@
         android:fragment="com.android.settings.AOSPAL.WakeLockBlocker" />
 
     <PreferenceScreen
-        android:key="@+id/kernel_tweaker"
-        android:title="@string/kernel_tweaker"
-        android:icon="@drawable/ic_settings_performance" >
-        <intent android:action="android.intent.action.MAIN"
-                android:targetClass="com.dsht.kerneltweaker.MainActivity"
-                android:targetPackage="com.dsht.kerneltweaker" />
-    </PreferenceScreen>
-
-    <PreferenceScreen
         android:key="screen_recorder"
         android:title="@string/screen_recorder_title"
         android:icon="@drawable/ic_settings_src"
