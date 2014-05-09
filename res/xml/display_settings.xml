@@ -65,6 +65,12 @@
                 android:summary="@string/summary_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
 
+        <ListPreference
+                android:key="screen_off_animation"
+                android:title="@string/screen_off_animation"
+                android:entries="@array/screen_off_animation_entries"
+                android:entryValues="@array/screen_off_animation_values" />
+
         <PreferenceScreen
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
