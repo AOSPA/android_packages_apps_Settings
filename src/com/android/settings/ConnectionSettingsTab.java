@@ -19,6 +19,7 @@ package com.android.settings;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.wifi.WifiEnabler;
+import com.android.settings.net.MobileDataEnabler;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -356,6 +357,11 @@ public class ConnectionSettingsTab extends PreferenceActivity
                 if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
                     target.remove(header);
                 }
+            } else if (id == R.id.mobile_network_settings) {
+                // Remove mobile network settings if the device doesn't have telephony
+                if (Utils.isWifiOnly(this)) {
+                    target.remove(i);
+                }
             } else if (id == R.id.data_usage_settings) {
                 // Remove data usage when kernel module not enabled
                 final INetworkManagementService netManager = INetworkManagementService.Stub
@@ -423,6 +429,7 @@ public class ConnectionSettingsTab extends PreferenceActivity
 
         private final WifiEnabler mWifiEnabler;
         private final BluetoothEnabler mBluetoothEnabler;
+        private final MobileDataEnabler mMobileDataEnabler;
 
         private static class HeaderViewHolder {
             ImageView icon;
@@ -437,7 +444,8 @@ public class ConnectionSettingsTab extends PreferenceActivity
             if (header.fragment == null && header.intent == null) {
                 return HEADER_TYPE_CATEGORY;
             } else if (header.id == R.id.wifi_settings
-                    || header.id == R.id.bluetooth_settings) {
+                    || header.id == R.id.bluetooth_settings
+                    || header.id == R.id.mobile_network_settings) {
                 return HEADER_TYPE_SWITCH;
             } else {
                 return HEADER_TYPE_NORMAL;
@@ -479,6 +487,7 @@ public class ConnectionSettingsTab extends PreferenceActivity
             // Switches inflated from their layouts. Must be done before adapter is set in super
             mWifiEnabler = new WifiEnabler(context, new Switch(context));
             mBluetoothEnabler = new BluetoothEnabler(context, new Switch(context));
+            mMobileDataEnabler = new MobileDataEnabler(context, new Switch(context));
         }
 
         @Override
@@ -537,7 +546,10 @@ public class ConnectionSettingsTab extends PreferenceActivity
                         mWifiEnabler.setSwitch(holder.switch_);
                     } else if (header.id == R.id.bluetooth_settings) {
                         mBluetoothEnabler.setSwitch(holder.switch_);
+                    } else if (header.id == R.id.mobile_network_settings) {
+                        mMobileDataEnabler.setSwitch(holder.switch_);
                     }
+
                     // No break, fall through on purpose to update common fields
 
                     //$FALL-THROUGH$
@@ -560,11 +572,13 @@ public class ConnectionSettingsTab extends PreferenceActivity
         public void resume() {
             mWifiEnabler.resume();
             mBluetoothEnabler.resume();
+            mMobileDataEnabler.resume();
         }
 
         public void pause() {
             mWifiEnabler.pause();
             mBluetoothEnabler.pause();
+            mMobileDataEnabler.pause();
         }
     }
 
