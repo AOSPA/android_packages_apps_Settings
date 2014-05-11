@@ -34,7 +34,6 @@ import com.android.settings.AOSPAL.NotificationDrawerQsSettings;
 import com.android.settings.AOSPAL.StatusBarSettings;
 import com.android.settings.AOSPAL.SystemSettings;
 import com.android.settings.AOSPAL.LockscreenSettings;
-import com.android.settings.AOSPAL.util.DepthPageTransformer;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -61,7 +60,6 @@ public class RemixSettings extends SettingsPreferenceFragment implements ActionB
         StatusBarAdapter StatusBarAdapter = new StatusBarAdapter(getFragmentManager());
 
         mViewPager.setAdapter(StatusBarAdapter);
-        mViewPager.setPageTransformer(true, new DepthPageTransformer());
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
