@@ -122,6 +122,23 @@
     <!-- Whether to display the IME switcher notifcation -->
     <string name="ime_switcher_notify">Selettore notifica</string>
     <string name="ime_switcher_notify_summary">Mostra sul display il metodo di immissione</string>
+    <!-- Setting checkbox title for root access -->
+    <string name="root_access">Accesso di root</string>
+    <string name="root_access_warning_title">Consentire l\'accesso di root?</string>
+    <string name="root_access_warning_message">Consentendo alle applicazioni di richiedere l\'accesso di root può essere molto pericoloso perchè potrebbe compromettere la sicurezza del sistema!</string>
+    <string name="root_access_none">Disattivo</string>
+    <string name="root_access_apps">Solo applicazioni</string>
+    <string name="root_access_adb">Solo ADB</string>
+    <string name="root_access_all">Applicazioni e ADB</string>
+
+    <!-- Low battery warning policy -->
+    <string name="low_battery_warning_policy_title">Avviso di batteria scarica</string>
+    <string name="low_battery_warning_policy_popup_sound">Pop-up e suono</string>
+    <string name="low_battery_warning_policy_notif_sound">Notifica e souno</string>
+    <string name="low_battery_warning_policy_popup">Solo finestra di Pop-up</string>
+    <string name="low_battery_warning_policy_notif">Solo notifica</string>
+    <string name="low_battery_warning_policy_sound">Solo suono</string>
+
     <!--PA version-->
     <string name="pa_version">Versione ParanoidAndroid</string>
     <string name="pa_version_default">Sconosciuta</string>
