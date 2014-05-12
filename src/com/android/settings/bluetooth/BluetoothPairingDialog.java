@@ -220,7 +220,7 @@ public final class BluetoothPairingDialog extends AlertActivity implements
 
     private View createView(CachedBluetoothDeviceManager deviceManager) {
         View view = getLayoutInflater().inflate(R.layout.bluetooth_pin_confirm, null);
-	// Escape device name to avoid HTML injection.
+        // Escape device name to avoid HTML injection.
         String name = Html.escapeHtml(deviceManager.getName(mDevice));
         TextView messageView = (TextView) view.findViewById(R.id.message);
 
