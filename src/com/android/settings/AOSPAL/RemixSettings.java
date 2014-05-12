@@ -34,19 +34,21 @@ import com.android.settings.AOSPAL.NotificationDrawerQsSettings;
 import com.android.settings.AOSPAL.StatusBarSettings;
 import com.android.settings.AOSPAL.SystemSettings;
 import com.android.settings.AOSPAL.LockscreenSettings;
+import com.android.settings.AOSPAL.extensions.PagerSlidingTabStrip;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RemixSettings extends SettingsPreferenceFragment implements ActionBar.TabListener {
+public class RemixSettings extends SettingsPreferenceFragment {
 
     private static final String BUGREPORT_URL = "https://sites.google.com/site/aospalrom/bug-report";
 
     ViewPager mViewPager;
     String titleString[];
     ViewGroup mContainer;
+    PagerSlidingTabStrip mTabs;
 
     static Bundle mSavedState;
 
@@ -57,72 +59,13 @@ public class RemixSettings extends SettingsPreferenceFragment implements ActionB
    
         View view = inflater.inflate(R.layout.remix_settings, container, false);
         mViewPager = (ViewPager) view.findViewById(R.id.viewPager);
+        mTabs = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
         StatusBarAdapter StatusBarAdapter = new StatusBarAdapter(getFragmentManager());
-
         mViewPager.setAdapter(StatusBarAdapter);
-        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                // When swiping between different app sections, select the corresponding tab.
-                // We can also use ActionBar.Tab#select() to do this if we have a reference to the
-                // Tab.
-                actionBar.setSelectedNavigationItem(position);
-            }
-        });
-
-        ActionBar.Tab systemTab = actionBar.newTab();
-        systemTab.setText("System");
-        systemTab.setTabListener(this);
-
-        ActionBar.Tab statusBarTab = actionBar.newTab();
-        statusBarTab.setText("Status Bar");
-        statusBarTab.setTabListener(this);
-
-        ActionBar.Tab navBarTab = actionBar.newTab();
-        navBarTab.setText("Navigation Bar");
-        navBarTab.setTabListener(this);
-
-        ActionBar.Tab notificationDrawerQsTab = actionBar.newTab();
-        if (!DeviceUtils.isPhone(getActivity())) {
-        notificationDrawerQsTab.setText("Notification Drawer");
-        } else {
-        notificationDrawerQsTab.setText("Notification Drawer & QS");
-        }
-        notificationDrawerQsTab.setTabListener(this);
-
-        ActionBar.Tab lockscreenTab = actionBar.newTab();
-        lockscreenTab.setText("Lockscreen");
-        lockscreenTab.setTabListener(this);
-
-        ActionBar.Tab animationsTab = actionBar.newTab();
-        animationsTab.setText("Animations");
-        animationsTab.setTabListener(this);
-
-        actionBar.addTab(systemTab);
-        actionBar.addTab(statusBarTab);
-        actionBar.addTab(navBarTab);
-        actionBar.addTab(notificationDrawerQsTab);
-        actionBar.addTab(lockscreenTab);
-        actionBar.addTab(animationsTab);
-
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        mTabs.setViewPager(mViewPager);
 
         setHasOptionsMenu(true);
         return view;
-    }
-
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        mViewPager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-    }
-
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-        // User selected the already selected tab. Usually do nothing.
     }
 
     @Override
