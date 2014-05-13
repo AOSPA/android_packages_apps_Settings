@@ -4,17 +4,14 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="navbar_settings">
 
+    <PreferenceCategory
+        android:title="@string/general">
+
          <SeekBarPreference
              android:key="navigation_bar_height"
              android:title="@string/navigation_bar_height"
              android:max="100"
              android:defaultValue="100" />
-
-        <com.android.settings.preference.SystemCheckBoxPreference
-            android:key="navigation_bar_left"
-            android:title="@string/navigation_bar_left_title"
-            android:summary="@string/navigation_bar_left_summary"
-            android:defaultValue="false" />
 
          <!-- Navring Targets -->
          <PreferenceScreen
@@ -27,5 +24,20 @@
             android:fragment="com.android.settings.paranoid.NavBar"
             android:key="navigation_bar"
             android:title="@string/navigation_bar_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/controls"
+        android:key="category_navbar_controls">
+
+        <com.android.settings.preference.SystemCheckBoxPreference
+            android:key="navigation_bar_left"
+            android:title="@string/navigation_bar_left_title"
+            android:summary="@string/navigation_bar_left_summary"
+            android:defaultValue="false" />
+
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

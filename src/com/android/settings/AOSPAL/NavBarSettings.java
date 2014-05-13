@@ -53,6 +53,7 @@ public class NavBarSettings extends SettingsPreferenceFragment implements
     private static final String KEY_NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
     private static final String NAVIGATION_BAR_CATEGORY = "navigation_bar";
     private static final String NAVIGATION_BAR_LEFT = "navigation_bar_left";
+    private static final String CATEGORY_NAVBAR_CONTROLS = "category_navbar_controls";
 
     private SeekBarPreference mNavigationBarHeight;
 
@@ -72,7 +73,7 @@ public class NavBarSettings extends SettingsPreferenceFragment implements
             (PreferenceScreen) findPreference(NAVBAR_SETTINGS);
 
         if (!DeviceUtils.isPhone(getActivity())) {
-            navbarSettings.removePreference(findPreference(NAVIGATION_BAR_LEFT));
+            navbarSettings.removePreference(findPreference(CATEGORY_NAVBAR_CONTROLS));
         }
     }
 
