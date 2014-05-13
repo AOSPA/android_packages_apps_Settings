@@ -85,9 +85,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOCK_SOUNDS = "dock_sounds";
     private static final String KEY_DOCK_AUDIO_MEDIA_ENABLED = "dock_audio_media_enabled";
     private static final String KEY_VOLUME_WAKE_SCREEN = "volume_wake_screen";
-
-    private static final String CATEGORY_HEADSETHOOK = "button_headsethook";
-    private static final String BUTTON_HEADSETHOOK_LAUNCH_VOICE = "button_headsethook_launch_voice";
     private static final String KEY_HEADSET_PLUG = "headset_plug";
 
     private static final String[] NEED_VOICE_CAPABILITY = {
@@ -102,7 +99,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mDtmfTone;
     private CheckBoxPreference mSoundEffects;
     private CheckBoxPreference mHapticFeedback;
-    private CheckBoxPreference mHeadsetHookLaunchVoice;
     private SeekBarPreference mVibrationDuration;
     private Preference mMusicFx;
     private CheckBoxPreference mLockSounds;
@@ -213,15 +209,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mVolumeWakeScreen = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE_SCREEN);
         mVolumeWakeScreen.setChecked(Settings.System.getInt(resolver,
                 Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
-
-        PreferenceScreen prefs = getPreferenceScreen();
-
-        final PreferenceCategory headsethookCategory =
-                (PreferenceCategory) prefs.findPreference(CATEGORY_HEADSETHOOK);
-
-        mHeadsetHookLaunchVoice = (CheckBoxPreference) findPreference(BUTTON_HEADSETHOOK_LAUNCH_VOICE);
-        mHeadsetHookLaunchVoice.setChecked(Settings.System.getInt(resolver,
-                Settings.System.HEADSETHOOK_LAUNCH_VOICE, 1) == 1);
 
         mHeadsetPlug = (AppSelectListPreference) findPreference(KEY_HEADSET_PLUG);
         mHeadsetPlug.setOnPreferenceChangeListener(this);
@@ -395,10 +382,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else if (preference == mDockAudioMediaEnabled) {
             Settings.Global.putInt(getContentResolver(), Settings.Global.DOCK_AUDIO_MEDIA_ENABLED,
                     mDockAudioMediaEnabled.isChecked() ? 1 : 0);
-        } else if (preference == mHeadsetHookLaunchVoice) {
-            boolean checked = ((CheckBoxPreference)preference).isChecked();
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.HEADSETHOOK_LAUNCH_VOICE, checked ? 1:0);
         }
         return true;
     }
