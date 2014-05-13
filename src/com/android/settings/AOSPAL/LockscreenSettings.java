@@ -124,7 +124,6 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         mBlurRadius.setOnPreferenceChangeListener(this);
         mBlurRadius.setEnabled(mSeeThrough.isChecked() && mSeeThrough.isEnabled());
 
-        updateLockscreenPreferences();
     }
 
     private boolean isToggled(Preference pref) {
@@ -175,7 +174,6 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
             if (!mLockscreenWallpaper.isChecked()) setWallpaper(null);
             else Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_WALLPAPER, 1);
             mSelectLockscreenWallpaper.setEnabled(mLockscreenWallpaper.isChecked());
-            updateLockscreenPreferences();
         } else if (preference == mSelectLockscreenWallpaper) {
             final Intent intent = new Intent(Intent.ACTION_PICK,
                     android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -209,11 +207,9 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         } else if (preference == mSeeThrough) {
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH,
                     mSeeThrough.isChecked() ? 1 : 0);
-            if (mSeeThrough.isChecked()) {
+            if (mSeeThrough.isChecked())
                 Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_WALLPAPER, 0);
             mBlurRadius.setEnabled(mSeeThrough.isChecked());
-            }
-            updateLockscreenPreferences();
         }else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
@@ -225,22 +221,6 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
             mKeyguardService.setWallpaper(bmp);
         } catch (RemoteException ex) {
             Log.e(TAG, "Unable to set wallpaper!");
-        }
-    } 
-
-    private void updateLockscreenPreferences () {
-        int seeThrough = Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH, 0);
-        int lockscreenWallpaper = Settings.System.getInt(getContentResolver(), Settings.System.LOCKSCREEN_WALLPAPER, 0);
-
-        if (seeThrough == 1) {
-            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_WALLPAPER, 0);
-            mLockscreenWallpaper.setEnabled(false);
-        } else if (lockscreenWallpaper == 1) {
-            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH, 0);
-            mSeeThrough.setEnabled(false);
-        } else {
-            mSeeThrough.setEnabled(true);
-            mLockscreenWallpaper.setEnabled(true);
         }
     }
 }
