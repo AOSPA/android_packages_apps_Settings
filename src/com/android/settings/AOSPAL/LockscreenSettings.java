@@ -237,6 +237,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
             mLockscreenWallpaper.setEnabled(false);
         } else if (lockscreenWallpaper == 1) {
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH, 0);
+            mSeeThrough.setEnabled(false);
         } else {
             mSeeThrough.setEnabled(true);
             mLockscreenWallpaper.setEnabled(true);
