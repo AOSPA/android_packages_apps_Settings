@@ -162,8 +162,6 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
         if (preference == mLockscreenNotifications) {
             Settings.System.putInt(cr, Settings.System.LOCKSCREEN_NOTIFICATIONS,
                     mLockscreenNotifications.isChecked() ? 1 : 0);
-            mPocketMode.setEnabled(mLockscreenNotifications.isChecked());
-            mShowAlways.setEnabled(mPocketMode.isChecked() && mPocketMode.isEnabled());
             mWakeOnNotification.setEnabled(mLockscreenNotifications.isChecked());
             mHideLowPriority.setEnabled(mLockscreenNotifications.isChecked());
             mHideNonClearable.setEnabled(mLockscreenNotifications.isChecked());
