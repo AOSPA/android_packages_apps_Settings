@@ -31,10 +31,21 @@
 
     <!-- Dark UI -->
     <header
-        android:id="@+id/theme_settings"
+        android:id="@+id/theme_crystal"
         android:fragment="com.android.settings.slim.themes.ThemeSettings"
         android:icon="@drawable/ic_settings_theme"
         android:title="@string/theme_settings_title" />
+
+    <!-- Themes -->
+    <header
+        android:id="@+id/themes_settings"
+        android:icon="@drawable/ic_settings_themes"
+        android:title="@string/themes_settings_title">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.tmobile.themechooser"
+            android:targetClass="com.tmobile.themechooser.ThemeChooser" />
+    </header>
 
     <!-- Performance -->
     <header

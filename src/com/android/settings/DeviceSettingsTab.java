@@ -534,11 +534,11 @@ public class DeviceSettingsTab extends PreferenceActivity
 
         static int getHeaderType(Header header) {
             if (header.fragment == null && header.intent == null
-                    && header.id != R.id.theme_settings) {
+                    && header.id != R.id.theme_crystal) {
                 return HEADER_TYPE_CATEGORY;
             } else if (header.id == R.id.wifi_settings
                     || header.id == R.id.bluetooth_settings
-                    || header.id == R.id.theme_settings) {
+                    || header.id == R.id.theme_crystal) {
                 return HEADER_TYPE_SWITCH;
             } else {
                 return HEADER_TYPE_NORMAL;
@@ -641,7 +641,7 @@ public class DeviceSettingsTab extends PreferenceActivity
                         mWifiEnabler.setSwitch(holder.switch_);
                     } else if (header.id == R.id.bluetooth_settings) {
                         mBluetoothEnabler.setSwitch(holder.switch_);
-                    } else if (header.id == R.id.theme_settings) {
+                    } else if (header.id == R.id.theme_crystal) {
                         mThemeEnabler.setSwitch(holder.switch_);
                     }
                     // No break, fall through on purpose to update common fields
