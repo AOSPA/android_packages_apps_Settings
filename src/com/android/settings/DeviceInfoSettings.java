@@ -201,9 +201,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
             System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
             mHits[mHits.length-1] = SystemClock.uptimeMillis();
             if (mHits[0] >= (SystemClock.uptimeMillis()-500)) {
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setClassName("android",
-                        com.android.internal.app.PAWorldActivity.class.getName());
+                Intent intent = new Intent(getActivity(), BeanBag.class);
                 try {
                     startActivity(intent);
                 } catch (Exception e) {
