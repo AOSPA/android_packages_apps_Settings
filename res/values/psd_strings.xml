@@ -180,8 +180,8 @@ USB networks). This setting is reset on reboot</string>
     <string name="wifi_menu_forget_all">Forget all networks</string>
 
     <!-- Turn on display when power connected; turn off display when power disconnected -->
-    <string name="wake_when_plugged_or_unplugged_title">Wake on plug</string>
-    <string name="wake_when_plugged_or_unplugged_summary">Turn the screen on when connecting or disconnecting the charger</string>
+    <string name="wake_when_plugged_or_unplugged_title" translatable="false">Wake on plug</string>
+    <string name="wake_when_plugged_or_unplugged_summary" translatable="false">Turn the screen on when connecting or disconnecting the charger</string>
 
     <!-- Lockscreen battery ring -->
     <string name="battery_around_lockscreen_ring">Battery level around unlock ring</string>
@@ -210,43 +210,43 @@ USB networks). This setting is reset on reboot</string>
     <string name="lock_pattern_size_6">6x6</string>
 
     <!-- Navigation Bar customization-->
-    <string name="navigation_bar_title">Buttons and layout</string>
-    <string name="navigation_bar_help_text">1 - To begin editing, tap the lock icon\n\n2 - Tap any button to assign or change functionality\n\n3 - Long press any button to rearrange the order\n\n4 - To save, tap the lock icon again\n\n5 - To restore system default, tap the reset button\n\n</string>
-    <string name="navigation_bar_tips">\u2022 Actions can only be assigned to one button at a time\n\n\u2022 The home button cannot be re-assigned\n\n\u2022 Side buttons cannot be rearranged</string>
-    <string name="navigation_bar_tips_title">Quick tips</string>
-    <string name="navigation_bar_reset_message">Delete current settings and restore to default?</string>
-    <string name="navigation_bar_save_message">Navigation bar settings saved</string>
-    <string name="navigation_bar_reset_toast">Navigation bar reset to default</string>
-    <string name="navigation_bar_menu_editable">Editable</string>
-    <string name="navigation_bar_menu_locked">Locked</string>
+    <string name="navigation_bar_title" translatable="false">Buttons and layout</string>
+    <string name="navigation_bar_help_text" translatable="false">1 - To begin editing, tap the lock icon\n\n2 - Tap any button to assign or change functionality\n\n3 - Long press any button to rearrange the order\n\n4 - To save, tap the lock icon again\n\n5 - To restore system default, tap the reset button\n\n</string>
+    <string name="navigation_bar_tips" translatable="false">\u2022 Actions can only be assigned to one button at a time\n\n\u2022 The home button cannot be re-assigned\n\n\u2022 Side buttons cannot be rearranged</string>
+    <string name="navigation_bar_tips_title" translatable="false">Quick tips</string>
+    <string name="navigation_bar_reset_message" translatable="false">Delete current settings and restore to default?</string>
+    <string name="navigation_bar_save_message" translatable="false">Navigation bar settings saved</string>
+    <string name="navigation_bar_reset_toast" translatable="false">Navigation bar reset to default</string>
+    <string name="navigation_bar_menu_editable" translatable="false">Editable</string>
+    <string name="navigation_bar_menu_locked" translatable="false">Locked</string>
 
     <!-- Automatic brightness customization -->
-    <string name="auto_brightness_setup_title">Automatic brightness</string>
-    <string name="auto_brightness_adjustment_title">Brightness adjustment</string>
-    <string name="auto_brightness_twilight_adjustment">Adjust to sunrise and sunset</string>
-    <string name="light_sensor_current_value">Current light sensor value: <xliff:g id="light_level">%d</xliff:g> lux</string>
-    <string name="auto_brightness_dialog_title">Automatic brightness levels</string>
-    <string name="auto_brightness_level_format"><xliff:g id="level">%1$d</xliff:g> lux</string>
-    <string name="auto_brightness_last_level_format"><xliff:g id="level">%1$d</xliff:g> -\n\u221e lux</string>
+    <string name="auto_brightness_setup_title" translatable="false">Automatic brightness</string>
+    <string name="auto_brightness_adjustment_title" translatable="false">Brightness adjustment</string>
+    <string name="auto_brightness_twilight_adjustment" translatable="false">Adjust to sunrise and sunset</string>
+    <string name="light_sensor_current_value" translatable="false">Current light sensor value: <xliff:g id="light_level">%d</xliff:g> lux</string>
+    <string name="auto_brightness_dialog_title" translatable="false">Automatic brightness levels</string>
+    <string name="auto_brightness_level_format" translatable="false"><xliff:g id="level">%1$d</xliff:g> lux</string>
+    <string name="auto_brightness_last_level_format" translatable="false"><xliff:g id="level">%1$d</xliff:g> -\n\u221e lux</string>
     <string name="auto_brightness_brightness_format" translatable="false"><xliff:g id="percent">%s</xliff:g>%%</string>
-    <string name="auto_brightness_adjust_button">Adjust</string>
-    <string name="auto_brightness_close_button">Close</string>
-    <string name="auto_brightness_reset_button">Reset</string>
-    <string name="auto_brightness_split_dialog_title">Split brightness level</string>
-    <string name="auto_brightness_level_dialog_title">Light level setup</string>
-    <string name="auto_brightness_lux">Ambient brightness (lux)</string>
-    <string name="auto_brightness_backlight">Screen brightness (%)</string>
-    <string name="auto_brightness_reset_dialog_title">Reset levels?</string>
-    <string name="auto_brightness_reset_confirmation">All brightness levels will be reset to their default settings.</string>
-    <string name="auto_brightness_split_lux_format">Split position (between <xliff:g id="min">%1$d</xliff:g> and <xliff:g id="max">%2$d</xliff:g> lux)</string>
-    <string name="auto_brightness_level_options">Light level options</string>
-    <string name="auto_brightness_menu_edit">Edit</string>
-    <string name="auto_brightness_menu_split">Split</string>
-    <string name="auto_brightness_menu_remove">Remove</string>
-    <string name="auto_brightness_preview">Preview</string>
-    <string name="auto_brightness_preview_dialog_title">Brightness curve preview</string>
-    <string name="auto_brightness_help_dialog_title">Help</string>
-    <string name="auto_brightness_help_text"><b>How is brightness calculated?</b>
+    <string name="auto_brightness_adjust_button" translatable="false">Adjust</string>
+    <string name="auto_brightness_close_button" translatable="false">Close</string>
+    <string name="auto_brightness_reset_button" translatable="false">Reset</string>
+    <string name="auto_brightness_split_dialog_title" translatable="false">Split brightness level</string>
+    <string name="auto_brightness_level_dialog_title" translatable="false">Light level setup</string>
+    <string name="auto_brightness_lux" translatable="false">Ambient brightness (lux)</string>
+    <string name="auto_brightness_backlight" translatable="false">Screen brightness (%)</string>
+    <string name="auto_brightness_reset_dialog_title" translatable="false">Reset levels?</string>
+    <string name="auto_brightness_reset_confirmation" translatable="false">All brightness levels will be reset to their default settings.</string>
+    <string name="auto_brightness_split_lux_format" translatable="false">Split position (between <xliff:g id="min">%1$d</xliff:g> and <xliff:g id="max">%2$d</xliff:g> lux)</string>
+    <string name="auto_brightness_level_options" translatable="false">Light level options</string>
+    <string name="auto_brightness_menu_edit" translatable="false">Edit</string>
+    <string name="auto_brightness_menu_split" translatable="false">Split</string>
+    <string name="auto_brightness_menu_remove" translatable="false">Remove</string>
+    <string name="auto_brightness_preview" translatable="false">Preview</string>
+    <string name="auto_brightness_preview_dialog_title" translatable="false">Brightness curve preview</string>
+    <string name="auto_brightness_help_dialog_title" translatable="false">Help</string>
+    <string name="auto_brightness_help_text" translatable="false"><b>How is brightness calculated?</b>
 \n\n
 The brightness curve is calculated by performing a <i>cubic spline interpolation</i>
 on a given number of <i>control points</i>. It\'s not a \'bucket-type\' calculation where
@@ -270,12 +270,12 @@ desired screen brightness. Selecting \'Split\' allows you to to duplicate one li
 two in order to insert additional control points. \'Remove\' deletes the selected line.
     </string>
 
-    <string name="auto_brightness_sensitivity_title">Adjustment sensitivity</string>
-    <string name="auto_brightness_sensitivity_verylow">Very low</string>
-    <string name="auto_brightness_sensitivity_low">Low</string>
-    <string name="auto_brightness_sensitivity_medium">Medium</string>
-    <string name="auto_brightness_sensitivity_high">High</string>
-    <string name="auto_brightness_sensitivity_veryhigh">Very high</string>
+    <string name="auto_brightness_sensitivity_title" translatable="false">Adjustment sensitivity</string>
+    <string name="auto_brightness_sensitivity_verylow" translatable="false">Very low</string>
+    <string name="auto_brightness_sensitivity_low" translatable="false">Low</string>
+    <string name="auto_brightness_sensitivity_medium" translatable="false">Medium</string>
+    <string name="auto_brightness_sensitivity_high" translatable="false">High</string>
+    <string name="auto_brightness_sensitivity_veryhigh" translatable="false">Very high</string>
 
     <!-- Recents Ram Bar -->
     <string name="ram_bar">Recents RAM bar</string>
@@ -604,14 +604,14 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="captive_server_summary">Server used to detect captive portal. Leave empty for default.</string>
 
     <!-- Display : Rotation -->
-    <string name="display_rotation_title">Rotation</string>
-    <string name="display_rotation_disabled">Disabled</string>
+    <string name="display_rotation_title" translatable="false">Rotation</string>
+    <string name="display_rotation_disabled" translatable="false">Disabled</string>
     <string name="display_rotation_unit">degrees</string>
-    <string name="display_rotation_category_title">Rotation modes</string>
-    <string name="display_rotation_0_title">0 degrees</string>
-    <string name="display_rotation_90_title">90 degrees</string>
-    <string name="display_rotation_180_title">180 degrees</string>
-    <string name="display_rotation_270_title">270 degrees</string>
+    <string name="display_rotation_category_title" translatable="false">Rotation modes</string>
+    <string name="display_rotation_0_title" translatable="false">0 degrees</string>
+    <string name="display_rotation_90_title" translatable="false">90 degrees</string>
+    <string name="display_rotation_180_title" translatable="false">180 degrees</string>
+    <string name="display_rotation_270_title" translatable="false">270 degrees</string>
 
     <!-- Gesture Anywhere -->
     <string name="gesture_anywhere_title">Gesture Anywhere</string>
@@ -931,13 +931,13 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="default_shortcut">Default</string>
 
     <!-- Headset plug -->
-    <string name="headset_settings">Headset</string>
-    <string name="headset_plug_enable_title">Insert shortcut</string>
-    <string name="headset_plug_positive_title">None</string>
-    <string name="headset_plug_neutral_title">Default</string>
-    <string name="headset_plug_neutral_summary">System default music app</string>
-    <string name="headset_plug_music_active_title">Disable on active audio</string>
-    <string name="headset_plug_music_active_summary">Dont run shortcut on active audio playback</string>
+    <string name="headset_settings" translatable="false">Headset</string>
+    <string name="headset_plug_enable_title" translatable="false">Insert shortcut</string>
+    <string name="headset_plug_positive_title" translatable="false">None</string>
+    <string name="headset_plug_neutral_title" translatable="false">Default</string>
+    <string name="headset_plug_neutral_summary" translatable="false">System default music app</string>
+    <string name="headset_plug_music_active_title" translatable="false">Disable on active audio</string>
+    <string name="headset_plug_music_active_summary" translatable="false">Dont run shortcut on active audio playback</string>
 
     <!-- Button shorcut actions -->
     <string name="shortcut_action_app">Custom app</string>
