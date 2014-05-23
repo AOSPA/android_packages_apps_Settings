@@ -209,7 +209,7 @@ public class PowerUsageSummary extends PreferenceFragment {
         batteryStyle.setGroupCheckable(1, true, true);
 
         MenuItem warningIcon = batteryWarning.getItem();
-        warningIcon.setIcon(R.drawable.ic_action_warning_alert)
+        warningIcon.setIcon(R.drawable.ic_action_warning)
                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
         MenuItem batteryIcon = batteryStyle.getItem();
