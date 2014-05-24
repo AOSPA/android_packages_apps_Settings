@@ -152,10 +152,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mWakeWhenPluggedOrUnplugged =
                 (CheckBoxPreference) findPreference(KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED);
 
-        boolean hasNotificationLed = res.getBoolean(
-=======
         boolean hasNotificationLed = getResources().getBoolean(
->>>>>>> parent of db85f44... PEEK [2/2]
                 com.android.internal.R.bool.config_intrusiveNotificationLed);
         boolean hasBatteryLed = res.getBoolean(
                 com.android.internal.R.bool.config_intrusiveBatteryLed);
