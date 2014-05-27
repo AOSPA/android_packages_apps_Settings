@@ -21,9 +21,12 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 import android.app.ActivityManagerNative;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
@@ -87,6 +90,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mAdaptiveBacklight;
     private CheckBoxPreference mTapToWake;
 
+    private PackageStatusReceiver mPackageStatusReceiver;
+    private IntentFilter mIntentFilter;
+
     private final RotationPolicy.RotationPolicyListener mRotationPolicyListener =
             new RotationPolicy.RotationPolicyListener() {
         @Override
@@ -94,6 +100,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             updateAccelerometerRotationCheckbox();
         }
     };
+
+    private boolean isPackageInstalled(String packagename) {
+        PackageManager pm = getActivity().getPackageManager();
+        try {
+            pm.getPackageInfo(packagename, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (NameNotFoundException e) {
+            return false;
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -171,6 +187,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (!isPostProcessingSupported()) {
             getPreferenceScreen().removePreference(mScreenColorSettings);
         }
+
+        if (mPackageStatusReceiver == null) {
+            mPackageStatusReceiver = new PackageStatusReceiver();
+        }
+        if (mIntentFilter == null) {
+            mIntentFilter = new IntentFilter();
+            mIntentFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
+            mIntentFilter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+        }
+        getActivity().registerReceiver(mPackageStatusReceiver, mIntentFilter);
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -268,6 +294,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         RotationPolicy.registerRotationPolicyListener(getActivity(),
                 mRotationPolicyListener);
+        getActivity().registerReceiver(mPackageStatusReceiver, mIntentFilter);
 
         final ContentResolver resolver = getContentResolver();
 
@@ -296,6 +323,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         RotationPolicy.unregisterRotationPolicyListener(getActivity(),
                 mRotationPolicyListener);
+        getActivity().unregisterReceiver(mPackageStatusReceiver);
     }
 
     @Override
@@ -459,6 +487,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } catch (NoClassDefFoundError e) {
             // Hardware abstraction framework not installed
             return false;
+        }
+
+    public class PackageStatusReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Intent.ACTION_PACKAGE_ADDED)) {
+            } else if(action.equals(Intent.ACTION_PACKAGE_REMOVED)) {
+            }
         }
     }
 }
