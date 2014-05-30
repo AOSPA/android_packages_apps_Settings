@@ -41,6 +41,7 @@ import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.internal.policy.IKeyguardService;
 
 import java.io.File;
@@ -129,7 +130,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
         PreferenceCategory personalizeCategory = (PreferenceCategory) findPreference(PERSONALIZE_CATEGORY);
 
         // Only add if device has LockClock installed
-        if (!isPackageInstalled("com.cyanogenmod.lockclock")) {
+        if (!Utils.isPackageInstalled(getActivity(), "com.cyanogenmod.lockclock")) {
             personalizeCategory.removePreference(findPreference(KEY_LOCK_CLOCK));
         }
 
