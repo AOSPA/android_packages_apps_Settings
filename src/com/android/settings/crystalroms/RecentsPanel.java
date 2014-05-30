@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 SlimRoms Project
+ * Copyright (C) 2014 The CrystalPA Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,11 +36,12 @@ import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
 
-
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.util.Helpers;
 import com.android.internal.util.omni.OmniSwitchConstants;
+
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class RecentsPanel extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
@@ -48,6 +49,7 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
 
     private static final String RECENTS_USE_OMNISWITCH = "recents_use_omniswitch";
     private static final String OMNISWITCH_START_SETTINGS = "omniswitch_start_settings";
+    private static final String RECENTS_PANEL_COLOR = "recents_panel_color";
 
     private static final String RECENTS_USE_SLIM = "recents_use_slim";
 
@@ -62,6 +64,7 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
     private Preference mOmniSwitchSettings;
     private boolean mOmniSwitchStarted;
     private CheckBoxPreference mRecentsUseSlim;
+    private ColorPickerPreference mRecentsColor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,6 +99,39 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
         mRecentsUseSlim.setChecked(useSlimRecents);
         mRecentsUseSlim.setOnPreferenceChangeListener(this);
         mRecentsUseSlim.setEnabled(!useOmniSwitch);
+
+        // WP7 Recents
+        mRecentsColor = (ColorPickerPreference) prefSet.findPreference(RECENTS_PANEL_COLOR);
+        mRecentsColor.setOnPreferenceChangeListener(this);
+
+        updateRecentsColor();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    private void updateRecentsColor() {
+        int intColor;
+        intColor = Settings.System.getInt(getActivity().getContentResolver(), Settings.System.RECENTS_PANEL_COLOR, DEFAULT_COLOR);
+        String hexColor;
+        hexColor = String.format("#%08x", (0xffffffff & intColor));
+        mRecentsColor.setSummary(hexColor);
+        mRecentsColor.setNewPreviewColor(intColor);
+    }
+
+    private void writeRecentsColor(Object NewVal) {
+        String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(NewVal)));
+        mRecentsColor.setSummary(hex);
+        Settings.System.putInt(getActivity().getContentResolver(), Settings.System.RECENTS_PANEL_COLOR, ColorPickerPreference.convertToColorInt(hex));
+        mRecentsColor.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -137,6 +173,9 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
             // Update OmniSwitch UI components
             mRecentsUseOmniSwitch.setEnabled(!useSlimRecents);
             mRecentsUseSlim.setChecked(useSlimRecents);
+            return true;
+        } else if (preference == mRecentsColor) {
+            writeRecentsColor(newValue);
             return true;
         }
         return false;
