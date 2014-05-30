@@ -67,6 +67,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private static final String KONSTA_NAVBAR = "konsta_navbar";
     private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
     private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
+    private static final String LOCKSCREEN_ROTATION = "lockscreen_rotation";
 
     private final Configuration mCurrentConfig = new Configuration();
 
@@ -75,6 +76,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private CheckBoxPreference mKonstaNavbar;
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
+    private CheckBoxPreference mLockScreenRotationPref;
 
     private Context mContext;
 
@@ -104,6 +106,8 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         mKonstaNavbar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.KONSTA_NAVBAR, 0) == 1);
 
+        mLockScreenRotationPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ROTATION);
+
         if (ActivityManager.isLowRamDeviceStatic()) {
             mForceHighEndGfx = (CheckBoxPreference) prefSet.findPreference(FORCE_HIGHEND_GFX_PREF);
             String forceHighendGfx = SystemProperties.get(FORCE_HIGHEND_GFX_PERSIST_PROP, "false");
@@ -114,6 +118,13 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
 
         mDisableBootanimPref = (CheckBoxPreference) prefSet.findPreference(DISABLE_BOOTANIMATION_PREF);
         mDisableBootanimPref.setChecked("1".equals(SystemProperties.get(DISABLE_BOOTANIMATION_PERSIST_PROP, "0")));
+
+        boolean configEnableLockRotation = getResources().
+                        getBoolean(com.android.internal.R.bool.config_enableLockScreenRotation);
+        Boolean lockScreenRotationEnabled = Settings.System.getInt(getContentResolver(),
+                        Settings.System.LOCKSCREEN_ROTATION, configEnableLockRotation ? 1 : 0) != 0;
+
+        mLockScreenRotationPref.setChecked(lockScreenRotationEnabled);
     }
 
     @Override
@@ -128,6 +139,8 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        boolean value;
+
         if (preference == mDisableBootanimPref) {
             SystemProperties.set(DISABLE_BOOTANIMATION_PERSIST_PROP, mDisableBootanimPref.isChecked() ? "1" : "0");
         } else if (preference == mForceHighEndGfx) {
@@ -150,6 +163,11 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                     })
                     .create()
                     .show();
+        } else if (preference == mLockScreenRotationPref) {
+            value = mLockScreenRotationPref.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_ROTATION, value ? 1 : 0);
+            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
