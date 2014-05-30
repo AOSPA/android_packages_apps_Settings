@@ -50,6 +50,7 @@ import android.util.Log;
 
 import com.android.settings.bluetooth.DockEventReceiver;
 import com.android.settings.preference.AppSelectListPreference;
+import com.android.settings.preference.SystemCheckBoxPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SeekBarPreference;
@@ -86,6 +87,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOCK_AUDIO_MEDIA_ENABLED = "dock_audio_media_enabled";
     private static final String KEY_VOLUME_WAKE_SCREEN = "volume_wake_screen";
     private static final String KEY_HEADSET_PLUG = "headset_plug";
+    private static final String KEY_HEADSET_MUSIC_ACTIVE = "headset_plug_music_active";
 
     private static final String[] NEED_VOICE_CAPABILITY = {
             KEY_RINGTONE, KEY_DTMF_TONE, KEY_CATEGORY_CALLS,
@@ -120,6 +122,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private boolean mFirstVibration = false;
 
     private AppSelectListPreference mHeadsetPlug;
+    private SystemCheckBoxPreference mHeadsetMusicActive;
     
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -212,6 +215,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         mHeadsetPlug = (AppSelectListPreference) findPreference(KEY_HEADSET_PLUG);
         mHeadsetPlug.setOnPreferenceChangeListener(this);
+        mHeadsetMusicActive = (SystemCheckBoxPreference) findPreference(KEY_HEADSET_MUSIC_ACTIVE);
         updateHeadsetPlugSummary();
 
         mRingtonePreference = findPreference(KEY_RINGTONE);
@@ -413,16 +417,18 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         return true;
     }
 
-    private void updateHeadsetPlugSummary(){
+    private void updateHeadsetPlugSummary() {
         final PackageManager packageManager = getPackageManager();
 
         mHeadsetPlug.setSummary(getResources().getString(R.string.headset_plug_positive_title));
+        mHeadsetMusicActive.setEnabled(false);
 
         String headSetPlugIntentUri = Settings.System.getString(getContentResolver(), Settings.System.HEADSET_PLUG_ENABLED);
 
         if (headSetPlugIntentUri != null) {
-            if(headSetPlugIntentUri.equals(Settings.System.HEADSET_PLUG_SYSTEM_DEFAULT)) {
-                 mHeadsetPlug.setSummary(getResources().getString(R.string.headset_plug_neutral_summary));
+            if (headSetPlugIntentUri.equals(Settings.System.HEADSET_PLUG_SYSTEM_DEFAULT)) {
+                mHeadsetPlug.setSummary(getResources().getString(R.string.headset_plug_neutral_summary));
+                mHeadsetMusicActive.setEnabled(true);
             } else {
                 Intent headSetPlugIntent = null;
                 try {
@@ -431,10 +437,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                     headSetPlugIntent = null;
                 }
 
-                if(headSetPlugIntent != null) {
+                if (headSetPlugIntent != null) {
                     ResolveInfo info = packageManager.resolveActivity(headSetPlugIntent, 0);
                     if (info != null) {
                         mHeadsetPlug.setSummary(info.loadLabel(packageManager));
+                        mHeadsetMusicActive.setEnabled(true);
                     }
                 }
             }
