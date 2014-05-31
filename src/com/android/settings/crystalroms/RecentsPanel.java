@@ -20,6 +20,7 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContentResolver;
+import android.graphics.Color;
 import android.content.Intent;
 import android.content.DialogInterface;
 import android.database.ContentObserver;
@@ -49,7 +50,6 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
 
     private static final String RECENTS_USE_OMNISWITCH = "recents_use_omniswitch";
     private static final String OMNISWITCH_START_SETTINGS = "omniswitch_start_settings";
-    private static final String RECENTS_PANEL_COLOR = "recents_panel_color";
 
     private static final String RECENTS_USE_SLIM = "recents_use_slim";
 
@@ -65,6 +65,8 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
     private boolean mOmniSwitchStarted;
     private CheckBoxPreference mRecentsUseSlim;
     private ColorPickerPreference mRecentsColor;
+    private ContentResolver mContentResolver;
+    private Context mContext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,8 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
         addPreferencesFromResource(R.xml.recents_apps_panel);
 
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        mContentResolver = getContentResolver();
 
         boolean useOmniSwitch = false;
         boolean useSlimRecents = false;
@@ -101,36 +105,7 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
         mRecentsUseSlim.setEnabled(!useOmniSwitch);
 
         // WP7 Recents
-        mRecentsColor = (ColorPickerPreference) prefSet.findPreference(RECENTS_PANEL_COLOR);
-        mRecentsColor.setOnPreferenceChangeListener(this);
-
-        updateRecentsColor();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    private void updateRecentsColor() {
-        int intColor;
-        intColor = Settings.System.getInt(getActivity().getContentResolver(), Settings.System.RECENTS_PANEL_COLOR, DEFAULT_COLOR);
-        String hexColor;
-        hexColor = String.format("#%08x", (0xffffffff & intColor));
-        mRecentsColor.setSummary(hexColor);
-        mRecentsColor.setNewPreviewColor(intColor);
-    }
-
-    private void writeRecentsColor(Object NewVal) {
-        String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(NewVal)));
-        mRecentsColor.setSummary(hex);
-        Settings.System.putInt(getActivity().getContentResolver(), Settings.System.RECENTS_PANEL_COLOR, ColorPickerPreference.convertToColorInt(hex));
+        mRecentsColor = (ColorPickerPreference) findPreference("recents_panel_color");
         mRecentsColor.setOnPreferenceChangeListener(this);
     }
 
@@ -175,7 +150,13 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
             mRecentsUseSlim.setChecked(useSlimRecents);
             return true;
         } else if (preference == mRecentsColor) {
-            writeRecentsColor(newValue);
+            String hex = ColorPickerPreference.convertToARGB(Integer
+                    .valueOf(String.valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.RECENTS_PANEL_COLOR, intHex);
+            Helpers.restartSystemUI();
             return true;
         }
         return false;
