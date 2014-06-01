@@ -134,6 +134,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
             personalizeCategory.removePreference(findPreference(KEY_LOCK_CLOCK));
         }
 
+        updateOptions();
     }
 
     private boolean isToggled(Preference pref) {
@@ -231,6 +232,27 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements
             mKeyguardService.setWallpaper(bmp);
         } catch (RemoteException ex) {
             Log.e(TAG, "Unable to set wallpaper!");
+        }
+    }
+
+    private void updateOptions() {
+        if (mLockscreenWallpaper.isChecked()) { 
+            mSeeThrough.setEnabled(false);
+            mSeeThrough.setChecked(false);
+            mSeeThrough.setSummary(R.string.see_through_disabled_summary);
+        } else {
+            mSeeThrough.setEnabled(true);
+            mSeeThrough.setChecked(true);
+            mSeeThrough.setSummary(R.string.see_through_summary);
+        }
+
+        if (mSeeThrough.isChecked()) { 
+            mLockscreenWallpaper.setEnabled(false);
+            mLockscreenWallpaper.setChecked(false);
+            mLockscreenWallpaper.setSummary(R.string.lockscreen_wallpaper_disabled_summary);
+        } else {
+            mLockscreenWallpaper.setEnabled(true);
+            mLockscreenWallpaper.setChecked(true);
         }
     }
 }

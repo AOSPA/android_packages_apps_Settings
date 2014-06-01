@@ -1676,6 +1676,21 @@
         <activity android:name=".chameleonos.labs.gestureanywhere.GestureAnywhereBuilderActivity" />
         <activity android:name=".chameleonos.labs.gestureanywhere.GestureAnywhereCreateGestureActivity" />
 
+        <activity
+        android:name="com.android.settings.AOSPAL.Nyandroid"
+        android:exported="true"
+        android:label="Nyandroid"
+        android:icon="@drawable/nyandroid04"
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+        android:hardwareAccelerated="true"
+        android:launchMode="singleInstance"
+        android:excludeFromRecents="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
+
 	<activity android:name=".AOSPAL.RamBar" />
 
    	<!-- Pseudo-activity used to provide an intent-filter entry point to ass display rotation config -->
