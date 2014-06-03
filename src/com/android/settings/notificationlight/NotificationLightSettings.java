@@ -605,6 +605,11 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
                         item.icon = appInfo.loadIcon(mPackageManager);
                         item.packageName = appInfo.packageName;
 
+                        if (mPackages.get(item.packageName) != null) {
+                            // Skip this package - it's already in the application's custom packages
+                            continue;
+                        }
+
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
