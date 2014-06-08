@@ -18,7 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="notification_category">Ilmoitukset</string>
-  <string name="notification_peek_title">Ilmoituksen kurkistus</string>
+  <string name="notification_peek_title">Peek</string>
   <string name="notification_peek_summary">Näytä viimeisin ilmoitus kun nostat laitteesi</string>
   <string name="notification_led_category_title">Ilmoitusledi</string>
   <string name="edit_light_settings">Muuta valo-asetuksia</string>
@@ -54,12 +54,12 @@
   <string name="pulse_speed_normal">Tavallinen</string>
   <string name="pulse_speed_slow">Hidas</string>
   <string name="pulse_speed_very_slow">Erittäin hidas</string>
-  <string name="volume_adjust_sounds_enable_summary">Soita ääni, kun soittoäänen voimakkuutta säädetään painikkeilla</string>
+  <string name="volume_adjust_sounds_enable_summary">Toista ääni, kun soittoäänen voimakkuutta säädetään painikkeilla</string>
   <string name="link_volume_ringtones">Yhdistä soittoäänen ja ilmoitusäänen äänenvoimakkuudet</string>
   <string name="volume_ring_only_description">Soittoääni</string>
   <string name="increasing_ring_title">Voimistuva soittoääni</string>
   <string name="checkbox_increasing_ring">Ota käyttöön</string>
-  <string name="increasing_ring_min_volume_title">Soittoäänen aloituskovuus</string>
+  <string name="increasing_ring_min_volume_title">Soittoäänen aloitusvoimakkuus</string>
   <string name="increasing_ring_volume_notice">Huomaa:\nKoska aloitusvoimakkuus on korkeampi kuin soittoäänen voimakkuus, se soitetaan käyttäen soittoäänen voimakkuutta</string>
   <string name="increasing_ring_interval_title">Pidennä nousuväliä</string>
   <string name="increasing_ring_interval_eachring">Jokaisella toistolla</string>
@@ -70,7 +70,7 @@
   <string name="increasing_ring_interval_5seconds">5 sekuntia</string>
   <string name="increasing_ring_interval_10seconds">10 sekuntia</string>
   <string name="volume_buttons_category">Äänenvoimakkuuspainikkeet</string>
-  <string name="volume_wake_title">Herätä äänenvoimakkuuspainikkeista</string>
+  <string name="volume_wake_title">Herätä</string>
   <string name="volume_wake_summary">Laite herää kun äänenvoimakkuuspainiketta painetaan</string>
   <string name="see_through_title">Läpinäkyvyys</string>
   <string name="see_through_summary">Näyttää lukitusnäytön takana olevan sisällön. Tietosi saattavat olla näkyvillä ympärillä oleville</string>
@@ -80,15 +80,15 @@
   <string name="reset_user_preferences_summary">Palauttaa käyttöliittymän asetukset oletusarvoihin</string>
   <string name="reset_user_preferences_dialog">Oletko varma että haluat palauttaa asetuksesi?</string>
   <string name="battery_status_icon_title">Ilmoituskuvake</string>
-  <string name="battery_bar">Palkki</string>
-  <string name="battery_bar_percent">Palkki &amp; prosentti</string>
+  <string name="battery_bar">Akku</string>
+  <string name="battery_bar_percent">Akku &amp; prosentti</string>
   <string name="battery_circle">Ympyrä</string>
   <string name="battery_circle_percent">Ympyrä &amp; prosentti</string>
   <string name="custom_runtime_warning_title">Varoitus</string>
   <string name="custom_runtime_warning_message">ParanoidAndroid tiimi ei tue ART-ympäristöä. Tämä asetus on vain kokeiluja varten ja saattaa aiheuttaa epävakautta, kaatumisia, tietojen katoamista ja estää laitteen käynnistymisen. Lue lisää: &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;Pyydämme, ettet lähetä virheraportteja jos valitset ART-ympäristön.&lt;br/&gt;&lt;br/&gt;Oletko varma että haluat vaihtaa suoritusympäristön <xliff:g id="old" example="libdvm.so">%1$s</xliff:g>-<xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
   <string name="security_maximize_widgets_title">Suurenna widgetit</string>
   <string name="ime_switcher_notify">Syöttötavan ilmoitus</string>
-  <string name="ime_switcher_notify_summary">Näytä käyttötavan valitsinilmoitus</string>
+  <string name="ime_switcher_notify_summary">Näytä syöttötavan valitsinilmoitus</string>
   <string name="root_access">Root-oikeudet</string>
   <string name="root_access_warning_title">Anna root-oikeudet?</string>
   <string name="root_access_warning_message">Root-oikeuksien antaminen on vaarallista ja voi vahingoittaa laitettasi!</string>
@@ -102,6 +102,25 @@
   <string name="low_battery_warning_policy_popup">Vain pop-up ikkuna</string>
   <string name="low_battery_warning_policy_notif">Vain ilmoitus</string>
   <string name="low_battery_warning_policy_sound">Vain ääni</string>
+  <string name="blacklist_button_title">Musta lista</string>
+  <string name="peek_blacklist_label">Älä näytä Peekissä</string>
+  <string name="floating_blacklist_label">Älä näytä kelluvassa tilassa</string>
+  <string name="lockscreen_background">Taustakuva</string>
+  <string name="lockscreen_background_style_title">Lukitusnäytön taustakuva</string>
+  <string name="background_default">Oletustaustakuva</string>
+  <string name="background_wallpaper">Mukautettu taustakuva</string>
+  <string name="background_result_successful">Taustakuva vaihdettu</string>
+  <string name="background_result_not_successful">Taustakuvaa ei vaihdettu</string>
+  <string name="setting_lockscreen_background">Asetetaan taustakuvaa</string>
   <string name="pa_version">ParanoidAndroid versio</string>
   <string name="pa_version_default">Tuntematon</string>
+  <string name="themes_settings_title">Teemat</string>
+  <string name="themepacks_settings_title">Teemapaketit</string>
+  <string name="styles_settings_title">Tyylit</string>
+  <string name="icons_settings_title">Kuvakkeet</string>
+  <string name="fonts_settings_title">Fontit</string>
+  <string name="wallpaper_settings_title">Taustakuva</string>
+  <string name="lockscreen_wallpaper_settings_title">Lukitusnäytön taustakuva</string>
+  <string name="bootanim_settings_title">Käynnistysanimaatio</string>
+  <string name="soundpack_settings_title">Äänet</string>
 </resources>
