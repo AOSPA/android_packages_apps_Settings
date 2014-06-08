@@ -24,6 +24,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.admin.DevicePolicyManager;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -61,9 +62,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.ActivityPicker;
 import com.android.settings.accessibility.AccessibilitySettings;
+import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accessibility.ToggleAccessibilityServicePreferenceFragment;
-import com.android.settings.accessibility.ToggleCaptioningPreferenceFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
@@ -329,13 +331,12 @@ public class Settings extends PreferenceActivity
         ManageApplications.class.getName(),
         ProcessStatsUi.class.getName(),
         NotificationStation.class.getName(),
-        AppOpsSummary.class.getName(),
         LocationSettings.class.getName(),
         SecuritySettings.class.getName(),
         PrivacySettings.class.getName(),
         DeviceAdminSettings.class.getName(),
         AccessibilitySettings.class.getName(),
-        ToggleCaptioningPreferenceFragment.class.getName(),
+        CaptionPropertiesFragment.class.getName(),
         TextToSpeechSettings.class.getName(),
         Memory.class.getName(),
         DevelopmentSettings.class.getName(),
@@ -355,7 +356,8 @@ public class Settings extends PreferenceActivity
         TrustedCredentialsSettings.class.getName(),
         PaymentSettings.class.getName(),
         ApnSettings.class.getName(),
-        KeyboardLayoutPickerFragment.class.getName()
+        KeyboardLayoutPickerFragment.class.getName(),
+        ThemeSettings.class.getName()
     };
 
     @Override
@@ -548,6 +550,15 @@ public class Settings extends PreferenceActivity
             int id = (int) header.id;
             if (id == R.id.operator_settings || id == R.id.manufacturer_settings) {
                 Utils.updateHeaderToSpecificActivityFromMetaDataOrRemove(this, target, header);
+            } else if (id == R.id.advanced_settings) {
+                try{
+                    // Set localized title of advanced settings
+                    header.title = getPackageManager().getApplicationLabel(getPackageManager()
+                            .getPackageInfo("org.omnirom.device", PackageManager.GET_META_DATA).applicationInfo);
+                }
+                catch (NameNotFoundException e){
+                    target.remove(header);  // Package does not exist. Remove entry.
+                }
             } else if (id == R.id.wifi_settings) {
                 // Remove WiFi Settings if WiFi service is not available.
                 if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI)) {
@@ -1035,6 +1046,19 @@ public class Settings extends PreferenceActivity
             revert = true;
         }
 
+        // a temp hack while we prepare to switch
+        // to the new theme chooser.
+        if (header.id == R.id.theme_settings) {
+            try {
+                Intent intent = new Intent();
+                intent.setClassName("com.tmobile.themechooser", "com.tmobile.themechooser.ThemeChooser");
+                startActivity(intent);
+                return;
+            } catch(ActivityNotFoundException e) {
+                 // Do nothing, we will launch the submenu
+            }
+        }
+
         super.onHeaderClick(header, position);
 
         if (revert && mLastHeader != null) {
@@ -1048,9 +1072,7 @@ public class Settings extends PreferenceActivity
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
         // Override the fragment title for Wallpaper settings
         int titleRes = pref.getTitleRes();
-        if (pref.getFragment().equals(WallpaperTypeSettings.class.getName())) {
-            titleRes = R.string.wallpaper_settings_fragment_title;
-        } else if (pref.getFragment().equals(OwnerInfoSettings.class.getName())
+        if (pref.getFragment().equals(OwnerInfoSettings.class.getName())
                 && UserHandle.myUserId() != UserHandle.USER_OWNER) {
             if (UserManager.get(this).isLinkedUser()) {
                 titleRes = R.string.profile_info_settings_title;
@@ -1113,7 +1135,15 @@ public class Settings extends PreferenceActivity
     public static class DeviceInfoSettingsActivity extends Settings { /* empty */ }
     public static class ApplicationSettingsActivity extends Settings { /* empty */ }
     public static class ManageApplicationsActivity extends Settings { /* empty */ }
-    public static class AppOpsSummaryActivity extends Settings { /* empty */ }
+    public static class AppOpsSummaryActivity extends Settings {
+        @Override
+        public boolean isValidFragment(String className) {
+            if (AppOpsSummary.class.getName().equals(className)) {
+                return true;
+            }
+            return super.isValidFragment(className);
+        }
+    }
     public static class StorageUseActivity extends Settings { /* empty */ }
     public static class DevelopmentSettingsActivity extends Settings { /* empty */ }
     public static class AccessibilitySettingsActivity extends Settings { /* empty */ }
@@ -1144,5 +1174,6 @@ public class Settings extends PreferenceActivity
     public static class PrintJobSettingsActivity extends Settings { /* empty */ }
     public static class ApnSettingsActivity extends Settings { /* empty */ }
     public static class ApnEditorActivity extends Settings { /* empty */ }
+    public static class ThemeSettingsActivity extends Settings { /* empty */ }
 }
 

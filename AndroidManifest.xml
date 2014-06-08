@@ -1134,7 +1134,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.accessibility.ToggleCaptioningPreferenceFragment" />
+                android:value="com.android.settings.accessibility.CaptionPropertiesFragment" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/accessibility_settings" />
         </activity>
@@ -1184,7 +1184,7 @@
         <!-- Runs in the phone process since it needs access to the Phone object -->
         <activity android:name=".deviceinfo.msim.MSimSubscriptionStatus"
                 android:label="@string/device_status_activity_title"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:theme="@style/Theme.DialogWhenLarge"
                 android:process="com.android.phone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -1196,8 +1196,9 @@
         <!-- Runs in the phone process since it needs access to the Phone object -->
         <activity android:name=".deviceinfo.msim.MSimStatus"
                 android:label="@string/device_status_activity_title"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
-                android:process="com.android.phone">
+                android:theme="@style/Theme.DialogWhenLarge"
+                android:process="com.android.phone"
+                android:parentActivityName="Settings$DeviceInfoSettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1507,13 +1508,6 @@
 
         <!-- Development settings -->
 
-        <activity android:name="DebugIntentSender" android:label="@string/debug_intent_sender_label">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
-            </intent-filter>
-        </activity>
-
         <!-- DeviceInfo adds the user's requested build to stats upload.  -->
         <receiver android:name=".DeviceInfo$StatsReportReceiver">
             <intent-filter>
@@ -1735,6 +1729,21 @@
 
         <!-- CyanogenMod activities End -->
 
+        <!-- CyanogenMod Theme Engine activity -->
+        <activity android:name="Settings$ThemeSettingsActivity"
+                  android:label="@string/themes_settings_title"
+                  android:taskAffinity=""
+                  android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.THEME_SETTINGS" />
+                <category android:name="com.android.settings.SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.ThemeSettings" />
+        </activity>
+
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
         <activity android:name="Settings$CryptKeeperSettingsActivity"
                 android:label="@string/crypt_keeper_encrypt_title">
@@ -1769,7 +1778,8 @@
         <activity android:name=".SelectSubscription"
                 android:label="@string/subs_settings"
                 android:process="com.android.phone"
-                android:clearTaskOnLaunch="true">
+                android:clearTaskOnLaunch="true"
+                android:parentActivityName=".deviceinfo.msim.MSimStatus">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
