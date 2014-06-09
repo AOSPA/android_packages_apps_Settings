@@ -19,7 +19,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="notification_category">通知</string>
   <string name="notification_peek_title">Peekで通知</string>
-  <string name="notification_peek_summary">端末を持つと最新の通知を表示します</string>
+  <string name="notification_peek_summary">端末を持った後に最新の通知を表示する</string>
   <string name="notification_led_category_title">LEDで通知</string>
   <string name="edit_light_settings">ライトの設定を編集</string>
   <string name="pulse_speed_title">点滅の長さと速度</string>
@@ -58,9 +58,9 @@
   <string name="link_volume_ringtones">着信音と通知音の音量を連動させる</string>
   <string name="volume_ring_only_description">着信音</string>
   <string name="increasing_ring_title">着信音量の増加</string>
-  <string name="checkbox_increasing_ring">有効</string>
+  <string name="checkbox_increasing_ring">有効にする</string>
   <string name="increasing_ring_min_volume_title">着信開始時の音量</string>
-  <string name="increasing_ring_volume_notice">注意:\n開始時の音量が通常の着信音量よりも大きく設定されている場合、着信音は通常の着信音量の大きさで再生されます</string>
+  <string name="increasing_ring_volume_notice">注意:\n着信開始時の音量が通常の着信音量よりも大きく設定されている場合、着信音は通常の着信音量の大きさで再生されます</string>
   <string name="increasing_ring_interval_title">音量の増加間隔</string>
   <string name="increasing_ring_interval_eachring">ループごと</string>
   <string name="increasing_ring_interval_half_second">0.5秒</string>
@@ -91,7 +91,7 @@
   <string name="ime_switcher_notify_summary">入力方法の選択を通知領域に表示する</string>
   <string name="root_access">Rootアクセス</string>
   <string name="root_access_warning_title">Rootアクセスを許可しますか？</string>
-  <string name="root_access_warning_message">アプリがRootへのアクセスを要求することができます。非常に危険であり、あなたのシステムのセキュリティが損なわれる可能性があります ！</string>
+  <string name="root_access_warning_message">アプリがRootへのアクセスを要求することができます。非常に危険であり、あなたのシステムのセキュリティが損なわれる可能性があります！</string>
   <string name="root_access_none">無効化</string>
   <string name="root_access_apps">アプリのみ</string>
   <string name="root_access_adb">ADB経由のみ</string>
@@ -102,6 +102,25 @@
   <string name="low_battery_warning_policy_popup">ポップアップのみ</string>
   <string name="low_battery_warning_policy_notif">通知のみ</string>
   <string name="low_battery_warning_policy_sound">音のみ</string>
+  <string name="blacklist_button_title">ブラックリスト</string>
+  <string name="peek_blacklist_label">Peekのブラックリストに登録</string>
+  <string name="floating_blacklist_label">フローティングモードのブラックリストに登録</string>
+  <string name="lockscreen_background">背景</string>
+  <string name="lockscreen_background_style_title">ロック画面の背景</string>
+  <string name="background_default">デフォルトの背景</string>
+  <string name="background_wallpaper">カスタムの壁紙</string>
+  <string name="background_result_successful">背景を変更しました</string>
+  <string name="background_result_not_successful">背景を変更しませんでした</string>
+  <string name="setting_lockscreen_background">背景を適用する</string>
   <string name="pa_version">ParanoidAndroidバージョン</string>
   <string name="pa_version_default">不明</string>
+  <string name="themes_settings_title">テーマ</string>
+  <string name="themepacks_settings_title">テーマパック</string>
+  <string name="styles_settings_title">スタイル</string>
+  <string name="icons_settings_title">アイコン</string>
+  <string name="fonts_settings_title">フォント</string>
+  <string name="wallpaper_settings_title">壁紙</string>
+  <string name="lockscreen_wallpaper_settings_title">ロック画面の壁紙</string>
+  <string name="bootanim_settings_title">起動アニメーション</string>
+  <string name="soundpack_settings_title">サウンドパック</string>
 </resources>
