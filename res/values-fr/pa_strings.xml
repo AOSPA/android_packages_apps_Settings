@@ -29,13 +29,13 @@
   <string name="dialog_delete_title">Supprimer</string>
   <string name="dialog_delete_message">Supprimer l\'élément sélectionné ?</string>
   <string name="dialog_test_message">Éteignez l\'écran pour voir les notifications sélectionnées en action ou fermez cette fenêtre pour interrompre le test</string>
-  <string name="dialog_test_button">Fermer</string>
+  <string name="dialog_test_button">Ignorer</string>
   <string name="notification_light_ok">OK</string>
   <string name="notification_light_reset">Réinitialiser</string>
   <string name="notification_light_general_title">Général</string>
   <string name="notification_light_applist_title">Applications</string>
   <string name="notification_light_phonelist_title">Téléphone</string>
-  <string name="notification_light_use_custom">Utiliser des valeurs personalisées</string>
+  <string name="notification_light_use_custom">Utiliser des valeurs personnalisées</string>
   <string name="notification_light_default_value">Par défaut</string>
   <string name="notification_light_enabled">Activée</string>
   <string name="notification_light_disabled">Désactivée</string>
@@ -55,7 +55,7 @@
   <string name="pulse_speed_slow">Lente</string>
   <string name="pulse_speed_very_slow">Très lente</string>
   <string name="volume_adjust_sounds_enable_summary">Jouer un son lors du réglage de la sonnerie avec les boutons de volume</string>
-  <string name="link_volume_ringtones">Lier le volume de la sonnerie et des notifications</string>
+  <string name="link_volume_ringtones">Lier le volume du téléphone &amp; et des notifications</string>
   <string name="volume_ring_only_description">Sonnerie</string>
   <string name="increasing_ring_title">Sonnerie de plus en plus forte</string>
   <string name="checkbox_increasing_ring">Activer</string>
@@ -73,7 +73,7 @@
   <string name="volume_wake_title">Les boutons de volume sortent l\'appareil de veille</string>
   <string name="volume_wake_summary">Un appui sur un des boutons de volume sortira votre appareil de veille</string>
   <string name="see_through_title">Écran de verrouillage transparent</string>
-  <string name="see_through_summary">Affiche l\'application en cours à travers l\'écran de verrouillage. Vos données peuvent être visible par ceux qui vous entourent</string>
+  <string name="see_through_summary">Affiche l\'application en cours à travers l\'écran de verrouillage. Vos données peuvent être visibles par ceux qui vous entourent</string>
   <string name="appops_settings_title">Autorisations des applications</string>
   <string name="personalization">Personnalisation</string>
   <string name="reset_user_preferences_title">Réinitialiser les préférences</string>
@@ -81,9 +81,9 @@
   <string name="reset_user_preferences_dialog">Etes-vous sûr(e) de vouloir réinitialiser les préférences ?</string>
   <string name="battery_status_icon_title">Icône de la batterie</string>
   <string name="battery_bar">Pile</string>
-  <string name="battery_bar_percent">Pile avec pourcentage</string>
+  <string name="battery_bar_percent">Pile &amp; avec pourcentage</string>
   <string name="battery_circle">Cercle</string>
-  <string name="battery_circle_percent">Cercle avec pourcentage</string>
+  <string name="battery_circle_percent">Cercle &amp; avec pourcentage</string>
   <string name="custom_runtime_warning_title">Attention</string>
   <string name="custom_runtime_warning_message">ART n\'est pas supporté par l\'équipe de ParanoidAndroid. Ce paramètre est disponible à des fins expérimentales uniquement et peut causer des instabilités, crashs, pertes de données et empêcher le démarrage du téléphone. Allez sur :  &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt; pour plus d\'informations.&lt;br/&gt;&lt;br/&gt; Merci de ne pas signaler de bugs si vous utilisez ART.&lt;br/&gt;&lt;br/&gt;Etes-vous sûr(e) de vouloir rédemarrer pour changez le moteur d’exécution de <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> à <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
   <string name="security_maximize_widgets_title">Agrandir les widgets</string>
@@ -102,6 +102,25 @@
   <string name="low_battery_warning_policy_popup">Pop-up uniquement</string>
   <string name="low_battery_warning_policy_notif">Notification uniquement</string>
   <string name="low_battery_warning_policy_sound">Son uniquement</string>
+  <string name="blacklist_button_title">Liste noire</string>
+  <string name="peek_blacklist_label">Liste noire pour Peek</string>
+  <string name="floating_blacklist_label">Liste noire pour le mode flottant</string>
+  <string name="lockscreen_background">Arrière-plan</string>
+  <string name="lockscreen_background_style_title">Arrière-plan de l\'écran de verrouillage</string>
+  <string name="background_default">Fond d\'écran par défaut</string>
+  <string name="background_wallpaper">Fond d\'écran personnalisé</string>
+  <string name="background_result_successful">Arrière-plan modifié</string>
+  <string name="background_result_not_successful">Arrière-plan non modifié</string>
+  <string name="setting_lockscreen_background">Modification du fond d\'écran</string>
   <string name="pa_version">Version de ParanoidAndroid</string>
   <string name="pa_version_default">Inconnue</string>
+  <string name="themes_settings_title">Thèmes</string>
+  <string name="themepacks_settings_title">Packs de thème</string>
+  <string name="styles_settings_title">Styles</string>
+  <string name="icons_settings_title">Icônes</string>
+  <string name="fonts_settings_title">Polices</string>
+  <string name="wallpaper_settings_title">Fonds d\'écran</string>
+  <string name="lockscreen_wallpaper_settings_title">Fonds de l\'écran de verrouillage</string>
+  <string name="bootanim_settings_title">Animations de démarrage</string>
+  <string name="soundpack_settings_title">Packs de sons</string>
 </resources>
