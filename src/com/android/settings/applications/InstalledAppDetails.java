@@ -68,6 +68,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -1108,13 +1110,13 @@ public class InstalledAppDetails extends Fragment
             mClearDataButton.setText(R.string.recompute_size);
         }
     }
-    
+
     private void showDialogInner(int id, int moveErrorCode) {
         DialogFragment newFragment = MyAlertDialogFragment.newInstance(id, moveErrorCode);
         newFragment.setTargetFragment(this, 0);
         newFragment.show(getFragmentManager(), "dialog " + id);
     }
-    
+
     public static class MyAlertDialogFragment extends DialogFragment {
 
         public static MyAlertDialogFragment newInstance(int id, int moveErrorCode) {
@@ -1266,6 +1268,9 @@ public class InstalledAppDetails extends Fragment
                     .setNegativeButton(R.string.dlg_cancel, null)
                     .create();
                 case DLG_BLACKLIST:
+                    final boolean tempPeek = getOwner().getPeekState();
+                    final boolean tempFloating = getOwner().getFloatingModeState();
+                    final boolean tempHover = getOwner().getHoverState();
                     AlertDialog dialog = new AlertDialog.Builder(getActivity())
                             .setTitle(getActivity().getText(R.string.blacklist_button_title))
                             .setView(mBlacklistDialogView)
@@ -1276,9 +1281,22 @@ public class InstalledAppDetails extends Fragment
                                             .removeView(mBlacklistDialogView);
                                 }
                             })
+                            .setOnKeyListener(new DialogInterface.OnKeyListener() {
+                                @Override
+                                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                                    if (keyCode == KeyEvent.KEYCODE_BACK
+                                            && event.getAction() == KeyEvent.ACTION_UP) {
+                                        getOwner().setPeekState(tempPeek);
+                                        getOwner().setFloatingModeState(tempFloating);
+                                        getOwner().setHoverState(tempHover);
+                                        ((ViewGroup)mBlacklistDialogView.getParent())
+                                            .removeView(mBlacklistDialogView);
+                                    }
+                                    return false;
+                                }
+                            })
                             .create();
                     dialog.setCanceledOnTouchOutside(false);
-                    dialog.setCancelable(false);
                     return dialog;
             }
             throw new IllegalArgumentException("unknown id " + id);
@@ -1368,6 +1386,8 @@ public class InstalledAppDetails extends Fragment
     }
 
     private void setPeekState(boolean state) {
+        if(getPeekState() != state)
+            mPeekBlacklist.setChecked(state); // needed when Peek state is set manually
         try {
             mNotificationManager.setPeekBlacklistStatus(mAppEntry.info.packageName, state);
         } catch (android.os.RemoteException ex) {
@@ -1376,6 +1396,8 @@ public class InstalledAppDetails extends Fragment
     }
 
     private void setFloatingModeState(boolean state) {
+        if(getFloatingModeState() != state)
+            mFloatingBlacklist.setChecked(state); // needed when Floating state is set manually
         try {
             mNotificationManager.setFloatingModeBlacklistStatus(mAppEntry.info.packageName, state);
         } catch (android.os.RemoteException ex) {
@@ -1384,11 +1406,25 @@ public class InstalledAppDetails extends Fragment
     }
 
     private void setHoverState(boolean state) {
+        if(getHoverState() != state)
+            mHoverBlacklist.setChecked(state); // needed when Hover state is set manually
         try {
             mNotificationManager.setHoverBlacklistStatus(mAppEntry.info.packageName, state);
         } catch (android.os.RemoteException ex) {
             mHoverBlacklist.setChecked(!state); // revert
         }
+    }
+
+    private boolean getPeekState() {
+        return mPeekBlacklist.isChecked();
+    }
+
+    private boolean getFloatingModeState() {
+        return mFloatingBlacklist.isChecked();
+    }
+
+    private boolean getHoverState() {
+        return mHoverBlacklist.isChecked();
     }
 
     private int getPremiumSmsPermission(String packageName) {
