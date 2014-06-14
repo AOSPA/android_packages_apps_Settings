@@ -68,6 +68,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -1276,9 +1278,19 @@ public class InstalledAppDetails extends Fragment
                                             .removeView(mBlacklistDialogView);
                                 }
                             })
+                            .setOnKeyListener(new DialogInterface.OnKeyListener() {
+                                @Override
+                                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                                    if (keyCode == KeyEvent.KEYCODE_BACK
+                                            && event.getAction() == KeyEvent.ACTION_UP) {
+                                        ((ViewGroup)mBlacklistDialogView.getParent())
+                                            .removeView(mBlacklistDialogView);
+                                    }
+                                    return false;
+                                }
+                            })
                             .create();
                     dialog.setCanceledOnTouchOutside(false);
-                    dialog.setCancelable(false);
                     return dialog;
             }
             throw new IllegalArgumentException("unknown id " + id);
