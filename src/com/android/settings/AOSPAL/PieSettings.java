@@ -400,23 +400,23 @@ public class PieSettings extends SettingsPreferenceFragment implements Preferenc
         mPieSnapBackgroundColor.setSummary(getResources().getString(
                 R.string.pie_snap_background_color_summary) + " (" + snapBackgroundHexColor + ")");
         mPieBackgroundColor.setSummary(getResources().getString(
-                R.string.pie_snap_background_color_summary) + " (" + backgroundHexColor + ")");
+                R.string.pie_background_color_summary) + " (" + backgroundHexColor + ")");
         mPieSelectColor.setSummary(getResources().getString(
-                R.string.pie_snap_background_color_summary) + " (" + selectHexColor + ")");
+                R.string.pie_select_color_summary) + " (" + selectHexColor + ")");
         mPieOutlinesColor.setSummary(getResources().getString(
-                R.string.pie_snap_background_color_summary) + " (" + outlinesHexColor + ")");
+                R.string.pie_outlines_color_summary) + " (" + outlinesHexColor + ")");
         mPieChevronColor.setSummary(getResources().getString(
-                R.string.pie_snap_background_color_summary) + " (" + chevronHexColor + ")");
+                R.string.pie_chevron_color_summary) + " (" + chevronHexColor + ")");
         mPieStatusColor.setSummary(getResources().getString(
-                R.string.pie_snap_background_color_summary) + " (" + statusHexColor + ")");
+                R.string.pie_status_color_summary) + " (" + statusHexColor + ")");
         mPieBatteryBackgroundColor.setSummary(getResources().getString(
-                R.string.pie_snap_background_color_summary) + " (" + batteryBackgroundHexColor + ")");
+                R.string.pie_battery_background_color_summary) + " (" + batteryBackgroundHexColor + ")");
         mPieBatteryJuiceColor.setSummary(getResources().getString(
-                R.string.pie_snap_background_color_summary) + " (" + batteryJuiceHexColor + ")");
+                R.string.pie_battery_juice_color_summary) + " (" + batteryJuiceHexColor + ")");
         mPieBatteryJuiceLowColor.setSummary(getResources().getString(
-                R.string.pie_snap_background_color_summary) + " (" + batteryJuiceLowHexColor + ")");
+                R.string.pie_battery_juice_low_color_summary) + " (" + batteryJuiceLowHexColor + ")");
         mPieBatteryJuiceCriticalColor.setSummary(getResources().getString(
-                R.string.pie_snap_background_color_summary) + " (" + batteryJuiceCriticalHexColor + ")");
+                R.string.pie_battery_juice_critical_color_summary) + " (" + batteryJuiceCriticalHexColor + ")");
     }
 
     private void resetPieSettings() {
@@ -428,10 +428,7 @@ public class PieSettings extends SettingsPreferenceFragment implements Preferenc
                 Settings.System.PIE_ANGLE, 12);
 
         mPieSize.setValueIndex(2);
-        mPieSize.setSummary(getResources().getString(R.string.pie_size_normal));
         mPieGap.setValueIndex(0);
-        mPieGap.setSummary(getResources().getString(R.string.pie_gap_none));
         mPieAngle.setValueIndex(2);
-        mPieAngle.setSummary(getResources().getString(R.string.pie_angle_normal));
     }
 }
