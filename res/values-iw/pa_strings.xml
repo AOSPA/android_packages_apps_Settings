@@ -19,7 +19,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="notification_category">התראות</string>
   <string name="notification_peek_title">התראות Peek</string>
-  <string name="notification_peek_summary">מציג את ההתראות האחרונות לאחר הרמת המכשיר</string>
+  <string name="notification_peek_summary">הצג את ההתראות האחרונות לאחר הרמת המכשיר</string>
   <string name="notification_led_category_title">התראות LED</string>
   <string name="edit_light_settings">הגדרות תאורה</string>
   <string name="pulse_speed_title">אורך הבהוב ומהירות</string>
@@ -28,7 +28,7 @@
   <string name="dialog_test">בדיקה</string>
   <string name="dialog_delete_title">מחק</string>
   <string name="dialog_delete_message">האם להסיר את הפריט הנבחר?</string>
-  <string name="dialog_test_message">כבה את המסך כדי לראות את ההתראה הנבחרת בפעולה או דחה את חלון זה כדי לעצור את הבדיקה</string>
+  <string name="dialog_test_message">כבה את המסך כדי לראות את ההתראה הנבחרת בפעולה או סגור חלון זה כדי לעצור את הבדיקה</string>
   <string name="dialog_test_button">דחה</string>
   <string name="notification_light_ok">אישור</string>
   <string name="notification_light_reset">איפוס</string>
@@ -61,7 +61,7 @@
   <string name="checkbox_increasing_ring">הפעל</string>
   <string name="increasing_ring_min_volume_title">עוצמת רינגטון התחלתית</string>
   <string name="increasing_ring_volume_notice">שים לב:\nעוצמת השמע ההתחלתית של הרינגטון גבוהה מעוצמת השמע של הרינגטון לכן הרינגטון ינוגן בעוצמת השמע של הרינגטון</string>
-  <string name="increasing_ring_interval_title">מרווח עלייה</string>
+  <string name="increasing_ring_interval_title">הגדל מרווח עלייה</string>
   <string name="increasing_ring_interval_eachring">בכל ניגון חדש</string>
   <string name="increasing_ring_interval_half_second">חצי שנייה</string>
   <string name="increasing_ring_interval_1second">שנייה</string>
@@ -85,7 +85,6 @@
   <string name="battery_circle">מעגל</string>
   <string name="battery_circle_percent">מעגל ואחוזים</string>
   <string name="custom_runtime_warning_title">אזהרה</string>
-  <string name="custom_runtime_warning_message">ART לא נתמך כראוי על ידי צוות ParanoidAndroid. הגדרה זו קיימת רק לניסוי בלבד ויש סיכוי לאי יציבות, קריסות, איבוד מידע או מניעת אתחול נכון של המכשיר. בקר ב-&lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;הצגת ART&lt;/a&gt; עבור מידע נוסף.&lt;br/&gt;&lt;br/&gt;אנחנו מבקשים שלא תדווח על באגים אם אתה משתמש ב-ART.&lt;br/&gt;&lt;br/&gt;האם אתה בטוח שאתה רוצה להחליף מ-<xliff:g id="old" example="libdvm.so">%1$s</xliff:g> ל-<xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
   <string name="security_maximize_widgets_title">הרחב ווידג\'טים</string>
   <string name="ime_switcher_notify">התראת בחירת שיטת קלט</string>
   <string name="ime_switcher_notify_summary">הצגת התראה עבור הגדרת שיטת קלט</string>
@@ -97,14 +96,15 @@
   <string name="root_access_adb">ADB בלבד</string>
   <string name="root_access_all">יישומים ו-ADB</string>
   <string name="low_battery_warning_policy_title">התראת סוללה חלשה</string>
-  <string name="low_battery_warning_policy_popup_sound">דו-שיח וקול</string>
+  <string name="low_battery_warning_policy_popup_sound">התראה קופצת וקולית</string>
   <string name="low_battery_warning_policy_notif_sound">התראה וקול</string>
-  <string name="low_battery_warning_policy_popup">דו-שיח בלבד</string>
+  <string name="low_battery_warning_policy_popup">התראה קופצת בלבד</string>
   <string name="low_battery_warning_policy_notif">התראה בלבד</string>
   <string name="low_battery_warning_policy_sound">קול בלבד</string>
-  <string name="blacklist_button_title">הסתר</string>
-  <string name="peek_blacklist_label">הסתר מ-Peek</string>
-  <string name="floating_blacklist_label">חסימת הופעה במצב צף</string>
+  <string name="blacklist_button_title">חסום</string>
+  <string name="peek_blacklist_label">חסימה מ Peek</string>
+  <string name="floating_blacklist_label">חסימה ממצב צף</string>
+  <string name="hover_blacklist_label">חסימה מ Hover</string>
   <string name="lockscreen_background">רקע</string>
   <string name="lockscreen_background_style_title">רקע למסך הנעילה</string>
   <string name="background_default">רקע ברירת המחדל</string>

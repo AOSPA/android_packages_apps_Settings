@@ -18,7 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="notification_category">Notificaciones</string>
-  <string name="notification_peek_title">Ojear notificaciones</string>
+  <string name="notification_peek_title">Notificaciones peek</string>
   <string name="notification_peek_summary">Mostrar la última notificación al levantar el dispositivo</string>
   <string name="notification_led_category_title">LED de notificaciones</string>
   <string name="edit_light_settings">Editar la configuración del LED</string>
@@ -28,7 +28,7 @@
   <string name="dialog_test">Probar</string>
   <string name="dialog_delete_title">Eliminar</string>
   <string name="dialog_delete_message">¿Eliminar el elemento seleccionado?</string>
-  <string name="dialog_test_message">Apague la pantalla para probar la notificación seleccionada o ciere este cuadro de diálogo para detener la prueba</string>
+  <string name="dialog_test_message">Apagua la pantalla para probar la notificación seleccionada o cierra este cuadro de diálogo para detener la prueba</string>
   <string name="dialog_test_button">Descartar</string>
   <string name="notification_light_ok">Aceptar</string>
   <string name="notification_light_reset">Restablecer</string>
@@ -56,10 +56,10 @@
   <string name="pulse_speed_very_slow">Muy lenta</string>
   <string name="volume_adjust_sounds_enable_summary">Emitir un sonido cuando se ajuste el tono de llamada con los botones de volumen</string>
   <string name="link_volume_ringtones">Unificar el volumen de tono de llamada y notificaciones</string>
-  <string name="volume_ring_only_description">Ringtone</string>
-  <string name="increasing_ring_title">Ringtone ascendente</string>
+  <string name="volume_ring_only_description">Tono de llamada</string>
+  <string name="increasing_ring_title">Tono de llamada ascendente</string>
   <string name="checkbox_increasing_ring">Activar</string>
-  <string name="increasing_ring_min_volume_title">Volumen inicial del ringtone</string>
+  <string name="increasing_ring_min_volume_title">Volumen inicial del tono de llamada</string>
   <string name="increasing_ring_volume_notice">Aviso:\nSi el volumen inicial es más alto que el volumen de llamada, prevalecerá el volumen de llamada</string>
   <string name="increasing_ring_interval_title">Intervalo de incremento</string>
   <string name="increasing_ring_interval_eachring">En cada tono</string>
@@ -72,7 +72,7 @@
   <string name="volume_buttons_category">Botones de volumen</string>
   <string name="volume_wake_title">Despertar con los botones de volumen</string>
   <string name="volume_wake_summary">Presionar cualquier botón de volumen desbloqueará el dispositivo</string>
-  <string name="see_through_title">Transparente</string>
+  <string name="see_through_title">Ver a través</string>
   <string name="see_through_summary">Muestra el contenido detrás de la pantalla de bloqueo. Tu información podría ser vista por las personas a tu alrededor</string>
   <string name="appops_settings_title">Permisos de las aplicaciones</string>
   <string name="personalization">Personalización</string>
@@ -85,7 +85,6 @@
   <string name="battery_circle">Círculo</string>
   <string name="battery_circle_percent">Círculo y porcentaje</string>
   <string name="custom_runtime_warning_title">Atención</string>
-  <string name="custom_runtime_warning_message">El equipo de ParanoidAndroid no da soporte a ART. Esta configuración es experimental y puede causar inestabilidad, bloqueos, pérdida de información o evitar el correcto inicio de su dispositivo. Visite &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducción a ART&lt;/a&gt; para más información.&lt;br/&gt;&lt;br/&gt;Le pedimos que no reporte errores si utiliza ART como tiempo de ejecución.&lt;br/&gt;&lt;br/&gt;¿Seguro que desea reiniciar y sustituir <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> por <xliff:g id="new" example="libart.so">%2$s</xliff:g> en tiempo de ejecución?</string>
   <string name="security_maximize_widgets_title">Maximizar widgets</string>
   <string name="ime_switcher_notify">Notificación de selector</string>
   <string name="ime_switcher_notify_summary">Muestra la notificación del selector de métodos de entrada</string>
@@ -99,12 +98,13 @@
   <string name="low_battery_warning_policy_title">Advertencia de batería baja</string>
   <string name="low_battery_warning_policy_popup_sound">Cuadro de diálogo y sonido</string>
   <string name="low_battery_warning_policy_notif_sound">Notificación y sonido</string>
-  <string name="low_battery_warning_policy_popup">Cuadro de diálogo solamente</string>
-  <string name="low_battery_warning_policy_notif">Notificación solamente</string>
-  <string name="low_battery_warning_policy_sound">Sonido solamente</string>
+  <string name="low_battery_warning_policy_popup">Sólo cuadro de diálogo</string>
+  <string name="low_battery_warning_policy_notif">Sólo notificación</string>
+  <string name="low_battery_warning_policy_sound">Sólo sonido</string>
   <string name="blacklist_button_title">Lista negra</string>
-  <string name="peek_blacklist_label">Lista negra de Peek</string>
-  <string name="floating_blacklist_label">Lista negra de modo flotante</string>
+  <string name="peek_blacklist_label">Excluir de Peek</string>
+  <string name="floating_blacklist_label">Excluir del modo flotante</string>
+  <string name="hover_blacklist_label">Excluir de Hover</string>
   <string name="lockscreen_background">Fondo</string>
   <string name="lockscreen_background_style_title">Fondo de pantalla de bloqueo</string>
   <string name="background_default">Fondo por defecto</string>
