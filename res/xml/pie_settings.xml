@@ -1,0 +1,80 @@
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/pie_settings_title"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:key="pie_settings">
+
+    <PreferenceCategory
+        android:key="dimensions_category"
+        android:title="@string/pie_settings_dimensions_category">
+
+        <ListPreference
+            android:key="pie_size"
+            android:title="@string/pie_size"
+            android:entries="@array/pie_size_entries"
+            android:entryValues="@array/pie_size_values"
+            android:defaultValue="1.0" />
+
+        <ListPreference
+            android:key="pie_gap"
+            android:title="@string/pie_gap"
+            android:entries="@array/pie_gap_entries"
+            android:entryValues="@array/pie_gap_values"
+            android:defaultValue="1" />
+
+        <ListPreference
+            android:key="pie_angle"
+            android:title="@string/pie_angle"
+            android:entries="@array/pie_angle_entries"
+            android:entryValues="@array/pie_angle_values"
+            android:defaultValue="12" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="colors_category"
+        android:title="@string/pie_colors_title">
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+                android:key="snap_background_color"
+                android:title="@string/pie_snap_background_color_title" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+                android:key="background_color"
+                android:title="@string/pie_background_color_title" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+                android:key="select_color"
+                android:title="@string/pie_select_color_title" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+                android:key="outlines_color"
+                android:title="@string/pie_outlines_color_title" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+                android:key="chevron_color"
+                android:title="@string/pie_chevron_color_title" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+                android:key="status_color"
+                android:title="@string/pie_status_color_title" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+                android:key="battery_background_color"
+                android:title="@string/pie_battery_background_color_title" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+                android:key="battery_juice_color"
+                android:title="@string/pie_battery_juice_color_title" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+                android:key="battery_juice_low_color"
+                android:title="@string/pie_battery_juice_low_color_title" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+                android:key="battery_juice_critical_color"
+                android:title="@string/pie_battery_juice_critical_color_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

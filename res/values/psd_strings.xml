@@ -98,7 +98,7 @@
     <string name="navring_action_ring_silent">Ring/Silent</string>
     <string name="navring_action_ring_vibrate_silent">Ring/Vibration/Silent</string>
     <string name="navring_action_screen_off">Screen off</string>
-    <string name="navring_action_torch">Toggle torch</string>
+    <string name="navring_action_lightbulb">Toggle lightbulb</string>
     <string name="navring_action_google_now">Google Now</string>
     <string name="navring_choose_action_title">Choose action</string>
     <string name="navring_action_last_app">Switch to last app</string>
@@ -166,15 +166,6 @@ USB networks). This setting is reset on reboot</string>
     <!-- ADB over network tile -->
     <string name="adb_tile">ADB over network tile</string>
     <string name="adb_tile_summary">Adds an adb over network tile to quicksettings.</string>
-
-    <!-- Wi-Fi region code settings-->
-    <string name="wifi_setting_countrycode_title">Wi-Fi region code</string>
-    <!-- Wi-Fi settings screen, setting summary for setting the wifi frequency band [CHAR LIMIT=50]. -->
-    <string name="wifi_setting_countrycode_summary">Specify the region code for Wi-Fi</string>
-    <!-- Wi-Fi settings screen, error message when the frequency band could not be set [CHAR LIMIT=50]. -->
-    <string name="wifi_setting_countrycode_error">There was a problem setting the region code.</string>
-    <!-- Wi-Fi settings diables message if Wifi is off-->
-    <string name="wifi_setting_countrycode_disabled">Enable Wi-Fi to change this option.</string>
 
     <!-- WiFi forget all networks -->
     <string name="wifi_menu_forget_all">Forget all networks</string>
@@ -315,11 +306,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="quick_pulldown_left">Left</string>
     <string name="quick_pulldown_right">Right</string>
 
-    <!-- Wi-Fi settings screen, advanced, title of the item to set the Wi-Fi priority. -->
-    <string name="wifi_setting_priority_title">Wi-Fi priority</string>
-    <!-- Wi-Fi settings screen, setting summary for setting the Wi-Fi priority-->
-    <string name="wifi_setting_priority_summary">Specify the priority of the Wi-Fi networks</string>
-
     <!-- Keyboard and Input ASS methods  -->
     <string name="title_keyboard_input">Advanced options</string>
     <string name="disable_fullscreen_keyboard_title">Disable fullscreen keyboard</string>
@@ -416,10 +402,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="lockscreen_targets_color_summary">Color of the challenge targets</string>
     <string name="lockscreen_misc_color_title">Miscellaneous color</string>
     <string name="lockscreen_misc_color_summary">Color of the remaining items</string>
-
-    <!-- Lockscreen wallpaper -->
-    <string name="lockscreen_wallpaper">Custom wallpaper</string>
-    <string name="select_wallpaper">Select wallpaper</string>
 
     <!-- Lockscreen widget settings -->
     <string name="lockscreen_widgets_title">Widgets</string>
@@ -598,12 +580,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="telo_radio_info_category">Information TeloRadio</string>
     <string name="telo_radio_info_title">About the Connection Manager</string>
     <string name="telo_radio_info_summary">The connection manager TeloRadio &#169; is a feature created by Telo (TeloKang ROM) Android Inc. Original Idea atl4ntis (Cataclysm ROM).</string>
-
-    <!-- Captive portal toggle -->
-    <string name="captive_toggle">Captive portal detection</string>
-    <string name="captive_toggle_summary">Toggle captive portal detection</string>
-    <string name="captive_server">Server for captive portal detection</string>
-    <string name="captive_server_summary">Server used to detect captive portal. Leave empty for default.</string>
 
     <!-- Display : Rotation -->
     <string name="display_rotation_title" translatable="false">Rotation</string>
@@ -842,28 +818,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="noti_reminder_interval_2dot5s">2.5 seconds</string>
     <string name="noti_reminder_interval_3s">3 seconds</string>
     <string name="noti_reminder_interval_3dot5s">3.5 second</string>
-	    <string name="noti_reminder_interval_4s">4 seconds</string>
-
-    <!-- Smooth ProgressBar -->
-    <string name="progressbar_title">Custom ProgressBar</string>
-    <string name="progressbar_mirror_title">Mirror Mode</string>
-    <string name="progressbar_reverse_title">Reversed</string>
-    <string name="progressbar_speed_title">Speed</string>
-    <string name="progressbar_width_title">Stroke Width</string>
-    <string name="progressbar_length_title">Separator length</string>
-    <string name="progressbar_count_title">Sections Count</string>
-    <string name="progressbar_color_1_title">Color1</string>
-    <string name="progressbar_color_2_title">Color2</string>
-    <string name="progressbar_color_3_title">Color3</string>
-    <string name="progressbar_color_4_title">Color4</string>
-    <string name="sample_progressbar_text">ProgressBar : Preview</string>
-    <string name="progressbar_interpolator">Interpolator</string>
-    <string name="progressbar_none">None</string>
-    <string name="progressbar_acclerate">Accelerate</string>
-    <string name="progressbar_linear">Linear</string>
-    <string name="progressbar_acceleratedecelerate">AccelerateDecelerate</string>
-    <string name="progressbar_decelerate">Decelerate</string>
-    <string name="progressbar_reset_message">Reset progress bar style to default?</string>
+    <string name="noti_reminder_interval_4s">4 seconds</string>
 
     <!-- Toast Animation -->
     <string name="toast_animation_title">Toast Animation</string>
@@ -957,7 +912,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="shortcut_action_qs">Quicksettings panel</string>
     <string name="shortcut_action_none">None</string>
     <string name="shortcut_action_power_menu">Power menu</string>
-    <string name="shortcut_action_torch">Torch</string>
+    <string name="shortcut_action_lightbulb">Lightbulb</string>
     <string name="shortcut_action_longpress">Longpress:</string>
     <string name="shortcut_action_select_action_longpress">Choose longpress action:</string>
     <string name="shortcut_action_select_action">Choose action:</string>
@@ -1051,4 +1006,59 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="notification_hide_carrier_title">Hide carrier label</string>
     <string name="notification_shortcuts_settings_title">Shortcuts</string>
     <string name="notification_shortcuts_settings_summary">Show shortcuts in the notification drawer</string>
+
+    <!-- Status bar notification count -->
+    <string name="status_bar_notification_count_title">Notification count</string>
+    <string name="status_bar_notification_count_summary">Display number of similar notifications</string>
+
+    <!-- Pie Settings-->
+    <string name="pie_settings_title">Pie Settings</string>
+    <string name="pie_settings_dimensions_category">Dimensions</string>
+    <string name="pie_colors_title">Colors</string>
+    <string name="pie_settings_reset">Reset</string>
+    <string name="pie_settings_reset_message">Reset pie settings to default?</string>
+
+    <!-- Pie Size -->
+    <string name="pie_size">Size</string>
+    <string name="pie_size_tiny">Tiny</string>
+    <string name="pie_size_small">Small</string>
+    <string name="pie_size_normal">Normal (Default)</string>
+    <string name="pie_size_large">Large</string>
+
+    <!-- Pie Gap -->
+    <string name="pie_gap">Gap</string>
+    <string name="pie_gap_none">None (Default)</string>
+    <string name="pie_gap_small">small</string>
+    <string name="pie_gap_big">big</string>
+    <string name="pie_gap_huge">huge</string>
+
+    <!-- Pie Angle -->
+    <string name="pie_angle">Angle</string>
+    <string name="pie_angle_none">None</string>
+    <string name="pie_angle_small">Small</string>
+    <string name="pie_angle_normal">Normal (Default)</string>
+    <string name="pie_angle_big">Big</string>
+    <string name="pie_angle_huge">Huge</string>
+
+    <!-- Pie Colors -->
+    <string name="pie_snap_background_color_title">Snap Background</string>
+    <string name="pie_background_color_title">Background Color</string>
+    <string name="pie_select_color_title">When Selected Color</string>
+    <string name="pie_outlines_color_title">Outlines Color</string>
+    <string name="pie_chevron_color_title">Chevron Color</string>
+    <string name="pie_status_color_title">Status Color</string>
+    <string name="pie_battery_background_color_title">Battery Background Color</string>
+    <string name="pie_battery_juice_color_title">Battery Normal Color</string>
+    <string name="pie_battery_juice_low_color_title">Battery Low Color</string>
+    <string name="pie_battery_juice_critical_color_title">Battery Critical Color</string>
+    <string name="pie_snap_background_color_summary">Color of the snap points at the sides</string>
+    <string name="pie_background_color_summary">Color of the menu</string>
+    <string name="pie_select_color_summary">Color of the menu when selected</string>
+    <string name="pie_outlines_color_summary">Color of the menu outlines</string>
+    <string name="pie_chevron_color_summary">Color of the half-circle line</string>
+    <string name="pie_status_color_summary">Color of the status</string>
+    <string name="pie_battery_background_color_summary">Color of the battery bar</string>
+    <string name="pie_battery_juice_color_summary">Color of the battery indicator in normal percentage</string>
+    <string name="pie_battery_juice_low_color_summary">Color of the battery indicator in low percentage</string>
+    <string name="pie_battery_juice_critical_color_summary">Color of the battery indicator in critical percentage</string>
 </resources>

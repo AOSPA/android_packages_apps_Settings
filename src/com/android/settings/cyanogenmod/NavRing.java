@@ -122,8 +122,8 @@ public class NavRing extends Fragment implements
         if (NavigationRingHelpers.isAssistantAvailable(getActivity())) {
             mActions.addAction(ACTION_ASSIST, R.string.navring_action_google_now);
         }
-        if (NavigationRingHelpers.isTorchAvailable(getActivity())) {
-            mActions.addAction(ACTION_TORCH, R.string.navring_action_torch);
+        if (NavigationRingHelpers.isLightbulbAvailable(getActivity())) {
+            mActions.addAction(ACTION_LIGHTBULB, R.string.navring_action_lightbulb);
         }
 
         mActions.addAction(ACTION_SCREENSHOT, R.string.navring_action_take_screenshot);

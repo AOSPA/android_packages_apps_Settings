@@ -4,6 +4,12 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="system_settings">
 
+    <PreferenceScreen
+        android:key="pie_settings"
+        android:title="@string/pie_settings_title"
+        android:fragment="com.android.settings.AOSPAL.PieSettings"
+        android:icon="@drawable/ic_settings_pie_settings" />
+
     <!-- TeloRadio -->
     <PreferenceScreen
         android:key="telo_radio_settings"
@@ -43,11 +49,6 @@
             android:key="recents_ram_bar"
             android:fragment="com.android.settings.AOSPAL.RamBar"
             android:title="@string/ram_bar" />
-
-        <PreferenceScreen
-            android:key="progressbar_settings"
-            android:fragment="com.android.settings.cyanogenmod.ProgressBar"
-            android:title="@string/progressbar_title" />
 
    </PreferenceCategory>
 

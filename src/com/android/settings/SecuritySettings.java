@@ -43,7 +43,6 @@ import android.security.KeyStore;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import com.android.internal.widget.LockPatternUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 

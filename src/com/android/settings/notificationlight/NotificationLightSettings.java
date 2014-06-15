@@ -258,6 +258,8 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
                 }
             }
         }
+
+        mPackageAdapter.reloadList();
     }
 
     private void setCustomEnabled() {
@@ -553,7 +555,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     private class PackageAdapter extends BaseAdapter {
         private List<PackageItem> mInstalledPackages = new LinkedList<PackageItem>();
 
-        private void reloadList() {
+        public void reloadList() {
             final Handler handler = new Handler();
             new Thread(new Runnable() {
                 @Override
@@ -575,6 +577,11 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
                         item.activityTitles.add(info.loadLabel(mPackageManager));
                         item.icon = appInfo.loadIcon(mPackageManager);
                         item.packageName = appInfo.packageName;
+
+                        if (mPackages.get(item.packageName) != null) {
+                            // Skip this package - it's already in the application's custom packages
+                            continue;
+                        }
 
                         handler.post(new Runnable() {
                             @Override

@@ -23,6 +23,7 @@ import com.android.settings.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.database.DataSetObserver;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -61,6 +62,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	private final PageListener pageListener = new PageListener();
 	public OnPageChangeListener delegatePageListener;
+
+	private final PagerAdapterObserver adapterObserver = new PagerAdapterObserver();
 
 	private LinearLayout tabsContainer;
 	private ViewPager pager;
@@ -178,6 +181,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		if (pager.getAdapter() == null) {
 			throw new IllegalStateException("ViewPager does not have adapter instance.");
 		}
+
+		pager.getAdapter().registerDataSetObserver(adapterObserver);
+		adapterObserver.setAttached(true);
 
 		pager.setOnPageChangeListener(pageListener);
 
@@ -390,6 +396,28 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		}
 	}
 
+	@Override
+	protected void onAttachedToWindow() {
+		super.onAttachedToWindow();
+		if (pager != null) {
+			if (!adapterObserver.isAttached()) {
+				pager.getAdapter().registerDataSetObserver(adapterObserver);
+				adapterObserver.setAttached(true);
+			}
+		}
+	}
+
+	@Override
+	protected void onDetachedFromWindow() {
+		super.onDetachedFromWindow();
+		if (pager != null) {
+			if (adapterObserver.isAttached()) {
+				pager.getAdapter().unregisterDataSetObserver(adapterObserver);
+				adapterObserver.setAttached(false);
+			}
+		}
+	}
+
 	private class PageListener implements OnPageChangeListener {
 
 		@Override
@@ -425,6 +453,24 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			}
 		}
 
+	}
+
+	private class PagerAdapterObserver extends DataSetObserver {
+
+		private boolean attached = false;
+
+		@Override
+		public void onChanged() {
+			notifyDataSetChanged();
+		}
+
+		public void setAttached(boolean attached) {
+			this.attached = attached;
+		}
+
+		public boolean isAttached() {
+			return attached;
+		}
 	}
 
 	public void setIndicatorColor(int indicatorColor) {

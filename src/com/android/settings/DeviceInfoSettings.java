@@ -109,6 +109,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
         findPreference(KEY_KERNEL_VERSION).setSummary(getFormattedKernelVersion());
         findPreference(KEY_PA_VERSION).setEnabled(true);
         setValueSummary(KEY_PA_VERSION, "ro.pa.version");
+        findPreference(KEY_PSD_VERSION).setEnabled(true);
         setValueSummary(KEY_PSD_VERSION, "ro.psd.version");
         setValueSummary(KEY_SM_AND, "ro.sm.android");
         setValueSummary(KEY_SM_ARM, "ro.sm.arm");
@@ -229,6 +230,19 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.setClassName("android",
                         com.android.internal.app.PAWorldActivity.class.getName());
+                try {
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Log.e(LOG_TAG, "Unable to start activity " + intent.toString());
+                }
+            }
+        } else if (preference.getKey().equals(KEY_PSD_VERSION)) {
+            System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
+            mHits[mHits.length-1] = SystemClock.uptimeMillis();
+            if (mHits[0] >= (SystemClock.uptimeMillis()-500)) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setClassName("android",
+                        com.android.internal.app.PSDWorldActivity.class.getName());
                 try {
                     startActivity(intent);
                 } catch (Exception e) {
