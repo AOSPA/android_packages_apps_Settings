@@ -55,7 +55,7 @@
   <string name="pulse_speed_slow">Lassú</string>
   <string name="pulse_speed_very_slow">Nagyon lassú</string>
   <string name="volume_adjust_sounds_enable_summary">Hangjelzés a csengőhang erejének hangerőgombokkal való állításakor</string>
-  <string name="link_volume_ringtones">Csengőhang és értesítési hangok összekapcsolása</string>
+  <string name="link_volume_ringtones">Csengőhang és értesítési hangerő összekapcsolása</string>
   <string name="volume_ring_only_description">Csengőhang</string>
   <string name="increasing_ring_title">Emelkedő csengőhang</string>
   <string name="checkbox_increasing_ring">Engedélyezés</string>
@@ -85,7 +85,6 @@
   <string name="battery_circle">Kör</string>
   <string name="battery_circle_percent">Kör és százalék</string>
   <string name="custom_runtime_warning_title">Figyelmeztetés</string>
-  <string name="custom_runtime_warning_message">A ParanoidAndroid nem támogatja az ART futtatási környezetet. Ez a beállítás csak kísérleti jelleggel van jelen a rendszerben. Instabilitást, rendszerösszeomlást, adatvesztést okozhat, vagy akár elindíthatatlanná teheti az eszközt. Látogasson el az &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt; oldalra a további információkért.&lt;br/&gt;&lt;br/&gt;Kérjük, ne küldjön hibabejelentést, amennyiben az ART futtatási környezet engedélyezve van.&lt;br/&gt;&lt;br/&gt;Biztosan újra kívánja indítani az eszközt és a jelenlegi futtatási környezetet <xliff:g id="old" example="libdvm.so">%1$s</xliff:g>-ról <xliff:g id="new" example="libart.so">%2$s</xliff:g>-ra cseréli?</string>
   <string name="security_maximize_widgets_title">Teljes méretű widgetek</string>
   <string name="ime_switcher_notify">Beviteli mód választó értesítés</string>
   <string name="ime_switcher_notify_summary">Beviteli mód választó megjelenítése az értesítési sávon</string>
@@ -105,8 +104,9 @@
   <string name="blacklist_button_title">Feketelista</string>
   <string name="peek_blacklist_label">Peek feketelista</string>
   <string name="floating_blacklist_label">Lebegő mód feketelista</string>
-  <string name="lockscreen_background">Háttérkép</string>
-  <string name="lockscreen_background_style_title">Képernyőzár háttérkép</string>
+  <string name="hover_blacklist_label">Hover feketelista</string>
+  <string name="lockscreen_background">Háttérképek</string>
+  <string name="lockscreen_background_style_title">Képernyőzár háttérképek</string>
   <string name="background_default">Alapértelmezett háttérkép</string>
   <string name="background_wallpaper">Egyéni háttérkép</string>
   <string name="background_result_successful">A háttérkép megváltozott</string>

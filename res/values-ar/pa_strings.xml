@@ -85,7 +85,6 @@
   <string name="battery_circle">دائرة</string>
   <string name="battery_circle_percent">دائرة و نسبة مئوية</string>
   <string name="custom_runtime_warning_title">تحذير</string>
-  <string name="custom_runtime_warning_message">ال(ART) غير مدعوم من قبل فريق ParanoidAndroid. هذا الخيار للتجربة فقط و قد يسبب مشاكل, او فقدان البيانات او إعطال جهازك. قم بزيارة &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt; للمزيد من المعلومات.&lt;br/&gt;&lt;br/&gt;نرجو عدم إرسال سجل الأخطاء في حين قمت بتفعيل ART كزمن التشغيل.&lt;br/&gt;&lt;br/&gt;هل تريد بالتأكيد إعادة التشغيل لتغيير الزمن التشغيلي من <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> إلى <xliff:g id="new" example="libart.so">%2$s</xliff:g>؟?</string>
   <string name="security_maximize_widgets_title">التطبيقات المصغرة إلى أقصى حد</string>
   <string name="ime_switcher_notify">تنبيه المغير</string>
   <string name="ime_switcher_notify_summary">عرض تنبيه محدد طريقة الإدخال</string>
@@ -103,16 +102,25 @@
   <string name="low_battery_warning_policy_notif">تنبيه فقط</string>
   <string name="low_battery_warning_policy_sound">صوت فقط</string>
   <string name="blacklist_button_title">القائمة السوداء</string>
-  <string name="peek_blacklist_label">إستثني من Peek</string>
+  <string name="peek_blacklist_label">القائمة السوداء من Peek</string>
+  <string name="floating_blacklist_label">القائمة السوداء من تعويم الوضع</string>
+  <string name="hover_blacklist_label">القائمة السوداء من Hover</string>
   <string name="lockscreen_background">الخلفية</string>
   <string name="lockscreen_background_style_title">خلفية شاشة القفل</string>
   <string name="background_default">الخلفية الإفتراضية</string>
+  <string name="background_wallpaper">خلفية مخصصة</string>
+  <string name="background_result_successful">الخلفية تغيرت</string>
   <string name="background_result_not_successful">الخلفية لم تتغير</string>
+  <string name="setting_lockscreen_background">تطبيق الخلفية</string>
   <string name="pa_version">اصدار ParanoidAndroid</string>
   <string name="pa_version_default">غير معروف</string>
+  <string name="themes_settings_title">المواضيع</string>
+  <string name="themepacks_settings_title">حزم المواضيع</string>
+  <string name="styles_settings_title">أنماط</string>
   <string name="icons_settings_title">الأيقونات</string>
   <string name="fonts_settings_title">الخطوط</string>
   <string name="wallpaper_settings_title">الخلفيات</string>
   <string name="lockscreen_wallpaper_settings_title">خلفيات قفل الشاشة</string>
+  <string name="bootanim_settings_title">شاشة الدخول</string>
   <string name="soundpack_settings_title">حزمات الصوت</string>
 </resources>
