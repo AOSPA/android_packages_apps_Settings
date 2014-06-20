@@ -305,15 +305,15 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             if (SHOW_INPUT_METHOD_SWITCHER_SETTINGS) {
                 mShowInputMethodSelectorPref.setOnPreferenceChangeListener(this);
             }
-        }
 
         if (mStylusIconEnabled != null) {
             mStylusIconEnabled.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                     Settings.System.STYLUS_ICON_ENABLED, 0) == 1);
         }
 
-        mStatusBarImeSwitcher.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_IME_SWITCHER, 1) != 0);
+            mStatusBarImeSwitcher.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_IME_SWITCHER, 1) != 0);
+        }
 
         // Hard keyboard
         if (!mHardKeyboardPreferenceList.isEmpty()) {
