@@ -125,6 +125,14 @@
         <intent android:action="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
     </header>
 
+    <!-- Remix Settings -->
+    <header
+        android:id="@+id/interface_settings"
+        android:title="@string/remix_settings_title"
+        android:icon="@drawable/ic_settings_system"
+        android:fragment="com.android.settings.AOSPAL.RemixSettings" />
+
+
     <!-- PERSONAL -->
     <header android:id="@+id/personal_section"
         android:title="@string/header_category_personal" />

@@ -31,7 +31,6 @@
 
     <dimen name="data_usage_chart_height">252dip</dimen>
     <dimen name="data_usage_chart_optimalWidth">440dip</dimen>
-
     <dimen name="volume_seekbar_side_margin">8dip</dimen>
 
     <dimen name="crypt_clock_size">100sp</dimen>
@@ -72,5 +71,12 @@
 
     <dimen name="captioning_preview_height">200dp</dimen>
 
-    <dimen name="settings_side_margin">@*android:dimen/preference_fragment_padding_side</dimen>
+    <!-- Default distance beyond which snaps to the matching target -->
+    <dimen name="navbar_search_snap_margin">40dip</dimen>
+    <!-- Diameter of outer shape drawable shown in navbar search. Should be 1/2 of above value -->
+    <dimen name="navbar_search_outerring_radius">170dp</dimen>
+    <!-- Diameter of outer shape drawable shown in navbar search-->
+    <dimen name="navbar_search_outerring_diameter">340dp</dimen>
+    <!-- Height of search panel including navigation bar height -->
+    <dimen name="navbar_search_panel_height">230dip</dimen>
 </resources>

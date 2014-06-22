@@ -89,6 +89,10 @@
             android:title="@string/haptic_feedback_enable_title"
             android:defaultValue="true" />
 
+    <com.android.settings.widget.SeekBarPreference
+            android:key="vibration_duration"
+            android:title="@string/minimum_vibration_duration" />
+
     <ListPreference
             android:key="emergency_tone"
             android:title="@string/emergency_tone_title"
@@ -125,5 +129,31 @@
         android:key="dock_sounds"
         android:title="@string/dock_sounds_enable_title"
         android:defaultValue="false" />
+
+    <PreferenceCategory
+        android:key="button_headsethook"
+        android:title="@string/button_headsethook_title" >
+
+        <com.android.settings.preference.SystemCheckBoxPreference
+            android:key="headsethook_launch_voice"
+            android:title="@string/button_headsethook_launch_voice_title"
+            android:summary="@string/button_headsethook_launch_voice_summary"
+            android:persistent="false" />
+
+        <com.android.settings.preference.AppSelectListPreference
+            android:key="headset_plug"
+            android:title="@string/headset_plug_enable_title"
+            android:positiveButtonText="@string/headset_plug_positive_title"
+            settings:neutralButtonText="@string/headset_plug_neutral_title"
+            settings:neutralButtonValue="SYSTEM_DEFAULT"
+            android:persistent="false"/>
+
+        <com.android.settings.preference.SystemCheckBoxPreference
+            android:key="headset_plug_music_active"
+            android:title="@string/headset_plug_music_active_title"
+            android:summary="@string/headset_plug_music_active_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

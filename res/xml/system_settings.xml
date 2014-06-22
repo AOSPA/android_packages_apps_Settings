@@ -1,0 +1,65 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/remix_settings_system_title"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:key="system_settings">
+
+    <PreferenceScreen
+        android:key="pie_settings"
+        android:title="@string/pie_settings_title"
+        android:fragment="com.android.settings.AOSPAL.PieSettings"
+        android:icon="@drawable/ic_settings_pie_settings" />
+
+    <!-- TeloRadio -->
+    <PreferenceScreen
+        android:key="telo_radio_settings"
+        android:fragment="com.android.settings.AOSPAL.teloradio.TeloRadioSettings"
+        android:title="@string/telo_radio_settings_title"
+        android:icon="@drawable/ic_settings_teloradio" />
+
+    <PreferenceScreen
+        android:key="@+id/gesture_anywhere"
+        android:fragment="com.android.settings.chameleonos.labs.gestureanywhere.GestureAnywhereSettings"
+        android:icon="@drawable/ic_dt_gesture_anywhere"
+        android:title="@string/gesture_anywhere_title" />
+
+    <PreferenceScreen
+        android:key="@+id/wakelock_blocker"
+        android:title="@string/wakelock_blocker"
+        android:icon="@drawable/ic_settings_wakelock_blocker"
+        android:fragment="com.android.settings.AOSPAL.WakeLockBlocker" />
+
+    <PreferenceScreen
+        android:key="screen_recorder"
+        android:title="@string/screen_recorder_title"
+        android:icon="@drawable/ic_settings_src"
+        android:fragment="com.android.settings.chameleonos.ScreenRecorderSettings" />
+
+    <PreferenceScreen
+        android:key="blacklist"
+        android:title="@string/blacklist_title"
+        android:icon="@drawable/ic_settings_blacklist"
+        android:fragment="com.android.settings.blacklist.BlacklistSettings" />
+
+    <PreferenceCategory
+        android:title="@string/remix_settings_interface_title">
+
+        <!-- Recents RAM bar -->
+        <PreferenceScreen
+            android:key="recents_ram_bar"
+            android:fragment="com.android.settings.AOSPAL.RamBar"
+            android:title="@string/ram_bar" />
+
+   </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/general">
+
+        <CheckBoxPreference
+            android:key="reverse_default_app_picker"
+            android:title="@string/reverse_default_app_picker"
+            android:summary="@string/reverse_default_app_picker_summary" />
+
+   </PreferenceCategory>
+
+</PreferenceScreen>

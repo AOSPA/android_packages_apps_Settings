@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2010 The Android Open Source Project
+     This code has been modified. Portions copyright (C) 2013, ParanoidAndroid Project.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -22,9 +23,10 @@
                 android:title="@string/brightness"
                 android:persistent="false"/>
 
-        <CheckBoxPreference
-            android:key="accelerometer"
-            android:title="@string/accelerometer_title"/>
+        <PreferenceScreen
+                android:key="display_rotation"
+                android:fragment="com.android.settings.slim.DisplayRotation"
+                android:title="@string/display_rotation_title" />
 
         <ListPreference
                 android:key="screen_timeout"
@@ -46,6 +48,12 @@
                 android:entries="@array/entries_font_size"
                 android:entryValues="@array/entryvalues_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
+
+        <CheckBoxPreference
+            android:key="wake_when_plugged_or_unplugged"
+            android:title="@string/wake_when_plugged_or_unplugged_title"
+            android:summary="@string/wake_when_plugged_or_unplugged_summary"
+            android:defaultValue="false" />
 
         <PreferenceScreen
                 android:key="wifi_display"

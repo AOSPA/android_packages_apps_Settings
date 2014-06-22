@@ -141,7 +141,6 @@
             android:permission="android.permission.REPORT_SUPERUSER" />
 
         <!-- Settings -->
-
         <activity android:name="Settings"
                 android:label="@string/settings_label_launcher"
                 android:taskAffinity="com.android.settings"
@@ -314,6 +313,23 @@
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+
+        <!-- "Blacklist settings" UI, used only on voice-capable phone devices. -->
+        <activity android:name="Settings$BlacklistSettingsActivity"
+                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:uiOptions="splitActionBarWhenNarrow"
+                android:label="@string/blacklist_title"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.blacklist.BlacklistSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/security_settings" />
         </activity>
 
         <!-- Suspect activity alias: targetActivity is Settings itself, does not define a name. Remove? -->
@@ -700,6 +716,14 @@
                 android:value="com.android.settings.DeviceInfoSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/about_settings" />
+        </activity>
+
+        <activity android:name="PartitionInfo" android:label="@string/partition_info_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
         </activity>
 
         <activity android:name="SettingsLicenseActivity"
@@ -1121,9 +1145,14 @@
             android:excludeFromRecents="true"
         />
 
+        <activity android:name="ChooseLockPatternSize" android:exported="false"/>
+
         <activity android:name="ChooseLockPattern" android:exported="false"/>
 
         <activity android:name="ChooseLockPassword" android:exported="false"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
+
+        <activity android:name="ChooseEncryptionPassword" android:exported="false"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <!-- Runs in the phone process since it needs access to the Phone object -->
@@ -1633,6 +1662,41 @@
             android:theme="@style/CryptKeeperBlankTheme"
         />
 
+        <activity android:name=".slim.AutoBrightnessSetup"
+                android:excludeFromRecents="true"
+                android:theme="@*android:style/Theme.Holo.Dialog.Alert" />
+
+        <activity android:name=".chameleonos.labs.gestureanywhere.GestureAnywhereBuilderActivity" />
+        <activity android:name=".chameleonos.labs.gestureanywhere.GestureAnywhereCreateGestureActivity" />
+
+        <activity
+        android:name="com.android.settings.AOSPAL.Nyandroid"
+        android:exported="true"
+        android:label="Nyandroid"
+        android:icon="@drawable/nyandroid04"
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+        android:hardwareAccelerated="true"
+        android:launchMode="singleInstance"
+        android:excludeFromRecents="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
+
+	<activity android:name=".AOSPAL.RamBar" />
+
+   	<!-- Pseudo-activity used to provide an intent-filter entry point to ass display rotation config -->
+        <activity android:name="Settings$ASSRamBarActivity"
+                android:label="@string/ram_bar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.AOSPAL.RamBar" />
+        </activity>
+
         <!-- CyanogenMod Theme Engine activity -->
         <activity android:name="Settings$ThemeSettingsActivity"
                   android:label="@string/themes_settings_title"
@@ -1770,6 +1834,35 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+
+        <!-- Telo -->
+
+        <activity android:name=".AOSPAL.teloradio.TeloRadioSettings"
+            android:label="@string/telo_radio_settings_title"
+            android:launchMode="singleTask"
+            android:process="com.android.phone">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".AOSPAL.teloradio.TeloRadioBoot">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name="com.android.settings.AOSPAL.RemixSettings"/>
+
+        <activity android:name=".cyanogenmod.LockscreenTargets" />
+
+        <activity android:name=".cyanogenmod.LockscreenInterface" />
+
+        <!-- Telo - FIN -->
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"

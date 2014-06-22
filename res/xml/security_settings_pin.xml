@@ -38,25 +38,28 @@
             android:key="power_button_instantly_locks"
             android:title="@string/lockpattern_settings_enable_power_button_instantly_locks"/>
 
-        <CheckBoxPreference
-            android:key="keyguard_enable_widgets"
-            android:title="@string/security_enable_widgets_title"/>
+        <ListPreference
+            android:key="lock_numpad_random"
+            android:entries="@array/lock_numpad_random_entries"
+            android:entryValues="@array/lock_numpad_random_values"
+            android:title="@string/lock_numpad_random_title"
+            android:dialogTitle="@string/lock_numpad_random_dialog_title" />
 
         <CheckBoxPreference
-            android:key="lockscreen_maximize_widgets"
-            android:title="@string/security_maximize_widgets_title"
-            android:enabled="false"/>
+            android:key="lock_before_unlock"
+            android:title="@string/lock_before_unlock_title"
+            android:summary="@string/lock_before_unlock_summary" />
+
+        <PreferenceScreen
+            android:key="keyguard_enable_widgets"
+            android:fragment="com.android.settings.AOSPAL.LockscreenWidgets"
+            android:title="@string/lockscreen_widgets_title"/>
 
         <PreferenceScreen
             android:fragment="com.android.settings.OwnerInfoSettings"
             android:key="owner_info_settings"
             android:title="@string/owner_info_settings_title"
             android:summary="@string/owner_info_settings_summary"/>
-
-        <!-- <CheckBoxPreference
-            android:key="see_through"
-            android:title="@string/see_through_title"
-            android:summary="@string/see_through_summary" /> -->
 
         <ListPreference
             android:key="lockscreen_background_style"
@@ -66,6 +69,7 @@
             android:title="@string/lockscreen_background_style_title"
             android:entries="@array/lockscreen_background_entries"
             android:entryValues="@array/lockscreen_background_values" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

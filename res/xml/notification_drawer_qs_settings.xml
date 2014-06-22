@@ -1,0 +1,103 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:key="notification_drawer_qs_settings">
+
+   <PreferenceCategory
+        android:key="qs_category"
+        android:title="@string/remix_settings_qs_title">
+
+        <!-- Quick Settings Pulldown -->
+        <ListPreference
+            android:key="quick_pulldown"
+            android:title="@string/title_quick_pulldown"
+            android:summary="@string/qs_pulldown_summary"
+            android:entries="@array/quick_pulldown_entries"
+            android:entryValues="@array/quick_pulldown_values"
+            android:persistent="false" />
+
+        <ListPreference
+            android:key="smart_pulldown"
+            android:title="@string/smart_pulldown_title"
+            android:entries="@array/smart_pulldown_entries"
+            android:entryValues="@array/smart_pulldown_values"
+            android:persistent="false" />
+
+   </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="shortcuts"
+            android:title="@string/notification_bar_shortcuts">
+
+        <com.android.settings.preference.AppSelectListPreference
+                android:key="clock_shortcut"
+                android:title="@string/clock_shortcut_title"
+                android:positiveButtonText="@string/default_shortcut"
+                android:persistent="false"/>
+
+        <com.android.settings.preference.AppSelectListPreference
+                android:key="calendar_shortcut"
+                android:title="@string/calendar_shortcut_title"
+                android:positiveButtonText="@string/default_shortcut"
+                android:persistent="false"/>
+
+   </PreferenceCategory>
+
+   <PreferenceCategory
+            android:title="@string/noti_reminder_category">
+
+        <CheckBoxPreference
+            android:key="noti_reminder_enabled"
+            android:title="@string/noti_reminder_enable_title"
+            android:summaryOn="@string/enabled"
+            android:summaryOff="@string/disabled"
+            android:defaultValue="false" />
+
+        <ListPreference
+            android:key="noti_reminder_interval"
+            android:defaultValue="1500"
+            android:title="@string/noti_reminder_interval"
+            android:entries="@array/noti_reminder_interval_entries"
+            android:entryValues="@array/noti_reminder_interval_values"
+            android:dependency="noti_reminder_enabled" />
+
+        <ListPreference
+            android:key="noti_reminder_sound"
+            android:defaultValue="0"
+            android:title="@string/noti_reminder_sound_title"
+            android:entries="@array/noti_reminder_sound_entries"
+            android:entryValues="@array/noti_reminder_sound_values"
+            android:dependency="noti_reminder_enabled" />
+
+        <RingtonePreference
+            android:key="noti_reminder_ringtone"
+            android:title="@string/noti_reminder_ringtone"
+            android:ringtoneType="all"
+            android:showSilent="false"
+            android:dependency="noti_reminder_enabled" />
+
+   </PreferenceCategory>
+
+   <PreferenceCategory
+            android:title="@string/more">
+
+         <PreferenceScreen
+                 android:key="slim_notification_shortcuts"
+                 android:fragment="com.android.settings.slim.dslv.ButtonsListViewSettings"
+                 android:summary="@string/notification_shortcuts_settings_summary"
+                 android:title="@string/notification_shortcuts_settings_title">
+             <extra android:name="buttonMode" android:value="5" />
+             <extra android:name="maxAllowedButtons" android:value="16" />
+             <extra android:name="disableLongpress" android:value="true" />
+             <extra android:name="useAppPickerOnly" android:value="true" />
+             <extra android:name="fragment" android:value="com.android.settings.slim.fragments.NotificationsShortcutFragment" />
+         </PreferenceScreen>
+
+        <CheckBoxPreference
+            android:key="notification_hide_carrier"
+            android:title="@string/notification_hide_carrier_title"
+            android:defaultValue="false" />
+
+   </PreferenceCategory>
+
+</PreferenceScreen>

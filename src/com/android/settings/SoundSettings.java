@@ -17,8 +17,6 @@
 
 package com.android.settings;
 
-import com.android.settings.bluetooth.DockEventReceiver;    
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.bluetooth.BluetoothDevice;
@@ -42,6 +40,7 @@ import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.MediaStore;
@@ -49,6 +48,14 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.android.settings.bluetooth.DockEventReceiver;
+import com.android.settings.preference.AppSelectListPreference;
+import com.android.settings.preference.SystemCheckBoxPreference;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.widget.SeekBarPreference;
+
+import java.net.URISyntaxException;
 import java.util.List;
 
 public class SoundSettings extends SettingsPreferenceFragment implements
@@ -67,6 +74,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DTMF_TONE = "dtmf_tone";
     private static final String KEY_SOUND_EFFECTS = "sound_effects";
     private static final String KEY_HAPTIC_FEEDBACK = "haptic_feedback";
+    private static final String KEY_VIBRATION_DURATION = "vibration_duration";
     private static final String KEY_EMERGENCY_TONE = "emergency_tone";
     private static final String KEY_SOUND_SETTINGS = "sound_settings";
     private static final String KEY_LOCK_SOUNDS = "lock_sounds";
@@ -78,6 +86,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOCK_SOUNDS = "dock_sounds";
     private static final String KEY_DOCK_AUDIO_MEDIA_ENABLED = "dock_audio_media_enabled";
     private static final String KEY_VOLUME_WAKE_SCREEN = "volume_wake_screen";
+    private static final String KEY_HEADSET_PLUG = "headset_plug";
+    private static final String KEY_HEADSET_MUSIC_ACTIVE = "headset_plug_music_active";
 
     private static final String[] NEED_VOICE_CAPABILITY = {
             KEY_RINGTONE, KEY_DTMF_TONE, KEY_CATEGORY_CALLS,
@@ -91,6 +101,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mDtmfTone;
     private CheckBoxPreference mSoundEffects;
     private CheckBoxPreference mHapticFeedback;
+    private SeekBarPreference mVibrationDuration;
     private Preference mMusicFx;
     private CheckBoxPreference mLockSounds;
     private Preference mRingtonePreference;
@@ -106,6 +117,13 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private Intent mDockIntent;
     private CheckBoxPreference mDockAudioMediaEnabled;
 
+    private Vibrator mVib;
+
+    private boolean mFirstVibration = false;
+
+    private AppSelectListPreference mHeadsetPlug;
+    private SystemCheckBoxPreference mHeadsetMusicActive;
+    
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -138,6 +156,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         boolean aospDialer = Settings.System.getInt(resolver, Settings.System.AOSP_DIALER, 0) == 1;
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
+        mVib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         addPreferencesFromResource(R.xml.sound_settings);
 
         if (!aospDialer) {
@@ -175,6 +194,16 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mHapticFeedback.setPersistent(false);
         mHapticFeedback.setChecked(Settings.System.getInt(resolver,
                 Settings.System.HAPTIC_FEEDBACK_ENABLED, 1) != 0);
+        int userMillis = Settings.System.getInt(resolver,
+                Settings.System.MINIMUM_VIBRATION_DURATION, 0);
+        mVibrationDuration = (SeekBarPreference) findPreference(KEY_VIBRATION_DURATION);
+        mVibrationDuration.setInitValue(userMillis);
+        mVibrationDuration.setInterval(1);
+        mVibrationDuration.displaySameValue(true);
+        mVibrationDuration.zeroDefault(true);
+        mVibrationDuration.isMilliseconds(true);
+        mVibrationDuration.setProperty(Settings.System.MINIMUM_VIBRATION_DURATION);
+        mVibrationDuration.setOnPreferenceChangeListener(this);
         mLockSounds = (CheckBoxPreference) findPreference(KEY_LOCK_SOUNDS);
         mLockSounds.setPersistent(false);
         mLockSounds.setChecked(Settings.System.getInt(resolver,
@@ -184,13 +213,18 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mVolumeWakeScreen.setChecked(Settings.System.getInt(resolver,
                 Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
 
+        mHeadsetPlug = (AppSelectListPreference) findPreference(KEY_HEADSET_PLUG);
+        mHeadsetPlug.setOnPreferenceChangeListener(this);
+        mHeadsetMusicActive = (SystemCheckBoxPreference) findPreference(KEY_HEADSET_MUSIC_ACTIVE);
+        updateHeadsetPlugSummary();
+
         mRingtonePreference = findPreference(KEY_RINGTONE);
         mNotificationPreference = findPreference(KEY_NOTIFICATION_SOUND);
 
-        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (vibrator == null || !vibrator.hasVibrator()) {
+        if (mVib == null || !mVib.hasVibrator()) {
             removePreference(KEY_VIBRATE);
             removePreference(KEY_HAPTIC_FEEDBACK);
+            removePreference(KEY_VIBRATION_DURATION);
         }
 
         if (TelephonyManager.PHONE_TYPE_CDMA == activePhoneType) {
@@ -223,6 +257,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                     getPreferenceScreen().removePreference(pref);
                 }
             }
+            mRingtonePreference = null;
         }
 
         mRingtoneLookupRunnable = new Runnable() {
@@ -365,9 +400,52 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist emergency tone setting", e);
             }
+        } else if (preference == mVibrationDuration) {
+            int value = Integer.parseInt((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.MINIMUM_VIBRATION_DURATION, value);
+            if (mFirstVibration && (value % 5 == 0) && mVib != null) {
+                mVib.vibrate(1);
+            }
+            mFirstVibration = true;
+        } else if (preference == mHeadsetPlug) {
+           String value = (String) objValue;
+           Settings.System.putString(getContentResolver(),
+                    Settings.System.HEADSET_PLUG_ENABLED, value);
+           updateHeadsetPlugSummary();
         }
-
         return true;
+    }
+
+    private void updateHeadsetPlugSummary() {
+        final PackageManager packageManager = getPackageManager();
+
+        mHeadsetPlug.setSummary(getResources().getString(R.string.headset_plug_positive_title));
+        mHeadsetMusicActive.setEnabled(false);
+
+        String headSetPlugIntentUri = Settings.System.getString(getContentResolver(), Settings.System.HEADSET_PLUG_ENABLED);
+
+        if (headSetPlugIntentUri != null) {
+            if (headSetPlugIntentUri.equals(Settings.System.HEADSET_PLUG_SYSTEM_DEFAULT)) {
+                mHeadsetPlug.setSummary(getResources().getString(R.string.headset_plug_neutral_summary));
+                mHeadsetMusicActive.setEnabled(true);
+            } else {
+                Intent headSetPlugIntent = null;
+                try {
+                    headSetPlugIntent = Intent.parseUri(headSetPlugIntentUri, 0);
+                } catch (URISyntaxException e) {
+                    headSetPlugIntent = null;
+                }
+
+                if (headSetPlugIntent != null) {
+                    ResolveInfo info = packageManager.resolveActivity(headSetPlugIntent, 0);
+                    if (info != null) {
+                        mHeadsetPlug.setSummary(info.loadLabel(packageManager));
+                        mHeadsetMusicActive.setEnabled(true);
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -457,4 +535,3 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         return ab.create();
     }
 }
-

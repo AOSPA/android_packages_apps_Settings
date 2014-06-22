@@ -43,24 +43,20 @@
             android:title="@string/lockpattern_settings_enable_power_button_instantly_locks"/>
 
         <CheckBoxPreference
-            android:key="keyguard_enable_widgets"
-            android:title="@string/security_enable_widgets_title"/>
+            android:key="lock_before_unlock"
+            android:title="@string/lock_before_unlock_title"
+            android:summary="@string/lock_before_unlock_summary" />
 
-        <CheckBoxPreference
-            android:key="lockscreen_maximize_widgets"
-            android:title="@string/security_maximize_widgets_title"
-            android:enabled="false"/>
+        <PreferenceScreen
+            android:key="keyguard_enable_widgets"
+            android:fragment="com.android.settings.AOSPAL.LockscreenWidgets"
+            android:title="@string/lockscreen_widgets_title"/>
 
         <PreferenceScreen
             android:fragment="com.android.settings.OwnerInfoSettings"
             android:key="owner_info_settings"
             android:title="@string/owner_info_settings_title"
             android:summary="@string/owner_info_settings_summary"/>
-
-        <!-- <CheckBoxPreference
-            android:key="see_through"
-            android:title="@string/see_through_title"
-            android:summary="@string/see_through_summary" /> -->
 
     </PreferenceCategory>
 
