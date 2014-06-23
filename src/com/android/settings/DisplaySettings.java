@@ -355,6 +355,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         final Resources res = getResources();
         String fontDesc = FontDialogPreference.getFontSizeDescription(res, mCurConfig.fontScale);
         pref.setSummary(getString(R.string.summary_font_size, fontDesc));
+    }
 
     private void updatePeekCheckbox() {
         boolean enabled = Settings.System.getInt(getContentResolver(),
