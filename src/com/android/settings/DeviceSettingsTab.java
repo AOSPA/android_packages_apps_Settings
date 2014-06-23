@@ -709,9 +709,7 @@ public class DeviceSettingsTab extends PreferenceActivity
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
         // Override the fragment title for Wallpaper settings
         int titleRes = pref.getTitleRes();
-        if (pref.getFragment().equals(WallpaperTypeSettings.class.getName())) {
             titleRes = R.string.wallpaper_settings_fragment_title;
-        }
         startPreferencePanel(pref.getFragment(), pref.getExtras(), titleRes, pref.getTitle(),
                 null, 0);
         return true;
