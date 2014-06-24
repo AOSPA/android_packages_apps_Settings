@@ -92,6 +92,12 @@ public class DreamBackend {
                 .getBoolean(com.android.internal.R.bool.config_dreamsActivatedOnDockByDefault);
     }
 
+    private boolean isCallable(Intent intent) {
+        List<ResolveInfo> list = mContext.getPackageManager().queryIntentActivities(intent,
+                PackageManager.MATCH_DEFAULT_ONLY);
+        return list.size() > 0;
+    }
+
     public List<DreamInfo> getDreamInfos() {
         logd("getDreamInfos()");
         ComponentName activeDream = getActiveDream();
@@ -109,7 +115,9 @@ public class DreamBackend {
             dreamInfo.componentName = getDreamComponentName(resolveInfo);
             dreamInfo.isActive = dreamInfo.componentName.equals(activeDream);
             dreamInfo.settingsComponentName = getSettingsComponentName(pm, resolveInfo);
-            dreamInfos.add(dreamInfo);
+            if (isCallable(new Intent().setComponent(dreamInfo.settingsComponentName))) {
+                dreamInfos.add(dreamInfo);
+            }
         }
         Collections.sort(dreamInfos, mComparator);
         return dreamInfos;
