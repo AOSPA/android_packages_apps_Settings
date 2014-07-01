@@ -248,4 +248,18 @@
     <style name="ApnPreference">
         <item name="android:layout">@layout/apn_preference_layout</item>
     </style>
+
+    <!-- Inverse Theming -->
+    <style name="Theme.Base.Settings" parent="@*android:style/Theme.Holo.Light" >
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+    </style>
+ 
+    <style name="ActionBar" parent="@*android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:textSize">30.0sp</item>
+        <item name="android:icon">@android:color/transparent</item>
+    </style>
+ 
+    <style name="Theme.Base.WifiDialog" parent="@*android:style/Theme.Holo.Light.Dialog.Alert">
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
 </resources>
