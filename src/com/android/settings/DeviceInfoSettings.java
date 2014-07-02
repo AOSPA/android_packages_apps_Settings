@@ -235,7 +235,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
                     if (mDevHitToast != null) {
                         mDevHitToast.cancel();
                     }
-                    mDevHitToast = Toast.makeText(getActivity(), R.string.show_dev_on,
+                    mDevHitToast = Toast.makeText(getActivity(), R.string.show_dev_on_pa,
                             Toast.LENGTH_LONG);
                     mDevHitToast.show();
                 } else if (mDevHitCountdown > 0
@@ -244,7 +244,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
                         mDevHitToast.cancel();
                     }
                     mDevHitToast = Toast.makeText(getActivity(), getResources().getQuantityString(
-                            R.plurals.show_dev_countdown, mDevHitCountdown, mDevHitCountdown),
+                            R.plurals.show_dev_countdown_pa, mDevHitCountdown, mDevHitCountdown),
                             Toast.LENGTH_SHORT);
                     mDevHitToast.show();
                 }
@@ -252,7 +252,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
                 if (mDevHitToast != null) {
                     mDevHitToast.cancel();
                 }
-                mDevHitToast = Toast.makeText(getActivity(), R.string.show_dev_already,
+                mDevHitToast = Toast.makeText(getActivity(), R.string.show_dev_already_pa,
                         Toast.LENGTH_LONG);
                 mDevHitToast.show();
             }
