@@ -25,7 +25,6 @@ import android.os.SystemProperties;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.android.settings.DisplaySettings;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.cyanogenmod.ButtonSettings;
@@ -33,6 +32,7 @@ import com.android.settings.hardware.DisplayColor;
 import com.android.settings.hardware.DisplayGamma;
 import com.android.settings.hardware.VibratorIntensity;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.PALP.DisplaySettingsLP;
 
 import java.util.Arrays;
 import java.util.List;
@@ -86,7 +86,7 @@ public class BootReceiver extends BroadcastReceiver {
         DisplayColor.restore(ctx);
         DisplayGamma.restore(ctx);
         VibratorIntensity.restore(ctx);
-        DisplaySettings.restore(ctx);
+        DisplaySettingsLP.restore(ctx);
         LocationSettings.restore(ctx);
         ButtonSettings.restoreKeyDisabler(ctx);
     }
