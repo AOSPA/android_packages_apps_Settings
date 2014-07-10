@@ -106,7 +106,9 @@ public class DisplaySettingsLP extends SettingsPreferenceFragment implements
         }
 
         if (mTapToWake != null) {
-            mTapToWake.setChecked(TapToWake.isEnabled());
+            final SharedPreferences prefs =
+                    PreferenceManager.getDefaultSharedPreferences(getActivity());
+            mTapToWake.setChecked(prefs.getBoolean(KEY_TAP_TO_WAKE, true));
         }
 
         final ContentResolver resolver = getContentResolver();
@@ -179,6 +181,9 @@ public class DisplaySettingsLP extends SettingsPreferenceFragment implements
         if (preference == mAdaptiveBacklight) {
             return AdaptiveBacklight.setEnabled(mAdaptiveBacklight.isChecked());
         } else if (preference == mTapToWake) {
+            final SharedPreferences prefs =
+                    PreferenceManager.getDefaultSharedPreferences(getActivity());
+            prefs.edit().putBoolean(KEY_TAP_TO_WAKE, mTapToWake.isChecked()).commit();
             return TapToWake.setEnabled(mTapToWake.isChecked());
         } else if (preference == mWakeWhenPluggedOrUnplugged) {
             Settings.Global.putInt(getContentResolver(),
