@@ -92,6 +92,13 @@ public class DreamBackend {
                 .getBoolean(com.android.internal.R.bool.config_dreamsActivatedOnDockByDefault);
     }
 
+    private boolean isDuplicate(List<DreamInfo> infos, DreamInfo dreamInfo) {
+        for (DreamInfo d : infos) {
+            if(d.componentName.getClassName().equals(dreamInfo.componentName.getClassName())) return true;
+        }
+        return false;
+    }
+
     public List<DreamInfo> getDreamInfos() {
         logd("getDreamInfos()");
         ComponentName activeDream = getActiveDream();
@@ -109,7 +116,7 @@ public class DreamBackend {
             dreamInfo.componentName = getDreamComponentName(resolveInfo);
             dreamInfo.isActive = dreamInfo.componentName.equals(activeDream);
             dreamInfo.settingsComponentName = getSettingsComponentName(pm, resolveInfo);
-            dreamInfos.add(dreamInfo);
+            if (!isDuplicate(dreamInfos, dreamInfo)) dreamInfos.add(dreamInfo);
         }
         Collections.sort(dreamInfos, mComparator);
         return dreamInfos;
