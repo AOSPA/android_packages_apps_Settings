@@ -30,16 +30,5 @@
 
     </PreferenceCategory>
 
-    <!-- Xperia Settings -->
-    <Preference
-        android:id="@+id/xperia_settings"
-        android:key="xperia_settings"
-        android:title="Xperia Settings">
-        <intent
-                android:action="android.intent.action.MAIN"
-                android:targetClass="com.cyanogenmod.settings.device.DeviceSettings"
-                android:targetPackage="com.cyanogenmod.settings.device" />
-    </Preference>
-
 
 </PreferenceScreen>
