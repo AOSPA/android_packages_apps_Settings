@@ -72,7 +72,8 @@ public class PowerUsageSummary extends PreferenceFragment {
     private static final int SUBMENU_BATTERY_BAR_PERCENT    = Menu.FIRST + 10;
     private static final int SUBMENU_BATTERY_CIRCLE         = Menu.FIRST + 11;
     private static final int SUBMENU_BATTERY_CIRCLE_PERCENT = Menu.FIRST + 12;
-    private static final int MENU_HELP                      = Menu.FIRST + 13;
+    private static final int SUBMENU_BATTERY_HIDDEN         = Menu.FIRST + 13;
+    private static final int MENU_HELP                      = Menu.FIRST + 14;
 
     private PreferenceGroup mAppListGroup;
     private Preference mBatteryStatusPref;
@@ -206,6 +207,8 @@ public class PowerUsageSummary extends PreferenceFragment {
                     .setChecked(selectedIcon == 2);
         batteryStyle.add(1, SUBMENU_BATTERY_CIRCLE_PERCENT, 4, R.string.battery_circle_percent)
                     .setChecked(selectedIcon == 3);
+        batteryStyle.add(1, SUBMENU_BATTERY_HIDDEN, 5, R.string.battery_hidden)
+                    .setChecked(selectedIcon == 4);
         batteryStyle.setGroupCheckable(1, true, true);
 
         MenuItem warningIcon = batteryWarning.getItem();
@@ -282,6 +285,11 @@ public class PowerUsageSummary extends PreferenceFragment {
                 item.setChecked(true);
                 Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_BATTERY_STYLE, 3);
+                return true;
+            case SUBMENU_BATTERY_HIDDEN:
+                item.setChecked(true);
+                Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_BATTERY_STYLE, 4);
                 return true;
             default:
                 return false;
