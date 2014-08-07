@@ -57,6 +57,17 @@
             android:key="see_through"
             android:title="@string/see_through_title"
             android:summary="@string/see_through_summary" /> -->
+
+        <CheckBoxPreference
+            android:key="lockscreen_quick_unlock_control"
+            android:title="@string/lockscreen_quick_unlock_control_title"
+            android:summary="@string/lockscreen_quick_unlock_control_summary"
+            android:persistent="false"/>
+
+        <PreferenceScreen
+            android:key="blacklist"
+            android:title="@string/blacklist_title"
+            android:fragment="com.android.settings.blacklist.BlacklistSettings" />
     </PreferenceCategory>
 
 </PreferenceScreen>

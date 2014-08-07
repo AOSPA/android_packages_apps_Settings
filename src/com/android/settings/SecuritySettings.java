@@ -48,7 +48,9 @@ import android.util.Log;
 import android.view.DisplayInfo;
 import android.view.WindowManager;
 
+import com.android.internal.telephony.util.BlacklistUtils;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,6 +96,11 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
     // Omni Additions
     private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
+    private static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
+    private static final String LOCK_NUMPAD_RANDOM = "lock_numpad_random";
+    private static final String MENU_UNLOCK_PREF = "menu_unlock";
+    private static final String KEY_APP_SECURITY_CATEGORY = "app_security";
+    private static final String KEY_BLACKLIST = "blacklist";
 
     private PackageManager mPM;
     private DevicePolicyManager mDPM;
@@ -128,6 +135,10 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
     // Omni Additions
     private CheckBoxPreference mLockRingBattery;
+    private CheckBoxPreference mQuickUnlockScreen;
+    private ListPreference mLockNumpadRandom;
+    private CheckBoxPreference mMenuUnlock;
+    private PreferenceScreen mBlacklist;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -401,6 +412,14 @@ public class SecuritySettings extends RestrictedSettingsFragment
             }
         }
 
+        mBlacklist = (PreferenceScreen) root.findPreference(KEY_BLACKLIST);
+
+        // Determine options based on device telephony support
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
+            // No telephony, remove dependent options
+            root.removePreference(mBlacklist);
+        }
+
         mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
         if (mNotificationAccess != null) {
             final int total = NotificationAccessSettings.getListenersCount(mPM);
@@ -603,6 +622,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
                 }
             }
         }
+        updateBlacklistSummary();
     }
 
     @Override
@@ -749,5 +769,14 @@ public class SecuritySettings extends RestrictedSettingsFragment
     return (getActivity().getApplicationContext().getResources().getConfiguration().screenLayout
             & Configuration.SCREENLAYOUT_SIZE_MASK)
             >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
+    private void updateBlacklistSummary() {
+        if (mBlacklist != null) {
+            if (BlacklistUtils.isBlacklistEnabled(getActivity())) {
+                mBlacklist.setSummary(R.string.blacklist_summary);
+            } else {
+                mBlacklist.setSummary(R.string.blacklist_summary_disabled);
+            }
+        }
     }
 }
