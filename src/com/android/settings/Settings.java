@@ -360,7 +360,8 @@ public class Settings extends PreferenceActivity
         ApnSettings.class.getName(),
         KeyboardLayoutPickerFragment.class.getName(),
         ThemeSettings.class.getName(),
-        BlacklistSettings.class.getName()
+        BlacklistSettings.class.getName(),
+        com.android.settings.cyanogenmod.QuietHours.class.getName()
     };
 
     @Override
@@ -1180,5 +1181,6 @@ public class Settings extends PreferenceActivity
     public static class ApnEditorActivity extends Settings { /* empty */ }
     public static class ThemeSettingsActivity extends Settings { /* empty */ }
     public static class BlacklistSettingsActivity extends Settings { /* empty */ }
+    public static class QuietHoursSettingsActivity extends Settings { /* empty */ }
 }
 
