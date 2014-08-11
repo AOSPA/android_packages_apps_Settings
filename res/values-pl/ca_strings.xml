@@ -20,6 +20,10 @@
     <string name="crystal_title">Ustawienia CrystalPA</string>
     <string name="crystalpa_version">Wersja CrystalPA</string>
 
+    <!-- Some of CPA Settings -->
+    <string name="listview_title">Ustawienia Listview</string>
+    <string name="other_title">Inne ustawienia</string>
+
     <!-- Navigation Bar Height -->
     <string name="navigation_bar_height">Wysokość paska nawigacji</string>
     <string name="navigation_bar_height_48">48dp</string>
@@ -207,9 +211,57 @@
     <string name="pref_use_16bpp_alpha_title">16-bitowa przeźroczystość</string>
     <string name="pref_use_16bpp_alpha_summary">Lepsza wydajność graficzna kosztem jakości. Może wywoływać artefakty (wymaga restartu)</string>
     
+    <!-- ListView animation -->
+    <string name="interface_settings_animation_title">Opcje animacji</string>
+    <string name="listview_animation_title">Animacje ListView</string>
+    <string name="listview_off">Domyślne</string>
+    <string name="listview_wave_left">Wave (lewo)</string>
+    <string name="listview_wave_right">Wave (prawo)</string>
+    <string name="listview_alpha">Alpha</string>
+    <string name="listview_scale">Scale</string>
+    <string name="listview_stack_top">Stack (górny)</string>
+    <string name="listview_stack_bottom">Stack (dolny)</string>
+    <string name="listview_unfold">Unfold</string>
+    <string name="listview_fold">Fold</string>
+    <string name="listview_translate_left">Translate (lewo)</string>
+    <string name="listview_translate_right">Translate (prawo)</string>
+
+    <!-- ListView interpolator -->
+    <string name="listview_interpolator_title">ListView interpolator</string>
+    <string name="listview_accelerate_interpolator">Accelerate</string>
+    <string name="listview_decelerate_interpolator">Decelerate</string>
+    <string name="listview_accelerate_decelerate_interpolator">Accelerate and decelerate</string>
+    <string name="listview_anticipate_interpolator">Anticipate</string>
+    <string name="listview_overshoot_interpolator">Overshoot</string>
+    <string name="listview_anticipate_overshoot_interpolator">Anticipate and overshoot</string>
+    <string name="listview_bounce_interpolator">Bounce</string>
+    
+    <!-- Slim Recents -->
+    <string name="slim_recents_category">Slim Recents</string>
+    <string name="slim_recents_warning_title">Uwaga!</string>
+    <string name="slim_recents_warning_message">SystemUI zostanie zrestartowane, żeby zaktualizować zmiany</string>
+    <string name="recents_use_slim_title">Używaj Slim Recents</string>
+    <string name="recents_use_slim_summary">Używaj Slim Recents zamiast domyślnego recents view</string>
+
+    <!-- OmniSwitch -->
+    <string name="omniswitch_category">OmniSwitch</string>
+    <string name="recents_use_omniswitch_title">Używaj OmniSwitch</string>
+    <string name="recents_use_omniswitch_summary">Używaj OmniSwitch zamiast domyślnego recents view</string>
+    <string name="omniswitch_start_settings_title">Ustawienia</string>
+    <string name="omniswitch_start_settings_summary">Otwórz ustawienia OmniSwitch</string>
+    <string name="omniswitch_first_time_title">Informacje</string>
+    <string name="omniswitch_first_time_message">Upewnij się, że jest włączony OmniSwitch. Możesz to zrobić za pomocą \"Ustawienia\" niżej.</string>
+    
+    <!--  Recents -->
+    <string name="recent_apps_panel_title" >Panel Recents Apps</string>
+
+    <!-- WP7 Recents -->
+    <string name="wprecents_category">WP7 Recents</string>
+    <string name="recents_color">Recents color - NIE DZIAŁA!</string>
+    
     <!-- Active display settings -->
-    <string name="ad_settings_title">Active display</string>
-    <string name="ad_settings_summary">Zmień ustawienia active display</string>
+    <string name="ad_settings_title">Aktywny wyświetlacz</string>
+    <string name="ad_settings_summary">Zmień ustawienia Active Display</string>
     <string name="ad_enable_title">Aktywuj</string>
     <string name="ad_enable_summary_on">Active display włączony</string>
     <string name="ad_enable_summary_off">Active display wyłączony</string>
@@ -276,4 +328,45 @@
 
     <string name="status_bar_notif_count_title">Pokaż ilość powiadomień</string>
     <string name="status_bar_notif_count_summary">Wyświetla liczbę oczekujących powiadomień</string>
+    
+    <!-- Lock screen shortcuts -->
+    <string name="picker_activities">Zadania</string>
+    <string name="select_custom_app_title">Wybierz aplikację</string>
+    <string name="select_custom_activity_title">Wybierz zadanie</string>
+    <string name="icon_picker_choose_icon_title">Wybierz ikonę</string>
+    <string name="icon_picker_alarm">Alarm</string>
+    <string name="icon_picker_browser">Przeglądarka</string>
+    <string name="icon_picker_calendar">Kalendarz</string>
+    <string name="icon_picker_camera">Aparat</string>
+    <string name="icon_picker_chrome">Chrome</string>
+    <string name="icon_picker_contacts">Kontakty</string>
+    <string name="icon_picker_email">Email</string>
+    <string name="icon_picker_email2">Email Holo</string>
+    <string name="icon_picker_facebook">Facebook</string>
+    <string name="icon_picker_gallery">Galeria</string>
+    <string name="icon_picker_google_small">Google (small)</string>
+    <string name="icon_picker_googleplus">Google Plus</string>
+    <string name="icon_picker_googletalk">Hangouts</string>
+    <string name="icon_picker_maps">Mapy</string>
+    <string name="icon_picker_movie">Film</string>
+    <string name="icon_picker_music">Muzyka</string>
+    <string name="icon_picker_nav_normal">Navigation</string>
+    <string name="icon_picker_phone">Telefon</string>
+    <string name="icon_picker_podcast">Podcast</string>
+    <string name="icon_picker_rss">Rss</string>
+    <string name="icon_picker_search">Szukaj</string>
+    <string name="icon_picker_sms">SMS</string>
+    <string name="icon_picker_twitter">Twitter</string>
+    
+    <!-- String for IconPicker -->
+    <string name="icon_picker_title">Wybierz ikonę</string>
+    <string name="icon_picker_system_icons_title">Ikony systemowe</string>
+    <string name="icon_picker_gallery_title">Galeria</string>
+    <string name="icon_picker_pack_title">Paczka ikon</string>
+
+    <!-- Lockscreen -->
+    <string name="display_lockscreen_rotation_title">Obracanie lockscreen'a</string>
+    <string name="lockscreen_settings_title">Ustawienia lockscreen'a</string>
+    
+    
 </resources>
