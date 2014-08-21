@@ -31,7 +31,7 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceDrawerActivity;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -146,7 +146,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     private void startAccountSettings(AccountPreference acctPref) {
         Bundle args = new Bundle();
         args.putParcelable(AccountSyncSettings.ACCOUNT_KEY, acctPref.getAccount());
-        ((PreferenceDrawerActivity) getActivity()).startPreferencePanel(
+        ((PreferenceActivity) getActivity()).startPreferencePanel(
                 AccountSyncSettings.class.getCanonicalName(), args,
                 R.string.account_sync_settings_title, acctPref.getAccount().name,
                 this, REQUEST_SHOW_SYNC_SETTINGS);

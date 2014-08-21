@@ -31,7 +31,7 @@ import android.os.Environment;
 import android.os.SystemProperties;
 import android.os.UserManager;
 import android.preference.Preference;
-import android.preference.PreferenceDrawerActivity;
+import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -115,7 +115,7 @@ public class MasterClear extends Fragment {
         preference.setFragment(MasterClearConfirm.class.getName());
         preference.setTitle(R.string.master_clear_confirm_title);
         preference.getExtras().putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
-        ((PreferenceDrawerActivity) getActivity()).onPreferenceStartFragment(null, preference);
+        ((PreferenceActivity) getActivity()).onPreferenceStartFragment(null, preference);
     }
 
     /**
