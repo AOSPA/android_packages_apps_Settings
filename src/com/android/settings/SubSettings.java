@@ -29,9 +29,7 @@ public class SubSettings extends Settings {
 
     @Override
     public boolean onNavigateUp() {
-        if (!popFragment()) {
-            finish();
-        }
+        finish();
         return true;
     }
 
@@ -39,14 +37,5 @@ public class SubSettings extends Settings {
     protected boolean isValidFragment(String fragmentName) {
         Log.d("SubSettings", "Launching fragment " + fragmentName);
         return true;
-    }
-
-    private boolean popFragment() {
-        FragmentManager fm = getFragmentManager();
-            if (fm.getBackStackEntryCount() > 0) {
-                fm.popBackStack();
-                return true;
-            }
-        return false;
     }
 }
