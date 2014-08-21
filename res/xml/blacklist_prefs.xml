@@ -41,11 +41,10 @@
         android:entryValues="@array/blacklist_policy_unknown_values"
         android:persistent="false" />
 
-    <CheckBoxPreference
+    <org.omnirom.omnigears.preference.SystemCheckBoxPreference
         android:key="phone_blacklist_regex_enabled"
         android:title="@string/blacklist_regex_title"
         android:summary="@string/blacklist_regex_summary"
-        android:defaultValue="false"
-        android:persistent="false" />
+        android:defaultValue="false" />
 
 </PreferenceScreen>
