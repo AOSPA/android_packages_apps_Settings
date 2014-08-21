@@ -27,7 +27,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Parcel;
 import android.preference.ListPreference;
-import android.preference.Preference;h
+import android.preference.Preference;
 import android.preference.PreferenceDrawerActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
