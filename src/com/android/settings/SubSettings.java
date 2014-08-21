@@ -17,9 +17,7 @@
 package com.android.settings;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.util.Log;
-import android.view.MenuItem;
 
 import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
 

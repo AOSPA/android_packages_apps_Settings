@@ -269,13 +269,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         getActivity().unregisterReceiver(mReceiver);
 
-    }
-
-    private void updateState(boolean force) {
-        if (getActivity() == null) return;
-        ContentResolver resolver = getContentResolver();
-
-		if (Settings.System.getInt(resolver, Settings.System.QUIET_HOURS_ENABLED, 0) == 1) {
+        if (Settings.System.getInt(resolver, Settings.System.QUIET_HOURS_ENABLED, 0) == 1) {
             mQuietHours.setSummary(getString(R.string.quiet_hours_active_from) + " " +
                 returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_START))
                 + " " + getString(R.string.quiet_hours_active_to) + " " +
@@ -283,7 +277,12 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else {
             mQuietHours.setSummary(getString(R.string.quiet_hours_summary));
         }
-		
+    }
+
+    private void updateState(boolean force) {
+        if (getActivity() == null) return;
+        ContentResolver resolver = getContentResolver();
+
     }
 
     private void updateRingtoneName(int type, Preference preference, int msg) {
