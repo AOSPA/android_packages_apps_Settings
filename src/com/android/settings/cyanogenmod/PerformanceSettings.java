@@ -80,7 +80,7 @@ public class PerformanceSettings extends SettingsPreferenceFragment {
             prefSet.removePreference(findPreference(FORCE_HIGHEND_GFX_PREF));
         }
 
-            /* Display the warning dialog */
+            /* Display the warning dialog 
             alertDialog = new AlertDialog.Builder(getActivity()).create();
             alertDialog.setTitle(R.string.performance_settings_warning_title);
             alertDialog.setMessage(getResources().getString(R.string.performance_settings_warning));
@@ -96,7 +96,7 @@ public class PerformanceSettings extends SettingsPreferenceFragment {
                     PerformanceSettings.this.finish();
                 }
             });
-            alertDialog.show();
+            alertDialog.show();*/
         }
     }
 

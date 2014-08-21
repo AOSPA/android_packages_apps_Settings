@@ -35,7 +35,7 @@
     <CheckBoxPreference 
         android:key="keep_screen_on" 
         android:title="@string/keep_screen_on" 
-        android:summary="@string/keep_screen_on_summary"/>
+        android:summary="@string/keep_screen_on_summary_pa"/>
 
     <ListPreference
         android:key="select_runtime"
@@ -79,8 +79,8 @@
 
         <CheckBoxPreference
             android:key="enable_adb"
-            android:title="@string/enable_adb"
-            android:summary="@string/enable_adb_summary"/>
+            android:title="@string/enable_adb_pa"
+            android:summary="@string/enable_adb_summary_pa"/>
 
         <CheckBoxPreference
             android:key="adb_notify"
