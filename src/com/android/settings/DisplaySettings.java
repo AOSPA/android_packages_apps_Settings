@@ -21,9 +21,12 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 import android.app.ActivityManagerNative;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
@@ -43,6 +46,7 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
+
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.DreamSettings;
 import com.android.settings.Utils;
@@ -64,19 +68,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
     private static final String KEY_SCREEN_SAVER = "screensaver";
-    private static final String KEY_ADVANCED_DISPLAY_SETTINGS = "advanced_display_settings";
-    private static final String KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED = "wake_when_plugged_or_unplugged";
-    private static final String KEY_TAP_TO_WAKE = "double_tap_wake_gesture";
-    private static final String KEY_SCREEN_COLOR_SETTINGS = "screencolor_settings";
-
     private static final String KEY_PEEK = "notification_peek";
+
+    private static final String PEEK_APPLICATION = "com.jedga.peek";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
     private CheckBoxPreference mAccelerometer;
     private FontDialogPreference mFontSizePref;
-    private CheckBoxPreference mWakeWhenPluggedOrUnplugged;
     private CheckBoxPreference mNotificationPeek;
+
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
 
@@ -85,7 +86,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
 
-    private CheckBoxPreference mTapToWake;
     private PackageStatusReceiver mPackageStatusReceiver;
     private IntentFilter mIntentFilter;
 
@@ -96,6 +96,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             updateAccelerometerRotationCheckbox();
         }
     };
+
+    private boolean isPeekAppInstalled() {
+        return isPackageInstalled(PEEK_APPLICATION);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,7 +115,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (!RotationPolicy.isRotationSupported(getActivity())
                 || RotationPolicy.isRotationLockToggleSupported(getActivity())) {
             // If rotation lock is supported, then we do not provide this option in
-            // Display settings. However, is still available in Accessibility settings,
+            // Display settings.  However, is still available in Accessibility settings,
             // if the device supports rotation.
             getPreferenceScreen().removePreference(mAccelerometer);
         }
@@ -135,18 +139,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref.setOnPreferenceChangeListener(this);
         mFontSizePref.setOnPreferenceClickListener(this);
 
-        mTapToWake = (CheckBoxPreference) findPreference(KEY_TAP_TO_WAKE);
-        if (!isTapToWakeSupported()) {
-            getPreferenceScreen().removePreference(mTapToWake);
-            mTapToWake = null;
-        }
-
-
-        Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
-                getPreferenceScreen(), KEY_ADVANCED_DISPLAY_SETTINGS);
-
-        mWakeWhenPluggedOrUnplugged =
-                (CheckBoxPreference) findPreference(KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED);
         mNotificationPeek = (CheckBoxPreference) findPreference(KEY_PEEK);
         mNotificationPeek.setPersistent(false);
 
@@ -163,10 +155,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (!hasBatteryLed) {
             getPreferenceScreen().removePreference(mBatteryPulse);
             mBatteryPulse = null;
-        }
-        mScreenColorSettings = (PreferenceScreen) findPreference(KEY_SCREEN_COLOR_SETTINGS);
-        if (!isPostProcessingSupported()) {
-            getPreferenceScreen().removePreference(mScreenColorSettings);
         }
         if (mPackageStatusReceiver == null) {
             mPackageStatusReceiver = new PackageStatusReceiver();
@@ -274,6 +262,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         RotationPolicy.registerRotationPolicyListener(getActivity(),
                 mRotationPolicyListener);
+        getActivity().registerReceiver(mPackageStatusReceiver, mIntentFilter);
 
         updateState();
     }
@@ -284,6 +273,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         RotationPolicy.unregisterRotationPolicyListener(getActivity(),
                 mRotationPolicyListener);
+        getActivity().unregisterReceiver(mPackageStatusReceiver);
     }
 
     @Override
@@ -323,8 +313,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     /**
-* Reads the current font size and sets the value in the summary text
-*/
+     * Reads the current font size and sets the value in the summary text
+     */
     public void readFontSizePreference(Preference pref) {
         try {
             mCurConfig.updateFrom(ActivityManagerNative.getDefault().getConfiguration());
@@ -341,7 +331,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private void updatePeekCheckbox() {
         boolean enabled = Settings.System.getInt(getContentResolver(),
                 Settings.System.PEEK_STATE, 0) == 1;
-        mNotificationPeek.setChecked(enabled);
+        mNotificationPeek.setChecked(enabled && !isPeekAppInstalled());
+        mNotificationPeek.setEnabled(!isPeekAppInstalled());
     }
 
     public void writeFontSizePreference(Object objValue) {
@@ -398,15 +389,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         return false;
     }
 
-    private static boolean isTapToWakeSupported() {
-        try {
-            return TapToWake.isSupported();
-        } catch (NoClassDefFoundError e) {
-            // Hardware abstraction framework not installed
-            return false;
-        }
-    }
-
     public class PackageStatusReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -419,3 +401,4 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
     }
 }
+
