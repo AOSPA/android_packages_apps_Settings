@@ -28,13 +28,6 @@
         android:title="@string/location_settings_title"
         android:id="@+id/location_settings" />
 
-    <!-- Manage NFC payment apps -->
-    <header
-        android:fragment="com.android.settings.nfc.PaymentSettings"
-        android:icon="@drawable/ic_settings_nfc_payment"
-        android:title="@string/nfc_payment_settings_title"
-        android:id="@+id/nfc_payment_settings" />
-
     <!-- Security -->
     <header
         android:fragment="com.android.settings.SecuritySettings"
@@ -51,6 +44,13 @@
 
     <!-- DEVICE MANAGER section -->
     <header android:title="@string/header_device_manager" />
+
+    <!-- Manage users -->
+    <header
+        android:fragment="com.android.settings.users.UserSettings"
+        android:icon="@drawable/ic_settings_multiuser"
+        android:title="@string/user_settings_title"
+        android:id="@+id/user_settings" />
 
     <!-- Application Settings -->
     <header

@@ -70,6 +70,20 @@
     <!-- PERSONALIZATION section -->
     <header android:title="@string/header_personal" />
 
+    <!-- Home -->
+    <header
+        android:id="@+id/home_settings"
+        android:icon="@drawable/ic_settings_home"
+        android:fragment="com.android.settings.HomeSettings"
+        android:title="@string/home_settings" />
+
+    <!-- Legacy Parts -->
+    <header
+        android:id="@+id/legacy_parts"
+        android:title="@string/palp_settings_title"
+        android:icon="@drawable/ic_settings_palp"
+        android:fragment="com.android.settings.PALP.LegacyParts" />
+
     <!-- Display -->
     <header
         android:id="@+id/display_settings"
@@ -105,7 +119,7 @@
         android:icon="@drawable/ic_settings_accessibility"
         android:title="@string/accessibility_settings" />
 
-    <!-- JBMP -->
+    <!-- Other -->
     <header android:title="@string/header_input" />
 
     <!-- Language -->
