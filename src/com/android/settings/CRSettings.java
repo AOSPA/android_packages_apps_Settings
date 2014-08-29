@@ -107,8 +107,8 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
 
         mToastAnimation = (ListPreference) findPreference(KEY_TOAST_ANIMATION);
         if (mToastAnimation != null) {
-           int toastAnimation = Settings.PAC.getInt(getContentResolver(),
-                    Settings.PAC.TOAST_ANIMATION, 1);
+           int toastAnimation = Settings.System.getInt(getContentResolver(),
+                    Settings.System.TOAST_ANIMATION, 1);
            mToastAnimation.setSummary(mToastAnimation.getEntry());
            mToastAnimation.setSummary(mToastAnimation.getEntries()[toastAnimation]);
            mToastAnimation.setValue(String.valueOf(toastAnimation));
@@ -181,18 +181,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_ROTATION, value ? 1 : 0);
             return true;
-        } else if (preference == mToastAnimation) {
-            int value = Integer.parseInt((String) objValue);
-            int index = mToastAnimation.findIndexOfValue((String) objValue);
-            Settings.PAC.putInt(getContentResolver(),
-                    Settings.PAC.TOAST_ANIMATION,
-                    value);
-            mToastAnimation.setSummary(mToastAnimation.getEntries()[index]);
-            Context context = this.getActivity().getApplicationContext();
-            if (context != null) {
-                Toast.makeText(context, "Toast Test", Toast.LENGTH_SHORT).show();
-            }
-            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -217,7 +205,18 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                     value);
             mListViewInterpolator.setSummary(mListViewInterpolator.getEntries()[index]);
         }
-
+        if (preference == mToastAnimation) {
+            int value = Integer.parseInt((String) objValue);
+            int index = mToastAnimation.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.TOAST_ANIMATION,
+                    value);
+            mToastAnimation.setSummary(mToastAnimation.getEntries()[index]);
+            Context context = this.getActivity().getApplicationContext();
+            if (context != null) {
+                Toast.makeText(context, "Toast Test", Toast.LENGTH_SHORT).show();
+            }
+        }
         return true;
     }
 }
