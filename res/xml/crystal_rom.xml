@@ -123,6 +123,11 @@
         android:title="@string/vibrator_intensity_title"
         android:dialogTitle="@string/vibrator_intensity_title"
         android:persistent="false" />
+
+    <PreferenceScreen
+        android:fragment="com.android.settings.axxion.StatusBarNetworkTraffic"
+        android:key="status_bar_network_traffic"
+        android:title="@string/network_traffic_title" />
         
     <CheckBoxPreference
         android:key="pref_disable_boot_animation"
