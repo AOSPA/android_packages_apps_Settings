@@ -77,6 +77,24 @@
                   android:persistent="false" />
     </PreferenceCategory>
 
+    <!-- NavBar Settings -->
+    <PreferenceCategory android:title="@string/navbar_title" >
+    <ListPreference
+        android:key="nav_buttons_height"
+        android:dialogTitle="@string/navigation_bar_height"
+        android:title="@string/navigation_bar_height"
+        android:entries="@array/nav_buttons_height_entries"
+        android:entryValues="@array/nav_buttons_height_values"
+        android:defaultValue="36"
+        android:persistent="false" />
+
+    <CheckBoxPreference
+        android:key="enable_navbar"
+        android:title="@string/enable_navbar"
+        android:summary="@string/enable_navbar_reboot"
+        android:defaultValue="false" />
+    </PreferenceCategory>
+
     <!-- Other Settings -->
     <PreferenceCategory android:title="@string/other_title" >
     <CheckBoxPreference
@@ -95,12 +113,6 @@
         android:key="pref_force_highend_gfx"
         android:title="@string/pref_force_highend_gfx_title"
         android:summary="@string/pref_force_highend_gfx_summary" />
-
-    <CheckBoxPreference
-        android:key="konsta_navbar"
-        android:title="@string/konsta_navbar"
-        android:summary="@string/konsta_navbar_reboot"
-        android:defaultValue="false" />
     </PreferenceCategory>
 </PreferenceScreen>
 

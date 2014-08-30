@@ -65,7 +65,8 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private static final String DISABLE_BOOTANIMATION_PERSIST_PROP = "persist.sys.nobootanimation";
     private static final String FORCE_HIGHEND_GFX_PREF = "pref_force_highend_gfx";
     private static final String FORCE_HIGHEND_GFX_PERSIST_PROP = "persist.sys.force_highendgfx";
-    private static final String KONSTA_NAVBAR = "konsta_navbar";
+    private static final String ENABLE_NAVBAR = "enable_navbar";
+    private static final String KEY_NAVIGATION_HEIGHT = "nav_buttons_height";
     private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
     private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
     private static final String LOCKSCREEN_ROTATION = "lockscreen_rotation";
@@ -75,7 +76,8 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
 
     private CheckBoxPreference mDisableBootanimPref;
     private CheckBoxPreference mForceHighEndGfx;
-    private CheckBoxPreference mKonstaNavbar;
+    private CheckBoxPreference mEnableNavbar;
+    private ListPreference mNavButtonsHeight;
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
     private CheckBoxPreference mLockScreenRotationPref;
@@ -115,9 +117,19 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         }
         mToastAnimation.setOnPreferenceChangeListener(this);
 
-        mKonstaNavbar = (CheckBoxPreference) findPreference(KONSTA_NAVBAR);
-        mKonstaNavbar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.KONSTA_NAVBAR, 0) == 1);
+        mEnableNavbar = (CheckBoxPreference) findPreference(ENABLE_NAVBAR);
+        mEnableNavbar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.ENABLE_NAVBAR, 0) == 1);
+
+        // Navbar height
+        mNavButtonsHeight = (ListPreference) findPreference(KEY_NAVIGATION_HEIGHT);
+        if (mNavButtonsHeight != null) {
+            mNavButtonsHeight.setOnPreferenceChangeListener(this);
+
+            int statusNavButtonsHeight = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.NAV_BUTTONS_HEIGHT, 48);
+            mNavButtonsHeight.setValue(String.valueOf(statusNavButtonsHeight));
+            mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntry());
 
         mLockScreenRotationPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ROTATION);
 
@@ -159,16 +171,16 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         } else if (preference == mForceHighEndGfx) {
             SystemProperties.set(FORCE_HIGHEND_GFX_PERSIST_PROP,
                     mForceHighEndGfx.isChecked() ? "true" : "false");
-        } else if (preference == mKonstaNavbar) {
-            Settings.System.putInt(getContentResolver(), Settings.System.KONSTA_NAVBAR,
-                    mKonstaNavbar.isChecked() ? 1 : 0);
+        } else if (preference == mEnableNavbar) {
+            Settings.System.putInt(getContentResolver(), Settings.System.ENABLE_NAVBAR,
+                    mEnableNavbar.isChecked() ? 1 : 0);
 
             new AlertDialog.Builder(getActivity())
-                    .setTitle(getResources().getString(R.string.konsta_navbar_dialog_title))
-                    .setMessage(getResources().getString(R.string.konsta_navbar_dialog_msg))
-                    .setNegativeButton(getResources().getString(R.string.konsta_navbar_dialog_negative), null)
+                    .setTitle(getResources().getString(R.string.enable_navbar_dialog_title))
+                    .setMessage(getResources().getString(R.string.enable_navbar_dialog_msg))
+                    .setNegativeButton(getResources().getString(R.string.enable_navbar_dialog_negative), null)
                     .setCancelable(false)
-                    .setPositiveButton(getResources().getString(R.string.konsta_navbar_dialog_positive), new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getResources().getString(R.string.enable_navbar_dialog_positive), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
                             powerManager.reboot(null);
@@ -176,6 +188,13 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                     })
                     .create()
                     .show();
+        } else if (preference == mNavButtonsHeight) {
+            int statusNavButtonsHeight = Integer.valueOf((String) objValue);
+            int index = mNavButtonsHeight.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.NAV_BUTTONS_HEIGHT, statusNavButtonsHeight);
+            mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntries()[index]);
+            return true;
         } else if (preference == mLockScreenRotationPref) {
             value = mLockScreenRotationPref.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
