@@ -189,13 +189,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                     })
                     .create()
                     .show();
-        } else if (preference == mNavButtonsHeight) {
-            int statusNavButtonsHeight = Integer.valueOf((String) objValue);
-            int index = mNavButtonsHeight.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.NAV_BUTTONS_HEIGHT, statusNavButtonsHeight);
-            mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntries()[index]);
-            return true;
         } else if (preference == mLockScreenRotationPref) {
             value = mLockScreenRotationPref.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
@@ -236,6 +229,12 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
             if (context != null) {
                 Toast.makeText(context, "Toast Test", Toast.LENGTH_SHORT).show();
             }
+        } else if (preference == mNavButtonsHeight) {
+            int statusNavButtonsHeight = Integer.valueOf((String) objValue);
+            int index = mNavButtonsHeight.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.NAV_BUTTONS_HEIGHT, statusNavButtonsHeight);
+            mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntries()[index]);
         }
         return true;
     }
