@@ -130,6 +130,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                     Settings.System.NAV_BUTTONS_HEIGHT, 48);
             mNavButtonsHeight.setValue(String.valueOf(statusNavButtonsHeight));
             mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntry());
+        }
 
         mLockScreenRotationPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ROTATION);
 
