@@ -149,7 +149,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         disableUnusableTimeouts(mScreenTimeoutPreference);
         updateTimeoutPreferenceDescription(currentTimeout);
 
-        boolean proximityCheckOnWait = getResources().getBoolean(
+        boolean proximityCheckOnWait = res.getBoolean(
                 com.android.internal.R.bool.config_proximityCheckOnWake);
         if (!proximityCheckOnWait) {
              getPreferenceScreen().removePreference(findPreference(KEY_PROXIMITY_WAKE));
