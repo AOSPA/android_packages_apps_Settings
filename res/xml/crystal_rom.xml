@@ -46,10 +46,15 @@
         android:summary="@string/lockscreen_target_summary"
         android:title="@string/lockscreen_target_title" />
 
-    <CheckBoxPreference
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
         android:key="lockscreen_rotation"
         android:title="@string/display_lockscreen_rotation_title"
         android:persistent="false" />
+
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="battery_around_lockscreen_ring"
+        android:title="@string/battery_around_lockscreen_ring"
+        android:defaultValue="false" />
     </PreferenceCategory>
 
     <!-- Listview Settings -->
