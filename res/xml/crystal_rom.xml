@@ -106,6 +106,12 @@
 
     <!-- Other Settings -->
     <PreferenceCategory android:title="@string/other_title" >
+    <com.android.settings.hardware.VibratorIntensity
+        android:key="vibration_intensity"
+        android:title="@string/vibrator_intensity_title"
+        android:dialogTitle="@string/vibrator_intensity_title"
+        android:persistent="false" />
+        
     <CheckBoxPreference
         android:key="pref_disable_boot_animation"
         android:title="@string/pref_disable_boot_animation_title"
