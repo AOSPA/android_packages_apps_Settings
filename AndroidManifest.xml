@@ -1817,6 +1817,12 @@
 
         <!-- CrystalRoms -->
 
+        <activity android:name=".crystalroms.ChangeLog" android:label="@string/changelog_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+
         <activity android:name=".crystalroms.SWAPActivity"
                 android:label="@string/swap_settings_title">
             <intent-filter>
