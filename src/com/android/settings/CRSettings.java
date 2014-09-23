@@ -127,7 +127,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
             mNavButtonsHeight.setOnPreferenceChangeListener(this);
 
             int statusNavButtonsHeight = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.NAV_BUTTONS_HEIGHT, 48);
+                    Settings.System.NAVIGATION_BAR_HEIGHT, 48);
             mNavButtonsHeight.setValue(String.valueOf(statusNavButtonsHeight));
             mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntry());
         }
@@ -233,7 +233,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
             int statusNavButtonsHeight = Integer.valueOf((String) objValue);
             int index = mNavButtonsHeight.findIndexOfValue((String) objValue);
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.NAV_BUTTONS_HEIGHT, statusNavButtonsHeight);
+                    Settings.System.NAVIGATION_BAR_HEIGHT, statusNavButtonsHeight);
             mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntries()[index]);
         }
         return true;
