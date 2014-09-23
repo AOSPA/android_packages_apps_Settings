@@ -120,7 +120,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         boolean hasNavBarByDefault = getResources().getBoolean(
                 com.android.internal.R.bool.config_showNavigationBar);
         boolean enableNavigationBar = Settings.System.getInt(getContentResolver(),
-                Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault ? 1 : 0) == 1;
+                Settings.System.ENABLE_NAVBAR, hasNavBarByDefault ? 1 : 0) == 1;
         mEnableNavbar = (CheckBoxPreference) findPreference(ENABLE_NAVBAR);
         mEnableNavbar.setChecked(enableNavigationBar);
         mEnableNavbar.setOnPreferenceChangeListener(this);
@@ -132,12 +132,9 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
 
             mNavButtonsHeight.setValue(String.valueOf(statusNavButtonsHeight));
             mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntry());
-            mNavButtonsHeight.setEnabled(enableNavigationBar > 0);
+            mNavButtonsHeight.setEnabled(enableNavigationBar);
             mNavButtonsHeight.setOnPreferenceChangeListener(this);
         }
-
-        mLockScreenRotationPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ROTATION);
-        mLockScreenRotationPref.setChecked(lockScreenRotationEnabled);
 
         if (ActivityManager.isLowRamDeviceStatic()) {
             mForceHighEndGfx = (CheckBoxPreference) prefSet.findPreference(FORCE_HIGHEND_GFX_PREF);
@@ -154,6 +151,8 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                         getBoolean(com.android.internal.R.bool.config_enableLockScreenRotation);
         Boolean lockScreenRotationEnabled = Settings.System.getInt(getContentResolver(),
                         Settings.System.LOCKSCREEN_ROTATION, configEnableLockRotation ? 1 : 0) != 0;
+        mLockScreenRotationPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ROTATION);
+        mLockScreenRotationPref.setChecked(lockScreenRotationEnabled);
     }
 
     @Override
