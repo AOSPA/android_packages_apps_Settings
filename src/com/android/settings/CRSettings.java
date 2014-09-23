@@ -117,24 +117,27 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         }
         mToastAnimation.setOnPreferenceChangeListener(this);
 
+        boolean hasNavBarByDefault = getResources().getBoolean(
+                com.android.internal.R.bool.config_showNavigationBar);
+        boolean enableNavigationBar = Settings.System.getInt(getContentResolver(),
+                Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault ? 1 : 0) == 1;
         mEnableNavbar = (CheckBoxPreference) findPreference(ENABLE_NAVBAR);
-        mEnableNavbar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.ENABLE_NAVBAR, 0) == 1);
+        mEnableNavbar.setChecked(enableNavigationBar);
+        mEnableNavbar.setOnPreferenceChangeListener(this);
 
         mNavButtonsHeight = (ListPreference) findPreference(KEY_NAVIGATION_HEIGHT);
         if (mNavButtonsHeight != null) {
-            mNavButtonsHeight.setOnPreferenceChangeListener(this);
-
             int statusNavButtonsHeight = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_HEIGHT, 48);
-            int enabledNavBar = Settings.System.getInt(getContentResolver(),
-                    Settings.System.ENABLE_NAVBAR, 0);
+
             mNavButtonsHeight.setValue(String.valueOf(statusNavButtonsHeight));
             mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntry());
-            mNavButtonsHeight.setEnabled(enabledNavBar > 0);
+            mNavButtonsHeight.setEnabled(enableNavigationBar > 0);
+            mNavButtonsHeight.setOnPreferenceChangeListener(this);
         }
 
         mLockScreenRotationPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ROTATION);
+        mLockScreenRotationPref.setChecked(lockScreenRotationEnabled);
 
         if (ActivityManager.isLowRamDeviceStatic()) {
             mForceHighEndGfx = (CheckBoxPreference) prefSet.findPreference(FORCE_HIGHEND_GFX_PREF);
@@ -151,8 +154,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                         getBoolean(com.android.internal.R.bool.config_enableLockScreenRotation);
         Boolean lockScreenRotationEnabled = Settings.System.getInt(getContentResolver(),
                         Settings.System.LOCKSCREEN_ROTATION, configEnableLockRotation ? 1 : 0) != 0;
-
-        mLockScreenRotationPref.setChecked(lockScreenRotationEnabled);
     }
 
     @Override
