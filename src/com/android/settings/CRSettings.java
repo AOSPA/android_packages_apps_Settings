@@ -121,15 +121,17 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         mEnableNavbar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.ENABLE_NAVBAR, 0) == 1);
 
-        // Navbar height
         mNavButtonsHeight = (ListPreference) findPreference(KEY_NAVIGATION_HEIGHT);
         if (mNavButtonsHeight != null) {
             mNavButtonsHeight.setOnPreferenceChangeListener(this);
 
             int statusNavButtonsHeight = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_HEIGHT, 48);
+            int enabledNavBar = Settings.System.getInt(getContentResolver(),
+                    Settings.System.ENABLE_NAVBAR, 0);
             mNavButtonsHeight.setValue(String.valueOf(statusNavButtonsHeight));
             mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntry());
+            mNavButtonsHeight.setEnabled(enabledNavBar > 0);
         }
 
         mLockScreenRotationPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ROTATION);
