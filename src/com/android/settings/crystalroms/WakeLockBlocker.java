@@ -1,4 +1,4 @@
-package com.android.settings.axxion;
+package com.android.settings.crystalroms;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -86,8 +86,7 @@ public class WakeLockBlocker extends SettingsPreferenceFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mInflater = inflater;
         setHasOptionsMenu(true);
         return inflater.inflate(R.layout.wakelock_blocker, container, false);
@@ -101,15 +100,11 @@ public class WakeLockBlocker extends SettingsPreferenceFragment {
         updateSeenWakeLocksList();
         updateBlockedWakeLocksList();
 
-        mBlockerEnabled = (Switch) getActivity().findViewById(
-                R.id.wakelock_blocker_switch);
-        mWakeLockList = (ListView) getActivity().findViewById(
-                R.id.wakelock_list);
-        mWakeLockListHeader = (TextView) getActivity().findViewById(
-                R.id.wakelock_list_header);
+        mBlockerEnabled = (Switch) getActivity().findViewById(R.id.wakelock_blocker_switch);
+        mWakeLockList = (ListView) getActivity().findViewById(R.id.wakelock_list);
+        mWakeLockListHeader = (TextView) getActivity().findViewById(R.id.wakelock_list_header);
 
-        mListAdapter = new WakeLockListAdapter(getActivity(), android.R.layout.simple_list_item_multiple_choice,
-                mSeenWakeLocks);
+        mListAdapter = new WakeLockListAdapter(getActivity(), android.R.layout.simple_list_item_multiple_choice, mSeenWakeLocks);
         mWakeLockList.setAdapter(mListAdapter);
 
         updateSwitches();

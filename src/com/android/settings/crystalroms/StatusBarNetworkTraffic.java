@@ -1,4 +1,4 @@
-package com.android.settings.axxion;
+package com.android.settings.crystalroms;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -17,8 +17,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class StatusBarNetworkTraffic extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+public class StatusBarNetworkTraffic extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
     private static final String TAG = "StatusBarNetworkTraffic";
 
     private static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
@@ -127,7 +126,6 @@ public class StatusBarNetworkTraffic extends SettingsPreferenceFragment implemen
         MASK_PERIOD = resources.getInteger(R.integer.maskPeriod);
     }
 
-    // intMask should only have the desired bit(s) set
     private int setBit(int intNumber, int intMask, boolean blnState) {
         if (blnState) {
             return (intNumber | intMask);

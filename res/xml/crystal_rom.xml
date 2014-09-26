@@ -116,7 +116,7 @@
     <PreferenceScreen
         android:id="@+id/wakelock_blocker"
         android:title="@string/wakelock_blocker"
-        android:fragment="com.android.settings.axxion.WakeLockBlocker" />
+        android:fragment="com.android.settings.crystalroms.WakeLockBlocker" />
 
     <com.android.settings.hardware.VibratorIntensity
         android:key="vibration_intensity"
@@ -125,7 +125,7 @@
         android:persistent="false" />
 
     <PreferenceScreen
-        android:fragment="com.android.settings.axxion.StatusBarNetworkTraffic"
+        android:fragment="com.android.settings.crystalroms.StatusBarNetworkTraffic"
         android:key="status_bar_network_traffic"
         android:title="@string/network_traffic_title" />
         
