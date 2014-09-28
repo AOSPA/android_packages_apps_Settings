@@ -83,7 +83,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private ListPreference mListViewInterpolator;
     private CheckBoxPreference mLockScreenRotationPref;
     private ListPreference mToastAnimation;
-    private CheckBoxPreference mFloatNorification;
+    private CheckBoxPreference mFloatNotification;
 
     private Context mContext;
 
@@ -156,8 +156,8 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         mLockScreenRotationPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ROTATION);
         mLockScreenRotationPref.setChecked(lockScreenRotationEnabled);
 
-        mFloatNorification = (CheckBoxPreference) prefSet.findPreference(KEY_FLOAT_NOTIFICATION);
-        mFloatNorification.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.STATUS_BAR_NOTIFICATION_SWIPE_FLOATING, 0) == 1);
+        mFloatNotification = (CheckBoxPreference) prefSet.findPreference(KEY_FLOAT_NOTIFICATION);
+        mFloatNotification.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.STATUS_BAR_NOTIFICATION_SWIPE_FLOATING, 0) == 1);
     }
 
     @Override
@@ -201,10 +201,10 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_ROTATION, value ? 1 : 0);
             return true;
-        } else if (preference == mFloatNorification) {
-            value = mFloatNorification.isChecked();
+        } else if (preference == mFloatNotification) {
+            value = mFloatNotification.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.STATUS_BAR_NOTIFICATION_SWIPE_FLOATING, value ? 1 : 0);
+                    Settings.System.STATUS_BAR_NOTIFICATION_SWIPE_FLOATING, value ? 1 : 2);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
