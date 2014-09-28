@@ -141,6 +141,12 @@
         android:title="@string/float_notification_tile"
         android:summary="@string/float_notification_summary"
         android:defaultValue="false" />
+
+    <CheckBoxPreference
+        android:key="pref_float_recent"
+        android:title="@string/float_recent_tile"
+        android:summary="@string/float_recent_summary"
+        android:defaultValue="false" />
         
     <CheckBoxPreference
         android:key="pref_disable_boot_animation"

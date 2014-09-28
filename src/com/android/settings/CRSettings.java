@@ -71,6 +71,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
     private static final String LOCKSCREEN_ROTATION = "lockscreen_rotation";
     private static final String KEY_TOAST_ANIMATION = "toast_animation";
+    private static final String KEY_FLOAT_RECENT = "pref_float_recent";
     private static final String KEY_FLOAT_NOTIFICATION = "pref_float_notification";
 
     private final Configuration mCurrentConfig = new Configuration();
@@ -83,6 +84,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private ListPreference mListViewInterpolator;
     private CheckBoxPreference mLockScreenRotationPref;
     private ListPreference mToastAnimation;
+    private CheckBoxPreference mFloatRecent;
     private CheckBoxPreference mFloatNotification;
 
     private Context mContext;
@@ -156,6 +158,9 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         mLockScreenRotationPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ROTATION);
         mLockScreenRotationPref.setChecked(lockScreenRotationEnabled);
 
+        mFloatRecent = (CheckBoxPreference) prefSet.findPreference(KEY_FLOAT_RECENT);
+        mFloatRecent.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.RECENTS_SWIPE_FLOATING, 0) == 1);
+
         mFloatNotification = (CheckBoxPreference) prefSet.findPreference(KEY_FLOAT_NOTIFICATION);
         mFloatNotification.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.STATUS_BAR_NOTIFICATION_SWIPE_FLOATING, 0) == 1);
     }
@@ -200,6 +205,11 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
             value = mLockScreenRotationPref.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_ROTATION, value ? 1 : 0);
+            return true;
+        } else if (preference == mFloatRecent) {
+            value = mFloatRecent.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.RECENTS_SWIPE_FLOATING, value ? 1 : 2);
             return true;
         } else if (preference == mFloatNotification) {
             value = mFloatNotification.isChecked();
