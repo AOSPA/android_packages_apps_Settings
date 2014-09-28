@@ -135,6 +135,12 @@
         android:targetPackage="com.android.settings"
         android:targetClass="com.android.settings.crystalroms.ChangeLog" />
     </PreferenceScreen>
+
+    <CheckBoxPreference
+        android:key="pref_float_notification"
+        android:title="@string/float_notification_tile"
+        android:summary="@string/float_notification_summary"
+        android:defaultValue="false" />
         
     <CheckBoxPreference
         android:key="pref_disable_boot_animation"

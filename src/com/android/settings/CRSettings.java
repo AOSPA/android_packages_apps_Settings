@@ -71,6 +71,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
     private static final String LOCKSCREEN_ROTATION = "lockscreen_rotation";
     private static final String KEY_TOAST_ANIMATION = "toast_animation";
+    private static final String KEY_FLOAT_NOTIFICATION = "pref_float_notification";
 
     private final Configuration mCurrentConfig = new Configuration();
 
@@ -82,6 +83,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private ListPreference mListViewInterpolator;
     private CheckBoxPreference mLockScreenRotationPref;
     private ListPreference mToastAnimation;
+    private CheckBoxPreference mFloatNorification;
 
     private Context mContext;
 
@@ -153,6 +155,9 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                         Settings.System.LOCKSCREEN_ROTATION, configEnableLockRotation ? 1 : 0) != 0;
         mLockScreenRotationPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ROTATION);
         mLockScreenRotationPref.setChecked(lockScreenRotationEnabled);
+
+        mFloatNorification = (CheckBoxPreference) prefSet.findPreference(KEY_FLOAT_NOTIFICATION);
+        mFloatNorification.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.STATUS_BAR_NOTIFICATION_SWIPE_FLOATING, 0) == 1);
     }
 
     @Override
@@ -195,6 +200,11 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
             value = mLockScreenRotationPref.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_ROTATION, value ? 1 : 0);
+            return true;
+        } else if (preference == mFloatNorification) {
+            value = mFloatNorification.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_NOTIFICATION_SWIPE_FLOATING, value ? 1 : 0);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
