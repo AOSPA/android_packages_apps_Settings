@@ -116,13 +116,18 @@
     <PreferenceScreen
         android:id="@+id/wakelock_blocker"
         android:title="@string/wakelock_blocker"
-        android:fragment="com.android.settings.axxion.WakeLockBlocker" />
+        android:fragment="com.android.settings.crystalroms.WakeLockBlocker" />
 
     <com.android.settings.hardware.VibratorIntensity
         android:key="vibration_intensity"
         android:title="@string/vibrator_intensity_title"
         android:dialogTitle="@string/vibrator_intensity_title"
         android:persistent="false" />
+
+    <PreferenceScreen
+        android:fragment="com.android.settings.crystalroms.StatusBarNetworkTraffic"
+        android:key="status_bar_network_traffic"
+        android:title="@string/network_traffic_title" />
         
     <CheckBoxPreference
         android:key="pref_disable_boot_animation"
