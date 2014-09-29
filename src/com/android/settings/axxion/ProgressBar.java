@@ -33,6 +33,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.settings.R;
+import com.android.settings.axxion.SeekBarPreference;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 import com.android.settings.SettingsPreferenceFragment;
 
