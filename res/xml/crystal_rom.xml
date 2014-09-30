@@ -34,39 +34,8 @@
 
         <!-- Lockscreen Settings -->
         <PreferenceScreen
-            android:key="lockscreen_settings_title"
-            android:title="@string/lockscreen_settings_title" >
-            <PreferenceScreen
-                android:title="@string/lockscreen_notifications"
-                android:fragment="com.android.settings.cyanogenmod.LockscreenNotifications" />
-
-            <Preference
-                android:fragment="com.android.settings.cyanogenmod.LockscreenTargets"
-                android:key="lockscreen_targets"
-                android:summary="@string/lockscreen_target_summary"
-                android:title="@string/lockscreen_target_title" />
-
-            <com.android.settings.crystalroms.CustomCarrier
-                android:key="notification_custom_carrier_label"
-                android:title="@string/notification_custom_carrier_label_title"
-                android:dialogTitle="@string/notification_custom_carrier_label_title"
-                android:positiveButtonText="@string/wifi_save"
-                android:negativeButtonText="@string/wifi_cancel"
-                android:selectAllOnFocus="true"
-                android:imeOptions="actionDone"
-                android:inputType="textNoSuggestions"
-                android:persistent="false" />
-
-            <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-                android:key="lockscreen_rotation"
-                android:title="@string/display_lockscreen_rotation_title"
-                android:persistent="false" />
-
-            <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-                android:key="battery_around_lockscreen_ring"
-                android:title="@string/battery_around_lockscreen_ring"
-                android:defaultValue="false" />
-        </PreferenceScreen>
+            android:title="@string/lockscreen_settings_title"
+            android:fragment="com.android.settings.crystalroms.LockscreenSettings" />
 
         <!-- Animation -->
         <PreferenceScreen
