@@ -69,7 +69,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private static final String KEY_NAVIGATION_HEIGHT = "nav_buttons_height";
     private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
     private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
-    private static final String LOCKSCREEN_ROTATION = "lockscreen_rotation";
     private static final String KEY_TOAST_ANIMATION = "toast_animation";
     private static final String KEY_FLOAT_RECENT = "pref_float_recent";
     private static final String KEY_FLOAT_NOTIFICATION = "pref_float_notification";
@@ -82,7 +81,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private ListPreference mNavButtonsHeight;
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
-    private CheckBoxPreference mLockScreenRotationPref;
     private ListPreference mToastAnimation;
     private CheckBoxPreference mFloatRecent;
     private CheckBoxPreference mFloatNotification;
@@ -151,13 +149,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         mDisableBootanimPref = (CheckBoxPreference) prefSet.findPreference(DISABLE_BOOTANIMATION_PREF);
         mDisableBootanimPref.setChecked("1".equals(SystemProperties.get(DISABLE_BOOTANIMATION_PERSIST_PROP, "0")));
 
-        boolean configEnableLockRotation = getResources().
-                        getBoolean(com.android.internal.R.bool.config_enableLockScreenRotation);
-        Boolean lockScreenRotationEnabled = Settings.System.getInt(getContentResolver(),
-                        Settings.System.LOCKSCREEN_ROTATION, configEnableLockRotation ? 1 : 0) != 0;
-        mLockScreenRotationPref = (CheckBoxPreference) prefSet.findPreference(LOCKSCREEN_ROTATION);
-        mLockScreenRotationPref.setChecked(lockScreenRotationEnabled);
-
         mFloatRecent = (CheckBoxPreference) prefSet.findPreference(KEY_FLOAT_RECENT);
         mFloatRecent.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.RECENTS_SWIPE_FLOATING, 0) == 1);
 
@@ -201,11 +192,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                     })
                     .create()
                     .show();
-        } else if (preference == mLockScreenRotationPref) {
-            value = mLockScreenRotationPref.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.LOCKSCREEN_ROTATION, value ? 1 : 0);
-            return true;
         } else if (preference == mFloatRecent) {
             value = mFloatRecent.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
