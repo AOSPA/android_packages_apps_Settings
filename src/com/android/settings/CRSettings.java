@@ -67,9 +67,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private static final String FORCE_HIGHEND_GFX_PERSIST_PROP = "persist.sys.force_highendgfx";
     private static final String ENABLE_NAVBAR = "enable_navbar";
     private static final String KEY_NAVIGATION_HEIGHT = "nav_buttons_height";
-    private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
-    private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
-    private static final String KEY_TOAST_ANIMATION = "toast_animation";
     private static final String KEY_FLOAT_RECENT = "pref_float_recent";
     private static final String KEY_FLOAT_NOTIFICATION = "pref_float_notification";
 
@@ -79,9 +76,6 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
     private CheckBoxPreference mForceHighEndGfx;
     private CheckBoxPreference mEnableNavbar;
     private ListPreference mNavButtonsHeight;
-    private ListPreference mListViewAnimation;
-    private ListPreference mListViewInterpolator;
-    private ListPreference mToastAnimation;
     private CheckBoxPreference mFloatRecent;
     private CheckBoxPreference mFloatNotification;
 
@@ -94,43 +88,15 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
 
         PreferenceScreen prefSet = getPreferenceScreen();
 
-        mListViewAnimation = (ListPreference) prefSet.findPreference(KEY_LISTVIEW_ANIMATION);
-        int listviewanimation = Settings.System.getInt(getContentResolver(),
-                Settings.System.LISTVIEW_ANIMATION, 0);
-        mListViewAnimation.setValue(String.valueOf(listviewanimation));
-        mListViewAnimation.setSummary(mListViewAnimation.getEntry());
-        mListViewAnimation.setOnPreferenceChangeListener(this);
-
-        mListViewInterpolator = (ListPreference) prefSet.findPreference(KEY_LISTVIEW_INTERPOLATOR);
-        int listviewinterpolator = Settings.System.getInt(getContentResolver(),
-                Settings.System.LISTVIEW_INTERPOLATOR, 0);
-        mListViewInterpolator.setValue(String.valueOf(listviewinterpolator));
-        mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
-        mListViewInterpolator.setOnPreferenceChangeListener(this);
-        mListViewInterpolator.setEnabled(listviewanimation > 0);
-
-        mToastAnimation = (ListPreference) findPreference(KEY_TOAST_ANIMATION);
-        if (mToastAnimation != null) {
-           int toastAnimation = Settings.System.getInt(getContentResolver(),
-                    Settings.System.TOAST_ANIMATION, 1);
-           mToastAnimation.setSummary(mToastAnimation.getEntry());
-           mToastAnimation.setSummary(mToastAnimation.getEntries()[toastAnimation]);
-           mToastAnimation.setValue(String.valueOf(toastAnimation));
-        }
-        mToastAnimation.setOnPreferenceChangeListener(this);
-
-        boolean hasNavBarByDefault = getResources().getBoolean(
-                com.android.internal.R.bool.config_showNavigationBar);
-        boolean enableNavigationBar = Settings.System.getInt(getContentResolver(),
-                Settings.System.ENABLE_NAVBAR, hasNavBarByDefault ? 1 : 0) == 1;
+        boolean hasNavBarByDefault = getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
+        boolean enableNavigationBar = Settings.System.getInt(getContentResolver(), Settings.System.ENABLE_NAVBAR, hasNavBarByDefault ? 1 : 0) == 1;
         mEnableNavbar = (CheckBoxPreference) findPreference(ENABLE_NAVBAR);
         mEnableNavbar.setChecked(enableNavigationBar);
         mEnableNavbar.setOnPreferenceChangeListener(this);
 
         mNavButtonsHeight = (ListPreference) findPreference(KEY_NAVIGATION_HEIGHT);
         if (mNavButtonsHeight != null) {
-            int statusNavButtonsHeight = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.NAVIGATION_BAR_HEIGHT, 48);
+            int statusNavButtonsHeight = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.NAVIGATION_BAR_HEIGHT, 48);
 
             mNavButtonsHeight.setValue(String.valueOf(statusNavButtonsHeight));
             mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntry());
@@ -173,11 +139,9 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         if (preference == mDisableBootanimPref) {
             SystemProperties.set(DISABLE_BOOTANIMATION_PERSIST_PROP, mDisableBootanimPref.isChecked() ? "1" : "0");
         } else if (preference == mForceHighEndGfx) {
-            SystemProperties.set(FORCE_HIGHEND_GFX_PERSIST_PROP,
-                    mForceHighEndGfx.isChecked() ? "true" : "false");
+            SystemProperties.set(FORCE_HIGHEND_GFX_PERSIST_PROP, mForceHighEndGfx.isChecked() ? "true" : "false");
         } else if (preference == mEnableNavbar) {
-            Settings.System.putInt(getContentResolver(), Settings.System.ENABLE_NAVBAR,
-                    mEnableNavbar.isChecked() ? 1 : 0);
+            Settings.System.putInt(getContentResolver(), Settings.System.ENABLE_NAVBAR, mEnableNavbar.isChecked() ? 1 : 0);
 
             new AlertDialog.Builder(getActivity())
                     .setTitle(getResources().getString(R.string.enable_navbar_dialog_title))
@@ -194,13 +158,11 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
                     .show();
         } else if (preference == mFloatRecent) {
             value = mFloatRecent.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.RECENTS_SWIPE_FLOATING, value ? 1 : 2);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.RECENTS_SWIPE_FLOATING, value ? 1 : 2);
             return true;
         } else if (preference == mFloatNotification) {
             value = mFloatNotification.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.STATUS_BAR_NOTIFICATION_SWIPE_FLOATING, value ? 1 : 2);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.STATUS_BAR_NOTIFICATION_SWIPE_FLOATING, value ? 1 : 2);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -208,40 +170,10 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        final String key = preference.getKey();
-        if (KEY_LISTVIEW_ANIMATION.equals(key)) {
-            int value = Integer.parseInt((String) objValue);
-            int index = mListViewAnimation.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.LISTVIEW_ANIMATION,
-                    value);
-            mListViewAnimation.setSummary(mListViewAnimation.getEntries()[index]);
-            mListViewInterpolator.setEnabled(value > 0);
-        }
-        if (KEY_LISTVIEW_INTERPOLATOR.equals(key)) {
-            int value = Integer.parseInt((String) objValue);
-            int index = mListViewInterpolator.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.LISTVIEW_INTERPOLATOR,
-                    value);
-            mListViewInterpolator.setSummary(mListViewInterpolator.getEntries()[index]);
-        }
-        if (preference == mToastAnimation) {
-            int value = Integer.parseInt((String) objValue);
-            int index = mToastAnimation.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.TOAST_ANIMATION,
-                    value);
-            mToastAnimation.setSummary(mToastAnimation.getEntries()[index]);
-            Context context = this.getActivity().getApplicationContext();
-            if (context != null) {
-                Toast.makeText(context, "Toast Test", Toast.LENGTH_SHORT).show();
-            }
-        } else if (preference == mNavButtonsHeight) {
+        if (preference == mNavButtonsHeight) {
             int statusNavButtonsHeight = Integer.valueOf((String) objValue);
             int index = mNavButtonsHeight.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.NAVIGATION_BAR_HEIGHT, statusNavButtonsHeight);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.NAVIGATION_BAR_HEIGHT, statusNavButtonsHeight);
             mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntries()[index]);
         }
         return true;
