@@ -71,6 +71,7 @@ public class LockscreenSettings extends SettingsPreferenceFragment implements Pr
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        boolean value;
         if (preference == mLockScreenRotationPref) {
             value = mLockScreenRotationPref.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.LOCKSCREEN_ROTATION, value ? 1 : 0);
