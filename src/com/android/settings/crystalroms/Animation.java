@@ -40,7 +40,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CRSettings extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
+public class Animation extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
     private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
