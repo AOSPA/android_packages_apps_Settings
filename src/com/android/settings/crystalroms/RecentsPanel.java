@@ -53,6 +53,11 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
 
     private static final String RECENTS_USE_SLIM = "recents_use_slim";
 
+    private static final String RAM_BAR_MODE = "ram_bar_mode";
+    private static final String RAM_BAR_COLOR_APP_MEM = "ram_bar_color_app_mem";
+    private static final String RAM_BAR_COLOR_CACHE_MEM = "ram_bar_color_cache_mem";
+    private static final String RAM_BAR_COLOR_TOTAL_MEM = "ram_bar_color_total_mem";
+
     // Package name of the omnniswitch app
     public static final String OMNISWITCH_PACKAGE_NAME = "org.omnirom.omniswitch";
 
@@ -72,6 +77,9 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
     private ColorPickerPreference mRamBarAppMemColor;
     private ColorPickerPreference mRamBarCacheMemColor;
     private ColorPickerPreference mRamBarTotalMemColor;
+    static final int DEFAULT_MEM_COLOR = 0xff8d8d8d;
+    static final int DEFAULT_CACHE_COLOR = 0xff00aa00;
+    static final int DEFAULT_ACTIVE_APPS_COLOR = 0xff33b5e5;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,6 +93,7 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
 
         boolean useOmniSwitch = false;
         boolean useSlimRecents = false;
+        int intColor;
         String hexColor;
 
         try {
