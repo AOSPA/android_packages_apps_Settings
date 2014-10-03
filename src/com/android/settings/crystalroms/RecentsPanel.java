@@ -129,6 +129,7 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
                 Settings.System.RECENTS_RAM_BAR_MODE, 0);
         mRamBarMode.setValue(String.valueOf(ramBarMode));
         mRamBarMode.setSummary(mRamBarMode.getEntry());
+        mRamBarMode.setEnabled(ramBarMode > 0);
         mRamBarMode.setOnPreferenceChangeListener(this);
 
         mRamBarAppMemColor = (ColorPickerPreference) findPreference(RAM_BAR_COLOR_APP_MEM);
@@ -154,8 +155,8 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
         hexColor = String.format("#%08x", (0xffffffff & intColor));
         mRamBarTotalMemColor.setSummary(hexColor);
         mRamBarTotalMemColor.setNewPreviewColor(intColor);
-
-        updateRecentsOptions();
+	
+        updateRamBarOptions();
     }
 
     @Override
@@ -185,7 +186,10 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
             // Update Slim recents UI components
             mRecentsUseSlim.setEnabled(!omniSwitchEnabled);
 
-            updateRecentsOptions();
+            mRamBarMode.setEnabled(false);
+            mRamBarAppMemColor.setEnabled(false);
+            mRamBarCacheMemColor.setEnabled(false);
+            mRamBarTotalMemColor.setEnabled(false);
             return true;
         } else if (preference == mRecentsUseSlim) {
             boolean useSlimRecents = (Boolean) newValue;
@@ -200,7 +204,10 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
             mRecentsUseOmniSwitch.setEnabled(!useSlimRecents);
             mRecentsUseSlim.setChecked(useSlimRecents);
 
-            updateRecentsOptions();
+            mRamBarMode.setEnabled(false);
+            mRamBarAppMemColor.setEnabled(false);
+            mRamBarCacheMemColor.setEnabled(false);
+            mRamBarTotalMemColor.setEnabled(false);
             return true;
         } else if (preference == mRecentsColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer
@@ -217,7 +224,7 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.RECENTS_RAM_BAR_MODE, ramBarMode);
             mRamBarMode.setSummary(mRamBarMode.getEntries()[index]);
-            updateRecentsOptions();
+            updateRamBarOptions();
             return true;
         } else if (preference == mRamBarAppMemColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer
@@ -282,15 +289,10 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
             }).show();
     }
 
-    private void updateRecentsOptions() {
+    private void updateRamBarOptions() {
         int ramBarMode = Settings.System.getInt(getActivity().getContentResolver(),
-               Settings.System.RECENTS_RAM_BAR_MODE, 0);
-        boolean useOmni = Settings.System.getInt(getActivity().getContentResolver(),
-               Settings.System.RECENTS_USE_OMNISWITCH, 0) > 0;
-        boolean useSlim = Settings.System.getInt(getActivity().getContentResolver(),
-               Settings.System.RECENTS_USE_SLIM, 0) > 0;      
+               Settings.System.RECENTS_RAM_BAR_MODE, 0);      
 
-        mRamBarMode.setEnabled(true);
         if (ramBarMode == 0) {
             mRamBarAppMemColor.setEnabled(false);
             mRamBarCacheMemColor.setEnabled(false);
