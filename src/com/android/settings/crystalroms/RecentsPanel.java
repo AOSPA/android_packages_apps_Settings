@@ -121,15 +121,15 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
 
         // WP7 Recents
         mRecentsColor = (ColorPickerPreference) findPreference("recents_panel_color");
+        mRecentsColor.setEnabled(!useSlimRecents && !useOmniSwitch);
         mRecentsColor.setOnPreferenceChangeListener(this);
 
-        // Ram Bar
         mRamBarMode = (ListPreference) prefSet.findPreference(RAM_BAR_MODE);
         int ramBarMode = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.RECENTS_RAM_BAR_MODE, 0);
         mRamBarMode.setValue(String.valueOf(ramBarMode));
         mRamBarMode.setSummary(mRamBarMode.getEntry());
-        mRamBarMode.setEnabled(ramBarMode > 0);
+        mRamBarMode.setEnabled(!useSlimRecents && !useOmniSwitch);
         mRamBarMode.setOnPreferenceChangeListener(this);
 
         mRamBarAppMemColor = (ColorPickerPreference) findPreference(RAM_BAR_COLOR_APP_MEM);
@@ -186,10 +186,11 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
             // Update Slim recents UI components
             mRecentsUseSlim.setEnabled(!omniSwitchEnabled);
 
-            mRamBarMode.setEnabled(false);
-            mRamBarAppMemColor.setEnabled(false);
-            mRamBarCacheMemColor.setEnabled(false);
-            mRamBarTotalMemColor.setEnabled(false);
+            mRecentsColor.setEnabled(!omniSwitchEnabled);
+            mRamBarMode.setEnabled(!omniSwitchEnabled);
+            mRamBarAppMemColor.setEnabled(!omniSwitchEnabled);
+            mRamBarCacheMemColor.setEnabled(!omniSwitchEnabled);
+            mRamBarTotalMemColor.setEnabled(!omniSwitchEnabled);
             return true;
         } else if (preference == mRecentsUseSlim) {
             boolean useSlimRecents = (Boolean) newValue;
@@ -204,10 +205,11 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
             mRecentsUseOmniSwitch.setEnabled(!useSlimRecents);
             mRecentsUseSlim.setChecked(useSlimRecents);
 
-            mRamBarMode.setEnabled(false);
-            mRamBarAppMemColor.setEnabled(false);
-            mRamBarCacheMemColor.setEnabled(false);
-            mRamBarTotalMemColor.setEnabled(false);
+            mRecentsColor.setEnabled(!useSlimRecents);
+            mRamBarMode.setEnabled(!useSlimRecents);
+            mRamBarAppMemColor.setEnabled(!useSlimRecents);
+            mRamBarCacheMemColor.setEnabled(!useSlimRecents);
+            mRamBarTotalMemColor.setEnabled(!useSlimRecents);
             return true;
         } else if (preference == mRecentsColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer
