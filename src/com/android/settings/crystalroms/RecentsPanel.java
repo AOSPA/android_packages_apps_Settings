@@ -162,7 +162,6 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
         } else {
             updateRamBarOptions();
         }
-        updateRamBarOptions();
     }
 
     @Override
