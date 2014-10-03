@@ -121,7 +121,7 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
 
         // WP7 Recents
         mRecentsColor = (ColorPickerPreference) findPreference("recents_panel_color");
-        mRecentsColor.setEnabled(!useSlimRecents && !useOmniSwitch);
+        mRecentsColor.setEnabled(!useSlimRecents);
         mRecentsColor.setOnPreferenceChangeListener(this);
 
         mRamBarMode = (ListPreference) prefSet.findPreference(RAM_BAR_MODE);
@@ -129,7 +129,7 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
                 Settings.System.RECENTS_RAM_BAR_MODE, 0);
         mRamBarMode.setValue(String.valueOf(ramBarMode));
         mRamBarMode.setSummary(mRamBarMode.getEntry());
-        mRamBarMode.setEnabled(!useSlimRecents && !useOmniSwitch);
+        mRamBarMode.setEnabled(!useSlimRecents);
         mRamBarMode.setOnPreferenceChangeListener(this);
 
         mRamBarAppMemColor = (ColorPickerPreference) findPreference(RAM_BAR_COLOR_APP_MEM);
@@ -186,9 +186,6 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
             // Update Slim recents UI components
             mRecentsUseSlim.setEnabled(!omniSwitchEnabled);
 
-            mRecentsColor.setEnabled(!omniSwitchEnabled);
-            mRamBarMode.setEnabled(!omniSwitchEnabled);
-            updateRamBarOptions();
             return true;
         } else if (preference == mRecentsUseSlim) {
             boolean useSlimRecents = (Boolean) newValue;
