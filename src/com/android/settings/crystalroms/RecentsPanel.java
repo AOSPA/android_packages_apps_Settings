@@ -155,7 +155,13 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
         hexColor = String.format("#%08x", (0xffffffff & intColor));
         mRamBarTotalMemColor.setSummary(hexColor);
         mRamBarTotalMemColor.setNewPreviewColor(intColor);
-	
+        if (useSlimRecents) {
+            mRamBarAppMemColor.setEnabled(false);
+            mRamBarCacheMemColor.setEnabled(false);
+            mRamBarTotalMemColor.setEnabled(false);
+        } else {
+            updateRamBarOptions();
+        }
         updateRamBarOptions();
     }
 
@@ -202,7 +208,7 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
 
             mRecentsColor.setEnabled(!useSlimRecents);
             mRamBarMode.setEnabled(!useSlimRecents);
-            if (!useSlimRecents) {
+            if (useSlimRecents) {
                 mRamBarAppMemColor.setEnabled(false);
                 mRamBarCacheMemColor.setEnabled(false);
                 mRamBarTotalMemColor.setEnabled(false);
