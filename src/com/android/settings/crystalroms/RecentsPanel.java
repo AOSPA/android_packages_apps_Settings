@@ -188,9 +188,7 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
 
             mRecentsColor.setEnabled(!omniSwitchEnabled);
             mRamBarMode.setEnabled(!omniSwitchEnabled);
-            mRamBarAppMemColor.setEnabled(!omniSwitchEnabled);
-            mRamBarCacheMemColor.setEnabled(!omniSwitchEnabled);
-            mRamBarTotalMemColor.setEnabled(!omniSwitchEnabled);
+            updateRamBarOptions();
             return true;
         } else if (preference == mRecentsUseSlim) {
             boolean useSlimRecents = (Boolean) newValue;
@@ -207,9 +205,7 @@ public class RecentsPanel extends SettingsPreferenceFragment implements OnPrefer
 
             mRecentsColor.setEnabled(!useSlimRecents);
             mRamBarMode.setEnabled(!useSlimRecents);
-            mRamBarAppMemColor.setEnabled(!useSlimRecents);
-            mRamBarCacheMemColor.setEnabled(!useSlimRecents);
-            mRamBarTotalMemColor.setEnabled(!useSlimRecents);
+            updateRamBarOptions();
             return true;
         } else if (preference == mRecentsColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer
