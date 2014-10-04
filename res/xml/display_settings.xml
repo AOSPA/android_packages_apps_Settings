@@ -56,11 +56,11 @@
                 android:summary="@string/proximity_wake_summary"
                 android:defaultValue="true" />
 
-        <CheckBoxPreference
-            android:key="status_bar_brightness_control"
-            android:title="@string/status_bar_toggle_brightness"
-            android:summary="@string/status_bar_toggle_brightness_summary"
-            android:defaultValue="false" />
+        <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+                android:key="status_bar_brightness_control"
+                android:title="@string/status_bar_toggle_brightness"
+                android:summary="@string/status_bar_toggle_brightness_summary"
+                android:defaultValue="false" />
 
         <!-- Notifications -->
         <PreferenceCategory
