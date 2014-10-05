@@ -15,7 +15,8 @@ import com.android.settings.R;
 
 import android.provider.Settings;
 
-public class SeekBarPreferenceVibration extends Preference implements OnSeekBarChangeListener {
+public class SeekBarPreferenceVibration extends Preference
+        implements OnSeekBarChangeListener {
 
     public static int maximum = 100;
     public int interval = 5;
@@ -26,10 +27,6 @@ public class SeekBarPreferenceVibration extends Preference implements OnSeekBarC
     private SeekBar bar;
 
     int defaultValue = 60;
-    int mSetDefault = -1;
-    int mMultiply = -1;
-    int mMinimum = -1;
-    boolean mDisableText = false;
     boolean mDisablePercentageValue = false;
     boolean mZeroDefault = false;
     boolean mIsMilliSeconds = false;
@@ -107,7 +104,7 @@ public class SeekBarPreferenceVibration extends Preference implements OnSeekBarC
 
         if (progress == 0 && mZeroDefault) {
             monitorBox.setText(R.string.default_string);
-        } else if (!mDisableText) {
+        } else {
             if (mIsMilliSeconds) {
                 monitorBox.setText(progress + " ms");
             } else if (!mDisablePercentageValue) {
@@ -140,10 +137,6 @@ public class SeekBarPreferenceVibration extends Preference implements OnSeekBarC
     public void setProperty(String property) {
         this.property = property;
     }
-    
-    public void disableText(boolean disable) {
-        mDisableText = disable;
-    }
 
     public void setInterval(int inter) {
         interval = inter;
@@ -170,4 +163,5 @@ public class SeekBarPreferenceVibration extends Preference implements OnSeekBarC
     public void onStopTrackingTouch(SeekBar seekBar) {
 
     }
+
 }
