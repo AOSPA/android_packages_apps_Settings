@@ -37,7 +37,7 @@ import android.telephony.TelephonyManager;
 import com.android.internal.telephony.Phone;
 
 import com.android.settings.crdroid.SeekBarPreferenceChOS;
-import com.android.settings.batterysaver.BatterySaverHelper;
+import com.android.settings.crystalroms.batterysaver.BatterySaverHelper;
 import com.android.settings.cyanogenmod.TimeRangePreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
