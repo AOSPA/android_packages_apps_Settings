@@ -114,7 +114,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mDockSounds;
     private Intent mDockIntent;
     private CheckBoxPreference mDockAudioMediaEnabled;
-    private SeekBarPreference mVibrationDuration;
+    private SeekBarPreferenceVibration mVibrationDuration;
     private ListPreference mVibrationMultiplier;
 
     private Vibrator mVib;
@@ -208,7 +208,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         int userMillis = Settings.System.getInt(resolver,
                 Settings.System.MINIMUM_VIBRATION_DURATION, 0);
-        mVibrationDuration = (SeekBarPreference) findPreference(KEY_VIBRATION_DURATION);
+        mVibrationDuration = (SeekBarPreferenceVibration) findPreference(KEY_VIBRATION_DURATION);
         mVibrationDuration.setInitValue(userMillis);
         mVibrationDuration.setInterval(1);
         mVibrationDuration.displaySameValue(true);
