@@ -59,13 +59,6 @@
             android:key="progressbar_settings"
             android:fragment="com.android.settings.crystalroms.ProgressBar"
             android:title="@string/progressbar_title" />
-
-        <!-- Vibrator Intensity -->
-        <com.android.settings.hardware.VibratorIntensity
-            android:key="vibration_intensity"
-            android:title="@string/vibrator_intensity_title"
-            android:dialogTitle="@string/vibrator_intensity_title"
-            android:persistent="false" />
     </PreferenceCategory>
 
     <!-- NavBar Settings -->

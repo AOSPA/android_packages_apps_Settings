@@ -63,6 +63,15 @@
         android:persistent="false"
         android:streamType="ring" />
 
+    <PreferenceCategory
+        android:title="@string/vibration_header_option"/>
+
+    <com.android.settings.hardware.VibratorIntensity
+        android:key="vibration_intensity"
+        android:title="@string/vibrator_intensity_title"
+        android:dialogTitle="@string/vibrator_intensity_title"
+        android:persistent="false" />
+
     <com.android.settings.crystalroms.SeekBarPreferenceVibration
         android:key="vibration_duration"
         android:title="@string/minimum_vibration_duration" />
