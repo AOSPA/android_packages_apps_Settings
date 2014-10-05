@@ -30,7 +30,7 @@
         android:key="pref_battery_saver_timerange"
         android:dependency="pref_battery_saver_enable" />
 
-    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+    <com.android.settings.crdroid.SeekBarPreferenceChOS
         android:key="pref_battery_saver_mode_change_delay"
         android:persistent="false"
         android:title="@string/pref_battery_saver_mode_change_delay_title"
