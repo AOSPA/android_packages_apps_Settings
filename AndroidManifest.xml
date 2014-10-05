@@ -2034,20 +2034,20 @@
         </receiver>
 
         <receiver
-            android:name="org.omnirom.omnigears.batterysaver.BootReceiver">
+            android:name="com.android.settings.crystalroms.batterysaver.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
         <receiver
-            android:name="org.omnirom.omnigears.batterysaver.BatterySaverReceiver">
+            android:name="com.android.settings.crystalroms.batterysaver.BatterySaverReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.TIMEZONE_CHANGED"></action>
                 <action android:name="android.intent.action.TIME_CHANGED"></action>
                 <action android:name="android.intent.action.DATE_CHANGED"></action>
                 <action android:name="android.intent.action.BATTERY_SERVICES"></action>
-                <action android:name="org.omnirom.omnigears.batterysaver.SCHEDULE_BATTERY_SAVER"/>
+                <action android:name="com.android.settings.crystalroms.batterysaver.SCHEDULE_BATTERY_SAVER"/>
             </intent-filter>
         </receiver>
 
