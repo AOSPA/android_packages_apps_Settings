@@ -27,7 +27,7 @@ LOCAL_RESOURCE_DIR += $(LOCAL_PATH)/res $(LOCAL_PATH)/../../../external/koush/Wi
 
 LOCAL_JAVA_LIBRARIES += org.cyanogenmod.hardware
 
-LOCAL_SRC_FILES += $(call all-java-files-under, ../PerformanceControl/src)
+LOCAL_SRC_FILES += $(call all-java-files-under, ../PerformanceControl/src/com/brewcrewfoo/performance/util)
 LOCAL_RESOURCE_DIR += packages/apps/PerformanceControl/res
 LOCAL_ASSET_DIR += packages/apps/PerformanceControl/assets
 LOCAL_AAPT_FLAGS += --extra-packages com.brewcrewfoo.performance
