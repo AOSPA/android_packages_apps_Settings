@@ -174,7 +174,7 @@
         android:dependency="pref_battery_saver_enable"
         android:title="@string/pref_battery_saver_cpu_title"
         android:summary="@string/pref_battery_saver_cpu_summary"
-        android:fragment="org.omnirom.omnigears.ui.BatteryCpuSettings" />
+        android:fragment="com.android.settings.crystalroms.batterysaver.BatteryCpuSettings" />
 
     <CheckBoxPreference
         android:key="pref_battery_saver_mode_bluetooth"
