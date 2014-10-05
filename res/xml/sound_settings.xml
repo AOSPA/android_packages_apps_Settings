@@ -63,6 +63,18 @@
         android:persistent="false"
         android:streamType="ring" />
 
+    <com.android.settings.crystalroms.SeekBarPreferenceVibration
+        android:key="vibration_duration"
+        android:title="@string/minimum_vibration_duration" />
+
+    <ListPreference
+        android:key="vibrator_multiplier"
+        android:persistent="false"
+        android:title="@string/vibrator_multiplier_title"
+        android:dialogTitle="@string/vibrator_multiplier_title"
+        android:entries="@array/vibration_multiplier_values"
+        android:entryValues="@array/vibration_multiplier_values" />
+
     <PreferenceCategory
             android:title="@string/sound_category_system_title"/>
 

@@ -50,6 +50,8 @@ import android.telephony.TelephonyManager;
 import android.text.format.DateFormat;
 import android.util.Log;
 
+import com.android.settings.crystalroms.SeekBarPreferenceVibration;
+
 import java.util.Date;
 import java.util.Calendar;
 import java.util.List;
@@ -82,6 +84,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOCK_AUDIO_MEDIA_ENABLED = "dock_audio_media_enabled";
     private static final String KEY_VOLUME_WAKE_SCREEN = "volume_wake_screen";
     private static final String KEY_QUIET_HOURS = "quiet_hours";
+    private static final String KEY_VIBRATION_DURATION = "vibration_duration";
+    private static final String KEY_VIBRATION_MULTIPLIER = "vibrator_multiplier";
 
     private static final String[] NEED_VOICE_CAPABILITY = {
             KEY_RINGTONE, KEY_DTMF_TONE, KEY_CATEGORY_CALLS,
@@ -110,6 +114,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mDockSounds;
     private Intent mDockIntent;
     private CheckBoxPreference mDockAudioMediaEnabled;
+    private SeekBarPreference mVibrationDuration;
+    private ListPreference mVibrationMultiplier;
+
+    private Vibrator mVib;
+    private boolean mFirstVibration = false;
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -142,6 +151,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         int activePhoneType = TelephonyManager.getDefault().getCurrentPhoneType();
         boolean aospDialer = Settings.System.getInt(resolver, Settings.System.AOSP_DIALER, 0) == 1;
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+        mVib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         addPreferencesFromResource(R.xml.sound_settings);
 
@@ -195,11 +206,28 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mLockSounds.setChecked(Settings.System.getInt(resolver,
                 Settings.System.LOCKSCREEN_SOUNDS_ENABLED, 1) != 0);
 
+        int userMillis = Settings.System.getInt(resolver,
+                Settings.System.MINIMUM_VIBRATION_DURATION, 0);
+        mVibrationDuration = (SeekBarPreference) findPreference(KEY_VIBRATION_DURATION);
+        mVibrationDuration.setInitValue(userMillis);
+        mVibrationDuration.setInterval(1);
+        mVibrationDuration.displaySameValue(true);
+        mVibrationDuration.zeroDefault(true);
+        mVibrationDuration.isMilliseconds(true);
+        mVibrationDuration.setProperty(Settings.System.MINIMUM_VIBRATION_DURATION);
+        mVibrationDuration.setOnPreferenceChangeListener(this);
+
+        mVibrationMultiplier = (ListPreference) findPreference(KEY_VIBRATION_MULTIPLIER);
+        String currentValue = Float.toString(Settings.System.getFloat(getActivity()
+                .getContentResolver(), Settings.System.VIBRATION_MULTIPLIER, 1));
+        mVibrationMultiplier.setValue(currentValue);
+        mVibrationMultiplier.setSummary(currentValue);
+        mVibrationMultiplier.setOnPreferenceChangeListener(this);
+
         mRingtonePreference = findPreference(KEY_RINGTONE);
         mNotificationPreference = findPreference(KEY_NOTIFICATION_SOUND);
 
-        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (vibrator == null || !vibrator.hasVibrator()) {
+        if (mVib == null || !mVib.hasVibrator()) {
             removePreference(KEY_VIBRATE);
             removePreference(KEY_HAPTIC_FEEDBACK);
         }
@@ -394,8 +422,21 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist emergency tone setting", e);
             }
+        } else if (preference == mVibrationDuration) {
+            int value = Integer.parseInt((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.MINIMUM_VIBRATION_DURATION, value);
+            if (mFirstVibration && (value % 5 == 0) && mVib != null) {
+                mVib.vibrate(1);
+            }
+            mFirstVibration = true;
+        } else if (preference == mVibrationMultiplier) {
+            String currentValue = (String) objValue;
+            float val = Float.parseFloat(currentValue);
+            Settings.System.putFloat(getActivity().getContentResolver(),
+                    Settings.System.VIBRATION_MULTIPLIER, val);
+            mVibrationMultiplier.setSummary(currentValue);
         }
-
         return true;
     }
 
