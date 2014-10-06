@@ -64,7 +64,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_PEEK = "notification_peek";
 
-    private static final String PEEK_APPLICATION = "com.jedga.peek";
+    private static final String PEEK_APPLICATION = "com.jedga.peek.free";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
