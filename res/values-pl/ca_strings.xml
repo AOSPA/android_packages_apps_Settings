@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2012-2013 The CrystalRoms Project
+     Copyright (C) 2014 The CrystalPA Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -186,7 +186,7 @@
     <string name="cpu_undervolt_summary">Zmniejsza napięcie CPU (lepsza żywotność baterii)</string>
 
     <!-- Themes -->
-    <string name="theme_settings_title">Ciemny CrystalPA</string>
+    <string name="theme_settings_title">Ciemny Crystal</string>
     <string name="theme_auto_mode_title">Wybierz wygląd</string>
     <string name="theme_auto_mode_off">Manualnie</string>
     <string name="theme_auto_mode_lightsensor">Włączenie na zmiane światła</string>
@@ -194,7 +194,7 @@
     <string name="theme_auto_switch_mode_error">Automatyczne włączanie wyglądu jest włączone!</string>
 
     <!-- ListView animation -->
-    <string name="interface_settings_animation_title">Opcje animacji</string>
+    <string name="interface_settings_animation_title">Ustawienia animacji</string>
     <string name="listview_animation_title">Animacje ListView</string>
     <string name="listview_off">Domyślne</string>
     <string name="listview_wave_left">Fala (lewo)</string>
@@ -239,21 +239,21 @@
     <string name="recent_apps_panel_title" >Panel Recents Apps</string>
 
     <!-- WP7 Recents -->
-    <string name="wprecents_category">WP7 Recents</string>
+    <string name="wprecents_category">CPA Recents</string>
     <string name="recents_color">Kolor recents</string>
     
     <!-- Active display settings -->
     <string name="ad_settings_title">Aktywny wyświetlacz</string>
-    <string name="ad_settings_summary">Zmień ustawienia Active Display</string>
+    <string name="ad_settings_summary">Edytuj ustawienia aktywnego wyświetlacza</string>
     <string name="ad_enable_title">Aktywuj</string>
-    <string name="ad_enable_summary_on">Active display włączony</string>
-    <string name="ad_enable_summary_off">Active display wyłączony</string>
+    <string name="ad_enable_summary_on">Aktywny wyświetlacz włączony</string>
+    <string name="ad_enable_summary_off">Aktywny wyświetlacz wyłączony</string>
     <string name="ad_bypass_title">Tryb Bypass</string>
     <string name="ad_bypass_summary">Tryb kieszonkowy uruchomi ekran blokady, gdy nie ma żadnych powiadomień</string>
     <string name="ad_text_title">Tekst powiadomienia</string>
     <string name="ad_text_summary">Pokaż tekst powiadomienia wokół pierścienia</string>
     <string name="ad_content_title">Niestandardowy widok powiadomienia</string>
-    <string name="ad_content_summary">Użyj stylu active display do szczegółowych powiadomień</string>
+    <string name="ad_content_summary">Użyj stylu aktywnego wyświetlacza do szczegółowych powiadomień</string>
     <string name="ad_annoying_title">Rzadsze powiadomienia</string>
     <string name="ad_annoying_summary">Ogranicz powiadomienia na:</string>
     <string name="ad_double_tap_title">Dwukrotne stuknięcie wyłącza ekran</string>
@@ -470,10 +470,10 @@
     <string name="show_network_traffic_2000">2000 ms</string>
 
     <!-- Carrier label -->
-    <string name="notification_carrier_label_title">Carrier label</string>
-    <string name="notification_custom_carrier_label_title">Custom carrier label</string>
-    <string name="notification_custom_carrier_label_explain">Please enter a new label. Enter an empty label to revert to stock label.</string>
-    <string name="notification_custom_carrier_label_notset">Custom label currently not set</string>
+    <string name="notification_carrier_label_title">Niestandardowa etykieta</string>
+    <string name="notification_custom_carrier_label_title">Niestandardowa etykieta</string>
+    <string name="notification_custom_carrier_label_explain">Napisz nową etykietę. Pozostawienie pustego pola ustawi oryginalną etykietę.</string>
+    <string name="notification_custom_carrier_label_notset">Niestandardowa etykieta nie została ustawiona</string>
 
     <!-- Float Recent -->
     <string name="float_recent_tile">Tryb okienkowy dla recent</string>
@@ -491,34 +491,34 @@
     <string name="progressbar_width_title">Szerokość skoku</string>
     <string name="progressbar_length_title">Długość separatora</string>
     <string name="progressbar_count_title">Ilość fragmentów</string>
-    <string name="progressbar_color_1_title">Kolor1</string>
-    <string name="progressbar_color_2_title">Kolor2</string>
-    <string name="progressbar_color_3_title">Kolor3</string>
-    <string name="progressbar_color_4_title">Kolor4</string>
+    <string name="progressbar_color_1_title">Kolor 1</string>
+    <string name="progressbar_color_2_title">Kolor 2</string>
+    <string name="progressbar_color_3_title">Kolor 3</string>
+    <string name="progressbar_color_4_title">Kolor 4</string>
     <string name="sample_progressbar_text">Pasek postępu : Podgląd</string>
     <string name="progressbar_options">Ustawienia paska postępu</string>
     <string name="progressbar_reset_message">Przywróć domyślne?</string>
 
     <!-- Recents Ram Bar -->
     <string name="ram_bar">Recents RAM bar</string>
-    <string name="ram_bar_note_title">Note</string>
-    <string name="ram_bar_note_summary">This RAM bar shows the actual android memory (RAM) utilization. Please note that having cached apps helps your device open apps much faster.</string>
-    <string name="ram_bar_mode_title">Recents RAM bar mode</string>
-    <string name="ram_bar_mode_dialog_title">Show on recents RAM bar</string>
-    <string name="ram_bar_none">None</string>
-    <string name="ram_bar_apps">Applications</string>
-    <string name="ram_bar_cache">Applications and cache</string>
-    <string name="ram_bar_other">Applications, cache and other</string>
-    <string name="ram_bar_style_cat">Recents RAM bar style</string>
-    <string name="ram_bar_color_app_mem_color">Applications RAM color</string>
-    <string name="ram_bar_color_cache_mem_color">Cache RAM color</string>
-    <string name="ram_bar_color_total_mem_color">Other RAM color</string>
-    <string name="ram_bar_color_enabled">Enabled</string>
-    <string name="ram_bar_color_disabled">Disabled</string>
-    <string name="ram_bar_button_help">Help</string>
-    <string name="ram_bar_button_reset">Reset colors</string>
-    <string name="ram_bar_reset">Reset</string>
-    <string name="ram_bar_reset_message">Reset RAM bar style to default?</string>
+    <string name="ram_bar_note_title">Informacja</string>
+    <string name="ram_bar_note_summary">Ten pasek pokazuje aktualnie wykorzystywaną pamięc RAM. Należy pamiętać, że jeśli aplikacje są aktywne w pamięci podręcznej uruchamiają się znacznie szybciej.</string>
+    <string name="ram_bar_mode_title">Tryb recents RAM bar</string>
+    <string name="ram_bar_mode_dialog_title">Pokazuj recents RAM bar</string>
+    <string name="ram_bar_none">Brak</string>
+    <string name="ram_bar_apps">Aplikacje</string>
+    <string name="ram_bar_cache">Aplikacje i cache</string>
+    <string name="ram_bar_other">Aplikacje, cache i inne</string>
+    <string name="ram_bar_style_cat">Styl recents RAM bar</string>
+    <string name="ram_bar_color_app_mem_color">Kolor aplikacji</string>
+    <string name="ram_bar_color_cache_mem_color">Kolor cache</string>
+    <string name="ram_bar_color_total_mem_color">Kolor innych</string>
+    <string name="ram_bar_color_enabled">Włączono</string>
+    <string name="ram_bar_color_disabled">Wyłączono</string>
+    <string name="ram_bar_button_help">Pomoc</string>
+    <string name="ram_bar_button_reset">Zresetuj kolor</string>
+    <string name="ram_bar_reset">Resetuj</string>
+    <string name="ram_bar_reset_message">Zresetować styl RAM bar\'u na domyślny? ?</string>
 
     <!-- Brightness control -->
     <string name="status_bar_toggle_brightness">Sterowanie jasnością</string>
@@ -526,78 +526,78 @@
     <string name="status_bar_toggle_info">Jasność jest dostosowywana automatycznie</string>
 
     <!-- Battery saver mode -->
-    <string name="network_lte">LTE (recommended)</string>
-    <string name="network_4G">4G (recommended)</string>
-    <string name="network_3G_only">3G Only</string>
-    <string name="network_3G_auto">2G/3G Auto</string>
-    <string name="network_3G">2G/3G Preferred</string>
-    <string name="network_2G">2G Only</string>
+    <string name="network_lte">LTE (rekomendowane)</string>
+    <string name="network_4G">4G (rekomendowane)</string>
+    <string name="network_3G_only">Tylko 3G</string>
+    <string name="network_3G_auto">Automatycznie 2G/3G</string>
+    <string name="network_3G">Preferowane 2G/3G</string>
+    <string name="network_2G">Tylko 2G</string>
     <string name="network_1x">1x</string>
-    <string name="network_global">Global</string>
-    <string name="battery_saver_action_undefined">Undefined</string>
-    <string name="battery_saver_title">Battery saver mode</string>
-    <string name="pref_battery_saver_enable_title">Battery saver</string>
-    <string name="pref_battery_saver_enable_summary">This will automatically manage your device battery usage and switch your network to user-defined power saving mode or normal mode depending on mobile data and Wi-Fi connection states</string>
-    <string name="pref_battery_saver_enable_no_mobiledata_summary">This will automatically manage your device battery usage to user-defined</string>
-    <string name="pref_battery_saver_normal_mode_title">Normal network mode</string>
-    <string name="pref_battery_saver_power_saving_mode_title">Power saving network mode</string>
-    <string name="pref_battery_saver_screen_off_title">When screen turns off</string>
-    <string name="pref_battery_saver_screen_off_summary">Activate power saving mode when screen turns off</string>
-    <string name="pref_battery_saver_ignore_locked_title">Ignore while locked</string>
-    <string name="pref_battery_saver_ignore_locked_summary">When screen turns on, power saving mode won\'t be deactivated until keyguard is unlocked</string>
-    <string name="pref_battery_saver_mode_change_delay_title">Change mode delay</string>
-    <string name="pref_battery_saver_mode_change_delay_summary">Delays changing of power saving mode by specified number of seconds</string>
-    <string name="pref_battery_saver_battery_title">When battery low</string>
-    <string name="pref_battery_saver_battery_summary">Activate power saving mode when battery low</string>
-    <string name="pref_battery_saver_mode_battery_level_title">Battery level</string>
-    <string name="pref_battery_saver_mode_battery_level_summary">Activate power saving mode or changing screen brightness by specified battery level</string>
-    <string name="pref_battery_saver_bluetooth_title">Disable bluetooth</string>
-    <string name="pref_battery_saver_bluetooth_summary">Disable bluetooth connection when power saving activated</string>
-    <string name="pref_battery_saver_data_title">Disable mobile data</string>
-    <string name="pref_battery_saver_data_summary">Disable mobile data connection when power saving activated</string>
-    <string name="pref_battery_saver_location_title">Disable gps</string>
-    <string name="pref_battery_saver_location_summary">Disable gps connection when power saving activated</string>
-    <string name="pref_battery_saver_wifi_title">Disable Wi-Fi</string>
-    <string name="pref_battery_saver_wifi_summary">Disable Wi-Fi connection when power saving activated</string>
-    <string name="pref_battery_saver_led_title">Disable LED</string>
-    <string name="pref_battery_saver_led_summary">Disable LED notification when power saving activated</string>
-    <string name="pref_battery_saver_vibrate_title">Disable vibrate</string>
-    <string name="pref_battery_saver_vibrate_summary">Disable vibration when power saving activated</string>
-    <string name="pref_battery_saver_brightness_title">Brightness mode</string>
-    <string name="pref_battery_saver_brightness_summary">Activates brightness level change when battery low</string>
-    <string name="pref_battery_saver_mode_brightness_level_title">Brightness level</string>
-    <string name="pref_battery_saver_mode_brightness_level_summary">Changing brightness level when power saver activated</string>
-    <string name="pref_battery_saver_cpu_title">CPU power saving mode</string>
-    <string name="pref_battery_saver_cpu_summary">This will automatically switch your maximum cpu frequency to user-defined power saving mode</string>
-    <string name="battery_saver_mode_current_speed">Current Speed</string>
-    <string name="battery_saver_mode_current_max">Maximum speed: </string>
-    <string name="battery_saver_mode_cpu_info_list_header">Core Status</string>
-    <string name="battery_saver_mode_cpu_speed_header">Core Limits</string>
-    <string name="battery_saver_mode_core_offline">Offline</string>
-    <string name="battery_saver_mode_core">Core</string>
-    <string name="battery_saver_cpu_mode_title">Activate CPU power saving mode</string>
-    <string name="pref_battery_saver_cpu_warning_title">Attention:</string>
-    <string name="pref_battery_saver_cpu_warning_summary">we never can guarantee this will work on device</string>
-    <string name="pref_battery_saver_network_title">Smart network change</string>
-    <string name="pref_battery_saver_network_summary">Allow changing network to normal mode with specific interval time after screen turn off and power saving mode enabled</string>
-    <string name="pref_battery_saver_nosignal_title">Smart network signal</string>
-    <string name="pref_battery_saver_nosignal_summary">Activate power saving mode when no network signal after 5 minutes</string>
-    <string name="pref_battery_saver_sync_title">Disable sync</string>
-    <string name="pref_battery_saver_sync_summary">Disable sync connection when power saving activated</string>
-    <string name="pref_battery_saver_killall_title">Kill all task</string>
-    <string name="pref_battery_saver_killall_summary">Allow to kill all task when power saving activated</string>
+    <string name="network_global">Globalne</string>
+    <string name="battery_saver_action_undefined">Niezdefiniowane</string>
+    <string name="battery_saver_title">Zarządzanie zasilaniem</string>
+    <string name="pref_battery_saver_enable_title">Tryb oszczędzania baterii</string>
+    <string name="pref_battery_saver_enable_summary">Włącz narzędzenie do zarządzania zużyciem baterii na urządzeniu, aby przedłużyć żywotność baterii</string>
+    <string name="pref_battery_saver_enable_no_mobiledata_summary">Spowoduje to automatyczne zarządzanie baterii na te zdefiniowane przez użytkownika</string>
+    <string name="pref_battery_saver_normal_mode_title">Normalny tryb sieci</string>
+    <string name="pref_battery_saver_power_saving_mode_title">Tryb sieci z włączonym oszczędzaniem energii</string>
+    <string name="pref_battery_saver_screen_off_title">Oszczędzanie w trybie gotowości</string>
+    <string name="pref_battery_saver_screen_off_summary">Aktywuj oszczędzanie energii, gdy telefon jest w trybie gotowości (wyłączony ekran)</string>
+    <string name="pref_battery_saver_ignore_locked_title">Ignoruj, gdy zablokowany...</string>
+    <string name="pref_battery_saver_ignore_locked_summary">Gdy włączy się ekran, oszczędzanie enerii nie zostanie wyłączone, dopóki blokada klawiatury nie zostanie odblokowana</string>
+    <string name="pref_battery_saver_mode_change_delay_title">Wybierz tryb opóźnienia</string>
+    <string name="pref_battery_saver_mode_change_delay_summary">Opóźniona zmiana trybu oszczędzania baterii przez określoną liczbę sekund</string>
+    <string name="pref_battery_saver_battery_title">Tryb słabej baterii</string>
+    <string name="pref_battery_saver_battery_summary">Aktywuj oszczędzanie baterii, gdy poziom baterii jest niski</string>
+    <string name="pref_battery_saver_mode_battery_level_title">Poziom baterii</string>
+    <string name="pref_battery_saver_mode_battery_level_summary">Aktywuj, gdy poziom baterii jest poniżej...</string>
+    <string name="pref_battery_saver_bluetooth_title">Wyłączanie bluetooth</string>
+    <string name="pref_battery_saver_bluetooth_summary">Wyłączy bluetooth, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_data_title">Wył. kom. trans. danych</string>
+    <string name="pref_battery_saver_data_summary">Wyłączy komórkową transmisję danych, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_location_title">Wyłączanie modułu GPS</string>
+    <string name="pref_battery_saver_location_summary">Wyłączy moduł GPS, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_wifi_title">Wyłączanie sieci Wi-Fi</string>
+    <string name="pref_battery_saver_wifi_summary">Wyłączy sieć Wi-Fi, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_led_title">Wyłączanie diody LED</string>
+    <string name="pref_battery_saver_led_summary">Wyłączy diodę LED, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_vibrate_title">Wyłączanie wibracji</string>
+    <string name="pref_battery_saver_vibrate_summary">Wyłączy wibracje, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_brightness_title">Jasność ekranu</string>
+    <string name="pref_battery_saver_brightness_summary">Zmień jasność ekranu, gdy poziom baterii jest niski</string>
+    <string name="pref_battery_saver_mode_brightness_level_title">Poziom jasności</string>
+    <string name="pref_battery_saver_mode_brightness_level_summary">Zmiana poziomu jasności, gdy oszczędzanie włączone</string>
+    <string name="pref_battery_saver_cpu_title">Tryb oszczędzania energii przez CPU</string>
+    <string name="pref_battery_saver_cpu_summary">Automatycznie ustawi zdefiniowane przez użytkownika maksymalne taktowanie procesora, gdy oszczędzanie baterii zostanie uruchomione</string>
+    <string name="battery_saver_mode_current_speed">Aktualna prędkość</string>
+    <string name="battery_saver_mode_current_max">Maksymalna prędkość:  </string>
+    <string name="battery_saver_mode_cpu_info_list_header">Status rdzeni</string>
+    <string name="battery_saver_mode_cpu_speed_header">Limit rdzenia</string>
+    <string name="battery_saver_mode_core_offline">Nieaktywny</string>
+    <string name="battery_saver_mode_core">Rdzeń</string>
+    <string name="battery_saver_cpu_mode_title">Aktywuj oszczędzanie baterii przez CPU</string>
+    <string name="pref_battery_saver_cpu_warning_title">Ostrzeżenie:</string>
+    <string name="pref_battery_saver_cpu_warning_summary">Nie możemy zagwarantować, że będzie działać to prawidłowo na Twoim urządzeniu!</string>
+    <string name="pref_battery_saver_network_title">Inteligentna zmiana sieci</string>
+    <string name="pref_battery_saver_network_summary">Umożliwia zmianę sieci do trybu normalnego w określonym przedziale czasu po wyłączeniu ekranu i włączeniu trybu oszczędzania energii</string>
+    <string name="pref_battery_saver_nosignal_title">Inteligenty sygnał</string>
+    <string name="pref_battery_saver_nosignal_summary">Aktywuj oszczędzanie energii, gdy telefon nie jest połączony z siecią powyżej 5 minut</string>
+    <string name="pref_battery_saver_sync_title">Wyłączanie synchronizacji</string>
+    <string name="pref_battery_saver_sync_summary">Wyłączy synchronizację, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_killall_title">Zabijanie wszystkich zadań</string>
+    <string name="pref_battery_saver_killall_summary">Wyłączy wszystkie zadania w tle, gdy oszczędzanie baterii jest włączone</string>
     <string name="pref_battery_saver_toast_title">Show toast</string>
     <string name="pref_battery_saver_toast_summary">Allow to showing toast message when battery saver changing device configuration</string>
-    <string name="battery_saver_battery_title">Battery options</string>
-    <string name="battery_saver_radio_title">Radio options</string>
-    <string name="battery_saver_network_title">Other Network options</string>
-    <string name="battery_saver_network_gsm_title">GSM Networks</string>
-    <string name="battery_saver_network_cdma_title">CDMA Networks</string>
-    <string name="battery_saver_system_title">System options</string>
-    <string name="data_usage_enable_batterysaver">Battery saver</string>
+    <string name="battery_saver_battery_title">Opcje baterii</string>
+    <string name="battery_saver_radio_title">Opcje radia</string>
+    <string name="battery_saver_network_title">Inne ustawienia trans. danych</string>
+    <string name="battery_saver_network_gsm_title">Sieci GSM</string>
+    <string name="battery_saver_network_cdma_title">Sieci CDMA</string>
+    <string name="battery_saver_system_title">Opcje systemowe</string>
+    <string name="data_usage_enable_batterysaver">Oszczędzanie baterii</string>
 
-    <string name="emulate_menu_key_title">Emulate hardware menu key</string>
-    <string name="emulate_menu_key_summary">Force hide the three-dot overflow menu in applications. Require restart of application</string>
+    <string name="emulate_menu_key_title">Emulowanie sprzętowego klawisza menu</string>
+    <string name="emulate_menu_key_summary">Ukrywa 3 kropki paska nawigacyjnego w aplikacjach. Wymaga restartu aplikacji</string>
 
     <string name="force_show_overflow_menu_title">Show overflow menu</string>
     <string name="force_show_overflow_menu_summary">Force show the three-dot overflow menu in applications. Require restart of application</string>
