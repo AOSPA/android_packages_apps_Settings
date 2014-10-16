@@ -35,6 +35,7 @@ import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.os.Handler;
 import android.util.Log;
@@ -138,6 +139,7 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         mFloatNotification = (CheckBoxPreference) prefSet.findPreference(KEY_FLOAT_NOTIFICATION);
         mFloatNotification.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.STATUS_BAR_NOTIFICATION_SWIPE_FLOATING, 0) == 1);
 
+        int activePhoneType = TelephonyManager.getDefault().getCurrentPhoneType();
 	boolean isPhone = activePhoneType != TelephonyManager.PHONE_TYPE_NONE;
         PreferenceCategory audioCat = (PreferenceCategory) getPreferenceScreen().findPreference("category_volume");
         mVolumeStepsAlarm = (ListPreference) findPreference(KEY_VOLUME_STEPS_ALARM);
