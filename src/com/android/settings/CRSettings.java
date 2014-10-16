@@ -140,10 +140,11 @@ public class CRSettings extends SettingsPreferenceFragment implements Preference
         mFloatNotification.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.STATUS_BAR_NOTIFICATION_SWIPE_FLOATING, 0) == 1);
 
         int activePhoneType = TelephonyManager.getDefault().getCurrentPhoneType();
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 	boolean isPhone = activePhoneType != TelephonyManager.PHONE_TYPE_NONE;
         PreferenceCategory audioCat = (PreferenceCategory) getPreferenceScreen().findPreference("category_volume");
         mVolumeStepsAlarm = (ListPreference) findPreference(KEY_VOLUME_STEPS_ALARM);
-        updateVolumeSteps(mVolumeStepsAlarm.getKey(),mAudioManager.getStreamMaxVolume(mAudioManager.STREAM_ALARM));
+        updateVolumeSteps(mVolumeStepsAlarm.getKey(), mAudioManager.getStreamMaxVolume(mAudioManager.STREAM_ALARM));
         mVolumeStepsAlarm.setOnPreferenceChangeListener(this);
         mVolumeStepsDTMF = (ListPreference) findPreference(KEY_VOLUME_STEPS_DTMF);
         if (isPhone) {
