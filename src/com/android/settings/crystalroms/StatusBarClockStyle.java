@@ -57,6 +57,7 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
     private static final String PREF_CLOCK_DATE_STYLE = "clock_date_style";
     private static final String PREF_CLOCK_DATE_FORMAT = "clock_date_format";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
+    private static final String CLOCK_USE_SECOND = "clock_use_second";
 
     public static final int CLOCK_DATE_STYLE_LOWERCASE = 1;
     public static final int CLOCK_DATE_STYLE_UPPERCASE = 2;
@@ -72,6 +73,7 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
     private ListPreference mClockDateStyle;
     private ListPreference mClockDateFormat;
     private CheckBoxPreference mStatusBarClock;
+    private CheckBoxPreference mClockSecond;
 
     private boolean mCheckPreferences;
 
@@ -154,6 +156,12 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
                 Settings.System.STATUS_BAR_CLOCK, 1) == 1));
         mStatusBarClock.setOnPreferenceChangeListener(this);
 
+        mClockSecond = (CheckBoxPreference) prefSet.findPreference(CLOCK_USE_SECOND);
+        mClockSecond.setChecked((Settings.System.getInt(
+                getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.CLOCK_USE_SECOND, 1) == 1));
+        mClockSecond.setOnPreferenceChangeListener(this);
+
         try {
             if (Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.TIME_12_24) == 24) {
@@ -235,6 +243,11 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
         } else if (preference == mStatusBarClock) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_CLOCK,
+                    (Boolean) newValue ? 1 : 0);
+            return true;
+        } else if (preference == mClockSecond) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.CLOCK_USE_SECOND,
                     (Boolean) newValue ? 1 : 0);
             return true;
         } else if (preference == mClockDateFormat) {

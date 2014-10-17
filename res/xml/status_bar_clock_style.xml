@@ -36,6 +36,12 @@
             android:title="@string/clock_title_enable"
             android:dependency="status_bar_show_clock" />
 
+       <CheckBoxPreference
+            android:key="clock_use_second"
+            android:title="@string/clock_use_second"
+            android:summary="@string/clock_use_second_summary"
+            android:defaultValue="true" />
+
         <ListPreference
             android:key="font_style"
             android:title="@string/clock_font_style_title"
