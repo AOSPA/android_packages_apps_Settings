@@ -176,6 +176,7 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
         if (!mClockDateToggle) {
             mClockDateStyle.setEnabled(false);
             mClockDateFormat.setEnabled(false);
+            mClockSecond.setEnabled(false);
         }
 
         setHasOptionsMenu(true);
@@ -227,9 +228,11 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
             if (val == 0) {
                 mClockDateStyle.setEnabled(false);
                 mClockDateFormat.setEnabled(false);
+                mClockSecond.setEnabled(false);
             } else {
                 mClockDateStyle.setEnabled(true);
                 mClockDateFormat.setEnabled(true);
+                mClockSecond.setEnabled(true);
             }
             return true;
         } else if (preference == mClockDateStyle) {
