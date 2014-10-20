@@ -58,6 +58,31 @@
                 android:summary="@string/proximity_wake_summary"
                 android:defaultValue="true" />
 
+        <!-- Dynamic system bars -->
+        <PreferenceCategory
+            android:key="dynamic_system_bars_category"
+            android:title="@string/dynamic_system_bars_category_title"/>
+
+        <CheckBoxPreference
+            android:key="dynamic_status_bar"
+            android:title="@string/dynamic_status_bar_title"
+            android:summary="@string/dynamic_status_bar_summary" />
+
+        <CheckBoxPreference
+            android:key="dynamic_navigation_bar"
+            android:title="@string/dynamic_navigation_bar_title"
+            android:summary="@string/dynamic_navigation_bar_summary" />
+
+        <CheckBoxPreference
+            android:key="dynamic_system_bars_gradient"
+            android:title="@string/dynamic_system_bars_gradient_title"
+            android:summary="@string/dynamic_system_bars_gradient_summary" />
+
+        <CheckBoxPreference
+            android:key="dynamic_status_bar_filter"
+            android:title="@string/dynamic_status_bar_filter_title"
+            android:summary="@string/dynamic_status_bar_filter_summary" />
+
         <!-- Notifications -->
         <PreferenceCategory
             android:key="notification_category"
