@@ -56,6 +56,10 @@
         android:title="@string/bt_hci_snoop_log"
         android:summary="@string/bt_hci_snoop_log_summary"/>
 
+    <Preference android:key="rescan_media"
+        android:title="@string/rescan_media"
+        android:summary="@string/rescan_media_summary" />
+
     <PreferenceScreen android:key="proc_stats"
             android:title="@string/process_stats_summary_title"
             android:summary="@string/process_stats_summary"

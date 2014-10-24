@@ -34,10 +34,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.hardware.usb.IUsbManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.PowerManager;
@@ -65,6 +67,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import dalvik.system.VMRuntime;
 
@@ -96,6 +99,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String ENABLE_TERMINAL = "enable_terminal";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String BT_HCI_SNOOP_LOG = "bt_hci_snoop_log";
+    private static final String RESCAN_MEDIA = "rescan_media";
     private static final String SELECT_RUNTIME_KEY = "select_runtime";
     private static final String SELECT_RUNTIME_PROPERTY = "persist.sys.dalvik.vm.lib";
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
@@ -169,6 +173,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private CheckBoxPreference mBugreportInPower;
     private CheckBoxPreference mKeepScreenOn;
     private CheckBoxPreference mBtHciSnoopLog;
+    private Preference mRescanMedia;
     private CheckBoxPreference mAllowMockLocation;
     private PreferenceScreen mPassword;
 
@@ -265,6 +270,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBugreportInPower = findAndInitCheckboxPref(BUGREPORT_IN_POWER_KEY);
         mKeepScreenOn = findAndInitCheckboxPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitCheckboxPref(BT_HCI_SNOOP_LOG);
+        mRescanMedia = findPreference(RESCAN_MEDIA);
         mAllowMockLocation = findAndInitCheckboxPref(ALLOW_MOCK_LOCATION);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
@@ -1268,6 +1274,15 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB) : 0);
         } else if (preference == mBtHciSnoopLog) {
             writeBtHciSnoopLogOptions();
+        } else if (preference == mRescanMedia) {
+            final Activity a = getActivity();
+            a.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED)
+                    .setData(Uri.parse("file://" +
+                            Environment.getExternalStorageDirectory().getPath()))
+                    .setClassName("com.android.providers.media",
+                            "com.android.providers.media.MediaScannerReceiver"));
+            Toast.makeText(a, a.getString(R.string.rescan_media_toast),
+                    Toast.LENGTH_LONG).show();
         } else if (preference == mAllowMockLocation) {
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.ALLOW_MOCK_LOCATION,
