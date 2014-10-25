@@ -24,6 +24,9 @@
         android:title="@string/quiet_hours_enabled"
         android:defaultValue="false" />
 
+    <PreferenceScreen
+        android:fragment="com.android.settings.cyanogenmod.QuietHoursDays" />
+
     <com.android.settings.cyanogenmod.TimeRangePreference
         android:key="quiet_hours_timerange"
         android:dependency="quiet_hours_enabled" />
