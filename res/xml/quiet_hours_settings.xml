@@ -25,6 +25,7 @@
         android:defaultValue="false" />
 
     <PreferenceScreen
+        android:title="@string/quiet_hours_daysOfWeek"
         android:fragment="com.android.settings.cyanogenmod.QuietHoursDays" />
 
     <com.android.settings.cyanogenmod.TimeRangePreference
