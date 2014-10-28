@@ -129,6 +129,8 @@ public class Settings extends PreferenceActivity
     private static final String SAVE_KEY_CURRENT_HEADER = "com.android.settings.CURRENT_HEADER";
     private static final String SAVE_KEY_PARENT_HEADER = "com.android.settings.PARENT_HEADER";
 
+    private static final String THEME_CHOOSER_CATEGORY = "cyngn.intent.category.APP_THEMES";
+
     static final int DIALOG_ONLY_ONE_HOME = 1;
 
     private static boolean sShowNoHomeNotice = false;
@@ -1049,16 +1051,16 @@ public class Settings extends PreferenceActivity
             revert = true;
         }
 
-        // a temp hack while we prepare to switch
-        // to the new theme chooser.
+        // Launch the theme chooser if it supports the cyngn.intent.category.APP_THEMES category.
         if (header.id == R.id.theme_settings) {
+            Intent intent = new Intent(Intent.ACTION_MAIN)
+                    .addCategory(THEME_CHOOSER_CATEGORY)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             try {
-                Intent intent = new Intent();
-                intent.setClassName("com.tmobile.themechooser", "com.tmobile.themechooser.ThemeChooser");
                 startActivity(intent);
                 return;
-            } catch(ActivityNotFoundException e) {
-                 // Do nothing, we will launch the submenu
+            } catch (ActivityNotFoundException e) {
+                // do nothing so the theme settings to be displayed
             }
         }
 
