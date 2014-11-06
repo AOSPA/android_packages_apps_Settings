@@ -204,6 +204,18 @@ public class MultiSimSettings extends PreferenceActivity implements DialogInterf
         updateUi();
     }
 
+    private int updateSimNameEntries()  {
+        int i = 0;
+        for (i = 0; i < MAX_SUBSCRIPTIONS; i++) {
+            String label = MSimTelephonyManager.getFormattedSimName(this, i);
+            entries[i] = summaries[i] = label;
+            entriesPrompt[i] = summariesPrompt[i] = label;
+            entryValues[i] = Integer.toString(i);
+            entryValuesPrompt[i] = Integer.toString(i);
+        }
+        return i;
+    }
+
     /**
      * UI behaviour for different SIM scenarios are listed below :
      * 1. No SIM case : Multi SIM menu will not be accessible.Dialog

@@ -75,9 +75,7 @@ public class SelectSubscription extends  TabActivity {
         int numPhones = tm.getPhoneCount();
 
         for (int i = 0; i < numPhones; i++) {
-            String operatorName = tm.getSimState(i) != SIM_STATE_ABSENT
-                    ? tm.getNetworkOperatorName(i) : getString(R.string.sub_no_sim);
-            String label = getString(R.string.multi_sim_entry_format, operatorName, i + 1);
+            String label = MSimTelephonyManager.getFormattedSimName(this, i);
             subscriptionPref = tabHost.newTabSpec(label);
             subscriptionPref.setIndicator(label);
             intent = new Intent().setClassName(pkg, targetClass)
