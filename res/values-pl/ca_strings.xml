@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2014 The CrystalPA Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- CrystalPA -->
+    <string name="crystal_title">Ustawienia CrystalPA</string>
+    <string name="crystalpa_version">Wersja CrystalPA</string>
+    <string name="crystalpa_default">Full</string>
+
+    <!-- Some of CPA Settings -->
+    <string name="listview_title">Ustawienia ListView</string>
+    <string name="other_title">Inne ustawienia</string>
+    
+    <!-- NavBar Title -->
+    <string name="navbar_title">Pasek nawigacyjny</string>
+
+    <!-- Enable Navbar -->
+    <string name="enable_navbar">Pasek nawigacyjny</string>
+    <string name="enable_navbar_reboot">Pasek nawigacyjny</string>
+    <string name="enable_navbar_dialog_title">Wymagany restart</string>
+    <string name="enable_navbar_dialog_msg">Zresetuj telegon, żeby włączyć/wyłączyć pasek nawigacyjny</string>
+    <string name="enable_navbar_dialog_negative">Zresetuj później</string>
+    <string name="enable_navbar_dialog_positive">Zresetuj teraz</string>
+
+    <!-- Navigation Bar Height -->
+    <string name="navigation_bar_height">Wysokość paska nawigacji</string>
+    <string name="navigation_bar_height_48">48dp</string>
+    <string name="navigation_bar_height_44">44dp</string>
+    <string name="navigation_bar_height_40">40dp</string>
+    <string name="navigation_bar_height_36">36dp</string>
+    <string name="navigation_bar_height_32">32dp</string>
+    <string name="navigation_bar_height_28">28dp</string>
+    <string name="navigation_bar_height_24">24dp</string>
+
+    <!-- Partition Info -->
+    <string name="partition_info_title">Informacje o partycjach</string>
+    <string name="partition_info_system">/system</string>
+    <string name="partition_info_data">/data</string>
+    <string name="partition_info_cache">/cache</string>
+    <string name="partition_info_sdcard">/sdcard (FAT)</string>
+    <string name="partition_info_sdext">/sd-ext (EXT)</string>
+    <string name="partition_info_used_of">/</string>
+    <string name="partition_info_signs">Znaki</string>
+    <string name="partition_info_signs_summary">U -> Używane | W -> Wolne | W -> Wielkość</string>
+
+    <!-- CPU Time in States -->
+    <string name="cat_cpustates">Użycie stanów procesora</string>
+    <string name="mt_refresh">Odśwież</string>
+    <string name="mt_reset">Reset</string>
+    <string name="mt_restore">Przywróć</string>
+    <string name="time_in_state">UŻYCIE STANÓW W CZASIE</string>
+    <string name="unused_cpu_states">NIEUŻYWANE STANY CPU</string>
+    <string name="total_state_time">CAŁY CZAS UŻYWANIA CPU</string>
+    <string name="no_states_file_found">Brak pliku stanów, skontaktuj się z developerem</string>
+    <string name="deep_sleep">"Uśpienie"</string> 
+    
+    <!-- Battery Bar -->
+    <string name="cat_battery_bar">Pasek baterii</string>
+    <string name="pref_battery_bar">Pasek baterii</string>
+    <string name="pref_battery_bar_color">Kolor paska baterii</string>
+    <string name="pref_battery_bar_style_title">Styl paska baterii</string>
+    <string name="pref_battery_bar_thickness_title">Grubość paska baterii</string>
+    <string name="pref_battery_bar_animate_title">Animacja ładowania</string>
+    <string name="pref_battery_bar_animate_summary"></string>
+    <string name="pref_regular">Normalny</string>
+    <string name="pref_center_mirror">Środkowy</string>
+
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Wybór koloru</string>
+    <string name="press_color_to_apply">Kliknij na kolor aby włączyć</string>
+    <string name="arrow_right">-</string>
+    <string name="arrow_down">|</string>
+    <string name="hex">Hex:</string>
+    <string name="hex_hint">#FF000000</string>
+    <string name="set">Ustaw</string>
+    <string name="ics_color">Holo</string>
+
+    <!-- Performance : Disable bootanimation -->
+    <string name="pref_disable_boot_animation_title">Wyłącz bootanimację</string>
+    <string name="pref_disable_boot_animation_summary">Nie włącza bootanimacji aby tel. się szybciej uruchamiał</string>
+
+    <!-- Status bar -->
+    <string name="status_bar_title">Pasek stanu</string>
+    <string name="status_bar_style_title">Style</string>
+
+    <!-- Status bar | Clock -->
+    <string name="status_bar_clock">Zegar i data</string>
+    <string name="status_bar_clock_title">Styl zegara i daty</string>
+    <string name="clock_title_enable">Położenie zegara</string>
+    <string name="clock_enabled">Włączony</string>
+    <string name="clock_disabled">Wyłączony</string>
+    <string name="clock_color_title">Kolor</string>
+    <string name="status_bar_clock_style_reset">Zresetuj kolor</string>
+    <string name="status_bar_show_clock_title">Pokaż zegar i datę</string>
+    <string name="status_bar_am_pm_title">AM/PM</string>
+    <string name="status_bar_am_pm_info">24-Godzinny zegar włączony</string>
+    <string name="enable_clock_weekday">Dzień tygodnia</string>
+    <string name="enable_clock_weekday_summary">Skrócony dzień tygodnia</string>
+    <string name="right_clock">Zegar na prawo</string>
+    <string name="center_clock">Zegar na środku</string>
+    <string name="dont_show">Nie pokazuj</string>
+    <string name="clock_date_display">Data</string>
+    <string name="clock_date_display_summary">Wyświetl niestandardową datę przed zegarem</string>
+    <string name="clock_date_style">Styl daty</string>
+    <string name="clock_date_format">Format daty</string>
+    <string name="clock_date_string_edittext_title">Musi być w MM/dd/yy</string>
+    <string name="clock_date_string_edittext_summary">Ustaw</string>
+    <string name="am_pm_clock_normal">Normalna wielkość czcionki</string>
+    <string name="am_pm_clock_small">Mała wielkość czcionki</string>
+    <string name="am_pm_clock_none">Nie pokazuj</string>
+    <string name="clock_date_display_none">Nie pokazuj</string>
+    <string name="clock_date_display_small">Mała wielkość czcionki</string>
+    <string name="clock_date_display_normal">Normalna wielkość czcionki</string>
+    <string name="clock_date_style_normal">Normalne</string>
+    <string name="clock_date_style_lowercase">Małe</string>
+    <string name="clock_date_style_uppercase">Duże</string>
+    <string name="clock_date_format_custom">Niestandardowy format javy</string>
+    <string name="status_bar_clock_style_reset_message">Zresetuj kolor zegara</string>
+    <string name="color_default">Oryginalny kolor</string>
+    <string name="clock_font_style_title">Czcionka</string>
+    <string name="clock_font_bold">Pogrubiona</string>
+    <string name="clock_font_condensed">Skrócona</string>
+    <string name="clock_font_light">Lekka</string>
+    <string name="clock_font_light_italic">Lekka z kursywą</string>
+    <string name="clock_font_normal">Normalna</string>
+
+    <!-- Headers -->
+    <string name="header_networks">Połączenia sieciowe</string>
+    <string name="header_my_accounts">Moje konta</string>
+    <string name="header_backup_opts">Opcje przywracania</string>
+    <string name="header_permissions">Pozwolenia</string>
+    <string name="header_device_manager">Menadżer urządzeń</string>
+    <string name="header_personal">Personalizacja</string>
+    <string name="header_input">Metoda wprowadzania</string>
+
+    <!-- Tabs -->
+    <string name="tab_account">Konta</string>
+    <string name="tab_connection">Połączenia</string>
+    <string name="tab_device">Moje urządzenie</string>
+    <string name="tab_more">Więcej</string>
+
+    <!-- Performance : Force high-end graphics -->
+    <string name="pref_force_highend_gfx_title">Włącz wszystkie efekty graficzne</string>
+    <string name="pref_force_highend_gfx_summary">Włącza efekty graficzne, takie jak przezroczysty pasek stanu</string>
+
+    <!-- Other -->
+    <string name="more_network">Więcej sieci</string>
+
+    <!-- Launcher settings  -->
+    <string name="launcher_settings_title">Pulpit</string>
+
+    <!-- SWAP -->
+    <string name="swap_settings_title">Ustawienia partycji wymiany</string>
+    <string name="swap_title">Ustawienia partycji wymiany</string>
+    <string name="swap_summary">Dodatkowa pamięć SWAP</string>
+    <string name="swap_mode_summary">%S</string>
+    <string name="swap_modes_title">SWAP na karcie SD</string>
+    <string name="swap_sizes_title">Wielkość partycji wymiany (SWAP\'u)</string>
+    <string name="swap_sizes_summary">%S MB</string>
+    <string name="swap_toast_swap_removed">Wcześniejszy plik SWAP usunięty</string>
+    <string name="swap_toast_swap_created">SWAP zrobiony</string>
+    <string name="swap_toast_swap_enabled">SWAP włączony</string>
+    <string name="swap_toast_swap_disabled">SWAP wyłączony</string>
+    <string name="swap_toast_wait">Prosze czekać...</string>
+    <string name="swap_info_title">Informacje o SWAP\'ie</string>
+    <string name="swap_dialog">Informacje o patrycji wymiany</string>
+    <string name="swap_loading">Ładowanie informacji o partycji wymiany</string>
+    <string name="swap_error">Błąd przy ładowaniu partycji wymiany</string>
+
+    <!-- CPU undervolt -->
+    <string name="cpu_undervolt">Undervolt</string>
+    <string name="cpu_undervolt_summary">Zmniejsza napięcie CPU (lepsza żywotność baterii)</string>
+
+    <!-- Themes -->
+    <string name="theme_settings_title">Ciemny Crystal</string>
+    <string name="theme_auto_mode_title">Wybierz wygląd</string>
+    <string name="theme_auto_mode_off">Manualnie</string>
+    <string name="theme_auto_mode_lightsensor">Włączenie na zmiane światła</string>
+    <string name="theme_auto_mode_twilight">W dzień</string>
+    <string name="theme_auto_switch_mode_error">Automatyczne włączanie wyglądu jest włączone!</string>
+
+    <!-- ListView animation -->
+    <string name="interface_settings_animation_title">Ustawienia animacji</string>
+    <string name="listview_animation_title">Animacje ListView</string>
+    <string name="listview_off">Domyślne</string>
+    <string name="listview_wave_left">Fala (lewo)</string>
+    <string name="listview_wave_right">Fala (prawo)</string>
+    <string name="listview_alpha">Alfa</string>
+    <string name="listview_scale">Skala</string>
+    <string name="listview_stack_top">Stos (górny)</string>
+    <string name="listview_stack_bottom">Stos (dolny)</string>
+    <string name="listview_unfold">Rozwijanie</string>
+    <string name="listview_fold">Zwijanie</string>
+    <string name="listview_translate_left">Przejście (lewo)</string>
+    <string name="listview_translate_right">Przejście (prawo)</string>
+
+
+    <!-- ListView interpolator -->
+    <string name="listview_interpolator_title">ListView interpolator</string>
+    <string name="listview_accelerate_interpolator">Przyśpieszenie</string>
+    <string name="listview_decelerate_interpolator">Zwolnienie</string>
+    <string name="listview_accelerate_decelerate_interpolator">Przyśpieszenie i zwolnienie</string>
+    <string name="listview_anticipate_interpolator">Przewidywanie</string>
+    <string name="listview_overshoot_interpolator">Przekroczenie</string>
+    <string name="listview_anticipate_overshoot_interpolator">Przewidywanie i przekroczenie</string>
+    <string name="listview_bounce_interpolator">Skakanie</string>
+
+    <!-- Slim Recents -->
+    <string name="slim_recents_category">Slim Recents</string>
+    <string name="slim_recents_warning_title">Uwaga!</string>
+    <string name="slim_recents_warning_message">SystemUI zostanie zrestartowane, żeby zaktualizować zmiany</string>
+    <string name="recents_use_slim_title">Używaj Slim Recents</string>
+    <string name="recents_use_slim_summary">Używaj Slim Recents zamiast domyślnego recents view</string>
+
+    <!-- OmniSwitch -->
+    <string name="omniswitch_category">OmniSwitch</string>
+    <string name="recents_use_omniswitch_title">Używaj OmniSwitch</string>
+    <string name="recents_use_omniswitch_summary">Używaj OmniSwitch zamiast domyślnego recents view</string>
+    <string name="omniswitch_start_settings_title">Ustawienia</string>
+    <string name="omniswitch_start_settings_summary">Otwórz ustawienia OmniSwitch</string>
+    <string name="omniswitch_first_time_title">Informacje</string>
+    <string name="omniswitch_first_time_message">Upewnij się, że jest włączony OmniSwitch. Możesz to zrobić za pomocą \"Ustawienia\" niżej.</string>
+    
+    <!--  Recents -->
+    <string name="recent_apps_panel_title" >Panel Recents Apps</string>
+
+    <!-- CPA Recents -->
+    <string name="wprecents_category">CPA Recents</string>
+    <string name="recents_color">Kolor recents</string>
+    
+    <!-- Active display settings -->
+    <string name="ad_settings_title">Aktywny wyświetlacz</string>
+    <string name="ad_settings_summary">Edytuj ustawienia aktywnego wyświetlacza</string>
+    <string name="ad_enable_title">Aktywuj</string>
+    <string name="ad_enable_summary_on">Aktywny wyświetlacz włączony</string>
+    <string name="ad_enable_summary_off">Aktywny wyświetlacz wyłączony</string>
+    <string name="ad_bypass_title">Tryb Bypass</string>
+    <string name="ad_bypass_summary">Tryb kieszonkowy uruchomi ekran blokady, gdy nie ma żadnych powiadomień</string>
+    <string name="ad_text_title">Tekst powiadomienia</string>
+    <string name="ad_text_summary">Pokaż tekst powiadomienia wokół pierścienia</string>
+    <string name="ad_content_title">Niestandardowy widok powiadomienia</string>
+    <string name="ad_content_summary">Użyj stylu aktywnego wyświetlacza do szczegółowych powiadomień</string>
+    <string name="ad_annoying_title">Rzadsze powiadomienia</string>
+    <string name="ad_annoying_summary">Ogranicz powiadomienia na:</string>
+    <string name="ad_double_tap_title">Dwukrotne stuknięcie wyłącza ekran</string>
+    <string name="ad_double_tap_summary">Wyłącz ekran podwójnym stuknięciem</string>
+    <string name="ad_wallpaper_title">Tapeta w tle</string>
+    <string name="ad_wallpaper_summary">Pokaż rozmytą tapetę w tle Active Display</string>
+    <string name="ad_all_notifications_title">Pokaż trwające powiadomienia</string>
+    <string name="ad_all_notifications_summary">Pokazuj nie usuwalne powiadomienia</string>
+    <string name="ad_hide_low_priority_title">Ukryj niski priorytet</string>
+    <string name="ad_hide_low_priority_summary">Ukryj powiadomienia o niskim priorytecie</string>
+    <string name="ad_pocket_mode_title">Tryb kieszonkowy</string>
+    <string name="ad_pocket_mode_summary">Pokaż powiadomienia oczekujące po wyjęciu urządzenia z kieszeni</string>
+    <string name="ad_redisplay_title">Wyświetlaj ponownie powiadomienia</string>
+    <string name="ad_timeout_title">Limit czasu wyświetlania</string>
+    <string name="ad_threshold_title">Czas włączenia ekranu po powiadomieniu</string>
+    <string name="ad_threshold_summary">Czas, po którym zostanie włączony ekran, gdy przyjdzie powiadomienie</string>
+    <string name="ad_sunlight_mode_title">Tryb sunlight</string>
+    <string name="ad_sunlight_mode_summary">Odwróć kolory w jasnym otoczeniu</string>
+    <string name="ad_turnoff_mode_title">Automatyczne wyłączenie ekranu</string>
+    <string name="ad_turnoff_mode_summary">Wyłącz ekran urządzenia po włożeniu spowrotem do kieszeni</string>
+    <string name="ad_customizations_title">Ustawienia zaawansowane</string>
+    <string name="ad_excluded_apps_title">Wyklucz aplikacje</string>
+    <string name="ad_excluded_apps_summary">Powiadomienia nie będą wyświetlane dla tych aplikacji</string>
+    <string name="ad_privacy_apps_title">Tryb prywatności</string>
+    <string name="ad_privacy_apps_summary">Nie będą wyświetlane szczegółowe powiadomienia dla tych aplikacji</string>
+    <string name="ad_brightness_title">Jasność wyświetlacza</string>
+    <string name="ad_brightness_summary">Użyj ręcznej regulacji jasności</string>
+    <string name="ad_show_date_title">Pokazuj datę</string>
+    <string name="ad_show_date_summary">Pokaż datę nad zegarem</string>
+    <string name="ad_show_ampm_title">Pokazuj AM/PM</string>
+    <string name="ad_show_ampm_summary">Pokaż wskaźnik AM/PM przy korzystaniu z 12-godzinnego formatu czasu</string>
+    <string name="ad_redisplay_never">Nigdy</string>
+    <string name="ad_redisplay_1m">1 minuta</string>
+    <string name="ad_redisplay_5m">5 minut</string>
+    <string name="ad_redisplay_15m">15 minut</string>
+    <string name="ad_redisplay_30m">30 minut</string>
+    <string name="ad_redisplay_1h">1 godzina</string>
+    <string name="ad_redisplay_2h">2 godziny</string>
+    <string name="ad_redisplay_5h">5 godzin</string>
+    <string name="ad_timeout_3s">3 sekundy</string>
+    <string name="ad_timeout_5s">5 sekund</string>
+    <string name="ad_timeout_8s">8 sekund</string>
+    <string name="ad_timeout_10s">10 sekund</string>
+    <string name="ad_timeout_15s">15 sekund</string>
+    <string name="ad_timeout_25s">25 sekund</string>
+    <string name="ad_threshold_0s">Natychmiast</string>
+    <string name="ad_threshold_1s">1 sekunda</string>
+    <string name="ad_threshold_2s">2 sekundy</string>
+    <string name="ad_threshold_3s">3 sekundy</string>
+    <string name="ad_threshold_4s">4 sekundy</string>
+    <string name="ad_threshold_5s">5 sekund</string>
+    <string name="ad_pocket_mode_off">Wyłączone</string>
+    <string name="ad_pocket_mode_notifications">Tylko powiadomienia</string>
+    <string name="ad_pocket_mode_always">Zawsze</string>
+
+    <string name="status_bar_notif_count_title">Pokaż ilość powiadomień</string>
+    <string name="status_bar_notif_count_summary">Wyświetla liczbę oczekujących powiadomień</string>
+
+    <!-- Lock Screen Shortcuts -->
+    <string name="lockscreen_target_info">Przeciągnij suwak, aby przypisać aplikację</string>
+    <string name="lockscreen_target_title">Skróty na ekranie blokady</string>
+    <string name="lockscreen_target_summary">Wyświetl lub zmień niestandardowe skróty</string>
+    <string name="lockscreen_target_reset">Skróty na ekranie zostaną ustawione na domyślne</string>
+    <string name="lockscreen_target_reset_title">Reset</string>
+    <string name="lockscreen_target_reset_message">Usunąć wszystkie skróty na ekranie blokady i ustawić domyślne?</string>
+    <string name="lockscreen_target_empty">Puste</string>
+    <string name="lockscreen_target_edit_title">Edytuj skrót i ikonę</string>
+    <string name="lockscreen_target_edit_msg">Wybierz lub zmień żądaną aplikację lub działanośc i związaną z nią ikonę</string>
+
+    <!-- Lock screen shortcuts -->
+    <string name="picker_activities">Zadania</string>
+    <string name="select_custom_app_title">Wybierz aplikację</string>
+    <string name="select_custom_activity_title">Wybierz zadanie</string>
+    <string name="icon_picker_choose_icon_title">Wybierz ikonę</string>
+    <string name="icon_picker_alarm">Alarm</string>
+    <string name="icon_picker_browser">Przeglądarka</string>
+    <string name="icon_picker_calendar">Kalendarz</string>
+    <string name="icon_picker_camera">Aparat</string>
+    <string name="icon_picker_chrome">Chrome</string>
+    <string name="icon_picker_contacts">Kontakty</string>
+    <string name="icon_picker_email">Email</string>
+    <string name="icon_picker_email2">Email Holo</string>
+    <string name="icon_picker_facebook">Facebook</string>
+    <string name="icon_picker_gallery">Galeria</string>
+    <string name="icon_picker_google_small">Google (małe)</string>
+    <string name="icon_picker_googleplus">Google Plus</string>
+    <string name="icon_picker_googletalk">Hangouts</string>
+    <string name="icon_picker_maps">Mapy</string>
+    <string name="icon_picker_movie">Film</string>
+    <string name="icon_picker_music">Muzyka</string>
+    <string name="icon_picker_nav_normal">Navigation</string>
+    <string name="icon_picker_phone">Telefon</string>
+    <string name="icon_picker_podcast">Podcast</string>
+    <string name="icon_picker_rss">RSS</string>
+    <string name="icon_picker_search">Szukaj</string>
+    <string name="icon_picker_sms">SMS</string>
+    <string name="icon_picker_twitter">Twitter</string>
+
+    <!-- Performance -->
+    <string name="performance_settings_title">Wydajność</string>
+    <string name="performance_settings_warning_title">Postępuj ostrożnie!</string>
+    <string name="performance_settings_warning">Ustawienia te są przeznaczone do eksperymentów i wszelkie zmiany mogą skutkować niestabilnością, błędami, utratą danych, a nawet uszkodzeniem sprzętu.\n\nProsimy o nie zgłaszanie błędów po zmianie tych ustawień.</string>
+    <string name="performance_set_on_boot">Ustaw przy starcie</string>
+    <string name="performance_set_on_boot_summary">Zastosuj te ustawienia po uruchomieniu urządzenia</string>
+    <string name="processor_title">Procesor</string>
+    <string name="cpu_cur_freq_title">Aktualna częstotliwość</string>
+    <string name="cpu_governors_title">Zarządca</string>
+    <string name="cpu_min_freq_title">Minimalna częstotliwość</string>
+    <string name="cpu_max_freq_title">Maksymalna częstotliwość</string>
+    <string name="io_scheds_title">Zarządca I/O</string>
+    <string name="io_sched_title">Zarządca I/O</string>
+    <string name="perf_profile_title">Profil</string>
+    <string name="memory_management_title">Zarządzanie pamięcią</string>
+    <string name="pref_ksm_title">Kernel Samepage Merging</string>
+    <string name="pref_ksm_summary">KSM zmniejsza fizyczne wymagania pamięci i poprawia wydajność</string>
+    <string name="pref_purgeable_assets_title">Pozwól na czyszczenie bitmap</string>
+    <string name="pref_purgeable_assets_summary">Czyszczenie bitmapowych zbiorów pamięci umożliwia uwolnienie więcej RAM-u, gdy zachodzi potrzeba (wymaga restartu)</string>
+    <string name="pref_use_16bpp_alpha_title">16-bitowa przeźroczystość</string>
+    <string name="pref_use_16bpp_alpha_summary">Lepsza wydajność graficzna kosztem jakości. Może wywoływać artefakty (wymaga restartu)</string>
+    
+    
+    <!-- String for IconPicker -->
+    <string name="icon_picker_title">Wybierz ikonę</string>
+    <string name="icon_picker_system_icons_title">Ikony systemowe</string>
+    <string name="icon_picker_gallery_title">Galeria</string>
+    <string name="icon_picker_pack_title">Paczka ikon</string>
+    
+    <!-- Lockscreen -->
+    <string name="display_lockscreen_rotation_title">Obracanie ekranu blokady</string>
+    <string name="lockscreen_settings_title">Ustawienia ekranu blokady</string>
+    
+    <!-- Toast Animation -->
+    <string name="toast_animation_title">Animacje Toast</string>
+    <string name="toast_none_animation">Brak</string>
+    <string name="toast_default_animation">Domyślne</string>
+    <string name="toast_fade_animation">Animacja Fade</string>
+    <string name="toast_SlideRight_animation">Animacja SlideRight</string>
+    <string name="toast_SlideLeft_animation">Animacja SlideLeft</string>
+    <string name="toast_Xylon_animation">Animacja Xylon</string>
+    <string name="toast_Toko_animation">Animacja Toko</string>
+    <string name="toast_Tn_animation">Animacja Tn</string>
+    <string name="toast_Honami_animation">Animacja Honami</string>
+    <string name="toast_FastFade_animation">Animacja FastFade</string>
+    <string name="toast_GrowFade_animation">Animacja GrowFade</string>
+    <string name="toast_GrowFadeCenter_animation">Animacja GrowFadeCenter</string>
+    <string name="toast_GrowFadeBottom_animation">Animacja GrowFadeBottom</string>
+    <string name="toast_Translucent_animation">Animacja Translucent</string>
+    <string name="toast_SlideLeftRight_animation">Animacja Slide Left To Right</string>
+    <string name="toast_SlideRightLeft_animation">Animacja Slide Right To Left</string>
+
+    <!-- Lockscreen Notifications -->
+    <!-- Categories -->
+    <string name="general">Ogólne</string>
+    <string name="layout">Układ</string>
+    <string name="privacy">Prywatność</string>
+    <string name="lockscreen_notifications">Powiadomienia na ekranie blokady</string>
+    <string name="lockscreen_notifications_summary">Pokaż oczekujące powiadomiena na ekranie blokady</string>
+    <string name="pocket_mode">Tryb kieszonkowy</string>
+    <string name="pocket_mode_summary">Ekran zostanie włączony, gdy telefon zostanie wyciągnięty z kieszeni. Ekran ponownie się wyłączy, gdy urządzenie wróci do kieszeni.</string>
+    <string name="show_always">Zawsze pokazuj</string>
+    <string name="show_always_summary">Ekran zawsze włącza się po wyciągnięciu z kieszeni, nawet gdy nie ma żadnych oczekujących powiadomień</string>
+    <string name="hide_low_priority">Ukryj niski priorytet</string>
+    <string name="hide_low_priority_summary">Ukrywaj powiadomienia o niskim priorytecie, takie jak informacje pogodowe od Google Now</string>
+    <string name="hide_non_clearable">Ukrywaj nie usuwalne powiadomienia</string>
+    <string name="hide_non_clearable_summary">Ukrywaj wszystkie nie usuwalne powiadomienia</string>
+    <string name="dismiss_all">Zezwalaj na odwoływanie wszystkich nie usuwalnych powiadomień</string>
+    <string name="dismiss_all_summary">Umożliwia odwołanie nawet nie usuwalnych powiadomień. Powiadomienia zostaną oczywiście ukryte tylko z ekranu blokady, a nie z panelu powiadomień.</string>
+    <string name="expanded_view">Widok rozszerzony</string>
+    <string name="expanded_view_summary">Dodaj możliwość przełączania między normalnym i rozszerzonym widokiem przez długie przetrzymanie. Rozszerzony widok pokazuje czasami informację bardziej prywatną, więc możesz go wyłączyć.</string>
+    <string name="force_expanded_view">Domyślny widok rozszerzony</string>
+    <string name="force_expanded_view_summary">Pokaż powiadomienia rozszerzone domyślnie. Nadal będziesz mógł się przełączać między rozbudowanym i normalnym widokiem.</string>
+    <string name="wake_on_notification">Budzące powiadomienia</string>
+    <string name="wake_on_notification_summary">Obudź urządzenie po otrzymaniu nowego powiadomienia</string>
+    <string name="notifications_height">Ilość powiadomień</string>
+    <string name="notifications_height_summary">Pokazuje liczbę powiadomień</string>
+    <string name="offset_top">Przesunięcie do góry ekranu:</string>
+    <string name="privacy_mode">Tryb prywatności</string>
+    <string name="privacy_mode_summary">Wyłącza powiadomienia i ukrywa. Dzięki temu zobaczysz tylko ikony powiadomień.</string>
+    <string name="excluded_apps_title">Wykluczone aplikacje</string>
+    <string name="excluded_apps_summary">Wykluczone aplikacje nie będą pokazywać powiadomień na ekranie blokady</string>
+
+    <!-- Wakelock blocker -->
+    <string name="wakelock_blocker">Blokada wakelock\'ów</string>
+    <string name="wakelock_blocker_title">Uruchom</string>
+    <string name="wakelock_blocker_summary">Aktywuj blokowanie dla znalezionego wakelock</string>
+    <string name="wakelock_blocker_save">Zapisz</string>
+    <string name="wakelock_list_header">Znalezione wakelock\'i</string>
+    <string name="wakelock_blocker_reload">Odśwież</string>
+    <string name="wakelock_blocker_warning_title">Postępuj ostrożnie!</string>
+    <string name="wakelock_blocker_warning">Używanie blokady wakelock\'ów może powodować niestabilność, awarię lub utratę danych</string>
+    
+    <!-- Changelog -->
+    <string name="changelog_title">Zobacz dziennik zmian</string>
+    <string name="changelog_dialog">Dziennik zmian</string>
+    <string name="changelog_loading">Wczytywanie dziennika zmian...</string>
+    <string name="changelog_error">Nie można załadować dziennika zmian</string>
+    <string name="changelog_unknown">Nieznany</string>
+    <string name="changelog_version">Wersja</string>
+
+    <!-- Network traffic -->
+    <string name="network_traffic_title">Szybkość sieci</string>
+    <string name="show_network_traffic_state">Szybkość sieci na pasku stanu</string>
+    <string name="show_network_traffic_unit">Jednostka</string>
+    <string name="show_network_traffic_frequency">Interwał</string>
+    <string name="show_network_traffic_disable">Wyłączony</string>
+    <string name="show_network_traffic_up">Wychodzące</string>
+    <string name="show_network_traffic_down">Przychodzące</string>
+    <string name="show_network_traffic_all">Wychodzące i przychodzące</string>
+    <string name="show_network_traffic_bit">Bity na sekundę</string>
+    <string name="show_network_traffic_byte">Bajty na sekundę</string>
+    <string name="show_network_traffic_500">500 ms</string>
+    <string name="show_network_traffic_1000">1000 ms</string>
+    <string name="show_network_traffic_1500">1500 ms</string>
+    <string name="show_network_traffic_2000">2000 ms</string>
+
+    <!-- Carrier label -->
+    <string name="notification_carrier_label_title">Niestandardowa etykieta</string>
+    <string name="notification_custom_carrier_label_title">Niestandardowa etykieta</string>
+    <string name="notification_custom_carrier_label_explain">Napisz nową etykietę. Pozostawienie pustego pola ustawi oryginalną etykietę.</string>
+    <string name="notification_custom_carrier_label_notset">Niestandardowa etykieta nie została ustawiona</string>
+
+    <!-- Float Recent -->
+    <string name="float_recent_tile">Tryb okienkowy dla recent</string>
+    <string name="float_recent_summary">Włącz lub wyłącz tryb okienkowy dla recent</string>
+
+    <!-- Float Notification -->
+    <string name="float_notification_tile">Tryb okienkowy dla powiadomień</string>
+    <string name="float_notification_summary">Włącz lub wyłącz tryb okienkowy dla powiadomień</string>
+
+    <!-- Smooth Progress Bar -->
+    <string name="progressbar_title">Niestandardowy pasek postępu</string>
+    <string name="progressbar_mirror_title">Tryb lustrzany</string>
+    <string name="progressbar_reverse_title">Odwrócony</string>
+    <string name="progressbar_speed_title">Prędkość</string>
+    <string name="progressbar_width_title">Szerokość skoku</string>
+    <string name="progressbar_length_title">Długość separatora</string>
+    <string name="progressbar_count_title">Ilość fragmentów</string>
+    <string name="progressbar_color_1_title">Kolor 1</string>
+    <string name="progressbar_color_2_title">Kolor 2</string>
+    <string name="progressbar_color_3_title">Kolor 3</string>
+    <string name="progressbar_color_4_title">Kolor 4</string>
+    <string name="sample_progressbar_text">Pasek postępu : Podgląd</string>
+    <string name="progressbar_options">Ustawienia paska postępu</string>
+    <string name="progressbar_reset_message">Przywróć domyślne?</string>
+
+    <!-- Recents Ram Bar -->
+    <string name="ram_bar">Recents RAM bar</string>
+    <string name="ram_bar_note_title">Informacja</string>
+    <string name="ram_bar_note_summary">Ten pasek pokazuje aktualnie wykorzystywaną pamięc RAM. Należy pamiętać, że jeśli aplikacje są aktywne w pamięci podręcznej uruchamiają się znacznie szybciej.</string>
+    <string name="ram_bar_mode_title">Tryb recents RAM bar</string>
+    <string name="ram_bar_mode_dialog_title">Pokazuj recents RAM bar</string>
+    <string name="ram_bar_none">Brak</string>
+    <string name="ram_bar_apps">Aplikacje</string>
+    <string name="ram_bar_cache">Aplikacje i cache</string>
+    <string name="ram_bar_other">Aplikacje, cache i inne</string>
+    <string name="ram_bar_style_cat">Styl recents RAM bar</string>
+    <string name="ram_bar_color_app_mem_color">Kolor aplikacji</string>
+    <string name="ram_bar_color_cache_mem_color">Kolor cache</string>
+    <string name="ram_bar_color_total_mem_color">Kolor innych</string>
+    <string name="ram_bar_color_enabled">Włączono</string>
+    <string name="ram_bar_color_disabled">Wyłączono</string>
+    <string name="ram_bar_button_help">Pomoc</string>
+    <string name="ram_bar_button_reset">Zresetuj kolor</string>
+    <string name="ram_bar_reset">Resetuj</string>
+    <string name="ram_bar_reset_message">Zresetować styl RAM bar\'u na domyślny? ?</string>
+
+    <!-- Brightness control -->
+    <string name="status_bar_toggle_brightness">Sterowanie jasnością</string>
+    <string name="status_bar_toggle_brightness_summary">Dostosuj jasność, przeciągając palcem po pasku stanu</string>
+    <string name="status_bar_toggle_info">Jasność jest dostosowywana automatycznie</string>
+
+    <!-- Battery saver mode -->
+    <string name="network_lte">LTE (rekomendowane)</string>
+    <string name="network_4G">4G (rekomendowane)</string>
+    <string name="network_3G_only">Tylko 3G</string>
+    <string name="network_3G_auto">Automatycznie 2G/3G</string>
+    <string name="network_3G">Preferowane 2G/3G</string>
+    <string name="network_2G">Tylko 2G</string>
+    <string name="network_1x">1x</string>
+    <string name="network_global">Globalne</string>
+    <string name="battery_saver_action_undefined">Niezdefiniowane</string>
+    <string name="battery_saver_title">Zarządzanie zasilaniem</string>
+    <string name="pref_battery_saver_enable_title">Tryb oszczędzania baterii</string>
+    <string name="pref_battery_saver_enable_summary">Włącz narzędzie do zarządzania zużyciem baterii na urządzeniu, aby przedłużyć żywotność baterii</string>
+    <string name="pref_battery_saver_enable_no_mobiledata_summary">Spowoduje to automatyczne zarządzanie baterii na te zdefiniowane przez użytkownika</string>
+    <string name="pref_battery_saver_normal_mode_title">Normalny tryb sieci</string>
+    <string name="pref_battery_saver_power_saving_mode_title">Tryb sieci z włączonym oszczędzaniem energii</string>
+    <string name="pref_battery_saver_screen_off_title">Oszczędzanie w trybie gotowości</string>
+    <string name="pref_battery_saver_screen_off_summary">Aktywuj oszczędzanie energii, gdy telefon jest w trybie gotowości (wyłączony ekran)</string>
+    <string name="pref_battery_saver_ignore_locked_title">Ignoruj, gdy zablokowany...</string>
+    <string name="pref_battery_saver_ignore_locked_summary">Gdy włączy się ekran, oszczędzanie enerii nie zostanie wyłączone, dopóki blokada klawiatury nie zostanie odblokowana</string>
+    <string name="pref_battery_saver_mode_change_delay_title">Wybierz tryb opóźnienia</string>
+    <string name="pref_battery_saver_mode_change_delay_summary">Opóźniona zmiana trybu oszczędzania baterii przez określoną liczbę sekund</string>
+    <string name="pref_battery_saver_battery_title">Tryb słabej baterii</string>
+    <string name="pref_battery_saver_battery_summary">Aktywuj oszczędzanie baterii, gdy poziom baterii jest niski</string>
+    <string name="pref_battery_saver_mode_battery_level_title">Poziom baterii</string>
+    <string name="pref_battery_saver_mode_battery_level_summary">Aktywuj, gdy poziom baterii jest poniżej...</string>
+    <string name="pref_battery_saver_bluetooth_title">Wyłączanie bluetooth</string>
+    <string name="pref_battery_saver_bluetooth_summary">Wyłączy bluetooth, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_data_title">Wył. kom. trans. danych</string>
+    <string name="pref_battery_saver_data_summary">Wyłączy komórkową transmisję danych, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_location_title">Wyłączanie modułu GPS</string>
+    <string name="pref_battery_saver_location_summary">Wyłączy moduł GPS, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_wifi_title">Wyłączanie sieci Wi-Fi</string>
+    <string name="pref_battery_saver_wifi_summary">Wyłączy sieć Wi-Fi, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_led_title">Wyłączanie diody LED</string>
+    <string name="pref_battery_saver_led_summary">Wyłączy diodę LED, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_vibrate_title">Wyłączanie wibracji</string>
+    <string name="pref_battery_saver_vibrate_summary">Wyłączy wibracje, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_brightness_title">Jasność ekranu</string>
+    <string name="pref_battery_saver_brightness_summary">Zmień jasność ekranu, gdy poziom baterii jest niski</string>
+    <string name="pref_battery_saver_mode_brightness_level_title">Poziom jasności</string>
+    <string name="pref_battery_saver_mode_brightness_level_summary">Zmiana poziomu jasności, gdy oszczędzanie włączone</string>
+    <string name="pref_battery_saver_cpu_title">Tryb oszczędzania energii przez CPU</string>
+    <string name="pref_battery_saver_cpu_summary">Automatycznie ustawi zdefiniowane przez użytkownika maksymalne taktowanie procesora, gdy oszczędzanie baterii zostanie uruchomione</string>
+    <string name="battery_saver_mode_current_speed">Aktualna prędkość</string>
+    <string name="battery_saver_mode_current_max">Maksymalna prędkość:  </string>
+    <string name="battery_saver_mode_cpu_info_list_header">Status rdzeni</string>
+    <string name="battery_saver_mode_cpu_speed_header">Limit rdzenia</string>
+    <string name="battery_saver_mode_core_offline">Nieaktywny</string>
+    <string name="battery_saver_mode_core">Rdzeń</string>
+    <string name="battery_saver_cpu_mode_title">Aktywuj oszczędzanie baterii przez CPU</string>
+    <string name="pref_battery_saver_cpu_warning_title">Ostrzeżenie:</string>
+    <string name="pref_battery_saver_cpu_warning_summary">Nie możemy zagwarantować, że będzie działać to prawidłowo na Twoim urządzeniu!</string>
+    <string name="pref_battery_saver_network_title">Inteligentna zmiana sieci</string>
+    <string name="pref_battery_saver_network_summary">Umożliwia zmianę sieci do trybu normalnego w określonym przedziale czasu po wyłączeniu ekranu i włączeniu trybu oszczędzania energii</string>
+    <string name="pref_battery_saver_nosignal_title">Inteligenty sygnał</string>
+    <string name="pref_battery_saver_nosignal_summary">Aktywuj oszczędzanie energii, gdy telefon nie jest połączony z siecią powyżej 5 minut</string>
+    <string name="pref_battery_saver_sync_title">Wyłączanie synchronizacji</string>
+    <string name="pref_battery_saver_sync_summary">Wyłączy synchronizację, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_killall_title">Zabijanie wszystkich zadań</string>
+    <string name="pref_battery_saver_killall_summary">Wyłączy wszystkie zadania w tle, gdy oszczędzanie baterii jest włączone</string>
+    <string name="pref_battery_saver_toast_title">Powiadomienia toast</string>
+    <string name="pref_battery_saver_toast_summary">Pozwól pokazywać powiadomienia toast, kiedy tryb oszczędności baterii zmienia ustawienia urządzenia</string>
+    <string name="battery_saver_battery_title">Opcje baterii</string>
+    <string name="battery_saver_radio_title">Opcje radia</string>
+    <string name="battery_saver_network_title">Inne ustawienia trans. danych</string>
+    <string name="battery_saver_network_gsm_title">Sieci GSM</string>
+    <string name="battery_saver_network_cdma_title">Sieci CDMA</string>
+    <string name="battery_saver_system_title">Opcje systemowe</string>
+    <string name="data_usage_enable_batterysaver">Oszczędzanie baterii</string>
+
+    <string name="emulate_menu_key_title">Emulowanie sprzętowego klawisza menu</string>
+    <string name="emulate_menu_key_summary">Ukrywa 3 kropki paska nawigacyjnego w aplikacjach. Wymaga restartu aplikacji</string>
+
+    <string name="force_show_overflow_menu_title">Show overflow menu</string>
+    <string name="force_show_overflow_menu_summary">Force show the three-dot overflow menu in applications. Require restart of application</string>
+
+    <!-- Blacklist preferences -->
+    <string name="blacklist_title">Czarna lista</string>
+    <string name="blacklist_edit_dialog_title">Edytuj czarną listę</string>
+    <string name="blacklist_prefs">Ustawienia</string>
+    <string name="blacklist_button_delete">Usuń</string>
+    <string name="blacklist_empty_text">Nie masz żadnych numerów na czarnej liście. Dodaj numer dotykając przycisk (+).</string>
+    <string name="blacklist_disabled_empty_text">Aby dodać numery do czarnej listy połączeń i/lub wiadomości, włącz czarną listę.</string>
+    <string name="blacklist_summary_disabled">Wyłączona</string>
+    <string name="blacklist_summary">Przychodzące połączenia i wiadomości z numerów na czarnej liście będą zablokowane</string>
+    <string name="blacklist_notify">Pokaż powiadomienia</string>
+    <string name="blacklist_private_numbers_title">Prywatne numery</string>
+    <string name="blacklist_private_numbers_summary_disabled">Nie blokuj połączeń z numerów prywatnych</string>
+    <string name="blacklist_private_numbers_summary">Blokuj przychodzące <xliff:g id="type">%s</xliff:g> z numerów prywatnych</string>
+    <string name="blacklist_unknown_numbers_title">Nieznane numery</string>
+    <string name="blacklist_unknown_numbers_summary_disabled">Nie blokuj połączeń lub wiadomości z numerów które nie są na liście kontaktów</string>
+    <string name="blacklist_unknown_numbers_summary">Blokuj przychodzące <xliff:g id="type">%s</xliff:g> z numerów które nie są na liście kontaktów</string>
+    <string name="blacklist_summary_type_calls_only">połączenia</string>
+    <string name="blacklist_summary_type_messages_only">wiadomości</string>
+    <string name="blacklist_summary_type_calls_and_messages">połączenia i wiadomości</string>
+    <string name="blacklist_regex_title">Użyj symboli wieloznacznych</string>
+    <string name="blacklist_regex_summary">Użyj . i * jako zamiennika dowolnego ciągu powtórzeń. Np. 123.* blokuje numery zaczynające się od 123, a .*123.* blokuje numery zawierające 123</string>
+    <string name="blacklist_policy_block_calls">Blokuj połączenia przychodzące</string>
+    <string name="blacklist_policy_block_messages">Blokuj wiadomości przychodzące</string>
+
+    <!-- Blacklist management -->
+    <string name="add_blacklist_number">Dodaj numer</string>
+    <string name="remove_blacklist_number_title">Usuń numer</string>
+    <string name="remove_blacklist_entry">Czy chcesz usunąć ten wpis z czarnej listy?</string>
+    <string name="select_contact">Wybierz kontakt</string>
+
+    <!-- Quick unlock -->
+    <string name="lockscreen_quick_unlock_control_title">Szybkie odblokowanie</string>
+    <string name="lockscreen_quick_unlock_control_summary">Odblokuj automatycznie kiedy PIN/hasło zostało wprowadzone poprawnie</string>
+
+    <!-- Basic Numbers -->
+    <string name="two">Dwa</string>
+    <string name="three">Trzy</string>
+    <string name="four">Cztery</string>
+    <string name="five">Pięć</string>
+    <string name="six">Sześć</string>
+
+    <!-- Vibration multiplier -->
+    <string name="minimum_vibration_duration">Minimalny czas wibracji</string>
+    <string name="vibrator_multiplier_title">Mnożnik wibracji</string>
+    <string name="default_string">Domyślny</string>
+    <string name="vibration_header_option">Wibracje</string>
+    
+    <!-- Volume Steps -->
+    <string name="volume_steps_60">60</string>
+    <string name="volume_steps_45">45</string>
+    <string name="volume_steps_30">30</string>
+    <string name="volume_steps_15">15</string>
+    <string name="volume_steps_7">7</string>
+    <string name="volume_steps_5">5</string>
+    <string name="volume_steps_title">Stopnie głośności</string>
+    <string name="volume_steps_alarm_title">Alarm</string>
+    <string name="volume_steps_dtmf_title">DTMF</string>
+    <string name="volume_steps_music_title">Muzyka</string>
+    <string name="volume_steps_notification_title">Powiadomienia</string>
+    <string name="volume_steps_ring_title">Dzwonek</string>
+    <string name="volume_steps_system_title">System</string>
+    <string name="volume_steps_voice_call_title">Połączenie głosowe</string>
+
+    <!-- Second Clock -->
+    <string name="clock_use_second">Sekundy w zegarze</string>
+    <string name="clock_use_second_summary">Pokazuj sekundy w zegarze</string>
+
+    <!-- Quiet Hours Days -->
+    <string name="quiet_hours_daysOfWeek">Dni tygodnia</string>
+    <string name="quiet_hours_monday">Poniedziałek</string>
+    <string name="quiet_hours_tuesday">Wtorek</string>
+    <string name="quiet_hours_wednesday">Środa</string>
+    <string name="quiet_hours_thursday">Czwartek</string>
+    <string name="quiet_hours_friday">Piątek</string>
+    <string name="quiet_hours_saturday">Sobota</string>
+    <string name="quiet_hours_sunday">Niedziela</string>
+    
+</resources>

@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+ * Not a Contribution.
  * Copyright (C) 2009 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,6 +45,7 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.telephony.MSimTelephonyManager;
 
 import com.android.internal.telephony.SmsApplication;
 import com.android.internal.telephony.SmsApplication.SmsApplicationData;
@@ -66,8 +69,13 @@ public class WirelessSettings extends RestrictedSettingsFragment
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
     private static final String KEY_MANAGE_MOBILE_PLAN = "manage_mobile_plan";
     private static final String KEY_SMS_APPLICATION = "sms_application";
+    private static final String KEY_VOICE_PLUS_ACCOUNT = "voice_plus";
     private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
+
+    private static final String GOOGLE_VOICE_PACKAGE = "com.google.android.apps.googlevoice";
+    private static final ComponentName VOICE_PLUS_SETUP =
+            new ComponentName("org.cyanogenmod.voiceplus", "org.cyanogenmod.voiceplus.VoicePlusSetup");
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -109,6 +117,11 @@ public class WirelessSettings extends RestrictedSettingsFragment
             return true;
         } else if (preference == findPreference(KEY_MANAGE_MOBILE_PLAN)) {
             onManageMobilePlanClick();
+        } else if (preference == findPreference(KEY_VOICE_PLUS_ACCOUNT)) {
+            Intent chooseVoicePlusAccount = new Intent();
+            chooseVoicePlusAccount.setComponent(VOICE_PLUS_SETUP);
+            chooseVoicePlusAccount.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(chooseVoicePlusAccount);
         }
         // Let the intents be launched by the Preference manager
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -247,7 +260,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
 
     private boolean isSmsSupported() {
         // Some tablet has sim card but could not do telephony operations. Skip those.
-        return (mTm.getPhoneType() != TelephonyManager.PHONE_TYPE_NONE);
+        return mTm.isSmsCapable();
     }
 
     @Override
@@ -267,6 +280,23 @@ public class WirelessSettings extends RestrictedSettingsFragment
 
         final Activity activity = getActivity();
         mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
+
+        if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+            // Mobile Networks menu will traverse to Select Subscription menu.
+            PreferenceScreen manageSub =
+                    (PreferenceScreen) findPreference(KEY_MOBILE_NETWORK_SETTINGS);
+
+            if (manageSub != null) {
+                Intent intent = manageSub.getIntent();
+                intent.setClassName("com.android.phone",
+                                    "com.android.phone.SelectSubscription");
+                intent.putExtra(SelectSubscription.PACKAGE,
+                                    "com.android.phone");
+                intent.putExtra(SelectSubscription.TARGET_CLASS,
+                                "com.android.phone.MSimMobileNetworkSubSettings");
+            }
+        }
+
         CheckBoxPreference nfc = (CheckBoxPreference) findPreference(KEY_TOGGLE_NFC);
         PreferenceScreen androidBeam = (PreferenceScreen) findPreference(KEY_ANDROID_BEAM_SETTINGS);
         CheckBoxPreference nsd = (CheckBoxPreference) findPreference(KEY_TOGGLE_NSD);
@@ -351,6 +381,11 @@ public class WirelessSettings extends RestrictedSettingsFragment
             removePreference(KEY_SMS_APPLICATION);
         }
 
+        // Remove Voice+ option if Google Voice is not installed
+        if (!isPackageInstalled(GOOGLE_VOICE_PACKAGE)) {
+            removePreference(KEY_VOICE_PLUS_ACCOUNT);
+        }
+
         // Remove Airplane Mode settings if it's a stationary device such as a TV.
         if (getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEVISION)) {
             removePreference(KEY_TOGGLE_AIRPLANE);
@@ -376,18 +411,22 @@ public class WirelessSettings extends RestrictedSettingsFragment
         protectByRestrictions(KEY_TETHER_SETTINGS);
 
         // Enable link to CMAS app settings depending on the value in config.xml.
-        boolean isCellBroadcastAppLinkEnabled = this.getResources().getBoolean(
-                com.android.internal.R.bool.config_cellBroadcastAppLinks);
-        try {
-            if (isCellBroadcastAppLinkEnabled) {
-                PackageManager pm = getPackageManager();
-                if (pm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
-                        == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
-                    isCellBroadcastAppLinkEnabled = false;  // CMAS app disabled
+        PackageManager pm = getPackageManager();
+        // boolean hasPhoneFeatures = pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
+        boolean isCellBroadcastAppLinkEnabled = false;
+        if (isSmsSupported()) {
+            isCellBroadcastAppLinkEnabled = this.getResources().getBoolean(
+                    com.android.internal.R.bool.config_cellBroadcastAppLinks);
+            try {
+                if (isCellBroadcastAppLinkEnabled) {
+                    if (pm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
+                            == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+                        isCellBroadcastAppLinkEnabled = false;  // CMAS app disabled
+                    }
                 }
+            } catch (IllegalArgumentException ignored) {
+                isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
             }
-        } catch (IllegalArgumentException ignored) {
-            isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
         }
         if (isSecondaryUser || !isCellBroadcastAppLinkEnabled) {
             PreferenceScreen root = getPreferenceScreen();

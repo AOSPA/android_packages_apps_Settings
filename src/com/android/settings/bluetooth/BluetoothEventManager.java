@@ -288,6 +288,14 @@ final class BluetoothEventManager {
                         cachedDevice.setVisible(false);
                     }
                 }
+                if (cachedDevice.isRemovable()) {
+                    synchronized (mCallbacks) {
+                        for (BluetoothCallback callback : mCallbacks) {
+                            callback.onDeviceDeleted(cachedDevice);
+                        }
+                    }
+                    mDeviceManager.onDeviceDeleted(cachedDevice);
+                }
                 int reason = intent.getIntExtra(BluetoothDevice.EXTRA_REASON,
                         BluetoothDevice.ERROR);
 
@@ -306,6 +314,7 @@ final class BluetoothEventManager {
 
             switch(reason) {
             case BluetoothDevice.UNBOND_REASON_AUTH_FAILED:
+            case BluetoothDevice.UNBOND_REASON_REMOVED:
                 errorMsg = R.string.bluetooth_pairing_pin_error_message;
                 break;
             case BluetoothDevice.UNBOND_REASON_AUTH_REJECTED:
@@ -350,7 +359,9 @@ final class BluetoothEventManager {
             }
             int errorMsg = R.string.bluetooth_pairing_error_message;
             CachedBluetoothDevice cachedDevice = mDeviceManager.findDevice(device);
-            Utils.showError(context, cachedDevice.getName(), errorMsg);
+            if (context != null && cachedDevice != null) {
+                Utils.showError(context, cachedDevice.getName(), errorMsg);
+            }
         }
     }
 

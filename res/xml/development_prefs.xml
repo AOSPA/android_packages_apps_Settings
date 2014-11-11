@@ -35,7 +35,7 @@
     <CheckBoxPreference 
         android:key="keep_screen_on" 
         android:title="@string/keep_screen_on" 
-        android:summary="@string/keep_screen_on_summary"/>
+        android:summary="@string/keep_screen_on_summary_pa"/>
 
     <ListPreference
         android:key="select_runtime"
@@ -62,6 +62,11 @@
             android:fragment="com.android.settings.applications.ProcessStatsUi">
     </PreferenceScreen>
 
+    <CheckBoxPreference
+        android:key="enable_quickboot"
+        android:title="@string/enable_quickboot_title"
+        android:summary="@string/enable_quickboot_summary" />
+
     <PreferenceCategory android:key="debug_debugging_category"
             android:title="@string/debug_debugging_category">
 
@@ -74,8 +79,14 @@
 
         <CheckBoxPreference
             android:key="enable_adb"
-            android:title="@string/enable_adb"
-            android:summary="@string/enable_adb_summary"/>
+            android:title="@string/enable_adb_pa"
+            android:summary="@string/enable_adb_summary_pa"/>
+
+        <CheckBoxPreference
+            android:key="adb_notify"
+            android:title="@string/adb_notify"
+            android:summary="@string/adb_notify_summary"
+            android:dependency="enable_adb"/>
 
         <Preference android:key="clear_adb_keys"
                 android:title="@string/clear_adb_keys" />
@@ -126,6 +137,12 @@
             android:key="pointer_location"
             android:title="@string/pointer_location"
             android:summary="@string/pointer_location_summary"/>
+
+        <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+            android:key="edge_service_for_gestures"
+            android:title="@string/edge_gesture_service_title"
+            android:summary="@string/edge_gesture_service_summary"
+            android:defaultValue="0"/>
 
     </PreferenceCategory>
 
@@ -270,6 +287,11 @@
             android:title="@string/show_all_anrs"
             android:summary="@string/show_all_anrs_summary"/>
 
-     </PreferenceCategory>
+        <CheckBoxPreference
+            android:key="kill_app_longpress_back"
+            android:title="@string/kill_app_longpress_back"
+            android:summary="@string/kill_app_longpress_back_summary"/>
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

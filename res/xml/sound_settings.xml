@@ -29,9 +29,15 @@
     <Preference
             android:key="musicfx"
             android:title="@string/musicfx_title">
-        <intent android:targetPackage="com.android.musicfx"
+            <intent android:targetPackage="com.android.musicfx"
                 android:targetClass="com.android.musicfx.ControlPanelPicker" />
     </Preference>
+
+    <!-- Quiet hours -->
+    <PreferenceScreen
+            android:key="quiet_hours"
+            android:fragment="com.android.settings.cyanogenmod.QuietHours"
+            android:title="@string/quiet_hours_title" />
 
     <PreferenceCategory
             android:key="category_calls_and_notification"
@@ -56,6 +62,27 @@
         android:dialogTitle="@string/increasing_ring_title"
         android:persistent="false"
         android:streamType="ring" />
+
+    <PreferenceCategory
+        android:title="@string/vibration_header_option"/>
+
+    <com.android.settings.hardware.VibratorIntensity
+        android:key="vibration_intensity"
+        android:title="@string/vibrator_intensity_title"
+        android:dialogTitle="@string/vibrator_intensity_title"
+        android:persistent="false" />
+
+    <com.android.settings.crystalroms.SeekBarPreferenceVibration
+        android:key="vibration_duration"
+        android:title="@string/minimum_vibration_duration" />
+
+    <ListPreference
+        android:key="vibrator_multiplier"
+        android:persistent="false"
+        android:title="@string/vibrator_multiplier_title"
+        android:dialogTitle="@string/vibrator_multiplier_title"
+        android:entries="@array/vibration_multiplier_values"
+        android:entryValues="@array/vibration_multiplier_values" />
 
     <PreferenceCategory
             android:title="@string/sound_category_system_title"/>
@@ -95,16 +122,6 @@
             android:entries="@array/emergency_tone_entries"
             android:entryValues="@array/emergency_tone_values" />
 
-    <!-- Volume Rocker -->
-    <PreferenceCategory
-        android:title="@string/volume_buttons_category"/>
-
-    <CheckBoxPreference
-        android:key="volume_wake_screen"
-        android:title="@string/volume_wake_title"
-        android:summary="@string/volume_wake_summary"
-        android:defaultValue="false" />
-
     <!-- Dock -->
     <PreferenceCategory
         android:key="dock_category"
@@ -125,5 +142,15 @@
         android:key="dock_sounds"
         android:title="@string/dock_sounds_enable_title"
         android:defaultValue="false" />
+
+    <PreferenceCategory
+        android:title="@string/headset_category_title" >
+
+        <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+            android:key="headset_connect_player"
+            android:title="@string/headset_connect_player_title"
+            android:summary="@string/headset_connect_player_summary"
+            android:defaultValue="false" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

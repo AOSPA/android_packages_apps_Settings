@@ -35,6 +35,7 @@ import android.net.wifi.p2p.WifiP2pGroup;
 import android.net.wifi.p2p.WifiP2pGroupList;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.GroupInfoListener;
+import android.net.wifi.p2p.WifiP2pManager.PeerListListener;
 import android.net.wifi.p2p.WifiP2pManager.PersistentGroupInfoListener;
 import android.net.wifi.WpsInfo;
 import android.os.Bundle;
@@ -45,8 +46,10 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -62,18 +65,21 @@ import com.android.settings.SettingsPreferenceFragment;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Collection;
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
 
 /*
  * Displays Wi-fi p2p settings UI
  */
 public class WifiP2pSettings extends SettingsPreferenceFragment
-        implements PersistentGroupInfoListener, GroupInfoListener {
+        implements PeerListListener, PersistentGroupInfoListener, GroupInfoListener, TextWatcher {
 
     private static final String TAG = "WifiP2pSettings";
     private static final boolean DBG = false;
     private static final int MENU_ID_SEARCH = Menu.FIRST;
     private static final int MENU_ID_RENAME = Menu.FIRST + 1;
 
+    private static final int DEVICE_NAME_MAX_LENGTH_BYTES = 30;
     private final IntentFilter mIntentFilter = new IntentFilter();
     private WifiP2pManager mWifiP2pManager;
     private WifiP2pManager.Channel mChannel;
@@ -459,6 +465,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
                 mDeviceNameText.setText(mThisDevice.deviceName);
                 mDeviceNameText.setSelection(0, mThisDevice.deviceName.length());
             }
+            mDeviceNameText.addTextChangedListener(this);
             mSavedDeviceName = null;
             AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.wifi_p2p_menu_rename)
@@ -493,6 +500,19 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         }
     }
 
+    public void onPeersAvailable(WifiP2pDeviceList peers) {
+        mPeersGroup.removeAll();
+
+        mPeers = peers;
+        mConnectedDevices = 0;
+        for (WifiP2pDevice peer: peers.getDeviceList()) {
+            if (DBG) Log.d(TAG, " peer " + peer);
+            mPeersGroup.addPreference(new WifiP2pPeer(getActivity(), peer));
+            if (peer.status == WifiP2pDevice.CONNECTED) mConnectedDevices++;
+        }
+        if (DBG) Log.d(TAG, " mConnectedDevices " + mConnectedDevices);
+    }
+
     private void handlePeersChanged() {
         mPeersGroup.removeAll();
 
@@ -505,11 +525,44 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
         }
         if (DBG) Log.d(TAG, " mConnectedDevices " + mConnectedDevices);
     }
-
+    private String utfToString(String utf) {
+        int value;
+        byte[] utfBytes = utf.getBytes();
+        ByteBuffer decodedBytes = ByteBuffer.allocate(utf.length());
+        int size = 0;
+        for (int i = 0; i < utfBytes.length; i++) {
+            if ((utfBytes[i] == '\\') && (utfBytes[i + 1] == 'x')) {
+               value = Integer.parseInt(utf.substring(i + 2, i + 4), 16);
+               decodedBytes.put((byte) value);
+               i = i + 3;
+            } else {
+               decodedBytes.put(utfBytes[i]);
+            }
+            size++;
+        }
+        try {
+            ByteBuffer sink = ByteBuffer.allocate(size);
+            for (int j = 0; j < size; j++) {
+                sink.put(decodedBytes.get(j));
+            }
+            return new String(sink.array(), "UTF-8");
+        } catch (UnsupportedEncodingException uee) {
+            uee.printStackTrace();
+        }
+        return null;
+    }
     public void onPersistentGroupInfoAvailable(WifiP2pGroupList groups) {
+        CharSequence cs = "\\x";
         mPersistentGroup.removeAll();
 
         for (WifiP2pGroup group: groups.getGroupList()) {
+            String networkName = group.getNetworkName();
+            if (networkName.contains(cs)){
+                String string = utfToString(networkName);
+                if (string != null){
+                    group.setNetworkName(string);
+                }
+            }
             if (DBG) Log.d(TAG, " group " + group);
             WifiP2pPersistentGroup wppg = new WifiP2pPersistentGroup(getActivity(), group);
             mPersistentGroup.addPreference(wppg);
@@ -548,6 +601,8 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
 
             mPersistentGroup.setEnabled(true);
             preferenceScreen.addPreference(mPersistentGroup);
+            /* Request latest set of peers */
+            mWifiP2pManager.requestPeers(mChannel, WifiP2pSettings.this);
         }
     }
 
@@ -558,7 +613,7 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
     }
 
     private void startSearch() {
-        if (mWifiP2pManager != null && !mWifiP2pSearching) {
+        if (mWifiP2pManager != null  && !mWifiP2pSearching) {
             mWifiP2pManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
                 public void onSuccess() {
                 }
@@ -581,5 +636,33 @@ public class WifiP2pSettings extends SettingsPreferenceFragment
             mThisDevicePref.setEnabled(true);
             mThisDevicePref.setSelectable(false);
         }
+    }
+
+    // If the device name is beyond 30 bytes, limit the input.
+    private void LimitDeviceNameLength(Editable editable) {
+        int selectionEnd = mDeviceNameText.getSelectionEnd();
+        int strLen = mDeviceNameText.getText().toString().getBytes().length;
+        if (DBG)
+            Log.d(TAG, "Device name bytes length is : " + strLen);
+        if (strLen > DEVICE_NAME_MAX_LENGTH_BYTES) {
+            editable.delete(selectionEnd - 1, selectionEnd);
+            Toast.makeText(getActivity(), R.string.p2p_device_name_input_limit,
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+        if (mDeviceNameText.getEditableText() == editable) {
+            LimitDeviceNameLength(editable);
+        }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+    }
+
+    @Override
+    public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
     }
 }

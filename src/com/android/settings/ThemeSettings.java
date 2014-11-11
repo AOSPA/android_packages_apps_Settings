@@ -25,6 +25,6 @@ public class ThemeSettings extends PreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.theme_settings);
+        addPreferencesFromResource(R.xml.themes_settings);
     }
 }

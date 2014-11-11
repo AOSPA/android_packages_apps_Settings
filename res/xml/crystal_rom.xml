@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="crystal_rom"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <PreferenceCategory
+        android:key="cr_settings"
+        android:title="@string/crystal_title" >
+
+        <PreferenceScreen
+            android:key="status_bar_menu"
+            android:title="@string/status_bar_title" >
+
+            <!-- BatteryBar Settings -->
+            <PreferenceScreen
+                android:key="batterybar_menu"
+                android:fragment="com.android.settings.crystalroms.BatteryBarMenu"
+                android:title="@string/cat_battery_bar" />
+
+            <!-- Clock Settings -->
+            <PreferenceScreen
+                android:fragment="com.android.settings.crystalroms.StatusBarClockStyle"
+                android:key="clock_style_pref"
+                android:title="@string/status_bar_clock" />
+
+            <!-- Network Traffic -->
+            <PreferenceScreen
+                android:fragment="com.android.settings.crystalroms.StatusBarNetworkTraffic"
+                android:key="status_bar_network_traffic"
+                android:title="@string/network_traffic_title" />
+        </PreferenceScreen>
+
+        <!-- Lockscreen Settings -->
+        <PreferenceScreen
+            android:title="@string/lockscreen_settings_title"
+            android:fragment="com.android.settings.crystalroms.LockscreenSettings" />
+
+        <!-- Animation -->
+        <PreferenceScreen
+            android:title="@string/interface_settings_animation_title"
+            android:fragment="com.android.settings.crystalroms.Animation" />
+
+        <!-- Wakelock Blocker -->
+        <PreferenceScreen
+            android:id="@+id/wakelock_blocker"
+            android:title="@string/wakelock_blocker"
+            android:fragment="com.android.settings.crystalroms.WakeLockBlocker" />
+
+        <!-- Recent Apps Settings -->
+        <PreferenceScreen
+            android:key="recents_apps_panel"
+            android:fragment="com.android.settings.crystalroms.RecentsPanel"
+            android:title="@string/recent_apps_panel_title" />
+
+        <!-- Progress Bar -->
+        <PreferenceScreen
+            android:key="progressbar_settings"
+            android:fragment="com.android.settings.crystalroms.ProgressBar"
+            android:title="@string/progressbar_title" />
+
+        <!-- Volume Steps -->
+        <PreferenceScreen
+            android:key="volume_steps"
+            android:fragment="com.android.settings.crystalroms.VolumeSteps"
+            android:title="@string/volume_steps_title" />
+    </PreferenceCategory>
+
+    <!-- NavBar Settings -->
+    <PreferenceCategory android:title="@string/navbar_title" >
+    <CheckBoxPreference
+        android:key="enable_navbar"
+        android:title="@string/enable_navbar"
+        android:summary="@string/enable_navbar_reboot"
+        android:defaultValue="false" />
+    <ListPreference
+        android:key="nav_buttons_height"
+        android:dialogTitle="@string/navigation_bar_height"
+        android:title="@string/navigation_bar_height"
+        android:entries="@array/nav_buttons_height_entries"
+        android:entryValues="@array/nav_buttons_height_values"
+        android:defaultValue="36"
+        android:persistent="false" />
+    </PreferenceCategory>
+
+    <!-- Other Settings -->
+    <PreferenceCategory android:title="@string/other_title" >
+    <PreferenceScreen android:key="changelog"
+        android:title="@string/changelog_title">
+    <intent android:action="android.intent.action.MAIN"
+        android:targetPackage="com.android.settings"
+        android:targetClass="com.android.settings.crystalroms.ChangeLog" />
+    </PreferenceScreen>
+
+    <CheckBoxPreference
+        android:key="pref_float_notification"
+        android:title="@string/float_notification_tile"
+        android:summary="@string/float_notification_summary"
+        android:defaultValue="false" />
+
+    <CheckBoxPreference
+        android:key="pref_float_recent"
+        android:title="@string/float_recent_tile"
+        android:summary="@string/float_recent_summary"
+        android:defaultValue="false" />
+        
+    <CheckBoxPreference
+        android:key="pref_disable_boot_animation"
+        android:title="@string/pref_disable_boot_animation_title"
+        android:summary="@string/pref_disable_boot_animation_summary"
+        android:defaultValue="false" />
+
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="status_bar_notif_count"
+        android:title="@string/status_bar_notif_count_title"
+        android:summary="@string/status_bar_notif_count_summary"
+        android:defaultValue="false" />
+
+    <CheckBoxPreference
+        android:key="pref_force_highend_gfx"
+        android:title="@string/pref_force_highend_gfx_title"
+        android:summary="@string/pref_force_highend_gfx_summary" />
+    </PreferenceCategory>
+</PreferenceScreen>
+
