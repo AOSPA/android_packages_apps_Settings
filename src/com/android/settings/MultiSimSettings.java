@@ -174,7 +174,7 @@ public class MultiSimSettings extends PreferenceActivity implements DialogInterf
         MSimTelephonyManager tm = MSimTelephonyManager.getDefault();
         int i = 0;
         for (i = 0; i < MAX_SUBSCRIPTIONS; i++) {
-			String label = getFormattedSimName(this, i);
+			String label = MSimTelephonyManager.getFormattedSimName(this, i);
             entries[i] = summaries[i] = label;
             entriesPrompt[i] = summariesPrompt[i] = label;
             entryValues[i] = Integer.toString(i);
