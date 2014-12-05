@@ -66,6 +66,7 @@ import android.widget.TextView;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
+import dalvik.system.VMRuntime;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -237,8 +238,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private PreferenceScreen mProcessStats;
 
-    private CheckBoxPreference mAdvancedReboot;
-    private CheckBoxPreference mHeadsUpTicker;
+    private SwitchPreference mAdvancedReboot;
+    private SwitchPreference mHeadsUpTicker;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
 
@@ -305,8 +306,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mDebugViewAttributes = findAndInitSwitchPref(DEBUG_VIEW_ATTRIBUTES);
         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
         mAllPrefs.add(mPassword);
-        mAdvancedReboot = findAndInitCheckboxPref(ADVANCED_REBOOT_KEY);
-        mHeadsUpTicker = findAndInitCheckboxPref(HEADS_UP_TICKER_EXP_KEY);
+        mAdvancedReboot = findAndInitSwitchPref(ADVANCED_REBOOT_KEY);
+        mHeadsUpTicker = findAndInitSwitchPref(HEADS_UP_TICKER_EXP_KEY);
 
 
         if (!android.os.Process.myUserHandle().equals(UserHandle.OWNER)) {
@@ -596,11 +597,11 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private void resetDangerousOptions() {
         mDontPokeProperties = true;
-        for (int i=0; i< mResetSwitchPrefs.size(); i++) {
-            SwitchPreference cb = mResetSwitchPrefs.get(i);
-            if (cb.isChecked()) {
-                cb.setChecked(false);
-                onPreferenceTreeClick(null, cb);
+        for (int i=0; i<mResetSwitchPrefs.size(); i++) {
+            SwitchPreference sp = mResetSwitchPrefs.get(i);
+            if (sp.isChecked()) {
+                sp.setChecked(false);
+                onPreferenceTreeClick(null, sp);
             }
         }
         resetDebuggerOptions();
@@ -1052,9 +1053,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 mUseAwesomePlayer, SystemProperties.getBoolean(USE_AWESOMEPLAYER_PROPERTY, false));
     }
 
-    private void writeUseAwesomePlayerOptions() {
+    private void writeUseNuplayerOptions() {
         SystemProperties.set(
-                USE_AWESOMEPLAYER_PROPERTY, mUseAwesomePlayer.isChecked() ? "true" : "false");
+                USE_AWESOMEPLAYER_PROPERTY, mUseNuplayer.isChecked() ? "false" : "true");
         pokeSystemProperties();
     }
 
