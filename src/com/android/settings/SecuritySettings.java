@@ -99,11 +99,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
     private static final String KEY_TRUST_AGENT = "trust_agent";
     private static final String KEY_SCREEN_PINNING = "screen_pinning_settings";
+    private static final String KEY_QUICK_UNLOCK = "quick_unlock";
 
     // These switch preferences need special handling since they're not all stored in Settings.
     private static final String SWITCH_PREFERENCE_KEYS[] = { KEY_LOCK_AFTER_TIMEOUT,
             KEY_LOCK_ENABLED, KEY_VISIBLE_PATTERN, KEY_BIOMETRIC_WEAK_LIVELINESS,
-            KEY_POWER_INSTANTLY_LOCKS, KEY_SHOW_PASSWORD, KEY_TOGGLE_INSTALL_APPLICATIONS };
+            KEY_POWER_INSTANTLY_LOCKS, KEY_SHOW_PASSWORD, KEY_TOGGLE_INSTALL_APPLICATIONS,
+            KEY_QUICK_UNLOCK };
 
     // Only allow one trust agent on the platform.
     private static final boolean ONLY_ONE_TRUST_AGENT = true;
@@ -125,6 +127,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private SwitchPreference mToggleAppInstallation;
     private DialogInterface mWarnInstallApps;
     private SwitchPreference mPowerButtonInstantlyLocks;
+    private SwitchPreference mQuickUnlock;
 
     private boolean mIsPrimary;
 
@@ -279,6 +282,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     trustAgentPreference.getTitle()));
         }
 
+        mQuickUnlock = (SwitchPreference) root.findPreference(KEY_QUICK_UNLOCK);
+        if (mQuickUnlock != null) {
+            mQuickUnlock.setChecked(isQuickUnlockEnabled());
+        }
+
         // don't display visible pattern if biometric and backup is not pattern
         if (resid == R.xml.security_settings_biometric_weak &&
                 mLockPatternUtils.getKeyguardStoredPasswordQuality() !=
@@ -396,6 +404,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private boolean isNonMarketAppsAllowed() {
         return Settings.Global.getInt(getContentResolver(),
                                       Settings.Global.INSTALL_NON_MARKET_APPS, 0) > 0;
+    }
+
+    private boolean isQuickUnlockEnabled() {
+        // on by default
+        return Settings.System.getIntForUser(getContentResolver(),
+                Settings.System.QUICK_UNLOCK_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
     }
 
     private void setNonMarketAppsAllowed(boolean enabled) {
@@ -535,6 +549,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mPowerButtonInstantlyLocks.setChecked(lockPatternUtils.getPowerButtonInstantlyLocks());
         }
 
+        if (mQuickUnlock != null) {
+            mQuickUnlock.setChecked(isQuickUnlockEnabled());
+        }
+
         if (mShowPassword != null) {
             mShowPassword.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
@@ -659,6 +677,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
             } else {
                 setNonMarketAppsAllowed(false);
             }
+        } else if (KEY_QUICK_UNLOCK.equals(key)) {
+            Settings.System.putIntForUser(getContentResolver(), Settings.System.QUICK_UNLOCK_ENABLED,
+                    ((Boolean) value) ? 1 : 0, UserHandle.USER_CURRENT);
         }
         return result;
     }
