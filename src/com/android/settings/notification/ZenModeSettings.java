@@ -34,6 +34,7 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.os.ServiceManager;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -41,6 +42,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
+import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.Condition;
 import android.service.notification.ZenModeConfig;
@@ -83,6 +85,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private static final String KEY_AUTOMATION = "automation";
     private static final String KEY_ENTRY = "entry";
     private static final String KEY_CONDITION_PROVIDERS = "manage_condition_providers";
+
+    private static final String KEY_HEADS_UP_TOGGLE = "zen_heads_up_toggle";
 
     private static final SettingPrefWithCallback PREF_ZEN_MODE = new SettingPrefWithCallback(
             SettingPref.TYPE_GLOBAL, KEY_ZEN_MODE, Global.ZEN_MODE, Global.ZEN_MODE_OFF,
@@ -142,6 +146,8 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
     private Preference mConditionProviders;
     private AlertDialog mDialog;
 
+    private SwitchPreference mNotificationsAsHeadsUp;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,6 +156,20 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
 
         addPreferencesFromResource(R.xml.zen_mode_settings);
         final PreferenceScreen root = getPreferenceScreen();
+
+        mNotificationsAsHeadsUp = (SwitchPreference) root
+                .findPreference(KEY_HEADS_UP_TOGGLE);
+        mNotificationsAsHeadsUp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return true;
+                final boolean val = (Boolean) newValue;
+                final boolean current = getUserHeadsUpState();
+                if (val == current) return true;
+                setUserHeadsUpState(val ? 1 : 0);
+                return true;
+            }
+        });
 
         mConfig = getZenModeConfig();
         if (DEBUG) Log.d(TAG, "Loaded mConfig=" + mConfig);
@@ -415,6 +435,7 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
         mDisableListeners = false;
         refreshAutomationSection();
         updateEndSummary();
+        mNotificationsAsHeadsUp.setChecked(getUserHeadsUpState());
     }
 
     private void updateStarredEnabled() {
@@ -465,6 +486,19 @@ public class ZenModeSettings extends SettingsPreferenceFragment implements Index
             Log.w(TAG, "Error calling getAutomaticZenModeConditions", e);
             return null;
         }
+    }
+
+    private boolean getUserHeadsUpState() {
+         return Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.HEADS_UP_USER_ENABLED,
+                Settings.System.HEADS_UP_USER_ON,
+                UserHandle.USER_CURRENT) != 0;
+    }
+
+    private void setUserHeadsUpState(int val) {
+         Settings.System.putIntForUser(mContext.getContentResolver(),
+                Settings.System.HEADS_UP_USER_ENABLED,
+                val, UserHandle.USER_CURRENT);
     }
 
     @Override

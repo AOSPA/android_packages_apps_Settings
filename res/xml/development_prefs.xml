@@ -65,6 +65,11 @@
         android:title="@string/advanced_reboot_title"
         android:summary="@string/advanced_reboot_summary" />
 
+    <CheckBoxPreference
+        android:key="heads_up_ticker_exp"
+        android:title="@string/heads_up_ticker_exp_title"
+        android:summary="@string/heads_up_ticker_exp_summary" />
+
     <PreferenceCategory android:key="debug_debugging_category"
             android:title="@string/debug_debugging_category">
 
