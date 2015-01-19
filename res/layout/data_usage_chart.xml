@@ -43,8 +43,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start|bottom"
         settings:strokeColor="#00000000"
-        settings:fillColor="#ff009688"
-        settings:fillColorSecondary="#ff80cbc4"
+        settings:fillColor="@color/data_usage_chart_fillcolor"
+        settings:fillColorSecondary="@color/data_usage_chart_fillcolor_secondary"
         settings:safeRegion="3dp" />
 
     <com.android.settings.widget.ChartNetworkSeriesView
@@ -53,8 +53,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start|bottom"
         settings:strokeColor="#00000000"
-        settings:fillColor="#ff009688"
-        settings:fillColorSecondary="#ff009688"
+        settings:fillColor="@color/data_usage_chart_fillcolor"
+        settings:fillColorSecondary="@color/data_usage_chart_fillcolor"
         settings:safeRegion="3dp" />
 
     <com.android.settings.widget.ChartSweepView
