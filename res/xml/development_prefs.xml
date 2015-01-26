@@ -33,6 +33,11 @@
     </PreferenceScreen>
 
     <CheckBoxPreference
+        android:key="advanced_reboot"
+        android:title="@string/advanced_reboot_title"
+        android:summary="@string/advanced_reboot_summary" />
+
+    <CheckBoxPreference
         android:key="keep_screen_on"
         android:title="@string/keep_screen_on"
         android:summary="@string/keep_screen_on_summary"/>
@@ -59,11 +64,6 @@
             android:summary="@string/process_stats_summary"
             android:fragment="com.android.settings.applications.ProcessStatsUi">
     </PreferenceScreen>
-
-    <CheckBoxPreference
-        android:key="advanced_reboot"
-        android:title="@string/advanced_reboot_title"
-        android:summary="@string/advanced_reboot_summary" />
 
     <CheckBoxPreference
         android:key="heads_up_ticker_exp"
