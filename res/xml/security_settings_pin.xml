@@ -48,6 +48,11 @@
             android:switchTextOff=""
             android:switchTextOn="" />
 
+        <SwitchPreference
+            android:key="disable_qs"
+            android:title="@string/secure_lockscreen_disable_qs"
+            android:summary="@string/secure_lockscreen_disable_qs_summary"/>
+
         <PreferenceScreen
             android:key="owner_info_settings"
             android:fragment="com.android.settings.OwnerInfoSettings"

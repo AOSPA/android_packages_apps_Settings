@@ -100,12 +100,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_TRUST_AGENT = "trust_agent";
     private static final String KEY_SCREEN_PINNING = "screen_pinning_settings";
     private static final String KEY_QUICK_UNLOCK = "quick_unlock";
+    private static final String KEY_DISABLE_QS = "disable_qs";
 
     // These switch preferences need special handling since they're not all stored in Settings.
     private static final String SWITCH_PREFERENCE_KEYS[] = { KEY_LOCK_AFTER_TIMEOUT,
             KEY_LOCK_ENABLED, KEY_VISIBLE_PATTERN, KEY_BIOMETRIC_WEAK_LIVELINESS,
             KEY_POWER_INSTANTLY_LOCKS, KEY_SHOW_PASSWORD, KEY_TOGGLE_INSTALL_APPLICATIONS,
-            KEY_QUICK_UNLOCK };
+            KEY_QUICK_UNLOCK, KEY_DISABLE_QS };
 
     // Only allow one trust agent on the platform.
     private static final boolean ONLY_ONE_TRUST_AGENT = true;
@@ -128,6 +129,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private DialogInterface mWarnInstallApps;
     private SwitchPreference mPowerButtonInstantlyLocks;
     private SwitchPreference mQuickUnlock;
+    private SwitchPreference mDisableQSOnSecureLS;
 
     private boolean mIsPrimary;
 
@@ -287,6 +289,15 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mQuickUnlock.setChecked(isQuickUnlockEnabled());
         }
 
+        if(mIsPrimary){
+            mDisableQSOnSecureLS = (SwitchPreference) root.findPreference(KEY_DISABLE_QS);
+            if (mDisableQSOnSecureLS != null) {
+                mDisableQSOnSecureLS.setChecked(isQSDisabled());
+            }
+        } else {
+            root.removePreference(root.findPreference(KEY_DISABLE_QS));
+        }
+
         // don't display visible pattern if biometric and backup is not pattern
         if (resid == R.xml.security_settings_biometric_weak &&
                 mLockPatternUtils.getKeyguardStoredPasswordQuality() !=
@@ -410,6 +421,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // on by default
         return Settings.System.getIntForUser(getContentResolver(),
                 Settings.System.QUICK_UNLOCK_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
+    }
+
+    private boolean isQSDisabled() {
+        // default disabled
+        return Settings.Global.getInt(getContentResolver(),
+                Settings.Global.DISABLE_QS_ON_SECURE_LS, 0) != 0;
     }
 
     private void setNonMarketAppsAllowed(boolean enabled) {
@@ -553,6 +570,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mQuickUnlock.setChecked(isQuickUnlockEnabled());
         }
 
+        if (mDisableQSOnSecureLS != null) {
+            mDisableQSOnSecureLS.setChecked(isQSDisabled());
+        }
+
         if (mShowPassword != null) {
             mShowPassword.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
@@ -680,6 +701,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } else if (KEY_QUICK_UNLOCK.equals(key)) {
             Settings.System.putIntForUser(getContentResolver(), Settings.System.QUICK_UNLOCK_ENABLED,
                     ((Boolean) value) ? 1 : 0, UserHandle.USER_CURRENT);
+        } else if (KEY_DISABLE_QS.equals(key)) {
+            Settings.Global.putInt(getContentResolver(), Settings.Global.DISABLE_QS_ON_SECURE_LS,
+                    ((Boolean) value) ? 1 : 0);
         }
         return result;
     }
