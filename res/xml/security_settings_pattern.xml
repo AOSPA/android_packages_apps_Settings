@@ -45,6 +45,11 @@
             android:key="power_button_instantly_locks"
             android:title="@string/lockpattern_settings_enable_power_button_instantly_locks"/>
 
+        <SwitchPreference
+            android:key="disable_qs"
+            android:title="@string/secure_lockscreen_disable_qs"
+            android:summary="@string/secure_lockscreen_disable_qs_summary"/>
+
         <PreferenceScreen
             android:fragment="com.android.settings.OwnerInfoSettings"
             android:key="owner_info_settings"
