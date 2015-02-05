@@ -26,6 +26,12 @@
             settings:keywords="@string/keywords_location_mode"
             android:summary="@string/location_mode_location_off_title" />
 
+        <SwitchPreference
+            android:key="qs_location_advanced"
+            android:title="@string/qs_advanced_location_title"
+            android:summary="@string/qs_advanced_location_summary"
+            android:defaultValue="false" />
+
         <PreferenceCategory
             android:key="recent_location_requests"
             android:title="@string/location_category_recent_location_requests" />
