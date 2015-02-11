@@ -57,11 +57,10 @@
                 android:title="@string/lift_to_wake_title"
                 android:persistent="false" />
 
-        <SwitchPreference
-                android:key="doze"
+        <PreferenceScreen
+                android:key="doze_fragment"
                 android:title="@string/doze_title"
-                android:summary="@string/doze_summary"
-                android:persistent="false" />
+                android:fragment="com.android.settings.paranoid.AmbientSettings" />
 
         <com.android.settings.WarnedListPreference
                 android:key="font_size"
