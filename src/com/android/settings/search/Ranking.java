@@ -46,6 +46,7 @@ import com.android.settings.voice.VoiceInputSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
+import com.android.settings.remix.BatteryStyleSettings;
 
 import java.util.HashMap;
 
@@ -75,7 +76,7 @@ public final class Ranking {
     public static final int RANK_PRINTING = 19;
     public static final int RANK_DEVELOPEMENT = 20;
     public static final int RANK_DEVICE_INFO = 21;
-
+    public static final int RANK_BATSTYLE = 22;
     public static final int RANK_UNDEFINED = -1;
     public static final int RANK_OTHERS = 1024;
     public static final int BASE_RANK_DEFAULT = 2048;
@@ -103,6 +104,8 @@ public final class Ranking {
 
         // Other wireless settinfs
         sRankMap.put(WirelessSettings.class.getName(), RANK_WIRELESS);
+
+        sRankMap.put(BatteryStyleSettings.class.getName(), RANK_BATSTYLE);
 
         // Home
         sRankMap.put(HomeSettings.class.getName(), RANK_HOME);

@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -25,18 +26,23 @@ import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Build;
 import android.os.Bundle;
+import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.preference.ListPreference;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import android.provider.Settings;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -44,6 +50,8 @@ import com.android.internal.os.PowerProfile;
 import com.android.settings.HelpUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+
+import com.android.settings.remix.BatteryStyleSettings;
 
 import java.util.List;
 
@@ -64,7 +72,11 @@ public class PowerUsageSummary extends PreferenceFragment {
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     private static final int MENU_STATS_REFRESH = Menu.FIRST + 1;
     private static final int MENU_BATTERY_SAVER = Menu.FIRST + 2;
-    private static final int MENU_HELP = Menu.FIRST + 3;
+    private static final int MENU_BATTERY_STYLE = Menu.FIRST + 3;
+    private static final int MENU_HELP = Menu.FIRST + 4;
+
+    private static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
+    private static final String STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
 
     private UserManager mUm;
 
@@ -79,6 +91,12 @@ public class PowerUsageSummary extends PreferenceFragment {
     private static final int MAX_ITEMS_TO_LIST = 10;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
     private static final int SECONDS_IN_HOUR = 60 * 60;
+
+    private ListPreference mStatusBarBattery;
+    private ListPreference mStatusBarBatteryShowPercent;
+
+    private int mbatteryStyle;
+    private int mbatteryShowPercent;
 
     private BatteryStatsHelper mStatsHelper;
 
@@ -188,11 +206,13 @@ public class PowerUsageSummary extends PreferenceFragment {
         MenuItem refresh = menu.add(0, MENU_STATS_REFRESH, 0, R.string.menu_stats_refresh)
                 .setIcon(com.android.internal.R.drawable.ic_menu_refresh)
                 .setAlphabeticShortcut('r');
-        refresh.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
-                MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        refresh.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
         MenuItem batterySaver = menu.add(0, MENU_BATTERY_SAVER, 0, R.string.battery_saver);
         batterySaver.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
+        MenuItem batteryStyle = menu.add(0, MENU_BATTERY_STYLE, 0, R.string.status_bar_battery_style_title);
+        batteryStyle.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
         String helpUrl;
         if (!TextUtils.isEmpty(helpUrl = getResources().getString(R.string.help_url_battery))) {
@@ -203,6 +223,8 @@ public class PowerUsageSummary extends PreferenceFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        ContentResolver resolver = getActivity().getContentResolver();
+        final SettingsActivity sa = (SettingsActivity) getActivity();
         switch (item.getItemId()) {
             case MENU_STATS_TYPE:
                 if (mStatsType == BatteryStats.STATS_SINCE_CHARGED) {
@@ -218,10 +240,14 @@ public class PowerUsageSummary extends PreferenceFragment {
                 mHandler.removeMessages(MSG_REFRESH_STATS);
                 return true;
             case MENU_BATTERY_SAVER:
-                final SettingsActivity sa = (SettingsActivity) getActivity();
                 sa.startPreferencePanel(BatterySaverSettings.class.getName(), null,
                         R.string.battery_saver, null, null, 0);
                 return true;
+            case MENU_BATTERY_STYLE:
+                sa.startPreferencePanel(BatteryStyleSettings.class.getName(), null,
+                        R.string.status_bar_battery_style_title, null, null, 0);
+                return true;
+
             default:
                 return false;
         }
