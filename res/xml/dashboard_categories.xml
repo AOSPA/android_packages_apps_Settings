@@ -213,6 +213,14 @@
         android:id="@+id/system_section"
         android:title="@string/header_category_system" >
 
+        <!-- AppOps -->
+        <dashboard-tile
+                android:id="@+id/appops_settings"
+                android:title="@string/appops_settings_title"
+                android:fragment="com.android.settings.applications.AppOpsSummary"
+                android:icon="@drawable/ic_app_ops"
+                />
+
         <!-- Date & Time -->
         <dashboard-tile
                 android:id="@+id/date_time_settings"
