@@ -45,157 +45,146 @@ import com.android.settings.Utils;
 import java.util.List;
 
 public class AppOpsDetails extends Fragment {
-    static final String TAG = "AppOpsDetails";
-
     public static final String ARG_PACKAGE_NAME = "package";
 
-    private AppOpsState mState;
-    private PackageManager mPm;
+    private static final String TAG = "AppOpsDetails";
+
     private AppOpsManager mAppOps;
-    private PackageInfo mPackageInfo;
     private LayoutInflater mInflater;
-    private View mRootView;
-    private TextView mAppVersion;
     private LinearLayout mOperationsSection;
+    private PackageInfo mPackageInfo;
+    private PackageManager mPm;
+    private View mRootView;
+    private AppOpsState mState;
 
-    // Utility method to set application label and icon.
-    private void setAppLabelAndIcon(PackageInfo pkgInfo) {
-        final View appSnippet = mRootView.findViewById(R.id.app_snippet);
-        appSnippet.setPaddingRelative(0, appSnippet.getPaddingTop(), 0, appSnippet.getPaddingBottom());
+    @Override
+    public void onCreate(final Bundle icicle) {
+        super.onCreate(icicle);
 
-        ImageView icon = (ImageView) appSnippet.findViewById(R.id.app_icon);
-        icon.setImageDrawable(mPm.getApplicationIcon(pkgInfo.applicationInfo));
-        // Set application name.
-        TextView label = (TextView) appSnippet.findViewById(R.id.app_name);
-        label.setText(mPm.getApplicationLabel(pkgInfo.applicationInfo));
-        // Version number of application
-        mAppVersion = (TextView) appSnippet.findViewById(R.id.app_size);
+        mAppOps = (AppOpsManager) getActivity()
+                .getSystemService(Context.APP_OPS_SERVICE);
+        mInflater = (LayoutInflater) getActivity()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if (pkgInfo.versionName != null) {
-            mAppVersion.setVisibility(View.VISIBLE);
-            mAppVersion.setText(getActivity().getString(R.string.version_text,
-                    String.valueOf(pkgInfo.versionName)));
-        } else {
-            mAppVersion.setVisibility(View.INVISIBLE);
-        }
-    }
+        mPm = getActivity().getPackageManager();
+        mState = new AppOpsState(getActivity());
 
-    private String retrieveAppEntry() {
         final Bundle args = getArguments();
-        String packageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
+
+        String packageName = args == null ? null : args.getString(ARG_PACKAGE_NAME);
         if (packageName == null) {
-            Intent intent = (args == null) ?
-                    getActivity().getIntent() : (Intent) args.getParcelable("intent");
+            Intent intent = args == null ? null : (Intent) args.getParcelable("intent");
+            if (intent == null) {
+                intent = getActivity().getIntent();
+            }
             if (intent != null) {
                 packageName = intent.getData().getSchemeSpecificPart();
             }
         }
+
         try {
             mPackageInfo = mPm.getPackageInfo(packageName,
                     PackageManager.GET_DISABLED_COMPONENTS |
                     PackageManager.GET_UNINSTALLED_PACKAGES);
         } catch (NameNotFoundException e) {
-            Log.e(TAG, "Exception when retrieving package:" + packageName, e);
+            Log.e(TAG, "Unable to get package info for " + packageName, e);
             mPackageInfo = null;
         }
-
-        return packageName;
-    }
-
-    private boolean refreshUi() {
-        if (mPackageInfo == null) {
-            return false;
-        }
-
-        setAppLabelAndIcon(mPackageInfo);
-
-        Resources res = getActivity().getResources();
-
-        mOperationsSection.removeAllViews();
-        String lastPermGroup = "";
-        for (AppOpsState.OpsTemplate tpl : AppOpsState.ALL_TEMPLATES) {
-            List<AppOpsState.AppOpEntry> entries = mState.buildState(tpl,
-                    mPackageInfo.applicationInfo.uid, mPackageInfo.packageName);
-            for (final AppOpsState.AppOpEntry entry : entries) {
-                final AppOpsManager.OpEntry firstOp = entry.getOpEntry(0);
-                final View view = mInflater.inflate(R.layout.app_ops_details_item,
-                        mOperationsSection, false);
-                mOperationsSection.addView(view);
-                String perm = AppOpsManager.opToPermission(firstOp.getOp());
-                if (perm != null) {
-                    try {
-                        PermissionInfo pi = mPm.getPermissionInfo(perm, 0);
-                        if (pi.group != null && !lastPermGroup.equals(pi.group)) {
-                            lastPermGroup = pi.group;
-                            PermissionGroupInfo pgi = mPm.getPermissionGroupInfo(pi.group, 0);
-                            if (pgi.icon != 0) {
-                                ((ImageView)view.findViewById(R.id.op_icon)).setImageDrawable(
-                                        pgi.loadIcon(mPm));
-                            }
-                        }
-                    } catch (NameNotFoundException e) {
-                    }
-                }
-                ((TextView)view.findViewById(R.id.op_name)).setText(
-                        entry.getSwitchText(mState));
-                ((TextView)view.findViewById(R.id.op_time)).setText(
-                        entry.getTimeText(res, true));
-                Switch sw = (Switch)view.findViewById(R.id.switchWidget);
-                final int switchOp = AppOpsManager.opToSwitch(firstOp.getOp());
-                sw.setChecked(mAppOps.checkOp(switchOp, entry.getPackageOps().getUid(),
-                        entry.getPackageOps().getPackageName()) == AppOpsManager.MODE_ALLOWED);
-                sw.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        mAppOps.setMode(switchOp, entry.getPackageOps().getUid(),
-                                entry.getPackageOps().getPackageName(), isChecked
-                                ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_IGNORED);
-                    }
-                });
-            }
-        }
-
-        return true;
-    }
-
-    private void setIntentAndFinish(boolean finish, boolean appChanged) {
-        Intent intent = new Intent();
-        intent.putExtra(ManageApplications.APP_CHG, appChanged);
-        SettingsActivity sa = (SettingsActivity)getActivity();
-        sa.finishPreferencePanel(this, Activity.RESULT_OK, intent);
-    }
-
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
-        mState = new AppOpsState(getActivity());
-        mPm = getActivity().getPackageManager();
-        mInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mAppOps = (AppOpsManager)getActivity().getSystemService(Context.APP_OPS_SERVICE);
-
-        retrieveAppEntry();
 
         setHasOptionsMenu(true);
     }
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+            final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.app_ops_details, container, false);
         Utils.prepareCustomPreferencesList(container, view, view, false);
 
-        mRootView = view;
-        mOperationsSection = (LinearLayout)view.findViewById(R.id.operations_section);
-        return view;
+        mOperationsSection = (LinearLayout) view.findViewById(R.id.operations_section);
+        return mRootView = view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (!refreshUi()) {
-            setIntentAndFinish(true, true);
+
+        if (mPackageInfo == null) {
+            ((SettingsActivity) getActivity()).finishPreferencePanel(this, Activity.RESULT_OK,
+                    new Intent().putExtra(ManageApplications.APP_CHG, true));
+            return;
+        }
+
+        final View appSnippet = mRootView.findViewById(R.id.app_snippet);
+        appSnippet.setPaddingRelative(0, appSnippet.getPaddingTop(),
+                0, appSnippet.getPaddingBottom());
+
+        final ImageView icon = (ImageView) appSnippet.findViewById(R.id.app_icon);
+        icon.setImageDrawable(mPm.getApplicationIcon(mPackageInfo.applicationInfo));
+        final TextView label = (TextView) appSnippet.findViewById(R.id.app_name);
+        label.setText(mPm.getApplicationLabel(mPackageInfo.applicationInfo));
+
+        final TextView appVersion = (TextView) appSnippet.findViewById(R.id.app_size);
+        appVersion.setVisibility(mPackageInfo.versionName == null ? View.INVISIBLE : View.VISIBLE);
+        if (mPackageInfo.versionName != null) {
+            appVersion.setText(getActivity().getString(R.string.version_text,
+                    String.valueOf(mPackageInfo.versionName)));
+        }
+
+        mOperationsSection.removeAllViews();
+
+        final Resources res = getActivity().getResources();
+
+        String lastPermGroup = "";
+        for (final AppOpsState.OpsTemplate tpl : AppOpsState.ALL_TEMPLATES) {
+            for (final AppOpsState.AppOpEntry entry : mState.buildState(tpl,
+                    mPackageInfo.applicationInfo.uid, mPackageInfo.packageName)) {
+                final int firstOp = entry.getOpEntry(0).getOp();
+                final String opPerm = AppOpsManager.opToPermission(firstOp);
+                final int opSwitch = AppOpsManager.opToSwitch(firstOp);
+
+                final View view = mInflater.inflate(R.layout.app_ops_details_item,
+                        mOperationsSection, false);
+
+                if (opPerm != null) {
+                    try {
+                        final PermissionInfo pi = mPm.getPermissionInfo(opPerm, 0);
+                        if (pi.group != null && !lastPermGroup.equals(pi.group)) {
+                            lastPermGroup = pi.group;
+
+                            final PermissionGroupInfo pgi = mPm.getPermissionGroupInfo(pi.group, 0);
+                            if (pgi.icon != 0) {
+                                ((ImageView) view.findViewById(R.id.op_icon))
+                                        .setImageDrawable(pgi.loadIcon(mPm));
+                            }
+                        }
+                    } catch (NameNotFoundException e) {
+                        Log.w(TAG, "Unable to get permission info for " + opPerm, e);
+                    }
+                }
+
+                ((TextView) view.findViewById(R.id.op_name))
+                        .setText(entry.getSwitchText(mState));
+                ((TextView) view.findViewById(R.id.op_time))
+                        .setText(entry.getTimeText(res, true));
+
+                final Switch sw = (Switch) view.findViewById(R.id.switchWidget);
+                sw.setChecked(mAppOps.checkOpNoThrow(opSwitch, entry.getPackageOps().getUid(),
+                        entry.getPackageOps().getPackageName()) == AppOpsManager.MODE_ALLOWED);
+                sw.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        mAppOps.setMode(opSwitch,
+                                entry.getPackageOps().getUid(),
+                                entry.getPackageOps().getPackageName(),
+                                isChecked ? AppOpsManager.MODE_ALLOWED :
+                                        AppOpsManager.MODE_ERRORED);
+                    }
+
+                });
+
+                mOperationsSection.addView(view);
+            }
         }
     }
 }
