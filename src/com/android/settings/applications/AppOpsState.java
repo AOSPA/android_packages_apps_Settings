@@ -437,20 +437,6 @@ public class AppOpsState {
 
         @Override
         public int compare(final AppOpEntry lh, final AppOpEntry rh) {
-            if (lh.getSwitchOrder() != rh.getSwitchOrder()) {
-                return lh.getSwitchOrder() < rh.getSwitchOrder() ? -1 : 1;
-            }
-
-            if (lh.isRunning() != rh.isRunning()) {
-                // Running applications go first.
-                return lh.isRunning() ? -1 : 1;
-            }
-
-            if (lh.getTime() != rh.getTime()) {
-                // More recently used applications go first.
-                return lh.getTime() > rh.getTime() ? -1 : 1;
-            }
-
             return mCollator.compare(lh.getAppEntry().getLabel(), rh.getAppEntry().getLabel());
         }
     };
