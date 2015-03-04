@@ -54,11 +54,8 @@ public class AppOpsCategory extends ListFragment implements
     private AppOpsState mState;
 
     public AppOpsCategory() {
-    }
-
-    public AppOpsCategory(final AppOpsState.OpsTemplate template) {
         final Bundle args = new Bundle();
-        args.putParcelable("template", template);
+        args.putParcelable("template", AppOpsState.OPERATIONS);
         setArguments(args);
     }
 
