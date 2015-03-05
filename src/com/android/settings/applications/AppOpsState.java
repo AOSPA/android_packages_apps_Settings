@@ -61,155 +61,110 @@ public class AppOpsState {
         mPm = context.getPackageManager();
     }
 
-    public static class OpsTemplate implements Parcelable {
-        public final int[] ops;
-        public final boolean[] showPerms;
-
-        public OpsTemplate(final int[] _ops, final boolean[] _showPerms) {
-            ops = _ops;
-            showPerms = _showPerms;
-
-            if (ops.length != showPerms.length) {
-                throw new IllegalArgumentException("ops.length=" + ops.length + " != " +
-                        "showPerms.length=" + showPerms.length);
-            }
-        }
-
-        OpsTemplate(final Parcel src) {
-            ops = src.createIntArray();
-            showPerms = src.createBooleanArray();
-
-            if (ops.length != showPerms.length) {
-                throw new IllegalStateException("ops.length=" + ops.length + " != " +
-                        "showPerms.length=" + showPerms.length);
-            }
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(final Parcel dest, final int flags) {
-            dest.writeIntArray(ops);
-            dest.writeBooleanArray(showPerms);
-        }
-
-        public static final Creator<OpsTemplate> CREATOR = new Creator<OpsTemplate>() {
-            @Override
-            public OpsTemplate createFromParcel(final Parcel source) {
-                return new OpsTemplate(source);
-            }
-
-            @Override
-            public OpsTemplate[] newArray(final int size) {
-                return new OpsTemplate[size];
-            }
-        };
-    }
-
-    public static final OpsTemplate OPERATIONS = new OpsTemplate(
-            new int[] {
-                    AppOpsManager.OP_COARSE_LOCATION,
-                    AppOpsManager.OP_FINE_LOCATION,
-                    AppOpsManager.OP_GPS,
-                    AppOpsManager.OP_WIFI_SCAN,
-                    AppOpsManager.OP_NEIGHBORING_CELLS,
-                    AppOpsManager.OP_MONITOR_LOCATION,
-                    AppOpsManager.OP_MONITOR_HIGH_POWER_LOCATION,
-                    AppOpsManager.OP_READ_CONTACTS,
-                    AppOpsManager.OP_WRITE_CONTACTS,
-                    AppOpsManager.OP_READ_CALL_LOG,
-                    AppOpsManager.OP_WRITE_CALL_LOG,
-                    AppOpsManager.OP_READ_CALENDAR,
-                    AppOpsManager.OP_WRITE_CALENDAR,
-                    AppOpsManager.OP_READ_CLIPBOARD,
-                    AppOpsManager.OP_WRITE_CLIPBOARD,
-                    AppOpsManager.OP_READ_SMS,
-                    AppOpsManager.OP_RECEIVE_SMS,
-                    AppOpsManager.OP_RECEIVE_EMERGECY_SMS,
-                    AppOpsManager.OP_RECEIVE_MMS,
-                    AppOpsManager.OP_RECEIVE_WAP_PUSH,
-                    AppOpsManager.OP_WRITE_SMS,
-                    AppOpsManager.OP_SEND_SMS,
-                    AppOpsManager.OP_READ_ICC_SMS,
-                    AppOpsManager.OP_WRITE_ICC_SMS,
-                    AppOpsManager.OP_VIBRATE,
-                    AppOpsManager.OP_CAMERA,
-                    AppOpsManager.OP_RECORD_AUDIO,
-                    AppOpsManager.OP_PLAY_AUDIO,
-                    AppOpsManager.OP_TAKE_MEDIA_BUTTONS,
-                    AppOpsManager.OP_TAKE_AUDIO_FOCUS,
-                    AppOpsManager.OP_AUDIO_MASTER_VOLUME,
-                    AppOpsManager.OP_AUDIO_VOICE_VOLUME,
-                    AppOpsManager.OP_AUDIO_RING_VOLUME,
-                    AppOpsManager.OP_AUDIO_MEDIA_VOLUME,
-                    AppOpsManager.OP_AUDIO_ALARM_VOLUME,
-                    AppOpsManager.OP_AUDIO_NOTIFICATION_VOLUME,
-                    AppOpsManager.OP_AUDIO_BLUETOOTH_VOLUME,
-                    AppOpsManager.OP_MUTE_MICROPHONE,
-                    AppOpsManager.OP_POST_NOTIFICATION,
-                    AppOpsManager.OP_ACCESS_NOTIFICATIONS,
-                    AppOpsManager.OP_CALL_PHONE,
-                    AppOpsManager.OP_WRITE_SETTINGS,
-                    AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
-                    AppOpsManager.OP_WAKE_LOCK,
-                    AppOpsManager.OP_PROJECT_MEDIA,
-                    AppOpsManager.OP_ACTIVATE_VPN,
-            }, new boolean[] {
-                    true, /* OP_COARSE_LOCATION */
-                    true, /* OP_FINE_LOCATION */
-                    false, /* OP_GPS */
-                    false, /* OP_WIFI_SCAN */
-                    false, /* OP_NEIGHBORING_CELLS */
-                    false, /* OP_MONITOR_LOCATION */
-                    false, /* OP_MONITOR_HIGH_POWER_LOCATION */
-                    true, /* OP_READ_CONTACTS */
-                    true, /* OP_WRITE_CONTACTS */
-                    true, /* OP_READ_CALL_LOG */
-                    true, /* OP_WRITE_CALL_LOG */
-                    true, /* OP_READ_CALENDAR */
-                    true, /* OP_WRITE_CALENDAR */
-                    false, /* OP_READ_CLIPBOARD */
-                    false, /* OP_WRITE_CLIPBOARD */
-                    true, /* OP_READ_SMS */
-                    true, /* OP_RECEIVE_SMS */
-                    true, /* OP_RECEIVE_EMERGECY_SMS */
-                    true, /* OP_RECEIVE_MMS */
-                    true, /* OP_RECEIVE_WAP_PUSH */
-                    true, /* OP_WRITE_SMS */
-                    true, /* OP_SEND_SMS */
-                    true, /* OP_READ_ICC_SMS */
-                    true, /* OP_WRITE_ICC_SMS */
-                    false, /* OP_VIBRATE */
-                    true, /* OP_CAMERA */
-                    true, /* OP_RECORD_AUDIO */
-                    false, /* OP_PLAY_AUDIO */
-                    false, /* OP_TAKE_MEDIA_BUTTONS */
-                    false, /* OP_TAKE_AUDIO_FOCUS */
-                    false, /* OP_AUDIO_MASTER_VOLUME */
-                    false, /* OP_AUDIO_VOICE_VOLUME */
-                    false, /* OP_AUDIO_RING_VOLUME */
-                    false, /* OP_AUDIO_MEDIA_VOLUME */
-                    false, /* OP_AUDIO_ALARM_VOLUME */
-                    false, /* OP_AUDIO_NOTIFICATION_VOLUME */
-                    false, /* OP_AUDIO_BLUETOOTH_VOLUME */
-                    false, /* OP_MUTE_MICROPHONE */
-                    false, /* OP_POST_NOTIFICATION */
-                    true, /* OP_ACCESS_NOTIFICATIONS */
-                    true, /* OP_CALL_PHONE */
-                    true, /* OP_WRITE_SETTINGS */
-                    true, /* OP_SYSTEM_ALERT_WINDOW */
-                    true, /* OP_WAKE_LOCK */
-                    false, /* OP_PROJECT_MEDIA */
-                    false, /* OP_ACTIVATE_VPN */
-            }
-    );
-
-    public static final OpsTemplate[] ALL_TEMPLATES = new OpsTemplate[] {
-            OPERATIONS
+    private static final int[] OPERATIONS = new int[] {
+            AppOpsManager.OP_COARSE_LOCATION,
+            AppOpsManager.OP_FINE_LOCATION,
+            AppOpsManager.OP_GPS,
+            AppOpsManager.OP_WIFI_SCAN,
+            AppOpsManager.OP_NEIGHBORING_CELLS,
+            AppOpsManager.OP_MONITOR_LOCATION,
+            AppOpsManager.OP_MONITOR_HIGH_POWER_LOCATION,
+            AppOpsManager.OP_READ_CONTACTS,
+            AppOpsManager.OP_WRITE_CONTACTS,
+            AppOpsManager.OP_READ_CALL_LOG,
+            AppOpsManager.OP_WRITE_CALL_LOG,
+            AppOpsManager.OP_READ_CALENDAR,
+            AppOpsManager.OP_WRITE_CALENDAR,
+            AppOpsManager.OP_READ_CLIPBOARD,
+            AppOpsManager.OP_WRITE_CLIPBOARD,
+            AppOpsManager.OP_READ_SMS,
+            AppOpsManager.OP_RECEIVE_SMS,
+            AppOpsManager.OP_RECEIVE_EMERGECY_SMS,
+            AppOpsManager.OP_RECEIVE_MMS,
+            AppOpsManager.OP_RECEIVE_WAP_PUSH,
+            AppOpsManager.OP_WRITE_SMS,
+            AppOpsManager.OP_SEND_SMS,
+            AppOpsManager.OP_READ_ICC_SMS,
+            AppOpsManager.OP_WRITE_ICC_SMS,
+            AppOpsManager.OP_VIBRATE,
+            AppOpsManager.OP_CAMERA,
+            AppOpsManager.OP_RECORD_AUDIO,
+            AppOpsManager.OP_PLAY_AUDIO,
+            AppOpsManager.OP_TAKE_MEDIA_BUTTONS,
+            AppOpsManager.OP_TAKE_AUDIO_FOCUS,
+            AppOpsManager.OP_AUDIO_MASTER_VOLUME,
+            AppOpsManager.OP_AUDIO_VOICE_VOLUME,
+            AppOpsManager.OP_AUDIO_RING_VOLUME,
+            AppOpsManager.OP_AUDIO_MEDIA_VOLUME,
+            AppOpsManager.OP_AUDIO_ALARM_VOLUME,
+            AppOpsManager.OP_AUDIO_NOTIFICATION_VOLUME,
+            AppOpsManager.OP_AUDIO_BLUETOOTH_VOLUME,
+            AppOpsManager.OP_MUTE_MICROPHONE,
+            AppOpsManager.OP_POST_NOTIFICATION,
+            AppOpsManager.OP_ACCESS_NOTIFICATIONS,
+            AppOpsManager.OP_CALL_PHONE,
+            AppOpsManager.OP_WRITE_SETTINGS,
+            AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
+            AppOpsManager.OP_WAKE_LOCK,
+            AppOpsManager.OP_PROJECT_MEDIA,
+            AppOpsManager.OP_ACTIVATE_VPN,
     };
+
+    private static final boolean[] SHOW_PERMS = new boolean[] {
+            true, /* OP_COARSE_LOCATION */
+            true, /* OP_FINE_LOCATION */
+            false, /* OP_GPS */
+            false, /* OP_WIFI_SCAN */
+            false, /* OP_NEIGHBORING_CELLS */
+            false, /* OP_MONITOR_LOCATION */
+            false, /* OP_MONITOR_HIGH_POWER_LOCATION */
+            true, /* OP_READ_CONTACTS */
+            true, /* OP_WRITE_CONTACTS */
+            true, /* OP_READ_CALL_LOG */
+            true, /* OP_WRITE_CALL_LOG */
+            true, /* OP_READ_CALENDAR */
+            true, /* OP_WRITE_CALENDAR */
+            false, /* OP_READ_CLIPBOARD */
+            false, /* OP_WRITE_CLIPBOARD */
+            true, /* OP_READ_SMS */
+            true, /* OP_RECEIVE_SMS */
+            true, /* OP_RECEIVE_EMERGECY_SMS */
+            true, /* OP_RECEIVE_MMS */
+            true, /* OP_RECEIVE_WAP_PUSH */
+            true, /* OP_WRITE_SMS */
+            true, /* OP_SEND_SMS */
+            true, /* OP_READ_ICC_SMS */
+            true, /* OP_WRITE_ICC_SMS */
+            false, /* OP_VIBRATE */
+            true, /* OP_CAMERA */
+            true, /* OP_RECORD_AUDIO */
+            false, /* OP_PLAY_AUDIO */
+            false, /* OP_TAKE_MEDIA_BUTTONS */
+            false, /* OP_TAKE_AUDIO_FOCUS */
+            false, /* OP_AUDIO_MASTER_VOLUME */
+            false, /* OP_AUDIO_VOICE_VOLUME */
+            false, /* OP_AUDIO_RING_VOLUME */
+            false, /* OP_AUDIO_MEDIA_VOLUME */
+            false, /* OP_AUDIO_ALARM_VOLUME */
+            false, /* OP_AUDIO_NOTIFICATION_VOLUME */
+            false, /* OP_AUDIO_BLUETOOTH_VOLUME */
+            false, /* OP_MUTE_MICROPHONE */
+            false, /* OP_POST_NOTIFICATION */
+            true, /* OP_ACCESS_NOTIFICATIONS */
+            true, /* OP_CALL_PHONE */
+            true, /* OP_WRITE_SETTINGS */
+            true, /* OP_SYSTEM_ALERT_WINDOW */
+            true, /* OP_WAKE_LOCK */
+            false, /* OP_PROJECT_MEDIA */
+            false, /* OP_ACTIVATE_VPN */
+    };
+
+    static {
+        if (OPERATIONS.length != SHOW_PERMS.length) {
+            throw new IllegalStateException("OPERATIONS length (" + OPERATIONS.length + ") " +
+                    "does not match SHOW_PERMS length (" + SHOW_PERMS.length + ")");
+        }
+    }
 
     /**
      * This class holds the per-item data in our Loader.
@@ -444,8 +399,8 @@ public class AppOpsState {
         entries.add(entry);
     }
 
-    public List<AppOpEntry> buildState(final OpsTemplate tpl) {
-        return buildState(tpl, 0, null);
+    public List<AppOpEntry> buildState() {
+        return buildState(0, null);
     }
 
     private AppEntry getAppEntry(final Context context, final HashMap<String, AppEntry> appEntries,
@@ -472,8 +427,7 @@ public class AppOpsState {
         return appEntry;
     }
 
-    public List<AppOpEntry> buildState(final OpsTemplate tpl, final int uid,
-            final String packageName) {
+    public List<AppOpEntry> buildState(final int uid, final String packageName) {
         final Context context = mContext;
 
         final HashMap<String, AppEntry> appEntries = new HashMap<String, AppEntry>();
@@ -483,22 +437,23 @@ public class AppOpsState {
         final ArrayList<Integer> permOps = new ArrayList<Integer>();
         final int[] opToOrder = new int[AppOpsManager._NUM_OP];
 
-        for (int i = 0; i < tpl.ops.length; i++) {
-            if (tpl.showPerms[i]) {
-                final String perm = AppOpsManager.opToPermission(tpl.ops[i]);
+        for (int i = 0; i < OPERATIONS.length; i++) {
+            if (SHOW_PERMS[i]) {
+                final int op = OPERATIONS[i];
+                final String perm = AppOpsManager.opToPermission(op);
                 if (perm != null && !perms.contains(perm)) {
                     perms.add(perm);
-                    permOps.add(tpl.ops[i]);
-                    opToOrder[tpl.ops[i]] = i;
+                    permOps.add(op);
+                    opToOrder[op] = i;
                 }
             }
         }
 
         final List<AppOpsManager.PackageOps> pkgs;
         if (packageName != null) {
-            pkgs = mAppOps.getOpsForPackage(uid, packageName, tpl.ops);
+            pkgs = mAppOps.getOpsForPackage(uid, packageName, OPERATIONS);
         } else {
-            pkgs = mAppOps.getPackagesForOps(tpl.ops);
+            pkgs = mAppOps.getPackagesForOps(OPERATIONS);
         }
 
         if (pkgs != null) {
