@@ -1054,9 +1054,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 mUseAwesomePlayer, SystemProperties.getBoolean(USE_AWESOMEPLAYER_PROPERTY, false));
     }
 
-    private void writeUseNuplayerOptions() {
+    private void writeUseAwesomePlayerOptions() {
         SystemProperties.set(
-                USE_AWESOMEPLAYER_PROPERTY, mUseNuplayer.isChecked() ? "false" : "true");
+                USE_AWESOMEPLAYER_PROPERTY, mUseAwesomePlayer.isChecked() ? "true" : "false");
         pokeSystemProperties();
     }
 

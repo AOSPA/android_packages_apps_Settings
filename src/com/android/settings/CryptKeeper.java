@@ -118,7 +118,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     /** A flag to indicate when the back event should be ignored */
     private boolean mIgnoreBack = false;
     /** When set, blocks unlocking. Set every COOL_DOWN_ATTEMPTS attempts, only cleared
-        by power cycling phone. */
+     by power cycling phone. */
     private boolean mCooldown = false;
 
     PowerManager.WakeLock mWakeLock;
@@ -322,13 +322,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-            case MESSAGE_UPDATE_PROGRESS:
-                updateProgress();
-                break;
+                case MESSAGE_UPDATE_PROGRESS:
+                    updateProgress();
+                    break;
 
-            case MESSAGE_NOTIFY:
-                notifyUser();
-                break;
+                case MESSAGE_NOTIFY:
+                    notifyUser();
+                    break;
             }
         }
     };
@@ -601,7 +601,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         final Button button = (Button) findViewById(R.id.factory_reset);
         button.setVisibility(View.VISIBLE);
         button.setOnClickListener(new OnClickListener() {
-                @Override
+            @Override
             public void onClick(View v) {
                 // Factory reset the device.
                 Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR);
@@ -707,34 +707,34 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     protected LockPatternView.OnPatternListener mChooseNewLockPatternListener =
-        new LockPatternView.OnPatternListener() {
+            new LockPatternView.OnPatternListener() {
 
-        @Override
-        public void onPatternStart() {
-            mLockPatternView.removeCallbacks(mClearPatternRunnable);
-        }
+                @Override
+                public void onPatternStart() {
+                    mLockPatternView.removeCallbacks(mClearPatternRunnable);
+                }
 
-        @Override
-        public void onPatternCleared() {
-        }
+                @Override
+                public void onPatternCleared() {
+                }
 
-        @Override
-        public void onPatternDetected(List<LockPatternView.Cell> pattern) {
-            mLockPatternView.setEnabled(false);
-            if (pattern.size() >= MIN_LENGTH_BEFORE_REPORT) {
-                new DecryptTask().execute(LockPatternUtils.patternToString(pattern));
-            } else {
-                // Allow user to make as many of these as they want.
-                fakeUnlockAttempt(mLockPatternView);
-            }
-        }
+                @Override
+                public void onPatternDetected(List<LockPatternView.Cell> pattern) {
+                    mLockPatternView.setEnabled(false);
+                    if (pattern.size() >= MIN_LENGTH_BEFORE_REPORT) {
+                        new DecryptTask().execute(LockPatternUtils.patternToString(pattern));
+                    } else {
+                        // Allow user to make as many of these as they want.
+                        fakeUnlockAttempt(mLockPatternView);
+                    }
+                }
 
-        @Override
-        public void onPatternCellAdded(List<Cell> pattern) {
-        }
-     };
+                @Override
+                public void onPatternCellAdded(List<Cell> pattern) {
+                }
+            };
 
-     private void passwordEntryInit() {
+    private void passwordEntryInit() {
         // Password/pin case
         mPasswordEntry = (EditText) findViewById(R.id.passwordEntry);
         if (mPasswordEntry != null){
@@ -767,7 +767,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         if (imeSwitcher != null && hasMultipleEnabledIMEsOrSubtypes(imm, false)) {
             imeSwitcher.setVisibility(View.VISIBLE);
             imeSwitcher.setOnClickListener(new OnClickListener() {
-                    @Override
+                @Override
                 public void onClick(View v) {
                     imm.showInputMethodPicker();
                 }
@@ -791,7 +791,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         // Asynchronously throw up the IME, since there are issues with requesting it to be shown
         // immediately.
-        if (mLockPatternView == null && mCooldown <= 0) {
+        if (mLockPatternView == null && !mCooldown) {
             mHandler.postDelayed(new Runnable() {
                 @Override public void run() {
                     imm.showSoftInputUnchecked(0, null);
@@ -817,7 +817,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
      * @return true if we have multiple IMEs to choose from
      */
     private boolean hasMultipleEnabledIMEsOrSubtypes(InputMethodManager imm,
-            final boolean shouldIncludeAuxiliarySubtypes) {
+                                                     final boolean shouldIncludeAuxiliarySubtypes) {
         final List<InputMethodInfo> enabledImis = imm.getEnabledInputMethodList();
 
         // Number of the filtered IMEs
@@ -852,8 +852,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
 
         return filteredImisCount > 1
-        // imm.getEnabledInputMethodSubtypeList(null, false) will return the current IME's enabled
-        // input method subtype (The current IME should be LatinIME.)
+                // imm.getEnabledInputMethodSubtypeList(null, false) will return the current IME's enabled
+                // input method subtype (The current IME should be LatinIME.)
                 || imm.getEnabledInputMethodSubtypeList(null, false).size() > 1;
     }
 
@@ -937,12 +937,12 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         if (isEmergencyCallCapable()) {
             emergencyCall.setVisibility(View.VISIBLE);
             emergencyCall.setOnClickListener(new View.OnClickListener() {
-                    @Override
+                @Override
 
-                    public void onClick(View v) {
-                        takeEmergencyCallAction();
-                    }
-                });
+                public void onClick(View v) {
+                    takeEmergencyCallAction();
+                }
+            });
         } else {
             emergencyCall.setVisibility(View.GONE);
             return;
@@ -975,7 +975,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private void launchEmergencyDialer() {
         final Intent intent = new Intent(ACTION_EMERGENCY_DIAL);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                        | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         setBackFunctionality(true);
         startActivity(intent);
     }
