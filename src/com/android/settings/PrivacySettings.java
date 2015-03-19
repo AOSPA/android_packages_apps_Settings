@@ -42,6 +42,7 @@ import android.preference.SwitchPreference;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.widget.ListView;
 
 import java.util.HashMap;
@@ -59,9 +60,6 @@ import java.util.List;
  */
 public class PrivacySettings extends SettingsPreferenceFragment implements
         DialogInterface.OnClickListener, Indexable {
-
-    static final String TAG = "PrivacySettings";
-
     // Vendor specific
     private static final String GSETTINGS_PROVIDER = "com.google.settings";
     private static final String BACKUP_CATEGORY = "backup_category";
