@@ -33,10 +33,12 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -61,10 +63,15 @@ public class PowerUsageSummary extends PreferenceFragment {
 
     private static final String BATTERY_HISTORY_FILE = "tmp_bat_history.bin";
 
-    private static final int MENU_STATS_TYPE = Menu.FIRST;
-    private static final int MENU_STATS_REFRESH = Menu.FIRST + 1;
-    private static final int MENU_BATTERY_SAVER = Menu.FIRST + 2;
-    private static final int MENU_HELP = Menu.FIRST + 3;
+    private static final int MENU_STATS_TYPE            = Menu.FIRST;
+    private static final int MENU_STATS_REFRESH         = Menu.FIRST + 1;
+    private static final int MENU_BATTERY_SAVER         = Menu.FIRST + 2;
+    private static final int MENU_BATTERY_STYLE         = Menu.FIRST + 3;
+    private static final int SUBMENU_BATTERY_BAR        = Menu.FIRST + 4;
+    private static final int SUBMENU_BATTERY_CIRCLE     = Menu.FIRST + 5;
+    private static final int SUBMENU_BATTERY_PERCENT    = Menu.FIRST + 6;
+    private static final int SUBMENU_BATTERY_HIDDEN     = Menu.FIRST + 7;
+    private static final int MENU_HELP                  = Menu.FIRST + 8;
 
     private UserManager mUm;
 
@@ -180,6 +187,8 @@ public class PowerUsageSummary extends PreferenceFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        int selectedStyle = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.STATUS_BAR_BATTERY_STYLE, 0);
         if (DEBUG) {
             menu.add(0, MENU_STATS_TYPE, 0, R.string.menu_stats_total)
                     .setIcon(com.android.internal.R.drawable.ic_menu_info_details)
@@ -193,6 +202,22 @@ public class PowerUsageSummary extends PreferenceFragment {
 
         MenuItem batterySaver = menu.add(0, MENU_BATTERY_SAVER, 0, R.string.battery_saver);
         batterySaver.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
+        SubMenu batteryStyle = menu.addSubMenu(1, MENU_BATTERY_STYLE, 1, R.string.battery_status_icon_title);
+
+        batteryStyle.add(1, SUBMENU_BATTERY_BAR, 1, R.string.battery_bar)
+                .setChecked(selectedStyle == 0);
+        batteryStyle.add(1, SUBMENU_BATTERY_CIRCLE, 2, R.string.battery_circle)
+                .setChecked(selectedStyle == 2);
+        batteryStyle.add(1, SUBMENU_BATTERY_PERCENT, 3, R.string.battery_percent)
+                .setChecked(selectedStyle == 5);
+        batteryStyle.add(1, SUBMENU_BATTERY_HIDDEN, 4, R.string.battery_hidden)
+                .setChecked(selectedStyle == 4);
+        batteryStyle.setGroupCheckable(1, true, true);
+
+        MenuItem batteryIcon = batteryStyle.getItem();
+        batteryIcon.setIcon(R.drawable.ic_settings_battery_style)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
         String helpUrl;
         if (!TextUtils.isEmpty(helpUrl = getResources().getString(R.string.help_url_battery))) {
@@ -221,6 +246,42 @@ public class PowerUsageSummary extends PreferenceFragment {
                 final SettingsActivity sa = (SettingsActivity) getActivity();
                 sa.startPreferencePanel(BatterySaverSettings.class.getName(), null,
                         R.string.battery_saver, null, null, 0);
+                return true;
+            case SUBMENU_BATTERY_BAR:
+                item.setChecked(true);
+                // write percent
+                Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENT, 0);
+                // write icon style
+                Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_BATTERY_STYLE, 0);
+                return true;
+            case SUBMENU_BATTERY_CIRCLE:
+                item.setChecked(true);
+                // write percent
+                Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENT, 0);
+                // write icon style
+                Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_BATTERY_STYLE, 2);
+                return true;
+            case SUBMENU_BATTERY_PERCENT:
+                item.setChecked(true);
+                // write percent
+                Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENT, 2);
+                // write icon style
+                Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_BATTERY_STYLE, 5);
+                return true;
+            case SUBMENU_BATTERY_HIDDEN:
+                item.setChecked(true);
+                // write percent
+                Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENT, 0);
+                // write icon style
+                Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_BATTERY_STYLE, 4);
                 return true;
             default:
                 return false;
