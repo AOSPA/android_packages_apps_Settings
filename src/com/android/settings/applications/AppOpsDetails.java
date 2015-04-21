@@ -177,7 +177,7 @@ public class AppOpsDetails extends Fragment {
                             entry.getPackageOps().getUid(),
                             entry.getPackageOps().getPackageName(),
                             isChecked ? AppOpsManager.MODE_ALLOWED :
-                                    AppOpsManager.MODE_ERRORED);
+                                    AppOpsManager.MODE_IGNORED);
                 }
 
             });
