@@ -66,10 +66,16 @@
 
     <PreferenceCategory android:key="personalization"
             android:title="@string/personalization">
+
         <Preference
                 android:key="user_preferences_reset"
                 android:title="@string/reset_user_preferences_title"
                 android:summary="@string/reset_user_preferences_summary" />
+
+        <Preference
+                android:key="reset_qs_tiles"
+                android:title="@string/reset_qs_tiles_title"
+                android:summary="@string/reset_qs_tiles_summary" />
     </PreferenceCategory>
 
 </PreferenceScreen>
