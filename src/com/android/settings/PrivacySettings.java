@@ -66,6 +66,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     private static final String BACKUP_CATEGORY = "backup_category";
     private static final String BACKUP_DATA = "backup_data";
     private static final String AUTO_RESTORE = "auto_restore";
+    private static final String RESET_QS_TILES = "reset_qs_tiles";
     private static final String RESET_PREFERENCES = "user_preferences_reset";
     private static final String CONFIGURE_ACCOUNT = "configure_account";
     private static final String BACKUP_INACTIVE = "backup_inactive";
@@ -74,6 +75,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     private IBackupManager mBackupManager;
     private SwitchPreference mBackup;
     private SwitchPreference mAutoRestore;
+    private Preference mResetQsTilesPreference;
     private Preference mResetUserPreferences;
     private Dialog mConfirmDialog;
     private PreferenceScreen mConfigure;
@@ -105,6 +107,33 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         mAutoRestore.setOnPreferenceChangeListener(preferenceChangeListener);
 
         mConfigure = (PreferenceScreen) screen.findPreference(CONFIGURE_ACCOUNT);
+
+        mResetQsTilesPreference = findPreference(RESET_QS_TILES);
+        mResetQsTilesPreference.setShouldDisableView(true);
+        mResetQsTilesPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            public boolean onPreferenceClick(Preference preference) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(R.string.reset_qs_tiles_dialog_title);
+                builder.setMessage(R.string.reset_qs_tiles_dialog_msg);
+                builder.setPositiveButton(R.string.reset_qs_tiles_dialog_yes,
+                        new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Settings.Secure.putString(getContentResolver(), Settings.Secure.QS_TILES, "default");
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton(R.string.reset_qs_tiles_dialog_no,
+                        new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.create().show();
+                return true;
+            }
+        });
 
         mResetUserPreferences = screen.findPreference(RESET_PREFERENCES);
         mResetUserPreferences.setOnPreferenceClickListener(new OnPreferenceClickListener() {
