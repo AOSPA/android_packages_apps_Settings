@@ -42,6 +42,7 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -52,9 +53,12 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.IWindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.view.Display.DEFAULT_DISPLAY;
 
 public class DisplaySettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, OnPreferenceClickListener, Indexable {
@@ -65,6 +69,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_FONT_SIZE = "font_size";
+    private static final String KEY_LCD_DENSITY = "lcd_density";
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_LIFT_TO_WAKE = "lift_to_wake";
     private static final String KEY_DOZE = "doze";
@@ -74,6 +79,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
     private WarnedListPreference mFontSizePref;
+    private ListPreference mLcdDensityPreference;
 
     private final Configuration mCurConfig = new Configuration();
 
@@ -109,6 +115,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref = (WarnedListPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
         mFontSizePref.setOnPreferenceClickListener(this);
+
+        mLcdDensityPreference = (ListPreference) findPreference(KEY_LCD_DENSITY);
+        mLcdDensityPreference.setOnPreferenceChangeListener(this);
+        updateLcdDensityPreference();
 
         if (isAutomaticBrightnessAvailable(getResources())) {
             mAutoBrightnessPreference = (SwitchPreference) findPreference(KEY_AUTO_BRIGHTNESS);
@@ -288,6 +298,67 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 fontSizeNames[index]));
     }
 
+    private void updateLcdDensityPreference() {
+        if (mLcdDensityPreference == null) {
+            return;
+        }
+
+        final IWindowManager wm = IWindowManager.Stub.asInterface(
+                ServiceManager.checkService(Context.WINDOW_SERVICE));
+        if (wm == null) {
+            removePreference(KEY_LCD_DENSITY);
+            mLcdDensityPreference = null;
+            return;
+        }
+
+        int defaultDensity = -1;
+        int currentDensity = -1;
+
+        try {
+            defaultDensity = wm.getInitialDisplayDensity(DEFAULT_DISPLAY);
+            currentDensity = wm.getBaseDisplayDensity(DEFAULT_DISPLAY);
+        } catch (final RemoteException e) {
+            Log.e(TAG, "Could not get the display density", e);
+
+            removePreference(KEY_LCD_DENSITY);
+            mLcdDensityPreference = null;
+
+            return;
+        }
+
+        final int densityFactor = defaultDensity >= 480 ? 40 : 20;
+        int density = defaultDensity - 4 * densityFactor; // init as the minimum density we allow
+
+        final String[] densityEntries = new String[7];
+        final String[] densityValues = new String[7];
+        int currentIndex = -1;
+
+        for (int i = 0; i < 7; i++) {
+            final int entryResId = density == defaultDensity
+                    ? R.string.lcd_density_default_entry
+                    : R.string.lcd_density_entry;
+
+            densityEntries[i] = getString(entryResId, density);
+            densityValues[i] = Integer.toString(density);
+            if (density == currentDensity) {
+                currentIndex = i;
+            }
+
+            density += densityFactor; // increment for the next item
+        }
+
+        mLcdDensityPreference.setEntries(densityEntries);
+        mLcdDensityPreference.setEntryValues(densityValues);
+        if (currentIndex != -1) {
+            mLcdDensityPreference.setValueIndex(currentIndex);
+        }
+
+        final int summaryResId = currentDensity == defaultDensity
+                ? R.string.lcd_density_default_entry
+                : R.string.lcd_density_entry;
+        mLcdDensityPreference.setSummary(getString(summaryResId, currentDensity));
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -310,6 +381,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private void updateState() {
         readFontSizePreference(mFontSizePref);
+        updateLcdDensityPreference();
         updateScreenSaverSummary();
 
         // Update auto brightness if it is available.
@@ -348,6 +420,35 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
     }
 
+    private void writeLcdDensityPreference(final int value) {
+        final IWindowManager wm = IWindowManager.Stub.asInterface(
+                ServiceManager.checkService(Context.WINDOW_SERVICE));
+        if (wm == null) {
+            if (mLcdDensityPreference != null) {
+                removePreference(KEY_LCD_DENSITY);
+                mLcdDensityPreference = null;
+            }
+            return;
+        }
+
+        try {
+            wm.setForcedDisplayDensity(DEFAULT_DISPLAY, value);
+        } catch (final RemoteException e) {
+            Log.e(TAG, "Could not set the display density", e);
+
+            if (mLcdDensityPreference != null) {
+                removePreference(KEY_LCD_DENSITY);
+                mLcdDensityPreference = null;
+            }
+
+            return;
+        }
+
+        // TODO deal with SystemUI not responding to the change as expected
+
+        updateLcdDensityPreference();
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -364,6 +465,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist screen timeout setting", e);
             }
+        }
+        if (KEY_LCD_DENSITY.equals(key)) {
+            final int value = Integer.parseInt((String) objValue);
+            writeLcdDensityPreference(value);
         }
         if (KEY_FONT_SIZE.equals(key)) {
             writeFontSizePreference(objValue);

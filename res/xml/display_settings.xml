@@ -72,6 +72,11 @@
                 android:entryValues="@array/entryvalues_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
 
+        <ListPreference
+                android:key="lcd_density"
+                android:title="@string/lcd_density_title"
+                android:persistent="false" />
+
         <com.android.settings.notification.DropDownPreference
                 android:key="auto_rotate"
                 android:title="@string/display_auto_rotate_title" />
