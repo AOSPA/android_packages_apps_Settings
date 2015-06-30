@@ -191,19 +191,25 @@ public class ConfirmLockPassword extends SettingsActivity {
         }
 
         private void handleNext() {
+            final Activity activity = getActivity();
+            if (activity == null) {
+                // we already finished. meh.
+                return;
+            }
+
             final String pin = mPasswordEntry.getText().toString();
             if (mLockPatternUtils.checkPassword(pin)) {
-
                 Intent intent = new Intent();
-                if (getActivity() instanceof ConfirmLockPassword.InternalActivity) {
+
+                if (activity instanceof ConfirmLockPassword.InternalActivity) {
                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
                                     mIsAlpha ? StorageManager.CRYPT_TYPE_PASSWORD
                                              : StorageManager.CRYPT_TYPE_PIN);
                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pin);
                 }
 
-                getActivity().setResult(RESULT_OK, intent);
-                getActivity().finish();
+                activity.setResult(RESULT_OK, intent);
+                activity.finish();
             } else {
                 if (++mNumWrongConfirmAttempts >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {
                     long deadline = mLockPatternUtils.setLockoutAttemptDeadline();
@@ -246,8 +252,12 @@ public class ConfirmLockPassword extends SettingsActivity {
                     break;
 
                 case R.id.cancel_button:
-                    getActivity().setResult(RESULT_CANCELED);
-                    getActivity().finish();
+                    final Activity activity = getActivity();
+                    if (activity != null) {
+                        // we have not yet finished. finish now.
+                        activity.setResult(RESULT_CANCELED);
+                        activity.finish();
+                    }
                     break;
             }
         }
