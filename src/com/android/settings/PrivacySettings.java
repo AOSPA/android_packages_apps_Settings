@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.backup.IBackupManager;
@@ -24,9 +23,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.RemoteException;
@@ -81,7 +79,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     private PreferenceScreen mConfigure;
     private boolean mEnabled;
 
-    private HashMap<String, String> customPrefs = new HashMap<String, String>();
+    private final HashMap<String, String> mResettablePrefs = new HashMap<String, String>();
 
     private static final int DIALOG_ERASE_BACKUP = 2;
     private int mDialogType;
@@ -136,17 +134,14 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         });
 
         mResetUserPreferences = screen.findPreference(RESET_PREFERENCES);
+        mResetUserPreferences.setShouldDisableView(true);
         mResetUserPreferences.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
-                updateActiveCustomPreferences();
-                if (customPrefs.size() > 1) {
-                    showResetList();
-                } else {
-                    showResetDialog();
-                }
+                showResetList();
                 return true;
             }
         });
+        updateResetUserPreferences();
 
         ArrayList<String> keysToRemove = getNonVisibleKeys(getActivity());
         final int screenPreferenceCount = screen.getPreferenceCount();
@@ -177,6 +172,8 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         if (mEnabled) {
             updateToggles();
         }
+
+        updateResetUserPreferences();
     }
 
     @Override
@@ -259,98 +256,96 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         setConfigureSummary(configSummary);
     }
 
-    private void showResetDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.reset_user_preferences_title);
-        builder.setMessage(R.string.reset_user_preferences_dialog);
-        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                for(String setting : Settings.System.SETTINGS_TO_RESET) {
-                    Settings.System.putInt(getContentResolver(), setting, 0);
-                }
-            }
-        });
-        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+    private void showResetList() {
+        updateResetUserPreferences();
+        if (mResettablePrefs.size() == 0) {
+            return;
+        }
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.reset_user_preferences_dialog_title);
+
+        final CharSequence[] c = mResettablePrefs.values()
+                .toArray(new CharSequence[mResettablePrefs.size()]);
+        builder.setMultiChoiceItems(c, null, null);
+
+        builder.setPositiveButton(R.string.reset_user_preferences_dialog_choice_reset,
+                new DialogInterface.OnClickListener() {
+
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(final DialogInterface dialog, final int which) {
+                final ListView resetList = ((AlertDialog) dialog).getListView();
+
+                final ContentResolver resolver = getContentResolver();
+                final SparseBooleanArray checked = resetList.getCheckedItemPositions();
+                for (int i = 0; i < resetList.getCount(); i++) {
+                    if (checked.get(i)) {
+                        final String value = resetList.getItemAtPosition(i).toString();
+                        Settings.System.putInt(resolver, getKey(value), 0);
+                    }
+                }
+
                 dialog.dismiss();
             }
+
         });
-        AlertDialog alert = builder.create();
-        alert.show();
+
+        builder.setNegativeButton(R.string.reset_user_preferences_dialog_choice_cancel,
+                new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                dialog.dismiss();
+            }
+
+        });
+
+        builder.create().show();
     }
 
-    private void showResetList() {
-        final CharSequence[] cs =
-                    customPrefs.values().toArray(new CharSequence[customPrefs.size()]);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.reset_user_preferences_title)
-               .setMultiChoiceItems(cs, null, null)
-               .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        AlertDialog ad = ((AlertDialog) dialog);
-                        ListView resetList = ad.getListView();
-                        int resetCount = resetList.getCheckedItemCount();
-                        if (resetCount > 0) {
-                            SparseBooleanArray checked = resetList.getCheckedItemPositions();
-                            for (int i = 0; i < resetList.getCount(); i++) {
-                                if (checked.get(i)) {
-                                    String value = resetList.getItemAtPosition(i).toString();
-                                    Settings.System.putInt(getContentResolver(), getKey(value), 0);
-                                }
-                            }
-                        }
-                        dialog.dismiss();
-                    }
-                })
-               .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+    private void updateResetUserPreferences() {
+        mResettablePrefs.clear();
 
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
-
-    private void updateActiveCustomPreferences() {
-        customPrefs.clear();
         try {
-            Context con = getActivity().getApplicationContext()
-                                       .createPackageContext("com.android.systemui", 0);
-            Resources r = con.getResources();
-            for(String setting : Settings.System.SETTINGS_TO_RESET) {
-                if (!(Settings.System.getInt(getContentResolver(), setting, 0) == 0)) {
-                    String key = setting.toLowerCase();
-                    int resId = r.getIdentifier(setting, "string", "com.android.systemui");
-                    if (resId != 0) {
+            final ContentResolver resolver = getContentResolver();
+            final Resources r = getActivity().getApplicationContext()
+                    .createPackageContext("com.android.systemui", 0).getResources();
+
+            for (final String setting : Settings.System.SETTINGS_TO_RESET) {
+                if (Settings.System.getInt(resolver, setting, 0) != 0) {
+                    final int resId = r.getIdentifier(setting, "string", "com.android.systemui");
+                    if (resId == 0) {
+                        Log.v(TAG, "Missing string for: " + setting);
+                    } else {
                         try {
-                            String value = (String) r.getText(resId);
-                            customPrefs.put(key, value);
-                        } catch (NotFoundException e) {
+                            final String value = r.getString(resId);
+                            mResettablePrefs.put(setting.toLowerCase(), value);
+                        } catch (final Resources.NotFoundException e) {
                             Log.e(TAG, "Resource not found for: " + setting, e);
                         }
-                    } else {
-                        Log.v(TAG, "Missing string for: " + setting);
                     }
                 }
             }
-        } catch (NameNotFoundException e) {
-            Log.e(TAG, "NameNotFoundException", e);
+        } catch (final PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "SystemUI package not found.", e);
+        }
+
+        if (mResetUserPreferences != null) {
+            final boolean enabled = mResettablePrefs.size() > 0;
+            mResetUserPreferences.setEnabled(enabled);
+            mResetUserPreferences.setSummary(enabled ?
+                    R.string.reset_user_preferences_summary :
+                    R.string.reset_user_preferences_disabled_summary);
         }
     }
 
-    private String getKey(String value) {
-        String key = null;
-        for(Map.Entry<String, String> entry : customPrefs.entrySet()) {
-            if((value == null && entry.getValue() == null) ||
-                    (value != null && value.equals(entry.getValue()))) {
+    private String getKey(final String value) {
+        for (final Map.Entry<String, String> entry : mResettablePrefs.entrySet()) {
+            if (value.equals(entry.getValue())) {
                 return entry.getKey();
             }
         }
-        return key;
+        return null;
     }
 
     private void setConfigureSummary(String summary) {
