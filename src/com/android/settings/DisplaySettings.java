@@ -28,6 +28,9 @@ import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
+import static android.provider.Settings.System.SYSTEM_DESIGN_FLAGS;
+import static android.view.View.SYSTEM_DESIGN_FLAG_IMMERSIVE_NAV;
+import static android.view.View.SYSTEM_DESIGN_FLAG_IMMERSIVE_STATUS;
 
 import android.app.Activity;
 import android.app.ActivityManagerNative;
@@ -70,6 +73,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOZE = "doze";
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
     private static final String KEY_AUTO_ROTATE = "auto_rotate";
+    private static final String KEY_NAVIGATION_BAR_STYLE = "navigation_bar_style";
+    private static final String KEY_STATUS_BAR_STYLE = "status_bar_style";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -130,6 +135,68 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } else {
             removePreference(KEY_DOZE);
         }
+
+        final DropDownPreference.Callback styleCallback = new DropDownPreference.Callback() {
+
+            @Override
+            public synchronized boolean onItemSelected(final int position, final Object value) {
+                int flags = Settings.System.getInt(getContentResolver(), SYSTEM_DESIGN_FLAGS, 0);
+
+                switch (((Integer) value).intValue()) {
+                case R.string.navigation_bar_style_summary_stock:
+                    // Revert the navigation bar to Google's stock.
+                    flags &= ~SYSTEM_DESIGN_FLAG_IMMERSIVE_NAV;
+                    break;
+                case R.string.navigation_bar_style_summary_immersive:
+                    // Switch the navigation bar over to Immersive mode.
+                    flags |= SYSTEM_DESIGN_FLAG_IMMERSIVE_NAV;
+                    break;
+                case R.string.status_bar_style_summary_stock:
+                    // Revert the status bar to Google's stock.
+                    flags &= ~SYSTEM_DESIGN_FLAG_IMMERSIVE_STATUS;
+                    break;
+                case R.string.status_bar_style_summary_immersive:
+                    // Switch the status bar over to Immersive mode.
+                    flags |= SYSTEM_DESIGN_FLAG_IMMERSIVE_STATUS;
+                    break;
+                default:
+                    // Report a bad state.
+                    return false;
+                }
+
+                return Settings.System.putInt(getContentResolver(), SYSTEM_DESIGN_FLAGS, flags);
+            }
+
+        };
+
+        final int systemDesignFlags = Settings.System.getInt(getContentResolver(),
+                SYSTEM_DESIGN_FLAGS, 0);
+
+        final DropDownPreference navigationBarStyle =
+                (DropDownPreference) findPreference(KEY_NAVIGATION_BAR_STYLE);
+        navigationBarStyle.addItem(R.string.navigation_bar_style_summary_stock,
+                R.string.navigation_bar_style_summary_stock);
+        navigationBarStyle.addItem(R.string.navigation_bar_style_summary_immersive,
+                R.string.navigation_bar_style_summary_immersive);
+        if ((systemDesignFlags & SYSTEM_DESIGN_FLAG_IMMERSIVE_NAV) != 0) {
+            navigationBarStyle.setSelectedValue(R.string.navigation_bar_style_summary_immersive);
+        } else {
+            navigationBarStyle.setSelectedValue(R.string.navigation_bar_style_summary_stock);
+        }
+        navigationBarStyle.setCallback(styleCallback);
+
+        final DropDownPreference statusBarStyle =
+                (DropDownPreference) findPreference(KEY_STATUS_BAR_STYLE);
+        statusBarStyle.addItem(R.string.status_bar_style_summary_stock,
+                R.string.status_bar_style_summary_stock);
+        statusBarStyle.addItem(R.string.status_bar_style_summary_immersive,
+                R.string.status_bar_style_summary_immersive);
+        if ((systemDesignFlags & SYSTEM_DESIGN_FLAG_IMMERSIVE_STATUS) != 0) {
+            statusBarStyle.setSelectedValue(R.string.status_bar_style_summary_immersive);
+        } else {
+            statusBarStyle.setSelectedValue(R.string.status_bar_style_summary_stock);
+        }
+        statusBarStyle.setCallback(styleCallback);
 
         if (RotationPolicy.isRotationLockToggleVisible(activity)) {
             DropDownPreference rotatePreference =
