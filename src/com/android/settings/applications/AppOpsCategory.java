@@ -294,7 +294,7 @@ public class AppOpsCategory extends ListFragment implements
             final Bundle args = new Bundle();
             args.putString(AppOpsDetails.ARG_PACKAGE_NAME, mCurrentPkgName);
             ((SettingsActivity) getActivity()).startPreferencePanel(AppOpsDetails.class.getName(),
-                    args, R.string.app_ops_settings, null, this, RESULT_APP_DETAILS);
+                    args, R.string.app_ops_settings_title, null, this, RESULT_APP_DETAILS);
         }
     }
 
