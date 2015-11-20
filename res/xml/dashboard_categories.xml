@@ -215,8 +215,14 @@
         android:id="@+id/system_section"
         android:key="@string/category_key_system"
         android:title="@string/header_category_system" >
-
-        <!-- Date & Time -->
+    <dashboard-tile
+                android:id="@+id/qtifeedback_settings"
+                android:title="@string/qtifeedback_settings_title"
+                android:summary="@string/qtifeedback_settings_subtitle"
+                android:icon="@drawable/ic_settings_qti_feedback">
+        <intent android:action="com.qti.smq.snapdragonSettings" />
+        </dashboard-tile>
+    <!-- Date & Time -->
         <dashboard-tile
                 android:id="@+id/date_time_settings"
                 android:title="@string/date_and_time_settings_title"
