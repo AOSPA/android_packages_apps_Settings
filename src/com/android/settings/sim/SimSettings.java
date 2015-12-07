@@ -101,6 +101,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     private SubscriptionManager mSubscriptionManager;
     private int mNumSlots;
     private Context mContext;
+    private boolean mPrimaryPrefRemoved = false;
 
     private static AlertDialog sAlertDialog = null;
     private static ProgressDialog sProgressDialog = null;
@@ -190,6 +191,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
             }
         }
         updateAllOptions();
+        initLTEPreference();
     }
 
     private void updateAllOptions() {
@@ -275,7 +277,6 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     public void onResume() {
         super.onResume();
         mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
-        initLTEPreference();
         updateSubscriptions();
         listen();
     }
@@ -914,13 +915,22 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
                  CONFIG_PRIMARY_SUB_SETABLE, 0) == 1;
 
         log("isPrimarySubFeatureEnable :" + isPrimarySubFeatureEnable +
-                " primarySetable :" + primarySetable);
+                " primarySetable :" + primarySetable +
+                " mPrimaryPrefRemoved = " + mPrimaryPrefRemoved);
 
         if (!isPrimarySubFeatureEnable || !primarySetable) {
             final PreferenceCategory simActivities =
                     (PreferenceCategory) findPreference(SIM_ACTIVITIES_CATEGORY);
-            simActivities.removePreference(mPrimarySubSelect);
+            if (!mPrimaryPrefRemoved) {
+                simActivities.removePreference(mPrimarySubSelect);
+                mPrimaryPrefRemoved = true;
+            }
             return;
+        } else if (mPrimaryPrefRemoved == true) {
+            final PreferenceCategory simActivities =
+                    (PreferenceCategory) findPreference(SIM_ACTIVITIES_CATEGORY);
+            simActivities.addPreference(mPrimarySubSelect);
+            mPrimaryPrefRemoved = false;
         }
         int currentPrimarySlot = Settings.Global.getInt(mContext.getContentResolver(),
                  CONFIG_CURRENT_PRIMARY_SUB, SubscriptionManager.INVALID_SIM_SLOT_INDEX);
