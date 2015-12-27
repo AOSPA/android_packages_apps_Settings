@@ -262,6 +262,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             Settings.Lte4GEnableActivity.class.getName(),
             Settings.WirelessSettingsActivity.class.getName(),
             //device_section
+            Settings.ButtonsSettingsActivity.class.getName(),
             Settings.HomeSettingsActivity.class.getName(),
             Settings.SoundSettingsActivity.class.getName(),
             Settings.DisplaySettingsActivity.class.getName(),
@@ -384,7 +385,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             MasterClear.class.getName(),
             NightDisplaySettings.class.getName(),
             ManageDomainUrls.class.getName(),
-            AutomaticStorageManagerSettings.class.getName()
+            AutomaticStorageManagerSettings.class.getName(),
+            ButtonsSettings.class.getName()
     };
 
 
@@ -1339,6 +1341,12 @@ public class SettingsActivity extends SettingsDrawerActivity
         setTileEnabled(new ComponentName(packageName,
                 BackupSettingsActivity.class.getName()), hasBackupActivity, isAdmin, pm);
 
+        // Only show buttons settings if supported
+        final int mDeviceHardwareKeys = getResources().getInteger(
+                com.android.internal.R.integer.config_deviceHardwareKeys);
+        setTileEnabled(new ComponentName(packageName,
+                Settings.ButtonsSettingsActivity.class.getName()),mDeviceHardwareKeys != 0,
+                isAdmin, pm);
     }
 
     private void setTileEnabled(ComponentName component, boolean enabled, boolean isAdmin,
