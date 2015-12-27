@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+<<<<<<< HEAD
    Copyright 2013-2017 The ParanoidAndroid Project
+=======
+   Copyright 2015, The ParanoidAndroid Project
+>>>>>>> 1f9a328... settings: Add buttons customization fragment
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -41,6 +45,31 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+    </string-array>
+
+    <!-- Buttons -->
+    <string-array name="action_entries" translatable="false">
+        <item>@string/action_nothing</item>
+        <item>@string/action_menu</item>
+        <item>@string/action_app_switch</item>
+        <item>@string/action_search</item>
+        <item>@string/action_voice_search</item>
+        <item>@string/action_in_app_search</item>
+        <item>@string/action_launch_camera</item>
+        <item>@string/action_last_app</item>
+        <item>@string/action_splitscreen</item>
+    </string-array>
+
+    <string-array name="action_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
     </string-array>
 
 </resources>
