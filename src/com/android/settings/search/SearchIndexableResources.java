@@ -21,6 +21,8 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
 import android.text.TextUtils;
+
+import com.android.settings.ButtonsSettings;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
@@ -216,6 +218,9 @@ public final class SearchIndexableResources {
                 AutomaticStorageManagerSettings.class,
                 NO_DATA_RES_ID,
                 R.drawable.ic_settings_storage);
+        addIndex(ButtonsSettings.class,
+                R.xml.buttons_settings,
+                R.drawable.ic_settings_buttons);
     }
 
     private SearchIndexableResources() {
