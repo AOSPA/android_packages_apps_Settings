@@ -261,6 +261,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             Settings.Lte4GEnableActivity.class.getName(),
             Settings.WirelessSettingsActivity.class.getName(),
             //device_section
+            Settings.ButtonsSettingsActivity.class.getName(),
             Settings.HomeSettingsActivity.class.getName(),
             Settings.SoundSettingsActivity.class.getName(),
             Settings.DisplaySettingsActivity.class.getName(),
@@ -383,7 +384,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             MasterClear.class.getName(),
             NightDisplaySettings.class.getName(),
             ManageDomainUrls.class.getName(),
-            AutomaticStorageManagerSettings.class.getName()
+            AutomaticStorageManagerSettings.class.getName(),
+            ButtonsSettings.class.getName()
     };
 
 
