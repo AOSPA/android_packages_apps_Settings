@@ -18,6 +18,7 @@ package com.android.settings.search;
 
 import android.support.annotation.VisibleForTesting;
 
+import com.android.settings.ButtonsSettings;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.LegalSettings;
@@ -193,6 +194,7 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(RecentLocationRequestSeeAllFragment.class);
         addIndex(PreviouslyConnectedDeviceDashboardFragment.class);
         addIndex(BluetoothDashboardFragment.class);
+        addIndex(ButtonsSettings.class);
     }
 
     @Override
