@@ -86,6 +86,14 @@
                 android:icon="@drawable/ic_settings_home"
                 />
 
+        <!-- Buttons -->
+        <dashboard-tile
+                android:id="@+id/buttons_settings"
+                android:title="@string/buttons_pref_title"
+                android:fragment="com.android.settings.ButtonsSettings"
+                android:icon="@drawable/ic_settings_buttons"
+                />
+
         <!-- Display -->
         <dashboard-tile
                 android:id="@+id/display_settings"

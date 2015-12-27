@@ -18,6 +18,7 @@ package com.android.settings.search;
 
 import android.provider.SearchIndexableResource;
 
+import com.android.settings.ButtonsSettings;
 import com.android.settings.DataUsageSummary;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
@@ -302,6 +303,13 @@ public final class SearchIndexableResources {
                         R.xml.wifi_calling_settings,
                         WifiCallingSettings.class.getName(),
                         R.drawable.ic_settings_wireless));
+
+        sResMap.put(ButtonsSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(ButtonsSettings.class.getName()),
+                        R.xml.buttons_settings,
+                        ButtonsSettings.class.getName(),
+                        R.drawable.ic_settings_home));
     }
 
     private SearchIndexableResources() {

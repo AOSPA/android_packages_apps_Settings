@@ -354,6 +354,7 @@ public class SettingsActivity extends Activity
             ProcessStatsSummary.class.getName(),
             DrawOverlayDetails.class.getName(),
             WriteSettingsDetails.class.getName(),
+            ButtonsSettings.class.getName(),
     };
 
 
@@ -1297,6 +1298,12 @@ public class SettingsActivity extends Activity
                 } else if (id == R.id.development_settings) {
                     if (!showDev || um.hasUserRestriction(
                             UserManager.DISALLOW_DEBUGGING_FEATURES)) {
+                        removeTile = true;
+                    }
+                } else if (id == R.id.buttons_settings) {
+                    boolean showButtonsSettings = getApplicationContext().getResources().getInteger(
+                            com.android.internal.R.integer.config_deviceHardwareKeys) > 0;
+                    if (!showButtonsSettings) {
                         removeTile = true;
                     }
                 }
