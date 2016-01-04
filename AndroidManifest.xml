@@ -91,7 +91,7 @@
             android:requiredForAllUsers="true"
             android:supportsRtl="true"
             android:allowBackup="false"
-            android:usesCleartextTraffic="false">
+            android:usesCleartextTraffic="true">
 
         <!-- Settings -->
 
@@ -671,7 +671,6 @@
                   android:excludeFromRecents="true">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.USER_DICTIONARY_INSERT" />
-                <action android:name="com.android.settings.USER_DICTIONARY_EDIT" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -1409,7 +1408,7 @@
         <!-- Lock screen settings -->
         <activity android:name="ConfirmDeviceCredentialActivity"
             android:exported="true"
-            android:theme="@style/Transparent">
+            android:theme="@android:style/Theme.NoDisplay">
             <intent-filter android:priority="1">
                 <action android:name="android.app.action.CONFIRM_DEVICE_CREDENTIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1736,27 +1735,6 @@
         <activity android:name=".AppPicker" android:label="@string/select_application"
                 android:theme="@android:style/Theme.Material.Light.Dialog" />
 
-        <activity android:name="Settings$UsbSettingsActivity"
-                android:label="@string/storage_title_usb"
-                android:taskAffinity="com.android.settings"
-                android:parentActivityName="Settings$StorageSettingsActivity">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.STORAGE_USB_SETTINGS" />
-                <action android:name="com.android.settings.STORAGE_USB_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.deviceinfo.UsbSettings" />
-            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
-                android:resource="@id/storage_settings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
-        </activity>
-
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="UsbSettings"
                   android:exported="true"
@@ -1828,7 +1806,7 @@
                   android:excludeFromRecents="true"
                   android:exported="true"
                   android:permission="android.permission.MANAGE_USB"
-                  android:theme="@style/Transparent">
+                  android:theme="@android:style/Theme.Material.Light.Dialog.NoActionBar">
         </activity>
 
         <activity android:name=".bluetooth.RequestPermissionHelperActivity"
@@ -2417,6 +2395,19 @@
                 android:value="com.android.settings.notification.AppNotificationSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/notification_settings" />
+        </activity>
+
+        <!-- Show Manual (from settings item) -->
+        <activity android:name="ManualDisplayActivity"
+                  android:label="@string/manual"
+                  android:taskAffinity=""
+                  android:enabled="@bool/config_show_manual">
+            <intent-filter>
+                <action android:name="android.settings.SHOW_MANUAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
         </activity>
 
         <!-- Show regulatory info (from settings item or dialing "*#07#") -->
