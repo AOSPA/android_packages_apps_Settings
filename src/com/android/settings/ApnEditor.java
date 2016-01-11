@@ -248,7 +248,7 @@ public class ApnEditor extends InstrumentedPreferenceActivity
 
         mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 
-        fillUi();
+        fillUi(intent.getStringExtra(ApnSettings.OPERATOR_NUMERIC_EXTRA));
     }
 
     @Override
@@ -270,10 +270,11 @@ public class ApnEditor extends InstrumentedPreferenceActivity
         super.onPause();
     }
 
-    private void fillUi() {
+    private void fillUi(String defaultOperatorNumeric) {
         if (mFirstTime) {
             mFirstTime = false;
-            String numeric = mTelephonyManager.getIccOperatorNumericForData(mSubId);
+            String numeric = (!TextUtils.isEmpty(defaultOperatorNumeric)) ? defaultOperatorNumeric:
+                    mTelephonyManager.getIccOperatorNumericForData(mSubId);
             // Fill in all the values from the db in both text editor and summary
             mName.setText(mCursor.getString(NAME_INDEX));
             mApn.setText(mCursor.getString(APN_INDEX));
