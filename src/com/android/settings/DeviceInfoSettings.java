@@ -65,6 +65,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String FILENAME_PROC_VERSION = "/proc/version";
     private static final String FILENAME_MSV = "/sys/board_properties/soc/msv";
 
+    private static final String KEY_MANUAL = "manual";
     private static final String KEY_REGULATORY_INFO = "regulatory_info";
     private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
@@ -180,6 +181,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         removePreferenceIfBoolFalse(KEY_UPDATE_SETTING,
                 R.bool.config_additional_system_update_setting_enable);
 
+        // Remove manual entry if none present.
+        removePreferenceIfBoolFalse(KEY_MANUAL, R.bool.config_show_manual);
+
         // Remove regulatory information if none present.
         final Intent intent = new Intent(Settings.ACTION_SHOW_REGULATORY_INFO);
         if (getPackageManager().queryIntentActivities(intent, 0).isEmpty()) {
@@ -223,6 +227,12 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         } else if (preference.getKey().equals(KEY_BUILD_NUMBER)) {
             // Don't enable developer options for secondary users.
             if (UserHandle.myUserId() != UserHandle.USER_OWNER) return true;
+
+            // Don't enable developer options until device has been provisioned
+            if (Settings.Global.getInt(getActivity().getContentResolver(),
+                    Settings.Global.DEVICE_PROVISIONED, 0) == 0) {
+                return true;
+            }
 
             final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
             if (um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) return true;
