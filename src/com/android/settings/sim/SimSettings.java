@@ -947,7 +947,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         } else {
             mPrimarySubSelect.setSummary("");
         }
-        mPrimarySubSelect.setEnabled(isManualMode);
+        mPrimarySubSelect.setEnabled(isManualMode && mSelectableSubInfos.size() > 1);
     }
 
     private boolean disableDds() {
