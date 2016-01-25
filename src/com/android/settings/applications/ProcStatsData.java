@@ -177,7 +177,9 @@ public class ProcStatsData {
             if (pkg == null) {
                 pkg = new ProcStatsPackageEntry(proc.mBestTargetPackage, memTotalTime);
                 pkgMap.put(proc.mBestTargetPackage, pkg);
-                pkgEntries.add(pkg);
+                if(pkg.mPackage != null) {
+                    pkgEntries.add(pkg);
+                }
             }
             pkg.addEntry(proc);
         }
