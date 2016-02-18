@@ -33,7 +33,7 @@
     <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="match_parent"
-        android:layout_height="84dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="horizontal" >
 
@@ -44,20 +44,22 @@
 
         <Button
             android:id="@+id/reset_selected_prefs"
-            android:layout_width="wrap_content"
+            android:layout_width="141dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginBottom="0dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
             android:text="@string/reset_selected_settings" />
 
         <Button
             android:id="@+id/reset_all_prefs"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="12dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
             android:text="@string/reset_all_settings" />
     </LinearLayout>
 </LinearLayout>
