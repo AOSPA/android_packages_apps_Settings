@@ -129,7 +129,8 @@
 
         <activity android:name=".SubSettings"
                 android:taskAffinity="com.android.settings"
-                android:parentActivityName="Settings">
+                android:parentActivityName="Settings"
+                android:configChanges="mcc|mnc">
         </activity>
 
         <activity android:name="CreateShortcut" android:label="@string/settings_shortcut"
