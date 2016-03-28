@@ -31,6 +31,12 @@
         android:persistent="false" />
 
     <SwitchPreference
+        android:key="swap_slider_order"
+        android:title="@string/swap_slider_order_title"
+        android:summary="@string/swap_slider_order_summary"
+        android:persistent="false" />
+
+    <SwitchPreference
         android:key="button_brightness"
         android:title="@string/hardware_brightness_keys_title"
         android:summary="@string/hardware_brightness_keys_summary"

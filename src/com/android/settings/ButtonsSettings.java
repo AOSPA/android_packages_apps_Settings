@@ -33,6 +33,7 @@ import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.service.notification.ZenModeConfig;
 import android.util.Log;
 import android.text.TextUtils;
 
@@ -59,6 +60,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_NAVIGATION_BAR         = "navigation_bar";
     private static final String KEY_SWAP_NAVIGATION_KEYS   = "swap_navigation_keys";
+    private static final String KEY_SWAP_SLIDER_ORDER      = "swap_slider_order";
     private static final String KEY_BUTTON_BRIGHTNESS      = "button_brightness";
 
     private static final String KEY_HOME_LONG_PRESS        = "hardware_keys_home_long_press";
@@ -102,8 +104,8 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
     private SwitchPreference mNavigationBar;
     private SwitchPreference mSwapNavigationkeys;
+    private SwitchPreference mSwapSliderOrder;
     private SwitchPreference mButtonBrightness;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -130,6 +132,17 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
         mSwapNavigationkeys = (SwitchPreference) findPreference(KEY_SWAP_NAVIGATION_KEYS);
         if (mSwapNavigationkeys != null) {
             mSwapNavigationkeys.setOnPreferenceChangeListener(this);
+        }
+
+        /* Swap Slider order */
+        mSwapSliderOrder = (SwitchPreference) findPreference(KEY_SWAP_SLIDER_ORDER);
+        if (mSwapSliderOrder != null) {
+            if (ZenModeConfig.hasAlertSlider(getActivity().getApplicationContext())) {
+                mSwapSliderOrder.setOnPreferenceChangeListener(this);
+            } else {
+                mSwapSliderOrder = null;
+                removePreference(KEY_SWAP_SLIDER_ORDER);
+            }
         }
 
         /* Button Brightness */
@@ -324,6 +337,8 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             return Settings.System.NAVIGATION_BAR_ENABLED;
         } else if (preference == mSwapNavigationkeys) {
             return Settings.System.SWAP_NAVIGATION_KEYS;
+        } else if (preference == mSwapSliderOrder) {
+            return Settings.System.ALERT_SLIDER_ORDER;
         } else if (preference == mButtonBrightness) {
             return Settings.System.BUTTON_BRIGHTNESS_ENABLED;
         } else if (preference == mHomeLongPressAction) {
@@ -371,6 +386,9 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
         final boolean swapNavigationkeysEnabled = Settings.System.getIntForUser(resolver,
                 Settings.System.SWAP_NAVIGATION_KEYS, 0, UserHandle.USER_CURRENT) != 0;
 
+        final boolean swapSliderOrderEnabled = Settings.System.getIntForUser(resolver,
+                Settings.System.ALERT_SLIDER_ORDER, 0, UserHandle.USER_CURRENT) != 0;
+
         final boolean buttonBrightnessEnabled = Settings.System.getIntForUser(resolver,
                 Settings.System.BUTTON_BRIGHTNESS_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
 
@@ -383,6 +401,10 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             // Disable when navigation bar is disabled.
             mSwapNavigationkeys.setEnabled(navigationBarEnabled
                     || hasBack && hasAppSwitch);
+        }
+
+        if (mSwapSliderOrder != null) {
+            mSwapSliderOrder.setChecked(swapSliderOrderEnabled);
         }
 
         if (mButtonBrightness != null) {
