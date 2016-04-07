@@ -86,4 +86,12 @@
         android:title="@string/gesture_prevent_ringing_screen_title"
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
         settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
+
+    <Preference
+        android:key="offscreen_gesture"
+        android:title="@string/offscreen_gesture_title"
+        android:summary="@string/offscreen_gesture_summary"
+        android:fragment="co.aospa.settings.gestures.OffscreenGestureSettings"
+        settings:controller="co.aospa.settings.gestures.OffscreenGestureSettingsController" />
+
 </PreferenceScreen>
