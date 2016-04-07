@@ -106,4 +106,10 @@
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
         settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
 
+    <Preference
+        android:key="offscreen_gesture"
+        android:title="@string/offscreen_gesture_title"
+        android:summary="@string/offscreen_gesture_summary"
+        android:fragment="com.android.settings.gestures.OffscreenGestureSettings" />
+
 </PreferenceScreen>
