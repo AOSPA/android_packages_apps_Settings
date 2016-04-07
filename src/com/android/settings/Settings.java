@@ -170,4 +170,5 @@ public class Settings extends SettingsActivity {
 
     // Aospa additions
     public static class ButtonsSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class GesturesSettingsActivity extends SettingsActivity { /* empty */ }
 }
