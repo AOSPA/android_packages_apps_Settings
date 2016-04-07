@@ -142,30 +142,19 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
         }
     }
 
-    private void enableGestures(boolean enable, boolean changed) {
+    private void enableGestures(boolean enable, boolean start) {
         for (String gestureKey : mGesturesKeyCodes.keySet()) {
             if (getResources().getInteger(mGesturesKeyCodes.get(gestureKey)) == 0) {
                 continue;
             }
             ListPreference gesturePref = (ListPreference) findPreference(gestureKey);
-            if (enable) {
-                gesturePref.setEnabled(true);
+            gesturePref.setEnabled(enable);
+            if (start) {
                 int gestureDefault = getResources().getInteger(
                         mGesturesDefaults.get(gestureKey));
-                if (changed) {
-                    Settings.System.putInt(getContentResolver(),
-                            mGesturesSettings.get(gestureKey), gestureDefault);
-                    gesturePref.setValue(String.valueOf(gestureDefault));
-                } else {
-                    int gestureBehaviour = Settings.System.getInt(getContentResolver(),
-                            mGesturesSettings.get(gestureKey), gestureDefault);
-                    gesturePref.setValue(String.valueOf(gestureBehaviour));
-                }
-            } else {
-                gesturePref.setEnabled(false);
-                gesturePref.setValue("0");
-                Settings.System.putInt(getContentResolver(),
-                        mGesturesSettings.get(gestureKey), 0);
+                int gestureBehaviour = Settings.System.getInt(getContentResolver(),
+                        mGesturesSettings.get(gestureKey), gestureDefault);
+                gesturePref.setValue(String.valueOf(gestureBehaviour));
             }
         }
     }
@@ -207,7 +196,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
                     mContext.getContentResolver(),
                     Settings.System.GESTURES_ENABLED, 0) != 0;
             mSwitchBar.setChecked(gesturesEnabled);
-            mGesturesSettings.enableGestures(gesturesEnabled, false);
+            mGesturesSettings.enableGestures(gesturesEnabled, true);
         }
 
         public void teardownSwitchBar() {
@@ -234,7 +223,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(
                     mContext.getContentResolver(),
                     Settings.System.GESTURES_ENABLED, isChecked ? 1 : 0);
-            mGesturesSettings.enableGestures(isChecked, true);
+            mGesturesSettings.enableGestures(isChecked, false);
         }
 
     }
