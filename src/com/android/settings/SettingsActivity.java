@@ -255,6 +255,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             Settings.WirelessSettingsActivity.class.getName(),
             //device_section
             Settings.ButtonsSettingsActivity.class.getName(),
+            Settings.GesturesSettingsActivity.class.getName(),
             Settings.HomeSettingsActivity.class.getName(),
             Settings.SoundSettingsActivity.class.getName(),
             Settings.DisplaySettingsActivity.class.getName(),
@@ -372,9 +373,9 @@ public class SettingsActivity extends SettingsDrawerActivity
             TestingSettings.class.getName(),
             WifiAPITest.class.getName(),
             WifiInfo.class.getName(),
-            ButtonsSettings.class.getName()
+            ButtonsSettings.class.getName(),
+            GesturesSettings.class.getName()
     };
-
 
     private static final String[] LIKE_SHORTCUT_INTENT_ACTION_ARRAY = {
             "android.settings.APPLICATION_DETAILS_SETTINGS"
@@ -1178,6 +1179,10 @@ public class SettingsActivity extends SettingsDrawerActivity
         setTileEnabled(new ComponentName(packageName,
                         Settings.AccessibilitySettingsActivity.class.getName()),
                 !getResources().getBoolean(R.bool.config_settings_rjil_layout), isAdmin, pm);
+
+//        setTileEnabled(new ComponentName(packageName,
+//                        Settings.GesturesSettingsActivity.class.getName()),
+//                GesturesSettings.supportsGestures(this));
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.Lte4GEnableActivity.class.getName()),
