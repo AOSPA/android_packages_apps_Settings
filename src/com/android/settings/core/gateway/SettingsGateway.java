@@ -147,6 +147,7 @@ import com.android.settings.wifi.calling.WifiCallingSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.tether.WifiTetherSettings;
+import com.android.settings.GesturesSettings;
 
 public class SettingsGateway {
 
@@ -283,7 +284,8 @@ public class SettingsGateway {
             PreviouslyConnectedDeviceDashboardFragment.class.getName(),
             BatterySaverScheduleSettings.class.getName(),
             MobileNetworkListFragment.class.getName(),
-            GlobalActionsPanelSettings.class.getName()
+            GlobalActionsPanelSettings.class.getName(),
+            GesturesSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
