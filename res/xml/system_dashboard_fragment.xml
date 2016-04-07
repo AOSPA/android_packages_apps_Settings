@@ -25,8 +25,7 @@
         android:title="@string/gesture_preference_title"
         android:icon="@drawable/ic_settings_gestures"
         android:order="-250"
-        android:fragment="com.android.settings.gestures.GestureSettings"
-        settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController"/>
+        android:fragment="com.android.settings.GesturesSettings" />
 
     <!-- Backup -->
     <Preference
@@ -69,5 +68,4 @@
                 android:targetPackage="@string/additional_system_update"
                 android:targetClass="@string/additional_system_update_menu" />
     </Preference>
-
 </PreferenceScreen>

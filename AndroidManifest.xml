@@ -919,6 +919,43 @@
                 android:resource="@string/display_dashboard_summary"/>
         </activity>
 
+        <!-- Gestures settings activity -->
+        <activity android:name="Settings$GesturesSettingsActivity"
+                android:label="@string/gestures_settings_title"
+                android:icon="@drawable/ic_settings_offscreen_gestures"
+                android:taskAffinity=""
+                android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.GESTURES_SETTINGS" />
+                <action android:name="android.settings.GESTURES_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <intent-filter android:priority="7">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.device" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.GesturesSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name="GesturesSettings"
+                android:label="@string/gestures_settings_title"
+                android:exported="true"
+                android:targetActivity="Settings$GesturesSettingsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.GesturesSettings" />
+        </activity-alias>
+
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="DisplaySettings"
                 android:label="@string/display_settings"
