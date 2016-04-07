@@ -28,6 +28,7 @@ import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.EncryptionAndCredential;
 import com.android.settings.LegalSettings;
+import com.android.settings.GesturesSettings;
 import com.android.settings.R;
 import com.android.settings.ScreenPinningSettings;
 import com.android.settings.SecuritySettings;
@@ -221,6 +222,7 @@ public final class SearchIndexableResources {
         addIndex(ButtonsSettings.class,
                 R.xml.buttons_settings,
                 R.drawable.ic_settings_buttons);
+        addIndex(GesturesSettings.class, R.xml.gestures_settings, R.drawable.ic_settings_offscreen_gestures);
     }
 
     private SearchIndexableResources() {
