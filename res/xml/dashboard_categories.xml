@@ -114,6 +114,13 @@
             </intent>
         </dashboard-tile>
 
+        <!-- Gestures -->
+        <dashboard-tile
+                android:id="@+id/gestures_settings"
+                android:title="@string/gestures_settings_title"
+                android:fragment="com.android.settings.GesturesSettings"
+                />
+
         <!-- Notifications -->
         <dashboard-tile
                 android:id="@+id/notification_settings"
