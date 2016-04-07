@@ -22,6 +22,7 @@ import com.android.settings.ButtonsSettings;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.LegalSettings;
+import com.android.settings.GesturesSettings;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.BluetoothDashboardFragment;
@@ -195,6 +196,7 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(PreviouslyConnectedDeviceDashboardFragment.class);
         addIndex(BluetoothDashboardFragment.class);
         addIndex(ButtonsSettings.class);
+        addIndex(GesturesSettings.class);
     }
 
     @Override
