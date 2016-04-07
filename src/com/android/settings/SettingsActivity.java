@@ -1268,6 +1268,8 @@ public class SettingsActivity extends Activity
                     if (!updateHomeSettingTiles(tile)) {
                         removeTile = true;
                     }
+                } else if (id == R.id.gestures_settings) {
+                    removeTile = !GesturesSettings.supportsGestures(this);
                 } else if (id == R.id.user_settings) {
                     boolean hasMultipleUsers =
                             ((UserManager) getSystemService(Context.USER_SERVICE))

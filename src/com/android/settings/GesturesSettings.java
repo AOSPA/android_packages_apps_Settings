@@ -178,6 +178,16 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
         return true;
     }
 
+    public static boolean supportsGestures(Context context) {
+        for (String gestureKey : mGesturesKeyCodes.keySet()) {
+            if (context.getResources().getInteger(mGesturesKeyCodes
+                    .get(gestureKey)) > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private class GesturesEnabler implements SwitchBar.OnSwitchChangeListener {
 
         private final Context mContext;
