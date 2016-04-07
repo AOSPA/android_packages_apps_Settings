@@ -38,7 +38,7 @@ public class TapToWakePreferenceController extends AbstractPreferenceController 
 
     @Override
     public boolean isAvailable() {
-        return mContext.getResources().getBoolean(
+        return false && mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_supportDoubleTapWake);
     }
 
