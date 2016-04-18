@@ -123,7 +123,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
         super.onStart();
 
         SettingsActivity activity = (SettingsActivity) getActivity();
-        mGesturesEnabler = new GesturesEnabler(activity.getSwitchBar(), this);
+        mGesturesEnabler = new GesturesEnabler(activity.getSwitchBar());
     }
 
     @Override
@@ -181,14 +181,11 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
 
         private final Context mContext;
         private final SwitchBar mSwitchBar;
-        private final GesturesSettings mGesturesSettings;
         private boolean mListeningToOnSwitchChange;
 
-        public GesturesEnabler(SwitchBar switchBar,
-                GesturesSettings gesturesSettings) {
+        public GesturesEnabler(SwitchBar switchBar) {
             mContext = switchBar.getContext();
             mSwitchBar = switchBar;
-            mGesturesSettings = gesturesSettings;
 
             mSwitchBar.show();
 
@@ -196,7 +193,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
                     mContext.getContentResolver(),
                     Settings.System.GESTURES_ENABLED, 0) != 0;
             mSwitchBar.setChecked(gesturesEnabled);
-            mGesturesSettings.enableGestures(gesturesEnabled, true);
+            GesturesSettings.this.enableGestures(gesturesEnabled, true);
         }
 
         public void teardownSwitchBar() {
@@ -223,7 +220,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(
                     mContext.getContentResolver(),
                     Settings.System.GESTURES_ENABLED, isChecked ? 1 : 0);
-            mGesturesSettings.enableGestures(isChecked, false);
+            GesturesSettings.this.enableGestures(isChecked, false);
         }
 
     }
