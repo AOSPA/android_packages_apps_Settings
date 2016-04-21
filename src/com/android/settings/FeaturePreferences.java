@@ -53,7 +53,7 @@ public class FeaturePreferences extends InstrumentedFragment {
         public void onClick(View v) {
             if (v == mResetAllButton) {
                 for (String setting : Settings.Secure.SETTINGS_TO_RESET) {
-                    Settings.Secure.putInt(getContext().getContentResolver(), setting, 0);
+                    Settings.Secure.putInt(mCr, setting, 0);
                 }
             } else if (v == mResetSelectedButton) {
                 if (customPrefs != null) {
@@ -77,25 +77,24 @@ public class FeaturePreferences extends InstrumentedFragment {
                     .createPackageContext("com.android.systemui", 0);
             Resources r = con.getResources();
             for (String setting : Settings.Secure.SETTINGS_TO_RESET) {
-                if (!(Settings.Secure.getInt(con.getContentResolver(), setting, 0) == 0)) {
-                    String key = setting.toLowerCase();
-                    int nameResId = r.getIdentifier(setting + "_name", "string", "com.android.systemui");
-                    int descResId = r.getIdentifier(setting + "_summary", "string", "com.android.systemui");
-                    if (nameResId != 0 && descResId != 0) {
-                        try {
-                            String name = (String) r.getText(nameResId);
-                            String desc = (String) r.getText(descResId);
-                            CheckBoxPreference item = new CheckBoxPreference(getContext());
-                            item.setKey(key);
-                            item.setTitle(name);
-                            item.setSummary(desc);
-                            customPrefs.add(item);
-                        } catch (Resources.NotFoundException e) {
-                            Log.e(TAG, "Resource not found for: " + setting, e);
-                        }
-                    } else {
-                        Log.v(TAG, "Missing strings for: " + setting);
+                String key = setting.toLowerCase();
+                int nameResId = r.getIdentifier(setting + "_name", "string", "com.android.systemui");
+                int descResId = r.getIdentifier(setting + "_summary", "string", "com.android.systemui");
+                if (nameResId != 0 && descResId != 0) {
+                    try {
+                        String name = (String) r.getText(nameResId);
+                        String desc = (String) r.getText(descResId);
+                        CheckBoxPreference item = new CheckBoxPreference(getContext());
+                        item.setKey(key);
+                        item.setTitle(name);
+                        item.setSummary(desc);
+                        item.setEnabled(!(Settings.Secure.getInt(mCr, setting, 0) == 0));
+                        customPrefs.add(item);
+                    } catch (Resources.NotFoundException e) {
+                        Log.e(TAG, "Resource not found for: " + setting, e);
                     }
+                } else {
+                    Log.v(TAG, "Missing strings for: " + setting);
                 }
             }
         } catch (PackageManager.NameNotFoundException e) {
@@ -123,9 +122,11 @@ public class FeaturePreferences extends InstrumentedFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CheckBoxPreference pref = (CheckBoxPreference) parent.getItemAtPosition(position);
-                pref.setChecked(!pref.isChecked());
                 CheckBox cb = (CheckBox) view.findViewById(android.R.id.checkbox);
-                cb.setChecked(pref.isChecked());
+                if (pref.isEnabled()) {
+                    pref.setChecked(!pref.isChecked());
+                    cb.setChecked(pref.isChecked());
+                }
                 updateResetSelectedButton();
             }
         });
