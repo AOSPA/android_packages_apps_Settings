@@ -35,6 +35,14 @@
                 android:entryValues="@array/gestures_values" />
 
         <ListPreference
+                android:key="draw_inverse_v"
+                android:title="@string/gestures_draw_inverse_v"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
+
+        <ListPreference
                 android:key="draw_o"
                 android:title="@string/gestures_draw_o"
                 android:summary="%s"
@@ -69,6 +77,22 @@
         <ListPreference
                 android:key="draw_arrow_right"
                 android:title="@string/gestures_draw_arrow_right"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
+
+        <ListPreference
+                android:key="one_finger_swipe_down"
+                android:title="@string/gestures_one_finger_swipe_left"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
+
+        <ListPreference
+                android:key="one_finger_swipe_left"
+                android:title="@string/gestures_one_finger_swipe_left"
                 android:summary="%s"
                 android:persistent="false"
                 android:entries="@array/gestures_entries"
