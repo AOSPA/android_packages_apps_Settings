@@ -59,16 +59,8 @@
             android:entryValues="@array/gestures_values" />
 
         <ListPreference
-            android:key="two_finger_swipe_up"
-            android:title="@string/gestures_two_finger_swipe_up"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
-
-        <ListPreference
-            android:key="two_finger_swipe_down"
-            android:title="@string/gestures_two_finger_swipe_down"
+            android:key="two_finger_swipe"
+            android:title="@string/gestures_two_finger_swipe"
             android:summary="%s"
             android:persistent="false"
             android:entries="@array/gestures_entries"
