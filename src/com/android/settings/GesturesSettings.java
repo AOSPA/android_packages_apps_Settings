@@ -46,6 +46,8 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DRAW_W = "draw_w";
     private static final String KEY_DRAW_ARROW_LEFT = "draw_arrow_left";
     private static final String KEY_DRAW_ARROW_RIGHT = "draw_arrow_right";
+    private static final String KEY_ONE_FINGER_SWIPE_UP = "one_finger_swipe_up";
+    private static final String KEY_ONE_FINGER_SWIPE_RIGHT = "one_finger_swipe_right";
     private static final String KEY_ONE_FINGER_SWIPE_DOWN = "one_finger_swipe_down";
     private static final String KEY_ONE_FINGER_SWIPE_LEFT = "one_finger_swipe_left";
     private static final String KEY_TWO_FINGER_SWIPE_UP = "two_finger_swipe_up";
@@ -64,6 +66,8 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
         mGesturesKeyCodes.put(KEY_DRAW_W, com.android.internal.R.integer.config_drawWKeyCode);
         mGesturesKeyCodes.put(KEY_DRAW_ARROW_LEFT, com.android.internal.R.integer.config_drawArrowLeftKeyCode);
         mGesturesKeyCodes.put(KEY_DRAW_ARROW_RIGHT, com.android.internal.R.integer.config_drawArrowRightKeyCode);
+        mGesturesKeyCodes.put(KEY_ONE_FINGER_SWIPE_UP, com.android.internal.R.integer.config_oneFingerSwipeUpKeyCode);
+        mGesturesKeyCodes.put(KEY_ONE_FINGER_SWIPE_RIGHT, com.android.internal.R.integer.config_oneFingerSwipeRightKeyCode);
         mGesturesKeyCodes.put(KEY_ONE_FINGER_SWIPE_DOWN, com.android.internal.R.integer.config_oneFingerSwipeDownKeyCode);
         mGesturesKeyCodes.put(KEY_ONE_FINGER_SWIPE_LEFT, com.android.internal.R.integer.config_oneFingerSwipeLeftKeyCode);
         mGesturesKeyCodes.put(KEY_TWO_FINGER_SWIPE_UP, com.android.internal.R.integer.config_twoFingerSwipeUpKeyCode);
@@ -79,6 +83,8 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
         mGesturesDefaults.put(KEY_DRAW_W, com.android.internal.R.integer.config_drawWDefault);
         mGesturesDefaults.put(KEY_DRAW_ARROW_LEFT, com.android.internal.R.integer.config_drawArrowLeftDefault);
         mGesturesDefaults.put(KEY_DRAW_ARROW_RIGHT, com.android.internal.R.integer.config_drawArrowRightDefault);
+        mGesturesDefaults.put(KEY_ONE_FINGER_SWIPE_UP, com.android.internal.R.integer.config_oneFingerSwipeUpDefault);
+        mGesturesDefaults.put(KEY_ONE_FINGER_SWIPE_RIGHT, com.android.internal.R.integer.config_oneFingerSwipeRightDefault);
         mGesturesDefaults.put(KEY_ONE_FINGER_SWIPE_DOWN, com.android.internal.R.integer.config_oneFingerSwipeDownDefault);
         mGesturesDefaults.put(KEY_ONE_FINGER_SWIPE_LEFT, com.android.internal.R.integer.config_oneFingerSwipeLeftDefault);
         mGesturesDefaults.put(KEY_TWO_FINGER_SWIPE_UP, com.android.internal.R.integer.config_twoFingerSwipeUpDefault);
@@ -94,6 +100,8 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
         mGesturesSettings.put(KEY_DRAW_W, Settings.System.GESTURE_DRAW_W);
         mGesturesSettings.put(KEY_DRAW_ARROW_LEFT, Settings.System.GESTURE_DRAW_ARROW_LEFT);
         mGesturesSettings.put(KEY_DRAW_ARROW_RIGHT, Settings.System.GESTURE_DRAW_ARROW_RIGHT);
+        mGesturesSettings.put(KEY_ONE_FINGER_SWIPE_UP, Settings.System.GESTURE_ONE_FINGER_SWIPE_UP);
+        mGesturesSettings.put(KEY_ONE_FINGER_SWIPE_RIGHT, Settings.System.GESTURE_ONE_FINGER_SWIPE_RIGHT);
         mGesturesSettings.put(KEY_ONE_FINGER_SWIPE_DOWN, Settings.System.GESTURE_ONE_FINGER_SWIPE_DOWN);
         mGesturesSettings.put(KEY_ONE_FINGER_SWIPE_LEFT, Settings.System.GESTURE_ONE_FINGER_SWIPE_LEFT);
         mGesturesSettings.put(KEY_TWO_FINGER_SWIPE_UP, Settings.System.GESTURE_TWO_FINGER_SWIPE_UP);
