@@ -63,6 +63,7 @@ import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.sim.SimSettings;
 import com.android.settings.search.DynamicIndexableContentMonitor;
 import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.wfd.WifiDisplaySettings;
@@ -766,6 +767,15 @@ public class SettingsActivity extends SettingsDrawerActivity
      */
     private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
             boolean addToBackStack, int titleResId, CharSequence title, boolean withTransition) {
+        if (fragmentName.equals(SimSettings.class.getName())){
+            Log.i(LOG_TAG, "switchToFragment, launch simSettings  ");
+            Intent provisioningIntent =
+                    new Intent("com.android.settings.sim.SIM_SUB_INFO_SETTINGS");
+            startActivity(provisioningIntent);
+            finish();
+            return null;
+        }
+
         if (validate && !isValidFragment(fragmentName)) {
             throw new IllegalArgumentException("Invalid fragment for this activity: "
                     + fragmentName);
