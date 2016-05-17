@@ -15,7 +15,9 @@
  */
 package com.android.settings.network;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -95,5 +97,18 @@ public class MobileNetworkPreferenceController extends PreferenceController impl
         if (mPhoneStateListener != null) {
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
         }
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (KEY_MOBILE_NETWORK_SETTINGS.equals(preference.getKey()) &&
+                Utils.isNetworkSettingsApkAvailable(mContext)) {
+            final Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setComponent(new ComponentName("com.qualcomm.qti.networksetting",
+                    "com.qualcomm.qti.networksetting.MobileNetworkSettings"));
+            mContext.startActivity(intent);
+            return true;
+        }
+        return false;
     }
 }
