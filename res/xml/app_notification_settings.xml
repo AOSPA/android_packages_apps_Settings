@@ -42,19 +42,27 @@
             android:order="3"
             android:persistent="false" />
 
+    <!-- Floating -->
+    <SwitchPreference
+            android:key="floating"
+            android:title="@string/app_notification_floating_title"
+            android:summary="@string/app_notification_floating_summary"
+            android:order="4"
+            android:persistent="false" />
+
     <!-- Sensitive -->
     <SwitchPreference
             android:key="sensitive"
             android:title="@string/app_notification_sensitive_title"
             android:summary="@string/app_notification_sensitive_summary"
-            android:order="4"
+            android:order="5"
             android:persistent="false" />
 
     <!-- App notification preferences -->
     <Preference
             android:key="app_settings"
             android:title="@string/app_notification_preferences"
-            android:order="5"
+            android:order="6"
             android:persistent="false" />
 
 </PreferenceScreen>

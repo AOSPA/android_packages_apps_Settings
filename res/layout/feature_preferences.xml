@@ -16,7 +16,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <ListView
         android:id="@+id/setting_list"
@@ -28,38 +28,40 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="bottom"
-        android:background="?android:attr/listDivider"/>
+        android:background="?android:attr/listDivider" />
 
-    <LinearLayout
-        android:id="@+id/buttons"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal" >
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        android:layout_gravity="bottom">
 
         <Button
             android:id="@+id/reset_selected_prefs"
-            android:layout_width="141dp"
+            android:layout_width="wrap_content"
+            android:minWidth="141dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/reset_all_prefs"
+            android:enabled="false"
             android:text="@string/reset_selected_settings" />
 
         <Button
             android:id="@+id/reset_all_prefs"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
+            android:minWidth="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:text="@string/reset_all_settings" />
-    </LinearLayout>
+
+    </RelativeLayout>
+
 </LinearLayout>

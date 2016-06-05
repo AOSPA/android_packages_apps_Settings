@@ -68,20 +68,20 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.DataUsageSummary;
-import com.android.settings.DataUsageSummary.AppItem;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
 import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.PowerUsageDetail;
-import com.android.settings.net.ChartData;
-import com.android.settings.net.ChartDataLoader;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
-import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.AppItem;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.net.ChartData;
+import com.android.settingslib.net.ChartDataLoader;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -822,7 +822,13 @@ public class InstalledAppDetails extends AppInfoBase
         if (!appRow.peekable) {
             notifSummary.add(context.getString(R.string.notifications_no_peeking));
         }
+        if (!appRow.floating) {
+            notifSummary.add(context.getString(R.string.notifications_no_floating));
+        }
         switch (notifSummary.size()) {
+            case 4:
+                return context.getString(R.string.notifications_four_items,
+                        notifSummary.get(0), notifSummary.get(1), notifSummary.get(2), notifSummary.get(3));
             case 3:
                 return context.getString(R.string.notifications_three_items,
                         notifSummary.get(0), notifSummary.get(1), notifSummary.get(2));
