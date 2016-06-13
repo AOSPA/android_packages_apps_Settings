@@ -68,19 +68,19 @@ public class PowerUsageSummary extends PowerUsageBase {
     private static final String KEY_BATTERY_HISTORY = "battery_history";
 
     private static final int MENU_STATS_TYPE = Menu.FIRST;
-    private static final int MENU_BATTERY_SAVER = Menu.FIRST + 1;
-    private static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 2;
-    private static final int MENU_HELP = Menu.FIRST + 3;
+    private static final int MENU_BATTERY_SAVER = Menu.FIRST + 2;
+    private static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
+    private static final int MENU_HELP = Menu.FIRST + 4;
 
-    private static final int MENU_BATTERY_STYLE             = Menu.FIRST + 4;
-    private static final int SUBMENU_BATTERY_BAR            = Menu.FIRST + 5;
-    private static final int SUBMENU_BATTERY_CIRCLE         = Menu.FIRST + 6;
-    private static final int SUBMENU_BATTERY_TEXT           = Menu.FIRST + 7;
-    private static final int SUBMENU_BATTERY_HIDDEN         = Menu.FIRST + 8;
-    private static final int MENU_BATTERY_PERCENT           = Menu.FIRST + 9;
-    private static final int SUBMENU_BATTERY_PERCENT_HIDDEN = Menu.FIRST + 10;
-    private static final int SUBMENU_BATTERY_PERCENT_INSIDE = Menu.FIRST + 11;
-    private static final int SUBMENU_BATTERY_PERCENT_NEXT   = Menu.FIRST + 12;
+    private static final int MENU_BATTERY_STYLE             = Menu.FIRST + 5;
+    private static final int SUBMENU_BATTERY_BAR            = Menu.FIRST + 6;
+    private static final int SUBMENU_BATTERY_CIRCLE         = Menu.FIRST + 7;
+    private static final int SUBMENU_BATTERY_TEXT           = Menu.FIRST + 8;
+    private static final int SUBMENU_BATTERY_HIDDEN         = Menu.FIRST + 9;
+    private static final int MENU_BATTERY_PERCENT           = Menu.FIRST + 10;
+    private static final int SUBMENU_BATTERY_PERCENT_HIDDEN = Menu.FIRST + 11;
+    private static final int SUBMENU_BATTERY_PERCENT_INSIDE = Menu.FIRST + 12;
+    private static final int SUBMENU_BATTERY_PERCENT_NEXT   = Menu.FIRST + 13;
 
     private BatteryHistoryPreference mHistPref;
     private PreferenceGroup mAppListGroup;
@@ -155,11 +155,11 @@ public class PowerUsageSummary extends PowerUsageBase {
 
         batteryStyle.add(1, SUBMENU_BATTERY_BAR, 1, R.string.battery_style_icon)
                     .setChecked(selectedIcon == 0);
-        batteryStyle.add(1, SUBMENU_BATTERY_CIRCLE, 3, R.string.battery_style_circle)
+        batteryStyle.add(1, SUBMENU_BATTERY_CIRCLE, 2, R.string.battery_style_circle)
                     .setChecked(selectedIcon == 2);
-        batteryStyle.add(1, SUBMENU_BATTERY_TEXT, 4, R.string.battery_style_text)
+        batteryStyle.add(1, SUBMENU_BATTERY_TEXT, 3, R.string.battery_style_text)
                     .setChecked(selectedIcon == 6);
-        batteryStyle.add(1, SUBMENU_BATTERY_HIDDEN, 5, R.string.battery_style_hidden)
+        batteryStyle.add(1, SUBMENU_BATTERY_HIDDEN, 4, R.string.battery_style_hidden)
                     .setChecked(selectedIcon == 4);
         batteryStyle.setGroupCheckable(1, true, true);
 
