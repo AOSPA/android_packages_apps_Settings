@@ -18,6 +18,12 @@
         android:title="@string/gestures_settings_title"
         settings:keywords="@string/keywords_gestures">
 
+        <CheckBoxPreference
+                android:key="proximity_on_wake"
+                android:title="@string/proximity_wake_title"
+                android:summary="@string/proximity_wake_summary"
+                android:defaultValue="true" />
+
         <ListPreference
             android:key="double_tap"
             android:title="@string/gestures_double_tap"

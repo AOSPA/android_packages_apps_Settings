@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.provider.SearchIndexableResource;
@@ -51,6 +52,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
     private static final String KEY_ONE_FINGER_SWIPE_DOWN = "one_finger_swipe_down";
     private static final String KEY_ONE_FINGER_SWIPE_LEFT = "one_finger_swipe_left";
     private static final String KEY_TWO_FINGER_SWIPE = "two_finger_swipe";
+    private static final String KEY_PROXIMITY_WAKE = "proximity_on_wake";
 
     private static final HashMap<String, Integer> mGesturesKeyCodes = new HashMap<>();
     private static final HashMap<String, Integer> mGesturesDefaults = new HashMap();
@@ -122,6 +124,12 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
             } else {
                 removePreference(gestureKey);
             }
+        }
+        boolean proximityCheckOnWait = getResources().getBoolean(
+                com.android.internal.R.bool.config_proximityCheckOnWake);
+        if (!proximityCheckOnWait) {
+            getPreferenceScreen().removePreference(findPreference(KEY_PROXIMITY_WAKE));
+            Settings.System.putInt(getContentResolver(), Settings.System.PROXIMITY_ON_WAKE, 1);
         }
     }
 
@@ -269,5 +277,4 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
             }
 
         };
-
 }
