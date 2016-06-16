@@ -19,10 +19,10 @@
         settings:keywords="@string/keywords_gestures">
 
         <SwitchPreference
-                android:key="proximity_on_wake"
-                android:title="@string/proximity_wake_title"
-                android:summary="@string/proximity_wake_summary"
-                android:defaultValue="true" />
+            android:key="proximity_on_wake"
+            android:title="@string/proximity_wake_title"
+            android:summary="@string/proximity_wake_summary"
+            android:persistent="false" />
 
         <ListPreference
             android:key="double_tap"

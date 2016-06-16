@@ -20,6 +20,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.SwitchPreference;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.widget.Switch;
@@ -38,6 +39,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
 
     private static final String TAG = "GesturesSettings";
 
+    private static final String KEY_PROXIMITY_WAKE = "proximity_on_wake";
     private static final String KEY_DOUBLE_TAP = "double_tap";
     private static final String KEY_DRAW_V = "draw_v";
     private static final String KEY_DRAW_INVERSE_V = "draw_inverse_v";
@@ -51,7 +53,6 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
     private static final String KEY_ONE_FINGER_SWIPE_DOWN = "one_finger_swipe_down";
     private static final String KEY_ONE_FINGER_SWIPE_LEFT = "one_finger_swipe_left";
     private static final String KEY_TWO_FINGER_SWIPE = "two_finger_swipe";
-    private static final String KEY_PROXIMITY_WAKE = "proximity_on_wake";
 
     private static final HashMap<String, Integer> mGesturesKeyCodes = new HashMap<>();
     private static final HashMap<String, Integer> mGesturesDefaults = new HashMap();
@@ -71,9 +72,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
         mGesturesKeyCodes.put(KEY_ONE_FINGER_SWIPE_DOWN, com.android.internal.R.integer.config_oneFingerSwipeDownKeyCode);
         mGesturesKeyCodes.put(KEY_ONE_FINGER_SWIPE_LEFT, com.android.internal.R.integer.config_oneFingerSwipeLeftKeyCode);
         mGesturesKeyCodes.put(KEY_TWO_FINGER_SWIPE, com.android.internal.R.integer.config_twoFingerSwipeKeyCode);
-    }
 
-    static {
         mGesturesDefaults.put(KEY_DOUBLE_TAP, com.android.internal.R.integer.config_doubleTapDefault);
         mGesturesDefaults.put(KEY_DRAW_V, com.android.internal.R.integer.config_drawVDefault);
         mGesturesDefaults.put(KEY_DRAW_INVERSE_V, com.android.internal.R.integer.config_drawInverseVDefault);
@@ -87,9 +86,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
         mGesturesDefaults.put(KEY_ONE_FINGER_SWIPE_DOWN, com.android.internal.R.integer.config_oneFingerSwipeDownDefault);
         mGesturesDefaults.put(KEY_ONE_FINGER_SWIPE_LEFT, com.android.internal.R.integer.config_oneFingerSwipeLeftDefault);
         mGesturesDefaults.put(KEY_TWO_FINGER_SWIPE, com.android.internal.R.integer.config_twoFingerSwipeDefault);
-    }
 
-    static {
         mGesturesSettings.put(KEY_DOUBLE_TAP, Settings.System.GESTURE_DOUBLE_TAP);
         mGesturesSettings.put(KEY_DRAW_V, Settings.System.GESTURE_DRAW_V);
         mGesturesSettings.put(KEY_DRAW_INVERSE_V, Settings.System.GESTURE_DRAW_INVERSE_V);
@@ -106,6 +103,8 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
     }
 
     private GesturesEnabler mGesturesEnabler;
+
+    private SwitchPreference mProximityWake;
 
     @Override
     protected int getMetricsCategory() {
@@ -124,11 +123,19 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
                 removePreference(gestureKey);
             }
         }
+
         boolean proximityCheckOnWait = getResources().getBoolean(
                 com.android.internal.R.bool.config_proximityCheckOnWake);
-        if (!proximityCheckOnWait) {
-            getPreferenceScreen().removePreference(findPreference(KEY_PROXIMITY_WAKE));
-            Settings.System.putInt(getContentResolver(), Settings.System.PROXIMITY_ON_WAKE, 1);
+        if (proximityCheckOnWait) {
+            boolean defaultValue = getResources().getBoolean(
+                    com.android.internal.R.bool.config_proximityCheckOnWakeEnabledByDefault);
+            int value = Settings.System.getInt(getContentResolver(), KEY_PROXIMITY_WAKE,
+                    defaultValue ?  1 : 0);
+            mProximityWake = (SwitchPreference) findPreference(KEY_PROXIMITY_WAKE);
+            mProximityWake.setChecked(value != 0);
+            mProximityWake.setOnPreferenceChangeListener(this);
+        } else {
+            removePreference(KEY_PROXIMITY_WAKE);
         }
     }
 
@@ -172,6 +179,9 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
             }
             ListPreference gesturePref = (ListPreference) findPreference(gestureKey);
             gesturePref.setEnabled(enable);
+            if (mProximityWake != null) {
+                mProximityWake.setEnabled(enable);
+            }
             if (start) {
                 int gestureDefault = getResources().getInteger(
                         mGesturesDefaults.get(gestureKey));
@@ -184,9 +194,15 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        Settings.System.putInt(getContentResolver(),
-                mGesturesSettings.get(preference.getKey()),
-                Integer.parseInt((String) objValue));
+        String key = preference.getKey();
+        if (KEY_PROXIMITY_WAKE.equals(key)) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(getContentResolver(), KEY_PROXIMITY_WAKE, value ? 1 : 0);
+        } else {
+            Settings.System.putInt(getContentResolver(),
+                    mGesturesSettings.get(preference.getKey()),
+                    Integer.parseInt((String) objValue));
+        }
         return true;
     }
 
