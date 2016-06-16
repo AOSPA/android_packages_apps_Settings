@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.provider.SearchIndexableResource;
