@@ -24,6 +24,7 @@ import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
+import com.android.settings.GesturesSettings;
 import com.android.settings.HomeSettings;
 import com.android.settings.LegalSettings;
 import com.android.settings.PrivacySettings;
@@ -309,7 +310,13 @@ public final class SearchIndexableResources {
                         Ranking.getRankForClassName(ButtonsSettings.class.getName()),
                         R.xml.buttons_settings,
                         ButtonsSettings.class.getName(),
-                        R.drawable.ic_settings_home));
+                        R.drawable.ic_settings_buttons));
+        sResMap.put(GesturesSettings.class.getName(),
+                new SearchIndexableResource(
+                        Ranking.getRankForClassName(GesturesSettings.class.getName()),
+                        R.xml.gestures_settings,
+                        GesturesSettings.class.getName(),
+                        R.drawable.ic_settings_gestures));
     }
 
     private SearchIndexableResources() {

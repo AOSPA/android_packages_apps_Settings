@@ -357,7 +357,6 @@ public class SettingsActivity extends Activity
             ButtonsSettings.class.getName(),
     };
 
-
     private static final String[] LIKE_SHORTCUT_INTENT_ACTION_ARRAY = {
             "android.settings.APPLICATION_DETAILS_SETTINGS"
     };
