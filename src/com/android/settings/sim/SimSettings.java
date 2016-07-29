@@ -104,8 +104,8 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
     private Context mContext;
     private boolean mPrimaryPrefRemoved = false;
 
-    private static AlertDialog sAlertDialog = null;
-    private static ProgressDialog sProgressDialog = null;
+    private AlertDialog mAlertDialog = null;
+    private ProgressDialog mProgressDialog = null;
     private boolean needUpdate = false;
     private int mPhoneCount = TelephonyManager.getDefault().getPhoneCount();
     private int[] mUiccProvisionStatus = new int[mPhoneCount];
@@ -707,55 +707,65 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
             String title = mSir == null ? "SUB" : mSir.getDisplayName().toString();
             // Confirm only one AlertDialog instance to show.
-            sAlertDialog = dismissDialog(sAlertDialog);
-            sProgressDialog = dismissDialog(sProgressDialog);
-            AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setTitle(title);
+            mAlertDialog = dismissDialog(mAlertDialog);
+            mProgressDialog = dismissDialog(mProgressDialog);
+            // Create dialog only if Fragment is visible
+            if (isVisible()) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle(title);
 
-            switch(dialogId) {
-                case CONFIRM_ALERT_DLG_ID:
-                    String message;
-                    if (mContext.getResources().getBoolean(
-                            R.bool.confirm_to_switch_data_service)) {
-                        if (SubscriptionManager.getDefaultDataSubId() ==
-                                mSir.getSubscriptionId()) {
-                            message = mContext.getString(
-                                    R.string.sim_enabler_need_switch_data_service,
-                                    getProvisionedSlotId(mContext));
+                switch (dialogId) {
+                    case CONFIRM_ALERT_DLG_ID:
+                        String message;
+                        if (mContext.getResources().getBoolean(
+                                R.bool.confirm_to_switch_data_service)) {
+                            if (SubscriptionManager.getDefaultDataSubId() == mSir
+                                    .getSubscriptionId()) {
+                                message = mContext
+                                        .getString(
+                                                R.string.sim_enabler_need_switch_data_service,
+                                                getProvisionedSlotId(mContext));
+                            } else {
+                                message = mContext
+                                        .getString(R.string.sim_enabler_need_disable_sim);
+                            }
+                            builder.setTitle(R.string.sim_enabler_will_disable_sim_title);
                         } else {
-                            message = mContext.getString(R.string.sim_enabler_need_disable_sim);
+                            message = mContext
+                                    .getString(R.string.sim_enabler_need_disable_sim);
                         }
-                        builder.setTitle(R.string.sim_enabler_will_disable_sim_title);
-                    } else {
-                        message = mContext.getString(R.string.sim_enabler_need_disable_sim);
+                        builder.setMessage(message);
+                        builder.setPositiveButton(android.R.string.ok,
+                                mDialogClickListener);
+                        builder.setNegativeButton(android.R.string.no,
+                                mDialogClickListener);
+                        builder.setOnCancelListener(mDialogCanceListener);
+                        break;
+
+                    case ERROR_ALERT_DLG_ID:
+                        builder.setMessage(mContext.getString(msgId));
+                        builder.setNeutralButton(android.R.string.ok,
+                                mDialogClickListener);
+                        builder.setCancelable(false);
+                        break;
+
+                    case RESULT_ALERT_DLG_ID:
+                        String msg = mCurrentUiccProvisionState ? mContext
+                                .getString(R.string.sub_activate_success)
+                                : mContext
+                                    .getString(R.string.sub_deactivate_success);
+                        builder.setMessage(msg);
+                        builder.setNeutralButton(android.R.string.ok, null);
+                        break;
+                    default:
+                        break;
                     }
-                    builder.setMessage(message);
-                    builder.setPositiveButton(android.R.string.ok, mDialogClickListener);
-                    builder.setNegativeButton(android.R.string.no, mDialogClickListener);
-                    builder.setOnCancelListener(mDialogCanceListener);
-                    break;
 
-                case ERROR_ALERT_DLG_ID:
-                    builder.setMessage(mContext.getString(msgId));
-                    builder.setNeutralButton(android.R.string.ok, mDialogClickListener);
-                    builder.setCancelable(false);
-                    break;
-
-                case RESULT_ALERT_DLG_ID:
-                    String msg = mCurrentUiccProvisionState ?
-                             mContext.getString(R.string.sub_activate_success) :
-                            mContext.getString(R.string.sub_deactivate_success);
-                    builder.setMessage(msg);
-                    builder.setNeutralButton(android.R.string.ok, null);
-                    break;
-            default:
-            break;
+                mAlertDialog = builder.create();
+                mAlertDialog.setCanceledOnTouchOutside(false);
+                mAlertDialog.show();
             }
-
-            sAlertDialog = builder.create();
-            sAlertDialog.setCanceledOnTouchOutside(false);
-            sAlertDialog.show();
         }
 
         private int getProvisionedSlotId(Context context) {
@@ -777,16 +787,19 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
             String msg = mContext.getString(mIsChecked ? R.string.sim_enabler_enabling
                     : R.string.sim_enabler_disabling);
-            sProgressDialog = dismissDialog(sProgressDialog);
-            sProgressDialog = new ProgressDialog(mContext);
-            sProgressDialog.setIndeterminate(true);
-            sProgressDialog.setTitle(title);
-            sProgressDialog.setMessage(msg);
-            sProgressDialog.setCancelable(false);
-            sProgressDialog.setCanceledOnTouchOutside(false);
-            sProgressDialog.show();
+            mProgressDialog = dismissDialog(mProgressDialog);
+            // Create dialog only if Fragment is visible
+            if (isVisible()) {
+                mProgressDialog = new ProgressDialog(mContext);
+                mProgressDialog.setIndeterminate(true);
+                mProgressDialog.setTitle(title);
+                mProgressDialog.setMessage(msg);
+                mProgressDialog.setCancelable(false);
+                mProgressDialog.setCanceledOnTouchOutside(false);
+                mProgressDialog.show();
 
-            sendMessage(EVT_PROGRESS_DLG_TIME_OUT, mHandler, PROGRESS_DLG_TIME_OUT);
+                sendMessage(EVT_PROGRESS_DLG_TIME_OUT, mHandler, PROGRESS_DLG_TIME_OUT);
+            }
         }
 
         /**
@@ -802,15 +815,15 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
         }
 
         public void cleanUpPendingDialogs() {
-            sProgressDialog = dismissDialog(sProgressDialog);
-            sAlertDialog = dismissDialog(sAlertDialog);
+            mProgressDialog = dismissDialog(mProgressDialog);
+            mAlertDialog = dismissDialog(mAlertDialog);
         }
 
         private DialogInterface.OnClickListener mDialogClickListener = new DialogInterface
                 .OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         if (which == DialogInterface.BUTTON_POSITIVE) {
-                            dismissDialog(sAlertDialog);
+                            dismissDialog(mAlertDialog);
                             sendUiccProvisioningRequest();
                         } else if (which == DialogInterface.BUTTON_NEGATIVE) {
                             update();
@@ -860,7 +873,7 @@ public class SimSettings extends RestrictedSettingsFragment implements Indexable
 
                         case EVT_PROGRESS_DLG_TIME_OUT:
                             logd("EVT_PROGRESS_DLG_TIME_OUT");
-                            sProgressDialog = dismissDialog(sProgressDialog);
+                            mProgressDialog = dismissDialog(mProgressDialog);
                             // Must update UI when time out
                             update();
                             break;
