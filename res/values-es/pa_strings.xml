@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-
-   Copyright 2013 The ParanoidAndroid Project
-
+   Copyright 2015, The ParanoidAndroid Project
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
-
        http://www.apache.org/licenses/LICENSE-2.0
-
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,6 +12,110 @@
    limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-     <string name="pa_version">Versión de ParanoidAndroid</string>
-     <string name="pa_version_default">Desconocida</string>
+
+    <!--PA Version-->
+    <string name="pa_version">Versión de Paranoid Android</string>
+    <string name="pa_version_default">Desconocida</string>
+
+    <!-- Themes Settings -->
+    <!-- Settings main menu entry -->
+    <string name="themes_settings_title">Temas</string>
+
+    <!-- Gestures Settings -->
+    <string name="gestures_settings_title">Gestos</string>
+    <string name="keywords_gestures">pantalla pantalla táctil dibujar deslizar dedo</string>
+
+    <string name="gestures_double_tap">Doble Toque</string>
+    <string name="gestures_draw_v">Dibujar V</string>
+    <string name="gestures_draw_inverse_v">Dibujar V Inversa</string>
+    <string name="gestures_draw_o">Dibujar O</string>
+    <string name="gestures_draw_m">Dibujar M</string>
+    <string name="gestures_draw_w">Dibujar W</string>
+    <string name="gestures_draw_arrow_left">Dibujar &lt;</string>
+    <string name="gestures_draw_arrow_right">Dibujar &gt;</string>
+    <string name="gestures_one_finger_swipe_up">Deslizar hacia arriba con un dedo</string>
+    <string name="gestures_one_finger_swipe_right">Deslizar hacia la derecha con un dedo</string>
+    <string name="gestures_one_finger_swipe_down">Deslizar hacia abajo con un dedo</string>
+    <string name="gestures_one_finger_swipe_left">Deslizar hacia la izquierda con un dedo</string>
+    <string name="gestures_two_finger_swipe">Deslizar con dos dedos</string>
+
+    <string name="gestures_disabled">Desactivado</string>
+    <string name="gestures_wake_device">Despertar dispositivo</string>
+    <string name="gestures_toggle_flashlight">Encender linterna</string>
+    <string name="gestures_toggle_airplane_mode">Encender modo avión</string>
+    <string name="gestures_play_pause_music">Reproducir/Pausar música</string>
+    <string name="gestures_next_music">Siguiente canción</string>
+    <string name="gestures_previous_music">Anterior canción</string>
+    <string name="gestures_open_camera">Abrir cámara</string>
+    <string name="gestures_open_dialer">Abrir teléfono</string>
+
+    <!-- Advanced reboot options -->
+    <string name="advanced_reboot_title">Reinicio avanzadoAdvanced reboot</string>
+    <string name="advanced_reboot_summary">Cuando el dispositivo esté desbloqueado, incluir en el menú de apagado las opciones de reiniciar en el modo recovery o modo bootloader</string>
+
+    <!-- QS tiles reset -->
+    <string name="reset_qs_tiles_title">Resetear la disposición de los ajustes en Ajustes Rápidos</string>
+    <string name="reset_qs_tiles_summary">Usar la posición por defecto de todos los ajustes</string>
+    <string name="reset_qs_tiles_dialog_title">¿Resetear los ajustes?</string>
+    <string name="reset_qs_tiles_dialog_msg">Todos los ajustes de Ajustes Rápidos se moverán a sus posiciones originales.</string>
+    <string name="reset_qs_tiles_dialog_yes">Resetear ahora</string>
+    <string name="reset_qs_tiles_dialog_no">Cancelar</string>
+
+    <string name="reset_all_settings">RESETEAR TODO</string>
+    <string name="reset_selected_settings">RESETEAR SÓLO SELLECIONADOS</string>
+    <string name="reset_settings_title">Funciones de las preferencias</string>
+    <string name="reset_settings_summary">Resetear las funciones de las preferencias de Paranoid Android</string>
+    <string name="keywords_settings_reset">resetear</string>
+
+    <!-- Buttons -->
+    <string name="buttons_pref_title">Botones</string>
+    <string name="enable_navigation_bar_title">Activar botones en pantalla</string>
+    <string name="enable_navigation_bar_summary">Activa los botones de navegación en pantalla on-screen</string>
+    <string name="swap_navigation_keys_title">Intercambiar botones</string>
+    <string name="swap_navigation_keys_summary">Intercambia los botones de Atrás y Recientes</string>
+    <string name="swap_slider_order_title">Intercambiar modos del deslizador</string>
+    <string name="swap_slider_order_summary">Intercambia el orden de los modos del Alert Slider</string>
+    <string name="hardware_brightness_keys_title">Luz de los botones</string>
+    <string name="hardware_brightness_keys_summary">Enciende la iluminación de los botones de navegación</string>
+    <string name="hardware_keys_home_key_title">Botón de Inicio</string>
+    <string name="hardware_keys_back_key_title">Botón de Atrás</string>
+    <string name="hardware_keys_menu_key_title">Botón de Menú</string>
+    <string name="hardware_keys_assist_key_title">Botón de Asistente</string>
+    <string name="hardware_keys_app_switch_key_title">Botón de Recientes</string>
+    <string name="hardware_keys_camera_key_title">Botón de Cámara</string>
+    <string name="hardware_keys_short_press_title">Acción de toque corto</string>
+    <string name="hardware_keys_long_press_title">Acción de toque largo</string>
+    <string name="hardware_keys_double_tap_title">Acción de doble toque</string>
+    <string name="hardware_keys_action_nothing">Ninguna acción</string>
+    <string name="hardware_keys_action_menu">Abrir/Cerrar menú</string>
+    <string name="hardware_keys_action_app_switch">Recientes</string>
+    <string name="hardware_keys_action_search">Asistente de búsqueda</string>
+    <string name="hardware_keys_action_voice_search">Búsqueda de voz</string>
+    <string name="hardware_keys_action_in_app_search">Búsqueda integrada de aplicación</string>
+    <string name="hardware_keys_action_launch_camera">Abrir cámara</string>
+    <string name="hardware_keys_action_last_app">Lanzar última app vista</string>
+
+    <!-- Status bar - Battery -->
+    <string name="battery_style_title">Estilos de batería en barra de estado</string>
+    <string name="battery_style_icon">Icono</string>
+    <string name="battery_style_circle">Círculo</string>
+    <string name="battery_style_text">Texto</string>
+    <string name="battery_style_hidden">Oculto</string>
+
+    <!-- Status bar - Battery percentage -->
+    <string name="battery_percentage_title">Porcentaje de batería</string>
+    <string name="battery_percentage_default">Oculto (defecto)</string>
+    <string name="battery_percentage_text_inside">Dentro del icono</string>
+    <string name="battery_percentage_text_next">Al lado del icono</string>
+
+    <!-- Floating peeking notifications -->
+    <string name="app_notification_floating_title">Permitir notificaciones flotantes</string>
+    <string name="app_notification_floating_summary">Permite que esta app se abrá en modo flotante cuando se pulsa sobre una notificación entrante.</string>
+    <string name="filter_notif_no_floating">Sin flotación</string>
+    <string name="notifications_no_floating">Sin flotación</string>
+    <string name="notifications_four_items"><xliff:g id="notif_state" example="Priority">%1$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%2$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%3$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%4$s</xliff:g></string>
+
+    <!-- Proximity wake -->
+    <string name="proximity_wake_title">Evitar que el dispositivo se encienda de manera accidental</string>
+    <string name="proximity_wake_summary">Comprueba el sensor de proximidad antes de encender la pantalla.</string>
 </resources>
