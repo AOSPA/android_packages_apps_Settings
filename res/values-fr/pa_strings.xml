@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2013,2014,2015, The ParanoidAndroid Project
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!--PA Version-->
+    <string name="pa_version">Version de ParanoidAndroid</string>
+    <string name="pa_version_default">Inconnu</string>
+
+    <!-- Advanced reboot options -->
+    <string name="advanced_reboot_title">Redémarrage avancé</string>
+    <string name="advanced_reboot_summary">When unlocked, include options in the power menu for rebooting into recovery or bootloader</string>
+
+    <!-- QS tiles reset -->
+    <string name="reset_qs_tiles_title">Réinitialiser la mise en page des tuiles des réglages rapides</string>
+    <string name="reset_qs_tiles_summary">Utiliser les positions par défaut pour toutes les tuiles</string>
+    <string name="reset_qs_tiles_dialog_title">Réinitialiser toutes les tuiles?</string>
+    <string name="reset_qs_tiles_dialog_msg">Toutes vos tuiles seront déplacés vers leurs positions par défaut.</string>
+    <string name="reset_qs_tiles_dialog_yes">Réinitialiser maintenant</string>
+    <string name="reset_qs_tiles_dialog_no">Effacer</string>
+
+    <!-- Themes Settings -->
+    <!-- Settings main menu entry -->
+    <string name="themes_settings_title">Themes</string>
+    
+    <string name="reset_all_settings">RESET ALL</string>
+    <string name="reset_selected_settings">RESET SELECTED</string>
+    <string name="reset_settings_title">Feature preferences</string>
+    <string name="reset_settings_summary">Reset Paranoid Android feature preferences</string>
+    <string name="keywords_settings_reset">reset</string>
+
+    <!-- Status bar - Battery -->
+    <string name="battery_style_title">Icône de la batterie</string>
+    <string name="battery_style_icon">Icône</string>
+    <string name="battery_style_circle">Cercle</string>
+    <string name="battery_style_text">Texte</string>
+    <string name="battery_style_hidden">Caché</string>
+
+    <!-- Status bar - Battery percentage -->
+    <string name="battery_percentage_title">Battery percentage</string>
+    <string name="battery_percentage_default">Hidden (default)</string>
+    <string name="battery_percentage_text_inside">Inside the icon</string>
+    <string name="battery_percentage_text_next">Next to the icon</string>
+
+    <!-- Floating peeking notifications -->
+    <string name="app_notification_floating_title">Allow floating from peek</string>
+    <string name="app_notification_floating_summary">Let this app open in floating window when peeking notification is tapped</string>
+    <string name="filter_notif_no_floating">No floating</string>
+    <string name="notifications_no_floating">No floating</string>
+    <string name="notifications_four_items"><xliff:g id="notif_state" example="Priority">%1$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%2$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%3$s</xliff:g> / <xliff:g id="notif_state" example="Priority">%4$s</xliff:g></string>
+
+</resources>
