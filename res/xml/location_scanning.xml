@@ -20,14 +20,14 @@
         <SwitchPreference
             android:title="@string/location_scanning_wifi_always_scanning_title"
             android:summary="@string/location_scanning_wifi_always_scanning_description"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="wifi_always_scanning"
             android:persistent="false" />
 
         <SwitchPreference
             android:title="@string/location_scanning_bluetooth_always_scanning_title"
             android:summary="@string/location_scanning_bluetooth_always_scanning_description"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="bluetooth_always_scanning"
             android:persistent="false" />
 
