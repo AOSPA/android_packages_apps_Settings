@@ -92,8 +92,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "screen_magnification_preference_screen";
-    private static final String FONT_SIZE_PREFERENCE_SCREEN =
-            "font_size_preference_screen";
     private static final String AUTOCLICK_PREFERENCE_SCREEN =
             "autoclick_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
@@ -177,7 +175,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private Preference mNoServicesMessagePreference;
     private PreferenceScreen mCaptioningPreferenceScreen;
     private PreferenceScreen mDisplayMagnificationPreferenceScreen;
-    private PreferenceScreen mFontSizePreferenceScreen;
     private PreferenceScreen mAutoclickPreferenceScreen;
     private PreferenceScreen mGlobalGesturePreferenceScreen;
     private PreferenceScreen mDisplayDaltonizerPreferenceScreen;
@@ -382,10 +379,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mDisplayMagnificationPreferenceScreen = (PreferenceScreen) findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
 
-        // Font size.
-        mFontSizePreferenceScreen = (PreferenceScreen) findPreference(
-                FONT_SIZE_PREFERENCE_SCREEN);
-
         // Autoclick after pointer stops.
         mAutoclickPreferenceScreen = (PreferenceScreen) findPreference(
                 AUTOCLICK_PREFERENCE_SCREEN);
@@ -562,8 +555,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
                 mDisplayDaltonizerPreferenceScreen);
 
-        updateFontSizeSummary(mFontSizePreferenceScreen);
-
         updateAutoclickSummary(mAutoclickPreferenceScreen);
 
         // Global gesture
@@ -596,17 +587,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 AccessibilityManager.AUTOCLICK_DELAY_DEFAULT);
         pref.setSummary(ToggleAutoclickPreferenceFragment.getAutoclickPreferenceSummary(
                 getResources(), delay));
-    }
-
-    private void updateFontSizeSummary(Preference pref) {
-        final float currentScale = Settings.System.getFloat(getContext().getContentResolver(),
-                Settings.System.FONT_SCALE, 1.0f);
-        final Resources res = getContext().getResources();
-        final String[] entries = res.getStringArray(R.array.entries_font_size);
-        final String[] strEntryValues = res.getStringArray(R.array.entryvalues_font_size);
-        final int index = ToggleFontSizePreferenceFragment.fontSizeValueToIndex(currentScale,
-                strEntryValues);
-        pref.setSummary(entries[index]);
     }
 
     private void updateMasterMono() {
