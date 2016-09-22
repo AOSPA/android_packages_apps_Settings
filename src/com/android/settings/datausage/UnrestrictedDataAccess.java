@@ -215,6 +215,9 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference instanceof AccessPreference) {
             AccessPreference accessPreference = (AccessPreference) preference;
+            if (accessPreference.mState == null) {
+                return false;
+            }
             boolean whitelisted = newValue == Boolean.TRUE;
             logSpecialPermissionChange(whitelisted, accessPreference.mEntry.info.packageName);
             mDataSaverBackend.setIsWhitelisted(accessPreference.mEntry.info.uid,
