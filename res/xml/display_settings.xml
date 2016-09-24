@@ -134,4 +134,20 @@
                 android:summary="%s"
                 android:title="@string/display_vr_pref_title" />
 
+        <PreferenceCategory
+                android:key="leds"
+                android:title="@string/omni_leds" >
+
+        <PreferenceScreen
+                android:key="charging_light"
+                android:title="@string/omni_battery_light_settings"
+                android:fragment="com.android.settings.batterylight.BatteryLightSettings" />
+
+        <PreferenceScreen
+                android:key="notification_light"
+                android:title="@string/omni_notification_light_settings"
+                android:fragment="com.android.settings.batterylight.NotificationLightSettings" />
+
+        </PreferenceCategory>
+
 </PreferenceScreen>
