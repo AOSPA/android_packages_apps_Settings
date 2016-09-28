@@ -165,6 +165,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     private CharSequence mInitialTitle;
     private int mInitialTitleResId;
+    private SmqSettings mSMQ;
 
     private static final String[] LIKE_SHORTCUT_INTENT_ACTION_ARRAY = {
             "android.settings.APPLICATION_DETAILS_SETTINGS"
@@ -293,6 +294,8 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (intent.hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
+
+        mSMQ = new SmqSettings(getApplicationContext());
 
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
@@ -747,6 +750,15 @@ public class SettingsActivity extends SettingsDrawerActivity
      */
     private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
             boolean addToBackStack, int titleResId, CharSequence title, boolean withTransition) {
+
+        if (fragmentName.equals(getString(R.string.qtifeedback_intent_action))){
+             final Intent newIntent = new Intent(getString(R.string.qtifeedback_intent_action));
+             newIntent.addCategory("android.intent.category.DEFAULT");
+             startActivity(newIntent);
+             finish();
+             return null;
+        }
+
         if (fragmentName.equals(SimSettings.class.getName())){
             Log.i(LOG_TAG, "switchToFragment, launch simSettings  ");
             Intent provisioningIntent =
@@ -799,6 +811,11 @@ public class SettingsActivity extends SettingsDrawerActivity
         final boolean isAdmin = um.isAdminUser();
 
         String packageName = getPackageName();
+        if(mSMQ.isShowSmqSettings()){
+            setTileEnabled(new ComponentName(packageName, Settings.SMQQtiFeedbackActivity.class.getName()),
+                mSMQ.isShowSmqSettings(), isAdmin);
+        }
+
         setTileEnabled(new ComponentName(packageName, WifiSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_WIFI), isAdmin);
 
