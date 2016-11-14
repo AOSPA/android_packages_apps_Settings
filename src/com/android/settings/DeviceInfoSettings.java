@@ -43,6 +43,8 @@ import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.internal.os.RegionalizationEnvironment;
+import com.android.internal.os.IRegionalizationService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,6 +78,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_PA_VERSION = "pa_version";
     private static final String KEY_QGP_VERSION = "qgp_version";
     private static final String PROPERTY_QGP_VERSION = "persist.qgp.version";
+    private static final String MBN_VERSION_PATH = "/persist/speccfg/mbnversion";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
@@ -89,6 +92,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private boolean mFunDisallowedBySystem;
     private EnforcedAdmin mDebuggingFeaturesDisallowedAdmin;
     private boolean mDebuggingFeaturesDisallowedBySystem;
+    private IRegionalizationService mRegionalizationService = null;
 
     @Override
     protected int getMetricsCategory() {
@@ -129,9 +133,13 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 PROPERTY_QGP_VERSION);
         findPreference(KEY_KERNEL_VERSION).setSummary(DeviceInfoUtils.customizeFormatKernelVersion(
                 getResources().getBoolean(R.bool.def_hide_kernel_version_name)));
-        setValueSummary(KEY_MBN_VERSION, PROPERTY_MBN_VERSION);
-        removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_MBN_VERSION,
-                PROPERTY_MBN_VERSION);
+
+        String mMbnVersion = getMBNVersionValue();
+        setStringSummary(KEY_MBN_VERSION, mMbnVersion);
+        if(mMbnVersion == null){
+            getPreferenceScreen().removePreference(findPreference(KEY_MBN_VERSION));
+        }
+
         findPreference(KEY_KERNEL_VERSION).setSummary(DeviceInfoUtils.getFormattedKernelVersion());
         setValueSummary(KEY_PA_VERSION, "ro.pa.version");
 
@@ -365,6 +373,27 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             findPreference(preference).setSummary(
                 getResources().getString(R.string.device_info_default));
         }
+    }
+
+    private String getMBNVersionValue() {
+        String mVersion = null;
+
+        if (RegionalizationEnvironment.isSupported()) {
+            mRegionalizationService = RegionalizationEnvironment.getRegionalizationService();
+        }
+        if(mRegionalizationService != null){
+            try{
+                if(!mRegionalizationService.checkFileExists(MBN_VERSION_PATH))
+                    return null;
+                if(mRegionalizationService.readFile(MBN_VERSION_PATH, "").size() > 0){
+                    mVersion = mRegionalizationService.readFile(MBN_VERSION_PATH, "").get(0);
+                }
+                Log.d(LOG_TAG,"read MBNVersion="+mVersion);
+            }catch (Exception e) {
+                Log.e(LOG_TAG, "IOException:"+ e.getMessage());
+            }
+        }
+        return mVersion;
     }
 
     private void setValueSummary(String preference, String property) {

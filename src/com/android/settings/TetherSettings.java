@@ -96,6 +96,8 @@ public class TetherSettings extends RestrictedSettingsFragment
     private static final String ACTION_HOTSPOT_CONFIGURE_RRSPONSE =
             "Hotspot_PreConfigure_Response";
 
+    private static final String INTENT_EXTRA_NEED_SHOW_HELP_LATER = "needShowHelpLater";
+
     private static final int DIALOG_AP_SETTINGS = 1;
 
     private static final String TAG = "TetheringSettings";
@@ -261,7 +263,9 @@ public class TetherSettings extends RestrictedSettingsFragment
             getPreferenceScreen().removePreference(mCreateNetwork);
         }
 
-        if (!bluetoothAvailable) {
+        final boolean configHideBluetoothAndHelpMenu = getResources().getBoolean(
+                R.bool.config_hide_bluetooth_menu);
+        if (!bluetoothAvailable || configHideBluetoothAndHelpMenu) {
             getPreferenceScreen().removePreference(mBluetoothTether);
         } else {
             BluetoothPan pan = mBluetoothPan.get();
@@ -605,6 +609,20 @@ public class TetherSettings extends RestrictedSettingsFragment
                 == TelephonyManager.SIM_STATE_READY);
     }
 
+    private boolean checkWifiApConfig() {
+        WifiConfiguration config = mWifiManager.getWifiApConfiguration();
+        boolean isNotNoneSecurity = config.getAuthType() > WifiConfiguration.KeyMgmt.NONE;
+        // WifiConfiguration.KeyMgmt be used to management schemes,
+        // WifiConfiguration.preSharedKey for use with WPA-PSK, it's password,
+        // if preSharedKey is empty, the WifiConfiguration need to set password.
+        if(isNotNoneSecurity) {
+            return config.preSharedKey != null &&
+                !config.preSharedKey.isEmpty();
+        } else {
+            return true;
+        }
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
         boolean enable = (Boolean) value;
@@ -614,10 +632,12 @@ public class TetherSettings extends RestrictedSettingsFragment
             if(enableWifiApSettingsExt && showNoSimCardDialog(getPrefContext())) {
                 ((HotspotPreference)preference).setChecked(false);
                 return false;
-            } else if(enableWifiApSettingsExt && isNeedShowHelp(getPrefContext())) {
+            } else if(enableWifiApSettingsExt &&
+                (isNeedShowHelp(getPrefContext()) || !checkWifiApConfig())) {
                 Intent intent = new Intent();
                 intent.setAction(ACTION_HOTSPOT_PRE_CONFIGURE);
                 intent.setPackage("com.qualcomm.qti.extsettings");
+                intent.putExtra(INTENT_EXTRA_NEED_SHOW_HELP_LATER, true);
                 getPrefContext().startActivity(intent);
                 ((HotspotPreference)preference).setChecked(false);
                 return false;
@@ -703,7 +723,7 @@ public class TetherSettings extends RestrictedSettingsFragment
         }
 
         if (choice == TETHERING_USB) {
-            if(mUsbTether.isChecked()) {
+            if(mUsbTether.isChecked() && mUsbEnable) {
                 mWifiManager.setWifiEnabled(false);
             }
         }
@@ -722,6 +742,8 @@ public class TetherSettings extends RestrictedSettingsFragment
                 }
                 if (isFirstUseUSBTethering(getActivity())) {
                     showFirstUseUSBTetheringDialog(getActivity());
+                } else if(checkWifiConnectivityState(getActivity())) {
+                    showTurnOffWifiDialog(getActivity());
                 }
                 startTethering(TETHERING_USB);
             } else {
