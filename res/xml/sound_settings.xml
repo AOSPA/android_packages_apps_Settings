@@ -49,6 +49,11 @@
                 android:key="vibrate_when_ringing"
                 android:title="@string/vibrate_when_ringing_title" />
 
+        <!-- Volume button music control -->
+        <SwitchPreference
+                android:key="volbtn_music_controls"
+                android:title="@string/volbtn_music_controls_title"
+                android:summary="@string/volbtn_music_controls_summary" />
 
         <!-- Interruptions -->
         <com.android.settingslib.RestrictedPreference
