@@ -87,6 +87,12 @@
         android:fragment="co.aospa.settings.gestures.PowerButtonTorchSettings"
         settings:controller="co.aospa.settings.gestures.PowerButtonTorchGesturePreferenceController" />
 
+    <Preference
+        android:key="volume_button_music_control_sumary"
+        android:title="@string/volume_button_music_control_title"
+        android:fragment="co.aospa.settings.gestures.VolumeButtonMusicControlGestureSettings"
+        settings:controller="co.aospa.settings.gestures.VolumeButtonMusicControlPreferenceController" />
+
     <com.android.settingslib.PrimarySwitchPreference
         android:key="gesture_prevent_ringing_summary"
         android:title="@string/gesture_prevent_ringing_screen_title"
