@@ -217,6 +217,7 @@ public class Settings extends SettingsActivity {
     public static class DcDimmingSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AdaptivePlaybackSoundSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PowerButtonTorchSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class VolumeButtonMusicControlGestureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MyDeviceInfoActivity extends SettingsActivity { /* empty */ }
     public static class FirmwareVersionActivity extends CatalystSettingsActivity {
         public FirmwareVersionActivity() {
