@@ -98,4 +98,10 @@
         android:title="@string/adaptive_playback_screen_title"
         android:fragment="com.android.settings.gestures.AdaptivePlaybackGestureSettings"
         settings:controller="com.android.settings.gestures.AdaptivePlaybackParentPreferenceController" />
+
+    <Preference
+        android:key="volume_button_music_control_sumary"
+        android:title="@string/volume_button_music_control_title"
+        android:fragment="com.android.settings.gestures.VolumeButtonMusicControlGestureSettings"
+        settings:controller="com.android.settings.gestures.VolumeButtonMusicControlPreferenceController" />
 </PreferenceScreen>
