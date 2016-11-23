@@ -263,6 +263,8 @@ public class SoundSettings extends DashboardFragment {
                 new BootSoundPreferenceController(context);
         final EmergencyTonePreferenceController emergencyTonePreferenceController =
                 new EmergencyTonePreferenceController(context, fragment, lifecycle);
+        final VolumeSkipPreferenceController volumeSkipPreferenceController =
+                new VolumeSkipPreferenceController(context, fragment, lifecycle);
 
         controllers.add(dialPadTonePreferenceController);
         controllers.add(screenLockSoundPreferenceController);
@@ -270,6 +272,7 @@ public class SoundSettings extends DashboardFragment {
         controllers.add(dockingSoundPreferenceController);
         controllers.add(touchSoundPreferenceController);
         controllers.add(vibrateOnTouchPreferenceController);
+        controllers.add(volumeSkipPreferenceController);
         controllers.add(dockAudioMediaPreferenceController);
         controllers.add(bootSoundPreferenceController);
         controllers.add(emergencyTonePreferenceController);
@@ -281,6 +284,7 @@ public class SoundSettings extends DashboardFragment {
                         dockingSoundPreferenceController,
                         touchSoundPreferenceController,
                         vibrateOnTouchPreferenceController,
+                        volumeSkipPreferenceController,
                         dockAudioMediaPreferenceController,
                         bootSoundPreferenceController,
                         emergencyTonePreferenceController)));
