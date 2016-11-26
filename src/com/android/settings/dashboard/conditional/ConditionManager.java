@@ -21,6 +21,8 @@ import android.os.PersistableBundle;
 import android.util.Log;
 import android.util.Xml;
 
+import android.service.notification.ZenModeConfig;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
@@ -138,7 +140,9 @@ public class ConditionManager {
     private void addMissingConditions(ArrayList<Condition> conditions) {
         addIfMissing(AirplaneModeCondition.class, conditions);
         addIfMissing(HotspotCondition.class, conditions);
-        addIfMissing(DndCondition.class, conditions);
+        if (!ZenModeConfig.hasAlertSlider(mContext)) {
+            addIfMissing(DndCondition.class, conditions);
+        }
         addIfMissing(BatterySaverCondition.class, conditions);
         addIfMissing(CellularDataCondition.class, conditions);
         addIfMissing(BackgroundDataCondition.class, conditions);
@@ -159,7 +163,8 @@ public class ConditionManager {
             return new AirplaneModeCondition(this);
         } else if (HotspotCondition.class == clz) {
             return new HotspotCondition(this);
-        } else if (DndCondition.class == clz) {
+        } else if (DndCondition.class == clz
+                && !ZenModeConfig.hasAlertSlider(mContext)) {
             return new DndCondition(this);
         } else if (BatterySaverCondition.class == clz) {
             return new BatterySaverCondition(this);
