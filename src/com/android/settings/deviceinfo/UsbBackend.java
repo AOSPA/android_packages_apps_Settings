@@ -100,7 +100,7 @@ public class UsbBackend {
             return MODE_DATA_TETHERING;
         }
         if (!mIsUnlocked) {
-            if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_CHARGING)) {
+            if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MTP)) {
                 //Take this as charging mode
                 return MODE_DATA_NONE;
             } else {
@@ -138,8 +138,8 @@ public class UsbBackend {
                 mContext.startActivity(intent);
                 break;
             default:
-                //default mode is "charging"
-                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_CHARGING);
+                //default mode is "charging",take MTP mode and data unlocked false as charging
+                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP);
                 mUsbManager.setUsbDataUnlocked(false);
                 break;
         }
