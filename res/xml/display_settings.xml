@@ -96,6 +96,11 @@
                 android:title="@string/srgb_title"
                 android:summary="@string/srgb_summary" />
 
+        <SwitchPreference
+                android:key="lockscreen_dialer_shortcut"
+                android:title="@string/lockscreen_dialer_shortcut_title"
+                android:summary="@string/lockscreen_dialer_shortcut_summary"/>
+
         <com.android.settings.WarnedPreference
                 android:key="font_size_mode"
                 android:title="@string/title_font_size"
