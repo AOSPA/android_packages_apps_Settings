@@ -88,6 +88,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_CAMERA_GESTURE = "camera_gesture";
     private static final String KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE
             = "camera_double_tap_power_gesture";
+    private static final String KEY_LOCKSCREEN_VOICE_SHORTCUT = "lockscreen_voice_shortcut";
     private static final String KEY_WALLPAPER = "wallpaper";
     private static final String KEY_VR_DISPLAY_PREF = "vr_display_pref";
     private static final String KEY_NETWORK_NAME_DISPLAYED = "network_operator_display";
@@ -106,6 +107,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mAutoBrightnessPreference;
     private SwitchPreference mCameraGesturePreference;
     private SwitchPreference mCameraDoubleTapPowerGesturePreference;
+    private SwitchPreference mVoiceShortcutEnabled;
     private SwitchPreference mNetworkNameDisplayedPreference = null;
 
     @Override
@@ -183,6 +185,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mCameraDoubleTapPowerGesturePreference.setOnPreferenceChangeListener(this);
         } else {
             removePreference(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
+        }
+
+        // Voice Lockscreen Shortcut
+        mVoiceShortcutEnabled = (SwitchPreference) root.findPreference(KEY_LOCKSCREEN_VOICE_SHORTCUT);
+        if (mVoiceShortcutEnabled != null) {
+            mVoiceShortcutEnabled.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.LOCKSCREEN_VOICE_SHORTCUT, 1) == 1);
+            mVoiceShortcutEnabled.setOnPreferenceChangeListener(this);
         }
 
         if (RotationPolicy.isRotationLockToggleVisible(activity)) {
