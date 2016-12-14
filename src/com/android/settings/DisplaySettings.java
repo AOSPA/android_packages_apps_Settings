@@ -76,6 +76,7 @@ import static android.provider.Settings.Secure.CAMERA_GESTURE_DISABLED;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static android.provider.Settings.Secure.SRGB_ENABLED;
 import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
+import static android.provider.Settings.System.LOCKSCREEN_DIALER_SHORTCUT;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
@@ -109,9 +110,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_CAMERA_GESTURE = "camera_gesture";
     private static final String KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE
             = "camera_double_tap_power_gesture";
-
     private static final String KEY_WALLPAPER = "wallpaper";
     private static final String KEY_VR_DISPLAY_PREF = "vr_display_pref";
+    private static final String KEY_LOCKSCREEN_DIALER_SHORTCUT = "lockscreen_dialer_shortcut";
 
     private static final int DLG_FONTSIZE_CHANGE_WARNING = 2;
 
@@ -139,6 +140,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mAutoBrightnessPreference;
     private SwitchPreference mCameraGesturePreference;
     private SwitchPreference mCameraDoubleTapPowerGesturePreference;
+    private SwitchPreference mDialerShortcutPreference;
     private SwitchPreference mNetworkNameDisplayedPreference = null;
 
     private SharedPreferences mSharedPreferences;
@@ -183,6 +185,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (mChargingLeds == null && mNotificationLeds == null) {
             getPreferenceScreen().removePreference(mLedsCategory);
         }
+        
+        // Dialer shortcut
+        mDialerShortcutPreference = (SwitchPreference) findPreference(KEY_LOCKSCREEN_DIALER_SHORTCUT);
+        mDialerShortcutPreference.setOnPreferenceChangeListener(this);
 
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
         if (mScreenSaverPreference != null
@@ -520,6 +526,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             int value = Settings.Secure.getInt(getContentResolver(), SRGB_ENABLED, 0);
             mSrgbPreference.setChecked(value != 0);
         }
+        
+        if (mDialerShortcutPreference != null) {
+            int value = Settings.System.getInt(getContentResolver(), LOCKSCREEN_DIALER_SHORTCUT, 0);
+            mDialerShortcutPreference.setChecked(value != 0);
+        }
+        
         // Update camera gesture #1 if it is available.
         if (mCameraGesturePreference != null) {
             int value = Settings.Secure.getInt(getContentResolver(), CAMERA_GESTURE_DISABLED, 0);
@@ -595,6 +607,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             boolean value = (Boolean) objValue;
             Settings.Secure.putInt(getContentResolver(), CAMERA_GESTURE_DISABLED,
                     value ? 0 : 1 /* Backwards because setting is for disabling */);
+        }
+        if (preference == mDialerShortcutPreference) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_DIALER_SHORTCUT,
+                    value ? 1 : 0);
         }
         if (preference == mNightModePreference) {
             try {
