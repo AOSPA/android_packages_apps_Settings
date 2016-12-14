@@ -77,6 +77,11 @@
                 android:title="@string/camera_gesture_title"
                 android:summary="@string/camera_gesture_desc" />
 
+        <SwitchPreference
+                android:key="lockscreen_dialer_shortcut"
+                android:title="@string/lockscreen_dialer_shortcut_title"
+                android:summary="@string/lockscreen_dialer_shortcut_summary"/>
+
         <PreferenceScreen
                 android:key="screensaver"
                 android:title="@string/screensaver_settings_title"
