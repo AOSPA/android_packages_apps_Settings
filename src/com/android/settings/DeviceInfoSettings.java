@@ -79,6 +79,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_QGP_VERSION = "qgp_version";
     private static final String PROPERTY_QGP_VERSION = "persist.qgp.version";
     private static final String MBN_VERSION_PATH = "/persist/speccfg/mbnversion";
+    private static final String QGP_VERSION_PATH = "/persist/speccfg/qgpversion";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
@@ -127,10 +128,15 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         setStringSummary(KEY_DEVICE_MODEL, Build.MODEL);
         setStringSummary(KEY_BUILD_NUMBER, Build.DISPLAY);
         findPreference(KEY_BUILD_NUMBER).setEnabled(true);
-        setValueSummary(KEY_QGP_VERSION, PROPERTY_QGP_VERSION);
+        //setValueSummary(KEY_QGP_VERSION, PROPERTY_QGP_VERSION);
         // Remove QGP Version if property is not present
-        removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_QGP_VERSION,
-                PROPERTY_QGP_VERSION);
+        //removePreferenceIfPropertyMissing(getPreferenceScreen(), KEY_QGP_VERSION,
+        //        PROPERTY_QGP_VERSION);
+        String mQGPVersion = getQGPVersionValue();
+        setStringSummary(KEY_QGP_VERSION, mQGPVersion);
+        if(mQGPVersion == null){
+            getPreferenceScreen().removePreference(findPreference(KEY_QGP_VERSION));
+        }
         findPreference(KEY_KERNEL_VERSION).setSummary(DeviceInfoUtils.customizeFormatKernelVersion(
                 getResources().getBoolean(R.bool.def_hide_kernel_version_name)));
 
@@ -213,6 +219,12 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 getPreferenceScreen().removePreference(pref);
             }
         }
+        // Remove regulatory labels if no activity present to handle intent.
+        removePreferenceIfActivityMissing(
+                KEY_REGULATORY_INFO, Settings.ACTION_SHOW_REGULATORY_INFO);
+
+        removePreferenceIfActivityMissing(
+                "safety_info", "android.settings.SHOW_SAFETY_AND_REGULATORY_INFO");
     }
 
     @Override
@@ -309,13 +321,20 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                         Toast.LENGTH_LONG);
                 mDevHitToast.show();
             }
+        } else if (preference.getKey().equals(KEY_SECURITY_PATCH)) {
+            if (getPackageManager().queryIntentActivities(preference.getIntent(), 0).isEmpty()) {
+                // Don't send out the intent to stop crash
+                Log.w(LOG_TAG, "Stop click action on " + KEY_SECURITY_PATCH + ": "
+                        + "queryIntentActivities() returns empty" );
+                return true;
+            }
         } else if (preference.getKey().equals(KEY_DEVICE_FEEDBACK)) {
             sendFeedback();
         } else if(preference.getKey().equals(KEY_SYSTEM_UPDATE_SETTINGS)) {
             CarrierConfigManager configManager =
                     (CarrierConfigManager) getSystemService(Context.CARRIER_CONFIG_SERVICE);
             PersistableBundle b = configManager.getConfig();
-            if (b.getBoolean(CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_BOOL)) {
+            if (b != null && b.getBoolean(CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_BOOL)) {
                 ciActionOnSysUpdate(b);
             }
         }
@@ -353,6 +372,16 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             } catch (RuntimeException e) {
                 Log.d(LOG_TAG, "Property '" + property + "' missing and no '"
                         + preference + "' preference");
+            }
+        }
+    }
+
+    private void removePreferenceIfActivityMissing(String preferenceKey, String action) {
+        final Intent intent = new Intent(action);
+        if (getPackageManager().queryIntentActivities(intent, 0).isEmpty()) {
+            Preference pref = findPreference(preferenceKey);
+            if (pref != null) {
+                getPreferenceScreen().removePreference(pref);
             }
         }
     }
@@ -396,6 +425,26 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         return mVersion;
     }
 
+    private String getQGPVersionValue() {
+        String mVersion = null;
+
+        if (RegionalizationEnvironment.isSupported()) {
+            mRegionalizationService = RegionalizationEnvironment.getRegionalizationService();
+        }
+        if(mRegionalizationService != null){
+            try{
+                if(!mRegionalizationService.checkFileExists(QGP_VERSION_PATH))
+                    return null;
+                if(mRegionalizationService.readFile(QGP_VERSION_PATH, "").size() > 0){
+                    mVersion = mRegionalizationService.readFile(QGP_VERSION_PATH, "").get(0);
+                }
+                Log.d(LOG_TAG,"read QGPVersion="+mVersion);
+            }catch (Exception e) {
+                Log.e(LOG_TAG, "IOException:"+ e.getMessage());
+            }
+        }
+        return mVersion;
+    }
     private void setValueSummary(String preference, String property) {
         try {
             findPreference(preference).setSummary(
