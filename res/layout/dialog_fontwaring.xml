@@ -33,25 +33,15 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dialog_font_warining_title_margin"
-        android:text="@string/dialog_font_warining_title"
-        android:textSize="20dip"
-        android:textStyle="bold" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#ddd" />
-
-    <TextView
         android:id="@+id/waring_information"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dialog_font_warining_content_margin"
+        android:layout_marginTop="@dimen/dialog_font_warining_content_margin"
+        android:layout_marginLeft="@dimen/dialog_font_warining_content_margin_left"
+        android:layout_marginRight="@dimen/dialog_font_warining_content_margin_left"
+        android:layout_marginBottom="@dimen/dialog_font_warining_content_margin"
         android:text="@string/dialog_font_warining_content"
+        android:textColor="@color/black"
         android:textSize="16dip" />
 
     <CheckBox
@@ -61,22 +51,8 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         android:layout_marginBottom="@dimen/dialog_font_warining_checkbox_margin_bottom"
         android:layout_marginLeft="@dimen/dialog_font_warining_checkbox_margin_left"
         android:checked="false"
+        android:textColor="#ff888888"
         android:text="@string/dialog_font_warining_ck_information"
         android:textSize="16dip" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dialog_font_warining_view_height"
-        android:background="#ddd" />
-
-    <TextView
-        android:id="@+id/ok_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dialog_font_warining_checkbox_margin_bottom"
-        android:gravity="center"
-        android:text="@string/dialog_font_warining_ok"
-        android:textSize="18dip"
-        android:textStyle="bold" />
 
 </LinearLayout>

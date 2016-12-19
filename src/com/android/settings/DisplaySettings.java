@@ -49,6 +49,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -425,21 +426,34 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     public Dialog onCreateDialog(int dialogId) {
         if(dialogId == DLG_FONTSIZE_CHANGE_WARNING){
             final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            final View dialog_view = getActivity().getLayoutInflater().
-                    inflate(R.layout.dialog_fontwaring, null);
-            builder.setView(dialog_view);
+
+            // get the layout inflater
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            final View dialog_view = inflater.inflate(R.layout.dialog_fontwaring, null);
             final CheckBox cb_showagain = (CheckBox)dialog_view.findViewById(R.id.showagain);
-            TextView ok_message = (TextView)dialog_view.findViewById(R.id.ok_message);
-            ok_message.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mEditor.putBoolean(KEY_IS_CHECKED, cb_showagain.isChecked());
-                    mEditor.commit();
-                    writeFontSizePreference(FONT_SIZE_VERYLARGE);
-                    removeDialog(DLG_FONTSIZE_CHANGE_WARNING);
-                    mDialogPref.waringDialogOk();
-                }
-            });
+
+            // Inflate and set the layout for the dialog
+            // Pass null as the parent view because its going in the dialog layout
+            builder.setView(dialog_view)
+                   .setTitle(R.string.dialog_font_warining_title)
+                    // add action button
+                   .setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialog, int id) {
+                           mEditor.putBoolean(KEY_IS_CHECKED, cb_showagain.isChecked());
+                           mEditor.commit();
+                           writeFontSizePreference(FONT_SIZE_VERYLARGE);
+                           removeDialog(DLG_FONTSIZE_CHANGE_WARNING);
+                           mDialogPref.waringDialogOk();
+                       }
+                   })
+                   .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialog, int id) {
+                           // just cancel the operation
+                       }
+                   });
+
             return builder.create();
         }
         return null;
