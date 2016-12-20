@@ -16,18 +16,24 @@
 
 package com.android.settings.dashboard;
 
-import android.content.BroadcastReceiver;
 import android.app.Activity;
+import android.app.IThemeCallback;
+import android.app.ThemeManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
@@ -81,6 +87,21 @@ public class DashboardSummary extends InstrumentedFragment
     private ArrayList<String> mSuggestionsShownLogged;
     private ArrayList<String> mSuggestionsHiddenLogged;
 
+    private ThemeManager mThemeManager;
+
+    private final IThemeCallback mThemeCallback = new IThemeCallback.Stub() {
+        @Override
+        public void onThemeChanged(boolean isThemeApplied) {
+            // Run on UI thread
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    updateDashboard(isThemeApplied);
+                }
+            });
+        }
+    };
+
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -107,6 +128,10 @@ public class DashboardSummary extends InstrumentedFragment
                 ((SettingsActivity) getActivity()).getDashboardCategories();
         mSummaryLoader = new SummaryLoader(getActivity(), categories);
         Context context = getContext();
+        mThemeManager = (ThemeManager) context.getSystemService(Context.THEME_SERVICE);
+        if (mThemeManager != null) {
+            mThemeManager.addCallback(mThemeCallback);
+        }
         mConditionManager = ConditionManager.get(context, false);
         mSuggestionParser = new SuggestionParser(context,
                 context.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
@@ -128,6 +153,13 @@ public class DashboardSummary extends InstrumentedFragment
     public void onDestroy() {
         mSummaryLoader.release();
         super.onDestroy();
+    }
+
+    private void updateDashboard(boolean enabled) {
+        DashboardDecorator.setColor(enabled ? Color.BLACK : 0);
+        DashboardAdapter.setColor(enabled ? getContext().getColor(
+                R.color.sim_noitification) : 0);
+        rebuildUI();
     }
 
     @Override
@@ -234,6 +266,7 @@ public class DashboardSummary extends InstrumentedFragment
                 mConditionManager.getConditions());
         mDashboard.setAdapter(mAdapter);
         mSummaryLoader.setAdapter(mAdapter);
+        ((LinearLayout)view.findViewById(R.id.category)).setBackgroundColor(Color.BLACK);
         ConditionAdapterUtils.addDismiss(mDashboard);
         if (DEBUG_TIMING) Log.d(TAG, "onViewCreated took "
                 + (System.currentTimeMillis() - startTime) + " ms");

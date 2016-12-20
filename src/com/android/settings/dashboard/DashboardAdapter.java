@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.text.TextUtils;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.provider.Settings;
@@ -68,6 +69,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private static int SUGGESTION_MODE_DEFAULT = 0;
     private static int SUGGESTION_MODE_COLLAPSED = 1;
     private static int SUGGESTION_MODE_EXPANDED = 2;
+
+    private static int mColor;
 
     private static final int DEFAULT_SUGGESTION_COUNT = 2;
 
@@ -139,6 +142,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         return null;
     }
 
+    public static void setColor(int color) {
+        mColor = color;
+    }
+
     public Lte4GEnabler getLte4GEnabler(){
         return mLte4GEnabler;
     }
@@ -193,7 +200,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                         tile.intent.getComponent().getPackageName())) {
                     // If this drawable is coming from outside Settings, tint it to match the
                     // color.
-                    tile.icon.setTint(tintColor.data);
+                    tile.icon.setTint(mColor != 0 ? mColor : tintColor.data);
                 }
             }
         }
@@ -587,6 +594,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 title = (TextView) itemView.findViewById(android.R.id.title);
                 summary = (TextView) itemView.findViewById(android.R.id.summary);
                 sw = (Switch) itemView.findViewById(R.id.switchWidget);
+            }
+            if (mColor != 0) {
+                if (title != null) {
+                    title.setTextColor(mColor);
+                }
+                if (summary != null) {
+                    summary.setTextColor(mColor);
+                }
             }
         }
     }

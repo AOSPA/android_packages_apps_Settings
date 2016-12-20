@@ -27,6 +27,8 @@ import com.android.settings.R;
 
 public class DashboardDecorator extends RecyclerView.ItemDecoration {
 
+    private static int mColor;
+
     private final Context mContext;
     private final Drawable mDivider;
 
@@ -37,6 +39,10 @@ public class DashboardDecorator extends RecyclerView.ItemDecoration {
         mDivider = mContext.getDrawable(value.resourceId);
     }
 
+    public static void setColor(int color) {
+        mColor = color;
+    }
+
     @Override
     public void onDrawOver(Canvas c, RecyclerView parent, State state) {
         final int childCount = parent.getChildCount();
@@ -44,6 +50,10 @@ public class DashboardDecorator extends RecyclerView.ItemDecoration {
             final View child = parent.getChildAt(i);
             final ViewHolder holder = parent.getChildViewHolder(child);
             if (holder.getItemViewType() == R.layout.dashboard_category) {
+                if (mColor != 0) {
+                    holder.itemView.setBackgroundColor(mColor);
+                    child.setBackgroundColor(mColor);
+                }
                 if (parent.getChildViewHolder(parent.getChildAt(i - 1)).getItemViewType()
                         != R.layout.dashboard_tile ||
                         parent.getChildViewHolder(parent.getChildAt(i - 1)).getItemViewType()
