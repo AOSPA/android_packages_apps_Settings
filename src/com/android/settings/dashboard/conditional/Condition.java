@@ -126,7 +126,7 @@ public abstract class Condition {
     }
 
     public boolean shouldShow() {
-        return isActive() && !isSilenced();
+        return false;
     }
 
     long getLastChange() {
