@@ -130,6 +130,14 @@
                 android:title="@string/display_vr_pref_title" />
 
         <PreferenceCategory
+            android:title="@string/theme_title">
+
+            <com.android.settings.display.ThemePreference
+                android:key="theme"
+                android:title="@string/theme" />
+        </PreferenceCategory>
+
+        <PreferenceCategory
             android:key="leds"
             android:title="@string/leds" >
 
@@ -144,5 +152,4 @@
                 android:fragment="com.android.settings.batterylight.NotificationLightSettings" />
 
         </PreferenceCategory>
-
 </PreferenceScreen>

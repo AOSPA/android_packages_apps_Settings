@@ -19,12 +19,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.content.res.TypedArray;
 import android.text.TextUtils;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
-import android.provider.Settings;
 import android.graphics.PorterDuff.Mode;
+import android.provider.Settings;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -97,6 +99,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private Condition mExpandedCondition = null;
     private SuggestionParser mSuggestionParser;
 
+    private int mPrimaryColor;
+    private int mAccentColor;
+
+    private boolean mThemeEnabled;
+    private boolean mDarkThemeEnabled;
+
     public DashboardAdapter(Context context, SuggestionParser parser, Bundle savedInstanceState,
                 List<Condition> conditions) {
         mContext = context;
@@ -104,6 +112,21 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mLte4GEnabler = new Lte4GEnabler(mContext, new Switch(mContext));
         mSuggestionParser = parser;
         mConditions = conditions;
+
+        final TypedArray ta = context.obtainStyledAttributes(new int[]{
+            android.R.attr.colorAccent,
+            android.R.attr.colorPrimary});
+        mAccentColor = ta.getColor(0, 0);
+        mPrimaryColor = ta.getColor(1, 0);
+        ta.recycle();
+
+        int accentColor = Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.THEME_ACCENT_COLOR, 1);
+        int primaryColor = Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.THEME_PRIMARY_COLOR, 2);
+
+        mThemeEnabled = accentColor != 0 || primaryColor != 0;
+        mDarkThemeEnabled = primaryColor == 3 || primaryColor == 1;
 
         setHasStableIds(true);
 
@@ -232,7 +255,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             countItem(mConditions.get(i), R.layout.condition_card, shouldShow, NS_CONDITION);
         }
         boolean hasSuggestions = mSuggestions != null && mSuggestions.size() != 0;
-        countItem(null, R.layout.dashboard_spacer, hasConditions && hasSuggestions, NS_SPACER);
+        countItem(null, R.layout.dashboard_spacer, hasConditions && hasSuggestions
+                && !mDarkThemeEnabled, NS_SPACER);
         countItem(null, R.layout.suggestion_header, hasSuggestions, NS_SPACER);
         resetCount();
         if (mSuggestions != null) {
@@ -302,12 +326,18 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         switch (mTypes.get(position)) {
             case R.layout.dashboard_category:
                 onBindCategory(holder, (DashboardCategory) mItems.get(position));
+                if (mDarkThemeEnabled) {
+                    holder.itemView.getBackground().setColorFilter(mPrimaryColor, Mode.SRC_ATOP);
+                }
                 break;
             case R.layout.dashboard_tile:
                 final Tile tile = (Tile) mItems.get(position);
                 onBindTile(holder, tile);
                 holder.itemView.setTag(tile);
                 holder.itemView.setOnClickListener(this);
+                if (mDarkThemeEnabled) {
+                    holder.itemView.getBackground().setColorFilter(mPrimaryColor, Mode.SRC_ATOP);
+                }
                 break;
             case R.layout.dashboard_tile_switch:
                 final Tile tileSitch = (Tile) mItems.get(position);
@@ -323,6 +353,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                        set4GEnableSummary(mSw.isChecked());
                     }
                 });
+                if (mDarkThemeEnabled) {
+                    holder.itemView.getBackground().setColorFilter(mPrimaryColor, Mode.SRC_ATOP);
+                }
                 updateLte4GEnabler();
                 break;
             case R.layout.suggestion_header:
@@ -346,14 +379,20 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                                 showRemoveOption(v, suggestion);
                             }
                         });
+                if (mDarkThemeEnabled) {
+                    holder.itemView.getBackground().setColorFilter(mPrimaryColor, Mode.SRC_ATOP);
+                    holder.icon.setColorFilter(mAccentColor, Mode.SRC_ATOP);
+                    holder.title.setTextColor(Color.WHITE);
+                    holder.summary.setTextColor(Color.WHITE);
+                }
                 break;
             case R.layout.see_all:
                 onBindSeeAll(holder);
                 break;
             case R.layout.condition_card:
                 ConditionAdapterUtils.bindViews((Condition) mItems.get(position), holder,
-                        mItems.get(position) == mExpandedCondition, this,
-                        new View.OnClickListener() {
+                        mItems.get(position) == mExpandedCondition, mDarkThemeEnabled,
+                        mThemeEnabled, mAccentColor, this, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 onExpandClick(v);
@@ -401,6 +440,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.icon.setImageResource(moreSuggestions ? R.drawable.ic_expand_more
                 : R.drawable.ic_expand_less);
         holder.title.setText(mContext.getString(R.string.suggestions_title, mSuggestions.size()));
+        if (mDarkThemeEnabled) {
+            holder.itemView.getBackground().setColorFilter(mPrimaryColor, Mode.SRC_ATOP);
+            holder.icon.setColorFilter(Color.WHITE, Mode.SRC_ATOP);
+            holder.title.setTextColor(Color.WHITE);
+            holder.summary.setTextColor(Color.WHITE);
+        }
         String summaryContentDescription;
         if (moreSuggestions) {
             summaryContentDescription = mContext.getResources().getQuantityString(
