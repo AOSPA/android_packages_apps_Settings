@@ -223,6 +223,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         case DIALOG_DATEPICKER:
             DatePickerDialog d = new DatePickerDialog(
                     getActivity(),
+                    (SettingsActivity.isThemeEnabled() ? getTheme() : 0),
                     this,
                     calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH),
@@ -232,6 +233,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         case DIALOG_TIMEPICKER:
             return new TimePickerDialog(
                     getActivity(),
+                    (SettingsActivity.isThemeEnabled() ? getTheme() : 0),
                     this,
                     calendar.get(Calendar.HOUR_OF_DAY),
                     calendar.get(Calendar.MINUTE),
@@ -239,6 +241,21 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         default:
             throw new IllegalArgumentException();
         }
+    }
+
+    private int getTheme() {
+        int color = Settings.Secure.getInt(getContext().getContentResolver(),
+                Settings.Secure.THEME_ACCENT_COLOR, 1);
+        switch (color) {
+            case 1:
+                color = R.style.dark_red_dialog;
+                break;
+            case 0:
+            default:
+                color = R.style.dark_dialog;
+                break;
+        }
+        return color;
     }
 
     static void configureDatePicker(DatePicker datePicker) {

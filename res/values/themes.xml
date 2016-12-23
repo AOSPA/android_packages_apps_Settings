@@ -133,7 +133,7 @@
          directly. So use #ff263238 instead of @color/theme_primary and so on. -->
     <style name="Theme.SettingsBase" parent="@android:style/Theme.DeviceDefault.Settings" />
 
-    <style name="Theme.Settings" parent="Theme.SettingsBase">
+    <style name="Theme_Settings" parent="Theme.SettingsBase">
         <item name="preferenceTheme">@style/PreferenceTheme</item>
         <item name="@*android:preferenceHeaderPanelStyle">@style/PreferenceHeaderPanelSinglePane</item>
         <item name="@*android:preferencePanelStyle">@style/PreferencePanelSinglePane</item>
@@ -168,7 +168,7 @@
         <item name="@*android:errorColor">@color/lock_pattern_view_error_color</item>
     </style>
 
-    <style name="Theme.SubSettings" parent="Theme.Settings">
+    <style name="Theme.SubSettings" parent="Theme_Settings">
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar.SubSettings</item>
 
@@ -243,7 +243,7 @@
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
     </style>
 
-    <style name="Theme.NotificationStation" parent="@style/Theme.Settings">
+    <style name="Theme.NotificationStation" parent="@style/Theme_Settings">
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar.SubSettings</item>
         <item name="@*android:actionBarSize">@dimen/actionbar_size</item>
@@ -307,4 +307,11 @@
     <style name="FallbackHomeProgressBar" parent="FallbackHome">
         <item name="android:colorControlActivated">?android:attr/textColorPrimary</item>
     </style>
+
+    <style name="dark_settings" parent="@*android:style/Theme.DeviceDefault.Dark.Settings" />
+
+    <style name="dark_red_settings" parent="@*android:style/Theme_DeviceDefault_Dark_Red" />
+
+    <style name="dark_dialog" parent="@*android:style/Theme_Dark_Alert_Dialog" />
+    <style name="dark_red_dialog" parent="@*android:style/Theme_Dark_Red_Alert_Dialog" />
 </resources>
