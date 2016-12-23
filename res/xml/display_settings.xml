@@ -96,6 +96,11 @@
                 android:title="@string/tap_to_wake"
                 android:summary="@string/tap_to_wake_summary" />
 
+        <SwitchPreference
+                android:key="theme"
+                android:title="theme test"
+                android:summary="theme test" />
+
         <com.android.settings.WarnedPreference
                 android:key="font_size_mode"
                 android:title="@string/title_font_size"
