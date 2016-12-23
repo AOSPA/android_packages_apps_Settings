@@ -71,16 +71,16 @@ import java.util.List;
 import static android.provider.Settings.Secure.CAMERA_GESTURE_DISABLED;
 import static android.provider.Settings.Secure.DOUBLE_TAP_TO_WAKE;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
+import static android.provider.Settings.Secure.THEME_ENABLED;
 import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
-
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class DisplaySettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener, 
+        Preference.OnPreferenceChangeListener,
         WarnedPreference.OnPreferenceValueChangeListener,
         WarnedPreference.OnPreferenceClickListener, Indexable {
     private static final String TAG = "DisplaySettings";
@@ -98,6 +98,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_LIFT_TO_WAKE = "lift_to_wake";
     private static final String KEY_DOZE = "doze";
     private static final String KEY_TAP_TO_WAKE = "tap_to_wake";
+    private static final String KEY_THEME = "theme";
+    private static final String KEY_THEME_ACCENT = "theme_accent";
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
     private static final String KEY_AUTO_ROTATE = "auto_rotate";
     private static final String KEY_NIGHT_DISPLAY = "night_display";
@@ -128,10 +130,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private TimeoutListPreference mScreenTimeoutPreference;
     private ListPreference mNightModePreference;
+    private ListPreference mThemeAccentPreference;
     private Preference mScreenSaverPreference;
     private SwitchPreference mLiftToWakePreference;
     private SwitchPreference mDozePreference;
     private SwitchPreference mTapToWakePreference;
+    private SwitchPreference mThemePreference;
     private SwitchPreference mAutoBrightnessPreference;
     private SwitchPreference mCameraGesturePreference;
     private SwitchPreference mCameraDoubleTapPowerGesturePreference;
@@ -219,6 +223,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } else {
             removePreference(KEY_TAP_TO_WAKE);
         }
+
+        mThemePreference = (SwitchPreference) findPreference(KEY_THEME);
+        mThemePreference.setOnPreferenceChangeListener(this);
 
         if (isCameraGestureAvailable(getResources())) {
             mCameraGesturePreference = (SwitchPreference) findPreference(KEY_CAMERA_GESTURE);
@@ -308,6 +315,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             final int currentNightMode = uiManager.getNightMode();
             mNightModePreference.setValue(String.valueOf(currentNightMode));
             mNightModePreference.setOnPreferenceChangeListener(this);
+        }
+
+        mThemeAccentPreference = (ListPreference) findPreference(KEY_THEME_ACCENT);
+        if (mThemeAccentPreference != null) {
+            final int currentAccent = Settings.Secure.getInt(activity.getContentResolver(),
+                    Settings.Secure.THEME_ACCENT_COLOR, 0);
+            mThemeAccentPreference.setValue(String.valueOf(currentAccent));
+            mThemeAccentPreference.setOnPreferenceChangeListener(this);
         }
     }
 
@@ -484,6 +499,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mDozePreference.setChecked(value != 0);
         }
 
+        if (mThemePreference != null) {
+            int value = Settings.Secure.getInt(getContentResolver(), THEME_ENABLED, 1);
+            mThemePreference.setChecked(value != 0);
+            mThemeAccentPreference.setEnabled(value != 0);
+        }
         // Update camera gesture #1 if it is available.
         if (mCameraGesturePreference != null) {
             int value = Settings.Secure.getInt(getContentResolver(), CAMERA_GESTURE_DISABLED, 0);
@@ -555,6 +575,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             boolean value = (Boolean) objValue;
             Settings.Secure.putInt(getContentResolver(), DOUBLE_TAP_TO_WAKE, value ? 1 : 0);
         }
+        if (preference == mThemePreference) {
+            boolean value = (Boolean) objValue;
+            Settings.Secure.putInt(getContentResolver(), THEME_ENABLED, value ? 1 : 0);
+        }
         if (preference == mCameraGesturePreference) {
             boolean value = (Boolean) objValue;
             Settings.Secure.putInt(getContentResolver(), CAMERA_GESTURE_DISABLED,
@@ -569,6 +593,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist night mode setting", e);
             }
+        }
+        if (preference == mThemeAccentPreference) {
+            final int value = Integer.parseInt((String) objValue);
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.THEME_ACCENT_COLOR,
+                    Integer.valueOf(value));
         }
         return true;
     }
