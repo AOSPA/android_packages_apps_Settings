@@ -20,8 +20,10 @@ import android.app.ActivityManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.ActivityNotFoundException;
 import android.app.ActionBar;
+import android.app.IThemeCallback;
+import android.app.ThemeManager;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -37,6 +39,8 @@ import android.content.res.Configuration;
 import android.nfc.NfcAdapter;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -411,6 +415,23 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
     };
 
+    private int mTheme;
+
+    private ThemeManager mThemeManager;
+    private final IThemeCallback mThemeCallback = new IThemeCallback.Stub() {
+
+        @Override
+        public void onThemeChanged(int themeMode, int color) {
+            onCallbackAdded(themeMode, color);
+            recreateActivity();
+        }
+
+        @Override
+        public void onCallbackAdded(int themeMode, int color) {
+            mTheme = color;
+        }
+    };
+
     private final BroadcastReceiver mUserAddRemoveReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -546,8 +567,20 @@ public class SettingsActivity extends SettingsDrawerActivity
         return false;
     }
 
+    private void recreateActivity() {
+        runOnUiThread(() -> {
+            recreate();
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedState) {
+        mThemeManager = (ThemeManager) getSystemService(Context.THEME_SERVICE);
+        if (mThemeManager != null) {
+            mThemeManager.addCallback(mThemeCallback);
+        }
+        setTheme(R.style.Theme_Settings);
+        getTheme().applyStyle(mTheme, true);
         super.onCreate(savedState);
         long startTime = System.currentTimeMillis();
 
@@ -606,7 +639,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             final int themeResId = getThemeResId();
             if (themeResId != R.style.Theme_DialogWhenLarge &&
                     themeResId != R.style.Theme_SubSettingsDialogWhenLarge) {
-                setTheme(R.style.Theme_SubSettings);
+                // Don't override theme to retain selected accent colors
+                getTheme().applyStyle(R.style.Theme_SubSettings, true);
             }
         }
 
