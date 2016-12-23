@@ -101,6 +101,10 @@
                 android:title="@string/srgb_title"
                 android:summary="@string/srgb_summary" />
 
+        <SwitchPreference
+                android:key="notif_count"
+                android:title="Notification count" />
+
         <com.android.settings.WarnedPreference
                 android:key="font_size_mode"
                 android:title="@string/title_font_size"
