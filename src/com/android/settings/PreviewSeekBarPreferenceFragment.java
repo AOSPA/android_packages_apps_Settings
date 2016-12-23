@@ -18,7 +18,9 @@ package com.android.settings;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
@@ -26,6 +28,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -61,6 +65,11 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
     private View mLarger;
     private View mSmaller;
 
+    private LinearLayout mGrid;
+
+    private int mSelectedValue = -1;
+    private boolean mShouldAccentShow = false;
+
     private class onPreviewSeekBarChangeListener implements OnSeekBarChangeListener {
         private boolean mSeekByTouch;
 
@@ -93,6 +102,45 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         }
     }
 
+    private void applyColor(int value) {
+        if (mShouldAccentShow) {
+            Settings.Secure.putInt(getPrefContext().getContentResolver(),
+                    Settings.Secure.THEME_ACCENT_COLOR, value);
+        } else {
+            Settings.Secure.putInt(getPrefContext().getContentResolver(),
+                    Settings.Secure.THEME_PRIMARY_COLOR, value);
+        }
+    }
+
+    private void initAdapter(int[] colors, int colorValue) {
+        mGrid.removeAllViews();
+        mSelectedValue = colorValue;
+        final Drawable backgroundDrawable = getContext().getDrawable(R.drawable.color_circle_bg);
+        backgroundDrawable.setAlpha(125);
+        int count = -1;
+        for (int color : colors) {
+            count++;
+            final int value = count;
+            ImageView view = new ImageView(getContext());
+            view.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            view.setImageDrawable(getContext().getDrawable(R.drawable.color_circle));
+            view.setColorFilter(color);
+            if (mSelectedValue != -1 && mSelectedValue == value) {
+                view.setBackground(backgroundDrawable);
+            }
+            view.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    applyColor(value);
+                }
+            });
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(65, 25, 65, 0);
+            mGrid.addView(view, params);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,6 +151,37 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         final View content = inflater.inflate(mActivityLayoutResId, listContainer, false);
         listContainer.addView(content);
 
+        mGrid = (LinearLayout) content.findViewById(R.id.grid_view);
+        if (mGrid != null) {
+            final int accentColor = Settings.Secure.getInt(getContext().getContentResolver(),
+                    Settings.Secure.THEME_ACCENT_COLOR, 0);
+            final int primaryColor = Settings.Secure.getInt(getContext().getContentResolver(),
+                    Settings.Secure.THEME_PRIMARY_COLOR, 0);
+            final int[] accentColors = getContext().getResources().getIntArray(
+                    com.android.settingslib.R.array.color_picker_dialog_colors);
+            final int[] primaryColors = getContext().getResources().getIntArray(
+                    R.array.primary_colors);
+            if (mShouldAccentShow) {
+                initAdapter(accentColors, accentColor);
+            } else {
+                initAdapter(primaryColors, primaryColor);
+            }
+            final TextView text = (TextView) content.findViewById(R.id.longpress_text);
+            text.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (!mShouldAccentShow) {
+                        mShouldAccentShow = true;
+                        initAdapter(accentColors, accentColor);
+                    } else {
+                        mShouldAccentShow = false;
+                        initAdapter(primaryColors, primaryColor);
+                    }
+                    return true;
+                }
+            });
+        }
+
         mLabel = (TextView) content.findViewById(R.id.current_label);
 
         // The maximum SeekBar value always needs to be non-zero. If there's
@@ -111,37 +190,39 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         final int max = Math.max(1, mEntries.length - 1);
 
         final LabeledSeekBar seekBar = (LabeledSeekBar) content.findViewById(R.id.seek_bar);
-        seekBar.setLabels(mEntries);
-        seekBar.setMax(max);
-        seekBar.setProgress(mInitialIndex);
-        seekBar.setOnSeekBarChangeListener(new onPreviewSeekBarChangeListener());
+        if (seekBar != null) {
+            seekBar.setLabels(mEntries);
+            seekBar.setMax(max);
+            seekBar.setProgress(mInitialIndex);
+            seekBar.setOnSeekBarChangeListener(new onPreviewSeekBarChangeListener());
 
-        mSmaller = content.findViewById(R.id.smaller);
-        mSmaller.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final int progress = seekBar.getProgress();
-                if (progress > 0) {
-                    seekBar.setProgress(progress - 1, true);
+            mSmaller = content.findViewById(R.id.smaller);
+            mSmaller.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final int progress = seekBar.getProgress();
+                    if (progress > 0) {
+                        seekBar.setProgress(progress - 1, true);
+                    }
                 }
-            }
-        });
+            });
 
-        mLarger = content.findViewById(R.id.larger);
-        mLarger.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final int progress = seekBar.getProgress();
-                if (progress < seekBar.getMax()) {
-                    seekBar.setProgress(progress + 1, true);
+            mLarger = content.findViewById(R.id.larger);
+            mLarger.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final int progress = seekBar.getProgress();
+                    if (progress < seekBar.getMax()) {
+                        seekBar.setProgress(progress + 1, true);
+                    }
                 }
-            }
-        });
+            });
 
-        if (mEntries.length == 1) {
-            // The larger and smaller buttons will be disabled when we call
-            // setPreviewLayer() later in this method.
-            seekBar.setEnabled(false);
+            if (mEntries.length == 1) {
+                // The larger and smaller buttons will be disabled when we call
+                // setPreviewLayer() later in this method.
+                seekBar.setEnabled(false);
+            }
         }
 
         final Context context = getContext();
@@ -183,9 +264,15 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
     protected abstract void commit();
 
     private void setPreviewLayer(int index, boolean animate) {
-        mLabel.setText(mEntries[index]);
-        mSmaller.setEnabled(index > 0);
-        mLarger.setEnabled(index < mEntries.length - 1);
+        if (mLabel != null) {
+            mLabel.setText(mEntries[index]);
+        }
+        if (mSmaller != null) {
+            mSmaller.setEnabled(index > 0);
+        }
+        if (mLarger != null) {
+            mLarger.setEnabled(index < mEntries.length - 1);
+        }
         setPagerIndicatorContentDescription(mPreviewPager.getCurrentItem());
         mPreviewPagerAdapter.setPreviewLayer(index, mCurrentIndex,
                 mPreviewPager.getCurrentItem(), animate);

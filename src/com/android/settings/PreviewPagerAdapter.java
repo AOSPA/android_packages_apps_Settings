@@ -19,6 +19,7 @@ import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,9 @@ public class PreviewPagerAdapter extends PagerAdapter {
 
     public PreviewPagerAdapter(Context context, boolean isLayoutRtl,
             int[] previewSampleResIds, Configuration[] configurations) {
+        final TypedArray ta = context.obtainStyledAttributes(new int[]{android.R.attr.colorBackground});
+        final int backgroundColor = ta.getColor(0, 0);
+        ta.recycle();
         mIsLayoutRtl = isLayoutRtl;
         mPreviewFrames = new FrameLayout[previewSampleResIds.length];
         mViewStubInflated = new boolean[previewSampleResIds.length][configurations.length];
@@ -69,6 +73,7 @@ public class PreviewPagerAdapter extends PagerAdapter {
             mPreviewFrames[p].setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT));
+            mPreviewFrames[p].setBackgroundColor(backgroundColor);
 
             for (int j = 0; j < configurations.length; ++j) {
                 // Create a new configuration for the specified value. It won't
