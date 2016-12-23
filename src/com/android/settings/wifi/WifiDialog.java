@@ -24,6 +24,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -53,7 +55,8 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogInterfac
 
     public WifiDialog(Context context, WifiDialogListener listener, AccessPoint accessPoint,
             int mode) {
-        super(context);
+        super(context, (SettingsActivity.isThemeEnabled()
+                ? R.style.Theme_AlertDialog_Dark : 0));
         mMode = mode;
         mListener = listener;
         mAccessPoint = accessPoint;

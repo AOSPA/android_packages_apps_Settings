@@ -23,6 +23,7 @@
     <attr name="setup_divider_color" format="reference" />
     <attr name="side_margin" format="reference|dimension" />
     <attr name="wifi_signal_color" format="reference" />
+    <attr name="two_buttons_color" format="reference" />
 
     <style name="SetupWizardDisableAppStartingTheme">
         <!-- Theme to disable the app starting window. The actual theme of the activity needs to
@@ -133,7 +134,7 @@
          directly. So use #ff263238 instead of @color/theme_primary and so on. -->
     <style name="Theme.SettingsBase" parent="@android:style/Theme.DeviceDefault.Settings" />
 
-    <style name="Theme.Settings" parent="Theme.SettingsBase">
+    <style name="Theme_Settings" parent="Theme.SettingsBase">
         <item name="preferenceTheme">@style/PreferenceTheme</item>
         <item name="@*android:preferenceHeaderPanelStyle">@style/PreferenceHeaderPanelSinglePane</item>
         <item name="@*android:preferencePanelStyle">@style/PreferencePanelSinglePane</item>
@@ -166,9 +167,11 @@
         <item name="@*android:regularColor">@color/lock_pattern_view_regular_color</item>
         <item name="@*android:successColor">@color/lock_pattern_view_success_color</item>
         <item name="@*android:errorColor">@color/lock_pattern_view_error_color</item>
+
+        <item name="two_buttons_color">@color/two_buttons_color</item>
     </style>
 
-    <style name="Theme.SubSettings" parent="Theme.Settings">
+    <style name="Theme.SubSettings" parent="Theme_Settings">
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar.SubSettings</item>
 
@@ -243,7 +246,7 @@
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
     </style>
 
-    <style name="Theme.NotificationStation" parent="@style/Theme.Settings">
+    <style name="Theme.NotificationStation" parent="@style/Theme_Settings">
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Theme.ActionBar.SubSettings</item>
         <item name="@*android:actionBarSize">@dimen/actionbar_size</item>
@@ -307,4 +310,18 @@
     <style name="FallbackHomeProgressBar" parent="FallbackHome">
         <item name="android:colorControlActivated">?android:attr/textColorPrimary</item>
     </style>
+
+    <style name="dark_settings" parent="@*android:style/Theme.DeviceDefault.Dark.Settings">
+        <item name="two_buttons_color">@android:color/dark_primary_color</item>
+    </style>
+
+    <style name="dark_red_settings" parent="@*android:style/Theme_DeviceDefault_Dark_Red">
+        <item name="two_buttons_color">@android:color/dark_primary_color</item>
+    </style>
+
+    <style name="Theme_AlertDialog_Dark" parent="@*android:style/Theme_Dark_Alert_Dialog">
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
+    </style>
+
 </resources>

@@ -30,7 +30,8 @@
             android:layout_width="120dip"
             android:layout_weight="0.4"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:background="?attr/two_buttons_color" />
         <!-- Spacer -->
         <View
             android:id="@+id/buttons_spacer_left"
@@ -44,5 +45,6 @@
             android:text="@string/cancel"
             android:layout_weight="0.4"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:background="?attr/two_buttons_color" />
 </LinearLayout>
