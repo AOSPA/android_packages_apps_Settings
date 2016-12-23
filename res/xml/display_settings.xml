@@ -134,4 +134,19 @@
                 android:summary="%s"
                 android:title="@string/display_vr_pref_title" />
 
+        <PreferenceCategory
+            android:title="@string/theme_title">
+
+            <SwitchPreference
+                    android:key="theme"
+                    android:title="@string/dark_mode_title"
+                    android:summary="@string/theme_summary" />
+
+            <ListPreference
+                    android:key="theme_accent"
+                    android:title="@string/theme_accent_title"
+                    android:summary="@string/theme_accent_summary"
+                    android:entries="@array/theme_accent_entries"
+                    android:entryValues="@array/theme_accent_values" />
+        </PreferenceCategory>
 </PreferenceScreen>

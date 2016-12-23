@@ -21,6 +21,7 @@ import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ThemeManager;
 import android.app.UiModeManager;
 import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
@@ -72,6 +73,7 @@ import static android.provider.Settings.Secure.CAMERA_GESTURE_DISABLED;
 import static android.provider.Settings.Secure.DOUBLE_TAP_TO_WAKE;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static android.provider.Settings.Secure.SRGB_ENABLED;
+import static android.provider.Settings.Secure.THEME_ENABLED;
 import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
@@ -81,7 +83,7 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class DisplaySettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener, 
+        Preference.OnPreferenceChangeListener,
         WarnedPreference.OnPreferenceValueChangeListener,
         WarnedPreference.OnPreferenceClickListener, Indexable {
     private static final String TAG = "DisplaySettings";
@@ -100,6 +102,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOZE = "doze";
     private static final String KEY_TAP_TO_WAKE = "tap_to_wake";
     private static final String KEY_SRGB = "srgb";
+    private static final String KEY_THEME = "theme";
+    private static final String KEY_THEME_ACCENT = "theme_accent";
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
     private static final String KEY_AUTO_ROTATE = "auto_rotate";
     private static final String KEY_NIGHT_DISPLAY = "night_display";
@@ -130,11 +134,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private TimeoutListPreference mScreenTimeoutPreference;
     private ListPreference mNightModePreference;
+    private ListPreference mThemeAccentPreference;
     private Preference mScreenSaverPreference;
     private SwitchPreference mLiftToWakePreference;
     private SwitchPreference mDozePreference;
     private SwitchPreference mTapToWakePreference;
     private SwitchPreference mSrgbPreference;
+    private SwitchPreference mThemePreference;
     private SwitchPreference mAutoBrightnessPreference;
     private SwitchPreference mCameraGesturePreference;
     private SwitchPreference mCameraDoubleTapPowerGesturePreference;
@@ -230,6 +236,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             removePreference(KEY_SRGB);
         }
 
+        mThemePreference = (SwitchPreference) findPreference(KEY_THEME);
+        mThemePreference.setOnPreferenceChangeListener(this);
+
         if (isCameraGestureAvailable(getResources())) {
             mCameraGesturePreference = (SwitchPreference) findPreference(KEY_CAMERA_GESTURE);
             mCameraGesturePreference.setOnPreferenceChangeListener(this);
@@ -318,6 +327,21 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             final int currentNightMode = uiManager.getNightMode();
             mNightModePreference.setValue(String.valueOf(currentNightMode));
             mNightModePreference.setOnPreferenceChangeListener(this);
+        }
+
+        mThemeAccentPreference = (ListPreference) findPreference(KEY_THEME_ACCENT);
+        if (mThemeAccentPreference != null) {
+            final int currentAccent = Settings.Secure.getInt(activity.getContentResolver(),
+                    Settings.Secure.THEME_ACCENT_COLOR, 0);
+            mThemeAccentPreference.setValue(String.valueOf(currentAccent));
+            mThemeAccentPreference.setOnPreferenceChangeListener(this);
+        }
+        if (mThemePreference != null && mThemeAccentPreference != null
+                && ThemeManager.isOverlayEnabled()) {
+            mThemeAccentPreference.setEnabled(false);
+            mThemePreference.setEnabled(false);
+            mThemeAccentPreference.setSummary(R.string.oms_enabled);
+            mThemePreference.setSummary(R.string.oms_enabled);
         }
     }
 
@@ -502,10 +526,21 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             int value = Settings.Secure.getInt(getContentResolver(), SRGB_ENABLED, 0);
             mSrgbPreference.setChecked(value != 0);
         }
+        if (mThemePreference != null) {
+            int value = Settings.Secure.getInt(getContentResolver(), THEME_ENABLED, 0);
+            mThemePreference.setChecked(value != 0);
+        }
         // Update camera gesture #1 if it is available.
         if (mCameraGesturePreference != null) {
             int value = Settings.Secure.getInt(getContentResolver(), CAMERA_GESTURE_DISABLED, 0);
             mCameraGesturePreference.setChecked(value == 0);
+        }
+        if (mThemePreference != null && mThemeAccentPreference != null
+                && ThemeManager.isOverlayEnabled()) {
+            mThemeAccentPreference.setEnabled(false);
+            mThemePreference.setEnabled(false);
+            mThemeAccentPreference.setSummary(R.string.oms_enabled);
+            mThemePreference.setSummary(R.string.oms_enabled);
         }
     }
 
@@ -577,6 +612,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             boolean value = (Boolean) objValue;
             Settings.Secure.putInt(getContentResolver(), SRGB_ENABLED, value ? 1 : 0);
         }
+        if (preference == mThemePreference) {
+            boolean value = (Boolean) objValue;
+            Settings.Secure.putInt(getContentResolver(), THEME_ENABLED, value ? 1 : 0);
+        }
         if (preference == mCameraGesturePreference) {
             boolean value = (Boolean) objValue;
             Settings.Secure.putInt(getContentResolver(), CAMERA_GESTURE_DISABLED,
@@ -592,6 +631,20 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 Log.e(TAG, "could not persist night mode setting", e);
             }
         }
+        if (preference == mThemeAccentPreference) {
+            final int value = Integer.parseInt((String) objValue);
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.THEME_ACCENT_COLOR,
+                    Integer.valueOf(value));
+        }
+
+        if (mThemePreference != null && mThemeAccentPreference != null
+                && ThemeManager.isOverlayEnabled()) {
+            mThemeAccentPreference.setEnabled(false);
+            mThemePreference.setEnabled(false);
+            mThemeAccentPreference.setSummary(R.string.oms_enabled);
+            mThemePreference.setSummary(R.string.oms_enabled);
+        }
+
         return true;
     }
 
