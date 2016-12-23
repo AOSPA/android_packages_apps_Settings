@@ -18,6 +18,7 @@ package com.android.settings.dashboard.conditional;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
@@ -61,11 +62,13 @@ public class ConditionAdapterUtils {
     }
 
     public static void bindViews(final Condition condition,
-            DashboardAdapter.DashboardItemHolder view, boolean isExpanded,
-            View.OnClickListener onClickListener, View.OnClickListener onExpandListener) {
+            DashboardAdapter.DashboardItemHolder view, boolean isExpanded, boolean isThemeEnabled,
+            int accentColor, View.OnClickListener onClickListener,
+            View.OnClickListener onExpandListener) {
         View card = view.itemView.findViewById(R.id.content);
         card.setTag(condition);
         card.setOnClickListener(onClickListener);
+        card.setBackgroundColor(accentColor);
         view.icon.setImageIcon(condition.getIcon());
         view.title.setText(condition.getTitle());
         final View collapsedGroup = view.itemView.findViewById(R.id.collapsed_group);
@@ -82,6 +85,15 @@ public class ConditionAdapterUtils {
             animateChange(view.itemView, view.itemView.findViewById(R.id.content),
                     detailGroup, isExpanded, actions.length > 0);
         }
+
+        if (isThemeEnabled) {
+            view.icon.setColorFilter(Color.WHITE);
+            view.title.setTextColor(Color.WHITE);
+            expand.setColorFilter(Color.WHITE);
+            if (isExpanded) {
+                view.summary.setTextColor(Color.WHITE);
+            }
+        }
         if (isExpanded) {
             view.summary.setText(condition.getSummary());
             for (int i = 0; i < 2; i++) {
@@ -90,6 +102,7 @@ public class ConditionAdapterUtils {
                 if (actions.length > i) {
                     button.setVisibility(View.VISIBLE);
                     button.setText(actions[i]);
+                    if (isThemeEnabled) button.setTextColor(Color.WHITE);
                     final int index = i;
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
