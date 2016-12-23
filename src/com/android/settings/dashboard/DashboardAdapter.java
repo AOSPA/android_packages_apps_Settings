@@ -19,10 +19,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.content.res.TypedArray;
 import android.text.TextUtils;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
+import android.graphics.PorterDuff;
 import android.provider.Settings;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -96,6 +99,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private Condition mExpandedCondition = null;
     private SuggestionParser mSuggestionParser;
 
+    private int mAccentColor;
+
+    private boolean mThemeEnabled;
+
     public DashboardAdapter(Context context, SuggestionParser parser, Bundle savedInstanceState,
                 List<Condition> conditions) {
         mContext = context;
@@ -103,6 +110,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mLte4GEnabler = new Lte4GEnabler(mContext, new Switch(mContext));
         mSuggestionParser = parser;
         mConditions = conditions;
+
+        final TypedArray ta
+                = context.obtainStyledAttributes(new int[]{android.R.attr.colorAccent});
+        mAccentColor = ta.getColor(0, 0);
+        ta.recycle();
+
+        mThemeEnabled = Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.THEME_ENABLED, 0) != 0;
 
         setHasStableIds(true);
 
@@ -341,6 +356,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                                 showRemoveOption(v, suggestion);
                             }
                         });
+                if (mThemeEnabled) {
+                    holder.itemView.setBackgroundColor(mAccentColor);
+                    holder.icon.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+                }
                 break;
             case R.layout.see_all:
                 onBindSeeAll(holder);
@@ -396,6 +415,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.icon.setImageResource(moreSuggestions ? R.drawable.ic_expand_more
                 : R.drawable.ic_expand_less);
         holder.title.setText(mContext.getString(R.string.suggestions_title, mSuggestions.size()));
+        if (mThemeEnabled) {
+            holder.itemView.setBackgroundColor(mAccentColor);
+            holder.icon.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+            holder.title.setTextColor(Color.BLACK);
+            holder.summary.setTextColor(Color.BLACK);
+        }
         String summaryContentDescription;
         if (moreSuggestions) {
             summaryContentDescription = mContext.getResources().getQuantityString(
