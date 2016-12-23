@@ -101,6 +101,18 @@
                 android:title="@string/srgb_title"
                 android:summary="@string/srgb_summary" />
 
+        <SwitchPreference
+                android:key="theme"
+                android:title="@string/theme_title"
+                android:summary="@string/theme_summary" />
+
+        <ListPreference
+                android:key="theme_accent"
+                android:title="@string/theme_accent_title"
+                android:summary="@string/theme_accent_summary"
+                android:entries="@array/theme_accent_entries"
+                android:entryValues="@array/theme_accent_values" />
+
         <com.android.settings.WarnedPreference
                 android:key="font_size_mode"
                 android:title="@string/title_font_size"
