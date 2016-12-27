@@ -620,7 +620,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
 
             if (!mEnhancedWFCSettingsEnabled) {
                 mButtonWfc.setSummary(WifiCallingSettings.getWfcModeSummary(
-                       context, ImsManager.getWfcMode(context)));
+                       context, ImsManager.getWfcMode(context, mTm.isNetworkRoaming())));
             } else {
                 if (!ImsManager.isWfcEnabledByUser(context)) {
                     ((WFCPreference) mButtonWfc).setChecked(false);
@@ -632,8 +632,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
                 }
             }
 
-            mButtonWfc.setSummary(WifiCallingSettings.getWfcModeSummary(
-                    context, ImsManager.getWfcMode(context, mTm.isNetworkRoaming())));
         } else {
             log("WFC not supported. Remove WFC menu");
             if (mButtonWfc != null) getPreferenceScreen().removePreference(mButtonWfc);
