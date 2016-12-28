@@ -139,6 +139,7 @@ import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
 
+import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -1061,6 +1062,15 @@ public class SettingsActivity extends SettingsDrawerActivity
      */
     private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
             boolean addToBackStack, int titleResId, CharSequence title, boolean withTransition) {
+
+        boolean SimSettingsExists = new File("/system/app/SimSettings/SimSettings.apk").exists();
+        if (SimSettingsExists && fragmentName.equals(SimSettings.class.getName())) {
+            Intent intent = new Intent("com.android.settings.sim.SIM_SUB_INFO_SETTINGS");
+            intent.setPackage("com.qualcomm.qti.simsettings");
+            startActivity(intent);
+            finish();
+            return null;
+        }
 
         if (fragmentName.equals(getString(R.string.qtifeedback_intent_action))){
              final Intent newIntent = new Intent(getString(R.string.qtifeedback_intent_action));
