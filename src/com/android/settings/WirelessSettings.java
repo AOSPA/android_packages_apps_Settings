@@ -101,6 +101,7 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
     private static final String KEY_MANAGE_MOBILE_PLAN = "manage_mobile_plan";
     private static final String KEY_WFC_SETTINGS = "wifi_calling_settings";
     private static final String KEY_WFC_ENHANCED_SETTINGS = "wifi_calling_enhanced_settings";
+    private static final String KEY_CALL_SETTINGS = "call_settings";
 
     private static final String ACTION_WIFI_CALL_ON = "com.android.wificall.TURNON";
     private static final String ACTION_WIFI_CALL_OFF = "com.android.wificall.TURNOFF";
@@ -384,6 +385,12 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         SwitchPreference nfc = (SwitchPreference) findPreference(KEY_TOGGLE_NFC);
         RestrictedPreference androidBeam = (RestrictedPreference) findPreference(
                 KEY_ANDROID_BEAM_SETTINGS);
+        if (QtiImsExtUtils.isCarrierOneSupported()) {
+            Preference callSettingsPref = (PreferenceScreen) findPreference(KEY_CALL_SETTINGS);
+            Intent callSettingsIntent = new Intent();
+            callSettingsIntent.setAction("org.codeaurora.CALL_SETTINGS");
+            callSettingsPref.setIntent(callSettingsIntent);
+        }
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
@@ -627,6 +634,12 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         } else {
             log("WFC not supported. Remove WFC menu");
             if (mButtonWfc != null) getPreferenceScreen().removePreference(mButtonWfc);
+        }
+        if (QtiImsExtUtils.isCarrierOneSupported() && mUm.isAdminUser()) {
+             //Call Settings already have WFC settings.
+            removePreference(KEY_WFC_SETTINGS);
+        } else {
+            removePreference(KEY_CALL_SETTINGS);
         }
     }
 
