@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
@@ -49,6 +50,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     private static final String KEY_NIGHT_DISPLAY_START_TIME = "night_display_start_time";
     private static final String KEY_NIGHT_DISPLAY_END_TIME = "night_display_end_time";
     private static final String KEY_NIGHT_DISPLAY_ACTIVATED = "night_display_activated";
+    private static final String KEY_NIGHT_BRIGHTNESS_VALUE = "night_brightness_value";
 
     private static final String SETTING_WARNING_HIDDEN = "night_display_warning_hidden";
     private static final int WARNING_SHOW = 0;
@@ -64,6 +66,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     private Preference mStartTimePreference;
     private Preference mEndTimePreference;
     private TwoStatePreference mActivatedPreference;
+    private DropDownPreference mNightBrightValue;
 
     private boolean mUseHwc2;
 
@@ -89,6 +92,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.night_display_settings);
 
         mAutoModePreference = (DropDownPreference) findPreference(KEY_NIGHT_DISPLAY_AUTO_MODE);
+        mNightBrightValue = (DropDownPreference) findPreference(KEY_NIGHT_BRIGHTNESS_VALUE);
         mStartTimePreference = findPreference(KEY_NIGHT_DISPLAY_START_TIME);
         mEndTimePreference = findPreference(KEY_NIGHT_DISPLAY_END_TIME);
         mActivatedPreference = (TwoStatePreference) findPreference(KEY_NIGHT_DISPLAY_ACTIVATED);
@@ -105,6 +109,12 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
         });
         mAutoModePreference.setOnPreferenceChangeListener(this);
         mActivatedPreference.setOnPreferenceChangeListener(this);
+        mNightBrightValue.setOnPreferenceChangeListener(this);
+
+        int nightBrightValue = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.NIGHT_BRIGHTNESS_VALUE, 0);
+        mNightBrightValue.setValue(Integer.toString(nightBrightValue));
+        mNightBrightValue.setSummary(mNightBrightValue.getEntry());
     }
 
     @Override
@@ -216,6 +226,13 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
             boolean activated = (Boolean) newValue;
             displayWarning = activated;
             result = mController.setActivated(activated);
+        } else if (preference == mNightBrightValue) {
+            int nightBrightValue = Integer.valueOf((String) newValue);
+            int index = mNightBrightValue.findIndexOfValue((String) newValue);
+            mNightBrightValue.setSummary(mNightBrightValue.getEntries()[index]);
+            Settings.Secure.putInt(getActivity().getContentResolver(),
+                    Settings.Secure.NIGHT_BRIGHTNESS_VALUE, nightBrightValue);
+            return true;
         }
 
         if (displayWarning && !mUseHwc2) {
