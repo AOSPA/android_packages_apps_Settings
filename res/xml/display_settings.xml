@@ -70,6 +70,10 @@
         android:fragment="com.android.settings.display.ColorModePreferenceFragment"
         settings:keywords="@string/keywords_color_mode" />
 
+    <SwitchPreference
+        android:key="srgb"
+        android:title="@string/srgb_title" />
+
     <Preference
         android:key="font_size"
         android:title="@string/title_font_size"
