@@ -44,6 +44,11 @@
                 settings:preview="@drawable/gesture_twist"/>
 
             <com.android.settings.gestures.GesturePreference
+                android:key="gesture_double_tap_sleep"
+                android:title="@string/double_tap_to_sleep_title"
+                android:summary="@string/double_tap_to_sleep_summary" />
+
+            <com.android.settings.gestures.GesturePreference
                 android:key="gesture_double_tap_screen"
                 android:title="@string/ambient_display_title"
                 android:summary="@string/ambient_display_summary"
