@@ -23,6 +23,12 @@
             android:title="@string/system_gestures_title">
 
             <com.android.settings.gestures.GesturePreference
+       		android:key="double_tap_sleep_gesture"
+       		android:title="@string/double_tap_to_sleep_title"
+		android:summary="@string/double_tap_to_sleep_summary"
+	        android:defaultValue="false" />
+
+            <com.android.settings.gestures.GesturePreference
                 android:key="gesture_swipe_down_fingerprint"
                 android:title="@string/fingerprint_swipe_for_notifications_title"
                 android:summary="@string/fingerprint_swipe_for_notifications_summary"
