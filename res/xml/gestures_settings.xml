@@ -51,6 +51,12 @@
                 settings:preview="@drawable/gesture_ambient_tap"/>
 
             <com.android.settings.gestures.GesturePreference
+                android:key="double_tap_sleep_gesture"
+                android:title="@string/double_tap_to_sleep_title"
+                android:summary="@string/double_tap_to_sleep_summary"
+                android:defaultValue="false" />
+
+            <com.android.settings.gestures.GesturePreference
                 android:key="gesture_pick_up"
                 android:title="@string/ambient_display_pickup_title"
                 android:summary="@string/ambient_display_pickup_summary"
