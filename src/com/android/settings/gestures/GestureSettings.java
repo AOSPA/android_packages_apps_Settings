@@ -54,6 +54,7 @@ public class GestureSettings extends SettingsPreferenceFragment implements
     private static final String PREF_KEY_DOUBLE_TWIST = "gesture_double_twist";
     private static final String PREF_KEY_PICK_UP = "gesture_pick_up";
     private static final String PREF_KEY_SWIPE_DOWN_FINGERPRINT = "gesture_swipe_down_fingerprint";
+    private static final String PREF_KEY_DOUBLE_TAP_SLEEP = "double_tap_sleep_gesture";
     private static final String PREF_KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen";
     private static final String DEBUG_DOZE_COMPONENT = "debug.doze.component";
 
@@ -161,6 +162,8 @@ public class GestureSettings extends SettingsPreferenceFragment implements
                     Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, enabled ? 0 : 1);
         } else if (PREF_KEY_PICK_UP.equals(key)) {
             Secure.putInt(getContentResolver(), Secure.DOZE_PULSE_ON_PICK_UP, enabled ? 1 : 0);
+        } else if (PREF_KEY_DOUBLE_TAP_SLEEP.equals(key)) {
+            Secure.putInt(getContentResolver(), enabled ? 1 : 0);
         } else if (PREF_KEY_DOUBLE_TAP_SCREEN.equals(key)) {
             Secure.putInt(getContentResolver(), Secure.DOZE_PULSE_ON_DOUBLE_TAP, enabled ? 1 : 0);
         } else if (PREF_KEY_SWIPE_DOWN_FINGERPRINT.equals(key)) {
