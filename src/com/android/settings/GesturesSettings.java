@@ -72,6 +72,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOUBLE_TWIST = "gesture_double_twist";
     private static final String KEY_PICK_UP = "gesture_pick_up";
     private static final String KEY_SWIPE_DOWN_FINGERPRINT = "gesture_swipe_down_fingerprint";
+    private static final String KEY_DOUBLE_TAP_SLEEP = "gesture_double_tap_sleep";
     private static final String KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen";
     private static final String DEBUG_DOZE_COMPONENT = "debug.doze.component";
 
@@ -154,13 +155,16 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
         mPreferences = new ArrayList();
 
         // Double tap power for camera
-        if (isCameraDoubleTapPowerGestureAvailable(getResources())) {
+        if (isGestureDoubleTapPowerAvailable(getResources())) {
             int cameraDisabled = Settings.Secure.getInt(getContentResolver(),
                     Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
             addPreference(KEY_DOUBLE_TAP_POWER, cameraDisabled == 0);
         } else {
             mSystemGestures.removePreference(findPreference(KEY_DOUBLE_TAP_POWER));
         }
+
+        // Double tap to sleep
+        addPreference(KEY_DOUBLE_TAP_SLEEP);
 
         // Ambient Display
         mAmbientConfig = new AmbientDisplayConfiguration(context);
@@ -306,6 +310,10 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
             boolean enabled = (boolean) newValue;
             Settings.Secure.putInt(getContentResolver(),
                     Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, enabled ? 0 : 1);
+        } else if (KEY_DOUBLE_TAP_SLEEP.equals(key)) {
+            boolean enabled = (boolean) newValue;
+            Settings.Secure.putInt(getContentResolver(), Settings.System.GESTURE_DOUBLE_TAP_SLEEP,
+                    enabled ? 1 : 0);
         } else if (KEY_PICK_UP.equals(key)) {
             boolean enabled = (boolean) newValue;
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.DOZE_PULSE_ON_PICK_UP,
