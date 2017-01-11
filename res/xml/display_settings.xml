@@ -98,7 +98,8 @@
 
         <SwitchPreference
                 android:key="srgb"
-                android:title="@string/srgb_title" />
+                android:title="@string/srgb_title"
+                android:summary="@string/srgb_summary" />
 
         <com.android.settings.WarnedPreference
                 android:key="font_size_mode"
