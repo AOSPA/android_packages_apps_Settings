@@ -310,6 +310,15 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
+
+        <receiver android:name=".wifi.ManagerPasspointReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.SIM_STATE_CHANGED" />
+                <action android:name="com.android.settings.action.USER_TAP_PASSPOINT" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
         <activity android:name=".SubSettings$SavedAccessPointsSubSettings"
             android:taskAffinity="com.android.settings"
             android:configChanges="orientation|keyboardHidden|screenSize"
