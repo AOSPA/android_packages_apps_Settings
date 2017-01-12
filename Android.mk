@@ -11,7 +11,7 @@ include $(BUILD_STATIC_JAVA_LIBRARY)
 # Build the Settings APK
 include $(CLEAR_VARS)
 
-LOCAL_JAVA_LIBRARIES := bouncycastle core-oj telephony-common ims-common
+LOCAL_JAVA_LIBRARIES := bouncycastle core-oj telephony-common ims-common telephony-ext
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v4 \
     android-support-v13 \
