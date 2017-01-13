@@ -16,14 +16,20 @@
 package com.android.settings.accounts;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.drawer.CategoryKey;
+import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static android.provider.Settings.EXTRA_AUTHORITIES;
@@ -31,6 +37,7 @@ import static android.provider.Settings.EXTRA_AUTHORITIES;
 public class UserAndAccountDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "UserAndAccountDashboard";
+    private static final String METADATA_IA_ACCOUNT = "com.android.settings.ia.account";
 
     @Override
     public int getMetricsCategory() {
@@ -65,10 +72,33 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
         controllers.add(new AutoSyncWorkDataPreferenceController(context, this));
         String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
         final AccountPreferenceController accountPrefController =
-            new AccountPreferenceController(context, this, authorities);
+                new AccountPreferenceController(context, this, authorities);
         getLifecycle().addObserver(accountPrefController);
         controllers.add(accountPrefController);
         return controllers;
     }
 
+    @Override
+    protected boolean displayTile(Tile tile) {
+        final Bundle metadata = tile.metaData;
+        if (metadata != null) {
+            return metadata.getString(METADATA_IA_ACCOUNT) == null;
+        }
+        return true;
+    }
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
+                            .isEnabled()) {
+                        return null;
+                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.user_and_accounts_settings;
+                    return Arrays.asList(sir);
+                }
+            };
 }

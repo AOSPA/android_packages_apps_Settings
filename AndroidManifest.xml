@@ -276,21 +276,6 @@
                 android:value="true" />
         </activity>
 
-        <activity android:name=".wifi.WifiSetupActivity"
-                android:taskAffinity="com.android.wizard"
-                android:theme="@style/SetupWizardDisableAppStartingTheme"
-                android:label="@string/wifi_setup_wizard_title"
-                android:icon="@drawable/empty_icon"
-                android:clearTaskOnLaunch="true"
-                android:windowSoftInputMode="adjustNothing">
-            <intent-filter android:priority="1">
-                <action android:name="com.android.net.wifi.SETUP_WIFI_NETWORK" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
-        </activity>
-
         <activity android:name="Settings$AdvancedWifiSettingsActivity"
                 android:taskAffinity="com.android.settings"
                 android:label="@string/wifi_advanced_settings_label"
@@ -468,6 +453,7 @@
         <activity android:name="TetherProvisioningActivity"
             android:exported="true"
             android:permission="android.permission.TETHER_PRIVILEGED"
+            android:excludeFromRecents="true"
             android:theme="@style/Theme.ProvisioningActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.TETHER_PROVISIONING_UI" />
@@ -773,11 +759,6 @@
                   android:icon="@drawable/ic_settings_notifications"
                   android:exported="true"
                   android:taskAffinity="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.ZenModeVisualInterruptionSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -792,11 +773,6 @@
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_PRIORITY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.ZenModePrioritySettings" />
@@ -816,11 +792,6 @@
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACTION_CONDITION_PROVIDER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.ZenModeAutomationSettings" />
@@ -964,11 +935,6 @@
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NIGHT_DISPLAY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.display.NightDisplaySettings" />
@@ -1358,11 +1324,6 @@
                 <action android:name="com.android.settings.TRUSTED_CREDENTIALS_USER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.TrustedCredentialsSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -1590,7 +1551,11 @@
             android:icon="@drawable/ic_settings_about"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
-            <intent-filter android:priority="-1">
+            <intent-filter>
+                <action android:name="android.settings.ENTERPRISE_PRIVACY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
@@ -2304,11 +2269,6 @@
                 <action android:name="android.settings.BATTERY_SAVER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.fuelgauge.BatterySaverSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2557,16 +2517,6 @@
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert">
             <intent-filter android:priority="1">
                 <action android:name="android.provider.Telephony.ACTION_CHANGE_DEFAULT" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".ActiveNetworkScorerDialog"
-                  android:label="@string/wifi_assistant_title"
-                  android:excludeFromRecents="true"
-                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert">
-            <intent-filter android:priority="1">
-                <action android:name="android.net.scoring.CHANGE_ACTIVE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -3079,10 +3029,22 @@
                        android:value="com.android.settings.datausage.DataUsageSummary"/>
         </activity-alias>
 
+        <activity android:name=".Settings$ConnectedDeviceDashboardActivity"
+                  android:label="@string/connected_devices_dashboard_title"
+                  android:icon="@drawable/ic_bt_laptop">
+            <intent-filter android:priority="10">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"/>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage"/>
+        </activity>
+
         <activity android:name=".Settings$AppAndNotificationDashboardActivity"
                   android:label="@string/app_and_notification_dashboard_title"
                   android:icon="@drawable/ic_settings_applications">
-            <intent-filter android:priority="8">
+            <intent-filter android:priority="9">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -3093,7 +3055,7 @@
 
         <activity-alias android:name="BatteryDashboardAlias"
                         android:targetActivity="Settings$PowerUsageSummaryActivity">
-            <intent-filter android:priority="7">
+            <intent-filter android:priority="8">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -3104,7 +3066,7 @@
 
         <activity-alias android:name="DisplayDashboardAlias"
                         android:targetActivity="Settings$DisplaySettingsActivity">
-            <intent-filter android:priority="6">
+            <intent-filter android:priority="7">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
@@ -3117,7 +3079,7 @@
 
         <activity-alias android:name="SoundDashboardAlias"
                         android:targetActivity="Settings$SoundSettingsActivity">
-            <intent-filter android:priority="5">
+            <intent-filter android:priority="6">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
@@ -3129,9 +3091,9 @@
         </activity-alias>
 
         <activity android:name=".Settings$StorageDashboardActivity"
-                  android:label="@string/storage_settings"
+                  android:label="@string/storage_settings_2"
                   android:icon="@drawable/ic_settings_storage">
-            <intent-filter android:priority="4">
+            <intent-filter android:priority="5">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
@@ -3142,23 +3104,9 @@
                        android:value="true" />
         </activity>
 
-        <activity-alias android:name="InternalStorageDashboardAlias"
-                        android:targetActivity="Settings$StorageSettingsActivity"
-                        android:label="@string/storage_internal_title">
-            <intent-filter android:priority="5">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.storage" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.deviceinfo.StorageSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity-alias>
-
         <activity-alias android:name="SecurityDashboardAlias"
                 android:targetActivity="Settings$SecuritySettingsActivity">
-            <intent-filter android:priority="3">
+            <intent-filter android:priority="4">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
@@ -3169,6 +3117,18 @@
                        android:value="true" />
         </activity-alias>
 
+        <activity android:name=".Settings$UserAndAccountDashboardActivity"
+                  android:label="@string/account_dashboard_title"
+                  android:icon="@drawable/ic_settings_accounts">
+            <intent-filter android:priority="3">
+                <action android:name="com.android.settings.action.SETTINGS"/>
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.accounts.UserAndAccountDashboardFragment"/>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage"/>
+        </activity>
+
         <activity-alias android:name="LocationDashboardAlias"
                         android:targetActivity="Settings$LocationSettingsActivity">
             <intent-filter>
@@ -3178,6 +3138,19 @@
                        android:value="com.android.settings.category.ia.security" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.location.LocationSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity-alias>
+
+        <activity-alias android:name="AccessibilityDashboardAlias"
+                        android:targetActivity="Settings$AccessibilitySettingsActivity">
+            <intent-filter android:priority="2">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.accessibility.AccessibilitySettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity-alias>
@@ -3196,7 +3169,7 @@
 
         <activity android:name=".Settings$SupportDashboardActivity"
                   android:label="@string/page_tab_title_support"
-                  android:icon="@drawable/ic_help_24dp">
+                  android:icon="@drawable/ic_support_24dp">
             <intent-filter android:priority="0">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3249,19 +3222,6 @@
                        android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.DateTimeSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity-alias>
-
-        <activity-alias android:name="AccessibilityDashboardAlias"
-                    android:targetActivity="Settings$AccessibilitySettingsActivity">
-            <intent-filter android:priority="150">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.system" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.accessibility.AccessibilitySettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity-alias>
@@ -3329,18 +3289,6 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.ProcessStatsSummary" />
         </activity-alias>
-
-        <activity android:name=".Settings$ConnectedDeviceDashboardActivity"
-                  android:label="@string/connected_devices_dashboard_title"
-                  android:icon="@drawable/ic_bt_laptop">
-            <intent-filter android:priority="9">
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.homepage"/>
-        </activity>
 
         <activity-alias android:name="BluetoothDashboardAlias"
                         android:targetActivity="Settings$BluetoothSettingsActivity">
@@ -3411,18 +3359,6 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity-alias>
-
-        <activity android:name=".Settings$UserAndAccountDashboardActivity"
-                  android:label="@string/account_dashboard_title"
-                  android:icon="@drawable/ic_settings_accounts">
-            <intent-filter android:priority="2">
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.accounts.UserAndAccountDashboardFragment"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.homepage"/>
-        </activity>
 
         <activity-alias android:name="UserDashboardAlias"
                         android:targetActivity="Settings$UserSettingsActivity">
@@ -3517,25 +3453,24 @@
 
         <!-- Quick Settings tiles for Developer Options -->
         <service
-                android:name=".qstile.DevelopmentTiles$ShowLayout"
-                android:label="@string/debug_layout"
-                android:icon="@drawable/tile_icon_show_layout"
-                android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-                android:enabled="false">
+            android:name=".qstile.DevelopmentModeTile"
+            android:label="@string/developer_tile"
+            android:icon="@drawable/ic_settings_development"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
-        <service
-                android:name=".qstile.DevelopmentTiles$GPUProfiling"
-                android:label="@string/track_frame_time"
-                android:icon="@drawable/tile_icon_graphics"
-                android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-                android:enabled="false">
+        <activity
+            android:name=".qstile.DevelopmentTileConfigActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:label="@string/developer_tile">
             <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
             </intent-filter>
-        </service>
+        </activity>
 
         <activity android:name=".HelpTrampoline"
             android:exported="true"

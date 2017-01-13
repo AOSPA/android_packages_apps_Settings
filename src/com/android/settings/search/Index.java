@@ -110,6 +110,9 @@ public class Index {
 
     public static final String ENTRIES_SEPARATOR = "|";
 
+    static final String FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER =
+            "SEARCH_INDEX_DATA_PROVIDER";
+
     // If you change the order of columns here, you SHOULD change the COLUMN_INDEX_XXX values
     private static final String[] SELECT_COLUMNS = new String[] {
             IndexColumns.DATA_RANK,               // 0
@@ -154,9 +157,6 @@ public class Index {
     private static final String LIST_DELIMITERS = "[,]\\s*";
     private static final String HYPHEN = "-";
     private static final String SPACE = " ";
-
-    private static final String FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER =
-            "SEARCH_INDEX_DATA_PROVIDER";
 
     private static final String NODE_NAME_PREFERENCE_SCREEN = "PreferenceScreen";
     private static final String NODE_NAME_CHECK_BOX_PREFERENCE = "CheckBoxPreference";
@@ -217,18 +217,18 @@ public class Index {
      */
     public static Index getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new Index(context.getApplicationContext(), BASE_AUTHORITY);
+            synchronized (Index.class) {
+                if (sInstance == null) {
+                    sInstance = new Index(context.getApplicationContext(), BASE_AUTHORITY);
+                }
+            }
         }
         return sInstance;
     }
 
-    public Index(Context context, String baseAuthority) {
+    private Index(Context context, String baseAuthority) {
         mContext = context;
         mBaseAuthority = baseAuthority;
-    }
-
-    public void setContext(Context context) {
-        mContext = context;
     }
 
     public boolean isAvailable() {

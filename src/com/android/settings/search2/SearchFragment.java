@@ -16,107 +16,112 @@
 
 package com.android.settings.search2;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.LoaderManager;
+import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
-import android.app.LoaderManager;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.SearchView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.List;
 
 public class SearchFragment extends InstrumentedFragment implements
-        SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener,
-        LoaderManager.LoaderCallbacks<List<SearchResult>>  {
+        SearchView.OnQueryTextListener, LoaderManager.LoaderCallbacks<List<SearchResult>> {
 
-    private static final int DATABASE_LOADER_ID = 0;
+    // State values
+    static final String STATE_QUERY = "query";
+
+    // Loader IDs
+    private static final int LOADER_ID_DATABASE = 0;
+    private static final int LOADER_ID_INSTALLED_APPS = 1;
+
+    @VisibleForTesting
+    String mQuery;
+
+    private SearchFeatureProvider mSearchFeatureProvider;
 
     private SearchResultsAdapter mSearchAdapter;
-
-    private DatabaseResultLoader mSearchLoader;
-
     private RecyclerView mResultsRecyclerView;
-    private SearchView mSearchView;
-    private MenuItem mSearchMenuItem;
 
-    private String mQuery;
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DASHBOARD_SEARCH_RESULTS;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mSearchFeatureProvider = FeatureFactory.getFactory(context)
+                .getSearchFeatureProvider();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-        mSearchAdapter = new SearchResultsAdapter();
-
-        final LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(DATABASE_LOADER_ID, null, this);
+        mSearchAdapter = new SearchResultsAdapter(this);
+        if (savedInstanceState != null) {
+            mQuery = savedInstanceState.getString(STATE_QUERY);
+            final LoaderManager loaderManager = getLoaderManager();
+            loaderManager.initLoader(LOADER_ID_DATABASE, null, this);
+            loaderManager.initLoader(LOADER_ID_INSTALLED_APPS, null, this);
+        }
+        final ActionBar actionBar = getActivity().getActionBar();
+        actionBar.setCustomView(makeSearchView(actionBar, mQuery));
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.search_panel_2, container, false);
         mResultsRecyclerView = (RecyclerView) view.findViewById(R.id.list_results);
-
         mResultsRecyclerView.setAdapter(mSearchAdapter);
         mResultsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.search_options_menu, menu);
-
-
-        mSearchMenuItem = menu.findItem(R.id.search);
-
-        mSearchView = (SearchView) mSearchMenuItem.getActionView();
-        mSearchView.setOnQueryTextListener(this);
-        mSearchView.setMaxWidth(Integer.MAX_VALUE);
-        mSearchMenuItem.expandActionView();
-    }
-
-    @Override
-    public boolean onMenuItemActionExpand(MenuItem item) {
-        return true;
-    }
-
-    @Override
-    public boolean onMenuItemActionCollapse(MenuItem item) {
-        // Return false to prevent the search box from collapsing.
-        return false;
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(STATE_QUERY, mQuery);
     }
 
     @Override
     public boolean onQueryTextChange(String query) {
-        if (query == null || query.equals(mQuery)) {
-            return false;
+        if (TextUtils.equals(query, mQuery)) {
+            return true;
         }
-
         mQuery = query;
-        clearLoaders();
+        mSearchAdapter.clearResults();
 
-        final LoaderManager loaderManager = getLoaderManager();
-        loaderManager.restartLoader(DATABASE_LOADER_ID, null, this);
+        if (TextUtils.isEmpty(mQuery)) {
+            getLoaderManager().destroyLoader(LOADER_ID_DATABASE);
+        } else {
+            restartLoaders();
+        }
 
         return true;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        return false;
+        return true;
     }
 
     @Override
@@ -124,9 +129,10 @@ public class SearchFragment extends InstrumentedFragment implements
         final Activity activity = getActivity();
 
         switch (id) {
-            case DATABASE_LOADER_ID:
-                mSearchLoader = new DatabaseResultLoader(activity, mQuery);
-                return mSearchLoader;
+            case LOADER_ID_DATABASE:
+                return mSearchFeatureProvider.getDatabaseSearchLoader(activity, mQuery);
+            case LOADER_ID_INSTALLED_APPS:
+                return mSearchFeatureProvider.getInstalledAppSearchLoader(activity, mQuery);
             default:
                 return null;
         }
@@ -134,25 +140,27 @@ public class SearchFragment extends InstrumentedFragment implements
 
     @Override
     public void onLoadFinished(Loader<List<SearchResult>> loader, List<SearchResult> data) {
-        if (data == null) {
-            return;
-        }
-
         mSearchAdapter.mergeResults(data, loader.getClass().getName());
     }
 
     @Override
-    public void onLoaderReset(Loader<List<SearchResult>> loader) { }
-
-    @Override
-    public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.DASHBOARD_SEARCH_RESULTS;
+    public void onLoaderReset(Loader<List<SearchResult>> loader) {
     }
 
-    private void clearLoaders() {
-        if (mSearchLoader != null) {
-            mSearchLoader.cancelLoad();
-            mSearchLoader = null;
-        }
+    private void restartLoaders() {
+        final LoaderManager loaderManager = getLoaderManager();
+        loaderManager.restartLoader(LOADER_ID_DATABASE, null /* args */, this /* callback */);
+        loaderManager.restartLoader(LOADER_ID_INSTALLED_APPS, null /* args */, this /* callback */);
+    }
+
+    private SearchView makeSearchView(ActionBar actionBar, String query) {
+        final SearchView searchView = new SearchView(actionBar.getThemedContext());
+        searchView.setIconifiedByDefault(false);
+        searchView.setQuery(query, false /* submitQuery */);
+        searchView.setOnQueryTextListener(this);
+        final LayoutParams lp =
+                new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        searchView.setLayoutParams(lp);
+        return searchView;
     }
 }

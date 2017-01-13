@@ -368,10 +368,21 @@ public final class Utils extends com.android.settingslib.Utils {
         } catch (IOException ioe) { }
     }
 
-    public static void assignDefaultPhoto(Context context, int userId) {
+    /**
+     * Assign the default photo to user with {@paramref userId}
+     * @param context used to get the {@link UserManager}
+     * @param userId  used to get the icon bitmap
+     * @return true if assign photo successfully, false if failed
+     */
+    public static boolean assignDefaultPhoto(Context context, int userId) {
+        if (context == null) {
+            return false;
+        }
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
         Bitmap bitmap = getDefaultUserIconAsBitmap(userId);
         um.setUserIcon(userId, bitmap);
+
+        return true;
     }
 
     public static String getMeProfileName(Context context, boolean full) {
@@ -1166,7 +1177,7 @@ public final class Utils extends com.android.settingslib.Utils {
             final ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(
                     packageName,
                     PackageManager.MATCH_DISABLED_COMPONENTS
-                    | PackageManager.MATCH_UNINSTALLED_PACKAGES);
+                    | PackageManager.MATCH_ANY_USER);
             return appInfo.loadLabel(context.getPackageManager());
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "Unable to find info for package: " + packageName);

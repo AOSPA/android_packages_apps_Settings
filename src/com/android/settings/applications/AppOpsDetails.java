@@ -39,14 +39,14 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 
 import java.util.List;
 
-public class AppOpsDetails extends InstrumentedFragment {
+public class AppOpsDetails extends InstrumentedPreferenceFragment {
     static final String TAG = "AppOpsDetails";
 
     public static final String ARG_PACKAGE_NAME = "package";
@@ -80,8 +80,8 @@ public class AppOpsDetails extends InstrumentedFragment {
         }
         try {
             mPackageInfo = mPm.getPackageInfo(packageName,
-                    PackageManager.GET_DISABLED_COMPONENTS |
-                    PackageManager.GET_UNINSTALLED_PACKAGES);
+                    PackageManager.MATCH_DISABLED_COMPONENTS |
+                    PackageManager.MATCH_ANY_USER);
         } catch (NameNotFoundException e) {
             Log.e(TAG, "Exception when retrieving package:" + packageName, e);
             mPackageInfo = null;

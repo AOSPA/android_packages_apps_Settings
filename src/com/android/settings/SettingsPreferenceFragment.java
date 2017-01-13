@@ -45,9 +45,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.widget.FooterPreferenceMixin;
 import com.android.settingslib.HelpUtils;
 
 import java.util.UUID;
@@ -55,7 +56,7 @@ import java.util.UUID;
 /**
  * Base class for Settings fragments, with some helper functions and dialog management.
  */
-public abstract class SettingsPreferenceFragment extends InstrumentedFragment
+public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceFragment
         implements DialogCreatable {
 
     /**
@@ -69,6 +70,9 @@ public abstract class SettingsPreferenceFragment extends InstrumentedFragment
     private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
 
     private static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
+
+    protected final FooterPreferenceMixin mFooterPreferenceMixin =
+            new FooterPreferenceMixin(this, getLifecycle());
 
     private SettingsDialogFragment mDialogFragment;
 
@@ -123,7 +127,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedFragment
 
     private LayoutPreference mHeader;
 
-    private LayoutPreference mFooter;
     private View mEmptyView;
     private LinearLayoutManager mLayoutManager;
     private HighlightablePreferenceGroupAdapter mAdapter;
@@ -277,10 +280,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedFragment
         return mHeader;
     }
 
-    public LayoutPreference getFooterView() {
-        return mFooter;
-    }
-
     protected void setHeaderView(int resource) {
         mHeader = new LayoutPreference(getPrefContext(), resource);
         addPreferenceToTop(mHeader);
@@ -298,29 +297,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedFragment
         }
     }
 
-    protected void setFooterView(int resource) {
-        setFooterView(resource != 0 ? new LayoutPreference(getPrefContext(), resource) : null);
-    }
-
-    protected void setFooterView(View v) {
-        setFooterView(v != null ? new LayoutPreference(getPrefContext(), v) : null);
-    }
-
-    private void setFooterView(LayoutPreference footer) {
-        if (getPreferenceScreen() != null && mFooter != null) {
-            getPreferenceScreen().removePreference(mFooter);
-        }
-        if (footer != null) {
-            mFooter = footer;
-            mFooter.setOrder(ORDER_LAST);
-            if (getPreferenceScreen() != null) {
-                getPreferenceScreen().addPreference(mFooter);
-            }
-        } else {
-            mFooter = null;
-        }
-    }
-
     @Override
     public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
         if (preferenceScreen != null && !preferenceScreen.isAttached()) {
@@ -332,9 +308,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedFragment
             if (mHeader != null) {
                 preferenceScreen.addPreference(mHeader);
             }
-            if (mFooter != null) {
-                preferenceScreen.addPreference(mFooter);
-            }
         }
     }
 
@@ -343,7 +316,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedFragment
         if (getPreferenceScreen() != null) {
             boolean show = (getPreferenceScreen().getPreferenceCount()
                     - (mHeader != null ? 1 : 0)
-                    - (mFooter != null ? 1 : 0)) <= 0;
+                    - (mFooterPreferenceMixin.hasFooter() ? 1 : 0)) <= 0;
             mEmptyView.setVisibility(show ? View.VISIBLE : View.GONE);
         } else {
             mEmptyView.setVisibility(View.VISIBLE);

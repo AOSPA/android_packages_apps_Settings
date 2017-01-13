@@ -67,7 +67,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
-import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.fuelgauge.PowerWhitelistBackend;
@@ -95,7 +95,7 @@ import java.util.Locale;
  * can be launched through Settings or via the ACTION_MANAGE_PACKAGE_STORAGE
  * intent.
  */
-public class ManageApplications extends InstrumentedFragment
+public class ManageApplications extends InstrumentedPreferenceFragment
         implements OnItemClickListener, OnItemSelectedListener {
 
     static final String TAG = "ManageApplications";
@@ -131,15 +131,11 @@ public class ManageApplications extends InstrumentedFragment
     public static final int FILTER_APPS_ENABLED = 3;
     public static final int FILTER_APPS_DISABLED = 4;
     public static final int FILTER_APPS_BLOCKED = 5;
-    public static final int FILTER_APPS_SILENT = 6;
-    public static final int FILTER_APPS_SENSITIVE = 7;
-    public static final int FILTER_APPS_HIDE_NOTIFICATIONS = 8;
-    public static final int FILTER_APPS_PRIORITY = 9;
-    public static final int FILTER_APPS_PERSONAL = 10;
-    public static final int FILTER_APPS_WORK = 11;
-    public static final int FILTER_APPS_USAGE_ACCESS = 13;
-    public static final int FILTER_APPS_WITH_OVERLAY = 14;
-    public static final int FILTER_APPS_WRITE_SETTINGS = 15;
+    public static final int FILTER_APPS_PERSONAL = 6;
+    public static final int FILTER_APPS_WORK = 7;
+    public static final int FILTER_APPS_USAGE_ACCESS = 8;
+    public static final int FILTER_APPS_WITH_OVERLAY = 9;
+    public static final int FILTER_APPS_WRITE_SETTINGS = 10;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[]{
@@ -149,10 +145,6 @@ public class ManageApplications extends InstrumentedFragment
             R.string.filter_enabled_apps,  // Enabled
             R.string.filter_apps_disabled, // Disabled
             R.string.filter_notif_blocked_apps,   // Blocked Notifications
-            R.string.filter_notif_silent,    // Silenced Notifications
-            R.string.filter_notif_sensitive_apps, // Sensitive Notifications
-            R.string.filter_notif_hide_notifications_apps, // Sensitive Notifications
-            R.string.filter_notif_priority_apps,  // Priority Notifications
             R.string.filter_personal_apps, // Personal
             R.string.filter_work_apps,     // Work
             R.string.filter_with_domain_urls_apps,     // Domain URLs
@@ -171,10 +163,6 @@ public class ManageApplications extends InstrumentedFragment
             ApplicationsState.FILTER_ALL_ENABLED, // Enabled
             ApplicationsState.FILTER_DISABLED,    // Disabled
             AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,   // Blocked Notifications
-            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_SILENCED,   // Silenced Notifications
-            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_HIDE_SENSITIVE, // Sensitive Notifications
-            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_HIDE_ALL, // Hide all Notifications
-            AppStateNotificationBridge.FILTER_APP_NOTIFICATION_PRIORITY,  // Priority Notifications
             ApplicationsState.FILTER_PERSONAL,    // Personal
             ApplicationsState.FILTER_WORK,        // Work
             ApplicationsState.FILTER_WITH_DOMAIN_URLS,   // Apps with Domain URLs
@@ -356,10 +344,6 @@ public class ManageApplications extends InstrumentedFragment
         }
         if (mListType == LIST_TYPE_NOTIFICATION) {
             mFilterAdapter.enableFilter(FILTER_APPS_BLOCKED);
-            mFilterAdapter.enableFilter(FILTER_APPS_SILENT);
-            mFilterAdapter.enableFilter(FILTER_APPS_SENSITIVE);
-            mFilterAdapter.enableFilter(FILTER_APPS_HIDE_NOTIFICATIONS);
-            mFilterAdapter.enableFilter(FILTER_APPS_PRIORITY);
         }
         if (mListType == LIST_TYPE_HIGH_POWER) {
             mFilterAdapter.enableFilter(FILTER_APPS_POWER_WHITELIST_ALL);
@@ -767,6 +751,12 @@ public class ManageApplications extends InstrumentedFragment
         private boolean mHasReceivedLoadEntries;
         private boolean mHasReceivedBridgeCallback;
 
+        // These two variables are used to remember and restore the last scroll position when this
+        // fragment is paused. We need this special handling because app entries are added gradually
+        // when we rebuild the list after the user made some changes, like uninstalling an app.
+        private int mLastIndex = -1;
+        private int mLastTop;
+
         private AlphabeticIndex.ImmutableIndex<Locale> mIndex;
         private SectionInfo[] mSections = EMPTY_SECTIONS;
         private int[] mPositionToSectionIndex;
@@ -851,6 +841,10 @@ public class ManageApplications extends InstrumentedFragment
                     mExtraInfoBridge.pause();
                 }
             }
+            // Record the current scroll position before pausing.
+            mLastIndex = mManageApplications.mListView.getFirstVisiblePosition();
+            View v = mManageApplications.mListView.getChildAt(0);
+            mLastTop = (v == null) ? 0 : (v.getTop() - mManageApplications.mListView.getPaddingTop());
         }
 
         public void release() {
@@ -971,6 +965,12 @@ public class ManageApplications extends InstrumentedFragment
             }
 
             notifyDataSetChanged();
+            // Restore the last scroll position if the number of entries added so far is bigger than
+            // it.
+            if (mLastIndex != -1 && getCount() > mLastIndex) {
+                mManageApplications.mListView.setSelectionFromTop(mLastIndex, mLastTop);
+                mLastIndex = -1;
+            }
 
             if (mSession.getAllApps().size() != 0
                     && mManageApplications.mListContainer.getVisibility() != View.VISIBLE) {

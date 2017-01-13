@@ -18,7 +18,9 @@ package com.android.settings.core;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.search2.ResultPayload;
 
 import java.util.List;
 
@@ -27,7 +29,7 @@ import java.util.List;
  */
 public abstract class PreferenceController {
 
-    protected Context mContext;
+    protected final Context mContext;
 
     public PreferenceController(Context context) {
         mContext = context;
@@ -85,7 +87,9 @@ public abstract class PreferenceController {
      * @param preference the preference being clicked
      * @return true if click is handled
      */
-    public abstract boolean handlePreferenceTreeClick(Preference preference);
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        return false;
+    }
 
     /**
      * Returns the key for this preference.
@@ -100,5 +104,12 @@ public abstract class PreferenceController {
         if (pref != null) {
             screen.removePreference(pref);
         }
+    }
+
+    /**
+     * @return the {@link ResultPayload} corresponding to the search result type for the preference.
+     */
+    public ResultPayload getResultPayload() {
+        return null;
     }
 }

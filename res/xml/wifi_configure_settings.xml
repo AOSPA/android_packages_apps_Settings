@@ -15,7 +15,6 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:title="@string/wifi_configure_titlebar">
 
     <Preference
@@ -35,26 +34,22 @@
         android:entries="@array/wifi_sleep_policy_entries"
         android:entryValues="@array/wifi_sleep_policy_values" />
 
-    <com.android.settings.AppListSwitchPreference
-        android:key="wifi_assistant"
-        android:title="@string/wifi_automatically_connect_title"
-        android:summary="@string/wifi_automatically_connect_summary"
-        android:dialogTitle="@string/wifi_select_assistant_dialog_title" />
+    <SwitchPreference
+      android:key="allow_recommendations"
+      android:title="@string/networking_allow_recommendations_title"
+      android:summary="@string/networking_allow_recommendations_summary"/>
 
     <SwitchPreference
         android:key="wifi_cellular_data_fallback"
         android:title="@string/wifi_cellular_data_fallback_title"
         android:summary="@string/wifi_cellular_data_fallback_summary"/>
 
-    <com.android.settings.DividerPreference
+    <Preference
         android:key="mac_address"
-        android:title="@string/wifi_advanced_mac_address_title"
-        android:layout="@layout/wifi_advance_layout"
-        settings:allowDividerAbove="true" />
+        android:title="@string/wifi_advanced_mac_address_title"/>
 
     <Preference
         android:key="current_ip_address"
-        android:title="@string/wifi_advanced_ip_address_title"
-        android:layout="@layout/wifi_advance_layout" />
+        android:title="@string/wifi_advanced_ip_address_title"/>
 
 </PreferenceScreen>

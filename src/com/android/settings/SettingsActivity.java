@@ -36,6 +36,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
@@ -53,104 +54,17 @@ import android.widget.SearchView;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
-import com.android.settings.accessibility.AccessibilitySettings;
-import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
-import com.android.settings.accessibility.CaptionPropertiesFragment;
-import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
-import com.android.settings.accounts.AccountSettings;
-import com.android.settings.accounts.AccountSyncSettings;
-import com.android.settings.accounts.ChooseAccountActivity;
-import com.android.settings.accounts.ManagedProfileSettings;
-import com.android.settings.accounts.UserAndAccountDashboardFragment;
-import com.android.settings.applications.AdvancedAppSettings;
-import com.android.settings.applications.AppAndNotificationDashboardFragment;
-import com.android.settings.applications.DrawOverlayDetails;
-import com.android.settings.applications.InstalledAppDetails;
-import com.android.settings.applications.ManageApplications;
-import com.android.settings.applications.ManageAssist;
-import com.android.settings.applications.ManageDomainUrls;
-import com.android.settings.applications.NotificationApps;
-import com.android.settings.applications.ProcessStatsSummary;
-import com.android.settings.applications.ProcessStatsUi;
-import com.android.settings.applications.UsageAccessDetails;
-import com.android.settings.applications.VrListenerSettings;
-import com.android.settings.applications.WriteSettingsDetails;
-import com.android.settings.bluetooth.BluetoothSettings;
-import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
+import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.core.instrumentation.SharedPreferencesLogger;
 import com.android.settings.dashboard.DashboardContainerFragment;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.dashboard.SearchResultsSummary;
-import com.android.settings.dashboard.SupportFragment;
-import com.android.settings.datausage.DataUsageSummary;
-import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
-import com.android.settings.deviceinfo.ImeiInformation;
-import com.android.settings.deviceinfo.PrivateVolumeForget;
-import com.android.settings.deviceinfo.PrivateVolumeSettings;
-import com.android.settings.deviceinfo.PublicVolumeSettings;
-import com.android.settings.deviceinfo.SimStatus;
-import com.android.settings.deviceinfo.Status;
-import com.android.settings.deviceinfo.StorageDashboardFragment;
-import com.android.settings.deviceinfo.StorageSettings;
-import com.android.settings.display.NightDisplaySettings;
-import com.android.settings.enterprise.EnterprisePrivacySettings;
-import com.android.settings.fuelgauge.BatterySaverSettings;
-import com.android.settings.fuelgauge.PowerUsageDetail;
-import com.android.settings.fuelgauge.PowerUsageSummary;
-import com.android.settings.gestures.DoubleTapPowerSettings;
-import com.android.settings.gestures.DoubleTapScreenSettings;
-import com.android.settings.gestures.DoubleTwistGestureSettings;
-import com.android.settings.gestures.GestureSettings;
-import com.android.settings.gestures.PickupGestureSettings;
-import com.android.settings.gestures.SwipeToNotificationSettings;
-import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
-import com.android.settings.inputmethod.InputAndGestureSettings;
-import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
-import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
-import com.android.settings.inputmethod.PhysicalKeyboardFragment;
-import com.android.settings.inputmethod.SpellCheckersSettings;
-import com.android.settings.inputmethod.UserDictionaryList;
-import com.android.settings.language.LanguageAndRegionSettings;
-import com.android.settings.localepicker.LocaleListEditor;
-import com.android.settings.location.LocationSettings;
-import com.android.settings.network.NetworkDashboardFragment;
-import com.android.settings.nfc.AndroidBeam;
-import com.android.settings.nfc.PaymentSettings;
-import com.android.settings.notification.AppNotificationSettings;
-import com.android.settings.notification.ConfigureNotificationSettings;
-import com.android.settings.notification.NotificationAccessSettings;
-import com.android.settings.notification.NotificationStation;
-import com.android.settings.notification.OtherSoundSettings;
-import com.android.settings.notification.SoundSettings;
-import com.android.settings.notification.ZenAccessSettings;
-import com.android.settings.notification.ZenModeAutomationSettings;
-import com.android.settings.notification.ZenModeEventRuleSettings;
-import com.android.settings.notification.ZenModePrioritySettings;
-import com.android.settings.notification.ZenModeScheduleRuleSettings;
-import com.android.settings.notification.ZenModeSettings;
-import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.print.PrintJobSettingsFragment;
-import com.android.settings.print.PrintSettingsFragment;
-import com.android.settings.qstile.DevelopmentTiles;
+import com.android.settings.qstile.DevelopmentModeTile;
 import com.android.settings.search.DynamicIndexableContentMonitor;
-import com.android.settings.search.Index;
 import com.android.settings.search2.SearchFeatureProvider;
-import com.android.settings.search2.SearchFragment;
-import com.android.settings.sim.SimSettings;
-import com.android.settings.system.SystemDashboardFragment;
-import com.android.settings.tts.TextToSpeechSettings;
-import com.android.settings.users.UserSettings;
-import com.android.settings.vpn2.VpnSettings;
-import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
-import com.android.settings.wifi.AdvancedWifiSettings;
-import com.android.settings.wifi.SavedAccessPointsWifiSettings;
-import com.android.settings.wifi.WifiAPITest;
-import com.android.settings.wifi.WifiInfo;
-import com.android.settings.wifi.WifiSettings;
-import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
@@ -309,120 +223,6 @@ public class SettingsActivity extends SettingsDrawerActivity
             "com.android.settings.Settings.AboutDeviceDashboardAlias",
     };
 
-    private static final String[] ENTRY_FRAGMENTS = {
-            WirelessSettings.class.getName(),
-            WifiSettings.class.getName(),
-            AdvancedWifiSettings.class.getName(),
-            SavedAccessPointsWifiSettings.class.getName(),
-            BluetoothSettings.class.getName(),
-            SimSettings.class.getName(),
-            TetherSettings.class.getName(),
-            WifiP2pSettings.class.getName(),
-            VpnSettings.class.getName(),
-            DateTimeSettings.class.getName(),
-            LocaleListEditor.class.getName(),
-            InputMethodAndLanguageSettings.class.getName(),
-            AvailableVirtualKeyboardFragment.class.getName(),
-            InputAndGestureSettings.class.getName(),
-            LanguageAndRegionSettings.class.getName(),
-            SpellCheckersSettings.class.getName(),
-            UserDictionaryList.class.getName(),
-            UserDictionarySettings.class.getName(),
-            HomeSettings.class.getName(),
-            DisplaySettings.class.getName(),
-            DeviceInfoSettings.class.getName(),
-            ManageApplications.class.getName(),
-            NotificationApps.class.getName(),
-            ManageAssist.class.getName(),
-            ProcessStatsUi.class.getName(),
-            NotificationStation.class.getName(),
-            LocationSettings.class.getName(),
-            SecuritySettings.class.getName(),
-            UsageAccessDetails.class.getName(),
-            PrivacySettings.class.getName(),
-            DeviceAdminSettings.class.getName(),
-            AccessibilitySettings.class.getName(),
-            AccessibilitySettingsForSetupWizard.class.getName(),
-            CaptionPropertiesFragment.class.getName(),
-            ToggleDaltonizerPreferenceFragment.class.getName(),
-            TextToSpeechSettings.class.getName(),
-            StorageSettings.class.getName(),
-            PrivateVolumeForget.class.getName(),
-            PrivateVolumeSettings.class.getName(),
-            PublicVolumeSettings.class.getName(),
-            DevelopmentSettings.class.getName(),
-            AndroidBeam.class.getName(),
-            WifiDisplaySettings.class.getName(),
-            PowerUsageSummary.class.getName(),
-            AccountSyncSettings.class.getName(),
-            AccountSettings.class.getName(),
-            GestureSettings.class.getName(),
-            SwipeToNotificationSettings.class.getName(),
-            DoubleTapPowerSettings.class.getName(),
-            DoubleTapScreenSettings.class.getName(),
-            PickupGestureSettings.class.getName(),
-            DoubleTwistGestureSettings.class.getName(),
-            CryptKeeperSettings.class.getName(),
-            DataUsageSummary.class.getName(),
-            DreamSettings.class.getName(),
-            UserSettings.class.getName(),
-            NotificationAccessSettings.class.getName(),
-            ZenAccessSettings.class.getName(),
-            PrintSettingsFragment.class.getName(),
-            PrintJobSettingsFragment.class.getName(),
-            TrustedCredentialsSettings.class.getName(),
-            PaymentSettings.class.getName(),
-            KeyboardLayoutPickerFragment.class.getName(),
-            PhysicalKeyboardFragment.class.getName(),
-            ZenModeSettings.class.getName(),
-            SoundSettings.class.getName(),
-            ConfigureNotificationSettings.class.getName(),
-            ChooseLockPassword.ChooseLockPasswordFragment.class.getName(),
-            ChooseLockPattern.ChooseLockPatternFragment.class.getName(),
-            InstalledAppDetails.class.getName(),
-            BatterySaverSettings.class.getName(),
-            AppNotificationSettings.class.getName(),
-            OtherSoundSettings.class.getName(),
-            ApnSettings.class.getName(),
-            ApnEditor.class.getName(),
-            WifiCallingSettings.class.getName(),
-            ZenModePrioritySettings.class.getName(),
-            ZenModeAutomationSettings.class.getName(),
-            ZenModeScheduleRuleSettings.class.getName(),
-            ZenModeEventRuleSettings.class.getName(),
-            ZenModeVisualInterruptionSettings.class.getName(),
-            ProcessStatsUi.class.getName(),
-            PowerUsageDetail.class.getName(),
-            ProcessStatsSummary.class.getName(),
-            DrawOverlayDetails.class.getName(),
-            WriteSettingsDetails.class.getName(),
-            AdvancedAppSettings.class.getName(),
-            WallpaperTypeSettings.class.getName(),
-            VrListenerSettings.class.getName(),
-            ManagedProfileSettings.class.getName(),
-            ChooseAccountActivity.class.getName(),
-            IccLockSettings.class.getName(),
-            ImeiInformation.class.getName(),
-            SimStatus.class.getName(),
-            Status.class.getName(),
-            TestingSettings.class.getName(),
-            WifiAPITest.class.getName(),
-            WifiInfo.class.getName(),
-            MasterClear.class.getName(),
-            NightDisplaySettings.class.getName(),
-            ManageDomainUrls.class.getName(),
-            AutomaticStorageManagerSettings.class.getName(),
-            SupportFragment.class.getName(),
-            StorageDashboardFragment.class.getName(),
-            SystemDashboardFragment.class.getName(),
-            NetworkDashboardFragment.class.getName(),
-            ConnectedDeviceDashboardFragment.class.getName(),
-            AppAndNotificationDashboardFragment.class.getName(),
-            UserAndAccountDashboardFragment.class.getName(),
-            EnterprisePrivacySettings.class.getName(),
-    };
-
-
     private static final String[] LIKE_SHORTCUT_INTENT_ACTION_ARRAY = {
             "android.settings.APPLICATION_DETAILS_SETTINGS"
     };
@@ -452,13 +252,12 @@ public class SettingsActivity extends SettingsDrawerActivity
             String action = intent.getAction();
             if (action.equals(Intent.ACTION_USER_ADDED)
                     || action.equals(Intent.ACTION_USER_REMOVED)) {
-                Index.getInstance(getApplicationContext()).update();
+                mSearchFeatureProvider.updateIndex(getApplicationContext());
             }
         }
     };
 
-    private final DynamicIndexableContentMonitor mDynamicIndexableContentMonitor =
-            new DynamicIndexableContentMonitor();
+    private DynamicIndexableContentMonitor mDynamicIndexableContentMonitor;
 
     private ActionBar mActionBar;
     private SwitchBar mSwitchBar;
@@ -477,20 +276,19 @@ public class SettingsActivity extends SettingsDrawerActivity
     private MenuItem mSearchMenuItem;
     private boolean mSearchMenuItemExpanded = false;
     private SearchResultsSummary mSearchResultsFragment;
-    private String mSearchQuery;
-
     private SearchFeatureProvider mSearchFeatureProvider;
 
     // Categories
-    private ArrayList<DashboardCategory> mCategories = new ArrayList<DashboardCategory>();
-
-    private static final String MSG_DATA_FORCE_REFRESH = "msg_data_force_refresh";
+    private ArrayList<DashboardCategory> mCategories = new ArrayList<>();
 
     private boolean mNeedToRevertToInitialFragment = false;
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private Intent mResultIntentData;
     private ComponentName mCurrentSuggestion;
+
+    @VisibleForTesting
+    String mSearchQuery;
 
     public SwitchBar getSwitchBar() {
         return mSwitchBar;
@@ -511,7 +309,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        Index.getInstance(this).update();
+        mSearchFeatureProvider.updateIndex(getApplicationContext());
     }
 
     @Override
@@ -530,7 +328,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
 
         MenuInflater inflater = getMenuInflater();
-        if (mSearchFeatureProvider.isEnabled()) {
+        if (mSearchFeatureProvider.isEnabled(this)) {
             mSearchFeatureProvider.setUpSearchMenu(menu, this);
             return true;
         }
@@ -606,7 +404,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         final FeatureFactory factory = FeatureFactory.getFactory(this);
 
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(this);
-        mSearchFeatureProvider = factory.getSearchFeatureProvider(this);
+        mSearchFeatureProvider = factory.getSearchFeatureProvider();
 
         // Should happen before any call to getIntent()
         getMetaData();
@@ -663,10 +461,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (mIsShowingDashboard) {
             // Run the Index update only if we have some space
             if (!Utils.isLowStorage(this)) {
-                long indexStartTime = System.currentTimeMillis();
-                Index.getInstance(getApplicationContext()).update();
-                if (DEBUG_TIMING) Log.d(LOG_TAG, "Index.update() took "
-                        + (System.currentTimeMillis() - indexStartTime) + " ms");
+                mSearchFeatureProvider.updateIndex(getApplicationContext());
             } else {
                 Log.w(LOG_TAG, "Cannot update the Indexer as we are running low on storage space!");
             }
@@ -907,7 +702,9 @@ public class SettingsActivity extends SettingsDrawerActivity
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_ADDED));
         registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_REMOVED));
-
+        if (mDynamicIndexableContentMonitor == null) {
+            mDynamicIndexableContentMonitor = new DynamicIndexableContentMonitor();
+        }
         mDynamicIndexableContentMonitor.register(this, LOADER_ID_INDEXABLE_CONTENT_MONITOR);
 
         if(mDisplaySearch && !TextUtils.isEmpty(mSearchQuery)) {
@@ -921,7 +718,9 @@ public class SettingsActivity extends SettingsDrawerActivity
         super.onPause();
         unregisterReceiver(mBatteryInfoReceiver);
         unregisterReceiver(mUserAddRemoveReceiver);
-        mDynamicIndexableContentMonitor.unregister();
+        if (mDynamicIndexableContentMonitor != null) {
+            mDynamicIndexableContentMonitor.unregister(this, LOADER_ID_INDEXABLE_CONTENT_MONITOR);
+        }
     }
 
     @Override
@@ -936,8 +735,8 @@ public class SettingsActivity extends SettingsDrawerActivity
     protected boolean isValidFragment(String fragmentName) {
         // Almost all fragments are wrapped in this,
         // except for a few that have their own activities.
-        for (int i = 0; i < ENTRY_FRAGMENTS.length; i++) {
-            if (ENTRY_FRAGMENTS[i].equals(fragmentName)) return true;
+        for (int i = 0; i < SettingsGateway.ENTRY_FRAGMENTS.length; i++) {
+            if (SettingsGateway.ENTRY_FRAGMENTS[i].equals(fragmentName)) return true;
         }
         return false;
     }
@@ -1139,59 +938,64 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         String packageName = getPackageName();
         setTileEnabled(new ComponentName(packageName, WifiSettingsActivity.class.getName()),
-                pm.hasSystemFeature(PackageManager.FEATURE_WIFI), isAdmin, pm);
+                pm.hasSystemFeature(PackageManager.FEATURE_WIFI), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.BluetoothSettingsActivity.class.getName()),
-                pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH), isAdmin, pm);
+                pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.DataUsageSummaryActivity.class.getName()),
-                Utils.isBandwidthControlEnabled(), isAdmin, pm);
+                Utils.isBandwidthControlEnabled(), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.SimSettingsActivity.class.getName()),
-                Utils.showSimCardTile(this), isAdmin, pm);
+                Utils.showSimCardTile(this), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.PowerUsageSummaryActivity.class.getName()),
-                mBatteryPresent, isAdmin, pm);
+                mBatteryPresent, isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.UserSettingsActivity.class.getName()),
                 UserHandle.MU_ENABLED && UserManager.supportsMultipleUsers()
-                && !Utils.isMonkeyRunning(), isAdmin, pm);
+                && !Utils.isMonkeyRunning(), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                         Settings.WirelessSettingsActivity.class.getName()),
-                !UserManager.isDeviceInDemoMode(this), isAdmin, pm);
+                !UserManager.isDeviceInDemoMode(this), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                         Settings.DateTimeSettingsActivity.class.getName()),
-                !UserManager.isDeviceInDemoMode(this), isAdmin, pm);
+                !UserManager.isDeviceInDemoMode(this), isAdmin);
         NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
         setTileEnabled(new ComponentName(packageName,
                         Settings.PaymentSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_NFC)
                         && pm.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)
-                        && adapter != null && adapter.isEnabled(), isAdmin, pm);
+                        && adapter != null && adapter.isEnabled(), isAdmin);
+        setTileEnabled(new ComponentName(packageName,
+                        "com.android.settings.PaymentSettingsDashboardAlias"),
+                pm.hasSystemFeature(PackageManager.FEATURE_NFC)
+                        && pm.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)
+                        && adapter != null && adapter.isEnabled(), isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.PrintSettingsActivity.class.getName()),
-                pm.hasSystemFeature(PackageManager.FEATURE_PRINTING), isAdmin, pm);
+                pm.hasSystemFeature(PackageManager.FEATURE_PRINTING), isAdmin);
 
         final boolean showDev = mDevelopmentPreferences.getBoolean(
                     DevelopmentSettings.PREF_SHOW, android.os.Build.TYPE.equals("eng"))
                 && !um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES);
         setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsActivity.class.getName()),
-                showDev, isAdmin, pm);
+                showDev, isAdmin);
         setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsActivity.DASHBOARD_ALIAS),
-                showDev, isAdmin, pm);
+                showDev, isAdmin);
 
         // Reveal development-only quick settings tiles
-        DevelopmentTiles.setTilesEnabled(this, showDev);
+        setTileEnabled(new ComponentName(this, DevelopmentModeTile.class), showDev);
 
         if (UserHandle.MU_ENABLED && !isAdmin) {
             // When on restricted users, disable all extra categories (but only the settings ones).
@@ -1207,7 +1011,7 @@ public class SettingsActivity extends SettingsDrawerActivity
                     ComponentName component = tile.intent.getComponent();
                     if (packageName.equals(component.getPackageName()) && !ArrayUtils.contains(
                             SETTINGS_FOR_RESTRICTED, component.getClassName())) {
-                        setTileEnabled(component, false, isAdmin, pm);
+                        setTileEnabled(component, false, isAdmin);
                     }
                 }
             }
@@ -1216,10 +1020,10 @@ public class SettingsActivity extends SettingsDrawerActivity
         String backupIntent = getResources().getString(R.string.config_backup_settings_intent);
         boolean useDefaultBackup = TextUtils.isEmpty(backupIntent);
         setTileEnabled(new ComponentName(packageName,
-                Settings.PrivacySettingsActivity.class.getName()), useDefaultBackup, isAdmin, pm);
+                Settings.PrivacySettingsActivity.class.getName()), useDefaultBackup, isAdmin);
         setTileEnabled(new ComponentName(packageName,
                         "com.android.settings.PrivacyDashboardAlias"),
-                useDefaultBackup, isAdmin, pm);
+                useDefaultBackup, isAdmin);
 
         boolean hasBackupActivity = false;
         if (!useDefaultBackup) {
@@ -1231,24 +1035,25 @@ public class SettingsActivity extends SettingsDrawerActivity
             }
         }
 
-        // Enable/disble BackupSettingsActivity and its alias.
+        // Enable/disable BackupSettingsActivity and its alias.
         setTileEnabled(new ComponentName(packageName,
-                BackupSettingsActivity.class.getName()), hasBackupActivity, isAdmin, pm);
+                BackupSettingsActivity.class.getName()), hasBackupActivity, isAdmin);
         setTileEnabled(new ComponentName(packageName,
-                "com.android.settings.BackupResetDashboardAlias"), hasBackupActivity, isAdmin, pm);
+                "com.android.settings.BackupResetDashboardAlias"), hasBackupActivity, isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.EnterprisePrivacySettingsActivity.class.getName()),
                 FeatureFactory.getFactory(this).getEnterprisePrivacyFeatureProvider(this)
-                        .hasDeviceOwner(), isAdmin, pm);
+                        .hasDeviceOwner(), isAdmin);
         setTileEnabled(new ComponentName(packageName,
                         "com.android.settings.EnterprisePrivacyDashboardAlias"),
                 FeatureFactory.getFactory(this).getEnterprisePrivacyFeatureProvider(this)
-                        .hasDeviceOwner(), isAdmin, pm);
+                        .hasDeviceOwner(), isAdmin);
+        // Final step, refresh categories.
+        updateCategories();
     }
 
-    private void setTileEnabled(ComponentName component, boolean enabled, boolean isAdmin,
-            PackageManager pm) {
+    private void setTileEnabled(ComponentName component, boolean enabled, boolean isAdmin) {
         if (UserHandle.MU_ENABLED && !isAdmin && getPackageName().equals(component.getPackageName())
                 && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, component.getClassName())) {
             enabled = false;
@@ -1294,7 +1099,7 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Deprecated
     @Override
     public boolean onQueryTextSubmit(String query) {
-        if (mSearchFeatureProvider.isEnabled()) {
+        if (mSearchFeatureProvider.isEnabled(this)) {
             return false;
         }
         mSearchQuery = query;
@@ -1305,10 +1110,10 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Deprecated
     @Override
     public boolean onQueryTextChange(String newText) {
-        if (mSearchFeatureProvider.isEnabled() || mSearchResultsFragment == null) {
+        mSearchQuery = newText;
+        if (mSearchFeatureProvider.isEnabled(this) || mSearchResultsFragment == null) {
             return false;
         }
-        mSearchQuery = newText;
         return mSearchResultsFragment.onQueryTextChange(newText);
     }
 

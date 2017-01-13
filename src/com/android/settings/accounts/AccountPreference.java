@@ -16,89 +16,139 @@
 
 package com.android.settings.accounts;
 
+import android.accounts.Account;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
+import android.support.v7.preference.PreferenceViewHolder;
+import android.util.Log;
+import android.widget.ImageView;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 
-import static android.content.Intent.EXTRA_USER;
+import java.util.ArrayList;
 
-public class AccountPreference extends Preference implements OnPreferenceClickListener {
-    /**
-     * Title of the tile that is shown to the user.
-     * @attr ref android.R.styleable#PreferenceHeader_title
-     */
-    private final CharSequence mTitle;
+/**
+ * AccountPreference is used to display a username, status and provider icon for an account on
+ * the device.
+ */
+public class AccountPreference extends Preference {
+    private static final String TAG = "AccountPreference";
+    public static final int SYNC_ENABLED = 0; // all know sync adapters are enabled and OK
+    public static final int SYNC_DISABLED = 1; // no sync adapters are enabled
+    public static final int SYNC_ERROR = 2; // one or more sync adapters have a problem
+    public static final int SYNC_IN_PROGRESS = 3; // currently syncing
+    private int mStatus;
+    private Account mAccount;
+    private ArrayList<String> mAuthorities;
+    private ImageView mSyncStatusIcon;
+    private boolean mShowTypeIcon;
 
-    /**
-     * Packange name used to resolve the resources of the title shown to the user in the new
-     * fragment.
-     */
-    private final String mTitleResPackageName;
-
-    /**
-     * Resource id of the title shown to the user in the new fragment.
-     */
-    private final int mTitleResId;
-
-    /**
-     * Full class name of the fragment to display when this tile is
-     * selected.
-     * @attr ref android.R.styleable#PreferenceHeader_fragment
-     */
-    private final String mFragment;
-
-    /**
-     * Optional arguments to supply to the fragment when it is
-     * instantiated.
-     */
-    private final Bundle mFragmentArguments;
-
-    public AccountPreference(Context context, CharSequence title, String titleResPackageName,
-        int titleResId, String fragment, Bundle fragmentArguments, Drawable icon) {
+    public AccountPreference(Context context, Account account, Drawable icon,
+            ArrayList<String> authorities, boolean showTypeIcon) {
         super(context);
-        mTitle = title;
-        mTitleResPackageName = titleResPackageName;
-        mTitleResId = titleResId;
-        mFragment = fragment;
-        mFragmentArguments = fragmentArguments;
-        setWidgetLayoutResource(R.layout.account_type_preference);
+        mAccount = account;
+        mAuthorities = authorities;
+        mShowTypeIcon = showTypeIcon;
+        if (showTypeIcon) {
+            setIcon(icon);
+        } else {
+            setIcon(getSyncStatusIcon(SYNC_DISABLED));
+        }
+        setTitle(mAccount.name);
+        setSummary("");
+        setPersistent(false);
+        setSyncStatus(SYNC_DISABLED, false);
+    }
 
-        setTitle(title);
-        setIcon(icon);
+    public Account getAccount() {
+        return mAccount;
+    }
 
-        setOnPreferenceClickListener(this);
+    public ArrayList<String> getAuthorities() {
+        return mAuthorities;
     }
 
     @Override
-    public boolean onPreferenceClick(Preference preference) {
-        if (mFragment != null) {
-            UserManager userManager =
-                (UserManager) getContext().getSystemService(Context.USER_SERVICE);
-            UserHandle user = mFragmentArguments.getParcelable(EXTRA_USER);
-            if (user != null && Utils.startQuietModeDialogIfNecessary(getContext(), userManager,
-                user.getIdentifier())) {
-                return true;
-            } else if (user != null && Utils.unlockWorkProfileIfNecessary(getContext(),
-                user.getIdentifier())) {
-                return true;
-            }
-            Utils.startWithFragment(getContext(), mFragment, mFragmentArguments,
-                null /* resultTo */, 0 /* resultRequestCode */, mTitleResPackageName,
-                mTitleResId, null /* title */);
-            return true;
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
+        if (!mShowTypeIcon) {
+            mSyncStatusIcon = (ImageView) view.findViewById(android.R.id.icon);
+            mSyncStatusIcon.setImageResource(getSyncStatusIcon(mStatus));
+            mSyncStatusIcon.setContentDescription(getSyncContentDescription(mStatus));
         }
-        return false;
     }
 
-    public CharSequence getitle() {
-        return mTitle;
+    public void setSyncStatus(int status, boolean updateSummary) {
+        if (mStatus == status) {
+            Log.d(TAG, "Status is the same, not changing anything");
+            return;
+        }
+        mStatus = status;
+        if (!mShowTypeIcon && mSyncStatusIcon != null) {
+            mSyncStatusIcon.setImageResource(getSyncStatusIcon(status));
+            mSyncStatusIcon.setContentDescription(getSyncContentDescription(mStatus));
+        }
+        if (updateSummary) {
+            setSummary(getSyncStatusMessage(status));
+        }
     }
 
+    private int getSyncStatusMessage(int status) {
+        int res;
+        switch (status) {
+            case SYNC_ENABLED:
+                res = R.string.sync_enabled;
+                break;
+            case SYNC_DISABLED:
+                res = R.string.sync_disabled;
+                break;
+            case SYNC_ERROR:
+                res = R.string.sync_error;
+                break;
+            case SYNC_IN_PROGRESS:
+                res = R.string.sync_in_progress;
+                break;
+            default:
+                res = R.string.sync_error;
+                Log.e(TAG, "Unknown sync status: " + status);
+        }
+        return res;
+    }
+
+    private int getSyncStatusIcon(int status) {
+        int res;
+        switch (status) {
+            case SYNC_ENABLED:
+            case SYNC_IN_PROGRESS:
+                res = R.drawable.ic_settings_sync;
+                break;
+            case SYNC_DISABLED:
+                res = R.drawable.ic_sync_grey_holo;
+                break;
+            case SYNC_ERROR:
+                res = R.drawable.ic_sync_red_holo;
+                break;
+            default:
+                res = R.drawable.ic_sync_red_holo;
+                Log.e(TAG, "Unknown sync status: " + status);
+        }
+        return res;
+    }
+
+    private String getSyncContentDescription(int status) {
+        switch (status) {
+            case SYNC_ENABLED:
+                return getContext().getString(R.string.accessibility_sync_enabled);
+            case SYNC_DISABLED:
+                return getContext().getString(R.string.accessibility_sync_disabled);
+            case SYNC_ERROR:
+                return getContext().getString(R.string.accessibility_sync_error);
+            case SYNC_IN_PROGRESS:
+                return getContext().getString(R.string.accessibility_sync_in_progress);
+            default:
+                Log.e(TAG, "Unknown sync status: " + status);
+                return getContext().getString(R.string.accessibility_sync_error);
+        }
+    }
 }

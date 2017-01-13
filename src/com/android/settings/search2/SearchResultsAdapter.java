@@ -16,8 +16,10 @@
 
 package com.android.settings.search2;
 
+import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,48 +28,34 @@ import com.android.settings.R;
 import com.android.settings.search2.ResultPayload.PayloadType;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
-    private ArrayList<SearchResult> mSearchResults;
-    private HashMap<String, List<SearchResult>> mResultsMap;
+    private final List<SearchResult> mSearchResults;
+    private final Map<String, List<SearchResult>> mResultsMap;
+    private final SearchFragment mFragment;
 
-    public SearchResultsAdapter() {
+    public SearchResultsAdapter(SearchFragment fragment) {
+        mFragment = fragment;
         mSearchResults = new ArrayList<>();
-        mResultsMap = new HashMap<>();
+        mResultsMap = new ArrayMap<>();
 
         setHasStableIds(true);
     }
 
-    public void mergeResults(List<SearchResult> freshResults, String loaderClassName) {
-        if (freshResults == null) {
-            return;
-        }
-        mResultsMap.put(loaderClassName, freshResults);
-        mSearchResults = mergeMappedResults();
-        notifyDataSetChanged();
-    }
-
-    private ArrayList<SearchResult> mergeMappedResults() {
-        ArrayList<SearchResult> mergedResults = new ArrayList<>();
-        for(String key : mResultsMap.keySet()) {
-            mergedResults.addAll(mResultsMap.get(key));
-        }
-        return mergedResults;
-    }
-
     @Override
     public SearchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        final Context context = parent.getContext();
+        final LayoutInflater inflater = LayoutInflater.from(context);
+        final View view;
         switch(viewType) {
             case PayloadType.INTENT:
-                View view = inflater.inflate(R.layout.search_intent_item, parent, false);
+                view = inflater.inflate(R.layout.search_intent_item, parent, false);
                 return new IntentSearchViewHolder(view);
-            case PayloadType.INLINE_SLIDER:
-                return null;
             case PayloadType.INLINE_SWITCH:
-                return null;
+                view = inflater.inflate(R.layout.search_inline_switch_item, parent, false);
+                return new InlineSwitchViewHolder(view, context);
             default:
                 return null;
         }
@@ -75,13 +63,12 @@ public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
 
     @Override
     public void onBindViewHolder(SearchViewHolder holder, int position) {
-        SearchResult result = mSearchResults.get(position);
-        holder.onBind(result);
+        holder.onBind(mFragment, mSearchResults.get(position));
     }
 
     @Override
     public long getItemId(int position) {
-        return super.getItemId(position);
+        return mSearchResults.get(position).stableId;
     }
 
     @Override
@@ -94,8 +81,25 @@ public class SearchResultsAdapter extends Adapter<SearchViewHolder> {
         return mSearchResults.size();
     }
 
+    public void mergeResults(List<SearchResult> freshResults, String loaderClassName) {
+        if (freshResults == null) {
+            return;
+        }
+        mResultsMap.put(loaderClassName, freshResults);
+        final int oldSize = mSearchResults.size();
+        mSearchResults.addAll(freshResults);
+        final int newSize = mSearchResults.size();
+        notifyItemRangeInserted(oldSize, newSize - oldSize);
+    }
+
+    public void clearResults() {
+        mSearchResults.clear();
+        mResultsMap.clear();
+        notifyDataSetChanged();
+    }
+
     @VisibleForTesting
-    public ArrayList<SearchResult> getSearchResults() {
+    public List<SearchResult> getSearchResults() {
         return mSearchResults;
     }
 }

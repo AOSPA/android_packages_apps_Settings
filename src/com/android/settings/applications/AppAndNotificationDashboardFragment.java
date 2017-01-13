@@ -17,12 +17,17 @@
 package com.android.settings.applications;
 
 import android.content.Context;
+import android.provider.SearchIndexableResource;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.drawer.CategoryKey;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class AppAndNotificationDashboardFragment extends DashboardFragment {
@@ -31,7 +36,13 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return APP_AND_NOTIFICATION_CATEGORY_FRAGMENT;
+        return MetricsProto.MetricsEvent.SETTINGS_APP_NOTIF_CATEGORY;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mProgressiveDisclosureMixin.setTileLimit(3);
     }
 
     @Override
@@ -53,4 +64,19 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         return null;
     }
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
+                            .isEnabled()) {
+                        return null;
+                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.app_and_notification;
+                    return Arrays.asList(sir);
+                }
+            };
 }

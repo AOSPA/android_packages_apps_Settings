@@ -25,7 +25,9 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
+import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.search2.SearchFeatureProvider;
+import com.android.settings.overlay.SurveyFeatureProvider;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -45,6 +47,8 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final ApplicationFeatureProvider applicationFeatureProvider;
     public final EnterprisePrivacyFeatureProvider enterprisePrivacyFeatureProvider;
     public final SearchFeatureProvider searchFeatureProvider;
+    public final SurveyFeatureProvider surveyFeatureProvider;
+    public final SecurityFeatureProvider securityFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -75,6 +79,8 @@ public class FakeFeatureFactory extends FeatureFactory {
         applicationFeatureProvider = mock(ApplicationFeatureProvider.class);
         enterprisePrivacyFeatureProvider = mock(EnterprisePrivacyFeatureProvider.class);
         searchFeatureProvider = mock(SearchFeatureProvider.class);
+        surveyFeatureProvider = mock(SurveyFeatureProvider.class);
+        securityFeatureProvider = mock(SecurityFeatureProvider.class);
     }
 
     @Override
@@ -88,7 +94,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public PowerUsageFeatureProvider getPowerUsageFeatureProvider() {
+    public PowerUsageFeatureProvider getPowerUsageFeatureProvider(Context context) {
         return powerUsageFeatureProvider;
     }
 
@@ -113,7 +119,17 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public SearchFeatureProvider getSearchFeatureProvider(Context context) {
+    public SearchFeatureProvider getSearchFeatureProvider() {
         return searchFeatureProvider;
+    }
+
+    @Override
+    public SurveyFeatureProvider getSurveyFeatureProvider(Context context) {
+        return surveyFeatureProvider;
+    }
+
+    @Override
+    public SecurityFeatureProvider getSecurityFeatureProvider() {
+        return securityFeatureProvider;
     }
 }

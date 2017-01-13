@@ -15,9 +15,11 @@
  */
 package com.android.settings.search2;
 
+import android.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.settings.R;
 
 /**
@@ -25,20 +27,31 @@ import com.android.settings.R;
  * The DatabaseResultLoader is the primary use case for this ViewHolder.
  */
 public class IntentSearchViewHolder extends SearchViewHolder {
+
     public final TextView titleView;
     public final TextView summaryView;
     public final ImageView iconView;
 
     public IntentSearchViewHolder(View view) {
         super(view);
-        titleView = (TextView) view.findViewById(R.id.title);
-        summaryView = (TextView) view.findViewById(R.id.summary);
-        iconView= (ImageView) view.findViewById(R.id.icon);
+        titleView = (TextView) view.findViewById(android.R.id.title);
+        summaryView = (TextView) view.findViewById(android.R.id.summary);
+        iconView = (ImageView) view.findViewById(android.R.id.icon);
     }
 
-    public void onBind(SearchResult result) {
+    @Override
+    public void onBind(final Fragment fragment, final SearchResult result) {
         titleView.setText(result.title);
         summaryView.setText(result.summary);
         iconView.setImageDrawable(result.icon);
+        if (result.icon == null) {
+            iconView.setBackgroundResource(R.drawable.empty_icon);
+        }
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragment.startActivity(((IntentPayload) result.payload).intent);
+            }
+        });
     }
 }

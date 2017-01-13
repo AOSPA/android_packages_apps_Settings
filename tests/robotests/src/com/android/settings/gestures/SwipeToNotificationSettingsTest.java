@@ -17,11 +17,13 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,10 +32,12 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -46,6 +50,10 @@ public class SwipeToNotificationSettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest(mContext);
+        final FakeFeatureFactory factory =
+                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        when(factory.dashboardFeatureProvider.isEnabled()).thenReturn(true);
         mFragment = new SwipeToNotificationSettings();
     }
 
@@ -62,4 +70,14 @@ public class SwipeToNotificationSettingsTest {
         assertThat(controllers.isEmpty()).isFalse();
     }
 
+    @Test
+    public void testSearchIndexProvider_shouldIndexResource() {
+        final List<SearchIndexableResource> indexRes =
+                SwipeToNotificationSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                        ShadowApplication.getInstance().getApplicationContext(),
+                        true /* enabled */);
+
+        assertThat(indexRes).isNotNull();
+        assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
+    }
 }

@@ -16,15 +16,21 @@
 package com.android.settings.connecteddevice;
 
 import android.content.Context;
+import android.provider.SearchIndexableResource;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.UsbBackend;
 import com.android.settings.nfc.NfcPreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
@@ -34,7 +40,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return CONNECTED_DEVICE_CATEGORY_FRAGMENT;
+        return MetricsProto.MetricsEvent.SETTINGS_CONNECTED_DEVICE_CATEGORY;
     }
 
     @Override
@@ -65,4 +71,21 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         return controllers;
     }
 
+    /**
+     * For Search.
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
+                            .isEnabled()) {
+                        return null;
+                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.connected_devices;
+                    return Arrays.asList(sir);
+                }
+            };
 }

@@ -84,6 +84,7 @@ public final class SupportFragment extends InstrumentedFragment implements View.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         mActivity = getActivity();
         mAccountManager = AccountManager.get(mActivity);
         mSupportFeatureProvider =
@@ -118,6 +119,7 @@ public final class SupportFragment extends InstrumentedFragment implements View.
                         .build(),
                 mNetworkCallback);
         mSupportItemAdapter.setHasInternet(hasInternet());
+        mSupportItemAdapter.refreshData();
     }
 
     @Override
@@ -138,8 +140,8 @@ public final class SupportFragment extends InstrumentedFragment implements View.
     @Override
     public void onAccountsUpdated(Account[] accounts) {
         // Account changed, update support items.
-        mSupportItemAdapter.setAccount(
-                mSupportFeatureProvider.getSupportEligibleAccount(mActivity));
+        mSupportItemAdapter.setAccounts(
+                mSupportFeatureProvider.getSupportEligibleAccounts(mActivity));
     }
 
     @Override

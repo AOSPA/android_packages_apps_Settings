@@ -93,22 +93,6 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="Preference">
-        <item name="android:layout">@layout/preference_material_settings</item>
-    </style>
-
-    <style name="SyncSwitchPreference" parent="Preference">
-        <item name="android:widgetLayout">@layout/preference_widget_sync_toggle</item>
-    </style>
-
-    <style name="EditTextPreference" parent="@*android:style/Preference.Material.DialogPreference.EditTextPreference">
-        <item name="android:dialogLayout">@layout/preference_dialog_edittext</item>
-    </style>
-
-    <style name="PreferenceTheme" parent="@*android:style/PreferenceTheme">
-        <item name="android:scrollbars">vertical</item>
-    </style>
-
     <style name="PreferenceHeaderPanelSinglePane">
         <item name="android:layout_marginStart">0dp</item>
         <item name="android:layout_marginEnd">0dp</item>
@@ -154,21 +138,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:scrollbarStyle">outsideOverlay</item>
-    </style>
-
-    <style name="PreferenceFragmentStyle" parent="@*android:style/PreferenceFragment.Material">
-        <item name="android:layout">@layout/preference_list_fragment</item>
-    </style>
-
-    <style name="VertDivider">
-        <item name="android:layout_width">@dimen/vert_divider_width</item>
-        <item name="android:layout_height">fill_parent</item>
-        <item name="android:background">@color/divider_color</item>
-        <item name="android:focusable">false</item>
-        <item name="android:clickable">false</item>
-    </style>
-
-    <style name="TextAppearance.SetupWizardDescription" parent="@android:style/TextAppearance.Material.Subhead">
     </style>
 
     <style name="TrimmedHorizontalProgressBar" parent="android:Widget.Material.ProgressBar.Horizontal">
@@ -324,10 +293,6 @@
     <!-- Scrollbar style OUTSIDE_OVERLAY -->
     <integer name="preference_scrollbar_style">33554432</integer>
 
-    <style name="ApnPreference">
-        <item name="android:layout">@layout/apn_preference_layout</item>
-    </style>
-
     <style name="AppListSwitchPreference" parent="@*android:style/Preference.Material.DialogPreference">
         <item name="android:widgetLayout">@*android:layout/preference_widget_switch</item>
     </style>
@@ -452,7 +417,7 @@
         <item name="android:progressDrawable">@drawable/ring_progress</item>
     </style>
 
-    <style name="AppHeader">
+    <style name="EntityHeader">
         <item name="android:background">@color/card_background_grey</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:paddingTop">16dp</item>
@@ -461,7 +426,7 @@
         <item name="android:paddingBottom">8dp</item>
     </style>
 
-    <style name="TextAppearance.AppHeaderTitle"
+    <style name="TextAppearance.EntityHeaderTitle"
            parent="@android:style/TextAppearance.Material.Subhead">
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">24sp</item>
@@ -472,5 +437,4 @@
     </style>
 
     <style name="AppActionPrimaryButton" parent="android:Widget.Material.Button.Colored"/>
-
 </resources>

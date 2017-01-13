@@ -40,7 +40,7 @@ public class InstalledPackagesPreferenceController extends PreferenceController 
                     @Override
                     public void onNumberOfInstalledAppsResult(int num) {
                         preference.setTitle(mContext.getResources().getQuantityString(
-                                R.plurals.number_installed_packages, num, num));
+                                R.plurals.enterprise_privacy_number_installed_packages, num, num));
                     }
                 });
     }
@@ -48,11 +48,6 @@ public class InstalledPackagesPreferenceController extends PreferenceController 
     @Override
     public boolean isAvailable() {
         return true;
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
     }
 
     @Override

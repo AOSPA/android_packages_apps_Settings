@@ -29,11 +29,10 @@
     <PreferenceCategory
         android:title="@string/default_apps_title">
 
-        <PreferenceScreen
+        <Preference
             android:key="domain_urls"
             android:title="@string/domain_urls_title"
-            android:fragment="com.android.settings.applications.ManageDomainUrls">
-        </PreferenceScreen>
+            android:fragment="com.android.settings.applications.ManageDomainUrls" />
 
         <Preference
             android:key="assist_and_voice_input"
@@ -93,7 +92,7 @@
     <PreferenceCategory
         android:title="@string/advanced_apps">
 
-        <PreferenceScreen
+        <Preference
             android:key="special_access"
             android:fragment="com.android.settings.applications.SpecialAccessSettings"
             android:title="@string/special_access" />

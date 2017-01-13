@@ -15,13 +15,22 @@
  */
 package com.android.settings;
 
-import java.util.List;
+import android.app.Fragment;
+import android.content.Intent;
+
 import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.manifest.AndroidManifest;
 import org.robolectric.res.Fs;
 import org.robolectric.res.ResourcePath;
+import org.robolectric.util.ActivityController;
+import org.robolectric.util.ReflectionHelpers;
+
+import java.util.List;
+
+import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
+import static org.robolectric.Robolectric.getShadowsAdapter;
 
 /**
  * Custom test runner for the testing of BluetoothPairingDialogs. This is needed because the
@@ -46,10 +55,10 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
         // Using the manifest file's relative path, we can figure out the application directory.
         final String appRoot = "packages/apps/Settings";
         final String manifestPath = appRoot + "/AndroidManifest.xml";
-        final String resDir = appRoot + "/res";
-        final String assetsDir = appRoot + "/assets";
+        final String resDir = appRoot + "/tests/robotests/res";
+        final String assetsDir = appRoot + config.assetDir();
 
-        // By adding any resources from libraries we need to the AndroidManifest, we can access
+        // By adding any resources from libraries we need the AndroidManifest, we can access
         // them from within the parallel universe's resource loader.
         final AndroidManifest manifest = new AndroidManifest(Fs.fileFromPath(manifestPath),
                 Fs.fileFromPath(resDir), Fs.fileFromPath(assetsDir)) {
@@ -75,5 +84,16 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
         // Set the package name to the renamed one
         manifest.setPackageName("com.android.settings");
         return manifest;
+    }
+
+    // A simple utility class to start a Settings fragment with an intent. The code here is almost
+    // the same as FragmentTestUtil.startFragment except that it starts an activity with an intent.
+    public static void startSettingsFragment(
+            Fragment fragment, Class<? extends SettingsActivity> activityClass) {
+        Intent intent = new Intent().putExtra(EXTRA_SHOW_FRAGMENT, fragment.getClass().getName());
+        SettingsActivity activity = ActivityController.of(
+                getShadowsAdapter(), ReflectionHelpers.callConstructor(activityClass), intent)
+                .setup().get();
+        activity.getFragmentManager().beginTransaction().add(fragment, null).commit();
     }
 }

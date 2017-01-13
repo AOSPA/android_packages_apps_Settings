@@ -43,13 +43,16 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private static final String TAG = "DashboardFeatureImpl";
 
     private static final String DASHBOARD_TILE_PREF_KEY_PREFIX = "dashboard_tile_pref_";
+    private static final String META_DATA_KEY_INTENT_ACTION = "com.android.settings.intent.action";
+
 
     protected final Context mContext;
 
     private final CategoryManager mCategoryManager;
 
     public DashboardFeatureProviderImpl(Context context) {
-        this(context.getApplicationContext(), CategoryManager.get(context));
+        mContext = context;
+        mCategoryManager = CategoryManager.get(context, getExtraIntentAction());
     }
 
     @VisibleForTesting
@@ -60,7 +63,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     @Override
@@ -109,6 +112,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         if (tile == null || tile.intent == null) {
             return null;
         }
+        if (!TextUtils.isEmpty(tile.key)) {
+            return tile.key;
+        }
         final StringBuilder sb = new StringBuilder(DASHBOARD_TILE_PREF_KEY_PREFIX);
         final ComponentName component = tile.intent.getComponent();
         sb.append(component.getClassName());
@@ -130,13 +136,18 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         final Bundle metadata = tile.metaData;
         String clsName = null;
+        String action = null;
         if (metadata != null) {
             clsName = metadata.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
+            action = metadata.getString(META_DATA_KEY_INTENT_ACTION);
         }
         if (!TextUtils.isEmpty(clsName)) {
             pref.setFragment(clsName);
         } else if (tile.intent != null) {
             final Intent intent = new Intent(tile.intent);
+            if (action != null) {
+                intent.setAction(action);
+            }
             pref.setOnPreferenceClickListener(preference -> {
                 ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
                 if (tile.userHandle == null) {
@@ -171,5 +182,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     public ProgressiveDisclosureMixin getProgressiveDisclosureMixin(Context context,
             DashboardFragment fragment) {
         return new ProgressiveDisclosureMixin(context, this, fragment);
+    }
+
+    @Override
+    public String getExtraIntentAction() {
+        return null;
     }
 }

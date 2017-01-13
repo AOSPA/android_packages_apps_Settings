@@ -20,11 +20,13 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -57,8 +59,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private final IconCache mCache;
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private DashboardData mDashboardData;
     private SuggestionParser mSuggestionParser;
+
+    @VisibleForTesting DashboardData mDashboardData;
 
     private View.OnClickListener mTileClickListener = new View.OnClickListener() {
         @Override
@@ -153,8 +156,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     public void setConditions(List<Condition> conditions) {
         final DashboardData prevData = mDashboardData;
+        Log.d(TAG, "adapter setConditions called");
         mDashboardData = new DashboardData.Builder(prevData)
                 .setConditions(conditions)
+                .setExpandedCondition(null)
                 .build();
         notifyDashboardDataChanged(prevData);
     }
@@ -165,7 +170,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         if (position != DashboardData.POSITION_NOT_FOUND) {
             // Since usually tile in parameter and tile in mCategories are same instance,
             // which is hard to be detected by DiffUtil, so we notifyItemChanged directly.
-            notifyItemChanged(position);
+            notifyItemChanged(position, mDashboardData.getItemTypeByPosition(position));
         }
     }
 

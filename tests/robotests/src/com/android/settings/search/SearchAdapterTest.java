@@ -20,20 +20,35 @@ package com.android.settings.search;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.*;
+import com.android.settings.search2.DatabaseResultLoader;
+import com.android.settings.search2.InlineSwitchViewHolder;
+import com.android.settings.search2.IntentPayload;
+import com.android.settings.search2.IntentSearchViewHolder;
+import com.android.settings.search2.ResultPayload;
+import com.android.settings.search2.SearchFragment;
+import com.android.settings.search2.SearchResult;
 import com.android.settings.search2.SearchResult.Builder;
-import com.android.settings.R;
+import com.android.settings.search2.SearchResultsAdapter;
 
-import java.util.ArrayList;
-
+import com.android.settings.search2.SearchViewHolder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import org.robolectric.annotation.Config;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -41,15 +56,59 @@ import static com.google.common.truth.Truth.assertThat;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SearchAdapterTest {
 
+    @Mock
+    private SearchFragment mFragment;
     private SearchResultsAdapter mAdapter;
     private Context mContext;
     private String mLoaderClassName;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = Robolectric.buildActivity(Activity.class).get();
-        mAdapter = new SearchResultsAdapter();
+        mAdapter = new SearchResultsAdapter(mFragment);
         mLoaderClassName = DatabaseResultLoader.class.getName();
+    }
+
+    @Test
+    public void testNoResultsAdded_EmptyListReturned() {
+        List<SearchResult> updatedResults = mAdapter.getSearchResults();
+        assertThat(updatedResults).isEmpty();
+    }
+
+    @Test
+    public void testSingleSourceMerge_ExactCopyReturned() {
+        ArrayList<SearchResult> intentResults = getIntentSampleResults();
+        mAdapter.mergeResults(intentResults, mLoaderClassName);
+
+        List<SearchResult> updatedResults = mAdapter.getSearchResults();
+        assertThat(updatedResults).containsAllIn(intentResults);
+    }
+
+    @Test
+    public void testDuplicateSourceMerge_ExactCopyReturned() {
+        ArrayList<SearchResult> intentResults = getIntentSampleResults();
+        mAdapter.mergeResults(intentResults, mLoaderClassName);
+        mAdapter.mergeResults(intentResults, mLoaderClassName);
+
+        List<SearchResult> updatedResults = mAdapter.getSearchResults();
+        assertThat(updatedResults).containsAllIn(intentResults);
+    }
+
+    @Test
+    public void testCreatViewHolder_ReturnsIntentResult() {
+        ViewGroup group = new FrameLayout(mContext);
+        SearchViewHolder view = mAdapter.onCreateViewHolder(group,
+                ResultPayload.PayloadType.INTENT);
+        assertThat(view).isInstanceOf(IntentSearchViewHolder.class);
+    }
+
+    @Test
+    public void testCreatViewHolder_ReturnsInlineSwitchResult() {
+        ViewGroup group = new FrameLayout(mContext);
+        SearchViewHolder view = mAdapter.onCreateViewHolder(group,
+                ResultPayload.PayloadType.INLINE_SWITCH);
+        assertThat(view).isInstanceOf(InlineSwitchViewHolder.class);
     }
 
     private ArrayList<SearchResult> getIntentSampleResults() {
@@ -57,8 +116,7 @@ public class SearchAdapterTest {
         ArrayList<String> breadcrumbs = new ArrayList<>();
         final Drawable icon = mContext.getDrawable(R.drawable.ic_search_history);
         final ResultPayload payload = new IntentPayload(null);
-
-        SearchResult.Builder builder = new Builder();
+        final SearchResult.Builder builder = new Builder();
         builder.addTitle("title")
                 .addSummary("summary")
                 .addRank(1)
@@ -73,32 +131,5 @@ public class SearchAdapterTest {
         builder.addRank(3);
         sampleResults.add(builder.build());
         return sampleResults;
-    }
-
-
-    @Test
-    public void testNoResultsAdded_EmptyListReturned() {
-        ArrayList<SearchResult> updatedResults = mAdapter.getSearchResults();
-        assertThat(updatedResults).isEmpty();
-    }
-
-
-    @Test
-    public void testSingleSourceMerge_ExactCopyReturned() {
-        ArrayList<SearchResult> intentResults = getIntentSampleResults();
-        mAdapter.mergeResults(intentResults, mLoaderClassName);
-
-        ArrayList<SearchResult> updatedResults = mAdapter.getSearchResults();
-        assertThat(updatedResults).containsAllIn(intentResults);
-    }
-
-    @Test
-    public void testDuplicateSourceMerge_ExactCopyReturned() {
-        ArrayList<SearchResult> intentResults = getIntentSampleResults();
-        mAdapter.mergeResults(intentResults, mLoaderClassName);
-        mAdapter.mergeResults(intentResults, mLoaderClassName);
-
-        ArrayList<SearchResult> updatedResults = mAdapter.getSearchResults();
-        assertThat(updatedResults).containsAllIn(intentResults);
     }
 }

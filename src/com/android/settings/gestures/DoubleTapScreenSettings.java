@@ -18,13 +18,18 @@ package com.android.settings.gestures;
 
 import android.content.Context;
 import android.os.UserHandle;
+import android.provider.SearchIndexableResource;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DoubleTapScreenSettings extends DashboardFragment {
@@ -33,7 +38,7 @@ public class DoubleTapScreenSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return GESTURE_DOUBLE_TAP_SCREEN;
+        return MetricsProto.MetricsEvent.SETTINGS_GESTURE_DOUBLE_TAP_SCREEN;
     }
 
     @Override
@@ -58,4 +63,19 @@ public class DoubleTapScreenSettings extends DashboardFragment {
                 new AmbientDisplayConfiguration(context), UserHandle.myUserId()));
         return controllers;
     }
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
+                            .isEnabled()) {
+                        return null;
+                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.double_tap_screen_settings;
+                    return Arrays.asList(sir);
+                }
+            };
 }

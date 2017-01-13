@@ -17,9 +17,6 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -58,7 +55,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     private final Map<Class, PreferenceController> mPreferenceControllers =
             new ArrayMap<>();
     private final Set<String> mDashboardTilePrefKeys = new ArraySet<>();
-    private DashboardDividerDecoration mDividerDecoration;
 
     protected ProgressiveDisclosureMixin mProgressiveDisclosureMixin;
     protected DashboardFeatureProvider mDashboardFeatureProvider;
@@ -99,9 +95,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
-        if (mDashboardFeatureProvider.isEnabled()) {
-            getListView().addItemDecoration(mDividerDecoration);
-        }
         return view;
     }
 
@@ -118,20 +111,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        mDividerDecoration = new DashboardDividerDecoration(getContext());
         refreshAllPreferences(getLogTag());
-    }
-
-    @Override
-    public void setDivider(Drawable divider) {
-        if (mDashboardFeatureProvider.isEnabled()) {
-            // Intercept divider and set it transparent so system divider decoration is disabled.
-            // We will use our decoration to draw divider more intelligently.
-            mDividerDecoration.setDivider(divider);
-            super.setDivider(new ColorDrawable(Color.TRANSPARENT));
-        } else {
-            super.setDivider(divider);
-        }
     }
 
     @Override
@@ -231,6 +211,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     protected abstract List<PreferenceController> getPreferenceControllers(Context context);
 
     /**
+     * Returns true if this tile should be displayed
+     */
+    protected boolean displayTile(Tile tile) {
+        return true;
+    }
+
+    /**
      * Displays resource based tiles.
      */
     private void displayResourceTiles() {
@@ -281,6 +268,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
         // Add resource based tiles.
         displayResourceTiles();
+        mProgressiveDisclosureMixin.collapse(getPreferenceScreen());
 
         refreshDashboardTiles(TAG);
     }
@@ -319,6 +307,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 Log.d(TAG, "tile does not contain a key, skipping " + tile);
                 continue;
             }
+            if (!displayTile(tile)) {
+                continue;
+            }
             if (mDashboardTilePrefKeys.contains(key)) {
                 // Have the key already, will rebind.
                 final Preference preference = mProgressiveDisclosureMixin.findPreference(
@@ -340,5 +331,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             mDashboardTilePrefKeys.remove(key);
             mProgressiveDisclosureMixin.removePreference(screen, key);
         }
+        mSummaryLoader.setListening(true);
     }
 }

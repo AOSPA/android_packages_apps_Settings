@@ -181,7 +181,7 @@
             translation_description="Text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
         Even with eyes protected by the green spectacles Dorothy and her friends were at first dazzled by the brilliancy of the wonderful City.
         The streets were lined with beautiful houses all built of green marble and studded everywhere with sparkling emeralds.
-        They walked over a pavement of the same green marble, and where the blocks were joined together were rows of emeralds, set closely, and glittering in the brighness of the sun.
+        They walked over a pavement of the same green marble, and where the blocks were joined together were rows of emeralds, set closely, and glittering in the brightness of the sun.
         The window panes were of green glass; even the sky above the City had a green tint, and the rays of the sun were green.
         \n\nThere were many people, men, women and children, walking about, and these were all dressed in green clothes and had greenish skins.
         They looked at Dorothy and her strangely assorted company with wondering eyes, and the children all ran away and hid behind their mothers when they saw the Lion; but no one spoke to them.
@@ -344,7 +344,9 @@
     <string name="bluetooth_phonebook_request">"Phone book access request"</string>
 
     <!-- Bluetooth phone book permission Alert Activity text [CHAR LIMIT=none] -->
-    <string name="bluetooth_pb_acceptance_dialog_text">%1$s wants to access your contacts and call history. Give access to %2$s?</string>
+    <string name="bluetooth_pb_acceptance_dialog_text">
+        <xliff:g id="device_name">%1$s</xliff:g> wants to access your contacts and call history. Give access to <xliff:g id="device_name">%2$s</xliff:g>?
+    </string>
 
     <!-- Bluetooth phone book permission Alert Activity checkbox text [CHAR LIMIT=none] -->
     <string name="bluetooth_remember_choice">Don\u2019t ask again</string>
@@ -610,6 +612,8 @@
     <string name="settings_label_launcher">Settings</string>
     <!-- Label for option to select a settings panel as a shortcut -->
     <string name="settings_shortcut">Settings shortcut</string>
+    <!-- Shown in create shortcut activity when there is no shortcut that can be created. [CHAR_LIMIT=None] -->
+    <string name="activity_list_empty">No matching activities found.</string>
     <!-- Wireless controls settings screen, setting check box label -->
     <string name="airplane_mode">Airplane mode</string>
     <!-- Main Settings screen settings title for things like airplane mode, tethering, NFC, VPN.  This will take you to another screen with those settings.  [CHAR LIMIT=30] -->
@@ -862,6 +866,10 @@
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
+    <!-- Text shown when users has enrolled a maximum number of fingerprints [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_intro_error_max">You\u2019ve added the maximum number of fingerprints</string>
+    <!-- Text shown when an unknown error caused the device to be unable to add fingerprints [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_intro_error_unknown">Can\u2019t add more fingerprints</string>
 
     <!-- Title shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=50]-->
     <string name="fingerprint_last_delete_title">Remove all fingerprints?</string>
@@ -1467,9 +1475,6 @@
     <!-- Bluetooth settings.  Dock Setting Dialog - Remember setting and don't ask user again -->
     <string name="bluetooth_dock_settings_remember">Remember settings</string>
 
-    <!-- Wifi Assistant title.  [CHAR LIMIT=40] -->
-    <string name="wifi_assistant_title">Wi\u2011Fi Assistant</string>
-
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
     <!-- Wifi Display settings. The title of a menu item to enable wireless display [CHAR LIMIT=40] -->
@@ -1549,7 +1554,7 @@
     <!-- Used in the Android Beam sharing preferences screen. This phrase is a trademark. [CHAR LIMIT=32] -->
     <string name="android_beam_label">Android Beam</string>
     <!-- Explanation of the Android Beam feature in the Android Beam settings panel. The use of "beam" here is as a verb and not considered trademarked. [CHAR LIMIT=NONE] -->
-    <string name="android_beam_explained">When this feature is turned on, you can beam app content to another NFC-capable device by holding the devices close together. For example, you can beam Browser pages, YouTube videos, People contacts, and more.\n\nJust bring the devices together (typically back to back) and then tap your screen. The app determines what gets beamed.</string>
+    <string name="android_beam_explained">When this feature is turned on, you can beam app content to another NFC-capable device by holding the devices close together. For example, you can beam web pages, YouTube videos, contacts, and more.\n\nJust bring the devices together (typically back to back) and then tap your screen. The app determines what gets beamed.</string>
 
     <!-- Wi-Fi Settings --> <skip />
     <!-- Used in the 1st-level settings screen to turn on Wi-Fi -->
@@ -1564,8 +1569,6 @@
     <string name="wifi_settings_title">Wi\u2011Fi</string>
     <!-- Summary text of the Wi-fi settings screen -->
     <string name="wifi_settings_summary">Set up &amp; manage wireless access points</string>
-    <!-- Used in the 1st-level settings screen to turn on Wi-Fi  [CHAR LIMIT=60] -->
-    <string name="wifi_setup_wizard_title">Select Wi\u2011Fi network</string>
     <!-- Used by Account creation for turning on Wi-Fi  [CHAR LIMIT=60] -->
     <string name="wifi_select_network">Select Wi\u2011Fi</string>
     <!-- Summary text when turning Wi-Fi or bluetooth on -->
@@ -1588,12 +1591,12 @@
     <string name="wifi_poor_network_detection_summary">Don\u2019t use a Wi\u2011Fi network unless it has a good Internet connection</string>
     <!-- Checkbox summary for option to toggle poor network detection [CHAR LIMIT=60] -->
     <string name="wifi_avoid_poor_network_detection_summary">Only use networks that have a good Internet connection</string>
-    <!-- Checkbox title for option to connect to open Wi-Fi automatically [CHAR LIMIT=40] -->
-    <string name="wifi_automatically_connect_title">Use open Wi\u2011Fi automatically</string>
-    <!-- Checkbox summary for option to connect to open Wi-Fi automatically  [CHAR LIMIT=100] -->
-    <string name="wifi_automatically_connect_summary">Let a Wi\u2011Fi assistant automatically connect to open networks determined to be high quality</string>
-    <!-- Dialog title for option to select an app which connects to open Wi-Fi automatically [CHAR LIMIT=40] -->
-    <string name="wifi_select_assistant_dialog_title">Choose assistant</string>
+
+    <!-- Network recommendations toggle -->
+    <!--TODO(jjoslin): Provide final strings and mark for translation. BUG: 32913919 -->
+    <string translatable="false" name="networking_allow_recommendations_title">Use network recommendations</string>
+    <string translatable="false" name="networking_allow_recommendations_summary">When enabled, use network recommendations when selecting the Wi\u2011Fi network to connect to</string>
+
     <!-- Preference title for option to install certificates -->
     <string name="wifi_install_credentials">Install certificates</string>
     <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off. The
@@ -1659,8 +1662,6 @@
     <string name="wifi_empty_list_wifi_on">Searching for Wi\u2011Fi networks\u2026</string>
     <!-- Wifi Settings. text displayed when user has restriction DISALLOW_CONFIG_WIFI [CHAR LIMIT=NONE]-->
     <string name="wifi_empty_list_user_restricted">You don\u2019t have permission to change the Wi\u2011Fi network.</string>
-    <!-- Wi-Fi settings. title for setup other network button [CHAR LIMIT=35]-->
-    <string name="wifi_other_network">Add another network</string>
     <!-- Wi-Fi settings. content description for more button [CHAR LIMIT=50]-->
     <string name="wifi_more">More</string>
     <!-- Wi-Fi settings. wps menu title [CHAR LIMIT=25]-->
@@ -1809,30 +1810,6 @@
     <string name="wifi_failed_save_message">Failed to save network</string>
     <!-- Button label to dismiss the dialog -->
     <string name="wifi_cancel">Cancel</string>
-    <!-- Button for skipping a step after having been warned of a potential concern [CHAR LIMIT=30] -->
-    <string name="wifi_skip_anyway">Skip anyway</string>
-    <!-- Button for going to the previous screen or step [CHAR LIMIT=20] -->
-    <string name="wifi_dont_skip">Go back</string>
-
-    <!-- Text warning about skipping Wi-Fi with a mobile connect (tablet) [CHAR LIMIT=NONE]-->
-    <string name="wifi_skipped_message" product="tablet">WARNING: if you skip Wi\u2011Fi, your tablet will only use cellular data for initial downloads and updates. To avoid possible data charges, connect to Wi\u2011Fi.</string>
-    <!-- Text warning about skipping Wi-Fi with a mobile connect (device) [CHAR LIMIT=NONE]-->
-    <string name="wifi_skipped_message" product="device">WARNING: if you skip Wi\u2011Fi, your device will only use cellular data for initial downloads and updates. To avoid possible data charges, connect to Wi\u2011Fi.</string>
-    <!-- Text warning about skipping Wi-Fi with a mobile connect (phone) [CHAR LIMIT=NONE]-->
-    <string name="wifi_skipped_message" product="default">WARNING: if you skip Wi\u2011Fi, your phone will only use cellular data for initial downloads and updates. To avoid possible data charges, connect to Wi\u2011Fi.</string>
-
-    <!-- Text warning about skipping Wi-Fi without a mobile connect (tablet) [CHAR LIMIT=NONE] -->
-    <string name="wifi_and_mobile_skipped_message" product="tablet">If you skip Wi\u2011Fi:\n\n<li>Your tablet won\u2019t have an Internet connection.</li>\n\n<li>You won\u2019t get software updates until you connect to the Internet.</li>\n\n<li>You can\u2019t activate device protection features at this time.</li></string>
-    <!-- Text warning about skipping Wi-Fi without a mobile connect (device) [CHAR LIMIT=NONE] -->
-    <string name="wifi_and_mobile_skipped_message" product="device">If you skip Wi\u2011Fi:\n\n<li>Your device won\u2019t have an Internet connection.</li>\n\n<li>You won\u2019t get software updates until you connect to the Internet.</li>\n\n<li>You can\u2019t activate device protection features at this time.</li></string>
-    <!-- Text warning about skipping Wi-Fi without a mobile connect (phone) [CHAR LIMIT=NONE] -->
-    <string name="wifi_and_mobile_skipped_message" product="default">If you skip Wi\u2011Fi:\n\n<li>Your phone won\u2019t have an Internet connection.</li>\n\n<li>You won\u2019t get software updates until you connect to the Internet.</li>\n\n<li>You can\u2019t activate device protection features at this time.</li></string>
-    <!-- Text alerting that Wi-Fi couldn't connect (tablet) [CHAR LIMIT=NONE] -->
-    <string name="wifi_connect_failed_message" product="tablet">The tablet was unable to connect to this Wi\u2011Fi network.</string>
-    <!-- Text alerting that Wi-Fi couldn't connect (device) [CHAR LIMIT=NONE] -->
-    <string name="wifi_connect_failed_message" product="device">The device was unable to connect to this Wi\u2011Fi network.</string>
-    <!-- Text alerting that Wi-Fi couldn't connect (phone) [CHAR LIMIT=NONE] -->
-    <string name="wifi_connect_failed_message" product="default">The phone was unable to connect to this Wi\u2011Fi network.</string>
 
     <!-- Wi-Fi Advanced Settings --> <skip />
     <!-- Wi-Fi settings screen, Saved networks, settings section.  This is a header shown above Saved networks wifi settings. [CHAR LIMIT=30] -->
@@ -3032,7 +3009,7 @@
     <string name="mobile_unknown_sim_operator" translatable="true">Unknown SIM operator</string>
 
     <!-- There is no mobile provisiong website for the operator which is the firat parameter [CHAR_ LIMIT=50]-->
-    <string name="mobile_no_provisioning_url" translatable="true">%1$s has no known provisioning website</string>
+    <string name="mobile_no_provisioning_url"><xliff:g id="operator">%1$s</xliff:g> has no known provisioning website</string>
 
     <!-- Ask user to insert a SIM card [CHAR_ LIMIT=50]-->
     <string name="mobile_insert_sim_card" translatable="true">Please insert SIM card and restart</string>
@@ -3591,11 +3568,11 @@
     <!-- [CHAR LIMIT=30] Manage applications, label for option to disable app -->
     <string name="app_disable_dlg_positive">Disable app</string>
     <!-- [CHAR LIMIT=200] Manage applications, text for dialog when disabling apps -->
-    <string name="app_disable_dlg_text">If you disable this app, other apps may no longer function as intended.</string>
+    <string name="app_disable_dlg_text">If you disable this app, Android and other apps may no longer function as intended.</string>
     <!-- [CHAR LIMIT=NONE] Manage applications, title for dialog when disabling updated apps -->
     <string name="app_special_disable_dlg_title">Delete data and disable app?</string>
     <!-- [CHAR LIMIT=NONE] Manage applications, text for dialog when disabling update apps -->
-    <string name="app_special_disable_dlg_text">If you disable this app, other apps may no longer function as intended.  Your data will also be deleted.</string>
+    <string name="app_special_disable_dlg_text">If you disable this app, Android and other apps may no longer function as intended.  Your data will also be deleted.</string>
     <!-- [CHAR LIMIT=30] Manage applications, title for dialog when disabling notifications for an app -->
     <string name="app_disable_notifications_dlg_title">Turn off notifications?</string>
     <!-- [CHAR LIMIT=200] Manage applications, text for dialog when disabling notifications for an app -->
@@ -4515,7 +4492,7 @@
     <string name="battery_saver_turn_on_automatically_never">Never</string>
 
     <!-- [CHAR_LIMIT=40] Battery saver: Value for automatic entry option: pct% battery -->
-    <string name="battery_saver_turn_on_automatically_pct">at %1$s battery</string>
+    <string name="battery_saver_turn_on_automatically_pct">at <xliff:g id="percent">%1$s</xliff:g> battery</string>
 
     <!-- Process Stats strings -->
     <skip />
@@ -5390,6 +5367,12 @@
     <string name="vpn_always_on_inactive">Always-on inactive</string>
     <!-- Preference summary for app not supporting always-on vpn [CHAR LIMIT=NONE] -->
     <string name="vpn_not_supported_by_this_app">Not supported by this app</string>
+    <!-- Preference title for forcing all network connections to go through VPN. -->
+    <string name="vpn_require_connection">Only allow connections through VPN</string>
+    <!-- Preference summary when the preference to force all network connections to go through a VPN is enabled, blocking all other network traffic. In this case apps must use the VPN for all connections. -->
+    <string name="vpn_lockdown_active">Lockdown active</string>
+    <!-- Preference summary when the preference to force all network connections to go through a VPN is disabled. In this case use of the VPN is optional for apps. -->
+    <string name="vpn_lockdown_inactive">Lockdown inactive</string>
 
     <!-- Summary describing the always-on VPN feature. [CHAR LIMIT=NONE] -->
     <string name="vpn_lockdown_summary">Select a VPN profile to always remain connected to. Network traffic will only be allowed when connected to this VPN.</string>
@@ -5946,7 +5929,7 @@
     </plurals>
 
     <!-- Title for setting tile leading to network and Internet settings [CHAR LIMIT=40]-->
-    <string name="network_dashboard_title">Network &amp; Internet</string>
+    <string name="network_dashboard_title">Network &amp; internet</string>
     <!-- Title for setting tile leading to Connected devices settings [CHAR LIMIT=40]-->
     <string name="connected_devices_dashboard_title">Connected devices</string>
     <!-- Title for setting tile leading to Apps & Notification settings [CHAR LIMIT=40]-->
@@ -6015,6 +5998,7 @@
     <string name="keywords_profile_challenge">work challenge, work, profile</string>
     <string name="keywords_unification">work profile, managed profile, unify, unification, work, profile</string>
     <string name="keywords_gesture">gesture</string>
+    <string name="keywords_payment_settings">pay, tap, payments</string>
 
     <!-- NFC Wi-Fi pairing/setup strings-->
 
@@ -6243,25 +6227,19 @@
     <string name="notification_importance_none">Not set</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: blocked importance level description -->
-    <string name="notification_importance_blocked">Never show notifications from this app</string>
+    <string name="notification_importance_blocked">Never show notifications</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: min importance level description -->
-    <string name="notification_importance_min">No full screen interruption, peeking, sound, or vibration. Show at the bottom of the notification list. Hide from lock screen and status bar.</string>
+    <string name="notification_importance_min">No sound or visual interruption</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: low importance level description -->
-    <string name="notification_importance_low">No full screen interruption, peeking, sound, or vibration.</string>
+    <string name="notification_importance_low">Show silently</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: normal importance level description -->
-    <string name="notification_importance_default">No full screen interruption or peeking.</string>
+    <string name="notification_importance_default">Make sound</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance slider: high importance level description -->
-    <string name="notification_importance_high">Always peek. No full screen interruption.</string>
-
-    <!-- [CHAR LIMIT=100] Notification Importance slider: max importance level description -->
-    <string name="notification_importance_max">Always peek, and allow full screen interruption. Show at the top of the notification list.</string>
-
-    <!-- [CHAR LIMIT=100] Notification Importance slider: max importance level description -->
-    <string name="notification_importance_unspecified">App determines importance for each notification</string>
+    <string name="notification_importance_high">Make sound and pop on screen</string>
 
     <!-- [CHAR LIMIT=60] Notification importance reset button -->
     <string name="importance_reset">Reset</string>
@@ -6352,13 +6330,19 @@
     <string name="app_notification_block_title">Block all</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Block option description-->
-    <string name="app_notification_block_summary">Never show notifications from this app</string>
+    <string name="app_notification_block_summary">Never show these notifications</string>
 
     <!-- [CHAR LIMIT=NONE] Channel notification settings: Block option title -->
-    <string name="channel_notification_block_title">Block all</string>
+    <string name="notification_content_block_title">Show notifications</string>
 
     <!-- [CHAR LIMIT=NONE] Channel notification settings: Block option description-->
-    <string name="channel_notification_block_summary">Never show notifications from this channel</string>
+    <string name="notification_content_block_summary">Never show notifications in the shade or on peripheral devices</string>
+
+    <!-- [CHAR LIMIT=NONE] Channel notification settings: Badging option title -->
+    <string name="notification_badge_title">Show badge</string>
+
+    <!-- [CHAR LIMIT=NONE] Channel notification settings: Badge option description-->
+    <string name="notification_badge_summary">Show notifications as badges on the Home app, if supported.</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Override DND option title -->
     <string name="app_notification_override_dnd_title">Override Do Not Disturb</string>
@@ -6369,7 +6353,7 @@
     <!-- [CHAR LIMIT=NONE] App notification settings: Visibility override option title -->
     <string name="app_notification_visibility_override_title">On the lock screen</string>
 
-    <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when banned -->
+    <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when allowed -->
     <string name="app_notification_row_banned">Blocked</string>
 
     <!-- [CHAR LIMIT=40] Notification settings: App notifications row summary when high priority -->
@@ -6645,7 +6629,7 @@
     <string name="experimental_preference">(Experimental)</string>
 
     <!-- [CHAR LIMIT=45] Auto-rotate setting title -->
-    <string name="display_auto_rotate_title">When device is rotated</string>
+    <string name="display_auto_rotate_title">Device rotation</string>
     <!-- [CHAR LIMIT=70] Rotate when screen is turned option -->
     <string name="display_auto_rotate_rotate">Rotate the contents of the screen</string>
     <!-- [CHAR LIMIT=70] Keep the screen in portrait when rotated -->
@@ -6811,14 +6795,6 @@
     <string name="filter_notif_blocked_apps">Blocked</string>
     <!-- Label for showing apps with domain URLs (data URI with http or https) in list [CHAR LIMIT=30] -->
     <string name="filter_with_domain_urls_apps">With domain URLs</string>
-    <!-- Label for showing apps with priority notifications in list [CHAR LIMIT=50] -->
-    <string name="filter_notif_priority_apps">Overrides Do Not Disturb</string>
-    <!-- Label for showing apps redacting sensitive notifications in list [CHAR LIMIT=50] -->
-    <string name="filter_notif_sensitive_apps">No sensitive content on lock screen</string>
-    <!-- Label for showing apps hiding notifications from lockscreen [CHAR LIMIT=50] -->
-    <string name="filter_notif_hide_notifications_apps">Never shown on lock screen</string>
-    <!-- Filter label for apps that the user has silenced [CHAR LIMIT=40] -->
-    <string name="filter_notif_silent">Shown silently</string>
 
     <!-- Title for advanced application management settings [CHAR LIMIT=30] -->
     <string name="advanced_apps">Advanced</string>
@@ -6980,6 +6956,9 @@
 
     <!-- Label for list to control apps that ignore battery saving restrictions [CHAR LIMIT=27]-->
     <string name="high_power_apps">Battery optimization</string>
+
+    <!-- Label for menu to launch additional battery info -->
+    <string name="additional_battery_info" translatable="false">Additional battery info</string>
 
     <!-- Filter for apps allowed to use a lot of power [CHAR LIMIT=25] -->
     <string name="high_power_filter_on">Not optimized</string>
@@ -7702,6 +7681,12 @@
     <!-- Title of developer options to set the smallest width of the screen [CHAR LIMIT=60]-->
     <string name="developer_smallest_width">Smallest width</string>
 
+    <!-- Title of developer options time [CHAR LIMIT=60]-->
+    <string name="developer_tile">Development mode</string>
+
+    <!-- Message shown when there is no active state for development mode [CHAR LIMIT=NONE]-->
+    <string name="developer_tile_unavailable">No active state selected</string>
+
     <!-- Message shown when there are no premium SMS apps [CHAR LIMIT=NONE] -->
     <string name="premium_sms_none">No installed apps have requested Premium SMS access</string>
 
@@ -7714,8 +7699,8 @@
     <!-- [CHAR LIMIT=25] Bluetooth is disabled. -->
     <string name="bluetooth_disabled">Disabled</string>
 
-    <!-- [CHAR LIMIT=60] Name of dev option called demo mode -->
-    <string name="demo_mode">Demo mode</string>
+    <!-- [CHAR LIMIT=60] Name of dev option called "System UI demo mode" -->
+    <string name="demo_mode">System UI demo mode</string>
 
     <!-- Title text for connecting to customer support [CHAR LIMIT=80]-->
     <string name="support_escalation_title">We\'re here to help</string>
@@ -7794,6 +7779,15 @@
 
     <!-- Checkbox text, when checked dialog will not show again [CHAR LIMIT=80] -->
     <string name="support_disclaimer_do_not_show">Do not show again</string>
+
+    <!-- Prefix text for the account picker, e.g. "Requesting as user@gmail.com" [CHAR LIMIT=60] -->
+    <string name="support_account_request_prefix">Requesting as</string>
+
+    <!-- Spinner dropdown text, when selected will try to add account [CHAR LIMIT=60] -->
+    <string name="support_account_picker_add_account">Add account</string>
+
+    <!-- Title for the dialog containing system information shown [CHAR LIMIT=30] -->
+    <string name="support_system_information_title">System information</string>
 
     <!-- [CHAR LIMIT=60] Title of work profile setting page -->
     <string name="managed_profile_settings_title">Work profile settings</string>
@@ -7973,6 +7967,8 @@
     <string name="auto_sync_personal_account_title">Auto sync personal account data</string>
     <!-- Switch label to enable auto sync work account [CHAR LIMIT=60] -->
     <string name="auto_sync_work_account_title">Auto sync work account data</string>
+    <!-- Preference label to sync account [CHAR LIMIT=60] -->
+    <string name="account_sync_title">Account sync</string>
 
     <!-- Enterprise Privacy --> <skip />
 
@@ -7983,20 +7979,47 @@
     <!-- Enterprise Privacy settings activity header, summarizing the powers that the admin has. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_header">To provide access to your work data, your organization may change settings and install software on your device, which could cause some of your personal content to be visible to your admin. Contact your organization\'s admin for more details.</string>
     <!-- Title for the 'What types of information can your organization see?' preference category. [CHAR LIMIT=60] -->
-    <string name="exposure_category">What types of information can your organization see?</string>
+    <string name="enterprise_privacy_exposure_category">What types of information can your organization see?</string>
     <!-- Title for the 'What changes affect what your organization can see?' preference category. [CHAR LIMIT=60] -->
-    <string name="exposure_changes_category">What changes affect what your organization can see?</string>
+    <string name="enterprise_privacy_exposure_changes_category">What changes affect what your organization can see?</string>
     <!-- Title for the 'What actions may impact your access to this device?' preference category. [CHAR LIMIT=60] -->
-    <string name="device_access_category">What actions may impact your access to this device?</string>
+    <string name="enterprise_privacy_device_access_category">What actions may impact your access to this device?</string>
     <!-- Label explaining that the admin can see data associated with his/her work account. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_data">Data associated with your work account, such as email and calendar</string>
+    <string name="enterprise_privacy_enterprise_data">Data associated with your work account, such as email and calendar</string>
     <!-- Label explaining that the admin can see all apps installed on the device. [CHAR LIMIT=NONE] -->
-    <string name="number_installed_packages_default">List of all apps on your device</string>
+    <string name="enterprise_privacy_number_installed_packages_default">List of all apps on your device</string>
     <!-- Label explaining that the admin can see all apps installed on the device. [CHAR LIMIT=NONE] -->
-    <plurals name="number_installed_packages">
+    <plurals name="enterprise_privacy_number_installed_packages">
         <item quantity="one">List of all <xliff:g id="count">%d</xliff:g> app on your device</item>
         <item quantity="other">List of all <xliff:g id="count">%d</xliff:g> apps on your device</item>
     </plurals>
     <!-- Label explaining that the admin can see app usage statistics. [CHAR LIMIT=NONE] -->
-    <string name="usage_stats">Usage (time spent and amount of data used) of each app on your device</string>
+    <string name="enterprise_privacy_usage_stats">Usage (time spent and amount of data used) of each app on your device</string>
+    <!-- Label explaining that the admin can retrieve network logs on the device. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_network_logs">Traffic logs on your device</string>
+    <!-- Label explaining that the admin can request bug reports on the device. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_bug_reports">Your most recent bug report</string>
+    <!-- Label explaining that the admin can retrieve security on from the device. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_security_logs">Your most recent security log</string>
+    <!-- Label indicating that the date at which the admin last took a particular action was "never" (i.e. the admin never took the action so far). -->
+    <string name="enterprise_privacy_never">Never</string>
+
+    <!-- Preference label for the Photos & Videos storage section. [CHAR LIMIT=50] -->
+    <string name="storage_photos_videos">Photos &amp; Videos</string>
+
+    <!-- Preference label for the Music & Audio storage section. [CHAR LIMIT=50] -->
+    <string name="storage_music_audio">Music &amp; Audio</string>
+
+    <!-- Preference label for the Games storage section. [CHAR LIMIT=50] -->
+    <string name="storage_games">Games</string>
+
+    <!-- Preference label for the Other apps storage section. [CHAR LIMIT=50] -->
+    <string name="storage_other_apps">Other apps</string>
+
+    <!-- Preference label for the Files storage section. [CHAR LIMIT=50] -->
+    <string name="storage_files">Files</string>
+
+    <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
+    <string name="storage_settings_2" >Phone Storage</string>
+
 </resources>

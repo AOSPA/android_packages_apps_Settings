@@ -21,15 +21,14 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.dashboard.conditional.Condition;
@@ -53,15 +52,6 @@ public class DashboardSummary extends InstrumentedFragment
     private static final boolean DEBUG_TIMING = false;
     private static final int MAX_WAIT_MILLIS = 700;
     private static final String TAG = "DashboardSummary";
-
-    public static final String[] INITIAL_ITEMS = new String[]{
-            Settings.WifiSettingsActivity.class.getName(),
-            Settings.BluetoothSettingsActivity.class.getName(),
-            Settings.DataUsageSummaryActivity.class.getName(),
-            Settings.PowerUsageSummaryActivity.class.getName(),
-            Settings.ManageApplicationsActivity.class.getName(),
-            Settings.StorageSettingsActivity.class.getName(),
-    };
 
     private static final String SUGGESTIONS = "suggestions";
 
@@ -102,10 +92,9 @@ public class DashboardSummary extends InstrumentedFragment
                     ((SettingsActivity) getActivity()).getDashboardCategories());
         }
 
-        Context context = getContext();
-        mConditionManager = ConditionManager.get(context, false);
-        mSuggestionParser = new SuggestionParser(context,
-                context.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
+        mConditionManager = ConditionManager.get(activity, false);
+        mSuggestionParser = new SuggestionParser(activity,
+                activity.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
         mSuggestionsChecks = new SuggestionsChecks(getContext());
         if (savedInstanceState == null) {
             mSuggestionsShownLogged = new ArrayList<>();
@@ -176,9 +165,12 @@ public class DashboardSummary extends InstrumentedFragment
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         long startTime = System.currentTimeMillis();
         if (hasWindowFocus) {
+            Log.d(TAG, "Listening for condition changes");
             mConditionManager.addListener(this);
+            Log.d(TAG, "conditions refreshed");
             mConditionManager.refreshAll();
         } else {
+            Log.d(TAG, "Stopped listening for condition changes");
             mConditionManager.remListener(this);
         }
         if (DEBUG_TIMING) {
@@ -219,9 +211,11 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setHasFixedSize(true);
         mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
         mDashboard.setListener(this);
+        Log.d(TAG, "adapter created");
         mAdapter = new DashboardAdapter(getContext(), mSuggestionParser, mMetricsFeatureProvider,
                 bundle, mConditionManager.getConditions());
         mDashboard.setAdapter(mAdapter);
+        mDashboard.setItemAnimator(new DashboardItemAnimator());
         mSummaryLoader.setSummaryConsumer(mAdapter);
         ConditionAdapterUtils.addDismiss(mDashboard);
         if (DEBUG_TIMING) {
@@ -241,11 +235,7 @@ public class DashboardSummary extends InstrumentedFragment
         new SuggestionLoader().execute();
         // Set categories on their own if loading suggestions takes too long.
         mHandler.postDelayed(() -> {
-            final Activity activity = getActivity();
-            if (activity != null) {
-                mAdapter.setCategoriesAndSuggestions(
-                        ((SettingsActivity) activity).getDashboardCategories(), null);
-            }
+            updateCategoryAndSuggestion(null /* tiles */);
         }, MAX_WAIT_MILLIS);
     }
 
@@ -257,7 +247,11 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onConditionsChanged() {
         Log.d(TAG, "onConditionsChanged");
+        final boolean scrollToTop = mLayoutManager.findFirstCompletelyVisibleItemPosition() <= 1;
         mAdapter.setConditions(mConditionManager.getConditions());
+        if (scrollToTop) {
+            mDashboard.scrollToPosition(0);
+        }
     }
 
     private class SuggestionLoader extends AsyncTask<Void, Void, List<Tile>> {
@@ -287,23 +281,27 @@ public class DashboardSummary extends InstrumentedFragment
         protected void onPostExecute(List<Tile> tiles) {
             // tell handler that suggestions were loaded quickly enough
             mHandler.removeCallbacksAndMessages(null);
+            updateCategoryAndSuggestion(tiles);
+        }
+    }
 
-            final Activity activity = getActivity();
-            if (activity == null) {
-                return;
-            }
+    @VisibleForTesting
+    void updateCategoryAndSuggestion(List<Tile> tiles) {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
 
-            if (mDashboardFeatureProvider.isEnabled()) {
-                // Temporary hack to wrap homepage category into a list. Soon we will create adapter
-                // API that takes a single category.
-                List<DashboardCategory> categories = new ArrayList<>();
-                categories.add(mDashboardFeatureProvider.getTilesForCategory(
-                        CategoryKey.CATEGORY_HOMEPAGE));
-                mAdapter.setCategoriesAndSuggestions(categories, tiles);
-            } else {
-                mAdapter.setCategoriesAndSuggestions(
-                        ((SettingsActivity) activity).getDashboardCategories(), tiles);
-            }
+        if (mDashboardFeatureProvider.isEnabled()) {
+            // Temporary hack to wrap homepage category into a list. Soon we will create adapter
+            // API that takes a single category.
+            List<DashboardCategory> categories = new ArrayList<>();
+            categories.add(mDashboardFeatureProvider.getTilesForCategory(
+                    CategoryKey.CATEGORY_HOMEPAGE));
+            mAdapter.setCategoriesAndSuggestions(categories, tiles);
+        } else {
+            mAdapter.setCategoriesAndSuggestions(
+                    ((SettingsActivity) activity).getDashboardCategories(), tiles);
         }
     }
 }

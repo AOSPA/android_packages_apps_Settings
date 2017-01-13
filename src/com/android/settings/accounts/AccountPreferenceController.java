@@ -26,6 +26,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -47,6 +48,7 @@ import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnPause;
 import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.Index;
 import com.android.settings.search.SearchIndexableRaw;
@@ -60,6 +62,7 @@ import java.util.List;
 
 import static android.content.Intent.EXTRA_USER;
 import static android.os.UserManager.DISALLOW_MODIFY_ACCOUNTS;
+import static android.os.UserManager.DISALLOW_REMOVE_MANAGED_PROFILE;
 import static android.os.UserManager.DISALLOW_REMOVE_USER;
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
@@ -86,6 +89,7 @@ public class AccountPreferenceController extends PreferenceController
     private boolean mIAEnabled;
     private int mAccountProfileOrder = ORDER_ACCOUNT_PROFILES;
     private AccountRestrictionHelper mHelper;
+    private DashboardFeatureProvider mDashboardFeatureProvider;
 
     /**
      * Holds data related to the accounts belonging to one profile.
@@ -132,19 +136,15 @@ public class AccountPreferenceController extends PreferenceController
         if (mAuthorities != null) {
             mAuthoritiesCount = mAuthorities.length;
         }
-        mIAEnabled = FeatureFactory.getFactory(mContext).getDashboardFeatureProvider(mContext)
-            .isEnabled();
+        mDashboardFeatureProvider =
+            FeatureFactory.getFactory(mContext).getDashboardFeatureProvider(mContext);
+        mIAEnabled = mDashboardFeatureProvider.isEnabled();
         mHelper = helper;
     }
 
     @Override
     public boolean isAvailable() {
         return !mUm.isManagedProfile();
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        return false;
     }
 
     @Override
@@ -172,7 +172,7 @@ public class AccountPreferenceController extends PreferenceController
                     rawData.add(data);
                 }
                 if (userInfo.isManagedProfile()) {
-                    if (!mHelper.hasBaseUserRestriction(DISALLOW_REMOVE_USER,
+                    if (!mHelper.hasBaseUserRestriction(DISALLOW_REMOVE_MANAGED_PROFILE,
                         UserHandle.myUserId())) {
                         SearchIndexableRaw data = new SearchIndexableRaw(mContext);
                         data.title = res.getString(R.string.remove_managed_profile_label);
@@ -250,11 +250,6 @@ public class AccountPreferenceController extends PreferenceController
     }
 
     private void updateUi() {
-        if (!mIAEnabled) {
-            // Load the preferences from an XML resource
-            mParent.addPreferencesFromResource(R.xml.account_settings);
-        }
-
         if (!isAvailable()) {
             // This should not happen
             Log.e(TAG, "We should not be showing settings for a managed profile");
@@ -264,6 +259,11 @@ public class AccountPreferenceController extends PreferenceController
             return;
         }
 
+        if (!mIAEnabled) {
+            // Load the preferences from an XML resource
+            mParent.addPreferencesFromResource(R.xml.account_settings);
+        }
+
         if (mUm.isLinkedUser()) {
             // Restricted user or similar
             UserInfo userInfo = mUm.getUserInfo(UserHandle.myUserId());
@@ -271,7 +271,6 @@ public class AccountPreferenceController extends PreferenceController
         } else {
             List<UserInfo> profiles = mUm.getProfiles(UserHandle.myUserId());
             final int profilesCount = profiles.size();
-            final boolean addCategory = profilesCount > 1;
             for (int i = 0; i < profilesCount; i++) {
                 updateProfileUi(profiles.get(i));
             }
@@ -298,7 +297,6 @@ public class AccountPreferenceController extends PreferenceController
             preferenceGroup.setContentDescription(
                 mContext.getString(R.string.account_settings));
         } else if (userInfo.isManagedProfile()) {
-            preferenceGroup.setLayoutResource(R.layout.work_profile_category);
             preferenceGroup.setTitle(R.string.category_work);
             String workGroupSummary = getWorkGroupSummary(context, userInfo);
             preferenceGroup.setSummary(workGroupSummary);
@@ -306,7 +304,7 @@ public class AccountPreferenceController extends PreferenceController
                 mContext.getString(R.string.accessibility_category_work, workGroupSummary));
             profileData.removeWorkProfilePreference = newRemoveWorkProfilePreference(context);
             mHelper.enforceRestrictionOnPreference(profileData.removeWorkProfilePreference,
-                DISALLOW_REMOVE_USER, UserHandle.myUserId());
+                DISALLOW_REMOVE_MANAGED_PROFILE, UserHandle.myUserId());
             profileData.managedProfilePreference = newManagedProfileSettings();
         } else {
             preferenceGroup.setTitle(R.string.category_personal);
@@ -400,7 +398,7 @@ public class AccountPreferenceController extends PreferenceController
     private void updateAccountTypes(ProfileData profileData) {
         profileData.preferenceGroup.removeAll();
         if (profileData.userInfo.isEnabled()) {
-            final ArrayList<AccountPreference> preferences = getAccountTypePreferences(
+            final ArrayList<AccountTypePreference> preferences = getAccountTypePreferences(
                     profileData.authenticatorHelper, profileData.userInfo.getUserHandle());
             final int count = preferences.size();
             for (int i = 0; i < count; i++) {
@@ -430,11 +428,11 @@ public class AccountPreferenceController extends PreferenceController
         }
     }
 
-    private ArrayList<AccountPreference> getAccountTypePreferences(AuthenticatorHelper helper,
+    private ArrayList<AccountTypePreference> getAccountTypePreferences(AuthenticatorHelper helper,
             UserHandle userHandle) {
         final String[] accountTypes = helper.getEnabledAccountTypes();
-        final ArrayList<AccountPreference> accountTypePreferences =
-                new ArrayList<AccountPreference>(accountTypes.length);
+        final ArrayList<AccountTypePreference> accountTypePreferences =
+                new ArrayList<AccountTypePreference>(accountTypes.length);
 
         for (int i = 0; i < accountTypes.length; i++) {
             final String accountType = accountTypes[i];
@@ -453,17 +451,42 @@ public class AccountPreferenceController extends PreferenceController
                     .getAccountsByTypeAsUser(accountType, userHandle);
             final boolean skipToAccount = accounts.length == 1
                     && !helper.hasAccountPreferences(accountType);
+            final Drawable icon = helper.getDrawableForType(mContext, accountType);
+            final Context prefContext = mParent.getPreferenceManager().getContext();
 
-            if (skipToAccount) {
+            if (mIAEnabled) {
+                // Add a preference row for each individual account
+                for (Account account : accounts) {
+                    final ArrayList<String> auths =
+                        helper.getAuthoritiesForAccountType(account.type);
+                    if (!AccountRestrictionHelper.showAccount(mAuthorities, auths)) {
+                        continue;
+                    }
+                    final Bundle fragmentArguments = new Bundle();
+                    fragmentArguments.putParcelable(AccountDetailDashboardFragment.KEY_ACCOUNT,
+                        account);
+                    fragmentArguments.putParcelable(AccountDetailDashboardFragment.KEY_USER_HANDLE,
+                        userHandle);
+                    fragmentArguments.putString(AccountDetailDashboardFragment.KEY_ACCOUNT_TYPE,
+                        accountType);
+                    fragmentArguments.putString(AccountDetailDashboardFragment.KEY_ACCOUNT_LABEL,
+                        label.toString());
+                    fragmentArguments.putInt(AccountDetailDashboardFragment.KEY_ACCOUNT_TITLE_RES,
+                        titleResId);
+                    fragmentArguments.putParcelable(EXTRA_USER, userHandle);
+                    accountTypePreferences.add(new AccountTypePreference(
+                        prefContext, account.name, titleResPackageName, titleResId, label,
+                        AccountDetailDashboardFragment.class.getName(), fragmentArguments, icon));
+                }
+            } else if (skipToAccount) {
                 final Bundle fragmentArguments = new Bundle();
                 fragmentArguments.putParcelable(AccountSyncSettings.ACCOUNT_KEY,
                         accounts[0]);
                 fragmentArguments.putParcelable(EXTRA_USER, userHandle);
 
-                accountTypePreferences.add(new AccountPreference(
-                    mParent.getPreferenceManager().getContext(), label, titleResPackageName,
-                    titleResId, AccountSyncSettings.class.getName(), fragmentArguments,
-                    helper.getDrawableForType(mContext, accountType)));
+                accountTypePreferences.add(new AccountTypePreference(
+                        prefContext, label, titleResPackageName,
+                    titleResId, AccountSyncSettings.class.getName(), fragmentArguments, icon));
             } else {
                 final Bundle fragmentArguments = new Bundle();
                 fragmentArguments.putString(ManageAccountsSettings.KEY_ACCOUNT_TYPE, accountType);
@@ -471,18 +494,23 @@ public class AccountPreferenceController extends PreferenceController
                         label.toString());
                 fragmentArguments.putParcelable(EXTRA_USER, userHandle);
 
-                accountTypePreferences.add(new AccountPreference(
-                    mParent.getPreferenceManager().getContext(), label, titleResPackageName,
-                    titleResId, ManageAccountsSettings.class.getName(), fragmentArguments,
-                    helper.getDrawableForType(mContext, accountType)));
+                accountTypePreferences.add(new AccountTypePreference(
+
+                        prefContext, label, titleResPackageName,
+                    titleResId, ManageAccountsSettings.class.getName(), fragmentArguments, icon));
             }
             helper.preloadDrawableForType(mContext, accountType);
         }
         // Sort by label
-        Collections.sort(accountTypePreferences, new Comparator<AccountPreference>() {
+        Collections.sort(accountTypePreferences, new Comparator<AccountTypePreference>() {
             @Override
-            public int compare(AccountPreference t1, AccountPreference t2) {
-                return t1.getitle().toString().compareTo(t2.getitle().toString());
+            public int compare(AccountTypePreference t1, AccountTypePreference t2) {
+                int result = 0;
+                if (mIAEnabled) {
+                    result = t1.getSummary().toString().compareTo(t2.getSummary().toString());
+                }
+                return result != 0
+                    ? result : t1.getTitle().toString().compareTo(t2.getTitle().toString());
             }
         });
         return accountTypePreferences;

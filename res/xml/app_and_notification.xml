@@ -17,11 +17,13 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/app_and_notification_dashboard_title">
 
     <Preference
         android:key="manage_perms"
         android:title="@string/app_permissions"
+        android:icon="@drawable/ic_apps"
         android:order="-130"
         settings:keywords="@string/keywords_app_permissions">
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>

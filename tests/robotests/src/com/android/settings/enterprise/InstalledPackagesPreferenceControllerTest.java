@@ -73,7 +73,8 @@ public final class InstalledPackagesPreferenceControllerTest {
                 return null;
             }}).when(mFeatureFactory.applicationFeatureProvider)
                     .calculateNumberOfInstalledApps(anyObject());
-        when(mContext.getResources().getQuantityString(R.plurals.number_installed_packages, 20, 20))
+        when(mContext.getResources().getQuantityString(
+                R.plurals.enterprise_privacy_number_installed_packages, 20, 20))
                 .thenReturn("20 packages");
         mController.updateState(preference);
         assertThat(preference.getTitle()).isEqualTo("20 packages");

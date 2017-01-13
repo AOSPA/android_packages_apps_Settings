@@ -16,7 +16,7 @@
 package com.android.settings.search2;
 
 import android.app.Activity;
-import android.widget.SearchView;
+import android.content.Context;
 import android.view.Menu;
 
 /**
@@ -27,12 +27,33 @@ public interface SearchFeatureProvider {
     /**
      * @return true to use the new version of search
      */
-    boolean isEnabled();
+    boolean isEnabled(Context context);
 
     /**
      * Inserts the Menu items into Settings activity.
+     *
      * @param menu Items will be inserted into this menu.
      * @param activity The activity that precedes SearchActivity.
      */
     void setUpSearchMenu(Menu menu, Activity activity);
+
+    /**
+     * Returns a new loader to search in index database.
+     */
+    DatabaseResultLoader getDatabaseSearchLoader(Context context, String query);
+
+    /**
+     * Returns a new loader to search installed apps.
+     */
+    InstalledAppResultLoader getInstalledAppSearchLoader(Context context, String query);
+
+    /**
+     * Returns the manager for indexing Settings data.
+     */
+    DatabaseIndexingManager getIndexingManager(Context context);
+
+    /**
+     * Updates the Settings indexes
+     */
+    void updateIndex(Context context);
 }
