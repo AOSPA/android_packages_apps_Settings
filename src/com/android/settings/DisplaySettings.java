@@ -73,6 +73,7 @@ import static android.provider.Settings.Secure.DOUBLE_TAP_TO_WAKE;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static android.provider.Settings.Secure.SRGB_ENABLED;
 import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
+import static android.provider.Settings.System.DOUBLE_TAP_SLEEP_GESTURE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
@@ -98,6 +99,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_LIFT_TO_WAKE = "lift_to_wake";
     private static final String KEY_DOZE = "doze";
+    private static final String KEY_DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
     private static final String KEY_TAP_TO_WAKE = "tap_to_wake";
     private static final String KEY_SRGB = "srgb";
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
@@ -133,6 +135,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private Preference mScreenSaverPreference;
     private SwitchPreference mLiftToWakePreference;
     private SwitchPreference mDozePreference;
+    private SwitchPreference mDoubleTapPreference;
     private SwitchPreference mTapToWakePreference;
     private SwitchPreference mSrgbPreference;
     private SwitchPreference mAutoBrightnessPreference;
@@ -498,6 +501,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mDozePreference.setChecked(value != 0);
         }
 
+        // Update double tap to sleep if it is available.
+        if (mDoubleTapPreference != null) {
+            int value = Settings.System.getInt(getContentResolver(), DOUBLE_TAP_SLEEP_GESTURE, 0);
+            mDoubleTapPreference.setChecked(value != 0);
+        }
+
         if (mSrgbPreference != null) {
             int value = Settings.Secure.getInt(getContentResolver(), SRGB_ENABLED, 0);
             mSrgbPreference.setChecked(value != 0);
@@ -572,6 +581,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (preference == mTapToWakePreference) {
             boolean value = (Boolean) objValue;
             Settings.Secure.putInt(getContentResolver(), DOUBLE_TAP_TO_WAKE, value ? 1 : 0);
+        }
+        if (preference == mDoubleTapPreference) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(getContentResolver(), DOUBLE_TAP_SLEEP_GESTURE, value ? 1 : 0);
         }
         if (preference == mSrgbPreference) {
             boolean value = (Boolean) objValue;
