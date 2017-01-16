@@ -92,6 +92,12 @@
                 android:summary="@string/doze_summary" />
 
         <SwitchPreference
+                android:key="double_tap_sleep_gesture"
+                android:title="@string/double_tap_to_sleep_title"
+                android:summary="@string/double_tap_to_sleep_summary"
+                android:defaultValue="false" />
+
+        <SwitchPreference
                 android:key="tap_to_wake"
                 android:title="@string/tap_to_wake"
                 android:summary="@string/tap_to_wake_summary" />
