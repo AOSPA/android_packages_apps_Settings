@@ -218,7 +218,8 @@
 
         <activity android:name=".search2.SearchActivity"
                   android:label="@string/search_settings"
-                  android:icon="@drawable/ic_search_history">
+                  android:icon="@drawable/ic_search_history"
+                  android:parentActivityName="Settings">
         </activity>
 
         <!-- Top-level settings -->
@@ -272,6 +273,27 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity android:name="Settings$ConfigureWifiSettingsActivity"
+                android:taskAffinity="com.android.settings"
+                android:label="@string/wifi_configure_titlebar"
+                android:icon="@drawable/ic_settings_wireless"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:parentActivityName="Settings$WifiSettingsActivity">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.CONFIGURE_WIFI_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.wifi.ConfigureWifiSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -3031,7 +3053,7 @@
 
         <activity android:name=".Settings$ConnectedDeviceDashboardActivity"
                   android:label="@string/connected_devices_dashboard_title"
-                  android:icon="@drawable/ic_bt_laptop">
+                  android:icon="@drawable/ic_devices_other">
             <intent-filter android:priority="10">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3043,7 +3065,7 @@
 
         <activity android:name=".Settings$AppAndNotificationDashboardActivity"
                   android:label="@string/app_and_notification_dashboard_title"
-                  android:icon="@drawable/ic_settings_applications">
+                  android:icon="@drawable/ic_apps">
             <intent-filter android:priority="9">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3091,7 +3113,7 @@
         </activity-alias>
 
         <activity android:name=".Settings$StorageDashboardActivity"
-                  android:label="@string/storage_settings_2"
+                  android:label="@string/storage_settings"
                   android:icon="@drawable/ic_settings_storage">
             <intent-filter android:priority="5">
                 <action android:name="com.android.settings.action.SETTINGS" />
@@ -3099,7 +3121,7 @@
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.deviceinfo.StorageDashboardFragment" />
+                       android:value="com.android.settings.deviceinfo.StorageSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -3169,7 +3191,7 @@
 
         <activity android:name=".Settings$SupportDashboardActivity"
                   android:label="@string/page_tab_title_support"
-                  android:icon="@drawable/ic_support_24dp">
+                  android:icon="@drawable/ic_help">
             <intent-filter android:priority="0">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3337,7 +3359,8 @@
         </activity-alias>
 
         <activity-alias android:name="AppNotificationDashboardAlias"
-                        android:targetActivity="Settings$NotificationAppListActivity">
+                        android:targetActivity="Settings$NotificationAppListActivity"
+                        android:icon="@drawable/ic_notifications">
             <intent-filter android:priority="150">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3345,6 +3368,7 @@
                        android:value="com.android.settings.category.ia.apps"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.NotificationApps"/>
+
         </activity-alias>
 
         <activity-alias android:name="ConfigureNotificationDashboardAlias"
@@ -3374,7 +3398,7 @@
         <activity-alias android:name="AppDefaultDashboardAlias"
                         android:targetActivity="Settings$AdvancedAppsActivity"
                         android:label="@string/app_default_dashboard_title"
-                        android:icon="@drawable/ic_settings_applications">
+                        android:icon="@drawable/ic_adb">
             <intent-filter android:priority="130">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>

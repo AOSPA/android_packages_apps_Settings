@@ -1582,9 +1582,13 @@
     <!-- Toast message when Wi-Fi or bluetooth is disallowed in airplane mode -->
     <string name="wifi_in_airplane_mode">In Airplane mode</string>
     <!-- Checkbox title for option to notify user when open networks are nearby -->
-    <string name="wifi_notify_open_networks">Network notification</string>
+    <string name="wifi_notify_open_networks">Open network notification</string>
     <!-- Checkbox summary for option to notify user when open networks are nearby [CHAR LIMIT=60]-->
-    <string name="wifi_notify_open_networks_summary">Notify whenever a public network is available</string>
+    <string name="wifi_notify_open_networks_summary">Notify whenever a high quality open network is available</string>
+    <!-- Checkbox title for option to enable Wi-Fi when saved networks are nearby -->
+    <string name="wifi_wakeup">Turn Wi\u2011Fi back on</string>
+    <!-- Checkbox summary for option to enable Wi-Fi when saved networks are nearby [CHAR LIMIT=60]-->
+    <string name="wifi_wakeup_summary">Automatically turn on Wi\u2011Fi near saved networks</string>
     <!-- Checkbox title for option to toggle poor network detection -->
     <string name="wifi_poor_network_detection">Avoid poor connections</string>
     <!-- Checkbox summary for option to toggle poor network detection -->
@@ -3982,12 +3986,6 @@
     <string name="accessibility_screen_magnification_summary"><b>To zoom</b>, quickly tap the screen 3 times with one finger.\n<ul><li>Drag 2 or more fingers to scroll</li>\n<li>Pinch 2 or more fingers together or apart to adjust zoom</li></ul>\n\n<b>To zoom temporarily</b>, quickly tap the screen 3 times and hold down your finger on the third tap.\n<ul><li>Drag your finger to move around the screen</li>\n<li>Lift your finger to zoom out</li></ul>\n\nYou can\'t zoom in on the keyboard and navigation bar.</string>
     <!-- Title for the preference to enable the global geture that turns on accessibility. [CHAR LIMIT=35] -->
     <string name="accessibility_global_gesture_preference_title">Accessibility shortcut</string>
-    <!-- Summary for the preference to enable the global geture that turns on accessibility (on state). [CHAR LIMIT=60] -->
-    <string name="accessibility_global_gesture_preference_summary_on">On</string>
-    <!-- Summary for the preference screen to enable the global geture that turns on accessibility (off state). [CHAR LIMIT=35] -->
-    <string name="accessibility_global_gesture_preference_summary_off">Off</string>
-    <!--  Description for the preference screen to enable the global geture taht turns on accessibility. [CHAR LIMIT=none] -->
-    <string name="accessibility_global_gesture_preference_description">When this feature is turned on, you can quickly activate accessibility features in two steps:\n\nStep 1: Press and hold the power button until you hear a sound or feel a vibration.\n\nStep 2: Touch and hold two fingers until you hear audio confirmation.\n\nIf the device has multiple users, using this shortcut on the lock screen temporarily enables accessibility until the device is unlocked.</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
@@ -6161,6 +6159,11 @@
     <!-- Work Sound: Message for dialog shown when enabling sync with personal sounds. [CHAR LIMIT=none] -->
     <string name="work_sync_dialog_message">Your current work profile sounds will be replaced with your personal profile sounds</string>
 
+    <!-- Ringtones preference category: Title for the Ringotnes preference categories. [CHAR LIMIT=none] -->
+    <string name="ringtones_category_preference_title">Ringtones</string>
+
+    <!-- Other sounds and vibrations preference category: Title for the Other sounds and vibrations preference categories. [CHAR LIMIT=none] -->
+    <string name="other_sound_category_preference_title">Other sounds and vibrations</string>
 
     <!-- Configure Notifications Settings title. [CHAR LIMIT=30] -->
     <string name="configure_notification_settings">Notification preferences</string>
@@ -8003,6 +8006,34 @@
     <string name="enterprise_privacy_security_logs">Your most recent security log</string>
     <!-- Label indicating that the date at which the admin last took a particular action was "never" (i.e. the admin never took the action so far). -->
     <string name="enterprise_privacy_never">Never</string>
+    <!-- Label indicating how many apps were installed on the device by the admin. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_enterprise_installed_packages">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app installed by your admin</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps installed by your admin</item>
+    </plurals>
+    <!-- Label indicating how many apps were granted permission to access the device's location by the admin. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_location_access_packages">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app allowed access to your location by your admin</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps allowed access to your location by your admin</item>
+    </plurals>
+    <!-- Label indicating how many apps were granted permission to access the microphone by the admin. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_microphone_access_packages">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app allowed access to your microphone by your admin</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps allowed access to your microphone by your admin</item>
+    </plurals>
+    <!-- Label indicating how many apps were granted permission to access the camera by the admin. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_camera_access_packages">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app allowed access to your camera by your admin</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps allowed access to your camera by your admin</item>
+    </plurals>
+    <!-- Label explaining that an always-on VPN was set by the admin for the entire device. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_always_on_vpn_device">Always-on VPN turned on</string>
+    <!-- Label explaining that an always-on VPN was set by the admin in the personal profile. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_always_on_vpn_personal">Always-on VPN turned on in your personal profile</string>
+    <!-- Label explaining that an always-on VPN was set by the admin in the work profile. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_always_on_vpn_work">Always-on VPN turned on in your work profile</string>
+    <!-- Label explaining that a global HTTP proxy was set by the admin. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_global_http_proxy">Global HTTP proxy set</string>
 
     <!-- Preference label for the Photos & Videos storage section. [CHAR LIMIT=50] -->
     <string name="storage_photos_videos">Photos &amp; Videos</string>
@@ -8021,5 +8052,21 @@
 
     <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
     <string name="storage_settings_2" >Phone Storage</string>
+
+    <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
+    <string name="storage_size_large_alternate"><xliff:g id="number" example="128">^1</xliff:g><small><small> <xliff:g id="unit" example="KB">^2</xliff:g> used</small></small></string>
+    <!-- Summary of a single storage volume free space. [CHAR LIMIT=48]-->
+    <string name="storage_volume_free"><xliff:g id="total" example="32GB">%1$s</xliff:g> free</string>
+    <!-- The percent of storage used by a storage volume. Exposed inside of a donut graph. [CHAR LIMIT=4]-->
+    <string name="storage_percent_used"><xliff:g id="percent" example="50%">%1$s</xliff:g>%%</string>
+
+    <!-- Indicates if the automatic storage manager is enabled or not. [CHAR_LIMIT=40] -->
+    <string name="storage_manager_indicator">Storage Manager: <xliff:g id="status" example="on">^1</xliff:g></string>
+
+    <!-- Off status for the automatic storage manager. [CHAR_LIMIT=10] -->
+    <string name="storage_manager_indicator_off">Off</string>
+
+    <!-- On status for the automatic storage manager. [CHAR_LIMIT=10] -->
+    <string name="storage_manager_indicator_on">On</string>
 
 </resources>

@@ -40,6 +40,7 @@ import org.robolectric.annotation.Config;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.anyObject;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.when;
 
 /**
@@ -68,11 +69,12 @@ public final class InstalledPackagesPreferenceControllerTest {
         final Preference preference = new Preference(mContext, null, 0, 0);
         doAnswer(new Answer() {
             public Object answer(InvocationOnMock invocation) {
-                ((ApplicationFeatureProvider.NumberOfInstalledAppsCallback)
-                        invocation.getArguments()[0]).onNumberOfInstalledAppsResult(20);
+                ((ApplicationFeatureProvider.NumberOfAppsCallback)
+                        invocation.getArguments()[1]).onNumberOfAppsResult(20);
                 return null;
             }}).when(mFeatureFactory.applicationFeatureProvider)
-                    .calculateNumberOfInstalledApps(anyObject());
+                    .calculateNumberOfInstalledApps(
+                            eq(ApplicationFeatureProvider.IGNORE_INSTALL_REASON), anyObject());
         when(mContext.getResources().getQuantityString(
                 R.plurals.enterprise_privacy_number_installed_packages, 20, 20))
                 .thenReturn("20 packages");

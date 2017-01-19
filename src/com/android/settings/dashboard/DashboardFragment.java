@@ -17,6 +17,7 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -298,8 +299,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         if (mSummaryLoader != null) {
             mSummaryLoader.release();
         }
+        final Context context = getContext();
         mSummaryLoader = new SummaryLoader(getActivity(), getCategoryKey());
         mSummaryLoader.setSummaryConsumer(this);
+        final TypedArray a = context.obtainStyledAttributes(new int[] {
+            mDashboardFeatureProvider.isEnabled() ? android.R.attr.colorControlNormal
+                : android.R.attr.colorAccent});
+        final int tintColor = a.getColor(0, context.getColor(android.R.color.white));
+        a.recycle();
+        final String pkgName = context.getPackageName();
         // Install dashboard tiles.
         for (Tile tile : tiles) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
@@ -309,6 +317,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             }
             if (!displayTile(tile)) {
                 continue;
+            }
+            if (pkgName != null && tile.intent != null
+                && !pkgName.equals(tile.intent.getComponent().getPackageName())) {
+                // If this drawable is coming from outside Settings, tint it to match the color.
+                tile.icon.setTint(tintColor);
             }
             if (mDashboardTilePrefKeys.contains(key)) {
                 // Have the key already, will rebind.

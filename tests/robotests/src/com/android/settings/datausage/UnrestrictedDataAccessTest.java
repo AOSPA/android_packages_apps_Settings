@@ -15,31 +15,44 @@
  */
 package com.android.settings.datausage;
 
+import com.android.internal.logging.nano.MetricsProto;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Process;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UnrestrictedDataAccessTest {
 
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Context mContext;
+
     @Mock
     private ApplicationsState.AppEntry mAppEntry;
     private UnrestrictedDataAccess mFragment;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         mFragment = new UnrestrictedDataAccess();
     }
 
@@ -57,6 +70,17 @@ public class UnrestrictedDataAccessTest {
         mAppEntry.info.uid = Process.FIRST_APPLICATION_UID - 10;
 
         assertThat(mFragment.shouldAddPreference(mAppEntry)).isFalse();
+    }
+
+    @Test
+    public void logSpecialPermissionChange() {
+        mFragment.logSpecialPermissionChange(true, "app");
+        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
+                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_UNL_DATA_ALLOW), eq("app"));
+
+        mFragment.logSpecialPermissionChange(false, "app");
+        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
+                eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_UNL_DATA_DENY), eq("app"));
     }
 
 }

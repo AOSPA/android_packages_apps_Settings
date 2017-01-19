@@ -63,7 +63,6 @@ import java.util.List;
 import static android.content.Intent.EXTRA_USER;
 import static android.os.UserManager.DISALLOW_MODIFY_ACCOUNTS;
 import static android.os.UserManager.DISALLOW_REMOVE_MANAGED_PROFILE;
-import static android.os.UserManager.DISALLOW_REMOVE_USER;
 import static android.provider.Settings.EXTRA_AUTHORITIES;
 
 public class AccountPreferenceController extends PreferenceController
@@ -286,6 +285,9 @@ public class AccountPreferenceController extends PreferenceController
     }
 
     private void updateProfileUi(final UserInfo userInfo) {
+        if (mParent.getPreferenceManager() == null) {
+            return;
+        }
         final Context context = mContext;
         final ProfileData profileData = new ProfileData();
         profileData.userInfo = userInfo;
@@ -311,7 +313,10 @@ public class AccountPreferenceController extends PreferenceController
             preferenceGroup.setContentDescription(
                 mContext.getString(R.string.accessibility_category_personal));
         }
-        mParent.getPreferenceScreen().addPreference(preferenceGroup);
+        final PreferenceScreen screen = mParent.getPreferenceScreen();
+        if (screen != null) {
+            screen.addPreference(preferenceGroup);
+        }
         profileData.preferenceGroup = preferenceGroup;
         if (userInfo.isEnabled()) {
             profileData.authenticatorHelper = new AuthenticatorHelper(context,
@@ -367,6 +372,9 @@ public class AccountPreferenceController extends PreferenceController
 
     void cleanUpPreferences() {
         PreferenceScreen screen = mParent.getPreferenceScreen();
+        if (screen == null) {
+            return;
+        }
         for (int i = 0; i < mProfiles.size(); i++) {
             final PreferenceGroup preferenceGroup = mProfiles.valueAt(i).preferenceGroup;
             screen.removePreference(preferenceGroup);
@@ -396,6 +404,11 @@ public class AccountPreferenceController extends PreferenceController
     }
 
     private void updateAccountTypes(ProfileData profileData) {
+        if (mParent.getPreferenceManager() == null
+                || profileData.preferenceGroup.getPreferenceManager() == null) {
+            // This could happen if activity is finishing
+            return;
+        }
         profileData.preferenceGroup.removeAll();
         if (profileData.userInfo.isEnabled()) {
             final ArrayList<AccountTypePreference> preferences = getAccountTypePreferences(

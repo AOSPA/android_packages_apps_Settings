@@ -22,8 +22,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.MatrixCursor;
 import android.graphics.drawable.Drawable;
-
 import android.util.ArrayMap;
+
 import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.SubSettings;
@@ -46,51 +46,50 @@ import static com.google.common.truth.Truth.assertThat;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class CursorToSearchResultConverterTest {
 
-    private CursorToSearchResultConverter mConverter;
-
-    private static final String[] COLUMNS = new String[]{"rank", "title", "summary_on",
-            "summary off", "entries", "keywords", "class name", "screen title", "icon",
-            "intent action", "target package", "target class", "enabled", "key",
-            "payload_type", "payload"};
-
-    private static final String[] TITLES = new String[]{"title1", "title2", "title3"};
-    private static final String SUMMARY = "SUMMARY";
+    private static final String ID = "id";
+    private static final String[] TITLES = {"title1", "title2", "title3"};
+    private static final String SUMMARY = "summary";
+    private static final String TARGET_PACKAGE = "a.b.c";
+    private static final String TARGET_CLASS = "a.b.c.class";
+    private static final String QUERY = "query";
+    private static final Intent INTENT = new Intent("com.android.settings");
+    private static final int ICON = R.drawable.ic_search_history;
+    private static final int BASE_RANK = 1;
     private static final int EXAMPLES = 3;
-    private static final Intent mIntent = new Intent("com.android.settings");
-    private static final int mIcon = R.drawable.ic_search_history;
 
     private Drawable mDrawable;
+    private CursorToSearchResultConverter mConverter;
 
     @Before
     public void setUp() {
         Context context = Robolectric.buildActivity(Activity.class).get();
-        mDrawable = context.getDrawable(mIcon);
-        mConverter = new CursorToSearchResultConverter(context);
+        mDrawable = context.getDrawable(ICON);
+        mConverter = new CursorToSearchResultConverter(context, QUERY);
     }
 
     @Test
     public void testParseNullResults_ReturnsNull() {
-        List<SearchResult> results = mConverter.convertCursor(null);
+        List<SearchResult> results = mConverter.convertCursor(null, BASE_RANK);
         assertThat(results).isNull();
     }
 
     @Test
     public void testParseCursor_NotNull() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
         assertThat(results).isNotNull();
     }
 
     @Test
     public void testParseCursor_MatchesRank() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
         for (int i = 0; i < EXAMPLES; i++) {
-            assertThat(results.get(i).rank).isEqualTo(i);
+            assertThat(results.get(i).rank).isEqualTo(BASE_RANK);
         }
     }
 
     @Test
     public void testParseCursor_MatchesTitle() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
         for (int i = 0; i < EXAMPLES; i++) {
             assertThat(results.get(i).title).isEqualTo(TITLES[i]);
         }
@@ -98,7 +97,7 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseCursor_MatchesSummary() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
         for (int i = 0; i < EXAMPLES; i++) {
             assertThat(results.get(i).summary).isEqualTo(SUMMARY);
         }
@@ -106,9 +105,10 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseCursor_MatchesIcon() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
         for (int i = 0; i < EXAMPLES; i++) {
             Drawable resultDrawable = results.get(i).icon;
+            assertThat(resultDrawable).isNotNull();
             assertThat(resultDrawable.toString()).isEqualTo(mDrawable.toString());
         }
     }
@@ -116,7 +116,7 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testParseCursor_NoIcon() {
         List<SearchResult> results = mConverter.convertCursor(
-                getDummyCursor(false /* hasIcon */));
+                getDummyCursor(false /* hasIcon */), BASE_RANK);
         for (int i = 0; i < EXAMPLES; i++) {
             Drawable resultDrawable = results.get(i).icon;
             assertThat(resultDrawable).isNull();
@@ -125,7 +125,7 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseCursor_MatchesPayloadType() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
         ResultPayload payload;
         for (int i = 0; i < EXAMPLES; i++) {
             payload = results.get(i).payload;
@@ -135,27 +135,24 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseCursor_MatchesIntentForSubSettings() {
-        MatrixCursor cursor = new MatrixCursor(COLUMNS);
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
         final String BLANK = "";
         cursor.addRow(new Object[]{
-                0,       // rank
-                TITLES[0],
-                SUMMARY,
+                ID,      // Doc ID
+                TITLES[0], // Title
+                SUMMARY, // Summary on
                 SUMMARY, // summary off
-                BLANK,   // entries
-                BLANK,   // Keywords
                 GestureSettings.class.getName(),
                 BLANK,   // screen title
                 null,    // icon
                 BLANK,   // action
                 null,    // target package
                 BLANK,   // target class
-                BLANK,   // enabled
-                BLANK,   // key
+                BLANK,   // Key
                 0,       // Payload Type
                 null     // Payload
         });
-        List<SearchResult> results = mConverter.convertCursor(cursor);
+        List<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
         IntentPayload payload = (IntentPayload) results.get(0).payload;
         Intent intent = payload.intent;
         assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
@@ -163,18 +160,44 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseCursor_MatchesIntentPayload() {
-        List<SearchResult> results = mConverter.convertCursor(getDummyCursor());
+        List<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
         IntentPayload payload;
         for (int i = 0; i < EXAMPLES; i++) {
             payload = (IntentPayload) results.get(i).payload;
             Intent intent = payload.intent;
-            assertThat(intent.getAction()).isEqualTo(mIntent.getAction());
+            assertThat(intent.getAction()).isEqualTo(INTENT.getAction());
         }
     }
 
     @Test
+    public void testParseCursor_MatchesIntentPayloadForExternalApps() {
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
+        cursor.addRow(new Object[]{
+                ID,      // Doc ID
+                TITLES[0], // Title
+                SUMMARY, // Summary on
+                SUMMARY, // summary off
+                null,    // class
+                TITLES[0], // Title
+                null,    // icon
+                Intent.ACTION_VIEW,   // action
+                TARGET_PACKAGE,    // target package
+                TARGET_CLASS,   // target class
+                QUERY,   // Key
+                PayloadType.INTENT,    // Payload Type
+                null // Payload
+        });
+        List<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
+        IntentPayload payload = (IntentPayload) results.get(0).payload;
+        Intent intent = payload.intent;
+
+        assertThat(intent.getComponent().getPackageName()).isEqualTo(TARGET_PACKAGE);
+        assertThat(intent.getComponent().getClassName()).isEqualTo(TARGET_CLASS);
+    }
+
+    @Test
     public void testParseCursor_MatchesInlineSwitchPayload() {
-        MatrixCursor cursor = new MatrixCursor(COLUMNS);
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
         final String BLANK = "";
         final String uri = "test.com";
         final int type = ResultPayload.PayloadType.INLINE_SWITCH;
@@ -185,24 +208,21 @@ public class CursorToSearchResultConverterTest {
         final InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, map);
 
         cursor.addRow(new Object[]{
-                0,       // rank
-                TITLES[0],
-                SUMMARY,
+                ID,      // Doc ID
+                TITLES[0], // Title
+                SUMMARY, // Summary on
                 SUMMARY, // summary off
-                BLANK,   // entries
-                BLANK,   // Keywords
                 GestureSettings.class.getName(),
                 BLANK,   // screen title
                 null,    // icon
                 BLANK,   // action
                 null,    // target package
                 BLANK,   // target class
-                BLANK,   // enabled
-                BLANK,   // key
+                BLANK,   // Key
                 type,    // Payload Type
                 ResultPayloadUtils.marshall(payload) // Payload
         });
-        List<SearchResult> results = mConverter.convertCursor(cursor);
+        List<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
         InlineSwitchPayload newPayload = (InlineSwitchPayload) results.get(0).payload;
 
         assertThat(newPayload.settingsUri).isEqualTo(uri);
@@ -217,27 +237,22 @@ public class CursorToSearchResultConverterTest {
     }
 
     private MatrixCursor getDummyCursor(boolean hasIcon) {
-        MatrixCursor cursor = new MatrixCursor(COLUMNS);
+        MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
         final String BLANK = "";
 
         for (int i = 0; i < EXAMPLES; i++) {
-            ArrayList<String> item = new ArrayList<>(COLUMNS.length);
-            item.add(Integer.toString(i));
-            item.add(TITLES[i]);
-            item.add(SUMMARY);
+            ArrayList<String> item = new ArrayList<>(DatabaseResultLoader.SELECT_COLUMNS.length);
+            item.add(ID + i); // Doc ID
+            item.add(TITLES[i]); // Title
+            item.add(SUMMARY); // Summary on
             item.add(BLANK); // summary off
-            item.add(BLANK); // entries
-            item.add(BLANK); // keywords
             item.add(BLANK); // classname
             item.add(BLANK); // screen title
-            item.add(hasIcon ? Integer.toString(mIcon) : null);
-            item.add(mIntent.getAction());
+            item.add(hasIcon ? Integer.toString(ICON) : null); // Icon
+            item.add(INTENT.getAction()); // Intent action
             item.add(BLANK); // target package
             item.add(BLANK); // target class
-            item.add(BLANK); // enabled
-            item.add(BLANK); // key
-                             // Note there is no user id. This is omitted because it is not being
-                             // queried. Should the queries change, so should this method.
+            item.add(BLANK); // Key
             item.add(Integer.toString(0));     // Payload Type
             item.add(null); // Payload
 

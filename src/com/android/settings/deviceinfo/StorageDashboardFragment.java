@@ -35,6 +35,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.FooterPreference;
+import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
@@ -45,9 +46,9 @@ public class StorageDashboardFragment extends DashboardFragment {
     private static final String TAG = "StorageDashboardFrag";
 
     private VolumeInfo mVolume;
-    private long mTotalSize;
 
     private StorageSummaryDonutPreferenceController mSummaryController;
+    private StorageItemPreferenceController mPreferenceController;
 
     private boolean isVolumeValid() {
         return (mVolume != null) && (mVolume.getType() == VolumeInfo.TYPE_PRIVATE)
@@ -61,23 +62,27 @@ public class StorageDashboardFragment extends DashboardFragment {
 
         // Initialize the storage sizes that we can quickly calc.
         StorageManager sm = context.getSystemService(StorageManager.class);
-        mVolume = sm.findVolumeById(VolumeInfo.ID_PRIVATE_INTERNAL);
+        String volumeId = getArguments().getString(VolumeInfo.EXTRA_VOLUME_ID);
+        mVolume = sm.findVolumeById(volumeId);
         if (!isVolumeValid()) {
             getActivity().finish();
             return;
         }
 
         final long sharedDataSize = mVolume.getPath().getTotalSpace();
-        mTotalSize = sm.getPrimaryStorageSize();
-        long systemSize = mTotalSize - sharedDataSize;
+        long totalSize = sm.getPrimaryStorageSize();
+        long systemSize = totalSize - sharedDataSize;
 
-        if (mTotalSize <= 0) {
-            mTotalSize = sharedDataSize;
+        if (totalSize <= 0) {
+            totalSize = sharedDataSize;
             systemSize = 0;
         }
 
-        final long usedBytes = mTotalSize - mVolume.getPath().getFreeSpace();
-        mSummaryController.updateBytes(usedBytes, mTotalSize);
+        final long usedBytes = totalSize - mVolume.getPath().getFreeSpace();
+        mSummaryController.updateBytes(usedBytes, totalSize);
+        mPreferenceController.setVolume(mVolume);
+        mPreferenceController.setSystemSize(systemSize);
+        mPreferenceController.startMeasurement();
 
         // Initialize the footer preference to go to the smart storage management.
         final FooterPreference pref = mFooterPreferenceMixin.createFooterPreference();
@@ -85,8 +90,6 @@ public class StorageDashboardFragment extends DashboardFragment {
         pref.setFragment("com.android.settings.deletionhelper.AutomaticStorageManagerSettings");
         pref.setIcon(R.drawable.ic_settings_storage);
         pref.setEnabled(true);
-
-
     }
 
     @Override
@@ -114,23 +117,15 @@ public class StorageDashboardFragment extends DashboardFragment {
         final List<PreferenceController> controllers = new ArrayList<>();
         mSummaryController = new StorageSummaryDonutPreferenceController(context);
         controllers.add(mSummaryController);
+
+        StorageManager sm = context.getSystemService(StorageManager.class);
+        mPreferenceController = new StorageItemPreferenceController(context, getLifecycle(), this,
+                mVolume, new StorageManagerVolumeProvider(sm));
+        controllers.add(mPreferenceController);
         controllers.add(new ManageStoragePreferenceController(context));
-        controllers.add(new StorageItemPreferenceController(context, "pref_photos_videos"));
-        controllers.add(new StorageItemPreferenceController(context, "pref_music_audio"));
-        controllers.add(new StorageItemPreferenceController(context, "pref_games"));
-        controllers.add(new StorageItemPreferenceController(context, "pref_other_apps"));
-        controllers.add(new StorageItemPreferenceController(context, "pref_system"));
-        controllers.add(new StorageItemPreferenceController(context, "pref_files"));
         return controllers;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View root = super.onCreateView(inflater, container, savedInstanceState);
-        // TODO: Add loader to load the storage sizes for the StorageItemPreferenceControllers.
-        return root;
-    }
     /**
      * For Search.
      */

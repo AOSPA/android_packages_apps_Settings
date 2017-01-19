@@ -27,15 +27,37 @@ public interface ApplicationFeatureProvider {
     AppHeaderController newAppHeaderController(Fragment fragment, View appHeader);
 
     /**
-     * Asynchronously calculates the total number of apps installed on the device, across all users
-     * and managed profiles.
+     * Count all installed packages, irrespective of install reason.
      */
-    void calculateNumberOfInstalledApps(NumberOfInstalledAppsCallback callback);
+    public static final int IGNORE_INSTALL_REASON = -1;
 
     /**
-     * Callback that receives the total number of packages installed on the device.
+     * Asynchronously calculates the total number of apps installed on the device, across all users
+     * and managed profiles.
+     *
+     * @param installReason Only consider apps with this install reason; may be any install reason
+     *         defined in {@link android.content.pm.PackageManager} or
+     *         {@link #IGNORE_INSTALL_REASON} to count all apps, irrespective of install reason.
+     * @param callback The callback to invoke with the result
      */
-    interface NumberOfInstalledAppsCallback {
-        void onNumberOfInstalledAppsResult(int num);
+    void calculateNumberOfInstalledApps(int installReason, NumberOfAppsCallback callback);
+
+    /**
+     * Asynchronously calculates the total number of apps installed on the device, across all users
+     * and managed profiles, that have been granted one or more of the given permissions by the
+     * admin.
+     *
+     * @param permissions Only consider apps that have been granted one or more of these permissions
+     *        by the admin, either at run-time or install-time
+     * @param callback The callback to invoke with the result
+     */
+    void calculateNumberOfAppsWithAdminGrantedPermissions(String[] permissions,
+            NumberOfAppsCallback callback);
+
+    /**
+     * Callback that receives the number of packages installed on the device.
+     */
+    interface NumberOfAppsCallback {
+        void onNumberOfAppsResult(int num);
     }
 }

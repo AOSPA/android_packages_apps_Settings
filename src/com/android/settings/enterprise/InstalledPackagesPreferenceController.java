@@ -36,12 +36,10 @@ public class InstalledPackagesPreferenceController extends PreferenceController 
     @Override
     public void updateState(Preference preference) {
         mFeatureProvider.calculateNumberOfInstalledApps(
-                new ApplicationFeatureProvider.NumberOfInstalledAppsCallback() {
-                    @Override
-                    public void onNumberOfInstalledAppsResult(int num) {
-                        preference.setTitle(mContext.getResources().getQuantityString(
-                                R.plurals.enterprise_privacy_number_installed_packages, num, num));
-                    }
+                ApplicationFeatureProvider.IGNORE_INSTALL_REASON,
+                (num) -> {
+                    preference.setTitle(mContext.getResources().getQuantityString(
+                            R.plurals.enterprise_privacy_number_installed_packages, num, num));
                 });
     }
 

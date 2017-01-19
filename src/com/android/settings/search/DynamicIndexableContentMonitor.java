@@ -36,6 +36,7 @@ import android.os.UserManager;
 import android.print.PrintManager;
 import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
+import android.provider.Settings;
 import android.provider.UserDictionary;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -47,7 +48,10 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.accessibility.AccessibilitySettings;
+import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
+import com.android.settings.inputmethod.PhysicalKeyboardFragment;
+import com.android.settings.inputmethod.VirtualKeyboardFragment;
 import com.android.settings.print.PrintSettingsFragment;
 
 import java.util.ArrayList;
@@ -205,8 +209,7 @@ public final class DynamicIndexableContentMonitor implements
         }
 
         private void buildIndex(boolean rebuild) {
-            // TODO: Fix landing page to PhysicalKeyboardFragment.
-            mIndex.updateFromClassNameResource(InputMethodAndLanguageSettings.class.getName(),
+            mIndex.updateFromClassNameResource(PhysicalKeyboardFragment.class.getName(),
                     rebuild, true /* includeInSearchResult */);
         }
 
@@ -380,6 +383,9 @@ public final class DynamicIndexableContentMonitor implements
     // Also it monitors user dictionary changes and updates search index.
     private static class InputMethodServicesMonitor extends ContentObserver {
 
+        private static final Uri ENABLED_INPUT_METHODS_CONTENT_URI =
+                Settings.Secure.getUriFor(Settings.Secure.ENABLED_INPUT_METHODS);
+
         // Null if not initialized.
         @Nullable private Index mIndex;
         private PackageManager mPackageManager;
@@ -418,7 +424,11 @@ public final class DynamicIndexableContentMonitor implements
             mPackageManager = context.getPackageManager();
             mContentResolver = context.getContentResolver();
             mInputMethodServices.clear();
+            // Build index of {@link UserDictionary}.
             buildIndex(InputMethodAndLanguageSettings.class, true /* rebuild */);
+            // Build index of IMEs.
+            buildIndex(VirtualKeyboardFragment.class, true /* rebuild */);
+            buildIndex(AvailableVirtualKeyboardFragment.class, true /* rebuild */);
 
             // Cache IME service packages to know when they go away.
             final InputMethodManager inputMethodManager = (InputMethodManager) context
@@ -433,8 +443,9 @@ public final class DynamicIndexableContentMonitor implements
             // Watch for related content URIs.
             mContentResolver.registerContentObserver(UserDictionary.Words.CONTENT_URI,
                     true /* notifyForDescendants */, this /* observer */);
-            // TODO: Should monitor android.provider.Settings.Secure.ENABLED_INPUT_METHODS and
-            // update index of AvailableVirtualKeyboardFragment and VirtualKeyboardFragment.
+            // Watch for changing enabled IMEs.
+            mContentResolver.registerContentObserver(ENABLED_INPUT_METHODS_CONTENT_URI,
+                    false /* notifyForDescendants */, this /* observer */);
         }
 
         private void buildIndex(Class<?> indexClass, boolean rebuild) {
@@ -451,20 +462,23 @@ public final class DynamicIndexableContentMonitor implements
                     .queryIntentServices(intent, 0 /* flags */);
             if (services == null || services.isEmpty()) return;
             mInputMethodServices.add(packageName);
-            // TODO: Fix landing page to VirtualKeyboardFragment.
-            buildIndex(InputMethodAndLanguageSettings.class, false /* rebuild */);
+            buildIndex(VirtualKeyboardFragment.class, false /* rebuild */);
+            buildIndex(AvailableVirtualKeyboardFragment.class, false /* rebuild */);
         }
 
         synchronized void onPackageUnavailable(String packageName) {
             if (mIndex == null) return;
             if (!mInputMethodServices.remove(packageName)) return;
-            // TODO: Fix landing page to AvailableVirtualKeyboardFragment.
-            buildIndex(InputMethodAndLanguageSettings.class, true /* rebuild */);
+            buildIndex(VirtualKeyboardFragment.class, true /* rebuild */);
+            buildIndex(AvailableVirtualKeyboardFragment.class, true /* rebuild */);
         }
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-            if (UserDictionary.Words.CONTENT_URI.equals(uri)) {
+            if (ENABLED_INPUT_METHODS_CONTENT_URI.equals(uri)) {
+                buildIndex(VirtualKeyboardFragment.class, true /* rebuild */);
+                buildIndex(AvailableVirtualKeyboardFragment.class, true /* rebuild */);
+            } else if (UserDictionary.Words.CONTENT_URI.equals(uri)) {
                 buildIndex(InputMethodAndLanguageSettings.class, true /* rebuild */);
             }
         }
