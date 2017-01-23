@@ -36,6 +36,11 @@
         settings:keywords="@string/keywords_wifi_calling"
         android:fragment="com.android.settings.WifiCallingSettings" />
 
+    <PreferenceScreen
+        android:key="call_settings"
+        android:title="@string/call_settings_title">
+    </PreferenceScreen>
+
     <com.android.settings.WFCPreference
         android:key="wifi_calling_enhanced_settings"
         android:summaryOff="@null"
