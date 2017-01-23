@@ -157,6 +157,7 @@ public class TetherSettings extends RestrictedSettingsFragment
     private boolean mUsbEnable = false;
     private WifiManager mWifiStatusManager;
     private boolean mIsWifiEnabled = false;
+    private boolean mEnableWifiApSettingsExt = false;
 
     @Override
     protected int getMetricsCategory() {
@@ -196,17 +197,18 @@ public class TetherSettings extends RestrictedSettingsFragment
 
         mCreateNetwork = findPreference(WIFI_AP_SSID_AND_SECURITY);
 
-        boolean enableWifiApSettingsExt = getResources().
+        mEnableWifiApSettingsExt = getResources().
                          getBoolean(R.bool.show_wifi_hotspot_settings);
         boolean isWifiApEnabled = getResources().getBoolean(R.bool.hide_wifi_hotspot);
         checkDefaultValue(getActivity());
-        if (enableWifiApSettingsExt) {
+        if (mEnableWifiApSettingsExt) {
             mEnableWifiAp =
                     (HotspotPreference) findPreference(ENABLE_WIFI_AP_EXT);
             getPreferenceScreen().removePreference(findPreference(ENABLE_WIFI_AP));
             getPreferenceScreen().removePreference(mCreateNetwork);
             mEnableWifiAp.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 public boolean onPreferenceClick(Preference preference) {
+                    mTetherChoice = TETHERING_WIFI;
                     Intent intent = new Intent();
                     if(isNeedShowHelp(getActivity())) {
                         intent.setAction(ACTION_HOTSPOT_PRE_CONFIGURE);
@@ -449,7 +451,9 @@ public class TetherSettings extends RestrictedSettingsFragment
         }
 
         updateState();
-        registerConfigureReceiver(getActivity());
+        if (mEnableWifiApSettingsExt) {
+            registerConfigureReceiver(getActivity());
+        }
     }
 
     @Override
@@ -466,7 +470,9 @@ public class TetherSettings extends RestrictedSettingsFragment
             mEnableWifiAp.setOnPreferenceChangeListener(null);
             mWifiApEnabler.pause();
         }
-        unRegisterConfigureReceiver();
+        if (mEnableWifiApSettingsExt) {
+            unRegisterConfigureReceiver();
+        }
     }
 
     private void updateState() {
@@ -626,13 +632,12 @@ public class TetherSettings extends RestrictedSettingsFragment
     @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
         boolean enable = (Boolean) value;
-        boolean enableWifiApSettingsExt = getResources().
-                         getBoolean(R.bool.show_wifi_hotspot_settings);
         if (enable) {
-            if(enableWifiApSettingsExt && showNoSimCardDialog(getPrefContext())) {
+            mTetherChoice = TETHERING_WIFI;
+            if (mEnableWifiApSettingsExt && showNoSimCardDialog(getPrefContext())) {
                 ((HotspotPreference)preference).setChecked(false);
                 return false;
-            } else if(enableWifiApSettingsExt &&
+            } else if (mEnableWifiApSettingsExt &&
                 (isNeedShowHelp(getPrefContext()) || !checkWifiApConfig())) {
                 Intent intent = new Intent();
                 intent.setAction(ACTION_HOTSPOT_PRE_CONFIGURE);
@@ -641,7 +646,7 @@ public class TetherSettings extends RestrictedSettingsFragment
                 getPrefContext().startActivity(intent);
                 ((HotspotPreference)preference).setChecked(false);
                 return false;
-            } else if(checkWifiConnectivityState(getActivity())
+            } else if (checkWifiConnectivityState(getActivity())
                       && !mWifiManager.getWifiStaSapConcurrency()) {
                 showTurnOffWifiDialog(getActivity());
                 startTethering(TETHERING_WIFI);
