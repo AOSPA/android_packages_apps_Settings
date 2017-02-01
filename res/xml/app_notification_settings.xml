@@ -23,13 +23,19 @@
         android:key="block"
         android:title="@string/app_notification_block_title"
         android:summary="@string/app_notification_block_summary"
-        android:order="2"
+        settings:useAdditionalSummary="true"
+        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+
+    <!-- Show badge -->
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="badge"
+        android:title="@string/notification_badge_title"
+        android:summary="@string/notification_badge_summary"
         settings:useAdditionalSummary="true"
         settings:restrictedSwitchSummary="@string/enabled_by_admin" />
 
     <PreferenceCategory
             android:key="channels"
-            android:title="@string/notification_channels"
-            android:order="3" />
+            android:title="@string/notification_channels" />
 
 </PreferenceScreen>

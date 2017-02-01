@@ -95,7 +95,6 @@ public class Settings extends SettingsActivity {
     public static class DeviceAdminSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DataUsageSummaryActivity extends SettingsActivity { /* empty */ }
     public static class ConfigureWifiSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class AdvancedWifiSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SavedAccessPointsSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TextToSpeechSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AndroidBeamSettingsActivity extends SettingsActivity { /* empty */ }
@@ -105,6 +104,7 @@ public class Settings extends SettingsActivity {
     public static class UserSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class VrListenersSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class PictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ConditionProviderSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UsbSettingsActivity extends SettingsActivity { /* empty */ }
@@ -123,9 +123,11 @@ public class Settings extends SettingsActivity {
     public static class ConfigureNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class ChannelNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class OtherSoundSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageDomainUrlsActivity extends SettingsActivity { /* empty */ }
     public static class AutomaticStorageManagerSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class GamesStorageActivity extends SettingsActivity { /* empty */ }
 
     public static class TopLevelSettings extends SettingsActivity { /* empty */ }
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
@@ -137,6 +139,9 @@ public class Settings extends SettingsActivity {
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AdvancedAppsActivity extends SettingsActivity { /* empty */ }
+
+    public static class ManageExternalSourcesActivity extends SettingsActivity {
+        /* empty */ }
 
     public static class WifiCallingSuggestionActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeAutomationSuggestionActivity extends SettingsActivity { /* empty */ }

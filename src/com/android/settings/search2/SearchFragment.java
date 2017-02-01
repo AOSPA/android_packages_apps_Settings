@@ -26,6 +26,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import android.widget.SearchView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
@@ -50,8 +52,9 @@ public class SearchFragment extends InstrumentedFragment implements
     private static final String STATE_RESULT_CLICK_COUNT = "state_result_click_count";
 
     // Loader IDs
-    private static final int LOADER_ID_DATABASE = 0;
-    private static final int LOADER_ID_INSTALLED_APPS = 1;
+    private static final int LOADER_ID_RECENTS = 0;
+    private static final int LOADER_ID_DATABASE = 1;
+    private static final int LOADER_ID_INSTALLED_APPS = 2;
 
     // Logging
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -59,6 +62,10 @@ public class SearchFragment extends InstrumentedFragment implements
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     String mQuery;
+
+    private final SaveQueryRecorderCallback mSaveQueryRecorderCallback =
+            new SaveQueryRecorderCallback();
+
     private boolean mNeverEnteredQuery = true;
     private int mResultClickCount;
     private MetricsFeatureProvider mMetricsFeatureProvider;
@@ -66,6 +73,7 @@ public class SearchFragment extends InstrumentedFragment implements
 
     private SearchResultsAdapter mSearchAdapter;
     private RecyclerView mResultsRecyclerView;
+    private SearchView mSearchView;
 
     @Override
     public int getMetricsCategory() {
@@ -84,18 +92,30 @@ public class SearchFragment extends InstrumentedFragment implements
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         mSearchAdapter = new SearchResultsAdapter(this);
+        final LoaderManager loaderManager = getLoaderManager();
         if (savedInstanceState != null) {
             mQuery = savedInstanceState.getString(STATE_QUERY);
             mNeverEnteredQuery = savedInstanceState.getBoolean(STATE_NEVER_ENTERED_QUERY);
             mResultClickCount = savedInstanceState.getInt(STATE_RESULT_CLICK_COUNT);
-            final LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(LOADER_ID_DATABASE, null, this);
             loaderManager.initLoader(LOADER_ID_INSTALLED_APPS, null, this);
+        } else {
+            loaderManager.initLoader(LOADER_ID_RECENTS, null, this);
         }
-        final ActionBar actionBar = getActivity().getActionBar();
-        actionBar.setCustomView(makeSearchView(actionBar, mQuery));
+
+        final Activity activity = getActivity();
+        final ActionBar actionBar = activity.getActionBar();
+        mSearchView = makeSearchView(actionBar, mQuery);
+        actionBar.setCustomView(mSearchView);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
+
+        // Run the Index update only if we have some space
+        if (!Utils.isLowStorage(activity)) {
+            mSearchFeatureProvider.updateIndex(activity);
+        } else {
+            Log.w(TAG, "Cannot update the Indexer as we are running low on storage space!");
+        }
     }
 
     @Override
@@ -140,7 +160,10 @@ public class SearchFragment extends InstrumentedFragment implements
         mSearchAdapter.clearResults();
 
         if (TextUtils.isEmpty(mQuery)) {
-            getLoaderManager().destroyLoader(LOADER_ID_DATABASE);
+            final LoaderManager loaderManager = getLoaderManager();
+            loaderManager.destroyLoader(LOADER_ID_DATABASE);
+            loaderManager.destroyLoader(LOADER_ID_INSTALLED_APPS);
+            loaderManager.restartLoader(LOADER_ID_RECENTS, null /* args */, this /* callback */);
         } else {
             restartLoaders();
         }
@@ -150,6 +173,10 @@ public class SearchFragment extends InstrumentedFragment implements
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        // Save submitted query.
+        getLoaderManager().restartLoader(SaveQueryRecorderCallback.LOADER_ID_SAVE_QUERY_TASK, null,
+                mSaveQueryRecorderCallback);
+
         return true;
     }
 
@@ -162,6 +189,8 @@ public class SearchFragment extends InstrumentedFragment implements
                 return mSearchFeatureProvider.getDatabaseSearchLoader(activity, mQuery);
             case LOADER_ID_INSTALLED_APPS:
                 return mSearchFeatureProvider.getInstalledAppSearchLoader(activity, mQuery);
+            case LOADER_ID_RECENTS:
+                return mSearchFeatureProvider.getSavedQueryLoader(activity);
             default:
                 return null;
         }
@@ -180,6 +209,12 @@ public class SearchFragment extends InstrumentedFragment implements
         mResultClickCount++;
     }
 
+    public void onSavedQueryClicked(CharSequence query) {
+        final String queryString = query.toString();
+        mSearchView.setQuery(queryString, false /* submit */);
+        onQueryTextChange(queryString);
+    }
+
     private void restartLoaders() {
         final LoaderManager loaderManager = getLoaderManager();
         loaderManager.restartLoader(LOADER_ID_DATABASE, null /* args */, this /* callback */);
@@ -195,5 +230,26 @@ public class SearchFragment extends InstrumentedFragment implements
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         searchView.setLayoutParams(lp);
         return searchView;
+    }
+
+    private class SaveQueryRecorderCallback implements LoaderManager.LoaderCallbacks<Void> {
+        // TODO: make a generic background task manager to handle one-off tasks like this one.
+
+        private static final int LOADER_ID_SAVE_QUERY_TASK = 0;
+
+        @Override
+        public Loader<Void> onCreateLoader(int id, Bundle args) {
+            return new SavedQueryRecorder(getActivity(), mQuery);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<Void> loader, Void data) {
+
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Void> loader) {
+
+        }
     }
 }

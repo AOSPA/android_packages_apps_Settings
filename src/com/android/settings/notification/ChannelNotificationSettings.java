@@ -34,6 +34,8 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
@@ -47,15 +49,17 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChannelNotificationSettings extends NotificationSettingsBase {
+    private static final String TAG = "ChannelSettings";
+
     protected static final String KEY_BYPASS_DND = "bypass_dnd";
     protected static final String KEY_VISIBILITY_OVERRIDE = "visibility_override";
     protected static final String KEY_IMPORTANCE = "importance";
     protected static final String KEY_LIGHTS = "lights";
     protected static final String KEY_VIBRATE = "vibrate";
     protected static final String KEY_RINGTONE = "ringtone";
-    protected static final String KEY_BADGE = "badge";
 
     protected RestrictedSwitchPreference mLights;
     protected RestrictedSwitchPreference mVibrate;
@@ -84,6 +88,11 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null || mChannel == null) {
+            Log.w(TAG, "Missing package or uid or packageinfo or channel");
+            toastAndFinish();
+            return;
+        }
         final Activity activity = getActivity();
         mDashboardFeatureProvider =
                 FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
@@ -100,7 +109,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         mVibrate = (RestrictedSwitchPreference) findPreference(KEY_VIBRATE);
         mRingtone = (DefaultNotificationTonePreference) findPreference(KEY_RINGTONE);
 
-        if (mPkgInfo != null) {
+        if (mPkgInfo != null && mChannel != null) {
             setupPriorityPref(mChannel.canBypassDnd());
             setupVisOverridePref(mChannel.getLockscreenVisibility());
             setupLights();
@@ -114,8 +123,8 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                     .getApplicationFeatureProvider(activity)
                     .newAppHeaderController(this /* fragment */, null /* appHeader */)
                     .setIcon(mAppRow.icon)
-                    .setLabel(mAppRow.label)
-                    .setSummary(mChannel.getName())
+                    .setLabel(mChannel.getName())
+                    .setSummary(mAppRow.label)
                     .setPackageName(mAppRow.pkg)
                     .setUid(mAppRow.uid)
                     .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
@@ -128,8 +137,8 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     @Override
     public void onResume() {
         super.onResume();
-        if ((mUid != -1 && getPackageManager().getPackagesForUid(mUid) == null)) {
-            // App isn't around anymore, must have been removed.
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null || mChannel == null) {
+            Log.w(TAG, "Missing package or uid or packageinfo or channel");
             finish();
             return;
         }
@@ -138,8 +147,6 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
         mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
         mVisibilityOverride.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mBadge.setDisabledByAdmin(mSuspendedAppsAdmin);
     }
 
     private void setupLights() {
@@ -179,7 +186,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 Uri ringtone = Uri.parse((String) newValue);
                 mRingtone.setRingtone(ringtone);
-                mChannel.setSound(ringtone);
+                mChannel.setSound(ringtone, mChannel.getAudioAttributes());
                 mChannel.lockFields(NotificationChannel.USER_LOCKED_SOUND);
                 mBackend.updateChannel(mPkg, mUid, mChannel);
                 return false;
@@ -204,6 +211,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             }
         });
         mBadge.setDisabledByAdmin(mSuspendedAppsAdmin);
+        mBadge.setEnabled(mAppRow.showBadge);
         mBadge.setChecked(mChannel.canShowBadge());
         mBadge.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -218,15 +226,20 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
 
         mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
         final int numImportances = IMPORTANCE_HIGH - IMPORTANCE_MIN + 1;
-        String[] summaries = new String[numImportances];
-        String[] values = new String[numImportances];
+        List<String> summaries = new ArrayList<>();
+        List<String> values = new ArrayList<>();;
         for (int i = 0; i < numImportances; i++) {
             int importance = i + 1;
-            summaries[i] = getSummary(importance);
-            values[i] = String.valueOf(importance);
+            summaries.add(getSummary(importance));
+            values.add(String.valueOf(importance));
         }
-        mImportance.setEntryValues(values);
-        mImportance.setEntries(summaries);
+        if (NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId())) {
+            // Add option to reset to letting the app decide
+            summaries.add(getSummary(NotificationManager.IMPORTANCE_UNSPECIFIED));
+            values.add(String.valueOf(NotificationManager.IMPORTANCE_UNSPECIFIED));
+        }
+        mImportance.setEntryValues(values.toArray(new String[0]));
+        mImportance.setEntries(summaries.toArray(new String[0]));
         mImportance.setValue(String.valueOf(mChannel.getImportance()));
         mImportance.setSummary("%s");
 
@@ -245,6 +258,8 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
 
     private String getSummary(int importance) {
         switch (importance) {
+            case NotificationManager.IMPORTANCE_UNSPECIFIED:
+                return getContext().getString(R.string.notification_importance_unspecified);
             case NotificationManager.IMPORTANCE_NONE:
                 return getContext().getString(R.string.notification_importance_blocked);
             case NotificationManager.IMPORTANCE_MIN:

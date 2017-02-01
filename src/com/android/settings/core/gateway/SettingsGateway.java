@@ -57,6 +57,7 @@ import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.ManageAssist;
 import com.android.settings.applications.ManageDomainUrls;
 import com.android.settings.applications.NotificationApps;
+import com.android.settings.applications.PictureInPictureSettings;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
@@ -100,6 +101,7 @@ import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.AppNotificationSettings;
+import com.android.settings.notification.ChannelNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationStation;
@@ -120,7 +122,6 @@ import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
-import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiAPITest;
@@ -138,7 +139,6 @@ public class SettingsGateway {
             WirelessSettings.class.getName(),
             WifiSettings.class.getName(),
             ConfigureWifiSettings.class.getName(),
-            AdvancedWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings.class.getName(),
             BluetoothSettings.class.getName(),
             SimSettings.class.getName(),
@@ -208,6 +208,7 @@ public class SettingsGateway {
             InstalledAppDetails.class.getName(),
             BatterySaverSettings.class.getName(),
             AppNotificationSettings.class.getName(),
+            ChannelNotificationSettings.class.getName(),
             OtherSoundSettings.class.getName(),
             ApnSettings.class.getName(),
             ApnEditor.class.getName(),
@@ -225,6 +226,7 @@ public class SettingsGateway {
             AdvancedAppSettings.class.getName(),
             WallpaperTypeSettings.class.getName(),
             VrListenerSettings.class.getName(),
+            PictureInPictureSettings.class.getName(),
             ManagedProfileSettings.class.getName(),
             ChooseAccountActivity.class.getName(),
             IccLockSettings.class.getName(),
@@ -292,7 +294,6 @@ public class SettingsGateway {
             "com.android.settings.ManageApplicationsDashboardAlias",
             "com.android.settings.PaymentSettingsDashboardAlias",
             // Home page > Network & Internet
-            "com.android.settings.WifiDashboardAlias",
             "com.android.settings.DataUsageDashboardAlias",
             // Home page > Security
             "com.android.settings.LocationDashboardAlias",
@@ -302,5 +303,6 @@ public class SettingsGateway {
             "com.android.settings.DateTimeDashboardAlias",
             "com.android.settings.AccessibilityDashboardAlias",
             "com.android.settings.AboutDeviceDashboardAlias",
+            "com.android.settings.EnterprisePrivacyDashboardAlias",
     };
 }

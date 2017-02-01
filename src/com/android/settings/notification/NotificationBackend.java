@@ -17,6 +17,7 @@ package com.android.settings.notification;
 
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
+import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +27,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Drawable;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.util.Log;
 
 import com.android.settingslib.Utils;
@@ -48,6 +50,8 @@ public class NotificationBackend {
         }
         row.icon = app.loadIcon(pm);
         row.banned = getNotificationsBanned(row.pkg, row.uid);
+        row.showBadge = canShowBadge(row.pkg, row.uid);
+        row.userId = UserHandle.getUserId(row.uid);
         return row;
     }
 
@@ -87,21 +91,40 @@ public class NotificationBackend {
         }
     }
 
+    public boolean canShowBadge(String pkg, int uid) {
+        try {
+            return sINM.canShowBadge(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    public boolean setShowBadge(String pkg, int uid, boolean showBadge) {
+        try {
+            sINM.setShowBadge(pkg, uid, showBadge);
+            return true;
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
     public NotificationChannel getChannel(String pkg, int uid, String channelId) {
         if (channelId == null) {
             return null;
         }
         try {
-            return sINM.getNotificationChannelForPackage(pkg, uid, channelId);
+            return sINM.getNotificationChannelForPackage(pkg, uid, channelId, true);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return null;
         }
     }
 
-    public ParceledListSlice<NotificationChannel> getChannels(String pkg, int uid) {
+    public ParceledListSlice<NotificationChannelGroup> getChannelGroups(String pkg, int uid) {
         try {
-            return sINM.getNotificationChannelsForPackage(pkg, uid);
+            return sINM.getNotificationChannelGroupsForPackage(pkg, uid, true);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return ParceledListSlice.emptyList();
@@ -129,6 +152,8 @@ public class NotificationBackend {
         public boolean banned;
         public boolean first;  // first app in section
         public boolean systemApp;
+        public boolean showBadge;
+        public int userId;
     }
 
     public static class ChannelRow extends AppRow {

@@ -31,7 +31,6 @@ import android.os.LocaleList;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,7 +56,9 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Settings.AllApplicationsActivity;
+import com.android.settings.Settings.GamesStorageActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
+import com.android.settings.Settings.ManageExternalSourcesActivity;
 import com.android.settings.Settings.NotificationAppListActivity;
 import com.android.settings.Settings.OverlaySettingsActivity;
 import com.android.settings.Settings.StorageUseActivity;
@@ -66,6 +67,7 @@ import com.android.settings.Settings.WriteSettingsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
+import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
@@ -136,6 +138,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int FILTER_APPS_USAGE_ACCESS = 8;
     public static final int FILTER_APPS_WITH_OVERLAY = 9;
     public static final int FILTER_APPS_WRITE_SETTINGS = 10;
+    public static final int FILTER_APPS_INSTALL_SOURCES = 12;
 
     // This is the string labels for the filter modes above, the order must be kept in sync.
     public static final int[] FILTER_LABELS = new int[]{
@@ -151,6 +154,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             R.string.filter_all_apps,      // Usage access screen, never displayed
             R.string.filter_overlay_apps,   // Apps with overlay permission
             R.string.filter_write_settings_apps,   // Apps that can write system settings
+            R.string.filter_install_sources_apps, // Apps that are trusted sources of apks
     };
     // This is the actual mapping to filters from FILTER_ constants above, the order must
     // be kept in sync.
@@ -169,6 +173,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             AppStateUsageBridge.FILTER_APP_USAGE, // Apps with Domain URLs
             AppStateOverlayBridge.FILTER_SYSTEM_ALERT_WINDOW,   // Apps that can draw overlays
             AppStateWriteSettingsBridge.FILTER_WRITE_SETTINGS,  // Apps that can write system settings
+            AppStateInstallAppsBridge.FILTER_APP_SOURCES,
     };
 
     // sort order
@@ -210,6 +215,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int LIST_TYPE_HIGH_POWER = 5;
     public static final int LIST_TYPE_OVERLAY = 6;
     public static final int LIST_TYPE_WRITE_SETTINGS = 7;
+    public static final int LIST_TYPE_MANAGE_SOURCES = 8;
+    public static final int LIST_TYPE_GAMES = 9;
 
     private View mRootView;
 
@@ -259,6 +266,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mListType = LIST_TYPE_OVERLAY;
         } else if (className.equals(WriteSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_WRITE_SETTINGS;
+        } else if (className.equals(ManageExternalSourcesActivity.class.getName())) {
+            mListType = LIST_TYPE_MANAGE_SOURCES;
+        } else if (className.equals(GamesStorageActivity.class.getName())) {
+            mListType = LIST_TYPE_GAMES;
+            mSortOrder = R.id.sort_order_size;
         } else {
             mListType = LIST_TYPE_MAIN;
         }
@@ -351,6 +363,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         if (mListType == LIST_TYPE_STORAGE) {
             mApplications.setOverrideFilter(new VolumeFilter(mVolumeUuid));
         }
+        if (mListType == LIST_TYPE_GAMES) {
+            mApplications.setOverrideFilter(ApplicationsState.FILTER_GAMES);
+        }
     }
 
     @Override
@@ -379,6 +394,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 return FILTER_APPS_WITH_OVERLAY;
             case LIST_TYPE_WRITE_SETTINGS:
                 return FILTER_APPS_WRITE_SETTINGS;
+            case LIST_TYPE_MANAGE_SOURCES:
+                return FILTER_APPS_INSTALL_SOURCES;
             default:
                 return FILTER_APPS_ALL;
         }
@@ -389,6 +406,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             case LIST_TYPE_MAIN:
             case LIST_TYPE_NOTIFICATION:
             case LIST_TYPE_STORAGE:
+            case LIST_TYPE_GAMES:
                 return mSortOrder == R.id.sort_order_alpha;
             default:
                 return false;
@@ -403,6 +421,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             case LIST_TYPE_NOTIFICATION:
                 return MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS;
             case LIST_TYPE_STORAGE:
+            case LIST_TYPE_GAMES:
                 return MetricsEvent.APPLICATIONS_STORAGE_APPS;
             case LIST_TYPE_USAGE_ACCESS:
                 return MetricsEvent.USAGE_ACCESS;
@@ -412,6 +431,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 return MetricsEvent.SYSTEM_ALERT_WINDOW_APPS;
             case LIST_TYPE_WRITE_SETTINGS:
                 return MetricsEvent.SYSTEM_ALERT_WINDOW_APPS;
+            case LIST_TYPE_MANAGE_SOURCES:
+                return MetricsEvent.MANAGE_EXTERNAL_SOURCES;
             default:
                 return MetricsEvent.VIEW_UNKNOWN;
         }
@@ -502,6 +523,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 break;
             case LIST_TYPE_WRITE_SETTINGS:
                 startAppInfoFragment(WriteSettingsDetails.class, R.string.write_system_settings);
+                break;
+            case LIST_TYPE_MANAGE_SOURCES:
+                startAppInfoFragment(ExternalSourcesDetails.class, R.string.install_other_apps);
+            case LIST_TYPE_GAMES:
+                startAppInfoFragment(AppStorageSettings.class, R.string.game_storage_settings);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed app.
@@ -796,6 +822,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 mExtraInfoBridge = new AppStateOverlayBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_WRITE_SETTINGS) {
                 mExtraInfoBridge = new AppStateWriteSettingsBridge(mContext, mState, this);
+            } else if (mManageApplications.mListType == LIST_TYPE_MANAGE_SOURCES) {
+                mExtraInfoBridge = new AppStateInstallAppsBridge(mContext, mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -1204,6 +1232,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 case LIST_TYPE_WRITE_SETTINGS:
                     holder.summary.setText(WriteSettingsDetails.getSummary(mContext,
                             holder.entry));
+                    break;
+
+                case LIST_TYPE_MANAGE_SOURCES:
+                    holder.summary
+                            .setText(((InstallAppsState) holder.entry.extraInfo).getSummary());
                     break;
 
                 default:

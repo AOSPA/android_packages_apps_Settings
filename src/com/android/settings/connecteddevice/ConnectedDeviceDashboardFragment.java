@@ -20,14 +20,16 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
+import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.UsbBackend;
 import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,11 +46,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_DEVICE;
-    }
-
-    @Override
     protected String getLogTag() {
         return TAG;
     }
@@ -61,13 +58,19 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
+        final Lifecycle lifecycle = getLifecycle();
         final NfcPreferenceController nfcPreferenceController =
                 new NfcPreferenceController(context);
-        getLifecycle().addObserver(nfcPreferenceController);
+        lifecycle.addObserver(nfcPreferenceController);
         controllers.add(nfcPreferenceController);
         mUsbPrefController = new UsbModePreferenceController(context, new UsbBackend(context));
-        getLifecycle().addObserver(mUsbPrefController);
+        lifecycle.addObserver(mUsbPrefController);
         controllers.add(mUsbPrefController);
+        final BluetoothMasterSwitchPreferenceController bluetoothPreferenceController =
+            new BluetoothMasterSwitchPreferenceController(
+                context, Utils.getLocalBtManager(context));
+        lifecycle.addObserver(bluetoothPreferenceController);
+        controllers.add(bluetoothPreferenceController);
         return controllers;
     }
 

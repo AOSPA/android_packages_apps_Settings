@@ -201,10 +201,16 @@ public class LocationSettings extends LocationSettingsBase
                     }
                 });
 
-        mCategoryRecentLocationRequests =
-                (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
         RecentLocationApps recentApps = new RecentLocationApps(activity);
         List<RecentLocationApps.Request> recentLocationRequests = recentApps.getAppList();
+
+        final AppLocationPermissionPreferenceController preferenceController =
+                new AppLocationPermissionPreferenceController(activity);
+        preferenceController.displayPreference(root);
+
+        mCategoryRecentLocationRequests =
+                (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
+
         List<Preference> recentLocationPrefs = new ArrayList<>(recentLocationRequests.size());
         for (final RecentLocationApps.Request request : recentLocationRequests) {
             DimmableIconPreference pref = new DimmableIconPreference(getPrefContext(),

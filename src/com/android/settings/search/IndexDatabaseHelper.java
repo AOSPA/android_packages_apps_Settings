@@ -28,12 +28,13 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "IndexDatabaseHelper";
 
     private static final String DATABASE_NAME = "search_index.db";
-    private static final int DATABASE_VERSION = 116;
+    private static final int DATABASE_VERSION = 117;
 
     private static final String INDEX = "index";
 
     public interface Tables {
         String TABLE_PREFS_INDEX = "prefs_index";
+        String TABLE_SITE_MAP = "site_map";
         String TABLE_META_INDEX = "meta_index";
         String TABLE_SAVED_QUERIES = "saved_queries";
     }
@@ -67,9 +68,17 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         String BUILD = "build";
     }
 
-    public interface SavedQueriesColums {
+    public interface SavedQueriesColumns {
         String QUERY = "query";
         String TIME_STAMP = "timestamp";
+    }
+
+    public interface SiteMapColumns {
+        String DOCID = "docid";
+        String PARENT_CLASS = "parent_class";
+        String CHILD_CLASS = "child_class";
+        String PARENT_TITLE = "parent_title";
+        String CHILD_TITLE = "child_title";
     }
 
     private static final String CREATE_INDEX_TABLE =
@@ -127,11 +136,22 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_SAVED_QUERIES_TABLE =
             "CREATE TABLE " + Tables.TABLE_SAVED_QUERIES +
                     "(" +
-                    SavedQueriesColums.QUERY + " VARCHAR(64) NOT NULL" +
+                    SavedQueriesColumns.QUERY + " VARCHAR(64) NOT NULL" +
                     ", " +
-                    SavedQueriesColums.TIME_STAMP + " INTEGER" +
+                    SavedQueriesColumns.TIME_STAMP + " INTEGER" +
                     ")";
 
+    private static final String CREATE_SITE_MAP_TABLE =
+            "CREATE VIRTUAL TABLE " + Tables.TABLE_SITE_MAP + " USING fts4" +
+                    "(" +
+                    SiteMapColumns.PARENT_CLASS +
+                    ", " +
+                    SiteMapColumns.CHILD_CLASS +
+                    ", " +
+                    SiteMapColumns.PARENT_TITLE +
+                    ", " +
+                    SiteMapColumns.CHILD_TITLE +
+                    ")";
     private static final String INSERT_BUILD_VERSION =
             "INSERT INTO " + Tables.TABLE_META_INDEX +
                     " VALUES ('" + Build.VERSION.INCREMENTAL + "');";
@@ -164,6 +184,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_INDEX_TABLE);
         db.execSQL(CREATE_META_TABLE);
         db.execSQL(CREATE_SAVED_QUERIES_TABLE);
+        db.execSQL(CREATE_SITE_MAP_TABLE);
         db.execSQL(INSERT_BUILD_VERSION);
         Log.i(TAG, "Bootstrapped database");
     }
@@ -201,7 +222,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         reconstruct(db);
     }
 
-    private void reconstruct(SQLiteDatabase db) {
+    public void reconstruct(SQLiteDatabase db) {
         dropTables(db);
         bootstrapDB(db);
     }
@@ -241,5 +262,6 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_META_INDEX);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_PREFS_INDEX);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_SAVED_QUERIES);
+        db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_SITE_MAP);
     }
 }

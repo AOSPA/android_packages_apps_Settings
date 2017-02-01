@@ -54,6 +54,7 @@ import android.widget.SearchView;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
+import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.core.instrumentation.SharedPreferencesLogger;
 import com.android.settings.dashboard.DashboardContainerFragment;
@@ -191,10 +192,12 @@ public class SettingsActivity extends SettingsDrawerActivity
     private final BroadcastReceiver mUserAddRemoveReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals(Intent.ACTION_USER_ADDED)
-                    || action.equals(Intent.ACTION_USER_REMOVED)) {
-                mSearchFeatureProvider.updateIndex(getApplicationContext());
+            if (mSearchFeatureProvider != null && !mSearchFeatureProvider.isEnabled(context)) {
+                String action = intent.getAction();
+                if (action.equals(Intent.ACTION_USER_ADDED)
+                        || action.equals(Intent.ACTION_USER_REMOVED)) {
+                    mSearchFeatureProvider.updateIndex(getApplicationContext());
+                }
             }
         }
     };
@@ -251,7 +254,9 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mSearchFeatureProvider.updateIndex(getApplicationContext());
+        if (!mSearchFeatureProvider.isEnabled(this)) {
+            mSearchFeatureProvider.updateIndex(getApplicationContext());
+        }
     }
 
     @Override
@@ -383,14 +388,10 @@ public class SettingsActivity extends SettingsDrawerActivity
         final boolean isSubSettings = this instanceof SubSettings ||
                 intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
 
-        // If this is a sub settings, then apply the SubSettings Theme for the ActionBar content insets
+        // If this is a sub settings, then apply the SubSettings Theme for the ActionBar content
+        // insets
         if (isSubSettings) {
-            // Check also that we are not a Theme Dialog as we don't want to override them
-            final int themeResId = getThemeResId();
-            if (themeResId != R.style.Theme_DialogWhenLarge &&
-                    themeResId != R.style.Theme_SubSettingsDialogWhenLarge) {
-                setTheme(R.style.Theme_SubSettings);
-            }
+            setTheme(R.style.Theme_SubSettings);
         }
 
         setContentView(mIsShowingDashboard ?
@@ -400,7 +401,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         getFragmentManager().addOnBackStackChangedListener(this);
 
-        if (mIsShowingDashboard) {
+        if (mIsShowingDashboard && !mSearchFeatureProvider.isEnabled(this)) {
             // Run the Index update only if we have some space
             if (!Utils.isLowStorage(this)) {
                 mSearchFeatureProvider.updateIndex(getApplicationContext());
@@ -642,8 +643,10 @@ public class SettingsActivity extends SettingsDrawerActivity
                 mDevelopmentPreferencesListener);
 
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_ADDED));
-        registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_REMOVED));
+        if (!mSearchFeatureProvider.isEnabled(this)) {
+            registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_ADDED));
+            registerReceiver(mUserAddRemoveReceiver, new IntentFilter(Intent.ACTION_USER_REMOVED));
+        }
         if (mDynamicIndexableContentMonitor == null) {
             mDynamicIndexableContentMonitor = new DynamicIndexableContentMonitor();
         }
@@ -659,7 +662,9 @@ public class SettingsActivity extends SettingsDrawerActivity
     protected void onPause() {
         super.onPause();
         unregisterReceiver(mBatteryInfoReceiver);
-        unregisterReceiver(mUserAddRemoveReceiver);
+        if (!mSearchFeatureProvider.isEnabled(this)) {
+            unregisterReceiver(mUserAddRemoveReceiver);
+        }
         if (mDynamicIndexableContentMonitor != null) {
             mDynamicIndexableContentMonitor.unregister(this, LOADER_ID_INDEXABLE_CONTENT_MONITOR);
         }
@@ -961,29 +966,11 @@ public class SettingsActivity extends SettingsDrawerActivity
             }
         }
 
-        String backupIntent = getResources().getString(R.string.config_backup_settings_intent);
-        boolean useDefaultBackup = TextUtils.isEmpty(backupIntent);
+        // Enable/disable backup settings depending on whether the user is admin.
         setTileEnabled(new ComponentName(packageName,
-                Settings.PrivacySettingsActivity.class.getName()), useDefaultBackup, isAdmin);
+                BackupSettingsActivity.class.getName()), true, isAdmin);
         setTileEnabled(new ComponentName(packageName,
-                        "com.android.settings.PrivacyDashboardAlias"),
-                useDefaultBackup, isAdmin);
-
-        boolean hasBackupActivity = false;
-        if (!useDefaultBackup) {
-            try {
-                Intent intent = Intent.parseUri(backupIntent, 0);
-                hasBackupActivity = !getPackageManager().queryIntentActivities(intent, 0).isEmpty();
-            } catch (URISyntaxException e) {
-                Log.e(LOG_TAG, "Invalid backup intent URI!", e);
-            }
-        }
-
-        // Enable/disable BackupSettingsActivity and its alias.
-        setTileEnabled(new ComponentName(packageName,
-                BackupSettingsActivity.class.getName()), hasBackupActivity, isAdmin);
-        setTileEnabled(new ComponentName(packageName,
-                "com.android.settings.BackupResetDashboardAlias"), hasBackupActivity, isAdmin);
+                "com.android.settings.BackupResetDashboardAlias"), true, isAdmin);
 
         setTileEnabled(new ComponentName(packageName,
                 Settings.EnterprisePrivacySettingsActivity.class.getName()),

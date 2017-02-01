@@ -25,21 +25,24 @@ import android.support.annotation.Keep;
 
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
+import com.android.settings.applications.IPackageManagerWrapperImpl;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProviderImpl;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
+import com.android.settings.dashboard.SuggestionFeatureProvider;
+import com.android.settings.dashboard.SuggestionFeatureProviderImpl;
 import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
-import com.android.settings.security.SecurityFeatureProvider;
-import com.android.settings.security.SecurityFeatureProviderImpl;
 import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.search2.SearchFeatureProviderImpl;
+import com.android.settings.security.SecurityFeatureProvider;
+import com.android.settings.security.SecurityFeatureProviderImpl;
 import com.android.settings.vpn2.ConnectivityManagerWrapperImpl;
 
 /**
@@ -55,6 +58,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private EnterprisePrivacyFeatureProvider mEnterprisePrivacyFeatureProvider;
     private SearchFeatureProvider mSearchFeatureProvider;
     private SecurityFeatureProvider mSecurityFeatureProvider;
+    private SuggestionFeatureProvider mSuggestionFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -87,7 +91,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
         if (mApplicationFeatureProvider == null) {
             mApplicationFeatureProvider = new ApplicationFeatureProviderImpl(context,
                     new PackageManagerWrapperImpl(context.getPackageManager()),
-                    AppGlobals.getPackageManager(),
+                    new IPackageManagerWrapperImpl(AppGlobals.getPackageManager()),
                     new DevicePolicyManagerWrapperImpl((DevicePolicyManager) context
                             .getSystemService(Context.DEVICE_POLICY_SERVICE)));
         }
@@ -111,7 +115,8 @@ public class FeatureFactoryImpl extends FeatureFactory {
                     new PackageManagerWrapperImpl(context.getPackageManager()),
                     UserManager.get(context),
                     new ConnectivityManagerWrapperImpl((ConnectivityManager) context
-                            .getSystemService(Context.CONNECTIVITY_SERVICE)));
+                            .getSystemService(Context.CONNECTIVITY_SERVICE)),
+                    context.getResources());
         }
         return mEnterprisePrivacyFeatureProvider;
     }
@@ -135,5 +140,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mSecurityFeatureProvider = new SecurityFeatureProviderImpl();
         }
         return mSecurityFeatureProvider;
+    }
+
+    @Override
+    public SuggestionFeatureProvider getSuggestionFeatureProvider() {
+        if (mSuggestionFeatureProvider == null) {
+            mSuggestionFeatureProvider = new SuggestionFeatureProviderImpl();
+        }
+        return mSuggestionFeatureProvider;
     }
 }

@@ -35,6 +35,7 @@ import com.android.settings.display.NightDisplayPreferenceController;
 import com.android.settings.display.NightModePreferenceController;
 import com.android.settings.display.ScreenSaverPreferenceController;
 import com.android.settings.display.TapToWakePreferenceController;
+import com.android.settings.display.ThemePreferenceController;
 import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.display.VrDisplayPreferenceController;
 import com.android.settings.display.WallpaperPreferenceController;
@@ -68,11 +69,6 @@ public class DisplaySettings extends DashboardFragment {
     }
 
     @Override
-    protected String getCategoryKey() {
-        return CategoryKey.CATEGORY_DISPLAY;
-    }
-
-    @Override
     protected int getPreferenceScreenResId() {
         if (mDashboardFeatureProvider.isEnabled()) {
             return R.xml.ia_display_settings;
@@ -97,6 +93,7 @@ public class DisplaySettings extends DashboardFragment {
         controllers.add(new TimeoutPreferenceController(context));
         controllers.add(new VrDisplayPreferenceController(context));
         controllers.add(new WallpaperPreferenceController(context));
+        controllers.add(new ThemePreferenceController(context));
         return controllers;
     }
 
@@ -182,6 +179,7 @@ public class DisplaySettings extends DashboardFragment {
                     new TimeoutPreferenceController(context).updateNonIndexableKeys(result);
                     new VrDisplayPreferenceController(context).updateNonIndexableKeys(result);
                     new WallpaperPreferenceController(context).updateNonIndexableKeys(result);
+                    new ThemePreferenceController(context).updateNonIndexableKeys(result);
 
                     return result;
                 }

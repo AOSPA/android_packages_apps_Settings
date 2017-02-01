@@ -20,7 +20,6 @@ import android.provider.SearchIndexableResource;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
-
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
@@ -38,6 +37,7 @@ import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.SpecialAccessSettings;
+import com.android.settings.backup.BackupSettingsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.datausage.DataUsageMeteredSettings;
@@ -47,6 +47,7 @@ import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
+import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
@@ -55,6 +56,7 @@ import com.android.settings.gestures.GestureSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
+import com.android.settings.inputmethod.InputAndGestureSettings;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.VirtualKeyboardFragment;
@@ -71,8 +73,9 @@ import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.system.SystemDashboardFragment;
+import com.android.settings.tts.TtsEnginePreferenceFragment;
+import com.android.settings.tts.TtsSlidersFragment;
 import com.android.settings.users.UserSettings;
-import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
@@ -85,7 +88,8 @@ public final class SearchIndexableResources {
     @XmlRes
     public static final int NO_DATA_RES_ID = 0;
 
-    private static final HashMap<String, SearchIndexableResource> sResMap = new HashMap<>();
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    static final HashMap<String, SearchIndexableResource> sResMap = new HashMap<>();
 
     @VisibleForTesting
     static void addIndex(Class<?> indexClass, @XmlRes int xmlResId,
@@ -98,7 +102,6 @@ public final class SearchIndexableResources {
     static {
         addIndex(WifiSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
         addIndex(NetworkDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
-        addIndex(AdvancedWifiSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
         addIndex(ConfigureWifiSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_wireless);
         addIndex(SavedAccessPointsWifiSettings.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_wireless);
@@ -123,6 +126,7 @@ public final class SearchIndexableResources {
         addIndex(StorageSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_storage);
         addIndex(PowerUsageSummary.class,
                 R.xml.power_usage_summary, R.drawable.ic_settings_battery);
+        addIndex(PowerUsageDetail.class, NO_DATA_RES_ID, R.drawable.ic_settings_battery);
         addIndex(BatterySaverSettings.class,
                 R.xml.battery_saver_settings, R.drawable.ic_settings_battery);
         addIndex(AdvancedAppSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
@@ -136,6 +140,7 @@ public final class SearchIndexableResources {
         addIndex(DoubleTwistGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(SwipeToNotificationSettings.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_gestures);
+        addIndex(InputAndGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(LocationSettings.class, R.xml.location_settings, R.drawable.ic_settings_location);
         addIndex(ScanningSettings.class, R.xml.location_scanning, R.drawable.ic_settings_location);
         addIndex(SecuritySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_security);
@@ -150,6 +155,7 @@ public final class SearchIndexableResources {
                 NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(PhysicalKeyboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(PrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_backup);
+        addIndex(BackupSettingsFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_backup);
         addIndex(DateTimeSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_date_time);
         addIndex(AccessibilitySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_accessibility);
         addIndex(PrintSettingsFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_print);
@@ -164,6 +170,9 @@ public final class SearchIndexableResources {
         addIndex(ConnectedDeviceDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_bt_laptop);
         addIndex(EnterprisePrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(PaymentSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_nfc_payment);
+        addIndex(
+                TtsEnginePreferenceFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
+        addIndex(TtsSlidersFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
     }
 
     private SearchIndexableResources() {

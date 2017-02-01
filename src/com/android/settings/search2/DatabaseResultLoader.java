@@ -20,6 +20,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import android.text.TextUtils;
+import com.android.settings.dashboard.SiteMapManager;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.utils.AsyncLoader;
 
@@ -35,11 +38,6 @@ import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS
  */
 public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
     private static final String LOG = "DatabaseResultLoader";
-    private final String mQueryText;
-
-    protected final SQLiteDatabase mDatabase;
-
-    private final CursorToSearchResultConverter mConverter;
 
     /* These indices are used to match the columns of the this loader's SELECT statement.
      These are not necessarily the same order nor similar coverage as the schema defined in
@@ -99,8 +97,15 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
      */
     private static final int[] BASE_RANKS = {1, 4, 7};
 
+    private final String mQueryText;
+    private final SQLiteDatabase mDatabase;
+    private final CursorToSearchResultConverter mConverter;
+    private final SiteMapManager mSiteMapManager;
+
     public DatabaseResultLoader(Context context, String queryText) {
         super(context);
+        mSiteMapManager = FeatureFactory.getFactory(context)
+                .getSearchFeatureProvider().getSiteMapManager();
         mDatabase = IndexDatabaseHelper.getInstance(context).getReadableDatabase();
         mQueryText = cleanQuery(queryText);
         mConverter = new CursorToSearchResultConverter(context, mQueryText);
@@ -125,7 +130,6 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
         secondaryResults = query(MATCH_COLUMNS_SECONDARY, BASE_RANKS[1]);
         tertiaryResults = query(MATCH_COLUMNS_TERTIARY, BASE_RANKS[2]);
 
-
         final List<SearchResult> results = new ArrayList<>(primaryResults.size()
                 + secondaryResults.size()
                 + tertiaryResults.size());
@@ -138,13 +142,11 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
 
     private List<SearchResult> query(String[] matchColumns, int baseRank) {
         final String whereClause = buildWhereClause(matchColumns);
-        final String[] selection = new String[matchColumns.length];
-        final String query = "%" + mQueryText + "%";
-        Arrays.fill(selection, query);
+        final String[] selection = buildQuerySelection(matchColumns.length * 2);
 
         final Cursor resultCursor = mDatabase.query(TABLE_PREFS_INDEX, SELECT_COLUMNS, whereClause,
                 selection, null, null, null);
-        return mConverter.convertCursor(resultCursor, baseRank);
+        return mConverter.convertCursor(mSiteMapManager, resultCursor, baseRank);
     }
 
     @Override
@@ -155,22 +157,48 @@ public class DatabaseResultLoader extends AsyncLoader<List<SearchResult>> {
 
     /**
      * A generic method to make the query suitable for searching the database.
+     *
      * @return the cleaned query string
      */
     private static String cleanQuery(String query) {
+        if (TextUtils.isEmpty(query)) {
+            return null;
+        }
         return query.trim();
     }
 
     private static String buildWhereClause(String[] matchColumns) {
-        StringBuilder sb = new StringBuilder(" ");
+        StringBuilder sb = new StringBuilder(" (");
         final int count = matchColumns.length;
         for (int n = 0; n < count; n++) {
+            sb.append(matchColumns[n]);
+            sb.append(" like ? OR ");
             sb.append(matchColumns[n]);
             sb.append(" like ?");
             if (n < count - 1) {
                 sb.append(" OR ");
             }
         }
+        sb.append(") AND enabled = 1");
         return sb.toString();
+    }
+
+    /**
+     * Fills out the selection array to match the query as the prefix of a word.
+     *
+     * @param size is twice the number of columns to be matched. The first match is for the prefix
+     *             of the first word in the column. The second match is for any subsequent word
+     *             prefix match.
+     */
+    private String[] buildQuerySelection(int size) {
+        String[] selection = new String[size];
+        final String query = mQueryText + "%";
+        final String subStringQuery = "% " + mQueryText + "%";
+
+        for(int i = 0; i < (size - 1); i += 2) {
+            selection[i] = query;
+            selection[i + 1] = subStringQuery;
+        }
+        return selection;
     }
 }

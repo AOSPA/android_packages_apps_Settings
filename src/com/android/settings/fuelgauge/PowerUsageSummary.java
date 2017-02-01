@@ -26,6 +26,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
 import android.os.UserHandle;
+import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -36,6 +37,7 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -44,11 +46,16 @@ import com.android.settings.R;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.ManageApplications;
+import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.display.AutoBrightnessPreferenceController;
+import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.BatteryInfo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -89,7 +96,6 @@ public class PowerUsageSummary extends PowerUsageBase {
         super.onCreate(icicle);
         setAnimationAllowed(true);
 
-        addPreferencesFromResource(R.xml.power_usage_summary);
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_HISTORY);
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
     }
@@ -130,6 +136,25 @@ public class PowerUsageSummary extends PowerUsageBase {
         PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), mStatsHelper,
                 mStatsType, entry, true, true);
         return super.onPreferenceTreeClick(preference);
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.power_usage_summary;
+    }
+
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(new AutoBrightnessPreferenceController(context));
+        controllers.add(new TimeoutPreferenceController(context));
+        controllers.add(new BatterySaverController(context, getLifecycle()));
+        return controllers;
     }
 
     @Override
@@ -209,6 +234,7 @@ public class PowerUsageSummary extends PowerUsageBase {
      * We want to coalesce some UIDs. For example, dex2oat runs under a shared gid that
      * exists for all users of the same app. We detect this case and merge the power use
      * for dex2oat to the device OWNER's use of the app.
+     *
      * @return A sorted list of apps using power.
      */
     private static List<BatterySipper> getCoalescedUsageList(final List<BatterySipper> sippers) {
@@ -314,24 +340,33 @@ public class PowerUsageSummary extends PowerUsageBase {
             final List<BatterySipper> usageList = getCoalescedUsageList(
                     USE_FAKE_DATA ? getFakeStats() : mStatsHelper.getUsageList());
 
+            final double screenPowerMah = removeScreenBatterySipper(usageList);
+
             final int dischargeAmount = USE_FAKE_DATA ? 5000
                     : stats != null ? stats.getDischargeAmount(mStatsType) : 0;
             final int numSippers = usageList.size();
             for (int i = 0; i < numSippers; i++) {
                 final BatterySipper sipper = usageList.get(i);
-                if ((sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP) {
+                if (shouldHideSipper(sipper)) {
                     continue;
                 }
-                double totalPower = USE_FAKE_DATA ? 4000 : mStatsHelper.getTotalPower();
+
+                // Deduct the screen power from total power, used to calculate percentOfTotal
+                double totalPower = USE_FAKE_DATA ?
+                        4000 : mStatsHelper.getTotalPower() - screenPowerMah;
+
+                // With deduction in totalPower, percentOfTotal is higher because it adds the part
+                // used in screen
                 final double percentOfTotal =
                         ((sipper.totalPowerMah / totalPower) * dischargeAmount);
+
                 if (((int) (percentOfTotal + .5)) < 1) {
                     continue;
                 }
                 if (sipper.drainType == BatterySipper.DrainType.OVERCOUNTED) {
                     // Don't show over-counted unless it is at least 2/3 the size of
                     // the largest real entry, and its percent of total is more significant
-                    if (sipper.totalPowerMah < ((mStatsHelper.getMaxRealPower()*2)/3)) {
+                    if (sipper.totalPowerMah < ((mStatsHelper.getMaxRealPower() * 2) / 3)) {
                         continue;
                     }
                     if (percentOfTotal < 10) {
@@ -344,7 +379,7 @@ public class PowerUsageSummary extends PowerUsageBase {
                 if (sipper.drainType == BatterySipper.DrainType.UNACCOUNTED) {
                     // Don't show over-counted unless it is at least 1/2 the size of
                     // the largest real entry, and its percent of total is more significant
-                    if (sipper.totalPowerMah < (mStatsHelper.getMaxRealPower()/2)) {
+                    if (sipper.totalPowerMah < (mStatsHelper.getMaxRealPower() / 2)) {
                         continue;
                     }
                     if (percentOfTotal < 5) {
@@ -375,8 +410,9 @@ public class PowerUsageSummary extends PowerUsageBase {
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfMax, percentOfTotal);
-                if ((sipper.drainType != DrainType.APP || sipper.uidObj.getUid() == 0)
-                         && sipper.drainType != DrainType.USER) {
+                if ((sipper.drainType != DrainType.APP
+                        || sipper.uidObj.getUid() == Process.ROOT_UID)
+                        && sipper.drainType != DrainType.USER) {
                     pref.setTint(colorControl);
                 }
                 addedSome = true;
@@ -396,6 +432,16 @@ public class PowerUsageSummary extends PowerUsageBase {
     }
 
     @VisibleForTesting
+    boolean shouldHideSipper(BatterySipper sipper) {
+        final DrainType drainType = sipper.drainType;
+        final int uid = sipper.getUid();
+
+        return drainType == DrainType.IDLE || drainType == DrainType.CELL
+                || uid == Process.ROOT_UID || uid == Process.SYSTEM_UID
+                || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP;
+    }
+
+    @VisibleForTesting
     String extractKeyFromSipper(BatterySipper sipper) {
         if (sipper.uidObj != null) {
             return Integer.toString(sipper.getUid());
@@ -407,6 +453,19 @@ public class PowerUsageSummary extends PowerUsageBase {
             Log.w(TAG, "Inappropriate BatterySipper without uid and package names: " + sipper);
             return "-1";
         }
+    }
+
+    @VisibleForTesting
+    double removeScreenBatterySipper(List<BatterySipper> sippers) {
+        for (int i = 0, size = sippers.size(); i < size; i++) {
+            final BatterySipper sipper = sippers.get(i);
+            if (sipper.drainType == DrainType.SCREEN) {
+                sippers.remove(i);
+                return sipper.totalPowerMah;
+            }
+        }
+
+        return 0;
     }
 
     private static List<BatterySipper> getFakeStats() {
@@ -498,11 +557,26 @@ public class PowerUsageSummary extends PowerUsageBase {
         }
     }
 
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
+                            .isEnabled()) {
+                        return null;
+                    }
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.power_usage_summary;
+                    return Arrays.asList(sir);
+                }
+            };
+
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
             = new SummaryLoader.SummaryProviderFactory() {
         @Override
         public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                                                                   SummaryLoader summaryLoader) {
+                SummaryLoader summaryLoader) {
             return new SummaryProvider(activity, summaryLoader);
         }
     };

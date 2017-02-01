@@ -25,6 +25,7 @@ import android.view.MenuItem;
 
 import com.android.settings.R;
 import com.android.settings.applications.PackageManagerWrapperImpl;
+import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.search.Index;
 
 /**
@@ -35,6 +36,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     private static final String TAG = "SearchFeatureProvider";
 
     private DatabaseIndexingManager mDatabaseIndexingManager;
+    private SiteMapManager mSiteMapManager;
 
     @Override
     public boolean isEnabled(Context context) {
@@ -73,6 +75,11 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     }
 
     @Override
+    public SavedQueryLoader getSavedQueryLoader(Context context) {
+        return new SavedQueryLoader(context);
+    }
+
+    @Override
     public DatabaseIndexingManager getIndexingManager(Context context) {
         if (mDatabaseIndexingManager == null) {
             mDatabaseIndexingManager = new DatabaseIndexingManager(context.getApplicationContext(),
@@ -81,14 +88,22 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
         return mDatabaseIndexingManager;
     }
 
+    public SiteMapManager getSiteMapManager() {
+        if (mSiteMapManager == null) {
+            mSiteMapManager = new SiteMapManager();
+        }
+        return mSiteMapManager;
+    }
+
     @Override
     public void updateIndex(Context context) {
         long indexStartTime = System.currentTimeMillis();
         if (isEnabled(context)) {
-            getIndexingManager(context).update();
+            getIndexingManager(context).indexDatabase();
         } else {
             Index.getInstance(context).update();
         }
-        Log.d(TAG, "Index.update() took " + (System.currentTimeMillis() - indexStartTime) + " ms");
+        Log.d(TAG, "IndexDatabase() took " +
+                (System.currentTimeMillis() - indexStartTime) + " ms");
     }
 }

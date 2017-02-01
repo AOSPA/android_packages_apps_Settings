@@ -27,6 +27,7 @@ import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.wifi.p2p.WifiP2pPreferenceController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,12 +45,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
     }
 
     @Override
-    protected String getCategoryKey() {
-        // We don't want to inject any external settings into this screen.
-        return null;
-    }
-
-    @Override
     protected String getLogTag() {
         return TAG;
     }
@@ -64,12 +59,14 @@ public class ConfigureWifiSettings extends DashboardFragment {
         mWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new WifiInfoPreferenceController(context, getLifecycle(), mWifiManager));
-        controllers.add(new SavedNetworkPreferenceController(context, mWifiManager));
         controllers.add(new CellularFallbackPreferenceController(context));
         controllers.add(new AllowRecommendationPreferenceController(context));
         controllers.add(new NotifyOpenNetworksPreferenceController(context, getLifecycle()));
         controllers.add(new WifiWakeupPreferenceController(context, getLifecycle()));
         controllers.add(new WifiSleepPolicyPreferenceController(context));
+        controllers.add(new WifiP2pPreferenceController(context, getLifecycle(), mWifiManager));
+        controllers.add(new WpsPreferenceController(
+                context, getLifecycle(), mWifiManager, getFragmentManager()));
         return controllers;
     }
 

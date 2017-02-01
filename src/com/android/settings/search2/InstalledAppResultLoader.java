@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.net.Uri;
 import android.os.UserHandle;
@@ -27,7 +28,11 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import com.android.settings.R;
+import com.android.settings.applications.ManageApplications;
 import com.android.settings.applications.PackageManagerWrapper;
+import com.android.settings.dashboard.SiteMapManager;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AsyncLoader;
 
 import java.util.ArrayList;
@@ -41,14 +46,21 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
 
     private static final int NAME_NO_MATCH = -1;
     private static final int NAME_EXACT_MATCH = 0;
+    private static final Intent LAUNCHER_PROBE = new Intent(Intent.ACTION_MAIN)
+            .addCategory(Intent.CATEGORY_LAUNCHER);
 
+    private List<String> mBreadcrumb;
+    private SiteMapManager mSiteMapManager;
     private final String mQuery;
     private final UserManager mUserManager;
     private final PackageManagerWrapper mPackageManager;
 
+
     public InstalledAppResultLoader(Context context, PackageManagerWrapper pmWrapper,
             String query) {
         super(context);
+        mSiteMapManager = FeatureFactory.getFactory(context)
+                .getSearchFeatureProvider().getSiteMapManager();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mPackageManager = pmWrapper;
         mQuery = query;
@@ -67,7 +79,7 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
                                     | (user.isAdmin() ? PackageManager.MATCH_ANY_USER : 0),
                             user.id);
             for (ApplicationInfo info : apps) {
-                if (info.isSystemApp()) {
+                if (!shouldIncludeAsCandidate(info, user)) {
                     continue;
                 }
                 final CharSequence label = info.loadLabel(pm);
@@ -83,12 +95,29 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
                 builder.addIcon(info.loadIcon(pm))
                         .addTitle(info.loadLabel(pm))
                         .addRank(wordDiff)
+                        .addBreadcrumbs(getBreadCrumb())
                         .addPayload(new IntentPayload(intent));
                 results.add(builder.build());
             }
         }
         Collections.sort(results);
         return results;
+    }
+
+    private boolean shouldIncludeAsCandidate(ApplicationInfo info, UserInfo user) {
+        if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0
+                || (info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+            return true;
+        }
+        final Intent launchIntent = new Intent(LAUNCHER_PROBE)
+                .setPackage(info.packageName);
+        final List<ResolveInfo> intents = mPackageManager.queryIntentActivitiesAsUser(
+                launchIntent,
+                PackageManager.MATCH_DISABLED_COMPONENTS
+                        | PackageManager.MATCH_DIRECT_BOOT_AWARE
+                        | PackageManager.MATCH_DIRECT_BOOT_UNAWARE,
+                user.id);
+        return intents != null && intents.size() != 0;
     }
 
     @Override
@@ -107,7 +136,7 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
      * perfectly, and larger values means they are less similar.
      * <p/>
      * Example:
-     * appName: Abcde, query: Abcde, Returns NAME_EXACT_MATCH
+     * appName: Abcde, query: Abcde, Returns {@link #NAME_EXACT_MATCH}
      * appName: Abcde, query: ade, Returns 2
      * appName: Abcde, query: ae, Returns 3
      * appName: Abcde, query: ea, Returns NAME_NO_MATCH
@@ -135,5 +164,15 @@ public class InstalledAppResultLoader extends AsyncLoader<List<SearchResult>> {
         // Use the diff in length as a proxy of how close the 2 words match. Value range from 0
         // to infinity.
         return valueText.length - queryTokens.length;
+    }
+
+    private List<String> getBreadCrumb() {
+        if (mBreadcrumb == null || mBreadcrumb.isEmpty()) {
+            final Context context = getContext();
+            mBreadcrumb = mSiteMapManager.buildBreadCrumb(
+                    context, ManageApplications.class.getName(),
+                    context.getString(R.string.applications_settings));
+        }
+        return mBreadcrumb;
     }
 }

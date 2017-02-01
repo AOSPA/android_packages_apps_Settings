@@ -21,8 +21,6 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -52,9 +50,8 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.Settings;
-import android.service.notification.NotificationListenerService.Ranking;
 import android.support.annotation.VisibleForTesting;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
@@ -78,7 +75,6 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.AppHeader;
 import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;
@@ -86,6 +82,11 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
+import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
+import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
+import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
@@ -743,6 +744,8 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void forceStopPackage(String pkgName) {
+        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
+                MetricsEvent.ACTION_APP_FORCE_STOP, pkgName);
         ActivityManager am = (ActivityManager) getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
         am.forceStopPackage(pkgName);
@@ -906,34 +909,49 @@ public class InstalledAppDetails extends AppInfoBase
             return;
         }
         final PreferenceScreen screen = getPreferenceScreen();
-        if (DefaultHomePreference.hasHomePreference(mPackageName, getContext())) {
+        final Context context = getContext();
+        if (DefaultHomePreferenceController.hasHomePreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
                     AdvancedAppSettings.class, "default_home", R.string.home_app,
                     R.string.configure_apps));
         }
-        if (DefaultBrowserPreference.hasBrowserPreference(mPackageName, getContext())) {
+        if (DefaultBrowserPreferenceController.hasBrowserPreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
                     AdvancedAppSettings.class, "default_browser", R.string.default_browser_title,
                     R.string.configure_apps));
         }
-        if (DefaultPhonePreference.hasPhonePreference(mPackageName, getContext())) {
+        if (DefaultPhonePreferenceController.hasPhonePreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
                     AdvancedAppSettings.class, "default_phone_app", R.string.default_phone_title,
                     R.string.configure_apps));
         }
-        if (DefaultEmergencyPreference.hasEmergencyPreference(mPackageName, getContext())) {
+        if (DefaultEmergencyPreferenceController.hasEmergencyPreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
                     AdvancedAppSettings.class, "default_emergency_app",
                     R.string.default_emergency_app, R.string.configure_apps));
         }
-        if (DefaultSmsPreference.hasSmsPreference(mPackageName, getContext())) {
+        if (DefaultSmsPreferenceController.hasSmsPreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
                     AdvancedAppSettings.class, "default_sms_app", R.string.sms_application_title,
                     R.string.configure_apps));
         }
+
+        // Get the package info with the activities
+        PackageInfo packageInfoWithActivities = null;
+        try {
+            packageInfoWithActivities = mPm.getPackageInfoAsUser(mPackageName,
+                    PackageManager.GET_ACTIVITIES, UserHandle.myUserId());
+        } catch (NameNotFoundException e) {
+            Log.e(TAG, "Exception while retrieving the package info of " + mPackageName, e);
+        }
+
         boolean hasDrawOverOtherApps = hasPermission(permission.SYSTEM_ALERT_WINDOW);
         boolean hasWriteSettings = hasPermission(permission.WRITE_SETTINGS);
-        if (hasDrawOverOtherApps || hasWriteSettings) {
+        boolean hasPictureInPictureActivities = (packageInfoWithActivities != null) &&
+                PictureInPictureSettings.checkPackageHasPictureInPictureActivities(
+                        packageInfoWithActivities.packageName,
+                        packageInfoWithActivities.activities);
+        if (hasDrawOverOtherApps || hasWriteSettings || hasPictureInPictureActivities) {
             PreferenceCategory category = new PreferenceCategory(getPrefContext());
             category.setTitle(R.string.advanced_apps);
             screen.addPreference(category);
@@ -961,6 +979,23 @@ public class InstalledAppDetails extends AppInfoBase
                     public boolean onPreferenceClick(Preference preference) {
                         startAppInfoFragment(WriteSettingsDetails.class,
                                 getString(R.string.write_settings));
+                        return true;
+                    }
+                });
+                category.addPreference(pref);
+            }
+            if (hasPictureInPictureActivities) {
+                final SwitchPreference pref = new SwitchPreference(getPrefContext());
+                pref.setPersistent(false);
+                pref.setTitle(R.string.picture_in_picture_app_detail_title);
+                pref.setSummary(R.string.picture_in_picture_app_detail_summary);
+                pref.setChecked(PictureInPictureSettings.getEnterPipOnHideStateForPackage(
+                        getContext(), mPackageInfo.applicationInfo.uid, mPackageName));
+                pref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        PictureInPictureSettings.setEnterPipOnHideStateForPackage(getContext(),
+                                mPackageInfo.applicationInfo.uid, mPackageName, (Boolean) newValue);
                         return true;
                     }
                 });
@@ -1019,29 +1054,33 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     private void updateDynamicPrefs() {
+        final Context context = getContext();
         Preference pref = findPreference("default_home");
+
         if (pref != null) {
-            pref.setSummary(DefaultHomePreference.isHomeDefault(mPackageName, getContext())
+            pref.setSummary(DefaultHomePreferenceController.isHomeDefault(mPackageName, context)
                     ? R.string.yes : R.string.no);
         }
         pref = findPreference("default_browser");
         if (pref != null) {
-            pref.setSummary(DefaultBrowserPreference.isBrowserDefault(mPackageName, getContext())
+            pref.setSummary(
+                    DefaultBrowserPreferenceController.isBrowserDefault(mPackageName, context)
                     ? R.string.yes : R.string.no);
         }
         pref = findPreference("default_phone_app");
         if (pref != null) {
-            pref.setSummary(DefaultPhonePreference.isPhoneDefault(mPackageName, getContext())
+            pref.setSummary(
+                    DefaultPhonePreferenceController.isPhoneDefault(mPackageName, context)
                     ? R.string.yes : R.string.no);
         }
         pref = findPreference("default_emergency_app");
         if (pref != null) {
-            pref.setSummary(DefaultEmergencyPreference.isEmergencyDefault(mPackageName,
+            pref.setSummary(DefaultEmergencyPreferenceController.isEmergencyDefault(mPackageName,
                     getContext()) ? R.string.yes : R.string.no);
         }
         pref = findPreference("default_sms_app");
         if (pref != null) {
-            pref.setSummary(DefaultSmsPreference.isSmsDefault(mPackageName, getContext())
+            pref.setSummary(DefaultSmsPreferenceController.isSmsDefault(mPackageName, context)
                     ? R.string.yes : R.string.no);
         }
         pref = findPreference("system_alert_window");

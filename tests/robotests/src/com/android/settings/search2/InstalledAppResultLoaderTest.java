@@ -17,13 +17,18 @@
 package com.android.settings.search2;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
 
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.PackageManagerWrapper;
+import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.testutils.ApplicationTestUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,8 +43,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
+import static android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP;
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -52,16 +65,24 @@ public class InstalledAppResultLoaderTest {
     private PackageManagerWrapper mPackageManagerWrapper;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private SiteMapManager mSiteMapManager;
 
     private InstalledAppResultLoader mLoader;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory factory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        when(factory.searchFeatureProvider.getSiteMapManager())
+                .thenReturn(mSiteMapManager);
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        when(mContext.getString(R.string.applications_settings))
+                .thenReturn("app");
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_SYSTEM,
@@ -89,9 +110,68 @@ public class InstalledAppResultLoaderTest {
     public void query_matchingQuery_shouldReturnNonSystemApps() {
         final String query = "app";
 
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+        mLoader = spy(new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query));
+        when(mLoader.getContext()).thenReturn(mContext);
+        when(mSiteMapManager.buildBreadCrumb(eq(mContext), anyString(), anyString()))
+                .thenReturn(Arrays.asList(new String[]{"123"}));
 
         assertThat(mLoader.loadInBackground().size()).isEqualTo(2);
+        verify(mSiteMapManager)
+                .buildBreadCrumb(eq(mContext), anyString(), anyString());
+    }
+
+    @Test
+    public void query_matchingQuery_shouldReturnSystemAppUpdates() {
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_UPDATED_SYSTEM_APP,
+                                0 /* targetSdkVersion */)));
+        final String query = "app";
+
+        mLoader = spy(new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query));
+        when(mLoader.getContext()).thenReturn(mContext);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+        verify(mSiteMapManager)
+                .buildBreadCrumb(eq(mContext), anyString(), anyString());
+    }
+
+    @Test
+    public void query_matchingQuery_shouldReturnSystemAppIfLaunchable() {
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_SYSTEM,
+                                0 /* targetSdkVersion */)));
+        final List<ResolveInfo> list = mock(List.class);
+        when(list.size()).thenReturn(1);
+        when(mPackageManagerWrapper.queryIntentActivitiesAsUser(
+                any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(list);
+
+        final String query = "app";
+
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void query_matchingQuery_shouldNotReturnSystemAppIfNotLaunchable() {
+        when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
+                .thenReturn(Arrays.asList(
+                        ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_SYSTEM,
+                                0 /* targetSdkVersion */)));
+        when(mPackageManagerWrapper.queryIntentActivitiesAsUser(
+                any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(null);
+
+        final String query = "app";
+
+        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query);
+
+        assertThat(mLoader.loadInBackground()).isEmpty();
+        verify(mSiteMapManager, never())
+                .buildBreadCrumb(eq(mContext), anyString(), anyString());
     }
 
     @Test

@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import android.content.Context;
+import android.os.Build.VERSION_CODES;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
@@ -33,12 +34,14 @@ import com.android.settings.TestConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.junit.Assume.assumeTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -109,26 +112,70 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void onResume_available_shouldAddPreferenceCategory() {
+        // Test requires UserManager.isUserUnlocked, which is an N API.
+        assumeTrue(RuntimeEnvironment.getApiLevel() >= VERSION_CODES.N);
+
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
         when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
                 .thenReturn(UserHandle.myUserId());
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
-        when(mScreen.findPreference(KEY_WORK_CATEGORY))
-            .thenReturn(mock(PreferenceGroup.class));
-        when(mScreen.findPreference(KEY_WORK_USE_PERSONAL_SOUNDS))
-            .thenReturn(mock(TwoStatePreference.class));
-        when(mScreen.findPreference(KEY_WORK_PHONE_RINGTONE))
-            .thenReturn(mock(DefaultRingtonePreference.class));
-        when(mScreen.findPreference(KEY_WORK_NOTIFICATION_RINGTONE))
-            .thenReturn(mock(DefaultRingtonePreference.class));
-        when(mScreen.findPreference(KEY_WORK_ALARM_RINGTONE))
-            .thenReturn(mock(DefaultRingtonePreference.class));
         when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);
+        mockWorkCategory();
 
         mController.onResume();
 
         verify(mFragment).addPreferencesFromResource(R.xml.sound_work_settings);
+    }
+
+    @Test
+    public void onManagedProfileAdded_shouldAddPreferenceCategory() {
+        // Test requires UserManager.isUserUnlocked, which is an N API.
+        assumeTrue(RuntimeEnvironment.getApiLevel() >= VERSION_CODES.N);
+
+        // Given a device without any managed profiles:
+        when(mAudioHelper.isSingleVolume()).thenReturn(false);
+        when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
+        when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);
+        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+                .thenReturn(UserHandle.USER_NULL);
+        mockWorkCategory();
+
+        // When the fragment first resumes, the category should not appear.
+        mController.onResume();
+
+        verify(mFragment, never()).addPreferencesFromResource(R.xml.sound_work_settings);
+
+        // However, when a managed profile is added after resuming, the category should appear.
+        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+                .thenReturn(UserHandle.myUserId());
+        mController.onManagedProfileAdded(UserHandle.myUserId());
+
+        verify(mFragment).addPreferencesFromResource(R.xml.sound_work_settings);
+    }
+
+    @Test
+    public void onManagedProfileRemoved_shouldRemovePreferenceCategory() {
+        // Test requires UserManager.isUserUnlocked, which is an N API.
+        assumeTrue(RuntimeEnvironment.getApiLevel() >= VERSION_CODES.N);
+
+        // Given a device with a managed profile:
+        when(mAudioHelper.isSingleVolume()).thenReturn(false);
+        when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
+        when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);
+        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+                .thenReturn(UserHandle.myUserId());
+        mockWorkCategory();
+
+        // Which is in resumed state:
+        mController.onResume();
+
+        // When a managed profile is removed, the category should be removed.
+        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+                .thenReturn(UserHandle.USER_NULL);
+        mController.onManagedProfileRemoved(UserHandle.myUserId());
+
+        verify(mScreen).removePreference(mScreen.findPreference(KEY_WORK_CATEGORY));
     }
 
     @Test
@@ -146,6 +193,9 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_shouldUpdateSummary() {
+        // Test requires UserManager.isUserUnlocked, which is an N API.
+        assumeTrue(RuntimeEnvironment.getApiLevel() >= VERSION_CODES.N);
+
         final Preference preference = mock(Preference.class);
         when(preference.getKey()).thenReturn(KEY_WORK_PHONE_RINGTONE);
 
@@ -154,4 +204,16 @@ public class WorkSoundPreferenceControllerTest {
         verify(preference).setSummary(anyString());
     }
 
+    private void mockWorkCategory() {
+        when(mScreen.findPreference(KEY_WORK_CATEGORY))
+            .thenReturn(mock(PreferenceGroup.class));
+        when(mScreen.findPreference(KEY_WORK_USE_PERSONAL_SOUNDS))
+            .thenReturn(mock(TwoStatePreference.class));
+        when(mScreen.findPreference(KEY_WORK_PHONE_RINGTONE))
+            .thenReturn(mock(DefaultRingtonePreference.class));
+        when(mScreen.findPreference(KEY_WORK_NOTIFICATION_RINGTONE))
+            .thenReturn(mock(DefaultRingtonePreference.class));
+        when(mScreen.findPreference(KEY_WORK_ALARM_RINGTONE))
+            .thenReturn(mock(DefaultRingtonePreference.class));
+    }
 }

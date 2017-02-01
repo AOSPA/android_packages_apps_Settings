@@ -34,7 +34,6 @@ import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesContract;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
@@ -56,6 +55,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
@@ -152,7 +152,7 @@ public class DatabaseIndexingManager {
         return mIsAvailable.get();
     }
 
-    public void update() {
+    public void indexDatabase() {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -279,7 +279,7 @@ public class DatabaseIndexingManager {
      * @param className the class name (typically a fragment name).
      * @param rebuild true means that you want to delete the data from the Index first.
      * @param includeInSearchResults true means that you want the bit "enabled" set so that the
-     *                               data will be seen included into the search results
+     * data will be seen included into the search results
      */
     public void updateFromClassNameResource(String className, final boolean rebuild,
             boolean includeInSearchResults) {
@@ -287,7 +287,7 @@ public class DatabaseIndexingManager {
             throw new IllegalArgumentException("class name cannot be null!");
         }
         final SearchIndexableResource res = SearchIndexableResources.getResourceByName(className);
-        if (res == null ) {
+        if (res == null) {
             Log.e(LOG_TAG, "Cannot find SearchIndexableResources for class name: " + className);
             return;
         }
@@ -516,10 +516,7 @@ public class DatabaseIndexingManager {
                 nonIndexableKeys.addAll(resNonIndxableKeys);
             }
 
-            indexFromResource(sir.context, database, localeStr,
-                    sir.xmlResId, sir.className, sir.iconResId, sir.rank,
-                    sir.intentAction, sir.intentTargetPackage, sir.intentTargetClass,
-                    nonIndexableKeys);
+            indexFromResource(database, localeStr, sir, nonIndexableKeys);
         } else {
             if (TextUtils.isEmpty(sir.className)) {
                 Log.w(LOG_TAG, "Cannot index an empty Search Provider name!");
@@ -543,20 +540,17 @@ public class DatabaseIndexingManager {
                     nonIndexableKeys.addAll(providerNonIndexableKeys);
                 }
 
-                indexFromProvider(mContext, database, localeStr, provider, sir.className,
-                        sir.iconResId, sir.rank, sir.enabled, nonIndexableKeys);
+                indexFromProvider(database, localeStr, provider, sir, nonIndexableKeys);
             }
         }
     }
 
-    private void indexFromResource(Context context, SQLiteDatabase database, String localeStr,
-            int xmlResId, String fragmentName, int iconResId, int rank,
-            String intentAction, String intentTargetPackage, String intentTargetClass,
-            List<String> nonIndexableKeys) {
-
+    private void indexFromResource(SQLiteDatabase database, String localeStr,
+            SearchIndexableResource sir, List<String> nonIndexableKeys) {
+        final Context context = sir.context;
         XmlResourceParser parser = null;
         try {
-            parser = context.getResources().getXml(xmlResId);
+            parser = context.getResources().getXml(sir.xmlResId);
 
             int type;
             while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
@@ -581,39 +575,47 @@ public class DatabaseIndexingManager {
             String title;
             String summary;
             String keywords;
+            String childFragment;
             ResultPayload payload;
+            boolean enabled;
+            final String fragmentName = sir.className;
+            final int iconResId = sir.iconResId;
+            final int rank = sir.rank;
+            final String intentAction = sir.intentAction;
+            final String intentTargetPackage = sir.intentTargetPackage;
+            final String intentTargetClass = sir.intentTargetClass;
 
-            ArrayMap<String, PreferenceController> controllerUriMap = null;
+            Map<String, PreferenceController> controllerUriMap = null;
 
             if (fragmentName != null) {
-                controllerUriMap = (ArrayMap) DatabaseIndexingUtils
+                controllerUriMap = DatabaseIndexingUtils
                         .getPreferenceControllerUriMap(fragmentName, context);
             }
 
             // Insert rows for the main PreferenceScreen node. Rewrite the data for removing
             // hyphens.
-            if (!nonIndexableKeys.contains(key)) {
-                title = XmlParserUtils.getDataTitle(context, attrs);
-                summary = XmlParserUtils.getDataSummary(context, attrs);
-                keywords = XmlParserUtils.getDataKeywords(context, attrs);
 
-                DatabaseRow.Builder builder = new DatabaseRow.Builder();
-                builder.setLocale(localeStr)
-                        .setEntries(null)
-                        .setClassName(fragmentName)
-                        .setScreenTitle(screenTitle)
-                        .setIconResId(iconResId)
-                        .setRank(rank)
-                        .setIntentAction(intentAction)
-                        .setIntentTargetPackage(intentTargetPackage)
-                        .setIntentTargetClass(intentTargetClass)
-                        .setEnabled(true)
-                        .setKey(key)
-                        .setUserId(-1 /* default user id */);
+            title = XmlParserUtils.getDataTitle(context, attrs);
+            summary = XmlParserUtils.getDataSummary(context, attrs);
+            keywords = XmlParserUtils.getDataKeywords(context, attrs);
+            enabled = !nonIndexableKeys.contains(key);
 
-                updateOneRowWithFilteredData(database, builder, title, summary,
-                        null /* summary off */, keywords);
-            }
+            DatabaseRow.Builder builder = new DatabaseRow.Builder();
+            builder.setLocale(localeStr)
+                    .setEntries(null)
+                    .setClassName(fragmentName)
+                    .setScreenTitle(screenTitle)
+                    .setIconResId(iconResId)
+                    .setRank(rank)
+                    .setIntentAction(intentAction)
+                    .setIntentTargetPackage(intentTargetPackage)
+                    .setIntentTargetClass(intentTargetClass)
+                    .setEnabled(enabled)
+                    .setKey(key)
+                    .setUserId(-1 /* default user id */);
+
+            updateOneRowWithFilteredData(database, builder, title, summary,
+                    null /* summary off */, keywords);
 
             while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                     && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth)) {
@@ -624,14 +626,11 @@ public class DatabaseIndexingManager {
                 nodeName = parser.getName();
 
                 key = XmlParserUtils.getDataKey(context, attrs);
-                if (nonIndexableKeys.contains(key)) {
-                    continue;
-                }
-
+                enabled = ! nonIndexableKeys.contains(key);
                 title = XmlParserUtils.getDataTitle(context, attrs);
                 keywords = XmlParserUtils.getDataKeywords(context, attrs);
 
-                DatabaseRow.Builder builder = new DatabaseRow.Builder();
+                builder = new DatabaseRow.Builder();
                 builder.setLocale(localeStr)
                         .setClassName(fragmentName)
                         .setScreenTitle(screenTitle)
@@ -640,7 +639,7 @@ public class DatabaseIndexingManager {
                         .setIntentAction(intentAction)
                         .setIntentTargetPackage(intentTargetPackage)
                         .setIntentTargetClass(intentTargetClass)
-                        .setEnabled(true)
+                        .setEnabled(enabled)
                         .setKey(key)
                         .setUserId(-1 /* default user id */);
 
@@ -654,8 +653,10 @@ public class DatabaseIndexingManager {
                     }
 
                     payload = DatabaseIndexingUtils.getPayloadFromUriMap(controllerUriMap, key);
+                    childFragment = XmlParserUtils.getDataChildFragment(context, attrs);
 
                     builder.setEntries(entries)
+                            .setChildClassName(childFragment)
                             .setPayload(payload);
 
                     // Insert rows for the child nodes of PreferenceScreen
@@ -682,16 +683,21 @@ public class DatabaseIndexingManager {
         }
     }
 
-    private void indexFromProvider(Context context, SQLiteDatabase database, String localeStr,
-            Indexable.SearchIndexProvider provider, String className, int iconResId, int rank,
-            boolean enabled, List<String> nonIndexableKeys) {
+    private void indexFromProvider(SQLiteDatabase database, String localeStr,
+            Indexable.SearchIndexProvider provider, SearchIndexableResource sir,
+            List<String> nonIndexableKeys) {
+
+        final String className = sir.className;
+        final int iconResId = sir.iconResId;
+        final int rank = sir.rank;
 
         if (provider == null) {
             Log.w(LOG_TAG, "Cannot find provider: " + className);
             return;
         }
 
-        final List<SearchIndexableRaw> rawList = provider.getRawDataToIndex(context, enabled);
+        final List<SearchIndexableRaw> rawList = provider.getRawDataToIndex(mContext,
+                true /* enabled */);
 
         if (rawList != null) {
 
@@ -703,10 +709,7 @@ public class DatabaseIndexingManager {
                 if (!raw.locale.toString().equalsIgnoreCase(localeStr)) {
                     continue;
                 }
-
-                if (nonIndexableKeys.contains(raw.key)) {
-                    continue;
-                }
+                boolean enabled = !nonIndexableKeys.contains(raw.key);
 
                 DatabaseRow.Builder builder = new DatabaseRow.Builder();
                 builder.setLocale(localeStr)
@@ -718,7 +721,7 @@ public class DatabaseIndexingManager {
                         .setIntentAction(raw.intentAction)
                         .setIntentTargetPackage(raw.intentTargetPackage)
                         .setIntentTargetClass(raw.intentTargetClass)
-                        .setEnabled(raw.enabled)
+                        .setEnabled(enabled)
                         .setKey(raw.key)
                         .setUserId(raw.userId);
 
@@ -728,7 +731,7 @@ public class DatabaseIndexingManager {
         }
 
         final List<SearchIndexableResource> resList =
-                provider.getXmlResourcesToIndex(context, enabled);
+                provider.getXmlResourcesToIndex(mContext, true);
         if (resList != null) {
             final int resSize = resList.size();
             for (int i = 0; i < resSize; i++) {
@@ -739,21 +742,16 @@ public class DatabaseIndexingManager {
                     continue;
                 }
 
-                final int itemIconResId = (item.iconResId == 0) ? iconResId : item.iconResId;
-                final int itemRank = (item.rank == 0) ? rank : item.rank;
-                String itemClassName = (TextUtils.isEmpty(item.className))
-                        ? className : item.className;
+                item.iconResId = (item.iconResId == 0) ? iconResId : item.iconResId;
+                item.className = (TextUtils.isEmpty(item.className)) ? className : item.className;
 
-                indexFromResource(context, database, localeStr,
-                        item.xmlResId, itemClassName, itemIconResId, itemRank,
-                        item.intentAction, item.intentTargetPackage,
-                        item.intentTargetClass, nonIndexableKeys);
+                indexFromResource(database, localeStr, item, nonIndexableKeys);
             }
         }
     }
 
     private void updateOneRowWithFilteredData(SQLiteDatabase database, DatabaseRow.Builder builder,
-            String title, String summaryOn, String summaryOff,String keywords) {
+            String title, String summaryOn, String summaryOff, String keywords) {
 
         final String updatedTitle = DatabaseIndexingUtils.normalizeHyphen(title);
         final String updatedSummaryOn = DatabaseIndexingUtils.normalizeHyphen(summaryOn);
@@ -783,14 +781,8 @@ public class DatabaseIndexingManager {
             return;
         }
 
-        // The DocID should contains more than the title string itself (you may have two settings
-        // with the same title). So we need to use a combination of the title and the screenTitle.
-        StringBuilder sb = new StringBuilder(row.updatedTitle);
-        sb.append(row.screenTitle);
-        int docId = sb.toString().hashCode();
-
         ContentValues values = new ContentValues();
-        values.put(IndexDatabaseHelper.IndexColumns.DOCID, docId);
+        values.put(IndexDatabaseHelper.IndexColumns.DOCID, row.getDocId());
         values.put(IndexDatabaseHelper.IndexColumns.LOCALE, row.locale);
         values.put(IndexDatabaseHelper.IndexColumns.DATA_RANK, row.rank);
         values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE, row.updatedTitle);
@@ -816,6 +808,18 @@ public class DatabaseIndexingManager {
         values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, row.payload);
 
         database.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, null, values);
+
+        if (!TextUtils.isEmpty(row.className) && !TextUtils.isEmpty(row.childClassName)) {
+            ContentValues siteMapPair = new ContentValues();
+            final int pairDocId = Objects.hash(row.className, row.childClassName);
+            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.DOCID, pairDocId);
+            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.PARENT_CLASS, row.className);
+            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.PARENT_TITLE, row.screenTitle);
+            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.CHILD_CLASS, row.childClassName);
+            siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.CHILD_TITLE, row.updatedTitle);
+
+            database.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_SITE_MAP, null, siteMapPair);
+        }
     }
 
     /**
@@ -919,7 +923,7 @@ public class DatabaseIndexingManager {
                 }
                 if (!TextUtils.isEmpty(data.className)) {
                     delete(database, IndexDatabaseHelper.IndexColumns.CLASS_NAME, data.className);
-                } else  {
+                } else {
                     if (data instanceof SearchIndexableRaw) {
                         final SearchIndexableRaw raw = (SearchIndexableRaw) data;
                         if (!TextUtils.isEmpty(raw.title)) {
@@ -938,7 +942,7 @@ public class DatabaseIndexingManager {
 
         private int delete(SQLiteDatabase database, String columName, String value) {
             final String whereClause = columName + "=?";
-            final String[] whereArgs = new String[] { value };
+            final String[] whereArgs = new String[]{value};
 
             return database.delete(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, whereClause,
                     whereArgs);
@@ -955,6 +959,7 @@ public class DatabaseIndexingManager {
         public final String normalizedSummaryOff;
         public final String entries;
         public final String className;
+        public final String childClassName;
         public final String screenTitle;
         public final int iconResId;
         public final int rank;
@@ -978,6 +983,7 @@ public class DatabaseIndexingManager {
             normalizedSummaryOff = builder.mNormalizedSummaryOff;
             entries = builder.mEntries;
             className = builder.mClassName;
+            childClassName = builder.mChildClassName;
             screenTitle = builder.mScreenTitle;
             iconResId = builder.mIconResId;
             rank = builder.mRank;
@@ -993,6 +999,16 @@ public class DatabaseIndexingManager {
                     : null;
         }
 
+        /**
+         * Returns the doc id for this row.
+         */
+        public int getDocId() {
+            // The DocID should contains more than the title string itself (you may have two
+            // settings with the same title). So we need to use a combination of multiple
+            // attributes from this row.
+            return Objects.hash(updatedTitle, screenTitle, key, payloadType);
+        }
+
         public static class Builder {
             private String mLocale;
             private String mUpdatedTitle;
@@ -1003,6 +1019,7 @@ public class DatabaseIndexingManager {
             private String mNormalizedSummaryOff;
             private String mEntries;
             private String mClassName;
+            private String mChildClassName;
             private String mScreenTitle;
             private int mIconResId;
             private int mRank;
@@ -1013,7 +1030,8 @@ public class DatabaseIndexingManager {
             private boolean mEnabled;
             private String mKey;
             private int mUserId;
-            @ResultPayload.PayloadType private int mPayloadType;
+            @ResultPayload.PayloadType
+            private int mPayloadType;
             private ResultPayload mPayload;
 
             public Builder setLocale(String locale) {
@@ -1058,6 +1076,11 @@ public class DatabaseIndexingManager {
 
             public Builder setClassName(String className) {
                 mClassName = className;
+                return this;
+            }
+
+            public Builder setChildClassName(String childClassName) {
+                mChildClassName = childClassName;
                 return this;
             }
 
@@ -1114,7 +1137,7 @@ public class DatabaseIndexingManager {
             public Builder setPayload(ResultPayload payload) {
                 mPayload = payload;
 
-                if(mPayload != null) {
+                if (mPayload != null) {
                     setPayloadType(mPayload.getType());
                 }
                 return this;
@@ -1122,6 +1145,7 @@ public class DatabaseIndexingManager {
 
             /**
              * Payload type is added when a Payload is added to the Builder in {setPayload}
+             *
              * @param payloadType PayloadType
              * @return The Builder
              */

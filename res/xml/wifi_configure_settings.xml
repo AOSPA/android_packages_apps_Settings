@@ -17,11 +17,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/wifi_configure_titlebar">
 
-    <Preference
-        android:key="saved_networks"
-        android:title="@string/wifi_saved_access_points_label"
-        android:fragment="com.android.settings.wifi.SavedAccessPointsWifiSettings" />
-
     <!-- android:dependency="enable_wifi" -->
     <ListPreference
         android:key="sleep_policy"
@@ -56,5 +51,30 @@
     <Preference
         android:key="current_ip_address"
         android:title="@string/wifi_advanced_ip_address_title"/>
+
+    <Preference
+            android:key="install_credentials"
+            android:title="@string/wifi_install_credentials">
+        <intent android:action="android.credentials.INSTALL_AS_USER"
+                android:targetPackage="com.android.certinstaller"
+                android:targetClass="com.android.certinstaller.CertInstallerMain">
+            <extra android:name="install_as_uid" android:value="1010"/>
+        </intent>
+    </Preference>
+
+    <Preference
+            android:key="wifi_direct"
+            android:title="@string/wifi_menu_p2p">
+        <intent android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.Settings$WifiP2pSettingsActivity"/>
+    </Preference>
+
+    <Preference
+            android:key="wps_push_button"
+            android:title="@string/wifi_menu_wps_pbc" />
+
+    <Preference
+            android:key="wps_pin_entry"
+            android:title="@string/wifi_menu_wps_pin" />
 
 </PreferenceScreen>
