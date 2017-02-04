@@ -72,6 +72,7 @@ import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.CarrierConfigManager;
+import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -798,13 +799,13 @@ public final class Utils extends com.android.settingslib.Utils {
      * Returns if need show the account with the given account type.
      */
     public static boolean showAccount(Context context, String accountType) {
-        String[] showAccounts = context.getResources().getStringArray(R.array.show_account_list);
-        if (showAccounts == null || showAccounts.length == 0) return false;
+        String[] hideAccounts = context.getResources().getStringArray(R.array.hide_account_list);
+        if (hideAccounts == null || hideAccounts.length == 0) return true;
 
-        for (String account : showAccounts) {
-            if (account.equals(accountType)) return true;
+        for (String account : hideAccounts) {
+            if (account.equals(accountType)) return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -1251,4 +1252,19 @@ public final class Utils extends com.android.settingslib.Utils {
         }
         return false;
     }
+
+    public static String getServiceStateString(int state, Resources res) {
+        switch (state) {
+            case ServiceState.STATE_IN_SERVICE:
+                return res.getString(R.string.radioInfo_service_in);
+            case ServiceState.STATE_OUT_OF_SERVICE:
+            case ServiceState.STATE_EMERGENCY_ONLY:
+                return res.getString(R.string.radioInfo_service_out);
+            case ServiceState.STATE_POWER_OFF:
+                return res.getString(R.string.radioInfo_service_off);
+            default:
+                return res.getString(R.string.radioInfo_unknown);
+        }
+    }
+
 }
