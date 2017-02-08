@@ -1571,6 +1571,7 @@
     <string name="wifi_notify_open_networks_summary">Notify whenever a public network is available</string>
 
     <string name="wifi_enable_hs2_title">Passpoint On</string>
+    <string name="wifi_enable_hs2_rel1_title">Automatically connect to WiFi</string>
 
     <!-- Checkbox title for option to toggle poor network detection -->
     <string name="wifi_poor_network_detection">Avoid poor connections</string>
@@ -1707,6 +1708,12 @@
     <string name="passpoint_label">Saved via</string>
     <!-- Content for Passpoint network -->
     <string name="passpoint_content"><xliff:g id="name">%1$s</xliff:g> credentials</string>
+    <!-- Label for Passpoint network FQDN -->
+    <string name="passpoint_fqdn">3gppnetwork.org</string>
+    <!-- Label for Passpoint network Provider Friendly Name-->
+    <string name="passpoint_provider_friendly_name">Jio</string>
+    <!-- Label for Passpoint Enterprise Security method [SIM/AKA/AKA_PRIME]-->
+    <string name="passpoint_eap_method">AKA</string>
     <!-- Label for the EAP method of the network -->
     <string name="wifi_eap_method">EAP method</string>
     <!-- Label for the phase2 -->
