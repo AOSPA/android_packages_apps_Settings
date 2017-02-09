@@ -17,9 +17,12 @@
 package com.android.settings.deviceinfo.storage;
 
 import android.app.Fragment;
+import android.app.LoaderManager;
+import android.app.usage.StorageStatsManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.UserHandle;
@@ -35,6 +38,7 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
+import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.core.lifecycle.LifecycleObserver;
@@ -51,10 +55,12 @@ import java.util.HashMap;
  * categorization breakdown.
  */
 public class StorageItemPreferenceController extends PreferenceController
-        implements StorageMeasurement.MeasurementReceiver, LifecycleObserver, OnDestroy {
+        implements StorageMeasurement.MeasurementReceiver, LifecycleObserver, OnDestroy,
+        LoaderManager.LoaderCallbacks<AppsAsyncLoader.AppsStorageResult> {
     private static final String TAG = "StorageItemPreference";
 
     private static final String IMAGE_MIME_TYPE = "image/*";
+
     @VisibleForTesting
     static final String PHOTO_KEY = "pref_photos_videos";
     @VisibleForTesting
@@ -179,15 +185,6 @@ public class StorageItemPreferenceController extends PreferenceController
             mAudioPreference.setStorageSize(audioSize);
         }
 
-        if (mGamePreference != null) {
-            mGamePreference.setStorageSize(0);
-        }
-
-        final long appSize = details.appsSize.get(mUserId);
-        if (mAppPreference != null) {
-            mAppPreference.setStorageSize(appSize);
-        }
-
         if (mSystemPreference != null) {
             mSystemPreference.setStorageSize(mSystemSize);
         }
@@ -214,6 +211,25 @@ public class StorageItemPreferenceController extends PreferenceController
         mAppPreference = (StorageItemPreferenceAlternate) screen.findPreference(OTHER_APPS_KEY);
         mSystemPreference = (StorageItemPreferenceAlternate) screen.findPreference(SYSTEM_KEY);
         mFilePreference = (StorageItemPreferenceAlternate) screen.findPreference(FILES_KEY);
+    }
+
+    @Override
+    public Loader<AppsAsyncLoader.AppsStorageResult> onCreateLoader(int id,
+            Bundle args) {
+        return new AppsAsyncLoader(mContext, UserHandle.myUserId(), mVolume.fsUuid,
+                new StorageStatsSource(mContext),
+                new PackageManagerWrapperImpl(mContext.getPackageManager()));
+    }
+
+    @Override
+    public void onLoadFinished(Loader<AppsAsyncLoader.AppsStorageResult> loader,
+            AppsAsyncLoader.AppsStorageResult data) {
+        mGamePreference.setStorageSize(data.gamesSize);
+        mAppPreference.setStorageSize(data.otherAppsSize);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<AppsAsyncLoader.AppsStorageResult> loader) {
     }
 
     /**
@@ -243,10 +259,15 @@ public class StorageItemPreferenceController extends PreferenceController
     }
 
     private Intent getAudioIntent() {
-        Intent intent = new Intent(DocumentsContract.ACTION_BROWSE);
-        intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "audio_root"));
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
-        return intent;
+        Bundle args = new Bundle();
+        args.putString(ManageApplications.EXTRA_CLASSNAME,
+                Settings.StorageUseActivity.class.getName());
+        args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
+        args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
+        args.putInt(ManageApplications.EXTRA_STORAGE_TYPE, ManageApplications.STORAGE_TYPE_MUSIC);
+        return Utils.onBuildStartFragmentIntent(mContext,
+                ManageApplications.class.getName(), args, null, R.string.audio_storage_title, null,
+                false);
     }
 
     private Intent getAppsIntent() {

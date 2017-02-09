@@ -743,7 +743,7 @@
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
     <string name="account_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the security screen -->
-    <string name="security_settings_title">Security</string>
+    <string name="security_settings_title">Security &amp; lockscreen</string>
     <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
     <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock, credential storage lock</string>
     <!-- Main Settings screen setting option summary text for the item to take you to the CDMA security and location screen -->
@@ -1209,9 +1209,9 @@
     <string name="lock_profile_wipe_dismiss">Dismiss</string>
 
     <!-- Hint shown in dialog screen when password is too short -->
-    <string name="lockpassword_password_too_short">Must be at least %d characters</string>
+    <string name="lockpassword_password_too_short">Must be at least <xliff:g id="count" example="3">%d</xliff:g> characters</string>
     <!-- Hint shown in dialog screen when PIN is too short -->
-    <string name="lockpassword_pin_too_short">PIN must be at least %d digits</string>
+    <string name="lockpassword_pin_too_short">PIN must be at least <xliff:g id="count" example="3">%d</xliff:g> digits</string>
 
     <!-- Hint shown after minimum password criteria is met -->
     <string name="lockpassword_continue_label">Continue</string>
@@ -1242,37 +1242,37 @@
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of letters -->
     <plurals name="lockpassword_password_requires_letters">
         <item quantity="one">Must contain at least 1 letter</item>
-        <item quantity="other">Must contain at least %d letters</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> letters</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of lowercase letters -->
     <plurals name="lockpassword_password_requires_lowercase">
         <item quantity="one">Must contain at least 1 lowercase letter</item>
-        <item quantity="other">Must contain at least %d lowercase letters</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> lowercase letters</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of uppercase letters -->
     <plurals name="lockpassword_password_requires_uppercase">
         <item quantity="one">Must contain at least 1 uppercase letter</item>
-        <item quantity="other">Must contain at least %d uppercase letters</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> uppercase letters</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of numerical digits -->
     <plurals name="lockpassword_password_requires_numeric">
         <item quantity="one">Must contain at least 1 numerical digit</item>
-        <item quantity="other">Must contain at least %d numerical digits</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> numerical digits</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of special symbols -->
     <plurals name="lockpassword_password_requires_symbols">
         <item quantity="one">Must contain at least 1 special symbol</item>
-        <item quantity="other">Must contain at least %d special symbols</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> special symbols</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password doesn't contain the required number of non-letter characters -->
     <plurals name="lockpassword_password_requires_nonletter">
         <item quantity="one">Must contain at least 1 non-letter character</item>
-        <item quantity="other">Must contain at least %d non-letter characters</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> non-letter characters</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password has been used recently. Please keep this string short! -->
@@ -2943,7 +2943,7 @@
     <!-- Tethering controls, item title to go into the tethering settings when USB and Bluetooth tethering are available [CHAR LIMIT=25]-->
     <string name="tether_settings_title_usb_bluetooth">Tethering</string>
     <!-- Tethering controls, item title to go into the tethering settings when USB, Bluetooth and Wifi tethering are available [CHAR LIMIT=25]-->
-    <string name="tether_settings_title_all">Tethering &amp; portable hotspot</string>
+    <string name="tether_settings_title_all">Hotspot &amp; Tethering</string>
     <!-- Tethering controls, footer note displayed when tethering is disabled because Data Saver mode is on [CHAR LIMIT=none]-->
     <string name="tether_settings_disabled_on_data_saver">"Can\u2019t tether or use portable hotspots while Data Saver is on"</string>
 
@@ -3039,7 +3039,8 @@
     <string name="location_mode_sensors_only_title">Device only</string>
     <!-- [CHAR LIMIT=30] Location settings screen, location off mode -->
     <string name="location_mode_location_off_title">Location off</string>
-    <!-- [CHAR LIMIT=30] Location settings screen, app-level permissions -->
+    <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
+      shows the location permission setting for each installed app -->
     <string name="location_app_level_permissions">App-level permissions</string>
     <!-- [CHAR LIMIT=42] Location settings screen, sub category for recent location requests -->
     <string name="location_category_recent_location_requests">Recent location requests</string>
@@ -3720,10 +3721,6 @@
     <string name="language_settings">Languages&#160;&amp; input</string>
     <!-- Title of Languages & input settings screen -->
     <string name="language_keyboard_settings_title">Languages&#160;&amp; input</string>
-    <!-- Title of Languages & region settings screen -->
-    <string name="language_and_region_settings_title">Languages&#160;&amp; region</string>
-    <!-- Title of Input & gesture settings screen -->
-    <string name="input_gesture_settings_title">Input&#160;&amp; gestures</string>
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to keyboard (enable/disable each keyboard, settings for each keyboard). -->
     <string name="keyboard_settings_category">Keyboard &amp; input methods</string>
     <!-- On Text & language settings screen, setting option name. title of the setting to take the user to a screen to select the locale. -->
@@ -8164,6 +8161,11 @@
 
     <!-- Title of games app storage screen [CHAR LIMIT=30] -->
     <string name="game_storage_settings">Games</string>
+
+    <!-- Title for audio files preference. [CHAR LIMIT=50] -->
+    <string name="audio_files_title">Audio files</string>
+    <!-- Title for the Audio storage view. [CHAR LIMIT=50] -->
+    <string name="audio_storage_title">Music</string>
 
     <!-- UI webview setting: WebView uninstalled-for-user explanatory text [CHAR LIMIT=30] -->
     <string name="webview_uninstalled_for_user">Uninstalled for user <xliff:g id="user" example="John Doe">%s</xliff:g>\n</string>

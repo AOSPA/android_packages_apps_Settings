@@ -25,6 +25,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.WifiCallingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.wifi.p2p.WifiP2pPreferenceController;
@@ -50,6 +51,12 @@ public class ConfigureWifiSettings extends DashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mProgressiveDisclosureMixin.setTileLimit(3);
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.wifi_configure_settings;
     }
@@ -65,6 +72,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
         controllers.add(new WifiWakeupPreferenceController(context, getLifecycle()));
         controllers.add(new WifiSleepPolicyPreferenceController(context));
         controllers.add(new WifiP2pPreferenceController(context, getLifecycle(), mWifiManager));
+        controllers.add(new WifiCallingPreferenceController(context));
         controllers.add(new WpsPreferenceController(
                 context, getLifecycle(), mWifiManager, getFragmentManager()));
         return controllers;

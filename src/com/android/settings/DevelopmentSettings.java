@@ -1434,7 +1434,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         Settings.Global.putInt(getActivity().getContentResolver(),
                 Settings.Global.DEVELOPMENT_FORCE_RTL, value ? 1 : 0);
         SystemProperties.set(Settings.Global.DEVELOPMENT_FORCE_RTL, value ? "1" : "0");
-        LocalePicker.updateLocale(getActivity().getResources().getConfiguration().locale);
+        LocalePicker.updateLocales(getActivity().getResources().getConfiguration().getLocales());
     }
 
     private void updateWifiDisplayCertificationOptions() {
@@ -1801,17 +1801,29 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         BluetoothCodecConfig[] codecsLocalCapabilities = null;
         BluetoothCodecConfig[] codecsSelectableCapabilities = null;
         String streaming;
+        Resources resources = null;
 
         synchronized (mBluetoothA2dpLock) {
             if (mBluetoothA2dp != null) {
                 codecStatus = mBluetoothA2dp.getCodecStatus();
-                codecConfig = codecStatus.getCodecConfig();
-                codecsLocalCapabilities = codecStatus.getCodecsLocalCapabilities();
-                codecsSelectableCapabilities = codecStatus.getCodecsSelectableCapabilities();
+                if (codecStatus != null) {
+                    codecConfig = codecStatus.getCodecConfig();
+                    codecsLocalCapabilities = codecStatus.getCodecsLocalCapabilities();
+                    codecsSelectableCapabilities = codecStatus.getCodecsSelectableCapabilities();
+                }
             }
         }
         if (codecConfig == null)
             return;
+
+        try {
+            resources = getResources();
+        } catch (IllegalStateException e) {
+            return;
+        }
+        if (resources == null) {
+            return;
+        }
 
         // Update the Codec Type
         index = -1;
@@ -1836,8 +1848,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             break;
         }
         if (index >= 0) {
-            summaries = getResources().getStringArray(R.array.bluetooth_a2dp_codec_summaries);
-            streaming = getResources().getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
+            summaries = resources.getStringArray(R.array.bluetooth_a2dp_codec_summaries);
+            streaming = resources.getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
             mBluetoothSelectA2dpCodec.setSummary(streaming);
         }
 
@@ -1863,8 +1875,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             break;
         }
         if (index >= 0) {
-            summaries = getResources().getStringArray(R.array.bluetooth_a2dp_codec_sample_rate_summaries);
-            streaming = getResources().getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
+            summaries = resources.getStringArray(R.array.bluetooth_a2dp_codec_sample_rate_summaries);
+            streaming = resources.getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
              mBluetoothSelectA2dpSampleRate.setSummary(streaming);
         }
 
@@ -1885,8 +1897,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             break;
         }
         if (index >= 0) {
-            summaries = getResources().getStringArray(R.array.bluetooth_a2dp_codec_bits_per_sample_summaries);
-            streaming = getResources().getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
+            summaries = resources.getStringArray(R.array.bluetooth_a2dp_codec_bits_per_sample_summaries);
+            streaming = resources.getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
             mBluetoothSelectA2dpBitsPerSample.setSummary(streaming);
         }
 
@@ -1904,8 +1916,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             break;
         }
         if (index >= 0) {
-            summaries = getResources().getStringArray(R.array.bluetooth_a2dp_codec_channel_mode_summaries);
-            streaming = getResources().getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
+            summaries = resources.getStringArray(R.array.bluetooth_a2dp_codec_channel_mode_summaries);
+            streaming = resources.getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
              mBluetoothSelectA2dpChannelMode.setSummary(streaming);
         }
 
@@ -1930,8 +1942,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             break;
         }
         if (index >= 0) {
-            summaries = getResources().getStringArray(R.array.bluetooth_a2dp_codec_ldac_playback_quality_summaries);
-            streaming = getResources().getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
+            summaries = resources.getStringArray(R.array.bluetooth_a2dp_codec_ldac_playback_quality_summaries);
+            streaming = resources.getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
             mBluetoothSelectA2dpLdacPlaybackQuality.setSummary(streaming);
         }
     }
