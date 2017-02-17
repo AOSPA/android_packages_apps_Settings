@@ -666,8 +666,12 @@ public class WifiSettings extends RestrictedSettingsFragment
                         LongPressAccessPointPreference pref = (LongPressAccessPointPreference)
                                 getCachedPreference(key);
                         if (pref != null) {
-                            pref.setOrder(index++);
-                            continue;
+                            if(accessPoint == pref.getAccessPoint()){
+                                pref.setOrder(index++);
+                                continue;
+                            }else{
+                                getPreferenceScreen().removePreference(pref);
+                            }
                         }
                         LongPressAccessPointPreference
                                 preference = new LongPressAccessPointPreference(accessPoint,
