@@ -76,7 +76,8 @@
 
     <Preference android:key="select_webview_provider"
         android:title="@string/select_webview_provider_title"
-        android:dialogTitle="@string/select_webview_provider_dialog_title" />
+        android:dialogTitle="@string/select_webview_provider_dialog_title"
+        android:fragment="com.android.settings.webview.WebViewAppPicker" />
 
     <SwitchPreference
         android:key="enable_webview_multiprocess"
@@ -100,6 +101,14 @@
         android:key="demo_mode"
         android:title="@string/demo_mode">
         <intent android:action="com.android.settings.action.DEMO_MODE" />
+    </Preference>
+
+    <Preference
+        android:key="quick_settings_tiles"
+        android:title="@string/quick_settings_developer_tiles">
+        <intent
+            android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.qstile.DevelopmentTileConfigActivity" />
     </Preference>
 
     <PreferenceCategory android:key="debug_debugging_category"

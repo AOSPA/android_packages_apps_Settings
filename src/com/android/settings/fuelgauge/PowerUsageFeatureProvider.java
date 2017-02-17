@@ -36,4 +36,9 @@ public interface PowerUsageFeatureProvider {
    * Gets an {@link Intent} to show additional battery info.
    */
   Intent getAdditionalBatteryInfoIntent();
+
+  /**
+   * Check whether advanced ui is enabled
+   */
+  boolean isAdvancedUiEnabled();
 }

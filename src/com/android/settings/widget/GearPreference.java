@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,16 +11,17 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.widget;
 
 import android.content.Context;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.android.settings.R;
 import com.android.settingslib.RestrictedPreference;
 
 /**
@@ -44,7 +45,13 @@ public class GearPreference extends RestrictedPreference implements View.OnClick
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         final View gear = holder.findViewById(R.id.settings_button);
-        gear.setOnClickListener(this);
+        if (mOnGearClickListener != null) {
+            gear.setVisibility(View.VISIBLE);
+            gear.setOnClickListener(this);
+        } else {
+            gear.setVisibility(View.GONE);
+            gear.setOnClickListener(null);
+        }
         gear.setEnabled(true);  // Make gear available even if the preference itself is disabled.
     }
 

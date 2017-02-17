@@ -26,39 +26,25 @@ import android.widget.TextView;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.BatteryInfo;
 import com.android.settingslib.graph.UsageView;
 
 /**
  * Custom preference for displaying power consumption as a bar and an icon on the left for the
  * subsystem/app type.
- *
  */
 public class BatteryHistoryPreference extends Preference {
 
-    protected static final String BATTERY_HISTORY_FILE = "tmp_bat_history.bin";
-
-    private BatteryStatsHelper mHelper;
     private BatteryInfo mBatteryInfo;
 
     public BatteryHistoryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.battery_usage_graph);
-        setSelectable(true);
-    }
-
-    @Override
-    public void performClick() {
-        mHelper.storeStatsHistoryInFile(BATTERY_HISTORY_FILE);
-        Bundle args = new Bundle();
-        args.putString(BatteryHistoryDetail.EXTRA_STATS, BATTERY_HISTORY_FILE);
-        args.putParcelable(BatteryHistoryDetail.EXTRA_BROADCAST, mHelper.getBatteryBroadcast());
-        Utils.startWithFragment(getContext(), BatteryHistoryDetail.class.getName(), args,
-                null, 0, R.string.history_details_title, null);
+        setSelectable(false);
     }
 
     public void setStats(BatteryStatsHelper batteryStats) {
-        mHelper = batteryStats;
         final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
         mBatteryInfo = BatteryInfo.getBatteryInfo(getContext(), batteryStats.getBatteryBroadcast(),
                 batteryStats.getStats(), elapsedRealtimeUs);

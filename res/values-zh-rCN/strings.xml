@@ -329,12 +329,15 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"帐号"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"位置信息"</string>
     <string name="account_settings_title" msgid="626177544686329806">"帐号"</string>
-    <string name="security_settings_title" msgid="7945465324818485460">"安全"</string>
+    <!-- no translation found for security_settings_title (9087149148665560415) -->
+    <skip />
     <string name="security_settings_summary" msgid="967393342537986570">"设置我的位置、屏幕解锁、SIM卡锁定和凭据存储锁定"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"设置我的位置、屏幕解锁和凭据存储锁定"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"密码"</string>
     <string name="disabled_by_administrator_summary" msgid="5989801404248162477">"已被管理员停用"</string>
     <string name="security_status_title" msgid="5848766673665944640">"安全状态"</string>
+    <!-- no translation found for security_dashboard_summary (7778812098315813315) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"指纹"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"管理指纹"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"将指纹用于以下用途："</string>
@@ -518,10 +521,8 @@
     <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"如果您这次输入的工作密码仍然有误，您的工作资料和相关数据都将从此设备中移除。"</string>
     <string name="lock_profile_wipe_content" msgid="2150455386921347628">"错误次数过多。您的工作资料和相关数据将会从此设备中移除。"</string>
     <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"关闭"</string>
-    <!-- no translation found for lockpassword_password_too_short (2726090378672764986) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_short (3638188874397727648) -->
-    <skip />
+    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"必须至少包含 <xliff:g id="COUNT">%d</xliff:g> 个字符"</string>
+    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN 码必须至少为 <xliff:g id="COUNT">%d</xliff:g> 位数"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"继续"</string>
     <string name="lockpassword_password_too_long" msgid="4520363269062591833">"必须少于 <xliff:g id="NUMBER">%d</xliff:g> 个字符。"</string>
     <string name="lockpassword_pin_too_long" msgid="4010052843684165845">"必须少于 <xliff:g id="NUMBER">%d</xliff:g> 位数。"</string>
@@ -531,12 +532,30 @@
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"必须包含至少 1 个字母"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"必须包含至少 1 个数字"</string>
     <string name="lockpassword_password_requires_symbol" msgid="5944350865681510893">"必须包含至少 1 个符号"</string>
-    <!-- no translation found for lockpassword_password_requires_letters (9013132344745898400) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase (2626327674921055486) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase (7860796359913920356) -->
-    <!-- no translation found for lockpassword_password_requires_numeric (1967587658356336828) -->
-    <!-- no translation found for lockpassword_password_requires_symbols (6751305770863640574) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter (4440596998172043055) -->
+    <plurals name="lockpassword_password_requires_letters" formatted="false" msgid="9013132344745898400">
+      <item quantity="other">必须包含至少 <xliff:g id="COUNT">%d</xliff:g> 个字母</item>
+      <item quantity="one">必须包含至少 1 个字母</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_lowercase" formatted="false" msgid="2626327674921055486">
+      <item quantity="other">必须包含至少 <xliff:g id="COUNT">%d</xliff:g> 个小写字母</item>
+      <item quantity="one">必须包含至少 1 个小写字母</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_uppercase" formatted="false" msgid="7860796359913920356">
+      <item quantity="other">必须包含至少 <xliff:g id="COUNT">%d</xliff:g> 个大写字母</item>
+      <item quantity="one">必须包含至少 1 个大写字母</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="1967587658356336828">
+      <item quantity="other">必须包含至少 <xliff:g id="COUNT">%d</xliff:g> 个数字</item>
+      <item quantity="one">必须包含至少 1 个数字</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_symbols" formatted="false" msgid="6751305770863640574">
+      <item quantity="other">必须包含至少 <xliff:g id="COUNT">%d</xliff:g> 个特殊符号</item>
+      <item quantity="one">必须包含至少 1 个特殊符号</item>
+    </plurals>
+    <plurals name="lockpassword_password_requires_nonletter" formatted="false" msgid="4440596998172043055">
+      <item quantity="other">必须包含至少 <xliff:g id="COUNT">%d</xliff:g> 个非字母字符</item>
+      <item quantity="one">必须包含至少 1 个非字母字符</item>
+    </plurals>
     <string name="lockpassword_password_recently_used" msgid="4687102591995446860">"设备管理器不允许使用最近用过的密码。"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="6830610582179569631">"禁止使用以升序、降序或重复序列进行排列的一串数字"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"确定"</string>
@@ -1241,7 +1260,8 @@
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"便携式热点"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"蓝牙网络共享"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"网络共享"</string>
-    <string name="tether_settings_title_all" msgid="8356136101061143841">"网络共享与便携式热点"</string>
+    <!-- no translation found for tether_settings_title_all (3216237959149430007) -->
+    <skip />
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"当流量节省程序开启时，无法使用网络共享功能或便携式热点"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB网络共享"</string>
@@ -1581,8 +1601,6 @@
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"如果停止此服务，您手机上的某些功能也将随之停止工作，并在您将手机关机然后再重新打开后才能使用。"</string>
     <string name="language_settings" msgid="8758655933029560944">"语言和输入法"</string>
     <string name="language_keyboard_settings_title" msgid="3709159207482544398">"语言和输入法"</string>
-    <string name="language_and_region_settings_title" msgid="117593114157670585">"语言和区域"</string>
-    <string name="input_gesture_settings_title" msgid="2201979773768106872">"输入和手势"</string>
     <string name="keyboard_settings_category" msgid="8275523930352487827">"键盘和输入法"</string>
     <string name="phone_language" msgid="7116581601133118044">"语言"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
@@ -1679,6 +1697,8 @@
     <string name="usage_time_label" msgid="295954901452833058">"使用时间"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"无障碍"</string>
     <string name="accessibility_settings_title" msgid="2130492524656204459">"无障碍设置"</string>
+    <!-- no translation found for accessibility_settings_summary (6654271785747778959) -->
+    <skip />
     <string name="vision_settings_title" msgid="4204111425716868288">"阅读辅助设置"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"您可以根据自己的需求对此设备进行自定义。以后，您可以在“设置”中更改这些辅助功能设置。"</string>
     <string name="accessibility_services_title" msgid="2592221829284342237">"服务"</string>
@@ -1828,6 +1848,8 @@
     <string name="awake" msgid="387122265874485088">"设备唤醒时间"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"WLAN开启时间"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"WLAN开启时间"</string>
+    <!-- no translation found for advanced_battery_title (2068039111517508622) -->
+    <skip />
     <string name="history_details_title" msgid="3608240585315506067">"详细电量使用记录"</string>
     <string name="details_title" msgid="3792801565213935385">"详细使用情况"</string>
     <string name="details_subtitle" msgid="32593908269911734">"详细使用情况"</string>
@@ -1844,6 +1866,14 @@
     <string name="power_idle" product="default" msgid="9055659695602194990">"手机待机"</string>
     <string name="power_unaccounted" msgid="709925017022660740">"其他"</string>
     <string name="power_overcounted" msgid="2762354976171358445">"多算了的"</string>
+    <!-- no translation found for power_apps (2043554781293951327) -->
+    <skip />
+    <!-- no translation found for power_service (1599661212370831780) -->
+    <skip />
+    <!-- no translation found for power_system (8290455327965307383) -->
+    <skip />
+    <!-- no translation found for power_user (1889728099253018005) -->
+    <skip />
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU总使用时间"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU（前台）"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"保持唤醒状态"</string>
@@ -1895,6 +1925,8 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"多算了的用电量"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g>毫安时"</string>
     <string name="battery_used_for" msgid="4383512863007718804">"已使用 %1$s"</string>
+    <!-- no translation found for battery_detail_since_full_charge (4329720759041042322) -->
+    <skip />
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"拔下电源后已过 <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"上次拔下电源 <xliff:g id="UNPLUGGED">%1$s</xliff:g> 时"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"总使用量"</string>
@@ -2399,6 +2431,8 @@
     <string name="user_enable_calling_and_sms_confirm_title" msgid="7243308401401932681">"要开启通话和短信功能吗？"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="4025082715546544967">"将与此用户共享通话记录和短信记录。"</string>
     <string name="emergency_info_title" msgid="208607506217060337">"急救信息"</string>
+    <!-- no translation found for emergency_info_summary (8791523394921560711) -->
+    <skip />
     <string name="application_restrictions" msgid="8207332020898004394">"允许应用和内容"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"受限应用"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"展开应用设置"</string>
@@ -2429,6 +2463,8 @@
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"更改PIN码"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"显示通知"</string>
     <string name="help_label" msgid="6886837949306318591">"帮助和反馈"</string>
+    <!-- no translation found for support_summary (8276116616493882830) -->
+    <skip />
     <string name="user_account_title" msgid="1127193807312271167">"内容帐号"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"照片 ID"</string>
     <string name="extreme_threats_title" msgid="6549541803542968699">"极端威胁"</string>
@@ -2518,11 +2554,18 @@
       <item quantity="one">显示 %d 项隐藏内容</item>
     </plurals>
     <string name="network_dashboard_title" msgid="3135144174846753758">"网络和互联网"</string>
+    <!-- no translation found for network_dashboard_summary (1832517180319685189) -->
+    <skip />
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"已关联的设备"</string>
+    <!-- no translation found for connected_devices_dashboard_summary (6595300910405977083) -->
+    <skip />
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"应用和通知"</string>
+    <!-- no translation found for app_and_notification_dashboard_summary (2363314178802548682) -->
+    <skip />
     <string name="account_dashboard_title" msgid="38701889336378742">"用户和帐号"</string>
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"默认应用"</string>
-    <string name="system_dashboard_summary" msgid="6112602136713843779">"语言：<xliff:g id="LANGUAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for system_dashboard_summary (3093393529569103150) -->
+    <skip />
     <string name="search_results_title" msgid="1796252422574886932">"设置"</string>
     <string name="search_menu" msgid="6283419262313758339">"搜索设置"</string>
     <string name="query_hint_text" msgid="3350700807437473939">"搜索设置"</string>
@@ -2580,6 +2623,8 @@
     <string name="status_tag_not_writable" msgid="2511611539977682175">"无法将数据写入NFC标签，请使用其他标签。"</string>
     <string name="default_sound" msgid="8821684447333687810">"默认铃声"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"铃声音量为 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for sound_dashboard_summary (2507943820408985874) -->
+    <skip />
     <string name="sound_settings_summary_vibrate" msgid="1869282574422220096">"振铃器已设为振动"</string>
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"振铃器已设为静音"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"铃声音量为 80%"</string>
@@ -2682,7 +2727,10 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"“勿扰”权限"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"没有任何已安装应用申请“勿扰”权限"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"正在加载应用…"</string>
-    <string name="notification_channels" msgid="8681423709659818791">"通道"</string>
+    <!-- no translation found for notification_channels (5346841743182627500) -->
+    <skip />
+    <!-- no translation found for notification_channels_other (5645317113885788226) -->
+    <skip />
     <string name="no_channels" msgid="3077375508177744586">"此应用未发布任何通知"</string>
     <string name="deleted_channel_name" msgid="1443368457916958928">"<xliff:g id="CHANNEL_NAME">%1$s</xliff:g>（已删除）"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"全部屏蔽"</string>
@@ -3012,7 +3060,6 @@
     <string name="system_alert_window_off" msgid="6189115687233061992">"不允许"</string>
     <string name="install_other_apps" msgid="4215339768128036452">"安装其他应用"</string>
     <string name="keywords_install_other_apps" msgid="3320171242043396361">"安装来自外部未知来源的应用"</string>
-    <string name="permit_install_other_apps" msgid="1001326049297652511">"允许安装其他应用"</string>
     <string name="write_settings" msgid="4797457275727195681">"修改系统设置"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"写入 修改 系统 设置"</string>
     <string name="write_settings_summary" msgid="4302268998611412696">"已允许 <xliff:g id="COUNT_0">%1$d</xliff:g> 个应用（共 <xliff:g id="COUNT_1">%2$d</xliff:g> 个）修改系统设置"</string>
@@ -3058,8 +3105,11 @@
     <string name="notification_summary_none" msgid="3440195312233351409">"已允许所有应用发送通知"</string>
     <string name="apps_summary" msgid="193158055537070092">"已安装 <xliff:g id="COUNT">%1$d</xliff:g> 个应用"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"已安装 24 个应用"</string>
-    <string name="storage_summary" msgid="1110250618334248745">"已使用 <xliff:g id="SIZE1">%1$s</xliff:g>（共 <xliff:g id="SIZE2">%2$s</xliff:g>）"</string>
+    <!-- no translation found for storage_summary (3801281635351732202) -->
+    <skip />
     <string name="display_summary" msgid="6737806235882127328">"闲置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后进入休眠状态"</string>
+    <!-- no translation found for display_dashboard_summary (4145888780290131488) -->
+    <skip />
     <string name="display_summary_example" msgid="9102633726811090523">"闲置 10 分钟后会进入休眠状态"</string>
     <string name="memory_summary" msgid="8080825904671961872">"平均内存用量为 <xliff:g id="USED_MEMORY">%1$s</xliff:g>，共 <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="user_summary" msgid="1617826998097722499">"目前登录的用户名为：<xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3193,13 +3243,13 @@
     <string name="page_tab_title_support" msgid="6330657582897417458">"支持"</string>
     <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"最小宽度"</string>
-    <string name="developer_tile" msgid="4822711696408279658">"开发模式"</string>
-    <string name="developer_tile_unavailable" msgid="6559656549479711827">"尚未选择任何启用状态"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"没有任何已安装的应用申请付费短信权限"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"“付费短信”可能会产生费用，而且相关费用将计入您的运营商帐单。如果您为某个应用启用该权限，那么您将能够使用该应用发送付费短信。"</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"付费短信权限"</string>
     <string name="bluetooth_disabled" msgid="1558295505487648234">"已停用"</string>
     <string name="demo_mode" msgid="2798762752209330277">"系统界面演示模式"</string>
+    <!-- no translation found for quick_settings_developer_tiles (5947788063262762448) -->
+    <skip />
     <string name="support_escalation_title" msgid="4111071371281023145">"我们会随时为您提供帮助"</string>
     <string name="support_escalation_24_7_title" msgid="8118369197749832074">"我们可全天候为您提供服务"</string>
     <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"我们可全天候为您提供服务"</string>
@@ -3284,15 +3334,13 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"请连接到互联网或与您的运营商联系"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"在与运营商绑定的设备上无法使用"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"已释放共 <xliff:g id="SIZE">%1$s</xliff:g>\n\n上次运行日期：<xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="automatic_storage_manager_downloads_days_title" msgid="8899594124034695459">"移除下载内容"</string>
-    <string name="downloads_backup_preference_title" msgid="2312237179341156671">"备份下载内容"</string>
-    <string name="downloads_backup_text" msgid="8351770128253816819"></string>
     <string name="web_action_enable_title" msgid="8502552575492048305">"在应用中打开链接"</string>
     <string name="web_action_enable_summary" msgid="4679844581193646863">"在支持的应用中打开链接，即使您的设备未安装相关应用也没问题"</string>
     <string name="web_action_section_title" msgid="806405168097593614">"未安装的应用"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"已安装的应用"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"您的存储空间目前是由存储空间管理器管理"</string>
-    <string name="account_for_section_header" msgid="5867553104728848377">"帐号"</string>
+    <!-- no translation found for account_for_section_header (5356566418548737121) -->
+    <skip />
     <string name="configure_section_header" msgid="7391183586410814450">"配置"</string>
     <string name="auto_sync_account_title" msgid="7647106425106072285">"自动同步帐号数据"</string>
     <string name="auto_sync_personal_account_title" msgid="999536545686286287">"自动同步个人帐号数据"</string>
@@ -3351,19 +3399,20 @@
     <string name="storage_other_apps" msgid="5524321740031718083">"其他应用"</string>
     <string name="storage_files" msgid="8581083146777364063">"文件"</string>
     <string name="storage_settings_2" msgid="6369810699930056554">"手机存储空间"</string>
-    <string name="storage_size_large_alternate" msgid="3436941214395940966">"已使用空间：<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small></string>
+    <!-- no translation found for storage_size_large_alternate (3550744227788333060) -->
+    <skip />
     <string name="storage_volume_free" msgid="8829609507318832879">"总的可用空间：<xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_used" msgid="6741397129281819921">"<xliff:g id="PERCENT">%1$s</xliff:g>%%"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"存储空间管理器：<xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"关闭"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"开启"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"游戏"</string>
-    <!-- no translation found for audio_files_title (4777048870657911307) -->
+    <string name="audio_files_title" msgid="4777048870657911307">"音频文件"</string>
+    <string name="audio_storage_title" msgid="5494923634269236874">"音乐"</string>
+    <!-- no translation found for webview_uninstalled_for_user (1819903169194420983) -->
     <skip />
-    <!-- no translation found for audio_storage_title (5494923634269236874) -->
+    <!-- no translation found for webview_disabled_for_user (1216426047631256825) -->
     <skip />
-    <string name="webview_uninstalled_for_user" msgid="2088190546280992258">"已为用户<xliff:g id="USER">%s</xliff:g>卸载\n"</string>
-    <string name="webview_disabled_for_user" msgid="894201527719182879">"已为用户<xliff:g id="USER">%s</xliff:g>停用\n"</string>
     <string name="autofill_app" msgid="3889348218462883960">"自动填充应用"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"自动, 填充, 自动填充, auto, fill, autofill"</string>
     <string name="autofill_confirmation_message" msgid="7368058965765225486">"要将<xliff:g id="APP_NAME_0">%1$s</xliff:g>设为您的自动填充应用吗？<xliff:g id="APP_NAME_1">%1$s</xliff:g>将能够读取您的屏幕内容，并在其他应用中填充字段。"</string>

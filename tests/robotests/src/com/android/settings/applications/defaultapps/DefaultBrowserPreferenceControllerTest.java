@@ -39,7 +39,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -77,7 +76,7 @@ public class DefaultBrowserPreferenceControllerTest {
         final Preference pref = mock(Preference.class);
 
         mController.updateState(pref);
-        verify(pref, never()).setSummary(any(String.class));
+        verify(pref).setSummary(null);
     }
 
     @Test

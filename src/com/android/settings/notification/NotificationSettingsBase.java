@@ -23,27 +23,38 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.widget.Toast;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+import java.util.List;
+
 abstract public class NotificationSettingsBase extends SettingsPreferenceFragment {
     private static final String TAG = "NotifiSettingsBase";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+
+    private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
+            = new Intent(Intent.ACTION_MAIN)
+            .addCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES);
 
     protected static final String KEY_BLOCK = "block";
     protected static final String KEY_BADGE = "badge";
@@ -155,6 +166,49 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         getActivity().finish();
     }
 
+    private List<ResolveInfo> queryNotificationConfigActivities() {
+        if (DEBUG) Log.d(TAG, "APP_NOTIFICATION_PREFS_CATEGORY_INTENT is "
+                + APP_NOTIFICATION_PREFS_CATEGORY_INTENT);
+        final List<ResolveInfo> resolveInfos = mPm.queryIntentActivities(
+                APP_NOTIFICATION_PREFS_CATEGORY_INTENT,
+                0 //PackageManager.MATCH_DEFAULT_ONLY
+        );
+        return resolveInfos;
+    }
+
+    protected void collectConfigActivities(ArrayMap<String, NotificationBackend.AppRow> rows) {
+        final List<ResolveInfo> resolveInfos = queryNotificationConfigActivities();
+        applyConfigActivities(rows, resolveInfos);
+    }
+
+    private void applyConfigActivities(ArrayMap<String, NotificationBackend.AppRow> rows,
+            List<ResolveInfo> resolveInfos) {
+        if (DEBUG) Log.d(TAG, "Found " + resolveInfos.size() + " preference activities"
+                + (resolveInfos.size() == 0 ? " ;_;" : ""));
+        for (ResolveInfo ri : resolveInfos) {
+            final ActivityInfo activityInfo = ri.activityInfo;
+            final ApplicationInfo appInfo = activityInfo.applicationInfo;
+            final NotificationBackend.AppRow row = rows.get(appInfo.packageName);
+            if (row == null) {
+                if (DEBUG) Log.v(TAG, "Ignoring notification preference activity ("
+                        + activityInfo.name + ") for unknown package "
+                        + activityInfo.packageName);
+                continue;
+            }
+            if (row.settingsIntent != null) {
+                if (DEBUG) Log.v(TAG, "Ignoring duplicate notification preference activity ("
+                        + activityInfo.name + ") for package "
+                        + activityInfo.packageName);
+                continue;
+            }
+            row.settingsIntent = new Intent(APP_NOTIFICATION_PREFS_CATEGORY_INTENT)
+                    .setClassName(activityInfo.packageName, activityInfo.name);
+            if (mChannel != null) {
+                row.settingsIntent.putExtra(Notification.EXTRA_CHANNEL_ID, mChannel.getId());
+            }
+        }
+    }
+
     private PackageInfo findPackageInfo(String pkg, int uid) {
         if (pkg == null || uid < 0) {
             return null;
@@ -176,15 +230,22 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         return null;
     }
 
-    private PackageInfo findPackageInfo(String pkg) {
-        if (pkg == null) {
-            return null;
+    protected String getImportanceSummary(int importance) {
+        switch (importance) {
+            case NotificationManager.IMPORTANCE_UNSPECIFIED:
+                return getContext().getString(R.string.notification_importance_unspecified);
+            case NotificationManager.IMPORTANCE_NONE:
+                return getContext().getString(R.string.notification_importance_blocked);
+            case NotificationManager.IMPORTANCE_MIN:
+                return getContext().getString(R.string.notification_importance_min);
+            case NotificationManager.IMPORTANCE_LOW:
+                return getContext().getString(R.string.notification_importance_low);
+            case NotificationManager.IMPORTANCE_DEFAULT:
+                return getContext().getString(R.string.notification_importance_default);
+            case NotificationManager.IMPORTANCE_HIGH:
+            case NotificationManager.IMPORTANCE_MAX:
+            default:
+                return getContext().getString(R.string.notification_importance_high);
         }
-        try {
-            return mPm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES);
-        } catch (NameNotFoundException e) {
-            Log.w(TAG, "Failed to load package " + pkg, e);
-        }
-        return null;
     }
 }

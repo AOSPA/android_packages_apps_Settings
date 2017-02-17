@@ -91,6 +91,11 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
         addPreferencesFromResource(R.xml.app_picker_prefs);
+        updateCandidates();
+    }
+
+    @VisibleForTesting
+    public void updateCandidates() {
         mCandidates.clear();
         final List<DefaultAppInfo> candidateList = getCandidates();
         if (candidateList != null) {
@@ -113,19 +118,26 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
         for (Map.Entry<String, DefaultAppInfo> app : mCandidates.entrySet()) {
             final RadioButtonPreference pref = new RadioButtonPreference(getPrefContext());
             final String appKey = app.getKey();
-
-            pref.setTitle(app.getValue().loadLabel(mPm.getPackageManager()));
-            pref.setIcon(app.getValue().loadIcon(mPm.getPackageManager()));
+            final DefaultAppInfo info = app.getValue();
+            pref.setTitle(info.loadLabel(mPm.getPackageManager()));
+            pref.setIcon(info.loadIcon(mPm.getPackageManager()));
             pref.setKey(appKey);
             if (TextUtils.equals(defaultAppKey, appKey)) {
                 pref.setChecked(true);
             }
             if (TextUtils.equals(systemDefaultAppKey, appKey)) {
                 pref.setSummary(R.string.system_app);
+            } else if (!TextUtils.isEmpty(info.summary)) {
+                pref.setSummary(info.summary);
+            }
+            if (!TextUtils.isEmpty(app.getValue().disabledDescription)) {
+                pref.setEnabled(false);
+                pref.setSummary(app.getValue().disabledDescription);
             }
             pref.setOnClickListener(this);
             screen.addPreference(pref);
         }
+        mayCheckOnlyRadioButton();
     }
 
     @Override
@@ -145,20 +157,37 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
     private void onRadioButtonConfirmed(String selectedKey) {
         final boolean success = setDefaultAppKey(selectedKey);
         if (success) {
-            final PreferenceScreen screen = getPreferenceScreen();
-            if (screen != null) {
-                final int count = screen.getPreferenceCount();
-                for (int i = 0; i < count; i++) {
-                    final Preference pref = screen.getPreference(i);
-                    if (pref instanceof RadioButtonPreference) {
-                        final RadioButtonPreference radioPref = (RadioButtonPreference) pref;
-                        final boolean newCheckedState =
-                                TextUtils.equals(pref.getKey(), selectedKey);
-                        if (radioPref.isChecked() != newCheckedState) {
-                            radioPref.setChecked(TextUtils.equals(pref.getKey(), selectedKey));
-                        }
+            updateCheckedState(selectedKey);
+        }
+        onSelectionPerformed(success);
+    }
+
+    @VisibleForTesting
+    public void updateCheckedState(String selectedKey) {
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen != null) {
+            final int count = screen.getPreferenceCount();
+            for (int i = 0; i < count; i++) {
+                final Preference pref = screen.getPreference(i);
+                if (pref instanceof RadioButtonPreference) {
+                    final RadioButtonPreference radioPref = (RadioButtonPreference) pref;
+                    final boolean newCheckedState = TextUtils.equals(pref.getKey(), selectedKey);
+                    if (radioPref.isChecked() != newCheckedState) {
+                        radioPref.setChecked(TextUtils.equals(pref.getKey(), selectedKey));
                     }
                 }
+            }
+        }
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    void mayCheckOnlyRadioButton() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        // If there is only 1 thing on screen, select it.
+        if (screen != null && screen.getPreferenceCount() == 1) {
+            final Preference onlyPref = screen.getPreference(0);
+            if (onlyPref instanceof RadioButtonPreference) {
+                ((RadioButtonPreference) onlyPref).setChecked(true);
             }
         }
     }
@@ -176,6 +205,9 @@ public abstract class DefaultAppPickerFragment extends InstrumentedPreferenceFra
     protected abstract String getDefaultAppKey();
 
     protected abstract boolean setDefaultAppKey(String key);
+
+    // Called after the user tries to select an item.
+    protected void onSelectionPerformed(boolean success) {}
 
     protected String getConfirmationMessage(DefaultAppInfo appInfo) {
         return null;

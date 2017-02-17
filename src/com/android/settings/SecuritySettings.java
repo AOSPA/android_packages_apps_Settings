@@ -68,9 +68,9 @@ import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.trustagent.TrustAgentManager;
+import com.android.settings.widget.GearPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
@@ -1300,7 +1300,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         dashboardFeatureProvider.getTilesForCategory(CategoryKey.CATEGORY_SECURITY);
                 mSummaryLoader.setSummary(this, getPackageVerifierSummary(dashboardCategory));
             } else {
-                mSummaryLoader.setSummary(this, null);
+                mSummaryLoader.setSummary(this,
+                        mContext.getString(R.string.security_dashboard_summary));
             }
         }
 

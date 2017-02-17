@@ -743,7 +743,8 @@
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
     <string name="account_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the security screen -->
-    <string name="security_settings_title">Security &amp; lockscreen</string>
+    <string name="security_settings_title">Security &amp; screen lock</string>
+
     <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
     <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock, credential storage lock</string>
     <!-- Main Settings screen setting option summary text for the item to take you to the CDMA security and location screen -->
@@ -754,7 +755,8 @@
     <string name="disabled_by_administrator_summary">Disabled by administrator</string>
     <!-- In the security screen, the header title for security statuses -->
     <string name="security_status_title">Security status</string>
-
+    <!-- Summary for Security settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="security_dashboard_summary">Location, fingerprint</string>
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
@@ -1597,11 +1599,6 @@
     <string name="wifi_poor_network_detection_summary">Don\u2019t use a Wi\u2011Fi network unless it has a good Internet connection</string>
     <!-- Checkbox summary for option to toggle poor network detection [CHAR LIMIT=60] -->
     <string name="wifi_avoid_poor_network_detection_summary">Only use networks that have a good Internet connection</string>
-
-    <!-- Network recommendations toggle -->
-    <!--TODO(jjoslin): Provide final strings and mark for translation. BUG: 32913919 -->
-    <string translatable="false" name="networking_allow_recommendations_title">Use network recommendations</string>
-    <string translatable="false" name="networking_allow_recommendations_summary">When enabled, use network recommendations when selecting the Wi\u2011Fi network to connect to</string>
 
     <!-- Preference title for option to install certificates -->
     <string name="wifi_install_credentials">Install certificates</string>
@@ -2942,8 +2939,14 @@
     <string name="tether_settings_title_bluetooth">Bluetooth tethering</string>
     <!-- Tethering controls, item title to go into the tethering settings when USB and Bluetooth tethering are available [CHAR LIMIT=25]-->
     <string name="tether_settings_title_usb_bluetooth">Tethering</string>
-    <!-- Tethering controls, item title to go into the tethering settings when USB, Bluetooth and Wifi tethering are available [CHAR LIMIT=25]-->
+    <!-- Tethering controls, item title to go into the tethering settings when USB, Bluetooth and Wifi tethering are available [CHAR LIMIT=50]-->
     <string name="tether_settings_title_all">Hotspot &amp; Tethering</string>
+    <!-- Tethering setting summary when both Wi-Fi hotspot and tether are turned on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_hotspot_on_tether_on">Hotspot on, tethering</string>
+    <!-- Tethering setting summary when Wi-Fi hotspot is on and tether is off [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_hotspot_on_tether_off">Hotspot on</string>
+    <!-- Tethering setting summary when Wi-Fi hotspot is off and tether is on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_hotspot_off_tether_on">Tethering</string>
     <!-- Tethering controls, footer note displayed when tethering is disabled because Data Saver mode is on [CHAR LIMIT=none]-->
     <string name="tether_settings_disabled_on_data_saver">"Can\u2019t tether or use portable hotspots while Data Saver is on"</string>
 
@@ -3965,6 +3968,8 @@
     <string name="accessibility_settings">Accessibility</string>
     <!-- Settings title for accessibility settings screen -->
     <string name="accessibility_settings_title">Accessibility settings</string>
+    <!-- Summary for Accessibility settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="accessibility_settings_summary">Screen readers, audio, display, interaction controls</string>
     <!-- Settings title for a brief version of Vision-Related Accessibility Settings. Displayed in Setup Wizard only. [CHAR LIMIT=35] -->
     <string name="vision_settings_title">Vision Settings</string>
     <!-- Settings description for a brief version of Vision-Related Accessibility Settings. Tells the user that they can adjust these settings now to help them through the remainder of the Setup Wizard and that they can later be changed in Settings. Displayed in Setup Wizard only. [CHAR LIMIT=none] -->
@@ -4317,7 +4322,9 @@
     <!-- Bluetooth on time -->
     <string name="bluetooth_on_time">Wi\u2011Fi on time</string>
 
-    <!-- Activity title for battery usage history details -->
+    <!-- Activity title for advanced battery usage page [CHAR LIMIT=60] -->
+    <string name="advanced_battery_title">Advanced battery usage</string>
+    <!-- Activity title for battery usage history details [CHAR LIMIT=60] -->
     <string name="history_details_title">History details</string>
 
     <!-- Activity title for battery usage details for an app. or power consumer -->
@@ -4351,6 +4358,14 @@
     <string name="power_unaccounted">Miscellaneous</string>
     <!-- Label for power that we computed too much for -->
     <string name="power_overcounted">Over-counted</string>
+    <!-- Label for power consumed by apps [CHAR LIMIT=30] -->
+    <string name="power_apps">Apps</string>
+    <!-- Label for power consumed by services [CHAR LIMIT=30] -->
+    <string name="power_service">Services</string>
+    <!-- Label for power consumed by system [CHAR LIMIT=30] -->
+    <string name="power_system">System</string>
+    <!-- Label for power consumed by user [CHAR LIMIT=30] -->
+    <string name="power_user">User</string>
 
     <!-- Label for CPU usage time -->
     <string name="usage_type_cpu">CPU total</string>
@@ -4470,6 +4485,14 @@
 
     <!-- Description for battery usage time for an app, i.e. Used for 30min. [CHAR LIMIT=60] -->
     <string name="battery_used_for">Used for %1$s</string>
+    <!-- Description for battery usage detail information since last full charge. [CHAR LIMIT=120] -->
+    <string name="battery_detail_since_full_charge">Usage breakdown since last full charge</string>
+
+    <!-- Description for battery time left, i.e. 50min Estimated time left. [CHAR LIMIT=80]-->
+    <string name="estimated_time_left">Estimated time left</string>
+
+    <!-- Description for estimated time. [CHAR LIMIT=80]-->
+    <string name="estimated_time_description">Estimation may change based on usage</string>
 
     <!-- Menu label for viewing battery usage since unplugged -->
     <string name="menu_stats_unplugged"><xliff:g id="unplugged">%1$s</xliff:g> since unplugged</string>
@@ -5620,6 +5643,8 @@
     <string name="user_enable_calling_and_sms_confirm_message">Call and SMS history will be shared with this user.</string>
     <!-- Title for the emergency info preference [CHAR LIMIT=40] -->
     <string name="emergency_info_title">Emergency information</string>
+    <!-- Summary for the emergency info preference [CHAR LIMIT=40] -->
+    <string name="emergency_info_summary">Information about <xliff:g id="user_name" example="Jason">%1$s</xliff:g></string>
 
     <!-- Application Restrictions screen title [CHAR LIMIT=45] -->
     <string name="application_restrictions">Allow apps and content</string>
@@ -5688,6 +5713,9 @@
     <!--  Help URLs for some screens. Not specified here. Specified in product overlays --><skip/>
     <!-- Help menu label [CHAR LIMIT=20] -->
     <string name="help_label">Help &amp; feedback</string>
+
+    <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
+    <string name="support_summary">Help articles, phone &amp; chat support</string>
 
     <!-- Help URI, Default [DO NOT TRANSLATE] -->
     <string name="help_uri_default" translatable="false"></string>
@@ -5947,17 +5975,25 @@
 
     <!-- Title for setting tile leading to network and Internet settings [CHAR LIMIT=40]-->
     <string name="network_dashboard_title">Network &amp; internet</string>
+    <!-- Summary for Network and Internet settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="network_dashboard_summary">Wi-Fi, cellular, data usage, hotspot</string>
     <!-- Title for setting tile leading to Connected devices settings [CHAR LIMIT=40]-->
     <string name="connected_devices_dashboard_title">Connected devices</string>
+    <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="connected_devices_dashboard_summary">Bluetooth, NFC, cast</string>
     <!-- Title for setting tile leading to Apps & Notification settings [CHAR LIMIT=40]-->
     <string name="app_and_notification_dashboard_title">Apps &amp; notifications</string>
+    <!-- Summary for Apps & Notification settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="app_and_notification_dashboard_summary">Permissions, default apps</string>
     <!-- Title for setting tile leading to User and accounts settings [CHAR LIMIT=40]-->
     <string name="account_dashboard_title">User &amp; accounts</string>
     <!-- Title for setting tile leading to setting UI which allows user set default app to
     handle actions such as open web page, making phone calls, default SMS apps [CHAR  LIMIT=40]-->
     <string name="app_default_dashboard_title">Default apps</string>
-    <!-- Summary text for system preference tile, showing current display language of device [CHAR LIMIT=NONE]-->
-    <string name="system_dashboard_summary">Language: <xliff:g id="language">%1$s</xliff:g></string>
+    <!-- Summary text for system preference tile, showing important setting items under system setting [CHAR LIMIT=NONE]-->
+    <string name="system_dashboard_summary" product="default">Languages, backup, updates, about phone</string>
+    <!-- Summary text for system preference tile, showing important setting items under system setting [CHAR LIMIT=NONE]-->
+    <string name="system_dashboard_summary" product="tablet">Languages, backup, updates, about device</string>
 
     <!-- Search strings -->
     <!-- Text to describe the search results fragment title [CHAR LIMIT=16] -->
@@ -6050,6 +6086,9 @@
     <!-- Sound: Dashboard summary indicating the volume of ringtone. example: Ring volume at 20%.
     [CHAR LIMIT=100] -->
     <string name="sound_settings_summary">Ring volume at <xliff:g id="percentage" example="2%">%1$s</xliff:g></string>
+
+    <!-- Summary for sound settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="sound_dashboard_summary">Volume, vibration, Do not disturb</string>
 
     <!-- Sound: Dashboard summary indicating the volume of ringtone when at 0% with vibrate enabled. [CHAR LIMIT=100] -->
     <string name="sound_settings_summary_vibrate">Ringer set to vibrate</string>
@@ -6372,7 +6411,10 @@
     <string name="loading_notification_apps">Loading apps...</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: channels title -->
-    <string name="notification_channels">Channels</string>
+    <string name="notification_channels">Categories</string>
+
+    <!-- [CHAR LIMIT=NONE] App notification settings: non-grouped-channels title -->
+    <string name="notification_channels_other">Other</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: no channels -->
     <string name="no_channels">This app has not posted any notifications</string>
@@ -7278,12 +7320,10 @@
     <!-- Summary of app not allowed to draw overlay [CHAR LIMIT=60] -->
     <string name="system_alert_window_off">No</string>
 
-    <!-- Title for settings screen for controlling apps that can install other apps on device [CHAR LIMIT=30] -->
+    <!-- Title for settings screen for controlling apps that can install other apps on device [CHAR LIMIT=50] -->
     <string name="install_other_apps">Install other apps</string>
     <!-- Keywords for setting screen for controlling apps that can install other apps on device -->
     <string name="keywords_install_other_apps">install apps external unknown sources</string>
-    <!-- Label for setting which controls whether app is trusted to install apps on the device [CHAR LIMIT=45] -->
-    <string name="permit_install_other_apps">Allows to install other apps</string>
 
     <!-- Write Settings settings -->
     <!-- Settings title in main settings screen for WRITE_SETTINGS [CHAR LIMIT=30] -->
@@ -7315,7 +7355,7 @@
     <string name="external_source_trusted">Yes</string>
     <!-- Summary of app not trusted to install apps [CHAR LIMIT=45] -->
     <string name="external_source_untrusted">No</string>
-    <!-- Title of switch preference that controls whether an external app source is trusted or not [CHAR LIMIT=100] -->
+    <!-- Title of switch preference that controls whether an external app source is trusted or not [CHAR LIMIT=50] -->
     <string name="external_source_switch_title">Trust apps from this source</string>
 
     <!-- Title of setting that controls gesture to open camera [CHAR LIMIT=40] -->
@@ -7387,10 +7427,12 @@
     <string name="apps_summary_example">24 apps installed</string>
 
     <!-- Summary of storage usage [CHAR LIMIT=NONE] -->
-    <string name="storage_summary"><xliff:g id="size1" example="8GB">%1$s</xliff:g> of <xliff:g id="size2" example="32GB">%2$s</xliff:g> used</string>
+    <string name="storage_summary"><xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space" example="32GB">%2$s</xliff:g> free</string>
 
     <!-- Summary of display with screen sleep timeout [CHAR LIMIT=NONE] -->
     <string name="display_summary">Sleep after <xliff:g id="timeout_description" example="10 minutes">%1$s</xliff:g> of inactivity</string>
+    <!-- Summary for Display settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="display_dashboard_summary">Wallpaper, sleep, font size</string>
     <!-- Example summary of display used in Setup Wizard preview screen [CHAR LIMIT=NONE] -->
     <string name="display_summary_example">Sleep after 10 minutes of inactivity</string>
 
@@ -7757,12 +7799,6 @@
     <!-- Title of developer options to set the smallest width of the screen [CHAR LIMIT=60]-->
     <string name="developer_smallest_width">Smallest width</string>
 
-    <!-- Title of developer options time [CHAR LIMIT=60]-->
-    <string name="developer_tile">Development mode</string>
-
-    <!-- Message shown when there is no active state for development mode [CHAR LIMIT=NONE]-->
-    <string name="developer_tile_unavailable">No active state selected</string>
-
     <!-- Message shown when there are no premium SMS apps [CHAR LIMIT=NONE] -->
     <string name="premium_sms_none">No installed apps have requested Premium SMS access</string>
 
@@ -7777,6 +7813,9 @@
 
     <!-- [CHAR LIMIT=60] Name of dev option called "System UI demo mode" -->
     <string name="demo_mode">System UI demo mode</string>
+
+    <!-- [CHAR LIMIT=60] Name of dev option to enable extra quick settings tiles -->
+    <string name="quick_settings_developer_tiles">Quick settings developer tiles</string>
 
     <!-- Title text for connecting to customer support [CHAR LIMIT=80]-->
     <string name="support_escalation_title">We\'re here to help</string>
@@ -8006,15 +8045,6 @@
 
     <string name="automatic_storage_manager_freed_bytes"><xliff:g id="size" example="3.25MB">%1$s</xliff:g> total made available\n\nLast ran on <xliff:g id="date" example="Jan 12">%2$s</xliff:g></string>
 
-    <!-- Dropdown preference title for dropdown describing how many days of downloads to retain.-->
-    <string name="automatic_storage_manager_downloads_days_title">Remove downloads</string>
-
-    <!-- Preference title for downloads backup toggle. [CHAR LIMIT=60]-->
-    <string name="downloads_backup_preference_title">Downloads backup</string>
-
-    <!-- Used as wall of text to describe the feature. [CHAR LIMIT=NONE] -->
-    <string name="downloads_backup_text"></string>
-
     <!-- Title text for enabling web actions. [CHAR_LIMIT=60] -->
     <string name="web_action_enable_title">Open links in apps</string>
 
@@ -8032,7 +8062,7 @@
     <string name="automatic_storage_manager_activation_warning">Your storage is now being managed by the storage manager</string>
 
     <!-- Accounts for section header [CHAR LIMIT=30] -->
-    <string name="account_for_section_header">Accounts</string>
+    <string name="account_for_section_header">Accounts for <xliff:g id="user_name" example="Jason">%1$s</xliff:g></string>
 
     <!-- Configure section header [CHAR LIMIT=30] -->
     <string name="configure_section_header">Configure</string>
@@ -8144,7 +8174,7 @@
     <string name="storage_settings_2" >Phone Storage</string>
 
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
-    <string name="storage_size_large_alternate"><xliff:g id="number" example="128">^1</xliff:g><small><small> <xliff:g id="unit" example="KB">^2</xliff:g> used</small></small></string>
+    <string name="storage_size_large_alternate"><xliff:g id="number" example="128">^1</xliff:g><small> <xliff:g id="unit" example="KB">^2</xliff:g></small></string>
     <!-- Summary of a single storage volume free space. [CHAR LIMIT=48]-->
     <string name="storage_volume_free"><xliff:g id="total" example="32GB">%1$s</xliff:g> free</string>
     <!-- The percent of storage used by a storage volume. Exposed inside of a donut graph. [CHAR LIMIT=4]-->
@@ -8168,9 +8198,9 @@
     <string name="audio_storage_title">Music</string>
 
     <!-- UI webview setting: WebView uninstalled-for-user explanatory text [CHAR LIMIT=30] -->
-    <string name="webview_uninstalled_for_user">Uninstalled for user <xliff:g id="user" example="John Doe">%s</xliff:g>\n</string>
+    <string name="webview_uninstalled_for_user">(uninstalled for user <xliff:g id="user" example="John Doe">%s</xliff:g>)</string>
     <!-- UI webview setting: WebView disabled-for-user explanatory text [CHAR LIMIT=30] -->
-    <string name="webview_disabled_for_user">Disabled for user <xliff:g id="user" example="John Doe">%s</xliff:g>\n</string>
+    <string name="webview_disabled_for_user">(disabled for user <xliff:g id="user" example="John Doe">%s</xliff:g>)</string>
 
     <!-- AutoFill strings -->
     <!-- Preference label for the auto-fill app. [CHAR LIMIT=60] -->

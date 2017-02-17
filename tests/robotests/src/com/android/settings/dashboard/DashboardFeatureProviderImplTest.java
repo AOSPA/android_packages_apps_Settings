@@ -27,9 +27,11 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.CategoryManager;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -49,6 +51,9 @@ import org.robolectric.shadows.ShadowApplication;
 import java.util.ArrayList;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -65,13 +70,21 @@ public class DashboardFeatureProviderImplTest {
     private UserManager mUserManager;
     @Mock
     private CategoryManager mCategoryManager;
+    private FakeFeatureFactory mFeatureFactory;
 
     private DashboardFeatureProviderImpl mImpl;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest(mActivity);
+        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
         mImpl = new DashboardFeatureProviderImpl(mActivity);
+    }
+
+    @Test
+    public void shouldHoldAppContext() {
+        assertThat(mImpl.mContext).isEqualTo(mActivity.getApplicationContext());
     }
 
     @Test
@@ -134,6 +147,30 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
+    public void bindPreference_noFragmentMetadataSingleUser_shouldBindToDirectLaunchIntent() {
+        final Preference preference = new Preference(
+                ShadowApplication.getInstance().getApplicationContext());
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.userHandle = new ArrayList<>();
+        tile.userHandle.add(mock(UserHandle.class));
+        tile.intent = new Intent();
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
+
+        when(mActivity.getSystemService(Context.USER_SERVICE))
+                .thenReturn(mUserManager);
+
+        mImpl.bindPreferenceToTile(mActivity, preference, tile, "123", Preference.DEFAULT_ORDER);
+        preference.getOnPreferenceClickListener().onPreferenceClick(null);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                any(Context.class),
+                eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK),
+                eq(tile.intent.getComponent().flattenToString()));
+        verify(mActivity)
+                .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
+    }
+
+    @Test
     public void bindPreference_withNullKeyNullPriority_shouldGenerateKeyAndPriority() {
         final Preference preference = new Preference(
                 ShadowApplication.getInstance().getApplicationContext());
@@ -191,7 +228,7 @@ public class DashboardFeatureProviderImplTest {
         ShadowActivity shadowActivity = shadowOf(activity);
 
         assertThat(shadowActivity.getNextStartedActivityForResult().intent.getAction())
-            .isEqualTo("TestAction");
+                .isEqualTo("TestAction");
     }
 
     @Test
@@ -234,7 +271,8 @@ public class DashboardFeatureProviderImplTest {
         when(mSpy.isEnabled()).thenReturn(true);
         final DashboardCategory category = new DashboardCategory();
         category.tiles.add(new Tile());
-        when(mCategoryManager.getTilesByCategory(mActivity, CategoryKey.CATEGORY_HOMEPAGE))
+        when(mCategoryManager
+                .getTilesByCategory(any(Context.class), eq(CategoryKey.CATEGORY_HOMEPAGE)))
                 .thenReturn(category);
 
         assertThat(mSpy.getPreferencesForCategory(mActivity,

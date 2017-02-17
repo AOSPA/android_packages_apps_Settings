@@ -35,6 +35,7 @@ import android.provider.Settings;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -98,6 +99,12 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                 FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
         addPreferencesFromResource(R.xml.channel_notification_settings);
 
+        // load settings intent
+        ArrayMap<String, NotificationBackend.AppRow>
+                rows = new ArrayMap<String, NotificationBackend.AppRow>();
+        rows.put(mAppRow.pkg, mAppRow);
+        collectConfigActivities(rows);
+
         mBlock = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BLOCK);
         mBadge = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BADGE);
         mImportance = (RestrictedDropDownPreference) findPreference(KEY_IMPORTANCE);
@@ -127,8 +134,9 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                     .setSummary(mAppRow.label)
                     .setPackageName(mAppRow.pkg)
                     .setUid(mAppRow.uid)
+                    .setAppNotifPrefIntent(mAppRow.settingsIntent)
                     .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                            AppHeaderController.ActionType.ACTION_NONE)
+                            AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
                     .done(getPrefContext());
             getPreferenceScreen().addPreference(pref);
         }
@@ -156,7 +164,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean lights = (Boolean) newValue;
-                mChannel.setLights(lights);
+                mChannel.enableLights(lights);
                 mChannel.lockFields(NotificationChannel.USER_LOCKED_LIGHTS);
                 mBackend.updateChannel(mPkg, mUid, mChannel);
                 return true;
@@ -230,12 +238,12 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         List<String> values = new ArrayList<>();;
         for (int i = 0; i < numImportances; i++) {
             int importance = i + 1;
-            summaries.add(getSummary(importance));
+            summaries.add(getImportanceSummary(importance));
             values.add(String.valueOf(importance));
         }
         if (NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId())) {
             // Add option to reset to letting the app decide
-            summaries.add(getSummary(NotificationManager.IMPORTANCE_UNSPECIFIED));
+            summaries.add(getImportanceSummary(NotificationManager.IMPORTANCE_UNSPECIFIED));
             values.add(String.valueOf(NotificationManager.IMPORTANCE_UNSPECIFIED));
         }
         mImportance.setEntryValues(values.toArray(new String[0]));
@@ -254,25 +262,6 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
                 return true;
             }
         });
-    }
-
-    private String getSummary(int importance) {
-        switch (importance) {
-            case NotificationManager.IMPORTANCE_UNSPECIFIED:
-                return getContext().getString(R.string.notification_importance_unspecified);
-            case NotificationManager.IMPORTANCE_NONE:
-                return getContext().getString(R.string.notification_importance_blocked);
-            case NotificationManager.IMPORTANCE_MIN:
-                return getContext().getString(R.string.notification_importance_min);
-            case NotificationManager.IMPORTANCE_LOW:
-                return getContext().getString(R.string.notification_importance_low);
-            case NotificationManager.IMPORTANCE_DEFAULT:
-                return getContext().getString(R.string.notification_importance_default);
-            case NotificationManager.IMPORTANCE_HIGH:
-            case NotificationManager.IMPORTANCE_MAX:
-            default:
-                return getContext().getString(R.string.notification_importance_high);
-        }
     }
 
     protected void setupPriorityPref(boolean priority) {
