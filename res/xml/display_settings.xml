@@ -96,6 +96,11 @@
                 android:title="@string/srgb_title"
                 android:summary="@string/srgb_summary" />
 
+        <SwitchPreference
+                android:key="pocket_judge"
+                android:title="@string/pocket_judge_title"
+                android:summary="@string/pocket_judge_summary" />
+
         <com.android.settings.WarnedPreference
                 android:key="font_size_mode"
                 android:title="@string/title_font_size"

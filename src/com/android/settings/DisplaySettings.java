@@ -78,6 +78,7 @@ import static android.provider.Settings.Secure.CAMERA_GESTURE_DISABLED;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static android.provider.Settings.Secure.SRGB_ENABLED;
 import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
+import static android.provider.Settings.System.POCKET_JUDGE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
@@ -103,6 +104,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_LIFT_TO_WAKE = "lift_to_wake";
     private static final String KEY_DOZE = "doze";
+    private static final String KEY_TAP_TO_WAKE = "tap_to_wake";
+    private static final String KEY_POCKET_JUDGE = "pocket_judge";
     private static final String KEY_SRGB = "srgb";
     private static final String KEY_THEME = "theme";
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
@@ -138,6 +141,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private Preference mScreenSaverPreference;
     private SwitchPreference mLiftToWakePreference;
     private SwitchPreference mDozePreference;
+    private SwitchPreference mPocketPreference;
     private SwitchPreference mSrgbPreference;
     private SwitchPreference mAutoBrightnessPreference;
     private SwitchPreference mCameraGesturePreference;
@@ -241,6 +245,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } else {
             removePreference(KEY_DOZE);
         }
+
+        mPocketPreference = (SwitchPreference) findPreference(KEY_POCKET_JUDGE);
+        mPocketPreference.setOnPreferenceChangeListener(this);
 
         if (isSrgbAvailable(activity)) {
             mSrgbPreference = (SwitchPreference) findPreference(KEY_SRGB);
@@ -536,6 +543,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mDozePreference.setChecked(value != 0);
         }
 
+        if (mPocketPreference != null) {
+            int value = Settings.System.getInt(getContentResolver(), POCKET_JUDGE, 1);
+            mPocketPreference.setChecked(value != 0);
+        }
+
         if (mSrgbPreference != null) {
             int value = Settings.Secure.getInt(getContentResolver(), SRGB_ENABLED, 0);
             mSrgbPreference.setChecked(value != 0);
@@ -620,6 +632,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (preference == mDozePreference) {
             boolean value = (Boolean) objValue;
             Settings.Secure.putInt(getContentResolver(), DOZE_ENABLED, value ? 1 : 0);
+        }
+        if (preference == mPocketPreference) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(getContentResolver(), POCKET_JUDGE, value ? 1 : 0);
         }
         if (preference == mSrgbPreference) {
             boolean value = (Boolean) objValue;
