@@ -16,10 +16,15 @@
 
 package com.android.settings.display;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.provider.Settings.Secure;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.TwoStatePreference;
@@ -44,6 +49,10 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     private static final String KEY_NIGHT_DISPLAY_START_TIME = "night_display_start_time";
     private static final String KEY_NIGHT_DISPLAY_END_TIME = "night_display_end_time";
     private static final String KEY_NIGHT_DISPLAY_ACTIVATED = "night_display_activated";
+
+    private static final String SETTING_WARNING_HIDDEN = "night_display_warning_hidden";
+    private static final int WARNING_SHOW = 0;
+    private static final int WARNING_HIDE = 1;
 
     private static final int DIALOG_START_TIME = 0;
     private static final int DIALOG_END_TIME = 1;
@@ -191,12 +200,54 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        boolean result = false;
+        boolean displayWarning = false;
+
         if (preference == mAutoModePreference) {
-            return mController.setAutoMode(Integer.parseInt((String) newValue));
+            int selectedAutoMode = Integer.parseInt((String) newValue);
+            displayWarning = selectedAutoMode != NightDisplayController.AUTO_MODE_DISABLED;
+            result = mController.setAutoMode(selectedAutoMode);
         } else if (preference == mActivatedPreference) {
-            return mController.setActivated((Boolean) newValue);
+            boolean activated = (Boolean) newValue;
+            displayWarning = activated;
+            result = mController.setActivated(activated);
         }
-        return false;
+
+        if (displayWarning) {
+            displayWarning();
+        }
+
+        return result;
+    }
+
+    private void displayWarning() {
+        final Context context = getContext();
+        final ContentResolver contentResolver = getContentResolver();
+        final int warningHidden = Secure.getIntForUser(contentResolver,
+              SETTING_WARNING_HIDDEN, WARNING_SHOW, UserHandle.myUserId());
+
+        if (warningHidden == WARNING_HIDE) {
+            return;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(getString(R.string.night_display_warning))
+            .setCancelable(true)
+            .setPositiveButton(getString(R.string.night_display_ok), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }})
+            .setNegativeButton(getString(R.string.night_display_hide),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Secure.putIntForUser(contentResolver,
+                              SETTING_WARNING_HIDDEN,
+                              WARNING_HIDE,
+                              UserHandle.myUserId());
+                    }});
+        AlertDialog alert = builder.create();
+        alert.setCanceledOnTouchOutside(true);
+        alert.show();
     }
 
     @Override
