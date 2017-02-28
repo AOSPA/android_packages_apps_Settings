@@ -54,7 +54,7 @@ import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DrawOverlayDetails;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
-import com.android.settings.applications.ManageAssist;
+import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.applications.ManageDomainUrls;
 import com.android.settings.applications.NotificationApps;
 import com.android.settings.applications.PictureInPictureSettings;
@@ -81,6 +81,7 @@ import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
@@ -182,6 +183,7 @@ public class SettingsGateway {
             AccountSyncSettings.class.getName(),
             AccountSettings.class.getName(),
             GestureSettings.class.getName(),
+            AssistGestureSettings.class.getName(),
             SwipeToNotificationSettings.class.getName(),
             DoubleTapPowerSettings.class.getName(),
             DoubleTapScreenSettings.class.getName(),
@@ -296,8 +298,6 @@ public class SettingsGateway {
             "com.android.settings.PaymentSettingsDashboardAlias",
             // Home page > Network & Internet
             "com.android.settings.DataUsageDashboardAlias",
-            // Home page > Security
-            "com.android.settings.LocationDashboardAlias",
             // Home page > System
             Settings.LanguageAndInputSettingsActivity.class.getName(),
             "com.android.settings.DateTimeDashboardAlias",

@@ -17,16 +17,22 @@
 package com.android.settings.core.instrumentation;
 
 import android.content.Context;
+import android.metrics.LogMaker;
+import android.util.Pair;
 
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.nano.MetricsProto;
 
 /**
  * {@link LogWriter} that writes data to eventlog.
  */
 public class EventLogWriter implements LogWriter {
 
-    public void visible(Context context, int category) {
-        MetricsLogger.visible(context, category);
+    public void visible(Context context, int source, int category) {
+        final LogMaker logMaker = new LogMaker(category)
+                .setType(MetricsProto.MetricsEvent.TYPE_OPEN)
+                .addTaggedData(MetricsProto.MetricsEvent.FIELD_CONTEXT, source);
+        MetricsLogger.action(logMaker);
     }
 
     public void hidden(Context context, int category) {
@@ -37,6 +43,15 @@ public class EventLogWriter implements LogWriter {
         MetricsLogger.action(context, category, "");
     }
 
+    public void actionWithSource(Context context, int source, int category) {
+        final LogMaker logMaker = new LogMaker(category)
+                .setType(MetricsProto.MetricsEvent.TYPE_ACTION);
+        if (source != MetricsProto.MetricsEvent.VIEW_UNKNOWN) {
+            logMaker.addTaggedData(MetricsProto.MetricsEvent.FIELD_CONTEXT, source);
+        }
+        MetricsLogger.action(logMaker);
+    }
+
     public void action(Context context, int category, int value) {
         MetricsLogger.action(context, category, Integer.toString(value));
     }
@@ -45,8 +60,19 @@ public class EventLogWriter implements LogWriter {
         MetricsLogger.action(context, category, Boolean.toString(value));
     }
 
-    public void action(Context context, int category, String pkg) {
-        MetricsLogger.action(context, category, pkg);
+    public void action(Context context, int category, String pkg,
+            Pair<Integer, Object>... taggedData) {
+        if (taggedData == null || taggedData.length == 0) {
+            MetricsLogger.action(context, category, pkg);
+        } else {
+            final LogMaker logMaker = new LogMaker(category)
+                    .setType(MetricsProto.MetricsEvent.TYPE_ACTION)
+                    .setPackageName(pkg);
+            for (Pair<Integer, Object> pair : taggedData) {
+                logMaker.addTaggedData(pair.first, pair.second);
+            }
+            MetricsLogger.action(logMaker);
+        }
     }
 
     public void count(Context context, String name, int value) {

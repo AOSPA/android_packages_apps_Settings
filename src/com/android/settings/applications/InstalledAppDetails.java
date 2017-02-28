@@ -151,6 +151,7 @@ public class InstalledAppDetails extends AppInfoBase
     private static final String KEY_LAUNCH = "preferred_settings";
     private static final String KEY_BATTERY = "battery";
     private static final String KEY_MEMORY = "memory";
+    private static final String KEY_VERSION = "app_version";
 
     private static final String NOTIFICATION_TUNER_SETTING = "show_importance_slider";
 
@@ -171,6 +172,7 @@ public class InstalledAppDetails extends AppInfoBase
     private Preference mLaunchPreference;
     private Preference mDataPreference;
     private Preference mMemoryPreference;
+    private Preference mVersionPreference;
 
     private boolean mDisableAfterUninstall;
 
@@ -327,7 +329,7 @@ public class InstalledAppDetails extends AppInfoBase
         addDynamicPrefs();
         if (mDashboardFeatureProvider.isEnabled()) {
             mFooter = new LayoutPreference(getPrefContext(), R.layout.app_action_buttons);
-            mFooter.setOrder(10000);
+            mFooter.setOrder(-9999);
             mFooter.setKey(KEY_FOOTER);
             getPreferenceScreen().addPreference(mFooter);
         }
@@ -416,6 +418,7 @@ public class InstalledAppDetails extends AppInfoBase
         mBatteryPreference.setOnPreferenceClickListener(this);
         mMemoryPreference = findPreference(KEY_MEMORY);
         mMemoryPreference.setOnPreferenceClickListener(this);
+        mVersionPreference = findPreference(KEY_VERSION);
 
         mLaunchPreference = findPreference(KEY_LAUNCH);
         if (mAppEntry != null && mAppEntry.info != null) {
@@ -559,12 +562,21 @@ public class InstalledAppDetails extends AppInfoBase
                     .newAppHeaderController(this, appSnippet)
                     .setLabel(mAppEntry)
                     .setIcon(mAppEntry)
-                    .setSummary(pkgInfo)
+                    .setSummary(getString(getInstallationStatus(mAppEntry.info)))
                     .done(false /* rebindActions */);
+            mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
         } else {
             setupAppSnippet(appSnippet, mAppEntry.label, mAppEntry.icon,
                     pkgInfo != null ? pkgInfo.versionName : null);
         }
+    }
+
+    @VisibleForTesting
+    int getInstallationStatus(ApplicationInfo info) {
+        if ((info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
+            return R.string.not_installed;
+        }
+        return info.enabled ? R.string.installed : R.string.disabled;
     }
 
     private boolean signaturesMatch(String pkg1, String pkg2) {
@@ -748,6 +760,7 @@ public class InstalledAppDetails extends AppInfoBase
                 MetricsEvent.ACTION_APP_FORCE_STOP, pkgName);
         ActivityManager am = (ActivityManager) getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
+        Log.d(LOG_TAG, "Stopping package " + pkgName);
         am.forceStopPackage(pkgName);
         int userId = UserHandle.getUserId(mAppEntry.info.uid);
         mState.invalidatePackage(pkgName, userId);
@@ -770,10 +783,12 @@ public class InstalledAppDetails extends AppInfoBase
     private void checkForceStop() {
         if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
             // User can't force stop device admin.
+            Log.w(LOG_TAG, "User can't force stop device admin");
             updateForceStopButton(false);
-        } else if ((mAppEntry.info.flags&ApplicationInfo.FLAG_STOPPED) == 0) {
+        } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_STOPPED) == 0) {
             // If the app isn't explicitly stopped, then always show the
             // force stop button.
+            Log.w(LOG_TAG, "App is not explicitly stopped");
             updateForceStopButton(true);
         } else {
             Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
@@ -781,6 +796,8 @@ public class InstalledAppDetails extends AppInfoBase
             intent.putExtra(Intent.EXTRA_PACKAGES, new String[] { mAppEntry.info.packageName });
             intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
             intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mAppEntry.info.uid));
+            Log.d(LOG_TAG, "Sending broadcast to query restart status for "
+                    + mAppEntry.info.packageName);
             getActivity().sendOrderedBroadcastAsUser(intent, UserHandle.CURRENT, null,
                     mCheckKillProcessesReceiver, null, Activity.RESULT_CANCELED, null, null);
         }
@@ -811,7 +828,8 @@ public class InstalledAppDetails extends AppInfoBase
         args.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
 
         SettingsActivity sa = (SettingsActivity) caller.getActivity();
-        sa.startPreferencePanel(fragment.getName(), args, -1, title, caller, SUB_INFO_FRAGMENT);
+        sa.startPreferencePanel(caller, fragment.getName(), args, -1, title, caller,
+                SUB_INFO_FRAGMENT);
     }
 
     /*
@@ -896,7 +914,7 @@ public class InstalledAppDetails extends AppInfoBase
             startAppInfoFragment(AppDataUsage.class, getString(R.string.app_data_usage));
         } else if (preference == mBatteryPreference) {
             BatteryEntry entry = new BatteryEntry(getActivity(), null, mUserManager, mSipper);
-            PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
+            PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), this,
                     mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, true, false);
         } else {
             return false;
@@ -1063,8 +1081,8 @@ public class InstalledAppDetails extends AppInfoBase
         }
         pref = findPreference("default_browser");
         if (pref != null) {
-            pref.setSummary(
-                    DefaultBrowserPreferenceController.isBrowserDefault(mPackageName, context)
+            pref.setSummary(new DefaultBrowserPreferenceController(context)
+                    .isBrowserDefault(mPackageName, mUserId)
                     ? R.string.yes : R.string.no);
         }
         pref = findPreference("default_phone_app");
@@ -1098,10 +1116,10 @@ public class InstalledAppDetails extends AppInfoBase
         LayoutInflater.from(appSnippet.getContext()).inflate(R.layout.widget_text_views,
                 (ViewGroup) appSnippet.findViewById(android.R.id.widget_frame));
 
-        ImageView iconView = (ImageView) appSnippet.findViewById(android.R.id.icon);
+        ImageView iconView = (ImageView) appSnippet.findViewById(R.id.app_detail_icon);
         iconView.setImageDrawable(icon);
         // Set application name.
-        TextView labelView = (TextView) appSnippet.findViewById(android.R.id.title);
+        TextView labelView = (TextView) appSnippet.findViewById(R.id.app_detail_title);
         labelView.setText(label);
         // Version number of application
         TextView appVersion = (TextView) appSnippet.findViewById(R.id.widget_text1);
@@ -1289,7 +1307,10 @@ public class InstalledAppDetails extends AppInfoBase
     private final BroadcastReceiver mCheckKillProcessesReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateForceStopButton(getResultCode() != Activity.RESULT_CANCELED);
+            final boolean enabled = getResultCode() != Activity.RESULT_CANCELED;
+            Log.d(LOG_TAG, "Got broadcast response: Restart status for "
+                    + mAppEntry.info.packageName + " " + enabled);
+            updateForceStopButton(enabled);
         }
     };
 

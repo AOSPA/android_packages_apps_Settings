@@ -16,6 +16,7 @@
 package com.android.settings.core.instrumentation;
 
 import android.content.Context;
+import android.util.Pair;
 
 /**
  * Generic log writer interface.
@@ -25,7 +26,7 @@ public interface LogWriter {
     /**
      * Logs a visibility event when view becomes visible.
      */
-    void visible(Context context, int category);
+    void visible(Context context, int source, int category);
 
     /**
      * Logs a visibility event when view becomes hidden.
@@ -40,6 +41,11 @@ public interface LogWriter {
     /**
      * Logs an user action.
      */
+    void actionWithSource(Context context, int source, int category);
+
+    /**
+     * Logs an user action.
+     */
     void action(Context context, int category, int value);
 
     /**
@@ -50,7 +56,7 @@ public interface LogWriter {
     /**
      * Logs an user action.
      */
-    void action(Context context, int category, String pkg);
+    void action(Context context, int category, String pkg, Pair<Integer, Object>... taggedData);
 
     /**
      * Logs a count.

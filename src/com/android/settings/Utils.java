@@ -16,6 +16,11 @@
 
 package com.android.settings;
 
+import static android.content.Intent.EXTRA_USER;
+import static android.content.Intent.EXTRA_USER_ID;
+import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
+import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
+
 import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -103,11 +108,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-
-import static android.content.Intent.EXTRA_USER;
-import static android.content.Intent.EXTRA_USER_ID;
-import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
-import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
 public final class Utils extends com.android.settingslib.Utils {
 
@@ -252,7 +252,6 @@ public final class Utils extends com.android.settingslib.Utils {
     /**
      * Returns the default link's IP addresses, if any, taking into account IPv4 and IPv6 style
      * addresses.
-     * @param context the application context
      * @return the formatted and newline-separated IP addresses, or null if none.
      */
     public static String getDefaultIpAddresses(ConnectivityManager cm) {
@@ -496,12 +495,14 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param titleResId resource id for the String to display for the title of this set
      *                   of preferences.
      * @param title String to display for the title of this set of preferences.
+     * @param metricsCategory The current metricsCategory for logging source when fragment starts
      */
     public static void startWithFragment(Context context, String fragmentName, Bundle args,
             Fragment resultTo, int resultRequestCode, int titleResId,
-            CharSequence title) {
+            CharSequence title, int metricsCategory) {
         startWithFragment(context, fragmentName, args, resultTo, resultRequestCode,
-                null /* titleResPackageName */, titleResId, title, false /* not a shortcut */);
+                null /* titleResPackageName */, titleResId, title, false /* not a shortcut */,
+                metricsCategory);
     }
 
     /**
@@ -519,19 +520,21 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param titleResId resource id for the String to display for the title of this set
      *                   of preferences.
      * @param title String to display for the title of this set of preferences.
+     * @param metricsCategory The current metricsCategory for logging source when fragment starts
      */
     public static void startWithFragment(Context context, String fragmentName, Bundle args,
             Fragment resultTo, int resultRequestCode, String titleResPackageName, int titleResId,
-            CharSequence title) {
+            CharSequence title, int metricsCategory) {
         startWithFragment(context, fragmentName, args, resultTo, resultRequestCode,
-                titleResPackageName, titleResId, title, false /* not a shortcut */);
+                titleResPackageName, titleResId, title, false /* not a shortcut */,
+                metricsCategory);
     }
 
     public static void startWithFragment(Context context, String fragmentName, Bundle args,
             Fragment resultTo, int resultRequestCode, int titleResId,
-            CharSequence title, boolean isShortcut) {
+            CharSequence title, boolean isShortcut, int metricsCategory) {
         Intent intent = onBuildStartFragmentIntent(context, fragmentName, args,
-                null /* titleResPackageName */, titleResId, title, isShortcut);
+                null /* titleResPackageName */, titleResId, title, isShortcut, metricsCategory);
         if (resultTo == null) {
             context.startActivity(intent);
         } else {
@@ -541,9 +544,9 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static void startWithFragment(Context context, String fragmentName, Bundle args,
             Fragment resultTo, int resultRequestCode, String titleResPackageName, int titleResId,
-            CharSequence title, boolean isShortcut) {
+            CharSequence title, boolean isShortcut, int metricsCategory) {
         Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, titleResPackageName,
-                titleResId, title, isShortcut);
+                titleResId, title, isShortcut, metricsCategory);
         if (resultTo == null) {
             context.startActivity(intent);
         } else {
@@ -552,30 +555,15 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     public static void startWithFragmentAsUser(Context context, String fragmentName, Bundle args,
-            int titleResId, CharSequence title, boolean isShortcut,
+            int titleResId, CharSequence title, boolean isShortcut, int metricsCategory,
             UserHandle userHandle) {
         // workaround to avoid crash in b/17523189
         if (userHandle.getIdentifier() == UserHandle.myUserId()) {
-            startWithFragment(context, fragmentName, args, null, 0, titleResId, title, isShortcut);
+            startWithFragment(context, fragmentName, args, null, 0, titleResId, title, isShortcut,
+                    metricsCategory);
         } else {
             Intent intent = onBuildStartFragmentIntent(context, fragmentName, args,
-                    null /* titleResPackageName */, titleResId, title, isShortcut);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            context.startActivityAsUser(intent, userHandle);
-        }
-    }
-
-    public static void startWithFragmentAsUser(Context context, String fragmentName, Bundle args,
-            String titleResPackageName, int titleResId, CharSequence title, boolean isShortcut,
-            UserHandle userHandle) {
-        // workaround to avoid crash in b/17523189
-        if (userHandle.getIdentifier() == UserHandle.myUserId()) {
-            startWithFragment(context, fragmentName, args, null, 0, titleResPackageName, titleResId,
-                    title, isShortcut);
-        } else {
-            Intent intent = onBuildStartFragmentIntent(context, fragmentName, args,
-                    titleResPackageName, titleResId, title, isShortcut);
+                    null /* titleResPackageName */, titleResId, title, isShortcut, metricsCategory);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivityAsUser(intent, userHandle);
@@ -595,12 +583,13 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param titleResId Optional title resource id to show for this item.
      * @param title Optional title to show for this item.
      * @param isShortcut  tell if this is a Launcher Shortcut or not
+     * @param sourceMetricsCategory The context (source) from which an action is performed
      * @return Returns an Intent that can be launched to display the given
      * fragment.
      */
     public static Intent onBuildStartFragmentIntent(Context context, String fragmentName,
             Bundle args, String titleResPackageName, int titleResId, CharSequence title,
-            boolean isShortcut) {
+            boolean isShortcut, int sourceMetricsCategory) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(context, SubSettings.class);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, fragmentName);
@@ -610,6 +599,7 @@ public final class Utils extends com.android.settingslib.Utils {
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, titleResId);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, title);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SHORTCUT, isShortcut);
+        intent.putExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY, sourceMetricsCategory);
         return intent;
     }
 
@@ -1197,15 +1187,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return null;
     }
 
-    public static boolean isPackageEnabled(Context context, String packageName) {
-        try {
-            return context.getPackageManager().getApplicationInfo(packageName, 0).enabled;
-        } catch (NameNotFoundException e) {
-            // Thrown by PackageManager.getApplicationInfo if the package does not exist
-        }
-        return false;
-    }
-
     public static boolean isPackageDirectBootAware(Context context, String packageName) {
         try {
             final ApplicationInfo ai = context.getPackageManager().getApplicationInfo(
@@ -1264,5 +1245,17 @@ public final class Utils extends com.android.settingslib.Utils {
                 && !TextUtils.isEmpty(carrierDemoModeSetting)
                 && (Settings.Secure.getInt(context.getContentResolver(),
                         carrierDemoModeSetting, 0) == 1);
+    }
+
+    /**
+     * Returns if a given user is a profile of another user.
+     * @param user The user whose profiles will be checked.
+     * @param profile The (potential) profile.
+     * @return if the profile is actually a profile
+     */
+    public static boolean isProfileOf(UserInfo user, UserInfo profile) {
+        return user.id == profile.id ||
+                (user.profileGroupId != UserInfo.NO_PROFILE_GROUP_ID
+                        && user.profileGroupId == profile.profileGroupId);
     }
 }

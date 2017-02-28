@@ -17,7 +17,6 @@
 package com.android.settings.applications;
 
 import android.app.Activity;
-import android.app.usage.StorageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -33,7 +32,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
 import android.text.TextUtils;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -136,12 +134,13 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int FILTER_APPS_ALL = 2;
     public static final int FILTER_APPS_ENABLED = 3;
     public static final int FILTER_APPS_DISABLED = 4;
-    public static final int FILTER_APPS_BLOCKED = 5;
-    public static final int FILTER_APPS_PERSONAL = 6;
-    public static final int FILTER_APPS_WORK = 7;
-    public static final int FILTER_APPS_USAGE_ACCESS = 8;
-    public static final int FILTER_APPS_WITH_OVERLAY = 9;
-    public static final int FILTER_APPS_WRITE_SETTINGS = 10;
+    public static final int FILTER_APPS_INSTANT = 5;
+    public static final int FILTER_APPS_BLOCKED = 6;
+    public static final int FILTER_APPS_PERSONAL = 7;
+    public static final int FILTER_APPS_WORK = 8;
+    public static final int FILTER_APPS_USAGE_ACCESS = 9;
+    public static final int FILTER_APPS_WITH_OVERLAY = 10;
+    public static final int FILTER_APPS_WRITE_SETTINGS = 11;
     public static final int FILTER_APPS_INSTALL_SOURCES = 12;
 
     // Storage types. Used to determine what the extra item in the list of preferences is.
@@ -155,6 +154,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             R.string.filter_all_apps,      // All apps
             R.string.filter_enabled_apps,  // Enabled
             R.string.filter_apps_disabled, // Disabled
+            R.string.filter_instant_apps,  // Instant apps
             R.string.filter_notif_blocked_apps,   // Blocked Notifications
             R.string.filter_personal_apps, // Personal
             R.string.filter_work_apps,     // Work
@@ -174,6 +174,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             ApplicationsState.FILTER_EVERYTHING,  // All apps
             ApplicationsState.FILTER_ALL_ENABLED, // Enabled
             ApplicationsState.FILTER_DISABLED,    // Disabled
+            ApplicationsState.FILTER_INSTANT,      // Instant
             AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED,   // Blocked Notifications
             ApplicationsState.FILTER_PERSONAL,    // Personal
             ApplicationsState.FILTER_WORK,        // Work
@@ -331,7 +332,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 mApplications.setExtraViewController(new MusicViewHolderController(
                         context,
                         new StorageStatsSource(context),
-                        mVolumeUuid));
+                        mVolumeUuid,
+                        UserHandle.of(UserHandle.getUserId(mCurrentUid))));
             }
             mListView.setAdapter(mApplications);
             mListView.setRecyclerListener(mApplications);
@@ -381,6 +383,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             AppFilter filter = new VolumeFilter(mVolumeUuid);
             if (mStorageType == STORAGE_TYPE_MUSIC) {
                 filter = new CompoundFilter(ApplicationsState.FILTER_AUDIO, filter);
+            } else {
+                filter = new CompoundFilter(ApplicationsState.FILTER_OTHER_APPS, filter);
             }
             mApplications.setOverrideFilter(filter);
         }
@@ -442,8 +446,12 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             case LIST_TYPE_NOTIFICATION:
                 return MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS;
             case LIST_TYPE_STORAGE:
-            case LIST_TYPE_GAMES:
+                if (mStorageType == STORAGE_TYPE_MUSIC) {
+                    return MetricsEvent.APPLICATIONS_STORAGE_MUSIC;
+                }
                 return MetricsEvent.APPLICATIONS_STORAGE_APPS;
+            case LIST_TYPE_GAMES:
+                return MetricsEvent.APPLICATIONS_STORAGE_GAMES;
             case LIST_TYPE_USAGE_ACCESS:
                 return MetricsEvent.USAGE_ACCESS;
             case LIST_TYPE_HIGH_POWER:
@@ -562,7 +570,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
     private void startAppInfoFragment(Class<?> fragment, int titleRes) {
         AppInfoBase.startAppInfoFragment(fragment, titleRes, mCurrentPkgName, mCurrentUid, this,
-                INSTALLED_APP_DETAILS);
+                INSTALLED_APP_DETAILS, getMetricsCategory());
     }
 
     @Override
@@ -629,11 +637,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 return true;
             case R.id.advanced:
                 if (mListType == LIST_TYPE_NOTIFICATION) {
-                    ((SettingsActivity) getActivity()).startPreferencePanel(
+                    ((SettingsActivity) getActivity()).startPreferencePanel(this,
                             ConfigureNotificationSettings.class.getName(), null,
                             R.string.configure_notification_settings, null, this, ADVANCED_SETTINGS);
                 } else {
-                    ((SettingsActivity) getActivity()).startPreferencePanel(
+                    ((SettingsActivity) getActivity()).startPreferencePanel(this,
                             AdvancedAppSettings.class.getName(), null, R.string.configure_apps,
                             null, this, ADVANCED_SETTINGS);
                 }
@@ -687,6 +695,10 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
         mFilterAdapter.setFilterEnabled(FILTER_APPS_ENABLED, hasDisabledApps);
         mFilterAdapter.setFilterEnabled(FILTER_APPS_DISABLED, hasDisabledApps);
+    }
+
+    public void setHasInstant(boolean haveInstantApps) {
+        mFilterAdapter.setFilterEnabled(FILTER_APPS_INSTANT, haveInstantApps);
     }
 
     static class FilterSpinnerAdapter extends ArrayAdapter<CharSequence> {
@@ -870,6 +882,12 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         public void setExtraViewController(FileViewHolderController extraViewController) {
             mExtraViewController = extraViewController;
+            mBgHandler.post(() -> {
+                mExtraViewController.queryStats();
+                mFgHandler.post(() -> {
+                    onExtraViewCompleted();
+                });
+            });
         }
 
         public void resume(int sort) {
@@ -957,10 +975,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     break;
             }
 
-            if (mExtraViewController != null) {
-                mExtraViewController.queryStats();
-            }
-
             filterObj = new CompoundFilter(filterObj, ApplicationsState.FILTER_NOT_HIDE);
             AppFilter finalFilterObj = filterObj;
             mBgHandler.post(() -> {
@@ -1040,6 +1054,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             }
 
             mManageApplications.setHasDisabled(mState.haveDisabledApps());
+            mManageApplications.setHasInstant(mState.haveInstantApps());
         }
 
         private void rebuildSections() {
@@ -1176,6 +1191,23 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             if (mLastSortMode == R.id.sort_order_size) {
                 rebuild(false);
             }
+        }
+
+        public void onExtraViewCompleted() {
+            int size = mActive.size();
+            // If we have no elements, don't do anything.
+            if (size < 1) {
+                return;
+            }
+            AppViewHolder holder = (AppViewHolder) mActive.get(size - 1).getTag();
+
+            // HACK: The extra view has no AppEntry -- and should be the only element without one.
+            // Thus, if the last active element has no AppEntry, it is the extra view.
+            if (holder == null || holder.entry != null) {
+                return;
+            }
+
+            mExtraViewController.setupView(holder);
         }
 
         public int getCount() {

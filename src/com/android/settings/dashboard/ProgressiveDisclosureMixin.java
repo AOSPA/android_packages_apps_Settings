@@ -21,11 +21,15 @@ import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.Instrumentable;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.lifecycle.LifecycleObserver;
 import com.android.settings.core.lifecycle.events.OnCreate;
 import com.android.settings.core.lifecycle.events.OnSaveInstanceState;
@@ -45,19 +49,23 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
     private final DashboardFeatureProvider mDashboardFeatureProvider;
     // Collapsed preference sorted by order.
     private final List<Preference> mCollapsedPrefs = new ArrayList<>();
-    private /* final */ ExpandPreference mExpandButton;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final PreferenceFragment mFragment;
+    private /* final */ ExpandPreference mExpandButton;
 
     private int mTileLimit = DEFAULT_TILE_LIMIT;
     private boolean mUserExpanded;
 
     public ProgressiveDisclosureMixin(Context context,
-            DashboardFeatureProvider dashboardFeatureProvider, PreferenceFragment fragment) {
+            DashboardFeatureProvider dashboardFeatureProvider,
+            MetricsFeatureProvider metricsFeatureProvider,
+            PreferenceFragment fragment) {
         mContext = context;
         mFragment = fragment;
         mExpandButton = new ExpandPreference(context);
         mExpandButton.setOnPreferenceClickListener(this);
         mDashboardFeatureProvider = dashboardFeatureProvider;
+        mMetricsFeatureProvider = metricsFeatureProvider;
     }
 
     @Override
@@ -83,6 +91,14 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
                 }
                 mCollapsedPrefs.clear();
                 mUserExpanded = true;
+                final int metricsCategory;
+                if (mFragment instanceof Instrumentable) {
+                    metricsCategory = ((Instrumentable) mFragment).getMetricsCategory();
+                } else {
+                    metricsCategory = MetricsProto.MetricsEvent.VIEW_UNKNOWN;
+                }
+                mMetricsFeatureProvider.actionWithSource(mContext, metricsCategory,
+                        MetricsProto.MetricsEvent.ACTION_SETTINGS_ADVANCED_BUTTON_EXPAND);
             }
         }
         return false;
@@ -203,6 +219,12 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
             final Preference pref = mCollapsedPrefs.get(i);
             if (TextUtils.equals(key, pref.getKey())) {
                 return pref;
+            }
+            if (pref instanceof PreferenceGroup) {
+                final Preference returnedPreference = ((PreferenceGroup)pref).findPreference(key);
+                if (returnedPreference != null) {
+                    return returnedPreference;
+                }
             }
         }
         Log.d(TAG, "Cannot find preference with key " + key);

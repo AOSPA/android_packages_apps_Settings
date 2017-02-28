@@ -14,13 +14,16 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Process;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
-import android.util.SparseArray;
+import android.support.v7.preference.PreferenceGroup;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -35,32 +38,42 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class PowerUsageAdvanced extends PowerUsageBase {
     private static final String TAG = "AdvancedBatteryUsage";
     private static final String KEY_BATTERY_GRAPH = "battery_graph";
-    private static final String KEY_BATTERY_APPS = "battery_apps";
-    private static final String KEY_BATTERY_WIFI = "battery_wifi";
-    private static final String KEY_BATTERY_CELL = "battery_cell";
-    private static final String KEY_BATTERY_BLUETOOTH = "battery_bluetooth";
-    private static final String KEY_BATTERY_IDLE = "battery_idle";
-    private static final String KEY_BATTERY_SERVICE = "battery_service";
-    private static final String KEY_BATTERY_SYSTEM = "battery_system";
-    private static final String KEY_BATTERY_USER = "battery_user";
+    private static final String KEY_BATTERY_USAGE_LIST = "battery_usage_list";
 
-    private BatteryHistoryPreference mHistPref;
     @VisibleForTesting
-    SparseArray<String> mUsageTypeMap;
+    final int[] mUsageTypes = {
+            UsageType.WIFI,
+            UsageType.CELL,
+            UsageType.SERVICE,
+            UsageType.SYSTEM,
+            UsageType.BLUETOOTH,
+            UsageType.USER,
+            UsageType.IDLE,
+            UsageType.APP};
+    private BatteryHistoryPreference mHistPref;
+    private PreferenceGroup mUsageListGroup;
+    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    private PackageManager mPackageManager;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_GRAPH);
-        init();
+        mUsageListGroup = (PreferenceGroup) findPreference(KEY_BATTERY_USAGE_LIST);
+        mPowerUsageFeatureProvider = FeatureFactory.getFactory(getContext())
+                .getPowerUsageFeatureProvider(getContext());
+        mPackageManager = getContext().getPackageManager();
     }
 
     @Override
@@ -96,12 +109,15 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         updatePreference(mHistPref);
 
         List<PowerUsageData> dataList = parsePowerUsageData(mStatsHelper);
+        mUsageListGroup.removeAll();
         for (int i = 0, size = dataList.size(); i < size; i++) {
-            final PowerUsageData data = dataList.get(i);
-            final String key = mUsageTypeMap.get(data.usageType);
-            if (key != null) {
-                bindData(key, data);
-            }
+            final PowerUsageData batteryData = dataList.get(i);
+            final PowerGaugePreference pref = new PowerGaugePreference(getContext());
+
+            pref.setTitle(batteryData.titleResId);
+            pref.setSummary(batteryData.summary);
+            pref.setPercent(batteryData.percentage);
+            mUsageListGroup.addPreference(pref);
         }
     }
 
@@ -123,23 +139,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             return UsageType.CELL;
         } else if (uid == Process.SYSTEM_UID || uid == Process.ROOT_UID) {
             return UsageType.SYSTEM;
+        } else if (mPowerUsageFeatureProvider.isTypeService(sipper.mPackages)) {
+            return UsageType.SERVICE;
         } else {
             return UsageType.APP;
         }
-    }
-
-    @VisibleForTesting
-    void init() {
-        // Store projection from UsageType to preference key
-        mUsageTypeMap = new SparseArray<>();
-        mUsageTypeMap.put(UsageType.APP, KEY_BATTERY_APPS);
-        mUsageTypeMap.put(UsageType.WIFI, KEY_BATTERY_WIFI);
-        mUsageTypeMap.put(UsageType.CELL, KEY_BATTERY_CELL);
-        mUsageTypeMap.put(UsageType.BLUETOOTH, KEY_BATTERY_BLUETOOTH);
-        mUsageTypeMap.put(UsageType.IDLE, KEY_BATTERY_IDLE);
-        mUsageTypeMap.put(UsageType.SERVICE, KEY_BATTERY_SERVICE);
-        mUsageTypeMap.put(UsageType.USER, KEY_BATTERY_USER);
-        mUsageTypeMap.put(UsageType.SYSTEM, KEY_BATTERY_SYSTEM);
     }
 
     @VisibleForTesting
@@ -147,13 +151,13 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         final List<BatterySipper> batterySippers = statusHelper.getUsageList();
         final Map<Integer, PowerUsageData> batteryDataMap = new HashMap<>();
 
-        for (int i = 0, size = mUsageTypeMap.size(); i < size; i++) {
-            @UsageType final int type = mUsageTypeMap.keyAt(i);
-            batteryDataMap.put(type, PowerUsageData.createBatteryUsageData(type));
+        for (final @UsageType Integer type : mUsageTypes) {
+            batteryDataMap.put(type, new PowerUsageData(type));
         }
 
         // Accumulate power usage based on usage type
         for (final BatterySipper sipper : batterySippers) {
+            sipper.mPackages = mPackageManager.getPackagesForUid(sipper.getUid());
             final PowerUsageData usageData = batteryDataMap.get(extractUsageType(sipper));
             usageData.totalPowerMah += sipper.totalPowerMah;
         }
@@ -165,21 +169,27 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             usageData.percentage = (usageData.totalPowerMah / totalPower) * 100;
         }
 
+        Collections.sort(batteryDataList);
+
         return batteryDataList;
     }
 
-    private void bindData(String key, PowerUsageData batteryData) {
-        final PowerGaugePreference pref = (PowerGaugePreference) findPreference(key);
+    @VisibleForTesting
+    void setPackageManager(PackageManager packageManager) {
+        mPackageManager = packageManager;
+    }
 
-        pref.setSummary(batteryData.summary);
-        pref.setPercent(batteryData.percentage);
+    @VisibleForTesting
+    void setPowerUsageFeatureProvider(PowerUsageFeatureProvider provider) {
+        mPowerUsageFeatureProvider = provider;
     }
 
     /**
      * Class that contains data used in {@link PowerGaugePreference}.
      */
     @VisibleForTesting
-    static class PowerUsageData {
+    static class PowerUsageData implements Comparable<PowerUsageData> {
+
         @Retention(RetentionPolicy.SOURCE)
         @IntDef({UsageType.APP,
                 UsageType.WIFI,
@@ -200,6 +210,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             int IDLE = 7;
         }
 
+        @StringRes
+        public int titleResId;
         public String summary;
         public double percentage;
         public double totalPowerMah;
@@ -208,14 +220,43 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         @UsageType
         public int usageType;
 
-        private PowerUsageData(@UsageType int usageType) {
-            this.usageType = usageType;
-            totalPowerMah = 0;
+        public PowerUsageData(@UsageType int usageType) {
+            this(usageType, 0);
         }
 
-        public static PowerUsageData createBatteryUsageData(@UsageType int usageType) {
-            // TODO(b/34385770): add color logic in this part
-            return new PowerUsageData(usageType);
+        public PowerUsageData(@UsageType int usageType, double totalPower) {
+            this.usageType = usageType;
+            totalPowerMah = 0;
+            titleResId = getTitleResId(usageType);
+            totalPowerMah = totalPower;
+        }
+
+        private int getTitleResId(@UsageType int usageType) {
+            switch (usageType) {
+                case UsageType.WIFI:
+                    return R.string.power_wifi;
+                case UsageType.CELL:
+                    return R.string.power_cell;
+                case UsageType.SERVICE:
+                    return R.string.power_service;
+                case UsageType.SYSTEM:
+                    return R.string.power_system;
+                case UsageType.BLUETOOTH:
+                    return R.string.power_bluetooth;
+                case UsageType.USER:
+                    return R.string.power_user;
+                case UsageType.IDLE:
+                    return R.string.power_idle;
+                case UsageType.APP:
+                default:
+                    return R.string.power_apps;
+            }
+        }
+
+        @Override
+        public int compareTo(@NonNull PowerUsageData powerUsageData) {
+            final int diff = Double.compare(powerUsageData.totalPowerMah, totalPowerMah);
+            return diff != 0 ? diff : usageType - powerUsageData.usageType;
         }
     }
 

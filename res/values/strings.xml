@@ -744,13 +744,15 @@
     <string name="account_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the security screen -->
     <string name="security_settings_title">Security &amp; screen lock</string>
+    <!-- Security Settings screen setting option title for the item to take you to the encryption and credential screen -->
+    <string name="encryption_and_credential_settings_title">Encryption &amp; credentials</string>
 
     <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
     <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock, credential storage lock</string>
     <!-- Main Settings screen setting option summary text for the item to take you to the CDMA security and location screen -->
     <string name="cdma_security_settings_summary">Set My Location, screen unlock, credential storage lock</string>
     <!-- In the security screen, the header title for settings related to  Passwords-->
-    <string name="security_passwords_title">Passwords</string>
+    <string name="security_passwords_title">Privacy</string>
     <!-- Summary for settings preference disabled by administrator [CHAR LIMIT=50] -->
     <string name="disabled_by_administrator_summary">Disabled by administrator</string>
     <!-- In the security screen, the header title for security statuses -->
@@ -1579,6 +1581,8 @@
     <string name="wifi_starting">Turning Wi\u2011Fi on\u2026</string>
     <!-- Summary text when turning Wi-Fi or bluetooth off -->
     <string name="wifi_stopping">Turning off Wi\u2011Fi\u2026</string>
+    <!-- Title of Button to show all Wi-Fi networks in the picker. [CHAR LIMIT=30] -->
+    <string name="wifi_see_all_networks_button_title">See all networks</string>
     <!-- Summary text when Wi-Fi or bluetooth has error -->
     <string name="wifi_error">Error</string>
     <!-- Summary text when wifi SoftAP started failed due to no legal usable channel allowed in this region by regulatory -->
@@ -3320,7 +3324,7 @@
     <!-- Applications settings screen, setting option summary for the user to go to the screen to manage installed applications  -->
     <string name="manageapplications_settings_summary">Manage and remove installed apps</string>
     <!-- Applications settings title, on main settings screen. If clicked, the user is taken to a settings screen full of application settings-->
-    <string name="applications_settings">Apps</string>
+    <string name="applications_settings">App info</string>
     <!-- Applications settings summary, on main settings screen. The summary for the "Applications" item on the main settings screen. Describes what settings are accessible from the "Applications" screen. -->
     <string name="applications_settings_summary">Manage apps, set up quick launch shortcuts</string>
     <!-- Applications settings screen heading. The header for the Application settings screen. -->
@@ -3452,9 +3456,9 @@
     <string name="filter_dlg_title">Choose filter options</string>
     <!-- Text for filter option in ManageApps screen to display all installed
     applications -->
-    <string name="filter_apps_all">All</string>
+    <string name="filter_apps_all">All apps</string>
     <!-- [CHAR LIMIT=NONE] Text for filter option in ManageApps screen to display disabled apps -->
-    <string name="filter_apps_disabled">Disabled</string>
+    <string name="filter_apps_disabled">Disabled apps</string>
     <!-- Text for filter option in ManageApps screen to display third party
     applications only -->
     <string name="filter_apps_third_party">Downloaded</string>
@@ -3471,6 +3475,8 @@
     <string name="disabled">Disabled</string>
     <!-- [CHAR LIMIT=30] Manage applications, text telling using an application is not installed for the current user. The key part is that it's not installed. -->
     <string name="not_installed">Not installed for this user</string>
+    <!-- [CHAR LIMIT=30] App details, text telling an application is installed. -->
+    <string name="installed">Installed</string>
     <!-- [CHAR LIMIT=25] Text shown when there are no applications to display. -->
     <string name="no_applications">No apps.</string>
     <!-- [CHAR LIMIT=15] Manage applications, label for chart showing internal storage use. -->
@@ -3890,12 +3896,6 @@
     <string name="input_method_settings">Settings</string>
     <!-- Spoken description for IME settings image button [CHAR LIMIT=NONE] -->
     <string name="input_method_settings_button">Settings</string>
-    <!-- Title for settings of active input methods in each IME [CHAR LIMIT=35] -->
-    <string name="active_input_method_subtypes">Active input methods</string>
-    <!-- Title for settings whether or not the framework will select input methods in an IME based
-         on the current system locales. (The user can select multiple system locales)
-         [CHAR LIMIT=35] -->
-    <string name="use_system_language_to_select_input_method_subtypes">Use system languages</string>
     <!-- Input Methods Settings localized format string for generating the appropriate "Foo settings" menu label for the Input Method named "Foo" [CHAR LIMIT=35] -->
     <string name="input_methods_settings_label_format"><xliff:g id="ime_name">%1$s</xliff:g> settings</string>
     <!-- Title for the settings of selecting active input methods of an IME [CHAR LIMIT=35] -->
@@ -4006,8 +4006,6 @@
         screen magnification on app transitions</string>
     <!-- Title for the accessibility preference to power button to end a call. [CHAR LIMIT=35] -->
     <string name="accessibility_power_button_ends_call_prerefence_title">Power button ends call</string>
-    <!-- Title for the accessibility preference to speak passwords. [CHAR LIMIT=35] -->
-    <string name="accessibility_toggle_speak_password_preference_title">Speak passwords</string>
     <!-- Title for the accessibility preference for enabling/disabling large icons for mouse/trackpad pointers. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_large_pointer_icon_title">Large mouse pointer</string>
     <!-- Title for the accessibility preference for master mono. [CHAR LIMIT=35] -->
@@ -4287,8 +4285,17 @@
     <!-- Display time remaining until battery is charged [CHAR_LIMIT=60] -->
     <string name="power_charge_remaining"><xliff:g id="until_charged">%1$s</xliff:g> to charge</string>
 
-    <!-- [CHAR_LIMIT=40] Label for list of apps using battery in power use UI -->
-    <string name="power_usage_list_summary">Use since last full charge</string>
+    <!-- Title for the screen usage in power use UI [CHAR_LIMIT=40] -->
+    <string name="device_screen_usage">Screen usage</string>
+    <!-- Title for the screen consumption in power use UI(i.e. Screen consumption: 30% of battery usage) [CHAR_LIMIT=40] -->
+    <string name="device_screen_consumption">Screen consumption</string>
+    <!-- Title for the cellular network in power use UI(i.e. Mobile network scanning: 30% of battery usage) [CHAR_LIMIT=40] -->
+    <string name="device_cellular_network">Mobile network scanning</string>
+
+    <!-- Label for list of apps using battery in power use UI [CHAR_LIMIT=60] -->
+    <string name="power_usage_list_summary">App usage since last full charge</string>
+    <!-- Label for list of different types using battery in power use UI [CHAR_LIMIT=60] -->
+    <string name="device_usage_list_summary">Device usage since last full charge</string>
     <!-- Battery usage since unplugged -->
     <string name="battery_since_unplugged">Battery use since unplugged</string>
     <!-- Battery usage since user reset the stats -->
@@ -4485,11 +4492,16 @@
 
     <!-- Description for battery usage time for an app, i.e. Used for 30min. [CHAR LIMIT=60] -->
     <string name="battery_used_for">Used for %1$s</string>
+    <!-- Description for percentage of battery usage for an app, i.e. Screen: 30% of overall battery. [CHAR LIMIT=60] -->
+    <string name="battery_overall_usage">%1$s of overall battery</string>
     <!-- Description for battery usage detail information since last full charge. [CHAR LIMIT=120] -->
     <string name="battery_detail_since_full_charge">Usage breakdown since last full charge</string>
 
     <!-- Description for battery time left, i.e. 50min Estimated time left. [CHAR LIMIT=80]-->
     <string name="estimated_time_left">Estimated time left</string>
+
+    <!-- Description for charging time left, i.e. 50min Time to full charge. [CHAR LIMIT=80]-->
+    <string name="estimated_charging_time_left">Time to full charge</string>
 
     <!-- Description for estimated time. [CHAR LIMIT=80]-->
     <string name="estimated_time_description">Estimation may change based on usage</string>
@@ -5407,6 +5419,8 @@
     <string name="vpn_not_supported_by_this_app">Not supported by this app</string>
     <!-- Preference title for forcing all network connections to go through VPN. -->
     <string name="vpn_require_connection">Only allow connections through VPN</string>
+    <!-- Dialog message title to confirm forcing all network connections to go through VPN. [CHAR LIMIT=40] -->
+    <string name="vpn_require_connection_title">Require VPN connection?</string>
     <!-- Preference summary when the preference to force all network connections to go through a VPN is enabled, blocking all other network traffic. In this case apps must use the VPN for all connections. -->
     <string name="vpn_lockdown_active">Lockdown active</string>
     <!-- Preference summary when the preference to force all network connections to go through a VPN is disabled. In this case use of the VPN is optional for apps. -->
@@ -5583,10 +5597,8 @@
     <string name="user_remove_user_menu">Delete <xliff:g id="user_name">%1$s</xliff:g> from this device</string>
     <!-- User lock screen settings header[CHAR LIMIT=40] -->
     <string name="user_lockscreen_settings">Lock screen settings</string>
-    <!-- User settings item to allow creating new users from locks creen [CHAR LIMIT=40] -->
-    <string name="user_add_on_lockscreen_menu">Add users</string>
-    <!-- User settings user_add_on_lockscreen_menu item summary [CHAR LIMIT=40] -->
-    <string name="user_add_on_lockscreen_menu_summary">when device is locked</string>
+    <!-- User settings item to allow creating new users from locks screen [CHAR LIMIT=50] -->
+    <string name="user_add_on_lockscreen_menu">Add users from lock screen</string>
     <!-- User details new user name [CHAR LIMIT=30] -->
     <string name="user_new_user_name">New user</string>
     <!-- User details new restricted profile name [CHAR LIMIT=30] -->
@@ -5974,9 +5986,9 @@
     </plurals>
 
     <!-- Title for setting tile leading to network and Internet settings [CHAR LIMIT=40]-->
-    <string name="network_dashboard_title">Network &amp; internet</string>
+    <string name="network_dashboard_title">Network &amp; Internet</string>
     <!-- Summary for Network and Internet settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="network_dashboard_summary">Wi-Fi, cellular, data usage, hotspot</string>
+    <string name="network_dashboard_summary">Wi-Fi, mobile, data usage, hotspot</string>
     <!-- Title for setting tile leading to Connected devices settings [CHAR LIMIT=40]-->
     <string name="connected_devices_dashboard_title">Connected devices</string>
     <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
@@ -6015,7 +6027,7 @@
     <!--Search Keywords [CHAR LIMIT=NONE]-->
     <string name="keywords_wifi">wifi, wi-fi, network connection</string>
     <string name="keywords_more_default_sms_app">text message, texting, messages, messaging</string>
-    <string name="keywords_more_mobile_networks">cellular, cell carrier, wireless, data, 4g, 3g, 2g, lte</string>
+    <string name="keywords_more_mobile_networks">cellular, mobile, cell carrier, wireless, data, 4g,3g, 2g, lte</string>
     <string name="keywords_wifi_calling">wifi, wi-fi, call, calling</string>
     <string name="keywords_home">launcher</string>
     <string name="keywords_display">screen, touchscreen</string>
@@ -6165,8 +6177,8 @@
     <!-- Sound: Other sounds: Title for the option enabling boot sounds. [CHAR LIMIT=30] -->
     <string name="boot_sounds_title">Power on sounds</string>
 
-    <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=30] -->
-    <string name="zen_mode_settings_title">Do not disturb</string>
+    <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
+    <string name="zen_mode_settings_title">Do not disturb preferences</string>
 
     <!-- Do not disturb: Title for the Priority interruptions option and associated settings page. [CHAR LIMIT=30] -->
     <string name="zen_mode_priority_settings_title">Priority only allows</string>
@@ -6217,13 +6229,13 @@
     <string name="work_sound_same_as_personal">Same as personal profile</string>
 
     <!-- Work Sound: Title for dialog shown when enabling sync with personal sounds. [CHAR LIMIT=60] -->
-    <string name="work_sync_dialog_title">Replace work profile sounds?</string>
+    <string name="work_sync_dialog_title">Use personal profile sounds?</string>
 
-    <!-- Work Sound: Confirm action text for dialog shown when enabling sync with personal sounds. [CHAR LIMIT=30] -->
+    <!-- Work Sound: Confirm action text for dialog shown when overriding work notification sounds with personal sounds. [CHAR LIMIT=30] -->
     <string name="work_sync_dialog_yes">Replace</string>
 
-    <!-- Work Sound: Message for dialog shown when enabling sync with personal sounds. [CHAR LIMIT=none] -->
-    <string name="work_sync_dialog_message">Your current work profile sounds will be replaced with your personal profile sounds</string>
+    <!-- Work Sound: Message for dialog shown when using the same sounds for work events as for personal events (notifications / ringtones / alarms). [CHAR LIMIT=none] -->
+    <string name="work_sync_dialog_message">Your personal profile sounds will be used instead of your current work profile sounds</string>
 
     <!-- Ringtones preference category: Title for the Ringotnes preference categories. [CHAR LIMIT=none] -->
     <string name="ringtones_category_preference_title">Ringtones</string>
@@ -6287,7 +6299,7 @@
     <string name="lock_screen_notifications_interstitial_title_profile">Profile notifications</string>
 
     <!-- Notification Settings: Title for the option managing notifications per application. [CHAR LIMIT=30] -->
-    <string name="app_notifications_title">Notifications</string>
+    <string name="app_notifications_title">App notifications</string>
 
     <!-- [CHAR LIMIT=100] Notification importance slider title -->
     <string name="notification_importance_title">Importance</string>
@@ -6882,7 +6894,9 @@
     <!-- Label for showing all apps in list [CHAR LIMIT=30] -->
     <string name="filter_all_apps">All apps</string>
     <!-- Label for showing enabled apps in list [CHAR LIMIT=30] -->
-    <string name="filter_enabled_apps">Enabled</string>
+    <string name="filter_enabled_apps">Installed apps</string>
+    <!-- Label for showing instant apps in list [CHAR LIMIT=30] -->
+    <string name="filter_instant_apps">Instant apps</string>
     <!-- Label for showing personal apps in list [CHAR LIMIT=30] -->
     <string name="filter_personal_apps">Personal</string>
     <!-- Label for showing work apps in list [CHAR LIMIT=30] -->
@@ -6957,12 +6971,6 @@
 
     <!-- Title for Default Assist settings [CHAR LIMIT=30] -->
     <string name="default_assist_title">Assist app</string>
-
-    <!-- Summary for No Default Assist settings [CHAR LIMIT=45] -->
-    <string name="default_assist_none">None</string>
-
-    <!-- Title for Choose Assist dialog [CHAR LIMIT=35] -->
-    <string name="choose_assist_title">Choose Assist app</string>
 
     <!-- [CHAR_LIMIT=45] Title of the security warning dialog for setting an assitant -->
     <string name="assistant_security_warning_title">
@@ -7055,6 +7063,12 @@
 
     <!-- Label for menu to launch a screen showing usage alerts for battery [CHAR LIMIT=30] -->
     <string name="additional_battery_info">Usage alerts</string>
+
+    <!-- Label for menu to show all apps in battery settings [CHAR LIMIT=30] -->
+    <string name="show_all_apps">Show all apps</string>
+
+    <!-- Label for menu to hide extra apps in battery settings [CHAR LIMIT=30] -->
+    <string name="hide_extra_apps">Hide extra apps</string>
 
     <!-- Filter for apps allowed to use a lot of power [CHAR LIMIT=25] -->
     <string name="high_power_filter_on">Not optimized</string>
@@ -8029,6 +8043,12 @@
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet">To check your notifications, swipe down on the fingerprint sensor on the back of your tablet.</string>
     <!-- Summary text for fingerprint swipe for notifications (device) [CHAR LIMIT=160]-->
     <string name="fingerprint_swipe_for_notifications_summary" product="device">To check your notifications, swipe down on the fingerprint sensor on the back of your device.</string>
+
+    <!-- Title text for the assist gesture [CHAR LIMIT=60]-->
+    <string name="assist_gesture_title">Assist gesture</string>
+
+    <!-- Summary text for the assist gesture [CHAR LIMIT=160]-->
+    <string name="assist_gesture_summary"></string>
 
     <!-- Switch text for each gesture setting state -->
     <string name="gesture_setting_on">On</string>

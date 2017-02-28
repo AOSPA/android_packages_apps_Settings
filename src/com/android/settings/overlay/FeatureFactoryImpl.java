@@ -28,22 +28,23 @@ import com.android.settings.applications.ApplicationFeatureProviderImpl;
 import com.android.settings.applications.IPackageManagerWrapperImpl;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.core.instrumentation.MetricsFeatureProviderImpl;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
-import com.android.settings.dashboard.SuggestionFeatureProvider;
-import com.android.settings.dashboard.SuggestionFeatureProviderImpl;
 import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProviderImpl;
+import com.android.settings.gestures.AssistGestureFeatureProvider;
+import com.android.settings.gestures.AssistGestureFeatureProviderImpl;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
 import com.android.settings.search2.SearchFeatureProvider;
 import com.android.settings.search2.SearchFeatureProviderImpl;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecurityFeatureProviderImpl;
+import com.android.settings.suggestions.SuggestionFeatureProvider;
+import com.android.settings.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.vpn2.ConnectivityManagerWrapperImpl;
 
 /**
@@ -61,6 +62,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private SecurityFeatureProvider mSecurityFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    private AssistGestureFeatureProvider mAssistGestureFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -70,7 +72,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     @Override
     public MetricsFeatureProvider getMetricsFeatureProvider() {
         if (mMetricsFeatureProvider == null) {
-            mMetricsFeatureProvider = new MetricsFeatureProviderImpl();
+            mMetricsFeatureProvider = new MetricsFeatureProvider();
         }
         return mMetricsFeatureProvider;
     }
@@ -148,10 +150,18 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public SuggestionFeatureProvider getSuggestionFeatureProvider() {
+    public SuggestionFeatureProvider getSuggestionFeatureProvider(Context context) {
         if (mSuggestionFeatureProvider == null) {
-            mSuggestionFeatureProvider = new SuggestionFeatureProviderImpl();
+            mSuggestionFeatureProvider = new SuggestionFeatureProviderImpl(context);
         }
         return mSuggestionFeatureProvider;
+    }
+
+    @Override
+    public AssistGestureFeatureProvider getAssistGestureFeatureProvider() {
+        if (mAssistGestureFeatureProvider == null) {
+            mAssistGestureFeatureProvider = new AssistGestureFeatureProviderImpl();
+        }
+        return mAssistGestureFeatureProvider;
     }
 }

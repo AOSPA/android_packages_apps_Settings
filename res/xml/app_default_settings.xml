@@ -23,7 +23,7 @@
     <Preference
         android:key="assist_and_voice_input"
         android:title="@string/assist_and_voice_input_title"
-        android:fragment="com.android.settings.applications.ManageAssist"
+        android:fragment="com.android.settings.applications.assist.ManageAssist"
         android:order="-20"/>
 
     <Preference
@@ -71,11 +71,13 @@
         settings:keywords="@string/autofill_keywords"
         android:order="-14"/>
 
+    <!--
     <Preference
         android:key="default_notification_asst_app"
         android:title="@string/default_notification_assistant"
         android:fragment="com.android.settings.applications.defaultapps.DefaultNotificationAssistantPicker"
         android:order="-13"/>
+     -->
 
     <Preference
         android:key="domain_urls"

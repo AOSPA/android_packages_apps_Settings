@@ -19,6 +19,7 @@ package com.android.settings.dashboard;
 import android.content.Context;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -44,7 +45,9 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -74,7 +77,9 @@ public class ProgressiveDisclosureTest {
         mAppContext = ShadowApplication.getInstance().getApplicationContext();
         mFakeFeatureFactory = (FakeFeatureFactory) FeatureFactory.getFactory(mContext);
         mMixin = new ProgressiveDisclosureMixin(mAppContext,
-                mFakeFeatureFactory.dashboardFeatureProvider, mPreferenceFragment);
+                mFakeFeatureFactory.dashboardFeatureProvider,
+                mFakeFeatureFactory.metricsFeatureProvider,
+                mPreferenceFragment);
         ReflectionHelpers.setField(mMixin, "mExpandButton", mExpandButton);
         mPreference = new Preference(mAppContext);
         mPreference.setKey("test");
@@ -137,6 +142,22 @@ public class ProgressiveDisclosureTest {
         Preference pref = mMixin.findPreference(mScreen, mPreference.getKey());
 
         assertThat(pref).isNull();
+    }
+
+    @Test
+    public void findPreference_nestedPrefInCollapsedList_shouldFindIt() {
+        when(mScreen.findPreference(anyString())).thenReturn(null);
+        final PreferenceScreen prefGroup = spy(new PreferenceScreen(mAppContext, null));
+        when(prefGroup.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
+        final Preference preference = mock(Preference.class);
+        when(preference.getKey()).thenReturn("TestKey");
+        prefGroup.addPreference(preference);
+        mMixin.addToCollapsedList(prefGroup);
+
+        Preference pref = mMixin.findPreference(mScreen, "TestKey");
+
+        assertThat(pref).isNotNull();
+        assertThat(pref).isSameAs(preference);
     }
 
     @Test

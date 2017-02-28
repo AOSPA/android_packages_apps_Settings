@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -36,9 +37,7 @@ import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.suggestions.EventStore;
-import com.android.settings.suggestions.SuggestionFeaturizer;
-import com.android.settings.suggestions.SuggestionRanker;
+import com.android.settings.suggestions.SuggestionFeatureProvider;
 import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -59,8 +58,6 @@ public class DashboardSummary extends InstrumentedFragment
     private static final String SUGGESTIONS = "suggestions";
 
     private static final String EXTRA_SCROLL_POSITION = "scroll_position";
-    private static final String EXTRA_SUGGESTION_SHOWN_LOGGED = "suggestions_shown_logged";
-    private static final String EXTRA_SUGGESTION_HIDDEN_LOGGED = "suggestions_hidden_logged";
 
     private final Handler mHandler = new Handler();
 
@@ -69,11 +66,8 @@ public class DashboardSummary extends InstrumentedFragment
     private SummaryLoader mSummaryLoader;
     private ConditionManager mConditionManager;
     private SuggestionParser mSuggestionParser;
-    private SuggestionRanker mSuggestionRanker;
     private LinearLayoutManager mLayoutManager;
     private SuggestionsChecks mSuggestionsChecks;
-    private ArrayList<String> mSuggestionsShownLogged;
-    private ArrayList<String> mSuggestionsHiddenLogged;
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
 
@@ -90,7 +84,7 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
                 .getDashboardFeatureProvider(activity);
         mSuggestionFeatureProvider = FeatureFactory.getFactory(activity)
-                .getSuggestionFeatureProvider();
+                .getSuggestionFeatureProvider(activity);
 
         if (mDashboardFeatureProvider.isEnabled()) {
             mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
@@ -102,18 +96,7 @@ public class DashboardSummary extends InstrumentedFragment
         mConditionManager = ConditionManager.get(activity, false);
         mSuggestionParser = new SuggestionParser(activity,
                 activity.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
-        mSuggestionRanker = new SuggestionRanker(
-                new SuggestionFeaturizer(new EventStore(activity)));
         mSuggestionsChecks = new SuggestionsChecks(getContext());
-        if (savedInstanceState == null) {
-            mSuggestionsShownLogged = new ArrayList<>();
-            mSuggestionsHiddenLogged = new ArrayList<>();
-        } else {
-            mSuggestionsShownLogged =
-                    savedInstanceState.getStringArrayList(EXTRA_SUGGESTION_SHOWN_LOGGED);
-            mSuggestionsHiddenLogged =
-                    savedInstanceState.getStringArrayList(EXTRA_SUGGESTION_HIDDEN_LOGGED);
-        }
         if (DEBUG_TIMING) {
             Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                     + " ms");
@@ -133,9 +116,11 @@ public class DashboardSummary extends InstrumentedFragment
 
         ((SettingsDrawerActivity) getActivity()).addCategoryListener(this);
         mSummaryLoader.setListening(true);
+        final int metricsCategory = getMetricsCategory();
         for (Condition c : mConditionManager.getConditions()) {
             if (c.shouldShow()) {
-                mMetricsFeatureProvider.visible(getContext(), c.getMetricsConstant());
+                mMetricsFeatureProvider.visible(getContext(), metricsCategory,
+                        c.getMetricsConstant());
             }
         }
         if (DEBUG_TIMING) {
@@ -155,18 +140,8 @@ public class DashboardSummary extends InstrumentedFragment
                 mMetricsFeatureProvider.hidden(getContext(), c.getMetricsConstant());
             }
         }
-        if (mAdapter.getSuggestions() == null) {
-            return;
-        }
         if (!getActivity().isChangingConfigurations()) {
-            for (Tile suggestion : mAdapter.getSuggestions()) {
-                String id = DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion);
-                if (!mSuggestionsHiddenLogged.contains(id)) {
-                    mSuggestionsHiddenLogged.add(id);
-                    mMetricsFeatureProvider.action(getContext(),
-                            MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION, id);
-                }
-            }
+            mAdapter.onPause();
         }
     }
 
@@ -197,8 +172,6 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putStringArrayList(EXTRA_SUGGESTION_HIDDEN_LOGGED, mSuggestionsHiddenLogged);
-        outState.putStringArrayList(EXTRA_SUGGESTION_SHOWN_LOGGED, mSuggestionsShownLogged);
         if (mLayoutManager == null) return;
         outState.putInt(EXTRA_SCROLL_POSITION, mLayoutManager.findFirstVisibleItemPosition());
         if (mAdapter != null) {
@@ -231,26 +204,25 @@ public class DashboardSummary extends InstrumentedFragment
             Log.d(TAG, "onViewCreated took "
                     + (System.currentTimeMillis() - startTime) + " ms");
         }
-        rebuildUI();
+        rebuildUI(true /* rebuildSuggestions */);
     }
 
-    private void rebuildUI() {
-        if (!isAdded()) {
-            Log.w(TAG, "Cannot build the DashboardSummary UI yet as the Fragment is not added");
-            return;
-        }
-
-        // recheck to see if any suggestions have been changed.
-        new SuggestionLoader().execute();
-        // Set categories on their own if loading suggestions takes too long.
-        mHandler.postDelayed(() -> {
+    private void rebuildUI(boolean rebuildSuggestions) {
+        if (rebuildSuggestions) {
+            // recheck to see if any suggestions have been changed.
+            new SuggestionLoader().execute();
+            // Set categories on their own if loading suggestions takes too long.
+            mHandler.postDelayed(() -> {
+                updateCategoryAndSuggestion(null /* tiles */);
+            }, MAX_WAIT_MILLIS);
+        } else {
             updateCategoryAndSuggestion(null /* tiles */);
-        }, MAX_WAIT_MILLIS);
+        }
     }
 
     @Override
     public void onCategoriesChanged() {
-        rebuildUI();
+        rebuildUI(false /* rebuildSuggestions */);
     }
 
     @Override
@@ -264,7 +236,6 @@ public class DashboardSummary extends InstrumentedFragment
     }
 
     private class SuggestionLoader extends AsyncTask<Void, Void, List<Tile>> {
-
         @Override
         protected List<Tile> doInBackground(Void... params) {
             final Context context = getContext();
@@ -278,21 +249,13 @@ public class DashboardSummary extends InstrumentedFragment
                         DashboardAdapter.getSuggestionIdentifier(context, suggestion));
                 }
                 // TODO: create a Suggestion class to maintain the id and other info
-                mSuggestionRanker.rank(suggestions, suggestionIds);
-                // TODO: consider showing only top-k (e.g., top-3)
+                mSuggestionFeatureProvider.rankSuggestions(suggestions, suggestionIds);
             }
             for (int i = 0; i < suggestions.size(); i++) {
                 Tile suggestion = suggestions.get(i);
                 if (mSuggestionsChecks.isSuggestionComplete(suggestion)) {
                     mAdapter.disableSuggestion(suggestion);
                     suggestions.remove(i--);
-                } else if (context != null) {
-                    String id = DashboardAdapter.getSuggestionIdentifier(context, suggestion);
-                    if (!mSuggestionsShownLogged.contains(id)) {
-                        mSuggestionsShownLogged.add(id);
-                        mMetricsFeatureProvider.action(context,
-                                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, id);
-                    }
                 }
             }
             return suggestions;
@@ -307,7 +270,7 @@ public class DashboardSummary extends InstrumentedFragment
     }
 
     @VisibleForTesting
-    void updateCategoryAndSuggestion(List<Tile> tiles) {
+    void updateCategoryAndSuggestion(List<Tile> suggestions) {
         final Activity activity = getActivity();
         if (activity == null) {
             return;
@@ -319,10 +282,14 @@ public class DashboardSummary extends InstrumentedFragment
             List<DashboardCategory> categories = new ArrayList<>();
             categories.add(mDashboardFeatureProvider.getTilesForCategory(
                     CategoryKey.CATEGORY_HOMEPAGE));
-            mAdapter.setCategoriesAndSuggestions(categories, tiles);
+            if (suggestions != null) {
+                mAdapter.setCategoriesAndSuggestions(categories, suggestions);
+            } else {
+                mAdapter.setCategory(categories);
+            }
         } else {
             mAdapter.setCategoriesAndSuggestions(
-                    ((SettingsActivity) activity).getDashboardCategories(), tiles);
+                    ((SettingsActivity) activity).getDashboardCategories(), suggestions);
         }
     }
 }

@@ -41,4 +41,14 @@ public interface PowerUsageFeatureProvider {
    * Check whether advanced ui is enabled
    */
   boolean isAdvancedUiEnabled();
+
+  /**
+   * Check whether it is type service
+   */
+  boolean isTypeService(String[] packages);
+
+  /**
+   * Check whether the toggle for power accounting is enabled
+   */
+  boolean isPowerAccountingToggleEnabled();
 }

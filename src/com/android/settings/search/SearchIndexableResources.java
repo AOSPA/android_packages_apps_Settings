@@ -24,6 +24,7 @@ import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
+import com.android.settings.EncryptionAndCredential;
 import com.android.settings.LegalSettings;
 import com.android.settings.PrivacySettings;
 import com.android.settings.R;
@@ -37,6 +38,7 @@ import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.SpecialAccessSettings;
+import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.backup.BackupSettingsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
@@ -50,6 +52,7 @@ import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageAdvanced;
 import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
@@ -132,10 +135,12 @@ public final class SearchIndexableResources {
         addIndex(BatterySaverSettings.class,
                 R.xml.battery_saver_settings, R.drawable.ic_settings_battery);
         addIndex(AdvancedAppSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
+        addIndex(ManageAssist.class, NO_DATA_RES_ID, R.drawable.ic_settings_applications);
         addIndex(SpecialAccessSettings.class,
                 R.xml.special_access, R.drawable.ic_settings_applications);
         addIndex(UserSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_multiuser);
         addIndex(GestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
+        addIndex(AssistGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(PickupGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(DoubleTapScreenSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(DoubleTapPowerSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
@@ -146,6 +151,8 @@ public final class SearchIndexableResources {
         addIndex(LocationSettings.class, R.xml.location_settings, R.drawable.ic_settings_location);
         addIndex(ScanningSettings.class, R.xml.location_scanning, R.drawable.ic_settings_location);
         addIndex(SecuritySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_security);
+        addIndex(EncryptionAndCredential.class, R.xml.encryption_and_credential,
+                R.drawable.ic_settings_security);
         addIndex(ScreenPinningSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_security);
         addIndex(AccountSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_accounts);
         addIndex(UserAndAccountDashboardFragment.class, NO_DATA_RES_ID,

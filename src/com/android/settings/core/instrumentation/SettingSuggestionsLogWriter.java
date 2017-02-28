@@ -17,6 +17,9 @@
 package com.android.settings.core.instrumentation;
 
 import android.content.Context;
+import android.metrics.LogMaker;
+import android.util.Pair;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.suggestions.EventStore;
@@ -29,7 +32,7 @@ public class SettingSuggestionsLogWriter implements LogWriter {
     private EventStore mEventStore;
 
     @Override
-    public void visible(Context context, int category) {
+    public void visible(Context context, int source, int category) {
     }
 
     @Override
@@ -41,6 +44,10 @@ public class SettingSuggestionsLogWriter implements LogWriter {
     }
 
     @Override
+    public void actionWithSource(Context context, int source, int category) {
+    }
+
+    @Override
     public void action(Context context, int category, int value) {
     }
 
@@ -49,7 +56,8 @@ public class SettingSuggestionsLogWriter implements LogWriter {
     }
 
     @Override
-    public void action(Context context, int category, String pkg) {
+    public void action(Context context, int category, String pkg,
+            Pair<Integer, Object>... taggedData) {
         if (mEventStore == null) {
             mEventStore = new EventStore(context);
         }

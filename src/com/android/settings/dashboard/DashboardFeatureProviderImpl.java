@@ -28,7 +28,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsActivity;
+import com.android.settings.SubSettings;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.CategoryManager;
@@ -80,7 +82,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     @Override
     public List<Preference> getPreferencesForCategory(Activity activity, Context context,
-            String key) {
+            int sourceMetricsCategory, String key) {
         if (!isEnabled()) {
             return null;
         }
@@ -97,7 +99,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         final List<Preference> preferences = new ArrayList<>();
         for (Tile tile : tiles) {
             final Preference pref = new Preference(context);
-            bindPreferenceToTile(activity, pref, tile, null /* key */,
+            bindPreferenceToTile(activity, sourceMetricsCategory, pref, tile, null /* key */,
                     Preference.DEFAULT_ORDER /* baseOrder */);
             preferences.add(pref);
         }
@@ -107,11 +109,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     @Override
     public List<DashboardCategory> getAllCategories() {
         return mCategoryManager.getCategories(mContext);
-    }
-
-    @Override
-    public int getPriorityGroup(Preference preference) {
-        return preference.getOrder() / 100;
     }
 
     @Override
@@ -129,8 +126,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
-    public void bindPreferenceToTile(Activity activity, Preference pref, Tile tile, String key,
-            int baseOrder) {
+    public void bindPreferenceToTile(Activity activity, int sourceMetricsCategory, Preference pref,
+            Tile tile, String key, int baseOrder) {
         pref.setTitle(tile.title);
         if (!TextUtils.isEmpty(key)) {
             pref.setKey(key);
@@ -152,6 +149,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             pref.setFragment(clsName);
         } else if (tile.intent != null) {
             final Intent intent = new Intent(tile.intent);
+            intent.putExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY, sourceMetricsCategory);
             if (action != null) {
                 intent.setAction(action);
             }
@@ -181,7 +179,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     @Override
     public ProgressiveDisclosureMixin getProgressiveDisclosureMixin(Context context,
             DashboardFragment fragment) {
-        return new ProgressiveDisclosureMixin(context, this, fragment);
+        return new ProgressiveDisclosureMixin(context, this, mMetricsFeatureProvider, fragment);
     }
 
     @Override
@@ -202,6 +200,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             return;
         }
         final Intent intent = new Intent(tile.intent)
+                .putExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY,
+                        MetricsEvent.DASHBOARD_SUMMARY)
                 .putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         launchIntentOrSelectProfile(activity, tile, intent);
@@ -226,10 +226,15 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         final ComponentName cn = intent.getComponent();
         if (cn == null) {
+            // Not loggable
+            return;
+        } else if (TextUtils.equals(cn.getPackageName(), mContext.getPackageName())) {
+            // Going to a Setting internal page, skip click logging in favor of page's own
+            // visibility logging.
             return;
         }
         mMetricsFeatureProvider.action(mContext,
-                MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK,
+                MetricsEvent.ACTION_SETTINGS_TILE_CLICK,
                 cn.flattenToString());
     }
 }
