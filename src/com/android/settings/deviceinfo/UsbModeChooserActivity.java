@@ -111,7 +111,7 @@ public class UsbModeChooserActivity extends Activity {
         int current = mBackend.getCurrentMode();
         int dataTetherMode = UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_TETHERING;
         for (int i = 0; i < DEFAULT_MODES.length; i++) {
-            if (mBackend.isModeSupported(DEFAULT_MODES[i])
+            if (mBackend.isCurrentModeSupported(DEFAULT_MODES[i])
                     && !mBackend.isModeDisallowedBySystem(DEFAULT_MODES[i])) {
                 if (getResources().getBoolean(
                         R.bool.config_regional_usb_tethering_quick_start_enable)
