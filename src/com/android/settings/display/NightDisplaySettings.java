@@ -65,6 +65,8 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     private Preference mEndTimePreference;
     private TwoStatePreference mActivatedPreference;
 
+    private boolean mUseHwc2;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,9 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
 
         mTimeFormatter = android.text.format.DateFormat.getTimeFormat(context);
         mTimeFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        mUsingHwc2 = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_enableHWC2);
     }
 
     @Override
@@ -213,7 +218,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
             result = mController.setActivated(activated);
         }
 
-        if (displayWarning) {
+        if (displayWarning && !mUsingHwc2) {
             displayWarning();
         }
 
