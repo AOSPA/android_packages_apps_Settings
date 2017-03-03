@@ -19,6 +19,7 @@ package com.android.settings.applications;
 import android.Manifest.permission;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.ActivityManager.AppTask;
 import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.Notification;
@@ -688,6 +689,14 @@ public class InstalledAppDetails extends AppInfoBase
     private void forceStopPackage(String pkgName) {
         ActivityManager am = (ActivityManager) getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
+        if(pkgName.equals(getActivity().getPackageName())){
+            List<AppTask> list = am.getAppTasks();
+            if(list != null){
+                for(AppTask appTask : list){
+                    appTask.finishAndRemoveTask();
+                }
+           }
+        }
         am.forceStopPackage(pkgName);
         int userId = UserHandle.getUserId(mAppEntry.info.uid);
         mState.invalidatePackage(pkgName, userId);
