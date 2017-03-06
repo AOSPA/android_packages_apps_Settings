@@ -741,19 +741,24 @@ public class TetherSettings extends RestrictedSettingsFragment
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == mUsbTether) {
-            if (showNoSimCardDialog(getActivity())) {
-                ((SwitchPreference) preference).setChecked(false);
-            } else if (mUsbTether.isChecked()) {
+           if (mUsbTether.isChecked()) {
                 if (mUsbEnable) {
                     //save the current wifi status for restore
                     mIsWifiEnabled = mWifiStatusManager.isWifiEnabled();
                 }
-                if (isFirstUseUSBTethering(getActivity())) {
+                if (getResources().
+                        getBoolean(R.bool.usb_tethering_show_alert_for_first_use)
+                             && isFirstUseUSBTethering(getActivity())) {
                     showFirstUseUSBTetheringDialog(getActivity());
-                } else if (getResources().
-                    getBoolean(R.bool.usb_tethering_show_alert_for_turn_off_wifi)
-                        && checkWifiConnectivityState(getActivity())) {
+                }
+                if (getResources().
+                        getBoolean(R.bool.usb_tethering_show_alert_for_turn_off_wifi)
+                             && checkWifiConnectivityState(getActivity())) {
                     showTurnOffWifiDialog(getActivity());
+                }
+                if (getResources().
+                        getBoolean(R.bool.usb_tethering_show_alert_for_no_sim_card)) {
+                    showNoSimCardDialog(getActivity());
                 }
                 startTethering(TETHERING_USB);
             } else {
