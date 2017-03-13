@@ -385,7 +385,8 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
         SwitchPreference nfc = (SwitchPreference) findPreference(KEY_TOGGLE_NFC);
         RestrictedPreference androidBeam = (RestrictedPreference) findPreference(
                 KEY_ANDROID_BEAM_SETTINGS);
-        if (QtiImsExtUtils.isCarrierOneSupported()) {
+        if (QtiImsExtUtils.isCarrierOneSupported()
+                    && QtiImsExtUtils.isCarrierOneCallSettingsAvailable(getActivity())) {
             Preference callSettingsPref = (PreferenceScreen) findPreference(KEY_CALL_SETTINGS);
             Intent callSettingsIntent = new Intent();
             callSettingsIntent.setAction("org.codeaurora.CALL_SETTINGS");
@@ -635,7 +636,8 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             log("WFC not supported. Remove WFC menu");
             if (mButtonWfc != null) getPreferenceScreen().removePreference(mButtonWfc);
         }
-        if (QtiImsExtUtils.isCarrierOneSupported() && mUm.isAdminUser()) {
+        if (QtiImsExtUtils.isCarrierOneSupported() && mUm.isAdminUser()
+                 && QtiImsExtUtils.isCarrierOneCallSettingsAvailable(getActivity())) {
              //Call Settings already have WFC settings.
             removePreference(KEY_WFC_SETTINGS);
         } else {

@@ -60,7 +60,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
@@ -288,18 +287,9 @@ public class Index {
         return sb.toString();
     }
 
-    public long addSavedQuery(String query){
+    public void addSavedQuery(String query){
         final SaveSearchQueryTask task = new SaveSearchQueryTask();
         task.execute(query);
-        try {
-            return task.get();
-        } catch (InterruptedException e) {
-            Log.e(LOG_TAG, "Cannot insert saved query: " + query, e);
-            return -1 ;
-        } catch (ExecutionException e) {
-            Log.e(LOG_TAG, "Cannot insert saved query: " + query, e);
-            return -1;
-        }
     }
 
     public void update() {
