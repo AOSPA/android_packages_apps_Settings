@@ -25,21 +25,21 @@ import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.VisibleForTesting;
 import android.util.SparseArray;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.applications.UserManagerWrapper;
 import com.android.settings.applications.UserManagerWrapperImpl;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController;
 import com.android.settings.deviceinfo.storage.SecondaryUserController;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageSummaryDonutPreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.applications.StorageStatsSource;
@@ -48,7 +48,6 @@ import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class StorageDashboardFragment extends DashboardFragment
     implements LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
@@ -60,11 +59,6 @@ public class StorageDashboardFragment extends DashboardFragment
     private StorageSummaryDonutPreferenceController mSummaryController;
     private StorageItemPreferenceController mPreferenceController;
     private List<PreferenceController> mSecondaryUsers;
-
-    private boolean isVolumeValid() {
-        return (mVolume != null) && (mVolume.getType() == VolumeInfo.TYPE_PRIVATE)
-                && mVolume.isMountedReadable();
-    }
 
     @Override
     public void onResume() {
@@ -101,7 +95,8 @@ public class StorageDashboardFragment extends DashboardFragment
         // Initialize the storage sizes that we can quickly calc.
         final Context context = getActivity();
         StorageManager sm = context.getSystemService(StorageManager.class);
-        if (!initializeVolume(sm, getArguments())) {
+        mVolume = Utils.maybeInitializeVolume(sm, getArguments());
+        if (mVolume == null) {
             getActivity().finish();
             return;
         }
@@ -152,19 +147,12 @@ public class StorageDashboardFragment extends DashboardFragment
         mSecondaryUsers = SecondaryUserController.getSecondaryUserControllers(context, userManager);
         controllers.addAll(mSecondaryUsers);
 
-        controllers.add(new ManageStoragePreferenceController(context));
+        final AutomaticStorageManagementSwitchPreferenceController asmController =
+                new AutomaticStorageManagementSwitchPreferenceController(
+                        context, mMetricsFeatureProvider, getFragmentManager());
+        getLifecycle().addObserver(asmController);
+        controllers.add(asmController);
         return controllers;
-    }
-
-    /**
-     * Initializes the volume with a given bundle and returns if the volume is valid.
-     */
-    @VisibleForTesting
-    boolean initializeVolume(StorageManager sm, Bundle bundle) {
-        String volumeId = bundle.getString(VolumeInfo.EXTRA_VOLUME_ID,
-                VolumeInfo.ID_PRIVATE_INTERNAL);
-        mVolume = sm.findVolumeById(volumeId);
-        return isVolumeValid();
     }
 
     /**
@@ -174,13 +162,10 @@ public class StorageDashboardFragment extends DashboardFragment
             SparseArray<StorageAsyncLoader.AppsStorageResult> stats) {
         for (int i = 0, size = controllers.size(); i < size; i++) {
             PreferenceController controller = controllers.get(i);
-            if (controller instanceof SecondaryUserController) {
-                SecondaryUserController userController = (SecondaryUserController) controller;
-                int userId = userController.getUser().id;
-                StorageAsyncLoader.AppsStorageResult result = stats.get(userId);
-                if (result != null) {
-                    userController.setSize(result.externalStats.totalBytes);
-                }
+            if (controller instanceof StorageAsyncLoader.ResultHandler) {
+                StorageAsyncLoader.ResultHandler userController =
+                        (StorageAsyncLoader.ResultHandler) controller;
+                userController.handleResult(stats);
             }
         }
     }
@@ -193,26 +178,24 @@ public class StorageDashboardFragment extends DashboardFragment
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        return null;
-                    }
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.storage_dashboard_fragment;
                     return Arrays.asList(sir);
                 }
 
                 @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        return null;
-                    }
-                    final ManageStoragePreferenceController controller =
-                            new ManageStoragePreferenceController(context);
-                    final List<String> keys = new ArrayList<>();
-                    controller.updateNonIndexableKeys(keys);
-                    return keys;
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    final StorageManager sm = context.getSystemService(StorageManager.class);
+                    final UserManagerWrapper userManager =
+                            new UserManagerWrapperImpl(context.getSystemService(UserManager.class));
+                    final List<PreferenceController> controllers = new ArrayList<>();
+                    controllers.add(new StorageSummaryDonutPreferenceController(context));
+                    controllers.add(new StorageItemPreferenceController(context, null /* host */,
+                            null /* volume */, new StorageManagerVolumeProvider(sm)));
+                    controllers.addAll(SecondaryUserController.getSecondaryUserControllers(
+                            context, userManager));
+                    return controllers;
                 }
+
             };
 }

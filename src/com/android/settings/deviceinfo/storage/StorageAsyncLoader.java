@@ -23,10 +23,8 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
-import android.util.ArrayMap;
-import android.util.ArraySet;
-import android.util.SparseArray;
 import android.util.Log;
+import android.util.SparseArray;
 
 import com.android.settings.applications.PackageManagerWrapper;
 import com.android.settings.applications.UserManagerWrapper;
@@ -34,7 +32,6 @@ import com.android.settings.utils.AsyncLoader;
 import com.android.settingslib.applications.StorageStatsSource;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * StorageAsyncLoader is a Loader which loads categorized app information and external stats for all
@@ -77,27 +74,31 @@ public class StorageAsyncLoader
         Log.d(TAG, "Loading apps");
         List<ApplicationInfo> applicationInfos =
                 mPackageManager.getInstalledApplicationsAsUser(0, userId);
-        ArraySet<Integer> seenUid = new ArraySet<>(); // some apps share a uid
         AppsStorageResult result = new AppsStorageResult();
+        UserHandle myUser = UserHandle.of(userId);
         for (int i = 0, size = applicationInfos.size(); i < size; i++) {
             ApplicationInfo app = applicationInfos.get(i);
-            if (seenUid.contains(app.uid)) {
-                continue;
-            }
-            seenUid.add(app.uid);
+            StorageStatsSource.AppStorageStats stats =
+                    mStatsManager.getStatsForPackage(mUuid, app.packageName, myUser);
 
-            StorageStatsSource.AppStorageStats stats = mStatsManager.getStatsForUid(mUuid, app.uid);
-            // Note: This omits cache intentionally -- we are not attributing it to the apps.
-            long appSize = stats.getCodeBytes() + stats.getDataBytes();
+            long attributedAppSizeInBytes = stats.getDataBytes();
+            // This matches how the package manager calculates sizes -- by zeroing out code sizes of
+            // system apps which are not updated. My initial tests suggest that this results in the
+            // original code size being counted for updated system apps when they shouldn't, but
+            // I am not sure how to avoid this problem without specifically going in to find that
+            // code size.
+            if (!app.isSystemApp() || app.isUpdatedSystemApp()) {
+                attributedAppSizeInBytes += stats.getCodeBytes();
+            }
             switch (app.category) {
                 case CATEGORY_GAME:
-                    result.gamesSize += appSize;
+                    result.gamesSize += attributedAppSizeInBytes;
                     break;
                 case CATEGORY_AUDIO:
-                    result.musicAppsSize += appSize;
+                    result.musicAppsSize += attributedAppSizeInBytes;
                     break;
                 default:
-                    result.otherAppsSize += appSize;
+                    result.otherAppsSize += attributedAppSizeInBytes;
                     break;
             }
         }
@@ -117,5 +118,13 @@ public class StorageAsyncLoader
         public long musicAppsSize;
         public long otherAppsSize;
         public StorageStatsSource.ExternalStorageStats externalStats;
+    }
+
+    /**
+     * ResultHandler defines a destination of data which can handle a result from
+     * {@link StorageAsyncLoader}.
+     */
+    public interface ResultHandler {
+        void handleResult(SparseArray<AppsStorageResult> result);
     }
 }

@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.android.settings.fuelgauge;
 
 import android.content.pm.PackageManager;
@@ -70,21 +85,18 @@ public class PowerUsageAdvancedTest {
     @Test
     public void testExtractUsageType_TypeSystem_ReturnSystem() {
         mBatterySipper.drainType = DrainType.APP;
-        final int uids[] = {Process.SYSTEM_UID, Process.ROOT_UID};
+        when(mPowerUsageFeatureProvider.isTypeSystem(any())).thenReturn(true);
 
-        for (int uid : uids) {
-            when(mBatterySipper.getUid()).thenReturn(uid);
-            assertThat(mPowerUsageAdvanced.extractUsageType(mBatterySipper))
-                    .isEqualTo(UsageType.SYSTEM);
-        }
+        assertThat(mPowerUsageAdvanced.extractUsageType(mBatterySipper))
+                .isEqualTo(UsageType.SYSTEM);
     }
 
     @Test
     public void testExtractUsageType_TypeEqualsToDrainType_ReturnRelevantType() {
         final DrainType drainTypes[] = {DrainType.WIFI, DrainType.BLUETOOTH, DrainType.IDLE,
-                DrainType.USER, DrainType.CELL};
+                DrainType.USER, DrainType.CELL, DrainType.UNACCOUNTED};
         final int usageTypes[] = {UsageType.WIFI, UsageType.BLUETOOTH, UsageType.IDLE,
-                UsageType.USER, UsageType.CELL};
+                UsageType.USER, UsageType.CELL, UsageType.UNACCOUNTED};
 
         assertThat(drainTypes.length).isEqualTo(usageTypes.length);
         for (int i = 0, size = drainTypes.length; i < size; i++) {
@@ -135,7 +147,7 @@ public class PowerUsageAdvancedTest {
 
         assertThat(usageTypeSet).asList().containsExactly(UsageType.APP, UsageType.WIFI,
                 UsageType.CELL, UsageType.BLUETOOTH, UsageType.IDLE, UsageType.SERVICE,
-                UsageType.USER, UsageType.SYSTEM);
+                UsageType.USER, UsageType.SYSTEM, UsageType.UNACCOUNTED);
     }
 
     @Test

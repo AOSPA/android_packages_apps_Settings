@@ -79,6 +79,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
     /* Private intent to show the list of received files */
     private static final String BTOPP_ACTION_OPEN_RECEIVED_FILES =
             "android.btopp.intent.action.OPEN_RECEIVED_FILES";
+    private static final String BTOPP_PACKAGE =
+            "com.android.bluetooth";
 
     private static final String KEY_PAIRED_DEVICES = "paired_devices";
 
@@ -97,6 +99,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
 
     private final IntentFilter mIntentFilter;
 
+    // For Search
+    private static final String DATA_KEY_REFERENCE = "main_toggle_bluetooth";
 
     // accessed from inner class (not private to avoid thunks)
     FooterPreference mMyDevicePreference;
@@ -266,6 +270,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                 mMetricsFeatureProvider.action(getActivity(),
                         MetricsEvent.ACTION_BLUETOOTH_FILES);
                 Intent intent = new Intent(BTOPP_ACTION_OPEN_RECEIVED_FILES);
+                intent.setPackage(BTOPP_PACKAGE);
                 getActivity().sendBroadcast(intent);
                 return true;
         }
@@ -564,6 +569,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = res.getString(R.string.bluetooth_settings);
                     data.screenTitle = res.getString(R.string.bluetooth_settings);
+                    data.key = DATA_KEY_REFERENCE;
                     result.add(data);
 
                     // Add cached paired BT devices

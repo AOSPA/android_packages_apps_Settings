@@ -24,6 +24,7 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.gestures.AssistGesturePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
@@ -50,15 +51,7 @@ public class ManageAssist extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final Lifecycle lifecycle = getLifecycle();
-        final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new DefaultAssistPreferenceController(context));
-        controllers.add(new GestureAssistPreferenceController(context));
-        controllers.add(new AssistContextPreferenceController(context, lifecycle));
-        controllers.add(new AssistScreenshotPreferenceController(context, lifecycle));
-        controllers.add(new AssistFlashScreenPreferenceController(context, lifecycle));
-        controllers.add(new DefaultVoiceInputPreferenceController(context, lifecycle));
-        return controllers;
+        return buildPreferenceControllers(context, getLifecycle());
     }
 
     @Override
@@ -74,6 +67,19 @@ public class ManageAssist extends DashboardFragment {
                 .setTitle(R.string.assist_footer);
     }
 
+    private static List<PreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
+        final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(new DefaultAssistPreferenceController(context));
+        controllers.add(new AssistGesturePreferenceController(context, lifecycle));
+        controllers.add(new AssistContextPreferenceController(context, lifecycle));
+        controllers.add(new AssistScreenshotPreferenceController(context, lifecycle));
+        controllers.add(new AssistFlashScreenPreferenceController(context, lifecycle));
+        controllers.add(new DefaultVoiceInputPreferenceController(context, lifecycle));
+        return controllers;
+    }
+
+
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
@@ -85,19 +91,8 @@ public class ManageAssist extends DashboardFragment {
                 }
 
                 @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> result = new ArrayList<>();
-                    new DefaultAssistPreferenceController(context).updateNonIndexableKeys(result);
-                    new GestureAssistPreferenceController(context).updateNonIndexableKeys(result);
-                    new AssistContextPreferenceController(context, null)
-                            .updateNonIndexableKeys(result);
-                    new AssistScreenshotPreferenceController(context, null)
-                            .updateNonIndexableKeys(result);
-                    new AssistFlashScreenPreferenceController(context, null)
-                            .updateNonIndexableKeys(result);
-                    new DefaultVoiceInputPreferenceController(context, null)
-                            .updateNonIndexableKeys(result);
-                    return result;
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    return buildPreferenceControllers(context, null /* lifecycle */);
                 }
             };
 }

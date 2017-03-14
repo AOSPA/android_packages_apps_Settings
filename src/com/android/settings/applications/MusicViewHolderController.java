@@ -26,7 +26,7 @@ import android.text.format.Formatter;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.deviceinfo.storage.StorageStatsSource;
+import com.android.settingslib.applications.StorageStatsSource;
 
 /**
  * MusicViewHolderController controls an Audio/Music file view in the ManageApplications view.
@@ -68,8 +68,10 @@ public class MusicViewHolderController implements FileViewHolderController {
 
     @Override
     public void onClick(Fragment fragment) {
-        Intent intent = new Intent(DocumentsContract.ACTION_BROWSE);
-        intent.setData(DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "audio_root"));
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(
+                DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "audio_root"),
+                DocumentsContract.Root.MIME_TYPE_ITEM);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.putExtra(Intent.EXTRA_USER_ID, mUser);
         Utils.launchIntent(fragment, intent);

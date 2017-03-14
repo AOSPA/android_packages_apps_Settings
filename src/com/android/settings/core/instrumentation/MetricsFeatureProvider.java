@@ -15,7 +15,10 @@
  */
 package com.android.settings.core.instrumentation;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -57,9 +60,9 @@ public class MetricsFeatureProvider {
         }
     }
 
-    public void action(Context context, int category) {
+    public void action(Context context, int category, Pair<Integer, Object>... taggedData) {
         for (LogWriter writer : mLoggerWriters) {
-            writer.action(context, category);
+            writer.action(context, category, taggedData);
         }
     }
 
@@ -99,5 +102,29 @@ public class MetricsFeatureProvider {
             return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
         }
         return ((Instrumentable) object).getMetricsCategory();
+    }
+
+    public void logDashboardStartIntent(Context context, Intent intent,
+            int sourceMetricsCategory) {
+        if (intent == null) {
+            return;
+        }
+        final ComponentName cn = intent.getComponent();
+        if (cn == null) {
+            final String action = intent.getAction();
+            if (TextUtils.isEmpty(action)) {
+                // Not loggable
+                return;
+            }
+            action(context, MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK, action,
+                    Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, sourceMetricsCategory));
+            return;
+        } else if (TextUtils.equals(cn.getPackageName(), context.getPackageName())) {
+            // Going to a Setting internal page, skip click logging in favor of page's own
+            // visibility logging.
+            return;
+        }
+        action(context, MetricsProto.MetricsEvent.ACTION_SETTINGS_TILE_CLICK, cn.flattenToString(),
+                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, sourceMetricsCategory));
     }
 }

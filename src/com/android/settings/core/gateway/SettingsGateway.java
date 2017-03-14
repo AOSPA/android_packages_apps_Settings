@@ -39,12 +39,10 @@ import com.android.settings.TrustedCredentialsSettings;
 import com.android.settings.UserDictionarySettings;
 import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.WifiCallingSettings;
-import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
-import com.android.settings.accounts.AccountSettings;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountActivity;
 import com.android.settings.accounts.ManagedProfileSettings;
@@ -52,9 +50,9 @@ import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DrawOverlayDetails;
+import com.android.settings.applications.ExternalSourcesDetails;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageApplications;
-import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.applications.ManageDomainUrls;
 import com.android.settings.applications.NotificationApps;
 import com.android.settings.applications.PictureInPictureSettings;
@@ -63,6 +61,7 @@ import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.VrListenerSettings;
 import com.android.settings.applications.WriteSettingsDetails;
+import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.dashboard.SupportFragment;
@@ -85,11 +84,9 @@ import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
-import com.android.settings.gestures.GestureSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
-import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
@@ -105,7 +102,6 @@ import com.android.settings.notification.ChannelNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationStation;
-import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenAccessSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
@@ -137,7 +133,6 @@ public class SettingsGateway {
      * security exception if the fragment it needs to display is not in this list.
      */
     public static final String[] ENTRY_FRAGMENTS = {
-            WirelessSettings.class.getName(),
             WifiSettings.class.getName(),
             ConfigureWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings.class.getName(),
@@ -148,7 +143,6 @@ public class SettingsGateway {
             VpnSettings.class.getName(),
             DateTimeSettings.class.getName(),
             LocaleListEditor.class.getName(),
-            InputMethodAndLanguageSettings.class.getName(),
             AvailableVirtualKeyboardFragment.class.getName(),
             LanguageAndInputSettings.class.getName(),
             SpellCheckersSettings.class.getName(),
@@ -181,8 +175,6 @@ public class SettingsGateway {
             WifiDisplaySettings.class.getName(),
             PowerUsageSummary.class.getName(),
             AccountSyncSettings.class.getName(),
-            AccountSettings.class.getName(),
-            GestureSettings.class.getName(),
             AssistGestureSettings.class.getName(),
             SwipeToNotificationSettings.class.getName(),
             DoubleTapPowerSettings.class.getName(),
@@ -210,7 +202,6 @@ public class SettingsGateway {
             BatterySaverSettings.class.getName(),
             AppNotificationSettings.class.getName(),
             ChannelNotificationSettings.class.getName(),
-            OtherSoundSettings.class.getName(),
             ApnSettings.class.getName(),
             ApnEditor.class.getName(),
             WifiCallingSettings.class.getName(),
@@ -224,6 +215,7 @@ public class SettingsGateway {
             ProcessStatsSummary.class.getName(),
             DrawOverlayDetails.class.getName(),
             WriteSettingsDetails.class.getName(),
+            ExternalSourcesDetails.class.getName(),
             AdvancedAppSettings.class.getName(),
             WallpaperTypeSettings.class.getName(),
             VrListenerSettings.class.getName(),
@@ -253,56 +245,38 @@ public class SettingsGateway {
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
-            //wireless_section
-            Settings.WifiSettingsActivity.class.getName(),
-            Settings.BluetoothSettingsActivity.class.getName(),
-            Settings.DataUsageSummaryActivity.class.getName(),
-            Settings.SimSettingsActivity.class.getName(),
-            Settings.WirelessSettingsActivity.class.getName(),
-            //device_section
-            Settings.SoundSettingsActivity.class.getName(),
-            Settings.DisplaySettingsActivity.class.getName(),
-            Settings.StorageSettingsActivity.class.getName(),
-            Settings.ManageApplicationsActivity.class.getName(),
-            Settings.PowerUsageSummaryActivity.class.getName(),
-            Settings.GestureSettingsActivity.class.getName(),
-            //personal_section
-            Settings.LocationSettingsActivity.class.getName(),
-            Settings.SecuritySettingsActivity.class.getName(),
-            Settings.InputMethodAndLanguageSettingsActivity.class.getName(),
-            Settings.UserSettingsActivity.class.getName(),
-            Settings.AccountSettingsActivity.class.getName(),
-            //system_section
-            Settings.DateTimeSettingsActivity.class.getName(),
-            Settings.DeviceInfoSettingsActivity.class.getName(),
-            Settings.AccessibilitySettingsActivity.class.getName(),
-            Settings.PrintSettingsActivity.class.getName(),
-            Settings.PaymentSettingsActivity.class.getName(),
-            Settings.EnterprisePrivacySettingsActivity.class.getName(),
-
             // New IA
             // Home page
             Settings.NetworkDashboardActivity.class.getName(),
             Settings.ConnectedDeviceDashboardActivity.class.getName(),
             Settings.AppAndNotificationDashboardActivity.class.getName(),
-            "com.android.settings.BatteryDashboardAlias",
-            "com.android.settings.DisplayDashboardAlias",
-            "com.android.settings.SoundDashboardAlias",
-            "com.android.settings.SecurityDashboardAlias",
-            "com.android.settings.UsersDashboardAlias",
+            Settings.DisplaySettingsActivity.class.getName(),
+            Settings.SoundSettingsActivity.class.getName(),
+            Settings.StorageDashboardActivity.class.getName(),
+            Settings.PowerUsageSummaryActivity.class.getName(),
             Settings.UserAndAccountDashboardActivity.class.getName(),
+            Settings.SecuritySettingsActivity.class.getName(),
+            Settings.AccessibilitySettingsActivity.class.getName(),
             Settings.SystemDashboardActivity.class.getName(),
             Settings.SupportDashboardActivity.class.getName(),
-            // Home page > Apps & Notifications
-            "com.android.settings.ManageApplicationsDashboardAlias",
-            "com.android.settings.PaymentSettingsDashboardAlias",
             // Home page > Network & Internet
-            "com.android.settings.DataUsageDashboardAlias",
+            Settings.WifiSettingsActivity.class.getName(),
+            Settings.DataUsageSummaryActivity.class.getName(),
+            Settings.SimSettingsActivity.class.getName(),
+            // Home page > Connected devices
+            Settings.BluetoothSettingsActivity.class.getName(),
+            Settings.WifiDisplaySettingsActivity.class.getName(),
+            Settings.PrintSettingsActivity.class.getName(),
+            // Home page > Apps & Notifications
+            Settings.UserSettingsActivity.class.getName(),
+            Settings.ManageApplicationsActivity.class.getName(),
+            Settings.PaymentSettingsActivity.class.getName(),
+            // Home page > Security & screen lock
+            Settings.LocationSettingsActivity.class.getName(),
             // Home page > System
             Settings.LanguageAndInputSettingsActivity.class.getName(),
-            "com.android.settings.DateTimeDashboardAlias",
-            "com.android.settings.AccessibilityDashboardAlias",
-            "com.android.settings.AboutDeviceDashboardAlias",
-            "com.android.settings.EnterprisePrivacyDashboardAlias",
+            Settings.DateTimeSettingsActivity.class.getName(),
+            Settings.DeviceInfoSettingsActivity.class.getName(),
+            Settings.EnterprisePrivacySettingsActivity.class.getName(),
     };
 }

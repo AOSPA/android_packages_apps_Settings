@@ -20,6 +20,7 @@ import android.Manifest.permission;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
@@ -65,7 +66,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.IWebViewUpdateService;
 import android.widget.Button;
@@ -81,13 +81,11 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
-import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
@@ -102,6 +100,10 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.PermissionsSummaryHelper;
+import com.android.settingslib.applications.PermissionsSummaryHelper.PermissionsResultCallback;
+import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 
@@ -122,7 +124,8 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  * uninstall the application.
  */
 public class InstalledAppDetails extends AppInfoBase
-        implements View.OnClickListener, OnPreferenceClickListener {
+        implements View.OnClickListener, OnPreferenceClickListener,
+        LoaderManager.LoaderCallbacks<AppStorageStats> {
 
     private static final String LOG_TAG = "InstalledAppDetails";
 
@@ -137,13 +140,14 @@ public class InstalledAppDetails extends AppInfoBase
     private static final int SUB_INFO_FRAGMENT = 1;
 
     private static final int LOADER_CHART_DATA = 2;
+    private static final int LOADER_STORAGE = 3;
 
     private static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
 
     private static final String KEY_HEADER = "header_view";
-    private static final String KEY_FOOTER = "header_footer";
+    private static final String KEY_ACTION_BUTTONS = "action_buttons";
     private static final String KEY_NOTIFICATION = "notification_settings";
     private static final String KEY_STORAGE = "storage_settings";
     private static final String KEY_PERMISSION = "permission_settings";
@@ -157,12 +161,10 @@ public class InstalledAppDetails extends AppInfoBase
 
     private final HashSet<String> mHomePackages = new HashSet<>();
 
-    private DashboardFeatureProvider mDashboardFeatureProvider;
-
     private boolean mInitialized;
     private boolean mShowUninstalled;
     private LayoutPreference mHeader;
-    private LayoutPreference mFooter;
+    private LayoutPreference mActionButtons;
     private Button mUninstallButton;
     private boolean mUpdatedSysApp = false;
     private Button mForceStopButton;
@@ -189,6 +191,8 @@ public class InstalledAppDetails extends AppInfoBase
 
     protected ProcStatsData mStatsManager;
     protected ProcStatsPackageEntry mStats;
+
+    private AppStorageStats mLastResult;
 
     private boolean handleDisableable(Button button) {
         boolean disableable = false;
@@ -319,20 +323,14 @@ public class InstalledAppDetails extends AppInfoBase
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         final Activity activity = getActivity();
-        mDashboardFeatureProvider =
-                FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
+
+        if (!ensurePackageInfoAvailable(activity)) {
+            return;
+        }
 
         setHasOptionsMenu(true);
-        addPreferencesFromResource(mDashboardFeatureProvider.isEnabled()
-                ? R.xml.installed_app_details_ia
-                : R.xml.installed_app_details);
+        addPreferencesFromResource(R.xml.installed_app_details_ia);
         addDynamicPrefs();
-        if (mDashboardFeatureProvider.isEnabled()) {
-            mFooter = new LayoutPreference(getPrefContext(), R.layout.app_action_buttons);
-            mFooter.setOrder(-9999);
-            mFooter.setKey(KEY_FOOTER);
-            getPreferenceScreen().addPreference(mFooter);
-        }
         if (Utils.isBandwidthControlEnabled()) {
             INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
                     ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
@@ -358,13 +356,14 @@ public class InstalledAppDetails extends AppInfoBase
         if (mFinishing) {
             return;
         }
-        mState.requestSize(mPackageName, mUserId);
         AppItem app = new AppItem(mAppEntry.info.uid);
         app.addUid(mAppEntry.info.uid);
         if (mStatsSession != null) {
-            getLoaderManager().restartLoader(LOADER_CHART_DATA,
+            LoaderManager loaderManager = getLoaderManager();
+            loaderManager.restartLoader(LOADER_CHART_DATA,
                     ChartDataLoader.buildArgs(getTemplate(getContext()), app),
                     mDataCallbacks);
+            loaderManager.restartLoader(LOADER_STORAGE, Bundle.EMPTY, this);
         }
         new BatteryUpdater().execute();
         new MemoryUpdater().execute();
@@ -388,20 +387,17 @@ public class InstalledAppDetails extends AppInfoBase
         if (mFinishing) {
             return;
         }
-        if (!mDashboardFeatureProvider.isEnabled()) {
-            handleHeader();
-        } else {
-            final Activity activity = getActivity();
-            mHeader = (LayoutPreference) findPreference(KEY_HEADER);
-            FeatureFactory.getFactory(activity)
-                    .getApplicationFeatureProvider(activity)
-                    .newAppHeaderController(this, mHeader.findViewById(R.id.app_snippet))
-                    .setPackageName(mPackageName)
-                    .setButtonActions(AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK,
-                            AppHeaderController.ActionType.ACTION_APP_PREFERENCE)
-                    .bindAppHeaderButtons();
-            prepareUninstallAndStop();
-        }
+        final Activity activity = getActivity();
+        mHeader = (LayoutPreference) findPreference(KEY_HEADER);
+        mActionButtons = (LayoutPreference) findPreference(KEY_ACTION_BUTTONS);
+        FeatureFactory.getFactory(activity)
+            .getApplicationFeatureProvider(activity)
+            .newAppHeaderController(this, mHeader.findViewById(R.id.app_snippet))
+            .setPackageName(mPackageName)
+            .setButtonActions(AppHeaderController.ActionType.ACTION_STORE_DEEP_LINK,
+                AppHeaderController.ActionType.ACTION_APP_PREFERENCE)
+            .bindAppHeaderButtons();
+        prepareUninstallAndStop();
 
         mNotificationPreference = findPreference(KEY_NOTIFICATION);
         mNotificationPreference.setOnPreferenceClickListener(this);
@@ -438,36 +434,27 @@ public class InstalledAppDetails extends AppInfoBase
         refreshUi();
     }
 
-    private void handleHeader() {
-        mHeader = (LayoutPreference) findPreference(KEY_HEADER);
-        // Get Control button panel
-        View btnPanel = mHeader.findViewById(R.id.control_buttons_panel);
-        mForceStopButton = (Button) btnPanel.findViewById(R.id.right_button);
-        mForceStopButton.setText(R.string.force_stop);
-        mUninstallButton = (Button) btnPanel.findViewById(R.id.left_button);
-        mForceStopButton.setEnabled(false);
-
-        View gear = mHeader.findViewById(R.id.gear);
-        Intent i = new Intent(Intent.ACTION_APPLICATION_PREFERENCES);
-        i.setPackage(mPackageName);
-        final Intent intent = resolveIntent(i);
-        if (intent != null) {
-            gear.setVisibility(View.VISIBLE);
-            gear.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(intent);
-                }
-            });
-        } else {
-            gear.setVisibility(View.GONE);
+    /**
+     * Ensures the {@link PackageInfo} is available to proceed. If it's not available, the fragment
+     * will finish.
+     *
+     * @return true if packageInfo is available.
+     */
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    boolean ensurePackageInfoAvailable(Activity activity) {
+        if (mPackageInfo == null) {
+            mFinishing = true;
+            Log.w(LOG_TAG, "Package info not available. Is this package already uninstalled?");
+            activity.finishAndRemoveTask();
+            return false;
         }
+        return true;
     }
 
     private void prepareUninstallAndStop() {
-        mForceStopButton = (Button) mFooter.findViewById(R.id.right_button);
+        mForceStopButton = (Button) mActionButtons.findViewById(R.id.right_button);
         mForceStopButton.setText(R.string.force_stop);
-        mUninstallButton = (Button) mFooter.findViewById(R.id.left_button);
+        mUninstallButton = (Button) mActionButtons.findViewById(R.id.left_button);
         mForceStopButton.setEnabled(false);
     }
 
@@ -490,23 +477,7 @@ public class InstalledAppDetails extends AppInfoBase
         if (mFinishing) {
             return;
         }
-        boolean showIt = true;
-        if (mUpdatedSysApp) {
-            showIt = false;
-        } else if (mAppEntry == null) {
-            showIt = false;
-        } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-            showIt = false;
-        } else if (mPackageInfo == null || mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
-            showIt = false;
-        } else if (UserHandle.myUserId() != 0) {
-            showIt = false;
-        } else if (mUserManager.getUsers().size() < 2) {
-            showIt = false;
-        } else if (PackageUtil.countPackageInUsers(mPm, mUserManager, mPackageName) < 2) {
-            showIt = false;
-        }
-        menu.findItem(UNINSTALL_ALL_USERS_MENU).setVisible(showIt);
+        menu.findItem(UNINSTALL_ALL_USERS_MENU).setVisible(shouldShowUninstallForAll(mAppEntry));
         mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
         MenuItem uninstallUpdatesItem = menu.findItem(UNINSTALL_UPDATES);
         uninstallUpdatesItem.setVisible(mUpdatedSysApp && !mAppsControlDisallowedBySystem);
@@ -551,24 +522,59 @@ public class InstalledAppDetails extends AppInfoBase
         }
     }
 
+    @Override
+    public Loader<AppStorageStats> onCreateLoader(int id, Bundle args) {
+        Context context = getContext();
+        return new FetchPackageStorageAsyncLoader(
+                context, new StorageStatsSource(context), mAppEntry.info, UserHandle.of(mUserId));
+    }
+
+    @Override
+    public void onLoadFinished(Loader<AppStorageStats> loader, AppStorageStats result) {
+        mLastResult = result;
+        refreshUi();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<AppStorageStats> loader) {
+    }
+
     // Utility method to set application label and icon.
     private void setAppLabelAndIcon(PackageInfo pkgInfo) {
         final View appSnippet = mHeader.findViewById(R.id.app_snippet);
         mState.ensureIcon(mAppEntry);
-        if (mDashboardFeatureProvider.isEnabled()) {
-            final Activity activity = getActivity();
-            FeatureFactory.getFactory(activity)
-                    .getApplicationFeatureProvider(activity)
-                    .newAppHeaderController(this, appSnippet)
-                    .setLabel(mAppEntry)
-                    .setIcon(mAppEntry)
-                    .setSummary(getString(getInstallationStatus(mAppEntry.info)))
-                    .done(false /* rebindActions */);
-            mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
-        } else {
-            setupAppSnippet(appSnippet, mAppEntry.label, mAppEntry.icon,
-                    pkgInfo != null ? pkgInfo.versionName : null);
+        final Activity activity = getActivity();
+        FeatureFactory.getFactory(activity)
+            .getApplicationFeatureProvider(activity)
+            .newAppHeaderController(this, appSnippet)
+            .setLabel(mAppEntry)
+            .setIcon(mAppEntry)
+            .setSummary(getString(getInstallationStatus(mAppEntry.info)))
+            .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
+            .done(false /* rebindActions */);
+        mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
+    }
+
+    @VisibleForTesting
+    boolean shouldShowUninstallForAll(ApplicationsState.AppEntry appEntry) {
+        boolean showIt = true;
+        if (mUpdatedSysApp) {
+            showIt = false;
+        } else if (appEntry == null) {
+            showIt = false;
+        } else if ((appEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+            showIt = false;
+        } else if (mPackageInfo == null || mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
+            showIt = false;
+        } else if (UserHandle.myUserId() != 0) {
+            showIt = false;
+        } else if (mUserManager.getUsers().size() < 2) {
+            showIt = false;
+        } else if (PackageUtil.countPackageInUsers(mPm, mUserManager, mPackageName) < 2
+                && (appEntry.info.flags & ApplicationInfo.FLAG_INSTALLED) != 0) {
+            showIt = false;
         }
+        return showIt;
     }
 
     @VisibleForTesting
@@ -630,7 +636,8 @@ public class InstalledAppDetails extends AppInfoBase
 
         // Update the preference summaries.
         Activity context = getActivity();
-        mStoragePreference.setSummary(AppStorageSettings.getSummary(mAppEntry, context));
+        boolean isExternal = ((mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0);
+        mStoragePreference.setSummary(getStorageSummary(context, mLastResult, isExternal));
 
         PermissionsSummaryHelper.getPermissionSummary(getContext(),
                 mPackageName, mPermissionCallback);
@@ -698,6 +705,25 @@ public class InstalledAppDetails extends AppInfoBase
         }
         return getString(R.string.computing_size);
     }
+
+    @VisibleForTesting
+    static CharSequence getStorageSummary(
+            Context context, AppStorageStats stats, boolean isExternal) {
+        if (stats == null) {
+            return context.getText(R.string.computing_size);
+        } else {
+            CharSequence storageType = context.getString(isExternal
+                    ? R.string.storage_type_external
+                    : R.string.storage_type_internal);
+            return context.getString(R.string.storage_summary_format,
+                    getSize(context, stats), storageType);
+        }
+    }
+
+    private static CharSequence getSize(Context context, AppStorageStats stats) {
+        return Formatter.formatFileSize(context, stats.getTotalBytes());
+    }
+
 
     @Override
     protected AlertDialog createDialog(int id, int errorCode) {
@@ -969,7 +995,9 @@ public class InstalledAppDetails extends AppInfoBase
                 PictureInPictureSettings.checkPackageHasPictureInPictureActivities(
                         packageInfoWithActivities.packageName,
                         packageInfoWithActivities.activities);
-        if (hasDrawOverOtherApps || hasWriteSettings || hasPictureInPictureActivities) {
+        boolean isPotentialAppSource = isPotentialAppSource();
+        if (hasDrawOverOtherApps || hasWriteSettings || hasPictureInPictureActivities ||
+                isPotentialAppSource) {
             PreferenceCategory category = new PreferenceCategory(getPrefContext());
             category.setTitle(R.string.advanced_apps);
             screen.addPreference(category);
@@ -1019,9 +1047,30 @@ public class InstalledAppDetails extends AppInfoBase
                 });
                 category.addPreference(pref);
             }
+            if (isPotentialAppSource) {
+                Preference pref = new Preference(getPrefContext());
+                pref.setTitle(R.string.install_other_apps);
+                pref.setKey("install_other_apps");
+                pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        startAppInfoFragment(ExternalSourcesDetails.class,
+                                getString(R.string.install_other_apps));
+                        return true;
+                    }
+                });
+                category.addPreference(pref);
+            }
         }
 
         addAppInstallerInfoPref(screen);
+    }
+
+    private boolean isPotentialAppSource() {
+        AppStateInstallAppsBridge.InstallAppsState appState =
+                new AppStateInstallAppsBridge(getContext(), null, null)
+                        .createInstallAppsStateFor(mPackageName, mPackageInfo.applicationInfo.uid);
+        return appState.isPotentialAppSource();
     }
 
     private void addAppInstallerInfoPref(PreferenceScreen screen) {
@@ -1109,8 +1158,15 @@ public class InstalledAppDetails extends AppInfoBase
         if (pref != null) {
             pref.setSummary(WriteSettingsDetails.getSummary(getContext(), mAppEntry));
         }
+        pref = findPreference("install_other_apps");
+        if (pref != null) {
+            pref.setSummary(ExternalSourcesDetails.getPreferenceSummary(getContext(), mAppEntry));
+        }
     }
 
+    /**
+     * @deprecated app info pages should use {@link AppHeaderController} to show the app header.
+     */
     public static void setupAppSnippet(View appSnippet, CharSequence label, Drawable icon,
             CharSequence versionName) {
         LayoutInflater.from(appSnippet.getContext()).inflate(R.layout.widget_text_views,

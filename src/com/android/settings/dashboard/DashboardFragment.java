@@ -157,6 +157,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         Collection<PreferenceController> controllers = mPreferenceControllers.values();
+        // If preference contains intent, log it before handling.
+        mMetricsFeatureProvider.logDashboardStartIntent(
+                getContext(), preference.getIntent(), getMetricsCategory());
         // Give all controllers a chance to handle click.
         for (PreferenceController controller : controllers) {
             if (controller.handlePreferenceTreeClick(preference)) {
@@ -306,8 +309,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         mSummaryLoader = new SummaryLoader(getActivity(), getCategoryKey());
         mSummaryLoader.setSummaryConsumer(this);
         final TypedArray a = context.obtainStyledAttributes(new int[]{
-                mDashboardFeatureProvider.isEnabled() ? android.R.attr.colorControlNormal
-                        : android.R.attr.colorAccent});
+                android.R.attr.colorControlNormal});
         final int tintColor = a.getColor(0, context.getColor(android.R.color.white));
         a.recycle();
         final String pkgName = context.getPackageName();

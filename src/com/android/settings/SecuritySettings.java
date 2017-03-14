@@ -76,6 +76,8 @@ import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
 import java.util.List;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
@@ -357,37 +359,33 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         PreferenceGroup securityStatusPreferenceGroup =
                 (PreferenceGroup) root.findPreference(KEY_SECURITY_STATUS);
-        if (mDashboardFeatureProvider.isEnabled()) {
-            final List<Preference> tilePrefs = mDashboardFeatureProvider.getPreferencesForCategory(
-                    getActivity(), getPrefContext(), getMetricsCategory(),
-                    CategoryKey.CATEGORY_SECURITY);
-            int numSecurityStatusPrefs = 0;
-            if (tilePrefs != null && !tilePrefs.isEmpty()) {
-                for (Preference preference : tilePrefs) {
-                    if (!TextUtils.isEmpty(preference.getKey())
-                            && preference.getKey().startsWith(SECURITY_STATUS_KEY_PREFIX)) {
-                        // Injected security status settings are placed under the Security status
-                        // category.
-                        securityStatusPreferenceGroup.addPreference(preference);
-                        numSecurityStatusPrefs++;
-                    } else {
-                        // Other injected settings are placed under the Security preference screen.
-                        root.addPreference(preference);
-                    }
+        final List<Preference> tilePrefs = mDashboardFeatureProvider.getPreferencesForCategory(
+            getActivity(), getPrefContext(), getMetricsCategory(),
+            CategoryKey.CATEGORY_SECURITY);
+        int numSecurityStatusPrefs = 0;
+        if (tilePrefs != null && !tilePrefs.isEmpty()) {
+            for (Preference preference : tilePrefs) {
+                if (!TextUtils.isEmpty(preference.getKey())
+                    && preference.getKey().startsWith(SECURITY_STATUS_KEY_PREFIX)) {
+                    // Injected security status settings are placed under the Security status
+                    // category.
+                    securityStatusPreferenceGroup.addPreference(preference);
+                    numSecurityStatusPrefs++;
+                } else {
+                    // Other injected settings are placed under the Security preference screen.
+                    root.addPreference(preference);
                 }
             }
+        }
 
-            if (numSecurityStatusPrefs == 0) {
-                root.removePreference(securityStatusPreferenceGroup);
-            } else if (numSecurityStatusPrefs > 0) {
-                // Update preference data with tile data. Security feature provider only updates the
-                // data if it actually needs to be changed.
-                mSecurityFeatureProvider.updatePreferences(getActivity(), root,
-                        mDashboardFeatureProvider.getTilesForCategory(
-                                CategoryKey.CATEGORY_SECURITY));
-            }
-        } else {
-            root.removePreference(root.findPreference(KEY_SECURITY_STATUS));
+        if (numSecurityStatusPrefs == 0) {
+            root.removePreference(securityStatusPreferenceGroup);
+        } else if (numSecurityStatusPrefs > 0) {
+            // Update preference data with tile data. Security feature provider only updates the
+            // data if it actually needs to be changed.
+            mSecurityFeatureProvider.updatePreferences(getActivity(), root,
+                mDashboardFeatureProvider.getTilesForCategory(
+                    CategoryKey.CATEGORY_SECURITY));
         }
 
         for (int i = 0; i < SWITCH_PREFERENCE_KEYS.length; i++) {
@@ -521,6 +519,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
         return result;
+    }
+
+    private static CharSequence getActiveTrustAgentLabel(Context context,
+            TrustAgentManager trustAgentManager, LockPatternUtils utils,
+            DevicePolicyManager dpm) {
+        ArrayList<TrustAgentComponentInfo> agents = getActiveTrustAgents(context,
+                trustAgentManager, utils, dpm);
+        return agents.isEmpty() ? null : agents.get(0).title;
     }
 
     @Override
@@ -910,6 +916,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         private SwitchPreference mPowerButtonInstantlyLocks;
         private RestrictedPreference mOwnerInfoPref;
 
+        private TrustAgentManager mTrustAgentManager;
         private LockPatternUtils mLockPatternUtils;
         private DevicePolicyManager mDPM;
 
@@ -921,6 +928,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
         @Override
         public void onCreate(Bundle icicle) {
             super.onCreate(icicle);
+            SecurityFeatureProvider securityFeatureProvider =
+                    FeatureFactory.getFactory(getActivity()).getSecurityFeatureProvider();
+            mTrustAgentManager = securityFeatureProvider.getTrustAgentManager();
             mLockPatternUtils = new LockPatternUtils(getContext());
             mDPM = getContext().getSystemService(DevicePolicyManager.class);
             createPreferenceHierarchy();
@@ -937,8 +947,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                         MY_USER_ID));
             }
             if (mPowerButtonInstantlyLocks != null) {
-                mPowerButtonInstantlyLocks.setChecked(mLockPatternUtils.getPowerButtonInstantlyLocks(
-                        MY_USER_ID));
+                mPowerButtonInstantlyLocks.setChecked(
+                        mLockPatternUtils.getPowerButtonInstantlyLocks(MY_USER_ID));
             }
 
             updateOwnerInfo();
@@ -975,13 +985,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
             // lock instantly on power key press
             mPowerButtonInstantlyLocks = (SwitchPreference) findPreference(
                     KEY_POWER_INSTANTLY_LOCKS);
-            Preference trustAgentPreference = findPreference(KEY_TRUST_AGENT);
-            if (mPowerButtonInstantlyLocks != null &&
-                    trustAgentPreference != null &&
-                    trustAgentPreference.getTitle().length() > 0) {
+            CharSequence trustAgentLabel = getActiveTrustAgentLabel(getContext(),
+                    mTrustAgentManager, mLockPatternUtils, mDPM);
+            if (mPowerButtonInstantlyLocks != null && !TextUtils.isEmpty(trustAgentLabel)) {
                 mPowerButtonInstantlyLocks.setSummary(getString(
                         R.string.lockpattern_settings_power_button_instantly_locks_summary,
-                        trustAgentPreference.getTitle()));
+                        trustAgentLabel));
             }
 
             mOwnerInfoPref = (RestrictedPreference) findPreference(KEY_OWNER_INFO_SETTINGS);
@@ -1050,14 +1059,15 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     }
                 }
 
-                Preference preference = findPreference(KEY_TRUST_AGENT);
-                if (preference != null && preference.getTitle().length() > 0) {
+                CharSequence trustAgentLabel = getActiveTrustAgentLabel(getContext(),
+                        mTrustAgentManager, mLockPatternUtils, mDPM);
+                if (!TextUtils.isEmpty(trustAgentLabel)) {
                     if (Long.valueOf(values[best].toString()) == 0) {
                         summary = getString(R.string.lock_immediately_summary_with_exception,
-                                preference.getTitle());
+                                trustAgentLabel);
                     } else {
                         summary = getString(R.string.lock_after_timeout_summary_with_exception,
-                                entries[best], preference.getTitle());
+                                entries[best], trustAgentLabel);
                     }
                 } else {
                     summary = getString(R.string.lock_after_timeout_summary, entries[best]);
@@ -1200,11 +1210,19 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     Settings.Secure.PACKAGE_VERIFIER_STATE, 0);
             DashboardFeatureProvider dashboardFeatureProvider =
                     FeatureFactory.getFactory(mContext).getDashboardFeatureProvider(mContext);
-            if (dashboardFeatureProvider.isEnabled()
-                    && (packageVerifierState == PACKAGE_VERIFIER_STATE_ENABLED)) {
-                DashboardCategory dashboardCategory =
-                        dashboardFeatureProvider.getTilesForCategory(CategoryKey.CATEGORY_SECURITY);
-                mSummaryLoader.setSummary(this, getPackageVerifierSummary(dashboardCategory));
+            if (packageVerifierState == PACKAGE_VERIFIER_STATE_ENABLED) {
+                // Calling the feature provider could potentially be slow, so do this on a separate
+                // thread so as to not block the loading of Settings.
+                Executors.newSingleThreadExecutor().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        DashboardCategory dashboardCategory =
+                                dashboardFeatureProvider.getTilesForCategory(
+                                        CategoryKey.CATEGORY_SECURITY);
+                        mSummaryLoader.setSummary(SummaryProvider.this,
+                                getPackageVerifierSummary(dashboardCategory));
+                    }
+                });
             } else {
                 final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(mContext);
                 if (fpm != null && fpm.isHardwareDetected()) {

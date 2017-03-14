@@ -16,6 +16,8 @@
 
 package com.android.settings.enterprise;
 
+import android.content.Context;
+
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
@@ -53,7 +55,7 @@ public final class AdminActionPreferenceControllerBaseTest extends
     private class AdminActionPreferenceControllerBaseTestable extends
             AdminActionPreferenceControllerBase {
         AdminActionPreferenceControllerBaseTestable() {
-            super(mContext);
+            super(AdminActionPreferenceControllerBaseTest.this.mContext);
         }
 
         @Override

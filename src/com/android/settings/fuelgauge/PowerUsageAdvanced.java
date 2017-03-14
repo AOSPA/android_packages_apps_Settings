@@ -16,7 +16,6 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Process;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
@@ -40,10 +39,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class PowerUsageAdvanced extends PowerUsageBase {
     private static final String TAG = "AdvancedBatteryUsage";
@@ -59,7 +56,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             UsageType.BLUETOOTH,
             UsageType.USER,
             UsageType.IDLE,
-            UsageType.APP};
+            UsageType.APP,
+            UsageType.UNACCOUNTED};
     private BatteryHistoryPreference mHistPref;
     private PreferenceGroup mUsageListGroup;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
@@ -71,9 +69,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_GRAPH);
         mUsageListGroup = (PreferenceGroup) findPreference(KEY_BATTERY_USAGE_LIST);
-        mPowerUsageFeatureProvider = FeatureFactory.getFactory(getContext())
-                .getPowerUsageFeatureProvider(getContext());
-        mPackageManager = getContext().getPackageManager();
+
+        final Context context = getContext();
+        mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
+                .getPowerUsageFeatureProvider(context);
+        mPackageManager = context.getPackageManager();
     }
 
     @Override
@@ -112,7 +112,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mUsageListGroup.removeAll();
         for (int i = 0, size = dataList.size(); i < size; i++) {
             final PowerUsageData batteryData = dataList.get(i);
-            final PowerGaugePreference pref = new PowerGaugePreference(getContext());
+            final PowerGaugePreference pref = new PowerGaugePreference(getPrefContext());
 
             pref.setTitle(batteryData.titleResId);
             pref.setSummary(batteryData.summary);
@@ -137,9 +137,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             return UsageType.USER;
         } else if (drainType == DrainType.CELL) {
             return UsageType.CELL;
-        } else if (uid == Process.SYSTEM_UID || uid == Process.ROOT_UID) {
+        } else if (drainType == DrainType.UNACCOUNTED) {
+            return UsageType.UNACCOUNTED;
+        } else if (mPowerUsageFeatureProvider.isTypeSystem(sipper)) {
             return UsageType.SYSTEM;
-        } else if (mPowerUsageFeatureProvider.isTypeService(sipper.mPackages)) {
+        } else if (mPowerUsageFeatureProvider.isTypeService(sipper)) {
             return UsageType.SERVICE;
         } else {
             return UsageType.APP;
@@ -198,7 +200,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 UsageType.SYSTEM,
                 UsageType.BLUETOOTH,
                 UsageType.USER,
-                UsageType.IDLE})
+                UsageType.IDLE,
+                UsageType.UNACCOUNTED})
         public @interface UsageType {
             int APP = 0;
             int WIFI = 1;
@@ -208,6 +211,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             int BLUETOOTH = 5;
             int USER = 6;
             int IDLE = 7;
+            int UNACCOUNTED = 8;
         }
 
         @StringRes
@@ -247,6 +251,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     return R.string.power_user;
                 case UsageType.IDLE:
                     return R.string.power_idle;
+                case UsageType.UNACCOUNTED:
+                    return R.string.power_unaccounted;
                 case UsageType.APP:
                 default:
                     return R.string.power_apps;
@@ -265,10 +271,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        return null;
-                    }
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.power_usage_advanced;
                     return Arrays.asList(sir);

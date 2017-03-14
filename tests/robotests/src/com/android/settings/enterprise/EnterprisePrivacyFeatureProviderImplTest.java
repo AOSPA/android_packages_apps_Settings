@@ -18,12 +18,14 @@ package com.android.settings.enterprise;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.net.ProxyInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.text.SpannableStringBuilder;
 
 import com.android.settings.R;
@@ -41,11 +43,13 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 /**
@@ -55,17 +59,22 @@ import static org.mockito.Mockito.when;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class EnterprisePrivacyFeatureProviderImplTest {
 
-    private final ComponentName DEVICE_OWNER = new ComponentName("dummy", "component");
-    private final String DEVICE_OWNER_ORGANIZATION = new String("ACME");
+    private final ComponentName OWNER = new ComponentName("dummy", "component");
+    private final String OWNER_ORGANIZATION = new String("ACME");
     private final Date TIMESTAMP = new Date(2011, 11, 11);
     private final int MY_USER_ID = UserHandle.myUserId();
     private final int MANAGED_PROFILE_USER_ID = MY_USER_ID + 1;
     private final String VPN_PACKAGE_ID = "com.example.vpn";
+    private final String IME_PACKAGE_ID = "com.example.ime";
+    private final String OTHER_PACKAGE_ID = "com.example.other";
+    private final String IME_PACKAGE_LABEL = "Test IME";
 
     private List<UserInfo> mProfiles = new ArrayList();
 
+    private @Mock Context mContext;
     private @Mock DevicePolicyManagerWrapper mDevicePolicyManager;
-    private @Mock PackageManagerWrapper mPackageManager;
+    private @Mock PackageManagerWrapper mPackageManagerWrapper;
+    private @Mock PackageManager mPackageManager;
     private @Mock UserManager mUserManager;
     private @Mock ConnectivityManagerWrapper mConnectivityManger;
     private Resources mResources;
@@ -76,14 +85,14 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN))
-                .thenReturn(true);
+        when(mContext.getApplicationContext()).thenReturn(mContext);
+        resetAndInitializePackageManagerWrapper();
         when(mUserManager.getProfiles(MY_USER_ID)).thenReturn(mProfiles);
         mProfiles.add(new UserInfo(MY_USER_ID, "", "", 0 /* flags */));
         mResources = ShadowApplication.getInstance().getApplicationContext().getResources();
 
-        mProvider = new EnterprisePrivacyFeatureProviderImpl(mDevicePolicyManager, mPackageManager,
-                mUserManager, mConnectivityManger, mResources);
+        mProvider = new EnterprisePrivacyFeatureProviderImpl(mContext, mDevicePolicyManager,
+                mPackageManagerWrapper, mUserManager, mConnectivityManger, mResources);
     }
 
     @Test
@@ -91,13 +100,13 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(null);
         assertThat(mProvider.hasDeviceOwner()).isFalse();
 
-        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_OWNER);
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(OWNER);
         assertThat(mProvider.hasDeviceOwner()).isTrue();
     }
 
     @Test
     public void testIsInCompMode() {
-        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_OWNER);
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(OWNER);
         assertThat(mProvider.isInCompMode()).isFalse();
 
         mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));
@@ -106,29 +115,26 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
 
     @Test
     public void testGetDeviceOwnerDisclosure() {
-        final Context context = mock(Context.class);
-
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(null);
-        assertThat(mProvider.getDeviceOwnerDisclosure(context)).isNull();
+        assertThat(mProvider.getDeviceOwnerDisclosure()).isNull();
 
         SpannableStringBuilder disclosure = new SpannableStringBuilder();
         disclosure.append(mResources.getString(R.string.do_disclosure_generic));
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more),
-                new EnterprisePrivacyFeatureProviderImpl.EnterprisePrivacySpan(context), 0);
-        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(DEVICE_OWNER);
+                new EnterprisePrivacyFeatureProviderImpl.EnterprisePrivacySpan(mContext), 0);
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(OWNER);
         when(mDevicePolicyManager.getDeviceOwnerOrganizationName()).thenReturn(null);
-        assertThat(mProvider.getDeviceOwnerDisclosure(context)).isEqualTo(disclosure);
+        assertThat(mProvider.getDeviceOwnerDisclosure()).isEqualTo(disclosure);
 
         disclosure = new SpannableStringBuilder();
         disclosure.append(mResources.getString(R.string.do_disclosure_with_name,
-                DEVICE_OWNER_ORGANIZATION));
+                OWNER_ORGANIZATION));
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more),
-                new EnterprisePrivacyFeatureProviderImpl.EnterprisePrivacySpan(context), 0);
-        when(mDevicePolicyManager.getDeviceOwnerOrganizationName())
-                .thenReturn(DEVICE_OWNER_ORGANIZATION);
-        assertThat(mProvider.getDeviceOwnerDisclosure(context)).isEqualTo(disclosure);
+                new EnterprisePrivacyFeatureProviderImpl.EnterprisePrivacySpan(mContext), 0);
+        when(mDevicePolicyManager.getDeviceOwnerOrganizationName()).thenReturn(OWNER_ORGANIZATION);
+        assertThat(mProvider.getDeviceOwnerDisclosure()).isEqualTo(disclosure);
     }
 
     @Test
@@ -192,5 +198,104 @@ public final class EnterprisePrivacyFeatureProviderImplTest {
         when(mConnectivityManger.getGlobalProxy()).thenReturn(
                 ProxyInfo.buildDirectProxy("localhost", 123));
         assertThat(mProvider.isGlobalHttpProxySet()).isTrue();
+    }
+
+    @Test
+    public void testGetMaximumFailedPasswordsForWipeInPrimaryUser() {
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(null);
+        when(mDevicePolicyManager.getDeviceOwnerUserId()).thenReturn(UserHandle.USER_NULL);
+        assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInPrimaryUser()).isEqualTo(0);
+
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(OWNER);
+        when(mDevicePolicyManager.getDeviceOwnerUserId()).thenReturn(UserHandle.USER_SYSTEM);
+        when(mDevicePolicyManager.getMaximumFailedPasswordsForWipe(OWNER, UserHandle.USER_SYSTEM))
+                .thenReturn(10);
+        assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInPrimaryUser()).isEqualTo(10);
+    }
+
+    @Test
+    public void testGetMaximumFailedPasswordsForWipeInManagedProfile() {
+        when(mDevicePolicyManager.getProfileOwnerAsUser(MANAGED_PROFILE_USER_ID)).thenReturn(OWNER);
+        when(mDevicePolicyManager.getMaximumFailedPasswordsForWipe(OWNER, MANAGED_PROFILE_USER_ID))
+                .thenReturn(10);
+
+        assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInManagedProfile()).isEqualTo(0);
+
+        mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));
+        assertThat(mProvider.getMaximumFailedPasswordsBeforeWipeInManagedProfile()).isEqualTo(10);
+    }
+
+    @Test
+    public void testGetImeLabelIfOwnerSet() throws Exception {
+        final ApplicationInfo applicationInfo = mock(ApplicationInfo.class);
+        when(applicationInfo.loadLabel(mPackageManager)).thenReturn(IME_PACKAGE_LABEL);
+
+        Settings.Secure.putString(null, Settings.Secure.DEFAULT_INPUT_METHOD, IME_PACKAGE_ID);
+        when(mPackageManagerWrapper.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
+                .thenReturn(applicationInfo);
+
+        // IME not set by Device Owner.
+        when(mDevicePolicyManager.isCurrentInputMethodSetByOwner()).thenReturn(false);
+        assertThat(mProvider.getImeLabelIfOwnerSet()).isNull();
+
+        // Device Owner set IME to empty string.
+        when(mDevicePolicyManager.isCurrentInputMethodSetByOwner()).thenReturn(true);
+        Settings.Secure.putString(null, Settings.Secure.DEFAULT_INPUT_METHOD, null);
+        assertThat(mProvider.getImeLabelIfOwnerSet()).isNull();
+
+        // Device Owner set IME to nonexistent package.
+        Settings.Secure.putString(null, Settings.Secure.DEFAULT_INPUT_METHOD, IME_PACKAGE_ID);
+        when(mPackageManagerWrapper.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
+                .thenThrow(new PackageManager.NameNotFoundException());
+        assertThat(mProvider.getImeLabelIfOwnerSet()).isNull();
+
+        // Device Owner set IME to existent package.
+        resetAndInitializePackageManagerWrapper();
+        when(mPackageManagerWrapper.getApplicationInfoAsUser(IME_PACKAGE_ID, 0, MY_USER_ID))
+                .thenReturn(applicationInfo);
+        assertThat(mProvider.getImeLabelIfOwnerSet()).isEqualTo(IME_PACKAGE_LABEL);
+    }
+
+    @Test
+    public void testGetNumberOfOwnerInstalledCaCertsInCurrentUser() {
+        final UserHandle userHandle = new UserHandle(UserHandle.USER_SYSTEM);
+
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
+                .thenReturn(null);
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInCurrentUser()).isEqualTo(0);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
+                .thenReturn(new ArrayList<String>());
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInCurrentUser()).isEqualTo(0);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
+                .thenReturn(Arrays.asList(new String[] {"ca1", "ca2"}));
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInCurrentUser()).isEqualTo(2);
+    }
+
+    @Test
+    public void testGetNumberOfOwnerInstalledCaCertsInManagedProfile() {
+        final UserHandle userHandle = new UserHandle(MANAGED_PROFILE_USER_ID);
+        final UserInfo managedProfile =
+                new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE);
+
+        mProfiles.add(managedProfile);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
+                .thenReturn(null);
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile()).isEqualTo(0);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
+                .thenReturn(new ArrayList<String>());
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile()).isEqualTo(0);
+        when(mDevicePolicyManager.getOwnerInstalledCaCerts(userHandle))
+                .thenReturn(Arrays.asList(new String[] {"ca1", "ca2"}));
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile()).isEqualTo(2);
+
+        mProfiles.remove(managedProfile);
+        assertThat(mProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile()).isEqualTo(0);
+    }
+
+    private void resetAndInitializePackageManagerWrapper() {
+        reset(mPackageManagerWrapper);
+        when(mPackageManagerWrapper.hasSystemFeature(PackageManager.FEATURE_DEVICE_ADMIN))
+                .thenReturn(true);
+        when(mPackageManagerWrapper.getPackageManager()).thenReturn(mPackageManager);
     }
 }

@@ -16,9 +16,13 @@
 
 package com.android.settings.enterprise;
 
+import android.annotation.NonNull;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.os.UserHandle;
 import android.support.annotation.Nullable;
+
+import java.util.List;
 
 public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrapper {
     private final DevicePolicyManager mDpm;
@@ -28,8 +32,23 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     }
 
     @Override
+    public int getMaximumFailedPasswordsForWipe(@Nullable ComponentName admin, int userHandle) {
+        return mDpm.getMaximumFailedPasswordsForWipe(admin, userHandle);
+    }
+
+    @Override
     public ComponentName getDeviceOwnerComponentOnAnyUser() {
         return mDpm.getDeviceOwnerComponentOnAnyUser();
+    }
+
+    @Override
+    public int getDeviceOwnerUserId() {
+        return mDpm.getDeviceOwnerUserId();
+    }
+
+    @Override
+    public @Nullable ComponentName getProfileOwnerAsUser(final int userId) {
+        return mDpm.getProfileOwnerAsUser(userId);
     }
 
     @Override
@@ -56,5 +75,15 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     @Override
     public long getLastNetworkLogRetrievalTime() {
         return mDpm.getLastNetworkLogRetrievalTime();
+    }
+
+    @Override
+    public boolean isCurrentInputMethodSetByOwner() {
+        return mDpm.isCurrentInputMethodSetByOwner();
+    }
+
+    @Override
+    public List<String> getOwnerInstalledCaCerts(@NonNull UserHandle user) {
+        return mDpm.getOwnerInstalledCaCerts(user);
     }
 }

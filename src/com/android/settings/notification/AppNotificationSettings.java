@@ -20,13 +20,9 @@ import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 
 import android.app.Activity;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -42,11 +38,9 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.MasterSwitchPreference;
-import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.text.Collator;
@@ -63,19 +57,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
 
     private static final String KEY_BLOCK = "block";
 
-    private DashboardFeatureProvider mDashboardFeatureProvider;
     private List<NotificationChannelGroup> mChannelGroupList;
     private List<PreferenceCategory> mChannelGroups = new ArrayList();
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (mAppRow == null) return;
-        if (!mDashboardFeatureProvider.isEnabled()) {
-            AppHeader.createAppHeader(this, mAppRow.icon, mAppRow.label, mAppRow.pkg, mAppRow.uid,
-                    mAppRow.settingsIntent);
-        }
-    }
 
     @Override
     public int getMetricsCategory() {
@@ -91,8 +74,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             return;
         }
         final Activity activity = getActivity();
-        mDashboardFeatureProvider =
-                FeatureFactory.getFactory(activity).getDashboardFeatureProvider(activity);
 
         addPreferencesFromResource(R.xml.app_notification_settings);
         getPreferenceScreen().setOrderingAsAdded(true);
@@ -121,20 +102,18 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 }
             }.execute();
         }
-        if (mDashboardFeatureProvider.isEnabled()) {
-            final Preference pref = FeatureFactory.getFactory(activity)
-                    .getApplicationFeatureProvider(activity)
-                    .newAppHeaderController(this /* fragment */, null /* appHeader */)
-                    .setIcon(mAppRow.icon)
-                    .setLabel(mAppRow.label)
-                    .setPackageName(mAppRow.pkg)
-                    .setUid(mAppRow.uid)
-                    .setAppNotifPrefIntent(mAppRow.settingsIntent)
-                    .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                            AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
-                    .done(getPrefContext());
-            getPreferenceScreen().addPreference(pref);
-        }
+        final Preference pref = FeatureFactory.getFactory(activity)
+            .getApplicationFeatureProvider(activity)
+            .newAppHeaderController(this /* fragment */, null /* appHeader */)
+            .setIcon(mAppRow.icon)
+            .setLabel(mAppRow.label)
+            .setPackageName(mAppRow.pkg)
+            .setUid(mAppRow.uid)
+            .setAppNotifPrefIntent(mAppRow.settingsIntent)
+            .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
+                AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
+            .done(getPrefContext());
+        getPreferenceScreen().addPreference(pref);
     }
 
     @Override
@@ -161,12 +140,12 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         } else {
             for (NotificationChannelGroup group : mChannelGroupList) {
                 PreferenceCategory groupCategory = new PreferenceCategory(getPrefContext());
-                if (group.getName() == null) {
+                if (group.getId() == null) {
                     groupCategory.setTitle(mChannelGroupList.size() > 1
                             ? R.string.notification_channels_other
                             : R.string.notification_channels);
                 } else {
-                    groupCategory.setTitle(group.getName());
+                    groupCategory.setTitle(getNotificationGroupLabel(group));
                 }
                 groupCategory.setKey(group.getId());
                 groupCategory.setOrderingAsAdded(true);
@@ -182,12 +161,13 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                             getPrefContext());
                     channelPref.setDisabledByAdmin(mSuspendedAppsAdmin);
                     channelPref.setKey(channel.getId());
-                    channelPref.setTitle(channel.getName());
+                    channelPref.setTitle(getNotificationChannelLabel(channel));
                     channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
+                    channelPref.setMultiLine(true);
 
                     if (channel.isDeleted()) {
-                        channelPref.setTitle(
-                                getString(R.string.deleted_channel_name, channel.getName()));
+                        channelPref.setTitle(getString(R.string.deleted_channel_name,
+                                getNotificationChannelLabel(channel)));
                         channelPref.setEnabled(false);
                     } else {
                         channelPref.setSummary(getImportanceSummary(channel.getImportance()));
@@ -274,8 +254,10 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             if (left.isDeleted() != right.isDeleted()) {
                 return Boolean.compare(left.isDeleted(), right.isDeleted());
             }
-            if (!Objects.equals(left.getName(), right.getName())) {
-                return sCollator.compare(left.getName().toString(), right.getName().toString());
+            CharSequence leftName = getNotificationChannelLabel(left);
+            CharSequence rightName = getNotificationChannelLabel(right);
+            if (!Objects.equals(leftName, rightName)) {
+                return sCollator.compare(leftName.toString(), rightName.toString());
             }
             return left.getId().compareTo(right.getId());
         }
@@ -293,10 +275,11 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     } else if (right.getId() == null && left.getId() != null) {
                         return -1;
                     }
+                    CharSequence leftName = getNotificationGroupLabel(left);
+                    CharSequence rightName = getNotificationGroupLabel(right);
                     // sort rest of the groups by name
-                    if (!Objects.equals(left.getName(), right.getName())) {
-                        return sCollator.compare(left.getName().toString(),
-                                right.getName().toString());
+                    if (!Objects.equals(leftName, rightName)) {
+                        return sCollator.compare(leftName.toString(), rightName.toString());
                     }
                     return left.getId().compareTo(right.getId());
                 }

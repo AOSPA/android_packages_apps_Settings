@@ -32,8 +32,8 @@ import android.view.LayoutInflater;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.deviceinfo.storage.StorageStatsSource;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
+import com.android.settingslib.applications.StorageStatsSource;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -99,9 +99,10 @@ public class MusicViewHolderControllerTest {
         verify(mFragment).startActivity(argumentCaptor.capture());
         Intent intent = argumentCaptor.getValue();
 
-        assertThat(intent.getAction()).isEqualTo(DocumentsContract.ACTION_BROWSE);
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
         assertThat(intent.getData()).isEqualTo(DocumentsContract.buildRootUri(
                 "com.android.providers.media.documents",
                 "audio_root"));
+        assertThat(intent.getType()).isEqualTo(DocumentsContract.Root.MIME_TYPE_ITEM);
     }
 }

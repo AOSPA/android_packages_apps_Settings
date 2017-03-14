@@ -2364,6 +2364,10 @@
     <string name="security_patch">Android security patch level</string>
     <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
     <string name="model_info">Model</string>
+    <!-- About phone screen, dialog title for showing hardware information such as model, serial number, etc.[CHAR LIMIT=60] -->
+    <string name="hardware_info">Model &amp; hardware</string>
+    <!-- Label for device's hardware revision value [CHAR LIMIT=40] -->
+    <string name="hardware_revision">Hardware version</string>
     <!-- About phone screen, fcc equipment id label  [CHAR LIMIT=40] -->
     <string name="fcc_equipment_id">Equipment ID</string>
     <!-- About phone screen,  setting option name  [CHAR LIMIT=40] -->
@@ -3012,6 +3016,10 @@
     <string name="sms_change_default_dialog_title" translatable="true">Change SMS app?</string>
     <string name="sms_change_default_dialog_text" translatable="true">Use <xliff:g id="new_app">%1$s</xliff:g> instead of <xliff:g id="current_app">%2$s</xliff:g> as your SMS app?</string>
     <string name="sms_change_default_no_previous_dialog_text" translatable="true">Use <xliff:g id="new_app">%s</xliff:g> as your SMS app?</string>
+
+    <!-- Network Scorer Picker title [CHAR LIMIT=40]-->
+    <string name="network_scorer_picker_title">Network Scorer</string>
+    <string name="network_scorer_picker_none_preference">None</string>
 
     <!-- Wifi Assistant change wi-fi assistant title.  [CHAR LIMIT=40] -->
     <string name="network_scorer_change_active_dialog_title">Change Wi\u2011Fi assistant?</string>
@@ -3751,7 +3759,9 @@
     <!-- On Text & language settings screen, setting summary for the Auto-punctuate setting. -->
     <string name="auto_punctuate_summary">Press Space key twice to insert \u0022.\u0022</string>
     <!-- On Security & location settings screen, setting check box name. Title of the checkbox to set whether password edit fields will show the most recent character typed and then hide it, or just hide it right away.  By hide, I mean mask it out. -->
-    <string name="show_password">Make passwords visible</string>
+    <string name="show_password">Show passwords</string>
+    <!-- On Security & location settings screen. This is a short summary text describing what "Show passwords" setting does -->
+    <string name="show_password_summary">Display characters briefly as you type</string>
     <!-- Warning message about security implications of enabling an input method, displayed as a dialog
          message when the user selects to enable an IME. -->
     <string name="ime_security_warning">This input method may be able to collect
@@ -3974,18 +3984,22 @@
     <string name="vision_settings_title">Vision Settings</string>
     <!-- Settings description for a brief version of Vision-Related Accessibility Settings. Tells the user that they can adjust these settings now to help them through the remainder of the Setup Wizard and that they can later be changed in Settings. Displayed in Setup Wizard only. [CHAR LIMIT=none] -->
     <string name="vision_settings_description">You can customize this device to fit your needs. These accessibility features can be changed later in Settings.</string>
-    <!-- Title for the accessibility preference category of accessibility services. [CHAR LIMIT=25] -->
-    <string name="accessibility_services_title">Services</string>
+    <!-- Title for the accessibility preference category of screen reader services and settings. [CHAR LIMIT=50] -->
+    <string name="screen_reader_category_title">Screen readers</string>
+    <!-- Title for the accessibility preference category of audio services and settings. [CHAR LIMIT=50] -->
+    <string name="audio_and_captions_category_title">Audio &amp; on-screen text</string>
+    <!-- Title for the accessibility preference category of display services and settings. [CHAR LIMIT=50] -->
+    <string name="display_category_title">Display</string>
+    <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
+    <string name="interaction_control_category_title">Interaction controls</string>
+    <!-- Title for the accessibility preference category of services downloaded by the user. [CHAR LIMIT=50] -->
+    <string name="user_installed_services_category_title">Downloaded services</string>
     <!-- Title for the Talkback Accessibility Service. Displayed on the Accessibility Settings screen in Setup Wizard. [CHAR_LIMIT=25] -->
     <string name="talkback_title">Talkback</string>
     <!-- Summary for the Talkback Accessibility Service. Lets the user know that Talkback is a screenreader and that it is usually most helpful to blind and low vision users and whether the service is on. [CHAR_LIMIT=none] -->
     <string name="talkback_summary">Screen reader primarily for people with blindness and low vision</string>
     <!-- Summary for the Select to Speak Accessibility Service. [CHAR_LIMIT=none] -->
     <string name="select_to_speak_summary">Tap items on your screen to hear them read aloud</string>
-    <!-- Title for the accessibility preference category of system related preferences. [CHAR LIMIT=25] -->
-    <string name="accessibility_system_title">System</string>
-    <!-- Title for the accessibility preference category of display related preferences. [CHAR LIMIT=25] -->
-    <string name="accessibility_display_title">Display</string>
     <!-- Title for the accessibility preference screen to enable video captioning. [CHAR LIMIT=35] -->
     <string name="accessibility_captioning_title">Captions</string>
     <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
@@ -4176,10 +4190,10 @@
     <string name="disable_service_message">Tapping OK will
         stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>.</string>
 
-    <!-- Title for the prompt shown as a placeholder if no accessibility serivices are installed. [CHAR LIMIT=50] -->
+    <!-- Title for the prompt shown as a placeholder if no accessibility services are installed. [CHAR LIMIT=50] -->
     <string name="accessibility_no_services_installed">No services installed</string>
 
-    <!-- Default description for an accessibility serivice if the latter doesn't provide one. [CHAR LIMIT=NONE] -->
+    <!-- Default description for an accessibility service if the latter doesn't provide one. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_default_description">No description provided.</string>
 
     <!-- Accessibility settings: button for lauching settings for an accessibility service -->
@@ -4200,7 +4214,7 @@
     <!-- Title for print service settings screen [CHAR LIMIT=25] -->
     <string name="print_settings_title">Print services</string>
 
-    <!-- Title for the prompt shown as a placeholder if no print serivices are installed. [CHAR LIMIT=50] -->
+    <!-- Title for the prompt shown as a placeholder if no print services are installed. [CHAR LIMIT=50] -->
     <string name="print_no_services_installed">No services installed</string>
 
     <!-- Title for the prompt shown as a placeholder if no printers are found while searching. [CHAR LIMIT=50] -->
@@ -4284,6 +4298,11 @@
     <string name="power_discharge_remaining"><xliff:g id="remain">%1$s</xliff:g> remaining</string>
     <!-- Display time remaining until battery is charged [CHAR_LIMIT=60] -->
     <string name="power_charge_remaining"><xliff:g id="until_charged">%1$s</xliff:g> to charge</string>
+
+    <!-- Title for the background activity setting, which allows a user to control whether an app can run in the background [CHAR_LIMIT=40] -->
+    <string name="background_activity_title">Background activity</string>
+    <!-- Summary for the background activity [CHAR_LIMIT=120] -->
+    <string name="background_activity_summary">Allow the app to run in the background</string>
 
     <!-- Title for the screen usage in power use UI [CHAR_LIMIT=40] -->
     <string name="device_screen_usage">Screen usage</string>
@@ -5656,7 +5675,7 @@
     <!-- Title for the emergency info preference [CHAR LIMIT=40] -->
     <string name="emergency_info_title">Emergency information</string>
     <!-- Summary for the emergency info preference [CHAR LIMIT=40] -->
-    <string name="emergency_info_summary">Information about <xliff:g id="user_name" example="Jason">%1$s</xliff:g></string>
+    <string name="emergency_info_summary">Info &amp; contacts for <xliff:g id="user_name" example="Jason">%1$s</xliff:g></string>
 
     <!-- Application Restrictions screen title [CHAR LIMIT=45] -->
     <string name="application_restrictions">Allow apps and content</string>
@@ -6068,6 +6087,7 @@
     <string name="keywords_unification">work profile, managed profile, unify, unification, work, profile</string>
     <string name="keywords_gesture">gesture</string>
     <string name="keywords_payment_settings">pay, tap, payments</string>
+    <string name="keywords_backup">backup, back up</string>
 
     <!-- NFC Wi-Fi pairing/setup strings-->
 
@@ -6895,7 +6915,7 @@
     <string name="filter_all_apps">All apps</string>
     <!-- Label for showing enabled apps in list [CHAR LIMIT=30] -->
     <string name="filter_enabled_apps">Installed apps</string>
-    <!-- Label for showing instant apps in list [CHAR LIMIT=30] -->
+    <!-- Label for showing instant apps in list [CHAR LIMIT=40] -->
     <string name="filter_instant_apps">Instant apps</string>
     <!-- Label for showing personal apps in list [CHAR LIMIT=30] -->
     <string name="filter_personal_apps">Personal</string>
@@ -6903,8 +6923,6 @@
     <string name="filter_work_apps">Work</string>
     <!-- Label for showing apps with blocked notifications in list [CHAR LIMIT=30] -->
     <string name="filter_notif_blocked_apps">Blocked</string>
-    <!-- Label for showing apps with domain URLs (data URI with http or https) in list [CHAR LIMIT=30] -->
-    <string name="filter_with_domain_urls_apps">With domain URLs</string>
 
     <!-- Title for advanced application management settings [CHAR LIMIT=30] -->
     <string name="advanced_apps">Advanced</string>
@@ -7560,6 +7578,9 @@
     <!-- Toast message letting the user know the color temperature setting is not immediate -->
     <string name="color_temperature_toast">To apply color change, turn off screen</string>
 
+    <!-- Toast message letting the user know the how to trigger telephony monitor -->
+    <string name="telephony_monitor_toast">To apply telephony monitor change, reboot device</string>
+
     <!-- Name of the setting to disable the automatic update -->
     <string name="ota_disable_automatic_update">Automatic system updates</string>
 
@@ -8050,6 +8071,9 @@
     <!-- Summary text for the assist gesture [CHAR LIMIT=160]-->
     <string name="assist_gesture_summary"></string>
 
+    <!-- Title text for the assist gesture sensitivity setting [CHAR LIMIT=NONE]-->
+    <string name="assist_gesture_sensitivity_title">Sensitivity</string>
+
     <!-- Switch text for each gesture setting state -->
     <string name="gesture_setting_on">On</string>
     <string name="gesture_setting_off">Off</string>
@@ -8098,62 +8122,58 @@
 
     <!-- Enterprise Privacy --> <skip />
 
-    <!-- Title of setting on main settings screen. This will take the user to a screen with information about his/her privacy on a managed device. Shown on enterprise-managed devices only. -->
-    <string name="enterprise_privacy_settings">Privacy</string>
+    <!-- Title of setting on security settings screen. This will take the user to a screen with information about admin powers and their impact on the user's privacy on a managed device. Shown on enterprise-managed devices only. -->
+    <string name="enterprise_privacy_settings">Device management</string>
+    <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
+    <string name="enterprise_privacy_settings_summary">View all settings applied by your admin</string>
     <!-- Enterprise Privacy settings activity title -->
-    <string name="enterprise_privacy_settings_title">Privacy</string>
-    <!-- Enterprise Privacy settings activity header, summarizing the powers that the admin has. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_header">To provide access to your work data, your organization may change settings and install software on your device, which could cause some of your personal content to be visible to your admin. Contact your organization\'s admin for more details.</string>
-    <!-- Title for the 'What types of information can your organization see?' preference category. [CHAR LIMIT=60] -->
-    <string name="enterprise_privacy_exposure_category">What types of information can your organization see?</string>
-    <!-- Title for the 'What changes affect what your organization can see?' preference category. [CHAR LIMIT=60] -->
-    <string name="enterprise_privacy_exposure_changes_category">What changes affect what your organization can see?</string>
-    <!-- Title for the 'What actions may impact your access to this device?' preference category. [CHAR LIMIT=60] -->
-    <string name="enterprise_privacy_device_access_category">What actions may impact your access to this device?</string>
+    <string name="enterprise_privacy_settings_title">Device management</string>
+    <!-- Enterprise Privacy settings activity footer, summarizing the powers that the admin has. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_footer">To provide access to your work data, your organization may change settings and install software on your device. \n\nFor more details, contact your organization\'s admin.</string>
+    <!-- Title for the 'Types of information your organization can see' preference category. [CHAR LIMIT=60] -->
+    <string name="enterprise_privacy_exposure_category">Types of information your organization can see</string>
+    <!-- Title for the 'Changes made by your organization’s admin' preference category. [CHAR LIMIT=60] -->
+    <string name="enterprise_privacy_exposure_changes_category">Changes made by your organization\'s admin</string>
+    <!-- Title for the 'Your access to this device' preference category. [CHAR LIMIT=60] -->
+    <string name="enterprise_privacy_device_access_category">Your access to this device</string>
     <!-- Label explaining that the admin can see data associated with his/her work account. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_enterprise_data">Data associated with your work account, such as email and calendar</string>
-    <!-- Label explaining that the admin can see all apps installed on the device. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_number_installed_packages_default">List of all apps on your device</string>
-    <!-- Label explaining that the admin can see all apps installed on the device. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_installed_packages">
-        <item quantity="one">List of all <xliff:g id="count">%d</xliff:g> app on your device</item>
-        <item quantity="other">List of all <xliff:g id="count">%d</xliff:g> apps on your device</item>
+    <!-- Label explaining that the admin can see apps installed on the device. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_installed_packages">List of apps on your device</string>
+    <!-- Summary indicating the number of apps that a label (e.g. installed apps or apps granted a particular permission) refers to. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_packages">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps</item>
+    </plurals>
+    <!-- Summary indicating the number of apps that a label (e.g. installed apps or apps granted a particular permission) refers to. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_packages_actionable">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app. Tap to view.</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps. Tap to view.</item>
     </plurals>
     <!-- Label explaining that the admin can see app usage statistics. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_usage_stats">Usage (time spent and amount of data used) of each app on your device</string>
+    <string name="enterprise_privacy_usage_stats">Time and data spent in each app on your device</string>
     <!-- Label explaining that the admin can retrieve network logs on the device. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_network_logs">Traffic logs on your device</string>
+    <string name="enterprise_privacy_network_logs">Network traffic logs on your device</string>
     <!-- Label explaining that the admin can request bug reports on the device. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_bug_reports">Your most recent bug report</string>
+    <string name="enterprise_privacy_bug_reports">Most recent bug report</string>
     <!-- Label explaining that the admin can retrieve security on from the device. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_security_logs">Your most recent security log</string>
-    <!-- Label indicating that the date at which the admin last took a particular action was "never" (i.e. the admin never took the action so far). -->
-    <string name="enterprise_privacy_never">Never</string>
-    <!-- Label indicating how many apps were installed on the device by the admin. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_enterprise_installed_packages">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app installed by your admin</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps installed by your admin</item>
-    </plurals>
-    <!-- Label indicating how many apps were granted permission to access the device's location by the admin. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_location_access_packages">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app allowed access to your location by your admin</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps allowed access to your location by your admin</item>
-    </plurals>
-    <!-- Label indicating how many apps were granted permission to access the microphone by the admin. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_microphone_access_packages">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app allowed access to your microphone by your admin</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps allowed access to your microphone by your admin</item>
-    </plurals>
-    <!-- Label indicating how many apps were granted permission to access the camera by the admin. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_camera_access_packages">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> app allowed access to your camera by your admin</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps allowed access to your camera by your admin</item>
-    </plurals>
-    <!-- Label indicating how many apps were set as default defaults for common actions (e.g. open browser, send e-mail) by the admin. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_number_enterprise_set_default_apps">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> default app set by your admin</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> default apps set by your admin</item>
-    </plurals>
+    <string name="enterprise_privacy_security_logs">Most recent security log</string>
+    <!-- Label indicating that the the admin never took a given action so far (e.g. did not retrieve security logs or request bug reports). -->
+    <string name="enterprise_privacy_none">None</string>
+    <!-- Label indicating that the admin installed one or more apps on the device. -->
+    <string name="enterprise_privacy_enterprise_installed_packages">Apps installed</string>
+    <!-- Label indicating that the admin granted one or more apps access to the device's location. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_location_access">Apps allowed to access your location</string>
+    <!-- Label indicating that the admin granted one or more apps access to the microphone. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_microphone_access">Apps allowed to access your microphone</string>
+    <!-- Label indicating that the admin granted one or more apps access to the camera. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_camera_access">Apps allowed to access your camera</string>
+    <!-- Label indicating that the admin set one or more apps as defaults for common actions (e.g. open browser, send e-mail). [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_enterprise_set_default_apps">Default apps set</string>
+    <!-- Label explaining that the current input method was set by the admin. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_input_method">Default keyboard</string>
+    <!-- Summary indicating the input method set by the admin. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_input_method_name">Set to <xliff:g id="app_label" example="Example Keyboard">%s</xliff:g></string>
     <!-- Label explaining that an always-on VPN was set by the admin for the entire device. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_always_on_vpn_device">Always-on VPN turned on</string>
     <!-- Label explaining that an always-on VPN was set by the admin in the personal profile. [CHAR LIMIT=NONE] -->
@@ -8162,12 +8182,46 @@
     <string name="enterprise_privacy_always_on_vpn_work">Always-on VPN turned on in your work profile</string>
     <!-- Label explaining that a global HTTP proxy was set by the admin. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_global_http_proxy">Global HTTP proxy set</string>
+    <!-- Label explaining that the admin installed trusted CA certificates for the current user. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_ca_certs_user">
+        <item quantity="one">Trusted CA Certificate installed</item>
+        <item quantity="other">Trusted CA Certificates installed</item>
+    </plurals>
+    <!-- Label explaining that the admin installed trusted CA certificates for the personal profile. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_ca_certs_personal">
+        <item quantity="one">Trusted CA Certificate installed in the personal profile</item>
+        <item quantity="other">Trusted CA Certificates installed in the personal profile</item>
+    </plurals>
+    <!-- Summary indicating the number of trusted CA certificates installed by the admin. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_ca_certs">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> certificate</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> certificates</item>
+    </plurals>
+    <!-- Summary indicating the number of trusted CA certificates installed by the admin. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_ca_certs_actionable">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> certificate. Tap to view.</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> certificates. Tap to view.</item>
+    </plurals>
+    <!-- Label explaining that the admin installed trusted CA certificates for the work profile. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_ca_certs_work">
+        <item quantity="one">Trusted CA Certificate installed in the work profile</item>
+        <item quantity="other">Trusted CA Certificates installed in the work profile</item>
+    </plurals>
     <!-- Label explaining that the admin can lock the device and change the user's password. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_lock_device">Admin can lock device and reset password</string>
+    <string name="enterprise_privacy_lock_device">Admin can lock the device and reset password</string>
     <!-- Label explaining that the admin can wipe the device remotely. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_wipe_device">Admin can delete all device data</string>
+    <!-- Label explaining that the admin configured the device to wipe itself when the password is mistyped too many times. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_failed_password_wipe_device">Failed password attempts before deleting all device data</string>
+    <!-- Label explaining that the admin configured the work profile to wipe itself when the password is mistyped too many times. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_failed_password_wipe_work">Failed password attempts before deleting work profile data</string>
+    <!-- Summary indicating the number of mistyped passwords after which the device or work profile wipes itself. [CHAR LIMIT=NONE] -->
+    <plurals name="enterprise_privacy_number_failed_password_wipe">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> attempt</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> attempts</item>
+    </plurals>
     <!-- Message indicating that the device is enterprise-managed by a Device Owner [CHAR LIMIT=NONE] -->
-    <string name="do_disclosure_generic">This device is managed.</string>
+    <string name="do_disclosure_generic">This device is managed by your organization.</string>
     <!-- Message indicating that the device is enterprise-managed by a Device Owner [CHAR LIMIT=NONE] -->
     <string name="do_disclosure_with_name">This device is managed by <xliff:g id="organization_name" example="Foo, Inc.">%s</xliff:g>.</string>
     <!-- Message indicating that the device is enterprise-managed: Space that separates the main text and the "learn more" link that follows it. [CHAR LIMIT=NONE] -->
@@ -8176,10 +8230,10 @@
     <string name="do_disclosure_learn_more">Learn more</string>
 
     <!-- Preference label for the Photos & Videos storage section. [CHAR LIMIT=50] -->
-    <string name="storage_photos_videos">Photos &amp; Videos</string>
+    <string name="storage_photos_videos">Photos &amp; videos</string>
 
     <!-- Preference label for the Music & Audio storage section. [CHAR LIMIT=50] -->
-    <string name="storage_music_audio">Music &amp; Audio</string>
+    <string name="storage_music_audio">Music &amp; audio</string>
 
     <!-- Preference label for the Games storage section. [CHAR LIMIT=50] -->
     <string name="storage_games">Games</string>
@@ -8191,7 +8245,7 @@
     <string name="storage_files">Files</string>
 
     <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
-    <string name="storage_settings_2" >Phone Storage</string>
+    <string name="storage_settings_2">Phone storage</string>
 
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
     <string name="storage_size_large_alternate"><xliff:g id="number" example="128">^1</xliff:g><small> <xliff:g id="unit" example="KB">^2</xliff:g></small></string>
@@ -8200,22 +8254,11 @@
     <!-- The percent of storage used by a storage volume. Exposed inside of a donut graph. [CHAR LIMIT=4]-->
     <string name="storage_percent_used"><xliff:g id="percent" example="50%">%1$s</xliff:g>%%</string>
 
-    <!-- Indicates if the automatic storage manager is enabled or not. [CHAR_LIMIT=40] -->
-    <string name="storage_manager_indicator">Storage Manager: <xliff:g id="status" example="on">^1</xliff:g></string>
-
-    <!-- Off status for the automatic storage manager. [CHAR_LIMIT=10] -->
-    <string name="storage_manager_indicator_off">Off</string>
-
-    <!-- On status for the automatic storage manager. [CHAR_LIMIT=10] -->
-    <string name="storage_manager_indicator_on">On</string>
-
     <!-- Title of games app storage screen [CHAR LIMIT=30] -->
     <string name="game_storage_settings">Games</string>
 
     <!-- Title for audio files preference. [CHAR LIMIT=50] -->
     <string name="audio_files_title">Audio files</string>
-    <!-- Title for the Audio storage view. [CHAR LIMIT=50] -->
-    <string name="audio_storage_title">Music</string>
 
     <!-- UI webview setting: WebView uninstalled-for-user explanatory text [CHAR LIMIT=30] -->
     <string name="webview_uninstalled_for_user">(uninstalled for user <xliff:g id="user" example="John Doe">%s</xliff:g>)</string>
@@ -8238,5 +8281,17 @@
     <string name="default_theme">Default</string>
     <!-- Temporary reboot string, will be removed -->
     <string name="change_theme_reboot" translatable="false">Changing the theme requires a restart.</string>
+
+    <!-- Indicates if the automatic storage manager is enabled or not. [CHAR_LIMIT=40] -->
+    <string name="storage_manager_indicator">Storage Manager: <xliff:g id="status" example="on">^1</xliff:g></string>
+
+    <!-- Off status for the automatic storage manager. [CHAR_LIMIT=10] -->
+    <string name="storage_manager_indicator_off">Off</string>
+
+    <!-- On status for the automatic storage manager. [CHAR_LIMIT=10] -->
+    <string name="storage_manager_indicator_on">On</string>
+
+    <!-- Added as the value of a header field indicating this is an instant app (as opposed to installed normally) -->
+    <string name="install_type_instant">Instant app</string>
 
 </resources>

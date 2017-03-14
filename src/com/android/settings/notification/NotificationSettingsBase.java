@@ -25,6 +25,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
+import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -247,5 +248,26 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             default:
                 return getContext().getString(R.string.notification_importance_high);
         }
+    }
+
+    protected CharSequence getNotificationGroupLabel(NotificationChannelGroup group) {
+        return getLabel(group.getName(), group.getNameResId());
+    }
+
+    protected CharSequence getNotificationChannelLabel(NotificationChannel channel) {
+        return getLabel(channel.getName(), channel.getNameResId());
+    }
+
+    private CharSequence getLabel(CharSequence name, int nameResId) {
+        if (!TextUtils.isEmpty(name)) {
+            return name;
+        }
+        try {
+            ApplicationInfo info = mPm.getApplicationInfoAsUser(mAppRow.pkg, 0, mAppRow.userId);
+            return mPm.getText(mAppRow.pkg, nameResId, info);
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

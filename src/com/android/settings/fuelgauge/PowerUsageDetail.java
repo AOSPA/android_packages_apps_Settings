@@ -34,7 +34,6 @@ import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
-import android.provider.SearchIndexableResource;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
@@ -54,21 +53,20 @@ import com.android.settings.DisplaySettings;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.WirelessSettings;
 import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiSettings;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickListener {
@@ -327,13 +325,11 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
 
     private PackageManager mPm;
     private DevicePolicyManager mDpm;
-    private int mUsageSince;
     private int[] mTypes;
     private int mUid;
     private double[] mValues;
     private Button mForceStopButton;
     private Button mReportButton;
-    private long mStartTime;
     private BatterySipper.DrainType mDrainType;
     private double mNoCoverage; // Percentage of time that there was no coverage
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
@@ -379,7 +375,6 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
     @Override
     public void onResume() {
         super.onResume();
-        mStartTime = android.os.Process.getElapsedCpuTime();
         checkForceStop();
         if (mHighPower != null) {
             mHighPower.setSummary(HighPowerDetail.getSummary(getActivity(), mApp.packageName));
@@ -400,7 +395,11 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
-        return null;
+        final List<PreferenceController> controllers = new ArrayList<>();
+        final int uid = getArguments().getInt(EXTRA_UID, 0);
+        controllers.add(new BackgroundActivityPreferenceController(context, uid));
+
+        return controllers;
     }
 
     @Override
@@ -414,7 +413,6 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
     private void createDetails() {
         final Bundle args = getArguments();
         Context context = getActivity();
-        mUsageSince = args.getInt(EXTRA_USAGE_SINCE, USAGE_SINCE_UNPLUGGED);
         mUid = args.getInt(EXTRA_UID, 0);
         mPackages = context.getPackageManager().getPackagesForUid(mUid);
         mDrainType = (BatterySipper.DrainType) args.getSerializable(EXTRA_DRAIN_TYPE);
@@ -514,29 +512,23 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
         if (pkg == null && mPackages != null) {
             pkg = mPackages[0];
         }
-        if (!FeatureFactory.getFactory(activity)
-                .getDashboardFeatureProvider(activity).isEnabled()) {
-            AppHeader.createAppHeader(this, appIcon, title, pkg, uid,
-                    mDrainType != DrainType.APP ? android.R.color.white : 0);
-        } else {
-            final PreferenceScreen screen = getPreferenceScreen();
-            final Preference appHeaderPref =
-                    findPreference(AppHeaderController.PREF_KEY_APP_HEADER);
-            if (appHeaderPref != null) {
-                return;
-            }
-            final Preference pref = FeatureFactory.getFactory(activity)
-                    .getApplicationFeatureProvider(activity)
-                    .newAppHeaderController(this, null /* appHeader */)
-                    .setIcon(appIcon)
-                    .setLabel(title)
-                    .setPackageName(pkg)
-                    .setUid(uid)
-                    .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                            AppHeaderController.ActionType.ACTION_NONE)
-                    .done(getPrefContext());
-            screen.addPreference(pref);
+        final PreferenceScreen screen = getPreferenceScreen();
+        final Preference appHeaderPref =
+            findPreference(AppHeaderController.PREF_KEY_APP_HEADER);
+        if (appHeaderPref != null) {
+            return;
         }
+        final Preference pref = FeatureFactory.getFactory(activity)
+            .getApplicationFeatureProvider(activity)
+            .newAppHeaderController(this, null /* appHeader */)
+            .setIcon(appIcon)
+            .setLabel(title)
+            .setPackageName(pkg)
+            .setUid(uid)
+            .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
+                AppHeaderController.ActionType.ACTION_NONE)
+            .done(getPrefContext());
+        screen.addPreference(pref);
     }
 
     @Override
@@ -571,7 +563,7 @@ public class PowerUsageDetail extends PowerUsageBase implements Button.OnClickLi
                         R.string.bluetooth_settings, null, null, 0);
                 break;
             case ACTION_WIRELESS_SETTINGS:
-                sa.startPreferencePanel(this, WirelessSettings.class.getName(), null,
+                sa.startPreferencePanel(this, NetworkDashboardFragment.class.getName(), null,
                         R.string.radio_controls_title, null, null, 0);
                 break;
             case ACTION_APP_DETAILS:

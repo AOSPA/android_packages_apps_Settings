@@ -95,7 +95,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(airplaneModePreferenceController);
         controllers.add(mobileNetworkPreferenceController);
-        controllers.add(new TetherPreferenceController(context));
+        controllers.add(new TetherPreferenceController(context, lifecycle));
         controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
         controllers.add(mobilePlanPreferenceController);
@@ -138,10 +138,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        return null;
-                    }
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.network_and_internet;
                     return Arrays.asList(sir);

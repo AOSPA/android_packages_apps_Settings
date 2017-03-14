@@ -40,9 +40,7 @@
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
         <!-- LockPatternView colors -->
-        <item name="*android:regularColor">@color/setup_lock_pattern_view_regular_color_dark</item>
-        <item name="*android:successColor">@color/setup_lock_pattern_view_success_color_dark</item>
-        <item name="*android:errorColor">@color/setup_lock_pattern_view_error_color_dark</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
     </style>
 
     <style name="SetupWizardTheme.Light" parent="SuwThemeGlif.Light">
@@ -62,10 +60,7 @@
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
-        <!-- LockPatternView colors -->
-        <item name="*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
-        <item name="*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
-        <item name="*android:errorColor">@color/setup_lock_pattern_view_error_color_light</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
     </style>
 
     <style name="SetupWizardTheme.Transparent" parent="SetupWizardTheme">
@@ -86,6 +81,7 @@
         <!-- Parent path frameworks/support/v14/preference/res/values/themes.xml -->
         <item name="android:scrollbars">vertical</item>
         <item name="apnPreferenceStyle">@style/ApnPreference</item>
+        <item name="footerPreferenceStyle">@style/FooterPreference</item>
         <item name="dialogPreferenceStyle">@style/SettingsDialogPreference</item>
         <item name="dropdownPreferenceStyle">@style/SettingsDropdownPreference</item>
         <item name="editTextPreferenceStyle">@style/EditTextPreference</item>
@@ -107,8 +103,10 @@
 
     <!-- Accessibility portion of Setup Wizard -->
     <style name="SetupWizardAccessibilityTheme" parent="Theme.SettingsBase">
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:colorPrimary">@color/material_blue_700</item>
         <item name="android:colorPrimaryDark">@color/material_blue_700</item>
+        <item name="android:actionBarTheme">@android:style/ThemeOverlay.Material.Dark.ActionBar</item>
         <item name="preferenceTheme">@style/PreferenceTheme</item>
         <item name="switchBarTheme">@style/SetupWizardAccessibilitySwitchBarTheme</item>
     </style>
@@ -152,10 +150,7 @@
         <!-- For all Alert Dialogs -->
         <item name="android:alertDialogTheme">@style/Theme.AlertDialog</item>
 
-        <!-- LockPatternView colors -->
-        <item name="*android:regularColor">@color/lock_pattern_view_regular_color</item>
-        <item name="*android:successColor">@color/lock_pattern_view_success_color</item>
-        <item name="*android:errorColor">@color/lock_pattern_view_error_color</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
     </style>
 
     <style name="Theme.SubSettings" parent="Theme.Settings">
@@ -201,10 +196,7 @@
         <item name="android:windowDrawsSystemBarBackgrounds">false</item>
         <item name="android:background">@android:color/black</item>
 
-        <!-- LockPatternView colors -->
-        <item name="*android:regularColor">@color/unlock_pattern_view_regular_color</item>
-        <item name="*android:successColor">@color/unlock_pattern_view_success_color</item>
-        <item name="*android:errorColor">@color/unlock_pattern_view_error_color</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Unlock</item>
     </style>
 
     <style name="ThemeOverlay.AlertDialog" parent="@android:style/ThemeOverlay.Material.Dialog.Alert">
@@ -227,7 +219,6 @@
     </style>
 
     <style name="Theme.ConfirmDeviceCredentials" parent="Theme.SubSettings">
-        <item name="android:windowLightStatusBar">false</item>
         <item name="confirmDeviceCredentialsSideMargin">@dimen/confirm_credentials_side_margin</item>
         <item name="confirmDeviceCredentialsTopMargin">@dimen/confirm_credentials_top_margin</item>
     </style>
@@ -240,15 +231,13 @@
         <item name="confirmDeviceCredentialsSideMargin">32dp</item>
         <item name="confirmDeviceCredentialsTopMargin">32dp</item>
 
-        <!-- LockPatternView colors -->
-        <item name="*android:regularColor">@color/lock_pattern_view_regular_color_dark</item>
-        <item name="*android:successColor">@color/lock_pattern_view_regular_color_dark</item>
-        <item name="*android:errorColor">@color/lock_pattern_view_error_color</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Dark</item>
 
         <item name="android:windowAnimationStyle">@style/ConfirmDeviceCredentialsAnimationStyle</item>
     </style>
+
     <style name="Theme.ConfirmDeviceCredentialsWork" parent="Theme.ConfirmDeviceCredentialsDark">
-        <item name="*android:regularColor">@*android:color/white</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Dark.Work</item>
         <item name="android:colorAccent">@*android:color/white</item>
     </style>
 

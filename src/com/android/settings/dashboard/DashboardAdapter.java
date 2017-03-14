@@ -146,8 +146,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             List<Tile> suggestions) {
         // TODO: Better place for tinting?
         final TypedArray a = mContext.obtainStyledAttributes(new int[]{
-                mDashboardFeatureProvider.isEnabled()
-                        ? android.R.attr.colorControlNormal : android.R.attr.colorAccent});
+                android.R.attr.colorControlNormal});
         int tintColor = a.getColor(0, mContext.getColor(android.R.color.white));
         a.recycle();
         for (int i = 0; i < categories.size(); i++) {
@@ -406,7 +405,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         popup.show();
     }
 
-    private void onBindSuggestionHeader(final DashboardItemHolder holder, DashboardData
+    @VisibleForTesting
+    void onBindSuggestionHeader(final DashboardItemHolder holder, DashboardData
             .SuggestionHeaderData data) {
         final boolean moreSuggestions = data.hasMoreSuggestions;
         final int undisplayedSuggestionCount = data.undisplayedSuggestionCount;
@@ -436,10 +436,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 final int suggestionMode;
                 if (moreSuggestions) {
                     suggestionMode = DashboardData.SUGGESTION_MODE_EXPANDED;
-                    List<Tile> expandedSuggestions = mDashboardData.getSuggestions().subList(
-                            DashboardData.DEFAULT_SUGGESTION_COUNT,
-                            mDashboardData.getSuggestions().size());
-                    for (Tile suggestion : expandedSuggestions) {
+
+                    for (Tile suggestion : mDashboardData.getSuggestions()) {
                         String suggestionId =
                                 DashboardAdapter.getSuggestionIdentifier(mContext, suggestion);
                         if (!mSuggestionsShownLogged.contains(suggestionId)) {

@@ -48,7 +48,6 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -93,7 +92,6 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     /* package */ static final int MENU_ID_WPS_PBC = Menu.FIRST;
     private static final int MENU_ID_WPS_PIN = Menu.FIRST + 1;
-    private static final int MENU_ID_SCAN = Menu.FIRST + 5;
     private static final int MENU_ID_CONNECT = Menu.FIRST + 6;
     private static final int MENU_ID_FORGET = Menu.FIRST + 7;
     private static final int MENU_ID_MODIFY = Menu.FIRST + 8;
@@ -166,7 +164,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     private Preference mSavedNetworksPreference;
     private LinkablePreference mStatusMessagePreference;
 
-    private MenuItem mScanMenuItem;
+    // For Search
+    private static final String DATA_KEY_REFERENCE = "main_toggle_wifi";
 
     /* End of "used in Wifi Setup context" */
 
@@ -194,7 +193,6 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         mConnectedAccessPointPreferenceCategory =
                 (PreferenceCategory) findPreference(PREF_KEY_CONNECTED_ACCESS_POINTS);
-        mConnectedAccessPointPreferenceCategory.setVisible(false); // initially hidden
 
         mAccessPointsPreferenceCategory =
                 (PreferenceCategory) findPreference(PREF_KEY_ACCESS_POINTS);
@@ -370,26 +368,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // If the user is not allowed to configure wifi, do not show the menu.
-        if (isUiRestricted()) return;
-
-        addOptionsMenuItems(menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    /**
-     * @param menu
-     */
-    void addOptionsMenuItems(Menu menu) {
-        final boolean wifiIsEnabled = mWifiTracker.isWifiEnabled();
-        mScanMenuItem = menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.menu_stats_refresh)
-                .setIcon(com.android.internal.R.drawable.ic_menu_refresh);
-        mScanMenuItem.setEnabled(wifiIsEnabled)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-    }
-
-    @Override
     public int getMetricsCategory() {
         return MetricsEvent.WIFI;
     }
@@ -440,10 +418,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                 */
             case MENU_ID_WPS_PIN:
                 showDialog(WPS_PIN_DIALOG_ID);
-                return true;
-            case MENU_ID_SCAN:
-                mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_FORCE_SCAN);
-                mWifiTracker.forceScan();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -717,9 +691,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                     mAccessPointsPreferenceCategory.addPreference(mSeeAllNetworksPreference);
                 }
                 setConfigureWifiSettingsVisibility();
-                if (mScanMenuItem != null) {
-                    mScanMenuItem.setEnabled(true);
-                }
                 break;
 
             case WifiManager.WIFI_STATE_ENABLING:
@@ -737,9 +708,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                 setOffMessage();
                 setConfigureWifiSettingsVisibility();
                 setProgressBarVisible(false);
-                if (mScanMenuItem != null) {
-                    mScanMenuItem.setEnabled(false);
-                }
                 break;
         }
     }
@@ -799,6 +767,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (pref == null) {
             pref = createLongPressActionPointPreference(connectedAp);
         }
+        pref.refresh();
         mConnectedAccessPointPreferenceCategory.addPreference(pref);
         mConnectedAccessPointPreferenceCategory.setVisible(true);
     }
@@ -954,6 +923,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 Log.e(TAG, "Failed to forget invalid network " + mSelectedAccessPoint.getConfig());
                 return;
             }
+        } else if (mSelectedAccessPoint.getConfig().isPasspoint()) {
+            mWifiManager.removePasspointConfiguration(mSelectedAccessPoint.getConfig().FQDN);
         } else {
             mWifiManager.forget(mSelectedAccessPoint.getConfig().networkId, mForgetListener);
         }
@@ -1026,6 +997,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 data.title = res.getString(R.string.wifi_settings);
                 data.screenTitle = res.getString(R.string.wifi_settings);
                 data.keywords = res.getString(R.string.keywords_wifi);
+                data.key = DATA_KEY_REFERENCE;
                 result.add(data);
 
                 // Add saved Wi-Fi access points

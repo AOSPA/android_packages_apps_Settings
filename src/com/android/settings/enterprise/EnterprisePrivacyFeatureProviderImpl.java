@@ -16,8 +16,11 @@
 
 package com.android.settings.enterprise;
 
+import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
@@ -38,6 +41,7 @@ import java.util.List;
 
 public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFeatureProvider {
 
+    private final Context mContext;
     private final DevicePolicyManagerWrapper mDpm;
     private final PackageManagerWrapper mPm;
     private final UserManager mUm;
@@ -46,9 +50,10 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
 
     private static final int MY_USER_ID = UserHandle.myUserId();
 
-    public EnterprisePrivacyFeatureProviderImpl(DevicePolicyManagerWrapper dpm,
+    public EnterprisePrivacyFeatureProviderImpl(Context context, DevicePolicyManagerWrapper dpm,
             PackageManagerWrapper pm, UserManager um, ConnectivityManagerWrapper cm,
             Resources resources) {
+        mContext = context.getApplicationContext();
         mDpm = dpm;
         mPm = pm;
         mUm = um;
@@ -70,16 +75,16 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
                 return userInfo.id;
             }
         }
-        return -1;
+        return UserHandle.USER_NULL;
     }
 
     @Override
     public boolean isInCompMode() {
-        return hasDeviceOwner() && getManagedProfileUserId() != -1;
+        return hasDeviceOwner() && getManagedProfileUserId() != UserHandle.USER_NULL;
     }
 
     @Override
-    public CharSequence getDeviceOwnerDisclosure(Context context) {
+    public CharSequence getDeviceOwnerDisclosure() {
         if (!hasDeviceOwner()) {
             return null;
         }
@@ -94,7 +99,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         }
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
         disclosure.append(mResources.getString(R.string.do_disclosure_learn_more),
-                new EnterprisePrivacySpan(context), 0);
+                new EnterprisePrivacySpan(mContext), 0);
         return disclosure;
     }
 
@@ -124,13 +129,69 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     @Override
     public boolean isAlwaysOnVpnSetInManagedProfile() {
         final int managedProfileUserId = getManagedProfileUserId();
-        return managedProfileUserId != -1 &&
+        return managedProfileUserId != UserHandle.USER_NULL &&
                 VpnUtils.isAlwaysOnVpnSet(mCm, managedProfileUserId);
     }
 
     @Override
     public boolean isGlobalHttpProxySet() {
         return mCm.getGlobalProxy() != null;
+    }
+
+    @Override
+    public int getMaximumFailedPasswordsBeforeWipeInPrimaryUser() {
+        final ComponentName deviceOwner = mDpm.getDeviceOwnerComponentOnAnyUser();
+        if (deviceOwner == null) {
+            return 0;
+        }
+        return mDpm.getMaximumFailedPasswordsForWipe(deviceOwner, mDpm.getDeviceOwnerUserId());
+    }
+
+    @Override
+    public int getMaximumFailedPasswordsBeforeWipeInManagedProfile() {
+        final int userId = getManagedProfileUserId();
+        if (userId == UserHandle.USER_NULL) {
+            return 0;
+        }
+        final ComponentName profileOwner = mDpm.getProfileOwnerAsUser(userId);
+        if (profileOwner == null) {
+            return 0;
+        }
+        return mDpm.getMaximumFailedPasswordsForWipe(profileOwner, userId);
+    }
+
+    @Override
+    public String getImeLabelIfOwnerSet() {
+        if (!mDpm.isCurrentInputMethodSetByOwner()) {
+            return null;
+        }
+        final String packageName = Settings.Secure.getStringForUser(mContext.getContentResolver(),
+                Settings.Secure.DEFAULT_INPUT_METHOD, MY_USER_ID);
+        if (packageName == null) {
+            return null;
+        }
+        try {
+            return mPm.getApplicationInfoAsUser(packageName, 0 /* flags */, MY_USER_ID)
+                    .loadLabel(mPm.getPackageManager()).toString();
+        } catch (PackageManager.NameNotFoundException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public int getNumberOfOwnerInstalledCaCertsInCurrentUser() {
+        final List<String> certs = mDpm.getOwnerInstalledCaCerts(new UserHandle(MY_USER_ID));
+        return certs != null ? certs.size() : 0;
+    }
+
+    @Override
+    public int getNumberOfOwnerInstalledCaCertsInManagedProfile() {
+        final int userId = getManagedProfileUserId();
+        if (userId == UserHandle.USER_NULL) {
+            return 0;
+        }
+        final List<String> certs = mDpm.getOwnerInstalledCaCerts(new UserHandle(userId));
+        return certs != null ? certs.size() : 0;
     }
 
     protected static class EnterprisePrivacySpan extends ClickableSpan {

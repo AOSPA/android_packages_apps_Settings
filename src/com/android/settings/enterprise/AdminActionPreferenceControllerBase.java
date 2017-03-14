@@ -26,12 +26,10 @@ import java.util.Date;
 
 public abstract class AdminActionPreferenceControllerBase extends PreferenceController {
 
-    private final Context mContext;
     protected final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
     public AdminActionPreferenceControllerBase(Context context) {
         super(context);
-        mContext = context;
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
     }
@@ -42,7 +40,7 @@ public abstract class AdminActionPreferenceControllerBase extends PreferenceCont
     public void updateState(Preference preference) {
         final Date timestamp = getAdminActionTimestamp();
         preference.setSummary(timestamp == null ?
-                mContext.getString(R.string.enterprise_privacy_never) :
+                mContext.getString(R.string.enterprise_privacy_none) :
                 DateUtils.formatDateTime(mContext, timestamp.getTime(),
                         DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE));
     }

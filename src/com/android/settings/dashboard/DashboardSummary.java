@@ -30,14 +30,13 @@ import android.view.ViewGroup;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.suggestions.SuggestionFeatureProvider;
 import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -70,6 +69,7 @@ public class DashboardSummary extends InstrumentedFragment
     private SuggestionsChecks mSuggestionsChecks;
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
+    private boolean isOnCategoriesChangedCalled;
 
     @Override
     public int getMetricsCategory() {
@@ -86,12 +86,7 @@ public class DashboardSummary extends InstrumentedFragment
         mSuggestionFeatureProvider = FeatureFactory.getFactory(activity)
                 .getSuggestionFeatureProvider(activity);
 
-        if (mDashboardFeatureProvider.isEnabled()) {
-            mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
-        } else {
-            mSummaryLoader = new SummaryLoader(activity,
-                    ((SettingsActivity) getActivity()).getDashboardCategories());
-        }
+        mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
 
         mConditionManager = ConditionManager.get(activity, false);
         mSuggestionParser = new SuggestionParser(activity,
@@ -204,25 +199,27 @@ public class DashboardSummary extends InstrumentedFragment
             Log.d(TAG, "onViewCreated took "
                     + (System.currentTimeMillis() - startTime) + " ms");
         }
-        rebuildUI(true /* rebuildSuggestions */);
+        rebuildUI();
     }
 
-    private void rebuildUI(boolean rebuildSuggestions) {
-        if (rebuildSuggestions) {
-            // recheck to see if any suggestions have been changed.
-            new SuggestionLoader().execute();
-            // Set categories on their own if loading suggestions takes too long.
-            mHandler.postDelayed(() -> {
-                updateCategoryAndSuggestion(null /* tiles */);
-            }, MAX_WAIT_MILLIS);
-        } else {
+    @VisibleForTesting
+    void rebuildUI() {
+        new SuggestionLoader().execute();
+        // Set categories on their own if loading suggestions takes too long.
+        mHandler.postDelayed(() -> {
             updateCategoryAndSuggestion(null /* tiles */);
-        }
+        }, MAX_WAIT_MILLIS);
     }
 
     @Override
     public void onCategoriesChanged() {
-        rebuildUI(false /* rebuildSuggestions */);
+        // Bypass rebuildUI() on the first call of onCategoriesChanged, since rebuildUI() happens
+        // in onViewCreated as well when app starts. But, on the subsequent calls we need to
+        // rebuildUI() because there might be some changes to suggestions and categories.
+        if (isOnCategoriesChangedCalled) {
+            rebuildUI();
+        }
+        isOnCategoriesChangedCalled = true;
     }
 
     @Override
@@ -276,20 +273,15 @@ public class DashboardSummary extends InstrumentedFragment
             return;
         }
 
-        if (mDashboardFeatureProvider.isEnabled()) {
-            // Temporary hack to wrap homepage category into a list. Soon we will create adapter
-            // API that takes a single category.
-            List<DashboardCategory> categories = new ArrayList<>();
-            categories.add(mDashboardFeatureProvider.getTilesForCategory(
-                    CategoryKey.CATEGORY_HOMEPAGE));
-            if (suggestions != null) {
-                mAdapter.setCategoriesAndSuggestions(categories, suggestions);
-            } else {
-                mAdapter.setCategory(categories);
-            }
+        // Temporary hack to wrap homepage category into a list. Soon we will create adapter
+        // API that takes a single category.
+        List<DashboardCategory> categories = new ArrayList<>();
+        categories.add(mDashboardFeatureProvider.getTilesForCategory(
+            CategoryKey.CATEGORY_HOMEPAGE));
+        if (suggestions != null) {
+            mAdapter.setCategoriesAndSuggestions(categories, suggestions);
         } else {
-            mAdapter.setCategoriesAndSuggestions(
-                    ((SettingsActivity) activity).getDashboardCategories(), suggestions);
+            mAdapter.setCategory(categories);
         }
     }
 }

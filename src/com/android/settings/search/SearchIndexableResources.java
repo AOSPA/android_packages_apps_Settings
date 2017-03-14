@@ -31,14 +31,13 @@ import com.android.settings.R;
 import com.android.settings.ScreenPinningSettings;
 import com.android.settings.SecuritySettings;
 import com.android.settings.WallpaperTypeSettings;
-import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
-import com.android.settings.accounts.AccountSettings;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.applications.assist.ManageAssist;
+import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.backup.BackupSettingsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
@@ -56,11 +55,9 @@ import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
-import com.android.settings.gestures.GestureSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
-import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.VirtualKeyboardFragment;
 import com.android.settings.language.LanguageAndInputSettings;
@@ -69,7 +66,6 @@ import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
-import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeSettings;
@@ -113,7 +109,6 @@ public final class SearchIndexableResources {
         addIndex(SimSettings.class, NO_DATA_RES_ID, R.drawable.ic_sim_sd);
         addIndex(DataUsageSummary.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
         addIndex(DataUsageMeteredSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
-        addIndex(WirelessSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_more);
         addIndex(ScreenZoomSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
         addIndex(DisplaySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
         addIndex(WallpaperTypeSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
@@ -122,7 +117,6 @@ public final class SearchIndexableResources {
         addIndex(AppAndNotificationDashboardFragment.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_applications);
         addIndex(SoundSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_sound);
-        addIndex(OtherSoundSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_sound);
         addIndex(ZenModeSettings.class,
                 R.xml.zen_mode_settings, R.drawable.ic_settings_notifications);
         addIndex(ZenModePrioritySettings.class,
@@ -139,7 +133,6 @@ public final class SearchIndexableResources {
         addIndex(SpecialAccessSettings.class,
                 R.xml.special_access, R.drawable.ic_settings_applications);
         addIndex(UserSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_multiuser);
-        addIndex(GestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(AssistGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(PickupGestureSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
         addIndex(DoubleTapScreenSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_gestures);
@@ -154,16 +147,13 @@ public final class SearchIndexableResources {
         addIndex(EncryptionAndCredential.class, R.xml.encryption_and_credential,
                 R.drawable.ic_settings_security);
         addIndex(ScreenPinningSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_security);
-        addIndex(AccountSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_accounts);
         addIndex(UserAndAccountDashboardFragment.class, NO_DATA_RES_ID,
                 R.drawable.ic_settings_accounts);
-        addIndex(InputMethodAndLanguageSettings.class,
-                NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(VirtualKeyboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(AvailableVirtualKeyboardFragment.class,
                 NO_DATA_RES_ID, R.drawable.ic_settings_language);
         addIndex(PhysicalKeyboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
-        addIndex(PrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_backup);
+        addIndex(BackupSettingsActivity.class, NO_DATA_RES_ID, R.drawable.ic_settings_backup);
         addIndex(BackupSettingsFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_backup);
         addIndex(DateTimeSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_date_time);
         addIndex(AccessibilitySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_accessibility);
@@ -176,7 +166,7 @@ public final class SearchIndexableResources {
                 R.drawable.ic_settings_notifications);
         addIndex(SystemDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(StorageDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_storage);
-        addIndex(ConnectedDeviceDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_bt_laptop);
+        addIndex(ConnectedDeviceDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_devices_other);
         addIndex(EnterprisePrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(PaymentSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_nfc_payment);
         addIndex(

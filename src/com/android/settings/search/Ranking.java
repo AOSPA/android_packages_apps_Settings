@@ -26,9 +26,8 @@ import com.android.settings.PrivacySettings;
 import com.android.settings.ScreenPinningSettings;
 import com.android.settings.SecuritySettings;
 import com.android.settings.WallpaperTypeSettings;
-import com.android.settings.WirelessSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
-import com.android.settings.accounts.AccountSettings;
+import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.bluetooth.BluetoothSettings;
@@ -41,12 +40,17 @@ import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
-import com.android.settings.gestures.GestureSettings;
-import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
+import com.android.settings.gestures.AssistGestureSettings;
+import com.android.settings.gestures.DoubleTapPowerSettings;
+import com.android.settings.gestures.DoubleTapScreenSettings;
+import com.android.settings.gestures.DoubleTwistGestureSettings;
+import com.android.settings.gestures.PickupGestureSettings;
+import com.android.settings.gestures.SwipeToNotificationSettings;
+import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
+import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.ConfigureNotificationSettings;
-import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
@@ -118,8 +122,8 @@ public final class Ranking {
         sRankMap.put(DataUsageSummary.class.getName(), RANK_DATA_USAGE);
         sRankMap.put(DataUsageMeteredSettings.class.getName(), RANK_DATA_USAGE);
 
-        // Other wireless settinfs
-        sRankMap.put(WirelessSettings.class.getName(), RANK_WIRELESS);
+        // Other wireless settings
+        sRankMap.put(NetworkDashboardFragment.class.getName(), RANK_WIRELESS);
 
         // Display
         sRankMap.put(DisplaySettings.class.getName(), RANK_DISPLAY);
@@ -133,7 +137,6 @@ public final class Ranking {
 
         // Notifications
         sRankMap.put(ConfigureNotificationSettings.class.getName(), RANK_NOTIFICATIONS);
-        sRankMap.put(OtherSoundSettings.class.getName(), RANK_NOTIFICATIONS);
         sRankMap.put(ZenModeSettings.class.getName(), RANK_NOTIFICATIONS);
         sRankMap.put(ZenModePrioritySettings.class.getName(), RANK_NOTIFICATIONS);
         sRankMap.put(ZenModeAutomationSettings.class.getName(), RANK_NOTIFICATIONS);
@@ -154,7 +157,12 @@ public final class Ranking {
         sRankMap.put(UserSettings.class.getName(), RANK_USERS);
 
         // Gestures
-        sRankMap.put(GestureSettings.class.getName(), RANK_GESTURE);
+        sRankMap.put(AssistGestureSettings.class.getName(), RANK_GESTURE);
+        sRankMap.put(DoubleTapPowerSettings.class.getName(), RANK_GESTURE);
+        sRankMap.put(DoubleTapScreenSettings.class.getName(), RANK_GESTURE);
+        sRankMap.put(DoubleTwistGestureSettings.class.getName(), RANK_GESTURE);
+        sRankMap.put(PickupGestureSettings.class.getName(), RANK_GESTURE);
+        sRankMap.put(SwipeToNotificationSettings.class.getName(), RANK_GESTURE);
 
         // Location
         sRankMap.put(LocationSettings.class.getName(), RANK_LOCATION);
@@ -166,10 +174,10 @@ public final class Ranking {
         sRankMap.put(ScreenPinningSettings.class.getName(), RANK_SECURITY);
 
         // Accounts
-        sRankMap.put(AccountSettings.class.getName(), RANK_ACCOUNT);
+        sRankMap.put(UserAndAccountDashboardFragment.class.getName(), RANK_ACCOUNT);
 
         // IMEs
-        sRankMap.put(InputMethodAndLanguageSettings.class.getName(), RANK_IME);
+        sRankMap.put(LanguageAndInputSettings.class.getName(), RANK_IME);
 
         // Privacy
         sRankMap.put(PrivacySettings.class.getName(), RANK_PRIVACY);

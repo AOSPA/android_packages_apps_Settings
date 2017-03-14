@@ -26,8 +26,10 @@
             <intent android:action="android.settings.LOCATION_SOURCE_SETTINGS"/>
         </Preference>
 
-        <SwitchPreference android:key="show_password"
-                android:title="@string/show_password"/>
+        <SwitchPreference
+            android:key="show_password"
+            android:title="@string/show_password"
+            android:summary="@string/show_password_summary"/>
 
     </PreferenceCategory>
 
@@ -40,6 +42,12 @@
                 android:summary="@string/manage_device_admin_summary"
                 android:persistent="false"
                 android:fragment="com.android.settings.DeviceAdminSettings"/>
+
+        <Preference android:key="enterprise_privacy"
+                android:title="@string/enterprise_privacy_settings"
+                android:summary="@string/enterprise_privacy_settings_summary"
+                android:persistent="false"
+                android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"/>
 
     </PreferenceCategory>
 

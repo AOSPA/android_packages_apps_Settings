@@ -25,14 +25,12 @@ import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
 import com.android.settings.deviceinfo.SystemUpdatePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 
 public class SystemDashboardFragment extends DashboardFragment {
 
@@ -55,9 +53,14 @@ public class SystemDashboardFragment extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
+    }
+
+    private static List<PreferenceController> buildPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new SystemUpdatePreferenceController(context, UserManager.get(context)));
         controllers.add(new AdditionalSystemUpdatePreferenceController(context));
+        controllers.add(new FactoryResetPreferenceController(context, UserManager.get(context)));
         return controllers;
     }
 
@@ -69,27 +72,14 @@ public class SystemDashboardFragment extends DashboardFragment {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        return null;
-                    }
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.system_dashboard_fragment;
                     return Arrays.asList(sir);
                 }
 
                 @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    if (!FeatureFactory.getFactory(context).getDashboardFeatureProvider(context)
-                            .isEnabled()) {
-                        return null;
-                    }
-                    final List<String> keys = new ArrayList<>();
-                    new SystemUpdatePreferenceController(context, UserManager.get(context))
-                            .updateNonIndexableKeys(keys);
-                    new AdditionalSystemUpdatePreferenceController(context)
-                            .updateNonIndexableKeys(keys);
-                    return keys;
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    return buildPreferenceControllers(context);
                 }
             };
 }

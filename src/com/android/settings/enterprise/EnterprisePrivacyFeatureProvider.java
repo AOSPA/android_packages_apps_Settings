@@ -16,8 +16,6 @@
 
 package com.android.settings.enterprise;
 
-import android.content.Context;
-
 import java.util.Date;
 
 public interface EnterprisePrivacyFeatureProvider {
@@ -37,10 +35,8 @@ public interface EnterprisePrivacyFeatureProvider {
      * Returns a message informing the user that the device is managed by a Device Owner app. The
      * message includes a Learn More link that takes the user to the enterprise privacy section of
      * Settings. If the device is not managed by a Device Owner app, returns {@code null}.
-     *
-     * @param context The context in which to show the enterprise privacy section of Settings
      */
-    CharSequence getDeviceOwnerDisclosure(Context context);
+    CharSequence getDeviceOwnerDisclosure();
 
     /**
      * Returns the time at which the Device Owner last retrieved security logs, or {@code null} if
@@ -74,4 +70,34 @@ public interface EnterprisePrivacyFeatureProvider {
      * Returns whether the Device Owner set a recommended global HTTP proxy.
      */
     boolean isGlobalHttpProxySet();
+
+    /**
+     * Returns the number of failed login attempts that the Device Owner allows before the entire
+     * device is wiped, or zero if no such limit is set.
+     */
+    int getMaximumFailedPasswordsBeforeWipeInPrimaryUser();
+
+    /**
+     * Returns the number of failed login attempts that the Profile Owner allows before the current
+     * user's managed profile (if any) is wiped, or zero if no such limit is set.
+     */
+    int getMaximumFailedPasswordsBeforeWipeInManagedProfile();
+
+    /**
+     * Returns the label of the current user's input method if that input method was set by a Device
+     * Owner or Profile Owner in that user. Otherwise, returns {@code null}.
+     */
+    String getImeLabelIfOwnerSet();
+
+    /**
+     * Returns the number of CA certificates that the Device Owner or Profile Owner installed in
+     * the current user.
+     */
+    int getNumberOfOwnerInstalledCaCertsInCurrentUser();
+
+    /**
+     * Returns the number of CA certificates that the Profile Owner installed in the current user's
+     * managed profile (if any).
+     */
+    int getNumberOfOwnerInstalledCaCertsInManagedProfile();
 }
