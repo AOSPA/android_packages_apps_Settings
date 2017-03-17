@@ -45,6 +45,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.settings.widget.SwitchBar;
+import org.codeaurora.ims.utils.QtiImsExtUtils;
 
 /**
  * "Wi-Fi Calling settings" screen.  This preference screen lets you
@@ -84,7 +85,8 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     private boolean mEditableWfcRoamingMode = true;
 
     private void initPhoneStateListeners(int phoneId) {
-        SubscriptionManager subMgr = SubscriptionManager.from(getActivity());
+        final Context context = getActivity();
+        SubscriptionManager subMgr = SubscriptionManager.from(context);
         final SubscriptionInfo subInfo = subMgr.getActiveSubscriptionInfoForSimSlotIndex(phoneId);
 
         if (subInfo == null) {
@@ -113,19 +115,15 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
                 mCallState[i] = state;
                 switchBar.setEnabled(isCallStateIdle() && isNonTtyOrTtyOnVolteEnabled);
-        
+
                 boolean isWfcModeEditable = true;
                 boolean isWfcRoamingModeEditable = false;
-                final CarrierConfigManager configManager = (CarrierConfigManager)
-                        activity.getSystemService(Context.CARRIER_CONFIG_SERVICE);
-                if (configManager != null) {
-                    PersistableBundle b = configManager.getConfig();
-                    if (b != null) {
-                        isWfcModeEditable = b.getBoolean(
-                                CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
-                        isWfcRoamingModeEditable = b.getBoolean(
-                                CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL);
-                    }
+                PersistableBundle b = QtiImsExtUtils.getConfigForDefaultImsPhoneId(context);
+                if (b != null) {
+                    isWfcModeEditable = b.getBoolean(
+                            CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
+                    isWfcRoamingModeEditable = b.getBoolean(
+                            CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL);
                 }
 
                 Preference pref = getPreferenceScreen().findPreference(BUTTON_WFC_MODE);
@@ -239,18 +237,14 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(ImsManager.ACTION_IMS_REGISTRATION_ERROR);
 
-        CarrierConfigManager configManager = (CarrierConfigManager)
-                getSystemService(Context.CARRIER_CONFIG_SERVICE);
         boolean isWifiOnlySupported = true;
-        if (configManager != null) {
-            PersistableBundle b = configManager.getConfig();
-            if (b != null) {
-                mEditableWfcMode = b.getBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
-                mEditableWfcRoamingMode = b.getBoolean(
-                        CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL);
-                isWifiOnlySupported = b.getBoolean(
-                        CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, true);
-            }
+        PersistableBundle b = QtiImsExtUtils.getConfigForDefaultImsPhoneId(getActivity());
+        if (b != null) {
+            mEditableWfcMode = b.getBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
+            mEditableWfcRoamingMode = b.getBoolean(
+                    CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL);
+            isWifiOnlySupported = b.getBoolean(
+                    CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, true);
         }
 
         if (!isWifiOnlySupported) {
@@ -368,11 +362,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
      * Return null when no activity found.
      */
     private static Intent getCarrierActivityIntent(Context context) {
-        // Retrive component name from carrirt config
-        CarrierConfigManager configManager = context.getSystemService(CarrierConfigManager.class);
-        if (configManager == null) return null;
-
-        PersistableBundle bundle = configManager.getConfig();
+        PersistableBundle bundle = QtiImsExtUtils.getConfigForDefaultImsPhoneId(context);
         if (bundle == null) return null;
 
         String carrierApp = bundle.getString(
