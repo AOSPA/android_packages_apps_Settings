@@ -1225,12 +1225,14 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * check whether NetworkSetting apk exist in system, if yes, return true, else
-     * return false.
+     * Check whether the required MobileNetworkSettings activity
+     * which would be in the NetworkSetting apk exists.
      */
     public static boolean isNetworkSettingsApkAvailable(Context context) {
         // check whether the target handler exist in system
-        Intent intent = new Intent("org.codeaurora.settings.NETWORK_OPERATOR_SETTINGS_ASYNC");
+        final Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setComponent(new ComponentName("com.qualcomm.qti.networksetting",
+               "com.qualcomm.qti.networksetting.MobileNetworkSettings"));
         PackageManager pm = context.getPackageManager();
         List<ResolveInfo> list = pm.queryIntentActivities(intent, 0);
         for (ResolveInfo resolveInfo : list){
