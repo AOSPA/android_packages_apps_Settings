@@ -97,10 +97,14 @@ public class PowerUsageSummary extends PowerUsageBase {
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
     private static final int SECONDS_IN_HOUR = 60 * 60;
 
+    private static String mLanguale = null;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setAnimationAllowed(true);
+
+        checkLanguageChange();
 
         addPreferencesFromResource(R.xml.power_usage_summary);
         mHistPref = (BatteryHistoryPreference) findPreference(KEY_BATTERY_HISTORY);
@@ -137,6 +141,17 @@ public class PowerUsageSummary extends PowerUsageBase {
     public void onDestroy() {
         super.onDestroy();
         if (getActivity().isChangingConfigurations()) {
+            BatteryEntry.clearUidCache();
+        }
+    }
+
+    private void checkLanguageChange() {
+        if (mLanguale == null) {
+            mLanguale = getResources().getConfiguration().locale.toString();
+        }
+        if (mLanguale != null
+                && !mLanguale.equals(getResources().getConfiguration().locale.toString())) {
+            mLanguale = getResources().getConfiguration().locale.toString();
             BatteryEntry.clearUidCache();
         }
     }
