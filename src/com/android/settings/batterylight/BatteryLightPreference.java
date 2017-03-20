@@ -22,14 +22,18 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.android.settings.R;
+import com.android.settingslib.ColorPickerDialog;
+import com.android.settingslib.ColorPickerDialogAdapter;
 
 public class BatteryLightPreference extends Preference implements DialogInterface.OnDismissListener {
 
@@ -95,27 +99,49 @@ public class BatteryLightPreference extends Preference implements DialogInterfac
     protected void onClick() {
         if (mDialog != null && mDialog.isShowing()) return;
         mDialog = getDialog();
-        mDialog.setOnDismissListener(this);
         mDialog.show();
     }
 
     public Dialog getDialog() {
-        final BatteryLightDialog d = new BatteryLightDialog(getContext(),
-                0xFF000000 | mColorValue);
+        final int[] colors = mResources.getIntArray(
+                R.array.led_color_picker_dialog_colors);
+        final ColorPickerDialog dialog = new ColorPickerDialog(getContext());
+        final ColorPickerDialogAdapter adapter = dialog.getAdapter();
 
-        d.setButton(AlertDialog.BUTTON_POSITIVE, mResources.getString(R.string.ok),
-                new DialogInterface.OnClickListener() {
+        adapter.setColors(colors);
+        adapter.setSelectedImageResourceId(R.drawable.ic_check_green_24dp);
+        adapter.setSelectedImageColorFilter(Color.WHITE);
+        adapter.setSelectedColor(getColor());
+
+        dialog.setOnCancelListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mColorValue =  d.getColor() & 0x00FFFFFF; // strip alpha, led does not support it
-                updatePreferenceViews();
-                callChangeListener(this);
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
-        d.setButton(AlertDialog.BUTTON_NEGATIVE, mResources.getString(R.string.cancel),
-                (DialogInterface.OnClickListener) null);
 
-        return d;
+        dialog.setOnOkListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColorValue =  dialog.getSelectedColor();
+                updatePreferenceViews();
+                callChangeListener(this);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
+            @Override
+            public void onColorSelected(DialogInterface d, int color) {
+                if (adapter.getSelectedPosition() == 0) {
+                    adapter.setSelectedImageColorFilter(Color.DKGRAY);
+                } else {
+                    adapter.setSelectedImageColorFilter(Color.WHITE);
+                }
+            }
+        });
+
+        return dialog;
     }
 
     private static ShapeDrawable createOvalShape(int size, int color) {
