@@ -31,6 +31,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v14.preference.PreferenceFragment;
+import android.support.v14.preference.SwitchPreference;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -41,14 +42,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.util.pa.ColorUtils;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.widget.SwitchBar;
 
-import com.android.settingslib.SystemSettingSwitchPreference;
 import com.android.settings.preferences.AppSelectListPreference;
 import com.android.settings.preferences.AppSelectListPreference.PackageItem;
 
@@ -64,26 +68,37 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     private static final String NOTIFICATION_LIGHT_PULSE_DEFAULT_COLOR = "notification_light_pulse_default_color";
     private static final String NOTIFICATION_LIGHT_PULSE_DEFAULT_LED_ON = "notification_light_pulse_default_led_on";
     private static final String NOTIFICATION_LIGHT_PULSE_DEFAULT_LED_OFF = "notification_light_pulse_default_led_off";
+    private static final String APP_LIST_PREF = "applications_list";
     private static final String DEFAULT_PREF = "default";
+
+    private static final String[] DEPENDENT_PREFS = {
+        Settings.System.NOTIFICATION_LIGHT_SCREEN_ON,
+        Settings.System.ALLOW_LIGHTS,
+        Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE,
+        APP_LIST_PREF,
+        DEFAULT_PREF
+    };
+
     public static final int ACTION_TEST = 0;
     public static final int ACTION_DELETE = 1;
     private static final int MENU_ADD = 0;
+    private static final int MENU_RESET = 1;
     private static final int DIALOG_APPS = 0;
 
     private int mDefaultColor;
     private int mDefaultLedOn;
     private int mDefaultLedOff;
+    private NotificationLightEnabler mNotificationLightEnabler;
     private PackageManager mPackageManager;
     private PreferenceGroup mApplicationPrefList;
-    private SystemSettingSwitchPreference mEnabledPref;
-    private SystemSettingSwitchPreference mScreenOnLightsPref;
-    private SystemSettingSwitchPreference mCustomEnabledPref;
+    private SwitchPreference mScreenOnLightsPref;
+    private SwitchPreference mAllowLightsPref;
+    private SwitchPreference mCustomEnabledPref;
     private NotificationLightPreference mDefaultPref;
     private Menu mMenu;
     private AppSelectListPreference mPackageAdapter;
     private String mPackageList;
     private Map<String, Package> mPackages;
-    private boolean mMultiColorLed;
 
     @Override
     protected int getMetricsCategory() {
@@ -95,46 +110,61 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.notification_light_settings);
 
-        PreferenceScreen prefSet = getPreferenceScreen();
-        Resources resources = getResources();
+        final PreferenceScreen prefSet = getPreferenceScreen();
+        final ContentResolver resolver = getContentResolver();
+        final Resources resources = getResources();
 
         PreferenceGroup mAdvancedPrefs = (PreferenceGroup) prefSet.findPreference("advanced_section");
 
-        // Get the system defined default notification color
+        // Defaults
         mDefaultColor =
                 resources.getColor(com.android.internal.R.color.config_defaultNotificationColor, null);
-
         mDefaultLedOn = resources.getInteger(
                 com.android.internal.R.integer.config_defaultNotificationLedOn);
         mDefaultLedOff = resources.getInteger(
                 com.android.internal.R.integer.config_defaultNotificationLedOff);
 
-        mEnabledPref = (SystemSettingSwitchPreference)
-                findPreference(Settings.System.NOTIFICATION_LIGHT_PULSE);
-        mEnabledPref.setOnPreferenceChangeListener(this);
-
         mDefaultPref = (NotificationLightPreference) findPreference(DEFAULT_PREF);
         mDefaultPref.setOnPreferenceChangeListener(this);
 
-        mScreenOnLightsPref = (SystemSettingSwitchPreference)
+        mScreenOnLightsPref = (SwitchPreference)
                 findPreference(Settings.System.NOTIFICATION_LIGHT_SCREEN_ON);
         mScreenOnLightsPref.setOnPreferenceChangeListener(this);
 
-        // Advanced light settings
-        mCustomEnabledPref = (SystemSettingSwitchPreference)
+        mAllowLightsPref = (SwitchPreference)
+                findPreference(Settings.System.ALLOW_LIGHTS);
+        mAllowLightsPref.setOnPreferenceChangeListener(this);
+
+        mCustomEnabledPref = (SwitchPreference)
                 findPreference(Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE);
         mCustomEnabledPref.setOnPreferenceChangeListener(this);
 
-        mApplicationPrefList = (PreferenceGroup) findPreference("applications_list");
+        // Applications
+        mApplicationPrefList = (PreferenceGroup) findPreference(APP_LIST_PREF);
         mApplicationPrefList.setOrderingAsAdded(false);
 
-        // Get launch-able applications
         mPackageManager = getPackageManager();
         mPackageAdapter = new AppSelectListPreference(getActivity());
 
         mPackages = new HashMap<String, Package>();
         setHasOptionsMenu(true);
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (mNotificationLightEnabler != null) {
+            mNotificationLightEnabler.teardownSwitchBar();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        SettingsActivity activity = (SettingsActivity) getActivity();
+        mNotificationLightEnabler = new NotificationLightEnabler(activity.getSwitchBar());
     }
 
     @Override
@@ -143,10 +173,30 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
         refreshDefault();
         refreshCustomApplicationPrefs();
         getActivity().invalidateOptionsMenu();
+        if (mNotificationLightEnabler != null) {
+            mNotificationLightEnabler.resume();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mNotificationLightEnabler != null) {
+            mNotificationLightEnabler.pause();
+        }
     }
 
     private void refreshDefault() {
         ContentResolver resolver = getContentResolver();
+
+        mScreenOnLightsPref.setChecked(Settings.System.getInt(resolver,
+                        Settings.System.NOTIFICATION_LIGHT_SCREEN_ON, 0) != 0);
+        mAllowLightsPref.setChecked(Settings.System.getInt(resolver,
+                        Settings.System.ALLOW_LIGHTS, 1) != 0);
+        mCustomEnabledPref.setChecked(Settings.System.getInt(resolver,
+                        Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE, 0) != 0);
+
         int color = Settings.System.getInt(resolver,
                 Settings.System.NOTIFICATION_LIGHT_PULSE_DEFAULT_COLOR, mDefaultColor);
         int timeOn = Settings.System.getInt(resolver,
@@ -156,7 +206,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
 
         mDefaultPref.setAllValues(color, timeOn, timeOff);
 
-        mApplicationPrefList = (PreferenceGroup) findPreference("applications_list");
+        mApplicationPrefList = (PreferenceGroup) findPreference(APP_LIST_PREF);
         mApplicationPrefList.setOrderingAsAdded(false);
     }
 
@@ -177,7 +227,6 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
                             PackageManager.GET_META_DATA);
                     NotificationLightPreference pref =
                             new NotificationLightPreference(context, pkg.color, pkg.timeon, pkg.timeoff);
-
                     pref.setKey(pkg.name);
                     pref.setTitle(info.applicationInfo.loadLabel(mPackageManager));
                     pref.setIcon(info.applicationInfo.loadIcon(mPackageManager));
@@ -206,16 +255,15 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     }
 
     private int getInitialColorForPackage(String packageName) {
-        boolean autoColor = true;
         int color = mDefaultColor;
-        // if (autoColor) {
-        //     try {
-        //         //Drawable icon = mPackageManager.getApplicationIcon(packageName);
-        //         //color = ColorUtils.getIconColorFromDrawable(icon);
-        //     } catch (NameNotFoundException e) {
-        //         // shouldn't happen, but just return default
-        //     }
-        //}
+
+        try {
+            Drawable icon = mPackageManager.getApplicationIcon(packageName);
+            color = ColorUtils.getIconColorFromDrawable(icon);
+        } catch (NameNotFoundException e) {
+            // shouldn't happen, but just return default
+        }
+
         return color;
     }
 
@@ -285,7 +333,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
      * @param timeon
      * @param timeoff
      */
-    protected void updateValues(String packageName, Integer color, Integer timeon, Integer timeoff) {
+    protected void updateAppValues(String packageName, Integer color, Integer timeon, Integer timeoff) {
         ContentResolver resolver = getContentResolver();
 
         if (packageName.equals(DEFAULT_PREF)) {
@@ -304,6 +352,21 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
             app.timeoff = timeoff;
             savePackageList(true);
         }
+    }
+
+    protected void resetToDefaults() {
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.NOTIFICATION_LIGHT_SCREEN_ON, 0);
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.ALLOW_LIGHTS, 1);
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE, 0);
+
+        if (mNotificationLightEnabler != null) {
+            mNotificationLightEnabler.setState(false);
+        }
+
+        resetColors();
     }
 
     protected void resetColors() {
@@ -341,12 +404,21 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        if (preference == mEnabledPref || preference == mCustomEnabledPref ||
-            preference == mScreenOnLightsPref) {
-            getActivity().invalidateOptionsMenu();
+        final ContentResolver resolver = getContentResolver();
+
+        if(preference == mScreenOnLightsPref) {
+            Settings.System.putInt(resolver,
+                    Settings.System.NOTIFICATION_LIGHT_SCREEN_ON, (Boolean)objValue ? 1:0);
+        } else if(preference == mAllowLightsPref) {
+            Settings.System.putInt(resolver,
+                    Settings.System.ALLOW_LIGHTS, (Boolean)objValue ? 1:0);
+        } else if(preference == mCustomEnabledPref) {
+            Settings.System.putInt(resolver,
+                    Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE, (Boolean)objValue ? 1:0);
+            onPrepareOptionsMenu(mMenu);
         } else {
             NotificationLightPreference lightPref = (NotificationLightPreference) preference;
-            updateValues(lightPref.getKey(), lightPref.getColor(),
+            updateAppValues(lightPref.getKey(), lightPref.getColor(),
                     lightPref.getOnValue(), lightPref.getOffValue());
         }
 
@@ -356,20 +428,31 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         mMenu = menu;
+
         mMenu.add(0, MENU_ADD, 0, R.string.profiles_add)
                 .setIcon(R.drawable.ic_menu_add_white)
+                .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        menu.add(1, MENU_RESET, 0, R.string.reset)
+                .setIcon(R.drawable.ic_settings_backup_restore)
+                .setAlphabeticShortcut('r')
                 .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
     }
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        boolean enableAddButton = mEnabledPref.isChecked() && mCustomEnabledPref.isChecked();
+        boolean enableAddButton = mNotificationLightEnabler != null &&
+                mNotificationLightEnabler.getState() &&
+                Settings.System.getInt(getContentResolver(),
+                        Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE, 0) == 1;
         menu.findItem(MENU_ADD).setVisible(enableAddButton);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case MENU_RESET:
+                resetToDefaults();
+                return true;
             case MENU_ADD:
                 showDialog(DIALOG_APPS);
                 return true;
@@ -407,6 +490,24 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
                 dialog = null;
         }
         return dialog;
+    }
+
+    private void enableNotificationLight(boolean enabled, boolean start) {
+        final PreferenceScreen prefSet = getPreferenceScreen();
+
+        for (String prefKey : DEPENDENT_PREFS) {
+            Preference pref = (Preference) prefSet.findPreference(prefKey);
+            pref.setEnabled(enabled);
+        }
+
+        // At start onCreateOptionsMenu and onPrepareOptionsMenu are called.
+        // When we toggle the menu has already all the items, so calling
+        // onPrepareOptionsMenu is sufficient.
+        if (start) {
+            refreshDefault();
+        } else {
+            onPrepareOptionsMenu(mMenu);
+        }
     }
 
     /**
@@ -464,6 +565,60 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
                 return null;
             }
         }
+    }
 
+    private class NotificationLightEnabler implements SwitchBar.OnSwitchChangeListener {
+
+        private final Context mContext;
+        private final SwitchBar mSwitchBar;
+        private boolean mListeningToOnSwitchChange;
+
+        public NotificationLightEnabler(SwitchBar switchBar) {
+            mContext = switchBar.getContext();
+            mSwitchBar = switchBar;
+            mSwitchBar.show();
+
+            boolean enabled = Settings.System.getInt(
+                            mContext.getContentResolver(),
+                            Settings.System.NOTIFICATION_LIGHT_PULSE, 0) != 0;
+            mSwitchBar.setChecked(enabled);
+            NotificationLightSettings.this.enableNotificationLight(enabled, true);
+        }
+
+        public void teardownSwitchBar() {
+            pause();
+            mSwitchBar.hide();
+        }
+
+        public void resume() {
+            if (!mListeningToOnSwitchChange) {
+                mSwitchBar.addOnSwitchChangeListener(this);
+                mListeningToOnSwitchChange = true;
+            }
+        }
+
+        public void pause() {
+            if (mListeningToOnSwitchChange) {
+                mSwitchBar.removeOnSwitchChangeListener(this);
+                mListeningToOnSwitchChange = false;
+            }
+        }
+
+        public void setState(boolean enabled) {
+            mSwitchBar.setChecked(enabled);
+            onSwitchChanged(null, enabled);
+        }
+
+        public boolean getState() {
+            return mSwitchBar.getSwitch().isChecked();
+        }
+
+        @Override
+        public void onSwitchChanged(Switch switchView, boolean isChecked) {
+            Settings.System.putInt(
+                    mContext.getContentResolver(),
+                    Settings.System.NOTIFICATION_LIGHT_PULSE, isChecked ? 1 : 0);
+            NotificationLightSettings.this.enableNotificationLight(isChecked, false);
+        }
     }
 }
