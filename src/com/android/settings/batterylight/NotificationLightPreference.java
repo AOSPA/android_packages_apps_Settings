@@ -21,7 +21,10 @@ import android.content.Context;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.support.v7.preference.Preference;
@@ -31,7 +34,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.internal.util.pa.ColorUtils;
 import com.android.settings.R;
+import com.android.settingslib.ColorPickerDialog;
+import com.android.settingslib.ColorPickerDialogAdapter;
 
 public class NotificationLightPreference extends Preference implements DialogInterface.OnDismissListener,
             View.OnLongClickListener {
@@ -194,28 +200,82 @@ public class NotificationLightPreference extends Preference implements DialogInt
     }
 
     public Dialog getDialog() {
-        final NotificationLightDialog d = new NotificationLightDialog(getContext(),
-                0xFF000000 + mColorValue, mOnValue, mOffValue, mOnOffChangeable); 
+        final NotificationLightDialog dialog = new NotificationLightDialog(getContext(),
+                0xFF000000 + mColorValue, mOnValue, mOffValue, mOnOffChangeable);
 
-        d.setButton(AlertDialog.BUTTON_POSITIVE, mResources.getString(R.string.ok),
-                new DialogInterface.OnClickListener() {
+        final ColorPickerDialogAdapter adapter = dialog.getAdapter();
+        adapter.setSelectedImageResourceId(R.drawable.ic_check_green_24dp);
+        adapter.setSelectedImageColorFilter(Color.WHITE);
+
+        int[] colors = getContext().getResources().getIntArray(
+                R.array.led_color_picker_dialog_colors);
+        final int initialPackageColor = getInitialColor();
+
+        // Check if the set package color (mColorValue) is still allowed. This
+        // is the case if will be one of the selectable colors in the dialog,
+        // in other words if it one of the material colors or the current
+        // initial package color.
+        boolean setPackageColorAllowed = mColorValue == initialPackageColor;
+        for(int i = 0; !setPackageColorAllowed && i < colors.length - 1; i++) {
+            setPackageColorAllowed = (colors[i] == mColorValue);
+        }
+
+        if (!setPackageColorAllowed) { // Happens when the application icon changes
+            mColorValue = initialPackageColor;
+            updatePreferenceViews();
+        }
+
+        // Inject the initial package color
+        colors[colors.length - 1] = initialPackageColor;
+        adapter.setColors(colors);
+
+        dialog.setSelectedColor(mColorValue);
+        dialog.setOnCancelListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mColorValue =  d.getColor() & 0x00FFFFFF; // strip alpha, led does not support it
-                mOnValue = d.getPulseSpeedOn();
-                mOffValue = d.getPulseSpeedOff();
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setOnOkListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColorValue =  dialog.getSelectedColor();
+                mOnValue = dialog.getPulseSpeedOn();
+                mOffValue = dialog.getPulseSpeedOff();
                 updatePreferenceViews();
                 callChangeListener(this);
-            }
-        });
-        d.setButton(AlertDialog.BUTTON_NEGATIVE, mResources.getString(R.string.cancel),
-                new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
             }
         });
 
-        return d;
+        dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
+            @Override
+            public void onColorSelected(DialogInterface d, int color) {
+                if (adapter.getSelectedPosition() == 0) {
+                    adapter.setSelectedImageColorFilter(Color.DKGRAY);
+                } else {
+                    adapter.setSelectedImageColorFilter(Color.WHITE);
+                }
+            }
+        });
+
+        return dialog;
+    }
+
+    private int getInitialColor() {
+        int color = DEFAULT_COLOR;
+        String packageName = getKey();
+
+        try {
+            Drawable icon = getContext().getPackageManager()
+                    .getApplicationIcon(packageName);
+            color = ColorUtils.getIconColorFromDrawable(icon);
+        } catch (NameNotFoundException e) {
+            // shouldn't happen, but just return default
+        }
+
+        return color;
     }
 
     private static ShapeDrawable createOvalShape(int size, int color) {
