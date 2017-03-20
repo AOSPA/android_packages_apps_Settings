@@ -57,6 +57,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.util.Log;
+
 public class NotificationLightSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, NotificationLightPreference.ItemLongClickListener, Indexable {
     private static final String TAG = "NotificationLightSettings";
@@ -164,6 +166,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
         Context context = getActivity();
 
         if (!parsePackageList()) {
+            Log.d("test", "parsePackageList returned false");
             return;
         }
 
@@ -177,7 +180,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
                             PackageManager.GET_META_DATA);
                     NotificationLightPreference pref =
                             new NotificationLightPreference(context, pkg.color, pkg.timeon, pkg.timeoff);
-
+                    Log.d("test", pkg.name);
                     pref.setKey(pkg.name);
                     pref.setTitle(info.applicationInfo.loadLabel(mPackageManager));
                     pref.setIcon(info.applicationInfo.loadIcon(mPackageManager));
@@ -242,6 +245,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
                 Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_VALUES);
 
         if (TextUtils.equals(mPackageList, baseString)) {
+            Log.d("test", "eqals base string");
             return false;
         }
 
