@@ -17,41 +17,27 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <PreferenceCategory
-        android:key="general_section"
-        android:title="@string/notification_light_general_title">
-
-        <com.android.settingslib.SystemSettingSwitchPreference
-            android:key="notification_light_pulse"
-            android:title="@string/notification_light_title" />
-
-        <com.android.settings.batterylight.NotificationLightPreference
-            android:key="default"
-            android:title="@string/notification_light_default_value"
-            android:persistent="false"
-            android:dependency="notification_light_pulse" />
-
-    </PreferenceCategory>
+    <com.android.settings.batterylight.NotificationLightPreference
+        android:key="default"
+        android:title="@string/notification_light_default_value"
+        android:persistent="false" />
 
     <PreferenceCategory
         android:key="advanced_section"
         android:title="@string/advanced">
 
-        <com.android.settingslib.SystemSettingSwitchPreference
+        <SwitchPreference
             android:key="notification_light_screen_on_enable"
-            android:title="@string/notification_light_screen_on"
-            android:dependency="notification_light_pulse" />
+            android:title="@string/notification_light_screen_on" />
 
-        <com.android.settingslib.SystemSettingSwitchPreference
+        <SwitchPreference
             android:key="allow_lights"
             android:title="@string/notification_light_zen_mode"
-            android:dependency="notification_light_pulse"
             android:defaultValue="true" />
 
-        <com.android.settingslib.SystemSettingSwitchPreference
+        <SwitchPreference
             android:key="notification_light_pulse_custom_enable"
-            android:title="@string/notification_light_use_custom"
-            android:dependency="notification_light_pulse" />
+            android:title="@string/notification_light_use_custom" />
 
     </PreferenceCategory>
 
