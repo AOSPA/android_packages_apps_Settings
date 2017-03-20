@@ -17,83 +17,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:orientation="horizontal"
     android:paddingTop="@dimen/alert_dialog_padding_material"
     android:paddingStart="@dimen/alert_dialog_padding_material"
     android:paddingEnd="@dimen/alert_dialog_padding_material" >
-    <com.android.settings.preferences.ColorPickerView
-        android:id="@+id/color_picker_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp" />
-    <LinearLayout
-        android:id="@+id/color_panel_view"
+
+    <Spinner
+        android:id="@+id/on_spinner"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="4dp"
-        android:orientation="horizontal" >
-        <EditText
-            android:id="@+id/hex_color_input"
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:digits="0123456789ABCDEFabcdef"
-            android:inputType="textNoSuggestions"
-            android:maxLength="6" />
-        <com.android.settings.preferences.ColorPanelView
-            android:id="@+id/color_panel"
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_weight="0.5" />
-    </LinearLayout>
-        <LinearLayout
-            android:id="@+id/speed_title_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/color_panel_view"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="4dp"
-            android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
-            <View
-                android:id="@+id/lights_dialog_divider"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:drawable/divider_horizontal_dark" />
+    <View
+        android:layout_width="8dip"
+        android:layout_height="match_parent" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/pulse_speed_title"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+    <Spinner
+        android:id="@+id/off_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="4dip" >
-
-                <Spinner
-                    android:id="@+id/on_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <View
-                    android:layout_width="8dip"
-                    android:layout_height="match_parent" />
-
-                <Spinner
-                    android:id="@+id/off_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-        </LinearLayout>
 </LinearLayout>
