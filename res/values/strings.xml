@@ -72,7 +72,7 @@
     <string name="wfc_provisioned_switch_string">Wifi Calling Provisioned</string>
 
     <!-- Cell Radio Power. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="radio_info_radio_power">Cellular Radio Power</string>
+    <string name="radio_info_radio_power">Mobile Radio Power</string>
 
     <!-- Phone Info screen. Menu item label.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_menu_viewADN">View SIM Address Book</string>
@@ -621,16 +621,16 @@
     <!-- Wireless Settings screen title for things like Wi-Fi, bluetooth, airplane mode. -->
     <string name="wireless_networks_settings_title">Wireless &amp; networks</string>
     <!-- Main Settings screen settings summary text for the "Wireless controls" setting -->
-    <string name="radio_controls_summary">Manage Wi\u2011Fi, Bluetooth, airplane mode, cellular networks, &amp; VPNs</string>
+    <string name="radio_controls_summary">Manage Wi\u2011Fi, Bluetooth, airplane mode, mobile networks, &amp; VPNs</string>
 
     <!-- check box cellular data title [CHAR LIMIT=30] -->
-    <string name="cellular_data_title">Cellular data</string>
+    <string name="cellular_data_title">Mobile data</string>
     <!-- check box Calls title [CHAR LIMIT=30] -->
     <string name="calls_title">Calls</string>
     <!-- check box SMS Messges title [CHAR LIMIT=30] -->
     <string name="sms_messages_title">SMS messages</string>
     <!-- check box cellular data summary [CHAR LIMIT=41] -->
-    <string name="cellular_data_summary">Allow data usage over cellular network</string>
+    <string name="cellular_data_summary">Allow data usage over mobile network</string>
     <!-- check box to allow data usage when roaming [CHAR LIMIT=41] -->
     <string name="allow_data_usage_title">Allow data usage when roaming</string>
     <!-- mobile network settings screen, setting check box title -->
@@ -1304,10 +1304,13 @@
     <string name="device_admin_title">Device administration</string>
 
     <!-- Title of preference to manage device admins -->
-    <string name="manage_device_admin">Device administrators</string>
+    <string name="manage_device_admin">Device admin apps</string>
 
-    <!-- Summary of preference to manage device policies -->
-    <string name="manage_device_admin_summary">View or deactivate device administrators</string>
+    <!-- Summary of preference to manage device administrators, informing the user how many device administrator apps are installed and active -->
+    <plurals name="number_of_device_admins">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> active app</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> active apps</item>
+    </plurals>
 
     <!-- Title of preference to manage trust agents -->
     <string name="manage_trust_agents">Trust agents</string>
@@ -1592,18 +1595,21 @@
     <!-- Checkbox title for option to notify user when open networks are nearby -->
     <string name="wifi_notify_open_networks">Open network notification</string>
     <!-- Checkbox summary for option to notify user when open networks are nearby-->
-    <string name="wifi_notify_open_networks_summary">Notify whenever a high quality open network is available</string>
+    <string name="wifi_notify_open_networks_summary">Notify when a high\u2011quality open network is available that may require sign\u2011in</string>
     <!-- Checkbox title for option to enable Wi-Fi when saved networks are nearby -->
     <string name="wifi_wakeup">Turn Wi\u2011Fi back on</string>
-    <!-- Checkbox summary for option to enable Wi-Fi when saved networks are nearby-->
-    <string name="wifi_wakeup_summary">Automatically turn on Wi\u2011Fi near saved networks</string>
+    <!-- Checkbox summary for option to enable Wi-Fi when high quality saved networks are nearby-->
+    <string name="wifi_wakeup_summary">Automatically turn on Wi\u2011Fi near high\u2011quality saved networks</string>
     <!-- Checkbox title for option to toggle poor network detection -->
     <string name="wifi_poor_network_detection">Avoid poor connections</string>
     <!-- Checkbox summary for option to toggle poor network detection -->
     <string name="wifi_poor_network_detection_summary">Don\u2019t use a Wi\u2011Fi network unless it has a good Internet connection</string>
     <!-- Checkbox summary for option to toggle poor network detection [CHAR LIMIT=60] -->
     <string name="wifi_avoid_poor_network_detection_summary">Only use networks that have a good Internet connection</string>
-
+    <!-- Checkbox title for option to connect to open Wi-Fi automatically [CHAR LIMIT=40] -->
+    <string name="use_open_wifi_automatically_title">Connect to open networks</string>
+    <!-- Checkbox summary for option to connect to open Wi-Fi automatically  [CHAR LIMIT=100] -->
+    <string name="use_open_wifi_automatically_summary">Automatically connect to high\u2011quality open networks </string>
     <!-- Preference title for option to install certificates -->
     <string name="wifi_install_credentials">Install certificates</string>
     <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off. The
@@ -1630,11 +1636,11 @@
     <!-- Checkbox summary for option to toggle suspend power optimizations [CHAR LIMIT=30] -->
     <string name="wifi_limit_optimizations_summary">Limit battery used by Wi\u2011Fi</string>
     <!-- Checkbox title. Should we switch to using cellular data if Wi-Fi is still connected but the Wi-Fi network we're connected to no longer has Internet access (e.g., due to an outage)? -->
-    <string name="wifi_switch_away_when_unvalidated">Switch to cellular data if Wi\u2011Fi loses Internet access.</string>
+    <string name="wifi_switch_away_when_unvalidated">Switch to mobile data if Wi\u2011Fi loses Internet access.</string>
     <!-- Preference title for option to automatically switch away from bad wifi networks [CHAR LIMIT=60]-->
-    <string name="wifi_cellular_data_fallback_title">Switch to cellular data automatically</string>
+    <string name="wifi_cellular_data_fallback_title">Switch to mobile data automatically</string>
     <!-- Preference summary for option to automatically switch away from bad wifi networks [CHAR LIMIT=None]-->
-    <string name="wifi_cellular_data_fallback_summary">Use cellular data when Wi\u2011Fi has no Internet access. Data usage may apply.</string>
+    <string name="wifi_cellular_data_fallback_summary">Use mobile data when Wi\u2011Fi has no Internet access. Data usage may apply.</string>
     <!-- Action bar text message to manually add a wifi network [CHAR LIMIT=20]-->
     <string name="wifi_add_network">Add network</string>
     <!-- Action bar title to open additional Wi-Fi settings-->
@@ -1800,8 +1806,8 @@
 
     <!-- Dialog text to tell the user that the selected network has lost Internet access, and asking the user whether they want to avoid this network. -->
     <string name="lost_internet_access_title">Wi\u2011Fi is not connected to the Internet</string>
-    <string name="lost_internet_access_text">You can switch to the cellular network whenever Wi\u2011Fi has a bad connection.  Data usage may apply.</string>
-    <string name="lost_internet_access_switch">Switch to cellular</string>
+    <string name="lost_internet_access_text">You can switch to the mobile network whenever Wi\u2011Fi has a bad connection. Data usage may apply.</string>
+    <string name="lost_internet_access_switch">Switch to mobile</string>
     <string name="lost_internet_access_cancel">Stay on Wi\u2011Fi</string>
     <string name="lost_internet_access_persist">Never show again</string>
 
@@ -1832,6 +1838,14 @@
     <!-- Title of the screen to adjust IP settings -->
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's current IP address. -->
     <string name="wifi_advanced_ip_address_title">IP address</string>
+
+    <!-- Wifi Network Details -->
+    <!-- Wifi details preference title to display router IP subnet mask -->
+    <string name="wifi_details_subnet_mask">Subnet Mask</string>
+    <!-- Wifi details preference title to display router DNS info -->
+    <string name="wifi_details_dns">DNS</string>
+    <!-- Wifi details preference category title for IPv6 information -->
+    <string name="wifi_details_ipv6_address_header">IPv6 Addresses</string>
 
     <!-- Wifi saved access points.  Used as a label under the shortcut icon that goes to Wifi saved access points. [CHAR LIMIT=20] -->
     <string name="wifi_saved_access_points_label">Saved networks</string>
@@ -1898,13 +1912,17 @@
     <!-- Label for Wifi tether checkbox. Toggles Access Point on/off  [CHAR LIMIT=30] -->
     <string name="wifi_hotspot_checkbox_text">Wi\u2011Fi hotspot</string>
     <!-- Label for Wifi tether checkbox summary. Toggles Access Point on/off  [CHAR LIMIT=60] -->
-    <string name="wifi_hotspot_checkbox_text_summary">Use cellular connection to provide Wi\u2011Fi network</string>
+    <string name="wifi_hotspot_checkbox_text_summary">Use mobile connection to provide Wi\u2011Fi network</string>
+    <!-- Summary text when turning hotspot off -->
+    <string name="wifi_hotspot_off_subtext" product="tablet">Not sharing this tablet\u2019s Internet connection via hotspot</string>
+    <!-- Summary text when turning hotspot off -->
+    <string name="wifi_hotspot_off_subtext" product="default">Not sharing this phone\u2019s Internet connection via hotspot</string>
     <!-- Summary text when turning hotspot on -->
     <string name="wifi_tether_starting">Turning hotspot on\u2026</string>
     <!-- Summary text when turning hotspot off -->
     <string name="wifi_tether_stopping">Turning off hotspot\u2026</string>
     <!-- Subtext for wifi tether checkbox on success -->
-    <string name="wifi_tether_enabled_subtext">Portable hotspot <xliff:g id="network_ssid">%1$s</xliff:g> active</string>
+    <string name="wifi_tether_enabled_subtext"><xliff:g id="network_ssid">%1$s</xliff:g> is active</string>
     <!-- Subtext for wifi tether checkbox on failure -->
     <string name="wifi_tether_failed_subtext">Portable Wi\u2011Fi hotspot error</string>
     <!-- Used to open the ssid and security dialog for Wifi Access Point -->
@@ -1912,7 +1930,7 @@
     <!-- Used to open the ssid and security dialog for Wifi Access Point.  [CHAR LIMIT=30]-->
     <string name="wifi_hotspot_configure_ap_text">Wi\u2011Fi hotspot setup</string>
     <!-- Summary Used to open the ssid and security dialog for Wifi Access Point.  [CHAR LIMIT=60] -->
-    <string name="wifi_hotspot_configure_ap_text_summary">AndroidAP WPA2 PSK portable Wi\u2011Fi hotspot</string>
+    <string name="wifi_hotspot_configure_ap_text_summary">AndroidAP WPA2 PSK hotspot</string>
     <!-- Subtext on configuration preference to indicate SSID and security chosen -->
     <string name="wifi_tether_configure_subtext"><xliff:g id="network_ssid">%1$s</xliff:g> <xliff:g id="network_security">%2$s</xliff:g> portable Wi\u2011Fi hotspot</string>
     <!-- Default access point SSID used for tethering -->
@@ -2019,12 +2037,12 @@
     <string name="wifi_calling_roaming_mode_dialog_title">Roaming preference</string>
     <string-array name="wifi_calling_mode_choices">
         <item>Wi-Fi preferred</item>
-        <item>Cellular preferred</item>
+        <item>Mobile preferred</item>
         <item>Wi-Fi only</item>
     </string-array>
     <string-array name="wifi_calling_mode_choices_v2">
         <item>Wi-Fi</item>
-        <item>Cellular</item>
+        <item>Mobile</item>
         <item>Wi-Fi only</item>
     </string-array>
     <string-array name="wifi_calling_mode_values">
@@ -2034,11 +2052,11 @@
     </string-array>
     <string-array name="wifi_calling_mode_choices_without_wifi_only">
         <item>Wi-Fi preferred</item>
-        <item>Cellular preferred</item>
+        <item>Mobile preferred</item>
     </string-array>
     <string-array name="wifi_calling_mode_choices_v2_without_wifi_only">
         <item>Wi-Fi</item>
-        <item>Cellular</item>
+        <item>Mobile</item>
     </string-array>
     <string-array name="wifi_calling_mode_values_without_wifi_only">
         <item>"2"</item>
@@ -2054,8 +2072,6 @@
 
     <!-- Sound and alerts settings -->
     <skip/>
-    <!-- Main Settings screen setting option name to go into the display settings screen -->
-    <string name="home_settings">Home</string>
     <string name="display_settings_title">Display</string>
     <!-- Sound settings screen heading -->
     <string name="sound_settings">Sound</string>
@@ -2167,6 +2183,8 @@
     <string name="search_settings">Search</string>
     <!-- Main Settings screen, setting option summary to go into search settings -->
     <string name="search_settings_summary">Manage search settings and history</string>
+    <!-- There are no search results for the user's search [CHAR LIMIT=NONE]-->
+    <string name="search_settings_no_results">No results</string>
 
     <!-- Display settings --><skip/>
     <!-- Sound & display settings screen, section header for settings related to display -->
@@ -2327,15 +2345,15 @@
     <!-- Multiple SIMs found title.  [CHAR LIMIT=40] -->
     <string name="sim_multi_sims_title">Multiple SIMs found</string>
     <!-- Multiple SIMs found summary.  [CHAR LIMIT=100] -->
-    <string name="sim_multi_sims_summary">Choose the SIM you prefer for cellular data.</string>
+    <string name="sim_multi_sims_summary">Choose the SIM you prefer for mobile data.</string>
     <!-- Title asking user if they wish to change the default sim for cellular data.  [CHAR LIMIT=30] -->
     <string name="sim_change_data_title">Change data SIM?</string>
     <!-- Message confirming the user wishes to change the default data SIM from one to another.  [CHAR LIMIT=NONE] -->
-    <string name="sim_change_data_message">Use <xliff:g id="new_sim">%1$s</xliff:g> instead of <xliff:g id="old_sim">%2$s</xliff:g> for cellular data?</string>
+    <string name="sim_change_data_message">Use <xliff:g id="new_sim">%1$s</xliff:g> instead of <xliff:g id="old_sim">%2$s</xliff:g> for mobile data?</string>
     <!-- Title for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=30] -->
     <string name="sim_preferred_title">Update preferred SIM card?</string>
     <!-- Message for the dialog asking to user to change the preferred SIM  [CHAR LIMIT=NONE] -->
-    <string name="sim_preferred_message"><xliff:g id="new_sim">%1$s</xliff:g> is the only SIM in your device.  Do you want to use this SIM for cellular data, calls, and SMS messages?</string>
+    <string name="sim_preferred_message"><xliff:g id="new_sim">%1$s</xliff:g> is the only SIM in your device. Do you want to use this SIM for mobile data, calls, and SMS messages?</string>
 
     <!-- Instructions telling the user that they entered the wrong SIM PIN for the last time.
          Displayed in a dialog box.  [CHAR LIMIT=100] -->
@@ -2420,11 +2438,11 @@
     <!-- About phone, status item title.  The ICCID of the current LTE device. [CHAR LIMIT=30] -->
     <string name="status_icc_id">ICCID</string>
     <!-- About phone, status item title for the type of data phone network we're connected to, for example 3G or Edge or GPRS -->
-    <string name="status_network_type">Cellular network type</string>
+    <string name="status_network_type">Mobile network type</string>
     <!-- About phone, status item title for the latest area info cell broadcast received (Brazil only). -->
     <string name="status_latest_area_info">Operator info</string>
     <!-- About phone, status item title. The status of data access.  For example, the value may be "Connected" -->
-    <string name="status_data_state">Cellular network state</string>
+    <string name="status_data_state">Mobile network state</string>
     <!-- About phone, status item title. The status of whether we have service.  for example, the value may be "In service" -->
     <string name="status_service_state">Service state</string>
     <!-- About phone, status item title. The  current cell tower signal strength -->
@@ -2682,7 +2700,7 @@
     <string name="storage_detail_dialog_system">System includes files that Android can\u2019t display individually.</string>
 
     <!-- Body of dialog informing user about other users on a storage device [CHAR LIMIT=NONE]-->
-    <string name="storage_detail_dialog_user"><xliff:g id="user" example="Guest user">^1</xliff:g> may have saved photos, music, movies, apps, or other data that is taking up <xliff:g id="size" example="1.2 GB">^2</xliff:g> of storage.
+    <string name="storage_detail_dialog_user"><xliff:g id="user" example="Guest user">^1</xliff:g> may have saved photos, music, apps, or other data, using <xliff:g id="size" example="1.2 GB">^2</xliff:g> of storage.
 \n\nTo view details, switch to <xliff:g id="user" example="Guest user">^1</xliff:g>.</string>
 
     <!-- Title of wizard step prompting user to setup a storage device [CHAR LIMIT=32] -->
@@ -2872,7 +2890,7 @@
     <!-- SD card & phone storage settings screen, setting option name under Backup & Restore heading -->
     <string name="reset_network_title">Network settings reset</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset network settings [CHAR LIMIT=NONE] -->
-    <string name="reset_network_desc">This will reset all network settings, including:\n\n<li>Wi\u2011Fi</li>\n<li>Cellular data</li>\n<li>Bluetooth</li>"</string>
+    <string name="reset_network_desc">This will reset all network settings, including:\n\n<li>Wi\u2011Fi</li>\n<li>Mobile data</li>\n<li>Bluetooth</li>"</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset network settings -->
     <string name="reset_network_button_text">Reset settings</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset settings button -->
@@ -2948,7 +2966,7 @@
     <!-- Tethering controls, item title to go into the tethering settings when USB and Bluetooth tethering are available [CHAR LIMIT=25]-->
     <string name="tether_settings_title_usb_bluetooth">Tethering</string>
     <!-- Tethering controls, item title to go into the tethering settings when USB, Bluetooth and Wifi tethering are available [CHAR LIMIT=50]-->
-    <string name="tether_settings_title_all">Hotspot &amp; Tethering</string>
+    <string name="tether_settings_title_all">Hotspot &amp; tethering</string>
     <!-- Tethering setting summary when both Wi-Fi hotspot and tether are turned on [CHAR LIMIT=NONE]-->
     <string name="tether_settings_summary_hotspot_on_tether_on">Hotspot on, tethering</string>
     <!-- Tethering setting summary when Wi-Fi hotspot is on and tether is off [CHAR LIMIT=NONE]-->
@@ -2978,23 +2996,23 @@
     <!-- Label for bluetooth tether checkbox [CHAR LIMIT=25]-->
     <string name="bluetooth_tether_checkbox_text">Bluetooth tethering</string>
     <!-- Bluetooth available subtext - shown when Bluetooth tethering is turned on but it is not currently tethered to any devices [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_available_subtext" product="tablet">Sharing this tablet\u2019s Internet connection</string>
+    <string name="bluetooth_tethering_available_subtext" product="tablet">Sharing this tablet\u2019s Internet connection via Bluetooth</string>
     <!-- Bluetooth available subtext - shown when Bluetooth tethering is turned on but it is not currently tethered to any devices [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_available_subtext" product="default">Sharing this phone\u2019s Internet connection</string>
+    <string name="bluetooth_tethering_available_subtext" product="default">Sharing this phone\u2019s Internet connection via Bluetooth</string>
     <!-- Bluetooth connected subtext - shown when a device is tethered over Bluetooth [CHAR LIMIT=60]-->
-    <string name="bluetooth_tethering_device_connected_subtext" product="tablet">Sharing this tablet\u2019s Internet connection to 1 device</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="tablet">Sharing this tablet\u2019s Internet connection to 1 device via Bluetooth</string>
     <!-- Bluetooth connected subtext - shown when a device is tethered over Bluetooth [CHAR LIMIT=60]-->
-    <string name="bluetooth_tethering_device_connected_subtext" product="default">Sharing this phone\u2019s Internet connection to 1 device</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="default">Sharing this phone\u2019s Internet connection to 1 device via Bluetooth</string>
     <!-- Bluetooth connected subtext - shown when multiple devices are tethered over Bluetooth [CHAR LIMIT=60]-->
-    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet">Sharing this tablet\u2019s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet">Sharing this tablet\u2019s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices via Bluetooth</string>
     <!-- Bluetooth connected subtext - shown when multiple devices are tethered over Bluetooth [CHAR LIMIT=60]-->
-    <string name="bluetooth_tethering_devices_connected_subtext" product="default">Sharing this phone\u2019s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="default">Sharing this phone\u2019s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices via Bluetooth</string>
     <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_off_subtext_config">Sharing this <xliff:g id="device_name">%1$d</xliff:g>\u2019s Internet connection</string>
+    <string name="bluetooth_tethering_off_subtext_config">Sharing this <xliff:g id="device_name">%1$d</xliff:g>\u2019s Internet connection via Bluetooth</string>
     <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_off_subtext" product="tablet">Not sharing this tablet\u2019s Internet connection</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet">Not sharing this tablet\u2019s Internet connection via Bluetooth</string>
     <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_off_subtext" product="default">Not sharing this phone\u2019s Internet connection</string>
+    <string name="bluetooth_tethering_off_subtext" product="default">Not sharing this phone\u2019s Internet connection via Bluetooth</string>
     <!-- Bluetooth errored subtext - shown when Bluetooth is broken for some reason [CHAR LIMIT=50]-->
     <string name="bluetooth_tethering_errored_subtext">Not tethered</string>
     <!-- Bluetooth Tethering settings. Error message shown when trying to connect an 8th device [CHAR LIMIT=50]-->
@@ -3002,11 +3020,14 @@
     <!-- Bluetooth Tethering settings.  Message for untethering from a bluetooth device [CHAR LIMIT=50]-->
     <string name="bluetooth_untether_blank"><xliff:g id="device_name">%1$s</xliff:g> will be untethered.</string>
 
+    <!-- Tethering footer info [CHAR LIMIT=NONE]-->
+    <string name="tethering_footer_info">Use hotspot and tethering to provide Internet to other devices through your mobile data connection.</string>
+
     <!-- Tethering help button - calls up a web view with general tethering info -->
     <string name="tethering_help_button_text">Help</string>
 
     <!-- Wireless controls, item title to go into the network settings -->
-    <string name="network_settings_title">Cellular networks</string>
+    <string name="network_settings_title">Mobile network</string>
 
     <!-- Mobile plan [CHAR LIMIT=35]-->
     <string name="manage_mobile_plan_title" translatable="true">Mobile plan</string>
@@ -3018,7 +3039,7 @@
     <string name="sms_change_default_no_previous_dialog_text" translatable="true">Use <xliff:g id="new_app">%s</xliff:g> as your SMS app?</string>
 
     <!-- Network Scorer Picker title [CHAR LIMIT=40]-->
-    <string name="network_scorer_picker_title">Network Scorer</string>
+    <string name="network_scorer_picker_title">Network Rating Provider</string>
     <string name="network_scorer_picker_none_preference">None</string>
 
     <!-- Wifi Assistant change wi-fi assistant title.  [CHAR LIMIT=40] -->
@@ -3070,9 +3091,9 @@
     <!-- [CHAR LIMIT=30] Location mode screen, screen title -->
     <string name="location_mode_screen_title">Location mode</string>
     <!-- [CHAR LIMIT=130] Location mode screen, description for high accuracy mode -->
-    <string name="location_mode_high_accuracy_description">Use GPS, Wi\u2011Fi, Bluetooth, or cellular networks to determine location </string>
+    <string name="location_mode_high_accuracy_description">Use GPS, Wi\u2011Fi, Bluetooth, or mobile networks to determine location </string>
     <!-- [CHAR LIMIT=130] Location mode screen, description for battery saving mode -->
-    <string name="location_mode_battery_saving_description">Use Wi\u2011Fi, Bluetooth, or cellular networks to determine location</string>
+    <string name="location_mode_battery_saving_description">Use Wi\u2011Fi, Bluetooth, or mobile networks to determine location</string>
     <!-- [CHAR LIMIT=130] Location mode screen, description for sensors only mode -->
     <string name="location_mode_sensors_only_description">Use GPS to determine location</string>
     <!-- Help menu label [CHAR LIMIT=20] Location settings screen, overflow menu that takes the user
@@ -3093,7 +3114,7 @@
         time.</string>
 
     <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for Google location service (cell ID, wifi, etc.) -->
-    <string name="location_network_based">Wi\u2011Fi &amp; cellular network location</string>
+    <string name="location_network_based">Wi\u2011Fi &amp; mobile network location</string>
     <!-- [CHAR LIMIT=130] Security & location settings screen, setting summary for Google location service check box-->
     <string name="location_neighborhood_level">Let apps use Google\u2019s location service to estimate your location faster. Anonymous location data will be collected and sent to Google.</string>
     <!-- [CHAR LIMIT=130] Security & location settings screen, setting summary when Use wireless networks check box is selected, for wifi-only devices -->
@@ -3979,7 +4000,7 @@
     <!-- Settings title for accessibility settings screen -->
     <string name="accessibility_settings_title">Accessibility settings</string>
     <!-- Summary for Accessibility settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="accessibility_settings_summary">Screen readers, audio, display, interaction controls</string>
+    <string name="accessibility_settings_summary">Screen readers, display, interaction controls</string>
     <!-- Settings title for a brief version of Vision-Related Accessibility Settings. Displayed in Setup Wizard only. [CHAR LIMIT=35] -->
     <string name="vision_settings_title">Vision Settings</string>
     <!-- Settings description for a brief version of Vision-Related Accessibility Settings. Tells the user that they can adjust these settings now to help them through the remainder of the Setup Wizard and that they can later be changed in Settings. Displayed in Setup Wizard only. [CHAR LIMIT=none] -->
@@ -3994,6 +4015,8 @@
     <string name="interaction_control_category_title">Interaction controls</string>
     <!-- Title for the accessibility preference category of services downloaded by the user. [CHAR LIMIT=50] -->
     <string name="user_installed_services_category_title">Downloaded services</string>
+    <!-- Title for the accessibility preference category of settings considered to be experimental, meaning they might be changed or removed in the future. [CHAR LIMIT=50] -->
+    <string name="experimental_category_title">Experimental</string>
     <!-- Title for the Talkback Accessibility Service. Displayed on the Accessibility Settings screen in Setup Wizard. [CHAR_LIMIT=25] -->
     <string name="talkback_title">Talkback</string>
     <!-- Summary for the Talkback Accessibility Service. Lets the user know that Talkback is a screenreader and that it is usually most helpful to blind and low vision users and whether the service is on. [CHAR_LIMIT=none] -->
@@ -4003,7 +4026,9 @@
     <!-- Title for the accessibility preference screen to enable video captioning. [CHAR LIMIT=35] -->
     <string name="accessibility_captioning_title">Captions</string>
     <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
-    <string name="accessibility_screen_magnification_title">Magnification gesture</string>
+    <string name="accessibility_screen_magnification_title">Magnification</string>
+    <!-- Summary for the accessibility preference to enable screen magnification. [CHAR LIMIT=25] -->
+    <string name="accessibility_preference_magnification_summary">Zoom in on screen</string>
     <!-- Short summary for Magnification gesture. Tells the user that this feature allows the user to magnify the screen by tapping 3 times. Appears in accessibility portion of setup wizard -->
     <string name="accessibility_screen_magnification_short_summary">Tap 3 times to zoom</string>
     <!-- Summary for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=none] -->
@@ -4031,7 +4056,7 @@
     <!-- Title for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_preference_title">Color inversion</string>
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_display_inversion_preference_subtitle">(Experimental) May affect performance</string>
+    <string name="accessibility_display_inversion_preference_subtitle">May affect performance</string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_preference_title">Click after pointer stops moving</string>
     <!-- Title for accessibility preference for configuring amount of time that has to pass after pointer stops moving before click action can be performed (if automatic click after pointer stops moving feature is enabled). [CHAR LIMIT=NONE] -->
@@ -4338,7 +4363,7 @@
     <!-- [CHAR LIMIT=25] Label for battery stats wake lock state graph -->
     <string name="battery_stats_wake_lock_label">Awake</string>
     <!-- [CHAR LIMIT=25] Label for battery stats phone signal strength graph -->
-    <string name="battery_stats_phone_signal_label">Cellular network signal</string>
+    <string name="battery_stats_phone_signal_label">Mobile network signal</string>
     <!-- Battery usage during last unplugged period -->
     <string name="battery_stats_last_duration">@string/menu_stats_last_unplugged</string>
     <!-- CPU awake time title -->
@@ -4553,6 +4578,11 @@
 
     <!-- [CHAR_LIMIT=40] Battery saver: Value for automatic entry option: pct% battery -->
     <string name="battery_saver_turn_on_automatically_pct">at <xliff:g id="percent">%1$s</xliff:g> battery</string>
+
+    <!-- [CHAR_LIMIT=40] Battery percentage: Title -->
+    <string name="battery_percentage">Battery percentage</string>
+    <!-- [CHAR_LIMIT=NONE] Battery percentage: Description for preference -->
+    <string name="battery_percentage_description">Show battery percentage in status bar</string>
 
     <!-- Process Stats strings -->
     <skip />
@@ -5149,7 +5179,7 @@
     <!-- Title for app usage. [CHAR LIMIT=40] -->
     <string name="data_usage_app_info_label">APP INFO</string>
     <!-- Title for cellular data usage. [CHAR LIMIT=40] -->
-    <string name="data_usage_cellular_data">Cellular data</string>
+    <string name="data_usage_cellular_data">Mobile data</string>
     <!-- Title for setting data limit. [CHAR LIMIT=40] -->
     <string name="data_usage_data_limit">Set data limit</string>
     <!-- Title for option to pick visible time range from a list available usage periods. [CHAR LIMIT=25] -->
@@ -5179,7 +5209,7 @@
     <!-- Title for menu option to show details for all SIM cards. [CHAR LIMIT=26] -->
     <string name="data_usage_menu_sim_cards">SIM cards</string>
     <!-- Title for menu option to show details for all cellular networks. [CHAR LIMIT=26] -->
-    <string name="data_usage_menu_cellular_networks">Cellular networks</string>
+    <string name="data_usage_menu_cellular_networks">Mobile networks</string>
     <!-- Summary String for Cellular data enable toggle. [CHAR LIMIT=33] -->
     <string name="data_usage_cellular_data_summary">Paused at limit</string>
 
@@ -5205,9 +5235,9 @@
     <string name="data_usage_app_restricted">restricted</string>
 
     <!-- Body of dialog shown to request confirmation that mobile data will be disabled. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_disable_mobile">Turn off cellular data?</string>
+    <string name="data_usage_disable_mobile">Turn off mobile data?</string>
     <!-- Checkbox label that will disable mobile network data connection when user-defined limit is reached. [CHAR LIMIT=26] -->
-    <string name="data_usage_disable_mobile_limit">Set cellular data limit</string>
+    <string name="data_usage_disable_mobile_limit">Set mobile data limit</string>
     <!-- Checkbox label that will disable 4G network data connection when user-defined limit is reached. [CHAR LIMIT=26] -->
     <string name="data_usage_disable_4g_limit">Set 4G data limit</string>
     <!-- Checkbox label that will disable 2G-3G network data connection when user-defined limit is reached. [CHAR LIMIT=26] -->
@@ -5220,19 +5250,19 @@
     <!-- Tab title for showing Ethernet data usage. [CHAR LIMIT=10] -->
     <string name="data_usage_tab_ethernet">Ethernet</string>
     <!-- Tab title for showing combined mobile data usage. [CHAR LIMIT=20] -->
-    <string name="data_usage_tab_mobile">Cellular</string>
+    <string name="data_usage_tab_mobile">Mobile</string>
     <!-- Tab title for showing 4G data usage. [CHAR LIMIT=10] -->
     <string name="data_usage_tab_4g">4G</string>
     <!-- Tab title for showing 2G and 3G data usage. [CHAR LIMIT=10] -->
     <string name="data_usage_tab_3g">2G-3G</string>
 
     <!-- Title shown when current operation applies to mobile networks. [CHAR LIMIT=20] -->
-    <string name="data_usage_list_mobile">Cellular</string>
+    <string name="data_usage_list_mobile">Mobile</string>
     <!-- Title shown when current operation applies to no networks. [CHAR LIMIT=20] -->
     <string name="data_usage_list_none">None</string>
 
     <!-- Toggle switch title for enabling all mobile data network connections. [CHAR LIMIT=32] -->
-    <string name="data_usage_enable_mobile">Cellular data</string>
+    <string name="data_usage_enable_mobile">Mobile data</string>
     <!-- Toggle switch title for enabling 2G and 3G data network connections. [CHAR LIMIT=32] -->
     <string name="data_usage_enable_3g">2G-3G data</string>
     <!-- Toggle switch title for enabling 4G data network connection. [CHAR LIMIT=32] -->
@@ -5247,15 +5277,15 @@
     <!-- Checkbox label that restricts background data usage of a specific application. [CHAR LIMIT=40] -->
     <string name="data_usage_app_restrict_background">Background data</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_app_restrict_background_summary">Enable usage of cellular data in the background</string>
+    <string name="data_usage_app_restrict_background_summary">Enable usage of Mobile data in the background</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application when no networks have been limited. [CHAR LIMIT=84] -->
-    <string name="data_usage_app_restrict_background_summary_disabled">To restrict background data for this app, first set a cellular data limit.</string>
+    <string name="data_usage_app_restrict_background_summary_disabled">To restrict background data for this app, first set a mobile data limit.</string>
     <!-- Title of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=48] -->
     <string name="data_usage_app_restrict_dialog_title">Restrict background data?</string>
     <!-- Body of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_app_restrict_dialog">This feature may cause an app that depends on background data to stop working when only cellular networks are available.\n\nYou can find more appropriate data usage controls in the settings available within the app.</string>
+    <string name="data_usage_app_restrict_dialog">This feature may cause an app that depends on background data to stop working when only mobile networks are available.\n\nYou can find more appropriate data usage controls in the settings available within the app.</string>
     <!-- Body of dialog shown when user attempts to restrict background data before a network data limit has been set. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_denied_dialog">Restricting background data is possible only when you\u2019ve set a cellular data limit.</string>
+    <string name="data_usage_restrict_denied_dialog">Restricting background data is possible only when you\u2019ve set a mobile data limit.</string>
     <!--  Title of dialog shown when user enables global auto sync [CHAR LIMIT=32] -->
     <string name="data_usage_auto_sync_on_dialog_title">Turn auto-sync data on?</string>
     <!--  Body of dialog shown when user enables global auto sync, for tablet [CHAR LIMIT=none] -->
@@ -5282,18 +5312,18 @@
     <!-- Title of dialog shown before user limits data usage. [CHAR LIMIT=48] -->
     <string name="data_usage_limit_dialog_title">Limiting data usage</string>
     <!-- Body of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_limit_dialog_mobile" product="tablet">Your tablet will turn off cellular data once it reaches the limit you set.\n\nSince data usage is measured by your tablet, and your carrier may account for usage differently, consider setting a conservative limit.</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet">Your tablet will turn off mobile data once it reaches the limit you set.\n\nSince data usage is measured by your tablet, and your carrier may account for usage differently, consider setting a conservative limit.</string>
     <!-- Body of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_limit_dialog_mobile" product="default">Your phone will turn off cellular data once it reaches the limit you set.\n\nSince data usage is measured by your phone, and your carrier may account for usage differently, consider setting a conservative limit.</string>
+    <string name="data_usage_limit_dialog_mobile" product="default">Your phone will turn off mobile data once it reaches the limit you set.\n\nSince data usage is measured by your phone, and your carrier may account for usage differently, consider setting a conservative limit.</string>
 
     <!-- Title of dialog shown before user restricts background data usage. [CHAR LIMIT=48] -->
     <string name="data_usage_restrict_background_title">Restrict background data?</string>
     <!-- Body of dialog shown before user restricts background data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_background">If you restrict background cellular data, some apps and services won\u2019t work unless you\u2019re connected to Wi\u2011Fi.</string>
+    <string name="data_usage_restrict_background">If you restrict background mobile data, some apps and services won\u2019t work unless you\u2019re connected to Wi\u2011Fi.</string>
     <!-- Body of dialog shown before user restricts background data usage. This is for multiuser tablets. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_background_multiuser" product="tablet">If you restrict background cellular data, some apps and services won\u2019t work unless you\u2019re connected to Wi\u2011Fi.\n\nThis setting affects all users on this tablet.</string>
+    <string name="data_usage_restrict_background_multiuser" product="tablet">If you restrict background mobile data, some apps and services won\u2019t work unless you\u2019re connected to Wi\u2011Fi.\n\nThis setting affects all users on this tablet.</string>
     <!-- Body of dialog shown before user restricts background data usage. This is for multiuser phones. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_restrict_background_multiuser" product="default">If you restrict background cellular data, some apps and services won\u2019t work unless you\u2019re connected to Wi\u2011Fi.\n\nThis setting affects all users on this phone.</string>
+    <string name="data_usage_restrict_background_multiuser" product="default">If you restrict background mobile data, some apps and services won\u2019t work unless you\u2019re connected to Wi\u2011Fi.\n\nThis setting affects all users on this phone.</string>
 
     <!-- Label displaying current network data usage warning threshold. [CHAR LIMIT=18] -->
     <string name="data_usage_sweep_warning"><font size="18"><xliff:g id="number" example="128">^1</xliff:g></font> <font size="9"><xliff:g id="unit" example="KB">^2</xliff:g></font>\n<font size="12">warning</font></string>
@@ -5319,9 +5349,9 @@
     <!-- Dialog title for selecting metered networks. [CHAR LIMIT=25] -->
     <string name="data_usage_metered_title">Network restrictions</string>
     <!-- Dialog body for selecting paid networks. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_metered_body">Metered networks are treated like cellular when background data is restricted. Apps may warn before using these networks for large downloads.</string>
+    <string name="data_usage_metered_body">Metered networks are treated like mobile networks when background data is restricted. Apps may warn before using these networks for large downloads.</string>
     <!-- Header for list of mobile networks. [CHAR LIMIT=32] -->
-    <string name="data_usage_metered_mobile">Cellular networks</string>
+    <string name="data_usage_metered_mobile">Mobile networks</string>
     <!-- Header for list of Wi-Fi networks. [CHAR LIMIT=32] -->
     <string name="data_usage_metered_wifi">Metered Wi\u2011Fi networks</string>
     <!-- Body text prompting user to enable Wi-Fi to configure metered networks. [CHAR LIMIT=64] -->
@@ -5456,6 +5486,8 @@
     <string name="vpn_no_network">There is no network connection. Please try again later.</string>
     <!-- Toast message when VPN has disconnected automatically due to Clear credentials. [CHAR LIMIT=NONE] -->
     <string name="vpn_disconnected">Disconnected from VPN</string>
+    <!-- Seting subtext indicating the device is not currently connected to any VPN [CHAR LIMIT=40]-->
+    <string name="vpn_disconnected_summary">None</string>
     <!-- Toast message when a certificate is missing. [CHAR LIMIT=100] -->
     <string name="vpn_missing_cert">A certificate is missing. Please edit the profile.</string>
 
@@ -5683,11 +5715,6 @@
     <string name="apps_with_restrictions_header">Applications with restrictions</string>
     <!-- Applicaitons with restrictions - settings button [CHAR LIMIT=30] -->
     <string name="apps_with_restrictions_settings_button">Expand settings for application</string>
-
-    <!-- Home application selection - uninstall button [CHAR LIMIT=80] -->
-    <string name="home_app_uninstall_button">Uninstall this application</string>
-    <!-- Message to user that Home Settings will be hidden because there is now only one available home application -->
-    <string name="only_one_home_message">Home settings will be hidden until you install another home application.</string>
 
     <!-- Warning message when changing a global setting for a tablet.[CHAR LIMIT=none] -->
     <string name="global_change_warning" product="tablet">This setting affects all users on this tablet.</string>
@@ -5928,7 +5955,7 @@
     <!-- Message smmary that SIM cards have changed.  [CHAR LIMIT=60] -->
     <string name="sim_cards_changed_message_summary">Tap to set activities</string>
     <!-- Message that Cellular data is unavailable.  [CHAR LIMIT=40] -->
-    <string name="sim_cellular_data_unavailable">Cellular data is unavailable</string>
+    <string name="sim_cellular_data_unavailable">Mobile data is unavailable</string>
     <!-- Message summary that Cellular data is unavailable.  [CHAR LIMIT=60] -->
     <string name="sim_cellular_data_unavailable_summary">Tap to select a data SIM</string>
     <!-- Checkbox to always use for calls.  [CHAR LIMIT=40] -->
@@ -6011,13 +6038,13 @@
     <!-- Title for setting tile leading to Connected devices settings [CHAR LIMIT=40]-->
     <string name="connected_devices_dashboard_title">Connected devices</string>
     <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="connected_devices_dashboard_summary">Bluetooth, NFC, cast</string>
+    <string name="connected_devices_dashboard_summary">Bluetooth, Cast, NFC</string>
     <!-- Title for setting tile leading to Apps & Notification settings [CHAR LIMIT=40]-->
     <string name="app_and_notification_dashboard_title">Apps &amp; notifications</string>
     <!-- Summary for Apps & Notification settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="app_and_notification_dashboard_summary">Permissions, default apps</string>
     <!-- Title for setting tile leading to User and accounts settings [CHAR LIMIT=40]-->
-    <string name="account_dashboard_title">User &amp; accounts</string>
+    <string name="account_dashboard_title">Users &amp; accounts</string>
     <!-- Title for setting tile leading to setting UI which allows user set default app to
     handle actions such as open web page, making phone calls, default SMS apps [CHAR  LIMIT=40]-->
     <string name="app_default_dashboard_title">Default apps</string>
@@ -6037,11 +6064,6 @@
     <string name="search_breadcrumb_connector" translatable="false">
         <xliff:g name="first_item">%1$s</xliff:g> > <xliff:g name="second_item">%2$s</xliff:g>
     </string>
-
-    <!-- Text used to identify the search query suggestions / recent searches -->
-    <string name="search_recents_queries_label">Recent searches</string>
-    <!-- Text used to identify the search results -->
-    <string name="search_results_label">Results</string>
 
     <!--Search Keywords [CHAR LIMIT=NONE]-->
     <string name="keywords_wifi">wifi, wi-fi, network connection</string>
@@ -6319,7 +6341,14 @@
     <string name="lock_screen_notifications_interstitial_title_profile">Profile notifications</string>
 
     <!-- Notification Settings: Title for the option managing notifications per application. [CHAR LIMIT=30] -->
-    <string name="app_notifications_title">App notifications</string>
+    <string name="app_notifications_title">Notifications</string>
+
+    <!-- Notification Settings: Summary for the option managing notifications per application. [CHAR LIMIT=60] -->
+    <plurals name="app_notifications_summary">
+        <item quantity="zero">On for all apps</item>
+        <item quantity="one">Off for 1 app</item>
+        <item quantity="other">Off for <xliff:g id="off_count" example="10">%d</xliff:g> apps</item>
+    </plurals>
 
     <!-- [CHAR LIMIT=100] Notification importance slider title -->
     <string name="notification_importance_title">Importance</string>
@@ -6451,8 +6480,14 @@
     <!-- [CHAR LIMIT=NONE] App notification settings: no channels -->
     <string name="no_channels">This app has not posted any notifications</string>
 
-    <!-- [CHAR LIMIT=60] App notification settings: Text to display for deleted channels -->
-    <string name="deleted_channel_name"><xliff:g id="channel_name" example="Promotions">%1$s</xliff:g> (deleted)</string>
+    <!-- [CHAR LIMIT=NONE] App notification settings: link to app notification settings-->
+    <string name="app_settings_link">Additional settings in the app</string>
+
+    <!-- [CHAR LIMIT=NONE] Footer listing a count of deleted channels. -->
+    <plurals name="deleted_channels">
+        <item quantity="one">%d category deleted</item>
+        <item quantity="other">%d categories deleted</item>
+    </plurals>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Block option title -->
     <string name="app_notification_block_title">Block all</string>
@@ -6935,11 +6970,8 @@
 
    <!-- Label for list that shows all permissions -->
    <string name="app_permissions">App permissions</string>
-   <!-- Summary of permissions currently granted to apps [CHAR LIMIT=45] -->
-   <string name="app_permissions_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed additional access</string>
-   <!-- Summary of number of apps currently granted a single permission [CHAR
-        LIMIT=45] -->
-   <string name="app_permissions_group_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed</string>
+   <!-- Summary of permissions currently granted to apps [CHAR LIMIT=60] -->
+   <string name="app_permissions_summary">Apps using <xliff:g id="apps" example="location">%1$s</xliff:g></string>
 
    <!-- Label for tap to wake setting [CHAR LIMIT=30] -->
    <string name="tap_to_wake">Tap to wake</string>
@@ -6961,9 +6993,9 @@
 
     <!-- Description of settings item that leads to list of all apps that can open web links [CHAR LIMIT=NONE] -->
     <plurals name="domain_urls_apps_summary">
-        <item quantity="zero">No app can open any supported link</item>
-        <item quantity="one">One app can open its supported links</item>
-        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps can open their supported links</item>
+        <item quantity="zero">No app opening supported links</item>
+        <item quantity="one">One app opening supported links</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> apps opening supported links</item>
     </plurals>
 
     <!-- Explanation that the app that will ALWAYS be launched to open web links to domains that it understands -->
@@ -7164,7 +7196,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring files via MTP. -->
-    <string name="usb_use_file_transfers">Transfer files</string>
+    <string name="usb_use_file_transfers">Transferring files</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring files via MTP. -->
@@ -7172,7 +7204,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring photos via PTP. -->
-    <string name="usb_use_photo_transfers">Transfer photos (PTP)</string>
+    <string name="usb_use_photo_transfers">Transferring photos (PTP)</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring photos via PTP. -->
@@ -7180,7 +7212,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for entering MIDI mode. -->
-    <string name="usb_use_MIDI">Use device as MIDI</string>
+    <string name="usb_use_MIDI">Using device as MIDI</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for entering MIDI mode. -->
@@ -7192,8 +7224,6 @@
 
     <!-- Settings item title for USB preference [CHAR LIMIT=35] -->
     <string name="usb_pref">USB</string>
-    <!-- Summary for the USB preference when nothing is connected through the usb port.  [CHAR LIMIT=40] -->
-    <string name="usb_nothing_connected">Nothing connected</string>
 
     <!-- Settings item title for background check prefs [CHAR LIMIT=35] -->
     <string name="background_check_pref">Background check</string>
@@ -7318,38 +7348,38 @@
     <string name="accessibility_lock_screen_progress"><xliff:g id="count" example="1">%1$d</xliff:g> of <xliff:g id="count" example="1">%2$d</xliff:g> characters used</string>
 
     <!-- System Alert Window settings -->
-    <!-- Title of Draw Overlay preference item [CHAR LIMIT=55] -->
-    <string name="draw_overlay_title">Apps that can draw over other apps</string>
-    <!-- Title of draw overlay screen [CHAR LIMIT=30] -->
-    <string name="draw_overlay">Draw over other apps</string>
+    <!-- Title of display overlay preference item [CHAR LIMIT=55] -->
+    <string name="draw_overlay_title">Apps that can display over other apps</string>
+    <!-- Title of display overlay screen [CHAR LIMIT=30] -->
+    <string name="draw_overlay">Display over other apps</string>
     <!-- Settings title in main settings screen for SYSTEM_ALERT_WINDOW [CHAR LIMIT=45] -->
-    <string name="system_alert_window_settings">Draw over other apps</string>
+    <string name="system_alert_window_settings">Display over other apps</string>
     <!-- Title for the apps with SYSTEM_ALERT_WINDOW permission/privilege [CHAR LIMIT=20] -->
     <string name="system_alert_window_apps_title">Apps</string>
-    <!-- Title for the apps that are allowed to draw on top of other apps [CHAR LIMIT=60] -->
-    <string name="system_alert_window_access_title">Draw over other apps</string>
-    <!-- Label for setting which controls whether app can draw overlays [CHAR LIMIT=45] -->
-    <string name="permit_draw_overlay">Permit drawing over other apps</string>
+    <!-- Title for the apps that are allowed to display over other apps [CHAR LIMIT=60] -->
+    <string name="system_alert_window_access_title">Display over other apps</string>
+    <!-- Label for setting which controls whether app can display over other apps [CHAR LIMIT=45] -->
+    <string name="permit_draw_overlay">Allow display over other apps</string>
     <!-- Link to the apps page for SYSTEM_ALERT_WINDOW settings [CHAR LIMIT=45] -->
-    <string name="app_overlay_permission_preference">App draw on top permission</string>
+    <string name="app_overlay_permission_preference">App display on top permission</string>
     <!-- Description of allowing overlay setting [CHAR LIMIT=NONE] -->
-    <string name="allow_overlay_description">This permission allows an app to display on top of other apps you\u2019re using and may interfere with your use of the interface in other applications, or change what you think you are seeing in other applications.</string>
+    <string name="allow_overlay_description">This feature allows an app to display on top of other apps you\u2019re using. It may interfere with your use of those apps or change the way they seem to appear or behave.</string>
 
     <!-- Keyword for VR setting -->
     <string name="keywords_vr_listener">vr virtual reality listener stereo helper service</string>
     <!-- Keyword for SYSTEM_ALERT_WINDOW -->
-    <string name="keywords_system_alert_window">system alert window dialog draw on top other apps</string>
+    <string name="keywords_system_alert_window">system alert window dialog display on top other apps</string>
     <!-- Main settings screen item's title to go into the overlay settings screen [CHAR LIMIT=30] -->
-    <string name="overlay_settings">Draw over other apps</string>
+    <string name="overlay_settings">Display over other apps</string>
 
-    <!-- Summary of number of apps currently can draw overlays [CHAR LIMIT=60] -->
-    <string name="system_alert_window_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed to draw on top of other apps</string>
+    <!-- Summary of number of apps currently can display over other apps [CHAR LIMIT=60] -->
+    <string name="system_alert_window_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed to display over other apps</string>
 
-    <!-- Label for showing apps that can draw overlays [CHAR LIMIT=45] -->
+    <!-- Label for showing apps that can display over other apps [CHAR LIMIT=45] -->
     <string name="filter_overlay_apps">Apps with permission</string>
-    <!-- Summary of app allowed to draw overlay [CHAR LIMIT=60] -->
+    <!-- Summary of app allowed to display over other apps [CHAR LIMIT=60] -->
     <string name="system_alert_window_on">Yes</string>
-    <!-- Summary of app not allowed to draw overlay [CHAR LIMIT=60] -->
+    <!-- Summary of app not allowed to display over other apps [CHAR LIMIT=60] -->
     <string name="system_alert_window_off">No</string>
 
     <!-- Title for settings screen for controlling apps that can install other apps on device [CHAR LIMIT=50] -->
@@ -7362,7 +7392,7 @@
     <string name="write_settings">Modify system settings</string>
     <!-- Keyword for WRITE_SETTINGS -->
     <string name="keywords_write_settings">write modify system settings</string>
-    <!-- Summary of number of apps currently can draw overlays [CHAR LIMIT=60] -->
+    <!-- Summary of number of apps currently can write system settings [CHAR LIMIT=60] -->
     <string name="write_settings_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed to modify system settings</string>
 
     <!-- Label for showing apps that can install other apps [CHAR LIMIT=45] -->
@@ -7439,7 +7469,7 @@
     <string name="screen_zoom_conversation_timestamp_4">Tue 6:03PM</string>
 
     <!-- Wi-Fi state - Disconnected [CHAR LIMIT=NONE] -->
-    <string name="disconnected">Disconnected</string>
+    <string name="disconnected">Not connected</string>
 
     <!-- Summary of data usage [CHAR LIMIT=NONE] -->
     <string name="data_usage_summary_format"><xliff:g id="amount" example="50%">%1$s</xliff:g> of data used</string>
@@ -7472,7 +7502,7 @@
     <string name="memory_summary">Avg <xliff:g id="used_memory" example="1.7GB">%1$s</xliff:g> of <xliff:g id="total_memory" example="2GB">%2$s</xliff:g> memory used</string>
 
     <!-- Summary of user screen [CHAR LIMIT=NONE] -->
-    <string name="user_summary">Signed in as <xliff:g id="user_name" example="Jason">%1$s</xliff:g></string>
+    <string name="user_summary">Current user: <xliff:g id="user_name" example="Jason">%1$s</xliff:g></string>
 
     <!-- Summary of payment screen [CHAR LIMIT=NONE] -->
     <string name="payment_summary"><xliff:g id="app_name" example="Payment App">%1$s</xliff:g> is default</string>
@@ -7489,9 +7519,18 @@
     <!-- Summary of device info page [CHAR LIMIT=NONE] -->
     <string name="about_summary">Android <xliff:g id="version" example="6.0">%1$s</xliff:g></string>
 
-    <!-- TODO: Update these strings with the finalized ones. -->
     <!-- Title for dialog displayed when user clicks on a setting locked by an admin [CHAR LIMIT=30] -->
     <string name="disabled_by_policy_title">Action not allowed</string>
+    <!-- Title for dialog displayed to tell user that changing volume was disallowed by an admin [CHAR LIMIT=50] -->
+    <string name="disabled_by_policy_title_adjust_volume">Can\'t change volume</string>
+    <!-- Title for dialog displayed to tell user that outgoing calls were disabled by an admin [CHAR LIMIT=50] -->
+    <string name="disabled_by_policy_title_outgoing_calls">Calling not allowed</string>
+    <!-- Title for dialog displayed to tell user that sending SMS were disabled by an admin [CHAR LIMIT=50] -->
+    <string name="disabled_by_policy_title_sms">SMS not allowed</string>
+    <!-- Title for dialog displayed to tell user that the camera was disabled by an admin [CHAR LIMIT=50] -->
+    <string name="disabled_by_policy_title_camera">Camera not allowed</string>
+    <!-- Title for dialog displayed to tell user that screenshots are disabled by an admin [CHAR LIMIT=50] -->
+    <string name="disabled_by_policy_title_screen_capture">Screenshot not allowed</string>
     <!-- Shown when the user tries to change a settings locked by an admin [CHAR LIMIT=200] -->
     <string name="default_admin_support_msg">This action is disabled. Contact your organization\'s administrator to learn more.</string>
     <!-- Shown in dialog to allow user to see more information about the device admin [CHAR LIMIT=30] -->
@@ -7525,7 +7564,7 @@
     <string name="condition_airplane_title">Airplane mode is on</string>
 
     <!-- Summary of condition that airplane mode is on [CHAR LIMIT=NONE] -->
-    <string name="condition_airplane_summary">Wi-Fi, Bluetooth, and cellular network are turned off. You can\'t make phone calls or connect to the Internet.</string>
+    <string name="condition_airplane_summary">Wi-Fi, Bluetooth, and mobile network are turned off. You can\'t make phone calls or connect to the Internet.</string>
 
     <!-- Title of condition that do not disturb is on [CHAR LIMIT=30] -->
     <string name="condition_zen_title">Do not disturb is on (<xliff:g name="zen_mode_type" example="Alarms only">%1$s</xliff:g>)</string>
@@ -7537,7 +7576,7 @@
     <string name="condition_battery_summary">Performance is reduced. Location services and background data are turned off.</string>
 
     <!-- Title of condition that cellular data is off [CHAR LIMIT=30] -->
-    <string name="condition_cellular_title">Cellular data is off</string>
+    <string name="condition_cellular_title">Mobile data is off</string>
 
     <!-- Summary of condition that cellular data is off [CHAR LIMIT=NONE] -->
     <string name="condition_cellular_summary">Internet is available only via Wi-Fi</string>
@@ -7591,7 +7630,7 @@
     <string name="usage">Usage</string>
 
     <!-- Label for cellular data usage in data usage screen [CHAR LIMIT=60] -->
-    <string name="cellular_data_usage">Cellular data usage</string>
+    <string name="cellular_data_usage">Mobile data usage</string>
 
     <!-- Label for wifi data usage in data usage screen [CHAR LIMIT=60] -->
     <string name="wifi_data_usage">Wi-Fi data usage</string>
@@ -7606,7 +7645,7 @@
     <string name="ethernet">Ethernet</string>
 
     <!-- Format string for amount of cellular data used [CHAR LIMIT=30] -->
-    <string name="cell_data_template"><xliff:g id="amount" example="1 GB">^1</xliff:g> cellular data</string>
+    <string name="cell_data_template"><xliff:g id="amount" example="1 GB">^1</xliff:g> mobile data</string>
 
     <!-- Format string for amount of wifi data used [CHAR LIMIT=30] -->
     <string name="wifi_data_template"><xliff:g id="amount" example="1 GB">^1</xliff:g> Wi-Fi data</string>
@@ -7631,6 +7670,12 @@
 
     <!-- Title of button and screen for which wifi networks have data restrictions [CHAR LIMIT=30 -->
     <string name="network_restrictions">Network restrictions</string>
+
+    <!-- Summary showing how many networks restrictions [CHAR LIMIT=NONE] -->
+    <plurals name="network_restrictions_summary">
+        <item quantity="one">1 restriction</item>
+        <item quantity="other"><xliff:g id="count" example="10">%1$d</xliff:g> restrictions</item>
+    </plurals>
 
     <!-- A summary shown on data usage screens to indicate inaccuracy of data tracking [CHAR LIMIT=NONE] -->
     <string name="operator_warning">Carrier data accounting may differ from device accounting</string>
@@ -7843,8 +7888,8 @@
     <!-- Title of screen controlling which apps have access to send premium SMS messages [CHAR LIMIT=60] -->
     <string name="premium_sms_access">Premium SMS access</string>
 
-    <!-- [CHAR LIMIT=25] Bluetooth is disabled. -->
-    <string name="bluetooth_disabled">Disabled</string>
+    <!-- Bluetooth is disabled. -->
+    <string name="bluetooth_disabled">Not visible to other devices</string>
 
     <!-- [CHAR LIMIT=60] Name of dev option called "System UI demo mode" -->
     <string name="demo_mode">System UI demo mode</string>
@@ -8122,14 +8167,14 @@
 
     <!-- Enterprise Privacy --> <skip />
 
-    <!-- Title of setting on security settings screen. This will take the user to a screen with information about admin powers and their impact on the user's privacy on a managed device. Shown on enterprise-managed devices only. -->
-    <string name="enterprise_privacy_settings">Device management</string>
+    <!-- Title of setting on security settings screen. This will take the user to a screen with information about admin powers and their impact on the user's privacy on a managed device. Shown on enterprise-managed devices only. Note: "Device" is singular and refers to the device (e.g. phone or tablet) that the user is holding in their hand. -->
+    <string name="enterprise_privacy_settings">Managed device details</string>
     <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
-    <string name="enterprise_privacy_settings_summary">View all settings applied by your admin</string>
-    <!-- Enterprise Privacy settings activity title -->
-    <string name="enterprise_privacy_settings_title">Device management</string>
-    <!-- Enterprise Privacy settings activity footer, summarizing the powers that the admin has. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_footer">To provide access to your work data, your organization may change settings and install software on your device. \n\nFor more details, contact your organization\'s admin.</string>
+    <string name="enterprise_privacy_settings_summary_generic">Changes &amp; settings managed by your organization</string>
+    <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
+    <string name="enterprise_privacy_settings_summary_with_name">Changes &amp; settings managed by <xliff:g id="organization_name" example="Foo, Inc.">%s</xliff:g></string>
+    <!-- Enterprise Privacy settings activity header, summarizing the powers that the admin has. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_header">To provide access to your work data, your organization may change settings and install software on your device.\n\nFor more details, contact your organization\'s admin.</string>
     <!-- Title for the 'Types of information your organization can see' preference category. [CHAR LIMIT=60] -->
     <string name="enterprise_privacy_exposure_category">Types of information your organization can see</string>
     <!-- Title for the 'Changes made by your organization’s admin' preference category. [CHAR LIMIT=60] -->
@@ -8189,8 +8234,8 @@
     </plurals>
     <!-- Label explaining that the admin installed trusted CA certificates for the personal profile. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_ca_certs_personal">
-        <item quantity="one">Trusted CA Certificate installed in the personal profile</item>
-        <item quantity="other">Trusted CA Certificates installed in the personal profile</item>
+        <item quantity="one">Trusted CA Certificate installed in your personal profile</item>
+        <item quantity="other">Trusted CA Certificates installed in your personal profile</item>
     </plurals>
     <!-- Summary indicating the number of trusted CA certificates installed by the admin. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_number_ca_certs">
@@ -8204,8 +8249,8 @@
     </plurals>
     <!-- Label explaining that the admin installed trusted CA certificates for the work profile. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_ca_certs_work">
-        <item quantity="one">Trusted CA Certificate installed in the work profile</item>
-        <item quantity="other">Trusted CA Certificates installed in the work profile</item>
+        <item quantity="one">Trusted CA Certificate installed in your work profile</item>
+        <item quantity="other">Trusted CA Certificates installed in your work profile</item>
     </plurals>
     <!-- Label explaining that the admin can lock the device and change the user's password. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_lock_device">Admin can lock the device and reset password</string>
@@ -8245,12 +8290,13 @@
     <string name="storage_files">Files</string>
 
     <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
-    <string name="storage_settings_2">Phone storage</string>
+    <string name="storage_settings_2" product="tablet">Tablet storage</string>
+    <string name="storage_settings_2" product="default">Phone storage</string>
 
     <!-- Summary of a single storage volume used space. [CHAR LIMIT=24] -->
     <string name="storage_size_large_alternate"><xliff:g id="number" example="128">^1</xliff:g><small> <xliff:g id="unit" example="KB">^2</xliff:g></small></string>
-    <!-- Summary of a single storage volume free space. [CHAR LIMIT=48]-->
-    <string name="storage_volume_free"><xliff:g id="total" example="32GB">%1$s</xliff:g> free</string>
+    <!-- Summary of a single storage volume total space. [CHAR LIMIT=48]-->
+    <string name="storage_volume_total">Used of <xliff:g id="total" example="32GB">%1$s</xliff:g></string>
     <!-- The percent of storage used by a storage volume. Exposed inside of a donut graph. [CHAR LIMIT=4]-->
     <string name="storage_percent_used"><xliff:g id="percent" example="50%">%1$s</xliff:g>%%</string>
 
@@ -8293,5 +8339,8 @@
 
     <!-- Added as the value of a header field indicating this is an instant app (as opposed to installed normally) -->
     <string name="install_type_instant">Instant app</string>
+
+    <!-- Warning for when the automatic storage manager is turned off. [CHAR LIMIT=NONE] -->
+    <string name="automatic_storage_manager_deactivation_warning">Turn off the storage manager?</string>
 
 </resources>

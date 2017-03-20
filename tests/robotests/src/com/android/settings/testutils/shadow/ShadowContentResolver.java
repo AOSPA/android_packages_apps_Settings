@@ -29,5 +29,4 @@ public class ShadowContentResolver {
     public static SyncAdapterType[] getSyncAdapterTypesAsUser(int userId) {
         return new SyncAdapterType[0];
     }
-
 }

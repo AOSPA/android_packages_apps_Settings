@@ -39,7 +39,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserManager;
-import android.security.KeyStore;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -76,6 +75,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     protected ImageView mFingerprintIcon;
     protected int mEffectiveUserId;
     protected int mUserId;
+    protected UserManager mUserManager;
     protected LockPatternUtils mLockPatternUtils;
     protected TextView mErrorTextView;
     protected final Handler mHandler = new Handler();
@@ -90,8 +90,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
         // Only take this argument into account if it belongs to the current profile.
         Intent intent = getActivity().getIntent();
         mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
-        final UserManager userManager = UserManager.get(getActivity());
-        mEffectiveUserId = userManager.getCredentialOwnerProfile(mUserId);
+        mUserManager = UserManager.get(getActivity());
+        mEffectiveUserId = mUserManager.getCredentialOwnerProfile(mUserId);
         mLockPatternUtils = new LockPatternUtils(getActivity());
     }
 
@@ -117,7 +117,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
                 Utils.getUserIdFromBundle(
                         getActivity(),
                         getActivity().getIntent().getExtras()));
-        if (UserManager.get(getActivity()).isManagedProfile(credentialOwnerUserId)) {
+        if (mUserManager.isManagedProfile(credentialOwnerUserId)) {
             setWorkChallengeBackground(view, credentialOwnerUserId);
         }
     }
@@ -135,7 +135,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     // fingerprint is disabled due to device restart.
     private boolean isFingerprintDisallowedByStrongAuth() {
         return !(mLockPatternUtils.isFingerprintAllowedForUser(mEffectiveUserId)
-                && KeyStore.getInstance().state(mUserId) == KeyStore.State.UNLOCKED);
+                && mUserManager.isUserUnlocked(mUserId));
     }
 
     @Override
@@ -262,7 +262,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends OptionsMenuFra
     }
 
     protected boolean isProfileChallenge() {
-        return UserManager.get(getContext()).isManagedProfile(mEffectiveUserId);
+        return mUserManager.isManagedProfile(mEffectiveUserId);
     }
 
     protected void reportSuccessfullAttempt() {

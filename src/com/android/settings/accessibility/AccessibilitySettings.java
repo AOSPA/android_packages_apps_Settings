@@ -71,7 +71,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
 
     // Index of the first preference in a preference category.
-    private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = 0;
+    private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = -1;
 
     // Preference categories
     private static final String CATEGORY_SCREEN_READER = "screen_reader_category";
@@ -548,8 +548,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     getString(R.string.accessibility_feature_state_on) :
                     getString(R.string.accessibility_feature_state_off);
             String serviceSummary = info.loadSummary(getPackageManager());
-            serviceSummary = (TextUtils.isEmpty(serviceSummary)) ? serviceState.toUpperCase() :
-                    serviceState.toUpperCase() + " / " + serviceSummary;
+            serviceSummary = (TextUtils.isEmpty(serviceSummary)) ? serviceState :
+                    serviceSummary;
 
             // Disable all accessibility services that are not permitted.
             boolean serviceAllowed =
@@ -756,7 +756,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     context.getSystemService(AccessibilityManager.class);
 
             String screenTitle = context.getResources().getString(
-                    R.string.accessibility_services_title);
+                    R.string.accessibility_settings);
 
             // Indexing all services, regardless if enabled.
             List<AccessibilityServiceInfo> services = accessibilityManager

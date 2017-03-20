@@ -127,15 +127,6 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         }
 
         mUserId = UserHandle.getUserId(mUid);
-        mAppRow = mBackend.loadAppRow(mContext, mPm, mPkgInfo);
-        mChannel = (args != null && args.containsKey(Settings.EXTRA_CHANNEL_ID)) ?
-                mBackend.getChannel(mPkg, mUid, args.getString(Settings.EXTRA_CHANNEL_ID)) : null;
-
-        mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
-                mContext, mPkg, mUserId);
-        NotificationManager.Policy policy =
-                NotificationManager.from(mContext).getNotificationPolicy();
-        mDndVisualEffectsSuppressed = policy == null ? false : policy.suppressedVisualEffects != 0;
     }
 
     @Override
@@ -146,10 +137,19 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             finish();
             return;
         }
+        mAppRow = mBackend.loadAppRow(mContext, mPm, mPkgInfo);
+        Bundle args = getArguments();
+        mChannel = (args != null && args.containsKey(Settings.EXTRA_CHANNEL_ID)) ?
+                mBackend.getChannel(mPkg, mUid, args.getString(Settings.EXTRA_CHANNEL_ID)) : null;
+
         mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
                 mContext, mPkg, mUserId);
-        mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
-        mBadge.setDisabledByAdmin(mSuspendedAppsAdmin);
+        NotificationManager.Policy policy =
+                NotificationManager.from(mContext).getNotificationPolicy();
+        mDndVisualEffectsSuppressed = policy == null ? false : policy.suppressedVisualEffects != 0;
+
+        mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
+                mContext, mPkg, mUserId);
     }
 
     protected void setVisible(Preference p, boolean visible) {
@@ -248,26 +248,5 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
             default:
                 return getContext().getString(R.string.notification_importance_high);
         }
-    }
-
-    protected CharSequence getNotificationGroupLabel(NotificationChannelGroup group) {
-        return getLabel(group.getName(), group.getNameResId());
-    }
-
-    protected CharSequence getNotificationChannelLabel(NotificationChannel channel) {
-        return getLabel(channel.getName(), channel.getNameResId());
-    }
-
-    private CharSequence getLabel(CharSequence name, int nameResId) {
-        if (!TextUtils.isEmpty(name)) {
-            return name;
-        }
-        try {
-            ApplicationInfo info = mPm.getApplicationInfoAsUser(mAppRow.pkg, 0, mAppRow.userId);
-            return mPm.getText(mAppRow.pkg, nameResId, info);
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

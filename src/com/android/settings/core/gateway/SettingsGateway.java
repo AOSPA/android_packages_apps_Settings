@@ -22,12 +22,10 @@ import com.android.settings.ChooseLockPassword;
 import com.android.settings.ChooseLockPattern;
 import com.android.settings.CryptKeeperSettings;
 import com.android.settings.DateTimeSettings;
-import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceAdminSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.DreamSettings;
-import com.android.settings.HomeSettings;
 import com.android.settings.IccLockSettings;
 import com.android.settings.MasterClear;
 import com.android.settings.PrivacySettings;
@@ -37,7 +35,6 @@ import com.android.settings.TestingSettings;
 import com.android.settings.TetherSettings;
 import com.android.settings.TrustedCredentialsSettings;
 import com.android.settings.UserDictionarySettings;
-import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.WifiCallingSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
@@ -67,6 +64,7 @@ import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.dashboard.SupportFragment;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
+import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.deviceinfo.ImeiInformation;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
 import com.android.settings.deviceinfo.PrivateVolumeSettings;
@@ -117,6 +115,7 @@ import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
 import com.android.settings.vpn2.VpnSettings;
+import com.android.settings.wallpaper.WallpaperTypeSettings;
 import com.android.settings.webview.WebViewAppPicker;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
@@ -148,7 +147,6 @@ public class SettingsGateway {
             SpellCheckersSettings.class.getName(),
             UserDictionaryList.class.getName(),
             UserDictionarySettings.class.getName(),
-            HomeSettings.class.getName(),
             DisplaySettings.class.getName(),
             DeviceInfoSettings.class.getName(),
             ManageApplications.class.getName(),
