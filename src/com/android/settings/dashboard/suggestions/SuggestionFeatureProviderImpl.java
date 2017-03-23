@@ -17,7 +17,12 @@
 package com.android.settings.dashboard.suggestions;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.List;
@@ -25,6 +30,7 @@ import java.util.List;
 public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider {
 
     private final SuggestionRanker mSuggestionRanker;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Override
     public boolean isSmartSuggestionEnabled(Context context) {
@@ -43,13 +49,50 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
 
 
     public SuggestionFeatureProviderImpl(Context context) {
+        final Context appContext = context.getApplicationContext();
         mSuggestionRanker = new SuggestionRanker(
-                new SuggestionFeaturizer(new EventStore(context.getApplicationContext())));
+                new SuggestionFeaturizer(new EventStore(appContext)));
+        mMetricsFeatureProvider = FeatureFactory.getFactory(appContext)
+                .getMetricsFeatureProvider();
     }
 
     @Override
     public void rankSuggestions(final List<Tile> suggestions, List<String> suggestionIds) {
         mSuggestionRanker.rankSuggestions(suggestions, suggestionIds);
+    }
+
+    @Override
+    public void dismissSuggestion(Context context, SuggestionParser parser, Tile suggestion) {
+        if (parser == null || suggestion == null) {
+            return;
+        }
+        mMetricsFeatureProvider.action(
+                context, MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
+                getSuggestionIdentifier(context, suggestion));
+
+        final boolean isSmartSuggestionEnabled = isSmartSuggestionEnabled(context);
+        if (!parser.dismissSuggestion(suggestion, isSmartSuggestionEnabled)) {
+            return;
+        }
+        context.getPackageManager().setComponentEnabledSetting(
+                suggestion.intent.getComponent(),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+        parser.markCategoryDone(suggestion.category);
+    }
+
+    @Override
+    public String getSuggestionIdentifier(Context context, Tile suggestion) {
+        if (suggestion.intent == null || suggestion.intent.getComponent() == null) {
+            return "unknown_suggestion";
+        }
+        String packageName = suggestion.intent.getComponent().getPackageName();
+        if (packageName.equals(context.getPackageName())) {
+            // Since Settings provides several suggestions, fill in the class instead of the
+            // package for these.
+            packageName = suggestion.intent.getComponent().getClassName();
+        }
+        return packageName;
     }
 
 }

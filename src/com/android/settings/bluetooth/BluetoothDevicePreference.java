@@ -34,9 +34,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.search.Index;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
@@ -205,11 +206,20 @@ public final class BluetoothDevicePreference extends Preference implements
     void onClicked() {
         int bondState = mCachedDevice.getBondState();
 
+        final MetricsFeatureProvider metricsFeatureProvider =
+            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
+
         if (mCachedDevice.isConnected()) {
+            metricsFeatureProvider.action(getContext(),
+                MetricsEvent.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
             askDisconnect();
         } else if (bondState == BluetoothDevice.BOND_BONDED) {
+            metricsFeatureProvider.action(getContext(),
+                MetricsEvent.ACTION_SETTINGS_BLUETOOTH_CONNECT);
             mCachedDevice.connect(true);
         } else if (bondState == BluetoothDevice.BOND_NONE) {
+            metricsFeatureProvider.action(getContext(),
+                MetricsEvent.ACTION_SETTINGS_BLUETOOTH_PAIR);
             pair();
         }
     }
@@ -238,17 +248,6 @@ public final class BluetoothDevicePreference extends Preference implements
         if (!mCachedDevice.startPairing()) {
             Utils.showError(getContext(), mCachedDevice.getName(),
                     R.string.bluetooth_pairing_error_message);
-        } else {
-            final Context context = getContext();
-
-            SearchIndexableRaw data = new SearchIndexableRaw(context);
-            data.className = BluetoothSettings.class.getName();
-            data.title = mCachedDevice.getName();
-            data.screenTitle = context.getResources().getString(R.string.bluetooth_settings);
-            data.iconResId = R.drawable.ic_settings_bluetooth;
-            data.enabled = true;
-
-            Index.getInstance(context).updateFromSearchIndexableData(data);
         }
     }
 

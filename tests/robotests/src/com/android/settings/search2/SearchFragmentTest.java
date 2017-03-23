@@ -16,9 +16,11 @@
 
 package com.android.settings.search2;
 
+import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
+import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -36,12 +38,14 @@ import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -61,7 +65,8 @@ public class SearchFragmentTest {
 
     @Mock
     private SavedQueryLoader mSavedQueryLoader;
-
+    @Mock
+    private SavedQueryController mSavedQueryController;
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
@@ -91,6 +96,7 @@ public class SearchFragmentTest {
         SearchFragment fragment = (SearchFragment) activityController.get().getFragmentManager()
                 .findFragmentById(R.id.main_content);
 
+        ReflectionHelpers.setField(fragment, "mShowingSavedQuery", false);
         fragment.mQuery = testQuery;
 
         activityController.saveInstanceState(bundle).pause().stop().destroy();
@@ -106,12 +112,6 @@ public class SearchFragmentTest {
 
     @Test
     public void screenRotateEmptyString_ShouldNotCrash() {
-        when(mFeatureFactory.searchFeatureProvider
-                .getDatabaseSearchLoader(any(Context.class), anyString()))
-                .thenReturn(mDatabaseResultLoader);
-        when(mFeatureFactory.searchFeatureProvider
-                .getInstalledAppSearchLoader(any(Context.class), anyString()))
-                .thenReturn(mInstalledAppResultLoader);
         when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
                 .thenReturn(mSavedQueryLoader);
 
@@ -129,10 +129,12 @@ public class SearchFragmentTest {
         activityController = Robolectric.buildActivity(SearchActivity.class);
         activityController.setup(bundle);
 
-        verify(mFeatureFactory.searchFeatureProvider)
+        verify(mFeatureFactory.searchFeatureProvider, never())
                 .getDatabaseSearchLoader(any(Context.class), anyString());
-        verify(mFeatureFactory.searchFeatureProvider)
+        verify(mFeatureFactory.searchFeatureProvider, never())
                 .getInstalledAppSearchLoader(any(Context.class), anyString());
+        verify(mFeatureFactory.searchFeatureProvider, times(2))
+                .getSavedQueryLoader(any(Context.class));
     }
 
     @Test
@@ -155,6 +157,7 @@ public class SearchFragmentTest {
 
         fragment.onQueryTextChange(testQuery);
         activityController.get().onBackPressed();
+
         activityController.pause().stop().destroy();
 
         verify(mFeatureFactory.metricsFeatureProvider, never()).action(
@@ -169,7 +172,7 @@ public class SearchFragmentTest {
     }
 
     @Test
-    public void queryTextChangeToEmpty_shouldTriggerSavedQueryLoader() {
+    public void queryTextChangeToEmpty_shouldLoadSavedQuery() {
         when(mFeatureFactory.searchFeatureProvider
                 .getDatabaseSearchLoader(any(Context.class), anyString()))
                 .thenReturn(mDatabaseResultLoader);
@@ -182,20 +185,18 @@ public class SearchFragmentTest {
         ActivityController<SearchActivity> activityController =
                 Robolectric.buildActivity(SearchActivity.class);
         activityController.setup();
-        SearchFragment fragment = (SearchFragment) activityController.get().getFragmentManager()
-                .findFragmentById(R.id.main_content);
 
+        SearchFragment fragment = spy((SearchFragment) activityController.get().getFragmentManager()
+                .findFragmentById(R.id.main_content));
+        ReflectionHelpers.setField(fragment, "mSavedQueryController", mSavedQueryController);
+        fragment.mQuery = "123";
         fragment.onQueryTextChange("");
-        activityController.get().onBackPressed();
-        activityController.pause().stop().destroy();
 
         verify(mFeatureFactory.searchFeatureProvider, never())
                 .getDatabaseSearchLoader(any(Context.class), anyString());
         verify(mFeatureFactory.searchFeatureProvider, never())
                 .getInstalledAppSearchLoader(any(Context.class), anyString());
-        // Saved query loaded 2 times: fragment start, and query change to empty.
-        verify(mFeatureFactory.searchFeatureProvider, times(2))
-                .getSavedQueryLoader(any(Context.class));
+        verify(mSavedQueryController).loadSavedQueries();
     }
 
     @Test
@@ -221,17 +222,19 @@ public class SearchFragmentTest {
 
     @Test
     public void syncLoaders_MergeWhenAllLoadersDone() {
-
         when(mFeatureFactory.searchFeatureProvider
                 .getDatabaseSearchLoader(any(Context.class), anyString()))
                 .thenReturn(new MockDBLoader(RuntimeEnvironment.application));
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(new MockAppLoader(RuntimeEnvironment.application));
+        when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
+                .thenReturn(mSavedQueryLoader);
 
         ActivityController<SearchActivity> activityController =
                 Robolectric.buildActivity(SearchActivity.class);
         activityController.setup();
+
         SearchFragment fragment = (SearchFragment) spy(activityController.get().getFragmentManager()
                 .findFragmentById(R.id.main_content));
 
@@ -240,5 +243,56 @@ public class SearchFragmentTest {
         Robolectric.flushForegroundThreadScheduler();
 
         verify(fragment, times(2)).onLoadFinished(any(Loader.class), any(List.class));
+    }
+
+    @Test
+    public void whenNoQuery_HideFeedbackIsCalled() {
+        when(mFeatureFactory.searchFeatureProvider
+                .getDatabaseSearchLoader(any(Context.class), anyString()))
+                .thenReturn(new MockDBLoader(RuntimeEnvironment.application));
+        when(mFeatureFactory.searchFeatureProvider
+                .getInstalledAppSearchLoader(any(Context.class), anyString()))
+                .thenReturn(new MockAppLoader(RuntimeEnvironment.application));
+        when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
+                .thenReturn(mSavedQueryLoader);
+
+        ActivityController<SearchActivity> activityController =
+                Robolectric.buildActivity(SearchActivity.class);
+        activityController.setup();
+        SearchFragment fragment = (SearchFragment) spy(activityController.get().getFragmentManager()
+                .findFragmentById(R.id.main_content));
+
+        when(fragment.getLoaderManager()).thenReturn(mock(LoaderManager.class));
+
+        fragment.onQueryTextChange("");
+
+        Robolectric.flushForegroundThreadScheduler();
+
+        verify(mFeatureFactory.searchFeatureProvider).hideFeedbackButton();
+    }
+
+    @Test
+    public void onLoadFinished_ShowsFeedback() {
+        when(mFeatureFactory.searchFeatureProvider
+                .getDatabaseSearchLoader(any(Context.class), anyString()))
+                .thenReturn(new MockDBLoader(RuntimeEnvironment.application));
+        when(mFeatureFactory.searchFeatureProvider
+                .getInstalledAppSearchLoader(any(Context.class), anyString()))
+                .thenReturn(new MockAppLoader(RuntimeEnvironment.application));
+        when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
+                .thenReturn(mSavedQueryLoader);
+
+        ActivityController<SearchActivity> activityController =
+                Robolectric.buildActivity(SearchActivity.class);
+        activityController.setup();
+        SearchFragment fragment = (SearchFragment) activityController.get().getFragmentManager()
+                .findFragmentById(R.id.main_content);
+
+        fragment.onQueryTextChange("non-empty");
+
+        Robolectric.flushForegroundThreadScheduler();
+
+        verify(mFeatureFactory.searchFeatureProvider).showFeedbackButton(any(SearchFragment.class),
+                any(View.class));
     }
 }

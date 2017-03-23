@@ -20,17 +20,15 @@ import android.provider.SearchIndexableResource;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
+
 import com.android.settings.DateTimeSettings;
-import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.EncryptionAndCredential;
 import com.android.settings.LegalSettings;
-import com.android.settings.PrivacySettings;
 import com.android.settings.R;
 import com.android.settings.ScreenPinningSettings;
 import com.android.settings.SecuritySettings;
-import com.android.settings.WallpaperTypeSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
@@ -43,6 +41,7 @@ import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
+import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.ScreenZoomSettings;
@@ -76,6 +75,7 @@ import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TtsEnginePreferenceFragment;
 import com.android.settings.tts.TtsSlidersFragment;
 import com.android.settings.users.UserSettings;
+import com.android.settings.wallpaper.WallpaperTypeSettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
@@ -95,8 +95,7 @@ public final class SearchIndexableResources {
     static void addIndex(Class<?> indexClass, @XmlRes int xmlResId,
             @DrawableRes int iconResId) {
         String className = indexClass.getName();
-        int rank = Ranking.getRankForClassName(className);
-        sResMap.put(className, new SearchIndexableResource(rank, xmlResId, className, iconResId));
+        sResMap.put(className, new SearchIndexableResource(0, xmlResId, className, iconResId));
     }
 
     static {
@@ -166,7 +165,8 @@ public final class SearchIndexableResources {
                 R.drawable.ic_settings_notifications);
         addIndex(SystemDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(StorageDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_storage);
-        addIndex(ConnectedDeviceDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_devices_other);
+        addIndex(ConnectedDeviceDashboardFragment.class, NO_DATA_RES_ID,
+                R.drawable.ic_devices_other);
         addIndex(EnterprisePrivacySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(PaymentSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_nfc_payment);
         addIndex(

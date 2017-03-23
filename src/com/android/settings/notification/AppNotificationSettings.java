@@ -34,6 +34,7 @@ import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.AppHeader;
+import com.android.settings.DimmableIconPreference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppHeaderController;
@@ -66,14 +67,18 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onResume() {
+        super.onResume();
+
         if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
             Log.w(TAG, "Missing package or uid or packageinfo");
-            toastAndFinish();
+            finish();
             return;
         }
-        final Activity activity = getActivity();
+
+        if (getPreferenceScreen() != null) {
+            getPreferenceScreen().removeAll();
+        }
 
         addPreferencesFromResource(R.xml.app_notification_settings);
         getPreferenceScreen().setOrderingAsAdded(true);
@@ -81,44 +86,38 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         mBlock = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BLOCK);
         mBadge = (RestrictedSwitchPreference) getPreferenceScreen().findPreference(KEY_BADGE);
 
-        if (mPkgInfo != null) {
-            setupBlock();
-            setupBadge();
-            // load settings intent
-            ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
-            rows.put(mAppRow.pkg, mAppRow);
-            collectConfigActivities(rows);
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(Void... unused) {
-                    mChannelGroupList = mBackend.getChannelGroups(mPkg, mUid).getList();
-                    Collections.sort(mChannelGroupList, mChannelGroupComparator);
-                    return null;
-                }
+        setupBlock();
+        setupBadge();
+        // load settings intent
+        ArrayMap<String, AppRow> rows = new ArrayMap<String, AppRow>();
+        rows.put(mAppRow.pkg, mAppRow);
+        collectConfigActivities(rows);
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... unused) {
+                mChannelGroupList = mBackend.getChannelGroups(mPkg, mUid).getList();
+                Collections.sort(mChannelGroupList, mChannelGroupComparator);
+                return null;
+            }
 
-                @Override
-                protected void onPostExecute(Void unused) {
-                    populateChannelList();
-                }
-            }.execute();
-        }
-        final Preference pref = FeatureFactory.getFactory(activity)
-            .getApplicationFeatureProvider(activity)
-            .newAppHeaderController(this /* fragment */, null /* appHeader */)
-            .setIcon(mAppRow.icon)
-            .setLabel(mAppRow.label)
-            .setPackageName(mAppRow.pkg)
-            .setUid(mAppRow.uid)
-            .setAppNotifPrefIntent(mAppRow.settingsIntent)
-            .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
-            .done(getPrefContext());
+            @Override
+            protected void onPostExecute(Void unused) {
+                populateChannelList();
+            }
+        }.execute();
+
+        final Preference pref = FeatureFactory.getFactory(getActivity())
+                .getApplicationFeatureProvider(getActivity())
+                .newAppHeaderController(this /* fragment */, null /* appHeader */)
+                .setIcon(mAppRow.icon)
+                .setLabel(mAppRow.label)
+                .setPackageName(mAppRow.pkg)
+                .setUid(mAppRow.uid)
+                .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
+                        AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
+                .done(getPrefContext());
         getPreferenceScreen().addPreference(pref);
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
         if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
             Log.w(TAG, "Missing package or uid or packageinfo");
             finish();
@@ -145,7 +144,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                             ? R.string.notification_channels_other
                             : R.string.notification_channels);
                 } else {
-                    groupCategory.setTitle(getNotificationGroupLabel(group));
+                    groupCategory.setTitle(group.getName());
                 }
                 groupCategory.setKey(group.getId());
                 groupCategory.setOrderingAsAdded(true);
@@ -161,44 +160,54 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                             getPrefContext());
                     channelPref.setDisabledByAdmin(mSuspendedAppsAdmin);
                     channelPref.setKey(channel.getId());
-                    channelPref.setTitle(getNotificationChannelLabel(channel));
+                    channelPref.setTitle(channel.getName());
                     channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
                     channelPref.setMultiLine(true);
+                    channelPref.setSummary(getImportanceSummary(channel.getImportance()));
+                    Bundle channelArgs = new Bundle();
+                    channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
+                    channelArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
+                    channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
+                    channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
+                    Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
+                            ChannelNotificationSettings.class.getName(),
+                            channelArgs, null, 0, null, false, getMetricsCategory());
+                    channelPref.setIntent(channelIntent);
 
-                    if (channel.isDeleted()) {
-                        channelPref.setTitle(getString(R.string.deleted_channel_name,
-                                getNotificationChannelLabel(channel)));
-                        channelPref.setEnabled(false);
-                    } else {
-                        channelPref.setSummary(getImportanceSummary(channel.getImportance()));
-                        Bundle channelArgs = new Bundle();
-                        channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
-                        channelArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
-                        channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
-                        channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
-                        Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
-                                ChannelNotificationSettings.class.getName(),
-                                channelArgs, null, 0, null, false, getMetricsCategory());
-                        channelPref.setIntent(channelIntent);
+                    channelPref.setOnPreferenceChangeListener(
+                            new Preference.OnPreferenceChangeListener() {
+                                @Override
+                                public boolean onPreferenceChange(Preference preference,
+                                        Object o) {
+                                    boolean value = (Boolean) o;
+                                    int importance = value ?  IMPORTANCE_LOW : IMPORTANCE_NONE;
+                                    channel.setImportance(importance);
+                                    channel.lockFields(
+                                            NotificationChannel.USER_LOCKED_IMPORTANCE);
+                                    mBackend.updateChannel(mPkg, mUid, channel);
 
-                        channelPref.setOnPreferenceChangeListener(
-                                new Preference.OnPreferenceChangeListener() {
-                                    @Override
-                                    public boolean onPreferenceChange(Preference preference,
-                                            Object o) {
-                                        boolean value = (Boolean) o;
-                                        int importance = value ?  IMPORTANCE_LOW : IMPORTANCE_NONE;
-                                        channel.setImportance(importance);
-                                        channel.lockFields(
-                                                NotificationChannel.USER_LOCKED_IMPORTANCE);
-                                        mBackend.updateChannel(mPkg, mUid, channel);
-
-                                        return true;
-                                    }
-                                });
-                    }
+                                    return true;
+                                }
+                            });
                     groupCategory.addPreference(channelPref);
                 }
+            }
+
+            if (mAppRow.settingsIntent != null) {
+                Preference intentPref = new Preference(getPrefContext());
+                intentPref.setIntent(mAppRow.settingsIntent);
+                intentPref.setTitle(mContext.getString(R.string.app_settings_link));
+                getPreferenceScreen().addPreference(intentPref);
+            }
+
+            int deletedChannelCount = mBackend.getDeletedChannelCount(mAppRow.pkg, mAppRow.uid);
+            if (deletedChannelCount > 0) {
+                DimmableIconPreference deletedPref = new DimmableIconPreference(getPrefContext());
+                deletedPref.setEnabled(false);
+                deletedPref.setTitle(getResources().getQuantityString(
+                        R.plurals.deleted_channels, deletedChannelCount, deletedChannelCount));
+                deletedPref.setIcon(R.drawable.ic_info);
+                getPreferenceScreen().addPreference(deletedPref);
             }
         }
         updateDependents(mAppRow.banned);
@@ -218,7 +227,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     }
 
     private void setupBlock() {
-        if (mAppRow.systemApp) {
+        if (mAppRow.systemApp && !mAppRow.banned) {
             setVisible(mBlock, false);
         } else {
             mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
@@ -243,6 +252,9 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             setVisible(category, !banned);
         }
         setVisible(mBadge, !banned);
+        if (mAppRow.systemApp && !mAppRow.banned) {
+            setVisible(mBlock, false);
+        }
     }
 
     private Comparator<NotificationChannel> mChannelComparator =
@@ -254,8 +266,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             if (left.isDeleted() != right.isDeleted()) {
                 return Boolean.compare(left.isDeleted(), right.isDeleted());
             }
-            CharSequence leftName = getNotificationChannelLabel(left);
-            CharSequence rightName = getNotificationChannelLabel(right);
+            CharSequence leftName = left.getName();
+            CharSequence rightName = right.getName();
             if (!Objects.equals(leftName, rightName)) {
                 return sCollator.compare(leftName.toString(), rightName.toString());
             }
@@ -275,8 +287,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     } else if (right.getId() == null && left.getId() != null) {
                         return -1;
                     }
-                    CharSequence leftName = getNotificationGroupLabel(left);
-                    CharSequence rightName = getNotificationGroupLabel(right);
+                    CharSequence leftName = left.getName();
+                    CharSequence rightName = right.getName();
                     // sort rest of the groups by name
                     if (!Objects.equals(leftName, rightName)) {
                         return sCollator.compare(leftName.toString(), rightName.toString());
