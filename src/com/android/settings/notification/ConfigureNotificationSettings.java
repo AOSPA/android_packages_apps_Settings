@@ -48,6 +48,7 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
     private static final String TAG = "ConfigNotiSettings";
 
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
+    private static final String KEY_HEADS_UP_NOTIFICATIONS = "heads_up_notifications";
     private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "lock_screen_notifications";
     private static final String KEY_LOCK_SCREEN_PROFILE_NOTIFICATIONS =
             "lock_screen_notifications_profile";
@@ -57,6 +58,7 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
     private Context mContext;
 
     private TwoStatePreference mNotificationPulse;
+    private TwoStatePreference mHeadsUpNotifications;
     private RestrictedDropDownPreference mLockscreen;
     private RestrictedDropDownPreference mLockscreenProfile;
     private boolean mSecure;
@@ -88,6 +90,7 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.configure_notification_settings);
 
         initPulse();
+        initHeadsUpNotifications();
         initLockscreenNotifications();
 
         if (mProfileChallengeUserId != UserHandle.USER_NULL) {
@@ -145,6 +148,32 @@ public class ConfigureNotificationSettings extends SettingsPreferenceFragment {
         } catch (Settings.SettingNotFoundException snfe) {
             Log.e(TAG, Settings.System.NOTIFICATION_LIGHT_PULSE + " not found");
         }
+    }
+
+    private void initHeadsUpNotifications() {
+        mHeadsUpNotifications =
+                (TwoStatePreference) getPreferenceScreen().findPreference(KEY_HEADS_UP_NOTIFICATIONS);
+        if (mHeadsUpNotifications == null) {
+            Log.i(TAG, "Preference not found: " + KEY_HEADS_UP_NOTIFICATIONS);
+            return;
+        }
+
+        try {
+            mHeadsUpNotifications.setChecked(Settings.Global.getInt(getContentResolver(),
+                    Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED) == 1);
+        } catch (Settings.SettingNotFoundException snfe) {
+            Log.e(TAG, Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED + " not found");
+        }
+
+        mHeadsUpNotifications.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final boolean val = (Boolean)newValue;
+                return Settings.Global.putInt(getContentResolver(),
+                        Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED,
+                        val ? 1 : 0);
+            }
+        });
     }
 
     private void initLockscreenNotifications() {
