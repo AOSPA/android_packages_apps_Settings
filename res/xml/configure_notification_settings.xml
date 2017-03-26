@@ -24,6 +24,11 @@
             android:key="notification_pulse"
             android:title="@string/notification_pulse_title" />
 
+    <!-- Global heads up toggle -->
+    <SwitchPreference
+            android:key="heads_up_notifications"
+            android:title="@string/heads_up_notifications_title" />
+
     <!-- When device is locked -->
     <com.android.settings.notification.RestrictedDropDownPreference
             android:key="lock_screen_notifications"
