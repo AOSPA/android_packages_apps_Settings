@@ -53,4 +53,9 @@
         android:key="repeat_callers"
         android:title="@string/zen_mode_repeat_callers"/>
 
+    <!-- Heads-up toggle -->
+    <SwitchPreference
+            android:key="heads_up_notifications"
+            android:title="@string/heads_up_notifications_title" />
+
 </PreferenceScreen>
