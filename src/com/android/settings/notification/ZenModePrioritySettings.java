@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.DropDownPreference;
@@ -38,6 +39,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
     private static final String KEY_MESSAGES = "messages";
     private static final String KEY_CALLS = "calls";
     private static final String KEY_REPEAT_CALLERS = "repeat_callers";
+    private static final String KEY_HEADS_UP_NOTIFICATIONS = "heads_up_notifications";
 
     private static final int SOURCE_NONE = -1;
 
@@ -47,6 +49,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
     private DropDownPreference mMessages;
     private DropDownPreference mCalls;
     private SwitchPreference mRepeatCallers;
+    private SwitchPreference mHeadsUpNotifications;
 
     private Policy mPolicy;
 
@@ -147,6 +150,17 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
             }
         });
 
+        mHeadsUpNotifications = (SwitchPreference) root.findPreference(KEY_HEADS_UP_NOTIFICATIONS);
+        mHeadsUpNotifications.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final boolean val = (Boolean)newValue;
+                return Settings.System.putInt(getContentResolver(),
+                        Settings.System.ALLOW_HEADS_UP_NOTIFICATIONS,
+                        val ? 1 : 0);
+            }
+        });
+
         updateControls();
     }
 
@@ -178,6 +192,9 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
         mRepeatCallers.setVisible(!isPriorityCategoryEnabled(Policy.PRIORITY_CATEGORY_CALLS)
                 || mPolicy.priorityCallSenders != Policy.PRIORITY_SENDERS_ANY);
         mDisableListeners = false;
+
+        mHeadsUpNotifications.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.ALLOW_HEADS_UP_NOTIFICATIONS, 1) == 1);
     }
 
     @Override

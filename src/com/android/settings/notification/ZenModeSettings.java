@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.Menu;
@@ -99,6 +100,10 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             }
         } else if (isCategoryEnabled(mPolicy, Policy.PRIORITY_CATEGORY_REPEAT_CALLERS)) {
             s = appendLowercase(s, true, R.string.zen_mode_repeat_callers);
+        }
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.ALLOW_HEADS_UP_NOTIFICATIONS, 1) == 1) {
+            s = appendLowercase(s, true, R.string.heads_up_notifications_title);
         }
         mPrioritySettings.setSummary(s);
     }
