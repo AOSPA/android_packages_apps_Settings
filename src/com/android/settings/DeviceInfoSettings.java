@@ -49,6 +49,7 @@ import com.android.internal.os.IRegionalizationService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.io.IOException;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -79,7 +80,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_QGP_VERSION = "qgp_version";
     private static final String PROPERTY_QGP_VERSION = "persist.qgp.version";
     private static final String MBN_VERSION_PATH = "/persist/speccfg/mbnversion";
-    private static final String QGP_VERSION_PATH = "/persist/speccfg/qgpversion";
+    private static final String QGP_VERSION_PATH = "/persist/speccfg/devicetype";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
@@ -134,7 +135,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         //        PROPERTY_QGP_VERSION);
         String mQGPVersion = getQGPVersionValue();
         setStringSummary(KEY_QGP_VERSION, mQGPVersion);
-        if(mQGPVersion == null){
+        if(TextUtils.isEmpty(mQGPVersion)){
             getPreferenceScreen().removePreference(findPreference(KEY_QGP_VERSION));
         }
         findPreference(KEY_KERNEL_VERSION).setSummary(DeviceInfoUtils.customizeFormatKernelVersion(
@@ -142,7 +143,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
 
         String mMbnVersion = getMBNVersionValue();
         setStringSummary(KEY_MBN_VERSION, mMbnVersion);
-        if(mMbnVersion == null){
+        if(TextUtils.isEmpty(mMbnVersion)){
             getPreferenceScreen().removePreference(findPreference(KEY_MBN_VERSION));
         }
 
@@ -427,7 +428,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
 
     private String getQGPVersionValue() {
         String mVersion = null;
-
+        String mQGPString = null;
+        List<String> mContents = null;
         if (RegionalizationEnvironment.isSupported()) {
             mRegionalizationService = RegionalizationEnvironment.getRegionalizationService();
         }
@@ -435,9 +437,14 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             try{
                 if(!mRegionalizationService.checkFileExists(QGP_VERSION_PATH))
                     return null;
-                if(mRegionalizationService.readFile(QGP_VERSION_PATH, "").size() > 0){
-                    mVersion = mRegionalizationService.readFile(QGP_VERSION_PATH, "").get(0);
+                mContents = mRegionalizationService.readFile(QGP_VERSION_PATH, null);
+                if(!(mContents.size() > 1))
+                    return null;
+                mQGPString = mContents.get(1);
+                if (!mQGPString.startsWith("qgpversion=")) {
+                    return null;
                 }
+                mVersion = mQGPString.substring("qgpversion=".length());
                 Log.d(LOG_TAG,"read QGPVersion="+mVersion);
             }catch (Exception e) {
                 Log.e(LOG_TAG, "IOException:"+ e.getMessage());
