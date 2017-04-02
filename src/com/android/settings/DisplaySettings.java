@@ -69,7 +69,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.provider.Settings.Secure.CAMERA_GESTURE_DISABLED;
-import static android.provider.Settings.Secure.DOUBLE_TAP_TO_WAKE;
+// import static android.provider.Settings.Secure.GESTURE_DOUBLE_TAP;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static android.provider.Settings.Secure.SRGB_ENABLED;
 import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
@@ -353,7 +353,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     private static boolean isTapToWakeAvailable(Resources res) {
-        return res.getBoolean(com.android.internal.R.bool.config_supportDoubleTapWake);
+        return false; // res.getBoolean(com.android.internal.R.bool.config_supportDoubleTapWake);
     }
 
     private static boolean isSrgbAvailable(Context context) {
@@ -488,7 +488,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         // Update tap to wake if it is available.
         if (mTapToWakePreference != null) {
-            int value = Settings.Secure.getInt(getContentResolver(), DOUBLE_TAP_TO_WAKE, 0);
+            int value = 0; // Settings.Secure.getInt(getContentResolver(), GESTURE_DOUBLE_TAP, 0);
             mTapToWakePreference.setChecked(value != 0);
         }
 
@@ -571,7 +571,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
         if (preference == mTapToWakePreference) {
             boolean value = (Boolean) objValue;
-            Settings.Secure.putInt(getContentResolver(), DOUBLE_TAP_TO_WAKE, value ? 1 : 0);
+            // Settings.Secure.putInt(getContentResolver(), GESTURE_DOUBLE_TAP, value ? 1 : 0);
         }
         if (preference == mSrgbPreference) {
             boolean value = (Boolean) objValue;
