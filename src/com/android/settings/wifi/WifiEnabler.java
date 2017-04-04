@@ -287,6 +287,13 @@ public class WifiEnabler implements SwitchBar.OnSwitchChangeListener  {
                 return;
             }
         }
+        if (isChecked) {
+            MetricsLogger.action(mContext, MetricsEvent.ACTION_WIFI_ON);
+        } else {
+            // Log if user was connected at the time of switching off.
+            MetricsLogger.action(mContext, MetricsEvent.ACTION_WIFI_OFF,
+                    mConnected.get());
+        }
         if (!mWifiManager.setWifiEnabled(isChecked)) {
             // Error
             mSwitchBar.setEnabled(true);

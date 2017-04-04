@@ -131,16 +131,13 @@ public class UsbBackend {
     private void setUsbFunction(int mode) {
         switch (mode) {
             case MODE_DATA_MTP:
-                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP);
-                mUsbManager.setUsbDataUnlocked(true);
+                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP, true);
                 break;
             case MODE_DATA_PTP:
-                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_PTP);
-                mUsbManager.setUsbDataUnlocked(true);
+                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_PTP, true);
                 break;
             case MODE_DATA_MIDI:
-                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MIDI);
-                mUsbManager.setUsbDataUnlocked(true);
+                mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MIDI, true);
                 break;
             case MODE_DATA_TETHERING:
                 Intent intent = new Intent();
@@ -150,13 +147,12 @@ public class UsbBackend {
             case MODE_DATA_NONE:
                 //Take MTP mode and data unlocked false as charging
                 if(!isInPowerSourceMode()){
-                    mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP);
-                    mUsbManager.setUsbDataUnlocked(false);
+                    mUsbManager.setCurrentFunction(UsbManager.USB_FUNCTION_MTP, false);
                     break;
                 }
             default:
-                mUsbManager.setCurrentFunction(null);
-                mUsbManager.setUsbDataUnlocked(false);
+                //default mode is "charging",take MTP mode and data unlocked false as charging
+                mUsbManager.setCurrentFunction(null, false);
                 break;
         }
     }
