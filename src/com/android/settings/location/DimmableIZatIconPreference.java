@@ -33,7 +33,7 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.util.Log;
 import com.android.settings.DimmableIconPreference;
-import dalvik.system.DexClassLoader;
+import dalvik.system.PathClassLoader;
 import java.lang.ClassNotFoundException;
 import java.lang.ExceptionInInitializerError;
 import java.lang.IllegalAccessException;
@@ -57,15 +57,13 @@ public class DimmableIZatIconPreference extends DimmableIconPreference {
     static private Method mGetConsentMethod;
     static private Method mShowIzatMethod;
     static private String mIzatPackage;
-    static private DexClassLoader mLoader;
+    static private PathClassLoader mLoader;
 
     private static void load(Context context) {
         if (mLoader == null) {
             try {
                 if (mXtProxyClz == null || mNotifierClz == null) {
-                    mLoader = new DexClassLoader("/system/framework/izat.xt.srv.jar",
-                                                 context.getFilesDir().getAbsolutePath(),
-                                                 null,
+                    mLoader = new PathClassLoader("/system/framework/izat.xt.srv.jar",
                                                  ClassLoader.getSystemClassLoader());
                     mXtProxyClz = Class.forName("com.qti.izat.XTProxy",
                                                 true,
@@ -128,7 +126,7 @@ public class DimmableIZatIconPreference extends DimmableIconPreference {
         Object notifier = Proxy.newProxyInstance(mLoader,
                                                  new Class[] { mNotifierClz },
                                                  new InvocationHandler() {
-               @Override   
+               @Override
                public Object invoke(Object proxy, Method method, Object[] args)
                    throws Throwable {
                    if (method.getName().equals("userConsentNotify") &&
@@ -152,6 +150,12 @@ public class DimmableIZatIconPreference extends DimmableIconPreference {
                  InvocationTargetException | ExceptionInInitializerError e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onClick() {
+        mChecked = !mChecked;
+        super.onClick();
     }
 
     @Override
