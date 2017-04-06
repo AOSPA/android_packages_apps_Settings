@@ -284,6 +284,13 @@
         <item name="android:singleLine">true</item>
     </style>
 
+    <style name="vpn_warning">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">8dip</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+
     <style name="TextAppearance.PagerTabs" parent="@android:style/TextAppearance.Material.Widget.TabWidget" />
 
     <style name="KeyguardAppWidgetItem">
@@ -310,22 +317,6 @@
            parent="@android:style/TextAppearance.Material.Subhead">
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textSize">14sp</item>
-    </style>
-
-    <style name="TextAppearance.FingerprintMessage"
-        parent="android:TextAppearance.Material.Subhead">
-        <item name="android:lineSpacingExtra">@dimen/suw_description_line_spacing_extra</item>
-    </style>
-
-    <style name="Button.FingerprintButton"
-        parent="android:Widget.Material.Button.Borderless">
-        <item name="android:lineSpacingExtra">@dimen/suw_description_line_spacing_extra</item>
-        <item name="android:textColor">?android:attr/colorAccent</item>
-    </style>
-
-    <style name="TextAppearance.FingerprintLink"
-           parent="TextAppearance.FingerprintMessage">
-        <item name="android:textColor">?android:attr/colorAccent</item>
     </style>
 
     <style name="TextAppearance.FingerprintErrorText"

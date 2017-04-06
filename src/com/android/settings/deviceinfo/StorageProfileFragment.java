@@ -73,7 +73,7 @@ public class StorageProfileFragment extends DashboardFragment
 
         mPreferenceController.setVolume(mVolume);
         mUserId = args.getInt(USER_ID_EXTRA, UserHandle.myUserId());
-        mPreferenceController.setUserId(mUserId);
+        mPreferenceController.setUserId(UserHandle.of(mUserId));
     }
 
     @Override
@@ -137,6 +137,7 @@ public class StorageProfileFragment extends DashboardFragment
             return null;
         }
 
+        // TODO(b/35927909): Attribute app sizes better than zeroing out for profiles.
         result.gamesSize = 0;
         result.musicAppsSize = 0;
         result.otherAppsSize = 0;

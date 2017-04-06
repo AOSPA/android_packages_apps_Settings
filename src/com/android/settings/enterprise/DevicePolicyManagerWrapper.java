@@ -52,13 +52,6 @@ public interface DevicePolicyManagerWrapper {
     ComponentName getDeviceOwnerComponentOnAnyUser();
 
     /**
-     * Calls {@code DevicePolicyManager.getDeviceOwnerUserId()}.
-     *
-     * @see android.app.admin.DevicePolicyManager#getDeviceOwnerUserId
-     */
-    int getDeviceOwnerUserId();
-
-    /**
      * Calls {@code DevicePolicyManager.getProfileOwnerAsUser()}.
      *
      * @see android.app.admin.DevicePolicyManager#getProfileOwnerAsUser
@@ -79,6 +72,20 @@ public interface DevicePolicyManagerWrapper {
      */
     int getPermissionGrantState(@Nullable ComponentName admin, String packageName,
             String permission);
+
+    /**
+     * Calls {@code DevicePolicyManager.isSecurityLoggingEnabled()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#isSecurityLoggingEnabled
+     */
+    boolean isSecurityLoggingEnabled(@Nullable ComponentName admin);
+
+    /**
+     * Calls {@code DevicePolicyManager.isNetworkLoggingEnabled()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#isNetworkLoggingEnabled
+     */
+    boolean isNetworkLoggingEnabled(@Nullable ComponentName admin);
 
     /**
      * Calls {@code DevicePolicyManager.getLastSecurityLogRetrievalTime()}.
@@ -115,4 +122,25 @@ public interface DevicePolicyManagerWrapper {
      * @see android.app.admin.DevicePolicyManager#getOwnerInstalledCaCerts
      */
     List<String> getOwnerInstalledCaCerts(@NonNull UserHandle user);
+
+    /**
+     * Calls {@code DevicePolicyManager.isDeviceOwnerAppOnAnyUser()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#isDeviceOwnerAppOnAnyUser
+     */
+    boolean isDeviceOwnerAppOnAnyUser(String packageName);
+
+    /**
+     * Calls {@code DevicePolicyManager.packageHasActiveAdmins()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#packageHasActiveAdmins
+     */
+    boolean packageHasActiveAdmins(String packageName);
+
+    /**
+     * Calls {@code DevicePolicyManager.isUninstallInQueue()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#isUninstallInQueue
+     */
+    boolean isUninstallInQueue(String packageName);
 }

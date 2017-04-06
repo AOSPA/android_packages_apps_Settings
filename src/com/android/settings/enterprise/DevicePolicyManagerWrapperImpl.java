@@ -47,11 +47,6 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     }
 
     @Override
-    public int getDeviceOwnerUserId() {
-        return mDpm.getDeviceOwnerUserId();
-    }
-
-    @Override
     public @Nullable ComponentName getProfileOwnerAsUser(final int userId) {
         return mDpm.getProfileOwnerAsUser(userId);
     }
@@ -65,6 +60,16 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     public int getPermissionGrantState(@Nullable ComponentName admin, String packageName,
             String permission) {
         return mDpm.getPermissionGrantState(admin, packageName, permission);
+    }
+
+    @Override
+    public boolean isSecurityLoggingEnabled(@Nullable ComponentName admin) {
+        return mDpm.isSecurityLoggingEnabled(admin);
+    }
+
+    @Override
+    public boolean isNetworkLoggingEnabled(@Nullable ComponentName admin) {
+        return mDpm.isNetworkLoggingEnabled(admin);
     }
 
     @Override
@@ -90,5 +95,20 @@ public class DevicePolicyManagerWrapperImpl implements DevicePolicyManagerWrappe
     @Override
     public List<String> getOwnerInstalledCaCerts(@NonNull UserHandle user) {
         return mDpm.getOwnerInstalledCaCerts(user);
+    }
+
+    @Override
+    public boolean isDeviceOwnerAppOnAnyUser(String packageName) {
+        return mDpm.isDeviceOwnerAppOnAnyUser(packageName);
+    }
+
+    @Override
+    public boolean packageHasActiveAdmins(String packageName) {
+        return mDpm.packageHasActiveAdmins(packageName);
+    }
+
+    @Override
+    public boolean isUninstallInQueue(String packageName) {
+        return mDpm.isUninstallInQueue(packageName);
     }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2015 The Android Open Source Project
+<!-- Copyright (C) 2017 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,10 +13,14 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="zen_mode_settings"
-    android:title="@string/zen_mode_automation_settings_title" >
-
-    <!-- Rules added at runtime -->
+                  android:title="@string/accessibility_screen_magnification_title">
+    <Preference
+        android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
+        android:key="screen_magnification_gestures_preference_screen"
+        android:title="@string/accessibility_screen_magnification_gestures_title"/>
+    <Preference
+        android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
+        android:key="screen_magnification_navbar_preference_screen"
+        android:title="@string/accessibility_screen_magnification_navbar_title"/>
 </PreferenceScreen>

@@ -165,8 +165,8 @@ public class PowerUsageSummary extends PowerUsageBase {
         }
         PowerGaugePreference pgp = (PowerGaugePreference) preference;
         BatteryEntry entry = pgp.getInfo();
-        PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), this,
-                mStatsHelper, mStatsType, entry, true, true);
+        AdvancedPowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
+                this, mStatsHelper, mStatsType, entry, pgp.getPercent());
         return super.onPreferenceTreeClick(preference);
     }
 
@@ -489,6 +489,10 @@ public class PowerUsageSummary extends PowerUsageBase {
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfTotal);
+                if (sipper.usageTimeMs == 0 && sipper.drainType == DrainType.APP) {
+                    sipper.usageTimeMs = BatteryUtils.getProcessTimeMs(
+                            BatteryUtils.StatusType.FOREGROUND, sipper.uidObj, mStatsType);
+                }
                 setUsageSummary(pref, usedTime, sipper.usageTimeMs);
                 if ((sipper.drainType != DrainType.APP
                         || sipper.uidObj.getUid() == Process.ROOT_UID)
@@ -594,8 +598,11 @@ public class PowerUsageSummary extends PowerUsageBase {
     boolean shouldHideSipper(BatterySipper sipper) {
         final DrainType drainType = sipper.drainType;
 
-        return drainType == DrainType.IDLE || drainType == DrainType.CELL
-                || drainType == DrainType.SCREEN || drainType == DrainType.BLUETOOTH
+        return drainType == DrainType.IDLE
+                || drainType == DrainType.CELL
+                || drainType == DrainType.WIFI
+                || drainType == DrainType.SCREEN
+                || drainType == DrainType.BLUETOOTH
                 || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP
                 || mPowerFeatureProvider.isTypeService(sipper)
                 || mPowerFeatureProvider.isTypeSystem(sipper);

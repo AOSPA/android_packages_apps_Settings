@@ -103,7 +103,6 @@ import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationStation;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenAccessSettings;
-import com.android.settings.notification.ZenModeAutomationSettings;
 import com.android.settings.notification.ZenModeEventRuleSettings;
 import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
@@ -111,7 +110,9 @@ import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.sim.SimSettings;
+import com.android.settings.system.ResetDashboardFragment;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
@@ -205,7 +206,6 @@ public class SettingsGateway {
             ApnEditor.class.getName(),
             WifiCallingSettings.class.getName(),
             ZenModePrioritySettings.class.getName(),
-            ZenModeAutomationSettings.class.getName(),
             ZenModeScheduleRuleSettings.class.getName(),
             ZenModeEventRuleSettings.class.getName(),
             ZenModeVisualInterruptionSettings.class.getName(),
@@ -230,6 +230,7 @@ public class SettingsGateway {
             WifiAPITest.class.getName(),
             WifiInfo.class.getName(),
             MasterClear.class.getName(),
+            ResetDashboardFragment.class.getName(),
             NightDisplaySettings.class.getName(),
             ManageDomainUrls.class.getName(),
             AutomaticStorageManagerSettings.class.getName(),
@@ -242,6 +243,7 @@ public class SettingsGateway {
             UserAndAccountDashboardFragment.class.getName(),
             EnterprisePrivacySettings.class.getName(),
             WebViewAppPicker.class.getName(),
+            LockscreenDashboardFragment.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

@@ -54,6 +54,7 @@ public class WifiDetailPreferenceControllerTest {
 
     private static final int LEVEL = 1;
     private static final int RSSI = -55;
+    private static final int LINK_SPEED = 123;
     private static final String SECURITY = "None";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -67,6 +68,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Mock private Preference mockConnectionDetailPref;
     @Mock private WifiDetailPreference mockSignalStrengthPref;
+    @Mock private WifiDetailPreference mockLinkSpeedPref;
     @Mock private WifiDetailPreference mockFrequencyPref;
     @Mock private WifiDetailPreference mockSecurityPref;
     @Mock private WifiDetailPreference mockIpAddressPref;
@@ -84,8 +86,6 @@ public class WifiDetailPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mLifecycle = new Lifecycle();
-        mController = new WifiDetailPreferenceController(
-                mockAccessPoint, mContext, mLifecycle, mockWifiManager);
 
         when(mockAccessPoint.getConfig()).thenReturn(mockWifiConfig);
         when(mockAccessPoint.getLevel()).thenReturn(LEVEL);
@@ -93,11 +93,14 @@ public class WifiDetailPreferenceControllerTest {
         when(mockAccessPoint.getRssi()).thenReturn(RSSI);
         when(mockAccessPoint.getSecurityString(false)).thenReturn(SECURITY);
 
+        mController = new WifiDetailPreferenceController(
+                mockAccessPoint, mContext, mLifecycle, mockWifiManager);
+
         setupMockedPreferenceScreen();
 
-        when (mockWifiInfo.getRssi()).thenReturn(RSSI);
+        when(mockWifiInfo.getRssi()).thenReturn(RSSI);
+        when(mockWifiInfo.getLinkSpeed()).thenReturn(LINK_SPEED);
         when(mockWifiManager.getConnectionInfo()).thenReturn(mockWifiInfo);
-        when(mockWifiManager.getWifiApConfiguration()).thenReturn(mockWifiConfig);
     }
 
     private void setupMockedPreferenceScreen() {
@@ -106,6 +109,8 @@ public class WifiDetailPreferenceControllerTest {
                 .thenReturn(mockConnectionDetailPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SIGNAL_STRENGTH_PREF))
                 .thenReturn(mockSignalStrengthPref);
+        when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_LINK_SPEED))
+                .thenReturn(mockLinkSpeedPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_FREQUENCY_PREF))
                 .thenReturn(mockFrequencyPref);
         when(mockScreen.findPreference(WifiDetailPreferenceController.KEY_SECURITY_PREF))
@@ -139,7 +144,6 @@ public class WifiDetailPreferenceControllerTest {
         mController.onResume();
 
         verify(mockWifiManager).getConnectionInfo();
-        verify(mockWifiManager).getWifiApConfiguration();
     }
 
     @Test
@@ -177,5 +181,39 @@ public class WifiDetailPreferenceControllerTest {
         mController.onResume();
 
         verify(mockSignalStrengthPref).setDetailText(expectedStrength);
+    }
+
+    @Test
+    public void linkSpeedPref_shouldHaveDetailTextSet() {
+        String expectedLinkSpeed = mContext.getString(R.string.link_speed, LINK_SPEED);
+
+        mController.onResume();
+
+        verify(mockLinkSpeedPref).setDetailText(expectedLinkSpeed);
+    }
+
+    @Test
+    public void forgetNetwork_ephemeral() {
+        WifiConfiguration wifiConfiguration = new WifiConfiguration();
+        wifiConfiguration.SSID = "ssid";
+        // WifiConfiguration#isEphemeral will not be visible in robolectric until O is supported
+        wifiConfiguration.ephemeral = true;
+        when(mockAccessPoint.getConfig()).thenReturn(wifiConfiguration);
+
+        mController = new WifiDetailPreferenceController(
+                mockAccessPoint, mContext, mLifecycle, mockWifiManager);
+
+        mController.forgetNetwork();
+
+        verify(mockWifiManager).disableEphemeralNetwork(wifiConfiguration.SSID);
+    }
+
+    @Test
+    public void forgetNetwork_saved() {
+        mockWifiConfig.networkId = 5;
+
+        mController.forgetNetwork();
+
+        verify(mockWifiManager).forget(mockWifiConfig.networkId, null);
     }
 }

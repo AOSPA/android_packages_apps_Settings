@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import com.android.settings.applications.instantapps.InstantAppButtonsController;
+
 import android.app.Fragment;
 import android.content.Intent;
 import android.view.View;
@@ -30,27 +32,25 @@ public interface ApplicationFeatureProvider {
     AppHeaderController newAppHeaderController(Fragment fragment, View appHeader);
 
     /**
-     * Count all installed packages, irrespective of install reason.
+     *
+     *  Returns a new {@link InstantAppButtonsController} instance for showing buttons
+     *  only relevant to instant apps.
      */
-    public static final int IGNORE_INSTALL_REASON = -1;
+    InstantAppButtonsController newInstantAppButtonsController(Fragment fragment,
+            View view);
 
     /**
-     * Calculates the total number of apps installed on the device, across all users and managed
-     * profiles.
+     * Calculates the total number of apps installed on the device via policy in the current user
+     * and all its managed profiles.
      *
-     * @param installReason Only consider apps with this install reason; may be any install reason
-     *         defined in {@link android.content.pm.PackageManager} or
-     *         {@link #IGNORE_INSTALL_REASON} to count all apps, irrespective of install reason.
      * @param async Whether to count asynchronously in a background thread
      * @param callback The callback to invoke with the result
      */
-    void calculateNumberOfInstalledApps(int installReason, boolean async,
-            NumberOfAppsCallback callback);
+    void calculateNumberOfPolicyInstalledApps(boolean async, NumberOfAppsCallback callback);
 
     /**
-     * Asynchronously calculates the total number of apps installed on the device, across all users
-     * and managed profiles, that have been granted one or more of the given permissions by the
-     * admin.
+     * Asynchronously calculates the total number of apps installed in the current user and all its
+     * managed profiles that have been granted one or more of the given permissions by the admin.
      *
      * @param permissions Only consider apps that have been granted one or more of these permissions
      *        by the admin, either at run-time or install-time

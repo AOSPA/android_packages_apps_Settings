@@ -30,6 +30,8 @@ import com.android.settings.R;
 import com.android.settings.ScreenPinningSettings;
 import com.android.settings.SecuritySettings;
 import com.android.settings.accessibility.AccessibilitySettings;
+import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
+import com.android.settings.accessibility.MagnificationPreferenceFragment;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AdvancedAppSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
@@ -70,10 +72,11 @@ import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.sim.SimSettings;
+import com.android.settings.system.ResetDashboardFragment;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TtsEnginePreferenceFragment;
-import com.android.settings.tts.TtsSlidersFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wallpaper.WallpaperTypeSettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
@@ -164,6 +167,7 @@ public final class SearchIndexableResources {
                 R.xml.zen_mode_visual_interruptions_settings,
                 R.drawable.ic_settings_notifications);
         addIndex(SystemDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
+        addIndex(ResetDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_restore);
         addIndex(StorageDashboardFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_storage);
         addIndex(ConnectedDeviceDashboardFragment.class, NO_DATA_RES_ID,
                 R.drawable.ic_devices_other);
@@ -171,7 +175,12 @@ public final class SearchIndexableResources {
         addIndex(PaymentSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_nfc_payment);
         addIndex(
                 TtsEnginePreferenceFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
-        addIndex(TtsSlidersFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_language);
+        addIndex(LockscreenDashboardFragment.class, R.xml.security_lockscreen_settings,
+            R.drawable.ic_settings_security);
+        addIndex(MagnificationPreferenceFragment.class, NO_DATA_RES_ID,
+                R.drawable.ic_settings_accessibility);
+        addIndex(AccessibilityShortcutPreferenceFragment.class, NO_DATA_RES_ID,
+                R.drawable.ic_settings_accessibility);
     }
 
     private SearchIndexableResources() {

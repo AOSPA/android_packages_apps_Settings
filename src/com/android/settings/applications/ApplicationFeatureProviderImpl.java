@@ -20,14 +20,15 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ComponentInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.pm.UserInfo;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArraySet;
 import android.view.View;
 
+import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 
 import java.util.List;
@@ -56,10 +57,15 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     }
 
     @Override
-    public void calculateNumberOfInstalledApps(int installReason, boolean async,
-            NumberOfAppsCallback callback) {
-        final AllUserInstalledAppCounter counter = new AllUserInstalledAppCounter(mContext,
-                installReason, mPm, callback);
+    public InstantAppButtonsController newInstantAppButtonsController(Fragment fragment,
+            View view) {
+        return new InstantAppButtonsController(mContext, fragment, view);
+    }
+
+    @Override
+    public void calculateNumberOfPolicyInstalledApps(boolean async, NumberOfAppsCallback callback) {
+        final CurrentUserAndManagedProfilePolicyInstalledAppCounter counter =
+                new CurrentUserAndManagedProfilePolicyInstalledAppCounter(mContext, mPm, callback);
         if (async) {
             counter.execute();
         } else {
@@ -70,9 +76,9 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
     @Override
     public void calculateNumberOfAppsWithAdminGrantedPermissions(String[] permissions,
             boolean async, NumberOfAppsCallback callback) {
-        final AllUserAppWithAdminGrantedPermissionsCounter counter =
-                new AllUserAppWithAdminGrantedPermissionsCounter(mContext, permissions, mPm, mPms,
-                        mDpm, callback);
+        final CurrentUserAndManagedProfileAppWithAdminGrantedPermissionsCounter counter =
+                new CurrentUserAndManagedProfileAppWithAdminGrantedPermissionsCounter(mContext,
+                        permissions, mPm, mPms, mDpm, callback);
         if (async) {
             counter.execute();
         } else {
@@ -113,12 +119,13 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         return activities;
     }
 
-    private static class AllUserInstalledAppCounter extends InstalledAppCounter {
+    private static class CurrentUserAndManagedProfilePolicyInstalledAppCounter
+            extends InstalledAppCounter {
         private NumberOfAppsCallback mCallback;
 
-        AllUserInstalledAppCounter(Context context, int installReason,
+        CurrentUserAndManagedProfilePolicyInstalledAppCounter(Context context,
                 PackageManagerWrapper packageManager, NumberOfAppsCallback callback) {
-            super(context, installReason, packageManager);
+            super(context, PackageManager.INSTALL_REASON_POLICY, packageManager);
             mCallback = callback;
         }
 
@@ -126,19 +133,15 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         protected void onCountComplete(int num) {
             mCallback.onNumberOfAppsResult(num);
         }
-
-        @Override
-        protected List<UserInfo> getUsersToCount() {
-            return mUm.getUsers(true /* excludeDying */);
-        }
     }
 
-    private static class AllUserAppWithAdminGrantedPermissionsCounter extends
-            AppWithAdminGrantedPermissionsCounter {
+    private static class CurrentUserAndManagedProfileAppWithAdminGrantedPermissionsCounter
+            extends AppWithAdminGrantedPermissionsCounter {
         private NumberOfAppsCallback mCallback;
 
-        AllUserAppWithAdminGrantedPermissionsCounter(Context context, String[] permissions,
-                PackageManagerWrapper packageManager, IPackageManagerWrapper packageManagerService,
+        CurrentUserAndManagedProfileAppWithAdminGrantedPermissionsCounter(Context context,
+                String[] permissions, PackageManagerWrapper packageManager,
+                IPackageManagerWrapper packageManagerService,
                 DevicePolicyManagerWrapper devicePolicyManager, NumberOfAppsCallback callback) {
             super(context, permissions, packageManager, packageManagerService, devicePolicyManager);
             mCallback = callback;
@@ -147,11 +150,6 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         @Override
         protected void onCountComplete(int num) {
             mCallback.onNumberOfAppsResult(num);
-        }
-
-        @Override
-        protected List<UserInfo> getUsersToCount() {
-            return mUm.getUsers(true /* excludeDying */);
         }
     }
 }

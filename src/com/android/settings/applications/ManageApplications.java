@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.UserInfo;
 import android.icu.text.AlphabeticIndex;
 import android.os.Bundle;
 import android.os.Environment;
@@ -69,7 +68,6 @@ import com.android.settings.Settings.WriteSettingsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
-import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
@@ -1398,17 +1396,12 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                new InstalledAppCounter(mContext, ApplicationFeatureProvider.IGNORE_INSTALL_REASON,
+                new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
                         new PackageManagerWrapperImpl(mContext.getPackageManager())) {
                     @Override
                     protected void onCountComplete(int num) {
                         mLoader.setSummary(SummaryProvider.this,
                                 mContext.getString(R.string.apps_summary, num));
-                    }
-
-                    @Override
-                    protected List<UserInfo> getUsersToCount() {
-                         return mUm.getProfiles(UserHandle.myUserId());
                     }
                 }.execute();
             }

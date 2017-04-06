@@ -58,7 +58,6 @@ public class EnterprisePrivacySettings extends DashboardFragment {
     private static List<PreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, boolean async) {
         final List controllers = new ArrayList<PreferenceController>();
-        controllers.add(new InstalledPackagesPreferenceController(context));
         controllers.add(new NetworkLogsPreferenceController(context));
         controllers.add(new BugReportsPreferenceController(context));
         controllers.add(new SecurityLogsPreferenceController(context));
@@ -71,11 +70,11 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         controllers.add(new AdminGrantedCameraPermissionPreferenceController(context, lifecycle,
                 async));
         controllers.add(new EnterpriseSetDefaultAppsPreferenceController(context, lifecycle));
-        controllers.add(new AlwaysOnVpnPrimaryUserPreferenceController(context, lifecycle));
+        controllers.add(new AlwaysOnVpnCurrentUserPreferenceController(context, lifecycle));
         controllers.add(new AlwaysOnVpnManagedProfilePreferenceController(context, lifecycle));
         controllers.add(new GlobalHttpProxyPreferenceController(context, lifecycle));
         controllers.add(new CaCertsPreferenceController(context, lifecycle));
-        controllers.add(new FailedPasswordWipePrimaryUserPreferenceController(context, lifecycle));
+        controllers.add(new FailedPasswordWipeCurrentUserPreferenceController(context, lifecycle));
         controllers.add(new FailedPasswordWipeManagedProfilePreferenceController(context,
                 lifecycle));
         controllers.add(new ImePreferenceController(context, lifecycle));

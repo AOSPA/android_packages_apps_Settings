@@ -57,8 +57,7 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (WifiManager.WIFI_STATE_CHANGED_ACTION.equals(action)) {
-                handleWifiStateChanged(intent.getIntExtra(
-                        WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN));
+                handleWifiStateChanged(mWifiManager.getWifiState());
             } else if (WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)) {
                 if (!mConnected.get()) {
                     handleStateChanged(WifiInfo.getDetailedStateOf((SupplicantState)
@@ -134,14 +133,12 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
 
         switch (state) {
             case WifiManager.WIFI_STATE_ENABLING:
-                mSwitchWidget.setEnabled(false);
                 break;
             case WifiManager.WIFI_STATE_ENABLED:
                 setSwitchBarChecked(true);
                 mSwitchWidget.setEnabled(true);
                 break;
             case WifiManager.WIFI_STATE_DISABLING:
-                mSwitchWidget.setEnabled(false);
                 break;
             case WifiManager.WIFI_STATE_DISABLED:
                 setSwitchBarChecked(false);

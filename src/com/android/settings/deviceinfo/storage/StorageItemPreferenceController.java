@@ -20,6 +20,9 @@ import android.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
@@ -35,6 +38,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.ManageApplications;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.deviceinfo.PrivateVolumeSettings.SystemInfoFragment;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
@@ -52,6 +56,7 @@ public class StorageItemPreferenceController extends PreferenceController {
     private static final String TAG = "StorageItemPreference";
 
     private static final String IMAGE_MIME_TYPE = "image/*";
+    private static final String SYSTEM_FRAGMENT_TAG = "SystemInfo";
 
     @VisibleForTesting
     static final String PHOTO_KEY = "pref_photos_videos";
@@ -104,8 +109,6 @@ public class StorageItemPreferenceController extends PreferenceController {
             return false;
         }
 
-        // TODO: Currently, this reflects the existing behavior for these toggles.
-        //       After the intermediate views are built, swap them in.
         Intent intent = null;
         if (preference.getKey() == null) {
             return false;
@@ -133,6 +136,11 @@ public class StorageItemPreferenceController extends PreferenceController {
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().action(
                         mContext, MetricsEvent.STORAGE_FILES);
                 break;
+            case SYSTEM_KEY:
+                final SystemInfoFragment dialog = new SystemInfoFragment();
+                dialog.setTargetFragment(mFragment, 0);
+                dialog.show(mFragment.getFragmentManager(), SYSTEM_FRAGMENT_TAG);
+                return true;
         }
 
         if (intent != null) {
@@ -160,8 +168,35 @@ public class StorageItemPreferenceController extends PreferenceController {
     /**
      * Sets the user id for which this preference controller is handling.
      */
-    public void setUserId(int userId) {
-        mUserId = userId;
+    public void setUserId(UserHandle userHandle) {
+        mUserId = userHandle.getIdentifier();
+
+        PackageManager pm = mContext.getPackageManager();
+        badgePreference(pm, userHandle, mPhotoPreference);
+        badgePreference(pm, userHandle, mAudioPreference);
+        badgePreference(pm, userHandle, mGamePreference);
+        badgePreference(pm, userHandle, mAppPreference);
+        badgePreference(pm, userHandle, mSystemPreference);
+        badgePreference(pm, userHandle, mFilePreference);
+    }
+
+    private void badgePreference(PackageManager pm, UserHandle userHandle, Preference preference) {
+        if (preference != null) {
+            Drawable currentIcon = preference.getIcon();
+            // Sigh... Applying the badge to the icon clobbers the tint on the base drawable.
+            // For some reason, re-applying it here means the tint remains.
+            currentIcon = applyTint(mContext, currentIcon);
+            preference.setIcon(pm.getUserBadgedIcon(currentIcon, userHandle));
+        }
+    }
+
+    private static Drawable applyTint(Context context, Drawable icon) {
+        TypedArray array =
+                context.obtainStyledAttributes(new int[]{android.R.attr.colorControlNormal});
+        icon = icon.mutate();
+        icon.setTint(array.getColor(0, 0));
+        array.recycle();
+        return icon;
     }
 
     @Override

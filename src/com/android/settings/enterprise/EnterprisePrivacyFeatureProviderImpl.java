@@ -132,7 +132,17 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     }
 
     @Override
-    public boolean isAlwaysOnVpnSetInPrimaryUser() {
+    public boolean isSecurityLoggingEnabled() {
+        return mDpm.isSecurityLoggingEnabled(null);
+    }
+
+    @Override
+    public boolean isNetworkLoggingEnabled() {
+        return mDpm.isNetworkLoggingEnabled(null);
+    }
+
+    @Override
+    public boolean isAlwaysOnVpnSetInCurrentUser() {
         return VpnUtils.isAlwaysOnVpnSet(mCm, MY_USER_ID);
     }
 
@@ -149,12 +159,12 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     }
 
     @Override
-    public int getMaximumFailedPasswordsBeforeWipeInPrimaryUser() {
-        final ComponentName deviceOwner = mDpm.getDeviceOwnerComponentOnAnyUser();
-        if (deviceOwner == null) {
+    public int getMaximumFailedPasswordsBeforeWipeInCurrentUser() {
+        final ComponentName profileOwner = mDpm.getProfileOwnerAsUser(MY_USER_ID);
+        if (profileOwner == null) {
             return 0;
         }
-        return mDpm.getMaximumFailedPasswordsForWipe(deviceOwner, mDpm.getDeviceOwnerUserId());
+        return mDpm.getMaximumFailedPasswordsForWipe(profileOwner, MY_USER_ID);
     }
 
     @Override
