@@ -660,7 +660,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     if (accessPoint.getLevel() != -1) {
                         String key = accessPoint.getBssid();
                         if (TextUtils.isEmpty(key)) {
-                            key = accessPoint.getSsidStr();
+                            key = accessPoint.getSsidStr()+accessPoint.getSecurityString(true);
                         }
                         hasAvailableAccessPoints = true;
                         LongPressAccessPointPreference pref = (LongPressAccessPointPreference)
