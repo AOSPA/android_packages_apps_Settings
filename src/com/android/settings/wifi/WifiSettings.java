@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi;
 
+import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
+
 import android.annotation.NonNull;
 import android.app.Activity;
 import android.app.Dialog;
@@ -70,11 +72,10 @@ import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.AccessPointPreference;
 import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 /**
  * Two types of UI are provided here.
@@ -231,8 +232,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mWifiTracker =
-                new WifiTracker(getActivity(), this, mBgThread.getLooper(), true, true, false);
+        mWifiTracker = WifiTrackerFactory.create(
+                getActivity(), this, mBgThread.getLooper(), true, true, false);
         mWifiManager = mWifiTracker.getManager();
 
         mConnectListener = new WifiManager.ActionListener() {
@@ -629,71 +630,11 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
-                // AccessPoints are sorted by the WifiTracker
-                final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
-
-                boolean hasAvailableAccessPoints = false;
-                mAccessPointsPreferenceCategory.removePreference(mStatusMessagePreference);
-                cacheRemoveAllPrefs(mAccessPointsPreferenceCategory);
-
-                int index = configureConnectedAccessPointPreferenceCategory(accessPoints) ? 1 : 0;
-                boolean fewerNetworksThanLimit =
-                        accessPoints.size() <= index + NETWORKS_TO_INITIALLY_SHOW;
-                int numAccessPointsToShow = mSeeAllNetworks || fewerNetworksThanLimit
-                        ? accessPoints.size() : index + NETWORKS_TO_INITIALLY_SHOW;
-
-                for (; index < numAccessPointsToShow; index++) {
-                    AccessPoint accessPoint = accessPoints.get(index);
-                    // Ignore access points that are out of range.
-                    if (accessPoint.isReachable()) {
-                        String key = accessPoint.getBssid();
-                        if (TextUtils.isEmpty(key)) {
-                            key = accessPoint.getSsidStr();
-                        }
-                        hasAvailableAccessPoints = true;
-                        LongPressAccessPointPreference pref = (LongPressAccessPointPreference)
-                                getCachedPreference(key);
-                        if (pref != null) {
-                            pref.setOrder(index);
-                            continue;
-                        }
-                        LongPressAccessPointPreference
-                                preference = createLongPressActionPointPreference(accessPoint);
-                        preference.setKey(key);
-                        preference.setOrder(index);
-                        if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsidStr())
-                                && !accessPoint.isSaved()
-                                && accessPoint.getSecurity() != AccessPoint.SECURITY_NONE) {
-                            onPreferenceTreeClick(preference);
-                            mOpenSsid = null;
-                        }
-                        mAccessPointsPreferenceCategory.addPreference(preference);
-                        accessPoint.setListener(this);
-                        preference.refresh();
-                    }
-                }
-                removeCachedPrefs(mAccessPointsPreferenceCategory);
-                if (!hasAvailableAccessPoints) {
-                    setProgressBarVisible(true);
-                    Preference pref = new Preference(getPrefContext());
-                    pref.setSelectable(false);
-                    pref.setSummary(R.string.wifi_empty_list_wifi_on);
-                    pref.setOrder(index++);
-                    pref.setKey(PREF_KEY_EMPTY_WIFI_LIST);
-                    mAccessPointsPreferenceCategory.addPreference(pref);
-                } else {
-                    setProgressBarVisible(false);
-                }
-                if (mSeeAllNetworks || fewerNetworksThanLimit) {
-                    mAccessPointsPreferenceCategory.removePreference(mSeeAllNetworksPreference);
-                    mAddPreference.setOrder(index);
-                    mAccessPointsPreferenceCategory.addPreference(mAddPreference);
-                } else {
-                    mAccessPointsPreferenceCategory.removePreference(mAddPreference);
-                    mSeeAllNetworksPreference.setOrder(index);
-                    mAccessPointsPreferenceCategory.addPreference(mSeeAllNetworksPreference);
-                }
-                setConfigureWifiSettingsVisibility();
+                setProgressBarVisible(true);
+                // Have the progress bar displayed before starting to modify APs
+                getView().postDelayed(() -> {
+                        updateAccessPointPreferences();
+                    }, 300 /* delay milliseconds */);
                 break;
 
             case WifiManager.WIFI_STATE_ENABLING:
@@ -712,6 +653,79 @@ public class WifiSettings extends RestrictedSettingsFragment
                 setConfigureWifiSettingsVisibility();
                 setProgressBarVisible(false);
                 break;
+        }
+    }
+
+    private void updateAccessPointPreferences() {
+        // AccessPoints are sorted by the WifiTracker
+        final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
+
+        boolean hasAvailableAccessPoints = false;
+        mAccessPointsPreferenceCategory.removePreference(mStatusMessagePreference);
+        cacheRemoveAllPrefs(mAccessPointsPreferenceCategory);
+
+        int index =
+                configureConnectedAccessPointPreferenceCategory(accessPoints) ? 1 : 0;
+        boolean fewerNetworksThanLimit =
+                accessPoints.size() <= index + NETWORKS_TO_INITIALLY_SHOW;
+        int numAccessPointsToShow = mSeeAllNetworks || fewerNetworksThanLimit
+                ? accessPoints.size() : index + NETWORKS_TO_INITIALLY_SHOW;
+
+        for (; index < numAccessPointsToShow; index++) {
+            AccessPoint accessPoint = accessPoints.get(index);
+            // Ignore access points that are out of range.
+            if (accessPoint.isReachable()) {
+                String key = accessPoint.getBssid();
+                if (TextUtils.isEmpty(key)) {
+                    key = accessPoint.getSsidStr();
+                }
+                hasAvailableAccessPoints = true;
+                LongPressAccessPointPreference pref =
+                        (LongPressAccessPointPreference) getCachedPreference(key);
+                if (pref != null) {
+                    pref.setOrder(index);
+                    continue;
+                }
+                LongPressAccessPointPreference preference =
+                        createLongPressActionPointPreference(accessPoint);
+                preference.setKey(key);
+                preference.setOrder(index);
+                if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsidStr())
+                        && !accessPoint.isSaved()
+                        && accessPoint.getSecurity() != AccessPoint.SECURITY_NONE) {
+                    onPreferenceTreeClick(preference);
+                    mOpenSsid = null;
+                }
+                mAccessPointsPreferenceCategory.addPreference(preference);
+                accessPoint.setListener(WifiSettings.this);
+                preference.refresh();
+            }
+        }
+        removeCachedPrefs(mAccessPointsPreferenceCategory);
+        if (mSeeAllNetworks || fewerNetworksThanLimit) {
+            mAccessPointsPreferenceCategory.removePreference(mSeeAllNetworksPreference);
+            mAddPreference.setOrder(index);
+            mAccessPointsPreferenceCategory.addPreference(mAddPreference);
+        } else {
+            mAccessPointsPreferenceCategory.removePreference(mAddPreference);
+            mSeeAllNetworksPreference.setOrder(index);
+            mAccessPointsPreferenceCategory.addPreference(mSeeAllNetworksPreference);
+        }
+        setConfigureWifiSettingsVisibility();
+
+        if (!hasAvailableAccessPoints) {
+            setProgressBarVisible(true);
+            Preference pref = new Preference(getPrefContext());
+            pref.setSelectable(false);
+            pref.setSummary(R.string.wifi_empty_list_wifi_on);
+            pref.setOrder(index++);
+            pref.setKey(PREF_KEY_EMPTY_WIFI_LIST);
+            mAccessPointsPreferenceCategory.addPreference(pref);
+        } else {
+            // Continuing showing progress bar for an additional delay to overlap with animation
+            getView().postDelayed(() -> {
+                    setProgressBarVisible(false);
+                }, 1700 /* delay millis */);
         }
     }
 
@@ -844,7 +858,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     protected void setProgressBarVisible(boolean visible) {
         if (mProgressHeader != null) {
-            mProgressHeader.setVisibility(visible && !isUiRestricted() ? View.VISIBLE : View.GONE);
+            mProgressHeader.setVisibility(
+                    visible && !isUiRestricted() ? View.VISIBLE : View.INVISIBLE);
         }
     }
 

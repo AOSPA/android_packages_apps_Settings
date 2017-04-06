@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,46 +11,44 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
-package com.android.settings.deviceinfo.storage;
 
-import static com.google.common.truth.Truth.assertThat;
+package com.android.settings.widget;
 
-import android.content.Context;
-
-import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import static junit.framework.Assert.assertEquals;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class StorageItemPreferenceAlternateTest {
-    private Context mContext;
+public class DefaultIndicatorSeekBarTest {
+
+    private DefaultIndicatorSeekBar mDefaultIndicatorSeekBar;
 
     @Before
-    public void setUp() throws Exception {
-        mContext = RuntimeEnvironment.application;
+    public void setUp() {
+        mDefaultIndicatorSeekBar = new DefaultIndicatorSeekBar(RuntimeEnvironment.application);
+        mDefaultIndicatorSeekBar.setMax(100);
+    }
+
+    @After
+    public void tearDown() {
+        mDefaultIndicatorSeekBar = null;
     }
 
     @Test
-    public void testBeforeLoad() {
-        StorageItemPreferenceAlternate pref = new StorageItemPreferenceAlternate(mContext);
-        assertThat(((String) pref.getSummary())).isEqualTo(
-                mContext.getString(R.string.memory_calculating_size));
+    public void defaultProgress_setSucceeds() {
+        mDefaultIndicatorSeekBar.setDefaultProgress(40);
+        assertEquals(40, mDefaultIndicatorSeekBar.getDefaultProgress());
     }
 
-    @Test
-    public void testAfterLoad() {
-        StorageItemPreferenceAlternate pref = new StorageItemPreferenceAlternate(mContext);
-        pref.setStorageSize(1024L);
-        assertThat(((String) pref.getSummary())).isEqualTo("1.00KB");
-    }
 }

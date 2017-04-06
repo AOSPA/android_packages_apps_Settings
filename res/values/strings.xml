@@ -71,7 +71,7 @@
     <!-- Wifi Calling provisioning flag on. Only shown in diagnostic screen, so precise translation is not needed. -->
     <string name="wfc_provisioned_switch_string">Wifi Calling Provisioned</string>
 
-    <!-- Cell Radio Power. Only shown in diagnostic screen, so precise translation is not needed. -->
+    <!-- Title for controlling on/off for Mobile phone's radio power. Only shown in diagnostic screen, so precise translation is not needed. -->
     <string name="radio_info_radio_power">Mobile Radio Power</string>
 
     <!-- Phone Info screen. Menu item label.  Used for diagnostic info screens, precise translation isn't needed -->
@@ -222,8 +222,6 @@
     <string name="bluetooth_devices">Bluetooth devices</string>
     <!-- Bluetooth settings screen, title for the current bluetooth name setting -->
     <string name="bluetooth_device_name">Device name</string>
-    <!-- Bluetooth settings screen, image description for device details button. This opens the screen to rename, unpair, etc. a single device. -->
-    <string name="bluetooth_device_details">Device settings</string>
     <!-- Bluetooth settings screen, image description for profile of a device details button. -->
     <string name="bluetooth_profile_details">Profile settings</string>
     <!-- Bluetooth settings screen, summary text when there isn't a name set (for the name setting) -->
@@ -629,7 +627,7 @@
     <string name="calls_title">Calls</string>
     <!-- check box SMS Messges title [CHAR LIMIT=30] -->
     <string name="sms_messages_title">SMS messages</string>
-    <!-- check box cellular data summary [CHAR LIMIT=41] -->
+    <!-- check box cellular data summary [CHAR LIMIT=85] -->
     <string name="cellular_data_summary">Allow data usage over mobile network</string>
     <!-- check box to allow data usage when roaming [CHAR LIMIT=41] -->
     <string name="allow_data_usage_title">Allow data usage when roaming</string>
@@ -1300,11 +1298,11 @@
     <!-- Toast shown when lock pattern or password successfully setup. [CHAR LIMIT=64] -->
     <string name="lock_setup" msgid="5507462851158901718">Setup is complete.</string>
 
-    <!-- In the security screen, the header title for settings related to device admins -->
-    <string name="device_admin_title">Device administration</string>
-
     <!-- Title of preference to manage device admins -->
     <string name="manage_device_admin">Device admin apps</string>
+
+    <!-- Summary of preference to manage device administrators, informing the user that currently no device administrator apps are installed and active -->
+    <string name="number_of_device_admins_none">No active apps</string>
 
     <!-- Summary of preference to manage device administrators, informing the user how many device administrator apps are installed and active -->
     <plurals name="number_of_device_admins">
@@ -1639,7 +1637,7 @@
     <string name="wifi_switch_away_when_unvalidated">Switch to mobile data if Wi\u2011Fi loses Internet access.</string>
     <!-- Preference title for option to automatically switch away from bad wifi networks [CHAR LIMIT=60]-->
     <string name="wifi_cellular_data_fallback_title">Switch to mobile data automatically</string>
-    <!-- Preference summary for option to automatically switch away from bad wifi networks [CHAR LIMIT=None]-->
+    <!-- Preference summary to automatically switch away from bad wifi networks [CHAR LIMIT=None]-->
     <string name="wifi_cellular_data_fallback_summary">Use mobile data when Wi\u2011Fi has no Internet access. Data usage may apply.</string>
     <!-- Action bar text message to manually add a wifi network [CHAR LIMIT=20]-->
     <string name="wifi_add_network">Add network</string>
@@ -1806,7 +1804,8 @@
 
     <!-- Dialog text to tell the user that the selected network has lost Internet access, and asking the user whether they want to avoid this network. -->
     <string name="lost_internet_access_title">Wi\u2011Fi is not connected to the Internet</string>
-    <string name="lost_internet_access_text">You can switch to the mobile network whenever Wi\u2011Fi has a bad connection. Data usage may apply.</string>
+    <string name="lost_internet_access_text">You can switch to the mobile network whenever Wi\u2011Fi has a bad connection. Data usage charges may apply.</string>
+    <!-- Button text to let user switch to mobile data -->
     <string name="lost_internet_access_switch">Switch to mobile</string>
     <string name="lost_internet_access_cancel">Stay on Wi\u2011Fi</string>
     <string name="lost_internet_access_persist">Never show again</string>
@@ -1932,7 +1931,7 @@
     <!-- Summary Used to open the ssid and security dialog for Wifi Access Point.  [CHAR LIMIT=60] -->
     <string name="wifi_hotspot_configure_ap_text_summary">AndroidAP WPA2 PSK hotspot</string>
     <!-- Subtext on configuration preference to indicate SSID and security chosen -->
-    <string name="wifi_tether_configure_subtext"><xliff:g id="network_ssid">%1$s</xliff:g> <xliff:g id="network_security">%2$s</xliff:g> portable Wi\u2011Fi hotspot</string>
+    <string name="wifi_tether_configure_subtext"><xliff:g id="network_ssid">%1$s</xliff:g> <xliff:g id="network_security">%2$s</xliff:g> hotspot</string>
     <!-- Default access point SSID used for tethering -->
     <string name="wifi_tether_configure_ssid_default">AndroidHotspot</string>
 
@@ -2075,8 +2074,10 @@
     <string name="display_settings_title">Display</string>
     <!-- Sound settings screen heading -->
     <string name="sound_settings">Sound</string>
-    <!-- Sound settings screen, setting option summary text -->
-    <string name="ringtone_summary">&#160;</string>
+    <!-- DO NOT TRANSLATE Summary placeholder -->
+    <string name="summary_placeholder" translatable="false">&#160;</string>
+    <!-- DO NOT TRANSLATE Empty summary for dynamic preferences -->
+    <string name="summary_empty" translatable="false"></string>
     <!-- Sound settings screen, volume title -->
     <string name="all_volume_title">Volumes</string>
     <!-- Sound settings screen, music effects title [CHAR LIMIT=30]-->
@@ -2230,6 +2231,8 @@
     <string name="night_display_start_time_title">Start time</string>
     <!-- Night display screen, setting option name to configure time to automatically turn off night display. [CHAR LIMIT=30] -->
     <string name="night_display_end_time_title">End time</string>
+    <!-- Night display screen, setting the color temperature of the display. [CHAR LIMIT=30] -->
+    <string name="night_display_temperature_title">Intensity</string>
     <!-- Display settings screen, summary format of night display when off. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off">Off. <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
@@ -2255,6 +2258,10 @@
     <string name="screen_timeout_summary">After <xliff:g id="timeout_description">%1$s</xliff:g> of inactivity</string>
     <!-- Wallpaper settings title [CHAR LIMIT=30] -->
     <string name="wallpaper_settings_title">Wallpaper</string>
+    <!-- Wallpaper settings summary when default wallpaper is used [CHAR LIMIT=NONE] -->
+    <string name="wallpaper_settings_summary_default">Default</string>
+    <!-- Wallpaper settings summary when wallpaper has been updated [CHAR LIMIT=NONE] -->
+    <string name="wallpaper_settings_summary_custom">Custom</string>
     <!-- Wallpaper suggestion title [CHAR LIMIT=30] -->
     <string name="wallpaper_suggestion_title">Change wallpaper</string>
     <!-- Wallpaper suggestion title [CHAR LIMIT=60] -->
@@ -2905,8 +2912,6 @@
     <string name="reset_network_complete_toast">Network settings have been reset</string>
 
     <!-- Master Clear -->
-    <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading [CHAR LIMIT=30] -->
-    <string name="device_reset_title">Reset device</string>
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading -->
     <string name="master_clear_title">Factory data reset</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
@@ -3362,20 +3367,25 @@
     <string name="install_applications">Unknown sources</string>
     <!-- Applications settings screen, setting check box title. If checked, the system allows installation of applications that are downloaded from random places, such as web sites.  [CHAR LIMIT=30] -->
     <string name="install_applications_title">Allow all app sources</string>
-    <!-- Applications settings screen, setting check box summary.  This is the summary for "Unknown sources" checkbox  [CHAR LIMIT=65] -->
-    <string name="install_unknown_applications_title">Lets you install apps from sources other than Google Play</string>
-    <!-- Applications settings screen, setting check box summary.  This is the summary for "Unknown sources" checkbox  -->
-    <string name="install_unknown_applications">Allow installation of apps from unknown sources</string>
-    <!-- Applications settings screen, message text of alert that appears if user selects the "Unknown sources" check box -->
-    <string name="install_all_warning" product="tablet">Your tablet and personal data are more vulnerable to attack by apps
- from unknown sources. You agree that you are solely responsible for any
- damage to your tablet or loss of data that may result from using
- these apps.</string>
-    <!-- Applications settings screen, message text of alert that appears if user selects the "Unknown sources" check box -->
-    <string name="install_all_warning" product="default">Your phone and personal data are more vulnerable to attack by apps
- from unknown sources. You agree that you are solely responsible for any
- damage to your phone or loss of data that may result from using
- these apps.</string>
+
+    <!-- Warning that appears below the unknown sources switch in settings -->
+    <string name="install_all_warning" product="tablet">
+        Your tablet and personal data are more vulnerable
+        to attack by unknown apps. By installing apps from
+        this source, you agree that you are responsible for
+        any damage to your tablet or loss of data that may
+        result from their use.
+    </string>
+
+    <!-- Warning that appears below the unknown sources switch in settings -->
+    <string name="install_all_warning" product="default">
+        Your phone and personal data are more vulnerable
+        to attack by unknown apps. By installing apps from
+        this source, you agree that you are responsible for
+        any damage to your phone or loss of data that may
+        result from their use.
+    </string>
+
     <!-- Applications settings screen, setting check box title. If checked, applications show more settings options. -->
     <string name="advanced_settings">Advanced settings</string>
     <!-- Applications settings screen, setting check box summary.  This is the summary for "Advanced settings" checkbox  -->
@@ -3759,6 +3769,8 @@
     <string name="language_settings">Languages&#160;&amp; input</string>
     <!-- Title of Languages & input settings screen -->
     <string name="language_keyboard_settings_title">Languages&#160;&amp; input</string>
+    <!-- Title of preference category that lists all settings about helping user input such as spell checker [CHAR LIMIT=60]-->
+    <string name="input_assistance">Input assistance</string>
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to keyboard (enable/disable each keyboard, settings for each keyboard). -->
     <string name="keyboard_settings_category">Keyboard &amp; input methods</string>
     <!-- On Text & language settings screen, setting option name. title of the setting to take the user to a screen to select the locale. -->
@@ -3805,9 +3817,9 @@
     <string name="failed_to_open_app_settings_toast">Failed to open settings for <xliff:g id="spell_application_name">%1$s</xliff:g></string>
 
     <!-- Title for the 'keyboard and input methods' preference category. [CHAR LIMIT=45] -->
-    <string name="keyboard_and_input_methods_category">Keyboard and input methods</string>
+    <string name="keyboard_and_input_methods_category">Keyboard &amp; inputs</string>
     <!-- Title for the 'virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
-    <string name="virtual_keyboard_category">Virtual keyboard</string>
+    <string name="virtual_keyboard_category">Virtual keyboards</string>
     <!-- Title for the 'available virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
     <string name="available_virtual_keyboard_category">Available virtual keyboard</string>
     <!-- Title for the button to trigger the 'Manage keyboards' preference sub-screen, where the user can turn on/off installed virtual keyboards.[CHAR LIMIT=35] -->
@@ -5277,7 +5289,7 @@
     <!-- Checkbox label that restricts background data usage of a specific application. [CHAR LIMIT=40] -->
     <string name="data_usage_app_restrict_background">Background data</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_app_restrict_background_summary">Enable usage of Mobile data in the background</string>
+    <string name="data_usage_app_restrict_background_summary">Enable usage of mobile data in the background</string>
     <!-- Summary message for checkbox that restricts background data usage of a specific application when no networks have been limited. [CHAR LIMIT=84] -->
     <string name="data_usage_app_restrict_background_summary_disabled">To restrict background data for this app, first set a mobile data limit.</string>
     <!-- Title of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=48] -->
@@ -6459,8 +6471,17 @@
     <!-- Apps > App Details > Advanced section string title. [CHAR LIMIT=NONE] -->
     <string name="picture_in_picture_app_detail_title">Picture-in-picture</string>
 
-    <!-- Apps > App Details > Advanced section string description. [CHAR LIMIT=NONE] -->
-    <string name="picture_in_picture_app_detail_summary">Permit entering picture-in-picture when leaving app</string>
+    <!-- Apps > App Details > Picture-in-picture > Switch title. [CHAR LIMIT=NONE] -->
+    <string name="picture_in_picture_app_detail_switch">Allow picture-in-picture</string>
+
+    <!-- Apps > App Details > Picture-in-picture > Description. [CHAR LIMIT=NONE] -->
+    <string name="picture_in_picture_app_detail_summary">Allow this app to create a picture-in-picture window while the app is open or after you leave it (for example, to continue watching a video).  This window displays on top of other apps you're using.</string>
+
+    <!-- Summary of app allowed to enter picture-in-picture. [CHAR LIMIT=60] -->
+    <string name="picture_in_picture_on">Yes</string>
+
+    <!-- Summary of app not allowed to enter picture-in-picture. [CHAR LIMIT=60] -->
+    <string name="picture_in_picture_off">No</string>
 
     <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_access_title">Do Not Disturb access</string>
@@ -7383,9 +7404,9 @@
     <string name="system_alert_window_off">No</string>
 
     <!-- Title for settings screen for controlling apps that can install other apps on device [CHAR LIMIT=50] -->
-    <string name="install_other_apps">Install other apps</string>
+    <string name="install_other_apps">Install unknown apps</string>
     <!-- Keywords for setting screen for controlling apps that can install other apps on device -->
-    <string name="keywords_install_other_apps">install apps external unknown sources</string>
+    <string name="keywords_install_other_apps">install apps unknown sources</string>
 
     <!-- Write Settings settings -->
     <!-- Settings title in main settings screen for WRITE_SETTINGS [CHAR LIMIT=30] -->
@@ -7418,7 +7439,7 @@
     <!-- Summary of app not trusted to install apps [CHAR LIMIT=45] -->
     <string name="external_source_untrusted">No</string>
     <!-- Title of switch preference that controls whether an external app source is trusted or not [CHAR LIMIT=50] -->
-    <string name="external_source_switch_title">Trust apps from this source</string>
+    <string name="external_source_switch_title">Allow app installs</string>
 
     <!-- Title of setting that controls gesture to open camera [CHAR LIMIT=40] -->
     <string name="camera_gesture_title">Double twist for camera</string>
@@ -7517,7 +7538,7 @@
     <string name="backup_disabled">Back up disabled</string>
 
     <!-- Summary of device info page [CHAR LIMIT=NONE] -->
-    <string name="about_summary">Android <xliff:g id="version" example="6.0">%1$s</xliff:g></string>
+    <string name="about_summary">Updated to Android <xliff:g id="version" example="6.0">%1$s</xliff:g></string>
 
     <!-- Title for dialog displayed when user clicks on a setting locked by an admin [CHAR LIMIT=30] -->
     <string name="disabled_by_policy_title">Action not allowed</string>
@@ -7575,7 +7596,7 @@
     <!-- Summary of condition that battery saver is on [CHAR LIMIT=NONE] -->
     <string name="condition_battery_summary">Performance is reduced. Location services and background data are turned off.</string>
 
-    <!-- Title of condition that cellular data is off [CHAR LIMIT=30] -->
+    <!-- Title of condition that cellular data is off [CHAR LIMIT=50] -->
     <string name="condition_cellular_title">Mobile data is off</string>
 
     <!-- Summary of condition that cellular data is off [CHAR LIMIT=NONE] -->
@@ -8100,8 +8121,8 @@
     <!-- Summary text for ambient display (device) [CHAR LIMIT=160]-->
     <string name="ambient_display_pickup_summary" product="device">To quickly check your notifications, pick up your device.</string>
 
-    <!-- Title text for fingerprint swipe for notifications [CHAR LIMIT=60]-->
-    <string name="fingerprint_swipe_for_notifications_title">Swipe for notifications</string>
+    <!-- Title text for fingerprint swipe for notifications [CHAR LIMIT=80]-->
+    <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
 
     <!-- Summary text for fingerprint swipe for notifications (phone) [CHAR LIMIT=160]-->
     <string name="fingerprint_swipe_for_notifications_summary" product="default">To check your notifications, swipe down on the fingerprint sensor on the back of your phone.</string>
@@ -8168,7 +8189,7 @@
     <!-- Enterprise Privacy --> <skip />
 
     <!-- Title of setting on security settings screen. This will take the user to a screen with information about admin powers and their impact on the user's privacy on a managed device. Shown on enterprise-managed devices only. Note: "Device" is singular and refers to the device (e.g. phone or tablet) that the user is holding in their hand. -->
-    <string name="enterprise_privacy_settings">Managed device details</string>
+    <string name="enterprise_privacy_settings">Managed device info</string>
     <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
     <string name="enterprise_privacy_settings_summary_generic">Changes &amp; settings managed by your organization</string>
     <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
@@ -8208,13 +8229,13 @@
     <!-- Label indicating that the admin installed one or more apps on the device. -->
     <string name="enterprise_privacy_enterprise_installed_packages">Apps installed</string>
     <!-- Label indicating that the admin granted one or more apps access to the device's location. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_location_access">Apps allowed to access your location</string>
+    <string name="enterprise_privacy_location_access">Location permissions</string>
     <!-- Label indicating that the admin granted one or more apps access to the microphone. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_microphone_access">Apps allowed to access your microphone</string>
+    <string name="enterprise_privacy_microphone_access">Microphone permissions</string>
     <!-- Label indicating that the admin granted one or more apps access to the camera. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_camera_access">Apps allowed to access your camera</string>
+    <string name="enterprise_privacy_camera_access">Camera permissions</string>
     <!-- Label indicating that the admin set one or more apps as defaults for common actions (e.g. open browser, send e-mail). [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_enterprise_set_default_apps">Default apps set</string>
+    <string name="enterprise_privacy_enterprise_set_default_apps">Default apps</string>
     <!-- Label explaining that the current input method was set by the admin. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_input_method">Default keyboard</string>
     <!-- Summary indicating the input method set by the admin. [CHAR LIMIT=NONE] -->
@@ -8227,30 +8248,17 @@
     <string name="enterprise_privacy_always_on_vpn_work">Always-on VPN turned on in your work profile</string>
     <!-- Label explaining that a global HTTP proxy was set by the admin. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_global_http_proxy">Global HTTP proxy set</string>
-    <!-- Label explaining that the admin installed trusted CA certificates for the current user. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_ca_certs_user">
-        <item quantity="one">Trusted CA Certificate installed</item>
-        <item quantity="other">Trusted CA Certificates installed</item>
-    </plurals>
-    <!-- Label explaining that the admin installed trusted CA certificates for the personal profile. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_ca_certs_personal">
-        <item quantity="one">Trusted CA Certificate installed in your personal profile</item>
-        <item quantity="other">Trusted CA Certificates installed in your personal profile</item>
-    </plurals>
+    <!-- Label explaining that the admin installed trusted CA certificates. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_ca_certs">Trusted credentials</string>
     <!-- Summary indicating the number of trusted CA certificates installed by the admin. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_number_ca_certs">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> certificate</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> certificates</item>
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CA certificate</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CA certificates</item>
     </plurals>
     <!-- Summary indicating the number of trusted CA certificates installed by the admin. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_number_ca_certs_actionable">
-        <item quantity="one"><xliff:g id="count">%d</xliff:g> certificate. Tap to view.</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> certificates. Tap to view.</item>
-    </plurals>
-    <!-- Label explaining that the admin installed trusted CA certificates for the work profile. [CHAR LIMIT=NONE] -->
-    <plurals name="enterprise_privacy_ca_certs_work">
-        <item quantity="one">Trusted CA Certificate installed in your work profile</item>
-        <item quantity="other">Trusted CA Certificates installed in your work profile</item>
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> CA certificate. Tap to view.</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> CA certificates. Tap to view.</item>
     </plurals>
     <!-- Label explaining that the admin can lock the device and change the user's password. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_lock_device">Admin can lock the device and reset password</string>
@@ -8312,8 +8320,8 @@
     <string name="webview_disabled_for_user">(disabled for user <xliff:g id="user" example="John Doe">%s</xliff:g>)</string>
 
     <!-- AutoFill strings -->
-    <!-- Preference label for the auto-fill app. [CHAR LIMIT=60] -->
-    <string name="autofill_app">Autofill app</string>
+    <!-- Preference label for choosing auto-fill service. [CHAR LIMIT=60] -->
+    <string name="autofill_app">Autofill service</string>
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
     <string name="autofill_keywords">auto, fill, autofill</string>
     <!-- Title of the warning dialog for setting the auto-fill app. [CHAR_LIMIT=NONE] -->

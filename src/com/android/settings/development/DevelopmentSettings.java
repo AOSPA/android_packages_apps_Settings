@@ -23,7 +23,6 @@ import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.AppOpsManager.PackageOps;
 import android.app.Dialog;
-import android.app.admin.DevicePolicyManager;
 import android.app.backup.IBackupManager;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
@@ -204,7 +203,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             "bluetooth_disable_absolute_volume";
     private static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY =
             "persist.bluetooth.disableabsvol";
+    private static final String BLUETOOTH_AVRCP_VERSION_PROPERTY =
+                                    "persist.bluetooth.avrcpversion";
 
+    private static final String BLUETOOTH_SELECT_AVRCP_VERSION_KEY = "bluetooth_select_avrcp_version";
     private static final String BLUETOOTH_SELECT_A2DP_CODEC_KEY = "bluetooth_select_a2dp_codec";
     private static final String BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY = "bluetooth_select_a2dp_sample_rate";
     private static final String BLUETOOTH_SELECT_A2DP_BITS_PER_SAMPLE_KEY = "bluetooth_select_a2dp_bits_per_sample";
@@ -246,17 +248,15 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
     private IWebViewUpdateService mWebViewUpdateService;
-    private DevicePolicyManager mDpm;
     private UserManager mUm;
     private WifiManager mWifiManager;
     private PersistentDataBlockManager mOemUnlockManager;
     private TelephonyManager mTelephonyManager;
 
     private SwitchBar mSwitchBar;
-    private boolean mLastEnabledState;
+
     private boolean mHaveDebugSettings;
     private boolean mDontPokeProperties;
-
     private SwitchPreference mEnableAdb;
     private Preference mClearAdbKeys;
     private SwitchPreference mEnableTerminal;
@@ -283,6 +283,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private BluetoothA2dp mBluetoothA2dp;
     private final Object mBluetoothA2dpLock = new Object();
+    private ListPreference mBluetoothSelectAvrcpVersion;
     private ListPreference mBluetoothSelectA2dpCodec;
     private ListPreference mBluetoothSelectA2dpSampleRate;
     private ListPreference mBluetoothSelectA2dpBitsPerSample;
@@ -350,6 +351,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private boolean mLogpersistCleared;
     private Dialog mLogpersistClearDialog;
     private DashboardFeatureProvider mDashboardFeatureProvider;
+    private DevelopmentSettingsEnabler mSettingsEnabler;
     private BugReportPreferenceController mBugReportController;
     private BugReportInPowerPreferenceController mBugReportInPowerController;
     private TelephonyMonitorPreferenceController mTelephonyMonitorController;
@@ -366,6 +368,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mSettingsEnabler = new DevelopmentSettingsEnabler(context, getLifecycle());
         mDashboardFeatureProvider = FeatureFactory.getFactory(context)
                 .getDashboardFeatureProvider(context);
     }
@@ -382,7 +385,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 .getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
         mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
-        mDpm = (DevicePolicyManager) getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUm = (UserManager) getSystemService(Context.USER_SERVICE);
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -496,6 +498,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mWebViewMultiprocess = findAndInitSwitchPref(WEBVIEW_MULTIPROCESS_KEY);
         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
 
+        mBluetoothSelectAvrcpVersion = addListPreference(BLUETOOTH_SELECT_AVRCP_VERSION_KEY);
         mBluetoothSelectA2dpCodec = addListPreference(BLUETOOTH_SELECT_A2DP_CODEC_KEY);
         mBluetoothSelectA2dpSampleRate = addListPreference(BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY);
         mBluetoothSelectA2dpBitsPerSample = addListPreference(BLUETOOTH_SELECT_A2DP_BITS_PER_SAMPLE_KEY);
@@ -671,22 +674,18 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mDisabledPrefs.add(mKeepScreenOn);
         }
 
-        final ContentResolver cr = getActivity().getContentResolver();
-        mLastEnabledState = Settings.Global.getInt(cr,
-                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
-        mSwitchBar.setChecked(mLastEnabledState);
-        setPrefsEnabledState(mLastEnabledState);
+        final boolean lastEnabledState = mSettingsEnabler.getLastEnabledState();
+        mSwitchBar.setChecked(lastEnabledState);
+        setPrefsEnabledState(lastEnabledState);
 
-        if (mHaveDebugSettings && !mLastEnabledState) {
+        if (mHaveDebugSettings && !lastEnabledState) {
             // Overall debugging is disabled, but there are some debug
             // settings that are enabled.  This is an invalid state.  Switch
             // to debug settings being enabled, so the user knows there is
             // stuff enabled and can turn it all off if they want.
-            Settings.Global.putInt(getActivity().getContentResolver(),
-                    Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
-            mLastEnabledState = true;
-            mSwitchBar.setChecked(mLastEnabledState);
-            setPrefsEnabledState(mLastEnabledState);
+            mSettingsEnabler.enableDevelopmentSettings();
+            mSwitchBar.setChecked(lastEnabledState);
+            setPrefsEnabledState(lastEnabledState);
         }
         mSwitchBar.show();
 
@@ -1560,7 +1559,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                         || currentValue.equals(SELECT_LOGD_OFF_SIZE_MARKER_VALUE)) {
                     writeLogpersistOption(null, true);
                     mLogpersist.setEnabled(false);
-                } else if (mLastEnabledState) {
+                } else if (mSettingsEnabler.getLastEnabledState()) {
                     mLogpersist.setEnabled(true);
                 }
             }
@@ -1792,6 +1791,14 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         String[] summaries;
         int index;
 
+        // Init the AVRCP Version - Default
+        values = getResources().getStringArray(R.array.bluetooth_avrcp_version_values);
+        summaries = getResources().getStringArray(R.array.bluetooth_avrcp_versions);
+        String value = SystemProperties.get(BLUETOOTH_AVRCP_VERSION_PROPERTY, values[0]);
+        index = mBluetoothSelectAvrcpVersion.findIndexOfValue(value);
+        mBluetoothSelectAvrcpVersion.setValue(values[index]);
+        mBluetoothSelectAvrcpVersion.setSummary(summaries[index]);
+
         // Init the Codec Type - Default
         values = getResources().getStringArray(R.array.bluetooth_a2dp_codec_values);
         summaries = getResources().getStringArray(R.array.bluetooth_a2dp_codec_summaries);
@@ -1828,6 +1835,15 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBluetoothSelectA2dpLdacPlaybackQuality.setSummary(summaries[index]);
     }
 
+    private void writeBluetoothAvrcpVersion(Object newValue) {
+        SystemProperties.set(BLUETOOTH_AVRCP_VERSION_PROPERTY, newValue.toString());
+        int index = mBluetoothSelectAvrcpVersion.findIndexOfValue(newValue.toString());
+        if (index >= 0) {
+            String[] titles = getResources().getStringArray(R.array.bluetooth_avrcp_versions);
+            mBluetoothSelectAvrcpVersion.setSummary(titles[index]);
+        }
+    }
+
     private void updateBluetoothA2dpConfigurationValues() {
         int index;
         String[] summaries;
@@ -1848,8 +1864,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 }
             }
         }
-        if (codecConfig == null)
+        if (codecConfig == null) {
             return;
+        }
 
         try {
             resources = getResources();
@@ -2329,7 +2346,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (switchView != mSwitchBar.getSwitch()) {
             return;
         }
-        if (isChecked != mLastEnabledState) {
+        final boolean lastEnabledState = mSettingsEnabler.getLastEnabledState();
+        if (isChecked != lastEnabledState) {
             if (isChecked) {
                 mDialogClicked = false;
                 if (mEnableDialog != null) dismissDialogs();
@@ -2343,10 +2361,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 mEnableDialog.setOnDismissListener(this);
             } else {
                 resetDangerousOptions();
-                Settings.Global.putInt(getActivity().getContentResolver(),
-                        Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
-                mLastEnabledState = isChecked;
-                setPrefsEnabledState(mLastEnabledState);
+                mSettingsEnabler.disableDevelopmentSettings();
+                setPrefsEnabledState(false);
             }
         }
     }
@@ -2534,6 +2550,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             updateHdcpValues();
             pokeSystemProperties();
             return true;
+        } else if (preference == mBluetoothSelectAvrcpVersion) {
+           writeBluetoothAvrcpVersion(newValue);
+           return true;
         } else if ((preference == mBluetoothSelectA2dpCodec) ||
                    (preference == mBluetoothSelectA2dpSampleRate) ||
                    (preference == mBluetoothSelectA2dpBitsPerSample) ||
@@ -2629,10 +2648,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         } else if (dialog == mEnableDialog) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 mDialogClicked = true;
-                Settings.Global.putInt(getActivity().getContentResolver(),
-                        Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
-                mLastEnabledState = true;
-                setPrefsEnabledState(mLastEnabledState);
+                mSettingsEnabler.enableDevelopmentSettings();
+                setPrefsEnabledState(true);
             } else {
                 // Reset the toggle
                 mSwitchBar.setChecked(false);

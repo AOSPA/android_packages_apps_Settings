@@ -20,6 +20,7 @@ import android.Manifest;
 
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
@@ -33,12 +34,13 @@ public final class AdminGrantedCameraPermissionPreferenceControllerTest extends
 
     public AdminGrantedCameraPermissionPreferenceControllerTest() {
         super("enterprise_privacy_number_camera_access_packages",
-                new String[] {Manifest.permission.CAMERA});
+                new String[] {Manifest.permission.CAMERA},
+                Manifest.permission_group.CAMERA);
     }
 
     @Override
-    public void setUp() {
-        super.setUp();
-        mController = new AdminGrantedCameraPermissionPreferenceController(mContext);
+    protected AdminGrantedPermissionsPreferenceControllerBase createController(boolean async) {
+        return new AdminGrantedCameraPermissionPreferenceController(mContext,null /* lifecycle */,
+                async);
     }
 }

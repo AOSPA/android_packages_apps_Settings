@@ -19,41 +19,37 @@ import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.overlay.FeatureFactory;
 
-public class CaCertsManagedProfilePreferenceController extends PreferenceController {
+public class CaCertsPreferenceController extends DynamicAvailabilityPreferenceController {
 
-    private static final String KEY_CA_CERTS_MANAGED_PROFILE = "ca_certs_managed_profile";
+    private static final String CA_CERTS = "ca_certs";
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public CaCertsManagedProfilePreferenceController(Context context) {
-        super(context);
+    public CaCertsPreferenceController(Context context, Lifecycle lifecycle) {
+        super(context, lifecycle);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
     }
 
     @Override
     public void updateState(Preference preference) {
-        final int certs = mFeatureProvider.getNumberOfOwnerInstalledCaCertsInManagedProfile();
-        if (certs == 0) {
-            preference.setVisible(false);
-            return;
-        }
-        preference.setTitle(mContext.getResources().getQuantityString(
-                R.plurals.enterprise_privacy_ca_certs_work, certs));
+        final int certs =
+                mFeatureProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile();
         preference.setSummary(mContext.getResources().getQuantityString(
                 R.plurals.enterprise_privacy_number_ca_certs, certs, certs));
-        preference.setVisible(true);
     }
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mFeatureProvider.getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile()
+                > 0;
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_CA_CERTS_MANAGED_PROFILE;
+        return CA_CERTS;
     }
 }
