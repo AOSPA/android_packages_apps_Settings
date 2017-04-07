@@ -64,6 +64,7 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
     // Wifi extension requirement
     private static final String KEY_CURRENT_GATEWAY = "current_gateway";
     private static final String KEY_CURRENT_NETMASK = "current_netmask";
+    private static final String KEY_CONNECT_CARRIER_NETWORKS = "connect_carrier_networks";
 
     private WifiManager mWifiManager;
     private NetworkScoreManager mNetworkScoreManager;
@@ -125,6 +126,17 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
         List<WifiConfiguration> configs = mWifiManager.getConfiguredNetworks();
         if (configs == null || configs.size() == 0) {
             removePreference(KEY_SAVED_NETWORKS);
+        }
+
+        if (!mWifiManager.hasCarrierConfiguredNetworks()){
+            removePreference(KEY_CONNECT_CARRIER_NETWORKS);
+        } else {
+            SwitchPreference connectToCarrierNetworks =
+                    (SwitchPreference) findPreference(KEY_CONNECT_CARRIER_NETWORKS);
+            if (connectToCarrierNetworks != null) {
+                connectToCarrierNetworks.setChecked(Settings.Global.getInt(getContentResolver(),
+                        Settings.Global.WIFI_CONNECT_CARRIER_NETWORKS, 0) == 1);
+            }
         }
 
         SwitchPreference notifyOpenNetworks =
@@ -243,6 +255,10 @@ public class ConfigureWifiSettings extends SettingsPreferenceFragment
                     ((SwitchPreference) preference).isChecked() ? 1 : 0);
             Intent i = new Intent("com.android.settings.action.USER_TAP_PASSPOINT");
             getActivity().sendBroadcast(i);
+        } else if (KEY_CONNECT_CARRIER_NETWORKS.equals(key)) {
+            Settings.Global.putInt(getContentResolver(),
+                    Settings.Global.WIFI_CONNECT_CARRIER_NETWORKS,
+                    ((SwitchPreference) preference).isChecked() ? 1 : 0);
         } else {
             return super.onPreferenceTreeClick(preference);
         }
