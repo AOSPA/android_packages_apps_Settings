@@ -20,9 +20,11 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageDeleteObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
+import android.os.storage.VolumeInfo;
 
 import java.util.List;
 
@@ -89,5 +91,16 @@ public class PackageManagerWrapperImpl implements PackageManagerWrapper {
     public void replacePreferredActivity(IntentFilter homeFilter, int matchCategoryEmpty,
             ComponentName[] componentNames, ComponentName component) {
         mPm.replacePreferredActivity(homeFilter, matchCategoryEmpty, componentNames, component);
+    }
+
+    @Override
+    public void deletePackageAsUser(String packageName, IPackageDeleteObserver observer, int flags,
+            int userId) {
+        mPm.deletePackageAsUser(packageName, observer, flags, userId);
+    }
+
+    @Override
+    public VolumeInfo getPrimaryStorageCurrentVolume() {
+        return mPm.getPrimaryStorageCurrentVolume();
     }
 }

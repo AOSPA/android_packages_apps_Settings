@@ -750,8 +750,6 @@
     <string name="encryption_and_credential_settings_summary">Phone encrypted</string>
     <!-- Security Settings screen setting option title for the item to take you to the lock screen preference screen [CHAR LIMIT=60] -->
     <string name="lockscreen_settings_title">Lock screen preferences</string>
-    <!-- Security Settings screen setting option summary for the item to take you to the lock screen preference screen -->
-    <string name="lockscreen_settings_summary">Show all notification content</string>
 
     <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
     <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock, credential storage lock</string>
@@ -765,6 +763,8 @@
     <string name="security_status_title">Security status</string>
     <!-- Summary for Security settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="security_dashboard_summary">Location, fingerprint</string>
+    <!-- Summary for Security settings when fingerprint is not supported [CHAR LIMIT=NONE]-->
+    <string name="security_dashboard_summary_no_fingerprint">Location</string>
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
@@ -1640,11 +1640,18 @@
     <string name="use_open_wifi_automatically_summary">Automatically connect to high\u2011quality public networks</string>
     <!-- Preference title for option to install certificates -->
     <string name="wifi_install_credentials">Install certificates</string>
-    <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off. The
-      place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They mark a link to bring
-      the user to "scanning settings" screen. -->
+    <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off and Wi-Fi
+      scanning is on. The place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They
+      mark a link to bring the user to "scanning settings" screen. -->
     <string name="wifi_scan_notify_text">To improve location accuracy, system apps and services can
         still scan for Wi\u2011Fi networks. You can change this in
+        <xliff:g id="link_begin">LINK_BEGIN</xliff:g>scanning
+        settings<xliff:g id="link_end">LINK_END</xliff:g>.</string>
+    <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off and Wi-Fi
+      scanning is also off. The place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated.
+      They mark a link to bring the user to "scanning settings" screen. -->
+    <string name="wifi_scan_notify_text_scanning_off">To improve location accuracy,
+        turn on Wi-Fi scanning in
         <xliff:g id="link_begin">LINK_BEGIN</xliff:g>scanning
         settings<xliff:g id="link_end">LINK_END</xliff:g>.</string>
     <!-- Wifi scan always mode checkbox text -->
@@ -2280,7 +2287,7 @@
     <!-- Adaptive brightness settings screen, setting option summary to enable adaptive brightness when user prefers very high brightness.
          Meant to make it clear that preferring very high brightness uses more battery. [CHAR LIMIT=100] -->
     <string name="auto_brightness_very_high_summary">Increased battery usage</string>
-    <!-- Adaptive brightness settings screen, disclaimer that explains in more detail about how adaptive brightness works [CHAR LIMIT=100] -->
+    <!-- Adaptive brightness settings screen, disclaimer that explains in more detail about how adaptive brightness works [CHAR LIMIT=150] -->
     <string name="auto_brightness_disclaimer">Optimize brightness level for available light. When this feature is on, you can still adjust brightness temporarily.</string>
 
     <!-- Night display screen, setting option name to enable night display (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
@@ -3880,13 +3887,6 @@
     <string name="show_password">Show passwords</string>
     <!-- On Security & location settings screen. This is a short summary text describing what "Show passwords" setting does -->
     <string name="show_password_summary">Display characters briefly as you type</string>
-    <!-- Warning message about security implications of enabling an input method, displayed as a dialog
-         message when the user selects to enable an IME. -->
-    <string name="ime_security_warning">This input method may be able to collect
-    all the text you type, including personal data like passwords and credit
-    card numbers.  It comes from the app
-    <xliff:g id="ime_application_name">%1$s</xliff:g>.
-    Use this input method?</string>
     <!-- Warning message about security implications of enabling a spell checker, displayed as a dialog
          message when the user selects to enable a spell checker. -->
     <string name="spellchecker_security_warning">This spell checker may be able to collect
@@ -3898,9 +3898,6 @@
     <string name="spellchecker_quick_settings">Settings</string>
     <!-- Image button description for spell checker language. -->
     <string name="spellchecker_language">Language</string>
-    <!-- Toast that settings for an application is failed to open. -->
-    <string name="failed_to_open_app_settings_toast">Failed to open settings for <xliff:g id="spell_application_name">%1$s</xliff:g></string>
-
     <!-- Title for the 'keyboard and input methods' preference category. [CHAR LIMIT=45] -->
     <string name="keyboard_and_input_methods_category">Keyboard &amp; inputs</string>
     <!-- Title for the 'virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
@@ -4463,7 +4460,7 @@
     <!-- Summary for the background activity when it is disabled [CHAR_LIMIT=120] -->
     <string name="background_activity_summary_disabled">App not allowed to run in background</string>
 
-    <!-- Title for the screen usage in power use UI [CHAR_LIMIT=40] -->
+    <!-- Title for the screen usage in power use UI [CHAR_LIMIT=60] -->
     <string name="device_screen_usage">Screen usage since full charge</string>
     <!-- Title for the screen consumption in power use UI(i.e. Screen consumption: 30% of battery usage) [CHAR_LIMIT=40] -->
     <string name="device_screen_consumption">Screen consumption</string>
@@ -4685,7 +4682,7 @@
     <!-- Description for text in battery footer. [CHAR LIMIT=120] -->
     <string name="battery_footer_summary">Remaining battery time is approximate and can change based on usage</string>
     <!-- Title for battery usage detail in foreground. [CHAR LIMIT=80] -->
-    <string name="battery_detail_foreground">While using app</string>
+    <string name="battery_detail_foreground">While in active use</string>
     <!-- Title for battery usage detail in background. [CHAR LIMIT=80] -->
     <string name="battery_detail_background">While in background</string>
     <!-- Title for battery usage amount by this app. [CHAR LIMIT=80] -->
@@ -7400,7 +7397,7 @@
         Allowing <xliff:g id="app_name" example="Settings">%1$s</xliff:g> to always run in the background may reduce battery life.
         \n\nYou can change this later from Settings > Apps &amp; notifications.</string>
     <!-- Summary of power usage for an app [CHAR LIMIT=NONE] -->
-    <string name="battery_summary"><xliff:g id="percentage" example="2">%1$d</xliff:g>%% use since last full charge</string>
+    <string name="battery_summary"><xliff:g id="percentage" example="2">%1$s</xliff:g> use since last full charge</string>
 
     <!-- Title of a group of settings that let you manage settings that affect battery life [CHAR LIMIT=60] -->
     <string name="battery_power_management">Power management</string>
@@ -7631,7 +7628,7 @@
     <!-- Link to the apps page for SYSTEM_ALERT_WINDOW settings [CHAR LIMIT=45] -->
     <string name="app_overlay_permission_preference">App display on top permission</string>
     <!-- Description of allowing overlay setting [CHAR LIMIT=NONE] -->
-    <string name="allow_overlay_description">This feature allows an app to display on top of other apps you\u2019re using. It may interfere with your use of those apps or change the way they seem to appear or behave.</string>
+    <string name="allow_overlay_description">Allow this app to display on top of other apps you\u2019re using. It may interfere with your use of those apps or change the way they seem to appear or behave.</string>
 
     <!-- Keyword for VR setting -->
     <string name="keywords_vr_listener">vr virtual reality listener stereo helper service</string>
@@ -8604,11 +8601,14 @@
     <!-- Summary of a single storage volume total space. [CHAR LIMIT=48]-->
     <string name="storage_volume_total">Used of <xliff:g id="total" example="32GB">%1$s</xliff:g></string>
     <!-- Follows the percent of storage used by a storage volume. Exposed inside of a donut graph. [CHAR LIMIT=7]-->
-    <string name="storage_percent_full">full</string>
+    <string name="storage_percent_full">used</string>
 
 
-    <!-- Label for button allow user to clear the data for an instant app -->
+    <!-- Label for button allow user to remove the instant app from the device. -->
     <string name="clear_instant_app_data">Clear app</string>
+    <!-- Confirmation message displayed when the user taps Clear app, to ensure they want to remove
+         the instant app from the device. -->
+    <string name="clear_instant_app_confirmation">Do you want to remove this instant app?</string>
 
     <!-- Title of games app storage screen [CHAR LIMIT=30] -->
     <string name="game_storage_settings">Games</string>

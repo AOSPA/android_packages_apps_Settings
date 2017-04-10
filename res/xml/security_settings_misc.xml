@@ -60,11 +60,11 @@
     <Preference
         android:key="encryption_and_credential"
         android:title="@string/encryption_and_credential_settings_title"
+        android:summary="@string/encryption_and_credential_settings_summary"/>
         android:fragment="com.android.settings.EncryptionAndCredential"/>
 
     <Preference android:key="manage_trust_agents"
         android:title="@string/manage_trust_agents"
-        android:summary="@string/manage_trust_agents_summary"
         android:persistent="false"
         android:fragment="com.android.settings.TrustAgentSettings"/>
 

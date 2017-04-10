@@ -85,11 +85,12 @@ import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceC
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
+import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
+import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryEntry;
-import com.android.settings.fuelgauge.PowerUsageDetail;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
@@ -182,15 +183,20 @@ public class InstalledAppDetails extends AppInfoBase
     private ChartData mChartData;
     private INetworkStatsSession mStatsSession;
 
-    private Preference mBatteryPreference;
-
-    private BatteryStatsHelper mBatteryHelper;
-    private BatterySipper mSipper;
+    @VisibleForTesting
+    Preference mBatteryPreference;
+    @VisibleForTesting
+    BatterySipper mSipper;
+    @VisibleForTesting
+    BatteryStatsHelper mBatteryHelper;
 
     protected ProcStatsData mStatsManager;
     protected ProcStatsPackageEntry mStats;
 
+    private InstantAppButtonsController mInstantAppButtonsController;
+
     private AppStorageStats mLastResult;
+    private String mBatteryPercent;
 
     private boolean handleDisableable(Button button) {
         boolean disableable = false;
@@ -546,13 +552,16 @@ public class InstalledAppDetails extends AppInfoBase
         final View appSnippet = mHeader.findViewById(R.id.app_snippet);
         mState.ensureIcon(mAppEntry);
         final Activity activity = getActivity();
+        final boolean isInstantApp = AppUtils.isInstant(mPackageInfo.applicationInfo);
+        final CharSequence summary =
+                isInstantApp ? null : getString(Utils.getInstallationStatus(mAppEntry.info));
         FeatureFactory.getFactory(activity)
             .getApplicationFeatureProvider(activity)
             .newAppHeaderController(this, appSnippet)
             .setLabel(mAppEntry)
             .setIcon(mAppEntry)
-            .setSummary(getString(Utils.getInstallationStatus(mAppEntry.info)))
-            .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
+            .setSummary(summary)
+            .setIsInstantApp(isInstantApp)
             .done(false /* rebindActions */);
         mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
     }
@@ -680,7 +689,8 @@ public class InstalledAppDetails extends AppInfoBase
                     BatteryStats.STATS_SINCE_CHARGED);
             final int percentOfMax = (int) ((mSipper.totalPowerMah)
                     / mBatteryHelper.getTotalPower() * dischargeAmount + .5f);
-            mBatteryPreference.setSummary(getString(R.string.battery_summary, percentOfMax));
+            mBatteryPercent = Utils.formatPercentage(percentOfMax);
+            mBatteryPreference.setSummary(getString(R.string.battery_summary, mBatteryPercent));
         } else {
             mBatteryPreference.setEnabled(false);
             mBatteryPreference.setSummary(getString(R.string.no_battery_summary));
@@ -712,7 +722,7 @@ public class InstalledAppDetails extends AppInfoBase
                     ? R.string.storage_type_external
                     : R.string.storage_type_internal);
             return context.getString(R.string.storage_summary_format,
-                    getSize(context, stats), storageType);
+                    getSize(context, stats), storageType.toString().toLowerCase());
         }
     }
 
@@ -767,6 +777,9 @@ public class InstalledAppDetails extends AppInfoBase
                         })
                         .setNegativeButton(R.string.dlg_cancel, null)
                         .create();
+        }
+        if (mInstantAppButtonsController != null) {
+            return mInstantAppButtonsController.createDialog(id);
         }
         return null;
     }
@@ -951,9 +964,9 @@ public class InstalledAppDetails extends AppInfoBase
         } else if (preference == mDataPreference) {
             startAppInfoFragment(AppDataUsage.class, getString(R.string.app_data_usage));
         } else if (preference == mBatteryPreference) {
-            BatteryEntry entry = new BatteryEntry(getActivity(), null, mUserManager, mSipper);
-            PowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), this,
-                    mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, true, false);
+            BatteryEntry entry = new BatteryEntry(getContext(), null, mUserManager, mSipper);
+            AdvancedPowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(), this,
+                    mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, mBatteryPercent);
         } else {
             return false;
         }
@@ -1117,10 +1130,11 @@ public class InstalledAppDetails extends AppInfoBase
         if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
             LayoutPreference buttons = (LayoutPreference) findPreference(KEY_INSTANT_APP_BUTTONS);
             final Activity activity = getActivity();
-            FeatureFactory.getFactory(activity)
+            mInstantAppButtonsController = FeatureFactory.getFactory(activity)
                     .getApplicationFeatureProvider(activity)
                     .newInstantAppButtonsController(this,
-                            buttons.findViewById(R.id.instant_app_button_container))
+                            buttons.findViewById(R.id.instant_app_button_container),
+                            id -> showDialogInner(id, 0))
                     .setPackageName(mPackageName)
                     .show();
         }
