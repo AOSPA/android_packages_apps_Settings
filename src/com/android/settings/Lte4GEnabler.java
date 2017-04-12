@@ -220,14 +220,16 @@ public class Lte4GEnabler {
                 setPrefNetwork(ddsSlotId, networkType);
             }
         } else {
-            int ddsSlotId = mSubscriptionManager.getSlotId(mSubscriptionManager.
-                    getDefaultDataSubscriptionId());
-            mPreviousNetworkType = getPreferredNetworkType(ddsSlotId);
-            SharedPreferences sharedPreferences = mContext.getSharedPreferences(
-                    SHAREPREFERENCE_FIFE_NAME,  Context.MODE_PRIVATE);
-            Editor editor = sharedPreferences.edit();
-            editor.putInt(SHAREPREFERENCE_PRI_NW, mPreviousNetworkType);
-            editor.commit();
+            if(isDdsSubInLteMode()) {
+                int ddsSlotId = mSubscriptionManager.getSlotId(mSubscriptionManager.
+                        getDefaultDataSubscriptionId());
+                mPreviousNetworkType = getPreferredNetworkType(ddsSlotId);
+                SharedPreferences sharedPreferences = mContext.getSharedPreferences(
+                        SHAREPREFERENCE_FIFE_NAME,  Context.MODE_PRIVATE);
+                Editor editor = sharedPreferences.edit();
+                editor.putInt(SHAREPREFERENCE_PRI_NW, mPreviousNetworkType);
+                editor.commit();
+            }
             for (int i = 0; i < sPhoneCount; i++) {
                 int networkType = getProperNwMode(i);
                 storeNwModeIntoDb(i, networkType);
