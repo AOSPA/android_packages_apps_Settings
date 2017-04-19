@@ -30,6 +30,7 @@ import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
+import android.net.wifi.WifiConfiguration.Fils;
 import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
@@ -522,6 +523,12 @@ public class WifiConfigController implements TextWatcher,
             case AccessPoint.SECURITY_EAP:
                 config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
                 config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
+                if (mAccessPoint.isFils256Supported()) {
+                    config.filsKeyMgmts.set(Fils.FILS_SHA256);
+                }
+                if (mAccessPoint.isFils384Supported()) {
+                    config.filsKeyMgmts.set(Fils.FILS_SHA384);
+                }
                 config.enterpriseConfig = new WifiEnterpriseConfig();
                 int eapMethod = mEapMethodSpinner.getSelectedItemPosition();
                 int phase2Method = mPhase2Spinner.getSelectedItemPosition();
