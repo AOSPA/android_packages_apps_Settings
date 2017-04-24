@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.provider.Settings;
+import android.graphics.PorterDuff.Mode;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -181,10 +182,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public void setCategories(List<DashboardCategory> categories) {
         mCategories = categories;
 
-        // TODO: Better place for tinting?
-        TypedValue tintColor = new TypedValue();
-        mContext.getTheme().resolveAttribute(com.android.internal.R.attr.colorAccent,
-                tintColor, true);
+        TypedValue tintColorValue = new TypedValue();
+        mContext.getResources().getValue(R.color.external_tile_icon_tint_color,
+                tintColorValue, true);
+
         for (int i = 0; i < categories.size(); i++) {
             for (int j = 0; j < categories.get(i).tiles.size(); j++) {
                 Tile tile = categories.get(i).tiles.get(j);
@@ -193,7 +194,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                         tile.intent.getComponent().getPackageName())) {
                     // If this drawable is coming from outside Settings, tint it to match the
                     // color.
-                    tile.icon.setTint(tintColor.data);
+                    if (tintColorValue.type == TypedValue.TYPE_ATTRIBUTE) {
+                        mContext.getTheme().resolveAttribute(tintColorValue.data,
+                                tintColorValue, true);
+                    }
+                    tile.icon.setTint(tintColorValue.data).setTintMode(Mode.SRC_ATOP);
                 }
             }
         }
