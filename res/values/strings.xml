@@ -3740,6 +3740,9 @@
     <!-- Manage applications, individual application info screen, summary for the option which will trigger application info in it's installer [CHAR_LIMIT=50] -->
     <string name="app_install_details_summary">App installed from <xliff:g id="app_store">%1$s</xliff:g></string>
 
+    <!-- Manage applications, individual application info screen, summary for the option which will trigger instant app info in it's installer [CHAR_LIMIT=50] -->
+    <string name="instant_app_details_summary">More info on <xliff:g id="app_store">%1$s</xliff:g></string>
+
     <!-- App Ops Settings --> <skip />
     <!-- [CHAR LIMIT=NONE] App ops settings title, on main settings screen. If clicked, the user is taken to a settings screen for app operations -->
     <string name="app_ops_settings">App ops</string>
@@ -4683,9 +4686,9 @@
     <string name="battery_last_full_charge">Last full charge</string>
     <!-- Description for text in battery footer. [CHAR LIMIT=120] -->
     <string name="battery_footer_summary">Remaining battery time is approximate and can change based on usage</string>
-    <!-- Title for battery usage detail in foreground. [CHAR LIMIT=80] -->
+    <!-- Title for text that shows the amount of time an app has been running while in the foreground. [CHAR LIMIT=80] -->
     <string name="battery_detail_foreground">While in active use</string>
-    <!-- Title for battery usage detail in background. [CHAR LIMIT=80] -->
+    <!-- Title for text that shows the amount of time an app has been running while in the background. [CHAR LIMIT=80] -->
     <string name="battery_detail_background">While in background</string>
     <!-- Title for battery usage amount by this app. [CHAR LIMIT=80] -->
     <string name="battery_detail_power_usage">Battery usage</string>
@@ -6360,6 +6363,12 @@
     <!-- Sound: Title for the option defining the default notification sound. [CHAR LIMIT=30] -->
     <string name="notification_ringtone_title">Default notification sound</string>
 
+    <!-- Sound: Sound title for apps that have not provided a title. [CHAR LIMIT=30] -->
+    <string name="notification_unknown_sound_title">App provided sound</string>
+
+    <!-- Notification sound summary when chosen sound is the system default. -->
+    <string name="notification_sound_default">Default notification sound</string>
+
     <!-- Sound: Title for the option defining the default alarm sound. [CHAR LIMIT=30] -->
     <string name="alarm_ringtone_title">Default alarm sound</string>
 
@@ -7615,8 +7624,6 @@
     <string name="accessibility_lock_screen_progress"><xliff:g id="count" example="1">%1$d</xliff:g> of <xliff:g id="count" example="1">%2$d</xliff:g> characters used</string>
 
     <!-- System Alert Window settings -->
-    <!-- Title of display overlay preference item [CHAR LIMIT=55] -->
-    <string name="draw_overlay_title">Apps that can display over other apps</string>
     <!-- Title of display overlay screen [CHAR LIMIT=30] -->
     <string name="draw_overlay">Display over other apps</string>
     <!-- Settings title in main settings screen for SYSTEM_ALERT_WINDOW [CHAR LIMIT=45] -->
@@ -8624,9 +8631,16 @@
     <string name="autofill_app">Autofill service</string>
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
     <string name="autofill_keywords">auto, fill, autofill</string>
-    <!-- Title of the warning dialog for setting the auto-fill app. [CHAR_LIMIT=NONE] -->
+
+    <!-- Message of the warning dialog for setting the auto-fill app. [CHAR_LIMIT=NONE] -->
     <string name="autofill_confirmation_message">
-        Make <xliff:g id="app_name">%1$s</xliff:g> your autofill app? <xliff:g id="app_name">%1$s</xliff:g> will be able to read your screen and fill fields in other apps.
+        <![CDATA[
+        <b>Make sure you trust this app</b>
+        <br/>
+        <br/>
+        <xliff:g id="app_name" example="Google Autofill">%1$s</xliff:g> uses what\'s on
+        your screen to determine what can be autofilled.
+        ]]>
     </string>
 
     <!-- Name of setting for switching device theme [CHAR LIMIT=60] -->

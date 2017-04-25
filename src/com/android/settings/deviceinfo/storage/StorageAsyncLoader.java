@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo.storage;
 
 import static android.content.pm.ApplicationInfo.CATEGORY_AUDIO;
 import static android.content.pm.ApplicationInfo.CATEGORY_GAME;
+import static android.content.pm.ApplicationInfo.CATEGORY_VIDEO;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -78,8 +79,15 @@ public class StorageAsyncLoader
         UserHandle myUser = UserHandle.of(userId);
         for (int i = 0, size = applicationInfos.size(); i < size; i++) {
             ApplicationInfo app = applicationInfos.get(i);
-            StorageStatsSource.AppStorageStats stats =
-                    mStatsManager.getStatsForPackage(mUuid, app.packageName, myUser);
+
+            StorageStatsSource.AppStorageStats stats;
+            try {
+                stats = mStatsManager.getStatsForPackage(mUuid, app.packageName, myUser);
+            } catch (IllegalStateException e) {
+                // This may happen if the package was removed during our calculation.
+                Log.w("App unexpectedly not found", e);
+                continue;
+            }
 
             long attributedAppSizeInBytes = stats.getDataBytes();
             // This matches how the package manager calculates sizes -- by zeroing out code sizes of
@@ -98,6 +106,9 @@ public class StorageAsyncLoader
                     break;
                 case CATEGORY_AUDIO:
                     result.musicAppsSize += attributedAppSizeInBytes;
+                    break;
+                case CATEGORY_VIDEO:
+                    result.videoAppsSize += attributedAppSizeInBytes;
                     break;
                 default:
                     // The deprecated game flag does not set the category.
@@ -123,6 +134,7 @@ public class StorageAsyncLoader
     public static class AppsStorageResult {
         public long gamesSize;
         public long musicAppsSize;
+        public long videoAppsSize;
         public long otherAppsSize;
         public long systemSize;
         public StorageStatsSource.ExternalStorageStats externalStats;

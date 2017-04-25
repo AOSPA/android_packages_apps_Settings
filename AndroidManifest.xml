@@ -166,7 +166,7 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.network.NetworkDashboardFragment"/>
             <meta-data android:name="com.android.settings.summary"
-                android:value="@string/network_dashboard_summary"/>
+                android:resource="@string/network_dashboard_summary"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -193,7 +193,7 @@
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.summary"
-                android:value="@string/connected_devices_dashboard_summary"/>
+                android:resource="@string/connected_devices_dashboard_summary"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -439,13 +439,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <receiver
-            android:name=".HotspotOffReceiver" >
-            <intent-filter>
-                <action android:name="android.net.wifi.WIFI_AP_STATE_CHANGED" />
-            </intent-filter>
-        </receiver>
 
         <activity android:name="Settings$TetherSettingsActivity"
                 android:label="@string/tether_settings_title_all"
@@ -884,7 +877,7 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
             <meta-data android:name="com.android.settings.summary"
-                android:value="@string/display_dashboard_summary"/>
+                android:resource="@string/display_dashboard_summary"/>
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -2567,7 +2560,7 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
             <meta-data android:name="com.android.settings.summary"
-                android:value="@string/sound_dashboard_summary"/>
+                android:resource="@string/sound_dashboard_summary"/>
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -2651,6 +2644,10 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
+
+        <!-- Confirmation dialog for enabling notification access from CompanionDeviceManager -->
+        <activity android:name=".notification.NotificationAccessConfirmationActivity"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
@@ -2799,7 +2796,7 @@
         </provider>
 
         <activity android:name="Settings$OverlaySettingsActivity"
-                android:label="@string/draw_overlay_title"
+                android:label="@string/draw_overlay"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
@@ -2810,7 +2807,7 @@
         </activity>
 
         <activity android:name="Settings$AppDrawOverlaySettingsActivity"
-                android:label="@string/draw_overlay_title"
+                android:label="@string/draw_overlay"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
@@ -2969,7 +2966,7 @@
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.summary"
-                       android:value="@string/app_and_notification_dashboard_summary"/>
+                       android:resource="@string/app_and_notification_dashboard_summary"/>
         </activity>
 
         <activity android:name=".Settings$UserAndAccountDashboardActivity"
@@ -3001,7 +2998,7 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.system.SystemDashboardFragment"/>
             <meta-data android:name="com.android.settings.summary"
-                       android:value="@string/system_dashboard_summary"/>
+                       android:resource="@string/system_dashboard_summary"/>
         </activity>
 
         <activity android:name=".Settings$SupportDashboardActivity"

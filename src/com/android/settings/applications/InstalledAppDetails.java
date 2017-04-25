@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import android.Manifest.permission;
+import android.annotation.IdRes;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -91,6 +92,7 @@ import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryEntry;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
@@ -111,6 +113,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -157,6 +160,8 @@ public class InstalledAppDetails extends AppInfoBase
     private static final String KEY_BATTERY = "battery";
     private static final String KEY_MEMORY = "memory";
     private static final String KEY_VERSION = "app_version";
+    private static final String KEY_INSTANT_APP_SUPPORTED_LINKS =
+            "instant_app_launch_supported_domain_urls";
 
     private final HashSet<String> mHomePackages = new HashSet<>();
 
@@ -174,6 +179,7 @@ public class InstalledAppDetails extends AppInfoBase
     private Preference mDataPreference;
     private Preference mMemoryPreference;
     private Preference mVersionPreference;
+    private AppDomainsPreference mInstantAppDomainsPreference;
 
     private boolean mDisableAfterUninstall;
 
@@ -197,6 +203,7 @@ public class InstalledAppDetails extends AppInfoBase
 
     private AppStorageStats mLastResult;
     private String mBatteryPercent;
+    private BatteryUtils mBatteryUtils;
 
     private boolean handleDisableable(Button button) {
         boolean disableable = false;
@@ -357,6 +364,7 @@ public class InstalledAppDetails extends AppInfoBase
             removePreference(KEY_DATA);
         }
         mBatteryHelper = new BatteryStatsHelper(getActivity(), true);
+        mBatteryUtils = BatteryUtils.getInstance(getContext());
     }
 
     @Override
@@ -429,7 +437,8 @@ public class InstalledAppDetails extends AppInfoBase
         mMemoryPreference = findPreference(KEY_MEMORY);
         mMemoryPreference.setOnPreferenceClickListener(this);
         mVersionPreference = findPreference(KEY_VERSION);
-
+        mInstantAppDomainsPreference =
+                (AppDomainsPreference) findPreference(KEY_INSTANT_APP_SUPPORTED_LINKS);
         mLaunchPreference = findPreference(KEY_LAUNCH);
         if (mAppEntry != null && mAppEntry.info != null) {
             if ((mAppEntry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0 ||
@@ -547,6 +556,25 @@ public class InstalledAppDetails extends AppInfoBase
     public void onLoaderReset(Loader<AppStorageStats> loader) {
     }
 
+    /**
+     * Utility method to hide and show specific preferences based on whether the app being displayed
+     * is an Instant App or an installed app.
+     */
+    @VisibleForTesting
+    void prepareInstantAppPrefs() {
+        final boolean isInstant = AppUtils.isInstant(mPackageInfo.applicationInfo);
+        if (isInstant) {
+            Set<String> handledDomainSet = Utils.getHandledDomains(mPm, mPackageInfo.packageName);
+            String[] handledDomains = handledDomainSet.toArray(new String[handledDomainSet.size()]);
+            mInstantAppDomainsPreference.setTitles(handledDomains);
+            // Dummy values, unused in the implementation
+            mInstantAppDomainsPreference.setValues(new int[handledDomains.length]);
+            getPreferenceScreen().removePreference(mLaunchPreference);
+        } else {
+            getPreferenceScreen().removePreference(mInstantAppDomainsPreference);
+        }
+    }
+
     // Utility method to set application label and icon.
     private void setAppLabelAndIcon(PackageInfo pkgInfo) {
         final View appSnippet = mHeader.findViewById(R.id.app_snippet);
@@ -638,6 +666,7 @@ public class InstalledAppDetails extends AppInfoBase
         checkForceStop();
         setAppLabelAndIcon(mPackageInfo);
         initUninstallButtons();
+        prepareInstantAppPrefs();
 
         // Update the preference summaries.
         Activity context = getActivity();
@@ -685,10 +714,14 @@ public class InstalledAppDetails extends AppInfoBase
     private void updateBattery() {
         if (mSipper != null) {
             mBatteryPreference.setEnabled(true);
-            int dischargeAmount = mBatteryHelper.getStats().getDischargeAmount(
+            final int dischargeAmount = mBatteryHelper.getStats().getDischargeAmount(
                     BatteryStats.STATS_SINCE_CHARGED);
-            final int percentOfMax = (int) ((mSipper.totalPowerMah)
-                    / mBatteryHelper.getTotalPower() * dischargeAmount + .5f);
+
+            final List<BatterySipper> usageList = new ArrayList<>(mBatteryHelper.getUsageList());
+            final double hiddenAmount = mBatteryUtils.removeHiddenBatterySippers(usageList);
+            final int percentOfMax = (int) mBatteryUtils.calculateBatteryPercent(
+                    mSipper.totalPowerMah, mBatteryHelper.getTotalPower(), hiddenAmount,
+                    dischargeAmount);
             mBatteryPercent = Utils.formatPercentage(percentOfMax);
             mBatteryPreference.setSummary(getString(R.string.battery_summary, mBatteryPercent));
         } else {
@@ -1107,13 +1140,16 @@ public class InstalledAppDetails extends AppInfoBase
         if (installerLabel == null) {
             return;
         }
+        final int detailsStringId = AppUtils.isInstant(mPackageInfo.applicationInfo)
+                ? R.string.instant_app_details_summary
+                : R.string.app_install_details_summary;
         PreferenceCategory category = new PreferenceCategory(getPrefContext());
         category.setTitle(R.string.app_install_details_group_title);
         screen.addPreference(category);
         Preference pref = new Preference(getPrefContext());
         pref.setTitle(R.string.app_install_details_title);
         pref.setKey("app_info_store");
-        pref.setSummary(getString(R.string.app_install_details_summary, installerLabel));
+        pref.setSummary(getString(detailsStringId, installerLabel));
 
         Intent intent =
                 AppStoreUtil.getAppStoreLink(getContext(), installerPackageName, mPackageName);
