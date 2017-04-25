@@ -106,6 +106,8 @@ public class FeaturePreferences extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+
         mCr = getContext().getContentResolver();
 
         View mainView = inflater.inflate(R.layout.feature_preferences, null);
