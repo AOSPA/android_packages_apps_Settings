@@ -392,7 +392,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             ManageDomainUrls.class.getName(),
             AutomaticStorageManagerSettings.class.getName(),
             ButtonsSettings.class.getName(),
-            GesturesSettings.class.getName()
+            GesturesSettings.class.getName(),
+            PieSettings.class.getName()
     };
 
     private static final String[] LIKE_SHORTCUT_INTENT_ACTION_ARRAY = {

@@ -18,6 +18,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+    <Preference
+        android:key="pie_settings"
+        android:title="@string/pie_settings"
+        android:summary="@string/pie_settings_summary" />
+
     <SwitchPreference
         android:key="navigation_bar"
         android:title="@string/enable_navigation_bar_title"

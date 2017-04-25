@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -60,6 +61,8 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SWAP_NAVIGATION_KEYS   = "swap_navigation_keys";
     private static final String KEY_SWAP_SLIDER_ORDER      = "swap_slider_order";
     private static final String KEY_BUTTON_BRIGHTNESS      = "button_brightness";
+
+    private static final String KEY_PIE_SETTINGS           = "pie_settings";
 
     private static final String KEY_HOME_LONG_PRESS        = "home_key_long_press";
     private static final String KEY_HOME_DOUBLE_TAP        = "home_key_double_tap";
@@ -106,6 +109,8 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mSwapNavigationkeys;
     private SwitchPreference mSwapSliderOrder;
     private SwitchPreference mButtonBrightness;
+
+    private Preference mPieFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -164,6 +169,11 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             } else {
                 prefScreen.removePreference(mButtonBrightness);
             }
+        }
+
+        mPieFragment = findPreference(KEY_PIE_SETTINGS);
+        if (mPieFragment != null) {
+            mPieFragment.setOnPreferenceChangeListener(this);
         }
 
         /* Home Key Long Press */
@@ -305,6 +315,11 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
                     mNavigationBar.setEnabled(true);
                 }
             }, 1000);
+            return true;
+        }
+        if (preference != null && preference == mPieFragment) {
+            startActivity(new Intent("android.settings.PIE_SETTINGS")
+                    .putExtra(":settings:show_fragment_as_subsetting", true));
             return true;
         }
         return false;
