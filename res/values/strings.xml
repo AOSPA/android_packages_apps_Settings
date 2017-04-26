@@ -743,7 +743,7 @@
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
     <string name="account_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the security screen -->
-    <string name="security_settings_title">Security &amp; screen lock</string>
+    <string name="security_settings_title">Security &amp; Location</string>
     <!-- Security Settings screen setting option title for the item to take you to the encryption and credential screen -->
     <string name="encryption_and_credential_settings_title">Encryption &amp; credentials</string>
     <!-- Security Settings screen Encryption and crendential summary -->
@@ -762,9 +762,9 @@
     <!-- In the security screen, the header title for security statuses -->
     <string name="security_status_title">Security status</string>
     <!-- Summary for Security settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="security_dashboard_summary">Location, fingerprint</string>
+    <string name="security_dashboard_summary">Screen lock, fingerprint</string>
     <!-- Summary for Security settings when fingerprint is not supported [CHAR LIMIT=NONE]-->
-    <string name="security_dashboard_summary_no_fingerprint">Location</string>
+    <string name="security_dashboard_summary_no_fingerprint">Screen lock</string>
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
@@ -1886,11 +1886,11 @@
 
     <!-- Wifi Network Details -->
     <!-- Wifi details preference title to display router IP subnet mask -->
-    <string name="wifi_details_subnet_mask">Subnet Mask</string>
+    <string name="wifi_details_subnet_mask">Subnet mask</string>
     <!-- Wifi details preference title to display router DNS info -->
     <string name="wifi_details_dns">DNS</string>
     <!-- Wifi details preference category title for IPv6 information -->
-    <string name="wifi_details_ipv6_address_header">IPv6 Addresses</string>
+    <string name="wifi_details_ipv6_address_header">IPv6 addresses</string>
 
     <!-- Wifi saved access points.  Used as a label under the shortcut icon that goes to Wifi saved access points. [CHAR LIMIT=20] -->
     <string name="wifi_saved_access_points_label">Saved networks</string>
@@ -2365,6 +2365,8 @@
     <string name="screensaver_settings_disabled_prompt">To control what happens when the phone is docked and/or sleeping, turn screen saver on.</string>
     <!-- Dream settings screen, action label, when to dream -->
     <string name="screensaver_settings_when_to_dream">When to start</string>
+    <!-- Dream settings screen, action label, current selected screen saver -->
+    <string name="screensaver_settings_current">Current screen saver</string>
     <!-- Dream settings screen, button label to start dreaming -->
     <string name="screensaver_settings_dream_start">Start now</string>
     <!-- Dream settings screen, button label for settings for a specific screensaver -->
@@ -3065,7 +3067,7 @@
     <string name="tether_settings_title_bluetooth">Bluetooth tethering</string>
     <!-- Tethering controls, item title to go into the tethering settings when USB and Bluetooth tethering are available [CHAR LIMIT=25]-->
     <string name="tether_settings_title_usb_bluetooth">Tethering</string>
-    <!-- Tethering controls, item title to go into the tethering settings when USB, Bluetooth and Wifi tethering are available [CHAR LIMIT=50]-->
+    <!-- Tethering controls, item title to go into the tethering settings when USB, Bluetooth and Wifi tethering are available [CHAR LIMIT=60]-->
     <string name="tether_settings_title_all">Hotspot &amp; tethering</string>
     <!-- Tethering setting summary when both Wi-Fi hotspot and tether are turned on [CHAR LIMIT=NONE]-->
     <string name="tether_settings_summary_hotspot_on_tether_on">Hotspot on, tethering</string>
@@ -3861,7 +3863,7 @@
     <string name="language_settings">Languages&#160;&amp; input</string>
     <!-- Title of Languages & input settings screen -->
     <string name="language_keyboard_settings_title">Languages&#160;&amp; input</string>
-    <!-- Title of preference category that lists all settings about helping user input such as spell checker [CHAR LIMIT=60]-->
+    <!-- Title of preference category that lists all settings about helping user text input such as spell checker [CHAR LIMIT=60]-->
     <string name="input_assistance">Input assistance</string>
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to keyboard (enable/disable each keyboard, settings for each keyboard). -->
     <string name="keyboard_settings_category">Keyboard &amp; input methods</string>
@@ -6424,10 +6426,10 @@
     <!--  Do not disturb: Title for the zen mode automation listing. [CHAR LIMIT=30] -->
     <string name="zen_mode_automation_settings_title">Automatic rules</string>
 
-    <!--  Do not disturb: Title for the zen mode automation option Suggestion. [CHAR LIMIT=30] -->
+    <!--  Do not disturb: Title for the zen mode automation option Suggestion. [CHAR LIMIT=50] -->
     <string name="zen_mode_automation_suggestion_title">Set Do Not Disturb rules</string>
 
-    <!--  Do not disturb: Summary for the zen mode automation option Suggestion. [CHAR LIMIT=30] -->
+    <!--  Do not disturb: Summary for the zen mode automation option Suggestion. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_automation_suggestion_summary">Limit sounds &amp; vibrations at certain times</string>
 
     <!--  Do not disturb: Zen mode option: Important interruptions [CHAR LIMIT=60] -->
@@ -8384,7 +8386,7 @@
     <!-- Summary text for ambient display (device) [CHAR LIMIT=160]-->
     <string name="ambient_display_pickup_summary" product="device">To quickly check your notifications, pick up your device.</string>
 
-    <!-- Title text for fingerprint swipe for notifications [CHAR LIMIT=80]-->
+    <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
 
     <!-- Summary text for fingerprint swipe for notifications (phone) [CHAR LIMIT=160]-->
@@ -8419,14 +8421,16 @@
     <string name="automatic_storage_manager_freed_bytes"><xliff:g id="size" example="3.25MB">%1$s</xliff:g> total made available\n\nLast ran on <xliff:g id="date" example="Jan 12">%2$s</xliff:g></string>
 
     <!-- Title text for enabling web actions. [CHAR_LIMIT=60] -->
-    <string name="web_action_enable_title">Open links in apps</string>
+    <string name="web_action_enable_title">Instant apps</string>
 
     <!-- Summary text for enabling web actions. [CHAR_LIMIT=250] -->
-    <string name="web_action_enable_summary">Open links in supported apps, even if the
-      apps aren’t installed on your device</string>
+    <string name="web_action_enable_summary">Open links in apps, even if they’re not installed</string>
 
     <!-- Section title for the Web Action preference [CHAR LIMIT=60] -->
-    <string name="web_action_section_title">Apps not installed</string>
+    <string name="web_action_section_title">Instant apps</string>
+
+    <!-- Preference label for an tappable preference that will open the account chooser for instant apps. [CHAR LIMIT=60] -->
+    <string name="instant_apps_account">Instant apps account</string>
 
     <!-- Section title for the Domain URL app preference list [CHAR LIMIT=60]-->
     <string name="domain_url_section_title">Installed apps</string>
@@ -8653,4 +8657,16 @@
     <!-- Title for the installed app info storage page. The total storage space taken up by this app. [CHAR LIMIT=40]-->
     <string name="app_info_storage_title">Space used</string>
 
+    <!-- apn names for carriers -->
+    <string name="APN_NAME_CMNET">CMNET</string>
+    <string name="APN_NAME_CMWAP">CMWAP</string>
+    <string name="APN_NAME_CMMMS">CMMMS</string>
+    <string name="APN_NAME_CUWAP">China Unicom WAP</string>
+    <string name="APN_NAME_CUNET">China Unicom NET</string>
+    <string name="APN_NAME_CUMMS">China Unicom MMS</string>
+    <string name="APN_NAME_CUSUPL">China Unicom AGPS</string>
+    <string name="APN_NAME_CTNET">CTNET</string>
+    <string name="APN_NAME_CTWAP">CTWAP</string>
+    <string name="APN_NAME_CTLTE">ctlte</string>
+    <string name="APN_NAME_CTMMS">CTWAP</string>
 </resources>
