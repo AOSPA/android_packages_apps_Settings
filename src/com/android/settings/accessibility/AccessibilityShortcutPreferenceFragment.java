@@ -42,12 +42,9 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
 
     public static final String SHORTCUT_SERVICE_KEY = "accessibility_shortcut_service";
     public static final String ON_LOCK_SCREEN_KEY = "accessibility_shortcut_on_lock_screen";
-    // ID for dialog that confirms shortcut capabilities
-    private static final int DIALOG_ID_ADD_SHORTCUT_WARNING = 1;
 
     private Preference mServicePreference;
     private SwitchPreference mOnLockScreenSwitchPreference;
-    private String mSelectedServiceComponentNameString;
 
     @Override
     public int getMetricsCategory() {
@@ -98,7 +95,7 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         CharSequence serviceName = getServiceName(getContext());
         mServicePreference.setSummary(serviceName);
         mOnLockScreenSwitchPreference.setChecked(Settings.Secure.getInt(
-                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, 1) == 1);
+                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, 0) == 1);
         if (TextUtils.equals(serviceName, getString(R.string.accessibility_no_service_selected))) {
             // If there's no service configured, enabling the shortcut will have no effect
             // It should already be disabled, but force the switch to off just in case

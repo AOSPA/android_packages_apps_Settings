@@ -114,6 +114,7 @@ public class StorageItemPreferenceControllerTest {
         Intent intent = argumentCaptor.getValue();
         assertThat(intent.getType()).isEqualTo("image/*");
         assertThat(intent.getAction()).isEqualTo(android.content.Intent.ACTION_VIEW);
+        assertThat(intent.getBooleanExtra(Intent.EXTRA_FROM_STORAGE, false)).isTrue();
     }
 
     @Test
@@ -242,21 +243,19 @@ public class StorageItemPreferenceControllerTest {
                 eq(StorageItemPreferenceController.FILES_KEY))).thenReturn(files);
         mController.displayPreference(screen);
 
-        mController.setSystemSize(KILOBYTE * 6);
+        mController.setUsedSize(KILOBYTE * 200); // There should 87kB attributed.
         StorageAsyncLoader.AppsStorageResult result = new StorageAsyncLoader.AppsStorageResult();
         result.gamesSize = KILOBYTE * 8;
         result.videoAppsSize = KILOBYTE * 16;
         result.musicAppsSize = KILOBYTE * 4;
         result.otherAppsSize = KILOBYTE * 9;
-        result.systemSize = KILOBYTE * 10;
+        result.systemSize = KILOBYTE * 10; // This value is ignored and overriden now.
         result.externalStats = new StorageStatsSource.ExternalStorageStats(
                 KILOBYTE * 50, // total
                 KILOBYTE * 10, // audio
                 KILOBYTE * 15, // video
                 KILOBYTE * 20); // image
 
-        result.gamesSize = KILOBYTE * 8;
-        result.otherAppsSize = KILOBYTE * 9;
         mController.onLoadFinished(result);
 
         assertThat(audio.getSummary().toString()).isEqualTo("14.00KB"); // 4KB apps + 10KB files
@@ -264,7 +263,7 @@ public class StorageItemPreferenceControllerTest {
         assertThat(games.getSummary().toString()).isEqualTo("8.00KB");
         assertThat(movies.getSummary().toString()).isEqualTo("16.00KB");
         assertThat(apps.getSummary().toString()).isEqualTo("9.00KB");
-        assertThat(system.getSummary().toString()).isEqualTo("16.00KB");
+        assertThat(system.getSummary().toString()).isEqualTo("113KB");
         assertThat(files.getSummary().toString()).isEqualTo("5.00KB");
     }
 

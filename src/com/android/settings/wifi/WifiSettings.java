@@ -90,6 +90,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         WifiDialog.WifiDialogListener {
 
     private static final String TAG = "WifiSettings";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     /* package */ static final int MENU_ID_WPS_PBC = Menu.FIRST;
     private static final int MENU_ID_WPS_PIN = Menu.FIRST + 1;
@@ -190,8 +191,10 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        getPreferenceManager().setPreferenceComparisonCallback(
-                new PreferenceManager.SimplePreferenceComparisonCallback());
+        // TODO(b/37429702): Add animations and preference comparator back after initial screen is
+        // loaded (ODR).
+        setAnimationAllowed(false);
+
         addPreferencesFromResource(R.xml.wifi_settings);
 
         mConnectedAccessPointPreferenceCategory =
@@ -335,6 +338,15 @@ public class WifiSettings extends RestrictedSettingsFragment
         mWifiEnabler = createWifiEnabler();
 
         mWifiTracker.startTracking();
+
+        if (!isUiRestricted() && mWifiManager.isWifiEnabled()) {
+            setProgressBarVisible(true);
+            mWifiTracker.forceUpdate();
+            if (DEBUG) Log.d(TAG, "WifiSettings onStart APs: " + mWifiTracker.getAccessPoints());
+
+            getView().removeCallbacks(mUpdateAccessPointsRunnable);
+            updateAccessPointPreferences();
+        }
     }
 
     /**
@@ -353,8 +365,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (mWifiEnabler != null) {
             mWifiEnabler.resume(activity);
         }
-
-        activity.invalidateOptionsMenu();
     }
 
     @Override
@@ -733,7 +743,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         removeCachedPrefs(mAccessPointsPreferenceCategory);
         mAddPreference.setOrder(index);
         mAccessPointsPreferenceCategory.addPreference(mAddPreference);
-        setConfigureWifiSettingsVisibility();
+        setAdditionalSettingsSummaries();
 
         if (!hasAvailableAccessPoints) {
             setProgressBarVisible(true);
@@ -812,8 +822,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         // in the Wifi Network Details Fragment
         pref.getAccessPoint().saveWifiState(pref.getExtras());
         pref.setFragment(WifiNetworkDetailsFragment.class.getName());
-
         pref.refresh();
+
         mConnectedAccessPointPreferenceCategory.addPreference(pref);
         mConnectedAccessPointPreferenceCategory.setVisible(true);
     }
@@ -824,7 +834,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         mConnectedAccessPointPreferenceCategory.setVisible(false);
     }
 
-    private void setConfigureWifiSettingsVisibility() {
+    private void setAdditionalSettingsSummaries() {
         mAdditionalSettingsPreferenceCategory.addPreference(mConfigureWifiSettingsPreference);
         boolean wifiWakeupEnabled = Settings.Global.getInt(
                 getContentResolver(), Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1;

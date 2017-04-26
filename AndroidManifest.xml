@@ -945,7 +945,6 @@
 
         <activity android:name="Settings$ManageApplicationsActivity"
                 android:label="@string/applications_settings"
-                android:icon="@drawable/ic_settings_applications"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_SETTINGS" />
@@ -2507,7 +2506,6 @@
 
         <activity android:name="Settings$ConfigureNotificationSettingsActivity"
                 android:label="@string/configure_notification_settings"
-                android:icon="@drawable/ic_settings_notifications"
                 android:exported="true"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
@@ -2519,7 +2517,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="120">
+            <intent-filter android:priority="160">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
@@ -2582,7 +2580,7 @@
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.apps" />
+                       android:value="com.android.settings.category.ia.notifications" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.NotificationApps" />
         </activity>
@@ -2846,7 +2844,7 @@
                 android:label="@string/install_other_apps"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.action.MANAGE_UNKNOWN_APP_SOURCES" />
+                <action android:name="android.settings.MANAGE_UNKNOWN_APP_SOURCES" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -2857,7 +2855,7 @@
                   android:label="@string/install_other_apps"
                   android:taskAffinity="">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.action.MANAGE_UNKNOWN_APP_SOURCES" />
+                <action android:name="android.settings.MANAGE_UNKNOWN_APP_SOURCES" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
@@ -2878,8 +2876,7 @@
         <activity android:name="Settings$AdvancedAppsActivity"
                   android:taskAffinity=""
                   android:exported="true"
-                  android:label="@string/app_default_dashboard_title"
-                  android:icon="@drawable/ic_adb">
+                  android:label="@string/app_default_dashboard_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MANAGE_DEFAULT_APPS_SETTINGS" />
                 <action android:name="android.settings.HOME_SETTINGS" />

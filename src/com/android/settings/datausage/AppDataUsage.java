@@ -14,6 +14,8 @@
 
 package com.android.settings.datausage;
 
+import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
+
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -38,6 +40,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.text.format.Formatter;
 import android.util.ArraySet;
+import android.util.IconDrawableFactory;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -56,8 +59,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
         DataSaverBackend.Listener {
@@ -158,7 +159,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 PackageManager pm = getPackageManager();
                 try {
                     ApplicationInfo info = pm.getApplicationInfo(mPackages.valueAt(0), 0);
-                    mIcon = info.loadIcon(pm);
+                    mIcon = IconDrawableFactory.newInstance(getActivity()).getBadgedIcon(info);
                     mLabel = info.loadLabel(pm);
                     mPackageName = info.packageName;
                 } catch (PackageManager.NameNotFoundException e) {
@@ -362,7 +363,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
             .setUid(uid)
             .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
                 AppHeaderController.ActionType.ACTION_NONE)
-            .done(getPrefContext());
+            .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
 

@@ -1628,6 +1628,8 @@
     <string name="wifi_wakeup">Turn on Wi\u2011Fi automatically</string>
     <!-- Checkbox summary for option to enable Wi-Fi when high quality saved networks are nearby-->
     <string name="wifi_wakeup_summary">Wi\u2011Fi will turn back on near high\u2011quality saved networks, like your home network</string>
+    <!-- Checkbox summary for Wi-Fi wakeup option to explain that Wi-Fi wakeup is disabled because Wi-Fi scanning is turned off -->
+    <string name="wifi_wakeup_summary_scanning_disabled">Unavailable because Wi\u2011Fi scanning is turned off</string>
     <!-- Checkbox title for option to toggle poor network detection -->
     <string name="wifi_poor_network_detection">Avoid poor connections</string>
     <!-- Checkbox summary for option to toggle poor network detection -->
@@ -2376,7 +2378,7 @@
     <!-- [CHAR LIMIT=40] Display settings screen, setting option name to change whether the device wakes up when a lift gesture is detected. -->
     <string name="lift_to_wake_title">Lift to wake</string>
     <!-- [CHAR LIMIT=30] Display settings screen, setting option name to change whether the ambient display feature is enabled. -->
-    <string name="doze_title">Incoming notification screen</string>
+    <string name="doze_title">Ambient display</string>
     <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the ambient display feature. -->
     <string name="doze_summary">Wake screen when you receive notifications</string>
     <!-- [CHAR LIMIT=30] Sound & display settings screen, setting option name to change font size -->
@@ -4472,10 +4474,10 @@
     <!-- Title for the cellular network in power use UI(i.e. Mobile network scanning: 30% of battery usage) [CHAR_LIMIT=40] -->
     <string name="device_cellular_network">Mobile network scanning</string>
 
-    <!-- Label for time since last full charge in power use UI, i.e. "7 h 20 min ago" [CHAR_LIMIT=60] -->
-    <string name="power_last_full_charge_summary"><xliff:g id="time">%1$s</xliff:g> ago</string>
-    <!-- Label for list of apps using battery in power use UI [CHAR_LIMIT=120] -->
-    <string name="power_usage_list_summary">App usage since full charge (<xliff:g id="time">%1$s</xliff:g> ago)</string>
+    <!-- Label for time since last full charge in power use UI, i.e. "7 h 20 min ago". Note: ^1 should be used in all translations [CHAR_LIMIT=60] -->
+    <string name="power_last_full_charge_summary"><xliff:g id="time">^1</xliff:g> ago</string>
+    <!-- Label for list of apps using battery in power use UI. Note: ^1 should be used in all translations[CHAR_LIMIT=120] -->
+    <string name="power_usage_list_summary">App usage since full charge (<xliff:g id="time">^1</xliff:g> ago)</string>
     <!-- Description for the screen usage item [CHAR_LIMIT=120] -->
     <string name="screen_usage_summary">Amount of time screen has been on since full charge</string>
     <!-- Label for list of different types using battery in power use UI [CHAR_LIMIT=60] -->
@@ -4537,8 +4539,8 @@
     <string name="power_wifi">Wi\u2011Fi</string>
     <!-- Label for power consumed by Bluetooth -->
     <string name="power_bluetooth">Bluetooth</string>
-    <!-- Label for power consumed by Cell idle -->
-    <string name="power_cell">Cell standby</string>
+    <!-- Label for power consumed by Mobile network idle -->
+    <string name="power_cell">Mobile network standby</string>
     <!-- Label for power consumed by Calling -->
     <string name="power_phone">Voice calls</string>
     <!-- Label for power consumed when Idle -->
@@ -4674,8 +4676,8 @@
     <!-- Representation of a mAh value. [CHAR LIMIT=NONE] -->
     <string name="mah"><xliff:g id="number" example="30">%d</xliff:g> mAh</string>
 
-    <!-- Description for battery usage time for an app, i.e. Used for 30min. [CHAR LIMIT=60] -->
-    <string name="battery_used_for">Used for %1$s</string>
+    <!-- Description for battery usage time for an app, i.e. Used for 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
+    <string name="battery_used_for">Used for <xliff:g id="time">^1</xliff:g></string>
     <!-- Description for battery usage info for an app, i.e. 60% used by facebook. [CHAR LIMIT=60] -->
     <string name="battery_used_by"><xliff:g id="percent">%1$s</xliff:g> used by <xliff:g id="app">%2$s</xliff:g></string>
     <!-- Description for percentage of battery usage for an app, i.e. Screen: 30% of overall battery. [CHAR LIMIT=60] -->
@@ -7055,42 +7057,30 @@
     <!-- Encryption interstitial button to continue with the shown setting.  Appears on screen that asks the user to opt in/out of encrypting device with a pin/pattern/password. [CHAR LIMIT=NONE] -->
     <string name="encryption_continue_button">Continue</string>
 
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pin">
-   You can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
-   \n\nThis helps protect data on lost or stolen devices.
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=2317181134653424679] -->
+    <string name="encryption_interstitial_message_pin">You can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
+   \n\nThis helps protect data on lost or stolen devices. Require PIN to start your device?
    </string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pattern">
-   You can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
-   \n\nThis helps protect data on lost or stolen devices.
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=7081249914068568570] -->
+    <string name="encryption_interstitial_message_pattern">You can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
+   \n\nThis helps protect data on lost or stolen devices. Require pattern to start your device?
    </string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_password">
-   You can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
-   \n\nThis helps protect data on lost or stolen devices.
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=7796567133897436443] -->
+    <string name="encryption_interstitial_message_password">You can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
+   \n\nThis helps protect data on lost or stolen devices. Require password to start your device?
    </string>
 
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pin_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices.</string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pattern_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices.</string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_password_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices.</string>
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=4550632760119547492] -->
+    <string name="encryption_interstitial_message_pin_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require PIN to start your device?</string>
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=932184823193006087] -->
+    <string name="encryption_interstitial_message_pattern_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require pattern to start your device?</string>
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=5560954719370251702] -->
+    <string name="encryption_interstitial_message_password_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require password to start your device></string>
 
-    <!-- Radio button text that require a PIN to start device [CHAR LIMIT=NONE] -->
-    <string name="encrypt_require_pin">Require PIN to start device</string>
-    <!-- Radio button text that require a pattern to start device [CHAR LIMIT=NONE] -->
-    <string name="encrypt_require_pattern">Require pattern to start device</string>
-    <!-- Radio button text that require a password to start device [CHAR LIMIT=NONE] -->
-    <string name="encrypt_require_password">Require password to start device</string>
-
-    <!-- Radio button text that doesn't require a PIN to decrypt [CHAR LIMIT=NONE] -->
-    <string name="encrypt_dont_require_pin">No thanks</string>
-    <!-- Radio button text that doesn't require a pattern to decrypt [CHAR LIMIT=NONE] -->
-    <string name="encrypt_dont_require_pattern">No thanks</string>
-    <!-- Radio button text that doesn't require a password to decrypt [CHAR LIMIT=NONE] -->
-    <string name="encrypt_dont_require_password">No thanks</string>
+    <!-- Button label to say yes to the question of whether to require PIN/password/pattern to start your device. [CHAR LIMIT=20] [BACKUP_MESSAGE_ID=4439509435889513411] -->
+    <string name="encryption_interstitial_yes">Yes</string>
+    <!-- Button label to say no to the question of whether to require PIN/password/pattern to start your device. [CHAR LIMIT=20] [BACKUP_MESSAGE_ID=8935031349097025137] -->
+    <string name="encryption_interstitial_no">No</string>
 
    <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
    <string name="encrypt_talkback_dialog_require_pin">Require PIN?</string>
@@ -7688,11 +7678,11 @@
     <!-- Summary of app not allowed to write system settings [CHAR LIMIT=45] -->
     <string name="write_settings_off">No</string>
     <!-- Summary of app trusted to install apps [CHAR LIMIT=45] -->
-    <string name="external_source_trusted">Yes</string>
+    <string name="external_source_trusted">Allowed</string>
     <!-- Summary of app not trusted to install apps [CHAR LIMIT=45] -->
-    <string name="external_source_untrusted">No</string>
+    <string name="external_source_untrusted">Not allowed</string>
     <!-- Title of switch preference that controls whether an external app source is trusted or not [CHAR LIMIT=50] -->
-    <string name="external_source_switch_title">Allow app installs</string>
+    <string name="external_source_switch_title">Allow from this source</string>
 
     <!-- Title of setting that controls gesture to open camera [CHAR LIMIT=40] -->
     <string name="camera_gesture_title">Double twist for camera</string>
@@ -8181,8 +8171,11 @@
     <!-- Summary for Bluetooth when disabled. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_disabled">Not visible to other devices</string>
 
-    <!-- Summary for Bluetooth when connected. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_connected_summary">Connected to </string>
+    <!-- Summary for Bluetooth when connected to one device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_connected_summary">Connected to <xliff:g name="device">%1$s</xliff:g></string>
+
+    <!-- Summary for Bluetooth when connected to multiple devices. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_connected_multiple_devices_summary">Connected to multiple devices</string>
 
     <!-- [CHAR LIMIT=60] Name of dev option called "System UI demo mode" -->
     <string name="demo_mode">System UI demo mode</string>
