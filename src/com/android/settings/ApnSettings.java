@@ -184,7 +184,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
 
         CarrierConfigManager configManager = (CarrierConfigManager)
                 getSystemService(Context.CARRIER_CONFIG_SERVICE);
-        PersistableBundle b = configManager.getConfig();
+        PersistableBundle b = configManager.getConfigForSubId(subId);
         mHideImsApn = b.getBoolean(CarrierConfigManager.KEY_HIDE_IMS_APN_BOOL);
         mAllowAddingApns = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL);
         mUserManager = UserManager.get(activity);
@@ -392,6 +392,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
                 pref.setSummary(apn);
                 pref.setPersistent(false);
                 pref.setOnPreferenceChangeListener(this);
+                pref.setSubId(subId);
 
                 boolean selectable = ((type == null) || !type.equals("mms"));
                 pref.setSelectable(selectable);
