@@ -1212,10 +1212,6 @@ public class SettingsActivity extends SettingsDrawerActivity
                 !getResources().getBoolean(R.bool.config_settings_rjil_layout), isAdmin, pm);
 
         setTileEnabled(new ComponentName(packageName,
-                        Settings.GesturesSettingsActivity.class.getName()),
-                GesturesSettings.supportsGestures(this), isAdmin, pm);
-
-        setTileEnabled(new ComponentName(packageName,
                 Settings.Lte4GEnableActivity.class.getName()),
                 getResources().getBoolean(R.bool.config_4gsettings_enabled), isAdmin, pm);
 
