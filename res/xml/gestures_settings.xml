@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 The ParanoidAndroid Project
+<!-- Copyright (C) 2016-2017 The ParanoidAndroid Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,108 +18,152 @@
         android:title="@string/gestures_settings_title"
         settings:keywords="@string/keywords_gestures">
 
-        <ListPreference
-            android:key="double_tap"
-            android:title="@string/gestures_double_tap"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
+        <PreferenceCategory
+            android:key="system_gestures"
+            android:title="@string/system_gestures_title">
 
-        <ListPreference
-            android:key="one_finger_swipe_up"
-            android:title="@string/gestures_one_finger_swipe_up"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
+            <com.android.settings.gestures.GesturePreference
+                android:key="gesture_swipe_down_fingerprint"
+                android:title="@string/fingerprint_swipe_for_notifications_title"
+                android:summary="@string/fingerprint_swipe_for_notifications_summary"
+                settings:animation="@raw/gesture_fingerprint_swipe"
+                settings:preview="@drawable/gesture_fingerprint_swipe"/>
 
-        <ListPreference
-            android:key="one_finger_swipe_right"
-            android:title="@string/gestures_one_finger_swipe_right"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
+            <com.android.settings.gestures.GesturePreference
+                android:key="gesture_double_tap_power"
+                android:title="@string/double_tap_power_for_camera_title"
+                android:summary="@string/double_tap_power_for_camera_summary"
+                settings:animation="@raw/gesture_double_tap"
+                settings:preview="@drawable/gesture_double_tap"/>
 
-        <ListPreference
-            android:key="one_finger_swipe_down"
-            android:title="@string/gestures_one_finger_swipe_down"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
+            <com.android.settings.gestures.GesturePreference
+                android:key="gesture_double_twist"
+                android:title="@string/double_twist_for_camera_mode_title"
+                android:summary="@string/double_twist_for_camera_mode_summary"
+                settings:animation="@raw/gesture_twist"
+                settings:preview="@drawable/gesture_twist"/>
 
-        <ListPreference
-            android:key="one_finger_swipe_left"
-            android:title="@string/gestures_one_finger_swipe_left"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
+            <com.android.settings.gestures.GesturePreference
+                android:key="gesture_double_tap_screen"
+                android:title="@string/ambient_display_title"
+                android:summary="@string/ambient_display_summary"
+                settings:animation="@raw/gesture_ambient_tap"
+                settings:preview="@drawable/gesture_ambient_tap"/>
 
-        <ListPreference
-            android:key="two_finger_swipe"
-            android:title="@string/gestures_two_finger_swipe"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
+            <com.android.settings.gestures.GesturePreference
+                android:key="gesture_pick_up"
+                android:title="@string/ambient_display_pickup_title"
+                android:summary="@string/ambient_display_pickup_summary"
+                settings:animation="@raw/gesture_ambient_lift"
+                settings:preview="@drawable/gesture_ambient_lift"/>
+        </PreferenceCategory>
 
-        <ListPreference
-            android:key="draw_o"
-            android:title="@string/gestures_draw_o"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
+        <PreferenceCategory
+            android:key="offscreen_gestures"
+            android:title="@string/offscreen_gestures_title">
 
-        <ListPreference
-            android:key="draw_v"
-            android:title="@string/gestures_draw_v"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
+            <ListPreference
+                android:key="double_tap"
+                android:title="@string/gestures_double_tap"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
 
-        <ListPreference
-            android:key="draw_inverse_v"
-            android:title="@string/gestures_draw_inverse_v"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
+            <ListPreference
+                android:key="one_finger_swipe_up"
+                android:title="@string/gestures_one_finger_swipe_up"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
 
-        <ListPreference
-            android:key="draw_m"
-            android:title="@string/gestures_draw_m"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
+            <ListPreference
+                android:key="one_finger_swipe_right"
+                android:title="@string/gestures_one_finger_swipe_right"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
 
-        <ListPreference
-            android:key="draw_w"
-            android:title="@string/gestures_draw_w"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
+            <ListPreference
+                android:key="one_finger_swipe_down"
+                android:title="@string/gestures_one_finger_swipe_down"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
 
-        <ListPreference
-            android:key="draw_arrow_left"
-            android:title="@string/gestures_draw_arrow_left"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
+            <ListPreference
+                android:key="one_finger_swipe_left"
+                android:title="@string/gestures_one_finger_swipe_left"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
 
-        <ListPreference
-            android:key="draw_arrow_right"
-            android:title="@string/gestures_draw_arrow_right"
-            android:summary="%s"
-            android:persistent="false"
-            android:entries="@array/gestures_entries"
-            android:entryValues="@array/gestures_values" />
+            <ListPreference
+                android:key="two_finger_swipe"
+                android:title="@string/gestures_two_finger_swipe"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
 
+            <ListPreference
+                android:key="draw_o"
+                android:title="@string/gestures_draw_o"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
+
+            <ListPreference
+                android:key="draw_v"
+                android:title="@string/gestures_draw_v"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
+
+            <ListPreference
+                android:key="draw_inverse_v"
+                android:title="@string/gestures_draw_inverse_v"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
+
+            <ListPreference
+                android:key="draw_m"
+                android:title="@string/gestures_draw_m"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
+
+            <ListPreference
+                android:key="draw_w"
+                android:title="@string/gestures_draw_w"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
+
+            <ListPreference
+                android:key="draw_arrow_left"
+                android:title="@string/gestures_draw_arrow_left"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
+
+            <ListPreference
+                android:key="draw_arrow_right"
+                android:title="@string/gestures_draw_arrow_right"
+                android:summary="%s"
+                android:persistent="false"
+                android:entries="@array/gestures_entries"
+                android:entryValues="@array/gestures_values" />
+        </PreferenceCategory>
 </PreferenceScreen>
