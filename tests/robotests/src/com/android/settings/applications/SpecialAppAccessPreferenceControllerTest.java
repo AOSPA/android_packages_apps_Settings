@@ -14,47 +14,44 @@
  * limitations under the License.
  */
 
-package com.android.settings.display;
+package com.android.settings.applications;
 
-import static android.provider.Settings.System.SCREEN_BRIGHTNESS;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.provider.Settings;
 import android.support.v7.preference.Preference;
-
+import com.android.settings.R;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
-
-import java.text.NumberFormat;
+import com.android.settings.datausage.DataSaverBackend;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class BrightnessLevelPreferenceControllerTest {
-    @Mock
+public class SpecialAppAccessPreferenceControllerTest {
     private Context mContext;
     @Mock
-    private ContentResolver mContentResolver;
+    private DataSaverBackend mBackend;
     @Mock
     private Preference mPreference;
 
-    private BrightnessLevelPreferenceController mController;
+    private SpecialAppAccessPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
-        mController = new BrightnessLevelPreferenceController(mContext);
+        mContext = RuntimeEnvironment.application;
+        mController = new SpecialAppAccessPreferenceController(mContext);
+        ReflectionHelpers.setField(mController, "mDataSaverBackend", mBackend);
     }
 
     @Test
@@ -64,13 +61,18 @@ public class BrightnessLevelPreferenceControllerTest {
 
     @Test
     public void updateState_shouldSetSummary() {
-        final NumberFormat formatter = NumberFormat.getPercentInstance();
-        when(mContext.getContentResolver()).thenReturn(mContentResolver);
-        Settings.System.putInt(mContentResolver, SCREEN_BRIGHTNESS, 45);
+        when(mBackend.getWhitelistedCount()).thenReturn(0);
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(formatter.format(45.0 / 255));
-    }
+        verify(mPreference).setSummary(mContext.getResources().getQuantityString(
+            R.plurals.special_access_summary, 0, 0));
 
+        when(mBackend.getWhitelistedCount()).thenReturn(1);
+
+        mController.updateState(mPreference);
+
+        verify(mPreference).setSummary(mContext.getResources().getQuantityString(
+            R.plurals.special_access_summary, 1, 1));
+    }
 }

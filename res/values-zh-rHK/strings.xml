@@ -329,8 +329,7 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"帳戶"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"位置"</string>
     <string name="account_settings_title" msgid="626177544686329806">"帳戶"</string>
-    <!-- no translation found for security_settings_title (6134528367364159294) -->
-    <skip />
+    <string name="security_settings_title" msgid="6134528367364159294">"安全性與位置"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"加密和憑證"</string>
     <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"手機已加密"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"螢幕鎖定偏好設定"</string>
@@ -339,10 +338,8 @@
     <string name="security_passwords_title" msgid="2881269890053568809">"私隱權"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"已由管理員停用"</string>
     <string name="security_status_title" msgid="5848766673665944640">"安全性狀態"</string>
-    <!-- no translation found for security_dashboard_summary (6757421634477554939) -->
-    <skip />
-    <!-- no translation found for security_dashboard_summary_no_fingerprint (8129641548372335540) -->
-    <skip />
+    <string name="security_dashboard_summary" msgid="6757421634477554939">"螢幕鎖定、指紋"</string>
+    <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"螢幕鎖定"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"指紋"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"管理指紋"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"使用指紋"</string>
@@ -446,7 +443,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"保護您的平板電腦"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"保護您的裝置"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"保護您的手機"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"請設定備援螢幕鎖定方式以加強保安。"</string>
+    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"為加強保安，請設定備用螢幕鎖定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"只要啟用裝置保護功能，即可阻止他人在未經您准許下使用此平板電腦。請選擇您想使用的螢幕鎖定功能。"</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"只要啟用裝置保護功能，即可阻止他人在未經您准許下使用此裝置。請選擇您想使用的螢幕鎖定功能。"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"只要啟用裝置保護功能，即可阻止他人在未經您准許下使用此手機。請選擇您想使用的螢幕鎖定功能。"</string>
@@ -692,6 +689,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"有高品質的公共網絡時通知我"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"自動開啟 Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"靠近已儲存的高品質網絡 (例如家用網絡) 時將會再次開啟 Wi-Fi"</string>
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Wi‑Fi 掃瞄功能已關閉，因此無法使用"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"已避免欠佳的連線"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"除非互聯網連線穩定，否則不要使用 Wi-Fi 網絡"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"只使用連線品質穩定的網絡"</string>
@@ -813,11 +811,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"設定 Wi-Fi"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC 位址"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP 位址"</string>
-    <!-- no translation found for wifi_details_subnet_mask (6720279144174924410) -->
-    <skip />
+    <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"子網絡遮罩"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"網域名稱系統 (DNS)"</string>
-    <!-- no translation found for wifi_details_ipv6_address_header (6734119149106422148) -->
-    <skip />
+    <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6 位址"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"已儲存的網絡"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP 設定"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"這位使用者無法查看或變更 Wi-Fi 進階設定"</string>
@@ -964,7 +960,7 @@
     <string name="brightness_summary" msgid="838917350127550703">"調校螢幕亮度"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"自動調校亮度"</string>
     <string name="auto_brightness_summary" msgid="1799041158760605375">"按環境光線優化亮度"</string>
-    <string name="auto_brightness_summary_off" msgid="2802336459335410626">"已關閉"</string>
+    <string name="auto_brightness_summary_off" msgid="2802336459335410626">"關閉"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"偏好的亮度為非常低"</string>
     <string name="auto_brightness_summary_low" msgid="5609877905833960427">"偏好的亮度為低"</string>
     <string name="auto_brightness_summary_default" msgid="7225666614394726845">"偏好的亮度為預設"</string>
@@ -991,11 +987,11 @@
     <string name="night_display_start_time_title" msgid="8918016772613689584">"開始時間"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"結束時間"</string>
     <string name="night_display_temperature_title" msgid="1435292789272017136">"濃度"</string>
-    <string name="night_display_summary_off" msgid="7009821232380000786">"已關閉。<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off" msgid="7009821232380000786">"關閉。<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"永遠不會自動開啟。"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"將會在<xliff:g id="ID_1">%1$s</xliff:g>自動開啟。"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"將會在日落時自動開啟。"</string>
-    <string name="night_display_summary_on" msgid="6626224414971753417">"已開啟。<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on" msgid="6626224414971753417">"開啟。<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"永遠不會自動關閉。"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"將會在<xliff:g id="ID_1">%1$s</xliff:g>自動關閉。"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"將會在日出時自動關閉。"</string>
@@ -1017,19 +1013,18 @@
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"關閉"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"如要控制手機在插座上和/或休眠時的操作，請開啟螢幕保護程式。"</string>
     <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"啟用時間"</string>
-    <!-- no translation found for screensaver_settings_current (4663846038247130023) -->
-    <skip />
+    <string name="screensaver_settings_current" msgid="4663846038247130023">"目前的螢幕保護程式"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"立即開始"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"設定"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"自動調整亮度"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"舉起即可喚醒"</string>
-    <string name="doze_title" msgid="5389406335828323273">"收到的通知螢幕"</string>
+    <string name="doze_title" msgid="2259176504273878294">"環境顯示"</string>
     <string name="doze_summary" msgid="3846219936142814032">"收到通知時喚醒螢幕"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字型大小"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"放大或縮小文字"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 卡鎖定設定"</string>
     <string name="sim_lock_settings_category" msgid="6242052161214271091">"SIM 卡鎖定"</string>
-    <string name="sim_lock_settings_summary_off" msgid="8028944267104896401">"已關閉"</string>
+    <string name="sim_lock_settings_summary_off" msgid="8028944267104896401">"關閉"</string>
     <string name="sim_lock_settings_summary_on" msgid="39103355956342985">"已鎖定"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM 卡鎖定"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"鎖定 SIM 卡"</string>
@@ -1204,7 +1199,7 @@
     <string name="storage_detail_system" msgid="4629506366064709687">"系統"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"探索 <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_detail_dialog_other" msgid="8907101974576694793">"其他檔案包括應用程式儲存的共用檔案、透過互聯網或藍牙下載的檔案、Android 檔案等。\n\n如要查看此 <xliff:g id="NAME">^1</xliff:g>的顯示內容，請輕按 [探索]。"</string>
-    <string name="storage_detail_dialog_system" msgid="862835644848361569">"「系統」包含用來執行 Android 版本 <xliff:g id="VERSION">%s</xliff:g> 的檔案"</string>
+    <string name="storage_detail_dialog_system" msgid="862835644848361569">"「系統」包含用來執行 Android <xliff:g id="VERSION">%s</xliff:g> 版本的檔案"</string>
     <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g>可能已使用 <xliff:g id="SIZE">^2</xliff:g> 儲存空間儲存相片、音樂、應用程式或其他資料。\n\n如要查看詳情，請切換至 <xliff:g id="USER_1">^1</xliff:g>。"</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"設定您的<xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="4867326438945303598">"作為可攜式儲存裝置使用"</string>
@@ -1601,7 +1596,7 @@
     <string name="system_package" msgid="1352722848400644991">"無法在外部媒體上安裝系統更新。"</string>
     <string name="move_error_device_admin" msgid="8673026002690505763">"無法在外部媒體上安裝裝置管理應用程式"</string>
     <string name="force_stop_dlg_title" msgid="977530651470711366">"您要強制停止嗎？"</string>
-    <string name="force_stop_dlg_text" msgid="7208364204467835578">"如果您強制停止應用程式，應用程式或會不能正常操作。"</string>
+    <string name="force_stop_dlg_text" msgid="7208364204467835578">"強制停止應用程式，可能會導致操作不正常。"</string>
     <string name="move_app_failed_dlg_title" msgid="1282561064082384192"></string>
     <string name="move_app_failed_dlg_text" msgid="187885379493011720">"無法移動應用程式。<xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"偏好的安裝位置"</string>
@@ -1616,6 +1611,7 @@
     <string name="app_install_details_group_title" msgid="7084623031296083574">"商店"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"應用程式詳細資料"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"從「<xliff:g id="APP_STORE">%1$s</xliff:g>」安裝的應用程式"</string>
+    <string name="instant_app_details_summary" msgid="4529934403276907045">"前往「<xliff:g id="APP_STORE">%1$s</xliff:g>」查看詳情"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"應用程式操作"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"執行中"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(從未使用)"</string>
@@ -1692,7 +1688,6 @@
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"鍵盤快速鍵助手"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"顯示可用的快速鍵"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"預設"</string>
-    <string name="pointer_settings_category" msgid="8183819795164034286">"滑鼠/觸控板"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"游標速度"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"遊戲控制器"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"使用震動"</string>
@@ -1799,8 +1794,8 @@
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"指標停止移動後點擊"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"延誤前點擊"</string>
     <string name="accessibility_summary_default_combination" msgid="90096949592817459">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="accessibility_summary_state_enabled" msgid="8359913912320966304">"已開啟"</string>
-    <string name="accessibility_summary_state_disabled" msgid="2241315620132005595">"已關閉"</string>
+    <string name="accessibility_summary_state_enabled" msgid="8359913912320966304">"開啟"</string>
+    <string name="accessibility_summary_state_disabled" msgid="2241315620132005595">"關閉"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"在「快速設定」中顯示"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"校準模式"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
@@ -1873,7 +1868,7 @@
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"未提供說明。"</string>
     <string name="settings_button" msgid="3006713718908152930">"設定"</string>
     <string name="print_settings" msgid="4742428530112487843">"列印"</string>
-    <string name="print_settings_summary_no_service" msgid="6354322414246865875">"已關閉"</string>
+    <string name="print_settings_summary_no_service" msgid="6354322414246865875">"關閉"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="6005468025646083029">
       <item quantity="other">已啟用 <xliff:g id="COUNT">%1$d</xliff:g> 項列印服務</item>
       <item quantity="one">已啟用 1 項列印服務</item>
@@ -1913,13 +1908,13 @@
     <string name="background_activity_summary_on" msgid="649282072540085599">"在不使用應用程式時，應用程式可在背景中執行"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"在不使用應用程式時，應用程式的背景活動會受限制"</string>
     <string name="background_activity_summary_disabled" msgid="3710669050484599847">"不允許應用程式在背景中執行"</string>
-    <string name="device_screen_usage" msgid="3386088035570409683">"自上次完全充電後的螢幕使用情況"</string>
+    <string name="device_screen_usage" msgid="3386088035570409683">"充滿電後的螢幕用量"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"螢幕耗電量"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"流動網絡掃瞄"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">%1$s</xliff:g>前"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"自上次完全充電後的應用程式使用情況 (<xliff:g id="TIME">%1$s</xliff:g>前)"</string>
-    <string name="screen_usage_summary" msgid="6687403051423153550">"自上次完全充電後的螢幕開啟時間"</string>
-    <string name="device_usage_list_summary" msgid="5623036661468763251">"自上次完全充電後的裝置使用情況"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g>前"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"充滿電後的應用程式用量 (<xliff:g id="TIME">^1</xliff:g>前)"</string>
+    <string name="screen_usage_summary" msgid="6687403051423153550">"充滿電後的螢幕開啟時間"</string>
+    <string name="device_usage_list_summary" msgid="5623036661468763251">"充滿電後的裝置用量"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"拔除插頭後的電池使用狀況"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"重設後的電池使用狀況"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"電池電力剩餘時間：<xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -1948,7 +1943,7 @@
     <string name="power_camera" msgid="4976286950934622605">"相機"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"藍牙"</string>
-    <string name="power_cell" msgid="6596471490976003056">"手機待命"</string>
+    <string name="power_cell" msgid="3392999761958982492">"流動網絡備用中"</string>
     <string name="power_phone" msgid="5392641106474567277">"語音通話"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"平板電腦閒置"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"手機閒置"</string>
@@ -2008,17 +2003,17 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"電池用量是估計的用電量，並非所有耗電來源均計算在內。其他用電量是指估計耗電量與實際電池用量的差額。"</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"計算過高的用電量"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"已使用時間：%1$s"</string>
-    <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> 的電池用量佔 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_used_for" msgid="2690821851327075443">"使用時間：<xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g>用量佔 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"整體電量的 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"自上次完全充電後的詳細使用情況"</string>
-    <string name="battery_last_full_charge" msgid="7151251641099019361">"上次完全充電後"</string>
+    <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"上次充滿電後的詳細用量"</string>
+    <string name="battery_last_full_charge" msgid="7151251641099019361">"上次充滿電"</string>
     <string name="battery_footer_summary" msgid="4701358808575132647">"剩餘電池使用時間只屬約數，視乎使用情況而定"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"在前景中執行時"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"在背景中執行時"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"電池用量"</string>
     <string name="battery_detail_power_percentage" msgid="8064814503316094497">"應用程式總電池用量的 <xliff:g id="PERCENT">%1$s</xliff:g> (<xliff:g id="POWER">%2$d</xliff:g> mAh)"</string>
-    <string name="battery_detail_info_title" msgid="8227822131405620369">"自上次完全充電後"</string>
+    <string name="battery_detail_info_title" msgid="8227822131405620369">"上次充滿電後"</string>
     <string name="battery_detail_manage_title" msgid="9094314252105828014">"管理電池用量"</string>
     <string name="estimated_time_left" msgid="7514194472683370877">"估計剩餘時間"</string>
     <string name="estimated_charging_time_left" msgid="5614442409326164691">"剩餘充電時間"</string>
@@ -2080,7 +2075,6 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"語音輸入與輸出裝置設定"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"語音搜尋"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android 鍵盤"</string>
-    <string name="voice_category" msgid="1430370497125803904">"語音"</string>
     <string name="voice_input_settings" msgid="1099937800539324567">"語音輸入設定"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"語音輸入"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"語音輸入服務"</string>
@@ -2734,6 +2728,8 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"通知音量"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"電話鈴聲"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"預設通知音效"</string>
+    <string name="notification_unknown_sound_title" msgid="2535027767851838335">"應用程式提供的音效"</string>
+    <string name="notification_sound_default" msgid="565135733949733766">"預設通知音效"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"預設鬧鐘音效"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"來電時同時震動"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"其他音效"</string>
@@ -2795,6 +2791,8 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"裝置鎖定時，應如何顯示個人檔案通知？"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"個人檔案通知"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"通知"</string>
+    <!-- no translation found for notification_channel_title (2260666541030178452) -->
+    <skip />
     <string name="notification_importance_title" msgid="848692592679312666">"重要性"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"讓應用程式決定"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"永不顯示通知"</string>
@@ -2802,10 +2800,14 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"不發出音效"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"發出音效"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"發出音效並在螢幕上彈出通知"</string>
-    <string name="notification_importance_min_summary" msgid="8233873580287975662">"低：不發出音效或顯示通知"</string>
-    <string name="notification_importance_low_summary" msgid="1296192045494524565">"中：不發出音效"</string>
-    <string name="notification_importance_default_summary" msgid="5730277944596984792">"高：發出音效"</string>
-    <string name="notification_importance_high_summary" msgid="3248683220940159642">"緊急：發出音效並在螢幕上彈出通知"</string>
+    <!-- no translation found for notification_importance_min_title (6974673091137544803) -->
+    <skip />
+    <!-- no translation found for notification_importance_low_title (8131254047772814309) -->
+    <skip />
+    <!-- no translation found for notification_importance_default_title (9120383978536089489) -->
+    <skip />
+    <!-- no translation found for notification_importance_high_title (3058778300264746473) -->
+    <skip />
     <string name="allow_sound" msgid="6585849855452076626">"允許發出音效"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"禁止這些通知發出音效、震動或不時於目前螢幕上出現。"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"通知小幫手"</string>
@@ -2839,6 +2841,10 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"[請勿騷擾] 存取"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"沒有已安裝的應用程式要求 [請勿騷擾] 存取。"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"正在載入應用程式…"</string>
+    <!-- no translation found for app_notifications_off_desc (4882445501376722969) -->
+    <skip />
+    <!-- no translation found for channel_notifications_off_desc (5899225298718840635) -->
+    <skip />
     <string name="notification_channels" msgid="5346841743182627500">"類別"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"其他"</string>
     <string name="no_channels" msgid="3077375508177744586">"此應用程式未發佈任何通知"</string>
@@ -2853,8 +2859,8 @@
       <item quantity="one">已刪除 <xliff:g id="COUNT_0">%d</xliff:g> 個類別</item>
     </plurals>
     <string name="notification_badges" msgid="4468378071033143539">"通知標誌"</string>
-    <string name="notification_toggle_on" msgid="650145396718191048">"已開啟"</string>
-    <string name="notification_toggle_off" msgid="2142010737190671762">"已關閉"</string>
+    <string name="notification_toggle_on" msgid="650145396718191048">"開啟"</string>
+    <string name="notification_toggle_off" msgid="2142010737190671762">"關閉"</string>
     <string name="app_notification_block_title" msgid="4069351066849087649">"全部封鎖"</string>
     <string name="app_notification_block_summary" msgid="4744020456943215352">"永不顯示這些通知"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"顯示通知"</string>
@@ -2972,18 +2978,14 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"保持目前方向"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"安全啟動"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"繼續"</string>
-    <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"您可以在裝置啟動前要求輸入 PIN，以進一步保障這部裝置的安全。裝置在啟動前，將無法接收來電、短訊或通知，包括鬧鐘。\n\n在裝置遺失或被盜時，這個設定有助保障資料安全。"</string>
-    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"您可以在裝置啟動前要求輸入解鎖圖案，以進一步保障這部裝置的安全。裝置在啟動前，將無法接收來電、短訊或通知，包括鬧鐘。\n\n在裝置遺失或被盜時，這個設定有助保障資料安全。"</string>
-    <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"您可以在裝置啟動前要求輸入密碼，以進一步保障這部裝置的安全。裝置在啟動前，將無法接收來電、短訊或通知，包括鬧鐘。\n\n在裝置遺失或被盜時，這個設定有助保障資料安全。"</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"除了使用指紋解鎖裝置外，您亦可設定在啟動前要求輸入 PIN，進一步保障此裝置安全。在裝置啟動前，裝置無法接收來電、訊息或通知，包括鬧鐘。\n\n這有助保障遺失或被盜裝置的資料安全。"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"除了使用指紋解鎖裝置外，您亦可設定在啟動前要求繪畫圖案，進一步保障此裝置安全。在裝置啟動前，裝置無法接收來電、訊息或通知，包括鬧鐘。\n\n這有助保障遺失或被盜裝置的資料安全。"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"除了使用指紋解鎖裝置外，您亦可設定在啟動前要求輸入密碼，進一步保障此裝置安全。在裝置啟動前，裝置無法接收來電、訊息或通知，包括鬧鐘。\n\n這有助保障遺失或被盜裝置的資料安全。"</string>
-    <string name="encrypt_require_pin" msgid="2063945047845243752">"需要輸入 PIN 才能啟動裝置"</string>
-    <string name="encrypt_require_pattern" msgid="6898479411004015810">"啟動裝置前必須輸入解鎖圖形"</string>
-    <string name="encrypt_require_password" msgid="8770628366276570518">"需要輸入密碼才能啟動裝置"</string>
-    <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"不用了，謝謝"</string>
-    <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"不用了，謝謝"</string>
-    <string name="encrypt_dont_require_password" msgid="2580403214917009046">"不用了，謝謝"</string>
+    <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"為加強保護此裝置，您可以在裝置啟動前要求輸入 PIN 碼。裝置啟動前，您將無法接收來電、訊息或通知 (包括鬧鐘)。\n\n這有助保護遺失或被盜裝置上的資料。要在啟動裝置時要求輸入 PIN 碼嗎？"</string>
+    <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"為加強保護此裝置，您可以在裝置啟動前要求畫出上鎖圖案。裝置啟動前，您將無法接收來電、訊息或通知 (包括鬧鐘)。\n\n這有助保護遺失或被盜裝置上的資料。要在啟動裝置時要求畫出上鎖圖案嗎？"</string>
+    <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"為加強保護此裝置，您可以在裝置啟動前要求輸入密碼。裝置啟動前，您將無法接收來電、訊息或通知 (包括鬧鐘)。\n\n這有助保護遺失或被盜裝置上的資料。要在啟動裝置時要求輸入密碼嗎？"</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"為加強保護此裝置，除了使用指紋解鎖裝置外，您亦可以在裝置啟動前要求輸入 PIN 碼。裝置啟動前，您將無法接收來電、訊息或通知 (包括鬧鐘)。\n\n這有助保護遺失或被盜裝置上的資料。要在啟動裝置時要求輸入 PIN 碼嗎？"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"為加強保護此裝置，除了使用指紋解鎖裝置外，您亦可以在裝置啟動前要求畫出上鎖圖案。裝置啟動前，您將無法接收來電、訊息或通知 (包括鬧鐘)。\n\n這有助保護遺失或被盜裝置上的資料。要在啟動裝置時要求畫出上鎖圖案嗎？"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="1088818752838720964">"為加強保護此裝置，除了使用指紋解鎖裝置外，您亦可以在裝置啟動前要求輸入密碼。裝置啟動前，您將無法接收來電、訊息或通知 (包括鬧鐘)。\n\n這有助保護遺失或被盜裝置上的資料。要在啟動裝置時要求輸入密碼嗎？"</string>
+    <string name="encryption_interstitial_yes" msgid="4439509435889513411">"是"</string>
+    <string name="encryption_interstitial_no" msgid="8935031349097025137">"否"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"要求輸入 PIN 嗎？"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"要求輸入解鎖圖案嗎？"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"要求輸入密碼嗎？"</string>
@@ -3079,7 +3081,7 @@
     <string name="default_app" msgid="6864503001385843060">"(預設)"</string>
     <string name="system_app" msgid="9068313769550747372">"(系統)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(系統預設)"</string>
-    <string name="apps_storage" msgid="4353308027210435513">"應用程式儲存"</string>
+    <string name="apps_storage" msgid="4353308027210435513">"應用程式儲存空間"</string>
     <string name="usage_access" msgid="5479504953931038165">"使用記錄存取權"</string>
     <string name="permit_usage_access" msgid="4012876269445832300">"允許使用記錄存取權"</string>
     <string name="app_usage_preference" msgid="7065701732733134991">"應用程式使用喜好"</string>
@@ -3096,7 +3098,7 @@
     <string name="memory_use_running_format" msgid="4172488041800743760">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"電池優化"</string>
-    <string name="additional_battery_info" msgid="4754099329165411970">"電量警示"</string>
+    <string name="additional_battery_info" msgid="4754099329165411970">"用量警示"</string>
     <string name="show_all_apps" msgid="1742726460081356745">"顯示所有應用程式"</string>
     <string name="hide_extra_apps" msgid="5568177134273528751">"隱藏其他應用程式"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"尚未優化"</string>
@@ -3106,9 +3108,9 @@
     <string name="high_power_desc" msgid="6283926163708585760">"不使用電池優化，可能會加速耗電。"</string>
     <string name="high_power_prompt_title" msgid="6358673688590282655">"允許應用程式一律在背景中執行嗎？"</string>
     <string name="high_power_prompt_body" msgid="1031422980602565049">"允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」一律在背景中執行可能會縮短電池壽命。\n\n您日後可以前往「設定」&gt;「應用程式與通知」中變更這項設定。"</string>
-    <string name="battery_summary" msgid="8044042095190688654">"自上次完全充電後已使用 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_power_management" msgid="5571519699679107523">"電源管理"</string>
-    <string name="no_battery_summary" msgid="3528036835462846814">"自上次完全充電後，沒有消耗電量"</string>
+    <string name="battery_summary" msgid="8044042095190688654">"上次充滿電後使用了 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_power_management" msgid="5571519699679107523">"電量管理"</string>
+    <string name="no_battery_summary" msgid="3528036835462846814">"上次充滿電後沒有耗電"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"應用程式設定"</string>
     <string name="system_ui_settings" msgid="579824306467081123">"顯示系統使用者介面調諧器"</string>
     <string name="additional_permissions" msgid="6463784193877056080">"其他權限"</string>
@@ -3207,9 +3209,9 @@
     <string name="write_settings_description" msgid="6868293938839954623">"此權限允許應用程式修改系統設定。"</string>
     <string name="write_settings_on" msgid="8230580416068832239">"允許"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"不允許"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"是"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"否"</string>
-    <string name="external_source_switch_title" msgid="5581865736984836418">"允許安裝應用程式"</string>
+    <string name="external_source_trusted" msgid="2707996266575928037">"允許"</string>
+    <string name="external_source_untrusted" msgid="2677442511837596726">"不允許"</string>
+    <string name="external_source_switch_title" msgid="3621381992793251070">"允許此來源的應用程式"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"轉動兩下即可使用相機功能"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"轉動手腕兩下即可開啟相機應用程式"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"連按電源按鈕兩次以啟動相機"</string>
@@ -3338,7 +3340,7 @@
     <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"必須輸入密碼才能啟動裝置。裝置關機時無法接聽來電、訊息、通知或使用鬧鐘。"</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"加入其他指紋"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"使用另一個指紋解鎖"</string>
-    <string name="battery_saver_on_summary" msgid="9072203872401530722">"已開啟/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="battery_saver_on_summary" msgid="9072203872401530722">"開啟/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"已關閉/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"永不自動開啟"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"電量為 %1$s 時自動開啟"</string>
@@ -3395,7 +3397,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"付費短訊的費用可能高昂，並會增加您流動網絡供應商帳單的款項。如果您為應用程式開放權限，將可以透過該應用程式發送付費短訊。"</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"發送付費短訊的權限"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"其他裝置無法偵測到"</string>
-    <string name="bluetooth_connected_summary" msgid="8733997010923307915">"已連線至"</string>
+    <string name="bluetooth_connected_summary" msgid="7672528674593152862">"已連接至 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"已連接多部裝置"</string>
     <string name="demo_mode" msgid="2798762752209330277">"系統使用者介面示範模式"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"快速設定開發人員圖塊"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"我們樂意為您提供協助"</string>
@@ -3414,7 +3417,7 @@
     <string name="support_escalation_by_phone" msgid="4843223043487058711">"電話"</string>
     <string name="support_escalation_by_chat" msgid="977019859110763749">"即時通訊"</string>
     <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"探索提示和技巧"</string>
-    <string name="support_help_feedback_title" msgid="693440287222186718">"搜尋說明和傳送意見反映"</string>
+    <string name="support_help_feedback_title" msgid="693440287222186718">"搜尋說明和傳送意見"</string>
     <string name="support_sign_in_required_title" msgid="1367187789121480440">"聯絡支援團隊"</string>
     <string name="support_sign_in_button_text" msgid="3054769428620671241">"登入"</string>
     <string name="support_sign_in_required_help" msgid="5200654782405538114">"無法登入嗎？"</string>
@@ -3584,7 +3587,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(已為使用者 (<xliff:g id="USER">%s</xliff:g>) 停用)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"自動填入服務"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"自動, 填入, 自動填入"</string>
-    <string name="autofill_confirmation_message" msgid="7368058965765225486">"要將「<xliff:g id="APP_NAME_0">%1$s</xliff:g>」設定為自動填入應用程式嗎？「<xliff:g id="APP_NAME_1">%1$s</xliff:g>」能夠讀取您的螢幕內容，並在其他應用程式上填入欄位。"</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;請確定您信任此應用程式&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; 應用程式會根據您畫面上的內容判斷可自動填入的資料。"</string>
     <string name="device_theme" msgid="4571803018917608588">"裝置主題"</string>
     <string name="default_theme" msgid="7085644992078579076">"預設"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"儲存空間管理員：<xliff:g id="STATUS">^1</xliff:g>"</string>

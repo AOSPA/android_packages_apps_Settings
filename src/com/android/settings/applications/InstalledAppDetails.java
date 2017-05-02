@@ -454,6 +454,10 @@ public class InstalledAppDetails extends AppInfoBase
 
     @Override
     public void onPackageSizeChanged(String packageName) {
+        if (!TextUtils.equals(packageName, mPackageName)) {
+            Log.d(LOG_TAG, "Package change irrelevant, skipping");
+          return;
+        }
         refreshUi();
     }
 
@@ -522,6 +526,9 @@ public class InstalledAppDetails extends AppInfoBase
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQUEST_UNINSTALL:
+                // Refresh option menu
+                getActivity().invalidateOptionsMenu();
+
                 if (mDisableAfterUninstall) {
                     mDisableAfterUninstall = false;
                     new DisableChanger(this, mAppEntry.info,

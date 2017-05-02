@@ -102,7 +102,6 @@ public class BatteryUtils {
         final long rawRealTimeUs = convertMsToUs(SystemClock.elapsedRealtime());
         final int foregroundTypes[] = {BatteryStats.Uid.PROCESS_STATE_TOP,
                 BatteryStats.Uid.PROCESS_STATE_FOREGROUND_SERVICE,
-                BatteryStats.Uid.PROCESS_STATE_TOP_SLEEPING,
                 BatteryStats.Uid.PROCESS_STATE_FOREGROUND};
         Log.v(TAG, "package: " + mPackageManager.getNameForUid(uid.getUid()));
 
@@ -129,9 +128,8 @@ public class BatteryUtils {
             final BatterySipper sipper = sippers.get(i);
             if (shouldHideSipper(sipper)) {
                 sippers.remove(i);
-                if (sipper.drainType != BatterySipper.DrainType.OVERCOUNTED
-                        && sipper.drainType != BatterySipper.DrainType.UNACCOUNTED) {
-                    // Don't add it if it is overcounted or unaccounted
+                if (sipper.drainType != BatterySipper.DrainType.OVERCOUNTED) {
+                    // Don't add it if it is overcounted
                     totalPowerMah += sipper.totalPowerMah;
                 }
             }

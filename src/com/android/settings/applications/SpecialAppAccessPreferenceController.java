@@ -11,21 +11,21 @@
  * KIND, either express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.android.settings.display;
-
-import static android.provider.Settings.System.SCREEN_BRIGHTNESS;
+package com.android.settings.applications;
 
 import android.content.Context;
-import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
-import java.text.NumberFormat;
+import com.android.settings.datausage.DataSaverBackend;
 
-public class BrightnessLevelPreferenceController extends PreferenceController {
+public class SpecialAppAccessPreferenceController extends PreferenceController {
 
-    private static final String KEY_BRIGHTNESS = "brightness";
+    private static final String KEY_SPECIAL_ACCESS = "special_access";
 
-    public BrightnessLevelPreferenceController(Context context) {
+    private DataSaverBackend mDataSaverBackend;
+
+    public SpecialAppAccessPreferenceController(Context context) {
         super(context);
     }
 
@@ -36,14 +36,16 @@ public class BrightnessLevelPreferenceController extends PreferenceController {
 
     @Override
     public String getPreferenceKey() {
-        return KEY_BRIGHTNESS;
+        return KEY_SPECIAL_ACCESS;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final double brightness = Settings.System.getInt(mContext.getContentResolver(),
-            SCREEN_BRIGHTNESS, 0);
-        preference.setSummary(NumberFormat.getPercentInstance().format(brightness / 255));
+        if (mDataSaverBackend == null) {
+            mDataSaverBackend = new DataSaverBackend(mContext);
+        }
+        final int count = mDataSaverBackend.getWhitelistedCount();
+        preference.setSummary(mContext.getResources().getQuantityString(
+            R.plurals.special_access_summary, count, count));
     }
-
 }

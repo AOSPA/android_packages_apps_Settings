@@ -64,12 +64,13 @@ public class BatteryUtilsTest {
     private static final long TIME_STATE_BACKGROUND = 6000 * UNIT;
 
     private static final int UID = 123;
-    private static final long TIME_EXPECTED_FOREGROUND = 9000;
+    private static final long TIME_EXPECTED_FOREGROUND = 6500;
     private static final long TIME_EXPECTED_BACKGROUND = 6000;
-    private static final long TIME_EXPECTED_ALL = 15000;
+    private static final long TIME_EXPECTED_ALL = 12500;
     private static final double BATTERY_SCREEN_USAGE = 300;
     private static final double BATTERY_SYSTEM_USAGE = 600;
     private static final double BATTERY_OVERACCOUNTED_USAGE = 500;
+    private static final double BATTERY_UNACCOUNTED_USAGE = 700;
     private static final double TOTAL_BATTERY_USAGE = 1000;
     private static final double HIDDEN_USAGE = 200;
     private static final int DISCHARGE_AMOUNT = 80;
@@ -84,6 +85,8 @@ public class BatteryUtilsTest {
     private BatterySipper mScreenBatterySipper;
     @Mock
     private BatterySipper mOvercountedBatterySipper;
+    @Mock
+    private BatterySipper mUnaccountedBatterySipper;
     @Mock
     private BatterySipper mSystemBatterySipper;
     @Mock
@@ -125,6 +128,9 @@ public class BatteryUtilsTest {
 
         mOvercountedBatterySipper.drainType = BatterySipper.DrainType.OVERCOUNTED;
         mOvercountedBatterySipper.totalPowerMah = BATTERY_OVERACCOUNTED_USAGE;
+
+        mUnaccountedBatterySipper.drainType = BatterySipper.DrainType.UNACCOUNTED;
+        mUnaccountedBatterySipper.totalPowerMah = BATTERY_UNACCOUNTED_USAGE;
 
         mBatteryUtils = BatteryUtils.getInstance(RuntimeEnvironment.application);
         mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
@@ -171,12 +177,14 @@ public class BatteryUtilsTest {
         sippers.add(mScreenBatterySipper);
         sippers.add(mSystemBatterySipper);
         sippers.add(mOvercountedBatterySipper);
+        sippers.add(mUnaccountedBatterySipper);
         when(mProvider.isTypeSystem(mSystemBatterySipper))
                 .thenReturn(true);
 
         final double totalUsage = mBatteryUtils.removeHiddenBatterySippers(sippers);
         assertThat(sippers).containsExactly(mNormalBatterySipper);
-        assertThat(totalUsage).isWithin(PRECISION).of(BATTERY_SCREEN_USAGE + BATTERY_SYSTEM_USAGE);
+        assertThat(totalUsage).isWithin(PRECISION).of(
+                BATTERY_SCREEN_USAGE + BATTERY_SYSTEM_USAGE + BATTERY_UNACCOUNTED_USAGE);
     }
 
     @Test
