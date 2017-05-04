@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.view.ViewPager;
@@ -263,32 +264,7 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
             }
         }
 
-        final Context context = getContext();
-        final Configuration origConfig = context.getResources().getConfiguration();
-        final boolean isLayoutRtl = origConfig.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
-        Configuration[] configurations = new Configuration[mEntries.length];
-        for (int i = 0; i < mEntries.length; ++i) {
-            configurations[i] = createConfig(origConfig, i);
-        }
-
-        mPreviewPager = (ViewPager) content.findViewById(R.id.preview_pager);
-        mPreviewPagerAdapter = new PreviewPagerAdapter(context, isLayoutRtl,
-                mPreviewSampleResIds, configurations);
-        mPreviewPager.setAdapter(mPreviewPagerAdapter);
-        mPreviewPager.setCurrentItem(isLayoutRtl ? mPreviewSampleResIds.length - 1 : 0);
-        mPreviewPager.addOnPageChangeListener(mPreviewPageChangeListener);
-
-        mPageIndicator = (DotsPageIndicator) content.findViewById(R.id.page_indicator);
-        if (mPageIndicator != null) {
-            if (mPreviewSampleResIds.length > 1) {
-                mPageIndicator.setViewPager(mPreviewPager);
-                mPageIndicator.setVisibility(View.VISIBLE);
-                mPageIndicator.setOnPageChangeListener(mPageIndicatorPageChangeListener);
-            } else {
-                mPageIndicator.setVisibility(View.GONE);
-            }
-        }
-        setPreviewLayer(mInitialIndex, false);
+        new PageViewLoader(content).execute();
         return root;
     }
 
@@ -402,4 +378,61 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
             setPagerIndicatorContentDescription(position);
         }
     };
+
+    private class PageViewLoader extends AsyncTask<Void, Void, Void> {
+
+        private Context context;
+        private View content;
+        private Configuration origConfig;
+        private Configuration[] configurations;
+
+        private boolean mIsLayoutRtl;
+
+        public PageViewLoader(View view) {
+            context = PreviewSeekBarPreferenceFragment.this.getContext();
+            content = view;
+            origConfig = context.getResources().getConfiguration();
+            configurations = new Configuration[mEntries.length];
+            for (int i = 0; i < mEntries.length; ++i) {
+                configurations[i] = createConfig(origConfig, i);
+            }
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mIsLayoutRtl = origConfig.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+            mPreviewPagerAdapter = new PreviewPagerAdapter(context, mIsLayoutRtl,
+                    mPreviewSampleResIds, configurations);
+            mPageIndicator = (DotsPageIndicator) content.findViewById(R.id.page_indicator);
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mPreviewPager = (ViewPager) content.findViewById(R.id.preview_pager);
+            mPreviewPager.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            mPreviewPager.setAdapter(mPreviewPagerAdapter);
+            mPreviewPager.setCurrentItem(mIsLayoutRtl ? mPreviewSampleResIds.length - 1 : 0);
+            mPreviewPager.addOnPageChangeListener(mPreviewPageChangeListener);
+
+            if (mPageIndicator != null) {
+                mPageIndicator.requestLayout();
+                if (mPreviewSampleResIds.length > 1) {
+                    mPageIndicator.setViewPager(mPreviewPager);
+                    mPageIndicator.setVisibility(View.VISIBLE);
+                    mPageIndicator.setOnPageChangeListener(mPageIndicatorPageChangeListener);
+                } else {
+                    mPageIndicator.setVisibility(View.GONE);
+                }
+            }
+            mPreviewPager.setVisibility(View.VISIBLE);
+            setPreviewLayer(mInitialIndex, false);
+        }
+    }
 }
