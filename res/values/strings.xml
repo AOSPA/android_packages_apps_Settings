@@ -747,7 +747,9 @@
     <!-- Security Settings screen setting option title for the item to take you to the encryption and credential screen -->
     <string name="encryption_and_credential_settings_title">Encryption &amp; credentials</string>
     <!-- Security Settings screen Encryption and crendential summary -->
-    <string name="encryption_and_credential_settings_summary">Phone encrypted</string>
+    <string name="encryption_and_credential_settings_summary" product="default">Phone encrypted</string>
+    <!-- Security Settings screen Encryption and crendential summary -->
+    <string name="encryption_and_credential_settings_summary" product="tablet">Device encrypted</string>
     <!-- Security Settings screen setting option title for the item to take you to the lock screen preference screen [CHAR LIMIT=60] -->
     <string name="lockscreen_settings_title">Lock screen preferences</string>
 
@@ -4302,6 +4304,11 @@
          can't verify user consent. [CHAR LIMIT=NONE] -->
     <string name="touch_filtered_warning">Because an app is obscuring a permission request, Settings
         can’t verify your response.</string>
+    <!-- Warning shown when user input has been blocked due to another app overlaying screen
+         content. Since we don't know what the app is showing on top of the input target, we
+         can't verify user consent. [CHAR LIMIT=NONE] -->
+    <string name="window_obscured_warning">Because another app is displaying on top of these options,
+        Settings can\u2019t respond to your action.</string>
     <!-- Warning that the device data will not be encrypted with password or PIN if
         enabling an accessibility service and there is a secure lock setup. [CHAR LIMIT=NONE] -->
     <string name="enable_service_encryption_warning">If you turn on <xliff:g id="service"
@@ -6601,6 +6608,10 @@
 
     <!-- Sound & notification > Advanced section: Title for managing notification listeners option. [CHAR LIMIT=30] -->
     <string name="manage_notification_access_title">Notification access</string>
+
+    <!-- Notification Access section: Indicates that the work profile admin doesn't allow this
+         notification listener to access work profile notifications [CHAR LIMIT=100] -->
+    <string name="work_profile_notification_access_blocked_summary">Access to work profile notifications is blocked</string>
 
     <!-- Summary of preference to manage notification listeners, when none are enabled -->
     <string name="manage_notification_access_summary_zero">Apps cannot read notifications</string>
