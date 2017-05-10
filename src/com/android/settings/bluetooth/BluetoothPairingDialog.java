@@ -324,7 +324,6 @@ public final class BluetoothPairingDialog extends AlertActivity implements
 
             case BluetoothDevice.PAIRING_VARIANT_CONSENT:
             case BluetoothDevice.PAIRING_VARIANT_OOB_CONSENT:
-                messagePairing.setVisibility(View.VISIBLE);
                 break;
 
             default:
