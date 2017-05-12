@@ -151,7 +151,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private PreferenceCategory mLedsCategory;
     private Preference mChargingLeds;
-    private Preference mNotificationLeds;
 
     @Override
     protected int getMetricsCategory() {
@@ -174,21 +173,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         mLedsCategory = (PreferenceCategory) findPreference("leds");
         mChargingLeds = (Preference) findPreference("charging_light");
-        mNotificationLeds = (Preference) findPreference("notification_light");
         if (mChargingLeds != null
                 && !getResources().getBoolean(
                         com.android.internal.R.bool.config_intrusiveBatteryLed)) {
             mLedsCategory.removePreference(mChargingLeds);
         }
-        if (mNotificationLeds != null
-                && !getResources().getBoolean(
-                        com.android.internal.R.bool.config_intrusiveNotificationLed)) {
-            mLedsCategory.removePreference(mNotificationLeds);
-        }
-        if (mChargingLeds == null && mNotificationLeds == null) {
-            getPreferenceScreen().removePreference(mLedsCategory);
-        }
-
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
         if (mScreenSaverPreference != null
                 && getResources().getBoolean(
