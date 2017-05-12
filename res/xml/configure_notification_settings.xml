@@ -19,11 +19,6 @@
         android:title="@string/configure_notification_settings"
         android:key="configure_notification_settings" >
 
-    <!-- Pulse notification light -->
-    <SwitchPreference
-            android:key="notification_pulse"
-            android:title="@string/notification_pulse_title" />
-
     <!-- Global heads up toggle -->
     <SwitchPreference
             android:key="heads_up_notifications"

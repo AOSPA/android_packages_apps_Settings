@@ -167,8 +167,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 Activity.MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
 
-        PreferenceScreen prefSet = getPreferenceScreen();
-
         mLedsCategory = (PreferenceCategory) findPreference("leds");
         mChargingLeds = (Preference) findPreference("charging_light");
         mNotificationLeds = (Preference) findPreference("notification_light");
