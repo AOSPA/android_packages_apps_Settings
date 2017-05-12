@@ -48,8 +48,6 @@ import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -149,9 +147,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private boolean isRJILMode;
     private final Configuration mCurConfig = new Configuration();
 
-    private PreferenceCategory mLedsCategory;
     private Preference mChargingLeds;
-    private Preference mNotificationLeds;
 
     @Override
     protected int getMetricsCategory() {
@@ -170,23 +166,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 Activity.MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
 
-        PreferenceScreen prefSet = getPreferenceScreen();
-
-        mLedsCategory = (PreferenceCategory) findPreference("leds");
         mChargingLeds = (Preference) findPreference("charging_light");
-        mNotificationLeds = (Preference) findPreference("notification_light");
+
         if (mChargingLeds != null
                 && !getResources().getBoolean(
                         com.android.internal.R.bool.config_intrusiveBatteryLed)) {
-            mLedsCategory.removePreference(mChargingLeds);
-        }
-        if (mNotificationLeds != null
-                && !getResources().getBoolean(
-                        com.android.internal.R.bool.config_intrusiveNotificationLed)) {
-            mLedsCategory.removePreference(mNotificationLeds);
-        }
-        if (mChargingLeds == null && mNotificationLeds == null) {
-            getPreferenceScreen().removePreference(mLedsCategory);
+            getPreferenceScreen().removePreference(mChargingLeds);
         }
 
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
