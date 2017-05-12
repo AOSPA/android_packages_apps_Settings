@@ -47,6 +47,7 @@ import com.android.settings.R;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.ManageApplications;
+import com.android.settings.batterylight.BatteryLightSettings;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.BatteryInfo;
@@ -74,6 +75,7 @@ public class PowerUsageSummary extends PowerUsageBase {
     private static final String KEY_BATTERY_PCT = "battery_pct";
 
     private static final int MENU_STATS_TYPE = Menu.FIRST;
+    private static final int MENU_BATTERY_LIGHT = Menu.FIRST + 2;
     private static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
     @VisibleForTesting
     static final int MENU_ADDITIONAL_BATTERY_INFO = Menu.FIRST + 4;
@@ -184,6 +186,9 @@ public class PowerUsageSummary extends PowerUsageBase {
                     .setAlphabeticShortcut('t');
         }
 
+        MenuItem batteryLight = menu.add(0, MENU_BATTERY_LIGHT, 0, R.string.batterylight_title);
+        batteryLight.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
         menu.add(Menu.NONE, MENU_HIGH_POWER_APPS, Menu.NONE, R.string.high_power_apps);
 
         PowerUsageFeatureProvider powerUsageFeatureProvider =
@@ -242,6 +247,10 @@ public class PowerUsageSummary extends PowerUsageBase {
                     mStatsType = BatteryStats.STATS_SINCE_CHARGED;
                 }
                 refreshStats();
+                return true;
+            case MENU_BATTERY_LIGHT:
+                sa.startPreferencePanel(BatteryLightSettings.class.getName(), null,
+                        R.string.batterylight_title, null, null, 0);
                 return true;
             case MENU_HIGH_POWER_APPS:
                 Bundle args = new Bundle();
