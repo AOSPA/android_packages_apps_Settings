@@ -28,6 +28,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
@@ -43,6 +44,7 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.style.RelativeSizeSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -58,6 +60,8 @@ import com.android.settingslib.net.DataUsageController;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.codeaurora.internal.IExtTelephony;
 
 import static android.net.ConnectivityManager.TYPE_ETHERNET;
 import static android.net.ConnectivityManager.TYPE_WIFI;
@@ -159,8 +163,26 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         switch (item.getItemId()) {
             case R.id.data_usage_menu_cellular_networks: {
                 final Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setComponent(new ComponentName("com.android.phone",
-                        "com.android.phone.MobileNetworkSettings"));
+                IExtTelephony extTelephony =
+                        IExtTelephony.Stub.asInterface(ServiceManager.getService("extphone"));
+                try {
+                    if (extTelephony != null &&
+                            extTelephony.isVendorApkAvailable("com.qualcomm.qti.networksetting")) {
+                        // prepare intent to start qti MobileNetworkSettings activity
+                        intent.setComponent(new ComponentName("com.qualcomm.qti.networksetting",
+                                "com.qualcomm.qti.networksetting.MobileNetworkSettings"));
+                    } else {
+                        // vendor MobileNetworkSettings not available, launch the default activity
+                        Log.d(TAG, "vendor MobileNetworkSettings is not available");
+                        intent.setComponent(new ComponentName("com.android.phone",
+                                "com.android.phone.MobileNetworkSettings"));
+                    }
+                } catch (RemoteException e) {
+                    // could not connect to extphone service, launch the default activity
+                    Log.d(TAG, "couldn't connect to extphone service, launch the default activity");
+                    intent.setComponent(new ComponentName("com.android.phone",
+                            "com.android.phone.MobileNetworkSettings"));
+                }
                 startActivity(intent);
                 return true;
             }
