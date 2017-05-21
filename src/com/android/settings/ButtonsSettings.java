@@ -60,6 +60,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SWAP_NAVIGATION_KEYS   = "swap_navigation_keys";
     private static final String KEY_SWAP_SLIDER_ORDER      = "swap_slider_order";
     private static final String KEY_BUTTON_BRIGHTNESS      = "button_brightness";
+    private static final String KEY_VOLUME_ROCKER          = "volume_rocker_wake";
 
     private static final String KEY_HOME_LONG_PRESS        = "home_key_long_press";
     private static final String KEY_HOME_DOUBLE_TAP        = "home_key_double_tap";
@@ -106,6 +107,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mSwapNavigationkeys;
     private SwitchPreference mSwapSliderOrder;
     private SwitchPreference mButtonBrightness;
+    private SwitchPreference mVolumeRockerWake;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -164,6 +166,12 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             } else {
                 prefScreen.removePreference(mButtonBrightness);
             }
+        }
+
+        /* Volume Rocker Wake */
+        mVolumeRockerWake = (SwitchPreference) findPreference(KEY_VOLUME_ROCKER);
+        if (mVolumeRockerWake != null) {
+            mVolumeRockerWake.setOnPreferenceChangeListener(this);
         }
 
         /* Home Key Long Press */
@@ -335,7 +343,6 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             Settings.System.putIntForUser(getContentResolver(), setting, state ? 1 : 0,
                     UserHandle.USER_CURRENT);
         }
-
         return true;
     }
 
@@ -350,6 +357,8 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             return Settings.System.ALERT_SLIDER_ORDER;
         } else if (preference == mButtonBrightness) {
             return Settings.System.BUTTON_BRIGHTNESS_ENABLED;
+        } else if (preference == mVolumeRockerWake) {
+            return Settings.System.VOLUME_ROCKER_WAKE_ENABLED;
         } else if (preference == mHomeLongPressAction) {
             return Settings.System.KEY_HOME_LONG_PRESS_ACTION;
         } else if (preference == mHomeDoubleTapAction) {
@@ -403,6 +412,9 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
         final boolean buttonBrightnessEnabled = Settings.System.getIntForUser(resolver,
                 Settings.System.BUTTON_BRIGHTNESS_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
 
+        final boolean volumeRockerWakeEnabled = Settings.System.getIntForUser(resolver,
+                Settings.System.VOLUME_ROCKER_WAKE_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
+      
         if (mNavigationBar != null) {
             mNavigationBar.setChecked(navigationBarEnabled);
         }
@@ -421,6 +433,11 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
         if (mButtonBrightness != null) {
             mButtonBrightness.setChecked(buttonBrightnessEnabled);
         }
+
+        if (mVolumeRockerWake != null) {
+            mVolumeRockerWake.setChecked(volumeRockerWakeEnabled);
+        }
+
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
