@@ -60,6 +60,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SWAP_NAVIGATION_KEYS   = "swap_navigation_keys";
     private static final String KEY_SWAP_SLIDER_ORDER      = "swap_slider_order";
     private static final String KEY_BUTTON_BRIGHTNESS      = "button_brightness";
+    private static final String VOLUME_ROCKER_WAKE         = "volume_rocker_wake";
 
     private static final String KEY_HOME_LONG_PRESS        = "home_key_long_press";
     private static final String KEY_HOME_DOUBLE_TAP        = "home_key_double_tap";
@@ -106,6 +107,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mSwapNavigationkeys;
     private SwitchPreference mSwapSliderOrder;
     private SwitchPreference mButtonBrightness;
+    private SwitchPreference mVolumeRockerWake;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -165,6 +167,13 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
                 prefScreen.removePreference(mButtonBrightness);
             }
         }
+
+	/* Volume Rocker Wake */
+        mVolumeRockerWake = (SwitchPreference) findPreference(VOLUME_ROCKER_WAKE);
+        mVolumeRockerWake.setOnPreferenceChangeListener(this);
+        int volumeRockerWake = Settings.System.getInt(getContentResolver(),
+                VOLUME_ROCKER_WAKE, 0);
+        mVolumeRockerWake.setChecked(volumeRockerWake != 0);
 
         /* Home Key Long Press */
         int defaultLongPressOnHomeKeyBehavior = res.getInteger(
@@ -476,6 +485,12 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean handled = handleOnPreferenceChange(preference, newValue);
+        if (preference == mVolumeRockerWake) {
+            boolean value = (Boolean) newValue;
+            Settings.System.putInt(getContentResolver(), VOLUME_ROCKER_WAKE,
+                    value ? 1 : 0);
+            return true;
+        }
         if (handled) {
             reload();
         }

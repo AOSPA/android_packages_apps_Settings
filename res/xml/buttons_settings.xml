@@ -42,6 +42,12 @@
         android:summary="@string/hardware_brightness_keys_summary"
         android:persistent="false" />
 
+    <SwitchPreference
+        android:key="volume_rocker_wake"
+        android:title="@string/volume_rocker_wake_title"
+        android:summary="@string/volume_rocker_wake_summary"
+	android:persistent="false" />
+
     <PreferenceCategory
         android:key="home_key"
         android:title="@string/home_key_title" >
