@@ -62,6 +62,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SWAP_SLIDER_ORDER      = "swap_slider_order";
     private static final String KEY_BUTTON_BRIGHTNESS      = "button_brightness";
     private static final String KEY_ANBI                   = "anbi";
+    private static final String KEY_VOLUME_ROCKER          = "volume_rocker_wake";
 
     private static final String KEY_PIE_SETTINGS           = "pie_settings";
 
@@ -111,6 +112,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mSwapSliderOrder;
     private SwitchPreference mButtonBrightness;
     private SwitchPreference mAnbiPreference;
+    private SwitchPreference mVolumeRockerWake;
 
     private Preference mPieFragment;
 
@@ -186,6 +188,12 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
         mPieFragment = findPreference(KEY_PIE_SETTINGS);
         if (mPieFragment != null) {
             mPieFragment.setOnPreferenceChangeListener(this);
+	}
+
+        /* Volume Rocker Wake */
+        mVolumeRockerWake = (SwitchPreference) findPreference(KEY_VOLUME_ROCKER);
+        if (mVolumeRockerWake != null) {
+            mVolumeRockerWake.setOnPreferenceChangeListener(this);
         }
 
         /* Home Key Long Press */
@@ -362,7 +370,6 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             Settings.System.putIntForUser(getContentResolver(), setting, state ? 1 : 0,
                     UserHandle.USER_CURRENT);
         }
-
         return true;
     }
 
@@ -379,6 +386,8 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             return Settings.System.BUTTON_BRIGHTNESS_ENABLED;
         } else if (preference == mAnbiPreference) {
             return Settings.System.ANBI_ENABLED;
+        } else if (preference == mVolumeRockerWake) {
+            return Settings.System.VOLUME_ROCKER_WAKE;
         } else if (preference == mHomeLongPressAction) {
             return Settings.System.KEY_HOME_LONG_PRESS_ACTION;
         } else if (preference == mHomeDoubleTapAction) {
@@ -435,6 +444,9 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
         final boolean anbiEnabled = Settings.System.getIntForUser(resolver,
                 Settings.System.ANBI_ENABLED, 0, UserHandle.USER_CURRENT) != 0;
 
+        final boolean volumeRockerWakeEnabled = Settings.System.getIntForUser(resolver,
+                Settings.System.VOLUME_ROCKER_WAKE, 1, UserHandle.USER_CURRENT) != 0;
+
         if (mNavigationBar != null) {
             mNavigationBar.setChecked(navigationBarEnabled);
         }
@@ -456,6 +468,10 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
         if (mAnbiPreference != null) {
             mAnbiPreference.setChecked(anbiEnabled);
+	}
+
+        if (mVolumeRockerWake != null) {
+            mVolumeRockerWake.setChecked(volumeRockerWakeEnabled);
         }
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
