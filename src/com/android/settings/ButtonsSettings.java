@@ -60,6 +60,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SWAP_NAVIGATION_KEYS   = "swap_navigation_keys";
     private static final String KEY_SWAP_SLIDER_ORDER      = "swap_slider_order";
     private static final String KEY_BUTTON_BRIGHTNESS      = "button_brightness";
+    private static final String KEY_VOLUME_ROCKER          = "volume_rocker_wake";
 
     private static final String KEY_HOME_LONG_PRESS        = "home_key_long_press";
     private static final String KEY_HOME_DOUBLE_TAP        = "home_key_double_tap";
@@ -106,6 +107,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mSwapNavigationkeys;
     private SwitchPreference mSwapSliderOrder;
     private SwitchPreference mButtonBrightness;
+    private SwitchPreference mVolumeRockerWake;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -164,6 +166,16 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             } else {
                 prefScreen.removePreference(mButtonBrightness);
             }
+        }
+
+
+        /* Volume Rocker Wake */
+        mVolumeRockerWake = (SwitchPreference) findPreference(KEY_VOLUME_ROCKER);
+        if (mVolumeRockerWake != null) {
+            mVolumeRockerWake.setOnPreferenceChangeListener(this);
+            int volumeRockerWake = Settings.System.getInt(getContentResolver(),
+                VOLUME_ROCKER_WAKE, 0);
+            mVolumeRockerWake.setChecked(volumeRockerWake != 0);
         }
 
         /* Home Key Long Press */
@@ -334,6 +346,11 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             }
             Settings.System.putIntForUser(getContentResolver(), setting, state ? 1 : 0,
                     UserHandle.USER_CURRENT);
+        } else if (preference == mVolumeRockerWake) {
+            boolean value = (Boolean) newValue;
+            Settings.System.putInt(getContentResolver(), VOLUME_ROCKER_WAKE,
+                    value ? 1 : 0);
+            return true;
         }
 
         return true;
