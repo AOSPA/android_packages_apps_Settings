@@ -42,6 +42,15 @@
         android:summary="@string/hardware_brightness_keys_summary"
         android:persistent="false" />
 
+<<<<<<< HEAD
+=======
+    <SwitchPreference
+        android:key="volume_rocker_wake"
+        android:title="@string/volume_rocker_wake_title"
+        android:summary="@string/volume_rocker_wake_summary"
+	android:persistent="false" />
+
+>>>>>>> d46660a... Settings: Volume Rocker Wake [2/2]
     <PreferenceCategory
         android:key="home_key"
         android:title="@string/home_key_title" >
