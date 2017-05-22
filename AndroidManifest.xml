@@ -1068,6 +1068,8 @@
                        android:value="com.android.settings.category.device" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.GesturesSettings" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/gestures_settings_summary" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
