@@ -21,6 +21,7 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.backup.BackupSettingsActivityPreferenceController;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
@@ -35,6 +36,8 @@ import java.util.List;
 public class SystemDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "SystemDashboardFrag";
+
+    private static final String KEY_RESET = "reset_dashboard";
 
     @Override
     public int getMetricsCategory() {
@@ -60,6 +63,7 @@ public class SystemDashboardFragment extends DashboardFragment {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new SystemUpdatePreferenceController(context, UserManager.get(context)));
         controllers.add(new AdditionalSystemUpdatePreferenceController(context));
+        controllers.add(new BackupSettingsActivityPreferenceController(context));
         return controllers;
     }
 
@@ -79,6 +83,15 @@ public class SystemDashboardFragment extends DashboardFragment {
                 @Override
                 public List<PreferenceController> getPreferenceControllers(Context context) {
                     return buildPreferenceControllers(context);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add((new BackupSettingsActivityPreferenceController(context)
+                            .getPreferenceKey()));
+                    keys.add(KEY_RESET);
+                    return keys;
                 }
             };
 }

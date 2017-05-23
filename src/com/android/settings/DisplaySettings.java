@@ -27,7 +27,6 @@ import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.AutoBrightnessPreferenceController;
 import com.android.settings.display.AutoRotatePreferenceController;
-import com.android.settings.display.BrightnessLevelPreferenceController;
 import com.android.settings.display.CameraGesturePreferenceController;
 import com.android.settings.display.DozePreferenceController;
 import com.android.settings.display.FontSizePreferenceController;
@@ -50,6 +49,11 @@ import java.util.List;
 
 public class DisplaySettings extends DashboardFragment {
     private static final String TAG = "DisplaySettings";
+
+    public static final String KEY_DISPLAY_SIZE = "screen_zoom";
+
+    private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
+    private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
 
     @Override
     public int getMetricsCategory() {
@@ -85,7 +89,7 @@ public class DisplaySettings extends DashboardFragment {
     private static List<PreferenceController> buildPreferenceControllers(
             Context context, Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AutoBrightnessPreferenceController(context));
+        controllers.add(new AutoBrightnessPreferenceController(context, KEY_AUTO_BRIGHTNESS));
         controllers.add(new AutoRotatePreferenceController(context));
         controllers.add(new CameraGesturePreferenceController(context));
         controllers.add(new DozePreferenceController(context));
@@ -100,11 +104,10 @@ public class DisplaySettings extends DashboardFragment {
         controllers.add(new DoubleTapScreenPreferenceController(
                 context, lifecycle, ambientDisplayConfig, UserHandle.myUserId()));
         controllers.add(new TapToWakePreferenceController(context));
-        controllers.add(new TimeoutPreferenceController(context));
+        controllers.add(new TimeoutPreferenceController(context, KEY_SCREEN_TIMEOUT));
         controllers.add(new VrDisplayPreferenceController(context));
         controllers.add(new WallpaperPreferenceController(context));
         controllers.add(new ThemePreferenceController(context));
-        controllers.add(new BrightnessLevelPreferenceController(context));
         return controllers;
     }
 
@@ -119,6 +122,13 @@ public class DisplaySettings extends DashboardFragment {
                     sir.xmlResId = R.xml.display_settings;
                     result.add(sir);
                     return result;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = new ArrayList<>();
+                    keys.add(KEY_DISPLAY_SIZE);
+                    return keys;
                 }
 
                 @Override

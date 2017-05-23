@@ -747,7 +747,9 @@
     <!-- Security Settings screen setting option title for the item to take you to the encryption and credential screen -->
     <string name="encryption_and_credential_settings_title">Encryption &amp; credentials</string>
     <!-- Security Settings screen Encryption and crendential summary -->
-    <string name="encryption_and_credential_settings_summary">Phone encrypted</string>
+    <string name="encryption_and_credential_settings_summary" product="default">Phone encrypted</string>
+    <!-- Security Settings screen Encryption and crendential summary -->
+    <string name="encryption_and_credential_settings_summary" product="tablet">Device encrypted</string>
     <!-- Security Settings screen setting option title for the item to take you to the lock screen preference screen [CHAR LIMIT=60] -->
     <string name="lockscreen_settings_title">Lock screen preferences</string>
 
@@ -1628,6 +1630,8 @@
     <string name="wifi_wakeup">Turn on Wi\u2011Fi automatically</string>
     <!-- Checkbox summary for option to enable Wi-Fi when high quality saved networks are nearby-->
     <string name="wifi_wakeup_summary">Wi\u2011Fi will turn back on near high\u2011quality saved networks, like your home network</string>
+    <!-- Checkbox summary for Wi-Fi wakeup option to explain that Wi-Fi wakeup is disabled because Wi-Fi scanning is turned off -->
+    <string name="wifi_wakeup_summary_scanning_disabled">Unavailable because Wi\u2011Fi scanning is turned off</string>
     <!-- Checkbox title for option to toggle poor network detection -->
     <string name="wifi_poor_network_detection">Avoid poor connections</string>
     <!-- Checkbox summary for option to toggle poor network detection -->
@@ -2122,6 +2126,9 @@
     <string name="sound_settings">Sound</string>
     <!-- DO NOT TRANSLATE Summary placeholder -->
     <string name="summary_placeholder" translatable="false">&#160;</string>
+    <!-- DO NOT TRANSLATE Summary placeholder reserving 2 lines -->
+    <string name="summary_two_lines_placeholder" translatable="false">&#160;\n&#160;</string>
+
     <!-- DO NOT TRANSLATE Empty summary for dynamic preferences -->
     <string name="summary_empty" translatable="false"></string>
     <!-- Sound settings screen, volume title -->
@@ -2376,7 +2383,7 @@
     <!-- [CHAR LIMIT=40] Display settings screen, setting option name to change whether the device wakes up when a lift gesture is detected. -->
     <string name="lift_to_wake_title">Lift to wake</string>
     <!-- [CHAR LIMIT=30] Display settings screen, setting option name to change whether the ambient display feature is enabled. -->
-    <string name="doze_title">Incoming notification screen</string>
+    <string name="doze_title">Ambient display</string>
     <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the ambient display feature. -->
     <string name="doze_summary">Wake screen when you receive notifications</string>
     <!-- [CHAR LIMIT=30] Sound & display settings screen, setting option name to change font size -->
@@ -3740,6 +3747,9 @@
     <!-- Manage applications, individual application info screen, summary for the option which will trigger application info in it's installer [CHAR_LIMIT=50] -->
     <string name="app_install_details_summary">App installed from <xliff:g id="app_store">%1$s</xliff:g></string>
 
+    <!-- Manage applications, individual application info screen, summary for the option which will trigger instant app info in it's installer [CHAR_LIMIT=50] -->
+    <string name="instant_app_details_summary">More info on <xliff:g id="app_store">%1$s</xliff:g></string>
+
     <!-- App Ops Settings --> <skip />
     <!-- [CHAR LIMIT=NONE] App ops settings title, on main settings screen. If clicked, the user is taken to a settings screen for app operations -->
     <string name="app_ops_settings">App ops</string>
@@ -3928,8 +3938,6 @@
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
     <string name="default_keyboard_layout">Default</string>
 
-    <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to mouse and trackpad devices. [CHAR LIMIT=40] -->
-    <string name="pointer_settings_category">Mouse/trackpad</string>
     <!-- On Languages & input settings screen, setting summary.  Setting for mouse pointer speed. [CHAR LIMIT=35] -->
     <string name="pointer_speed">Pointer speed</string>
 
@@ -4299,6 +4307,11 @@
          can't verify user consent. [CHAR LIMIT=NONE] -->
     <string name="touch_filtered_warning">Because an app is obscuring a permission request, Settings
         can’t verify your response.</string>
+    <!-- Warning shown when user input has been blocked due to another app overlaying screen
+         content. Since we don't know what the app is showing on top of the input target, we
+         can't verify user consent. [CHAR LIMIT=NONE] -->
+    <string name="window_obscured_warning">Because another app is displaying on top of these options,
+        Settings can\u2019t respond to your action.</string>
     <!-- Warning that the device data will not be encrypted with password or PIN if
         enabling an accessibility service and there is a secure lock setup. [CHAR LIMIT=NONE] -->
     <string name="enable_service_encryption_warning">If you turn on <xliff:g id="service"
@@ -4469,10 +4482,10 @@
     <!-- Title for the cellular network in power use UI(i.e. Mobile network scanning: 30% of battery usage) [CHAR_LIMIT=40] -->
     <string name="device_cellular_network">Mobile network scanning</string>
 
-    <!-- Label for time since last full charge in power use UI, i.e. "7 h 20 min ago" [CHAR_LIMIT=60] -->
-    <string name="power_last_full_charge_summary"><xliff:g id="time">%1$s</xliff:g> ago</string>
-    <!-- Label for list of apps using battery in power use UI [CHAR_LIMIT=120] -->
-    <string name="power_usage_list_summary">App usage since full charge (<xliff:g id="time">%1$s</xliff:g> ago)</string>
+    <!-- Label for time since last full charge in power use UI, i.e. "7 h 20 min ago". Note: ^1 should be used in all translations [CHAR_LIMIT=60] -->
+    <string name="power_last_full_charge_summary"><xliff:g id="time">^1</xliff:g> ago</string>
+    <!-- Label for list of apps using battery in power use UI. Note: ^1 should be used in all translations[CHAR_LIMIT=120] -->
+    <string name="power_usage_list_summary">App usage since full charge (<xliff:g id="time">^1</xliff:g> ago)</string>
     <!-- Description for the screen usage item [CHAR_LIMIT=120] -->
     <string name="screen_usage_summary">Amount of time screen has been on since full charge</string>
     <!-- Label for list of different types using battery in power use UI [CHAR_LIMIT=60] -->
@@ -4534,8 +4547,8 @@
     <string name="power_wifi">Wi\u2011Fi</string>
     <!-- Label for power consumed by Bluetooth -->
     <string name="power_bluetooth">Bluetooth</string>
-    <!-- Label for power consumed by Cell idle -->
-    <string name="power_cell">Cell standby</string>
+    <!-- Label for power consumed by Mobile network idle -->
+    <string name="power_cell">Mobile network standby</string>
     <!-- Label for power consumed by Calling -->
     <string name="power_phone">Voice calls</string>
     <!-- Label for power consumed when Idle -->
@@ -4671,8 +4684,8 @@
     <!-- Representation of a mAh value. [CHAR LIMIT=NONE] -->
     <string name="mah"><xliff:g id="number" example="30">%d</xliff:g> mAh</string>
 
-    <!-- Description for battery usage time for an app, i.e. Used for 30min. [CHAR LIMIT=60] -->
-    <string name="battery_used_for">Used for %1$s</string>
+    <!-- Description for battery usage time for an app, i.e. Used for 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
+    <string name="battery_used_for">Used for <xliff:g id="time">^1</xliff:g></string>
     <!-- Description for battery usage info for an app, i.e. 60% used by facebook. [CHAR LIMIT=60] -->
     <string name="battery_used_by"><xliff:g id="percent">%1$s</xliff:g> used by <xliff:g id="app">%2$s</xliff:g></string>
     <!-- Description for percentage of battery usage for an app, i.e. Screen: 30% of overall battery. [CHAR LIMIT=60] -->
@@ -4683,9 +4696,9 @@
     <string name="battery_last_full_charge">Last full charge</string>
     <!-- Description for text in battery footer. [CHAR LIMIT=120] -->
     <string name="battery_footer_summary">Remaining battery time is approximate and can change based on usage</string>
-    <!-- Title for battery usage detail in foreground. [CHAR LIMIT=80] -->
+    <!-- Title for text that shows the amount of time an app has been running while in the foreground. [CHAR LIMIT=80] -->
     <string name="battery_detail_foreground">While in active use</string>
-    <!-- Title for battery usage detail in background. [CHAR LIMIT=80] -->
+    <!-- Title for text that shows the amount of time an app has been running while in the background. [CHAR LIMIT=80] -->
     <string name="battery_detail_background">While in background</string>
     <!-- Title for battery usage amount by this app. [CHAR LIMIT=80] -->
     <string name="battery_detail_power_usage">Battery usage</string>
@@ -4840,8 +4853,6 @@
     <string name="voice_search_settings_title">Voice search</string>
     <!-- Title of keyboard settings list item within voice input/output settings -->
     <string name="keyboard_settings_title">Android keyboard</string>
-    <!-- Title for the 'voice input' category of voice input/output settings -->
-    <string name="voice_category">Speech</string>
 
     <!-- Voice input settings --><skip />
     <!-- [CHAR_LIMIT=NONE] Name of the settings item to open the voice input settings. -->
@@ -6360,6 +6371,12 @@
     <!-- Sound: Title for the option defining the default notification sound. [CHAR LIMIT=30] -->
     <string name="notification_ringtone_title">Default notification sound</string>
 
+    <!-- Sound: Sound title for apps that have not provided a title. [CHAR LIMIT=30] -->
+    <string name="notification_unknown_sound_title">App provided sound</string>
+
+    <!-- Notification sound summary when chosen sound is the system default. -->
+    <string name="notification_sound_default">Default notification sound</string>
+
     <!-- Sound: Title for the option defining the default alarm sound. [CHAR LIMIT=30] -->
     <string name="alarm_ringtone_title">Default alarm sound</string>
 
@@ -6498,6 +6515,9 @@
     <!-- Configure Notifications: Work profile section header [CHAR LIMIT=30] -->
     <string name="profile_section_header">Work notifications</string>
 
+    <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=30] -->
+    <string name="notification_badging_title">Allow icon badges</string>
+
     <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
     <string name="notification_pulse_title">Blink light</string>
 
@@ -6547,7 +6567,10 @@
     <!-- Notification Settings: Title for the option managing notifications per application. [CHAR LIMIT=30] -->
     <string name="app_notifications_title">Notifications</string>
 
-    <!-- [CHAR LIMIT=100] Notification importance slider title -->
+    <!-- [CHAR LIMIT=100] Notification channel title -->
+    <string name="notification_channel_title">Notification category</string>
+
+    <!-- [CHAR LIMIT=100] Notification importance screen title -->
     <string name="notification_importance_title">Importance</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance: unspecified importance level description -->
@@ -6555,6 +6578,12 @@
 
     <!-- [CHAR LIMIT=100] Notification Importance: blocked importance level description -->
     <string name="notification_importance_blocked">Never show notifications</string>
+
+    <!-- [CHAR LIMIT=100] Notification Importance template for the channel importance summary -->
+    <string name="notification_importance_divider" translatable="false"><xliff:g id="importance_title">%1$s</xliff:g>: <xliff:g id="importance_summary">%2$s</xliff:g></string>
+
+    <!-- Importance title strings for the Importance page. Also the second part of the importance
+     summary on the channel page-->
 
     <!-- [CHAR LIMIT=100] Notification Importance: min importance level description -->
     <string name="notification_importance_min">No sound or visual interruption</string>
@@ -6568,20 +6597,23 @@
     <!-- [CHAR LIMIT=100] Notification Importance: high importance level description -->
     <string name="notification_importance_high">Make sound and pop on screen</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance summary: min importance level description -->
-    <string name="notification_importance_min_summary">Low: No sound or visual interruption</string>
+    <!-- Importance title strings for the Importance page. Also the first part of the importance
+     summary on the channel page-->
 
-    <!-- [CHAR LIMIT=100] Notification Importance summary: low importance level description -->
-    <string name="notification_importance_low_summary">Medium: No sound</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: min importance level title -->
+    <string name="notification_importance_min_title">Low</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance summary: normal importance level description -->
-    <string name="notification_importance_default_summary">High: Make sound</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: low importance level title -->
+    <string name="notification_importance_low_title">Medium</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance summary: high importance level description -->
-    <string name="notification_importance_high_summary">Urgent: Make sound and pop on screen</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: normal importance level title -->
+    <string name="notification_importance_default_title">High</string>
 
-    <!-- [CHAR LIMIT=40] Notification importance title -->
-    <string name="allow_sound">Allow Sound</string>
+    <!-- [CHAR LIMIT=100] Notification Importance title: high importance level title -->
+    <string name="notification_importance_high_title">Urgent</string>
+
+    <!-- [CHAR LIMIT=40 BACKUP_MESSAGE_ID:6585849855452076626] Notification importance title -->
+    <string name="allow_sound">Allow sound</string>
 
     <!-- [CHAR LIMIT=180] Notification importance summary -->
     <string name="show_silently_summary">Don\'t make sound, vibrate, or peek these notifications into view on the current screen.</string>
@@ -6591,6 +6623,10 @@
 
     <!-- Sound & notification > Advanced section: Title for managing notification listeners option. [CHAR LIMIT=30] -->
     <string name="manage_notification_access_title">Notification access</string>
+
+    <!-- Notification Access section: Indicates that the work profile admin doesn't allow this
+         notification listener to access work profile notifications [CHAR LIMIT=100] -->
+    <string name="work_profile_notification_access_blocked_summary">Access to work profile notifications is blocked</string>
 
     <!-- Summary of preference to manage notification listeners, when none are enabled -->
     <string name="manage_notification_access_summary_zero">Apps cannot read notifications</string>
@@ -6683,6 +6719,12 @@
     <!-- [CHAR LIMIT=NONE] Text when loading app list in notification settings -->
     <string name="loading_notification_apps">Loading apps...</string>
 
+    <!-- [CHAR LIMIT=NONE] Text appearing when app notifications are off -->
+    <string name="app_notifications_off_desc">Android is blocking this app\'s notifications from appearing on this device</string>
+
+    <!-- [CHAR LIMIT=NONE] Text appearing when channel notifications are off -->
+    <string name="channel_notifications_off_desc">Android is blocking this category of notifications from appearing on this device</string>
+
     <!-- [CHAR LIMIT=NONE] App notification settings: channels title -->
     <string name="notification_channels">Categories</string>
 
@@ -6730,11 +6772,8 @@
     <!-- [CHAR LIMIT=NONE] Channel notification settings: Block option description-->
     <string name="notification_content_block_summary">Never show notifications in the shade or on peripheral devices</string>
 
-    <!-- [CHAR LIMIT=NONE] Channel notification settings: Badging option title -->
-    <string name="notification_badge_title">Badge app icon</string>
-
-    <!-- [CHAR LIMIT=NONE] Channel notification settings: Badge option description-->
-    <string name="notification_badge_summary">Show notifications as badges on the Home app, if supported.</string>
+    <!-- [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID:7166470350070693657] Channel notification settings: Badging option title -->
+    <string name="notification_badge_title">Allow icon badge</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Override DND option title -->
     <string name="app_notification_override_dnd_title">Override Do Not Disturb</string>
@@ -7046,42 +7085,30 @@
     <!-- Encryption interstitial button to continue with the shown setting.  Appears on screen that asks the user to opt in/out of encrypting device with a pin/pattern/password. [CHAR LIMIT=NONE] -->
     <string name="encryption_continue_button">Continue</string>
 
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pin">
-   You can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
-   \n\nThis helps protect data on lost or stolen devices.
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=2317181134653424679] -->
+    <string name="encryption_interstitial_message_pin">You can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
+   \n\nThis helps protect data on lost or stolen devices. Require PIN to start your device?
    </string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pattern">
-   You can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
-   \n\nThis helps protect data on lost or stolen devices.
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=7081249914068568570] -->
+    <string name="encryption_interstitial_message_pattern">You can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
+   \n\nThis helps protect data on lost or stolen devices. Require pattern to start your device?
    </string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_password">
-   You can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
-   \n\nThis helps protect data on lost or stolen devices.
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=7796567133897436443] -->
+    <string name="encryption_interstitial_message_password">You can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.
+   \n\nThis helps protect data on lost or stolen devices. Require password to start your device?
    </string>
 
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pin_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices.</string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_pattern_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices.</string>
-    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] -->
-    <string name="encryption_interstitial_message_password_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices.</string>
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a PIN to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=4550632760119547492] -->
+    <string name="encryption_interstitial_message_pin_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your PIN before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require PIN to start your device?</string>
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a pattern to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=932184823193006087] -->
+    <string name="encryption_interstitial_message_pattern_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your pattern before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require pattern to start your device?</string>
+    <!-- Message shown on encryption interstitial to ask the user whether or not they want to use a password to encrypt the device while setting up fingerprint unlock. [CHAR LIMIT=NONE] [BACKUP_MESSAGE_ID=5560954719370251702] -->
+    <string name="encryption_interstitial_message_password_for_fingerprint">In addition to using your fingerprint to unlock your device, you can further protect this device by requiring your password before it starts up. Until the device starts up, it can\u2019t receive calls, messages, or notifications, including alarms.\n\nThis helps protect data on lost or stolen devices. Require password to start your device></string>
 
-    <!-- Radio button text that require a PIN to start device [CHAR LIMIT=NONE] -->
-    <string name="encrypt_require_pin">Require PIN to start device</string>
-    <!-- Radio button text that require a pattern to start device [CHAR LIMIT=NONE] -->
-    <string name="encrypt_require_pattern">Require pattern to start device</string>
-    <!-- Radio button text that require a password to start device [CHAR LIMIT=NONE] -->
-    <string name="encrypt_require_password">Require password to start device</string>
-
-    <!-- Radio button text that doesn't require a PIN to decrypt [CHAR LIMIT=NONE] -->
-    <string name="encrypt_dont_require_pin">No thanks</string>
-    <!-- Radio button text that doesn't require a pattern to decrypt [CHAR LIMIT=NONE] -->
-    <string name="encrypt_dont_require_pattern">No thanks</string>
-    <!-- Radio button text that doesn't require a password to decrypt [CHAR LIMIT=NONE] -->
-    <string name="encrypt_dont_require_password">No thanks</string>
+    <!-- Button label to say yes to the question of whether to require PIN/password/pattern to start your device. [CHAR LIMIT=20] [BACKUP_MESSAGE_ID=4439509435889513411] -->
+    <string name="encryption_interstitial_yes">Yes</string>
+    <!-- Button label to say no to the question of whether to require PIN/password/pattern to start your device. [CHAR LIMIT=20] [BACKUP_MESSAGE_ID=8935031349097025137] -->
+    <string name="encryption_interstitial_no">No</string>
 
    <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
    <string name="encrypt_talkback_dialog_require_pin">Require PIN?</string>
@@ -7615,8 +7642,6 @@
     <string name="accessibility_lock_screen_progress"><xliff:g id="count" example="1">%1$d</xliff:g> of <xliff:g id="count" example="1">%2$d</xliff:g> characters used</string>
 
     <!-- System Alert Window settings -->
-    <!-- Title of display overlay preference item [CHAR LIMIT=55] -->
-    <string name="draw_overlay_title">Apps that can display over other apps</string>
     <!-- Title of display overlay screen [CHAR LIMIT=30] -->
     <string name="draw_overlay">Display over other apps</string>
     <!-- Settings title in main settings screen for SYSTEM_ALERT_WINDOW [CHAR LIMIT=45] -->
@@ -7681,11 +7706,11 @@
     <!-- Summary of app not allowed to write system settings [CHAR LIMIT=45] -->
     <string name="write_settings_off">No</string>
     <!-- Summary of app trusted to install apps [CHAR LIMIT=45] -->
-    <string name="external_source_trusted">Yes</string>
+    <string name="external_source_trusted">Allowed</string>
     <!-- Summary of app not trusted to install apps [CHAR LIMIT=45] -->
-    <string name="external_source_untrusted">No</string>
+    <string name="external_source_untrusted">Not allowed</string>
     <!-- Title of switch preference that controls whether an external app source is trusted or not [CHAR LIMIT=50] -->
-    <string name="external_source_switch_title">Allow app installs</string>
+    <string name="external_source_switch_title">Allow from this source</string>
 
     <!-- Title of setting that controls gesture to open camera [CHAR LIMIT=40] -->
     <string name="camera_gesture_title">Double twist for camera</string>
@@ -8174,8 +8199,11 @@
     <!-- Summary for Bluetooth when disabled. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_disabled">Not visible to other devices</string>
 
-    <!-- Summary for Bluetooth when connected. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_connected_summary">Connected to </string>
+    <!-- Summary for Bluetooth when connected to one device. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_connected_summary">Connected to <xliff:g name="device">%1$s</xliff:g></string>
+
+    <!-- Summary for Bluetooth when connected to multiple devices. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_connected_multiple_devices_summary">Connected to multiple devices</string>
 
     <!-- [CHAR LIMIT=60] Name of dev option called "System UI demo mode" -->
     <string name="demo_mode">System UI demo mode</string>
@@ -8624,9 +8652,16 @@
     <string name="autofill_app">Autofill service</string>
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
     <string name="autofill_keywords">auto, fill, autofill</string>
-    <!-- Title of the warning dialog for setting the auto-fill app. [CHAR_LIMIT=NONE] -->
+
+    <!-- Message of the warning dialog for setting the auto-fill app. [CHAR_LIMIT=NONE] -->
     <string name="autofill_confirmation_message">
-        Make <xliff:g id="app_name">%1$s</xliff:g> your autofill app? <xliff:g id="app_name">%1$s</xliff:g> will be able to read your screen and fill fields in other apps.
+        <![CDATA[
+        <b>Make sure you trust this app</b>
+        <br/>
+        <br/>
+        <xliff:g id="app_name" example="Google Autofill">%1$s</xliff:g> uses what\'s on
+        your screen to determine what can be autofilled.
+        ]]>
     </string>
 
     <!-- Name of setting for switching device theme [CHAR LIMIT=60] -->

@@ -169,8 +169,33 @@ public class StorageAsyncLoaderTest {
         assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(11L);
     }
 
-    private ApplicationInfo addPackage(
-            String packageName, long cacheSize, long codeSize, long dataSize, int category) {
+    @Test
+    public void testVideoAppsAreFiltered() throws Exception {
+        addPackage(PACKAGE_NAME_1, 0, 1, 10, ApplicationInfo.CATEGORY_VIDEO);
+
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(PRIMARY_USER_ID).videoAppsSize).isEqualTo(11L);
+        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(0);
+    }
+
+    @Test
+    public void testRemovedPackageDoesNotCrash() throws Exception {
+        ApplicationInfo info = new ApplicationInfo();
+        info.packageName = PACKAGE_NAME_1;
+        info.category = ApplicationInfo.CATEGORY_UNDEFINED;
+        mInfo.add(info);
+        when(mSource.getStatsForPackage(anyString(), anyString(), any(UserHandle.class)))
+                .thenThrow(new IllegalStateException());
+
+        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+
+        // Should not crash.
+    }
+
+    private ApplicationInfo addPackage(String packageName, long cacheSize, long codeSize,
+            long dataSize, int category) throws Exception {
         StorageStatsSource.AppStorageStats storageStats =
                 mock(StorageStatsSource.AppStorageStats.class);
         when(storageStats.getCodeBytes()).thenReturn(codeSize);

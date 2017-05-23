@@ -17,21 +17,34 @@
 package com.android.settings.applications;
 
 
-import android.app.Activity;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.BatteryStats;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceManager;
+import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
 import android.widget.Button;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -39,8 +52,8 @@ import com.android.settings.applications.instantapps.InstantAppButtonsController
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
+import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,22 +65,13 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class InstalledAppDetailsTest {
+
+    private static final String PACKAGE_NAME = "test_package_name";
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
@@ -86,6 +90,8 @@ public final class InstalledAppDetailsTest {
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
     private BatteryStats.Uid mUid;
+    @Mock
+    private PackageManager mPackageManager;
 
     private InstalledAppDetails mAppDetail;
     private Context mShadowContext;
@@ -93,14 +99,15 @@ public final class InstalledAppDetailsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mShadowContext = RuntimeEnvironment.application;
 
+        mShadowContext = RuntimeEnvironment.application;
         mAppDetail = spy(new InstalledAppDetails());
 
         mBatterySipper.drainType = BatterySipper.DrainType.IDLE;
         mBatterySipper.uidObj = mUid;
         doReturn(mActivity).when(mAppDetail).getActivity();
         doReturn(mShadowContext).when(mAppDetail).getContext();
+        doReturn(mPackageManager).when(mActivity).getPackageManager();
 
         // Default to not considering any apps to be instant (individual tests can override this).
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
@@ -175,6 +182,24 @@ public final class InstalledAppDetailsTest {
 
         assertThat(mAppDetail.ensurePackageInfoAvailable(mActivity)).isTrue();
         verify(mActivity, never()).finishAndRemoveTask();
+    }
+
+    @Test
+    public void packageSizeChange_isOtherPackage_shouldNotRefreshUi() {
+        ReflectionHelpers.setField(mAppDetail, "mPackageName", PACKAGE_NAME);
+        mAppDetail.onPackageSizeChanged("Not_" + PACKAGE_NAME);
+
+        verify(mAppDetail, never()).refreshUi();
+    }
+
+    @Test
+    public void packageSizeChange_isOwnPackage_shouldRefreshUi() {
+        doReturn(Boolean.TRUE).when(mAppDetail).refreshUi();
+        ReflectionHelpers.setField(mAppDetail, "mPackageName", PACKAGE_NAME);
+
+        mAppDetail.onPackageSizeChanged(PACKAGE_NAME);
+
+        verify(mAppDetail).refreshUi();
     }
 
     @Test
@@ -314,5 +339,53 @@ public final class InstalledAppDetailsTest {
         fragment.maybeAddInstantAppButtons();
         verify(buttonsController).setPackageName(anyString());
         verify(buttonsController).show();
+    }
+
+    @Test
+    public void instantApps_removeCorrectPref() {
+        PreferenceScreen mockPreferenceScreen = mock(PreferenceScreen.class);
+        PreferenceManager mockPreferenceManager = mock(PreferenceManager.class);
+        AppDomainsPreference mockAppDomainsPref = mock(AppDomainsPreference.class);
+        Preference mockLaunchPreference = mock(Preference.class);
+        PackageInfo mockPackageInfo = mock(PackageInfo.class);
+        PackageManager mockPackageManager = mock(PackageManager.class);
+        ReflectionHelpers.setField(
+                mAppDetail, "mLaunchPreference", mockLaunchPreference);
+        ReflectionHelpers.setField(
+                mAppDetail, "mInstantAppDomainsPreference", mockAppDomainsPref);
+        ReflectionHelpers.setField(
+                mAppDetail, "mPreferenceManager", mockPreferenceManager);
+        ReflectionHelpers.setField(
+                mAppDetail, "mPackageInfo", mockPackageInfo);
+        ReflectionHelpers.setField(
+                mAppDetail, "mPm", mockPackageManager);
+        when(mockPreferenceManager.getPreferenceScreen()).thenReturn(mockPreferenceScreen);
+
+        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+                (InstantAppDataProvider) (i -> false));
+        mAppDetail.prepareInstantAppPrefs();
+
+        // For the non instant case we remove the app domain pref, and leave the launch pref
+        verify(mockPreferenceScreen).removePreference(mockAppDomainsPref);
+        verify(mockPreferenceScreen, never()).removePreference(mockLaunchPreference);
+
+        // For the instant app case we remove the launch preff, and leave the app domain pref
+        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+                (InstantAppDataProvider) (i -> true));
+
+        mAppDetail.prepareInstantAppPrefs();
+        verify(mockPreferenceScreen).removePreference(mockLaunchPreference);
+        // Will be 1 still due to above call
+        verify(mockPreferenceScreen, times(1))
+                .removePreference(mockAppDomainsPref);
+    }
+
+    @Test
+    public void onActivityResult_uninstalledUpdates_shouldInvalidateOptionsMenu() {
+        doReturn(true).when(mAppDetail).refreshUi();
+
+        mAppDetail.onActivityResult(InstalledAppDetails.REQUEST_UNINSTALL, 0, mock(Intent.class));
+
+        verify(mActivity).invalidateOptionsMenu();
     }
 }

@@ -65,6 +65,8 @@ public class StorageItemPreferenceController extends PreferenceController {
     @VisibleForTesting
     static final String GAME_KEY = "pref_games";
     @VisibleForTesting
+    static final String MOVIES_KEY = "pref_movies";
+    @VisibleForTesting
     static final String OTHER_APPS_KEY = "pref_other_apps";
     @VisibleForTesting
     static final String SYSTEM_KEY = "pref_system";
@@ -76,12 +78,14 @@ public class StorageItemPreferenceController extends PreferenceController {
     private final StorageVolumeProvider mSvp;
     private VolumeInfo mVolume;
     private int mUserId;
-    private long mSystemSize;
+    private long mUsedBytes;
     private long mTotalSize;
 
+    private PreferenceScreen mScreen;
     private StorageItemPreference mPhotoPreference;
     private StorageItemPreference mAudioPreference;
     private StorageItemPreference mGamePreference;
+    private StorageItemPreference mMoviesPreference;
     private StorageItemPreference mAppPreference;
     private StorageItemPreference mFilePreference;
     private StorageItemPreference mSystemPreference;
@@ -123,6 +127,9 @@ public class StorageItemPreferenceController extends PreferenceController {
             case GAME_KEY:
                 intent = getGamesIntent();
                 break;
+            case MOVIES_KEY:
+                intent = getMoviesIntent();
+                break;
             case OTHER_APPS_KEY:
                 // Because we are likely constructed with a null volume, this is theoretically
                 // possible.
@@ -163,6 +170,22 @@ public class StorageItemPreferenceController extends PreferenceController {
      */
     public void setVolume(VolumeInfo volume) {
         mVolume = volume;
+        setFilesPreferenceVisibility();
+    }
+
+    private void setFilesPreferenceVisibility() {
+        if (mScreen != null) {
+            final VolumeInfo sharedVolume = mSvp.findEmulatedForPrivate(mVolume);
+            // If we don't have a shared volume for our internal storage (or the shared volume isn't
+            // mounted as readable for whatever reason), we should hide the File preference.
+            final boolean hideFilePreference =
+                    (sharedVolume == null) || !sharedVolume.isMountedReadable();
+            if (hideFilePreference) {
+                mScreen.removePreference(mFilePreference);
+            } else {
+                mScreen.addPreference(mFilePreference);
+            }
+        }
     }
 
     /**
@@ -173,6 +196,7 @@ public class StorageItemPreferenceController extends PreferenceController {
 
         PackageManager pm = mContext.getPackageManager();
         badgePreference(pm, userHandle, mPhotoPreference);
+        badgePreference(pm, userHandle, mMoviesPreference);
         badgePreference(pm, userHandle, mAudioPreference);
         badgePreference(pm, userHandle, mGamePreference);
         badgePreference(pm, userHandle, mAppPreference);
@@ -201,12 +225,16 @@ public class StorageItemPreferenceController extends PreferenceController {
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
+        mScreen = screen;
         mPhotoPreference = (StorageItemPreference) screen.findPreference(PHOTO_KEY);
         mAudioPreference = (StorageItemPreference) screen.findPreference(AUDIO_KEY);
         mGamePreference = (StorageItemPreference) screen.findPreference(GAME_KEY);
+        mMoviesPreference = (StorageItemPreference) screen.findPreference(MOVIES_KEY);
         mAppPreference = (StorageItemPreference) screen.findPreference(OTHER_APPS_KEY);
         mSystemPreference = (StorageItemPreference) screen.findPreference(SYSTEM_KEY);
         mFilePreference = (StorageItemPreference) screen.findPreference(FILES_KEY);
+
+        setFilesPreferenceVisibility();
     }
 
     public void onLoadFinished(StorageAsyncLoader.AppsStorageResult data) {
@@ -217,18 +245,31 @@ public class StorageItemPreferenceController extends PreferenceController {
         mAudioPreference.setStorageSize(
                 data.musicAppsSize + data.externalStats.audioBytes, mTotalSize);
         mGamePreference.setStorageSize(data.gamesSize, mTotalSize);
+        mMoviesPreference.setStorageSize(data.videoAppsSize, mTotalSize);
         mAppPreference.setStorageSize(data.otherAppsSize, mTotalSize);
-        if (mSystemPreference != null) {
-            mSystemPreference.setStorageSize(mSystemSize + data.systemSize, mTotalSize);
-        }
 
-        long unattributedBytes = data.externalStats.totalBytes - data.externalStats.audioBytes
-                - data.externalStats.videoBytes - data.externalStats.imageBytes;
-        mFilePreference.setStorageSize(unattributedBytes, mTotalSize);
+        long unattributedExternalBytes =
+                data.externalStats.totalBytes
+                        - data.externalStats.audioBytes
+                        - data.externalStats.videoBytes
+                        - data.externalStats.imageBytes;
+        mFilePreference.setStorageSize(unattributedExternalBytes, mTotalSize);
+
+        // We define the system size as everything we can't classify.
+        if (mSystemPreference != null) {
+            mSystemPreference.setStorageSize(
+                    mUsedBytes
+                            - data.externalStats.totalBytes
+                            - data.musicAppsSize
+                            - data.gamesSize
+                            - data.videoAppsSize
+                            - data.otherAppsSize,
+                    mTotalSize);
+        }
     }
 
-    public void setSystemSize(long systemSizeBytes) {
-        mSystemSize = systemSizeBytes;
+    public void setUsedSize(long usedSizeBytes) {
+        mUsedBytes = usedSizeBytes;
     }
 
     public void setTotalSize(long totalSizeBytes) {
@@ -243,6 +284,7 @@ public class StorageItemPreferenceController extends PreferenceController {
         list.add(PHOTO_KEY);
         list.add(AUDIO_KEY);
         list.add(GAME_KEY);
+        list.add(MOVIES_KEY);
         list.add(OTHER_APPS_KEY);
         list.add(SYSTEM_KEY);
         list.add(FILES_KEY);
@@ -254,10 +296,15 @@ public class StorageItemPreferenceController extends PreferenceController {
         intent.setAction(android.content.Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         intent.setType(IMAGE_MIME_TYPE);
+        intent.putExtra(Intent.EXTRA_FROM_STORAGE, true);
         return intent;
     }
 
     private Intent getAudioIntent() {
+        if (mVolume == null) {
+            return null;
+        }
+
         Bundle args = new Bundle();
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.StorageUseActivity.class.getName());
@@ -270,6 +317,10 @@ public class StorageItemPreferenceController extends PreferenceController {
     }
 
     private Intent getAppsIntent() {
+        if (mVolume == null) {
+            return null;
+        }
+
         Bundle args = new Bundle();
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.StorageUseActivity.class.getName());
@@ -281,12 +332,21 @@ public class StorageItemPreferenceController extends PreferenceController {
     }
 
     private Intent getGamesIntent() {
-            Bundle args = new Bundle(1);
-            args.putString(ManageApplications.EXTRA_CLASSNAME,
-                    Settings.GamesStorageActivity.class.getName());
-            return Utils.onBuildStartFragmentIntent(mContext,
-                    ManageApplications.class.getName(), args, null, R.string.game_storage_settings,
-                    null, false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
+        Bundle args = new Bundle(1);
+        args.putString(ManageApplications.EXTRA_CLASSNAME,
+                Settings.GamesStorageActivity.class.getName());
+        return Utils.onBuildStartFragmentIntent(mContext,
+                ManageApplications.class.getName(), args, null, R.string.game_storage_settings,
+                null, false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
+    }
+
+    private Intent getMoviesIntent() {
+        Bundle args = new Bundle(1);
+        args.putString(ManageApplications.EXTRA_CLASSNAME,
+                Settings.MoviesStorageActivity.class.getName());
+        return Utils.onBuildStartFragmentIntent(mContext,
+                ManageApplications.class.getName(), args, null, R.string.storage_movies_tv,
+                null, false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
     }
 
     private Intent getFilesIntent() {

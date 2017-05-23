@@ -18,6 +18,18 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -25,17 +37,19 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.view.View;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,22 +60,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AdvancedPowerUsageDetailTest {
     private static final String APP_LABEL = "app label";
@@ -74,9 +77,13 @@ public class AdvancedPowerUsageDetailTest {
     private static final long FOREGROUND_TIME_US = 200 * 1000;
     private static final long BACKGROUND_TIME_MS = 100;
     private static final long FOREGROUND_TIME_MS = 200;
+    private static final long PHONE_FOREGROUND_TIME_MS = 250 * 1000;
+    private static final long PHONE_BACKGROUND_TIME_MS = 0;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Activity mActivity;
     @Mock
     private AppHeaderController mAppHeaderController;
     @Mock
@@ -85,8 +92,6 @@ public class AdvancedPowerUsageDetailTest {
     private ApplicationsState mState;
     @Mock
     private ApplicationsState.AppEntry mAppEntry;
-    @Mock
-    private Drawable mIconDrawable;
     @Mock
     private Bundle mBundle;
     @Mock
@@ -111,6 +116,7 @@ public class AdvancedPowerUsageDetailTest {
 
         mFragment = spy(new AdvancedPowerUsageDetail());
         doReturn(mContext).when(mFragment).getContext();
+        doReturn(mActivity).when(mFragment).getActivity();
         doReturn(SUMMARY).when(mFragment).getString(anyInt());
         doReturn(APP_LABEL).when(mBundle).getString(anyString());
         doReturn(mBundle).when(mFragment).getArguments();
@@ -133,13 +139,15 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(BACKGROUND_TIME_US).when(mUid).getProcessStateTime(
                 eq(BatteryStats.Uid.PROCESS_STATE_BACKGROUND), anyLong(), anyInt());
         doReturn(FOREGROUND_TIME_US).when(mUid).getProcessStateTime(
-                eq(BatteryStats.Uid.PROCESS_STATE_FOREGROUND), anyLong(), anyInt());
+                eq(BatteryStats.Uid.PROCESS_STATE_TOP), anyLong(), anyInt());
         ReflectionHelpers.setField(mBatteryEntry, "sipper", mBatterySipper);
         mBatteryEntry.iconId = ICON_ID;
         mBatterySipper.uidObj = mUid;
+        mBatterySipper.drainType = BatterySipper.DrainType.APP;
 
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
+        mFragment.mBatteryUtils = new BatteryUtils(RuntimeEnvironment.application);
         mAppEntry.info = mock(ApplicationInfo.class);
 
         mTestActivity = spy(new SettingsActivity());
@@ -169,11 +177,37 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void testInitHeader_HasAppEntry_BuildByAppEntry() {
+        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+                new InstantAppDataProvider() {
+                    @Override
+                    public boolean isInstantApp(ApplicationInfo info) {
+                        return false;
+                    }
+                });
         mFragment.mAppEntry = mAppEntry;
         mFragment.initHeader();
 
         verify(mAppHeaderController).setIcon(mAppEntry);
         verify(mAppHeaderController).setLabel(mAppEntry);
+        verify(mAppHeaderController).setIsInstantApp(false);
+    }
+
+    @Test
+    public void testInitHeader_HasAppEntry_InstantApp() {
+        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+                new InstantAppDataProvider() {
+                    @Override
+                    public boolean isInstantApp(ApplicationInfo info) {
+                        return true;
+                    }
+                });
+        mFragment.mAppEntry = mAppEntry;
+        mFragment.initHeader();
+
+        verify(mAppHeaderController).setIcon(mAppEntry);
+        verify(mAppHeaderController).setLabel(mAppEntry);
+        verify(mAppHeaderController).setIsInstantApp(true);
+        verify(mAppHeaderController).setSummary((CharSequence) null);
     }
 
     @Test
@@ -186,6 +220,23 @@ public class AdvancedPowerUsageDetailTest {
                 BACKGROUND_TIME_MS);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME)).isEqualTo(
                 FOREGROUND_TIME_MS);
+        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT)).isEqualTo(
+                USAGE_PERCENT);
+    }
+
+    @Test
+    public void testStartBatteryDetailPage_typeNotApp_hasBasicData() {
+        mBatterySipper.drainType = BatterySipper.DrainType.PHONE;
+        mBatterySipper.usageTimeMs = PHONE_FOREGROUND_TIME_MS;
+
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, mBatteryStatsHelper, 0,
+                mBatteryEntry, USAGE_PERCENT);
+
+        assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
+        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME)).isEqualTo(
+                PHONE_FOREGROUND_TIME_MS);
+        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME)).isEqualTo(
+                PHONE_BACKGROUND_TIME_MS);
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT)).isEqualTo(
                 USAGE_PERCENT);
     }

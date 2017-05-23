@@ -90,18 +90,16 @@ public class AppStorageSettings extends AppInfoWithHeader
 
     private static final String KEY_TOTAL_SIZE = "total_size";
     private static final String KEY_APP_SIZE = "app_size";
-    private static final String KEY_EXTERNAL_CODE_SIZE = "external_code_size";
     private static final String KEY_DATA_SIZE = "data_size";
-    private static final String KEY_EXTERNAL_DATA_SIZE = "external_data_size";
     private static final String KEY_CACHE_SIZE = "cache_size";
 
-    private static final String KEY_CLEAR_DATA = "clear_data_button";
-    private static final String KEY_CLEAR_CACHE = "clear_cache_button";
+    private static final String KEY_HEADER_BUTTONS = "header_view";
 
     private static final String KEY_URI_CATEGORY = "uri_category";
     private static final String KEY_CLEAR_URI = "clear_uri_button";
 
     private static final String KEY_CACHE_CLEARED = "cache_cleared";
+    private static final String KEY_DATA_CLEARED = "data_cleared";
 
     // Views related to cache info
     private Preference mCacheSize;
@@ -118,16 +116,12 @@ public class AppStorageSettings extends AppInfoWithHeader
 
     private boolean mCanClearData = true;
     private boolean mCacheCleared;
+    private boolean mDataCleared;
 
-    private AppStorageStats mLastResult;
     private AppStorageSizesController mSizeController;
 
     private ClearCacheObserver mClearCacheObserver;
     private ClearUserDataObserver mClearDataObserver;
-
-    // Resource strings
-    private CharSequence mInvalidSizeStr;
-    private CharSequence mComputingStr;
 
     private VolumeInfo[] mCandidates;
     private AlertDialog.Builder mDialogBuilder;
@@ -138,6 +132,8 @@ public class AppStorageSettings extends AppInfoWithHeader
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             mCacheCleared = savedInstanceState.getBoolean(KEY_CACHE_CLEARED, false);
+            mDataCleared = savedInstanceState.getBoolean(KEY_DATA_CLEARED, false);
+            mCacheCleared = mCacheCleared || mDataCleared;
         }
 
         addPreferencesFromResource(R.xml.app_storage_settings);
@@ -155,12 +151,10 @@ public class AppStorageSettings extends AppInfoWithHeader
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_CACHE_CLEARED, mCacheCleared);
+        outState.putBoolean(KEY_DATA_CLEARED, mDataCleared);
     }
 
     private void setupViews() {
-        mComputingStr = getActivity().getText(R.string.computing_size);
-        mInvalidSizeStr = getActivity().getText(R.string.invalid_size_value);
-
         // Set default values on sizes
         mSizeController = new AppStorageSizesController.Builder()
                 .setTotalSizePreference(findPreference(KEY_TOTAL_SIZE))
@@ -171,8 +165,8 @@ public class AppStorageSettings extends AppInfoWithHeader
                 .setErrorString(R.string.invalid_size_value)
                 .build();
 
-        mClearDataButton = (Button) ((LayoutPreference) findPreference(KEY_CLEAR_DATA))
-                .findViewById(R.id.button);
+        mClearDataButton = (Button) ((LayoutPreference) findPreference(KEY_HEADER_BUTTONS))
+                .findViewById(R.id.left_button);
 
         mStorageUsed = findPreference(KEY_STORAGE_USED);
         mChangeStorageButton = (Button) ((LayoutPreference) findPreference(KEY_CHANGE_STORAGE))
@@ -182,8 +176,8 @@ public class AppStorageSettings extends AppInfoWithHeader
 
         // Cache section
         mCacheSize = findPreference(KEY_CACHE_SIZE);
-        mClearCacheButton = (Button) ((LayoutPreference) findPreference(KEY_CLEAR_CACHE))
-                .findViewById(R.id.button);
+        mClearCacheButton = (Button) ((LayoutPreference) findPreference(KEY_HEADER_BUTTONS))
+                .findViewById(R.id.right_button);
         mClearCacheButton.setText(R.string.clear_cache_btn_text);
 
         // URI permissions section
@@ -267,7 +261,7 @@ public class AppStorageSettings extends AppInfoWithHeader
         if (mAppEntry == null) {
             return false;
         }
-        updateUiWithSize(mLastResult);
+        updateUiWithSize(mSizeController.getLastResult());
         refreshGrantedUriPermissions();
 
         final VolumeInfo currentVol = getActivity().getPackageManager()
@@ -538,6 +532,9 @@ public class AppStorageSettings extends AppInfoWithHeader
         if (mCacheCleared) {
             mSizeController.setCacheCleared(true);
         }
+        if (mDataCleared) {
+            mSizeController.setDataCleared(true);
+        }
 
         mSizeController.updateUi(getContext());
 
@@ -549,7 +546,7 @@ public class AppStorageSettings extends AppInfoWithHeader
             long dataSize = result.getDataBytes();
             long cacheSize = result.getCacheBytes();
 
-            if (dataSize <= 0 || !mCanClearData) {
+            if (dataSize <= 0 || !mCanClearData || mDataCleared) {
                 mClearDataButton.setEnabled(false);
             } else {
                 mClearDataButton.setEnabled(true);
@@ -575,6 +572,8 @@ public class AppStorageSettings extends AppInfoWithHeader
             }
             switch (msg.what) {
                 case MSG_CLEAR_USER_DATA:
+                    mDataCleared = true;
+                    mCacheCleared = true;
                     processClearMsg(msg);
                     break;
                 case MSG_CLEAR_CACHE:

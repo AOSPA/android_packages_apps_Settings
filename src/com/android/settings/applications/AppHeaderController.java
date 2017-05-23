@@ -18,25 +18,26 @@ package com.android.settings.applications;
 
 import android.annotation.IdRes;
 import android.annotation.UserIdInt;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
-import android.graphics.Outline;
-import android.graphics.drawable.AdaptiveIconDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.support.annotation.IntDef;
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewOutlineProvider;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -51,28 +52,16 @@ public class AppHeaderController {
     @IntDef({ActionType.ACTION_NONE,
             ActionType.ACTION_APP_INFO,
             ActionType.ACTION_APP_PREFERENCE,
-            ActionType.ACTION_STORE_DEEP_LINK,
             ActionType.ACTION_NOTIF_PREFERENCE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ActionType {
         int ACTION_NONE = 0;
         int ACTION_APP_INFO = 1;
-        int ACTION_STORE_DEEP_LINK = 2;
-        int ACTION_APP_PREFERENCE = 3;
-        int ACTION_NOTIF_PREFERENCE = 4;
+        int ACTION_APP_PREFERENCE = 2;
+        int ACTION_NOTIF_PREFERENCE = 3;
     }
 
     public static final String PREF_KEY_APP_HEADER = "pref_app_header";
-
-    public static final ViewOutlineProvider OUTLINE_PROVIDER = new ViewOutlineProvider() {
-        @Override
-        public void getOutline(View view, Outline outline) {
-            Drawable background = ((ImageView)view).getDrawable();
-            if (background != null) {
-                background.getOutline(outline);
-            }
-        }
-    };
 
     private static final String TAG = "AppDetailFeature";
 
@@ -80,7 +69,6 @@ public class AppHeaderController {
     private final Fragment mFragment;
     private final int mMetricsCategory;
     private final View mAppHeader;
-    private final int mIconElevation;
 
     private Drawable mIcon;
     private CharSequence mLabel;
@@ -107,8 +95,6 @@ public class AppHeaderController {
             mAppHeader = LayoutInflater.from(fragment.getContext())
                     .inflate(R.layout.app_details, null /* root */);
         }
-        mIconElevation = mContext.getResources()
-            .getDimensionPixelSize(R.dimen.launcher_icon_elevation);
     }
 
     public AppHeaderController setIcon(Drawable icon) {
@@ -175,39 +161,10 @@ public class AppHeaderController {
     }
 
     /**
-     * Binds app header view and data from {@code PackageInfo} and {@code AppEntry}.
-     */
-    public void bindAppHeader(PackageInfo packageInfo, ApplicationsState.AppEntry appEntry) {
-        final String versionName = packageInfo == null ? null : packageInfo.versionName;
-        final Resources res = mAppHeader.getResources();
-
-        // Set Icon
-        final ImageView iconView = (ImageView) mAppHeader.findViewById(R.id.app_detail_icon);
-        if (appEntry.icon != null) {
-            iconView.setImageDrawable(appEntry.icon.getConstantState().newDrawable(res));
-        }
-
-        // Set application name.
-        final TextView labelView = (TextView) mAppHeader.findViewById(R.id.app_detail_title);
-        labelView.setText(appEntry.label);
-
-        // Version number of application
-        final TextView appVersion = (TextView) mAppHeader.findViewById(R.id.app_detail_summary);
-
-        if (!TextUtils.isEmpty(versionName)) {
-            appVersion.setSelected(true);
-            appVersion.setVisibility(View.VISIBLE);
-            appVersion.setText(res.getString(R.string.version_text, String.valueOf(versionName)));
-        } else {
-            appVersion.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    /**
      * Done mutating appheader, rebinds everything and return a new {@link LayoutPreference}.
      */
-    public LayoutPreference done(Context context) {
-        final LayoutPreference pref = new LayoutPreference(context, done());
+    public LayoutPreference done(Activity activity, Context uiContext) {
+        final LayoutPreference pref = new LayoutPreference(uiContext, done(activity));
         // Makes sure it's the first preference onscreen.
         pref.setOrder(-1000);
         pref.setKey(PREF_KEY_APP_HEADER);
@@ -215,30 +172,13 @@ public class AppHeaderController {
     }
 
     /**
-     * Done mutating appheader, rebinds everything.
-     */
-    public View done() {
-        return done(true);
-    }
-
-    /**
      * Done mutating appheader, rebinds everything (optionally skip rebinding buttons).
      */
-    public View done(boolean rebindActions) {
-        ImageView iconView = (ImageView) mAppHeader.findViewById(R.id.app_detail_icon);
+    public View done(Activity activity, boolean rebindActions) {
+        styleActionBar(activity);
+        ImageView iconView = mAppHeader.findViewById(R.id.app_detail_icon);
         if (iconView != null) {
             iconView.setImageDrawable(mIcon);
-            if (mIcon instanceof AdaptiveIconDrawable) {
-                iconView.setElevation(mIconElevation);
-                iconView.setOutlineProvider(OUTLINE_PROVIDER);
-            } else {
-                iconView.setElevation(0);
-                iconView.setOutlineProvider(null);
-            }
-            ImageView badgeView = mAppHeader.findViewById(R.id.app_icon_instant_apps_badge);
-            if (badgeView != null) {
-                badgeView.setVisibility(mIsInstantApp ? View.VISIBLE : View.GONE);
-            }
         }
         setText(R.id.app_detail_title, mLabel);
         setText(R.id.app_detail_summary, mSummary);
@@ -257,12 +197,38 @@ public class AppHeaderController {
     /**
      * Only binds app header with button actions.
      */
-    public void bindAppHeaderButtons() {
-        ImageButton leftButton = (ImageButton) mAppHeader.findViewById(R.id.left_button);
-        ImageButton rightButton = (ImageButton) mAppHeader.findViewById(R.id.right_button);
+    public AppHeaderController bindAppHeaderButtons() {
+        ImageButton leftButton = mAppHeader.findViewById(R.id.left_button);
+        ImageButton rightButton = mAppHeader.findViewById(R.id.right_button);
 
         bindButton(leftButton, mLeftAction);
         bindButton(rightButton, mRightAction);
+        return this;
+    }
+
+    public AppHeaderController styleActionBar(Activity activity) {
+        if (activity == null) {
+            Log.w(TAG, "No activity, cannot style actionbar.");
+            return this;
+        }
+        final ActionBar actionBar = activity.getActionBar();
+        if (actionBar == null) {
+            Log.w(TAG, "No actionbar, cannot style actionbar.");
+            return this;
+        }
+        actionBar.setBackgroundDrawable(
+                new ColorDrawable(Utils.getColorAttr(activity, android.R.attr.colorSecondary)));
+        actionBar.setElevation(0);
+
+        return this;
+    }
+
+    /**
+     * Done mutating appheader, rebinds everything.
+     */
+    @VisibleForTesting
+    View done(Activity activity) {
+        return done(activity, true /* rebindActions */);
     }
 
     private void bindButton(ImageButton button, @ActionType int action) {
@@ -282,20 +248,6 @@ public class AppHeaderController {
                     button.setOnClickListener(v -> AppInfoBase.startAppInfoFragment(
                             InstalledAppDetails.class, R.string.application_info_label,
                             mPackageName, mUid, mFragment, 0 /* request */, mMetricsCategory));
-                    button.setVisibility(View.VISIBLE);
-                }
-                return;
-            }
-            case ActionType.ACTION_STORE_DEEP_LINK: {
-                final Intent intent = new Intent(Intent.ACTION_SHOW_APP_INFO)
-                        .setPackage(getInstallerPackageName(mContext, mPackageName));
-                final Intent result = resolveIntent(intent);
-                if (result == null) {
-                    button.setVisibility(View.GONE);
-                } else {
-                    result.putExtra(Intent.EXTRA_PACKAGE_NAME, mPackageName);
-                    button.setImageResource(R.drawable.ic_sim_sd);
-                    button.setOnClickListener(v -> mFragment.startActivity(intent));
                     button.setVisibility(View.VISIBLE);
                 }
                 return;
@@ -327,15 +279,6 @@ public class AppHeaderController {
         }
     }
 
-    private String getInstallerPackageName(Context context, String packageName) {
-        try {
-            return context.getPackageManager().getInstallerPackageName(packageName);
-        } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Exception while retrieving the package installer of " + packageName, e);
-            return null;
-        }
-    }
-
     private Intent resolveIntent(Intent i) {
         ResolveInfo result = mContext.getPackageManager().resolveActivity(i, 0);
         if (result != null) {
@@ -346,7 +289,7 @@ public class AppHeaderController {
     }
 
     private void setText(@IdRes int id, CharSequence text) {
-        TextView textView = (TextView) mAppHeader.findViewById(id);
+        TextView textView = mAppHeader.findViewById(id);
         if (textView != null) {
             textView.setText(text);
             textView.setVisibility(TextUtils.isEmpty(text) ? View.GONE : View.VISIBLE);

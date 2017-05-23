@@ -15,9 +15,9 @@
  */
 package com.android.settings.deviceinfo.storage;
 
-import static com.android.settings.TestUtils.KILOBYTE;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
@@ -27,6 +27,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 
 import android.app.Fragment;
 import android.content.Context;
@@ -50,9 +51,11 @@ import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -80,11 +83,13 @@ public class StorageItemPreferenceControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        SettingsShadowResources.overrideResource("android:string/fileSizeSuffix", "%1$s %2$s");
+        SettingsShadowResources.overrideResource("android:string/gigabyteShort", "GB");
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         FakeFeatureFactory.setupForTest(mContext);
         mFakeFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
-        mVolume = new VolumeInfo("id", 0, null, "id");
+        mVolume = spy(new VolumeInfo("id", 0, null, "id"));
         // Note: null is passed as the Lifecycle because we are handling it outside of the normal
         //       Settings fragment lifecycle for test purposes.
         mController = new StorageItemPreferenceController(mContext, mFragment, mVolume, mSvp);
@@ -94,6 +99,11 @@ public class StorageItemPreferenceControllerTest {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         final View view = inflater.inflate(
                 mPreference.getLayoutResource(), new LinearLayout(mContext), false);
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -114,6 +124,7 @@ public class StorageItemPreferenceControllerTest {
         Intent intent = argumentCaptor.getValue();
         assertThat(intent.getType()).isEqualTo("image/*");
         assertThat(intent.getAction()).isEqualTo(android.content.Intent.ACTION_VIEW);
+        assertThat(intent.getBooleanExtra(Intent.EXTRA_FROM_STORAGE, false)).isTrue();
     }
 
     @Test
@@ -136,6 +147,14 @@ public class StorageItemPreferenceControllerTest {
     }
 
     @Test
+    public void handlePreferenceTreeClick_tappingAudioWhileUninitializedDoesntCrash() {
+        mController.setVolume(null);
+
+        mPreference.setKey("pref_music_audio");
+        mController.handlePreferenceTreeClick(mPreference);
+    }
+
+    @Test
     public void testClickApps() {
         mPreference.setKey("pref_other_apps");
         mController.handlePreferenceTreeClick(mPreference);
@@ -151,6 +170,14 @@ public class StorageItemPreferenceControllerTest {
                 ManageApplications.class.getName());
         assertThat(intent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
                 .isEqualTo(R.string.apps_storage);
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_tappingAppsWhileUninitializedDoesntCrash() {
+        mController.setVolume(null);
+
+        mPreference.setKey("pref_other_apps");
+        mController.handlePreferenceTreeClick(mPreference);
     }
 
     @Test
@@ -190,6 +217,24 @@ public class StorageItemPreferenceControllerTest {
     }
 
     @Test
+    public void testClickMovies() {
+        mPreference.setKey("pref_movies");
+        mController.handlePreferenceTreeClick(mPreference);
+
+        final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                any(UserHandle.class));
+
+        Intent intent = argumentCaptor.getValue();
+        assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
+        assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
+        assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
+                ManageApplications.class.getName());
+        assertThat(intent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
+                .isEqualTo(R.string.storage_movies_tv);
+    }
+
+    @Test
     public void testClickSystem() {
         mPreference.setKey("pref_system");
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
@@ -203,6 +248,7 @@ public class StorageItemPreferenceControllerTest {
         StorageItemPreference audio = new StorageItemPreference(mContext);
         StorageItemPreference image = new StorageItemPreference(mContext);
         StorageItemPreference games = new StorageItemPreference(mContext);
+        StorageItemPreference movies = new StorageItemPreference(mContext);
         StorageItemPreference apps = new StorageItemPreference(mContext);
         StorageItemPreference system = new StorageItemPreference(mContext);
         StorageItemPreference files = new StorageItemPreference(mContext);
@@ -214,6 +260,8 @@ public class StorageItemPreferenceControllerTest {
         when(screen.findPreference(
                 eq(StorageItemPreferenceController.GAME_KEY))).thenReturn(games);
         when(screen.findPreference(
+                eq(StorageItemPreferenceController.MOVIES_KEY))).thenReturn(movies);
+        when(screen.findPreference(
                 eq(StorageItemPreferenceController.OTHER_APPS_KEY))).thenReturn(apps);
         when(screen.findPreference(
                 eq(StorageItemPreferenceController.SYSTEM_KEY))).thenReturn(system);
@@ -221,34 +269,37 @@ public class StorageItemPreferenceControllerTest {
                 eq(StorageItemPreferenceController.FILES_KEY))).thenReturn(files);
         mController.displayPreference(screen);
 
-        mController.setSystemSize(KILOBYTE * 6);
+        mController.setUsedSize(MEGABYTE_IN_BYTES * 970); // There should 870MB attributed.
         StorageAsyncLoader.AppsStorageResult result = new StorageAsyncLoader.AppsStorageResult();
-        result.gamesSize = KILOBYTE * 8;
-        result.musicAppsSize = KILOBYTE * 4;
-        result.otherAppsSize = KILOBYTE * 9;
-        result.systemSize = KILOBYTE * 10;
-        result.externalStats = new StorageStatsSource.ExternalStorageStats(
-                KILOBYTE * 50, // total
-                KILOBYTE * 10, // audio
-                KILOBYTE * 15, // video
-                KILOBYTE * 20); // image
+        result.gamesSize = MEGABYTE_IN_BYTES * 80;
+        result.videoAppsSize = MEGABYTE_IN_BYTES * 160;
+        result.musicAppsSize = MEGABYTE_IN_BYTES * 40;
+        result.otherAppsSize = MEGABYTE_IN_BYTES * 90;
+        result.systemSize = MEGABYTE_IN_BYTES * 100; // This value is ignored and overridden now.
+        result.externalStats =
+                new StorageStatsSource.ExternalStorageStats(
+                        MEGABYTE_IN_BYTES * 500, // total
+                        MEGABYTE_IN_BYTES * 100, // audio
+                        MEGABYTE_IN_BYTES * 150, // video
+                        MEGABYTE_IN_BYTES * 200); // image
 
-        result.gamesSize = KILOBYTE * 8;
-        result.otherAppsSize = KILOBYTE * 9;
         mController.onLoadFinished(result);
 
-        assertThat(audio.getSummary().toString()).isEqualTo("14.00KB"); // 4KB apps + 10KB files
-        assertThat(image.getSummary().toString()).isEqualTo("35.00KB"); // 15KB video + 20KB images
-        assertThat(games.getSummary().toString()).isEqualTo("8.00KB");
-        assertThat(apps.getSummary().toString()).isEqualTo("9.00KB");
-        assertThat(system.getSummary().toString()).isEqualTo("16.00KB");
-        assertThat(files.getSummary().toString()).isEqualTo("5.00KB");
+        assertThat(audio.getSummary().toString()).isEqualTo("0.14GB");
+        assertThat(image.getSummary().toString()).isEqualTo("0.35GB");
+        assertThat(games.getSummary().toString()).isEqualTo("0.08GB");
+        assertThat(movies.getSummary().toString()).isEqualTo("0.16GB");
+        assertThat(apps.getSummary().toString()).isEqualTo("0.09GB");
+        assertThat(system.getSummary().toString()).isEqualTo("0.10GB");
+        assertThat(files.getSummary().toString()).isEqualTo("0.05GB");
     }
 
     @Test
     public void settingUserIdAppliesNewIcons() {
         StorageItemPreference audio = spy(new StorageItemPreference(mContext));
         audio.setIcon(R.drawable.ic_photo_library_vd_theme_24);
+        StorageItemPreference video = spy(new StorageItemPreference(mContext));
+        video.setIcon(R.drawable.ic_photo_library_vd_theme_24);
         StorageItemPreference image = spy(new StorageItemPreference(mContext));
         image.setIcon(R.drawable.ic_photo_library_vd_theme_24);
         StorageItemPreference games = spy(new StorageItemPreference(mContext));
@@ -262,6 +313,8 @@ public class StorageItemPreferenceControllerTest {
         PreferenceScreen screen = mock(PreferenceScreen.class);
         when(screen.findPreference(
                 eq(StorageItemPreferenceController.AUDIO_KEY))).thenReturn(audio);
+        when(screen.findPreference(
+                eq(StorageItemPreferenceController.MOVIES_KEY))).thenReturn(video);
         when(screen.findPreference(
                 eq(StorageItemPreferenceController.PHOTO_KEY))).thenReturn(image);
         when(screen.findPreference(
@@ -277,10 +330,162 @@ public class StorageItemPreferenceControllerTest {
         mController.setUserId(new UserHandle(10));
 
         verify(audio, times(2)).setIcon(any(Drawable.class));
+        verify(video, times(2)).setIcon(any(Drawable.class));
         verify(image, times(2)).setIcon(any(Drawable.class));
         verify(games, times(2)).setIcon(any(Drawable.class));
         verify(apps, times(2)).setIcon(any(Drawable.class));
         verify(system, times(2)).setIcon(any(Drawable.class));
         verify(files, times(2)).setIcon(any(Drawable.class));
+    }
+
+    @Test
+    public void displayPreference_dontHideFilePreferenceWhenEmulatedInternalStorageUsed() {
+        StorageItemPreference audio = new StorageItemPreference(mContext);
+        StorageItemPreference image = new StorageItemPreference(mContext);
+        StorageItemPreference games = new StorageItemPreference(mContext);
+        StorageItemPreference apps = new StorageItemPreference(mContext);
+        StorageItemPreference system = new StorageItemPreference(mContext);
+        StorageItemPreference files = new StorageItemPreference(mContext);
+        PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(screen.findPreference(eq(StorageItemPreferenceController.AUDIO_KEY)))
+                .thenReturn(audio);
+        when(screen.findPreference(eq(StorageItemPreferenceController.PHOTO_KEY)))
+                .thenReturn(image);
+        when(screen.findPreference(eq(StorageItemPreferenceController.GAME_KEY))).thenReturn(games);
+        when(screen.findPreference(eq(StorageItemPreferenceController.OTHER_APPS_KEY)))
+                .thenReturn(apps);
+        when(screen.findPreference(eq(StorageItemPreferenceController.SYSTEM_KEY)))
+                .thenReturn(system);
+        when(screen.findPreference(eq(StorageItemPreferenceController.FILES_KEY)))
+                .thenReturn(files);
+
+        when(mSvp.findEmulatedForPrivate(any(VolumeInfo.class))).thenReturn(mVolume);
+        when(mVolume.isMountedReadable()).thenReturn(true);
+
+        mController.displayPreference(screen);
+
+        verify(screen, times(0)).removePreference(files);
+    }
+
+    @Test
+    public void displayPreference_hideFilePreferenceWhenEmulatedStorageUnreadable() {
+        StorageItemPreference audio = new StorageItemPreference(mContext);
+        StorageItemPreference image = new StorageItemPreference(mContext);
+        StorageItemPreference games = new StorageItemPreference(mContext);
+        StorageItemPreference apps = new StorageItemPreference(mContext);
+        StorageItemPreference system = new StorageItemPreference(mContext);
+        StorageItemPreference files = new StorageItemPreference(mContext);
+        PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(screen.findPreference(eq(StorageItemPreferenceController.AUDIO_KEY)))
+                .thenReturn(audio);
+        when(screen.findPreference(eq(StorageItemPreferenceController.PHOTO_KEY)))
+                .thenReturn(image);
+        when(screen.findPreference(eq(StorageItemPreferenceController.GAME_KEY))).thenReturn(games);
+        when(screen.findPreference(eq(StorageItemPreferenceController.OTHER_APPS_KEY)))
+                .thenReturn(apps);
+        when(screen.findPreference(eq(StorageItemPreferenceController.SYSTEM_KEY)))
+                .thenReturn(system);
+        when(screen.findPreference(eq(StorageItemPreferenceController.FILES_KEY)))
+                .thenReturn(files);
+
+        when(mSvp.findEmulatedForPrivate(any(VolumeInfo.class))).thenReturn(mVolume);
+        when(mVolume.isMountedReadable()).thenReturn(false);
+
+        mController.displayPreference(screen);
+
+        verify(screen).removePreference(files);
+    }
+
+    @Test
+    public void displayPreference_hideFilePreferenceWhenNoEmulatedInternalStorage() {
+        StorageItemPreference audio = new StorageItemPreference(mContext);
+        StorageItemPreference image = new StorageItemPreference(mContext);
+        StorageItemPreference games = new StorageItemPreference(mContext);
+        StorageItemPreference apps = new StorageItemPreference(mContext);
+        StorageItemPreference system = new StorageItemPreference(mContext);
+        StorageItemPreference files = new StorageItemPreference(mContext);
+        PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(screen.findPreference(eq(StorageItemPreferenceController.AUDIO_KEY)))
+                .thenReturn(audio);
+        when(screen.findPreference(eq(StorageItemPreferenceController.PHOTO_KEY)))
+                .thenReturn(image);
+        when(screen.findPreference(eq(StorageItemPreferenceController.GAME_KEY))).thenReturn(games);
+        when(screen.findPreference(eq(StorageItemPreferenceController.OTHER_APPS_KEY)))
+                .thenReturn(apps);
+        when(screen.findPreference(eq(StorageItemPreferenceController.SYSTEM_KEY)))
+                .thenReturn(system);
+        when(screen.findPreference(eq(StorageItemPreferenceController.FILES_KEY)))
+                .thenReturn(files);
+
+        when(mSvp.findEmulatedForPrivate(any(VolumeInfo.class))).thenReturn(null);
+
+        mController.displayPreference(screen);
+
+        verify(screen).removePreference(files);
+    }
+
+    @Test
+    public void displayPreference_updateFilePreferenceToHideAfterSettingVolume() {
+        StorageItemPreference audio = new StorageItemPreference(mContext);
+        StorageItemPreference image = new StorageItemPreference(mContext);
+        StorageItemPreference games = new StorageItemPreference(mContext);
+        StorageItemPreference apps = new StorageItemPreference(mContext);
+        StorageItemPreference system = new StorageItemPreference(mContext);
+        StorageItemPreference files = new StorageItemPreference(mContext);
+        PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(screen.findPreference(eq(StorageItemPreferenceController.AUDIO_KEY)))
+                .thenReturn(audio);
+        when(screen.findPreference(eq(StorageItemPreferenceController.PHOTO_KEY)))
+                .thenReturn(image);
+        when(screen.findPreference(eq(StorageItemPreferenceController.GAME_KEY))).thenReturn(games);
+        when(screen.findPreference(eq(StorageItemPreferenceController.OTHER_APPS_KEY)))
+                .thenReturn(apps);
+        when(screen.findPreference(eq(StorageItemPreferenceController.SYSTEM_KEY)))
+                .thenReturn(system);
+        when(screen.findPreference(eq(StorageItemPreferenceController.FILES_KEY)))
+                .thenReturn(files);
+
+        when(mSvp.findEmulatedForPrivate(any(VolumeInfo.class))).thenReturn(mVolume);
+        when(mVolume.isMountedReadable()).thenReturn(true);
+
+        mController.displayPreference(screen);
+        when(mSvp.findEmulatedForPrivate(any(VolumeInfo.class))).thenReturn(null);
+        mController.setVolume(mVolume);
+
+        verify(screen).removePreference(files);
+    }
+
+
+    @Test
+    public void displayPreference_updateFilePreferenceToShowAfterSettingVolume() {
+        StorageItemPreference audio = new StorageItemPreference(mContext);
+        StorageItemPreference image = new StorageItemPreference(mContext);
+        StorageItemPreference games = new StorageItemPreference(mContext);
+        StorageItemPreference apps = new StorageItemPreference(mContext);
+        StorageItemPreference system = new StorageItemPreference(mContext);
+        StorageItemPreference files = new StorageItemPreference(mContext);
+        PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(screen.findPreference(eq(StorageItemPreferenceController.AUDIO_KEY)))
+                .thenReturn(audio);
+        when(screen.findPreference(eq(StorageItemPreferenceController.PHOTO_KEY)))
+                .thenReturn(image);
+        when(screen.findPreference(eq(StorageItemPreferenceController.GAME_KEY))).thenReturn(games);
+        when(screen.findPreference(eq(StorageItemPreferenceController.OTHER_APPS_KEY)))
+                .thenReturn(apps);
+        when(screen.findPreference(eq(StorageItemPreferenceController.SYSTEM_KEY)))
+                .thenReturn(system);
+        when(screen.findPreference(eq(StorageItemPreferenceController.FILES_KEY)))
+                .thenReturn(files);
+
+        // This will hide it initially.
+        mController.displayPreference(screen);
+
+        when(mSvp.findEmulatedForPrivate(any(VolumeInfo.class))).thenReturn(mVolume);
+        when(mVolume.isMountedReadable()).thenReturn(true);
+
+        // And we bring it back.
+        mController.setVolume(mVolume);
+
+        verify(screen).addPreference(files);
     }
 }

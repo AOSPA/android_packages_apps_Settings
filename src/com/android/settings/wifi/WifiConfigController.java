@@ -38,6 +38,7 @@ import android.os.Handler;
 import android.os.UserManager;
 import android.security.Credentials;
 import android.security.KeyStore;
+import android.support.annotation.VisibleForTesting;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -54,7 +55,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -348,9 +348,7 @@ public class WifiConfigController implements TextWatcher,
             }
         }
 
-        final UserManager userManager =
-                (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        if (!userManager.isSplitSystemUser()) {
+        if (!isSplitSystemUser()) {
             mSharedCheckBox.setVisibility(View.GONE);
         }
 
@@ -360,6 +358,13 @@ public class WifiConfigController implements TextWatcher,
         }
     }
 
+    @VisibleForTesting
+    boolean isSplitSystemUser() {
+        final UserManager userManager =
+                (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        return userManager.isSplitSystemUser();
+    }
+
     private void addRow(ViewGroup group, int name, String value) {
         View row = mConfigUi.getLayoutInflater().inflate(R.layout.wifi_dialog_row, group, false);
         ((TextView) row.findViewById(R.id.name)).setText(name);
@@ -367,7 +372,11 @@ public class WifiConfigController implements TextWatcher,
         group.addView(row);
     }
 
-    private String getSignalString() {
+    @VisibleForTesting
+    String getSignalString() {
+        if (!mAccessPoint.isReachable()) {
+            return null;
+        }
         final int level = mAccessPoint.getLevel();
 
         return (level > -1 && level < mLevels.length) ? mLevels[level] : null;
@@ -403,12 +412,16 @@ public class WifiConfigController implements TextWatcher,
                 && ((mAccessPointSecurity == AccessPoint.SECURITY_WEP
                         && mPasswordView.length() == 0)
                     || (mAccessPointSecurity == AccessPoint.SECURITY_PSK
-                           && mPasswordView.length() < 8))) {
+                           && (mPasswordView.length() < 8 || mPasswordView.length() > 63)))) {
             passwordInvalid = true;
         }
-
         if ((mSsidView != null && mSsidView.length() == 0)
-                || ((mAccessPoint == null || !mAccessPoint.isSaved()) && passwordInvalid)) {
+                // If Accesspoint is not saved, apply passwordInvalid check
+                || ((mAccessPoint == null || !mAccessPoint.isSaved()) && passwordInvalid
+                // If AccessPoint is saved (modifying network) and password is changed, apply
+                // Invalid password check
+                || mAccessPoint != null && mAccessPoint.isSaved() && passwordInvalid
+                    && mPasswordView.length() > 0)) {
             enabled = false;
         } else {
             enabled = ipAndProxyFieldsAreValid();

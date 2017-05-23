@@ -329,19 +329,18 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Hesablar"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Yer"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Hesablar"</string>
-    <string name="security_settings_title" msgid="9087149148665560415">"Təhlükəsizlik və ekran kilidi"</string>
+    <string name="security_settings_title" msgid="6134528367364159294">"Təhlükəsizlik və Məkan"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Şifrələmə və kredensiallar"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Telefon şifrələnib"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefon şifrələnib"</string>
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Cihaz şifrələndi"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Ekran kilidi tərcihləri"</string>
-    <string name="lockscreen_settings_summary" msgid="8788089950462346171">"Bütün bildiriş kontentini göstərin"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Məkanım\'ı, ekranı kiliddən çıxarmanı, hesab yaddaş kilidini ayarlayın,"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Məkanım\'ı, ekranı kiliddən çıxarmanı, hesab yaddaş kilidini ayarlayın,"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"Məxfilik"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"Admin tərəfindən deaktiv edildi"</string>
     <string name="security_status_title" msgid="5848766673665944640">"Təhlükəsizlik statusu"</string>
-    <string name="security_dashboard_summary" msgid="7778812098315813315">"Məkan, barmaq izi"</string>
-    <!-- no translation found for security_dashboard_summary_no_fingerprint (6407130749972933883) -->
-    <skip />
+    <string name="security_dashboard_summary" msgid="6757421634477554939">"Ekran kilidi, barmaq izi"</string>
+    <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Ekran kilidi"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Barmaq izi"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Barmaq izlərini idarə edin"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Bunun üçün barmaq izi istifadə edin:"</string>
@@ -691,6 +690,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"Yüksək keyfiyyətli ictimai şəbəkə əlçatan olduqda bildirin"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Wi‑Fi\'ı avtomatik olaraq aktiv edin"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi‑Fi daxili şəbəkə kimi yüksək keyfiyyətli yadda saxlanmış şəbəkələrin yaxınlığında yenidən aktiv ediləcək"</string>
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Wi‑Fi skanı deaktiv olduğuna görə əlçatmazdır"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Keyfiyyətsiz bağlantıdan çəkinin"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Yaxşı İnternet bağlantısı yoxdursa, Wi-Fi şəbəkəsi istifadə etmə"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Yalnız keyfiyyətli internet bağlantısı olan şəbəkələri istifadə edin"</string>
@@ -698,8 +698,7 @@
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Yüksək keyfiyyətli açıq şəbəkələrə avtomatik qoşulun"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Sertifikatları quraşdır"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Yerləşmə dəqiqliyini təkmilləşdirmək üçün sistem tətbiq və xidmətləri hələ də Wi‑Fi şəbəkələrini skan edə bilər. Bu funksiyanı <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>skan ayarlarından<xliff:g id="LINK_END_1">LINK_END</xliff:g> dəyişə bilərsiniz."</string>
-    <!-- no translation found for wifi_scan_notify_text_scanning_off (3426075479272242098) -->
-    <skip />
+    <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Məkan dəqiqliyini təkmilləşdirmək üçün <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>skan ayarlarından<xliff:g id="LINK_END_1">LINK_END</xliff:g> Wi-Fi skanını aktiv edin."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Daha göstərmə"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Yuxu zamanı Wi-Fi\'ı açıq saxlayın"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Yuxu zamanı Wi-Fi aktiv olsun"</string>
@@ -813,9 +812,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Wi-Fi konfiqurasiya edin"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC ünvanı"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP ünvanı"</string>
-    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"Alt Şəbəkə Maskası"</string>
+    <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Alt şəbəkə maskası"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
-    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"IPv6 Ünvanları"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6 ünvanları"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"Saxlanmış şəbəkələr"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP ayarları"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"Təkmilləşmiş Wi‑Fi ayarları bu istifadəçi üçün əlçatmazdır"</string>
@@ -1015,11 +1014,12 @@
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Qapalı"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"Telefon doklanmış və/və ya yatan zaman baş verənlərə nəzarət edin, ekran qoruyucunu aktiv edin."</string>
     <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"Başlama vaxtı"</string>
+    <string name="screensaver_settings_current" msgid="4663846038247130023">"Cari ekran qoruyucu"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"İndi başlayın"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Ayarlar"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Avtomatik parlaqlıq"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Oyatmaq üçün qaldırın"</string>
-    <string name="doze_title" msgid="5389406335828323273">"Gələn bildiriş ekranı"</string>
+    <string name="doze_title" msgid="2259176504273878294">"Ətraf mühit displeyi"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Bildirişlər aldığınız zaman ekran oyansın"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Şrift ölçüsü"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Mətni kiçildin və ya böyüdün"</string>
@@ -1611,6 +1611,7 @@
     <string name="app_install_details_group_title" msgid="7084623031296083574">"Mağaza"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"Tətbiq məlumatları"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"Tətbiq <xliff:g id="APP_STORE">%1$s</xliff:g> bölməsindən yükləndi"</string>
+    <string name="instant_app_details_summary" msgid="4529934403276907045">"<xliff:g id="APP_STORE">%1$s</xliff:g> haqqında ətraflı məlumat"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Tətbiq əməliyyatları"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"Proses gedir"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(Heç vaxt istifadə olunmayıb)"</string>
@@ -1687,7 +1688,6 @@
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"Klaviatura qısa yolları köməkçisi"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"Əlçatan qısayolları göstərin"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"Defolt"</string>
-    <string name="pointer_settings_category" msgid="8183819795164034286">"Mouse/trackpad"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Kursor sürəti"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Oyun Kontrolleri"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"Vibrator istifadə edin"</string>
@@ -1854,6 +1854,7 @@
     <string name="enable_service_title" msgid="3061307612673835592">"<xliff:g id="SERVICE">%1$s</xliff:g> xidməti istifadə edilsin?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> etməlidir:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Çünki, tətbiq icazə sorğusunu anlaşılmaz edir. Ayarlar cavabınızı doğrulaya bilməz."</string>
+    <string name="window_obscured_warning" msgid="8711643931674708175">"Digər tətbiqlər bu seçimlərin üstündə göstərildiyinə görə Ayarlar əməliyyata cavab verə bilmir."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"<xliff:g id="SERVICE">%1$s</xliff:g> aktiv olarsa, cihazınız data şifrələnməsini genişləndirmək üçün ekran kilidini istifadə etməyəcək."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Girişimlik xidmətini aktiv etdiyiniz üçün cihazınız data şifrələnməsini genişləndirmək üçün ekran kilidini istifadə etməyəcək."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"<xliff:g id="SERVICE">%1$s</xliff:g> xidmətinin aktiv edilməsi şifrələnməyə təsir etdiyi üçün modelinizi təsdiq etməlisiniz."</string>
@@ -1911,8 +1912,8 @@
     <string name="device_screen_usage" msgid="3386088035570409683">"Tam doldurmadan sonrakı ekran istifadəsi"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Ekranın enerji sərfiyyatı"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Mobil şəbəkənin skan edilməsi"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">%1$s</xliff:g> əvvəl"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Tam doldurmadan sonrakı tətbiq istifadəsi (<xliff:g id="TIME">%1$s</xliff:g> əvvəl)"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"<xliff:g id="TIME">^1</xliff:g> əvvəl"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"Tam doldurmadan sonrakı tətbiq istifadəsi (<xliff:g id="TIME">^1</xliff:g> əvvəl)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Dam doldurmadan sonra ekranın vaxtı miqdarı aktiv edilib"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Tam doldurmadan sonrakı cihaz istifadəsi"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Elektrik şəbəkəsindən çıxarılandan sonra batareya istifadəsi"</string>
@@ -1943,7 +1944,7 @@
     <string name="power_camera" msgid="4976286950934622605">"Kamera"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
-    <string name="power_cell" msgid="6596471490976003056">"Şəbəkə ilə bağlantı"</string>
+    <string name="power_cell" msgid="3392999761958982492">"Mobil şəbəkə gözləmə rejimi"</string>
     <string name="power_phone" msgid="5392641106474567277">"Səs çağrıları"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tablet boşdadır"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Telefon inaktivdir"</string>
@@ -2003,14 +2004,13 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Enerji istifadəsi haqqında məlumat təxminidir və enerjinin sərf olunduğu hər sahəni əks etmir. Müxtəlif istifadə haqqında məlumat təxmini hesablanmış enerji istifadəsi və batareyada müşahidə olunan hazırkı enerji istifadəsi arasındakı fərqdir."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Artıq hesablanmış enerji istifadəsi"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"%1$s qədər istifadə edilib"</string>
+    <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g> üçün istifadə olundu"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> <xliff:g id="PERCENT">%1$s</xliff:g> batareya istifadə etdi"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> batareya istifadəsi"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Sonuncu tam doldurmadan sonrakı istifadə problemi"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Sonuncu tam doldurma"</string>
     <string name="battery_footer_summary" msgid="4701358808575132647">"Qalan batareya vaxtı təxminidir və istifadəyə əsasən dəyişə bilər"</string>
-    <!-- no translation found for battery_detail_foreground (3350401514602032183) -->
-    <skip />
+    <string name="battery_detail_foreground" msgid="3350401514602032183">"Aktiv istifadədə olarkən"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Arxa fonda olarkən"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Batareya istifadəsi"</string>
     <string name="battery_detail_power_percentage" msgid="8064814503316094497">"Ümumi tətbiq istifadəsindən <xliff:g id="PERCENT">%1$s</xliff:g> (<xliff:g id="POWER">%2$d</xliff:g>mAh)"</string>
@@ -2076,7 +2076,6 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Səs daxiletməsi və çıxış parametrləri"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Səsli axtarış"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android klaviatura"</string>
-    <string name="voice_category" msgid="1430370497125803904">"Nitq"</string>
     <string name="voice_input_settings" msgid="1099937800539324567">"Səs daxiletməsi parametrləri"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Səs daxiletməsi"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Səs daxiletmə xidmətləri"</string>
@@ -2728,6 +2727,8 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Bildiriş səsi"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Telefon zəng səsi"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Varsayılan bildiriş səsi"</string>
+    <string name="notification_unknown_sound_title" msgid="2535027767851838335">"Tətbiq səs təmin etdi"</string>
+    <string name="notification_sound_default" msgid="565135733949733766">"Defolt bildiriş səsi"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"Defolt zəngli saat səsi"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Həmçinin, zənglər üçün vibrasiya olsun"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Digər səslər"</string>
@@ -2776,6 +2777,7 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Bildirişlər"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Qabaqcıl"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"İş bildirişləri"</string>
+    <string name="notification_badging_title" msgid="5125022693565388760">"İkona nişanlarına icazə verin"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Parıltı işığı"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Ekran kilidində"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Bütün bildiriş məzmunlarını göstər"</string>
@@ -2789,6 +2791,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Cihazınız kilidləndiyi zaman profil bildirişlərinin necə göstərilməsini istəyirsiniz?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Profil bildirişləri"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Bildirişlər"</string>
+    <string name="notification_channel_title" msgid="2260666541030178452">"Bildiriş kateqoriyası"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Əhəmiyyət"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"Tətbiqin öhdəsinə buraxın"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Bildirişləri heç vaxt göstərməyin"</string>
@@ -2796,14 +2799,15 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Səs yoxdur"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Səsli"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Səsli və ekranda pəncərə ilə"</string>
-    <string name="notification_importance_min_summary" msgid="8233873580287975662">"Aşağı: Səs və ya vizual kəsinti yoxdur"</string>
-    <string name="notification_importance_low_summary" msgid="1296192045494524565">"Orta: Səs yoxdur"</string>
-    <string name="notification_importance_default_summary" msgid="5730277944596984792">"Yüksək: Səs çıxarın"</string>
-    <string name="notification_importance_high_summary" msgid="3248683220940159642">"Mühüm: Səs çıxarın və ekrana qışqırın"</string>
-    <string name="allow_sound" msgid="6585849855452076626">"Səsə icazə verin"</string>
+    <string name="notification_importance_min_title" msgid="6974673091137544803">"Aşağı"</string>
+    <string name="notification_importance_low_title" msgid="8131254047772814309">"Orta"</string>
+    <string name="notification_importance_default_title" msgid="9120383978536089489">"Yüksək"</string>
+    <string name="notification_importance_high_title" msgid="3058778300264746473">"Vacib"</string>
+    <string name="allow_sound" msgid="1820188704793497324">"Səsə icazə verin"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"Səs, vibrasiyanı deaktiv edin və ya bu bildirişlərə cari ekranınızda baxın."</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Bildiriş köməkçisi"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Bildiriş girişi"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"İş profili bildirişlərinə giriş blok edilib"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Tətbiqlər bildirişləri oxuya bilmir"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="other">%d proqram bildirişləri oxuya bilər</item>
@@ -2833,6 +2837,8 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"\"Narahat etməyin\" girişi"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Heç bir tətbiq \"Narahat etməyin\" girişi sorğusu göndərməyib"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Tətbiqlər endirilir..."</string>
+    <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android bu tətbiq bildirişinin bu cihazda görünməsini blok edir"</string>
+    <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android bu kateqoriyalı bildirişin bu cihazda görünməsini blok edir"</string>
     <string name="notification_channels" msgid="5346841743182627500">"Kateqoriyalar"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Digər"</string>
     <string name="no_channels" msgid="3077375508177744586">"Bu tətbiq heç bir bildiriş paylaşmayıb"</string>
@@ -2853,8 +2859,7 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Bu bildirişlər heç vaxt göstərilməsin"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Bildirişləri göstərin"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Bildirişləri heç vaxt ekranda və ya periferik cihazlarda göstərməyin."</string>
-    <string name="notification_badge_title" msgid="7166470350070693657">"Nişan tətbiq ikonası"</string>
-    <string name="notification_badge_summary" msgid="3944771498030335669">"Əgər dəstəkləyirsə, bildirişləri Əsas tətbiqdə nişanlar kimi göstərin."</string>
+    <string name="notification_badge_title" msgid="7734903868300369178">"İkona nişanına icazə verin"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"\"Narahat etməyin\" seçimini əvəzləyin"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Narahat Etməyin seçimi Yalnız Prioritet üçün ayarlandıqda bildirişlərin mane olmasına imkan verin"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Ekran kilidində"</string>
@@ -2966,18 +2971,14 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"İndiki orientasiyada qalın"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"Təhlükəsiz başlama"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Davam et"</string>
-    <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Cihazı işə salmadan öncə PIN kodunun daxil edilməsini tələb edərək, onu qoruya bilərsiniz. Cihaz işə başlamadan öncə zəng, mesaj, bildiriş, xəbərdarlıq qəbul edə bilməz.\n\nBu, itirilmiş və ya oğurlanmış cihazlarda datanı qorumağa yardım edir."</string>
-    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Cihazı işə salmadan öncə modelin daxil edilməsini tələb edərək, onu qoruya bilərsiniz. Cihaz işə başlamadan öncə zəng, mesaj, bildiriş, xəbərdarlıq qəbul edə bilməz.\n\nBu, itirilmiş və ya oğurlanmış cihazlarda datanı qorumağa yardım edir."</string>
-    <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Cihazı işə salmadan öncə parolun daxil edilməsini tələb edərək, onu qoruya bilərsiniz. Cihaz işə başlamadan öncə zəng, mesaj, bildiriş, xəbərdarlıq qəbul edə bilməz.\n\nBu, itirilmiş və ya oğurlanmış cihazlarda datanı qorumağa yardım edir."</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Cihazınızı kiliddən çıxarmaq üçün barmaq izi istifadə etməkdən əlavə, cihazı işə salmadan öncə PIN kod tələb edərək, onu qoruya bilərsiniz. Cihaz işə başlamadan öncə zəng, mesaj, bildiriş, xəbərdarlıq qəbul edə bilməz. \n\nBu, itirilmiş və ya oğurlanmış cihazlarda datanı qorumağa yardım edir."</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Cihazınızı kiliddən çıxarmaq üçün barmaq izi istifadə etməkdən əlavə, cihazı işə salmadan öncə modelin daxil edilməsini tələb edərək, onu qoruya bilərsiniz. Cihaz işə başlamadan öncə zəng, mesaj, bildiriş, xəbərdarlıq qəbul edə bilməz. \n\nBu, itirilmiş və ya oğurlanmış cihazlarda datanı qorumağa yardım edir."</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Cihazınızı kiliddən çıxarmaq üçün barmaq izi istifadə etməkdən əlavə, cihazı işə salmadan öncə parolun daxil edilməsini tələb edərək, onu qoruya bilərsiniz. Cihaz işə başlamadan öncə zəng, mesaj, bildiriş, xəbərdarlıq qəbul edə bilməz. \n\nBu, itirilmiş və ya oğurlanmış cihazlarda datanı qorumağa yardım edir."</string>
-    <string name="encrypt_require_pin" msgid="2063945047845243752">"Cihazı işə salmaq üçün PIN tələb olunsun"</string>
-    <string name="encrypt_require_pattern" msgid="6898479411004015810">"Cihazı işə salmaq üçün model tələb olunsun"</string>
-    <string name="encrypt_require_password" msgid="8770628366276570518">"Cihazı işə salmaq üçün parol tələb olunsun"</string>
-    <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Yox, çox sağ olun"</string>
-    <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Yox, çox sağ olun"</string>
-    <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Yox, çox sağ olun"</string>
+    <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Cihazı işə salmadan öncə PIN tələb edərək, onu qoruya bilərsiniz. Cihaz işə salınmadan öncə siqnallar da daxil olmaqla zəng, mesaj və ya bildiriş qəbul edə bilməz. \n\nBu, itirilmiş və ya oğurlanmış cihazlarda datanı qorumağa yardım edir. Cihazı işə salmaq üçün PIN tələb edilsin?"</string>
+    <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"Cihazı işə salmadan öncə model tələb edərək, onu qoruya bilərsiniz. Cihaz işə salınmadan öncə siqnallar da daxil olmaqla zəng, mesaj və ya bildiriş qəbul edə bilməz. \n\nBu, itirilmiş və ya oğurlanmış cihazlarda datanı qorumağa yardım edir. Cihazı işə salmaq üçün model tələb edilsin?"</string>
+    <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Cihazı işə salmadan öncə parol tələb edərək, onu qoruya bilərsiniz. Cihaz işə salınmadan öncə siqnallar da daxil olmaqla zəng, mesaj və ya bildiriş qəbul edə bilməz. \n\nBu, itirilmiş və ya oğurlanmış cihazlarda datanı qorumağa yardım edir. Cihazı işə salmaq üçün parol tələb edilsin?"</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Cihazı kiliddən çıxarmaq üçün barmaq izi istifadə etməkdən əlavə, cihazı işə salmadan öncə PIN tələb edərək, onu qoruya bilərsiniz. Cihaz işə salınmadan öncə siqnallar da daxil olmaqla zəng, mesaj və ya bildiriş qəbul edə bilməz.\n\nBu, itirilmiş və ya oğurlanmış cihazlarda datanı qorumağa yardım edir. Cihazı işə salmaq üçün PIN tələb edilsin?"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Cihazı kiliddən çıxarmaq üçün barmaq izi istifadə etməkdən əlavə, cihazı işə salmadan öncə model tələb edərək, onu qoruya bilərsiniz. Cihaz işə salınmadan öncə siqnallar da daxil olmaqla zəng, mesaj və ya bildiriş qəbul edə bilməz.\n\nBu, itirilmiş və ya oğurlanmış cihazlarda datanı qorumağa yardım edir. Cihazı işə salmaq üçün model tələb edilsin?"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="1088818752838720964">"Cihazı kiliddən çıxarmaq üçün barmaq izi istifadə etməkdən əlavə, cihazı işə salmadan öncə parol tələb edərək onu qoruya bilərsiniz. Cihaz işə salınmadan öncə siqnallar da daxil olmaqla zəng, mesaj və ya bildiriş qəbul edə bilməz.\n\nBu, itirilmiş və ya oğurlanmış cihazlarda datanı qorumağa yardım edir. Cihazı işə salmaq üçün parol tələb edin&gt;"</string>
+    <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Bəli"</string>
+    <string name="encryption_interstitial_no" msgid="8935031349097025137">"Xeyr"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"PİN  tələb edirsiniz?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Model tələb edirsiniz?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Parol tələb edirsiniz?"</string>
@@ -3100,8 +3101,7 @@
     <string name="high_power_desc" msgid="6283926163708585760">"Batareya optimallaşdırılması tətbiq etməyin. Batareya daha tez qurtara bilər."</string>
     <string name="high_power_prompt_title" msgid="6358673688590282655">"Tətbiqə həmişə arxa fonda işləməyə icazə verilsin?"</string>
     <string name="high_power_prompt_body" msgid="1031422980602565049">"<xliff:g id="APP_NAME">%1$s</xliff:g> tətbiqinə həmişə arxa fonda işləmək icazəsi vermək batareya enerjisini azalda bilər. \n\nBunu daha sonra Ayarlar &gt;Tətbiqlər və bildirişlər bölməsindən dəyişə bilərsiniz."</string>
-    <!-- no translation found for battery_summary (8044042095190688654) -->
-    <skip />
+    <string name="battery_summary" msgid="8044042095190688654">"Sonuncu tam doldurmadan sonra <xliff:g id="PERCENTAGE">%1$s</xliff:g> batareya istifadəsi"</string>
     <string name="battery_power_management" msgid="5571519699679107523">"Enerji idarəetməsi"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Batareya tam dolandan sonra istifadə olunmayıb"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"Tətbiq ayarları"</string>
@@ -3174,15 +3174,13 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Heç biri"</string>
     <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"Bu tətbiqin istifadə girişini deaktiv etmək adminin iş profilindəki tətbiqlərin data istifadəsini izləməsinin qarşısını almır"</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"<xliff:g id="COUNT_1">%2$d</xliff:g> simvoldan <xliff:g id="COUNT_0">%1$d</xliff:g> ədəd istifadə olunub"</string>
-    <string name="draw_overlay_title" msgid="7524215631960029502">"Digər tətbiqlər üzərindən görüntülənə biləcək tətbiqlər"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"Tətbiqlər üzərindən görüntüləmə"</string>
     <string name="system_alert_window_settings" msgid="8466613169103527868">"Tətbiqlər üzərindən görüntüləmə"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Tətbiqlər"</string>
     <string name="system_alert_window_access_title" msgid="6297115362542361241">"Tətbiqlər üzərindən görüntüləmə"</string>
     <string name="permit_draw_overlay" msgid="7456536798718633432">"Digər tətbiq üzərindən görüntüləmək icazəsi"</string>
     <string name="app_overlay_permission_preference" msgid="9039432222453006038">"Üst icazədə tətbiq görüntüləmə"</string>
-    <!-- no translation found for allow_overlay_description (8961670023925421358) -->
-    <skip />
+    <string name="allow_overlay_description" msgid="8961670023925421358">"Bu tətbiqə istifadə etdiyiniz digər tətbiqlərin üzərində göstərilmək icazəsi verin. Bu tətbiq həmin tətbiqlərin istifadəsinə müdaxilə edə və ya tətbiqlərin görünüş və davranışını dəyişə bilər."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr virtual reallıq dinləyici stereo köməkçi xidməti"</string>
     <string name="keywords_system_alert_window" msgid="5049498015597864850">"digər tətbiqlərin üzərində sistem siqnalının pəncərə dialoq görüntüsü"</string>
     <string name="overlay_settings" msgid="6930854109449524280">"Tətbiqlər üzərindən görüntüləmə"</string>
@@ -3204,9 +3202,9 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Bu icazə tətbiqə sistem ayarlarını dəyişdirməyə imkan verir."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Bəli"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Xeyr"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"Bəli"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"Xeyr"</string>
-    <string name="external_source_switch_title" msgid="5581865736984836418">"Tətbiq quraşdırmalarına icazə verin"</string>
+    <string name="external_source_trusted" msgid="2707996266575928037">"İcazə verilib"</string>
+    <string name="external_source_untrusted" msgid="2677442511837596726">"İcazə verilməyib"</string>
+    <string name="external_source_switch_title" msgid="3621381992793251070">"Bu mənbədən icazə verin"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Kamera üçün iki dəfə burun"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Biləyinizi iki dəfə buraraq kamera tətbiqini açın"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Kamera üçün qidalanma düyməsini iki dəfə basın"</string>
@@ -3278,8 +3276,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Arxa fon datası yalnız  Wi-Fi vasitəsilə əlçatandır. Wi-Fi əlçatan olmadıqda, bəzi tətbiq və ya xidmətlərə təsir edə bilər."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"İş profili deaktivdir"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Tətbiq, arxa fon sinxronizasiyası və iş profiliniz ilə bağlı digər xüsusiyyətlər deaktiv edildi."</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Gecə İşığı cədvəlini ayarlayın"</string>
-    <string name="night_display_suggestion_summary" msgid="1747638280833631187">"Solğun ekran kəhrabası"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Gecə İşığı aktivdir"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"Ekran kəhrəba rəngi çalarındandır. Bu, yuxuya getməyinizə kömək edə bilər."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Təkliflər"</string>
@@ -3394,7 +3390,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Premium SMS müəyyən məbləğ tuta bilər və mobil operator fakturasına əlavə oluna bilər. Tətbiq üçün icazəni aktiv etsəniz, həmin tətbiqdən istifadə edərək, Premium SMS göndərə biləcəksiniz."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Premium SMS girişi"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"Digər cihazlara görünmür"</string>
-    <string name="bluetooth_connected_summary" msgid="8733997010923307915">"Qoşulub:"</string>
+    <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> cihazına qoşuldu"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Bir çox cihaza qoşuldu"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Sistem İİ demo rejimi"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Sürətli ayarlar üzrə developer xanaları"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Yardım üçün buradayıq"</string>
@@ -3484,9 +3481,10 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"İnternetə qoşulun və ya operatorunuz ilə əlaqə saxlayın"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Operatoru kilidlənmiş cihazlarda əlçatan deyil"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Ümumi olaraq <xliff:g id="SIZE">%1$s</xliff:g> əlçatandır\n\nSonuncu dəfə <xliff:g id="DATE">%2$s</xliff:g> tarixində çalışdı"</string>
-    <string name="web_action_enable_title" msgid="8502552575492048305">"Linkləri tətbiqdə açın"</string>
-    <string name="web_action_enable_summary" msgid="4679844581193646863">"Tətbiqlər cihazınıza quraşdırılmasa belə, linkləri dəstəklənən tətbiqlərdə açın"</string>
-    <string name="web_action_section_title" msgid="806405168097593614">"Tətbiq quraşdırılmayıb"</string>
+    <string name="web_action_enable_title" msgid="4051513950976670853">"Ani tətbiqlər"</string>
+    <string name="web_action_enable_summary" msgid="3108127559723396382">"Hətta quraşdırılmasa belə, linki tətbiqlərdə açın"</string>
+    <string name="web_action_section_title" msgid="7364647086538399136">"Ani tətbiqlər"</string>
+    <string name="instant_apps_account" msgid="1433620209791992528">"Ani tətbiq hesabı"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Quraşdırılmış tətbiqlər"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Yaddaşınız indi yaddaş meneceri tərəfindən idarə olunur"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g> üçün hesablar"</string>
@@ -3573,18 +3571,16 @@
     <string name="storage_settings_2" product="default" msgid="4306047711760327031">"Telefon yaddaşı"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_total" msgid="3499221850532701342">"<xliff:g id="TOTAL">%1$s</xliff:g> istifadə olunub"</string>
-    <!-- no translation found for storage_percent_full (6095012055875077036) -->
-    <skip />
+    <string name="storage_percent_full" msgid="6095012055875077036">"işlənib"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"Tətbiqi silin"</string>
-    <!-- no translation found for clear_instant_app_confirmation (7451671214898856857) -->
-    <skip />
+    <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"Bu ani tətbiqi silmək istəyirsiniz?"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"Oyunlar"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"Audio fayllar"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(<xliff:g id="USER">%s</xliff:g> üçün silindi)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(<xliff:g id="USER">%s</xliff:g> üçün deaktiv edildi)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"Avtodoldurma xidməti"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"avtomatik, doldurmaq, avtomatik doldurmaq"</string>
-    <string name="autofill_confirmation_message" msgid="7368058965765225486">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> avtomatik doldurma tətbiqi olsun? <xliff:g id="APP_NAME_1">%1$s</xliff:g> ekranınızı oxuya və digər tətbiqlərdə sahələri doldura biləcək."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Bu tətbiqə etibar etdiyinizə əmin olun&lt;b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=tətbiq_adı nümunə=Google Avtodoldurma &gt;%%1$s&lt;/xliff:g&gt; nəyin avtomatik doldurula biləcəyini müəyyən etmək üçün ekrandakılardan istifadə edir."</string>
     <string name="device_theme" msgid="4571803018917608588">"Cihaz teması"</string>
     <string name="default_theme" msgid="7085644992078579076">"Defolt"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Yaddaş Meneceri: <xliff:g id="STATUS">^1</xliff:g>"</string>

@@ -84,6 +84,8 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
@@ -104,6 +106,8 @@ import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.UserIcons;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.password.FingerprintManagerWrapper;
+import com.android.settings.password.IFingerprintManager;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -776,8 +780,9 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param withSeconds include seconds?
      * @return the formatted elapsed time
      */
-    public static String formatElapsedTime(Context context, double millis, boolean withSeconds) {
-        StringBuilder sb = new StringBuilder();
+    public static CharSequence formatElapsedTime(Context context, double millis,
+            boolean withSeconds) {
+        SpannableStringBuilder sb = new SpannableStringBuilder();
         int seconds = (int) Math.floor(millis / 1000);
         if (!withSeconds) {
             // Round up.
@@ -818,9 +823,15 @@ public final class Utils extends com.android.settingslib.Utils {
                         hours, minutes));
             } else {
                 sb.append(context.getString(R.string.battery_history_minutes_no_seconds, minutes));
+
+                // Add ttsSpan if it only have minute value, because it will be read as "meters"
+                TtsSpan ttsSpan = new TtsSpan.MeasureBuilder().setNumber(minutes)
+                        .setUnit("minute").build();
+                sb.setSpan(ttsSpan, 0, sb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
-        return sb.toString();
+
+        return sb;
     }
 
     /**
@@ -1189,6 +1200,15 @@ public final class Utils extends com.android.settingslib.Utils {
     public static FingerprintManager getFingerprintManagerOrNull(Context context) {
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
             return context.getSystemService(FingerprintManager.class);
+        } else {
+            return null;
+        }
+    }
+
+    public static IFingerprintManager getFingerprintManagerWrapperOrNull(Context context) {
+        FingerprintManager fingerprintManager = getFingerprintManagerOrNull(context);
+        if (fingerprintManager != null) {
+            return new FingerprintManagerWrapper(fingerprintManager);
         } else {
             return null;
         }

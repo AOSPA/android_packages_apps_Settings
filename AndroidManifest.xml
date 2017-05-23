@@ -166,7 +166,7 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.network.NetworkDashboardFragment"/>
             <meta-data android:name="com.android.settings.summary"
-                android:value="@string/network_dashboard_summary"/>
+                android:resource="@string/network_dashboard_summary"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -193,7 +193,7 @@
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.summary"
-                android:value="@string/connected_devices_dashboard_summary"/>
+                android:resource="@string/connected_devices_dashboard_summary"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -439,13 +439,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <receiver
-            android:name=".HotspotOffReceiver" >
-            <intent-filter>
-                <action android:name="android.net.wifi.WIFI_AP_STATE_CHANGED" />
-            </intent-filter>
-        </receiver>
 
         <activity android:name="Settings$TetherSettingsActivity"
                 android:label="@string/tether_settings_title_all"
@@ -884,7 +877,7 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
             <meta-data android:name="com.android.settings.summary"
-                android:value="@string/display_dashboard_summary"/>
+                android:resource="@string/display_dashboard_summary"/>
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -952,7 +945,6 @@
 
         <activity android:name="Settings$ManageApplicationsActivity"
                 android:label="@string/applications_settings"
-                android:icon="@drawable/ic_settings_applications"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_SETTINGS" />
@@ -1888,6 +1880,20 @@
                 android:value="true" />
         </activity>
 
+        <!-- The opposite of DevelopmentSettingsActivity, it's no-op and only enabled when the real
+             activity is disabled to be CTS compliant. -->
+        <activity
+            android:name=".development.DevelopmentSettingsDisabledActivity"
+            android:icon="@drawable/ic_settings_development"
+            android:label="@string/development_settings_title"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter android:priority="-1">
+                <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
+                <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="Settings$PrintSettingsActivity"
                 android:label="@string/print_settings"
                 android:icon="@drawable/ic_settings_print"
@@ -2381,8 +2387,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.accounts" />
-            <meta-data android:name="com.android.settings.summary"
-                android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.users.UserSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2514,7 +2518,6 @@
 
         <activity android:name="Settings$ConfigureNotificationSettingsActivity"
                 android:label="@string/configure_notification_settings"
-                android:icon="@drawable/ic_settings_notifications"
                 android:exported="true"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
@@ -2526,7 +2529,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter android:priority="120">
+            <intent-filter android:priority="160">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
@@ -2567,7 +2570,7 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
             <meta-data android:name="com.android.settings.summary"
-                android:value="@string/sound_dashboard_summary"/>
+                android:resource="@string/sound_dashboard_summary"/>
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -2589,7 +2592,7 @@
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.apps" />
+                       android:value="com.android.settings.category.ia.notifications" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.NotificationApps" />
         </activity>
@@ -2651,6 +2654,10 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
+
+        <!-- Confirmation dialog for enabling notification access from CompanionDeviceManager -->
+        <activity android:name=".notification.NotificationAccessConfirmationActivity"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
@@ -2799,7 +2806,7 @@
         </provider>
 
         <activity android:name="Settings$OverlaySettingsActivity"
-                android:label="@string/draw_overlay_title"
+                android:label="@string/draw_overlay"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
@@ -2810,7 +2817,7 @@
         </activity>
 
         <activity android:name="Settings$AppDrawOverlaySettingsActivity"
-                android:label="@string/draw_overlay_title"
+                android:label="@string/draw_overlay"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
@@ -2849,7 +2856,7 @@
                 android:label="@string/install_other_apps"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.action.MANAGE_UNKNOWN_APP_SOURCES" />
+                <action android:name="android.settings.MANAGE_UNKNOWN_APP_SOURCES" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
@@ -2860,7 +2867,7 @@
                   android:label="@string/install_other_apps"
                   android:taskAffinity="">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.action.MANAGE_UNKNOWN_APP_SOURCES" />
+                <action android:name="android.settings.MANAGE_UNKNOWN_APP_SOURCES" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
@@ -2881,8 +2888,7 @@
         <activity android:name="Settings$AdvancedAppsActivity"
                   android:taskAffinity=""
                   android:exported="true"
-                  android:label="@string/app_default_dashboard_title"
-                  android:icon="@drawable/ic_adb">
+                  android:label="@string/app_default_dashboard_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MANAGE_DEFAULT_APPS_SETTINGS" />
                 <action android:name="android.settings.HOME_SETTINGS" />
@@ -2935,8 +2941,6 @@
             <intent-filter android:priority="60">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.summary"
                        android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2969,7 +2973,7 @@
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
             <meta-data android:name="com.android.settings.summary"
-                       android:value="@string/app_and_notification_dashboard_summary"/>
+                       android:resource="@string/app_and_notification_dashboard_summary"/>
         </activity>
 
         <activity android:name=".Settings$UserAndAccountDashboardActivity"
@@ -3001,7 +3005,7 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.system.SystemDashboardFragment"/>
             <meta-data android:name="com.android.settings.summary"
-                       android:value="@string/system_dashboard_summary"/>
+                       android:resource="@string/system_dashboard_summary"/>
         </activity>
 
         <activity android:name=".Settings$SupportDashboardActivity"
@@ -3078,6 +3082,24 @@
             android:theme="@android:style/Theme.NoDisplay"
             android:permission="android.permission.DUMP"
             android:enabled="@bool/config_has_help" />
+
+        <activity android:name=".applications.autofill.AutofillPickerActivity"
+                android:excludeFromRecents="true"
+                android:launchMode="singleInstance"
+                android:exported="false">
+        </activity>
+
+        <activity android:name=".applications.autofill.AutofillPickerTrampolineActivity"
+                android:theme="@android:style/Theme.NoDisplay"
+                android:excludeFromRecents="true"
+                android:launchMode="singleInstance"
+                android:label="@string/autofill_app">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_SET_AUTOFILL_SERVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>

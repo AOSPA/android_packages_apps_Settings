@@ -50,13 +50,13 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
     @Override
     public void onRadioButtonClicked(RadioButtonPreference selected) {
         final String selectedKey = selected.getKey();
-        final String confirmationMessage = getConfirmationMessage(getCandidate(selectedKey));
+        final CharSequence confirmationMessage = getConfirmationMessage(getCandidate(selectedKey));
         final Activity activity = getActivity();
         if (TextUtils.isEmpty(confirmationMessage)) {
             super.onRadioButtonClicked(selected);
         } else if (activity != null) {
-            final DialogFragment fragment = ConfirmationDialogFragment.newInstance(
-                    this, selectedKey, confirmationMessage);
+            final DialogFragment fragment =
+                    newConfirmationDialogFragment(selectedKey, confirmationMessage);
             fragment.show(activity.getFragmentManager(), ConfirmationDialogFragment.TAG);
         }
     }
@@ -74,7 +74,12 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
         }
     }
 
-    protected String getConfirmationMessage(CandidateInfo info) {
+    protected ConfirmationDialogFragment newConfirmationDialogFragment(String selectedKey,
+            CharSequence confirmationMessage) {
+        return ConfirmationDialogFragment.newInstance(this, selectedKey, confirmationMessage);
+    }
+
+    protected CharSequence getConfirmationMessage(CandidateInfo info) {
         return null;
     }
 
@@ -85,17 +90,30 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
         public static final String EXTRA_KEY = "extra_key";
         public static final String EXTRA_MESSAGE = "extra_message";
 
+        private final DialogInterface.OnClickListener mCancelListener;
+
+        private ConfirmationDialogFragment(DialogInterface.OnClickListener cancelListener) {
+            mCancelListener = cancelListener;
+        }
+
         @Override
         public int getMetricsCategory() {
             return MetricsProto.MetricsEvent.DEFAULT_APP_PICKER_CONFIRMATION_DIALOG;
         }
 
         public static ConfirmationDialogFragment newInstance(DefaultAppPickerFragment parent,
-                String key, String message) {
-            final ConfirmationDialogFragment fragment = new ConfirmationDialogFragment();
+                String key, CharSequence message) {
+            return newInstance(parent, key, message, null);
+        }
+
+        // TODO: add test case for cancelListener
+        public static ConfirmationDialogFragment newInstance(DefaultAppPickerFragment parent,
+                String key, CharSequence message, DialogInterface.OnClickListener cancelListener) {
+            final ConfirmationDialogFragment fragment = new ConfirmationDialogFragment(
+                    cancelListener);
             final Bundle argument = new Bundle();
             argument.putString(EXTRA_KEY, key);
-            argument.putString(EXTRA_MESSAGE, message);
+            argument.putCharSequence(EXTRA_MESSAGE, message);
             fragment.setArguments(argument);
             fragment.setTargetFragment(parent, 0);
             return fragment;
@@ -105,9 +123,9 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Bundle bundle = getArguments();
             final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                    .setMessage(bundle.getString(EXTRA_MESSAGE))
+                    .setMessage(bundle.getCharSequence(EXTRA_MESSAGE))
                     .setPositiveButton(android.R.string.ok, this)
-                    .setNegativeButton(android.R.string.cancel, null);
+                    .setNegativeButton(android.R.string.cancel, mCancelListener);
             return builder.create();
         }
 

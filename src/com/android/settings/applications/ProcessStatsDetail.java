@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.applications.AppHeaderController.ActionType;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
@@ -37,6 +39,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.text.format.Formatter;
 import android.util.ArrayMap;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -57,8 +60,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.android.settings.applications.AppHeaderController.ActionType;
 
 public class ProcessStatsDetail extends SettingsPreferenceFragment {
 
@@ -129,7 +130,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
             .getApplicationFeatureProvider(activity)
             .newAppHeaderController(this, null /* appHeader */)
             .setIcon(mApp.mUiTargetApp != null
-                ? mApp.mUiTargetApp.loadIcon(mPm)
+                ? IconDrawableFactory.newInstance(activity).getBadgedIcon(mApp.mUiTargetApp)
                 : new ColorDrawable(0))
             .setLabel(mApp.mUiLabel)
             .setPackageName(mApp.mPackage)
@@ -137,7 +138,7 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
                 ? mApp.mUiTargetApp.uid
                 : UserHandle.USER_NULL)
             .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE)
-            .done(getPrefContext());
+            .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
 

@@ -17,6 +17,8 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.UserManager;
+import android.text.TextUtils;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
@@ -75,6 +77,8 @@ public class PowerUsageAdvancedTest {
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private UserManager mUserManager;
     private PowerUsageAdvanced mPowerUsageAdvanced;
     private PowerUsageData mPowerUsageData;
     private Context mShadowContext;
@@ -102,8 +106,12 @@ public class PowerUsageAdvancedTest {
         when(mPowerUsageAdvanced.getContext()).thenReturn(mShadowContext);
         doReturn(STUB_STRING).when(mPowerUsageAdvanced).getString(anyInt(), any(), any());
         doReturn(STUB_STRING).when(mPowerUsageAdvanced).getString(anyInt(), any());
+        doReturn(mShadowContext.getText(R.string.battery_used_for)).when(
+                mPowerUsageAdvanced).getText(R.string.battery_used_for);
         mPowerUsageAdvanced.setPackageManager(mPackageManager);
         mPowerUsageAdvanced.setPowerUsageFeatureProvider(mPowerUsageFeatureProvider);
+        mPowerUsageAdvanced.setUserManager(mUserManager);
+        mPowerUsageAdvanced.setBatteryUtils(BatteryUtils.getInstance(mShadowContext));
 
         mPowerUsageData = new PowerUsageData(UsageType.APP);
         mMaxBatterySipper.totalPowerMah = TYPE_BLUETOOTH_USAGE;
@@ -136,13 +144,13 @@ public class PowerUsageAdvancedTest {
     }
 
     @Test
-    public void testExtractUsageType_TypeService_ReturnService() {
+    public void testExtractUsageType_TypeService_ReturnSystem() {
         mNormalBatterySipper.drainType = DrainType.APP;
         when(mNormalBatterySipper.getUid()).thenReturn(FAKE_UID_1);
         when(mPowerUsageFeatureProvider.isTypeService(any())).thenReturn(true);
 
         assertThat(mPowerUsageAdvanced.extractUsageType(mNormalBatterySipper))
-                .isEqualTo(UsageType.SERVICE);
+                .isEqualTo(UsageType.SYSTEM);
     }
 
     @Test
@@ -172,10 +180,22 @@ public class PowerUsageAdvancedTest {
 
     @Test
     public void testUpdateUsageDataSummary_onlyOneApp_showUsageTime() {
+        final String expectedSummary = "Used for 0m";
         mPowerUsageData.usageList.add(mNormalBatterySipper);
+
         mPowerUsageAdvanced.updateUsageDataSummary(mPowerUsageData, TOTAL_POWER, DISCHARGE_AMOUNT);
 
-        verify(mPowerUsageAdvanced).getString(eq(R.string.battery_used_for), any());
+        assertThat(mPowerUsageData.summary.toString()).isEqualTo(expectedSummary);
+    }
+
+    @Test
+    public void testUpdateUsageDataSummary_typeIdle_showUsageTime() {
+        mPowerUsageData.usageType = UsageType.IDLE;
+        mPowerUsageData.usageList.add(mNormalBatterySipper);
+
+        mPowerUsageAdvanced.updateUsageDataSummary(mPowerUsageData, TOTAL_POWER, DISCHARGE_AMOUNT);
+
+        assertThat(mPowerUsageData.summary.toString()).isEqualTo("0m");
     }
 
     @Test
@@ -206,8 +226,8 @@ public class PowerUsageAdvancedTest {
         final int[] usageTypeSet = mPowerUsageAdvanced.mUsageTypes;
 
         assertThat(usageTypeSet).asList().containsExactly(UsageType.APP, UsageType.WIFI,
-                UsageType.CELL, UsageType.BLUETOOTH, UsageType.IDLE, UsageType.SERVICE,
-                UsageType.USER, UsageType.SYSTEM, UsageType.UNACCOUNTED, UsageType.OVERCOUNTED);
+                UsageType.CELL, UsageType.BLUETOOTH, UsageType.IDLE, UsageType.USER,
+                UsageType.SYSTEM, UsageType.UNACCOUNTED, UsageType.OVERCOUNTED);
     }
 
     @Test
@@ -225,25 +245,94 @@ public class PowerUsageAdvancedTest {
     }
 
     @Test
-    public void testShouldHide_typeUnAccounted_returnTrue() {
+    public void testShouldHideCategory_typeUnAccounted_returnTrue() {
         mPowerUsageData.usageType = UsageType.UNACCOUNTED;
 
-        assertThat(mPowerUsageAdvanced.shouldHide(mPowerUsageData)).isTrue();
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isTrue();
     }
 
-
     @Test
-    public void testShouldHide_typeOverCounted_returnTrue() {
+    public void testShouldHideCategory_typeOverCounted_returnTrue() {
         mPowerUsageData.usageType = UsageType.OVERCOUNTED;
 
-        assertThat(mPowerUsageAdvanced.shouldHide(mPowerUsageData)).isTrue();
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isTrue();
     }
 
+    @Test
+    public void testShouldHideCategory_typeUserAndOnlyOne_returnTrue() {
+        mPowerUsageData.usageType = UsageType.USER;
+        doReturn(1).when(mUserManager).getUserCount();
+
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isTrue();
+    }
 
     @Test
-    public void testShouldHide_typeNormal_returnFalse() {
+    public void testShouldHideCategory_typeUserAndMoreThanOne_returnFalse() {
+        mPowerUsageData.usageType = UsageType.USER;
+        doReturn(2).when(mUserManager).getUserCount();
+
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isFalse();
+    }
+
+    @Test
+    public void testShouldHideCategory_typeNormal_returnFalse() {
         mPowerUsageData.usageType = UsageType.APP;
 
-        assertThat(mPowerUsageAdvanced.shouldHide(mPowerUsageData)).isFalse();
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isFalse();
+    }
+
+    @Test
+    public void testShouldHideSummary_typeCell_returnTrue() {
+        mPowerUsageData.usageType = UsageType.CELL;
+
+        assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSummary_typeWifi_returnTrue() {
+        mPowerUsageData.usageType = UsageType.WIFI;
+
+        assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSummary_typeBluetooth_returnTrue() {
+        mPowerUsageData.usageType = UsageType.BLUETOOTH;
+
+        assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSummary_typeNormal_returnFalse() {
+        mPowerUsageData.usageType = UsageType.APP;
+
+        assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isFalse();
+    }
+
+    @Test
+    public void testShouldShowBatterySipper_typeScreen_returnFalse() {
+        mNormalBatterySipper.drainType = DrainType.SCREEN;
+
+        assertThat(mPowerUsageAdvanced.shouldShowBatterySipper(mNormalBatterySipper)).isFalse();
+    }
+
+    @Test
+    public void testShouldShowBatterySipper_typeNormal_returnTrue() {
+        mNormalBatterySipper.drainType = DrainType.APP;
+
+        assertThat(mPowerUsageAdvanced.shouldShowBatterySipper(mNormalBatterySipper)).isTrue();
+    }
+
+    @Test
+    public void testCalculateHiddenPower_returnCorrectPower() {
+        List<PowerUsageData> powerUsageDataList = new ArrayList<>();
+        final double unaccountedPower = 100;
+        final double normalPower = 150;
+        powerUsageDataList.add(new PowerUsageData(UsageType.UNACCOUNTED, unaccountedPower));
+        powerUsageDataList.add(new PowerUsageData(UsageType.APP, normalPower));
+        powerUsageDataList.add(new PowerUsageData(UsageType.CELL, normalPower));
+
+        assertThat(mPowerUsageAdvanced.calculateHiddenPower(powerUsageDataList)).isWithin(
+                PRECISION).of(unaccountedPower);
     }
 }

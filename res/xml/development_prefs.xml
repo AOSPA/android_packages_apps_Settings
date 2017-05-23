@@ -80,11 +80,6 @@
         android:fragment="com.android.settings.webview.WebViewAppPicker" />
 
     <SwitchPreference
-        android:key="enable_webview_multiprocess"
-        android:title="@string/enable_webview_multiprocess"
-        android:summary="@string/enable_webview_multiprocess_desc" />
-
-    <SwitchPreference
         android:key="color_temperature"
         android:title="@string/color_temperature"
         android:summary="@string/color_temperature_desc" />
@@ -143,7 +138,7 @@
             android:title="@string/wait_for_debugger"
             android:summary="@string/wait_for_debugger_summary"/>
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="verify_apps_over_usb"
             android:title="@string/verify_apps_over_usb_title"
             android:summary="@string/verify_apps_over_usb_summary"/>
@@ -208,6 +203,11 @@
             android:key="bluetooth_disable_absolute_volume"
             android:title="@string/bluetooth_disable_absolute_volume"
             android:summary="@string/bluetooth_disable_absolute_volume_summary"/>
+
+        <SwitchPreference
+            android:key="bluetooth_enable_inband_ringing"
+            android:title="@string/bluetooth_enable_inband_ringing"
+            android:summary="@string/bluetooth_enable_inband_ringing_summary"/>
 
         <ListPreference
             android:key="bluetooth_select_avrcp_version"

@@ -331,19 +331,18 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Konti"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Atrašanās vieta"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Konti"</string>
-    <string name="security_settings_title" msgid="9087149148665560415">"Drošība un ekrāna bloķēšana"</string>
+    <string name="security_settings_title" msgid="6134528367364159294">"Drošība un atrašanās vieta"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Šifrēšana un akreditācijas dati"</string>
-    <string name="encryption_and_credential_settings_summary" msgid="8721883002237981248">"Tālrunis ir šifrēts"</string>
+    <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Tālrunis ir šifrēts"</string>
+    <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Ierīce ir šifrēta"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Bloķēšanas ekrāna preferences"</string>
-    <string name="lockscreen_settings_summary" msgid="8788089950462346171">"Rādīt visu paziņojumu saturu"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Manas atrašanās vietas, ekrāna atbloķēšanas, SIM kartes bloķēšanas, akreditācijas datu krātuves bloķēšanas iestatīšana"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Manas atrašanās vietas, ekrāna atbloķēšanas, akreditācijas datu krātuves bloķēšanas iestatīšana"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"Konfidencialitāte"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"Atspējoja administrators"</string>
     <string name="security_status_title" msgid="5848766673665944640">"Drošības statuss"</string>
-    <string name="security_dashboard_summary" msgid="7778812098315813315">"Atrašanās vieta, pirksta nospiedums"</string>
-    <!-- no translation found for security_dashboard_summary_no_fingerprint (6407130749972933883) -->
-    <skip />
+    <string name="security_dashboard_summary" msgid="6757421634477554939">"Ekrāna bloķēšana, pirksta nospiedums"</string>
+    <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Ekrāna bloķēšana"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Pirkstu nospiedumi"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Nospiedumu pārvaldība"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Nospieduma lietošana"</string>
@@ -702,6 +701,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="2761326999921366960">"Paziņot, kad ir pieejams augstas kvalitātes publiskais tīkls"</string>
     <string name="wifi_wakeup" msgid="8815640989361538036">"Automātiski ieslēgt Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi‑Fi tiks automātiski atkārtoti ieslēgts netālu no saglabātiem augstas kvalitātes tīkliem, piemēram, netālu no mājas tīkla."</string>
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Nav pieejama, jo ir izslēgta Wi‑Fi meklēšana"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Nelietot vājus savienojumus"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Nelietot Wi-Fi tīklu, ja vien tam nav labs interneta savienojums"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Izmantot tikai tīklus ar labu interneta savienojumu"</string>
@@ -709,8 +709,7 @@
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Automātiski izveidot savienojumu ar augstas kvalitātes publiskajiem tīkliem"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Sertifikātu instalēšana"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Lai uzlabotu atrašanās vietas noteikšanas precizitāti, sistēmas lietotnēs un pakalpojumos joprojām var meklēt Wi-Fi tīklus. Varat to mainīt <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>meklēšanas iestatījumos<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
-    <!-- no translation found for wifi_scan_notify_text_scanning_off (3426075479272242098) -->
-    <skip />
+    <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Lai uzlabotu atrašanās vietas noteikšanas precizitāti, <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>meklēšanas iestatījumos<xliff:g id="LINK_END_1">LINK_END</xliff:g> ieslēdziet Wi-Fi meklēšanu."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Vairs nerādīt"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Aktivizēt Wi-Fi arī miega režīmā"</string>
     <string name="wifi_setting_on_during_sleep_title" msgid="8308975500029751565">"Wi‑Fi ieslēgts miega režīmā"</string>
@@ -825,9 +824,9 @@
     <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Konfigurēt Wi-Fi tīklu"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC adrese"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP adrese"</string>
-    <string name="wifi_details_subnet_mask" msgid="6547625164186585943">"Apakštīkla maska"</string>
+    <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Apakštīkla maska"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
-    <string name="wifi_details_ipv6_address_header" msgid="4334059712014889425">"IPv6 adreses"</string>
+    <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6 adreses"</string>
     <string name="wifi_saved_access_points_label" msgid="2013409399392285262">"Saglabātie tīkli"</string>
     <string name="wifi_advanced_settings_label" msgid="3654366894867838338">"IP iestatījumi"</string>
     <string name="wifi_advanced_not_available" msgid="5823045095444154586">"Wi‑Fi papildu iestatījumi šim lietotājam nav pieejami."</string>
@@ -1027,11 +1026,12 @@
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Izslēgts"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"Lai kontrolētu, kas notiek, kad tālrunis tiek dokots un/vai ir miega režīmā, ieslēdziet ekrānsaudzētāju."</string>
     <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"Kad sākt"</string>
+    <string name="screensaver_settings_current" msgid="4663846038247130023">"Pašreizējais ekrānsaudzētājs"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Sākt tūlīt"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Iestatījumi"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automātisks spilgtums"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Pacelt, lai ieslēgtu"</string>
-    <string name="doze_title" msgid="5389406335828323273">"Ienākoša paziņojuma ekrāns"</string>
+    <string name="doze_title" msgid="2259176504273878294">"Ambients displejs"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Aktivizēt ekrānu, kad tiek saņemts paziņojums"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Fonta lielums"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Palielināt vai samazināt tekstu"</string>
@@ -1626,6 +1626,7 @@
     <string name="app_install_details_group_title" msgid="7084623031296083574">"Veikals"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"Lietotnes informācija"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"Lietotne instalēta, izmantojot <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="instant_app_details_summary" msgid="4529934403276907045">"Papildinformācija par <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Lietotnes darbības"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"Darbojas"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(Nekad nav izmantots)"</string>
@@ -1702,7 +1703,6 @@
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"Tastatūras īsinājumtaustiņu palīgs"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"Rādīt pieejamos īsinājumtaustiņus"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"Noklusējums"</string>
-    <string name="pointer_settings_category" msgid="8183819795164034286">"Pele/kursorplanšete"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"Rādītāja ātrums"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"Spēļu vadība"</string>
     <string name="vibrate_input_devices" msgid="2599591466928793082">"Vibrosignāla izmantošana"</string>
@@ -1874,6 +1874,7 @@
     <string name="enable_service_title" msgid="3061307612673835592">"Vai izmantot pakalpojumu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"Pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> nepieciešams:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Lietotne Iestatījumi nevar verificēt jūsu atbildi, jo cita lietotne aizsedz atļaujas pieprasījumu."</string>
+    <string name="window_obscured_warning" msgid="8711643931674708175">"Lietotne Iestatījumi nevar atbildēt uz jūsu darbību, jo cita lietotne tiek rādīta virs šīm opcijām."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Ja ieslēgsiet pakalpojumu <xliff:g id="SERVICE">%1$s</xliff:g>, ierīce neizmantos ekrāna bloķēšanu datu šifrēšanas uzlabošanai."</string>
     <string name="secure_lock_encryption_warning" msgid="460911459695077779">"Tā kā esat ieslēdzis pieejamības pakalpojumu, ierīce neizmantos ekrāna bloķēšanu datu šifrēšanas uzlabošanai."</string>
     <string name="enable_service_pattern_reason" msgid="777577618063306751">"Tā kā pakalpojuma <xliff:g id="SERVICE">%1$s</xliff:g> ieslēgšana ietekmē datu šifrēšanu, jums ir jāapstiprina sava grafiskā atslēga."</string>
@@ -1932,8 +1933,8 @@
     <string name="device_screen_usage" msgid="3386088035570409683">"Ekrāna lietojums kopš pilnas uzlādes"</string>
     <string name="device_screen_consumption" msgid="4607589286438986687">"Ekrāna lietojuma patēriņš"</string>
     <string name="device_cellular_network" msgid="4724773411762382950">"Mobilo tīklu meklēšana"</string>
-    <string name="power_last_full_charge_summary" msgid="532845389094620657">"Pirms <xliff:g id="TIME">%1$s</xliff:g>"</string>
-    <string name="power_usage_list_summary" msgid="6775339745194635000">"Jaudas patēriņš lietotnēs kopš pilnas uzlādes (pirms <xliff:g id="TIME">%1$s</xliff:g>)"</string>
+    <string name="power_last_full_charge_summary" msgid="532845389094620657">"Pirms <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="power_usage_list_summary" msgid="6775339745194635000">"Jaudas patēriņš lietotnēs kopš pilnas uzlādes (pirms <xliff:g id="TIME">^1</xliff:g>)"</string>
     <string name="screen_usage_summary" msgid="6687403051423153550">"Cik ilgi ekrāns ir ieslēgts kopš pilnas uzlādes"</string>
     <string name="device_usage_list_summary" msgid="5623036661468763251">"Ierīces lietojums kopš pilnas uzlādes"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Akumulatora lietojums kopš atslēgšanas"</string>
@@ -1953,7 +1954,7 @@
     <string name="awake" msgid="387122265874485088">"Ierīces nomoda laiks"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi uz laiku"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi uz laiku"</string>
-    <string name="advanced_battery_title" msgid="2068039111517508622">"Papildu informācija par akumulatora lietojumu"</string>
+    <string name="advanced_battery_title" msgid="2068039111517508622">"Dati par akum. lietojumu"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Vēstures dati"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Akumulatora lietojums"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Izmantot detaļas"</string>
@@ -1964,7 +1965,7 @@
     <string name="power_camera" msgid="4976286950934622605">"Kamera"</string>
     <string name="power_wifi" msgid="1135085252964054957">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
-    <string name="power_cell" msgid="6596471490976003056">"Mobilā tālruņa gaidstāve"</string>
+    <string name="power_cell" msgid="3392999761958982492">"Mobilā tīkla gaidstāve"</string>
     <string name="power_phone" msgid="5392641106474567277">"Balss zvani"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Planšetdators ir gaidstāvē"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Tālrunis dīkstāvē"</string>
@@ -2024,14 +2025,13 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Patērētā akumulatora jauda ir aptuvens enerģijas patēriņa aprēķins, un tajā nav ietverti visi avoti, kuri patērē akumulatora enerģiju. Dažādu avotu rādītājs nozīmē starpību starp aptuveno aprēķināto enerģijas patēriņu un faktiski novēroto patēriņu."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Par daudz uzskaitītais enerģijas patēriņš"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="4383512863007718804">"Izmantots: %1$s"</string>
+    <string name="battery_used_for" msgid="2690821851327075443">"Izmantots šādu laiku: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> izmanto lietotne <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> no vispārējā akumulatora lietojuma"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Sadalījums kopš pēdējās pilnās uzlādes"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Pēdējā pilnā uzlāde"</string>
     <string name="battery_footer_summary" msgid="4701358808575132647">"Atlikušais akumulatora darbības ilgums ir aptuvens un var mainīties atkarībā no lietojuma."</string>
-    <!-- no translation found for battery_detail_foreground (3350401514602032183) -->
-    <skip />
+    <string name="battery_detail_foreground" msgid="3350401514602032183">"Aktīvi lietojot"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Darbojoties fonā"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Akumulatora lietojums"</string>
     <string name="battery_detail_power_percentage" msgid="8064814503316094497">"<xliff:g id="PERCENT">%1$s</xliff:g> no kopējā jaudas patēriņa lietotnēs (<xliff:g id="POWER">%2$d</xliff:g> mAh)"</string>
@@ -2047,7 +2047,7 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Lietotnes optimizācija"</string>
-    <string name="battery_saver" msgid="1426682272004907982">"Akumulatora enerģijas taupīšanas režīms"</string>
+    <string name="battery_saver" msgid="1426682272004907982">"Enerģijas taupīšanas režīms"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Ieslēgt automātiski"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Nekad"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"ar akumulatora uzlādes līmeni <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -2097,7 +2097,6 @@
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Balss ievades un izvades iestatījumi"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Balss meklēšana"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android tastatūra"</string>
-    <string name="voice_category" msgid="1430370497125803904">"Runa"</string>
     <string name="voice_input_settings" msgid="1099937800539324567">"Balss ievades iestatījumi"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"Balss ievade"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"Balss ievades pakalpojumi"</string>
@@ -2570,7 +2569,7 @@
     <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Pieskarties un maksāt"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Plašāka informācija"</string>
     <string name="nfc_payment_no_apps" msgid="5477904979148086424">"Maksājiet veikalos, izmantojot savu tālruni"</string>
-    <string name="nfc_payment_default" msgid="8648420259219150395">"Noklusējuma lietotne maksājumu veikšanai"</string>
+    <string name="nfc_payment_default" msgid="8648420259219150395">"Noklusējuma maksājumu lietotne"</string>
     <string name="nfc_payment_default_not_set" msgid="7485060884228447765">"Nav iestatīta"</string>
     <string name="nfc_payment_app_and_desc" msgid="7942415346564794258">"<xliff:g id="APP">%1$s</xliff:g> — <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
     <string name="nfc_payment_use_default" msgid="3234730182120288495">"Izmantot noklusējumu"</string>
@@ -2754,10 +2753,12 @@
     <string name="notification_volume_option_title" msgid="6064656124416882130">"Paziņojumu skaļums"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Tālruņa zvana signāls"</string>
     <string name="notification_ringtone_title" msgid="4468722874617061231">"Paziņojuma noklusējuma skaņa"</string>
+    <string name="notification_unknown_sound_title" msgid="2535027767851838335">"Lietotnes nodrošinātā skaņa"</string>
+    <string name="notification_sound_default" msgid="565135733949733766">"Paziņojuma noklusējuma skaņa"</string>
     <string name="alarm_ringtone_title" msgid="6344025478514311386">"Signāla noklusējuma skaņa"</string>
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Vibrācija zvaniem"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Citas skaņas"</string>
-    <string name="dial_pad_tones_title" msgid="1999293510400911558">"Numura sastādīšanas tastatūras skaņas"</string>
+    <string name="dial_pad_tones_title" msgid="1999293510400911558">"Numura sast. tastatūras skaņas"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Ekrāna bloķēšanas skaņas"</string>
     <string name="charging_sounds_title" msgid="1132272552057504251">"Uzlādes signāli"</string>
     <string name="docking_sounds_title" msgid="155236288949940607">"Dokošanas skaņas"</string>
@@ -2776,7 +2777,7 @@
       <item quantity="one">Ieslēgta <xliff:g id="ON_COUNT">%d</xliff:g> automātiskā kārtula</item>
       <item quantity="other">Ieslēgtas <xliff:g id="ON_COUNT">%d</xliff:g> automātiskās kārtulas</item>
     </plurals>
-    <string name="zen_mode_settings_title" msgid="842308776768942600">"Režīma “Netraucēt” preferences"</string>
+    <string name="zen_mode_settings_title" msgid="842308776768942600">"“Netraucēt” preferences"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Tikai prioritārie"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Autom. kārtulas"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"“Netraucēt” kārtulu iestatīšana"</string>
@@ -2803,6 +2804,7 @@
     <string name="configure_notification_settings" msgid="7616737397127242615">"Paziņojumi"</string>
     <string name="advanced_section_header" msgid="8833934850242546903">"Papildu"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Darba paziņojumi"</string>
+    <string name="notification_badging_title" msgid="5125022693565388760">"Atļaut ikonu emblēmas"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Mirgojošs gaismas signāls"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Bloķēšanas ekrānā"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Rādīt visu saturu paziņojumos"</string>
@@ -2816,6 +2818,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Kā ierīcē rādīt profila paziņojumus, kad tā ir bloķēta?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Profila paziņojumi"</string>
     <string name="app_notifications_title" msgid="139788604658984593">"Paziņojumi"</string>
+    <string name="notification_channel_title" msgid="2260666541030178452">"Paziņojuma kategorija"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Svarīgums"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"Atkarībā no lietotnes iestatījumiem"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Nekad nerādīt paziņojumus"</string>
@@ -2823,14 +2826,15 @@
     <string name="notification_importance_low" msgid="8881468429453766553">"Bez skaņas"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"Atskaņot skaņas signālu"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"Atskaņot skaņas signālu un īslaicīgi parādīt ekrānā"</string>
-    <string name="notification_importance_min_summary" msgid="8233873580287975662">"Nav svarīgi: bez skaņas vai vizuāla signāla"</string>
-    <string name="notification_importance_low_summary" msgid="1296192045494524565">"Vidēji svarīgi: bez skaņas"</string>
-    <string name="notification_importance_default_summary" msgid="5730277944596984792">"Svarīgi: atskaņot skaņas signālu"</string>
-    <string name="notification_importance_high_summary" msgid="3248683220940159642">"Ļoti svarīgi: atskaņot skaņas signālu un īslaicīgi parādīt ekrānā"</string>
-    <string name="allow_sound" msgid="6585849855452076626">"Atļaut skaņu"</string>
+    <string name="notification_importance_min_title" msgid="6974673091137544803">"Mazsvarīgs"</string>
+    <string name="notification_importance_low_title" msgid="8131254047772814309">"Vidēji svarīgs"</string>
+    <string name="notification_importance_default_title" msgid="9120383978536089489">"Svarīgs"</string>
+    <string name="notification_importance_high_title" msgid="3058778300264746473">"Steidzams"</string>
+    <string name="allow_sound" msgid="1820188704793497324">"Atļaujiet skaņu"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"Nerādīt šos paziņojumus pašreizējā ekrāna skatā, kā arī neatskaņot to skaņas signālu un nevibrēt"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Paziņojumu palīgs"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Piekļuve paziņojumiem"</string>
+    <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Piekļuve darba profila paziņojumiem ir bloķēta"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"Lietotnēs nevar lasīt paziņojumus."</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
       <item quantity="zero">%d lietotnēs var lasīt paziņojumus</item>
@@ -2861,6 +2865,8 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Piekļuve pie “Netraucēt”"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Nevienā instalētajā lietotnē nav pieprasīta piekļuve režīmam “Netraucēt”."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Notiek lietotņu ielāde..."</string>
+    <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android neatļauj šīs lietotnes paziņojumu rādīšanu šajā ierīcē"</string>
+    <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android neatļauj šīs kategorijas paziņojumu rādīšanu šajā ierīcē"</string>
     <string name="notification_channels" msgid="5346841743182627500">"Kategorijas"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Cits"</string>
     <string name="no_channels" msgid="3077375508177744586">"Šai lietotnei nav neviena paziņojuma."</string>
@@ -2883,8 +2889,7 @@
     <string name="app_notification_block_summary" msgid="4744020456943215352">"Nekad nerādīt šos paziņojumus"</string>
     <string name="notification_content_block_title" msgid="5854232570963006360">"Rādīt paziņojumus"</string>
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Nekad nerādīt paziņojumus panelī vai perifērijas ierīcēs"</string>
-    <string name="notification_badge_title" msgid="7166470350070693657">"Emblēmas lietotnes ikona"</string>
-    <string name="notification_badge_summary" msgid="3944771498030335669">"Ja tiek atbalstīts, rādīt paziņojumus kā emblēmas lietotnē Sākums."</string>
+    <string name="notification_badge_title" msgid="7734903868300369178">"Atļaut ikonas emblēmu"</string>
     <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Ignorēt režīmu “Netraucēt”"</string>
     <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Ļaut šiem paziņojumiem pārtraukt arī turpmāk, ja režīms “Netraucēt” ir iestatīts uz “Tikai prioritārie”"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"Bloķēšanas ekrānā"</string>
@@ -2998,18 +3003,14 @@
     <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Saglabāt pašreizējo virzienu"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"Drošā palaišana"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Turpināt"</string>
-    <string name="encryption_interstitial_message_pin" msgid="7164072567822375682">"Varat uzlabot šīs ierīces drošības līmeni, iestatot, lai pirms ierīces palaišanas tiktu pieprasīts PIN. Kamēr ierīce nav palaista, nevar saņemt zvanus, ziņojumus vai paziņojumus, tostarp modinātāja signālus.\n\nTādējādi tiek uzlabota datu aizsardzība pazaudētās vai nozagtās ierīcēs."</string>
-    <string name="encryption_interstitial_message_pattern" msgid="6747091924626566031">"Varat uzlabot šīs ierīces drošības līmeni, iestatot, lai pirms ierīces palaišanas tiktu pieprasīta grafiskā atslēga. Kamēr ierīce nav palaista, nevar saņemt zvanus, ziņojumus vai paziņojumus, tostarp modinātāja signālus.\n\nTādējādi tiek uzlabota datu aizsardzība pazaudētās vai nozagtās ierīcēs."</string>
-    <string name="encryption_interstitial_message_password" msgid="3462225324186045679">"Varat uzlabot šīs ierīces drošības līmeni, iestatot, lai pirms ierīces palaišanas tiktu pieprasīta parole. Kamēr ierīce nav palaista, nevar saņemt zvanus, ziņojumus vai paziņojumus, tostarp modinātāja signālus.\n\nTādējādi tiek uzlabota datu aizsardzība pazaudētās vai nozagtās ierīcēs."</string>
-    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="3775537118799831558">"Papildus atbloķēšanai ar pirkstu nospiedumu varat iestatīt, lai pirms ierīces palaišanas tiktu pieprasīts PIN kods. Šādi jūs uzlabosiet ierīces aizsardzību. Ja ierīce nav palaista, netiek saņemti zvani, īsziņas, paziņojumi, tostarp signāli.\n\nTādējādi tiek aizsargāti ierīces dati, ja tā tiek pazaudēta vai nozagta."</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="1105290967535237237">"Papildus atbloķēšanai ar pirkstu nospiedumu varat iestatīt, lai pirms ierīces palaišanas tiktu pieprasīta kombinācija. Šādi jūs uzlabosiet ierīces aizsardzību. Ja ierīce nav palaista, netiek saņemti zvani, īsziņas, paziņojumi, tostarp signāli.\n\nTādējādi tiek aizsargāti ierīces dati, ja tā tiek pazaudēta vai nozagta."</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="3512482682507378424">"Papildus atbloķēšanai ar pirkstu nospiedumu varat iestatīt, lai pirms ierīces palaišanas tiktu pieprasīta parole. Šādi jūs uzlabosiet ierīces aizsardzību. Ja ierīce nav palaista, netiek saņemti zvani, īsziņas, paziņojumi, tostarp signāli.\n\nTādējādi tiek aizsargāti ierīces dati, ja tā tiek pazaudēta vai nozagta."</string>
-    <string name="encrypt_require_pin" msgid="2063945047845243752">"Sāknējot ierīci, pieprasīt PIN kodu"</string>
-    <string name="encrypt_require_pattern" msgid="6898479411004015810">"Sāknējot ierīci, pieprasīt kombināciju"</string>
-    <string name="encrypt_require_password" msgid="8770628366276570518">"Sāknējot ierīci, pieprasīt paroli"</string>
-    <string name="encrypt_dont_require_pin" msgid="1082444817726247368">"Nē, paldies"</string>
-    <string name="encrypt_dont_require_pattern" msgid="6668299362640433843">"Nē, paldies"</string>
-    <string name="encrypt_dont_require_password" msgid="2580403214917009046">"Nē, paldies"</string>
+    <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Varat uzlabot šīs ierīces drošības līmeni, iestatot, lai pirms ierīces palaišanas tiktu pieprasīts PIN. Kamēr ierīce nav palaista, nevar saņemt zvanus, ziņojumus un paziņojumus, tostarp modinātāja signālus.\n\nTādējādi tiek uzlabota datu aizsardzība nozaudētās vai nozagtās ierīcēs. Vai pieprasīt PIN pirms ierīces palaišanas?"</string>
+    <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"Varat uzlabot šīs ierīces drošības līmeni, iestatot, lai pirms ierīces palaišanas tiktu pieprasīta kombinācija. Kamēr ierīce nav palaista, nevar saņemt zvanus, ziņojumus un paziņojumus, tostarp modinātāja signālus.\n\nTādējādi tiek uzlabota datu aizsardzība nozaudētās vai nozagtās ierīcēs. Vai pieprasīt kombināciju pirms ierīces palaišanas?"</string>
+    <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Varat uzlabot šīs ierīces drošības līmeni, iestatot, lai pirms ierīces palaišanas tiktu pieprasīta parole. Kamēr ierīce nav palaista, nevar saņemt zvanus, ziņojumus un paziņojumus, tostarp modinātāja signālus.\n\nTādējādi tiek uzlabota datu aizsardzība nozaudētās vai nozagtās ierīcēs. Vai pieprasīt paroli pirms ierīces palaišanas?"</string>
+    <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Papildus ierīces atbloķēšanai ar pirksta nospiedumu varat uzlabot ierīces drošības līmeni, iestatot, lai pirms ierīces palaišanas tiktu pieprasīts PIN. Kamēr ierīce nav palaista, nevar saņemt zvanus, ziņojumus un paziņojumus, tostarp modinātāja signālus.\n\nTādējādi tiek uzlabota datu aizsardzība nozaudētās vai nozagtās ierīcēs. Vai pieprasīt PIN pirms ierīces palaišanas?"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Papildus ierīces atbloķēšanai ar pirksta nospiedumu varat uzlabot ierīces drošības līmeni, iestatot, lai pirms ierīces palaišanas tiktu pieprasīta kombinācija. Kamēr ierīce nav palaista, nevar saņemt zvanus, ziņojumus un paziņojumus, tostarp modinātāja signālus.\n\nTādējādi tiek uzlabota datu aizsardzība nozaudētās vai nozagtās ierīcēs. Vai pieprasīt kombināciju pirms ierīces palaišanas?"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="1088818752838720964">"Papildus ierīces atbloķēšanai ar pirksta nospiedumu varat uzlabot ierīces drošības līmeni, iestatot, lai pirms ierīces palaišanas tiktu pieprasīta parole. Kamēr ierīce nav palaista, nevar saņemt zvanus, ziņojumus un paziņojumus, tostarp modinātāja signālus.\n\nTādējādi tiek uzlabota datu aizsardzība nozaudētās vai nozagtās ierīcēs. Vai pieprasīt paroli pirms ierīces palaišanas?"</string>
+    <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Jā"</string>
+    <string name="encryption_interstitial_no" msgid="8935031349097025137">"Nē"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Vai pieprasīt PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Vai pieprasīt atslēgu?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Vai pieprasīt paroli?"</string>
@@ -3021,7 +3022,7 @@
     <string name="imei_information_summary" msgid="2074095606556565233">"Ar IMEI saistīta informācija"</string>
     <string name="slot_number" msgid="3762676044904653577">"(<xliff:g id="SLOT_NUM">%1$d</xliff:g>. slots)"</string>
     <string name="launch_by_default" msgid="1840761193189009248">"Atvērt pēc noklusējuma"</string>
-    <string name="app_launch_domain_links_title" msgid="1160925981363706090">"Saišu atvēršana"</string>
+    <string name="app_launch_domain_links_title" msgid="1160925981363706090">"Palaišanas saites"</string>
     <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"Atbalstīto saišu atvēršana"</string>
     <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"Atvērt bez vaicāšanas"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="8250695258211477480">"Atbalstītās saites"</string>
@@ -3080,7 +3081,7 @@
     <string name="app_permissions_summary" msgid="5163974162150406324">"Lietotnes, kuras izmanto: <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="7211944147196888807">"Pieskarieties, lai aktivizētu"</string>
     <string name="tap_to_wake_summary" msgid="4341387904987585616">"Lai aktivizētu ierīci, veiciet dubultskārienu jebkurā ekrāna vietā."</string>
-    <string name="domain_urls_title" msgid="3132983644568821250">"Saišu atvēršana"</string>
+    <string name="domain_urls_title" msgid="3132983644568821250">"Palaišanas saites"</string>
     <string name="domain_urls_summary_none" msgid="2639588015479657864">"Neatvērt atbalstītās saites"</string>
     <string name="domain_urls_summary_one" msgid="3704934031930978405">"Atvērt: <xliff:g id="DOMAIN">%s</xliff:g>"</string>
     <string name="domain_urls_summary_some" msgid="3950089361819428455">"Atvērt <xliff:g id="DOMAIN">%s</xliff:g> un citus vietrāžus URL"</string>
@@ -3136,8 +3137,7 @@
     <string name="high_power_desc" msgid="6283926163708585760">"Neizmantot akumulatora darbības optimizāciju. Iespējams, akumulators tiks ātrāk izlādēts."</string>
     <string name="high_power_prompt_title" msgid="6358673688590282655">"Vai atļaut lietotnei vienmēr darboties fonā?"</string>
     <string name="high_power_prompt_body" msgid="1031422980602565049">"Atļaujot lietotnei <xliff:g id="APP_NAME">%1$s</xliff:g> vienmēr darboties fonā, var tikt samazināts akumulatora darbības ilgums. \n\nVarat mainīt šo iestatījumu vēlāk sadaļā Iestatījumi &gt; Lietotnes un paziņojumi."</string>
-    <!-- no translation found for battery_summary (8044042095190688654) -->
-    <skip />
+    <string name="battery_summary" msgid="8044042095190688654">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> lietojums kopš pēdējās pilnās uzlādes"</string>
     <string name="battery_power_management" msgid="5571519699679107523">"Enerģijas patēriņa pārvaldība"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Kopš pēdējās pilnās uzlādes akumulatora jauda nav izmantota"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"Lietotnes iestatījumi"</string>
@@ -3211,15 +3211,13 @@
     <string name="app_list_preference_none" msgid="108006867520327904">"Nav"</string>
     <string name="work_profile_usage_access_warning" msgid="2918050775124911939">"Izslēdzot piekļuvi šīs lietotnes lietojuma datiem, administratoram netiek liegta iespēja izsekot datu lietojumu lietotnēm jūsu darba profilā."</string>
     <string name="accessibility_lock_screen_progress" msgid="2408292742980383166">"Izmantotas <xliff:g id="COUNT_0">%1$d</xliff:g> zīmes no <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
-    <string name="draw_overlay_title" msgid="7524215631960029502">"Lietotnes, ko var rādīt pāri citām lietotnēm"</string>
     <string name="draw_overlay" msgid="6564116025404257047">"Rādīt pāri citām lietotnēm"</string>
     <string name="system_alert_window_settings" msgid="8466613169103527868">"Rādīt pāri citām lietotnēm"</string>
     <string name="system_alert_window_apps_title" msgid="7005760279028569491">"Lietotnes"</string>
     <string name="system_alert_window_access_title" msgid="6297115362542361241">"Rādīt pāri citām lietotnēm"</string>
     <string name="permit_draw_overlay" msgid="7456536798718633432">"Atļaut rādīt pāri citām lietotnēm"</string>
     <string name="app_overlay_permission_preference" msgid="9039432222453006038">"Atļauja rādīt lietotni pāri"</string>
-    <!-- no translation found for allow_overlay_description (8961670023925421358) -->
-    <skip />
+    <string name="allow_overlay_description" msgid="8961670023925421358">"Atļaut rādīt šo lietotni pāri citām jūsu izmantotajām lietotnēm. Šī lietotne var traucēt izmantot citas lietotnes vai mainīt šo lietotņu attēlojumu vai darbību."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr virtuālā realitāte klausītājs stereo palīgs pakalpojums"</string>
     <string name="keywords_system_alert_window" msgid="5049498015597864850">"sistēma brīdinājums logs dialoglodziņš rādīt pāri citām lietotnēm"</string>
     <string name="overlay_settings" msgid="6930854109449524280">"Rādīt pāri citām lietotnēm"</string>
@@ -3227,7 +3225,7 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Lietotnes ar atļauju"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"Jā"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"Nē"</string>
-    <string name="install_other_apps" msgid="6986686991775883017">"Instalēt nezināmas lietotnes"</string>
+    <string name="install_other_apps" msgid="6986686991775883017">"Instalēt nez. lietotnes"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"instalēt lietotnes nezināmi avoti"</string>
     <string name="write_settings" msgid="4797457275727195681">"Iestatījumu pārveidošana"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"rakstīt, pārveidot sistēmas iestatījumus"</string>
@@ -3241,9 +3239,9 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Ar šo atļauju lietotnes var pārveidot sistēmas iestatījumus."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Jā"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Nē"</string>
-    <string name="external_source_trusted" msgid="6857780460845250885">"Jā"</string>
-    <string name="external_source_untrusted" msgid="6608922938133896956">"Nē"</string>
-    <string name="external_source_switch_title" msgid="5581865736984836418">"Atļaut instalēt lietotnes"</string>
+    <string name="external_source_trusted" msgid="2707996266575928037">"Atļauts"</string>
+    <string name="external_source_untrusted" msgid="2677442511837596726">"Nav atļauts"</string>
+    <string name="external_source_switch_title" msgid="3621381992793251070">"Atļaut no šī avota"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Pagriešana divreiz kameras atvēršanai"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Atvērt kameras lietotni, divreiz pagriežot plaukstas locītavu"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Kamera, divreiz nospiežot barošanas pogu"</string>
@@ -3316,8 +3314,6 @@
     <string name="condition_bg_data_summary" msgid="656957852895282228">"Fona dati ir pieejami, izmantojot tikai Wi-Fi savienojumu. Tas var ietekmēt dažu lietotņu vai pakalpojumu darbību, kad Wi-Fī tīkls nav pieejams."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Darba profils ir izslēgts"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Lietotnes, sinhronizācija fonā un citas ar jūsu darba profilu saistītās funkcijas ir izslēgtas."</string>
-    <string name="night_display_suggestion_title" msgid="6602129097059325291">"Nakts režīma iestatīšana"</string>
-    <string name="night_display_suggestion_summary" msgid="1747638280833631187">"Ekrāns dzintara tonī iemigšanai"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Nakts režīms ir ieslēgts"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"Ekrāns iekrāsojas dzintara krāsā. Tas var palīdzēt jums iemigt."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Ieteikumi"</string>
@@ -3435,7 +3431,8 @@
     <string name="premium_sms_warning" msgid="9086859595338944882">"Par maksas īsziņām no jums var tikt iekasēta samaksa, kas tiks pievienota jūsu mobilo sakaru operatora rēķinam. Ja kādai lietotnei iespējosiet piekļuves atļauju, varēsiet sūtīt maksas īsziņas, izmantojot šo lietotni."</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"Piekļuve maksas īsziņām"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"Nav redzams citām ierīcēm"</string>
-    <string name="bluetooth_connected_summary" msgid="8733997010923307915">"Izveidots savienojums ar:"</string>
+    <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Izveidots savienojums ar ierīci <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Izveidots savienojums ar vairākām ierīcēm"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Sistēmas lietotāja saskarnes demonstrācijas režīms"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Izstrādātāja ātro iestatījumu elementi"</string>
     <string name="support_escalation_title" msgid="4111071371281023145">"Esam gatavi jums palīdzēt"</string>
@@ -3508,13 +3505,13 @@
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Dubultskāriens, lai skatītu planšetdatora paziņojumus"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Dubultskāriens, lai skatītu ierīces paziņojumus"</string>
     <string name="ambient_display_summary" msgid="2521630136233865893">"Lai ātri skatītu paziņojumus, veiciet dubultskārienu ekrānam."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Tālruņa pacelšana, lai skatītu paziņojumus"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Tālruņa pārbaude paceļot"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Planšetdatora pacelšana, lai skatītu paziņojumus"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Ierīces pacelšana, lai skatītu paziņojumus"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"Lai ātri skatītu paziņojumus, paņemiet tālruni."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"Lai ātri skatītu paziņojumus, paņemiet planšetdatoru."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"Lai ātri skatītu paziņojumus, paņemiet ierīci."</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Pirksta nospieduma vilkšana, lai skatītu paziņojumus"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Ziņu skatīšana ar pirksta nospiedumu"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Lai skatītu paziņojumus, velciet uz leju pār pirksta nospieduma sensoru tālruņa aizmugurē."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Lai skatītu paziņojumus, velciet uz leju pār pirksta nospieduma sensoru planšetdatora aizmugurē."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Lai skatītu paziņojumus, velciet uz leju pār pirksta nospieduma sensoru ierīces aizmugurē."</string>
@@ -3528,9 +3525,10 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Veidojiet savienojumu ar internetu/sazinieties ar operatoru"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Nav pieejams mobilo sakaru operatoru bloķētās ierīcēs"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"Kopā pieejams: <xliff:g id="SIZE">%1$s</xliff:g>\n\nPēdējoreiz izmantots: <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="web_action_enable_title" msgid="8502552575492048305">"Atvērt saites lietotnēs"</string>
-    <string name="web_action_enable_summary" msgid="4679844581193646863">"Atveriet saites atbalstītās lietotnēs, pat ja šīs lietotnes nav instalētas jūsu ierīcē."</string>
-    <string name="web_action_section_title" msgid="806405168097593614">"Lietotnes nav instalētas"</string>
+    <string name="web_action_enable_title" msgid="4051513950976670853">"Tūlītējās lietotnes"</string>
+    <string name="web_action_enable_summary" msgid="3108127559723396382">"Atveriet saites lietotnēs, pat ja tās nav instalētas."</string>
+    <string name="web_action_section_title" msgid="7364647086538399136">"Tūlītējās lietotnes"</string>
+    <string name="instant_apps_account" msgid="1433620209791992528">"Tūlītējo lietotņu konts"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"Instalētās lietotnes"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"Tagad jūsu krātuvi pārvalda krātuves pārvaldnieks"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"Lietotāja <xliff:g id="USER_NAME">%1$s</xliff:g> konti"</string>
@@ -3624,24 +3622,22 @@
     <string name="storage_settings_2" product="default" msgid="4306047711760327031">"Tālruņa krātuve"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
     <string name="storage_volume_total" msgid="3499221850532701342">"Izmantoti no <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
-    <!-- no translation found for storage_percent_full (6095012055875077036) -->
-    <skip />
+    <string name="storage_percent_full" msgid="6095012055875077036">"izmantots"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"Notīrīt lietotni"</string>
-    <!-- no translation found for clear_instant_app_confirmation (7451671214898856857) -->
-    <skip />
+    <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"Vai vēlaties noņemt šo tūlītējo lietotni?"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"Spēles"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"Audio faili"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(atinstalēts lietotājam <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(atspējots lietotājam <xliff:g id="USER">%s</xliff:g>)"</string>
-    <string name="autofill_app" msgid="7338387238377914374">"Automātiskās aizpildes pakalpojums"</string>
+    <string name="autofill_app" msgid="7338387238377914374">"Automātiskā aizpilde"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"automātiskā aizpilde"</string>
-    <string name="autofill_confirmation_message" msgid="7368058965765225486">"Vai izvēlaties automātiskās aizpildes lietotni <xliff:g id="APP_NAME_0">%1$s</xliff:g>? <xliff:g id="APP_NAME_1">%1$s</xliff:g> varēs lasīt ekrāna saturu un aizpildīt laukus citās lietotnēs."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Pārliecinieties, ka šī lietotne ir uzticama&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google automātiskā aizpilde&gt;%1$s&lt;/xliff:g&gt; izmanto ekrānā redzamo, lai noteiktu, kādu informāciju aizpildīt automātiski."</string>
     <string name="device_theme" msgid="4571803018917608588">"Ierīces motīvs"</string>
     <string name="default_theme" msgid="7085644992078579076">"Noklusējums"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Krātuves pārvaldnieks: <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"Izslēgts"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"Ieslēgts"</string>
-    <string name="install_type_instant" msgid="3174425974536078647">"Tūlītēja lietotne"</string>
+    <string name="install_type_instant" msgid="3174425974536078647">"Tūlītējā lietotne"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="5605210730828410482">"Vai izslēgt krātuves pārvaldnieku?"</string>
     <string name="storage_movies_tv" msgid="5498394447562086890">"Filmu un TV pārraižu lietotnes"</string>
     <string name="app_info_storage_title" msgid="5554719444625611987">"Izmantotā vieta krātuvē"</string>

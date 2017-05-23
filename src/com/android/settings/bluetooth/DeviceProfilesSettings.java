@@ -23,6 +23,7 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,6 +38,7 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -55,6 +57,8 @@ public final class DeviceProfilesSettings extends InstrumentedDialogFragment imp
     private static final String KEY_PROFILE_CONTAINER = "profile_container";
     private static final String KEY_UNPAIR = "unpair";
     private static final String KEY_PBAP_SERVER = "PBAP Server";
+    @VisibleForTesting
+    static final String HIGH_QUALITY_AUDIO_PREF_TAG = "A2dpProfileHighQualityAudio";
 
     private CachedBluetoothDevice mCachedDevice;
     private LocalBluetoothManager mManager;
@@ -167,11 +171,32 @@ public final class DeviceProfilesSettings extends InstrumentedDialogFragment imp
     private void addPreferencesForProfiles() {
         mProfileContainer.removeAllViews();
         for (LocalBluetoothProfile profile : mCachedDevice.getConnectableProfiles()) {
-            CheckBox pref = createProfilePreference(profile);
-            mProfileContainer.addView(pref);
+            // MAP and PBAP profiles would be added based on permission access
+            if (!((profile instanceof PbapServerProfile) ||
+                (profile instanceof MapProfile) ||
+                (profile instanceof A2dpProfile))) {
+                CheckBox pref = createProfilePreference(profile);
+                mProfileContainer.addView(pref);
+            }
+            if (profile instanceof A2dpProfile) {
+                CheckBox pref = createProfilePreference(profile);
+                mProfileContainer.addView(pref);
+                BluetoothDevice device = mCachedDevice.getDevice();
+                A2dpProfile a2dpProfile = (A2dpProfile) profile;
+                if (a2dpProfile.supportsHighQualityAudio(device)) {
+                    CheckBox highQualityPref = new CheckBox(getActivity());
+                    highQualityPref.setTag(HIGH_QUALITY_AUDIO_PREF_TAG);
+                    highQualityPref.setOnClickListener(v -> {
+                        a2dpProfile.setHighQualityAudioEnabled(device, highQualityPref.isChecked());
+                    });
+                    highQualityPref.setVisibility(View.GONE);
+                    mProfileContainer.addView(highQualityPref);
+                }
+                refreshProfilePreference(pref, profile);
+            }
         }
-
         final int pbapPermission = mCachedDevice.getPhonebookPermissionChoice();
+        Log.d(TAG, "addPreferencesForProfiles: pbapPermission = " + pbapPermission);
         // Only provide PBAP cabability if the client device has requested PBAP.
         if (pbapPermission != CachedBluetoothDevice.ACCESS_UNKNOWN) {
             final PbapServerProfile psp = mManager.getProfileManager().getPbapProfile();
@@ -181,6 +206,7 @@ public final class DeviceProfilesSettings extends InstrumentedDialogFragment imp
 
         final MapProfile mapProfile = mManager.getProfileManager().getMapProfile();
         final int mapPermission = mCachedDevice.getMessagePermissionChoice();
+        Log.d(TAG, "addPreferencesForProfiles: mapPermission = " + mapPermission);
         if (mapPermission != CachedBluetoothDevice.ACCESS_UNKNOWN) {
             CheckBox mapPreference = createProfilePreference(mapProfile);
             mProfileContainer.addView(mapPreference);
@@ -232,15 +258,6 @@ public final class DeviceProfilesSettings extends InstrumentedDialogFragment imp
     private void onProfileClicked(LocalBluetoothProfile profile, CheckBox profilePref) {
         BluetoothDevice device = mCachedDevice.getDevice();
 
-        if (KEY_PBAP_SERVER.equals(profilePref.getTag())) {
-            final int newPermission = mCachedDevice.getPhonebookPermissionChoice()
-                == CachedBluetoothDevice.ACCESS_ALLOWED ? CachedBluetoothDevice.ACCESS_REJECTED
-                : CachedBluetoothDevice.ACCESS_ALLOWED;
-            mCachedDevice.setPhonebookPermissionChoice(newPermission);
-            profilePref.setChecked(newPermission == CachedBluetoothDevice.ACCESS_ALLOWED);
-            return;
-        }
-
         if (!profilePref.isChecked()) {
             // Recheck it, until the dialog is done.
             profilePref.setChecked(true);
@@ -248,6 +265,12 @@ public final class DeviceProfilesSettings extends InstrumentedDialogFragment imp
         } else {
             if (profile instanceof MapProfile) {
                 mCachedDevice.setMessagePermissionChoice(BluetoothDevice.ACCESS_ALLOWED);
+            }
+            if (profile instanceof PbapServerProfile) {
+                mCachedDevice.setPhonebookPermissionChoice(BluetoothDevice.ACCESS_ALLOWED);
+                refreshProfilePreference(profilePref, profile);
+                // PBAP server is not preffered profile and cannot initiate connection, so return
+                return;
             }
             if (profile.isPreferred(device)) {
                 // profile is preferred but not connected: disable auto-connect
@@ -282,10 +305,17 @@ public final class DeviceProfilesSettings extends InstrumentedDialogFragment imp
         DialogInterface.OnClickListener disconnectListener =
                 new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                device.disconnect(profile);
-                profile.setPreferred(device.getDevice(), false);
-                if (profile instanceof MapProfile) {
-                    device.setMessagePermissionChoice(BluetoothDevice.ACCESS_REJECTED);
+
+                // Disconnect only when user has selected OK otherwise ignore
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    device.disconnect(profile);
+                    profile.setPreferred(device.getDevice(), false);
+                    if (profile instanceof MapProfile) {
+                        device.setMessagePermissionChoice(BluetoothDevice.ACCESS_REJECTED);
+                    }
+                    if (profile instanceof PbapServerProfile) {
+                        device.setPhonebookPermissionChoice(BluetoothDevice.ACCESS_REJECTED);
+                    }
                 }
                 refreshProfilePreference(findProfile(profile.toString()), profile);
             }
@@ -322,6 +352,19 @@ public final class DeviceProfilesSettings extends InstrumentedDialogFragment imp
         for (LocalBluetoothProfile profile : mCachedDevice.getRemovedProfiles()) {
             CheckBox profilePref = findProfile(profile.toString());
             if (profilePref != null) {
+
+                if (profile instanceof PbapServerProfile) {
+                    final int pbapPermission = mCachedDevice.getPhonebookPermissionChoice();
+                    Log.d(TAG, "refreshProfiles: pbapPermission = " + pbapPermission);
+                    if (pbapPermission != CachedBluetoothDevice.ACCESS_UNKNOWN)
+                        continue;
+                }
+                if (profile instanceof MapProfile) {
+                    final int mapPermission = mCachedDevice.getMessagePermissionChoice();
+                    Log.d(TAG, "refreshProfiles: mapPermission = " + mapPermission);
+                    if (mapPermission != CachedBluetoothDevice.ACCESS_UNKNOWN)
+                        continue;
+                }
                 Log.d(TAG, "Removing " + profile.toString() + " from profile list");
                 mProfileContainer.removeView(profilePref);
             }
@@ -355,6 +398,22 @@ public final class DeviceProfilesSettings extends InstrumentedDialogFragment imp
 
         } else {
             profilePref.setChecked(profile.isPreferred(device));
+        }
+        if (profile instanceof A2dpProfile) {
+            A2dpProfile a2dpProfile = (A2dpProfile) profile;
+            View v = mProfileContainer.findViewWithTag(HIGH_QUALITY_AUDIO_PREF_TAG);
+            if (v instanceof CheckBox) {
+                CheckBox highQualityPref = (CheckBox) v;
+                highQualityPref.setText(a2dpProfile.getHighQualityAudioOptionLabel(device));
+                highQualityPref.setChecked(a2dpProfile.isHighQualityAudioEnabled(device));
+
+                if (a2dpProfile.isPreferred(device)) {
+                    v.setVisibility(View.VISIBLE);
+                    v.setEnabled(!mCachedDevice.isBusy());
+                } else {
+                    v.setVisibility(View.GONE);
+                }
+            }
         }
     }
 
