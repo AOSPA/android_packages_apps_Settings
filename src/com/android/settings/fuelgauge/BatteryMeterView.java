@@ -38,8 +38,6 @@ public class BatteryMeterView extends ImageView {
     @VisibleForTesting
     ColorFilter mAccentColorFilter;
 
-    private int mLevel;
-
     public BatteryMeterView(Context context) {
         this(context, null, 0);
     }
@@ -51,7 +49,7 @@ public class BatteryMeterView extends ImageView {
     public BatteryMeterView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        final int frameColor = context.getColor(R.color.batterymeter_frame_color);
+        final int frameColor = context.getColor(R.color.meter_background_color);
         mAccentColorFilter = new PorterDuffColorFilter(
                 Utils.getColorAttr(context, android.R.attr.colorAccent), PorterDuff.Mode.SRC_IN);
         mErrorColorFilter = new PorterDuffColorFilter(
@@ -66,7 +64,6 @@ public class BatteryMeterView extends ImageView {
     }
 
     public void setBatteryLevel(int level) {
-        mLevel = level;
         mDrawable.setBatteryLevel(level);
         if (level < mDrawable.getCriticalLevel()) {
             mDrawable.setBatteryColorFilter(mErrorColorFilter);
@@ -76,7 +73,7 @@ public class BatteryMeterView extends ImageView {
     }
 
     public int getBatteryLevel() {
-        return mLevel;
+        return mDrawable.getBatteryLevel();
     }
 
     public void setCharging(boolean charging) {
