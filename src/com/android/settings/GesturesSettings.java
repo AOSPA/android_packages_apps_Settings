@@ -246,11 +246,11 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
         }
 
         if (mGesturesKeyCodes.keySet().stream().allMatch(keyCode -> getResources().getInteger(
-                mGesturesKeyCodes.get(keyCode)) > 0)) {
+                mGesturesKeyCodes.get(keyCode)) == 0)) {
+            getPreferenceScreen().removePreference(mOnScreenGestures);
+        } else {
             SettingsActivity activity = (SettingsActivity) getActivity();
             mGesturesEnabler = new GesturesEnabler(activity.getSwitchBar());
-        } else {
-            getPreferenceScreen().removePreference(mOnScreenGestures);
         }
 
         if (mPreferences.isEmpty()) {
