@@ -18,7 +18,10 @@ package com.android.settings.applications;
 
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyDouble;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -45,10 +48,12 @@ import android.widget.Button;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -65,12 +70,19 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class InstalledAppDetailsTest {
 
     private static final String PACKAGE_NAME = "test_package_name";
+    private static final int TARGET_UID = 111;
+    private static final int OTHER_UID = 222;
+    private static final double BATTERY_LEVEL = 60;
+    private static final String BATTERY_LEVEL_STRING = "60%";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -83,18 +95,21 @@ public final class InstalledAppDetailsTest {
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
     @Mock
-    private Preference mBatteryPreference;
-    @Mock
     private BatterySipper mBatterySipper;
     @Mock
+    private BatterySipper mOtherBatterySipper;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
     private BatteryStats.Uid mUid;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private BatteryUtils mBatteryUtils;
 
     private InstalledAppDetails mAppDetail;
     private Context mShadowContext;
+    private Preference mBatteryPreference;
 
     @Before
     public void setUp() {
@@ -102,9 +117,15 @@ public final class InstalledAppDetailsTest {
 
         mShadowContext = RuntimeEnvironment.application;
         mAppDetail = spy(new InstalledAppDetails());
+        mAppDetail.mBatteryUtils = mBatteryUtils;
+
+        mBatteryPreference = new Preference(mShadowContext);
+        mAppDetail.mBatteryPreference = mBatteryPreference;
 
         mBatterySipper.drainType = BatterySipper.DrainType.IDLE;
         mBatterySipper.uidObj = mUid;
+        doReturn(TARGET_UID).when(mBatterySipper).getUid();
+        doReturn(OTHER_UID).when(mOtherBatterySipper).getUid();
         doReturn(mActivity).when(mAppDetail).getActivity();
         doReturn(mShadowContext).when(mAppDetail).getContext();
         doReturn(mPackageManager).when(mActivity).getPackageManager();
@@ -387,5 +408,54 @@ public final class InstalledAppDetailsTest {
         mAppDetail.onActivityResult(InstalledAppDetails.REQUEST_UNINSTALL, 0, mock(Intent.class));
 
         verify(mActivity).invalidateOptionsMenu();
+    }
+
+    @Test
+    public void findTargetSipper_findCorrectSipper() {
+        List<BatterySipper> usageList = new ArrayList<>();
+        usageList.add(mBatterySipper);
+        usageList.add(mOtherBatterySipper);
+        doReturn(usageList).when(mBatteryStatsHelper).getUsageList();
+
+        assertThat(mAppDetail.findTargetSipper(mBatteryStatsHelper, TARGET_UID)).isEqualTo(
+                mBatterySipper);
+    }
+
+    @Test
+    public void updateBattery_noBatteryStats_summaryNo() {
+        doReturn(mShadowContext.getString(R.string.no_battery_summary)).when(mAppDetail).getString(
+                R.string.no_battery_summary);
+        mAppDetail.updateBattery();
+
+        assertThat(mBatteryPreference.getSummary()).isEqualTo(
+                "No battery use since last full charge");
+    }
+
+    @Test
+    public void updateBattery_hasBatteryStats_summaryPercent() {
+        mAppDetail.mBatteryHelper = mBatteryStatsHelper;
+        mAppDetail.mSipper = mBatterySipper;
+        doReturn(BATTERY_LEVEL).when(mBatteryUtils).calculateBatteryPercent(anyDouble(),
+                anyDouble(), anyDouble(), anyInt());
+        doReturn(mShadowContext.getString(R.string.battery_summary, BATTERY_LEVEL_STRING)).when(
+                mAppDetail).getString(R.string.battery_summary, BATTERY_LEVEL_STRING);
+        doReturn(new ArrayList<>()).when(mBatteryStatsHelper).getUsageList();
+
+        mAppDetail.updateBattery();
+
+        assertThat(mBatteryPreference.getSummary()).isEqualTo("60% use since last full charge");
+    }
+
+    @Test
+    public void isBatteryStatsAvailable_hasBatteryStatsHelperAndSipper_returnTrue() {
+        mAppDetail.mBatteryHelper = mBatteryStatsHelper;
+        mAppDetail.mSipper = mBatterySipper;
+
+        assertThat(mAppDetail.isBatteryStatsAvailable()).isTrue();
+    }
+
+    @Test
+    public void isBatteryStatsAvailable_parametersNull_returnFalse() {
+        assertThat(mAppDetail.isBatteryStatsAvailable()).isFalse();
     }
 }

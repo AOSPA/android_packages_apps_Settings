@@ -35,6 +35,8 @@ import java.util.List;
 public class ConfigureNotificationSettings extends DashboardFragment {
     private static final String TAG = "ConfigNotiSettings";
 
+    private static final String KEY_SWIPE_DOWN = "gesture_swipe_down_fingerprint_notifications";
+
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.CONFIGURE_NOTIFICATION;
@@ -63,12 +65,16 @@ public class ConfigureNotificationSettings extends DashboardFragment {
         final PulseNotificationPreferenceController pulseController =
                 new PulseNotificationPreferenceController(context);
         final LockScreenNotificationPreferenceController lockScreenNotificationController =
-                new LockScreenNotificationPreferenceController(context);
+                new LockScreenNotificationPreferenceController(context,
+                        "lock_screen_notifications",
+                        "lock_screen_notifications_profile_header",
+                        "lock_screen_notifications_profile");
         if (lifecycle != null) {
             lifecycle.addObserver(pulseController);
             lifecycle.addObserver(lockScreenNotificationController);
         }
-        controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle));
+        controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle,
+                KEY_SWIPE_DOWN));
         controllers.add(badgeController);
         controllers.add(pulseController);
         controllers.add(lockScreenNotificationController);

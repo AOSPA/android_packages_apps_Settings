@@ -41,8 +41,10 @@ public class WifiCallingPreferenceController extends PreferenceController {
 
     @Override
     public boolean isAvailable() {
-        return ImsManager.isWfcEnabledByPlatform(mContext)
-                && ImsManager.isWfcProvisionedOnDevice(mContext);
+        // NOTE: Global WiFi Calling settings are disabled, since they are
+        // stored per sub. WFC settings can still be accessed via the call
+        // settings UI menu.
+        return false;
     }
 
     @Override
