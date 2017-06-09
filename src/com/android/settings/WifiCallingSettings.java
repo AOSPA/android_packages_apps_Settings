@@ -42,6 +42,7 @@ import com.android.ims.ImsManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.settings.widget.SwitchBar;
+import org.codeaurora.ims.QtiCallConstants;
 
 /**
  * "Wi-Fi Calling settings" screen.  This preference screen lets you
@@ -76,6 +77,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     private boolean mValidListener = false;
     private boolean mEditableWfcMode = true;
     private boolean mEditableWfcRoamingMode = true;
+    private final int DEFAULT_PHONE_ID = 0;
+    private int mPhoneId = DEFAULT_PHONE_ID;
+    private ImsManager mImsMgr = null;
 
     private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         /*
@@ -87,8 +91,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
             final SettingsActivity activity = (SettingsActivity) getActivity();
-            boolean isNonTtyOrTtyOnVolteEnabled = ImsManager
-                    .isNonTtyOrTtyOnVolteEnabled(activity);
+            boolean isNonTtyOrTtyOnVolteEnabled = mImsMgr.isNonTtyOrTtyOnVolteEnabledForSlot();
             final SwitchBar switchBar = activity.getSwitchBar();
             boolean isWfcEnabled = switchBar.getSwitch().isChecked()
                     && isNonTtyOrTtyOnVolteEnabled;
@@ -244,6 +247,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
             mButtonWfcRoamingMode.setEntryValues(
                     R.array.wifi_calling_mode_values_without_wifi_only);
         }
+
+        mPhoneId = getIntent().getIntExtra(QtiCallConstants.EXTRA_PHONE_ID, DEFAULT_PHONE_ID);
+        mImsMgr = ImsManager.getInstance(getActivity(), mPhoneId);
     }
 
     @Override
@@ -253,16 +259,16 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         final Context context = getActivity();
 
         // NOTE: Buttons will be enabled/disabled in mPhoneStateListener
-        boolean wfcEnabled = ImsManager.isWfcEnabledByUser(context)
-                && ImsManager.isNonTtyOrTtyOnVolteEnabled(context);
+        boolean wfcEnabled = mImsMgr.isWfcEnabledByUserForSlot()
+                && mImsMgr.isNonTtyOrTtyOnVolteEnabledForSlot();
         mSwitch.setChecked(wfcEnabled);
-        int wfcMode = ImsManager.getWfcMode(context, false);
-        int wfcRoamingMode = ImsManager.getWfcMode(context, true);
+        int wfcMode = mImsMgr.getWfcModeForSlot(false);
+        int wfcRoamingMode = mImsMgr.getWfcModeForSlot(true);
         mButtonWfcMode.setValue(Integer.toString(wfcMode));
         mButtonWfcRoamingMode.setValue(Integer.toString(wfcRoamingMode));
         updateButtonWfcMode(context, wfcEnabled, wfcMode, wfcRoamingMode);
 
-        if (ImsManager.isWfcEnabledByPlatform(context)) {
+        if (mImsMgr.isWfcEnabledByPlatformForSlot()) {
             TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             tm.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
@@ -350,10 +356,10 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
      */
     private void updateWfcMode(Context context, boolean wfcEnabled) {
         Log.i(TAG, "updateWfcMode(" + wfcEnabled + ")");
-        ImsManager.setWfcSetting(context, wfcEnabled);
+        mImsMgr.setWfcSettingForSlot(wfcEnabled);
 
-        int wfcMode = ImsManager.getWfcMode(context, false);
-        int wfcRoamingMode = ImsManager.getWfcMode(context, true);
+        int wfcMode = mImsMgr.getWfcModeForSlot(false);
+        int wfcRoamingMode = mImsMgr.getWfcModeForSlot(true);
         updateButtonWfcMode(context, wfcEnabled, wfcMode, wfcRoamingMode);
         if (wfcEnabled) {
             mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), wfcMode);
@@ -379,7 +385,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
     private void updateButtonWfcMode(Context context, boolean wfcEnabled,
                                      int wfcMode, int wfcRoamingMode) {
-        mButtonWfcMode.setSummary(getWfcModeSummary(context, wfcMode));
+        mButtonWfcMode.setSummary(getWfcModeSummaryForSlot(context, wfcMode));
         mButtonWfcMode.setEnabled(wfcEnabled && mEditableWfcMode);
         // mButtonWfcRoamingMode.setSummary is not needed; summary is just selected value.
         mButtonWfcRoamingMode.setEnabled(wfcEnabled && mEditableWfcRoamingMode);
@@ -417,25 +423,25 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         if (preference == mButtonWfcMode) {
             mButtonWfcMode.setValue((String) newValue);
             int buttonMode = Integer.valueOf((String) newValue);
-            int currentWfcMode = ImsManager.getWfcMode(context, false);
+            int currentWfcMode = mImsMgr.getWfcModeForSlot(false);
             if (buttonMode != currentWfcMode) {
-                ImsManager.setWfcMode(context, buttonMode, false);
-                mButtonWfcMode.setSummary(getWfcModeSummary(context, buttonMode));
+                mImsMgr.setWfcModeForSlot(buttonMode, false);
+                mButtonWfcMode.setSummary(getWfcModeSummaryForSlot(context, buttonMode));
                 mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
             }
             if (!mEditableWfcRoamingMode) {
-                int currentWfcRoamingMode = ImsManager.getWfcMode(context, true);
+                int currentWfcRoamingMode = mImsMgr.getWfcModeForSlot(true);
                 if (buttonMode != currentWfcRoamingMode) {
-                    ImsManager.setWfcMode(context, buttonMode, true);
+                    mImsMgr.setWfcModeForSlot(buttonMode, true);
                     // mButtonWfcRoamingMode.setSummary is not needed; summary is selected value
                 }
             }
         } else if (preference == mButtonWfcRoamingMode) {
             mButtonWfcRoamingMode.setValue((String) newValue);
             int buttonMode = Integer.valueOf((String) newValue);
-            int currentMode = ImsManager.getWfcMode(context, true);
+            int currentMode = mImsMgr.getWfcModeForSlot(true);
             if (buttonMode != currentMode) {
-                ImsManager.setWfcMode(context, buttonMode, true);
+                mImsMgr.setWfcModeForSlot(buttonMode, true);
                 // mButtonWfcRoamingMode.setSummary is not needed; summary is just selected value.
                 mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
             }
@@ -446,6 +452,26 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     public static int getWfcModeSummary(Context context, int wfcMode) {
         int resId = com.android.internal.R.string.wifi_calling_off_summary;
         if (ImsManager.isWfcEnabledByUser(context)) {
+            switch (wfcMode) {
+                case ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY:
+                    resId = com.android.internal.R.string.wfc_mode_wifi_only_summary;
+                    break;
+                case ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED:
+                    resId = com.android.internal.R.string.wfc_mode_cellular_preferred_summary;
+                    break;
+                case ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED:
+                    resId = com.android.internal.R.string.wfc_mode_wifi_preferred_summary;
+                    break;
+                default:
+                    Log.e(TAG, "Unexpected WFC mode value: " + wfcMode);
+            }
+        }
+        return resId;
+    }
+
+    public int getWfcModeSummaryForSlot(Context context, int wfcMode) {
+        int resId = com.android.internal.R.string.wifi_calling_off_summary;
+        if (mImsMgr.isWfcEnabledByUserForSlot()) {
             switch (wfcMode) {
                 case ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY:
                     resId = com.android.internal.R.string.wfc_mode_wifi_only_summary;
