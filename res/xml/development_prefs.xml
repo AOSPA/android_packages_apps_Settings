@@ -74,11 +74,6 @@
         android:summary="@string/convert_to_file_encryption_enabled"
         android:fragment="com.android.settings.applications.ConvertToFbe" />
 
-    <com.android.settings.ColorModePreference
-        android:key="color_mode"
-        android:title="@string/picture_color_mode"
-        android:summary="@string/picture_color_mode_desc" />
-
     <ListPreference
         android:key="select_webview_provider"
         android:title="@string/select_webview_provider_title"
@@ -89,11 +84,6 @@
         android:key="enable_webview_multiprocess"
         android:title="@string/enable_webview_multiprocess"
         android:summary="@string/enable_webview_multiprocess_desc" />
-
-    <SwitchPreference
-        android:key="color_temperature"
-        android:title="@string/color_temperature"
-        android:summary="@string/color_temperature_desc" />
 
     <PreferenceScreen
         android:key="demo_mode"
