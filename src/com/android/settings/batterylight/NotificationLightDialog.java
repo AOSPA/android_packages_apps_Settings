@@ -1,5 +1,5 @@
-/*
- * Copyright (C) 2017 Paranoid Android
+/**
+ * Copyright (C) 2015-2017 Paranoid Android
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,10 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,68 +36,75 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.android.settings.R;
-
-import java.util.ArrayList;
-
 import com.android.settingslib.ColorPickerDialog;
 import com.android.settingslib.ColorPickerDialogAdapter;
+
+import java.util.ArrayList;
 
 public class NotificationLightDialog extends ColorPickerDialog
         implements ColorPickerDialog.OnColorSelectedListener {
 
-    private final static String TAG = "NotificationLightDialog";
-    private final static String STATE_KEY_COLOR = "NotificationLightDialog:color";
-    private final static long LED_UPDATE_DELAY_MS = 250;
+    private final static boolean DEBUG = false;
     private final static int LAYOUT_INDEX = 1;
+    private final static long LED_UPDATE_DELAY_MS = 250;
+    private final static String STATE_KEY_COLOR = "NotificationLightDialog:color";
+    private final static String TAG = "NotificationLightDialog";
 
-    private NotificationManager mNotificationManager;
-    private int mColor;
-    private int mSpeedOn;
-    private int mSpeedOff;
     private boolean mOnOffChangeable;
-    private boolean mReadyForLed = false;
+    private int mSpeedOff;
+    private int mSpeedOn;
 
-    private Spinner mPulseSpeedOn;
-    private Spinner mPulseSpeedOff;
+    private ColorPickerDialogAdapter mAdapter;
+    private Context mContext;
+    private NotificationManager mNotificationManager;
+    private Resources mResources;
+
     private LayoutInflater mInflater;
+    private Spinner mPulseSpeedOff;
+    private Spinner mPulseSpeedOn;
 
-    private int mLedLastColor = 0;
-    private int mLedLastSpeedOn;
-    private int mLedLastSpeedOff;
-
-    public NotificationLightDialog(Context context, int initialColor, int initialSpeedOn,
+    public NotificationLightDialog(Context context, int initialSpeedOn,
             int initialSpeedOff) {
         super(context);
-        init(context, initialColor, initialSpeedOn, initialSpeedOff, true);
+        init(context, initialSpeedOn, initialSpeedOff, true);
     }
 
-    public NotificationLightDialog(Context context, int initialColor, int initialSpeedOn,
+    public NotificationLightDialog(Context context, int initialSpeedOn,
             int initialSpeedOff, boolean onOffChangeable) {
         super(context);
-        init(context, initialColor, initialSpeedOn, initialSpeedOff, onOffChangeable);
+        init(context, initialSpeedOn, initialSpeedOff, onOffChangeable);
     }
 
-    private void init(Context context, int color, int speedOn, int speedOff,
+    private void init(Context context, int speedOn, int speedOff,
             boolean onOffChangeable) {
-        mColor = color;
         mSpeedOn = speedOn;
         mSpeedOff = speedOff;
         mOnOffChangeable = onOffChangeable;
+
+        mContext = context;
         mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        mResources = context.getResources();
+
+        final int[] colors = mResources.getIntArray(
+                R.array.led_color_picker_dialog_colors);
+
+        mAdapter = getAdapter();
+        mAdapter.setColors(colors);
+        mAdapter.setSelectedImageResourceId(R.drawable.ic_check_green_24dp);
+        mAdapter.setSelectedImageColorFilter(Color.WHITE);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.setOnColorSelectedListener(this);
+        setOnColorSelectedListener(this);
 
         mInflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         TextView textView = (TextView) findViewById(R.id.text_primary);
-        textView.setText(getContext().getResources()
-                .getString(R.string.notification_light_dialog_text));
+        textView.setText(mResources.getString(R.string.notification_light_dialog_text));
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.layout_root);
         LinearLayout notificationSettingsLayout = (LinearLayout) mInflater
@@ -126,10 +134,7 @@ public class NotificationLightDialog extends ColorPickerDialog
         }
 
         mPulseSpeedOn.setEnabled(mOnOffChangeable);
-        mPulseSpeedOff.setEnabled((mSpeedOn != 1) && mOnOffChangeable);
-
-        mReadyForLed = true;
-        updateLed();
+        mPulseSpeedOff.setEnabled(mSpeedOn != 1 && mOnOffChangeable);
     }
 
     @Override
@@ -146,20 +151,43 @@ public class NotificationLightDialog extends ColorPickerDialog
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        dismissLed();
+    public void onColorSelected(DialogInterface dialog, int color) {
+        mAdapter.setSelectedImageColorFilter(
+                mAdapter.getSelectedPosition() == 0 ? Color.DKGRAY : Color.WHITE);
+
+        onStart();
     }
 
     @Override
     public void onStart() {
-        super.onStart();
-        updateLed();
+        final boolean pulseEnabled = mPulseSpeedOn.isEnabled();
+
+        final Bundle b = new Bundle();
+        b.putBoolean(Notification.EXTRA_FORCE_SHOW_LIGHTS, true);
+
+        final Notification.Builder builder = new Notification.Builder(mContext);
+        builder.setLights(getSelectedColor(),
+                pulseEnabled ? getPulseSpeedOn() : 1,
+                pulseEnabled ? getPulseSpeedOff() : 0);
+        builder.setExtras(b);
+
+        builder.setSmallIcon(R.drawable.ic_settings_leds);
+        builder.setContentTitle(getContext().getString(R.string.led_notification_title));
+        builder.setContentText(getContext().getString(R.string.led_notification_text));
+        builder.setOngoing(true);
+
+        if (DEBUG) {
+            Log.i(TAG, "onShow(): " + Integer.toHexString(getSelectedColor()) +
+                    " " + (pulseEnabled ? getPulseSpeedOn() : 1) +
+                    " " + (pulseEnabled ? getPulseSpeedOff() : 0));
+        }
+
+        mNotificationManager.notify(1, builder.build());
     }
 
     @Override
-    public void onColorSelected(DialogInterface dialog, int color) {
-        updateLed();
+    public void onStop() {
+        mNotificationManager.cancel(1);
     }
 
     private AdapterView.OnItemSelectedListener mPulseSelectionListener =
@@ -169,7 +197,8 @@ public class NotificationLightDialog extends ColorPickerDialog
             if (parent == mPulseSpeedOn) {
                 mPulseSpeedOff.setEnabled(mPulseSpeedOn.isEnabled() && getPulseSpeedOn() != 1);
             }
-            updateLed();
+
+            onStart();
         }
 
         @Override
@@ -192,73 +221,14 @@ public class NotificationLightDialog extends ColorPickerDialog
         return getPulseSpeedOn() == 1 ? 0 : ((Pair<String, Integer>) mPulseSpeedOff.getSelectedItem()).second;
     }
 
-    private Handler mLedHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            updateLed();
-        }
-    };
-
-    private void updateLed() {
-        if (!mReadyForLed) {
-            return;
-        }
-
-        final int color = getSelectedColor() & 0xFFFFFF;
-        final int speedOn, speedOff;
-        if (mPulseSpeedOn.isEnabled()) {
-            speedOn = getPulseSpeedOn();
-            speedOff = getPulseSpeedOff();
-        } else {
-            speedOn = 1;
-            speedOff = 0;
-        }
-
-        if (mLedLastColor == color && mLedLastSpeedOn == speedOn
-                && mLedLastSpeedOff == speedOff) {
-            return;
-        }
-
-        // Dampen rate of consecutive LED changes
-        if (mLedHandler.hasMessages(0)) {
-            return;
-        }
-        mLedHandler.sendEmptyMessageDelayed(0, LED_UPDATE_DELAY_MS);
-
-        mLedLastColor = color;
-        mLedLastSpeedOn = speedOn;
-        mLedLastSpeedOff = speedOff;
-
-        final Bundle b = new Bundle();
-        b.putBoolean(Notification.EXTRA_FORCE_SHOW_LIGHTS, true);
-
-        final Notification.Builder builder = new Notification.Builder(getContext());
-        builder.setLights(color, speedOn, speedOff);
-        builder.setExtras(b);
-
-        // Set a notification
-        builder.setSmallIcon(R.drawable.ic_settings_leds);
-        builder.setContentTitle(getContext().getString(R.string.led_notification_title));
-        builder.setContentText(getContext().getString(R.string.led_notification_text));
-        builder.setOngoing(true);
-
-        mNotificationManager.notify(1, builder.build());
-    }
-
-    public void dismissLed() {
-        mNotificationManager.cancel(1);
-        // ensure we later reset LED if dialog is
-        // hidden and then made visible
-        mLedLastColor = 0;
-    }
-
-    class PulseSpeedAdapter extends BaseAdapter implements SpinnerAdapter {
+    private class PulseSpeedAdapter extends BaseAdapter implements SpinnerAdapter {
         private ArrayList<Pair<String, Integer>> times;
 
         public PulseSpeedAdapter(int timeNamesResource, int timeValuesResource) {
             times = new ArrayList<Pair<String, Integer>>();
 
-            String[] time_names = getContext().getResources().getStringArray(timeNamesResource);
-            String[] time_values = getContext().getResources().getStringArray(timeValuesResource);
+            String[] time_names = mResources.getStringArray(timeNamesResource);
+            String[] time_values = mResources.getStringArray(timeValuesResource);
 
             for(int i = 0; i < time_values.length; ++i) {
                 times.add(new Pair<String, Integer>(time_names[i], Integer.decode(time_values[i])));
@@ -282,7 +252,7 @@ public class NotificationLightDialog extends ColorPickerDialog
 
             // Check if we also need to add the custom value entry
             if (getTimePosition(customTime) == -1) {
-                times.add(new Pair<String, Integer>(getContext().getResources()
+                times.add(new Pair<String, Integer>(mResources
                         .getString(R.string.custom_time), customTime));
             }
         }
