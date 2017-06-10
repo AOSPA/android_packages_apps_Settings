@@ -16,8 +16,6 @@
 
 package com.android.settings.batterylight;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,26 +34,26 @@ import android.widget.TextView;
 
 import com.android.internal.util.pa.ColorUtils;
 import com.android.settings.R;
-import com.android.settingslib.ColorPickerDialog;
-import com.android.settingslib.ColorPickerDialogAdapter;
 
-public class NotificationLightPreference extends Preference implements DialogInterface.OnDismissListener,
-            View.OnLongClickListener {
+public class NotificationLightPreference extends Preference
+        implements View.OnLongClickListener {
 
     private static String TAG = "NotificationLightPreference";
+    public static final int DEFAULT_COLOR = 0xFFFFFF;
     public static final int DEFAULT_TIME = 1000;
-    public static final int DEFAULT_COLOR = 0xFFFFFF; //White
+
+    private boolean mOnOffChangeable;
+    private int mColorValue;
+    private int mOffValue;
+    private int mOnValue;
+
+    private Context mContext;
+    private NotificationLightDialog mDialog;
+    private Resources mResources;
 
     private ImageView mLightColorView;
     private TextView mOnValueView;
     private TextView mOffValueView;
-    private Resources mResources;
-    private int mColorValue;
-    private Dialog mDialog;
-
-    private int mOnValue;
-    private int mOffValue;
-    private boolean mOnOffChangeable;
 
     public interface ItemLongClickListener {
         public boolean onItemLongClick(String key);
@@ -63,54 +61,32 @@ public class NotificationLightPreference extends Preference implements DialogInt
 
     private ItemLongClickListener mLongClickListener;
 
-    /**
-     * @param context
-     * @param attrs
-     */
     public NotificationLightPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mColorValue = DEFAULT_COLOR;
-        mOnValue = DEFAULT_TIME;
-        mOffValue = DEFAULT_TIME;
-        mOnOffChangeable = context.getResources().getBoolean(
-                com.android.internal.R.bool.config_ledCanPulse);
-        init();
+        init(context, DEFAULT_COLOR, DEFAULT_TIME, DEFAULT_TIME, context.getResources().getBoolean(
+                com.android.internal.R.bool.config_ledCanPulse));
     }
 
-    /**
-     * @param context
-     * @param color
-     * @param onValue
-     * @param offValue
-     */
     public NotificationLightPreference(Context context, int color, int onValue, int offValue) {
         super(context, null);
-        mColorValue = color;
-        mOnValue = onValue;
-        mOffValue = offValue;
-        mOnOffChangeable = context.getResources().getBoolean(
-                com.android.internal.R.bool.config_ledCanPulse);
-        init();
+        init(context, color, onValue, offValue, context.getResources().getBoolean(
+                com.android.internal.R.bool.config_ledCanPulse));
     }
 
-    /**
-     * @param context
-     * @param color
-     * @param onValue
-     * @param offValue
-     */
     public NotificationLightPreference(Context context, int color, int onValue, int offValue, boolean onOffChangeable) {
         super(context, null);
+        init(context, color, onValue, offValue, onOffChangeable);
+    }
+
+    private void init(Context context, int color, int onValue, int offValue, boolean onOffChangeable) {
+        setLayoutResource(R.layout.preference_notification_light);
         mColorValue = color;
         mOnValue = onValue;
         mOffValue = offValue;
         mOnOffChangeable = onOffChangeable;
-        init();
-    }
 
-    private void init() {
-        setLayoutResource(R.layout.preference_notification_light);
-        mResources = getContext().getResources();
+        mContext = context;
+        mResources = context.getResources();
     }
 
     public void setColor(int color) {
@@ -120,20 +96,6 @@ public class NotificationLightPreference extends Preference implements DialogInt
 
     public int getColor() {
         return mColorValue;
-    }
-
-    public void onStart() {
-        NotificationLightDialog d = (NotificationLightDialog) getDialog();
-        if (d != null) {
-            d.onStart();
-        }
-    }
-
-    public void onStop() {
-        NotificationLightDialog d = (NotificationLightDialog) getDialog();
-        if (d != null) {
-            d.onStop();
-        }
     }
 
     @Override
@@ -161,7 +123,7 @@ public class NotificationLightPreference extends Preference implements DialogInt
         TextView tView = (TextView) holder.findViewById(android.R.id.summary);
         tView.setVisibility(View.GONE);
 
-        if (!getContext().getResources().getBoolean(com.android.internal.R.bool.config_multiColorNotificationLed)) {
+        if (!mResources.getBoolean(com.android.internal.R.bool.config_multiColorNotificationLed)) {
             mLightColorView.setVisibility(View.GONE);
         }
 
@@ -170,17 +132,17 @@ public class NotificationLightPreference extends Preference implements DialogInt
     }
 
     private void updatePreferenceViews() {
-        final int size = (int) getContext().getResources().getDimension(R.dimen.oval_notification_size);
+        final int size = (int) mResources.getDimension(R.dimen.oval_notification_size);
 
         if (mLightColorView != null) {
             mLightColorView.setEnabled(true);
-            final int imageColor = ((mColorValue & 0xF0F0F0) == 0xF0F0F0) ?
-                    (mColorValue - 0x101010) : mColorValue;
-            mLightColorView.setImageDrawable(createOvalShape(size, 0xFF000000 + imageColor));
+            mLightColorView.setImageDrawable(createOvalShape(size, 0xFF000000 | mColorValue));
         }
+
         if (mOnValueView != null) {
             mOnValueView.setText(mapLengthValue(mOnValue));
         }
+
         if (mOffValueView != null) {
             if (mOnValue == 1 || !mOnOffChangeable) {
                 mOffValueView.setEnabled(false);
@@ -193,31 +155,21 @@ public class NotificationLightPreference extends Preference implements DialogInt
 
     @Override
     protected void onClick() {
-        if (mDialog != null && mDialog.isShowing()) return;
         mDialog = getDialog();
-        mDialog.setOnDismissListener(this);
-        mDialog.show();
-    }
 
-    public Dialog getDialog() {
-        final NotificationLightDialog dialog = new NotificationLightDialog(getContext(),
-                0xFF000000 + mColorValue, mOnValue, mOffValue, mOnOffChangeable);
-
-        final ColorPickerDialogAdapter adapter = dialog.getAdapter();
-        adapter.setSelectedImageResourceId(R.drawable.ic_check_green_24dp);
-        adapter.setSelectedImageColorFilter(Color.WHITE);
-
-        int[] colors = getContext().getResources().getIntArray(
-                R.array.led_color_picker_dialog_colors);
+        int[] colors = mDialog.getAdapter().getColors();
         final int initialPackageColor = getInitialColor();
 
-        // Check if the set package color (mColorValue) is still allowed. This
-        // is the case if will be one of the selectable colors in the dialog,
-        // in other words if it one of the material colors or the current
-        // initial package color.
+        // Check if the set package color is still allowed. A color
+        // is allowed if is selectable in the color picker dialog. Those
+        // includes all the RGB colors, and the latest color extracted from
+        // the application icon. Now it may happen that the icon and hereby the
+        // color changes, in that case the set color is not a color that
+        // can be selected in the dialog, for these we override with the
+        // new application icon color.
         boolean setPackageColorAllowed = mColorValue == initialPackageColor;
         for(int i = 0; !setPackageColorAllowed && i < colors.length - 1; i++) {
-            setPackageColorAllowed = (colors[i] == mColorValue);
+            setPackageColorAllowed = (colors[i] == (0xFF000000 | mColorValue));
         }
 
         if (!setPackageColorAllowed) { // Happens when the application icon changes
@@ -227,40 +179,40 @@ public class NotificationLightPreference extends Preference implements DialogInt
 
         // Inject the initial package color
         colors[colors.length - 1] = initialPackageColor;
-        adapter.setColors(colors);
+        mDialog.setColors(colors);
+        mDialog.setSelectedColor(0xFF000000 | mColorValue);
+        mDialog.show();
+    }
 
-        dialog.setSelectedColor(mColorValue);
-        dialog.setOnCancelListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.setOnOkListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mColorValue =  dialog.getSelectedColor();
-                mOnValue = dialog.getPulseSpeedOn();
-                mOffValue = dialog.getPulseSpeedOff();
-                updatePreferenceViews();
-                callChangeListener(this);
-                dialog.dismiss();
-            }
-        });
-
-        dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
-            @Override
-            public void onColorSelected(DialogInterface d, int color) {
-                if (adapter.getSelectedPosition() == 0) {
-                    adapter.setSelectedImageColorFilter(Color.DKGRAY);
-                } else {
-                    adapter.setSelectedImageColorFilter(Color.WHITE);
+    public NotificationLightDialog getDialog() {
+        if (mDialog == null) {
+            mDialog = new NotificationLightDialog(mContext,
+                    mOnValue, mOffValue, mOnOffChangeable);
+            mDialog.setOnCancelListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mDialog.dismiss();
                 }
-            }
-        });
-
-        return dialog;
+            });
+            mDialog.setOnOkListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mColorValue = mDialog.getSelectedColor() & 0x00FFFFFF;
+                    mOnValue = mDialog.getPulseSpeedOn();
+                    mOffValue = mDialog.getPulseSpeedOff();
+                    updatePreferenceViews();
+                    callChangeListener(this);
+                    mDialog.dismiss();
+                }
+            });
+            mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface d) {
+                    mDialog = null;
+                }
+            });
+        }
+        return mDialog;
     }
 
     private int getInitialColor() {
@@ -268,11 +220,12 @@ public class NotificationLightPreference extends Preference implements DialogInt
         String packageName = getKey();
 
         try {
-            Drawable icon = getContext().getPackageManager()
+            Drawable icon = mContext.getPackageManager()
                     .getApplicationIcon(packageName);
+
             color = ColorUtils.getIconColorFromDrawable(icon);
         } catch (NameNotFoundException e) {
-            // shouldn't happen, but just return default
+            // Shouldn't happen, but just return default
         }
 
         return color;
@@ -284,11 +237,6 @@ public class NotificationLightPreference extends Preference implements DialogInt
         shape.setIntrinsicWidth(size);
         shape.getPaint().setColor(color);
         return shape;
-    }
-
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        mDialog = null;
     }
 
     public void setAllValues(int color, int onValue, int offValue) {
@@ -318,14 +266,14 @@ public class NotificationLightPreference extends Preference implements DialogInt
 
     private String mapLengthValue(Integer time) {
         if (!mOnOffChangeable) {
-            return getContext().getResources().getString(R.string.pulse_length_always_on);
+            return mResources.getString(R.string.pulse_length_always_on);
         }
         if (time == DEFAULT_TIME) {
-            return getContext().getResources().getString(R.string.default_time);
+            return mResources.getString(R.string.default_time);
         }
 
-        String[] timeNames = getContext().getResources().getStringArray(R.array.notification_pulse_length_entries);
-        String[] timeValues = getContext().getResources().getStringArray(R.array.notification_pulse_length_values);
+        String[] timeNames = mResources.getStringArray(R.array.notification_pulse_length_entries);
+        String[] timeValues = mResources.getStringArray(R.array.notification_pulse_length_values);
 
         for (int i = 0; i < timeValues.length; i++) {
             if (Integer.decode(timeValues[i]).equals(time)) {
@@ -333,16 +281,16 @@ public class NotificationLightPreference extends Preference implements DialogInt
             }
         }
 
-        return getContext().getResources().getString(R.string.custom_time);
+        return mResources.getString(R.string.custom_time);
     }
 
     private String mapSpeedValue(Integer time) {
         if (time == DEFAULT_TIME) {
-            return getContext().getResources().getString(R.string.default_time);
+            return mResources.getString(R.string.default_time);
         }
 
-        String[] timeNames = getContext().getResources().getStringArray(R.array.notification_pulse_speed_entries);
-        String[] timeValues = getContext().getResources().getStringArray(R.array.notification_pulse_speed_values);
+        String[] timeNames = mResources.getStringArray(R.array.notification_pulse_speed_entries);
+        String[] timeValues = mResources.getStringArray(R.array.notification_pulse_speed_values);
 
         for (int i = 0; i < timeValues.length; i++) {
             if (Integer.decode(timeValues[i]).equals(time)) {
@@ -350,7 +298,7 @@ public class NotificationLightPreference extends Preference implements DialogInt
             }
         }
 
-        return getContext().getResources().getString(R.string.custom_time);
+        return mResources.getString(R.string.custom_time);
     }
 
 }
