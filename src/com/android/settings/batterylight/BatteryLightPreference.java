@@ -16,13 +16,8 @@
 
 package com.android.settings.batterylight;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.support.v7.preference.Preference;
@@ -32,38 +27,32 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.android.settings.R;
-import com.android.settingslib.ColorPickerDialog;
-import com.android.settingslib.ColorPickerDialogAdapter;
 
-public class BatteryLightPreference extends Preference implements DialogInterface.OnDismissListener {
+public class BatteryLightPreference extends Preference {
 
     private static String TAG = "BatteryLightPreference";
-    public static final int DEFAULT_COLOR = 0xFFFFFF; //White
+    private static final int DEFAULT_COLOR = 0xFFFFFF;
 
-    private ImageView mLightColorView;
-    private Resources mResources;
     private int mColorValue;
-    private Dialog mDialog;
 
-    /**
-     * @param context
-     * @param attrs
-     */
+    private Context mContext;
+    private BatteryLightDialog mDialog;
+    private ImageView mLightColorView;
+
     public BatteryLightPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mColorValue = DEFAULT_COLOR;
-        init();
+        init(context, DEFAULT_COLOR);
     }
 
     public BatteryLightPreference(Context context, int color) {
         super(context, null);
-        mColorValue = color;
-        init();
+        init(context, color);
     }
 
-    private void init() {
+    private void init(Context context, int color) {
         setLayoutResource(R.layout.preference_battery_light);
-        mResources = getContext().getResources();
+        mColorValue = color;
+        mContext = context;
     }
 
     public void setColor(int color) {
@@ -78,9 +67,7 @@ public class BatteryLightPreference extends Preference implements DialogInterfac
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-
         mLightColorView = (ImageView) holder.findViewById(R.id.light_color);
-
         updatePreferenceViews();
     }
 
@@ -89,59 +76,42 @@ public class BatteryLightPreference extends Preference implements DialogInterfac
 
         if (mLightColorView != null) {
             mLightColorView.setEnabled(true);
-            final int imageColor = ((mColorValue & 0xF0F0F0) == 0xF0F0F0) ?
-                    (mColorValue - 0x101010) : mColorValue;
-            mLightColorView.setImageDrawable(createOvalShape(size, 0xFF000000 + imageColor));
+            mLightColorView.setImageDrawable(createOvalShape(size, 0xFF000000 | mColorValue));
         }
     }
 
     @Override
     protected void onClick() {
-        if (mDialog != null && mDialog.isShowing()) return;
         mDialog = getDialog();
+        mDialog.setSelectedColor(0xFF000000 | mColorValue);
         mDialog.show();
     }
 
-    public Dialog getDialog() {
-        final int[] colors = mResources.getIntArray(
-                R.array.led_color_picker_dialog_colors);
-        final ColorPickerDialog dialog = new ColorPickerDialog(getContext());
-        final ColorPickerDialogAdapter adapter = dialog.getAdapter();
-
-        adapter.setColors(colors);
-        adapter.setSelectedImageResourceId(R.drawable.ic_check_green_24dp);
-        adapter.setSelectedImageColorFilter(Color.WHITE);
-        adapter.setSelectedColor(getColor());
-
-        dialog.setOnCancelListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.setOnOkListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mColorValue =  dialog.getSelectedColor();
-                updatePreferenceViews();
-                callChangeListener(this);
-                dialog.dismiss();
-            }
-        });
-
-        dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
-            @Override
-            public void onColorSelected(DialogInterface d, int color) {
-                if (adapter.getSelectedPosition() == 0) {
-                    adapter.setSelectedImageColorFilter(Color.DKGRAY);
-                } else {
-                    adapter.setSelectedImageColorFilter(Color.WHITE);
+    private BatteryLightDialog getDialog() {
+        if (mDialog == null) {
+            mDialog = new BatteryLightDialog(mContext);
+            mDialog.setOnCancelListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mDialog.dismiss();
                 }
-            }
-        });
-
-        return dialog;
+            });
+            mDialog.setOnOkListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setColor(mDialog.getSelectedColor() & 0x00FFFFFF);
+                    callChangeListener(this);
+                    mDialog.dismiss();
+                }
+            });
+            mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface d) {
+                    mDialog = null;
+                }
+            });
+        }    
+        return mDialog;
     }
 
     private static ShapeDrawable createOvalShape(int size, int color) {
@@ -150,10 +120,5 @@ public class BatteryLightPreference extends Preference implements DialogInterfac
         shape.setIntrinsicWidth(size);
         shape.getPaint().setColor(color);
         return shape;
-    }
-
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        mDialog = null;
     }
 }
