@@ -18,10 +18,15 @@ package com.android.settings.batterylight;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 
 import com.android.settings.R;
@@ -31,10 +36,19 @@ import com.android.settingslib.ColorPickerDialogAdapter;
 public class BatteryLightDialog extends ColorPickerDialog
         implements ColorPickerDialog.OnColorSelectedListener {
 
+    private final static String TAG = "BatteryLightDialog";
+
     private ColorPickerDialogAdapter mAdapter;
     private Context mContext;
     private NotificationManager mNotificationManager;
     private Resources mResources;
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            BatteryLightDialog.this.dismiss();
+        }
+    };
 
     public BatteryLightDialog(Context context) {
         super(context);
@@ -68,6 +82,17 @@ public class BatteryLightDialog extends ColorPickerDialog
 
     @Override
     public void onStart() {
+        mContext.registerReceiver(broadcastReceiver, new IntentFilter(TAG));
+        updateLed();
+    }
+
+    @Override
+    public void onStop() {
+        mNotificationManager.cancel(1);
+        mContext.unregisterReceiver(broadcastReceiver);
+    }
+
+    private void updateLed() {
         final Bundle b = new Bundle();
         b.putBoolean(Notification.EXTRA_FORCE_SHOW_LIGHTS, true);
 
@@ -76,15 +101,21 @@ public class BatteryLightDialog extends ColorPickerDialog
         builder.setExtras(b);
 
         builder.setSmallIcon(R.drawable.ic_settings_leds);
-        builder.setContentTitle(mResources.getString(R.string.led_notification_title));
+        builder.setContentTitle(mResources.getString(R.string.battery_light_settings));
         builder.setContentText(mResources.getString(R.string.led_notification_text));
-        builder.setOngoing(true);
+        builder.setOngoing(false);
+
+        final PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0,
+                new Intent(TAG), 0);
+
+        builder.addAction(new Notification.Action.Builder(
+                Icon.createWithResource(mContext, R.drawable.ic_cancel),
+                mResources.getString(R.string.cancel),
+                pendingIntent).build());
+        builder.setDeleteIntent(pendingIntent);
+        builder.setPriority(Notification.PRIORITY_MAX);
+        builder.setWhen(0);
 
         mNotificationManager.notify(1, builder.build());
-    }
-
-    @Override
-    public void onStop() {
-        mNotificationManager.cancel(1);
     }
 }
