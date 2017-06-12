@@ -38,6 +38,7 @@ public class UsbBackend {
     public static final int MODE_DATA_MTP    = 0x01 << 1;
     public static final int MODE_DATA_PTP    = 0x02 << 1;
     public static final int MODE_DATA_MIDI   = 0x03 << 1;
+    public static final int MODE_DATA_NONE_CTA = -1;
 
     private final boolean mRestricted;
     private final boolean mRestrictedBySystem;
@@ -113,7 +114,7 @@ public class UsbBackend {
                 return MODE_DATA_NONE;
             } else {
                 // select none if no found
-                return -1;
+                return MODE_DATA_NONE_CTA;
             }
         } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MTP)) {
             return MODE_DATA_MTP;
@@ -122,8 +123,7 @@ public class UsbBackend {
         } else if (mUsbManager.isFunctionEnabled(UsbManager.USB_FUNCTION_MIDI)) {
             return MODE_DATA_MIDI;
         }
-        // select none if no found
-        return -1; // ...
+        return mIsCTA ? MODE_DATA_NONE_CTA : MODE_DATA_NONE; // ...
     }
 
     private boolean isUsbDataUnlocked() {
