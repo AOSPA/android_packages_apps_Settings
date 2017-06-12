@@ -111,7 +111,7 @@ public class BluetoothPairingDialog extends Activity {
             BluetoothPairingDialogFragment bluetoothFragment =
                 (BluetoothPairingDialogFragment) getFragmentManager()
                     .findFragmentByTag(FRAGMENT_TAG);
-            if (bluetoothFragment != null) {
+            if (bluetoothFragment != null && !bluetoothFragment.isStateSaved()) {
                 bluetoothFragment.dismiss();
             }
             finish();
