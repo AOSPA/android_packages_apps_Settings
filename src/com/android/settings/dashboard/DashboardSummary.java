@@ -232,7 +232,11 @@ public class DashboardSummary extends InstrumentedFragment
         final boolean scrollToTop = mLayoutManager.findFirstCompletelyVisibleItemPosition() <= 1;
         mAdapter.setConditions(mConditionManager.getConditions());
         if (scrollToTop) {
-            mDashboard.scrollToPosition(0);
+            mHandler.post(() -> {
+                if(mDashboard != null){
+                    mDashboard.scrollToPosition(0);
+                }
+            });
         }
     }
 
