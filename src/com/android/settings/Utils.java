@@ -25,6 +25,7 @@ import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
+import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.IActivityManager;
@@ -109,6 +110,7 @@ import com.android.internal.util.UserIcons;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.password.FingerprintManagerWrapper;
 import com.android.settings.password.IFingerprintManager;
+import com.android.settings.bluetooth.BluetoothSettings;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -596,7 +598,12 @@ public final class Utils extends com.android.settingslib.Utils {
             Bundle args, String titleResPackageName, int titleResId, CharSequence title,
             boolean isShortcut, int sourceMetricsCategory) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setClass(context, SubSettings.class);
+        if (BluetoothSettings.class.getName().equals(fragmentName)) {
+            intent.setClass(context, SubSettings.BluetoothSubSettings.class);
+            intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, true);
+         } else {
+             intent.setClass(context, SubSettings.class);
+         }
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, fragmentName);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RES_PACKAGE_NAME,
@@ -1278,6 +1285,22 @@ public final class Utils extends com.android.settingslib.Utils {
         }
         return info.enabled ? R.string.installed : R.string.disabled;
     }
+
+    /**
+     * Control if other apps can display overlays. By default this is allowed. Be sure to
+     * re-enable overlays, as the effect is system-wide.
+     */
+    public static void setOverlayAllowed(Context context, IBinder token, boolean allowed) {
+        AppOpsManager appOpsManager = context.getSystemService(AppOpsManager.class);
+        if (appOpsManager != null) {
+            appOpsManager.setUserRestriction(AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
+                    !allowed, token);
+            appOpsManager.setUserRestriction(AppOpsManager.OP_TOAST_WINDOW,
+                    !allowed, token);
+        }
+    }
+
+
 
     private static boolean isVolumeValid(VolumeInfo volume) {
         return (volume != null) && (volume.getType() == VolumeInfo.TYPE_PRIVATE)
