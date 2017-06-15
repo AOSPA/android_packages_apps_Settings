@@ -47,6 +47,12 @@
         android:summary="@string/hardware_brightness_keys_summary"
         android:persistent="false" />
 
+    <SwitchPreference
+        android:key="anbi"
+        android:title="@string/anbi_title"
+        android:summary="@string/anbi_summary"
+        android:persistent="false" />
+
     <PreferenceCategory
         android:key="home_key"
         android:title="@string/home_key_title" >

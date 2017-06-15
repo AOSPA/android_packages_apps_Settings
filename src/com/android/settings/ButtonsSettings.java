@@ -61,6 +61,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SWAP_NAVIGATION_KEYS   = "swap_navigation_keys";
     private static final String KEY_SWAP_SLIDER_ORDER      = "swap_slider_order";
     private static final String KEY_BUTTON_BRIGHTNESS      = "button_brightness";
+    private static final String KEY_ANBI                   = "anbi";
 
     private static final String KEY_PIE_SETTINGS           = "pie_settings";
 
@@ -109,6 +110,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mSwapNavigationkeys;
     private SwitchPreference mSwapSliderOrder;
     private SwitchPreference mButtonBrightness;
+    private SwitchPreference mAnbiPreference;
 
     private Preference mPieFragment;
 
@@ -168,6 +170,16 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
                 mButtonBrightness.setOnPreferenceChangeListener(this);
             } else {
                 prefScreen.removePreference(mButtonBrightness);
+            }
+        }
+
+        /* Accidental navigation button interaction */
+        mAnbiPreference = (SwitchPreference) findPreference(KEY_ANBI);
+        if (mAnbiPreference != null) {
+            if (mDeviceHardwareKeys != 0) {
+                mAnbiPreference.setOnPreferenceChangeListener(this);
+            } else {
+                prefScreen.removePreference(mAnbiPreference);
             }
         }
 
@@ -365,6 +377,8 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             return Settings.System.ALERT_SLIDER_ORDER;
         } else if (preference == mButtonBrightness) {
             return Settings.System.BUTTON_BRIGHTNESS_ENABLED;
+        } else if (preference == mAnbiPreference) {
+            return Settings.System.ANBI_ENABLED;
         } else if (preference == mHomeLongPressAction) {
             return Settings.System.KEY_HOME_LONG_PRESS_ACTION;
         } else if (preference == mHomeDoubleTapAction) {
@@ -418,6 +432,9 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
         final boolean buttonBrightnessEnabled = Settings.System.getIntForUser(resolver,
                 Settings.System.BUTTON_BRIGHTNESS_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
 
+        final boolean anbiEnabled = Settings.System.getIntForUser(resolver,
+                Settings.System.ANBI_ENABLED, 0, UserHandle.USER_CURRENT) != 0;
+
         if (mNavigationBar != null) {
             mNavigationBar.setChecked(navigationBarEnabled);
         }
@@ -435,6 +452,10 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
         if (mButtonBrightness != null) {
             mButtonBrightness.setChecked(buttonBrightnessEnabled);
+        }
+
+        if (mAnbiPreference != null) {
+            mAnbiPreference.setChecked(anbiEnabled);
         }
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
