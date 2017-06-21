@@ -108,7 +108,7 @@ public final class BluetoothNameDialogFragment extends InstrumentedDialogFragmen
                 .setPositiveButton(R.string.bluetooth_rename_button,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                String deviceName = mDeviceNameView.getText().toString();
+                                String deviceName = mDeviceNameView.getText().toString().trim();
                                 setDeviceName(deviceName);
                             }
                         })
@@ -145,7 +145,11 @@ public final class BluetoothNameDialogFragment extends InstrumentedDialogFragmen
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    setDeviceName(v.getText().toString());
+                    // Rejecting Empty String
+                    if (v.length() != 0 && !(v.getText().toString().trim().isEmpty()))
+                    {
+                        setDeviceName(v.getText().toString().trim());
+                    }
                     mAlertDialog.dismiss();
                     return true;    // action handled
                 } else {
