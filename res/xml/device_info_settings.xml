@@ -53,18 +53,6 @@
                 android:title="@string/legal_information"
                 android:fragment="com.android.settings.LegalSettings" />
 
-        <PreferenceScreen
-                android:key="regulatory_info"
-                android:title="@string/regulatory_labels">
-            <intent android:action="android.settings.SHOW_REGULATORY_INFO" />
-        </PreferenceScreen>
-
-        <PreferenceScreen
-                android:key="safety_info"
-                android:title="@string/safety_and_regulatory_info">
-                <intent android:action="android.settings.SHOW_SAFETY_AND_REGULATORY_INFO" />
-        </PreferenceScreen>
-
         <!-- Feedback on the device -->
         <PreferenceScreen android:key="device_feedback"
                 android:title="@string/device_feedback">
