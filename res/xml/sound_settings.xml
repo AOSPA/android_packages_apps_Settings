@@ -142,10 +142,10 @@
           android:title="@string/cell_broadcast_settings"
           settings:useAdminDisabledSummary="true"
           settings:allowDividerAbove="true" >
-                <intent
+                <!--intent
                   android:action="android.intent.action.MAIN"
                   android:targetPackage="com.android.cellbroadcastreceiver"
-                  android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings" />
+                  android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings" /-->
         </com.android.settingslib.RestrictedPreference>
 
         <com.android.settings.WorkOnlyCategory
