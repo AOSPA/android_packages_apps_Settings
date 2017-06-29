@@ -23,6 +23,7 @@
     <string name="deny" msgid="6947806159746484865">"Deny"</string>
     <string name="dlg_close" msgid="7471087791340790015">"Close"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"Switch"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"Unknown"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other">You are now <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> steps away from being a developer.</item>
       <item quantity="one">You are now <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> step away from being a developer.</item>
@@ -1548,7 +1549,6 @@
     <string name="filter_apps_running" msgid="7767071454371350486">"Running"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB storage"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"On SD card"</string>
-    <string name="disabled" msgid="9206776641295849915">"Disabled"</string>
     <string name="not_installed" msgid="2797554494953450291">"Not installed for this user"</string>
     <string name="installed" msgid="3070865169422600098">"Installed"</string>
     <string name="no_applications" msgid="7336588977497084921">"No apps."</string>
@@ -2655,7 +2655,7 @@
     <string name="network_dashboard_title" msgid="4771589228992391573">"Network &amp; Internet"</string>
     <string name="network_dashboard_summary" msgid="3274556191585905652">"Wi-Fi, mobile, data usage, hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Connected devices"</string>
-    <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, Cast, NFC"</string>
+    <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, cast, NFC"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Apps &amp; notifications"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Permissions, default apps"</string>
     <string name="account_dashboard_title" msgid="4936890821712178853">"Users &amp; accounts"</string>
@@ -2717,7 +2717,7 @@
     <string name="status_tag_not_writable" msgid="2511611539977682175">"NFC tag is not writeable. Please use a different tag."</string>
     <string name="default_sound" msgid="8821684447333687810">"Default sound"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Ring volume at <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="sound_dashboard_summary" msgid="3402435125958012986">"Volume, Vibration, Do Not Disturb"</string>
+    <string name="sound_dashboard_summary" msgid="3402435125958012986">"Volume, vibration, Do not disturb"</string>
     <string name="sound_settings_summary_vibrate" msgid="1869282574422220096">"Ringer set to vibrate"</string>
     <string name="sound_settings_summary_silent" msgid="5074529767435584948">"Ringer set to silent"</string>
     <string name="sound_settings_example_summary" msgid="2404914514266523165">"Ring volume at 80%"</string>
@@ -2733,7 +2733,7 @@
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Also vibrate for calls"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Other sounds"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Dial pad tones"</string>
-    <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Screen locking sounds"</string>
+    <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Screen-locking sounds"</string>
     <string name="charging_sounds_title" msgid="1132272552057504251">"Charging sounds"</string>
     <string name="docking_sounds_title" msgid="155236288949940607">"Docking sounds"</string>
     <string name="touch_sounds_title" msgid="5326587106892390176">"Touch sounds"</string>
@@ -2750,7 +2750,7 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> automatic rules turned on</item>
       <item quantity="one">1 automatic rule turned on</item>
     </plurals>
-    <string name="zen_mode_settings_title" msgid="842308776768942600">"Do Not Disturb preferences"</string>
+    <string name="zen_mode_settings_title" msgid="842308776768942600">"Do not disturb preferences"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Priority only allows"</string>
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatic rules"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"Set Do Not Disturb rules"</string>
@@ -2860,8 +2860,8 @@
     <string name="notification_content_block_summary" msgid="7746185794438882389">"Never show notifications in the shade or on peripheral devices"</string>
     <string name="notification_badge_title" msgid="6370122441168519809">"Allow notification dot"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"Show notification dot"</string>
-    <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Override Do Not Disturb"</string>
-    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Let these notifications continue to interrupt when Do Not Disturb is set to Priority Only"</string>
+    <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"Override Do not disturb"</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"Let these notifications continue to interrupt when Do not disturb is set to Priority only"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"On the lock screen"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"Blocked"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"Priority"</string>
@@ -3188,7 +3188,6 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Apps with permission"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"Yes"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"No"</string>
-    <string name="install_other_apps" msgid="6986686991775883017">"Install unknown apps"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"install apps unknown sources"</string>
     <string name="write_settings" msgid="4797457275727195681">"Modify system settings"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"write modify system settings"</string>
@@ -3202,8 +3201,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"This permission allows an app to modify system settings."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Yes"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"No"</string>
-    <string name="external_source_trusted" msgid="2707996266575928037">"Allowed"</string>
-    <string name="external_source_untrusted" msgid="2677442511837596726">"Not allowed"</string>
     <string name="external_source_switch_title" msgid="3621381992793251070">"Allow from this source"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Double twist for camera"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Open the camera app by twisting your wrist twice"</string>

@@ -23,6 +23,7 @@
     <string name="deny" msgid="6947806159746484865">"Denega"</string>
     <string name="dlg_close" msgid="7471087791340790015">"Tanca"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"Canvia"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"Desconegut"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other">Ara només et queden <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> passos per convertir-te en desenvolupador.</item>
       <item quantity="one">Ara només et queda <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> pas per convertir-te en desenvolupador.</item>
@@ -352,9 +353,9 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Desbloqueig amb empremta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Utilitzar l\'empremta digital"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Només cal que toquis el sensor d\'empremtes digitals per desbloquejar el telèfon, autoritzar compres o iniciar la sessió en aplicacions. Vés amb compte amb les empremtes digitals d\'altres persones que hi afegeixis, perquè totes podran dur a terme aquestes accions.\n\nNota: fer servir l\'empremta digital pot ser menys segur que utilitzar un patró o un PIN complets."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Només cal que toquis el sensor d\'empremtes digitals per autoritzar una compra o iniciar la sessió en una aplicació. Vés amb compte a l\'hora d\'afegir-hi empremtes digitals; tingues present que totes les que hi afegeixis podran dur a terme totes aquestes accions.\n\nNota: no pots fer servir l\'empremta digital per desbloquejar el dispositiu. Per obtenir més informació, contacta amb l\'administrador de l\'organització."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Només cal que toquis el sensor d\'empremtes digitals per desbloquejar el telèfon, autoritzar compres o iniciar la sessió en aplicacions. Vés amb compte amb les empremtes digitals d\'altres persones que hi afegeixis, perquè totes podran dur a terme aquestes accions.\n\nNota: fer servir l\'empremta digital pot ser menys segur que utilitzar un patró o un PIN complets."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Només cal que toquis el sensor d\'empremtes digitals per desbloquejar el telèfon, autoritzar compres o iniciar la sessió en aplicacions. Ves amb compte amb les empremtes digitals d\'altres persones que hi afegeixis, perquè totes podran dur a terme aquestes accions.\n\nNota: fer servir l\'empremta digital pot ser menys segur que utilitzar un patró o un PIN complets."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Només cal que toquis el sensor d\'empremtes digitals per autoritzar una compra o iniciar la sessió en una aplicació. Ves amb compte a l\'hora d\'afegir-hi empremtes digitals; tingues present que totes les que hi afegeixis podran dur a terme totes aquestes accions.\n\nNota: no pots fer servir l\'empremta digital per desbloquejar el dispositiu. Per obtenir més informació, contacta amb l\'administrador de l\'organització."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Només cal que toquis el sensor d\'empremtes digitals per desbloquejar el telèfon, autoritzar compres o iniciar la sessió en aplicacions. Ves amb compte amb les empremtes digitals d\'altres persones que hi afegeixis, perquè totes podran dur a terme aquestes accions.\n\nNota: fer servir l\'empremta digital pot ser menys segur que utilitzar un patró o un PIN complets."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Cancel·la"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Continua"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Omet"</string>
@@ -574,7 +575,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplicació activa</item>
     </plurals>
     <string name="manage_trust_agents" msgid="4629279457536987768">"Agents de confiança"</string>
-    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Per utilitzar-lo, has de configurar un bloqueig de pantalla"</string>
+    <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"Per utilitzar-ho, has de configurar un bloqueig de pantalla"</string>
     <string name="manage_trust_agents_summary" msgid="1475819820389620546">"Cap"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="3935182396726101824">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> agents de confiança actius</item>
@@ -782,7 +783,7 @@
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS disponible)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Introdueix la contrasenya de la xarxa."</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Per millorar la precisió de la ubicació i per a altres finalitats, <xliff:g id="APP_NAME">%1$s</xliff:g> vol activar la cerca de xarxes tot i que la connexió Wi-Fi estigui desactivada.\n\nVols permetre-ho per a totes les aplicacions que vulguin cercar xarxes?"</string>
-    <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Per desactivar aquesta funció, vés a Configuració avançada al menú addicional."</string>
+    <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Per desactivar aquesta funció, ves a Configuració avançada al menú addicional."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Permet"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"Denega"</string>
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"Vols iniciar la sessió per connectar-te?"</string>
@@ -1548,7 +1549,6 @@
     <string name="filter_apps_running" msgid="7767071454371350486">"En execució"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Emmagatzematge USB"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"A la targeta SD"</string>
-    <string name="disabled" msgid="9206776641295849915">"Desactivat"</string>
     <string name="not_installed" msgid="2797554494953450291">"No instal·lada per a l\'usuari"</string>
     <string name="installed" msgid="3070865169422600098">"Instal·lada"</string>
     <string name="no_applications" msgid="7336588977497084921">"No hi ha cap aplicació."</string>
@@ -1721,7 +1721,7 @@
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Introducció de text"</string>
     <string name="input_method" msgid="5434026103176856164">"Mètode d\'introducció de text"</string>
     <string name="current_input_method" msgid="2636466029213488159">"Teclat actual"</string>
-    <string name="input_method_selector" msgid="4311213129681430709">"Selector del mètode d\'entrada"</string>
+    <string name="input_method_selector" msgid="4311213129681430709">"Selector del mètode d\'introducció"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automàtic"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"Mostra sempre"</string>
     <string name="input_method_selector_always_hide_title" msgid="7699647095118680424">"Amaga sempre"</string>
@@ -2207,7 +2207,7 @@
     <string name="wifi_setup_status_edit_network" msgid="4765340816724760717">"Escriu la configuració de la xarxa"</string>
     <string name="wifi_setup_status_new_network" msgid="7468952850452301083">"Connecta a una xarxa nova"</string>
     <string name="wifi_setup_status_connecting" msgid="4971421484401530740">"S\'està connectant..."</string>
-    <string name="wifi_setup_status_proceed_to_next" msgid="6708250000342940031">"Vés al pas següent"</string>
+    <string name="wifi_setup_status_proceed_to_next" msgid="6708250000342940031">"Ves al pas següent"</string>
     <string name="wifi_setup_status_eap_not_supported" msgid="6796317704783144190">"EAP no és compatible."</string>
     <string name="wifi_setup_eap_not_supported" msgid="6812710317883658843">"No pots configurar una connexió Wi-Fi EAP durant la configuració. Quan hagi finalitzat, pots dur a terme aquesta acció a Configuració &gt; Sense fil i xarxes."</string>
     <string name="wifi_setup_description_connecting" msgid="2793554932006756795">"La connexió pot trigar una estona..."</string>
@@ -2956,7 +2956,7 @@
     <string name="switch_on_text" msgid="1124106706920572386">"Activat"</string>
     <string name="switch_off_text" msgid="1139356348100829659">"Desactivat"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Fixació de pantalla"</string>
-    <string name="screen_pinning_description" msgid="3360904523688769289">"Si aquesta opció està activada, pots fixar la pantalla per mantenir-la visible fins que deixis de fixar-la.\n\nPer fer-ho:\n\n1. Assegura\'t que la fixació de pantalla estigui activada.\n\n2. Obre la pantalla que vulguis fixar.\n\n3. Toca Aplicacions recents.\n\n4. Fes lliscar el dit cap amunt i toca la icona de fixació."</string>
+    <string name="screen_pinning_description" msgid="3360904523688769289">"Si aquesta opció està activada, pots fixar la pantalla per mantenir-la visible fins que deixis de fixar-la.\n\nPer fer-ho:\n\n1. Assegura\'t que la fixació de pantalla estigui activada.\n\n2. Obre la pantalla que vulguis fixar.\n\n3. Toca Aplicacions recents.\n\n4. Llisca cap amunt i toca la icona de fixació."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Sol·licita el patró de desbloqueig per anul·lar"</string>
     <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Demana el codi PIN per anul·lar"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Demana la contrasenya per anul·lar"</string>
@@ -3188,7 +3188,6 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Aplicacions amb permís"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"Sí"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"No"</string>
-    <string name="install_other_apps" msgid="6986686991775883017">"Instal·lar aplicacions desconegudes"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"instal·lar aplicacions fonts desconegudes"</string>
     <string name="write_settings" msgid="4797457275727195681">"Modificar configuració sistema"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"modifica la configuració del sistema i hi escriu"</string>
@@ -3202,8 +3201,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Aquest permís permet que una aplicació modifiqui la configuració del sistema."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Sí"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"No"</string>
-    <string name="external_source_trusted" msgid="2707996266575928037">"Permeses"</string>
-    <string name="external_source_untrusted" msgid="2677442511837596726">"No permeses"</string>
     <string name="external_source_switch_title" msgid="3621381992793251070">"Permet d\'aquesta font"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Doble gir per obrir Càmera"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Gira el canell dues vegades per obrir l\'aplicació Càmera"</string>

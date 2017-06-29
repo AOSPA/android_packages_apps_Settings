@@ -23,6 +23,7 @@
     <string name="deny" msgid="6947806159746484865">"거부"</string>
     <string name="dlg_close" msgid="7471087791340790015">"닫기"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"전환"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"알 수 없음"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g>단계만 더 완료하면 개발자가 될 수 있습니다.</item>
       <item quantity="one"><xliff:g id="STEP_COUNT_0">%1$d</xliff:g>단계만 더 완료하면 개발자가 될 수 있습니다.</item>
@@ -284,7 +285,7 @@
     <string name="roaming_disable" msgid="1295279574370898378">"로밍 시 데이터 서비스에 연결"</string>
     <string name="roaming_reenable_message" msgid="9141007271031717369">"데이터 로밍을 사용 중지한 상태에서 홈 네트워크를 벗어났으므로 데이터 연결이 끊어졌습니다."</string>
     <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"사용"</string>
-    <string name="roaming_warning" msgid="4275443317524544705">"많은 요금이 부과될 수 있습니다."</string>
+    <string name="roaming_warning" msgid="4275443317524544705">"요금이 많이 부과될 수 있습니다."</string>
     <string name="roaming_warning_multiuser" product="tablet" msgid="6458990250829214777">"데이터 로밍을 허용하면 높은 로밍 요금이 부과될 수 있습니다.\n\n이 설정은 태블릿의 모든 사용자에게 영향을 줍니다."</string>
     <string name="roaming_warning_multiuser" product="default" msgid="6368421100292355440">"데이터 로밍을 허용하면 높은 로밍 요금이 부과될 수 있습니다.\n\n이 설정은 휴대전화의 모든 사용자에게 영향을 줍니다."</string>
     <string name="roaming_reenable_title" msgid="6068100976707316772">"데이터 로밍을 허용하시겠습니까?"</string>
@@ -596,7 +597,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;와(과) 페어링하려면&lt;br&gt;&lt;br&gt;이 패스키(&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;)가 표시되는지 확인하세요.&lt;br&gt;&lt;br&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"출처:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;이 기기와 페어링하시겠습니까?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>와(과) 페어링하려면 <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>을(를) 입력한 다음 Return 또는 Enter 키를 누르세요."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>이(가) 주소록 및 통화 기록에 액세스하도록 허용합니다."</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>이(가) 연락처 및 통화 기록에 액세스하도록 허용합니다."</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>에 연결할 수 없습니다."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"장치 검색"</string>
@@ -1078,8 +1079,8 @@
     <string name="device_status" msgid="607405385799807324">"상태"</string>
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"배터리 상태, 네트워크 및 기타 정보"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"전화번호, 신호 등"</string>
-    <string name="storage_settings" msgid="4211799979832404953">"저장소"</string>
-    <string name="storage_usb_settings" msgid="7293054033137078060">"저장소"</string>
+    <string name="storage_settings" msgid="4211799979832404953">"저장용량"</string>
+    <string name="storage_usb_settings" msgid="7293054033137078060">"저장용량"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"저장소 설정"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"USB 저장소를 마운트 해제하고 사용 가능한 저장공간을 봅니다."</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"SD 카드 마운트 해제, 사용 가능한 저장공간 보기"</string>
@@ -1548,7 +1549,6 @@
     <string name="filter_apps_running" msgid="7767071454371350486">"실행 중"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB 저장소"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"SD 카드"</string>
-    <string name="disabled" msgid="9206776641295849915">"사용 안함"</string>
     <string name="not_installed" msgid="2797554494953450291">"이 사용자에게 설치되지 않음"</string>
     <string name="installed" msgid="3070865169422600098">"설치됨"</string>
     <string name="no_applications" msgid="7336588977497084921">"앱 없음."</string>
@@ -1764,7 +1764,7 @@
     <string name="experimental_category_title" msgid="5272318666666893547">"실험"</string>
     <string name="talkback_title" msgid="7912059827205988080">"음성 안내 지원"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"주로 시각 장애가 있는 사용자를 위한 스크린 리더"</string>
-    <string name="select_to_speak_summary" msgid="4282846695497544515">"읽는 소리를 들으려면 화면에서 항목을 탭하세요."</string>
+    <string name="select_to_speak_summary" msgid="4282846695497544515">"화면에서 항목을 탭하여 읽는 소리 듣기"</string>
     <string name="accessibility_captioning_title" msgid="7589266662024836291">"캡션"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"확대"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"세 번 탭하여 확대"</string>
@@ -1932,7 +1932,7 @@
     <string name="awake" msgid="387122265874485088">"장치 무중단 가동 시간"</string>
     <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi 사용 시간"</string>
     <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi 사용 시간"</string>
-    <string name="advanced_battery_title" msgid="2068039111517508622">"고급 배터리 사용 정보"</string>
+    <string name="advanced_battery_title" msgid="2068039111517508622">"배터리 사용 상세 정보"</string>
     <string name="history_details_title" msgid="3608240585315506067">"기록 세부정보"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"배터리 사용량"</string>
     <string name="details_subtitle" msgid="32593908269911734">"사용 세부정보"</string>
@@ -2566,8 +2566,8 @@
     <string name="support_summary" msgid="8276116616493882830">"도움말, 전화 및 채팅 지원"</string>
     <string name="user_account_title" msgid="1127193807312271167">"콘텐츠용 계정"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"사진 ID"</string>
-    <string name="extreme_threats_title" msgid="6549541803542968699">"극단적 위협"</string>
-    <string name="extreme_threats_summary" msgid="8777860706500920667">"생명과 재산에 대한 극단적인 위협에 대해 알림을 수신합니다."</string>
+    <string name="extreme_threats_title" msgid="6549541803542968699">"긴급한 위협"</string>
+    <string name="extreme_threats_summary" msgid="8777860706500920667">"생명과 재산에 대한 긴급한 위협에 대해 알림을 수신합니다."</string>
     <string name="severe_threats_title" msgid="8362676353803170963">"심각한 위협"</string>
     <string name="severe_threats_summary" msgid="8848126509420177320">"생명 및 재산에 대한 심각한 위협에 대해 알림을 수신합니다."</string>
     <string name="amber_alerts_title" msgid="2772220337031146529">"황색 경고"</string>
@@ -3093,7 +3093,7 @@
     <string name="high_power_apps" msgid="3459065925679828230">"배터리 최적화"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"배터리 사용량 알림"</string>
     <string name="show_all_apps" msgid="1512506948197818534">"전체 기기 사용 정보 표시"</string>
-    <string name="hide_extra_apps" msgid="5016497281322459633">"앱 사용 정보 표시"</string>
+    <string name="hide_extra_apps" msgid="5016497281322459633">"앱 사용량 표시"</string>
     <string name="high_power_filter_on" msgid="3222265297576680099">"최적화되지 않음"</string>
     <string name="high_power_on" msgid="6216293998227583810">"최적화되지 않음"</string>
     <string name="high_power_off" msgid="3393904131961263278">"배터리 최적화 사용"</string>
@@ -3188,7 +3188,6 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"권한을 가진 앱"</string>
     <string name="system_alert_window_on" msgid="2939489395109048888">"예"</string>
     <string name="system_alert_window_off" msgid="6189115687233061992">"아니요"</string>
-    <string name="install_other_apps" msgid="6986686991775883017">"알 수 없는 앱 설치"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"알 수 없는 소스에서 가져온 앱 설치"</string>
     <string name="write_settings" msgid="4797457275727195681">"시스템 설정 수정"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"시스템 설정 수정 쓰기"</string>
@@ -3202,8 +3201,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"이 권한은 앱이 시스템 설정을 수정하도록 허용합니다."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"예"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"아니요"</string>
-    <string name="external_source_trusted" msgid="2707996266575928037">"허용됨"</string>
-    <string name="external_source_untrusted" msgid="2677442511837596726">"허용되지 않음"</string>
     <string name="external_source_switch_title" msgid="3621381992793251070">"이 소스에서 가져온 앱 설치 허용"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"손목을 두 번 돌려 카메라 열기"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"손목을 두 번 돌리면 카메라 앱이 열립니다."</string>
