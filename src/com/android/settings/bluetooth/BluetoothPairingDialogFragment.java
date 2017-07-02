@@ -334,7 +334,7 @@ private final Handler mHandler = new Handler() {
             switch (msg.what) {
                 case MESSAGE_DELAYED_DISMISS:
                     Log.v(TAG, "Delayed pairing pop up handler");
-                    dismiss();
+                    mPairingDialogActivity.dismiss();
                     break;
                 default:
                     break;
