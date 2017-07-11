@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import android.preference.SeekBarVolumizer;
 import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -98,7 +100,19 @@ public class SoundSettings extends DashboardFragment {
                     null,
                     UserHandle.of(mRequestPreference.getUserId()));
             return true;
+        } else if (preference == findPreference(KEY_CELL_BROADCAST_SETTINGS)) {
+            final Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setComponent(new ComponentName("com.android.cellbroadcastreceiver",
+                    "com.android.cellbroadcastreceiver.CellBroadcastSettings"));
+            if (getActivity().getPackageManager().queryIntentActivities(intent, 0).isEmpty()) {
+                Log.d(TAG, "Activity com.android.cellbroadcastreceiver" +
+                        ".CellBroadcastSettings does not exist");
+                return false;
+            }
+            startActivity(intent);
+            return true;
         }
+
         return super.onPreferenceTreeClick(preference);
     }
 
