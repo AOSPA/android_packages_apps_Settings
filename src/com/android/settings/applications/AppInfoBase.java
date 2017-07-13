@@ -102,6 +102,9 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         mUsbManager = IUsbManager.Stub.asInterface(b);
 
         retrieveAppEntry();
+        if(mAppEntry == null){
+           setIntentAndFinish(true, true);
+        }
         startListeningToPackageRemove();
     }
 
