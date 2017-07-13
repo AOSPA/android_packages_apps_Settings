@@ -74,6 +74,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SWIPE_DOWN_FINGERPRINT = "gesture_swipe_down_fingerprint";
     private static final String KEY_DOUBLE_TAP_SLEEP = "gesture_double_tap_sleep";
     private static final String KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen";
+    private static final String KEY_THREE_FINGER_SCREENSHOT = "gesture_three_finger_screenshot";
     private static final String DEBUG_DOZE_COMPONENT = "debug.doze.component";
 
     private List<GesturePreference> mPreferences;
@@ -167,6 +168,12 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
         int tapToSleep = Settings.System.getInt(getContentResolver(),
                 Settings.System.GESTURE_DOUBLE_TAP_SLEEP, 0);
         addPreference(KEY_DOUBLE_TAP_SLEEP, tapToSleep != 0);
+
+        // three finger screenshot
+        int threeFingerScreenshot = Settings.Secure.getIntForUser(getContentResolver(),
+                Settings.Secure.THREE_FINGER_SCREENSHOT_ENABLED, 0,
+                UserHandle.USER_CURRENT);
+        addPreference(KEY_THREE_FINGER_SCREENSHOT, threeFingerScreenshot != 0);
 
         // Ambient Display
         mAmbientConfig = new AmbientDisplayConfiguration(context);
@@ -332,6 +339,10 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
             boolean enabled = (boolean) newValue;
             Settings.Secure.putInt(getContentResolver(),
                     Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, enabled ? 1 : 0);
+        } else if (KEY_THREE_FINGER_SCREENSHOT.equals(key)) {
+            boolean enabled = (boolean) newValue;
+            Settings.Secure.putInt(getContentResolver(),
+                    Settings.Secure.THREE_FINGER_SCREENSHOT_ENABLED, enabled ? 1 : 0);
         } else if (mGesturesSettings.containsKey(key)) {
             Settings.System.putInt(getContentResolver(), mGesturesSettings.get(key),
                     Integer.parseInt((String) newValue));
