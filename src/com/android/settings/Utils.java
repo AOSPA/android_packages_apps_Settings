@@ -52,6 +52,9 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.fingerprint.FingerprintManager;
+import android.icu.text.MeasureFormat;
+import android.icu.util.Measure;
+import android.icu.util.MeasureUnit;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
@@ -834,33 +837,36 @@ public final class Utils extends com.android.settingslib.Utils {
             minutes = seconds / SECONDS_PER_MINUTE;
             seconds -= minutes * SECONDS_PER_MINUTE;
         }
-        if (withSeconds) {
-            if (days > 0) {
-                sb.append(context.getString(R.string.battery_history_days,
-                        days, hours, minutes, seconds));
-            } else if (hours > 0) {
-                sb.append(context.getString(R.string.battery_history_hours,
-                        hours, minutes, seconds));
-            } else if (minutes > 0) {
-                sb.append(context.getString(R.string.battery_history_minutes, minutes, seconds));
-            } else {
-                sb.append(context.getString(R.string.battery_history_seconds, seconds));
-            }
-        } else {
-            if (days > 0) {
-                sb.append(context.getString(R.string.battery_history_days_no_seconds,
-                        days, hours, minutes));
-            } else if (hours > 0) {
-                sb.append(context.getString(R.string.battery_history_hours_no_seconds,
-                        hours, minutes));
-            } else {
-                sb.append(context.getString(R.string.battery_history_minutes_no_seconds, minutes));
 
-                // Add ttsSpan if it only have minute value, because it will be read as "meters"
-                TtsSpan ttsSpan = new TtsSpan.MeasureBuilder().setNumber(minutes)
-                        .setUnit("minute").build();
-                sb.setSpan(ttsSpan, 0, sb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
+        final ArrayList<Measure> measureList = new ArrayList(4);
+        if (days > 0) {
+            measureList.add(new Measure(days, MeasureUnit.DAY));
+        }
+        if (hours > 0) {
+            measureList.add(new Measure(hours, MeasureUnit.HOUR));
+        }
+        if (minutes > 0) {
+            measureList.add(new Measure(minutes, MeasureUnit.MINUTE));
+        }
+        if (withSeconds && seconds > 0) {
+            measureList.add(new Measure(seconds, MeasureUnit.SECOND));
+        }
+        if (measureList.size() == 0) {
+            // Everything addable was zero, so nothing was added. We add a zero.
+            measureList.add(new Measure(0, withSeconds ? MeasureUnit.SECOND : MeasureUnit.MINUTE));
+        }
+        final Measure[] measureArray = measureList.toArray(new Measure[measureList.size()]);
+
+        final Locale locale = context.getResources().getConfiguration().locale;
+        final MeasureFormat measureFormat = MeasureFormat.getInstance(
+                locale, MeasureFormat.FormatWidth.NARROW);
+        sb.append(measureFormat.formatMeasures(measureArray));
+
+        if (measureArray.length == 1 && MeasureUnit.MINUTE.equals(measureArray[0].getUnit())) {
+            // Add ttsSpan if it only have minute value, because it will be read as "meters"
+            final TtsSpan ttsSpan = new TtsSpan.MeasureBuilder().setNumber(minutes)
+                    .setUnit("minute").build();
+            sb.setSpan(ttsSpan, 0, sb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
         return sb;
@@ -956,41 +962,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return result;
     }
 
-    public static void handleLoadingContainer(View loading, View doneLoading, boolean done,
-            boolean animate) {
-        setViewShown(loading, !done, animate);
-        setViewShown(doneLoading, done, animate);
-    }
-
-    private static void setViewShown(final View view, boolean shown, boolean animate) {
-        if (animate) {
-            Animation animation = AnimationUtils.loadAnimation(view.getContext(),
-                    shown ? android.R.anim.fade_in : android.R.anim.fade_out);
-            if (shown) {
-                view.setVisibility(View.VISIBLE);
-            } else {
-                animation.setAnimationListener(new AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        view.setVisibility(View.INVISIBLE);
-                    }
-                });
-            }
-            view.startAnimation(animation);
-        } else {
-            view.clearAnimation();
-            view.setVisibility(shown ? View.VISIBLE : View.INVISIBLE);
-        }
-    }
-
     /**
      * Returns the application info of the currently installed MDM package.
      */
@@ -1049,7 +1020,24 @@ public final class Utils extends com.android.settingslib.Utils {
             return getCredentialOwnerUserId(context);
         }
         int userId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
-        return enforceSameOwner(context, userId);
+        if (userId == LockPatternUtils.USER_FRP) {
+            return enforceSystemUser(context, userId);
+        } else {
+            return enforceSameOwner(context, userId);
+        }
+    }
+
+    /**
+     * Returns the given user id if the current user is the system user.
+     *
+     * @throws SecurityException if the current user is not the system user.
+     */
+    public static int enforceSystemUser(Context context, int userId) {
+        if (UserHandle.myUserId() == UserHandle.USER_SYSTEM) {
+            return userId;
+        }
+        throw new SecurityException("Given user id " + userId + " must only be used from "
+                + "USER_SYSTEM, but current user is " + UserHandle.myUserId());
     }
 
     /**
@@ -1309,22 +1297,6 @@ public final class Utils extends com.android.settingslib.Utils {
         }
         return info.enabled ? R.string.installed : R.string.disabled;
     }
-
-    /**
-     * Control if other apps can display overlays. By default this is allowed. Be sure to
-     * re-enable overlays, as the effect is system-wide.
-     */
-    public static void setOverlayAllowed(Context context, IBinder token, boolean allowed) {
-        AppOpsManager appOpsManager = context.getSystemService(AppOpsManager.class);
-        if (appOpsManager != null) {
-            appOpsManager.setUserRestriction(AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
-                    !allowed, token);
-            appOpsManager.setUserRestriction(AppOpsManager.OP_TOAST_WINDOW,
-                    !allowed, token);
-        }
-    }
-
-
 
     private static boolean isVolumeValid(VolumeInfo volume) {
         return (volume != null) && (volume.getType() == VolumeInfo.TYPE_PRIVATE)

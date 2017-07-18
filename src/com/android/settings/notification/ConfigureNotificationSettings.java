@@ -16,17 +16,26 @@
 
 package com.android.settings.notification;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
+import android.support.v7.preference.Preference;
+import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settings.RingtonePreference;
+import com.android.settings.applications.NotificationApps;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +45,11 @@ public class ConfigureNotificationSettings extends DashboardFragment {
     private static final String TAG = "ConfigNotiSettings";
 
     private static final String KEY_SWIPE_DOWN = "gesture_swipe_down_fingerprint_notifications";
+    private static final String KEY_NOTI_DEFAULT_RINGTONE = "notification_default_ringtone";
+
+    private RingtonePreference mRequestPreference;
+    private static final int REQUEST_CODE = 200;
+    private static final String SELECTED_PREFERENCE_KEY = "selected_preference";
 
     @Override
     public int getMetricsCategory() {
@@ -53,13 +67,13 @@ public class ConfigureNotificationSettings extends DashboardFragment {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getLifecycle());
     }
 
-    private static List<PreferenceController> buildPreferenceControllers(Context context,
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final BadgingNotificationPreferenceController badgeController =
                 new BadgingNotificationPreferenceController(context);
         final PulseNotificationPreferenceController pulseController =
@@ -78,8 +92,55 @@ public class ConfigureNotificationSettings extends DashboardFragment {
         controllers.add(badgeController);
         controllers.add(pulseController);
         controllers.add(lockScreenNotificationController);
+        controllers.add(new NotificationRingtonePreferenceController(context) {
+            @Override
+            public String getPreferenceKey() {
+                return KEY_NOTI_DEFAULT_RINGTONE;
+            }
+
+        });
         return controllers;
     }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (preference instanceof RingtonePreference) {
+            mRequestPreference = (RingtonePreference) preference;
+            mRequestPreference.onPrepareRingtonePickerIntent(mRequestPreference.getIntent());
+            startActivityForResultAsUser(
+                    mRequestPreference.getIntent(),
+                    REQUEST_CODE,
+                    null,
+                    UserHandle.of(mRequestPreference.getUserId()));
+            return true;
+        }
+        return super.onPreferenceTreeClick(preference);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (mRequestPreference != null) {
+            mRequestPreference.onActivityResult(requestCode, resultCode, data);
+            mRequestPreference = null;
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mRequestPreference != null) {
+            outState.putString(SELECTED_PREFERENCE_KEY, mRequestPreference.getKey());
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+        = new SummaryLoader.SummaryProviderFactory() {
+            @Override
+            public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                    SummaryLoader summaryLoader) {
+                return new NotificationApps.SummaryProvider(activity, summaryLoader);
+            }
+    };
 
     /**
      * For Search.
@@ -95,8 +156,9 @@ public class ConfigureNotificationSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<PreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
                     return buildPreferenceControllers(context, null);
                 }
+
             };
 }

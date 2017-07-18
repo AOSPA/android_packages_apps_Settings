@@ -25,6 +25,7 @@ import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -34,21 +35,24 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.TetherSettings;
-import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnDestroy;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnCreate;
+import com.android.settingslib.core.lifecycle.events.OnDestroy;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.concurrent.atomic.AtomicReference;
 
 import static android.os.UserManager.DISALLOW_CONFIG_TETHERING;
+
 import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
 import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
 
-public class TetherPreferenceController extends PreferenceController
-        implements LifecycleObserver, OnResume, OnPause, OnDestroy {
+public class TetherPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin, LifecycleObserver, OnCreate, OnResume, OnPause, OnDestroy {
 
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
 
@@ -56,7 +60,8 @@ public class TetherPreferenceController extends PreferenceController
     private final AtomicReference<BluetoothPan> mBluetoothPan;
     private final ConnectivityManager mConnectivityManager;
     private final BluetoothAdapter mBluetoothAdapter;
-    private final BluetoothProfile.ServiceListener mBtProfileServiceListener =
+    @VisibleForTesting
+    final BluetoothProfile.ServiceListener mBtProfileServiceListener =
             new android.bluetooth.BluetoothProfile.ServiceListener() {
                 public void onServiceConnected(int profile, BluetoothProfile proxy) {
                     mBluetoothPan.set((BluetoothPan) proxy);
@@ -91,10 +96,6 @@ public class TetherPreferenceController extends PreferenceController
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (lifecycle != null) {
             lifecycle.addObserver(this);
-        }
-        if (mBluetoothAdapter != null) {
-            mBluetoothAdapter.getProfileProxy(context, mBtProfileServiceListener,
-                    BluetoothProfile.PAN);
         }
     }
 
@@ -131,6 +132,14 @@ public class TetherPreferenceController extends PreferenceController
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        if (mBluetoothAdapter != null) {
+            mBluetoothAdapter.getProfileProxy(mContext, mBtProfileServiceListener,
+                    BluetoothProfile.PAN);
+        }
+    }
+
+    @Override
     public void onResume() {
         if (mAirplaneModeObserver == null) {
             mAirplaneModeObserver = new SettingObserver();
@@ -139,7 +148,7 @@ public class TetherPreferenceController extends PreferenceController
             mTetherReceiver = new TetherBroadcastReceiver();
         }
         mContext.registerReceiver(
-            mTetherReceiver, new IntentFilter(ConnectivityManager.ACTION_TETHER_STATE_CHANGED));
+                mTetherReceiver, new IntentFilter(ConnectivityManager.ACTION_TETHER_STATE_CHANGED));
         mContext.getContentResolver()
                 .registerContentObserver(mAirplaneModeObserver.uri, false, mAirplaneModeObserver);
     }

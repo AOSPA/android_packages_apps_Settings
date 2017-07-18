@@ -19,10 +19,11 @@ import android.os.Bundle;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
+
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -93,8 +94,8 @@ public class UtilsTest {
 
     @Test
     public void testFormatElapsedTime_WithSeconds_ShowSeconds() {
-        final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS;
-        final String expectedTime = "5m 0s";
+        final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS + 30 * DateUtils.SECOND_IN_MILLIS;
+        final String expectedTime = "5m 30s";
 
         assertThat(Utils.formatElapsedTime(mContext, testMillis, true).toString()).isEqualTo(
                 expectedTime);
@@ -102,8 +103,8 @@ public class UtilsTest {
 
     @Test
     public void testFormatElapsedTime_NoSeconds_DoNotShowSeconds() {
-        final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS;
-        final String expectedTime = "5m";
+        final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS + 30 * DateUtils.SECOND_IN_MILLIS;
+        final String expectedTime = "6m";
 
         assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
                 expectedTime);
@@ -114,6 +115,33 @@ public class UtilsTest {
         final double testMillis = 2 * DateUtils.DAY_IN_MILLIS
                 + 4 * DateUtils.HOUR_IN_MILLIS + 15 * DateUtils.MINUTE_IN_MILLIS;
         final String expectedTime = "2d 4h 15m";
+
+        assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatElapsedTime_ZeroFieldsInTheMiddleDontShow() {
+        final double testMillis = 2 * DateUtils.DAY_IN_MILLIS + 15 * DateUtils.MINUTE_IN_MILLIS;
+        final String expectedTime = "2d 15m";
+
+        assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatElapsedTime_FormatZero_WithSeconds() {
+        final double testMillis = 0;
+        final String expectedTime = "0s";
+
+        assertThat(Utils.formatElapsedTime(mContext, testMillis, true).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatElapsedTime_FormatZero_NoSeconds() {
+        final double testMillis = 0;
+        final String expectedTime = "0m";
 
         assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
                 expectedTime);

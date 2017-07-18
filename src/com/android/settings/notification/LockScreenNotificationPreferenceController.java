@@ -32,19 +32,21 @@ import android.util.Log;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.ArrayList;
 
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
 
-public class LockScreenNotificationPreferenceController extends PreferenceController implements
-        Preference.OnPreferenceChangeListener, LifecycleObserver, OnResume, OnPause {
+public class LockScreenNotificationPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
+        LifecycleObserver, OnResume, OnPause {
 
     private static final String TAG = "LockScreenNotifPref";
 

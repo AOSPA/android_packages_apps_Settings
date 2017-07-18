@@ -16,7 +16,6 @@
 
 package com.android.internal.hardware;
 
-import android.provider.Settings;
 import android.content.Context;
 
 /**
@@ -40,6 +39,30 @@ public class AmbientDisplayConfiguration {
     }
 
     public boolean pulseOnDoubleTapEnabled(int user) {
+        return true;
+    }
+
+    public boolean pulseOnNotificationEnabled(int user) {
+        return true;
+    }
+
+    public boolean pulseOnNotificationAvailable() {
+        return true;
+    }
+
+    public boolean alwaysOnEnabled(int user) {
+        return true;
+    }
+
+    public boolean alwaysOnAvailable() {
+        return true;
+    }
+
+    public boolean available() {
+        return true;
+    }
+
+    public boolean enabled(int user) {
         return true;
     }
 }

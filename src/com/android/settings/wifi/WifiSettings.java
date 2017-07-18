@@ -43,14 +43,12 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -141,7 +139,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private WifiDialog mDialog;
     private WriteWifiConfigToNfcDialog mWifiToNfcDialog;
 
-    private ProgressBar mProgressHeader;
+    private View mProgressHeader;
 
     // this boolean extra specifies whether to disable the Next button when not connected. Used by
     // account creation outside of setup wizard.
@@ -188,7 +186,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         super.onViewCreated(view, savedInstanceState);
         final Activity activity = getActivity();
         if (activity != null) {
-            mProgressHeader = (ProgressBar) setPinnedHeaderView(R.layout.wifi_progress_header);
+            mProgressHeader = setPinnedHeaderView(R.layout.wifi_progress_header)
+                    .findViewById(R.id.progress_bar_animation);
             setProgressBarVisible(false);
         }
     }
@@ -449,20 +448,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             case MENU_ID_WPS_PBC:
                 showDialog(WPS_PBC_DIALOG_ID);
                 return true;
-                /*
-            case MENU_ID_P2P:
-                if (getActivity() instanceof SettingsActivity) {
-                    ((SettingsActivity) getActivity()).startPreferencePanel(
-                            WifiP2pSettings.class.getCanonicalName(),
-                            null,
-                            R.string.wifi_p2p_settings_title, null,
-                            this, 0);
-                } else {
-                    startFragment(this, WifiP2pSettings.class.getCanonicalName(),
-                            R.string.wifi_p2p_settings_title, -1, null);
-                }
-                return true;
-                */
             case MENU_ID_WPS_PIN:
                 showDialog(WPS_PIN_DIALOG_ID);
                 return true;
@@ -711,6 +696,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
             case WifiManager.WIFI_STATE_DISABLED:
                 setOffMessage();
+                setAdditionalSettingsSummaries();
                 setProgressBarVisible(false);
                 break;
         }
@@ -748,10 +734,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             AccessPoint accessPoint = accessPoints.get(index);
             // Ignore access points that are out of range.
             if (accessPoint.isReachable()) {
-                String key = accessPoint.getBssid();
-                if (TextUtils.isEmpty(key)) {
-                    key = accessPoint.getSsidStr();
-                }
+                String key = AccessPointPreference.generatePreferenceKey(accessPoint);
                 hasAvailableAccessPoints = true;
                 LongPressAccessPointPreference pref =
                         (LongPressAccessPointPreference) getCachedPreference(key);
@@ -926,7 +909,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     protected void setProgressBarVisible(boolean visible) {
         if (mProgressHeader != null) {
-            mProgressHeader.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+            mProgressHeader.setVisibility(visible ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -1005,6 +988,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         mMetricsFeatureProvider.action(getActivity(), MetricsEvent.ACTION_WIFI_CONNECT,
                 isSavedNetwork);
         mWifiManager.connect(config, mConnectListener);
+        scrollToPreference(mConnectedAccessPointPreferenceCategory);
     }
 
     protected void connect(final int networkId, boolean isSavedNetwork) {

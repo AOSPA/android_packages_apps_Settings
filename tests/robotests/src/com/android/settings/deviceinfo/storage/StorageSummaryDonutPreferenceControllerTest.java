@@ -27,20 +27,19 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.storage.VolumeInfo;
-import android.provider.Settings;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 import org.junit.Before;
@@ -53,11 +52,14 @@ import org.robolectric.annotation.Config;
 import java.io.File;
 
 import static com.android.settings.TestUtils.KILOBYTE;
-import static com.android.settings.TestUtils.MEGABYTE;
 import static com.android.settings.TestUtils.GIGABYTE;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = {
+        SettingsShadowResources.class,
+        SettingsShadowResources.SettingsShadowTheme.class
+})
 public class StorageSummaryDonutPreferenceControllerTest {
     private Context mContext;
     private StorageSummaryDonutPreferenceController mController;

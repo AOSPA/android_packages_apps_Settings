@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,21 +33,14 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.AppSearchResult;
-import com.android.settings.search2.IntentPayload;
-import com.android.settings.search2.IntentSearchViewHolder;
-import com.android.settings.search2.SearchFragment;
-import com.android.settings.search2.SearchResult;
-import com.android.settings.search2.SearchResult.Builder;
+import com.android.settings.search.SearchResult.Builder;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,6 +53,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -116,12 +110,8 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mHolder.breadcrumbView.getVisibility()).isEqualTo(View.GONE);
 
-        verify(mFragment).onSearchResultClicked();
+        verify(mFragment).onSearchResultClicked(eq(mHolder), any(SearchResult.class));
         verify(mFragment).startActivity(any(Intent.class));
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT),
-                eq(((IntentPayload)result.payload).intent.getComponent().flattenToString()),
-                any(Pair.class));
     }
 
     @Test
@@ -135,10 +125,11 @@ public class IntentSearchViewHolderTest {
     @Test
     public void testBindViewElements_emptySummary_hideSummaryView() {
         final SearchResult result = new Builder()
-                .addTitle(TITLE)
-                .addRank(1)
-                .addPayload(new IntentPayload(null))
-                .addIcon(mIcon)
+                .setTitle(TITLE)
+                .setRank(1)
+                .setPayload(new ResultPayload(null))
+                .setIcon(mIcon)
+                .setStableId(1)
                 .build();
 
         mHolder.onBind(mFragment, result);
@@ -152,11 +143,12 @@ public class IntentSearchViewHolderTest {
         breadcrumbs.add("b");
         breadcrumbs.add("c");
         final SearchResult result = new Builder()
-                .addTitle(TITLE)
-                .addRank(1)
-                .addPayload(new IntentPayload(null))
+                .setTitle(TITLE)
+                .setRank(1)
+                .setPayload(new ResultPayload(null))
                 .addBreadcrumbs(breadcrumbs)
-                .addIcon(mIcon)
+                .setIcon(mIcon)
+                .setStableId(1)
                 .build();
 
         mHolder.onBind(mFragment, result);
@@ -168,9 +160,10 @@ public class IntentSearchViewHolderTest {
     public void testBindElements_placeholderSummary_visibilityIsGone() {
         String nonBreakingSpace = mContext.getString(R.string.summary_placeholder);
         SearchResult result = new Builder()
-                .addTitle(TITLE)
-                .addSummary(nonBreakingSpace)
-                .addPayload(new IntentPayload(null))
+                .setTitle(TITLE)
+                .setSummary(nonBreakingSpace)
+                .setPayload(new ResultPayload(null))
+                .setStableId(1)
                 .build();
 
         mHolder.onBind(mFragment, result);
@@ -182,9 +175,10 @@ public class IntentSearchViewHolderTest {
     public void testBindElements_dynamicSummary_visibilityIsGone() {
         String dynamicSummary = "%s";
         SearchResult result = new Builder()
-                .addTitle(TITLE)
-                .addSummary(dynamicSummary)
-                .addPayload(new IntentPayload(null))
+                .setTitle(TITLE)
+                .setSummary(dynamicSummary)
+                .setPayload(new ResultPayload(null))
+                .setStableId(1)
                 .build();
 
         mHolder.onBind(mFragment, result);
@@ -192,6 +186,7 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.GONE);
     }
 
+    @Test
     public void testBindViewElements_appSearchResult() {
         when(mPackageManager.getUserBadgedLabel(any(CharSequence.class),
                 eq(new UserHandle(USER_ID)))).thenReturn(BADGED_LABEL);
@@ -207,24 +202,22 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.breadcrumbView.getVisibility()).isEqualTo(View.GONE);
         assertThat(mHolder.titleView.getContentDescription()).isEqualTo(BADGED_LABEL);
 
-        verify(mFragment).onSearchResultClicked();
+        verify(mFragment).onSearchResultClicked(eq(mHolder), any(SearchResult.class));
         verify(mFragment.getActivity()).startActivityAsUser(
                 any(Intent.class), eq(new UserHandle(USER_ID)));
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT),
-                eq(((IntentPayload)result.payload).intent.getComponent().flattenToString()),
-                any(Pair.class));
     }
 
     private SearchResult getSearchResult(String title, String summary, Drawable icon) {
         Builder builder = new Builder();
-        builder.addTitle(title)
-                .addSummary(summary)
-                .addRank(1)
-                .addPayload(new IntentPayload(
+        builder.setStableId(Objects.hash(title, summary, icon))
+                .setTitle(title)
+                .setSummary(summary)
+                .setRank(1)
+                .setPayload(new ResultPayload(
                         new Intent().setComponent(new ComponentName("pkg", "class"))))
                 .addBreadcrumbs(new ArrayList<>())
-                .addIcon(icon);
+                .setStableId(1)
+                .setIcon(icon);
 
         return builder.build();
     }
@@ -232,13 +225,13 @@ public class IntentSearchViewHolderTest {
     private SearchResult getAppSearchResult(
             String title, String summary, Drawable icon, ApplicationInfo applicationInfo) {
         AppSearchResult.Builder builder = new AppSearchResult.Builder();
-        builder.addTitle(title)
-                .addSummary(summary)
-                .addRank(1)
-                .addPayload(new IntentPayload(
+        builder.setTitle(title)
+                .setSummary(summary)
+                .setRank(1)
+                .setPayload(new ResultPayload(
                         new Intent().setComponent(new ComponentName("pkg", "class"))))
                 .addBreadcrumbs(new ArrayList<>())
-                .addIcon(icon);
+                .setIcon(icon);
         builder.setAppInfo(applicationInfo);
         return builder.build();
     }

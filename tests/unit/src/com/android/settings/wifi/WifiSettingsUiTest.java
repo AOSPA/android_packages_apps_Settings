@@ -49,6 +49,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.TestAccessPointBuilder;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTracker.WifiListener;
 import com.android.settingslib.wifi.WifiTrackerFactory;
@@ -84,8 +85,10 @@ public class WifiSettingsUiTest {
     private static final int TEST_RSSI = 123;
     private static final int TEST_NETWORK_ID = 1;
 
-    @Mock private WifiTracker mWifiTracker;
-    @Mock private WifiManager mWifiManager;
+    @Mock
+    private WifiTracker mWifiTracker;
+    @Mock
+    private WifiManager mWifiManager;
     private Context mContext;
     private WifiListener mWifiListener;
 
@@ -144,7 +147,7 @@ public class WifiSettingsUiTest {
 
     private void callOnWifiStateChanged(int state) {
         mActivityRule.getActivity().getMainThreadHandler()
-                .post( () -> mWifiListener.onWifiStateChanged(state) );
+                .post(() -> mWifiListener.onWifiStateChanged(state));
     }
 
     @Test
@@ -160,13 +163,23 @@ public class WifiSettingsUiTest {
     }
 
     @Test
-    public void noSavedNetworks_shouldNotShowSavedNetworksButton() {
+    public void noSavedNetworks_wifiEnabled_shouldNotShowSavedNetworksButton() {
         setWifiState(WifiManager.WIFI_STATE_ENABLED);
         when(mWifiTracker.getNumSavedNetworks()).thenReturn(0);
 
         launchActivity();
 
         onView(withText(SAVED_NETWORKS)).check(matches(not(isDisplayed())));
+    }
+
+    @Test
+    public void noSavedNetworks_wifiDisabled_shouldNotShowSavedNetworksButton() {
+        setWifiState(WifiManager.WIFI_STATE_DISABLED);
+        when(mWifiTracker.getNumSavedNetworks()).thenReturn(0);
+
+        launchActivity();
+
+        onView(withText(SAVED_NETWORKS)).check(doesNotExist());
     }
 
     @Test
@@ -228,5 +241,35 @@ public class WifiSettingsUiTest {
 
         getInstrumentation().callActivityOnStart(activity);
         verify(mWifiTracker, atMost(1)).forceUpdate();
+    }
+
+    @Test
+    public void changingSecurityStateOnApShouldNotCauseMultipleListItems() {
+        setWifiState(WifiManager.WIFI_STATE_ENABLED);
+        TestAccessPointBuilder builder = new TestAccessPointBuilder(mContext)
+                .setSsid(TEST_SSID).setSecurity(AccessPoint.SECURITY_NONE);
+        AccessPoint open = builder.build();
+
+        builder.setSecurity(AccessPoint.SECURITY_EAP);
+        AccessPoint eap = builder.build();
+
+        builder.setSecurity(AccessPoint.SECURITY_WEP);
+        AccessPoint wep = builder.build();
+
+        // Return a different security state each time getAccessPoints is invoked
+        when(mWifiTracker.getAccessPoints())
+                .thenReturn(Lists.newArrayList(open, eap))
+                .thenReturn(Lists.newArrayList(eap))
+                .thenReturn(Lists.newArrayList(wep));
+
+        launchActivity();
+
+        onView(withText(TEST_SSID)).check(matches(isDisplayed()));
+
+        mWifiListener.onAccessPointsChanged();
+        onView(withText(TEST_SSID)).check(matches(isDisplayed()));
+
+        mWifiListener.onAccessPointsChanged();
+        onView(withText(TEST_SSID)).check(matches(isDisplayed()));
     }
 }

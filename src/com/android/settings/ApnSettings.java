@@ -188,6 +188,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         PersistableBundle b = configManager.getConfigForSubId(subId);
         mHideImsApn = b.getBoolean(CarrierConfigManager.KEY_HIDE_IMS_APN_BOOL);
         mAllowAddingApns = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL);
+<<<<<<< HEAD
 
         mHideApnsWithRule = b.getStringArray(APN_HIDE_RULE_STRINGS_ARRAY);
         mHideApnsWithIccidRule = b.getStringArray(APN_HIDE_RULE_STRINGS_WITH_ICCIDS_ARRAY);
@@ -197,6 +198,17 @@ public class ApnSettings extends RestrictedSettingsFragment implements
            mHideApnsGroupByIccid = b.getPersistableBundle(iccid);
         }
 
+=======
+        if (mAllowAddingApns) {
+            String[] readOnlyApnTypes = b.getStringArray(
+                    CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
+            // if no apn type can be edited, do not allow adding APNs
+            if (ApnEditor.hasAllApns(readOnlyApnTypes)) {
+                Log.d(TAG, "not allowing adding APN because all APN types are read only");
+                mAllowAddingApns = false;
+            }
+        }
+>>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
         mUserManager = UserManager.get(activity);
     }
 
@@ -208,7 +220,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         mUnavailable = isUiRestricted();
         setHasOptionsMenu(!mUnavailable);
         if (mUnavailable) {
-            addPreferencesFromResource(R.xml.empty_settings);
+            addPreferencesFromResource(R.xml.placeholder_prefs);
             return;
         }
 

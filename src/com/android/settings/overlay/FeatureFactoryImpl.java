@@ -27,11 +27,15 @@ import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
 import com.android.settings.applications.IPackageManagerWrapperImpl;
 import com.android.settings.applications.PackageManagerWrapperImpl;
+import com.android.settings.bluetooth.BluetoothFeatureProvider;
+import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
+import com.android.settings.datausage.DataPlanFeatureProvider;
+import com.android.settings.datausage.DataPlanFeatureProviderImpl;
 import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
@@ -41,8 +45,8 @@ import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProviderImpl;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
-import com.android.settings.search2.SearchFeatureProvider;
-import com.android.settings.search2.SearchFeatureProviderImpl;
+import com.android.settings.search.SearchFeatureProvider;
+import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecurityFeatureProviderImpl;
 import com.android.settings.users.UserFeatureProvider;
@@ -66,6 +70,8 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private AssistGestureFeatureProvider mAssistGestureFeatureProvider;
     private UserFeatureProvider mUserFeatureProvider;
+    private BluetoothFeatureProvider mBluetoothFeatureProvider;
+    private DataPlanFeatureProvider mDataPlanFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -166,6 +172,22 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mUserFeatureProvider = new UserFeatureProviderImpl(context);
         }
         return mUserFeatureProvider;
+    }
+
+    @Override
+    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
+        if (mBluetoothFeatureProvider == null) {
+            mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl();
+        }
+        return mBluetoothFeatureProvider;
+    }
+
+    @Override
+    public DataPlanFeatureProvider getDataPlanFeatureProvider() {
+        if (mDataPlanFeatureProvider == null) {
+            mDataPlanFeatureProvider = new DataPlanFeatureProviderImpl();
+        }
+        return mDataPlanFeatureProvider;
     }
 
     @Override

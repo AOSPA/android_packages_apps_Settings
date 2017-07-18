@@ -211,6 +211,18 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     private DevicePolicyManager mDpm;
 
+    /**
+     * Check if the color transforms are color accelerated. Some transforms are experimental only
+     * on non-accelerated platforms due to the performance implications.
+     *
+     * @param context The current context
+     * @return
+     */
+    public static boolean isColorTransformAccelerated(Context context) {
+        return context.getResources()
+                .getBoolean(com.android.internal.R.bool.config_setColorTransformAccelerated);
+    }
+
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY;
@@ -481,7 +493,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     getString(R.string.accessibility_summary_state_disabled);
             final CharSequence serviceSummary = info.loadSummary(getPackageManager());
             final String stateSummaryCombo = getString(
-                    R.string.accessibility_summary_default_combination,
+                    R.string.preference_summary_default_combination,
                     serviceState, serviceSummary);
             preference.setSummary((TextUtils.isEmpty(serviceSummary)) ? serviceState
                     : stateSummaryCombo);
@@ -616,11 +628,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateAutoclickSummary(mAutoclickPreferenceScreen);
 
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
-    }
-
-    private boolean isColorTransformAccelerated(Context context) {
-        return context.getResources()
-                .getBoolean(com.android.internal.R.bool.config_setColorTransformAccelerated);
     }
 
     private void updateMagnificationSummary(Preference pref) {
@@ -767,10 +774,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         @Override
         public List<String> getNonIndexableKeys(Context context) {
-            List<String> keys = new ArrayList<>();
+            List<String> keys = super.getNonIndexableKeys(context);
             // Duplicates in Display
             keys.add(FONT_SIZE_PREFERENCE_SCREEN);
-            // TODO (b/37741509) Remove this non-indexble key when bug is resolved.
             keys.add(DisplaySettings.KEY_DISPLAY_SIZE);
 
             return keys;

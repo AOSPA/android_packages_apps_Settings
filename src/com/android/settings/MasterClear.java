@@ -16,11 +16,14 @@
 
 package com.android.settings;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,7 +35,9 @@ import android.os.Environment;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
+import android.telephony.euicc.EuiccManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,12 +52,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmLockPattern;
 import com.android.settings.widget.CarrierDemoPasswordDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.List;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"
@@ -71,11 +76,14 @@ public class MasterClear extends OptionsMenuFragment
     private static final int KEYGUARD_REQUEST = 55;
 
     static final String ERASE_EXTERNAL_EXTRA = "erase_sd";
+    static final String ERASE_ESIMS_EXTRA = "erase_esim";
 
     private View mContentView;
     private Button mInitiateButton;
     private View mExternalStorageContainer;
-    private CheckBox mExternalStorage;
+    @VisibleForTesting CheckBox mExternalStorage;
+    private View mEsimStorageContainer;
+    @VisibleForTesting CheckBox mEsimStorage;
     private ScrollView mScrollView;
 
     private final OnGlobalLayoutListener mOnGlobalLayoutListener = new OnGlobalLayoutListener() {
@@ -115,9 +123,11 @@ public class MasterClear extends OptionsMenuFragment
         }
     }
 
-    private void showFinalConfirmation() {
+    @VisibleForTesting
+    void showFinalConfirmation() {
         Bundle args = new Bundle();
         args.putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
+        args.putBoolean(ERASE_ESIMS_EXTRA, mEsimStorage.isChecked());
         ((SettingsActivity) getActivity()).startPreferencePanel(
                 this, MasterClearConfirm.class.getName(),
                 args, R.string.master_clear_confirm_title, null, null, 0);
@@ -165,6 +175,8 @@ public class MasterClear extends OptionsMenuFragment
         mInitiateButton.setOnClickListener(mInitiateListener);
         mExternalStorageContainer = mContentView.findViewById(R.id.erase_external_container);
         mExternalStorage = (CheckBox) mContentView.findViewById(R.id.erase_external);
+        mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mEsimStorage = (CheckBox) mContentView.findViewById(R.id.erase_esim);
         mScrollView = (ScrollView) mContentView.findViewById(R.id.master_clear_scrollview);
 
         /*
@@ -198,6 +210,18 @@ public class MasterClear extends OptionsMenuFragment
             });
         }
 
+        if (showWipeEuicc()) {
+            mEsimStorageContainer.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    mEsimStorage.toggle();
+                }
+            });
+        } else {
+            mEsimStorageContainer.setVisibility(View.GONE);
+        }
+
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         loadAccountList(um);
         StringBuffer contentDescription = new StringBuffer();
@@ -218,6 +242,30 @@ public class MasterClear extends OptionsMenuFragment
 
         // Set the initial state of the initiateButton
         mScrollView.getViewTreeObserver().addOnGlobalLayoutListener(mOnGlobalLayoutListener);
+    }
+
+    /**
+     * Whether to show the checkbox to wipe the eUICC.
+     *
+     * <p>We show the checkbox on any device which supports eUICC as long as either the eUICC was
+     * ever provisioned (that is, at least one profile was ever downloaded onto it), or if the user
+     * has enabled development mode.
+     */
+    @VisibleForTesting
+    boolean showWipeEuicc() {
+        Context context = getContext();
+        if (!isEuiccEnabled(context)) {
+            return false;
+        }
+        ContentResolver cr = context.getContentResolver();
+        return Settings.Global.getInt(cr, Settings.Global.EUICC_PROVISIONED, 0) != 0
+                || Settings.Global.getInt(cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
+    }
+
+    @VisibleForTesting
+    protected boolean isEuiccEnabled(Context context) {
+        EuiccManager euiccManager = (EuiccManager) context.getSystemService(Context.EUICC_SERVICE);
+        return euiccManager.isEnabled();
     }
 
     @VisibleForTesting

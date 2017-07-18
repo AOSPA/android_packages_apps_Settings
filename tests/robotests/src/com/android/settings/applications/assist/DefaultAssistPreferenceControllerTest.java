@@ -28,7 +28,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.provider.Settings;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
@@ -78,7 +78,7 @@ public class DefaultAssistPreferenceControllerTest {
     @Config(shadows = {ShadowSecureSettings.class})
     public void getDefaultAppInfo_hasDefaultAssist_shouldReturnKey() {
         final String flattenKey = "com.android.settings/assist";
-        ShadowSecureSettings.putString(null, Settings.Secure.ASSISTANT, flattenKey);
+        Settings.Secure.putString(null, Settings.Secure.ASSISTANT, flattenKey);
         DefaultAppInfo appInfo = mController.getDefaultAppInfo();
 
         assertThat(appInfo.getKey()).isEqualTo(flattenKey);
@@ -87,7 +87,7 @@ public class DefaultAssistPreferenceControllerTest {
     @Test
     public void getSettingIntent_noSettingsActivity_shouldNotCrash() {
         final String flattenKey = "com.android.settings/assist";
-        ShadowSecureSettings.putString(null, Settings.Secure.ASSISTANT, flattenKey);
+        Settings.Secure.putString(null, Settings.Secure.ASSISTANT, flattenKey);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         DefaultAssistPreferenceController controller =
             spy(new DefaultAssistPreferenceController(mContext));

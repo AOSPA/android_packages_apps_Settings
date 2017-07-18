@@ -16,10 +16,6 @@
 
 package com.android.settings.notification;
 
-import static android.app.NotificationManager.IMPORTANCE_LOW;
-import static android.app.NotificationManager.IMPORTANCE_NONE;
-import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
-
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -40,17 +36,19 @@ import android.view.View;
 import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.Utils;
-import com.android.settings.applications.AppHeaderController;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.FooterPreference;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.widget.FooterPreference;
+
+import static android.app.NotificationManager.IMPORTANCE_LOW;
+import static android.app.NotificationManager.IMPORTANCE_NONE;
+import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 public class ChannelNotificationSettings extends NotificationSettingsBase {
     private static final String TAG = "ChannelSettings";
@@ -66,7 +64,7 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     private NotificationSoundPreference mRingtone;
     private FooterPreference mFooter;
     private NotificationChannelGroup mChannelGroup;
-    private AppHeaderController mHeaderPref;
+    private EntityHeaderController mHeaderPref;
 
     @Override
     public int getMetricsCategory() {
@@ -134,21 +132,22 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
     }
 
     private void addHeaderPref() {
-        ArrayMap<String, NotificationBackend.AppRow> rows = new ArrayMap<String, NotificationBackend.AppRow>();
+        ArrayMap<String, NotificationBackend.AppRow> rows = new ArrayMap<>();
         rows.put(mAppRow.pkg, mAppRow);
         collectConfigActivities(rows);
         final Activity activity = getActivity();
-        mHeaderPref = FeatureFactory.getFactory(activity)
-                .getApplicationFeatureProvider(activity)
-                .newAppHeaderController(this /* fragment */, null /* appHeader */);
+        mHeaderPref = EntityHeaderController
+                .newInstance(activity, this /* fragment */, null /* header */)
+                .setRecyclerView(getListView(), getLifecycle());
         final Preference pref = mHeaderPref
                 .setIcon(mAppRow.icon)
                 .setLabel(mChannel.getName())
                 .setSummary(mAppRow.label)
                 .setPackageName(mAppRow.pkg)
                 .setUid(mAppRow.uid)
-                .setButtonActions(AppHeaderController.ActionType.ACTION_APP_INFO,
-                        AppHeaderController.ActionType.ACTION_NOTIF_PREFERENCE)
+                .setButtonActions(EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
+                        EntityHeaderController.ActionType.ACTION_NONE)
+                .setHasAppInfoLink(true)
                 .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
@@ -284,7 +283,6 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         mImportance = findPreference(KEY_IMPORTANCE);
         Bundle channelArgs = new Bundle();
         channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
-        channelArgs.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
         channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
         channelArgs.putString(Settings.EXTRA_CHANNEL_ID, mChannel.getId());
         mImportance.setEnabled(mSuspendedAppsAdmin == null && isChannelConfigurable(mChannel));

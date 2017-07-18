@@ -18,9 +18,11 @@ package com.android.settings.testutils;
 import android.content.Context;
 
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.datausage.DataPlanFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
@@ -28,7 +30,7 @@ import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
-import com.android.settings.search2.SearchFeatureProvider;
+import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
 
@@ -55,13 +57,15 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final SuggestionFeatureProvider suggestionsFeatureProvider;
     public final UserFeatureProvider userFeatureProvider;
     public final AssistGestureFeatureProvider assistGestureFeatureProvider;
+    public final BluetoothFeatureProvider bluetoothFeatureProvider;
+    public final DataPlanFeatureProvider dataPlanFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
      *
      * @param context The context must be a deep mock.
      */
-    public static void setupForTest(Context context) {
+    public static FakeFeatureFactory setupForTest(Context context) {
         sFactory = null;
         when(context.getString(com.android.settings.R.string.config_featureFactory))
                 .thenReturn(FakeFeatureFactory.class.getName());
@@ -71,6 +75,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         } catch (ClassNotFoundException e) {
             // Ignore.
         }
+        return (FakeFeatureFactory) FakeFeatureFactory.getFactory(context);
     }
 
     /**
@@ -90,6 +95,8 @@ public class FakeFeatureFactory extends FeatureFactory {
         suggestionsFeatureProvider = mock(SuggestionFeatureProvider.class);
         userFeatureProvider = mock(UserFeatureProvider.class);
         assistGestureFeatureProvider = mock(AssistGestureFeatureProvider.class);
+        bluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
+        dataPlanFeatureProvider = mock(DataPlanFeatureProvider.class);
     }
 
     @Override
@@ -150,6 +157,16 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public UserFeatureProvider getUserFeatureProvider(Context context) {
         return userFeatureProvider;
+    }
+
+    @Override
+    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
+        return bluetoothFeatureProvider;
+    }
+
+    @Override
+    public DataPlanFeatureProvider getDataPlanFeatureProvider() {
+        return dataPlanFeatureProvider;
     }
 
     @Override
