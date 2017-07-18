@@ -91,6 +91,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
             final SettingsActivity activity = (SettingsActivity) getActivity();
+            if(activity == null){
+               return;
+            }
             boolean isNonTtyOrTtyOnVolteEnabled = mImsMgr.isNonTtyOrTtyOnVolteEnabledForSlot();
             final SwitchBar switchBar = activity.getSwitchBar();
             boolean isWfcEnabled = switchBar.getSwitch().isChecked()
