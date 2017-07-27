@@ -68,6 +68,7 @@ import static android.net.NetworkPolicy.LIMIT_DISABLED;
 
 public class DataUsageSummary extends DataUsageBase implements Indexable, DataUsageEditController {
 
+    private static final String TAG = "DataUsageSummary";
     static final boolean LOGD = false;
 
     public static final boolean TEST_RADIOS = false;

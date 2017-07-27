@@ -794,19 +794,19 @@ public class SettingsActivity extends SettingsDrawerActivity
         final boolean isAdmin = um.isAdminUser();
         boolean somethingChanged = false;
         String packageName = getPackageName();
-<<<<<<< HEAD
+        //FIX ME : HEAD Keeping change in tail to enable compilation 
         if(mSMQ.isShowSmqSettings()){
             setTileEnabled(new ComponentName(packageName, Settings.SMQQtiFeedbackActivity.class.getName()),
                 mSMQ.isShowSmqSettings(), isAdmin);
         }
-
-        setTileEnabled(new ComponentName(packageName, WifiSettingsActivity.class.getName()),
-                pm.hasSystemFeature(PackageManager.FEATURE_WIFI), isAdmin);
-=======
+        //FIX ME :
+        /*setTileEnabled(new ComponentName(packageName, WifiSettingsActivity.class.getName()),
+                pm.hasSystemFeature(PackageManager.FEATURE_WIFI), isAdmin);*/
+       //FIX ME :=======
         somethingChanged = setTileEnabled(
                 new ComponentName(packageName, WifiSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_WIFI), isAdmin) || somethingChanged;
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
+        //FIX ME : 23dd351091fa4d8909543a0b95c332505f2053d2
 
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.BluetoothSettingsActivity.class.getName()),
@@ -979,13 +979,10 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         return bitmap;
     }
-<<<<<<< HEAD
-=======
 
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
     }
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
 }

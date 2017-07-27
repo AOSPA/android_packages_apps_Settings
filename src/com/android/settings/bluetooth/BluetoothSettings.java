@@ -16,12 +16,9 @@
 
 package com.android.settings.bluetooth;
 
-<<<<<<< HEAD
 import android.app.ActionBar;
-=======
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -39,14 +36,11 @@ import android.text.Spannable;
 import android.text.style.TextAppearanceSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
-<<<<<<< HEAD
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-=======
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
@@ -122,12 +116,9 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-<<<<<<< HEAD
         /* Don't auto start scan if screen reconstructs due to frozen screen*/
-        mInitialScanStarted = (savedInstanceState != null);
-        mInitiateDiscoverable = true;
-=======
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
+        //mInitialScanStarted = (savedInstanceState != null);
+        //mInitiateDiscoverable = true;
 
         final SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
@@ -240,11 +231,8 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
         if (isUiRestricted()) {
             return;
         }
-<<<<<<< HEAD
-
-        getActivity().unregisterReceiver(mReceiver);
     }
-
+/*
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (mLocalAdapter == null) return;
@@ -318,10 +306,8 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
         }
         mInitialScanStarted = true;
         mLocalAdapter.startScanning(true);
-=======
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
     }
-
+*/
     @Override
     public String getDeviceListKey() {
         return KEY_PAIRED_DEVICES;

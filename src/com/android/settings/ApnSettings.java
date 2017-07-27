@@ -188,7 +188,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         PersistableBundle b = configManager.getConfigForSubId(subId);
         mHideImsApn = b.getBoolean(CarrierConfigManager.KEY_HIDE_IMS_APN_BOOL);
         mAllowAddingApns = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL);
-<<<<<<< HEAD
+        //FIX ME : HEAD Keeping change in HEAD to enable compilation
 
         mHideApnsWithRule = b.getStringArray(APN_HIDE_RULE_STRINGS_ARRAY);
         mHideApnsWithIccidRule = b.getStringArray(APN_HIDE_RULE_STRINGS_WITH_ICCIDS_ARRAY);
@@ -198,7 +198,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
            mHideApnsGroupByIccid = b.getPersistableBundle(iccid);
         }
 
-=======
+       /*FIX ME : =======
         if (mAllowAddingApns) {
             String[] readOnlyApnTypes = b.getStringArray(
                     CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
@@ -208,7 +208,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
                 mAllowAddingApns = false;
             }
         }
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
+        FIX ME : TAIL 23dd351091fa4d8909543a0b95c332505f2053d2*/
         mUserManager = UserManager.get(activity);
     }
 

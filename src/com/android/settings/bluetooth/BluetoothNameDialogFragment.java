@@ -85,23 +85,11 @@ abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                 .setTitle(getDialogTitle())
                 .setView(createDialogView(deviceName))
-<<<<<<< HEAD
-                .setPositiveButton(R.string.bluetooth_rename_button,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                String deviceName = mDeviceNameView.getText().toString().trim();
-                                setDeviceName(deviceName);
-                            }
-                        })
-                .setNegativeButton(android.R.string.cancel, null)
-                .create();
-=======
                 .setPositiveButton(R.string.bluetooth_rename_button, (dialog, which) -> {
-                    setDeviceName(mDeviceNameView.getText().toString());
+                    setDeviceName(mDeviceNameView.getText().toString().trim());
                 })
                 .setNegativeButton(android.R.string.cancel, null);
         mAlertDialog = builder.create();
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
         mAlertDialog.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 

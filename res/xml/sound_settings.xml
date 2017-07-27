@@ -140,23 +140,23 @@
           android:key="emergency_tone"
           android:title="@string/emergency_tone_title"
           android:summary="%s" />
-<<<<<<< HEAD
+<!--<<<<<<< HEAD Keeping tail changes for now to enable compilation 
 
         <com.android.settingslib.RestrictedPreference
           android:key="cell_broadcast_settings"
           android:title="@string/cell_broadcast_settings"
           settings:useAdminDisabledSummary="true"
-          settings:allowDividerAbove="true" >
+          settings:allowDividerAbove="true" -->
                 <!--intent
                   android:action="android.intent.action.MAIN"
                   android:targetPackage="com.android.cellbroadcastreceiver"
                   android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings" /-->
-        </com.android.settingslib.RestrictedPreference>
+        <!--/com.android.settingslib.RestrictedPreference>
 
         <com.android.settings.WorkOnlyCategory
             android:key="sound_work_settings_section"
             android:title="@string/sound_work_settings">
-=======
+======= -->
     </PreferenceCategory>
 
     <com.android.settingslib.RestrictedPreference
@@ -175,7 +175,7 @@
         android:key="sound_work_settings_section"
         android:title="@string/sound_work_settings"
         android:order="100">
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
+<!-->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2 -->
 
                 <!-- Use the same sounds of the work profile -->
                 <SwitchPreference

@@ -1391,7 +1391,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
                 case LIST_TYPE_USAGE_ACCESS:
                     if (holder.entry.extraInfo != null) {
-<<<<<<< HEAD
+                //FIX ME : HEAD Kepping change in HEAD to enable compilation
                         if (!((holder.entry.extraInfo) instanceof PermissionState)) {
                             holder.updateSizeText(mManageApplications.mInvalidSizeStr, mWhichSize);
                         } else {
@@ -1399,12 +1399,12 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                                 .extraInfo)).isPermissible() ? R.string.switch_on_text :
                                 R.string.switch_off_text);
                         }
-=======
+                 /*FIX ME ;=======
                         holder.summary.setText((new UsageState((PermissionState) holder.entry
                                 .extraInfo)).isPermissible()
                                 ? R.string.app_permission_summary_allowed
                                 : R.string.app_permission_summary_not_allowed);
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
+                 FIX ME : TAIL 23dd351091fa4d8909543a0b95c332505f2053d2*/
                     } else {
                         holder.summary.setText(null);
                     }

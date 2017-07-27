@@ -118,14 +118,11 @@ public class ApnEditor extends SettingsPreferenceFragment
     private String[] mReadOnlyApnTypes;
     private String[] mReadOnlyApnFields;
     private boolean mReadOnlyApn;
-<<<<<<< HEAD
     private boolean mDeletableApn;
 
 
     private static final String APN_DEFALUT_VALUES_STRING_ARRAY = "apn_default_values_strings_array";
-=======
     private String mUserEnteredApnType;
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
 
     /**
      * Standard projection for the interesting columns of a normal note.
@@ -270,9 +267,6 @@ public class ApnEditor extends SettingsPreferenceFragment
                 finish();
                 return;
             }
-<<<<<<< HEAD
-            CarrierConfigManager configManager = (CarrierConfigManager)
-                    getSystemService(Context.CARRIER_CONFIG_SERVICE);
             if (configManager != null) {
                 PersistableBundle b = configManager.getConfigForSubId(mSubId);
                 if (b != null) {
@@ -282,8 +276,6 @@ public class ApnEditor extends SettingsPreferenceFragment
                             CarrierConfigManager.KEY_READ_ONLY_APN_FIELDS_STRING_ARRAY);
                 }
             }
-=======
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
             mUri = uri;
         } else if (action.equals(Intent.ACTION_INSERT)) {
             if (mFirstTime || icicle.getInt(SAVED_POS) == 0) {
@@ -1172,7 +1164,6 @@ public class ApnEditor extends SettingsPreferenceFragment
         }
     }
 
-<<<<<<< HEAD
     private ContentValues getDefaultValue(){
         ContentValues contentValues = new ContentValues();
         CarrierConfigManager configManager = (CarrierConfigManager)
@@ -1201,7 +1192,8 @@ public class ApnEditor extends SettingsPreferenceFragment
         }
         Log.w(TAG, field + " is not configurable");
         return false;
-=======
+    }
+
     private String getUserEnteredApnType() {
         if (mUserEnteredApnType != null) {
             return mUserEnteredApnType;
@@ -1235,7 +1227,6 @@ public class ApnEditor extends SettingsPreferenceFragment
         }
 
         return mUserEnteredApnType;
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
     }
 
     public static class ErrorDialog extends InstrumentedDialogFragment {

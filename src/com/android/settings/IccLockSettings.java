@@ -247,7 +247,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
     }
 
     private void updatePreferences() {
-<<<<<<< HEAD
+    //FIX ME :  HEAD Keeping change in HEAD to enable compilation
         if (mPhone != null) {
             if (mPhone.getIccCard().getState() != State.READY) {
                 // if SIM State is NOT READY, it is not possible to interact with UICC app
@@ -262,7 +262,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
         } else {
             mPinDialog.setEnabled(false);
             mPinToggle.setEnabled(false);
-=======
+        /*FIX ME :=======
         if (mPinDialog != null) {
             mPinDialog.setEnabled(mPhone != null);
         }
@@ -272,7 +272,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
             if (mPhone != null) {
                 mPinToggle.setChecked(mPhone.getIccCard().getIccLockEnabled());
             }
->>>>>>> 23dd351091fa4d8909543a0b95c332505f2053d2
+        FIX ME : TAIL 23dd351091fa4d8909543a0b95c332505f2053d2 */
         }
     }
 
