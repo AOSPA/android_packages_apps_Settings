@@ -39,6 +39,8 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.settingslib.RestrictedLockUtils;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * Confirm and execute a reset of the network settings to a clean "just out of the box"
@@ -100,6 +102,13 @@ public class ResetNetworkConfirm extends OptionsMenuFragment {
                 BluetoothAdapter btAdapter = btManager.getAdapter();
                 if (btAdapter != null) {
                     btAdapter.factoryReset();
+                    LocalBluetoothManager mLocalBtManager =
+                                      LocalBluetoothManager.getInstance(context, null);
+                    if (mLocalBtManager != null) {
+                        CachedBluetoothDeviceManager cachedDeviceManager =
+                                            mLocalBtManager.getCachedDeviceManager();
+                        cachedDeviceManager.clearAllDevices();
+                    }
                 }
             }
 
