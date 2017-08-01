@@ -71,14 +71,6 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     private static final String APP_LIST_PREF = "applications_list";
     private static final String DEFAULT_PREF = "default";
 
-    private static final String[] DEPENDENT_PREFS = {
-        Settings.System.NOTIFICATION_LIGHT_SCREEN_ON,
-        Settings.System.ALLOW_LIGHTS,
-        Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE,
-        APP_LIST_PREF,
-        DEFAULT_PREF
-    };
-
     public static final int ACTION_TEST = 0;
     public static final int ACTION_DELETE = 1;
     private static final int MENU_ADD = 0;
@@ -99,6 +91,8 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     private AppSelectListPreference mPackageAdapter;
     private String mPackageList;
     private Map<String, Package> mPackages;
+    private boolean mLedCanPulse;
+    private boolean mMultiColorLed;
 
     @Override
     protected int getMetricsCategory() {
@@ -124,6 +118,11 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
         mDefaultLedOff = resources.getInteger(
                 com.android.internal.R.integer.config_defaultNotificationLedOff);
 
+        mLedCanPulse = resources.getBoolean(
+                com.android.internal.R.bool.config_ledCanPulse);
+        mMultiColorLed = resources.getBoolean(
+                com.android.internal.R.bool.config_multiColorNotificationLed);
+
         mDefaultPref = (NotificationLightPreference) findPreference(DEFAULT_PREF);
         mDefaultPref.setOnPreferenceChangeListener(this);
 
@@ -137,11 +136,15 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
 
         mCustomEnabledPref = (SwitchPreference)
                 findPreference(Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE);
-        mCustomEnabledPref.setOnPreferenceChangeListener(this);
 
-        // Applications
-        mApplicationPrefList = (PreferenceGroup) findPreference(APP_LIST_PREF);
-        mApplicationPrefList.setOrderingAsAdded(false);
+        if (mMultiColorLed) {
+          mCustomEnabledPref.setOnPreferenceChangeListener(this);
+          mApplicationPrefList = (PreferenceGroup) findPreference(APP_LIST_PREF);
+          mApplicationPrefList.setOrderingAsAdded(false);
+        } else {
+          mAdvancedPrefs.removePreference(mCustomEnabledPref);
+          prefSet.removePreference(prefSet.findPreference(APP_LIST_PREF));
+        }
 
         mPackageManager = getPackageManager();
         mPackageAdapter = new AppSelectListPreference(getActivity());
@@ -206,8 +209,10 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
 
         mDefaultPref.setAllValues(color, timeOn, timeOff);
 
-        mApplicationPrefList = (PreferenceGroup) findPreference(APP_LIST_PREF);
-        mApplicationPrefList.setOrderingAsAdded(false);
+        if (mMultiColorLed) {
+          mApplicationPrefList = (PreferenceGroup) findPreference(APP_LIST_PREF);
+          mApplicationPrefList.setOrderingAsAdded(false);
+        }
     }
 
     private void refreshCustomApplicationPrefs() {
@@ -495,7 +500,19 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     private void enableNotificationLight(boolean enabled, boolean start) {
         final PreferenceScreen prefSet = getPreferenceScreen();
 
-        for (String prefKey : DEPENDENT_PREFS) {
+        final ArrayList<String> prefs = new ArrayList<String>();
+        if (mLedCanPulse || mMultiColorLed) {
+            prefs.add(DEFAULT_PREF);
+        }
+        if (mMultiColorLed) {
+            prefs.add(Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE);
+            prefs.add(APP_LIST_PREF);
+        }
+        prefs.add(Settings.System.NOTIFICATION_LIGHT_SCREEN_ON);
+        prefs.add(Settings.System.ALLOW_LIGHTS);
+        final String[] depPrefs = prefs.toArray(new String[prefs.size()]);
+
+        for (String prefKey : depPrefs) {
             Preference pref = (Preference) prefSet.findPreference(prefKey);
             pref.setEnabled(enabled);
         }
