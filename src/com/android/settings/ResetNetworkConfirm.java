@@ -103,7 +103,8 @@ public class ResetNetworkConfirm extends OptionsMenuFragment {
                 }
             }
 
-            ImsManager.factoryReset(context);
+            ImsManager.getInstance(context,
+                     SubscriptionManager.getPhoneId(mSubId)).factoryResetSlot();
 
             Toast.makeText(context, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
                     .show();
