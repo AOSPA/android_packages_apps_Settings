@@ -54,14 +54,6 @@ public class BatteryLightSettings extends SettingsPreferenceFragment
     private static final String REALLY_FULL_COLOR_PREF = "really_full_color";
     private static final String BATTERY_PULSE_PREF = "battery_light_pulse";
 
-    private static final String[] DEPENDENT_PREFS = {
-        BATTERY_PULSE_PREF,
-        LOW_COLOR_PREF,
-        MEDIUM_COLOR_PREF,
-        FULL_COLOR_PREF,
-        REALLY_FULL_COLOR_PREF
-    };
-
     private static final int MENU_RESET = Menu.FIRST;
 
     private boolean mBatteryLightEnabled;
@@ -262,7 +254,19 @@ public class BatteryLightSettings extends SettingsPreferenceFragment
     private void enableBatteryLight(boolean enabled, boolean start) {
         final PreferenceScreen prefSet = getPreferenceScreen();
 
-        for (String prefKey : DEPENDENT_PREFS) {
+        final ArrayList<String> prefs = new ArrayList<String>();
+        if (getResources().getBoolean(com.android.internal.R.bool.config_ledCanPulse)) {
+            prefs.add(BATTERY_PULSE_PREF);
+        }
+        if (getResources().getBoolean(com.android.internal.R.bool.config_multiColorBatteryLed)) {
+            prefs.add(LOW_COLOR_PREF);
+            prefs.add(MEDIUM_COLOR_PREF);
+            prefs.add(FULL_COLOR_PREF);
+            prefs.add(REALLY_FULL_COLOR_PREF);
+        }
+        final String[] depPrefs = prefs.toArray(new String[prefs.size()]);
+
+        for (String prefKey : depPrefs) {
             Preference pref = (Preference) prefSet.findPreference(prefKey);
             pref.setEnabled(enabled);
         }
