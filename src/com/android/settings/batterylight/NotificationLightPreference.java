@@ -127,6 +127,11 @@ public class NotificationLightPreference extends Preference
             mLightColorView.setVisibility(View.GONE);
         }
 
+        if (!mResources.getBoolean(com.android.internal.R.bool.config_ledCanPulse)) {
+            mOnValueView.setVisibility(View.GONE);
+            mOffValueView.setVisibility(View.GONE);
+        }
+
         updatePreferenceViews();
         holder.itemView.setOnLongClickListener(this);
     }
