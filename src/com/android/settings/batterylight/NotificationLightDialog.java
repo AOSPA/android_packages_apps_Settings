@@ -69,6 +69,8 @@ public class NotificationLightDialog extends ColorPickerDialog
     private LayoutInflater mInflater;
     private Spinner mPulseSpeedOff;
     private Spinner mPulseSpeedOn;
+    private boolean mLedCanPulse;
+    private boolean mMultiColorLed;
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -103,10 +105,21 @@ public class NotificationLightDialog extends ColorPickerDialog
         final int[] colors = mResources.getIntArray(
                 R.array.led_color_picker_dialog_colors);
 
+        mLedCanPulse = mResources.getBoolean(
+                com.android.internal.R.bool.config_ledCanPulse);
+        mMultiColorLed = mResources.getBoolean(
+                com.android.internal.R.bool.config_multiColorNotificationLed);
+
         mAdapter = getAdapter();
-        mAdapter.setColors(colors);
-        mAdapter.setSelectedImageResourceId(R.drawable.ic_check_green_24dp);
-        mAdapter.setSelectedImageColorFilter(Color.WHITE);
+        if (mMultiColorLed) {
+            mAdapter.setColors(colors);
+            mAdapter.setSelectedImageResourceId(R.drawable.ic_check_green_24dp);
+            mAdapter.setSelectedImageColorFilter(Color.WHITE);
+        } else {
+            final ColorPickerDialog dialog = new ColorPickerDialog(context);
+            dialog.setColumns(0);
+            mAdapter.setRowHeight(0);
+        }
     }
 
     @Override
@@ -118,7 +131,13 @@ public class NotificationLightDialog extends ColorPickerDialog
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         TextView textView = (TextView) findViewById(R.id.text_primary);
-        textView.setText(mResources.getString(R.string.notification_light_dialog_text));
+        if (mLedCanPulse && mMultiColorLed) {
+            textView.setText(mResources.getString(R.string.notification_light_dialog_text));
+        } else if (!mLedCanPulse && mMultiColorLed) {
+            textView.setText(mResources.getString(R.string.notification_light_dialog_text_multicolor));
+        } else if (mLedCanPulse && !mMultiColorLed) {
+            textView.setText(mResources.getString(R.string.notification_light_dialog_text_pulse));
+        }
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.layout_root);
         LinearLayout notificationSettingsLayout = (LinearLayout) mInflater
