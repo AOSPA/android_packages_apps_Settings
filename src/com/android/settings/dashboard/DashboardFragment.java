@@ -351,4 +351,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
         mSummaryLoader.setListening(true);
     }
+
+    public void onDestroy(){
+        if(mSummaryLoader != null){
+           mSummaryLoader.release();
+        }
+        super.onDestroy();
+    }
 }
