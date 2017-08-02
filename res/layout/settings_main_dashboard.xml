@@ -23,6 +23,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <FrameLayout
+        android:id="@+id/search_bar_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/suggestion_condition_background">
@@ -41,6 +42,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:contentInsetStartWithNavigation="64dp"
                 android:navigationIcon="@drawable/ic_search_24dp"
+                android:navigationContentDescription="@string/search_menu"
                 android:title="@string/search_menu"
                 android:titleTextAppearance="@style/TextAppearance.SearchBar"
                 android:theme="?android:attr/actionBarTheme"/>

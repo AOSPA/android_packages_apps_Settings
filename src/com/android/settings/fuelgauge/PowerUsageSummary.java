@@ -136,7 +136,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     SparseArray<List<Anomaly>> mAnomalySparseArray;
     @VisibleForTesting
     PreferenceGroup mAppListGroup;
-    private BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
+    @VisibleForTesting
+    BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
     private AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
@@ -231,13 +232,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
         initFeatureProvider();
         mBatteryLayoutPref = (LayoutPreference) findPreference(KEY_BATTERY_HEADER);
-        View header = mBatteryLayoutPref.findViewById(R.id.summary1);
-        // Unfortunately setting a long click listener on a means it will no longer pass the regular
-        // click event to the parent, so we have to register a regular click listener as well.
-        if (mPowerFeatureProvider.isEstimateDebugEnabled()) {
-            header.setOnLongClickListener(this);
-            header.setOnClickListener(this);
-        }
+
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
         mScreenUsagePref = (PowerGaugePreference) findPreference(KEY_SCREEN_USAGE);
         mLastFullChargePref = (PowerGaugePreference) findPreference(
@@ -387,7 +382,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 item.setTitle(mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
                 metricsFeatureProvider.action(context,
                         MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE, mShowAllApps);
-                restartBatteryStatsLoader();
+                restartBatteryStatsLoader(false /* clearHeader */);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -528,7 +523,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
             return;
         }
 
-        initAnomalyDetectionIfPossible();
+        restartAnomalyDetectionIfPossible();
 
         // reload BatteryInfo and updateUI
         restartBatteryInfoLoader();
@@ -653,9 +648,9 @@ public class PowerUsageSummary extends PowerUsageBase implements
     }
 
     @VisibleForTesting
-    void initAnomalyDetectionIfPossible() {
+    void restartAnomalyDetectionIfPossible() {
         if (getAnomalyDetectionPolicy().isAnomalyDetectionEnabled()) {
-            getLoaderManager().initLoader(ANOMALY_LOADER, Bundle.EMPTY, mAnomalyLoaderCallbacks);
+            getLoaderManager().restartLoader(ANOMALY_LOADER, Bundle.EMPTY, mAnomalyLoaderCallbacks);
         }
     }
 
@@ -720,7 +715,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
             preference.setSummary(
                     (sipper.drainType != DrainType.APP || mBatteryUtils.shouldHideSipper(sipper))
                             ? timeSequence
-                            : TextUtils.expandTemplate(getText(R.string.battery_screen_usage),
+                            : TextUtils.expandTemplate(getText(R.string.battery_used_for),
                                     timeSequence));
         }
     }
@@ -772,6 +767,14 @@ public class PowerUsageSummary extends PowerUsageBase implements
     void restartBatteryInfoLoader() {
         getLoaderManager().restartLoader(BATTERY_INFO_LOADER, Bundle.EMPTY,
                 mBatteryInfoLoaderCallbacks);
+        if (mPowerFeatureProvider.isEstimateDebugEnabled()) {
+            // Unfortunately setting a long click listener on a view means it will no
+            // longer pass the regular click event to the parent, so we have to register
+            // a regular click listener as well.
+            View header = mBatteryLayoutPref.findViewById(R.id.summary1);
+            header.setOnLongClickListener(this);
+            header.setOnClickListener(this);
+        }
     }
 
     private static List<BatterySipper> getFakeStats() {
@@ -859,8 +862,14 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @Override
     protected void restartBatteryStatsLoader() {
+        restartBatteryStatsLoader(true /* clearHeader */);
+    }
+
+    void restartBatteryStatsLoader(boolean clearHeader) {
         super.restartBatteryStatsLoader();
-        mBatteryHeaderPreferenceController.quickUpdateHeaderPreference();
+        if (clearHeader) {
+            mBatteryHeaderPreferenceController.quickUpdateHeaderPreference();
+        }
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {

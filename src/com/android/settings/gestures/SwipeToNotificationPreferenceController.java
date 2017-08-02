@@ -17,17 +17,29 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.R;
+import com.android.settings.Utils;
+import com.android.settings.search.DatabaseIndexingUtils;
+import com.android.settings.search.InlineSwitchPayload;
+import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import static android.provider.Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED;
 
 public class SwipeToNotificationPreferenceController extends GesturePreferenceController {
 
+    private final int ON = 1;
+    private final int OFF = 0;
+
     private static final String PREF_KEY_VIDEO = "gesture_swipe_down_fingerprint_video";
     private final String mSwipeDownFingerPrefKey;
+
+    private final String SECURE_KEY = SYSTEM_NAVIGATION_KEYS_ENABLED;
 
     public SwipeToNotificationPreferenceController(Context context, Lifecycle lifecycle,
             String key) {
@@ -42,7 +54,7 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
     }
 
     private static boolean isGestureAvailable(Context context) {
-        return context.getResources()
+        return Utils.hasFingerprintHardware(context) && context.getResources()
                 .getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys);
     }
 
@@ -63,15 +75,23 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, (boolean) newValue ? 1 : 0);
+        Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY,
+                (boolean) newValue ? ON : OFF);
         return true;
     }
 
     @Override
     protected boolean isSwitchPrefEnabled() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 1)
-                == 1;
+        return Settings.Secure.getInt(mContext.getContentResolver(), SECURE_KEY, OFF) == ON;
+    }
+
+    @Override
+    public ResultPayload getResultPayload() {
+        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+                SwipeToNotificationSettings.class.getName(), mSwipeDownFingerPrefKey,
+                mContext.getString(R.string.display_settings));
+
+        return new InlineSwitchPayload(SECURE_KEY, ResultPayload.SettingsSource.SECURE,
+                ON /* onValue */, intent, isAvailable(), OFF /* defaultValue */);
     }
 }

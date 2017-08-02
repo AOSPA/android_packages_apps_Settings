@@ -17,6 +17,7 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.content.Intent;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -25,14 +26,24 @@ import android.support.v7.preference.TwoStatePreference;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.search.DatabaseIndexingUtils;
+import com.android.settings.search.InlineSwitchPayload;
+import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import static android.provider.Settings.Secure.ASSIST_GESTURE_ENABLED;
 
 public class AssistGesturePreferenceController extends GesturePreferenceController
         implements OnResume {
 
+    private final int ON = 1;
+    private final int OFF = 0;
+
     private static final String PREF_KEY_VIDEO = "gesture_assist_video";
     private final String mAssistGesturePrefKey;
+
+    private final String SECURE_KEY = ASSIST_GESTURE_ENABLED;
 
     private final AssistGestureFeatureProvider mFeatureProvider;
     private boolean mWasAvailable;
@@ -135,8 +146,7 @@ public class AssistGesturePreferenceController extends GesturePreferenceControll
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean enabled = (boolean) newValue;
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ASSIST_GESTURE_ENABLED, enabled ? 1 : 0);
+        Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY, enabled ? ON : OFF);
         updateState(preference);
         return true;
     }
@@ -154,7 +164,17 @@ public class AssistGesturePreferenceController extends GesturePreferenceControll
     @Override
     protected boolean isSwitchPrefEnabled() {
         final int assistGestureEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ASSIST_GESTURE_ENABLED, 1);
+                SECURE_KEY, ON);
         return assistGestureEnabled != 0;
+    }
+
+    @Override
+    public ResultPayload getResultPayload() {
+        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+                AssistGestureSettings.class.getName(), mAssistGesturePrefKey,
+                mContext.getString(R.string.display_settings));
+
+        return new InlineSwitchPayload(SECURE_KEY, ResultPayload.SettingsSource.SECURE,
+                ON /* onValue */, intent, isAvailable(), ON /* defaultValue */);
     }
 }

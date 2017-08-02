@@ -84,17 +84,24 @@ public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
                     continue;
                 }
 
-                final int wakeups = getWakeupAlarmCountFromUid(uid);
-                if ((wakeups / totalRunningHours) > mWakeupAlarmThreshold) {
+                final int wakeupAlarmCount = (int) (getWakeupAlarmCountFromUid(uid)
+                        / totalRunningHours);
+                if (wakeupAlarmCount > mWakeupAlarmThreshold) {
                     final String packageName = mBatteryUtils.getPackageName(uid.getUid());
                     final CharSequence displayName = Utils.getApplicationLabel(mContext,
                             packageName);
+                    final int targetSdkVersion = mBatteryUtils.getTargetSdkVersion(packageName);
 
                     Anomaly anomaly = new Anomaly.Builder()
                             .setUid(uid.getUid())
                             .setType(Anomaly.AnomalyType.WAKEUP_ALARM)
                             .setDisplayName(displayName)
                             .setPackageName(packageName)
+                            .setTargetSdkVersion(targetSdkVersion)
+                            .setBackgroundRestrictionEnabled(
+                                    mBatteryUtils.isBackgroundRestrictionEnabled(targetSdkVersion,
+                                            uid.getUid(), packageName))
+                            .setWakeupAlarmCount(wakeupAlarmCount)
                             .build();
 
                     if (mAnomalyUtils.getAnomalyAction(anomaly).isActionActive(anomaly)) {

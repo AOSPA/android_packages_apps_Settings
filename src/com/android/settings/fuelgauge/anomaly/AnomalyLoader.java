@@ -25,8 +25,11 @@ import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.utils.AsyncLoader;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,15 +98,7 @@ public class AnomalyLoader extends AsyncLoader<List<Anomaly>> {
                     mUserManager.getUserProfiles());
         }
 
-        final List<Anomaly> anomalies = new ArrayList<>();
-        for (@Anomaly.AnomalyType int type : Anomaly.ANOMALY_TYPE_LIST) {
-            if (mPolicy.isAnomalyDetectorEnabled(type)) {
-                anomalies.addAll(mAnomalyUtils.getAnomalyDetector(type).detectAnomalies(
-                        mBatteryStatsHelper, mPackageName));
-            }
-        }
-
-        return anomalies;
+        return mAnomalyUtils.detectAnomalies(mBatteryStatsHelper, mPolicy, mPackageName);
     }
 
     @VisibleForTesting

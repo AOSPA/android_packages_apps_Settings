@@ -30,19 +30,20 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public abstract class GesturePreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
-        LifecycleObserver, OnStart, OnStop, OnCreate, OnSaveInstanceState  {
+        LifecycleObserver, OnResume, OnPause, OnCreate, OnSaveInstanceState  {
 
     @VisibleForTesting
     static final String KEY_VIDEO_PAUSED = "key_video_paused";
 
     private VideoPreference mVideoPreference;
-    private boolean mVideoPaused;
+    @VisibleForTesting
+    boolean mVideoPaused;
 
     public GesturePreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
@@ -71,6 +72,8 @@ public abstract class GesturePreferenceController extends AbstractPreferenceCont
                         ? R.string.gesture_setting_on
                         : R.string.gesture_setting_off);
             }
+            // Different meanings of "Enabled" for the Preference and Controller.
+            preference.setEnabled(canHandleClicks());
         }
     }
 
@@ -83,21 +86,19 @@ public abstract class GesturePreferenceController extends AbstractPreferenceCont
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        if (mVideoPreference != null) {
-            mVideoPaused = mVideoPreference.isVideoPaused();
-        }
         outState.putBoolean(KEY_VIDEO_PAUSED, mVideoPaused);
     }
 
     @Override
-    public void onStop() {
+    public void onPause() {
         if (mVideoPreference != null) {
+            mVideoPaused = mVideoPreference.isVideoPaused();
             mVideoPreference.onViewInvisible();
         }
     }
 
     @Override
-    public void onStart() {
+    public void onResume() {
         if (mVideoPreference != null) {
             mVideoPreference.onViewVisible(mVideoPaused);
         }
@@ -106,4 +107,8 @@ public abstract class GesturePreferenceController extends AbstractPreferenceCont
     protected abstract String getVideoPrefKey();
 
     protected abstract boolean isSwitchPrefEnabled();
+
+    protected boolean canHandleClicks() {
+        return true;
+    }
 }

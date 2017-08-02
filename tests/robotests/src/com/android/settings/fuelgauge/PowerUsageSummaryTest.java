@@ -27,8 +27,10 @@ import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -73,6 +75,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -156,6 +159,8 @@ public class PowerUsageSummaryTest {
     private PreferenceGroup mAppListGroup;
     @Mock
     private AnomalyDetectionPolicy mAnomalyDetectionPolicy;
+    @Mock
+    private BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -184,6 +189,7 @@ public class PowerUsageSummaryTest {
         mBatteryMeterView = new BatteryMeterView(mRealContext);
         mBatteryMeterView.mDrawable = new BatteryMeterView.BatteryMeterDrawable(mRealContext, 0);
         doNothing().when(mFragment).restartBatteryStatsLoader();
+        doReturn(mock(LoaderManager.class)).when(mFragment).getLoaderManager();
 
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
         when(mAdditionalBatteryInfoMenu.getItemId())
@@ -333,13 +339,13 @@ public class PowerUsageSummaryTest {
     @Test
     public void testSetUsageSummary_timeMoreThanOneMinute_normalApp_setScreenSummary() {
         mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
-        doReturn(mRealContext.getText(R.string.battery_screen_usage)).when(mFragment).getText(
-                R.string.battery_screen_usage);
+        doReturn(mRealContext.getText(R.string.battery_used_for)).when(mFragment).getText(
+                R.string.battery_used_for);
         doReturn(mRealContext).when(mFragment).getContext();
 
         mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
 
-        assertThat(mPreference.getSummary().toString()).isEqualTo("Screen usage 2m");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Used for 2m");
     }
 
     @Test
@@ -481,9 +487,9 @@ public class PowerUsageSummaryTest {
         doReturn(mAnomalyDetectionPolicy).when(mFragment).getAnomalyDetectionPolicy();
         when(mAnomalyDetectionPolicy.isAnomalyDetectionEnabled()).thenReturn(true);
 
-        mFragment.initAnomalyDetectionIfPossible();
+        mFragment.restartAnomalyDetectionIfPossible();
 
-        verify(mLoaderManager).initLoader(eq(PowerUsageSummary.ANOMALY_LOADER), eq(Bundle.EMPTY),
+        verify(mLoaderManager).restartLoader(eq(PowerUsageSummary.ANOMALY_LOADER), eq(Bundle.EMPTY),
                 any());
     }
 
@@ -544,6 +550,33 @@ public class PowerUsageSummaryTest {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
 
         assertThat(mFragment.shouldHideSipper(mNormalBatterySipper)).isFalse();
+    }
+
+    @Test
+    public void testDebugMode() {
+        doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).isEstimateDebugEnabled();
+
+        mFragment.restartBatteryInfoLoader();
+        ArgumentCaptor<View.OnLongClickListener> listener = ArgumentCaptor.forClass(
+                View.OnLongClickListener.class);
+        verify(mSummary1).setOnLongClickListener(listener.capture());
+
+        // Calling the listener should disable it.
+        listener.getValue().onLongClick(mSummary1);
+        verify(mSummary1).setOnLongClickListener(null);
+
+        // Restarting the loader should reset the listener.
+        mFragment.restartBatteryInfoLoader();
+        verify(mSummary1, times(2)).setOnLongClickListener(any(View.OnLongClickListener.class));
+    }
+
+    @Test
+    public void testRestartBatteryStatsLoader_notClearHeader_quickUpdateNotInvoked() {
+        mFragment.mBatteryHeaderPreferenceController = mBatteryHeaderPreferenceController;
+
+        mFragment.restartBatteryStatsLoader(false /* clearHeader */);
+
+        verify(mBatteryHeaderPreferenceController, never()).quickUpdateHeaderPreference();
     }
 
     public static class TestFragment extends PowerUsageSummary {

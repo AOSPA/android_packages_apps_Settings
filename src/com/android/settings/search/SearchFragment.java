@@ -32,6 +32,8 @@ import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -47,6 +49,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.ActionBarShadowController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -103,7 +106,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @VisibleForTesting
     SearchFeatureProvider mSearchFeatureProvider;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     SearchResultsAdapter mSearchAdapter;
 
     @VisibleForTesting
@@ -138,6 +141,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        long startTime = System.currentTimeMillis();
         setHasOptionsMenu(true);
 
         final LoaderManager loaderManager = getLoaderManager();
@@ -162,6 +166,15 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         } else {
             Log.w(TAG, "Cannot update the Indexer as we are running low on storage space!");
         }
+        if (SettingsSearchIndexablesProvider.DEBUG) {
+            Log.d(TAG, "onCreate spent " + (System.currentTimeMillis() - startTime) + " ms");
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        mSavedQueryController.buildMenuItem(menu);
     }
 
     @Override
@@ -203,6 +216,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             params.setMarginStart(0);
             editFrame.setLayoutParams(params);
         }
+        ActionBarShadowController.attachToRecyclerView(
+                view.findViewById(R.id.search_bar_container), getLifecycle(), mResultsRecyclerView);
         return view;
     }
 
@@ -359,10 +374,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
                 MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_SAVED_QUERY);
         mSearchView.setQuery(queryString, false /* submit */);
         onQueryTextChange(queryString);
-    }
-
-    public void onRemoveSavedQueryClicked(CharSequence title) {
-        mSavedQueryController.removeQuery(title.toString());
     }
 
     private void restartLoaders() {

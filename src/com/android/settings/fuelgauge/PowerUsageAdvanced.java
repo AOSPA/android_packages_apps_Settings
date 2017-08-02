@@ -15,7 +15,10 @@ package com.android.settings.fuelgauge;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Handler;
@@ -164,6 +167,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
     @Override
     protected void refreshUi() {
+        final long startTime = System.currentTimeMillis();
         final Context context = getContext();
         if (context == null) {
             return;
@@ -171,7 +175,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         updatePreference(mHistPref);
         refreshPowerUsageDataList(mStatsHelper, mUsageListGroup);
 
-        if (mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(context)) {
+        Intent batteryIntent =
+                context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        final boolean plugged = batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) != 0;
+
+        if (mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(context) && !plugged) {
             mHistPref.setBottomSummary(
                     mPowerUsageFeatureProvider.getAdvancedUsageScreenInfoString());
         } else {
@@ -179,6 +187,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         }
 
         BatteryEntry.startRequestQueue();
+        BatteryUtils.logRuntime(TAG, "refreshUI", startTime);
     }
 
     @VisibleForTesting

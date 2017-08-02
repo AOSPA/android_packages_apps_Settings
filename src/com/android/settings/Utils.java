@@ -1234,6 +1234,11 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
+    public static boolean hasFingerprintHardware(Context context) {
+        FingerprintManager fingerprintManager = getFingerprintManagerOrNull(context);
+        return fingerprintManager != null && fingerprintManager.isHardwareDetected();
+    }
+
     /**
      * Launches an intent which may optionally have a user id defined.
      * @param fragment Fragment to use to launch the activity.
@@ -1253,19 +1258,17 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
-    public static boolean isCarrierDemoUser(Context context) {
-        final String carrierDemoModeSetting =
-                context.getString(com.android.internal.R.string.config_carrierDemoModeSetting);
-        return UserManager.isDeviceInDemoMode(context)
-                && getUserManager(context).isDemoUser()
-                && !TextUtils.isEmpty(carrierDemoModeSetting)
-                && (Settings.Secure.getInt(context.getContentResolver(),
-                        carrierDemoModeSetting, 0) == 1);
+    public static boolean isDemoUser(Context context) {
+        return UserManager.isDeviceInDemoMode(context) && getUserManager(context).isDemoUser();
+    }
+
+    public static String getDemoModePackageName(Context context) {
+        return context.getString(com.android.internal.R.string.config_demoModePackage);
     }
 
     /**
      * Returns if a given user is a profile of another user.
-     * @param user The user whose profiles will be checked.
+     * @param user The user whose profiles wibe checked.
      * @param profile The (potential) profile.
      * @return if the profile is actually a profile
      */

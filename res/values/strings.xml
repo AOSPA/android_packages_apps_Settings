@@ -387,7 +387,7 @@
     <string name="bluetooth_sap_acceptance_dialog_text"><xliff:g id="device_name">%1$s</xliff:g> wants to access your SIM card. Granting access to the SIM card will disable data connectivity on your device for the duration of the connection. Give access to <xliff:g id="device_name">%2$s?</xliff:g></string>
 
     <!-- Description for bluetooth device name summary [CHAR LIMIT=none] -->
-    <string name="bluetooth_device_name_summary">Visible as \'<xliff:g id="device_name">^1</xliff:g>\' to other devices</string>
+    <string name="bluetooth_device_name_summary">Visible as \"<xliff:g id="device_name">^1</xliff:g>\" to other devices</string>
 
     <!-- Title for paired device group [CHAR LIMIT=none] -->
     <string name="bluetooth_paired_device_title">Your devices</string>
@@ -1971,6 +1971,8 @@
     <string name="wifi_advanced_ip_address_title">IP address</string>
 
     <!-- Wifi Network Details -->
+    <!-- Wifi details title-->
+    <string name="wifi_details_title">Network info</string>
     <!-- Wifi details preference title to display router IP subnet mask -->
     <string name="wifi_details_subnet_mask">Subnet mask</string>
     <!-- Wifi details preference title to display router DNS info -->
@@ -2038,8 +2040,6 @@
     <string name="wifi_p2p_delete_group_message">Forget this group?</string>
 
     <!-- Wifi AP settings-->
-    <!-- Label for Wifi tether checkbox. Toggles Access Point on/off -->
-    <string name="wifi_tether_checkbox_text">Portable Wi\u2011Fi hotspot</string>
     <!-- Label for Wifi tether checkbox. Toggles Access Point on/off  [CHAR LIMIT=30] -->
     <string name="wifi_hotspot_checkbox_text">Wi\u2011Fi hotspot</string>
     <!-- Summary text when turning hotspot off -->
@@ -2053,13 +2053,13 @@
 
     <!-- Wifi hotspot settings -->
     <!-- Label for Wifi hotspot name. -->
-    <string name="wifi_hotspot_name_title">Wi\u2011Fi name</string>
+    <string name="wifi_hotspot_name_title">Hotspot name</string>
     <!-- Summary for Wifi hotspot name when connection is in progress. -->
     <string name="wifi_hotspot_name_summary_connecting">Turning on <xliff:g id="wifi_hotspot_name">%1$s</xliff:g>...</string>
     <!-- Summary for Wifi hotspot name when connected. -->
     <string name="wifi_hotspot_name_summary_connected">Other devices can connect to <xliff:g id="wifi_hotspot_name">%1$s</xliff:g></string>
     <!-- Label for Wifi hotspot password. -->
-    <string name="wifi_hotspot_password_title">Wi\u2011Fi password</string>
+    <string name="wifi_hotspot_password_title">Hotspot password</string>
     <!-- Label for Wifi hotspot AP Band. -->
     <string name="wifi_hotspot_ap_band_title">AP Band</string>
     <!-- Wifi hotspot footer info for regular hotspot [CHAR LIMIT=NONE]-->
@@ -2342,6 +2342,9 @@
     <string name="search_settings_summary">Manage search settings and history</string>
     <!-- There are no search results for the user's search [CHAR LIMIT=NONE]-->
     <string name="search_settings_no_results">No results</string>
+
+    <!-- Button to clear all search history in Settings [CHAR LIMIT=40]-->
+    <string name="search_clear_history">Clear history</string>
 
     <!-- Display settings --><skip/>
     <!-- Sound & display settings screen, section header for settings related to display -->
@@ -3108,6 +3111,9 @@
 
     <!-- Title for a screen containing all device reset options [CHAR LIMIT=50] -->
     <string name="reset_dashboard_title">Reset options</string>
+
+    <!-- Summary text for a screen containing all device reset options [CHAR LIMIT=None] -->
+    <string name="reset_dashboard_summary">Network, apps, or device can be reset</string>
 
     <!-- Reset Network -->
     <!-- Button title to reset Wi-Fi settings, Mobile data setting, bluetooth settings -->
@@ -4299,8 +4305,6 @@
     <!-- Title for accessibility preference for configuring amount of time that has to pass after pointer stops moving before click action can be performed (if automatic click after pointer stops moving feature is enabled). [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_delay_preference_title">Delay before click</string>
 
-    <!-- Summary text for accessibility service preferences, or preferences including a short description (eg. "ON / High accuracy mode"). -->
-    <string name="preference_summary_default_combination"><xliff:g id="state" example="ON">%1$s</xliff:g> / <xliff:g id="description" example="High accuracy mode">%2$s</xliff:g></string>
     <!-- Preference's state when enabled. Note: UPPERCASE -->
     <string name="accessibility_summary_state_enabled">ON</string>
     <!-- Preference's state when disabled. Note: UPPERCASE -->
@@ -4686,7 +4690,7 @@
     <!-- Text for OK button in force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_ok">Stop app</string>
 
-    <!-- Title for background usage dialog [CHAR LIMIT=60] -->
+    <!-- Title for background usage dialog [CHAR LIMIT=70] -->
     <string name="dialog_background_check_title">Turn off background usage &amp; stop app?</string>
     <!-- Message body for background usage dialog [CHAR LIMIT=NONE] -->
     <string name="dialog_background_check_message" product="default">Your phone can\'t manage battery normally because <xliff:g id="app">%1$s</xliff:g> keeps waking up your phone.\n\nTo try to fix this issue, you can stop <xliff:g id="app">%1$s</xliff:g> and prevent it from running in the background.</string>
@@ -5526,6 +5530,9 @@
     <!--  action to select all [CHAR LIMIT=30] -->
     <string name="select_all">Select all</string>
 
+    <!-- A button that gets displayed in data plan usage preference in settings page to manage data plans [CHAR LIMIT=25] -->
+    <string name="data_plan_usage_manage_plans_button_text">Manage plans</string>
+
     <!-- Activity title for network data usage summary. [CHAR LIMIT=25] -->
     <string name="data_usage_summary_title">Data usage</string>
     <!-- Activity title for Appk data usage summary. [CHAR LIMIT=25] -->
@@ -5714,6 +5721,13 @@
     <string name="data_usage_metered_wifi">Metered Wi\u2011Fi networks</string>
     <!-- Body text prompting user to enable Wi-Fi to configure metered networks. [CHAR LIMIT=64] -->
     <string name="data_usage_metered_wifi_disabled">To select metered networks, turn Wi\u2011Fi on.</string>
+
+    <!-- Option for indicating that a network being metered (expensive) should be determined automatically. [CHAR LIMIT=32] -->
+    <string name="data_usage_metered_auto">Automatic</string>
+    <!-- Option for indicating that a network is metered (expensive). [CHAR LIMIT=32] -->
+    <string name="data_usage_metered_yes">Metered</string>
+    <!-- Option for indicating that a network is not metered (inexpensive). [CHAR LIMIT=32] -->
+    <string name="data_usage_metered_no">Not metered</string>
 
     <!-- Disclaimer string for data usage measured by device. [CHAR LIMIT=80] -->
     <string name="data_usage_disclaimer">Carrier data accounting may differ from your device.</string>
@@ -6251,6 +6265,8 @@
     <string name="help_url_double_tap_screen" translatable="false"></string>
     <string name="help_url_account_detail" translatable="false"></string>
     <string name="help_url_icc_lock" translatable="false"></string>
+    <string name="help_uri_process_stats_summary" translatable="false"></string>
+    <string name="help_uri_process_stats_apps" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -7168,6 +7184,9 @@
     <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option -->
     <string name="zen_mode_alarms">Alarms</string>
 
+    <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option summary -->
+    <string name="zen_mode_alarms_summary">Alarms are always a priority and make sound</string>
+
     <!-- [CHAR LIMIT=50] Zen mode settings: Reminders option -->
     <string name="zen_mode_reminders">Reminders</string>
 
@@ -7746,6 +7765,9 @@
     <string name="usb_summary_photo_transfers">Transferring photos (PTP)</string>
     <!-- Settings item summary for USB preference when set to entering MIDI mode [CHAR LIMIT=NONE] -->
     <string name="usb_summary_MIDI">Using device as MIDI</string>
+
+    <!-- Settings item title for SMS Mirroring preference [CHAR LIMIT=35] -->
+    <string name="sms_mirroring_pref">SMS Mirroring</string>
 
     <!-- Settings item title for background check prefs [CHAR LIMIT=35] -->
     <string name="background_check_pref">Background check</string>
@@ -8329,11 +8351,6 @@
     <!-- Text for the setting on whether you can type text into notifications without unlocking the device. -->
     <string name="lockscreen_remote_input">If device is locked, prevent typing replies or other text in notifications</string>
 
-    <string-array name="bytes_picker_sizes" translatable="false">
-        <item>@*android:string/megabyteShort</item>
-        <item>@*android:string/gigabyteShort</item>
-    </string-array>
-
     <!-- [CHAR LIMIT=30] Label for setting to control the default spell checker -->
     <string name="default_spell_checker">Default spell checker</string>
 
@@ -8426,7 +8443,7 @@
     <string name="reset_shortcut_manager_throttling_complete">ShortcutManager rate-limiting has been reset</string>
 
     <!-- Title of notification suggestion during optional steps of setup. [CHAR_LIMIT=60] -->
-    <string name="notification_suggestion_title">Control lock screen notifications</string>
+    <string name="notification_suggestion_title">Control info on lock screen</string>
     <!-- Summary of notification suggestion during optional steps of setup. [CHAR_LIMIT=80] -->
     <string name="notification_suggestion_summary">Show or hide notification content</string>
     <!-- Setting tab title for all setting options. [CHAR LIMIT=20] -->
@@ -8450,7 +8467,7 @@
     <string name="premium_sms_access">Premium SMS access</string>
 
     <!-- Summary for Bluetooth when disabled. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_disabled">Not visible to other devices</string>
+    <string name="bluetooth_disabled">Off</string>
 
     <!-- Summary for Bluetooth when connected to one device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_connected_summary">Connected to <xliff:g name="device">%1$s</xliff:g></string>

@@ -27,6 +27,7 @@ import static org.robolectric.Shadows.shadowOf;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -36,6 +37,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,10 +46,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
-
-
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -92,55 +94,32 @@ public class MasterClearTest {
     @Test
     public void testShowWipeEuicc_euiccDisabled() {
         prepareEuiccState(
-                false /* isEuiccEnabled */, true /* isEuiccProvisioned */,
-                true /* isDevelopmentSettingsEnabled */);
+                false /* isEuiccEnabled */, true /* isEuiccProvisioned */);
         assertThat(mMasterClear.showWipeEuicc()).isFalse();
     }
 
     @Test
     public void testShowWipeEuicc_euiccEnabled_unprovisioned() {
         prepareEuiccState(
-                true /* isEuiccEnabled */, false /* isEuiccProvisioned */,
-                false /* isDevelopmentSettingsEnabled */);
+                true /* isEuiccEnabled */, false /* isEuiccProvisioned */);
         assertThat(mMasterClear.showWipeEuicc()).isFalse();
     }
 
     @Test
     public void testShowWipeEuicc_euiccEnabled_provisioned() {
         prepareEuiccState(
-                true /* isEuiccEnabled */, true /* isEuiccProvisioned */,
-                false /* isDevelopmentSettingsEnabled */);
-        assertThat(mMasterClear.showWipeEuicc()).isTrue();
-    }
-
-    @Test
-    public void testShowWipeEuicc_euiccEnabled_developmentSettingsEnabled() {
-        prepareEuiccState(
-                true /* isEuiccEnabled */, false /* isEuiccProvisioned */,
-                true /* isDevelopmentSettingsEnabled */);
-        assertThat(mMasterClear.showWipeEuicc()).isTrue();
-    }
-
-    @Test
-    public void testShowWipeEuicc_euiccEnabled_provisioned_developmentSettingsEnabled() {
-        prepareEuiccState(
-                true /* isEuiccEnabled */, true /* isEuiccProvisioned */,
-                true /* isDevelopmentSettingsEnabled */);
+                true /* isEuiccEnabled */, true /* isEuiccProvisioned */);
         assertThat(mMasterClear.showWipeEuicc()).isTrue();
     }
 
     private void prepareEuiccState(
             boolean isEuiccEnabled,
-            boolean isEuiccProvisioned,
-            boolean isDevelopmentSettingsEnabled) {
+            boolean isEuiccProvisioned) {
         doReturn(mActivity).when(mMasterClear).getContext();
         doReturn(isEuiccEnabled).when(mMasterClear).isEuiccEnabled(any());
         ContentResolver cr = mActivity.getContentResolver();
         Settings.Global.putInt(
                 cr, android.provider.Settings.Global.EUICC_PROVISIONED, isEuiccProvisioned ? 1 : 0);
-        Settings.Global.putInt(
-                cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED,
-                isDevelopmentSettingsEnabled ? 1 : 0);
     }
 
     @Test
@@ -188,6 +167,22 @@ public class MasterClearTest {
         initScrollView(100, 100, 200);
 
         assertThat(mMasterClear.hasReachedBottom(mScrollView)).isTrue();
+    }
+
+    @Test
+    @Config(shadows = { ShadowUtils.class, SettingsShadowResources.class })
+    public void testInitiateMasterClear_inDemoMode_sendsIntent() {
+        SettingsShadowResources.overrideResource(
+            com.android.internal.R.string.config_demoModePackage, "package");
+
+        ShadowUtils.setIsDemoUser(true);
+
+        mMasterClear.mInitiateListener.onClick(
+                mContentView.findViewById(R.id.initiate_master_clear));
+        final Intent intent = mShadowActivity.getNextStartedActivity();
+        assertThat(Intent.ACTION_FACTORY_RESET).isEqualTo(intent.getAction());
+        final String packageName = Utils.getDemoModePackageName(RuntimeEnvironment.application);
+        assertThat(packageName).isEqualTo(intent.getPackage());
     }
 
     private void initScrollView(int height, int scrollY, int childBottom) {
