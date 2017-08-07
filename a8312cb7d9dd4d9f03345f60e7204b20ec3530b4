@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "577f18f3_a0be22bb",
+        "filename": "src/com/android/settings/batterylight/NotificationLightDialog.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2017-08-07T11:42:18Z",
+      "side": 1,
+      "message": "Don\u0027t we need \"mMultiColorLed\" to be defined above this too?\n\nmMultiColorLed \u003d mResources.getBoolean(com.android.internal.R.bool.config_multiColorNotificationLed);\n\nUnder \"int[] colors\" array.",
+      "revId": "a8312cb7d9dd4d9f03345f60e7204b20ec3530b4",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
+    }
+  ]
+}
