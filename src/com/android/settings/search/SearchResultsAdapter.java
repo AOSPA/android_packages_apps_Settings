@@ -56,6 +56,10 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
 
     @VisibleForTesting
     static final String APP_RESULTS_LOADER_KEY = InstalledAppResultLoader.class.getName();
+    @VisibleForTesting
+    static final String ACCESSIBILITY_LOADER_KEY = AccessibilityServiceResultLoader.class.getName();
+    @VisibleForTesting
+    static final String INPUT_DEVICE_LOADER_KEY = InputDeviceResultLoader.class.getName();
 
     @VisibleForTesting
     static final int MSG_RANKING_TIMED_OUT = 1;
@@ -262,13 +266,22 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
                 getSortedLoadedResults(DB_RESULTS_LOADER_KEY);
         List<? extends SearchResult> installedAppResults =
                 getSortedLoadedResults(APP_RESULTS_LOADER_KEY);
+        List<? extends SearchResult> accessibilityResults =
+                getSortedLoadedResults(ACCESSIBILITY_LOADER_KEY);
+        List<? extends SearchResult> inputDeviceResults =
+                getSortedLoadedResults(INPUT_DEVICE_LOADER_KEY);
+
         int dbSize = databaseResults.size();
         int appSize = installedAppResults.size();
-
+        int a11ySize = accessibilityResults.size();
+        int inputDeviceSize = inputDeviceResults.size();
         int dbIndex = 0;
         int appIndex = 0;
+        int a11yIndex = 0;
+        int inputDeviceIndex = 0;
         int rank = SearchResult.TOP_RANK;
 
+        // TODO: We need a helper method to do k-way merge.
         mStaticallyRankedSearchResults.clear();
         while (rank <= SearchResult.BOTTOM_RANK) {
             while ((dbIndex < dbSize) && (databaseResults.get(dbIndex).rank == rank)) {
@@ -276,6 +289,13 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
             }
             while ((appIndex < appSize) && (installedAppResults.get(appIndex).rank == rank)) {
                 mStaticallyRankedSearchResults.add(installedAppResults.get(appIndex++));
+            }
+            while ((a11yIndex < a11ySize) && (accessibilityResults.get(a11yIndex).rank == rank)) {
+                mStaticallyRankedSearchResults.add(accessibilityResults.get(a11yIndex++));
+            }
+            while (inputDeviceIndex < inputDeviceSize
+                    && inputDeviceResults.get(inputDeviceIndex).rank == rank) {
+                mStaticallyRankedSearchResults.add(inputDeviceResults.get(inputDeviceIndex++));
             }
             rank++;
         }
@@ -285,6 +305,12 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
         }
         while (appIndex < appSize) {
             mStaticallyRankedSearchResults.add(installedAppResults.get(appIndex++));
+        }
+        while(a11yIndex < a11ySize) {
+            mStaticallyRankedSearchResults.add(accessibilityResults.get(a11yIndex++));
+        }
+        while (inputDeviceIndex < inputDeviceSize) {
+            mStaticallyRankedSearchResults.add(inputDeviceResults.get(inputDeviceIndex++));
         }
     }
 
@@ -318,10 +344,17 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
                 getUnsortedLoadedResults(DB_RESULTS_LOADER_KEY);
         List<? extends SearchResult> installedAppResults =
                 getSortedLoadedResults(APP_RESULTS_LOADER_KEY);
+        List<? extends SearchResult> accessibilityResults =
+                getSortedLoadedResults(ACCESSIBILITY_LOADER_KEY);
+        List<? extends SearchResult> inputDeviceResults =
+                getSortedLoadedResults(INPUT_DEVICE_LOADER_KEY);
         int dbSize = databaseResults.size();
         int appSize = installedAppResults.size();
+        int a11ySize = accessibilityResults.size();
+        int inputDeviceSize = inputDeviceResults.size();
 
-        final List<SearchResult> asyncRankingResults = new ArrayList<>(dbSize + appSize);
+        final List<SearchResult> asyncRankingResults = new ArrayList<>(
+                dbSize + appSize + a11ySize + inputDeviceSize);
         TreeSet<SearchResult> dbResultsSortedByScores = new TreeSet<>(
                 new Comparator<SearchResult>() {
                     @Override
@@ -339,15 +372,16 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
                 });
         dbResultsSortedByScores.addAll(databaseResults);
         asyncRankingResults.addAll(dbResultsSortedByScores);
-        // App results are not ranked by async ranking and appended at the end of the list.
+        // Other results are not ranked by async ranking and appended at the end of the list.
         asyncRankingResults.addAll(installedAppResults);
+        asyncRankingResults.addAll(accessibilityResults);
+        asyncRankingResults.addAll(inputDeviceResults);
         return asyncRankingResults;
     }
 
     @VisibleForTesting
     Set<? extends SearchResult> getUnsortedLoadedResults(String loaderKey) {
-        return mResultsMap.containsKey(loaderKey) ?
-                mResultsMap.get(loaderKey) : new HashSet<SearchResult>();
+        return mResultsMap.containsKey(loaderKey) ? mResultsMap.get(loaderKey) : new HashSet<>();
     }
 
     @VisibleForTesting

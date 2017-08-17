@@ -387,7 +387,7 @@
     <string name="bluetooth_sap_acceptance_dialog_text"><xliff:g id="device_name">%1$s</xliff:g> wants to access your SIM card. Granting access to the SIM card will disable data connectivity on your device for the duration of the connection. Give access to <xliff:g id="device_name">%2$s?</xliff:g></string>
 
     <!-- Description for bluetooth device name summary [CHAR LIMIT=none] -->
-    <string name="bluetooth_device_name_summary">Visible as \"<xliff:g id="device_name">^1</xliff:g>\" to other devices</string>
+    <string name="bluetooth_device_name_summary">Visible as \u201C<xliff:g id="device_name">^1</xliff:g>\u201D to other devices</string>
 
     <!-- Title for paired device group [CHAR LIMIT=none] -->
     <string name="bluetooth_paired_device_title">Your devices</string>
@@ -834,6 +834,12 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup">Skip</string>
     <!-- Button text to continue to the next screen from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup">Next</string>
+    <!-- Title of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup. [CHAR LIMIT=30] -->
+    <string name="setup_fingerprint_enroll_skip_title">Skip fingerprint?</string>
+    <!-- Body text of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup [CHAR LIMIT=NONE] -->
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text">Fingerprint setup only takes a minute or two. If you skip this, you can add your fingerprint later in settings.</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
+    <string name="lock_screen_intro_skip_title">Skip screen lock?</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (tablet) [CHAR LIMIT=NONE] -->
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet">Device protection features won\u2019t be turned on. You won\u2019t be able to prevent others from using this tablet if it\u2019s lost, stolen or reset.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (device) [CHAR LIMIT=NONE] -->
@@ -1099,8 +1105,8 @@
     <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password (phone) [CHAR LIMIT=22] -->
     <string name="setup_lock_settings_picker_title" product="default">Protect your phone</string>
 
-    <!-- Title for screen in setup wizard, prompting user to choose the their backup screen lock method [CHAR LIMIT=NONE] -->
-    <string name="setup_lock_settings_picker_fingerprint_message">For added security, set up a backup screen lock.</string>
+    <!-- Message shown when setting up screen lock, prompting user to choose the their backup screen lock method [CHAR LIMIT=NONE] -->
+    <string name="lock_settings_picker_fingerprint_added_security_message">For added security, set up a backup screen lock.</string>
 
     <!-- Description text for screen in setup wizard asking user to set up screen lock, explaining to the user how setting up a screen lock protect them from losing data. (tablet) [CHAR LIMIT=NONE] -->
     <string name="setup_lock_settings_picker_message" product="tablet">Prevent others from using this tablet without your permission by activating device protection features. Choose the screen lock you want to use.</string>
@@ -1374,6 +1380,9 @@
 
     <!-- Label for ChoosePassword/PIN OK button -->
     <string name="lockpassword_cancel_label">Cancel</string>
+
+    <!-- Label for ChoosePassword/PIN Clear button that clears all text entered by the user so far. -->
+    <string name="lockpassword_clear_label">Clear</string>
 
     <!-- Label for LockPatternTutorial Cancel button -->
     <string name="lockpattern_tutorial_cancel_label">Cancel</string>
@@ -1914,6 +1923,11 @@
     <!-- Message in WriteWifiConfigToNfcDialog when prompted to enter network password [CHAR_LIMIT=40] -->
     <string name="wifi_wps_nfc_enter_password">Enter your network password</string>
 
+    <!-- Message in dialog when the user tries to connect to a carrier network[CHAR_LIMIT=40] -->
+    <string name="wifi_carrier_connect">Carrier Wi\u2011Fi network</string>
+    <!-- Message in dialog when the user tries to connect to a carrier network[CHAR_LIMIT=60] -->
+    <string name="wifi_carrier_content">Connect via <xliff:g id="name">%1%s</xliff:g></string>
+
     <string name="wifi_scan_always_turnon_message">To improve location accuracy and for other purposes, <xliff:g id="app_name">%1$s</xliff:g> wants to turn on network scanning, even when Wi-Fi is off.\n\nAllow this for all apps that want to scan?</string>
     <!-- Message informing the user how to turn off  [CHAR LIMIT=200] -->
     <string name="wifi_scan_always_turnoff_message">To turn this off, go to Advanced in the overflow menu.</string>
@@ -1945,6 +1959,8 @@
     <string name="wifi_failed_connect_message">Failed to connect to network</string>
     <!-- Button label to delete a Wi-Fi network -->
     <string name="wifi_forget">Forget</string>
+    <!-- Button label to modify a Wi-Fi network -->
+    <string name="wifi_modify">Modify</string>
     <!-- Failured notification for forget -->
     <string name="wifi_failed_forget_message">Failed to forget network</string>
     <!-- Button label to save a Wi-Fi network configuration -->
@@ -2219,7 +2235,7 @@
     <!-- Title of a preference for updating emergency address [CHAR LIMIT=40] -->
     <string name="emergency_address_title">Update Emergency Address</string>
     <!-- Summary of Update Emergency Address preference, explaining usage of emergency address [CHAR LIMIT=NONE] -->
-    <string name="emergency_address_summary">Address used by emergency services as your location if you make a 911 call using WiFi</string>
+    <string name="emergency_address_summary">Address used by emergency services as your location if you make an emergency call using Wi\u2011Fi</string>
 
 
     <!-- Sound and alerts settings -->
@@ -3135,23 +3151,21 @@
 
     <!-- Master Clear -->
     <!-- Button title to factory data reset the entire device -->
-    <string name="master_clear_title">Erase all data (Factory reset)</string>
-    <!-- Summary text for factory data reset describing what will be reset [CHAR_LIMIT=NONE]-->
-    <plurals name="master_clear_with_account_summary">
-        <item quantity="one">1 account will be reset</item>
-        <item quantity="other"><xliff:g id="account_count">%1$d</xliff:g> accounts will be reset</item>
-    </plurals>
-    <string name="master_clear_summary">Internal storage &amp; all data will be reset</string>
+    <string name="master_clear_title">Erase all data (factory reset)</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
     <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc" product="default">"This will erase all data from your phone\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps"</li></string>
+    <string name="master_clear_desc" product="default">"This will erase all data from your phone\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, instructions and list of current accounts.  The list of accounts follows this text[CHAR LIMIT=NONE] -->
     <string name="master_clear_accounts" product="default">"\n\nYou are currently signed into the following accounts:\n"</string>
     <!-- SD card & phone storage settings screen, notification if other users are present on the device [CHAR LIMIT=NONE] -->
     <string name="master_clear_other_users_present" product="default">"\n\nThere are other users present on this device.\n"</string>
     <!-- SD card & phone storage settings screen, list of items in user data storage (USB storage or SD card) that will be erased during this operation [CHAR LIMIT=NONE] -->
     <string name="master_clear_desc_also_erases_external">"<li>Music</li>\n<li>Photos</li>\n<li>Other user data</li>"</string>
+    <!-- SD card & phone storage settings screen, list of items on an eSIM (embedded SIM) that will be erased during this operation [CHAR LIMIT=NONE] -->
+    <string name="master_clear_desc_also_erases_esim">"<li>Carriers on eSIM</li>"</string>
+    <!-- SD card & phone storage settings screen, notification if there are eSIM (embedded SIM) profiles present that the user's mobile service plan will not be canceled [CHAR LIMIT=NONE] -->
+    <string name="master_clear_desc_no_cancel_mobile_plan">"\n\nThis will not cancel your mobile service plan.</string>
     <!-- SD card & phone storage settings screen, instructions about whether to also erase the external storage (SD card) when erasing the internal storage [CHAR LIMIT=NONE] -->
     <string name="master_clear_desc_erase_external_storage" product="nosdcard">"\n\nTo clear music, pictures, and other user data, the <b>USB storage</b> needs to be erased."</string>
     <!-- SD card & phone storage settings screen, instructions about whether to also erase the external storage (SD card) when erasing the internal storage [CHAR LIMIT=NONE] -->
@@ -3413,24 +3427,26 @@
     <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
     <!-- Lock Pattern settings -->
-    <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=30] -->
-    <string name="lockpassword_choose_your_password_header">Choose your password</string>
+    <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_screen_lock_header">Set a screen lock</string>
+    <!-- Message on first screen of choose password flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_your_password_message">For security, set a password</string>
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_your_password_header_for_fingerprint">To use fingerprint, set password</string>
     <!-- Header on first screen of choose pattern flow [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_your_pattern_header">Choose your pattern</string>
     <!-- Header on first screen of choose pattern as backup for fingerprint flow [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint">To use fingerprint, set pattern</string>
-    <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=30] -->
-    <string name="lockpassword_choose_your_pin_header">Choose your PIN</string>
+    <!-- Message on first screen of choose PIN flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_your_pin_message">For security, set a PIN</string>
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_your_pin_header_for_fingerprint">To use fingerprint, set PIN</string>
-    <!-- Header on password confirm screen [CHAR LIMIT=30] -->
-    <string name="lockpassword_confirm_your_password_header">Confirm your password</string>
+    <!-- Header on password confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_confirm_your_password_header">Re-enter your password</string>
     <!-- Header on pattern confirm screen [CHAR LIMIT=30] -->
     <string name="lockpassword_confirm_your_pattern_header">Confirm your pattern</string>
-    <!-- Header on password confirm screen [CHAR LIMIT=30] -->
-    <string name="lockpassword_confirm_your_pin_header">Confirm your PIN</string>
+    <!-- Header on password confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_confirm_your_pin_header">Re-enter your PIN</string>
     <!-- Header on password confirm screen if second password doesn't match the first. [CHAR LIMIT=30] -->
     <string name="lockpassword_confirm_passwords_dont_match">Passwords don\u2019t match</string>
     <!-- Header on pin confirm screen if second pin doesn't match the first. [CHAR LIMIT=30]-->
@@ -3491,6 +3507,20 @@
          managed by their employer. This is an extra security measure that's required for them to
          continue. [CHAR LIMIT=100] -->
     <string name="lockpassword_strong_auth_required_work_password">For added security, enter your work password</string>
+
+    <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous pattern.</string>
+    <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous PIN.</string>
+    <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous password.</string>
+
+    <!-- Header shown when pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_header_frp">Verify pattern</string>
+    <!-- Header shown when the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_header_frp">Verify PIN</string>
+    <!-- Header shown when the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_header_frp">Verify password</string>
 
     <!-- Security & location settings screen, change security method screen instruction if user
          enters incorrect PIN [CHAR LIMIT=30] -->
@@ -4229,7 +4259,7 @@
     <!-- Settings description for a brief version of Vision-Related Accessibility Settings. Tells the user that they can adjust these settings now to help them through the remainder of the Setup Wizard and that they can later be changed in Settings. Displayed in Setup Wizard only. [CHAR LIMIT=none] -->
     <string name="vision_settings_description">You can customize this device to fit your needs. These accessibility features can be changed later in Settings.</string>
     <!-- Label for suggested action which will allow the user to change the font size and other accessibility settings. [CHAR LIMIT=40] -->
-    <string name="vision_settings_suggestion_title">Increase font size</string>
+    <string name="vision_settings_suggestion_title">Change font size</string>
     <!-- Title for the accessibility preference category of screen reader services and settings. [CHAR LIMIT=50] -->
     <string name="screen_reader_category_title">Screen readers</string>
     <!-- Title for the accessibility preference category of audio services and settings. [CHAR LIMIT=50] -->
@@ -6827,6 +6857,10 @@
     <!-- [CHAR LIMIT=100] Notification Importance: high importance level description -->
     <string name="notification_importance_high">Make sound and pop on screen</string>
 
+    <!-- [CHAR LIMIT=100] Notification Importance: high importance level description,
+     when the user has picked high importance but disabled sound for it -->
+    <string name="notification_importance_high_silent">Pop on screen</string>
+
     <!-- Importance title strings for the Importance page. Also the first part of the importance
      summary on the channel page-->
 
@@ -8273,7 +8307,7 @@
     <string name="data_limit">Data limit</string>
 
     <!-- Summary about how much data has been used in a date range [CHAR LIMIT=NONE] -->
-    <string name="data_usage_template"><xliff:g name="amount" example="200 MB">%1$s</xliff:g> used between <xliff:g name="date_range" example="Jan 1 -- Feb 2">%2$s</xliff:g></string>
+    <string name="data_usage_template"><xliff:g name="amount" example="200 MB">%1$s</xliff:g> used <xliff:g name="date_range" example="Jan 1 -- Feb 2">%2$s</xliff:g></string>
 
     <!-- Accessibility label for button that leads to screen with more configuration options [CHAR LIMIT=NONE] -->
     <string name="configure">Configure</string>
@@ -8749,8 +8783,8 @@
     <!-- Section title for the Web Action preference [CHAR LIMIT=60] -->
     <string name="web_action_section_title">Instant apps</string>
 
-    <!-- Preference label for an tappable preference that will open the account chooser for instant apps. [CHAR LIMIT=60] -->
-    <string name="instant_apps_account">Instant apps account</string>
+    <!-- Preference label for an tappable preference that will open the instant apps settings. [CHAR LIMIT=60] -->
+    <string name="instant_apps_settings">Instant Apps preferences</string>
 
     <!-- Section title for the Domain URL app preference list [CHAR LIMIT=60]-->
     <string name="domain_url_section_title">Installed apps</string>
@@ -8998,7 +9032,13 @@
     <string name="new_device_suggestion_title">What\'s new and exciting?</string>
 
     <!-- Summary label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
-    <string name="new_device_suggestion_summary">Check out the top 5 features</string>
+    <string name="new_device_suggestion_summary" product="default">Take a tour of your new phone</string>
+
+    <!-- Summary label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="new_device_suggestion_summary" product="tablet">Take a tour of your new tablet</string>
+
+    <!-- Summary label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="new_device_suggestion_summary" product="device">Take a tour of your new device</string>
 
     <!-- apn names for carriers -->
     <string name="APN_NAME_CMNET">CMNET</string>

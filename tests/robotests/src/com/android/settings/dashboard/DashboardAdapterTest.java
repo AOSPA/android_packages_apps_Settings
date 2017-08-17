@@ -15,6 +15,19 @@
  */
 package com.android.settings.dashboard;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -38,7 +51,6 @@ import com.android.settings.dashboard.suggestions.SuggestionAdapter;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -56,26 +68,12 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
         sdk = TestConfig.SDK_VERSION,
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowResources.SettingsShadowTheme.class,
-                ShadowDynamicIndexableContentMonitor.class
         })
 public class DashboardAdapterTest {
 
@@ -349,6 +347,30 @@ public class DashboardAdapterTest {
         assertThat(suggestions.size()).isEqualTo(2);
         assertThat(suggestions.contains(suggestionToRemove)).isFalse();
         verify(adapter, never()).notifyDashboardDataChanged(any());
+    }
+
+    @Test
+    public void testSuggestionDismissed_moreThanTwoSuggestions_defaultMode_shouldNotCrash() {
+        final RecyclerView data = new RecyclerView(RuntimeEnvironment.application);
+        final View itemView = mock(View.class);
+        when(itemView.findViewById(R.id.data)).thenReturn(data);
+        final DashboardAdapter.SuggestionAndConditionContainerHolder holder =
+                new DashboardAdapter.SuggestionAndConditionContainerHolder(itemView);
+        final List<Tile> suggestions =
+                makeSuggestions("pkg1", "pkg2", "pkg3", "pkg4");
+        final DashboardAdapter adapter = spy(new DashboardAdapter(mContext, null /*savedInstance */,
+                null /* conditions */, null /* suggestionParser */, null /* callback */));
+        adapter.setCategoriesAndSuggestions(null /* category */, suggestions);
+        adapter.onBindConditionAndSuggestion(
+                holder, DashboardAdapter.SUGGESTION_CONDITION_HEADER_POSITION);
+        // default mode, only displaying 2 suggestions
+
+        adapter.onSuggestionDismissed(suggestions.get(1));
+
+        // verify operations that access the lists will not cause ConcurrentModificationException
+        assertThat(holder.data.getAdapter().getItemCount()).isEqualTo(1);
+        adapter.setCategoriesAndSuggestions(null /* category */, suggestions);
+        // should not crash
     }
 
     @Test

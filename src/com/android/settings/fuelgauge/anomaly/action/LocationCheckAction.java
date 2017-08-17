@@ -16,8 +16,10 @@
 
 package com.android.settings.fuelgauge.anomaly.action;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.pm.permission.RuntimePermissionPresenter;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.PermissionChecker;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -29,13 +31,17 @@ import com.android.settings.fuelgauge.anomaly.Anomaly;
 public class LocationCheckAction extends AnomalyAction {
 
     private static final String TAG = "LocationCheckAction";
-    private static final String LOCATION_PERMISSION = "android.permission-group.LOCATION";
 
     private final RuntimePermissionPresenter mRuntimePermissionPresenter;
 
     public LocationCheckAction(Context context) {
+        this(context, RuntimePermissionPresenter.getInstance(context));
+    }
+
+    @VisibleForTesting
+    LocationCheckAction(Context context, RuntimePermissionPresenter runtimePermissionPresenter) {
         super(context);
-        mRuntimePermissionPresenter = RuntimePermissionPresenter.getInstance(context);
+        mRuntimePermissionPresenter = runtimePermissionPresenter;
         mActionMetricKey = MetricsProto.MetricsEvent.ACTION_APP_LOCATION_CHECK;
     }
 
@@ -43,17 +49,24 @@ public class LocationCheckAction extends AnomalyAction {
     public void handlePositiveAction(Anomaly anomaly, int contextMetricsKey) {
         super.handlePositiveAction(anomaly, contextMetricsKey);
         mRuntimePermissionPresenter.revokeRuntimePermission(anomaly.packageName,
-                LOCATION_PERMISSION);
+                Manifest.permission.ACCESS_COARSE_LOCATION);
+        mRuntimePermissionPresenter.revokeRuntimePermission(anomaly.packageName,
+                Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
     @Override
     public boolean isActionActive(Anomaly anomaly) {
-        return PermissionChecker.checkPermission(mContext, LOCATION_PERMISSION, -1, anomaly.uid,
-                anomaly.packageName) == PermissionChecker.PERMISSION_GRANTED;
+        return isPermissionGranted(anomaly, Manifest.permission.ACCESS_COARSE_LOCATION)
+                || isPermissionGranted(anomaly, Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
     @Override
     public int getActionType() {
         return Anomaly.AnomalyActionType.LOCATION_CHECK;
+    }
+
+    private boolean isPermissionGranted(Anomaly anomaly, String permission) {
+        return PermissionChecker.checkPermission(mContext, permission, -1, anomaly.uid,
+                anomaly.packageName) == PermissionChecker.PERMISSION_GRANTED;
     }
 }
