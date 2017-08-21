@@ -308,10 +308,20 @@ public class FingerprintSettings extends SubSettings {
                     R.layout.fingerprint_settings_footer, null);
             EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
                     getActivity(), DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId);
-            v.setText(LearnMoreSpan.linkify(getText(admin != null
+
+            final CharSequence display_fingerprint_disc = getText(admin != null
                             ? R.string.security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled
-                            : R.string.security_settings_fingerprint_enroll_disclaimer),
-                    getString(getHelpResource()), admin));
+                            : R.string.security_settings_fingerprint_enroll_disclaimer);
+
+            final SpannableString msg = new SpannableString(display_fingerprint_disc);
+            final Annotation[] spans = msg.getSpans(0, msg.length(), Annotation.class);
+            final Annotation thisspan = spans[0];
+            final SpannableStringBuilder builder = new SpannableStringBuilder(msg);
+            final int start = msg.getSpanStart(thisspan);
+            final int end = msg.getSpanEnd(thisspan);
+            builder.delete(start, end);
+
+            v.setText(builder.toString());
             v.setMovementMethod(new LinkMovementMethod());
             setFooterView(v);
         }
