@@ -141,6 +141,7 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
                     + (countryCode == null ? " NO country code" :"") +  " forbid 5GHz");
             channelAdapter = ArrayAdapter.createFromResource(mContext,
                     R.array.wifi_ap_band_config_2G_only, android.R.layout.simple_spinner_item);
+            mWifiConfig.apBand = 0;
         } else if (mContext.getResources().getBoolean(
                   com.android.internal.R.bool.config_wifi_dual_sap_mode_enabled) == true) {
             channelAdapter = ArrayAdapter.createFromResource(mContext,
