@@ -202,7 +202,7 @@ public class WifiConfigController implements TextWatcher,
         } else {
             mPhase2PeapAdapter = new ArrayAdapter<String>(
                     mContext, android.R.layout.simple_spinner_item,
-                    res.getStringArray(R.array.wifi_peap_phase2_entries_with_sim_auth));
+                    res.getStringArray(R.array.wifi_peap_phase2_entries));
         }
         mPhase2PeapAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
