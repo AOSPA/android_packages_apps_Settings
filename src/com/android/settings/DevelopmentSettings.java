@@ -228,6 +228,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final int[] MOCK_LOCATION_APP_OPS = new int[] {AppOpsManager.OP_MOCK_LOCATION};
 
+    private static final String THEME_FORCE_ENABLED = "theme_force_enabled";
+
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
     private IWebViewUpdateService mWebViewUpdateService;
@@ -312,6 +314,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mForceResizable;
 
     private SwitchPreference mColorTemperaturePreference;
+
+    private SwitchPreference mThemeForceEnabled;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
 
@@ -469,6 +473,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mSimulateColorSpace = addListPreference(SIMULATE_COLOR_SPACE);
         mUSBAudio = findAndInitSwitchPref(USB_AUDIO_KEY);
         mForceResizable = findAndInitSwitchPref(FORCE_RESIZABLE_KEY);
+        mThemeForceEnabled = findAndInitSwitchPref(THEME_FORCE_ENABLED);
 
         mImmediatelyDestroyActivities = (SwitchPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
@@ -742,6 +747,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateBluetoothDisableAbsVolumeOptions();
         updateForceAuthorizeSubstratumPackagesOptions();
         updateAdvancedRebootOptions();
+        updateThemeForceEnabledOptions();
     }
 
     private void writeForceAuthorizeSubstratumPackagesOptions() {
@@ -769,6 +775,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void updateAdvancedRebootOptions() {
         mAdvancedReboot.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.EXTENDED_REBOOT, 0) != 0);
+    }
+
+    private void writeThemeForceEnabledOptions() {
+      Settings.Secure.putInt(getActivity().getContentResolver(),
+              Settings.Secure.THEME_FORCE_ENABLED,
+              mThemeForceEnabled.isChecked() ? 1 : 0);
+    }
+
+    private void updateThemeForceEnabledOptions() {
+        mThemeForceEnabled.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
+              Settings.Secure.THEME_FORCE_ENABLED, 0) != 0);
     }
 
     private void resetDangerousOptions() {
@@ -2075,6 +2092,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeWebViewMultiprocessOptions();
         } else if (SHORTCUT_MANAGER_RESET_KEY.equals(preference.getKey())) {
             resetShortcutManagerThrottling();
+        } else if(preference == mThemeForceEnabled) {
+          writeThemeForceEnabledOptions();
         } else {
             return super.onPreferenceTreeClick(preference);
         }

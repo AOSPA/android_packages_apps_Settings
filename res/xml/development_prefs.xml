@@ -22,6 +22,11 @@
             android:title="@*android:string/bugreport_title"
             android:dialogTitle="@*android:string/bugreport_title" />
 
+    <SwitchPreference
+        android:key="theme_force_enabled"
+        android:title="@string/theme_force_enabled_title"
+        android:summary="@string/theme_force_enabled_summary" />
+
     <PreferenceScreen
             android:key="local_backup_password"
             android:title="@string/local_backup_password_title"
