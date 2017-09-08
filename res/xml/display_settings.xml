@@ -134,6 +134,15 @@
         android:summary="@string/pulse_ambient_light_summary"
         android:fragment="com.android.settings.display.PulseAmbientLightSettings" />
 
+    <!-- Statubar icon manager -->
+    <Preference
+        android:key="statusbar_icon_manager"
+        android:title="@string/statusbar_icon_manager_title" >
+        <intent android:action="android.intent.action.MAIN"
+            android:targetPackage="com.android.systemui"
+            android:targetClass="com.android.systemui.tuner.IconManagerActivity" />
+    </Preference>
+
     <SwitchPreference
         android:key="camera_gesture"
         android:title="@string/camera_gesture_title"
