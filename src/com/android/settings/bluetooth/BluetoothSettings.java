@@ -323,6 +323,8 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
             case MENU_ID_SHOW_RECEIVED:
                 MetricsLogger.action(getActivity(), MetricsEvent.ACTION_BLUETOOTH_FILES);
                 Intent intent = new Intent(BTOPP_ACTION_OPEN_RECEIVED_FILES);
+                intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+                intent.setPackage("com.android.bluetooth");
                 getActivity().sendBroadcast(intent);
                 return true;
         }
