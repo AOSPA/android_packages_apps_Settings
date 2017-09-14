@@ -59,7 +59,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
 
     private static final String KEY_MANUAL = "manual";
     private static final String KEY_REGULATORY_INFO = "regulatory_info";
-    private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
     private static final String PROPERTY_SELINUX_STATUS = "ro.build.selinux";
     private static final String KEY_KERNEL_VERSION = "kernel_version";
@@ -178,30 +177,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         // Dont show feedback option if there is no reporter.
         if (TextUtils.isEmpty(DeviceInfoUtils.getFeedbackReporterPackage(getActivity()))) {
             getPreferenceScreen().removePreference(findPreference(KEY_DEVICE_FEEDBACK));
-        }
-
-        /*
-         * Settings is a generic app and should not contain any device-specific
-         * info.
-         */
-        final Activity act = getActivity();
-
-        // These are contained by the root preference screen
-        PreferenceGroup parentPreference = getPreferenceScreen();
-
-        if (mUm.isAdminUser()) {
-            Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference,
-                    KEY_SYSTEM_UPDATE_SETTINGS,
-                    Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        } else {
-            // Remove for secondary users
-            removePreference(KEY_SYSTEM_UPDATE_SETTINGS);
-        }
-
-        boolean isRJILlayout = getResources().getBoolean(R.bool.config_settings_rjil_layout);
-
-        if(isRJILlayout){
-            removePreference(KEY_SYSTEM_UPDATE_SETTINGS);
         }
 
         // Read platform settings for additional system update setting
@@ -331,13 +306,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             }
         } else if (preference.getKey().equals(KEY_DEVICE_FEEDBACK)) {
             sendFeedback();
-        } else if(preference.getKey().equals(KEY_SYSTEM_UPDATE_SETTINGS)) {
-            CarrierConfigManager configManager =
-                    (CarrierConfigManager) getSystemService(Context.CARRIER_CONFIG_SERVICE);
-            PersistableBundle b = configManager.getConfig();
-            if (b != null && b.getBoolean(CarrierConfigManager.KEY_CI_ACTION_ON_SYS_UPDATE_BOOL)) {
-                ciActionOnSysUpdate(b);
-            }
         }
         return super.onPreferenceTreeClick(preference);
     }
@@ -533,11 +501,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 // Dont show feedback option if there is no reporter.
                 if (TextUtils.isEmpty(DeviceInfoUtils.getFeedbackReporterPackage(context))) {
                     keys.add(KEY_DEVICE_FEEDBACK);
-                }
-                final UserManager um = UserManager.get(context);
-                // TODO: system update needs to be fixed for non-owner user b/22760654
-                if (!um.isAdminUser()) {
-                    keys.add(KEY_SYSTEM_UPDATE_SETTINGS);
                 }
                 if (!context.getResources().getBoolean(
                         R.bool.config_additional_system_update_setting_enable)) {
