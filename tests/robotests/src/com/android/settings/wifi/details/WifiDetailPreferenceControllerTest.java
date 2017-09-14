@@ -18,12 +18,15 @@ package com.android.settings.wifi.details;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -138,7 +141,7 @@ public class WifiDetailPreferenceControllerTest {
     @Captor private ArgumentCaptor<View.OnClickListener> mForgetClickListener;
     @Captor private ArgumentCaptor<Preference> mIpv6AddressCaptor;
 
-    private Context mContext = RuntimeEnvironment.application;
+    private Context mContext;
     private Lifecycle mLifecycle;
     private LinkProperties mLinkProperties;
     private WifiDetailPreferenceController mController;
@@ -199,6 +202,7 @@ public class WifiDetailPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        mContext = spy(RuntimeEnvironment.application);
         mLifecycle = new Lifecycle();
 
         when(mockAccessPoint.getConfig()).thenReturn(mockWifiConfig);
@@ -229,6 +233,8 @@ public class WifiDetailPreferenceControllerTest {
         when(mockHeaderController.setRecyclerView(mockFragment.getListView(), mLifecycle))
                 .thenReturn(mockHeaderController);
         when(mockHeaderController.setSummary(anyString())).thenReturn(mockHeaderController);
+
+        doReturn(null).when(mContext).getSystemService(eq(Context.DEVICE_POLICY_SERVICE));
 
         setupMockedPreferenceScreen();
         mController = newWifiDetailPreferenceController();
@@ -431,10 +437,14 @@ public class WifiDetailPreferenceControllerTest {
     public void dnsServersPref_shouldHaveDetailTextSet() throws UnknownHostException {
         mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[]{8,8,4,4}));
         mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[]{8,8,8,8}));
+        mLinkProperties.addDnsServer(Constants.IPV6_DNS);
 
         displayAndResume();
 
-        verify(mockDnsPref).setDetailText("8.8.4.4\n8.8.8.8");
+        verify(mockDnsPref).setDetailText(
+                "8.8.4.4\n" +
+                "8.8.8.8\n" +
+                Constants.IPV6_DNS.getHostAddress());
     }
 
     @Test
@@ -540,12 +550,14 @@ public class WifiDetailPreferenceControllerTest {
 
         lp.addDnsServer(Constants.IPV6_DNS);
         updateLinkProperties(lp);
-        inOrder.verify(mockDnsPref, never()).setVisible(true);
+        inOrder.verify(mockDnsPref).setDetailText(Constants.IPV6_DNS.getHostAddress());
+        inOrder.verify(mockDnsPref).setVisible(true);
 
         lp.addDnsServer(Constants.IPV4_DNS1);
         lp.addDnsServer(Constants.IPV4_DNS2);
         updateLinkProperties(lp);
         inOrder.verify(mockDnsPref).setDetailText(
+                Constants.IPV6_DNS.getHostAddress() + "\n" +
                 Constants.IPV4_DNS1.getHostAddress() + "\n" +
                 Constants.IPV4_DNS2.getHostAddress());
         inOrder.verify(mockDnsPref).setVisible(true);
