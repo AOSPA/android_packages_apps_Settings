@@ -19,7 +19,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="network_and_internet_screen"
     android:title="@string/network_dashboard_title"
-    settings:initialExpandedChildrenCount="5">
+    settings:initialExpandedChildrenCount="15">
 
     <com.android.settings.widget.MasterSwitchPreference
         android:fragment="com.android.settings.wifi.WifiSettings"
@@ -104,4 +104,27 @@
         android:positiveButtonText="@string/save"
         android:negativeButtonText="@android:string/cancel" />
 
+    <PreferenceCategory
+        android:key="net_monitor_category"
+        android:title="@string/net_monitor_category_title"
+        android:order="25" >
+	<com.aospa.support.preference.SystemSettingSwitchPreference
+            android:key="network_traffic_state"
+            android:title="@string/network_traffic_state_title"
+            android:defaultValue="true" />
+	<com.aospa.support.preference.CustomSystemSeekBarPreference
+            android:key="network_traffic_autohide_threshold"
+            android:title="@string/network_traffic_autohide_threshold_title"
+            android:max="10"
+            android:min="0"
+            android:defaultValue="1"
+	    android:dependency="network_traffic_state"
+            settings:units="KB/s" />    
+	<com.aospa.support.preference.SystemSettingSwitchPreference
+            android:key="network_traffic_arrow"
+            android:title="@string/network_traffic_arrow"
+            android:summary="@string/network_traffic_arrow_summary"
+            android:dependency="network_traffic_state"
+	    android:defaultValue="true" />
+   </PreferenceCategory>
 </PreferenceScreen>
