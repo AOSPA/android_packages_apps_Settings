@@ -81,7 +81,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
     private static final String KEY_NOTIFICATION_RINGTONE = "notification_ringtone";
     private static final String KEY_ALARM_RINGTONE = "alarm_ringtone";
     private static final String KEY_VIBRATE_WHEN_RINGING = "vibrate_when_ringing";
-    private static final String KEY_WIFI_DISPLAY = "wifi_display";
     private static final String KEY_ZEN_MODE = "zen_mode";
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
     private static final String KEY_VOLBTN_MUSIC_CONTROLS = "volbtn_music_controls";
@@ -688,7 +687,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements Indexab
             } else {
                 rt.add(KEY_RING_VOLUME);
                 rt.add(KEY_PHONE_RINGTONE);
-                rt.add(KEY_WIFI_DISPLAY);
                 rt.add(KEY_VIBRATE_WHEN_RINGING);
             }
 
