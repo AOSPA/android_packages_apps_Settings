@@ -43,12 +43,14 @@ public class SecurityPatchLevelDialogController implements View.OnClickListener 
     private final Context mContext;
     private final PackageManagerWrapper mPackageManager;
     private final String mCurrentPatch;
+    private final boolean showPatch;
 
     public SecurityPatchLevelDialogController(FirmwareVersionDialogFragment dialog) {
         mDialog = dialog;
         mContext = dialog.getContext();
         mPackageManager = new PackageManagerWrapper(mContext.getPackageManager());
         mCurrentPatch = DeviceInfoUtils.getSecurityPatch();
+        showPatch = getResources().getBoolean(R.bool.config_show_security_patch_level);
     }
 
     @Override
@@ -70,7 +72,7 @@ public class SecurityPatchLevelDialogController implements View.OnClickListener 
      * Populates the security patch level field in the dialog and registers click listeners.
      */
     public void initialize() {
-        if (TextUtils.isEmpty(mCurrentPatch)) {
+        if (TextUtils.isEmpty(mCurrentPatch) || !showPatch) {
             mDialog.removeSettingFromScreen(SECURITY_PATCH_LABEL_ID);
             mDialog.removeSettingFromScreen(SECURITY_PATCH_VALUE_ID);
             return;
