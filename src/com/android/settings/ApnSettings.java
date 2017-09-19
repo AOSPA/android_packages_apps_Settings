@@ -314,7 +314,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
                 }
                 int bearer = cursor.getInt(BEARER_INDEX);
                 int bearerBitMask = cursor.getInt(BEARER_BITMASK_INDEX);
-                int fullBearer = bearer | bearerBitMask;
+                int fullBearer = ServiceState.getBitmaskForTech(bearer) | bearerBitMask;
                 int radioTech = networkTypeToRilRidioTechnology(TelephonyManager.getDefault()
                         .getDataNetworkType(subId));
                 if (!ServiceState.bitmaskHasTech(fullBearer, radioTech)
