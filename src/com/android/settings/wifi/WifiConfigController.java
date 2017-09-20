@@ -951,8 +951,13 @@ public class WifiConfigController implements TextWatcher,
                 } else {
                     setSelection(mEapUserCertSpinner, userCert);
                 }
-                mEapIdentityView.setText(enterpriseConfig.getIdentity());
-                mEapAnonymousView.setText(enterpriseConfig.getAnonymousIdentity());
+                // Don't set (Anonymous)Identity to GUI if EAP method is SIM/AKA/AKA_PRIME
+                if (eapMethod != Eap.SIM
+                        && eapMethod != Eap.AKA
+                        && eapMethod != Eap.AKA_PRIME) {
+                    mEapIdentityView.setText(enterpriseConfig.getIdentity());
+                    mEapAnonymousView.setText(enterpriseConfig.getAnonymousIdentity());
+                }
             } else {
                 mPhase2Spinner = (Spinner) mView.findViewById(R.id.phase2);
                 showEapFieldsByMethod(mEapMethodSpinner.getSelectedItemPosition());
