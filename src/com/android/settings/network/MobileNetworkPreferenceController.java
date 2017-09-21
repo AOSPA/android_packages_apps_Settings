@@ -24,6 +24,8 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.Utils;
@@ -32,6 +34,8 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import java.util.List;
 
 import static android.os.UserHandle.myUserId;
 import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
@@ -47,12 +51,14 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
     private Preference mPreference;
     @VisibleForTesting
     PhoneStateListener mPhoneStateListener;
+    private SubscriptionManager mSubscriptionManager;
 
     public MobileNetworkPreferenceController(Context context) {
         super(context);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         mIsSecondaryUser = !mUserManager.isAdminUser();
+        mSubscriptionManager = SubscriptionManager.from(context);
     }
 
     @Override
@@ -84,14 +90,14 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
 
     @Override
     public void onResume() {
+        if (mSubscriptionManager != null)
+            mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
         if (isAvailable()) {
             if (mPhoneStateListener == null) {
                 mPhoneStateListener = new PhoneStateListener() {
                     @Override
                     public void onServiceStateChanged(ServiceState serviceState) {
-                        if (mPreference != null) {
-                            mPreference.setSummary(mTelephonyManager.getNetworkOperatorName());
-                        }
+                        updateDisplayName();
                     }
                 };
             }
@@ -99,11 +105,52 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
         }
     }
 
+    private void updateDisplayName() {
+        if (mPreference != null) {
+            List<SubscriptionInfo> list = mSubscriptionManager.getActiveSubscriptionInfoList();
+            if (list != null && !list.isEmpty()) {
+                boolean useSeparator = false;
+                StringBuilder builder = new StringBuilder();
+                for (SubscriptionInfo subInfo : list) {
+                    if (isSubscriptionInService(subInfo.getSubscriptionId())) {
+                        if (useSeparator) builder.append(", ");
+                        builder.append(mTelephonyManager.getNetworkOperatorName
+                                (subInfo.getSubscriptionId()));
+                        useSeparator = true;
+                    }
+                }
+                mPreference.setSummary(builder.toString());
+            } else {
+                mPreference.setSummary(mTelephonyManager.getNetworkOperatorName());
+            }
+        }
+    }
+
+    private boolean isSubscriptionInService(int subId) {
+        if (mTelephonyManager != null) {
+            if (mTelephonyManager.getServiceStateForSubscriber(subId).getState()
+                    == ServiceState.STATE_IN_SERVICE) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private final SubscriptionManager.OnSubscriptionsChangedListener mOnSubscriptionsChangeListener
+            = new SubscriptionManager.OnSubscriptionsChangedListener() {
+        @Override
+        public void onSubscriptionsChanged() {
+             updateDisplayName();
+        }
+    };
+
     @Override
     public void onPause() {
         if (mPhoneStateListener != null) {
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
         }
+        mSubscriptionManager
+                .removeOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
     }
 
     @Override
