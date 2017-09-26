@@ -335,6 +335,11 @@ public class ApnEditor extends SettingsPreferenceFragment
             getPreferenceScreen().getPreference(i).setOnPreferenceChangeListener(this);
         }
 
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         fillUi();
     }
 
