@@ -71,6 +71,12 @@
                 android:title="@string/firmware_version"
                 android:summary="@string/device_info_default"/>
 
+        <!-- Device PA version -->
+        <Preference android:key="pa_version"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/pa_version"
+                android:summary="@string/pa_version_default" />
+
         <!-- Security patch level -->
         <Preference android:key="security_patch"
                 android:title="@string/security_patch"
