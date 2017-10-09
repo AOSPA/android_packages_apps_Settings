@@ -22,7 +22,7 @@
   <string name="build_date_default">२०१७-०१-०१-००००</string>
   <!-- Advanced reboot options -->
   <string name="advanced_reboot_title">विस्तारित रिबूट</string>
-  <string name="advanced_reboot_summary">पुनर्प्राप्ति या बूटलोडर में रिबूट के लिए पावर मेनू में विकल्प शामिल हैं</string>
+  <string name="advanced_reboot_summary">रिकवरी या बूटलोडर में रिबूट करने के लिए पावर मेनू में विकल्प शामिल करे</string>
   <string name="reset_all_settings">सभी रीसेट करें</string>
   <string name="reset_selected_settings">चयनित रीसेट करें</string>
   <string name="reset_settings_title">सुविधा वरीयताएँ</string>
@@ -50,7 +50,7 @@
   <string name="night_display_ok">ठीक है</string>
   <!-- Statusbar - double-tap to sleep -->
   <string name="double_tap_to_sleep_title">स्लीप करने के लिए दो बार टैप करें</string>
-  <string name="double_tap_to_sleep_summary">डिवाइस स्लीप करने के लिए दो बार स्थिति पट्टी पर टैप करें</string>
+  <string name="double_tap_to_sleep_summary">डिवाइस स्लीप करने के लिए दो बार स्टेटस बार पर टैप करें</string>
   <!-- Gestures Settings -->
   <string name="gestures_settings_title">इशारे</string>
   <string name="gestures_settings_summary">ऑफ स्क्रीन और और सिस्टम इशारों को अनुकूल करे</string>
@@ -84,7 +84,7 @@
   <string name="buttons_pref_summary">अपने डिवाइस कुंजी और बटनों को अनुकूलित करें</string>
   <string name="enable_navigation_bar_title">सॉफ़्टवेयर कुंजी को सक्षम करें</string>
   <string name="enable_navigation_bar_summary">ऑन-स्क्रीन नेविगेशन कुंजियाँ सक्षम करे</string>
-  <string name="swap_navigation_keys_title">कुंजी बदलाव करे</string>
+  <string name="swap_navigation_keys_title">कुंजी विनिमय</string>
   <string name="swap_navigation_keys_summary">पिछला और रीसेंट कुंजियां वापस बदलाव करे</string>
   <string name="swap_slider_order_title">स्लाइडर बदलाव करे</string>
   <string name="swap_slider_order_summary">चेतावनी स्लाइडर मोड आदेश बदलाव करे</string>
@@ -114,9 +114,9 @@
   <!-- Heads-up notifications -->
   <string name="heads_up_notifications_title">पीकिंग सूचनाएं</string>
   <!-- LED notifications -->
-  <string name="battery_light_settings">बैटरी प्रकाश चार्ज</string>
+  <string name="battery_light_settings">बैटरी चार्जीग प्रकाश</string>
   <string name="leds">एलईडी प्रकाश</string>
-  <string name="notification_light_settings">एल. ई. डी. अधिसूचना</string>
+  <string name="notification_light_settings">अधिसूचना प्रकाश</string>
   <string name="reset">रीसेट करें</string>
   <string name="batterylight_title">बैटरी एलईडी सेटिंग्स</string>
   <string name="battery_light_enable">सक्षम करें</string>
@@ -134,7 +134,7 @@
   <string name="advanced">एडवांस्ड</string>
   <string name="profiles_add">जोड़ें...</string>
   <!-- Notification light dialogs -->
-  <string name="default_time">प्रसामान्य</string>
+  <string name="default_time">सामान्य</string>
   <string name="custom_time">कुध के सेटिंग्स </string>
   <string name="dialog_delete_title">हटाएँ</string>
   <string name="dialog_delete_message">चयनित आइटम निकालें?</string>
@@ -153,19 +153,19 @@
   <!-- Lights settings screen, notification light settings -->
   <string name="notification_light_applist_title">ऐप्स</string>
   <string name="notification_light_phonelist_title">फोन</string>
-  <string name="notification_light_use_custom">प्रति ऐप के लिए मानों का उपयोग करें</string>
+  <string name="notification_light_use_custom">प्रति ऐप मानों का उपयोग करें</string>
   <string name="notification_light_default_value">डिफॉल्ट</string>
   <string name="notification_light_missed_call_title">मिस्ड कॉल</string>
   <string name="notification_light_voicemail_title">ध्वनि डाक</string>
   <string name="notification_light_screen_on">स्क्रीन चालू होने के साथ रोशनी</string>
-  <string name="notification_light_zen_mode">दो नाट डिस्टर्ब मोड में रोशनी</string>
+  <string name="notification_light_zen_mode">डू नट डिस्टर्ब मोड में रोशनी</string>
   <string name="notification_light_use_multiple_leds">बहुत सारे एलईडी</string>
   <string name="notification_light_dialog_text_pulse">पल्स लम्बाई और गति</string>
   <string name="notification_light_dialog_text_multicolor">रंग चुनें</string>
   <string name="notification_light_dialog_text">कृपया एक रंग, स्पंद लंबाई और चल का चयन करे</string>
   <!-- Lights settings, LED notification -->
   <string name="led_notification_text">एलईडी प्रकाश सक्षम किया गया है</string>
-  <string name="notification_light_no_apps_summary">प्रति अनुप्रयोग नियंत्रण जोड़ने के लिए, \'%1$s\' को सक्रिय करें, और मेनू पट्टी पर \'\u002b\' दबाएँ</string>
+  <string name="notification_light_no_apps_summary">प्रति अनुप्रयोग नियंत्रण जोड़ने के लिए, \'%1$s\' को सक्रिय करें, और मेनू बार पर \'\u002b\' दबाएँ</string>
   <string name="font_sample_text">११:५७</string>
   <!-- Format string for fingerprint location message -->
   <string name="security_settings_fingerprint_enroll_find_sensor_message_cm">अपने फिंगरप्रिंट सेंसर का <xliff:g id="sensor_location">%1$s </xliff:g> पर पता लगाएँ।</string>
@@ -195,6 +195,8 @@
   <string name="cyan">स्कूटर</string>
   <string name="grey">भूरा</string>
   <string name="default_string">पूर्व निर्धारित</string>
+  <string name="theme_force_enabled_title">फोर्स सक्षम थीम</string>
+  <string name="theme_force_enabled_summary">OMS के होने के बाद भी थीम जबरन सछम हो जाएगा</string>
   <!-- Pie -->
   <string name="pie_settings">पाइ सेटिंग्स</string>
   <string name="pie_settings_summary">पाई को अपने पसंद के अनुसार समायोजित करें</string>
