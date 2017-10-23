@@ -180,6 +180,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                 .getBooleanExtra(CONFIRM_CREDENTIALS, true);
             if (getActivity() instanceof ChooseLockGeneric.InternalActivity) {
                 mPasswordConfirmed = !confirmCredentials;
+                mUserPassword = getActivity().getIntent().getStringExtra(
+                        ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             }
             mHideDrawer = getActivity().getIntent().getBooleanExtra(EXTRA_HIDE_DRAWER, false);
 
@@ -199,6 +201,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                 mEncryptionRequestQuality = savedInstanceState.getInt(ENCRYPT_REQUESTED_QUALITY);
                 mEncryptionRequestDisabled = savedInstanceState.getBoolean(
                         ENCRYPT_REQUESTED_DISABLED);
+                if (mUserPassword == null) {
+                    mUserPassword = savedInstanceState.getString(
+                            ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
+                }
             }
 
             // a) If this is started from other user, use that user id.
@@ -269,6 +275,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                 // Forward the target user id to  ChooseLockGeneric.
                 chooseLockGenericIntent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 chooseLockGenericIntent.putExtra(CONFIRM_CREDENTIALS, !mPasswordConfirmed);
+                if (mUserPassword != null) {
+                    chooseLockGenericIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
+                            mUserPassword);
+                }
                 startActivityForResult(chooseLockGenericIntent, SKIP_FINGERPRINT_REQUEST);
                 return true;
             } else {
@@ -394,6 +404,9 @@ public class ChooseLockGeneric extends SettingsActivity {
             outState.putBoolean(WAITING_FOR_CONFIRMATION, mWaitingForConfirmation);
             outState.putInt(ENCRYPT_REQUESTED_QUALITY, mEncryptionRequestQuality);
             outState.putBoolean(ENCRYPT_REQUESTED_DISABLED, mEncryptionRequestDisabled);
+            if (mUserPassword != null) {
+                outState.putString(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, mUserPassword);
+            }
         }
 
         private void updatePreferencesOrFinish(boolean isRecreatingActivity) {
@@ -581,7 +594,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                             .setUserId(mUserId);
             if (mHasChallenge) {
                 builder.setChallenge(mChallenge);
-            } else {
+            }
+            if (mUserPassword != null) {
                 builder.setPassword(mUserPassword);
             }
             return builder.build();
@@ -594,7 +608,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                             .setUserId(mUserId);
             if (mHasChallenge) {
                 builder.setChallenge(mChallenge);
-            } else {
+            }
+            if (mUserPassword != null) {
                 builder.setPattern(mUserPassword);
             }
             return builder.build();
