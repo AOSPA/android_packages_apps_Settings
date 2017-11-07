@@ -551,10 +551,10 @@ public class WifiConfigController implements TextWatcher,
             case AccessPoint.SECURITY_EAP:
                 config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
                 config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
-                if (mAccessPoint.isFils256Supported()) {
+                if (mAccessPoint != null && mAccessPoint.isFils256Supported()) {
                     config.allowedKeyManagement.set(KeyMgmt.FILS_SHA256);
                 }
-                if (mAccessPoint.isFils384Supported()) {
+                if (mAccessPoint != null && mAccessPoint.isFils384Supported()) {
                     config.allowedKeyManagement.set(KeyMgmt.FILS_SHA384);
                 }
                 config.enterpriseConfig = new WifiEnterpriseConfig();
@@ -594,7 +594,7 @@ public class WifiConfigController implements TextWatcher,
                     case Eap.AKA:
                     case Eap.AKA_PRIME:
                         selectedSimCardNumber = mSimCardSpinner.getSelectedItemPosition() + 1;
-                        config.SIMNum = selectedSimCardNumber;
+                        config.enterpriseConfig.setSimNum(selectedSimCardNumber);
                         break;
                     default:
                         // The default index from mPhase2FullAdapter maps to the API
@@ -670,7 +670,8 @@ public class WifiConfigController implements TextWatcher,
                     // clear password
                     config.enterpriseConfig.setPassword(mPasswordView.getText().toString());
                 }
-                if (mAccessPoint.isFils256Supported() || mAccessPoint.isFils384Supported()) {
+                if (mAccessPoint != null && (mAccessPoint.isFils256Supported() 
+                            || mAccessPoint.isFils384Supported())) {
                     config.enterpriseConfig.setFieldValue(WifiEnterpriseConfig.EAP_ERP, "1");
                 }
                 break;
@@ -918,8 +919,13 @@ public class WifiConfigController implements TextWatcher,
                     case Eap.SIM:
                     case Eap.AKA:
                     case Eap.AKA_PRIME:
-                        WifiConfiguration config =  mAccessPoint.getConfig();
-                        mSimCardSpinner.setSelection(config.SIMNum-1);
+                        if (enterpriseConfig.getSimNum() != null
+                                && !enterpriseConfig.getSimNum().isEmpty()) {
+                            int mSimNum = Integer.parseInt(enterpriseConfig.getSimNum());
+                            mSimCardSpinner.setSelection(mSimNum - 1);
+                        } else {
+                            mSimCardSpinner.setSelection(0);
+                        }
                         break;
                     default:
                         mPhase2Spinner.setSelection(phase2Method);
@@ -1056,8 +1062,14 @@ public class WifiConfigController implements TextWatcher,
                               android.R.layout.simple_spinner_dropdown_item);
                 mSimCardSpinner.setAdapter(eapSimAdapter);
                 mView.findViewById(R.id.l_sim_card).setVisibility(View.VISIBLE);
-                if(config != null){
-                    mSimCardSpinner.setSelection(config.SIMNum-1);
+                if (config != null) {
+                    if (config.enterpriseConfig.getSimNum() != null
+                            && !config.enterpriseConfig.getSimNum().isEmpty()) {
+                         int mSimNum = Integer.parseInt(config.enterpriseConfig.getSimNum());
+                         mSimCardSpinner.setSelection(mSimNum - 1);
+                    } else {
+                         mSimCardSpinner.setSelection(0);
+                    }
                 }
                 setPhase2Invisible();
                 setAnonymousIdentInvisible();
