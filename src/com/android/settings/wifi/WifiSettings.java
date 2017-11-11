@@ -748,10 +748,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             AccessPoint accessPoint = accessPoints.get(index);
             // Ignore access points that are out of range.
             if (accessPoint.isReachable()) {
-                String key = accessPoint.getBssid();
-                if (TextUtils.isEmpty(key)) {
-                    key = accessPoint.getSsidStr();
-                }
+                String key = generateKey(accessPoint);
                 hasAvailableAccessPoints = true;
                 LongPressAccessPointPreference pref =
                         (LongPressAccessPointPreference) getCachedPreference(key);
@@ -793,6 +790,18 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
     }
 
+    private String generateKey(AccessPoint accessPoint) {
+        StringBuilder key = new StringBuilder();
+        String bssid = accessPoint.getBssid();
+        if (TextUtils.isEmpty(bssid)) {
+            key.append(accessPoint.getSsidStr());
+        } else {
+            key.append(bssid);
+        }
+        key.append(',').append(accessPoint.getSecurity());
+        return key.toString();
+    }
+
     @NonNull
     private LongPressAccessPointPreference createLongPressActionPointPreference(
             AccessPoint accessPoint) {
@@ -824,10 +833,11 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
 
         // Is the previous currently connected SSID different from the new one?
-        if (!((AccessPointPreference)
-                mConnectedAccessPointPreferenceCategory.getPreference(0))
-                        .getAccessPoint().getSsidStr().equals(
-                                connectedAp.getSsidStr())) {
+        AccessPointPreference preference = (AccessPointPreference)
+            (mConnectedAccessPointPreferenceCategory.getPreference(0));
+        // The AccessPoints need to be the same reference to ensure that updates are reflected
+        // in the UI.
+        if (preference.getAccessPoint() != connectedAp) {
             removeConnectedAccessPointPreference();
             addConnectedAccessPointPreference(connectedAp);
             return true;

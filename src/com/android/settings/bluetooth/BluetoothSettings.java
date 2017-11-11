@@ -334,6 +334,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment implem
                         MetricsEvent.ACTION_BLUETOOTH_FILES);
                 Intent intent = new Intent(BTOPP_ACTION_OPEN_RECEIVED_FILES);
                 intent.setPackage(BTOPP_PACKAGE);
+                intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
                 getActivity().sendBroadcast(intent);
                 return true;
         }
