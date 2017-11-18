@@ -142,11 +142,14 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
             channelAdapter = ArrayAdapter.createFromResource(mContext,
                     R.array.wifi_ap_band_config_2G_only, android.R.layout.simple_spinner_item);
             mWifiConfig.apBand = 0;
-        } else {
+        } else if (mContext.getResources().getBoolean(
+                  com.android.internal.R.bool.config_wifi_dual_sap_mode_enabled) == true) {
             channelAdapter = ArrayAdapter.createFromResource(mContext,
                     R.array.wifi_ap_band_config_full, android.R.layout.simple_spinner_item);
+        } else {
+            channelAdapter = ArrayAdapter.createFromResource(mContext,
+                    R.array.wifi_ap_band_config_2G_5G, android.R.layout.simple_spinner_item);
         }
-
         channelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         setButton(BUTTON_SUBMIT, context.getString(R.string.wifi_save), mListener);
@@ -155,11 +158,7 @@ public class WifiApDialog extends AlertDialog implements View.OnClickListener,
 
         if (mWifiConfig != null) {
             mSsid.setText(mWifiConfig.SSID);
-            if (mWifiConfig.apBand == 0) {
-               mBandIndex = 0;
-            } else {
-               mBandIndex = 1;
-            }
+            mBandIndex = mWifiConfig.apBand;
 
             mSecurity.setSelection(mSecurityTypeIndex);
             if (mSecurityTypeIndex == WPA2_INDEX) {
