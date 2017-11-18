@@ -208,8 +208,8 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
             return false;
         }
 
-        // Disable tethering if enabling Wifi
-        if (mayDisableTethering(isChecked)) {
+        // Disable tethering if enabling Wifi OR skip in case of STA + SAP concurrency
+        if (!mWifiManager.getWifiStaSapConcurrency() && mayDisableTethering(isChecked)) {
             mConnectivityManager.stopTethering(ConnectivityManager.TETHERING_WIFI);
         }
         if (isChecked) {
