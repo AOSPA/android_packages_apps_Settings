@@ -390,11 +390,12 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 @Override
                 protected Void doInBackground(Void... args) {
                     /**
-                     * Disable tethering if enabling Wifi
+                     * Disable tethering if enabling Wifi OR skip in case of STA + SAP concurrency
                      */
                     int wifiApState = wifiManager.getWifiApState();
                     if (desiredState && ((wifiApState == WifiManager.WIFI_AP_STATE_ENABLING) ||
-                                         (wifiApState == WifiManager.WIFI_AP_STATE_ENABLED))) {
+                                         (wifiApState == WifiManager.WIFI_AP_STATE_ENABLED)) &&
+                                        !wifiManager.getWifiStaSapConcurrency()) {
                         final ConnectivityManager connectivityManager =
                                 (ConnectivityManager) context.getSystemService(
                                         Context.CONNECTIVITY_SERVICE);
