@@ -60,11 +60,16 @@
         <Preference android:key="device_feedback"
                 android:title="@string/device_feedback" />
 
-        <!-- Device hardware model -->
+        <!-- Device hardware model
         <Preference
                 android:key="device_model"
                 android:title="@string/model_info"
-                android:summary="@string/device_info_default"/>
+                android:summary="@string/device_info_default"/> -->
+
+        <!-- Device PA name -->
+        <Preference android:key="pa_device"
+                android:title="@string/pa_device"
+                android:summary="@string/pa_device_default"/>
 
         <!-- Device firmware version -->
         <Preference android:key="firmware_version"
