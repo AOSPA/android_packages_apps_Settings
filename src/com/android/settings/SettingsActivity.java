@@ -35,6 +35,8 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
@@ -68,6 +70,8 @@ import com.android.settingslib.drawer.SettingsDrawerActivity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import org.codeaurora.internal.IExtTelephony;
 
 public class SettingsActivity extends SettingsDrawerActivity
         implements PreferenceManager.OnPreferenceTreeClickListener,
@@ -727,15 +731,24 @@ public class SettingsActivity extends SettingsDrawerActivity
              return null;
         }
 
-        if (fragmentName.equals(SimSettings.class.getName())){
-            Log.i(LOG_TAG, "switchToFragment, launch simSettings  ");
-            Intent provisioningIntent =
-                    new Intent("com.android.settings.sim.SIM_SUB_INFO_SETTINGS");
-            if (!getPackageManager().queryIntentActivities(provisioningIntent, 0).isEmpty()) {
-                startActivity(provisioningIntent);
+        IExtTelephony extTelephony =
+                IExtTelephony.Stub.asInterface(ServiceManager.getService("extphone"));
+        try {
+            if (fragmentName.equals(SimSettings.class.getName()) && extTelephony != null &&
+                    extTelephony.isVendorApkAvailable("com.qualcomm.qti.simsettings")) {
+                Log.i(LOG_TAG, "switchToFragment, launch simSettings  ");
+                Intent provisioningIntent =
+                        new Intent("com.android.settings.sim.SIM_SUB_INFO_SETTINGS");
+                if (!getPackageManager().queryIntentActivities(provisioningIntent, 0).isEmpty()) {
+                    startActivity(provisioningIntent);
+                }
+                finish();
+                return null;
             }
-            finish();
-            return null;
+        } catch (RemoteException e) {
+            // could not connect to extphone service, launch the default activity
+            Log.i(LOG_TAG,
+                    "couldn't connect to extphone service, launch the default sim cards activity");
         }
 
         if (validate && !isValidFragment(fragmentName)) {
