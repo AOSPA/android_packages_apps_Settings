@@ -109,6 +109,9 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
     private Resources mRes;
 
+    private int mNumSims;
+    private static final String TAB_ID = "tabId";
+
     // For async handler to identify request type
     private static final int MSG_ENABLE_ICC_PIN_COMPLETE = 100;
     private static final int MSG_CHANGE_ICC_PIN_COMPLETE = 101;
@@ -206,8 +209,8 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
         final TelephonyManager tm =
                 (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
-        final int numSims = tm.getSimCount();
-        if (numSims > 1) {
+        mNumSims = tm.getSimCount();
+        if (mNumSims > 1) {
             View view = inflater.inflate(R.layout.icc_lock_tabs, container, false);
             final ViewGroup prefs_container = (ViewGroup) view.findViewById(R.id.prefs_container);
             Utils.prepareCustomPreferencesList(container, view, prefs_container, false);
@@ -223,14 +226,21 @@ public class IccLockSettings extends SettingsPreferenceFragment
             mTabHost.clearAllTabs();
 
             SubscriptionManager sm = SubscriptionManager.from(getContext());
-            for (int i = 0; i < numSims; ++i) {
+            for (int i = 0; i < mNumSims; ++i) {
                 final SubscriptionInfo subInfo = sm.getActiveSubscriptionInfoForSimSlotIndex(i);
                 mTabHost.addTab(buildTabSpec(String.valueOf(i),
                         String.valueOf(subInfo == null
                             ? getContext().getString(R.string.sim_editor_title, i + 1)
                             : subInfo.getDisplayName())));
             }
-            final SubscriptionInfo sir = sm.getActiveSubscriptionInfoForSimSlotIndex(0);
+
+            String currentTab = "0";
+            if (savedInstanceState != null) {
+                currentTab = savedInstanceState.getString(TAB_ID);
+                mTabHost.setCurrentTabByTag(currentTab);
+            }
+            final SubscriptionInfo sir = sm.getActiveSubscriptionInfoForSimSlotIndex(
+                    Integer.parseInt(currentTab));
 
             mPhone = (sir == null) ? null
                 : PhoneFactory.getPhone(SubscriptionManager.getPhoneId(sir.getSubscriptionId()));
@@ -339,6 +349,10 @@ public class IccLockSettings extends SettingsPreferenceFragment
                 default:
                     break;
             }
+        }
+
+        if (mNumSims > 1) {
+            out.putString(TAB_ID, mTabHost.getCurrentTabTag());
         } else {
             super.onSaveInstanceState(out);
         }
