@@ -19,6 +19,7 @@ package com.android.settings.gestures;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
+import android.os.SystemProperties;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.Utils;
@@ -50,7 +51,8 @@ public class SwipeToNotificationPreferenceController extends GesturePreferenceCo
 
     private static boolean isGestureAvailable(Context context) {
         return Utils.hasFingerprintHardware(context) && context.getResources()
-                .getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys);
+                .getBoolean(com.android.internal.R.bool.config_supportSystemNavigationKeys)
+                && SystemProperties.getBoolean("settings.ui.navigationkeys.enabled", true);;
     }
 
     @Override
