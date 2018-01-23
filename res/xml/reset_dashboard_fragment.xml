@@ -34,6 +34,14 @@
         android:key="reset_app_prefs"
         android:title="@string/reset_app_preferences" />
 
+    <!-- Settings reset -->
+    <PreferenceScreen
+        android:key="settings_reset"
+        android:title="@string/reset_settings_title"
+        android:summary="@string/reset_settings_summary"
+        settings:keywords="@string/keywords_settings_reset"
+        android:fragment="com.android.settings.FeaturePreferences" />
+
     <!-- Factory reset -->
     <com.android.settingslib.RestrictedPreference
         android:key="factory_reset"
