@@ -100,19 +100,18 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
                     publishProgress(40);
 
                     VolumeInfo privateVol = null;
-                    try {
-                        // The volume will be destroyed and created during format process,
-                        // retry several times to avoid return null when getting volume
-                        int retryCount = 5;
-                        do {
-                            Thread.sleep(50);
-                            privateVol = activity.findFirstVolume(VolumeInfo.TYPE_PRIVATE);
-                        } while (privateVol == null && --retryCount > 0);
-                    } catch (InterruptedException e) {
-                        Log.e(TAG, "exception: "+e);
+                    synchronized (mLock) {
+                        if ((privateVol = activity.findFirstVolume(
+                                VolumeInfo.TYPE_PRIVATE)) == null) {
+                            mLock.wait(1000);
+                            privateVol = activity.findFirstVolume(
+                                    VolumeInfo.TYPE_PRIVATE);
+                        }
                     }
-                    mPrivateBench = storage.benchmark(privateVol.getId());
-                    mPrivateBench /= 1000000;
+                    if (privateVol != null) {
+                        mPrivateBench = storage.benchmark(privateVol.getId());
+                        mPrivateBench /= 1000000;
+                    }
 
                     // If we just adopted the device that had been providing
                     // physical storage, then automatically move storage to the
