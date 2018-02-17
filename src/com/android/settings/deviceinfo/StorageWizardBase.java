@@ -46,6 +46,7 @@ public abstract class StorageWizardBase extends Activity {
 
     protected VolumeInfo mVolume;
     protected DiskInfo mDisk;
+    protected static final Object mLock = new Object();
 
     private View mCustomNav;
     private Button mCustomNext;
@@ -217,6 +218,18 @@ public abstract class StorageWizardBase extends Activity {
             // We know mDisk != null.
             if (mDisk.id.equals(disk.id)) {
                 finish();
+            }
+        }
+
+        @Override
+        public void onVolumeStateChanged(VolumeInfo vol, int oldState, int newState) {
+            if (Objects.equals(mDisk.getId(), vol.getDiskId())
+                    && (VolumeInfo.STATE_MOUNTED == newState
+                    || VolumeInfo.STATE_MOUNTED_READ_ONLY == newState
+                    || VolumeInfo.STATE_UNMOUNTABLE == newState)) {
+                synchronized (mLock) {
+                    mLock.notifyAll();
+                }
             }
         }
     };
