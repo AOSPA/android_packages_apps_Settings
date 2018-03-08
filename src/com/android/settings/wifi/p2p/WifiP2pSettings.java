@@ -36,8 +36,17 @@ import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.PeerListListener;
 import android.net.wifi.p2p.WifiP2pManager.PersistentGroupInfoListener;
+import android.net.wifi.p2p.WifiP2pManager.ActionListener;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.InputFilter;
@@ -70,6 +79,7 @@ public class WifiP2pSettings extends DashboardFragment
 
     private final IntentFilter mIntentFilter = new IntentFilter();
     private WifiP2pManager mWifiP2pManager;
+    private WifiManager mWifiManager;
     private WifiP2pManager.Channel mChannel;
     private OnClickListener mRenameListener;
     private OnClickListener mDisconnectListener;
@@ -84,10 +94,16 @@ public class WifiP2pSettings extends DashboardFragment
     private boolean mWifiP2pSearching;
     private int mConnectedDevices;
     private boolean mLastGroupFormed = false;
+    private boolean mWifiP2pPassiveListenOn = false;
 
     private P2pPeerCategoryPreferenceController mPeerCategoryController;
     private P2pPersistentCategoryPreferenceController mPersistentCategoryController;
     private P2pThisDevicePreferenceController mThisDevicePreferenceController;
+
+    private SwitchPreference mListenEnablepref;
+    private ListPreference mListenChannelpre;
+    private boolean mListen = false;
+    private int mListenChannel = 0;
 
     private static final int DIALOG_DISCONNECT  = 1;
     private static final int DIALOG_CANCEL_CONNECT = 2;
@@ -102,6 +118,8 @@ public class WifiP2pSettings extends DashboardFragment
     private WifiP2pDeviceList mPeers = new WifiP2pDeviceList();
 
     private String mSavedDeviceName;
+
+    private P2pCategoryPreferenceController mP2pListenCateforyController;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -130,6 +148,12 @@ public class WifiP2pSettings extends DashboardFragment
                     startSearch();
                 }
                 mLastGroupFormed = wifip2pinfo.groupFormed;
+                if (mListen) {
+                    //When group removed, p2p will be flushed,
+                    //we should trigger listen mode again
+                    if (DBG) Log.d(TAG, "set listen mode: " + mListen);
+                    setListenMode(mListen);
+                }
             } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
                 mThisDevice = (WifiP2pDevice) intent.getParcelableExtra(
                         WifiP2pManager.EXTRA_WIFI_P2P_DEVICE);
@@ -176,6 +200,13 @@ public class WifiP2pSettings extends DashboardFragment
                 new P2pPeerCategoryPreferenceController(context);
         mThisDevicePreferenceController = new P2pThisDevicePreferenceController(context);
         controllers.add(mPersistentCategoryController);
+        mWifiP2pPassiveListenOn = Settings.Global.getInt(getContentResolver(),
+                 Settings.Global.WIFI_P2P_PASSIVE_LISTEN_ON, 0) != 0;
+        if (mWifiP2pPassiveListenOn) {
+            if (DBG) Log.d(TAG, "Passive listen mode on when create activity!");
+            buildP2plisten(context);
+            controllers.add(mP2pListenCateforyController);
+        }
         controllers.add(mPeerCategoryController);
         controllers.add(mThisDevicePreferenceController);
         return controllers;
@@ -185,6 +216,7 @@ public class WifiP2pSettings extends DashboardFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         final Activity activity = getActivity();
         mWifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+        mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         if (mWifiP2pManager != null) {
             mChannel = mWifiP2pManager.initialize(activity.getApplicationContext(),
                     getActivity().getMainLooper(), null);
@@ -195,6 +227,9 @@ public class WifiP2pSettings extends DashboardFragment
             }
         } else {
             Log.e(TAG, "mWifiP2pManager is null !");
+        }
+        if (mWifiManager == null) {
+            Log.e(TAG, "mWifiManager is null !");
         }
 
         if (savedInstanceState != null && savedInstanceState.containsKey(SAVE_DIALOG_PEER)) {
@@ -315,6 +350,7 @@ public class WifiP2pSettings extends DashboardFragment
             }
         };
 
+        buildP2pListenPreferences(getPrefContext());
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -329,6 +365,14 @@ public class WifiP2pSettings extends DashboardFragment
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PERSISTENT_GROUPS_CHANGED_ACTION);
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
 
+        mWifiP2pPassiveListenOn = Settings.Global.getInt(getContentResolver(),
+                 Settings.Global.WIFI_P2P_PASSIVE_LISTEN_ON, 0) != 0;
+        if (mWifiP2pPassiveListenOn) {
+            if (DBG) Log.d(TAG, "show p2p listen list!");
+        } else {
+            PreferenceCategory P2pListenPreferenceCategory = (PreferenceCategory) preferenceScreen.findPreference("p2p_passive_listen");
+            preferenceScreen.removePreference(P2pListenPreferenceCategory);
+        }
         getActivity().registerReceiver(mReceiver, mIntentFilter);
         if (mWifiP2pManager != null) {
             mWifiP2pManager.requestPeers(mChannel, WifiP2pSettings.this);
@@ -362,7 +406,10 @@ public class WifiP2pSettings extends DashboardFragment
         MenuItem searchMenu = menu.findItem(MENU_ID_SEARCH);
         MenuItem renameMenu = menu.findItem(MENU_ID_RENAME);
         if (mWifiP2pEnabled) {
-            searchMenu.setEnabled(true);
+            if(!mListen)
+                searchMenu.setEnabled(true);
+            else
+                searchMenu.setEnabled(false);
             renameMenu.setEnabled(true);
         } else {
             searchMenu.setEnabled(false);
@@ -575,6 +622,10 @@ public class WifiP2pSettings extends DashboardFragment
         mThisDevicePreferenceController.setEnabled(mWifiP2pEnabled);
         mPersistentCategoryController.setEnabled(mWifiP2pEnabled);
         mPeerCategoryController.setEnabled(mWifiP2pEnabled);
+        if (mListenEnablepref != null && mWifiP2pPassiveListenOn)
+            mListenEnablepref.setEnabled(mWifiP2pEnabled);
+        if (mListenEnablepref != null && mWifiP2pPassiveListenOn)
+            mListenChannelpre.setEnabled(mWifiP2pEnabled);
     }
 
     private void updateSearchMenu(boolean searching) {
@@ -583,8 +634,13 @@ public class WifiP2pSettings extends DashboardFragment
        if (activity != null) activity.invalidateOptionsMenu();
     }
 
+    private void updateMenuAfterSetListenMode() {
+       Activity activity = getActivity();
+       if (activity != null) activity.invalidateOptionsMenu();
+    }
+
     private void startSearch() {
-        if (mWifiP2pManager != null && !mWifiP2pSearching) {
+        if (mWifiP2pManager != null && !mWifiP2pSearching && !mListen) {
             mWifiP2pManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
                 public void onSuccess() {
                 }
@@ -592,6 +648,121 @@ public class WifiP2pSettings extends DashboardFragment
                     if (DBG) Log.d(TAG, " discover fail " + reason);
                 }
             });
+        }
+    }
+
+    private void buildP2plisten(Context context) {
+        if (DBG) Log.d(TAG, "buildP2plisten!");
+        if (mP2pListenCateforyController == null) {
+            if (DBG) Log.d(TAG, "create P2pCategoryPreferenceController");
+            mP2pListenCateforyController = new P2pCategoryPreferenceController(context) {
+                @Override
+                public String getPreferenceKey() {
+                    return "p2p_passive_listen";
+                }
+            };
+        } else {
+            mP2pListenCateforyController.removeAllChildren();
+        }
+    }
+
+    private void buildP2pListenPreferences(Context context) {
+        if (DBG) Log.d(TAG, "buildP2pListenPreferences!");
+        // switch for Listen Mode
+        mListenEnablepref = new SwitchPreference(context) {
+            @Override
+            protected void onClick() {
+                mListen = !mListen;
+                setListenMode(mListen);
+                setChecked(mListen);
+                updateMenuAfterSetListenMode();
+            }
+        };
+        mListenEnablepref.setTitle(R.string.wifi_p2p_listen_mode);
+        mListenEnablepref.setChecked(mListen);
+
+        // Drop down list for choosing listen channel
+        mListenChannelpre = new ListPreference(context);
+        mListenChannelpre.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object value) {
+                int channel = Integer.parseInt((String) value);
+                if (channel != mListenChannel) {
+                    mListenChannel = channel;
+                    getActivity().invalidateOptionsMenu();
+                    setWifiP2pChannels(mListenChannel, 0);
+                }
+                return true;
+            }
+        });
+        String[] lcEntries = {"Auto", "1", "6", "11"};
+        String[] lcValues = {"0", "1", "6", "11"};
+        mListenChannelpre.setKey("listening_channel");
+        mListenChannelpre.setTitle(R.string.wifi_p2p_listen_channel);
+        mListenChannelpre.setEntries(lcEntries);
+        mListenChannelpre.setEntryValues(lcValues);
+        mListenChannelpre.setValue("" + mListenChannel);
+        mListenChannelpre.setSummary("%1$s");
+        if (mP2pListenCateforyController != null) {
+        mP2pListenCateforyController.removeAllChildren();
+        mP2pListenCateforyController.addChild(mListenEnablepref);
+        mP2pListenCateforyController.addChild(mListenChannelpre);
+        }
+    }
+
+    private void setListenMode(final boolean enable) {
+        if (DBG) {
+            Log.d(TAG, "Setting listen mode to: " + enable);
+        }
+        if (mWifiP2pManager != null) {
+            mWifiP2pManager.listen(mChannel, enable, new ActionListener() {
+                @Override
+                public void onSuccess() {
+                    if (DBG) {
+                        Log.d(TAG, "Successfully " + (enable ? "entered" : "exited")
+                                + " listen mode.");
+                    }
+                }
+
+                @Override
+                public void onFailure(int reason) {
+                    Log.e(TAG, "Failed to " + (enable ? "entered" : "exited")
+                            + " listen mode with reason " + reason + ".");
+                }
+            });
+        }
+    }
+
+    private void setWifiP2pChannels(final int lc, final int oc) {
+        if (DBG) {
+            Log.d(TAG, "Setting wifi p2p channel: lc=" + lc + ", oc=" + oc);
+        }
+        int mPassedChannel = lc;
+        if (mWifiP2pManager != null) {
+            if (mWifiManager != null && mWifiManager.isWifiApEnabled() && lc == 0) {
+                WifiConfiguration wifiAPConfig = mWifiManager.getWifiApConfiguration();
+                if (DBG) {
+                    Log.d(TAG, "wifiAPConfig = " + wifiAPConfig);
+                }
+                if (wifiAPConfig.apChannel == 1 || wifiAPConfig.apChannel == 6 || wifiAPConfig.apChannel == 11) {
+                    if (DBG) Log.d(TAG, "Change channel to SAP Channel! wifiAPConfig.apChannel = " + wifiAPConfig.apChannel);
+                    mPassedChannel = wifiAPConfig.apChannel;
+                }
+            }
+            mWifiP2pManager.setWifiP2pChannels(mChannel,
+                    mPassedChannel, oc, new ActionListener() {
+                        @Override
+                        public void onSuccess() {
+                            if (DBG) {
+                                Log.d(TAG, "Successfully set wifi p2p channels.");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int reason) {
+                            Log.e(TAG, "Failed to set wifi p2p channels with reason " + reason + ".");
+                        }
+                    });
         }
     }
 }
