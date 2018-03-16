@@ -3142,7 +3142,7 @@
             android:label="@string/debug_layout"
             android:icon="@drawable/tile_icon_show_layout"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:enabled="false">
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
@@ -3152,7 +3152,7 @@
             android:label="@string/track_frame_time"
             android:icon="@drawable/tile_icon_graphics"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:enabled="false">
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
