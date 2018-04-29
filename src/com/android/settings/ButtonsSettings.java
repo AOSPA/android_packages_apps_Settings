@@ -65,10 +65,6 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private static final String KEY_HOME_DOUBLE_TAP        = "home_key_double_tap";
     private static final String KEY_BACK_LONG_PRESS        = "back_key_long_press";
     private static final String KEY_BACK_DOUBLE_TAP        = "back_key_double_tap";
-    private static final String KEY_MENU_LONG_PRESS        = "menu_key_long_press";
-    private static final String KEY_MENU_DOUBLE_TAP        = "menu_key_double_tap";
-    private static final String KEY_ASSIST_LONG_PRESS      = "assist_key_long_press";
-    private static final String KEY_ASSIST_DOUBLE_TAP      = "assist_key_double_tap";
     private static final String KEY_APP_SWITCH_LONG_PRESS  = "app_switch_key_long_press";
     private static final String KEY_APP_SWITCH_DOUBLE_TAP  = "app_switch_key_double_tap";
     private static final String KEY_CAMERA_LONG_PRESS      = "camera_key_long_press";
@@ -76,8 +72,6 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_CATEGORY_HOME          = "home_key";
     private static final String KEY_CATEGORY_BACK          = "back_key";
-    private static final String KEY_CATEGORY_MENU          = "menu_key";
-    private static final String KEY_CATEGORY_ASSIST        = "assist_key";
     private static final String KEY_CATEGORY_APP_SWITCH    = "app_switch_key";
     private static final String KEY_CATEGORY_CAMERA        = "camera_key";
 
@@ -93,10 +87,6 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private ListPreference mHomeDoubleTapAction;
     private ListPreference mBackLongPressAction;
     private ListPreference mBackDoubleTapAction;
-    private ListPreference mMenuLongPressAction;
-    private ListPreference mMenuDoubleTapAction;
-    private ListPreference mAssistLongPressAction;
-    private ListPreference mAssistDoubleTapAction;
     private ListPreference mAppSwitchLongPressAction;
     private ListPreference mAppSwitchDoubleTapAction;
     private ListPreference mCameraLongPressAction;
@@ -201,42 +191,6 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
                 defaultDoubleTapOnBackKeyBehavior,
                 UserHandle.USER_CURRENT);
         mBackDoubleTapAction = initActionList(KEY_BACK_DOUBLE_TAP, doubleTapOnBackKeyBehavior);
-
-        /* Menu Key Long Press */
-        int defaultLongPressOnMenuKeyBehavior = res.getInteger(
-                com.android.internal.R.integer.config_longPressOnMenuKeyBehavior);
-        int longPressOnMenuKeyBehavior = Settings.System.getIntForUser(resolver,
-                Settings.System.KEY_MENU_LONG_PRESS_ACTION,
-                defaultLongPressOnMenuKeyBehavior,
-                UserHandle.USER_CURRENT);
-        mMenuLongPressAction = initActionList(KEY_MENU_LONG_PRESS, longPressOnMenuKeyBehavior);
-
-        /* Menu Key Double Tap */
-        int defaultDoubleTapOnMenuKeyBehavior = res.getInteger(
-                com.android.internal.R.integer.config_doubleTapOnMenuKeyBehavior);
-        int doubleTapOnMenuKeyBehavior = Settings.System.getIntForUser(resolver,
-                Settings.System.KEY_MENU_DOUBLE_TAP_ACTION,
-                defaultDoubleTapOnMenuKeyBehavior,
-                UserHandle.USER_CURRENT);
-        mMenuDoubleTapAction = initActionList(KEY_MENU_DOUBLE_TAP, doubleTapOnMenuKeyBehavior);
-
-        /* Assist Key Long Press */
-        int defaultLongPressOnAssistKeyBehavior = res.getInteger(
-                com.android.internal.R.integer.config_longPressOnAssistKeyBehavior);
-        int longPressOnAssistKeyBehavior = Settings.System.getIntForUser(resolver,
-                Settings.System.KEY_ASSIST_LONG_PRESS_ACTION,
-                defaultLongPressOnAssistKeyBehavior,
-                UserHandle.USER_CURRENT);
-        mAssistLongPressAction = initActionList(KEY_ASSIST_LONG_PRESS, longPressOnAssistKeyBehavior);
-
-        /* Assist Key Double Tap */
-        int defaultDoubleTapOnAssistKeyBehavior = res.getInteger(
-                com.android.internal.R.integer.config_doubleTapOnAssistKeyBehavior);
-        int doubleTapOnAssistKeyBehavior = Settings.System.getIntForUser(resolver,
-                Settings.System.KEY_ASSIST_DOUBLE_TAP_ACTION,
-                defaultDoubleTapOnAssistKeyBehavior,
-                UserHandle.USER_CURRENT);
-        mAssistDoubleTapAction = initActionList(KEY_ASSIST_DOUBLE_TAP, doubleTapOnAssistKeyBehavior);
 
         /* AppSwitch Key Long Press */
         int defaultLongPressOnAppSwitchKeyBehavior = res.getInteger(
@@ -358,14 +312,6 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             return Settings.System.KEY_BACK_LONG_PRESS_ACTION;
         } else if (preference == mBackDoubleTapAction) {
             return Settings.System.KEY_BACK_DOUBLE_TAP_ACTION;
-        } else if (preference == mMenuLongPressAction) {
-            return Settings.System.KEY_MENU_LONG_PRESS_ACTION;
-        } else if (preference == mMenuDoubleTapAction) {
-            return Settings.System.KEY_MENU_DOUBLE_TAP_ACTION;
-        } else if (preference == mAssistLongPressAction) {
-            return Settings.System.KEY_ASSIST_LONG_PRESS_ACTION;
-        } else if (preference == mAssistDoubleTapAction) {
-            return Settings.System.KEY_ASSIST_DOUBLE_TAP_ACTION;
         } else if (preference == mAppSwitchLongPressAction) {
             return Settings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION;
         } else if (preference == mAppSwitchDoubleTapAction) {
@@ -388,9 +334,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
                 Settings.System.NAVIGATION_BAR_ENABLED, showNavigationBar ? 1 : 0, UserHandle.USER_CURRENT) != 0;
 
         final boolean hasHome = (mDeviceHardwareKeys & KEY_MASK_HOME) != 0 || navigationBarEnabled;
-        final boolean hasMenu = (mDeviceHardwareKeys & KEY_MASK_MENU) != 0;
         final boolean hasBack = (mDeviceHardwareKeys & KEY_MASK_BACK) != 0 || navigationBarEnabled;
-        final boolean hasAssist = (mDeviceHardwareKeys & KEY_MASK_ASSIST) != 0;
         final boolean hasAppSwitch = (mDeviceHardwareKeys & KEY_MASK_APP_SWITCH) != 0 || navigationBarEnabled;
         final boolean hasCamera = (mDeviceHardwareKeys & KEY_MASK_CAMERA) != 0;
 
@@ -430,12 +374,6 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
         final PreferenceCategory backCategory =
                 (PreferenceCategory) prefScreen.findPreference(KEY_CATEGORY_BACK);
 
-        final PreferenceCategory menuCategory =
-                (PreferenceCategory) prefScreen.findPreference(KEY_CATEGORY_MENU);
-
-        final PreferenceCategory assistCategory =
-                (PreferenceCategory) prefScreen.findPreference(KEY_CATEGORY_ASSIST);
-
         final PreferenceCategory appSwitchCategory =
                 (PreferenceCategory) prefScreen.findPreference(KEY_CATEGORY_APP_SWITCH);
 
@@ -454,14 +392,6 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
         if (!hasBack && backCategory != null) {
             prefScreen.removePreference(backCategory);
-        }
-
-        if (!hasMenu && menuCategory != null) {
-            prefScreen.removePreference(menuCategory);
-        }
-
-        if (!hasAssist && assistCategory != null) {
-            prefScreen.removePreference(assistCategory);
         }
 
         if (!hasAppSwitch && appSwitchCategory != null) {
