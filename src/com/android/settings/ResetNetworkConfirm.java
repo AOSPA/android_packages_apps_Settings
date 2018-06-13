@@ -25,6 +25,10 @@ import android.net.NetworkPolicyManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.telephony.SubscriptionManager;
@@ -55,6 +59,12 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
  * This is the confirmation screen.
  */
 public class ResetNetworkConfirm extends OptionsMenuFragment {
+
+    private static final int EVENT_RESTORE_DEFAULTAPN_START = 1;
+    private static final int EVENT_RESTORE_DEFAULTAPN_COMPLETE = 2;
+    private RestoreApnUiHandler mRestoreApnUiHandler;
+    private RestoreApnProcessHandler mRestoreApnProcessHandler;
+    private HandlerThread mRestoreDefaultApnThread;
 
     private View mContentView;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
@@ -117,24 +127,72 @@ public class ResetNetworkConfirm extends OptionsMenuFragment {
             ImsManager.getInstance(context,
                      SubscriptionManager.getPhoneId(mSubId)).factoryResetSlot();
             restoreDefaultApn(context);
-
-            Toast.makeText(context, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
-                    .show();
         }
     };
+
+    private class RestoreApnUiHandler extends Handler {
+        private Context mContext;
+        public RestoreApnUiHandler(Context context) {
+            super();
+            mContext = context;
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case EVENT_RESTORE_DEFAULTAPN_COMPLETE:
+                    Toast.makeText(mContext, R.string.reset_network_complete_toast,
+                            Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    }
+    private class RestoreApnProcessHandler extends Handler {
+        private Context mContext;
+        private Handler mRestoreApnUiHandler;
+
+        public RestoreApnProcessHandler(Looper looper, Context context,
+                                        RestoreApnUiHandler restoreApnUiHandler) {
+            super(looper);
+            mContext = context;
+            this.mRestoreApnUiHandler = restoreApnUiHandler;
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case EVENT_RESTORE_DEFAULTAPN_START:
+                    Uri uri = Uri.parse(ApnSettings.RESTORE_CARRIERS_URI);
+
+                    if (SubscriptionManager.isUsableSubIdValue(mSubId)) {
+                        uri = Uri.withAppendedPath(uri, "subId/" + String.valueOf(mSubId));
+                    }
+
+                    ContentResolver resolver = mContext.getContentResolver();
+                    resolver.delete(uri, null, null);
+                    // send to UI change
+                    mRestoreApnUiHandler.sendEmptyMessage(EVENT_RESTORE_DEFAULTAPN_COMPLETE);
+                    break;
+            }
+        }
+    }
 
     /**
      * Restore APN settings to default.
      */
     private void restoreDefaultApn(Context context) {
-        Uri uri = Uri.parse(ApnSettings.RESTORE_CARRIERS_URI);
-
-        if (SubscriptionManager.isUsableSubIdValue(mSubId)) {
-            uri = Uri.withAppendedPath(uri, "subId/" + String.valueOf(mSubId));
+        if (mRestoreApnUiHandler == null) {
+            mRestoreApnUiHandler = new RestoreApnUiHandler(context);
         }
-
-        ContentResolver resolver = context.getContentResolver();
-        resolver.delete(uri, null, null);
+        if (mRestoreApnProcessHandler == null ||
+                mRestoreDefaultApnThread == null) {
+            mRestoreDefaultApnThread = new HandlerThread(
+                    "Restore defautl APN Handler");
+            mRestoreDefaultApnThread.start();
+            mRestoreApnProcessHandler = new RestoreApnProcessHandler(
+                    mRestoreDefaultApnThread.getLooper(), context, mRestoreApnUiHandler);
+        }
+        mRestoreApnProcessHandler.sendEmptyMessage(EVENT_RESTORE_DEFAULTAPN_START);
     }
 
     /**
@@ -178,5 +236,13 @@ public class ResetNetworkConfirm extends OptionsMenuFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.RESET_NETWORK_CONFIRM;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mRestoreDefaultApnThread != null) {
+            mRestoreDefaultApnThread.quit();
+        }
     }
 }
