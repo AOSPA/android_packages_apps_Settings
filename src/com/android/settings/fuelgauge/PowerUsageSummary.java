@@ -102,6 +102,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
     private static final String KEY_AMBIENT_DISPLAY = "ambient_display_battery";
     private static final String KEY_BATTERY_SAVER_SUMMARY = "battery_saver_summary";
     private static final String KEY_HIGH_USAGE = "high_usage";
+    private static final String KEY_BATTERY_PERCENTAGE_SUMMARY = "battery_percentage_summary_pa";
 
     @VisibleForTesting
     static final int ANOMALY_LOADER = 1;
@@ -316,7 +317,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
         controllers.add(new AutoBrightnessPreferenceController(context, KEY_AUTO_BRIGHTNESS));
         controllers.add(new TimeoutPreferenceController(context, KEY_SCREEN_TIMEOUT));
         controllers.add(new BatterySaverController(context, getLifecycle()));
-        controllers.add(new BatteryPercentagePreferenceController(context));
+        //controllers.add(new BatteryPercentagePreferenceController(context));
+        controllers.add(new BatteryPercentageController(context));
         controllers.add(new AmbientDisplayPreferenceController(
                 context,
                 new AmbientDisplayConfiguration(context),
@@ -925,6 +927,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                     niks.add(KEY_AUTO_BRIGHTNESS);
                     niks.add(KEY_SCREEN_TIMEOUT);
                     niks.add(KEY_AMBIENT_DISPLAY);
+                    niks.add(KEY_BATTERY_PERCENTAGE_SUMMARY);
                     return niks;
                 }
             };
