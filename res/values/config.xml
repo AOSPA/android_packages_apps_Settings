@@ -38,9 +38,6 @@
     <!-- When true enable color temperature setting. -->
     <bool name="config_enableColorTemperature">false</bool>
 
-    <!-- Whether to show Connectivity Monitor switch in Developer Options -->
-    <bool name="config_show_connectivity_monitor">false</bool>
-
     <!-- Whether to show Camera laser sensor switch in Developer Options -->
     <bool name="config_show_camera_laser_sensor">false</bool>
 
@@ -131,4 +128,12 @@
     <!-- List of a11y components on the device allowed to be enabled by Settings Slices -->
     <string-array name="config_settings_slices_accessibility_components" translatable="false"/>
 
+    <!-- Whether or not to show the night light suggestion. -->
+    <bool name="config_night_light_suggestion_enabled">true</bool>
+
+    <!-- Whether or not the device is capable of multiple levels of vibration intensity.
+         Note that this is different from whether it can control the vibration amplitude as some
+         devices will be able to vary their amplitude but do not possess enough dynamic range to
+         have distinct intensity levels -->
+    <bool name="config_vibration_supports_multiple_intensities">false</bool>
 </resources>
