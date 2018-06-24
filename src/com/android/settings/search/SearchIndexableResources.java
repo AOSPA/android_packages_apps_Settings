@@ -52,6 +52,7 @@ import com.android.settings.display.AmbientDisplaySettings;
 import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.dream.DreamSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
+import com.android.settings.fuelgauge.BatteryPercentageSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageAdvanced;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -216,6 +217,8 @@ public final class SearchIndexableResources {
                 AutomaticStorageManagerSettings.class,
                 NO_DATA_RES_ID,
                 R.drawable.ic_settings_storage);
+        addIndex(BatteryPercentageSettings.class,
+                R.xml.battery_percentage_settings, R.drawable.ic_settings_battery);
     }
 
     private SearchIndexableResources() {
