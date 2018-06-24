@@ -192,4 +192,6 @@ public class Settings extends SettingsActivity {
     public static class SystemDashboardActivity extends SettingsActivity {}
     public static class SupportDashboardActivity extends SettingsActivity {}
 
+    // Aospa additions
+    public static class BatteryPercentageSettingsActivity extends SettingsActivity { /* empty */ }
 }
