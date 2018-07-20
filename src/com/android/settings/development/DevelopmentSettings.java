@@ -193,6 +193,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String WIFI_VERBOSE_LOGGING_KEY = "wifi_verbose_logging";
     private static final String WIFI_AGGRESSIVE_HANDOVER_KEY = "wifi_aggressive_handover";
     private static final String WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY = "wifi_allow_scan_with_traffic";
+    private static final String WIFI_P2P_ALLOW_PASSIVE_LISTEN_KEY = "wifi_p2p_allow_passive_listen";
     private static final String USB_CONFIGURATION_KEY = "select_usb_configuration";
     private static final String MOBILE_DATA_ALWAYS_ON = "mobile_data_always_on";
     private static final String TETHERING_HARDWARE_OFFLOAD = "tethering_hardware_offload";
@@ -290,6 +291,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mWifiDisplayCertification;
     private SwitchPreference mWifiVerboseLogging;
     private SwitchPreference mWifiAggressiveHandover;
+    private SwitchPreference mWifiP2pAllowPassiveListen;
     private SwitchPreference mMobileDataAlwaysOn;
     private SwitchPreference mTetheringHardwareOffload;
     private SwitchPreference mBluetoothShowDevicesWithoutNames;
@@ -496,6 +498,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mWifiVerboseLogging = findAndInitSwitchPref(WIFI_VERBOSE_LOGGING_KEY);
         mWifiAggressiveHandover = findAndInitSwitchPref(WIFI_AGGRESSIVE_HANDOVER_KEY);
         mWifiAllowScansWithTraffic = findAndInitSwitchPref(WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY);
+        mWifiP2pAllowPassiveListen = findAndInitSwitchPref(WIFI_P2P_ALLOW_PASSIVE_LISTEN_KEY);
         mMobileDataAlwaysOn = findAndInitSwitchPref(MOBILE_DATA_ALWAYS_ON);
         mTetheringHardwareOffload = findAndInitSwitchPref(TETHERING_HARDWARE_OFFLOAD);
         mLogdSize = addListPreference(SELECT_LOGD_SIZE_KEY);
@@ -849,6 +852,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateWifiVerboseLoggingOptions();
         updateWifiAggressiveHandoverOptions();
         updateWifiAllowScansWithTrafficOptions();
+        updateWifiP2pPassiveListenOptions();
         updateMobileDataAlwaysOnOptions();
         updateTetheringHardwareOffloadOptions();
         updateSimulateColorSpace();
@@ -1515,6 +1519,18 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void writeWifiAllowScansWithTrafficOptions() {
         mWifiManager.setAllowScansWithTraffic(mWifiAllowScansWithTraffic.isChecked() ? 1 : 0);
+    }
+
+    private void updateWifiP2pPassiveListenOptions() {
+        updateSwitchPreference(mWifiP2pAllowPassiveListen, Settings.Global.getInt(
+                getActivity().getContentResolver(),
+                Settings.Global.WIFI_P2P_PASSIVE_LISTEN_ON, 0) != 0);
+    }
+
+    private void writeWifiP2pPassiveListenOptions() {
+        Settings.Global.putInt(getActivity().getContentResolver(),
+                Settings.Global.WIFI_P2P_PASSIVE_LISTEN_ON,
+                mWifiP2pAllowPassiveListen.isChecked() ? 1 : 0);
     }
 
     private void updateBluetoothShowDevicesWithoutUserFriendlyNameOptions() {
@@ -2582,6 +2598,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeWifiAggressiveHandoverOptions();
         } else if (preference == mWifiAllowScansWithTraffic) {
             writeWifiAllowScansWithTrafficOptions();
+        } else if (preference == mWifiP2pAllowPassiveListen) {
+            writeWifiP2pPassiveListenOptions();
         } else if (preference == mMobileDataAlwaysOn) {
             writeMobileDataAlwaysOnOptions();
         } else if (preference == mTetheringHardwareOffload) {

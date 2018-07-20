@@ -19,6 +19,9 @@
         android:key="p2p_this_device"
         android:selectable="false" />
     <PreferenceCategory
+        android:key="p2p_passive_listen"
+        android:title="@string/wifi_p2p_passive_listen" />
+    <PreferenceCategory
         android:key="p2p_peer_devices"
         android:title="@string/wifi_p2p_peer_devices" />
     <PreferenceCategory

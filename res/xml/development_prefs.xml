@@ -198,6 +198,11 @@
             android:summary="@string/wifi_allow_scan_with_traffic_summary"/>
 
         <SwitchPreference
+            android:key="wifi_p2p_allow_passive_listen"
+            android:title="@string/wifi_p2p_allow_passive_listen"
+            android:summary="@string/wifi_p2p_allow_passive_listen_summary"/>
+
+        <SwitchPreference
             android:key="mobile_data_always_on"
             android:title="@string/mobile_data_always_on"
             android:summary="@string/mobile_data_always_on_summary"/>
