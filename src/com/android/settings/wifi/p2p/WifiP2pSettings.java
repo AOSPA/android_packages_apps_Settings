@@ -371,7 +371,9 @@ public class WifiP2pSettings extends DashboardFragment
             if (DBG) Log.d(TAG, "show p2p listen list!");
         } else {
             PreferenceCategory P2pListenPreferenceCategory = (PreferenceCategory) preferenceScreen.findPreference("p2p_passive_listen");
-            preferenceScreen.removePreference(P2pListenPreferenceCategory);
+            if (P2pListenPreferenceCategory != null) {
+                preferenceScreen.removePreference(P2pListenPreferenceCategory);
+            }
         }
         getActivity().registerReceiver(mReceiver, mIntentFilter);
         if (mWifiP2pManager != null) {
