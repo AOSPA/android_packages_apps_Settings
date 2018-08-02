@@ -17,15 +17,16 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import android.support.annotation.StringRes;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.R;
+
+import androidx.annotation.StringRes;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class ActionButtonPreference extends Preference {
 

@@ -25,15 +25,15 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Objects;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 
 /**
  * Parent class for preferences appearing on notification setting pages at the app,
@@ -138,11 +138,11 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
 
     protected boolean isChannelBlockable() {
         if (mChannel != null && mAppRow != null) {
-            if (!mAppRow.systemApp) {
-                return true;
+            if (!isChannelConfigurable()) {
+                return mChannel.getImportance() == IMPORTANCE_NONE;
             }
 
-            return mChannel.isBlockableSystem()
+            return mChannel.isBlockableSystem() || !mAppRow.systemApp
                     || mChannel.getImportance() == IMPORTANCE_NONE;
         }
         return false;

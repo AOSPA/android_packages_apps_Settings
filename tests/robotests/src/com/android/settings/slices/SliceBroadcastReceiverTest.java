@@ -26,6 +26,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.slice.Slice;
 import android.content.ContentResolver;
@@ -40,11 +41,11 @@ import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.FakeIndexProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.FakeIndexProvider;
 import com.android.settings.testutils.FakeSliderController;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -84,6 +85,8 @@ public class SliceBroadcastReceiverTest {
         mSearchFeatureProvider = new SearchFeatureProviderImpl();
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.searchFeatureProvider = mSearchFeatureProvider;
+        when(mFakeFeatureFactory.slicesFeatureProvider.getCustomSliceManager(any()))
+                .thenReturn(new CustomSliceManager(mContext));
         mLoggingNameArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
         mLoggingValueArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
     }
@@ -159,9 +162,13 @@ public class SliceBroadcastReceiverTest {
 
         assertThat(fakeToggleController.isChecked()).isFalse();
 
-        final Uri expectedUri = SliceBuilderUtils.getUri(
-                SettingsSlicesContract.PATH_SETTING_ACTION + "/" + key, false);
-        verify(resolver).notifyChange(eq(expectedUri), eq(null));
+        final Uri expectedUri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(key)
+                .build();
+        verify(resolver).notifyChange(expectedUri, null);
     }
 
     @Test

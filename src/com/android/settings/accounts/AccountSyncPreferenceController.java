@@ -24,9 +24,6 @@ import android.content.Context;
 import android.content.SyncAdapterType;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -34,6 +31,10 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class AccountSyncPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, AuthenticatorHelper.OnAccountsUpdateListener {
@@ -66,7 +67,7 @@ public class AccountSyncPreferenceController extends AbstractPreferenceControlle
                 .setDestination(AccountSyncSettings.class.getName())
                 .setArguments(args)
                 .setSourceMetricsCategory( MetricsProto.MetricsEvent.ACCOUNT)
-                .setTitle( R.string.account_sync_title)
+                .setTitleRes( R.string.account_sync_title)
                 .launch();
 
         return true;

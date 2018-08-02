@@ -16,7 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_CODE_DEBUG_APP;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
+        .REQUEST_CODE_DEBUG_APP;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -27,13 +28,11 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +41,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SelectDebugAppPreferenceControllerTest {
@@ -53,7 +55,7 @@ public class SelectDebugAppPreferenceControllerTest {
     @Mock
     private DevelopmentSettingsDashboardFragment mFragment;
     @Mock
-    private PackageManagerWrapper mPackageManagerWrapper;
+    private PackageManager mPackageManager;
 
     private Context mContext;
     private SelectDebugAppPreferenceController mController;
@@ -64,7 +66,7 @@ public class SelectDebugAppPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = spy(new SelectDebugAppPreferenceController(mContext, mFragment));
         ReflectionHelpers
-            .setField(mController, "mPackageManager" /* field name */, mPackageManagerWrapper);
+            .setField(mController, "mPackageManager" /* field name */, mPackageManager);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
             .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);

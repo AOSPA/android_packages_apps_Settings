@@ -63,8 +63,7 @@ public class SearchIndexableResourcesTest {
         final int beforeCount =
                 mSearchProvider.getSearchIndexableResources().getProviderValues().size();
 
-        ((SearchIndexableResourcesImpl) mSearchProvider.getSearchIndexableResources())
-                .addIndex(String.class);
+        mSearchProvider.getSearchIndexableResources().addIndex(String.class);
 
         assertThat(mSearchProvider.getSearchIndexableResources().getProviderValues())
                 .contains(String.class);
@@ -82,8 +81,7 @@ public class SearchIndexableResourcesTest {
     @Test
     public void testNonIndexableKeys_GetsKeyFromProvider() {
         mSearchProvider.getSearchIndexableResources().getProviderValues().clear();
-        ((SearchIndexableResourcesImpl) mSearchProvider.getSearchIndexableResources())
-                .addIndex(FakeIndexProvider.class);
+        mSearchProvider.getSearchIndexableResources().addIndex(FakeIndexProvider.class);
 
         SettingsSearchIndexablesProvider provider = spy(new SettingsSearchIndexablesProvider());
 

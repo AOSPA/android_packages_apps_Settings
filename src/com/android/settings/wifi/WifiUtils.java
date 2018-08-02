@@ -26,7 +26,7 @@ import android.net.wifi.WifiConfiguration;
 import android.provider.Settings;
 import android.text.TextUtils;
 
-import com.android.settingslib.wrapper.PackageManagerWrapper;
+import java.nio.charset.StandardCharsets;
 
 public class WifiUtils {
 
@@ -40,7 +40,7 @@ public class WifiUtils {
         if (TextUtils.isEmpty(ssid)) {
             return false;
         }
-        return ssid.length() > SSID_ASCII_MAX_LENGTH;
+        return ssid.getBytes(StandardCharsets.UTF_8).length > SSID_ASCII_MAX_LENGTH;
     }
 
     public static boolean isSSIDTooShort(String ssid) {
@@ -61,8 +61,9 @@ public class WifiUtils {
 
     /**
      * This method is a stripped and negated version of WifiConfigStore.canModifyNetwork.
+     *
      * @param context Context of caller
-     * @param config The WiFi config.
+     * @param config  The WiFi config.
      * @return true if Settings cannot modify the config due to lockDown.
      */
     public static boolean isNetworkLockedDown(Context context, WifiConfiguration config) {
@@ -72,7 +73,7 @@ public class WifiUtils {
 
         final DevicePolicyManager dpm =
                 (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-        final PackageManagerWrapper pm = new PackageManagerWrapper(context.getPackageManager());
+        final PackageManager pm = context.getPackageManager();
 
         // Check if device has DPM capability. If it has and dpm is still null, then we
         // treat this case with suspicion and bail out.

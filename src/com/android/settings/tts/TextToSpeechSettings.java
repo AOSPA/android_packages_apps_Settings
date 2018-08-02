@@ -31,8 +31,6 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.EngineInfo;
 import android.speech.tts.TtsEngines;
 import android.speech.tts.UtteranceProgressListener;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
@@ -46,6 +44,7 @@ import com.android.settings.search.Indexable;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,9 +57,13 @@ import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.Set;
 
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+
+@SearchIndexable
 public class TextToSpeechSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener,
-        GearPreference.OnGearClickListener, Indexable {
+        GearPreference.OnGearClickListener {
 
     private static final String STATE_KEY_LOCALE_ENTRIES = "locale_entries";
     private static final String STATE_KEY_LOCALE_ENTRY_VALUES = "locale_entry_values";

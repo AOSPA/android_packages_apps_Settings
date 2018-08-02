@@ -37,7 +37,6 @@ import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils;
@@ -49,6 +48,8 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.shadows.ShadowApplication;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class NotificationPreferenceControllerTest {
@@ -255,6 +256,34 @@ public class NotificationPreferenceControllerTest {
         appRow.systemApp = true;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isBlockableSystem()).thenReturn(false);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
+
+        mController.onResume(appRow, channel, null, null);
+        assertTrue(mController.isChannelBlockable());
+    }
+
+    @Test
+    public void testIsChannelBlockable_notConfigurable() {
+        String sameId = "apples";
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.systemApp = false;
+        appRow.lockedChannelId = sameId;
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getId()).thenReturn(sameId);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
+
+        mController.onResume(appRow, channel, null, null);
+        assertFalse(mController.isChannelBlockable());
+    }
+
+    @Test
+    public void testIsChannelBlockable_notConfigurableButBlocked() {
+        String sameId = "apples";
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.systemApp = false;
+        appRow.lockedChannelId = sameId;
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getId()).thenReturn(sameId);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
 
         mController.onResume(appRow, channel, null, null);

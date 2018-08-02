@@ -22,9 +22,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v7.preference.Preference;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,9 +31,13 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupEncryptionInterstitial;
 import com.android.settings.SetupWizardUtils;
-import com.android.settings.fingerprint.SetupFingerprintEnrollFindSensor;
+import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollFindSensor;
 import com.android.settings.utils.SettingsDividerItemDecoration;
 import com.android.setupwizardlib.GlifPreferenceLayout;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Setup Wizard's version of ChooseLockGeneric screen. It inherits the logic and basic structure
@@ -55,7 +56,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
     }
 
     @Override
-    /* package */ Class<? extends PreferenceFragment> getFragmentClass() {
+    /* package */ Class<? extends PreferenceFragmentCompat> getFragmentClass() {
         return SetupChooseLockGenericFragment.class;
     }
 
@@ -101,8 +102,8 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
         @Override
         protected void addHeaderView() {
-            if (mForFingerprint) {
-                setHeaderView(R.layout.setup_choose_lock_generic_fingerprint_header);
+            if (mForFingerprint || mForFace) {
+                setHeaderView(R.layout.setup_choose_lock_generic_biometrics_header);
             } else {
                 setHeaderView(R.layout.setup_choose_lock_generic_header);
             }
@@ -170,9 +171,9 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         }
 
         @Override
-        protected Intent getLockPasswordIntent(int quality, int minLength, int maxLength) {
+        protected Intent getLockPasswordIntent(int quality) {
             final Intent intent = SetupChooseLockPassword.modifyIntentForSetup(
-                    getContext(), super.getLockPasswordIntent(quality, minLength, maxLength));
+                    getContext(), super.getLockPasswordIntent(quality));
             SetupWizardUtils.copySetupExtras(getActivity().getIntent(), intent);
             return intent;
         }

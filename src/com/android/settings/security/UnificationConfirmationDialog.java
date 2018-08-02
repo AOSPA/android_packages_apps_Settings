@@ -18,13 +18,14 @@ package com.android.settings.security;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import androidx.fragment.app.FragmentManager;
 
 public class UnificationConfirmationDialog extends InstrumentedDialogFragment {
 
@@ -59,15 +60,8 @@ public class UnificationConfirmationDialog extends InstrumentedDialogFragment {
                 .setPositiveButton(
                         compliant ? R.string.lock_settings_profile_unification_dialog_confirm
                                 : R.string
-                                        .lock_settings_profile_unification_dialog_uncompliant_confirm,
-                        (dialog, whichButton) -> {
-                            if (compliant) {
-                                parentFragment.launchConfirmDeviceLockForUnification();
-                            } else {
-                                parentFragment.unifyUncompliantLocks();
-                            }
-                        }
-                )
+                                      .lock_settings_profile_unification_dialog_uncompliant_confirm,
+                        (dialog, whichButton) -> parentFragment.startUnification())
                 .setNegativeButton(R.string.cancel, null)
                 .create();
     }

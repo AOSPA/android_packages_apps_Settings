@@ -30,7 +30,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
-import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
@@ -43,7 +42,6 @@ import android.text.TextUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.wrapper.LocationManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,10 +57,12 @@ import org.robolectric.annotation.Implements;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.lifecycle.LifecycleOwner;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
     ShadowSecureSettings.class,
-    LocationEnablerTest.ShadowLocationManagerWrapper.class})
+    LocationEnablerTest.ShadowLocationManager.class})
 public class LocationEnablerTest {
 
     @Mock
@@ -272,8 +272,8 @@ public class LocationEnablerTest {
         return intent -> TextUtils.equals(expected, intent.getAction());
     }
 
-    @Implements(value = LocationManagerWrapper.class)
-    public static class ShadowLocationManagerWrapper {
+    @Implements(value = LocationManager.class)
+    public static class ShadowLocationManager {
 
         @Implementation
         public void setLocationEnabledForUser(boolean enabled, UserHandle userHandle) {

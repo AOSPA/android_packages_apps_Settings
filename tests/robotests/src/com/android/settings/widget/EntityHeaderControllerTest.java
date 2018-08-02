@@ -26,8 +26,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -36,7 +34,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.os.UserHandle;
-import android.support.v7.preference.Preference;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -58,13 +55,17 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class EntityHeaderControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private Fragment mFragment;
 
@@ -135,7 +136,7 @@ public class EntityHeaderControllerTest {
     }
 
     @Test
-    public void bindButton_hasEditRuleNameClickListener_shouldShowButton() {
+    public void bindButton_hasEditClickListener_shouldShowButton() {
         final ResolveInfo info = new ResolveInfo();
         info.activityInfo = new ActivityInfo();
         info.activityInfo.packageName = "123";
@@ -145,13 +146,13 @@ public class EntityHeaderControllerTest {
         when(mActivity.getApplicationContext()).thenReturn(mContext);
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
-        mController.setEditZenRuleNameListener(new View.OnClickListener() {
+        mController.setEditListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // do nothing
             }
         });
         mController.setButtonActions(
-                EntityHeaderController.ActionType.ACTION_DND_RULE_PREFERENCE,
+                EntityHeaderController.ActionType.ACTION_EDIT_PREFERENCE,
                 EntityHeaderController.ActionType.ACTION_NONE);
         mController.done(mActivity);
 
@@ -163,7 +164,7 @@ public class EntityHeaderControllerTest {
     }
 
     @Test
-    public void bindButton_noEditRuleNameClickListener_shouldNotShowButton() {
+    public void bindButton_noEditClickListener_shouldNotShowButton() {
         final ResolveInfo info = new ResolveInfo();
         info.activityInfo = new ActivityInfo();
         info.activityInfo.packageName = "123";
@@ -173,7 +174,7 @@ public class EntityHeaderControllerTest {
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
         mController.setButtonActions(
-                EntityHeaderController.ActionType.ACTION_DND_RULE_PREFERENCE,
+                EntityHeaderController.ActionType.ACTION_EDIT_PREFERENCE,
                 EntityHeaderController.ActionType.ACTION_NONE);
         mController.done(mActivity);
 
@@ -186,7 +187,7 @@ public class EntityHeaderControllerTest {
     public void bindButton_noAppInfo_shouldNotAttachClickListener() {
         final View appLinks =
                 mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
-        final Activity activity = mock(Activity.class);
+        final FragmentActivity activity = mock(FragmentActivity.class);
         when(mFragment.getActivity()).thenReturn(activity);
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
@@ -211,7 +212,7 @@ public class EntityHeaderControllerTest {
     public void bindButton_hasAppInfo_shouldAttachClickListener() {
         final View appLinks =
                 mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
-        final Activity activity = mock(Activity.class);
+        final FragmentActivity activity = mock(FragmentActivity.class);
         when(mFragment.getActivity()).thenReturn(activity);
         when(mContext.getString(eq(R.string.application_info_label))).thenReturn("App Info");
 
@@ -233,7 +234,7 @@ public class EntityHeaderControllerTest {
     public void iconContentDescription_shouldWorkWithSetIcon() {
         final View view =
                 mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
-        when(mFragment.getActivity()).thenReturn(mock(Activity.class));
+        when(mFragment.getActivity()).thenReturn(mock(FragmentActivity.class));
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
         String description = "Fake Description";
         mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add));
@@ -247,7 +248,7 @@ public class EntityHeaderControllerTest {
     public void iconContentDescription_shouldWorkWithoutSetIcon() {
         final View view = mLayoutInflater
                 .inflate(R.layout.settings_entity_header, null /* root */);
-        when(mFragment.getActivity()).thenReturn(mock(Activity.class));
+        when(mFragment.getActivity()).thenReturn(mock(FragmentActivity.class));
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
         String description = "Fake Description";
         mController.setIconContentDescription(description);

@@ -39,9 +39,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -65,6 +62,7 @@ import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.AccessPointPreference;
@@ -74,6 +72,10 @@ import com.android.settingslib.wifi.WifiTrackerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+
 /**
  * Two types of UI are provided here.
  *
@@ -82,6 +84,7 @@ import java.util.List;
  * The second is for Setup Wizard, with a simplified interface that hides the action bar
  * and menus.
  */
+@SearchIndexable
 public class WifiSettings extends RestrictedSettingsFragment
         implements Indexable, WifiTracker.WifiListener, AccessPointListener,
         WifiDialog.WifiDialogListener {
@@ -240,7 +243,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         super.onActivityCreated(savedInstanceState);
 
         mWifiTracker = WifiTrackerFactory.create(
-                getActivity(), this, getLifecycle(), true, true);
+                getActivity(), this, getSettingsLifecycle(), true, true);
         mWifiManager = mWifiTracker.getManager();
 
         final Activity activity = getActivity();
@@ -912,7 +915,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private void launchNetworkDetailsFragment(ConnectedAccessPointPreference pref) {
         new SubSettingLauncher(getContext())
-                .setTitle(R.string.pref_title_network_details)
+                .setTitleRes(R.string.pref_title_network_details)
                 .setDestination(WifiNetworkDetailsFragment.class.getName())
                 .setArguments(pref.getExtras())
                 .setSourceMetricsCategory(getMetricsCategory())
@@ -971,7 +974,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         final LinkifyUtils.OnClickListener clickListener =
                 () -> new SubSettingLauncher(getContext())
                         .setDestination(ScanningSettings.class.getName())
-                        .setTitle(R.string.location_scanning_screen_title)
+                        .setTitleRes(R.string.location_scanning_screen_title)
                         .setSourceMetricsCategory(getMetricsCategory())
                         .launch();
         mStatusMessagePreference.setText(title, description, clickListener);

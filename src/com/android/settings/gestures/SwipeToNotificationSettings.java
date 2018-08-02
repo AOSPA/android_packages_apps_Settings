@@ -26,10 +26,12 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class SwipeToNotificationSettings extends DashboardFragment {
 
     private static final String TAG = "SwipeToNotifSettings";
@@ -69,6 +71,11 @@ public class SwipeToNotificationSettings extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.swipe_to_notification_settings;
                     return Arrays.asList(sir);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return SwipeToNotificationPreferenceController.isAvailable(context);
                 }
             };
 }

@@ -17,12 +17,13 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.view.View;
 
 import com.android.settings.R;
+
+import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreference;
 
 public class AppSwitchPreference extends SwitchPreference {
 

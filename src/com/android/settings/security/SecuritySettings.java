@@ -27,24 +27,25 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.face.FaceStatusPreferenceController;
+import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPreferenceController;
+import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
-import com.android.settings.enterprise.ManageDeviceAdminPreferenceController;
-import com.android.settings.fingerprint.FingerprintProfileStatusPreferenceController;
-import com.android.settings.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.location.LocationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.security.screenlock.LockScreenPreferenceController;
 import com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public class SecuritySettings extends DashboardFragment {
 
     private static final String TAG = "SecuritySettings";
@@ -78,7 +79,7 @@ public class SecuritySettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(), this /* host*/);
+        return buildPreferenceControllers(context, getSettingsLifecycle(), this /* host*/);
     }
 
     /**
@@ -97,13 +98,8 @@ public class SecuritySettings extends DashboardFragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    void launchConfirmDeviceLockForUnification() {
-        use(LockUnificationPreferenceController.class)
-                .launchConfirmDeviceLockForUnification();
-    }
-
-    void unifyUncompliantLocks() {
-        use(LockUnificationPreferenceController.class).unifyUncompliantLocks();
+    void startUnification() {
+        use(LockUnificationPreferenceController.class).startUnification();
     }
 
     void updateUnificationPreference() {
@@ -114,7 +110,6 @@ public class SecuritySettings extends DashboardFragment {
             Lifecycle lifecycle, SecuritySettings host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new LocationPreferenceController(context, lifecycle));
-        controllers.add(new ManageDeviceAdminPreferenceController(context));
         controllers.add(new EnterprisePrivacyPreferenceController(context));
         controllers.add(new ManageTrustAgentsPreferenceController(context));
         controllers.add(new ScreenPinningPreferenceController(context));
@@ -125,8 +120,8 @@ public class SecuritySettings extends DashboardFragment {
         controllers.add(new TrustAgentListPreferenceController(context, host, lifecycle));
 
         final List<AbstractPreferenceController> securityPreferenceControllers = new ArrayList<>();
+        securityPreferenceControllers.add(new FaceStatusPreferenceController(context));
         securityPreferenceControllers.add(new FingerprintStatusPreferenceController(context));
-        securityPreferenceControllers.add(new LockScreenPreferenceController(context, lifecycle));
         securityPreferenceControllers.add(new ChangeScreenLockPreferenceController(context, host));
         controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)
                 .setChildren(securityPreferenceControllers));

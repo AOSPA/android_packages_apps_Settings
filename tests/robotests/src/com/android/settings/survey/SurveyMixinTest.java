@@ -8,11 +8,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.support.v4.content.LocalBroadcastManager;
 
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.SurveyFeatureProvider;
@@ -30,6 +28,9 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SurveyMixinTest {
@@ -59,7 +60,7 @@ public class SurveyMixinTest {
         when(mProvider.getSurveyExpirationDate(any(), any())).thenReturn(-1L);
 
         // Pretend we are an activity that is starting up
-        Activity temp = Robolectric.setupActivity(Activity.class);
+        FragmentActivity temp = Robolectric.setupActivity(FragmentActivity.class);
         when(mFragment.getActivity()).thenReturn(temp);
         SurveyMixin mixin = new SurveyMixin(mFragment, FAKE_KEY);
         mixin.onResume();
@@ -78,7 +79,7 @@ public class SurveyMixinTest {
         when(mProvider.getSurveyExpirationDate(any(), any())).thenReturn(0L);
 
         // Pretend we are an activity that is starting up
-        Activity temp = Robolectric.setupActivity(Activity.class);
+        FragmentActivity temp = Robolectric.setupActivity(FragmentActivity.class);
         when(mFragment.getActivity()).thenReturn(temp);
         SurveyMixin mixin = new SurveyMixin(mFragment, FAKE_KEY);
         mixin.onResume();
@@ -109,7 +110,7 @@ public class SurveyMixinTest {
         when(mProvider.getSurveyExpirationDate(any(), any())).thenReturn(-1L);
 
         // Pretend we are an activity that starts and stops
-        Activity temp = Robolectric.setupActivity(Activity.class);
+        FragmentActivity temp = Robolectric.setupActivity(FragmentActivity.class);
         when(mFragment.getActivity()).thenReturn(temp);
         when(mProvider.createAndRegisterReceiver(any())).thenReturn(mReceiver);
         LocalBroadcastManager manager = LocalBroadcastManager.getInstance(temp);
@@ -130,7 +131,7 @@ public class SurveyMixinTest {
         when(mProvider.getSurveyExpirationDate(any(), any())).thenReturn(-1L);
 
         // Pretend we are an activity that fails to create a receiver properly
-        Activity temp = Robolectric.setupActivity(Activity.class);
+        FragmentActivity temp = Robolectric.setupActivity(FragmentActivity.class);
         when(mFragment.getActivity()).thenReturn(temp);
         SurveyMixin mixin = new SurveyMixin(mFragment, FAKE_KEY);
         mixin.onPause();

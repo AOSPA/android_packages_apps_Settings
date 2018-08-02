@@ -18,8 +18,6 @@ package com.android.settings.security.screenlock;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.TwoStatePreference;
 import android.text.TextUtils;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -28,6 +26,9 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
+import androidx.preference.TwoStatePreference;
 
 public class PowerButtonInstantLockPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {

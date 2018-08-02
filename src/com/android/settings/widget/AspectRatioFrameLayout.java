@@ -16,11 +16,12 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 import com.android.settings.R;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * A {@link FrameLayout} with customizable aspect ratio.

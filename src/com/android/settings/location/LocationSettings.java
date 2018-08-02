@@ -23,11 +23,10 @@ import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.CheckBoxPreference;
 import android.util.Log;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -40,6 +39,8 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
+import com.android.settingslib.search.SearchIndexable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -49,6 +50,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 
 /**
  * System location settings (Settings &gt; Location). The screen has three parts:
@@ -68,6 +72,7 @@ import java.util.Properties;
  * other things, this simplifies integration with future changes to the default (AOSP)
  * implementation.
  */
+@SearchIndexable
 public class LocationSettings extends DashboardFragment {
 
     private static final String TAG = "LocationSettings";
@@ -86,7 +91,8 @@ public class LocationSettings extends DashboardFragment {
         final SwitchBar switchBar = activity.getSwitchBar();
         switchBar.setSwitchBarText(R.string.location_settings_master_switch_title,
                 R.string.location_settings_master_switch_title);
-        mSwitchBarController = new LocationSwitchBarController(activity, switchBar, getLifecycle());
+        mSwitchBarController = new LocationSwitchBarController(activity, switchBar,
+                getSettingsLifecycle());
         switchBar.show();
     }
 
@@ -102,7 +108,7 @@ public class LocationSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, this, getLifecycle());
+        return buildPreferenceControllers(context, this, getSettingsLifecycle());
     }
 
     static void addPreferencesSorted(List<Preference> prefs, PreferenceGroup container) {
@@ -184,6 +190,13 @@ public class LocationSettings extends DashboardFragment {
                         context) {
                     return buildPreferenceControllers(context, null /* fragment */,
                             null /* lifecycle */);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> niks = super.getNonIndexableKeys(context);
+                    niks.add("recent_location_requests_see_all_button"); // 'See all' button
+                    return niks;
                 }
             };
 

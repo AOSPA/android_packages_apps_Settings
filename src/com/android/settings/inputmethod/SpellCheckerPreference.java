@@ -16,12 +16,10 @@
 
 package com.android.settings.inputmethod;
 
-import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +27,9 @@ import android.view.textservice.SpellCheckerInfo;
 
 import com.android.settings.CustomListPreference;
 import com.android.settings.R;
+
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * Spell checker service preference.

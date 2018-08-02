@@ -18,7 +18,6 @@ package com.android.settings.applications;
 
 import android.app.Activity;
 import android.app.Application;
-import android.app.Fragment;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
@@ -28,11 +27,15 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.EmergencyBroadcastPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
+
+@SearchIndexable
 public class AppAndNotificationDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "AppAndNotifDashboard";

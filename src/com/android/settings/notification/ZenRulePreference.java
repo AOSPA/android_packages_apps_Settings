@@ -17,15 +17,12 @@
 package com.android.settings.notification;
 
 import android.app.AutomaticZenRule;
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.service.notification.ZenModeConfig;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -36,6 +33,10 @@ import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.Map;
+
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class ZenRulePreference extends TwoTargetPreference {
     private static final ManagedServiceSettings.Config CONFIG =
@@ -112,7 +113,7 @@ public class ZenRulePreference extends TwoTargetPreference {
 
     protected void setAttributes(AutomaticZenRule rule) {
         final boolean isSchedule = ZenModeConfig.isValidScheduleConditionId(
-                rule.getConditionId());
+                rule.getConditionId(), true);
         final boolean isEvent = ZenModeConfig.isValidEventConditionId(rule.getConditionId());
         final boolean isSystemRule = isSchedule || isEvent;
 

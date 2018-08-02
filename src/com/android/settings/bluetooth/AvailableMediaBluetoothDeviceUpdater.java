@@ -18,14 +18,15 @@ package com.android.settings.bluetooth;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.media.AudioManager;
-import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import android.support.v7.preference.Preference;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 /**
  * Controller to maintain available media Bluetooth devices
@@ -34,7 +35,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
 
     private static final String TAG = "AvailableMediaBluetoothDeviceUpdater";
-    private static final boolean DBG = false;
+    private static final boolean DBG = true;
 
     private final AudioManager mAudioManager;
 
@@ -96,6 +97,11 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         if (isDeviceConnected(cachedDevice)) {
             if (DBG) {
                 Log.d(TAG, "isFilterMatched() current audio profile : " + currentAudioProfile);
+            }
+            // If device is Hearing Aid, it is compatible with HFP and A2DP.
+            // It would show in Available Devices group.
+            if (cachedDevice.isConnectedHearingAidDevice()) {
+                return true;
             }
             // According to the current audio profile type,
             // this page will show the bluetooth device that have corresponding profile.

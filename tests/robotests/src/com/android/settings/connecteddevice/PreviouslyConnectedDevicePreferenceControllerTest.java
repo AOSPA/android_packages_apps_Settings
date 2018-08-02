@@ -15,12 +15,18 @@
  */
 package com.android.settings.connecteddevice;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 
-import android.support.v7.preference.Preference;
-
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
+import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -31,10 +37,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.*;
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class PreviouslyConnectedDevicePreferenceControllerTest {
@@ -45,6 +48,8 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     private DashboardFragment mDashboardFragment;
     @Mock
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
+    @Mock
+    private DockUpdater mDockUpdater;
     @Mock
     private PackageManager mPackageManager;
 
@@ -61,6 +66,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         mPreConnectedDeviceController =
                 new PreviouslyConnectedDevicePreferenceController(mContext, KEY);
         mPreConnectedDeviceController.setBluetoothDeviceUpdater(mBluetoothDeviceUpdater);
+        mPreConnectedDeviceController.setSavedDockUpdater(mDockUpdater);
 
         mPreference = new Preference(mContext);
         mPreConnectedDeviceController.setPreference(mPreference);
@@ -71,10 +77,12 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         // register the callback in onStart()
         mPreConnectedDeviceController.onStart();
         verify(mBluetoothDeviceUpdater).registerCallback();
+        verify(mDockUpdater).registerCallback();
 
         // unregister the callback in onStop()
         mPreConnectedDeviceController.onStop();
         verify(mBluetoothDeviceUpdater).unregisterCallback();
+        verify(mDockUpdater).unregisterCallback();
     }
 
     @Test

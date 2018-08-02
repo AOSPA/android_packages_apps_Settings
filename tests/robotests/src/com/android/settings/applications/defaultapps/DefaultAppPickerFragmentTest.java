@@ -26,7 +26,6 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
-import android.support.v7.preference.PreferenceScreen;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -46,11 +45,14 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceScreen;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DefaultAppPickerFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private PreferenceScreen mScreen;
     @Mock

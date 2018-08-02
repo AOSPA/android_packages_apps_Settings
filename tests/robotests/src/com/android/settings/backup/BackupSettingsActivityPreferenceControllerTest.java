@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -38,6 +37,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = BackupSettingsActivityPreferenceControllerTest.ShadowBackupManager.class)
@@ -70,7 +71,7 @@ public class BackupSettingsActivityPreferenceControllerTest {
         mBackupEnabled = true;
 
         mController.updateState(mBackupPreference);
-        String summaryString = mContext.getString(R.string.accessibility_feature_state_on);
+        String summaryString = mContext.getString(R.string.backup_summary_state_on);
         verify(mBackupPreference).setSummary(summaryString);
     }
 
@@ -79,7 +80,7 @@ public class BackupSettingsActivityPreferenceControllerTest {
         mBackupEnabled = false;
 
         mController.updateState(mBackupPreference);
-        String summaryString = mContext.getString(R.string.accessibility_feature_state_off);
+        String summaryString = mContext.getString(R.string.backup_summary_state_off);
         verify(mBackupPreference).setSummary(summaryString);
     }
 

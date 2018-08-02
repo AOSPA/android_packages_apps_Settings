@@ -25,8 +25,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
@@ -36,10 +34,15 @@ import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.accessibility.AccessibilityUtils;
+import com.android.settingslib.search.SearchIndexable;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 /**
  * Settings page for accessibility shortcut
  */
+@SearchIndexable
 public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePreferenceFragment
         implements Indexable {
 

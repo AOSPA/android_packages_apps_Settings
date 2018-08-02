@@ -17,17 +17,13 @@
 package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.os.Vibrator;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -35,12 +31,13 @@ import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AccessibilitySettingsTest {
@@ -49,7 +46,7 @@ public class AccessibilitySettingsTest {
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = RuntimeEnvironment.application;
         final List<String> niks = AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context);
+            .getNonIndexableKeys(context);
         final List<String> keys = new ArrayList<>();
 
         keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.accessibility_settings));

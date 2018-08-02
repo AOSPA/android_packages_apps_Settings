@@ -19,12 +19,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.SettingInjectorService;
 import android.os.UserHandle;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
+import com.android.settings.Utils;
 import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -32,6 +29,11 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 public class LocationServicePreferenceController extends LocationBasePreferenceController
         implements LifecycleObserver, OnResume, OnPause {
@@ -130,8 +132,11 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
     private List<Preference> getLocationServices() {
         // If location access is locked down by device policy then we only show injected settings
         // for the primary profile.
+        final int profileUserId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
+
         return mInjector.getInjectedSettings(mFragment.getPreferenceManager().getContext(),
-                mLocationEnabler.isManagedProfileRestrictedByBase()
+                (profileUserId != UserHandle.USER_NULL
+                        && mLocationEnabler.getShareLocationEnforcedAdmin(profileUserId) != null)
                         ? UserHandle.myUserId() : UserHandle.USER_CURRENT);
     }
 }

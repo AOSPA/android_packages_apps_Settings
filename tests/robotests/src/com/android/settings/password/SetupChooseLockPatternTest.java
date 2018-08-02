@@ -17,10 +17,8 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.robolectric.RuntimeEnvironment.application;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
@@ -35,15 +33,16 @@ import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
+import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
@@ -52,6 +51,8 @@ import org.robolectric.util.ReflectionHelpers;
 import org.robolectric.util.ReflectionHelpers.ClassParameter;
 
 import java.util.Arrays;
+
+import androidx.fragment.app.FragmentActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
@@ -92,13 +93,16 @@ public class SetupChooseLockPatternTest {
     }
 
     @Test
-    public void selectPattern_shouldHideOptionsButton() {
+    public void optionsButton_whenPatternSelected_shouldBeVisible() {
         Button button = mActivity.findViewById(R.id.screen_lock_options);
         assertThat(button).isNotNull();
         assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
 
         LockPatternView lockPatternView = mActivity.findViewById(R.id.lockPattern);
         ReflectionHelpers.callInstanceMethod(lockPatternView, "notifyPatternDetected");
+
+        enterPattern();
+        assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     private void verifyScreenLockOptionsShown() {
@@ -115,12 +119,14 @@ public class SetupChooseLockPatternTest {
 
     @Config(qualifiers = "sw400dp")
     @Test
+    @Ignore("b/111194289")
     public void sw400dp_shouldShowScreenLockOptions() {
         verifyScreenLockOptionsShown();
     }
 
     @Config(qualifiers = "sw400dp-land")
     @Test
+    @Ignore("b/111194289")
     public void sw400dpLandscape_shouldShowScreenLockOptions() {
         verifyScreenLockOptionsShown();
     }
@@ -182,9 +188,9 @@ public class SetupChooseLockPatternTest {
         assertThat(skipButton.getVisibility()).isEqualTo(View.GONE);
     }
 
-    private ChooseLockPatternFragment findFragment(Activity activity) {
+    private ChooseLockPatternFragment findFragment(FragmentActivity activity) {
         return (ChooseLockPatternFragment)
-                activity.getFragmentManager().findFragmentById(R.id.main_content);
+                activity.getSupportFragmentManager().findFragmentById(R.id.main_content);
     }
 
     private void enterPattern() {

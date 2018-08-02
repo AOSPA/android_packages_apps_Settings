@@ -28,9 +28,6 @@ import android.os.ServiceManager;
 import android.provider.Settings;
 import android.provider.Settings.System;
 import android.service.vr.IVrManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.settings.core.PreferenceControllerMixin;
@@ -41,6 +38,10 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.text.NumberFormat;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class BrightnessLevelPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {

@@ -18,12 +18,13 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -32,10 +33,6 @@ import com.android.settings.testutils.shadow.ShadowLocalBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowLocalBluetoothProfileManager;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-
-import android.content.Intent;
-import android.content.res.Resources;
-import android.support.v4.graphics.drawable.IconCompat;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +43,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.List;
 
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;

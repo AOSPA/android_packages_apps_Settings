@@ -31,8 +31,6 @@ import static org.mockito.Mockito.when;
 import android.content.pm.PackageManager;
 import android.net.NetworkPolicyManager;
 import android.os.Bundle;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
 import android.util.ArraySet;
 import android.view.View;
 
@@ -44,7 +42,6 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -57,6 +54,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowRestrictedLockUtils.class})
 public class AppDataUsageTest {
@@ -64,7 +64,7 @@ public class AppDataUsageTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
     @Mock
-    private PackageManagerWrapper mPackageManagerWrapper;
+    private PackageManager mPackageManager;
 
     private AppDataUsage mFragment;
 
@@ -107,11 +107,11 @@ public class AppDataUsageTest {
         packages.add("pkg");
         final AppItem appItem = new AppItem(123456789);
 
-        ReflectionHelpers.setField(mFragment, "mPackageManagerWrapper", mPackageManagerWrapper);
+        ReflectionHelpers.setField(mFragment, "mPackageManager", mPackageManager);
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
         ReflectionHelpers.setField(mFragment, "mPackages", packages);
 
-        when(mPackageManagerWrapper.getPackageUidAsUser(anyString(), anyInt()))
+        when(mPackageManager.getPackageUidAsUser(anyString(), anyInt()))
                 .thenReturn(fakeUserId);
 
         ShadowEntityHeaderController.setUseMock(mHeaderController);

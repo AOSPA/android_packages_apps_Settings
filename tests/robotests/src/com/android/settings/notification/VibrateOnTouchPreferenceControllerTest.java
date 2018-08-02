@@ -20,13 +20,10 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Vibrator;
 import android.provider.Settings.System;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -37,13 +34,17 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class VibrateOnTouchPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock
     private ContentResolver mContentResolver;
     @Mock

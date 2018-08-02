@@ -18,13 +18,13 @@ package com.android.settings.wifi.tether;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.EditTextPreference;
-import android.support.v7.preference.Preference;
 import android.util.Log;
 
 import com.android.settings.widget.ValidatedEditTextPreference;
-import com.android.settings.wifi.WifiUtils;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.EditTextPreference;
+import androidx.preference.Preference;
 
 public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreferenceController
         implements ValidatedEditTextPreference.Validator {

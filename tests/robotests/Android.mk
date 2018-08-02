@@ -6,7 +6,8 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := SettingsRoboTests
 
-LOCAL_SRC_FILES := $(call all-java-files-under, src)
+LOCAL_SRC_FILES := $(call all-java-files-under, src) \
+    $(call all-java-files-under, ../../../../../frameworks/base/packages/SettingsLib/tests/robotests/src/com/android/settingslib/testutils)
 
 LOCAL_JAVA_RESOURCE_DIRS := config
 
@@ -38,7 +39,8 @@ LOCAL_JAVA_LIBRARIES := \
 
 LOCAL_TEST_PACKAGE := Settings
 
-LOCAL_INSTRUMENT_SOURCE_DIRS := $(dir $(LOCAL_PATH))../src
+LOCAL_INSTRUMENT_SOURCE_DIRS := $(dir $(LOCAL_PATH))../src \
+    frameworks/base/packages/SettingsLib/search/src \
 
 LOCAL_ROBOTEST_TIMEOUT := 36000
 

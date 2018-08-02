@@ -18,12 +18,7 @@ package com.android.settings.fuelgauge.batterytip;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -34,10 +29,14 @@ import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Controller in charge of the battery tip group
@@ -108,6 +107,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         mPreferenceGroup.removeAll();
         for (int i = 0, size = batteryTips.size(); i < size; i++) {
             final BatteryTip batteryTip = mBatteryTips.get(i);
+            batteryTip.sanityCheck(mContext);
             if (batteryTip.getState() != BatteryTip.StateType.INVISIBLE) {
                 final Preference preference = batteryTip.buildPreference(mPrefContext);
                 mBatteryTipMap.put(preference.getKey(), batteryTip);

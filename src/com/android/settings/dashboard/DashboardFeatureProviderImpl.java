@@ -29,8 +29,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -53,13 +51,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 /**
  * Impl for {@code DashboardFeatureProvider}.
  */
 public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     private static final String TAG = "DashboardFeatureImpl";
-
     private static final String DASHBOARD_TILE_PREF_KEY_PREFIX = "dashboard_tile_pref_";
     private static final String META_DATA_KEY_INTENT_ACTION = "com.android.settings.intent.action";
     @VisibleForTesting
@@ -276,7 +276,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             return;
         }
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
-        if (tile.userHandle == null) {
+
+        if (tile.userHandle == null || tile.isPrimaryProfileOnly()) {
             mMetricsFeatureProvider.logDashboardStartIntent(mContext, intent, sourceMetricCategory);
             activity.startActivityForResult(intent, 0);
         } else if (tile.userHandle.size() == 1) {

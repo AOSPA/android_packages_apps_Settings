@@ -38,7 +38,6 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -63,6 +62,8 @@ import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"
@@ -161,7 +162,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
         new SubSettingLauncher(getContext())
                 .setDestination(MasterClearConfirm.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.master_clear_confirm_title)
+                .setTitleRes(R.string.master_clear_confirm_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }

@@ -18,14 +18,14 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.ProgressBar;
 
 import com.android.settings.R;
 import com.android.settings.utils.FileSizeFormatter;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class StorageItemPreference extends Preference {
     public int userHandle;

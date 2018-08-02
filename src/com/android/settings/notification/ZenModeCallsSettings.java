@@ -27,15 +27,17 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SearchIndexable
 public class ZenModeCallsSettings extends ZenModeSettingsBase implements Indexable {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        return buildPreferenceControllers(context, getSettingsLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
@@ -43,7 +45,7 @@ public class ZenModeCallsSettings extends ZenModeSettingsBase implements Indexab
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModeCallsPreferenceController(context, lifecycle));
         controllers.add(new ZenModeStarredContactsPreferenceController(context, lifecycle,
-                PRIORITY_CATEGORY_CALLS));
+                PRIORITY_CATEGORY_CALLS, "zen_mode_starred_contacts_callers"));
         controllers.add(new ZenModeRepeatCallersPreferenceController(context, lifecycle,
                 context.getResources().getInteger(com.android.internal.R.integer
                 .config_zen_repeat_callers_threshold)));

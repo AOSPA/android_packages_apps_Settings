@@ -18,13 +18,14 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.os.SystemProperties;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
 import android.view.ThreadedRenderer;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.SystemPropPoker;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 public class GpuViewUpdatesPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {

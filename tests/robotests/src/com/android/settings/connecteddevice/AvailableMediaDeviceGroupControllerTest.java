@@ -17,7 +17,6 @@ package com.android.settings.connecteddevice;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Matchers.anyString;
@@ -29,10 +28,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.AvailableMediaBluetoothDeviceUpdater;
@@ -52,6 +47,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
@@ -196,5 +196,21 @@ public class AvailableMediaDeviceGroupControllerTest {
 
         assertThat(mPreferenceGroup.getTitle()).isEqualTo(
                 mContext.getText(R.string.connected_device_available_media_title));
+    }
+
+    @Test
+    public void onStart_localBluetoothManagerNull_shouldNotCrash() {
+        mAvailableMediaDeviceGroupController.mLocalBluetoothManager = null;
+
+        // Shouldn't crash
+        mAvailableMediaDeviceGroupController.onStart();
+    }
+
+    @Test
+    public void onStop_localBluetoothManagerNull_shouldNotCrash() {
+        mAvailableMediaDeviceGroupController.mLocalBluetoothManager = null;
+
+        // Shouldn't crash
+        mAvailableMediaDeviceGroupController.onStop();
     }
 }

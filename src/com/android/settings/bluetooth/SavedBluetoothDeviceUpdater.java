@@ -51,14 +51,15 @@ package com.android.settings.bluetooth;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
+import android.util.Log;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import android.support.v7.preference.Preference;
-import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 /**
  * Maintain and update saved bluetooth devices(bonded but not connected)
@@ -66,6 +67,7 @@ import android.util.Log;
 public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
     private static final String TAG = "SavedBluetoothDeviceUpdater";
+    private static final boolean DBG = true;
 
     public SavedBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
@@ -92,8 +94,12 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     @Override
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
         final BluetoothDevice device = cachedDevice.getDevice();
-        return device.getBondState() == BluetoothDevice.BOND_BONDED &&
-            !device.isConnected() && !device.isTwsPlusDevice();
+        if (DBG) {
+            Log.d(TAG, "isFilterMatched() device name : " + cachedDevice.getName() +
+                    ", is connected : " + device.isConnected() +
+                    ", is twsplusdevice : " + device.isTwsPlusDevice());
+        }
+        return device.getBondState() == BluetoothDevice.BOND_BONDED && !device.isConnected() && !device.isTwsPlusDevice();
     }
 
     @Override

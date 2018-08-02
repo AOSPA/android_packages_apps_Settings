@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
-
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
         .ANOMALY_STATE;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
@@ -41,6 +40,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.VisibleForTesting;
+
 /**
  * Database manager for battery data. Now it only contains anomaly data stored in {@link AppInfo}.
  *
@@ -61,6 +62,11 @@ public class BatteryDatabaseManager {
             sSingleton = new BatteryDatabaseManager(context);
         }
         return sSingleton;
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    public static void setUpForTest(BatteryDatabaseManager batteryDatabaseManager) {
+        sSingleton = batteryDatabaseManager;
     }
 
     /**

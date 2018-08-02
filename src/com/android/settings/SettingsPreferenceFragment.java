@@ -18,21 +18,12 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
-import android.support.annotation.XmlRes;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -44,30 +35,41 @@ import android.widget.Button;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.search.Indexable;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.HighlightablePreferenceGroupAdapter;
 import com.android.settings.widget.LoadingViewController;
-import com.android.settingslib.CustomDialogPreference;
-import com.android.settingslib.CustomEditTextPreference;
+import com.android.settingslib.CustomDialogPreferenceCompat;
+import com.android.settingslib.CustomEditTextPreferenceCompat;
 import com.android.settingslib.core.instrumentation.Instrumentable;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import java.util.UUID;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.XmlRes;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Base class for Settings fragments, with some helper functions and dialog management.
  */
 public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceFragment
-        implements DialogCreatable, HelpResourceProvider {
+        implements DialogCreatable, HelpResourceProvider, Indexable {
 
     private static final String TAG = "SettingsPreference";
 
     private static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
 
-    protected final FooterPreferenceMixin mFooterPreferenceMixin =
-            new FooterPreferenceMixin(this, getLifecycle());
+    protected final FooterPreferenceMixinCompat mFooterPreferenceMixin =
+            new FooterPreferenceMixinCompat(this, getSettingsLifecycle());
 
 
     private static final int ORDER_FIRST = -1;
@@ -515,11 +517,11 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         } else if (preference instanceof CustomListPreference) {
             f = CustomListPreference.CustomListPreferenceDialogFragment
                     .newInstance(preference.getKey());
-        } else if (preference instanceof CustomDialogPreference) {
-            f = CustomDialogPreference.CustomPreferenceDialogFragment
+        } else if (preference instanceof CustomDialogPreferenceCompat) {
+            f = CustomDialogPreferenceCompat.CustomPreferenceDialogFragment
                     .newInstance(preference.getKey());
-        } else if (preference instanceof CustomEditTextPreference) {
-            f = CustomEditTextPreference.CustomPreferenceDialogFragment
+        } else if (preference instanceof CustomEditTextPreferenceCompat) {
+            f = CustomEditTextPreferenceCompat.CustomPreferenceDialogFragment
                     .newInstance(preference.getKey());
         } else {
             super.onDisplayPreferenceDialog(preference);

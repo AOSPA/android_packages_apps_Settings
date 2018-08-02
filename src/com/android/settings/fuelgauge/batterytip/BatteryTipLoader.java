@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.BatteryInfo;
@@ -26,23 +25,25 @@ import com.android.settings.fuelgauge.Estimate;
 import com.android.settings.fuelgauge.batterytip.detectors.EarlyWarningDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.HighUsageDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
-import com.android.settings.fuelgauge.batterytip.detectors.SmartBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.RestrictAppDetector;
+import com.android.settings.fuelgauge.batterytip.detectors.SmartBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.SummaryDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
-import com.android.settingslib.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+
 /**
  * Loader to compute and return a battery tip list. It will always return a full length list even
  * though some tips may have state {@code BaseBatteryTip.StateType.INVISIBLE}.
  */
-public class BatteryTipLoader extends AsyncLoader<List<BatteryTip>> {
+public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
     private static final String TAG = "BatteryTipLoader";
 
     private static final boolean USE_FAKE_DATA = false;

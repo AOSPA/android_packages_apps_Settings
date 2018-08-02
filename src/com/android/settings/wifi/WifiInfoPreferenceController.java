@@ -23,9 +23,6 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
-import android.support.v4.text.BidiFormatter;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
@@ -36,6 +33,10 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import androidx.core.text.BidiFormatter;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /**
  * {@link PreferenceControllerMixin} that updates MAC/IP address.
@@ -101,11 +102,12 @@ public class WifiInfoPreferenceController extends AbstractPreferenceController
                     Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 0);
             final String macAddress = wifiInfo == null ? null : wifiInfo.getMacAddress();
 
-            if (TextUtils.isEmpty(macAddress)) {
-                mWifiMacAddressPref.setSummary(R.string.status_unavailable);
-            } else if (macRandomizationMode == 1
+            if (macRandomizationMode == 1
                     && WifiInfo.DEFAULT_MAC_ADDRESS.equals(macAddress)) {
                 mWifiMacAddressPref.setSummary(R.string.wifi_status_mac_randomized);
+            } else if (TextUtils.isEmpty(macAddress)
+                    || WifiInfo.DEFAULT_MAC_ADDRESS.equals(macAddress)) {
+                mWifiMacAddressPref.setSummary(R.string.status_unavailable);
             } else {
                 mWifiMacAddressPref.setSummary(macAddress);
             }

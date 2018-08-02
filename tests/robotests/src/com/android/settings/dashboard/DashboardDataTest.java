@@ -26,9 +26,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.PendingIntent;
 import android.service.settings.suggestions.Suggestion;
-import android.support.annotation.NonNull;
-import android.support.v7.util.DiffUtil;
-import android.support.v7.util.ListUpdateCallback;
 
 import com.android.settings.dashboard.conditional.AirplaneModeCondition;
 import com.android.settings.dashboard.conditional.Condition;
@@ -46,6 +43,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListUpdateCallback;
 
 @RunWith(RobolectricTestRunner.class)
 public class DashboardDataTest {
@@ -278,10 +279,10 @@ public class DashboardDataTest {
      * the transform data result is equals to {@paramref testResultData}
      * <p>
      * The steps are described below:
-     * 1. Calculate a {@link android.support.v7.util.DiffUtil.DiffResult} from
+     * 1. Calculate a {@link androidx.recyclerview.widget.DiffUtil.DiffResult} from
      * {@paramref baseDashboardData} to {@paramref diffDashboardData}
      * <p>
-     * 2. Dispatch the {@link android.support.v7.util.DiffUtil.DiffResult} calculated from step 1
+     * 2. Dispatch the {@link androidx.recyclerview.widget.DiffUtil.DiffResult} calculated from step 1
      * into {@link ListUpdateResult}
      * <p>
      * 3. Get result data(a.k.a. baseResultData) from {@link ListUpdateResult} and compare it to

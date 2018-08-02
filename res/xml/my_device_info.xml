@@ -86,7 +86,9 @@
         android:order="21"
         android:title="@string/hardware_info"
         settings:keywords="@string/keywords_model_and_hardware"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder"
+        settings:controller=
+            "com.android.settings.deviceinfo.DeviceModelPreferenceController" />
 
     <!-- IMEI -->
     <Preference
@@ -98,11 +100,13 @@
 
     <!-- Android version -->
     <Preference
-        android:key="firmware_version"
+        android:key="my_device_firmware_version"
         android:order="32"
         android:title="@string/firmware_version"
         settings:keywords="@string/keywords_android_version"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder"
+        settings:controller=
+            "com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController" />
 
     <!--IP address -->
     <Preference
@@ -149,7 +153,8 @@
     <Preference
         android:key="device_feedback"
         android:order="41"
-        android:title="@string/device_feedback"/>
+        android:title="@string/device_feedback"
+        settings:keywords="@string/keywords_device_feedback" />
 
     <!-- Device FCC equipment id -->
     <Preference

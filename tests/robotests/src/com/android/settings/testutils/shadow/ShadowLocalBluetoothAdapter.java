@@ -25,16 +25,15 @@ import org.robolectric.annotation.Implements;
 public class ShadowLocalBluetoothAdapter {
 
     private static String sName;
-
     private boolean isBluetoothEnabled = true;
+
+    public static void setName(String name) {
+        sName = name;
+    }
 
     @Implementation
     public String getName() {
         return sName;
-    }
-
-    public static void setName(String name) {
-        sName = name;
     }
 
     @Implementation

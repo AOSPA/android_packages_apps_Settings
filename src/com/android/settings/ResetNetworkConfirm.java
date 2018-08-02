@@ -33,10 +33,8 @@ import android.os.RecoverySystem;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Telephony;
-import android.support.annotation.VisibleForTesting;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +50,8 @@ import com.android.settings.network.ApnSettings;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Confirm and execute a reset of the network settings to a clean "just out of the box"

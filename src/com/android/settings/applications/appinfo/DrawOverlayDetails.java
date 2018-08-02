@@ -19,23 +19,15 @@ import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYST
 
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoWithHeader;
@@ -45,13 +37,19 @@ import com.android.settings.applications.AppStateOverlayBridge.OverlayState;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.SwitchPreference;
+
 public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
         OnPreferenceClickListener {
 
     private static final String KEY_APP_OPS_SETTINGS_SWITCH = "app_ops_settings_switch";
     private static final String LOG_TAG = "DrawOverlayDetails";
 
-    private static final int [] APP_OPS_OP_CODE = {
+    private static final int[] APP_OPS_OP_CODE = {
             AppOpsManager.OP_SYSTEM_ALERT_WINDOW
     };
 
@@ -124,7 +122,7 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         logSpecialPermissionChange(newState, mPackageName);
         mAppOpsManager.setMode(AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
                 mPackageInfo.applicationInfo.uid, mPackageName, newState
-                ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_ERRORED);
+                        ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_ERRORED);
     }
 
     @VisibleForTesting
@@ -177,6 +175,7 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
 
     public static CharSequence getSummary(Context context, OverlayState overlayState) {
         return context.getString(overlayState.isPermissible() ?
-            R.string.app_permission_summary_allowed : R.string.app_permission_summary_not_allowed);
+                R.string.app_permission_summary_allowed
+                : R.string.app_permission_summary_not_allowed);
     }
 }

@@ -28,8 +28,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.VisibleForTesting;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,11 +47,16 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
         implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost,
@@ -163,7 +166,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // Set up master switch
         mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
         mSwitchBarController = new DevelopmentSwitchBarController(
-                this /* DevelopmentSettings */, mSwitchBar, mIsAvailable, getLifecycle());
+                this /* DevelopmentSettings */, mSwitchBar, mIsAvailable,
+                getSettingsLifecycle());
         mSwitchBar.show();
 
         // Restore UI state based on whether developer options is enabled
@@ -315,8 +319,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             mPreferenceControllers = new ArrayList<>();
             return null;
         }
-        mPreferenceControllers = buildPreferenceControllers(context, getActivity(), getLifecycle(),
-                this /* devOptionsDashboardFragment */,
+        mPreferenceControllers = buildPreferenceControllers(context, getActivity(),
+                getSettingsLifecycle(), this /* devOptionsDashboardFragment */,
                 new BluetoothA2dpConfigStore());
         return mPreferenceControllers;
     }
@@ -383,7 +387,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
         controllers.add(new HdcpCheckingPreferenceController(context));
-        controllers.add(new DarkUIPreferenceController(context));
         controllers.add(new BluetoothSnoopLogPreferenceController(context));
         controllers.add(new OemUnlockPreferenceController(context, activity, fragment));
         controllers.add(new FileEncryptionPreferenceController(context));
@@ -435,7 +438,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new TransitionAnimationScalePreferenceController(context));
         controllers.add(new AnimatorDurationScalePreferenceController(context));
         controllers.add(new SecondaryDisplayPreferenceController(context));
-        controllers.add(new ForceGpuRenderingPreferenceController(context));
         controllers.add(new GpuViewUpdatesPreferenceController(context));
         controllers.add(new HardwareLayersUpdatesPreferenceController(context));
         controllers.add(new DebugGpuOverdrawPreferenceController(context));

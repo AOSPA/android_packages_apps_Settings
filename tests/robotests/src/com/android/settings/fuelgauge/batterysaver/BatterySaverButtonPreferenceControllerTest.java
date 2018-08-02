@@ -23,7 +23,6 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.os.PowerManager;
-import android.support.v7.preference.PreferenceScreen;
 import android.widget.Button;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -38,6 +37,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPowerManager;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowPowerManager.class)

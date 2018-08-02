@@ -21,17 +21,18 @@ LOCAL_USE_AAPT2 := true
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
-    android-slices-builders \
-    android-slices-core \
-    android-slices-view \
-    android-support-compat \
-    android-support-v4 \
-    android-support-v13 \
-    android-support-v7-appcompat \
-    android-support-v7-cardview \
-    android-support-v7-preference \
-    android-support-v7-recyclerview \
-    android-support-v14-preference \
+    androidx.slice_slice-builders \
+    androidx.slice_slice-core \
+    androidx.slice_slice-view \
+    androidx.core_core \
+    androidx.legacy_legacy-support-v4 \
+    androidx.legacy_legacy-support-v13 \
+    androidx.appcompat_appcompat \
+    androidx.cardview_cardview \
+    androidx.preference_preference \
+    androidx.recyclerview_recyclerview \
+    androidx.legacy_legacy-preference-v14 \
+    com.google.android.material_material \
 
 LOCAL_JAVA_LIBRARIES := \
     bouncycastle \
@@ -40,8 +41,8 @@ LOCAL_JAVA_LIBRARIES := \
     telephony-ext
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
-    android-arch-lifecycle-runtime \
-    android-arch-lifecycle-extensions \
+    androidx.lifecycle_lifecycle-runtime \
+    androidx.lifecycle_lifecycle-extensions \
     guava \
     jsr305 \
     settings-logtags \
@@ -56,6 +57,7 @@ endif
 
 include frameworks/opt/setupwizard/library/common-gingerbread.mk
 include frameworks/base/packages/SettingsLib/common.mk
+include frameworks/base/packages/SettingsLib/search/common.mk
 
 include $(BUILD_PACKAGE)
 

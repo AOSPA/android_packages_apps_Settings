@@ -17,13 +17,23 @@
 package com.android.settings.slices;
 
 import static com.android.settings.bluetooth.BluetoothSliceBuilder.ACTION_BLUETOOTH_SLICE_CHANGED;
+import static com.android.settings.flashlight.FlashlightSliceBuilder
+        .ACTION_FLASHLIGHT_SLICE_CHANGED;
+import static com.android.settings.mobilenetwork.Enhanced4gLteSliceHelper
+        .ACTION_ENHANCED_4G_LTE_CHANGED;
 import static com.android.settings.notification.ZenModeSliceBuilder.ACTION_ZEN_MODE_SLICE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_SLIDER_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
-import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_CHANGED;
 import static com.android.settings.wifi.WifiSliceBuilder.ACTION_WIFI_SLICE_CHANGED;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper.ACTION_WIFI_CALLING_CHANGED;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper
+        .ACTION_WIFI_CALLING_PREFERENCE_CELLULAR_PREFERRED;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper
+        .ACTION_WIFI_CALLING_PREFERENCE_WIFI_ONLY;
+import static com.android.settings.wifi.calling.WifiCallingSliceHelper
+        .ACTION_WIFI_CALLING_PREFERENCE_WIFI_PREFERRED;
 
 import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
@@ -41,6 +51,7 @@ import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.flashlight.FlashlightSliceBuilder;
 import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.WifiSliceBuilder;
@@ -59,6 +70,15 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         final String key = intent.getStringExtra(EXTRA_SLICE_KEY);
         final boolean isPlatformSlice = intent.getBooleanExtra(EXTRA_SLICE_PLATFORM_DEFINED,
                 false /* default */);
+
+        final CustomSliceManager mCustomSliceManager = FeatureFactory.getFactory(
+                context).getSlicesFeatureProvider().getCustomSliceManager(context);
+        if (mCustomSliceManager.isValidAction(action)) {
+            final CustomSliceable sliceable =
+                    mCustomSliceManager.getSliceableFromIntentAction(action);
+            sliceable.onNotifyChange(intent);
+            return;
+        }
 
         switch (action) {
             case ACTION_TOGGLE_CHANGED:
@@ -83,6 +103,23 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                 break;
             case ACTION_ZEN_MODE_SLICE_CHANGED:
                 ZenModeSliceBuilder.handleUriChange(context, intent);
+                break;
+            case ACTION_ENHANCED_4G_LTE_CHANGED:
+                FeatureFactory.getFactory(context)
+                        .getSlicesFeatureProvider()
+                        .getNewEnhanced4gLteSliceHelper(context)
+                        .handleEnhanced4gLteChanged(intent);
+                break;
+            case ACTION_WIFI_CALLING_PREFERENCE_WIFI_ONLY:
+            case ACTION_WIFI_CALLING_PREFERENCE_WIFI_PREFERRED:
+            case ACTION_WIFI_CALLING_PREFERENCE_CELLULAR_PREFERRED:
+                FeatureFactory.getFactory(context)
+                        .getSlicesFeatureProvider()
+                        .getNewWifiCallingSliceHelper(context)
+                        .handleWifiCallingPreferenceChanged(intent);
+                break;
+            case ACTION_FLASHLIGHT_SLICE_CHANGED:
+                FlashlightSliceBuilder.handleUriChange(context, intent);
                 break;
             default:
                 final String uriString = intent.getStringExtra(SliceBroadcastRelay.EXTRA_URI);

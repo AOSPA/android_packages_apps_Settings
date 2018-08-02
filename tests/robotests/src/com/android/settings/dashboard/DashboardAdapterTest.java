@@ -33,7 +33,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.service.settings.suggestions.Suggestion;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +62,8 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
@@ -101,7 +102,7 @@ public class DashboardAdapterTest {
     }
 
     @Test
-    public void testSuggestionDismissed_notOnlySuggestion_updateSuggestionOnly() {
+    public void onSuggestionClosed_notOnlySuggestion_updateSuggestionOnly() {
         final DashboardAdapter adapter =
                 spy(new DashboardAdapter(mContext, null /* savedInstanceState */,
                         null /* conditions */, null /* suggestionControllerMixin */,
@@ -134,8 +135,8 @@ public class DashboardAdapterTest {
     }
 
     @Test
-    public void testSuggestionDismissed_onlySuggestion_updateDashboardData() {
-        DashboardAdapter adapter =
+    public void onSuggestionClosed_onlySuggestion_updateDashboardData() {
+        final DashboardAdapter adapter =
                 spy(new DashboardAdapter(mContext, null /* savedInstanceState */,
                         null /* conditions */, null /* suggestionControllerMixin */,
                         null /* lifecycle */));
@@ -151,7 +152,23 @@ public class DashboardAdapterTest {
     }
 
     @Test
-    public void testBindSuggestion_shouldSetSuggestionAdapterAndNoCrash() {
+    public void onSuggestionClosed_notInSuggestionList_shouldNotUpdateSuggestionList() {
+        final DashboardAdapter adapter =
+            spy(new DashboardAdapter(mContext, null /* savedInstanceState */,
+                null /* conditions */, null /* suggestionControllerMixin */,
+                null /* lifecycle */));
+        final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
+        adapter.setSuggestions(suggestions);
+        final DashboardData dashboardData = adapter.mDashboardData;
+        reset(adapter); // clear interactions tracking
+
+        adapter.onSuggestionClosed(mock(Suggestion.class));
+
+        verify(adapter, never()).setSuggestions(any());
+    }
+
+    @Test
+    public void onBindSuggestion_shouldSetSuggestionAdapterAndNoCrash() {
         mDashboardAdapter = new DashboardAdapter(mContext, null /* savedInstanceState */,
                 null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
         final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");

@@ -16,13 +16,13 @@
 package com.android.settings.accessibility;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
-import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME;
-import static com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController
+        .COLOR_INVERSION_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController
+        .DALTONIZER_COMPONENT_NAME;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -39,19 +39,22 @@ import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
+import com.android.internal.accessibility.AccessibilityShortcutController
+        .ToggleableFrameworkFeatureInfo;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.accessibility.AccessibilityShortcutController.ToggleableFrameworkFeatureInfo;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.CandidateInfo;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * Fragment for picking accessibility shortcut service
@@ -132,10 +135,11 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
                 // This is a framework feature. It doesn't need to be confirmed.
                 onRadioButtonConfirmed(selectedKey);
             } else {
-                final Activity activity = getActivity();
+                final FragmentActivity activity = getActivity();
                 if (activity != null) {
                     ConfirmationDialogFragment.newInstance(this, selectedKey)
-                            .show(activity.getFragmentManager(), ConfirmationDialogFragment.TAG);
+                            .show(activity.getSupportFragmentManager(),
+                                    ConfirmationDialogFragment.TAG);
                 }
             }
         }
@@ -229,10 +233,9 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
 
         @Override
         public CharSequence loadLabel() {
-            final PackageManagerWrapper pmw =
-                    new PackageManagerWrapper(getContext().getPackageManager());
+            final PackageManager pmw = getContext().getPackageManager();
             final CharSequence label =
-                    mServiceInfo.getResolveInfo().serviceInfo.loadLabel(pmw.getPackageManager());
+                    mServiceInfo.getResolveInfo().serviceInfo.loadLabel(pmw);
             if (label != null) {
                 return label;
             }
@@ -242,7 +245,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
                 try {
                     final ApplicationInfo appInfo = pmw.getApplicationInfoAsUser(
                             componentName.getPackageName(), 0, UserHandle.myUserId());
-                    return appInfo.loadLabel(pmw.getPackageManager());
+                    return appInfo.loadLabel(pmw);
                 } catch (PackageManager.NameNotFoundException e) {
                     return null;
                 }

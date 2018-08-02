@@ -19,11 +19,12 @@ package com.android.settings.notification;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
 import android.util.Log;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 public class ZenModeMediaPreferenceController extends AbstractZenModePreferenceController
         implements Preference.OnPreferenceChangeListener {

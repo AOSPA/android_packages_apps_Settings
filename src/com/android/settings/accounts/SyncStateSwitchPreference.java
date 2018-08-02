@@ -19,8 +19,6 @@ package com.android.settings.accounts;
 import android.accounts.Account;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -29,6 +27,9 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settingslib.widget.AnimatedImageView;
+
+import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreference;
 
 public class SyncStateSwitchPreference extends SwitchPreference {
 

@@ -36,16 +36,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -66,6 +61,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 public class AccountPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, AuthenticatorHelper.OnAccountsUpdateListener,
@@ -250,7 +251,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
                 new SubSettingLauncher(mContext)
                         .setSourceMetricsCategory(mParent.getMetricsCategory())
                         .setDestination(ManagedProfileSettings.class.getName())
-                        .setTitle(R.string.managed_profile_settings_title)
+                        .setTitleRes(R.string.managed_profile_settings_title)
                         .setArguments(arguments)
                         .launch();
 

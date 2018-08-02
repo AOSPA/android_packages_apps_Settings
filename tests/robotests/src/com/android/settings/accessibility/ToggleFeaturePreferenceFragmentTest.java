@@ -21,7 +21,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.os.Bundle;
-import android.support.annotation.XmlRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +29,13 @@ import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.testutils.FragmentTestUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.FragmentTestUtil;
+
+import androidx.annotation.XmlRes;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
@@ -45,7 +46,7 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     public void createFragment_shouldOnlyAddPreferencesOnce() {
         mFragment = spy(new ToggleFeaturePreferenceFragmentTestable());
-        FragmentTestUtil.startFragment(mFragment);
+        FragmentTestUtils.startFragment(mFragment);
 
         // execute exactly once
         verify(mFragment).addPreferencesFromResource(R.xml.placeholder_prefs);
@@ -55,7 +56,8 @@ public class ToggleFeaturePreferenceFragmentTest {
             extends ToggleFeaturePreferenceFragment {
 
         @Override
-        protected void onPreferenceToggled(String preferenceKey, boolean enabled) {}
+        protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
+        }
 
         @Override
         public int getMetricsCategory() {

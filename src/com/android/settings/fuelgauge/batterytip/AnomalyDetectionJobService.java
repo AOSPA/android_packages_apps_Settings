@@ -34,8 +34,6 @@ import android.os.Bundle;
 import android.os.StatsDimensionsValue;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.annotation.GuardedBy;
-import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 import android.util.Pair;
 
@@ -52,6 +50,9 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.GuardedBy;
+import androidx.annotation.VisibleForTesting;
 
 /** A JobService to store anomaly data to anomaly database */
 public class AnomalyDetectionJobService extends JobService {
@@ -155,7 +156,7 @@ public class AnomalyDetectionJobService extends JobService {
                 metricsFeatureProvider.action(context,
                         MetricsProto.MetricsEvent.ACTION_ANOMALY_IGNORED,
                         packageName,
-                        Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT,
+                        Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE,
                                 anomalyInfo.anomalyType),
                         Pair.create(MetricsProto.MetricsEvent.FIELD_APP_VERSION_CODE,
                                 versionCode));

@@ -14,25 +14,20 @@
 package com.android.settings.display;
 
 import static android.provider.Settings.Secure.DOZE_ENABLED;
-
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_AMBIENT_DISPLAY;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 public class AmbientDisplayNotificationsPreferenceController extends
         TogglePreferenceController implements Preference.OnPreferenceChangeListener {
@@ -73,7 +68,7 @@ public class AmbientDisplayNotificationsPreferenceController extends
 
     @Override
     public boolean isChecked() {
-        return mConfig.pulseOnNotificationEnabled(MY_USER);
+        return getAmbientConfig().pulseOnNotificationEnabled(MY_USER);
     }
 
     @Override
@@ -84,10 +79,8 @@ public class AmbientDisplayNotificationsPreferenceController extends
 
     @Override
     public int getAvailabilityStatus() {
-        if (mConfig == null) {
-            mConfig = new AmbientDisplayConfiguration(mContext);
-        }
-        return mConfig.pulseOnNotificationAvailable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return getAmbientConfig().pulseOnNotificationAvailable()
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -95,15 +88,11 @@ public class AmbientDisplayNotificationsPreferenceController extends
         return TextUtils.equals(getPreferenceKey(), "ambient_display_notification");
     }
 
-    @Override
-    //TODO (b/69808376): Remove result payload
-    public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
-                AmbientDisplaySettings.class.getName(), KEY_AMBIENT_DISPLAY_NOTIFICATIONS,
-                mContext.getString(R.string.ambient_display_screen_title));
+    private AmbientDisplayConfiguration getAmbientConfig() {
+        if (mConfig == null) {
+            mConfig = new AmbientDisplayConfiguration(mContext);
+        }
 
-        return new InlineSwitchPayload(Settings.Secure.DOZE_ENABLED,
-                ResultPayload.SettingsSource.SECURE, ON /* onValue */, intent, isAvailable(),
-                ON /* defaultValue */);
+        return mConfig;
     }
 }

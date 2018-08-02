@@ -17,11 +17,6 @@
 package com.android.settings.datetime.timezone;
 
 import android.icu.text.BreakIterator;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
-import android.support.annotation.WorkerThread;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +30,12 @@ import com.android.settings.datetime.timezone.BaseTimeZonePicker.OnListItemClick
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Used with {@class BaseTimeZonePicker}. It renders text in each item into list view. A list of
@@ -78,7 +79,7 @@ public class BaseTimeZoneAdapter<T extends BaseTimeZoneAdapter.AdapterItem>
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         switch(viewType) {
             case TYPE_HEADER: {
-                final View view = inflater.inflate(R.layout.preference_category_material_settings,
+                final View view = inflater.inflate(R.layout.preference_category_material,
                         parent, false);
                 return new HeaderViewHolder(view);
             }

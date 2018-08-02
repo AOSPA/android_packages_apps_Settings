@@ -18,13 +18,13 @@ package com.android.settings.notification;
 
 import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
 
-import android.app.NotificationChannel;
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedSwitchPreference;
+
+import androidx.preference.Preference;
 
 public class BadgePreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {

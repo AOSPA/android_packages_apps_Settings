@@ -18,7 +18,6 @@ package com.android.settings.users;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,8 +25,6 @@ import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -35,6 +32,10 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 public class AutoSyncDataPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {

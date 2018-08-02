@@ -21,11 +21,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.indexing.IndexData;
-
-import java.util.Locale;
+import com.android.settingslib.search.SearchIndexableResources;
+import com.android.settingslib.search.SearchIndexableResourcesMobile;
 
 /**
  * FeatureProvider for the refactored search code.
@@ -34,8 +31,6 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
 
     private static final String TAG = "SearchFeatureProvider";
 
-    private static final String METRICS_ACTION_SETTINGS_INDEX = "search_synchronous_indexing";
-    private DatabaseIndexingManager mDatabaseIndexingManager;
     private SearchIndexableResources mSearchIndexableResources;
 
     @Override
@@ -57,47 +52,14 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     }
 
     @Override
-    public DatabaseIndexingManager getIndexingManager(Context context) {
-        if (mDatabaseIndexingManager == null) {
-            mDatabaseIndexingManager = new DatabaseIndexingManager(context.getApplicationContext());
-        }
-        return mDatabaseIndexingManager;
-    }
-
-    @Override
-    public void updateIndex(Context context) {
-        long indexStartTime = System.currentTimeMillis();
-        getIndexingManager(context).performIndexing();
-        int indexingTime = (int) (System.currentTimeMillis() - indexStartTime);
-        FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                .histogram(context, METRICS_ACTION_SETTINGS_INDEX, indexingTime);
-    }
-
-    @Override
     public SearchIndexableResources getSearchIndexableResources() {
         if (mSearchIndexableResources == null) {
-            mSearchIndexableResources = new SearchIndexableResourcesImpl();
+            mSearchIndexableResources = new SearchIndexableResourcesMobile();
         }
         return mSearchIndexableResources;
     }
 
     protected boolean isSignatureWhitelisted(Context context, String callerPackage) {
         return false;
-    }
-
-    /**
-     * A generic method to make the query suitable for searching the database.
-     *
-     * @return the cleaned query string
-     */
-    @VisibleForTesting
-    String cleanQuery(String query) {
-        if (TextUtils.isEmpty(query)) {
-            return null;
-        }
-        if (Locale.getDefault().equals(Locale.JAPAN)) {
-            query = IndexData.normalizeJapaneseString(query);
-        }
-        return query.trim();
     }
 }

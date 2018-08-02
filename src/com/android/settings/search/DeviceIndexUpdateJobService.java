@@ -28,7 +28,6 @@ import android.net.Uri.Builder;
 import android.provider.SettingsSlicesContract;
 import android.util.Log;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceDeepLinkSpringBoard;
@@ -36,11 +35,12 @@ import com.android.settings.slices.SliceDeepLinkSpringBoard;
 import java.util.Collection;
 import java.util.concurrent.CountDownLatch;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
+import androidx.slice.SliceMetadata;
 import androidx.slice.SliceViewManager;
 import androidx.slice.SliceViewManager.SliceCallback;
-import androidx.slice.SliceMetadata;
 import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.ListContent;
 

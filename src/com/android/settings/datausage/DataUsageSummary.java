@@ -15,15 +15,10 @@
 package com.android.settings.datausage;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
@@ -34,7 +29,6 @@ import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.style.RelativeSizeSpan;
 import android.util.Log;
-import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -45,15 +39,20 @@ import com.android.settings.search.Indexable;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.net.DataUsageController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 /**
  * Settings preference fragment that displays data usage summary.
  */
-public class DataUsageSummary extends DataUsageBaseFragment implements Indexable,
-        DataUsageEditController {
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
+public class DataUsageSummary extends DataUsageBaseFragment implements DataUsageEditController {
 
     private static final String TAG = "DataUsageSummary";
 
@@ -177,9 +176,9 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
         final Activity activity = getActivity();
         final ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
         mSummaryController =
-                new DataUsageSummaryPreferenceController(activity, getLifecycle(), this);
+                new DataUsageSummaryPreferenceController(activity, getSettingsLifecycle(), this);
         controllers.add(mSummaryController);
-        getLifecycle().addObserver(mSummaryController);
+        getSettingsLifecycle().addObserver(mSummaryController);
         return controllers;
     }
 
@@ -404,7 +403,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
                     keys.add(KEY_MOBILE_USAGE_TITLE);
                     keys.add(KEY_MOBILE_DATA_USAGE_TOGGLE);
                     keys.add(KEY_MOBILE_DATA_USAGE);
-                    keys.add(KEY_MOBILE_BILLING_CYCLE);
                 }
 
                 if (!DataUsageUtils.hasWifiRadio(context)) {
@@ -413,6 +411,11 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
 
                 // This title is named Wifi, and will confuse users.
                 keys.add(KEY_WIFI_USAGE_TITLE);
+
+                // Duplicate entry for "Data saver"
+                keys.add(KEY_RESTRICT_BACKGROUND);
+                // Duplicate entry for "Data warning & limit"
+                keys.add(KEY_MOBILE_BILLING_CYCLE);
 
                 return keys;
             }

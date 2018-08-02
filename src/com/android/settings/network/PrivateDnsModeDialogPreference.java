@@ -22,14 +22,12 @@ import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME
 import static android.system.OsConstants.AF_INET;
 import static android.system.OsConstants.AF_INET6;
 
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
 import android.system.Os;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -46,17 +44,19 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
-import com.android.settingslib.CustomDialogPreference;
+import com.android.settingslib.CustomDialogPreferenceCompat;
 import com.android.settingslib.HelpUtils;
 
-import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Dialog to set the Private DNS
  */
-public class PrivateDnsModeDialogPreference extends CustomDialogPreference implements
+public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat implements
         DialogInterface.OnClickListener, RadioGroup.OnCheckedChangeListener, TextWatcher {
 
     public static final String ANNOTATION_URL = "url";
@@ -72,7 +72,7 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreference imple
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_PROVIDER_HOSTNAME, R.id.private_dns_mode_provider);
     }
 
-    private static final int[] ADDRESS_FAMILIES = new int[]{AF_INET, AF_INET6};
+    private static final int[] ADDRESS_FAMILIES = new int[] {AF_INET, AF_INET6};
 
     @VisibleForTesting
     static final String MODE_KEY = Settings.Global.PRIVATE_DNS_MODE;

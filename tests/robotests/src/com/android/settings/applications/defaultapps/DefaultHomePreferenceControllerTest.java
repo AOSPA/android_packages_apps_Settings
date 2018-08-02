@@ -29,12 +29,11 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,13 +48,15 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.Arrays;
 import java.util.Collections;
 
+import androidx.preference.Preference;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DefaultHomePreferenceControllerTest {
 
     @Mock
     private UserManager mUserManager;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
 
     private Context mContext;
     private DefaultHomePreferenceController mController;

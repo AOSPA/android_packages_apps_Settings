@@ -19,8 +19,6 @@ package com.android.settings.wifi;
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static android.provider.SettingsSlicesContract.KEY_WIFI;
 
-import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
-
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
@@ -32,21 +30,19 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiSsid;
 import android.provider.SettingsSlicesContract;
+import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
-import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
 
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
-
-import android.support.v4.graphics.drawable.IconCompat;
-import android.text.TextUtils;
 
 /**
  * Utility class to build a Wifi Slice, and handle all associated actions.
@@ -90,7 +86,7 @@ public class WifiSliceBuilder {
                 R.drawable.ic_settings_wireless);
         final String title = context.getString(R.string.wifi_settings);
         final CharSequence summary = getSummary(context);
-        @ColorInt final int color = Utils.getColorAccent(context);
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final PendingIntent toggleAction = getBroadcastIntent(context);
         final PendingIntent primaryAction = getPrimaryAction(context);
         final SliceAction primarySliceAction = new SliceAction(primaryAction, icon, title);
@@ -124,7 +120,7 @@ public class WifiSliceBuilder {
     public static Intent getIntent(Context context) {
         final String screenTitle = context.getText(R.string.wifi_settings).toString();
         final Uri contentUri = new Uri.Builder().appendPath(KEY_WIFI).build();
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
+        final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(context,
                 WifiSettings.class.getName(), KEY_WIFI, screenTitle,
                 MetricsEvent.DIALOG_WIFI_AP_EDIT)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())

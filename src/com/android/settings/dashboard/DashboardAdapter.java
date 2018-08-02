@@ -21,10 +21,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.service.settings.suggestions.Suggestion;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,10 +45,15 @@ import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
-import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 import com.android.settingslib.utils.IconCache;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
         implements SummaryLoader.SummaryConsumer, SuggestionAdapter.Callback, LifecycleObserver,
@@ -83,7 +84,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     };
 
     public DashboardAdapter(Context context, Bundle savedInstanceState,
-            List<Condition> conditions, SuggestionControllerMixin suggestionControllerMixin,
+            List<Condition> conditions, SuggestionControllerMixinCompat suggestionControllerMixin,
             Lifecycle lifecycle) {
 
         DashboardCategory category = null;
@@ -146,15 +147,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @Override
     public void onSuggestionClosed(Suggestion suggestion) {
         final List<Suggestion> list = mDashboardData.getSuggestions();
-        if (list == null || list.size() == 0) {
+        if (list == null || list.size() == 0 || !list.remove(suggestion)) {
             return;
         }
-        if (list.size() == 1) {
+        if (list.isEmpty()) {
             // The only suggestion is dismissed, and the the empty suggestion container will
             // remain as the dashboard item. Need to refresh the dashboard list.
             setSuggestions(null);
         } else {
-            list.remove(suggestion);
             setSuggestions(list);
         }
     }

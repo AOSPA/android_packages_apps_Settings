@@ -16,7 +16,6 @@
 
 package com.android.settings.deviceinfo.storage;
 
-import android.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -26,9 +25,6 @@ import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -49,6 +45,11 @@ import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /**
  * StorageItemPreferenceController handles the storage line items which summarize the storage
@@ -321,7 +322,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 ManageApplications.STORAGE_TYPE_PHOTOS_VIDEOS);
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.storage_photos_videos)
+                .setTitleRes(R.string.storage_photos_videos)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -340,7 +341,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         args.putInt(ManageApplications.EXTRA_STORAGE_TYPE, ManageApplications.STORAGE_TYPE_MUSIC);
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.storage_music_audio)
+                .setTitleRes(R.string.storage_music_audio)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -357,7 +358,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.apps_storage)
+                .setTitleRes(R.string.apps_storage)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -369,7 +370,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 Settings.GamesStorageActivity.class.getName());
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.game_storage_settings)
+                .setTitleRes(R.string.game_storage_settings)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -381,7 +382,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 Settings.MoviesStorageActivity.class.getName());
         return new SubSettingLauncher(mContext)
                 .setDestination(ManageApplications.class.getName())
-                .setTitle(R.string.storage_movies_tv)
+                .setTitleRes(R.string.storage_movies_tv)
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
@@ -402,10 +403,14 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         try {
             final int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, -1);
 
+            // b/33117269: Note that launchIntent may launch activity in different task which set
+            // different launchMode (e.g. Files), using startActivityForesult to set task as
+            // source task, and set requestCode as 0 means don't care about returnCode currently.
             if (userId == -1) {
-                mFragment.startActivity(intent);
+                mFragment.startActivityForResult(intent, 0 /* requestCode not used */);
             } else {
-                mFragment.getActivity().startActivityAsUser(intent, new UserHandle(userId));
+                mFragment.getActivity().startActivityForResultAsUser(intent,
+                        0 /* requestCode not used */, new UserHandle(userId));
             }
         } catch (ActivityNotFoundException e) {
             Log.w(TAG, "No activity found for " + intent);

@@ -21,14 +21,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.PowerManager;
-import android.support.annotation.IntDef;
-import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.Utils;
-import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Use this broadcastReceiver to listen to the battery change, and it will invoke

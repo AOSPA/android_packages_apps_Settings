@@ -27,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -48,7 +49,7 @@ public class RequestPermissionActivity extends Activity implements
     // adb shell am start -a android.bluetooth.adapter.action.REQUEST_DISCOVERABLE
     // adb shell am start -a android.bluetooth.adapter.action.REQUEST_DISABLE
 
-    private static final String TAG = "RequestPermissionActivity";
+    private static final String TAG = "BtRequestPermission";
 
     private static final int MAX_DISCOVERABLE_TIMEOUT = 3600; // 1 hr
 
@@ -327,7 +328,10 @@ public class RequestPermissionActivity extends Activity implements
             try {
                 ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(
                         packageName, 0);
-                mAppLabel = applicationInfo.loadSafeLabel(getPackageManager());
+                mAppLabel = applicationInfo.loadSafeLabel(getPackageManager(),
+                        PackageItemInfo.DEFAULT_MAX_LABEL_SIZE_PX,
+                        PackageItemInfo.SAFE_LABEL_FLAG_TRIM
+                                | PackageItemInfo.SAFE_LABEL_FLAG_FIRST_LINE);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e(TAG, "Couldn't find app with package name " + packageName);
                 setResult(RESULT_CANCELED);

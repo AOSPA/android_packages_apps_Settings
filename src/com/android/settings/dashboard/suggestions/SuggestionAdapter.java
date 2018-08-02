@@ -23,8 +23,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.service.settings.suggestions.Suggestion;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -32,7 +30,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -44,12 +41,15 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
-import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 import com.android.settingslib.utils.IconCache;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder> implements
     LifecycleObserver, OnSaveInstanceState {
@@ -63,7 +63,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
     private final IconCache mCache;
     private final ArrayList<String> mSuggestionsShownLogged;
     private final SuggestionFeatureProvider mSuggestionFeatureProvider;
-    private final SuggestionControllerMixin mSuggestionControllerMixin;
+    private final SuggestionControllerMixinCompat mSuggestionControllerMixin;
     private final Callback mCallback;
     private final CardConfig mConfig;
 
@@ -76,8 +76,9 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         void onSuggestionClosed(Suggestion suggestion);
     }
 
-    public SuggestionAdapter(Context context, SuggestionControllerMixin suggestionControllerMixin,
-        Bundle savedInstanceState, Callback callback, Lifecycle lifecycle) {
+    public SuggestionAdapter(Context context,
+            SuggestionControllerMixinCompat suggestionControllerMixin, Bundle savedInstanceState,
+            Callback callback, Lifecycle lifecycle) {
         mContext = context;
         mSuggestionControllerMixin = suggestionControllerMixin;
         mCache = new IconCache(context);
@@ -120,7 +121,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         final Icon icon = suggestion.getIcon();
         final Drawable drawable = mCache.getIcon(icon);
         if (drawable != null && (suggestion.getFlags() & Suggestion.FLAG_ICON_TINTABLE) != 0) {
-            drawable.setTint(Utils.getColorAccent(mContext));
+            drawable.setTintList(Utils.getColorAccent(mContext));
         }
         holder.icon.setImageDrawable(drawable);
         holder.title.setText(suggestion.getTitle());

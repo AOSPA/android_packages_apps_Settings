@@ -21,10 +21,6 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -37,12 +33,11 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+
 public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment {
     public static final String KEY_DEVICE_ADDRESS = "device_address";
     private static final String TAG = "BTDeviceDetailsFrg";
-
-    @VisibleForTesting
-    static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;
 
     /**
      * An interface to let tests override the normal mechanism for looking up the
@@ -60,9 +55,12 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     @VisibleForTesting
     static TestDataFactory sTestDataFactory;
 
-    private String mDeviceAddress;
-    private LocalBluetoothManager mManager;
-    private CachedBluetoothDevice mCachedDevice;
+    @VisibleForTesting
+    String mDeviceAddress;
+    @VisibleForTesting
+    LocalBluetoothManager mManager;
+    @VisibleForTesting
+    CachedBluetoothDevice mCachedDevice;
 
     public BluetoothDeviceDetailsFragment() {
         super(DISALLOW_CONFIG_BLUETOOTH);
@@ -118,29 +116,11 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem item = menu.add(0, EDIT_DEVICE_NAME_ITEM_ID, 0, R.string.bluetooth_rename_button);
-        item.setIcon(R.drawable.ic_mode_edit);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() == EDIT_DEVICE_NAME_ITEM_ID) {
-            RemoteDeviceNameDialogFragment.newInstance(mCachedDevice).show(
-                    getFragmentManager(), RemoteDeviceNameDialogFragment.TAG);
-            return true;
-        }
-        return super.onOptionsItemSelected(menuItem);
-    }
-
-    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
 
         if (mCachedDevice != null) {
-            Lifecycle lifecycle = getLifecycle();
+            Lifecycle lifecycle = getSettingsLifecycle();
             controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
                     lifecycle, mManager));
             controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,

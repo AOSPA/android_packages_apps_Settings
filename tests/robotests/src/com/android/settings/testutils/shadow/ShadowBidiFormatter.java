@@ -16,10 +16,10 @@
 
 package com.android.settings.testutils.shadow;
 
-import android.support.v4.text.BidiFormatter;
-import android.support.v4.text.TextDirectionHeuristicCompat;
-
 import org.robolectric.annotation.Implements;
+
+import androidx.core.text.BidiFormatter;
+import androidx.core.text.TextDirectionHeuristicCompat;
 
 @Implements(BidiFormatter.class)
 public class ShadowBidiFormatter {

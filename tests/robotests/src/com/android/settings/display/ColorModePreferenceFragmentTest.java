@@ -24,10 +24,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto;
@@ -49,6 +46,10 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
 public class ColorModePreferenceFragmentTest {
@@ -59,7 +60,7 @@ public class ColorModePreferenceFragmentTest {
     private ColorDisplayController mController;
 
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
 
     @Before
     public void setup() {

@@ -22,23 +22,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
 
-import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.bluetooth.AlwaysDiscoverable;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.R;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Controller that shows and updates the bluetooth device name
@@ -49,9 +50,10 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
 
     @VisibleForTesting
     BroadcastReceiver mBluetoothChangedReceiver;
-    private FooterPreferenceMixin mFooterPreferenceMixin;
+    @VisibleForTesting
+    LocalBluetoothManager mLocalManager;
+    private FooterPreferenceMixinCompat mFooterPreferenceMixin;
     private FooterPreference mPreference;
-    private LocalBluetoothManager mLocalManager;
     private LocalBluetoothAdapter mLocalAdapter;
     private AlwaysDiscoverable mAlwaysDiscoverable;
 
@@ -80,11 +82,12 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
     }
 
     public void init(DashboardFragment fragment) {
-        mFooterPreferenceMixin = new FooterPreferenceMixin(fragment, fragment.getLifecycle());
+        mFooterPreferenceMixin = new FooterPreferenceMixinCompat(fragment,
+                fragment.getSettingsLifecycle());
     }
 
     @VisibleForTesting
-    void init(FooterPreferenceMixin footerPreferenceMixin, FooterPreference preference,
+    void init(FooterPreferenceMixinCompat footerPreferenceMixin, FooterPreference preference,
             AlwaysDiscoverable alwaysDiscoverable) {
         mFooterPreferenceMixin = footerPreferenceMixin;
         mPreference = preference;
@@ -112,6 +115,9 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
 
     @Override
     public void onResume() {
+        if (mLocalManager == null) {
+            return;
+        }
         mContext.registerReceiver(mBluetoothChangedReceiver,
                 new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         mAlwaysDiscoverable.start();
@@ -120,6 +126,9 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
 
     @Override
     public void onPause() {
+        if (mLocalManager == null) {
+            return;
+        }
         mContext.unregisterReceiver(mBluetoothChangedReceiver);
         mAlwaysDiscoverable.stop();
     }

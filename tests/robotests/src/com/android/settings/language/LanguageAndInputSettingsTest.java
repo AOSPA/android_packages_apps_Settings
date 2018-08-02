@@ -27,7 +27,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
-import android.arch.lifecycle.LifecycleObserver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -58,6 +57,8 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.lifecycle.LifecycleObserver;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class LanguageAndInputSettingsTest {
@@ -109,7 +110,7 @@ public class LanguageAndInputSettingsTest {
                 lifecycleObserverCount++;
             }
         }
-        verify(mFragment.getLifecycle(), times(lifecycleObserverCount))
+        verify(mFragment.getSettingsLifecycle(), times(lifecycleObserverCount))
                 .addObserver(any(LifecycleObserver.class));
     }
 
@@ -206,9 +207,9 @@ public class LanguageAndInputSettingsTest {
         }
 
         @Override
-        public Lifecycle getLifecycle() {
+        public Lifecycle getSettingsLifecycle() {
             if (mLifecycle == null) {
-                return super.getLifecycle();
+                return super.getSettingsLifecycle();
             }
             return mLifecycle;
         }

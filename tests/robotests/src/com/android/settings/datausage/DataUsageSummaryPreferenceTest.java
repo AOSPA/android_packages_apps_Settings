@@ -18,7 +18,6 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -29,7 +28,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.telephony.SubscriptionManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +54,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 
 import java.util.concurrent.TimeUnit;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceViewHolder;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResourcesImpl.class)
@@ -226,7 +227,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mCarrierInfo.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCarrierInfo.getCurrentTextColor()).isEqualTo(
-                Utils.getColorAttr(mContext, android.R.attr.textColorSecondary));
+                Utils.getColorAttrDefaultColor(mContext, android.R.attr.textColorSecondary));
         assertThat(mCarrierInfo.getTypeface()).isEqualTo(Typeface.SANS_SERIF);
     }
 
@@ -239,7 +240,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mCarrierInfo.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCarrierInfo.getCurrentTextColor()).isEqualTo(
-                Utils.getColorAttr(mContext, android.R.attr.colorError));
+                Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorError));
         assertThat(mCarrierInfo.getTypeface()).isEqualTo(
                 DataUsageSummaryPreference.SANS_SERIF_MEDIUM);
     }
@@ -319,6 +320,15 @@ public class DataUsageSummaryPreferenceTest {
     }
 
     @Test
+    public void testSetLimitInfo_withEmptyLimitInfo_dataLimitsNotShown() {
+        final String emptyLimitText = "";
+        mSummaryPreference.setLimitInfo(emptyLimitText);
+
+        bindViewHolder();
+        assertThat(mDataLimits.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
     public void testSetChartEnabledFalse_hidesLabelBar() {
         setValidLabels();
         mSummaryPreference.setChartEnabled(false);
@@ -374,7 +384,7 @@ public class DataUsageSummaryPreferenceTest {
         assertThat(mDataUsed.getText().toString()).isEqualTo("1.00 MB used");
         assertThat(mDataRemaining.getText().toString()).isEqualTo("9.00 MB left");
         assertThat(mDataRemaining.getVisibility()).isEqualTo(View.VISIBLE);
-        final int colorId = Utils.getColorAttr(mContext, android.R.attr.colorAccent);
+        final int colorId = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorAccent);
         assertThat(mDataRemaining.getCurrentTextColor()).isEqualTo(colorId);
     }
 
@@ -390,7 +400,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("11.00 MB used");
         assertThat(mDataRemaining.getText().toString()).isEqualTo("1.00 MB over");
-        final int colorId = Utils.getColorAttr(mContext, android.R.attr.colorError);
+        final int colorId = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorError);
         assertThat(mDataRemaining.getCurrentTextColor()).isEqualTo(colorId);
     }
 
@@ -408,7 +418,7 @@ public class DataUsageSummaryPreferenceTest {
 
     @Test
     public void testSetAppIntent_toMdpApp_intentCorrect() {
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         final Intent intent = new Intent(SubscriptionManager.ACTION_MANAGE_SUBSCRIPTION_PLANS);
         intent.setPackage("test-owner.example.com");
         intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, 42);
@@ -476,12 +486,14 @@ public class DataUsageSummaryPreferenceTest {
         final int daysLeft = 3;
         final long cycleEnd = System.currentTimeMillis() + TimeUnit.DAYS.toMillis(daysLeft)
                 + TimeUnit.HOURS.toMillis(1);
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
+        mSummaryPreference = spy(mSummaryPreference);
         mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
                 new Intent());
         mSummaryPreference.setUsageNumbers(1000000L, -1L, true);
         final String cycleText = "The quick fox";
         mSummaryPreference.setWifiMode(true, cycleText);
+        doReturn(200L).when(mSummaryPreference).getHistoriclUsageLevel();
 
         bindViewHolder();
         assertThat(mUsageTitle.getText().toString())
@@ -509,8 +521,19 @@ public class DataUsageSummaryPreferenceTest {
         assertThat((NetworkTemplate) actual.getParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE))
                 .isEqualTo(NetworkTemplate.buildTemplateWifiWildcard());
 
-        assertThat(startedIntent.getCharSequenceExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE))
-                .isEqualTo(mContext.getString(R.string.wifi_data_usage));
+        assertThat(startedIntent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
+                .isEqualTo(R.string.wifi_data_usage);
+    }
+
+    @Test
+    public void testSetWifiMode_noUsageInfo_shouldDisableLaunchButton() {
+        mSummaryPreference = spy(mSummaryPreference);
+        mSummaryPreference.setWifiMode(true, "Test cycle text");
+        doReturn(0L).when(mSummaryPreference).getHistoriclUsageLevel();
+
+        bindViewHolder();
+
+        assertThat(mLaunchButton.isEnabled()).isFalse();
     }
 
     private void bindViewHolder() {

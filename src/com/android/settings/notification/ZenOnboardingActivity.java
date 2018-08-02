@@ -29,12 +29,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+
+import androidx.annotation.VisibleForTesting;
 
 public class ZenOnboardingActivity extends Activity {
 
@@ -194,7 +195,8 @@ public class ZenOnboardingActivity extends Activity {
         final long showTimeMs = firstDisplayTimeMs + ALWAYS_SHOW_THRESHOLD;
         final boolean stillShow = currentTimeMs < showTimeMs;
 
-        Log.d(TAG, "still show zen suggestion based on time: " + stillShow);
+        Log.d(TAG, "still show zen suggestion based on time: " + stillShow + " showTimeMs="
+            + showTimeMs);
         return stillShow;
     }
 }

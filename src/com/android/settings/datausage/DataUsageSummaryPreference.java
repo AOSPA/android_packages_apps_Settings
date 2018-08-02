@@ -22,8 +22,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -35,15 +33,19 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.Utils;
+import com.android.settingslib.net.DataUsageController;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * Provides a summary of data usage.
@@ -72,7 +74,7 @@ public class DataUsageSummaryPreference extends Preference {
     private long mSnapshotTimeMs;
     /** Name of carrier, or null if not available */
     private CharSequence mCarrierName;
-    private String mLimitInfoText;
+    private CharSequence mLimitInfoText;
     private Intent mLaunchIntent;
 
     /** Progress to display on ProgressBar */
@@ -97,7 +99,7 @@ public class DataUsageSummaryPreference extends Preference {
         setLayoutResource(R.layout.data_usage_summary_preference);
     }
 
-    public void setLimitInfo(String text) {
+    public void setLimitInfo(CharSequence text) {
         if (!Objects.equals(text, mLimitInfoText)) {
             mLimitInfoText = text;
             notifyChanged();
@@ -176,9 +178,14 @@ public class DataUsageSummaryPreference extends Preference {
             carrierInfo.setVisibility(View.GONE);
             limitInfo.setVisibility(View.GONE);
 
-            launchButton.setOnClickListener((view) -> {
-                launchWifiDataUsage(getContext());
-            });
+            final long usageLevel = getHistoriclUsageLevel();
+            if (usageLevel > 0L) {
+                launchButton.setOnClickListener((view) -> {
+                    launchWifiDataUsage(getContext());
+                });
+            } else {
+                launchButton.setEnabled(false);
+            }
             launchButton.setText(R.string.launch_wifi_text);
             launchButton.setVisibility(View.VISIBLE);
         } else {
@@ -207,7 +214,7 @@ public class DataUsageSummaryPreference extends Preference {
                 .setArguments(args)
                 .setDestination(DataUsageList.class.getName())
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
-        launcher.setTitle(context.getString(R.string.wifi_data_usage));
+        launcher.setTitleRes(R.string.wifi_data_usage);
         launcher.launch();
     }
 
@@ -330,4 +337,11 @@ public class DataUsageSummaryPreference extends Preference {
         carrierInfo.setTextColor(Utils.getColorAttr(getContext(), colorId));
         carrierInfo.setTypeface(typeface);
     }
+
+    @VisibleForTesting
+    long getHistoriclUsageLevel() {
+        final DataUsageController controller = new DataUsageController(getContext());
+        return controller.getHistoriclUsageLevel(NetworkTemplate.buildTemplateWifiWildcard());
+    }
+
 }

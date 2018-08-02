@@ -14,7 +14,6 @@
 
 package com.android.settings.datausage;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.ContentObserver;
@@ -25,9 +24,6 @@ import android.os.Looper;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Settings.Global;
-import android.support.annotation.VisibleForTesting;
-import android.support.v4.content.res.TypedArrayUtils;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -40,11 +36,16 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.CustomDialogPreference;
+import com.android.settingslib.CustomDialogPreferenceCompat;
 
 import java.util.List;
 
-public class CellDataPreference extends CustomDialogPreference implements TemplatePreference {
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.PreferenceViewHolder;
+
+public class CellDataPreference extends CustomDialogPreferenceCompat implements TemplatePreference {
 
     private static final String TAG = "CellDataPreference";
 
@@ -56,7 +57,7 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
 
     public CellDataPreference(Context context, AttributeSet attrs) {
         super(context, attrs, TypedArrayUtils.getAttr(context,
-                android.support.v7.preference.R.attr.switchPreferenceStyle,
+                androidx.preference.R.attr.switchPreferenceStyle,
                 android.R.attr.switchPreferenceStyle));
     }
 
@@ -162,12 +163,12 @@ public class CellDataPreference extends CustomDialogPreference implements Templa
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
         showDisableDialog(builder, listener);
     }
 
-    private void showDisableDialog(AlertDialog.Builder builder,
+    private void showDisableDialog(Builder builder,
             DialogInterface.OnClickListener listener) {
         builder.setTitle(null)
                 .setMessage(R.string.data_usage_disable_mobile)

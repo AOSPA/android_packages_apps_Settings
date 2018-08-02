@@ -16,16 +16,11 @@
 
 package com.android.settings.applications.appinfo;
 
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.Loader;
 import android.content.pm.PackageInfo;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -44,6 +39,12 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class AppBatteryPreferenceController extends BasePreferenceController
         implements LoaderManager.LoaderCallbacks<BatteryStatsHelper>,
@@ -98,13 +99,11 @@ public class AppBatteryPreferenceController extends BasePreferenceController
                     (UserManager) mContext.getSystemService(Context.USER_SERVICE);
             final BatteryEntry entry = new BatteryEntry(mContext, null, userManager, mSipper);
             entry.defaultPackageName = mPackageName;
-            AdvancedPowerUsageDetail.startBatteryDetailPage(
-                    (SettingsActivity) mParent.getActivity(), mParent, mBatteryHelper,
-                    BatteryStats.STATS_SINCE_CHARGED, entry, mBatteryPercent,
-                    null /* mAnomalies */);
+            AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
+                    mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry, mBatteryPercent);
         } else {
-            AdvancedPowerUsageDetail.startBatteryDetailPage(
-                    (SettingsActivity) mParent.getActivity(), mParent, mPackageName);
+            AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
+                    mPackageName);
         }
         return true;
     }

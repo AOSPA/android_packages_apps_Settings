@@ -28,13 +28,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.provider.Telephony;
-import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.MultiSelectListPreference;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.EditTextPreference;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
@@ -61,6 +54,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.MultiSelectListPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.SwitchPreference;
 
 public class ApnEditor extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, OnKeyListener {
@@ -347,11 +348,21 @@ public class ApnEditor extends SettingsPreferenceFragment
     static String formatInteger(String value) {
         try {
             final int intValue = Integer.parseInt(value);
-            return String.format("%d", intValue);
+            return String.format(getCorrectDigitsFormat(value), intValue);
         } catch (NumberFormatException e) {
             return value;
         }
     }
+
+    /**
+     * Get the digits format so we preserve leading 0's.
+     * MCCs are 3 digits and MNCs are either 2 or 3.
+     */
+    static String getCorrectDigitsFormat(String value) {
+        if (value.length() == 2) return "%02d";
+        else return "%03d";
+    }
+
 
     /**
      * Check if passed in array of APN types indicates all APN types

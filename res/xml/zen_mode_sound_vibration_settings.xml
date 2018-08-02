@@ -21,7 +21,8 @@
     android:title="@string/zen_sound_title" >
 
    <PreferenceCategory
-       android:title="@string/zen_mode_settings_category">
+       android:title="@string/zen_mode_settings_category"
+       android:key="zen_mode_settings_category_sound_vibration">
       <!-- Alarms -->
       <SwitchPreference
           android:key="zen_mode_alarms"

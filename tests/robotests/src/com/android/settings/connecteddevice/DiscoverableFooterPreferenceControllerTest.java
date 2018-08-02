@@ -26,19 +26,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
 
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.bluetooth.AlwaysDiscoverable;
 import com.android.settings.R;
+import com.android.settings.bluetooth.AlwaysDiscoverable;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothPan;
 import com.android.settings.testutils.shadow.ShadowLocalBluetoothAdapter;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,6 +52,8 @@ import org.robolectric.shadows.ShadowApplication;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.preference.PreferenceScreen;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothPan.class, ShadowBluetoothAdapter.class,
         ShadowLocalBluetoothAdapter.class})
@@ -65,7 +66,7 @@ public class DiscoverableFooterPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private FooterPreferenceMixin mFooterPreferenceMixin;
+    private FooterPreferenceMixinCompat mFooterPreferenceMixin;
     @Mock
     private AlwaysDiscoverable mAlwaysDiscoverable;
 
@@ -176,5 +177,23 @@ public class DiscoverableFooterPreferenceControllerTest {
             registeredBroadcastReceivers.add(wrapper.getBroadcastReceiver());
         }
         return registeredBroadcastReceivers;
+    }
+
+    @Test
+    public void onResume_localBluetoothManagerNull_shouldNotCrash() {
+        mDiscoverableFooterPreferenceController.mLocalManager = null;
+        mDiscoverableFooterPreferenceController.init(mFooterPreferenceMixin, mPreference, null);
+
+        // Shouldn't crash
+        mDiscoverableFooterPreferenceController.onResume();
+    }
+
+    @Test
+    public void onPause_localBluetoothManagerNull_shouldNotCrash() {
+        mDiscoverableFooterPreferenceController.mLocalManager = null;
+        mDiscoverableFooterPreferenceController.init(mFooterPreferenceMixin, mPreference, null);
+
+        // Shouldn't crash
+        mDiscoverableFooterPreferenceController.onPause();
     }
 }

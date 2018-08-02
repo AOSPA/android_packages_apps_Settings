@@ -19,7 +19,6 @@ package com.android.settings.datausage;
 import static android.net.ConnectivityManager.TYPE_WIFI;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
@@ -32,7 +31,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
-import android.support.v7.widget.RecyclerView;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -52,6 +50,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -59,6 +58,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.concurrent.TimeUnit;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowEntityHeaderController.class)
@@ -96,7 +98,7 @@ public class DataUsageSummaryPreferenceControllerTest {
     private DataUsageInfoController mDataInfoController;
 
     private FakeFeatureFactory mFactory;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private Context mContext;
     private DataUsageSummaryPreferenceController mController;
 
@@ -114,7 +116,7 @@ public class DataUsageSummaryPreferenceControllerTest {
         ShadowEntityHeaderController.setUseMock(mHeaderController);
         mDataInfoController = new DataUsageInfoController();
 
-        mActivity = spy(Robolectric.buildActivity(Activity.class).get());
+        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         when(mActivity.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mActivity.getSystemService(ConnectivityManager.class))
                 .thenReturn(mConnectivityManager);
@@ -148,7 +150,12 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("512 MB data warning / 1.00 GB data limit");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
+
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 1 /* numPlans */, intent);
         verify(mSummaryPreference).setChartEnabled(true);
@@ -167,7 +174,12 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("512 MB data warning / 1.00 GB data limit");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
+
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 0 /* numPlans */, intent);
         verify(mSummaryPreference).setChartEnabled(true);
@@ -185,7 +197,11 @@ public class DataUsageSummaryPreferenceControllerTest {
                 info.cycleEnd, null /* intent */);
         mController.updateState(mSummaryPreference);
 
-        verify(mSummaryPreference).setLimitInfo("512 MB data warning / 1.00 GB data limit");
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
+
         verify(mSummaryPreference).setUsageInfo(
                 info.cycleEnd,
                 -1L /* snapshotTime */,
@@ -208,7 +224,10 @@ public class DataUsageSummaryPreferenceControllerTest {
                 info.cycleEnd, null /* intent */);
         mController.updateState(mSummaryPreference);
 
-        verify(mSummaryPreference).setLimitInfo("512 MB data warning / 1.00 GB data limit");
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
         verify(mSummaryPreference).setUsageInfo(
                 info.cycleEnd,
                 -1L /* snapshotTime */,
@@ -250,7 +269,11 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("1.00 MB data warning");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("1.00 MB data warning");
     }
 
     @Test
@@ -267,7 +290,11 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("1.00 MB data limit");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("1.00 MB data limit");
     }
 
     @Test
@@ -284,7 +311,11 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("1.00 MB data warning / 1.00 MB data limit");
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mSummaryPreference).setLimitInfo(captor.capture());
+        CharSequence value = captor.getValue();
+        assertThat(value.toString()).isEqualTo("1.00 MB data warning / 1.00 MB data limit");
         verify(mSummaryPreference).setWifiMode(false, null);
     }
 
@@ -324,7 +355,7 @@ public class DataUsageSummaryPreferenceControllerTest {
                 mActivity, null, null, null);
 
         final SubscriptionInfo subInfo = new SubscriptionInfo(0, "123456", 0, "name", "carrier",
-                0, 0, "number", 0, null, 123, 456, "ZX");
+                0, 0, "number", 0, null, "123", "456", "ZX");
         when(mSubscriptionManager.getDefaultDataSubscriptionInfo()).thenReturn(subInfo);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }

@@ -16,23 +16,20 @@
 
 package com.android.settings.wifi;
 
-import static android.arch.lifecycle.Lifecycle.Event.ON_PAUSE;
-import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
+import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
+import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.arch.lifecycle.LifecycleOwner;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -44,6 +41,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WifiInfoPreferenceControllerTest {
@@ -78,6 +79,7 @@ public class WifiInfoPreferenceControllerTest {
                 .thenReturn(mMacPreference)
                 .thenReturn(mIpPreference);
         when(mWifiManager.getConnectionInfo()).thenReturn(mWifiInfo);
+        when(mWifiManager.getCurrentNetwork()).thenReturn(null);
         mController = new WifiInfoPreferenceController(mContext, mLifecycle, mWifiManager);
     }
 
@@ -102,7 +104,6 @@ public class WifiInfoPreferenceControllerTest {
 
     @Test
     public void onResume_shouldUpdateWifiInfo() {
-        when(mWifiManager.getCurrentNetwork()).thenReturn(null);
         when(mWifiInfo.getMacAddress()).thenReturn(TEST_MAC_ADDRESS);
 
         mController.displayPreference(mScreen);
@@ -113,22 +114,98 @@ public class WifiInfoPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateMacAddress() {
-        when(mWifiManager.getCurrentNetwork()).thenReturn(null);
+    public void updateWifiInfo_nullWifiInfoWithMacRandomizationOff_setMacUnavailable() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 0);
+        mController.displayPreference(mScreen);
+        when(mWifiManager.getConnectionInfo()).thenReturn(null);
+
+        mController.updateWifiInfo();
+
+        verify(mMacPreference).setSummary(R.string.status_unavailable);
+    }
+
+    @Test
+    public void updateWifiInfo_nullMacWithMacRandomizationOff_setMacUnavailable() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 0);
+        mController.displayPreference(mScreen);
+        when(mWifiInfo.getMacAddress()).thenReturn(null);
+
+        mController.updateWifiInfo();
+
+        verify(mMacPreference).setSummary(R.string.status_unavailable);
+    }
+
+    @Test
+    public void updateWifiInfo_defaultMacWithMacRandomizationOff_setMacUnavailable() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 0);
+        mController.displayPreference(mScreen);
+        when(mWifiInfo.getMacAddress()).thenReturn(WifiInfo.DEFAULT_MAC_ADDRESS);
+
+        mController.updateWifiInfo();
+
+        verify(mMacPreference).setSummary(R.string.status_unavailable);
+    }
+
+    @Test
+    public void updateWifiInfo_validMacWithMacRandomizationOff_setValidMac() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 0);
+        mController.displayPreference(mScreen);
+        when(mWifiInfo.getMacAddress()).thenReturn(TEST_MAC_ADDRESS);
+
+        mController.updateWifiInfo();
+
+        verify(mMacPreference).setSummary(TEST_MAC_ADDRESS);
+    }
+
+    @Test
+    public void updateWifiInfo_nullWifiInfoWithMacRandomizationOn_setMacUnavailable() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 1);
         mController.displayPreference(mScreen);
+        when(mWifiManager.getConnectionInfo()).thenReturn(null);
 
-        when(mWifiInfo.getMacAddress()).thenReturn(null);
         mController.updateWifiInfo();
+
         verify(mMacPreference).setSummary(R.string.status_unavailable);
+    }
 
+    @Test
+    public void updateWifiInfo_nullMacWithMacRandomizationOn_setMacUnavailable() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 1);
+        mController.displayPreference(mScreen);
+        when(mWifiInfo.getMacAddress()).thenReturn(null);
+
+        mController.updateWifiInfo();
+
+        verify(mMacPreference).setSummary(R.string.status_unavailable);
+    }
+
+    @Test
+    public void updateWifiInfo_defaultMacWithMacRandomizationOn_setMacRandomized() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 1);
+        mController.displayPreference(mScreen);
         when(mWifiInfo.getMacAddress()).thenReturn(WifiInfo.DEFAULT_MAC_ADDRESS);
-        mController.updateWifiInfo();
-        verify(mMacPreference).setSummary(R.string.wifi_status_mac_randomized);
 
-        when(mWifiInfo.getMacAddress()).thenReturn(TEST_MAC_ADDRESS);
         mController.updateWifiInfo();
+
+        verify(mMacPreference).setSummary(R.string.wifi_status_mac_randomized);
+    }
+
+    @Test
+    public void updateWifiInfo_validMacWithMacRandomizationOn_setValidMac() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_CONNECTED_MAC_RANDOMIZATION_ENABLED, 1);
+        mController.displayPreference(mScreen);
+        when(mWifiInfo.getMacAddress()).thenReturn(TEST_MAC_ADDRESS);
+
+        mController.updateWifiInfo();
+
         verify(mMacPreference).setSummary(TEST_MAC_ADDRESS);
     }
 }

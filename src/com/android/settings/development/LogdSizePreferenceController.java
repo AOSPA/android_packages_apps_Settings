@@ -17,10 +17,11 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.AbstractLogdSizePreferenceController;
+
+import androidx.preference.Preference;
 
 public class LogdSizePreferenceController extends AbstractLogdSizePreferenceController implements
         Preference.OnPreferenceChangeListener, PreferenceControllerMixin {

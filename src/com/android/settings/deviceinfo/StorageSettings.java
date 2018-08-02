@@ -20,7 +20,6 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,10 +34,6 @@ import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
-import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
@@ -57,16 +52,24 @@ import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+
 /**
  * Panel showing both internal storage (both built-in storage and private
  * volumes) and removable storage (public volumes).
  */
+@SearchIndexable
 public class StorageSettings extends SettingsPreferenceFragment implements Indexable {
     static final String TAG = "StorageSettings";
 
@@ -236,7 +239,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 new SubSettingLauncher(getActivity())
                         .setDestination(StorageDashboardFragment.class.getName())
                         .setArguments(args)
-                        .setTitle(R.string.storage_settings)
+                        .setTitleRes(R.string.storage_settings)
                         .setSourceMetricsCategory(getMetricsCategory())
                         .launch();
                 finish();
@@ -283,7 +286,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(vol.getId())) {
                     new SubSettingLauncher(getContext())
                             .setDestination(StorageDashboardFragment.class.getCanonicalName())
-                            .setTitle(R.string.storage_settings)
+                            .setTitleRes(R.string.storage_settings)
                             .setSourceMetricsCategory(getMetricsCategory())
                             .setArguments(args)
                             .launch();
@@ -294,7 +297,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                             sTotalInternalStorage));
                     new SubSettingLauncher(getContext())
                             .setDestination(PrivateVolumeSettings.class.getCanonicalName())
-                            .setTitle(-1)
+                            .setTitleRes(-1)
                             .setSourceMetricsCategory(getMetricsCategory())
                             .setArguments(args)
                             .launch();
@@ -317,7 +320,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             args.putString(VolumeRecord.EXTRA_FS_UUID, key);
             new SubSettingLauncher(getContext())
                     .setDestination(PrivateVolumeForget.class.getCanonicalName())
-                    .setTitle(R.string.storage_menu_forget)
+                    .setTitleRes(R.string.storage_menu_forget)
                     .setSourceMetricsCategory(getMetricsCategory())
                     .setArguments(args)
                     .launch();
@@ -338,7 +341,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             args.putString(VolumeInfo.EXTRA_VOLUME_ID, vol.getId());
             new SubSettingLauncher(context)
                     .setDestination(PublicVolumeSettings.class.getCanonicalName())
-                    .setTitle(-1)
+                    .setTitleRes(-1)
                     .setSourceMetricsCategory(METRICS_CATEGORY)
                     .setArguments(args)
                     .launch();

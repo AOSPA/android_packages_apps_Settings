@@ -17,17 +17,18 @@
 package com.android.settings.core;
 
 import android.annotation.StringRes;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 
 public class SubSettingLauncher {
 
@@ -48,18 +49,37 @@ public class SubSettingLauncher {
         return this;
     }
 
-    public SubSettingLauncher setTitle(@StringRes int titleResId) {
-        return setTitle(null /*titlePackageName*/, titleResId);
+    /**
+     * Set title with resource string id.
+     *
+     * @param titleResId res id of string
+     */
+    public SubSettingLauncher setTitleRes(@StringRes int titleResId) {
+        return setTitleRes(null /*titlePackageName*/, titleResId);
     }
 
-    public SubSettingLauncher setTitle(String titlePackageName, @StringRes int titleResId) {
+    /**
+     * Set title with resource string id, and package name to resolve the resource id.
+     *
+     * @param titlePackageName package name to resolve resource
+     * @param titleResId       res id of string, will use package name to resolve
+     */
+    public SubSettingLauncher setTitleRes(String titlePackageName, @StringRes int titleResId) {
         mLaunchRequest.titleResPackageName = titlePackageName;
         mLaunchRequest.titleResId = titleResId;
         mLaunchRequest.title = null;
         return this;
     }
 
-    public SubSettingLauncher setTitle(CharSequence title) {
+    /**
+     * Set title with text,
+     * This method is only for user generated string,
+     * display text will not update after locale change,
+     * if title string is from resource id, please use setTitleRes.
+     *
+     * @param title text title
+     */
+    public SubSettingLauncher setTitleText(CharSequence title) {
         mLaunchRequest.title = title;
         return this;
     }

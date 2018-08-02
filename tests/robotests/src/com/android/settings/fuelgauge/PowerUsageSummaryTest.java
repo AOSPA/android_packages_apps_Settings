@@ -16,7 +16,6 @@
 package com.android.settings.fuelgauge;
 
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADVANCED_BATTERY;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -32,11 +31,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -48,8 +45,6 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -73,6 +68,8 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.loader.app.LoaderManager;
 
 // TODO: Improve this test class so that it starts up the real activity and fragment.
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -238,23 +235,6 @@ public class PowerUsageSummaryTest {
         }
 
         assertThat(preferenceScreenKeys).containsAllIn(preferenceKeys);
-    }
-
-    @Test
-    public void updateAnomalySparseArray() {
-        mFragment.mAnomalySparseArray = new SparseArray<>();
-        final List<Anomaly> anomalies = new ArrayList<>();
-        final Anomaly anomaly1 = new Anomaly.Builder().setUid(UID).build();
-        final Anomaly anomaly2 = new Anomaly.Builder().setUid(UID).build();
-        final Anomaly anomaly3 = new Anomaly.Builder().setUid(UID_2).build();
-        anomalies.add(anomaly1);
-        anomalies.add(anomaly2);
-        anomalies.add(anomaly3);
-
-        mFragment.updateAnomalySparseArray(anomalies);
-
-        assertThat(mFragment.mAnomalySparseArray.get(UID)).containsExactly(anomaly1, anomaly2);
-        assertThat(mFragment.mAnomalySparseArray.get(UID_2)).containsExactly(anomaly3);
     }
 
     @Test

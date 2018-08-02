@@ -23,7 +23,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
+        android:minHeight="36dp"
         android:background="?android:attr/selectableItemBackground"
         android:orientation="horizontal">
 
@@ -57,7 +58,7 @@
         android:alpha=".7"
         android:textColor="?android:attr/textColorPrimary" />
 
-    <android.support.v7.widget.ButtonBarLayout
+    <androidx.appcompat.widget.ButtonBarLayout
         android:id="@+id/buttonBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,7 +88,7 @@
             android:textColor="?android:attr/textColorPrimary"
             style="?android:attr/buttonBarButtonStyle" />
 
-    </android.support.v7.widget.ButtonBarLayout>
+    </androidx.appcompat.widget.ButtonBarLayout>
 
     <include layout="@layout/horizontal_divider" />
 

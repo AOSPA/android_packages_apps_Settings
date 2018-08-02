@@ -38,13 +38,12 @@ import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Telephony;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.data.ApnSetting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -56,7 +55,7 @@ import android.widget.Toast;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
-import com.android.internal.telephony.dataconnection.ApnSetting;
+import com.android.internal.telephony.dataconnection.ApnSettingUtils;
 import com.android.internal.telephony.uicc.IccRecords;
 import com.android.internal.telephony.uicc.UiccController;
 import com.android.settings.R;
@@ -69,6 +68,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 
 public class ApnSettings extends RestrictedSettingsFragment implements
         Preference.OnPreferenceChangeListener {
@@ -118,7 +120,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
 
     private String mSelectedKey;
 
-    private IntentFilter mMobileStateFilter;
+    private IntentFilter mIntentFilter;
 
     private boolean mUnavailable;
 
@@ -136,7 +138,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
     }
 
-    private final BroadcastReceiver mMobileStateReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(
@@ -150,6 +152,11 @@ public class ApnSettings extends RestrictedSettingsFragment implements
                         showDialog(DIALOG_RESTORE_DEFAULTAPN);
                     }
                     break;
+                }
+            } else if(intent.getAction().equals(
+                    TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED)) {
+                if (!mRestoreDefaultApnMode) {
+                    fillList();
                 }
             }
         }
@@ -176,8 +183,9 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         final int subId = activity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
-        mMobileStateFilter = new IntentFilter(
+        mIntentFilter = new IntentFilter(
                 TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED);
+        mIntentFilter.addAction(TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED);
 
         setIfOnlyAvailableForAdmins(true);
 
@@ -232,7 +240,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
             return;
         }
 
-        getActivity().registerReceiver(mMobileStateReceiver, mMobileStateFilter);
+        getActivity().registerReceiver(mReceiver, mIntentFilter);
 
         if (!mRestoreDefaultApnMode) {
             fillList();
@@ -247,7 +255,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
             return;
         }
 
-        getActivity().unregisterReceiver(mMobileStateReceiver);
+        getActivity().unregisterReceiver(mReceiver);
     }
 
     @Override
@@ -380,7 +388,8 @@ public class ApnSettings extends RestrictedSettingsFragment implements
                               ArrayList<ApnPreference> mvnoList, IccRecords r, String mvnoType,
                               String mvnoMatchData) {
         if (r != null && !TextUtils.isEmpty(mvnoType) && !TextUtils.isEmpty(mvnoMatchData)) {
-            if (ApnSetting.mvnoMatches(r, mvnoType, mvnoMatchData)) {
+            if (ApnSettingUtils.mvnoMatches(r, ApnSetting.getMvnoTypeIntFromString(mvnoType),
+                    mvnoMatchData)) {
                 mvnoList.add(pref);
                 // Since adding to mvno list, save mvno info
                 mMvnoType = mvnoType;

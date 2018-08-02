@@ -27,6 +27,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -45,7 +46,8 @@ import com.android.settings.dashboard.DashboardAdapter;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowCardView;
-import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.Utils;
+import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 import com.android.settingslib.utils.IconCache;
 
 import org.junit.Before;
@@ -68,7 +70,7 @@ public class SuggestionAdapterTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private SettingsActivity mActivity;
     @Mock
-    private SuggestionControllerMixin mSuggestionControllerMixin;
+    private SuggestionControllerMixinCompat mSuggestionControllerMixin;
     @Mock
     private Resources mResources;
     @Mock
@@ -282,13 +284,13 @@ public class SuggestionAdapterTest {
         when(cache.getIcon(icon)).thenReturn(drawable);
         ReflectionHelpers.setField(mSuggestionAdapter, "mCache", cache);
         TypedArray typedArray = mock(TypedArray.class);
-        final int colorAccent = 1234;
+        final ColorStateList colorAccentState = Utils.getColorAccent(mContext);
         when(mActivity.obtainStyledAttributes(any())).thenReturn(typedArray);
-        when(typedArray.getColor(anyInt(), anyInt())).thenReturn(colorAccent);
+        when(typedArray.getColorStateList(anyInt())).thenReturn(colorAccentState);
 
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
 
-        verify(drawable).setTint(colorAccent);
+        verify(drawable).setTintList(colorAccentState);
     }
 
     @Test

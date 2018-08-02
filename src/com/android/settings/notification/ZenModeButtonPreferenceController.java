@@ -16,10 +16,8 @@
 
 package com.android.settings.notification;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 import android.view.View;
 import android.widget.Button;
 
@@ -28,6 +26,9 @@ import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 public class ZenModeButtonPreferenceController extends AbstractZenModePreferenceController
         implements PreferenceControllerMixin {

@@ -17,7 +17,6 @@ package com.android.settings.applications.appinfo;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -26,6 +25,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
+
+import androidx.preference.Preference;
 
 /*
  * Abstract base controller for the default app shortcut preferences that launches the default app
@@ -63,7 +64,7 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
             new SubSettingLauncher(mContext)
                     .setDestination(DefaultAppSettings.class.getName())
                     .setArguments(bundle)
-                    .setTitle(R.string.configure_apps)
+                    .setTitleRes(R.string.configure_apps)
                     .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN)
                     .launch();
             return true;

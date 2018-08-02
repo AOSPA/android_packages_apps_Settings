@@ -22,9 +22,6 @@ import android.content.res.TypedArray;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Surface;
@@ -33,6 +30,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.android.settings.R;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * A full width preference that hosts a MP4 video.
@@ -47,10 +48,12 @@ public class VideoPreference extends Preference {
     MediaPlayer mMediaPlayer;
     @VisibleForTesting
     boolean mAnimationAvailable;
-    private boolean mVideoReady;
+    @VisibleForTesting
+    boolean mVideoReady;
     private boolean mVideoPaused;
     private float mAspectRadio = 1.0f;
     private int mPreviewResource;
+    private boolean mViewVisible;
 
     public VideoPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -143,6 +146,9 @@ public class VideoPreference extends Preference {
 
             @Override
             public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
+                if (!mViewVisible) {
+                    return;
+                }
                 if (mVideoReady) {
                     if (imageView.getVisibility() == View.VISIBLE) {
                         imageView.setVisibility(View.GONE);
@@ -171,6 +177,7 @@ public class VideoPreference extends Preference {
     }
 
     public void onViewVisible(boolean videoPaused) {
+        mViewVisible = true;
         mVideoPaused = videoPaused;
         if (mVideoReady && mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
             mMediaPlayer.seekTo(0);
@@ -178,6 +185,7 @@ public class VideoPreference extends Preference {
     }
 
     public void onViewInvisible() {
+        mViewVisible = false;
         if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
             mMediaPlayer.pause();
         }

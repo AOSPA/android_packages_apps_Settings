@@ -20,17 +20,13 @@ import android.app.backup.BackupManager;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.DropDownPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-import android.text.TextUtils;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.DropDownPreference;
+import androidx.preference.Preference;
 
 /**
  * {@link AbstractPreferenceController} that controls whether the wifi network is metered or not

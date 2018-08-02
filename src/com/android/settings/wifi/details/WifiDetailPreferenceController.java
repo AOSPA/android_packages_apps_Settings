@@ -20,7 +20,6 @@ import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -40,16 +39,11 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
-import android.support.v4.text.BidiFormatter;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -75,6 +69,13 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.core.text.BidiFormatter;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Controller for logic pertaining to displaying Wifi information for the
@@ -406,7 +407,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mRssiSignalLevel = signalLevel;
         Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel);
 
-        wifiIcon.setTint(Utils.getColorAccent(mContext));
+        wifiIcon.setTintList(Utils.getColorAccent(mContext));
         mEntityHeaderController.setIcon(wifiIcon).done(mFragment.getActivity(), true /* rebind */);
 
         Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();

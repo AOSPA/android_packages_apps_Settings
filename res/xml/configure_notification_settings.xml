@@ -34,7 +34,8 @@
     <!-- Pulse notification light -->
     <SwitchPreference
         android:key="notification_pulse"
-        android:title="@string/notification_pulse_title"/>
+        android:title="@string/notification_pulse_title"
+        settings:controller="com.android.settings.notification.PulseNotificationPreferenceController" />
 
     <!-- Default notification ringtone -->
     <com.android.settings.DefaultRingtonePreference
@@ -55,6 +56,7 @@
         android:title="@string/zen_mode_settings_title"
         settings:useAdminDisabledSummary="true"
         android:fragment="com.android.settings.notification.ZenModeSettings"
+        settings:controller="com.android.settings.notification.ZenModePreferenceController"
         settings:allowDividerAbove="false" />
 
     <!-- Empty category to draw divider -->

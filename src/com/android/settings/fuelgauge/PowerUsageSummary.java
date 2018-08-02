@@ -19,14 +19,10 @@ package com.android.settings.fuelgauge;
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
 
 import android.app.Activity;
-import android.app.LoaderManager;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
-import android.content.Loader;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.VisibleForTesting;
 import android.text.BidiFormatter;
 import android.text.format.Formatter;
 import android.util.SparseArray;
@@ -45,8 +41,6 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.display.BatteryPercentagePreferenceController;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
-import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -54,6 +48,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
 
@@ -61,10 +56,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.Loader;
+
 /**
  * Displays a list of apps and subsystems that consume power, ordered by how much power was
  * consumed since the last time it was unplugged.
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class PowerUsageSummary extends PowerUsageBase implements OnLongClickListener,
         BatteryTipPreferenceController.BatteryTipListener {
 
@@ -101,11 +102,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     @VisibleForTesting
     BatteryInfo mBatteryInfo;
 
-    /**
-     * SparseArray that maps uid to {@link Anomaly}, so we could find {@link Anomaly} by uid
-     */
-    @VisibleForTesting
-    SparseArray<List<Anomaly>> mAnomalySparseArray;
     @VisibleForTesting
     BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
     @VisibleForTesting
@@ -214,7 +210,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                 KEY_TIME_SINCE_LAST_FULL_CHARGE);
         mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.battery_footer_summary);
         mBatteryUtils = BatteryUtils.getInstance(getContext());
-        mAnomalySparseArray = new SparseArray<>();
 
         restartBatteryInfoLoader();
         mBatteryTipPreferenceController.restoreInstanceState(icicle);
@@ -238,7 +233,7 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final Lifecycle lifecycle = getLifecycle();
+        final Lifecycle lifecycle = getSettingsLifecycle();
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(
@@ -285,7 +280,7 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                 new SubSettingLauncher(getContext())
                         .setDestination(PowerUsageAdvanced.class.getName())
                         .setSourceMetricsCategory(getMetricsCategory())
-                        .setTitle(R.string.advanced_battery_title)
+                        .setTitleRes(R.string.advanced_battery_title)
                         .launch();
                 return true;
             default:
@@ -325,11 +320,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     }
 
     @VisibleForTesting
-    AnomalyDetectionPolicy getAnomalyDetectionPolicy() {
-        return new AnomalyDetectionPolicy(getContext());
-    }
-
-    @VisibleForTesting
     void updateLastFullChargePreference() {
         if (mBatteryInfo != null && mBatteryInfo.averageTimeToDischarge
                 != Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN) {
@@ -363,17 +353,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         final Context context = getContext();
         mPowerFeatureProvider = FeatureFactory.getFactory(context)
                 .getPowerUsageFeatureProvider(context);
-    }
-
-    @VisibleForTesting
-    void updateAnomalySparseArray(List<Anomaly> anomalies) {
-        mAnomalySparseArray.clear();
-        for (final Anomaly anomaly : anomalies) {
-            if (mAnomalySparseArray.get(anomaly.uid) == null) {
-                mAnomalySparseArray.append(anomaly.uid, new ArrayList<>());
-            }
-            mAnomalySparseArray.get(anomaly.uid).add(anomaly);
-        }
     }
 
     @VisibleForTesting

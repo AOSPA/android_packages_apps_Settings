@@ -2,7 +2,6 @@ package com.android.settings.testutils.shadow;
 
 import static android.util.TypedValue.TYPE_REFERENCE;
 import static org.robolectric.RuntimeEnvironment.application;
-import static org.robolectric.Shadows.shadowOf;
 import static org.robolectric.shadow.api.Shadow.directlyOn;
 
 import android.annotation.DimenRes;
@@ -14,9 +13,6 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ArrayRes;
-import android.support.annotation.ColorRes;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.util.TypedValue;
@@ -24,6 +20,7 @@ import android.util.TypedValue;
 import com.android.settings.R;
 
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.android.XmlResourceParserImpl;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -39,6 +36,10 @@ import org.w3c.dom.Node;
 
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.ArrayRes;
+import androidx.annotation.ColorRes;
+import androidx.annotation.Nullable;
 
 /**
  * Shadow Resources and Theme classes to handle resource references that Robolectric shadows cannot
@@ -188,7 +189,7 @@ public class SettingsShadowResources extends ShadowResources {
         @RealObject
         Theme realTheme;
 
-        private ShadowAssetManager mAssetManager = shadowOf(
+        private ShadowAssetManager mAssetManager = Shadows.shadowOf(
                 RuntimeEnvironment.application.getAssets());
 
         @Implementation

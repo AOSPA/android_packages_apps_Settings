@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip.detectors;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
@@ -102,6 +101,13 @@ public class LowBatteryDetectorTest {
     public void testDetect_charging_tipInvisible() {
         mBatteryInfo.discharging = false;
 
+        assertThat(mLowBatteryDetector.detect().isVisible()).isFalse();
+    }
+
+    @Test
+    public void testDetect_timeEstimationZero_tipInvisible() {
+        mBatteryInfo.batteryLevel = 50;
+        mBatteryInfo.remainingTimeUs = 0;
         assertThat(mLowBatteryDetector.detect().isVisible()).isFalse();
     }
 

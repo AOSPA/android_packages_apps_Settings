@@ -35,9 +35,8 @@ import android.os.UserManager;
 
 import com.android.settings.testutils.ApplicationTestUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowDefaultDialerManager;
-import com.android.settings.testutils.shadow.ShadowSmsApplication;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
+import com.android.settingslib.testutils.shadow.ShadowDefaultDialerManager;
+import com.android.settingslib.testutils.shadow.ShadowSmsApplication;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -77,7 +76,7 @@ public final class ApplicationFeatureProviderImplTest {
     @Mock
     private Context mContext;
     @Mock
-    private PackageManagerWrapper mPackageManager;
+    private PackageManager mPackageManager;
     @Mock
     private IPackageManager mPackageManagerService;
     @Mock

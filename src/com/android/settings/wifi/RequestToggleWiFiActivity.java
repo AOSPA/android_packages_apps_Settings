@@ -23,15 +23,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.android.internal.app.AlertActivity;
 import com.android.settings.R;
+
+import androidx.annotation.NonNull;
 
 /**
  * This activity handles requests to toggle WiFi by collecting user
@@ -80,7 +83,9 @@ public class RequestToggleWiFiActivity extends AlertActivity
         try {
             ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(
                     packageName, 0);
-            mAppLabel = applicationInfo.loadSafeLabel(getPackageManager());
+            mAppLabel = applicationInfo.loadSafeLabel(getPackageManager(),
+                    PackageItemInfo.DEFAULT_MAX_LABEL_SIZE_PX, PackageItemInfo.SAFE_LABEL_FLAG_TRIM
+                            | PackageItemInfo.SAFE_LABEL_FLAG_FIRST_LINE);
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(LOG_TAG, "Couldn't find app with package name " + packageName);
             finish();

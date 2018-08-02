@@ -121,8 +121,6 @@
     <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"نشانی بلوتوث دستگاه: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"ارتباط <xliff:g id="DEVICE_NAME">%1$s</xliff:g> قطع شود؟"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"پخش"</string>
-    <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"غیر فعال کردن نمایه؟"</string>
-    <string name="bluetooth_disable_profile_message" msgid="2895844842011809904">"‏این کار :&lt;br&gt;&lt;b&gt;<xliff:g id="PROFILE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;From:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%2$s</xliff:g>&lt;/b&gt; را غیرفعال می‌کند"</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
     <string name="bluetooth_device" msgid="5291950341750186887">"دستگاه بلوتوث بدون نام"</string>
     <string name="progress_scanning" msgid="192587958424295789">"در حال جستجو"</string>
@@ -131,6 +129,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"درخواست مرتبط‌سازی"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"برای مرتبط‌سازی با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ضربه بزنید."</string>
     <string name="bluetooth_show_received_files" msgid="3144149432555230410">"فایل‌های دریافت‌شده"</string>
+    <string name="bluetooth_show_files_received_via_bluetooth" msgid="5445105773989432594">"فایل‌های دریافتی ازطریق بلوتوث"</string>
     <string name="device_picker" msgid="4978696506172252813">"انتخاب دستگاه بلوتوث"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"<xliff:g id="APP_NAME">%1$s</xliff:g> می‌خواهد بلوتوث را روشن کند"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"<xliff:g id="APP_NAME">%1$s</xliff:g> می‌خواهد بلوتوث را خاموش کند"</string>
@@ -186,6 +185,8 @@
     <string name="connected_device_add_device_summary" msgid="4041865900298680338">"بلوتوث برای مرتبط شدن روشن خواهد شد"</string>
     <string name="connected_device_connections_title" msgid="5988939345181466770">"اولویت‌های اتصال"</string>
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"دستگاه‌هایی که قبلاً متصل شده‌اند"</string>
+    <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"قبلاً متصل‌شده"</string>
+    <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"بلوتوث روشن شد"</string>
     <string name="date_and_time" msgid="9062980487860757694">"تاریخ و زمان"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"انتخاب منطقهٔ زمانی"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -214,11 +215,9 @@
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"‏پهنای باند DL (کیلوبیت بر ثانیه):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"‏پهنای باند UL (کیلوبیت بر ثانیه):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"اطلاعات مکان شبکه همراه (منسوخ شده):"</string>
-    <string name="radio_info_neighboring_location_label" msgid="5766020323342985397">"اطلاعات شبکه همراه مجاور (منسوخ شده):"</string>
     <string name="radio_info_phy_chan_config" msgid="7133247058801474028">"‏پیکربندی کانال فیزیکی LTE:"</string>
     <string name="radio_info_cell_info_refresh_rate" msgid="7062777594049622128">"نرخ بازخوانی اطلاعات شبکه همراه:"</string>
     <string name="radio_info_cellinfo_label" msgid="6213223844927623098">"همه اطلاعات اندازه‌گیری شبکه همراه:"</string>
-    <string name="radio_info_dcrtinfo_label" msgid="4062076024399431876">"اطلاعات هم‌زمان اتصال داده:"</string>
     <string name="radio_info_gprs_service_label" msgid="4209624131644060517">"سرویس داده:"</string>
     <string name="radio_info_roaming_label" msgid="6141505430275138647">"رومینگ:"</string>
     <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI:"</string>
@@ -303,7 +302,6 @@
     <string name="settings_label" msgid="1626402585530130914">"تنظیمات"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"تنظیمات"</string>
     <string name="settings_shortcut" msgid="3936651951364030415">"میان‌بر تنظیمات"</string>
-    <string name="activity_list_empty" msgid="6428823323471264836">"فعالیتی مطابق با این مورد یافت نشد."</string>
     <string name="airplane_mode" msgid="8837269988154128601">"حالت هواپیما"</string>
     <string name="radio_controls_title" msgid="3447085191369779032">"بیشتر"</string>
     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"بی‌سیم و شبکه‌ها"</string>
@@ -345,11 +343,7 @@
     <string name="date_time_set_date" msgid="7021491668550232105">"تنظیم تاریخ"</string>
     <string name="date_time_search_region" msgid="2478334699004021972">"جستجوی منطقه"</string>
     <string name="date_time_select_region" msgid="5434001881313168586">"منطقه"</string>
-    <string name="date_time_select_zone" msgid="8883690857762652278">"منطقه زمانی"</string>
-    <string name="date_time_set_timezone_in_region" msgid="7935631939393423886">"منطقه‌های زمانی در <xliff:g id="REGION">%1$s</xliff:g>"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"‏انتخاب اختلاف با UTC"</string>
-    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"به ترتیب الفبا"</string>
-    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"به ترتیب منطقه زمانی"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> در <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> شروع می‌شود."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -387,7 +381,8 @@
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"تلفن رمزگذاری‌ نشده است"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"دستگاه رمزگذاری شد"</string>
     <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"دستگاه رمزگذاری نشده است"</string>
-    <string name="lockscreen_settings_title" msgid="3922976395527087455">"اولویت‌های صفحه درحالت قفل"</string>
+    <string name="lockscreen_settings_title" msgid="1099738951060387656">"نمایش صفحه در حالت قفل"</string>
+    <string name="lockscreen_settings_what_to_show_category" msgid="278055252361575926">"آنچه باید نمایش داده شود"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"تنظیم مکان من، قفل صفحه، قفل سیم کارت، قفل حافظه اطلاعات کاربری"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"تنظیم مکان من، بازگشایی قفل صفحه، قفل حافظه اطلاعات کاربری"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"حریم خصوصی"</string>
@@ -395,6 +390,18 @@
     <string name="security_status_title" msgid="5848766673665944640">"وضعیت امنیتی"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"قفل صفحه، اثرانگشت"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"قفل صفحه"</string>
+    <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"چهره افزوده شد"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"برای تنظیم تشخیص چهره ضربه بزنید"</string>
+    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"احراز هویت با چهره"</string>
+    <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"لغو"</string>
+    <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"با چهره‌تان قفل را باز کنید"</string>
+    <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"از چهره‌تان برای احراز هویت استفاده کنید"</string>
+    <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"برای باز کردن قفل تلفنتان، مجاز کردن خریدها یا ورود به سیستم برنامه‌ها، از چهر‌ه‌تان استفاده کنید."</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6300341727101929207">"استفاده از چهره‌تان"</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"برای باز کردن قفل تلفنتان، مجاز کردن خریدها یا ورود به سیستم برنامه‌ها، از چهر‌ه‌تان استفاده کنید"</string>
+    <string name="face_add_max" msgid="2342250989212694454">"می‌توانید حداکثر <xliff:g id="COUNT">%d</xliff:g> اثرانگشت اضافه کنید"</string>
+    <string name="face_intro_error_max" msgid="160022811747660581">"حداکثر تعداد چهره را اضافه کرده‌اید"</string>
+    <string name="face_intro_error_unknown" msgid="6367721696446677261">"چهره بیشتری نمی‌توان اضافه کرد"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"اثر انگشت"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"مدیریت اثر انگشت"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"استفاده از اثر انگشت برای"</string>
@@ -506,11 +513,12 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"محافظت از رایانه لوحی"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"محافظت از دستگاه"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"از تلفنتان محافظت کنید"</string>
-    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5008939545428518367">"برای امنیت بیشتر، قفل صفحه پشتیبانی تنظیم کنید"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1507307757032207572">"برای امنیت بیشتر، قفل صفحه پشتیبانی تنظیم کنید"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"با فعال کردن قابلیت‌های حفاظتی دستگاه، نگذارید دیگران بدون اجازه شما از این رایانه لوحی استفاده کنند. قفل صفحه موردنظر برای استفاده را انتخاب کنید."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"با فعال کردن قابلیت‌های حفاظتی دستگاه، نگذارید دیگران بدون اجازه شما از این دستگاه استفاده کنند. قفل صفحه موردنظر برای استفاده را انتخاب کنید."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"با فعال کردن قابلیت‌های حفاظتی دستگاه، نگذارید دیگران بدون اجازه شما از این تلفن استفاده کنند. قفل صفحه موردنظر برای استفاده را انتخاب کنید."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"روش پشتیبان قفل صفحه را انتخاب کنید"</string>
+    <string name="lock_settings_picker_face_message" msgid="197106534637556054">"روش پشتیبان قفل صفحه را انتخاب کنید"</string>
     <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"گزینه‌های قفل صفحه"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"گزینه‌های قفل صفحه"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"قفل صفحه"</string>
@@ -537,6 +545,11 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"اثر انگشت + گذرواژه"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"ادامه بدون اثر انگشت"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"می‌توانید با استفاده از اثر انگشتتان قفل تلفنتان را باز کنید. بنا به دلایل ایمنی این گزینه مستلزم قفل صفحه پشتیبان است."</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"احراز هویت با چهره + الگو"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"احراز هویت با چهره + پین"</string>
+    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"احراز هویت با چهره + گذرواژه"</string>
+    <string name="face_unlock_skip_face" msgid="6362883392838482791">"ادامه بدون احراز هویت با چهره"</string>
+    <string name="face_unlock_title" msgid="9042382084472444316">"می‌توانید با استفاده از چهره‌تان قفل تلفنتان را باز کنید. بنا به دلایل ایمنی این گزینه مستلزم قفل صفحه پشتیبان است."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"غیرفعال‌شده توسط سرپرست، طبق خط‌مشی رمزگذاری یا حافظه اطلاعات کاربردی"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"هیچ‌کدام"</string>
     <string name="unlock_set_unlock_mode_none" msgid="8467360084676871617">"تند کشیدن"</string>
@@ -598,11 +611,23 @@
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"تلاش‌های اشتباه بسیار زیادی انجام شده است. این کاربر حذف خواهد شد."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"تلاش‌های اشتباه بسیار زیادی انجام شده است. این نمایه کاری و داده‌های آن‌ حذف خواهند شد."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"نپذیرفتن"</string>
-    <string name="lockpassword_password_too_short" msgid="2726090378672764986">"باید حداقل <xliff:g id="COUNT">%d</xliff:g> نویسه داشته باشد"</string>
-    <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"پین باید حداقل <xliff:g id="COUNT">%d</xliff:g> رقم داشته باشد"</string>
+    <plurals name="lockpassword_password_too_short" formatted="false" msgid="1957883871187697796">
+      <item quantity="one">باید حداقل <xliff:g id="COUNT_1">%d</xliff:g> نویسه داشته باشد</item>
+      <item quantity="other">باید حداقل <xliff:g id="COUNT_1">%d</xliff:g> نویسه داشته باشد</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_short" formatted="false" msgid="5019935246875659237">
+      <item quantity="one">پین باید حداقل <xliff:g id="COUNT_1">%d</xliff:g> رقم داشته باشد</item>
+      <item quantity="other">پین باید حداقل <xliff:g id="COUNT_1">%d</xliff:g> رقم داشته باشد</item>
+    </plurals>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"ادامه"</string>
-    <string name="lockpassword_password_too_long" msgid="4591720174765403476">"باید کمتر از <xliff:g id="NUMBER">%d</xliff:g> نویسه باشد"</string>
-    <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"باید کمتر از <xliff:g id="NUMBER">%d</xliff:g> رقم باشد"</string>
+    <plurals name="lockpassword_password_too_long" formatted="false" msgid="4581209996591221075">
+      <item quantity="one">باید کمتر از <xliff:g id="NUMBER_1">%d</xliff:g> نویسه باشد</item>
+      <item quantity="other">باید کمتر از <xliff:g id="NUMBER_1">%d</xliff:g> نویسه باشد</item>
+    </plurals>
+    <plurals name="lockpassword_pin_too_long" formatted="false" msgid="185568652740755131">
+      <item quantity="one">باید کمتر از <xliff:g id="NUMBER_1">%d</xliff:g> رقم باشد</item>
+      <item quantity="other">باید کمتر از <xliff:g id="NUMBER_1">%d</xliff:g> رقم باشد</item>
+    </plurals>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"فقط می‌تواند شامل اعداد ۰ تا ۹ باشد"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"سرپرست دستگاه اجازه استفاده از پین اخیر را نمی‌دهد"</string>
     <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"پین‌های رایج توسط سرپرست فناوری اطلاعات شما مسدود شده‌اند. پین متفاوتی را امتحان کنید."</string>
@@ -680,7 +705,6 @@
     <string name="bluetooth_searching_for_devices" msgid="9203739709307871727">"در حال جستجو..."</string>
     <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"تنظیمات دستگاه"</string>
     <string name="bluetooth_preference_paired_dialog_title" msgid="8875124878198774180">"دستگاه مرتبط‌شده"</string>
-    <string name="bluetooth_preference_paired_dialog_name_label" msgid="8111146086595617285">"نام"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="7112953286863428412">"اتصال به اینترنت"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="2271954176947879628">"صفحه‌کلید"</string>
     <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="7747163316331917594">"سابقه تماس و مخاطبین"</string>
@@ -688,7 +712,6 @@
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"دفترچه تلفن به اشتراک گذاشته شود؟"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> می‌خواهد به مخاطبین و سابقه تماس شما دسترسی داشته باشد."</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> می‌خواهد با بلوتوث مرتبط‌سازی کند. وقتی وصل شود، به مخاطبین و سابقه تماستان دسترسی دارد."</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"دستگاه‌های مرتبط شده"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="1617401232446299411">"دستگاه‌های در دسترس"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"دستگاهی موجود نیست"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"اتصال"</string>
@@ -856,6 +879,7 @@
     <string name="wifi_ap_choose_auto" msgid="2677800651271769965">"خودکار"</string>
     <string name="wifi_ap_choose_2G" msgid="8724267386885036210">"باند ۲٫۴ گیگاهرتزی"</string>
     <string name="wifi_ap_choose_5G" msgid="8813128641914385634">"باند ۵٫۰ گیگاهرتزی"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2501070491623803139">"نوار ۵٫۰ گیگاهرتز اولویت دارد"</string>
     <string name="wifi_ap_2G" msgid="8378132945192979364">"۲٫۴ گیگاهرتز"</string>
     <string name="wifi_ap_5G" msgid="4020713496716329468">"۵٫۰ گیگاهرتز"</string>
     <string name="wifi_ap_band_select_one" msgid="3476254666116431650">"‏حداقل یک باند برای نقطه اتصال Wi‑Fi انتخاب کنید:"</string>
@@ -1067,7 +1091,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"طبیعی"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"تقویت‌شده"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"اشباع‌شده"</string>
-    <string name="color_mode_option_automatic" msgid="8781254568140509331">"خودکار"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"قابل تطبیق"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"فقط استفاده از رنگ‌های دقیق"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"تنظیم بین رنگ‌های روشن و دقیق"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"هنگام چرخاندن رایانهٔ لوحی، جهت به‌طور خودکار تغییر می‌کند"</string>
@@ -1078,7 +1102,8 @@
     <string name="brightness_title" msgid="5746272622112982836">"روشنایی"</string>
     <string name="brightness_summary" msgid="838917350127550703">"تنظیم روشنایی صفحه"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"روشنایی تطبیقی"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"بهینه‌سازی سطح روشنایی برای نور در دسترس"</string>
+    <!-- no translation found for auto_brightness_summary_on (3519854265558828744) -->
+    <skip />
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"خاموش"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"میزان روشنایی ترجیحی بسیار کم است"</string>
     <string name="auto_brightness_summary_low" msgid="5609877905833960427">"میزان روشنایی ترجیحی کم است"</string>
@@ -1144,8 +1169,6 @@
     <string name="automatic_brightness" msgid="5014143533884135461">"روشنایی خودکار"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"بیدار شدن با بالا بردن"</string>
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"نمایشگر محیط"</string>
-    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"همیشه روشن / مصرف باتری افزایش‌یافته"</string>
-    <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"اعلان‌های جدید"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"زمان نمایش دادن"</string>
     <string name="doze_title" msgid="2375510714460456687">"اعلان‌های جدید"</string>
     <string name="doze_summary" msgid="3846219936142814032">"روشن شدن صفحه‌نمایش هنگامی که اعلانی دریافت می‌کنید"</string>
@@ -1190,8 +1213,6 @@
       <item quantity="other">کد پین سیم‌کارت اشتباه است، <xliff:g id="NUMBER_1">%d</xliff:g> بار دیگر می‌توانید تلاش کنید.</item>
     </plurals>
     <string name="pin_failed" msgid="1848423634948587645">"عملیات پین سیم کارت ناموفق بود!"</string>
-    <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"وضعیت رایانهٔ لوحی"</string>
-    <string name="device_info_settings" product="default" msgid="475872867864762157">"وضعیت تلفن"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"به‌روزرسانی‌های سیستم"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"‏نسخهٔ Android"</string>
@@ -1597,6 +1618,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"گذرواژه تنظیم شد"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"پین تنظیم شد"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"الگو تنظیم شد"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"برای استفاده از احراز هویت با چهره، گذرواژه تنظیم کنید"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"برای استفاده از احراز هویت با چهره، الگو تنظیم کنید"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"برای استفاده از احراز هویت با چهره، پین تنظیم کنید"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"برای ادامه، از الگوی دستگاهتان استفاده کنید"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"برای ادامه، کد پین دستگاهتان را وارد کنید"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"برای ادامه گذرواژه دستگاهتان را وارد کنید"</string>
@@ -1747,9 +1771,6 @@
     <string name="security_settings_desc_multi" product="default" msgid="6610268420793984752">"این برنامه می‌تواند به موارد زیر در تلفن شما دسترسی داشته باشد. به منظور بهبود عملکرد و کاهش استفاده از حافظه، برخی از این مجوزها در<xliff:g id="BASE_APP_NAME">%1$s</xliff:g>  در دسترس هستند چون پردازش آن مانند <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g> است:"</string>
     <string name="join_two_items" msgid="1336880355987539064">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g> و <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
     <string name="join_two_unrelated_items" msgid="1873827777191260824">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>، <xliff:g id="SECOND_ITEM">%2$s</xliff:g>"</string>
-    <string name="join_many_items_last" msgid="218498527304674173">"<xliff:g id="ALL_BUT_LAST_ITEM">%1$s</xliff:g> و <xliff:g id="LAST_ITEM_0">%2$s</xliff:g>"</string>
-    <string name="join_many_items_first" msgid="4333907712038448660">"<xliff:g id="FIRST_ITEM">%1$s</xliff:g>، <xliff:g id="ALL_BUT_FIRST_AND_LAST_ITEM">%2$s</xliff:g>"</string>
-    <string name="join_many_items_middle" msgid="7556692394478220814">"<xliff:g id="ADDED_ITEM">%1$s</xliff:g>، <xliff:g id="REST_OF_ITEMS">%2$s</xliff:g>"</string>
     <string name="security_settings_billing_desc" msgid="8061019011821282358">"این برنامه ممکن است برای شما هزینه داشته باشد:"</string>
     <string name="security_settings_premium_sms_desc" msgid="8734171334263713717">"ارسال پیامک ممتاز"</string>
     <string name="computing_size" msgid="1599186977475211186">"در حال محاسبه..."</string>
@@ -1935,6 +1956,7 @@
     <string name="interaction_control_category_title" msgid="7836591031872839151">"کنترل‌های تعامل"</string>
     <string name="user_installed_services_category_title" msgid="6426376488922158647">"سرویس‌های بارگیری‌شده"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"آزمایشی"</string>
+    <string name="feature_flags_dashboard_title" msgid="778619522682769966">"پرچم‌های ویژه"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
     <string name="talkback_summary" msgid="8331244650729024963">"صفحه‌خوان در وهله اول برای افراد نابینا و کم‌بینا در نظر گرفته شده است"</string>
     <string name="select_to_speak_summary" msgid="4282846695497544515">"روی موارد موجود در صفحه‌تان ضربه بزنید تا بلند خوانده شوند"</string>
@@ -2065,7 +2087,7 @@
     <string name="disable_service_message" msgid="2247101878627941561">"با ضربه زدن به تأیید، <xliff:g id="SERVICE">%1$s</xliff:g> متوقف خواهد شد."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"سرویسی نصب نشده است"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"سرویسی انتخاب نشده است"</string>
-    <string name="accessibility_service_default_description" msgid="1072730037861494125">"توضیحی ارائه نشده است."</string>
+    <string name="accessibility_service_default_description" msgid="1072730037861494125">"شرحی ارائه نشده است."</string>
     <string name="settings_button" msgid="3006713718908152930">"تنظیمات"</string>
     <string name="print_settings" msgid="4742428530112487843">"چاپ کردن"</string>
     <string name="print_settings_summary_no_service" msgid="6354322414246865875">"خاموش"</string>
@@ -2425,27 +2447,23 @@
     <string name="credentials_settings_not_available" msgid="7968275634486624215">"اطلاعات کاربری این کاربر در دسترس نیست"</string>
     <string name="credential_for_vpn_and_apps" msgid="4168197158768443365">"‏نصب‌شده برای VPN و برنامه‌ها"</string>
     <string name="credential_for_wifi" msgid="6228425986551591864">"‏نصب‌شده برای Wi-Fi"</string>
-    <string name="credentials_unlock" msgid="385427939577366499"></string>
-    <string name="credentials_unlock_hint" msgid="2301301378040499348">"گذرواژه حافظه اطلاعات کاربری را تایپ کنید."</string>
-    <string name="credentials_old_password" msgid="7553393815538684028">"گذرواژه فعلی:"</string>
     <string name="credentials_reset_hint" msgid="6297256880896133631">"همه محتوا حذف شود؟"</string>
-    <string name="credentials_wrong_password" msgid="2541932597104054807">"گذرواژه نادرست است."</string>
-    <string name="credentials_reset_warning" msgid="5320653011511797600">"گذرواژه نادرست است. قبل از پاک کردن حافظه اطلاعات کاربری، یک بار دیگر می‌توانید امتحان کنید."</string>
-    <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"گذرواژه نادرست است. قبل از پاک شدن حافظه اطلاعات کاربری، <xliff:g id="NUMBER">%1$d</xliff:g> بار دیگر می‌توانید امتحان کنید."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"حافظه اطلاعات کاربری پاک شد."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"حافظه اطلاعات کاربری پاک نمی‌شود."</string>
-    <string name="credentials_enabled" msgid="7588607413349978930">"حافظه اطلاعات کاربری فعال است."</string>
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"قبل از اینکه بتوانید از حافظه اطلاعات کاربری استفاده کنید، دستگاهتان باید قفل صفحه ایمنی داشته باشد."</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"تنظیم قفل"</string>
     <string name="usage_access_title" msgid="332333405495457839">"برنامه‌های مجاز به دسترسی"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"سیگنال شماره‌گیری اضطراری"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"واکنش موجود در هنگام برقراری تماس اضطراری را تنظیم کنید"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"پشتیبان‌گیری"</string>
+    <string name="backup_summary_state_on" msgid="6407084627816231202">"روشن"</string>
+    <string name="backup_summary_state_off" msgid="7388321532624105594">"خاموش"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"تهیهٔ نسخهٔ پشتیبان و بازیابی"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"اطلاعات شخصی"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"پشتیبان‌گیری از داده‌های من"</string>
     <string name="backup_data_summary" msgid="708773323451655666">"‏داده‌های نسخه پشتیبان برنامه، گذرواژه‌های Wi-Fi، و سایر تنظیمات در سرورهای Google"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"حساب پشتیبان"</string>
+    <string name="backup_data_management_title" msgid="4059093462647090064">"مدیریت حساب پشتیبان"</string>
     <string name="include_app_data_title" msgid="2829970132260278394">"داده‌های برنامه شامل شود"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"بازیابی خودکار"</string>
     <string name="auto_restore_summary" msgid="4235615056371993807">"هنگام نصب مجدد یک برنامه، تنظیمات و داده‌های پشتیبان‌گیری شده بازیابی شود"</string>
@@ -2546,7 +2564,6 @@
     <string name="header_account_settings" msgid="5382475087121880626">"تنظیمات حساب"</string>
     <string name="remove_account_label" msgid="5921986026504804119">"حذف کردن حساب"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"افزودن حساب"</string>
-    <string name="finish_button_label" msgid="481587707657751116">"پایان"</string>
     <string name="really_remove_account_title" msgid="8800653398717172460">"حساب حذف شود؟"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"با حذف این حساب تمام پیام‌ها، مخاطبین و دیگر داده‌ها از رایانهٔ لوحی نیز حذف می‌شود!"</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"با حذف این حساب همه پیام‌ها، مخاطبین و دیگر داده‌ها از تلفن همراه حذف خواهد شد."</string>
@@ -2587,7 +2604,6 @@
     <string name="data_usage_menu_metered" msgid="6235119991372755026">"محدودیت‌های شبکه"</string>
     <string name="data_usage_menu_auto_sync" msgid="8203999775948778560">"همگام‌سازی خودکار داده"</string>
     <string name="data_usage_menu_sim_cards" msgid="6410498422797244073">"سیم‌کارت‌ها"</string>
-    <string name="data_usage_menu_cellular_networks" msgid="8339835014751511300">"شبکه‌های تلفن همراه"</string>
     <string name="data_usage_cellular_data_summary" msgid="8413357481361268285">"مکث با رسیدن به حد"</string>
     <string name="account_settings_menu_auto_sync" msgid="6243013719753700377">"همگام‌سازی خودکار داده"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="785541379617346438">"همگام‌سازی خودکار داده‌های شخصی"</string>
@@ -2767,6 +2783,9 @@
       <item quantity="other">بررسی گواهی‌ها</item>
     </plurals>
     <string name="user_settings_title" msgid="3493908927709169019">"چندین کاربر"</string>
+    <string name="user_settings_footer_text" product="device" msgid="5947601460660791129">"با افزودن کاربران جدید، از دستگاهتان به‌صورت مشترک استفاده کنید. هر کاربر فضایی شخصی برای سفارشی کردن صفحه‌های اصلی، حساب‌ها، برنامه‌ها، تنظیمات و موارد دیگر در دستگاه شما دارد."</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="2153761434649733502">"با افزودن کاربران جدید، از رایانه لوحی‌تان به‌صورت مشترک استفاده کنید. هر کاربر فضایی شخصی برای سفارشی کردن صفحه‌های اصلی، حساب‌ها، برنامه‌ها، تنظیمات و موارد دیگر در رایانه لوحی شما دارد."</string>
+    <string name="user_settings_footer_text" product="default" msgid="2844602828189838075">"با افزودن کاربران جدید، از تلفنتان به‌صورت مشترک استفاده کنید. هر کاربر فضایی شخصی برای سفارشی کردن صفحه‌های اصلی، حساب‌ها، برنامه‌ها، تنظیمات و موارد دیگر در تلفن شما دارد."</string>
     <string name="user_list_title" msgid="7937158411137563543">"کاربران و نمایه‌ها"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"افزودن کاربر یا نمایه"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"افزودن کاربر"</string>
@@ -2969,7 +2988,6 @@
     <string name="keywords_home" msgid="294182527446892659">"راه‌انداز، پیش‌فرض، برنامه‌ها"</string>
     <string name="keywords_display" msgid="8910345814565493016">"صفحه، صفحه لمسی"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"صفحه کم‌نور، صفحه لمسی، باتری، روشن"</string>
-    <string name="keywords_display_auto_brightness" msgid="3325150824507953765">"صفحه کم نور، صفحه لمسی، باتری"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"صفحه کم‌نور، شب، رنگ‌مایه، شیفت شب، روشنایی، رنگ صفحه، رنگ، رنگ"</string>
     <string name="keywords_display_wallpaper" msgid="7362076351860131776">"پس‌زمینه، شخصی کردن، سفارشی کردن نمایشگر"</string>
     <string name="keywords_display_font_size" msgid="3404655440064726124">"اندازه نوشتار"</string>
@@ -3010,8 +3028,12 @@
     <string name="keywords_sim_status" msgid="1474422416860990564">"‏شبکه، وضعیت شبکه همراه، وضعیت سرویس، شدت سیگنال، نوع شبکه همراه، رومینگ، iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"شماره سریال، نسخه سخت‌افزار"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"‏سطح وصله امنیتی android، نسخه باند پایه، نسخه اصلی"</string>
+    <string name="keywords_systemui_theme" msgid="9112852512550404882">"طرح زمینه تیره"</string>
+    <string name="keywords_device_feedback" msgid="564493721125966719">"اشکال"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"نمایشگر محیطی. نمایشگر صفحه در حالت قفل"</string>
+    <string name="keywords_face_settings" msgid="7505388678116799329">"چهره"</string>
     <string name="keywords_fingerprint_settings" msgid="239222512315619538">"اثر انگشت"</string>
+    <string name="keywords_display_auto_brightness" msgid="4130320471533951796">"تار کردن صفحه‌نمایش، صفحه لمسی، باتری، روشنایی هوشمند، روشنایی پویا"</string>
     <string name="keywords_auto_rotate" msgid="5620879898668211494">"چرخاندن، چرخش، چرخش، پرتره، منظره، جهت، عمودی، افقی"</string>
     <string name="keywords_system_update_settings" msgid="7752189778843741773">"‏ارتقا دادن، Android"</string>
     <string name="keywords_zen_mode_settings" msgid="6526742836231604995">"«مزاحم نشوید»، زمان‌بندی، اعلان‌ها، مسدود کردن، سکوت، لرزش، خواب، کار، کانونی کردن، صدا، صامت کردن، روز، روز هفته، آخر هفته، شب‌های طول هفته، رویداد"</string>
@@ -3163,7 +3185,7 @@
     <string name="zen_sound_two_allowed" msgid="980491120444358550">"صامت شده است، اما <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> و <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> را مجاز کنید"</string>
     <string name="zen_sound_three_allowed" msgid="3455767205934547985">"صامت شده است، اما <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>، <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> و <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g> را مجاز کنید"</string>
     <string name="zen_msg_event_reminder_title" msgid="5137894077488924820">"پیام‌ها، رویدادها و یادآوری‌ها"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="3242847055412790819">"وقتی «مزاحم نشوید» روشن است، به‌جز مواردی که در بالا مجاز می‌کنید، پیام‌ها، یادآوری‌ها و رویدادها صامت می‌شوند. می‌توانید تنظیمات پیام را به‌گونه‌ای انجام دهید که دوستانتان، خانواده یا سایر مخاطبین بتوانند به شما دسترسی پیدا کنند."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="4376930591019535192">"وقتی «مزاحم نشوید» روشن باشد، به‌جز مواردی که در بالا مجاز می‌کنید، پیام‌ها، یادآوری‌ها و رویدادها صامت خواهند شد. می‌توانید تنظیمات پیام‌ها را به‌گونه‌ای انجام دهید که دوستان، خانواده یا سایر مخاطبینتان بتوانند به شما دسترسی پیدا کنند."</string>
     <string name="zen_onboarding_ok" msgid="6131211000824433013">"تمام"</string>
     <string name="zen_onboarding_settings" msgid="9046451821239946868">"تنظیمات"</string>
     <string name="zen_onboarding_new_setting_title" msgid="1893095176110470711">"بدون تصویر یا صدای اعلان‌ها"</string>
@@ -3349,7 +3371,9 @@
     <string name="zen_mode_messages" msgid="5886440273537510894">"پیام‌ها"</string>
     <string name="zen_mode_messages_title" msgid="7729380010396411129">"اجازه دادن به پیام‌ها"</string>
     <string name="zen_mode_all_messages" msgid="8257021584561639816">"پیام‌ها"</string>
+    <string name="zen_mode_all_messages_list" msgid="4223560721230967061">"پیام‌ها"</string>
     <string name="zen_mode_selected_messages" msgid="1047355526202106114">"برخی پیام‌ها"</string>
+    <string name="zen_mode_selected_messages_list" msgid="5309288435815759102">"بعضی پیام‌ها"</string>
     <string name="zen_mode_from_anyone" msgid="2638322015361252161">"از هر کسی"</string>
     <string name="zen_mode_from_contacts" msgid="2232335406106711637">"تنها از مخاطبین"</string>
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"تنها از مخاطین ستاره‌دار"</string>
@@ -3358,16 +3382,22 @@
     <string name="zen_calls_summary_repeat_only" msgid="7105261473107715445">"فقط از تماس‌گیرنده‌های تکراری"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"هیچ‌کدام"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"هشدارها"</string>
+    <string name="zen_mode_alarms_list" msgid="1090332840207025714">"هشدارها"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"رسانه"</string>
+    <string name="zen_mode_media_list" msgid="5483540766397328038">"رسانه‌ها"</string>
     <string name="zen_mode_system" msgid="2541380718411593581">"صداهای لمس"</string>
+    <string name="zen_mode_system_list" msgid="6996104733185177115">"صداهای لمس"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"یادآوری‌ها"</string>
+    <string name="zen_mode_reminders_list" msgid="2853975802240340190">"یادآوری‌ها"</string>
     <string name="zen_mode_reminders_title" msgid="2345044406347406902">"اجازه دادن به یادآوری‌ها"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"رویدادها"</string>
+    <string name="zen_mode_events_list" msgid="5571368229052715098">"رویدادها"</string>
     <string name="zen_mode_events_title" msgid="5597241655883329085">"اجازه دادن به رویدادها"</string>
     <string name="zen_mode_all_callers" msgid="2378065871253871057">"همه"</string>
     <string name="zen_mode_contacts_callers" msgid="5569804103920394175">"مخاطبین"</string>
     <string name="zen_mode_starred_callers" msgid="1023167821338514140">"مخاطبین ستاره‌دار"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"تماس‌گیرنده‌های تکراری"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="2529895519653237330">"تماس‌گیرنده‌های تکراری"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8553876328249671783">"اجازه دادن به تماس‌گیرندگانی که در ۱۵ دقیقه دو بار تماس می‌گیرند"</string>
     <string name="zen_mode_calls_summary_one" msgid="3972333792749874863">"از <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
     <string name="zen_mode_calls_summary_two" msgid="6592821501321201329">"از <xliff:g id="CALLER_TYPE">%1$s</xliff:g> و <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
@@ -3419,6 +3449,9 @@
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"علاوه بر استفاده از اثر انگشت برای باز کردن قفل دستگاه، برای محافظت بیشتر می‌توانید راه‌اندازی آن را به وارد کردن پین موکول کنید. تا زمانی‌که دستگاه راه‌اندازی نشود، نمی‌تواند تماس تلفنی، پیام یا اعلان (ازجمله هشدار) دریافت کند.\n\nاین کار به محافظت از داده‌ها در دستگاه‌های گم‌شده یا به‌سرقت‌رفته کمک می‌کند. برای راه‌اندازی دستگاهتان وارد کردن پین الزامی است؟"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"علاوه بر استفاده از اثر انگشت برای باز کردن قفل دستگاه، برای محافظت بیشتر می‌توانید راه‌اندازی آن را به وارد کردن الگو موکول کنید. تا زمانی‌که دستگاه راه‌اندازی نشود، نمی‌تواند تماس تلفنی، پیام یا اعلان (ازجمله هشدار) دریافت کند.\n\nاین کار به محافظت از داده‌ها در دستگاه‌های گم‌شده یا به‌سرقت‌رفته کمک می‌کند. برای راه‌اندازی دستگاهتان وارد کردن الگو الزامی است؟"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"علاوه بر استفاده از اثرانگشت برای باز کردن قفل دستگاه، برای محافظت بیشتر می‌توانید وارد کردن گذرواژه را برای راه‌اندازی آن لازم کنید. تا زمانی‌که دستگاه راه‌اندازی نشود، نمی‌تواند تماس تلفنی، پیام یا اعلان (ازجمله هشدار) دریافت کند.\n\nاین کار به محافظت از داده‌ها در دستگاه‌های گم‌شده یا به‌سرقت‌رفته کمک می‌کند. وارد کردن گذرواژه برای راه‌اندازی دستگاهتان الزامی شود؟"</string>
+    <string name="encryption_interstitial_message_pin_for_face" msgid="2017438765366716760">"علاوه بر استفاده از چهره رای باز کردن قفل دستگاه، به‌منظور محافظت بیشتر می‌توانید راه‌اندازی آن را به وارد کردن پین موکول کنید. تا زمانی‌که دستگاه راه‌اندازی نشود، نمی‌تواند تماس تلفنی، پیام یا اعلان (ازجمله هشدار) دریافت کند.\n\nاین کار به محافظت از داده‌ها در دستگاه‌های گم‌شده یا به‌سرقت‌رفته کمک می‌کند. برای راه‌اندازی دستگاهتان وارد کردن پین الزامی است؟"</string>
+    <string name="encryption_interstitial_message_pattern_for_face" msgid="3551827507967661552">"علاوه بر استفاده از چهره برای باز کردن قفل دستگاه، به‌منظور محافظت بیشتر می‌توانید راه‌اندازی آن را به وارد کردن الگو موکول کنید. تا زمانی‌که دستگاه راه‌اندازی نشود، نمی‌تواند تماس تلفنی، پیام یا اعلان (ازجمله هشدار) دریافت کند.\n\nاین کار به محافظت از داده‌ها در دستگاه‌های گم‌شده یا به‌سرقت‌رفته کمک می‌کند. برای راه‌اندازی دستگاهتان وارد کردن الگو الزامی است؟"</string>
+    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"علاوه بر استفاده از چهره‌تان برای باز کردن قفل دستگاه، به‌منظور محافظت بیشتر می‌توانید راه‌اندازی آن را به وارد کردن گذرواژه موکول کنید. تا زمانی‌که دستگاه راه‌اندازی نشود، نمی‌تواند تماس تلفنی، پیام یا اعلان (ازجمله هشدار) دریافت کند.\n\nاین کار به محافظت از داده‌ها در دستگاه‌های گم‌شده یا به‌سرقت‌رفته کمک می‌کند. وارد کردن گذرواژه برای راه‌اندازی دستگاهتان الزامی شود؟"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"بله"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"نه"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"محدودشده"</string>
@@ -3449,7 +3482,7 @@
     <string name="change_storage" msgid="600475265207060436">"تغییر فضای ذخیره‌سازی"</string>
     <string name="notifications_label" msgid="2872668710589600731">"اعلان‌ها"</string>
     <string name="notifications_enabled" msgid="6983396130566021385">"روشن"</string>
-    <string name="notifications_enabled_with_info" msgid="2446033696770133334">"فعال / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%1$s</xliff:g>"</string>
+    <string name="notifications_enabled_with_info" msgid="5669544704839269901">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="1262114548434938079">"خاموش"</string>
     <string name="notifications_partly_blocked" msgid="592071133950126656">"<xliff:g id="COUNT_0">%1$d</xliff:g> دسته از <xliff:g id="COUNT_1">%2$d</xliff:g> دسته خاموش شده‌اند"</string>
     <string name="notifications_silenced" msgid="4728603513072110381">"بی‌صدا شد"</string>
@@ -3694,6 +3727,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"سه‌شنبه ۶:۰۲ ب.ظ"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"سه‌شنبه ۶:۰۳ ب.ظ"</string>
     <string name="disconnected" msgid="4836600637485526329">"متصل نیست"</string>
+    <string name="keyboard_disconnected" msgid="1495037256967224035">"متصل نیست"</string>
     <string name="data_usage_summary_format" msgid="7507047900192160585">"<xliff:g id="AMOUNT">%1$s</xliff:g> داده استفاده‌شده"</string>
     <string name="data_usage_wifi_format" msgid="5417296451392612860">"‏<xliff:g id="AMOUNT">^1</xliff:g> داده مصرفی در Wi‑Fi"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
@@ -3787,8 +3821,6 @@
     <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> داده شبکه تلفن همراه"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"‏<xliff:g id="AMOUNT">^1</xliff:g> داده‌های Wi-Fi"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> داده‌ اترنت"</string>
-    <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> هشدار داده"</string>
-    <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> هشدار داده / <xliff:g id="ID_2">%2$s</xliff:g> محدودیت داده"</string>
     <string name="billing_cycle" msgid="6614597736285325497">"محدودیت و اخطار داده"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"دوره مصرف داده برنامه"</string>
     <string name="cell_data_warning" msgid="1985956818884847057">"<xliff:g id="ID_1">^1</xliff:g> هشدار داده"</string>
@@ -4084,12 +4116,8 @@
     <string name="autofill_app" msgid="7338387238377914374">"سرویس تکمیل خودکار"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"خودکار، پر کردن، تکمیل خودکار"</string>
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"‏&lt;b&gt;مطمئن شوید به این برنامه اطمینان دارید&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=تکمیل خودکار Google&gt;%1$s&lt;/xliff:g&gt; برای تعیین مواردی که می‌توانند به‌طور خودکار تکمیل شوند، از آنچه روی صفحه‌نمایش شما است استفاده می‌کند."</string>
-    <string name="color_theme" msgid="1535685696756738324">"طرح‌ زمینه‌ رنگی"</string>
-    <string name="default_theme" msgid="7085644992078579076">"پیش‌فرض"</string>
     <string name="device_theme" msgid="4571803018917608588">"طرح زمینه دستگاه"</string>
-    <string name="systemui_theme_wallpaper" msgid="5658521610680281172">"خودکار (براساس کاغذدیواری)"</string>
-    <string name="systemui_theme_light" msgid="7519689709659152866">"روشن"</string>
-    <string name="systemui_theme_dark" msgid="8708733503912628456">"تیره"</string>
+    <string name="default_theme" msgid="7085644992078579076">"پیش‌فرض"</string>
     <string name="show_operator_name_title" msgid="805135053530442951">"نام شبکه"</string>
     <string name="show_operator_name_summary" msgid="5962567590205757550">"نمایش نام شبکه در نوار وضعیت"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"مدیریت حافظه: <xliff:g id="STATUS">^1</xliff:g>"</string>

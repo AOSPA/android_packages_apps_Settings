@@ -21,19 +21,18 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.LocationManager;
 import android.provider.Settings.Secure;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.InlineListPayload;
-import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class LocationPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
@@ -108,16 +107,5 @@ public class LocationPreferenceController extends AbstractPreferenceController
             return context.getString(R.string.location_on_summary);
         }
         return context.getString(R.string.location_off_summary);
-    }
-
-    @Override
-    public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
-                LocationSettings.class.getName(), KEY_LOCATION,
-                mContext.getString(R.string.location_settings_title));
-
-        return new InlineListPayload(Secure.LOCATION_MODE,
-                ResultPayload.SettingsSource.SECURE, intent, isAvailable(),
-                Secure.LOCATION_MODE_HIGH_ACCURACY + 1, Secure.LOCATION_MODE_OFF);
     }
 }

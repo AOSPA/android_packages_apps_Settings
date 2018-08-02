@@ -16,6 +16,8 @@
 
 package com.android.settings.nfc;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -25,18 +27,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
-import com.android.settingslib.HelpUtils;
-import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class AndroidBeam extends InstrumentedFragment
         implements SwitchBar.OnSwitchChangeListener {
@@ -75,7 +77,13 @@ public class AndroidBeam extends InstrumentedFragment
             mBeamDisallowedByOnlyAdmin = true;
             return new View(getContext());
         }
-        mView = inflater.inflate(R.layout.android_beam, container, false);
+        mView = inflater.inflate(R.layout.preference_footer, container, false);
+
+        ImageView iconInfo = mView.findViewById(android.R.id.icon);
+        iconInfo.setImageResource(R.drawable.ic_info_outline_24dp);
+        TextView textInfo = mView.findViewById(android.R.id.title);
+        textInfo.setText(R.string.android_beam_explained);
+
         return mView;
     }
 

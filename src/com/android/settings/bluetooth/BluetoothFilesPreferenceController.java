@@ -16,17 +16,18 @@
 
 package com.android.settings.bluetooth;
 
-import android.content.pm.PackageManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
+import android.content.pm.PackageManager;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 /**
  * Controller that shows received files

@@ -16,13 +16,15 @@
 package com.android.settings.survey;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.BroadcastReceiver;
+
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * attaches extra, survey related work to the onResume method of registered observable classes

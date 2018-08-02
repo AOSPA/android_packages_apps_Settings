@@ -17,15 +17,16 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import android.support.v4.content.res.TypedArrayUtils;
-import android.support.v7.preference.CheckBoxPreference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.settings.R;
+
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * Check box preference with check box replaced by radio button.
@@ -53,7 +54,7 @@ public class RadioButtonPreference extends CheckBoxPreference {
 
     public RadioButtonPreference(Context context, AttributeSet attrs) {
         this(context, attrs, TypedArrayUtils.getAttr(context,
-                android.support.v7.preference.R.attr.preferenceStyle,
+                androidx.preference.R.attr.preferenceStyle,
                 android.R.attr.preferenceStyle));
     }
 

@@ -16,7 +16,7 @@
 
 package com.android.settings.applications.manageapplications;
 
-import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
+import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
@@ -42,7 +42,6 @@ import android.annotation.Nullable;
 import android.annotation.StringRes;
 import android.app.Activity;
 import android.app.usage.IUsageStatsManager;
-import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -53,10 +52,6 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
-import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
@@ -124,13 +119,17 @@ import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.utils.ThreadUtils;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Activity to pick an application that will be used to display installation information and
@@ -142,7 +141,7 @@ public class ManageApplications extends InstrumentedFragment
         implements View.OnClickListener, OnItemSelectedListener {
 
     static final String TAG = "ManageApplications";
-    static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+    static final boolean DEBUG = true;
 
     // Intent extras.
     public static final String EXTRA_CLASSNAME = "classname";
@@ -157,6 +156,7 @@ public class ManageApplications extends InstrumentedFragment
     private static final String EXTRA_SHOW_SYSTEM = "showSystem";
     private static final String EXTRA_HAS_ENTRIES = "hasEntries";
     private static final String EXTRA_HAS_BRIDGE = "hasBridge";
+    private static final String EXTRA_FILTER_TYPE = "filterType";
 
     // attributes used as keys when passing values to AppInfoDashboardFragment activity
     public static final String APP_CHG = "chg";
@@ -235,6 +235,7 @@ public class ManageApplications extends InstrumentedFragment
     private boolean mIsWorkOnly;
     private int mWorkUserId;
     private View mEmptyView;
+    private int mFilterType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -316,6 +317,8 @@ public class ManageApplications extends InstrumentedFragment
         if (savedInstanceState != null) {
             mSortOrder = savedInstanceState.getInt(EXTRA_SORT_ORDER, mSortOrder);
             mShowSystem = savedInstanceState.getBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
+            mFilterType =
+                    savedInstanceState.getInt(EXTRA_FILTER_TYPE, AppFilterRegistry.FILTER_APPS_ALL);
         }
 
         mInvalidSizeStr = activity.getText(R.string.invalid_size_value);
@@ -498,6 +501,7 @@ public class ManageApplications extends InstrumentedFragment
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
         outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
+        outState.putInt(EXTRA_FILTER_TYPE, mFilter.getFilterType());
         if (mApplications != null) {
             mApplications.onSaveInstanceState(outState);
         }
@@ -670,14 +674,14 @@ public class ManageApplications extends InstrumentedFragment
                 if (mListType == LIST_TYPE_NOTIFICATION) {
                     new SubSettingLauncher(getContext())
                             .setDestination(ConfigureNotificationSettings.class.getName())
-                            .setTitle(R.string.configure_notification_settings)
+                            .setTitleRes(R.string.configure_notification_settings)
                             .setSourceMetricsCategory(getMetricsCategory())
                             .setResultListener(this, ADVANCED_SETTINGS)
                             .launch();
                 } else {
                     new SubSettingLauncher(getContext())
                             .setDestination(DefaultAppSettings.class.getName())
-                            .setTitle(R.string.configure_apps)
+                            .setTitleRes(R.string.configure_apps)
                             .setSourceMetricsCategory(getMetricsCategory())
                             .setResultListener(this, ADVANCED_SETTINGS)
                             .launch();
@@ -717,7 +721,9 @@ public class ManageApplications extends InstrumentedFragment
         mFilter = mFilterAdapter.getFilter(position);
         mApplications.setFilter(mFilter);
 
-        if (DEBUG) Log.d(TAG, "Selecting filter " + mFilter);
+        if (DEBUG) {
+            Log.d(TAG, "Selecting filter " + getContext().getText(mFilter.getTitle()));
+        }
     }
 
     @Override
@@ -780,7 +786,7 @@ public class ManageApplications extends InstrumentedFragment
                 return;
             }
             if (DEBUG) {
-                Log.d(TAG, "Enabling filter " + filter);
+                Log.d(TAG, "Enabling filter " + mContext.getText(filter.getTitle()));
             }
             mFilterOptions.add(filter);
             Collections.sort(mFilterOptions);
@@ -789,10 +795,21 @@ public class ManageApplications extends InstrumentedFragment
             notifyDataSetChanged();
             if (mFilterOptions.size() == 1) {
                 if (DEBUG) {
-                    Log.d(TAG, "Auto selecting filter " + filter);
+                    Log.d(TAG, "Auto selecting filter " + filter + " " + mContext.getText(
+                            filter.getTitle()));
                 }
                 mManageApplications.mFilterSpinner.setSelection(0);
                 mManageApplications.onItemSelected(null, null, 0, 0);
+            }
+            if (mFilterOptions.size() > 1) {
+                if (filterType == mManageApplications.mFilterType) {
+                    int index = mFilterOptions.indexOf(filter);
+                    if (index != -1) {
+                        mManageApplications.mFilterSpinner.setSelection(index);
+                        mManageApplications.onItemSelected(null, null, index, 0);
+                        mManageApplications.mFilterType = AppFilterRegistry.FILTER_APPS_ALL;
+                    }
+                }
             }
         }
 
@@ -802,7 +819,8 @@ public class ManageApplications extends InstrumentedFragment
                 return;
             }
             if (DEBUG) {
-                Log.d(TAG, "Disabling filter " + filter);
+                Log.d(TAG, "Disabling filter " + filter + " " + mContext.getText(
+                        filter.getTitle()));
             }
             Collections.sort(mFilterOptions);
             mManageApplications.mSpinnerHeader.setVisibility(
@@ -811,7 +829,8 @@ public class ManageApplications extends InstrumentedFragment
             if (mManageApplications.mFilter == filter) {
                 if (mFilterOptions.size() > 0) {
                     if (DEBUG) {
-                        Log.d(TAG, "Auto selecting filter " + mFilterOptions.get(0));
+                        Log.d(TAG, "Auto selecting filter " + mFilterOptions.get(0)
+                            + mContext.getText(mFilterOptions.get(0).getTitle()));
                     }
                     mManageApplications.mFilterSpinner.setSelection(0);
                     mManageApplications.onItemSelected(null, null, 0, 0);
@@ -1021,6 +1040,12 @@ public class ManageApplications extends InstrumentedFragment
             if (!mHasReceivedLoadEntries
                     || (mExtraInfoBridge != null && !mHasReceivedBridgeCallback)) {
                 // Don't rebuild the list until all the app entries are loaded.
+                if (DEBUG) {
+                    Log.d(TAG, "Not rebuilding until all the app entries loaded."
+                            + " !mHasReceivedLoadEntries=" + !mHasReceivedLoadEntries
+                            + " !mExtraInfoBridgeNull=" + (mExtraInfoBridge != null)
+                            + " !mHasReceivedBridgeCallback=" + !mHasReceivedBridgeCallback);
+                }
                 return;
             }
             ApplicationsState.AppFilter filterObj;
@@ -1126,6 +1151,9 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public void onRebuildComplete(ArrayList<AppEntry> entries) {
+            if (DEBUG) {
+                Log.d(TAG, "onRebuildComplete");
+            }
             final int filterType = mAppFilter.getFilterType();
             if (filterType == FILTER_APPS_POWER_WHITELIST ||
                     filterType == FILTER_APPS_POWER_WHITELIST_ALL) {
@@ -1411,7 +1439,7 @@ public class ManageApplications extends InstrumentedFragment
         public void setListening(boolean listening) {
             if (listening) {
                 new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
-                        new PackageManagerWrapper(mContext.getPackageManager())) {
+                        mContext.getPackageManager()) {
                     @Override
                     protected void onCountComplete(int num) {
                         mLoader.setSummary(SummaryProvider.this,

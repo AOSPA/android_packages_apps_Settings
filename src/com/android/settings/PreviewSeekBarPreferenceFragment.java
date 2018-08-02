@@ -19,8 +19,6 @@ package com.android.settings;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,6 +30,9 @@ import android.widget.TextView;
 
 import com.android.settings.widget.DotsPageIndicator;
 import com.android.settings.widget.LabeledSeekBar;
+
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 /**
  * Preference fragment shows a preview and a seek bar to adjust a specific settings.
@@ -96,9 +97,9 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         final View root = super.onCreateView(inflater, container, savedInstanceState);
-        final ViewGroup listContainer = (ViewGroup) root.findViewById(android.R.id.list_container);
+        final ViewGroup listContainer = root.findViewById(android.R.id.list_container);
         listContainer.removeAllViews();
 
         final View content = inflater.inflate(mActivityLayoutResId, listContainer, false);

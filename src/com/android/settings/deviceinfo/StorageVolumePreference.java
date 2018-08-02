@@ -23,8 +23,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
@@ -36,8 +34,11 @@ import com.android.settings.R;
 import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
 import com.android.settingslib.Utils;
 
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * Preference line representing a single {@link VolumeInfo}, possibly including
@@ -106,7 +107,7 @@ public class StorageVolumePreference extends Preference {
             }
 
             if (freeBytes < mStorageManager.getStorageLowBytes(path)) {
-                mColor = Utils.getColorAttr(context, android.R.attr.colorError);
+                mColor = Utils.getColorAttrDefaultColor(context, android.R.attr.colorError);
                 icon = context.getDrawable(R.drawable.ic_warning_24dp);
             }
 

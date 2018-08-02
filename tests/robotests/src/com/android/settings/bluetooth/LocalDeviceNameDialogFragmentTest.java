@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -32,7 +31,9 @@ import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.testutils.FragmentTestUtils;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,7 +41,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowAlertDialog;
-import org.robolectric.util.FragmentTestUtil;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -67,9 +67,14 @@ public class LocalDeviceNameDialogFragmentTest {
         when(mFragment.getContext()).thenReturn(mContext);
     }
 
+    @After
+    public void tearDown() {
+        ReflectionHelpers.setStaticField(LocalBluetoothManager.class, "sInstance", null);
+    }
+
     @Test
     public void diaglogTriggersShowSoftInput() {
-        FragmentTestUtil.startFragment(mFragment);
+        FragmentTestUtils.startFragment(mFragment);
         AlertDialog dialog = ShadowAlertDialog.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         View view = dialog.findViewById(R.id.edittext);

@@ -4,9 +4,7 @@ import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTI
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
 import static android.provider.Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS;
 import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.robolectric.Robolectric.buildActivity;
 
 import android.content.ContentResolver;
@@ -133,7 +131,7 @@ public class RedactionInterstitialTest {
     private void setupActivity() {
         mActivity = buildActivity(RedactionInterstitial.class, new Intent()).setup().get();
         mFragment = (RedactionInterstitialFragment)
-                mActivity.getFragmentManager().findFragmentById(R.id.main_content);
+                mActivity.getSupportFragmentManager().findFragmentById(R.id.main_content);
         assertThat(mActivity).isNotNull();
         assertThat(mFragment).isNotNull();
     }

@@ -30,13 +30,15 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.os.Build;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Interpolator;
+
 import com.android.settings.R;
 
 import java.util.Arrays;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Custom pager indicator for use with a {@code ViewPager}.
@@ -188,7 +190,7 @@ public class DotsPageIndicator extends View implements ViewPager.OnPageChangeLis
 
     /***
      * As this class <b>must</b> act as the {@link ViewPager.OnPageChangeListener} for the ViewPager
-     * (as set by {@link #setViewPager(android.support.v4.view.ViewPager)}).  Applications may set a
+     * (as set by {@link #setViewPager(androidx.viewpager.widget.ViewPager)}).  Applications may set a
      * listener here to be notified of the ViewPager events.
      *
      * @param onPageChangeListener

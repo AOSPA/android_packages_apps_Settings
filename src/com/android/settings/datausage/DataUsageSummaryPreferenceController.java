@@ -21,13 +21,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.widget.RecyclerView;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
 import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.util.RecurrenceRule;
 
@@ -43,6 +41,10 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.net.DataUsageController;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * This is the controller for the top of the data usage screen that retrieves carrier data from the
@@ -215,18 +217,18 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         }
 
         if (info.warningLevel > 0 && info.limitLevel > 0) {
-                summaryPreference.setLimitInfo(TextUtils.expandTemplate(
-                        mContext.getText(R.string.cell_data_warning_and_limit),
-                        DataUsageUtils.formatDataUsage(mContext, info.warningLevel),
-                        DataUsageUtils.formatDataUsage(mContext, info.limitLevel)).toString());
+            summaryPreference.setLimitInfo(TextUtils.expandTemplate(
+                    mContext.getText(R.string.cell_data_warning_and_limit),
+                    DataUsageUtils.formatDataUsage(mContext, info.warningLevel),
+                    DataUsageUtils.formatDataUsage(mContext, info.limitLevel)));
         } else if (info.warningLevel > 0) {
-                summaryPreference.setLimitInfo(TextUtils.expandTemplate(
-                        mContext.getText(R.string.cell_data_warning),
-                        DataUsageUtils.formatDataUsage(mContext, info.warningLevel)).toString());
+            summaryPreference.setLimitInfo(TextUtils.expandTemplate(
+                    mContext.getText(R.string.cell_data_warning),
+                    DataUsageUtils.formatDataUsage(mContext, info.warningLevel)));
         } else if (info.limitLevel > 0) {
             summaryPreference.setLimitInfo(TextUtils.expandTemplate(
                     mContext.getText(R.string.cell_data_limit),
-                    DataUsageUtils.formatDataUsage(mContext, info.limitLevel)).toString());
+                    DataUsageUtils.formatDataUsage(mContext, info.limitLevel)));
         } else {
             summaryPreference.setLimitInfo(null);
         }
@@ -237,7 +239,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
             summaryPreference.setChartEnabled(false);
         } else {
             summaryPreference.setChartEnabled(true);
-            summaryPreference.setLabels(DataUsageUtils.formatDataUsage(mContext, 0 /* sizeBytes */),
+            summaryPreference.setLabels(Formatter.formatFileSize(mContext, 0 /* sizeBytes */),
                     DataUsageUtils.formatDataUsage(mContext, mDataBarSize));
             summaryPreference.setProgress(mDataplanUse / (float) mDataBarSize);
         }

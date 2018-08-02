@@ -19,16 +19,16 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import android.support.v4.content.res.TypedArrayUtils;
-import android.support.v7.preference.Preference;
 import android.util.AttributeSet;
-import android.util.FeatureFlagUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.net.DataUsageController;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.Preference;
 
 public class DataUsagePreference extends Preference implements TemplatePreference {
 
@@ -41,7 +41,7 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
         final TypedArray a = context.obtainStyledAttributes(
                 attrs, new int[] {com.android.internal.R.attr.title},
                 TypedArrayUtils.getAttr(
-                        context, android.support.v7.preference.R.attr.preferenceStyle,
+                        context, androidx.preference.R.attr.preferenceStyle,
                         android.R.attr.preferenceStyle), 0);
         mTitleRes = a.getResourceId(0, 0);
         a.recycle();
@@ -52,24 +52,24 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
             NetworkServices services) {
         mTemplate = template;
         mSubId = subId;
-        DataUsageController controller = new DataUsageController(getContext());
-        DataUsageController.DataUsageInfo usageInfo = controller.getDataUsageInfo(mTemplate);
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
-            if (mTemplate.isMatchRuleMobile()) {
-                setTitle(R.string.app_cellular_data_usage);
-            } else {
-                setTitle(mTitleRes);
-                setSummary(getContext().getString(R.string.data_usage_template,
-                        DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
-                                usageInfo.period));
-            }
+        final DataUsageController controller = getDataUsageController();
+        if (mTemplate.isMatchRuleMobile()) {
+            setTitle(R.string.app_cellular_data_usage);
         } else {
+            final DataUsageController.DataUsageInfo usageInfo =
+                    controller.getDataUsageInfo(mTemplate);
             setTitle(mTitleRes);
             setSummary(getContext().getString(R.string.data_usage_template,
                     DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
-                            usageInfo.period));
+                    usageInfo.period));
         }
-        setIntent(getIntent());
+        final long usageLevel = controller.getHistoriclUsageLevel(template);
+        if (usageLevel > 0L) {
+            setIntent(getIntent());
+        } else {
+            setIntent(null);
+            setEnabled(false);
+        }
     }
 
     @Override
@@ -81,19 +81,16 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
                 .setArguments(args)
                 .setDestination(DataUsageList.class.getName())
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
-            if (mTemplate.isMatchRuleMobile()) {
-                launcher.setTitle(R.string.app_cellular_data_usage);
-            } else {
-                launcher.setTitle(mTitleRes);
-            }
+        if (mTemplate.isMatchRuleMobile()) {
+            launcher.setTitleRes(R.string.app_cellular_data_usage);
         } else {
-            if (mTitleRes > 0) {
-                launcher.setTitle(mTitleRes);
-            } else {
-                launcher.setTitle(getTitle());
-            }
+            launcher.setTitleRes(mTitleRes);
         }
         return launcher.toIntent();
+    }
+
+    @VisibleForTesting
+    DataUsageController getDataUsageController() {
+        return new DataUsageController(getContext());
     }
 }

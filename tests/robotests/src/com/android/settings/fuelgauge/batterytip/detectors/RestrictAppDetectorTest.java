@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip.detectors;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
@@ -94,6 +93,7 @@ public class RestrictAppDetectorTest {
                 AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UNRESTRICTED_UID,
                 UNRESTRICTED_PACKAGE_NAME);
 
+        BatteryDatabaseManager.setUpForTest(mBatteryDatabaseManager);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(any(),
                 anyInt());

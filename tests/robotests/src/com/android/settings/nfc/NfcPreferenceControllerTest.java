@@ -17,7 +17,6 @@
 package com.android.settings.nfc;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,8 +26,6 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.v7.preference.PreferenceScreen;
-import android.support.v14.preference.SwitchPreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -43,10 +40,13 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 public class NfcPreferenceControllerTest {
 
-    Context mContext;
+
     @Mock
     private NfcAdapter mNfcAdapter;
     @Mock
@@ -56,6 +56,7 @@ public class NfcPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
 
+    private Context mContext;
     private SwitchPreference mNfcPreference;
     private NfcPreferenceController mNfcController;
 
@@ -74,15 +75,6 @@ public class NfcPreferenceControllerTest {
         mNfcPreference = new SwitchPreference(RuntimeEnvironment.application);
 
         when(mScreen.findPreference(mNfcController.getPreferenceKey())).thenReturn(mNfcPreference);
-
-        Settings.Global.putString(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS,
-                Settings.Global.RADIO_NFC);
-
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON,
-                0);
-        mNfcController.displayPreference(mScreen);
     }
 
     @Test
@@ -101,6 +93,7 @@ public class NfcPreferenceControllerTest {
 
     @Test
     public void isNfcEnable_nfcStateNotTurning_shouldReturnTrue() {
+        mNfcController.displayPreference(mScreen);
         when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_ON);
         mNfcController.onResume();
         assertThat(mNfcPreference.isEnabled()).isTrue();
@@ -112,6 +105,7 @@ public class NfcPreferenceControllerTest {
 
     @Test
     public void isNfcEnable_nfcStateTurning_shouldReturnFalse() {
+        mNfcController.displayPreference(mScreen);
         when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_TURNING_ON);
         mNfcController.onResume();
         assertThat(mNfcPreference.isEnabled()).isFalse();
@@ -123,6 +117,7 @@ public class NfcPreferenceControllerTest {
 
     @Test
     public void isNfcChecked_nfcStateOn_shouldReturnTrue() {
+        mNfcController.displayPreference(mScreen);
         when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_ON);
         mNfcController.onResume();
         assertThat(mNfcPreference.isChecked()).isTrue();
@@ -203,5 +198,53 @@ public class NfcPreferenceControllerTest {
                 Settings.Global.AIRPLANE_MODE_ON, 1);
 
         assertThat(NfcPreferenceController.isToggleableInAirplaneMode(mContext)).isFalse();
+    }
+
+    @Test
+    public void shouldTurnOffNFCInAirplaneMode_airplaneModeRadiosContainsNfc_shouldReturnTrue() {
+        Settings.Global.putString(mContext.getContentResolver(),
+            Settings.Global.AIRPLANE_MODE_RADIOS, Settings.Global.RADIO_NFC);
+
+        assertThat(NfcPreferenceController.shouldTurnOffNFCInAirplaneMode(mContext)).isTrue();
+    }
+
+    @Test
+    public void shouldTurnOffNFCInAirplaneMode_airplaneModeRadiosWithoutNfc_shouldReturnFalse() {
+        Settings.Global.putString(mContext.getContentResolver(),
+            Settings.Global.AIRPLANE_MODE_RADIOS, "");
+
+        assertThat(NfcPreferenceController.shouldTurnOffNFCInAirplaneMode(mContext)).isFalse();
+    }
+
+    @Test
+    public void displayPreference_airplaneModeRadiosContainsNfc_shouldCreateAirplaneModeObserver() {
+        Settings.Global.putString(mContext.getContentResolver(),
+            Settings.Global.AIRPLANE_MODE_RADIOS, Settings.Global.RADIO_NFC);
+
+        mNfcController.displayPreference(mScreen);
+
+        assertThat(mNfcController.mAirplaneModeObserver).isNotNull();
+    }
+
+    @Test
+    public void displayPreference_nfcToggleableInAirplaneMode_shouldCreateAirplaneModeObserver() {
+        Settings.Global.putString(mContext.getContentResolver(),
+            Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, Settings.Global.RADIO_NFC);
+
+        mNfcController.displayPreference(mScreen);
+
+        assertThat(mNfcController.mAirplaneModeObserver).isNotNull();
+    }
+
+    @Test
+    public void displayPreference_nfcNotAffectByAirplaneMode_shouldNotCreateAirplaneModeObserver() {
+        Settings.Global.putString(mContext.getContentResolver(),
+            Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS, "");
+        Settings.Global.putString(mContext.getContentResolver(),
+            Settings.Global.AIRPLANE_MODE_RADIOS, "");
+
+        mNfcController.displayPreference(mScreen);
+
+        assertThat(mNfcController.mAirplaneModeObserver).isNull();
     }
 }

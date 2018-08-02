@@ -16,25 +16,26 @@
 package com.android.settings.connecteddevice;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.spy;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
+
 import com.android.settings.R;
 import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowNfcAdapter;
 import org.robolectric.util.ReflectionHelpers;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.spy;
-import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowNfcAdapter.class)
@@ -57,7 +58,7 @@ public class AdvancedConnectedDeviceControllerTest {
         mContentResolver = mContext.getContentResolver();
         mNfcController = new NfcPreferenceController(mContext,
                 NfcPreferenceController.KEY_TOGGLE_NFC);
-        mShadowNfcAdapter = shadowOf(ShadowNfcAdapter.getNfcAdapter(mContext));
+        mShadowNfcAdapter = Shadows.shadowOf(ShadowNfcAdapter.getNfcAdapter(mContext));
     }
 
     @Test

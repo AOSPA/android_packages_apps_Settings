@@ -24,8 +24,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
@@ -36,10 +34,15 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
+@SearchIndexable
 public final class MagnificationPreferenceFragment extends DashboardFragment {
     @VisibleForTesting
     static final int ON = 1;

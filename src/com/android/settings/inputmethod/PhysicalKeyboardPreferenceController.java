@@ -18,7 +18,7 @@ package com.android.settings.inputmethod;
 
 import android.content.Context;
 import android.hardware.input.InputManager;
-import android.support.v7.preference.Preference;
+import android.icu.text.ListFormatter;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -29,7 +29,11 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
+
 
 public class PhysicalKeyboardPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause,
@@ -96,18 +100,13 @@ public class PhysicalKeyboardPreferenceController extends AbstractPreferenceCont
         final List<HardKeyboardDeviceInfo> keyboards =
                 PhysicalKeyboardFragment.getHardKeyboards(mContext);
         if (keyboards.isEmpty()) {
-            mPreference.setSummary(R.string.disconnected);
+            mPreference.setSummary(R.string.keyboard_disconnected);
             return;
         }
-        String summary = null;
+        final List<String> summaries = new ArrayList<>();
         for (HardKeyboardDeviceInfo info : keyboards) {
-            if (summary == null) {
-                summary = info.mDeviceName;
-            } else {
-                summary = mContext.getString(R.string.join_many_items_middle, summary,
-                        info.mDeviceName);
-            }
+            summaries.add(info.mDeviceName);
         }
-        mPreference.setSummary(summary);
+        mPreference.setSummary(ListFormatter.getInstance().format(summaries));
     }
 }

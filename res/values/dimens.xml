@@ -62,7 +62,6 @@
     <dimen name="captioning_preview_height">200dp</dimen>
 
     <dimen name="color_mode_preview_height">320dp</dimen>
-    <dimen name="color_mode_preview_padding_bottom">40dp</dimen>
 
     <dimen name="ring_progress_bar_thickness">4dp</dimen>
     <dimen name="settings_side_margin">0dip</dimen>
@@ -98,9 +97,6 @@
     <dimen name="dashboard_category_padding_start">0dp</dimen>
     <dimen name="dashboard_category_padding_end">0dp</dimen>
 
-    <!-- Dashboard category panel elevation -->
-    <dimen name="dashboard_category_elevation">2dp</dimen>
-
     <!-- Dashboard tile minimum height -->
     <dimen name="dashboard_tile_minimum_height">72dp</dimen>
 
@@ -129,6 +125,8 @@
     <dimen name="search_bar_height">48dp</dimen>
     <dimen name="search_bar_corner_radius">2dp</dimen>
     <dimen name="search_bar_text_size">16dp</dimen>
+    <dimen name="search_bar_card_elevation">2dp</dimen>
+    <dimen name="search_bar_content_inset">64dp</dimen>
 
     <!-- Dimensions for Wifi Assistant Card -->
     <dimen name="wifi_assistant_padding_top_bottom">16dp</dimen>
@@ -184,7 +182,6 @@
     <!-- Bluetooth Preferences -->
     <dimen name="bluetooth_dialog_padding">8dip</dimen>
     <dimen name="bluetooth_dialog_padding_top">20dp</dimen>
-    <integer name="bluetooth_name_length">32</integer>
     <dimen name="bluetooth_pairing_padding">24dp</dimen>
     <dimen name="bluetooth_pairing_edittext_padding">21dp</dimen>
     <dimen name="bluetooth_checkbox_padding">16dp</dimen>
@@ -252,7 +249,6 @@
     <dimen name="unmount_button_padding">8dp</dimen>
 
     <!-- Display, Screen zoom -->
-    <dimen name="screen_zoom_preview_app_icon_width">88dp</dimen>
     <dimen name="conversation_message_list_padding">10dp</dimen>
     <dimen name="conversation_message_contact_icon_text_size">32sp</dimen>
     <dimen name="conversation_message_text_size">16sp</dimen>
@@ -329,5 +325,11 @@
     <dimen name="reset_checkbox_summary_padding_top">4dp</dimen>
     <dimen name="reset_checkbox_title_text_size">18sp</dimen>
     <dimen name="reset_checkbox_summary_text_size">14sp</dimen>
+
+    <!-- Bottombar size and padding -->
+    <dimen name="homepage_bottomsheet_height">90dp</dimen>
+    <dimen name="homepage_bottombar_height">56dp</dimen>
+    <dimen name="homepage_bottombar_top_margin">34dp</dimen>
+    <dimen name="homepage_bottombar_fab_cradle">68dp</dimen>
 
 </resources>

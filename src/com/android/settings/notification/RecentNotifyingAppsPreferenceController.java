@@ -17,17 +17,12 @@
 package com.android.settings.notification;
 
 import android.app.Application;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.service.notification.NotifyingApp;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -51,6 +46,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 /**
  * This controller displays a list of recently used apps and a "See all" button. If there is
@@ -220,7 +221,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
             pref.setIntent(new SubSettingLauncher(mHost.getActivity())
                     .setDestination(AppNotificationSettings.class.getName())
-                    .setTitle(R.string.notifications_title)
+                    .setTitleRes(R.string.notifications_title)
                     .setArguments(args)
                     .setSourceMetricsCategory(
                             MetricsProto.MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS)

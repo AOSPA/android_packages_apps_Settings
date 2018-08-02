@@ -15,8 +15,6 @@
 package com.android.settings.fuelgauge;
 
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -27,6 +25,9 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 /**
  * Controller that jumps to high power optimization fragment
@@ -89,7 +90,7 @@ public class BatteryOptimizationPreferenceController extends AbstractPreferenceC
         new SubSettingLauncher(mSettingsActivity)
                 .setDestination(ManageApplications.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.high_power_apps)
+                .setTitleRes(R.string.high_power_apps)
                 .setSourceMetricsCategory(mFragment.getMetricsCategory())
                 .launch();
 

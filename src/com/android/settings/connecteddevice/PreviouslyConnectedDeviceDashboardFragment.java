@@ -17,11 +17,13 @@ package com.android.settings.connecteddevice;
 
 import android.content.Context;
 import android.content.res.Resources;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ import java.util.List;
 /**
  * This fragment contains previously connected device
  */
+@SearchIndexable(forTarget = SearchIndexable.MOBILE)
 public class PreviouslyConnectedDeviceDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "PreConnectedDeviceFrag";

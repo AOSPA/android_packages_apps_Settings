@@ -18,17 +18,17 @@ package com.android.settings.notification;
 
 import android.app.NotificationManager.Policy;
 import android.content.Context;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class ZenModeVisEffectsAllPreferenceController
         extends AbstractZenModePreferenceController
         implements ZenCustomRadioButtonPreference.OnRadioButtonClickListener {
 
-    private final String KEY;
     private ZenCustomRadioButtonPreference mPreference;
 
     protected static final int EFFECTS = Policy.SUPPRESSED_EFFECT_SCREEN_OFF
@@ -44,13 +44,12 @@ public class ZenModeVisEffectsAllPreferenceController
     public ZenModeVisEffectsAllPreferenceController(Context context, Lifecycle lifecycle,
             String key) {
         super(context, key, lifecycle);
-        KEY = key;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (ZenCustomRadioButtonPreference) screen.findPreference(KEY);
+        mPreference = (ZenCustomRadioButtonPreference) screen.findPreference(getPreferenceKey());
         mPreference.setOnRadioButtonClickListener(this);
     }
 

@@ -25,12 +25,13 @@ import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.ZenModeConfig;
-import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.ZenModeSettings;
+
+import androidx.annotation.VisibleForTesting;
 
 public class DndCondition extends Condition {
 
@@ -107,7 +108,7 @@ public class DndCondition extends Condition {
         new SubSettingLauncher(mManager.getContext())
                 .setDestination(ZenModeSettings.class.getName())
                 .setSourceMetricsCategory(MetricsEvent.DASHBOARD_SUMMARY)
-                .setTitle(R.string.zen_mode_settings_title)
+                .setTitleRes(R.string.zen_mode_settings_title)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .launch();
     }

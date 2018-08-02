@@ -15,11 +15,12 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 public class BluetoothScanningPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {

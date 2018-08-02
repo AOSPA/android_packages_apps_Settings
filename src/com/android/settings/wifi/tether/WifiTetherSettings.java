@@ -27,26 +27,41 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
+import android.provider.SearchIndexableResource;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
+import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+
+@SearchIndexable
 public class WifiTetherSettings extends RestrictedDashboardFragment
         implements WifiTetherBasePreferenceController.OnTetherConfigUpdateListener {
 
     private static final String TAG = "WifiTetherSettings";
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
-    private static final String KEY_WIFI_TETHER_AUTO_OFF = "wifi_tether_auto_turn_off";
+    private static final String KEY_WIFI_TETHER_SCREEN = "wifi_tether_settings_screen";
+    @VisibleForTesting
+    static final String KEY_WIFI_TETHER_NETWORK_NAME = "wifi_tether_network_name";
+    @VisibleForTesting
+    static final String KEY_WIFI_TETHER_NETWORK_PASSWORD = "wifi_tether_network_password";
+    @VisibleForTesting
+    static final String KEY_WIFI_TETHER_AUTO_OFF = "wifi_tether_auto_turn_off";
+    @VisibleForTesting
+    static final String KEY_WIFI_TETHER_NETWORK_AP_BAND = "wifi_tether_network_ap_band";
 
     private WifiTetherSwitchBarController mSwitchBarController;
     private WifiTetherSSIDPreferenceController mSSIDPreferenceController;
@@ -95,7 +110,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         final SwitchBar switchBar = activity.getSwitchBar();
         mSwitchBarController = new WifiTetherSwitchBarController(activity,
                 new SwitchBarController(switchBar));
-        getLifecycle().addObserver(mSwitchBarController);
+        getSettingsLifecycle().addObserver(mSwitchBarController);
         switchBar.show();
     }
 
@@ -186,6 +201,33 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         use(WifiTetherApBandPreferenceController.class)
                 .updateDisplay();
     }
+
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.wifi_tether_settings;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+
+                    if (!TetherUtil.isTetherAvailable(context)) {
+                        keys.add(KEY_WIFI_TETHER_NETWORK_NAME);
+                        keys.add(KEY_WIFI_TETHER_NETWORK_PASSWORD);
+                        keys.add(KEY_WIFI_TETHER_AUTO_OFF);
+                        keys.add(KEY_WIFI_TETHER_NETWORK_AP_BAND);
+                    }
+
+                    // Remove duplicate
+                    keys.add(KEY_WIFI_TETHER_SCREEN);
+                    return keys;
+                }
+            };
 
     @VisibleForTesting
     class TetherChangeReceiver extends BroadcastReceiver {

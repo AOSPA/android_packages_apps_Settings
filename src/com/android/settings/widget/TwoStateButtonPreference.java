@@ -18,14 +18,15 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.VisibleForTesting;
-import android.support.v4.content.res.TypedArrayUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.res.TypedArrayUtils;
 
 /**
  * Preference that presents a button with two states(On vs Off)

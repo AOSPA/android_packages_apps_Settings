@@ -18,12 +18,10 @@ package com.android.settings.deviceinfo;
 
 import static android.os.storage.DiskInfo.EXTRA_DISK_ID;
 import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
-
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 import android.annotation.LayoutRes;
 import android.annotation.NonNull;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -49,7 +47,9 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class StorageWizardBase extends Activity {
+import androidx.fragment.app.FragmentActivity;
+
+public abstract class StorageWizardBase extends FragmentActivity {
     protected static final String EXTRA_FORMAT_FORGET_UUID = "format_forget_uuid";
     protected static final String EXTRA_FORMAT_PRIVATE = "format_private";
     protected static final String EXTRA_FORMAT_SLOW = "format_slow";
@@ -162,7 +162,7 @@ public abstract class StorageWizardBase extends Activity {
     protected void setIcon(int resId) {
         final GlifLayout layout = getGlifLayout();
         final Drawable icon = getDrawable(resId).mutate();
-        icon.setTint(Utils.getColorAccent(layout.getContext()));
+        icon.setTintList(Utils.getColorAccent(layout.getContext()));
         layout.setIcon(icon);
     }
 

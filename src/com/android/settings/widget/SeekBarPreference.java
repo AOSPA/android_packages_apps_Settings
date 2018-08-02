@@ -20,8 +20,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.content.res.TypedArrayUtils;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -30,8 +28,10 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-import com.android.settings.widget.DefaultIndicatorSeekBar;
 import com.android.settingslib.RestrictedPreference;
+
+import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * Based on android.preference.SeekBarPreference, but uses support preference as base.
@@ -78,7 +78,7 @@ public class SeekBarPreference extends RestrictedPreference
 
     public SeekBarPreference(Context context, AttributeSet attrs) {
         this(context, attrs, TypedArrayUtils.getAttr(context,
-                        android.support.v7.preference.R.attr.seekBarPreferenceStyle,
+                        androidx.preference.R.attr.seekBarPreferenceStyle,
                         com.android.internal.R.attr.seekBarPreferenceStyle));
     }
 

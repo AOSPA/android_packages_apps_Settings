@@ -16,7 +16,6 @@
 
 package com.android.settings.gestures;
 
-import static android.provider.Settings.Secure.VOLUME_HUSH_GESTURE;
 import static android.provider.Settings.Secure.VOLUME_HUSH_MUTE;
 import static android.provider.Settings.Secure.VOLUME_HUSH_OFF;
 import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
@@ -24,14 +23,7 @@ import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.VideoPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
@@ -39,8 +31,13 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
-public class PreventRingingPreferenceController extends BasePreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
+public class PreventRingingPreferenceController extends PreventRingingParentPreferenceController
+        implements Preference.OnPreferenceChangeListener,
         LifecycleObserver, OnResume, OnPause, OnCreate, OnSaveInstanceState {
 
     private static final String PREF_KEY_VIDEO = "gesture_prevent_ringing_video";
@@ -51,17 +48,17 @@ public class PreventRingingPreferenceController extends BasePreferenceController
     @VisibleForTesting
     boolean mVideoPaused;
 
-    private final String SECURE_KEY = VOLUME_HUSH_GESTURE;
-
     public PreventRingingPreferenceController(Context context, String key) {
         super(context, key);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_volumeHushGestureEnabled)
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        final int status = super.getAvailabilityStatus();
+        if (status == AVAILABLE_UNSEARCHABLE) {
+            return AVAILABLE;
+        }
+        return status;
     }
 
     @Override
@@ -92,24 +89,6 @@ public class PreventRingingPreferenceController extends BasePreferenceController
                 }
             }
         }
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        int value = Settings.Secure.getInt(
-                mContext.getContentResolver(), SECURE_KEY, VOLUME_HUSH_VIBRATE);
-        int summary;
-        switch (value) {
-            case VOLUME_HUSH_VIBRATE:
-                summary = R.string.prevent_ringing_option_vibrate_summary;
-                break;
-            case VOLUME_HUSH_MUTE:
-                summary = R.string.prevent_ringing_option_mute_summary;
-                break;
-            default:
-                summary = R.string.prevent_ringing_option_none_summary;
-        }
-        return mContext.getString(summary);
     }
 
     @Override

@@ -16,18 +16,15 @@
 
 package com.android.settings;
 
-import android.app.ActivityManager;
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.ListPreferenceDialogFragment;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,14 +35,15 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreferenceHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.preference.ListPreferenceDialogFragmentCompat;
+import androidx.preference.PreferenceViewHolder;
 
 public class RestrictedListPreference extends CustomListPreference {
     private final RestrictedPreferenceHelper mHelper;
@@ -172,7 +170,7 @@ public class RestrictedListPreference extends CustomListPreference {
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
+    protected void onPrepareDialogBuilder(Builder builder,
             DialogInterface.OnClickListener listener) {
         builder.setAdapter(createListAdapter(), listener);
     }
@@ -222,8 +220,8 @@ public class RestrictedListPreference extends CustomListPreference {
             CustomListPreference.CustomListPreferenceDialogFragment {
         private int mLastCheckedPosition = AdapterView.INVALID_POSITION;
 
-        public static ListPreferenceDialogFragment newInstance(String key) {
-            final ListPreferenceDialogFragment fragment
+        public static ListPreferenceDialogFragmentCompat newInstance(String key) {
+            final ListPreferenceDialogFragmentCompat fragment
                     = new RestrictedListPreferenceDialogFragment();
             final Bundle b = new Bundle(1);
             b.putString(ARG_KEY, key);

@@ -16,11 +16,9 @@
 
 package com.android.settings.password;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +26,9 @@ import android.widget.Button;
 
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 /**
  * Setup Wizard's version of ChooseLockPattern screen. It inherits the logic and basic structure
@@ -97,7 +98,9 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
             if (!getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)
                     && mOptionsButton != null) {
                 mOptionsButton.setVisibility(
-                        stage == Stage.Introduction ? View.VISIBLE : View.INVISIBLE);
+                        (stage == Stage.Introduction || stage == Stage.HelpScreen ||
+                                stage == Stage.ChoiceTooShort || stage == Stage.FirstChoiceValid)
+                                ? View.VISIBLE : View.INVISIBLE);
             }
         }
 

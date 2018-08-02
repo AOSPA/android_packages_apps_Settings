@@ -26,15 +26,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.List;
+
+import androidx.preference.Preference;
 
 public class MockLocationAppPreferenceController extends DeveloperOptionsPreferenceController
         implements PreferenceControllerMixin, OnActivityResultListener {
@@ -44,7 +44,7 @@ public class MockLocationAppPreferenceController extends DeveloperOptionsPrefere
 
     private final DevelopmentSettingsDashboardFragment mFragment;
     private final AppOpsManager mAppsOpsManager;
-    private final PackageManagerWrapper mPackageManager;
+    private final PackageManager mPackageManager;
 
     public MockLocationAppPreferenceController(Context context,
             DevelopmentSettingsDashboardFragment fragment) {
@@ -52,7 +52,7 @@ public class MockLocationAppPreferenceController extends DeveloperOptionsPrefere
 
         mFragment = fragment;
         mAppsOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        mPackageManager = new PackageManagerWrapper(context.getPackageManager());
+        mPackageManager = context.getPackageManager();
     }
 
     @Override

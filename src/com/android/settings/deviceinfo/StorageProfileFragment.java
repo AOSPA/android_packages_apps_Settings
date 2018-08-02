@@ -16,15 +16,12 @@
 
 package com.android.settings.deviceinfo;
 
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.Loader;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
-import android.support.annotation.VisibleForTesting;
 import android.util.SparseArray;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -37,10 +34,13 @@ import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 
 /**
  * StorageProfileFragment is a fragment which shows the storage results for a profile of the
@@ -118,7 +118,7 @@ public class StorageProfileFragment extends DashboardFragment
                 context.getSystemService(UserManager.class),
                 mVolume.fsUuid,
                 new StorageStatsSource(context),
-                new PackageManagerWrapper(context.getPackageManager()));
+                context.getPackageManager());
     }
 
     @Override

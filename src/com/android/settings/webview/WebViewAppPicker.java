@@ -25,7 +25,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.webkit.UserPackage;
 
@@ -33,10 +32,11 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settingslib.applications.DefaultAppInfo;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 public class WebViewAppPicker extends DefaultAppPickerFragment {
     private WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;
@@ -118,7 +118,7 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
     }
 
     private static class WebViewAppInfo extends DefaultAppInfo {
-        public WebViewAppInfo(Context context, PackageManagerWrapper pm,
+        public WebViewAppInfo(Context context, PackageManager pm,
                 PackageItemInfo packageItemInfo, String summary, boolean enabled) {
             super(context, pm, packageItemInfo, summary, enabled);
         }
@@ -127,8 +127,7 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
         public CharSequence loadLabel() {
             String versionName = "";
             try {
-                versionName = mPm.getPackageManager().
-                        getPackageInfo(packageItemInfo.packageName, 0).versionName;
+                versionName = mPm.getPackageInfo(packageItemInfo.packageName, 0).versionName;
             } catch (PackageManager.NameNotFoundException e) {
             }
             return String.format("%s %s", super.loadLabel(), versionName);
@@ -137,7 +136,7 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
 
 
     @VisibleForTesting
-    DefaultAppInfo createDefaultAppInfo(Context context, PackageManagerWrapper pm,
+    DefaultAppInfo createDefaultAppInfo(Context context, PackageManager pm,
             PackageItemInfo packageItemInfo, String disabledReason) {
         return new WebViewAppInfo(context, pm, packageItemInfo, disabledReason,
                 TextUtils.isEmpty(disabledReason) /* enabled */);

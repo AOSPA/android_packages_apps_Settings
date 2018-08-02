@@ -23,6 +23,7 @@
     settings:keywords="@string/keywords_zen_mode_settings">
 
     <PreferenceCategory
+        android:key="zen_mode_settings_category_behavior"
         android:title="@string/zen_category_behavior">
         <!-- sound vibration -->
         <Preference
@@ -38,6 +39,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="zen_mode_settings_category_exceptions"
         android:title="@string/zen_category_exceptions">
         <Preference
             android:key="zen_mode_calls_settings"
@@ -51,6 +53,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="zen_mode_settings_category_schedule"
         android:title="@string/zen_category_schedule">
         <!-- DND duration settings -->
         <Preference

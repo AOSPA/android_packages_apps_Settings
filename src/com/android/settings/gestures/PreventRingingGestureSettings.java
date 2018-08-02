@@ -17,20 +17,18 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
-import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SearchIndexable
 public class PreventRingingGestureSettings extends DashboardFragment {
 
     private static final String TAG = "RingingGestureSettings";
@@ -58,7 +56,7 @@ public class PreventRingingGestureSettings extends DashboardFragment {
 
     @Override
     public int getHelpResource() {
-        return 0;
+        return R.string.help_uri_prevent_ringing_gesture;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

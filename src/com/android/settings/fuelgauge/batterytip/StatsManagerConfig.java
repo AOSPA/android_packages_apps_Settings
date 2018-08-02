@@ -16,13 +16,10 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
-import android.support.annotation.IntDef;
-
-import com.google.common.hash.HashFunction;
-import com.google.common.hash.Hashing;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
 
 /**
  * This class provides all the configs needed if we want to use {@link android.app.StatsManager}
@@ -30,7 +27,7 @@ import java.lang.annotation.RetentionPolicy;
 public class StatsManagerConfig {
     /**
      * The key that represents the anomaly config.
-     * This value is used in {@link android.app.StatsManager#addConfiguration(long, byte[])}
+     * This value is used in {@link android.app.StatsManager#addConfig(long, byte[])}
      */
     public static final long ANOMALY_CONFIG_KEY = 1;
 

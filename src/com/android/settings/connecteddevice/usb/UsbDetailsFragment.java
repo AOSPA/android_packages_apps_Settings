@@ -19,7 +19,6 @@ package com.android.settings.connecteddevice.usb;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -27,15 +26,19 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+
 /**
  * Controls the USB device details and provides updates to individual controllers.
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class UsbDetailsFragment extends DashboardFragment {
     private static final String TAG = UsbDetailsFragment.class.getSimpleName();
 
@@ -82,7 +85,7 @@ public class UsbDetailsFragment extends DashboardFragment {
         mControllers = createControllerList(context, mUsbBackend, this);
         mUsbReceiver = new UsbConnectionBroadcastReceiver(context, mUsbConnectionListener,
                 mUsbBackend);
-        this.getLifecycle().addObserver(mUsbReceiver);
+        this.getSettingsLifecycle().addObserver(mUsbReceiver);
 
         return new ArrayList<>(mControllers);
     }

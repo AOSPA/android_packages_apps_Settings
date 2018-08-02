@@ -16,6 +16,7 @@
 package com.android.settings.testutils.shadow;
 
 import android.annotation.UserIdInt;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 
 import com.android.internal.util.ArrayUtils;
@@ -28,9 +29,14 @@ import org.robolectric.annotation.Resetter;
 
 @Implements(RestrictedLockUtils.class)
 public class ShadowRestrictedLockUtils {
+
     private static boolean sIsRestricted;
-    private static String[] sRestrictedPkgs;
     private static boolean sAdminSupportDetailsIntentLaunched;
+    private static boolean sHasSystemFeature;
+    private static boolean sMaximumTimeToLockIsSet;
+    private static String[] sRestrictedPkgs;
+    private static DevicePolicyManager sDevicePolicyManager;
+    private static String[] sDisabledTypes;
     private static int sKeyguardDisabledFeatures;
 
     @Resetter
@@ -39,6 +45,8 @@ public class ShadowRestrictedLockUtils {
         sRestrictedPkgs = null;
         sAdminSupportDetailsIntentLaunched = false;
         sKeyguardDisabledFeatures = 0;
+        sDisabledTypes = new String[0];
+        sMaximumTimeToLockIsSet = false;
     }
 
     @Implementation
@@ -59,6 +67,25 @@ public class ShadowRestrictedLockUtils {
     }
 
     @Implementation
+    public static EnforcedAdmin checkIfAccountManagementDisabled(Context context,
+            String accountType, int userId) {
+        if (accountType == null) {
+            return null;
+        }
+        if (!sHasSystemFeature || sDevicePolicyManager == null) {
+            return null;
+        }
+        boolean isAccountTypeDisabled = false;
+        if (ArrayUtils.contains(sDisabledTypes, accountType)) {
+            isAccountTypeDisabled = true;
+        }
+        if (!isAccountTypeDisabled) {
+            return null;
+        }
+        return new EnforcedAdmin();
+    }
+
+    @Implementation
     public static EnforcedAdmin checkIfKeyguardFeaturesDisabled(Context context,
             int features, final @UserIdInt int userId) {
         return (sKeyguardDisabledFeatures & features) == 0 ? null : new EnforcedAdmin();
@@ -74,6 +101,11 @@ public class ShadowRestrictedLockUtils {
     public static EnforcedAdmin checkIfRestrictionEnforced(Context context,
             String userRestriction, int userId) {
         return sIsRestricted ? new EnforcedAdmin() : null;
+    }
+
+    @Implementation
+    public static EnforcedAdmin checkIfMaximumTimeToLockIsSet(Context context) {
+        return sMaximumTimeToLockIsSet ? new EnforcedAdmin() : null;
     }
 
     public static boolean hasAdminSupportDetailsIntentLaunched() {
@@ -92,7 +124,28 @@ public class ShadowRestrictedLockUtils {
         sRestrictedPkgs = pkgs;
     }
 
+    public static void setHasSystemFeature(boolean hasSystemFeature) {
+        sHasSystemFeature = hasSystemFeature;
+    }
+
+    public static void setDevicePolicyManager(DevicePolicyManager dpm) {
+        sDevicePolicyManager = dpm;
+    }
+
+    public static void setDisabledTypes(String[] disabledTypes) {
+        sDisabledTypes = disabledTypes;
+    }
+
+    public static void clearDisabledTypes() {
+        sDisabledTypes = new String[0];
+    }
+
     public static void setKeyguardDisabledFeatures(int features) {
         sKeyguardDisabledFeatures = features;
     }
+
+    public static void setMaximumTimeToLockIsSet(boolean isSet) {
+        sMaximumTimeToLockIsSet = isSet;
+    }
+
 }

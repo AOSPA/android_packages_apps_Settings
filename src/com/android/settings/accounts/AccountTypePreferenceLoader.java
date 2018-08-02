@@ -29,11 +29,6 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
 import android.os.UserHandle;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -43,6 +38,12 @@ import com.android.settings.location.LocationSettings;
 import com.android.settings.utils.LocalClassLoaderContextThemeWrapper;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Class to load the preference screen to be added to the settings page for the specific account
@@ -60,9 +61,9 @@ public class AccountTypePreferenceLoader {
 
     private AuthenticatorHelper mAuthenticatorHelper;
     private UserHandle mUserHandle;
-    private PreferenceFragment mFragment;
+    private PreferenceFragmentCompat mFragment;
 
-    public AccountTypePreferenceLoader(PreferenceFragment fragment,
+    public AccountTypePreferenceLoader(PreferenceFragmentCompat fragment,
             AuthenticatorHelper authenticatorHelper, UserHandle userHandle) {
         mFragment = fragment;
         mAuthenticatorHelper = authenticatorHelper;
@@ -235,7 +236,7 @@ public class AccountTypePreferenceLoader {
                     ? ((Instrumentable) mFragment).getMetricsCategory()
                     : Instrumentable.METRICS_CATEGORY_UNKNOWN;
             new SubSettingLauncher(preference.getContext())
-                    .setTitle(mTitleRes)
+                    .setTitleRes(mTitleRes)
                     .setDestination(mClass)
                     .setSourceMetricsCategory(metricsCategory)
                     .launch();

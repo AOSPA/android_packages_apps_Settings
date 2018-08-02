@@ -30,15 +30,9 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings.Secure;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.InputDevice;
 
-import com.android.internal.inputmethod.InputMethodUtils;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
@@ -46,18 +40,25 @@ import com.android.settings.Settings;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
+@SearchIndexable
 public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         implements InputManager.InputDeviceListener,
-        KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener, Indexable {
+        KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener {
 
     private static final String KEYBOARD_ASSISTANCE_CATEGORY = "keyboard_assistance_category";
     private static final String SHOW_VIRTUAL_KEYBOARD_SWITCH = "show_virtual_keyboard_switch";
@@ -71,8 +72,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private PreferenceCategory mKeyboardAssistanceCategory;
     @NonNull
     private SwitchPreference mShowVirtualKeyboardSwitch;
-    @NonNull
-    private InputMethodUtils.InputMethodSettings mSettings;
 
     private Intent mIntentWaitingForResult;
 
@@ -81,13 +80,6 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         Activity activity = Preconditions.checkNotNull(getActivity());
         addPreferencesFromResource(R.xml.physical_keyboard_settings);
         mIm = Preconditions.checkNotNull(activity.getSystemService(InputManager.class));
-        mSettings = new InputMethodUtils.InputMethodSettings(
-                activity.getResources(),
-                getContentResolver(),
-                new HashMap<>(),
-                new ArrayList<>(),
-                UserHandle.myUserId(),
-                false /* copyOnWrite */);
         mKeyboardAssistanceCategory = Preconditions.checkNotNull(
                 (PreferenceCategory) findPreference(KEYBOARD_ASSISTANCE_CATEGORY));
         mShowVirtualKeyboardSwitch = Preconditions.checkNotNull(
@@ -190,7 +182,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         KeyboardLayoutDialogFragment fragment = new KeyboardLayoutDialogFragment(
                 inputDeviceIdentifier);
         fragment.setTargetFragment(this, 0);
-        fragment.show(getActivity().getFragmentManager(), "keyboardLayout");
+        fragment.show(getActivity().getSupportFragmentManager(), "keyboardLayout");
     }
 
     private void registerShowVirtualKeyboardSettingsObserver() {
@@ -208,7 +200,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     }
 
     private void updateShowVirtualKeyboardSwitch() {
-        mShowVirtualKeyboardSwitch.setChecked(mSettings.isShowImeWithHardKeyboardEnabled());
+        mShowVirtualKeyboardSwitch.setChecked(
+                Secure.getInt(getContentResolver(), Secure.SHOW_IME_WITH_HARD_KEYBOARD, 0) != 0);
     }
 
     private void toggleKeyboardShortcutsMenu() {
@@ -216,12 +209,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     }
 
     private final OnPreferenceChangeListener mShowVirtualKeyboardSwitchPreferenceChangeListener =
-            new OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    mSettings.setShowImeWithHardKeyboard((Boolean) newValue);
-                    return true;
-                }
+            (preference, newValue) -> {
+                Secure.putInt(getContentResolver(), Secure.SHOW_IME_WITH_HARD_KEYBOARD,
+                        ((Boolean) newValue) ? 1 : 0);
+                return true;
             };
 
     private final ContentObserver mContentObserver = new ContentObserver(new Handler(true)) {

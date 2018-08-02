@@ -23,22 +23,16 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.Build;
 import android.os.Process;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.search.DatabaseIndexingManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -56,6 +50,11 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowUserManager;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
@@ -201,9 +200,6 @@ public class BuildNumberPreferenceControllerTest {
 
     @Test
     public void onActivityResult_confirmPasswordRequestCompleted_enableDevPref() {
-        when(mFactory.searchFeatureProvider.getIndexingManager(any(Context.class)))
-                .thenReturn(mock(DatabaseIndexingManager.class));
-
         mController =
                 new BuildNumberPreferenceController(mContext, mActivity, mFragment, mLifecycle);
 

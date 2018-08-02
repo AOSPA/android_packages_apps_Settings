@@ -20,10 +20,10 @@ import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -34,21 +34,22 @@ import com.android.settings.widget.GearPreference;
 import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
+
+import androidx.preference.Preference;
 
 public abstract class DefaultAppPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
 
     private static final String TAG = "DefaultAppPrefControl";
 
-    protected final PackageManagerWrapper mPackageManager;
+    protected final PackageManager mPackageManager;
     protected final UserManager mUserManager;
 
     protected int mUserId;
 
     public DefaultAppPreferenceController(Context context) {
         super(context);
-        mPackageManager = new PackageManagerWrapper(context.getPackageManager());
+        mPackageManager = context.getPackageManager();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mUserId = UserHandle.myUserId();
     }

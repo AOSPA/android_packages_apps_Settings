@@ -19,14 +19,9 @@ package com.android.settings.connecteddevice.usb;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
-import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
-import android.support.v14.preference.PreferenceFragment;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
@@ -45,6 +40,11 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowEntityHeaderController.class)
 public class UsbDetailsHeaderControllerTest {
@@ -62,7 +62,7 @@ public class UsbDetailsHeaderControllerTest {
     @Mock
     private UsbDetailsFragment mFragment;
     @Mock
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
 

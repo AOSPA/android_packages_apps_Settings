@@ -18,11 +18,14 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.graphics.drawable.Drawable;
+import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
@@ -31,7 +34,6 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
-
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
@@ -39,9 +41,14 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.robolectric.annotation.Config;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 
@@ -97,6 +104,10 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         verify(mHeaderController).setIconContentDescription(any(String.class));
         verify(mHeaderController).setSummary(any(String.class));
         verify(mHeaderController).setSecondSummary(any(String.class));
+        verify(mHeaderController).setEditListener(any(View.OnClickListener.class));
+        verify(mHeaderController).setButtonActions(
+                EntityHeaderController.ActionType.ACTION_EDIT_PREFERENCE,
+                EntityHeaderController.ActionType.ACTION_NONE);
         verify(mHeaderController).done(mActivity, true);
     }
 
@@ -118,5 +129,21 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         mController.onDeviceAttributesChanged();
         inOrder.verify(mHeaderController)
             .setSummary(mContext.getString(R.string.bluetooth_connecting));
+    }
+
+    @Test
+    public void invokeShowEditDeviceNameDialog_showDialog() {
+        showScreen(mController);
+
+        FragmentManager fragmentManager = mock(FragmentManager.class);
+        when(mFragment.getFragmentManager()).thenReturn(fragmentManager);
+        FragmentTransaction ft = mock(FragmentTransaction.class);
+        when(fragmentManager.beginTransaction()).thenReturn(ft);
+
+        ArgumentCaptor<Fragment> captor = ArgumentCaptor.forClass(Fragment.class);
+        mController.showEditDeviceNameDialog();
+        verify(ft).add(captor.capture(), eq(RemoteDeviceNameDialogFragment.TAG));
+        RemoteDeviceNameDialogFragment dialog = (RemoteDeviceNameDialogFragment) captor.getValue();
+        assertThat(dialog).isNotNull();
     }
 }

@@ -2,6 +2,7 @@ package com.android.settings.slices;
 
 import android.content.Context;
 
+import com.android.settings.mobilenetwork.Enhanced4gLteSliceHelper;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -12,21 +13,30 @@ public class SlicesFeatureProviderImpl implements SlicesFeatureProvider {
 
     private SlicesIndexer mSlicesIndexer;
     private SliceDataConverter mSliceDataConverter;
+    private CustomSliceManager mCustomSliceManager;
 
     @Override
     public SlicesIndexer getSliceIndexer(Context context) {
         if (mSlicesIndexer == null) {
-            mSlicesIndexer = new SlicesIndexer(context);
+            mSlicesIndexer = new SlicesIndexer(context.getApplicationContext());
         }
         return mSlicesIndexer;
     }
 
     @Override
     public SliceDataConverter getSliceDataConverter(Context context) {
-        if(mSliceDataConverter == null) {
+        if (mSliceDataConverter == null) {
             mSliceDataConverter = new SliceDataConverter(context.getApplicationContext());
         }
         return mSliceDataConverter;
+    }
+
+    @Override
+    public CustomSliceManager getCustomSliceManager(Context context) {
+        if (mCustomSliceManager == null) {
+            mCustomSliceManager = new CustomSliceManager(context.getApplicationContext());
+        }
+        return mCustomSliceManager;
     }
 
     @Override
@@ -44,5 +54,10 @@ public class SlicesFeatureProviderImpl implements SlicesFeatureProvider {
     @Override
     public WifiCallingSliceHelper getNewWifiCallingSliceHelper(Context context) {
         return new WifiCallingSliceHelper(context);
+    }
+
+    @Override
+    public Enhanced4gLteSliceHelper getNewEnhanced4gLteSliceHelper(Context context) {
+        return new Enhanced4gLteSliceHelper(context);
     }
 }

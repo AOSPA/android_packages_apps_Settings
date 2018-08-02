@@ -18,18 +18,20 @@ package com.android.settings.bluetooth;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v7.preference.PreferenceScreen;
 import android.util.Pair;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 /**
  * This class adds a header with device name and status (connected/disconnected, etc.).
@@ -41,7 +43,7 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
     private LocalBluetoothManager mLocalManager;
     private CachedBluetoothDeviceManager mDeviceManager;
 
-    public BluetoothDetailsHeaderController(Context context, PreferenceFragment fragment,
+    public BluetoothDetailsHeaderController(Context context, PreferenceFragmentCompat fragment,
             CachedBluetoothDevice device, Lifecycle lifecycle,
             LocalBluetoothManager bluetoothManager) {
         super(context, fragment, device, lifecycle);
@@ -59,7 +61,7 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
     }
 
     protected void setHeaderProperties() {
-        final Pair<Drawable, String> pair = com.android.settingslib.bluetooth.Utils
+        final Pair<Drawable, String> pair = BluetoothUtils
                 .getBtClassDrawableWithDescription(mContext, mCachedDevice,
                 mContext.getResources().getFraction(R.fraction.bt_battery_scale_fraction, 1, 1));
         String summaryText = mCachedDevice.getConnectionSummary();
@@ -73,6 +75,16 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
         mHeaderController.setIcon(pair.first);
         mHeaderController.setIconContentDescription(pair.second);
         mHeaderController.setSummary(summaryText);
+        mHeaderController.setEditListener(v -> showEditDeviceNameDialog());
+        mHeaderController.setButtonActions(
+                EntityHeaderController.ActionType.ACTION_EDIT_PREFERENCE,
+                EntityHeaderController.ActionType.ACTION_NONE);
+    }
+
+    @VisibleForTesting
+    void showEditDeviceNameDialog() {
+        RemoteDeviceNameDialogFragment.newInstance(mCachedDevice).show(
+                mFragment.getFragmentManager(), RemoteDeviceNameDialogFragment.TAG);
     }
 
     @Override

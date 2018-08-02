@@ -33,13 +33,6 @@ import android.os.UserHandle;
 import android.os.Vibrator;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.KeyCharacterMap;
@@ -55,11 +48,11 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -68,11 +61,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.core.content.ContextCompat;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 /**
  * Activity with the accessibility settings.
  */
+@SearchIndexable
 public class AccessibilitySettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener, Indexable {
+        Preference.OnPreferenceChangeListener {
 
     // Index of the first preference in a preference category.
     private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = -1;
@@ -117,11 +119,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String TTS_SETTINGS_PREFERENCE =
             "tts_settings_preference";
     private static final String AUTOCLICK_PREFERENCE_SCREEN =
-            "autoclick_preference_screen";
+            "autoclick_preference";
     private static final String VIBRATION_PREFERENCE_SCREEN =
             "vibration_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
-            "daltonizer_preference_screen";
+            "daltonizer_preference";
 
     // Extras passed to sub-fragments.
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
@@ -221,6 +223,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private Preference mDisplayDaltonizerPreferenceScreen;
     private Preference mVibrationPreferenceScreen;
     private SwitchPreference mToggleInversionPreference;
+    private ColorInversionPreferenceController mInversionPreferenceController;
 
     private int mLongPressTimeoutDefault;
 
@@ -301,9 +304,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         if (mSelectLongPressTimeoutPreference == preference) {
             handleLongPressTimeoutPreferenceChange((String) newValue);
             return true;
-        } else if (mToggleInversionPreference == preference) {
-            handleToggleInversionPreferenceChange((Boolean) newValue);
-            return true;
         }
         return false;
     }
@@ -313,11 +313,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 Settings.Secure.LONG_PRESS_TIMEOUT, Integer.parseInt(stringValue));
         mSelectLongPressTimeoutPreference.setSummary(
                 mLongPressTimeoutValueToTitleMap.get(stringValue));
-    }
-
-    private void handleToggleInversionPreferenceChange(boolean checked) {
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, (checked ? 1 : 0));
     }
 
     @Override
@@ -409,7 +404,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         // Display inversion.
         mToggleInversionPreference = (SwitchPreference) findPreference(TOGGLE_INVERSION_PREFERENCE);
-        mToggleInversionPreference.setOnPreferenceChangeListener(this);
+        mInversionPreferenceController =
+                new ColorInversionPreferenceController(getContext(), TOGGLE_INVERSION_PREFERENCE);
+        mInversionPreferenceController.displayPreference(getPreferenceScreen());
 
         // Power button ends calls.
         mTogglePowerButtonEndsCallPreference =
@@ -649,8 +646,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                         Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, 0) == 1);
 
         // If the quick setting is enabled, the preference MUST be enabled.
-        mToggleInversionPreference.setChecked(Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, 0) == 1);
+        mInversionPreferenceController.updateState(mToggleInversionPreference);
 
         // Power button ends calls.
         if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
@@ -886,6 +882,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     // Duplicates in Language & Input
                     keys.add(TTS_SETTINGS_PREFERENCE);
 
+                    // Duplicates in child page
+                    keys.add(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
+                    keys.add(AUTOCLICK_PREFERENCE_SCREEN);
                     return keys;
                 }
             };

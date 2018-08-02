@@ -24,7 +24,6 @@ import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.AppGlobals;
-import android.app.Fragment;
 import android.app.IActivityManager;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
@@ -50,6 +49,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
+import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
@@ -74,9 +74,6 @@ import android.provider.ContactsContract.RawContacts;
 import android.provider.Settings;
 import android.provider.Telephony;
 import android.service.persistentdata.PersistentDataBlockManager;
-import android.support.annotation.StringRes;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -102,6 +99,11 @@ import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 
 import org.codeaurora.internal.IExtTelephony;
 
@@ -817,6 +819,19 @@ public final class Utils extends com.android.settingslib.Utils {
     public static boolean hasFingerprintHardware(Context context) {
         FingerprintManager fingerprintManager = getFingerprintManagerOrNull(context);
         return fingerprintManager != null && fingerprintManager.isHardwareDetected();
+    }
+
+    public static FaceManager getFaceManagerOrNull(Context context) {
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FACE)) {
+            return (FaceManager) context.getSystemService(Context.FACE_SERVICE);
+        } else {
+            return null;
+        }
+    }
+
+    public static boolean hasFaceHardware(Context context) {
+        FaceManager faceManager = getFaceManagerOrNull(context);
+        return faceManager != null && faceManager.isHardwareDetected();
     }
 
     /**

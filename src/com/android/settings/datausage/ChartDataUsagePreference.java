@@ -18,9 +18,6 @@ import android.content.Context;
 import android.net.NetworkPolicy;
 import android.net.NetworkStatsHistory;
 import android.net.TrafficStats;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.format.Formatter;
@@ -30,7 +27,11 @@ import android.util.SparseIntArray;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.graph.UsageView;
+import com.android.settings.widget.UsageView;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 public class ChartDataUsagePreference extends Preference {
 
@@ -51,8 +52,8 @@ public class ChartDataUsagePreference extends Preference {
     public ChartDataUsagePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setSelectable(false);
-        mLimitColor = Utils.getColorAttr(context, android.R.attr.colorError);
-        mWarningColor = Utils.getColorAttr(context, android.R.attr.textColorSecondary);
+        mLimitColor = Utils.getColorAttrDefaultColor(context, android.R.attr.colorError);
+        mWarningColor = Utils.getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
         setLayoutResource(R.layout.data_usage_graph);
     }
 

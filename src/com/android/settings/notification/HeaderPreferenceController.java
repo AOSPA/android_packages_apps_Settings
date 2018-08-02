@@ -19,15 +19,10 @@ package com.android.settings.notification;
 import static com.android.settings.widget.EntityHeaderController.PREF_KEY_APP_HEADER;
 
 import android.app.Activity;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v7.preference.Preference;
 import android.text.BidiFormatter;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
-import android.util.Slog;
 import android.view.View;
 
 import com.android.settings.R;
@@ -36,14 +31,19 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+
 public class HeaderPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver {
 
-    private final PreferenceFragment mFragment;
+    private final PreferenceFragmentCompat mFragment;
     private EntityHeaderController mHeaderController;
     private boolean mStarted = false;
 
-    public HeaderPreferenceController(Context context, PreferenceFragment fragment) {
+    public HeaderPreferenceController(Context context, PreferenceFragmentCompat fragment) {
         super(context, null);
         mFragment = fragment;
     }

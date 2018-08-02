@@ -1,12 +1,12 @@
 package com.android.settings.wifi.tether;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.net.wifi.WifiConfiguration;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
+
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 
 public class WifiTetherSecurityPreferenceController extends WifiTetherBasePreferenceController {
 

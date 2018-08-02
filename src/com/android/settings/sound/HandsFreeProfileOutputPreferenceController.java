@@ -17,18 +17,16 @@
 package com.android.settings.sound;
 
 import static android.bluetooth.IBluetoothHearingAid.HI_SYNC_ID_INVALID;
-import static android.media.AudioManager.STREAM_VOICE_CALL;
-import static android.media.AudioSystem.DEVICE_OUT_USB_HEADSET;
-
-import com.android.settingslib.Utils;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settingslib.Utils;
 import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
+
+import androidx.preference.Preference;
 
 /**
  * This class allows switching between HFP-connected & HAP-connected BT devices
@@ -79,12 +77,7 @@ public class HandsFreeProfileOutputPreferenceController extends
         CharSequence[] mediaValues = new CharSequence[numDevices + 1];
 
         // Setup devices entries, select active connected device
-        setupPreferenceEntries(mediaOutputs, mediaValues, findActiveDevice(STREAM_VOICE_CALL));
-
-        if (isStreamFromOutputDevice(STREAM_VOICE_CALL, DEVICE_OUT_USB_HEADSET)) {
-            // If wired headset is plugged in and active, select to default device.
-            mSelectedIndex = getDefaultDeviceIndex();
-        }
+        setupPreferenceEntries(mediaOutputs, mediaValues, findActiveDevice());
 
         // Display connected devices, default device and show the active device
         setPreference(mediaOutputs, mediaValues, preference);
@@ -108,5 +101,16 @@ public class HandsFreeProfileOutputPreferenceController extends
         if (hfpProfile != null) {
             hfpProfile.setActiveDevice(device);
         }
+    }
+
+    @Override
+    public BluetoothDevice findActiveDevice() {
+        BluetoothDevice activeDevice = findActiveHearingAidDevice();
+        final HeadsetProfile headsetProfile = mProfileManager.getHeadsetProfile();
+
+        if (activeDevice == null && headsetProfile != null) {
+            activeDevice = headsetProfile.getActiveDevice();
+        }
+        return activeDevice;
     }
 }

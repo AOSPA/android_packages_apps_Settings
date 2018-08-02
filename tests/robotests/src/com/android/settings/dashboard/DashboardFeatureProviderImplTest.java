@@ -16,17 +16,20 @@
 
 package com.android.settings.dashboard;
 
+import static com.android.settingslib.drawer.TileUtils.META_DATA_KEY_PROFILE;
+import static com.android.settingslib.drawer.TileUtils.PROFILE_ALL;
+import static com.android.settingslib.drawer.TileUtils.PROFILE_PRIMARY;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -39,7 +42,6 @@ import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -64,12 +66,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowUserManager.class)
@@ -364,7 +369,7 @@ public class DashboardFeatureProviderImplTest {
         mImpl.bindPreferenceToTile(activity, MetricsProto.MetricsEvent.SETTINGS_GESTURES,
                 preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.performClick();
-        ShadowActivity shadowActivity = shadowOf(activity);
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
 
         final Intent launchIntent = shadowActivity.getNextStartedActivityForResult().intent;
         assertThat(launchIntent.getAction())
@@ -393,7 +398,7 @@ public class DashboardFeatureProviderImplTest {
         preference.performClick();
 
         final ShadowActivity.IntentForResult launchIntent =
-                shadowOf(activity).getNextStartedActivityForResult();
+                Shadows.shadowOf(activity).getNextStartedActivityForResult();
 
         assertThat(launchIntent).isNull();
     }
@@ -453,5 +458,57 @@ public class DashboardFeatureProviderImplTest {
     @Config(qualifiers = "mcc999")
     public void testShouldTintIcon_disabledInResources_shouldBeFalse() {
         assertThat(mImpl.shouldTintIcon()).isFalse();
+    }
+
+    @Test
+    public void openTileIntent_profileSelectionDialog_shouldShow() {
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.intent = new Intent();
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
+        final ArrayList<UserHandle> handles = new ArrayList<>();
+        handles.add(new UserHandle(0));
+        handles.add(new UserHandle(10));
+        tile.userHandle = handles;
+        mImpl.openTileIntent(mActivity, tile);
+
+        verify(mActivity, never())
+            .startActivityForResult(any(Intent.class), eq(0));
+        verify(mActivity).getFragmentManager();
+    }
+
+    @Test
+    public void openTileIntent_profileSelectionDialog_explicitMetadataShouldShow() {
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.metaData.putString(META_DATA_KEY_PROFILE, PROFILE_ALL);
+        tile.intent = new Intent();
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
+        final ArrayList<UserHandle> handles = new ArrayList<>();
+        handles.add(new UserHandle(0));
+        handles.add(new UserHandle(10));
+        tile.userHandle = handles;
+        mImpl.openTileIntent(mActivity, tile);
+
+        verify(mActivity, never())
+            .startActivityForResult(any(Intent.class), eq(0));
+        verify(mActivity).getFragmentManager();
+    }
+    @Test
+    public void openTileIntent_profileSelectionDialog_shouldNotShow() {
+        final Tile tile = new Tile();
+        tile.metaData = new Bundle();
+        tile.metaData.putString(META_DATA_KEY_PROFILE, PROFILE_PRIMARY);
+        tile.intent = new Intent();
+        tile.intent.setComponent(new ComponentName("pkg", "class"));
+        final ArrayList<UserHandle> handles = new ArrayList<>();
+        handles.add(new UserHandle(0));
+        handles.add(new UserHandle(10));
+        tile.userHandle = handles;
+        mImpl.openTileIntent(mActivity, tile);
+
+        verify(mActivity)
+            .startActivityForResult(any(Intent.class), eq(0));
+        verify(mActivity, never()).getFragmentManager();
     }
 }

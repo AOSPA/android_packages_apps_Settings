@@ -19,32 +19,15 @@ package com.android.settings.gestures;
 import static android.provider.Settings.Secure.VOLUME_HUSH_GESTURE;
 import static android.provider.Settings.Secure.VOLUME_HUSH_MUTE;
 import static android.provider.Settings.Secure.VOLUME_HUSH_OFF;
-import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static junit.framework.Assert.assertEquals;
-
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.provider.Settings;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.R;
-import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
-import com.android.settings.search.InlinePayload;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -53,7 +36,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class PreventRingingPreferenceControllerTest {
@@ -85,29 +70,6 @@ public class PreventRingingPreferenceControllerTest {
                 com.android.internal.R.bool.config_volumeHushGestureEnabled)).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void testGetSummary_mute() {
-        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
-                Settings.Secure.VOLUME_HUSH_MUTE);
-        assertEquals(mContext.getString(R.string.prevent_ringing_option_mute_summary),
-                mController.getSummary());
-    }
-
-    @Test
-    public void testGetSummary_vibrate() {
-        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
-                Settings.Secure.VOLUME_HUSH_VIBRATE);
-        assertEquals(mContext.getString(R.string.prevent_ringing_option_vibrate_summary),
-                mController.getSummary());
-    }
-    @Test
-    public void testGetSummary_other() {
-        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
-                7);
-        assertEquals(mContext.getString(R.string.prevent_ringing_option_none_summary),
-                mController.getSummary());
     }
 
     @Test

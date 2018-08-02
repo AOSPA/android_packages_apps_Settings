@@ -18,7 +18,6 @@
 package com.android.settings.location;
 
 import static android.provider.SettingsSlicesContract.KEY_LOCATION;
-
 import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 
 import android.annotation.ColorInt;
@@ -33,13 +32,12 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
-import com.android.settings.search.DatabaseIndexingUtils;
+import com.android.settings.slices.SliceBuilderUtils;
 
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
-
-import android.support.v4.graphics.drawable.IconCompat;
 
 /**
  * Utility class to build an intent-based Location Slice.
@@ -66,7 +64,7 @@ public class LocationSliceBuilder {
         final IconCompat icon = IconCompat.createWithResource(context,
                 R.drawable.ic_signal_location);
         final String title = context.getString(R.string.location_settings_title);
-        @ColorInt final int color = Utils.getColorAccent(context);
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final PendingIntent primaryAction = getPrimaryAction(context);
         final SliceAction primarySliceAction = new SliceAction(primaryAction, icon, title);
 
@@ -82,7 +80,7 @@ public class LocationSliceBuilder {
     public static Intent getIntent(Context context) {
         final String screenTitle = context.getText(R.string.location_settings_title).toString();
         final Uri contentUri = new Uri.Builder().appendPath(KEY_LOCATION).build();
-        return DatabaseIndexingUtils.buildSearchResultPageIntent(context,
+        return SliceBuilderUtils.buildSearchResultPageIntent(context,
                 LocationSettings.class.getName(), KEY_LOCATION, screenTitle,
                 MetricsEvent.LOCATION)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())

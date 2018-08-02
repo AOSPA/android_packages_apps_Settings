@@ -21,7 +21,6 @@ import static android.provider.Settings.Global.PREFERRED_NETWORK_MODE;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.QueuedWork;
 import android.content.ComponentName;
 import android.content.Context;
@@ -42,25 +41,23 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
+import android.telephony.CellIdentityCdma;
+import android.telephony.CellIdentityGsm;
+import android.telephony.CellIdentityLte;
+import android.telephony.CellIdentityWcdma;
 import android.telephony.CellInfo;
 import android.telephony.CellInfoCdma;
 import android.telephony.CellInfoGsm;
 import android.telephony.CellInfoLte;
 import android.telephony.CellInfoWcdma;
-import android.telephony.CellIdentityCdma;
-import android.telephony.CellIdentityGsm;
-import android.telephony.CellIdentityLte;
-import android.telephony.CellIdentityWcdma;
 import android.telephony.CellLocation;
 import android.telephony.CellSignalStrengthCdma;
 import android.telephony.CellSignalStrengthGsm;
 import android.telephony.CellSignalStrengthLte;
 import android.telephony.CellSignalStrengthWcdma;
-import android.telephony.DataConnectionRealTimeInfo;
-import android.telephony.NeighboringCellInfo;
-import android.telephony.PreciseCallState;
 import android.telephony.PhoneStateListener;
 import android.telephony.PhysicalChannelConfig;
+import android.telephony.PreciseCallState;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionManager;
@@ -87,16 +84,11 @@ import com.android.ims.ImsConfig;
 import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
 import com.android.internal.telephony.Phone;
-import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.PhoneFactory;
-import com.android.internal.telephony.RILConstants;
-import com.android.internal.telephony.TelephonyProperties;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class RadioInfo extends Activity {
@@ -195,9 +187,7 @@ public class RadioInfo extends Activity {
     private TextView mMwi;
     private TextView mCfi;
     private TextView mLocation;
-    private TextView mNeighboringCids;
     private TextView mCellInfo;
-    private TextView mDcRtInfoTv;
     private TextView sent;
     private TextView received;
     private TextView mPingHostnameV4;
@@ -237,7 +227,6 @@ public class RadioInfo extends Activity {
 
     private List<CellInfo> mCellInfoResult = null;
     private CellLocation mCellLocationResult = null;
-    private List<NeighboringCellInfo> mNeighboringCellResult = null;
 
     private int mPreferredNetworkTypeResult;
     private int mCellInfoRefreshRateIndex;
@@ -300,12 +289,6 @@ public class RadioInfo extends Activity {
             log("onCellInfoChanged: arrayCi=" + arrayCi);
             mCellInfoResult = arrayCi;
             updateCellInfo(mCellInfoResult);
-        }
-
-        @Override
-        public void onDataConnectionRealTimeInfoChanged(DataConnectionRealTimeInfo dcRtInfo) {
-            log("onDataConnectionRealTimeInfoChanged: dcRtInfo=" + dcRtInfo);
-            updateDcRtInfoTv(dcRtInfo);
         }
 
         @Override
@@ -435,10 +418,8 @@ public class RadioInfo extends Activity {
         mMwi = (TextView) findViewById(R.id.mwi);
         mCfi = (TextView) findViewById(R.id.cfi);
         mLocation = (TextView) findViewById(R.id.location);
-        mNeighboringCids = (TextView) findViewById(R.id.neighboring);
         mCellInfo = (TextView) findViewById(R.id.cellinfo);
         mCellInfo.setTypeface(Typeface.MONOSPACE);
-        mDcRtInfoTv = (TextView) findViewById(R.id.dcrtinfo);
 
         sent = (TextView) findViewById(R.id.sent);
         received = (TextView) findViewById(R.id.received);
@@ -522,7 +503,6 @@ public class RadioInfo extends Activity {
         updateDnsCheckState();
         updateNetworkType();
 
-        updateNeighboringCids(mNeighboringCellResult);
         updateLocation(mCellLocationResult);
         updateCellInfo(mCellInfoResult);
 
@@ -716,23 +696,6 @@ public class RadioInfo extends Activity {
 
     }
 
-    private final void updateNeighboringCids(List<NeighboringCellInfo> cids) {
-        StringBuilder sb = new StringBuilder();
-
-        if (cids != null) {
-            if (cids.isEmpty()) {
-                sb.append("no neighboring cells");
-            } else {
-                for (NeighboringCellInfo cell : cids) {
-                    sb.append(cell.toString()).append(" ");
-                }
-            }
-        } else {
-            sb.append("unknown");
-        }
-        mNeighboringCids.setText(sb.toString());
-    }
-
     private final String getCellInfoDisplayString(int i) {
         return (i != Integer.MAX_VALUE) ? Integer.toString(i) : "";
     }
@@ -883,10 +846,6 @@ public class RadioInfo extends Activity {
 
     private final void updateCellInfo(List<CellInfo> arrayCi) {
         mCellInfo.setText(buildCellInfoString(arrayCi));
-    }
-
-    private final void updateDcRtInfoTv(DataConnectionRealTimeInfo dcRtInfo) {
-        mDcRtInfoTv.setText(dcRtInfo.toString());
     }
 
     private final void
@@ -1081,12 +1040,10 @@ public class RadioInfo extends Activity {
     private final void updateAllCellInfo() {
 
         mCellInfo.setText("");
-        mNeighboringCids.setText("");
         mLocation.setText("");
 
         final Runnable updateAllCellInfoResults = new Runnable() {
             public void run() {
-                updateNeighboringCids(mNeighboringCellResult);
                 updateLocation(mCellLocationResult);
                 updateCellInfo(mCellInfoResult);
             }
@@ -1097,7 +1054,6 @@ public class RadioInfo extends Activity {
             public void run() {
                 mCellInfoResult = mTelephonyManager.getAllCellInfo();
                 mCellLocationResult = mTelephonyManager.getCellLocation();
-                mNeighboringCellResult = mTelephonyManager.getNeighboringCellInfo();
 
                 mHandler.post(updateAllCellInfoResults);
             }

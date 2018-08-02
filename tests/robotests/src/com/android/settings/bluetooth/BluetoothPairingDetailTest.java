@@ -30,7 +30,6 @@ import static org.mockito.Mockito.verify;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.v7.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -46,6 +45,8 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.PreferenceGroup;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BluetoothPairingDetailTest {
@@ -191,5 +192,14 @@ public class BluetoothPairingDetailTest {
 
         // Verify that clean up only happen once at initialization
         verify(mAvailableDevicesCategory, times(1)).removeAll();
+    }
+
+    @Test
+    public void onBluetoothStateChanged_whenTurnedOnBTShowToast() {
+        doNothing().when(mFragment).updateContent(anyInt());
+
+        mFragment.onBluetoothStateChanged(BluetoothAdapter.STATE_ON);
+
+        verify(mFragment).showBluetoothTurnedOnToast();
     }
 }

@@ -18,8 +18,7 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
+import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -28,7 +27,9 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.webview.WebViewUpdateServiceWrapper;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 public class WebViewAppPreferenceController extends DeveloperOptionsPreferenceController implements
         PreferenceControllerMixin {
@@ -36,13 +37,13 @@ public class WebViewAppPreferenceController extends DeveloperOptionsPreferenceCo
     private static final String TAG = "WebViewAppPrefCtrl";
     private static final String WEBVIEW_APP_KEY = "select_webview_provider";
 
-    private final PackageManagerWrapper mPackageManager;
+    private final PackageManager mPackageManager;
     private final WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;
 
     public WebViewAppPreferenceController(Context context) {
         super(context);
 
-        mPackageManager = new PackageManagerWrapper(context.getPackageManager());
+        mPackageManager = context.getPackageManager();
         mWebViewUpdateServiceWrapper = new WebViewUpdateServiceWrapper();
     }
 

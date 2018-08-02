@@ -17,7 +17,6 @@ package com.android.settings.network;
 
 import static android.os.UserManager.DISALLOW_CONFIG_TETHERING;
 import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
-import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
@@ -33,13 +32,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.TetherSettings;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -49,6 +46,10 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.concurrent.atomic.AtomicReference;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class TetherPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnCreate, OnResume, OnPause, OnDestroy {
@@ -112,11 +113,7 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
 
     @Override
     public boolean isAvailable() {
-        final boolean isBlocked =
-                (!mConnectivityManager.isTetheringSupported() && !mAdminDisallowedTetherConfig)
-                        || hasBaseUserRestriction(mContext, DISALLOW_CONFIG_TETHERING,
-                        UserHandle.myUserId());
-        return !isBlocked;
+        return TetherUtil.isTetherAvailable(mContext);
     }
 
     @Override

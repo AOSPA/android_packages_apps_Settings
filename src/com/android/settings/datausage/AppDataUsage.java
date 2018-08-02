@@ -17,10 +17,8 @@ package com.android.settings.datausage;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 import android.app.Activity;
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -32,9 +30,6 @@ import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
@@ -50,10 +45,15 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.net.ChartData;
-import com.android.settingslib.net.ChartDataLoader;
+import com.android.settingslib.net.ChartDataLoaderCompat;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
         DataSaverBackend.Listener {
@@ -75,7 +75,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     private static final int LOADER_CHART_DATA = 2;
     private static final int LOADER_APP_PREF = 3;
 
-    private PackageManagerWrapper mPackageManagerWrapper;
+    private PackageManager mPackageManager;
     private final ArraySet<String> mPackages = new ArraySet<>();
     private Preference mTotalUsage;
     private Preference mForegroundUsage;
@@ -104,7 +104,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mPackageManagerWrapper = new PackageManagerWrapper(getPackageManager());
+        mPackageManager = getPackageManager();
         final Bundle args = getArguments();
 
         try {
@@ -149,10 +149,10 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         if (mAppItem.key > 0) {
             if (mPackages.size() != 0) {
                 try {
-                    ApplicationInfo info = mPackageManagerWrapper.getApplicationInfoAsUser(
+                    ApplicationInfo info = mPackageManager.getApplicationInfoAsUser(
                             mPackages.valueAt(0), 0, UserHandle.getUserId(mAppItem.key));
                     mIcon = IconDrawableFactory.newInstance(getActivity()).getBadgedIcon(info);
-                    mLabel = info.loadLabel(mPackageManagerWrapper.getPackageManager());
+                    mLabel = info.loadLabel(mPackageManager);
                     mPackageName = info.packageName;
                 } catch (PackageManager.NameNotFoundException e) {
                 }
@@ -222,7 +222,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         }
         mPolicy = services.mPolicyEditor.getPolicy(mTemplate);
         getLoaderManager().restartLoader(LOADER_CHART_DATA,
-                ChartDataLoader.buildArgs(mTemplate, mAppItem), mChartDataCallbacks);
+                ChartDataLoaderCompat.buildArgs(mTemplate, mAppItem), mChartDataCallbacks);
         updatePrefs();
     }
 
@@ -333,7 +333,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         int uid = 0;
         if (pkg != null) {
             try {
-                uid = mPackageManagerWrapper.getPackageUidAsUser(pkg,
+                uid = mPackageManager.getPackageUidAsUser(pkg,
                         UserHandle.getUserId(mAppItem.key));
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "Skipping UID because cannot find package " + pkg);
@@ -345,7 +345,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         final Activity activity = getActivity();
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
-                .setRecyclerView(getListView(), getLifecycle())
+                .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setUid(uid)
                 .setHasAppInfoLink(showInfoButton)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
@@ -383,7 +383,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
             new LoaderManager.LoaderCallbacks<ChartData>() {
         @Override
         public Loader<ChartData> onCreateLoader(int id, Bundle args) {
-            return new ChartDataLoader(getActivity(), mStatsSession, args);
+            return new ChartDataLoaderCompat(getActivity(), mStatsSession, args);
         }
 
         @Override

@@ -17,13 +17,14 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
-import android.support.annotation.DrawableRes;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.view.View;
 
 import com.android.settings.R;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
+
+import androidx.annotation.DrawableRes;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * An AP preference for the currently connected AP

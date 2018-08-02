@@ -18,8 +18,6 @@ package com.android.settings.core;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.XmlRes;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -29,6 +27,9 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
+
+import androidx.annotation.XmlRes;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Instrumented fragment that logs visibility state.
@@ -52,8 +53,8 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         // Mixin that logs visibility change for activity.
         mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
                 mMetricsFeatureProvider);
-        getLifecycle().addObserver(mVisibilityLoggerMixin);
-        getLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
+        getSettingsLifecycle().addObserver(mVisibilityLoggerMixin);
+        getSettingsLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
         super.onAttach(context);
     }
 

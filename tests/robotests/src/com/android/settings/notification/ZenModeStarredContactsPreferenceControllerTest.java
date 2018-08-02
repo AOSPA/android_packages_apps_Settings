@@ -18,10 +18,9 @@ package com.android.settings.notification;
 
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CALLS;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,8 +28,7 @@ import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.PreferenceScreen;
+import android.database.Cursor;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -40,8 +38,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
+
+import java.util.List;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ZenModeStarredContactsPreferenceControllerTest {
@@ -54,7 +59,7 @@ public class ZenModeStarredContactsPreferenceControllerTest {
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
-    private ListPreference mockPref;
+    private Preference mockPref;
     @Mock
     private NotificationManager.Policy mPolicy;
     @Mock
@@ -76,7 +81,8 @@ public class ZenModeStarredContactsPreferenceControllerTest {
         when(testIntent.resolveActivity(any())).thenReturn(mComponentName);
 
         mCallsController = new ZenModeStarredContactsPreferenceController(
-                mContext, mock(Lifecycle.class), PRIORITY_CATEGORY_CALLS);
+                mContext, mock(Lifecycle.class), PRIORITY_CATEGORY_CALLS,
+                "zen_mode_starred_contacts_callers");
         ReflectionHelpers.setField(mCallsController, "mBackend", mBackend);
         ReflectionHelpers.setField(mCallsController, "mStarredContactsIntent", testIntent);
         when(mPreferenceScreen.findPreference(mCallsController.getPreferenceKey()))
@@ -84,7 +90,8 @@ public class ZenModeStarredContactsPreferenceControllerTest {
         mCallsController.displayPreference(mPreferenceScreen);
 
         mMessagesController = new ZenModeStarredContactsPreferenceController(
-                mContext, mock(Lifecycle.class), PRIORITY_CATEGORY_MESSAGES);
+                mContext, mock(Lifecycle.class), PRIORITY_CATEGORY_MESSAGES,
+                "zen_mode_starred_contacts_messages");
         ReflectionHelpers.setField(mMessagesController, "mBackend", mBackend);
         ReflectionHelpers.setField(mMessagesController, "mStarredContactsIntent", testIntent);
         when(mPreferenceScreen.findPreference(mMessagesController.getPreferenceKey()))
@@ -145,5 +152,46 @@ public class ZenModeStarredContactsPreferenceControllerTest {
                 .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_STARRED);
 
         assertThat(mMessagesController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void updateSummary_nullCursorValues() {
+        Cursor testCursorWithNullValues = createMockCursor(3);
+        when(testCursorWithNullValues.getString(0)).thenReturn(null);
+
+        // expected - no null  values
+        List<String> contacts = mMessagesController.getStarredContacts(testCursorWithNullValues);
+        for (int i = 0 ; i < contacts.size(); i++) {
+            assertThat(contacts.get(i)).isNotNull();
+        }
+    }
+
+    @Test
+    public void nullPreference_displayPreference() {
+        when(mPreferenceScreen.findPreference(mMessagesController.getPreferenceKey()))
+                .thenReturn(null);
+
+        // should not throw a null pointer
+        mMessagesController.displayPreference(mPreferenceScreen);
+    }
+
+    private Cursor createMockCursor(int size) {
+        Cursor mockCursor = mock(Cursor.class);
+        when(mockCursor.moveToFirst()).thenReturn(true);
+
+        doAnswer(new Answer<Boolean>() {
+            int count = 0;
+            @Override
+            public Boolean answer(InvocationOnMock invocation) throws Throwable {
+                if (count < size) {
+                    count++;
+                    return true;
+                }
+                return false;
+            }
+
+        }).when(mockCursor).moveToNext();
+
+        return mockCursor;
     }
 }

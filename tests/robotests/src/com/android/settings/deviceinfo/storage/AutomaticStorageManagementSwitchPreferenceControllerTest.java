@@ -25,23 +25,19 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.RoSystemProperties;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.MasterSwitchPreference;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,6 +47,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AutomaticStorageManagementSwitchPreferenceControllerTest {
@@ -72,22 +73,25 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application.getApplicationContext();
         final FeatureFactory factory = FeatureFactory.getFactory(mContext);
-        final MetricsFeatureProvider metricsFeature = factory.getMetricsFeatureProvider();
 
-        mController = new AutomaticStorageManagementSwitchPreferenceController(
-                mContext, metricsFeature, mFragmentManager);
+        mController = new AutomaticStorageManagementSwitchPreferenceController(mContext, "testkey");
+        mController.setFragmentManager(mFragmentManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
     @Test
     public void isAvailable_shouldReturnTrue_forHighRamDevice() {
         assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
     }
 
     @Test
     public void isAvailable_shouldAlwaysReturnFalse_forLowRamDevice() {
         ReflectionHelpers.setStaticField(RoSystemProperties.class, "CONFIG_LOW_RAM", true);
         assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
         ReflectionHelpers.setStaticField(RoSystemProperties.class, "CONFIG_LOW_RAM", false);
     }
 
@@ -117,8 +121,10 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
         // the instance variables.
         final FakeFeatureFactory factory = FakeFeatureFactory.setupForTest();
         final AutomaticStorageManagementSwitchPreferenceController controller =
-                new AutomaticStorageManagementSwitchPreferenceController(
-                        mMockContext, factory.metricsFeatureProvider, mFragmentManager);
+                new AutomaticStorageManagementSwitchPreferenceController(mMockContext, "testkey");
+        ReflectionHelpers.setField(controller, "mMetricsFeatureProvider",
+                factory.metricsFeatureProvider);
+        controller.setFragmentManager(mFragmentManager);
 
         controller.onSwitchToggled(true);
 
@@ -157,7 +163,6 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
 
         verify(transaction, never()).add(any(), eq(ActivationWarningFragment.TAG));
     }
-
 
     @Test
     public void togglingOnShouldNotTriggerWarningFragmentIfEnabledByDefault() {

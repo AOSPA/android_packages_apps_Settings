@@ -21,7 +21,6 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import android.support.v7.preference.Preference;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -30,16 +29,20 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.preference.Preference;
+
 /**
  * Settings screen for Night display.
  */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class NightDisplaySettings extends DashboardFragment
-        implements ColorDisplayController.Callback, Indexable {
+        implements ColorDisplayController.Callback {
 
     private static final String TAG = "NightDisplaySettings";
 

@@ -17,11 +17,12 @@
 package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.EntityHeaderController;
+
+import androidx.preference.PreferenceScreen;
 
 /**
  * This class adds a header with device name.

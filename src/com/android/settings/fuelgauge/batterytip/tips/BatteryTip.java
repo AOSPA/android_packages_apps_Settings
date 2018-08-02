@@ -16,19 +16,21 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.IdRes;
-import android.support.annotation.IntDef;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
 import android.util.SparseIntArray;
 
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.IntDef;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 /**
  * Base model for a battery tip(e.g. suggest user to turn on battery saver)
@@ -131,6 +133,14 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
      * @param tip used to update
      */
     public abstract void updateState(BatteryTip tip);
+
+    /**
+     * Check whether data is still make sense. If not, try recover.
+     * @param context used to do sanity check
+     */
+    public void sanityCheck(Context context) {
+        // do nothing
+    }
 
     /**
      * Log the battery tip

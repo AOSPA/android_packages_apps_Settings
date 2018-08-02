@@ -17,7 +17,6 @@
 package com.android.settings.language;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -28,6 +27,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
+
+import androidx.preference.Preference;
 
 public class PhoneLanguagePreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
@@ -74,7 +75,7 @@ public class PhoneLanguagePreferenceController extends AbstractPreferenceControl
         new SubSettingLauncher(mContext)
                 .setDestination(LocaleListEditor.class.getName())
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.SETTINGS_LANGUAGE_CATEGORY)
-                .setTitle(R.string.pref_title_lang_selection)
+                .setTitleRes(R.string.language_picker_title)
                 .launch();
         return true;
     }

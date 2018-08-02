@@ -30,9 +30,6 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.RemoteException;
 import android.service.quicksettings.TileService;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.settings.R;
@@ -48,6 +45,10 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class DevelopmentTilePreferenceControllerTest {
@@ -69,9 +70,7 @@ public class DevelopmentTilePreferenceControllerTest {
         mShadowPackageManager = Shadows.shadowOf(mContext.getPackageManager());
         when(mScreen.getContext()).thenReturn(mContext);
 
-        mController = new DevelopmentTilePreferenceController(mContext);
-        assertThat(mController.getPreferenceKey()).isNull();
-
+        mController = new DevelopmentTilePreferenceController(mContext, "testkey");
         mOnChangeHandler = spy(new DevelopmentTilePreferenceController.OnChangeHandler(mContext));
         ReflectionHelpers.setField(mOnChangeHandler, "mStatusBarService", mStatusBarService);
     }

@@ -17,11 +17,6 @@
 package com.android.settings.sound;
 
 import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
-import static android.media.AudioManager.STREAM_MUSIC;
-import static android.media.AudioManager.STREAM_VOICE_CALL;
-import static android.media.AudioSystem.DEVICE_OUT_ALL_A2DP;
-import static android.media.AudioSystem.DEVICE_OUT_ALL_SCO;
-import static android.media.AudioSystem.DEVICE_OUT_HEARING_AID;
 import static android.media.MediaRouter.ROUTE_TYPE_REMOTE_DISPLAY;
 
 import android.bluetooth.BluetoothDevice;
@@ -37,9 +32,6 @@ import android.media.MediaRouter;
 import android.media.MediaRouter.Callback;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -64,6 +56,10 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 /**
  * Abstract class for audio switcher controller to notify subclass
  * updating the current status of switcher entry. Subclasses must overwrite
@@ -74,7 +70,7 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         implements Preference.OnPreferenceChangeListener, BluetoothCallback,
         LifecycleObserver, OnStart, OnStop {
 
-    private static final String TAG = "AudioSwitchPreferenceController";
+    private static final String TAG = "AudioSwitchPrefCtrl";
     private static final int INVALID_INDEX = -1;
 
     protected final List<BluetoothDevice> mConnectedDevices;
@@ -308,28 +304,16 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     }
 
     /**
-     * According to different stream and output device, find the active device from
-     * the corresponding profile. Hearing aid device could stream both STREAM_MUSIC
-     * and STREAM_VOICE_CALL.
-     *
-     * @param streamType the type of audio streams.
-     * @return the active device. Return null if the active device is current device
-     * or streamType is not STREAM_MUSIC or STREAM_VOICE_CALL.
+     * Find active hearing aid device
      */
-    protected BluetoothDevice findActiveDevice(int streamType) {
-        if (streamType != STREAM_MUSIC && streamType != STREAM_VOICE_CALL) {
-            return null;
-        }
-        if (isStreamFromOutputDevice(STREAM_MUSIC, DEVICE_OUT_ALL_A2DP)) {
-            return mProfileManager.getA2dpProfile().getActiveDevice();
-        } else if (isStreamFromOutputDevice(STREAM_VOICE_CALL, DEVICE_OUT_ALL_SCO)) {
-            return mProfileManager.getHeadsetProfile().getActiveDevice();
-        } else if (isStreamFromOutputDevice(streamType, DEVICE_OUT_HEARING_AID)) {
+    protected BluetoothDevice findActiveHearingAidDevice() {
+        final HearingAidProfile hearingAidProfile = mProfileManager.getHearingAidProfile();
+
+        if (hearingAidProfile != null) {
             // The first element is the left active device; the second element is
             // the right active device. And they will have same hiSyncId. If either
             // or both side is not active, it will be null on that position.
-            List<BluetoothDevice> activeDevices =
-                    mProfileManager.getHearingAidProfile().getActiveDevices();
+            List<BluetoothDevice> activeDevices = hearingAidProfile.getActiveDevices();
             for (BluetoothDevice btDevice : activeDevices) {
                 if (btDevice != null && mConnectedDevices.contains(btDevice)) {
                     // also need to check mConnectedDevices, because one of
@@ -340,6 +324,14 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         }
         return null;
     }
+
+    /**
+     * Find the active device from the corresponding profile.
+     *
+     * @return the active device. Return null if the
+     * corresponding profile don't have active device.
+     */
+    public abstract BluetoothDevice findActiveDevice();
 
     int getDefaultDeviceIndex() {
         // Default device is after all connected devices.

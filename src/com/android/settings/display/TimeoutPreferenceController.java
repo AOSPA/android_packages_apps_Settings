@@ -20,15 +20,15 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.TimeoutListPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
 
 public class TimeoutPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
@@ -70,12 +70,13 @@ public class TimeoutPreferenceController extends AbstractPreferenceController im
                     dpm.getMaximumTimeToLock(null /* admin */, UserHandle.myUserId());
             timeoutListPreference.removeUnusableTimeouts(maxTimeout, admin);
         }
-        updateTimeoutPreferenceDescription(timeoutListPreference, currentTimeout);
+        updateTimeoutPreferenceDescription(timeoutListPreference,
+                Long.parseLong(timeoutListPreference.getValue()));
 
-        EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
-                        mContext, UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT,
-                        UserHandle.myUserId());
-        if(admin != null) {
+        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT,
+                UserHandle.myUserId());
+        if (admin != null) {
             timeoutListPreference.removeUnusableTimeouts(0/* disable all*/, admin);
         }
     }

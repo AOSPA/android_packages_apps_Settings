@@ -17,11 +17,12 @@
 package com.android.settings.testutils.shadow;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowFrameLayout;
+
+import androidx.cardview.widget.CardView;
 
 /**
  * Shadow for CardView to get around view not implemented error.

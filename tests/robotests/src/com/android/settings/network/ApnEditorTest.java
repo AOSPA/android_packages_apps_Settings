@@ -17,7 +17,6 @@
 package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -25,17 +24,12 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v14.preference.MultiSelectListPreference;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.EditTextPreference;
-import android.support.v7.preference.ListPreference;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,6 +37,7 @@ import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.network.ApnEditor.ApnData;
+import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -53,7 +48,12 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.MultiSelectListPreference;
+import androidx.preference.SwitchPreference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ApnEditorTest {
@@ -96,13 +96,13 @@ public class ApnEditorTest {
     private ArgumentCaptor<Uri> mUriCaptor;
 
     private ApnEditor mApnEditorUT;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private Resources mResources;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mActivity = spy(Robolectric.setupActivity(Activity.class));
+        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
         mResources = mActivity.getResources();
         mApnEditorUT = spy(new ApnEditor());
 
@@ -440,6 +440,8 @@ public class ApnEditorTest {
     @Test
     public void formatInteger_shouldParseString() {
         assertThat(ApnEditor.formatInteger("42")).isEqualTo("42");
+        assertThat(ApnEditor.formatInteger("01")).isEqualTo("01");
+        assertThat(ApnEditor.formatInteger("001")).isEqualTo("001");
     }
 
     @Test

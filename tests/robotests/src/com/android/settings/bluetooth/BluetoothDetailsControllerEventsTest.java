@@ -22,8 +22,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
@@ -33,6 +31,9 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
+
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowBluetoothDevice.class)
@@ -61,7 +62,7 @@ public class BluetoothDetailsControllerEventsTest extends BluetoothDetailsContro
     }
 
     private static class TestController extends BluetoothDetailsController {
-        private TestController(Context context, PreferenceFragment fragment,
+        private TestController(Context context, PreferenceFragmentCompat fragment,
             CachedBluetoothDevice device, Lifecycle lifecycle) {
             super(context, fragment, device, lifecycle);
         }

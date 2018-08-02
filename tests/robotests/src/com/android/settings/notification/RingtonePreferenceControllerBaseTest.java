@@ -23,7 +23,6 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.media.RingtoneManager;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -32,6 +31,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class RingtonePreferenceControllerBaseTest {

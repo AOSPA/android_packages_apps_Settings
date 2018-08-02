@@ -17,13 +17,14 @@
 package com.android.settings.bluetooth;
 
 import android.content.Context;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 /**
  * This class adds two buttons: one to connect/disconnect from a device (depending on the current
@@ -36,7 +37,7 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
     private boolean mConnectButtonInitialized;
     private ActionButtonPreference mActionButtons;
 
-    public BluetoothDetailsButtonsController(Context context, PreferenceFragment fragment,
+    public BluetoothDetailsButtonsController(Context context, PreferenceFragmentCompat fragment,
             CachedBluetoothDevice device, Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
         mIsConnected = device.isConnected();

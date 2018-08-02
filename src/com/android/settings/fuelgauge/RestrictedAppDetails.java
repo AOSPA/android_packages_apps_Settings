@@ -21,12 +21,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.v7.preference.CheckBoxPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
 import android.util.IconDrawableFactory;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -41,9 +37,14 @@ import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.widget.AppCheckBoxPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.FooterPreferenceMixin;
+import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 
 /**
  * Fragment to show a list of anomaly apps, where user could handle these anomalies
@@ -67,8 +68,8 @@ public class RestrictedAppDetails extends DashboardFragment implements
     BatteryUtils mBatteryUtils;
     @VisibleForTesting
     PackageManager mPackageManager;
-    private final FooterPreferenceMixin mFooterPreferenceMixin =
-            new FooterPreferenceMixin(this, getLifecycle());
+    private final FooterPreferenceMixinCompat mFooterPreferenceMixin =
+            new FooterPreferenceMixinCompat(this, getSettingsLifecycle());
 
     public static void startRestrictedAppDetails(InstrumentedPreferenceFragment fragment,
             List<AppInfo> appInfos) {
@@ -78,7 +79,7 @@ public class RestrictedAppDetails extends DashboardFragment implements
         new SubSettingLauncher(fragment.getContext())
                 .setDestination(RestrictedAppDetails.class.getName())
                 .setArguments(args)
-                .setTitle(R.string.restricted_app_title)
+                .setTitleRes(R.string.restricted_app_title)
                 .setSourceMetricsCategory(fragment.getMetricsCategory())
                 .launch();
     }

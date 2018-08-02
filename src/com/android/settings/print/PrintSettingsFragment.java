@@ -18,13 +18,10 @@ package com.android.settings.print;
 
 import static com.android.settings.print.PrintSettingPreferenceController.shouldShowToUser;
 
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ActivityNotFoundException;
-import android.content.AsyncTaskLoader;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -35,12 +32,9 @@ import android.print.PrintJobId;
 import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.print.PrintManager.PrintJobStateChangeListener;
-import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -56,14 +50,23 @@ import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.utils.ProfileSettingsPreferenceFragment;
+import com.android.settings.widget.AppPreference;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+
 /**
  * Fragment with the top level print settings.
  */
+@SearchIndexable
 public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
         implements Indexable, OnClickListener {
     public static final String TAG = "PrintSettingsFragment";
@@ -191,7 +194,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
             }
 
             for (PrintServiceInfo service : services) {
-                Preference preference = new Preference(context);
+                AppPreference preference = new AppPreference(context);
 
                 String title = service.getResolveInfo().loadLabel(pm).toString();
                 preference.setTitle(title);

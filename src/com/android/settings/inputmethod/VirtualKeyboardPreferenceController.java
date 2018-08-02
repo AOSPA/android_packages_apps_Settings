@@ -19,7 +19,7 @@ package com.android.settings.inputmethod;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.v7.preference.Preference;
+import android.icu.text.ListFormatter;
 import android.text.BidiFormatter;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -30,6 +30,8 @@ import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.preference.Preference;
 
 public class VirtualKeyboardPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
@@ -81,15 +83,10 @@ public class VirtualKeyboardPreferenceController extends AbstractPreferenceContr
 
         final BidiFormatter bidiFormatter = BidiFormatter.getInstance();
 
-        String summary = null;
+        final List<String> summaries = new ArrayList<>();
         for (String label : labels) {
-            if (summary == null) {
-                summary = bidiFormatter.unicodeWrap(label);
-            } else {
-                summary = mContext.getString(R.string.join_many_items_middle, summary,
-                        bidiFormatter.unicodeWrap(label));
-            }
+            summaries.add(bidiFormatter.unicodeWrap(label));
         }
-        preference.setSummary(summary);
+        preference.setSummary(ListFormatter.getInstance().format(summaries));
     }
 }

@@ -24,8 +24,6 @@ import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.speech.tts.TtsEngines;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -42,11 +40,16 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+@SearchIndexable
 public class LanguageAndInputSettings extends DashboardFragment {
 
     private static final String TAG = "LangAndInputSettings";
@@ -54,7 +57,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
     private static final String KEY_KEYBOARDS_CATEGORY = "keyboards_category";
     private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
     private static final String KEY_POINTER_AND_TTS_CATEGORY = "pointer_and_tts_category";
-    private static final String KEY_GAME_CONTROLLER_CATEGORY = "game_controller_settings_category";
     private static final String KEY_PHYSICAL_KEYBOARD = "physical_keyboard_pref";
 
     @Override
@@ -87,7 +89,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        return buildPreferenceControllers(context, getSettingsLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
@@ -121,7 +123,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
         // Input Assistance
         controllers.add(new SpellCheckerPreferenceController(context));
         controllers.add(new DefaultAutofillPreferenceController(context));
-        controllers.add(new UserDictionaryPreferenceController(context));
 
         return controllers;
     }

@@ -23,21 +23,19 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HeadsetProfile;
-import com.android.settingslib.bluetooth.A2dpProfile;
-
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,6 +43,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.Preference;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class BluetoothDeviceUpdaterTest {
@@ -166,5 +166,21 @@ public class BluetoothDeviceUpdaterTest {
         doReturn(false).when(mBluetoothDevice).isConnected();
 
         assertThat(mBluetoothDeviceUpdater.isDeviceConnected(mCachedBluetoothDevice)).isFalse();
+    }
+
+    @Test
+    public void registerCallback_localBluetoothManagerNull_shouldNotCrash() {
+        mBluetoothDeviceUpdater.mLocalManager = null;
+
+        // Shouldn't crash
+        mBluetoothDeviceUpdater.registerCallback();
+    }
+
+    @Test
+    public void unregisterCallback_localBluetoothManagerNull_shouldNotCrash() {
+        mBluetoothDeviceUpdater.mLocalManager = null;
+
+        // Shouldn't crash
+        mBluetoothDeviceUpdater.unregisterCallback();
     }
 }

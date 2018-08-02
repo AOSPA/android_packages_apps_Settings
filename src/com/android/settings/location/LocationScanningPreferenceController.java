@@ -18,10 +18,10 @@ package com.android.settings.location;
 
 import android.content.Context;
 
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 
 public class LocationScanningPreferenceController extends BasePreferenceController {

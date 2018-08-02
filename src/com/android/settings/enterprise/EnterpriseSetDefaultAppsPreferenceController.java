@@ -16,7 +16,6 @@ package com.android.settings.enterprise;
 
 import android.content.Context;
 import android.os.UserHandle;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
@@ -25,6 +24,8 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
 
 public class EnterpriseSetDefaultAppsPreferenceController
         extends AbstractPreferenceController implements PreferenceControllerMixin {

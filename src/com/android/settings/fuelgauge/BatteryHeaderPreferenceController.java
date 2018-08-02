@@ -22,9 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
-import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v7.preference.PreferenceScreen;
+import android.os.PowerManager;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -36,6 +34,10 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Controller that update the battery header view
@@ -55,13 +57,14 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
     TextView mSummary2;
 
     private final Activity mActivity;
-    private final PreferenceFragment mHost;
+    private final PreferenceFragmentCompat mHost;
     private final Lifecycle mLifecycle;
+    private final PowerManager mPowerManager;
 
     private LayoutPreference mBatteryLayoutPref;
 
     public BatteryHeaderPreferenceController(Context context, Activity activity,
-            PreferenceFragment host, Lifecycle lifecycle) {
+            PreferenceFragmentCompat host, Lifecycle lifecycle) {
         super(context);
         mActivity = activity;
         mHost = host;
@@ -69,6 +72,7 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
         if (mLifecycle != null) {
             mLifecycle.addObserver(this);
         }
+        mPowerManager = context.getSystemService(PowerManager.class);
     }
 
     @Override
@@ -115,6 +119,7 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
 
         mBatteryMeterView.setBatteryLevel(info.batteryLevel);
         mBatteryMeterView.setCharging(!info.discharging);
+        mBatteryMeterView.setPowerSave(mPowerManager.isPowerSaveMode());
     }
 
     public void quickUpdateHeaderPreference() {
@@ -127,6 +132,7 @@ public class BatteryHeaderPreferenceController extends AbstractPreferenceControl
         // Set battery level and charging status
         mBatteryMeterView.setBatteryLevel(batteryLevel);
         mBatteryMeterView.setCharging(!discharging);
+        mBatteryMeterView.setPowerSave(mPowerManager.isPowerSaveMode());
         mBatteryPercentText.setText(Utils.formatPercentage(batteryLevel));
 
         // clear all the summaries

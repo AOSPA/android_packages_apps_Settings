@@ -17,14 +17,10 @@
 package com.android.settings.dashboard;
 
 import android.app.Activity;
-import android.app.LoaderManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.service.settings.suggestions.Suggestion;
-import android.support.annotation.VisibleForTesting;
-import android.support.annotation.WorkerThread;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +29,8 @@ import android.view.ViewGroup;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.SettingsBaseActivity;
+import com.android.settings.core.SettingsBaseActivity.CategoryListener;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.ConditionManager.ConditionListener;
@@ -43,16 +41,19 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionBarShadowController;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.SettingsDrawerActivity;
-import com.android.settingslib.drawer.SettingsDrawerActivity.CategoryListener;
-import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
+import androidx.loader.app.LoaderManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 public class DashboardSummary extends InstrumentedFragment
         implements CategoryListener, ConditionListener,
-        FocusListener, SuggestionControllerMixin.SuggestionControllerHost {
+        FocusListener, SuggestionControllerMixinCompat.SuggestionControllerHost {
     public static final boolean DEBUG = false;
     private static final boolean DEBUG_TIMING = false;
     private static final int MAX_WAIT_MILLIS = 3000;
@@ -68,7 +69,7 @@ public class DashboardSummary extends InstrumentedFragment
     private SummaryLoader mSummaryLoader;
     private ConditionManager mConditionManager;
     private LinearLayoutManager mLayoutManager;
-    private SuggestionControllerMixin mSuggestionControllerMixin;
+    private SuggestionControllerMixinCompat mSuggestionControllerMixin;
     private DashboardFeatureProvider mDashboardFeatureProvider;
     @VisibleForTesting
     boolean mIsOnCategoriesChangedCalled;
@@ -85,14 +86,14 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Log.d(TAG, "Creating SuggestionControllerMixin");
+        Log.d(TAG, "Creating SuggestionControllerMixinCompat");
         final SuggestionFeatureProvider suggestionFeatureProvider = FeatureFactory
                 .getFactory(context)
                 .getSuggestionFeatureProvider(context);
         if (suggestionFeatureProvider.isSuggestionEnabled(context)) {
-            mSuggestionControllerMixin = new SuggestionControllerMixin(context, this /* host */,
-                    getLifecycle(), suggestionFeatureProvider
-                    .getSuggestionServiceComponent());
+            mSuggestionControllerMixin = new SuggestionControllerMixinCompat(
+                    context, this /* host */, getSettingsLifecycle(),
+                    suggestionFeatureProvider.getSuggestionServiceComponent());
         }
     }
 
@@ -116,7 +117,7 @@ public class DashboardSummary extends InstrumentedFragment
         mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
 
         mConditionManager = ConditionManager.get(activity, false);
-        getLifecycle().addObserver(mConditionManager);
+        getSettingsLifecycle().addObserver(mConditionManager);
         if (savedInstanceState != null) {
             mIsOnCategoriesChangedCalled =
                     savedInstanceState.getBoolean(STATE_CATEGORIES_CHANGE_CALLED);
@@ -137,7 +138,7 @@ public class DashboardSummary extends InstrumentedFragment
         long startTime = System.currentTimeMillis();
         super.onResume();
 
-        ((SettingsDrawerActivity) getActivity()).addCategoryListener(this);
+        ((SettingsBaseActivity) getActivity()).addCategoryListener(this);
         mSummaryLoader.setListening(true);
         final int metricsCategory = getMetricsCategory();
         for (Condition c : mConditionManager.getConditions()) {
@@ -155,7 +156,7 @@ public class DashboardSummary extends InstrumentedFragment
     public void onPause() {
         super.onPause();
 
-        ((SettingsDrawerActivity) getActivity()).remCategoryListener(this);
+        ((SettingsBaseActivity) getActivity()).remCategoryListener(this);
         mSummaryLoader.setListening(false);
         for (Condition c : mConditionManager.getConditions()) {
             if (c.shouldShow()) {
@@ -208,11 +209,13 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setListener(this);
         mDashboard.setItemAnimator(new DashboardItemAnimator());
         mAdapter = new DashboardAdapter(getContext(), bundle,
-                mConditionManager.getConditions(), mSuggestionControllerMixin, getLifecycle());
+                mConditionManager.getConditions(), mSuggestionControllerMixin,
+                getSettingsLifecycle());
         mDashboard.setAdapter(mAdapter);
         mSummaryLoader.setSummaryConsumer(mAdapter);
         ActionBarShadowController.attachToRecyclerView(
-                getActivity().findViewById(R.id.search_bar_container), getLifecycle(), mDashboard);
+                getActivity().findViewById(R.id.search_bar_container), getSettingsLifecycle(),
+                mDashboard);
         rebuildUI();
         if (DEBUG_TIMING) {
             Log.d(TAG, "onCreateView took "

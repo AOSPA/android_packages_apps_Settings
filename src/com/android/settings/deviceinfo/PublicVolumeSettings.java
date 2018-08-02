@@ -28,8 +28,6 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
 import android.provider.DocumentsContract;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
@@ -46,6 +44,9 @@ import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
 
 import java.io.File;
 import java.util.Objects;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Panel showing summary and actions for a {@link VolumeInfo#TYPE_PUBLIC}

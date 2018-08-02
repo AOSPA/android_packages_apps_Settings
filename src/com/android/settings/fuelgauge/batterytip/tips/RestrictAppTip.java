@@ -20,10 +20,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.icu.text.ListFormatter;
 import android.os.Parcel;
-import android.text.TextUtils;
 import android.util.Pair;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -32,6 +30,8 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Tip to suggest user to restrict some bad apps
@@ -104,6 +104,17 @@ public class RestrictAppTip extends BatteryTip {
             mState = tip.getState();
             mShowDialog = tip.shouldShowDialog();
             mRestrictAppList = ((RestrictAppTip) tip).mRestrictAppList;
+        }
+    }
+
+    @Override
+    public void sanityCheck(Context context) {
+        super.sanityCheck(context);
+
+        // Set it invisible if there is no valid app
+        mRestrictAppList.removeIf(new AppLabelPredicate(context));
+        if (mRestrictAppList.isEmpty()) {
+            mState = StateType.INVISIBLE;
         }
     }
 

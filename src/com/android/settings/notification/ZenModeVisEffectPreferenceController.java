@@ -18,13 +18,14 @@ package com.android.settings.notification;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.support.v7.preference.CheckBoxPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settings.widget.DisabledCheckBoxPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class ZenModeVisEffectPreferenceController
         extends AbstractZenModePreferenceController

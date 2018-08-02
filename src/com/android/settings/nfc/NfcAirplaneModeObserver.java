@@ -22,8 +22,9 @@ import android.nfc.NfcAdapter;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 /**
  * NfcAirplaneModeObserver is a helper to manage the Nfc on/off when airplane mode status
@@ -70,12 +71,13 @@ public class NfcAirplaneModeObserver extends ContentObserver {
         }
 
         mAirplaneMode = airplaneMode;
-        boolean toggleable = mAirplaneMode != 1;
-        if (toggleable) {
-            mNfcAdapter.enable();
-        } else {
+        if (mAirplaneMode == 1) {
+            // airplane mode is on, need to turn off NFC, and check if user can toggle it
             mNfcAdapter.disable();
+            mPreference.setEnabled(NfcPreferenceController.isToggleableInAirplaneMode(mContext));
+        } else {
+            // airplane mode is off, no restriction
+            mPreference.setEnabled(true);
         }
-        mPreference.setEnabled(toggleable);
     }
 }

@@ -20,10 +20,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.LayoutInflater;
@@ -37,6 +33,11 @@ import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFragment implements
         RadioButtonPreference.OnClickListener {

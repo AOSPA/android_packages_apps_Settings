@@ -15,12 +15,8 @@
  */
 package com.android.settings.connecteddevice;
 
-import android.content.pm.PackageManager;
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
+import android.content.pm.PackageManager;
 
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
@@ -31,12 +27,17 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 /**
- * Controller to maintain the {@link android.support.v7.preference.PreferenceGroup} for all
+ * Controller to maintain the {@link androidx.preference.PreferenceGroup} for all
  * connected devices. It uses {@link DevicePreferenceCallback} to add/remove {@link Preference}
  */
 public class ConnectedDeviceGroupController extends BasePreferenceController
@@ -76,9 +77,11 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
             mPreferenceGroup = (PreferenceGroup) screen.findPreference(KEY);
             mPreferenceGroup.setVisible(false);
 
-            mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
+            final Context context = screen.getContext();
+            mBluetoothDeviceUpdater.setPrefContext(context);
             mBluetoothDeviceUpdater.forceUpdate();
-            mConnectedUsbDeviceUpdater.initUsbPreference(screen.getContext());
+            mConnectedUsbDeviceUpdater.initUsbPreference(context);
+            mConnectedDockUpdater.setPreferenceContext(context);
             mConnectedDockUpdater.forceUpdate();
         }
     }

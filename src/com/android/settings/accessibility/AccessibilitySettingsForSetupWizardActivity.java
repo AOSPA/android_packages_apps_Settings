@@ -17,8 +17,6 @@
 package com.android.settings.accessibility;
 
 import android.os.Bundle;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v7.preference.Preference;
 import android.view.Menu;
 import android.view.accessibility.AccessibilityEvent;
 
@@ -27,6 +25,9 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
 
@@ -70,7 +71,7 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     }
 
     @Override
-    public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
+    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
         Bundle args = pref.getExtras();
         if (args == null) {
             args = new Bundle();

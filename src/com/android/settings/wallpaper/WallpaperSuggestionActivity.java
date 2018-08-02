@@ -22,11 +22,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+
+import androidx.annotation.VisibleForTesting;
 
 public class WallpaperSuggestionActivity extends Activity {
 
@@ -52,7 +53,7 @@ public class WallpaperSuggestionActivity extends Activity {
         // fall back to default wallpaper picker
         new SubSettingLauncher(this)
                 .setDestination(WallpaperTypeSettings.class.getName())
-                .setTitle(R.string.wallpaper_suggestion_title)
+                .setTitleRes(R.string.wallpaper_suggestion_title)
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.DASHBOARD_SUMMARY)
                 .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                 .launch();

@@ -18,8 +18,6 @@ package com.android.settings.deviceinfo.imei;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -33,6 +31,9 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 public class ImeiInfoDialogController {
 
@@ -53,6 +54,9 @@ public class ImeiInfoDialogController {
     static final int ID_GSM_SETTINGS = R.id.gsm_settings;
 
     private static CharSequence getTextAsDigits(CharSequence text) {
+        if (TextUtils.isEmpty(text)) {
+            return "";
+        }
         if (TextUtils.isDigitsOnly(text)) {
             final Spannable spannable = new SpannableStringBuilder(text);
             final TtsSpan span = new TtsSpan.DigitsBuilder(text.toString()).build();

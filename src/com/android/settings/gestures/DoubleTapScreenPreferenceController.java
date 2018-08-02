@@ -16,23 +16,18 @@
 
 package com.android.settings.gestures;
 
+import static android.provider.Settings.Secure.DOZE_PULSE_ON_DOUBLE_TAP;
+
 import android.annotation.UserIdInt;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.R;
-import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.InlineSwitchPayload;
-import com.android.settings.search.ResultPayload;
 
-import static android.provider.Settings.Secure.DOZE_PULSE_ON_DOUBLE_TAP;
+import androidx.annotation.VisibleForTesting;
 
 public class DoubleTapScreenPreferenceController extends GesturePreferenceController {
 
@@ -40,7 +35,6 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
     private final int OFF = 0;
 
     private static final String PREF_KEY_VIDEO = "gesture_double_tap_screen_video";
-    private final String mDoubleTapScreenPrefKey;
 
     private final String SECURE_KEY = DOZE_PULSE_ON_DOUBLE_TAP;
 
@@ -51,7 +45,6 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
     public DoubleTapScreenPreferenceController(Context context, String key) {
         super(context, key);
         mUserId = UserHandle.myUserId();
-        mDoubleTapScreenPrefKey = key;
     }
 
     public DoubleTapScreenPreferenceController setConfig(AmbientDisplayConfiguration config) {
@@ -72,17 +65,13 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        if (mAmbientConfig == null) {
-            mAmbientConfig = new AmbientDisplayConfiguration(mContext);
-        }
-
         // No hardware support for Double Tap
-        if (!mAmbientConfig.doubleTapSensorAvailable()) {
+        if (!getAmbientConfig().doubleTapSensorAvailable()) {
             return UNSUPPORTED_ON_DEVICE;
         }
 
         // Can't change Double Tap when AOD is enabled.
-        if (!mAmbientConfig.ambientDisplayAvailable()) {
+        if (!getAmbientConfig().ambientDisplayAvailable()) {
             return DISABLED_DEPENDENT_SETTING;
         }
 
@@ -107,22 +96,18 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
 
     @Override
     public boolean isChecked() {
-        return mAmbientConfig.pulseOnDoubleTapEnabled(mUserId);
-    }
-
-    @Override
-    //TODO (b/69808376): Remove result payload
-    public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
-                DoubleTapScreenSettings.class.getName(), mDoubleTapScreenPrefKey,
-                mContext.getString(R.string.display_settings));
-
-        return new InlineSwitchPayload(SECURE_KEY, ResultPayload.SettingsSource.SECURE,
-                ON /* onValue */, intent, isAvailable(), ON /* defaultValue */);
+        return getAmbientConfig().pulseOnDoubleTapEnabled(mUserId);
     }
 
     @Override
     protected boolean canHandleClicks() {
-        return !mAmbientConfig.alwaysOnEnabled(mUserId);
+        return !getAmbientConfig().alwaysOnEnabled(mUserId);
+    }
+
+    private AmbientDisplayConfiguration getAmbientConfig() {
+        if (mAmbientConfig == null) {
+            mAmbientConfig = new AmbientDisplayConfiguration(mContext);
+        }
+        return mAmbientConfig;
     }
 }

@@ -16,11 +16,11 @@
 package com.android.settings.fuelgauge.batterytip.tips;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -35,7 +35,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -51,6 +50,7 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 public class RestrictAppTipTest {
     private static final String PACKAGE_NAME = "com.android.app";
+    private static final String UNINSTALL_PACKAGE_NAME = "com.android.app.unintall";
     private static final String DISPLAY_NAME = "app";
     private static final int ANOMALY_WAKEUP = 0;
     private static final int ANOMALY_WAKELOCK = 1;
@@ -61,6 +61,7 @@ public class RestrictAppTipTest {
     private RestrictAppTip mInvisibleBatteryTip;
     private List<AppInfo> mUsageAppList;
     private AppInfo mAppInfo;
+    private AppInfo mUninstallAppInfo;
     @Mock
     private ApplicationInfo mApplicationInfo;
     @Mock
@@ -76,12 +77,19 @@ public class RestrictAppTipTest {
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME,
                 PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.MATCH_ANY_USER);
+        doThrow(new PackageManager.NameNotFoundException()).when(mPackageManager)
+                .getApplicationInfo(UNINSTALL_PACKAGE_NAME,
+                        PackageManager.MATCH_DISABLED_COMPONENTS | PackageManager.MATCH_ANY_USER);
         doReturn(DISPLAY_NAME).when(mApplicationInfo).loadLabel(mPackageManager);
 
         mAppInfo = new AppInfo.Builder()
                 .setPackageName(PACKAGE_NAME)
                 .addAnomalyType(ANOMALY_WAKEUP)
                 .addAnomalyType(ANOMALY_WAKELOCK)
+                .build();
+        mUninstallAppInfo = new AppInfo.Builder()
+                .setPackageName(UNINSTALL_PACKAGE_NAME)
+                .addAnomalyType(ANOMALY_WAKEUP)
                 .build();
         mUsageAppList = new ArrayList<>();
         mUsageAppList.add(mAppInfo);
@@ -171,6 +179,29 @@ public class RestrictAppTipTest {
         mInvisibleBatteryTip.updateState(mHandledBatteryTip);
         assertThat(mInvisibleBatteryTip.getState()).isEqualTo(BatteryTip.StateType.HANDLED);
         assertThat(mInvisibleBatteryTip.getRestrictAppList()).containsExactly(mAppInfo);
+    }
+
+    @Test
+    public void sanityCheck_appUninstalled_stateInvisible() {
+        final List<AppInfo> appInfos = new ArrayList<>();
+        appInfos.add(mUninstallAppInfo);
+        final BatteryTip batteryTip = new RestrictAppTip(BatteryTip.StateType.NEW, appInfos);
+
+        batteryTip.sanityCheck(mContext);
+
+        assertThat(batteryTip.getState()).isEqualTo(BatteryTip.StateType.INVISIBLE);
+    }
+
+    @Test
+    public void sanityCheck_twoRestrictedAppsWhileUninstallOne_stateVisible() {
+        final List<AppInfo> appInfos = new ArrayList<>();
+        appInfos.add(mAppInfo);
+        appInfos.add(mUninstallAppInfo);
+        final BatteryTip batteryTip = new RestrictAppTip(BatteryTip.StateType.NEW, appInfos);
+
+        batteryTip.sanityCheck(mContext);
+
+        assertThat(batteryTip.getState()).isEqualTo(BatteryTip.StateType.NEW);
     }
 
     @Test

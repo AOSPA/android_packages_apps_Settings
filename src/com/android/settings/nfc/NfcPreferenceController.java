@@ -19,18 +19,15 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 import android.provider.Settings;
-import android.text.TextUtils;
-
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-import android.support.v14.preference.SwitchPreference;
 
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import java.util.List;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 public class NfcPreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnResume, OnPause {
@@ -38,7 +35,8 @@ public class NfcPreferenceController extends TogglePreferenceController
     public static final String KEY_TOGGLE_NFC = "toggle_nfc";
     private final NfcAdapter mNfcAdapter;
     private NfcEnabler mNfcEnabler;
-    private NfcAirplaneModeObserver mAirplaneModeObserver;
+    @VisibleForTesting
+    NfcAirplaneModeObserver mAirplaneModeObserver;
 
     public NfcPreferenceController(Context context, String key) {
         super(context, key);
@@ -58,10 +56,10 @@ public class NfcPreferenceController extends TogglePreferenceController
 
         mNfcEnabler = new NfcEnabler(mContext, switchPreference);
 
-        // Manually set dependencies for NFC when not toggleable.
-        if (!isToggleableInAirplaneMode(mContext)) {
-            mAirplaneModeObserver = new NfcAirplaneModeObserver(mContext,
-                    mNfcAdapter, (Preference) switchPreference);
+        // Listen to airplane mode updates if NFC should be turned off when airplane mode is on
+        if (shouldTurnOffNFCInAirplaneMode(mContext) || isToggleableInAirplaneMode(mContext)) {
+            mAirplaneModeObserver =
+                    new NfcAirplaneModeObserver(mContext, mNfcAdapter, switchPreference);
         }
     }
 
@@ -103,7 +101,7 @@ public class NfcPreferenceController extends TogglePreferenceController
 
     @Override
     public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), KEY_TOGGLE_NFC);
+        return true;
     }
 
     @Override
@@ -124,6 +122,12 @@ public class NfcPreferenceController extends TogglePreferenceController
         if (mNfcEnabler != null) {
             mNfcEnabler.pause();
         }
+    }
+
+    public static boolean shouldTurnOffNFCInAirplaneMode(Context context) {
+        final String airplaneModeRadios = Settings.Global.getString(context.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_RADIOS);
+        return airplaneModeRadios != null && airplaneModeRadios.contains(Settings.Global.RADIO_NFC);
     }
 
     public static boolean isToggleableInAirplaneMode(Context context) {

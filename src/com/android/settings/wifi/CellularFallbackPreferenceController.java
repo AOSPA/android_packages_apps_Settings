@@ -18,12 +18,13 @@ package com.android.settings.wifi;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 /**
  * {@link AbstractPreferenceController} that controls whether we should fall back to celluar when

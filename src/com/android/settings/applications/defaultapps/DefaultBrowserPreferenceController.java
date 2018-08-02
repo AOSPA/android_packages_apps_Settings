@@ -24,14 +24,18 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
 import com.android.settingslib.applications.DefaultAppInfo;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+import androidx.preference.Preference;
 
 public class DefaultBrowserPreferenceController extends DefaultAppPreferenceController {
 
@@ -48,7 +52,7 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
 
     @Override
     public boolean isAvailable() {
-        final List<ResolveInfo> candidates = getCandidates();
+        final List<ResolveInfo> candidates = getCandidates(mPackageManager, mUserId);
         return candidates != null && !candidates.isEmpty();
     }
 
@@ -72,7 +76,7 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
             final String packageName = mPackageManager.getDefaultBrowserPackageNameAsUser(mUserId);
             Log.d(TAG, "Get default browser package: " + packageName);
             return new DefaultAppInfo(mContext, mPackageManager,
-                    mPackageManager.getPackageManager().getApplicationInfo(packageName, 0));
+                    mPackageManager.getApplicationInfo(packageName, 0));
         } catch (PackageManager.NameNotFoundException e) {
             return null;
         }
@@ -103,17 +107,34 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
         return getOnlyAppIcon();
     }
 
-    private List<ResolveInfo> getCandidates() {
-        return mPackageManager.queryIntentActivitiesAsUser(BROWSE_PROBE, PackageManager.MATCH_ALL,
-                mUserId);
+    static List<ResolveInfo> getCandidates(PackageManager packageManager, int userId) {
+        final List<ResolveInfo> candidates = new ArrayList<>();
+        // Resolve that intent and check that the handleAllWebDataURI boolean is set
+        final List<ResolveInfo> list = packageManager.queryIntentActivitiesAsUser(
+            BROWSE_PROBE, PackageManager.MATCH_ALL, userId);
+        if (list != null) {
+            final Set<String> addedPackages = new ArraySet<>();
+            for (ResolveInfo info : list) {
+                if (info.activityInfo == null || !info.handleAllWebDataURI) {
+                    continue;
+                }
+                final String packageName = info.activityInfo.packageName;
+                if (addedPackages.contains(packageName)) {
+                    continue;
+                }
+                candidates.add(info);
+                addedPackages.add(packageName);
+            }
+        }
+        return candidates;
     }
 
     private String getOnlyAppLabel() {
         // Resolve that intent and check that the handleAllWebDataURI boolean is set
-        final List<ResolveInfo> list = getCandidates();
+        final List<ResolveInfo> list = getCandidates(mPackageManager, mUserId);
         if (list != null && list.size() == 1) {
             final ResolveInfo info = list.get(0);
-            final String label = info.loadLabel(mPackageManager.getPackageManager()).toString();
+            final String label = info.loadLabel(mPackageManager).toString();
             final ComponentInfo cn = info.getComponentInfo();
             final String packageName = cn == null ? null : cn.packageName;
             Log.d(TAG, "Getting label for the only browser app: " + packageName + label);
@@ -123,7 +144,7 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
     }
 
     private Drawable getOnlyAppIcon() {
-        final List<ResolveInfo> list = getCandidates();
+        final List<ResolveInfo> list = getCandidates(mPackageManager, mUserId);
         if (list != null && list.size() == 1) {
             final ResolveInfo info = list.get(0);
             final ComponentInfo cn = info.getComponentInfo();
@@ -133,7 +154,7 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
             }
             final ApplicationInfo appInfo;
             try {
-                appInfo = mPackageManager.getPackageManager().getApplicationInfo(packageName, 0);
+                appInfo = mPackageManager.getApplicationInfo(packageName, 0);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "Error getting app info for " + packageName);
                 return null;

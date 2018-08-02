@@ -27,32 +27,33 @@ import android.database.Cursor;
 import android.icu.text.ListFormatter;
 import android.provider.Contacts;
 import android.provider.ContactsContract;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 public class ZenModeStarredContactsPreferenceController extends
         AbstractZenModePreferenceController implements Preference.OnPreferenceClickListener {
 
-    protected static final String KEY = "zen_mode_starred_contacts";
+    protected static String KEY;
     private Preference mPreference;
     private final int mPriorityCategory;
     private final PackageManager mPackageManager;
 
-    @VisibleForTesting
-    Intent mStarredContactsIntent;
-    @VisibleForTesting
-    Intent mFallbackIntent;
+    private Intent mStarredContactsIntent;
+    private Intent mFallbackIntent;
 
     public ZenModeStarredContactsPreferenceController(Context context, Lifecycle lifecycle, int
-            priorityCategory) {
-        super(context, KEY, lifecycle);
+            priorityCategory, String key) {
+        super(context, key, lifecycle);
+        KEY = key;
+
         mPriorityCategory = priorityCategory;
         mPackageManager = mContext.getPackageManager();
 
@@ -66,7 +67,10 @@ public class ZenModeStarredContactsPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(KEY);
-        mPreference.setOnPreferenceClickListener(this);
+
+        if (mPreference != null) {
+            mPreference.setOnPreferenceClickListener(this);
+        }
     }
 
     @Override
@@ -91,9 +95,7 @@ public class ZenModeStarredContactsPreferenceController extends
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-
+    public CharSequence getSummary() {
         List<String> starredContacts = getStarredContacts();
         int numStarredContacts = starredContacts.size();
 
@@ -115,7 +117,8 @@ public class ZenModeStarredContactsPreferenceController extends
             }
         }
 
-        mPreference.setSummary(ListFormatter.getInstance().format(displayContacts));
+        // values in displayContacts must not be null
+        return ListFormatter.getInstance().format(displayContacts);
     }
 
     @Override
@@ -128,20 +131,30 @@ public class ZenModeStarredContactsPreferenceController extends
         return true;
     }
 
-    private List<String> getStarredContacts() {
+    @VisibleForTesting
+    List<String> getStarredContacts(Cursor cursor) {
         List<String> starredContacts = new ArrayList<>();
-
-        Cursor cursor = mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
-                new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
-                ContactsContract.Data.STARRED + "=1", null,
-                ContactsContract.Data.TIMES_CONTACTED);
 
         if (cursor.moveToFirst()) {
             do {
-                starredContacts.add(cursor.getString(0));
+                String contact = cursor.getString(0);
+                if (contact != null) {
+                    starredContacts.add(contact);
+                }
             } while (cursor.moveToNext());
         }
         return starredContacts;
+    }
+
+    private List<String> getStarredContacts() {
+        return getStarredContacts(queryData());
+    }
+
+    private Cursor queryData() {
+        return mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
+                new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
+                ContactsContract.Data.STARRED + "=1", null,
+                ContactsContract.Data.TIMES_CONTACTED);
     }
 
     private boolean isIntentValid() {

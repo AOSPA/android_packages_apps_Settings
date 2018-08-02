@@ -14,11 +14,12 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dream.DreamSettings;
 import com.android.settingslib.core.AbstractPreferenceController;
+
+import androidx.preference.Preference;
 
 public class ScreenSaverPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {

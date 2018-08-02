@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.widget.Toolbar;
 
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.search.SearchIndexableResources;
 
 /**
  * FeatureProvider for Settings Search
@@ -40,13 +41,6 @@ public interface SearchFeatureProvider {
      */
     void verifyLaunchSearchResultPageCaller(Context context, @NonNull ComponentName caller)
             throws SecurityException, IllegalArgumentException;
-
-    /**
-     * Synchronously updates the Settings database.
-     */
-    void updateIndex(Context context);
-
-    DatabaseIndexingManager getIndexingManager(Context context);
 
     /**
      * @return a {@link SearchIndexableResources} to be used for indexing search results.

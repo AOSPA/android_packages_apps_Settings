@@ -15,15 +15,17 @@
  */
 package com.android.settings.display;
 
+import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
+
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v14.preference.SwitchPreference;
 
+import com.android.internal.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 /**
  * A controller to manage the switch for showing battery percentage in the status bar.
@@ -40,7 +42,8 @@ public class BatteryPercentagePreferenceController extends AbstractPreferenceCon
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources()
+                .getBoolean(R.bool.config_battery_percentage_setting_available);
     }
 
     @Override
