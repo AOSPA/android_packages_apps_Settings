@@ -23,8 +23,8 @@ import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.preference.CheckBoxPreference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.CheckBoxPreference;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

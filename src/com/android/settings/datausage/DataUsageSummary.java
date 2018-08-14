@@ -131,28 +131,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.data_usage_menu_cellular_networks: {
-                final Intent intent = new Intent(Intent.ACTION_MAIN);
-                if (Utils.isNetworkSettingsApkAvailable()) {
-                    // prepare intent to start qti MobileNetworkSettings activity
-                    intent.setComponent(new ComponentName("com.qualcomm.qti.networksetting",
-                            "com.qualcomm.qti.networksetting.MobileNetworkSettings"));
-                } else {
-                    // vendor MobileNetworkSettings not available, launch the default activity
-                    Log.d(TAG, "vendor MobileNetworkSettings is not available");
-                    intent.setComponent(new ComponentName("com.android.phone",
-                            "com.android.phone.MobileNetworkSettings"));
-                }
-                startActivity(intent);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == findPreference(KEY_STATUS_HEADER)) {
             BillingCycleSettings.BytesEditorFragment.show(this, false);

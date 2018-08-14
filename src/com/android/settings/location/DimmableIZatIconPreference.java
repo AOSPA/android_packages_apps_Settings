@@ -29,7 +29,7 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v7.preference.PreferenceViewHolder;
+import androidx.preference.PreferenceViewHolder;
 import android.util.Log;
 import com.android.settings.widget.AppPreference;
 import com.android.settings.widget.RestrictedAppPreference;
