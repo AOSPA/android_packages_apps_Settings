@@ -17,27 +17,26 @@
 package com.android.settings.dashboard.suggestions;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
+
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.service.settings.suggestions.Suggestion;
-import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 
@@ -45,7 +44,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -58,7 +56,7 @@ import java.util.List;
 @Config(shadows = ShadowSecureSettings.class)
 public class SuggestionFeatureProviderImplTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    @Mock
     private Context mContext;
     @Mock
     private SuggestionControllerMixinCompat mSuggestionControllerMixin;
@@ -71,6 +69,7 @@ public class SuggestionFeatureProviderImplTest {
     @Mock
     private FingerprintManager mFingerprintManager;
 
+    private ActivityInfo mActivityInfo;
     private FakeFeatureFactory mFactory;
     private SuggestionFeatureProviderImpl mProvider;
 
@@ -78,6 +77,9 @@ public class SuggestionFeatureProviderImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFactory = FakeFeatureFactory.setupForTest();
+        mActivityInfo = new ActivityInfo();
+        mActivityInfo.packageName = "pkg";
+        mActivityInfo.name = "class";
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         // Explicit casting to object due to MockitoCast bug
         when((Object) mContext.getSystemService(FingerprintManager.class))
@@ -145,31 +147,16 @@ public class SuggestionFeatureProviderImplTest {
     @Test
     public void filterExclusiveSuggestions_shouldOnlyKeepFirst3() {
         final List<Tile> suggestions = new ArrayList<>();
-        suggestions.add(new Tile());
-        suggestions.add(new Tile());
-        suggestions.add(new Tile());
-        suggestions.add(new Tile());
-        suggestions.add(new Tile());
-        suggestions.add(new Tile());
-        suggestions.add(new Tile());
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
+        suggestions.add(new Tile(mActivityInfo, CategoryKey.CATEGORY_APPS));
 
         mProvider.filterExclusiveSuggestions(suggestions);
 
         assertThat(suggestions).hasSize(3);
-    }
-
-    @Test
-    public void testGetSmartSuggestionEnabledTaggedData_disabled() {
-        assertThat(mProvider.getLoggingTaggedData(mContext)).asList().containsExactly(
-                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
-    }
-
-    @Test
-    public void testGetSmartSuggestionEnabledTaggedData_enabled() {
-        final SuggestionFeatureProvider provider = spy(mProvider);
-        when(provider.isSmartSuggestionEnabled(any(Context.class))).thenReturn(true);
-
-        assertThat(provider.getLoggingTaggedData(mContext)).asList().containsExactly(
-                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 1));
     }
 }

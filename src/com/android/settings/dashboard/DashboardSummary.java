@@ -26,17 +26,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
+import androidx.loader.app.LoaderManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SettingsBaseActivity.CategoryListener;
-import com.android.settings.dashboard.conditional.Condition;
-import com.android.settings.dashboard.conditional.ConditionManager;
-import com.android.settings.dashboard.conditional.ConditionManager.ConditionListener;
-import com.android.settings.dashboard.conditional.FocusRecyclerView;
-import com.android.settings.dashboard.conditional.FocusRecyclerView.FocusListener;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.homepage.conditional.ConditionListener;
+import com.android.settings.homepage.conditional.FocusRecyclerView;
+import com.android.settings.homepage.conditional.FocusRecyclerView.FocusListener;
+import com.android.settings.homepage.conditional.ConditionManager;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionBarShadowController;
 import com.android.settingslib.drawer.CategoryKey;
@@ -46,11 +50,12 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.annotation.WorkerThread;
-import androidx.loader.app.LoaderManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
+/**
+ * Deprecated in favor of {@link com.android.settings.homepage.TopLevelSettings}
+ *
+ * @deprecated
+ */
+@Deprecated
 public class DashboardSummary extends InstrumentedFragment
         implements CategoryListener, ConditionListener,
         FocusListener, SuggestionControllerMixinCompat.SuggestionControllerHost {
@@ -116,8 +121,9 @@ public class DashboardSummary extends InstrumentedFragment
 
         mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
 
-        mConditionManager = ConditionManager.get(activity, false);
-        getSettingsLifecycle().addObserver(mConditionManager);
+        mConditionManager =
+                new ConditionManager(
+                        activity, this /* listener */);
         if (savedInstanceState != null) {
             mIsOnCategoriesChangedCalled =
                     savedInstanceState.getBoolean(STATE_CATEGORIES_CHANGE_CALLED);
@@ -140,13 +146,7 @@ public class DashboardSummary extends InstrumentedFragment
 
         ((SettingsBaseActivity) getActivity()).addCategoryListener(this);
         mSummaryLoader.setListening(true);
-        final int metricsCategory = getMetricsCategory();
-        for (Condition c : mConditionManager.getConditions()) {
-            if (c.shouldShow()) {
-                mMetricsFeatureProvider.visible(getContext(), metricsCategory,
-                        c.getMetricsConstant());
-            }
-        }
+        mConditionManager.startMonitoringStateChange();
         if (DEBUG_TIMING) {
             Log.d(TAG, "onResume took " + (System.currentTimeMillis() - startTime) + " ms");
         }
@@ -158,24 +158,16 @@ public class DashboardSummary extends InstrumentedFragment
 
         ((SettingsBaseActivity) getActivity()).remCategoryListener(this);
         mSummaryLoader.setListening(false);
-        for (Condition c : mConditionManager.getConditions()) {
-            if (c.shouldShow()) {
-                mMetricsFeatureProvider.hidden(getContext(), c.getMetricsConstant());
-            }
-        }
+        mConditionManager.stopMonitoringStateChange();
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         long startTime = System.currentTimeMillis();
         if (hasWindowFocus) {
-            Log.d(TAG, "Listening for condition changes");
-            mConditionManager.addListener(this);
-            Log.d(TAG, "conditions refreshed");
-            mConditionManager.refreshAll();
+            mConditionManager.startMonitoringStateChange();
         } else {
-            Log.d(TAG, "Stopped listening for condition changes");
-            mConditionManager.remListener(this);
+            mConditionManager.stopMonitoringStateChange();
         }
         if (DEBUG_TIMING) {
             Log.d(TAG, "onWindowFocusChanged took "
@@ -209,7 +201,8 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setListener(this);
         mDashboard.setItemAnimator(new DashboardItemAnimator());
         mAdapter = new DashboardAdapter(getContext(), bundle,
-                mConditionManager.getConditions(), mSuggestionControllerMixin,
+                mConditionManager,
+                mSuggestionControllerMixin,
                 getSettingsLifecycle());
         mDashboard.setAdapter(mAdapter);
         mSummaryLoader.setSummaryConsumer(mAdapter);
@@ -252,7 +245,8 @@ public class DashboardSummary extends InstrumentedFragment
         if (mOnConditionsChangedCalled) {
             final boolean scrollToTop =
                     mLayoutManager.findFirstCompletelyVisibleItemPosition() <= 1;
-            mAdapter.setConditions(mConditionManager.getConditions());
+            mAdapter.setConditions(mConditionManager.getDisplayableCards());
+
             if (scrollToTop) {
                 mDashboard.scrollToPosition(0);
             }

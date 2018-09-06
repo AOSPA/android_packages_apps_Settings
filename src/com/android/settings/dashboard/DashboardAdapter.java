@@ -15,10 +15,9 @@
  */
 package com.android.settings.dashboard;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.service.settings.suggestions.Suggestion;
 import android.text.TextUtils;
@@ -30,30 +29,32 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.R.id;
 import com.android.settings.dashboard.DashboardData.ConditionHeaderData;
-import com.android.settings.dashboard.conditional.Condition;
-import com.android.settings.dashboard.conditional.ConditionAdapter;
 import com.android.settings.dashboard.suggestions.SuggestionAdapter;
+import com.android.settings.homepage.conditional.ConditionAdapter;
+import com.android.settings.homepage.conditional.ConditionManager;
+import com.android.settings.homepage.conditional.ConditionalCard;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.RoundedHomepageIcon;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.drawer.TileUtils;
 import com.android.settingslib.suggestions.SuggestionControllerMixinCompat;
 import com.android.settingslib.utils.IconCache;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
         implements SummaryLoader.SummaryConsumer, SuggestionAdapter.Callback, LifecycleObserver,
@@ -71,6 +72,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private boolean mFirstFrameDrawn;
     private RecyclerView mRecyclerView;
     private SuggestionAdapter mSuggestionAdapter;
+    private ConditionManager mConditionManager;
 
     @VisibleForTesting
     DashboardData mDashboardData;
@@ -79,13 +81,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         @Override
         public void onClick(View v) {
             //TODO: get rid of setTag/getTag
-            mDashboardFeatureProvider.openTileIntent((Activity) mContext, (Tile) v.getTag());
+            mDashboardFeatureProvider.openTileIntent((FragmentActivity) mContext,
+                    (Tile) v.getTag());
         }
     };
 
     public DashboardAdapter(Context context, Bundle savedInstanceState,
-            List<Condition> conditions, SuggestionControllerMixinCompat suggestionControllerMixin,
-            Lifecycle lifecycle) {
+            ConditionManager conditionManager,
+            SuggestionControllerMixinCompat suggestionControllerMixin, Lifecycle lifecycle) {
 
         DashboardCategory category = null;
         boolean conditionExpanded = false;
@@ -95,6 +98,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(context);
         mCache = new IconCache(context);
+        mConditionManager = conditionManager;
         mSuggestionAdapter = new SuggestionAdapter(mContext, suggestionControllerMixin,
                 savedInstanceState, this /* callback */, lifecycle);
 
@@ -111,7 +115,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
 
         mDashboardData = new DashboardData.Builder()
-                .setConditions(conditions)
+                .setConditions(
+                        conditionManager == null ? null : conditionManager.getDisplayableCards())
                 .setSuggestions(mSuggestionAdapter.getSuggestions())
                 .setCategory(category)
                 .setConditionExpanded(conditionExpanded)
@@ -135,7 +140,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         notifyDashboardDataChanged(prevData);
     }
 
-    public void setConditions(List<Condition> conditions) {
+    public void setConditions(List<ConditionalCard> conditions) {
         final DashboardData prevData = mDashboardData;
         Log.d(TAG, "adapter setConditions called");
         mDashboardData = new DashboardData.Builder(prevData)
@@ -245,10 +250,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         return mDashboardData.getItemEntityById(itemId);
     }
 
-    public Suggestion getSuggestion(int position) {
-        return mSuggestionAdapter.getSuggestion(position);
-    }
-
     @VisibleForTesting
     void notifyDashboardDataChanged(DashboardData prevData) {
         if (mFirstFrameDrawn && prevData != null) {
@@ -289,10 +290,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     @VisibleForTesting
     void onBindCondition(final ConditionContainerHolder holder, int position) {
-        final ConditionAdapter adapter = new ConditionAdapter(mContext,
-                (List<Condition>) mDashboardData.getItemEntityByPosition(position),
+        final List<ConditionalCard> conditions =
+                (List) mDashboardData.getItemEntityByPosition(position);
+        final ConditionAdapter adapter = new ConditionAdapter(
+                mContext, mConditionManager, conditions,
                 mDashboardData.isConditionExpanded());
-        adapter.addDismissHandling(holder.data);
         holder.data.setAdapter(adapter);
         holder.data.setLayoutManager(new LinearLayoutManager(mContext));
     }
@@ -314,30 +316,19 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     @VisibleForTesting
     void onBindTile(DashboardItemHolder holder, Tile tile) {
-        Drawable icon = mCache.getIcon(tile.icon);
-        if (!TextUtils.equals(tile.icon.getResPackage(), mContext.getPackageName())
+        Icon tileIcon = tile.getIcon(mContext);
+        Drawable icon = mCache.getIcon(tileIcon);
+        if (!TextUtils.equals(tileIcon.getResPackage(), mContext.getPackageName())
                 && !(icon instanceof RoundedHomepageIcon)) {
             icon = new RoundedHomepageIcon(mContext, icon);
-            try {
-                if (tile.metaData != null) {
-                    final int colorRes = tile.metaData.getInt(
-                            TileUtils.META_DATA_PREFERENCE_ICON_BACKGROUND_HINT, 0 /* default */);
-                    if (colorRes != 0) {
-                        final int bgColor = mContext.getPackageManager()
-                                .getResourcesForApplication(tile.icon.getResPackage())
-                                .getColor(colorRes, null /* theme */);
-                        ((RoundedHomepageIcon) icon).setBackgroundColor(bgColor);
-                    }
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "Failed to set background color for " + tile.intent.getPackage());
-            }
-            mCache.updateIcon(tile.icon, icon);
+            ((RoundedHomepageIcon) icon).setBackgroundColor(mContext, tile);
+            mCache.updateIcon(tileIcon, icon);
         }
         holder.icon.setImageDrawable(icon);
-        holder.title.setText(tile.title);
-        if (!TextUtils.isEmpty(tile.summary)) {
-            holder.summary.setText(tile.summary);
+        holder.title.setText(tile.getTitle(mContext));
+        final CharSequence summary = tile.getSummary(mContext);
+        if (!TextUtils.isEmpty(summary)) {
+            holder.summary.setText(summary);
             holder.summary.setVisibility(View.VISIBLE);
         } else {
             holder.summary.setVisibility(View.GONE);

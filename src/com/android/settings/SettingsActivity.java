@@ -44,6 +44,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toolbar;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
@@ -69,16 +79,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.codeaurora.internal.IExtTelephony;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 
 
 public class SettingsActivity extends SettingsBaseActivity
@@ -298,8 +298,10 @@ public class SettingsActivity extends SettingsBaseActivity
             launchSettingFragment(initialFragmentName, isSubSettings, intent);
         }
 
+        final boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
         if (mIsShowingDashboard) {
-            findViewById(R.id.search_bar).setVisibility(View.VISIBLE);
+            findViewById(R.id.search_bar).setVisibility(
+                    deviceProvisioned ? View.VISIBLE : View.INVISIBLE);
             findViewById(R.id.action_bar).setVisibility(View.GONE);
             final Toolbar toolbar = findViewById(R.id.search_action_bar);
             FeatureFactory.getFactory(this).getSearchFeatureProvider()
@@ -318,7 +320,6 @@ public class SettingsActivity extends SettingsBaseActivity
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
-            boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
             actionBar.setDisplayHomeAsUpEnabled(deviceProvisioned);
             actionBar.setHomeButtonEnabled(deviceProvisioned);
             actionBar.setDisplayShowTitleEnabled(!mIsShowingDashboard);
@@ -762,7 +763,8 @@ public class SettingsActivity extends SettingsBaseActivity
                 for (DashboardCategory category : categories) {
                     final int tileCount = category.getTilesCount();
                     for (int i = 0; i < tileCount; i++) {
-                        final ComponentName component = category.getTile(i).intent.getComponent();
+                        final ComponentName component = category.getTile(i)
+                                .getIntent().getComponent();
                         final String name = component.getClassName();
                         final boolean isEnabledForRestricted = ArrayUtils.contains(
                                 SettingsGateway.SETTINGS_FOR_RESTRICTED, name);

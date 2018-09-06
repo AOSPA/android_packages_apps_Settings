@@ -21,9 +21,6 @@
     <bool name="has_boot_sounds">false</bool>
     <!-- Whether there is a silent mode checkbox  -->
     <bool name="has_silent_mode">true</bool>
-    <!-- Whether the DEPRECATED power control widget is enabled for this
-         device. Should be overridden for specific product builds. -->
-    <bool name="has_powercontrol_widget">false</bool>
 
     <!-- Display additional System Update menu if true -->
     <bool name="config_additional_system_update_setting_enable">false</bool>
@@ -31,6 +28,9 @@
     <!-- Whether the bluetooth activation confirmation dialogs should be auto dismissed.
          Can be overridden for specific product builds. -->
     <bool name="auto_confirm_bluetooth_activation_dialog">false</bool>
+
+    <!-- Whether the device name is shown in About device or not -->
+    <bool name="config_show_device_name">true</bool>
 
     <!-- Whether to show a preference item for the manual in About phone -->
     <bool name="config_show_manual">false</bool>
@@ -59,6 +59,9 @@
 
     <!-- Whether toggle_airplane is available or not. -->
     <bool name="config_show_toggle_airplane">true</bool>
+
+    <!-- Whether private_dns_settings is available or not. -->
+    <bool name="config_show_private_dns_settings">true</bool>
 
     <!-- Whether memory from app_info_settings is available or not. -->
     <bool name="config_show_app_info_settings_memory">false</bool>

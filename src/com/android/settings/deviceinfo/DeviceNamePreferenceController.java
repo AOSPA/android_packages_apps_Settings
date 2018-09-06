@@ -16,7 +16,7 @@
 
 package com.android.settings.deviceinfo;
 
-import android.annotation.Nullable;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -27,10 +27,9 @@ import android.text.SpannedString;
 
 import com.android.settings.bluetooth.BluetoothLengthDeviceNameFilter;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.R;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.tether.WifiDeviceNameTextValidator;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
@@ -49,10 +48,9 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     private static final String KEY_PENDING_DEVICE_NAME = "key_pending_device_name";
     private String mDeviceName;
     protected WifiManager mWifiManager;
+    private final BluetoothAdapter mBluetoothAdapter;
     private final WifiDeviceNameTextValidator mWifiDeviceNameTextValidator;
     private ValidatedEditTextPreference mPreference;
-    @Nullable
-    private LocalBluetoothManager mBluetoothManager;
     private DeviceNamePreferenceHost mHost;
     private String mPendingDeviceName;
 
@@ -61,6 +59,7 @@ public class DeviceNamePreferenceController extends BasePreferenceController
 
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mWifiDeviceNameTextValidator = new WifiDeviceNameTextValidator();
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         initializeDeviceName();
     }
@@ -90,7 +89,9 @@ public class DeviceNamePreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mContext.getResources().getBoolean(R.bool.config_show_device_name)
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -113,10 +114,6 @@ public class DeviceNamePreferenceController extends BasePreferenceController
         // Given the restrictions presented by the SSID name filter (32 char), I don't believe it is
         // possible to construct an SSID that is not a valid Bluetooth name.
         return mWifiDeviceNameTextValidator.isTextValid(deviceName);
-    }
-
-    public void setLocalBluetoothManager(LocalBluetoothManager localBluetoothManager) {
-        mBluetoothManager = localBluetoothManager;
     }
 
     public void confirmDeviceName() {
@@ -146,14 +143,8 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     }
 
     private void setBluetoothDeviceName(String deviceName) {
-        // Bluetooth manager doesn't exist for certain devices.
-        if (mBluetoothManager == null) {
-            return;
-        }
-
-        final LocalBluetoothAdapter localBluetoothAdapter = mBluetoothManager.getBluetoothAdapter();
-        if (localBluetoothAdapter != null) {
-            localBluetoothAdapter.setName(getFilteredBluetoothString(deviceName));
+        if (mBluetoothAdapter != null) {
+            mBluetoothAdapter.setName(getFilteredBluetoothString(deviceName));
         }
     }
 

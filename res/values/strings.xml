@@ -843,7 +843,9 @@
     <string name="disabled_by_administrator_summary">Disabled by admin</string>
     <!-- In the security screen, the header title for security statuses -->
     <string name="security_status_title">Security status</string>
-    <!-- Summary for Security settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <!-- Summary for Security settings, explaining a few important settings under it [CHAR LIMIT=NONE] -->
+    <string name="security_dashboard_summary_face">Screen lock, face unlock</string>
+    <!-- Summary for Security settings, explaining a few important settings under it [CHAR LIMIT=NONE] -->
     <string name="security_dashboard_summary">Screen lock, fingerprint</string>
     <!-- Summary for Security settings when fingerprint is not supported [CHAR LIMIT=NONE]-->
     <string name="security_dashboard_summary_no_fingerprint">Screen lock</string>
@@ -889,6 +891,17 @@
     <string name="security_settings_face_enroll_finish_title">All set. Looking good.</string>
     <!-- Button text to exit face wizard after everything is done [CHAR LIMIT=15] -->
     <string name="security_settings_face_enroll_done">Done</string>
+    <!-- Title for a category shown for the face settings page. [CHAR LIMIT=20] -->
+    <string name="security_settings_face_settings_use_face_category">Use your face to</string>
+    <!-- Text shown on a toggle which allows or disallows the device to use face for unlocking the device. [CHAR LIMIT=20] -->
+    <string name="security_settings_face_settings_use_face_unlock_phone">Unlock your device</string>
+    <!-- Button text in face settings which removes the user's faces from the device [CHAR LIMIT=20] -->
+    <string name="security_settings_face_settings_remove_face_data">Remove face data</string>
+    <!-- Text shown in face settings allowing the user to update/improve the enrolled face. This brings the user back to the enrollment flow. [CHAR LIMIT=30] -->
+    <string name="security_settings_face_settings_improve_face">Improve your face data</string>
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">Your face can be used to unlock your device and access apps.
+        <annotation id="url">Learn more</annotation></string>
 
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
@@ -2116,8 +2129,6 @@
     <string name="wifi_forget_dialog_message">All passwords for this network will be deleted</string>
 
     <!-- Wi-Fi Advanced Settings --> <skip />
-    <!-- Wi-Fi settings screen, Saved networks, settings section.  This is a header shown above Saved networks wifi settings. [CHAR LIMIT=30] -->
-    <string name="wifi_saved_access_points_titlebar">Saved networks</string>
     <!-- Wi-Fi settings screen, Saved networks summary.  This shows below the "Saved networks" item and indicates the number of networks a user has saved. -->
     <plurals name="wifi_saved_access_points_summary">
         <item quantity="one">1 network</item>
@@ -3164,7 +3175,7 @@
     <!-- In-progress title. This string lets the user know the SD card is being formatted. The user won't be able to proceed with setup until this step is finished. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=32] -->
     <string name="storage_wizard_format_progress_title">Formatting <xliff:g id="name" example="SD card">^1</xliff:g>\u2026</string>
     <!-- Subtext for a full-screen title. This string lets the user know that the SD card can't be removed during this process. The user won't be able to proceed with setup until this step is finished. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_format_progress_body">Don\u2019t remove the <xliff:g id="name" example="SD card">^1</xliff:g> while it\u2019s being formatting.</string>
+    <string name="storage_wizard_format_progress_body">Don\u2019t remove the <xliff:g id="name" example="SD card">^1</xliff:g> while it\u2019s being formatted.</string>
 
     <!-- Title of wizard step prompting user to migrate data to new storage [CHAR LIMIT=32] -->
     <string name="storage_wizard_migrate_title">Move data to new storage</string>
@@ -4582,6 +4593,8 @@
     <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_caption_master_switch_title">Use captions</string>
 
+    <!-- Button text for the accessibility dialog continue to the next screen for hearing aid. [CHAR LIMIT=32] -->
+    <string name="accessibility_hearingaid_instruction_continue_button">Continue</string>
     <!-- Title for the accessibility preference for hearing aid. [CHAR LIMIT=35] -->
     <string name="accessibility_hearingaid_title">Hearing aids</string>
     <!-- Summary for the accessibility preference for hearing aid when not connected. [CHAR LIMIT=50] -->
@@ -5099,6 +5112,9 @@
         <item quantity="other">Limiting battery usage for %1$d apps</item>
     </plurals>
 
+    <!-- Summary for restricted app to show the restriction time [CHAR LIMIT=NONE] -->
+    <string name="restricted_app_time_summary">Restricted <xliff:g id="time" example="5 days ago">%1$s</xliff:g></string>
+
     <!-- Footer message for restrict app details page -->
     <string name="restricted_app_detail_footer">These apps have been using battery in the background. Restricted apps may not work properly and notifications may be delayed.</string>
 
@@ -5526,39 +5542,6 @@
     <!-- Name for buttont hat plays a sample of the currently selected text-to-speech engine. -->
     <string name="tts_play">Play</string>
 
-    <!-- Power Control Widget -->
-    <string name="gadget_title">Power control</string>
-    <string name="gadget_toggle_wifi">Updating Wi\u2011Fi setting</string>
-    <string name="gadget_toggle_bluetooth">Updating Bluetooth setting</string>
-    <!-- Template for gadget toggle button description. Populated examples are "Wi-Fi off" or "Wi-Fi turning on". -->
-    <string name="gadget_state_template"><xliff:g name="feature" example="Wi\u2011Fi">%1$s</xliff:g> <xliff:g name="state" example="off">%2$s</xliff:g></string>
-    <!-- Gadget value used to describe on state. -->
-    <string name="gadget_state_on">on</string>
-    <!-- Gadget value used to describe off state. -->
-    <string name="gadget_state_off">off</string>
-    <!-- Gadget value used to describe turning on state. -->
-    <string name="gadget_state_turning_on">turning on</string>
-    <!-- Gadget value used to describe turning off state. -->
-    <string name="gadget_state_turning_off">turning off</string>
-    <!-- Spoken description for the Wi-Fi power control gadget. -->
-    <string name="gadget_wifi">Wi\u2011Fi</string>
-    <!-- Spoken description for the Bluetooth power control gadget. -->
-    <string name="gadget_bluetooth">Bluetooth</string>
-    <!-- Spoken description for the Location power control gadget. -->
-    <string name="gadget_location">Location</string>
-    <!-- Spoken description for the data synchronization gadget. -->
-    <string name="gadget_sync">Sync</string>
-    <!-- Template for brightness gadget toggle button description. -->
-    <string name="gadget_brightness_template">Brightness <xliff:g name="state" example="half">%1$s</xliff:g></string>
-    <!-- Brightness gadget value used to describe automatic brightness state. -->
-    <string name="gadget_brightness_state_auto">auto</string>
-    <!-- Brightness gadget value used to describe maximum brightness state. -->
-    <string name="gadget_brightness_state_full">full</string>
-    <!-- Brightness gadget value used to describe half brightness state. -->
-    <string name="gadget_brightness_state_half">half</string>
-    <!-- Brightness gadget value used to describe minimum brightness state. -->
-    <string name="gadget_brightness_state_off">off</string>
-
     <!-- Title of preference to enter the VPN settings activity -->
     <string name="vpn_settings_title">VPN</string>
 
@@ -5953,8 +5936,8 @@
 
     <!-- Activity title for network data usage summary. [CHAR LIMIT=25] -->
     <string name="data_usage_summary_title">Data usage</string>
-    <!-- Activity title for Appk data usage summary. [CHAR LIMIT=25] -->
-    <string name="data_usage_app_summary_title">App data usage</string>
+    <!-- Activity title Mobile data & WI-FI summary. [CHAR LIMIT=40] -->
+    <string name="data_usage_app_summary_title">Mobile data &amp; Wi\u2011Fi</string>
     <!-- Message about carrier data accounting.  [CHAR LIMIT=100] -->
     <string name="data_usage_accounting">Carrier data accounting may differ from your device.</string>
     <!-- Title for app usage. [CHAR LIMIT=40] -->
@@ -6644,6 +6627,8 @@
     <string name="help_url_nfc_payment" translatable="false"></string>
     <!-- Help URL, Remote display [DO NOT TRANSLATE] -->
     <string name="help_url_remote_display" translatable="false"></string>
+    <!-- Help URL, Face [DO NOT TRANSLATE] -->
+    <string name="help_url_face" translatable="false"></string>
     <!-- Help URL, Fingerprint [DO NOT TRANSLATE] -->
     <string name="help_url_fingerprint" translatable="false"></string>
     <!-- Help URL, Gesture settings -->
@@ -6905,6 +6890,8 @@
     <string name="app_and_notification_dashboard_title">Apps &amp; notifications</string>
     <!-- Summary for Apps & Notification settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="app_and_notification_dashboard_summary">Permissions, default apps</string>
+    <!-- Toast shown when an app in the work profile attempts to open notification settings. The apps in the work profile cannot access notification settings. [CHAR LIMIT=NONE] -->
+    <string name="notification_settings_work_profile">Notification access is not available for apps in the work profile.</string>
     <!-- Title for setting tile leading to account settings [CHAR LIMIT=40]-->
     <string name="account_dashboard_title">Accounts</string>
     <!-- Summary for account settings tiles when there is no accounts on device [CHAR LIMIT=NONE]-->
@@ -6970,6 +6957,7 @@
     <string name="keywords_payment_settings">pay, tap, payments</string>
     <string name="keywords_backup">backup, back up</string>
     <string name="keywords_assist_gesture_launch">gesture</string>
+    <string name="keywords_face_unlock">face, unlock</string>
     <string name="keywords_imei_info">imei, meid, min, prl version, imei sv</string>
     <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
@@ -9412,13 +9400,13 @@
     <string name="notification_log_details_ranking_none">Ranking object doesn\'t contain this key.</string>
 
     <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the setting which turns on emulation of a display cutout. -->
-    <string name="display_cutout_emulation">Simulate a display with a cutout</string>
+    <string name="display_cutout_emulation">Display cutout</string>
 
     <!-- [CHAR_LIMIT=NONE] Developer Settings: Search keywords for the setting which turns on emulation of a display cutout. -->
     <string name="display_cutout_emulation_keywords">display cutout, notch</string>
 
-    <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off display cutout emulation. -->
-    <string name="display_cutout_emulation_none">None</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off display cutout emulation, (i.e. on devices whose screen actually has a cutout, selecting this option will show that cutout).-->
+    <string name="display_cutout_emulation_device_default">Device default</string>
 
     <!-- [CHAR_LIMIT=60] Label for special access screen -->
     <string name="special_access">Special app access</string>
@@ -9588,7 +9576,7 @@
     <string name="ambient_display_title" product="device">Double-tap to check device</string>
 
     <!-- Summary text for ambient display double tap [CHAR LIMIT=NONE]-->
-    <string name="ambient_display_summary">To check time, notification icons, and other info, double-tap your screen.</string>
+    <string name="ambient_display_summary">To check time, notifications, and other info, double-tap your screen.</string>
 
     <!-- Preference and settings suggestion title text for ambient display pick up (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_pickup_title" product="default">Lift to check phone</string>
@@ -9598,11 +9586,25 @@
     <string name="ambient_display_pickup_title" product="device">Lift to check device</string>
 
     <!-- Summary text for ambient display (phone) [CHAR LIMIT=NONE]-->
-    <string name="ambient_display_pickup_summary" product="default">To check time, notification icons, and other info, pick up your phone.</string>
+    <string name="ambient_display_pickup_summary" product="default">To check time, notifications, and other info, pick up your phone.</string>
     <!-- Summary text for ambient display (tablet) [CHAR LIMIT=NONE]-->
-    <string name="ambient_display_pickup_summary" product="tablet">To check time, notification icons, and other info, pick up your tablet.</string>
+    <string name="ambient_display_pickup_summary" product="tablet">To check time, notifications, and other info, pick up your tablet.</string>
     <!-- Summary text for ambient display (device) [CHAR LIMIT=NONE]-->
-    <string name="ambient_display_pickup_summary" product="device">To check time, notification icons, and other info, pick up your device.</string>
+    <string name="ambient_display_pickup_summary" product="device">To check time, notifications, and other info, pick up your device.</string>
+
+    <!-- Preference and settings suggestion title text for reach gesture (phone) [CHAR LIMIT=60]-->
+    <string name="ambient_display_reach_title" product="default">Reach to check phone</string>
+    <!-- Preference and settings suggestion title text for reach gesture (tablet) [CHAR LIMIT=60]-->
+    <string name="ambient_display_reach_title" product="tablet">Reach to check tablet</string>
+    <!-- Preference and settings suggestion title text for reach gesture (device) [CHAR LIMIT=60]-->
+    <string name="ambient_display_reach_title" product="device">Reach to check device</string>
+
+    <!-- Summary text for ambient display (phone) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_reach_summary" product="default">To check time, notifications, and other info, reach for your phone.</string>
+    <!-- Summary text for ambient display (tablet) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_reach_summary" product="tablet">To check time, notifications, and other info, reach for your tablet.</string>
+    <!-- Summary text for ambient display (device) [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_reach_summary" product="device">To check time, notifications, and other info, reach for your device.</string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
@@ -9866,6 +9868,24 @@
         your screen to determine what can be autofilled.
         ]]>
     </string>
+
+    <!-- Preference category for autofill debugging development settings. [CHAR LIMIT=25] -->
+    <string name="debug_autofill_category">Autofill</string>
+
+    <!-- UI debug setting: logging level for Android Autofill [CHAR LIMIT=25] -->
+    <string name="autofill_logging_level_title">Logging level</string>
+
+    <!-- Title of developer options to set the maximum number of requests per session [CHAR LIMIT=60]-->
+    <string name="autofill_max_partitions">Max requests per session</string>
+
+    <!-- Title of developer options to set the maximum number of visible datasets in the autofill UX [CHAR LIMIT=60]-->
+    <string name="autofill_max_visible_datasets">Max visible datasets</string>
+
+    <!-- Reset all autofill developer options to their default values.[CHAR_LIMIT=60] -->
+    <string name="autofill_reset_developer_options">Reset to default values</string>
+
+    <!-- Toast message shown when autofill_reset_developer_options has been performed. [CHAR_LIMIT=none] -->
+    <string name="autofill_reset_developer_options_complete">Autofill developer options have been reset</string>
 
     <!-- Name of setting for switching device theme [CHAR LIMIT=60] -->
     <string name="device_theme">Device theme</string>

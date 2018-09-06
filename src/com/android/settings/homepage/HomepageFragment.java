@@ -16,7 +16,6 @@
 
 package com.android.settings.homepage;
 
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -25,6 +24,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -35,24 +38,34 @@ import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.SearchFeatureProvider;
 
-import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import androidx.annotation.NonNull;
 
 public class HomepageFragment extends InstrumentedFragment {
 
     private static final String TAG = "HomepageFragment";
+    private static final String SAVE_BOTTOMBAR_STATE = "bottombar_state";
+    private static final String SAVE_BOTTOM_FRAGMENT_LOADED = "bottom_fragment_loaded";
+
+    private RecyclerView mCardsContainer;
+    private LinearLayoutManager mLayoutManager;
 
     private FloatingActionButton mSearchButton;
     private BottomSheetBehavior mBottomSheetBehavior;
-    private boolean mBottomFragmentLoaded = false;
+    private View mBottomBar;
+    private View mSearchBar;
+    private boolean mBottomFragmentLoaded;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.dashboard, container, false);
+        final View rootView = inflater.inflate(R.layout.settings_homepage,
+                container, false);
+        mCardsContainer = (RecyclerView) rootView.findViewById(R.id.card_container);
+        //TODO(b/111822407): May have to swap to GridLayoutManager
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mCardsContainer.setLayoutManager(mLayoutManager);
+
         return rootView;
     }
 
@@ -61,6 +74,22 @@ public class HomepageFragment extends InstrumentedFragment {
         super.onActivityCreated(savedInstanceState);
         setupBottomBar();
         setupSearchBar();
+        if (savedInstanceState != null) {
+            final int bottombarState = savedInstanceState.getInt(SAVE_BOTTOMBAR_STATE);
+            mBottomFragmentLoaded = savedInstanceState.getBoolean(SAVE_BOTTOM_FRAGMENT_LOADED);
+            mBottomSheetBehavior.setState(bottombarState);
+            setBarState(bottombarState);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (mBottomSheetBehavior != null) {
+            outState.putInt(SAVE_BOTTOMBAR_STATE, mBottomSheetBehavior.getState());
+            outState.putBoolean(SAVE_BOTTOM_FRAGMENT_LOADED, mBottomFragmentLoaded);
+        }
     }
 
     @Override
@@ -70,8 +99,8 @@ public class HomepageFragment extends InstrumentedFragment {
 
     private void setupBottomBar() {
         final Activity activity = getActivity();
-        mSearchButton = (FloatingActionButton) activity.findViewById(R.id.search_fab);
 
+        mSearchButton = activity.findViewById(R.id.search_fab);
         mSearchButton.setOnClickListener(v -> {
             final Intent intent = SearchFeatureProvider.SEARCH_UI_INTENT;
             intent.setPackage(FeatureFactory.getFactory(activity)
@@ -79,47 +108,52 @@ public class HomepageFragment extends InstrumentedFragment {
             startActivityForResult(intent, 0 /* requestCode */);
         });
         mBottomSheetBehavior = BottomSheetBehavior.from(activity.findViewById(R.id.bottom_sheet));
-        final BottomAppBar bottomBar = (BottomAppBar) activity.findViewById(R.id.bar);
-        bottomBar.setOnClickListener(v -> {
+        mSearchBar = activity.findViewById(R.id.search_bar_container);
+        mBottomBar = activity.findViewById(R.id.bar);
+        mBottomBar.setOnClickListener(v -> {
             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         });
 
         final int screenWidthpx = getResources().getDisplayMetrics().widthPixels;
-        final View searchbar = activity.findViewById(R.id.search_bar_container);
-        final View bottombar = activity.findViewById(R.id.bar);
-
+        final Toolbar searchActionBar = activity.findViewById(R.id.search_action_bar);
+        searchActionBar.setNavigationIcon(R.drawable.ic_search_floating_24dp);
 
         mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (!mBottomFragmentLoaded) {
+                    // TODO(b/110405144): Switch to {@link TopLevelSettings} when it's ready.
                     SettingsHomepageActivity.switchToFragment(getActivity(),
                             R.id.bottom_sheet_fragment, DashboardSummary.class.getName());
                     mBottomFragmentLoaded = true;
                 }
-                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    bottombar.setVisibility(View.INVISIBLE);
-                    searchbar.setVisibility(View.VISIBLE);
-                    mSearchButton.setVisibility(View.GONE);
-                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    bottombar.setVisibility(View.VISIBLE);
-                    searchbar.setVisibility(View.INVISIBLE);
-                    mSearchButton.setVisibility(View.VISIBLE);
-                } else if (newState == BottomSheetBehavior.STATE_SETTLING) {
-                    bottombar.setVisibility(View.VISIBLE);
-                    searchbar.setVisibility(View.VISIBLE);
-                    mSearchButton.setVisibility(View.VISIBLE);
-                }
+                setBarState(newState);
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                bottombar.setAlpha(1 - slideOffset);
+                mBottomBar.setAlpha(1 - slideOffset);
                 mSearchButton.setAlpha(1 - slideOffset);
-                searchbar.setAlpha(slideOffset);
-                searchbar.setPadding((int) (screenWidthpx * (1 - slideOffset)), 0, 0, 0);
+                mSearchBar.setAlpha(slideOffset);
+                mSearchBar.setPadding((int) (screenWidthpx * (1 - slideOffset)), 0, 0, 0);
             }
         });
+    }
+
+    private void setBarState(int bottomSheetState) {
+        if (bottomSheetState == BottomSheetBehavior.STATE_EXPANDED) {
+            mBottomBar.setVisibility(View.INVISIBLE);
+            mSearchBar.setVisibility(View.VISIBLE);
+            mSearchButton.setVisibility(View.GONE);
+        } else if (bottomSheetState == BottomSheetBehavior.STATE_COLLAPSED) {
+            mBottomBar.setVisibility(View.VISIBLE);
+            mSearchBar.setVisibility(View.INVISIBLE);
+            mSearchButton.setVisibility(View.VISIBLE);
+        } else if (bottomSheetState == BottomSheetBehavior.STATE_SETTLING) {
+            mBottomBar.setVisibility(View.VISIBLE);
+            mSearchBar.setVisibility(View.VISIBLE);
+            mSearchButton.setVisibility(View.VISIBLE);
+        }
     }
 
     //TODO(110767984), copied from settingsActivity. We have to merge them

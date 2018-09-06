@@ -18,7 +18,6 @@ package com.android.settings.biometrics.fingerprint;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -46,6 +45,8 @@ import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricErrorDialog;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Activity which handles the actual enrolling for fingerprint.
@@ -244,7 +245,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     @Override
-    public void onEnrollmentHelp(CharSequence helpString) {
+    public void onEnrollmentHelp(int helpMsgId, CharSequence helpString) {
         if (!TextUtils.isEmpty(helpString)) {
             mErrorText.removeCallbacks(mTouchAgainRunnable);
             showError(helpString);

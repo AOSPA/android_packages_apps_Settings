@@ -27,11 +27,10 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 
-import com.android.settings.dashboard.conditional.ConditionManager;
-import com.android.settings.dashboard.conditional.FocusRecyclerView;
+import com.android.settings.homepage.conditional.ConditionManager;
+import com.android.settings.homepage.conditional.FocusRecyclerView;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;

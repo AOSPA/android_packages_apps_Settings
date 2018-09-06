@@ -61,7 +61,8 @@
         android:order="5"
         android:title="@string/legal_information"
         android:fragment="com.android.settings.LegalSettings"
-        settings:allowDividerAbove="true"/>
+        settings:allowDividerAbove="true"
+        settings:searchable="false"/>
 
     <!-- Regulatory labels -->
     <Preference
@@ -132,6 +133,14 @@
         android:title="@string/status_bt_address"
         android:summary="@string/summary_placeholder"
         android:selectable="false"/>
+
+    <!-- Device up time -->
+    <Preference
+        android:key="up_time"
+        android:order="37"
+        android:title="@string/status_up_time"
+        android:summary="@string/summary_placeholder"
+        android:selectable="false" />
 
     <!-- Safety & regulatory manual -->
     <Preference

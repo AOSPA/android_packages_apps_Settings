@@ -15,20 +15,27 @@
  */
 package com.android.settings.accounts;
 
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITLE;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
@@ -44,8 +51,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.util.ReflectionHelpers;
 
-import androidx.preference.Preference;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AccountDetailDashboardFragmentTest {
 
@@ -55,10 +60,15 @@ public class AccountDetailDashboardFragmentTest {
 
     private AccountDetailDashboardFragment mFragment;
     private Context mContext;
+    private ActivityInfo mActivityInfo;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mActivityInfo = new ActivityInfo();
+        mActivityInfo.packageName = mContext.getPackageName();
+        mActivityInfo.name = "clazz";
+        mActivityInfo.metaData = new Bundle();
 
         final Bundle args = new Bundle();
         args.putParcelable(METADATA_USER_HANDLE, UserHandle.CURRENT);
@@ -72,37 +82,31 @@ public class AccountDetailDashboardFragmentTest {
     @Test
     public void testCategory_isAccountDetail() {
         assertThat(new AccountDetailDashboardFragment().getCategoryKey())
-            .isEqualTo(CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+                .isEqualTo(CategoryKey.CATEGORY_ACCOUNT_DETAIL);
     }
 
     @Test
     public void refreshDashboardTiles_HasAccountType_shouldDisplay() {
-        final Tile tile = new Tile();
-        final Bundle metaData = new Bundle();
-        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
-        metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
-        tile.metaData = metaData;
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
 
         assertThat(mFragment.displayTile(tile)).isTrue();
     }
 
     @Test
     public void refreshDashboardTiles_NoAccountType_shouldNotDisplay() {
-        final Tile tile = new Tile();
-        final Bundle metaData = new Bundle();
-        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
-        tile.metaData = metaData;
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
 
         assertThat(mFragment.displayTile(tile)).isFalse();
     }
 
     @Test
     public void refreshDashboardTiles_OtherAccountType_shouldNotDisplay() {
-        final Tile tile = new Tile();
-        final Bundle metaData = new Bundle();
-        metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
-        metaData.putString(METADATA_ACCOUNT_TYPE, "com.other");
-        tile.metaData = metaData;
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.other");
 
         assertThat(mFragment.displayTile(tile)).isFalse();
     }
@@ -114,24 +118,25 @@ public class AccountDetailDashboardFragmentTest {
         final PackageManager packageManager = mock(PackageManager.class);
         ReflectionHelpers.setField(dashboardFeatureProvider, "mPackageManager", packageManager);
         when(packageManager.resolveActivity(any(Intent.class), anyInt()))
-            .thenReturn(mock(ResolveInfo.class));
+                .thenReturn(mock(ResolveInfo.class));
 
-        final Tile tile = new Tile();
-        tile.key = "key";
-        tile.metaData = new Bundle();
-        tile.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
-        tile.metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
-        tile.metaData.putString("com.android.settings.intent.action", Intent.ACTION_ASSIST);
-        tile.intent = new Intent();
+        final Tile tile = new Tile(mActivityInfo, CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
+        mActivityInfo.metaData.putString(METADATA_CATEGORY, CategoryKey.CATEGORY_ACCOUNT);
+        mActivityInfo.metaData.putString(METADATA_ACCOUNT_TYPE, "com.abc");
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_TITLE, "summary");
+        mActivityInfo.metaData.putString("com.android.settings.intent.action",
+                Intent.ACTION_ASSIST);
         tile.userHandle = null;
         mFragment.displayTile(tile);
 
-        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         final Preference preference = new Preference(mContext);
-        dashboardFeatureProvider.bindPreferenceToTile(activity,
-                MetricsProto.MetricsEvent.DASHBOARD_SUMMARY, preference, tile, "key",
+        dashboardFeatureProvider.bindPreferenceToTile(activity, false /* forceRoundedIcon */,
+                MetricsProto.MetricsEvent.DASHBOARD_SUMMARY, preference, tile, null /* key */,
                 Preference.DEFAULT_ORDER);
 
+        assertThat(preference.getKey()).isEqualTo(tile.getKey(mContext));
         preference.performClick();
 
         final Intent intent = Shadows.shadowOf(activity).getNextStartedActivityForResult().intent;

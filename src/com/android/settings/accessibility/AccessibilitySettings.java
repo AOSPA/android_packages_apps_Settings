@@ -110,14 +110,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "select_long_press_timeout_preference";
     private static final String ACCESSIBILITY_SHORTCUT_PREFERENCE =
             "accessibility_shortcut_preference";
+    private static final String HEARING_AID_PREFERENCE =
+            "hearing_aid_preference";
     private static final String CAPTIONING_PREFERENCE_SCREEN =
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
             "magnification_preference_screen";
     private static final String FONT_SIZE_PREFERENCE_SCREEN =
             "font_size_preference_screen";
-    private static final String TTS_SETTINGS_PREFERENCE =
-            "tts_settings_preference";
     private static final String AUTOCLICK_PREFERENCE_SCREEN =
             "autoclick_preference";
     private static final String VIBRATION_PREFERENCE_SCREEN =
@@ -221,9 +221,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private Preference mAutoclickPreferenceScreen;
     private Preference mAccessibilityShortcutPreferenceScreen;
     private Preference mDisplayDaltonizerPreferenceScreen;
+    private Preference mHearingAidPreference;
     private Preference mVibrationPreferenceScreen;
     private SwitchPreference mToggleInversionPreference;
     private ColorInversionPreferenceController mInversionPreferenceController;
+    private AccessibilityHearingAidPreferenceController mHearingAidPreferenceController;
 
     private int mLongPressTimeoutDefault;
 
@@ -273,6 +275,15 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         initializeAllPreferences();
         mDpm = (DevicePolicyManager) (getActivity()
                 .getSystemService(Context.DEVICE_POLICY_SERVICE));
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mHearingAidPreferenceController = new AccessibilityHearingAidPreferenceController
+                (context, HEARING_AID_PREFERENCE);
+        mHearingAidPreferenceController.setFragmentManager(getFragmentManager());
+        getLifecycle().addObserver(mHearingAidPreferenceController);
     }
 
     @Override
@@ -334,6 +345,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             return true;
         } else if (mToggleMasterMonoPreference == preference) {
             handleToggleMasterMonoPreferenceClick();
+            return true;
+        } else if (mHearingAidPreferenceController.handlePreferenceTreeClick(preference)) {
             return true;
         }
         return super.onPreferenceTreeClick(preference);
@@ -451,6 +464,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 mLongPressTimeoutValueToTitleMap.put(timeoutValues[i], timeoutTitles[i]);
             }
         }
+
+        // Hearing Aid.
+        mHearingAidPreference = findPreference(HEARING_AID_PREFERENCE);
+        mHearingAidPreferenceController.displayPreference(getPreferenceScreen());
 
         // Captioning.
         mCaptioningPreferenceScreen = findPreference(CAPTIONING_PREFERENCE_SCREEN);
@@ -633,8 +650,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     mCategoryToPrefCategoryMap.get(CATEGORY_DISPLAY);
             experimentalCategory.removePreference(mToggleInversionPreference);
             experimentalCategory.removePreference(mDisplayDaltonizerPreferenceScreen);
-            mToggleInversionPreference.setOrder(mToggleLargePointerIconPreference.getOrder());
-            mDisplayDaltonizerPreferenceScreen.setOrder(mToggleInversionPreference.getOrder());
+            mDisplayDaltonizerPreferenceScreen.setOrder(
+                    mDisplayMagnificationPreferenceScreen.getOrder() + 1);
+            mToggleInversionPreference.setOrder(
+                    mDisplayDaltonizerPreferenceScreen.getOrder() + 1);
+            mToggleLargePointerIconPreference.setOrder(
+                    mToggleInversionPreference.getOrder() + 1);
+            mToggleDisableAnimationsPreference.setOrder(
+                    mToggleLargePointerIconPreference.getOrder() + 1);
             mToggleInversionPreference.setSummary(R.string.summary_empty);
             displayCategory.addPreference(mToggleInversionPreference);
             displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
@@ -679,6 +702,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mSelectLongPressTimeoutPreference.setSummary(mLongPressTimeoutValueToTitleMap.get(value));
 
         updateVibrationSummary(mVibrationPreferenceScreen);
+
+        mHearingAidPreferenceController.updateState(mHearingAidPreference);
 
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED,
                 mCaptioningPreferenceScreen);
@@ -860,8 +885,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
 
-                public static final String KEY_DISPLAY_SIZE = "accessibility_settings_screen_zoom";
-
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
@@ -870,22 +893,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     indexable.xmlResId = R.xml.accessibility_settings;
                     indexables.add(indexable);
                     return indexables;
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    // Duplicates in Display
-                    keys.add(FONT_SIZE_PREFERENCE_SCREEN);
-                    keys.add(KEY_DISPLAY_SIZE);
-
-                    // Duplicates in Language & Input
-                    keys.add(TTS_SETTINGS_PREFERENCE);
-
-                    // Duplicates in child page
-                    keys.add(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
-                    keys.add(AUTOCLICK_PREFERENCE_SCREEN);
-                    return keys;
                 }
             };
 }

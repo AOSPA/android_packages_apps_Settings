@@ -27,6 +27,9 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.CheckBoxPreference;
 import android.util.Log;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -50,9 +53,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 
 /**
  * System location settings (Settings &gt; Location). The screen has three parts:
@@ -190,13 +190,6 @@ public class LocationSettings extends DashboardFragment {
                         context) {
                     return buildPreferenceControllers(context, null /* fragment */,
                             null /* lifecycle */);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> niks = super.getNonIndexableKeys(context);
-                    niks.add("recent_location_requests_see_all_button"); // 'See all' button
-                    return niks;
                 }
             };
 

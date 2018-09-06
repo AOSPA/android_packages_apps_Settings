@@ -20,7 +20,6 @@ package com.android.settings.password;
 import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.ActivityOptions;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.IActivityManager;
 import android.app.KeyguardManager;
@@ -53,6 +52,7 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.fingerprint.FingerprintUiHelper;
 import com.android.settings.core.InstrumentedFragment;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -125,8 +125,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         mCancelButton = (Button) view.findViewById(R.id.cancelButton);
         mFingerprintIcon = (ImageView) view.findViewById(R.id.fingerprintIcon);
         mFingerprintHelper = new FingerprintUiHelper(
-                mFingerprintIcon,
-                (TextView) view.findViewById(R.id.errorText), this, mEffectiveUserId);
+                mFingerprintIcon, view.findViewById(R.id.errorText), this, mUserId);
         boolean showCancelButton = getActivity().getIntent().getBooleanExtra(
                 SHOW_CANCEL_BUTTON, false);
         boolean hasAlternateButton = mFrp && !TextUtils.isEmpty(mFrpAlternateButtonText);

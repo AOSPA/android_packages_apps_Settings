@@ -17,21 +17,25 @@
 package com.android.settings.fuelgauge;
 
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
+import static com.android.settings.fuelgauge.TopLevelBatteryPreferenceController.getDashboardLabel;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import android.text.BidiFormatter;
 import android.text.format.Formatter;
-import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.TextView;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.Loader;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -40,26 +44,17 @@ import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.display.BatteryPercentagePreferenceController;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.app.LoaderManager.LoaderCallbacks;
-import androidx.loader.content.Loader;
 
 /**
  * Displays a list of apps and subsystems that consume power, ordered by how much power was
@@ -73,7 +68,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     private static final boolean DEBUG = false;
     private static final String KEY_BATTERY_HEADER = "battery_header";
-    private static final String KEY_BATTERY_TIP = "battery_tip";
 
     private static final String KEY_SCREEN_USAGE = "screen_usage";
     private static final String KEY_TIME_SINCE_LAST_FULL_CHARGE = "last_full_charge";
@@ -152,9 +146,9 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     protected void updateViews(List<BatteryInfo> batteryInfos) {
         final BatteryMeterView batteryView = mBatteryLayoutPref
-            .findViewById(R.id.battery_header_icon);
+                .findViewById(R.id.battery_header_icon);
         final TextView percentRemaining =
-            mBatteryLayoutPref.findViewById(R.id.battery_percent);
+                mBatteryLayoutPref.findViewById(R.id.battery_percent);
         final TextView summary1 = mBatteryLayoutPref.findViewById(R.id.summary1);
         final TextView summary2 = mBatteryLayoutPref.findViewById(R.id.summary2);
         BatteryInfo oldInfo = batteryInfos.get(0);
@@ -165,13 +159,13 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         // can sometimes say 0 time remaining because battery stats requires the phone
         // be unplugged for a period of time before being willing ot make an estimate.
         summary1.setText(mPowerFeatureProvider.getOldEstimateDebugString(
-            Formatter.formatShortElapsedTime(getContext(),
-                PowerUtil.convertUsToMs(oldInfo.remainingTimeUs))));
+                Formatter.formatShortElapsedTime(getContext(),
+                        PowerUtil.convertUsToMs(oldInfo.remainingTimeUs))));
 
         // for this one we can just set the string directly
         summary2.setText(mPowerFeatureProvider.getEnhancedEstimateDebugString(
-            Formatter.formatShortElapsedTime(getContext(),
-                PowerUtil.convertUsToMs(newInfo.remainingTimeUs))));
+                Formatter.formatShortElapsedTime(getContext(),
+                        PowerUtil.convertUsToMs(newInfo.remainingTimeUs))));
 
         batteryView.setBatteryLevel(oldInfo.batteryLevel);
         batteryView.setCharging(!oldInfo.discharging);
@@ -196,6 +190,22 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
                 }
             };
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+
+        mBatteryHeaderPreferenceController = use(BatteryHeaderPreferenceController.class);
+        mBatteryHeaderPreferenceController.setActivity(activity);
+        mBatteryHeaderPreferenceController.setFragment(this);
+        mBatteryHeaderPreferenceController.setLifecycle(getSettingsLifecycle());
+
+        mBatteryTipPreferenceController = use(BatteryTipPreferenceController.class);
+        mBatteryTipPreferenceController.setActivity(activity);
+        mBatteryTipPreferenceController.setFragment(this);
+        mBatteryTipPreferenceController.setBatteryTipListener(this::onBatteryTipHandled);
+    }
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -229,22 +239,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.power_usage_summary;
-    }
-
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final Lifecycle lifecycle = getSettingsLifecycle();
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(
-                context, activity, this /* host */, lifecycle);
-        controllers.add(mBatteryHeaderPreferenceController);
-        mBatteryTipPreferenceController = new BatteryTipPreferenceController(context,
-                KEY_BATTERY_TIP, (SettingsActivity) getActivity(), this /* fragment */, this /*
-                BatteryTipListener */);
-        controllers.add(mBatteryTipPreferenceController);
-        controllers.add(new BatteryPercentagePreferenceController(context));
-        return controllers;
     }
 
     @Override
@@ -424,19 +418,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         }
     }
 
-    @VisibleForTesting
-    static CharSequence getDashboardLabel(Context context, BatteryInfo info) {
-        CharSequence label;
-        final BidiFormatter formatter = BidiFormatter.getInstance();
-        if (info.remainingLabel == null) {
-            label = info.batteryPercentString;
-        } else {
-            label = context.getString(R.string.power_remaining_settings_home_page,
-                    formatter.unicodeWrap(info.batteryPercentString),
-                    formatter.unicodeWrap(info.remainingLabel));
-        }
-        return label;
-    }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
@@ -446,13 +427,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.power_usage_summary;
                     return Collections.singletonList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> niks = super.getNonIndexableKeys(context);
-                    niks.add(KEY_BATTERY_SAVER_SUMMARY);
-                    return niks;
                 }
             };
 

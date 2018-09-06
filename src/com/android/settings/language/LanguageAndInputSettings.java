@@ -23,14 +23,15 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.speech.tts.TtsEngines;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.inputmethod.PhysicalKeyboardPreferenceController;
@@ -46,9 +47,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 @SearchIndexable
 public class LanguageAndInputSettings extends DashboardFragment {
 
@@ -57,7 +55,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
     private static final String KEY_KEYBOARDS_CATEGORY = "keyboards_category";
     private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
     private static final String KEY_POINTER_AND_TTS_CATEGORY = "pointer_and_tts_category";
-    private static final String KEY_PHYSICAL_KEYBOARD = "physical_keyboard_pref";
 
     @Override
     public int getMetricsCategory() {
@@ -112,7 +109,7 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
         // Pointer and Tts
         final TtsPreferenceController ttsPreferenceController =
-                new TtsPreferenceController(context, new TtsEngines(context));
+                new TtsPreferenceController(context, KEY_TEXT_TO_SPEECH);
         controllers.add(ttsPreferenceController);
         final PointerSpeedController pointerController = new PointerSpeedController(context);
         controllers.add(pointerController);
@@ -122,7 +119,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
         // Input Assistance
         controllers.add(new SpellCheckerPreferenceController(context));
-        controllers.add(new DefaultAutofillPreferenceController(context));
 
         return controllers;
     }
@@ -179,15 +175,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    // Duplicates in summary and details pages.
-                    keys.add(KEY_TEXT_TO_SPEECH);
-                    keys.add(KEY_PHYSICAL_KEYBOARD);
-                    return keys;
                 }
             };
 }

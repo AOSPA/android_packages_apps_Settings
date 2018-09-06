@@ -85,8 +85,9 @@ public class SliceBroadcastReceiverTest {
         mSearchFeatureProvider = new SearchFeatureProviderImpl();
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.searchFeatureProvider = mSearchFeatureProvider;
+        CustomSliceManager manager = new CustomSliceManager(mContext);
         when(mFakeFeatureFactory.slicesFeatureProvider.getCustomSliceManager(any()))
-                .thenReturn(new CustomSliceManager(mContext));
+                .thenReturn(manager);
         mLoggingNameArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
         mLoggingValueArgumentCatpor = ArgumentCaptor.forClass(Pair.class);
     }
@@ -168,6 +169,7 @@ public class SliceBroadcastReceiverTest {
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                 .appendPath(key)
                 .build();
+
         verify(resolver).notifyChange(expectedUri, null);
     }
 
