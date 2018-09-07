@@ -123,6 +123,7 @@ public class SecuritySettings extends DashboardFragment {
         controllers.add(new EncryptionStatusPreferenceController(context,
                 PREF_KEY_ENCRYPTION_SECURITY_PAGE));
         controllers.add(new TrustAgentListPreferenceController(context, host, lifecycle));
+        controllers.add(new FaceAutoUnlockPreferenceController(context));
 
         final List<AbstractPreferenceController> securityPreferenceControllers = new ArrayList<>();
         securityPreferenceControllers.add(new FingerprintStatusPreferenceController(context));
