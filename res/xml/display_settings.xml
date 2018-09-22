@@ -81,19 +81,6 @@
         android:fragment="com.android.settings.display.ColorModePreferenceFragment"
         settings:keywords="@string/keywords_color_mode" />
 
-    <Preference
-        android:key="font_size"
-        android:title="@string/title_font_size"
-        android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
-        settings:controller="com.android.settings.display.FontSizePreferenceController"
-        settings:keywords="@string/keywords_display_font_size" />
-
-    <com.android.settings.display.ScreenZoomPreference
-        android:key="display_settings_screen_zoom"
-        android:title="@string/screen_zoom_title"
-        android:fragment="com.android.settings.display.ScreenZoomSettings"
-        settings:keywords="@string/screen_zoom_keywords" />
-
     <SwitchPreference
         android:key="show_operator_name"
         android:title="@string/show_operator_name_title"
@@ -144,5 +131,28 @@
         android:key="vr_display_pref"
         android:title="@string/display_vr_pref_title"
         android:fragment="com.android.settings.display.VrDisplayPreferencePicker" />
+
+    <PreferenceCategory
+        android:key="density_category"
+        android:title="@string/density_category">
+
+        <Preference
+            android:key="font_size"
+            android:title="@string/title_font_size"
+            android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
+            settings:controller="com.android.settings.display.FontSizePreferenceController"
+            settings:keywords="@string/keywords_display_font_size" />
+
+        <com.android.settings.display.ScreenZoomPreference
+            android:key="display_settings_screen_zoom"
+            android:title="@string/screen_zoom_title"
+            android:fragment="com.android.settings.display.ScreenZoomSettings"
+            settings:keywords="@string/screen_zoom_keywords" />
+
+        <com.android.settings.display.DensityPreference
+            android:key="density"
+            android:title="@string/developer_smallest_width" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
