@@ -23,6 +23,9 @@ import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.text.TextUtils;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -33,11 +36,9 @@ import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class ChangeScreenLockPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, GearPreference.OnGearClickListener {
@@ -170,7 +171,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
      * DO or PO installed in the user may disallow to change password.
      */
     void disableIfPasswordQualityManaged(int userId) {
-        final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtils
+        final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtilsInternal
                 .checkIfPasswordQualityIsSet(mContext, userId);
         final DevicePolicyManager dpm = (DevicePolicyManager) mContext
                 .getSystemService(Context.DEVICE_POLICY_SERVICE);

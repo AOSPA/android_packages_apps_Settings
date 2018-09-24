@@ -22,11 +22,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.wifi.AccessPoint;
-
-import androidx.appcompat.app.AlertDialog;
 
 public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
         DialogInterface.OnClickListener {
@@ -117,7 +118,7 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
                 case BUTTON_FORGET:
                     if (WifiUtils.isNetworkLockedDown(getContext(), mAccessPoint.getConfig())) {
                         RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
-                                RestrictedLockUtils.getDeviceOwner(getContext()));
+                                RestrictedLockUtilsInternal.getDeviceOwner(getContext()));
                         return;
                     }
                     mListener.onForget(this);

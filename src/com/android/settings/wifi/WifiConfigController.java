@@ -62,6 +62,9 @@ import android.widget.TextView;
 
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
 import com.android.settingslib.Utils;
@@ -76,8 +79,6 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * The class for allowing UIs like {@link WifiDialog} and {@link WifiConfigUiBase} to
@@ -493,8 +494,7 @@ public class WifiConfigController implements TextWatcher,
         } else {
             enabled = ipAndProxyFieldsAreValid();
         }
-        if (mEapCaCertSpinner != null
-                && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE) {
+        if (mAccessPointSecurity == AccessPoint.SECURITY_EAP) {
             String caCertSelection = (String) mEapCaCertSpinner.getSelectedItem();
             if (caCertSelection.equals(mUnspecifiedCertString)) {
                 // Disallow submit if the user has not selected a CA certificate for an EAP network
@@ -510,10 +510,8 @@ public class WifiConfigController implements TextWatcher,
                 enabled = false;
             }
         }
-        if (mEapUserCertSpinner != null
-                && mView.findViewById(R.id.l_user_cert).getVisibility() != View.GONE
-                && ((String) mEapUserCertSpinner.getSelectedItem())
-                       .equals(mUnspecifiedCertString)) {
+        if (mAccessPointSecurity == AccessPoint.SECURITY_EAP
+                && mEapUserCertSpinner.getSelectedItem().equals(mUnspecifiedCertString)) {
             // Disallow submit if the user has not selected a user certificate for an EAP network
             // configuration.
             enabled = false;

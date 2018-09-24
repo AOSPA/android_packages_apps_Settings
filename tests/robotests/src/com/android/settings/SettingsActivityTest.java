@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -30,6 +31,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings.Global;
 import android.view.View;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -43,10 +49,6 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class SettingsActivityTest {
@@ -71,10 +73,11 @@ public class SettingsActivityTest {
         Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
         final Intent intent = new Intent(mContext, Settings.class);
         final SettingsActivity activity =
-            Robolectric.buildActivity(SettingsActivity.class, intent).create(Bundle.EMPTY).get();
+                Robolectric.buildActivity(SettingsActivity.class, intent).create(
+                        Bundle.EMPTY).get();
 
         assertThat(activity.findViewById(R.id.search_bar).getVisibility())
-            .isEqualTo(View.INVISIBLE);
+                .isEqualTo(View.INVISIBLE);
     }
 
     @Test
@@ -82,7 +85,8 @@ public class SettingsActivityTest {
         Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
         final Intent intent = new Intent(mContext, Settings.class);
         final SettingsActivity activity =
-            Robolectric.buildActivity(SettingsActivity.class, intent).create(Bundle.EMPTY).get();
+                Robolectric.buildActivity(SettingsActivity.class, intent).create(
+                        Bundle.EMPTY).get();
 
         assertThat(activity.findViewById(R.id.search_bar).getVisibility()).isEqualTo(View.VISIBLE);
     }
@@ -90,6 +94,7 @@ public class SettingsActivityTest {
     @Test
     public void launchSettingFragment_nullExtraShowFragment_shouldNotCrash() {
         when(mActivity.getSupportFragmentManager()).thenReturn(mFragmentManager);
+        doReturn(mContext.getContentResolver()).when(mActivity).getContentResolver();
         when(mFragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
 
         doReturn(RuntimeEnvironment.application.getClassLoader()).when(mActivity).getClassLoader();

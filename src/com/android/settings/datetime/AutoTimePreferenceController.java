@@ -19,12 +19,13 @@ package com.android.settings.datetime;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import androidx.preference.Preference;
 
 public class AutoTimePreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
@@ -74,6 +75,6 @@ public class AutoTimePreferenceController extends AbstractPreferenceController
     }
 
     private RestrictedLockUtils.EnforcedAdmin getEnforcedAdminProperty() {
-        return RestrictedLockUtils.checkIfAutoTimeRequired(mContext);
+        return RestrictedLockUtilsInternal.checkIfAutoTimeRequired(mContext);
     }
 }

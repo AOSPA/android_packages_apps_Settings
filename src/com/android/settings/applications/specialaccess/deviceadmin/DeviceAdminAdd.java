@@ -57,6 +57,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.EventLogTags;
 import com.android.settings.R;
@@ -65,6 +67,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.users.UserDialogs;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -72,8 +75,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import androidx.appcompat.app.AlertDialog;
 
 public class DeviceAdminAdd extends Activity {
     static final String TAG = "DeviceAdminAdd";
@@ -645,12 +646,12 @@ public class DeviceAdminAdd extends Activity {
     private EnforcedAdmin getAdminEnforcingCantRemoveProfile() {
         // Removing a managed profile is disallowed if DISALLOW_REMOVE_MANAGED_PROFILE
         // is set in the parent rather than the user itself.
-        return RestrictedLockUtils.checkIfRestrictionEnforced(this,
+        return RestrictedLockUtilsInternal.checkIfRestrictionEnforced(this,
                 UserManager.DISALLOW_REMOVE_MANAGED_PROFILE, getParentUserId());
     }
 
     private boolean hasBaseCantRemoveProfileRestriction() {
-        return RestrictedLockUtils.hasBaseUserRestriction(this,
+        return RestrictedLockUtilsInternal.hasBaseUserRestriction(this,
                 UserManager.DISALLOW_REMOVE_MANAGED_PROFILE, getParentUserId());
     }
 

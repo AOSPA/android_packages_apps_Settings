@@ -13,11 +13,13 @@
  */
 package com.android.settings.datausage;
 
-import static com.android.settingslib.RestrictedLockUtils.checkIfMeteredDataRestricted;
+import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfMeteredDataRestricted;
 
 import android.content.Context;
 import android.os.UserHandle;
 import android.view.View;
+
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
@@ -27,8 +29,6 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreferenceHelper;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-
-import androidx.preference.PreferenceViewHolder;
 
 public class UnrestrictedDataAccessPreference extends AppSwitchPreference implements
         DataSaverBackend.Listener {

@@ -32,20 +32,20 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.security.SecurityFeatureProvider;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 public class TrustAgentsPreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener, LifecycleObserver, OnStart {
@@ -97,8 +97,8 @@ public class TrustAgentsPreferenceController extends BasePreferenceController
         loadActiveAgents();
         removeUselessExistingPreferences();
 
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(mContext,
-                DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS, UserHandle.myUserId());
+        final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
+                mContext, DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS, UserHandle.myUserId());
 
         for (TrustAgentInfo agent : mAvailableAgents.values()) {
             final ComponentName componentName = agent.getComponentName();

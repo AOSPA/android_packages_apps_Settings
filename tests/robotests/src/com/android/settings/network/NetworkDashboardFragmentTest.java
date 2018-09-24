@@ -16,6 +16,7 @@
 package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -78,7 +79,7 @@ public class NetworkDashboardFragmentTest {
         final SummaryLoader.SummaryProvider provider =
                 new NetworkDashboardFragment.SummaryProvider(mContext, summaryLoader,
                         wifiPreferenceController, mobileNetworkPreferenceController,
-                        tetherPreferenceController);
+                        tetherPreferenceController, () -> true);
 
         provider.setListening(false);
 
@@ -106,7 +107,7 @@ public class NetworkDashboardFragmentTest {
         final SummaryLoader.SummaryProvider provider =
                 new NetworkDashboardFragment.SummaryProvider(mContext, summaryLoader,
                         wifiPreferenceController, mobileNetworkPreferenceController,
-                        tetherPreferenceController);
+                        tetherPreferenceController, () -> true);
 
         provider.setListening(false);
 
@@ -120,4 +121,34 @@ public class NetworkDashboardFragmentTest {
 
         verify(summaryLoader).setSummary(provider, "Wi\u2011Fi and data usage");
     }
+
+    @Test
+    public void summaryProviderSetListening_noDataUsageActivity_shouldReturnNoDataUsageSummary() {
+        final WifiMasterSwitchPreferenceController wifiPreferenceController =
+                mock(WifiMasterSwitchPreferenceController.class);
+        final MobileNetworkPreferenceController mobileNetworkPreferenceController =
+                mock(MobileNetworkPreferenceController.class);
+        final TetherPreferenceController tetherPreferenceController =
+                mock(TetherPreferenceController.class);
+
+        final SummaryLoader summaryLoader = mock(SummaryLoader.class);
+        final SummaryLoader.SummaryProvider provider =
+                new NetworkDashboardFragment.SummaryProvider(mContext, summaryLoader,
+                        wifiPreferenceController, mobileNetworkPreferenceController,
+                        tetherPreferenceController, () -> false);
+
+        provider.setListening(false);
+
+        verifyZeroInteractions(summaryLoader);
+
+        when(wifiPreferenceController.isAvailable()).thenReturn(true);
+        when(mobileNetworkPreferenceController.isAvailable()).thenReturn(true);
+        when(tetherPreferenceController.isAvailable()).thenReturn(true);
+
+        provider.setListening(true);
+
+        verify(summaryLoader).setSummary(provider, "Wi\u2011Fi, mobile, and hotspot");
+    }
+
+
 }

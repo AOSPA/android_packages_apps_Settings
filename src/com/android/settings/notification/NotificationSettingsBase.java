@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
+
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Notification;
@@ -40,21 +41,21 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.MasterCheckBoxPreference;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 
 abstract public class NotificationSettingsBase extends DashboardFragment {
     private static final String TAG = "NotifiSettingsBase";
@@ -111,19 +112,22 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
 
         mPkgInfo = findPackageInfo(mPkg, mUid);
 
-        mUserId = UserHandle.getUserId(mUid);
-        mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
-                mContext, mPkg, mUserId);
+        if (mPkgInfo != null) {
+            mUserId = UserHandle.getUserId(mUid);
+            mSuspendedAppsAdmin = RestrictedLockUtilsInternal.checkIfApplicationIsSuspended(
+                    mContext, mPkg, mUserId);
 
-        loadChannel();
-        loadAppRow();
-        loadChannelGroup();
-        collectConfigActivities();
 
-        getSettingsLifecycle().addObserver(use(HeaderPreferenceController.class));
+            loadChannel();
+            loadAppRow();
+            loadChannelGroup();
+            collectConfigActivities();
 
-        for (NotificationPreferenceController controller : mControllers) {
-            controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);
+            getSettingsLifecycle().addObserver(use(HeaderPreferenceController.class));
+
+            for (NotificationPreferenceController controller : mControllers) {
+                controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);
+            }
         }
     }
 

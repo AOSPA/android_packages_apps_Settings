@@ -76,6 +76,8 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
             paths.add(new ResourcePath(null,
                 Fs.fromURL(new URL("file:frameworks/base/packages/SettingsLib/res")), null));
             paths.add(new ResourcePath(null,
+                    Fs.fromURL(new URL("file:frameworks/base/packages/SettingsLib/HelpUtils/res/")), null));
+            paths.add(new ResourcePath(null,
                 Fs.fromURL(new URL("file:frameworks/base/core/res/res")), null));
             paths.add(new ResourcePath(null,
                 Fs.fromURL(new URL("file:frameworks/opt/setupwizard/library/main/res")), null));
@@ -85,6 +87,8 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
                 Fs.fromURL(new URL("file:frameworks/opt/setupwizard/library/recyclerview/res")), null));
             paths.add(new ResourcePath(null,
                 Fs.fromURL(new URL("file:out/soong/.intermediates/prebuilts/sdk/current/androidx/androidx.appcompat_appcompat-nodeps/android_common/aar/res/")), null));
+            paths.add(new ResourcePath(null,
+                Fs.fromURL(new URL("file:out/soong/.intermediates/prebuilts/sdk/current/extras/material-design-x/com.google.android.material_material-nodeps/android_common/aar/res/")), null));
             paths.add(new ResourcePath(null,
                 Fs.fromURL(new URL("file:out/soong/.intermediates/prebuilts/sdk/current/androidx/androidx.cardview_cardview-nodeps/android_common/aar/res")), null));
         } catch (MalformedURLException e) {

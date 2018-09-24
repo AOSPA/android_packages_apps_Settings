@@ -49,6 +49,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.net.LegacyVpnInfo;
@@ -59,7 +63,7 @@ import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.GearPreference.OnGearClickListener;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.collect.Lists;
 
@@ -69,10 +73,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
 
 /**
  * Settings screen listing VPNs. Configured VPNs and networks managed by apps
@@ -143,7 +143,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         // Disable all actions if VPN configuration has been disallowed
         for (int i = 0; i < menu.size(); i++) {
             if (isUiRestrictedByOnlyAdmin()) {
-                RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getPrefContext(),
+                RestrictedLockUtilsInternal.setMenuItemAsDisabledByAdmin(getPrefContext(),
                         menu.getItem(i), getRestrictionEnforcedAdmin());
             } else {
                 menu.getItem(i).setEnabled(!mUnavailable);

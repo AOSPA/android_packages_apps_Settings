@@ -20,7 +20,9 @@ import static com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import static com.android.settings.applications.appinfo.AppInfoDashboardFragment
         .UNINSTALL_ALL_USERS_MENU;
 import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.UNINSTALL_UPDATES;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;
@@ -168,7 +170,7 @@ public final class AppInfoDashboardFragmentTest {
     }
 
     @Test
-    public void launchFragment_hasNoPackageInfo_shouldFinish() {
+    public void ensurePackageInfoAvailable_hasNoPackageInfo_shouldFinish() {
         ReflectionHelpers.setField(mFragment, "mPackageInfo", null);
 
         assertThat(mFragment.ensurePackageInfoAvailable(mActivity)).isFalse();
@@ -176,12 +178,22 @@ public final class AppInfoDashboardFragmentTest {
     }
 
     @Test
-    public void launchFragment_hasPackageInfo_shouldReturnTrue() {
+    public void ensurePackageInfoAvailable_hasPackageInfo_shouldReturnTrue() {
         final PackageInfo packageInfo = mock(PackageInfo.class);
         ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
 
         assertThat(mFragment.ensurePackageInfoAvailable(mActivity)).isTrue();
         verify(mActivity, never()).finishAndRemoveTask();
+    }
+
+    @Test
+    public void createPreference_hasNoPackageInfo_shouldSkip() {
+        ReflectionHelpers.setField(mFragment, "mPackageInfo", null);
+
+        mFragment.onCreatePreferences(new Bundle(), "root_key");
+
+        verify(mActivity).finishAndRemoveTask();
+        verify(mFragment, never()).getPreferenceScreen();
     }
 
     @Test

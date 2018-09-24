@@ -30,6 +30,10 @@ import android.provider.Settings.System;
 import android.service.vr.IVrManager;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -38,10 +42,6 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.text.NumberFormat;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class BrightnessLevelPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
@@ -152,12 +152,20 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
     }
 
     @VisibleForTesting
+    IVrManager safeGetVrManager() {
+        return IVrManager.Stub.asInterface(ServiceManager.getService(
+                Context.VR_SERVICE));
+    }
+
+    @VisibleForTesting
     boolean isInVrMode() {
-        try {
-            return IVrManager.Stub.asInterface(ServiceManager.getService(Context.VR_SERVICE))
-                    .getVrModeState();
-        } catch (RemoteException e) {
-            Log.e(TAG, "Failed to check vr mode!", e);
+        IVrManager vrManager = safeGetVrManager();
+        if (vrManager != null) {
+            try {
+                return vrManager.getVrModeState();
+            } catch (RemoteException e) {
+                Log.e(TAG, "Failed to check vr mode!", e);
+            }
         }
         return false;
     }

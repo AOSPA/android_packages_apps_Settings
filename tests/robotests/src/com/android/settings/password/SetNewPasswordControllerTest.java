@@ -18,6 +18,7 @@ package com.android.settings.password;
 
 import static android.content.pm.PackageManager.FEATURE_FACE;
 import static android.content.pm.PackageManager.FEATURE_FINGERPRINT;
+
 import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment
         .HIDE_DISABLED_PREFS;
 import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment
@@ -26,7 +27,9 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_C
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
@@ -110,7 +113,7 @@ public final class SetNewPasswordControllerTest {
         // GIVEN the device supports face.
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         // GIVEN there are no enrolled face.
-        when(mFaceManager.hasEnrolledFaces(CURRENT_USER_ID)).thenReturn(false);
+        when(mFaceManager.hasEnrolledTemplates(CURRENT_USER_ID)).thenReturn(false);
         // GIVEN DPC does not disallow face for keyguard usage.
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(any(ComponentName.class)))
                 .thenReturn(0);
@@ -177,7 +180,7 @@ public final class SetNewPasswordControllerTest {
         // GIVEN the device does NOT support face.
         when(mFaceManager.isHardwareDetected()).thenReturn(false);
         // GIVEN there are no enrolled face.
-        when(mFaceManager.hasEnrolledFaces(CURRENT_USER_ID)).thenReturn(false);
+        when(mFaceManager.hasEnrolledTemplates(CURRENT_USER_ID)).thenReturn(false);
         // GIVEN DPC does not disallow face for keyguard usage.
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(any(ComponentName.class)))
                 .thenReturn(0);
@@ -215,7 +218,7 @@ public final class SetNewPasswordControllerTest {
         // GIVEN the device supports face.
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         // GIVEN there are no enrolled face.
-        when(mFaceManager.hasEnrolledFaces(CURRENT_USER_ID)).thenReturn(true);
+        when(mFaceManager.hasEnrolledTemplates(CURRENT_USER_ID)).thenReturn(true);
         // GIVEN DPC does not disallow face for keyguard usage.
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(any(ComponentName.class)))
                 .thenReturn(0);
@@ -253,7 +256,7 @@ public final class SetNewPasswordControllerTest {
         // GIVEN the device supports face.
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         // GIVEN there is an enrolled face.
-        when(mFaceManager.hasEnrolledFaces(CURRENT_USER_ID)).thenReturn(true);
+        when(mFaceManager.hasEnrolledTemplates(CURRENT_USER_ID)).thenReturn(true);
         // GIVEN DPC disallows face for keyguard usage.
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(any(ComponentName.class)))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FACE);

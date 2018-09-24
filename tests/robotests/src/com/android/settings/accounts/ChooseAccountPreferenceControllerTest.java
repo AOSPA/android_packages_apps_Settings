@@ -17,6 +17,7 @@
 package com.android.settings.accounts;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -30,12 +31,17 @@ import android.content.SyncAdapterType;
 import android.graphics.drawable.ColorDrawable;
 import android.os.UserHandle;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowContentResolver;
-import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 
 import org.junit.After;
 import org.junit.Before;
@@ -46,14 +52,9 @@ import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class,
-        ShadowRestrictedLockUtils.class})
+        ShadowRestrictedLockUtilsInternal.class})
 public class ChooseAccountPreferenceControllerTest {
 
     private Context mContext;
@@ -76,7 +77,7 @@ public class ChooseAccountPreferenceControllerTest {
     public void tearDown() {
         ShadowContentResolver.reset();
         ShadowAccountManager.resetAuthenticator();
-        ShadowRestrictedLockUtils.clearDisabledTypes();
+        ShadowRestrictedLockUtilsInternal.clearDisabledTypes();
     }
 
     @Test
@@ -114,9 +115,9 @@ public class ChooseAccountPreferenceControllerTest {
                 true /* supportsUploading */)};
         ShadowContentResolver.setSyncAdapterTypes(syncAdapters);
 
-        ShadowRestrictedLockUtils.setHasSystemFeature(true);
-        ShadowRestrictedLockUtils.setDevicePolicyManager(mock(DevicePolicyManager.class));
-        ShadowRestrictedLockUtils.setDisabledTypes(new String[] {"test_type"});
+        ShadowRestrictedLockUtilsInternal.setHasSystemFeature(true);
+        ShadowRestrictedLockUtilsInternal.setDevicePolicyManager(mock(DevicePolicyManager.class));
+        ShadowRestrictedLockUtilsInternal.setDisabledTypes(new String[] {"test_type"});
 
         doReturn("label").when(mController).getLabelForType(anyString());
 
@@ -139,9 +140,9 @@ public class ChooseAccountPreferenceControllerTest {
                 true /* supportsUploading */)};
         ShadowContentResolver.setSyncAdapterTypes(syncAdapters);
 
-        ShadowRestrictedLockUtils.setHasSystemFeature(true);
-        ShadowRestrictedLockUtils.setDevicePolicyManager(mock(DevicePolicyManager.class));
-        ShadowRestrictedLockUtils.setDisabledTypes(new String[] {"com.acct1"});
+        ShadowRestrictedLockUtilsInternal.setHasSystemFeature(true);
+        ShadowRestrictedLockUtilsInternal.setDevicePolicyManager(mock(DevicePolicyManager.class));
+        ShadowRestrictedLockUtilsInternal.setDisabledTypes(new String[] {"com.acct1"});
 
         doReturn("label").when(mController).getLabelForType(anyString());
 

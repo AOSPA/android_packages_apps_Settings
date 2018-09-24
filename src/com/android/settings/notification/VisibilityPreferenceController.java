@@ -26,15 +26,16 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 
+import androidx.preference.Preference;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedListPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.ArrayList;
-
-import androidx.preference.Preference;
 
 public class VisibilityPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
@@ -128,7 +129,7 @@ public class VisibilityPreferenceController extends NotificationPreferenceContro
     private void setRestrictedIfNotificationFeaturesDisabled(RestrictedListPreference pref,
             CharSequence entry, CharSequence entryValue, int keyguardNotificationFeatures) {
         RestrictedLockUtils.EnforcedAdmin admin =
-                RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+                RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                         mContext, keyguardNotificationFeatures, mAppRow.userId);
         if (admin != null) {
             RestrictedListPreference.RestrictedItem item =

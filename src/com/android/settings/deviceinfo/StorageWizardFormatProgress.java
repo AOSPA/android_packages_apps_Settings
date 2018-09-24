@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import static android.os.storage.VolumeInfo.TYPE_PRIVATE;
+
 import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 import android.content.Intent;
@@ -59,7 +60,6 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
         setHeaderText(R.string.storage_wizard_format_progress_title, getDiskShortDescription());
         setBodyText(R.string.storage_wizard_format_progress_body, getDiskDescription());
 
-        // TODO (b/111151113) : Need to check it again.
         mTask = (PartitionTask) getLastCustomNonConfigurationInstance();
         if (mTask == null) {
             mTask = new PartitionTask();
@@ -69,7 +69,7 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
             mTask.setActivity(this);
         }
     }
-    // TODO (b/111151113) : Need to check it again.
+
     @Override
     public Object onRetainCustomNonConfigurationInstance() {
         return mTask;

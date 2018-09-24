@@ -37,6 +37,14 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -50,19 +58,12 @@ import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.HashMap;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceViewHolder;
 
 /**
  * Settings screen for fingerprints
@@ -319,7 +320,7 @@ public class FingerprintSettings extends SubSettings {
             }
 
             final FooterPreference pref = mFooterPreferenceMixin.createFooterPreference();
-            final EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+            final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                     activity, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId);
             final AnnotationSpan.LinkInfo adminLinkInfo = new AnnotationSpan.LinkInfo(
                     ANNOTATION_ADMIN_DETAILS, (view) -> {

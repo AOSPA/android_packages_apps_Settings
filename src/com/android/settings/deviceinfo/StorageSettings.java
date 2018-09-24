@@ -39,6 +39,13 @@ import android.text.format.Formatter.BytesResult;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -49,6 +56,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import com.android.settingslib.search.SearchIndexable;
@@ -57,13 +65,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 
 /**
  * Panel showing both internal storage (both built-in storage and private
@@ -460,10 +461,11 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                          * @return {@code true} iff a intent was shown.
                          */
                         private boolean wasAdminSupportIntentShown(@NonNull String restriction) {
-                            EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
-                                    getActivity(), restriction, UserHandle.myUserId());
+                            EnforcedAdmin admin = RestrictedLockUtilsInternal
+                                    .checkIfRestrictionEnforced(getActivity(), restriction,
+                                            UserHandle.myUserId());
                             boolean hasBaseUserRestriction =
-                                    RestrictedLockUtils.hasBaseUserRestriction(
+                                    RestrictedLockUtilsInternal.hasBaseUserRestriction(
                                             getActivity(), restriction, UserHandle.myUserId());
                             if (admin != null && !hasBaseUserRestriction) {
                                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),

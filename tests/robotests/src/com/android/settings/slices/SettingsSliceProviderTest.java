@@ -18,10 +18,15 @@
 package com.android.settings.slices;
 
 import static android.content.ContentResolver.SCHEME_CONTENT;
+
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -37,6 +42,11 @@ import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.util.ArraySet;
 
+import androidx.slice.Slice;
+import androidx.slice.SliceProvider;
+import androidx.slice.widget.SliceLiveData;
+
+import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.flashlight.FlashlightSliceBuilder;
 import com.android.settings.location.LocationSliceBuilder;
@@ -57,6 +67,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -64,11 +75,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import androidx.slice.Slice;
-import androidx.slice.SliceProvider;
-import androidx.slice.widget.SliceLiveData;
-import com.android.settings.R;
 
 /**
  * TODO Investigate using ShadowContentResolver.registerProviderInternal(String, ContentProvider)
@@ -473,6 +479,28 @@ public class SettingsSliceProviderTest {
                 .build();
 
         mProvider.onSlicePinned(uri);
+    }
+
+    @Test
+    public void grantWhitelistedPackagePermissions_noWhitelist_shouldNotGrant() {
+        final List<Uri> uris = new ArrayList<>();
+        uris.add(Uri.parse("content://settings/slice"));
+
+        mProvider.grantWhitelistedPackagePermissions(mContext, uris);
+
+        verify(mManager, never()).grantSlicePermission(anyString(), any(Uri.class));
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void grantWhitelistedPackagePermissions_hasPackageWhitelist_shouldGrant() {
+        final List<Uri> uris = new ArrayList<>();
+        uris.add(Uri.parse("content://settings/slice"));
+
+        mProvider.grantWhitelistedPackagePermissions(mContext, uris);
+
+        verify(mManager)
+                .grantSlicePermission("com.android.settings.slice_whitelist_package", uris.get(0));
     }
 
     private void insertSpecialCase(String key) {

@@ -19,12 +19,13 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.slices.SliceData;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
-
-import androidx.preference.Preference;
 
 public class ContactSearchPreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceChangeListener {
@@ -52,7 +53,7 @@ public class ContactSearchPreferenceController extends BasePreferenceController 
             pref.setChecked(isChecked());
             if (mManagedUser != null) {
                 final RestrictedLockUtils.EnforcedAdmin enforcedAdmin =
-                        RestrictedLockUtils.checkIfRemoteContactSearchDisallowed(
+                        RestrictedLockUtilsInternal.checkIfRemoteContactSearchDisallowed(
                                 mContext, mManagedUser.getIdentifier());
                 pref.setDisabledByAdmin(enforcedAdmin);
             }

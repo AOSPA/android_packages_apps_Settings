@@ -8201,7 +8201,7 @@
     <string name="encrypt_talkback_dialog_message_password">When you enter your password to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
 
     <!-- [CHAR LIMIT=NONE] Dialog body explaining that the app just selected by the user will not work after a reboot until until after the user enters their credentials, such as a PIN or password. -->
-    <string name="direct_boot_unaware_dialog_message">Note: After a reboot, this app can\'t start until you unlock your phone</string>
+    <string name="direct_boot_unaware_dialog_message">Note: If you restart your phone and have a screen lock set, this app can\'t start until you unlock your phone</string>
 
     <!-- Title and summary for SIM Status -->
     <string name="imei_information_title">IMEI information</string>
@@ -8956,8 +8956,6 @@
     <string name="disabled_by_policy_title_camera">Camera not allowed</string>
     <!-- Title for dialog displayed to tell user that screenshots are disabled by an admin [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_screen_capture">Screenshot not allowed</string>
-    <!-- Title for dialog displayed to tell user that turning off backups is disallowed by an admin [CHAR LIMIT=50] -->
-    <string name="disabled_by_policy_title_turn_off_backups">Can’t turn off backups</string>
     <!-- Title for dialog displayed to tell user that the app was suspended by an admin [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_suspend_packages">Can’t open this app</string>
     <!-- Shown when the user tries to change a settings locked by an admin [CHAR LIMIT=200] -->
@@ -9467,20 +9465,17 @@
     <!-- [CHAR LIMIT=60] Name of dev option called "System UI demo mode" -->
     <string name="demo_mode">System UI demo mode</string>
 
-    <!-- [CHAR LIMIT=60] Name of dev option that changes the UI Mode -->
-    <string name="dark_ui_mode">Night mode</string>
+    <!-- [CHAR LIMIT=60] Name of setting that changes the UI to dark -->
+    <string name="dark_ui_mode">Dark mode</string>
 
     <!-- [CHAR LIMIT=60] Name of dev option that changes the color of the UI -->
-    <string name="dark_ui_mode_title">Set Night mode</string>
+    <string name="dark_ui_mode_title">Set Dark mode</string>
 
     <!-- [CHAR LIMIT=60] Name of dev option to enable extra quick settings tiles -->
     <string name="quick_settings_developer_tiles">Quick settings developer tiles</string>
 
     <!-- [CHAR LIMIT=25] Title of developer tile to toggle winscope trace -->
     <string name="winscope_trace_quick_settings_title">Winscope Trace</string>
-
-    <!-- Template for formatting country and language. eg Canada - French [CHAR LIMIT=NONE]-->
-    <string name="support_country_format"><xliff:g id="country" example="Canada">%1$s</xliff:g> - <xliff:g id="language" example="French">%2$s</xliff:g></string>
 
     <!-- [CHAR LIMIT=60] Title of work profile setting page -->
     <string name="managed_profile_settings_title">Work profile settings</string>
@@ -9592,19 +9587,10 @@
     <!-- Summary text for ambient display (device) [CHAR LIMIT=NONE]-->
     <string name="ambient_display_pickup_summary" product="device">To check time, notifications, and other info, pick up your device.</string>
 
-    <!-- Preference and settings suggestion title text for reach gesture (phone) [CHAR LIMIT=60]-->
-    <string name="ambient_display_reach_title" product="default">Reach to check phone</string>
-    <!-- Preference and settings suggestion title text for reach gesture (tablet) [CHAR LIMIT=60]-->
-    <string name="ambient_display_reach_title" product="tablet">Reach to check tablet</string>
-    <!-- Preference and settings suggestion title text for reach gesture (device) [CHAR LIMIT=60]-->
-    <string name="ambient_display_reach_title" product="device">Reach to check device</string>
-
-    <!-- Summary text for ambient display (phone) [CHAR LIMIT=NONE]-->
-    <string name="ambient_display_reach_summary" product="default">To check time, notifications, and other info, reach for your phone.</string>
-    <!-- Summary text for ambient display (tablet) [CHAR LIMIT=NONE]-->
-    <string name="ambient_display_reach_summary" product="tablet">To check time, notifications, and other info, reach for your tablet.</string>
-    <!-- Summary text for ambient display (device) [CHAR LIMIT=NONE]-->
-    <string name="ambient_display_reach_summary" product="device">To check time, notifications, and other info, reach for your device.</string>
+    <!-- Preference and settings suggestion title text for reach gesture [CHAR LIMIT=60]-->
+    <string name="ambient_display_reach_title">Reach gesture</string>
+    <!-- Summary text for ambient display [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_reach_summary" product="default"></string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
@@ -9769,8 +9755,6 @@
         <item quantity="one"><xliff:g id="count">%d</xliff:g> attempt</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> attempts</item>
     </plurals>
-    <!-- List item in a work device's settings. This text lets the user know that their IT administrator requires their device's data to be backed up. The user can't change this setting. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_backups_enabled">This device\'s data is being backed up</string>
     <!-- Message indicating that the device is enterprise-managed by a Device Owner [CHAR LIMIT=NONE] -->
     <string name="do_disclosure_generic">This device is managed by your organization.</string>
     <!-- Message indicating that the device is enterprise-managed by a Device Owner [CHAR LIMIT=NONE] -->
@@ -10091,6 +10075,19 @@
 
     <!-- Title for Connected device shortcut [CHAR LIMIT=30] -->
     <string name="devices_title">Devices</string>
+
+    <!-- UI debug setting: Enable High Refresh Rate virtual panel [CHAR LIMIT=25] -->
+    <string name="high_frequency_display_device_title">High Frequency Panel</string>
+
+    <!-- UI debug setting: Enable High Refresh Rate virtual panel [CHAR LIMIT=50] -->
+    <string name="high_frequency_display_device_summary">Enable Virtual High Frequency Panel</string>
+
+    <!-- Homepage bottom menu. Title for display all Settings [CHAR LIMIT=30] -->
+    <string name="homepage_all_settings">All Settings</string>
+
+    <!-- Homepage bottom menu. Title for display personalized Settings [CHAR LIMIT=30] -->
+    <string name="homepage_personal_settings">Your Settings</string>
+
     <string name="select_sim_card">Select SIM card</string>
     <string name="qtifeedback_settings_title">Hardware Feedback</string>
     <string name="qtifeedback_settings_subtitle">Qualcomm Technologies, Inc Reporting</string>

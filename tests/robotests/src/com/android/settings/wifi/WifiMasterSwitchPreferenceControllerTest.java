@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -31,9 +32,12 @@ import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -45,11 +49,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceScreen;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowRestrictedLockUtils.class)
+@Config(shadows = ShadowRestrictedLockUtilsInternal.class)
 public class WifiMasterSwitchPreferenceControllerTest {
 
     @Mock

@@ -17,6 +17,7 @@
 package com.android.settings.deviceinfo;
 
 import static android.os.storage.DiskInfo.EXTRA_DISK_ID;
+
 import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_FORGET_UUID;
 import static com.android.settings.deviceinfo.StorageWizardBase.EXTRA_FORMAT_PRIVATE;
 
@@ -28,12 +29,12 @@ import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.text.TextUtils;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
 
 public class StorageWizardFormatConfirm extends InstrumentedDialogFragment {
     private static final String TAG_FORMAT_WARNING = "format_warning";
@@ -59,7 +60,6 @@ public class StorageWizardFormatConfirm extends InstrumentedDialogFragment {
 
         final StorageWizardFormatConfirm fragment = new StorageWizardFormatConfirm();
         fragment.setArguments(args);
-        // TODO (b/111150236) : Need to check it again.
         fragment.show(activity.getSupportFragmentManager(), TAG_FORMAT_WARNING);
     }
 

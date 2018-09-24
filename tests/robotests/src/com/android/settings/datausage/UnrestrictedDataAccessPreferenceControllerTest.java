@@ -16,6 +16,7 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.nullable;
@@ -32,6 +33,9 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Process;
 
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge;
@@ -39,6 +43,7 @@ import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
@@ -54,12 +59,10 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
         ShadowRestrictedLockUtils.class,
+        ShadowRestrictedLockUtilsInternal.class,
         UnrestrictedDataAccessPreferenceControllerTest.ShadowAppStateBaseBridge.class
 })
 public class UnrestrictedDataAccessPreferenceControllerTest {
@@ -126,7 +129,7 @@ public class UnrestrictedDataAccessPreferenceControllerTest {
 
         final String testPkg1 = "com.example.one";
         final String testPkg2 = "com.example.two";
-        ShadowRestrictedLockUtils.setRestrictedPkgs(testPkg2);
+        ShadowRestrictedLockUtilsInternal.setRestrictedPkgs(testPkg2);
 
         doAnswer((invocation) -> {
             final UnrestrictedDataAccessPreference preference = invocation.getArgument(0);

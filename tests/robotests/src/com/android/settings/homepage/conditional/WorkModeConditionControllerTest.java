@@ -24,24 +24,28 @@ import android.content.ComponentName;
 import android.content.Context;
 
 import com.android.settings.Settings;
-import com.android.settings.homepage.conditional.WorkModeConditionController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class WorkModeConditionControllerTest {
 
+    @Mock
+    private ConditionManager mConditionManager;
     private Context mContext;
     private WorkModeConditionController mController;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mController = new WorkModeConditionController(mContext);
+        mController = new WorkModeConditionController(mContext, mConditionManager);
     }
 
     @Test
