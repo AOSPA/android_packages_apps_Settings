@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo.aboutphone;
 
-import static com.android.settings.bluetooth.Utils.getLocalBtManager;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -46,6 +44,7 @@ import com.android.settings.deviceinfo.ManualPreferenceController;
 import com.android.settings.deviceinfo.PhoneNumberPreferenceController;
 import com.android.settings.deviceinfo.RegulatoryInfoPreferenceController;
 import com.android.settings.deviceinfo.SafetyInfoPreferenceController;
+import com.android.settings.deviceinfo.UptimePreferenceController;
 import com.android.settings.deviceinfo.WifiMacAddressPreferenceController;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController;
 import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceController;
@@ -66,7 +65,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
 
     private static final String LOG_TAG = "MyDeviceInfoFragment";
     private static final String KEY_MY_DEVICE_INFO_HEADER = "my_device_info_header";
-    private static final String KEY_LEGAL_CONTAINER = "legal_container";
 
     @Override
     public int getMetricsCategory() {
@@ -116,7 +114,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
         controllers.add(new BrandedAccountPreferenceController(context));
         DeviceNamePreferenceController deviceNamePreferenceController =
                 new DeviceNamePreferenceController(context);
-        deviceNamePreferenceController.setLocalBluetoothManager(getLocalBtManager(context));
         deviceNamePreferenceController.setHost(fragment);
         if (lifecycle != null) {
             lifecycle.addObserver(deviceNamePreferenceController);
@@ -134,6 +131,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
         controllers.add(new FccEquipmentIdPreferenceController(context));
         controllers.add(
                 new BuildNumberPreferenceController(context, activity, fragment, lifecycle));
+        controllers.add(new UptimePreferenceController(context, lifecycle));
         return controllers;
     }
 
@@ -223,14 +221,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
                         Context context) {
                     return buildPreferenceControllers(context, null /*activity */,
                             null /* fragment */, null /* lifecycle */);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    // The legal container is duplicated, so we ignore it here.
-                    keys.add(KEY_LEGAL_CONTAINER);
-                    return keys;
                 }
             };
 }

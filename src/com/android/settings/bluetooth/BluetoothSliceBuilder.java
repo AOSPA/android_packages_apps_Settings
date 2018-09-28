@@ -33,12 +33,11 @@ import com.android.settings.SubSettings;
 import com.android.settings.connecteddevice.BluetoothDashboardFragment;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
-import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
 /**
@@ -95,7 +94,7 @@ public class BluetoothSliceBuilder {
 
         return new ListBuilder(context, BLUETOOTH_URI, ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(b -> b
+                .addRow(new RowBuilder()
                         .setTitle(title)
                         .addEndItem(toggleSliceAction)
                         .setPrimaryAction(primarySliceAction))
@@ -119,10 +118,13 @@ public class BluetoothSliceBuilder {
      */
     public static void handleUriChange(Context context, Intent intent) {
         final boolean newBluetoothState = intent.getBooleanExtra(EXTRA_TOGGLE_STATE, false);
-        final LocalBluetoothAdapter adapter = LocalBluetoothManager.getInstance(context,
-                null /* callback */).getBluetoothAdapter();
+        final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
 
-        adapter.setBluetoothEnabled(newBluetoothState);
+        if (newBluetoothState) {
+            adapter.enable();
+        } else {
+            adapter.disable();
+        }
         // Do not notifyChange on Uri. The service takes longer to update the current value than it
         // does for the Slice to check the current value again. Let {@link SliceBroadcastRelay}
         // handle it.

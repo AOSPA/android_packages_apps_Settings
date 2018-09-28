@@ -15,6 +15,7 @@
  */
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
@@ -115,20 +116,31 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      * Force to update the list of bluetooth devices
      */
     public void forceUpdate() {
-        Collection<CachedBluetoothDevice> cachedDevices =
+        if (BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+            final Collection<CachedBluetoothDevice> cachedDevices =
+                    mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
+            for (CachedBluetoothDevice cachedBluetoothDevice : cachedDevices) {
+                update(cachedBluetoothDevice);
+            }
+        }
+    }
+
+    public void removeAllDevicesFromPreference() {
+        final Collection<CachedBluetoothDevice> cachedDevices =
                 mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
         for (CachedBluetoothDevice cachedBluetoothDevice : cachedDevices) {
-            update(cachedBluetoothDevice);
+            removePreference(cachedBluetoothDevice);
         }
     }
 
     @Override
     public void onBluetoothStateChanged(int bluetoothState) {
-        forceUpdate();
+        if (BluetoothAdapter.STATE_ON == bluetoothState) {
+            forceUpdate();
+        } else if (BluetoothAdapter.STATE_OFF == bluetoothState) {
+            removeAllDevicesFromPreference();
+        }
     }
-
-    @Override
-    public void onScanningStateChanged(boolean started) {}
 
     @Override
     public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
@@ -149,19 +161,13 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     }
 
     @Override
-    public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {}
-
-    @Override
-    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
-    }
-
-    @Override
-    public void onAudioModeChanged() {
-    }
-
-    @Override
     public void onProfileConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state,
             int bluetoothProfile) {
+        if (DBG) {
+            Log.d(TAG, "onProfileConnectionStateChanged() device: " + cachedDevice.getName()
+                    + ", state: " + state + ", bluetoothProfile: " + bluetoothProfile);
+        }
+        update(cachedDevice);
     }
 
     @Override

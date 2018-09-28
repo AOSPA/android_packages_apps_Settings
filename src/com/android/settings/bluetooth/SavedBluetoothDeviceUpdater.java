@@ -49,16 +49,13 @@
 package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.util.Log;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 /**
@@ -72,23 +69,6 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     public SavedBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
         super(context, fragment, devicePreferenceCallback);
-    }
-
-    @VisibleForTesting
-    SavedBluetoothDeviceUpdater(DashboardFragment fragment,
-            DevicePreferenceCallback devicePreferenceCallback,
-            LocalBluetoothManager localBluetoothManager) {
-        super(fragment, devicePreferenceCallback, localBluetoothManager);
-    }
-
-    @Override
-    public void onProfileConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state,
-            int bluetoothProfile) {
-        if (state == BluetoothProfile.STATE_CONNECTED) {
-            removePreference(cachedDevice);
-        } else if (state == BluetoothProfile.STATE_DISCONNECTED) {
-            addPreference(cachedDevice);
-        }
     }
 
     @Override

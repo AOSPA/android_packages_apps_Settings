@@ -31,6 +31,7 @@ public class Settings extends SettingsActivity {
     public static class AssistGestureSettingsActivity extends SettingsActivity { /* empty */}
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
+    public static class FaceSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SimSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiTetherSettingsActivity extends SettingsActivity { /* empty */ }
@@ -120,7 +121,6 @@ public class Settings extends SettingsActivity {
     }
     public static class DirectoryAccessSettingsActivity extends SettingsActivity { /* empty */ }
 
-    public static class TopLevelSettings extends SettingsActivity { /* empty */ }
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MemorySettingsActivity extends SettingsActivity { /* empty */ }

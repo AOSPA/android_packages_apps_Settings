@@ -20,7 +20,6 @@ import static android.provider.Settings.Secure.TTS_DEFAULT_PITCH;
 import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
 
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -34,6 +33,10 @@ import android.speech.tts.UtteranceProgressListener;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -56,9 +59,6 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.Set;
-
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 
 @SearchIndexable
 public class TextToSpeechSettings extends SettingsPreferenceFragment
@@ -789,13 +789,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.tts_settings;
                     return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add("tts_engine_preference");
-                    return keys;
                 }
             };
 

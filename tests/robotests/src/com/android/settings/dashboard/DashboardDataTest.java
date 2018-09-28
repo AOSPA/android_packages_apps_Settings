@@ -20,15 +20,23 @@ import static com.android.settings.dashboard.DashboardData.STABLE_ID_CONDITION_C
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_CONDITION_FOOTER;
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONDITION_DIVIDER;
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONTAINER;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.app.PendingIntent;
 import android.service.settings.suggestions.Suggestion;
 
-import com.android.settings.dashboard.conditional.AirplaneModeCondition;
-import com.android.settings.dashboard.conditional.Condition;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListUpdateCallback;
+
+import com.android.settings.homepage.conditional.AirplaneModeConditionCard;
+import com.android.settings.homepage.conditional.ConditionalCard;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -37,22 +45,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListUpdateCallback;
-
-@RunWith(RobolectricTestRunner.class)
+@RunWith(SettingsRobolectricTestRunner.class)
 public class DashboardDataTest {
 
     private static final String TEST_SUGGESTION_TITLE = "Use fingerprint";
-    private static final String TEST_CATEGORY_TILE_TITLE = "Display";
+    private static final int TEST_TILE_ID = 12345;
 
     private DashboardData mDashboardDataWithOneConditions;
     private DashboardData mDashboardDataWithTwoConditions;
@@ -61,16 +63,16 @@ public class DashboardDataTest {
     @Mock
     private Tile mTestCategoryTile;
     @Mock
-    private Condition mTestCondition;
+    private ConditionalCard mTestCondition;
     @Mock
-    private Condition mSecondCondition; // condition used to test insert in DiffUtil
+    private ConditionalCard mSecondCondition; // condition used to test insert in DiffUtil
     private Suggestion mTestSuggestion;
 
     @Before
     public void SetUp() {
         MockitoAnnotations.initMocks(this);
 
-        mDashboardCategory = new DashboardCategory();
+        mDashboardCategory = new DashboardCategory(CategoryKey.CATEGORY_HOMEPAGE);
 
         // Build suggestions
         final List<Suggestion> suggestions = new ArrayList<>();
@@ -81,19 +83,16 @@ public class DashboardDataTest {
         suggestions.add(mTestSuggestion);
 
         // Build oneItemConditions
-        final List<Condition> oneItemConditions = new ArrayList<>();
-        when(mTestCondition.shouldShow()).thenReturn(true);
+        final List<ConditionalCard> oneItemConditions = new ArrayList<>();
         oneItemConditions.add(mTestCondition);
 
         // Build twoItemConditions
-        final List<Condition> twoItemsConditions = new ArrayList<>();
-        when(mSecondCondition.shouldShow()).thenReturn(true);
+        final List<ConditionalCard> twoItemsConditions = new ArrayList<>();
         twoItemsConditions.add(mTestCondition);
         twoItemsConditions.add(mSecondCondition);
 
         // Build category
-        mTestCategoryTile.title = TEST_CATEGORY_TILE_TITLE;
-        mDashboardCategory.title = "test";
+        when(mTestCategoryTile.getId()).thenReturn(TEST_TILE_ID);
 
         mDashboardCategory.addTile(mTestCategoryTile);
 
@@ -130,7 +129,7 @@ public class DashboardDataTest {
         assertThat(items.get(1).id).isEqualTo(STABLE_ID_SUGGESTION_CONDITION_DIVIDER);
         assertThat(items.get(2).id).isEqualTo(STABLE_ID_CONDITION_CONTAINER);
         assertThat(items.get(3).id).isEqualTo(STABLE_ID_CONDITION_FOOTER);
-        assertThat(items.get(4).id).isEqualTo(Objects.hash(mTestCategoryTile.title));
+        assertThat(items.get(4).id).isEqualTo(TEST_TILE_ID);
     }
 
     @Test
@@ -169,7 +168,7 @@ public class DashboardDataTest {
 
     @Test
     public void testGetPositionByEntity_notExisted_returnNotFound() {
-        final Condition condition = mock(AirplaneModeCondition.class);
+        final ConditionalCard condition = mock(AirplaneModeConditionCard.class);
         final int position = mDashboardDataWithOneConditions.getPositionByEntity(condition);
         assertThat(position).isEqualTo(DashboardData.POSITION_NOT_FOUND);
     }
@@ -183,15 +182,17 @@ public class DashboardDataTest {
     @Test
     public void testGetPositionByTile_equalTitle_returnPositionFound() {
         final Tile tile = mock(Tile.class);
-        tile.title = TEST_CATEGORY_TILE_TITLE;
+        when(tile.getId()).thenReturn(TEST_TILE_ID);
+
         final int position = mDashboardDataWithOneConditions.getPositionByTile(tile);
+
         assertThat(position).isNotEqualTo(DashboardData.POSITION_NOT_FOUND);
     }
 
     @Test
     public void testGetPositionByTile_notExisted_returnNotFound() {
         final Tile tile = mock(Tile.class);
-        tile.title = "";
+        when(tile.getId()).thenReturn(123);
         final int position = mDashboardDataWithOneConditions.getPositionByTile(tile);
         assertThat(position).isEqualTo(DashboardData.POSITION_NOT_FOUND);
     }
@@ -224,8 +225,8 @@ public class DashboardDataTest {
         testResultData.add(new ListUpdateResult.ResultData(
                 ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 2, 1));
         // Build DashboardData
-        final List<Condition> oneItemConditions = new ArrayList<>();
-        when(mTestCondition.shouldShow()).thenReturn(true);
+        final List<ConditionalCard> oneItemConditions = new ArrayList<>();
+
         oneItemConditions.add(mTestCondition);
         final List<Suggestion> suggestions = new ArrayList<>();
         suggestions.add(mTestSuggestion);
@@ -275,14 +276,16 @@ public class DashboardDataTest {
     /**
      * Test when using the
      * {@link com.android.settings.dashboard.DashboardData.ItemsDataDiffCallback}
-     * to transfer List from {@paramref baseDashboardData} to {@paramref diffDashboardData}, whether
+     * to transfer List from {@paramref baseDashboardData} to {@paramref diffDashboardData},
+     * whether
      * the transform data result is equals to {@paramref testResultData}
      * <p>
      * The steps are described below:
      * 1. Calculate a {@link androidx.recyclerview.widget.DiffUtil.DiffResult} from
      * {@paramref baseDashboardData} to {@paramref diffDashboardData}
      * <p>
-     * 2. Dispatch the {@link androidx.recyclerview.widget.DiffUtil.DiffResult} calculated from step 1
+     * 2. Dispatch the {@link androidx.recyclerview.widget.DiffUtil.DiffResult} calculated from step
+     * 1
      * into {@link ListUpdateResult}
      * <p>
      * 3. Get result data(a.k.a. baseResultData) from {@link ListUpdateResult} and compare it to
