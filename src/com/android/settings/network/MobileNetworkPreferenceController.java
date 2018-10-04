@@ -198,14 +198,6 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-<<<<<<< HEAD
-        if (KEY_MOBILE_NETWORK_SETTINGS.equals(preference.getKey()) &&
-                Utils.isNetworkSettingsApkAvailable()) {
-            final Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setComponent(new ComponentName("com.qualcomm.qti.networksetting",
-                    "com.qualcomm.qti.networksetting.MobileNetworkSettings"));
-            mContext.startActivity(intent);
-=======
         if (KEY_MOBILE_NETWORK_SETTINGS.equals(preference.getKey())) {
             if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.MOBILE_NETWORK_V2)) {
                 //TODO(b/110260193): go to the mobile network page existed in settings
@@ -215,16 +207,12 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
                         new ComponentName(MOBILE_NETWORK_PACKAGE, MOBILE_NETWORK_CLASS));
                 mContext.startActivity(intent);
             }
->>>>>>> 6ab18e3dcca88f65e5b6a59ed20c4353753108a2
             return true;
         }
         return false;
     }
 
-<<<<<<< HEAD
-=======
     @Override
->>>>>>> 6ab18e3dcca88f65e5b6a59ed20c4353753108a2
     public CharSequence getSummary() {
         return mSummary;
     }
