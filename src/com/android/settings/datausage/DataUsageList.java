@@ -51,6 +51,12 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.Loader;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
@@ -66,22 +72,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.loader.app.LoaderManager.LoaderCallbacks;
-import androidx.loader.content.Loader;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-
 /**
  * Panel showing data usage history across various networks, including options
  * to inspect based on usage cycle and control through {@link NetworkPolicy}.
+
+ * Deprecated in favor of {@link DataUsageListV2}
+ *
+ * @deprecated
  */
-public class DataUsageList extends DataUsageBase {
+@Deprecated
+public class DataUsageList extends DataUsageBaseFragment {
 
     public static final String EXTRA_SUB_ID = "sub_id";
     public static final String EXTRA_NETWORK_TEMPLATE = "network_template";
 
-    private static final String TAG = "DataUsage";
+    private static final String TAG = "DataUsageList";
     private static final boolean LOGD = false;
 
     private static final String KEY_USAGE_AMOUNT = "usage_amount";
@@ -140,7 +145,6 @@ public class DataUsageList extends DataUsageBase {
 
         mUidDetailProvider = new UidDetailProvider(context);
 
-        addPreferencesFromResource(R.xml.data_usage_list);
         mUsageAmount = findPreference(KEY_USAGE_AMOUNT);
         mChart = (ChartDataUsagePreference) findPreference(KEY_CHART_DATA);
         mApps = (PreferenceGroup) findPreference(KEY_APPS_GROUP);
@@ -233,6 +237,16 @@ public class DataUsageList extends DataUsageBase {
         TrafficStats.closeQuietly(mStatsSession);
 
         super.onDestroy();
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.data_usage_list;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     void processArgument() {

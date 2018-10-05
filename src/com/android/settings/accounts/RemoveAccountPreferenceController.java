@@ -33,6 +33,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
@@ -40,13 +44,10 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.io.IOException;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceScreen;
 
 public class RemoveAccountPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, OnClickListener {
@@ -84,8 +85,8 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
     @Override
     public void onClick(View v) {
         if (mUserHandle != null) {
-            final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(mContext,
-                    UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle.getIdentifier());
+            final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                    mContext, UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle.getIdentifier());
             if (admin != null) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mContext, admin);
                 return;

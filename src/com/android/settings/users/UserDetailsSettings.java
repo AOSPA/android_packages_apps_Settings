@@ -24,16 +24,16 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
 
 /**
  * Settings screen for configuring a specific user. It can contain user restrictions
@@ -105,7 +105,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mPhonePref.setChecked(
                     !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
         }
-        if (RestrictedLockUtils.hasBaseUserRestriction(context,
+        if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
                 UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
             removePreference(KEY_REMOVE_USER);
         }

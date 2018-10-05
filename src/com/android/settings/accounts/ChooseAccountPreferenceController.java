@@ -33,8 +33,13 @@ import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.collect.Maps;
 
@@ -45,10 +50,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 /**
  * An extra {@link UserHandle} can be specified in the intent as {@link EXTRA_USER}, if the user for
@@ -167,7 +168,7 @@ public class ChooseAccountPreferenceController extends BasePreferenceController 
             // There's only one provider that matches. If it is disabled by admin show the
             // support dialog otherwise run it.
             final RestrictedLockUtils.EnforcedAdmin admin =
-                    RestrictedLockUtils.checkIfAccountManagementDisabled(
+                    RestrictedLockUtilsInternal.checkIfAccountManagementDisabled(
                             context, mProviderList.get(0).getType(), mUserHandle.getIdentifier());
             if (admin != null) {
                 mActivity.setResult(RESULT_CANCELED,

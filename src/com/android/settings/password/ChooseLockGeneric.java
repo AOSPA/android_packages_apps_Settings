@@ -18,6 +18,7 @@ package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
+
 import static com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment
         .RESULT_FINISHED;
 
@@ -43,6 +44,14 @@ import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 
+import androidx.annotation.StringRes;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.EncryptionInterstitial;
@@ -54,19 +63,12 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
 import java.util.List;
-
-import androidx.annotation.StringRes;
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class ChooseLockGeneric extends SettingsActivity {
     public static final String CONFIRM_CREDENTIALS = "confirm_credentials";
@@ -131,10 +133,14 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         @VisibleForTesting
         static final int CONFIRM_EXISTING_REQUEST = 100;
-        private static final int ENABLE_ENCRYPTION_REQUEST = 101;
-        private static final int CHOOSE_LOCK_REQUEST = 102;
-        private static final int CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST = 103;
-        private static final int SKIP_FINGERPRINT_REQUEST = 104;
+        @VisibleForTesting
+        static final int ENABLE_ENCRYPTION_REQUEST = 101;
+        @VisibleForTesting
+        static final int CHOOSE_LOCK_REQUEST = 102;
+        @VisibleForTesting
+        static final int CHOOSE_LOCK_BEFORE_FINGERPRINT_REQUEST = 103;
+        @VisibleForTesting
+        static final int SKIP_FINGERPRINT_REQUEST = 104;
 
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private DevicePolicyManager mDPM;
@@ -401,6 +407,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                             resultCode == RESULT_FINISHED ? RESULT_OK : resultCode, data);
                     finish();
                 }
+            } else if (requestCode == SearchFeatureProvider.REQUEST_CODE) {
+                return;
             } else {
                 getActivity().setResult(Activity.RESULT_CANCELED);
                 finish();
@@ -555,7 +563,7 @@ public class ChooseLockGeneric extends SettingsActivity {
             final PreferenceScreen entries = getPreferenceScreen();
 
             int adminEnforcedQuality = mDPM.getPasswordQuality(null, mUserId);
-            EnforcedAdmin enforcedAdmin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
+            EnforcedAdmin enforcedAdmin = RestrictedLockUtilsInternal.checkIfPasswordQualityIsSet(
                     getActivity(), mUserId);
 
             for (ScreenLockType lock : ScreenLockType.values()) {
@@ -806,7 +814,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         // TODO: figure out how to eliminate duplicated code. It's a bit hard due to the async-ness
         private void removeAllFaceForUserAndFinish(final int userId, RemovalTracker tracker) {
             if (mFaceManager != null && mFaceManager.isHardwareDetected()) {
-                if (mFaceManager.hasEnrolledFaces(userId)) {
+                if (mFaceManager.hasEnrolledTemplates(userId)) {
                     mFaceManager.setActiveUser(userId);
                     Face face = new Face(null, 0, 0);
                     mFaceManager.remove(face, userId,

@@ -29,6 +29,12 @@ import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
@@ -46,12 +52,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 /**
  * This controller displays a list of recently used apps and a "See all" button. If there is
@@ -81,17 +81,6 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
     private PreferenceCategory mCategory;
     private Preference mSeeAllPref;
     private Preference mDivider;
-
-    static {
-        SKIP_SYSTEM_PACKAGES.addAll(Arrays.asList(
-                "android",
-                "com.android.phone",
-                "com.android.settings",
-                "com.android.systemui",
-                "com.android.providers.calendar",
-                "com.android.providers.media"
-        ));
-    }
 
     public RecentNotifyingAppsPreferenceController(Context context, NotificationBackend backend,
             Application app, Fragment host) {
@@ -226,6 +215,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
                     .setSourceMetricsCategory(
                             MetricsProto.MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS)
                     .toIntent());
+            pref.setEnabled(mNotificationBackend.isBlockable(mContext, appEntry.info));
             pref.setOnPreferenceChangeListener((preference, newValue) -> {
                 boolean blocked = !(Boolean) newValue;
                 mNotificationBackend.setNotificationsEnabledForPackage(
@@ -272,10 +262,6 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
      * Whether or not the app should be included in recent list.
      */
     private boolean shouldIncludePkgInRecents(String pkgName) {
-         if (SKIP_SYSTEM_PACKAGES.contains(pkgName)) {
-            Log.d(TAG, "System package, skipping " + pkgName);
-            return false;
-        }
         final Intent launchIntent = new Intent().addCategory(Intent.CATEGORY_LAUNCHER)
                 .setPackage(pkgName);
 

@@ -72,6 +72,7 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 import com.android.settingslib.search.SearchIndexable;
@@ -912,7 +913,7 @@ public class UserSettings extends SettingsPreferenceFragment
             if (mUserCaps.mDisallowAddUser) {
                 pref.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
             } else if (mUserCaps.mDisallowSwitchUser) {
-                pref.setDisabledByAdmin(RestrictedLockUtils.getDeviceOwner(context));
+                pref.setDisabledByAdmin(RestrictedLockUtilsInternal.getDeviceOwner(context));
             } else {
                 pref.setDisabledByAdmin(null);
             }
@@ -963,7 +964,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddUserWhenLockedPreferenceController.getPreferenceKey());
         mAddUserWhenLockedPreferenceController.updateState(addUserOnLockScreen);
         mMultiUserFooterPreferenceController.updateState(null /* preference */);
-        mAddUser.setVisible(mUserCaps.mUserSwitcherEnabled);
+        mAddUser.setVisible(mUserCaps.mCanAddUser && Utils.isDeviceProvisioned(context)
+                && mUserCaps.mUserSwitcherEnabled);
         mUserListCategory.setVisible(mUserCaps.mUserSwitcherEnabled);
         if (!mUserCaps.mUserSwitcherEnabled) {
             return;
@@ -1090,7 +1092,7 @@ public class UserSettings extends SettingsPreferenceFragment
             switch (v.getId()) {
                 case UserPreference.DELETE_ID:
                     final EnforcedAdmin removeDisallowedAdmin =
-                            RestrictedLockUtils.checkIfRestrictionEnforced(getContext(),
+                            RestrictedLockUtilsInternal.checkIfRestrictionEnforced(getContext(),
                                     UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
                     if (removeDisallowedAdmin != null) {
                         RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),

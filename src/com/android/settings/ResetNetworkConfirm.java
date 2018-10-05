@@ -40,6 +40,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.ims.ImsManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
@@ -47,11 +50,9 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.network.ApnSettings;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * Confirm and execute a reset of the network settings to a clean "just out of the box"
@@ -213,9 +214,9 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+        final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                 getActivity(), UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId());
-        if (RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+        if (RestrictedLockUtilsInternal.hasBaseUserRestriction(getActivity(),
                 UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
             return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
         } else if (admin != null) {

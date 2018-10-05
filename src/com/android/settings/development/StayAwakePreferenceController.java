@@ -24,18 +24,19 @@ import android.os.BatteryManager;
 import android.os.Handler;
 import android.provider.Settings;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 
 public class StayAwakePreferenceController extends DeveloperOptionsPreferenceController
@@ -130,7 +131,7 @@ public class StayAwakePreferenceController extends DeveloperOptionsPreferenceCon
         // will lock...  in this case we can't allow the user to turn
         // on "stay awake when plugged in" because that would defeat the
         // restriction.
-        return RestrictedLockUtils.checkIfMaximumTimeToLockIsSet(mContext);
+        return RestrictedLockUtilsInternal.checkIfMaximumTimeToLockIsSet(mContext);
     }
 
     @VisibleForTesting

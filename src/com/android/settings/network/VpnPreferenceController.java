@@ -32,11 +32,15 @@ import android.provider.SettingsSlicesContract;
 import android.util.Log;
 import android.util.SparseArray;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -44,10 +48,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 
 public class VpnPreferenceController extends AbstractPreferenceController
@@ -92,7 +92,7 @@ public class VpnPreferenceController extends AbstractPreferenceController
 
     @Override
     public boolean isAvailable() {
-        return !RestrictedLockUtils.hasBaseUserRestriction(mContext,
+        return !RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                 UserManager.DISALLOW_CONFIG_VPN, UserHandle.myUserId());
     }
 

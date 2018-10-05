@@ -26,11 +26,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.settingslib.CustomEditTextPreferenceCompat;
-
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.PreferenceViewHolder;
+
+import com.android.settingslib.CustomEditTextPreferenceCompat;
 
 /**
  * {@code EditTextPreference} that supports input validation.
@@ -93,7 +93,8 @@ public class ValidatedEditTextPreference extends CustomEditTextPreferenceCompat 
             textView.setInputType(
                     InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         } else {
-            textView.setInputType(InputType.TYPE_CLASS_TEXT);
+            textView.setInputType(
+                    InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         }
     }
 

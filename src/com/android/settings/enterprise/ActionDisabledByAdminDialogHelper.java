@@ -32,17 +32,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.Objects;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * Helper class for {@link ActionDisabledByAdminDialog} which sets up the dialog.
@@ -94,7 +95,7 @@ public class ActionDisabledByAdminDialogHelper {
         if (admin == null) {
             return;
         }
-        if (!RestrictedLockUtils.isAdminInCurrentUserOrProfile(mActivity, admin)
+        if (!RestrictedLockUtilsInternal.isAdminInCurrentUserOrProfile(mActivity, admin)
                 || !RestrictedLockUtils.isCurrentUserOrProfile(mActivity, userId)) {
             admin = null;
         } else {
@@ -136,9 +137,6 @@ public class ActionDisabledByAdminDialogHelper {
             case DevicePolicyManager.POLICY_DISABLE_SCREEN_CAPTURE:
                 titleView.setText(R.string.disabled_by_policy_title_screen_capture);
                 break;
-            case DevicePolicyManager.POLICY_MANDATORY_BACKUPS:
-                titleView.setText(R.string.disabled_by_policy_title_turn_off_backups);
-                break;
             case DevicePolicyManager.POLICY_SUSPEND_PACKAGES:
                 titleView.setText(R.string.disabled_by_policy_title_suspend_packages);
                 break;
@@ -156,7 +154,7 @@ public class ActionDisabledByAdminDialogHelper {
         }
         final DevicePolicyManager dpm = (DevicePolicyManager) activity.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
-        if (!RestrictedLockUtils.isAdminInCurrentUserOrProfile(activity,
+        if (!RestrictedLockUtilsInternal.isAdminInCurrentUserOrProfile(activity,
                 enforcedAdmin.component) || !RestrictedLockUtils.isCurrentUserOrProfile(
                 activity, enforcedAdmin.userId)) {
             enforcedAdmin.component = null;

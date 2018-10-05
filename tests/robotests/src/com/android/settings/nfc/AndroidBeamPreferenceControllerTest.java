@@ -17,6 +17,7 @@
 package com.android.settings.nfc;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -27,8 +28,10 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
@@ -41,8 +44,6 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class AndroidBeamPreferenceControllerTest {
@@ -68,7 +69,7 @@ public class AndroidBeamPreferenceControllerTest {
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getSystemService(Context.NFC_SERVICE)).thenReturn(mManager);
-        when(RestrictedLockUtils.hasBaseUserRestriction(mContext,
+        when(RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                 UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId())).thenReturn(false);
         when(NfcAdapter.getDefaultAdapter(mContext)).thenReturn(mNfcAdapter);
 
@@ -103,7 +104,7 @@ public class AndroidBeamPreferenceControllerTest {
     public void isBeamEnable_disAllowBeam_shouldReturnFalse() {
         when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_OFF);
 
-        when(RestrictedLockUtils.hasBaseUserRestriction(mContext,
+        when(RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                 UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId())).thenReturn(true);
         mAndroidBeamController.displayPreference(mScreen);
 

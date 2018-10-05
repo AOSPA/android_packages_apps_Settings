@@ -117,12 +117,12 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             CharSequence title = null;
             try {
                 title = mPm.getApplicationInfoAsUser(
-                        service.packageName, 0, getCurrentUser(managedProfileId)).loadLabel(mPm);
+                        service.packageName, 0, UserHandle.myUserId()).loadLabel(mPm);
             } catch (PackageManager.NameNotFoundException e) {
                 // unlikely, as we are iterating over live services.
                 Log.e(TAG, "can't find package name", e);
             }
-            final String finalTitle = title.toString();
+            final CharSequence finalTitle = title;
             final String summary = service.loadLabel(mPm).toString();
             final SwitchPreference pref = new AppSwitchPreference(getPrefContext());
             pref.setPersistent(false);
@@ -143,7 +143,11 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             }
             pref.setOnPreferenceChangeListener((preference, newValue) -> {
                 final boolean enable = (boolean) newValue;
-                return setEnabled(cn, finalTitle, enable);
+                if (finalTitle != null) {
+                    return setEnabled(cn, finalTitle.toString(), enable);
+                } else {
+                    return setEnabled(cn, null, enable);
+                }
             });
             pref.setKey(cn.flattenToString());
             screen.addPreference(pref);

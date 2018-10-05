@@ -22,11 +22,11 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.AppPreference;
-
-import androidx.preference.PreferenceViewHolder;
 
 /**
  * Custom preference for displaying battery usage info as a bar and an icon on
@@ -58,7 +58,9 @@ public class PowerGaugePreference extends AppPreference {
     private PowerGaugePreference(Context context, AttributeSet attrs, Drawable icon,
             CharSequence contentDescription, BatteryEntry info) {
         super(context, attrs);
-        setIcon(icon != null ? icon : new ColorDrawable(0));
+        if (icon != null) {
+            setIcon(icon);
+        }
         setWidgetLayoutResource(R.layout.preference_widget_summary);
         mInfo = info;
         mContentDescription = contentDescription;

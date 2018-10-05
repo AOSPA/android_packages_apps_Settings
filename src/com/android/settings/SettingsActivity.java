@@ -64,6 +64,8 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
+import com.android.settings.homepage.SettingsHomepageActivity;
+import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.search.DeviceIndexFeatureProvider;
@@ -411,8 +413,13 @@ public class SettingsActivity extends SettingsBaseActivity
             // Show search icon as up affordance if we are displaying the main Dashboard
             mInitialTitleResId = R.string.dashboard_title;
 
-            switchToFragment(DashboardSummary.class.getName(), null /* args */, false, false,
-                    mInitialTitleResId, mInitialTitle, false);
+            if (SettingsHomepageActivity.isDynamicHomepageEnabled(this)) {
+                switchToFragment(TopLevelSettings.class.getName(), null /* args */, false, false,
+                        mInitialTitleResId, mInitialTitle, false);
+            } else {
+                switchToFragment(DashboardSummary.class.getName(), null /* args */, false, false,
+                        mInitialTitleResId, mInitialTitle, false);
+            }
         }
     }
 
@@ -726,16 +733,6 @@ public class SettingsActivity extends SettingsBaseActivity
                         Settings.UserSettingsActivity.class.getName()),
                 UserHandle.MU_ENABLED && UserManager.supportsMultipleUsers()
                         && !Utils.isMonkeyRunning(), isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.NetworkDashboardActivity.class.getName()),
-                !UserManager.isDeviceInDemoMode(this), isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.DateTimeSettingsActivity.class.getName()),
-                !UserManager.isDeviceInDemoMode(this), isAdmin)
                 || somethingChanged;
 
         final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)

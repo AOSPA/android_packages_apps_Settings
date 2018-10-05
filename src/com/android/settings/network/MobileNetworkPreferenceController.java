@@ -30,9 +30,15 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.FeatureFlagUtils;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settings.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -42,14 +48,15 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.List;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-
 public class MobileNetworkPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
 
-    private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
+    @VisibleForTesting
+    static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
+    @VisibleForTesting
+    static final String MOBILE_NETWORK_PACKAGE = "com.android.phone";
+    @VisibleForTesting
+    static final String MOBILE_NETWORK_CLASS = "com.android.phone.MobileNetworkSettings";
 
     private final boolean mIsSecondaryUser;
     private final TelephonyManager mTelephonyManager;
@@ -86,7 +93,7 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
 
     public boolean isUserRestricted() {
         return mIsSecondaryUser ||
-                RestrictedLockUtils.hasBaseUserRestriction(
+                RestrictedLockUtilsInternal.hasBaseUserRestriction(
                         mContext,
                         DISALLOW_CONFIG_MOBILE_NETWORKS,
                         myUserId());
@@ -191,17 +198,21 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_MOBILE_NETWORK_SETTINGS.equals(preference.getKey()) &&
-                Utils.isNetworkSettingsApkAvailable()) {
-            final Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setComponent(new ComponentName("com.qualcomm.qti.networksetting",
-                    "com.qualcomm.qti.networksetting.MobileNetworkSettings"));
-            mContext.startActivity(intent);
+        if (KEY_MOBILE_NETWORK_SETTINGS.equals(preference.getKey())) {
+            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.MOBILE_NETWORK_V2)) {
+                //TODO(b/110260193): go to the mobile network page existed in settings
+            } else {
+                final Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setComponent(
+                        new ComponentName(MOBILE_NETWORK_PACKAGE, MOBILE_NETWORK_CLASS));
+                mContext.startActivity(intent);
+            }
             return true;
         }
         return false;
     }
 
+    @Override
     public CharSequence getSummary() {
         return mSummary;
     }

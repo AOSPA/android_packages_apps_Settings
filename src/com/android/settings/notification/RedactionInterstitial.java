@@ -20,6 +20,7 @@ import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTI
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
 import static android.provider.Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS;
 import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS;
+
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.content.Context;
@@ -46,6 +47,7 @@ import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 public class RedactionInterstitial extends SettingsActivity {
 
@@ -159,7 +161,7 @@ public class RedactionInterstitial extends SettingsActivity {
 
         private void checkNotificationFeaturesAndSetDisabled(RestrictedRadioButton button,
                 int keyguardNotifications) {
-            EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+            EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                     getActivity(), keyguardNotifications, mUserId);
             button.setDisabledByAdmin(admin);
         }

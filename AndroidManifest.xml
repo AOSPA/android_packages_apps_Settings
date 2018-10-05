@@ -124,7 +124,7 @@
                 android:value="true" />
         </activity>
 
-        <activity android:name=".SettingsHomepageActivity"
+        <activity android:name=".homepage.SettingsHomepageActivity"
                   android:taskAffinity="com.android.settings.root"
                   android:label="@string/settings_label_launcher"
                   android:theme="@style/Theme.Settings.Home"
@@ -136,7 +136,7 @@
                 android:taskAffinity="com.android.settings.root"
                 android:label="@string/settings_label_launcher"
                 android:launchMode="singleTask"
-                android:targetActivity=".SettingsHomepageActivity">
+                android:targetActivity=".homepage.SettingsHomepageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1158,12 +1158,12 @@
             </intent-filter>
         </activity-alias>
 
-        <activity android:name=".applications.InstalledAppOpenByDefaultPage"
+        <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
                   android:label="@string/application_info_label"
-                  android:permission="android.permission.OPEN_APPLICATION_DETAILS_OPEN_BY_DEFAULT_PAGE"
+                  android:permission="android.permission.OPEN_APP_OPEN_BY_DEFAULT_SETTINGS"
                   android:exported="true">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS_OPEN_BY_DEFAULT_PAGE" />
+                <action android:name="com.android.settings.APP_OPEN_BY_DEFAULT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
@@ -2743,8 +2743,7 @@
         <activity
             android:name="Settings$WifiCallingSettingsActivity"
             android:label="@string/wifi_calling_settings_title"
-            android:taskAffinity="com.android.settings"
-            android:parentActivityName="Settings">
+            android:taskAffinity="com.android.settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIFI_CALLING_SETTINGS" />

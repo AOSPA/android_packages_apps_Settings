@@ -28,6 +28,9 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -36,12 +39,9 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 /**
  * Controller for password unification/un-unification flows.
@@ -136,8 +136,9 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
                     mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileUserId);
             mUnifyProfile.setChecked(!separate);
             if (separate) {
-                mUnifyProfile.setDisabledByAdmin(RestrictedLockUtils.checkIfRestrictionEnforced(
-                        mContext, UserManager.DISALLOW_UNIFIED_PASSWORD, mProfileUserId));
+                mUnifyProfile.setDisabledByAdmin(RestrictedLockUtilsInternal
+                        .checkIfRestrictionEnforced(mContext, UserManager.DISALLOW_UNIFIED_PASSWORD,
+                                mProfileUserId));
             }
         }
     }

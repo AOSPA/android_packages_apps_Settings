@@ -28,11 +28,14 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.service.trust.TrustAgentService;
 
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
-import com.android.settings.testutils.shadow.ShadowRestrictedLockUtils;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.After;
@@ -49,13 +52,10 @@ import org.robolectric.shadows.ShadowApplicationPackageManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
         ShadowLockPatternUtils.class,
-        ShadowRestrictedLockUtils.class,
+        ShadowRestrictedLockUtilsInternal.class,
         ShadowDevicePolicyManager.class,
         ShadowApplicationPackageManager.class,
         TrustAgentsPreferenceControllerTest.ShadowTrustAgentManager.class
@@ -145,7 +145,7 @@ public class TrustAgentsPreferenceControllerTest {
 
     @Test
     public void onStart_hasUnrestrictedTrustAgent_shouldAddThreeChangeablePreferences() {
-        ShadowRestrictedLockUtils.setKeyguardDisabledFeatures(0);
+        ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(0);
         final List<ResolveInfo> availableAgents = createFakeAvailableAgents();
         for (ResolveInfo rInfo : availableAgents) {
             ShadowTrustAgentManager.grantPermissionToResolveInfo(rInfo);
@@ -170,7 +170,7 @@ public class TrustAgentsPreferenceControllerTest {
             ShadowTrustAgentManager.grantPermissionToResolveInfo(rInfo);
         }
         mPackageManager.addResolveInfoForIntent(TEST_INTENT, availableAgents);
-        ShadowRestrictedLockUtils.setKeyguardDisabledFeatures(
+        ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
                 DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS);
 
         mController.displayPreference(mPreferenceScreen);

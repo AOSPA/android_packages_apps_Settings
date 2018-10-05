@@ -13,7 +13,7 @@
  */
 package com.android.settings.location;
 
-import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
+import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfRestrictionEnforced;
 import static com.android.settingslib.Utils.updateLocationEnabled;
 import static com.android.settingslib.Utils.updateLocationMode;
 
@@ -28,14 +28,15 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-
-import androidx.annotation.VisibleForTesting;
 
 
 /**
@@ -168,14 +169,14 @@ public class LocationEnabler implements LifecycleObserver, OnResume, OnPause {
                 mContext, UserManager.DISALLOW_SHARE_LOCATION, userId);
 
         if (admin == null) {
-            admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+            admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                     mContext, UserManager.DISALLOW_CONFIG_LOCATION, userId);
         }
         return admin;
     }
 
     boolean hasShareLocationRestriction(int userId) {
-        return RestrictedLockUtils.hasBaseUserRestriction(
+        return RestrictedLockUtilsInternal.hasBaseUserRestriction(
                 mContext, UserManager.DISALLOW_SHARE_LOCATION, userId);
     }
 

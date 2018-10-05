@@ -17,6 +17,7 @@
 package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
@@ -343,15 +344,6 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         mProfiles.add(new UserInfo(MANAGED_PROFILE_USER_ID, "", "", UserInfo.FLAG_MANAGED_PROFILE));
         assertThat(mProvider.getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile())
                 .isEqualTo(3);
-    }
-
-    @Test
-    public void testAreBackupsMandatory() {
-        assertThat(mProvider.areBackupsMandatory()).isFalse();
-        ComponentName transportComponent = new ComponentName("test", "test");
-        when(mDevicePolicyManager.getMandatoryBackupTransport())
-                .thenReturn(transportComponent);
-        assertThat(mProvider.areBackupsMandatory()).isTrue();
     }
 
     private void resetAndInitializePackageManager() {

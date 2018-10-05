@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.anyInt;
@@ -180,6 +181,22 @@ public class WifiConfigControllerTest {
         mController =
             new TestWifiConfigController(mConfigUiBase, mView, null, WifiConfigUiBase.MODE_CONNECT);
         mController.isSubmittable();
+    }
+
+    @Test
+    public void isSubmittable_EapToPskWithValidPassword_shouldReturnTrue() {
+        final TextView password = mView.findViewById(R.id.password);
+        final Spinner securitySpinner = mView.findViewById(R.id.security);
+        assertThat(password).isNotNull();
+        assertThat(securitySpinner).isNotNull();
+        when(mAccessPoint.isSaved()).thenReturn(true);
+
+        // Change it from EAP to PSK
+        mController.onItemSelected(securitySpinner, null, AccessPoint.SECURITY_EAP, 0);
+        mController.onItemSelected(securitySpinner, null, AccessPoint.SECURITY_PSK, 0);
+        password.setText(GOOD_PSK);
+
+        assertThat(mController.isSubmittable()).isTrue();
     }
 
     @Test

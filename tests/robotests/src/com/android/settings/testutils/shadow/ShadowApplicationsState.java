@@ -14,23 +14,19 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.testutils.shadow;
 
-import android.content.Intent;
+import android.os.Looper;
 
-import com.android.settings.SettingsActivity;
+import com.android.settingslib.applications.ApplicationsState;
 
-public class InstalledAppOpenByDefaultPage extends SettingsActivity {
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
-    @Override
-    public Intent getIntent() {
-        Intent modIntent = new Intent(super.getIntent());
-        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, AppLaunchSettings.class.getName());
-        return modIntent;
-    }
-
-    @Override
-    protected boolean isValidFragment(String fragmentName) {
-        return AppLaunchSettings.class.getName().equals(fragmentName);
+@Implements(ApplicationsState.class)
+public class ShadowApplicationsState {
+    @Implementation
+    public Looper getBackgroundLooper() {
+        return Looper.getMainLooper();
     }
 }
