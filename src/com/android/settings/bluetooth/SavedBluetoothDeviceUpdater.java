@@ -76,7 +76,8 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         final BluetoothDevice device = cachedDevice.getDevice();
         if (DBG) {
             Log.d(TAG, "isFilterMatched() device name : " + cachedDevice.getName() +
-                    ", is connected : " + device.isConnected() +
+                    ", is connected : " + device.isConnected() + ", is profile connected : "
+                    + cachedDevice.isConnected() +
                     ", is twsplusdevice : " + device.isTwsPlusDevice());
         }
         return device.getBondState() == BluetoothDevice.BOND_BONDED && !device.isConnected() && !device.isTwsPlusDevice();

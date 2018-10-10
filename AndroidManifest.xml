@@ -1412,6 +1412,21 @@
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
         </activity>
 
+        <activity
+            android:name="Settings$AppUsageAccessSettingsActivity"
+            android:label="@string/usage_access_title"
+            android:taskAffinity="com.android.settings"
+            android:parentActivityName="Settings">
+            <intent-filter>
+                <action android:name="android.settings.USAGE_ACCESS_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.UsageAccessDetails"/>
+        </activity>
+
         <activity android:name="Settings$IccLockSettingsActivity"
                 android:label="@string/sim_lock_settings"
                 android:process="com.android.phone">
@@ -3211,6 +3226,15 @@
             android:exported="true"
             android:permission="android.permission.WRITE_SETTINGS_HOMEPAGE_DATA" />
 
+        <provider
+            android:name=".homepage.contextualcards.SettingsContextualCardProvider"
+            android:authorities="com.android.settings.homepage.contextualcards"
+            android:permission="android.permission.WRITE_SETTINGS_HOMEPAGE_DATA"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.content.action.SETTINGS_HOMEPAGE_DATA"/>
+            </intent-filter>
+        </provider>
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>

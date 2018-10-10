@@ -405,6 +405,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new SelectDebugAppPreferenceController(context, fragment));
         controllers.add(new WaitForDebuggerPreferenceController(context));
         controllers.add(new EnableGpuDebugLayersPreferenceController(context));
+        controllers.add(new AngleEnabledAppPreferenceController(context, fragment));
         controllers.add(new VerifyAppsOverUsbPreferenceController(context));
         controllers.add(new LogdSizePreferenceController(context));
         controllers.add(new LogPersistPreferenceController(context, fragment, lifecycle));
@@ -461,6 +462,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new FreeformWindowsPreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         controllers.add(new EnableGnssRawMeasFullTrackingPreferenceController(context));
+        controllers.add(new CbrsDataSwitchPreferenceController(context));
         controllers.add(new DefaultLaunchPreferenceController(context, "running_apps"));
         controllers.add(new DefaultLaunchPreferenceController(context, "demo_mode"));
         controllers.add(new DefaultLaunchPreferenceController(context, "quick_settings_tiles"));

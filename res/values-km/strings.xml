@@ -179,6 +179,7 @@
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"ឧបករណ៍​ដែលបាន​ភ្ជាប់​ពីមុន"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"បាន​ភ្ជាប់​ពីមុន​"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"បាន​បើក​ប៊្លូធូស"</string>
+    <string name="previous_connected_see_all" msgid="3626779872898778415">"មើលទាំងអស់"</string>
     <string name="date_and_time" msgid="9062980487860757694">"កាលបរិច្ឆេទ និង ម៉ោង"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"ជ្រើស​តំបន់​ពេល​វេលា"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -403,6 +404,9 @@
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"រួចរាល់"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="8444494667872034497">"ប្រើ​មុខ​របស់អ្នក​ដើម្បី"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8720574411679475571">"ដោះសោ​ឧបករណ៍​របស់អ្នក"</string>
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"ការចូល​កម្មវិធី និងការទូទាត់ប្រាក់"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"បើកភ្នែកដើម្បីដោះសោ"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"អ្នកត្រូវបើកភ្នែក នៅពេល​ប្រើ​ការផ្ទៀងផ្ទាត់មុខ"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"លុប​ទិន្នន័យ​មុខ​"</string>
     <string name="security_settings_face_settings_improve_face" msgid="1771390557275699911">"កែលម្អ​ទិន្នន័យ​មុខ​របស់អ្នក"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"មុខ​របស់អ្នក​អាចប្រើ​ដើម្បី​ដោះសោ​ឧបករណ៍​របស់អ្នក និង​ចូលប្រើ​កម្មវិធី​បាន។ "<annotation id="url">"ស្វែងយល់​បន្ថែម"</annotation></string>
@@ -1234,7 +1238,7 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"ស្ថានភាព​ថ្ម បណ្ដាញ និង​ព័ត៌មាន​ផ្សេងៗ"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"លេខ​ទូរស័ព្ទ សញ្ញា ។ល។"</string>
     <string name="storage_settings" msgid="4211799979832404953">"ទំហំ​ផ្ទុក"</string>
-    <string name="storage_usb_settings" msgid="7293054033137078060">"ឧបករណ៍​ផ្ទុក"</string>
+    <string name="storage_usb_settings" msgid="7293054033137078060">"ទំហំ​ផ្ទុក"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"កំណត់​ការ​​ផ្ទុក"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"ផ្ដាច់​​ឧបករណ៍​ផ្ទុក​យូអេសប៊ី មើល​ទំហំ​ដែល​មាន"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"ផ្ដាច់​​កាត​អេស​ឌី មើល​ទំហំ​ដែល​មាន"</string>
@@ -2945,7 +2949,6 @@
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"កម្មវិធីលំនាំដើម"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"ភាសា ពេលវេលា ការបម្រុងទុក កំណែថ្មី"</string>
     <string name="search_results_title" msgid="1796252422574886932">"ការកំណត់"</string>
-    <string name="search_menu" msgid="6283419262313758339">"ស្វែងរកការកំណត់"</string>
     <string name="keywords_wifi" msgid="3646884600964177062">"wifi, wi-fi, ការ​តភ្ជាប់​បណ្តាញ អ៊ីនធឺណិត ឥតខ្សែ ទិន្នន័យ, wi fi"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, បិទ/បើក, គ្រប់គ្រង"</string>
     <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"សារ​ជាអក្សរ ការ​សរសេរ​សារ សារ ការ​ផ្ញើ​សារ លំនាំដើម"</string>
@@ -2990,7 +2993,7 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"បង់​ប្រាក់, ចុច, ការ​បង់​ប្រាក់"</string>
     <string name="keywords_backup" msgid="470070289135403022">"ការបម្រុងទុក បម្រុងទុក"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"ចលនា"</string>
-    <string name="keywords_face_unlock" msgid="5753804962088424662">"មុខ ដោះសោ"</string>
+    <string name="keywords_face_unlock" msgid="254144854349092754">"មុខ ដោះសោ ផ្ទៀងផ្ទាត់ ចូល"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, កំណែ prl, imei sv"</string>
     <string name="keywords_sim_status" msgid="1474422416860990564">"បណ្តាញ, ស្ថាន​ភាព​បណ្តាញ​ទូរសព្ទចល័ត, ស្ថានភាព​សេវាកម្ម, កម្លាំងរលកសញ្ញា, ប្រភេទ​បណ្តាញ​ទូរសព្ទចល័ត, រ៉ូ​មីង, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"លេខស៊េរី កំណែផ្នែក​រឹង"</string>
@@ -3429,7 +3432,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"នៅ​ពេល​អ្នក​បញ្ចូល​​កូដ PIN ដើម្បី​ចាប់ផ្ដើម​ឧបករណ៍​នេះ សេវាកម្ម​ភាព​ងាយស្រួល​ដូច​ជា <xliff:g id="SERVICE">%1$s</xliff:g> នឹង​មិន​អាច​ប្រើ​បាន​នៅ​ឡើយ​ទេ។"</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"នៅ​ពេល​អ្នក​បញ្ចូល​​លំនាំ​ដើម្បី​ចាប់ផ្ដើម​ឧបករណ៍​នេះ សេវាកម្ម​ភាព​ងាយស្រួល​ដូច​ជា <xliff:g id="SERVICE">%1$s</xliff:g> នឹង​មិន​អាច​ប្រើ​បាន​នៅ​ឡើយ​ទេ។"</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"នៅ​ពេល​អ្នក​បញ្ចូល​ពាក្យ​សម្ងាត់​ដើម្បី​ចាប់ផ្ដើម​ឧបករណ៍​នេះ សេវាកម្ម​ភាព​ងាយស្រួល​ដូច​ជា <xliff:g id="SERVICE">%1$s</xliff:g> នឹង​មិន​អាច​ប្រើ​បាន​នៅ​ឡើយ​ទេ។"</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"ចំណាំ៖ បន្ទាប់ពីបិទបើកឡើងវិញហើយ កម្មវិធីនេះមិនអាចចាប់ផ្តើមបានទេ រហូតទាល់តែអ្នកដោះសោទូរស័ព្ទរបស់អ្នក"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"ចំណាំ៖ ប្រសិនបើ​អ្នកចាប់ផ្ដើម​ទូរសព្ទ​របស់អ្នក​ឡើងវិញ និងបានកំណត់​ការចាក់សោលើ​អេក្រង់ កម្មវិធីនេះនឹង​មិនអាច​ចាប់ផ្តើម​បានទេ រហូតទាល់តែ​អ្នកដោះសោ​ទូរសព្ទ​របស់អ្នក"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"ព័ត៌មាន IMEI"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"ព័ត៌មាន​ទាក់ទង​នឹង IMEI"</string>
     <string name="slot_number" msgid="3762676044904653577">"(រន្ធ <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3483,7 +3486,7 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"ផ្ទាល់ខ្លួន"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"កន្លែងធ្វើការ"</string>
     <string name="filter_notif_all_apps" msgid="2299049859443680242">"កម្មវិធី៖ ទាំងអស់"</string>
-    <string name="filter_notif_blocked_apps" msgid="3300375727887991342">"កម្មវិធី៖ បិទ"</string>
+    <string name="filter_notif_blocked_apps" msgid="3383043508771300704">"បាន​បិទ"</string>
     <string name="filter_notif_urgent_channels" msgid="3972473613117159653">"ប្រភេទ៖ សំខាន់ជាបន្ទាន់"</string>
     <string name="filter_notif_low_channels" msgid="4128487387390004604">"ប្រភេទ៖ មិនសូវសំខាន់"</string>
     <string name="filter_notif_blocked_channels" msgid="5880190882221644289">"ប្រភេទ៖ បិទ"</string>
@@ -3722,7 +3725,6 @@
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"មិនអនុញ្ញាតសារ SMS ទេ"</string>
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"មិនអនុញ្ញាតឲ្យប្រើកាមេរ៉ាទេ"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"មិនអនុញ្ញាតឲ្យប្រើមុខងារថតអេក្រង់ទេ"</string>
-    <string name="disabled_by_policy_title_turn_off_backups" msgid="7330460584199383321">"មិន​អាចបិទការបម្រុង​ទុក​បាន​ទេ"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="7872038990805477554">"មិន​អាច​បើកកម្មវិធី​នេះបាន​ទេ"</string>
     <string name="default_admin_support_msg" msgid="4489678214035485367">"ប្រសិន​បើ​អ្នក​មាន​សំណួរ សូម​ទាក់ទង​ទៅ​អ្នក​គ្រប់គ្រង​ព័ត៌មាន​វិទ្យា​របស់អ្នក"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"ព័ត៌មានលម្អិតបន្ថែម"</string>
@@ -3886,11 +3888,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"គ្មាន"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"បានបាត់វត្ថុដាក់ចំណាត់ថ្នាក់"</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"វត្ថុដាក់ចំណាត់ថ្នាក់មិនផ្ទុកគន្លឹះនេះទេ"</string>
-    <!-- no translation found for display_cutout_emulation (7466869822418376317) -->
-    <skip />
-    <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ស្នាមចោះ​ផ្ទាំងអេក្រង់ ស្នាមក្រិត"</string>
-    <!-- no translation found for display_cutout_emulation_device_default (7957250558326167503) -->
-    <skip />
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"សក់សេះ"</string>
+    <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"សក់សេះ, ក្បាលឆក"</string>
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"លំនាំដើម​របស់ឧបករណ៍"</string>
     <string name="special_access" msgid="3458780842491881155">"ការចូលប្រើប្រាស់កម្មវិធីពិសេស"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other">កម្មវិធី <xliff:g id="COUNT">%d</xliff:g> អាច​ប្រើ​ទិន្នន័យដែលគ្មានការដាក់កំហិត</item>
@@ -3912,11 +3912,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"បាន​ភ្ជាប់ទៅ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"បានភ្ជាប់​ទៅ​ឧបករណ៍​ច្រើន"</string>
     <string name="demo_mode" msgid="2798762752209330277">"មុខងារ​សាកល្បង​ UI ​ប្រព័ន្ធ"</string>
-    <string name="dark_ui_mode" msgid="2112241426441807273">"មុខងារយប់"</string>
-    <string name="dark_ui_mode_title" msgid="975299966259850992">"កំណត់​មុខងារយប់"</string>
+    <string name="dark_ui_mode" msgid="4176511670311366886">"មុខងារ​ងងឹត"</string>
+    <string name="dark_ui_mode_title" msgid="3471395820322819817">"កំណត់​មុខងារ​ងងឹត"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"ប្រអប់​ការ​កំណត់​រហ័ស​សម្រាប់​អ្នកអភិវឌ្ឍន៍"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"ដាន Winscope"</string>
-    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"ការកំណត់ប្រវត្តិរូបការងារ"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"ការស្វែងរកទំនាក់ទំនង"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"អនុញ្ញាតការស្វែងរកទំនាក់ទំនងដោយស្ថាប័នរបស់អ្នកដើម្បីកំណត់អត្តសញ្ញាណអ្នកហៅ និងលេខទំនាក់ទំនង"</string>
@@ -3944,7 +3943,7 @@
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"ធ្វើកាយវិការរហ័សដើម្បីគ្រប់គ្រងទូរស័ព្ទរបស់អ្នក"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"ធ្វើកាយវិការរហ័សដើម្បីគ្រប់គ្រងថេប្លេតរបស់អ្នក"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"ធ្វើកាយវិការរហ័សដើម្បីគ្រប់គ្រងឧបករណ៍របស់អ្នក"</string>
-    <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"លោតទៅកាមេរ៉ា"</string>
+    <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"ប្តូរទៅកាមេរ៉ា"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"ដើម្បីបើកកាមេរ៉ាឲ្យបានរហ័ស សូមចុចប៊ូតុងថាមពលពីរដង។ ដំណើរការនៅលើអេក្រង់ណាមួយក៏បាន។"</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"បើក​កាមេរ៉ា​យ៉ាង​រហ័ស"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"ត្រឡប់កាមេរ៉ា"</string>
@@ -3961,15 +3960,13 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"លើកដើម្បីពិនិត្យទូរសព្ទ"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"លើកដើម្បីពិនិត្យថេប្លេត"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"លើកដើម្បីពិនិត្យឧបករណ៍"</string>
+    <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"ដាស់ផ្ទាំងអេក្រង់"</string>
+    <string name="ambient_display_wake_screen_summary" msgid="7046476455581790544"></string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"ដើម្បី​ពិនិត្យមើល​ម៉ោង ការជូន​ដំណឹង និងព័ត៌មាន​ផ្សេងទៀត សូមជ្រើសរើស​ទូរសព្ទ​របស់អ្នក។"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"ដើម្បី​ពិនិត្យមើល​ម៉ោង ការជូន​ដំណឹង និងព័ត៌មាន​ផ្សេងទៀត សូមជ្រើសរើស​ថេប្លេត​របស់អ្នក។"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"ដើម្បី​ពិនិត្យមើល​ម៉ោង ការជូន​ដំណឹង និងព័ត៌មាន​ផ្សេងទៀត សូមជ្រើសរើស​ឧបករណ៍​របស់អ្នក។"</string>
-    <string name="ambient_display_reach_title" product="default" msgid="8922978048080725179">"ចូលទៅ​ពិនិត្យមើល​ទូរសព្ទ"</string>
-    <string name="ambient_display_reach_title" product="tablet" msgid="2003954050799022314">"ចូលទៅ​ពិនិត្យមើល​ថេប្លេត"</string>
-    <string name="ambient_display_reach_title" product="device" msgid="4936469171466002668">"ចូលទៅ​ពិនិត្យមើល​ឧបករណ៍"</string>
-    <string name="ambient_display_reach_summary" product="default" msgid="4244514681312536449">"ដើម្បី​ពិនិត្យមើល​ម៉ោង ការជូន​ដំណឹង និងព័ត៌មាន​ផ្សេងទៀត សូមចូល​ទៅកាន់​ទូរសព្ទ​របស់អ្នក។"</string>
-    <string name="ambient_display_reach_summary" product="tablet" msgid="2321551792287654898">"ដើម្បី​ពិនិត្យមើល​ម៉ោង ការជូន​ដំណឹង និងព័ត៌មាន​ផ្សេងទៀត សូមចូល​ទៅកាន់​ថេប្លេត​របស់អ្នក។"</string>
-    <string name="ambient_display_reach_summary" product="device" msgid="1953312292453084907">"ដើម្បី​ពិនិត្យមើល​ម៉ោង ការជូន​ដំណឹង និងព័ត៌មាន​ផ្សេងទៀត សូមចូល​ទៅកាន់​ឧបករណ៍​របស់អ្នក។"</string>
+    <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"ចលនា​ដាស់អេក្រង់ចាក់សោ"</string>
+    <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"អូសលើ​ឧបករណ៍ចាប់ស្នាមម្រាមដៃ​សម្រាប់​ការជូនដំណឹង"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"អូសស្នាមម្រាមដៃ"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"ដើម្បីពិនិត្យមើលការជូនដំណឹងរបស់អ្នក សូមអូសចុះក្រោមនៅលើឧបករណ៍ចាប់ស្នាមម្រាមដៃ ដែលស្ថិតនៅផ្នែកខាងក្រោយទូរសព្ទរបស់អ្នក។"</string>
@@ -4049,7 +4046,6 @@
       <item quantity="other">ការ​ព្យាយាម​ចូល <xliff:g id="COUNT_1">%d</xliff:g> ដង</item>
       <item quantity="one">ការ​ព្យាយាម​ចូល <xliff:g id="COUNT_0">%d</xliff:g> ដង</item>
     </plurals>
-    <string name="enterprise_privacy_backups_enabled" msgid="8186700798406539053">"ទិន្នន័យ​របស់​ឧបករណ៍​នេះ​កំពុង​ត្រូវ​បាន​បម្រុង​ទុក"</string>
     <string name="do_disclosure_generic" msgid="8653670456990823307">"ឧបករណ៍​នេះ​ស្ថិត​ក្រោម​ការ​គ្រប់គ្រង​របស់ស្ថាប័ន​​អ្នក។"</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"ឧបករណ៍​នេះ​ស្ថិត​ក្រោម​ការ​គ្រប់គ្រង​របស់ <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> ។"</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
@@ -4115,6 +4111,9 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"តាមដានក្រុមរូបថត និងហ្រេ្វកង់ GNSS ទាំងអស់​ដែល​គ្មាន​ការបែង​ចែក​រយៈពេល​ដំណើរការ"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"បង្ហាញ​ប្រអប់បញ្ចូល​នៃ​ការ​គាំង​ជានិច្ច"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"បង្ហាញ​ប្រអប់បញ្ចូល​រាល់ពេលដែល​កម្មវិធី​គាំង"</string>
+    <string name="angle_enabled_app" msgid="1841862539745838255">"ជ្រើសរើស​កម្មវិធី​ដែលអាច​ប្រើ ANGLE"</string>
+    <string name="angle_enabled_app_not_set" msgid="864740024581634768">"មិន​មាន​ការកំណត់​កម្មវិធី​ដែលអាច​ប្រើ ANGLE ទេ"</string>
+    <string name="angle_enabled_app_set" msgid="226015765615525056">"កម្មវិធី​ដែល​អាច​ប្រើ ANGLE៖ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="directory_access" msgid="4722237210725864244">"ការចូល​ប្រើ​បញ្ជី"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"ការចូលប្រើ​បញ្ជី"</string>
     <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
@@ -4155,6 +4154,21 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"ព័ត៌មាន​លម្អិតនៃ​បណ្ដាញ"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"ឈ្មោះ​ឧបករណ៍​របស់អ្នក​អាច​ឱ្យ​កម្មវិធី​នៅលើ​ទូរសព្ទ​របស់អ្នក​មើលឃើញ។ វា​ក៏​អាច​ឱ្យ​អ្នក​ដទៃ​មើល​ឃើញ​ផងដែរ នៅពេល​ដែលអ្នក​ភ្ជាប់​ទៅ​ឧបករណ៍​ប៊្លូធូស ឬ​រៀបចំ​ហតស្ប៉ត Wi-Fi ។"</string>
     <string name="devices_title" msgid="7701726109334110391">"ឧបករណ៍"</string>
+    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"ផ្ទាំង​ប្រេកង់​ខ្ពស់"</string>
+    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"បើក​ផ្ទាំង​ប្រេកង់​ខ្ពស់​និម្មិត"</string>
+    <string name="homepage_all_settings" msgid="1245540304900512919">"ការកំណត់​ទាំងអស់"</string>
+    <string name="homepage_personal_settings" msgid="3998213046366125494">"ការកំណត់របស់អ្នក"</string>
+    <string name="cbrs_data_switch" msgid="2438108549734702331">"ទិន្នន័យ CBRS"</string>
+    <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"ទិន្នន័យ CBRS"</string>
+    <string name="choose_network_title" msgid="5702586742615861037">"ជ្រើសរើសបណ្តាញ"</string>
+    <string name="network_disconnected" msgid="2933191767567503504">"បាន​ផ្ដាច់"</string>
+    <string name="network_connected" msgid="4943925032253989621">"បានភ្ជាប់"</string>
+    <string name="network_connecting" msgid="76404590784733557">"កំពុងភ្ជាប់…"</string>
+    <string name="network_could_not_connect" msgid="1113813392274155369">"មិន​អាចភ្ជាប់​បានទេ"</string>
+    <string name="empty_networks_list" msgid="2578752112731781190">"រក​បណ្ដាញមិន​ឃើញ​ទេ។"</string>
+    <string name="network_query_error" msgid="7487714485362598410">"រក​បណ្ដាញ​មិនឃើញទេ។ សូមព្យាយាម​ម្ដង​ទៀត។"</string>
+    <string name="forbidden_network" msgid="4626592887509826545">"(ហាម)"</string>
+    <string name="no_sim_card" msgid="1360669528113557381">"គ្មាន​ស៊ីម​កាត​ទេ"</string>
     <string name="qtifeedback_settings_title">មតិតប​នៃ​ហាដវែរ</string>
     <string name="qtifeedback_settings_subtitle">Qualcomm Technologies, Inc ការរាយការណ៍</string>
 </resources>
