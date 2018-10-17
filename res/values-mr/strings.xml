@@ -179,6 +179,8 @@
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"याआधी कनेक्ट केलेली डिव्हाइस"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"याआधी कनेक्ट केलेले"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"ब्लूटूथ सुरू केले"</string>
+    <!-- no translation found for previous_connected_see_all (3626779872898778415) -->
+    <skip />
     <string name="date_and_time" msgid="9062980487860757694">"तारीख आणि वेळ"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"टाइम झोन निवडा"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -387,9 +389,9 @@
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"रद्द करा"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"तुमच्या चेहऱ्यासह अनलॉक करा"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"ऑथेंटिकेट करण्यासाठी तुमचा चेहरा वापरा"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"तुमचा फोन अनलॉक करण्यासाठी, खरेदी अधिकृत करण्यासाठी किंवा अॅप्समध्ये साइन इन करण्यासाठी तुमचा चेहरा वापरा."</string>
+    <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"तुमचा फोन अनलॉक करण्यासाठी, खरेदी मान्यता देण्यासाठी किंवा अॅप्समध्ये साइन इन करण्यासाठी तुमचा चेहरा वापरा."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"फोन अनलॉक करण्यासाठी किंवा खरेदींना मंजूरी देण्यासाठी तुमचा चेहरा वापरा.\n\nटीप: तुम्ही हे डिव्हाइस अनलॉक करण्यासाठी तुमचा चेहरा वापरू शकत नाही. अधिक माहितीसाठी, तुमच्या संस्थेच्या प्रशासकाशी संपर्क साधा."</string>
-    <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"तुमचा फोन अनलॉक करण्यासाठी, खरेदी अधिकृत करण्यासाठी किंवा अॅप्सवर साइन इन करण्यासाठी तुमचा चेहरा वापरा"</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"तुमचा फोन अनलॉक करण्यासाठी, खरेदी परवानगी देण्यासाठी किंवा अॅप्सवर साइन इन करण्यासाठी तुमचा चेहरा वापरा"</string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4019853239039918762">"तुमचा चेहरा वर्तुळाच्या मध्यभागी ठेवा"</string>
     <string name="security_settings_face_enroll_enrolling_skip" msgid="1933553314312349529">"हे नंतर करा"</string>
     <string name="face_add_max" msgid="4408683751143942949">"तुम्ही <xliff:g id="COUNT">%d</xliff:g> पर्यंत चेहरे जोडू शकता"</string>
@@ -403,6 +405,9 @@
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"पूर्ण झाले"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="8444494667872034497">"तुमचा चेहेरा वापरून"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8720574411679475571">"तुमचे डिव्हाइस अनलॉक करा"</string>
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"अॅप साइन इन आणि पेमेंट"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"अनलॉक करण्यासाठी डोळे उघडा"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"चेहरा ऑथेंटिकेशन वापरताना, तुमचे डोळे उघडे असणे आवश्यक आहे"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"फेस डेटा काढून टाका"</string>
     <string name="security_settings_face_settings_improve_face" msgid="1771390557275699911">"तुमच्या फेस डेटात सुधारणा करा"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"डिव्हाइस अनलॉक करण्यासाठी आणि अॅप्स करण्यासाठी तुम्ही तुमचा चेहेरा वापरू शकता. "<annotation id="url">"अधिक जाणून घ्या"</annotation></string>
@@ -1124,13 +1129,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"उपलब्ध प्रकाशासाठी उज्ज्वलता स्तर अनुकूल करा. हे वैशिष्ट्य चालू असताना, तुम्ही तरीही उज्ज्वलता तात्पुरती समायोजित करू शकता."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"तुमच्या स्क्रीनची चमक तुमच्या वातावरण आणि अॅक्टिव्हिटीशी आपोआप समायोजित होईल. अनुकूलित चमकेला तुमची प्राधान्ये जाणून घेण्यात मदत करण्यासाठी तुम्ही स्लाइडर व्यक्तिचलितपणे हलवू शकता."</string>
     <string name="night_display_title" msgid="2626451512200357686">"रात्रीचा प्रकाश"</string>
-    <string name="night_display_text" msgid="1837277457033025056">"रात्रीचा प्रकाश तुमच्या स्क्रीनला पिवळसर तपकिरी रंगछटा देतो. यामुळे मंद प्रकाशात तुमचा स्क्रीन पाहणे किंवा वाचणे सोपे होते आणि तुम्हाला झोप येण्यात मदत होऊ शकते."</string>
-    <string name="night_display_auto_mode_title" msgid="6574111412154833409">"शेड्यूल"</string>
+    <string name="night_display_text" msgid="1837277457033025056">"रात्रीचा प्रकाश तुमच्या स्क्रीनला पिवळसर तपकिरी छटा देतो. यामुळे मंद प्रकाशात तुमची स्क्रीन पाहणे किंवा वाचणे सोपे होते आणि तुम्हाला झोप येण्यात मदत होऊ शकते."</string>
+    <string name="night_display_auto_mode_title" msgid="6574111412154833409">"शेड्युल"</string>
     <string name="night_display_auto_mode_never" msgid="2483761922928753400">"काहीही नाही"</string>
-    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"कस्टम वेळी चालू होते"</string>
-    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"सूर्योदय ते सूर्यास्तादरम्यान चालू होते"</string>
+    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"ठराविक वेळी चालू होतो"</string>
+    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"सूर्यास्त-सूर्योदय चालू राहतो"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"प्रारंभ वेळ"</string>
-    <string name="night_display_end_time_title" msgid="8286061578083519350">"समाप्ती वेळ"</string>
+    <string name="night_display_end_time_title" msgid="8286061578083519350">"संपण्याची वेळ"</string>
     <string name="night_display_status_title" msgid="1784041143360286267">"स्थिती"</string>
     <string name="night_display_temperature_title" msgid="1435292789272017136">"तीव्रता"</string>
     <string name="night_display_summary_off" msgid="1792750041697946539">"बंद / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -2946,7 +2951,6 @@
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"डीफॉल्ट अ‍ॅप्स"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"भाषा, वेळ, बॅक अप, अपडेट"</string>
     <string name="search_results_title" msgid="1796252422574886932">"सेटिंग्ज"</string>
-    <string name="search_menu" msgid="6283419262313758339">"सेटिंग्ज शोधा"</string>
     <string name="keywords_wifi" msgid="3646884600964177062">"वायफाय, वाय-फाय, नेटवर्क कनेक्शन, इंटरनेट, वायरलेस, डेटा, वाय फाय"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"वायफाय, वाय-फाय, टॉगल, कंट्रोल"</string>
     <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"एसएमएस, मजकूर पाठवणे, मेसेज, मेसेजिंग, डीफॉल्ट"</string>
@@ -2991,7 +2995,7 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"देय द्या, टॅप करा, पेमेंट"</string>
     <string name="keywords_backup" msgid="470070289135403022">"बॅकअप, बॅक अप"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"जेश्चर"</string>
-    <string name="keywords_face_unlock" msgid="5753804962088424662">"फेस, अनलॉक"</string>
+    <string name="keywords_face_unlock" msgid="254144854349092754">"चेहरा, अनलॉक, प्रमाणीकरण, साइन इन"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, prl आवृत्ती, imei sv"</string>
     <string name="keywords_sim_status" msgid="1474422416860990564">"नेटवर्क, मोबाइल नेटवर्क स्थिती, सेवा स्थिती, सिग्नल तीव्रता, मोबाइल नेटवर्क प्रकार, रोमिंग, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"सीरीअल नंबर, हार्डवेअर आवृत्ती"</string>
@@ -3375,7 +3379,7 @@
     <string name="zen_mode_when_never" msgid="8809494351918405602">"कधीही नाही"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"प्रत्येक रात्री"</string>
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"आठवड्याच्या रात्री"</string>
-    <string name="zen_mode_start_time" msgid="8102602297273744441">"प्रारंभ वेळ"</string>
+    <string name="zen_mode_start_time" msgid="8102602297273744441">"सुरू होण्याची वेळ"</string>
     <string name="zen_mode_end_time" msgid="8774327885892705505">"समाप्ती वेळ"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> पुढील दिवशी"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="2061973221027570123">"अनिश्चितपणे केवळ अलार्म वर बदला"</string>
@@ -3430,7 +3434,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"या डिव्हाइसचा प्रारंभ करण्यासाठी तुम्ही तुमचा पिन एंटर करता, तेव्हा <xliff:g id="SERVICE">%1$s</xliff:g> सारख्या सेवांची प्रवेशयोग्यता उपलब्धता असणार नाही."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"हे डिव्हाइस सुरू करण्यासाठी तुम्ही तुमचा पॅटर्न एंटर करता, तेव्हा <xliff:g id="SERVICE">%1$s</xliff:g> सारख्या सेवांची प्रवेशयोग्यता उपलब्ध असणार नाही."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"या डिव्हाइसचा प्रारंभ करण्यासाठी तुम्ही तुमचा पासवर्ड एंटर करता, तेव्हा <xliff:g id="SERVICE">%1$s</xliff:g> सारख्या सेवांची प्रवेशयोग्यता उपलब्ध असणार नाही."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"टीप: रीबूट केल्यानंतर, तुम्ही तुमचा फोन अनलॉक करे पर्यंत हे अॅप सुरू होऊ शकत नाही"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"टीप: तुम्ही तुमचा फोन रीस्टार्ट केल्यास आणि स्क्रीन लॉक सेट केले असल्यास, तुम्ही तुमचा फोन अनलॉक करेपर्यंत हे अॅप सुरू होऊ शकत नाही"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI माहिती"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI सापेक्ष माहिती"</string>
     <string name="slot_number" msgid="3762676044904653577">"(स्लॉट<xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3484,7 +3488,7 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"वैयक्तिक"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"कार्य"</string>
     <string name="filter_notif_all_apps" msgid="2299049859443680242">"अ‍ॅप्स: सर्व"</string>
-    <string name="filter_notif_blocked_apps" msgid="3300375727887991342">"अ‍ॅप्स: बंद केलेली"</string>
+    <string name="filter_notif_blocked_apps" msgid="3383043508771300704">"बंद केले आहे"</string>
     <string name="filter_notif_urgent_channels" msgid="3972473613117159653">"वर्गवाऱ्या: तातडीचे महत्त्व"</string>
     <string name="filter_notif_low_channels" msgid="4128487387390004604">"वर्गवाऱ्या: कमी महत्त्व"</string>
     <string name="filter_notif_blocked_channels" msgid="5880190882221644289">"वर्गवाऱ्या: बंद केलेल्या"</string>
@@ -3633,7 +3637,7 @@
     <string name="running_frequency" msgid="6622624669948277693">"वारंवारता"</string>
     <string name="memory_maximum_usage" msgid="6513785462055278341">"कमाल वापर"</string>
     <string name="no_data_usage" msgid="9131454024293628063">"कोणताही डेटा वापरला नाही"</string>
-    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"<xliff:g id="APP">%1$s</xliff:g> साठी व्यत्यय आणू नका ला प्रवेशाची अनुमती द्यायची?"</string>
+    <string name="zen_access_warning_dialog_title" msgid="1198189958031157142">"<xliff:g id="APP">%1$s</xliff:g> वर व्यत्यय आणू नका ला अॅक्सेस द्यायचा का?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="4015885767653010873">"व्यत्यय आणू नका चालू/बंद करण्‍यात आणि संबंधित स्‍ट्रिंगमध्‍ये बदल करण्‍यात अ‍ॅप सक्षम असेल."</string>
     <string name="zen_access_disabled_package_warning" msgid="302820100078584431">"सूचना प्रवेश चालू असल्याने चालू केलेले ठेवणे आवश्यक आहे"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="558779234015793950">"<xliff:g id="APP">%1$s</xliff:g> साठी व्यत्यय आणू नका मध्‍ये प्रवेश करणे रद्द करायचे?"</string>
@@ -3723,7 +3727,6 @@
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"SMS ला अनुमती नाही"</string>
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"कॅमेर्‍याला अनुमती नाही"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"स्‍क्रीनशॉटला अनुमती नाही"</string>
-    <string name="disabled_by_policy_title_turn_off_backups" msgid="7330460584199383321">"बॅकअप बंद करू शकत नाही"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="7872038990805477554">"हे अॅप उघडू शकत नाही"</string>
     <string name="default_admin_support_msg" msgid="4489678214035485367">"तुम्हाला कोणतेही प्रश्न असल्यास, तुमच्या आयटी प्रशासकाशी संपर्क साधा"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"अधिक तपशील"</string>
@@ -3887,11 +3890,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"काहीही नाही"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"रँकिंग ऑब्जेक्ट गहाळ आहे."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"रँकिंग ऑब्जेक्ट मध्ये ही की असू शकत नाही."</string>
-    <!-- no translation found for display_cutout_emulation (7466869822418376317) -->
-    <skip />
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"डिस्प्ले कटआउट"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"कटआउट, नॉच डिस्‍प्‍ले करा"</string>
-    <!-- no translation found for display_cutout_emulation_device_default (7957250558326167503) -->
-    <skip />
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"डिव्हाइस डीफॉल्ट"</string>
     <string name="special_access" msgid="3458780842491881155">"विशेष अॅप प्रवेश"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> अ‍ॅप अनिर्बंधित डेटा वापरू शकते</item>
@@ -3913,11 +3914,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g>शी कनेक्ट केले"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"एकाधिक डिव्हाइसशी कनेक्ट केले"</string>
     <string name="demo_mode" msgid="2798762752209330277">"सिस्टम UI डेमो मोड"</string>
-    <string name="dark_ui_mode" msgid="2112241426441807273">"नाइट मोड"</string>
-    <string name="dark_ui_mode_title" msgid="975299966259850992">"नाइट मोड सेट करा"</string>
+    <string name="dark_ui_mode" msgid="4176511670311366886">"गडद मोड"</string>
+    <string name="dark_ui_mode_title" msgid="3471395820322819817">"गडद मोड सेट करा"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"द्रुत सेटिंग्ज डेव्हलपर टाइल"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"विनस्कोप ट्रेस"</string>
-    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"कार्य प्रोफाइल सेटिंग्ज"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"संपर्क शोध"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"कॉलर आणि संपर्कांना ओळखण्यासाठी आपल्या संस्थेनुसार संपर्क शोधांची अनुमती द्या"</string>
@@ -3962,21 +3962,13 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"फोन तपासण्‍यासाठी तो उचला"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"टॅब्लेट तपासण्‍यासाठी तो उचला"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"डिव्हाइस तपासण्‍यासाठी ते उचला"</string>
+    <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"वेक अप डिस्प्ले"</string>
+    <string name="ambient_display_wake_screen_summary" msgid="7046476455581790544"></string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"वेळ, सूचना आणि इतर माहिती तपासण्यासाठी, तुमचा फोन उचला."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"वेळ, सूचना आणि इतर माहिती तपासण्यासाठी, तुमचे टॅबलेट उचला."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"वेळ, सूचना आणि इतर माहिती तपासण्यासाठी, तुमचे डिव्हाइस उचला."</string>
-    <!-- no translation found for ambient_display_reach_title (8922978048080725179) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_title (2003954050799022314) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_title (4936469171466002668) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_summary (4244514681312536449) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_summary (2321551792287654898) -->
-    <skip />
-    <!-- no translation found for ambient_display_reach_summary (1953312292453084907) -->
-    <skip />
+    <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"वेक लॉक स्क्रीन जेश्चर"</string>
+    <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"सूचनांसाठी फिंगरप्रिंट स्वाइप करा"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"फिंगरप्रिंट स्वाइप करा"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"तुमच्या सूचना तपासण्यासाठी, तुमच्या फोनच्या पाठीमागे फिंगरप्रिंट सेन्सरवर खाली स्वाइप करा."</string>
@@ -4056,7 +4048,6 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> प्रयत्न</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> प्रयत्न</item>
     </plurals>
-    <string name="enterprise_privacy_backups_enabled" msgid="8186700798406539053">"या डिव्हाइसच्या डेटाचा बॅकअप घेतला जात आहे"</string>
     <string name="do_disclosure_generic" msgid="8653670456990823307">"हे डिव्हाइस तुमच्या संस्थेने व्यवस्थापित केले आहे."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"हे डिव्हाइस <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> द्वारे व्यवस्थापित आहे."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
@@ -4122,6 +4113,9 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"कुठल्याही ड्युटी सायकलिंग शिवाय सर्व GNSS तारामंडळे आणि वारंवारता ट्रॅक करा"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"नेहमी क्रॅश डायलॉग दाखवा"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"अॅप क्रॅश झाल्यावर प्रत्येक वेळी डायलॉग दाखवा"</string>
+    <string name="angle_enabled_app" msgid="1841862539745838255">"ANGLE सुरू केलेले अॅप निवडा"</string>
+    <string name="angle_enabled_app_not_set" msgid="864740024581634768">"कोणतेही ANGLE सुरू केलेले अॅप्लिकेशन सेट करा"</string>
+    <string name="angle_enabled_app_set" msgid="226015765615525056">"ANGLE सुरू केलेले अॅप्लिकेशन: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="directory_access" msgid="4722237210725864244">"डिरेक्टरी अ‍ॅक्सेस"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"डिरेक्टरी अ‍ॅक्सेस"</string>
     <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
@@ -4162,6 +4156,21 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"नेटवर्क तपशील"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"तुमचे डिव्हाइस नाव तुमच्या फोनवरील अॅप्सना दृश्यमान आहे. तुम्ही ब्लूटूथ डिव्हाइसशी जोडता किंवा वाय-फाय हॉटस्पॉट सेट करता, तेव्हा हे इतर लोकांद्वारे देखील बघितले जाऊ शकते."</string>
     <string name="devices_title" msgid="7701726109334110391">"डिव्हाइस"</string>
+    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"उच्च अचूकता पॅनल"</string>
+    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"व्हर्च्युअल उच्च अचूकता पॅनल सुरू करा"</string>
+    <string name="homepage_all_settings" msgid="1245540304900512919">"सर्व सेटिंग्ज"</string>
+    <string name="homepage_personal_settings" msgid="3998213046366125494">"तुमच्या सेटिंग्ज"</string>
+    <string name="cbrs_data_switch" msgid="2438108549734702331">"CBRS डेटा"</string>
+    <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"CBRS डेटा"</string>
+    <string name="choose_network_title" msgid="5702586742615861037">"नेटवर्क निवडा"</string>
+    <string name="network_disconnected" msgid="2933191767567503504">"डिस्कनेक्ट केलेले"</string>
+    <string name="network_connected" msgid="4943925032253989621">"कनेक्ट केलेले"</string>
+    <string name="network_connecting" msgid="76404590784733557">"कनेक्ट करत आहे…"</string>
+    <string name="network_could_not_connect" msgid="1113813392274155369">"कनेक्ट करता आले नाही"</string>
+    <string name="empty_networks_list" msgid="2578752112731781190">"कोणतीही नेटवर्क आढळली नाहीत."</string>
+    <string name="network_query_error" msgid="7487714485362598410">"नेटवर्क मिळू शकले नाहीत. पुन्‍हा प्रयत्‍न करा."</string>
+    <string name="forbidden_network" msgid="4626592887509826545">"(मनाई केलेले)"</string>
+    <string name="no_sim_card" msgid="1360669528113557381">"सिम कार्ड नाही"</string>
     <string name="qtifeedback_settings_title">हार्डवेअर फीडबॅक</string>
     <string name="qtifeedback_settings_subtitle">Qualcomm Technologies, Inc  रिपोर्टिंग</string>
 </resources>

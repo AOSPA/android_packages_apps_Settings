@@ -384,15 +384,15 @@
     <!-- Summary for bluetooth item in connection detail page. (phone)-->
     <string name="bluetooth_pref_summary" product="default">Allow your phone to communicate with nearby Bluetooth devices</string>
 
-    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=40] -->
+    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_a2dp_hw_offload">Disable Bluetooth A2DP hardware offload</string>
-    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=20] -->
+    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_title">Restart Device?</string>
-    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=60] -->
+    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_message">You need to restart your device to change this setting.</string>
-    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=10] -->
+    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm">Restart</string>
-    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=10] -->
+    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel">Cancel</string>
 
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
@@ -415,6 +415,9 @@
     <string name="connected_device_previously_connected_screen_title">Previously connected</string>
     <!-- Toast text for hint user bluetooth is turned on [CHAR LIMIT=none]-->
     <string name="connected_device_bluetooth_turned_on_toast">Bluetooth turned on</string>
+
+    <!-- Title to see all the previous connected devices [CHAR LIMIT=50] -->
+    <string name="previous_connected_see_all">See all</string>
 
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time</string>
@@ -895,6 +898,12 @@
     <string name="security_settings_face_settings_use_face_category">Use your face to</string>
     <!-- Text shown on a toggle which allows or disallows the device to use face for unlocking the device. [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_use_face_unlock_phone">Unlock your device</string>
+    <!-- Text shown on a toggle which allows or disallows the device to use face authentication for apps. This will be presented to the user together with the context of security_settings_face_settings_use_face_category. [CHAR LIMIT=30] -->
+    <string name="security_settings_face_settings_use_face_for_apps">App sign-in \u0026 payments</string>
+    <!-- Text shown on a toggle which disables/enables face authentication, depending if the user's eyes are open. [CHAR LIMIT=30] -->
+    <string name="security_settings_face_settings_require_attention">Eyes open to unlock</string>
+    <!-- Text shown on the details of a toggle which disables/enables face authentication, depending if the user's eyes are open. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_attention_details">When using face authentication, your eyes must be open</string>
     <!-- Button text in face settings which removes the user's faces from the device [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_remove_face_data">Remove face data</string>
     <!-- Text shown in face settings allowing the user to update/improve the enrolled face. This brings the user back to the enrollment flow. [CHAR LIMIT=30] -->
@@ -6905,8 +6914,6 @@
     <!-- Search strings -->
     <!-- Text to describe the search results fragment title [CHAR LIMIT=16] -->
     <string name="search_results_title">Settings</string>
-    <!-- Text used as a search hint into the search box -->
-    <string name="search_menu">Search settings</string>
     <!-- Search breadcrumb connector symbol -->
     <string name="search_breadcrumb_connector" translatable="false">
         <xliff:g name="first_item">%1$s</xliff:g> > <xliff:g name="second_item">%2$s</xliff:g>
@@ -6957,7 +6964,7 @@
     <string name="keywords_payment_settings">pay, tap, payments</string>
     <string name="keywords_backup">backup, back up</string>
     <string name="keywords_assist_gesture_launch">gesture</string>
-    <string name="keywords_face_unlock">face, unlock</string>
+    <string name="keywords_face_unlock">face, unlock, auth, sign in</string>
     <string name="keywords_imei_info">imei, meid, min, prl version, imei sv</string>
     <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
@@ -8309,7 +8316,7 @@
     <!-- Label for showing apps with blocked notifications in list [CHAR LIMIT=30] -->
     <string name="filter_notif_all_apps">Apps: All</string>
     <!-- Label for showing apps with blocked notifications in list [CHAR LIMIT=30] -->
-    <string name="filter_notif_blocked_apps">Apps: Turned off</string>
+    <string name="filter_notif_blocked_apps">Turned off</string>
     <!-- Label for showing categories with urgent notifications in list [CHAR LIMIT=30] -->
     <string name="filter_notif_urgent_channels">Categories: Urgent importance</string>
     <!-- Label for showing categories with low importance notifications in list [CHAR LIMIT=30] -->
@@ -9580,6 +9587,11 @@
     <!-- Preference and settings suggestion title text for ambient display pick up (device) [CHAR LIMIT=60]-->
     <string name="ambient_display_pickup_title" product="device">Lift to check device</string>
 
+    <!-- Preference and settings suggestion title text for display wake-up gesture [CHAR LIMIT=60]-->
+    <string name="ambient_display_wake_screen_title">Wake up display</string>
+    <!-- Summary text for ambient display wake-up gesture [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_wake_screen_summary"></string>
+
     <!-- Summary text for ambient display (phone) [CHAR LIMIT=NONE]-->
     <string name="ambient_display_pickup_summary" product="default">To check time, notifications, and other info, pick up your phone.</string>
     <!-- Summary text for ambient display (tablet) [CHAR LIMIT=NONE]-->
@@ -9587,10 +9599,10 @@
     <!-- Summary text for ambient display (device) [CHAR LIMIT=NONE]-->
     <string name="ambient_display_pickup_summary" product="device">To check time, notifications, and other info, pick up your device.</string>
 
-    <!-- Preference and settings suggestion title text for reach gesture [CHAR LIMIT=60]-->
-    <string name="ambient_display_reach_title">Reach gesture</string>
+    <!-- Preference and settings suggestion title text for gesture that shows the lock screen [CHAR LIMIT=60]-->
+    <string name="ambient_display_wake_lock_screen_title">Wake lock screen gesture</string>
     <!-- Summary text for ambient display [CHAR LIMIT=NONE]-->
-    <string name="ambient_display_reach_summary" product="default"></string>
+    <string name="ambient_display_wake_lock_screen_summary" product="default"></string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
@@ -9955,6 +9967,13 @@
     <!-- UI debug setting: preference summary - describes the behavior of showing a dialog every time an app crashes [CHAR LIMIT=NONE] -->
     <string name="show_first_crash_dialog_summary">Show dialog every time an app crashes</string>
 
+    <!-- UI debug setting: select current app to use ANGLE [CHAR LIMIT=100] -->
+    <string name="angle_enabled_app">Select ANGLE enabled app</string>
+    <!-- UI debug setting: no ANGLE enabled app has been set [CHAR LIMIT=100] -->
+    <string name="angle_enabled_app_not_set">No ANGLE enabled application set</string>
+    <!-- UI debug setting: ANGLE enabled app has been set [CHAR LIMIT=NONE] -->
+    <string name="angle_enabled_app_set">ANGLE enabled application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
+
     <!-- Title for Directory Access settings -->
     <string name="directory_access">Directory access</string>
     <!-- Keywords for Directory Access settings -->
@@ -10087,6 +10106,32 @@
 
     <!-- Homepage bottom menu. Title for display personalized Settings [CHAR LIMIT=30] -->
     <string name="homepage_personal_settings">Your Settings</string>
+
+    <!-- Setting Checkbox title whether to enable CBRS data. [CHAR LIMIT=40] -->
+    <string name="cbrs_data_switch">CBRS Data</string>
+
+    <!-- Title of implications of enabling CBRS Data -->
+    <string name="cbrs_data_switch_summary">CBRS Data</string>
+
+    <!-- Available networks screen, name of button when user wants to select network manually [CHAR LIMIT=60] -->
+    <string name="choose_network_title">Choose network</string>
+    <!-- Available networks screen, text when no networks connected [CHAR LIMIT=60] -->
+    <string name="network_disconnected">Disconnected</string>
+    <!-- Available networks screen, text when network connected [CHAR LIMIT=60] -->
+    <string name="network_connected">Connected</string>
+    <!-- Available networks screen, text when a network is connecting [CHAR LIMIT=60] -->
+    <string name="network_connecting">Connecting\u2026</string>
+    <!-- Available networks screen, text when a network cannot be connected [CHAR LIMIT=60] -->
+    <string name="network_could_not_connect">Couldn\u2019t connect</string>
+    <!-- Available networks screen, text when no networks are found [CHAR LIMIT=NONE] -->
+    <string name="empty_networks_list">No networks found.</string>
+    <!-- Available networks screen, toast when an error is encountered when searching for networks [CHAR LIMIT=NONE] -->
+    <string name="network_query_error">Couldn\u2019t find networks. Try again.</string>
+    <!-- Text to show this network is forbidden [CHAR LIMIT=NONE] -->
+    <string name="forbidden_network">(forbidden)</string>
+
+    <!-- Message informs the user that has no SIM card in personalized Settings [CHAR LIMIT=30] -->
+    <string name="no_sim_card">No SIM card</string>
 
     <string name="select_sim_card">Select SIM card</string>
     <string name="qtifeedback_settings_title">Hardware Feedback</string>

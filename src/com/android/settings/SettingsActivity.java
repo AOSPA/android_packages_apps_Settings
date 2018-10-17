@@ -685,7 +685,6 @@ public class SettingsActivity extends SettingsBaseActivity
         PackageManager pm = getPackageManager();
         final UserManager um = UserManager.get(this);
         final boolean isAdmin = um.isAdminUser();
-        final FeatureFactory featureFactory = FeatureFactory.getFactory(this);
         boolean somethingChanged = false;
         final String packageName = getPackageName();
         final StringBuilder changedList = new StringBuilder();

@@ -14,8 +14,12 @@
 
 package com.android.settings.datausage;
 
+import static android.net.ConnectivityManager.TYPE_MOBILE;
 import static android.net.ConnectivityManager.TYPE_WIFI;
+import static android.telephony.TelephonyManager.SIM_STATE_READY;
 
+import android.app.usage.NetworkStats.Bucket;
+import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.INetworkStatsService;
@@ -31,6 +35,10 @@ import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
+import android.util.FeatureFlagUtils;
+import android.util.Log;
+
+import com.android.settings.core.FeatureFlags;
 
 import java.util.List;
 
@@ -40,7 +48,9 @@ import java.util.List;
 public final class DataUsageUtils {
     static final boolean TEST_RADIOS = false;
     static final String TEST_RADIOS_PROP = "test.radios";
+    private static final boolean LOGD = false;
     private static final String ETHERNET = "ethernet";
+    private static final String TAG = "DataUsageUtils";
 
     private DataUsageUtils() {
     }
@@ -64,28 +74,48 @@ public final class DataUsageUtils {
         }
 
         final ConnectivityManager conn = ConnectivityManager.from(context);
-        final boolean hasEthernet = conn.isNetworkSupported(ConnectivityManager.TYPE_ETHERNET);
-
-        final long ethernetBytes;
-        try {
-            INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
-                    ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
-
-            INetworkStatsSession statsSession = statsService.openSession();
-            if (statsSession != null) {
-                ethernetBytes = statsSession.getSummaryForNetwork(
-                        NetworkTemplate.buildTemplateEthernet(), Long.MIN_VALUE, Long.MAX_VALUE)
-                        .getTotalBytes();
-                TrafficStats.closeQuietly(statsSession);
-            } else {
-                ethernetBytes = 0;
-            }
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+        if (!conn.isNetworkSupported(ConnectivityManager.TYPE_ETHERNET)) {
+            return false;
         }
 
-        // only show ethernet when both hardware present and traffic has occurred
-        return hasEthernet && ethernetBytes > 0;
+        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.DATA_USAGE_V2)) {
+            final TelephonyManager telephonyManager = TelephonyManager.from(context);;
+            final NetworkStatsManager networkStatsManager =
+                context.getSystemService(NetworkStatsManager.class);
+            boolean hasEthernetUsage = false;
+            try {
+                final Bucket bucket = networkStatsManager.querySummaryForUser(
+                    ConnectivityManager.TYPE_ETHERNET, telephonyManager.getSubscriberId(),
+                    0L /* startTime */, System.currentTimeMillis() /* endTime */);
+                if (bucket != null) {
+                    hasEthernetUsage = bucket.getRxBytes() > 0 || bucket.getTxBytes() > 0;
+                }
+            } catch (RemoteException e) {
+                Log.e(TAG, "Exception querying network detail.", e);
+            }
+            return hasEthernetUsage;
+        } else {
+            final long ethernetBytes;
+            try {
+                INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
+                    ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
+
+                INetworkStatsSession statsSession = statsService.openSession();
+                if (statsSession != null) {
+                    ethernetBytes = statsSession.getSummaryForNetwork(
+                        NetworkTemplate.buildTemplateEthernet(), Long.MIN_VALUE, Long.MAX_VALUE)
+                        .getTotalBytes();
+                    TrafficStats.closeQuietly(statsSession);
+                } else {
+                    ethernetBytes = 0;
+                }
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+
+            // only show ethernet when both hardware present and traffic has occurred
+            return ethernetBytes > 0;
+        }
     }
 
     /**
@@ -96,6 +126,42 @@ public final class DataUsageUtils {
         ConnectivityManager connectivityManager = ConnectivityManager.from(context);
         return connectivityManager != null && connectivityManager
                 .isNetworkSupported(ConnectivityManager.TYPE_MOBILE);
+    }
+
+    /**
+     * Test if device has a mobile data radio with SIM in ready state.
+     */
+    public static boolean hasReadyMobileRadio(Context context) {
+        if (DataUsageUtils.TEST_RADIOS) {
+            return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
+        }
+        final List<SubscriptionInfo> subInfoList =
+            SubscriptionManager.from(context).getActiveSubscriptionInfoList();
+        // No activated Subscriptions
+        if (subInfoList == null) {
+            if (LOGD) {
+                Log.d(TAG, "hasReadyMobileRadio: subInfoList=null");
+            }
+            return false;
+        }
+        final TelephonyManager tele = TelephonyManager.from(context);
+        // require both supported network and ready SIM
+        boolean isReady = true;
+        for (SubscriptionInfo subInfo : subInfoList) {
+            isReady = isReady & tele.getSimState(subInfo.getSimSlotIndex()) == SIM_STATE_READY;
+            if (LOGD) {
+                Log.d(TAG, "hasReadyMobileRadio: subInfo=" + subInfo);
+            }
+        }
+        final ConnectivityManager conn = ConnectivityManager.from(context);
+        final boolean retVal = conn.isNetworkSupported(TYPE_MOBILE) && isReady;
+        if (LOGD) {
+            Log.d(TAG, "hasReadyMobileRadio:"
+                + " conn.isNetworkSupported(TYPE_MOBILE)="
+                + conn.isNetworkSupported(TYPE_MOBILE)
+                + " isReady=" + isReady);
+        }
+        return retVal;
     }
 
     /**

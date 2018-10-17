@@ -25,6 +25,7 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.PowerManager;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -41,11 +42,11 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.AppPreference;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,6 +79,7 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
     private final ApplicationsState mApplicationsState;
     private final int mUserId;
     private final IconDrawableFactory mIconDrawableFactory;
+    private final PowerManager mPowerManager;
 
     private Calendar mCal;
     private List<UsageStats> mStats;
@@ -108,6 +110,8 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
         mIconDrawableFactory = IconDrawableFactory.newInstance(context);
         mUserId = UserHandle.myUserId();
         mPm = context.getPackageManager();
+        mPowerManager = context.getSystemService(PowerManager.class);
+
         mHost = host;
         mUsageStatsManager =
                 (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
@@ -183,9 +187,11 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
     void reloadData() {
         mCal = Calendar.getInstance();
         mCal.add(Calendar.DAY_OF_YEAR, -1);
-        mStats = mUsageStatsManager.queryUsageStats(
-                UsageStatsManager.INTERVAL_BEST, mCal.getTimeInMillis(),
-                System.currentTimeMillis());
+        mStats = mPowerManager.isPowerSaveMode()
+                ? new ArrayList<>()
+                : mUsageStatsManager.queryUsageStats(
+                        UsageStatsManager.INTERVAL_BEST, mCal.getTimeInMillis(),
+                        System.currentTimeMillis());
     }
 
     private void displayOnlyAppInfo() {
@@ -244,8 +250,8 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
             pref.setOrder(i);
             pref.setOnPreferenceClickListener(preference -> {
                 AppInfoBase.startAppInfoFragment(AppInfoDashboardFragment.class,
-                    R.string.application_info_label, pkgName, appEntry.info.uid, mHost,
-                    1001 /*RequestCode*/, SETTINGS_APP_NOTIF_CATEGORY);
+                        R.string.application_info_label, pkgName, appEntry.info.uid, mHost,
+                        1001 /*RequestCode*/, SETTINGS_APP_NOTIF_CATEGORY);
                 return true;
             });
             if (!rebindPref) {
@@ -301,7 +307,8 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
     private boolean shouldIncludePkgInRecents(UsageStats stat) {
         final String pkgName = stat.getPackageName();
         if (stat.getLastTimeUsed() < mCal.getTimeInMillis()) {
-            Log.d(TAG, "Invalid timestamp, skipping " + pkgName);
+            Log.d(TAG, "Invalid timestamp (usage time is more than 24 hours ago), skipping "
+                    + pkgName);
             return false;
         }
 

@@ -119,15 +119,7 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
                 for (int i = 0; i < apps.size(); i++) {
                     ApplicationInfo app = apps.get(i);
                     try {
-                        NotificationChannel channel = mNm.getNotificationChannelForPackage(
-                                app.packageName, app.uid, NotificationChannel.DEFAULT_CHANNEL_ID,
-                                true);
-                        if (channel != null && (mNm.onlyHasDefaultChannel(app.packageName, app.uid)
-                            || NotificationChannel.DEFAULT_CHANNEL_ID.equals(channel.getId()))) {
-                            channel.setImportance(NotificationManager.IMPORTANCE_DEFAULT);
-                            mNm.updateNotificationChannelForPackage(app.packageName, app.uid, channel);
-                        }
-                        mNm.setNotificationsEnabledForPackage(app.packageName, app.uid, true);
+                        mNm.clearData(app.packageName, app.uid, false);
                     } catch (android.os.RemoteException ex) {
                     }
                     if (!app.enabled) {

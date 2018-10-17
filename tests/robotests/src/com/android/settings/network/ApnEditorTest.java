@@ -19,11 +19,13 @@ package com.android.settings.network;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -44,7 +46,6 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.network.ApnEditor.ApnData;
-import com.android.settings.testutils.Robolectric;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -55,6 +56,7 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ApnEditorTest {
@@ -448,6 +450,15 @@ public class ApnEditorTest {
     @Test
     public void formatInteger_shouldIgnoreNonIntegers() {
         assertThat(ApnEditor.formatInteger("not an int")).isEqualTo("not an int");
+    }
+
+    @Test
+    public void onCreate_noAction_shouldFinishAndNoCrash() {
+        doNothing().when(mApnEditorUT).addPreferencesFromResource(anyInt());
+
+        mApnEditorUT.onCreate(null);
+
+        verify(mApnEditorUT).finish();
     }
 
     private void initCursor() {

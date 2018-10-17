@@ -179,6 +179,7 @@
     <string name="connected_device_previously_connected_title" msgid="491765792822244604">"Eerder verbonden apparaten"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="6196066429488377795">"Eerder verbonden"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="5683648191381637533">"Bluetooth ingeschakeld"</string>
+    <string name="previous_connected_see_all" msgid="3626779872898778415">"Alles weergeven"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Datum en tijd"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Een tijdzone kiezen"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -219,7 +220,7 @@
     <string name="radio_info_ppp_received_label" msgid="363579470428151850">"Ontvangen gegevens:"</string>
     <string name="radio_info_gsm_service_label" msgid="1370863866816125489">"Spraakservice:"</string>
     <string name="radio_info_signal_strength_label" msgid="5155734002519307416">"Signaalsterkte:"</string>
-    <string name="radio_info_call_status_label" msgid="2611065018172747413">"Status van spraakoproep:"</string>
+    <string name="radio_info_call_status_label" msgid="2611065018172747413">"Status van audiogesprek:"</string>
     <string name="radio_info_ppp_sent_label" msgid="7748668735880404586">"Gegevens verzonden:"</string>
     <string name="radio_info_message_waiting_label" msgid="1037302619943328273">"Wachtend bericht:"</string>
     <string name="radio_info_phone_number_label" msgid="7942153178953255231">"Telefoonnummer:"</string>
@@ -403,6 +404,9 @@
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Gereed"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="8444494667872034497">"Je gezicht gebruiken voor"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8720574411679475571">"Je apparaat ontgrendelen"</string>
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"App-login en -betalingen"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"Ogen open om te ontgrendelen"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"Wanneer je gezichtsherkenning gebruikt, moeten je ogen open zijn"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="3477772641643318370">"Gezichtsgegevens verwijderen"</string>
     <string name="security_settings_face_settings_improve_face" msgid="1771390557275699911">"Je gezichtsgegevens verbeteren"</string>
     <string name="security_settings_face_settings_footer" msgid="8056977398747222768">"Met je gezicht kun je je apparaat ontgrendelen en toegang tot apps krijgen. "<annotation id="url">"Meer informatie"</annotation></string>
@@ -1143,7 +1147,7 @@
     <string name="night_display_summary_on_auto_mode_twilight" msgid="852270120144683507">"Wordt automatisch uitgeschakeld bij zonsopgang"</string>
     <string name="night_display_activation_on_manual" msgid="277343561277625826">"Nu inschakelen"</string>
     <string name="night_display_activation_off_manual" msgid="4074557720918572883">"Nu uitschakelen"</string>
-    <string name="night_display_activation_on_twilight" msgid="6976051971534953845">"Inschakelen tot zonsopkomst"</string>
+    <string name="night_display_activation_on_twilight" msgid="6976051971534953845">"Inschakelen tot zonsopgang"</string>
     <string name="night_display_activation_off_twilight" msgid="7196227685059907233">"Uitschakelen tot zonsondergang"</string>
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"Inschakelen tot <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"Uitschakelen tot <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -2249,7 +2253,7 @@
     <string name="power_wifi" msgid="1135085252964054957">"Wifi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="3392999761958982492">"Mobiel netwerk stand-by"</string>
-    <string name="power_phone" msgid="5392641106474567277">"Spraakoproepen"</string>
+    <string name="power_phone" msgid="5392641106474567277">"Audiogesprekken"</string>
     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tablet inactief"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Telefoon inactief"</string>
     <string name="power_unaccounted" msgid="709925017022660740">"Diversen"</string>
@@ -2281,7 +2285,7 @@
     <string name="battery_action_display" msgid="7338551244519110831">"Scherminstellingen"</string>
     <string name="battery_action_wifi" msgid="8181553479021841207">"Wifi-instellingen"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Bluetooth-instellingen"</string>
-    <string name="battery_desc_voice" msgid="8980322055722959211">"Batterij gebruikt door spraakoproepen"</string>
+    <string name="battery_desc_voice" msgid="8980322055722959211">"Batterij gebruikt door audiogesprekken"</string>
     <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Batterij gebruikt wanneer tablet inactief is"</string>
     <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Batterij gebruikt wanneer telefoon inactief is"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"Batterij gebruikt door radio"</string>
@@ -2835,7 +2839,7 @@
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Beperkingen verwijderen"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Pincode wijzigen"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"Meldingen weergeven"</string>
-    <string name="help_label" msgid="6886837949306318591">"Help en feedback"</string>
+    <string name="help_label" msgid="6886837949306318591">"Hulp en feedback"</string>
     <string name="support_summary" msgid="2705726826263742491">"Help-artikelen, bel- en chatondersteuning, aan de slag"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Account voor content"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"Foto-ID"</string>
@@ -2945,7 +2949,6 @@
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"Standaard-apps"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"Talen, tijd, back-up, updates"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Instellingen"</string>
-    <string name="search_menu" msgid="6283419262313758339">"Zoeken in de instellingen"</string>
     <string name="keywords_wifi" msgid="3646884600964177062">"wifi, wifi-netwerk, netwerkverbinding, internet, draadloos, gegevens, wifi-verbinding"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, schakelen, inschakelen, uitschakelen, beheren"</string>
     <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"sms, sms\'en, sms\'jes, berichten, sms-berichten, standaard"</string>
@@ -2990,7 +2993,7 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"betalen, tikken, betalingen"</string>
     <string name="keywords_backup" msgid="470070289135403022">"back-up, back-up maken, back-uppen"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"gebaar"</string>
-    <string name="keywords_face_unlock" msgid="5753804962088424662">"gezicht, ontgrendelen"</string>
+    <string name="keywords_face_unlock" msgid="254144854349092754">"gezicht, ontgrendelen, auth, inloggen"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, prl-versie, imei-softwareversie"</string>
     <string name="keywords_sim_status" msgid="1474422416860990564">"netwerk, status mobiel netwerk, servicestatus, signaalsterkte, type mobiel netwerk, roaming, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"serienummer, hardwareversie"</string>
@@ -3429,7 +3432,7 @@
     <string name="encrypt_talkback_dialog_message_pin" msgid="7582096542997635316">"Wanneer je je pincode opgeeft om dit apparaat te starten, zijn toegankelijkheidsservices zoals <xliff:g id="SERVICE">%1$s</xliff:g> nog niet beschikbaar."</string>
     <string name="encrypt_talkback_dialog_message_pattern" msgid="2020083142199612743">"Wanneer je je patroon opgeeft om dit apparaat te starten, zijn toegankelijkheidsservices zoals <xliff:g id="SERVICE">%1$s</xliff:g> nog niet beschikbaar."</string>
     <string name="encrypt_talkback_dialog_message_password" msgid="4155875981789127796">"Wanneer je je wachtwoord opgeeft om dit apparaat te starten, zijn toegankelijkheidsservices zoals <xliff:g id="SERVICE">%1$s</xliff:g> nog niet beschikbaar."</string>
-    <string name="direct_boot_unaware_dialog_message" msgid="7870273558547549125">"Opmerking: Wanneer je telefoon opnieuw is opgestart, kan deze app pas worden gestart nadat je je telefoon hebt ontgrendeld"</string>
+    <string name="direct_boot_unaware_dialog_message" msgid="2433632805847985867">"Opmerking: Als je de telefoon opnieuw opstart en een schermvergrendeling hebt ingesteld, kan deze app pas worden gestart nadat je de telefoon hebt ontgrendeld"</string>
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI-informatie"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"Relatieve IMEI-informatie"</string>
     <string name="slot_number" msgid="3762676044904653577">"(Positie <xliff:g id="SLOT_NUM">%1$d</xliff:g>)"</string>
@@ -3483,7 +3486,7 @@
     <string name="filter_personal_apps" msgid="3277727374174355971">"Persoonlijk"</string>
     <string name="filter_work_apps" msgid="24519936790795574">"Werk"</string>
     <string name="filter_notif_all_apps" msgid="2299049859443680242">"Apps: alle"</string>
-    <string name="filter_notif_blocked_apps" msgid="3300375727887991342">"Apps: uitgeschakeld"</string>
+    <string name="filter_notif_blocked_apps" msgid="3383043508771300704">"Uitgeschakeld"</string>
     <string name="filter_notif_urgent_channels" msgid="3972473613117159653">"Categorieën: urgent belang"</string>
     <string name="filter_notif_low_channels" msgid="4128487387390004604">"Categorieën: klein belang"</string>
     <string name="filter_notif_blocked_channels" msgid="5880190882221644289">"Categorieën: uitgeschakeld"</string>
@@ -3722,7 +3725,6 @@
     <string name="disabled_by_policy_title_sms" msgid="5733307423899610340">"Sms niet toegestaan"</string>
     <string name="disabled_by_policy_title_camera" msgid="6225008536855644874">"Camera niet toegestaan"</string>
     <string name="disabled_by_policy_title_screen_capture" msgid="4066913623298047094">"Screenshot niet toegestaan"</string>
-    <string name="disabled_by_policy_title_turn_off_backups" msgid="7330460584199383321">"Kan back-ups niet uitschakelen"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="7872038990805477554">"Kan deze app niet openen"</string>
     <string name="default_admin_support_msg" msgid="4489678214035485367">"Neem bij vragen contact op met je IT-beheerder"</string>
     <string name="admin_support_more_info" msgid="8901377038510512654">"Meer informatie"</string>
@@ -3886,11 +3888,9 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"geen"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Rangschikkingsobject ontbreekt"</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Rangschikkingsobject bevat deze sleutel niet."</string>
-    <!-- no translation found for display_cutout_emulation (7466869822418376317) -->
-    <skip />
+    <string name="display_cutout_emulation" msgid="7466869822418376317">"Display-cutout"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"display-cutout, inkeping"</string>
-    <!-- no translation found for display_cutout_emulation_device_default (7957250558326167503) -->
-    <skip />
+    <string name="display_cutout_emulation_device_default" msgid="7957250558326167503">"Apparaatstandaard"</string>
     <string name="special_access" msgid="3458780842491881155">"Speciale app-toegang"</string>
     <plurals name="special_access_summary" formatted="false" msgid="260765309935675867">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps kunnen onbeperkt data gebruiken</item>
@@ -3912,11 +3912,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Verbonden met <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Verbonden met meerdere apparaten"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Demomodus voor systeemgebruikersinterface"</string>
-    <string name="dark_ui_mode" msgid="2112241426441807273">"Nachtmodus"</string>
-    <string name="dark_ui_mode_title" msgid="975299966259850992">"Nachtmodus instellen"</string>
+    <string name="dark_ui_mode" msgid="4176511670311366886">"Donkere modus"</string>
+    <string name="dark_ui_mode_title" msgid="3471395820322819817">"Donkere modus instellen"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Ontwikkelaarstegels voor Snelle instellingen"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope-tracering"</string>
-    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Instellingen voor werkprofiel"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Contacten zoeken"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Contactzoekopdrachten door je organisatie toestaan om bellers en contacten te identificeren"</string>
@@ -3961,15 +3960,13 @@
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Oppakken om telefoon te checken"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Oppakken om tablet te checken"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Oppakken om apparaat te checken"</string>
+    <string name="ambient_display_wake_screen_title" msgid="4091523525326925790">"Scherm activeren"</string>
+    <string name="ambient_display_wake_screen_summary" msgid="7046476455581790544"></string>
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Pak je telefoon op om de tijd, meldingen en andere informatie te bekijken."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Pak je tablet op om de tijd, meldingen en andere informatie te bekijken."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Pak je apparaat op om de tijd, meldingen en andere informatie te bekijken."</string>
-    <string name="ambient_display_reach_title" product="default" msgid="8922978048080725179">"Naar je telefoon reiken om deze te controleren"</string>
-    <string name="ambient_display_reach_title" product="tablet" msgid="2003954050799022314">"Naar je tablet reiken om deze te controleren"</string>
-    <string name="ambient_display_reach_title" product="device" msgid="4936469171466002668">"Naar je apparaat reiken om het te controleren"</string>
-    <string name="ambient_display_reach_summary" product="default" msgid="4244514681312536449">"Reik naar je telefoon om de tijd, meldingen en andere informatie te bekijken."</string>
-    <string name="ambient_display_reach_summary" product="tablet" msgid="2321551792287654898">"Reik naar je tablet om de tijd, meldingen en andere informatie te bekijken."</string>
-    <string name="ambient_display_reach_summary" product="device" msgid="1953312292453084907">"Reik naar je apparaat om de tijd, meldingen en andere informatie te bekijken."</string>
+    <string name="ambient_display_wake_lock_screen_title" msgid="562547995385322349">"Vergrendelingsschermgebaar activeren"</string>
+    <string name="ambient_display_wake_lock_screen_summary" product="default" msgid="7758512805102207920"></string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Over vingerafdruksensor vegen voor meldingen"</string>
     <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Over vingerafdruksensor vegen"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Als je je meldingen wilt bekijken, veeg je omlaag over de vingerafdruksensor achter op je telefoon."</string>
@@ -4049,7 +4046,6 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> pogingen</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> poging</item>
     </plurals>
-    <string name="enterprise_privacy_backups_enabled" msgid="8186700798406539053">"Er wordt een back-up gemaakt van de apparaatgegevens"</string>
     <string name="do_disclosure_generic" msgid="8653670456990823307">"Dit apparaat wordt beheerd door je organisatie."</string>
     <string name="do_disclosure_with_name" msgid="1141081465968481380">"Dit apparaat wordt beheerd door <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="3558079393757238670">" "</string>
@@ -4115,6 +4111,9 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Alle GNSS-constellaties en -frequenties bijhouden zonder duty cycling"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Altijd een crashvenster weergeven"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Bij gecrashte apps altijd een venster weergeven"</string>
+    <string name="angle_enabled_app" msgid="1841862539745838255">"App met ANGLE-functionaliteit selecteren"</string>
+    <string name="angle_enabled_app_not_set" msgid="864740024581634768">"Geen app met ANGLE-functionaliteit ingesteld"</string>
+    <string name="angle_enabled_app_set" msgid="226015765615525056">"App met ANGLE-functionaliteit: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="directory_access" msgid="4722237210725864244">"Toegang tot directory"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"toegang tot directory"</string>
     <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
@@ -4143,9 +4142,9 @@
     <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"De batterijduur van het apparaat verbeteren"</string>
     <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"De batterijduur van de telefoon verbeteren"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
-    <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Beltoon voorkomen"</string>
+    <string name="gesture_prevent_ringing_screen_title" msgid="7840226017975251549">"Beltoon uitschakelen"</string>
     <string name="gesture_prevent_ringing_title" msgid="2483159069038138740">"Druk tegelijkertijd op de aan/uit-knop en de knop \'Volume omhoog\'"</string>
-    <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Snelkoppeling om beltoon te voorkomen"</string>
+    <string name="gesture_prevent_ringing_sound_title" msgid="5724512060316688779">"Snelkoppeling om beltoon uit te schakelen"</string>
     <string name="prevent_ringing_option_vibrate" msgid="7286821846542822661">"Trillen"</string>
     <string name="prevent_ringing_option_mute" msgid="7551545579059879853">"Dempen"</string>
     <string name="prevent_ringing_option_none" msgid="4656046650769569175">"Niets doen"</string>
@@ -4155,6 +4154,21 @@
     <string name="pref_title_network_details" msgid="7186418845727358964">"Netwerkgegevens"</string>
     <string name="about_phone_device_name_warning" msgid="8885670415541365348">"De naam van je apparaat is zichtbaar voor apps op je telefoon. De apparaatnaam kan ook door andere mensen worden gezien wanneer je verbinding maakt met Bluetooth-apparaten of een wifi-hotspot instelt."</string>
     <string name="devices_title" msgid="7701726109334110391">"Apparaten"</string>
+    <string name="high_frequency_display_device_title" msgid="2327369124536178715">"Hoge-frequentievenster"</string>
+    <string name="high_frequency_display_device_summary" msgid="1476189143535389304">"Virtueel venster voor hoge frequentie inschakelen"</string>
+    <string name="homepage_all_settings" msgid="1245540304900512919">"Alle instellingen"</string>
+    <string name="homepage_personal_settings" msgid="3998213046366125494">"Je instellingen"</string>
+    <string name="cbrs_data_switch" msgid="2438108549734702331">"CBRS-gegevens"</string>
+    <string name="cbrs_data_switch_summary" msgid="1359701543634843588">"CBRS-gegevens"</string>
+    <string name="choose_network_title" msgid="5702586742615861037">"Netwerk kiezen"</string>
+    <string name="network_disconnected" msgid="2933191767567503504">"Verbinding verbroken"</string>
+    <string name="network_connected" msgid="4943925032253989621">"Verbonden"</string>
+    <string name="network_connecting" msgid="76404590784733557">"Verbinding maken…"</string>
+    <string name="network_could_not_connect" msgid="1113813392274155369">"Kan geen verbinding maken"</string>
+    <string name="empty_networks_list" msgid="2578752112731781190">"Geen netwerken gevonden."</string>
+    <string name="network_query_error" msgid="7487714485362598410">"Kan geen netwerken vinden. Probeer het opnieuw."</string>
+    <string name="forbidden_network" msgid="4626592887509826545">"(niet toegestaan)"</string>
+    <string name="no_sim_card" msgid="1360669528113557381">"Geen simkaart"</string>
     <string name="qtifeedback_settings_title">Feedback over hardware</string>
     <string name="qtifeedback_settings_subtitle">Rapportage aan Qualcomm Technologies, Inc</string>
 </resources>

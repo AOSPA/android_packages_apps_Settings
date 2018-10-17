@@ -47,7 +47,10 @@
         android:order="3"
         android:title="@string/status_number"
         android:summary="@string/summary_placeholder"
-        android:selectable="false"/>
+        android:selectable="false"
+        settings:allowDynamicSummaryInSlice="true"
+        settings:controller=
+            "com.android.settings.deviceinfo.PhoneNumberPreferenceController" />
 
     <Preference
         android:key="emergency_info"
@@ -96,6 +99,7 @@
         android:title="@string/hardware_info"
         settings:keywords="@string/keywords_model_and_hardware"
         android:summary="@string/summary_placeholder"
+        settings:allowDynamicSummaryInSlice="true"
         settings:controller=
             "com.android.settings.deviceinfo.DeviceModelPreferenceController" />
 
@@ -109,11 +113,12 @@
 
     <!-- Android version -->
     <Preference
-        android:key="my_device_firmware_version"
+        android:key="firmware_version"
         android:order="32"
         android:title="@string/firmware_version"
         settings:keywords="@string/keywords_android_version"
         android:summary="@string/summary_placeholder"
+        settings:allowDynamicSummaryInSlice="true"
         settings:controller=
             "com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController" />
 
