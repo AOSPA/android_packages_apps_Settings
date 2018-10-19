@@ -612,13 +612,13 @@ public class WifiConfigController implements TextWatcher,
             case AccessPoint.SECURITY_EAP:
                 config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
                 config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
-                if (mAccessPoint.isFils256Supported()) {
+                if (mAccessPoint != null && mAccessPoint.isFils256Supported()) {
                     config.allowedKeyManagement.set(KeyMgmt.FILS_SHA256);
                 }
-                if (mAccessPoint.isFils384Supported()) {
+                if (mAccessPoint != null && mAccessPoint.isFils384Supported()) {
                     config.allowedKeyManagement.set(KeyMgmt.FILS_SHA384);
                 }
-                if (mAccessPoint.isSuiteBSupported()) {
+                if (mAccessPoint != null && mAccessPoint.isSuiteBSupported()) {
                     config.allowedKeyManagement.set(KeyMgmt.SUITE_B_192);
                     config.requirePMF = true;
 		    config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.GCMP);
@@ -739,7 +739,8 @@ public class WifiConfigController implements TextWatcher,
                     // clear password
                     config.enterpriseConfig.setPassword(mPasswordView.getText().toString());
                 }
-                if (mAccessPoint.isFils256Supported() || mAccessPoint.isFils384Supported()) {
+                if (mAccessPoint != null && (mAccessPoint.isFils256Supported()
+                            || mAccessPoint.isFils384Supported())) {
                     config.enterpriseConfig.setFieldValue(WifiEnterpriseConfig.EAP_ERP, "1");
                 }
                 break;
