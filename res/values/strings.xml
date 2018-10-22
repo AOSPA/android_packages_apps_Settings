@@ -2056,6 +2056,8 @@
     <string name="wifi_ap_band_select_one">Choose at least one band for Wi\u2011Fi hotspot:</string>
     <!-- Label for the spinner to show ip settings [CHAR LIMIT=25] -->
     <string name="wifi_ip_settings">IP settings</string>
+    <!-- Label for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
+    <string name="wifi_privacy_settings">Privacy</string>
     <!-- Label for the check box to share a network with other users on the same device -->
     <string name="wifi_shared">Share with other device users</string>
     <!-- Hint for unchanged fields -->
@@ -10275,6 +10277,11 @@
     <!-- Mobile network settings screen, message asking the user to check their pricing with their Carrier, when enabling Data roaming. [CHAR LIMIT=NONE] -->
     <string name="roaming_check_price_warning">Check with your network provider for pricing.</string>
 
+    <!-- Title for mobile data preference, to display the mobile data usage for each app. [CHAR LIMIT=NONE]-->
+    <string name="mobile_data_usage_title">App data usage</string>
+    <!-- Summary to show the current network mode is invalid. [CHAR LIMIT=NONE]-->
+    <string name="mobile_network_mode_error">Invalid Network Mode <xliff:g id="networkModeId" example="0">%1$d</xliff:g>. Ignore.</string>
+
     <!-- Available networks screen, summary when button disallowed due to permanent automatic mode [CHAR LIMIT=NONE] -->
     <string name="manual_mode_disallowed_summary">Unavailable when connected to <xliff:g id="carrier" example="verizon">%1$s</xliff:g></string>
 
@@ -10284,4 +10291,7 @@
     <string name="qtifeedback_intent_action">com.qti.smq.snapdragonSettings</string>
     <string name="qtifeedback_package">com.qti.smq.Feedback</string>
     <string name="qtifeedback_activity">com.qti.smq.ui.QtiFeedbackActivity</string>
+
+    <!-- Used for EmergencyInfoSlice slice helper class -->
+    <string name="emergency_info_contextual_card_summary" translatable="false">Medical info, emergency contacts</string>
 </resources>

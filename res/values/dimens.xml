@@ -267,7 +267,7 @@
     <!-- Restricted icon in switch bar -->
     <dimen name="restricted_icon_margin_end">16dp</dimen>
     <!-- Restricted icon size in switch bar -->
-    <dimen name="restricted_icon_size">@*android:dimen/config_restricted_icon_size</dimen>
+    <dimen name="restricted_icon_size">@*android:dimen/config_restrictedIconSize</dimen>
 
     <!-- Display Size and Font Size preview screen -->
     <dimen name="preview_pager_padding">8dp</dimen>
@@ -349,6 +349,10 @@
     <dimen name="homepage_card_padding_end">16dp</dimen>
     <dimen name="homepage_card_padding_top">6dp</dimen>
     <dimen name="homepage_card_padding_bottom">6dp</dimen>
+
+    <!-- Slice cards maximum height (4 rows + show more)
+        MODE_LARGE height(3 rows + show more) 240dp + one line text(1 row) 48dp = 288dp -->
+    <dimen name="homepage_slice_card_max_height">288dp</dimen>
 
     <!-- Signal icon in NetworkSelectSetting -->
     <dimen name="signal_strength_icon_size">24dp</dimen>
