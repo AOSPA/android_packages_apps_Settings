@@ -38,6 +38,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.mobilenetwork.MobileSettingsActivity;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settings.Utils;
@@ -200,7 +201,8 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_MOBILE_NETWORK_SETTINGS.equals(preference.getKey())) {
             if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.MOBILE_NETWORK_V2)) {
-                //TODO(b/110260193): go to the mobile network page existed in settings
+                final Intent intent = new Intent(mContext, MobileSettingsActivity.class);
+                mContext.startActivity(intent);
             } else {
                 final Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.setComponent(
