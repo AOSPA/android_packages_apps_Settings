@@ -40,6 +40,12 @@
         settings:controller="com.android.settings.gestures.DoubleTapPowerPreferenceController" />
 
     <Preference
+        android:key="power_button_torch_summary"
+        android:title="@string/power_button_torch_screen_title"
+        android:fragment="com.android.settings.gestures.PowerButtonTorchSettings"
+        settings:controller="com.android.settings.gestures.PowerButtonTorchGesturePreferenceController" />
+
+    <Preference
         android:key="gesture_double_twist_input_summary"
         android:title="@string/double_twist_for_camera_mode_title"
         android:fragment="com.android.settings.gestures.DoubleTwistGestureSettings"

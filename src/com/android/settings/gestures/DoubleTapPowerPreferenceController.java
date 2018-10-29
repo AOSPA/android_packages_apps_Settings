@@ -74,6 +74,14 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        final int previousTorchPref = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.TORCH_POWER_BUTTON_GESTURE, 0);
+        if (isChecked && previousTorchPref == 1) {
+            // if double tap for torch was active and we enable here double tap for camera,
+            // set torch action to long press mode
+            Settings.Secure.putInt(mContext.getContentResolver(),
+                    Settings.Secure.TORCH_POWER_BUTTON_GESTURE, 2);
+        }
         return Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY,
                 isChecked ? ON : OFF);
     }
