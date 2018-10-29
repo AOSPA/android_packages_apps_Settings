@@ -81,6 +81,12 @@
         android:fragment="com.android.settings.gestures.PowerMenuSettings"
         settings:controller="com.android.settings.gestures.PowerMenuPreferenceController" />
 
+    <Preference
+        android:key="power_button_torch_summary"
+        android:title="@string/power_button_torch_title"
+        android:fragment="co.aospa.settings.gestures.PowerButtonTorchSettings"
+        settings:controller="co.aospa.settings.gestures.PowerButtonTorchGesturePreferenceController" />
+
     <com.android.settingslib.PrimarySwitchPreference
         android:key="gesture_prevent_ringing_summary"
         android:title="@string/gesture_prevent_ringing_screen_title"
