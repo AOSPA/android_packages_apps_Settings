@@ -98,4 +98,10 @@
         android:title="@string/adaptive_playback_screen_title"
         android:fragment="com.android.settings.gestures.AdaptivePlaybackGestureSettings"
         settings:controller="com.android.settings.gestures.AdaptivePlaybackParentPreferenceController" />
+
+    <Preference
+        android:key="power_button_torch_summary"
+        android:title="@string/power_button_torch_title"
+        android:fragment="com.android.settings.gestures.PowerButtonTorchSettings"
+        settings:controller="com.android.settings.gestures.PowerButtonTorchGesturePreferenceController" />
 </PreferenceScreen>
