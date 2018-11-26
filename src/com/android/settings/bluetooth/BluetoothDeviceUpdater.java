@@ -171,6 +171,15 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
     }
 
     @Override
+    public void onAclConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
+        if (DBG) {
+            Log.d(TAG, "onAclConnectionStateChanged() device: " + cachedDevice.getName()
+                    + ", state: " + state);
+        }
+        update(cachedDevice);
+    }
+
+    @Override
     public void onServiceConnected() {
         // When bluetooth service connected update the UI
         forceUpdate();
@@ -230,9 +239,19 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      */
     protected void removePreference(CachedBluetoothDevice cachedDevice) {
         final BluetoothDevice device = cachedDevice.getDevice();
+        final CachedBluetoothDevice subCachedDevice = cachedDevice.getSubDevice();
         if (mPreferenceMap.containsKey(device)) {
             mDevicePreferenceCallback.onDeviceRemoved(mPreferenceMap.get(device));
             mPreferenceMap.remove(device);
+        } else if (subCachedDevice != null) {
+            // When doing remove, to check if preference maps to sub device.
+            // This would happen when connection state is changed in detail page that there is no
+            // callback from SettingsLib.
+            final BluetoothDevice subDevice = subCachedDevice.getDevice();
+            if (mPreferenceMap.containsKey(subDevice)) {
+                mDevicePreferenceCallback.onDeviceRemoved(mPreferenceMap.get(subDevice));
+                mPreferenceMap.remove(subDevice);
+            }
         }
     }
 
@@ -272,6 +291,6 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
                     ", is connected : " + device.isConnected() + " , is profile connected : "
                     + cachedDevice.isConnected());
         }
-        return device.getBondState() == BluetoothDevice.BOND_BONDED && cachedDevice.isConnected();
+        return device.getBondState() == BluetoothDevice.BOND_BONDED && device.isConnected();
     }
 }

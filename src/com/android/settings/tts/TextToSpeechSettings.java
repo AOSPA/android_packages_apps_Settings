@@ -147,12 +147,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
      * screen for the first time (as opposed to when a user changes his choice
      * of engine).
      */
-    private final TextToSpeech.OnInitListener mInitListener = new TextToSpeech.OnInitListener() {
-        @Override
-        public void onInit(int status) {
-            onInitEngine(status);
-        }
-    };
+    private final TextToSpeech.OnInitListener mInitListener = this::onInitEngine;
 
     @Override
     public int getMetricsCategory() {
@@ -176,11 +171,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
 
         mActionButtons = ((ActionButtonPreference) findPreference(KEY_ACTION_BUTTONS))
                 .setButton1Text(R.string.tts_play)
-                .setButton1Positive(true)
                 .setButton1OnClickListener(v -> speakSampleText())
                 .setButton1Enabled(false)
                 .setButton2Text(R.string.tts_reset)
-                .setButton2Positive(false)
                 .setButton2OnClickListener(v -> resetTts())
                 .setButton1Enabled(true);
 
@@ -215,6 +208,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
+        // We tend to change the summary contents of our widgets, which at higher text sizes causes
+        // them to resize, which results in the recyclerview smoothly animating them at inopportune
+        // times. Disable the animation so widgets snap to their positions rather than sliding
+        // around while the user is interacting with it.
+        getListView().getItemAnimator().setMoveDuration(0);
 
         if (mTts == null || mCurrentDefaultLocale == null) {
             return;
@@ -251,15 +249,20 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         mTts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
             public void onStart(String utteranceId) {
+                updateWidgetState(false);
             }
 
             @Override
             public void onDone(String utteranceId) {
+                updateWidgetState(true);
             }
 
             @Override
             public void onError(String utteranceId) {
                 Log.e(TAG, "Error while trying to synthesize sample text");
+                // Re-enable just in case, although there isn't much hope that following synthesis
+                // requests are going to succeed.
+                updateWidgetState(true);
             }
         });
     }
@@ -323,7 +326,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         if (mCurrentEngine != null) {
             EngineInfo info = mEnginesHelper.getEngineInfo(mCurrentEngine);
 
-
             Preference mEnginePreference = findPreference(KEY_TTS_ENGINE_PREFERENCE);
             ((GearPreference) mEnginePreference).setOnGearClickListener(this);
             mEnginePreference.setSummary(info.label);
@@ -365,14 +367,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         if (status == TextToSpeech.SUCCESS) {
             if (DBG) Log.d(TAG, "TTS engine for settings screen initialized.");
             checkDefaultLocale();
-            getActivity()
-                    .runOnUiThread(
-                            new Runnable() {
-                                @Override
-                                public void run() {
-                                    mLocalePreference.setEnabled(true);
-                                }
-                            });
+            getActivity().runOnUiThread(() -> mLocalePreference.setEnabled(true));
         } else {
             if (DBG) {
                 Log.d(TAG,
@@ -516,14 +511,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         }
 
         // Sort it
-        Collections.sort(
-                entryPairs,
-                new Comparator<Pair<String, Locale>>() {
-                    @Override
-                    public int compare(Pair<String, Locale> lhs, Pair<String, Locale> rhs) {
-                        return lhs.first.compareToIgnoreCase(rhs.first);
-                    }
-                });
+        Collections.sort(entryPairs, (lhs, rhs) -> lhs.first.compareToIgnoreCase(rhs.first));
 
         // Get two arrays out of one of pairs
         mSelectedLocaleIndex = 0; // Will point to the R.string.tts_lang_use_system value
@@ -711,9 +699,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     }
 
     private void updateWidgetState(boolean enable) {
-        mActionButtons.setButton1Enabled(enable);
-        mDefaultRatePref.setEnabled(enable);
-        mDefaultPitchPref.setEnabled(enable);
+        getActivity().runOnUiThread(() -> {
+            mActionButtons.setButton1Enabled(enable);
+            mDefaultRatePref.setEnabled(enable);
+            mDefaultPitchPref.setEnabled(enable);
+        });
     }
 
     private void displayNetworkAlert() {

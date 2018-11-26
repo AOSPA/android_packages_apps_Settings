@@ -33,12 +33,12 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.text.BidiFormatter;
 
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -64,7 +64,7 @@ public class BuildNumberPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Fragment mFragment;
+    private InstrumentedPreferenceFragment mFragment;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
 
@@ -81,10 +81,8 @@ public class BuildNumberPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        final UserManager userManager =
-                (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        mShadowUserManager = Shadows.shadowOf(userManager);
-        mShadowUserManager.setIsAdminUser(true);
+        mShadowUserManager = Shadows.shadowOf(
+                RuntimeEnvironment.application.getSystemService(UserManager.class));
         mFactory = FakeFeatureFactory.setupForTest();
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
@@ -101,8 +99,6 @@ public class BuildNumberPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowUtils.reset();
-        mShadowUserManager.setIsAdminUser(false);
-        mShadowUserManager.setIsDemoUser(false);
     }
 
     @Test
@@ -201,6 +197,7 @@ public class BuildNumberPreferenceControllerTest {
 
     @Test
     public void onActivityResult_confirmPasswordRequestCompleted_enableDevPref() {
+        mShadowUserManager.setIsAdminUser(true);
         mController =
                 new BuildNumberPreferenceController(mContext, mActivity, mFragment, mLifecycle);
 

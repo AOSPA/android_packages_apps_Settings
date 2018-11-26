@@ -16,37 +16,32 @@
 
 package com.android.settings.homepage;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
+import android.widget.ImageView;
 import android.widget.Toolbar;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.accounts.AvatarViewMixin;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
+import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.overlay.FeatureFactory;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 public class SettingsHomepageActivity extends SettingsBaseActivity {
-
-    @VisibleForTesting
-    static final String PERSONAL_SETTINGS_TAG = "personal_settings";
-    private static final String ALL_SETTINGS_TAG = "all_settings";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!isDynamicHomepageEnabled(this)) {
-            final Intent settings = new Intent();
-            settings.setAction("android.settings.SETTINGS");
+        if (!FeatureFlagUtils.isEnabled(this, FeatureFlags.DYNAMIC_HOMEPAGE)) {
+            final Intent settings = new Intent(this, SettingsActivity.class);
             startActivity(settings);
             finish();
             return;
@@ -58,46 +53,21 @@ public class SettingsHomepageActivity extends SettingsBaseActivity {
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
                 .initSearchToolbar(this, toolbar);
 
-        final BottomNavigationView navigation = findViewById(R.id.bottom_nav);
-        navigation.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.homepage_personal_settings:
-                    switchFragment(new PersonalSettingsFragment(), PERSONAL_SETTINGS_TAG,
-                            ALL_SETTINGS_TAG);
-                    return true;
+        final ImageView avatarView = findViewById(R.id.account_avatar);
+        final AvatarViewMixin avatarViewMixin = new AvatarViewMixin(this, avatarView);
+        getLifecycle().addObserver(avatarViewMixin);
 
-                case R.id.homepage_all_settings:
-                    switchFragment(new TopLevelSettings(), ALL_SETTINGS_TAG,
-                            PERSONAL_SETTINGS_TAG);
-                    return true;
-            }
-            return false;
-        });
-
-        if (savedInstanceState == null) {
-            // savedInstanceState is null, this is first load.
-            // Default to open contextual cards.
-            switchFragment(new PersonalSettingsFragment(), PERSONAL_SETTINGS_TAG,
-                    ALL_SETTINGS_TAG);
-        }
+        showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
+        showFragment(new TopLevelSettings(), R.id.main_content);
     }
 
-    public static boolean isDynamicHomepageEnabled(Context context) {
-        return FeatureFlagUtils.isEnabled(context, FeatureFlags.DYNAMIC_HOMEPAGE);
-    }
-
-    private void switchFragment(Fragment fragment, String showFragmentTag, String hideFragmentTag) {
+    private void showFragment(Fragment fragment, int id) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        final Fragment showFragment = fragmentManager.findFragmentById(id);
 
-        final Fragment hideFragment = fragmentManager.findFragmentByTag(hideFragmentTag);
-        if (hideFragment != null) {
-            fragmentTransaction.hide(hideFragment);
-        }
-
-        Fragment showFragment = fragmentManager.findFragmentByTag(showFragmentTag);
         if (showFragment == null) {
-            fragmentTransaction.add(R.id.main_content, fragment, showFragmentTag);
+            fragmentTransaction.add(id, fragment);
         } else {
             fragmentTransaction.show(showFragment);
         }

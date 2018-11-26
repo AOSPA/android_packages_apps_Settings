@@ -265,6 +265,10 @@ public class ChooseLockGeneric extends SettingsActivity {
             return false;
         }
 
+        protected Class<? extends ChooseLockGeneric.InternalActivity> getInternalActivityClass() {
+            return ChooseLockGeneric.InternalActivity.class;
+        }
+
         protected void addHeaderView() {
             if (mForFingerprint) {
                 setHeaderView(R.layout.choose_lock_generic_fingerprint_header);
@@ -292,7 +296,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 return true;
             } else if (KEY_SKIP_FINGERPRINT.equals(key) || KEY_SKIP_FACE.equals(key)) {
                 Intent chooseLockGenericIntent = new Intent(getActivity(),
-                    ChooseLockGeneric.InternalActivity.class);
+                    getInternalActivityClass());
                 chooseLockGenericIntent.setAction(getIntent().getAction());
                 // Forward the target user id to  ChooseLockGeneric.
                 chooseLockGenericIntent.putExtra(Intent.EXTRA_USER_ID, mUserId);

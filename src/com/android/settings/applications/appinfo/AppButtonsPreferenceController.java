@@ -51,6 +51,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
@@ -106,7 +107,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     private final UserManager mUserManager;
     private final PackageManager mPm;
     private final SettingsActivity mActivity;
-    private final Fragment mFragment;
+    private final InstrumentedPreferenceFragment mFragment;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final ApplicationFeatureProvider mApplicationFeatureProvider;
     private final int mUserId;
@@ -119,7 +120,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     private boolean mFinishing = false;
     private boolean mAppsControlDisallowedBySystem;
 
-    public AppButtonsPreferenceController(SettingsActivity activity, Fragment fragment,
+    public AppButtonsPreferenceController(SettingsActivity activity,
+            InstrumentedPreferenceFragment fragment,
             Lifecycle lifecycle, String packageName, ApplicationsState state,
             int requestUninstall, int requestRemoveDeviceAdmin) {
         super(activity, KEY_ACTION_BUTTONS);
@@ -165,11 +167,11 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         if (isAvailable()) {
             mButtonsPref = ((ActionButtonPreference) screen.findPreference(KEY_ACTION_BUTTONS))
                     .setButton1Text(R.string.uninstall_text)
+                    .setButton1Icon(R.drawable.ic_settings_delete)
                     .setButton2Text(R.string.force_stop)
+                    .setButton2Icon(R.drawable.ic_settings_force_stop)
                     .setButton1OnClickListener(new UninstallAndDisableButtonListener())
                     .setButton2OnClickListener(new ForceStopButtonListener())
-                    .setButton1Positive(false)
-                    .setButton2Positive(false)
                     .setButton2Enabled(false);
         }
     }
@@ -517,8 +519,12 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
 
     @VisibleForTesting
     void forceStopPackage(String pkgName) {
-        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().action(mContext,
-                MetricsProto.MetricsEvent.ACTION_APP_FORCE_STOP, pkgName);
+        mMetricsFeatureProvider.action(
+                mMetricsFeatureProvider.getAttribution(mActivity),
+                MetricsProto.MetricsEvent.ACTION_APP_FORCE_STOP,
+                mFragment.getMetricsCategory(),
+                pkgName,
+                0);
         ActivityManager am = (ActivityManager) mActivity.getSystemService(
                 Context.ACTIVITY_SERVICE);
         Log.d(TAG, "Stopping package " + pkgName);
@@ -541,16 +547,16 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         if (mHomePackages.contains(mAppEntry.info.packageName)
                 || isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
             // Disable button for core system applications.
-            mButtonsPref.setButton1Text(R.string.disable_text)
-                    .setButton1Positive(false);
+            mButtonsPref.setButton1Text(R.string.uninstall_text)
+                    .setButton1Icon(R.drawable.ic_settings_delete);
         } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
-            mButtonsPref.setButton1Text(R.string.disable_text)
-                    .setButton1Positive(false);
+            mButtonsPref.setButton1Text(R.string.uninstall_text)
+                    .setButton1Icon(R.drawable.ic_settings_delete);
             disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
                     .contains(mAppEntry.info.packageName);
         } else {
-            mButtonsPref.setButton1Text(R.string.enable_text)
-                    .setButton1Positive(true);
+            mButtonsPref.setButton1Text(R.string.install_text)
+                    .setButton1Icon(R.drawable.ic_settings_install);
             disableable = true;
         }
 

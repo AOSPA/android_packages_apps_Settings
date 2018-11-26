@@ -30,11 +30,10 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiSsid;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
@@ -70,6 +69,9 @@ public class WifiSlice implements CustomSliceable {
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath(KEY_WIFI)
             .build();
+
+    @VisibleForTesting
+    static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
 
     private final Context mContext;
 
@@ -115,13 +117,24 @@ public class WifiSlice implements CustomSliceable {
                         .addEndItem(toggleSliceAction)
                         .setPrimaryAction(primarySliceAction));
 
-        if (isWifiEnabled) {
-            final List<AccessPoint> result = getBackgroundWorker().getResults();
-            if (result != null && !result.isEmpty()) {
-                for (AccessPoint ap : result) {
-                    listBuilder.addRow(getAccessPointRow(ap));
-                }
-                listBuilder.setSeeMoreAction(primaryAction);
+        if (!isWifiEnabled) {
+            return listBuilder.build();
+        }
+
+        List<AccessPoint> results = SliceBackgroundWorker.getInstance(mContext, this).getResults();
+        if (results == null) {
+            results = new ArrayList<>();
+        }
+        final int apCount = results.size();
+        // Add AP rows
+        final CharSequence placeholder = mContext.getText(R.string.summary_placeholder);
+        for (int i = 0; i < DEFAULT_EXPANDED_ROW_COUNT; i++) {
+            if (i < apCount) {
+                listBuilder.addRow(getAccessPointRow(results.get(i)));
+            } else {
+                listBuilder.addRow(new RowBuilder()
+                        .setTitle(placeholder)
+                        .setSubtitle(placeholder));
             }
         }
         return listBuilder.build();
@@ -131,10 +144,13 @@ public class WifiSlice implements CustomSliceable {
         final String title = accessPoint.getConfigName();
         final IconCompat levelIcon = IconCompat.createWithResource(mContext,
                 com.android.settingslib.Utils.getWifiIconResource(accessPoint.getLevel()));
+        final CharSequence apSummary = accessPoint.getSettingsSummary();
         final RowBuilder rowBuilder = new RowBuilder()
                 .setTitleItem(levelIcon, ListBuilder.ICON_IMAGE)
                 .setTitle(title)
-                .setSubtitle(accessPoint.getSettingsSummary())
+                .setSubtitle(!TextUtils.isEmpty(apSummary)
+                        ? apSummary
+                        : mContext.getText(R.string.summary_placeholder))
                 .setPrimaryAction(new SliceAction(
                         getAccessPointAction(accessPoint), levelIcon, title));
 
@@ -248,47 +264,40 @@ public class WifiSlice implements CustomSliceable {
     }
 
     @Override
-    public SliceBackgroundWorker getBackgroundWorker() {
-        return WifiScanWorker.getInstance(mContext, WIFI_URI);
+    public Class getBackgroundWorkerClass() {
+        return WifiScanWorker.class;
     }
 
-    private static class WifiScanWorker extends SliceBackgroundWorker<AccessPoint>
+    public static class WifiScanWorker extends SliceBackgroundWorker<AccessPoint>
             implements WifiTracker.WifiListener {
-
-        private static WifiScanWorker mWifiScanWorker;
 
         private final Context mContext;
 
         private WifiTracker mWifiTracker;
-        private WifiManager mWifiManager;
 
-        private WifiScanWorker(Context context, Uri uri) {
-            super(context.getContentResolver(), uri);
+        public WifiScanWorker(Context context, Uri uri) {
+            super(context, uri);
             mContext = context;
-        }
-
-        public static WifiScanWorker getInstance(Context context, Uri uri) {
-            if (mWifiScanWorker == null) {
-                mWifiScanWorker = new WifiScanWorker(context, uri);
-            }
-            return mWifiScanWorker;
         }
 
         @Override
         protected void onSlicePinned() {
-            new Handler(Looper.getMainLooper()).post(() -> {
-                mWifiTracker = new WifiTracker(mContext, this, true, true);
-                mWifiManager = mWifiTracker.getManager();
-                mWifiTracker.onStart();
-                onAccessPointsChanged();
-            });
+            if (mWifiTracker == null) {
+                mWifiTracker = new WifiTracker(mContext, this /* wifiListener */,
+                        true /* includeSaved */, true /* includeScans */);
+            }
+            mWifiTracker.onStart();
+            onAccessPointsChanged();
         }
 
         @Override
         protected void onSliceUnpinned() {
             mWifiTracker.onStop();
+        }
+
+        @Override
+        public void close() {
             mWifiTracker.onDestroy();
-            mWifiScanWorker = null;
         }
 
         @Override
@@ -302,7 +311,7 @@ public class WifiSlice implements CustomSliceable {
         @Override
         public void onAccessPointsChanged() {
             // in case state has changed
-            if (!mWifiManager.isWifiEnabled()) {
+            if (!mWifiTracker.getManager().isWifiEnabled()) {
                 updateResults(null);
                 return;
             }

@@ -19,6 +19,7 @@ package com.android.settings.search.actionbar;
 import android.annotation.NonNull;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -56,7 +57,13 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        final Context context = mHost.getContext();
+        final String SettingsIntelligencePkgName = context.getString(
+                R.string.config_settingsintelligence_package_name);
         if (!Utils.isDeviceProvisioned(mHost.getContext())) {
+            return;
+        }
+        if (!Utils.isPackageEnabled(mHost.getContext(), SettingsIntelligencePkgName)) {
             return;
         }
         if (menu == null) {
@@ -72,10 +79,14 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
         searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         searchItem.setOnMenuItemClickListener(target -> {
-            final Context context = mHost.getContext();
             final Intent intent = SearchFeatureProvider.SEARCH_UI_INTENT;
-            intent.setPackage(FeatureFactory.getFactory(mHost.getContext())
-                    .getSearchFeatureProvider().getSettingsIntelligencePkgName());
+            intent.setPackage(SettingsIntelligencePkgName);
+
+            if (context.getPackageManager().queryIntentActivities(intent,
+                    PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
+                return true;
+            }
+
             FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                     .action(context, MetricsProto.MetricsEvent.ACTION_SEARCH_RESULTS);
             mHost.startActivityForResult(intent, 0 /* requestCode */);

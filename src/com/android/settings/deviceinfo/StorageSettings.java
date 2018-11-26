@@ -51,7 +51,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -61,7 +60,6 @@ import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -148,6 +146,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         switch (vol.getType()) {
             case VolumeInfo.TYPE_PRIVATE:
             case VolumeInfo.TYPE_PUBLIC:
+            case VolumeInfo.TYPE_STUB:
                 return true;
             default:
                 return false;
@@ -180,7 +179,8 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 final int color = COLOR_PRIVATE[privateCount++ % COLOR_PRIVATE.length];
                 mInternalCategory.addPreference(
                         new StorageVolumePreference(context, vol, color, volumeTotalBytes));
-            } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
+            } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC
+                    || vol.getType() == VolumeInfo.TYPE_STUB) {
                 mExternalCategory.addPreference(
                         new StorageVolumePreference(context, vol, COLOR_PUBLIC, 0));
             }
@@ -308,6 +308,8 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
             } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
                 return handlePublicVolumeClick(getContext(), vol);
+            } else if (vol.getType() == VolumeInfo.TYPE_STUB) {
+                return handleStubVolumeClick(getContext(), vol);
             }
 
         } else if (key.startsWith("disk:")) {
@@ -328,6 +330,16 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             return true;
         }
 
+        return false;
+    }
+
+    @VisibleForTesting
+    static boolean handleStubVolumeClick(Context context, VolumeInfo vol) {
+        final Intent intent = vol.buildBrowseIntent();
+        if (vol.isMountedReadable() && intent != null) {
+            context.startActivity(intent);
+            return true;
+        }
         return false;
     }
 
@@ -541,41 +553,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             return builder.create();
         }
     }
-
-    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
-        private final Context mContext;
-        private final SummaryLoader mLoader;
-        private final StorageManagerVolumeProvider mStorageManagerVolumeProvider;
-
-        private SummaryProvider(Context context, SummaryLoader loader) {
-            mContext = context;
-            mLoader = loader;
-            final StorageManager storageManager = mContext.getSystemService(StorageManager.class);
-            mStorageManagerVolumeProvider = new StorageManagerVolumeProvider(storageManager);
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                updateSummary();
-            }
-        }
-
-        private void updateSummary() {
-            // TODO: Register listener.
-            final NumberFormat percentageFormat = NumberFormat.getPercentInstance();
-            final PrivateStorageInfo info = PrivateStorageInfo.getPrivateStorageInfo(
-                    mStorageManagerVolumeProvider);
-            double privateUsedBytes = info.totalBytes - info.freeBytes;
-            mLoader.setSummary(this, mContext.getString(R.string.storage_summary,
-                    percentageFormat.format(privateUsedBytes / info.totalBytes),
-                    Formatter.formatFileSize(mContext, info.freeBytes)));
-        }
-    }
-
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = (activity, summaryLoader) -> new SummaryProvider(activity, summaryLoader);
 
     /** Enable indexing of searchable data */
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

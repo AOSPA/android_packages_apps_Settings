@@ -30,11 +30,13 @@ import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.GestureSettings;
+import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModeSettings;
+import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.system.SystemDashboardFragment;
@@ -61,9 +63,8 @@ public class DashboardFragmentRegistry {
 
     static {
         PARENT_TO_CATEGORY_KEY_MAP = new ArrayMap<>();
-        // TODO(b/110405144): Add the mapping when IA.homepage intent-filter is  is removed.
-        //        PARENT_TO_CATEGORY_KEY_MAP.put(TopLevelSettings.class.getName(),
-        //                CategoryKey.CATEGORY_HOMEPAGE);
+        PARENT_TO_CATEGORY_KEY_MAP.put(TopLevelSettings.class.getName(),
+                CategoryKey.CATEGORY_HOMEPAGE);
         PARENT_TO_CATEGORY_KEY_MAP.put(
                 NetworkDashboardFragment.class.getName(), CategoryKey.CATEGORY_NETWORK);
         PARENT_TO_CATEGORY_KEY_MAP.put(ConnectedDeviceDashboardFragment.class.getName(),
@@ -104,6 +105,8 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_GESTURES);
         PARENT_TO_CATEGORY_KEY_MAP.put(NightDisplaySettings.class.getName(),
                 CategoryKey.CATEGORY_NIGHT_DISPLAY);
+        PARENT_TO_CATEGORY_KEY_MAP.put(PrivacyDashboardFragment.class.getName(),
+                CategoryKey.CATEGORY_PRIVACY);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());
 

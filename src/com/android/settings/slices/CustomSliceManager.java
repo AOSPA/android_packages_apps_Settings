@@ -20,12 +20,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.ArrayMap;
 
-import com.android.settings.homepage.deviceinfo.DataUsageSlice;
-import com.android.settings.homepage.deviceinfo.DeviceInfoSlice;
-import com.android.settings.homepage.deviceinfo.StorageSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.DeviceInfoSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
+import com.android.settings.homepage.contextualcards.slices.ConnectedDeviceSlice;
+import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.wifi.WifiSlice;
 
 import java.util.Map;
+import java.util.WeakHashMap;
 
 /**
  * Manages custom {@link androidx.slice.Slice Slices}, which are all Slices not backed by
@@ -39,10 +43,12 @@ public class CustomSliceManager {
     protected final Map<Uri, Class<? extends CustomSliceable>> mUriMap;
 
     private final Context mContext;
+    private final Map<Uri, CustomSliceable> mSliceableCache;
 
     public CustomSliceManager(Context context) {
         mContext = context.getApplicationContext();
         mUriMap = new ArrayMap<>();
+        mSliceableCache = new WeakHashMap<>();
         addSlices();
     }
 
@@ -53,13 +59,18 @@ public class CustomSliceManager {
      * the only thing that should be needed to create the object.
      */
     public CustomSliceable getSliceableFromUri(Uri uri) {
-        final Class clazz = mUriMap.get(uri);
+        if (mSliceableCache.containsKey(uri)) {
+            return mSliceableCache.get(uri);
+        }
 
+        final Class clazz = mUriMap.get(uri);
         if (clazz == null) {
             throw new IllegalArgumentException("No Slice found for uri: " + uri);
         }
 
-        return CustomSliceable.createInstance(mContext, clazz);
+        final CustomSliceable sliceable = CustomSliceable.createInstance(mContext, clazz);
+        mSliceableCache.put(uri, sliceable);
+        return sliceable;
     }
 
     /**
@@ -93,5 +104,8 @@ public class CustomSliceManager {
         mUriMap.put(DataUsageSlice.DATA_USAGE_CARD_URI, DataUsageSlice.class);
         mUriMap.put(DeviceInfoSlice.DEVICE_INFO_CARD_URI, DeviceInfoSlice.class);
         mUriMap.put(StorageSlice.STORAGE_CARD_URI, StorageSlice.class);
+        mUriMap.put(BatterySlice.BATTERY_CARD_URI, BatterySlice.class);
+        mUriMap.put(ConnectedDeviceSlice.CONNECTED_DEVICE_URI, ConnectedDeviceSlice.class);
+        mUriMap.put(LowStorageSlice.LOW_STORAGE_URI, LowStorageSlice.class);
     }
 }
