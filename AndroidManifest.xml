@@ -131,7 +131,7 @@
                   android:launchMode="singleTask">
         </activity>
 
-        <activity android:name=".mobilenetwork.MobileSettingsActivity"
+        <activity android:name=".network.telephony.MobileSettingsActivity"
                   android:label="@string/network_settings_title"
                   android:theme="@style/Theme.Settings.Home"
                   android:launchMode="singleTask">
@@ -1590,7 +1590,7 @@
             android:enabled="false"
             android:exported="true"
             android:taskAffinity="com.android.wizard"
-            android:theme="@style/SuwThemeGlif.Light"
+            android:theme="@style/SuwThemeGlif.DayNight"
             android:label="@string/lock_screen_notifications_interstitial_title"
             android:icon="@drawable/ic_suggested_notifications">
             <intent-filter>
@@ -2564,7 +2564,6 @@
             android:label="@string/sound_settings"
             android:icon="@drawable/ic_homepage_sound"
             android:exported="true"
-            android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.SOUND_SETTINGS" />
