@@ -773,24 +773,6 @@ public class WifiConfigController implements TextWatcher,
                 config.allowedKeyManagement.set(KeyMgmt.DPP);
                 config.requirePMF = true;
                 break;
-
-            case AccessPoint.SECURITY_SAE:
-                config.allowedKeyManagement.set(KeyMgmt.SAE);
-                config.requirePMF = true;
-                if (mPasswordView.length() != 0) {
-                    String password = mPasswordView.getText().toString();
-                    if (password.matches("[0-9A-Fa-f]{64}")) {
-                        config.preSharedKey = password;
-                    } else {
-                        config.preSharedKey = '"' + password + '"';
-                    }
-                }
-                break;
-
-            case AccessPoint.SECURITY_OWE:
-                config.allowedKeyManagement.set(KeyMgmt.OWE);
-                config.requirePMF = true;
-                break;
             case AccessPoint.SECURITY_SAE:
                 config.allowedKeyManagement.set(KeyMgmt.SAE);
                 config.requirePMF = true;
