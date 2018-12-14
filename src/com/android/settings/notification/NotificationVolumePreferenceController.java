@@ -55,7 +55,21 @@ public class NotificationVolumePreferenceController extends
 
     @Override
     public int getMuteIcon() {
-        return R.drawable.ic_notifications_off_24dp;
+        return R.drawable.ic_audio_notifications_off_24dp;
     }
 
+    @Override
+    protected void updatePreferenceIcon() {
+        if (mPreference != null) {
+            if (mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
+                mMuteIcon = R.drawable.ic_volume_ringer_vibrate;
+                mPreference.showIcon(R.drawable.ic_volume_ringer_vibrate);
+            } else if (mRingerMode == AudioManager.RINGER_MODE_SILENT) {
+                mMuteIcon = R.drawable.ic_audio_notifications_off_24dp;
+                mPreference.showIcon(R.drawable.ic_audio_notifications_off_24dp);
+            } else {
+                mPreference.showIcon(R.drawable.ic_audio_notifications);
+            }
+        }
+    }
 }
