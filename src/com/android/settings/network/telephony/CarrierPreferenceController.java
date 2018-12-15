@@ -19,6 +19,7 @@ package com.android.settings.network.telephony;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
+import android.telephony.SubscriptionManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -36,7 +37,9 @@ public class CarrierPreferenceController extends BasePreferenceController {
 
     public CarrierPreferenceController(Context context, String key) {
         super(context, key);
+        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mCarrierConfigManager = new CarrierConfigManager(context);
+        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     public void init(int subId) {

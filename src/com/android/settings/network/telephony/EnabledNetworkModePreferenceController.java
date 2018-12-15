@@ -45,7 +45,8 @@ public class EnabledNetworkModePreferenceController extends BasePreferenceContro
     private PersistableBundle mPersistableBundle;
     private int mSubId;
     private boolean mIsGlobalCdma;
-    private boolean mShow4GForLTE;
+    @VisibleForTesting
+    boolean mShow4GForLTE;
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
@@ -111,12 +112,10 @@ public class EnabledNetworkModePreferenceController extends BasePreferenceContro
                 mTelephonyManager.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE;
         mIsGlobalCdma = isLteOnCdma
                 && mPersistableBundle.getBoolean(CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
-        initShow4GForLTE();
-    }
-
-    @VisibleForTesting
-    void initShow4GForLTE() {
-        mShow4GForLTE = MobileNetworkUtils.isShow4GForLTE(mContext);
+        mShow4GForLTE = mPersistableBundle != null
+                ? mPersistableBundle.getBoolean(
+                CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL)
+                : false;
     }
 
     private int getPreferredNetworkMode() {
@@ -181,7 +180,7 @@ public class EnabledNetworkModePreferenceController extends BasePreferenceContro
                 preference.setEntryValues(
                         R.array.enabled_networks_tdscdma_values);
             } else if (!carrierConfig.getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL)
-                    && !resources.getBoolean(R.bool.config_enabled_lte)) {
+                    && !carrierConfig.getBoolean(CarrierConfigManager.KEY_LTE_ENABLED_BOOL)) {
                 preference.setEntries(R.array.enabled_networks_except_gsm_lte_choices);
                 preference.setEntryValues(R.array.enabled_networks_except_gsm_lte_values);
             } else if (!carrierConfig.getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL)) {
@@ -191,7 +190,7 @@ public class EnabledNetworkModePreferenceController extends BasePreferenceContro
                 preference.setEntries(select);
                 preference.setEntryValues(
                         R.array.enabled_networks_except_gsm_values);
-            } else if (!resources.getBoolean(R.bool.config_enabled_lte)) {
+            } else if (!carrierConfig.getBoolean(CarrierConfigManager.KEY_LTE_ENABLED_BOOL)) {
                 preference.setEntries(
                         R.array.enabled_networks_except_lte_choices);
                 preference.setEntryValues(

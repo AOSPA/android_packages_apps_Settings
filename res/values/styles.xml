@@ -16,11 +16,15 @@
 
 <resources>
 
-    <style name="Theme.ActionBar" parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid">
+    <style name="Widget.ActionBar.Base"
+            parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid"/>
+
+    <style name="Widget.ActionBar"
+           parent="Widget.ActionBar.Base">
         <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
     </style>
 
-    <style name="Theme.ActionBar.SubSettings" parent="Theme.ActionBar">
+    <style name="Widget.ActionBar.SubSettings" parent="Widget.ActionBar">
         <item name="android:contentInsetStart">@dimen/actionbar_subsettings_contentInsetStart</item>
     </style>
 
@@ -78,8 +82,11 @@
         <item name="android:scrollbarStyle">outsideOverlay</item>
     </style>
 
-    <style name="TrimmedHorizontalProgressBar" parent="android:Widget.Material.ProgressBar.Horizontal">
-        <item name="android:indeterminateDrawable">@drawable/progress_indeterminate_horizontal_material_trimmed</item>
+    <style name="TrimmedHorizontalProgressBar"
+           parent="android:Widget.Material.ProgressBar.Horizontal">
+        <item name="android:indeterminateDrawable">
+            @drawable/progress_indeterminate_horizontal_material_trimmed
+        </item>
         <item name="android:minHeight">3dip</item>
         <item name="android:maxHeight">3dip</item>
     </style>
@@ -162,7 +169,8 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="ConfirmDeviceCredentialsAnimationStyle" parent="@*android:style/Animation.Material.Activity">
+    <style name="ConfirmDeviceCredentialsAnimationStyle"
+           parent="@*android:style/Animation.Material.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/confirm_credential_open_enter</item>
         <item name="android:activityOpenExitAnimation">@anim/confirm_credential_open_exit</item>
     </style>
@@ -171,14 +179,16 @@
         <item name="android:background">#ff000000</item>
     </style>
 
-    <style name="SecurityPreferenceButtonContainer" parent="@android:style/Widget.Material.Light.SegmentedButton">
+    <style name="SecurityPreferenceButtonContainer"
+           parent="@android:style/Widget.Material.Light.SegmentedButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:weightSum">2</item>
         <item name="android:dividerPadding">8dip</item>
     </style>
 
-    <style name="SecurityPreferenceButton" parent="@android:style/Widget.Material.Light.Button.Borderless">
+    <style name="SecurityPreferenceButton"
+           parent="@android:style/Widget.Material.Light.Button.Borderless">
         <item name="android:layout_width">0dip</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">wrap_content</item>
@@ -192,7 +202,7 @@
         <item name="android:layout_marginStart">-16dp</item>
     </style>
 
-    <style name="SetupWizardButton.Positive" parent="@style/SuwGlifButton.Primary" />
+    <style name="SetupWizardButton.Positive" parent="@style/SuwGlifButton.Primary"/>
 
     <style name="AccentColorHighlightBorderlessButton">
         <item name="android:colorControlHighlight">?android:attr/colorAccent</item>
@@ -252,17 +262,18 @@
         <item name="android:imeOptions">flagForceAscii|actionDone</item>
     </style>
 
-    <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium" />
-    <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Material.Small" />
+    <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium"/>
+    <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Material.Small"/>
     <style name="TextAppearance.Switch" parent="@android:style/TextAppearance.Material.Title">
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="TextAppearance.CategoryTitle" parent="@android:style/TextAppearance.Material.Body2">
+    <style name="TextAppearance.CategoryTitle"
+           parent="@android:style/TextAppearance.Material.Body2">
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
-    <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Material.Subhead" />
+    <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Material.Subhead"/>
 
     <style name="TextAppearance.SuggestionTitle"
            parent="@android:style/TextAppearance.Material.Subhead">
@@ -293,12 +304,14 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="TextAppearance.RemoveDialogContent" parent="@android:style/TextAppearance.Material">
+    <style name="TextAppearance.RemoveDialogContent"
+           parent="@android:style/TextAppearance.Material">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
-    <style name="TextAppearance.SearchBar" parent="@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle">
+    <style name="TextAppearance.SearchBar"
+           parent="@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle">
         <item name="android:textSize">@dimen/search_bar_text_size</item>
     </style>
 
@@ -308,10 +321,21 @@
         <item name="android:textColor">?android:attr/colorAccent</item>
     </style>
 
+    <style name="TextAppearance.ConditionCardTitle"
+           parent="@android:style/TextAppearance.Material.Body2">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.ConditionCardSummary"
+           parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
     <style name="TextAppearance.EntityHeaderTitle"
            parent="@android:style/TextAppearance.Material.Subhead">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="TextAppearance.EntityHeaderSummary"
@@ -321,6 +345,7 @@
         <item name="android:gravity">start</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">marquee</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TextAppearance.ZenOnboardingButton">
@@ -333,8 +358,10 @@
         <item name="android:padding">8dp</item>
     </style>
 
-    <style name="SuggestionConditionStyle">
-        <item name="android:background">?android:attr/colorPrimary</item>
+    <style name="TextAppearance.ContextualCardDismissalText"
+           parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="SuggestionCardText">
@@ -344,16 +371,8 @@
     <style name="SuggestionCardIcon">
         <item name="android:layout_centerHorizontal">false</item>
         <item name="android:layout_alignParentStart">true</item>
-        <item name="android:layout_marginStart">@dimen/suggestion_card_icon_side_margin</item>
-        <item name="android:layout_marginEnd">@dimen/suggestion_card_icon_side_margin</item>
-    </style>
-
-    <style name="SuggestionCardButton">
-        <item name="android:layout_gravity">start</item>
-        <item name="android:layout_marginStart">@dimen/suggestion_card_button_side_margin</item>
-        <item name="android:layout_marginEnd">@dimen/suggestion_card_button_side_margin</item>
-        <item name="android:layout_marginTop">@dimen/suggestion_card_button_top_margin</item>
-        <item name="android:layout_marginBottom">@dimen/suggestion_card_button_bottom_margin</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
     </style>
 
     <style name="FingerprintLayoutTheme">
@@ -391,7 +410,8 @@
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
-    <style name="RingProgressBarStyle" parent="android:style/Widget.Material.ProgressBar.Horizontal">
+    <style name="RingProgressBarStyle"
+           parent="android:style/Widget.Material.ProgressBar.Horizontal">
         <item name="android:indeterminate">false</item>
         <item name="android:max">10000</item>
         <item name="android:mirrorForRtl">false</item>
@@ -399,17 +419,20 @@
     </style>
 
     <style name="EntityHeader">
-        <item name="android:background">?android:attr/colorPrimary</item>
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingStart">16dp</item>
+        <item name="android:background">?android:attr/colorPrimaryDark</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingBottom">16dp</item>
         <item name="android:paddingEnd">16dp</item>
-        <item name="android:paddingBottom">8dp</item>
     </style>
 
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
 
     <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button"/>
+
+    <style name="SettingsActionButton" parent="android:Widget.DeviceDefault.Button.Borderless.Colored">
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:drawableTint">@*android:color/btn_colored_borderless_text_material</item>
+    </style>
 
     <style name="LockPatternContainerStyle">
         <item name="android:maxHeight">400dp</item>
@@ -459,12 +482,34 @@
     </style>
 
     <style name="ContextualCardStyle">
-        <item name="android:layout_marginTop">@dimen/homepage_card_top_margin</item>
-        <item name="android:layout_marginBottom">@dimen/homepage_card_bottom_margin</item>
+        <item name="android:layout_marginTop">@dimen/homepage_card_vertical_margin</item>
+        <item name="android:layout_marginBottom">@dimen/homepage_card_vertical_margin</item>
         <item name="android:layout_marginStart">@dimen/homepage_card_side_margin</item>
         <item name="android:layout_marginEnd">@dimen/homepage_card_side_margin</item>
         <item name="cardCornerRadius">@dimen/homepage_card_corner_radius</item>
         <item name="cardElevation">@dimen/homepage_card_elevation</item>
+    </style>
+
+    <style name="ConditionCardBorderlessButton"
+           parent="android:Widget.DeviceDefault.Button.Borderless">
+        <item name="android:textColor">?android:attr/colorAccent</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="ConditionHalfCardBorderlessButton"
+           parent="@style/ConditionCardBorderlessButton">
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <style name="ConditionFullCardBorderlessButton"
+           parent="@style/ConditionCardBorderlessButton">
+        <item name="android:textAlignment">viewEnd</item>
+    </style>
+
+    <style name="ContextualCardDismissalButton"
+           parent="android:Widget.DeviceDefault.Button.Borderless.Colored">
+        <item name="android:textAllCaps">false</item>
     </style>
 
 </resources>

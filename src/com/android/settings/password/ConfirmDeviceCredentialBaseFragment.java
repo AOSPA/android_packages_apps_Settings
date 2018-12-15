@@ -18,17 +18,12 @@
 package com.android.settings.password;
 
 import android.annotation.Nullable;
-import android.app.ActivityManager;
-import android.app.ActivityOptions;
 import android.app.Dialog;
-import android.app.IActivityManager;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
-import android.app.trust.TrustManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.pm.UserInfo;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
@@ -36,7 +31,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.RemoteException;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -53,26 +47,24 @@ import androidx.fragment.app.FragmentManager;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.biometrics.fingerprint.FingerprintUiHelper;
 import com.android.settings.core.InstrumentedFragment;
 
 /**
  * Base fragment to be shared for PIN/Pattern/Password confirmation fragments.
  */
-public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFragment
-        implements FingerprintUiHelper.Callback {
+public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFragment {
 
     public static final String PACKAGE = "com.android.settings";
     public static final String TITLE_TEXT = PACKAGE + ".ConfirmCredentials.title";
     public static final String HEADER_TEXT = PACKAGE + ".ConfirmCredentials.header";
     public static final String DETAILS_TEXT = PACKAGE + ".ConfirmCredentials.details";
-    public static final String ALLOW_FP_AUTHENTICATION =
-            PACKAGE + ".ConfirmCredentials.allowFpAuthentication";
     public static final String DARK_THEME = PACKAGE + ".ConfirmCredentials.darkTheme";
     public static final String SHOW_CANCEL_BUTTON =
             PACKAGE + ".ConfirmCredentials.showCancelButton";
     public static final String SHOW_WHEN_LOCKED =
             PACKAGE + ".ConfirmCredentials.showWhenLocked";
+    public static final String USE_FADE_ANIMATION =
+            PACKAGE + ".ConfirmCredentials.useFadeAnimation";
 
     protected static final int USER_TYPE_PRIMARY = 1;
     protected static final int USER_TYPE_MANAGED_PROFILE = 2;
@@ -81,10 +73,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     /** Time we wait before clearing a wrong input attempt (e.g. pattern) and the error message. */
     protected static final long CLEAR_WRONG_ATTEMPT_TIMEOUT_MS = 3000;
 
-    private FingerprintUiHelper mFingerprintHelper;
     protected boolean mReturnCredentials = false;
     protected Button mCancelButton;
-    protected ImageView mFingerprintIcon;
     protected int mEffectiveUserId;
     protected int mUserId;
     protected UserManager mUserManager;
@@ -123,9 +113,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mCancelButton = (Button) view.findViewById(R.id.cancelButton);
-        mFingerprintIcon = (ImageView) view.findViewById(R.id.fingerprintIcon);
-        mFingerprintHelper = new FingerprintUiHelper(
-                mFingerprintIcon, view.findViewById(R.id.errorText), this, mUserId);
+
         boolean showCancelButton = getActivity().getIntent().getBooleanExtra(
                 SHOW_CANCEL_BUTTON, false);
         boolean hasAlternateButton = mFrp && !TextUtils.isEmpty(mFrpAlternateButtonText);
@@ -153,27 +141,14 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         }
     }
 
-    private boolean isFingerprintDisabledByAdmin() {
-        final int disabledFeatures =
-                mDevicePolicyManager.getKeyguardDisabledFeatures(null, mEffectiveUserId);
-        return (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT) != 0;
-    }
-
     // User could be locked while Effective user is unlocked even though the effective owns the
     // credential. Otherwise, fingerprint can't unlock fbe/keystore through
     // verifyTiedProfileChallenge. In such case, we also wanna show the user message that
     // fingerprint is disabled due to device restart.
     protected boolean isStrongAuthRequired() {
         return mFrp
-                || !mLockPatternUtils.isFingerprintAllowedForUser(mEffectiveUserId)
+                || !mLockPatternUtils.isBiometricAllowedForUser(mEffectiveUserId)
                 || !mUserManager.isUserUnlocked(mUserId);
-    }
-
-    private boolean isFingerprintAllowed() {
-        return !mReturnCredentials
-                && getActivity().getIntent().getBooleanExtra(ALLOW_FP_AUTHENTICATION, false)
-                && !isStrongAuthRequired()
-                && !isFingerprintDisabledByAdmin();
     }
 
     @Override
@@ -183,13 +158,6 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     }
 
     protected void refreshLockScreen() {
-        if (isFingerprintAllowed()) {
-            mFingerprintHelper.startListening();
-        } else {
-            if (mFingerprintHelper.isListening()) {
-                mFingerprintHelper.stopListening();
-            }
-        }
         updateErrorMessage(mLockPatternUtils.getCurrentFailedPasswordAttempts(mEffectiveUserId));
     }
 
@@ -214,56 +182,15 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     @Override
     public void onPause() {
         super.onPause();
-        if (mFingerprintHelper.isListening()) {
-            mFingerprintHelper.stopListening();
-        }
-    }
-
-    @Override
-    public void onAuthenticated() {
-        // Check whether we are still active.
-        if (getActivity() != null && getActivity().isResumed()) {
-            TrustManager trustManager =
-                (TrustManager) getActivity().getSystemService(Context.TRUST_SERVICE);
-            trustManager.setDeviceLockedForUser(mEffectiveUserId, false);
-            authenticationSucceeded();
-            checkForPendingIntent();
-        }
     }
 
     protected abstract void authenticationSucceeded();
 
-    @Override
-    public void onFingerprintIconVisibilityChanged(boolean visible) {
-    }
 
     public void prepareEnterAnimation() {
     }
 
     public void startEnterAnimation() {
-    }
-
-    protected void checkForPendingIntent() {
-        int taskId = getActivity().getIntent().getIntExtra(Intent.EXTRA_TASK_ID, -1);
-        if (taskId != -1) {
-            try {
-                IActivityManager activityManager = ActivityManager.getService();
-                final ActivityOptions options = ActivityOptions.makeBasic();
-                activityManager.startActivityFromRecents(taskId, options.toBundle());
-                return;
-            } catch (RemoteException e) {
-                // Do nothing.
-            }
-        }
-        IntentSender intentSender = getActivity().getIntent()
-                .getParcelableExtra(Intent.EXTRA_INTENT);
-        if (intentSender != null) {
-            try {
-                getActivity().startIntentSenderForResult(intentSender, -1, null, 0, 0, 0);
-            } catch (IntentSender.SendIntentException e) {
-                /* ignore */
-            }
-        }
     }
 
     private void setWorkChallengeBackground(View baseView, int userId) {
@@ -287,15 +214,6 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
             imageView.setLayoutParams(new FrameLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     screenSize.y));
-        }
-    }
-
-    protected void reportSuccessfulAttempt() {
-        mLockPatternUtils.reportSuccessfulPasswordAttempt(mEffectiveUserId);
-        if (mUserManager.isManagedProfile(mEffectiveUserId)) {
-            // Keyguard is responsible to disable StrongAuth for primary user. Disable StrongAuth
-            // for work challenge only here.
-            mLockPatternUtils.userPresent(mEffectiveUserId);
         }
     }
 

@@ -22,6 +22,7 @@ import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLAT
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -77,12 +78,12 @@ public class SliceBuilderUtils {
     public static Slice buildSlice(Context context, SliceData sliceData) {
         Log.d(TAG, "Creating slice for: " + sliceData.getPreferenceController());
         final BasePreferenceController controller = getPreferenceController(context, sliceData);
-        final Pair<Integer, Object> sliceNamePair =
-                Pair.create(MetricsEvent.FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, sliceData.getKey());
-        // Log Slice requests using the same schema as SharedPreferenceLogger (but with a different
-        // action name).
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                .action(context, MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED, sliceNamePair);
+                .action(SettingsEnums.PAGE_UNKNOWN,
+                        MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED,
+                        SettingsEnums.PAGE_UNKNOWN,
+                        sliceData.getKey(),
+                        0);
 
         if (!controller.isAvailable()) {
             // Cannot guarantee setting page is accessible, let the presenter handle error case.
@@ -91,6 +92,10 @@ public class SliceBuilderUtils {
 
         if (controller.getAvailabilityStatus() == DISABLED_DEPENDENT_SETTING) {
             return buildUnavailableSlice(context, sliceData);
+        }
+
+        if (controller instanceof CopyableSlice) {
+            return buildCopyableSlice(context, sliceData, controller);
         }
 
         switch (sliceData.getSliceType()) {
@@ -324,6 +329,28 @@ public class SliceBuilderUtils {
                 .build();
     }
 
+    private static Slice buildCopyableSlice(Context context, SliceData sliceData,
+            BasePreferenceController controller) {
+        final SliceAction copyableAction = getCopyableAction(context, sliceData);
+        final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
+        final IconCompat icon = getSafeIcon(context, sliceData);
+        final SliceAction primaryAction = new SliceAction(contentIntent, icon,
+                sliceData.getTitle());
+        final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
+        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
+        final Set<String> keywords = buildSliceKeywords(sliceData);
+
+        return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
+                .setAccentColor(color)
+                .addRow(new RowBuilder()
+                        .setTitle(sliceData.getTitle())
+                        .setSubtitle(subtitleText)
+                        .setPrimaryAction(primaryAction)
+                        .addEndItem(copyableAction))
+                .setKeywords(keywords)
+                .build();
+    }
+
     private static BasePreferenceController getPreferenceController(Context context,
             String controllerClassName, String controllerKey) {
         try {
@@ -344,6 +371,14 @@ public class SliceBuilderUtils {
 
     private static PendingIntent getSliderAction(Context context, SliceData sliceData) {
         return getActionIntent(context, SettingsSliceProvider.ACTION_SLIDER_CHANGED, sliceData);
+    }
+
+    private static SliceAction getCopyableAction(Context context, SliceData sliceData) {
+        final PendingIntent intent = getActionIntent(context,
+                SettingsSliceProvider.ACTION_COPY, sliceData);
+        final IconCompat icon = IconCompat.createWithResource(context,
+                R.drawable.ic_content_copy_grey600_24dp);
+        return new SliceAction(intent, icon, sliceData.getTitle());
     }
 
     private static boolean isValidSummary(Context context, CharSequence summary) {
@@ -385,7 +420,7 @@ public class SliceBuilderUtils {
         final Set<String> keywords = buildSliceKeywords(data);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final CharSequence summary = context.getText(R.string.disabled_dependent_setting_summary);
-        final IconCompat icon = IconCompat.createWithResource(context, data.getIconResource());
+        final IconCompat icon = getSafeIcon(context, data);
         final SliceAction primaryAction = new SliceAction(getContentPendingIntent(context, data),
                 icon, title);
 

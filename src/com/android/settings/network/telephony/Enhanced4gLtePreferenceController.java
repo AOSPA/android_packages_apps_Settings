@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
@@ -35,6 +36,9 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Preference controller for "Enhanced 4G LTE"
  */
@@ -48,13 +52,15 @@ public class Enhanced4gLtePreferenceController extends TogglePreferenceControlle
     @VisibleForTesting
     ImsManager mImsManager;
     private PhoneCallStateListener mPhoneStateListener;
+    private final List<On4gLteUpdateListener> m4gLteListeners;
     private int mSubId;
 
     public Enhanced4gLtePreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
-        mPhoneStateListener = new PhoneCallStateListener();
-        mSubId =  SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        m4gLteListeners = new ArrayList<>();
+        mPhoneStateListener = new PhoneCallStateListener(Looper.getMainLooper());
+        mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @Override
@@ -104,6 +110,9 @@ public class Enhanced4gLtePreferenceController extends TogglePreferenceControlle
     @Override
     public boolean setChecked(boolean isChecked) {
         mImsManager.setEnhanced4gLteModeSetting(isChecked);
+        for (final On4gLteUpdateListener lsn : m4gLteListeners) {
+            lsn.on4gLteUpdated();
+        }
         return true;
     }
 
@@ -112,13 +121,20 @@ public class Enhanced4gLtePreferenceController extends TogglePreferenceControlle
         return mImsManager.isEnhanced4gLteModeSettingEnabledByUser();
     }
 
-    public void init(int subId) {
+    public Enhanced4gLtePreferenceController init(int subId) {
         mSubId = subId;
         mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
         mCarrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mImsManager = ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(mSubId));
         }
+
+        return this;
+    }
+
+    public Enhanced4gLtePreferenceController addListener(On4gLteUpdateListener lsn) {
+        m4gLteListeners.add(lsn);
+        return this;
     }
 
     private boolean is4gLtePrefEnabled() {
@@ -131,6 +147,11 @@ public class Enhanced4gLtePreferenceController extends TogglePreferenceControlle
     }
 
     private class PhoneCallStateListener extends PhoneStateListener {
+
+        public PhoneCallStateListener(Looper looper) {
+            super(looper);
+        }
+
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
             updateState(mPreference);
@@ -144,5 +165,12 @@ public class Enhanced4gLtePreferenceController extends TogglePreferenceControlle
         public void unregister() {
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
         }
+    }
+
+    /**
+     * Update other preferences when 4gLte state is changed
+     */
+    public interface On4gLteUpdateListener {
+        void on4gLteUpdated();
     }
 }

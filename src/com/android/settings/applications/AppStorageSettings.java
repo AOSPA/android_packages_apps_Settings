@@ -18,13 +18,10 @@ package com.android.settings.applications;
 
 import static android.content.pm.ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA;
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
-import static android.os.storage.StorageVolume.ScopedAccessProviderContract.AUTHORITY;
-import static android.os.storage.StorageVolume.ScopedAccessProviderContract.TABLE_PERMISSIONS;
 
 import android.app.ActivityManager;
 import android.app.AppGlobals;
 import android.app.GrantedUriPermission;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,7 +29,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -171,10 +167,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                 .setComputingString(R.string.computing_size)
                 .setErrorString(R.string.invalid_size_value)
                 .build();
-        mButtonsPref = ((ActionButtonPreference) findPreference(KEY_HEADER_BUTTONS))
-                .setButton1Positive(false)
-                .setButton2Positive(false);
-
+        mButtonsPref = ((ActionButtonPreference) findPreference(KEY_HEADER_BUTTONS));
         mStorageUsed = findPreference(KEY_STORAGE_USED);
         mChangeStorageButton = (Button) ((LayoutPreference) findPreference(KEY_CHANGE_STORAGE))
                 .findViewById(R.id.button);
@@ -182,7 +175,9 @@ public class AppStorageSettings extends AppInfoWithHeader
         mChangeStorageButton.setOnClickListener(this);
 
         // Cache section
-        mButtonsPref.setButton2Text(R.string.clear_cache_btn_text);
+        mButtonsPref
+                .setButton2Text(R.string.clear_cache_btn_text)
+                .setButton2Icon(R.drawable.ic_settings_delete);
 
         // URI permissions section
         mUri = (PreferenceCategory) findPreference(KEY_URI_CATEGORY);
@@ -308,16 +303,20 @@ public class AppStorageSettings extends AppInfoWithHeader
                 || !isManageSpaceActivityAvailable) {
             mButtonsPref
                     .setButton1Text(R.string.clear_user_data_text)
+                    .setButton1Icon(R.drawable.ic_settings_delete)
                     .setButton1Enabled(false);
             mCanClearData = false;
         } else {
             if (appHasSpaceManagementUI) {
                 mButtonsPref.setButton1Text(R.string.manage_space_text);
             } else {
-                mButtonsPref.setButton1Text(R.string.clear_user_data_text);
+                mButtonsPref
+                        .setButton1Text(R.string.clear_user_data_text)
+                        .setButton1Icon(R.drawable.ic_settings_delete);
             }
             mButtonsPref
                     .setButton1Text(R.string.clear_user_data_text)
+                    .setButton1Icon(R.drawable.ic_settings_delete)
                     .setButton1OnClickListener(v -> handleClearDataClick());
         }
 
@@ -388,7 +387,9 @@ public class AppStorageSettings extends AppInfoWithHeader
     private void processClearMsg(Message msg) {
         int result = msg.arg1;
         String packageName = mAppEntry.info.packageName;
-        mButtonsPref.setButton1Text(R.string.clear_user_data_text);
+        mButtonsPref
+                .setButton1Text(R.string.clear_user_data_text)
+                .setButton1Icon(R.drawable.ic_settings_delete);
         if (result == OP_SUCCESSFUL) {
             Log.i(TAG, "Cleared user data for package : " + packageName);
             updateSize();
@@ -460,17 +461,6 @@ public class AppStorageSettings extends AppInfoWithHeader
         final ActivityManager am = (ActivityManager) context.getSystemService(
                 Context.ACTIVITY_SERVICE);
         am.clearGrantedUriPermissions(packageName);
-
-
-        // Also update the Scoped Directory Access UI permissions
-        final Uri providerUri = new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(AUTHORITY).appendPath(TABLE_PERMISSIONS).appendPath("*")
-                .build();
-        Log.v(TAG, "Asking " + providerUri + " to delete permissions for " + packageName);
-        final int deleted = context.getContentResolver().delete(providerUri, null, new String[] {
-                packageName
-        });
-        Log.d(TAG, "Deleted " + deleted + " entries for package " + packageName);
 
         // Update UI
         refreshGrantedUriPermissions();

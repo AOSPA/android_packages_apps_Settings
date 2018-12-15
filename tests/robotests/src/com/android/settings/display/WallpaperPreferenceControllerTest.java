@@ -45,6 +45,7 @@ public class WallpaperPreferenceControllerTest {
 
     private static final String WALLPAPER_PACKAGE = "TestPkg";
     private static final String WALLPAPER_CLASS = "TestCls";
+    private static final String TEST_KEY = "test_key";
 
     @Mock
     private Context mContext;
@@ -54,7 +55,7 @@ public class WallpaperPreferenceControllerTest {
     private WallpaperPreferenceController mController;
 
     @Before
-    public void setUp() throws PackageManager.NameNotFoundException {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getString(R.string.config_wallpaper_picker_package))
                 .thenReturn(WALLPAPER_PACKAGE);
@@ -62,11 +63,11 @@ public class WallpaperPreferenceControllerTest {
                 .thenReturn(WALLPAPER_CLASS);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
 
-        mController = new WallpaperPreferenceController(mContext);
+        mController = new WallpaperPreferenceController(mContext, TEST_KEY);
     }
 
     @Test
-    public void isAvailable_wallpaerPickerEnabled_shouldReturnTrue() {
+    public void isAvailable_wallpaperPickerEnabled_shouldReturnTrue() {
         final List<ResolveInfo> resolveInfos = new ArrayList<>();
         resolveInfos.add(mock(ResolveInfo.class));
         when(mPackageManager.queryIntentActivities(any(Intent.class), anyInt()))
@@ -76,7 +77,7 @@ public class WallpaperPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_wallpaerPickerDisbled_shouldReturnFalseAndNoCrash() {
+    public void isAvailable_wallpaperPickerDisabled_shouldReturnFalse() {
         when(mPackageManager.queryIntentActivities(any(Intent.class), anyInt())).thenReturn(null);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -86,6 +87,5 @@ public class WallpaperPreferenceControllerTest {
                 .thenReturn(resolveInfos);
 
         assertThat(mController.isAvailable()).isFalse();
-        // should not crash
     }
 }

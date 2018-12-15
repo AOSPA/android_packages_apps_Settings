@@ -41,11 +41,19 @@ public class ZenModeSoundVibrationSettings extends ZenModeSettingsBase implement
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModeAlarmsPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeCallsPreferenceController(context, lifecycle,
+                "zen_mode_calls_settings"));
+        controllers.add(new ZenModeMessagesPreferenceController(context, lifecycle,
+                "zen_mode_messages_settings"));
+        controllers.add(new ZenModeAlarmsPreferenceController(context, lifecycle,
+                "zen_mode_alarms"));
         controllers.add(new ZenModeMediaPreferenceController(context, lifecycle));
         controllers.add(new ZenModeSystemPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeRemindersPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeEventsPreferenceController(context, lifecycle));
         controllers.add(new ZenModeBehaviorFooterPreferenceController(context, lifecycle,
                 R.string.zen_sound_footer));
+        controllers.add(new ZenModeBypassingAppsPreferenceController(context, lifecycle));
         return controllers;
     }
 
