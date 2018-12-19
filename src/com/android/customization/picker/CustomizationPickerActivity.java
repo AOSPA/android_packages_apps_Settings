@@ -28,6 +28,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.customization.picker.theme.ThemeFragment;
 import com.android.wallpaper.R;
 import com.android.wallpaper.model.WallpaperInfo;
 import com.android.wallpaper.module.DailyLoggingAlarmScheduler;
@@ -85,27 +86,23 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 
-        boolean forceCategoryRefresh = false;
         if (fragment == null) {
             // App launch specific logic: log the "app launched" event and set up daily logging.
             mUserEventLogger.logAppLaunched();
             DailyLoggingAlarmScheduler.setAlarm(getApplicationContext());
-            navigateToSection(R.id.nav_wallpaper);
-            forceCategoryRefresh = true;
+            navigateToSection(R.id.nav_theme);
         }
 
-        mDelegate.initialize(forceCategoryRefresh);
 
     }
 
     private boolean supportsCustomization() {
-        //TODO (santie): the check for sections.size() should be > 1: if we only have wallpaper we
-        // should default to the Wallpaper only UI
         return mDelegate.getFormFactor() == FormFactorChecker.FORM_FACTOR_MOBILE
-                && mSections.size() > 0;
+                && mSections.size() > 1;
     }
 
     private void initSections() {
+        mSections.put(R.id.nav_theme, new ThemeSection(R.id.nav_theme));
         mSections.put(R.id.nav_wallpaper, new WallpaperSection(R.id.nav_wallpaper));
         //TODO (santie): add other sections if supported by the device
     }
@@ -121,7 +118,9 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         }
 
         mBottomNav.setOnNavigationItemSelectedListener(item -> {
-            switchFragment(item.getItemId());
+            CustomizationSection section = mSections.get(item.getItemId());
+            switchFragment(section);
+            section.onVisible();
             return true;
         });
     }
@@ -130,10 +129,10 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         mBottomNav.setSelectedItemId(id);
     }
 
-    private void switchFragment(int id) {
+    private void switchFragment(CustomizationSection section) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
-        Fragment fragment = mSections.get(id).getFragment();
+        Fragment fragment = section.getFragment();
 
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
@@ -201,12 +200,14 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
          */
         abstract Fragment getFragment();
 
+        void onVisible() {}
     }
 
     /**
      * {@link CustomizationSection} corresponding to the "Wallpaper" section of the Picker.
      */
     private class WallpaperSection extends CustomizationSection {
+        private boolean mForceCategoryRefresh;
 
         private WallpaperSection(int id) {
             super(id);
@@ -215,9 +216,28 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         @Override
         Fragment getFragment() {
             if (mWallpaperCategoryFragment == null) {
-                mWallpaperCategoryFragment = new CategoryFragment();
+                mWallpaperCategoryFragment = CategoryFragment.newInstance(
+                        getString(R.string.wallpaper_title));
+                mForceCategoryRefresh = true;
             }
             return mWallpaperCategoryFragment;
+        }
+
+        @Override
+        void onVisible() {
+            mDelegate.initialize(mForceCategoryRefresh);
+        }
+    }
+
+    private class ThemeSection extends CustomizationSection {
+
+        private ThemeSection(int id) {
+            super(id);
+        }
+
+        @Override
+        Fragment getFragment() {
+            return ThemeFragment.newInstance(getString(R.string.theme_title));
         }
     }
 }

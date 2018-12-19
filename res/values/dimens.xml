@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+
      Copyright (C) 2018 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,11 +15,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:state_checked="true"
-        android:color="?android:colorAccent" />
-    <item
-        android:state_checked="false"
-        android:color="@color/material_grey500" />
-</selector>
+<resources>
+    <dimen name="bottom_navbar_height">56dp</dimen>
+</resources>

@@ -31,6 +31,7 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <style name="BottomNavStyle" parent="@style/Widget.MaterialComponents.BottomNavigationView">
         <item name="itemIconTint">@color/bottom_nav_item_color</item>
         <item name="itemTextColor">@color/bottom_nav_item_color</item>
@@ -41,4 +42,12 @@
     <style name="BottomNavTextAppearance" parent="@android:style/TextAppearance.Small">
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="RegularToolbarStyle" parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid">
+        <item name="android:background">@color/primary_color</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <style name="HeaderTextAppearance" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title"/>
+
+    <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
 </resources>
