@@ -22,7 +22,12 @@
     android:background="@color/category_picker_background_color">
     <include layout="@layout/section_header"/>
 
-    <!-- TODO(santie): Preview pager goes here... -->
+    <com.android.customization.widget.PreviewPager
+        android:id="@+id/theme_preview_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/secondary_color"/>
 
     <LinearLayout
         android:id="@+id/options_section"

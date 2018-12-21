@@ -55,4 +55,27 @@
         <item name="android:textColor">@color/option_title_color</item>
     </style>
 
+
+    <style name="PreviewCard" parent="CardView.Light">
+        <item name="cardCornerRadius">@dimen/preview_card_corner_radius</item>
+        <item name="android:clipChildren">true</item>
+        <item name="contentPadding">@dimen/preview_card_padding</item>
+        <item name="android:background">@color/primary_color</item>
+    </style>
+
+    <style name="CardTitleTextAppearance" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/card_title_text_size</item>
+    </style>
+
+    <style name="FontCardTitleStyle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title</item>
+    </style>
+
+    <style name="FontCardBodyTextStyle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault</item>
+    </style>
+
 </resources>
