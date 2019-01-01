@@ -36,8 +36,7 @@
             android:fragment="com.android.settings.location.RecentLocationRequestSeeAllFragment"/>
 
         <PreferenceCategory
-            android:key="location_advanced_settings"
-            settings:initialExpandedChildrenCount="1">
+	    android:key="location_advanced_settings">
 
             <!-- This preference category gets removed if new_recent_location_ui is disabled -->
             <Preference
