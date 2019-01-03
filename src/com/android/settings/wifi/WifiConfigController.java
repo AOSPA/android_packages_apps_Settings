@@ -187,16 +187,11 @@ public class WifiConfigController implements TextWatcher,
     private TextView mSsidView;
 
     private Context mContext;
-<<<<<<< HEAD
-    private WifiManager mWifiManager;
+    private final WifiManager mWifiManager;
     private TelephonyManager mTelephonyManager;
     private SubscriptionManager mSubscriptionManager = null;
     private int selectedSimCardNumber;
-=======
     private Integer mSecurityInPosition[];
-
-    private final WifiManager mWifiManager;
->>>>>>> 352c149d7db98aa6071595a0bac7df406024bad8
 
     public WifiConfigController(WifiConfigUiBase parent, View view, AccessPoint accessPoint,
             int mode) {
@@ -279,12 +274,8 @@ public class WifiConfigController implements TextWatcher,
                 mHiddenSettingsSpinner.getSelectedItemPosition() == NOT_HIDDEN_NETWORK
                         ? View.GONE
                         : View.VISIBLE);
-<<<<<<< HEAD
         mShareThisWifiCheckBox = (CheckBox) mView.findViewById(R.id.share_this_wifi);
-        mWifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
-=======
         mSecurityInPosition = new Integer[AccessPoint.SECURITY_MAX_VAL];
->>>>>>> 352c149d7db98aa6071595a0bac7df406024bad8
 
         if (mAccessPoint == null) { // new network
             configureSecuritySpinner();
@@ -1522,8 +1513,8 @@ public class WifiConfigController implements TextWatcher,
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent == mSecuritySpinner) {
-<<<<<<< HEAD
-            mAccessPointSecurity = position;
+            // Convert menu position to actual Wi-Fi security type
+            mAccessPointSecurity = mSecurityInPosition[position];
 
             if (!mWifiManager.isWifiCoverageExtendFeatureEnabled()
                  || (mAccessPointSecurity != AccessPoint.SECURITY_NONE
@@ -1534,10 +1525,6 @@ public class WifiConfigController implements TextWatcher,
                 mShareThisWifiCheckBox.setVisibility(View.VISIBLE);
             }
 
-=======
-            // Convert menu position to actual Wi-Fi security type
-            mAccessPointSecurity = mSecurityInPosition[position];
->>>>>>> 352c149d7db98aa6071595a0bac7df406024bad8
             showSecurityFields();
         } else if (parent == mEapMethodSpinner || parent == mEapCaCertSpinner) {
             showSecurityFields();
@@ -1583,7 +1570,6 @@ public class WifiConfigController implements TextWatcher,
         return mAccessPoint;
     }
 
-<<<<<<< HEAD
     private void getSIMInfo() {
         int numOfSims;
         String displayname;
@@ -1598,7 +1584,8 @@ public class WifiConfigController implements TextWatcher,
             }
             mSimDisplayNames.add(displayname);
         }
-=======
+    }
+
     private void configureSecuritySpinner() {
         mConfigUi.setTitle(R.string.wifi_add_network);
 
@@ -1646,6 +1633,5 @@ public class WifiConfigController implements TextWatcher,
         mView.findViewById(R.id.hidden_settings_field).setVisibility(View.VISIBLE);
         ((CheckBox) mView.findViewById(R.id.wifi_advanced_togglebox))
                 .setOnCheckedChangeListener(this);
->>>>>>> 352c149d7db98aa6071595a0bac7df406024bad8
     }
 }

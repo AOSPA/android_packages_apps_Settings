@@ -297,18 +297,14 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mIpv6Category = (PreferenceCategory) screen.findPreference(KEY_IPV6_CATEGORY);
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
 
-<<<<<<< HEAD
         if (mAccessPoint.getSecurityString(false).equals("SAE")
              && mAccessPoint.getConfig().allowedKeyManagement.get(KeyMgmt.WPA_PSK)) {
-             mSecurityPref.setDetailText(mContext.getString(R.string.wifi_security_wpa_wpa2));
+             mSecurityPref.setSummary(mContext.getString(R.string.wifi_security_wpa_wpa2));
          }
          else
-             mSecurityPref.setDetailText(mAccessPoint.getSecurityString(false /* concise */));
+             mSecurityPref.setSummary(mAccessPoint.getSecurityString(false /* concise */));
 
-        mSecurityPref.setDetailText(mAccessPoint.getSecurityString(false /* concise */));
-=======
         mSecurityPref.setSummary(mAccessPoint.getSecurityString(false /* concise */));
->>>>>>> 352c149d7db98aa6071595a0bac7df406024bad8
     }
 
     private void setupEntityHeader(PreferenceScreen screen) {

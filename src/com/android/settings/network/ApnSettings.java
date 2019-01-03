@@ -90,6 +90,8 @@ public class ApnSettings extends RestrictedSettingsFragment {
             Telephony.Carriers.MVNO_TYPE,
             Telephony.Carriers.MVNO_MATCH_DATA,
             Telephony.Carriers.EDITED,
+            Telephony.Carriers.BEARER,
+            Telephony.Carriers.BEARER_BITMASK,
     };
 
     private static final int ID_INDEX = 0;
@@ -98,12 +100,9 @@ public class ApnSettings extends RestrictedSettingsFragment {
     private static final int TYPES_INDEX = 3;
     private static final int MVNO_TYPE_INDEX = 4;
     private static final int MVNO_MATCH_DATA_INDEX = 5;
-<<<<<<< HEAD
-    private static final int BEARER_INDEX = 6;
-    private static final int BEARER_BITMASK_INDEX = 7;
-=======
     private static final int EDITED_INDEX = 6;
->>>>>>> 352c149d7db98aa6071595a0bac7df406024bad8
+    private static final int BEARER_INDEX = 7;
+    private static final int BEARER_BITMASK_INDEX = 8;
 
     private static final int MENU_NEW = Menu.FIRST;
     private static final int MENU_RESTORE = Menu.FIRST + 1;
@@ -313,19 +312,13 @@ public class ApnSettings extends RestrictedSettingsFragment {
             where.append(" AND NOT (type='ims')");
         }
 
-<<<<<<< HEAD
         appendFilter(where);
 
         Log.d(TAG, "where = " + where.toString());
 
-        Cursor cursor = getContentResolver().query(Telephony.Carriers.CONTENT_URI, new String[] {
-                "_id", "name", "apn", "type", "mvno_type", "mvno_match_data", "bearer", "bearer_bitmask"}, where.toString(),
-                null, Telephony.Carriers.DEFAULT_SORT_ORDER);
-=======
         Cursor cursor = getContentResolver().query(simApnUri,
                 CARRIERS_PROJECTION, where.toString(), null,
                 Telephony.Carriers.DEFAULT_SORT_ORDER);
->>>>>>> 352c149d7db98aa6071595a0bac7df406024bad8
 
         if (cursor != null) {
             PreferenceGroup apnPrefList = (PreferenceGroup) findPreference("apn_list");
