@@ -114,13 +114,6 @@
         <uses-library android:name="org.apache.http.legacy" />
         <!-- Settings -->
 
-        <activity android:name="SettingsActivity"
-                android:label="@string/settings_label_launcher"
-                android:launchMode="singleTask">
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
-        </activity>
-
         <activity android:name=".homepage.SettingsHomepageActivity"
                   android:label="@string/settings_label_launcher"
                   android:theme="@style/Theme.Settings.Home"
@@ -2619,6 +2612,18 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".wifi.NetworkRequestDialogActivity"
+            android:theme="@style/Transparent"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:permission="android.permission.NETWORK_SETTINGS">
+            <intent-filter>
+                <action android:name="com.android.settings.wifi.NETWORK_REQUEST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".sim.SimDialogActivity"
                 android:theme="@style/Theme.AlertDialog"
                 android:label="@string/sim_settings_title"
@@ -2993,6 +2998,17 @@
                        android:value="true" />
         </activity>
 
+        <activity android:name=".panel.SettingsPanelActivity"
+            android:label="@string/settings_panel_title"
+            android:theme="@style/Theme.BottomDialog"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask">
+                 <intent-filter>
+                     <action android:name="android.settings.SETTINGSPANEL" />
+                     <category android:name="android.intent.category.DEFAULT" />
+                 </intent-filter>
+        </activity>
+
         <provider android:name=".slices.SettingsSliceProvider"
                   android:authorities="com.android.settings.slices;android.settings.slices"
                   android:exported="true"
@@ -3052,6 +3068,12 @@
                 <action android:name="android.content.action.SETTINGS_HOMEPAGE_DATA"/>
             </intent-filter>
         </provider>
+
+        <activity
+            android:name=".wifi.dpp.WifiDppConfiguratorActivity"/>
+
+        <activity android:name=".homepage.contextualcards.ContextualCardFeedbackDialog"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>

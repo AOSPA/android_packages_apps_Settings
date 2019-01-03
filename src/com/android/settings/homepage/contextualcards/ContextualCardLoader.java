@@ -23,18 +23,18 @@ import static androidx.slice.widget.SliceLiveData.SUPPORTED_SPECS;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.pm.PackageManager;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
 
-import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
-import com.android.settings.homepage.contextualcards.slices.ConnectedDeviceSlice;
-import com.android.settings.wifi.WifiSlice;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
@@ -49,15 +49,34 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     private static final String TAG = "ContextualCardLoader";
 
-    private Context mContext;
+    private final ContentObserver mObserver = new ContentObserver(
+            new Handler(Looper.getMainLooper())) {
+        @Override
+        public void onChange(boolean selfChange) {
+            if (isStarted()) {
+                forceLoad();
+            }
+        }
+    };
 
-    public interface CardContentLoaderListener {
-        void onFinishCardLoading(List<ContextualCard> contextualCards);
-    }
+    private Context mContext;
 
     ContextualCardLoader(Context context) {
         super(context);
         mContext = context.getApplicationContext();
+    }
+
+    @Override
+    protected void onStartLoading() {
+        super.onStartLoading();
+        mContext.getContentResolver().registerContentObserver(CardContentProvider.URI,
+                false /*notifyForDescendants*/, mObserver);
+    }
+
+    @Override
+    protected void onStopLoading() {
+        super.onStopLoading();
+        mContext.getContentResolver().unregisterContentObserver(mObserver);
     }
 
     @Override
@@ -70,9 +89,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     public List<ContextualCard> loadInBackground() {
         final List<ContextualCard> result = new ArrayList<>();
         try (Cursor cursor = getContextualCardsFromProvider()) {
-            if (cursor.getCount() == 0) {
-                result.addAll(createStaticCards());
-            } else {
+            if (cursor.getCount() > 0) {
                 for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                     final ContextualCard card = new ContextualCard(cursor);
                     if (card.isCustomCard()) {
@@ -115,24 +132,6 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     }
 
     @VisibleForTesting
-    List<ContextualCard> createStaticCards() {
-        final long appVersionCode = getAppVersionCode();
-        final String packageName = mContext.getPackageName();
-        final double rankingScore = 0.0;
-        final List<ContextualCard> result = new ArrayList();
-        result.add(new ContextualCard.Builder()
-                .setSliceUri(BatterySlice.BATTERY_CARD_URI)
-                .setName(BatterySlice.PATH_BATTERY_INFO)
-                .setPackageName(packageName)
-                .setRankingScore(rankingScore)
-                .setAppVersion(appVersionCode)
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setIsHalfWidth(false)
-                .build());
-        return result;
-    }
-
-    @VisibleForTesting
     List<ContextualCard> filterEligibleCards(List<ContextualCard> candidates) {
         return candidates.stream().filter(card -> isCardEligibleToDisplay(card))
                 .collect(Collectors.toList());
@@ -170,18 +169,12 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     private int getNumberOfLargeCard(List<ContextualCard> cards) {
         return (int) cards.stream()
-                .filter(card -> card.getSliceUri().equals(WifiSlice.WIFI_URI)
-                        || card.getSliceUri().equals(ConnectedDeviceSlice.CONNECTED_DEVICE_URI))
+                .filter(card -> card.getSliceUri().equals(CustomSliceRegistry.WIFI_SLICE_URI)
+                        || card.getSliceUri().equals(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI))
                 .count();
     }
 
-    private long getAppVersionCode() {
-        try {
-            return mContext.getPackageManager().getPackageInfo(mContext.getPackageName(),
-                    0 /* flags */).getLongVersionCode();
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "Invalid package name for context", e);
-        }
-        return -1L;
+    public interface CardContentLoaderListener {
+        void onFinishCardLoading(List<ContextualCard> contextualCards);
     }
 }

@@ -2054,6 +2054,10 @@
     <string name="wifi_ip_settings">IP settings</string>
     <!-- Label for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
     <string name="wifi_privacy_settings">Privacy</string>
+    <!-- Title for the fragment to add a device into the wifi network [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_add_device_to_network">Add a device to this network</string>
+    <!-- Hint for the user to center another device's QR code in the below camera window [CHAR LIMIT=120] -->
+    <string name="wifi_dpp_center_qr_code">Center the device\u2019s QR code below to add device to \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
     <!-- Label for the check box to share a network with other users on the same device -->
     <string name="wifi_shared">Share with other device users</string>
     <!-- Hint for unchanged fields -->
@@ -3456,9 +3460,9 @@
     <!-- Button title to factory data reset the entire device. The "(factory reset)" part is optional for translation. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=3531267871084279512]-->
     <string name="master_clear_short_title">Erase all data (factory reset)</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
+    <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google Account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc" product="default">"This will erase all data from your phone\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
+    <string name="master_clear_desc" product="default">"This will erase all data from your phone\u2019s <b>internal storage</b>, including:\n\n<li>Your Google Account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, instructions and list of current accounts.  The list of accounts follows this text[CHAR LIMIT=NONE] -->
     <string name="master_clear_accounts" product="default">"\n\nYou are currently signed into the following accounts:\n"</string>
     <!-- SD card & phone storage settings screen, notification if other users are present on the device [CHAR LIMIT=NONE] -->
@@ -3488,17 +3492,17 @@
     <!-- SD card & phone storage settings screen, description for check box to erase eSIMs for tablets [CHAR LIMIT=NONE] -->
     <string name="erase_esim_storage_description" product="tablet">Erase all eSIMs on the tablet. This will not cancel your mobile service plan.</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
-    <string name="master_clear_button_text" product="tablet">Reset tablet</string>
+    <string name="master_clear_button_text" product="tablet">Erase all data</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
-    <string name="master_clear_button_text" product="default">Reset phone</string>
+    <string name="master_clear_button_text" product="default">Erase all data</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button -->
-    <string name="master_clear_final_desc">Erase all your personal information and downloaded apps? You can\u2019t undo this action!</string>
+    <string name="master_clear_final_desc">All of your personal information and downloaded apps will be deleted. You can\u2019t undo this action!</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset phone button -->
     <string name="master_clear_final_button_text">Erase everything</string>
     <!-- Master clear failed message -->
     <string name="master_clear_failed">No reset was performed because the System Clear service isn\u2019t available.</string>
     <!-- Master clear confirmation screen title [CHAR LIMIT=30] -->
-    <string name="master_clear_confirm_title">Reset?</string>
+    <string name="master_clear_confirm_title">Erase all data?</string>
     <!-- Error message for users that aren't allowed to factory reset [CHAR LIMIT=none] -->
     <string name="master_clear_not_available">Factory reset is not available for this user</string>
     <!-- Master clear progress screen title [CHAR LIMIT=30] -->
@@ -4131,7 +4135,6 @@
     <!-- Manage applications, text for move error messages -->
     <string name="insufficient_storage">Not enough storage space.</string>
     <string name="does_not_exist">App doesn\u2019t exist.</string>
-    <string name="app_forward_locked">App is copy-protected.</string>
     <string name="invalid_location">Install location isn\u2019t valid.</string>
     <string name="system_package">System updates can\u2019t be installed on external media.</string>
     <!-- Error message shown when trying to move device administrators to external disks, such as SD card [CHAR_LIMIT=none] -->
@@ -4578,22 +4581,24 @@
     <!-- Summary for the accessibility preference for master mono. [CHAR LIMIT=50] -->
     <string name="accessibility_toggle_master_mono_summary">Combine channels when playing audio</string>
 
-    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <!-- Option heading to leave the timeout requirement for accessibility users at its default level. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_default">Default</string>
-    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <!-- Option heading to leave the timeout requirement for accessibility users at 10 secs. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_10secs">10 seconds</string>
-    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <!-- Option heading to leave the timeout requirement for accessibility users at 30 secs. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_30secs">30 seconds</string>
-    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <!-- Option heading to leave the timeout requirement for accessibility users at 1 min. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_1min">1 minute</string>
-    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <!-- Option heading to leave the timeout requirement for accessibility users at 2 mins. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_2mins">2 minutes</string>
-    <!-- Title for accessibility preference to accessibility message_timeout. [CHAR LIMIT=35] -->
-    <string name="accessibility_accessibility_content_timeout_preference_title">Content Timeout</string>
-    <!-- Title for accessibility preference to accessibility message_timeout. [CHAR LIMIT=35] -->
-    <string name="accessibility_accessibility_control_timeout_preference_title">Control Timeout</string>
-    <!-- Title for accessibility preference to accessibility message_timeout. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_accessibility_timeout_preference_summary">Choose how long it takes before automatically disappearing messages go away.\nSome apps may not support this setting yet.</string>
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_content_timeout_preference_title">Time to read</string>
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_control_timeout_preference_title">Time to take action</string>
+    <!-- Descriptive text for accessibility preference to accessibility content timeout. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_content_timeout_preference_summary">Choose how much time you want to read and take action on messages that automatically go away.\n\nSupport for this setting is up to each app.</string>
+    <!-- Descriptive text for accessibility preference to accessibility control timeout. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_control_timeout_preference_summary">Choose how long to show messages that ask you to take action, but are visible only temporarily.\n\nNot all apps support this setting.</string>
 
     <!-- Title for accessibility preference to choose long-press delay i.e. timeout before it is detected. [CHAR LIMIT=35] -->
     <string name="accessibility_long_press_timeout_preference_title">Touch &amp; hold delay</string>
@@ -5424,9 +5429,9 @@
     <string name="battery_saver_turn_on_automatically_pct">at <xliff:g id="percent">%1$s</xliff:g> battery</string>
 
     <!-- [CHAR_LIMIT=40] Battery percentage: Title -->
-    <string name="battery_percentage">Battery percentage</string>
+    <string name="battery_info">Battery Information</string>
     <!-- [CHAR_LIMIT=NONE] Battery percentage: Description for preference -->
-    <string name="battery_percentage_description">Show battery percentage in status bar</string>
+    <string name="battery_info_description">Show percentage and time left before charge is needed</string>
 
     <!-- Process Stats strings -->
     <skip />
@@ -5720,116 +5725,14 @@
     <!-- Message displayed to let the user know that some of the options are disabled by admin. [CHAR LIMIT=NONE] -->
     <string name="admin_disabled_other_options">Other options are disabled by your admin</string>
     <string name="admin_more_details">More details</string>
-
-    <string name="sound_category_sound_title">General</string>
     <string name="notification_log_title">Notification log</string>
 
     <!-- Category title for phone call's ringtone and vibration settings in the Sound Setting.
          [CHAR LIMIT=40] -->
     <string name="sound_category_call_ringtone_vibrate_title">Call ringtone &amp; vibrate</string>
-
-    <!-- Category title for system-wide notification and feedback settings in the Sound Setting.
-         [CHAR LIMIT=40] -->
-    <string name="sound_category_system_title">System</string>
-
-    <!-- Wifi Setup For Setup Wizard with XL screen -->
-    <!-- Title shown in Wifi Setup Wizard with XL screen -->
-    <string name="wifi_setup_title">Wi\u2011Fi setup</string>
-    <!-- Title shown in Wifi Setup Wizard with XL screen when
-         a user is configuring password for a network.
-         The argument should be the name of the network.
-         [CHAR LIMIT=50] -->
-    <string name="wifi_setup_title_editing_network">Connect to Wi\u2011Fi network <xliff:g id="network_name" example="Happy Mobile">%s</xliff:g></string>
-    <!-- Title shown in Wifi Setup For Setup Wizard with XL screen when
-         the device is connecting a network the user specified.
-         The argument should be the name of the network.
-         [CHAR LIMIT=50] -->
-    <string name="wifi_setup_title_connecting_network">Connecting to Wi\u2011Fi network <xliff:g id="network_name" example="Happy Mobile">%s</xliff:g>\u2026</string>
-    <!-- Title shown in Wifi Setup For Setup Wizard with XL screen when
-         the device successfully connected to a network the user specified.
-         The argument should be the name of the network.
-         [CHAR LIMIT=50] -->
-    <string name="wifi_setup_title_connected_network">Connected to Wi\u2011Fi network <xliff:g id="network_name" example="Happy Mobile">%s</xliff:g></string>
-    <!-- Title shown in Wifi Setup For Setup Wizard with XL screen when
-         a user is adding a network.
-         [CHAR LIMIT=50] -->
-    <string name="wifi_setup_title_add_network">Add a network</string>
-    <!-- Text message shown when Wifi is not connected.
-         Used in Wifi Setup For Setup Wizard with XL screen. -->
-    <string name="wifi_setup_not_connected">Not connected</string>
-    <!-- Button message shown on the button adding manual setting.
-         Used in Wifi Setup For Setup Wizard with XL screen. -->
-    <string name="wifi_setup_add_network">Add network</string>
-    <!-- Button message shown on the button refreshing a list of network.
-         Used in Wifi Setup For Setup Wizard with XL screen. -->
-    <string name="wifi_setup_refresh_list">Refresh list</string>
-    <!-- Button message shown on the button enabling users skip Wifi Setup.
-         Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=10] -->
-    <string name="wifi_setup_skip">Skip</string>
-    <!-- Button message shown on the button enabling users go the next step.
-         Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=10] -->
-    <string name="wifi_setup_next">Next</string>
-    <!-- Button label to go back to previous screen. Used in SetupWizard for
-      XLarge screen [CHAR LIMIT=10] -->
-    <string name="wifi_setup_back">Back</string>
     <!-- Button label to show detailed dialog for a selected Wi-Fi settings.
          Used in SetupWizard for XLarge screen [CHAR LIMIT=20] -->
     <string name="wifi_setup_detail">Network details</string>
-    <!-- Button label to connect to a Wi-Fi network.
-         Used in SetupWizard for XLarge screen [CHAR LIMIT=10] -->
-    <string name="wifi_setup_connect">Connect</string>
-    <!-- Button label to delete a Wi-Fi network.
-         Used in SetupWizard for XLarge screen [CHAR LIMIT=10] -->
-    <string name="wifi_setup_forget">Forget</string>
-    <!-- Button label to save a Wi-Fi network configuration.
-         Used in SetupWizard for XLarge screen [CHAR LIMIT=10] -->
-    <string name="wifi_setup_save">Save</string>
-    <!-- Button label to dismiss the dialog.
-         Used in SetupWizard for XLarge screen [CHAR LIMIT=10] -->
-    <string name="wifi_setup_cancel">Cancel</string>
-
-    <!-- The message shown above available networks when the device is scanning
-         available networks [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_scanning">Scanning networks\u2026</string>
-    <!-- Message shown above available network when there's no connected network.
-         Used in Wifi Setup For Setup Wizard with XL screen. -->
-    <string name="wifi_setup_status_select_network">Tap a network to connect to it</string>
-    <!-- Message shown above available networks when a user clicked one of available
-         networks and the UI is showing one possible existing network.
-         Used in Wifi Setup. -->
-    <string name="wifi_setup_status_existing_network">Connect to existing network</string>
-    <!-- Message shown above available networks when a user clicked one of available
-         networks and the network doesn't require configuration (e.g. password)
-         Used in Wifi Setup with XL screen. [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_unsecured_network">Connect to unsecured network</string>
-    <!-- Message shown above available networks when a user clicked one of available
-         networks and the UI is prompting the user to edit the network configuration
-         if needed. Used in Wifi Setup with XL screen. [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_edit_network">Type network configuration</string>
-    <!-- The message shown above available networks when a user clicked "Add network"
-         button. Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_new_network">Connect to new network</string>
-    <!-- The message shown above available networks when a user clicked one of available
-         networks or created another profile and he/she is waiting for the connection
-         is established.
-         Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_connecting">Connecting\u2026</string>
-    <!-- The message shown above available networks when connection is established,
-         letting a user to proceed to the next step of the SetupWizard.
-         Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_proceed_to_next">Go to the next step</string>
-    <!-- The message shown above available networks when a user clicked a network secured by
-         EAP. We don't allow the user to connect it.
-         Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
-    <string name="wifi_setup_status_eap_not_supported">EAP isn\u2019t supported.</string>
-    <!-- Message shown when users select EAP in Wi-Fi settings for SetupWizard,
-         saying EAP can't be configured in SetupWizard flow.
-         [CHAR LIMIT=NONE] -->
-    <string name="wifi_setup_eap_not_supported">You can\u2019t configure an EAP Wi\u2011Fi connection during setup. After setup, you can do that in Settings &gt; Wireless &amp; networks.</string>
-    <!-- Message shown when the device is connecting a network [CHAR LIMIT=NONE] -->
-    <string name="wifi_setup_description_connecting">Connecting can take a few minutes\u2026</string>
-    <!-- Message shown when the device is connected to a network [CHAR LIMIT=NONE] -->
-    <string name="wifi_setup_description_connected">Tap <b>Next</b> to continue with setup.\n\nTap <b>Back</b> to connect to a different Wi\u2011Fi network.</string>
 
     <!-- Do not translate. This is a stub which will be removed soon. -->
     <string name="time_zone_auto_stub" translatable="false">Select Time Zone</string>
@@ -9032,25 +8935,28 @@
     <string name="condition_expand_hide">Hide</string>
 
     <!-- Title of condition that hotspot is on [CHAR LIMIT=30] -->
-    <string name="condition_hotspot_title">Hotspot is on</string>
+    <string name="condition_hotspot_title">Hotspot</string>
 
     <!-- Summary of condition that hotspot is on [CHAR LIMIT=NONE] -->
-    <string name="condition_hotspot_summary">Portable Wi-Fi hotspot <xliff:g name="ap_name" example="AndroidAP">%1$s</xliff:g> is active, Wi-Fi for this device is turned off.</string>
+    <string name="condition_hotspot_summary"><xliff:g name="ap_name" example="AndroidAP">%1$s</xliff:g> on</string>
 
     <!-- Title of condition that airplane mode is on [CHAR LIMIT=30] -->
     <string name="condition_airplane_title">Airplane mode is on</string>
 
     <!-- Summary of condition that airplane mode is on [CHAR LIMIT=NONE] -->
-    <string name="condition_airplane_summary">When airplane mode is turned on, Wi\u2011Fi, Bluetooth, and mobile network are turned off. Wi\u2011Fi and Bluetooth can be turned back on.</string>
+    <string name="condition_airplane_summary">Networks unavailable</string>
 
     <!-- Title of condition that do not disturb is on [CHAR LIMIT=36] -->
     <string name="condition_zen_title">Do Not Disturb is on</string>
+
+    <!-- Summary of condition that do not disturb is on [CHAR LIMIT=36] -->
+    <string name="condition_zen_summary">Impacts what you hear and see</string>
 
     <!-- Title of condition that battery saver is on [CHAR LIMIT=30] -->
     <string name="condition_battery_title">Battery Saver is on</string>
 
     <!-- Summary of condition that battery saver is on [CHAR LIMIT=NONE] -->
-    <string name="condition_battery_summary">Battery Saver turns off some device features and restricts apps</string>
+    <string name="condition_battery_summary">Features restricted</string>
 
     <!-- Title of condition that cellular data is off [CHAR LIMIT=50] -->
     <string name="condition_cellular_title">Mobile data is off</string>
@@ -9059,10 +8965,10 @@
     <string name="condition_cellular_summary">Internet is available only via Wi-Fi</string>
 
     <!-- Title of condition that background data is off [CHAR LIMIT=30] -->
-    <string name="condition_bg_data_title">Data Saver is on</string>
+    <string name="condition_bg_data_title">Data Saver</string>
 
     <!-- Summary of condition that background data is off [CHAR LIMIT=NONE] -->
-    <string name="condition_bg_data_summary">Background data is only available via Wi-Fi. This may affect some apps or services when Wi-Fi is not available.</string>
+    <string name="condition_bg_data_summary">Features restricted</string>
 
     <!-- Title of condition that work mode is off [CHAR LIMIT=30] -->
     <string name="condition_work_title">Work profile is off</string>
@@ -9077,22 +8983,22 @@
     <string name="condition_device_muted_title" product="tablet">Device is muted</string>
 
     <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
-    <string name="condition_device_muted_title" product="default">Phone is muted</string>
+    <string name="condition_device_muted_title" product="default">Phone muted</string>
 
     <!-- Summary of condition that indicates device is muted -->
-    <string name="condition_device_muted_summary">Calls and notifications will be muted</string>
+    <string name="condition_device_muted_summary">For calls &amp; notifications</string>
 
     <!-- Title of condition that indicates device is set to vibrate [CHAR LIMIT=50] -->
     <string name="condition_device_vibrate_title" product="tablet">Device is set to vibrate</string>
 
     <!-- Title of condition that indicates device is muted [CHAR LIMIT=50] -->
-    <string name="condition_device_vibrate_title" product="default">Phone is set to vibrate</string>
+    <string name="condition_device_vibrate_title" product="default">Vibration only</string>
 
     <!-- Summary of condition that indicates device is set to vibrate -->
     <string name="condition_device_vibrate_summary" product="tablet">Calls and notifications will vibrate device</string>
 
     <!-- Summary of condition that indicates device is set to vibrate -->
-    <string name="condition_device_vibrate_summary" product="default">Calls and notifications will vibrate phone</string>
+    <string name="condition_device_vibrate_summary" product="default">For calls &amp; notifications</string>
 
     <!--  Night display: Title for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=46] -->
     <string name="night_display_suggestion_title">Set Night Light schedule</string>
@@ -9104,10 +9010,13 @@
     <string name="condition_night_display_title">Night Light is on</string>
 
     <!-- Summary of condition that night display is on (renamed "Night Light" with title caps). [CHAR LIMIT=NONE] -->
-    <string name="condition_night_display_summary">Screen is tinted amber. This may help you fall asleep.</string>
+    <string name="condition_night_display_summary">Screen tinted amber</string>
 
     <!-- Summary for the condition section on the dashboard, representing number of conditions. [CHAR LIMIT=10] -->
     <string name="condition_summary" translatable="false"><xliff:g name="count" example="3">%1$d</xliff:g></string>
+
+    <!-- Content description for condition footer button. In talkback mode, double tapping will cause condition list to collapse [CHAR LIMIT=NONE]-->
+    <string name="homepage_condition_footer_content_description">Collapse</string>
 
     <!-- Title for the suggestions section on the dashboard [CHAR LIMIT=30] -->
     <string name="suggestions_title_v2">Suggested for You</string>
@@ -9987,6 +9896,7 @@
     <!-- UI debug setting: preference summary - describes the behavior of forcing full raw GNSS satellite measurements [CHAR LIMIT=NONE] -->
     <string name="enable_gnss_raw_meas_full_tracking_summary">Track all GNSS constellations and frequencies with no duty cycling</string>
 
+<<<<<<< HEAD
     <!-- apn names for carriers -->
     <string name="APN_NAME_CMNET">CMNET</string>
     <string name="APN_NAME_CMWAP">CMWAP</string>
@@ -9999,6 +9909,13 @@
     <string name="APN_NAME_CTWAP">CTWAP</string>
     <string name="APN_NAME_CTLTE">ctlte</string>
     <string name="APN_NAME_CTMMS">CTWAP</string>
+=======
+    <!-- UI debug setting: preference title - allow background activity starts [CHAR LIMIT=60] -->
+    <string name="allow_background_activity_starts">Allow background activity starts</string>
+    <!-- UI debug setting: preference summary - describes the behavior of allowing background activity starts [CHAR LIMIT=NONE] -->
+    <string name="allow_background_activity_starts_summary">Allows all background activity starts</string>
+
+>>>>>>> 352c149d7db98aa6071595a0bac7df406024bad8
     <!-- UI debug setting: preference title - show all crash dialogs [CHAR LIMIT=60] -->
     <string name="show_first_crash_dialog">Always show crash dialog</string>
     <!-- UI debug setting: preference summary - describes the behavior of showing a dialog every time an app crashes [CHAR LIMIT=NONE] -->
@@ -10087,6 +10004,9 @@
 
     <!-- Title for HFP(hands free profile) output switch button in settings. -->
     <string name="take_call_on_title">Take call on</string>
+
+    <!-- Toast that appears when users tap an APN for which parameters cannot be viewed. [CHAR LIMIT=NONE] -->
+    <string name="cannot_change_apn_toast">This APN cannot be changed.</string>
 
     <!--  Title for battery Suggestion. (tablet) [CHAR LIMIT=46] -->
     <string name="battery_suggestion_title" product="tablet" >Improve tablet\'s battery life</string>
@@ -10303,6 +10223,7 @@
     <!-- Available networks screen, summary when button disallowed due to permanent automatic mode [CHAR LIMIT=NONE] -->
     <string name="manual_mode_disallowed_summary">Unavailable when connected to <xliff:g id="carrier" example="verizon">%1$s</xliff:g></string>
 
+<<<<<<< HEAD
     <string name="select_sim_card">Select SIM card</string>
     <string name="qtifeedback_settings_title">Hardware Feedback</string>
     <string name="qtifeedback_settings_subtitle">Qualcomm Technologies, Inc Reporting</string>
@@ -10312,6 +10233,10 @@
 
     <!-- Used for EmergencyInfoSlice slice helper class -->
     <string name="emergency_info_contextual_card_summary" translatable="false">Medical info, emergency contacts</string>
+=======
+    <!-- Used for EmergencyInfoSlice slice helper class [CHAR LIMIT=NONE]-->
+    <string name="emergency_info_contextual_card_summary">Medical info, emergency contacts</string>
+>>>>>>> 352c149d7db98aa6071595a0bac7df406024bad8
 
     <!-- See more items in contextual homepage [CHAR LIMIT=30]-->
     <string name="see_more">See more</string>
@@ -10333,15 +10258,21 @@
     <!-- Title for no connected devices in connected device slice. [CHAR LIMIT=NONE] -->
     <string name="no_connected_devices">No connected devices</string>
 
+    <!-- Default title for the settings panel [CHAR LIMIT=NONE] -->
+    <string name="settings_panel_title">Settings Panel</string>
+
+    <!-- Title for the Internet Connectivity dialog (settings panel) with Internet related settings [CHAR LIMIT=50] -->
+    <string name="internet_connectivity_panel_title">Internet Connectivity</string>
+
     <!-- UI debug setting: force desktop mode [CHAR LIMIT=50] -->
     <string name="force_desktop_mode">Force desktop mode</string>
     <!-- UI debug setting: force desktop mode summary [CHAR LIMIT=NONE] -->
     <string name="force_desktop_mode_summary">Force experimental desktop mode on secondary displays</string>
 
-    <!-- UI debug setting: Force enable "smart dark" UI rendering feature [CHAR LIMIT=25] -->
-    <string name="hwui_force_dark_title">Force-enable SmartDark</string>
-    <!-- UI debug setting: Force enable "smart dark" UI rendering feature summary [CHAR LIMIT=50] -->
-    <string name="hwui_force_dark_summary">Forces the SmartDark feature to be always-on</string>
+    <!-- UI debug setting: Force enable "smart dark" UI rendering feature [CHAR LIMIT=60] -->
+    <string name="hwui_force_dark_title">Override force-dark</string>
+    <!-- UI debug setting: Force enable "smart dark" UI rendering feature summary [CHAR LIMIT=NONE] -->
+    <string name="hwui_force_dark_summary">Overrides the force-dark feature to be always-on</string>
 
     <!-- Title for the top level Privacy Settings [CHAR LIMIT=30]-->
     <string name="privacy_dashboard_title">Privacy</string>
@@ -10358,5 +10289,12 @@
     <!-- Summary for low storage slice. [CHAR LIMIT=NONE] -->
     <string name="low_storage_summary">Storage is low. <xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space" example="32GB">%2$s</xliff:g> free</string>
 
+<<<<<<< HEAD
     <string name="reset_default_apn_failed">Failed to reset default apn</string>
+=======
+    <!-- Label for button in contextual card feedback dialog for users to send feedback [CHAR LIMIT=30] -->
+    <string name="contextual_card_feedback_send">Send feedback</string>
+    <!-- String for contextual card feedback dialog [CHAR LIMIT=NONE] -->
+    <string name="contextual_card_feedback_confirm_message">Would you like to give us feedback on this suggestion?</string>
+>>>>>>> 352c149d7db98aa6071595a0bac7df406024bad8
 </resources>
