@@ -20,16 +20,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.customization.model.CustomizationOption;
 import com.android.wallpaper.R;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Simple controller for a RecyclerView-based widget to hold the options for each customization
@@ -50,13 +50,14 @@ public class OptionSelectorController {
     }
 
     private final RecyclerView mContainer;
-    private final List<CustomizationOption> mOptions;
+    private final List<? extends CustomizationOption> mOptions;
 
     private final Set<OptionSelectedListener> mListeners = new HashSet<>();
     private RecyclerView.Adapter<TileViewHolder> mAdapter;
     private CustomizationOption mSelectedOption;
 
-    public OptionSelectorController(RecyclerView container, List<CustomizationOption> options) {
+    public OptionSelectorController(RecyclerView container,
+            List<? extends CustomizationOption> options) {
         mContainer = container;
         mOptions = options;
     }

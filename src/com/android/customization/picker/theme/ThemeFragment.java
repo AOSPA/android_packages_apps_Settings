@@ -27,7 +27,7 @@ import com.android.wallpaper.R;
 import com.android.wallpaper.picker.ToolbarFragment;
 
 /**
- * Fragment that contains the main UI for selecting and applying a Theme.
+ * Fragment that contains the main UI for selecting and applying a ThemeBundle.
  */
 public class ThemeFragment extends ToolbarFragment {
 

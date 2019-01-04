@@ -17,13 +17,13 @@ package com.android.customization.model;
 
 import android.view.View;
 
-import com.android.wallpaper.R;
-
 import androidx.annotation.LayoutRes;
+
+import com.android.wallpaper.R;
 
 
 /**
- * Represents an option of customization (eg, a Theme, a Clock face, a Grid size)
+ * Represents an option of customization (eg, a ThemeBundle, a Clock face, a Grid size)
  */
 public interface CustomizationOption {
 

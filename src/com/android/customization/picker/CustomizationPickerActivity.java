@@ -180,7 +180,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     }
 
     /**
-     * Represents a section of the Picker (eg "Theme", "Clock", etc).
+     * Represents a section of the Picker (eg "ThemeBundle", "Clock", etc).
      * There should be a concrete subclass per available section, providing the corresponding
      * Fragment to be displayed when switching to each section.
      */
