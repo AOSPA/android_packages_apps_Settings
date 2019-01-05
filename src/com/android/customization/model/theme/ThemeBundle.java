@@ -15,15 +15,19 @@
  */
 package com.android.customization.model.theme;
 
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationOption;
+import com.android.wallpaper.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +54,10 @@ public class ThemeBundle implements CustomizationOption {
 
     @Override
     public void bindThumbnailTile(View view) {
-        //TODO(santie): implement
+        ((ImageView) view.findViewById(R.id.theme_option_color)).setImageTintList(
+                ColorStateList.valueOf(mPreviewInfo.colorAccentLight));
+        ((TextView) view.findViewById(R.id.theme_option_font)).setTypeface(
+                mPreviewInfo.headlineFontFamily);
     }
 
     @Override
@@ -60,7 +67,7 @@ public class ThemeBundle implements CustomizationOption {
 
     @Override
     public int getLayoutResId() {
-        return 0; //TODO(santie)
+        return R.layout.theme_option;
     }
 
     public PreviewInfo getPreviewInfo() {

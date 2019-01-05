@@ -15,6 +15,7 @@
  */
 package com.android.customization.widget;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,6 +119,9 @@ public class OptionSelectorController {
 
         mContainer.setLayoutManager(new LinearLayoutManager(mContainer.getContext(),
                 LinearLayoutManager.HORIZONTAL, false));
+        Resources res = mContainer.getContext().getResources();
+        mContainer.addItemDecoration(new HorizontalSpacerItemDecoration(
+                res.getDimensionPixelOffset(R.dimen.option_tile_margin_horizontal)));
         mContainer.setAdapter(mAdapter);
     }
 
