@@ -46,10 +46,10 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.ShadowIconDrawableFactory;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -96,11 +96,12 @@ public class EntityHeaderControllerTest {
     }
 
     @Test
-    public void testBuildView_withContext_shouldBuildPreference() {
+    public void testBuildView_withContext_shouldBuildPreferenceAllowedBelowDivider() {
         mController = EntityHeaderController.newInstance(mActivity, mFragment, null);
         Preference preference = mController.done(mActivity, mShadowContext);
 
         assertThat(preference instanceof LayoutPreference).isTrue();
+        assertThat(((LayoutPreference)preference).isAllowDividerBelow()).isTrue();
     }
 
     @Test

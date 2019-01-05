@@ -16,8 +16,7 @@
 
 package com.android.settings.widget;
 
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
-        .ACTION_OPEN_APP_NOTIFICATION_SETTING;
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_OPEN_APP_NOTIFICATION_SETTING;
 
 import android.annotation.IdRes;
 import android.annotation.UserIdInt;
@@ -48,11 +47,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -238,6 +237,7 @@ public class EntityHeaderController {
         pref.setOrder(-1000);
         pref.setSelectable(false);
         pref.setKey(PREF_KEY_APP_HEADER);
+        pref.setAllowDividerBelow(true);
         return pref;
     }
 
@@ -320,7 +320,7 @@ public class EntityHeaderController {
         }
         actionBar.setBackgroundDrawable(
                 new ColorDrawable(
-                        Utils.getColorAttrDefaultColor(activity, android.R.attr.colorPrimary)));
+                        Utils.getColorAttrDefaultColor(activity, android.R.attr.colorPrimaryDark)));
         actionBar.setElevation(0);
         if (mRecyclerView != null && mLifecycle != null) {
             ActionBarShadowController.attachToRecyclerView(mActivity, mLifecycle, mRecyclerView);

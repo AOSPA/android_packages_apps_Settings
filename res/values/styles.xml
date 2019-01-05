@@ -17,7 +17,7 @@
 <resources>
 
     <style name="Widget.ActionBar.Base"
-            parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid"/>
+           parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid"/>
 
     <style name="Widget.ActionBar"
            parent="Widget.ActionBar.Base">
@@ -164,11 +164,6 @@
         <item name="android:orientation">vertical</item>
     </style>
 
-    <style name="setup_wizard_button">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
     <style name="ConfirmDeviceCredentialsAnimationStyle"
            parent="@*android:style/Animation.Material.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/confirm_credential_open_enter</item>
@@ -264,8 +259,9 @@
 
     <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium"/>
     <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Material.Small"/>
-    <style name="TextAppearance.Switch" parent="@android:style/TextAppearance.Material.Title">
-        <item name="android:textSize">18sp</item>
+    <style name="TextAppearance.Switch"
+           parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextAppearance.CategoryTitle"
@@ -329,23 +325,6 @@
     <style name="TextAppearance.ConditionCardSummary"
            parent="@android:style/TextAppearance.Material.Body1">
         <item name="android:textColor">?android:attr/textColorSecondary</item>
-    </style>
-
-    <style name="TextAppearance.EntityHeaderTitle"
-           parent="@android:style/TextAppearance.Material.Subhead">
-        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textSize">20sp</item>
-    </style>
-
-    <style name="TextAppearance.EntityHeaderSummary"
-           parent="@android:style/TextAppearance.Material.Body1">
-        <item name="android:textAlignment">viewStart</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-        <item name="android:gravity">start</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TextAppearance.ZenOnboardingButton">
@@ -418,20 +397,18 @@
         <item name="android:progressDrawable">@drawable/ring_progress</item>
     </style>
 
-    <style name="EntityHeader">
-        <item name="android:background">?android:attr/colorPrimaryDark</item>
-        <item name="android:paddingTop">24dp</item>
-        <item name="android:paddingBottom">16dp</item>
-        <item name="android:paddingEnd">16dp</item>
-    </style>
-
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
 
     <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button"/>
 
-    <style name="SettingsActionButton" parent="android:Widget.DeviceDefault.Button.Borderless.Colored">
+    <style name="SettingsActionButton"
+           parent="android:Widget.DeviceDefault.Button.Borderless.Colored">
         <item name="android:drawablePadding">4dp</item>
-        <item name="android:drawableTint">@*android:color/btn_colored_borderless_text_material</item>
+        <item name="android:drawableTint">@*android:color/btn_colored_borderless_text_material
+        </item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
     </style>
 
     <style name="LockPatternContainerStyle">
@@ -482,12 +459,20 @@
     </style>
 
     <style name="ContextualCardStyle">
-        <item name="android:layout_marginTop">@dimen/homepage_card_vertical_margin</item>
         <item name="android:layout_marginBottom">@dimen/homepage_card_vertical_margin</item>
         <item name="android:layout_marginStart">@dimen/homepage_card_side_margin</item>
         <item name="android:layout_marginEnd">@dimen/homepage_card_side_margin</item>
-        <item name="cardCornerRadius">@dimen/homepage_card_corner_radius</item>
-        <item name="cardElevation">@dimen/homepage_card_elevation</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">@color/homepage_card_stroke_color</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="SearchBarStyle">
+        <item name="android:layout_margin">@dimen/search_bar_margin</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="strokeColor">@color/homepage_card_stroke_color</item>
+        <item name="strokeWidth">1dp</item>
     </style>
 
     <style name="ConditionCardBorderlessButton"
