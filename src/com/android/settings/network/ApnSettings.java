@@ -42,7 +42,6 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.telephony.data.ApnSetting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -57,8 +56,6 @@ import androidx.preference.PreferenceGroup;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
-import com.android.internal.telephony.dataconnection.ApnSettingUtils;
-import com.android.internal.telephony.uicc.IccRecords;
 import com.android.internal.telephony.uicc.UiccController;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
@@ -85,14 +82,27 @@ public class ApnSettings extends RestrictedSettingsFragment {
     public static final String MVNO_TYPE = "mvno_type";
     public static final String MVNO_MATCH_DATA = "mvno_match_data";
 
+    private static final String[] CARRIERS_PROJECTION = new String[] {
+            Telephony.Carriers._ID,
+            Telephony.Carriers.NAME,
+            Telephony.Carriers.APN,
+            Telephony.Carriers.TYPE,
+            Telephony.Carriers.MVNO_TYPE,
+            Telephony.Carriers.MVNO_MATCH_DATA,
+            Telephony.Carriers.EDITED,
+            Telephony.Carriers.BEARER,
+            Telephony.Carriers.BEARER_BITMASK,
+    };
+
     private static final int ID_INDEX = 0;
     private static final int NAME_INDEX = 1;
     private static final int APN_INDEX = 2;
     private static final int TYPES_INDEX = 3;
     private static final int MVNO_TYPE_INDEX = 4;
     private static final int MVNO_MATCH_DATA_INDEX = 5;
-    private static final int BEARER_INDEX = 6;
-    private static final int BEARER_BITMASK_INDEX = 7;
+    private static final int EDITED_INDEX = 6;
+    private static final int BEARER_INDEX = 7;
+    private static final int BEARER_BITMASK_INDEX = 8;
 
     private static final int MENU_NEW = Menu.FIRST;
     private static final int MENU_RESTORE = Menu.FIRST + 1;
@@ -125,6 +135,7 @@ public class ApnSettings extends RestrictedSettingsFragment {
 
     private boolean mHideImsApn;
     private boolean mAllowAddingApns;
+    private boolean mHidePresetApnDetails;
 
     private String[] mHideApnsWithRule;
     private String[] mHideApnsWithIccidRule;
@@ -220,6 +231,7 @@ public class ApnSettings extends RestrictedSettingsFragment {
                 mAllowAddingApns = false;
             }
         }
+        mHidePresetApnDetails = b.getBoolean(CarrierConfigManager.KEY_HIDE_PRESET_APN_DETAILS_BOOL);
         mUserManager = UserManager.get(activity);
     }
 
@@ -289,13 +301,12 @@ public class ApnSettings extends RestrictedSettingsFragment {
     }
 
     private void fillList() {
-        final TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         final int subId = mSubscriptionInfo != null ? mSubscriptionInfo.getSubscriptionId()
                 : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        final String mccmnc = mSubscriptionInfo == null ? "" : tm.getSimOperator(subId);
-        Log.d(TAG, "mccmnc = " + mccmnc);
-        StringBuilder where = new StringBuilder("numeric=\"" + mccmnc +
-                "\" AND NOT (type='ia' AND (apn=\"\" OR apn IS NULL)) AND user_visible!=0");
+        final Uri simApnUri = Uri.withAppendedPath(Telephony.Carriers.SIM_APN_LIST,
+                String.valueOf(subId));
+        StringBuilder where = new StringBuilder("NOT (type='ia' AND (apn=\"\" OR apn IS NULL)) AND "
+                + "user_visible!=0");
 
         if (mHideImsApn) {
             where.append(" AND NOT (type='ims')");
@@ -305,23 +316,16 @@ public class ApnSettings extends RestrictedSettingsFragment {
 
         Log.d(TAG, "where = " + where.toString());
 
-        Cursor cursor = getContentResolver().query(Telephony.Carriers.CONTENT_URI, new String[] {
-                "_id", "name", "apn", "type", "mvno_type", "mvno_match_data", "bearer", "bearer_bitmask"}, where.toString(),
-                null, Telephony.Carriers.DEFAULT_SORT_ORDER);
+        Cursor cursor = getContentResolver().query(simApnUri,
+                CARRIERS_PROJECTION, where.toString(), null,
+                Telephony.Carriers.DEFAULT_SORT_ORDER);
 
         if (cursor != null) {
-            IccRecords r = null;
-            if (mUiccController != null && mSubscriptionInfo != null) {
-                r = mUiccController.getIccRecords(
-                        SubscriptionManager.getPhoneId(subId), UiccController.APP_FAM_3GPP);
-            }
-            PreferenceGroup apnList = (PreferenceGroup) findPreference("apn_list");
-            apnList.removeAll();
+            PreferenceGroup apnPrefList = (PreferenceGroup) findPreference("apn_list");
+            apnPrefList.removeAll();
 
-            ArrayList<ApnPreference> mnoApnList = new ArrayList<ApnPreference>();
-            ArrayList<ApnPreference> mvnoApnList = new ArrayList<ApnPreference>();
-            ArrayList<ApnPreference> mnoMmsApnList = new ArrayList<ApnPreference>();
-            ArrayList<ApnPreference> mvnoMmsApnList = new ArrayList<ApnPreference>();
+            ArrayList<ApnPreference> apnList = new ArrayList<ApnPreference>();
+            ArrayList<ApnPreference> mmsApnList = new ArrayList<ApnPreference>();
 
             mSelectedKey = getSelectedApnKey();
 
@@ -334,8 +338,9 @@ public class ApnSettings extends RestrictedSettingsFragment {
                 String apn = cursor.getString(APN_INDEX);
                 String key = cursor.getString(ID_INDEX);
                 String type = cursor.getString(TYPES_INDEX);
-                String mvnoType = cursor.getString(MVNO_TYPE_INDEX);
-                String mvnoMatchData = cursor.getString(MVNO_MATCH_DATA_INDEX);
+                int edited = cursor.getInt(EDITED_INDEX);
+                mMvnoType = cursor.getString(MVNO_TYPE_INDEX);
+                mMvnoMatchData = cursor.getString(MVNO_MATCH_DATA_INDEX);
 
                 //Special requirement of some operators, need change APN name follow language.
                 String localizedName = Utils.getLocalizedName(getActivity(), cursor.getString(NAME_INDEX));
@@ -361,9 +366,13 @@ public class ApnSettings extends RestrictedSettingsFragment {
 
                 pref.setKey(key);
                 pref.setTitle(name);
-                pref.setSummary(apn);
                 pref.setPersistent(false);
                 pref.setSubId(subId);
+                if (mHidePresetApnDetails && edited == Telephony.Carriers.UNEDITED) {
+                    pref.setHideDetails();
+                } else {
+                    pref.setSummary(apn);
+                }
 
                 boolean selectable = ((type == null) || !type.equals("mms"));
                 pref.setSelectable(selectable);
@@ -371,43 +380,20 @@ public class ApnSettings extends RestrictedSettingsFragment {
                     if ((mSelectedKey != null) && mSelectedKey.equals(key)) {
                         pref.setChecked();
                     }
-                    addApnToList(pref, mnoApnList, mvnoApnList, r, mvnoType, mvnoMatchData);
+                    apnList.add(pref);
                 } else {
-                    addApnToList(pref, mnoMmsApnList, mvnoMmsApnList, r, mvnoType, mvnoMatchData);
+                    mmsApnList.add(pref);
                 }
                 cursor.moveToNext();
             }
             cursor.close();
 
-            if (!mvnoApnList.isEmpty()) {
-                mnoApnList = mvnoApnList;
-                mnoMmsApnList = mvnoMmsApnList;
-
-                // Also save the mvno info
+            for (Preference preference : apnList) {
+                apnPrefList.addPreference(preference);
             }
-
-            for (Preference preference : mnoApnList) {
-                apnList.addPreference(preference);
+            for (Preference preference : mmsApnList) {
+                apnPrefList.addPreference(preference);
             }
-            for (Preference preference : mnoMmsApnList) {
-                apnList.addPreference(preference);
-            }
-        }
-    }
-
-    private void addApnToList(ApnPreference pref, ArrayList<ApnPreference> mnoList,
-                              ArrayList<ApnPreference> mvnoList, IccRecords r, String mvnoType,
-                              String mvnoMatchData) {
-        if (r != null && !TextUtils.isEmpty(mvnoType) && !TextUtils.isEmpty(mvnoMatchData)) {
-            if (ApnSettingUtils.mvnoMatches(r, ApnSetting.getMvnoTypeIntFromString(mvnoType),
-                    mvnoMatchData)) {
-                mvnoList.add(pref);
-                // Since adding to mvno list, save mvno info
-                mMvnoType = mvnoType;
-                mMvnoMatchData = mvnoMatchData;
-            }
-        } else {
-            mnoList.add(pref);
         }
     }
 

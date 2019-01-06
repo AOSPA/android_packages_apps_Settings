@@ -28,11 +28,13 @@ import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.overlay.SurveyFeatureProvider;
+import com.android.settings.panel.PanelFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
@@ -61,7 +63,9 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final UserFeatureProvider userFeatureProvider;
     public final AssistGestureFeatureProvider assistGestureFeatureProvider;
     public final AccountFeatureProvider mAccountFeatureProvider;
+    public final ContextualCardFeatureProvider mContextualCardFeatureProvider;
 
+    public PanelFeatureProvider panelFeatureProvider;
     public SlicesFeatureProvider slicesFeatureProvider;
     public SearchFeatureProvider searchFeatureProvider;
 
@@ -102,6 +106,8 @@ public class FakeFeatureFactory extends FeatureFactory {
         assistGestureFeatureProvider = mock(AssistGestureFeatureProvider.class);
         slicesFeatureProvider = mock(SlicesFeatureProvider.class);
         mAccountFeatureProvider = mock(AccountFeatureProvider.class);
+        mContextualCardFeatureProvider = mock(ContextualCardFeatureProvider.class);
+        panelFeatureProvider = mock(PanelFeatureProvider.class);
     }
 
     @Override
@@ -182,5 +188,14 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public AccountFeatureProvider getAccountFeatureProvider() {
         return mAccountFeatureProvider;
+    }
+
+    @Override
+    public PanelFeatureProvider getPanelFeatureProvider() {
+        return panelFeatureProvider;
+    }
+
+    public ContextualCardFeatureProvider getContextualCardFeatureProvider() {
+        return mContextualCardFeatureProvider;
     }
 }

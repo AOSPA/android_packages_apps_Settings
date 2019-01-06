@@ -37,7 +37,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -75,11 +74,6 @@ public class AppMemoryPreferenceControllerTest {
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
         when(mFragment.getActivity()).thenReturn(mActivity);
-    }
-
-    @After
-    public void tearDown() {
-        ShadowUserManager.getShadow().reset();
     }
 
     @Test

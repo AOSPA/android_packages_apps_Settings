@@ -180,6 +180,11 @@
 
         <!-- action bar, needed for search bar icon tinting -->
         <item name="android:actionBarTheme">@*android:style/ThemeOverlay.DeviceDefault.ActionBar.Accent</item>
+
+        <!-- For battery status icons in -->
+        <item name="batteryGoodColor">@color/battery_good_color_light</item>
+        <item name="batteryMaybeColor">@color/battery_maybe_color_light</item>
+        <item name="batteryBadColor">@color/battery_bad_color_light</item>
     </style>
 
     <style name="Theme.Settings.Home" parent="Theme.Settings.HomeBase">
@@ -190,9 +195,11 @@
         <item name="android:windowLightNavigationBar">true</item>
     </style>
 
-    <style name="ThemeOverlay.Settings.SearchBar" parent="Theme.Settings">
-        <item name="android:colorBackground">?android:attr/colorPrimary</item>
-        <item name="cardBackgroundColor">?android:attr/colorBackground</item>
+    <style name="Theme.BottomDialog" parent="@*android:style/Theme.DeviceDefault.Settings.Dialog">
+        <item name="android:windowBackground">@drawable/settings_panel_background</item>
+        <item name="android:dividerHorizontal">@*android:drawable/list_divider_material</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
     </style>
 
 </resources>

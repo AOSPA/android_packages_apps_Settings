@@ -16,16 +16,11 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import static android.provider.SettingsSlicesContract.KEY_WIFI;
-
 import android.annotation.Nullable;
 
-import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
-import com.android.settings.homepage.contextualcards.slices.ConnectedDeviceSlice;
-import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCard;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
-import com.android.settings.wifi.WifiSlice;
+import com.android.settings.slices.CustomSliceRegistry;
 
 import com.google.android.settings.intelligence.libs.contextualcards.ContextualCardProvider;
 
@@ -39,33 +34,33 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
     public ContextualCardList getContextualCards() {
         final ContextualCard wifiCard =
                 ContextualCard.newBuilder()
-                        .setSliceUri(WifiSlice.WIFI_URI.toString())
-                        .setCardName(KEY_WIFI)
+                        .setSliceUri(CustomSliceRegistry.WIFI_SLICE_URI.toString())
+                        .setCardName(CustomSliceRegistry.WIFI_SLICE_URI.toString())
                         .setCardCategory(ContextualCard.Category.IMPORTANT)
-                        .build();
-        final ContextualCard batteryInfoCard =
-                ContextualCard.newBuilder()
-                        .setSliceUri(BatterySlice.BATTERY_CARD_URI.toString())
-                        .setCardName(BatterySlice.PATH_BATTERY_INFO)
-                        .setCardCategory(ContextualCard.Category.DEFAULT)
                         .build();
         final ContextualCard connectedDeviceCard =
                 ContextualCard.newBuilder()
-                        .setSliceUri(ConnectedDeviceSlice.CONNECTED_DEVICE_URI.toString())
-                        .setCardName(ConnectedDeviceSlice.PATH_CONNECTED_DEVICE)
+                        .setSliceUri(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI.toString())
+                        .setCardName(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI.toString())
                         .setCardCategory(ContextualCard.Category.IMPORTANT)
                         .build();
         final ContextualCard lowStorageCard =
                 ContextualCard.newBuilder()
-                        .setSliceUri(LowStorageSlice.LOW_STORAGE_URI.toString())
-                        .setCardName(LowStorageSlice.PATH_LOW_STORAGE)
+                        .setSliceUri(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString())
+                        .setCardName(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString())
+                        .setCardCategory(ContextualCard.Category.IMPORTANT)
+                        .build();
+        final ContextualCard batteryFixCard =
+                ContextualCard.newBuilder()
+                        .setSliceUri(CustomSliceRegistry.BATTERY_FIX_SLICE_URI.toString())
+                        .setCardName(CustomSliceRegistry.BATTERY_FIX_SLICE_URI.toString())
                         .setCardCategory(ContextualCard.Category.IMPORTANT)
                         .build();
         final ContextualCardList cards = ContextualCardList.newBuilder()
                 .addCard(wifiCard)
-                .addCard(batteryInfoCard)
                 .addCard(connectedDeviceCard)
                 .addCard(lowStorageCard)
+                .addCard(batteryFixCard)
                 .build();
 
         return cards;

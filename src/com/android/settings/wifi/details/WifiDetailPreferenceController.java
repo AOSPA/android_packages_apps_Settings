@@ -55,11 +55,9 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settings.wifi.WifiDetailPreference;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wifi.WifiDialog.WifiDialogListener;
 import com.android.settings.wifi.WifiUtils;
@@ -69,6 +67,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.net.Inet4Address;
@@ -134,15 +133,15 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     // UI elements - in order of appearance
     private ActionButtonPreference mButtonsPref;
     private EntityHeaderController mEntityHeaderController;
-    private WifiDetailPreference mSignalStrengthPref;
-    private WifiDetailPreference mLinkSpeedPref;
-    private WifiDetailPreference mFrequencyPref;
-    private WifiDetailPreference mSecurityPref;
-    private WifiDetailPreference mMacAddressPref;
-    private WifiDetailPreference mIpAddressPref;
-    private WifiDetailPreference mGatewayPref;
-    private WifiDetailPreference mSubnetPref;
-    private WifiDetailPreference mDnsPref;
+    private Preference mSignalStrengthPref;
+    private Preference mLinkSpeedPref;
+    private Preference mFrequencyPref;
+    private Preference mSecurityPref;
+    private Preference mMacAddressPref;
+    private Preference mIpAddressPref;
+    private Preference mGatewayPref;
+    private Preference mSubnetPref;
+    private Preference mDnsPref;
     private PreferenceCategory mIpv6Category;
     private Preference mIpv6AddressPref;
 
@@ -284,29 +283,28 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 .setButton2Text(R.string.wifi_sign_in_button_text)
                 .setButton2OnClickListener(view -> signIntoNetwork());
 
-        mSignalStrengthPref =
-                (WifiDetailPreference) screen.findPreference(KEY_SIGNAL_STRENGTH_PREF);
-        mLinkSpeedPref = (WifiDetailPreference) screen.findPreference(KEY_LINK_SPEED);
-        mFrequencyPref = (WifiDetailPreference) screen.findPreference(KEY_FREQUENCY_PREF);
-        mSecurityPref = (WifiDetailPreference) screen.findPreference(KEY_SECURITY_PREF);
+        mSignalStrengthPref = screen.findPreference(KEY_SIGNAL_STRENGTH_PREF);
+        mLinkSpeedPref = screen.findPreference(KEY_LINK_SPEED);
+        mFrequencyPref = screen.findPreference(KEY_FREQUENCY_PREF);
+        mSecurityPref = screen.findPreference(KEY_SECURITY_PREF);
 
-        mMacAddressPref = (WifiDetailPreference) screen.findPreference(KEY_MAC_ADDRESS_PREF);
-        mIpAddressPref = (WifiDetailPreference) screen.findPreference(KEY_IP_ADDRESS_PREF);
-        mGatewayPref = (WifiDetailPreference) screen.findPreference(KEY_GATEWAY_PREF);
-        mSubnetPref = (WifiDetailPreference) screen.findPreference(KEY_SUBNET_MASK_PREF);
-        mDnsPref = (WifiDetailPreference) screen.findPreference(KEY_DNS_PREF);
+        mMacAddressPref = screen.findPreference(KEY_MAC_ADDRESS_PREF);
+        mIpAddressPref = screen.findPreference(KEY_IP_ADDRESS_PREF);
+        mGatewayPref = screen.findPreference(KEY_GATEWAY_PREF);
+        mSubnetPref = screen.findPreference(KEY_SUBNET_MASK_PREF);
+        mDnsPref = screen.findPreference(KEY_DNS_PREF);
 
         mIpv6Category = (PreferenceCategory) screen.findPreference(KEY_IPV6_CATEGORY);
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
 
         if (mAccessPoint.getSecurityString(false).equals("SAE")
              && mAccessPoint.getConfig().allowedKeyManagement.get(KeyMgmt.WPA_PSK)) {
-             mSecurityPref.setDetailText(mContext.getString(R.string.wifi_security_wpa_wpa2));
+             mSecurityPref.setSummary(mContext.getString(R.string.wifi_security_wpa_wpa2));
          }
          else
-             mSecurityPref.setDetailText(mAccessPoint.getSecurityString(false /* concise */));
+             mSecurityPref.setSummary(mAccessPoint.getSecurityString(false /* concise */));
 
-        mSecurityPref.setDetailText(mAccessPoint.getSecurityString(false /* concise */));
+        mSecurityPref.setSummary(mAccessPoint.getSecurityString(false /* concise */));
     }
 
     private void setupEntityHeader(PreferenceScreen screen) {
@@ -367,12 +365,12 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         refreshRssiViews();
 
         // MAC Address Pref
-        mMacAddressPref.setDetailText(mWifiInfo.getMacAddress());
+        mMacAddressPref.setSummary(mWifiInfo.getMacAddress());
 
         // Link Speed Pref
         int linkSpeedMbps = mWifiInfo.getLinkSpeed();
         mLinkSpeedPref.setVisible(linkSpeedMbps >= 0);
-        mLinkSpeedPref.setDetailText(mContext.getString(
+        mLinkSpeedPref.setSummary(mContext.getString(
                 R.string.link_speed, mWifiInfo.getLinkSpeed()));
 
         // Frequency Pref
@@ -387,7 +385,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         } else {
             Log.e(TAG, "Unexpected frequency " + frequency);
         }
-        mFrequencyPref.setDetailText(band);
+        mFrequencyPref.setSummary(band);
 
         updateIpLayerInfo();
     }
@@ -418,16 +416,15 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mEntityHeaderController.setIcon(wifiIcon).done(mFragment.getActivity(), true /* rebind */);
 
         Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();
-        wifiIconDark.setTint(mContext.getResources().getColor(
-                R.color.wifi_details_icon_color, mContext.getTheme()));
+        wifiIconDark.setTintList(Utils.getColorAttr(mContext, android.R.attr.colorControlNormal));
         mSignalStrengthPref.setIcon(wifiIconDark);
 
-        mSignalStrengthPref.setDetailText(mSignalStr[mRssiSignalLevel]);
+        mSignalStrengthPref.setSummary(mSignalStr[mRssiSignalLevel]);
     }
 
-    private void updatePreference(WifiDetailPreference pref, String detailText) {
+    private void updatePreference(Preference pref, String detailText) {
         if (!TextUtils.isEmpty(detailText)) {
-            pref.setDetailText(detailText);
+            pref.setSummary(detailText);
             pref.setVisible(true);
         } else {
             pref.setVisible(false);
