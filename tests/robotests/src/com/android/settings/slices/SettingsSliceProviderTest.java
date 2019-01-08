@@ -41,6 +41,7 @@ import android.os.StrictMode;
 import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.util.ArraySet;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
@@ -54,18 +55,27 @@ import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
+import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.wifi.WifiSlice;
+import com.android.settingslib.wifi.WifiTracker;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowAccessibilityManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,7 +90,10 @@ import java.util.Set;
  * TODO Investigate using ShadowContentResolver.registerProviderInternal(String, ContentProvider)
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowThreadUtils.class)
+@Config(shadows = {ShadowUserManager.class, ShadowThreadUtils.class, ShadowUtils.class,
+        SlicesDatabaseAccessorTest.ShadowApplicationPackageManager.class,
+        ShadowBluetoothAdapter.class, ShadowLockPatternUtils.class,
+        SettingsSliceProviderTest.ShadowWifiScanWorker.class})
 public class SettingsSliceProviderTest {
 
     private static final String KEY = "KEY";
@@ -96,7 +109,7 @@ public class SettingsSliceProviderTest {
 
     private Context mContext;
     private SettingsSliceProvider mProvider;
-    private SQLiteDatabase mDb;
+    @Mock
     private SliceManager mManager;
 
     private static final List<Uri> SPECIAL_CASE_PLATFORM_URIS = Arrays.asList(
@@ -112,19 +125,24 @@ public class SettingsSliceProviderTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        // Register the fake a11y Service
+        ShadowAccessibilityManager shadowAccessibilityManager = Shadow.extract(
+                RuntimeEnvironment.application.getSystemService(AccessibilityManager.class));
+        shadowAccessibilityManager.setInstalledAccessibilityServiceList(new ArrayList<>());
+
         mProvider = spy(new SettingsSliceProvider());
         ShadowStrictMode.reset();
         mProvider.mSliceWeakDataCache = new HashMap<>();
         mProvider.mSliceDataCache = new HashMap<>();
         mProvider.mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(mContext);
-        mProvider.mCustomSliceManager = spy(new CustomSliceManager(mContext));
+        mProvider.mCustomSliceManager = new CustomSliceManager(mContext);
         when(mProvider.getContext()).thenReturn(mContext);
 
-        mDb = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
         SlicesDatabaseHelper.getInstance(mContext).setIndexedState();
-        mManager = mock(SliceManager.class);
-        when(mContext.getSystemService(SliceManager.class)).thenReturn(mManager);
+
+        doReturn(mManager).when(mContext).getSystemService(SliceManager.class);
         when(mManager.getPinnedSlices()).thenReturn(Collections.emptyList());
 
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
@@ -481,42 +499,52 @@ public class SettingsSliceProviderTest {
         mProvider.onSlicePinned(uri);
     }
 
-    private SliceBackgroundWorker initBackgroundWorker(Uri uri) {
-        final SliceBackgroundWorker worker = spy(new SliceBackgroundWorker(
-                mContext.getContentResolver(), uri) {
-            @Override
-            public void onSlicePinned() {
-            }
+    @Implements(WifiSlice.WifiScanWorker.class)
+    public static class ShadowWifiScanWorker {
+        private static WifiTracker mWifiTracker;
 
-            @Override
-            public void onSliceUnpinned() {
-            }
-        });
-        final WifiSlice wifiSlice = spy(new WifiSlice(mContext));
-        when(wifiSlice.getBackgroundWorker()).thenReturn(worker);
-        when(mProvider.mCustomSliceManager.getSliceableFromUri(uri)).thenReturn(wifiSlice);
-        return worker;
+        @Implementation
+        protected void onSlicePinned() {
+            mWifiTracker = mock(WifiTracker.class);
+            mWifiTracker.onStart();
+        }
+
+        @Implementation
+        protected void onSliceUnpinned() {
+            mWifiTracker.onStop();
+        }
+
+        @Implementation
+        public void close() {
+            mWifiTracker.onDestroy();
+        }
+
+        static WifiTracker getWifiTracker() {
+            return mWifiTracker;
+        }
     }
 
     @Test
     public void onSlicePinned_backgroundWorker_started() {
-        final Uri uri = WifiSlice.WIFI_URI;
-        final SliceBackgroundWorker worker = initBackgroundWorker(uri);
+        mProvider.onSlicePinned(WifiSlice.WIFI_URI);
 
-        mProvider.onSlicePinned(uri);
-
-        verify(worker).onSlicePinned();
+        verify(ShadowWifiScanWorker.getWifiTracker()).onStart();
     }
 
     @Test
     public void onSlicePinned_backgroundWorker_stopped() {
-        final Uri uri = WifiSlice.WIFI_URI;
-        final SliceBackgroundWorker worker = initBackgroundWorker(uri);
+        mProvider.onSlicePinned(WifiSlice.WIFI_URI);
+        mProvider.onSliceUnpinned(WifiSlice.WIFI_URI);
 
-        mProvider.onSlicePinned(uri);
-        mProvider.onSliceUnpinned(uri);
+        verify(ShadowWifiScanWorker.getWifiTracker()).onStop();
+    }
 
-        verify(worker).onSliceUnpinned();
+    @Test
+    public void shutdown_backgroundWorker_closed() {
+        mProvider.onSlicePinned(WifiSlice.WIFI_URI);
+        mProvider.shutdown();
+
+        verify(ShadowWifiScanWorker.getWifiTracker()).onDestroy();
     }
 
     @Test
@@ -546,7 +574,7 @@ public class SettingsSliceProviderTest {
     }
 
     private void insertSpecialCase(String key, boolean isPlatformSlice) {
-        ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues();
         values.put(SlicesDatabaseHelper.IndexColumns.KEY, key);
         values.put(SlicesDatabaseHelper.IndexColumns.TITLE, TITLE);
         values.put(SlicesDatabaseHelper.IndexColumns.SUMMARY, "s");
@@ -556,8 +584,15 @@ public class SettingsSliceProviderTest {
         values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, PREF_CONTROLLER);
         values.put(SlicesDatabaseHelper.IndexColumns.PLATFORM_SLICE, isPlatformSlice);
         values.put(SlicesDatabaseHelper.IndexColumns.SLICE_TYPE, SliceData.SliceType.INTENT);
-
-        mDb.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
+        final SQLiteDatabase db = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
+        db.beginTransaction();
+        try {
+            db.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        db.close();
     }
 
     private static SliceData getDummyData() {
@@ -573,7 +608,7 @@ public class SettingsSliceProviderTest {
                 .build();
     }
 
-    @Implements(value = StrictMode.class, inheritImplementationMethods = true)
+    @Implements(value = StrictMode.class)
     public static class ShadowStrictMode {
 
         private static int sSetThreadPolicyCount;

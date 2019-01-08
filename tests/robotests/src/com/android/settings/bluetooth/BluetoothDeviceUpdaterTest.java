@@ -63,7 +63,11 @@ public class BluetoothDeviceUpdaterTest {
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
     @Mock
+    private CachedBluetoothDevice mSubCachedBluetoothDevice;
+    @Mock
     private BluetoothDevice mBluetoothDevice;
+    @Mock
+    private BluetoothDevice mSubBluetoothDevice;
     @Mock
     private SettingsActivity mSettingsActivity;
     @Mock
@@ -86,6 +90,7 @@ public class BluetoothDeviceUpdaterTest {
         mCachedDevices.add(mCachedBluetoothDevice);
         doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
+        when(mSubCachedBluetoothDevice.getDevice()).thenReturn(mSubBluetoothDevice);
         when(mLocalManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);
 
@@ -147,6 +152,20 @@ public class BluetoothDeviceUpdaterTest {
     }
 
     @Test
+    public void testRemovePreference_subDeviceExist_removePreference() {
+        when(mCachedBluetoothDevice.getSubDevice()).thenReturn(mSubCachedBluetoothDevice);
+        mBluetoothDeviceUpdater.mPreferenceMap.put(mSubBluetoothDevice, mPreference);
+
+        assertThat(mBluetoothDeviceUpdater.mPreferenceMap.
+                containsKey(mSubBluetoothDevice)).isTrue();
+        mBluetoothDeviceUpdater.removePreference(mCachedBluetoothDevice);
+
+        verify(mDevicePreferenceCallback).onDeviceRemoved(mPreference);
+        assertThat(mBluetoothDeviceUpdater.mPreferenceMap.
+                containsKey(mSubBluetoothDevice)).isFalse();
+    }
+
+    @Test
     public void testDeviceProfilesListener_click_startBluetoothDeviceDetailPage() {
         doReturn(mSettingsActivity).when(mDashboardFragment).getContext();
 
@@ -161,7 +180,7 @@ public class BluetoothDeviceUpdaterTest {
     @Test
     public void isDeviceConnected_deviceConnected() {
         doReturn(BluetoothDevice.BOND_BONDED).when(mBluetoothDevice).getBondState();
-        doReturn(true).when(mCachedBluetoothDevice).isConnected();
+        doReturn(true).when(mBluetoothDevice).isConnected();
 
         assertThat(mBluetoothDeviceUpdater.isDeviceConnected(mCachedBluetoothDevice)).isTrue();
     }
@@ -169,7 +188,7 @@ public class BluetoothDeviceUpdaterTest {
     @Test
     public void isDeviceConnected_deviceNotConnected() {
         doReturn(BluetoothDevice.BOND_BONDED).when(mBluetoothDevice).getBondState();
-        doReturn(false).when(mCachedBluetoothDevice).isConnected();
+        doReturn(false).when(mBluetoothDevice).isConnected();
 
         assertThat(mBluetoothDeviceUpdater.isDeviceConnected(mCachedBluetoothDevice)).isFalse();
     }

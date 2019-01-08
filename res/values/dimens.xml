@@ -79,19 +79,6 @@
     <dimen name="actionbar_contentInsetStart">16dp</dimen>
     <dimen name="actionbar_subsettings_contentInsetStart">72dp</dimen>
 
-    <!-- Dashboard padding in its container -->
-    <dimen name="dashboard_padding_start">0dp</dimen>
-    <dimen name="dashboard_padding_end">0dp</dimen>
-    <dimen name="dashboard_padding_top">0dp</dimen>
-    <dimen name="dashboard_padding_bottom">0dp</dimen>
-
-    <!-- Dashboard category padding start / end -->
-    <dimen name="dashboard_category_padding_start">0dp</dimen>
-    <dimen name="dashboard_category_padding_end">0dp</dimen>
-
-    <!-- Dashboard tile minimum height -->
-    <dimen name="dashboard_tile_minimum_height">72dp</dimen>
-
     <!-- Dashboard image tile size -->
     <dimen name="dashboard_tile_image_size">36dp</dimen>
 
@@ -101,8 +88,8 @@
     <!-- Dashboard foreground image inset (from background edge to foreground edge) -->
     <dimen name="dashboard_tile_foreground_image_inset">6dp</dimen>
 
-    <!-- Dashboard tile image margin start / end -->
-    <dimen name="dashboard_tile_image_margin">18dp</dimen>
+    <!-- Preference icon foreground image inset (from background edge to foreground edge) -->
+    <dimen name="preference_icon_foreground_image_inset">12dp</dimen>
 
     <!-- SwitchBar sub settings margin start / end -->
     <dimen name="switchbar_subsettings_margin_start">72dp</dimen>
@@ -119,6 +106,9 @@
     <dimen name="search_bar_text_size">16dp</dimen>
     <dimen name="search_bar_card_elevation">2dp</dimen>
     <dimen name="search_bar_content_inset">64dp</dimen>
+    <dimen name="search_bar_avatar_size">32dp</dimen>
+    <dimen name="search_bar_avatar_start_margin">4dp</dimen>
+    <dimen name="search_bar_avatar_end_margin">16dp</dimen>
 
     <!-- Dimensions for Wifi Assistant Card -->
     <dimen name="wifi_assistant_padding_top_bottom">16dp</dimen>
@@ -284,11 +274,11 @@
     <!-- Padding between the donut and the storage summary. -->
     <dimen name="storage_summary_padding_end">16dp</dimen>
     <!-- Text size of the big number in the donut. -->
-    <dimen name="storage_donut_view_percent_text_size">30sp</dimen>
+    <dimen name="storage_donut_view_percent_text_size">45sp</dimen>
     <!-- Text size of the percentage sign in the donut. -->
     <dimen name="storage_donut_view_percent_sign_size">20sp</dimen>
     <!-- Text size of the label text in the donut. -->
-    <dimen name="storage_donut_view_label_text_size">14sp</dimen>
+    <dimen name="storage_donut_view_label_text_size">21sp</dimen>
     <!-- Text size of the label text in the donut if the label text is long. -->
     <dimen name="storage_donut_view_shrunken_label_text_size">10sp</dimen>
     <!-- The width of the storage summary donut -->
@@ -311,17 +301,7 @@
     <!-- Suggestion/condition header padding -->
     <dimen name="suggestion_condition_header_padding_collapsed">10dp</dimen>
     <dimen name="suggestion_condition_header_padding_expanded">5dp</dimen>
-
-    <!-- Suggestion cards size and padding -->
-    <dimen name="suggestion_card_icon_size">24dp</dimen>
-    <dimen name="suggestion_card_outer_margin">14dp</dimen>
-    <dimen name="suggestion_card_inner_margin">12dp</dimen>
-    <dimen name="suggestion_card_padding_bottom_one_card">16dp</dimen>
-    <dimen name="suggestion_card_corner_radius">2dp</dimen>
-    <dimen name="suggestion_card_icon_side_margin">12dp</dimen>
-    <dimen name="suggestion_card_button_side_margin">8dp</dimen>
-    <dimen name="suggestion_card_button_top_margin">16dp</dimen>
-    <dimen name="suggestion_card_button_bottom_margin">18dp</dimen>
+    <dimen name="condition_header_height">36dp</dimen>
 
     <!-- Condition cards size and padding -->
     <dimen name="condition_card_elevation">2dp</dimen>
@@ -340,21 +320,34 @@
     <dimen name="homepage_bottombar_fab_cradle">68dp</dimen>
 
     <!-- Homepage cards size and padding -->
+    <dimen name="homepage_card_icon_size">24dp</dimen>
     <dimen name="homepage_card_corner_radius">8dp</dimen>
     <dimen name="homepage_card_elevation">2dp</dimen>
-    <dimen name="homepage_card_top_margin">6dp</dimen>
-    <dimen name="homepage_card_bottom_margin">6dp</dimen>
-    <dimen name="homepage_card_side_margin">16dp</dimen>
+    <dimen name="homepage_card_vertical_margin">4dp</dimen>
+    <dimen name="homepage_card_side_margin">8dp</dimen>
     <dimen name="homepage_card_padding_start">16dp</dimen>
     <dimen name="homepage_card_padding_end">16dp</dimen>
-    <dimen name="homepage_card_padding_top">6dp</dimen>
-    <dimen name="homepage_card_padding_bottom">6dp</dimen>
 
-    <!-- Slice cards maximum height (4 rows + show more)
-        MODE_LARGE height(3 rows + show more) 240dp + one line text(1 row) 48dp = 288dp -->
-    <dimen name="homepage_slice_card_max_height">288dp</dimen>
+    <!-- Horizontal divider size and margin -->
+    <dimen name="horizontal_divider_margin_top">4dp</dimen>
+    <dimen name="horizontal_divider_margin_bottom">8dp</dimen>
+    <dimen name="horizontal_divider_height">.75dp</dimen>
+
+    <!-- Vertical divider size -->
+    <dimen name="vertical_divider_width">.75dp</dimen>
 
     <!-- Signal icon in NetworkSelectSetting -->
     <dimen name="signal_strength_icon_size">24dp</dimen>
+
+    <!-- Condition cards size and padding -->
+    <dimen name="homepage_condition_card_title_margin_bottom">2dp</dimen>
+    <dimen name="homepage_condition_half_card_height">150dp</dimen>
+    <dimen name="homepage_condition_half_card_padding_top">12dp</dimen>
+    <dimen name="homepage_condition_half_card_title_margin_top">12dp</dimen>
+    <dimen name="homepage_condition_half_card_summary_margin_bottom">12dp</dimen>
+    <dimen name="homepage_condition_full_card_padding_start">24dp</dimen>
+    <dimen name="homepage_condition_full_card_padding_end">24dp</dimen>
+    <dimen name="homepage_condition_full_card_padding_top">12dp</dimen>
+    <dimen name="homepage_condition_full_card_padding_bottom">12dp</dimen>
 
 </resources>

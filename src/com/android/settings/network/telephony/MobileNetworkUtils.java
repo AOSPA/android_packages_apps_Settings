@@ -27,8 +27,10 @@ import android.database.Cursor;
 import android.os.PersistableBundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
+import android.service.carrier.CarrierMessagingService;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -81,7 +83,7 @@ public class MobileNetworkUtils {
      * Returns true if Wifi calling is enabled for at least one phone.
      */
     public static boolean isWifiCallingEnabled(Context context) {
-        int phoneCount = TelephonyManager.from(context).getPhoneCount();
+        int phoneCount = context.getSystemService(TelephonyManager.class).getPhoneCount();
         for (int i = 0; i < phoneCount; i++) {
             if (isWifiCallingEnabled(context, i)) {
                 return true;
@@ -211,18 +213,13 @@ public class MobileNetworkUtils {
                 || (!esimIgnoredDevice && enabledEsimUiByDefault && inEsimSupportedCountries));
     }
 
-    public static PersistableBundle getCarrierConfigBySubId(int mSubId) {
-        //TODO(b/114749736): get carrier config from subId
-        return new PersistableBundle();
-    }
-
     /**
      * Set whether to enable data for {@code subId}, also whether to disable data for other
      * subscription
      */
     public static void setMobileDataEnabled(Context context, int subId, boolean enabled,
             boolean disableOtherSubscriptions) {
-        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
         final SubscriptionManager subscriptionManager = context.getSystemService(
                 SubscriptionManager.class);
@@ -234,7 +231,7 @@ public class MobileNetworkUtils {
             if (subInfoList != null) {
                 for (SubscriptionInfo subInfo : subInfoList) {
                     if (subInfo.getSubscriptionId() != subId) {
-                        TelephonyManager.from(context).createForSubscriptionId(
+                        context.getSystemService(TelephonyManager.class).createForSubscriptionId(
                                 subInfo.getSubscriptionId()).setDataEnabled(false);
                     }
                 }
@@ -249,10 +246,18 @@ public class MobileNetworkUtils {
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return false;
         }
-        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
+        final PersistableBundle carrierConfig = context.getSystemService(
+                CarrierConfigManager.class).getConfigForSubId(subId);
+
 
         if (telephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_CDMA) {
+            return true;
+        } else if (carrierConfig != null
+                && !carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
+                && carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             return true;
         }
 
@@ -275,14 +280,45 @@ public class MobileNetworkUtils {
         return false;
     }
 
+    /**
+     * return {@code true} if we need show Gsm related settings
+     */
     public static boolean isGsmOptions(Context context, int subId) {
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return false;
         }
-        final TelephonyManager telephonyManager = TelephonyManager.from(context)
+        if (isGsmBasicOptions(context, subId)) {
+            return true;
+        }
+        final int settingsNetworkMode = android.provider.Settings.Global.getInt(
+                context.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
+                Phone.PREFERRED_NT_MODE);
+        if (isWorldMode(context, subId)) {
+            if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
+                    || settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
+                return true;
+            } else if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA
+                    && !MobileNetworkUtils.isTdscdmaSupported(context, subId)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static boolean isGsmBasicOptions(Context context, int subId) {
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
+        final PersistableBundle carrierConfig = context.getSystemService(
+                CarrierConfigManager.class).getConfigForSubId(subId);
 
         if (telephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_GSM) {
+            return true;
+        } else if (carrierConfig != null
+                && !carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
+                && carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             return true;
         }
 
@@ -294,41 +330,44 @@ public class MobileNetworkUtils {
      * settings
      */
     public static boolean isWorldMode(Context context, int subId) {
+        final PersistableBundle carrierConfig = context.getSystemService(
+                CarrierConfigManager.class).getConfigForSubId(subId);
+        return carrierConfig == null
+                ? false
+                : carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL);
+    }
+
+    /**
+     * Return {@code true} if we need show settings for network selection(i.e. Verizon)
+     */
+    public static boolean shouldDisplayNetworkSelectOptions(Context context, int subId) {
         final TelephonyManager telephonyManager = TelephonyManager.from(context)
                 .createForSubscriptionId(subId);
-        boolean worldModeOn = false;
-        final String configString = context.getString(R.string.config_world_mode);
+        final PersistableBundle carrierConfig = context.getSystemService(
+                CarrierConfigManager.class).getConfigForSubId(subId);
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                || !carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_OPERATOR_SELECTION_EXPAND_BOOL)
+                || (carrierConfig.getBoolean(CarrierConfigManager.KEY_CSP_ENABLED_BOOL)
+                && !telephonyManager.isManualNetworkSelectionAllowed())) {
+            return false;
+        }
 
-        if (!TextUtils.isEmpty(configString)) {
-            String[] configArray = configString.split(";");
-            // Check if we have World mode configuration set to True only or config is set to True
-            // and SIM GID value is also set and matches to the current SIM GID.
-            if (configArray != null &&
-                    ((configArray.length == 1 && configArray[0].equalsIgnoreCase("true"))
-                            || (configArray.length == 2 && !TextUtils.isEmpty(configArray[1])
-                            && telephonyManager != null
-                            && configArray[1].equalsIgnoreCase(
-                            telephonyManager.getGroupIdLevel1())))) {
-                worldModeOn = true;
+        if (isGsmBasicOptions(context, subId)) {
+            return true;
+        }
+
+        final int settingsNetworkMode = android.provider.Settings.Global.getInt(
+                context.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
+                Phone.PREFERRED_NT_MODE);
+        if (isWorldMode(context, subId)) {
+            if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
+                return true;
             }
         }
 
-        Log.d(TAG, "isWorldMode=" + worldModeOn);
-
-        return worldModeOn;
-    }
-
-    public static boolean isShow4GForLTE(Context context) {
-        //TODO(b/117882862): move this to framework
-        try {
-            Context con = context.createPackageContext("com.android.systemui", 0);
-            int id = con.getResources().getIdentifier("config_show4GForLTE",
-                    "bool", "com.android.systemui");
-             return con.getResources().getBoolean(id);
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "NameNotFoundException for show4GFotLTE");
-            return false;
-        }
+        return false;
     }
 
     /**
@@ -336,19 +375,26 @@ public class MobileNetworkUtils {
      */
     public static boolean isTdscdmaSupported(Context context, int subId) {
         return isTdscdmaSupported(context,
-                TelephonyManager.from(context).createForSubscriptionId(subId));
+                context.getSystemService(TelephonyManager.class).createForSubscriptionId(subId));
     }
 
     //TODO(b/117651939): move it to telephony
     private static boolean isTdscdmaSupported(Context context, TelephonyManager telephonyManager) {
-        if (context.getResources().getBoolean(R.bool.config_support_tdscdma)) {
+        final PersistableBundle carrierConfig = context.getSystemService(
+                CarrierConfigManager.class).getConfig();
+
+        if (carrierConfig == null) {
+            return false;
+        }
+
+        if (carrierConfig.getBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL)) {
             return true;
         }
 
         String operatorNumeric = telephonyManager.getServiceState().getOperatorNumeric();
-        String[] numericArray = context.getResources().getStringArray(
-                R.array.config_support_tdscdma_roaming_on_networks);
-        if (numericArray.length == 0 || operatorNumeric == null) {
+        String[] numericArray = carrierConfig.getStringArray(
+                CarrierConfigManager.KEY_SUPPORT_TDSCDMA_ROAMING_NETWORKS_STRING_ARRAY);
+        if (numericArray == null || operatorNumeric == null) {
             return false;
         }
         for (String numeric : numericArray) {

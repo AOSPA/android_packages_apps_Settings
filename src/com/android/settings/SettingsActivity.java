@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
-
 import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
@@ -63,8 +61,6 @@ import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
-import com.android.settings.dashboard.DashboardSummary;
-import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.sim.SimSettings;
@@ -258,10 +254,8 @@ public class SettingsActivity extends SettingsBaseActivity
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
 
-        final ComponentName cn = intent.getComponent();
-        final String className = cn.getClassName();
-
-        mIsShowingDashboard = className.equals(Settings.class.getName());
+        mIsShowingDashboard = TextUtils.equals(
+                SettingsActivity.class.getName(), intent.getComponent().getClassName());
 
         // This is a "Sub Settings" when:
         // - this is a real SubSettings
@@ -401,14 +395,9 @@ public class SettingsActivity extends SettingsBaseActivity
         } else {
             // Show search icon as up affordance if we are displaying the main Dashboard
             mInitialTitleResId = R.string.dashboard_title;
+            switchToFragment(TopLevelSettings.class.getName(), null /* args */, false, false,
+                    mInitialTitleResId, mInitialTitle, false);
 
-            if (SettingsHomepageActivity.isDynamicHomepageEnabled(this)) {
-                switchToFragment(TopLevelSettings.class.getName(), null /* args */, false, false,
-                        mInitialTitleResId, mInitialTitle, false);
-            } else {
-                switchToFragment(DashboardSummary.class.getName(), null /* args */, false, false,
-                        mInitialTitleResId, mInitialTitle, false);
-            }
         }
     }
 

@@ -21,7 +21,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -72,8 +71,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ApnSettings extends RestrictedSettingsFragment implements
-        Preference.OnPreferenceChangeListener {
+public class ApnSettings extends RestrictedSettingsFragment {
     static final String TAG = "ApnSettings";
 
     public static final String EXTRA_POSITION = "position";
@@ -361,7 +359,6 @@ public class ApnSettings extends RestrictedSettingsFragment implements
                 pref.setTitle(name);
                 pref.setSummary(apn);
                 pref.setPersistent(false);
-                pref.setOnPreferenceChangeListener(this);
                 pref.setSubId(subId);
 
                 boolean selectable = ((type == null) || !type.equals("mms"));
@@ -597,14 +594,6 @@ public class ApnSettings extends RestrictedSettingsFragment implements
             intent.putExtra(MVNO_MATCH_DATA, mMvnoMatchData);
         }
         startActivity(intent);
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        int pos = Integer.parseInt(preference.getKey());
-        Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
-        startActivity(new Intent(Intent.ACTION_EDIT, url));
-        return true;
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {

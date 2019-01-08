@@ -38,6 +38,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +47,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,24 +71,24 @@ public class SettingsActivityTest {
     }
 
     @Test
+    @Config(shadows = ShadowUtils.class)
     public void onCreate_deviceNotProvisioned_shouldDisableSearch() {
         Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
-        final Intent intent = new Intent(mContext, Settings.class);
-        final SettingsActivity activity =
-                Robolectric.buildActivity(SettingsActivity.class, intent).create(
-                        Bundle.EMPTY).get();
+        final SettingsActivity activity = Robolectric.buildActivity(SettingsActivity.class)
+                .create(Bundle.EMPTY)
+                .get();
 
         assertThat(activity.findViewById(R.id.search_bar).getVisibility())
                 .isEqualTo(View.INVISIBLE);
     }
 
     @Test
+    @Config(shadows = ShadowUtils.class)
     public void onCreate_deviceProvisioned_shouldEnableSearch() {
         Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
-        final Intent intent = new Intent(mContext, Settings.class);
-        final SettingsActivity activity =
-                Robolectric.buildActivity(SettingsActivity.class, intent).create(
-                        Bundle.EMPTY).get();
+        final SettingsActivity activity = Robolectric.buildActivity(SettingsActivity.class)
+                .create(Bundle.EMPTY)
+                .get();
 
         assertThat(activity.findViewById(R.id.search_bar).getVisibility()).isEqualTo(View.VISIBLE);
     }

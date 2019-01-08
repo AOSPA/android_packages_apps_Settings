@@ -25,9 +25,6 @@
     <!-- Strings for Dialog deny button -->
     <string name="deny">Deny</string>
 
-    <!-- Strings for Dialog close button [CHAR LIMIT=20] -->
-    <string name="dlg_close">Close</string>
-
     <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
     <string name="device_info_default">Unknown</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Countdown for user taps to enable development settings -->
@@ -683,7 +680,7 @@
     <!-- check box to allow data usage when roaming [CHAR LIMIT=41] -->
     <string name="allow_data_usage_title">Allow data usage when roaming</string>
     <!-- mobile network settings screen, setting check box title -->
-    <string name="roaming">Data roaming</string>
+    <string name="roaming">Roaming</string>
     <!-- mobile network settings screen, setting option summary text when check box is selected -->
     <string name="roaming_enable">Connect to data services when roaming</string>
     <!-- mobile network settings screen, setting option summary text when check box is clear -->
@@ -819,11 +816,13 @@
     <string name="location_settings_title">Location</string>
     <!-- Used in the location settings to control turning on/off the feature entirely -->
     <string name="location_settings_master_switch_title">Use location</string>
+    <!-- Summary for Location settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="location_settings_summary">Scanning, location history</string>
 
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
     <string name="account_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the security screen -->
-    <string name="security_settings_title">Security &amp; location</string>
+    <string name="security_settings_title">Security</string>
     <!-- Security Settings screen setting option title for the item to take you to the encryption and credential screen -->
     <string name="encryption_and_credential_settings_title">Encryption &amp; credentials</string>
     <!-- Security Settings screen Encryption and crendential summary -->
@@ -1055,9 +1054,6 @@
 
     <!-- Button to confirm the last removing the last fingerprint. [CHAR LIMIT=20]-->
     <string name="fingerprint_last_delete_confirm">Yes, remove</string>
-
-    <!-- Content description for the fingerprint icon when the user is prompted to enter his credentials. Not shown on the screen. [CHAR LIMIT=NONE] -->
-    <string name="confirm_fingerprint_icon_content_description">Use your fingerprint to continue.</string>
 
     <!-- Title of the preferences category for preference items to control encryption -->
     <string name="crypt_keeper_settings_title">Encryption</string>
@@ -3716,6 +3712,10 @@
     <!-- About phone settings screen, Safety Legal dialog title until the link is fully loaded -->
     <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
+    <!-- ConfirmDeviceCredential settings-->
+    <!-- Button text shown on BiometricPrompt (system dialog that asks for biometric authentication) giving the user the option to use an alternate form of authentication (Pin/Pattern/Pass) [CHAR LIMIT=30] -->
+    <string name="confirm_device_credential_use_alternate_method">Use alternate method</string>
+
     <!-- Lock Pattern settings -->
     <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_screen_lock_header">Set screen lock</string>
@@ -3778,8 +3778,8 @@
     <string name="lockpassword_confirm_your_password_generic_profile">Enter your work password to continue</string>
 
     <!-- This string shows up on a screen where a user can enter a pattern that
-         unlocks their device. This is an extra security measure that's required for them to
-         continue. [CHAR LIMIT=100] -->
+     unlocks their device. This is an extra security measure that's required for them to
+     continue. [CHAR LIMIT=100] -->
     <string name="lockpassword_strong_auth_required_device_pattern">For added security, use your device pattern</string>
     <!-- This string shows up on a screen where a user can enter a PIN that unlocks their device.
          This is an extra security measure that's required for them to continue. [CHAR LIMIT=100]
@@ -4006,8 +4006,6 @@
     <string name="uninstall_all_users_text">Uninstall for all users</string>
     <!-- [CHAR LIMIT=NONE] Manage applications, individual application info screen, button label under Storage heading. Button to install an application for the user. -->
     <string name="install_text">Install</string>
-    <!-- [CHAR LIMIT=25] Manage applications, individual application info screen, button label under Storage heading. Button to disable an existing application. -->
-    <string name="disable_text">Disable</string>
     <!-- [CHAR LIMIT=25] Manage applications, individual application info screen, button label under Storage heading. Button to re-enable an existing application. -->
     <string name="enable_text">Enable</string>
     <!-- Manage applications, individual application info screen, button label under Storage heading. Button to clear all data associated with tis app (for example, remove all cached emails for an Email app) -->
@@ -4579,6 +4577,24 @@
     <string name="accessibility_toggle_master_mono_title">Mono audio</string>
     <!-- Summary for the accessibility preference for master mono. [CHAR LIMIT=50] -->
     <string name="accessibility_toggle_master_mono_summary">Combine channels when playing audio</string>
+
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_timeout_default">Default</string>
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_timeout_10secs">10 seconds</string>
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_timeout_30secs">30 seconds</string>
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_timeout_1min">1 minute</string>
+    <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_timeout_2mins">2 minutes</string>
+    <!-- Title for accessibility preference to accessibility message_timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_accessibility_content_timeout_preference_title">Content Timeout</string>
+    <!-- Title for accessibility preference to accessibility message_timeout. [CHAR LIMIT=35] -->
+    <string name="accessibility_accessibility_control_timeout_preference_title">Control Timeout</string>
+    <!-- Title for accessibility preference to accessibility message_timeout. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_accessibility_timeout_preference_summary">Choose how long it takes before automatically disappearing messages go away.\nSome apps may not support this setting yet.</string>
+
     <!-- Title for accessibility preference to choose long-press delay i.e. timeout before it is detected. [CHAR LIMIT=35] -->
     <string name="accessibility_long_press_timeout_preference_title">Touch &amp; hold delay</string>
     <!-- Title for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
@@ -5661,12 +5677,18 @@
     <string name="remove_and_uninstall_device_admin">Deactivate &amp; uninstall</string>
     <!-- Label for screen showing to select device admin apps -->
     <string name="select_device_admin_msg">Device admin apps</string>
+
     <!-- Message when there are no available device admin apps to display -->
     <string name="no_device_admins">No device admin apps available</string>
     <!-- Title for personal device admin apps on the list [CHAR_LIMIT=25] -->
     <string name="personal_device_admin_title">Personal</string>
     <!-- Title for managed device admin apps on the list [CHAR_LIMIT=25] -->
     <string name="managed_device_admin_title">Work</string>
+    <!-- Title for whether to enable SMS access restriction [CHAR LIMIT=50]-->
+    <string name="sms_access_restriction_enabled">Restrict SMS &amp; call log access</string>
+    <!-- Summary for whether to enable SMS access restriction [CHAR LIMIT=NONE]-->
+    <string name="sms_access_restriction_enabled_summary">Only default phone and messaging apps have SMS &amp; call log permissions</string>
+
 
     <!-- Message when there are no available trust agents to display -->
     <string name="no_trust_agents">No available trust agents</string>
@@ -6460,7 +6482,7 @@
     <!-- User (self) removal confirmation title [CHAR LIMIT=30] -->
     <string name="user_confirm_remove_self_title">Delete yourself?</string>
     <!-- User removal confirmation title [CHAR LIMIT=25] -->
-    <string name="user_confirm_remove_title">Remove this user?</string>
+    <string name="user_confirm_remove_title">Delete this user?</string>
     <!-- Profile removal confirmation title [CHAR LIMIT=25] -->
     <string name="user_profile_confirm_remove_title">Remove this profile?</string>
     <!-- Work profile removal confirmation title [CHAR LIMIT=25] -->
@@ -6498,7 +6520,7 @@
     <!-- Title of preference to enable calling and SMS [CHAR LIMIT=45] -->
     <string name="user_enable_calling_sms">Turn on phone calls &amp; SMS</string>
     <!-- Title of preference to remove the user [CHAR LIMIT=35] -->
-    <string name="user_remove_user">Remove user</string>
+    <string name="user_remove_user">Delete user</string>
     <!-- Title for confirmation of turning on calls [CHAR LIMIT=40] -->
     <string name="user_enable_calling_confirm_title">Turn on phone calls?</string>
     <!-- Message for confirmation of turning on calls [CHAR LIMIT=none] -->
@@ -6656,6 +6678,8 @@
     <string name="help_url_auto_brightness" translatable="false" />
     <!-- Help URL, Previously connected bluetooth devices [DO NOT TRANSLATE] -->
     <string name="help_url_previously_connected_devices" translatable="false"></string>
+    <!-- Help URL, Top level privacy settings [DO NOT TRANSLATE] -->
+    <string name="help_url_privacy_dashboard" translatable="false"></string>
 
     <string name="help_url_network_dashboard" translatable="false"></string>
     <string name="help_url_connected_devices" translatable="false"></string>
@@ -6874,9 +6898,6 @@
         <item quantity="one">Show %d hidden item</item>
         <item quantity="other">Show %d hidden items</item>
     </plurals>
-
-    <!-- Content description for suggestion footer button. Double tapping will cause suggestion list to collapse [CHAR LIMIT=NONE]-->
-    <string name="dashboard_suggestion_condition_footer_content_description">Collapse</string>
 
     <!-- Title for setting tile leading to network and Internet settings [CHAR LIMIT=40]-->
     <string name="network_dashboard_title">Network &amp; internet</string>
@@ -7111,7 +7132,7 @@
     <string name="alarm_ringtone_title">Default alarm sound</string>
 
     <!-- Sound: Title for the option managing whether or not to vibrate when ringing. [CHAR LIMIT=30] -->
-    <string name="vibrate_when_ringing_title">Also vibrate for calls</string>
+    <string name="vibrate_when_ringing_title">Vibrate for calls</string>
 
     <!-- Sound: Title for the other sounds option and associated settings page. [CHAR LIMIT=30] -->
     <string name="other_sound_settings">Other sounds</string>
@@ -7195,19 +7216,25 @@
     <string name="zen_mode_behavior_alarms_only">No sound except alarms and media</string>
 
     <!--  Do not disturb: Title for the zen mode automation option in Settings. [CHAR LIMIT=40] -->
-    <string name="zen_mode_automation_settings_title">Turn on automatically</string>
+    <string name="zen_mode_automation_settings_title">Schedules</string>
 
     <!--  Do not disturb: Title for the zen mode automatic rules page in settings. [CHAR LIMIT=30] -->
-    <string name="zen_mode_automation_settings_page_title">Automatic rules</string>
+    <string name="zen_mode_automation_settings_page_title">Do Not Disturb</string>
 
     <!--  Do not disturb: Title for a specific zen mode automatic rule in settings. [CHAR LIMIT=30] -->
     <string name="zen_mode_automatic_rule_settings_page_title">Automatic rule</string>
+
+    <!--  Do not disturb: Title do not disturb settings representing automatic (scheduled) do not disturb rules. [CHAR LIMIT=30] -->
+    <string name="zen_mode_schedule_category_title">Schedule</string>
 
     <!--  Do not disturb: Title for the zen mode automation option Suggestion. [CHAR LIMIT=46] -->
     <string name="zen_mode_automation_suggestion_title">Silence phone at certain times</string>
 
     <!--  Do not disturb: Summary for the zen mode automation option Suggestion. [CHAR LIMIT=55] -->
     <string name="zen_mode_automation_suggestion_summary">Set Do Not Disturb rules</string>
+
+    <!--  Do not disturb: Header for the Do Not Disturb automatic rules. [CHAR LIMIT=55] -->
+    <string name="zen_mode_schedule_title">Schedule</string>
 
     <!--  Do not disturb: Switch toggle to toggle whether to use an automatic dnd rule or not [CHAR LIMIT=40] -->
     <string name="zen_mode_use_automatic_rule">Use rule</string>
@@ -7231,10 +7258,10 @@
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
     <!-- Do not disturb: zen settings screens category title [CHAR LIMIT=100] -->
-    <string name="zen_mode_settings_category">When Do Not Disturb is turned on</string>
+    <string name="zen_mode_settings_category">When Do Not Disturb is on</string>
 
-    <!-- Do not disturb: restrict notifications title [CHAR LIMIT=60] -->
-    <string name="zen_mode_restrict_notifications_title">Notifications</string>
+    <!-- Do not disturb: restrict notifications title [CHAR LIMIT=80] -->
+    <string name="zen_mode_restrict_notifications_title">Notification restrictions</string>
     <!-- Do not disturb: Mute notifications option [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_mute">No sound from notifications</string>
     <!-- Do not disturb:Mute notifications summary [CHAR LIMIT=NONE] -->
@@ -7275,9 +7302,9 @@
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
     <string name="zen_mode_block_effect_peek">Don\'t pop notifications on screen</string>
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_block_effect_status">Hide status bar icons</string>
+    <string name="zen_mode_block_effect_status">Hide status bar icons at top of screen</string>
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_block_effect_badge">Hide notification dots</string>
+    <string name="zen_mode_block_effect_badge">Hide notification dots on app icons</string>
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
     <string name="zen_mode_block_effect_ambient">Don\'t wake for notifications</string>
     <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
@@ -7366,15 +7393,15 @@
         <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> rules can turn on automatically</item>
     </plurals>
 
-    <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
-    <string name="zen_category_behavior">Behavior</string>
-    <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
+    <!-- Do not disturb settings, category header [CHAR LIMIT=120]-->
+    <string name="zen_category_behavior">Mute phone, but allow exceptions</string>
+    <!-- Do not disturb settings, exceptions to dnd title [CHAR LIMIT=100]-->
     <string name="zen_category_exceptions">Exceptions</string>
     <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
     <string name="zen_category_schedule">Schedule</string>
 
-    <!-- Do not disturb settings, sound and vibrations title [CHAR LIMIT=100]-->
-    <string name="zen_sound_title">Sound &amp; vibration</string>
+    <!-- Do not disturb settings, sound and vibrations exceptions title [CHAR LIMIT=100]-->
+    <string name="zen_sound_title">See all exceptions</string>
     <!-- Do not disturb settings, sound and vibrations screen footer [CHAR LIMIT=NONE]-->
     <string name="zen_sound_footer">When Do Not Disturb is on, sound and vibration will be muted, except for the items you allow above.</string>
     <!-- Do not disturb settings, sound and vibrations screen category [CHAR LIMIT=100]-->
@@ -7826,8 +7853,8 @@
     <!-- [CHAR LIMIT=100] Zen mode settings: Warning text for invalid zen rule names -->
     <string name="zen_mode_rule_name_warning">Rule name already in use</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Add rule menu option name -->
-    <string name="zen_mode_add_rule">Add rule</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Add another automatic zen rule option name-->
+    <string name="zen_mode_add_rule">Add more</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Add event-based rule, set rule name title -->
     <string name="zen_mode_add_event_rule">Add event rule</string>
@@ -7952,6 +7979,9 @@
     <!-- [CHAR LIMIT=20] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Messages</string>
 
+    <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
+    <string name="zen_mode_messages_footer">When Do Not Disturb is on, incoming text messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
+
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages toggle title -->
     <string name="zen_mode_messages_title">Allow messages</string>
 
@@ -7988,41 +8018,48 @@
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: None -->
     <string name="zen_mode_from_none">None</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option -->
-    <string name="zen_mode_alarms">Alarms</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow alarms option -->
+    <string name="zen_mode_alarms">Allow alarms</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option (ie: sound from alarm clock) -->
     <string name="zen_mode_alarms_list">alarms</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Media option -->
-    <string name="zen_mode_media">Media</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow media (sound from video) to bypass dnd -->
+    <string name="zen_mode_media">Allow media</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) -->
     <string name="zen_mode_media_list">media</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: System option which includes sounds such as touch sounds -->
-    <string name="zen_mode_system">Touch sounds</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: allow touch sounds to bypass DND  -->
+    <string name="zen_mode_system">Allow touch sounds</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: System sounds (ie: touch sounds) -->
     <string name="zen_mode_system_list">touch sounds</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Reminders option -->
-    <string name="zen_mode_reminders">Reminders</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow reminder notifications/sounds to bypass DND  -->
+    <string name="zen_mode_reminders">Allow reminders</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Reminders (ie: calendar reminders are allowed to bypass dnd) -->
     <string name="zen_mode_reminders_list">reminders</string>
 
-    <!-- [CHAR LIMIT=70] Zen mode settings: Allow reminders toggle title -->
-    <string name="zen_mode_reminders_title">Allow reminders</string>
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow event notifications/sounds to bypass DND -->
+    <string name="zen_mode_events">Allow events</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Events option -->
-    <string name="zen_mode_events">Events</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
+    <string name="zen_mode_bypassing_apps">Allow apps to override</string>
+
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
+    <string name="zen_mode_bypassing_apps_title">Overrides Do Not Disturb</string>
+
+    <!-- [CHAR LIMIT=80] Zen mode settings: Allow apps to bypass DND -->
+    <plurals name="zen_mode_bypassing_apps_subtext">
+        <item quantity="zero">No apps can override Do Not Disturb</item>
+        <item quantity="one">1 app can override Do Not Disturb</item>
+        <item quantity="other"><xliff:g id="number" example="2">%1$d</xliff:g> apps can override Do Not Disturb</item>
+    </plurals>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) -->
     <string name="zen_mode_events_list">events</string>
-
-    <!-- [CHAR LIMIT=70] Zen mode settings: Allow events toggle title -->
-    <string name="zen_mode_events_title">Allow events</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: All callers summary -->
     <string name="zen_mode_all_callers">anyone</string>
@@ -8380,9 +8417,6 @@
 
     <!-- Explanation that the app that will NEVER be launched to open web links to domains that it understands -->
     <string name="app_link_open_never">Don&#8217;t open in this app</string>
-
-    <!-- Fingerprint hint message when finger was not recognized.-->
-    <string name="fingerprint_not_recognized">Not recognized</string>
 
     <!-- Title for Default Apps settings [CHAR LIMIT=30] -->
     <string name="default_apps_title">Default</string>
@@ -8930,6 +8964,10 @@
     <string name="display_summary">Sleep after <xliff:g id="timeout_description" example="10 minutes">%1$s</xliff:g> of inactivity</string>
     <!-- Summary for Display settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="display_dashboard_summary">Wallpaper, sleep, font size</string>
+
+    <!-- Summary for Display settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="display_dashboard_nowallpaper_summary">Sleep, font size</string>
+
     <!-- Example summary of display used in Setup Wizard preview screen [CHAR LIMIT=NONE] -->
     <string name="display_summary_example">Sleep after 10 minutes of inactivity</string>
 
@@ -8941,12 +8979,6 @@
 
     <!-- Summary of payment screen [CHAR LIMIT=NONE] -->
     <string name="payment_summary"><xliff:g id="app_name" example="Payment App">%1$s</xliff:g> is default</string>
-
-    <!-- Summary of location on screen [CHAR LIMIT=NONE] -->
-    <string name="location_on_summary">On</string>
-
-    <!-- Location off [CHAR LIMIT=NONE] -->
-    <string name="location_off_summary">Off</string>
 
     <!-- Backup disabled summary [CHAR LIMIT=NONE] -->
     <string name="backup_disabled">Back up disabled</string>
@@ -9979,14 +10011,12 @@
     <!-- UI debug setting: ANGLE enabled app has been set [CHAR LIMIT=NONE] -->
     <string name="angle_enabled_app_set">ANGLE enabled application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
 
-    <!-- Title for Directory Access settings -->
-    <string name="directory_access">Directory access</string>
-    <!-- Keywords for Directory Access settings -->
-    <string name="keywords_directory_access">directory access</string>
-
-    <!-- String used to describe the name of a directory in a volume; it must
-         show both names, with the directory name wrapped in parenthesis -->
-    <string name="directory_on_volume"><xliff:g id="volume" example="SD Card">%1$s</xliff:g> (<xliff:g id="directory" example="Movies">%2$s</xliff:g>)</string>
+    <!-- UI debug setting: select an app to use updated graphics driver [CHAR LIMIT=100] -->
+    <string name="updated_gfx_driver_dev_opt_in_app">Select app to use updated graphics driver</string>
+    <!-- UI debug setting: no app selected to use updated GPU driver [CHAR LIMIT=100] -->
+    <string name="updated_gfx_driver_dev_opt_in_app_not_set">No selected app to use updated graphics driver</string>
+    <!-- UI debug setting: app selected to use updated graphics driver [CHAR LIMIT=NONE] -->
+    <string name="updated_gfx_driver_dev_opt_in_app_set">Opt in application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
 
     <!-- Slices Strings -->
 
@@ -10024,11 +10054,6 @@
     <string name="my_device_info_account_preference_title">Account</string>
     <!-- Title for preference showing the name of the device. [CHAR LIMIT=60]-->
     <string name="my_device_info_device_name_preference_title">Device name</string>
-
-    <!-- Settings item title for automatic Bluetooth on while driving preference [CHAR LIMIT=35] -->
-    <string name="bluetooth_on_while_driving_pref">Use Bluetooth when driving</string>
-    <!-- Settings item summary for automatic Bluetooth on while driving preference [CHAR LIMIT=100] -->
-    <string name="bluetooth_on_while_driving_summary">Turn on Bluetooth automatically when driving</string>
 
     <!-- Title for Wifi Access settings [CHAR LIMIT=35] -->
     <string name="change_wifi_state_title">Wi-Fi control</string>
@@ -10075,7 +10100,7 @@
     <!-- Title for prevent ringing gesture screen -->
     <string name="gesture_prevent_ringing_screen_title">Prevent ringing</string>
     <!-- Title for prevent ringing setting -->
-    <string name="gesture_prevent_ringing_title">Press Power &amp; Volume Up together</string>
+    <string name="gesture_prevent_ringing_title">Press Power &amp; Volume Up together to</string>
     <!-- Title for prevent ringing setting -->
     <string name="gesture_prevent_ringing_sound_title">Shortcut to prevent ringing</string>
     <!-- Option for prevent ringing setting -->
@@ -10099,12 +10124,6 @@
 
     <!-- Title for Connected device shortcut [CHAR LIMIT=30] -->
     <string name="devices_title">Devices</string>
-
-    <!-- UI debug setting: Enable High Refresh Rate virtual panel [CHAR LIMIT=25] -->
-    <string name="high_frequency_display_device_title">High Frequency Panel</string>
-
-    <!-- UI debug setting: Enable High Refresh Rate virtual panel [CHAR LIMIT=50] -->
-    <string name="high_frequency_display_device_summary">Enable Virtual High Frequency Panel</string>
 
     <!-- Homepage bottom menu. Title for display all Settings [CHAR LIMIT=30] -->
     <string name="homepage_all_settings">All Settings</string>
@@ -10208,9 +10227,6 @@
     <!-- Text for Network global [CHAR LIMIT=NONE] -->
     <string name="network_global">Global</string>
 
-    <!-- Configuration setting for world mode Format is <true;GID if any to be checked> [CHAR LIMIT=NONE] -->
-    <string translatable="false" name="config_world_mode"/>
-
     <!-- Available networks screen title/heading [CHAR LIMIT=NONE] -->
     <string name="label_available">Available networks</string>
     <!-- Mobile network settings screen, toast when searching for available networks [CHAR LIMIT=NONE] -->
@@ -10281,6 +10297,8 @@
     <string name="mobile_data_usage_title">App data usage</string>
     <!-- Summary to show the current network mode is invalid. [CHAR LIMIT=NONE]-->
     <string name="mobile_network_mode_error">Invalid Network Mode <xliff:g id="networkModeId" example="0">%1$d</xliff:g>. Ignore.</string>
+    <!-- Title for Apn settings in mobile network settings [CHAR LIMIT=60] -->
+    <string name="mobile_network_apn_title">Access Point Names</string>
 
     <!-- Available networks screen, summary when button disallowed due to permanent automatic mode [CHAR LIMIT=NONE] -->
     <string name="manual_mode_disallowed_summary">Unavailable when connected to <xliff:g id="carrier" example="verizon">%1$s</xliff:g></string>
@@ -10294,4 +10312,49 @@
 
     <!-- Used for EmergencyInfoSlice slice helper class -->
     <string name="emergency_info_contextual_card_summary" translatable="false">Medical info, emergency contacts</string>
+
+    <!-- See more items in contextual homepage [CHAR LIMIT=30]-->
+    <string name="see_more">See more</string>
+    <!-- See less items in contextual homepage [CHAR LIMIT=30]-->
+    <string name="see_less">See less</string>
+
+    <!-- Title for Network connection request Dialog [CHAR LIMIT=30] -->
+    <string name="network_connection_request_dialog_title">Choose device</string>
+    <!-- Message for Network connection timeout Dialog [CHAR LIMIT=NONE] -->
+    <string name="network_connection_timeout_dialog_message">No devices found. Make sure the device is turned on and available to connect.</string>
+    <!-- OK button for Network connection timeout Dialog [CHAR LIMIT=30] -->
+    <string name="network_connection_timeout_dialog_ok">Scan again</string>
+
+    <!-- Summary for connected devices count in connected device slice. [CHAR LIMIT=NONE] -->
+    <plurals name="show_connected_devices">
+        <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> device connected</item>
+        <item quantity="other"><xliff:g id="number_device_count">%1$d</xliff:g> devices connected</item>
+    </plurals>
+    <!-- Title for no connected devices in connected device slice. [CHAR LIMIT=NONE] -->
+    <string name="no_connected_devices">No connected devices</string>
+
+    <!-- UI debug setting: force desktop mode [CHAR LIMIT=50] -->
+    <string name="force_desktop_mode">Force desktop mode</string>
+    <!-- UI debug setting: force desktop mode summary [CHAR LIMIT=NONE] -->
+    <string name="force_desktop_mode_summary">Force experimental desktop mode on secondary displays</string>
+
+    <!-- UI debug setting: Force enable "smart dark" UI rendering feature [CHAR LIMIT=25] -->
+    <string name="hwui_force_dark_title">Force-enable SmartDark</string>
+    <!-- UI debug setting: Force enable "smart dark" UI rendering feature summary [CHAR LIMIT=50] -->
+    <string name="hwui_force_dark_summary">Forces the SmartDark feature to be always-on</string>
+
+    <!-- Title for the top level Privacy Settings [CHAR LIMIT=30]-->
+    <string name="privacy_dashboard_title">Privacy</string>
+    <!-- Summary for the top level Privacy Settings [CHAR LIMIT=NONE]-->
+    <string name="privacy_dashboard_summary">Permission, permission usage</string>
+
+    <!-- Label for button in contextual card for users to remove the card [CHAR LIMIT=30] -->
+    <string name="contextual_card_dismiss_remove">Remove</string>
+    <!-- Label for button in contextual card for users to keep the card [CHAR LIMIT=30] -->
+    <string name="contextual_card_dismiss_keep">Keep</string>
+    <!-- String for contextual card dismissal [CHAR LIMIT=NONE] -->
+    <string name="contextual_card_dismiss_confirm_message">Remove this suggestion?</string>
+
+    <!-- Summary for low storage slice. [CHAR LIMIT=NONE] -->
+    <string name="low_storage_summary">Storage is low. <xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space" example="32GB">%2$s</xliff:g> free</string>
 </resources>
