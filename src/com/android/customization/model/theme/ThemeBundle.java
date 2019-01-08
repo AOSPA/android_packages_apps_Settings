@@ -39,6 +39,8 @@ import java.util.List;
  */
 public class ThemeBundle implements CustomizationOption {
 
+    static final String DEFAULT_PACKAGE = "DEFAULT_PACKAGE";
+
     private final String mTitle;
     private final PreviewInfo mPreviewInfo;
 

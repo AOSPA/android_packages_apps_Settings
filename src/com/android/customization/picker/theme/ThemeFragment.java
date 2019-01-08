@@ -102,6 +102,7 @@ public class ThemeFragment extends ToolbarFragment {
             if (mSelectedTheme == null) {
                 mSelectedTheme = options.get(0);
             }
+            mOptionsController.setSelectedOption(mSelectedTheme);
         });
         createAdapter();
     }
