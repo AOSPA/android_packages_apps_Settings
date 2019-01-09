@@ -44,7 +44,6 @@ import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.display.BatteryPercentagePreferenceController;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
@@ -77,6 +76,8 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     private static final String KEY_SCREEN_USAGE = "screen_usage";
     private static final String KEY_TIME_SINCE_LAST_FULL_CHARGE = "last_full_charge";
     private static final String KEY_BATTERY_SAVER_SUMMARY = "battery_saver_summary";
+    private static final String KEY_BATTERY_STYLE = "battery_style";
+    private static final String KEY_BATTERY_PERCENTAGE = "battery_percentage";
 
     @VisibleForTesting
     static final int BATTERY_INFO_LOADER = 1;
@@ -248,7 +249,9 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                 KEY_BATTERY_TIP, (SettingsActivity) getActivity(), this /* fragment */, this /*
                 BatteryTipListener */);
         controllers.add(mBatteryTipPreferenceController);
-        controllers.add(new BatteryPercentagePreferenceController(context));
+        //controllers.add(new BatteryPercentagePreferenceController(context));
+        controllers.add(new BatteryStylePreferenceController(context, KEY_BATTERY_STYLE));
+        controllers.add(new BatteryPercentagePreferenceController(context, KEY_BATTERY_PERCENTAGE));
         return controllers;
     }
 
@@ -474,7 +477,7 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                     List<String> niks = super.getNonIndexableKeys(context);
 
                     final BatteryPercentagePreferenceController controller =
-                            new BatteryPercentagePreferenceController(context);
+                            new BatteryPercentagePreferenceController(context, KEY_BATTERY_PERCENTAGE);
                     if (!controller.isAvailable()) {
                         niks.add(controller.getPreferenceKey());
                     }
