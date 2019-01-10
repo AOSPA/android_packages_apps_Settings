@@ -16,8 +16,13 @@
 package com.android.customization.model.theme;
 
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.PathShape;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +30,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.PathParser;
 
 import com.android.customization.model.CustomizationOption;
 import com.android.wallpaper.R;
@@ -56,10 +62,24 @@ public class ThemeBundle implements CustomizationOption {
 
     @Override
     public void bindThumbnailTile(View view) {
+        Resources res = view.getContext().getResources();
+
         ((ImageView) view.findViewById(R.id.theme_option_color)).setImageTintList(
                 ColorStateList.valueOf(mPreviewInfo.colorAccentLight));
         ((TextView) view.findViewById(R.id.theme_option_font)).setTypeface(
                 mPreviewInfo.headlineFontFamily);
+        if (mPreviewInfo.shapeDrawable != null) {
+            ((ShapeDrawable)mPreviewInfo.shapeDrawable).getPaint().setColor(res.getColor(
+                    R.color.shape_thumbnail_color, null));
+            ((ImageView) view.findViewById(R.id.theme_option_shape)).setImageDrawable(
+                    mPreviewInfo.shapeDrawable);
+        }
+        if (!mPreviewInfo.icons.isEmpty()) {
+            Drawable icon = mPreviewInfo.icons.get(0).mutate();
+            icon.setTint(res.getColor(R.color.icon_thumbnail_color, null));
+            ((ImageView) view.findViewById(R.id.theme_option_icon)).setImageDrawable(
+                    icon);
+        }
     }
 
     @Override
@@ -82,24 +102,25 @@ public class ThemeBundle implements CustomizationOption {
         @ColorInt public final int colorAccentLight;
         @ColorInt public final int colorAccentDark;
         public final List<Drawable> icons;
-        public final String shapePath;
+        public final Drawable shapeDrawable;
         @DrawableRes public final int wallpaperDrawableRes;
 
         public PreviewInfo(Typeface bodyFontFamily, Typeface headlineFontFamily,
                 int colorAccentLight,
-                int colorAccentDark, List<Drawable> icons, String shapePath,
+                int colorAccentDark, List<Drawable> icons, Drawable shapeDrawable,
                 int wallpaperDrawableRes) {
             this.bodyFontFamily = bodyFontFamily;
             this.headlineFontFamily = headlineFontFamily;
             this.colorAccentLight = colorAccentLight;
             this.colorAccentDark = colorAccentDark;
             this.icons = icons;
-            this.shapePath = shapePath;
+            this.shapeDrawable = shapeDrawable;
             this.wallpaperDrawableRes = wallpaperDrawableRes;
         }
     }
 
     public static class Builder {
+        private static final float PATH_SIZE = 100f;
         private String mTitle;
         private Typeface mBodyFontFamily;
         private Typeface mHeadlineFontFamily;
@@ -115,9 +136,17 @@ public class ThemeBundle implements CustomizationOption {
         private String mShapePackage;
 
         public ThemeBundle build() {
+            ShapeDrawable shapeDrawable = null;
+            if (!TextUtils.isEmpty(mShapePath)) {
+                PathShape shape = new PathShape(PathParser.createPathFromPathData(mShapePath),
+                                PATH_SIZE, PATH_SIZE);
+                shapeDrawable = new ShapeDrawable(shape);
+                shapeDrawable.setIntrinsicHeight((int) PATH_SIZE);
+                shapeDrawable.setIntrinsicWidth((int) PATH_SIZE);
+            }
             return new ThemeBundle(mTitle,
                     new PreviewInfo(mBodyFontFamily, mHeadlineFontFamily, mColorAccentLight,
-                            mColorAccentDark, mIcons, mShapePath, mWallpaperDrawableResId));
+                            mColorAccentDark, mIcons, shapeDrawable, mWallpaperDrawableResId));
         }
 
         public Builder setTitle(String title) {
@@ -152,6 +181,26 @@ public class ThemeBundle implements CustomizationOption {
 
         public Builder setColorAccentDark(@ColorInt int colorAccentDark) {
             mColorAccentDark = colorAccentDark;
+            return this;
+        }
+
+        public Builder addIcon(Drawable icon) {
+            mIcons.add(icon);
+            return this;
+        }
+
+        public Builder addIconPackage(String packageName) {
+            mIconPackages.add(packageName);
+            return this;
+        }
+
+        public Builder setShapePackage(String packageName) {
+            mShapePackage = packageName;
+            return this;
+        }
+
+        public Builder setShapePath(String path) {
+            mShapePath = path;
             return this;
         }
     }

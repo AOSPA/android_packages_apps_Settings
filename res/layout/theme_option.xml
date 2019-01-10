@@ -36,7 +36,7 @@
         android:background="@drawable/option_border">
         <TextView
             android:id="@+id/theme_option_font"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/theme_option_sample_width"
             android:layout_height="@dimen/theme_option_sample_height"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -45,22 +45,26 @@
             android:text="@string/theme_font_example"/>
         <ImageView
             android:id="@+id/theme_option_shape"
-            android:layout_width="@dimen/theme_option_sample_right_width"
+            android:layout_width="@dimen/theme_option_sample_width"
             android:layout_height="@dimen/theme_option_sample_height"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/theme_option_sample_padding"/>
         <ImageView
             android:id="@+id/theme_option_color"
-            android:layout_width="@dimen/theme_option_sample_left_width"
+            android:layout_width="@dimen/theme_option_sample_width"
             android:layout_height="@dimen/theme_option_sample_height"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
+            android:padding="@dimen/theme_option_sample_padding"
             android:src="@drawable/option_color"/>
         <ImageView
             android:id="@+id/theme_option_icon"
-            android:layout_width="@dimen/theme_option_sample_right_width"
+            android:layout_width="@dimen/theme_option_sample_width"
             android:layout_height="@dimen/theme_option_sample_height"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/theme_option_sample_padding"/>
     </RelativeLayout>
 </LinearLayout>
