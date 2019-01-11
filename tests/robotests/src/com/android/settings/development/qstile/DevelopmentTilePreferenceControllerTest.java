@@ -18,7 +18,8 @@ package com.android.settings.development.qstile;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,21 +39,22 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+import java.util.Arrays;
+
+@RunWith(RobolectricTestRunner.class)
 public class DevelopmentTilePreferenceControllerTest {
 
     private static final String SERVICE_INFO_NAME = "TestName";
@@ -83,7 +85,6 @@ public class DevelopmentTilePreferenceControllerTest {
     }
 
     @Test
-    @Ignore("b/119829673")
     public void display_hasTileService_shouldDisplay() {
         final Intent tileProbe = new Intent(TileService.ACTION_QS_TILE)
                 .setPackage(mContext.getPackageName());
@@ -92,11 +93,11 @@ public class DevelopmentTilePreferenceControllerTest {
         info.serviceInfo.name = "abc";
         info.serviceInfo.icon = R.drawable.ic_settings_24dp;
         info.serviceInfo.packageName = mContext.getPackageName();
-        mShadowPackageManager.addResolveInfoForIntent(tileProbe, info);
+        mShadowPackageManager.setResolveInfosForIntent(tileProbe, Arrays.asList(info));
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen).addPreference(any(Preference.class));
+        verify(mScreen, atLeastOnce()).addPreference(any(Preference.class));
     }
 
     @Test

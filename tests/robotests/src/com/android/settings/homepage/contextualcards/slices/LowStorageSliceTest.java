@@ -16,18 +16,18 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import static android.app.slice.Slice.HINT_ERROR;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
 import androidx.slice.Slice;
-import androidx.slice.SliceItem;
+import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.SliceTester;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
@@ -35,15 +35,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
-import java.util.List;
-
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class LowStorageSliceTest {
 
     private Context mContext;
@@ -66,23 +65,44 @@ public class LowStorageSliceTest {
 
     @Test
     @Config(shadows = ShadowPrivateStorageInfo.class)
-    public void getSlice_hasLowStorage_shouldBeCorrectSliceContent() {
+    public void getSlice_lowStorage_shouldHaveStorageFreeTitle() {
         ShadowPrivateStorageInfo.setPrivateStorageInfo(new PrivateStorageInfo(10L, 100L));
 
         final Slice slice = mLowStorageSlice.getSlice();
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.storage_menu_free));
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.storage_menu_free));
     }
 
     @Test
     @Config(shadows = ShadowPrivateStorageInfo.class)
-    public void getSlice_hasNoLowStorage_shouldBeNull() {
+    public void getSlice_lowStorage_shouldNotHaveErrorHint() {
+        ShadowPrivateStorageInfo.setPrivateStorageInfo(new PrivateStorageInfo(10L, 100L));
+
+        final Slice slice = mLowStorageSlice.getSlice();
+
+        assertThat(slice.hasHint(HINT_ERROR)).isFalse();
+    }
+
+    @Test
+    @Config(shadows = ShadowPrivateStorageInfo.class)
+    public void getSlice_storageFree_shouldHaveStorageSettingsTitle() {
         ShadowPrivateStorageInfo.setPrivateStorageInfo(new PrivateStorageInfo(100L, 100L));
 
         final Slice slice = mLowStorageSlice.getSlice();
 
-        assertThat(slice).isNull();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.storage_settings));
+    }
+
+    @Test
+    @Config(shadows = ShadowPrivateStorageInfo.class)
+    public void getSlice_storageFree_shouldHaveErrorHint() {
+        ShadowPrivateStorageInfo.setPrivateStorageInfo(new PrivateStorageInfo(100L, 100L));
+
+        final Slice slice = mLowStorageSlice.getSlice();
+
+        assertThat(slice.hasHint(HINT_ERROR)).isTrue();
     }
 
     @Implements(PrivateStorageInfo.class)
@@ -101,7 +121,7 @@ public class LowStorageSliceTest {
             return sPrivateStorageInfo;
         }
 
-        public static void setPrivateStorageInfo(
+        private static void setPrivateStorageInfo(
                 PrivateStorageInfo privateStorageInfo) {
             sPrivateStorageInfo = privateStorageInfo;
         }

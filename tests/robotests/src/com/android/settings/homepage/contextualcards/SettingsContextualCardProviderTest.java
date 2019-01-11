@@ -29,7 +29,6 @@ import android.os.Bundle;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCard;
 import com.android.settings.intelligence.ContextualCardProto.ContextualCardList;
 import com.android.settings.slices.CustomSliceRegistry;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import com.google.android.settings.intelligence.libs.contextualcards.ContextualCardProvider;
 
@@ -39,9 +38,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SettingsContextualCardProviderTest {
 
     @Mock
@@ -70,11 +70,12 @@ public class SettingsContextualCardProviderTest {
     }
 
     @Test
-    public void getContextualCards_wifiSlice_shouldGetCorrectCategory() {
+    public void getContextualCards_wifiSlice_shouldGetImportantCategory() {
         final ContextualCardList cards = mProvider.getContextualCards();
         ContextualCard wifiCard = null;
         for (ContextualCard card : cards.getCardList()) {
-            if (card.getSliceUri().equals(CustomSliceRegistry.WIFI_SLICE_URI.toString())) {
+            if (card.getSliceUri().equals(
+                    CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString())) {
                 wifiCard = card;
             }
         }

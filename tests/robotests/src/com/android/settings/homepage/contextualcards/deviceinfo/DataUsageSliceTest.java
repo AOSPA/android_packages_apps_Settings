@@ -33,19 +33,19 @@ import androidx.slice.core.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.SliceTester;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowDataUsageUtils.class)
 public class DataUsageSliceTest {
     private static final String DATA_USAGE_TITLE = "Data usage";
@@ -69,24 +69,31 @@ public class DataUsageSliceTest {
         ShadowDataUsageUtils.HAS_SIM = true;
         doReturn(DATA_USAGE_TITLE).when(mDataUsageSlice).getDataUsageText(any());
         doReturn(DATA_USAGE_SUMMARY).when(mDataUsageSlice).getCycleTime(any());
+
         final Slice slice = mDataUsageSlice.getSlice();
+
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(
+                mContext.getString(R.string.data_usage_summary_title));
+
         final SliceAction primaryAction = metadata.getPrimaryAction();
         final IconCompat expectedIcon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_data_usage);
         assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedIcon.toString());
-
-        final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.data_usage_summary_title));
     }
 
     @Test
     public void getSlice_hasNoSim_shouldShowNoSimCard() {
         ShadowDataUsageUtils.HAS_SIM = false;
-        final Slice slice = mDataUsageSlice.getSlice();
-        final List<SliceItem> sliceItems = slice.getItems();
 
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.data_usage_summary_title));
-        SliceTester.assertTitle(sliceItems, mContext.getString(R.string.no_sim_card));
+        final Slice slice = mDataUsageSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(
+                mContext.getString(R.string.data_usage_summary_title));
+
+        final List<SliceItem> sliceItems = slice.getItems();
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems,
+                mContext.getString(R.string.no_sim_card));
     }
 }

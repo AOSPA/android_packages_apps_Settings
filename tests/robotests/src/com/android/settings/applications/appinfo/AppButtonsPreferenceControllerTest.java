@@ -18,10 +18,11 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -42,18 +43,17 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
+import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.widget.ActionButtonPreference;
-import com.android.settings.widget.ActionButtonPreferenceTest;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.ActionButtonsPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -63,9 +63,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.stubbing.Answer;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AppButtonsPreferenceControllerTest {
 
     private static final String PACKAGE_NAME = "com.android.settings";
@@ -99,9 +100,8 @@ public class AppButtonsPreferenceControllerTest {
     @Mock
     private PackageInfo mPackageInfo;
 
-    private ActionButtonPreference mButtonPrefs;
-
     private Intent mUninstallIntent;
+    private ActionButtonsPreference mButtonPrefs;
     private AppButtonsPreferenceController mController;
 
     @Before
@@ -127,7 +127,7 @@ public class AppButtonsPreferenceControllerTest {
         mPackageInfo.packageName = PACKAGE_NAME;
         mPackageInfo.applicationInfo = mAppInfo;
 
-        mButtonPrefs = ActionButtonPreferenceTest.createMock();
+        mButtonPrefs = createMock();
         mController.mButtonsPref = mButtonPrefs;
         mController.mPackageInfo = mPackageInfo;
 
@@ -175,6 +175,22 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
+    public void updateOpenButton_noLaunchIntent_buttonShouldBeDisable() {
+        mController.updateOpenButton();
+
+        verify(mButtonPrefs).setButton1Visible(false);
+    }
+
+    @Test
+    public void updateOpenButton_haveLaunchIntent_buttonShouldBeEnable() {
+        doReturn(new Intent()).when(mPackageManger).getLaunchIntentForPackage(anyString());
+
+        mController.updateOpenButton();
+
+        verify(mButtonPrefs).setButton1Visible(true);
+    }
+
+    @Test
     public void updateUninstallButton_isSystemApp_handleAsDisableableButton() {
         doReturn(false).when(mController).handleDisableable();
         mAppInfo.flags |= ApplicationInfo.FLAG_SYSTEM;
@@ -182,11 +198,11 @@ public class AppButtonsPreferenceControllerTest {
         mController.updateUninstallButton();
 
         verify(mController).handleDisableable();
-        verify(mButtonPrefs).setButton1Enabled(false);
+        verify(mButtonPrefs).setButton2Enabled(false);
     }
 
     @Test
-    public void isAvailable_nonInstantApp() throws Exception {
+    public void isAvailable_nonInstantApp() {
         mController.mAppEntry = mAppEntry;
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 new InstantAppDataProvider() {
@@ -199,7 +215,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_instantApp() throws Exception {
+    public void isAvailable_instantApp() {
         mController.mAppEntry = mAppEntry;
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 new InstantAppDataProvider() {
@@ -220,7 +236,7 @@ public class AppButtonsPreferenceControllerTest {
         mController.updateUninstallButton();
 
         verify(mController).handleDisableable();
-        verify(mButtonPrefs).setButton1Enabled(false);
+        verify(mButtonPrefs).setButton2Enabled(false);
     }
 
     @Test
@@ -229,7 +245,7 @@ public class AppButtonsPreferenceControllerTest {
 
         mController.updateUninstallButton();
 
-        verify(mButtonPrefs).setButton1Enabled(false);
+        verify(mButtonPrefs).setButton2Enabled(false);
     }
 
     @Test
@@ -239,7 +255,7 @@ public class AppButtonsPreferenceControllerTest {
 
         mController.updateUninstallButton();
 
-        verify(mButtonPrefs).setButton1Enabled(false);
+        verify(mButtonPrefs).setButton2Enabled(false);
     }
 
     @Test
@@ -248,7 +264,7 @@ public class AppButtonsPreferenceControllerTest {
 
         mController.updateUninstallButton();
 
-        verify(mButtonPrefs).setButton1Enabled(false);
+        verify(mButtonPrefs).setButton2Enabled(false);
     }
 
     @Test
@@ -258,7 +274,7 @@ public class AppButtonsPreferenceControllerTest {
 
         mController.updateUninstallButton();
 
-        verify(mButtonPrefs).setButton1Enabled(false);
+        verify(mButtonPrefs).setButton2Enabled(false);
     }
 
     @Test
@@ -308,7 +324,7 @@ public class AppButtonsPreferenceControllerTest {
 
         final boolean controllable = mController.handleDisableable();
 
-        verify(mButtonPrefs).setButton1Text(R.string.uninstall_text);
+        verify(mButtonPrefs).setButton2Text(R.string.uninstall_text);
         assertThat(controllable).isFalse();
     }
 
@@ -320,7 +336,7 @@ public class AppButtonsPreferenceControllerTest {
 
         final boolean controllable = mController.handleDisableable();
 
-        verify(mButtonPrefs).setButton1Text(R.string.uninstall_text);
+        verify(mButtonPrefs).setButton2Text(R.string.uninstall_text);
         assertThat(controllable).isTrue();
     }
 
@@ -332,7 +348,7 @@ public class AppButtonsPreferenceControllerTest {
 
         final boolean controllable = mController.handleDisableable();
 
-        verify(mButtonPrefs).setButton1Text(R.string.install_text);
+        verify(mButtonPrefs).setButton2Text(R.string.install_text);
         assertThat(controllable).isTrue();
     }
 
@@ -355,7 +371,8 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     public void onPackageListChanged_available_shouldRefreshUi() {
-        doReturn(mController.AVAILABLE).when(mController).getAvailabilityStatus();
+        doReturn(AppButtonsPreferenceController.AVAILABLE)
+            .when(mController).getAvailabilityStatus();
         doReturn(true).when(mController).refreshUi();
 
         mController.onPackageListChanged();
@@ -365,7 +382,8 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     public void onPackageListChanged_notAvailable_shouldNotRefreshUiAndNoCrash() {
-        doReturn(mController.DISABLED_FOR_USER).when(mController).getAvailabilityStatus();
+        doReturn(AppButtonsPreferenceController.DISABLED_FOR_USER)
+            .when(mController).getAvailabilityStatus();
 
         mController.onPackageListChanged();
 
@@ -389,5 +407,16 @@ public class AppButtonsPreferenceControllerTest {
         public int getMetricsCategory() {
             return SettingsEnums.PAGE_UNKNOWN;
         }
+    }
+
+    private ActionButtonsPreference createMock() {
+        final ActionButtonsPreference pref = mock(ActionButtonsPreference.class);
+        when(pref.setButton2Text(anyInt())).thenReturn(pref);
+        when(pref.setButton2Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton2Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton2Visible(anyBoolean())).thenReturn(pref);
+        when(pref.setButton2OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+
+        return pref;
     }
 }

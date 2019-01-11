@@ -32,7 +32,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ControllerRendererPool;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,9 +39,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ConditionContextualCardRendererTest {
 
     @Mock
@@ -58,7 +58,7 @@ public class ConditionContextualCardRendererTest {
         final ActivityController<Activity> activityController = Robolectric.buildActivity(
                 Activity.class);
         mActivity = activityController.get();
-        mActivity.setTheme(R.style.Theme_AppCompat);
+        mActivity.setTheme(R.style.Theme_Settings_Home);
         activityController.create();
         mRenderer = new ConditionContextualCardRenderer(mActivity, mControllerRendererPool);
     }

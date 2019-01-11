@@ -47,8 +47,8 @@ public class InternetConnectivityPanel implements PanelContent {
     }
 
     @Override
-    public String getTitle() {
-        return (String) mContext.getText(R.string.internet_connectivity_panel_title);
+    public CharSequence getTitle() {
+        return mContext.getText(R.string.internet_connectivity_panel_title);
     }
 
     @Override

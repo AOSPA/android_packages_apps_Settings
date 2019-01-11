@@ -30,8 +30,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -39,6 +41,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
@@ -46,7 +49,7 @@ import org.robolectric.util.ReflectionHelpers;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModePriorityCallsPreferenceControllerTest {
 
     private ZenModePriorityCallsPreferenceController mController;
@@ -86,16 +89,15 @@ public class ZenModePriorityCallsPreferenceControllerTest {
 
         when(mBackend.getPriorityCallSenders())
                 .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_STARRED);
-        when(mBackend.getContactsSummary(ZenModeBackend.SOURCE_NONE))
-                .thenCallRealMethod();
+        when(mBackend.getAlarmsTotalSilenceCallsMessagesSummary(
+                NotificationManager.Policy.PRIORITY_CATEGORY_CALLS)).thenCallRealMethod();
         when(mBackend.getContactsSummary(NotificationManager.Policy.PRIORITY_CATEGORY_CALLS))
                 .thenCallRealMethod();
 
         mController = new ZenModePriorityCallsPreferenceController(mContext, mock(Lifecycle.class));
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mockPref);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -110,7 +112,7 @@ public class ZenModePriorityCallsPreferenceControllerTest {
         mController.updateState(mockPref);
 
         verify(mockPref).setEnabled(false);
-        verify(mockPref).setSummary(R.string.zen_mode_from_none);
+        verify(mockPref).setSummary(R.string.zen_mode_from_none_calls);
     }
 
     @Test
@@ -121,7 +123,7 @@ public class ZenModePriorityCallsPreferenceControllerTest {
         mController.updateState(mockPref);
 
         verify(mockPref).setEnabled(false);
-        verify(mockPref).setSummary(R.string.zen_mode_from_none);
+        verify(mockPref).setSummary(R.string.zen_mode_from_none_calls);
     }
 
     @Test

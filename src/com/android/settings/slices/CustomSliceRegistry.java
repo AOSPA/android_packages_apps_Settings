@@ -72,20 +72,32 @@ public class CustomSliceRegistry {
             .build();
 
     /**
-     * Backing Uri for Connected device Slice.
+     * Backing Uri for Bluetooth devices Slice.
      */
-    public static final Uri CONNECTED_DEVICE_SLICE_URI = new Uri.Builder()
+    public static final Uri BLUETOOTH_DEVICES_SLICE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("connected_device")
+            .appendPath("bluetooth_devices")
             .build();
+
+    /**
+     * Backing Uri for the Wifi Slice.
+     */
+    public static final Uri CONTEXTUAL_WIFI_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSlicesContract.AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("contextual_wifi")
+            .build();
+
     /**
      * Backing Uri for the Data usage Slice.
      */
     public static final Uri DATA_USAGE_SLICE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("data_usage_card")
             .build();
     /**
@@ -94,6 +106,7 @@ public class CustomSliceRegistry {
     public static final Uri DEVICE_INFO_SLICE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
             .appendPath("device_info_card")
             .build();
     /**
@@ -102,6 +115,7 @@ public class CustomSliceRegistry {
     public static final Uri EMERGENCY_INFO_SLICE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
             .appendPath("emergency_info_card")
             .build();
     /**
@@ -110,6 +124,7 @@ public class CustomSliceRegistry {
     public static final Uri ENHANCED_4G_SLICE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("enhanced_4g_lte")
             .build();
     /**
@@ -145,14 +160,53 @@ public class CustomSliceRegistry {
     public static final Uri STORAGE_SLICE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
             .appendPath("storage_card")
             .build();
+    /**
+     * Full {@link Uri} for the Alarm volume Slice.
+     */
+    public static final Uri VOLUME_ALARM_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("alarm_volume")
+            .build();
+    /**
+     * Full {@link Uri} for the Call Volume Slice.
+     */
+    public static final Uri VOLUME_CALL_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("call_volume")
+            .build();
+    /**
+     * Full {@link Uri} for the Media Volume Slice.
+     */
+    public static final Uri VOLUME_MEDIA_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("media_volume")
+            .build();
+    /**
+     * Full {@link Uri} for the Ringer volume Slice.
+     */
+    public static final Uri VOLUME_RINGER_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("ring_volume")
+            .build();
+
     /**
      * Full {@link Uri} for the Wifi Calling Slice.
      */
     public static final Uri WIFI_CALLING_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
             .appendPath(WifiCallingSliceHelper.PATH_WIFI_CALLING)
             .build();
     /**
@@ -161,6 +215,7 @@ public class CustomSliceRegistry {
     public static final Uri WIFI_CALLING_PREFERENCE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath(WifiCallingSliceHelper.PATH_WIFI_CALLING_PREFERENCE)
             .build();
     /**
@@ -172,6 +227,7 @@ public class CustomSliceRegistry {
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath(KEY_WIFI)
             .build();
+
     /**
      * Backing Uri for the Zen Mode Slice.
      */

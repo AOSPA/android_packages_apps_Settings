@@ -25,8 +25,15 @@
         android:selectable="false"
         settings:allowDividerBelow="true"/>
 
-    <com.android.settings.widget.ActionButtonPreference
-        android:key="action_buttons" />
+    <com.android.settingslib.widget.ActionButtonsPreference
+        android:key="action_buttons"
+        settings:allowDividerBelow="true"/>
+
+    <com.android.settings.slices.SlicePreference
+        android:key="bt_device_slice"
+        settings:controller="com.android.settings.slices.SlicePreferenceController"
+        settings:allowDividerBelow="true"
+        settings:allowDividerAbove="true"/>
 
     <PreferenceCategory
         android:key="bluetooth_profiles"/>

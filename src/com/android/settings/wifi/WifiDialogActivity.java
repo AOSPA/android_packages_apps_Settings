@@ -30,12 +30,15 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.SetupWizardUtils;
 import com.android.settingslib.wifi.AccessPoint;
-import com.android.setupwizardlib.util.WizardManagerHelper;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialogListener,
         DialogInterface.OnDismissListener {
 
     private static final String TAG = "WifiDialogActivity";
+
+    public static final String KEY_ACCESS_POINT_STATE = "access_point_state";
 
     /**
      * Boolean extra indicating whether this activity should connect to an access point on the
@@ -45,9 +48,8 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
      */
     @VisibleForTesting
     static final String KEY_CONNECT_FOR_CALLER = "connect_for_caller";
-    static final String KEY_ACCESS_POINT_STATE = "access_point_state";
-    private static final String KEY_WIFI_CONFIGURATION = "wifi_configuration";
 
+    private static final String KEY_WIFI_CONFIGURATION = "wifi_configuration";
     private static final int RESULT_CONNECTED = RESULT_FIRST_USER;
     private static final int RESULT_FORGET = RESULT_FIRST_USER + 1;
 

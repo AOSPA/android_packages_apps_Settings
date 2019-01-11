@@ -14,7 +14,9 @@ include $(CLEAR_VARS)
 LOCAL_PACKAGE_NAME := Settings
 LOCAL_PRIVATE_PLATFORM_APIS := true
 LOCAL_CERTIFICATE := platform
+LOCAL_PRODUCT_MODULE := true
 LOCAL_PRIVILEGED_MODULE := true
+LOCAL_REQUIRED_MODULES := privapp_whitelist_com.android.settings
 LOCAL_MODULE_TAGS := optional
 LOCAL_USE_AAPT2 := true
 
@@ -30,6 +32,8 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     androidx.preference_preference \
     androidx.recyclerview_recyclerview \
     com.google.android.material_material \
+    setupcompat \
+    setupdesign
 
 LOCAL_JAVA_LIBRARIES := \
     telephony-common \
@@ -54,7 +58,6 @@ ifneq ($(INCREMENTAL_BUILDS),)
     LOCAL_JACK_FLAGS := --multi-dex native
 endif
 
-include frameworks/opt/setupwizard/library/common-gingerbread.mk
 include frameworks/base/packages/SettingsLib/common.mk
 include frameworks/base/packages/SettingsLib/search/common.mk
 

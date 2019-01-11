@@ -28,21 +28,24 @@ import android.widget.Button;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
+
+import com.google.android.setupcompat.PartnerCustomizationLayout;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowKeyguardManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowLockPatternUtils.class, ShadowUserManager.class})
 public class FingerprintSuggestionActivityTest {
 
@@ -62,7 +65,10 @@ public class FingerprintSuggestionActivityTest {
 
         mController.create().resume();
 
-        final Button cancelButton = mController.get().findViewById(R.id.fingerprint_cancel_button);
+        PartnerCustomizationLayout layout =
+                mController.get().findViewById(R.id.setup_wizard_layout);
+        final Button cancelButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
         assertThat(cancelButton.getText().toString()).isEqualTo("Cancel");
         assertThat(cancelButton.getVisibility()).named("Cancel visible").isEqualTo(View.VISIBLE);
         cancelButton.performClick();

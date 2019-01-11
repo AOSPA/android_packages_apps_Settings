@@ -68,7 +68,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ApnSettings extends RestrictedSettingsFragment {
+public class ApnSettings extends RestrictedSettingsFragment
+        implements Preference.OnPreferenceChangeListener {
     static final String TAG = "ApnSettings";
 
     public static final String EXTRA_POSITION = "position";
@@ -89,7 +90,7 @@ public class ApnSettings extends RestrictedSettingsFragment {
             Telephony.Carriers.TYPE,
             Telephony.Carriers.MVNO_TYPE,
             Telephony.Carriers.MVNO_MATCH_DATA,
-            Telephony.Carriers.EDITED,
+            Telephony.Carriers.EDITED_STATUS,
             Telephony.Carriers.BEARER,
             Telephony.Carriers.BEARER_BITMASK,
     };
@@ -303,7 +304,7 @@ public class ApnSettings extends RestrictedSettingsFragment {
     private void fillList() {
         final int subId = mSubscriptionInfo != null ? mSubscriptionInfo.getSubscriptionId()
                 : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        final Uri simApnUri = Uri.withAppendedPath(Telephony.Carriers.SIM_APN_LIST,
+        final Uri simApnUri = Uri.withAppendedPath(Telephony.Carriers.SIM_APN_URI,
                 String.valueOf(subId));
         StringBuilder where = new StringBuilder("NOT (type='ia' AND (apn=\"\" OR apn IS NULL)) AND "
                 + "user_visible!=0");
@@ -367,6 +368,7 @@ public class ApnSettings extends RestrictedSettingsFragment {
                 pref.setKey(key);
                 pref.setTitle(name);
                 pref.setPersistent(false);
+                pref.setOnPreferenceChangeListener(this);
                 pref.setSubId(subId);
                 if (mHidePresetApnDetails && edited == Telephony.Carriers.UNEDITED) {
                     pref.setHideDetails();
@@ -584,6 +586,7 @@ public class ApnSettings extends RestrictedSettingsFragment {
         startActivity(intent);
     }
 
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Log.d(TAG, "onPreferenceChange(): Preference - " + preference
                 + ", newValue - " + newValue + ", newValue type - "

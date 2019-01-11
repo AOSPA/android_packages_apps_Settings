@@ -18,8 +18,8 @@ package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.nullable;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -35,8 +35,10 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 
 import org.junit.Before;
@@ -44,6 +46,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
@@ -51,15 +54,13 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.preference.PreferenceScreen;
-
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowWifiManager.class})
 public class WifiTetherSettingsTest {
     private static final String[] WIFI_REGEXS = {"wifi_regexs"};
 
     private Context mContext;
+    private WifiTetherSettings mWifiTetherSettings;
 
     @Mock
     private ConnectivityManager mConnectivityManager;
@@ -75,6 +76,8 @@ public class WifiTetherSettingsTest {
                 .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
         doReturn(WIFI_REGEXS).when(mConnectivityManager).getTetherableWifiRegexs();
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+
+        mWifiTetherSettings = new WifiTetherSettings();
     }
 
     @Test
@@ -134,6 +137,15 @@ public class WifiTetherSettingsTest {
         settings.onStart();
 
         verify(screen).removeAll();
+    }
+
+    @Test
+    public void createPreferenceControllers_hasAutoOffPreference() {
+        assertThat(mWifiTetherSettings.createPreferenceControllers(mContext)
+                .stream()
+                .filter(controller -> controller instanceof WifiTetherAutoOffPreferenceController)
+                .count())
+                .isEqualTo(1);
     }
 
     private void setupIsTetherAvailable(boolean returnValue) {

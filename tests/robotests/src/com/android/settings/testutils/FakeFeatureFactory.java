@@ -15,7 +15,7 @@
  */
 package com.android.settings.testutils;
 
-import static org.mockito.Matchers.anyString;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,6 +23,7 @@ import android.content.Context;
 
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
@@ -64,6 +65,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final AssistGestureFeatureProvider assistGestureFeatureProvider;
     public final AccountFeatureProvider mAccountFeatureProvider;
     public final ContextualCardFeatureProvider mContextualCardFeatureProvider;
+    public final BluetoothFeatureProvider mBluetoothFeatureProvider;
 
     public PanelFeatureProvider panelFeatureProvider;
     public SlicesFeatureProvider slicesFeatureProvider;
@@ -108,6 +110,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mAccountFeatureProvider = mock(AccountFeatureProvider.class);
         mContextualCardFeatureProvider = mock(ContextualCardFeatureProvider.class);
         panelFeatureProvider = mock(PanelFeatureProvider.class);
+        mBluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
     }
 
     @Override
@@ -195,7 +198,13 @@ public class FakeFeatureFactory extends FeatureFactory {
         return panelFeatureProvider;
     }
 
-    public ContextualCardFeatureProvider getContextualCardFeatureProvider() {
+    @Override
+    public ContextualCardFeatureProvider getContextualCardFeatureProvider(Context context) {
         return mContextualCardFeatureProvider;
+    }
+
+    @Override
+    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
+        return mBluetoothFeatureProvider;
     }
 }

@@ -16,8 +16,11 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Build;
 
@@ -27,7 +30,6 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -35,16 +37,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class FirmwareVersionPreferenceControllerTest {
 
-    private final String KEY = "firmware_version";
+    private static final String KEY = "firmware_version";
 
     @Mock
     private Fragment mFragment;
@@ -106,6 +109,17 @@ public class FirmwareVersionPreferenceControllerTest {
     @Test
     public void isSliceable_shouldBeTrue() {
         assertThat(mController.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void copy_shouldCopyVersionNumberToClipboard() {
+        mController.copy();
+
+        final Context context = RuntimeEnvironment.application;
+        final ClipboardManager clipboard = (ClipboardManager) context.getSystemService(
+                CLIPBOARD_SERVICE);
+        final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
+        assertThat(data.toString()).isEqualTo(Build.VERSION.RELEASE);
     }
 
     @Implements(FirmwareVersionDialogFragment.class)

@@ -28,6 +28,8 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
+import com.android.settings.bluetooth.BluetoothFeatureProvider;
+import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl;
 import com.android.settings.core.instrumentation.SettingsMetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
@@ -78,6 +80,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private AccountFeatureProvider mAccountFeatureProvider;
     private PanelFeatureProvider mPanelFeatureProvider;
     private ContextualCardFeatureProvider mContextualCardFeatureProvider;
+    private BluetoothFeatureProvider mBluetoothFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -224,10 +227,21 @@ public class FeatureFactoryImpl extends FeatureFactory {
         return mPanelFeatureProvider;
     }
 
-    public ContextualCardFeatureProvider getContextualCardFeatureProvider() {
+    @Override
+    public ContextualCardFeatureProvider getContextualCardFeatureProvider(Context context) {
         if (mContextualCardFeatureProvider == null) {
-            mContextualCardFeatureProvider = new ContextualCardFeatureProviderImpl();
+            mContextualCardFeatureProvider = new ContextualCardFeatureProviderImpl(
+                    context.getApplicationContext());
         }
         return mContextualCardFeatureProvider;
+    }
+
+    @Override
+    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
+        if (mBluetoothFeatureProvider == null) {
+            mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl(
+                    context.getApplicationContext());
+        }
+        return mBluetoothFeatureProvider;
     }
 }
