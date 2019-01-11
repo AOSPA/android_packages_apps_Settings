@@ -28,6 +28,15 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.customization.model.CustomizationManager;
+import com.android.customization.model.CustomizationOption;
+import com.android.customization.model.grid.GridOption;
+import com.android.customization.model.grid.GridOptionsManager;
+import com.android.customization.model.grid.LauncherGridOptionsProvider;
+import com.android.customization.model.theme.DefaultThemeProvider;
+import com.android.customization.model.theme.ThemeBundle;
+import com.android.customization.model.theme.ThemeManager;
+import com.android.customization.picker.grid.GridFragment;
 import com.android.customization.picker.theme.ThemeFragment;
 import com.android.wallpaper.R;
 import com.android.wallpaper.model.WallpaperInfo;
@@ -103,7 +112,18 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     }
 
     private void initSections() {
-        mSections.put(R.id.nav_theme, new ThemeSection(R.id.nav_theme));
+        //Theme
+        ThemeManager themeManager = new ThemeManager(new DefaultThemeProvider(this));
+        if (themeManager.isAvailable()) {
+            mSections.put(R.id.nav_theme, new ThemeSection(R.id.nav_theme, themeManager));
+        }
+        // TODO: clock
+        //Grid
+        GridOptionsManager gridManager = new GridOptionsManager(
+                new LauncherGridOptionsProvider(this));
+        if (gridManager.isAvailable()) {
+            mSections.put(R.id.nav_grid, new GridSection(R.id.nav_grid, gridManager));
+        }
         mSections.put(R.id.nav_wallpaper, new WallpaperSection(R.id.nav_wallpaper));
         //TODO (santie): add other sections if supported by the device
     }
@@ -190,15 +210,17 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
      * There should be a concrete subclass per available section, providing the corresponding
      * Fragment to be displayed when switching to each section.
      */
-    static abstract class CustomizationSection {
+    static abstract class CustomizationSection<T extends CustomizationOption> {
 
         /**
          * IdRes used to identify this section in the BottomNavigationView menu.
          */
         @IdRes final int id;
+        protected final CustomizationManager<T> mCustomizationManager;
 
-        private CustomizationSection(@IdRes int id) {
+        private CustomizationSection(@IdRes int id, CustomizationManager<T> manager) {
             this.id = id;
+            this.mCustomizationManager = manager;
         }
 
         /**
@@ -216,7 +238,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         private boolean mForceCategoryRefresh;
 
         private WallpaperSection(int id) {
-            super(id);
+            super(id, null);
         }
 
         @Override
@@ -235,15 +257,39 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         }
     }
 
-    private class ThemeSection extends CustomizationSection {
+    private class ThemeSection extends CustomizationSection<ThemeBundle> {
 
-        private ThemeSection(int id) {
-            super(id);
+        private ThemeFragment mFragment;
+
+        private ThemeSection(int id, ThemeManager manager) {
+            super(id, manager);
         }
 
         @Override
         Fragment getFragment() {
-            return ThemeFragment.newInstance(getString(R.string.theme_title));
+            if (mFragment == null) {
+                mFragment = ThemeFragment.newInstance(getString(R.string.theme_title),
+                        (ThemeManager) mCustomizationManager);
+            }
+            return mFragment;
+        }
+    }
+
+    private class GridSection extends CustomizationSection<GridOption> {
+
+        private GridFragment mFragment;
+
+        private GridSection(int id, GridOptionsManager manager) {
+            super(id, manager);
+        }
+
+        @Override
+        Fragment getFragment() {
+            if (mFragment == null) {
+                mFragment = GridFragment.newInstance(getString(R.string.grid_title),
+                        (GridOptionsManager) mCustomizationManager);
+            }
+            return mFragment;
         }
     }
 }

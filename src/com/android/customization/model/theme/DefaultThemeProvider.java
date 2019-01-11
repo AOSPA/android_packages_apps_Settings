@@ -15,6 +15,9 @@
  */
 package com.android.customization.model.theme;
 
+import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
+import static com.android.customization.model.ResourceConstants.CONFIG_ICON_MASK;
+
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -56,8 +59,6 @@ public class DefaultThemeProvider implements ThemeBundleProvider {
     private static final String ACCENT_COLOR_DARK_NAME = "accent_device_default_dark";
     private static final String CONFIG_BODY_FONT_FAMILY = "config_bodyFontFamily";
     private static final String CONFIG_HEADLINE_FONT_FAMILY = "config_headlineFontFamily";
-    private static final String CONFIG_ICON_MASK = "config_icon_mask";
-    private static final String ANDROID_PACKAGE = "android";
 
     private final Context mContext;
     private final String mStubPackageName;

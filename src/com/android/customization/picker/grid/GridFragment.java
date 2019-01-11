@@ -13,45 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.customization.picker.theme;
+package com.android.customization.picker.grid;
 
 import static androidx.core.view.ViewCompat.LAYOUT_DIRECTION_RTL;
 
-import android.content.res.ColorStateList;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.cardview.widget.CardView;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.android.customization.model.theme.ThemeBundle;
-import com.android.customization.model.theme.ThemeManager;
+import com.android.customization.model.grid.GridOption;
+import com.android.customization.model.grid.GridOptionsManager;
 import com.android.customization.widget.OptionSelectorController;
 import com.android.customization.widget.PreviewPager;
 import com.android.wallpaper.R;
+import com.android.wallpaper.asset.Asset;
+import com.android.wallpaper.asset.ContentUriAsset;
 import com.android.wallpaper.picker.ToolbarFragment;
+
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Fragment that contains the main UI for selecting and applying a ThemeBundle.
+ * Fragment that contains the UI for selecting and applying a GridOption.
  */
-public class ThemeFragment extends ToolbarFragment {
+public class GridFragment extends ToolbarFragment {
 
-    public static ThemeFragment newInstance(CharSequence title, ThemeManager manager) {
-        ThemeFragment fragment = new ThemeFragment();
+    public static GridFragment newInstance(CharSequence title, GridOptionsManager manager) {
+        GridFragment fragment = new GridFragment();
         fragment.setManager(manager);
         fragment.setArguments(ToolbarFragment.createArguments(title));
         return fragment;
@@ -59,9 +59,8 @@ public class ThemeFragment extends ToolbarFragment {
 
     private RecyclerView mOptionsContainer;
     private OptionSelectorController mOptionsController;
-    private ThemeManager mThemeManager;
-    private ThemeBundle mSelectedTheme;
-    private PagerAdapter mAdapter;
+    private GridOptionsManager mGridManager;
+    private GridOption mSelectedOption;
     private PreviewPager mPreviewPager;
 
     @Nullable
@@ -69,45 +68,43 @@ public class ThemeFragment extends ToolbarFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(
-                R.layout.fragment_theme_picker, container, /* attachToRoot */ false);
+                R.layout.fragment_grid_picker, container, /* attachToRoot */ false);
         setUpToolbar(view);
-        mPreviewPager = view.findViewById(R.id.theme_preview_pager);
+        mPreviewPager = view.findViewById(R.id.grid_preview_pager);
         mOptionsContainer = view.findViewById(R.id.options_container);
         setUpOptions();
 
         return view;
     }
 
-    private void setManager(ThemeManager manager) {
-        mThemeManager = manager;
+    private void setManager(GridOptionsManager manager) {
+        mGridManager = manager;
     }
 
     private void createAdapter() {
-        mAdapter = new ThemePreviewAdapter(mSelectedTheme);
-        mPreviewPager.setAdapter(mAdapter);
+        mPreviewPager.setAdapter(new GridPreviewAdapter(mSelectedOption));
     }
 
     private void setUpOptions() {
-        mThemeManager.fetchOptions(options -> {
+        mGridManager.fetchOptions(options -> {
             mOptionsController = new OptionSelectorController(mOptionsContainer, options);
 
             mOptionsController.addListener(selected -> {
-                mSelectedTheme = (ThemeBundle) selected;
+                mSelectedOption = (GridOption) selected;
                 createAdapter();
             });
             mOptionsController.initOptions();
-            for (ThemeBundle theme : options) {
-                if (theme.isCurrentlySet()) {
-                    mSelectedTheme = theme;
+            for (GridOption option : options) {
+                if (option.isCurrentlySet()) {
+                    mSelectedOption = option;
                 }
             }
-            // For development only, as there should always be a theme set.
-            if (mSelectedTheme == null) {
-                mSelectedTheme = options.get(0);
+            // For development only, as there should always be a grid set.
+            if (mSelectedOption == null) {
+                mSelectedOption = options.get(0);
             }
-            mOptionsController.setSelectedOption(mSelectedTheme);
+            createAdapter();
         });
-        createAdapter();
     }
 
     /**
@@ -115,44 +112,42 @@ public class ThemeFragment extends ToolbarFragment {
      * This is a ViewPager as it allows for a nice pagination effect (ie, pages snap on swipe,
      * we don't want to just scroll)
      */
-    private class ThemePreviewAdapter extends PagerAdapter {
+    private class GridPreviewAdapter extends PagerAdapter {
 
-        private abstract class PreviewPage {
-            @StringRes final int nameResId;
-            @DrawableRes final int iconSrc;
-            @LayoutRes final int contentLayoutRes;
-            @ColorInt final int accentColor;
+        private class PreviewPage {
+            final int pageId;
+            final Asset previewAsset;
+            final int cols;
+            final int rows;
 
             CardView card;
 
-            private PreviewPage(@StringRes int titleResId, @DrawableRes int iconSrc,
-                    @LayoutRes int contentLayoutRes, @ColorInt int accentColor) {
-                this.nameResId = titleResId;
-                this.iconSrc = iconSrc;
-                this.contentLayoutRes = contentLayoutRes;
-                this.accentColor = accentColor;
+            private PreviewPage(Context context, int id, Uri previewUri, int rows, int cols) {
+                pageId = id;
+                previewAsset = new ContentUriAsset(context, previewUri,
+                        RequestOptions.fitCenterTransform());
+                this.rows = rows;
+                this.cols = cols;
             }
 
             public void setCard(CardView card) {
                 this.card = card;
             }
 
-            abstract void bindPreviewContent();
+            void bindPreviewContent() {
+                previewAsset.loadDrawable(getActivity(), card.findViewById(R.id.grid_preview_image),
+                        card.getContext().getResources().getColor(R.color.primary_color, null));
+            }
         }
 
-        List<PreviewPage> mPages = new ArrayList<>();
+        private final List<PreviewPage> mPages = new ArrayList<>();
 
-        ThemePreviewAdapter(ThemeBundle theme) {
-            mPages.add(new PreviewPage(R.string.preview_name_font, R.drawable.ic_font,
-                    R.layout.preview_card_font_content, theme.getPreviewInfo().colorAccentLight) {
-                @Override
-                void bindPreviewContent() {
-                    TextView title = card.findViewById(R.id.font_card_title);
-                    title.setTypeface(theme.getPreviewInfo().headlineFontFamily);
-                    TextView body = card.findViewById(R.id.font_card_body);
-                    body.setTypeface(theme.getPreviewInfo().bodyFontFamily);
-                }
-            });
+        GridPreviewAdapter(GridOption gridOption) {
+            for (int i = 0; i < gridOption.previewPagesCount; i++) {
+                mPages.add(new PreviewPage(getContext(), i,
+                        gridOption.previewImageUri.buildUpon().appendPath("" + i).build(),
+                        gridOption.rows, gridOption.cols));
+            }
         }
 
         @Override
@@ -172,17 +167,9 @@ public class ThemeFragment extends ToolbarFragment {
                 position = mPages.size() - 1 - position;
             }
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            CardView card = (CardView) inflater.inflate(R.layout.theme_preview_card,
+            CardView card = (CardView) inflater.inflate(R.layout.grid_preview_card,
                     container, false);
             PreviewPage page = mPages.get(position);
-
-            TextView header = card.findViewById(R.id.theme_preview_card_header);
-            header.setText(page.nameResId);
-            header.setCompoundDrawablesWithIntrinsicBounds(0, page.iconSrc, 0, 0);
-            header.setCompoundDrawableTintList(ColorStateList.valueOf(page.accentColor));
-
-            ViewGroup body = card.findViewById(R.id.theme_preview_card_body_container);
-            inflater.inflate(page.contentLayoutRes, body, true);
 
             page.setCard(card);
             page.bindPreviewContent();
