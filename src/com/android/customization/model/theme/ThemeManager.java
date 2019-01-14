@@ -15,14 +15,24 @@
  */
 package com.android.customization.model.theme;
 
+import android.content.Context;
+import android.content.om.OverlayManager;
+import android.os.UserHandle;
+
 import com.android.customization.model.CustomizationManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ThemeManager implements CustomizationManager<ThemeBundle> {
 
     private final ThemeBundleProvider mProvider;
+    private final OverlayManager mOverlayManager;
+    private boolean useThemeWallpaper;
 
-    public ThemeManager(ThemeBundleProvider provider) {
+    public ThemeManager(ThemeBundleProvider provider, Context context) {
         mProvider = provider;
+        mOverlayManager = context.getSystemService(OverlayManager.class);
     }
 
     @Override
@@ -32,7 +42,19 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
 
     @Override
     public void apply(ThemeBundle theme) {
-        // TODO(santie) implement
+        if (theme.isDefault()) {
+            // TODO: Clear secure setting
+        }
+        List<String> packages = new ArrayList<>();
+        packages.add(theme.getFontOverlayPackage());
+        packages.add(theme.getColorOverlayPackage());
+        packages.add(theme.getShapeOverlayPackage());
+        packages.addAll(theme.getIconOverlayPackages());
+        for (String packageName : packages) {
+            mOverlayManager.setEnabledExclusiveInCategory(packageName, UserHandle.myUserId());
+        }
+        // TODO: store to secure setting
+        // TODO: set wallpaper
     }
 
     @Override

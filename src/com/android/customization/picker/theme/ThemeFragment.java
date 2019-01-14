@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -69,6 +70,11 @@ public class ThemeFragment extends ToolbarFragment {
         setUpToolbar(view);
         mPreviewPager = view.findViewById(R.id.theme_preview_pager);
         mOptionsContainer = view.findViewById(R.id.options_container);
+        view.findViewById(R.id.apply_button).setOnClickListener(v -> {
+            mThemeManager.apply(mSelectedTheme);
+            Toast.makeText(getContext(), R.string.applied_theme_msg, Toast.LENGTH_LONG).show();
+            getActivity().finish();
+        });
         setUpOptions();
 
         return view;

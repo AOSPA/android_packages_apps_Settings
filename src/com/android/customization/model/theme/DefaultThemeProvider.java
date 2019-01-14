@@ -163,7 +163,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
      * the default theme.
      */
     private void addDefaultTheme() {
-        ThemeBundle.Builder builder = new Builder();
+        ThemeBundle.Builder builder = new Builder().asDefault();
         Resources system = Resources.getSystem();
 
         int titleId = mStubApkResources.getIdentifier(TITLE_PREFIX + DEFAULT_THEME_NAME,

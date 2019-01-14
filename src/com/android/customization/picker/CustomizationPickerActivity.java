@@ -117,7 +117,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
     private void initSections() {
         //Theme
-        ThemeManager themeManager = new ThemeManager(new DefaultThemeProvider(this));
+        ThemeManager themeManager = new ThemeManager(new DefaultThemeProvider(this), this);
         if (themeManager.isAvailable()) {
             mSections.put(R.id.nav_theme, new ThemeSection(R.id.nav_theme, themeManager));
         }

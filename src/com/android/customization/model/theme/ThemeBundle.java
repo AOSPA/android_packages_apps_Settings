@@ -36,6 +36,7 @@ import com.android.customization.model.CustomizationOption;
 import com.android.wallpaper.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -45,13 +46,23 @@ import java.util.List;
  */
 public class ThemeBundle implements CustomizationOption {
 
-    static final String DEFAULT_PACKAGE = "DEFAULT_PACKAGE";
-
     private final String mTitle;
     private final PreviewInfo mPreviewInfo;
+    private final String mFontOverlayPackage;
+    private final String mColorOverlayPackage;
+    private final String mShapeOverlayPackage;
+    private final List<String> mIconOverlayPackages;
+    private final boolean mIsDefault;
 
-    private ThemeBundle(String title, PreviewInfo previewInfo) {
+    private ThemeBundle(String title, @Nullable String fontOverlayPackage,
+            @Nullable String colorOverlayPackage, @Nullable String shapeOverlayPackage,
+            List<String> iconOverlayPackages, boolean isDefault, PreviewInfo previewInfo) {
         mTitle = title;
+        mFontOverlayPackage = fontOverlayPackage;
+        mColorOverlayPackage = colorOverlayPackage;
+        mShapeOverlayPackage = shapeOverlayPackage;
+        mIconOverlayPackages = Collections.unmodifiableList(iconOverlayPackages);
+        mIsDefault = isDefault;
         mPreviewInfo = previewInfo;
     }
 
@@ -96,6 +107,26 @@ public class ThemeBundle implements CustomizationOption {
         return mPreviewInfo;
     }
 
+    String getFontOverlayPackage() {
+        return mFontOverlayPackage;
+    }
+
+    String getColorOverlayPackage() {
+        return mColorOverlayPackage;
+    }
+
+    String getShapeOverlayPackage() {
+        return mShapeOverlayPackage;
+    }
+
+    List<String> getIconOverlayPackages() {
+        return mIconOverlayPackages;
+    }
+
+    boolean isDefault() {
+        return mIsDefault;
+    }
+
     public static class PreviewInfo {
         public final Typeface bodyFontFamily;
         public final Typeface headlineFontFamily;
@@ -128,6 +159,7 @@ public class ThemeBundle implements CustomizationOption {
         @ColorInt private int mColorAccentDark;
         private List<Drawable> mIcons = new ArrayList<>();
         private String mShapePath;
+        private boolean mIsDefault;
         @DrawableRes private int mWallpaperDrawableResId;
 
         private String mFontOverlayPackage;
@@ -144,7 +176,8 @@ public class ThemeBundle implements CustomizationOption {
                 shapeDrawable.setIntrinsicHeight((int) PATH_SIZE);
                 shapeDrawable.setIntrinsicWidth((int) PATH_SIZE);
             }
-            return new ThemeBundle(mTitle,
+            return new ThemeBundle(mTitle, mFontOverlayPackage, mColorsPackage, mShapePackage,
+                    mIconPackages, mIsDefault,
                     new PreviewInfo(mBodyFontFamily, mHeadlineFontFamily, mColorAccentLight,
                             mColorAccentDark, mIcons, shapeDrawable, mWallpaperDrawableResId));
         }
@@ -201,6 +234,11 @@ public class ThemeBundle implements CustomizationOption {
 
         public Builder setShapePath(String path) {
             mShapePath = path;
+            return this;
+        }
+
+        public Builder asDefault() {
+            mIsDefault = true;
             return this;
         }
     }
