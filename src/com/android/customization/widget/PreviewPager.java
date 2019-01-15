@@ -82,6 +82,20 @@ public class PreviewPager extends LinearLayout {
         mViewPager.addOnPageChangeListener(mPageListener);
     }
 
+    public void forceCardWidth(int widthPixels) {
+        mViewPager.addOnLayoutChangeListener(new OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom,
+                    int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                int hPadding = (mViewPager.getWidth() - widthPixels) / 2;
+                mViewPager.setPadding(hPadding, mViewPager.getPaddingTop(),
+                        hPadding, mViewPager.getPaddingBottom());
+                mViewPager.removeOnLayoutChangeListener(this);
+            }
+        });
+        mViewPager.invalidate();
+    }
+
     /**
      * Call this method to set the {@link PagerAdapter} backing the {@link ViewPager} in this
      * widget.

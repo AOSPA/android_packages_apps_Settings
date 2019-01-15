@@ -16,6 +16,7 @@
 package com.android.customization.model.grid;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.ProviderInfo;
 import android.content.res.Resources;
@@ -40,6 +41,7 @@ public class LauncherGridOptionsProvider {
 
     private static final String LIST_OPTIONS = "list_options";
     private static final String PREVIEW = "preview";
+    private static final String DEFAULT_GRID = "default_grid";
 
     private static final String COL_NAME = "name";
     private static final String COL_ROWS = "rows";
@@ -111,6 +113,13 @@ public class LauncherGridOptionsProvider {
     }
 
     void applyGrid(String name) {
-        //TODO: implement
+        Uri updateDefaultUri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(mProviderInfo.authority)
+                .appendPath(DEFAULT_GRID)
+                .build();
+        ContentValues values = new ContentValues();
+        values.put("name", name);
+        mContext.getContentResolver().update(updateDefaultUri, values, null, null);
     }
 }

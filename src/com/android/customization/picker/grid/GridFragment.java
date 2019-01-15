@@ -16,14 +16,20 @@
 package com.android.customization.picker.grid;
 
 import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLayoutChangeListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.customization.model.grid.GridOption;
@@ -35,6 +41,9 @@ import com.android.customization.widget.PreviewPager;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
 import com.android.wallpaper.asset.ContentUriAsset;
+import com.android.wallpaper.model.WallpaperInfo;
+import com.android.wallpaper.module.CurrentWallpaperInfoFactory;
+import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.picker.ToolbarFragment;
 
 import com.bumptech.glide.request.RequestOptions;
@@ -43,6 +52,13 @@ import com.bumptech.glide.request.RequestOptions;
  * Fragment that contains the UI for selecting and applying a GridOption.
  */
 public class GridFragment extends ToolbarFragment {
+
+    private boolean mIsWallpaperInfoReady;
+    private WallpaperInfo mHomeWallpaper;
+    private float mScreenAspectRatio;
+    private int mPageHeight;
+    private int mPageWidth;
+    private GridPreviewAdapter mAdapter;
 
     public static GridFragment newInstance(CharSequence title, GridOptionsManager manager) {
         GridFragment fragment = new GridFragment();
@@ -66,8 +82,35 @@ public class GridFragment extends ToolbarFragment {
         setUpToolbar(view);
         mPreviewPager = view.findViewById(R.id.grid_preview_pager);
         mOptionsContainer = view.findViewById(R.id.options_container);
+        final Resources res = getContext().getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        mScreenAspectRatio = (float) dm.heightPixels / dm.widthPixels;
         setUpOptions();
+        view.findViewById(R.id.apply_button).setOnClickListener(v -> {
+            mGridManager.apply(mSelectedOption);
+            getActivity().finish();
+        });
+        CurrentWallpaperInfoFactory factory = InjectorProvider.getInjector()
+                .getCurrentWallpaperFactory(getActivity().getApplicationContext());
 
+        factory.createCurrentWallpaperInfos((homeWallpaper, lockWallpaper, presentationMode) -> {
+            mHomeWallpaper = homeWallpaper;
+            mIsWallpaperInfoReady = true;
+            if (mAdapter != null) {
+                mAdapter.onWallpaperInfoLoaded();
+            }
+        }, false);
+        view.addOnLayoutChangeListener(new OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom,
+                    int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                mPageHeight = mPreviewPager.getHeight() - mPreviewPager.getPaddingTop() -
+                        res.getDimensionPixelSize(R.dimen.indicator_container_height);
+                mPageWidth = (int) (mPageHeight / mScreenAspectRatio);
+                mPreviewPager.forceCardWidth(mPageWidth);
+                view.removeOnLayoutChangeListener(this);
+            }
+        });
         return view;
     }
 
@@ -76,7 +119,8 @@ public class GridFragment extends ToolbarFragment {
     }
 
     private void createAdapter() {
-        mPreviewPager.setAdapter(new GridPreviewAdapter(mSelectedOption));
+        mAdapter = new GridPreviewAdapter(mSelectedOption);
+        mPreviewPager.setAdapter(mAdapter);
     }
 
     private void setUpOptions() {
@@ -101,12 +145,14 @@ public class GridFragment extends ToolbarFragment {
         });
     }
 
-    private static class GridPreviewPage extends PreviewPage {
+    private class GridPreviewPage extends PreviewPage {
         private final int mPageId;
         private final Asset mPreviewAsset;
         private final int mCols;
         private final int mRows;
         private final Activity mActivity;
+
+		private ImageView mPreview;
 
         private GridPreviewPage(Activity activity, int id, Uri previewUri, int rows, int cols) {
             super(null);
@@ -118,9 +164,28 @@ public class GridFragment extends ToolbarFragment {
             mActivity = activity;
         }
 
+        @Override
+        public void setCard(CardView card) {
+        	super.setCard(card);
+        	mPreview = card.findViewById(R.id.grid_preview_image);
+        }
+
         public void bindPreviewContent() {
-            mPreviewAsset.loadDrawable(mActivity, card.findViewById(R.id.grid_preview_image),
-                    card.getContext().getResources().getColor(R.color.primary_color, null));
+            Resources resources = card.getResources();
+            bindWallpaperIfAvailable();
+            mPreviewAsset.loadDrawable(mActivity, mPreview,
+                    resources.getColor(android.R.color.transparent, null));
+        }
+
+        void bindWallpaperIfAvailable() {
+            if (card != null && mIsWallpaperInfoReady && mHomeWallpaper != null) {
+                mHomeWallpaper.getThumbAsset(card.getContext()).decodeBitmap(mPageWidth,
+                        mPageHeight,
+                        bitmap -> {
+                            mPreview.setBackground(
+                                    new BitmapDrawable(card.getResources(), bitmap));
+                        });
+            }
         }
     }
     /**
@@ -136,6 +201,12 @@ public class GridFragment extends ToolbarFragment {
                 addPage(new GridPreviewPage(getActivity(), i,
                         gridOption.previewImageUri.buildUpon().appendPath("" + i).build(),
                         gridOption.rows, gridOption.cols));
+            }
+        }
+
+        void onWallpaperInfoLoaded() {
+            for (GridPreviewPage page : mPages) {
+                page.bindWallpaperIfAvailable();
             }
         }
     }
