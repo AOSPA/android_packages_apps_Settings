@@ -38,7 +38,8 @@ import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.module.UserEventLogger;
 import com.android.wallpaper.picker.CategoryFragment;
 import com.android.wallpaper.picker.CategoryFragment.CategoryFragmentHost;
-import com.android.wallpaper.picker.MyPhotosLauncher.PermissionChangedListener;
+import com.android.wallpaper.picker.MyPhotosStarter;
+import com.android.wallpaper.picker.MyPhotosStarter.PermissionChangedListener;
 import com.android.wallpaper.picker.TopLevelPickerActivity;
 import com.android.wallpaper.picker.WallpaperPickerDelegate;
 import com.android.wallpaper.picker.WallpapersUiContainer;
@@ -142,17 +143,17 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
     @Override
     public void requestExternalStoragePermission(PermissionChangedListener listener) {
-
+        mDelegate.requestExternalStoragePermission(listener);
     }
 
     @Override
     public boolean isReadExternalStoragePermissionGranted() {
-        return false;
+        return mDelegate.isReadExternalStoragePermissionGranted();
     }
 
     @Override
     public void showViewOnlyPreview(WallpaperInfo wallpaperInfo) {
-
+        mDelegate.showViewOnlyPreview(wallpaperInfo);
     }
 
     /**
@@ -177,6 +178,11 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     @Override
     public void doneFetchingCategories() {
 
+    }
+
+    @Override
+    public MyPhotosStarter getMyPhotosStarter() {
+        return mDelegate;
     }
 
     /**
