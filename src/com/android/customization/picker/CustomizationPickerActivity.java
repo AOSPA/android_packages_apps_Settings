@@ -30,12 +30,16 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
+import com.android.customization.model.clock.ClockManager;
+import com.android.customization.model.clock.Clockface;
+import com.android.customization.model.clock.ResourcesApkClockProvider;
 import com.android.customization.model.grid.GridOption;
 import com.android.customization.model.grid.GridOptionsManager;
 import com.android.customization.model.grid.LauncherGridOptionsProvider;
 import com.android.customization.model.theme.DefaultThemeProvider;
 import com.android.customization.model.theme.ThemeBundle;
 import com.android.customization.model.theme.ThemeManager;
+import com.android.customization.picker.clock.ClockFragment;
 import com.android.customization.picker.grid.GridFragment;
 import com.android.customization.picker.theme.ThemeFragment;
 import com.android.wallpaper.R;
@@ -117,7 +121,11 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         if (themeManager.isAvailable()) {
             mSections.put(R.id.nav_theme, new ThemeSection(R.id.nav_theme, themeManager));
         }
-        // TODO: clock
+        //Clock
+        ClockManager clockManager = new ClockManager(this, new ResourcesApkClockProvider(this));
+        if (clockManager.isAvailable()) {
+            mSections.put(R.id.nav_clock, new ClockSection(R.id.nav_clock, clockManager));
+        }
         //Grid
         GridOptionsManager gridManager = new GridOptionsManager(
                 new LauncherGridOptionsProvider(this));
@@ -288,6 +296,24 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
             if (mFragment == null) {
                 mFragment = GridFragment.newInstance(getString(R.string.grid_title),
                         (GridOptionsManager) mCustomizationManager);
+            }
+            return mFragment;
+        }
+    }
+
+    private class ClockSection extends CustomizationSection<Clockface> {
+
+        private ClockFragment mFragment;
+
+        private ClockSection(int id, ClockManager manager) {
+            super(id, manager);
+        }
+
+        @Override
+        Fragment getFragment() {
+            if (mFragment == null) {
+                mFragment = ClockFragment.newInstance(getString(R.string.clock_title),
+                        (ClockManager) mCustomizationManager);
             }
             return mFragment;
         }

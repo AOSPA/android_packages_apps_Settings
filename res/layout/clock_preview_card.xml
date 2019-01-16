@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-
-     Copyright (C) 2018 The Android Open Source Project
+     Copyright (C) 2019 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,14 +14,16 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
-    <color name="status_bar_color">#ffffffff</color>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/FullContentPreviewCard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <color name="system_navigation_bar_background">@android:color/white</color>
-    <color name="system_navigation_bar_divider">#1f000000</color>
+    <ImageView
+        android:id="@+id/clock_preview_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/clockface_preview_background"/>
 
-    <color name="shape_thumbnail_color">#b2b2b2</color>
-    <color name="icon_thumbnail_color">@android:color/black</color>
-
-    <color name="clockface_preview_background">@android:color/black</color>
-</resources>
+</androidx.cardview.widget.CardView>

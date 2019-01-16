@@ -100,7 +100,7 @@ public class OptionSelectorController {
             @Override
             public void onBindViewHolder(@NonNull TileViewHolder holder, int position) {
                 CustomizationOption option = mOptions.get(position);
-                if (mSelectedOption == null && option.isCurrentlySet()) {
+                if (mSelectedOption == null && option.isActive(mContainer.getContext())) {
                     mSelectedOption = option;
                 }
                 if (holder.labelView != null) {

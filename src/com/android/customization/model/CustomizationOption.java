@@ -15,6 +15,7 @@
  */
 package com.android.customization.model;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.LayoutRes;
@@ -43,7 +44,7 @@ public interface CustomizationOption {
     /**
      * Returns whether this option is the one currently set in the System.
      */
-    boolean isCurrentlySet();
+    boolean isActive(Context context);
 
     /**
      * Return the id of the layout used to show this option in the UI. It must contain a view with

@@ -67,7 +67,7 @@ public class GridOption implements CustomizationOption {
     }
 
     @Override
-    public boolean isCurrentlySet() {
+    public boolean isActive(Context context) {
         return mIsCurrent;
     }
 

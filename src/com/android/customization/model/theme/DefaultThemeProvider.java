@@ -19,8 +19,6 @@ import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
 import static com.android.customization.model.ResourceConstants.CONFIG_ICON_MASK;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
@@ -30,6 +28,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.customization.model.CustomizationManager.OptionsFetchedListener;
+import com.android.customization.model.ResourcesApkProvider;
 import com.android.customization.model.theme.ThemeBundle.Builder;
 import com.android.wallpaper.R;
 
@@ -39,7 +38,7 @@ import java.util.List;
 /**
  * Default implementation of {@link ThemeBundleProvider} that reads Themes' overlays from a stub APK.
  */
-public class DefaultThemeProvider implements ThemeBundleProvider {
+public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeBundleProvider {
 
     private static final String TAG = "DefaultThemeProvider";
 
@@ -60,37 +59,10 @@ public class DefaultThemeProvider implements ThemeBundleProvider {
     private static final String CONFIG_BODY_FONT_FAMILY = "config_bodyFontFamily";
     private static final String CONFIG_HEADLINE_FONT_FAMILY = "config_headlineFontFamily";
 
-    private final Context mContext;
-    private final String mStubPackageName;
-    private Resources mStubApkResources;
     private List<ThemeBundle> mThemes;
 
     public DefaultThemeProvider(Context context) {
-        mContext = context;
-        mStubPackageName = mContext.getString(R.string.themes_stub_package);
-        init();
-    }
-
-    private void init() {
-        if (TextUtils.isEmpty(mStubPackageName)) {
-            return;
-        }
-        mStubApkResources = null;
-        try {
-            PackageManager pm = mContext.getPackageManager();
-            ApplicationInfo stubAppInfo = pm.getApplicationInfo(
-                    mStubPackageName, PackageManager.GET_META_DATA);
-            if (stubAppInfo != null) {
-                mStubApkResources = pm.getResourcesForApplication(stubAppInfo);
-            }
-        } catch (NameNotFoundException e) {
-            Log.w(TAG, String.format("Themes stub APK for %s not found.", mStubPackageName));
-        }
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return mStubApkResources != null;
+        super(context, context.getString(R.string.themes_stub_package));
     }
 
     @Override
@@ -108,9 +80,7 @@ public class DefaultThemeProvider implements ThemeBundleProvider {
     private void loadAll() {
         addDefaultTheme();
 
-        int themesListResId = mStubApkResources.getIdentifier(THEMES_ARRAY, "array",
-                mStubPackageName);
-        String[] themeNames = mStubApkResources.getStringArray(themesListResId);
+        String[] themeNames = getItemsFromStub(THEMES_ARRAY);
 
         for (String themeName : themeNames) {
             // Default theme needs special treatment (see #addDefaultTheme())
@@ -186,7 +156,6 @@ public class DefaultThemeProvider implements ThemeBundleProvider {
             }
         }
     }
-
 
     /**
      * Default theme requires different treatment: if there are overlay packages specified in the
@@ -270,9 +239,7 @@ public class DefaultThemeProvider implements ThemeBundleProvider {
     }
 
     private String getOverlayPackage(String prefix, String themeName) {
-        int overlayPackageResId = mStubApkResources.getIdentifier(prefix + themeName,
-                "string", mStubPackageName);
-        return mStubApkResources.getString(overlayPackageResId);
+        return getItemStringFromStub(prefix, themeName);
     }
 
     private Typeface loadTypeface(String configName, String fontOverlayPackage)

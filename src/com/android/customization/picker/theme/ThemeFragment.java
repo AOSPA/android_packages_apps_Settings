@@ -15,8 +15,7 @@
  */
 package com.android.customization.picker.theme;
 
-import static androidx.core.view.ViewCompat.LAYOUT_DIRECTION_RTL;
-
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,20 +29,17 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.cardview.widget.CardView;
-import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.android.customization.model.theme.ThemeBundle;
 import com.android.customization.model.theme.ThemeManager;
+import com.android.customization.picker.BasePreviewAdapter;
+import com.android.customization.picker.BasePreviewAdapter.PreviewPage;
 import com.android.customization.widget.OptionSelectorController;
 import com.android.customization.widget.PreviewPager;
 import com.android.wallpaper.R;
 import com.android.wallpaper.picker.ToolbarFragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Fragment that contains the main UI for selecting and applying a ThemeBundle.
@@ -83,7 +79,7 @@ public class ThemeFragment extends ToolbarFragment {
     }
 
     private void createAdapter() {
-        mAdapter = new ThemePreviewAdapter(mSelectedTheme);
+        mAdapter = new ThemePreviewAdapter(getContext(), mSelectedTheme);
         mPreviewPager.setAdapter(mAdapter);
     }
 
@@ -97,7 +93,7 @@ public class ThemeFragment extends ToolbarFragment {
             });
             mOptionsController.initOptions();
             for (ThemeBundle theme : options) {
-                if (theme.isCurrentlySet()) {
+                if (theme.isActive(getContext())) {
                     mSelectedTheme = theme;
                 }
             }
@@ -110,93 +106,57 @@ public class ThemeFragment extends ToolbarFragment {
         createAdapter();
     }
 
+    private static abstract class ThemePreviewPage extends PreviewPage {
+        @StringRes final int nameResId;
+        @DrawableRes final int iconSrc;
+        @LayoutRes final int contentLayoutRes;
+        @ColorInt final int accentColor;
+        private final LayoutInflater inflater;
+
+        private ThemePreviewPage(Context context, @StringRes int titleResId, @DrawableRes int iconSrc,
+                @LayoutRes int contentLayoutRes, @ColorInt int accentColor) {
+            super(null);
+            this.nameResId = titleResId;
+            this.iconSrc = iconSrc;
+            this.contentLayoutRes = contentLayoutRes;
+            this.accentColor = accentColor;
+            this.inflater = LayoutInflater.from(context);
+        }
+
+        @Override
+        public void bindPreviewContent() {
+            TextView header = card.findViewById(R.id.theme_preview_card_header);
+            header.setText(nameResId);
+            header.setCompoundDrawablesWithIntrinsicBounds(0, iconSrc, 0, 0);
+            header.setCompoundDrawableTintList(ColorStateList.valueOf(accentColor));
+
+            ViewGroup body = card.findViewById(R.id.theme_preview_card_body_container);
+            inflater.inflate(contentLayoutRes, body, true);
+            bindBody();
+        }
+
+        protected abstract void bindBody();
+    }
+
     /**
      * Adapter class for mPreviewPager.
      * This is a ViewPager as it allows for a nice pagination effect (ie, pages snap on swipe,
      * we don't want to just scroll)
      */
-    private class ThemePreviewAdapter extends PagerAdapter {
+    private static class ThemePreviewAdapter extends BasePreviewAdapter<ThemePreviewPage> {
 
-        private abstract class PreviewPage {
-            @StringRes final int nameResId;
-            @DrawableRes final int iconSrc;
-            @LayoutRes final int contentLayoutRes;
-            @ColorInt final int accentColor;
-
-            CardView card;
-
-            private PreviewPage(@StringRes int titleResId, @DrawableRes int iconSrc,
-                    @LayoutRes int contentLayoutRes, @ColorInt int accentColor) {
-                this.nameResId = titleResId;
-                this.iconSrc = iconSrc;
-                this.contentLayoutRes = contentLayoutRes;
-                this.accentColor = accentColor;
-            }
-
-            public void setCard(CardView card) {
-                this.card = card;
-            }
-
-            abstract void bindPreviewContent();
-        }
-
-        List<PreviewPage> mPages = new ArrayList<>();
-
-        ThemePreviewAdapter(ThemeBundle theme) {
-            mPages.add(new PreviewPage(R.string.preview_name_font, R.drawable.ic_font,
+        ThemePreviewAdapter(Context context, ThemeBundle theme) {
+            super(context, R.layout.theme_preview_card);
+            addPage(new ThemePreviewPage(context, R.string.preview_name_font, R.drawable.ic_font,
                     R.layout.preview_card_font_content, theme.getPreviewInfo().colorAccentLight) {
                 @Override
-                void bindPreviewContent() {
+                protected void bindBody() {
                     TextView title = card.findViewById(R.id.font_card_title);
                     title.setTypeface(theme.getPreviewInfo().headlineFontFamily);
                     TextView body = card.findViewById(R.id.font_card_body);
                     body.setTypeface(theme.getPreviewInfo().bodyFontFamily);
                 }
             });
-        }
-
-        @Override
-        public int getCount() {
-            return mPages.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-            return view == ((PreviewPage)object).card;
-        }
-
-        @NonNull
-        @Override
-        public Object instantiateItem(@NonNull ViewGroup container, int position) {
-            if (ViewCompat.getLayoutDirection(container) == LAYOUT_DIRECTION_RTL) {
-                position = mPages.size() - 1 - position;
-            }
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            CardView card = (CardView) inflater.inflate(R.layout.theme_preview_card,
-                    container, false);
-            PreviewPage page = mPages.get(position);
-
-            TextView header = card.findViewById(R.id.theme_preview_card_header);
-            header.setText(page.nameResId);
-            header.setCompoundDrawablesWithIntrinsicBounds(0, page.iconSrc, 0, 0);
-            header.setCompoundDrawableTintList(ColorStateList.valueOf(page.accentColor));
-
-            ViewGroup body = card.findViewById(R.id.theme_preview_card_body_container);
-            inflater.inflate(page.contentLayoutRes, body, true);
-
-            page.setCard(card);
-            page.bindPreviewContent();
-            if (card.getParent() != null) {
-                container.removeView(card);
-            }
-            container.addView(card);
-            return page;
-        }
-
-        @Override
-        public void destroyItem(@NonNull ViewGroup container, int position,
-                @NonNull Object object) {
-            ((PreviewPage) object).card = null;
         }
     }
 }

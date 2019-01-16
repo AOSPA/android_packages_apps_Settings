@@ -15,9 +15,9 @@
  */
 package com.android.customization.model.theme;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
-import android.graphics.PorterDuff.Mode;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
@@ -83,7 +83,7 @@ public class ThemeBundle implements CustomizationOption {
     }
 
     @Override
-    public boolean isCurrentlySet() {
+    public boolean isActive(Context context) {
         return false;
     }
 
