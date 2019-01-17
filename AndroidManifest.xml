@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.wallpaper">
 
-    <uses-sdk android:targetSdkVersion="28" android:minSdkVersion="28"/>
+    <uses-sdk android:targetSdkVersion="Q" android:minSdkVersion="Q"/>
+
+    <uses-permission android:name="android.permission.CHANGE_OVERLAY_PACKAGES"/>
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>
+
     <application
         android:extractNativeLibs="false"
         android:hardwareAccelerated="true"
