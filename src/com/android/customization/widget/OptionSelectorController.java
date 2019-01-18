@@ -107,7 +107,7 @@ public class OptionSelectorController {
                     holder.labelView.setText(option.getTitle());
                 }
                 option.bindThumbnailTile(holder.tileView);
-                holder.itemView.setSelected(option.equals(mSelectedOption));
+                holder.itemView.setActivated(option.equals(mSelectedOption));
                 holder.itemView.setOnClickListener(view -> setSelectedOption(option));
             }
 

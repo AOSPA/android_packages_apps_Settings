@@ -15,12 +15,15 @@
  */
 package com.android.customization.picker.theme;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -93,7 +96,7 @@ public class ThemeFragment extends ToolbarFragment {
     }
 
     private void createAdapter() {
-        mAdapter = new ThemePreviewAdapter(getContext(), mSelectedTheme);
+        mAdapter = new ThemePreviewAdapter(getActivity(), mSelectedTheme);
         mPreviewPager.setAdapter(mAdapter);
     }
 
@@ -159,9 +162,15 @@ public class ThemeFragment extends ToolbarFragment {
      */
     private static class ThemePreviewAdapter extends BasePreviewAdapter<ThemePreviewPage> {
 
-        ThemePreviewAdapter(Context context, ThemeBundle theme) {
-            super(context, R.layout.theme_preview_card);
-            addPage(new ThemePreviewPage(context, R.string.preview_name_font, R.drawable.ic_font,
+        private int[] mIconIds = {
+                R.id.preview_icon_0, R.id.preview_icon_1, R.id.preview_icon_2, R.id.preview_icon_3,
+                R.id.preview_icon_4, R.id.preview_icon_5
+        };
+
+        ThemePreviewAdapter(Activity activity, ThemeBundle theme) {
+            super(activity, R.layout.theme_preview_card);
+            final Resources res = activity.getResources();
+            addPage(new ThemePreviewPage(activity, R.string.preview_name_font, R.drawable.ic_font,
                     R.layout.preview_card_font_content, theme.getPreviewInfo().colorAccentLight) {
                 @Override
                 protected void bindBody() {
@@ -171,6 +180,53 @@ public class ThemeFragment extends ToolbarFragment {
                     body.setTypeface(theme.getPreviewInfo().bodyFontFamily);
                 }
             });
+            if (theme.getPreviewInfo().icons.size() >= mIconIds.length) {
+                addPage(new ThemePreviewPage(activity, R.string.preview_name_icon,
+                        R.drawable.ic_wifi_24px, R.layout.preview_card_icon_content,
+                        theme.getPreviewInfo().colorAccentLight) {
+                    @Override
+                    protected void bindBody() {
+                        for (int i = 0; i < mIconIds.length; i++) {
+                            ((ImageView) card.findViewById(mIconIds[i])).setImageDrawable(
+                                    theme.getPreviewInfo().icons.get(i));
+                        }
+                    }
+                });
+            }
+            if (theme.getPreviewInfo().colorPreviewDrawable != null) {
+                addPage(new ThemePreviewPage(activity, R.string.preview_name_color,
+                        R.drawable.ic_colorize_24px, R.layout.preview_card_static_content,
+                        theme.getPreviewInfo().colorAccentLight) {
+                    @Override
+                    protected void bindBody() {
+                        ImageView staticImage = card.findViewById(R.id.preview_static_image);
+
+                        theme.getPreviewInfo().colorPreviewDrawable.loadDrawable(activity,
+                                staticImage, card.getCardBackgroundColor().getDefaultColor());
+                        staticImage.getLayoutParams().width = res.getDimensionPixelSize(
+                                R.dimen.color_preview_image_width);
+                        staticImage.getLayoutParams().height = res.getDimensionPixelSize(
+                                R.dimen.color_preview_image_height);
+                    }
+                });
+            }
+            if (theme.getPreviewInfo().shapePreviewDrawable != null) {
+                addPage(new ThemePreviewPage(activity, R.string.preview_name_shape,
+                        R.drawable.ic_shapes_24px, R.layout.preview_card_static_content,
+                        theme.getPreviewInfo().colorAccentLight) {
+                    @Override
+                    protected void bindBody() {
+                        ImageView staticImage = card.findViewById(R.id.preview_static_image);
+                        theme.getPreviewInfo().shapePreviewDrawable.loadDrawable(activity,
+                                staticImage, card.getCardBackgroundColor().getDefaultColor());
+
+                        staticImage.getLayoutParams().width = res.getDimensionPixelSize(
+                                R.dimen.shape_preview_image_width);
+                        staticImage.getLayoutParams().height = res.getDimensionPixelSize(
+                                R.dimen.shape_preview_image_height);
+                    }
+                });
+            }
         }
     }
 }
