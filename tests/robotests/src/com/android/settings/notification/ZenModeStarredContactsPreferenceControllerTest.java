@@ -21,7 +21,7 @@ import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -30,12 +30,10 @@ import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -45,13 +43,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ZenModeStarredContactsPreferenceControllerTest {
 
     private ZenModeStarredContactsPreferenceController mCallsController;
@@ -116,7 +114,6 @@ public class ZenModeStarredContactsPreferenceControllerTest {
         when(mBackend.getPriorityCallSenders())
                 .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_ANY);
 
-
         assertThat(mCallsController.isAvailable()).isFalse();
     }
 
@@ -158,44 +155,11 @@ public class ZenModeStarredContactsPreferenceControllerTest {
     }
 
     @Test
-    public void updateSummary_nullCursorValues() {
-        Cursor testCursorWithNullValues = createMockCursor(3);
-        when(testCursorWithNullValues.getString(0)).thenReturn(null);
-
-        // expected - no null  values
-        List<String> contacts = mMessagesController.getStarredContacts(testCursorWithNullValues);
-        for (String contact : contacts) {
-            assertThat(contact).isNotNull();
-        }
-    }
-
-    @Test
     public void nullPreference_displayPreference() {
         when(mPreferenceScreen.findPreference(mMessagesController.getPreferenceKey()))
                 .thenReturn(null);
 
         // should not throw a null pointer
         mMessagesController.displayPreference(mPreferenceScreen);
-    }
-
-    private Cursor createMockCursor(int size) {
-        Cursor mockCursor = mock(Cursor.class);
-        when(mockCursor.moveToFirst()).thenReturn(true);
-
-        doAnswer(new Answer<Boolean>() {
-            int count = 0;
-
-            @Override
-            public Boolean answer(InvocationOnMock invocation) throws Throwable {
-                if (count < size) {
-                    count++;
-                    return true;
-                }
-                return false;
-            }
-
-        }).when(mockCursor).moveToNext();
-
-        return mockCursor;
     }
 }

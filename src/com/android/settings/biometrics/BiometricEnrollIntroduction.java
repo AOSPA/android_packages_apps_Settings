@@ -22,23 +22,20 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.setupwizardlib.span.LinkSpan;
+
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupdesign.span.LinkSpan;
 
 /**
  * Abstract base class for the intro onboarding activity for biometric enrollment.
  */
 public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         implements LinkSpan.OnClickListener {
-
-    public static final int CHOOSE_LOCK_GENERIC_REQUEST = 1;
-    public static final int BIOMETRIC_FIND_SENSOR_REQUEST = 2;
-    public static final int LEARN_MORE_REQUEST = 3;
 
     private UserManager mUserManager;
     private boolean mHasPassword;
@@ -73,12 +70,12 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     /**
      * @return the cancel button
      */
-    protected abstract Button getCancelButton();
+    protected abstract FooterButton getCancelButton();
 
     /**
      * @return the next button
      */
-    protected abstract Button getNextButton();
+    protected abstract FooterButton getNextButton();
 
     /**
      * @return the error TextView
@@ -109,6 +106,11 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected abstract Intent getEnrollingIntent();
 
     /**
+     * @return the title to be shown on the ConfirmLock screen.
+     */
+    protected abstract int getConfirmLockTitleResId();
+
+    /**
      * @param span
      */
     public abstract void onClick(LinkSpan span);
@@ -125,13 +127,17 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             setHeaderText(getHeaderResDefault());
         }
 
-        Button cancelButton = getCancelButton();
-        cancelButton.setOnClickListener(v -> onCancelButtonClick());
-
         mErrorText = getErrorTextView();
 
         mUserManager = UserManager.get(this);
         updatePasswordQuality();
+
+        if (!mHasPassword) {
+            // No password registered, launch into enrollment wizard.
+            launchChooseLock();
+        } else {
+            launchConfirmLock(getConfirmLockTitleResId(), getChallenge());
+        }
     }
 
     @Override
@@ -144,7 +150,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             getNextButton().setVisibility(View.VISIBLE);
         } else {
             mErrorText.setText(errorMsg);
-            getNextButton().setVisibility(View.GONE);
+            getNextButton().setText(getResources().getString(R.string.done));
+            getNextButton().setVisibility(View.VISIBLE);
         }
     }
 
@@ -155,13 +162,13 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     }
 
     @Override
-    protected void onNextButtonClick() {
-        if (!mHasPassword) {
-            // No biometrics registered, launch into enrollment wizard.
-            launchChooseLock();
+    protected void onNextButtonClick(View view) {
+        if (checkMaxEnrolled() == 0) {
+            // Lock thingy is already set up, launch directly to the next page
+            launchNextEnrollingActivity(mToken);
         } else {
-            // Lock thingy is already set up, launch directly into find sensor step from wizard.
-            launchFindSensor(null);
+            setResult(RESULT_FINISHED);
+            finish();
         }
     }
 
@@ -180,7 +187,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
     }
 
-    private void launchFindSensor(byte[] token) {
+    private void launchNextEnrollingActivity(byte[] token) {
         Intent intent = getEnrollingIntent();
         if (token != null) {
             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
@@ -198,9 +205,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         final boolean isResultFinished = resultCode == RESULT_FINISHED;
+        final int result = isResultFinished ? RESULT_OK : RESULT_SKIP;
         if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST) {
             if (isResultFinished || resultCode == RESULT_SKIP) {
-                final int result = isResultFinished ? RESULT_OK : RESULT_SKIP;
                 setResult(result, data);
                 finish();
                 return;
@@ -208,10 +215,21 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         } else if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
             if (isResultFinished) {
                 updatePasswordQuality();
-                byte[] token = data.getByteArrayExtra(
+                mToken = data.getByteArrayExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
-                launchFindSensor(token);
+                overridePendingTransition(R.anim.suw_slide_next_in, R.anim.suw_slide_next_out);
                 return;
+            } else {
+                setResult(result, data);
+                finish();
+            }
+        } else if (requestCode == CONFIRM_REQUEST) {
+            if (resultCode == RESULT_OK && data != null) {
+                mToken = data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                overridePendingTransition(R.anim.suw_slide_next_in, R.anim.suw_slide_next_out);
+            } else {
+                setResult(result, data);
+                finish();
             }
         } else if (requestCode == LEARN_MORE_REQUEST) {
             overridePendingTransition(R.anim.suw_slide_back_in, R.anim.suw_slide_back_out);
@@ -219,7 +237,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    protected void onCancelButtonClick() {
+    protected void onCancelButtonClick(View view) {
         finish();
     }
 

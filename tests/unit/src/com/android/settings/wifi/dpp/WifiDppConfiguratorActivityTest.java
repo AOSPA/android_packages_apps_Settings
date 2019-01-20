@@ -18,12 +18,11 @@ package com.android.settings.wifi.dpp;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.Before;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,43 +34,71 @@ public class WifiDppConfiguratorActivityTest {
             new ActivityTestRule<>(WifiDppConfiguratorActivity.class);
 
     @Test
-    public void launchActivity_modeQrCodeScanner_shouldNotAutoFinish() {
-        Intent intent = new Intent();
-        intent.putExtra(WifiDppConfiguratorActivity.EXTRA_LAUNCH_MODE,
-                WifiDppConfiguratorActivity.LaunchMode.LAUNCH_MODE_QR_CODE_SCANNER.getMode());
+    public void launchActivity_qrCodeScanner_shouldNotAutoFinish() {
+        Intent intent = new Intent(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY, "password");
+
         mActivityRule.launchActivity(intent);
 
         assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(false);
     }
 
     @Test
-    public void launchActivity_modeQrCodeGenerator_shouldNotAutoFinish() {
-        Intent intent = new Intent();
-        intent.putExtra(WifiDppConfiguratorActivity.EXTRA_LAUNCH_MODE,
-                WifiDppConfiguratorActivity.LaunchMode.LAUNCH_MODE_QR_CODE_GENERATOR.getMode());
+    public void launchActivity_qrCodeGenerator_shouldNotAutoFinish() {
+        Intent intent = new Intent(
+                WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY, "password");
+
         mActivityRule.launchActivity(intent);
 
         assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(false);
     }
 
     @Test
-    public void launchActivity_modeChooseSavedWifiNetwork_shouldNotAutoFinish() {
-        Intent intent = new Intent();
-        intent.putExtra(WifiDppConfiguratorActivity.EXTRA_LAUNCH_MODE,
-                WifiDppConfiguratorActivity.LaunchMode
-                .LAUNCH_MODE_CHOOSE_SAVED_WIFI_NETWORK.getMode());
+    public void launchActivity_chooseSavedWifiNetwork_shouldNotAutoFinish() {
+        Intent intent = new Intent(
+                WifiDppConfiguratorActivity.ACTION_PROCESS_WIFI_DPP_QR_CODE);
+        String qrCode = "DPP:I:SN=4774LH2b4044;M:010203040506;K:MDkwEwYHKoZIzj0CAQYIKoZIzj0DAQcD"
+               + "IgADURzxmttZoIRIPWGoQMV00XHWCAQIhXruVWOz0NjlkIA=;;";
+        intent.putExtra(WifiDppUtils.EXTRA_QR_CODE, qrCode);
+
         mActivityRule.launchActivity(intent);
 
         assertThat(mActivityRule.getActivity().isFinishing()).isEqualTo(false);
     }
 
     @Test
-    public void launchActivity_noLaunchMode_shouldFinishActivityWithResultCodeCanceled() {
-        // If we do not specify launch mode, the activity will finish itself right away
-        Intent intent = new Intent();
-        mActivityRule.launchActivity(intent);
+    public void testActivity_shouldImplementsWifiNetworkConfigRetriever() {
+        WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
 
-        assertThat(mActivityRule.getActivityResult().getResultCode()).
-                isEqualTo(Activity.RESULT_CANCELED);
+        assertThat(activity instanceof WifiNetworkConfig.Retriever).isEqualTo(true);
+    }
+
+    @Test
+    public void testActivity_shouldImplementsQrCodeGeneratorFragmentCallback() {
+        WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
+
+        assertThat(activity instanceof WifiDppQrCodeGeneratorFragment
+                .OnQrCodeGeneratorFragmentAddButtonClickedListener).isEqualTo(true);
+    }
+
+    @Test
+    public void testActivity_shouldImplementsOnScanWifiDppSuccessCallback() {
+        WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
+
+        assertThat(activity instanceof WifiDppQrCodeScannerFragment
+                .OnScanWifiDppSuccessListener).isEqualTo(true);
+    }
+
+    @Test
+    public void testActivity_shouldImplementsOnScanZxingWifiFormatSuccessCallback() {
+        WifiDppConfiguratorActivity activity = mActivityRule.getActivity();
+
+        assertThat(activity instanceof WifiDppQrCodeScannerFragment
+                .OnScanZxingWifiFormatSuccessListener).isEqualTo(true);
     }
 }

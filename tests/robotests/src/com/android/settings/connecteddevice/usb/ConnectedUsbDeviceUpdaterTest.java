@@ -15,6 +15,11 @@
  */
 package com.android.settings.connecteddevice.usb;
 
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_NONE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_NONE;
+import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
@@ -22,12 +27,10 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.hardware.usb.UsbManager;
-import android.hardware.usb.UsbPort;
 
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
@@ -35,9 +38,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ConnectedUsbDeviceUpdaterTest {
 
     private Context mContext;
@@ -78,7 +82,7 @@ public class ConnectedUsbDeviceUpdaterTest {
     public void initUsbPreference_usbConnected_preferenceAdded() {
         mDeviceUpdater.initUsbPreference(mContext);
         mDeviceUpdater.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
-                UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_DEVICE);
+                UsbManager.FUNCTION_NONE, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
 
         verify(mDevicePreferenceCallback).onDeviceAdded(mDeviceUpdater.mUsbPreference);
     }
@@ -87,7 +91,7 @@ public class ConnectedUsbDeviceUpdaterTest {
     public void initUsbPreference_usbDisconnected_preferenceRemoved() {
         mDeviceUpdater.initUsbPreference(mContext);
         mDeviceUpdater.mUsbConnectionListener.onUsbConnectionChanged(false /* connected */,
-                UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_NONE, UsbPort.DATA_ROLE_NONE);
+                UsbManager.FUNCTION_NONE, POWER_ROLE_NONE, DATA_ROLE_NONE);
 
         verify(mDevicePreferenceCallback).onDeviceRemoved(mDeviceUpdater.mUsbPreference);
     }

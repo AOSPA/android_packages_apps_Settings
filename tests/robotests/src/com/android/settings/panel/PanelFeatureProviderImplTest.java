@@ -20,16 +20,16 @@ package com.android.settings.panel;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import android.provider.Settings;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PanelFeatureProviderImplTest {
 
     private Context mContext;
@@ -44,9 +44,16 @@ public class PanelFeatureProviderImplTest {
     @Test
     public void getPanel_internetConnectivityKey_returnsCorrectPanel() {
         final PanelContent panel = mProvider.getPanel(mContext,
-                SettingsPanelActivity.PANEL_TYPE_WIFI);
+                Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
 
         assertThat(panel).isInstanceOf(InternetConnectivityPanel.class);
     }
 
+    @Test
+    public void getPanel_volume_returnsCorrectPanel() {
+        final PanelContent panel = mProvider.getPanel(mContext,
+                Settings.Panel.ACTION_VOLUME);
+
+        assertThat(panel).isInstanceOf(VolumePanel.class);
+    }
 }

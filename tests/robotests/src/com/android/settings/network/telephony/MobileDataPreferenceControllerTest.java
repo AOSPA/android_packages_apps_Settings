@@ -20,6 +20,7 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -34,16 +35,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class MobileDataPreferenceControllerTest {
     private static final int SUB_ID = 2;
 
@@ -104,9 +104,8 @@ public class MobileDataPreferenceControllerTest {
     public void isDialogNeeded_enableNonDefaultSimInMultiSimMode_returnTrue() {
         doReturn(false).when(mTelephonyManager).isDataEnabled();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
-        doReturn(null).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
+        doReturn(true).when(mSubscriptionManager).isActiveSubscriptionId(anyInt());
         doReturn(2).when(mTelephonyManager).getSimCount();
-        doReturn(1).when(mTelephonyManager).getNumberOfModemsWithSimultaneousDataConnections();
 
         assertThat(mController.isDialogNeeded()).isTrue();
         assertThat(mController.mDialogType).isEqualTo(
@@ -145,5 +144,4 @@ public class MobileDataPreferenceControllerTest {
 
         verify(mTelephonyManager).setDataEnabled(true);
     }
-
 }

@@ -15,24 +15,29 @@
  */
 package com.android.settings.biometrics.fingerprint;
 
-import static android.support.test.InstrumentationRegistry.getTargetContext;
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.intent.Intents.intended;
-import static android.support.test.espresso.intent.Intents.intending;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.InstrumentationRegistry.getTargetContext;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.intent.Intents.intended;
+import static androidx.test.espresso.intent.Intents.intending;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import android.app.Activity;
 import android.app.Instrumentation.ActivityResult;
 import android.content.ComponentName;
-import android.support.test.espresso.intent.rule.IntentsTestRule;
-import android.support.test.filters.SmallTest;
-import android.support.test.runner.AndroidJUnit4;
+
+import androidx.test.espresso.intent.rule.IntentsTestRule;
+import androidx.test.filters.SmallTest;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.R;
+
+import com.google.android.setupcompat.PartnerCustomizationLayout;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -55,7 +60,9 @@ public class FingerprintEnrollFinishTest {
         intending(hasComponent(enrollingComponent))
                 .respondWith(new ActivityResult(Activity.RESULT_CANCELED, null));
 
-        onView(withId(R.id.add_another_button)).perform(click());
+        PartnerCustomizationLayout layout =
+                mActivityRule.getActivity().findViewById(R.id.setup_wizard_layout);
+        layout.getMixin(ButtonFooterMixin.class).getPrimaryButtonView().performClick();
 
         intended(hasComponent(enrollingComponent));
         assertFalse(mActivityRule.getActivity().isFinishing());
@@ -70,7 +77,9 @@ public class FingerprintEnrollFinishTest {
         intending(hasComponent(enrollingComponent))
                 .respondWith(new ActivityResult(Activity.RESULT_OK, null));
 
-        onView(withId(R.id.add_another_button)).perform(click());
+        PartnerCustomizationLayout layout =
+                mActivityRule.getActivity().findViewById(R.id.setup_wizard_layout);
+        layout.getMixin(ButtonFooterMixin.class).getPrimaryButtonView().performClick();
 
         intended(hasComponent(enrollingComponent));
         assertTrue(mActivityRule.getActivity().isFinishing());

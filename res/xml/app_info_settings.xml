@@ -36,7 +36,7 @@
         settings:allowDividerAbove="true"
         settings:allowDividerBelow="true"/>
 
-    <com.android.settings.widget.ActionButtonPreference
+    <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"
         android:order="-9998" />
 
@@ -70,12 +70,6 @@
         android:title="@string/data_usage_app_summary_title"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.applications.appinfo.AppDataUsagePreferenceController" />
-
-    <Preference
-        android:key="data_settings_v2"
-        android:title="@string/data_usage_app_summary_title"
-        android:summary="@string/summary_placeholder"
-        settings:controller="com.android.settings.applications.appinfo.AppDataUsagePreferenceControllerV2" />
 
     <Preference
         android:key="time_spent_in_app"

@@ -32,16 +32,17 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WifiCallingPreferenceControllerTest {
     private static final int SUB_ID = 2;
 
@@ -76,7 +77,6 @@ public class WifiCallingPreferenceControllerTest {
         when(mPreferenceScreen.findPreference(
                 WifiCallingPreferenceController.KEY_PREFERENCE_CATEGORY)).thenReturn(
                 mPreferenceCategory);
-
     }
 
     @Test
@@ -111,4 +111,11 @@ public class WifiCallingPreferenceControllerTest {
         assertThat(mPreferenceCategory.isVisible()).isFalse();
     }
 
+    @Test
+    public void getAvailabilityStatus_noWiFiCalling_shouldReturnUnsupported() {
+        mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
 }

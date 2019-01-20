@@ -28,33 +28,27 @@ import android.content.Context;
 import android.net.Uri;
 
 import com.android.settings.slices.CustomSliceRegistry;
-import com.android.settings.slices.SettingsSliceProvider;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowContentResolver;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+
+@RunWith(RobolectricTestRunner.class)
 public class ContextualCardLoaderTest {
 
     private Context mContext;
     private ContextualCardLoader mContextualCardLoader;
-    private SettingsSliceProvider mProvider;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mContextualCardLoader = spy(new ContextualCardLoader(mContext));
-        mProvider = new SettingsSliceProvider();
-        ShadowContentResolver.registerProviderInternal(SettingsSliceProvider.SLICE_AUTHORITY,
-                mProvider);
     }
 
     @Test
@@ -151,7 +145,7 @@ public class ContextualCardLoaderTest {
         cards.add(new ContextualCard.Builder()
                 .setName("test_wifi")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.WIFI_SLICE_URI)
+                .setSliceUri(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_flashlight")
@@ -162,7 +156,7 @@ public class ContextualCardLoaderTest {
         cards.add(new ContextualCard.Builder()
                 .setName("test_connected")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI)
+                .setSliceUri(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_gesture")

@@ -28,11 +28,11 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.service.trust.TrustAgentService;
 
+import android.text.TextUtils;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
@@ -42,6 +42,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
@@ -52,7 +53,7 @@ import org.robolectric.shadows.ShadowApplicationPackageManager;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowLockPatternUtils.class,
         ShadowRestrictedLockUtilsInternal.class,
@@ -96,7 +97,7 @@ public class TrustAgentsPreferenceControllerTest {
     @Test
     public void onStart_noTrustAgent_shouldNotAddPreference() {
         final List<ResolveInfo> availableAgents = createFakeAvailableAgents();
-        mPackageManager.addResolveInfoForIntent(TEST_INTENT, availableAgents);
+        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
 
         mController.displayPreference(mPreferenceScreen);
         mController.onStart();
@@ -109,15 +110,16 @@ public class TrustAgentsPreferenceControllerTest {
     onStart_hasAUninstalledTrustAgent_shouldRemoveOnePreferenceAndLeaveTwoPreferences() {
         final List<ResolveInfo> availableAgents = createFakeAvailableAgents();
         final ResolveInfo uninstalledTrustAgent = availableAgents.get(0);
+
         for (ResolveInfo rInfo : availableAgents) {
             ShadowTrustAgentManager.grantPermissionToResolveInfo(rInfo);
         }
-        mPackageManager.addResolveInfoForIntent(TEST_INTENT, availableAgents);
+        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
         mController.displayPreference(mPreferenceScreen);
         mController.onStart();
         availableAgents.remove(uninstalledTrustAgent);
 
-        mPackageManager.addResolveInfoForIntent(TEST_INTENT, availableAgents);
+        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
         mController.onStart();
 
         assertThat(mPreferenceScreen.getPreferenceCount()).isEqualTo(2);
@@ -131,13 +133,13 @@ public class TrustAgentsPreferenceControllerTest {
         for (ResolveInfo rInfo : availableAgents) {
             ShadowTrustAgentManager.grantPermissionToResolveInfo(rInfo);
         }
-        mPackageManager.addResolveInfoForIntent(TEST_INTENT, availableAgents);
+        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
         mController.displayPreference(mPreferenceScreen);
         mController.onStart();
         availableAgents.add(newTrustAgent);
         ShadowTrustAgentManager.grantPermissionToResolveInfo(newTrustAgent);
 
-        mPackageManager.addResolveInfoForIntent(TEST_INTENT, availableAgents);
+        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
         mController.onStart();
 
         assertThat(mPreferenceScreen.getPreferenceCount()).isEqualTo(4);
@@ -150,7 +152,7 @@ public class TrustAgentsPreferenceControllerTest {
         for (ResolveInfo rInfo : availableAgents) {
             ShadowTrustAgentManager.grantPermissionToResolveInfo(rInfo);
         }
-        mPackageManager.addResolveInfoForIntent(TEST_INTENT, availableAgents);
+        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
 
         mController.displayPreference(mPreferenceScreen);
         mController.onStart();
@@ -169,7 +171,7 @@ public class TrustAgentsPreferenceControllerTest {
         for (ResolveInfo rInfo : availableAgents) {
             ShadowTrustAgentManager.grantPermissionToResolveInfo(rInfo);
         }
-        mPackageManager.addResolveInfoForIntent(TEST_INTENT, availableAgents);
+        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
         ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
                 DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS);
 
@@ -213,18 +215,21 @@ public class TrustAgentsPreferenceControllerTest {
         private final static List<ResolveInfo> sPermissionGrantedList = new ArrayList<>();
 
         @Implementation
-        public boolean shouldProvideTrust(ResolveInfo resolveInfo, PackageManager pm) {
-            if (sPermissionGrantedList.contains(resolveInfo)) {
-                return true;
+        protected boolean shouldProvideTrust(ResolveInfo resolveInfo, PackageManager pm) {
+            for (ResolveInfo info : sPermissionGrantedList) {
+                if (info.serviceInfo.equals(resolveInfo.serviceInfo)) {
+                    return true;
+                }
             }
+
             return false;
         }
 
-        public static void grantPermissionToResolveInfo(ResolveInfo rInfo) {
+        private static void grantPermissionToResolveInfo(ResolveInfo rInfo) {
             sPermissionGrantedList.add(rInfo);
         }
 
-        public static void clearPermissionGrantedList() {
+        private static void clearPermissionGrantedList() {
             sPermissionGrantedList.clear();
         }
     }

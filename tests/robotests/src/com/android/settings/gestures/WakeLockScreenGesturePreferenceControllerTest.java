@@ -21,13 +21,12 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,8 +34,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WakeLockScreenGesturePreferenceControllerTest {
 
     private static final String KEY_WAKE_LOCK_SCREEN = "gesture_wake_lock_screen";
@@ -71,7 +71,7 @@ public class WakeLockScreenGesturePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_gestureNotSupported_UNSUPPORTED_ON_DEVICE() {
-        when(mAmbientDisplayConfiguration.wakeLockScreenGestureAvailable()).thenReturn(false);
+        when(mAmbientDisplayConfiguration.wakeScreenGestureAvailable()).thenReturn(false);
         final int availabilityStatus = mController.getAvailabilityStatus();
 
         assertThat(availabilityStatus).isEqualTo(UNSUPPORTED_ON_DEVICE);
@@ -79,7 +79,7 @@ public class WakeLockScreenGesturePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_gestureSupported_AVAILABLE() {
-        when(mAmbientDisplayConfiguration.wakeLockScreenGestureAvailable()).thenReturn(true);
+        when(mAmbientDisplayConfiguration.wakeScreenGestureAvailable()).thenReturn(true);
         final int availabilityStatus = mController.getAvailabilityStatus();
 
         assertThat(availabilityStatus).isEqualTo(AVAILABLE);

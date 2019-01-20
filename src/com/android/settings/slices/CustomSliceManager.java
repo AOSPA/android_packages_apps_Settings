@@ -22,14 +22,18 @@ import android.util.ArrayMap;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.flashlight.FlashlightSlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.DeviceInfoSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSlice;
-import com.android.settings.homepage.contextualcards.slices.ConnectedDeviceSlice;
+import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice;
 import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
-import com.android.settings.wifi.WifiSlice;
+import com.android.settings.location.LocationSlice;
+import com.android.settings.wifi.slice.ContextualWifiSlice;
+import com.android.settings.wifi.slice.WifiSlice;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -103,9 +107,13 @@ public class CustomSliceManager {
     private void addSlices() {
         mUriMap.put(CustomSliceRegistry.BATTERY_FIX_SLICE_URI, BatteryFixSlice.class);
         mUriMap.put(CustomSliceRegistry.BATTERY_INFO_SLICE_URI, BatterySlice.class);
-        mUriMap.put(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI, ConnectedDeviceSlice.class);
+        mUriMap.put(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
+        mUriMap.put(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
         mUriMap.put(CustomSliceRegistry.DATA_USAGE_SLICE_URI, DataUsageSlice.class);
         mUriMap.put(CustomSliceRegistry.DEVICE_INFO_SLICE_URI, DeviceInfoSlice.class);
+        mUriMap.put(CustomSliceRegistry.EMERGENCY_INFO_SLICE_URI, EmergencyInfoSlice.class);
+        mUriMap.put(CustomSliceRegistry.FLASHLIGHT_SLICE_URI, FlashlightSlice.class);
+        mUriMap.put(CustomSliceRegistry.LOCATION_SLICE_URI, LocationSlice.class);
         mUriMap.put(CustomSliceRegistry.LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
         mUriMap.put(CustomSliceRegistry.STORAGE_SLICE_URI, StorageSlice.class);
         mUriMap.put(CustomSliceRegistry.WIFI_SLICE_URI, WifiSlice.class);

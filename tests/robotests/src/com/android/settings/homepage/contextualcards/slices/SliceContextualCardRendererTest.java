@@ -18,6 +18,7 @@ package com.android.settings.homepage.contextualcards.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
@@ -38,7 +39,6 @@ import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.homepage.contextualcards.ControllerRendererPool;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,15 +46,20 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SliceContextualCardRendererTest {
+
+    private static final Uri TEST_SLICE_URI = Uri.parse("content://test/test");
 
     @Mock
     private LiveData<Slice> mSliceLiveData;
     @Mock
     private ControllerRendererPool mControllerRendererPool;
+    @Mock
+    private SliceContextualCardController mController;
 
     private Activity mActivity;
     private SliceContextualCardRenderer mRenderer;
@@ -66,7 +71,7 @@ public class SliceContextualCardRendererTest {
         final ActivityController<Activity> activityController = Robolectric.buildActivity(
                 Activity.class);
         mActivity = activityController.get();
-        mActivity.setTheme(R.style.Theme_AppCompat);
+        mActivity.setTheme(R.style.Theme_Settings_Home);
         activityController.create();
         mLifecycleOwner = new ContextualCardsFragment();
         mRenderer = new SliceContextualCardRenderer(mActivity, mLifecycleOwner,
@@ -75,10 +80,9 @@ public class SliceContextualCardRendererTest {
 
     @Test
     public void bindView_shouldSetScrollableToFalse() {
-        final String sliceUri = "content://com.android.settings.slices/action/flashlight";
         RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
 
-        mRenderer.bindView(viewHolder, buildContextualCard(sliceUri));
+        mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
 
         assertThat(
                 ((SliceContextualCardRenderer.SliceViewHolder) viewHolder).sliceView.isScrollable
@@ -87,7 +91,7 @@ public class SliceContextualCardRendererTest {
 
     @Test
     public void bindView_invalidScheme_sliceShouldBeNull() {
-        final String sliceUri = "contet://com.android.settings.slices/action/flashlight";
+        final Uri sliceUri = Uri.parse("contet://com.android.settings.slices/action/flashlight");
         RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
 
         mRenderer.bindView(viewHolder, buildContextualCard(sliceUri));
@@ -99,60 +103,120 @@ public class SliceContextualCardRendererTest {
 
     @Test
     public void bindView_newSliceLiveData_shouldAddDataToMap() {
-        final String sliceUri = "content://com.android.settings.slices/action/flashlight";
-
-        mRenderer.bindView(getSliceViewHolder(), buildContextualCard(sliceUri));
+        mRenderer.bindView(getSliceViewHolder(), buildContextualCard(TEST_SLICE_URI));
 
         assertThat(mRenderer.mSliceLiveDataMap.size()).isEqualTo(1);
     }
 
     @Test
     public void bindView_sliceLiveDataShouldObserveSliceView() {
-        final String sliceUri = "content://com.android.settings.slices/action/flashlight";
+        mRenderer.bindView(getSliceViewHolder(), buildContextualCard(TEST_SLICE_URI));
 
-        mRenderer.bindView(getSliceViewHolder(), buildContextualCard(sliceUri));
-
-        assertThat(mRenderer.mSliceLiveDataMap.get(sliceUri).hasObservers()).isTrue();
+        assertThat(mRenderer.mSliceLiveDataMap.get(TEST_SLICE_URI).hasObservers()).isTrue();
     }
 
     @Test
     public void bindView_sliceLiveDataShouldRemoveObservers() {
-        final String sliceUri = "content://com.android.settings.slices/action/flashlight";
-        mRenderer.mSliceLiveDataMap.put(sliceUri, mSliceLiveData);
+        mRenderer.mSliceLiveDataMap.put(TEST_SLICE_URI, mSliceLiveData);
 
-        mRenderer.bindView(getSliceViewHolder(), buildContextualCard(sliceUri));
+        mRenderer.bindView(getSliceViewHolder(), buildContextualCard(TEST_SLICE_URI));
 
         verify(mSliceLiveData).removeObservers(mLifecycleOwner);
     }
 
     @Test
     public void longClick_shouldFlipCard() {
-        final String sliceUri = "content://com.android.settings.slices/action/flashlight";
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
         final View card = viewHolder.itemView.findViewById(R.id.slice_view);
-        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.viewFlipper);
+        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.view_flipper);
         final View dismissalView = viewHolder.itemView.findViewById(R.id.dismissal_view);
-        mRenderer.bindView(viewHolder, buildContextualCard(sliceUri));
+        mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
 
-        assertThat(card).isNotNull();
         card.performLongClick();
 
         assertThat(viewFlipper.getCurrentView()).isEqualTo(dismissalView);
     }
 
     @Test
+    public void longClick_shouldAddViewHolderToSet() {
+        final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+        final View card = viewHolder.itemView.findViewById(R.id.slice_view);
+        mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
+
+        card.performLongClick();
+
+        assertThat(mRenderer.mFlippedCardSet).contains(viewHolder);
+    }
+
+    @Test
     public void viewClick_keepCard_shouldFlipBackToSlice() {
-        final String sliceUri = "content://com.android.settings.slices/action/flashlight";
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
         final View card = viewHolder.itemView.findViewById(R.id.slice_view);
         final Button btnKeep = viewHolder.itemView.findViewById(R.id.keep);
-        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.viewFlipper);
-        mRenderer.bindView(viewHolder, buildContextualCard(sliceUri));
+        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.view_flipper);
+        mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
 
-        assertThat(card).isNotNull();
         card.performLongClick();
-        assertThat(btnKeep).isNotNull();
         btnKeep.performClick();
+
+        assertThat(viewFlipper.getCurrentView()).isInstanceOf(SliceView.class);
+    }
+
+    @Test
+    public void viewClick_keepCard_shouldRemoveViewHolderFromSet() {
+        final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+        final View card = viewHolder.itemView.findViewById(R.id.slice_view);
+        final Button btnKeep = viewHolder.itemView.findViewById(R.id.keep);
+        mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
+
+        card.performLongClick();
+        btnKeep.performClick();
+
+        assertThat(mRenderer.mFlippedCardSet).doesNotContain(viewHolder);
+    }
+
+    @Test
+    public void viewClick_removeCard_shouldRemoveViewHolderFromSet() {
+        final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+        final View card = viewHolder.itemView.findViewById(R.id.slice_view);
+        final Button btnRemove = viewHolder.itemView.findViewById(R.id.remove);
+        final ContextualCard contextualCard = buildContextualCard(TEST_SLICE_URI);
+        mRenderer.bindView(viewHolder, contextualCard);
+        doReturn(mController).when(mControllerRendererPool).getController(mActivity,
+                ContextualCard.CardType.SLICE);
+
+        card.performLongClick();
+        btnRemove.performClick();
+
+        assertThat(mRenderer.mFlippedCardSet).doesNotContain(viewHolder);
+    }
+
+    @Test
+    public void viewClick_removeCard_sliceLiveDataShouldRemoveObservers() {
+        final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+        final View card = viewHolder.itemView.findViewById(R.id.slice_view);
+        final Button btnRemove = viewHolder.itemView.findViewById(R.id.remove);
+        final ContextualCard contextualCard = buildContextualCard(TEST_SLICE_URI);
+        mRenderer.mSliceLiveDataMap.put(TEST_SLICE_URI, mSliceLiveData);
+        mRenderer.bindView(viewHolder, contextualCard);
+        doReturn(mController).when(mControllerRendererPool).getController(mActivity,
+                ContextualCard.CardType.SLICE);
+
+        card.performLongClick();
+        btnRemove.performClick();
+
+        assertThat(mRenderer.mSliceLiveDataMap.get(TEST_SLICE_URI).hasObservers()).isFalse();
+    }
+
+    @Test
+    public void onStop_cardIsFlipped_shouldFlipBack() {
+        final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+        final View card = viewHolder.itemView.findViewById(R.id.slice_view);
+        final ViewFlipper viewFlipper = viewHolder.itemView.findViewById(R.id.view_flipper);
+        mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
+
+        card.performLongClick();
+        mRenderer.onStop();
 
         assertThat(viewFlipper.getCurrentView()).isInstanceOf(SliceView.class);
     }
@@ -166,10 +230,11 @@ public class SliceContextualCardRendererTest {
         return mRenderer.createViewHolder(view);
     }
 
-    private ContextualCard buildContextualCard(String sliceUri) {
+    private ContextualCard buildContextualCard(Uri sliceUri) {
         return new ContextualCard.Builder()
                 .setName("test_name")
-                .setSliceUri(Uri.parse(sliceUri))
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(sliceUri)
                 .build();
     }
 }

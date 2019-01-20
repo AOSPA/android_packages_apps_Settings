@@ -25,9 +25,9 @@ import android.content.Context;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,11 +35,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class EnterprisePrivacySettingsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -59,7 +60,7 @@ public class EnterprisePrivacySettingsTest {
         assertThat(mSettings.getMetricsCategory())
                 .isEqualTo(MetricsEvent.ENTERPRISE_PRIVACY_SETTINGS);
         assertThat(mSettings.getLogTag()).isEqualTo("EnterprisePrivacySettings");
-        assertThat(mSettings.getCategoryKey()).isNull();
+        assertThat(mSettings.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_ENTERPRISE_PRIVACY);
         assertThat(mSettings.getPreferenceScreenResId())
                 .isEqualTo(R.xml.enterprise_privacy_settings);
     }

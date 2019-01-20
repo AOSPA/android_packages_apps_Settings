@@ -64,7 +64,6 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     private TimePickerPreference mEnd;
     private SwitchPreference mExitAtAlarm;
     private AlertDialog mDayDialog;
-
     private ScheduleInfo mSchedule;
 
     @Override
@@ -186,7 +185,6 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
         final int summaryFormat = nextDay ? R.string.zen_mode_end_time_next_day_summary_format : 0;
         mEnd.setSummaryFormat(summaryFormat);
     }
-
     @Override
     protected void updateControlsInternal() {
         updateDays();
@@ -201,10 +199,12 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         mHeader = new ZenAutomaticRuleHeaderPreferenceController(context, this,
                 getSettingsLifecycle());
+        mActionButtons = new ZenRuleButtonsPreferenceController(context, this,
+                getSettingsLifecycle());
         mSwitch = new ZenAutomaticRuleSwitchPreferenceController(context, this,
                 getSettingsLifecycle());
-
         controllers.add(mHeader);
+        controllers.add(mActionButtons);
         controllers.add(mSwitch);
         return controllers;
     }

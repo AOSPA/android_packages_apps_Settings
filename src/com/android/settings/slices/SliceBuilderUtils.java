@@ -94,7 +94,7 @@ public class SliceBuilderUtils {
             return buildUnavailableSlice(context, sliceData);
         }
 
-        if (controller instanceof CopyableSlice) {
+        if (controller instanceof Copyable) {
             return buildCopyableSlice(context, sliceData, controller);
         }
 
@@ -168,10 +168,11 @@ public class SliceBuilderUtils {
      * @return {@link PendingIntent} for a non-primary {@link SliceAction}.
      */
     public static PendingIntent getActionIntent(Context context, String action, SliceData data) {
-        final Intent intent = new Intent(action);
-        intent.setClass(context, SliceBroadcastReceiver.class);
-        intent.putExtra(EXTRA_SLICE_KEY, data.getKey());
-        intent.putExtra(EXTRA_SLICE_PLATFORM_DEFINED, data.isPlatformDefined());
+        final Intent intent = new Intent(action)
+                .setData(data.getUri())
+                .setClass(context, SliceBroadcastReceiver.class)
+                .putExtra(EXTRA_SLICE_KEY, data.getKey())
+                .putExtra(EXTRA_SLICE_PLATFORM_DEFINED, data.isPlatformDefined());
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
     }
@@ -193,8 +194,9 @@ public class SliceBuilderUtils {
         CharSequence summaryText = controller.getSummary();
 
         // Priority 1 : User prefers showing the dynamic summary in slice view rather than static
-        // summary.
-        if (isDynamicSummaryAllowed && isValidSummary(context, summaryText)) {
+        // summary. Note it doesn't require a valid summary - so we can force some slices to have
+        // empty summaries (ex: volume).
+        if (isDynamicSummaryAllowed) {
             return summaryText;
         }
 
@@ -447,6 +449,12 @@ public class SliceBuilderUtils {
         if (iconResource == 0) {
             iconResource = R.drawable.ic_settings;
         }
-        return IconCompat.createWithResource(context, iconResource);
+        try {
+            return IconCompat.createWithResource(context, iconResource);
+        } catch (Exception e) {
+            Log.w(TAG, "Falling back to settings icon because there is an error getting slice icon "
+                    + data.getUri(), e);
+            return IconCompat.createWithResource(context, R.drawable.ic_settings);
+        }
     }
 }

@@ -28,7 +28,6 @@ import android.widget.FrameLayout;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -36,10 +35,11 @@ import org.robolectric.Robolectric;
 
 import org.junit.Test;
 
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PanelSlicesAdapterTest {
 
     private Context mContext;
@@ -54,7 +54,13 @@ public class PanelSlicesAdapterTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
 
-        final ActivityController<FakeSettingsPanelActivity> activityController =
+        mPanelFeatureProvider = spy(new PanelFeatureProviderImpl());
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mFakeFeatureFactory.panelFeatureProvider = mPanelFeatureProvider;
+        mFakePanelContent = new FakePanelContent();
+        doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any());
+
+        ActivityController<FakeSettingsPanelActivity> activityController =
                 Robolectric.buildActivity(FakeSettingsPanelActivity.class);
         activityController.setup();
 
@@ -64,12 +70,6 @@ public class PanelSlicesAdapterTest {
                                 .get()
                                 .getSupportFragmentManager()
                                 .findFragmentById(R.id.main_content));
-
-        mPanelFeatureProvider = spy(new PanelFeatureProviderImpl());
-        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mFakeFeatureFactory.panelFeatureProvider = mPanelFeatureProvider;
-        mFakePanelContent = new FakePanelContent();
-        doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any());
 
         mAdapter = new PanelSlicesAdapter(mPanelFragment, mFakePanelContent.getSlices());
     }

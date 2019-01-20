@@ -15,12 +15,12 @@
   ~ limitations under the License
   -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout="@layout/suw_glif_blank_template"
+    android:layout="@layout/sud_glif_blank_template"
     style="?attr/fingerprint_layout_theme">
 
     <ScrollView
@@ -70,44 +70,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/security_settings_fingerprint_enroll_finish_message"/>
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <com.android.setupwizardlib.view.ButtonBarLayout
-                    style="@style/SuwGlifButtonBar.Stackable"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:clipChildren="false"
-                    android:clipToPadding="false">
-
-                    <Button
-                        style="@style/SetupWizardButton.Negative"
-                        android:id="@+id/add_another_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="@string/fingerprint_enroll_button_add" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <Button
-                        style="@style/SetupWizardButton.Positive"
-                        android:id="@+id/next_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/security_settings_fingerprint_enroll_done" />
-
-                </com.android.setupwizardlib.view.ButtonBarLayout>
-
             </LinearLayout>
 
-            <com.android.setupwizardlib.view.FillContentLayout
+            <com.google.android.setupdesign.view.FillContentLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent">
@@ -120,8 +85,8 @@
                     android:contentDescription="@android:string/fingerprint_icon_content_description"
                     android:src="@drawable/fingerprint_enroll_finish" />
 
-            </com.android.setupwizardlib.view.FillContentLayout>
+            </com.google.android.setupdesign.view.FillContentLayout>
 
         </LinearLayout>
     </ScrollView>
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

@@ -28,11 +28,12 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
@@ -43,16 +44,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowUserManager;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = ShadowUserManager.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowUserManager.class, ShadowAlertDialogCompat.class})
 public class DevelopmentSettingsDashboardFragmentTest {
 
     private ToggleSwitch mSwitch;
@@ -68,7 +73,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         mSwitch = switchBar.getSwitch();
         mDashboard = spy(new DevelopmentSettingsDashboardFragment());
         ReflectionHelpers.setField(mDashboard, "mSwitchBar", switchBar);
-        mShadowUserManager = ShadowUserManager.getShadow();
+        mShadowUserManager = Shadow.extract(mContext.getSystemService(Context.USER_SERVICE));
         mShadowUserManager.setIsAdminUser(true);
     }
 
@@ -99,7 +104,6 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
     public void searchIndex_pageDisabledBySetting_shouldAddAllKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, false);
@@ -112,7 +116,6 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
     public void searchIndex_pageDisabledForNonAdmin_shouldAddAllKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, true);
@@ -176,6 +179,29 @@ public class DevelopmentSettingsDashboardFragmentTest {
 
         assertThat(ShadowEnableDevelopmentSettingWarningDialog.mShown).isFalse();
         assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)).isFalse();
+    }
+
+    @Test
+    @Config(shadows = ShadowDisableDevSettingsDialogFragment.class)
+    public void onSwitchChanged_turnOff_andOffloadIsNotDefaultValue_shouldShowWarningDialog() {
+        final BluetoothA2dpHwOffloadPreferenceController controller =
+                mock(BluetoothA2dpHwOffloadPreferenceController.class);
+        when(mDashboard.getContext()).thenReturn(mContext);
+        when(mDashboard.getDevelopmentOptionsController(
+                BluetoothA2dpHwOffloadPreferenceController.class)).thenReturn(controller);
+        when(controller.isDefaultValue()).thenReturn(false);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+
+        mDashboard.onSwitchChanged(mSwitch, false /* isChecked */);
+
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNotNull();
+        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
+        assertThat(shadowDialog.getTitle()).isEqualTo(
+                mContext.getString(R.string.bluetooth_disable_a2dp_hw_offload_dialog_title));
+        assertThat(shadowDialog.getMessage()).isEqualTo(
+                mContext.getString(R.string.bluetooth_disable_a2dp_hw_offload_dialog_message));
     }
 
     @Test
@@ -259,15 +285,27 @@ public class DevelopmentSettingsDashboardFragmentTest {
         }
 
         @Implementation
-        public static void show(DevelopmentSettingsDashboardFragment host) {
+        protected static void show(DevelopmentSettingsDashboardFragment host) {
             mShown = true;
+        }
+    }
+
+    @Implements(DisableDevSettingsDialogFragment.class)
+    public static class ShadowDisableDevSettingsDialogFragment {
+
+        @Implementation
+        public static void show(DevelopmentSettingsDashboardFragment host) {
+            DisableDevSettingsDialogFragment mFragment =
+                    spy(DisableDevSettingsDialogFragment.newInstance());
+            FragmentController.setupFragment(mFragment, FragmentActivity.class,
+                    0 /* containerViewId */, null /* bundle */);
         }
     }
 
     @Implements(PictureColorModePreferenceController.class)
     public static class ShadowPictureColorModePreferenceController {
         @Implementation
-        public boolean isAvailable() {
+        protected boolean isAvailable() {
             return true;
         }
     }
@@ -275,16 +313,15 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Implements(AbstractEnableAdbPreferenceController.class)
     public static class ShadowAdbPreferenceController {
         @Implementation
-        public boolean isAvailable() {
+        protected boolean isAvailable() {
             return true;
         }
     }
 
     @Implements(ClearAdbKeysPreferenceController.class)
     public static class ShadowClearAdbKeysPreferenceController {
-
         @Implementation
-        public boolean isAvailable() {
+        protected boolean isAvailable() {
             return true;
         }
     }

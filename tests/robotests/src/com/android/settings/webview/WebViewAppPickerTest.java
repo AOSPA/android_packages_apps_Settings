@@ -20,9 +20,9 @@ import static android.provider.Settings.ACTION_WEBVIEW_SETTINGS;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -39,12 +39,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.graphics.drawable.ColorDrawable;
 import android.os.UserManager;
 import android.webkit.UserPackage;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -55,13 +55,16 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WebViewAppPickerTest {
 
     private final static String DEFAULT_PACKAGE_NAME = "DEFAULT_PACKAGE_NAME";
@@ -340,6 +343,11 @@ public class WebViewAppPickerTest {
         packageInfo.versionName = "myVersionName";
         when(mPackageManager.getPackageInfo(eq(DEFAULT_PACKAGE_NAME), anyInt())).thenReturn(
                 packageInfo);
+
+        // Subvert attempts to load an unbadged icon for the application.
+        PackageManager pm = RuntimeEnvironment.application.getPackageManager();
+        ShadowPackageManager spm = Shadows.shadowOf(pm);
+        spm.setUnbadgedApplicationIcon(DEFAULT_PACKAGE_NAME, new ColorDrawable());
 
         RadioButtonPreference mockPreference = mock(RadioButtonPreference.class);
         mPicker.bindPreference(mockPreference, DEFAULT_PACKAGE_NAME, webviewAppInfo, null);

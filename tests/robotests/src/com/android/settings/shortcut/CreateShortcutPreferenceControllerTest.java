@@ -38,7 +38,6 @@ import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 
 import com.android.settings.Settings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
 import org.junit.Before;
@@ -47,6 +46,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
@@ -58,7 +58,7 @@ import java.util.List;
 /**
  * Tests for {@link CreateShortcutPreferenceController}
  */
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
 public class CreateShortcutPreferenceControllerTest {
 
@@ -118,13 +118,13 @@ public class CreateShortcutPreferenceControllerTest {
         ri2.activityInfo.applicationInfo = new ApplicationInfo();
         ri2.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
-        mPackageManager.addResolveInfoForIntent(
+        mPackageManager.setResolveInfosForIntent(
                 new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
                 Arrays.asList(ri1, ri2));
 
         final List<ResolveInfo> info = mController.queryShortcuts();
         assertThat(info).hasSize(1);
-        assertThat(info.get(0)).isEqualTo(ri2);
+        assertThat(info.get(0).activityInfo).isEqualTo(ri2.activityInfo);
     }
 
     @Test
@@ -143,13 +143,13 @@ public class CreateShortcutPreferenceControllerTest {
         ri2.activityInfo.applicationInfo = new ApplicationInfo();
         ri2.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
-        mPackageManager.addResolveInfoForIntent(
+        mPackageManager.setResolveInfosForIntent(
                 new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
                 Arrays.asList(ri1, ri2));
 
         final List<ResolveInfo> info = mController.queryShortcuts();
         assertThat(info).hasSize(2);
-        assertThat(info.get(0)).isEqualTo(ri2);
-        assertThat(info.get(1)).isEqualTo(ri1);
+        assertThat(info.get(0).activityInfo).isEqualTo(ri2.activityInfo);
+        assertThat(info.get(1).activityInfo).isEqualTo(ri1.activityInfo);
     }
 }

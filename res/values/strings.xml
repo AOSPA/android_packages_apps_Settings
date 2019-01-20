@@ -655,6 +655,8 @@
     <string name="done">Done</string>
     <!-- Button label for generic apply action [CHAR LIMIT=20] -->
     <string name="apply">Apply</string>
+    <!-- Button label for generic share action [CHAR LIMIT=20] -->
+    <string name="share">Share</string>
 
     <!-- Title of the Settings activity shown within the application itself. -->
     <string name="settings_label">Settings</string>
@@ -672,7 +674,7 @@
     <!-- check box cellular data title [CHAR LIMIT=30] -->
     <string name="cellular_data_title">Mobile data</string>
     <!-- check box Calls title [CHAR LIMIT=30] -->
-    <string name="calls_title">Calls</string>
+    <string name="calls_title">Allow calls</string>
     <!-- check box SMS Messges title [CHAR LIMIT=30] -->
     <string name="sms_messages_title">SMS messages</string>
     <!-- check box cellular data summary [CHAR LIMIT=85] -->
@@ -798,6 +800,17 @@
     <string name="lockdown_settings_title">Show lockdown option</string>
     <!-- Text shown for the description of the lockdown option -->
     <string name="lockdown_settings_summary">Display power button option that turns off Smart Lock, fingerprint unlocking, and notifications on the lock screen</string>
+
+    <!-- Text shown for the title of the extend unlock mode option for trust agents [CHAR LIMIT=40] -->
+    <string name="trust_agents_extend_unlock_title">SmartLock only extends unlock</string>
+    <!-- Text shown for the description of the extend unlock mode option [CHAR LIMIT=NONE] -->
+    <string name="trust_agents_extend_unlock_summary">If enabled, SmartLock will keep your device unlocked for longer, but can no longer unlock a locked device.</string>
+
+    <!-- Text shown for the title of the lock when trust lost option [CHAR LIMIT=40] -->
+    <string name="trust_lost_locks_screen_title">Lock screen when trust is lost</string>
+    <!-- Text shown for the description of the lock when trust lost option [CHAR LIMIT=NONE -->
+    <string name="trust_lost_locks_screen_summary">If enabled, the device will lock when the last trust agent loses trust</string>
+
     <!-- Text shown for summary of owner info setting (if none set) [CHAR LIMIT=40]-->
     <string name="owner_info_settings_summary">None</string>
     <!-- Description of how many characters are used in owner info [CHAR LIMIT=40]-->
@@ -816,8 +829,15 @@
     <string name="location_settings_title">Location</string>
     <!-- Used in the location settings to control turning on/off the feature entirely -->
     <string name="location_settings_master_switch_title">Use location</string>
-    <!-- Summary for Location settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="location_settings_summary">Scanning, location history</string>
+    <!-- Summary for Location settings when location is off [CHAR LIMIT=NONE] -->
+    <string name="location_settings_summary_location_off">Off</string>
+    <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
+    <plurals name="location_settings_summary_location_on">
+        <item quantity="one">On - <xliff:g id="count">%1$d</xliff:g> app can access location</item>
+        <item quantity="other">On - <xliff:g id="count">%1$d</xliff:g> apps can access location</item>
+    </plurals>
+    <!-- Location settings, loading the number of apps which have location permission [CHAR LIMIT=30] -->
+    <string name="location_settings_loading_app_permission_stats">Loading\u2026</string>
 
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
     <string name="account_settings_title">Accounts</string>
@@ -859,6 +879,12 @@
     <string name="security_settings_face_preference_summary_none">Tap to set up face authentication</string>
     <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=32] -->
     <string name="security_settings_face_preference_title">Face authentication</string>
+    <!-- Button shown which shows accessibility toggles for face enrollment when clicked. [CHAR LIMIT=32] -->
+    <string name="security_settings_face_enroll_introduction_accessibility">Use accessibility setup</string>
+    <!-- Message shown for a toggle which when disabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_accessibility_diversity"></string>
+    <!-- Message shown for a toggle which when disabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_accessibility_vision"></string>
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
     <!-- Introduction title shown in face enrollment to introduce the face unlock feature [CHAR LIMIT=40] -->
@@ -2055,9 +2081,33 @@
     <!-- Label for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
     <string name="wifi_privacy_settings">Privacy</string>
     <!-- Title for the fragment to add a device into the wifi network [CHAR LIMIT=50]  -->
-    <string name="wifi_dpp_add_device_to_network">Add a device to this network</string>
+    <string name="wifi_dpp_add_device_to_network">Add a device</string>
     <!-- Hint for the user to center another device's QR code in the below camera window [CHAR LIMIT=120] -->
-    <string name="wifi_dpp_center_qr_code">Center the device\u2019s QR code below to add device to \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
+    <string name="wifi_dpp_center_qr_code">Center the QR code below to add the device to \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
+    <!-- Title for the fragment to scan QR code [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_scan_qr_code">Scan QR code</string>
+    <!-- Hint for the user to center another device's QR code in the below camera window [CHAR LIMIT=NONE] -->
+    <string name="wifi_dpp_scan_qr_code_join_network">Center the QR code below to connect to \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
+    <!-- Hint for the user to center another device's QR code in the below camera window [CHAR LIMIT=NONE] -->
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network">Join Wi\u2011Fi by scanning a QR code</string>
+    <!-- Title for the fragment to share Wi-Fi [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_share_wifi">Share Wi\u2011Fi</string>
+    <!-- Hint for the user to use another device to scan QR code on screen to join Wi-Fi [CHAR LIMIT=NONE] -->
+    <string name="wifi_dpp_scan_qr_code_with_another_device">Scan this QR code with another device to join \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
+    <!-- Hint for QR code detection [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_could_not_detect_valid_qr_code">Couldn\u2019t read QR code</string>
+    <!-- Title for the fragment choose network [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_choose_network">Choose network</string>
+    <!-- Hint for the user to center another device's QR code in the below camera window [CHAR LIMIT=NONE] -->
+    <string name="wifi_dpp_choose_network_to_connect_device">To connect your device, choose a network</string>
+    <!-- Hint for the user to add the device to a Wi-Fi network [CHAR LIMIT=NONE] -->
+    <string name="wifi_dpp_add_device_to_wifi">Add this device to \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d?</string>
+    <!-- Title for the fragment to tell the user that Wi-Fi shared with device successfully [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_wifi_shared_with_device">Wi\u2011Fi shared with device</string>
+    <!-- Button label to add another device to Wi-Fi [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_add_another_device">Add another device</string>
+    <!-- Button label to choose different Wi-Fi network [CHAR LIMIT=80]  -->
+    <string name="wifi_dpp_choose_different_network">Choose different network</string>
     <!-- Label for the check box to share a network with other users on the same device -->
     <string name="wifi_shared">Share with other device users</string>
     <!-- Hint for unchanged fields -->
@@ -2612,6 +2662,9 @@
     <!-- Description about the feature adaptive brightness -->
     <string name="auto_brightness_description">Your screen brightness will automatically adjust to your environment and activities. You can move the slider manually to help adaptive brightness learn your preferences.</string>
 
+    <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
+    <string name="display_white_balance_title">Display white balance</string>
+
     <!-- Night display screen, setting option name to enable night display (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
     <string name="night_display_title">Night Light</string>
     <!-- Night display screen, description of night display feature (renamed "Night Light" with title caps). [CHAR LIMIT=NONE] -->
@@ -2882,6 +2935,14 @@
     <string name="status_prl_version">PRL version</string>
     <!-- About phone screen, title for MEID for multi-sim devices -->
     <string name="meid_multi_sim">MEID (sim slot %1$d)</string>
+    <!-- The status text when both Wi-Fi scanning and Bluetooth scanning are on. [CHAR LIMIT=120] -->
+    <string name="scanning_status_text_wifi_on_ble_on">Both Wi\u2011Fi and Bluetooth are allowed to determine location</string>
+    <!-- The status text when Wi-Fi scanning is on and Bluetooth scanning are off. [CHAR LIMIT=120] -->
+    <string name="scanning_status_text_wifi_on_ble_off">Only Wi\u2011Fi is allowed to determine location</string>
+    <!-- The status text when Wi-Fi scanning is off and Bluetooth scanning are on. [CHAR LIMIT=120] -->
+    <string name="scanning_status_text_wifi_off_ble_on">Only Bluetooth is allowed to determine location</string>
+    <!-- The status text when both Wi-Fi scanning and Bluetooth scanning are off. [CHAR LIMIT=120] -->
+    <string name="scanning_status_text_wifi_off_ble_off">Neither Wi\u2011Fi nor Bluetooth is allowed to determine location</string>
     <!-- About phone, status item title.  The phone MEID number of the current LTE/CDMA device. [CHAR LIMIT=30] -->
     <string name="status_meid_number">MEID</string>
     <!-- About phone, status item title.  The ICCID of the current LTE device. [CHAR LIMIT=30] -->
@@ -3603,21 +3664,34 @@
     <string name="managed_profile_location_switch_title">Location for work profile</string>
     <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
       shows the location permission setting for each installed app -->
-    <string name="location_app_level_permissions">App-level permissions</string>
-    <!-- [CHAR LIMIT=42] Location settings screen, sub category for recent location requests -->
-    <string name="location_category_recent_location_requests">Recent location requests</string>
-    <!-- Location settings screen, displayed when there're more than three recent location requests -->
-    <string name="location_recent_location_requests_see_all">See all</string>
+    <string name="location_app_level_permissions">App permission</string>
+    <!-- Summary for app permission on Location settings page when location is off [CHAR LIMIT=NONE] -->
+    <string name="location_app_permission_summary_location_off">Location is off</string>
+    <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
+    <plurals name="location_app_permission_summary_location_on">
+        <item quantity="one">
+            <xliff:g id="background_location_app_count">%1$d</xliff:g>
+            of
+            <xliff:g id="total_location_app_count">%2$d</xliff:g>
+            app has unlimited access</item>
+        <item quantity="other">
+            <xliff:g id="background_location_app_count">%1$d</xliff:g>
+            of
+            <xliff:g id="total_location_app_count">%2$d</xliff:g>
+            apps have unlimited access</item>
+    </plurals>
+    <!-- [CHAR LIMIT=50] Location settings screen, sub category for recent location access -->
+    <string name="location_category_recent_location_access">Recent location access</string>
+    <!-- [CHAR LIMIT=30] Location settings screen, button to bring the user to view the details of recent location access -->
+    <string name="location_recent_location_access_view_details">View details</string>
     <!-- Location settings screen, displayed when there's no recent app accessing location -->
     <string name="location_no_recent_apps">No apps have requested location recently</string>
-    <!-- [CHAR LIMIT=30] Location settings screen, sub category for location services -->
-    <string name="location_category_location_services">Location services</string>
     <!-- [CHAR LIMIT=30] Location settings screen, recent location requests high battery use-->
     <string name="location_high_battery_use">High battery use</string>
     <!-- [CHAR LIMIT=30] Location settings screen, recent location requests low battery use-->
     <string name="location_low_battery_use">Low battery use</string>
-    <!-- [CHAR LIMIT=30] Wireless background scanning settings screen, screen title -->
-    <string name="location_scanning_screen_title">Scanning</string>
+    <!-- [CHAR LIMIT=60] Wireless background scanning settings screen, screen title -->
+    <string name="location_scanning_screen_title">Wi\u2011Fi and Bluetooth scanning</string>
     <!-- [CHAR LIMIT=130] Preference title for Wi-Fi always scanning -->
     <string name="location_scanning_wifi_always_scanning_title">Wi\u2011Fi scanning</string>
     <!-- Preference description text for Wi-Fi always scanning -->
@@ -3761,6 +3835,8 @@
     <string name="lockpassword_choose_your_pattern_header_for_face">To use face authentication, set pattern</string>
     <!-- Header on first screen of choose password/PIN as backup for face authentication flow. If this string cannot be translated in under 40 characters, please translate "Set face authentication backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_pin_header_for_face">To use face authentication, set PIN</string>
+    <!-- Message on Wi-Fi Sharing screen [CHAR LIMIT=NONE] -->
+    <string name="wifi_sharing_message">Your Wi\u2011Fi name and password for \"<xliff:g id="SSID" example="GoogleGuest">%1$s</xliff:g>\" will be shared.</string>
 
     <!-- Message to be used to explain the user that he needs to enter his pattern to continue a
          particular operation. [CHAR LIMIT=70]-->
@@ -4822,11 +4898,12 @@
         example="TalkBack">%1$s</xliff:g> affects data encryption, you need to confirm your password.
     </string>
 
-    <!-- Title for the capability of an accessibility service to receive events and keys. -->
-    <string name="capability_title_receiveAccessibilityEvents">Observe your actions</string>
-    <!-- Description for the capability of an accessibility service to receive events and keys. -->
-    <string name="capability_desc_receiveAccessibilityEvents">Receive notifications when you\u2019re
-        interacting with an app.</string>
+    <!-- Warning that explains that accessibility services have a lot of access to user data [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_warning"><xliff:g id="service"
+        example="TalkBack">%1$s</xliff:g> is requesting full control of this device. The service
+        can read the screen and act on behalf of users with accessibility needs.
+        This level of control is not appropriate for most apps.
+    </string>
 
     <!-- Title for a warning about disabling an accessibility service. [CHAR LIMIT=NONE] -->
     <string name="disable_service_title">Stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
@@ -5165,6 +5242,9 @@
         <item quantity="other">%1$d apps restricted</item>
     </plurals>
 
+    <!-- Title to display the battery percentage. [CHAR LIMIT=24] -->
+    <string name="battery_header_title_alternate"><xliff:g id="number" example="88">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="%">%</xliff:g></font></small></string>
+
     <!-- Title for force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_title">Stop app?</string>
     <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->
@@ -5410,8 +5490,26 @@
     <!-- Battery saver: Label for preference to turn on battery saver automatically when battery is low [CHAR_LIMIT=40] -->
     <string name="battery_saver_auto_title">Turn on automatically</string>
 
+    <!-- Battery saver: Label for preference to indicate there is no battery saver schedule [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_no_schedule">No schedule</string>
+
+    <!-- Battery saver: Label for preference to indicate there is a routine based schedule [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_routine">Based on your routine</string>
+
+    <!-- Battery saver: Label for preference to indicate there is a percentage based schedule [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_percentage">Based on percentage</string>
+
+    <!-- Battery saver: Summary for preference to describe what is meant by a routine based schedule [CHAR_LIMIT=NONE] -->
+    <string name="battery_saver_auto_routine_summary">Battery Saver turns on if your battery is likely to run out before your next typical charge</string>
+
     <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
-    <string name="battery_saver_seekbar_title">At <xliff:g id="percent">%1$s</xliff:g></string>
+    <string name="battery_saver_auto_percentage_summary">Will turn on at <xliff:g id="percent" example="52%">%1$s</xliff:g></string>
+
+    <!-- Battery saver: Title for battery saver schedule screen [CHAR_LIMIT=40] -->
+    <string name="battery_saver_schedule_settings_title">Set a schedule</string>
+
+    <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
+    <string name="battery_saver_seekbar_title"><xliff:g id="percent">%1$s</xliff:g></string>
 
     <!-- Battery saver: Placeholder label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
     <string name="battery_saver_seekbar_title_placeholder">Turn on</string>
@@ -6698,7 +6796,7 @@
     <string name="wizard_back">Back</string>
     <!-- Wizard next button label [CHAR LIMIT=25] -->
     <string name="wizard_next">Next</string>
-    <!-- Wizard next button label [CHAR LIMIT=25] -->
+    <!-- Wizard finish button label [CHAR LIMIT=25] -->
     <string name="wizard_finish">Finish</string>
 
     <!-- An option in a photo selection dialog, if there is no photo yet [CHAR LIMIT=50] -->
@@ -6870,7 +6968,7 @@
     <string name="keywords_sounds">speaker beep, speaker, volume, mute, silence, audio, music</string>
     <string name="keywords_sounds_and_notifications_interruptions">dont don\u2019t disturb, interrupt, interruption, break</string>
     <string name="keywords_app">RAM</string>
-    <string name="keywords_location">nearby, location, history, reporting</string>
+    <string name="keywords_location">nearby, location, history, reporting, GPS</string>
     <string name="keywords_accounts">account</string>
     <string name="keywords_users">restriction, restrict, restricted</string>
     <string name="keywords_keyboard_and_ime">text correction, correct, sound, vibrate, auto, language, gesture, suggest, suggestion, theme, offensive, word, type, emoji, international</string>
@@ -6895,6 +6993,8 @@
     <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
     <string name="keywords_android_version">android security patch level, baseband version, kernel version</string>
+    <!--Search keywords for financial apps sms access settings -->
+    <string name="keywords_financial_apps_sms_access">financial app, sms, permission</string>
 
     <!-- Search keyword for Device Theme Settings [CHAR LIMIT=NONE] -->
     <string name="keywords_systemui_theme">dark theme</string>
@@ -7087,8 +7187,8 @@
 
     <!-- Sound: Summary for the Do not Disturb option when at least one automatic rules turned on. [CHAR LIMIT=NONE]-->
     <plurals name="zen_mode_settings_summary_on">
-        <item quantity="one">1 rule</item>
-        <item quantity="other"><xliff:g id="on_count" example="10">%d</xliff:g> rules</item>
+        <item quantity="one">1 enabled</item>
+        <item quantity="other"><xliff:g id="on_count" example="10">%d</xliff:g> enabled</item>
     </plurals>
 
     <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
@@ -7121,11 +7221,20 @@
     <!--  Do not disturb: Title for the zen mode automation option in Settings. [CHAR LIMIT=40] -->
     <string name="zen_mode_automation_settings_title">Schedules</string>
 
+    <!--  Do not disturb: Title for dialog that allows users to delete DND rules/schedules[CHAR LIMIT=40] -->
+    <string name="zen_mode_delete_automatic_rules">Delete schedules</string>
+
+    <!--  Do not disturb: Delete text button presented in a dialog to confirm the user would like to delete the selected DND rules. [CHAR LIMIT=30] -->
+    <string name="zen_mode_schedule_delete">Delete</string>
+
+    <!--  Do not disturb: Edit label for button that allows user to edit the dnd schedule name. [CHAR LIMIT=30] -->
+    <string name="zen_mode_rule_name_edit">Edit</string>
+
     <!--  Do not disturb: Title for the zen mode automatic rules page in settings. [CHAR LIMIT=30] -->
-    <string name="zen_mode_automation_settings_page_title">Do Not Disturb</string>
+    <string name="zen_mode_automation_settings_page_title">Schedules</string>
 
     <!--  Do not disturb: Title for a specific zen mode automatic rule in settings. [CHAR LIMIT=30] -->
-    <string name="zen_mode_automatic_rule_settings_page_title">Automatic rule</string>
+    <string name="zen_mode_automatic_rule_settings_page_title">Schedule</string>
 
     <!--  Do not disturb: Title do not disturb settings representing automatic (scheduled) do not disturb rules. [CHAR LIMIT=30] -->
     <string name="zen_mode_schedule_category_title">Schedule</string>
@@ -7140,7 +7249,7 @@
     <string name="zen_mode_schedule_title">Schedule</string>
 
     <!--  Do not disturb: Switch toggle to toggle whether to use an automatic dnd rule or not [CHAR LIMIT=40] -->
-    <string name="zen_mode_use_automatic_rule">Use rule</string>
+    <string name="zen_mode_use_automatic_rule">Use schedule</string>
 
     <!--  Do not disturb: Zen mode option: Important interruptions [CHAR LIMIT=60] -->
     <string name="zen_mode_option_important_interruptions">Priority only</string>
@@ -7164,7 +7273,7 @@
     <string name="zen_mode_settings_category">When Do Not Disturb is on</string>
 
     <!-- Do not disturb: restrict notifications title [CHAR LIMIT=80] -->
-    <string name="zen_mode_restrict_notifications_title">Notification restrictions</string>
+    <string name="zen_mode_restrict_notifications_title">Restrict notifications</string>
     <!-- Do not disturb: Mute notifications option [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_mute">No sound from notifications</string>
     <!-- Do not disturb:Mute notifications summary [CHAR LIMIT=NONE] -->
@@ -7251,11 +7360,17 @@
     <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing length of DND -->
     <string name="zen_mode_settings_dnd_manual_indefinite">Do Not Disturb will stay on until you turn it off</string>
 
-    <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing how DND was triggered by an automatic DND rule -->
-    <string name="zen_mode_settings_dnd_automatic_rule">Do Not Disturb was automatically turned on by a rule (<xliff:g id="rule_name" example="Weeknights">%s</xliff:g>)</string>
+    <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing how DND was triggered by an automatic DND schedule -->
+    <string name="zen_mode_settings_dnd_automatic_rule">Do Not Disturb was automatically turned on by a schedule (<xliff:g id="rule_name" example="Weeknights">%s</xliff:g>)</string>
 
     <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer how DND was triggered by an app -->
     <string name="zen_mode_settings_dnd_automatic_rule_app">Do Not Disturb was automatically turned on by an app (<xliff:g id="app_name" example="Android Services">%s</xliff:g>)</string>
+
+    <!-- [CHAR LIMIT=120] Zen mode settings footer: Footer informing user DND has custom settings. -->
+    <string name="zen_mode_settings_dnd_custom_settings_footer">Do Not Disturb is on for <xliff:g id="rule_names" example="Sleeping and Work">%s</xliff:g> with custom settings.</string>
+
+    <!-- [CHAR LIMIT=120] Zen mode settings footer: Link following zen_mode_settings_dnd_custom_settings_footer to see the currently applied custom dnd settings. -->
+    <string name="zen_mode_settings_dnd_custom_settings_footer_link"><annotation id="link"> View custom settings</annotation></string>
 
     <!--[CHAR LIMIT=40] Zen Interruption level: Priority.  -->
     <string name="zen_interruption_level_priority">Priority only</string>
@@ -7267,7 +7382,7 @@
     <string name="zen_mode_sound_summary_on_with_info">On / <xliff:g name="dnd_summary" example="No sound except alarms and media">%1$s</xliff:g></string>
 
     <!-- Sound settings screen, summary format of do not disturb when off with extra information. [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_sound_summary_off_with_info">Off / <xliff:g name="dnd_summary" example="1 rule can turn on automatically">%1$s</xliff:g></string>
+    <string name="zen_mode_sound_summary_off_with_info">Off / <xliff:g name="dnd_summary" example="1 schedule can turn on automatically">%1$s</xliff:g></string>
 
     <!-- Sound settings screen, summary format of do not disturb when off with no extra information. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_sound_summary_off">Off</string>
@@ -7292,12 +7407,12 @@
 
     <!-- Summary for the Sound Do not Disturb option when at least one automatic rules is enabled. [CHAR LIMIT=NONE]-->
     <plurals name="zen_mode_sound_summary_summary_off_info">
-        <item quantity="one">1 rule can turn on automatically</item>
-        <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> rules can turn on automatically</item>
+        <item quantity="one">1 schedule can turn on automatically</item>
+        <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> schedules can turn on automatically</item>
     </plurals>
 
     <!-- Do not disturb settings, category header [CHAR LIMIT=120]-->
-    <string name="zen_category_behavior">Mute phone, but allow exceptions</string>
+    <string name="zen_category_behavior">Mute device but allow exceptions</string>
     <!-- Do not disturb settings, exceptions to dnd title [CHAR LIMIT=100]-->
     <string name="zen_category_exceptions">Exceptions</string>
     <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
@@ -7319,6 +7434,17 @@
     <string name="zen_sound_two_allowed">Muted, but allow <xliff:g id="sound_type" example="alarms">%1$s</xliff:g> and <xliff:g id="sound_type" example="media">%2$s</xliff:g></string>
     <!-- Do not disturb settings, sound and vibrations summary [CHAR LIMIT=100]-->
     <string name="zen_sound_three_allowed">Muted, but allow <xliff:g id="sound_type" example="alarms">%1$s</xliff:g>, <xliff:g id="sound_type" example="alarms">%2$s</xliff:g>, and <xliff:g id="sound_type" example="media">%3$s</xliff:g></string>
+
+    <!-- Do not disturb custom settings dialog title [CHAR LIMIT=40]-->
+    <string name="zen_custom_settings_dialog_title">Custom settings</string>
+    <!-- Do not disturb custom settings dialog button label [CHAR LIMIT=40]-->
+    <string name="zen_custom_settings_dialog_review_schedule">Review schedule</string>
+    <!-- Do not disturb custom settings dialog button label [CHAR LIMIT=40]-->
+    <string name="zen_custom_settings_dialog_ok">Got it</string>
+    <!-- Do not disturb custom settings notifications header [CHAR LIMIT=40]-->
+    <string name="zen_custom_settings_notifications_header">Notifications</string>
+    <!-- Do not disturb custom settings duration header [CHAR LIMIT=40]-->
+    <string name="zen_custom_settings_duration_header">Duration</string>
 
     <!-- Do not disturb settings, messages, events and reminders title [CHAR LIMIT=100]-->
     <string name="zen_msg_event_reminder_title">Messages, events &amp; reminders</string>
@@ -7748,28 +7874,28 @@
     <string name="zen_mode_rule_rename_button">Rename</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Rule name option and edit dialog title -->
-    <string name="zen_mode_rule_name">Rule name</string>
+    <string name="zen_mode_rule_name">Schedule name</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Rule name hint text -->
-    <string name="zen_mode_rule_name_hint">Enter rule name</string>
+    <string name="zen_mode_rule_name_hint">Enter schedule name</string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Warning text for invalid zen rule names -->
-    <string name="zen_mode_rule_name_warning">Rule name already in use</string>
+    <string name="zen_mode_rule_name_warning">Schedule name already in use</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Add another automatic zen rule option name-->
     <string name="zen_mode_add_rule">Add more</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Add event-based rule, set rule name title -->
-    <string name="zen_mode_add_event_rule">Add event rule</string>
+    <string name="zen_mode_add_event_rule">Add event schedule</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Add time-based rule, set rule name title -->
-    <string name="zen_mode_add_time_rule">Add time rule</string>
+    <string name="zen_mode_add_time_rule">Add time schedule</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Delete rule menu option name -->
-    <string name="zen_mode_delete_rule">Delete rule</string>
+    <string name="zen_mode_delete_rule">Delete schedule</string>
 
     <!-- [CHAR LIMIT=60] Zen mode settings: Choose rule type dialog title -->
-    <string name="zen_mode_choose_rule_type">Choose rule type</string>
+    <string name="zen_mode_choose_rule_type">Choose schedule type</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Delete rule dialog confirmation message -->
     <string name="zen_mode_delete_rule_confirmation">Delete \u201c<xliff:g id="rule" example="Weekends">%1$s</xliff:g>\u201d rule?</string>
@@ -7850,7 +7976,19 @@
     <string name="zen_mode_schedule_alarm_title">Alarm can override end time</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Downtime rule setting -->
-    <string name="zen_mode_schedule_alarm_summary">Stop at the end time or next alarm, whichever comes first</string>
+    <string name="zen_mode_schedule_alarm_summary">Schedule turns off when an alarm rings</string>
+
+    <!-- [CHAR LIMIT=80] Zen mode settings: Title for preference to allow custom behavior for the dnd schedule -->
+    <string name="zen_mode_custom_behavior_title">Do Not Disturb behavior</string>
+
+    <!-- [CHAR LIMIT=120] Zen mode settings: Summay text indicating the currenty dnd schedule is using the default dnd settings -->
+    <string name="zen_mode_custom_behavior_summary_default">Use default settings</string>
+
+    <!-- [CHAR LIMIT=120] Zen mode settings: Summay text indicating the currenty dnd schedule is using custom behavior -->
+    <string name="zen_mode_custom_behavior_summary">Create custom settings for this schedule</string>
+
+    <!-- [CHAR LIMIT=100] Zen mode settings: Category text indicating the schedule this custom behavior will be configured for-->
+    <string name="zen_mode_custom_behavior_category_title">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019</string>
 
     <!-- [CHAR LIMIT=40] General divider text when concatenating multiple items in a text summary -->
     <string name="summary_divider_text">,\u0020</string>
@@ -7862,13 +8000,16 @@
     <string name="summary_range_verbal_combination"><xliff:g id="start" example="Sun">%1$s</xliff:g> to <xliff:g id="end" example="Thu">%2$s</xliff:g></string>
 
     <!-- [CHAR LIMIT=20] Zen mode settings: Calls option -->
-    <string name="zen_mode_calls">Calls</string>
+    <string name="zen_mode_calls">Allow calls</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow calls toggle title -->
-    <string name="zen_mode_calls_title">Allow calls</string>
+    <string name="zen_mode_calls_title">Calls</string>
 
-    <!-- [CHAR LIMIT=20] Zen mode settings: Calls screen footer -->
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Calls screen footer -->
     <string name="zen_mode_calls_footer">When Do Not Disturb is on, incoming calls are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Calls screen footer -->
+    <string name="zen_mode_custom_calls_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming calls are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Starred contacts preference title -->
     <string name="zen_mode_starred_contacts_title">Starred contacts</string>
@@ -7879,26 +8020,17 @@
         <item quantity="other"><xliff:g id="num_people" example="3">%d</xliff:g> others</item>
     </plurals>
 
-    <!-- [CHAR LIMIT=20] Zen mode settings: Messages option -->
-    <string name="zen_mode_messages">Messages</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
+    <string name="zen_mode_messages">Allow text messages</string>
 
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
     <string name="zen_mode_messages_footer">When Do Not Disturb is on, incoming text messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages toggle title -->
-    <string name="zen_mode_messages_title">Allow messages</string>
+    <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Messages screen footer -->
+    <string name="zen_mode_custom_messages_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming text messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: All messages summary -->
-    <string name="zen_mode_all_messages">Messages</string>
-
-    <!-- [CHAR LIMIT=50] Zen mode settings: Messages option (ie: text messages) -->
-    <string name="zen_mode_all_messages_list">messages</string>
-
-    <!-- [CHAR LIMIT=50] Zen mode settings: Selected messages summary -->
-    <string name="zen_mode_selected_messages">Some messages</string>
-
-    <!-- [CHAR LIMIT=50] Zen mode settings: Selected messages (ie: some text messages are allowed to bypass dnd) -->
-    <string name="zen_mode_selected_messages_list">some messages</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages to bypass DND title -->
+    <string name="zen_mode_messages_title">Text messages</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From anyone -->
     <string name="zen_mode_from_anyone">From anyone</string>
@@ -7918,8 +8050,14 @@
     <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
     <string name="zen_calls_summary_repeat_only">From repeat callers only</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: None -->
+    <!-- [CHAR LIMIT=40] Zen mode settings: Calls and/or messages from none-->
     <string name="zen_mode_from_none">None</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Calls option value: No calls allowed -->
+    <string name="zen_mode_from_none_calls">Don\u2019t allow any calls</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Messages option value: No messages allowed -->
+    <string name="zen_mode_from_none_messages">Don\u2019t allow any messages</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow alarms option -->
     <string name="zen_mode_alarms">Allow alarms</string>
@@ -7928,7 +8066,7 @@
     <string name="zen_mode_alarms_list">alarms</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow media (sound from video) to bypass dnd -->
-    <string name="zen_mode_media">Allow media</string>
+    <string name="zen_mode_media">Allow media sounds</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) -->
     <string name="zen_mode_media_list">media</string>
@@ -7952,13 +8090,13 @@
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
-    <string name="zen_mode_bypassing_apps_title">Overrides Do Not Disturb</string>
+    <string name="zen_mode_bypassing_apps_title">App exceptions</string>
 
-    <!-- [CHAR LIMIT=80] Zen mode settings: Allow apps to bypass DND -->
+    <!-- [CHAR LIMIT=120] Zen mode settings: Allow apps to bypass DND -->
     <plurals name="zen_mode_bypassing_apps_subtext">
         <item quantity="zero">No apps can override Do Not Disturb</item>
-        <item quantity="one">1 app can override Do Not Disturb</item>
-        <item quantity="other"><xliff:g id="number" example="2">%1$d</xliff:g> apps can override Do Not Disturb</item>
+        <item quantity="one">Notifications from 1 app can override Do Not Disturb</item>
+        <item quantity="other">Notifications from <xliff:g id="number" example="2">%1$d</xliff:g> apps can override Do Not Disturb</item>
     </plurals>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) -->
@@ -7983,10 +8121,10 @@
     <string name="zen_mode_repeat_callers_title">Allow repeat callers</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
-    <string name="zen_mode_calls_summary_one">From <xliff:g id="caller type" example="contacts">%1$s</xliff:g></string>
+    <string name="zen_mode_calls_summary_one">Allow from <xliff:g id="caller type" example="contacts">%1$s</xliff:g></string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
-    <string name="zen_mode_calls_summary_two">From <xliff:g id="caller type" example="starred contacts">%1$s</xliff:g> and <xliff:g id="callert tpye" example="repeat callers">%2$s</xliff:g></string>
+    <string name="zen_mode_calls_summary_two">Allow from <xliff:g id="caller type" example="starred contacts">%1$s</xliff:g> and <xliff:g id="callert tpye" example="repeat callers">%2$s</xliff:g></string>
 
     <!-- [CHAR LIMIT=200] Zen mode settings: Repeat callers option summary -->
     <string name="zen_mode_repeat_callers_summary">If the same person calls a second time within a <xliff:g id="minutes">%d</xliff:g> minute period</string>
@@ -8178,8 +8316,6 @@
     <!-- Summary describing external storage for applications [CHAR LIMIT=25] -->
     <string name="storage_type_external">External storage</string>
 
-    <!-- Title for data usage screen when entered from app info [CHAR LIMIT=30] -->
-    <string name="app_data_usage">App data usage</string>
     <!-- Summary for data usage preference [CHAR LIMIT=15] -->
     <string name="data_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used since <xliff:g id="date" example="Jan 12">%2$s</xliff:g></string>
 
@@ -8361,6 +8497,12 @@
 
     <!--  Title for Default Phone app settings [CHAR LIMIT=30] -->
     <string name="default_phone_title">Phone app</string>
+
+    <!--
+     ~ STOPSHIP(b/110557011): Remove once the new UI is ready.
+     -->
+    <!-- Title for Roles settings [CHAR LIMIT=30] -->
+    <string name="roles_title">Roles</string>
 
     <!-- Label of default app for current setting [CHAR LIMIT=40] -->
     <string name="default_app">(Default)</string>
@@ -8764,6 +8906,10 @@
     <!-- Summary of number of apps currently can write system settings [CHAR LIMIT=60] -->
     <string name="write_settings_summary"><xliff:g id="count" example="10">%1$d</xliff:g> of <xliff:g id="count" example="10">%2$d</xliff:g> apps allowed to modify system settings</string>
 
+    <!-- Settings title in main settings screen for financial apps sms access [CHAR LIMIT=60] -->
+    <string name="financial_apps_sms_access_title">Financial Apps Sms Access</string>
+    <!-- Preference key for financial apps sms access screen -->
+    <string name="financial_sms_root_screen_key" translatable="false">financial_sms_root_screen_key</string>
     <!-- Label for showing apps that can install other apps [CHAR LIMIT=45] -->
     <string name="filter_install_sources_apps">Can install other apps</string>
     <!-- Label for showing apps that can write system settings [CHAR LIMIT=45] -->
@@ -8952,17 +9098,11 @@
     <!-- Summary of condition that do not disturb is on [CHAR LIMIT=36] -->
     <string name="condition_zen_summary">Impacts what you hear and see</string>
 
-    <!-- Title of condition that battery saver is on [CHAR LIMIT=30] -->
-    <string name="condition_battery_title">Battery Saver is on</string>
-
-    <!-- Summary of condition that battery saver is on [CHAR LIMIT=NONE] -->
-    <string name="condition_battery_summary">Features restricted</string>
-
     <!-- Title of condition that cellular data is off [CHAR LIMIT=50] -->
     <string name="condition_cellular_title">Mobile data is off</string>
 
     <!-- Summary of condition that cellular data is off [CHAR LIMIT=NONE] -->
-    <string name="condition_cellular_summary">Internet is available only via Wi-Fi</string>
+    <string name="condition_cellular_summary">Internet only available via Wi\u2011Fi</string>
 
     <!-- Title of condition that background data is off [CHAR LIMIT=30] -->
     <string name="condition_bg_data_title">Data Saver</string>
@@ -8974,7 +9114,7 @@
     <string name="condition_work_title">Work profile is off</string>
 
     <!-- Summary of condition that work mode is off [CHAR LIMIT=NONE] -->
-    <string name="condition_work_summary">Apps, background sync, and other features related to your work profile are turned off.</string>
+    <string name="condition_work_summary">For apps &amp; notifications</string>
 
     <!-- Action label on device muted card - clicking action will turn on ringtone sound [CHAR LIMIT=50] -->
     <string name="condition_device_muted_action_turn_on_sound">Turn on sound</string>
@@ -9337,10 +9477,14 @@
     <string name="notification_log_details_parcel">parcel size</string>
     <!-- Notification log debug tool: notification ashmem size -->
     <string name="notification_log_details_ashmem">ashmem</string>
+    <!-- Notification log debug tool: header: notification alert info -->
+    <string name="notification_log_details_alerted">notification alerted</string>
     <!-- Notification log debug tool: header: notification sound info -->
     <string name="notification_log_details_sound">sound</string>
     <!-- Notification log debug tool: header: notification vibration info -->
     <string name="notification_log_details_vibrate">vibrate</string>
+    <!-- Notification log debug tool: header: notification vibration info -->
+    <string name="notification_log_details_vibrate_pattern">pattern</string>
     <!-- Notification log debug tool: the word 'default' -->
     <string name="notification_log_details_default">default</string>
     <!-- Notification log debug tool: the word 'none' -->
@@ -9436,6 +9580,11 @@
     <string name="managed_profile_contact_search_title">Contact search</string>
     <!-- [CHAR LIMIT=NONE] The preference summary for enabling cross-profile remote contact search -->
     <string name="managed_profile_contact_search_summary">Allow contact searches by your organization to identify callers and contacts</string>
+    <!-- [CHAR LIMIT=60] The preference title for enabling cross profile calendar sync -->
+    <string name="cross_profile_calendar_title">Cross-profile calendar</string>
+    <!-- [CHAR LIMIT=NONE] The preference summary for enabling cross profile calendar sync -->
+    <string name="cross_profile_calendar_summary">Show work events on personal calendar</string>
+
 
     <!-- Time in hours -->
     <plurals name="hours">
@@ -9926,12 +10075,17 @@
     <!-- UI debug setting: ANGLE enabled app has been set [CHAR LIMIT=NONE] -->
     <string name="angle_enabled_app_set">ANGLE enabled application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
 
-    <!-- UI debug setting: select an app to use updated graphics driver [CHAR LIMIT=100] -->
-    <string name="updated_gfx_driver_dev_opt_in_app">Select app to use updated graphics driver</string>
-    <!-- UI debug setting: no app selected to use updated GPU driver [CHAR LIMIT=100] -->
-    <string name="updated_gfx_driver_dev_opt_in_app_not_set">No selected app to use updated graphics driver</string>
-    <!-- UI debug setting: app selected to use updated graphics driver [CHAR LIMIT=NONE] -->
-    <string name="updated_gfx_driver_dev_opt_in_app_set">Opt in application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
+    <!-- UI debug setting: select an app to use Game Update Package [CHAR LIMIT=100] -->
+    <string name="gup_dev_opt_in_app">Use Game Update Package</string>
+    <!-- UI debug setting: no app selected to use Game Update Package [CHAR LIMIT=100] -->
+    <string name="gup_dev_opt_in_app_not_set">No selected app</string>
+    <!-- UI debug setting: app selected to use Game Update Package [CHAR LIMIT=NONE] -->
+    <string name="gup_dev_opt_in_app_set"><xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
+
+    <!-- Title for Game Update Packages dashboard where developers can configure apps to use GUP or not [CHAR LIMIT=50] -->
+    <string name="gup_dashboard_title">Game Update Packages Preferences</string>
+    <!-- Summary for Game Update Packages dashboard [CHAR LIMIT=50] -->
+    <string name="gup_dashboard_summary">Modify Game Update Packages settings</string>
 
     <!-- Slices Strings -->
 
@@ -10237,25 +10391,30 @@
     <string name="see_less">See less</string>
 
     <!-- Title for Network connection request Dialog [CHAR LIMIT=30] -->
-    <string name="network_connection_request_dialog_title">Choose device</string>
+    <string name="network_connection_request_dialog_title">Choose a device</string>
     <!-- Message for Network connection timeout Dialog [CHAR LIMIT=NONE] -->
-    <string name="network_connection_timeout_dialog_message">No devices found. Make sure the device is turned on and available to connect.</string>
+    <string name="network_connection_timeout_dialog_message">No devices found. Make sure devices are turned on and available to connect.</string>
     <!-- OK button for Network connection timeout Dialog [CHAR LIMIT=30] -->
-    <string name="network_connection_timeout_dialog_ok">Scan again</string>
+    <string name="network_connection_timeout_dialog_ok">Try again</string>
+    <!-- Message for Network connection error state Dialog [CHAR LIMIT=NONE] -->
+    <string name="network_connection_errorstate_dialog_message">Something came up. The application has cancelled the request to choose a device.</string>
 
-    <!-- Summary for connected devices count in connected device slice. [CHAR LIMIT=NONE] -->
-    <plurals name="show_connected_devices">
+    <!-- Summary for bluetooth devices count in Bluetooth devices slice. [CHAR LIMIT=NONE] -->
+    <plurals name="show_bluetooth_devices">
         <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> device connected</item>
         <item quantity="other"><xliff:g id="number_device_count">%1$d</xliff:g> devices connected</item>
     </plurals>
-    <!-- Title for no connected devices in connected device slice. [CHAR LIMIT=NONE] -->
-    <string name="no_connected_devices">No connected devices</string>
+    <!-- Title for no bluetooth devices in Bluetooth devices slice. [CHAR LIMIT=NONE] -->
+    <string name="no_bluetooth_devices">No Bluetooth devices</string>
 
     <!-- Default title for the settings panel [CHAR LIMIT=NONE] -->
     <string name="settings_panel_title">Settings Panel</string>
 
     <!-- Title for the Internet Connectivity dialog (settings panel) with Internet related settings [CHAR LIMIT=50] -->
     <string name="internet_connectivity_panel_title">Internet Connectivity</string>
+
+    <!-- Title for the Volume dialog (settings panel) with all volume streams[CHAR LIMIT=50] -->
+    <string name="volume_connectivity_panel_title">Volume</string>
 
     <!-- UI debug setting: force desktop mode [CHAR LIMIT=50] -->
     <string name="force_desktop_mode">Force desktop mode</string>
@@ -10288,4 +10447,11 @@
     <string name="contextual_card_feedback_send">Send feedback</string>
     <!-- String for contextual card feedback dialog [CHAR LIMIT=NONE] -->
     <string name="contextual_card_feedback_confirm_message">Would you like to give us feedback on this suggestion?</string>
+
+    <!-- Toast message for copy action of Copyable Slice [CHAR LIMIT=NONE] -->
+    <string name="copyable_slice_toast"><xliff:g id="copy_content" example="Phone number">%1$s</xliff:g> copied to clipboard.</string>
+
+    <!-- String for talkback on the account avatar of the search bar.  [CHAR LIMIT=NONE] -->
+    <string name="search_bar_account_avatar_content_description"></string>
+
 </resources>

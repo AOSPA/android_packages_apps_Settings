@@ -18,7 +18,7 @@ package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -30,7 +30,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,9 +38,10 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PrivateVolumeOptionMenuControllerTest {
 
     @Mock
@@ -64,6 +64,7 @@ public class PrivateVolumeOptionMenuControllerTest {
         MockitoAnnotations.initMocks(this);
 
         when(mVolumeInfo.getType()).thenReturn(VolumeInfo.TYPE_PRIVATE);
+        when(mVolumeInfo.isMountedWritable()).thenReturn(true);
         when(mPrimaryInfo.getType()).thenReturn(VolumeInfo.TYPE_PRIVATE);
         when(mMenu.findItem(anyInt())).thenReturn(mMigrateMenuItem);
         when(mMigrateMenuItem.getItemId()).thenReturn(100);
@@ -82,6 +83,7 @@ public class PrivateVolumeOptionMenuControllerTest {
     @Test
     public void testMigrateDataIsNotVisibleNormally() {
         when(mPm.getPrimaryStorageCurrentVolume()).thenReturn(mPrimaryInfo);
+        when(mPrimaryInfo.isMountedWritable()).thenReturn(true);
 
         mController.onCreateOptionsMenu(mMenu, mMenuInflater);
         mController.onPrepareOptionsMenu(mMenu);
@@ -97,6 +99,17 @@ public class PrivateVolumeOptionMenuControllerTest {
         mController.onPrepareOptionsMenu(mMenu);
 
         verify(mMigrateMenuItem).setVisible(true);
+    }
+
+    @Test
+    public void testMigrateDataIsNotVisibleWhenExternalVolumeIsNotMounted() {
+        when(mPm.getPrimaryStorageCurrentVolume()).thenReturn(mVolumeInfo);
+        when(mVolumeInfo.isMountedWritable()).thenReturn(false);
+
+        mController.onCreateOptionsMenu(mMenu, mMenuInflater);
+        mController.onPrepareOptionsMenu(mMenu);
+
+        verify(mMigrateMenuItem).setVisible(false);
     }
 
     @Test

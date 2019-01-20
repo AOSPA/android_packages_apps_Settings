@@ -15,14 +15,13 @@
   ~ limitations under the License.
   -->
 
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="?attr/face_layout_theme"
-    app:suwFooter="@layout/face_enroll_enrolling_footer">
+    style="?attr/face_layout_theme">
 
     <LinearLayout
         style="@style/SuwContentFrame"
@@ -58,7 +57,7 @@
             </com.android.settings.biometrics.face.FaceSquareFrameLayout>
 
             <TextView
-                style="@style/TextAppearance.FaceErrorText"
+                style="@style/TextAppearance.ErrorText"
                 android:id="@+id/error_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,4 +70,4 @@
 
     </LinearLayout>
 
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

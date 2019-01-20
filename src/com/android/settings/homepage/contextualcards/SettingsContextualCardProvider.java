@@ -34,14 +34,14 @@ public class SettingsContextualCardProvider extends ContextualCardProvider {
     public ContextualCardList getContextualCards() {
         final ContextualCard wifiCard =
                 ContextualCard.newBuilder()
-                        .setSliceUri(CustomSliceRegistry.WIFI_SLICE_URI.toString())
-                        .setCardName(CustomSliceRegistry.WIFI_SLICE_URI.toString())
+                        .setSliceUri(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString())
+                        .setCardName(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString())
                         .setCardCategory(ContextualCard.Category.IMPORTANT)
                         .build();
         final ContextualCard connectedDeviceCard =
                 ContextualCard.newBuilder()
-                        .setSliceUri(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI.toString())
-                        .setCardName(CustomSliceRegistry.CONNECTED_DEVICE_SLICE_URI.toString())
+                        .setSliceUri(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI.toString())
+                        .setCardName(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI.toString())
                         .setCardCategory(ContextualCard.Category.IMPORTANT)
                         .build();
         final ContextualCard lowStorageCard =

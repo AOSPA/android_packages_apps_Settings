@@ -121,7 +121,7 @@
         <item name="android:paddingStart">8dip</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
+        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body1</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
@@ -129,13 +129,13 @@
         <item name="android:paddingStart">8dip</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
+        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body1</item>
         <item name="android:textColor">?android:attr/colorError</item>
     </style>
 
     <style name="wifi_item_content">
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Subhead</item>
+        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Subhead</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
     </style>
@@ -174,23 +174,6 @@
         <item name="android:background">#ff000000</item>
     </style>
 
-    <style name="SecurityPreferenceButtonContainer"
-           parent="@android:style/Widget.Material.Light.SegmentedButton">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:weightSum">2</item>
-        <item name="android:dividerPadding">8dip</item>
-    </style>
-
-    <style name="SecurityPreferenceButton"
-           parent="@android:style/Widget.Material.Light.Button.Borderless">
-        <item name="android:layout_width">0dip</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:singleLine">true</item>
-    </style>
-
     <style name="SetupWizardButton.Negative" parent="@style/SuwGlifButton.Secondary">
         <!-- Negative margin to offset for padding of the button itself. We want the label to be
              aligned with the text above it -->
@@ -206,13 +189,13 @@
     <style name="vpn_label">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Small</item>
     </style>
 
     <style name="vpn_value">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Medium</item>
         <item name="android:singleLine">true</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
@@ -222,10 +205,10 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingStart">8dip</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Small</item>
     </style>
 
-    <style name="TextAppearance" parent="android:TextAppearance.Material"/>
+    <style name="TextAppearance" parent="android:TextAppearance.DeviceDefault"/>
 
     <style name="TextAppearance.info_label">
         <item name="android:textSize">14sp</item>
@@ -242,14 +225,14 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="TextAppearance.PasswordEntry" parent="android:TextAppearance.Material">
+    <style name="TextAppearance.PasswordEntry" parent="android:TextAppearance.DeviceDefault">
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="TextAppearance.CryptKeeper_PasswordEntry" parent="android:TextAppearance.Material">
+    <style name="TextAppearance.CryptKeeper_PasswordEntry" parent="android:TextAppearance.DeviceDefault">
         <item name="android:gravity">center_horizontal</item>
         <item name="android:background">@null</item>
         <item name="android:textCursorDrawable">@null</item>
@@ -257,22 +240,22 @@
         <item name="android:imeOptions">flagForceAscii|actionDone</item>
     </style>
 
-    <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium"/>
-    <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Material.Small"/>
+    <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.DeviceDefault.Medium"/>
+    <style name="TextAppearance.Small" parent="@android:style/TextAppearance.DeviceDefault.Small"/>
     <style name="TextAppearance.Switch"
            parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextAppearance.CategoryTitle"
-           parent="@android:style/TextAppearance.Material.Body2">
+           parent="@*android:style/TextAppearance.DeviceDefault.Body2">
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
-    <style name="TextAppearance.TileTitle" parent="@android:style/TextAppearance.Material.Subhead"/>
+    <style name="TextAppearance.TileTitle" parent="@*android:style/TextAppearance.DeviceDefault.Subhead"/>
 
     <style name="TextAppearance.SuggestionTitle"
-           parent="@android:style/TextAppearance.Material.Subhead">
+           parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:textSize">16sp</item>
     </style>
 
@@ -280,18 +263,8 @@
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
-    <style name="TextAppearance.FingerprintErrorText"
-           parent="android:TextAppearance.Material.Body1">
-        <item name="android:textColor">?android:attr/colorError</item>
-    </style>
-
-    <style name="TextAppearance.FaceErrorText"
-           parent="android:TextAppearance.Material.Body1">
-        <item name="android:textColor">?android:attr/colorError</item>
-    </style>
-
-    <style name="TextAppearance.ConfirmDeviceCredentialsErrorText"
-           parent="android:TextAppearance.Material.Body1">
+    <style name="TextAppearance.ErrorText"
+           parent="@*android:TextAppearance.DeviceDefault.Body1">
         <item name="android:textColor">?android:attr/colorError</item>
     </style>
 
@@ -301,29 +274,29 @@
     </style>
 
     <style name="TextAppearance.RemoveDialogContent"
-           parent="@android:style/TextAppearance.Material">
+           parent="@android:style/TextAppearance.DeviceDefault">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="TextAppearance.SearchBar"
-           parent="@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle">
+           parent="@*android:style/TextAppearance.DeviceDefault.Widget.Toolbar.Subtitle">
         <item name="android:textSize">@dimen/search_bar_text_size</item>
     </style>
 
     <style name="TextAppearance.SuggestionHeader"
-           parent="@android:style/TextAppearance.Material.Subhead">
+           parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?android:attr/colorAccent</item>
     </style>
 
     <style name="TextAppearance.ConditionCardTitle"
-           parent="@android:style/TextAppearance.Material.Body2">
+           parent="@*android:style/TextAppearance.DeviceDefault.Body2">
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextAppearance.ConditionCardSummary"
-           parent="@android:style/TextAppearance.Material.Body1">
+           parent="@*android:style/TextAppearance.DeviceDefault.Body1">
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
@@ -338,7 +311,7 @@
     </style>
 
     <style name="TextAppearance.ContextualCardDismissalText"
-           parent="@android:style/TextAppearance.Material.Body1">
+           parent="@*android:style/TextAppearance.DeviceDefault.Body1">
         <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textSize">16sp</item>
     </style>
@@ -377,13 +350,13 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="FingerprintHeaderStyle" parent="android:style/TextAppearance.Material.Subhead">
+    <style name="FingerprintHeaderStyle" parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:paddingTop">16dp</item>
         <item name="android:textColor">@color/primary_dark_material_light</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
-    <style name="FaceHeaderStyle" parent="android:style/TextAppearance.Material.Subhead">
+    <style name="FaceHeaderStyle" parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:paddingTop">16dp</item>
         <item name="android:textColor">@color/primary_dark_material_light</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
@@ -400,16 +373,6 @@
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
 
     <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button"/>
-
-    <style name="SettingsActionButton"
-           parent="android:Widget.DeviceDefault.Button.Borderless.Colored">
-        <item name="android:drawablePadding">4dp</item>
-        <item name="android:drawableTint">@*android:color/btn_colored_borderless_text_material
-        </item>
-        <item name="android:layout_marginEnd">8dp</item>
-        <item name="android:paddingTop">20dp</item>
-        <item name="android:paddingBottom">20dp</item>
-    </style>
 
     <style name="LockPatternContainerStyle">
         <item name="android:maxHeight">400dp</item>
@@ -448,13 +411,13 @@
 
     <style name="device_info_dialog_label">
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
+        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body1</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="device_info_dialog_value">
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Body2</item>
+        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body2</item>
         <item name="android:paddingBottom">24dp</item>
     </style>
 
@@ -471,8 +434,9 @@
     <style name="SearchBarStyle">
         <item name="android:layout_margin">@dimen/search_bar_margin</item>
         <item name="cardCornerRadius">8dp</item>
-        <item name="strokeColor">@color/homepage_card_stroke_color</item>
-        <item name="strokeWidth">1dp</item>
+        <item name="enforceMaterialTheme">true</item>
+        <item name="cardElevation">3dp</item>
+        <item name="shapeAppearance">@null</item>
     </style>
 
     <style name="ConditionCardBorderlessButton"
@@ -485,6 +449,7 @@
     <style name="ConditionHalfCardBorderlessButton"
            parent="@style/ConditionCardBorderlessButton">
         <item name="android:textAlignment">viewStart</item>
+        <item name="android:layout_marginStart">4dp</item>
     </style>
 
     <style name="ConditionFullCardBorderlessButton"
@@ -494,7 +459,12 @@
 
     <style name="ContextualCardDismissalButton"
            parent="android:Widget.DeviceDefault.Button.Borderless.Colored">
+        <item name="android:minHeight">16dp</item>
         <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="Widget.SliceView.Settings">
+        <item name="titleSize">@*android:dimen/text_size_subhead_material</item>
     </style>
 
 </resources>

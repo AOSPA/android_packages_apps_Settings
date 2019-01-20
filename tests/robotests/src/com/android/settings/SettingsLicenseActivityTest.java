@@ -18,29 +18,27 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.SystemProperties;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
 
 import java.io.File;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SettingsLicenseActivityTest {
 
     private ActivityController<SettingsLicenseActivity> mActivityController;
@@ -67,8 +65,6 @@ public class SettingsLicenseActivityTest {
 
     @Test
     public void testOnCreateWithValidHtmlFile() {
-        SystemProperties.set("ro.config.license_path", "/system/etc/NOTICE.html.gz");
-
         doReturn(true).when(mActivity).isFileValid(any());
         mActivity.onCreate(null);
 

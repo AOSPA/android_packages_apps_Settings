@@ -16,17 +16,11 @@
 
 package com.android.settings.wifi.dpp;
 
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static android.support.test.espresso.Espresso.onView;
-
-import static com.google.common.truth.Truth.assertThat;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
+
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -41,18 +35,10 @@ public class WifiDppQrCodeScannerFragmentTest {
 
     @Before
     public void setUp() {
-        Intent intent = new Intent();
-        intent.putExtra(WifiDppConfiguratorActivity.EXTRA_LAUNCH_MODE,
-                WifiDppConfiguratorActivity.LaunchMode.LAUNCH_MODE_QR_CODE_SCANNER.getMode());
+        Intent intent = new Intent(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SECURITY, "WEP");
+        intent.putExtra(WifiDppUtils.EXTRA_WIFI_SSID, "GoogleGuest");
         mActivityRule.launchActivity(intent);
-    }
-
-    @Test
-    public void leftButton_shouldFinishActivityWithResultCodeCanceled() {
-        onView(withText("Cancel")).perform(click());
-
-        assertThat(mActivityRule.getActivityResult().getResultCode()).
-                isEqualTo(Activity.RESULT_CANCELED);
     }
 
     @Test
