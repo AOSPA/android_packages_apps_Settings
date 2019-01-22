@@ -38,6 +38,10 @@
         [CHAR LIMIT=20] -->
     <string name="apply_theme_btn">Apply</string>
 
+    <!-- Label for a checkbox to allow the user to use their currently set wallpaper instead of
+        the one bundled with selected Theme [CHAR LIMIT=35]-->
+    <string name="keep_my_wallpaper">Keep current wallpaper</string>
+
     <!-- Label for a button that allows the user to apply the currently selected customization option.
         [CHAR LIMIT=20] -->
     <string name="apply_btn">Apply</string>
@@ -81,4 +85,8 @@
 
     <!-- Message shown when a theme has been applied successfully in the system [CHAR LIMIT=NONE] -->
     <string name="applied_theme_msg">Style applied</string>
+
+    <!-- Message shown when a theme couldn't be applied in the system because of an error
+        [CHAR LIMIT=NONE] -->
+    <string name="apply_theme_error_msg">There was a problem applying the style</string>
 </resources>

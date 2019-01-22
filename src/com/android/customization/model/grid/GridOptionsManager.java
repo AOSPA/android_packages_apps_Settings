@@ -41,8 +41,13 @@ public class GridOptionsManager implements CustomizationManager<GridOption> {
     }
 
     @Override
-    public void apply(GridOption option) {
-        mProvider.applyGrid(option.name);
+    public void apply(GridOption option, Callback callback) {
+        int updated = mProvider.applyGrid(option.name);
+        if (updated == 1) {
+            callback.onSuccess();
+        } else {
+            callback.onError(null);
+        }
     }
 
     @Override

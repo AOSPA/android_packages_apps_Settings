@@ -16,7 +16,6 @@
 package com.android.customization.model.clock;
 
 import android.content.Context;
-import android.provider.Settings;
 import android.provider.Settings.Secure;
 
 import com.android.customization.model.CustomizationManager;
@@ -39,9 +38,14 @@ public class ClockManager implements CustomizationManager<Clockface> {
     }
 
     @Override
-    public void apply(Clockface option) {
-        Settings.Secure.putString(mContext.getContentResolver(),
+    public void apply(Clockface option, Callback callback) {
+        boolean stored = Secure.putString(mContext.getContentResolver(),
                 CLOCK_FACE_SETTING, option.getId());
+        if (stored) {
+            callback.onSuccess();
+        } else {
+            callback.onError(null);
+        }
     }
 
     @Override

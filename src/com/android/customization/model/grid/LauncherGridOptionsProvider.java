@@ -124,7 +124,7 @@ public class LauncherGridOptionsProvider {
         return mOptions;
     }
 
-    void applyGrid(String name) {
+    int applyGrid(String name) {
         Uri updateDefaultUri = new Uri.Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(mProviderInfo.authority)
@@ -132,6 +132,6 @@ public class LauncherGridOptionsProvider {
                 .build();
         ContentValues values = new ContentValues();
         values.put("name", name);
-        mContext.getContentResolver().update(updateDefaultUri, values, null, null);
+        return mContext.getContentResolver().update(updateDefaultUri, values, null, null);
     }
 }

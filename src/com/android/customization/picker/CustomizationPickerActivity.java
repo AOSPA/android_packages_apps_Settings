@@ -54,6 +54,7 @@ import com.android.wallpaper.module.FormFactorChecker;
 import com.android.wallpaper.module.Injector;
 import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.module.UserEventLogger;
+import com.android.wallpaper.module.WallpaperSetter;
 import com.android.wallpaper.picker.CategoryFragment;
 import com.android.wallpaper.picker.CategoryFragment.CategoryFragmentHost;
 import com.android.wallpaper.picker.MyPhotosStarter;
@@ -84,6 +85,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
     private static final Map<Integer, CustomizationSection> mSections = new HashMap<>();
     private CategoryFragment mWallpaperCategoryFragment;
+    private WallpaperSetter mWallpaperSetter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -145,7 +147,11 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
             return;
         }
         //Theme
-        ThemeManager themeManager = new ThemeManager(new DefaultThemeProvider(this), this);
+        Injector injector = InjectorProvider.getInjector();
+        mWallpaperSetter = new WallpaperSetter(injector.getWallpaperPersister(this),
+                injector.getPreferences(this), mUserEventLogger, false);
+        ThemeManager themeManager = new ThemeManager(new DefaultThemeProvider(this), this,
+                mWallpaperSetter);
         if (themeManager.isAvailable()) {
             mSections.put(R.id.nav_theme, new ThemeSection(R.id.nav_theme, themeManager));
         }
@@ -258,6 +264,14 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     public ThemeManager getThemeManager() {
         CustomizationSection section = mSections.get(R.id.nav_theme);
         return section == null ? null : (ThemeManager) section.customizationManager;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mWallpaperSetter != null) {
+            mWallpaperSetter.cleanUp();
+        }
     }
 
     /**

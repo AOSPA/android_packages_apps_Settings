@@ -33,6 +33,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.model.grid.GridOption;
 import com.android.customization.model.grid.GridOptionsManager;
 import com.android.customization.picker.BasePreviewAdapter;
@@ -101,8 +102,18 @@ public class GridFragment extends ToolbarFragment {
         mScreenAspectRatio = (float) dm.heightPixels / dm.widthPixels;
         setUpOptions();
         view.findViewById(R.id.apply_button).setOnClickListener(v -> {
-            mGridManager.apply(mSelectedOption);
-            getActivity().finish();
+            mGridManager.apply(mSelectedOption,  new Callback() {
+                @Override
+                public void onSuccess() {
+                    getActivity().finish();
+                }
+
+                @Override
+                public void onError(@Nullable Throwable throwable) {
+                    //TODO(santie): handle
+                }
+            });
+
         });
         CurrentWallpaperInfoFactory factory = InjectorProvider.getInjector()
                 .getCurrentWallpaperFactory(getContext().getApplicationContext());

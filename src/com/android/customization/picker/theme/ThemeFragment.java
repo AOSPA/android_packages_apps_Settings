@@ -19,10 +19,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLayoutChangeListener;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,8 +39,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
 
+import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.model.theme.ThemeBundle;
 import com.android.customization.model.theme.ThemeManager;
 import com.android.customization.picker.BasePreviewAdapter;
@@ -43,6 +48,9 @@ import com.android.customization.picker.BasePreviewAdapter.PreviewPage;
 import com.android.customization.widget.OptionSelectorController;
 import com.android.customization.widget.PreviewPager;
 import com.android.wallpaper.R;
+import com.android.wallpaper.model.WallpaperInfo;
+import com.android.wallpaper.module.CurrentWallpaperInfoFactory;
+import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.picker.ToolbarFragment;
 
 /**
@@ -50,13 +58,15 @@ import com.android.wallpaper.picker.ToolbarFragment;
  */
 public class ThemeFragment extends ToolbarFragment {
 
+    private static final String TAG = "ThemeFragment";
+    private static final String KEY_SELECTED_THEME = "ThemeFragment.SelectedThemeBundle";
+
     /**
      * Interface to be implemented by an Activity hosting a {@link ThemeFragment}
      */
     public interface ThemeFragmentHost {
         ThemeManager getThemeManager();
     }
-
     public static ThemeFragment newInstance(CharSequence title) {
         ThemeFragment fragment = new ThemeFragment();
         fragment.setArguments(ToolbarFragment.createArguments(title));
@@ -67,8 +77,11 @@ public class ThemeFragment extends ToolbarFragment {
     private OptionSelectorController mOptionsController;
     private ThemeManager mThemeManager;
     private ThemeBundle mSelectedTheme;
-    private PagerAdapter mAdapter;
+    private ThemePreviewAdapter mAdapter;
     private PreviewPager mPreviewPager;
+    private boolean mUseMyWallpaper;
+    private WallpaperInfo mCurrentHomeWallpaper;
+    private CurrentWallpaperInfoFactory mCurrentWallpaperFactory;
 
     @Override
     public void onAttach(Context context) {
@@ -83,16 +96,77 @@ public class ThemeFragment extends ToolbarFragment {
         View view = inflater.inflate(
                 R.layout.fragment_theme_picker, container, /* attachToRoot */ false);
         setUpToolbar(view);
+
+        mCurrentWallpaperFactory = InjectorProvider.getInjector()
+                .getCurrentWallpaperFactory(getActivity().getApplicationContext());
         mPreviewPager = view.findViewById(R.id.theme_preview_pager);
         mOptionsContainer = view.findViewById(R.id.options_container);
         view.findViewById(R.id.apply_button).setOnClickListener(v -> {
-            mThemeManager.apply(mSelectedTheme);
-            Toast.makeText(getContext(), R.string.applied_theme_msg, Toast.LENGTH_LONG).show();
-            getActivity().finish();
+            mThemeManager.apply(mSelectedTheme, new Callback() {
+                @Override
+                public void onSuccess() {
+                    Toast.makeText(getContext(), R.string.applied_theme_msg,
+                            Toast.LENGTH_LONG).show();
+                    getActivity().finish();
+                }
+
+                @Override
+                public void onError(@Nullable Throwable throwable) {
+                    Log.w(TAG, "Error applying theme", throwable);
+                    Toast.makeText(getContext(), R.string.apply_theme_error_msg,
+                            Toast.LENGTH_LONG).show();
+                }
+            });
+
         });
-        setUpOptions();
+        ((CheckBox)view.findViewById(R.id.use_my_wallpaper)).setOnCheckedChangeListener(
+                this::onUseMyWallpaperCheckChanged);
+
+        setUpOptions(savedInstanceState);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        reloadWallpaper();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mSelectedTheme != null && !mSelectedTheme.isActive(mThemeManager)) {
+            outState.putString(KEY_SELECTED_THEME, mSelectedTheme.getSerializedPackages());
+        }
+    }
+
+    private void onUseMyWallpaperCheckChanged(CompoundButton checkbox, boolean checked) {
+        mUseMyWallpaper = checked;
+        reloadWallpaper();
+    }
+
+    private void reloadWallpaper() {
+        if (mUseMyWallpaper) {
+            mCurrentWallpaperFactory.createCurrentWallpaperInfos(
+                    (homeWallpaper, lockWallpaper, presentationMode) -> {
+                        if (mSelectedTheme != null) {
+                            mCurrentHomeWallpaper = homeWallpaper;
+                            mSelectedTheme.setOverrideThemeWallpaper(homeWallpaper);
+                            if (mAdapter != null) {
+                                mAdapter.rebindWallpaperIfAvailable();
+                            }
+                        }
+            }, false);
+        } else {
+            mCurrentHomeWallpaper = null;
+            if (mSelectedTheme != null) {
+                mSelectedTheme.setOverrideThemeWallpaper(null);
+                if (mAdapter != null) {
+                    mAdapter.rebindWallpaperIfAvailable();
+                }
+            }
+        }
     }
 
     private void createAdapter() {
@@ -100,23 +174,26 @@ public class ThemeFragment extends ToolbarFragment {
         mPreviewPager.setAdapter(mAdapter);
     }
 
-    private void setUpOptions() {
+    private void setUpOptions(@Nullable Bundle savedInstanceState) {
         mThemeManager.fetchOptions(options -> {
             mOptionsController = new OptionSelectorController(mOptionsContainer, options);
 
             mOptionsController.addListener(selected -> {
                 mSelectedTheme = (ThemeBundle) selected;
+                mSelectedTheme.setOverrideThemeWallpaper(mCurrentHomeWallpaper);
                 createAdapter();
             });
             mOptionsController.initOptions(mThemeManager);
+            String previouslySelected = savedInstanceState != null
+                    ? savedInstanceState.getString(KEY_SELECTED_THEME) : null;
+
             for (ThemeBundle theme : options) {
-                if (theme.isActive(mThemeManager)) {
+                if (previouslySelected != null
+                        && previouslySelected.equals(theme.getSerializedPackages())) {
+                    mSelectedTheme = theme;
+                } else if (theme.isActive(mThemeManager)) {
                     mSelectedTheme = theme;
                 }
-            }
-            // For development only, as there should always be a theme set.
-            if (mSelectedTheme == null) {
-                mSelectedTheme = options.get(0);
             }
             mOptionsController.setSelectedOption(mSelectedTheme);
         });
@@ -130,8 +207,9 @@ public class ThemeFragment extends ToolbarFragment {
         @ColorInt final int accentColor;
         private final LayoutInflater inflater;
 
-        private ThemePreviewPage(Context context, @StringRes int titleResId, @DrawableRes int iconSrc,
-                @LayoutRes int contentLayoutRes, @ColorInt int accentColor) {
+        private ThemePreviewPage(Context context, @StringRes int titleResId,
+                @DrawableRes int iconSrc, @LayoutRes int contentLayoutRes,
+                @ColorInt int accentColor) {
             super(null);
             this.nameResId = titleResId;
             this.iconSrc = iconSrc;
@@ -149,10 +227,14 @@ public class ThemeFragment extends ToolbarFragment {
 
             ViewGroup body = card.findViewById(R.id.theme_preview_card_body_container);
             inflater.inflate(contentLayoutRes, body, true);
-            bindBody();
+            bindBody(false);
         }
 
-        protected abstract void bindBody();
+        protected boolean containsWallpaper() {
+            return false;
+        }
+
+        protected abstract void bindBody(boolean forceRebind);
     }
 
     /**
@@ -173,7 +255,7 @@ public class ThemeFragment extends ToolbarFragment {
             addPage(new ThemePreviewPage(activity, R.string.preview_name_font, R.drawable.ic_font,
                     R.layout.preview_card_font_content, theme.getPreviewInfo().colorAccentLight) {
                 @Override
-                protected void bindBody() {
+                protected void bindBody(boolean forceRebind) {
                     TextView title = card.findViewById(R.id.font_card_title);
                     title.setTypeface(theme.getPreviewInfo().headlineFontFamily);
                     TextView body = card.findViewById(R.id.font_card_body);
@@ -185,7 +267,7 @@ public class ThemeFragment extends ToolbarFragment {
                         R.drawable.ic_wifi_24px, R.layout.preview_card_icon_content,
                         theme.getPreviewInfo().colorAccentLight) {
                     @Override
-                    protected void bindBody() {
+                    protected void bindBody(boolean forceRebind) {
                         for (int i = 0; i < mIconIds.length; i++) {
                             ((ImageView) card.findViewById(mIconIds[i])).setImageDrawable(
                                     theme.getPreviewInfo().icons.get(i));
@@ -193,15 +275,14 @@ public class ThemeFragment extends ToolbarFragment {
                     }
                 });
             }
-            if (theme.getPreviewInfo().colorPreviewDrawable != null) {
+            if (theme.getPreviewInfo().colorPreviewAsset != null) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_color,
                         R.drawable.ic_colorize_24px, R.layout.preview_card_static_content,
                         theme.getPreviewInfo().colorAccentLight) {
                     @Override
-                    protected void bindBody() {
+                    protected void bindBody(boolean forceRebind) {
                         ImageView staticImage = card.findViewById(R.id.preview_static_image);
-
-                        theme.getPreviewInfo().colorPreviewDrawable.loadDrawable(activity,
+                        theme.getPreviewInfo().colorPreviewAsset.loadDrawable(activity,
                                 staticImage, card.getCardBackgroundColor().getDefaultColor());
                         staticImage.getLayoutParams().width = res.getDimensionPixelSize(
                                 R.dimen.color_preview_image_width);
@@ -210,14 +291,14 @@ public class ThemeFragment extends ToolbarFragment {
                     }
                 });
             }
-            if (theme.getPreviewInfo().shapePreviewDrawable != null) {
+            if (theme.getPreviewInfo().shapePreviewAsset != null) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_shape,
                         R.drawable.ic_shapes_24px, R.layout.preview_card_static_content,
                         theme.getPreviewInfo().colorAccentLight) {
                     @Override
-                    protected void bindBody() {
+                    protected void bindBody(boolean forceRebind) {
                         ImageView staticImage = card.findViewById(R.id.preview_static_image);
-                        theme.getPreviewInfo().shapePreviewDrawable.loadDrawable(activity,
+                        theme.getPreviewInfo().shapePreviewAsset.loadDrawable(activity,
                                 staticImage, card.getCardBackgroundColor().getDefaultColor());
 
                         staticImage.getLayoutParams().width = res.getDimensionPixelSize(
@@ -226,6 +307,63 @@ public class ThemeFragment extends ToolbarFragment {
                                 R.dimen.shape_preview_image_height);
                     }
                 });
+            }
+            if (theme.getPreviewInfo().wallpaperAsset != null) {
+                addPage(new ThemePreviewPage(activity, R.string.preview_name_wallpaper,
+                        R.drawable.ic_wallpaper_24px, R.layout.preview_card_wallpaper_content,
+                        theme.getPreviewInfo().colorAccentLight) {
+
+                    private final WallpaperPreviewLayoutListener  mListener =
+                            new WallpaperPreviewLayoutListener(theme);
+
+                    @Override
+                    protected boolean containsWallpaper() {
+                        return true;
+                    }
+
+                    @Override
+                    protected void bindBody(boolean forceRebind) {
+                        if (card == null) {
+                            return;
+                        }
+                        card.addOnLayoutChangeListener(mListener);
+                        if (forceRebind) {
+                            card.requestLayout();
+                        }
+                    }
+                });
+            }
+        }
+
+        public void rebindWallpaperIfAvailable() {
+            for (ThemePreviewPage page : mPages) {
+                if (page.containsWallpaper()) {
+                    page.bindBody(true);
+                }
+            }
+        }
+
+        private static class WallpaperPreviewLayoutListener implements OnLayoutChangeListener {
+            private final ThemeBundle mTheme;
+
+            public WallpaperPreviewLayoutListener(ThemeBundle theme) {
+                mTheme = theme;
+            }
+
+            @Override
+            public void onLayoutChange(View view, int left, int top, int right,
+                    int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                int targetWidth = right - left;
+                int targetHeight = bottom - top;
+                if (targetWidth > 0 && targetHeight > 0) {
+                    mTheme.getWallpaperPreviewAsset(view.getContext()).decodeBitmap(
+                            targetWidth, targetHeight, bitmap -> {
+                                Resources res = view.getContext().getResources();
+                                view.findViewById(R.id.theme_preview_card_background)
+                                        .setBackground(new BitmapDrawable(res, bitmap));
+                            });
+                    view.removeOnLayoutChangeListener(this);
+                }
             }
         }
     }
