@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.annotation.Nullable;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -41,14 +42,12 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
@@ -161,7 +160,8 @@ public class ResetNetwork extends InstrumentedFragment {
         mEsimContainer = mContentView.findViewById(R.id.erase_esim_container);
         mEsimCheckbox = mContentView.findViewById(R.id.erase_esim);
 
-        mSubscriptions = SubscriptionManager.from(getActivity()).getActiveSubscriptionInfoList();
+        mSubscriptions = SubscriptionManager.from(getActivity())
+                .getActiveSubscriptionInfoList(true);
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
             // Get the default subscription in the order of data, voice, sms, first up.
             int defaultSubscription = SubscriptionManager.getDefaultDataSubscriptionId();
@@ -262,6 +262,6 @@ public class ResetNetwork extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.RESET_NETWORK;
+        return SettingsEnums.RESET_NETWORK;
     }
 }

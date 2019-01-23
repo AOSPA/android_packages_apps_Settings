@@ -20,9 +20,11 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
+
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -54,9 +56,11 @@ public class BatterySaverScheduleSeekBarController implements
         mContext = context;
         mSeekBarPreference = new SeekBarPreference(context);
         mSeekBarPreference.setOnPreferenceChangeListener(this);
-        mSeekBarPreference.setMax(BatterySaverScheduleSeekBarController.MAX_SEEKBAR_VALUE);
-        mSeekBarPreference.setMin(BatterySaverScheduleSeekBarController.MIN_SEEKBAR_VALUE);
+        mSeekBarPreference.setContinuousUpdates(true);
+        mSeekBarPreference.setMax(MAX_SEEKBAR_VALUE);
+        mSeekBarPreference.setMin(MIN_SEEKBAR_VALUE);
         mSeekBarPreference.setKey(KEY_BATTERY_SAVER_SEEK_BAR);
+        updateSeekBar();
     }
 
     @Override
@@ -83,11 +87,12 @@ public class BatterySaverScheduleSeekBarController implements
             if (threshold <= 0) {
                 mSeekBarPreference.setVisible(false);
             } else {
+                final int currentSeekbarValue = Math.max(threshold / 5, MIN_SEEKBAR_VALUE);
                 mSeekBarPreference.setVisible(true);
-                mSeekBarPreference.setProgress(MIN_SEEKBAR_VALUE);
+                mSeekBarPreference.setProgress(currentSeekbarValue);
                 mSeekBarPreference.setTitle(mContext.getString(
                         R.string.battery_saver_seekbar_title,
-                        Utils.formatPercentage(MIN_SEEKBAR_VALUE * 5)));
+                        Utils.formatPercentage(currentSeekbarValue * 5)));
             }
         } else {
             mSeekBarPreference.setVisible(false);

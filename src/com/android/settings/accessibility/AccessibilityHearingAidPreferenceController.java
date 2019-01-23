@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHearingAid;
@@ -33,7 +34,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.core.BasePreferenceController;
@@ -152,7 +152,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
         if (!mHearingAidProfileSupported) {
             return null;
         }
-        if (!mBluetoothAdapter.isEnabled()) {
+        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
             return null;
         }
         final List<BluetoothDevice> deviceList = mLocalBluetoothManager.getProfileManager()
@@ -166,6 +166,9 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
     }
 
     private boolean isHearingAidProfileSupported() {
+        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
+            return false;
+        }
         final List<Integer> supportedList = mBluetoothAdapter.getSupportedProfiles();
         if (supportedList.contains(BluetoothProfile.HEARING_AID)) {
             return true;
@@ -204,7 +207,7 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
                 .setDestination(BluetoothDeviceDetailsFragment.class.getName())
                 .setArguments(args)
                 .setTitleRes(R.string.device_details_title)
-                .setSourceMetricsCategory(MetricsProto.MetricsEvent.ACCESSIBILITY)
+                .setSourceMetricsCategory(SettingsEnums.ACCESSIBILITY)
                 .launch();
     }
 

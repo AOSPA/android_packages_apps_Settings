@@ -59,6 +59,7 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
 
         @Nullable
         private Button mOptionsButton;
+        private boolean mLeftButtonIsSkip;
 
         @Override
         public View onCreateView(
@@ -71,15 +72,20 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                                 .show(getChildFragmentManager(), null));
             }
             // Show the skip button during SUW but not during Settings > Biometric Enrollment
-            Button skipButton = view.findViewById(R.id.skip_button);
-            skipButton.setVisibility(View.VISIBLE);
-            skipButton.setOnClickListener(v -> {
+            mSkipOrClearButton.setOnClickListener(this::onSkipOrClearButtonClick);
+            return view;
+        }
+
+        @Override
+        protected void onSkipOrClearButtonClick(View view) {
+            if (mLeftButtonIsSkip) {
                 SetupSkipDialog dialog = SetupSkipDialog.newInstance(
                         getActivity().getIntent()
                                 .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
                 dialog.show(getFragmentManager());
-                });
-            return view;
+                return;
+            }
+            super.onSkipOrClearButtonClick(view);
         }
 
         @Override
@@ -99,6 +105,14 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                         (stage == Stage.Introduction || stage == Stage.HelpScreen ||
                                 stage == Stage.ChoiceTooShort || stage == Stage.FirstChoiceValid)
                                 ? View.VISIBLE : View.INVISIBLE);
+            }
+
+            if (stage.leftMode == LeftButtonMode.Gone && stage == Stage.Introduction) {
+                mSkipOrClearButton.setVisibility(View.VISIBLE);
+                mSkipOrClearButton.setText(getActivity(), R.string.skip_label);
+                mLeftButtonIsSkip = true;
+            } else {
+                mLeftButtonIsSkip = false;
             }
         }
 

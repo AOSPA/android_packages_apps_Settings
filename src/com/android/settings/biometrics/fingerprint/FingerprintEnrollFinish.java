@@ -16,12 +16,12 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
@@ -47,7 +47,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
                 new FooterButton.Builder(this)
                         .setText(R.string.fingerprint_enroll_button_add)
                         .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SuwGlifButton_Secondary)
+                        .setTheme(R.style.SudGlifButton_Secondary)
                         .build()
         );
 
@@ -56,7 +56,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
                         .setText(R.string.security_settings_fingerprint_enroll_done)
                         .setListener(this::onNextButtonClick)
                         .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
     }
@@ -105,6 +105,6 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.FINGERPRINT_ENROLL_FINISH;
+        return SettingsEnums.FINGERPRINT_ENROLL_FINISH;
     }
 }

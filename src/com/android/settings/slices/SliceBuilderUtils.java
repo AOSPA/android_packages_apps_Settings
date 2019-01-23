@@ -42,7 +42,6 @@ import androidx.slice.builders.ListBuilder.InputRangeBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
@@ -80,7 +79,7 @@ public class SliceBuilderUtils {
         final BasePreferenceController controller = getPreferenceController(context, sliceData);
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                 .action(SettingsEnums.PAGE_UNKNOWN,
-                        MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED,
+                        SettingsEnums.ACTION_SETTINGS_SLICE_REQUESTED,
                         SettingsEnums.PAGE_UNKNOWN,
                         sliceData.getKey(),
                         0);
@@ -425,7 +424,10 @@ public class SliceBuilderUtils {
         final String title = data.getTitle();
         final Set<String> keywords = buildSliceKeywords(data);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
-        final CharSequence summary = context.getText(R.string.disabled_dependent_setting_summary);
+
+        final String customSubtitle = data.getUnavailableSliceSubtitle();
+        final CharSequence subtitle = !TextUtils.isEmpty(customSubtitle) ? customSubtitle
+                : context.getText(R.string.disabled_dependent_setting_summary);
         final IconCompat icon = getSafeIcon(context, data);
         final SliceAction primaryAction = SliceAction.createDeeplink(
                 getContentPendingIntent(context, data),
@@ -436,7 +438,7 @@ public class SliceBuilderUtils {
                 .addRow(new RowBuilder()
                         .setTitle(title)
                         .setTitleItem(icon, ListBuilder.ICON_IMAGE)
-                        .setSubtitle(summary)
+                        .setSubtitle(subtitle)
                         .setPrimaryAction(primaryAction))
                 .setKeywords(keywords)
                 .build();

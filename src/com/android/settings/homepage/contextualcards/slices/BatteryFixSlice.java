@@ -21,11 +21,11 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.android.settings.slices.CustomSliceRegistry.BATTERY_FIX_SLICE_URI;
 
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
@@ -35,7 +35,6 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
@@ -49,6 +48,7 @@ import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class BatteryFixSlice implements CustomSliceable {
@@ -57,6 +57,11 @@ public class BatteryFixSlice implements CustomSliceable {
     static final String PREFS = "battery_fix_prefs";
     @VisibleForTesting
     static final String KEY_CURRENT_TIPS_TYPE = "current_tip_type";
+
+    private static final List<Integer> UNIMPORTANT_BATTERY_TIPS = Arrays.asList(
+            BatteryTip.TipType.SUMMARY,
+            BatteryTip.TipType.BATTERY_SAVER
+    );
 
     private static final String TAG = "BatteryFixSlice";
 
@@ -78,12 +83,12 @@ public class BatteryFixSlice implements CustomSliceable {
                         .setAccentColor(-1);
 
         // TipType.SUMMARY is battery good
-        if (readBatteryTipAvailabilityCache(mContext) == BatteryTip.TipType.SUMMARY) {
+        if (UNIMPORTANT_BATTERY_TIPS.contains(readBatteryTipAvailabilityCache(mContext))) {
             return buildBatteryGoodSlice(sliceBuilder, true);
         }
 
-        final List<BatteryTip> batteryTips = SliceBackgroundWorker.getInstance(mContext,
-                this).getResults();
+        final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(getUri());
+        final List<BatteryTip> batteryTips = worker != null ? worker.getResults() : null;
 
         if (batteryTips == null) {
             // Because we need wait slice background worker return data
@@ -91,19 +96,21 @@ public class BatteryFixSlice implements CustomSliceable {
         }
 
         for (BatteryTip batteryTip : batteryTips) {
-            if (batteryTip.getState() != BatteryTip.StateType.INVISIBLE) {
-                final IconCompat icon = IconCompat.createWithResource(mContext, batteryTip.getIconId());
-                final SliceAction primaryAction = SliceAction.createDeeplink(getPrimaryAction(),
-                        icon,
-                        ListBuilder.ICON_IMAGE,
-                        batteryTip.getTitle(mContext));
-                sliceBuilder.addRow(new RowBuilder()
-                        .setTitleItem(icon, ListBuilder.ICON_IMAGE)
-                        .setTitle(batteryTip.getTitle(mContext))
-                        .setSubtitle(batteryTip.getSummary(mContext))
-                        .setPrimaryAction(primaryAction));
-                break;
+            if (batteryTip.getState() == BatteryTip.StateType.INVISIBLE) {
+                continue;
             }
+            final IconCompat icon = IconCompat.createWithResource(mContext,
+                    batteryTip.getIconId());
+            final SliceAction primaryAction = SliceAction.createDeeplink(getPrimaryAction(),
+                    icon,
+                    ListBuilder.ICON_IMAGE,
+                    batteryTip.getTitle(mContext));
+            sliceBuilder.addRow(new RowBuilder()
+                    .setTitleItem(icon, ListBuilder.ICON_IMAGE)
+                    .setTitle(batteryTip.getTitle(mContext))
+                    .setSubtitle(batteryTip.getSummary(mContext))
+                    .setPrimaryAction(primaryAction));
+            break;
         }
         return sliceBuilder.build();
     }
@@ -118,7 +125,7 @@ public class BatteryFixSlice implements CustomSliceable {
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 PowerUsageSummary.class.getName(), BatteryTipPreferenceController.PREF_NAME,
                 screenTitle,
-                MetricsProto.MetricsEvent.SLICE)
+                SettingsEnums.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
     }

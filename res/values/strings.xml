@@ -929,10 +929,12 @@
     <string name="security_settings_face_settings_require_attention">Eyes open to unlock</string>
     <!-- Text shown on the details of a toggle which disables/enables face authentication, depending if the user's eyes are open. [CHAR LIMIT=70] -->
     <string name="security_settings_face_settings_require_attention_details">When using face authentication, your eyes must be open</string>
+    <!-- When authenticating in apps, always require confirmation (e.g. confirm button) after a face is authenticated. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_settings_require_confirmation">Always require confirmation</string>
+    <!-- When authenticating in apps, always require confirmation (e.g. confirm button) after a face is authenticated. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_confirmation_details">When authenticating in apps, always require confirmation</string>
     <!-- Button text in face settings which removes the user's faces from the device [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_remove_face_data">Remove face data</string>
-    <!-- Text shown in face settings allowing the user to update/improve the enrolled face. This brings the user back to the enrollment flow. [CHAR LIMIT=30] -->
-    <string name="security_settings_face_settings_improve_face">Improve your face data</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer">Your face can be used to unlock your device and access apps.
         <annotation id="url">Learn more</annotation></string>
@@ -1836,8 +1838,10 @@
     <string name="wifi_sign_in_button_text">Sign in</string>
     <!-- Wifi Sign in CTA for wifi settings when captive portal auth is required [CHAR LIMIT = 50] -->
     <string name="wifi_tap_to_sign_in">Tap here to sign in to network</string>
-    <!-- Link speed on Wifi Status screen -->
-    <string name="link_speed">%1$d Mbps</string>
+    <!-- Transmit Link speed on Wifi Status screen [CHAR LIMIT=32] -->
+    <string name="tx_link_speed"><xliff:g id="Transmit link speed" example="150 Mbps">%1$d</xliff:g> Mbps</string>
+    <!-- Receive Link speed on Wifi Status screen [CHAR LIMIT=32] -->
+    <string name="rx_link_speed"><xliff:g id="Receive link speed" example="54 Mbps">%1$d</xliff:g> Mbps</string>
 
     <!-- This string asks the user whether or not to allow an app to enable WiFi. [CHAR LIMIT=NONE] -->
     <string name="wifi_ask_enable"><xliff:g id="requester" example="FancyApp">%s</xliff:g> wants to turn on Wi-Fi</string>
@@ -2032,8 +2036,10 @@
     <string name="wifi_signal">Signal strength</string>
     <!-- Label for the status of the connection -->
     <string name="wifi_status">Status</string>
-    <!-- Label for the link speed of the connection -->
-    <string name="wifi_speed">Link speed</string>
+    <!-- Label for the transmit link speed of the connection. [CHAR LIMIT=32] -->
+    <string name="tx_wifi_speed">Transmit link speed</string>
+    <!-- Label for the receive link speed of the connection. [CHAR LIMIT=32] -->
+    <string name="rx_wifi_speed">Receive link speed</string>
     <!-- Label for the frequency band of the connection -->
     <string name="wifi_frequency">Frequency</string>
     <!-- Label for the IP address of the connection -->
@@ -2108,6 +2114,12 @@
     <string name="wifi_dpp_add_another_device">Add another device</string>
     <!-- Button label to choose different Wi-Fi network [CHAR LIMIT=80]  -->
     <string name="wifi_dpp_choose_different_network">Choose different network</string>
+    <!-- Hint for QR code detection [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_could_not_add_device">Couldn\u2019t add device</string>
+    <!-- Title for the fragment to show that device found but naming known [CHAR LIMIT=50]  -->
+    <string name="wifi_dpp_device_found">Device found</string>
+     <!-- Label for the try again button [CHAR LIMIT=20]-->
+    <string name="retry">Retry</string>
     <!-- Label for the check box to share a network with other users on the same device -->
     <string name="wifi_shared">Share with other device users</string>
     <!-- Hint for unchanged fields -->
@@ -2385,7 +2397,10 @@
     <string name="networkid_label" translatable="false">Network ID:</string>
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Label on Wifi Status screen-->
-    <string name="link_speed_label" translatable="false">Link speed:</string>
+    <string name="tx_link_speed_label" translatable="false">Transmit link speed:</string>
+    <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
+         Label on Wifi Status screen-->
+    <string name="rx_link_speed_label" translatable="false">Receive link speed:</string>
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Label on Wifi Status screen-->
     <string name="scan_list_label" translatable="false">Scan results:</string>
@@ -2713,6 +2728,8 @@
     <string name="night_display_activation_on_custom">Turn on until <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, deactivation button action for custom schedule [CHAR LIMIT=40] -->
     <string name="night_display_activation_off_custom">Turn off until <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
+    <!-- Night display slice screen, subtitle of intensity setting when night light is off. [CHAR LIMIT=30] -->
+    <string name="night_display_not_currently_on">Night Light not currently on</string>
 
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
     <string name="screen_timeout">Sleep</string>
@@ -4224,13 +4241,9 @@
     <!-- Manage applications. application installation location summary -->
     <string name="app_install_location_summary">Change the preferred installation location for new apps</string>
     <!-- [CHAR LIMIT=30] Manage applications, label for option to disable app -->
-    <string name="app_disable_dlg_positive">Disable app</string>
+    <string name="app_disable_dlg_positive">Uninstall app</string>
     <!-- [CHAR LIMIT=200] Manage applications, text for dialog when disabling apps -->
-    <string name="app_disable_dlg_text">If you disable this app, Android and other apps may no longer function as intended.</string>
-    <!-- [CHAR LIMIT=NONE] Manage applications, title for dialog when disabling updated apps -->
-    <string name="app_special_disable_dlg_title">Delete data and disable app?</string>
-    <!-- [CHAR LIMIT=NONE] Manage applications, text for dialog when disabling update apps -->
-    <string name="app_special_disable_dlg_text">If you disable this app, Android and other apps may no longer function as intended.  Your data will also be deleted.</string>
+    <string name="app_disable_dlg_text">If you uninstall this app, Android and other apps may no longer function as intended.</string>
     <!-- [CHAR LIMIT=30] Manage applications, title for dialog when disabling notifications for an app -->
     <string name="app_disable_notifications_dlg_title">Turn off notifications?</string>
     <!-- Manage applications, individual application info screen, section heading for information about the app installer [CHAR_LIMIT=25] -->
@@ -4691,7 +4704,9 @@
     <!-- Title for accessibility preference screen for configuring vibrations. -->
     <string name="accessibility_vibration_settings_title">Vibration</string>
     <!-- Title for accessibility preference for configuring notification vibrations. -->
-    <string name="accessibility_notification_vibration_title">Ring &amp; notification vibration</string>
+    <string name="accessibility_notification_vibration_title">Notification vibration</string>
+    <!-- Title for accessibility preference for configuring ring vibrations. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_ring_vibration_title">Ring vibration</string>
     <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
     <string name="accessibility_touch_vibration_title">Touch vibration</string>
     <!-- Used in the acessibilty service settings to control turning on/off the service entirely -->
@@ -4761,8 +4776,8 @@
         <item quantity="other">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
     </plurals>
 
-    <!-- Summary for vibration settings preference when notification vibration and haptic feedback intensity are set. [CHAR LIMIT=32] -->
-    <string name="accessibility_vibration_summary">Ring <xliff:g id="summary_ring" example="Medium">%1$s</xliff:g>, touch <xliff:g id="summary_touch" example="High">%2$s</xliff:g></string>
+    <!-- Summary for vibration settings preference when notification vibration and haptic feedback intensity are set. [CHAR LIMIT=50] -->
+    <string name="accessibility_vibration_summary">Ring <xliff:g id="summary_ring" example="Medium">%1$s</xliff:g>, notification <xliff:g id="summary_notification" example="Low">%2$s</xliff:g>, touch <xliff:g id="summary_touch" example="High">%3$s</xliff:g></string>
 
     <!-- Summary for vibration settings preference when ring & notification are set to off-->
     <string name="accessibility_vibration_summary_off">Ring &amp; notification set to off</string>
@@ -7059,8 +7074,10 @@
     <!-- List of synonyms for touch vibration setting (where you get a haptic response for touching things on the screen), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_touch_vibration">haptics, vibrate, screen, sensitivity</string>
 
-    <!-- List of synonyms for ring and notification vibration setting (changes whether your phone vibrates when it rings), used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_ring_vibration">haptics, vibrate, phone, call, sensitivity</string>
+    <!-- List of synonyms for ring vibration setting (changes whether your phone vibrates when it rings), used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_ring_vibration">haptics, vibrate, phone, call, sensitivity, ring</string>
+    <!-- List of synonyms for notification vibration setting (changes whether your phone vibrates when it shows a notification), used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_notification_vibration">haptics, vibrate, sensitivity</string>
 
     <!-- NFC Wi-Fi pairing/setup strings-->
 
@@ -7146,8 +7163,8 @@
     <!-- Sound: Other sounds: Title for the option enabling touch sounds for screen locking sounds. [CHAR LIMIT=30] -->
     <string name="screen_locking_sounds_title">Screen locking sounds</string>
 
-    <!-- Sound: Other sounds: Title for the option enabling charging sounds. [CHAR LIMIT=30] -->
-    <string name="charging_sounds_title">Charging sounds</string>
+    <!-- Sound: Other sounds: Title for the option enabling charging sounds and vibration. [CHAR LIMIT=50] -->
+    <string name="charging_sounds_title">Charging sounds and vibration</string>
 
     <!-- Sound: Other sounds: Title for the option enabling docking sounds. [CHAR LIMIT=30] -->
     <string name="docking_sounds_title">Docking sounds</string>
@@ -7353,6 +7370,12 @@
 
     <!--  Do not disturb: Label for button that will turn off zen mode. [CHAR LIMIT=30] -->
     <string name="zen_mode_button_turn_off">Turn off now</string>
+
+    <!-- Setting title for controlling how caption text display in real time [CHAR LIMIT=40]-->
+    <string name="live_captions_title">Live Caption</string>
+
+    <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
+    <string name="live_captions_summary">Auto-convert on-device audio to captions</string>
 
     <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing end time of DND -->
     <string name="zen_mode_settings_dnd_manual_end_time">Do Not Disturb is on until <xliff:g id="formatted_time" example="7:00 AM">%s</xliff:g></string>
@@ -9098,6 +9121,12 @@
     <!-- Summary of condition that do not disturb is on [CHAR LIMIT=36] -->
     <string name="condition_zen_summary">Impacts what you hear and see</string>
 
+    <!-- Title of condition that battery saver is on [CHAR LIMIT=30] -->
+    <string name="condition_battery_title">Battery Saver is on</string>
+
+    <!-- Summary of condition that battery saver is on [CHAR LIMIT=NONE] -->
+    <string name="condition_battery_summary">Features restricted</string>
+
     <!-- Title of condition that cellular data is off [CHAR LIMIT=50] -->
     <string name="condition_cellular_title">Mobile data is off</string>
 
@@ -9494,14 +9523,25 @@
     <!-- Notification log debug tool: the word 'none' -->
     <string name="notification_log_details_ranking_none">Ranking object doesn\'t contain this key.</string>
 
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the settings category for theme overlays. -->
+    <string name="theme_customization_category">Theming</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the setting which enables overlays to customize accent color. -->
+    <string name="theme_customization_accent_color_title">Accent color</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the setting which enables overlays to customize headline and body fonts. -->
+    <string name="theme_customization_font_title">Headline / Body font</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the setting which enables overlays to customize the adaptive icon shape (e.g. launcher and quick settings icons). -->
+    <string name="theme_customization_icon_shape_title">Icon shape</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off customizations for a given category.-->
+    <string name="theme_customization_device_default">Device default</string>
+
     <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the setting which turns on emulation of a display cutout. -->
     <string name="display_cutout_emulation">Display cutout</string>
 
     <!-- [CHAR_LIMIT=NONE] Developer Settings: Search keywords for the setting which turns on emulation of a display cutout. -->
     <string name="display_cutout_emulation_keywords">display cutout, notch</string>
 
-    <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off display cutout emulation, (i.e. on devices whose screen actually has a cutout, selecting this option will show that cutout).-->
-    <string name="display_cutout_emulation_device_default">Device default</string>
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off all overlays in a given category. -->
+    <string name="overlay_option_device_default">Device default</string>
 
     <!-- [CHAR_LIMIT=60] Label for special access screen -->
     <string name="special_access">Special app access</string>
@@ -9563,10 +9603,10 @@
     <string name="demo_mode">System UI demo mode</string>
 
     <!-- [CHAR LIMIT=60] Name of setting that changes the UI to dark -->
-    <string name="dark_ui_mode">Dark mode</string>
+    <string name="dark_ui_mode">Theme</string>
 
     <!-- [CHAR LIMIT=60] Name of dev option that changes the color of the UI -->
-    <string name="dark_ui_mode_title">Set Dark mode</string>
+    <string name="dark_ui_mode_title">Set Theme</string>
 
     <!-- [CHAR LIMIT=60] Name of dev option to enable extra quick settings tiles -->
     <string name="quick_settings_developer_tiles">Quick settings developer tiles</string>
@@ -9698,6 +9738,16 @@
     <string name="ambient_display_wake_lock_screen_title">Wake lock screen gesture</string>
     <!-- Summary text for ambient display [CHAR LIMIT=NONE]-->
     <string name="ambient_display_wake_lock_screen_summary" product="default"></string>
+
+    <!-- Preference and settings suggestion title text for ambient display tap (phone) [CHAR LIMIT=60]-->
+    <string name="ambient_display_tap_screen_title" product="default">Tap to check phone</string>
+    <!-- Preference and settings suggestion title text for ambient display tap (tablet) [CHAR LIMIT=60]-->
+    <string name="ambient_display_tap_screen_title" product="tablet">Tap to check tablet</string>
+    <!-- Preference and settings suggestion title text for ambient display tap (device) [CHAR LIMIT=60]-->
+    <string name="ambient_display_tap_screen_title" product="device">Tap to check device</string>
+
+    <!-- Summary text for ambient display tap [CHAR LIMIT=NONE]-->
+    <string name="ambient_display_tap_screen_summary">To check time, notifications, and other info, tap your screen.</string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
@@ -10075,17 +10125,26 @@
     <!-- UI debug setting: ANGLE enabled app has been set [CHAR LIMIT=NONE] -->
     <string name="angle_enabled_app_set">ANGLE enabled application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
 
-    <!-- UI debug setting: select an app to use Game Update Package [CHAR LIMIT=100] -->
-    <string name="gup_dev_opt_in_app">Use Game Update Package</string>
-    <!-- UI debug setting: no app selected to use Game Update Package [CHAR LIMIT=100] -->
-    <string name="gup_dev_opt_in_app_not_set">No selected app</string>
-    <!-- UI debug setting: app selected to use Game Update Package [CHAR LIMIT=NONE] -->
-    <string name="gup_dev_opt_in_app_set"><xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
-
-    <!-- Title for Game Update Packages dashboard where developers can configure apps to use GUP or not [CHAR LIMIT=50] -->
-    <string name="gup_dashboard_title">Game Update Packages Preferences</string>
-    <!-- Summary for Game Update Packages dashboard [CHAR LIMIT=50] -->
-    <string name="gup_dashboard_summary">Modify Game Update Packages settings</string>
+    <!-- Title for Game Update Package dashboard where developers can configure apps to use GUP or not [CHAR LIMIT=50] -->
+    <string name="gup_dashboard_title">Game Update Package Preferences</string>
+    <!-- Summary for Game Update Package dashboard [CHAR LIMIT=50] -->
+    <string name="gup_dashboard_summary">Modify Game Update Package settings</string>
+    <!-- Title for Game Update Package all apps preference [CHAR LIMIT=50] -->
+    <string name="gup_all_apps_switch_title">Enable for all apps</string>
+    <!-- Title for Game Update Package preference [CHAR LIMIT=50] -->
+    <string name="gup_app_preference_title">Select Graphics Driver</string>
+    <!-- The default value for Game Update Package preference [CHAR LIMIT=50] -->
+    <string name="gup_app_preference_default">Default</string>
+    <!-- The gup value for Game Update Package preference [CHAR LIMIT=50] -->
+    <string name="gup_app_preference_gup">Game Update Package</string>
+    <!-- The system value for Game Update Package preference [CHAR LIMIT=50] -->
+    <string name="gup_app_preference_system">System Graphics Driver</string>
+    <!-- All the values for Game Update Package preference [CHAR LIMIT=50] -->
+    <string-array name="gup_app_preference_values">
+        <item>@string/gup_app_preference_default</item>
+        <item>@string/gup_app_preference_gup</item>
+        <item>@string/gup_app_preference_system</item>
+    </string-array>
 
     <!-- Slices Strings -->
 
@@ -10203,12 +10262,6 @@
     <!-- Homepage bottom menu. Title for display personalized Settings [CHAR LIMIT=30] -->
     <string name="homepage_personal_settings">Suggestions</string>
 
-    <!-- Setting Checkbox title whether to enable CBRS data. [CHAR LIMIT=40] -->
-    <string name="cbrs_data_switch">CBRS Data</string>
-
-    <!-- Title of implications of enabling CBRS Data -->
-    <string name="cbrs_data_switch_summary">CBRS Data</string>
-
     <!-- Available networks screen, name of button when user wants to select network manually [CHAR LIMIT=60] -->
     <string name="choose_network_title">Choose network</string>
     <!-- Available networks screen, text when no networks connected [CHAR LIMIT=60] -->
@@ -10325,6 +10378,34 @@
     <!-- Mobile network settings screen, title of Mobile data switch preference [CHAR LIMIT=NONE] -->
     <string name="mobile_data_settings_summary">Access data using mobile network</string>
 
+    <!-- Summary of the 'Mobile network' item on the Network & internet page when there is no mobile
+         service setup yet (eg no SIM card inserted and no eSIM configured). Tapping it leads to a
+         UI where the user can setup service. [CHAR LIMIT=50] -->
+    <string name="mobile_network_summary_add_a_network">Add a network</string>
+    <!-- Summary of the 'Mobile network' item on the Network & internet page when there is more than
+         one mobile service configured (aka "dual SIM") - it shows a count of SIM/eSIM and tapping
+         it leads to a page showing a list of the mobile service subscriptions. [CHAR LIMIT=40] -->
+    <plurals name="mobile_network_summary_count">
+        <item quantity="one"><xliff:g id="count" example="1">%1$d</xliff:g> SIM</item>
+        <item quantity="other"><xliff:g id="count" example="2">%1$d</xliff:g> SIMs</item>
+    </plurals>
+
+    <!-- Title of item shown at the bottom of the page listing multiple mobile service
+         subscriptions; tapping it leads to a UI to add more [CHAR LIMIT=40] -->
+    <string name="mobile_network_list_add_more">Add more</string>
+    <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
+         that service is active and is tied to a physical SIM card [CHAR LIMIT=40] -->
+    <string name="mobile_network_active_sim">Active SIM</string>
+    <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
+         that service is inactive and is tied to a physical SIM card [CHAR LIMIT=40] -->
+    <string name="mobile_network_inactive_sim">Inactive SIM</string>
+    <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
+         that service is active and is tied to an eSIM profile [CHAR LIMIT=40] -->
+    <string name="mobile_network_active_esim">Active eSIM</string>
+    <!-- Summary for an item in the page listing multiple mobile service subscriptions, indicating
+         that service is inactive and is tied to an eSIM profile [CHAR LIMIT=40] -->
+    <string name="mobile_network_inactive_esim">Inactive eSIM</string>
+
     <!-- Title for preferred network type [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_title">Preferred network type</string>
     <!-- Summary for preferred network type [CHAR LIMIT=NONE] -->
@@ -10429,7 +10510,7 @@
     <!-- Title for the top level Privacy Settings [CHAR LIMIT=30]-->
     <string name="privacy_dashboard_title">Privacy</string>
     <!-- Summary for the top level Privacy Settings [CHAR LIMIT=NONE]-->
-    <string name="privacy_dashboard_summary">Permission, permission usage</string>
+    <string name="privacy_dashboard_summary">Permissions, activity controls, data shown on screen</string>
 
     <!-- Label for button in contextual card for users to remove the card [CHAR LIMIT=30] -->
     <string name="contextual_card_dismiss_remove">Remove</string>
@@ -10453,5 +10534,30 @@
 
     <!-- String for talkback on the account avatar of the search bar.  [CHAR LIMIT=NONE] -->
     <string name="search_bar_account_avatar_content_description"></string>
+
+    <!-- Preference title text for skip media gesture [CHAR LIMIT=60]-->
+    <string name="gesture_skip_title">Skip gesture</string>
+
+    <!-- Preference title text for silence gesture [CHAR LIMIT=60]-->
+    <string name="gesture_silence_title">Silence alerts gesture</string>
+
+    <!-- Text to display when no app used permission.  [CHAR LIMIT=NONE] -->
+    <string name="permission_bar_chart_empty_text">0 apps used permissions</string>
+
+    <!-- Text for permission bar chart title in Privacy page.  [CHAR LIMIT=NONE] -->
+    <string name="permission_bar_chart_title">Most-used permissions in last 24 hours</string>
+
+    <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
+    <string name="permission_bar_chart_details">See all usage</string>
+
+    <!-- Title for notification channel slice. [CHAR LIMIT=NONE] -->
+    <string name="manage_app_notification">Manage <xliff:g id="app_name" example="Settings">%1$s</xliff:g> Notifications</string>
+    <!-- Title for no suggested app in notification channel slice. [CHAR LIMIT=NONE] -->
+    <string name="no_suggested_app">No suggested application</string>
+    <!-- Summary for notification channel slice. [CHAR LIMIT=NONE] -->
+    <plurals name="notification_channel_count_summary">
+        <item quantity="one"><xliff:g id="notification_channel_count">%1$d</xliff:g> notification channel. Tap to manage all.</item>
+        <item quantity="other"><xliff:g id="notification_channel_count">%1$d</xliff:g> notification channels. Tap to manage all.</item>
+    </plurals>
 
 </resources>

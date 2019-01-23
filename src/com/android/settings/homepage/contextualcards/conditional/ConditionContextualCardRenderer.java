@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
@@ -26,7 +27,6 @@ import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardRenderer;
@@ -39,9 +39,9 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
  */
 public class ConditionContextualCardRenderer implements ContextualCardRenderer {
     @LayoutRes
-    public static final int HALF_WIDTH_VIEW_TYPE = R.layout.homepage_condition_half_tile;
+    public static final int VIEW_TYPE_HALF_WIDTH = R.layout.homepage_condition_half_tile;
     @LayoutRes
-    public static final int FULL_WIDTH_VIEW_TYPE = R.layout.homepage_condition_full_tile;
+    public static final int VIEW_TYPE_FULL_WIDTH = R.layout.homepage_condition_full_tile;
 
     private final Context mContext;
     private final ControllerRendererPool mControllerRendererPool;
@@ -53,16 +53,7 @@ public class ConditionContextualCardRenderer implements ContextualCardRenderer {
     }
 
     @Override
-    public int getViewType(boolean isHalfWidth) {
-        if (isHalfWidth) {
-            return HALF_WIDTH_VIEW_TYPE;
-        } else {
-            return FULL_WIDTH_VIEW_TYPE;
-        }
-    }
-
-    @Override
-    public RecyclerView.ViewHolder createViewHolder(View view) {
+    public RecyclerView.ViewHolder createViewHolder(View view, @LayoutRes int viewType) {
         return new ConditionalCardHolder(view);
     }
 
@@ -73,7 +64,7 @@ public class ConditionContextualCardRenderer implements ContextualCardRenderer {
         final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory.getFactory(
                 mContext).getMetricsFeatureProvider();
 
-        metricsFeatureProvider.visible(mContext, MetricsProto.MetricsEvent.SETTINGS_HOMEPAGE,
+        metricsFeatureProvider.visible(mContext, SettingsEnums.SETTINGS_HOMEPAGE,
                 card.getMetricsConstant());
         initializePrimaryClick(view, card, metricsFeatureProvider);
         initializeView(view, card);
@@ -85,7 +76,7 @@ public class ConditionContextualCardRenderer implements ContextualCardRenderer {
         view.itemView.findViewById(R.id.content).setOnClickListener(
                 v -> {
                     metricsFeatureProvider.action(mContext,
-                            MetricsProto.MetricsEvent.ACTION_SETTINGS_CONDITION_CLICK,
+                            SettingsEnums.ACTION_SETTINGS_CONDITION_CLICK,
                             card.getMetricsConstant());
                     mControllerRendererPool.getController(mContext,
                             card.getCardType()).onPrimaryClick(card);
@@ -110,7 +101,7 @@ public class ConditionContextualCardRenderer implements ContextualCardRenderer {
             button.setOnClickListener(v -> {
                 final Context viewContext = v.getContext();
                 metricsFeatureProvider.action(
-                        viewContext, MetricsProto.MetricsEvent.ACTION_SETTINGS_CONDITION_BUTTON,
+                        viewContext, SettingsEnums.ACTION_SETTINGS_CONDITION_BUTTON,
                         card.getMetricsConstant());
                 mControllerRendererPool.getController(mContext, card.getCardType())
                         .onActionClick(card);

@@ -24,6 +24,7 @@ import android.app.INotificationManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.IntentSender;
@@ -56,7 +57,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -183,7 +183,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.NOTIFICATION_STATION;
+        return SettingsEnums.NOTIFICATION_STATION;
     }
 
     @Override
@@ -372,7 +372,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
             sb.append("\n")
                     .append(bold(getString(R.string.notification_log_details_sound)))
                     .append(delim);
-            if (channel.getImportance() == IMPORTANCE_UNSPECIFIED) {
+            if (channel == null || channel.getImportance() == IMPORTANCE_UNSPECIFIED) {
 
                 if (0 != (n.defaults & Notification.DEFAULT_SOUND)) {
                     sb.append(getString(R.string.notification_log_details_default));
@@ -387,7 +387,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
             sb.append("\n")
                     .append(bold(getString(R.string.notification_log_details_vibrate)))
                     .append(delim);
-            if (channel.getImportance() == IMPORTANCE_UNSPECIFIED) {
+            if (channel == null || channel.getImportance() == IMPORTANCE_UNSPECIFIED) {
                 if (0 != (n.defaults & Notification.DEFAULT_VIBRATE)) {
                     sb.append(getString(R.string.notification_log_details_default));
                 } else if (n.vibrate != null) {
