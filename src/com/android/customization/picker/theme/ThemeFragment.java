@@ -47,9 +47,15 @@ import com.android.wallpaper.picker.ToolbarFragment;
  */
 public class ThemeFragment extends ToolbarFragment {
 
-    public static ThemeFragment newInstance(CharSequence title, ThemeManager manager) {
+    /**
+     * Interface to be implemented by an Activity hosting a {@link ThemeFragment}
+     */
+    public interface ThemeFragmentHost {
+        ThemeManager getThemeManager();
+    }
+
+    public static ThemeFragment newInstance(CharSequence title) {
         ThemeFragment fragment = new ThemeFragment();
-        fragment.setManager(manager);
         fragment.setArguments(ToolbarFragment.createArguments(title));
         return fragment;
     }
@@ -60,6 +66,12 @@ public class ThemeFragment extends ToolbarFragment {
     private ThemeBundle mSelectedTheme;
     private PagerAdapter mAdapter;
     private PreviewPager mPreviewPager;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mThemeManager = ((ThemeFragmentHost) context).getThemeManager();
+    }
 
     @Nullable
     @Override
@@ -78,10 +90,6 @@ public class ThemeFragment extends ToolbarFragment {
         setUpOptions();
 
         return view;
-    }
-
-    private void setManager(ThemeManager manager) {
-        mThemeManager = manager;
     }
 
     private void createAdapter() {

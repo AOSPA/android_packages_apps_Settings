@@ -36,11 +36,20 @@ import com.android.customization.widget.PreviewPager;
 import com.android.wallpaper.R;
 import com.android.wallpaper.picker.ToolbarFragment;
 
+/**
+ * Fragment that contains the main UI for selecting and applying a Clockface.
+ */
 public class ClockFragment extends ToolbarFragment {
 
-    public static ClockFragment newInstance(CharSequence title, ClockManager manager) {
+    /**
+     * Interface to be implemented by an Activity hosting a {@link ClockFragment}
+     */
+    public interface ClockFragmentHost {
+        ClockManager getClockManager();
+    }
+
+    public static ClockFragment newInstance(CharSequence title) {
         ClockFragment fragment = new ClockFragment();
-        fragment.setManager(manager);
         fragment.setArguments(ToolbarFragment.createArguments(title));
         return fragment;
     }
@@ -50,6 +59,12 @@ public class ClockFragment extends ToolbarFragment {
     private Clockface mSelectedOption;
     private ClockManager mClockManager;
     private PreviewPager mPreviewPager;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mClockManager = ((ClockFragmentHost) context).getClockManager();
+    }
 
     @Nullable
     @Override
@@ -66,10 +81,6 @@ public class ClockFragment extends ToolbarFragment {
             getActivity().finish();
         });
         return view;
-    }
-
-    private void setManager(ClockManager manager) {
-        mClockManager = manager;
     }
 
     private void createAdapter() {
