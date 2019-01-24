@@ -15,20 +15,17 @@
  */
 package com.android.customization.model.clock;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
 import com.android.wallpaper.R;
 
-public class Clockface implements CustomizationOption {
+public class Clockface implements CustomizationOption<Clockface> {
 
-    // TODO: use constant from Settings.Secure
-    static final String CLOCK_FACE_SETTING = "lock_screen_custom_clock_face";
     private final String mTitle;
     private final String mId;
     private final Drawable mPreview;
@@ -52,9 +49,8 @@ public class Clockface implements CustomizationOption {
     }
 
     @Override
-    public boolean isActive(Context context) {
-        String currentClock = Secure.getString(context.getContentResolver(),
-                Clockface.CLOCK_FACE_SETTING);
+    public boolean isActive(CustomizationManager<Clockface> manager) {
+        String currentClock = ((ClockManager) manager).getCurrentClock();
         // Empty clock Id is the default system clock
         return (TextUtils.isEmpty(currentClock) && TextUtils.isEmpty(mId))
                 || (mId != null && mId.equals(currentClock));

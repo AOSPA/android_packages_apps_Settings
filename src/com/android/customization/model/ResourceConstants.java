@@ -26,6 +26,11 @@ public interface ResourceConstants {
     String ANDROID_PACKAGE = "android";
 
     /**
+     * Package name for android settings resources.
+     */
+    String SETTINGS_PACKAGE = "com.android.settings";
+
+    /**
      * Package name for android sysui resources.
      */
     String SYSUI_PACKAGE = "com.android.systemui";

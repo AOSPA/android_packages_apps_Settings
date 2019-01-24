@@ -108,9 +108,9 @@ public class ThemeFragment extends ToolbarFragment {
                 mSelectedTheme = (ThemeBundle) selected;
                 createAdapter();
             });
-            mOptionsController.initOptions();
+            mOptionsController.initOptions(mThemeManager);
             for (ThemeBundle theme : options) {
-                if (theme.isActive(getContext())) {
+                if (theme.isActive(mThemeManager)) {
                     mSelectedTheme = theme;
                 }
             }

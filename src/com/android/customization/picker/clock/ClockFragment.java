@@ -95,9 +95,9 @@ public class ClockFragment extends ToolbarFragment {
                 mSelectedOption = (Clockface) selected;
                 createAdapter();
             });
-            mOptionsController.initOptions();
+            mOptionsController.initOptions(mClockManager);
             for (Clockface option : options) {
-                if (option.isActive(getContext())) {
+                if (option.isActive(mClockManager)) {
                     mSelectedOption = option;
                 }
             }

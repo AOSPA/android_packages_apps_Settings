@@ -139,9 +139,9 @@ public class GridFragment extends ToolbarFragment {
                 mSelectedOption = (GridOption) selected;
                 createAdapter();
             });
-            mOptionsController.initOptions();
+            mOptionsController.initOptions(mGridManager);
             for (GridOption option : options) {
-                if (option.isActive(getContext())) {
+                if (option.isActive(mGridManager)) {
                     mSelectedOption = option;
                 }
             }
