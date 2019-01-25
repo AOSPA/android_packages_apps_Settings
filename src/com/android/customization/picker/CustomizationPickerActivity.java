@@ -17,12 +17,14 @@ package com.android.customization.picker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
+import androidx.core.os.BuildCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -73,6 +75,8 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         CategoryFragmentHost, ThemeFragmentHost, GridFragmentHost, ClockFragmentHost {
 
     private static final String TAG = "CustomizationPickerActivity";
+    private static final String THEMEPICKER_SYSTEM_PROPERTY =
+            "com.android.customization.picker.enable_customization";
 
     private WallpaperPickerDelegate mDelegate;
     private UserEventLogger mUserEventLogger;
@@ -95,22 +99,21 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
             Intent intent = new Intent(this, TopLevelPickerActivity.class);
             startActivity(intent);
             finish();
+        } else {
+            setContentView(R.layout.activity_customization_picker_main);
+            setUpBottomNavView();
+
+            FragmentManager fm = getSupportFragmentManager();
+            Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+
+            if (fragment == null) {
+                // App launch specific logic: log the "app launched" event and set up daily logging.
+                mUserEventLogger.logAppLaunched();
+                DailyLoggingAlarmScheduler.setAlarm(getApplicationContext());
+                // Navigate to the first available section
+                navigateToSection(mBottomNav.getMenu().getItem(0).getItemId());
+            }
         }
-
-        setContentView(R.layout.activity_customization_picker_main);
-        setUpBottomNavView();
-
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-
-        if (fragment == null) {
-            // App launch specific logic: log the "app launched" event and set up daily logging.
-            mUserEventLogger.logAppLaunched();
-            DailyLoggingAlarmScheduler.setAlarm(getApplicationContext());
-            navigateToSection(R.id.nav_theme);
-        }
-
-
     }
 
     private boolean supportsCustomization() {
@@ -119,6 +122,12 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     }
 
     private void initSections() {
+        if (!BuildCompat.isAtLeastQ()) {
+            return;
+        }
+        if (!Boolean.parseBoolean(SystemProperties.get(THEMEPICKER_SYSTEM_PROPERTY, "false"))) {
+            return;
+        }
         //Theme
         ThemeManager themeManager = new ThemeManager(new DefaultThemeProvider(this), this);
         if (themeManager.isAvailable()) {
