@@ -37,7 +37,6 @@ import android.text.TextUtils;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toolbar;
@@ -138,14 +137,9 @@ public class SettingsActivity extends SettingsBaseActivity
             ":settings:show_fragment_title_res_package_name";
     public static final String EXTRA_SHOW_FRAGMENT_TITLE_RESID =
             ":settings:show_fragment_title_resid";
-    public static final String EXTRA_SHOW_FRAGMENT_AS_SHORTCUT =
-            ":settings:show_fragment_as_shortcut";
 
     public static final String EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting";
-
-    @Deprecated
-    public static final String EXTRA_HIDE_DRAWER = ":settings:hide_drawer";
 
     public static final String META_DATA_KEY_FRAGMENT_CLASS =
             "com.android.settings.FRAGMENT_CLASS";
@@ -180,6 +174,10 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private Button mNextButton;
 
+    /**
+     * TODO(b/118444000): Remove this and all related code.
+     */
+    @Deprecated
     private boolean mIsShowingDashboard;
 
     private ViewGroup mContent;
@@ -254,9 +252,6 @@ public class SettingsActivity extends SettingsBaseActivity
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
 
-        mIsShowingDashboard = TextUtils.equals(
-                SettingsActivity.class.getName(), intent.getComponent().getClassName());
-
         // This is a "Sub Settings" when:
         // - this is a real SubSettings
         // - or :settings:show_fragment_as_subsetting is passed to the Intent
@@ -268,6 +263,9 @@ public class SettingsActivity extends SettingsBaseActivity
         if (isSubSettings) {
             setTheme(R.style.Theme_SubSettings);
         }
+
+        mIsShowingDashboard = TextUtils.equals(
+                SettingsActivity.class.getName(), intent.getComponent().getClassName());
 
         setContentView(mIsShowingDashboard ?
                 R.layout.settings_main_dashboard : R.layout.settings_main_prefs);
@@ -289,7 +287,7 @@ public class SettingsActivity extends SettingsBaseActivity
                 setTitleFromBackStack();
             }
         } else {
-            launchSettingFragment(initialFragmentName, isSubSettings, intent);
+            launchSettingFragment(initialFragmentName, intent);
         }
 
         final boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
@@ -321,26 +319,20 @@ public class SettingsActivity extends SettingsBaseActivity
             if (buttonBar != null) {
                 buttonBar.setVisibility(View.VISIBLE);
 
-                Button backButton = (Button) findViewById(R.id.back_button);
-                backButton.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        setResult(RESULT_CANCELED, null);
-                        finish();
-                    }
+                Button backButton = findViewById(R.id.back_button);
+                backButton.setOnClickListener(v -> {
+                    setResult(RESULT_CANCELED, null);
+                    finish();
                 });
-                Button skipButton = (Button) findViewById(R.id.skip_button);
-                skipButton.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        setResult(RESULT_OK, null);
-                        finish();
-                    }
+                Button skipButton = findViewById(R.id.skip_button);
+                skipButton.setOnClickListener(v -> {
+                    setResult(RESULT_OK, null);
+                    finish();
                 });
-                mNextButton = (Button) findViewById(R.id.next_button);
-                mNextButton.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        setResult(RESULT_OK, null);
-                        finish();
-                    }
+                mNextButton = findViewById(R.id.next_button);
+                mNextButton.setOnClickListener(v -> {
+                    setResult(RESULT_OK, null);
+                    finish();
                 });
 
                 // set our various button parameters
@@ -385,8 +377,8 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     @VisibleForTesting
-    void launchSettingFragment(String initialFragmentName, boolean isSubSettings, Intent intent) {
-        if (!mIsShowingDashboard && initialFragmentName != null) {
+    void launchSettingFragment(String initialFragmentName, Intent intent) {
+        if (initialFragmentName != null) {
             setTitleFromIntent(intent);
 
             Bundle initialArguments = intent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);

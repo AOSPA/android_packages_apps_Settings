@@ -17,35 +17,34 @@
 package com.android.settings;
 
 import android.content.Intent;
-import android.os.SystemProperties;
+import android.sysprop.SetupWizardProperties;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.setupwizardlib.util.WizardManagerHelper;
+import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
+
 
 public class SetupWizardUtils {
-
-    @VisibleForTesting
-    static final String SYSTEM_PROP_SETUPWIZARD_THEME = "setupwizard.theme";
 
     public static int getTheme(Intent intent) {
         String theme = intent.getStringExtra(WizardManagerHelper.EXTRA_THEME);
         if (theme == null) {
-            theme = SystemProperties.get(SYSTEM_PROP_SETUPWIZARD_THEME);
+            theme = SetupWizardProperties.theme().orElse("");
         }
         if (theme != null) {
             switch (theme) {
-                case WizardManagerHelper.THEME_GLIF_V3_LIGHT:
+                case ThemeHelper.THEME_GLIF_V3_LIGHT:
                     return R.style.GlifV3Theme_Light;
-                case WizardManagerHelper.THEME_GLIF_V3:
+                case ThemeHelper.THEME_GLIF_V3:
                     return R.style.GlifV3Theme;
-                case WizardManagerHelper.THEME_GLIF_V2_LIGHT:
+                case ThemeHelper.THEME_GLIF_V2_LIGHT:
                     return R.style.GlifV2Theme_Light;
-                case WizardManagerHelper.THEME_GLIF_V2:
+                case ThemeHelper.THEME_GLIF_V2:
                     return R.style.GlifV2Theme;
-                case WizardManagerHelper.THEME_GLIF_LIGHT:
+                case ThemeHelper.THEME_GLIF_LIGHT:
                     return R.style.GlifTheme_Light;
-                case WizardManagerHelper.THEME_GLIF:
+                case ThemeHelper.THEME_GLIF:
                     return R.style.GlifTheme;
             }
         }

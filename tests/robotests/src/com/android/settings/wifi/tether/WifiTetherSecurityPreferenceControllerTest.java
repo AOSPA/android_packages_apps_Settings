@@ -14,16 +14,15 @@ import android.net.wifi.WifiManager;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class WifiTetherSecurityPreferenceControllerTest {
 
     private static final String WPA2_PSK = String.valueOf(WifiConfiguration.KeyMgmt.WPA2_PSK);
@@ -66,11 +65,11 @@ public class WifiTetherSecurityPreferenceControllerTest {
     public void onPreferenceChange_securityValueUpdated() {
         mController.onPreferenceChange(mPreference, WPA2_PSK);
         assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.WPA2_PSK);
-        assertThat(mPreference.getSummary()).isEqualTo("WPA2-Personal");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("WPA2-Personal");
 
         mController.onPreferenceChange(mPreference, NONE);
         assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.NONE);
-        assertThat(mPreference.getSummary()).isEqualTo("None");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("None");
     }
 
     @Test
@@ -79,7 +78,7 @@ public class WifiTetherSecurityPreferenceControllerTest {
         when(mWifiManager.getWifiApConfiguration()).thenReturn(null);
         mController.updateDisplay();
         assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.WPA2_PSK);
-        assertThat(mPreference.getSummary()).isEqualTo("WPA2-Personal");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("WPA2-Personal");
 
         // test open tether network
         when(mWifiManager.getWifiApConfiguration()).thenReturn(mConfig);
@@ -87,13 +86,13 @@ public class WifiTetherSecurityPreferenceControllerTest {
         mConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
         mController.updateDisplay();
         assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.NONE);
-        assertThat(mPreference.getSummary()).isEqualTo("None");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("None");
 
         // test WPA2-Personal tether network
         mConfig.allowedKeyManagement.clear();
         mConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA2_PSK);
         mController.updateDisplay();
         assertThat(mController.getSecurityType()).isEqualTo(WifiConfiguration.KeyMgmt.WPA2_PSK);
-        assertThat(mPreference.getSummary()).isEqualTo("WPA2-Personal");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("WPA2-Personal");
     }
 }

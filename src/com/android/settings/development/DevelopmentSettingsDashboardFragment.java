@@ -221,7 +221,16 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             if (isChecked) {
                 EnableDevelopmentSettingWarningDialog.show(this /* host */);
             } else {
-                disableDeveloperOptions();
+                final BluetoothA2dpHwOffloadPreferenceController controller =
+                        getDevelopmentOptionsController(
+                                BluetoothA2dpHwOffloadPreferenceController.class);
+                // If A2DP hardware offload isn't default value, we must reboot after disable
+                // developer options. Show a dialog for the user to confirm.
+                if (controller == null || controller.isDefaultValue()) {
+                    disableDeveloperOptions();
+                } else {
+                    DisableDevSettingsDialogFragment.show(this /* host */);
+                }
             }
         }
     }
@@ -380,6 +389,15 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         mSwitchBar.setChecked(false);
     }
 
+    void onDisableDevelopmentOptionsConfirmed() {
+        disableDeveloperOptions();
+    }
+
+    void onDisableDevelopmentOptionsRejected() {
+        // Reset the toggle
+        mSwitchBar.setChecked(true);
+    }
+
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment,
             BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
@@ -405,8 +423,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new SelectDebugAppPreferenceController(context, fragment));
         controllers.add(new WaitForDebuggerPreferenceController(context));
         controllers.add(new EnableGpuDebugLayersPreferenceController(context));
-        controllers.add(new AngleEnabledAppPreferenceController(context, fragment));
-        controllers.add(new UpdatedGfxDriverDevOptInPreferenceController(context, fragment));
+        controllers.add(new GameUpdatePackageDevOptInPreferenceController(context, fragment));
         controllers.add(new VerifyAppsOverUsbPreferenceController(context));
         controllers.add(new LogdSizePreferenceController(context));
         controllers.add(new LogPersistPreferenceController(context, fragment, lifecycle));
@@ -455,6 +472,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ProfileGpuRenderingPreferenceController(context));
         controllers.add(new KeepActivitiesPreferenceController(context));
         controllers.add(new BackgroundProcessLimitPreferenceController(context));
+        controllers.add(new AllowBackgroundActivityStartsPreferenceController(context));
         controllers.add(new ShowFirstCrashDialogPreferenceController(context));
         controllers.add(new AppsNotRespondingPreferenceController(context));
         controllers.add(new NotificationChannelWarningsPreferenceController(context));

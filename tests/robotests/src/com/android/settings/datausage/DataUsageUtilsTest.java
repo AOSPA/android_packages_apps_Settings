@@ -18,9 +18,9 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -29,20 +29,17 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
 import android.util.DataUnit;
-import android.util.FeatureFlagUtils;
-
-import com.android.settings.core.FeatureFlags;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public final class DataUsageUtilsTest {
 
     @Mock
@@ -102,7 +99,6 @@ public final class DataUsageUtilsTest {
 
     @Test
     public void hasEthernet_shouldQueryEthernetSummaryForUser() throws Exception {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.DATA_USAGE_V2, true);
         when(mManager.isNetworkSupported(anyInt())).thenReturn(true);
         final String subscriber = "TestSub";
         when(mTelephonyManager.getSubscriberId()).thenReturn(subscriber);

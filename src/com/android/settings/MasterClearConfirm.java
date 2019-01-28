@@ -43,8 +43,11 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.setupwizardlib.TemplateLayout;
-import com.android.setupwizardlib.template.ButtonFooterMixin;
+
+import com.google.android.setupcompat.TemplateLayout;
+import com.google.android.setupcompat.item.FooterButton;
+import com.google.android.setupcompat.item.FooterButton.ButtonType;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"
@@ -152,11 +155,14 @@ public class MasterClearConfirm extends InstrumentedFragment {
         final TemplateLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
 
         final ButtonFooterMixin buttonFooterMixin = layout.getMixin(ButtonFooterMixin.class);
-        buttonFooterMixin.removeAllViews();
-        buttonFooterMixin.addSpace();
-        buttonFooterMixin.addSpace();
-        buttonFooterMixin.addButton(R.string.master_clear_button_text,
-                R.style.SuwGlifButton_Primary).setOnClickListener(mFinalClickListener);
+        buttonFooterMixin.setPrimaryButton(
+                new FooterButton.Builder(getActivity())
+                        .setText(R.string.master_clear_button_text)
+                        .setListener(mFinalClickListener)
+                        .setButtonType(ButtonType.OTHER)
+                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .build()
+        );
     }
 
     private void setUpActionBarAndTitle() {

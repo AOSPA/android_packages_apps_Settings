@@ -30,13 +30,13 @@ import java.util.List;
 import java.util.Map;
 
 @Implements(AccountManager.class)
-public class ShadowAccountManager{
+public class ShadowAccountManager {
 
     private static final Map<String, AuthenticatorDescription> sAuthenticators = new HashMap<>();
     private static final Map<Integer, List<Account>> sAccountsByUserId = new HashMap<>();
 
     @Implementation
-    public AuthenticatorDescription[] getAuthenticatorTypesAsUser(int userId) {
+    protected AuthenticatorDescription[] getAuthenticatorTypesAsUser(int userId) {
         return sAuthenticators.values().toArray(new AuthenticatorDescription[sAuthenticators.size()]);
     }
 
@@ -50,7 +50,7 @@ public class ShadowAccountManager{
     }
 
     @Implementation @NonNull
-    public Account[] getAccountsAsUser(int userId) {
+    protected Account[] getAccountsAsUser(int userId) {
         if (sAccountsByUserId.containsKey(userId)) {
             return sAccountsByUserId.get(userId).toArray(new Account[0]);
         } else {

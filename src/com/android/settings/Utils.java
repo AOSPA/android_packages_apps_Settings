@@ -128,8 +128,6 @@ public final class Utils extends com.android.settingslib.Utils {
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
 
     public static final String OS_PKG = "os";
-    public static final String READ_ONLY = "read_only";
-    public static final String PERSISTENT = "persistent";
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -1021,8 +1019,7 @@ public final class Utils extends com.android.settingslib.Utils {
     public static boolean carrierTableFieldValidate(String field){
         if(field == null)
             return false;
-        if(READ_ONLY.equalsIgnoreCase(field) || PERSISTENT.equalsIgnoreCase(field)
-                || Telephony.Carriers.AUTH_TYPE.equalsIgnoreCase(field)
+        if(Telephony.Carriers.AUTH_TYPE.equalsIgnoreCase(field)
                 || Telephony.Carriers.SUBSCRIPTION_ID.equalsIgnoreCase(field))
             return true;
         field = field.toUpperCase();

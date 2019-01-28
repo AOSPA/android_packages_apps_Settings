@@ -43,7 +43,6 @@ import android.text.TextUtils;
 
 import androidx.lifecycle.LifecycleOwner;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -53,18 +52,15 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {
-    ShadowSecureSettings.class,
-    LocationEnablerTest.ShadowLocationManager.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowSecureSettings.class)
 public class LocationEnablerTest {
 
     @Mock
@@ -88,30 +84,31 @@ public class LocationEnablerTest {
     }
 
     @Test
-    public void onResume_shouldSetActiveAndRegisterListener() {
-        mEnabler.onResume();
+    public void onStart_shouldSetActiveAndRegisterListener() {
+        mEnabler.onStart();
 
         verify(mContext).registerReceiver(eq(mEnabler.mReceiver),
                 eq(LocationEnabler.INTENT_FILTER_LOCATION_MODE_CHANGED));
     }
 
     @Test
-    public void onResume_shouldRefreshLocationMode() {
-        mEnabler.onResume();
+    public void onStart_shouldRefreshLocationMode() {
+        mEnabler.onStart();
 
         verify(mEnabler).refreshLocationMode();
     }
 
     @Test
-    public void onPause_shouldUnregisterListener() {
-        mEnabler.onPause();
+    public void onStop_shouldUnregisterListener() {
+        mEnabler.onStart();
+        mEnabler.onStop();
 
         verify(mContext).unregisterReceiver(mEnabler.mReceiver);
     }
 
     @Test
     public void onReceive_shouldRefreshLocationMode() {
-        mEnabler.onResume();
+        mEnabler.onStart();
         reset(mListener);
         mEnabler.mReceiver.onReceive(mContext, new Intent());
 
@@ -272,14 +269,5 @@ public class LocationEnablerTest {
 
     private static ArgumentMatcher<Intent> actionMatches(String expected) {
         return intent -> TextUtils.equals(expected, intent.getAction());
-    }
-
-    @Implements(value = LocationManager.class)
-    public static class ShadowLocationManager {
-
-        @Implementation
-        public void setLocationEnabledForUser(boolean enabled, UserHandle userHandle) {
-            // Do nothing
-        }
     }
 }

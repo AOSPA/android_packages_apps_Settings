@@ -210,29 +210,6 @@
         <item>Temporarily avoiding poor connection</item>
     </string-array>
 
-    <!-- Match this with the constants in AccessPoint. --> <skip />
-    <!-- Wi-Fi security choices used when manually added a Wi-Fi network -->
-    <string-array name="wifi_security">
-        <!-- The Wi-Fi network does not have any security. -->
-        <item>@string/wifi_security_none</item>
-        <item translatable="false">@string/wifi_security_wep</item>
-        <item translatable="false">@string/wifi_security_psk_generic</item>
-        <item translatable="false">@string/wifi_security_eap</item>
-        <item translatable="false">@string/wifi_security_owe</item>
-        <item translatable="false">@string/wifi_security_sae</item>
-        <item translatable="false">@string/wifi_security_eap_suiteb</item>
-    </string-array>
-
-    <!-- Match this with the constants in AccessPoint. --> <skip />
-    <!-- Wi-Fi security types for New User Dialog. EAP is not configurable. -->
-    <string-array name="wifi_security_no_eap">
-        <!-- The Wi-Fi network does not have any security. -->
-        <item>@string/wifi_security_none</item>
-        <item translatable="false">@string/wifi_security_wep</item>
-        <item translatable="false">@string/wifi_security_psk_generic</item>
-        <item translatable="false">@string/wifi_security_sae</item>
-    </string-array>
-
     <!-- Security types for wireless tether -->
     <string-array name="wifi_tether_security">
         <!-- Do not translate. -->
@@ -242,7 +219,7 @@
     </string-array>
 
     <!-- Values for security type for wireless tether -->
-    <string-array name="wifi_tether_security_values">
+    <string-array name="wifi_tether_security_values" translatable="false">
         <!-- Do not translate. -->
         <item>4</item>
         <!-- Do not translate. -->
@@ -727,6 +704,15 @@
         <item>120000</item>
     </integer-array>
 
+    <!-- Summaries of accessibility timeout, pairs to Values -->
+    <string-array name="accessibility_timeout_summaries" translatable="false">
+        <item>@string/accessibility_timeout_default</item>
+        <item>@string/accessibility_timeout_10secs</item>
+        <item>@string/accessibility_timeout_30secs</item>
+        <item>@string/accessibility_timeout_1min</item>
+        <item>@string/accessibility_timeout_2mins</item>
+    </string-array>
+
     <!-- Titles for the list of long press timeout options. -->
     <string-array name="long_press_timeout_selector_titles">
         <!-- A title for the option for short long-press timeout [CHAR LIMIT=25] -->
@@ -1094,11 +1080,18 @@
         <item>never</item>
     </string-array>
 
-    <string-array name="zen_mode_contacts_entries" translatable="false">
+    <string-array name="zen_mode_contacts_messages_entries" translatable="false">
         <item>@string/zen_mode_from_anyone</item>
         <item>@string/zen_mode_from_contacts</item>
         <item>@string/zen_mode_from_starred</item>
-        <item>@string/zen_mode_from_none</item>
+        <item>@string/zen_mode_from_none_messages</item>
+    </string-array>
+
+    <string-array name="zen_mode_contacts_calls_entries" translatable="false">
+        <item>@string/zen_mode_from_anyone</item>
+        <item>@string/zen_mode_from_contacts</item>
+        <item>@string/zen_mode_from_starred</item>
+        <item>@string/zen_mode_from_none_calls</item>
     </string-array>
 
     <string-array name="zen_mode_contacts_values" translatable="false">
@@ -1115,8 +1108,8 @@
     </string-array>
 
     <string-array name="wifi_privacy_entries">
-        <item>Default (use randomized MAC)</item>
-        <item>Trusted</item>
+        <item>Use device MAC</item>
+        <item>Use randomized MAC (default)</item>
     </string-array>
 
     <string-array name="wifi_hidden_entries">

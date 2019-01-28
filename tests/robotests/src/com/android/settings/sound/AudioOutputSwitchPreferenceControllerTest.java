@@ -38,6 +38,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.util.FeatureFlagUtils;
 
 import androidx.preference.ListPreference;
@@ -45,11 +46,10 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.FeatureFlags;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
-import com.android.settings.testutils.shadow.ShadowMediaRouter;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
@@ -64,6 +64,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
@@ -74,10 +75,9 @@ import org.robolectric.shadows.ShadowPackageManager;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowAudioManager.class,
-        ShadowMediaRouter.class,
         ShadowBluetoothUtils.class,
         ShadowBluetoothDevice.class}
 )
@@ -107,8 +107,8 @@ public class AudioOutputSwitchPreferenceControllerTest {
     private Context mContext;
     private PreferenceScreen mScreen;
     private ListPreference mPreference;
+    private AudioManager mAudioManager;
     private ShadowAudioManager mShadowAudioManager;
-    private ShadowMediaRouter mShadowMediaRouter;
     private BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothDevice mBluetoothDevice;
@@ -126,11 +126,11 @@ public class AudioOutputSwitchPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
 
+        mAudioManager = mContext.getSystemService(AudioManager.class);
         mShadowAudioManager = ShadowAudioManager.getShadow();
-        mShadowMediaRouter = ShadowMediaRouter.getShadow();
 
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalManager;
-        mLocalBluetoothManager = ShadowBluetoothUtils.getLocalBtManager(mContext);
+        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
 
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
@@ -168,14 +168,13 @@ public class AudioOutputSwitchPreferenceControllerTest {
 
     @After
     public void tearDown() {
-        mShadowAudioManager.reset();
         ShadowBluetoothUtils.reset();
     }
 
     @Test
     public void constructor_notSupportBluetooth_shouldReturnBeforeUsingLocalBluetoothManager() {
         ShadowBluetoothUtils.reset();
-        mLocalBluetoothManager = ShadowBluetoothUtils.getLocalBtManager(mContext);
+        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
 
         AudioSwitchPreferenceController controller = new AudioSwitchPreferenceControllerTestable(
                 mContext, TEST_KEY);

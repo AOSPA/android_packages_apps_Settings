@@ -17,13 +17,11 @@
 package com.android.settings.homepage.contextualcards.slices;
 
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.storage.StorageManager;
 import android.text.format.Formatter;
-import android.util.Log;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -36,8 +34,8 @@ import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.deviceinfo.StorageSettings;
+import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
-import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
@@ -47,23 +45,7 @@ import java.text.NumberFormat;
 public class LowStorageSlice implements CustomSliceable {
 
     /**
-     * The path denotes the unique name of Low storage Slice.
-     */
-    public static final String PATH_LOW_STORAGE = "low_storage";
-
-    /**
-     * Backing Uri for Low storage Slice.
-     */
-    public static final Uri LOW_STORAGE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_LOW_STORAGE)
-            .build();
-
-    private static final String TAG = "LowStorageSlice";
-
-    /**
-     * If user used >= 85% storage.
+     * If used storage >= 85%, it would be low storage.
      */
     private static final double LOW_STORAGE_THRESHOLD = 0.85;
 
@@ -73,54 +55,45 @@ public class LowStorageSlice implements CustomSliceable {
         mContext = context;
     }
 
-    /**
-     * Return a Low storage Slice bound to {@link #LOW_STORAGE_URI}
-     */
     @Override
     public Slice getSlice() {
-        // Get current storage percentage from StorageManager.
+        // Get used storage percentage from StorageManager.
         final PrivateStorageInfo info = PrivateStorageInfo.getPrivateStorageInfo(
                 new StorageManagerVolumeProvider(mContext.getSystemService(StorageManager.class)));
-        final double currentStoragePercentage =
-                (double) (info.totalBytes - info.freeBytes) / info.totalBytes;
+        final double usedPercentage = (double) (info.totalBytes - info.freeBytes) / info.totalBytes;
 
-        // Used storage < 85%. NOT show Low storage Slice.
-        if (currentStoragePercentage < LOW_STORAGE_THRESHOLD) {
-            /**
-             * TODO(b/114808204): Contextual Home Page - "Low Storage"
-             * The behavior is under decision making, will update new behavior or remove TODO later.
-             */
-            Log.i(TAG, "Not show low storage slice, not match condition.");
-            return null;
+        // Generate Low storage Slice.
+        final String percentageString = NumberFormat.getPercentInstance().format(usedPercentage);
+        final String freeSizeString = Formatter.formatFileSize(mContext, info.freeBytes);
+        final ListBuilder listBuilder = new ListBuilder(mContext,
+                CustomSliceRegistry.LOW_STORAGE_SLICE_URI, ListBuilder.INFINITY).setAccentColor(
+                Utils.getColorAccentDefaultColor(mContext));
+        final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.ic_storage);
+
+        if (usedPercentage < LOW_STORAGE_THRESHOLD) {
+            // For clients that ignore error checking, a generic storage slice will be given.
+            final CharSequence titleStorage = mContext.getText(R.string.storage_settings);
+            final String summaryStorage = mContext.getString(R.string.storage_summary,
+                    percentageString, freeSizeString);
+
+            return listBuilder
+                    .addRow(buildRowBuilder(titleStorage, summaryStorage, icon))
+                    .setIsError(true)
+                    .build();
         }
 
-        // Show Low storage Slice.
-        final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.ic_storage);
-        final CharSequence title = mContext.getText(R.string.storage_menu_free);
-        final SliceAction primarySliceAction = new SliceAction(
-                PendingIntent.getActivity(mContext, 0, getIntent(), 0), icon, title);
-        final String lowStorageSummary = mContext.getString(R.string.low_storage_summary,
-                NumberFormat.getPercentInstance().format(currentStoragePercentage),
-                Formatter.formatFileSize(mContext, info.freeBytes));
+        final CharSequence titleLowStorage = mContext.getText(R.string.storage_menu_free);
+        final String summaryLowStorage = mContext.getString(R.string.low_storage_summary,
+                percentageString, freeSizeString);
 
-        /**
-         * TODO(b/114808204): Contextual Home Page - "Low Storage"
-         * Slices doesn't support "Icon on the left" in header. Now we intend to start with Icon
-         * right aligned. Will update the icon to left until Slices support it.
-         */
-        return new ListBuilder(mContext, LOW_STORAGE_URI, ListBuilder.INFINITY)
-                .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
-                .addRow(new RowBuilder()
-                        .setTitle(title)
-                        .setSubtitle(lowStorageSummary)
-                        .addEndItem(icon, ListBuilder.ICON_IMAGE)
-                        .setPrimaryAction(primarySliceAction))
+        return listBuilder
+                .addRow(buildRowBuilder(titleLowStorage, summaryLowStorage, icon))
                 .build();
     }
 
     @Override
     public Uri getUri() {
-        return LOW_STORAGE_URI;
+        return CustomSliceRegistry.LOW_STORAGE_SLICE_URI;
     }
 
     @Override
@@ -132,13 +105,24 @@ public class LowStorageSlice implements CustomSliceable {
     public Intent getIntent() {
         final String screenTitle = mContext.getText(R.string.storage_label)
                 .toString();
-        final Uri contentUri = new Uri.Builder().appendPath(PATH_LOW_STORAGE).build();
 
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                StorageSettings.class.getName(), PATH_LOW_STORAGE,
+                StorageSettings.class.getName(), "" /* key */,
                 screenTitle,
                 MetricsProto.MetricsEvent.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
-                .setData(contentUri);
+                .setData(CustomSliceRegistry.LOW_STORAGE_SLICE_URI);
+    }
+
+    private RowBuilder buildRowBuilder(CharSequence title, String summary, IconCompat icon) {
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(
+                PendingIntent.getActivity(mContext, 0, getIntent(), 0), icon,
+                ListBuilder.ICON_IMAGE, title);
+
+        return new RowBuilder()
+                .setTitleItem(icon, ListBuilder.ICON_IMAGE)
+                .setTitle(title)
+                .setSubtitle(summary)
+                .setPrimaryAction(primarySliceAction);
     }
 }

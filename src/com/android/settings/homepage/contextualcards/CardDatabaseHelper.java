@@ -197,28 +197,30 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
     }
 
     Cursor getContextualCards() {
-        final SQLiteDatabase db = this.getReadableDatabase();
+        final SQLiteDatabase db = getReadableDatabase();
         final String selection = CardColumns.CARD_DISMISSED + "=0";
-        Cursor cursor = db.query(CARD_TABLE, null /* columns */, selection,
+        return db.query(CARD_TABLE, null /* columns */, selection,
                 null /* selectionArgs */, null /* groupBy */, null /* having */,
                 CardColumns.SCORE + " DESC" /* orderBy */);
-        return cursor;
     }
 
     /**
      * Mark a specific ContextualCard with dismissal flag in the database to indicate that the
      * card has been dismissed.
      *
-     * @param cardName the card name of the ContextualCard which is dismissed by user.
-     * @return updated row number
+     * @param context Context
+     * @param cardName The card name of the ContextualCard which is dismissed by user.
+     * @return The number of rows updated
      */
-    public int markContextualCardAsDismissed(String cardName) {
-        final SQLiteDatabase database = this.getWritableDatabase();
+    public int markContextualCardAsDismissed(Context context, String cardName) {
+        final SQLiteDatabase database = getWritableDatabase();
         final ContentValues values = new ContentValues();
         values.put(CardColumns.CARD_DISMISSED, 1);
         final String selection = CardColumns.NAME + "=?";
         final String[] selectionArgs = {cardName};
         final int rowsUpdated = database.update(CARD_TABLE, values, selection, selectionArgs);
+        database.close();
+        context.getContentResolver().notifyChange(CardContentProvider.URI, null);
         return rowsUpdated;
     }
 }

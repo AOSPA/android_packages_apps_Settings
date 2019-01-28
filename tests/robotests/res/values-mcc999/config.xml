@@ -58,6 +58,9 @@
     <bool name="config_show_system_update_settings">false</bool>
     <bool name="config_wifi_support_connected_mac_randomization">false</bool>
     <bool name="config_show_device_model">false</bool>
+    <bool name="config_show_top_level_battery">false</bool>
+    <bool name="config_show_top_level_connected_devices">false</bool>
+    <bool name="config_show_top_level_display">false</bool>
     <bool name="config_show_wifi_ip_address">false</bool>
     <bool name="config_show_wifi_mac_address">false</bool>
     <bool name="config_disable_uninstall_update">true</bool>
@@ -73,8 +76,16 @@
         <item>fake_package/fake_service</item>
     </string-array>
 
+    <!-- Settings intelligence interaction log intent action -->
+    <string name="config_settingsintelligence_log_action" translatable="false">
+        aaa.bbb.ccc
+    </string>
+
     <!-- List of packages that should be whitelisted for slice uri access. Do not translate -->
     <string-array name="slice_whitelist_package_names" translatable="false">
         <item>com.android.settings.slice_whitelist_package</item>
     </string-array>
+
+    <!-- Email address for the homepage contextual cards feedback -->
+    <string name="config_contextual_card_feedback_email" translatable="false">test@test.test</string>
 </resources>

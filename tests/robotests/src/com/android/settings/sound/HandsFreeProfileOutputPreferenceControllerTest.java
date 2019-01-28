@@ -40,10 +40,9 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.bluetooth.Utils;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
-import com.android.settings.testutils.shadow.ShadowMediaRouter;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
@@ -56,6 +55,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowBluetoothDevice;
@@ -63,10 +63,9 @@ import org.robolectric.shadows.ShadowBluetoothDevice;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowAudioManager.class,
-        ShadowMediaRouter.class,
         ShadowBluetoothUtils.class,
         ShadowBluetoothDevice.class}
 )
@@ -99,8 +98,8 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
     private Context mContext;
     private PreferenceScreen mScreen;
     private ListPreference mPreference;
+    private AudioManager mAudioManager;
     private ShadowAudioManager mShadowAudioManager;
-    private ShadowMediaRouter mShadowMediaRouter;
     private BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothDevice mBluetoothDevice;
@@ -117,11 +116,11 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
 
+        mAudioManager = mContext.getSystemService(AudioManager.class);
         mShadowAudioManager = ShadowAudioManager.getShadow();
-        mShadowMediaRouter = ShadowMediaRouter.getShadow();
 
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalManager;
-        mLocalBluetoothManager = ShadowBluetoothUtils.getLocalBtManager(mContext);
+        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
 
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
@@ -163,7 +162,6 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
 
     @After
     public void tearDown() {
-        mShadowAudioManager.reset();
         ShadowBluetoothUtils.reset();
     }
 
@@ -173,7 +171,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      */
     @Test
     public void setActiveBluetoothDevice_btDeviceWithHisyncId_shouldSetBtDeviceActive() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         when(mHearingAidProfile.getHiSyncId(mLeftBluetoothHapDevice)).thenReturn(HISYNCID1);
 
         mController.setActiveBluetoothDevice(mLeftBluetoothHapDevice);
@@ -188,7 +186,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      */
     @Test
     public void setActiveBluetoothDevice_btDeviceWithoutHisyncId_shouldSetBtDeviceActive() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
 
         mController.setActiveBluetoothDevice(mBluetoothDevice);
 
@@ -203,7 +201,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      */
     @Test
     public void setActiveBluetoothDevice_setNull_shouldSetNullToBothProfiles() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
 
         mController.setActiveBluetoothDevice(null);
 
@@ -217,7 +215,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      */
     @Test
     public void setActiveBluetoothDevice_inNormalMode_shouldNotSetActiveDeviceToHeadsetProfile() {
-        mShadowAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
 
         mController.setActiveBluetoothDevice(mBluetoothDevice);
 
@@ -245,7 +243,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_oneHeadsetsAvailableAndActivated_shouldSetDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_SCO);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);
@@ -266,7 +264,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_moreThanOneHfpBtDevicesAreAvailable_shouldSetActivatedDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_SCO);
         List<BluetoothDevice> connectedDevices = new ArrayList<>(2);
         connectedDevices.add(mBluetoothDevice);
@@ -288,7 +286,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_withAvailableDevicesWiredHeadsetActivated_shouldSetDefaultSummary() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);
         when(mHeadsetProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
@@ -308,7 +306,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_noAvailableHeadsetBtDevices_shouldSetDefaultSummary() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         List<BluetoothDevice> emptyDeviceList = new ArrayList<>();
         when(mHeadsetProfile.getConnectedDevices()).thenReturn(emptyDeviceList);
 
@@ -326,7 +324,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_oneHapBtDeviceAreAvailable_shouldSetActivatedDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mLeftBluetoothHapDevice);
@@ -350,7 +348,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_moreThanOneHapBtDevicesAreAvailable_shouldSetActivatedDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mLeftBluetoothHapDevice);
@@ -378,7 +376,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_hapBtDeviceWithSameId_shouldSetActivatedDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);
@@ -411,7 +409,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_hapBtDeviceWithSameIdButDifferentOrder_shouldSetActivatedDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);
@@ -443,7 +441,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
      */
     @Test
     public void updateState_hapBtDeviceWithDifferentId_shouldSetActivatedDeviceName() {
-        mShadowAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
         mProfileConnectedDevices.clear();
         mProfileConnectedDevices.add(mBluetoothDevice);

@@ -37,7 +37,6 @@ import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.testutils.DrawableTestHelper;
@@ -45,9 +44,10 @@ import com.android.settingslib.testutils.DrawableTestHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RoundedHomepageIconTest {
 
     private Context mContext;
@@ -101,7 +101,7 @@ public class RoundedHomepageIconTest {
     public void onBindTile_externalTileWithBackgroundColorHint_shouldUpdateIcon() {
         final Tile tile = spy(new Tile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE));
         mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON_BACKGROUND_HINT,
-                R.color.memory_critical);
+                R.color.material_blue_500);
         doReturn(Icon.createWithResource(mContext, R.drawable.ic_settings))
                 .when(tile).getIcon(mContext);
 
@@ -110,7 +110,6 @@ public class RoundedHomepageIconTest {
         icon.setBackgroundColor(mContext, tile);
 
         assertThat(icon.mBackgroundColor)
-                .isEqualTo(mContext.getColor(R.color.memory_critical));
+                .isEqualTo(mContext.getColor(R.color.material_blue_500));
     }
-
 }

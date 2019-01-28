@@ -18,16 +18,27 @@ package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.widget.TextView;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceScreen;
+
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 
 import org.junit.Before;
@@ -35,18 +46,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowWifiManager.class})
 public class WifiTetherSettingsTest {
     private static final String[] WIFI_REGEXS = {"wifi_regexs"};
 
     private Context mContext;
+    private WifiTetherSettings mWifiTetherSettings;
 
     @Mock
     private ConnectivityManager mConnectivityManager;
@@ -62,6 +76,8 @@ public class WifiTetherSettingsTest {
                 .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
         doReturn(WIFI_REGEXS).when(mConnectivityManager).getTetherableWifiRegexs();
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+
+        mWifiTetherSettings = new WifiTetherSettings();
     }
 
     @Test
@@ -96,6 +112,40 @@ public class WifiTetherSettingsTest {
     public void createPreferenceControllers_notEmpty() {
         assertThat(WifiTetherSettings.SEARCH_INDEX_DATA_PROVIDER.getPreferenceControllers(mContext))
                 .isNotEmpty();
+    }
+
+    @Test
+    public void startFragment_notAdminUser_shouldRemoveAllPreferences() {
+        final WifiTetherSettings settings = spy(new WifiTetherSettings());
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(settings.getActivity()).thenReturn(activity);
+        when(settings.getContext()).thenReturn(mContext);
+        final Resources.Theme theme = mContext.getTheme();
+        when(activity.getTheme()).thenReturn(theme);
+        when(activity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        doNothing().when(settings)
+            .onCreatePreferences(any(Bundle.class), nullable(String.class));
+        final FakeFeatureFactory fakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        ReflectionHelpers.setField(settings, "mDashboardFeatureProvider",
+            fakeFeatureFactory.dashboardFeatureProvider);
+        final TextView emptyTextView = mock(TextView.class);
+        ReflectionHelpers.setField(settings, "mEmptyTextView", emptyTextView);
+        final PreferenceScreen screen = mock(PreferenceScreen.class);
+        doReturn(screen).when(settings).getPreferenceScreen();
+        settings.onCreate(Bundle.EMPTY);
+
+        settings.onStart();
+
+        verify(screen).removeAll();
+    }
+
+    @Test
+    public void createPreferenceControllers_hasAutoOffPreference() {
+        assertThat(mWifiTetherSettings.createPreferenceControllers(mContext)
+                .stream()
+                .filter(controller -> controller instanceof WifiTetherAutoOffPreferenceController)
+                .count())
+                .isEqualTo(1);
     }
 
     private void setupIsTetherAvailable(boolean returnValue) {

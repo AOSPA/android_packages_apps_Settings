@@ -29,9 +29,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.accounts.EmergencyInfoPreferenceController;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.BluetoothAddressPreferenceController;
 import com.android.settings.deviceinfo.BrandedAccountPreferenceController;
 import com.android.settings.deviceinfo.BuildNumberPreferenceController;
@@ -53,6 +51,7 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,6 +63,8 @@ public class MyDeviceInfoFragment extends DashboardFragment
 
     private static final String LOG_TAG = "MyDeviceInfoFragment";
     private static final String KEY_MY_DEVICE_INFO_HEADER = "my_device_info_header";
+
+    private BuildNumberPreferenceController mBuildNumberPreferenceController;
 
     @Override
     public int getMetricsCategory() {
@@ -80,6 +81,8 @@ public class MyDeviceInfoFragment extends DashboardFragment
         super.onAttach(context);
         use(FirmwareVersionPreferenceController.class).setHost(this /*parent*/);
         use(DeviceModelPreferenceController.class).setHost(this /* parent */);
+        mBuildNumberPreferenceController = use(BuildNumberPreferenceController.class);
+        mBuildNumberPreferenceController.setHost(this /* parent */);
     }
 
     @Override
@@ -127,17 +130,13 @@ public class MyDeviceInfoFragment extends DashboardFragment
         controllers.add(new ManualPreferenceController(context));
         controllers.add(new FeedbackPreferenceController(fragment, context));
         controllers.add(new FccEquipmentIdPreferenceController(context));
-        controllers.add(
-                new BuildNumberPreferenceController(context, activity, fragment, lifecycle));
         controllers.add(new UptimePreferenceController(context, lifecycle));
         return controllers;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        final BuildNumberPreferenceController buildNumberPreferenceController =
-                use(BuildNumberPreferenceController.class);
-        if (buildNumberPreferenceController.onActivityResult(requestCode, resultCode, data)) {
+        if (mBuildNumberPreferenceController.onActivityResult(requestCode, resultCode, data)) {
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);

@@ -69,6 +69,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.CONFIGURE_WIFI_DISPLAY" />
     <uses-permission android:name="android.permission.CONFIGURE_DISPLAY_COLOR_MODE" />
+    <uses-permission android:name="android.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS" />
     <uses-permission android:name="android.permission.SET_TIME" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.REBOOT" />
@@ -114,11 +115,12 @@
         <uses-library android:name="org.apache.http.legacy" />
         <!-- Settings -->
 
+        <!-- TODO(b/118444000): Remove this. -->
         <activity android:name="SettingsActivity"
-                android:label="@string/settings_label_launcher"
-                android:launchMode="singleTask">
+                  android:label="@string/settings_label_launcher"
+                  android:launchMode="singleTask">
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
+                       android:value="true" />
         </activity>
 
         <activity android:name=".homepage.SettingsHomepageActivity"
@@ -715,8 +717,7 @@
             android:name="Settings$ZenModeSettingsActivity"
             android:label="@string/zen_mode_settings_title"
             android:icon="@drawable/ic_notifications"
-            android:exported="true"
-            android:parentActivityName="Settings">
+            android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -903,8 +904,7 @@
             android:name="Settings$NightDisplaySettingsActivity"
             android:label="@string/night_display_title"
             android:enabled="@*android:bool/config_nightDisplayAvailable"
-            android:icon="@drawable/ic_settings_night_display"
-            android:parentActivityName="Settings">
+            android:icon="@drawable/ic_settings_night_display">
             <intent-filter android:priority="32">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -1654,7 +1654,7 @@
             android:icon="@drawable/ic_settings_security">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.LOCK_SCREEN" />
+                <category android:name="com.android.settings.suggested.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.title"
                        android:resource="@string/suggested_lock_settings_title" />
@@ -2573,10 +2573,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="1">
-                <action android:name="com.android.settings.sim.SIM_SUB_INFO_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
@@ -2615,6 +2611,18 @@
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="com.android.settings.WIFI_DIALOG" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".wifi.NetworkRequestDialogActivity"
+            android:theme="@style/Transparent"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:permission="android.permission.NETWORK_SETTINGS">
+            <intent-filter>
+                <action android:name="com.android.settings.wifi.NETWORK_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -2841,10 +2849,8 @@
             android:name=".Settings$AppAndNotificationDashboardActivity"
             android:label="@string/app_and_notification_dashboard_title"
             android:icon="@drawable/ic_homepage_apps"
-            android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
+            android:parentActivityName="Settings"
+            android:exported="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.AppAndNotificationDashboardFragment"/>
         </activity>
@@ -2993,6 +2999,22 @@
                        android:value="true" />
         </activity>
 
+        <activity android:name=".panel.SettingsPanelActivity"
+            android:label="@string/settings_panel_title"
+            android:theme="@style/Theme.BottomDialog"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:exported="true">
+                 <intent-filter>
+                     <action android:name="android.settings.panel.action.INTERNET_CONNECTIVITY" />
+                     <category android:name="android.intent.category.DEFAULT" />
+                 </intent-filter>
+                <intent-filter>
+                    <action android:name="android.settings.panel.action.VOLUME" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
+        </activity>
+
         <provider android:name=".slices.SettingsSliceProvider"
                   android:authorities="com.android.settings.slices;android.settings.slices"
                   android:exported="true"
@@ -3052,6 +3074,27 @@
                 <action android:name="android.content.action.SETTINGS_HOMEPAGE_DATA"/>
             </intent-filter>
         </provider>
+
+        <activity
+            android:name=".wifi.dpp.WifiDppConfiguratorActivity">
+            <intent-filter>
+                <action android:name="android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_SCANNER"/>
+                <action android:name="android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_GENERATOR"/>
+                <action android:name="android.settings.PROCESS_WIFI_DPP_QR_CODE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".wifi.dpp.WifiDppEnrolleeActivity">
+            <intent-filter>
+                <action android:name="android.settings.WIFI_DPP_ENROLLEE_QR_CODE_SCANNER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".homepage.contextualcards.ContextualCardFeedbackDialog"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>

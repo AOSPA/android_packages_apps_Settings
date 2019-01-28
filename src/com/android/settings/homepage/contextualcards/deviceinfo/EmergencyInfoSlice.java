@@ -16,8 +16,9 @@
 
 package com.android.settings.homepage.contextualcards.deviceinfo;
 
+import static com.android.settings.accounts.EmergencyInfoPreferenceController.ACTION_EDIT_EMERGENCY_INFO;
+
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -28,50 +29,58 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 
 import com.android.settings.R;
-import com.android.settings.slices.SettingsSliceProvider;
+import com.android.settings.slices.CustomSliceRegistry;
+import com.android.settings.slices.CustomSliceable;
 
 // This is a slice helper class for EmergencyInfo
-public class EmergencyInfoSlice {
-    /**
-     * The path denotes the unique name of emergency info slice.
-     */
-    public static final String PATH_EMERGENCY_INFO_CARD = "emergency_info_card";
+public class EmergencyInfoSlice implements CustomSliceable {
 
-    /**
-     * Backing Uri for the Emergency Info Slice.
-     */
-    public static final Uri EMERGENCY_INFO_CARD_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(PATH_EMERGENCY_INFO_CARD)
-            .build();
+    private final Context mContext;
 
-    private static final String ACTION_EDIT_EMERGENCY_INFO = "android.settings.EDIT_EMERGENCY_INFO";
+    public EmergencyInfoSlice(Context context) {
+        mContext = context;
+    }
 
-    public static Slice getSlice(Context context) {
-        final ListBuilder listBuilder = new ListBuilder(context, EMERGENCY_INFO_CARD_URI,
+    @Override
+    public Slice getSlice() {
+        final ListBuilder listBuilder = new ListBuilder(mContext,
+                CustomSliceRegistry.EMERGENCY_INFO_SLICE_URI,
                 ListBuilder.INFINITY);
         listBuilder.addRow(
                 new ListBuilder.RowBuilder()
-                        .setTitle(context.getText(R.string.emergency_info_title))
+                        .setTitle(mContext.getText(R.string.emergency_info_title))
                         .setSubtitle(
-                                context.getText(R.string.emergency_info_contextual_card_summary))
-                        .setPrimaryAction(generatePrimaryAction(context)));
+                                mContext.getText(R.string.emergency_info_contextual_card_summary))
+                        .setPrimaryAction(createPrimaryAction()));
         return listBuilder.build();
     }
 
-    private static SliceAction generatePrimaryAction(Context context) {
-        PendingIntent pendingIntent =
+    @Override
+    public Uri getUri() {
+        return CustomSliceRegistry.EMERGENCY_INFO_SLICE_URI;
+    }
+
+    @Override
+    public Intent getIntent() {
+        return new Intent(ACTION_EDIT_EMERGENCY_INFO);
+    }
+
+    @Override
+    public void onNotifyChange(Intent intent) {
+    }
+
+    private SliceAction createPrimaryAction() {
+        final PendingIntent pendingIntent =
                 PendingIntent.getActivity(
-                        context,
+                        mContext,
                         0 /* requestCode */,
-                        new Intent(ACTION_EDIT_EMERGENCY_INFO),
+                        getIntent(),
                         PendingIntent.FLAG_UPDATE_CURRENT);
 
-        return SliceAction.create(
+        return SliceAction.createDeeplink(
                 pendingIntent,
-                IconCompat.createWithResource(context, R.drawable.empty_icon),
-                ListBuilder.SMALL_IMAGE,
-                context.getText(R.string.emergency_info_title));
+                IconCompat.createWithResource(mContext, R.drawable.empty_icon),
+                ListBuilder.ICON_IMAGE,
+                mContext.getText(R.string.emergency_info_title));
     }
 }

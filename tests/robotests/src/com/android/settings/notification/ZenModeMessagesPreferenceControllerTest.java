@@ -17,13 +17,16 @@
 package com.android.settings.notification;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
 import android.content.Context;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import androidx.preference.Preference;
+
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -31,11 +34,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public final class ZenModeMessagesPreferenceControllerTest {
 
     private ZenModeMessagesPreferenceController mController;
@@ -67,11 +71,10 @@ public final class ZenModeMessagesPreferenceControllerTest {
         assertTrue(mController.isAvailable());
     }
 
-// TODO: (b/111475013 - beverlyt) set messages summary
-//    @Test
-//    public void testHasSummary() {
-//        Preference pref = mock(Preference.class);
-//        mController.updateState(pref);
-//        verify(pref).setSummary(any());
-//    }
+    @Test
+    public void testHasSummary() {
+        Preference pref = mock(Preference.class);
+        mController.updateState(pref);
+        verify(pref).setSummary(any());
+    }
 }

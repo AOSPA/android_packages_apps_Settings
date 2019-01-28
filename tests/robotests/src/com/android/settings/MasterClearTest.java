@@ -43,14 +43,12 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
@@ -60,11 +58,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
 public class MasterClearTest {
 
@@ -386,7 +385,7 @@ public class MasterClearTest {
     public void testOnGlobalLayout_shouldNotRemoveListener() {
         final ViewTreeObserver viewTreeObserver = mock(ViewTreeObserver.class);
         mMasterClear.mScrollView = mScrollView;
-        mMasterClear.mInitiateButton = mock(Button.class);
+        doNothing().when(mMasterClear).onGlobalLayout();
         doReturn(true).when(mMasterClear).hasReachedBottom(any());
         when(mScrollView.getViewTreeObserver()).thenReturn(viewTreeObserver);
 

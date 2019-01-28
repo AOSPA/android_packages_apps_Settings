@@ -13,13 +13,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<com.android.setupwizardlib.GlifLayout
+<com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:icon="@drawable/ic_lock"
-    android:layout="@layout/suw_glif_blank_template">
+    android:layout="@layout/sud_glif_blank_template">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
         android:id="@+id/topLayout"
@@ -65,7 +65,7 @@
             android:paddingLeft="0dp"
             android:paddingRight="0dp">
 
-            <com.android.setupwizardlib.view.FillContentLayout
+            <com.google.android.setupdesign.view.FillContentLayout
                 style="@style/LockPatternContainerStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -77,10 +77,10 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center" />
 
-            </com.android.setupwizardlib.view.FillContentLayout>
+            </com.google.android.setupdesign.view.FillContentLayout>
 
             <TextView
-                style="@style/TextAppearance.ConfirmDeviceCredentialsErrorText"
+                style="@style/TextAppearance.ErrorText"
                 android:accessibilityLiveRegion="polite"
                 android:id="@+id/errorText"
                 android:layout_width="wrap_content"
@@ -104,4 +104,4 @@
 
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
 
-</com.android.setupwizardlib.GlifLayout>
+</com.google.android.setupdesign.GlifLayout>

@@ -18,56 +18,54 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.endsWith;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyObject;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.endsWith;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.net.NetworkPolicyManager;
 
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowDashboardFragment;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @Config(shadows = {
-        SettingsShadowResourcesImpl.class,
-        SettingsShadowResources.SettingsShadowTheme.class,
         ShadowUtils.class,
         ShadowDataUsageUtils.class,
         ShadowDashboardFragment.class,
         ShadowUserManager.class,
 })
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class DataUsageSummaryTest {
 
     @Mock
     private SummaryLoader mSummaryLoader;
     @Mock
     private NetworkPolicyManager mNetworkPolicyManager;
+    @Mock
+    private NetworkStatsManager mNetworkStatsManager;
     private Context mContext;
     private FragmentActivity mActivity;
     private SummaryLoader.SummaryProvider mSummaryProvider;
@@ -86,20 +84,14 @@ public class DataUsageSummaryTest {
 
         mContext = RuntimeEnvironment.application;
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
+        doReturn(mNetworkStatsManager).when(mActivity).getSystemService(NetworkStatsManager.class);
 
         mSummaryProvider = DataUsageSummary.SUMMARY_PROVIDER_FACTORY
                 .createSummaryProvider(mActivity, mSummaryLoader);
     }
 
-    @After
-    public void tearDown() {
-        ShadowUserManager.getShadow().reset();
-    }
-
     @Test
     public void formatUsage_shouldLookLikeFormatFileSize() {
-        SettingsShadowResources.overrideResource(com.android.internal.R.string.fileSizeSuffix,
-                "%1$s %2$s");
         final long usage = 2147483648L; // 2GB
         final String formattedUsage =
                 DataUsageSummary.formatUsage(mContext, "^1", usage).toString();

@@ -23,7 +23,6 @@ import static org.robolectric.RuntimeEnvironment.application;
 import android.app.KeyguardManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.UserInfo;
 import android.view.View;
 import android.widget.Button;
 
@@ -33,19 +32,20 @@ import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.password.SetupChooseLockGeneric.SetupChooseLockGenericFragment;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowFingerprintManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
+import com.google.android.setupcompat.PartnerCustomizationLayout;
+import com.google.android.setupcompat.template.ButtonFooterMixin;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
@@ -53,7 +53,7 @@ import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowActivity.IntentForResult;
 import org.robolectric.shadows.ShadowKeyguardManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
     ShadowFingerprintManager.class,
     ShadowLockPatternUtils.class,
@@ -62,15 +62,10 @@ import org.robolectric.shadows.ShadowKeyguardManager;
 })
 public class SetupFingerprintEnrollIntroductionTest {
 
-    @Mock
-    private UserInfo mUserInfo;
-
     private ActivityController<SetupFingerprintEnrollIntroduction> mController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         Shadows.shadowOf(application.getPackageManager())
             .setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true);
 
@@ -78,8 +73,6 @@ public class SetupFingerprintEnrollIntroductionTest {
 
         final Intent intent = new Intent();
         mController = Robolectric.buildActivity(SetupFingerprintEnrollIntroduction.class, intent);
-
-        ShadowUserManager.getShadow().setUserInfo(0, mUserInfo);
     }
 
     @After
@@ -93,7 +86,10 @@ public class SetupFingerprintEnrollIntroductionTest {
 
         mController.create().resume();
 
-        final Button skipButton = mController.get().findViewById(R.id.fingerprint_cancel_button);
+        PartnerCustomizationLayout layout =
+                mController.get().findViewById(R.id.setup_wizard_layout);
+        final Button skipButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
         assertThat(skipButton.getVisibility()).named("Skip visible").isEqualTo(View.VISIBLE);
         skipButton.performClick();
 
@@ -109,7 +105,10 @@ public class SetupFingerprintEnrollIntroductionTest {
 
         mController.create().resume();
 
-        final Button skipButton = mController.get().findViewById(R.id.fingerprint_cancel_button);
+        PartnerCustomizationLayout layout =
+                mController.get().findViewById(R.id.setup_wizard_layout);
+        final Button skipButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
         assertThat(skipButton.getVisibility()).named("Skip visible").isEqualTo(View.VISIBLE);
         skipButton.performClick();
 
@@ -151,7 +150,9 @@ public class SetupFingerprintEnrollIntroductionTest {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
 
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
-        final Button skipButton = activity.findViewById(R.id.fingerprint_cancel_button);
+        PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        final Button skipButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
         getShadowKeyguardManager().setIsKeyguardSecure(true);
         skipButton.performClick();
 
@@ -166,7 +167,9 @@ public class SetupFingerprintEnrollIntroductionTest {
         getShadowKeyguardManager().setIsKeyguardSecure(true);
 
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
-        final Button skipButton = activity.findViewById(R.id.fingerprint_cancel_button);
+        PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        final Button skipButton =
+                layout.getMixin(ButtonFooterMixin.class).getSecondaryButtonView();
         skipButton.performClick();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
@@ -209,8 +212,9 @@ public class SetupFingerprintEnrollIntroductionTest {
 
         SetupFingerprintEnrollIntroduction activity = mController.get();
 
-        final Button nextButton = activity.findViewById(R.id.fingerprint_next_button);
-        nextButton.performClick();
+        PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
+        layout.getMixin(ButtonFooterMixin.class).getPrimaryButtonView().performClick();
+
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         IntentForResult startedActivity = shadowActivity.getNextStartedActivityForResult();

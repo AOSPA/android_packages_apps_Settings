@@ -28,31 +28,25 @@ import static org.mockito.Mockito.when;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.provider.Settings.Global;
-import android.view.View;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.core.OnActivityResultListener;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SettingsActivityTest {
 
     @Mock
@@ -71,29 +65,6 @@ public class SettingsActivityTest {
     }
 
     @Test
-    @Config(shadows = ShadowUtils.class)
-    public void onCreate_deviceNotProvisioned_shouldDisableSearch() {
-        Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
-        final SettingsActivity activity = Robolectric.buildActivity(SettingsActivity.class)
-                .create(Bundle.EMPTY)
-                .get();
-
-        assertThat(activity.findViewById(R.id.search_bar).getVisibility())
-                .isEqualTo(View.INVISIBLE);
-    }
-
-    @Test
-    @Config(shadows = ShadowUtils.class)
-    public void onCreate_deviceProvisioned_shouldEnableSearch() {
-        Global.putInt(mContext.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
-        final SettingsActivity activity = Robolectric.buildActivity(SettingsActivity.class)
-                .create(Bundle.EMPTY)
-                .get();
-
-        assertThat(activity.findViewById(R.id.search_bar).getVisibility()).isEqualTo(View.VISIBLE);
-    }
-
-    @Test
     public void launchSettingFragment_nullExtraShowFragment_shouldNotCrash() {
         when(mActivity.getSupportFragmentManager()).thenReturn(mFragmentManager);
         doReturn(mContext.getContentResolver()).when(mActivity).getContentResolver();
@@ -101,7 +72,7 @@ public class SettingsActivityTest {
 
         doReturn(RuntimeEnvironment.application.getClassLoader()).when(mActivity).getClassLoader();
 
-        mActivity.launchSettingFragment(null, true, mock(Intent.class));
+        mActivity.launchSettingFragment(null, mock(Intent.class));
     }
 
     @Test
@@ -128,7 +99,7 @@ public class SettingsActivityTest {
 
     public static class ListenerFragment extends Fragment implements OnActivityResultListener {
 
-        public boolean mOnActivityResultCalled;
+        private boolean mOnActivityResultCalled;
 
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {

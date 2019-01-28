@@ -79,8 +79,7 @@ public class SliceTester {
         assertThat(primaryPendingIntent).isEqualTo(
                 SliceBuilderUtils.getContentPendingIntent(context, sliceData));
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        assertTitle(sliceItems, sliceData.getTitle());
+        assertThat(metadata.getTitle()).isEqualTo(sliceData.getTitle());
 
         assertKeywords(metadata, sliceData);
     }
@@ -110,8 +109,6 @@ public class SliceTester {
 
         final SliceAction mainToggleAction = toggles.get(0);
 
-        final IconCompat expectedToggleIcon = IconCompat.createWithResource(context,
-                sliceData.getIconResource());
         assertThat(mainToggleAction.getIcon()).isNull();
 
         // Check intent in Toggle Action
@@ -124,8 +121,7 @@ public class SliceTester {
         assertThat(primaryPendingIntent).isEqualTo(
                 SliceBuilderUtils.getContentPendingIntent(context, sliceData));
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        assertTitle(sliceItems, sliceData.getTitle());
+        assertThat(metadata.getTitle()).isEqualTo(sliceData.getTitle());
 
         assertKeywords(metadata, sliceData);
     }
@@ -162,8 +158,7 @@ public class SliceTester {
         assertThat(primaryPendingIntent).isEqualTo(
                 SliceBuilderUtils.getContentPendingIntent(context, sliceData));
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        assertTitle(sliceItems, sliceData.getTitle());
+        assertThat(metadata.getTitle()).isEqualTo(sliceData.getTitle());
 
         assertKeywords(metadata, sliceData);
     }
@@ -199,8 +194,7 @@ public class SliceTester {
         assertThat(primaryPendingIntent).isEqualTo(
                 SliceBuilderUtils.getContentPendingIntent(context, sliceData));
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        assertTitle(sliceItems, sliceData.getTitle());
+        assertThat(metadata.getTitle()).isEqualTo(sliceData.getTitle());
 
         assertKeywords(metadata, sliceData);
     }
@@ -232,13 +226,18 @@ public class SliceTester {
         assertThat(primaryPendingIntent).isEqualTo(SliceBuilderUtils.getContentPendingIntent(
                 context, sliceData));
 
-        final List<SliceItem> sliceItems = slice.getItems();
-        assertTitle(sliceItems, sliceData.getTitle());
+        assertThat(metadata.getTitle()).isEqualTo(sliceData.getTitle());
 
         assertKeywords(metadata, sliceData);
     }
 
-    public static void assertTitle(List<SliceItem> sliceItems, String title) {
+    /**
+     * Assert any slice item contains title.
+     *
+     * @param sliceItems All slice items of a Slice.
+     * @param title Title for asserting.
+     */
+    public static void assertAnySliceItemContainsTitle(List<SliceItem> sliceItems, String title) {
         boolean hasTitle = false;
         for (SliceItem item : sliceItems) {
             List<SliceItem> titleItems = SliceQuery.findAll(item, FORMAT_TEXT, HINT_TITLE,

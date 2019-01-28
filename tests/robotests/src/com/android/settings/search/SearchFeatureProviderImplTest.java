@@ -29,18 +29,18 @@ import android.widget.Toolbar;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPackageManager;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SearchFeatureProviderImplTest {
 
     private SearchFeatureProviderImpl mProvider;
@@ -53,6 +53,8 @@ public class SearchFeatureProviderImplTest {
         mActivity = Robolectric.setupActivity(Activity.class);
         mProvider = new SearchFeatureProviderImpl();
         mPackageManager = Shadows.shadowOf(mActivity.getPackageManager());
+        Settings.Global.putInt(mActivity.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 1);
     }
 
     @Test
@@ -76,13 +78,12 @@ public class SearchFeatureProviderImplTest {
 
         final Intent launchIntent = Shadows.shadowOf(mActivity).getNextStartedActivity();
 
-        assertThat(launchIntent.getAction())
-                .isEqualTo(Settings.ACTION_APP_SEARCH_SETTINGS);
+        assertThat(launchIntent.getAction()).isEqualTo(Settings.ACTION_APP_SEARCH_SETTINGS);
     }
 
     @Test
     @Config(shadows = ShadowUtils.class)
-    public void initSearchToolbar_NotHaveResolvedInfo_shouldNotStartActivity() {
+    public void initSearchToolbar_noResolvedInfo_shouldNotStartActivity() {
         final Toolbar toolbar = new Toolbar(mActivity);
         // This ensures navigationView is created.
         toolbar.setNavigationContentDescription("test");
@@ -90,9 +91,21 @@ public class SearchFeatureProviderImplTest {
 
         toolbar.performClick();
 
-        final Intent launchIntent = Shadows.shadowOf(mActivity).getNextStartedActivity();
+        assertThat(Shadows.shadowOf(mActivity).getNextStartedActivity()).isNull();
+    }
 
-        assertThat(launchIntent).isNull();
+    @Test
+    public void initSearchToolbar_deviceNotProvisioned_shouldNotCreateSearchBar() {
+        final Toolbar toolbar = new Toolbar(mActivity);
+        // This ensures navigationView is created.
+        toolbar.setNavigationContentDescription("test");
+
+        Settings.Global.putInt(mActivity.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 0);
+
+        toolbar.performClick();
+
+        assertThat(Shadows.shadowOf(mActivity).getNextStartedActivity()).isNull();
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -27,16 +27,17 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.net.wifi.WifiManager;
 import android.os.ServiceSpecificException;
 import android.security.KeyStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -45,10 +46,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
 public class WifiConfigControllerTest {
 
@@ -138,7 +140,6 @@ public class WifiConfigControllerTest {
         assertThat(password).isNotNull();
         password.setText(LONG_PSK);
         assertThat(mController.isSubmittable()).isFalse();
-
     }
 
     @Test
@@ -155,7 +156,6 @@ public class WifiConfigControllerTest {
         assertThat(password).isNotNull();
         password.setText(GOOD_PSK);
         assertThat(mController.isSubmittable()).isTrue();
-
     }
 
     @Test
@@ -164,7 +164,6 @@ public class WifiConfigControllerTest {
         assertThat(password).isNotNull();
         password.setText(HEX_PSK);
         assertThat(mController.isSubmittable()).isTrue();
-
     }
 
     @Test
@@ -298,11 +297,85 @@ public class WifiConfigControllerTest {
         assertThat(hiddenField.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
+    @Test
+    public void securitySpinner_saeSuitebAndOweNotVisible() {
+        securitySpinnerTestHelper(false, false, false);
+    }
+
+    @Test
+    public void securitySpinner_saeSuitebAndOweVisible() {
+        securitySpinnerTestHelper(true, true, true);
+    }
+
+    @Test
+    public void securitySpinner_saeVisible_suitebAndOweNotVisible() {
+        securitySpinnerTestHelper(true, false, false);
+    }
+
+    @Test
+    public void securitySpinner_oweVisible_suitebAndSaeNotVisible() {
+        securitySpinnerTestHelper(false, false, true);
+    }
+
+    private void securitySpinnerTestHelper(boolean saeVisible, boolean suitebVisible,
+            boolean oweVisible) {
+        WifiManager wifiManager = mock(WifiManager.class);
+        when(wifiManager.isWpa3SaeSupported()).thenReturn(saeVisible);
+        when(wifiManager.isWpa3SuiteBSupported()).thenReturn(suitebVisible);
+        when(wifiManager.isOweSupported()).thenReturn(oweVisible);
+
+        mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
+                WifiConfigUiBase.MODE_MODIFY, wifiManager);
+
+        final Spinner securitySpinner = mView.findViewById(R.id.security);
+        final ArrayAdapter<String> adapter = (ArrayAdapter) securitySpinner.getAdapter();
+        boolean saeFound = false;
+        boolean suitebFound = false;
+        boolean oweFound = false;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            String val = adapter.getItem(i);
+
+            if (val.compareTo(mContext.getString(R.string.wifi_security_sae)) == 0) {
+                saeFound = true;
+            }
+
+            if (val.compareTo(mContext.getString(R.string.wifi_security_eap_suiteb)) == 0) {
+                suitebFound = true;
+            }
+
+            if (val.compareTo(mContext.getString(R.string.wifi_security_owe)) == 0) {
+                oweFound = true;
+            }
+        }
+
+        if (saeVisible) {
+            assertThat(saeFound).isTrue();
+        } else {
+            assertThat(saeFound).isFalse();
+        }
+        if (suitebVisible) {
+            assertThat(suitebFound).isTrue();
+        } else {
+            assertThat(suitebFound).isFalse();
+        }
+        if (oweVisible) {
+            assertThat(oweFound).isTrue();
+        } else {
+            assertThat(oweFound).isFalse();
+        }
+    }
+
     public class TestWifiConfigController extends WifiConfigController {
 
         private TestWifiConfigController(
             WifiConfigUiBase parent, View view, AccessPoint accessPoint, int mode) {
             super(parent, view, accessPoint, mode);
+        }
+
+        private TestWifiConfigController(
+                WifiConfigUiBase parent, View view, AccessPoint accessPoint, int mode,
+                    WifiManager wifiManager) {
+            super(parent, view, accessPoint, mode, wifiManager);
         }
 
         @Override

@@ -140,7 +140,6 @@ public class ApnEditor extends SettingsPreferenceFragment
     private String[] mReadOnlyApnFields;
     private boolean mReadOnlyApn;
     private Uri mCarrierUri;
-    private boolean mDeletableApn;
 
     private static final String APN_DEFALUT_VALUES_STRING_ARRAY = "apn_default_values_strings_array";
 
@@ -171,10 +170,8 @@ public class ApnEditor extends SettingsPreferenceFragment
             Telephony.Carriers.ROAMING_PROTOCOL, // 20
             Telephony.Carriers.MVNO_TYPE,   // 21
             Telephony.Carriers.MVNO_MATCH_DATA,  // 22
-            Telephony.Carriers.EDITED,   // 23
-            Telephony.Carriers.USER_EDITABLE,    //24
-            Utils.PERSISTENT,   //25
-            Utils.READ_ONLY   //26
+            Telephony.Carriers.EDITED_STATUS,   // 23
+            Telephony.Carriers.USER_EDITABLE    //24
     };
 
     private static final String[] sUIConfigurableItems = new String[] {
@@ -226,8 +223,6 @@ public class ApnEditor extends SettingsPreferenceFragment
     private static final int MVNO_MATCH_DATA_INDEX = 22;
     private static final int EDITED_INDEX = 23;
     private static final int USER_EDITABLE_INDEX = 24;
-    private static final int PERSISTENT_INDEX = 25;
-    private static final int READONLY_INDEX = 26;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -330,16 +325,13 @@ public class ApnEditor extends SettingsPreferenceFragment
         Log.d(TAG, "onCreate: EDITED " + isUserEdited);
         // if it's not a USER_EDITED apn, check if it's read-only
         if (!isUserEdited && (mApnData.getInteger(USER_EDITABLE_INDEX, 1) == 0
-                || apnTypesMatch(mReadOnlyApnTypes, mApnData.getString(TYPE_INDEX))
-                || mApnData.getInteger(READONLY_INDEX) == 1)) {
+                || apnTypesMatch(mReadOnlyApnTypes, mApnData.getString(TYPE_INDEX)))) {
             Log.d(TAG, "onCreate: apnTypesMatch; read-only APN");
             mReadOnlyApn = true;
             disableAllFields();
         } else if (!ArrayUtils.isEmpty(mReadOnlyApnFields)) {
             disableFields(mReadOnlyApnFields);
         }
-
-        mDeletableApn = (mApnData.getInteger(PERSISTENT_INDEX, 0)) != 1;
 
         for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
             getPreferenceScreen().getPreference(i).setOnPreferenceChangeListener(this);
@@ -777,7 +769,7 @@ public class ApnEditor extends SettingsPreferenceFragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         // If it's a new APN, then cancel will delete the new entry in onPause
-        if (!mNewApn && !mReadOnlyApn && mDeletableApn) {
+        if (!mNewApn && !mReadOnlyApn) {
             menu.add(0, MENU_DELETE, 0, R.string.menu_delete)
                 .setIcon(R.drawable.ic_delete);
         }
@@ -1078,7 +1070,7 @@ public class ApnEditor extends SettingsPreferenceFragment
                 callUpdate,
                 CARRIER_ENABLED_INDEX);
 
-        values.put(Telephony.Carriers.EDITED, Telephony.Carriers.USER_EDITED);
+        values.put(Telephony.Carriers.EDITED_STATUS, Telephony.Carriers.USER_EDITED);
 
         if (callUpdate) {
             final Uri uri = mApnData.getUri() == null ? mCarrierUri : mApnData.getUri();

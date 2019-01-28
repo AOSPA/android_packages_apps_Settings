@@ -44,7 +44,6 @@
         android:title="@string/auto_brightness_title"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.display.AutoBrightnessSettings"
-        settings:searchable="false"
         settings:controller="com.android.settings.display.AutoBrightnessPreferenceController" />
 
     <com.android.settingslib.RestrictedPreference
@@ -79,6 +78,11 @@
         android:fragment="com.android.settings.display.ColorModePreferenceFragment"
         settings:controller="com.android.settings.display.ColorModePreferenceController"
         settings:keywords="@string/keywords_color_mode" />
+
+    <SwitchPreference
+        android:key="display_white_balance"
+        android:title="@string/display_white_balance_title"
+        settings:controller="com.android.settings.display.DisplayWhiteBalancePreferenceController" />
 
     <Preference
         android:key="font_size"

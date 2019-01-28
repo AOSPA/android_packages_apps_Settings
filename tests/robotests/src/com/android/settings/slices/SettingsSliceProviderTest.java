@@ -48,19 +48,14 @@ import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
-import com.android.settings.bluetooth.BluetoothSliceBuilder;
-import com.android.settings.flashlight.FlashlightSliceBuilder;
-import com.android.settings.location.LocationSliceBuilder;
-import com.android.settings.notification.ZenModeSliceBuilder;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeToggleController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.wifi.WifiSlice;
+import com.android.settings.wifi.slice.WifiSlice;
 import com.android.settingslib.wifi.WifiTracker;
 
 import org.junit.After;
@@ -69,6 +64,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
@@ -89,7 +85,7 @@ import java.util.Set;
 /**
  * TODO Investigate using ShadowContentResolver.registerProviderInternal(String, ContentProvider)
  */
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class, ShadowThreadUtils.class, ShadowUtils.class,
         SlicesDatabaseAccessorTest.ShadowApplicationPackageManager.class,
         ShadowBluetoothAdapter.class, ShadowLockPatternUtils.class,
@@ -113,14 +109,14 @@ public class SettingsSliceProviderTest {
     private SliceManager mManager;
 
     private static final List<Uri> SPECIAL_CASE_PLATFORM_URIS = Arrays.asList(
-            WifiSlice.WIFI_URI,
-            BluetoothSliceBuilder.BLUETOOTH_URI,
-            LocationSliceBuilder.LOCATION_URI
+            CustomSliceRegistry.WIFI_SLICE_URI,
+            CustomSliceRegistry.BLUETOOTH_URI,
+            CustomSliceRegistry.LOCATION_SLICE_URI
     );
 
     private static final List<Uri> SPECIAL_CASE_OEM_URIS = Arrays.asList(
-            ZenModeSliceBuilder.ZEN_MODE_URI,
-            FlashlightSliceBuilder.FLASHLIGHT_URI
+            CustomSliceRegistry.ZEN_MODE_SLICE_URI,
+            CustomSliceRegistry.FLASHLIGHT_SLICE_URI
     );
 
     @Before
@@ -472,9 +468,9 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void bindSlice_wifiSlice_returnsWifiSlice() {
-        final Slice wifiSlice = mProvider.onBindSlice(WifiSlice.WIFI_URI);
+        final Slice wifiSlice = mProvider.onBindSlice(CustomSliceRegistry.WIFI_SLICE_URI);
 
-        assertThat(wifiSlice.getUri()).isEqualTo(WifiSlice.WIFI_URI);
+        assertThat(wifiSlice.getUri()).isEqualTo(CustomSliceRegistry.WIFI_SLICE_URI);
     }
 
     @Test
@@ -482,9 +478,10 @@ public class SettingsSliceProviderTest {
         Settings.Secure.putInt(
                 mContext.getContentResolver(), Settings.Secure.FLASHLIGHT_AVAILABLE, 1);
 
-        final Slice flashlightSlice = mProvider.onBindSlice(FlashlightSliceBuilder.FLASHLIGHT_URI);
+        final Slice flashlightSlice = mProvider.onBindSlice(
+                CustomSliceRegistry.FLASHLIGHT_SLICE_URI);
 
-        assertThat(flashlightSlice.getUri()).isEqualTo(FlashlightSliceBuilder.FLASHLIGHT_URI);
+        assertThat(flashlightSlice.getUri()).isEqualTo(CustomSliceRegistry.FLASHLIGHT_SLICE_URI);
     }
 
     @Test
@@ -515,7 +512,7 @@ public class SettingsSliceProviderTest {
         }
 
         @Implementation
-        public void close() {
+        protected void close() {
             mWifiTracker.onDestroy();
         }
 
@@ -526,33 +523,34 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void onSlicePinned_backgroundWorker_started() {
-        mProvider.onSlicePinned(WifiSlice.WIFI_URI);
+        mProvider.onSlicePinned(CustomSliceRegistry.WIFI_SLICE_URI);
 
         verify(ShadowWifiScanWorker.getWifiTracker()).onStart();
     }
 
     @Test
     public void onSlicePinned_backgroundWorker_stopped() {
-        mProvider.onSlicePinned(WifiSlice.WIFI_URI);
-        mProvider.onSliceUnpinned(WifiSlice.WIFI_URI);
+        mProvider.onSlicePinned(CustomSliceRegistry.WIFI_SLICE_URI);
+        mProvider.onSliceUnpinned(CustomSliceRegistry.WIFI_SLICE_URI);
 
         verify(ShadowWifiScanWorker.getWifiTracker()).onStop();
     }
 
     @Test
     public void shutdown_backgroundWorker_closed() {
-        mProvider.onSlicePinned(WifiSlice.WIFI_URI);
+        mProvider.onSlicePinned(CustomSliceRegistry.WIFI_SLICE_URI);
         mProvider.shutdown();
 
         verify(ShadowWifiScanWorker.getWifiTracker()).onDestroy();
     }
 
     @Test
+    @Config(qualifiers = "mcc998")
     public void grantWhitelistedPackagePermissions_noWhitelist_shouldNotGrant() {
         final List<Uri> uris = new ArrayList<>();
         uris.add(Uri.parse("content://settings/slice"));
 
-        mProvider.grantWhitelistedPackagePermissions(mContext, uris);
+        SettingsSliceProvider.grantWhitelistedPackagePermissions(mContext, uris);
 
         verify(mManager, never()).grantSlicePermission(anyString(), any(Uri.class));
     }
@@ -563,7 +561,7 @@ public class SettingsSliceProviderTest {
         final List<Uri> uris = new ArrayList<>();
         uris.add(Uri.parse("content://settings/slice"));
 
-        mProvider.grantWhitelistedPackagePermissions(mContext, uris);
+        SettingsSliceProvider.grantWhitelistedPackagePermissions(mContext, uris);
 
         verify(mManager)
                 .grantSlicePermission("com.android.settings.slice_whitelist_package", uris.get(0));
@@ -619,11 +617,11 @@ public class SettingsSliceProviderTest {
         }
 
         @Implementation
-        public static void setThreadPolicy(final StrictMode.ThreadPolicy policy) {
+        protected static void setThreadPolicy(final StrictMode.ThreadPolicy policy) {
             sSetThreadPolicyCount++;
         }
 
-        public static boolean isThreadPolicyOverridden() {
+        private static boolean isThreadPolicyOverridden() {
             return sSetThreadPolicyCount != 0;
         }
     }

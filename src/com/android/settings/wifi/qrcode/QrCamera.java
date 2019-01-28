@@ -17,7 +17,10 @@
 package com.android.settings.wifi.qrcode;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.graphics.Matrix;
 import android.graphics.Rect;
+import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
@@ -29,7 +32,6 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
-import android.view.SurfaceHolder;
 import android.view.WindowManager;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
@@ -43,13 +45,14 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 import androidx.annotation.VisibleForTesting;
 
 /**
  * Manage the camera for the QR scanner and help the decoder to get the image inside the scanning
- * frame. Caller prepares a {@link SurfaceHolder} then call {@link #start(SurfaceHolder)} to
+ * frame. Caller prepares a {@link SurfaceTexture} then call {@link #start(SurfaceTexture)} to
  * start QR Code scanning. The scanning result will return by ScannerCallback interface. Caller
  * can also call {@link #stop()} to halt QR Code scanning before the result returned.
  */
@@ -85,14 +88,25 @@ public class QrCamera extends Handler {
         mReader.setHints(HINTS);
     }
 
-    void start(SurfaceHolder surfaceHolder) {
+    /**
+     * The function start camera preview and capture pictures to decode QR code continuously in a
+     * background task.
+     *
+     * @param surface The surface to be used for live preview.
+     */
+    public void start(SurfaceTexture surface) {
         if (mDecodeTask == null) {
-            mDecodeTask = new DecodingTask(surfaceHolder);
-            mDecodeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            mDecodeTask = new DecodingTask(surface);
+            // Execute in the separate thread pool to prevent block other AsyncTask.
+            mDecodeTask.executeOnExecutor(Executors.newSingleThreadExecutor());
         }
     }
 
-    void stop() {
+    /**
+     * The function stop camera preview and background decode task. Caller call this function when
+     * the surface is being destroyed.
+     */
+    public void stop() {
         removeMessages(MSG_AUTO_FOCUS);
         if (mDecodeTask != null) {
             mDecodeTask.cancel(true);
@@ -104,7 +118,7 @@ public class QrCamera extends Handler {
     }
 
     /** The scanner which includes this QrCamera class should implement this */
-    interface ScannerCallback {
+    public interface ScannerCallback {
 
         /**
          * The function used to handle the decoding result of the QR code.
@@ -131,6 +145,22 @@ public class QrCamera extends Handler {
          * @return The rectangle would like to crop from the camera preview shot.
          */
         Rect getFramePosition(Size previewSize, int cameraOrientation);
+
+        /**
+         * Sets the transform to associate with preview area.
+         *
+         * @param transform The transform to apply to the content of preview
+         */
+        void setTransform(Matrix transform);
+
+        /**
+         * Verify QR code is valid or not. The camera will stop scanning if this callback returns
+         * true.
+         *
+         * @param qrCode The result QR code after decoding.
+         * @return Returns true if qrCode hold valid information.
+         */
+        boolean isValid(String qrCode);
     }
 
     private void setCameraParameter() {
@@ -187,15 +217,15 @@ public class QrCamera extends Handler {
 
     private class DecodingTask extends AsyncTask<Void, Void, String> {
         private QrYuvLuminanceSource mImage;
-        private SurfaceHolder mSurfaceHolder;
+        private SurfaceTexture mSurface;
 
-        private DecodingTask(SurfaceHolder surfaceHolder) {
-            mSurfaceHolder = surfaceHolder;
+        private DecodingTask(SurfaceTexture surface) {
+            mSurface = surface;
         }
 
         @Override
         protected String doInBackground(Void... tmp) {
-            if (!initCamera(mSurfaceHolder)) {
+            if (!initCamera(mSurface)) {
                 return null;
             }
 
@@ -224,7 +254,9 @@ public class QrCamera extends Handler {
                         mReader.reset();
                     }
                     if (qrCode != null) {
-                        return qrCode.getText();
+                        if (mScannerCallback.isValid(qrCode.getText())) {
+                            return qrCode.getText();
+                        }
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
@@ -240,7 +272,7 @@ public class QrCamera extends Handler {
             }
         }
 
-        private boolean initCamera(SurfaceHolder surfaceHolder) {
+        private boolean initCamera(SurfaceTexture surface) {
             final int numberOfCameras = Camera.getNumberOfCameras();
             Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
             try {
@@ -248,7 +280,7 @@ public class QrCamera extends Handler {
                     Camera.getCameraInfo(i, cameraInfo);
                     if (cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK) {
                         mCamera = Camera.open(i);
-                        mCamera.setPreviewDisplay(surfaceHolder);
+                        mCamera.setPreviewTexture(surface);
                         mCameraOrientation = cameraInfo.orientation;
                         break;
                     }
@@ -259,6 +291,7 @@ public class QrCamera extends Handler {
                     return false;
                 }
                 setCameraParameter();
+                setTransformationMatrix(mScannerCallback.getViewSize());
                 if (!startPreview()) {
                     Log.e(TAG, "Error to init Camera");
                     mCamera = null;
@@ -273,6 +306,36 @@ public class QrCamera extends Handler {
                 return false;
             }
         }
+    }
+
+    /** Set transfom matrix to crop and center the preview picture */
+    private void setTransformationMatrix(Size viewSize) {
+        // Check aspect ratio, can only handle square view.
+        final int viewRatio = (int)getRatio(viewSize.getWidth(), viewSize.getHeight());
+        if (viewRatio != 1) {
+            throw new IllegalArgumentException("Preview area should be square");
+        }
+
+        final boolean isPortrait = mContext.get().getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_PORTRAIT ? true : false;
+
+        final int previewWidth = isPortrait ? mPreviewSize.getWidth() : mPreviewSize.getHeight();
+        final int previewHeight = isPortrait ? mPreviewSize.getHeight() : mPreviewSize.getWidth();
+        final float ratioPreview = (float) getRatio(previewWidth, previewHeight);
+
+        // Calculate transformation matrix.
+        float scaleX = 1.0f;
+        float scaleY = 1.0f;
+        if (previewWidth > previewHeight) {
+            scaleY = scaleX / ratioPreview;
+        } else {
+            scaleX = scaleY / ratioPreview;
+        }
+
+        // Set the transform matrix.
+        final Matrix matrix = new Matrix();
+        matrix.setScale(scaleX, scaleY);
+        mScannerCallback.setTransform(matrix);
     }
 
     private QrYuvLuminanceSource getFrameImage(byte[] imageData) {
@@ -298,16 +361,28 @@ public class QrCamera extends Handler {
         }
     }
 
+    /** Get best preview size from the list of camera supported preview sizes. Compares the
+     * preview size and aspect ratio to choose the best one. */
     private Size getBestPreviewSize(Camera.Parameters parameters) {
+        final double minRatioDiffPercent = 0.1;
         final Size windowSize = mScannerCallback.getViewSize();
+        final double winRatio = getRatio(windowSize.getWidth(), windowSize.getHeight());
+        double bestChoiceRatio = 0;
         Size bestChoice = new Size(0, 0);
         for (Camera.Size size : parameters.getSupportedPreviewSizes()) {
-            if (size.width <= windowSize.getWidth() && size.height <= windowSize.getHeight()) {
+            double ratio = getRatio(size.width, size.height);
+            if (size.height * size.width > bestChoice.getWidth() * bestChoice.getHeight()
+                    && (Math.abs(bestChoiceRatio - winRatio) / winRatio > minRatioDiffPercent
+                    || Math.abs(ratio - winRatio) / winRatio <= minRatioDiffPercent)) {
                 bestChoice = new Size(size.width, size.height);
-                break;
+                bestChoiceRatio = getRatio(size.width, size.height);
             }
         }
         return bestChoice;
+    }
+
+    private double getRatio(double x, double y) {
+        return (x < y) ? x / y : y / x;
     }
 
     @VisibleForTesting

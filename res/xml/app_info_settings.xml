@@ -21,20 +21,22 @@
     android:key="installed_app_detail_settings_screen"
     settings:initialExpandedChildrenCount="6">
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="header_view"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
         android:order="-10000"
         settings:allowDividerBelow="true"/>
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settingslib.widget.LayoutPreference
         android:key="instant_app_buttons"
         android:layout="@layout/instant_app_buttons"
         android:selectable="false"
-        android:order="-9999" />
+        android:order="-9999"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="true"/>
 
-    <com.android.settings.widget.ActionButtonPreference
+    <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"
         android:order="-9998" />
 
@@ -68,12 +70,6 @@
         android:title="@string/data_usage_app_summary_title"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.applications.appinfo.AppDataUsagePreferenceController" />
-
-    <Preference
-        android:key="data_settings_v2"
-        android:title="@string/data_usage_app_summary_title"
-        android:summary="@string/summary_placeholder"
-        settings:controller="com.android.settings.applications.appinfo.AppDataUsagePreferenceControllerV2" />
 
     <Preference
         android:key="time_spent_in_app"
@@ -180,6 +176,7 @@
         android:selectable="false"
         android:order="9999"
         settings:controller="com.android.settings.applications.appinfo.AppVersionPreferenceController"
-        settings:allowDividerAbove="true" />
+        settings:allowDividerAbove="true"
+        settings:enableCopying="true"/>
 
 </PreferenceScreen>

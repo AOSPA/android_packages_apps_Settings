@@ -22,17 +22,16 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class})
 public class UserCapabilitiesTest {
 
@@ -43,11 +42,6 @@ public class UserCapabilitiesTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mUserManager = ShadowUserManager.getShadow();
-    }
-
-    @After
-    public void tearDown() {
-        mUserManager.reset();
     }
 
     @Test

@@ -28,10 +28,10 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 
+import android.net.wifi.WifiManager;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAccessPoint;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
@@ -43,10 +43,11 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowThreadUtils.class, ShadowWifiManager.class})
 public class SavedAccessPointsPreferenceControllerTest {
 
@@ -56,14 +57,14 @@ public class SavedAccessPointsPreferenceControllerTest {
     private PreferenceCategory mPreferenceCategory;
 
     private Context mContext;
-    private ShadowWifiManager mWifiManager;
+    private WifiManager mWifiManager;
     private SavedAccessPointsPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mWifiManager = ShadowWifiManager.get();
+        mWifiManager = mContext.getSystemService(WifiManager.class);
         mController = spy(new SavedAccessPointsPreferenceController(mContext, "test_key"));
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
@@ -84,7 +85,6 @@ public class SavedAccessPointsPreferenceControllerTest {
 
         verify(mController).refreshSavedAccessPoints();
     }
-
 
     @Test
     public void postRefresh_shouldRefreshApList() {

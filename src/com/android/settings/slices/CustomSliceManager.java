@@ -20,13 +20,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.ArrayMap;
 
+import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.flashlight.FlashlightSlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.BatterySlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.DeviceInfoSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSlice;
 import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
-import com.android.settings.homepage.contextualcards.slices.ConnectedDeviceSlice;
+import com.android.settings.homepage.contextualcards.slices.BatteryFixSlice;
+import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice;
 import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
-import com.android.settings.wifi.WifiSlice;
+import com.android.settings.location.LocationSlice;
+import com.android.settings.wifi.slice.ContextualWifiSlice;
+import com.android.settings.wifi.slice.WifiSlice;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -34,13 +41,11 @@ import java.util.WeakHashMap;
 /**
  * Manages custom {@link androidx.slice.Slice Slices}, which are all Slices not backed by
  * preferences.
- * <p>
- *     By default, all Slices in Settings should be built by a
- * </p>
  */
 public class CustomSliceManager {
 
-    protected final Map<Uri, Class<? extends CustomSliceable>> mUriMap;
+    @VisibleForTesting
+    final Map<Uri, Class<? extends CustomSliceable>> mUriMap;
 
     private final Context mContext;
     private final Map<Uri, CustomSliceable> mSliceableCache;
@@ -100,12 +105,17 @@ public class CustomSliceManager {
     }
 
     private void addSlices() {
-        mUriMap.put(WifiSlice.WIFI_URI, WifiSlice.class);
-        mUriMap.put(DataUsageSlice.DATA_USAGE_CARD_URI, DataUsageSlice.class);
-        mUriMap.put(DeviceInfoSlice.DEVICE_INFO_CARD_URI, DeviceInfoSlice.class);
-        mUriMap.put(StorageSlice.STORAGE_CARD_URI, StorageSlice.class);
-        mUriMap.put(BatterySlice.BATTERY_CARD_URI, BatterySlice.class);
-        mUriMap.put(ConnectedDeviceSlice.CONNECTED_DEVICE_URI, ConnectedDeviceSlice.class);
-        mUriMap.put(LowStorageSlice.LOW_STORAGE_URI, LowStorageSlice.class);
+        mUriMap.put(CustomSliceRegistry.BATTERY_FIX_SLICE_URI, BatteryFixSlice.class);
+        mUriMap.put(CustomSliceRegistry.BATTERY_INFO_SLICE_URI, BatterySlice.class);
+        mUriMap.put(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
+        mUriMap.put(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
+        mUriMap.put(CustomSliceRegistry.DATA_USAGE_SLICE_URI, DataUsageSlice.class);
+        mUriMap.put(CustomSliceRegistry.DEVICE_INFO_SLICE_URI, DeviceInfoSlice.class);
+        mUriMap.put(CustomSliceRegistry.EMERGENCY_INFO_SLICE_URI, EmergencyInfoSlice.class);
+        mUriMap.put(CustomSliceRegistry.FLASHLIGHT_SLICE_URI, FlashlightSlice.class);
+        mUriMap.put(CustomSliceRegistry.LOCATION_SLICE_URI, LocationSlice.class);
+        mUriMap.put(CustomSliceRegistry.LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
+        mUriMap.put(CustomSliceRegistry.STORAGE_SLICE_URI, StorageSlice.class);
+        mUriMap.put(CustomSliceRegistry.WIFI_SLICE_URI, WifiSlice.class);
     }
 }

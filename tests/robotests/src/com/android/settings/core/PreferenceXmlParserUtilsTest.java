@@ -18,6 +18,7 @@ package com.android.settings.core;
 
 import static com.android.settings.core.PreferenceXmlParserUtils
         .METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE;
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_APPEND;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEYWORDS;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SEARCHABLE;
@@ -33,11 +34,12 @@ import android.util.Xml;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
+import java.util.Objects;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.xmlpull.v1.XmlPullParser;
@@ -53,7 +55,7 @@ import java.util.List;
  * If changing a preference file breaks a test in this test file, please replace its reference
  * with another preference with a matchin replacement attribute.
  */
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class PreferenceXmlParserUtilsTest {
 
     private Context mContext;
@@ -315,6 +317,32 @@ public class PreferenceXmlParserUtilsTest {
         }
     }
 
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_requestAppendProperty_shouldDefaultToFalse()
+        throws Exception {
+        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.display_settings,
+                MetadataFlag.FLAG_INCLUDE_PREF_SCREEN | MetadataFlag.FLAG_NEED_PREF_APPEND);
+
+        for (Bundle bundle : metadata) {
+            assertThat(bundle.getBoolean(METADATA_APPEND)).isFalse();
+        }
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_requestAppendProperty_shouldReturnCorrectValue()
+        throws Exception {
+        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.battery_saver_schedule_settings,
+                MetadataFlag.FLAG_INCLUDE_PREF_SCREEN | MetadataFlag.FLAG_NEED_PREF_APPEND);
+
+        for (Bundle bundle : metadata) {
+            assertThat(bundle.getBoolean(METADATA_APPEND)).isTrue();
+        }
+    }
+
     /**
      * @param resId the ID for the XML preference
      * @return an XML resource parser that points to the start tag
@@ -343,7 +371,14 @@ public class PreferenceXmlParserUtilsTest {
             while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                     && type != XmlPullParser.START_TAG) {
             }
-            while (parser.getName() != xmlType && parser.next() != XmlPullParser.END_DOCUMENT) {
+            while (true) {
+                if (Objects.equals(parser.getName(), xmlType)) {
+                    break;
+                }
+                final int nextEvent = parser.next();
+                if (nextEvent == XmlPullParser.END_DOCUMENT) {
+                    break;
+                }
             }
         } catch (Exception e) {
 

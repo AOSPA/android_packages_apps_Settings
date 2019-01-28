@@ -28,7 +28,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,28 +38,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowUserManager;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
-import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class})
+@RunWith(RobolectricTestRunner.class)
 public class EditUserInfoControllerTest {
     @Mock
     private Fragment mFragment;
     @Mock
     private LayoutInflater mInflater;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private UserInfo mUserInfo;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private View mDialogContent;
     @Mock
@@ -70,14 +63,13 @@ public class EditUserInfoControllerTest {
     @Mock
     private Drawable mCurrentIcon;
 
-    private ShadowUserManager mUserManager;
     private FragmentActivity mActivity;
     private TestEditUserInfoController mController;
 
     public class TestEditUserInfoController extends EditUserInfoController {
         private EditUserPhotoController mPhotoController;
 
-        public EditUserPhotoController getPhotoController() {
+        private EditUserPhotoController getPhotoController() {
             return mPhotoController;
         }
 
@@ -92,8 +84,6 @@ public class EditUserInfoControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mUserManager = ShadowUserManager.getShadow();
-        mUserManager.setUserInfo(0, mUserInfo);
         mActivity = spy(ActivityController.of(new FragmentActivity()).get());
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mActivity.getLayoutInflater()).thenReturn(mInflater);
@@ -103,11 +93,6 @@ public class EditUserInfoControllerTest {
         when(mDialogContent.findViewById(eq(R.id.user_photo))).thenReturn(mPhotoView);
         when(mPhotoView.getContext()).thenReturn((Context) mActivity);
         mController = new TestEditUserInfoController();
-    }
-
-    @After
-    public void tearDown() {
-        mUserManager.reset();
     }
 
     @Test

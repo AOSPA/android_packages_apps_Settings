@@ -46,15 +46,15 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeSliderController;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.FakeUnavailablePreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.SliceTester;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SliceBuilderUtilsTest {
 
     private final String KEY = "KEY";
@@ -215,6 +215,19 @@ public class SliceBuilderUtilsTest {
         final CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
 
         assertThat(summary).isEqualTo(controllerSummary);
+    }
+
+    @Test
+    public void getDynamicSummary_allowDynamicSummary_nullSummary_returnsNull() {
+        final SliceData data = getDummyData(true /*isDynamicSummaryAllowed*/);
+        final FakePreferenceController controller = spy(
+                new FakePreferenceController(mContext, KEY));
+        final String controllerSummary = null;
+        doReturn(controllerSummary).when(controller).getSummary();
+
+        final CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
+
+        assertThat(summary).isNull();
     }
 
     @Test
@@ -489,6 +502,19 @@ public class SliceBuilderUtilsTest {
 
         final int actualIconResource = actualIcon.toIcon().getResId();
         assertThat(actualIconResource).isNotEqualTo(zeroIcon);
+        assertThat(actualIconResource).isEqualTo(settingsIcon);
+    }
+
+    @Test
+    public void getSafeIcon_invalidResource_shouldFallbackToSettingsIcon() {
+        final int settingsIcon = R.drawable.ic_settings;
+        final int badIcon = 0x12345678;
+        final SliceData data = getDummyData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
+                badIcon);
+
+        final IconCompat actualIcon = SliceBuilderUtils.getSafeIcon(mContext, data);
+
+        final int actualIconResource = actualIcon.toIcon().getResId();
         assertThat(actualIconResource).isEqualTo(settingsIcon);
     }
 

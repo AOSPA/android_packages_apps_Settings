@@ -22,17 +22,17 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class CellularFallbackPreferenceControllerTest {
+    private static final String KEY_CELLULAR_FALLBACK = "wifi_cellular_data_fallback";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -42,7 +42,7 @@ public class CellularFallbackPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new CellularFallbackPreferenceController(mContext);
+        mController = new CellularFallbackPreferenceController(mContext, KEY_CELLULAR_FALLBACK);
     }
 
     @Test

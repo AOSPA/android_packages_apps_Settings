@@ -38,7 +38,6 @@ import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 
 import com.android.settings.Settings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,6 +46,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowPackageManager;
@@ -54,7 +54,7 @@ import org.robolectric.shadows.ShadowPackageManager;
 import java.util.Arrays;
 import java.util.List;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ShortcutsUpdateTaskTest {
 
     private Context mContext;
@@ -80,12 +80,14 @@ public class ShortcutsUpdateTaskTest {
                 .setComponent(new ComponentName(
                         mContext, Settings.ManageApplicationsActivity.class));
         final ResolveInfo ri1 = mock(ResolveInfo.class);
+        ri1.nonLocalizedLabel = "label1";
+
         final Intent shortcut2 = new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE)
                 .setComponent(new ComponentName(
                         mContext, Settings.SoundSettingsActivity.class));
         final ResolveInfo ri2 = mock(ResolveInfo.class);
-        when(ri1.loadLabel(any(PackageManager.class))).thenReturn("label1");
-        when(ri2.loadLabel(any(PackageManager.class))).thenReturn("label2");
+        ri2.nonLocalizedLabel = "label2";
+
         mPackageManager.addResolveInfoForIntent(shortcut1, ri1);
         mPackageManager.addResolveInfoForIntent(shortcut2, ri2);
 
@@ -112,7 +114,6 @@ public class ShortcutsUpdateTaskTest {
         ComponentName cn = new ComponentName(mContext, className);
         return makeShortcut(SHORTCUT_ID_PREFIX + cn.flattenToShortString());
     }
-
 
     private ShortcutInfo makeShortcut(String id) {
         return new ShortcutInfo.Builder(mContext, id).build();

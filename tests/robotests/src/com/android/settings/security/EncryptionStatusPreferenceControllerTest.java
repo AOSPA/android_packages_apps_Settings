@@ -28,18 +28,17 @@ import android.content.Context;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowLockPatternUtils.class, ShadowUserManager.class})
 public class EncryptionStatusPreferenceControllerTest {
 
@@ -55,11 +54,6 @@ public class EncryptionStatusPreferenceControllerTest {
                 new EncryptionStatusPreferenceController(mContext, PREF_KEY_ENCRYPTION_DETAIL_PAGE);
         mShadowUserManager = ShadowUserManager.getShadow();
         mPreference = new Preference(mContext);
-    }
-
-    @After
-    public void tearDown() {
-        mShadowUserManager.reset();
     }
 
     @Test

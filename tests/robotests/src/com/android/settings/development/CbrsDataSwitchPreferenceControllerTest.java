@@ -16,7 +16,6 @@
 
 package com.android.settings.development;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static com.google.common.truth.Truth.assertThat;
 
@@ -26,17 +25,15 @@ import android.telephony.TelephonyManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 
-@RunWith(SettingsRobolectricTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public final class CbrsDataSwitchPreferenceControllerTest {
 
     @Mock

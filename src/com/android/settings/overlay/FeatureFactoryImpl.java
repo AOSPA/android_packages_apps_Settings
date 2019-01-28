@@ -28,6 +28,8 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
+import com.android.settings.bluetooth.BluetoothFeatureProvider;
+import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl;
 import com.android.settings.core.instrumentation.SettingsMetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
@@ -40,8 +42,12 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProviderImpl;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProviderImpl;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProviderImpl;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProviderImpl;
+import com.android.settings.panel.PanelFeatureProvider;
+import com.android.settings.panel.PanelFeatureProviderImpl;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.security.SecurityFeatureProvider;
@@ -72,6 +78,9 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private UserFeatureProvider mUserFeatureProvider;
     private SlicesFeatureProvider mSlicesFeatureProvider;
     private AccountFeatureProvider mAccountFeatureProvider;
+    private PanelFeatureProvider mPanelFeatureProvider;
+    private ContextualCardFeatureProvider mContextualCardFeatureProvider;
+    private BluetoothFeatureProvider mBluetoothFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -208,5 +217,31 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mAccountFeatureProvider = new AccountFeatureProviderImpl();
         }
         return mAccountFeatureProvider;
+    }
+
+    @Override
+    public PanelFeatureProvider getPanelFeatureProvider() {
+        if (mPanelFeatureProvider == null) {
+            mPanelFeatureProvider = new PanelFeatureProviderImpl();
+        }
+        return mPanelFeatureProvider;
+    }
+
+    @Override
+    public ContextualCardFeatureProvider getContextualCardFeatureProvider(Context context) {
+        if (mContextualCardFeatureProvider == null) {
+            mContextualCardFeatureProvider = new ContextualCardFeatureProviderImpl(
+                    context.getApplicationContext());
+        }
+        return mContextualCardFeatureProvider;
+    }
+
+    @Override
+    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
+        if (mBluetoothFeatureProvider == null) {
+            mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl(
+                    context.getApplicationContext());
+        }
+        return mBluetoothFeatureProvider;
     }
 }
