@@ -34,6 +34,7 @@ import androidx.core.graphics.PathParser;
 
 import com.android.customization.model.CustomizationOption;
 import com.android.wallpaper.R;
+import com.android.wallpaper.asset.ResourceAsset;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -135,11 +136,13 @@ public class ThemeBundle implements CustomizationOption {
         public final List<Drawable> icons;
         public final Drawable shapeDrawable;
         @DrawableRes public final int wallpaperDrawableRes;
+        public final ResourceAsset colorPreviewDrawable;
+        public final ResourceAsset shapePreviewDrawable;
 
-        public PreviewInfo(Typeface bodyFontFamily, Typeface headlineFontFamily,
-                int colorAccentLight,
-                int colorAccentDark, List<Drawable> icons, Drawable shapeDrawable,
-                int wallpaperDrawableRes) {
+        private PreviewInfo(Typeface bodyFontFamily, Typeface headlineFontFamily,
+                int colorAccentLight, int colorAccentDark, List<Drawable> icons,
+                Drawable shapeDrawable, int wallpaperDrawableRes,
+                ResourceAsset colorPreviewDrawable, ResourceAsset shapePreviewDrawable) {
             this.bodyFontFamily = bodyFontFamily;
             this.headlineFontFamily = headlineFontFamily;
             this.colorAccentLight = colorAccentLight;
@@ -147,6 +150,8 @@ public class ThemeBundle implements CustomizationOption {
             this.icons = icons;
             this.shapeDrawable = shapeDrawable;
             this.wallpaperDrawableRes = wallpaperDrawableRes;
+            this.colorPreviewDrawable = colorPreviewDrawable;
+            this.shapePreviewDrawable = shapePreviewDrawable;
         }
     }
 
@@ -161,6 +166,8 @@ public class ThemeBundle implements CustomizationOption {
         private String mShapePath;
         private boolean mIsDefault;
         @DrawableRes private int mWallpaperDrawableResId;
+        private ResourceAsset mColorPreview;
+        private ResourceAsset mShapePreview;
 
         private String mFontOverlayPackage;
         private String mColorsPackage;
@@ -179,7 +186,8 @@ public class ThemeBundle implements CustomizationOption {
             return new ThemeBundle(mTitle, mFontOverlayPackage, mColorsPackage, mShapePackage,
                     mIconPackages, mIsDefault,
                     new PreviewInfo(mBodyFontFamily, mHeadlineFontFamily, mColorAccentLight,
-                            mColorAccentDark, mIcons, shapeDrawable, mWallpaperDrawableResId));
+                            mColorAccentDark, mIcons, shapeDrawable, mWallpaperDrawableResId,
+                            mColorPreview, mShapePreview));
         }
 
         public Builder setTitle(String title) {
@@ -234,6 +242,16 @@ public class ThemeBundle implements CustomizationOption {
 
         public Builder setShapePath(String path) {
             mShapePath = path;
+            return this;
+        }
+
+        public Builder setColorPreview(ResourceAsset colorPreview) {
+            mColorPreview = colorPreview;
+            return this;
+        }
+
+        public Builder setShapePreview(ResourceAsset shapePreview) {
+            mShapePreview = shapePreview;
             return this;
         }
 

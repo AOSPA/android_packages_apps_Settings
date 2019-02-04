@@ -26,6 +26,11 @@ public interface ResourceConstants {
     String ANDROID_PACKAGE = "android";
 
     /**
+     * Package name for android sysui resources.
+     */
+    String SYSUI_PACKAGE = "com.android.systemui";
+
+    /**
      * Name of the system resource for icon mask
      */
     String CONFIG_ICON_MASK = "config_icon_mask";

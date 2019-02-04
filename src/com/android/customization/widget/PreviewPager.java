@@ -21,6 +21,7 @@ import android.database.DataSetObserver;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
@@ -131,7 +132,10 @@ public class PreviewPager extends LinearLayout {
              @Override
              public void onPageScrolled(
                      int position, float positionOffset, int positionOffsetPixels) {
-                 mPageIndicator.setLocation(position + positionOffset);
+                 // For certain sizes, positionOffset never makes it to 1, so round it as we don't
+                 // need that much precision
+                 float location = (float)Math.round((position + positionOffset) * 100) / 100;
+                 mPageIndicator.setLocation(location);
                  if (mExternalPageListener != null) {
                      mExternalPageListener.onPageScrolled(position, positionOffset,
                              positionOffsetPixels);
@@ -162,10 +166,13 @@ public class PreviewPager extends LinearLayout {
 
     private void updateIndicator(int position) {
         int adapterCount = mAdapter.getCount();
-        if (adapterCount > 0) {
-            mPreviousArrow.setVisibility(position == 0 ? View.GONE : View.VISIBLE);
-            mNextArrow.setVisibility(
-                    position == (adapterCount - 1) ? View.GONE : View.VISIBLE);
+        if (adapterCount > 1) {
+            mPreviousArrow.setVisibility(View.VISIBLE);
+            mNextArrow.setVisibility(View.VISIBLE);
+            mPreviousArrow.setEnabled(position != 0);
+            ((ViewGroup) mPreviousArrow).getChildAt(0).setEnabled(position != 0);
+            mNextArrow.setEnabled(position != (adapterCount - 1));
+            ((ViewGroup) mNextArrow).getChildAt(0).setEnabled(position != (adapterCount - 1));
         } else {
             mPageIndicator.setVisibility(View.GONE);
             mPreviousArrow.setVisibility(View.GONE);
