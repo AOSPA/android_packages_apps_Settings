@@ -34,7 +34,7 @@ import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
 import com.android.customization.model.clock.ClockManager;
 import com.android.customization.model.clock.Clockface;
-import com.android.customization.model.clock.ResourcesApkClockProvider;
+import com.android.customization.model.clock.ContentProviderClockProvider;
 import com.android.customization.model.grid.GridOption;
 import com.android.customization.model.grid.GridOptionsManager;
 import com.android.customization.model.grid.LauncherGridOptionsProvider;
@@ -134,7 +134,8 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
             mSections.put(R.id.nav_theme, new ThemeSection(R.id.nav_theme, themeManager));
         }
         //Clock
-        ClockManager clockManager = new ClockManager(this, new ResourcesApkClockProvider(this));
+        //ClockManager clockManager = new ClockManager(this, new ResourcesApkClockProvider(this));
+        ClockManager clockManager = new ClockManager(this, new ContentProviderClockProvider(this));
         if (clockManager.isAvailable()) {
             mSections.put(R.id.nav_clock, new ClockSection(R.id.nav_clock, clockManager));
         }

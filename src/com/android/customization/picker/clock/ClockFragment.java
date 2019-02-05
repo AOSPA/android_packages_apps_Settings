@@ -16,7 +16,7 @@
 package com.android.customization.picker.clock;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +34,7 @@ import com.android.customization.picker.BasePreviewAdapter.PreviewPage;
 import com.android.customization.widget.OptionSelectorController;
 import com.android.customization.widget.PreviewPager;
 import com.android.wallpaper.R;
+import com.android.wallpaper.asset.Asset;
 import com.android.wallpaper.picker.ToolbarFragment;
 
 /**
@@ -111,17 +112,22 @@ public class ClockFragment extends ToolbarFragment {
 
     private static class ClockfacePreviewPage extends PreviewPage {
 
-        private final Drawable mPreview;
+        private final Asset mPreviewAsset;
 
-        public ClockfacePreviewPage(String title, Drawable previewDrawable) {
+        public ClockfacePreviewPage(String title, Asset previewAsset) {
             super(title);
-            mPreview = previewDrawable;
+            mPreviewAsset = previewAsset;
         }
 
         @Override
         public void bindPreviewContent() {
-            ((ImageView) card.findViewById(R.id.clock_preview_image))
-                    .setImageDrawable(mPreview);
+            ImageView previewImage = card.findViewById(R.id.clock_preview_image);
+            Context context = previewImage.getContext();
+            Resources res = previewImage.getResources();
+            mPreviewAsset.loadDrawableWithTransition(context, previewImage,
+                    100 /* transitionDurationMillis */,
+                    null /* drawableLoadedListener */,
+                    res.getColor(android.R.color.transparent, null) /* placeholderColor */);
         }
     }
 
@@ -133,7 +139,7 @@ public class ClockFragment extends ToolbarFragment {
     private static class ClockPreviewAdapter extends BasePreviewAdapter<ClockfacePreviewPage> {
         ClockPreviewAdapter(Context context, Clockface clockface) {
             super(context, R.layout.clock_preview_card);
-            addPage(new ClockfacePreviewPage(clockface.getTitle(), clockface.getPreviewDrawable()));
+            addPage(new ClockfacePreviewPage(clockface.getTitle(), clockface.getPreviewAsset()));
         }
     }
 }
