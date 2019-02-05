@@ -33,6 +33,7 @@ LOCAL_SDK_VERSION := system_current
 
 LOCAL_PACKAGE_NAME := ThemePicker
 LOCAL_PRIVILEGED_MODULE := true
+LOCAL_PRODUCT_MODULE := true
 LOCAL_OVERRIDES_PACKAGES := WallpaperPicker2
 
 LOCAL_SRC_FILES := $(call all-java-files-under, $(WALLPAPER_PATH)/src) \

@@ -16,6 +16,7 @@
 package com.android.customization.picker.grid;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -53,25 +54,36 @@ import com.bumptech.glide.request.RequestOptions;
  */
 public class GridFragment extends ToolbarFragment {
 
+    /**
+     * Interface to be implemented by an Activity hosting a {@link GridFragment}
+     */
+    public interface GridFragmentHost {
+        GridOptionsManager getGridOptionsManager();
+    }
+
+    public static GridFragment newInstance(CharSequence title) {
+        GridFragment fragment = new GridFragment();
+        fragment.setArguments(ToolbarFragment.createArguments(title));
+        return fragment;
+    }
+
     private boolean mIsWallpaperInfoReady;
     private WallpaperInfo mHomeWallpaper;
     private float mScreenAspectRatio;
     private int mPageHeight;
     private int mPageWidth;
     private GridPreviewAdapter mAdapter;
-
-    public static GridFragment newInstance(CharSequence title, GridOptionsManager manager) {
-        GridFragment fragment = new GridFragment();
-        fragment.setManager(manager);
-        fragment.setArguments(ToolbarFragment.createArguments(title));
-        return fragment;
-    }
-
     private RecyclerView mOptionsContainer;
     private OptionSelectorController mOptionsController;
     private GridOptionsManager mGridManager;
     private GridOption mSelectedOption;
     private PreviewPager mPreviewPager;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mGridManager = ((GridFragmentHost) context).getGridOptionsManager();
+    }
 
     @Nullable
     @Override
@@ -112,10 +124,6 @@ public class GridFragment extends ToolbarFragment {
             }
         });
         return view;
-    }
-
-    private void setManager(GridOptionsManager manager) {
-        mGridManager = manager;
     }
 
     private void createAdapter() {

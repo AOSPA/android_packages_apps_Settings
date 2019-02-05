@@ -17,12 +17,14 @@ package com.android.customization.picker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
+import androidx.core.os.BuildCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -40,8 +42,11 @@ import com.android.customization.model.theme.DefaultThemeProvider;
 import com.android.customization.model.theme.ThemeBundle;
 import com.android.customization.model.theme.ThemeManager;
 import com.android.customization.picker.clock.ClockFragment;
+import com.android.customization.picker.clock.ClockFragment.ClockFragmentHost;
 import com.android.customization.picker.grid.GridFragment;
+import com.android.customization.picker.grid.GridFragment.GridFragmentHost;
 import com.android.customization.picker.theme.ThemeFragment;
+import com.android.customization.picker.theme.ThemeFragment.ThemeFragmentHost;
 import com.android.wallpaper.R;
 import com.android.wallpaper.model.WallpaperInfo;
 import com.android.wallpaper.module.DailyLoggingAlarmScheduler;
@@ -67,9 +72,11 @@ import java.util.Map;
  *  Fragments providing customization options.
  */
 public class CustomizationPickerActivity extends FragmentActivity implements WallpapersUiContainer,
-        CategoryFragmentHost {
+        CategoryFragmentHost, ThemeFragmentHost, GridFragmentHost, ClockFragmentHost {
 
     private static final String TAG = "CustomizationPickerActivity";
+    private static final String THEMEPICKER_SYSTEM_PROPERTY =
+            "com.android.customization.picker.enable_customization";
 
     private WallpaperPickerDelegate mDelegate;
     private UserEventLogger mUserEventLogger;
@@ -92,22 +99,21 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
             Intent intent = new Intent(this, TopLevelPickerActivity.class);
             startActivity(intent);
             finish();
+        } else {
+            setContentView(R.layout.activity_customization_picker_main);
+            setUpBottomNavView();
+
+            FragmentManager fm = getSupportFragmentManager();
+            Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+
+            if (fragment == null) {
+                // App launch specific logic: log the "app launched" event and set up daily logging.
+                mUserEventLogger.logAppLaunched();
+                DailyLoggingAlarmScheduler.setAlarm(getApplicationContext());
+                // Navigate to the first available section
+                navigateToSection(mBottomNav.getMenu().getItem(0).getItemId());
+            }
         }
-
-        setContentView(R.layout.activity_customization_picker_main);
-        setUpBottomNavView();
-
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-
-        if (fragment == null) {
-            // App launch specific logic: log the "app launched" event and set up daily logging.
-            mUserEventLogger.logAppLaunched();
-            DailyLoggingAlarmScheduler.setAlarm(getApplicationContext());
-            navigateToSection(R.id.nav_theme);
-        }
-
-
     }
 
     private boolean supportsCustomization() {
@@ -116,6 +122,12 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     }
 
     private void initSections() {
+        if (!BuildCompat.isAtLeastQ()) {
+            return;
+        }
+        if (!Boolean.parseBoolean(SystemProperties.get(THEMEPICKER_SYSTEM_PROPERTY, "false"))) {
+            return;
+        }
         //Theme
         ThemeManager themeManager = new ThemeManager(new DefaultThemeProvider(this), this);
         if (themeManager.isAvailable()) {
@@ -213,6 +225,24 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         return mDelegate;
     }
 
+    @Override
+    public ClockManager getClockManager() {
+        CustomizationSection section = mSections.get(R.id.nav_clock);
+        return section == null ? null : (ClockManager) section.customizationManager;
+    }
+
+    @Override
+    public GridOptionsManager getGridOptionsManager() {
+        CustomizationSection section = mSections.get(R.id.nav_grid);
+        return section == null ? null : (GridOptionsManager) section.customizationManager;
+    }
+
+    @Override
+    public ThemeManager getThemeManager() {
+        CustomizationSection section = mSections.get(R.id.nav_theme);
+        return section == null ? null : (ThemeManager) section.customizationManager;
+    }
+
     /**
      * Represents a section of the Picker (eg "ThemeBundle", "Clock", etc).
      * There should be a concrete subclass per available section, providing the corresponding
@@ -224,11 +254,11 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
          * IdRes used to identify this section in the BottomNavigationView menu.
          */
         @IdRes final int id;
-        protected final CustomizationManager<T> mCustomizationManager;
+        protected final CustomizationManager<T> customizationManager;
 
         private CustomizationSection(@IdRes int id, CustomizationManager<T> manager) {
             this.id = id;
-            this.mCustomizationManager = manager;
+            this.customizationManager = manager;
         }
 
         /**
@@ -276,8 +306,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         @Override
         Fragment getFragment() {
             if (mFragment == null) {
-                mFragment = ThemeFragment.newInstance(getString(R.string.theme_title),
-                        (ThemeManager) mCustomizationManager);
+                mFragment = ThemeFragment.newInstance(getString(R.string.theme_title));
             }
             return mFragment;
         }
@@ -294,8 +323,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         @Override
         Fragment getFragment() {
             if (mFragment == null) {
-                mFragment = GridFragment.newInstance(getString(R.string.grid_title),
-                        (GridOptionsManager) mCustomizationManager);
+                mFragment = GridFragment.newInstance(getString(R.string.grid_title));
             }
             return mFragment;
         }
@@ -312,8 +340,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         @Override
         Fragment getFragment() {
             if (mFragment == null) {
-                mFragment = ClockFragment.newInstance(getString(R.string.clock_title),
-                        (ClockManager) mCustomizationManager);
+                mFragment = ClockFragment.newInstance(getString(R.string.clock_title));
             }
             return mFragment;
         }
