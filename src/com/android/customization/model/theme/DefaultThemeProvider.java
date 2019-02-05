@@ -66,7 +66,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     private static final String CONFIG_HEADLINE_FONT_FAMILY = "config_headlineFontFamily";
     private static final String[] SYSUI_ICONS_FOR_PREVIEW = {
             "ic_qs_bluetooth_on",
-            "ic_qs_dnd_on",
+            "ic_dnd",
             "ic_signal_flashlight",
             "ic_qs_auto_rotate",
             "ic_signal_airplane"
