@@ -179,7 +179,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                 String iconSysUiOverlayPackage = getOverlayPackage(ICON_SYSUI_PREFIX, themeName);
 
                 if (!TextUtils.isEmpty(iconSysUiOverlayPackage)) {
-                    builder.addOverlayPackage(getOverlayCategory(iconAndroidOverlayPackage),
+                    builder.addOverlayPackage(getOverlayCategory(iconSysUiOverlayPackage),
                             iconSysUiOverlayPackage);
                     for (String iconName : SYSUI_ICONS_FOR_PREVIEW) {
                         builder.addIcon(loadIconPreviewDrawable(iconName, iconSysUiOverlayPackage));
@@ -190,7 +190,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                         themeName);
 
                 if (!TextUtils.isEmpty(iconSettingsOverlayPackage)) {
-                    builder.addOverlayPackage(getOverlayCategory(iconAndroidOverlayPackage),
+                    builder.addOverlayPackage(getOverlayCategory(iconSettingsOverlayPackage),
                             iconSettingsOverlayPackage);
                 }
 
