@@ -19,6 +19,7 @@ package com.android.settings;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.AlertDialog;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.ContentResolver;
@@ -49,12 +50,10 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.ims.ImsManager;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.network.ApnSettings;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -334,6 +333,6 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.RESET_NETWORK_CONFIRM;
+        return SettingsEnums.RESET_NETWORK_CONFIRM;
     }
 }

@@ -18,19 +18,22 @@ package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.slices.SlicePreferenceController;
+import com.android.settings.slices.BlockingSlicePrefController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -42,6 +45,9 @@ import java.util.List;
 public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment {
     public static final String KEY_DEVICE_ADDRESS = "device_address";
     private static final String TAG = "BTDeviceDetailsFrg";
+
+    @VisibleForTesting
+    static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;
 
     /**
      * An interface to let tests override the normal mechanism for looking up the
@@ -106,14 +112,14 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         if (FeatureFlagUtils.isEnabled(context, FeatureFlags.SLICE_INJECTION)) {
             final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(context)
                     .getBluetoothFeatureProvider(context);
-            use(SlicePreferenceController.class).setSliceUri(
+            use(BlockingSlicePrefController.class).setSliceUri(
                     featureProvider.getBluetoothDeviceSettingsUri(mDeviceAddress));
         }
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.BLUETOOTH_DEVICE_DETAILS;
+        return SettingsEnums.BLUETOOTH_DEVICE_DETAILS;
     }
 
     @Override
@@ -124,6 +130,24 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.bluetooth_device_details_fragment;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem item = menu.add(0, EDIT_DEVICE_NAME_ITEM_ID, 0, R.string.bluetooth_rename_button);
+        item.setIcon(R.drawable.ic_mode_edit);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == EDIT_DEVICE_NAME_ITEM_ID) {
+            RemoteDeviceNameDialogFragment.newInstance(mCachedDevice).show(
+                    getFragmentManager(), RemoteDeviceNameDialogFragment.TAG);
+            return true;
+        }
+        return super.onOptionsItemSelected(menuItem);
     }
 
     @Override

@@ -16,6 +16,8 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
@@ -79,17 +81,6 @@ public class SliceContextualCardRendererTest {
     }
 
     @Test
-    public void bindView_shouldSetScrollableToFalse() {
-        RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
-
-        mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
-
-        assertThat(
-                ((SliceContextualCardRenderer.SliceViewHolder) viewHolder).sliceView.isScrollable
-                        ()).isFalse();
-    }
-
-    @Test
     public void bindView_invalidScheme_sliceShouldBeNull() {
         final Uri sliceUri = Uri.parse("contet://com.android.settings.slices/action/flashlight");
         RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
@@ -97,7 +88,7 @@ public class SliceContextualCardRendererTest {
         mRenderer.bindView(viewHolder, buildContextualCard(sliceUri));
 
         assertThat(
-                ((SliceContextualCardRenderer.SliceViewHolder) viewHolder).sliceView.getSlice())
+                ((SliceFullCardRendererHelper.SliceViewHolder) viewHolder).sliceView.getSlice())
                 .isNull();
     }
 
@@ -222,12 +213,12 @@ public class SliceContextualCardRendererTest {
     }
 
     private RecyclerView.ViewHolder getSliceViewHolder() {
-        final int viewType = mRenderer.getViewType(false /* isHalfWidth */);
         final RecyclerView recyclerView = new RecyclerView(mActivity);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        final View view = LayoutInflater.from(mActivity).inflate(viewType, recyclerView, false);
+        final View view = LayoutInflater.from(mActivity).inflate(VIEW_TYPE_FULL_WIDTH, recyclerView,
+                false);
 
-        return mRenderer.createViewHolder(view);
+        return mRenderer.createViewHolder(view, VIEW_TYPE_FULL_WIDTH);
     }
 
     private ContextualCard buildContextualCard(Uri sliceUri) {
@@ -235,6 +226,7 @@ public class SliceContextualCardRendererTest {
                 .setName("test_name")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(sliceUri)
+                .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build();
     }
 }

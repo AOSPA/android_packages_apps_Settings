@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -50,7 +51,6 @@ import android.widget.Toast;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.CommandException;
 import com.android.internal.telephony.IccCardConstants.State;
 import com.android.internal.telephony.Phone;
@@ -292,7 +292,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ICC_LOCK;
+        return SettingsEnums.ICC_LOCK;
     }
 
     @Override

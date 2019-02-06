@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.face;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
@@ -27,7 +28,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
@@ -66,7 +66,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                         .setText(R.string.security_settings_face_enroll_introduction_cancel)
                         .setListener(this::onCancelButtonClick)
                         .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SuwGlifButton_Secondary)
+                        .setTheme(R.style.SudGlifButton_Secondary)
                         .build()
         );
 
@@ -75,7 +75,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                         .setText(R.string.wizard_next)
                         .setListener(this::onNextButtonClick)
                         .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
     }
@@ -179,7 +179,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FACE_ENROLL_INTRO;
+        return SettingsEnums.FACE_ENROLL_INTRO;
     }
 
     @Override
