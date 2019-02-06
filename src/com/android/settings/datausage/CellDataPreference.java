@@ -14,6 +14,7 @@
 
 package com.android.settings.datausage;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.ContentObserver;
@@ -37,7 +38,6 @@ import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
@@ -132,8 +132,12 @@ public class CellDataPreference extends CustomDialogPreferenceCompat implements 
     @Override
     protected void performClick(View view) {
         final Context context = getContext();
+        // TODO (b/123905421): Clean up dead code path
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
-                .action(context, MetricsEvent.ACTION_CELL_DATA_TOGGLE, !mChecked);
+                .action(context, SettingsEnums.ACTION_CELL_DATA_TOGGLE, !mChecked);
+        final SubscriptionInfo currentSir = mSubscriptionManager.getActiveSubscriptionInfo(
+                mSubId);
+        final SubscriptionInfo nextSir = mSubscriptionManager.getDefaultDataSubscriptionInfo();
         if (mChecked) {
             super.performClick(view);
         } else {
@@ -174,6 +178,37 @@ public class CellDataPreference extends CustomDialogPreferenceCompat implements 
                 .setMessage(R.string.data_usage_disable_mobile)
                 .setPositiveButton(android.R.string.ok, listener)
                 .setNegativeButton(android.R.string.cancel, null);
+    }
+
+    // TODO (b/123905421): Clean up dead code path
+    private void showMultiSimDialog(Builder builder,
+            DialogInterface.OnClickListener listener) {
+        final SubscriptionInfo currentSir = mSubscriptionManager.getActiveSubscriptionInfo(mSubId);
+        final SubscriptionInfo nextSir = mSubscriptionManager.getDefaultDataSubscriptionInfo();
+
+        final String previousName = (nextSir == null)
+            ? getContext().getResources().getString(R.string.sim_selection_required_pref)
+            : nextSir.getDisplayName().toString();
+
+        builder.setTitle(R.string.sim_change_data_title);
+        builder.setMessage(getContext().getString(R.string.sim_change_data_message,
+                String.valueOf(currentSir != null ? currentSir.getDisplayName() : null),
+                previousName));
+
+        builder.setPositiveButton(R.string.okay, listener);
+        builder.setNegativeButton(R.string.cancel, null);
+    }
+
+    private void disableDataForOtherSubscriptions(int subId) {
+        List<SubscriptionInfo> subInfoList = mSubscriptionManager
+                .getActiveSubscriptionInfoList(true);
+        if (subInfoList != null) {
+            for (SubscriptionInfo subInfo : subInfoList) {
+                if (subInfo.getSubscriptionId() != subId) {
+                    mTelephonyManager.setDataEnabled(subInfo.getSubscriptionId(), false);
+                }
+            }
+        }
     }
 
     @Override

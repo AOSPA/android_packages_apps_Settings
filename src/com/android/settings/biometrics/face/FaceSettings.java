@@ -21,6 +21,7 @@ import static android.app.Activity.RESULT_OK;
 import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
@@ -29,13 +30,11 @@ import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.VideoPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
@@ -51,11 +50,10 @@ import java.util.List;
 public class FaceSettings extends DashboardFragment {
 
     private static final String TAG = "FaceSettings";
-    private static final String KEY_LAUNCHED_CONFIRM = "key_launched_confirm";
+    private static final String KEY_TOKEN = "key_token";
 
     private FaceManager mFaceManager;
     private int mUserId;
-    private boolean mLaunchedConfirm;
     private byte[] mToken;
     private FaceSettingsAttentionPreferenceController mAttentionController;
 
@@ -70,7 +68,7 @@ public class FaceSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FACE;
+        return SettingsEnums.FACE;
     }
 
     @Override
@@ -86,7 +84,7 @@ public class FaceSettings extends DashboardFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(KEY_LAUNCHED_CONFIRM, mLaunchedConfirm);
+        outState.putByteArray(KEY_TOKEN, mToken);
     }
 
     @Override
@@ -98,10 +96,10 @@ public class FaceSettings extends DashboardFragment {
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
 
         if (savedInstanceState != null) {
-            mLaunchedConfirm = savedInstanceState.getBoolean(KEY_LAUNCHED_CONFIRM, false);
+            mToken = savedInstanceState.getByteArray(KEY_TOKEN);
         }
 
-        if (!mLaunchedConfirm) {
+        if (mToken == null) {
             final long challenge = mFaceManager.generateChallenge();
             ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
             if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
@@ -110,6 +108,14 @@ public class FaceSettings extends DashboardFragment {
                 Log.e(TAG, "Password not set");
                 finish();
             }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mToken != null) {
+            mAttentionController.setToken(mToken);
         }
     }
 
@@ -166,12 +172,13 @@ public class FaceSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new FaceSettingsImprovePreferenceController(context));
+        controllers.add(new FaceSettingsVideoPreferenceController(context));
         controllers.add(new FaceSettingsKeyguardPreferenceController(context));
         controllers.add(new FaceSettingsAppPreferenceController(context));
         controllers.add(new FaceSettingsAttentionPreferenceController(context));
         controllers.add(new FaceSettingsRemoveButtonPreferenceController(context));
         controllers.add(new FaceSettingsFooterPreferenceController(context));
+        controllers.add(new FaceSettingsConfirmPreferenceController(context));
         return controllers;
     }
 

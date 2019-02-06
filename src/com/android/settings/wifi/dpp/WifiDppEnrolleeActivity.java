@@ -16,21 +16,26 @@
 
 package com.android.settings.wifi.dpp;
 
-import android.provider.Settings;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedActivity;
+
+import java.util.List;
+import java.util.concurrent.Executor;
 
 /**
  * To provision "this" device with specified Wi-Fi network.
@@ -49,9 +54,43 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
 
     private FragmentManager mFragmentManager;
 
+    private class EasyConnectStatusCallback extends android.net.wifi.EasyConnectStatusCallback {
+        @Override
+        public void onEnrolleeSuccess(int newNetworkId) {
+            // Connect to the new network.
+            final WifiManager wifiManager = getSystemService(WifiManager.class);
+            final List<WifiConfiguration> wifiConfigs =
+                    wifiManager.getPrivilegedConfiguredNetworks();
+            for (WifiConfiguration wifiConfig : wifiConfigs) {
+                if (wifiConfig.networkId == newNetworkId) {
+                    wifiManager.connect(wifiConfig, WifiDppEnrolleeActivity.this);
+                    return;
+                }
+            }
+            Log.e(TAG, "Invalid networkId " + newNetworkId);
+            WifiDppEnrolleeActivity.this.onFailure(WifiManager.ERROR_AUTHENTICATING);
+        }
+
+        @Override
+        public void onConfiguratorSuccess(int code) {
+            // Do nothing
+        }
+
+        @Override
+        public void onFailure(int code) {
+            //TODO(b/122429170): Show DPP enrollee error state UI
+            Log.d(TAG, "EasyConnectStatusCallback.onFailure " + code);
+        }
+
+        @Override
+        public void onProgress(int code) {
+            // Do nothing
+        }
+    }
+
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_ENROLLEE;
+        return SettingsEnums.SETTINGS_WIFI_DPP_ENROLLEE;
     }
 
     @Override
@@ -108,8 +147,10 @@ public class WifiDppEnrolleeActivity extends InstrumentedActivity implements
     }
 
     @Override
-    public void onScanWifiDppSuccess(String publicKey, String information) {
-        // TODO(b/1023597): starts DPP enrollee handshake here
+    public void onScanWifiDppSuccess(WifiQrCode wifiQrCode) {
+        final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        wifiManager.startEasyConnectAsEnrolleeInitiator(wifiQrCode.getQrCode(), getMainExecutor(),
+                new EasyConnectStatusCallback());
     }
 
     @Override

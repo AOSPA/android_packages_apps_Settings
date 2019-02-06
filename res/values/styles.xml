@@ -174,13 +174,13 @@
         <item name="android:background">#ff000000</item>
     </style>
 
-    <style name="SetupWizardButton.Negative" parent="@style/SuwGlifButton.Secondary">
+    <style name="SetupWizardButton.Negative" parent="@style/SudGlifButton.Secondary">
         <!-- Negative margin to offset for padding of the button itself. We want the label to be
              aligned with the text above it -->
         <item name="android:layout_marginStart">-16dp</item>
     </style>
 
-    <style name="SetupWizardButton.Positive" parent="@style/SuwGlifButton.Primary"/>
+    <style name="SetupWizardButton.Positive" parent="@style/SudGlifButton.Primary"/>
 
     <style name="AccentColorHighlightBorderlessButton">
         <item name="android:colorControlHighlight">?android:attr/colorAccent</item>
@@ -454,11 +454,13 @@
 
     <style name="ConditionFullCardBorderlessButton"
            parent="@style/ConditionCardBorderlessButton">
-        <item name="android:textAlignment">viewEnd</item>
+        <item name="android:minWidth">24dp</item>
+        <item name="android:layout_marginStart">20dp</item>
     </style>
 
     <style name="ContextualCardDismissalButton"
            parent="android:Widget.DeviceDefault.Button.Borderless.Colored">
+        <item name="android:minWidth">10dp</item>
         <item name="android:minHeight">16dp</item>
         <item name="android:textAllCaps">false</item>
     </style>

@@ -17,17 +17,25 @@
 package com.android.settings.fuelgauge.batterysaver;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
-import com.android.settings.widget.RadioButtonPickerFragment;
+
 import com.android.settings.R;
+import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 import com.android.settingslib.widget.CandidateInfo;
+
 import com.google.common.collect.Lists;
+
 import java.util.List;
 
 /**
@@ -56,6 +64,13 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
         mSeekBarController = new BatterySaverScheduleSeekBarController(context);
         mRadioButtonController = new BatterySaverScheduleRadioButtonsController(
                 context, mSeekBarController);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setDivider(new ColorDrawable(Color.TRANSPARENT));
+        setDividerHeight(0);
     }
 
     @Override

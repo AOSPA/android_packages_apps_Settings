@@ -267,6 +267,8 @@ public class WifiConfigController implements TextWatcher,
                 com.android.settings.core.FeatureFlags.WIFI_MAC_RANDOMIZATION)) {
             View privacySettingsLayout = mView.findViewById(R.id.privacy_settings_fields);
             privacySettingsLayout.setVisibility(View.VISIBLE);
+            // Set default value
+            mPrivacySettingsSpinner.setSelection(WifiConfiguration.RANDOMIZATION_PERSISTENT);
         }
         mHiddenSettingsSpinner.setOnItemSelectedListener(this);
         mHiddenWarningView = mView.findViewById(R.id.hidden_settings_warning);
@@ -388,9 +390,14 @@ public class WifiConfigController implements TextWatcher,
                     }
 
                     WifiInfo info = mAccessPoint.getInfo();
-                    if (info != null && info.getLinkSpeed() != -1) {
-                        addRow(group, R.string.wifi_speed, String.format(
-                                res.getString(R.string.link_speed), info.getLinkSpeed()));
+                    if (info != null && info.getTxLinkSpeedMbps() != -1) {
+                        addRow(group, R.string.tx_wifi_speed, String.format(
+                                res.getString(R.string.tx_link_speed), info.getTxLinkSpeedMbps()));
+                    }
+
+                    if (info != null && info.getRxLinkSpeedMbps() != -1) {
+                        addRow(group, R.string.rx_wifi_speed, String.format(
+                                res.getString(R.string.rx_link_speed), info.getRxLinkSpeedMbps()));
                     }
 
                     if (info != null && info.getFrequency() != -1) {
@@ -652,7 +659,7 @@ public class WifiConfigController implements TextWatcher,
                     config.requirePMF = true;
                     config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.GCMP_256);
                     config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.GCMP_256);
-                    config.allowedGroupMgmtCiphers.set(WifiConfiguration.GroupMgmtCipher
+                    config.allowedGroupManagementCiphers.set(WifiConfiguration.GroupMgmtCipher
                             .BIP_GMAC_256);
                     config.allowedSuiteBCiphers.set(WifiConfiguration.SuiteBCipher.ECDHE_RSA);
                 }

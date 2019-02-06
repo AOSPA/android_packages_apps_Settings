@@ -20,7 +20,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
@@ -73,16 +72,6 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
         mHeaderController.setIcon(pair.first);
         mHeaderController.setIconContentDescription(pair.second);
         mHeaderController.setSummary(summaryText);
-        mHeaderController.setEditListener(v -> showEditDeviceNameDialog());
-        mHeaderController.setButtonActions(
-                EntityHeaderController.ActionType.ACTION_EDIT_PREFERENCE,
-                EntityHeaderController.ActionType.ACTION_NONE);
-    }
-
-    @VisibleForTesting
-    void showEditDeviceNameDialog() {
-        RemoteDeviceNameDialogFragment.newInstance(mCachedDevice).show(
-                mFragment.getFragmentManager(), RemoteDeviceNameDialogFragment.TAG);
     }
 
     @Override

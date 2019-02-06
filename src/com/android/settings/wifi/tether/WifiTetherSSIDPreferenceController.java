@@ -18,7 +18,6 @@ package com.android.settings.wifi.tether;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.EditTextPreference;
@@ -53,10 +52,8 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
         final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
         if (config != null) {
             mSSID = config.SSID;
-            Log.d(TAG, "Updating SSID in Preference, " + mSSID);
         } else {
             mSSID = DEFAULT_SSID;
-            Log.d(TAG, "Updating to default SSID in Preference, " + mSSID);
         }
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
         updateSsidDisplay((EditTextPreference) mPreference);

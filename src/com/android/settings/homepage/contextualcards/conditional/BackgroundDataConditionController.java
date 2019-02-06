@@ -16,11 +16,11 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkPolicyManager;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.homepage.contextualcards.ContextualCard;
@@ -66,14 +66,14 @@ public class BackgroundDataConditionController implements ConditionalCardControl
     public ContextualCard buildContextualCard() {
         return new ConditionalContextualCard.Builder()
                 .setConditionId(ID)
-                .setMetricsConstant(MetricsProto.MetricsEvent.SETTINGS_CONDITION_BACKGROUND_DATA)
+                .setMetricsConstant(SettingsEnums.SETTINGS_CONDITION_BACKGROUND_DATA)
                 .setActionText(mAppContext.getText(R.string.condition_turn_off))
                 .setName(mAppContext.getPackageName() + "/"
                         + mAppContext.getText(R.string.condition_bg_data_title))
                 .setTitleText(mAppContext.getText(R.string.condition_bg_data_title).toString())
                 .setSummaryText(mAppContext.getText(R.string.condition_bg_data_summary).toString())
                 .setIconDrawable(mAppContext.getDrawable(R.drawable.ic_data_saver))
-                .setIsHalfWidth(true)
+                .setViewType(ConditionContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)
                 .build();
     }
 
