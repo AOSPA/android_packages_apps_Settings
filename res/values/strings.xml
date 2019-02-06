@@ -1,0 +1,84 @@
+<!--
+     Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- The name of this application, a theme picker. [CHAR LIMIT=50] -->
+    <string name="app_name">Styles &amp; wallpapers</string>
+
+    <!-- Title of a section of the customization picker where the user can select a Theme for the
+        device. [CHAR LIMIT=15] -->
+    <string name="theme_title">Style</string>
+
+    <!-- Title of a section of the customization picker where the user can select a Clock face.
+        [CHAR LIMIT=15] -->
+    <string name="clock_title">Clock</string>
+
+    <!-- Title of a section of the customization picker where the user can select a Grid size for
+        the home screen. [CHAR LIMIT=15] -->
+    <string name="grid_title">Grid</string>
+
+    <!-- Title of a section of the customization picker where the user can select a Wallpaper.
+        [CHAR LIMIT=15] -->
+    <string name="wallpaper_title">Wallpaper</string>
+
+    <!-- Label for a button that allows the user to apply the currently selected Theme.
+        [CHAR LIMIT=20] -->
+    <string name="apply_theme_btn">Apply</string>
+
+    <!-- Label for a button that allows the user to apply the currently selected customization option.
+        [CHAR LIMIT=20] -->
+    <string name="apply_btn">Apply</string>
+
+    <!-- Accessibility label for paging indicator in theme picker preview [CHAR LIMIT=NONE] -->
+    <string name="accessibility_preview_pager">Page <xliff:g name="current_page" example="1">%1$d</xliff:g> of <xliff:g name="num_pages" example="2">%2$d</xliff:g></string>
+    <!-- Content description of the next button to bring user to the next preview page.[CHAR LIMIT=NONE] -->
+    <string name="next_page_content_description">Next</string>
+    <!-- Content description of the previous button to bring user to the previous preview page. [CHAR LIMIT=NONE] -->
+    <string name="previous_page_content_description">Previous</string>
+
+    <!-- Sample text used to show a preview of a selected font [CHAR LIMIT=3] -->
+    <string name="theme_font_example">ABC</string>
+
+    <!-- Name for the Android Theme that comes preset with the device [CHAR LIMIT=10]-->
+    <string name="default_theme_title">Default</string>
+
+    <!-- Title of a page that shows the user the preview of a font selection [CHAR_LIMIT=20] -->
+    <string name="preview_name_font">Font</string>
+
+    <!-- Title of a page that shows the user the preview of a set of icons [CHAR_LIMIT=20] -->
+    <string name="preview_name_icon">Icon</string>
+
+    <!-- Title of a page that shows the user the preview of a color [CHAR_LIMIT=20] -->
+    <string name="preview_name_color">Color</string>
+
+    <!-- Title of a page that shows the user the preview of a set of icons' shape [CHAR_LIMIT=20] -->
+    <string name="preview_name_shape">Shape</string>
+
+    <!-- Title of a page that shows the user the preview of a wallpaper associated with a theme [CHAR_LIMIT=20] -->
+    <string name="preview_name_wallpaper">Wallpaper</string>
+
+    <!-- Title text for previewing a font [CHAR LIMIT=30] -->
+    <string name="font_card_title">Customize your device</string>
+
+    <!-- Body text for previewing a font [CHAR LIMIT=160] -->
+    <string name="font_card_body">Add your style to every screen with featured or custom designs that change your phone\'s home screen, icons and more</string>
+
+    <!--Title for a grid option, describing the number of columns and rows, eg: 4x4 [CHAR LIMIT=10] -->
+    <string name="grid_title_pattern"><xliff:g name="num_cols" example="1">%1$d</xliff:g>x<xliff:g name="num_rows" example="1">%2$d</xliff:g></string>
+
+    <!-- Message shown when a theme has been applied successfully in the system [CHAR LIMIT=NONE] -->
+    <string name="applied_theme_msg">Style applied</string>
+</resources>
