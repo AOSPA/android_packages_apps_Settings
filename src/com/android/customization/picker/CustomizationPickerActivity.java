@@ -16,8 +16,8 @@
 package com.android.customization.picker;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -75,8 +75,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         CategoryFragmentHost, ThemeFragmentHost, GridFragmentHost, ClockFragmentHost {
 
     private static final String TAG = "CustomizationPickerActivity";
-    private static final String THEMEPICKER_SYSTEM_PROPERTY =
-            "com.android.customization.picker.enable_customization";
+    private static final String WALLPAPER_ONLY_EXTRA = "wallpaper_only";
 
     private WallpaperPickerDelegate mDelegate;
     private UserEventLogger mUserEventLogger;
@@ -125,7 +124,10 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         if (!BuildCompat.isAtLeastQ()) {
             return;
         }
-        if (!Boolean.parseBoolean(SystemProperties.get(THEMEPICKER_SYSTEM_PROPERTY, "false"))) {
+        if (Build.TYPE.equals("user")) {
+            return;
+        }
+        if (getIntent().hasExtra(WALLPAPER_ONLY_EXTRA)) {
             return;
         }
         //Theme
