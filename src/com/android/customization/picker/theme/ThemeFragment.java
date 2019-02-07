@@ -15,10 +15,14 @@
  */
 package com.android.customization.picker.theme;
 
+import static android.app.WallpaperColors.HINT_SUPPORTS_DARK_THEME;
+
 import android.app.Activity;
+import android.app.WallpaperColors;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +46,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.model.theme.ThemeBundle;
+import com.android.customization.model.theme.ThemeBundle.PreviewInfo;
 import com.android.customization.model.theme.ThemeManager;
 import com.android.customization.picker.BasePreviewAdapter;
 import com.android.customization.picker.BasePreviewAdapter.PreviewPage;
@@ -252,37 +257,39 @@ public class ThemeFragment extends ToolbarFragment {
         ThemePreviewAdapter(Activity activity, ThemeBundle theme) {
             super(activity, R.layout.theme_preview_card);
             final Resources res = activity.getResources();
+            final PreviewInfo previewInfo = theme.getPreviewInfo();
             addPage(new ThemePreviewPage(activity, R.string.preview_name_font, R.drawable.ic_font,
-                    R.layout.preview_card_font_content, theme.getPreviewInfo().colorAccentLight) {
+                    R.layout.preview_card_font_content,
+                    previewInfo.resolveAccentColor(res)) {
                 @Override
                 protected void bindBody(boolean forceRebind) {
                     TextView title = card.findViewById(R.id.font_card_title);
-                    title.setTypeface(theme.getPreviewInfo().headlineFontFamily);
+                    title.setTypeface(previewInfo.headlineFontFamily);
                     TextView body = card.findViewById(R.id.font_card_body);
-                    body.setTypeface(theme.getPreviewInfo().bodyFontFamily);
+                    body.setTypeface(previewInfo.bodyFontFamily);
                 }
             });
-            if (theme.getPreviewInfo().icons.size() >= mIconIds.length) {
+            if (previewInfo.icons.size() >= mIconIds.length) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_icon,
                         R.drawable.ic_wifi_24px, R.layout.preview_card_icon_content,
-                        theme.getPreviewInfo().colorAccentLight) {
+                        previewInfo.colorAccentLight) {
                     @Override
                     protected void bindBody(boolean forceRebind) {
                         for (int i = 0; i < mIconIds.length; i++) {
                             ((ImageView) card.findViewById(mIconIds[i])).setImageDrawable(
-                                    theme.getPreviewInfo().icons.get(i));
+                                    previewInfo.icons.get(i));
                         }
                     }
                 });
             }
-            if (theme.getPreviewInfo().colorPreviewAsset != null) {
+            if (previewInfo.colorPreviewAsset != null) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_color,
                         R.drawable.ic_colorize_24px, R.layout.preview_card_static_content,
-                        theme.getPreviewInfo().colorAccentLight) {
+                        previewInfo.resolveAccentColor(res)) {
                     @Override
                     protected void bindBody(boolean forceRebind) {
                         ImageView staticImage = card.findViewById(R.id.preview_static_image);
-                        theme.getPreviewInfo().colorPreviewAsset.loadDrawable(activity,
+                        previewInfo.colorPreviewAsset.loadDrawable(activity,
                                 staticImage, card.getCardBackgroundColor().getDefaultColor());
                         staticImage.getLayoutParams().width = res.getDimensionPixelSize(
                                 R.dimen.color_preview_image_width);
@@ -291,14 +298,14 @@ public class ThemeFragment extends ToolbarFragment {
                     }
                 });
             }
-            if (theme.getPreviewInfo().shapePreviewAsset != null) {
+            if (previewInfo.shapePreviewAsset != null) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_shape,
                         R.drawable.ic_shapes_24px, R.layout.preview_card_static_content,
-                        theme.getPreviewInfo().colorAccentLight) {
+                        previewInfo.resolveAccentColor(res)) {
                     @Override
                     protected void bindBody(boolean forceRebind) {
                         ImageView staticImage = card.findViewById(R.id.preview_static_image);
-                        theme.getPreviewInfo().shapePreviewAsset.loadDrawable(activity,
+                        previewInfo.shapePreviewAsset.loadDrawable(activity,
                                 staticImage, card.getCardBackgroundColor().getDefaultColor());
 
                         staticImage.getLayoutParams().width = res.getDimensionPixelSize(
@@ -308,13 +315,13 @@ public class ThemeFragment extends ToolbarFragment {
                     }
                 });
             }
-            if (theme.getPreviewInfo().wallpaperAsset != null) {
+            if (previewInfo.wallpaperAsset != null) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_wallpaper,
                         R.drawable.ic_wallpaper_24px, R.layout.preview_card_wallpaper_content,
-                        theme.getPreviewInfo().colorAccentLight) {
+                        previewInfo.resolveAccentColor(res)) {
 
                     private final WallpaperPreviewLayoutListener  mListener =
-                            new WallpaperPreviewLayoutListener(theme);
+                            new WallpaperPreviewLayoutListener(theme, previewInfo);
 
                     @Override
                     protected boolean containsWallpaper() {
@@ -345,9 +352,11 @@ public class ThemeFragment extends ToolbarFragment {
 
         private static class WallpaperPreviewLayoutListener implements OnLayoutChangeListener {
             private final ThemeBundle mTheme;
+            private final PreviewInfo mPreviewInfo;
 
-            public WallpaperPreviewLayoutListener(ThemeBundle theme) {
+            public WallpaperPreviewLayoutListener(ThemeBundle theme, PreviewInfo previewInfo) {
                 mTheme = theme;
+                mPreviewInfo = previewInfo;
             }
 
             @Override
@@ -357,12 +366,27 @@ public class ThemeFragment extends ToolbarFragment {
                 int targetHeight = bottom - top;
                 if (targetWidth > 0 && targetHeight > 0) {
                     mTheme.getWallpaperPreviewAsset(view.getContext()).decodeBitmap(
-                            targetWidth, targetHeight, bitmap -> {
-                                Resources res = view.getContext().getResources();
-                                view.findViewById(R.id.theme_preview_card_background)
-                                        .setBackground(new BitmapDrawable(res, bitmap));
-                            });
+                            targetWidth, targetHeight, bitmap -> setWallpaperBitmap(view, bitmap));
                     view.removeOnLayoutChangeListener(this);
+                }
+            }
+
+            private void setWallpaperBitmap(View view, Bitmap bitmap) {
+                Resources res = view.getContext().getResources();
+                view.findViewById(
+                        R.id.theme_preview_card_background)
+                        .setBackground(
+                                new BitmapDrawable(res, bitmap));
+                int colorsHint = WallpaperColors.fromBitmap(bitmap).getColorHints();
+                TextView header = view.findViewById(R.id.theme_preview_card_header);
+                if ((colorsHint & WallpaperColors.HINT_SUPPORTS_DARK_TEXT) == 0) {
+                    header.setTextColor(res.getColor(R.color.text_color_light, null));
+                    header.setCompoundDrawableTintList(ColorStateList.valueOf(
+                            mPreviewInfo.colorAccentDark));
+                } else {
+                    header.setTextColor(res.getColor(R.color.text_color_dark, null));
+                    header.setCompoundDrawableTintList(ColorStateList.valueOf(
+                            mPreviewInfo.colorAccentLight));
                 }
             }
         }

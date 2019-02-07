@@ -17,6 +17,7 @@ package com.android.customization.model.theme;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -182,6 +183,17 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
             this.wallpaperAsset = wallpaperAsset;
             this.colorPreviewAsset = colorPreviewAsset;
             this.shapePreviewAsset = shapePreviewAsset;
+        }
+
+        /**
+         * Returns the accent color to be applied corresponding with the current configuration's
+         * UI mode.
+         * @return one of {@link #colorAccentDark} or {@link #colorAccentLight}
+         */
+        @ColorInt
+        public int resolveAccentColor(Resources res) {
+            return (res.getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                    == Configuration.UI_MODE_NIGHT_YES ? colorAccentDark : colorAccentLight;
         }
     }
 
