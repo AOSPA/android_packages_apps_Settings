@@ -16,25 +16,24 @@
 package com.android.customization.model.clock;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
 import com.android.wallpaper.R;
+import com.android.wallpaper.asset.Asset;
 
-public class Clockface implements CustomizationOption {
+public class Clockface implements CustomizationOption<Clockface> {
 
-    // TODO: use constant from Settings.Secure
-    static final String CLOCK_FACE_SETTING = "lock_screen_custom_clock_face";
     private final String mTitle;
     private final String mId;
-    private final Drawable mPreview;
-    private final Drawable mThumbnail;
+    private final Asset mPreview;
+    private final Asset mThumbnail;
 
-    private Clockface(String title, String id, Drawable preview, Drawable thumbnail) {
+    private Clockface(String title, String id, Asset preview, Asset thumbnail) {
         mTitle = title;
         mId = id;
         mPreview = preview;
@@ -48,13 +47,14 @@ public class Clockface implements CustomizationOption {
 
     @Override
     public void bindThumbnailTile(View view) {
-        ((ImageView) view.findViewById(R.id.clock_option_thumbnail)).setImageDrawable(mThumbnail);
+        ImageView thumbView = view.findViewById(R.id.clock_option_thumbnail);
+        mThumbnail.loadDrawableWithTransition(thumbView.getContext(), thumbView, 50, null,
+                thumbView.getResources().getColor(android.R.color.transparent, null));
     }
 
     @Override
-    public boolean isActive(Context context) {
-        String currentClock = Secure.getString(context.getContentResolver(),
-                Clockface.CLOCK_FACE_SETTING);
+    public boolean isActive(CustomizationManager<Clockface> manager) {
+        String currentClock = ((ClockManager) manager).getCurrentClock();
         // Empty clock Id is the default system clock
         return (TextUtils.isEmpty(currentClock) && TextUtils.isEmpty(mId))
                 || (mId != null && mId.equals(currentClock));
@@ -65,7 +65,7 @@ public class Clockface implements CustomizationOption {
         return R.layout.clock_option;
     }
 
-    public Drawable getPreviewDrawable() {
+    public Asset getPreviewAsset() {
         return mPreview;
     }
 
@@ -76,8 +76,8 @@ public class Clockface implements CustomizationOption {
     public static class Builder {
         private String mTitle;
         private String mId;
-        private Drawable mPreview;
-        private Drawable mThumbnail;
+        private Asset mPreview;
+        private Asset mThumbnail;
 
         public Clockface build() {
             return new Clockface(mTitle, mId, mPreview, mThumbnail);
@@ -93,12 +93,12 @@ public class Clockface implements CustomizationOption {
             return this;
         }
 
-        public Builder setPreview(Drawable preview) {
+        public Builder setPreview(Asset preview) {
             mPreview = preview;
             return this;
         }
 
-        public Builder setThumbnail(Drawable thumbnail) {
+        public Builder setThumbnail(Asset thumbnail) {
             mThumbnail = thumbnail;
             return this;
         }

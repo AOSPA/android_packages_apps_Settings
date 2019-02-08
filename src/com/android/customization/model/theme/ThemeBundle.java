@@ -15,7 +15,6 @@
  */
 package com.android.customization.model.theme;
 
-import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Typeface;
@@ -32,39 +31,38 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.PathParser;
 
+import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.ResourceAsset;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a Theme component available in the system as a "persona" bundle.
  * Note that in this context a Theme is not related to Android's Styles, but it's rather an
  * abstraction representing a series of overlays to be applied to the system.
  */
-public class ThemeBundle implements CustomizationOption {
+public class ThemeBundle implements CustomizationOption<ThemeBundle> {
 
     private final String mTitle;
     private final PreviewInfo mPreviewInfo;
-    private final String mFontOverlayPackage;
-    private final String mColorOverlayPackage;
-    private final String mShapeOverlayPackage;
-    private final List<String> mIconOverlayPackages;
     private final boolean mIsDefault;
+    private final Map<String, String> mPackagesByCategory;
 
-    private ThemeBundle(String title, @Nullable String fontOverlayPackage,
-            @Nullable String colorOverlayPackage, @Nullable String shapeOverlayPackage,
-            List<String> iconOverlayPackages, boolean isDefault, PreviewInfo previewInfo) {
+    private ThemeBundle(String title, Map<String, String> overlayPackages,
+            boolean isDefault, PreviewInfo previewInfo) {
         mTitle = title;
-        mFontOverlayPackage = fontOverlayPackage;
-        mColorOverlayPackage = colorOverlayPackage;
-        mShapeOverlayPackage = shapeOverlayPackage;
-        mIconOverlayPackages = Collections.unmodifiableList(iconOverlayPackages);
         mIsDefault = isDefault;
         mPreviewInfo = previewInfo;
+        mPackagesByCategory = Collections.unmodifiableMap(overlayPackages);
     }
 
     @Override
@@ -95,8 +93,16 @@ public class ThemeBundle implements CustomizationOption {
     }
 
     @Override
-    public boolean isActive(Context context) {
-        return false;
+    public boolean isActive(CustomizationManager<ThemeBundle> manager) {
+        ThemeManager themeManager = (ThemeManager) manager;
+        String serializedOverlays = themeManager.getStoredOverlays();
+
+        if (mIsDefault) {
+            return TextUtils.isEmpty(serializedOverlays);
+        } else {
+            Map<String, String> currentOverlays = themeManager.getCurrentOverlays();
+            return mPackagesByCategory.equals(currentOverlays);
+        }
     }
 
     @Override
@@ -108,24 +114,20 @@ public class ThemeBundle implements CustomizationOption {
         return mPreviewInfo;
     }
 
-    String getFontOverlayPackage() {
-        return mFontOverlayPackage;
-    }
-
-    String getColorOverlayPackage() {
-        return mColorOverlayPackage;
-    }
-
-    String getShapeOverlayPackage() {
-        return mShapeOverlayPackage;
-    }
-
-    List<String> getIconOverlayPackages() {
-        return mIconOverlayPackages;
-    }
-
     boolean isDefault() {
         return mIsDefault;
+    }
+
+    Collection<String> getAllPackages() {
+        return mPackagesByCategory.values();
+    }
+
+    String getSerializedPackages() {
+        if (isDefault()) {
+            return "";
+        }
+
+        return new JSONObject(mPackagesByCategory).toString();
     }
 
     public static class PreviewInfo {
@@ -168,11 +170,7 @@ public class ThemeBundle implements CustomizationOption {
         @DrawableRes private int mWallpaperDrawableResId;
         private ResourceAsset mColorPreview;
         private ResourceAsset mShapePreview;
-
-        private String mFontOverlayPackage;
-        private String mColorsPackage;
-        private List<String> mIconPackages = new ArrayList<>();
-        private String mShapePackage;
+        private Map<String, String> mPackages = new HashMap<>();
 
         public ThemeBundle build() {
             ShapeDrawable shapeDrawable = null;
@@ -183,8 +181,7 @@ public class ThemeBundle implements CustomizationOption {
                 shapeDrawable.setIntrinsicHeight((int) PATH_SIZE);
                 shapeDrawable.setIntrinsicWidth((int) PATH_SIZE);
             }
-            return new ThemeBundle(mTitle, mFontOverlayPackage, mColorsPackage, mShapePackage,
-                    mIconPackages, mIsDefault,
+            return new ThemeBundle(mTitle, mPackages, mIsDefault,
                     new PreviewInfo(mBodyFontFamily, mHeadlineFontFamily, mColorAccentLight,
                             mColorAccentDark, mIcons, shapeDrawable, mWallpaperDrawableResId,
                             mColorPreview, mShapePreview));
@@ -195,11 +192,6 @@ public class ThemeBundle implements CustomizationOption {
             return this;
         }
 
-        public Builder setFontOverlayPackage(String packageName) {
-            mFontOverlayPackage = packageName;
-            return this;
-        }
-
         public Builder setBodyFontFamily(@Nullable Typeface bodyFontFamily) {
             mBodyFontFamily = bodyFontFamily;
             return this;
@@ -207,11 +199,6 @@ public class ThemeBundle implements CustomizationOption {
 
         public Builder setHeadlineFontFamily(@Nullable Typeface headlineFontFamily) {
             mHeadlineFontFamily = headlineFontFamily;
-            return this;
-        }
-
-        public Builder setColorPackage(String packageName) {
-            mColorsPackage = packageName;
             return this;
         }
 
@@ -230,13 +217,8 @@ public class ThemeBundle implements CustomizationOption {
             return this;
         }
 
-        public Builder addIconPackage(String packageName) {
-            mIconPackages.add(packageName);
-            return this;
-        }
-
-        public Builder setShapePackage(String packageName) {
-            mShapePackage = packageName;
+        public Builder addOverlayPackage(String category, String packageName) {
+            mPackages.put(category, packageName);
             return this;
         }
 
