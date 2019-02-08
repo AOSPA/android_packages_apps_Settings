@@ -225,6 +225,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                         e);
             }
         }
+        addCustomTheme();
     }
 
     /**
@@ -360,6 +361,11 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         }
 
         mThemes.add(builder.build());
+    }
+
+    private void addCustomTheme() {
+        mThemes.add(new CustomTheme(mContext.getString(R.string.custom_theme_title),
+                new HashMap<>(), null));
     }
 
     private String getOverlayPackage(String prefix, String themeName) {
