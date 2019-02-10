@@ -17,8 +17,10 @@ package com.android.customization.widget;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,14 +41,19 @@ import com.android.wallpaper.R;
  */
 public class PreviewPager extends LinearLayout {
 
+    private static final int STYLE_PEEKING = 0;
+    private static final int STYLE_ASPECT_RATIO = 1;
+
     private final ViewPager mViewPager;
     private final PageIndicator mPageIndicator;
     private final View mPreviousArrow;
     private final View mNextArrow;
     private final ViewPager.OnPageChangeListener mPageListener;
+    private int mPageStyle;
 
     private PagerAdapter mAdapter;
     private ViewPager.OnPageChangeListener mExternalPageListener;
+    private float mScreenAspectRatio;
 
     public PreviewPager(Context context) {
         this(context, null);
@@ -60,14 +67,30 @@ public class PreviewPager extends LinearLayout {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.preview_pager, this);
         Resources res = context.getResources();
+        TypedArray a = context.obtainStyledAttributes(attrs,
+                R.styleable.PreviewPager, defStyleAttr, 0);
+
+        mPageStyle = a.getInteger(R.styleable.PreviewPager_card_style, STYLE_PEEKING);
 
         mViewPager = findViewById(R.id.preview_viewpager);
         mViewPager.setPageMargin(res.getDimensionPixelOffset(R.dimen.preview_page_gap));
         mViewPager.setClipToPadding(false);
-        mViewPager.setPadding(res.getDimensionPixelOffset(R.dimen.preview_page_horizontal_margin),
-                res.getDimensionPixelOffset(R.dimen.preview_page_top_margin),
-                res.getDimensionPixelOffset(R.dimen.preview_page_horizontal_margin),
-                res.getDimensionPixelOffset(R.dimen.preview_page_bottom_margin));
+        if (mPageStyle == STYLE_PEEKING) {
+            mViewPager.setPadding(
+                    res.getDimensionPixelOffset(R.dimen.preview_page_horizontal_margin),
+                    res.getDimensionPixelOffset(R.dimen.preview_page_top_margin),
+                    res.getDimensionPixelOffset(R.dimen.preview_page_horizontal_margin),
+                    res.getDimensionPixelOffset(R.dimen.preview_page_bottom_margin));
+        } else if (mPageStyle == STYLE_ASPECT_RATIO) {
+            DisplayMetrics dm = res.getDisplayMetrics();
+            mScreenAspectRatio = (float) dm.heightPixels / dm.widthPixels;
+            mViewPager.setPadding(
+                    0,
+                    res.getDimensionPixelOffset(R.dimen.preview_page_top_margin),
+                    0,
+                    res.getDimensionPixelOffset(R.dimen.preview_page_bottom_margin));
+
+        }
         mPageIndicator = findViewById(R.id.page_indicator);
         mPreviousArrow = findViewById(R.id.arrow_previous);
         mPreviousArrow.setOnClickListener(v -> {
@@ -81,6 +104,27 @@ public class PreviewPager extends LinearLayout {
         });
         mPageListener = createPageListener();
         mViewPager.addOnPageChangeListener(mPageListener);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        if (mPageStyle == STYLE_ASPECT_RATIO && mViewPager.getPaddingStart() == 0) {
+            int availableWidth = MeasureSpec.getSize(widthMeasureSpec);
+            int availableHeight = MeasureSpec.getSize(heightMeasureSpec);
+            int indicatorHeight = ((View) mPageIndicator.getParent()).getLayoutParams().height;
+            int pagerHeight = availableHeight - indicatorHeight;
+            if (availableWidth > 0) {
+                int absoluteCardWidth = (int) ((pagerHeight - mViewPager.getPaddingBottom()
+                        - mViewPager.getPaddingTop())/ mScreenAspectRatio);
+                int hPadding = (availableWidth / 2) - (absoluteCardWidth / 2);
+                mViewPager.setPaddingRelative(
+                        hPadding,
+                        mViewPager.getPaddingTop(),
+                        hPadding,
+                        mViewPager.getPaddingBottom());
+            }
+        }
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     public void forceCardWidth(int widthPixels) {
