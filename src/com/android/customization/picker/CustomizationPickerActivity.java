@@ -75,7 +75,8 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         CategoryFragmentHost, ThemeFragmentHost, GridFragmentHost, ClockFragmentHost {
 
     private static final String TAG = "CustomizationPickerActivity";
-    private static final String WALLPAPER_ONLY_EXTRA = "wallpaper_only";
+    private static final String WALLPAPER_FLAVOR_EXTRA = "com.android.launcher3.WALLPAPER_FLAVOR";
+    private static final String WALLPAPER_ONLY = "wallpaper_only";
 
     private WallpaperPickerDelegate mDelegate;
     private UserEventLogger mUserEventLogger;
@@ -95,9 +96,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
         if (!supportsCustomization()) {
             Log.w(TAG, "Themes not supported, reverting to Wallpaper Picker");
-            Intent intent = new Intent(this, TopLevelPickerActivity.class);
-            startActivity(intent);
-            finish();
+            skipToWallpaperPicker();
         } else {
             setContentView(R.layout.activity_customization_picker_main);
             setUpBottomNavView();
@@ -115,19 +114,34 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         }
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (WALLPAPER_ONLY.equals(intent.getStringExtra(WALLPAPER_FLAVOR_EXTRA))) {
+            skipToWallpaperPicker();
+        }
+    }
+
+    private void skipToWallpaperPicker() {
+        Intent intent = new Intent(this, TopLevelPickerActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private boolean supportsCustomization() {
         return mDelegate.getFormFactor() == FormFactorChecker.FORM_FACTOR_MOBILE
                 && mSections.size() > 1;
     }
 
     private void initSections() {
+        mSections.clear();
         if (!BuildCompat.isAtLeastQ()) {
             return;
         }
         if (Build.TYPE.equals("user")) {
             return;
         }
-        if (getIntent().hasExtra(WALLPAPER_ONLY_EXTRA)) {
+        if (WALLPAPER_ONLY.equals(getIntent().getStringExtra(WALLPAPER_FLAVOR_EXTRA))) {
             return;
         }
         //Theme
