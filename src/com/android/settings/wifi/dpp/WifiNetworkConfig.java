@@ -17,8 +17,9 @@
 package com.android.settings.wifi.dpp;
 
 import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_NO_PASSWORD;
+import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_SAE;
 import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_WEP;
-import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_WPA;
+import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_WPA_PSK;
 
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +42,9 @@ import androidx.annotation.VisibleForTesting;
  * EXTRA_QR_CODE
  */
 public class WifiNetworkConfig {
+
+    static final String FAKE_SSID = "fake network";
+    static final String FAKE_PASSWORD = "password";
     private static final String TAG = "WifiNetworkConfig";
 
     private String mSecurity;
@@ -49,8 +53,8 @@ public class WifiNetworkConfig {
     private boolean mHiddenSsid;
     private int mNetworkId;
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    protected WifiNetworkConfig(String security, String ssid, String preSharedKey,
+    @VisibleForTesting
+    WifiNetworkConfig(String security, String ssid, String preSharedKey,
             boolean hiddenSsid, int networkId) {
         mSecurity = security;
         mSsid = ssid;
@@ -208,6 +212,19 @@ public class WifiNetworkConfig {
         wifiManager.connect(wifiConfiguration, listener);
     }
 
+    public boolean isSupportConfiguratorQrCodeScanner(Context context) {
+        if (!WifiDppUtils.isWifiDppEnabled(context)) {
+            return false;
+        }
+
+        // DPP 1.0 only supports SAE and PSK.
+        if (SECURITY_SAE.equals(mSecurity) || SECURITY_WPA_PSK.equals(mSecurity)) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * This is a simplified method from {@code WifiConfigController.getConfig()}
      */
@@ -239,7 +256,7 @@ public class WifiNetworkConfig {
             } else {
                 wifiConfiguration.wepKeys[0] = addQuotationIfNeeded(mPreSharedKey);
             }
-        } else if (mSecurity.startsWith(SECURITY_WPA)) {
+        } else if (mSecurity.startsWith(SECURITY_WPA_PSK)) {
             wifiConfiguration.allowedKeyManagement.set(KeyMgmt.WPA_PSK);
 
             if (mPreSharedKey.matches("[0-9A-Fa-f]{64}")) {

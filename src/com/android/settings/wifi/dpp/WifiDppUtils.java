@@ -29,6 +29,8 @@ import java.util.List;
 
 /**
  * Here are the items shared by both WifiDppConfiguratorActivity & WifiDppEnrolleeActivity
+ *
+ * @see WifiQrCode
  */
 public class WifiDppUtils {
     /**
@@ -67,8 +69,9 @@ public class WifiDppUtils {
     /** The data corresponding to {@code WifiConfiguration} networkId */
     public static final String EXTRA_WIFI_NETWORK_ID = "networkId";
 
-    /** @see WifiQrCode */
-    public static final String EXTRA_QR_CODE = "qrCode";
+    /** Used by {@link android.provider.Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE} to
+     * indicate test mode UI should be shown. Test UI does not make API calls. Value is a boolean.*/
+    public static final String EXTRA_TEST = "test";
 
     /**
      * Returns whether the user can share the network represented by this preference with QR code.
@@ -134,26 +137,36 @@ public class WifiDppUtils {
     private static String getSecurityString(AccessPoint accessPoint) {
         switch(accessPoint.getSecurity()) {
             case AccessPoint.SECURITY_WEP:
-                return "WEP";
+                return WifiQrCode.SECURITY_WEP;
             case AccessPoint.SECURITY_PSK:
-                return "WPA";
+                return WifiQrCode.SECURITY_WPA_PSK;
+            case AccessPoint.SECURITY_SAE:
+                return WifiQrCode.SECURITY_SAE;
             default:
-                return "nopass";
+                return WifiQrCode.SECURITY_NO_PASSWORD;
         }
     }
 
     /**
-     * Returns an intent to launch QR code generator.
+     * Returns an intent to launch QR code generator or scanner according to the Wi-Fi network
+     * security. It may return null if the security is not supported by QR code generator nor
+     * scanner.
      *
      * @param context     The context to use for the content resolver
      * @param wifiManager An instance of {@link WifiManager}
      * @param accessPoint An instance of {@link AccessPoint}
      * @return Intent for launching QR code generator
      */
-    public static Intent getConfiguratorQrCodeGeneratorIntent(Context context,
+    public static Intent getConfiguratorIntentOrNull(Context context,
             WifiManager wifiManager, AccessPoint accessPoint) {
         final Intent intent = new Intent(context, WifiDppConfiguratorActivity.class);
-        intent.setAction(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
+        if (isSupportConfiguratorQrCodeGenerator(accessPoint)) {
+            intent.setAction(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
+        } else if (isSupportConfiguratorQrCodeScanner(context, accessPoint)) {
+            intent.setAction(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
+        } else {
+            return null;
+        }
 
         final WifiConfiguration wifiConfig = accessPoint.getConfig();
         final String ssid = removeFirstAndLastDoubleQuotes(wifiConfig.SSID);
@@ -182,5 +195,44 @@ public class WifiDppUtils {
         }
 
         return intent;
+    }
+
+    /**
+     * Android Q supports Wi-Fi configurator by:
+     *
+     * 1. QR code generator of ZXing's Wi-Fi network config format.
+     * and
+     * 2. QR code scanner of Wi-Fi DPP QR code format.
+     */
+    public static boolean isSuportConfigurator(Context context, AccessPoint accessPoint) {
+        return isSupportConfiguratorQrCodeScanner(context, accessPoint) ||
+                isSupportConfiguratorQrCodeGenerator(accessPoint);
+    }
+
+    private static boolean isSupportConfiguratorQrCodeScanner(Context context,
+            AccessPoint accessPoint) {
+        if (!isWifiDppEnabled(context)) {
+            return false;
+        }
+
+        // DPP 1.0 only supports SAE and PSK.
+        final int security = accessPoint.getSecurity();
+        if (security == AccessPoint.SECURITY_SAE || security == AccessPoint.SECURITY_PSK) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private static boolean isSupportConfiguratorQrCodeGenerator(AccessPoint accessPoint) {
+        // QR code generator produces QR code with ZXing's Wi-Fi network config format,
+        // it supports PSK and WEP and non security
+        final int security = accessPoint.getSecurity();
+        if (security == AccessPoint.SECURITY_PSK || security == AccessPoint.SECURITY_WEP ||
+                security == AccessPoint.SECURITY_NONE) {
+            return true;
+        }
+
+        return false;
     }
 }

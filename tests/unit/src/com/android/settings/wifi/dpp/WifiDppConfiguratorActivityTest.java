@@ -18,12 +18,18 @@ package com.android.settings.wifi.dpp;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.app.Instrumentation;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.RemoteException;
+import android.provider.Settings;
+import android.support.test.uiautomator.UiDevice;
 
+import androidx.test.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +43,13 @@ public class WifiDppConfiguratorActivityTest {
     @Rule
     public final ActivityTestRule<WifiDppConfiguratorActivity> mActivityRule =
             new ActivityTestRule<>(WifiDppConfiguratorActivity.class);
+
+    private UiDevice mDevice;
+
+    @Before
+    public void setUp() {
+        mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+    }
 
     @Test
     public void launchActivity_qrCodeScanner_shouldNotAutoFinish() {
@@ -65,9 +78,8 @@ public class WifiDppConfiguratorActivityTest {
 
     @Test
     public void launchActivity_chooseSavedWifiNetwork_shouldNotAutoFinish() {
-        Intent intent = new Intent(
-                WifiDppConfiguratorActivity.ACTION_PROCESS_WIFI_DPP_QR_CODE);
-        intent.putExtra(WifiDppUtils.EXTRA_QR_CODE, VALID_WIFI_DPP_QR_CODE);
+        Intent intent = new Intent(Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE);
+        intent.putExtra(Settings.EXTRA_QR_CODE, VALID_WIFI_DPP_QR_CODE);
 
         mActivityRule.launchActivity(intent);
 
@@ -124,12 +136,17 @@ public class WifiDppConfiguratorActivityTest {
         // setWifiDppQrCode and check if getWifiDppQrCode correctly after rotation
         mActivityRule.launchActivity(intent);
         mActivityRule.getActivity().setWifiDppQrCode(wifiQrCode);
-        mActivityRule.getActivity().setRequestedOrientation(
-                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        mActivityRule.getActivity().setRequestedOrientation(
-                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        WifiQrCode restoredWifiDppQrCode = mActivityRule.getActivity().getWifiDppQrCode();
 
+        try {
+            mDevice.setOrientationLeft();
+            mDevice.setOrientationNatural();
+            mDevice.setOrientationRight();
+            mDevice.setOrientationNatural();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+
+        WifiQrCode restoredWifiDppQrCode = mActivityRule.getActivity().getWifiDppQrCode();
         assertThat(restoredWifiDppQrCode).isNotNull();
         assertThat(restoredWifiDppQrCode.getQrCode()).isEqualTo(VALID_WIFI_DPP_QR_CODE);
     }
@@ -138,17 +155,22 @@ public class WifiDppConfiguratorActivityTest {
     public void rotateScreen_shouldGetCorrectWifiNetworkConfig() {
         WifiNetworkConfig wifiNetworkConfig = new WifiNetworkConfig("WPA", "WifiSsid", "password",
                 /* hiddenSsid */ false, /* networkId */ 0);
-        Intent intent = new Intent(
-                WifiDppConfiguratorActivity.ACTION_PROCESS_WIFI_DPP_QR_CODE);
-        intent.putExtra(WifiDppUtils.EXTRA_QR_CODE, VALID_WIFI_DPP_QR_CODE);
+        Intent intent = new Intent(Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE);
+        intent.putExtra(Settings.EXTRA_QR_CODE, VALID_WIFI_DPP_QR_CODE);
 
         // setWifiNetworkConfig and check if getWifiNetworkConfig correctly after rotation
         mActivityRule.launchActivity(intent);
         mActivityRule.getActivity().setWifiNetworkConfig(wifiNetworkConfig);
-        mActivityRule.getActivity().setRequestedOrientation(
-                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        mActivityRule.getActivity().setRequestedOrientation(
-                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        try {
+            mDevice.setOrientationLeft();
+            mDevice.setOrientationNatural();
+            mDevice.setOrientationRight();
+            mDevice.setOrientationNatural();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+
         WifiNetworkConfig restoredWifiNetworkConfig =
                 mActivityRule.getActivity().getWifiNetworkConfig();
 

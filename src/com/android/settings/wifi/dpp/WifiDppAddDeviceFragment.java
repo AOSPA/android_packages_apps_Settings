@@ -55,6 +55,7 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
         @Override
         public void onConfiguratorSuccess(int code) {
             // Update success UI.
+            setHeaderIconImageResource(R.drawable.ic_devices_check_circle_green);
             mTitle.setText(R.string.wifi_dpp_wifi_shared_with_device);
             mSummary.setVisibility(View.INVISIBLE);
             mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_success);
@@ -62,7 +63,11 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
             mButtonLeft.setText(R.string.wifi_dpp_add_another_device);
             mButtonLeft.setOnClickListener(v -> getFragmentManager().popBackStack());
             mButtonRight.setText(R.string.done);
-            mButtonRight.setOnClickListener(v -> getActivity().finish());
+            mButtonRight.setOnClickListener(v -> {
+                final Activity activity = getActivity();
+                activity.setResult(Activity.RESULT_OK);
+                activity.finish();
+            });
         }
 
         @Override
@@ -109,6 +114,8 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setHeaderIconImageResource(R.drawable.ic_devices_other_opaque_black);
+
         final WifiQrCode wifiQrCode = ((WifiDppConfiguratorActivity) getActivity())
                 .getWifiDppQrCode();
         final String information = wifiQrCode.getInformation();
@@ -130,14 +137,12 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
 
         mChooseDifferentNetwork = view.findViewById(R.id.choose_different_network);
         mChooseDifferentNetwork.setOnClickListener(v ->
-                mClickChooseDifferentNetworkListener.onClickChooseDifferentNetwork());
+            mClickChooseDifferentNetworkListener.onClickChooseDifferentNetwork()
+        );
 
         mButtonLeft = view.findViewById(R.id.button_left);
         mButtonLeft.setText(R.string.cancel);
-        mButtonLeft.setOnClickListener(v -> {
-            getActivity().setResult(Activity.RESULT_CANCELED);
-            getActivity().finish();
-        });
+        mButtonLeft.setOnClickListener(v -> getActivity().finish());
 
         mButtonRight = view.findViewById(R.id.button_right);
         mButtonRight.setText(R.string.wifi_dpp_share_wifi);

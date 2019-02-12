@@ -23,24 +23,23 @@ import android.text.TextUtils;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.app.ColorDisplayController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.widget.SeekBarPreference;
 
 public class NightDisplayIntensityPreferenceController extends SliderPreferenceController {
 
-    private ColorDisplayController mController;
+    private ColorDisplayManager mColorDisplayManager;
 
     public NightDisplayIntensityPreferenceController(Context context, String key) {
         super(context, key);
-        mController = new ColorDisplayController(context);
+        mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
     }
 
     @Override
     public int getAvailabilityStatus() {
         if (!ColorDisplayManager.isNightDisplayAvailable(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
-        } else if (!mController.isActivated()) {
+        } else if (!mColorDisplayManager.isNightDisplayActivated()) {
             return DISABLED_DEPENDENT_SETTING;
         }
         return AVAILABLE;
@@ -54,8 +53,7 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final SeekBarPreference preference = (SeekBarPreference) screen.findPreference(
-                getPreferenceKey());
+        final SeekBarPreference preference = screen.findPreference(getPreferenceKey());
         preference.setContinuousUpdates(true);
         preference.setMax(getMaxSteps());
     }
@@ -63,22 +61,22 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
     @Override
     public final void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setEnabled(mController.isActivated());
+        preference.setEnabled(mColorDisplayManager.isNightDisplayActivated());
     }
 
     @Override
     public int getSliderPosition() {
-        return convertTemperature(mController.getColorTemperature());
+        return convertTemperature(mColorDisplayManager.getNightDisplayColorTemperature());
     }
 
     @Override
     public boolean setSliderPosition(int position) {
-        return mController.setColorTemperature(convertTemperature(position));
+        return mColorDisplayManager.setNightDisplayColorTemperature(convertTemperature(position));
     }
 
     @Override
     public int getMaxSteps() {
-        return convertTemperature(mController.getMinimumColorTemperature());
+        return convertTemperature(ColorDisplayManager.getMinimumColorTemperature(mContext));
     }
 
     /**
@@ -87,6 +85,6 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
      * adjustment status of the input.
      */
     private int convertTemperature(int temperature) {
-        return mController.getMaximumColorTemperature() - temperature;
+        return ColorDisplayManager.getMaximumColorTemperature(mContext) - temperature;
     }
 }

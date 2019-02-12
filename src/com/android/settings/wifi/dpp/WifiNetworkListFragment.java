@@ -48,7 +48,6 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
     private static final String TAG = "WifiNetworkListFragment";
 
     private static final String WIFI_CONFIG_KEY = "wifi_config_key";
-    private static final String PREF_KEY_EMPTY_WIFI_LIST = "wifi_empty_list";
     private static final String PREF_KEY_ACCESS_POINTS = "access_points";
 
     static final int ADD_NETWORK_REQUEST = 1;
@@ -56,11 +55,14 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
     private PreferenceCategory mAccessPointsPreferenceCategory;
     private AccessPointPreference.UserBadgeCache mUserBadgeCache;
     private Preference mAddPreference;
+    // Only shows up if mIsTest == true
+    private Preference mFakeNetworkPreference;
 
     private WifiManager mWifiManager;
     private WifiTracker mWifiTracker;
 
     private WifiManager.ActionListener mSaveListener;
+    private boolean mIsTest;
 
     @VisibleForTesting
     boolean mUseConnectedAccessPointDirectly;
@@ -100,6 +102,11 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
                 getSettingsLifecycle(), /* includeSaved */true, /* includeScans */ true);
         mWifiManager = mWifiTracker.getManager();
 
+        final Bundle args = getArguments();
+        if (args != null) {
+            mIsTest = args.getBoolean(WifiDppUtils.EXTRA_TEST, false);
+        }
+
         mSaveListener = new WifiManager.ActionListener() {
             @Override
             public void onSuccess() {
@@ -138,6 +145,11 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
 
         mAccessPointsPreferenceCategory = (PreferenceCategory) findPreference(
                 PREF_KEY_ACCESS_POINTS);
+
+        mFakeNetworkPreference = new Preference(getPrefContext());
+        mFakeNetworkPreference.setIcon(R.drawable.ic_wifi_signal_0);
+        mFakeNetworkPreference.setKey("fake_key");
+        mFakeNetworkPreference.setTitle("fake network");
 
         mAddPreference = new Preference(getPrefContext());
         mAddPreference.setIcon(R.drawable.ic_menu_add);
@@ -219,6 +231,16 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
             }
         } else if (preference == mAddPreference) {
             launchAddNetworkFragment();
+        } else if (preference == mFakeNetworkPreference) {
+            if (mOnChooseNetworkListener != null) {
+                mOnChooseNetworkListener.onChooseNetwork(
+                        new WifiNetworkConfig(
+                                WifiQrCode.SECURITY_WPA_PSK,
+                                /* ssid */ WifiNetworkConfig.FAKE_SSID,
+                                /* preSharedKey */ WifiNetworkConfig.FAKE_PASSWORD,
+                                /* hiddenSsid */ true,
+                                /* networkId */ WifiConfiguration.INVALID_NETWORK_ID));
+            }
         } else {
             return super.onPreferenceTreeClick(preference);
         }
@@ -277,7 +299,6 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
         // AccessPoints are sorted by the WifiTracker
         final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
 
-        boolean hasAvailableAccessPoints = false;
         mAccessPointsPreferenceCategory.setVisible(true);
 
         cacheRemoveAllPrefs(mAccessPointsPreferenceCategory);
@@ -299,7 +320,6 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
                     return;
                 }
 
-                hasAvailableAccessPoints = true;
                 final AccessPointPreference pref = (AccessPointPreference) getCachedPreference(key);
                 if (pref != null) {
                     pref.setOrder(index);
@@ -318,13 +338,9 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
         mAddPreference.setOrder(index);
         mAccessPointsPreferenceCategory.addPreference(mAddPreference);
 
-        if (!hasAvailableAccessPoints) {
-            final Preference pref = new Preference(getPrefContext());
-            pref.setSelectable(false);
-            pref.setSummary(R.string.wifi_empty_list_wifi_on);
-            pref.setOrder(index++);
-            pref.setKey(PREF_KEY_EMPTY_WIFI_LIST);
-            mAccessPointsPreferenceCategory.addPreference(pref);
+        if (mIsTest) {
+            mFakeNetworkPreference.setOrder(index + 1);
+            mAccessPointsPreferenceCategory.addPreference(mFakeNetworkPreference);
         }
     }
 

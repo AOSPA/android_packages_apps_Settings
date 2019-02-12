@@ -56,7 +56,6 @@
     <bool name="config_show_vibrate_input_devices">false</bool>
     <bool name="config_show_reset_dashboard">false</bool>
     <bool name="config_show_system_update_settings">false</bool>
-    <bool name="config_wifi_support_connected_mac_randomization">false</bool>
     <bool name="config_show_device_model">false</bool>
     <bool name="config_show_top_level_battery">false</bool>
     <bool name="config_show_top_level_connected_devices">false</bool>
@@ -67,9 +66,12 @@
     <bool name="config_show_device_name">false</bool>
     <bool name="config_use_legacy_suggestion">false</bool>
     <bool name="config_show_avatar_in_homepage">true</bool>
+    <bool name="config_show_branded_account_in_device_info">false</bool>
+    <bool name="config_show_emergency_info_in_device_info">false</bool>
 
     <!-- Whether or not extra preview panels should be used for screen zoom setting. -->
     <bool name="config_enable_extra_screen_zoom_preview">false</bool>
+
 
     <!-- List of a11y components on the device allowed to be enabled by Settings Slices -->
     <string-array name="config_settings_slices_accessibility_components" translatable="false">

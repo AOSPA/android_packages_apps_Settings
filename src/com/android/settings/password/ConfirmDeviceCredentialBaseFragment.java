@@ -17,6 +17,8 @@
 // TODO (b/35202196): move this class out of the root of the package.
 package com.android.settings.password;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.annotation.Nullable;
 import android.app.Dialog;
 import android.app.KeyguardManager;
@@ -29,6 +31,7 @@ import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.hardware.biometrics.BiometricManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserManager;
@@ -54,17 +57,16 @@ import com.android.settings.core.InstrumentedFragment;
  */
 public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFragment {
 
-    public static final String PACKAGE = "com.android.settings";
-    public static final String TITLE_TEXT = PACKAGE + ".ConfirmCredentials.title";
-    public static final String HEADER_TEXT = PACKAGE + ".ConfirmCredentials.header";
-    public static final String DETAILS_TEXT = PACKAGE + ".ConfirmCredentials.details";
-    public static final String DARK_THEME = PACKAGE + ".ConfirmCredentials.darkTheme";
+    public static final String TITLE_TEXT = SETTINGS_PACKAGE_NAME + ".ConfirmCredentials.title";
+    public static final String HEADER_TEXT = SETTINGS_PACKAGE_NAME + ".ConfirmCredentials.header";
+    public static final String DETAILS_TEXT = SETTINGS_PACKAGE_NAME + ".ConfirmCredentials.details";
+    public static final String DARK_THEME = SETTINGS_PACKAGE_NAME + ".ConfirmCredentials.darkTheme";
     public static final String SHOW_CANCEL_BUTTON =
-            PACKAGE + ".ConfirmCredentials.showCancelButton";
+            SETTINGS_PACKAGE_NAME + ".ConfirmCredentials.showCancelButton";
     public static final String SHOW_WHEN_LOCKED =
-            PACKAGE + ".ConfirmCredentials.showWhenLocked";
+            SETTINGS_PACKAGE_NAME + ".ConfirmCredentials.showWhenLocked";
     public static final String USE_FADE_ANIMATION =
-            PACKAGE + ".ConfirmCredentials.useFadeAnimation";
+            SETTINGS_PACKAGE_NAME + ".ConfirmCredentials.useFadeAnimation";
 
     protected static final int USER_TYPE_PRIMARY = 1;
     protected static final int USER_TYPE_MANAGED_PROFILE = 2;
@@ -84,6 +86,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     protected final Handler mHandler = new Handler();
     protected boolean mFrp;
     private CharSequence mFrpAlternateButtonText;
+    protected BiometricManager mBiometricManager;
 
     private boolean isInternalActivity() {
         return (getActivity() instanceof ConfirmLockPassword.InternalActivity)
@@ -107,6 +110,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         mLockPatternUtils = new LockPatternUtils(getActivity());
         mDevicePolicyManager = (DevicePolicyManager) getActivity().getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
+        mBiometricManager = getActivity().getSystemService(BiometricManager.class);
     }
 
     @Override

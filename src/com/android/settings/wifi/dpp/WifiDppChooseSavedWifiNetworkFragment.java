@@ -17,8 +17,8 @@
 package com.android.settings.wifi.dpp;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +60,10 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
          * WifiDppChooseSavedWifiNetworkFragment. */
         final FragmentManager fragmentManager = getChildFragmentManager();
         final WifiNetworkListFragment fragment = new WifiNetworkListFragment();
+        final Bundle args = getArguments();
+        if (args != null) {
+            fragment.setArguments(args);
+        }
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.wifi_network_list_container, fragment,
                 TAG_FRAGMENT_WIFI_NETWORK_LIST);
@@ -77,15 +81,26 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setHeaderIconImageResource(R.drawable.ic_wifi_signal_4);
+
         mTitle.setText(R.string.wifi_dpp_choose_network);
         mSummary.setText(R.string.wifi_dpp_choose_network_to_connect_device);
 
         mButtonLeft = view.findViewById(R.id.button_left);
         mButtonLeft.setText(R.string.cancel);
         mButtonLeft.setOnClickListener(v -> {
-            Activity activity = getActivity();
-            activity.setResult(Activity.RESULT_CANCELED);
-            activity.finish();
+            String action = null;
+            final Intent intent = getActivity().getIntent();
+            if (intent != null) {
+                action = intent.getAction();
+            }
+            if (WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER.equals(action) ||
+                    WifiDppConfiguratorActivity
+                    .ACTION_CONFIGURATOR_QR_CODE_GENERATOR.equals(action)) {
+                getFragmentManager().popBackStack();
+            } else {
+                getActivity().finish();
+            }
         });
 
         mButtonRight = view.findViewById(R.id.button_right);
