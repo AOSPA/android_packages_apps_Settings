@@ -117,6 +117,13 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        // refresh the sections as the preview may have changed
+        initSections();
+    }
+
+    @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (WALLPAPER_ONLY.equals(intent.getStringExtra(WALLPAPER_FLAVOR_EXTRA))) {
