@@ -25,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
 import com.android.wallpaper.R;
 
@@ -83,7 +84,7 @@ public class OptionSelectorController {
     /**
      * Initializes the UI for the options passed in the constructor of this class.
      */
-    public void initOptions() {
+    public void initOptions(final CustomizationManager<? extends CustomizationOption> manager) {
         mAdapter = new RecyclerView.Adapter<TileViewHolder>() {
             @Override
             public int getItemViewType(int position) {
@@ -100,7 +101,7 @@ public class OptionSelectorController {
             @Override
             public void onBindViewHolder(@NonNull TileViewHolder holder, int position) {
                 CustomizationOption option = mOptions.get(position);
-                if (mSelectedOption == null && option.isActive(mContainer.getContext())) {
+                if (mSelectedOption == null && option.isActive(manager)) {
                     mSelectedOption = option;
                 }
                 if (holder.labelView != null) {

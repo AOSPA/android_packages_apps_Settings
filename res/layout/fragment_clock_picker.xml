@@ -16,6 +16,7 @@
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -27,7 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/secondary_color"/>
+        android:background="@color/secondary_color"
+        app:card_style="screen_aspect_ratio"/>
 
     <LinearLayout
         android:id="@+id/options_section"

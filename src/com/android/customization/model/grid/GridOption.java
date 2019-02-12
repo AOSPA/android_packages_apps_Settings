@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
 import com.android.customization.widget.GridTileDrawable;
 import com.android.wallpaper.R;
@@ -28,7 +29,7 @@ import com.android.wallpaper.R;
 /**
  * Represents a grid layout option available in the current launcher.
  */
-public class GridOption implements CustomizationOption {
+public class GridOption implements CustomizationOption<GridOption> {
 
     private final String mTitle;
     private final boolean mIsCurrent;
@@ -67,7 +68,7 @@ public class GridOption implements CustomizationOption {
     }
 
     @Override
-    public boolean isActive(Context context) {
+    public boolean isActive(CustomizationManager<GridOption> manager) {
         return mIsCurrent;
     }
 

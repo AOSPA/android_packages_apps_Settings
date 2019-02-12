@@ -54,6 +54,8 @@ import com.bumptech.glide.request.RequestOptions;
  */
 public class GridFragment extends ToolbarFragment {
 
+    private static final int PREVIEW_FADE_DURATION_MS = 100;
+
     /**
      * Interface to be implemented by an Activity hosting a {@link GridFragment}
      */
@@ -67,11 +69,11 @@ public class GridFragment extends ToolbarFragment {
         return fragment;
     }
 
-    private boolean mIsWallpaperInfoReady;
     private WallpaperInfo mHomeWallpaper;
     private float mScreenAspectRatio;
-    private int mPageHeight;
-    private int mPageWidth;
+    private int mCardHeight;
+    private int mCardWidth;
+    private BitmapDrawable mCardBackground;
     private GridPreviewAdapter mAdapter;
     private RecyclerView mOptionsContainer;
     private OptionSelectorController mOptionsController;
@@ -94,7 +96,7 @@ public class GridFragment extends ToolbarFragment {
         setUpToolbar(view);
         mPreviewPager = view.findViewById(R.id.grid_preview_pager);
         mOptionsContainer = view.findViewById(R.id.options_container);
-        final Resources res = getContext().getResources();
+        final Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         mScreenAspectRatio = (float) dm.heightPixels / dm.widthPixels;
         setUpOptions();
@@ -103,27 +105,39 @@ public class GridFragment extends ToolbarFragment {
             getActivity().finish();
         });
         CurrentWallpaperInfoFactory factory = InjectorProvider.getInjector()
-                .getCurrentWallpaperFactory(getActivity().getApplicationContext());
+                .getCurrentWallpaperFactory(getContext().getApplicationContext());
 
         factory.createCurrentWallpaperInfos((homeWallpaper, lockWallpaper, presentationMode) -> {
             mHomeWallpaper = homeWallpaper;
-            mIsWallpaperInfoReady = true;
-            if (mAdapter != null) {
-                mAdapter.onWallpaperInfoLoaded();
-            }
+            loadWallpaperBackground();
+
         }, false);
         view.addOnLayoutChangeListener(new OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom,
                     int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                mPageHeight = mPreviewPager.getHeight() - mPreviewPager.getPaddingTop() -
+                mCardHeight = mPreviewPager.getHeight() - mPreviewPager.getPaddingTop() -
                         res.getDimensionPixelSize(R.dimen.indicator_container_height);
-                mPageWidth = (int) (mPageHeight / mScreenAspectRatio);
-                mPreviewPager.forceCardWidth(mPageWidth);
+                mCardWidth = (int) (mCardHeight / mScreenAspectRatio);
                 view.removeOnLayoutChangeListener(this);
+                loadWallpaperBackground();
             }
         });
         return view;
+    }
+
+    private void loadWallpaperBackground() {
+        if (mHomeWallpaper != null && mCardHeight > 0 && mCardWidth > 0) {
+            mHomeWallpaper.getThumbAsset(getContext()).decodeBitmap(mCardWidth,
+                    mCardHeight,
+                    bitmap -> {
+                        mCardBackground =
+                                new BitmapDrawable(getResources(), bitmap);
+                        if (mAdapter != null) {
+                            mAdapter.onWallpaperInfoLoaded();
+                        }
+                    });
+        }
     }
 
     private void createAdapter() {
@@ -139,9 +153,9 @@ public class GridFragment extends ToolbarFragment {
                 mSelectedOption = (GridOption) selected;
                 createAdapter();
             });
-            mOptionsController.initOptions();
+            mOptionsController.initOptions(mGridManager);
             for (GridOption option : options) {
-                if (option.isActive(getContext())) {
+                if (option.isActive(mGridManager)) {
                     mSelectedOption = option;
                 }
             }
@@ -181,18 +195,16 @@ public class GridFragment extends ToolbarFragment {
         public void bindPreviewContent() {
             Resources resources = card.getResources();
             bindWallpaperIfAvailable();
-            mPreviewAsset.loadDrawable(mActivity, mPreview,
-                    resources.getColor(android.R.color.transparent, null));
+            mPreviewAsset.loadDrawableWithTransition(mActivity,
+                    mPreview /* imageView */,
+                    PREVIEW_FADE_DURATION_MS /* duration */,
+                    null /* drawableLoadedListener */,
+                    resources.getColor(android.R.color.transparent, null) /* placeHolderColorJ */);
         }
 
         void bindWallpaperIfAvailable() {
-            if (card != null && mIsWallpaperInfoReady && mHomeWallpaper != null) {
-                mHomeWallpaper.getThumbAsset(card.getContext()).decodeBitmap(mPageWidth,
-                        mPageHeight,
-                        bitmap -> {
-                            mPreview.setBackground(
-                                    new BitmapDrawable(card.getResources(), bitmap));
-                        });
+            if (card != null && mCardBackground != null) {
+                mPreview.setBackground(mCardBackground);
             }
         }
     }

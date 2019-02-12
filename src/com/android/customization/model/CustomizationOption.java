@@ -15,7 +15,6 @@
  */
 package com.android.customization.model;
 
-import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.LayoutRes;
@@ -26,7 +25,7 @@ import com.android.wallpaper.R;
 /**
  * Represents an option of customization (eg, a ThemeBundle, a Clock face, a Grid size)
  */
-public interface CustomizationOption {
+public interface CustomizationOption <T extends CustomizationOption> {
 
     /**
      * Optional name or label for this option
@@ -44,7 +43,7 @@ public interface CustomizationOption {
     /**
      * Returns whether this option is the one currently set in the System.
      */
-    boolean isActive(Context context);
+    boolean isActive(CustomizationManager<T> manager);
 
     /**
      * Return the id of the layout used to show this option in the UI. It must contain a view with
