@@ -15,9 +15,6 @@
  */
 package com.android.customization.model.theme;
 
-import static com.google.android.apps.wallpaper.model.Action.getActionIconForType;
-import static com.google.android.apps.wallpaper.model.Action.getActionLabelForType;
-
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -33,8 +30,6 @@ import com.android.wallpaper.asset.Asset;
 import com.android.wallpaper.asset.ResourceAsset;
 import com.android.wallpaper.model.InlinePreviewIntentFactory;
 import com.android.wallpaper.model.WallpaperInfo;
-
-import com.google.android.apps.wallpaper.model.Action.ActionType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,11 +120,6 @@ public class ThemeBundledWallpaperInfo extends WallpaperInfo {
     }
 
     @Override
-    public int getActionLabelRes(Context context) {
-        return getActionLabelForType(getActionType(context));
-    }
-
-    @Override
     public Asset getAsset(Context context) {
         if (mAsset == null) {
             Resources res = getPackageResources(context);
@@ -142,11 +132,6 @@ public class ThemeBundledWallpaperInfo extends WallpaperInfo {
     @Override
     public Asset getThumbAsset(Context context) {
         return getAsset(context);
-    }
-
-    @Override
-    public int getActionIconRes(Context context) {
-        return getActionIconForType(getActionType(context));
     }
 
     @Override
@@ -172,10 +157,6 @@ public class ThemeBundledWallpaperInfo extends WallpaperInfo {
 
     public String getResName() {
         return mResName;
-    }
-
-    private int getActionType(Context context) {
-        return ActionType.EXPLORE;
     }
 
     /**
