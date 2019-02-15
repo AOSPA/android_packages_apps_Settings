@@ -15,6 +15,7 @@
  */
 package com.android.customization.picker;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -279,6 +280,20 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         if (mWallpaperSetter != null) {
             mWallpaperSetter.cleanUp();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (mDelegate.handleActivityResult(requestCode, resultCode, data)) {
+            finishActivityWithResultOk();
+        }
+    }
+
+    private void finishActivityWithResultOk() {
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        setResult(Activity.RESULT_OK);
+        finish();
     }
 
     /**
