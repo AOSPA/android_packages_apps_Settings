@@ -18,6 +18,7 @@ package com.android.settings.wifi.dpp;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.android.settings.R;
 
 /**
@@ -33,13 +36,15 @@ import com.android.settings.R;
  * {@code WifiDppConfiguratorActivity} to start with this fragment to choose a saved Wi-Fi network.
  */
 public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFragment {
+    private static final String TAG_FRAGMENT_WIFI_NETWORK_LIST = "wifi_network_list_fragment";
+
     private ListView mSavedWifiNetworkList;
     private Button mButtonLeft;
     private Button mButtonRight;
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_WIFI_DPP_CONFIGURATOR;
+        return SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR;
     }
 
     @Override
@@ -50,6 +55,15 @@ public class WifiDppChooseSavedWifiNetworkFragment extends WifiDppQrCodeBaseFrag
         if (actionBar != null) {
             actionBar.hide();
         }
+
+        /** Embeded WifiNetworkListFragment as child fragment within
+         * WifiDppChooseSavedWifiNetworkFragment. */
+        final FragmentManager fragmentManager = getChildFragmentManager();
+        final WifiNetworkListFragment fragment = new WifiNetworkListFragment();
+        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.wifi_network_list_container, fragment,
+                TAG_FRAGMENT_WIFI_NETWORK_LIST);
+        fragmentTransaction.commit();
     }
 
     @Override

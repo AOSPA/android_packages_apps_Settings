@@ -23,6 +23,7 @@ import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -38,7 +39,6 @@ import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
@@ -105,8 +105,8 @@ public class WifiSlice implements CustomSliceable {
             return listBuilder.build();
         }
 
-        final List<AccessPoint> results =
-                SliceBackgroundWorker.getInstance(mContext, this).getResults();
+        final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(getUri());
+        final List<AccessPoint> results = worker != null ? worker.getResults() : null;
 
         // Need a loading text when results are not ready.
         boolean needLoadingRow = results == null;
@@ -174,7 +174,7 @@ public class WifiSlice implements CustomSliceable {
                     .setTitleRes(R.string.pref_title_network_details)
                     .setDestination(WifiNetworkDetailsFragment.class.getName())
                     .setArguments(extras)
-                    .setSourceMetricsCategory(MetricsEvent.WIFI)
+                    .setSourceMetricsCategory(SettingsEnums.WIFI)
                     .toIntent();
         } else {
             intent = new Intent(mContext, WifiDialogActivity.class);
@@ -204,7 +204,7 @@ public class WifiSlice implements CustomSliceable {
         final Uri contentUri = new Uri.Builder().appendPath(KEY_WIFI).build();
         final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 WifiSettings.class.getName(), KEY_WIFI, screenTitle,
-                MetricsEvent.DIALOG_WIFI_AP_EDIT)
+                SettingsEnums.DIALOG_WIFI_AP_EDIT)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
 

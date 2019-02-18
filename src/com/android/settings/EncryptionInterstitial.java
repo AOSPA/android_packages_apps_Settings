@@ -20,6 +20,7 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,7 +36,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -96,7 +96,7 @@ public class EncryptionInterstitial extends SettingsActivity {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.ENCRYPTION;
+            return SettingsEnums.ENCRYPTION;
         }
 
         @Override
@@ -156,7 +156,7 @@ public class EncryptionInterstitial extends SettingsActivity {
                             .setText(R.string.encryption_interstitial_no)
                             .setListener(this::onNoButtonClicked)
                             .setButtonType(FooterButton.ButtonType.SKIP)
-                            .setTheme(R.style.SuwGlifButton_Secondary)
+                            .setTheme(R.style.SudGlifButton_Secondary)
                             .build()
             );
 
@@ -165,7 +165,7 @@ public class EncryptionInterstitial extends SettingsActivity {
                             .setText(R.string.encryption_interstitial_yes)
                             .setListener(this::onYesButtonClicked)
                             .setButtonType(FooterButton.ButtonType.NEXT)
-                            .setTheme(R.style.SuwGlifButton_Primary)
+                            .setTheme(R.style.SudGlifButton_Primary)
                             .build()
             );
         }
@@ -281,7 +281,7 @@ public class EncryptionInterstitial extends SettingsActivity {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.DIALOG_ENCRYPTION_INTERSTITIAL_ACCESSIBILITY;
+            return SettingsEnums.DIALOG_ENCRYPTION_INTERSTITIAL_ACCESSIBILITY;
         }
 
         @Override

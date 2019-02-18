@@ -20,6 +20,7 @@ import static android.os.Vibrator.VibrationIntensity;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -27,6 +28,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.hardware.display.ColorDisplayManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,7 +52,6 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.content.PackageMonitor;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.view.RotationPolicy;
 import com.android.internal.view.RotationPolicy.RotationPolicyListener;
 import com.android.settings.R;
@@ -91,7 +92,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_EXPERIMENTAL = "experimental_category";
     private static final String CATEGORY_DOWNLOADED_SERVICES = "user_installed_services_category";
 
-    private static final String[] CATEGORIES = new String[] {
+    private static final String[] CATEGORIES = new String[]{
             CATEGORY_SCREEN_READER, CATEGORY_AUDIO_AND_CAPTIONS, CATEGORY_DISPLAY,
             CATEGORY_INTERACTION_CONTROL, CATEGORY_EXPERIMENTAL, CATEGORY_DOWNLOADED_SERVICES
     };
@@ -132,7 +133,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "accessibility_content_timeout_preference_fragment";
     private static final String ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE =
             "accessibility_control_timeout_preference_fragment";
-
+    private static final String LIVE_CAPTION_PREFERENCE_KEY =
+            "live_caption";
 
     // Extras passed to sub-fragments.
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
@@ -232,9 +234,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private Preference mDisplayDaltonizerPreferenceScreen;
     private Preference mHearingAidPreference;
     private Preference mVibrationPreferenceScreen;
+    private Preference mLiveCaptionPreference;
     private SwitchPreference mToggleInversionPreference;
     private ColorInversionPreferenceController mInversionPreferenceController;
     private AccessibilityHearingAidPreferenceController mHearingAidPreferenceController;
+    private LiveCaptionPreferenceController mLiveCaptionPreferenceController;
 
     private int mLongPressTimeoutDefault;
 
@@ -269,7 +273,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY;
+        return SettingsEnums.ACCESSIBILITY;
     }
 
     @Override
@@ -293,6 +297,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 (context, HEARING_AID_PREFERENCE);
         mHearingAidPreferenceController.setFragmentManager(getFragmentManager());
         getLifecycle().addObserver(mHearingAidPreferenceController);
+
+        mLiveCaptionPreferenceController = new LiveCaptionPreferenceController(context,
+                LIVE_CAPTION_PREFERENCE_KEY);
     }
 
     @Override
@@ -481,6 +488,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         // Captioning.
         mCaptioningPreferenceScreen = findPreference(CAPTIONING_PREFERENCE_SCREEN);
 
+        // Live caption
+        mLiveCaptionPreference = findPreference(LIVE_CAPTION_PREFERENCE_KEY);
+        mLiveCaptionPreferenceController.displayPreference(getPreferenceScreen());
+
         // Display magnification.
         mDisplayMagnificationPreferenceScreen = findPreference(
                 DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN);
@@ -652,7 +663,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     protected void updateSystemPreferences() {
         // Move color inversion and color correction preferences to Display category if device
         // supports HWC hardware-accelerated color transform.
-        if (isColorTransformAccelerated(getContext())) {
+        if (ColorDisplayManager.isColorTransformAccelerated(getContext())) {
             PreferenceCategory experimentalCategory =
                     mCategoryToPrefCategoryMap.get(CATEGORY_EXPERIMENTAL);
             PreferenceCategory displayCategory =
@@ -716,6 +727,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         mHearingAidPreferenceController.updateState(mHearingAidPreference);
 
+        mLiveCaptionPreferenceController.updateState(mLiveCaptionPreference);
+
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED,
                 mCaptioningPreferenceScreen);
         updateFeatureSummary(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
@@ -736,7 +749,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     void updateAccessibilityTimeoutSummary(ContentResolver resolver, Preference pref) {
-
         String[] timeoutSummarys = getResources().getStringArray(
                 R.array.accessibility_timeout_summaries);
         int[] timeoutValues = getResources().getIntArray(
@@ -805,20 +817,35 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         pref.setSummary(entries[index]);
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     void updateVibrationSummary(Preference pref) {
         final Context context = getContext();
         final Vibrator vibrator = context.getSystemService(Vibrator.class);
 
-        final int ringIntensity = Settings.System.getInt(context.getContentResolver(),
-                Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
-                vibrator.getDefaultNotificationVibrationIntensity());
+        int ringIntensity = Settings.System.getInt(context.getContentResolver(),
+                Settings.System.RING_VIBRATION_INTENSITY,
+                vibrator.getDefaultRingVibrationIntensity());
+        if (Settings.System.getInt(context.getContentResolver(),
+                Settings.System.VIBRATE_WHEN_RINGING, 0) == 0) {
+            ringIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
+        }
         CharSequence ringIntensityString =
                 VibrationIntensityPreferenceController.getIntensityString(context, ringIntensity);
 
-        final int touchIntensity = Settings.System.getInt(context.getContentResolver(),
+        int notificationIntensity = Settings.System.getInt(context.getContentResolver(),
+                Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
+                vibrator.getDefaultNotificationVibrationIntensity());
+        CharSequence notificationIntensityString =
+                VibrationIntensityPreferenceController.getIntensityString(context,
+                        notificationIntensity);
+
+        int touchIntensity = Settings.System.getInt(context.getContentResolver(),
                 Settings.System.HAPTIC_FEEDBACK_INTENSITY,
                 vibrator.getDefaultHapticFeedbackIntensity());
+        if (Settings.System.getInt(context.getContentResolver(),
+                Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) == 0) {
+            touchIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
+        }
         CharSequence touchIntensityString =
                 VibrationIntensityPreferenceController.getIntensityString(context, touchIntensity);
 
@@ -826,12 +853,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             mVibrationPreferenceScreen = findPreference(VIBRATION_PREFERENCE_SCREEN);
         }
 
-        if (ringIntensity == touchIntensity) {
+        if (ringIntensity == touchIntensity && ringIntensity == notificationIntensity) {
             mVibrationPreferenceScreen.setSummary(ringIntensityString);
         } else {
             mVibrationPreferenceScreen.setSummary(
                     getString(R.string.accessibility_vibration_summary,
-                            ringIntensityString, touchIntensityString));
+                            ringIntensityString,
+                            notificationIntensityString,
+                            touchIntensityString));
         }
     }
 

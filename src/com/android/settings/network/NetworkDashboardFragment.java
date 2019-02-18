@@ -15,22 +15,21 @@
  */
 package com.android.settings.network;
 
-import static com.android.settings.network.MobilePlanPreferenceController
-        .MANAGE_MOBILE_PLAN_DIALOG_ID;
+import static com.android.settings.network.MobilePlanPreferenceController.MANAGE_MOBILE_PLAN_DIALOG_ID;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.network.MobilePlanPreferenceController.MobilePlanPreferenceHost;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
@@ -51,7 +50,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SETTINGS_NETWORK_CATEGORY;
+        return SettingsEnums.SETTINGS_NETWORK_CATEGORY;
     }
 
     @Override
@@ -61,7 +60,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
+        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
             return R.xml.network_and_internet_v2;
         } else {
             return R.xml.network_and_internet;
@@ -72,7 +71,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
+        if (FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
             use(MultiNetworkHeaderController.class).init(getSettingsLifecycle());
         }
         use(AirplaneModePreferenceController.class).setFragment(this);
@@ -96,8 +95,11 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 new MobilePlanPreferenceController(context, mobilePlanHost);
         final WifiMasterSwitchPreferenceController wifiPreferenceController =
                 new WifiMasterSwitchPreferenceController(context, metricsFeatureProvider);
-        final MobileNetworkPreferenceController mobileNetworkPreferenceController =
-                new MobileNetworkPreferenceController(context);
+        MobileNetworkPreferenceController mobileNetworkPreferenceController = null;
+        if (!FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
+            mobileNetworkPreferenceController = new MobileNetworkPreferenceController(context);
+        }
+
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
         final PrivateDnsPreferenceController privateDnsPreferenceController =
@@ -106,13 +108,21 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         if (lifecycle != null) {
             lifecycle.addObserver(mobilePlanPreferenceController);
             lifecycle.addObserver(wifiPreferenceController);
-            lifecycle.addObserver(mobileNetworkPreferenceController);
+            if (mobileNetworkPreferenceController != null) {
+                lifecycle.addObserver(mobileNetworkPreferenceController);
+            }
             lifecycle.addObserver(vpnPreferenceController);
             lifecycle.addObserver(privateDnsPreferenceController);
         }
 
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(mobileNetworkPreferenceController);
+
+        if (FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
+            controllers.add(new MobileNetworkSummaryController(context, lifecycle));
+        }
+        if (mobileNetworkPreferenceController != null) {
+            controllers.add(mobileNetworkPreferenceController);
+        }
         controllers.add(new TetherPreferenceController(context, lifecycle));
         controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
@@ -147,7 +157,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     @Override
     public int getDialogMetricsCategory(int dialogId) {
         if (MANAGE_MOBILE_PLAN_DIALOG_ID == dialogId) {
-            return MetricsProto.MetricsEvent.DIALOG_MANAGE_MOBILE_PLAN;
+            return SettingsEnums.DIALOG_MANAGE_MOBILE_PLAN;
         }
         return 0;
     }

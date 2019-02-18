@@ -19,6 +19,7 @@ package com.android.settings.network;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -53,7 +54,6 @@ import android.widget.Toast;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.uicc.UiccController;
@@ -191,7 +191,7 @@ public class ApnSettings extends RestrictedSettingsFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APN;
+        return SettingsEnums.APN;
     }
 
     @Override
@@ -716,7 +716,7 @@ public class ApnSettings extends RestrictedSettingsFragment
     @Override
     public int getDialogMetricsCategory(int dialogId) {
         if (dialogId == DIALOG_RESTORE_DEFAULTAPN) {
-            return MetricsEvent.DIALOG_APN_RESTORE_DEFAULT;
+            return SettingsEnums.DIALOG_APN_RESTORE_DEFAULT;
         }
         return 0;
     }

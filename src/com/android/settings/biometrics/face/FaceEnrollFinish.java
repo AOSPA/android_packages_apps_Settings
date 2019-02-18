@@ -16,10 +16,10 @@
 
 package com.android.settings.biometrics.face;
 
+import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
 
@@ -43,14 +43,14 @@ public class FaceEnrollFinish extends BiometricEnrollBase {
                         .setText(R.string.security_settings_face_enroll_done)
                         .setListener(this::onNextButtonClick)
                         .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.FACE_ENROLL_FINISHED;
+        return SettingsEnums.FACE_ENROLL_FINISHED;
     }
 
     @Override

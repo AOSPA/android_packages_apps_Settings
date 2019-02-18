@@ -22,6 +22,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -39,7 +40,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -160,7 +160,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
                         .setText(R.string.master_clear_button_text)
                         .setListener(mFinalClickListener)
                         .setButtonType(ButtonType.OTHER)
-                        .setTheme(R.style.SuwGlifButton_Primary)
+                        .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
     }
@@ -225,6 +225,6 @@ public class MasterClearConfirm extends InstrumentedFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.MASTER_CLEAR_CONFIRM;
+        return SettingsEnums.MASTER_CLEAR_CONFIRM;
     }
 }

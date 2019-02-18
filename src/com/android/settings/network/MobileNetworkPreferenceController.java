@@ -200,7 +200,13 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_MOBILE_NETWORK_SETTINGS.equals(preference.getKey())) {
-            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.MOBILE_NETWORK_V2)) {
+            if (Utils.isNetworkSettingsApkAvailable()) {
+                final Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setComponent(
+                        new ComponentName("com.qualcomm.qti.networksetting",
+                        "com.qualcomm.qti.networksetting.MobileNetworkSettings"));
+                mContext.startActivity(intent);
+            } else if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.MOBILE_NETWORK_V2)) {
                 final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
                 mContext.startActivity(intent);
             } else {

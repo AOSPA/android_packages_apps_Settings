@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
  */
 public class ConditionContextualCardController implements ContextualCardController,
         ConditionListener, LifecycleObserver, OnStart, OnStop {
-    public static final int EXPANDING_THRESHOLD = 2;
+    public static final int EXPANDING_THRESHOLD = 0;
 
     private static final double UNSUPPORTED_RANKING = -99999.0;
     private static final String TAG = "ConditionCtxCardCtrl";
@@ -168,7 +168,8 @@ public class ConditionContextualCardController implements ContextualCardControll
             final int lastIndex = expandedCards.size() - 1;
             final ConditionalContextualCard card =
                     (ConditionalContextualCard) expandedCards.get(lastIndex);
-            expandedCards.set(lastIndex, card.mutate().setIsHalfWidth(false).build());
+            expandedCards.set(lastIndex, card.mutate().setViewType(
+                    ConditionContextualCardRenderer.VIEW_TYPE_FULL_WIDTH).build());
         }
         return expandedCards;
     }
@@ -180,6 +181,7 @@ public class ConditionContextualCardController implements ContextualCardControll
             footerCards.add(new ConditionFooterContextualCard.Builder()
                     .setName(CONDITION_FOOTER)
                     .setRankingScore(UNSUPPORTED_RANKING)
+                    .setViewType(ConditionFooterContextualCardRenderer.VIEW_TYPE)
                     .build());
             return footerCards;
         }
@@ -194,6 +196,7 @@ public class ConditionContextualCardController implements ContextualCardControll
                     .setConditionalCards(conditionCards)
                     .setName(CONDITION_HEADER)
                     .setRankingScore(UNSUPPORTED_RANKING)
+                    .setViewType(ConditionHeaderContextualCardRenderer.VIEW_TYPE)
                     .build());
             return headerCards;
         }

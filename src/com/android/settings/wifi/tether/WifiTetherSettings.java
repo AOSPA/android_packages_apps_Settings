@@ -20,6 +20,7 @@ import static android.net.ConnectivityManager.ACTION_TETHER_STATE_CHANGED;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
 import static android.net.wifi.WifiManager.WIFI_COUNTRY_CODE_CHANGED_ACTION;
 
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -33,7 +34,6 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
@@ -89,7 +89,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.WIFI_TETHER_SETTINGS;
+        return SettingsEnums.WIFI_TETHER_SETTINGS;
     }
 
     @Override
