@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
@@ -60,9 +61,27 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
         /* Navigation Bar */
         mNavigationBar = (SwitchPreference) findPreference(KEY_NAVIGATION_BAR);
         if (mNavigationBar != null) {
-            mNavigationBar.setOnPreferenceChangeListener(this);
+            if (needsNavbar()) {
+                mNavigationBar = null;
+                removePreference(KEY_NAVIGATION_BAR);
+            } else {
+                mNavigationBar.setOnPreferenceChangeListener(this);
+            }
         }
 
+    }
+
+    private boolean needsNavbar() {
+        boolean needsNavbar = getContext().getResources()
+                .getBoolean(com.android.internal.R.bool.config_showNavigationBar);
+
+        String navBarOverride = SystemProperties.get("qemu.hw.mainkeys");
+        if ("1".equals(navBarOverride)) {
+            needsNavbar = false;
+        } else if ("0".equals(navBarOverride)) {
+            needsNavbar = true;
+        }
+        return needsNavbar;
     }
 
     @Override
