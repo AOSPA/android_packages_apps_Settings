@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,6 +42,8 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
     private Handler mHandler;
     private SwitchPreference mNavigationBar;
+    private int mDeviceHardwareKeys;
+    private boolean mOnlyHasCameraButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,12 +53,36 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
         mHandler = new Handler();
 
+        final Resources res = getActivity().getResources();
+
+        mDeviceHardwareKeys = res.getInteger(
+                com.android.internal.R.integer.config_deviceHardwareKeys);
+
+        mOnlyHasCameraButton = res.getBoolean(
+                R.bool.config_has_only_camera_button);
+
         /* Navigation Bar */
         mNavigationBar = (SwitchPreference) findPreference(KEY_NAVIGATION_BAR);
         if (mNavigationBar != null) {
-            mNavigationBar.setOnPreferenceChangeListener(this);
+            if (mDeviceHardwareKeys != 0 && !mOnlyHasCameraButton) {
+                mNavigationBar.setOnPreferenceChangeListener(this);
+            } else {
+                mNavigationBar = null;
+                removePreference(KEY_NAVIGATION_BAR);
+            }
         }
 
+    }
+
+    public static boolean shouldShowTile(Context context) {
+
+        int mHasDeviceHardwareKeys = context.getResources().getInteger(
+                com.android.internal.R.integer.config_deviceHardwareKeys);
+
+        boolean mHasOnlyCameraButton = context.getResources().getBoolean(
+                R.bool.config_has_only_camera_button);
+
+        return !(mHasDeviceHardwareKeys !=0 && !mHasOnlyCameraButton);
     }
 
     @Override
