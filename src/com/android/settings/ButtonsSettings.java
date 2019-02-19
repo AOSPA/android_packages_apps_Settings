@@ -41,6 +41,12 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
     private Handler mHandler;
     private SwitchPreference mNavigationBar;
+    private int mDeviceHardwareKeys;
+
+    private static final int KEY_MASK_HOME = 0x01;
+    private static final int KEY_MASK_BACK = 0x02;
+
+    private int prefCounter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,12 +56,32 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
         mHandler = new Handler();
 
+        final Resources res = getActivity().getResources();
+
+        mDeviceHardwareKeys = res.getInteger(
+                com.android.internal.R.integer.config_deviceHardwareKeys);
+
         /* Navigation Bar */
         mNavigationBar = (SwitchPreference) findPreference(KEY_NAVIGATION_BAR);
         if (mNavigationBar != null) {
-            mNavigationBar.setOnPreferenceChangeListener(this);
+            if (needsNavbar(mDeviceHardwareKeys)) {
+                mNavigationBar.setOnPreferenceChangeListener(this);
+            } else {
+                mNavigationBar = null;
+                removePreference(KEY_NAVIGATION_BAR);
+            }
         }
 
+    }
+
+    private boolean needsNavbar(int mDeviceHardwareKeys) {
+        boolean hasHomeKey = (mDeviceHardwareKeys & KEY_MASK_HOME) != 0;
+        boolean hasBackKey = (mDeviceHardwareKeys & KEY_MASK_BACK) != 0;
+        return hasHomeKey && hasBackKey;
+    }
+
+    public boolean shouldShowTile() {
+        return (getPreferenceScreen().getPreferenceCount() > 0);
     }
 
     @Override
