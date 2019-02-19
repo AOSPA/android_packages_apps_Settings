@@ -41,6 +41,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
     private Handler mHandler;
     private SwitchPreference mNavigationBar;
+    private int mDeviceHardwareKeys;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,10 +51,23 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
         mHandler = new Handler();
 
+        final Resources res = getActivity().getResources();
+
+        mDeviceHardwareKeys = res.getInteger(
+                com.android.internal.R.integer.config_deviceHardwareKeys);
+
+        mOnlyHasCameraButton = res.getBoolean(
+                R.bool.config_has_only_camera_button);
+
         /* Navigation Bar */
         mNavigationBar = (SwitchPreference) findPreference(KEY_NAVIGATION_BAR);
         if (mNavigationBar != null) {
-            mNavigationBar.setOnPreferenceChangeListener(this);
+            if (mDeviceHardwareKeys != 0 && !mOnlyHasCameraButton) {
+                mNavigationBar.setOnPreferenceChangeListener(this);
+            } else {
+                mNavigationBar = null;
+                removePreference(KEY_NAVIGATION_BAR);
+            }
         }
 
     }
