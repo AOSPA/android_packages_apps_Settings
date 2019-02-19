@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,6 +28,7 @@ import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v14.preference.SwitchPreference;
 import android.text.TextUtils;
+import sun.misc.PerfCounter;
 
 import com.android.settings.R;
 import com.android.settings.search.Indexable;
@@ -41,6 +43,12 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
     private Handler mHandler;
     private SwitchPreference mNavigationBar;
+    private int mDeviceHardwareKeys;
+
+    private static final int KEY_MASK_HOME = 0x01;
+    private static final int KEY_MASK_BACK = 0x02;
+
+    private int prefCounter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,12 +58,32 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
         mHandler = new Handler();
 
+        final Resources res = getActivity().getResources();
+
+        mDeviceHardwareKeys = res.getInteger(
+                com.android.internal.R.integer.config_deviceHardwareKeys);
+
         /* Navigation Bar */
         mNavigationBar = (SwitchPreference) findPreference(KEY_NAVIGATION_BAR);
         if (mNavigationBar != null) {
-            mNavigationBar.setOnPreferenceChangeListener(this);
+            if (needsNavbar(mDeviceHardwareKeys)) {
+                mNavigationBar.setOnPreferenceChangeListener(this);
+            } else {
+                mNavigationBar = null;
+                removePreference(KEY_NAVIGATION_BAR);
+            }
         }
 
+    }
+
+    private boolean needsNavbar(int mDeviceHardwareKeys) {
+        boolean hasHomeKey = (mDeviceHardwareKeys & KEY_MASK_HOME) != 0;
+        boolean hasBackKey = (mDeviceHardwareKeys & KEY_MASK_BACK) != 0;
+        return hasHomeKey && hasBackKey;
+    }
+
+    public static boolean shouldShowTile(Context context) {
+        return (returnCounter() > 0);
     }
 
     @Override
@@ -75,8 +103,21 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             list.setValue(Integer.toString(value));
             list.setSummary(list.getEntry());
             list.setOnPreferenceChangeListener(this);
+            changeCounter(true);
         }
         return list;
+    }
+
+    private void changeCounter(boolean result) {
+        if(result) {
+            ++prefCounter;
+        } else {
+            --prefCounter;
+        }
+    }
+
+    private int returnCounter() {
+        return prefCounter;
     }
 
     private boolean handleOnPreferenceTreeClick(Preference preference) {
