@@ -15,7 +15,9 @@
  */
 package com.android.customization.model.theme;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -29,12 +31,15 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.core.graphics.PathParser;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
 import com.android.wallpaper.R;
+import com.android.wallpaper.asset.Asset;
 import com.android.wallpaper.asset.ResourceAsset;
+import com.android.wallpaper.model.WallpaperInfo;
 
 import org.json.JSONObject;
 
@@ -56,13 +61,17 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
     private final PreviewInfo mPreviewInfo;
     private final boolean mIsDefault;
     private final Map<String, String> mPackagesByCategory;
+    @Nullable private final WallpaperInfo mWallpaperInfo;
+    private WallpaperInfo mOverrideWallpaper;
 
     private ThemeBundle(String title, Map<String, String> overlayPackages,
-            boolean isDefault, PreviewInfo previewInfo) {
+            boolean isDefault, @Nullable WallpaperInfo wallpaperInfo,
+            PreviewInfo previewInfo) {
         mTitle = title;
         mIsDefault = isDefault;
         mPreviewInfo = previewInfo;
-        mPackagesByCategory = Collections.unmodifiableMap(overlayPackages);
+        mWallpaperInfo = wallpaperInfo;
+        mPackagesByCategory = Collections.unmodifiableMap(overlayPackages);        
     }
 
     @Override
@@ -114,6 +123,24 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         return mPreviewInfo;
     }
 
+    public void setOverrideThemeWallpaper(WallpaperInfo homeWallpaper) {
+        mOverrideWallpaper = homeWallpaper;
+    }
+
+    public boolean useThemeWallpaper() {
+        return mOverrideWallpaper == null && mWallpaperInfo != null;
+    }
+
+    public Asset getWallpaperPreviewAsset(Context context) {
+        return mOverrideWallpaper != null ?
+                mOverrideWallpaper.getThumbAsset(context) :
+                getPreviewInfo().wallpaperAsset;
+    }
+
+    public WallpaperInfo getWallpaperInfo() {
+        return mWallpaperInfo;
+    }
+
     boolean isDefault() {
         return mIsDefault;
     }
@@ -122,13 +149,14 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         return mPackagesByCategory.values();
     }
 
-    String getSerializedPackages() {
+    public String getSerializedPackages() {
         if (isDefault()) {
             return "";
         }
 
         return new JSONObject(mPackagesByCategory).toString();
     }
+
 
     public static class PreviewInfo {
         public final Typeface bodyFontFamily;
@@ -137,23 +165,35 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         @ColorInt public final int colorAccentDark;
         public final List<Drawable> icons;
         public final Drawable shapeDrawable;
-        @DrawableRes public final int wallpaperDrawableRes;
-        public final ResourceAsset colorPreviewDrawable;
-        public final ResourceAsset shapePreviewDrawable;
+        @Nullable public final ResourceAsset wallpaperAsset;
+        @Nullable public final ResourceAsset colorPreviewAsset;
+        @Nullable public final ResourceAsset shapePreviewAsset;
 
         private PreviewInfo(Typeface bodyFontFamily, Typeface headlineFontFamily,
                 int colorAccentLight, int colorAccentDark, List<Drawable> icons,
-                Drawable shapeDrawable, int wallpaperDrawableRes,
-                ResourceAsset colorPreviewDrawable, ResourceAsset shapePreviewDrawable) {
+                Drawable shapeDrawable, @Nullable ResourceAsset wallpaperAsset,
+                @Nullable ResourceAsset colorPreviewAsset,
+                @Nullable ResourceAsset shapePreviewAsset) {
             this.bodyFontFamily = bodyFontFamily;
             this.headlineFontFamily = headlineFontFamily;
             this.colorAccentLight = colorAccentLight;
             this.colorAccentDark = colorAccentDark;
             this.icons = icons;
             this.shapeDrawable = shapeDrawable;
-            this.wallpaperDrawableRes = wallpaperDrawableRes;
-            this.colorPreviewDrawable = colorPreviewDrawable;
-            this.shapePreviewDrawable = shapePreviewDrawable;
+            this.wallpaperAsset = wallpaperAsset;
+            this.colorPreviewAsset = colorPreviewAsset;
+            this.shapePreviewAsset = shapePreviewAsset;
+        }
+
+        /**
+         * Returns the accent color to be applied corresponding with the current configuration's
+         * UI mode.
+         * @return one of {@link #colorAccentDark} or {@link #colorAccentLight}
+         */
+        @ColorInt
+        public int resolveAccentColor(Resources res) {
+            return (res.getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                    == Configuration.UI_MODE_NIGHT_YES ? colorAccentDark : colorAccentLight;
         }
     }
 
@@ -167,9 +207,10 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         private List<Drawable> mIcons = new ArrayList<>();
         private String mShapePath;
         private boolean mIsDefault;
-        @DrawableRes private int mWallpaperDrawableResId;
+        private ResourceAsset mWallpaperAsset;
         private ResourceAsset mColorPreview;
         private ResourceAsset mShapePreview;
+        private WallpaperInfo mWallpaperInfo;
         private Map<String, String> mPackages = new HashMap<>();
 
         public ThemeBundle build() {
@@ -181,9 +222,9 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
                 shapeDrawable.setIntrinsicHeight((int) PATH_SIZE);
                 shapeDrawable.setIntrinsicWidth((int) PATH_SIZE);
             }
-            return new ThemeBundle(mTitle, mPackages, mIsDefault,
+            return new ThemeBundle(mTitle, mPackages, mIsDefault, mWallpaperInfo,
                     new PreviewInfo(mBodyFontFamily, mHeadlineFontFamily, mColorAccentLight,
-                            mColorAccentDark, mIcons, shapeDrawable, mWallpaperDrawableResId,
+                            mColorAccentDark, mIcons, shapeDrawable, mWallpaperAsset,
                             mColorPreview, mShapePreview));
         }
 
@@ -234,6 +275,19 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
 
         public Builder setShapePreview(ResourceAsset shapePreview) {
             mShapePreview = shapePreview;
+            return this;
+        }
+
+        public Builder setWallpaperInfo(String wallpaperPackageName, String wallpaperResName,
+                String themeId, @DrawableRes int wallpaperResId, @StringRes int titleResId,
+                @StringRes int attributionResId, @StringRes int actionUrlResId) {
+            mWallpaperInfo = new ThemeBundledWallpaperInfo(wallpaperPackageName, wallpaperResName,
+                    themeId, wallpaperResId, titleResId, attributionResId, actionUrlResId);
+            return this;
+        }
+
+        public Builder setWallpaperAsset(ResourceAsset wallpaperAsset) {
+            mWallpaperAsset = wallpaperAsset;
             return this;
         }
 

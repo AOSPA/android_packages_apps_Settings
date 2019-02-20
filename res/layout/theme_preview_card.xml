@@ -16,27 +16,34 @@
 -->
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/PreviewCard"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:contentPadding="0dp">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/theme_preview_card_background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/theme_preview_card_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="8dp"
-            android:drawablePadding="10dp"
-            android:textAppearance="@style/CardTitleTextAppearance"/>
-        <FrameLayout
-            android:id="@+id/theme_preview_card_body_container"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"/>
-    </LinearLayout>
-
+            android:padding="@dimen/preview_card_padding"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/theme_preview_card_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:drawablePadding="10dp"
+                android:textAppearance="@style/CardTitleTextAppearance"/>
+            <FrameLayout
+                android:id="@+id/theme_preview_card_body_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="8dp"/>
+        </LinearLayout>
+    </FrameLayout>
 </androidx.cardview.widget.CardView>
