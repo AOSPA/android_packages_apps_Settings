@@ -22,6 +22,10 @@ import android.os.UserHandle;
 
 import androidx.annotation.Nullable;
 
+import com.android.customization.model.ResourceConstants;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +36,7 @@ import java.util.Map;
  */
 public class OverlayManagerCompat {
     private final OverlayManager mOverlayManager;
+    private Map<Integer, Map<String, List<OverlayInfo>>> mOverlayByUser;
 
     public OverlayManagerCompat(Context context) {
         mOverlayManager = context.getSystemService(OverlayManager.class);
@@ -59,6 +64,7 @@ public class OverlayManagerCompat {
      */
     @Nullable
     public String getEnabledPackageName(String targetPackageName, String category) {
+        // Can't use mOverlayByUser map as the enabled state might change
         List<OverlayInfo> overlayInfos = getOverlayInfosForTarget(targetPackageName,
                 UserHandle.myUserId());
         for (OverlayInfo overlayInfo : overlayInfos) {
@@ -81,13 +87,42 @@ public class OverlayManagerCompat {
         return overlays;
     }
 
+    public List<String> getOverlayPackagesForCategory(String category, int userId,
+            String... targetPackages) {
+        List<String> overlays = new ArrayList<>();
+        ensureCategoryMapForUser(userId);
+        for (String target : targetPackages) {
+            for (OverlayInfo info
+                    : mOverlayByUser.get(userId).getOrDefault(target, Collections.emptyList())) {
+                if (category.equals(info.category)) {
+                    overlays.add(info.packageName);
+                }
+            }
+        }
+        return overlays;
+    }
+
+    private void ensureCategoryMapForUser(int userId) {
+        if (mOverlayByUser == null) {
+            mOverlayByUser = new HashMap<>();
+        }
+        if (!mOverlayByUser.containsKey(userId)) {
+            Map<String, List<OverlayInfo>> overlaysByTarget = new HashMap<>();
+            for (String target : ResourceConstants.DEFAULT_TARGET_PACKAGES) {
+                overlaysByTarget.put(target, getOverlayInfosForTarget(target, userId));
+            }
+            mOverlayByUser.put(userId, overlaysByTarget);
+        }
+    }
+
+
     private List<OverlayInfo> getOverlayInfosForTarget(String targetPackageName, int userId) {
         return mOverlayManager.getOverlayInfosForTarget(targetPackageName, userId);
     }
 
     private void addAllEnabledOverlaysForTarget(Map<String, String> overlays, String target) {
-        for (OverlayInfo overlayInfo : getOverlayInfosForTarget(target,
-                UserHandle.myUserId())) {
+        // Can't use mOverlayByUser map as the enabled state might change
+        for (OverlayInfo overlayInfo : getOverlayInfosForTarget(target, UserHandle.myUserId())) {
             if (overlayInfo.isEnabled()) {
                 overlays.put(overlayInfo.category, overlayInfo.packageName);
             }

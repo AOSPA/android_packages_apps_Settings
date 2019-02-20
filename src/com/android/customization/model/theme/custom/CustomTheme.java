@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.customization.model.theme;
+package com.android.customization.model.theme.custom;
 
 import android.view.View;
 
+import com.android.customization.model.theme.ThemeBundle;
 import com.android.wallpaper.R;
 
 import java.util.Map;

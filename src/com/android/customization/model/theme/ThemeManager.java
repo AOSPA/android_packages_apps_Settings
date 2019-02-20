@@ -16,6 +16,7 @@
 package com.android.customization.model.theme;
 
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
+import static com.android.customization.model.ResourceConstants.DEFAULT_TARGET_PACKAGES;
 import static com.android.customization.model.ResourceConstants.SETTINGS_PACKAGE;
 import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 
@@ -155,8 +156,8 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
 
     public Map<String, String> getCurrentOverlays() {
         if (mCurrentOverlays == null) {
-            mCurrentOverlays = mOverlayManagerCompat.getEnabledOverlaysForTargets(ANDROID_PACKAGE,
-                    SYSUI_PACKAGE, SETTINGS_PACKAGE);
+            mCurrentOverlays = mOverlayManagerCompat.getEnabledOverlaysForTargets(
+                    DEFAULT_TARGET_PACKAGES);
             mCurrentOverlays.entrySet().removeIf(
                     categoryAndPackage -> !THEME_CATEGORIES.contains(categoryAndPackage.getKey()));
         }
@@ -164,6 +165,7 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     }
 
     public String getStoredOverlays() {
-        return Settings.Secure.getString(mActivity.getContentResolver(), ResourceConstants.THEME_SETTING);
+        return Settings.Secure.getString(mActivity.getContentResolver(),
+                ResourceConstants.THEME_SETTING);
     }
 }

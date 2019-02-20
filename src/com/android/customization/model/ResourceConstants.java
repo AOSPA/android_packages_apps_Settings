@@ -37,6 +37,8 @@ public interface ResourceConstants {
      */
     String SYSUI_PACKAGE = "com.android.systemui";
 
+    String [] DEFAULT_TARGET_PACKAGES = {ANDROID_PACKAGE, SETTINGS_PACKAGE, SYSUI_PACKAGE};
+
     /**
      * Name of the system resource for icon mask
      */
@@ -56,4 +58,6 @@ public interface ResourceConstants {
      * Secure Setting used to store the currently set theme.
      */
     String THEME_SETTING = Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES;
+    String CONFIG_BODY_FONT_FAMILY = "config_bodyFontFamily";
+    String CONFIG_HEADLINE_FONT_FAMILY = "config_headlineFontFamily";
 }
