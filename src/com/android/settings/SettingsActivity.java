@@ -765,6 +765,13 @@ public class SettingsActivity extends SettingsDrawerActivity
                 !aboutPhoneV2Enabled, isAdmin)
                 || somethingChanged;
 
+        // Enable/disable buttons page
+        final boolean buttonsPageEnabled = getResources().getInteger(
+                com.android.internal.R.integer.config_deviceHardwareKeys) > 0;
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
+                        Settings.ButtonsSettingsActivity.class.getName()),
+                buttonsPageEnabled, isAdmin) || somethingChanged;
+
         if (UserHandle.MU_ENABLED && !isAdmin) {
 
             // When on restricted users, disable all extra categories (but only the settings ones).
