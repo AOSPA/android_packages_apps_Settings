@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "180f543c_225f9bf0",
+        "filename": "src/com/android/settings/ButtonsSettings.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-02-20T12:06:37Z",
+      "side": 1,
+      "message": "There’s no need to pass an argument here. NeedsNavbar is not static so it can use the member variable without needing any argument passed",
+      "revId": "5138f5a2c8774146651005d6f03fab9c30ec816e",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": false
+    }
+  ]
+}
