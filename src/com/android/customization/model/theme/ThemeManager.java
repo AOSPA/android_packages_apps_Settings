@@ -91,7 +91,7 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     @Override
     public void apply(ThemeBundle theme, Callback callback) {
         // Set wallpaper
-        if (theme.useThemeWallpaper()) {
+        if (theme.shouldUseThemeWallpaper()) {
             applyWallpaper(theme, new SetWallpaperCallback() {
                 @Override
                 public void onSuccess() {
