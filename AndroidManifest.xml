@@ -57,6 +57,7 @@
     <uses-permission android:name="android.permission.READ_SYNC_STATS" />
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_DEVICE_CONFIG" />
     <uses-permission android:name="android.permission.STATUS_BAR" />
     <uses-permission android:name="android.permission.MANAGE_USB" />
     <uses-permission android:name="android.permission.MANAGE_DEBUGGING" />
@@ -1273,6 +1274,17 @@
                 android:value="com.android.settings.backup.PrivacySettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <activity android:name="Settings$PrivacyDashboardActivity"
+                  android:label="@string/privacy_dashboard_title"
+                  android:icon="@drawable/ic_settings_privacy">
+            <intent-filter>
+                <action android:name="android.settings.PRIVACY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.privacy.PrivacyDashboardFragment" />
         </activity>
 
         <activity android:name="SetFullBackupPassword"
@@ -2821,10 +2833,6 @@
         <activity android:name=".backup.UserBackupSettingsActivity"
                   android:label="@string/privacy_settings_title"
                   android:icon="@drawable/ic_settings_backup">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.PRIVACY_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3013,7 +3021,7 @@
             android:label="@string/settings_panel_title"
             android:theme="@style/Theme.BottomDialog"
             android:excludeFromRecents="true"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:exported="true">
                  <intent-filter>
                      <action android:name="android.settings.panel.action.INTERNET_CONNECTIVITY" />
@@ -3043,16 +3051,7 @@
         <provider android:name=".slices.SettingsSliceProvider"
                   android:authorities="com.android.settings.slices;android.settings.slices"
                   android:exported="true"
-                  android:grantUriPermissions="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.app.slice.category.SLICE" />
-                <data android:scheme="settings"
-                      android:host="com.android.settings.slices" />
-            </intent-filter>
-        </provider>
+                  android:grantUriPermissions="true" />
 
         <receiver
             android:name=".slices.SliceBroadcastReceiver"
