@@ -16,9 +16,16 @@
 
 package com.android.settings.privacy;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.util.Log;
+import android.view.View;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -27,18 +34,24 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.ActionBarShadowController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
 public class PrivacyDashboardFragment extends DashboardFragment {
-    private static final String TAG = "PrivacyDashboardFragment";
+    private static final String TAG = "PrivacyDashboardFrag";
     private static final String KEY_LOCK_SCREEN_NOTIFICATIONS = "privacy_lock_screen_notifications";
     private static final String KEY_WORK_PROFILE_CATEGORY =
             "privacy_work_profile_notifications_category";
     private static final String KEY_NOTIFICATION_WORK_PROFILE_NOTIFICATIONS =
             "privacy_lock_screen_work_profile_notifications";
+
+    @VisibleForTesting
+    View mProgressHeader;
+    @VisibleForTesting
+    View mProgressAnimation;
 
     @Override
     public int getMetricsCategory() {
@@ -63,6 +76,52 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getSettingsLifecycle());
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(PermissionBarChartPreferenceController.class).setFragment(this /* fragment */);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        styleActionBar();
+        initLoadingBar();
+    }
+
+    @VisibleForTesting
+    void styleActionBar() {
+        final Activity activity = getActivity();
+        final ActionBar actionBar = activity.getActionBar();
+        final Lifecycle lifecycle = getSettingsLifecycle();
+        final View scrollView = getListView();
+
+        if (actionBar == null) {
+            Log.w(TAG, "No actionbar, cannot style actionbar.");
+            return;
+        }
+
+        actionBar.setElevation(0);
+        if (lifecycle != null && scrollView != null) {
+            ActionBarShadowController.attachToView(activity, lifecycle, scrollView);
+        }
+    }
+
+    @VisibleForTesting
+    void initLoadingBar() {
+        mProgressHeader = setPinnedHeaderView(R.layout.progress_header);
+        mProgressAnimation = mProgressHeader.findViewById(R.id.progress_bar_animation);
+        setLoadingEnabled(false);
+    }
+
+    @VisibleForTesting
+    void setLoadingEnabled(boolean enabled) {
+        if (mProgressHeader != null && mProgressAnimation != null) {
+            mProgressHeader.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
+            mProgressAnimation.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
+        }
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(

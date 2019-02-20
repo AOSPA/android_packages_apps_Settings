@@ -21,9 +21,6 @@ import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
-import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,7 +37,6 @@ import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
-import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -82,17 +78,6 @@ public class BluetoothDevicesSlice implements CustomSliceable {
 
     public BluetoothDevicesSlice(Context context) {
         mContext = context;
-    }
-
-    private static Bitmap getBitmapFromVectorDrawable(Drawable VectorDrawable) {
-        final Bitmap bitmap = Bitmap.createBitmap(VectorDrawable.getIntrinsicWidth(),
-                VectorDrawable.getIntrinsicHeight(), Config.ARGB_8888);
-        final Canvas canvas = new Canvas(bitmap);
-
-        VectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        VectorDrawable.draw(canvas);
-
-        return bitmap;
     }
 
     @Override
@@ -139,11 +124,6 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         // According to the displayable device count to add bluetooth device rows.
         for (int i = 0; i < deviceCount; i++) {
             listBuilder.addRow(rows.get(i));
-        }
-
-        // Add "Pair new device" if need.
-        if (rows.size() < DEFAULT_EXPANDED_ROW_COUNT) {
-            listBuilder.addRow(getPairNewDeviceRowBuilder());
         }
 
         return listBuilder.build();
@@ -234,7 +214,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
                 .getBtClassDrawableWithDescription(mContext, device);
 
         if (pair.first != null) {
-            return IconCompat.createWithBitmap(getBitmapFromVectorDrawable(pair.first));
+            return IconCompat.createWithBitmap(Utils.drawableToBitmap(pair.first));
         } else {
             return IconCompat.createWithResource(mContext,
                 com.android.internal.R.drawable.ic_settings_bluetooth);
@@ -281,27 +261,5 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     private CharSequence getSubTitle(int deviceCount) {
         return mContext.getResources().getQuantityString(R.plurals.show_bluetooth_devices,
                 deviceCount, deviceCount);
-    }
-
-    private ListBuilder.RowBuilder getPairNewDeviceRowBuilder() {
-        final CharSequence title = mContext.getText(R.string.bluetooth_pairing_pref_title);
-        final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.ic_menu_add);
-        final SliceAction sliceAction = SliceAction.createDeeplink(
-                getPairNewDeviceIntent(), icon, ListBuilder.ICON_IMAGE, title);
-
-        return new ListBuilder.RowBuilder()
-                .setTitleItem(icon, ListBuilder.ICON_IMAGE)
-                .setTitle(title)
-                .setPrimaryAction(sliceAction);
-    }
-
-    private PendingIntent getPairNewDeviceIntent() {
-        final Intent intent = new SubSettingLauncher(mContext)
-                .setDestination(BluetoothPairingDetail.class.getName())
-                .setTitleRes(R.string.bluetooth_pairing_page_title)
-                .setSourceMetricsCategory(SettingsEnums.BLUETOOTH_PAIRING)
-                .toIntent();
-
-        return PendingIntent.getActivity(mContext, 0  /* requestCode */, intent, 0  /* flags */);
     }
 }

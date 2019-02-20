@@ -306,7 +306,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mSubnetPref = screen.findPreference(KEY_SUBNET_MASK_PREF);
         mDnsPref = screen.findPreference(KEY_DNS_PREF);
 
-        mIpv6Category = (PreferenceCategory) screen.findPreference(KEY_IPV6_CATEGORY);
+        mIpv6Category = screen.findPreference(KEY_IPV6_CATEGORY);
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
 
         if (mAccessPoint.getSecurityString(false).equals("SAE")
@@ -320,7 +320,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     }
 
     private void setupEntityHeader(PreferenceScreen screen) {
-        LayoutPreference headerPref = (LayoutPreference) screen.findPreference(KEY_HEADER);
+        LayoutPreference headerPref = screen.findPreference(KEY_HEADER);
         mEntityHeaderController =
                 EntityHeaderController.newInstance(
                         mFragment.getActivity(), mFragment,
@@ -510,7 +510,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private static String ipv4PrefixLengthToSubnetMask(int prefixLength) {
         try {
             InetAddress all = InetAddress.getByAddress(
-                    new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255});
+                    new byte[]{(byte) 255, (byte) 255, (byte) 255, (byte) 255});
             return NetworkUtils.getNetworkPart(all, prefixLength).getHostAddress();
         } catch (UnknownHostException e) {
             return null;
@@ -542,8 +542,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
      * Returns whether the user can share the network represented by this preference with QR code.
      */
     private boolean canShareNetwork() {
-        return mAccessPoint.getConfig() != null && FeatureFlagUtils.isEnabled(mContext,
-                FeatureFlags.WIFI_SHARING);
+        return mAccessPoint.getConfig() != null;
     }
 
     /**
