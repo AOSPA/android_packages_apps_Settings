@@ -27,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.model.clock.ClockManager;
 import com.android.customization.model.clock.Clockface;
 import com.android.customization.picker.BasePreviewAdapter;
@@ -78,8 +79,18 @@ public class ClockFragment extends ToolbarFragment {
         mOptionsContainer = view.findViewById(R.id.options_container);
         setUpOptions();
         view.findViewById(R.id.apply_button).setOnClickListener(v -> {
-            mClockManager.apply(mSelectedOption);
-            getActivity().finish();
+            mClockManager.apply(mSelectedOption, new Callback() {
+                @Override
+                public void onSuccess() {
+                    getActivity().finish();
+                }
+
+                @Override
+                public void onError(@Nullable Throwable throwable) {
+                    //TODO(santie): handle
+                }
+            });
+
         });
         return view;
     }
