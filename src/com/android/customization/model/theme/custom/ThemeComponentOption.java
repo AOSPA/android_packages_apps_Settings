@@ -16,11 +16,14 @@
 package com.android.customization.model.theme.custom;
 
 import android.graphics.Typeface;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
+import com.android.wallpaper.R;
 
 /**
  * Represents an option of a component of a custom Theme (for example, a possible color, or font,
@@ -63,12 +66,13 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
         @Override
         public String getTitle() {
-            return mLabel;
+            return null;
         }
 
         @Override
         public void bindThumbnailTile(View view) {
-
+            ((TextView) view.findViewById(R.id.thumbnail_text)).setTypeface(
+                    mHeadlineFont);
         }
 
         @Override
@@ -78,12 +82,25 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
         @Override
         public int getLayoutResId() {
-            return 0;
+            return R.layout.theme_font_option;
         }
 
         @Override
         public void bindPreview(ViewGroup container) {
+            TextView header = container.findViewById(R.id.theme_preview_card_header);
+            header.setText(mLabel);
+            header.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_font, 0, 0);
 
+            ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
+            if (cardBody.getChildCount() == 0) {
+                LayoutInflater.from(container.getContext()).inflate(
+                        R.layout.preview_card_font_content,
+                        cardBody, true);
+            }
+            TextView title = container.findViewById(R.id.font_card_title);
+            title.setTypeface(mHeadlineFont);
+            TextView bodyText = container.findViewById(R.id.font_card_body);
+            bodyText.setTypeface(mBodyFont);
         }
     }
 

@@ -31,6 +31,7 @@
     <dimen name="preview_page_horizontal_margin">56dp</dimen>
     <dimen name="preview_page_top_margin">16dp</dimen>
     <dimen name="preview_page_bottom_margin">2dp</dimen>
+    <dimen name="component_preview_page_bottom_margin">36dp</dimen>
 
     <!-- Dimensions for the customization option tiles -->
     <dimen name="options_container_height">100dp</dimen>
@@ -62,4 +63,7 @@
     <dimen name="shape_preview_image_height">153dp</dimen>
 
     <dimen name="custom_theme_nav_height">56dp</dimen>
+
+    <!-- Note, using dp instead of sp as this is just the font thumbnail, not text -->
+    <dimen name="font_comonent_option_thumbnail_size">32dp</dimen>
 </resources>

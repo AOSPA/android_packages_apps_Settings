@@ -97,7 +97,20 @@
         [CHAR LIMIT=20] -->
     <string name="custom_theme_next">Next</string>
 
-    <!-- Title for a system Style/Theme (combination of fonts/colors/icons) that is defined and
+    <!-- Label for a system Style/Theme (combination of fonts/colors/icons) that is defined and
         customized by the user [CHAR LIMIT=15] -->
     <string name="custom_theme_title">Custom</string>
+
+    <!-- Title for a screen that lets the user define their custom system Style/Theme
+        [CHAR LIMIT=30] -->
+    <string name="custom_theme_fragment_title">Custom Style</string>
+
+    <!-- Title of a page allowing the user to choose a font for a custom theme -->
+    <string name="font_component_title">Choose font</string>
+
+    <string name="font_component_option_thumbnail" translatable="false">A</string>
+
+    <!-- Text explaining what the current step is in setting a custom theme, eg: "1 of 4".
+    [CHAR_LIMIT=40] -->
+    <string name="component_step_counter"><xliff:g name="current_step" example="1">%1$d</xliff:g> of <xliff:g name="total_steps" example="4">%2$d</xliff:g></string>
 </resources>
