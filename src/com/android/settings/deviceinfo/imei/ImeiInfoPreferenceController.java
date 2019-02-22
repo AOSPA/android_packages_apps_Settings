@@ -30,7 +30,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.slices.Sliceable;
-import com.android.settingslib.Utils;
+import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +74,38 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             mPreferenceList.add(multiSimPreference);
             updatePreference(multiSimPreference, simSlotNumber);
         }
+
+        final int phoneCount = mTelephonyManager.getPhoneCount();
+        if (Utils.isSupportCTPA(mContext) && phoneCount >= 2) {
+            final int slot0PhoneType = mTelephonyManager.getCurrentPhoneTypeForSlot(0);
+            final int slot1PhoneType = mTelephonyManager.getCurrentPhoneTypeForSlot(1);
+            if (PHONE_TYPE_CDMA != slot0PhoneType && PHONE_TYPE_CDMA != slot1PhoneType) {
+                addPreference(screen, 0, imeiPreferenceOrder + phoneCount,
+                        getPreferenceKey() + phoneCount, true);
+            } else if (PHONE_TYPE_CDMA == slot0PhoneType){
+                addPreference(screen, 0, imeiPreferenceOrder + phoneCount,
+                        getPreferenceKey() + phoneCount, false);
+            } else if (PHONE_TYPE_CDMA == slot1PhoneType) {
+                addPreference(screen, 1, imeiPreferenceOrder + phoneCount,
+                        getPreferenceKey() + phoneCount, false);
+            }
+        }
+    }
+
+    private void addPreference(PreferenceScreen screen, int slotNumber, int order,
+                               String key, boolean isCDMAPhone) {
+        final Preference multiSimPreference = createNewPreference(screen.getContext());
+        multiSimPreference.setOrder(order);
+        multiSimPreference.setKey(key);
+        screen.addPreference(multiSimPreference);
+        mPreferenceList.add(multiSimPreference);
+        if (isCDMAPhone) {
+            multiSimPreference.setTitle(getTitleForCdmaPhone(slotNumber));
+            multiSimPreference.setSummary(getMeid(slotNumber));
+        } else {
+            multiSimPreference.setTitle(getTitleForGsmPhone(slotNumber));
+            multiSimPreference.setSummary(mTelephonyManager.getImei(slotNumber));
+        }
     }
 
     @Override
@@ -88,6 +120,10 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         final int simSlot = mPreferenceList.indexOf(preference);
         if (simSlot == -1) {
             return false;
+        }
+
+        if (Utils.isSupportCTPA(mContext)) {
+            return true;
         }
 
         ImeiInfoDialogFragment.show(mFragment, simSlot, preference.getTitle().toString());
@@ -116,7 +152,13 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     }
 
     private void updatePreference(Preference preference, int simSlot) {
-        final int phoneType = mTelephonyManager.getPhoneType();
+        int phoneType = mTelephonyManager.getPhoneType();
+        if (Utils.isSupportCTPA(mContext)) {
+            phoneType = mTelephonyManager.getCurrentPhoneTypeForSlot(simSlot);
+            if (PHONE_TYPE_CDMA == phoneType) {
+                simSlot = 0;
+            }
+        }
         if (phoneType == PHONE_TYPE_CDMA) {
             preference.setTitle(getTitleForCdmaPhone(simSlot));
             preference.setSummary(getMeid(simSlot));
