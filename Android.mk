@@ -29,7 +29,11 @@ LOCAL_STATIC_ANDROID_LIBRARIES := WallpaperPicker2CommonDepsLib
 
 LOCAL_PROGUARD_ENABLED := disabled
 
-LOCAL_SDK_VERSION := system_current
+ifneq (,$(wildcard frameworks/base))
+  LOCAL_PRIVATE_PLATFORM_APIS := true
+else
+  LOCAL_SDK_VERSION := system_current
+endif
 
 LOCAL_PACKAGE_NAME := ThemePicker
 LOCAL_PRIVILEGED_MODULE := true
