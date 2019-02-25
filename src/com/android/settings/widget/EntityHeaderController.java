@@ -49,6 +49,7 @@ import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.ActionBarShadowController;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.lang.annotation.Retention;
@@ -321,7 +322,7 @@ public class EntityHeaderController {
                         Utils.getColorAttrDefaultColor(activity, android.R.attr.colorPrimaryDark)));
         actionBar.setElevation(0);
         if (mRecyclerView != null && mLifecycle != null) {
-            ActionBarShadowController.attachToRecyclerView(mActivity, mLifecycle, mRecyclerView);
+            ActionBarShadowController.attachToView(mActivity, mLifecycle, mRecyclerView);
         }
 
         return this;
@@ -344,7 +345,7 @@ public class EntityHeaderController {
                 if (mEditOnClickListener == null) {
                     button.setVisibility(View.GONE);
                 } else {
-                    button.setImageResource(R.drawable.ic_mode_edit);
+                    button.setImageResource(com.android.internal.R.drawable.ic_mode_edit);
                     button.setVisibility(View.VISIBLE);
                     button.setOnClickListener(mEditOnClickListener);
                 }

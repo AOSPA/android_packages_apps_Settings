@@ -68,6 +68,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
+import com.android.settings.wifi.details.WifiPrivacyPreferenceController;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.wifi.AccessPoint;
@@ -267,8 +268,6 @@ public class WifiConfigController implements TextWatcher,
                 com.android.settings.core.FeatureFlags.WIFI_MAC_RANDOMIZATION)) {
             View privacySettingsLayout = mView.findViewById(R.id.privacy_settings_fields);
             privacySettingsLayout.setVisibility(View.VISIBLE);
-            // Set default value
-            mPrivacySettingsSpinner.setSelection(WifiConfiguration.RANDOMIZATION_PERSISTENT);
         }
         mHiddenSettingsSpinner.setOnItemSelectedListener(this);
         mHiddenWarningView = mView.findViewById(R.id.hidden_settings_warning);
@@ -306,7 +305,12 @@ public class WifiConfigController implements TextWatcher,
                 mHiddenSettingsSpinner.setSelection(config.hiddenSSID
                         ? HIDDEN_NETWORK
                         : NOT_HIDDEN_NETWORK);
-                mPrivacySettingsSpinner.setSelection(config.macRandomizationSetting);
+
+                final int prefMacValue =
+                        WifiPrivacyPreferenceController.translateMacRandomizedValueToPrefValue(
+                                config.macRandomizationSetting);
+                mPrivacySettingsSpinner.setSelection(prefMacValue);
+
                 if (config.getIpAssignment() == IpAssignment.STATIC) {
                     mIpSettingsSpinner.setSelection(STATIC_IP);
                     showAdvancedFields = true;
@@ -380,8 +384,15 @@ public class WifiConfigController implements TextWatcher,
                         if (config != null && config.isPasspoint()) {
                             providerFriendlyName = config.providerFriendlyName;
                         }
+                        String suggestionOrSpecifierPackageName = null;
+                        if (config != null
+                                && (config.fromWifiNetworkSpecifier
+                                || config.fromWifiNetworkSuggestion)) {
+                            suggestionOrSpecifierPackageName = config.creatorName;
+                        }
                         String summary = AccessPoint.getSummary(
-                                mConfigUi.getContext(), state, isEphemeral, providerFriendlyName);
+                                mConfigUi.getContext(), /* ssid */ null, state, isEphemeral,
+                                suggestionOrSpecifierPackageName);
                         addRow(group, R.string.wifi_status, summary);
                     }
 
@@ -812,7 +823,10 @@ public class WifiConfigController implements TextWatcher,
         }
 
         if (mPrivacySettingsSpinner != null) {
-            config.macRandomizationSetting = mPrivacySettingsSpinner.getSelectedItemPosition();
+            final int macValue =
+                    WifiPrivacyPreferenceController.translatePrefValueToMacRandomizedValue(
+                            mPrivacySettingsSpinner.getSelectedItemPosition());
+            config.macRandomizationSetting = macValue;
         }
 
         return config;

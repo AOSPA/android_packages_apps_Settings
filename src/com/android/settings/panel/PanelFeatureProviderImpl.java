@@ -16,18 +16,24 @@
 
 package com.android.settings.panel;
 
+import static com.android.settingslib.media.MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT;
+
 import android.content.Context;
 import android.provider.Settings;
 
 public class PanelFeatureProviderImpl implements PanelFeatureProvider {
 
     @Override
-    public PanelContent getPanel(Context context, String panelType) {
+    public PanelContent getPanel(Context context, String panelType, String packageName) {
         switch (panelType) {
             case Settings.Panel.ACTION_INTERNET_CONNECTIVITY:
                 return InternetConnectivityPanel.create(context);
             case Settings.Panel.ACTION_VOLUME:
                 return VolumePanel.create(context);
+            case Settings.Panel.ACTION_NFC:
+                return NfcPanel.create(context);
+            case ACTION_MEDIA_OUTPUT:
+                return MediaOutputPanel.create(context, packageName);
         }
 
         throw new IllegalStateException("No matching panel for: "  + panelType);

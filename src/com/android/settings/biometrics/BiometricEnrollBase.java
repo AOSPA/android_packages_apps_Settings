@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.annotation.Nullable;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -32,8 +34,8 @@ import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
-import com.google.android.setupcompat.item.FooterButton;
-import com.google.android.setupcompat.template.ButtonFooterMixin;
+import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 
 /**
@@ -78,7 +80,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     protected boolean mLaunchedConfirmLock;
     protected byte[] mToken;
     protected int mUserId;
-    protected ButtonFooterMixin mButtonFooterMixin;
+    protected FooterBarMixin mFooterBarMixin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,8 +139,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     }
 
     protected FooterButton getNextButton() {
-        if (mButtonFooterMixin != null) {
-            return mButtonFooterMixin.getPrimaryButton();
+        if (mFooterBarMixin != null) {
+            return mFooterBarMixin.getPrimaryButton();
         }
         return null;
     }
@@ -148,7 +150,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
 
     protected Intent getFingerprintEnrollingIntent() {
         Intent intent = new Intent();
-        intent.setClassName("com.android.settings", FingerprintEnrollEnrolling.class.getName());
+        intent.setClassName(SETTINGS_PACKAGE_NAME, FingerprintEnrollEnrolling.class.getName());
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);

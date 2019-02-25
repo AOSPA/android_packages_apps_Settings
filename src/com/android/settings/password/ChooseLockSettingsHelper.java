@@ -16,6 +16,8 @@
 
 package com.android.settings.password;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -44,6 +46,18 @@ public final class ChooseLockSettingsHelper {
     public static final String EXTRA_KEY_FOR_FINGERPRINT = "for_fingerprint";
     public static final String EXTRA_KEY_FOR_FACE = "for_face";
     public static final String EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT = "for_cred_req_boot";
+
+    /**
+     * Intent extra for passing the requested min password complexity to later steps in the set new
+     * screen lock flow.
+     */
+    public static final String EXTRA_KEY_REQUESTED_MIN_COMPLEXITY = "requested_min_complexity";
+
+    /**
+     * Intent extra for passing the label of the calling app to later steps in the set new screen
+     * lock flow.
+     */
+    public static final String EXTRA_KEY_CALLER_APP_NAME = "caller_app_name";
 
     /**
      * When invoked via {@link ConfirmLockPassword.InternalActivity}, this flag
@@ -396,7 +410,7 @@ public final class ChooseLockSettingsHelper {
         if (extras != null) {
             intent.putExtras(extras);
         }
-        intent.setClassName(ConfirmDeviceCredentialBaseFragment.PACKAGE, activityClass.getName());
+        intent.setClassName(SETTINGS_PACKAGE_NAME, activityClass.getName());
         if (external) {
             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
             if (mFragment != null) {

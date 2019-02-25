@@ -101,7 +101,7 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.wifi_modify);
-        item.setIcon(R.drawable.ic_mode_edit);
+        item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -152,7 +152,7 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
 
         if (requestCode == REQUEST_CODE_CONFIRM_DEVICE_CREDENTIALS
                 && resultCode == Activity.RESULT_OK) {
-            mWifiDetailPreferenceController.launchQRCodeGenerator();
+            mWifiDetailPreferenceController.launchWifiDppConfiguratorActivity();
         }
     }
 }

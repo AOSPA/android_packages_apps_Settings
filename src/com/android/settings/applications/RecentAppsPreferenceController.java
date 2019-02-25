@@ -16,6 +16,8 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.app.usage.UsageStats;
@@ -91,7 +93,7 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
         SKIP_SYSTEM_PACKAGES.addAll(Arrays.asList(
                 "android",
                 "com.android.phone",
-                "com.android.settings",
+                SETTINGS_PACKAGE_NAME,
                 "com.android.systemui",
                 "com.android.providers.calendar",
                 "com.android.providers.media"
@@ -312,6 +314,9 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
 
         if (SKIP_SYSTEM_PACKAGES.contains(pkgName)) {
             Log.d(TAG, "System package, skipping " + pkgName);
+            return false;
+        }
+        if (AppUtils.isHiddenSystemModule(mContext, pkgName)) {
             return false;
         }
         final Intent launchIntent = new Intent().addCategory(Intent.CATEGORY_LAUNCHER)

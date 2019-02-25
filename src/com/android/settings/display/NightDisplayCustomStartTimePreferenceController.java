@@ -18,21 +18,18 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
-
 import androidx.preference.Preference;
-
-import com.android.internal.app.ColorDisplayController;
 import com.android.settings.core.BasePreferenceController;
 
 public class NightDisplayCustomStartTimePreferenceController extends BasePreferenceController {
 
-    private ColorDisplayController mController;
+    private ColorDisplayManager mColorDisplayManager;
     private NightDisplayTimeFormatter mTimeFormatter;
 
     public NightDisplayCustomStartTimePreferenceController(Context context, String key) {
         super(context, key);
 
-        mController = new ColorDisplayController(context);
+        mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
         mTimeFormatter = new NightDisplayTimeFormatter(context);
     }
 
@@ -44,8 +41,10 @@ public class NightDisplayCustomStartTimePreferenceController extends BasePrefere
 
     @Override
     public final void updateState(Preference preference) {
-        preference.setVisible(mController.getAutoMode() == ColorDisplayController.AUTO_MODE_CUSTOM);
+        preference
+                .setVisible(mColorDisplayManager.getNightDisplayAutoMode()
+                        == ColorDisplayManager.AUTO_MODE_CUSTOM_TIME);
         preference.setSummary(mTimeFormatter.getFormattedTimeString(
-                mController.getCustomStartTime()));
+                mColorDisplayManager.getNightDisplayCustomStartTime()));
     }
 }

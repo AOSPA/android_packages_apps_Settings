@@ -41,10 +41,6 @@
     <!-- Whether to show Camera laser sensor switch in Developer Options -->
     <bool name="config_show_camera_laser_sensor">false</bool>
 
-    <!-- Whether to show Connected MAC Randomization in Developer Options
-         as not all devices can support dynamic MAC address change.  -->
-    <bool name="config_wifi_support_connected_mac_randomization">false</bool>
-
     <!-- Fully-qualified class name for the implementation of the FeatureFactory to be instantiated. -->
     <string name="config_featureFactory" translatable="false">com.android.settings.overlay.FeatureFactoryImpl</string>
 
@@ -142,6 +138,15 @@
 
     <!-- Whether or not homepage should display user's account avatar -->
     <bool name="config_show_avatar_in_homepage">false</bool>
+
+    <!-- Whether or not emergency info tile should display in device info page -->
+    <bool name="config_show_emergency_info_in_device_info">true</bool>
+
+    <!-- Whether or not branded account info tile should display in device info page -->
+    <bool name="config_show_branded_account_in_device_info">true</bool>
+
+    <!-- Whether or not device header widget tile should display in device info page -->
+    <bool name="config_show_device_header_in_device_info">true</bool>
 
     <!-- Whether or not TopLevelSettings should force rounded icon for injected tiles -->
     <bool name="config_force_rounded_icon_TopLevelSettings">true</bool>
