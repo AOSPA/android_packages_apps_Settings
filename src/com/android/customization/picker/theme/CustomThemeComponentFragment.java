@@ -116,6 +116,10 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
         mHost.setCurrentStep(mPosition);
     }
 
+    public ThemeComponentOption getSelectedOption() {
+        return mSelectedOption;
+    }
+
     private void bindPreview() {
         mSelectedOption.bindPreview(mPreviewCard);
     }

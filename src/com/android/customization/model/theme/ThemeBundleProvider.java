@@ -16,6 +16,7 @@
 package com.android.customization.model.theme;
 
 import com.android.customization.model.CustomizationManager.OptionsFetchedListener;
+import com.android.customization.model.theme.custom.CustomTheme;
 
 /**
  * Interface for a class that can retrieve Themes from the system.
@@ -34,4 +35,5 @@ public interface ThemeBundleProvider {
      */
     void fetch(OptionsFetchedListener<ThemeBundle> callback, boolean reload);
 
+    void storeCustomTheme(CustomTheme theme);
 }

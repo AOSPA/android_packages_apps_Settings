@@ -16,9 +16,9 @@
 package com.android.customization.model.theme.custom;
 
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
-import static com.android.customization.model.ResourceConstants.DEFAULT_TARGET_PACKAGES;
 import static com.android.customization.model.ResourceConstants.ICON_PREVIEW_DRAWABLE_NAME;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_LAUNCHER;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SETTINGS;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
 import static com.android.customization.model.ResourceConstants.SYSUI_ICONS_FOR_PREVIEW;
@@ -32,6 +32,7 @@ import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.util.Log;
 
+import com.android.customization.model.ResourceConstants;
 import com.android.customization.model.theme.OverlayManagerCompat;
 import com.android.customization.model.theme.custom.ThemeComponentOption.IconOption;
 import com.android.wallpaper.R;
@@ -51,13 +52,17 @@ public class IconOptionsProvider extends ThemeComponentOptionProvider<IconOption
 
     private final List<String> mSysUiIconsOverlayPackages = new ArrayList<>();
     private final List<String> mSettingsIconsOverlayPackages = new ArrayList<>();
+    private final List<String> mLauncherIconsOverlayPackages = new ArrayList<>();
 
     public IconOptionsProvider(Context context, OverlayManagerCompat manager) {
         super(context, manager, OVERLAY_CATEGORY_ICON_ANDROID);
+        String[] targetPackages = ResourceConstants.getPackagesToOverlay(context);
         mSysUiIconsOverlayPackages.addAll(manager.getOverlayPackagesForCategory(
-                OVERLAY_CATEGORY_ICON_SYSUI, UserHandle.myUserId(), DEFAULT_TARGET_PACKAGES));
+                OVERLAY_CATEGORY_ICON_SYSUI, UserHandle.myUserId(), targetPackages));
         mSettingsIconsOverlayPackages.addAll(manager.getOverlayPackagesForCategory(
-                OVERLAY_CATEGORY_ICON_SETTINGS, UserHandle.myUserId(), DEFAULT_TARGET_PACKAGES));
+                OVERLAY_CATEGORY_ICON_SETTINGS, UserHandle.myUserId(), targetPackages));
+        mLauncherIconsOverlayPackages.addAll(manager.getOverlayPackagesForCategory(
+                OVERLAY_CATEGORY_ICON_LAUNCHER, UserHandle.myUserId(), targetPackages));
     }
 
     @Override
@@ -93,8 +98,12 @@ public class IconOptionsProvider extends ThemeComponentOptionProvider<IconOption
             addOrUpdateOption(optionsByPrefix, overlayPackage, OVERLAY_CATEGORY_ICON_SETTINGS);
         }
 
+        for (String overlayPackage : mLauncherIconsOverlayPackages) {
+            addOrUpdateOption(optionsByPrefix, overlayPackage, OVERLAY_CATEGORY_ICON_LAUNCHER);
+        }
+
         for (IconOption option : optionsByPrefix.values()) {
-            if (option.isValid()) {
+            if (option.isValid(mContext)) {
                 mOptions.add(option);
                 option.setLabel(mContext.getString(R.string.icon_component_label, mOptions.size()));
             }

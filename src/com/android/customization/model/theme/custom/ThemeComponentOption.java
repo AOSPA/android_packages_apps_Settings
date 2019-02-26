@@ -15,12 +15,12 @@
  */
 package com.android.customization.model.theme.custom;
 
-import static com.android.customization.model.ResourceConstants.DEFAULT_TARGET_PACKAGES;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
 import static com.android.customization.model.ResourceConstants.SYSUI_ICONS_FOR_PREVIEW;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -32,12 +32,14 @@ import android.widget.TextView;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
+import com.android.customization.model.ResourceConstants;
 import com.android.wallpaper.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Represents an option of a component of a custom Theme (for example, a possible color, or font,
@@ -53,7 +55,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         mOverlayPackageNames.put(category, packageName);
     }
 
-    public Map<String, String> getOverlayPackageNames() {
+    public Map<String, String> getOverlayPackages() {
         return mOverlayPackageNames;
     }
 
@@ -91,7 +93,9 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
         @Override
         public boolean isActive(CustomizationManager<ThemeComponentOption> manager) {
-            return false;
+            CustomThemeManager customThemeManager = (CustomThemeManager) manager;
+            return Objects.equals(getOverlayPackages().get(OVERLAY_CATEGORY_FONT),
+                    customThemeManager.getOverlayPackages().get(OVERLAY_CATEGORY_FONT));
         }
 
         @Override
@@ -140,7 +144,14 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
         @Override
         public boolean isActive(CustomizationManager<ThemeComponentOption> manager) {
-            return false;
+            CustomThemeManager customThemeManager = (CustomThemeManager) manager;
+             for (Map.Entry<String, String> overlayEntry : getOverlayPackages().entrySet()) {
+                 if(!Objects.equals(overlayEntry.getValue(),
+                         customThemeManager.getOverlayPackages().get(overlayEntry.getKey()))) {
+                     return false;
+                 }
+             }
+             return true;
         }
 
         @Override
@@ -169,8 +180,12 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
             mIcons.add(previewIcon);
         }
 
-        public boolean isValid() {
-            return getOverlayPackageNames().keySet().size() == DEFAULT_TARGET_PACKAGES.length
+        /**
+         * @return whether this icon option has overlays and previews for all the required packages
+         */
+        public boolean isValid(Context context) {
+            return getOverlayPackages().keySet().size() ==
+                    ResourceConstants.getPackagesToOverlay(context).length
                 && mIcons.size() == SYSUI_ICONS_FOR_PREVIEW.length + 1;
         }
 

@@ -15,21 +15,50 @@
  */
 package com.android.customization.model.theme.custom;
 
+import android.content.Context;
+
+import androidx.annotation.Nullable;
+
 import com.android.customization.model.CustomizationManager;
+import com.android.wallpaper.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CustomThemeManager implements CustomizationManager<ThemeComponentOption> {
-    @Override
-    public boolean isAvailable() {
-        return false;
+
+    private final Map<String, String> overlayPackages = new HashMap<>();
+
+    public CustomThemeManager(@Nullable CustomTheme existingTheme) {
+        if (existingTheme != null && existingTheme.isDefined()) {
+            overlayPackages.putAll(existingTheme.getPackagesByCategory());
+        }
     }
 
     @Override
-    public void apply(ThemeComponentOption option, Callback callback) {
+    public boolean isAvailable() {
+        return true;
+    }
 
+    @Override
+    public void apply(ThemeComponentOption option, @Nullable Callback callback) {
+        overlayPackages.putAll(option.getOverlayPackages());
+        if (callback != null) {
+            callback.onSuccess();
+        }
+    }
+
+    public Map<String, String> getOverlayPackages() {
+        return overlayPackages;
+    }
+
+    public CustomTheme buildPartialCustomTheme(Context context) {
+        return new CustomTheme(context.getString(R.string.custom_theme_title),
+                overlayPackages, null);
     }
 
     @Override
     public void fetchOptions(OptionsFetchedListener<ThemeComponentOption> callback) {
-
+        //Unused
     }
 }
