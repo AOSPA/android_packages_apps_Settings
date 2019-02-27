@@ -15,6 +15,8 @@
  */
 package com.android.customization.model;
 
+import android.provider.Settings.Secure;
+
 /**
  * Holds common strings used to reference system resources.
  */
@@ -35,9 +37,27 @@ public interface ResourceConstants {
      */
     String SYSUI_PACKAGE = "com.android.systemui";
 
+    String [] DEFAULT_TARGET_PACKAGES = {ANDROID_PACKAGE, SETTINGS_PACKAGE, SYSUI_PACKAGE};
+
     /**
      * Name of the system resource for icon mask
      */
     String CONFIG_ICON_MASK = "config_icon_mask";
 
+    /**
+     * Overlay Categories that theme picker handles.
+     */
+    String OVERLAY_CATEGORY_COLOR = "android.theme.customization.accent_color";
+    String OVERLAY_CATEGORY_FONT = "android.theme.customization.font";
+    String OVERLAY_CATEGORY_SHAPE = "android.theme.customization.adaptive_icon_shape";
+    String OVERLAY_CATEGORY_ICON_ANDROID = "android.theme.customization.icon_pack.android";
+    String OVERLAY_CATEGORY_ICON_SETTINGS = "android.theme.customization.icon_pack.settings";
+    String OVERLAY_CATEGORY_ICON_SYSUI = "android.theme.customization.icon_pack.systemui";
+
+    /**
+     * Secure Setting used to store the currently set theme.
+     */
+    String THEME_SETTING = Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES;
+    String CONFIG_BODY_FONT_FAMILY = "config_bodyFontFamily";
+    String CONFIG_HEADLINE_FONT_FAMILY = "config_headlineFontFamily";
 }

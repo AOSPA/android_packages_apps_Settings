@@ -64,14 +64,14 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
     @Nullable private final WallpaperInfo mWallpaperInfo;
     private WallpaperInfo mOverrideWallpaper;
 
-    private ThemeBundle(String title, Map<String, String> overlayPackages,
+    protected ThemeBundle(String title, Map<String, String> overlayPackages,
             boolean isDefault, @Nullable WallpaperInfo wallpaperInfo,
             PreviewInfo previewInfo) {
         mTitle = title;
         mIsDefault = isDefault;
         mPreviewInfo = previewInfo;
         mWallpaperInfo = wallpaperInfo;
-        mPackagesByCategory = Collections.unmodifiableMap(overlayPackages);        
+        mPackagesByCategory = Collections.unmodifiableMap(overlayPackages);
     }
 
     @Override
@@ -127,7 +127,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         mOverrideWallpaper = homeWallpaper;
     }
 
-    public boolean useThemeWallpaper() {
+    public boolean shouldUseThemeWallpaper() {
         return mOverrideWallpaper == null && mWallpaperInfo != null;
     }
 
