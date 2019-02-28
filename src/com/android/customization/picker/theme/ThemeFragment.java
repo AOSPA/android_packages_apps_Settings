@@ -182,7 +182,6 @@ public class ThemeFragment extends ToolbarFragment {
     private void setUpOptions(@Nullable Bundle savedInstanceState) {
         mThemeManager.fetchOptions(options -> {
             mOptionsController = new OptionSelectorController(mOptionsContainer, options);
-
             mOptionsController.addListener(selected -> {
                 if (selected instanceof CustomTheme && !((CustomTheme) selected).isDefined()) {
                     navigateToCustomTheme();
@@ -195,7 +194,6 @@ public class ThemeFragment extends ToolbarFragment {
             mOptionsController.initOptions(mThemeManager);
             String previouslySelected = savedInstanceState != null
                     ? savedInstanceState.getString(KEY_SELECTED_THEME) : null;
-
             for (ThemeBundle theme : options) {
                 if (previouslySelected != null
                         && previouslySelected.equals(theme.getSerializedPackages())) {
@@ -204,6 +202,11 @@ public class ThemeFragment extends ToolbarFragment {
                     mSelectedTheme = theme;
                     break;
                 }
+            }
+            if (mSelectedTheme == null) {
+                // Select the default theme if there is no matching custom enabled theme
+                // TODO(b/124796742): default to custom if there is no matching theme bundle
+                mSelectedTheme = options.get(0);
             }
             mOptionsController.setSelectedOption(mSelectedTheme);
         });
