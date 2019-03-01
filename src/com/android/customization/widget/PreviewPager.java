@@ -211,12 +211,8 @@ public class PreviewPager extends LinearLayout {
     private void updateIndicator(int position) {
         int adapterCount = mAdapter.getCount();
         if (adapterCount > 1) {
-            mPreviousArrow.setVisibility(View.VISIBLE);
-            mNextArrow.setVisibility(View.VISIBLE);
-            mPreviousArrow.setEnabled(position != 0);
-            ((ViewGroup) mPreviousArrow).getChildAt(0).setEnabled(position != 0);
-            mNextArrow.setEnabled(position != (adapterCount - 1));
-            ((ViewGroup) mNextArrow).getChildAt(0).setEnabled(position != (adapterCount - 1));
+            mPreviousArrow.setVisibility(position != 0 ? View.VISIBLE : View.GONE);
+            mNextArrow.setVisibility(position != (adapterCount - 1) ? View.VISIBLE : View.GONE);
         } else {
             mPageIndicator.setVisibility(View.GONE);
             mPreviousArrow.setVisibility(View.GONE);
