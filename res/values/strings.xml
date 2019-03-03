@@ -56,6 +56,9 @@
     <!-- Sample text used to show a preview of a selected font [CHAR LIMIT=3] -->
     <string name="theme_font_example">ABC</string>
 
+    <!-- Plus sign used to indicate that the user can add a custom theme -->
+    <string name="add_custom_theme" translatable="false">+</string>
+
     <!-- Name for the Android Theme that comes preset with the device [CHAR LIMIT=10]-->
     <string name="default_theme_title">Default</string>
 
@@ -89,4 +92,12 @@
     <!-- Message shown when a theme couldn't be applied in the system because of an error
         [CHAR LIMIT=NONE] -->
     <string name="apply_theme_error_msg">There was a problem applying the style</string>
+
+    <!-- Label for a button that takes the user to the next step when configuring a custom theme.
+        [CHAR LIMIT=20] -->
+    <string name="custom_theme_next">Next</string>
+
+    <!-- Title for a system Style/Theme (combination of fonts/colors/icons) that is defined and
+        customized by the user [CHAR LIMIT=15] -->
+    <string name="custom_theme_title">Custom</string>
 </resources>
