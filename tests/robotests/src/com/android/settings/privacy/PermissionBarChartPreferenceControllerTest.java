@@ -33,6 +33,7 @@ import android.content.pm.UserInfo;
 import android.os.UserManager;
 import android.permission.RuntimePermissionUsageInfo;
 import android.provider.DeviceConfig;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.preference.PreferenceScreen;
 
@@ -55,6 +56,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowAccessibilityManager;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 import java.util.ArrayList;
@@ -80,6 +82,9 @@ public class PermissionBarChartPreferenceControllerTest {
         final Context context = RuntimeEnvironment.application;
         final UserManager userManager = context.getSystemService(UserManager.class);
         final ShadowUserManager shadowUserManager = Shadow.extract(userManager);
+        final ShadowAccessibilityManager accessibilityManager = Shadow.extract(
+                AccessibilityManager.getInstance(context));
+        accessibilityManager.setEnabledAccessibilityServiceList(new ArrayList<>());
         shadowUserManager.addProfile(new UserInfo(123, null, 0));
         when(FakeFeatureFactory.setupForTest().securityFeatureProvider.getLockPatternUtils(
                 any(Context.class))).thenReturn(mLockPatternUtils);
@@ -120,6 +125,18 @@ public class PermissionBarChartPreferenceControllerTest {
     }
 
     @Test
+    public void displayPreference_usageInfosSet_shouldSetBarViewInfos() {
+        final RuntimePermissionUsageInfo info1 =
+                new RuntimePermissionUsageInfo("permission 1", 10);
+        mController.mOldUsageInfos.add(info1);
+
+        mController.displayPreference(mScreen);
+
+        verify(mPreference).setBarViewInfos(any(BarViewInfo[].class));
+        verify(mPreference).initializeBarChart(any(BarChartInfo.class));
+    }
+
+    @Test
     public void onPermissionUsageResult_differentPermissionResultSet_shouldSetBarViewInfos() {
         final List<RuntimePermissionUsageInfo> infos1 = new ArrayList<>();
         final RuntimePermissionUsageInfo info1 =
@@ -154,7 +171,7 @@ public class PermissionBarChartPreferenceControllerTest {
     }
 
     @Test
-    public void onStart_permissionHubEnabled_shouldShowProgressBar() {
+    public void onStart_usageInfosNotSetAndPermissionHubEnabled_shouldShowProgressBar() {
         DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
                 DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
         mController.displayPreference(mScreen);
@@ -163,6 +180,21 @@ public class PermissionBarChartPreferenceControllerTest {
 
         verify(mFragment).setLoadingEnabled(true /* enabled */);
         verify(mPreference).updateLoadingState(true /* isLoading */);
+    }
+
+    @Test
+    public void onStart_usageInfosSetAndPermissionHubEnabled_shouldNotUpdatePrefLoadingState() {
+        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
+                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+        final RuntimePermissionUsageInfo info1 =
+                new RuntimePermissionUsageInfo("permission 1", 10);
+        mController.mOldUsageInfos.add(info1);
+        mController.displayPreference(mScreen);
+
+        mController.onStart();
+
+        verify(mFragment).setLoadingEnabled(true /* enabled */);
+        verify(mPreference).updateLoadingState(false /* isLoading */);
     }
 
     @Test

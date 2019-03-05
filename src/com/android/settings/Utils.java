@@ -56,6 +56,7 @@ import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.INetworkManagementService;
@@ -92,6 +93,7 @@ import android.widget.ListView;
 import android.widget.TabWidget;
 
 import androidx.annotation.StringRes;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
@@ -274,27 +276,21 @@ public final class Utils extends com.android.settingslib.Utils {
         final boolean movePadding = list.getScrollBarStyle() == View.SCROLLBARS_OUTSIDE_OVERLAY;
         if (movePadding) {
             final Resources res = list.getResources();
-            final int paddingSide = res.getDimensionPixelSize(R.dimen.settings_side_margin);
             final int paddingBottom = res.getDimensionPixelSize(
                     com.android.internal.R.dimen.preference_fragment_padding_bottom);
 
             if (parent instanceof PreferenceFrameLayout) {
                 ((PreferenceFrameLayout.LayoutParams) child.getLayoutParams()).removeBorders = true;
-
-                final int effectivePaddingSide = ignoreSidePadding ? 0 : paddingSide;
-                list.setPaddingRelative(effectivePaddingSide, 0, effectivePaddingSide, paddingBottom);
-            } else {
-                list.setPaddingRelative(paddingSide, 0, paddingSide, paddingBottom);
             }
+            list.setPaddingRelative(0 /* start */, 0 /* top */, 0 /* end */, paddingBottom);
         }
     }
 
     public static void forceCustomPadding(View view, boolean additive) {
         final Resources res = view.getResources();
-        final int paddingSide = res.getDimensionPixelSize(R.dimen.settings_side_margin);
 
-        final int paddingStart = paddingSide + (additive ? view.getPaddingStart() : 0);
-        final int paddingEnd = paddingSide + (additive ? view.getPaddingEnd() : 0);
+        final int paddingStart = additive ? view.getPaddingStart() : 0;
+        final int paddingEnd = additive ? view.getPaddingEnd() : 0;
         final int paddingBottom = res.getDimensionPixelSize(
                 com.android.internal.R.dimen.preference_fragment_padding_bottom);
 
@@ -955,24 +951,30 @@ public final class Utils extends com.android.settingslib.Utils {
             bitmap = Bitmap.createScaledBitmap(((BitmapDrawable) original).getBitmap(), width,
                     height, false);
         } else {
-            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            final Canvas canvas = new Canvas(bitmap);
-            original.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-            original.draw(canvas);
+            bitmap = createBitmap(original, width, height);
         }
         return new BitmapDrawable(null, bitmap);
     }
 
     /**
-     * Converts the {@link Drawable} to a {@link Bitmap}.
+     * Create an Icon pointing to a drawable.
      */
-    public static Bitmap drawableToBitmap(Drawable drawable) {
+    public static IconCompat createIconWithDrawable(Drawable drawable) {
+        Bitmap bitmap;
         if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable)drawable).getBitmap();
+            bitmap = ((BitmapDrawable)drawable).getBitmap();
+        } else {
+            final int width = drawable.getIntrinsicWidth();
+            final int height = drawable.getIntrinsicHeight();
+            bitmap = createBitmap(drawable,
+                    width > 0 ? width : 1,
+                    height > 0 ? height : 1);
         }
+        return IconCompat.createWithBitmap(bitmap);
+    }
 
-        final Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+    private static Bitmap createBitmap(Drawable drawable, int width, int height) {
+        final Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(bitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
@@ -1068,5 +1070,15 @@ public final class Utils extends com.android.settingslib.Utils {
         } else {
             return context.getResources();
         }
+    }
+
+    /**
+     * Returns true if SYSTEM_ALERT_WINDOW permission is available.
+     * Starting from Q, SYSTEM_ALERT_WINDOW is disabled on low ram phones.
+     */
+    public static boolean isSystemAlertWindowEnabled(Context context) {
+        // SYSTEM_ALERT_WINDOW is disabled on on low ram devices starting from Q
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        return !(am.isLowRamDevice() && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q));
     }
 }

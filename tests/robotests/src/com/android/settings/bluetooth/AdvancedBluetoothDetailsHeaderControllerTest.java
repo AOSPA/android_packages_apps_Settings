@@ -18,12 +18,17 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -49,13 +54,20 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
     private static final int BATTERY_LEVEL_MAIN = 30;
     private static final int BATTERY_LEVEL_LEFT = 25;
     private static final int BATTERY_LEVEL_RIGHT = 45;
+    private static final String ICON_URI = "content://test.provider/icon.png";
 
     private Context mContext;
 
     @Mock
     private BluetoothDevice mBluetoothDevice;
     @Mock
+    private Bitmap mBitmap;
+    @Mock
+    private ImageView mImageView;
+    @Mock
     private CachedBluetoothDevice mCachedDevice;
+    @Mock
+    private BluetoothAdapter mBluetoothAdapter;
     private AdvancedBluetoothDetailsHeaderController mController;
     private LayoutPreference mLayoutPreference;
 
@@ -69,21 +81,24 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
         mLayoutPreference = new LayoutPreference(mContext,
                 LayoutInflater.from(mContext).inflate(R.layout.advanced_bt_entity_header, null));
         mController.mLayoutPreference = mLayoutPreference;
+        mController.mBluetoothAdapter = mBluetoothAdapter;
         when(mCachedDevice.getDevice()).thenReturn(mBluetoothDevice);
     }
 
     @Test
     public void createBatteryIcon_hasCorrectInfo() {
-        final Drawable drawable = mController.createBtBatteryIcon(mContext, BATTERY_LEVEL_MAIN);
+        final Drawable drawable = mController.createBtBatteryIcon(mContext, BATTERY_LEVEL_MAIN,
+                true /* charging */);
         assertThat(drawable).isInstanceOf(BatteryMeterView.BatteryMeterDrawable.class);
 
         final BatteryMeterView.BatteryMeterDrawable iconDrawable =
                 (BatteryMeterView.BatteryMeterDrawable) drawable;
         assertThat(iconDrawable.getBatteryLevel()).isEqualTo(BATTERY_LEVEL_MAIN);
+        assertThat(iconDrawable.getCharging()).isTrue();
     }
 
     @Test
-    public void refresh_updateCorrectInfo() {
+    public void refresh_connected_updateCorrectInfo() {
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_UNTHETHERED_LEFT_BATTERY)).thenReturn(
                 String.valueOf(BATTERY_LEVEL_LEFT));
@@ -93,11 +108,32 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_UNTHETHERED_CASE_BATTERY)).thenReturn(
                 String.valueOf(BATTERY_LEVEL_MAIN));
+        when(mCachedDevice.isConnected()).thenReturn(true);
         mController.refresh();
 
         assertBatteryLevel(mLayoutPreference.findViewById(R.id.layout_left), BATTERY_LEVEL_LEFT);
         assertBatteryLevel(mLayoutPreference.findViewById(R.id.layout_right), BATTERY_LEVEL_RIGHT);
         assertBatteryLevel(mLayoutPreference.findViewById(R.id.layout_middle), BATTERY_LEVEL_MAIN);
+    }
+
+    @Test
+    public void refresh_disconnected_updateCorrectInfo() {
+        when(mCachedDevice.isConnected()).thenReturn(false);
+
+        mController.refresh();
+
+        final LinearLayout layout = mLayoutPreference.findViewById(R.id.layout_middle);
+
+        assertThat(mLayoutPreference.findViewById(R.id.layout_left).getVisibility()).isEqualTo(
+                View.GONE);
+        assertThat(mLayoutPreference.findViewById(R.id.layout_right).getVisibility()).isEqualTo(
+                View.GONE);
+        assertThat(layout.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(layout.findViewById(R.id.header_title).getVisibility()).isEqualTo(View.GONE);
+        assertThat(layout.findViewById(R.id.bt_battery_summary).getVisibility()).isEqualTo(
+                View.GONE);
+        assertThat(layout.findViewById(R.id.bt_battery_icon).getVisibility()).isEqualTo(View.GONE);
+        assertThat(layout.findViewById(R.id.header_icon).getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test
@@ -116,6 +152,30 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void updateIcon_existInCache_setImageBitmap() {
+        mController.mIconCache.put(ICON_URI, mBitmap);
+
+        mController.updateIcon(mImageView, ICON_URI);
+
+        verify(mImageView).setImageBitmap(mBitmap);
+    }
+
+    @Test
+    public void onStart_registerCallback() {
+        mController.onStart();
+
+        verify(mBluetoothAdapter).registerMetadataListener(mBluetoothDevice,
+                mController.mMetadataListener, mController.mHandler);
+    }
+
+    @Test
+    public void onStop_unregisterCallback() {
+        mController.onStop();
+
+        verify(mBluetoothAdapter).unregisterMetadataListener(mBluetoothDevice);
     }
 
     private void assertBatteryLevel(LinearLayout linearLayout, int batteryLevel) {
