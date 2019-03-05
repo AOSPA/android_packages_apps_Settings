@@ -15,6 +15,7 @@
  */
 package com.android.customization.picker;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ import com.android.wallpaper.module.FormFactorChecker;
 import com.android.wallpaper.module.Injector;
 import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.module.UserEventLogger;
+import com.android.wallpaper.module.WallpaperSetter;
 import com.android.wallpaper.picker.CategoryFragment;
 import com.android.wallpaper.picker.CategoryFragment.CategoryFragmentHost;
 import com.android.wallpaper.picker.MyPhotosStarter;
@@ -75,7 +77,8 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         CategoryFragmentHost, ThemeFragmentHost, GridFragmentHost, ClockFragmentHost {
 
     private static final String TAG = "CustomizationPickerActivity";
-    private static final String WALLPAPER_ONLY_EXTRA = "wallpaper_only";
+    private static final String WALLPAPER_FLAVOR_EXTRA = "com.android.launcher3.WALLPAPER_FLAVOR";
+    private static final String WALLPAPER_ONLY = "wallpaper_only";
 
     private WallpaperPickerDelegate mDelegate;
     private UserEventLogger mUserEventLogger;
@@ -83,6 +86,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
     private static final Map<Integer, CustomizationSection> mSections = new HashMap<>();
     private CategoryFragment mWallpaperCategoryFragment;
+    private WallpaperSetter mWallpaperSetter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,9 +99,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
         if (!supportsCustomization()) {
             Log.w(TAG, "Themes not supported, reverting to Wallpaper Picker");
-            Intent intent = new Intent(this, TopLevelPickerActivity.class);
-            startActivity(intent);
-            finish();
+            skipToWallpaperPicker();
         } else {
             setContentView(R.layout.activity_customization_picker_main);
             setUpBottomNavView();
@@ -115,23 +117,49 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // refresh the sections as the preview may have changed
+        initSections();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (WALLPAPER_ONLY.equals(intent.getStringExtra(WALLPAPER_FLAVOR_EXTRA))) {
+            skipToWallpaperPicker();
+        }
+    }
+
+    private void skipToWallpaperPicker() {
+        Intent intent = new Intent(this, TopLevelPickerActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private boolean supportsCustomization() {
         return mDelegate.getFormFactor() == FormFactorChecker.FORM_FACTOR_MOBILE
                 && mSections.size() > 1;
     }
 
     private void initSections() {
+        mSections.clear();
         if (!BuildCompat.isAtLeastQ()) {
             return;
         }
         if (Build.TYPE.equals("user")) {
             return;
         }
-        if (getIntent().hasExtra(WALLPAPER_ONLY_EXTRA)) {
+        if (WALLPAPER_ONLY.equals(getIntent().getStringExtra(WALLPAPER_FLAVOR_EXTRA))) {
             return;
         }
         //Theme
-        ThemeManager themeManager = new ThemeManager(new DefaultThemeProvider(this), this);
+        Injector injector = InjectorProvider.getInjector();
+        mWallpaperSetter = new WallpaperSetter(injector.getWallpaperPersister(this),
+                injector.getPreferences(this), mUserEventLogger, false);
+        ThemeManager themeManager = new ThemeManager(new DefaultThemeProvider(this), this,
+                mWallpaperSetter);
         if (themeManager.isAvailable()) {
             mSections.put(R.id.nav_theme, new ThemeSection(R.id.nav_theme, themeManager));
         }
@@ -244,6 +272,28 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     public ThemeManager getThemeManager() {
         CustomizationSection section = mSections.get(R.id.nav_theme);
         return section == null ? null : (ThemeManager) section.customizationManager;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mWallpaperSetter != null) {
+            mWallpaperSetter.cleanUp();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (mDelegate.handleActivityResult(requestCode, resultCode, data)) {
+            finishActivityWithResultOk();
+        }
+    }
+
+    private void finishActivityWithResultOk() {
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        setResult(Activity.RESULT_OK);
+        finish();
     }
 
     /**

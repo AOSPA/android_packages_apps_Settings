@@ -66,6 +66,10 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     private static final String ICON_PREVIEW_DRAWABLE_NAME = "ic_wifi_signal_3";
     private static final String PREVIEW_COLOR_PREFIX = "theme_preview_color_";
     private static final String PREVIEW_SHAPE_PREFIX = "theme_preview_shape_";
+    private static final String WALLPAPER_PREFIX = "theme_wallpaper_";
+    private static final String WALLPAPER_TITLE_PREFIX = "theme_wallpaper_title_";
+    private static final String WALLPAPER_ATTRIBUTION_PREFIX = "theme_wallpaper_attribution_";
+    private static final String WALLPAPER_ACTION_PREFIX = "theme_wallpaper_action_";
 
     private static final String DEFAULT_THEME_NAME= "default";
 
@@ -194,6 +198,27 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                             iconSettingsOverlayPackage);
                 }
 
+                try {
+                    String wallpaperResName = WALLPAPER_PREFIX + themeName;
+                    int wallpaperResId = mStubApkResources.getIdentifier(wallpaperResName,
+                            "drawable", mStubPackageName);
+                    if (wallpaperResId > 0) {
+                        builder.setWallpaperInfo(mStubPackageName, wallpaperResName,
+                                themeName, wallpaperResId,
+                                mStubApkResources.getIdentifier(WALLPAPER_TITLE_PREFIX + themeName,
+                                        "string", mStubPackageName),
+                                mStubApkResources.getIdentifier(
+                                        WALLPAPER_ATTRIBUTION_PREFIX + themeName, "string",
+                                        mStubPackageName),
+                                mStubApkResources.getIdentifier(WALLPAPER_ACTION_PREFIX + themeName,
+                                        "string", mStubPackageName))
+                                .setWallpaperAsset(
+                                        getDrawableResourceAsset(WALLPAPER_PREFIX, themeName));
+                    }
+                } catch (NotFoundException e) {
+                    // Nothing to do here, if there's no wallpaper we'll just omit wallpaper
+                }
+
                 mThemes.add(builder.build());
             } catch (NameNotFoundException | NotFoundException e) {
                 Log.w(TAG, String.format("Couldn't load part of theme %s, will skip it", themeName),
@@ -308,6 +333,30 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             } catch (NameNotFoundException | NotFoundException e2) {
                 Log.w(TAG, "Didn't find SystemUi package icons, will skip preview", e);
             }
+        }
+
+        try {
+            String wallpaperResName = WALLPAPER_PREFIX + DEFAULT_THEME_NAME;
+            int wallpaperResId = mStubApkResources.getIdentifier(wallpaperResName,
+                    "drawable", mStubPackageName);
+            if (wallpaperResId > 0) {
+                builder.setWallpaperInfo(mStubPackageName, wallpaperResName, DEFAULT_THEME_NAME,
+                        mStubApkResources.getIdentifier(
+                                wallpaperResName,
+                                "drawable", mStubPackageName),
+                        mStubApkResources.getIdentifier(WALLPAPER_TITLE_PREFIX + DEFAULT_THEME_NAME,
+                                "string", mStubPackageName),
+                        mStubApkResources.getIdentifier(
+                                WALLPAPER_ATTRIBUTION_PREFIX + DEFAULT_THEME_NAME, "string",
+                                mStubPackageName),
+                        mStubApkResources.getIdentifier(
+                                WALLPAPER_ACTION_PREFIX + DEFAULT_THEME_NAME,
+                                "string", mStubPackageName))
+                        .setWallpaperAsset(
+                                getDrawableResourceAsset(WALLPAPER_PREFIX, DEFAULT_THEME_NAME));
+            }
+        } catch (NotFoundException e) {
+            // Nothing to do here, if there's no wallpaper we'll just omit wallpaper
         }
 
         mThemes.add(builder.build());

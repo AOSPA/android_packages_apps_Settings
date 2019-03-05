@@ -21,10 +21,13 @@
 
     <TextView
         android:id="@+id/option_label"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/option_tile_width"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/theme_option_label_margin"
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:maxLines="1"
         android:textAppearance="@style/OptionTitleTextAppearance"/>
     <RelativeLayout
         android:id="@+id/option_tile"

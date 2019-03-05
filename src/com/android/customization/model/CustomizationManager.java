@@ -15,6 +15,8 @@
  */
 package com.android.customization.model;
 
+import androidx.annotation.Nullable;
+
 import java.util.List;
 
 /**
@@ -22,6 +24,22 @@ import java.util.List;
  * @param <T> the type of {@link CustomizationOption} that this Manager class provides.
  */
 public interface CustomizationManager<T extends CustomizationOption> {
+
+    /**
+     * Callback for applying a customization option.
+     */
+    interface Callback {
+        /**
+         * Called after an option was applied successfully.
+         */
+        void onSuccess();
+
+        /**
+         * Called if there was an error applying the customization
+         * @param throwable Exception thrown if available.
+         */
+        void onError(@Nullable Throwable throwable);
+    }
 
     /**
      * Listener interface for fetching CustomizationOptions
@@ -41,7 +59,7 @@ public interface CustomizationManager<T extends CustomizationOption> {
     /**
      * Applies the given option into the system.
      */
-    void apply(T option);
+    void apply(T option, Callback callback);
 
     /**
      * Loads the available options for the type of Customization managed by this class, calling the
