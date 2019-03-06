@@ -18,6 +18,7 @@ package com.android.settings.wifi.dpp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
@@ -72,14 +73,6 @@ public class WifiDppUtils {
     /** Used by {@link android.provider.Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE} to
      * indicate test mode UI should be shown. Test UI does not make API calls. Value is a boolean.*/
     public static final String EXTRA_TEST = "test";
-
-    /**
-     * Returns whether the user can share the network represented by this preference with QR code.
-     */
-    public static boolean isSharingNetworkEnabled(Context context) {
-        return FeatureFlagUtils.isEnabled(context,
-                com.android.settings.core.FeatureFlags.WIFI_SHARING);
-    }
 
     /**
      * Returns whether the device support WiFi DPP.
@@ -145,6 +138,17 @@ public class WifiDppUtils {
             default:
                 return WifiQrCode.SECURITY_NO_PASSWORD;
         }
+    }
+
+    static String getSecurityString(WifiConfiguration config) {
+        if (config.allowedKeyManagement.get(KeyMgmt.SAE)) {
+            return WifiQrCode.SECURITY_SAE;
+        }
+        if (config.allowedKeyManagement.get(KeyMgmt.WPA_PSK)) {
+            return WifiQrCode.SECURITY_WPA_PSK;
+        }
+        return (config.wepKeys[0] == null) ?
+                WifiQrCode.SECURITY_NO_PASSWORD : WifiQrCode.SECURITY_WEP;
     }
 
     /**

@@ -203,7 +203,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         super.onViewCreated(view, savedInstanceState);
         final Activity activity = getActivity();
         if (activity != null) {
-            mProgressHeader = setPinnedHeaderView(R.layout.wifi_progress_header)
+            mProgressHeader = setPinnedHeaderView(R.layout.progress_header)
                     .findViewById(R.id.progress_bar_animation);
             setProgressBarVisible(false);
         }
@@ -239,14 +239,12 @@ public class WifiSettings extends RestrictedSettingsFragment
         mAddPreference = new ButtonPreference(prefContext);
         mAddPreference.setIcon(R.drawable.ic_menu_add);
         mAddPreference.setTitle(R.string.wifi_add_network);
-        if (WifiDppUtils.isSharingNetworkEnabled(getContext())) {
-            mAddPreference.setButtonIcon(R.drawable.ic_scan_24dp);
-            mAddPreference.setButtonOnClickListener((View v) -> {
-                // Launch QR code scanner to join a network.
-                getContext().startActivity(
-                        WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
-            });
-        }
+        mAddPreference.setButtonIcon(R.drawable.ic_scan_24dp);
+        mAddPreference.setButtonOnClickListener((View v) -> {
+            // Launch QR code scanner to join a network.
+            getContext().startActivity(
+                    WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
+        });
         mStatusMessagePreference = (LinkablePreference) findPreference(PREF_KEY_STATUS_MESSAGE);
 
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());

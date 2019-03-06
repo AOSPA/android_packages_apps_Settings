@@ -33,6 +33,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -108,6 +109,7 @@ public class DataUsageList extends DataUsageBaseFragment {
     @VisibleForTesting
     int mNetworkType;
     private List<NetworkCycleChartData> mCycleData;
+    private ArrayList<Long> mCycles;
 
     private LoadingViewController mLoadingViewController;
     private UidDetailProvider mUidDetailProvider;
@@ -362,7 +364,8 @@ public class DataUsageList extends DataUsageBaseFragment {
                         category = AppItem.CATEGORY_USER;
                     }
                 }
-            } else if (uid == UID_REMOVED || uid == UID_TETHERING) {
+            } else if (uid == UID_REMOVED || uid == UID_TETHERING
+                    || uid == Process.OTA_UPDATE_UID) {
                 collapseKey = uid;
                 category = AppItem.CATEGORY_APP;
             } else {
@@ -409,10 +412,23 @@ public class DataUsageList extends DataUsageBaseFragment {
         }
     }
 
-    private void startAppDataUsage(AppItem item) {
+    @VisibleForTesting
+    void startAppDataUsage(AppItem item) {
         final Bundle args = new Bundle();
         args.putParcelable(AppDataUsage.ARG_APP_ITEM, item);
         args.putParcelable(AppDataUsage.ARG_NETWORK_TEMPLATE, mTemplate);
+        if (mCycles == null) {
+            mCycles = new ArrayList<>();
+            for (NetworkCycleChartData data : mCycleData) {
+                if (mCycles.isEmpty()) {
+                    mCycles.add(data.getEndTime());
+                }
+                mCycles.add(data.getStartTime());
+            }
+        }
+        args.putSerializable(AppDataUsage.ARG_NETWORK_CYCLES, mCycles);
+        args.putLong(AppDataUsage.ARG_SELECTED_CYCLE,
+            mCycleData.get(mCycleSpinner.getSelectedItemPosition()).getEndTime());
 
         new SubSettingLauncher(getContext())
                 .setDestination(AppDataUsage.class.getName())
