@@ -731,41 +731,26 @@
     <!-- Main Settings screen setting option summary text for the item to go into the date and time settings. -->
     <string name="date_and_time_settings_summary">Set date, time, time zone, &amp; formats</string>
     <!-- Date & time setting screen setting check box title if the date and time should be determined automatically [CHAR LIMIT=30] -->
-    <string name="date_time_auto">Automatic date &amp; time</string>
-    <!-- Date & time setting screen setting option summary text when Automatic check box is selected
-        (that is, when date and time should be determined automatically) [CHAR LIMIT=100] -->
-    <string name="date_time_auto_summaryOn">Use network-provided time</string>
-    <!-- Date & time setting screen setting option summary text when Automatic check box is clear
-        [CHAR LIMIT=100] -->
-    <string name="date_time_auto_summaryOff">Use network-provided time</string>
-    <!-- Date & time setting screen setting check box title if the time zone should be determined automatically [CHAR LIMIT=30] -->
-    <string name="zone_auto">Automatic time zone</string>
-    <!-- Date & time setting screen setting option summary text when Automatic time zone check box is selected (that is, when date and time should be determined automatically)
+    <string name="date_time_auto">Use network-provided time</string>
+    <!-- Date & time setting screen setting option text when Automatic time zone check box is selected (that is, when date and time should be determined automatically)
         [CHAR LIMIT=100]  -->
-    <string name="zone_auto_summaryOn">Use network-provided time zone</string>
-    <!-- Date & time setting screen setting option summary text when Automatic time zone check box is clear
-        [CHAR LIMIT=100] -->
-    <string name="zone_auto_summaryOff">Use network-provided time zone</string>
-    <!-- Date & time setting screen setting check box title if the 24 hour setting should be determined automatically [CHAR LIMIT=30] -->
-    <string name="date_time_24hour_auto">Automatic 24\u2011hour format</string>
+    <string name="zone_auto_title">Use network-provided time zone</string>
     <!-- Date & time setting screen setting option summary text for the automatic 24 hour setting checkbox [CHAR LIMIT=100] -->
-    <string name="date_time_24hour_auto_summary">Use locale default</string>
+    <string name="date_time_24hour_auto">Use locale default</string>
     <!-- Date & time setting screen setting check box title [CHAR LIMIT=30] -->
     <string name="date_time_24hour_title">24\u2011hour format</string>
     <!-- Date & time setting screen setting check box title -->
     <string name="date_time_24hour">Use 24-hour format</string>
     <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
     <string name="date_time_set_time_title">Time</string>
-    <!-- Date & time setting screen setting option title -->
-    <string name="date_time_set_time">Set time</string>
+    <!-- Date & time setting screen title for setting time format (allowing user to set device display in 12-hour format or 24-hour format) [CHAR LIMIT=30] -->
+    <string name="time_format_category_title">Time format</string>
     <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
     <string name="date_time_set_timezone_title">Time zone</string>
     <!-- Date & time setting screen setting option title -->
     <string name="date_time_set_timezone">Select time zone</string>
     <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
     <string name="date_time_set_date_title">Date</string>
-    <!-- Date & time setting screen setting option title -->
-    <string name="date_time_set_date">Set date</string>
     <!-- Text hint to search region in time zone setting screen -->
     <string name="date_time_search_region">Search region</string>
     <!-- Setting option title to select region in time zone setting screen [CHAR LIMIT=30] -->
@@ -822,9 +807,9 @@
     <string name="lockdown_settings_summary">Display power button option that turns off Smart Lock, fingerprint unlocking, and notifications on the lock screen</string>
 
     <!-- Text shown for the title of the extend unlock mode option for trust agents [CHAR LIMIT=40] -->
-    <string name="trust_agents_extend_unlock_title">SmartLock only extends unlock</string>
+    <string name="trust_agents_extend_unlock_title">Trust agents only extend unlock</string>
     <!-- Text shown for the description of the extend unlock mode option [CHAR LIMIT=NONE] -->
-    <string name="trust_agents_extend_unlock_summary">If enabled, SmartLock will keep your device unlocked for longer, but can no longer unlock a locked device.</string>
+    <string name="trust_agents_extend_unlock_summary">If enabled, trust agents will keep your device unlocked for longer, but can no longer unlock a locked device.</string>
 
     <!-- Text shown for the title of the lock when trust lost option [CHAR LIMIT=40] -->
     <string name="trust_lost_locks_screen_title">Lock screen when trust is lost</string>
@@ -4435,7 +4420,7 @@
     <!-- Title of Languages & input settings screen -->
     <string name="language_keyboard_settings_title">Languages&#160;&amp; input</string>
     <!-- Title of preference category that lists all settings about helping user text input such as spell checker [CHAR LIMIT=60]-->
-    <string name="input_assistance">Input assistance</string>
+    <string name="input_assistance">Tools</string>
     <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to keyboard (enable/disable each keyboard, settings for each keyboard). -->
     <string name="keyboard_settings_category">Keyboard &amp; input methods</string>
     <!-- On Text & language settings screen, setting option name. title of the setting to take the user to a screen to select the locale. -->
@@ -4472,7 +4457,7 @@
     <!-- Image button description for spell checker language. -->
     <string name="spellchecker_language">Language</string>
     <!-- Title for the 'keyboard and input methods' preference category. [CHAR LIMIT=45] -->
-    <string name="keyboard_and_input_methods_category">Keyboard &amp; inputs</string>
+    <string name="keyboard_and_input_methods_category">Keyboards</string>
     <!-- Title for the 'virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
     <string name="virtual_keyboard_category">Virtual keyboard</string>
     <!-- Title for the 'available virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
@@ -4491,8 +4476,8 @@
     <string name="keyboard_shortcuts_helper">Keyboard shortcuts helper</string>
     <!-- Summary text for the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=100] -->
     <string name="keyboard_shortcuts_helper_summary">Display available shortcuts</string>
-    <!-- Title for the 'Work profile' preference category inside Languages and inputs'. [CHAR LIMIT=45] -->
-    <string name="language_and_input_for_work_category_title">Work profile</string>
+    <!-- Title for the 'Work profile input & assistance' preference category inside Languages and inputs'. [CHAR LIMIT=50] -->
+    <string name="language_and_input_for_work_category_title">Work profile input &amp; assistance</string>
     <!-- Title for the 'Virtual keyboards for work' preference. [CHAR LIMIT=45] -->
     <string name="virtual_keyboards_for_work_title">Virtual keyboard for work</string>
 
@@ -4721,6 +4706,12 @@
     <string name="accessibility_toggle_master_mono_title">Mono audio</string>
     <!-- Summary for the accessibility preference for master mono. [CHAR LIMIT=50] -->
     <string name="accessibility_toggle_master_mono_summary">Combine channels when playing audio</string>
+    <!-- Title for the accessibility preference for master balance. [CHAR LIMIT=35] -->
+    <string name="accessibility_toggle_master_balance_title">Audio balance</string>
+    <!-- 'Left' balance text for the accessibility preference for master balance. [CHAR LIMIT=20] -->
+    <string name="accessibility_toggle_master_balance_left_label">Left</string>
+    <!-- 'Right' balance text for the accessibility preference for master balance. [CHAR LIMIT=20] -->
+    <string name="accessibility_toggle_master_balance_right_label">Right</string>
 
     <!-- Option heading to leave the timeout requirement for accessibility users at its default level. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_default">Default</string>
@@ -4775,13 +4766,13 @@
     <!-- Summary for the accessibility preference for hearing aid when not connected. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_not_connected_summary">No hearing aids connected</string>
     <!-- Summary for the accessibility preference for hearing aid when adding new devices. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_adding_summary">Add hearing aid</string>
+    <string name="accessibility_hearingaid_adding_summary">Add hearing aids</string>
     <!-- Message to ask the user that if they want to pair the hearing aid, then they should find and tap the hearing aid device from the list on the next screen. [CHAR LIMIT=NONE] -->
     <string name="accessibility_hearingaid_pair_instructions_first_message">To pair your hearing aids, find and tap your device on the next screen.</string>
     <!-- Message to ask the user to make sure that their hearing aid devices are in pairing mode. [CHAR LIMIT=NONE] -->
     <string name="accessibility_hearingaid_pair_instructions_second_message">Make sure your hearing aids are in pairing mode.</string>
     <!-- Summary for the accessibility preference for hearing aid when there is an active device. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_active_device_summary"><xliff:g id="device_name">%1$s</xliff:g> currently active</string>
+    <string name="accessibility_hearingaid_active_device_summary"><xliff:g id="device_name">%1$s</xliff:g> active</string>
     <!-- Summary for the accessibility preference for hearing aid when there are saved devices. [CHAR LIMIT=50] -->
     <plurals name="show_number_hearingaid_count">
         <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> saved hearing aid</item>
@@ -5854,6 +5845,10 @@
     <string name="sms_access_restriction_enabled">Restrict SMS &amp; call log access</string>
     <!-- Summary for whether to enable SMS access restriction [CHAR LIMIT=NONE]-->
     <string name="sms_access_restriction_enabled_summary">Only default phone and messaging apps have SMS &amp; call log permissions</string>
+    <!-- Title for the new device identifier access restrictions [CHAR LIMIT=50]-->
+    <string name="device_identifier_access_restrictions_title">Disable device identifier restrictions</string>
+    <!-- Summary for the new device identifier access restrictions [CHAR LIMIT=NONE]-->
+    <string name="device_identifier_access_restrictions_summary">Disable the new access restrictions for device identifiers</string>
 
 
     <!-- Message when there are no available trust agents to display -->
@@ -7620,6 +7615,9 @@
 
     <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=5125022693565388760] -->
     <string name="notification_badging_title">Allow notification dots</string>
+
+    <!-- Configure Notifications: Title for the notification bubbles option. [CHAR LIMIT=60] -->
+    <string name="notification_bubbles_title">Allow notification bubbles</string>
 
     <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
     <string name="notification_pulse_title">Blink light</string>
@@ -10287,11 +10285,11 @@
     <!--  Summary for battery Suggestion. [CHAR LIMIT=55] -->
     <string name="battery_suggestion_summary"></string>
 
-    <!-- Title for prevent ringing gesture screen -->
+    <!-- Title for prevent ringing gesture screen [CHAR LIMIT=60]-->
     <string name="gesture_prevent_ringing_screen_title">Prevent ringing</string>
-    <!-- Title for prevent ringing setting -->
+    <!-- Title for prevent ringing setting [CHAR LIMIT=60]-->
     <string name="gesture_prevent_ringing_title">Press Power &amp; Volume Up together to</string>
-    <!-- Title for prevent ringing setting -->
+    <!-- Title for prevent ringing setting [CHAR LIMIT=60]-->
     <string name="gesture_prevent_ringing_sound_title">Shortcut to prevent ringing</string>
     <!-- Option for prevent ringing setting -->
     <string name="prevent_ringing_option_vibrate">Vibrate</string>
@@ -10460,6 +10458,30 @@
         <item quantity="other"><xliff:g id="count" example="2">%1$d</xliff:g> SIMs</item>
     </plurals>
 
+    <!-- Network & internet page. Summary indicating that a SIM is used by default for calls when
+         multiple SIMs are present. [CHAR LIMIT=40] -->
+    <string name="default_for_calls">Default for calls</string>
+    <!-- Network & internet page. Summary indicating that a SIM is used by default for SMS messages
+         when multiple SIMs are present. [CHAR LIMIT=40] -->
+    <string name="default_for_sms">Default for SMS</string>
+    <!-- Network & internet page. Summary indicating that a SIM is used by default for calls and SMS
+         messages when multiple SIMs are present. [CHAR LIMIT=40] -->
+    <string name="default_for_calls_and_sms">Default for calls &amp; SMS</string>
+    <!-- Network & internet page. Summary indicating that a SIM is used by default for mobile data
+         when multiple SIMs are present. [CHAR LIMIT=40] -->
+    <string name="default_for_mobile_data">Default for mobile data</string>
+    <!-- Network & internet page. Summary indicating that a SIM has an active mobile data connection
+         when multiple SIMs are present. [CHAR LIMIT=40] -->
+    <string name="mobile_data_active">Mobile data active</string>
+    <!-- Network & internet page. Summary indicating that a SIM is used by default for mobile data
+         when multiple SIMs are present, but mobile data is currently turned off.
+         [CHAR LIMIT=40] -->
+    <string name="mobile_data_off">Mobile data off</string>
+    <!-- Network & internet page. Summary indicating that a SIM is available to be used for services
+         such as calls, SMS, or data when multiple SIMs are present, but is not currently the
+          default SIM for any of those services. [CHAR LIMIT=40] -->
+    <string name="subscription_available">Available</string>
+
     <!-- Title of item shown at the bottom of the page listing multiple mobile service
          subscriptions; tapping it leads to a UI to add more [CHAR LIMIT=40] -->
     <string name="mobile_network_list_add_more">Add more</string>
@@ -10483,6 +10505,12 @@
     <!-- Label on the confirmation button of a dialog that lets a user set the display name of a
          mobile network subscription [CHAR LIMIT=20] -->
     <string name="mobile_network_sim_name_rename">Rename</string>
+    <!-- Label for the on position of a switch on the mobile network details page which allows
+         disabling/enabling a SIM. The SIM is enabled in this state. [CHAR LIMIT=40] -->
+    <string name="mobile_network_use_sim_on">Use SIM</string>
+    <!-- Label for the off position of a switch on the mobile network details page which allows
+         disabling/enabling a SIM. The SIM is disabled in this state. [CHAR LIMIT=40] -->
+    <string name="mobile_network_use_sim_off">Off</string>
 
     <!-- Title for preferred network type [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_title">Preferred network type</string>
