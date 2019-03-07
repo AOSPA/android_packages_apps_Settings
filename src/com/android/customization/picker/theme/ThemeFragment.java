@@ -393,9 +393,9 @@ public class ThemeFragment extends ToolbarFragment {
                 int colorsHint = WallpaperColors.fromBitmap(bitmap).getColorHints();
                 TextView header = view.findViewById(R.id.theme_preview_card_header);
                 if ((colorsHint & WallpaperColors.HINT_SUPPORTS_DARK_TEXT) == 0) {
-                    header.setTextColor(res.getColor(R.color.text_color_light, null));
-                    header.setCompoundDrawableTintList(ColorStateList.valueOf(
-                            mPreviewInfo.colorAccentDark));
+                    int colorLight = res.getColor(R.color.text_color_light, null);
+                    header.setTextColor(colorLight);
+                    header.setCompoundDrawableTintList(ColorStateList.valueOf(colorLight));
                 } else {
                     header.setTextColor(res.getColor(R.color.text_color_dark, null));
                     header.setCompoundDrawableTintList(ColorStateList.valueOf(
