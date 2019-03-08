@@ -65,6 +65,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     private static final String COLOR_PREFIX = "theme_overlay_color_";
     private static final String SHAPE_PREFIX = "theme_overlay_shape_";
     private static final String ICON_ANDROID_PREFIX = "theme_overlay_icon_android_";
+    private static final String ICON_LAUNCHER_PREFIX = "theme_overlay_icon_launcher_";
     private static final String ICON_SETTINGS_PREFIX = "theme_overlay_icon_settings_";
     private static final String ICON_SYSUI_PREFIX = "theme_overlay_icon_sysui_";
     private static final String ICON_PREVIEW_DRAWABLE_NAME = "ic_wifi_signal_3";
@@ -192,6 +193,13 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                     for (String iconName : SYSUI_ICONS_FOR_PREVIEW) {
                         builder.addIcon(loadIconPreviewDrawable(iconName, iconSysUiOverlayPackage));
                     }
+                }
+
+                String iconLauncherOverlayPackage = getOverlayPackage(ICON_LAUNCHER_PREFIX,
+                        themeName);
+                if (!TextUtils.isEmpty(iconLauncherOverlayPackage)) {
+                    builder.addOverlayPackage(getOverlayCategory(iconLauncherOverlayPackage),
+                            iconLauncherOverlayPackage);
                 }
 
                 String iconSettingsOverlayPackage = getOverlayPackage(ICON_SETTINGS_PREFIX,
