@@ -285,7 +285,7 @@ public class ThemeFragment extends ToolbarFragment {
             if (previewInfo.icons.size() >= mIconIds.length) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_icon,
                         R.drawable.ic_wifi_24px, R.layout.preview_card_icon_content,
-                        previewInfo.colorAccentLight) {
+                        previewInfo.resolveAccentColor(res)) {
                     @Override
                     protected void bindBody(boolean forceRebind) {
                         for (int i = 0; i < mIconIds.length; i++) {

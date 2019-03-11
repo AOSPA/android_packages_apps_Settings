@@ -35,11 +35,11 @@
         <item name="itemTextColor">@color/bottom_nav_item_color</item>
         <item name="itemTextAppearanceActive">@style/BottomNavTextAppearance</item>
         <item name="itemTextAppearanceInactive">@style/BottomNavTextAppearance</item>
-         <item name="android:background">?android:colorPrimary</item>
+        <item name="android:background">?android:colorPrimary</item>
     </style>
 
-    <style name="BottomNavTextAppearance" parent="@android:style/TextAppearance.DeviceDefault.Small">
-        <item name="android:textStyle">bold</item>
+    <style name="BottomNavTextAppearance" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
+        <item name="android:textSize">@dimen/bottom_navbar_font_text_size</item>
     </style>
     <style name="RegularToolbarStyle" parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid">
         <item name="android:elevation">0dp</item>
@@ -49,9 +49,10 @@
 
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
 
-    <style name="OptionTitleTextAppearance" parent="@android:style/TextAppearance.DeviceDefault.Small">
+    <style name="OptionTitleTextAppearance" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
         <item name="android:textColor">@color/option_title_color</item>
         <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/theme_option_title_font_text_size</item>
     </style>
 
 
