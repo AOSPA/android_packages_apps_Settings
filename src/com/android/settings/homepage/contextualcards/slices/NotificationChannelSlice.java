@@ -30,9 +30,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -145,7 +142,8 @@ public class NotificationChannelSlice implements CustomSliceable {
     @Override
     public Slice getSlice() {
         final ListBuilder listBuilder =
-                new ListBuilder(mContext, getUri(), ListBuilder.INFINITY).setAccentColor(-1);
+                new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
+                        .setAccentColor(COLOR_NOT_TINTED);
         /**
          * Get package which is satisfied with:
          * 1. Recently installed.
@@ -243,7 +241,7 @@ public class NotificationChannelSlice implements CustomSliceable {
             return null;
         }
 
-        return IconCompat.createWithBitmap(Utils.drawableToBitmap(drawable));
+        return Utils.createIconWithDrawable(drawable);
     }
 
     @VisibleForTesting
@@ -418,9 +416,13 @@ public class NotificationChannelSlice implements CustomSliceable {
     private CharSequence getSubTitle(String packageName, int uid) {
         final int channelCount = mNotificationBackend.getChannelCount(packageName, uid);
 
+        if (channelCount > DEFAULT_EXPANDED_ROW_COUNT) {
+            return mContext.getString(
+                    R.string.notification_many_channel_count_summary, channelCount);
+        }
+
         return mContext.getResources().getQuantityString(
-                R.plurals.notification_channel_count_summary,
-                channelCount, channelCount);
+                R.plurals.notification_few_channel_count_summary, channelCount, channelCount);
     }
 
     private Intent getAppAndNotificationPageIntent() {

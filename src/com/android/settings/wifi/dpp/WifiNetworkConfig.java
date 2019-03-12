@@ -212,7 +212,7 @@ public class WifiNetworkConfig {
         wifiManager.connect(wifiConfiguration, listener);
     }
 
-    public boolean isSupportConfiguratorQrCodeScanner(Context context) {
+    public boolean isSupportWifiDpp(Context context) {
         if (!WifiDppUtils.isWifiDppEnabled(context)) {
             return false;
         }
@@ -228,7 +228,7 @@ public class WifiNetworkConfig {
     /**
      * This is a simplified method from {@code WifiConfigController.getConfig()}
      */
-    private WifiConfiguration getWifiConfigurationOrNull() {
+    WifiConfiguration getWifiConfigurationOrNull() {
         if (!isValidConfig(this)) {
             return null;
         }
