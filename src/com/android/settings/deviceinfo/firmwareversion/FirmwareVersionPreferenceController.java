@@ -18,56 +18,22 @@ package com.android.settings.deviceinfo.firmwareversion;
 
 import android.content.Context;
 import android.os.Build;
-import android.text.TextUtils;
 
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.slices.Copyable;
 
-public class FirmwareVersionPreferenceController extends BasePreferenceController implements
-        Copyable {
-
-    private Fragment mFragment;
+public class FirmwareVersionPreferenceController extends BasePreferenceController {
 
     public FirmwareVersionPreferenceController(Context context, String key) {
         super(context, key);
     }
 
-    public void setHost(Fragment fragment) {
-        mFragment = fragment;
-    }
-
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
     public CharSequence getSummary() {
         return Build.VERSION.RELEASE;
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), mPreferenceKey)) {
-            return false;
-        }
-
-        FirmwareVersionDialogFragment.show(mFragment);
-        return true;
-    }
-
-    @Override
-    public boolean isSliceable() {
-        return true;
-    }
-
-    @Override
-    public void copy() {
-        Copyable.setCopyContent(mContext, getSummary(),
-                mContext.getText(R.string.firmware_version));
     }
 }

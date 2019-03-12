@@ -730,7 +730,7 @@
     <string name="date_and_time_settings_title_setup_wizard">Set date and time</string>
     <!-- Main Settings screen setting option summary text for the item to go into the date and time settings. -->
     <string name="date_and_time_settings_summary">Set date, time, time zone, &amp; formats</string>
-    <!-- Date & time setting screen setting check box title if the date and time should be determined automatically [CHAR LIMIT=30] -->
+    <!-- Date & time setting screen setting check box title if the date and time should be determined automatically [CHAR LIMIT=100] -->
     <string name="date_time_auto">Use network-provided time</string>
     <!-- Date & time setting screen setting option text when Automatic time zone check box is selected (that is, when date and time should be determined automatically)
         [CHAR LIMIT=100]  -->
@@ -1863,6 +1863,11 @@
     <!-- This string asks the user whether or not to allow an app to disable WiFi. [CHAR LIMIT=NONE] -->
     <string name="wifi_ask_disable"><xliff:g id="requester" example="FancyApp">%s</xliff:g> wants to turn off Wi-Fi</string>
 
+    <!-- Debugging developer settings: Enable ART verifier for Debuggable Apps [CHAR LIMIT=40] -->
+    <string name="art_verifier_for_debuggable_title">Verify bytecode of debuggable apps</string>
+    <!-- Debugging developer settings: Enable ART verifier for Debuggable Apps [CHAR LIMIT=NONE] -->
+    <string name="art_verifier_for_debuggable_summary">Allow ART to verify bytecode for debuggable apps</string>
+
     <!-- NFC settings -->
     <!-- Used in the 1st-level settings screen to turn on NFC -->
     <string name="nfc_quick_toggle_title">NFC</string>
@@ -2123,7 +2128,19 @@
     <!-- Hint for the user to use another device to scan QR code on screen to join Wi-Fi [CHAR LIMIT=NONE] -->
     <string name="wifi_dpp_scan_qr_code_with_another_device">Scan this QR code with another device to join \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
     <!-- Hint for QR code detection [CHAR LIMIT=NONE]  -->
-    <string name="wifi_dpp_could_not_detect_valid_qr_code">Couldn\u2019t read QR code</string>
+    <string name="wifi_dpp_could_not_detect_valid_qr_code">Couldn\u2019t read QR code. Re-center code and try again</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_authentication_or_configuration">Try again. If the issue continues, contact the device manufacturer</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_not_compatible">Something went wrong</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_timeout">Make sure the device has been plugged in, charged, and turned on</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_generic">Make sure the device has been plugged in, charged, and turned on. If the issue continues, contact the device manufacturer</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_not_supported">Adding \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d isn\u2019t supported by this device</string>
+    <!-- Hint for Wi-Fi connection fail [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_check_connection_try_again">Check connection and try again</string>
     <!-- Title for the fragment choose network [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_choose_network">Choose network</string>
     <!-- Hint for the user to center another device's QR code in the below camera window [CHAR LIMIT=NONE] -->
@@ -2140,6 +2157,10 @@
     <string name="wifi_dpp_could_not_add_device">Couldn\u2019t add device</string>
     <!-- Title for the fragment to show that device found but naming known [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_device_found">Device found</string>
+    <!-- Hint for Wi-Fi DPP handshake running [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_sharing_wifi_with_this_device">Sharing Wi\u2011Fi with this device\u2026</string>
+    <!-- Hint for Wi-Fi DPP handshake running [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_connecting">Connecting\u2026</string>
      <!-- Label for the try again button [CHAR LIMIT=20]-->
     <string name="retry">Retry</string>
     <!-- Label for the check box to share a network with other users on the same device -->
@@ -2490,7 +2511,7 @@
         <item>"1"</item>
     </string-array>
     <!-- Wi-Fi Calling settings. Text displayed when Wi-Fi Calling is off -->
-    <string name="wifi_calling_off_explanation">When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your carrier\u2019s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your carrier regarding fees and other details.</string>
+    <string name="wifi_calling_off_explanation">When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your carrier\u2019s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your carrier regarding fees and other details.<xliff:g id="additional_text" example="Learn More">%1$s</xliff:g></string>
     <!-- Wi-Fi Calling settings. Additional text displayed when Wi-Fi Calling is off. Default empty. [CHAR LIMIT=NONE] -->
     <string name="wifi_calling_off_explanation_2"></string>
     <!-- Title of a preference for updating emergency address [CHAR LIMIT=40] -->
@@ -2914,8 +2935,6 @@
 
     <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
     <string name="firmware_version">Android version</string>
-    <!-- About phone screen, dialog title for showing device software information such as android version, security patch level, etc  [CHAR LIMIT=60] -->
-    <string name="firmware_title">Android</string>
     <!-- About phone screen, status item label  [CHAR LIMIT=60] -->
     <string name="security_patch">Android security patch level</string>
     <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
@@ -3612,7 +3631,7 @@
     <string name="master_clear_final_button_text">Erase everything</string>
     <!-- Master clear failed message -->
     <string name="master_clear_failed">No reset was performed because the System Clear service isn\u2019t available.</string>
-    <!-- Master clear confirmation screen title [CHAR LIMIT=30] -->
+    <!-- Master clear confirmation screen title [CHAR LIMIT=33] -->
     <string name="master_clear_confirm_title">Erase all data?</string>
     <!-- Error message for users that aren't allowed to factory reset [CHAR LIMIT=none] -->
     <string name="master_clear_not_available">Factory reset is not available for this user</string>
@@ -7621,6 +7640,15 @@
     <!-- Configure Notifications: Title for the notification bubbles option. [CHAR LIMIT=60] -->
     <string name="notification_bubbles_title">Allow notification bubbles</string>
 
+    <!-- Configure notifications: title for swipe direction [CHAR LIMIT=60] -->
+    <string name="swipe_direction_title">Swipe actions</string>
+
+    <!-- Configure notifications: value for swipe direction [CHAR LIMIT=100] -->
+    <string name="swipe_direction_ltr">Swipe right to dismiss, left to show menu</string>
+
+    <!-- Configure notifications: value for swipe direction [CHAR LIMIT=100] -->
+    <string name="swipe_direction_rtl">Swipe left to dismiss, right to show menu</string>
+
     <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
     <string name="notification_pulse_title">Blink light</string>
 
@@ -7774,8 +7802,27 @@
         <item quantity="other">%d apps can read notifications</item>
     </plurals>
 
+    <!-- Title for Notification Assistant Picker screen [CHAR LIMIT=30]-->
+    <string name="notification_assistant_title">Notification Assistant</string>
+
+    <!-- Label for no NotificationAssistantService [CHAR_LIMIT=NONE] -->
+    <string name="no_notification_assistant">No assistant</string>
+
     <!-- String to show in the list of notification listeners, when none is installed -->
     <string name="no_notification_listeners">No installed apps have requested notification access.</string>
+
+    <!-- Title for a warning message about security implications of enabling a notification
+      assistant, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+    <string name="notification_assistant_security_warning_title">Allow notification access for
+         <xliff:g id="service" example="NotificationAssistant">%1$s</xliff:g>?</string>
+    <!-- Summary for a warning message about security implications of enabling a notification
+          listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
+    <string name="notification_assistant_security_warning_summary">
+        <xliff:g id="notification_assistant_name" example="Notification Assistant">%1$s</xliff:g> will be able to read all notifications,
+        including personal information such as contact names and the text of messages you receive.
+        It will also be able to modify or dismiss notifications or trigger action buttons they contain.
+        \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
+    </string>
 
     <!-- Title for a warning message about security implications of enabling a notification
           listener, displayed as a dialog message. [CHAR LIMIT=NONE] -->
@@ -8497,7 +8544,7 @@
     <string name="unknown_app">Unknown app</string>
 
     <!-- Label for list that shows all permissions -->
-    <string name="app_permissions">App permissions</string>
+    <string name="app_permissions">Permission manager</string>
     <!-- Summary of permissions currently granted to apps [CHAR LIMIT=60] -->
     <string name="app_permissions_summary">Apps using <xliff:g id="apps" example="location">%1$s</xliff:g></string>
 
@@ -9175,7 +9222,7 @@
     <!-- Title of condition that do not disturb is on [CHAR LIMIT=36] -->
     <string name="condition_zen_title">Do Not Disturb is on</string>
 
-    <!-- Summary of condition that do not disturb is on and all exceptions set to off [CHAR LIMIT=36] -->
+    <!-- Summary of condition that do not disturb is on and all exceptions set to off [CHAR LIMIT=38] -->
     <string name="condition_zen_summary_phone_muted">Phone muted</string>
 
     <!-- Summary of condition that do not disturb is on and some exceptions are allowed [CHAR LIMIT=36] -->
@@ -10140,6 +10187,10 @@
 
     <!-- Note displayed when certain features are not available on low ram devices. [CHAR LIMIT=NONE] -->
     <string name="disabled_low_ram_device">This feature is not available on this device</string>
+    <!-- Note displayed when certain features are not available. [CHAR LIMIT=NONE] -->
+    <string name="disabled_feature">This feature is not available</string>
+    <!-- Note displayed to explain that a feature is not available because it will slow down the phone. [CHAR LIMIT=NONE] -->
+    <string name="disabled_feature_reason_slow_down_phone">It will slow down this phone</string>
 
     <!-- UI debug setting: preference title - enforce full raw GNSS satellite measurements [CHAR LIMIT=60] -->
     <string name="enable_gnss_raw_meas_full_tracking">Force full GNSS measurements</string>
@@ -10658,7 +10709,7 @@
     <string name="permission_bar_chart_title">Most-used permissions in last 24 hours</string>
 
     <!-- Text for permission bar chart details in Privacy page.  [CHAR LIMIT=NONE] -->
-    <string name="permission_bar_chart_details">See all usage</string>
+    <string name="permission_bar_chart_details">View Permissions Dashboard</string>
 
     <!-- Title for the accessibility usage preference in the Privacy page.  [CHAR LIMIT=NONE] -->
     <string name="accessibility_usage_title">Accessibility usage</string>
@@ -10673,11 +10724,13 @@
     <string name="manage_app_notification">Manage <xliff:g id="app_name" example="Settings">%1$s</xliff:g> Notifications</string>
     <!-- Title for no suggested app in notification channel slice. [CHAR LIMIT=NONE] -->
     <string name="no_suggested_app">No suggested application</string>
-    <!-- Summary for notification channel slice. [CHAR LIMIT=NONE] -->
-    <plurals name="notification_channel_count_summary">
-        <item quantity="one"><xliff:g id="notification_channel_count">%1$d</xliff:g> notification channel. Tap to manage all.</item>
-        <item quantity="other"><xliff:g id="notification_channel_count">%1$d</xliff:g> notification channels. Tap to manage all.</item>
+    <!-- Summary for the channels count is equal or less than 3 in notification channel slice. [CHAR LIMIT=NONE] -->
+    <plurals name="notification_few_channel_count_summary">
+        <item quantity="one"><xliff:g id="notification_channel_count" example="1">%1$d</xliff:g> notification channel.</item>
+        <item quantity="other"><xliff:g id="notification_channel_count" example="3">%1$d</xliff:g> notification channels.</item>
     </plurals>
+    <!-- Summary for the channels count is more than 3 in notification channel slice. [CHAR LIMIT=NONE] -->
+    <string name="notification_many_channel_count_summary"><xliff:g id="notification_channel_count" example="4">%1$d</xliff:g> notification channels. Tap to manage all.</string>
 
     <!-- Title for the Switch output dialog (settings panel) with media related devices [CHAR LIMIT=50] -->
     <string name="media_output_panel_title">Switch output</string>
