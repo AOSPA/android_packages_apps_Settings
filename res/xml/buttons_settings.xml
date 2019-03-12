@@ -25,4 +25,136 @@
         android:summary="@string/enable_navigation_bar_summary"
         android:defaultValue="false" />
 
+    <PreferenceCategory
+            android:key="home_key"
+            android:title="@string/home_key_title" >
+
+        <ListPreference
+                android:key="home_key_long_press"
+                android:dialogTitle="@string/long_press_title"
+                android:title="@string/long_press_title"
+                android:entries="@array/action_entries"
+                android:entryValues="@array/action_values"
+                android:persistent="false" />
+
+        <ListPreference
+                android:key="home_key_double_tap"
+                android:dialogTitle="@string/double_tap_title"
+                android:title="@string/double_tap_title"
+                android:entries="@array/action_entries"
+                android:entryValues="@array/action_values"
+                android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="back_key"
+            android:title="@string/back_key_title" >
+
+        <ListPreference
+                android:key="back_key_long_press"
+                android:dialogTitle="@string/long_press_title"
+                android:title="@string/long_press_title"
+                android:entries="@array/action_entries"
+                android:entryValues="@array/action_values"
+                android:persistent="false" />
+
+        <ListPreference
+                android:key="back_key_double_tap"
+                android:dialogTitle="@string/double_tap_title"
+                android:title="@string/double_tap_title"
+                android:entries="@array/action_entries"
+                android:entryValues="@array/action_values"
+                android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="menu_key"
+            android:title="@string/menu_key_title" >
+
+        <ListPreference
+                android:key="menu_key_long_press"
+                android:dialogTitle="@string/long_press_title"
+                android:title="@string/long_press_title"
+                android:entries="@array/action_entries"
+                android:entryValues="@array/action_values"
+                android:persistent="false" />
+
+        <ListPreference
+                android:key="menu_key_double_tap"
+                android:dialogTitle="@string/double_tap_title"
+                android:title="@string/double_tap_title"
+                android:entries="@array/action_entries"
+                android:entryValues="@array/action_values"
+                android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="assist_key"
+            android:title="@string/assist_key_title" >
+
+        <ListPreference
+                android:key="assist_key_long_press"
+                android:dialogTitle="@string/long_press_title"
+                android:title="@string/long_press_title"
+                android:entries="@array/action_entries"
+                android:entryValues="@array/action_values"
+                android:persistent="false" />
+
+        <ListPreference
+                android:key="assist_key_double_tap"
+                android:dialogTitle="@string/double_tap_title"
+                android:title="@string/double_tap_title"
+                android:entries="@array/action_entries"
+                android:entryValues="@array/action_values"
+                android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="app_switch_key"
+            android:title="@string/app_switch_key_title" >
+
+        <ListPreference
+                android:key="app_switch_key_long_press"
+                android:dialogTitle="@string/long_press_title"
+                android:title="@string/long_press_title"
+                android:entries="@array/action_entries"
+                android:entryValues="@array/action_values"
+                android:persistent="false" />
+
+        <ListPreference
+                android:key="app_switch_key_double_tap"
+                android:dialogTitle="@string/double_tap_title"
+                android:title="@string/double_tap_title"
+                android:entries="@array/action_entries"
+                android:entryValues="@array/action_values"
+                android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="camera_key"
+            android:title="@string/camera_key_title">
+
+        <ListPreference
+                android:key="camera_key_long_press"
+                android:dialogTitle="@string/long_press_title"
+                android:title="@string/long_press_title"
+                android:entries="@array/action_entries"
+                android:entryValues="@array/action_values"
+                android:persistent="false" />
+
+        <ListPreference
+                android:key="camera_key_double_tap"
+                android:dialogTitle="@string/double_tap_title"
+                android:title="@string/double_tap_title"
+                android:entries="@array/action_entries"
+                android:entryValues="@array/action_values"
+                android:persistent="false" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
