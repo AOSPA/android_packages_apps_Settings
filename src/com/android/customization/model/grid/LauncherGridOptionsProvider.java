@@ -57,16 +57,14 @@ public class LauncherGridOptionsProvider {
     private final ProviderInfo mProviderInfo;
     private List<GridOption> mOptions;
 
-    public LauncherGridOptionsProvider(Context context) {
+    public LauncherGridOptionsProvider(Context context, String authorityMetadataKey) {
         mContext = context;
-        Intent homeIntent =  new Intent(Intent.ACTION_MAIN)
-                .addCategory(Intent.CATEGORY_HOME);
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME);
 
         ResolveInfo info = context.getPackageManager().resolveActivity(homeIntent,
                 PackageManager.MATCH_DEFAULT_ONLY | PackageManager.GET_META_DATA);
         if (info != null && info.activityInfo != null && info.activityInfo.metaData != null) {
-            mGridProviderAuthority = info.activityInfo.metaData.getString(
-                    mContext.getString(R.string.grid_control_metadata_name));
+            mGridProviderAuthority = info.activityInfo.metaData.getString(authorityMetadataKey);
         } else {
             mGridProviderAuthority = null;
         }

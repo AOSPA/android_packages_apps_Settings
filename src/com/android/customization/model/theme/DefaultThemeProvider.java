@@ -35,8 +35,10 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager.OptionsFetchedListener;
+import com.android.customization.model.ResourceConstants;
 import com.android.customization.model.ResourcesApkProvider;
 import com.android.customization.model.theme.ThemeBundle.Builder;
+import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.ResourceAsset;
 
@@ -54,6 +56,8 @@ import java.util.function.Consumer;
 public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeBundleProvider {
 
     private static final String TAG = "DefaultThemeProvider";
+    // TODO(b/124796742): remove once custom theme picker is ready to merge
+    private static final boolean SHOW_CUSTOM_THEME_OPTION = false;
 
     private static final String THEMES_ARRAY = "themes";
     private static final String TITLE_PREFIX = "theme_title_";
@@ -75,8 +79,6 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
 
     private static final String ACCENT_COLOR_LIGHT_NAME = "accent_device_default_light";
     private static final String ACCENT_COLOR_DARK_NAME = "accent_device_default_dark";
-    private static final String CONFIG_BODY_FONT_FAMILY = "config_bodyFontFamily";
-    private static final String CONFIG_HEADLINE_FONT_FAMILY = "config_headlineFontFamily";
     private static final String[] SYSUI_ICONS_FOR_PREVIEW = {
             "ic_qs_bluetooth_on",
             "ic_dnd",
@@ -133,9 +135,11 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                 if (!TextUtils.isEmpty(fontOverlayPackage)) {
                     builder.addOverlayPackage(getOverlayCategory(fontOverlayPackage),
                                 fontOverlayPackage)
-                            .setBodyFontFamily(loadTypeface(CONFIG_BODY_FONT_FAMILY,
+                            .setBodyFontFamily(loadTypeface(
+                                    ResourceConstants.CONFIG_BODY_FONT_FAMILY,
                                     fontOverlayPackage))
-                            .setHeadlineFontFamily(loadTypeface(CONFIG_HEADLINE_FONT_FAMILY,
+                            .setHeadlineFontFamily(loadTypeface(
+                                    ResourceConstants.CONFIG_HEADLINE_FONT_FAMILY,
                                     fontOverlayPackage));
                 }
 
@@ -225,6 +229,10 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                         e);
             }
         }
+
+        if (SHOW_CUSTOM_THEME_OPTION) {
+            addCustomTheme();
+        }
     }
 
     /**
@@ -269,15 +277,17 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
 
         try {
             builder.addOverlayPackage(getOverlayCategory(fontOverlayPackage), fontOverlayPackage)
-                    .setBodyFontFamily(loadTypeface(CONFIG_BODY_FONT_FAMILY,
+                    .setBodyFontFamily(loadTypeface(ResourceConstants.CONFIG_BODY_FONT_FAMILY,
                             fontOverlayPackage))
-                    .setHeadlineFontFamily(loadTypeface(CONFIG_HEADLINE_FONT_FAMILY,
+                    .setHeadlineFontFamily(loadTypeface(
+                            ResourceConstants.CONFIG_HEADLINE_FONT_FAMILY,
                             fontOverlayPackage));
         } catch (NameNotFoundException | NotFoundException e) {
             Log.d(TAG, "Didn't find font overlay for default theme, will use system default", e);
             String headlineFontFamily = system.getString(system.getIdentifier(
-                    CONFIG_HEADLINE_FONT_FAMILY,"string", ANDROID_PACKAGE));
-            String bodyFontFamily = system.getString(system.getIdentifier(CONFIG_BODY_FONT_FAMILY,
+                    ResourceConstants.CONFIG_HEADLINE_FONT_FAMILY,"string", ANDROID_PACKAGE));
+            String bodyFontFamily = system.getString(system.getIdentifier(
+                    ResourceConstants.CONFIG_BODY_FONT_FAMILY,
                     "string", ANDROID_PACKAGE));
             builder.setHeadlineFontFamily(Typeface.create(headlineFontFamily, Typeface.NORMAL))
                     .setBodyFontFamily(Typeface.create(bodyFontFamily, Typeface.NORMAL));
@@ -360,6 +370,11 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         }
 
         mThemes.add(builder.build());
+    }
+
+    private void addCustomTheme() {
+        mThemes.add(new CustomTheme(mContext.getString(R.string.custom_theme_title),
+                new HashMap<>(), null));
     }
 
     private String getOverlayPackage(String prefix, String themeName) {

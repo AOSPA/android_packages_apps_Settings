@@ -15,11 +15,10 @@
  */
 package com.android.customization.picker.theme;
 
-import static android.app.WallpaperColors.HINT_SUPPORTS_DARK_THEME;
-
 import android.app.Activity;
 import android.app.WallpaperColors;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -45,6 +44,7 @@ import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.customization.model.CustomizationManager.Callback;
+import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.model.theme.ThemeBundle;
 import com.android.customization.model.theme.ThemeBundle.PreviewInfo;
 import com.android.customization.model.theme.ThemeManager;
@@ -182,27 +182,40 @@ public class ThemeFragment extends ToolbarFragment {
     private void setUpOptions(@Nullable Bundle savedInstanceState) {
         mThemeManager.fetchOptions(options -> {
             mOptionsController = new OptionSelectorController(mOptionsContainer, options);
-
             mOptionsController.addListener(selected -> {
-                mSelectedTheme = (ThemeBundle) selected;
-                mSelectedTheme.setOverrideThemeWallpaper(mCurrentHomeWallpaper);
-                createAdapter();
+                if (selected instanceof CustomTheme && !((CustomTheme) selected).isDefined()) {
+                    navigateToCustomTheme();
+                } else {
+                    mSelectedTheme = (ThemeBundle) selected;
+                    mSelectedTheme.setOverrideThemeWallpaper(mCurrentHomeWallpaper);
+                    createAdapter();
+                }
             });
             mOptionsController.initOptions(mThemeManager);
             String previouslySelected = savedInstanceState != null
                     ? savedInstanceState.getString(KEY_SELECTED_THEME) : null;
-
             for (ThemeBundle theme : options) {
                 if (previouslySelected != null
                         && previouslySelected.equals(theme.getSerializedPackages())) {
                     mSelectedTheme = theme;
                 } else if (theme.isActive(mThemeManager)) {
                     mSelectedTheme = theme;
+                    break;
                 }
+            }
+            if (mSelectedTheme == null) {
+                // Select the default theme if there is no matching custom enabled theme
+                // TODO(b/124796742): default to custom if there is no matching theme bundle
+                mSelectedTheme = options.get(0);
             }
             mOptionsController.setSelectedOption(mSelectedTheme);
         });
         createAdapter();
+    }
+
+    private void navigateToCustomTheme() {
+        Intent intent = new Intent(getActivity(), CustomThemeActivity.class);
+        startActivity(intent);
     }
 
     private static abstract class ThemePreviewPage extends PreviewPage {
