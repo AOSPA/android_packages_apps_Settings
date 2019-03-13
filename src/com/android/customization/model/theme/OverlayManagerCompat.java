@@ -49,7 +49,8 @@ public class OverlayManagerCompat {
      * @return true if the operation succeeded
      */
     public boolean setEnabledExclusiveInCategory(String packageName, int userId) {
-        return mOverlayManager.setEnabledExclusiveInCategory(packageName, userId);
+        mOverlayManager.setEnabledExclusiveInCategory(packageName, UserHandle.of(userId));
+        return true;
     }
 
     /**
@@ -57,7 +58,8 @@ public class OverlayManagerCompat {
      * @return true if the operation succeeded
      */
     public boolean disableOverlay(String packageName, int userId) {
-        return mOverlayManager.setEnabled(packageName, false, userId);
+        mOverlayManager.setEnabled(packageName, false, UserHandle.of(userId));
+        return true;
     }
 
     /**
@@ -119,7 +121,7 @@ public class OverlayManagerCompat {
 
 
     private List<OverlayInfo> getOverlayInfosForTarget(String targetPackageName, int userId) {
-        return mOverlayManager.getOverlayInfosForTarget(targetPackageName, userId);
+        return mOverlayManager.getOverlayInfosForTarget(targetPackageName, UserHandle.of(userId));
     }
 
     private void addAllEnabledOverlaysForTarget(Map<String, String> overlays, String target) {
