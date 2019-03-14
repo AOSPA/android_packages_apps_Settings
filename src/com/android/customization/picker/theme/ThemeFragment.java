@@ -113,6 +113,7 @@ public class ThemeFragment extends ToolbarFragment {
                     Toast.makeText(getContext(), R.string.applied_theme_msg,
                             Toast.LENGTH_LONG).show();
                     getActivity().finish();
+                    getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
 
                 @Override
