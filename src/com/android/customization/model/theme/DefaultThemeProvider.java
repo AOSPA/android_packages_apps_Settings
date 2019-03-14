@@ -413,8 +413,22 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                     new HashMap<>(), null));
             return;
         }
-        Map<String, String> customPackages = new HashMap<>();
+        ThemeBundle.Builder builder = parseCustomTheme(serializedTheme);
+        if (builder != null) {
+            builder.setTitle(mContext.getString(R.string.custom_theme_title));
+            mThemes.add(builder.build());
+        } else {
+            Log.w(TAG, "Couldn't read stored custom theme, resetting");
+            mThemes.add(new CustomTheme(mContext.getString(R.string.custom_theme_title),
+                    new HashMap<>(), null));
+        }
+    }
+
+    @Override
+    public Builder parseCustomTheme(String serializedTheme) {
         try {
+            Map<String, String> customPackages = new HashMap<>();
+
             JSONObject theme = new JSONObject(serializedTheme);
             Iterator<String> keysIterator = theme.keys();
 
@@ -430,11 +444,10 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             addNoPreviewIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_SETTINGS));
             addNoPreviewIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_LAUNCHER));
 
-            mThemes.add(builder.build());
+            return builder;
         } catch (JSONException | NameNotFoundException | NotFoundException e) {
-            Log.w(TAG, "Couldn't read stored custom theme, resetting", e);
-            mThemes.add(new CustomTheme(mContext.getString(R.string.custom_theme_title),
-                    new HashMap<>(), null));
+            Log.i(TAG, "Couldn't parse serialized custom theme", e);
+            return null;
         }
     }
 

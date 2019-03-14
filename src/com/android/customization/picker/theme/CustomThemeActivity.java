@@ -15,6 +15,7 @@
  */
 package com.android.customization.picker.theme;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -30,7 +31,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.model.theme.DefaultThemeProvider;
 import com.android.customization.model.theme.OverlayManagerCompat;
+import com.android.customization.model.theme.ThemeBundle.Builder;
+import com.android.customization.model.theme.ThemeBundleProvider;
 import com.android.customization.model.theme.ThemeManager;
+import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.model.theme.custom.CustomThemeManager;
 import com.android.customization.model.theme.custom.FontOptionsProvider;
 import com.android.customization.model.theme.custom.IconOptionsProvider;
@@ -50,6 +54,9 @@ import java.util.List;
 
 public class CustomThemeActivity extends FragmentActivity implements
         CustomThemeComponentFragmentHost {
+    public static final String EXTRA_THEME_TITLE = "CustomThemeActivity.ThemeTitle";
+    public static final String EXTRA_THEME_PACKAGES = "CustomThemeActivity.ThemePackages";
+
     private static final String TAG = "CustomThemeActivity";
 
     private UserEventLogger mUserEventLogger;
@@ -64,7 +71,21 @@ public class CustomThemeActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         CustomizationInjector injector = (CustomizationInjector) InjectorProvider.getInjector();
         mUserEventLogger = injector.getUserEventLogger(this);
-        mCustomThemeManager = new CustomThemeManager(null);
+        Intent intent = getIntent();
+        Builder themeBuilder = null;
+        if (intent != null && intent.hasExtra(EXTRA_THEME_PACKAGES)
+                && intent.hasExtra(EXTRA_THEME_TITLE)) {
+            ThemeBundleProvider themeProvider =
+                    new DefaultThemeProvider(this, injector.getCustomizationPreferences(this));
+            themeBuilder = themeProvider.parseCustomTheme(
+                    intent.getStringExtra(EXTRA_THEME_PACKAGES));
+            if (themeBuilder != null) {
+                themeBuilder.setTitle(intent.getStringExtra(EXTRA_THEME_TITLE));
+            }
+        }
+        mCustomThemeManager = new CustomThemeManager(themeBuilder == null ? null
+                : (CustomTheme) themeBuilder.build());
+
         mThemeManager = new ThemeManager(
                 new DefaultThemeProvider(this, injector.getCustomizationPreferences(this)),
                 this,
