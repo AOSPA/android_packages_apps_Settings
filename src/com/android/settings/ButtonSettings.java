@@ -46,11 +46,16 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener, Indexable {
     private static final String TAG = "ButtonSettings";
 
+    private static final int KEY_MASK_BACK = 0x02;
+    private static final int KEY_MASK_APP_SWITCH = 0x10;
+
+    private static final String KEY_SWAP_NAVIGATION_KEYS = "swap_navigation_keys";
     private static final String KEY_BUTTON_BRIGHTNESS = "button_brightness";
     private static final String EMPTY_STRING = "";
 
     private Handler mHandler;
 
+    private SwitchPreference mSwapNavigationkeys;
     private SwitchPreference mButtonBrightness;
 
     @Override
@@ -63,6 +68,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
         final Resources res = getActivity().getResources();
         final PreferenceScreen prefScreen = getPreferenceScreen();
+
+        /* Swap Navigation Keys */
+        mSwapNavigationkeys = (SwitchPreference) findPreference(KEY_SWAP_NAVIGATION_KEYS);
+        if (mSwapNavigationkeys != null) {
+            mSwapNavigationkeys.setOnPreferenceChangeListener(this);
+        }
 
         /* Button Brightness */
         mButtonBrightness = (SwitchPreference) findPreference(KEY_BUTTON_BRIGHTNESS);
@@ -124,6 +135,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private String getSystemPreferenceString(Preference preference) {
         if (preference == null) {
             return EMPTY_STRING;
+        } else if (preference == mSwapNavigationkeys) {
+            return Settings.System.SWAP_NAVIGATION_KEYS;
         } else if (preference == mButtonBrightness) {
             return Settings.System.BUTTON_BRIGHTNESS_ENABLED;
         }
@@ -137,8 +150,20 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
+        final boolean hasBack = (KEY_MASK_BACK) != 0;
+        final boolean hasAppSwitch = (KEY_MASK_APP_SWITCH) != 0;
+
+        final boolean swapNavigationkeysEnabled = Settings.System.getIntForUser(resolver,
+                Settings.System.SWAP_NAVIGATION_KEYS, 0, UserHandle.USER_CURRENT) != 0;
+
         final boolean buttonBrightnessEnabled = Settings.System.getIntForUser(resolver,
                 Settings.System.BUTTON_BRIGHTNESS_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
+
+        if (mSwapNavigationkeys != null) {
+            mSwapNavigationkeys.setChecked(swapNavigationkeysEnabled);
+            // Disable when no HW back and recents available.
+            mSwapNavigationkeys.setEnabled(hasBack && hasAppSwitch);
+        }
 
         if (mButtonBrightness != null) {
             mButtonBrightness.setChecked(buttonBrightnessEnabled);
