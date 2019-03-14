@@ -50,6 +50,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private static final int KEY_MASK_CAMERA = 0x20;
 
     private static final String KEY_NAVIGATION_BAR         = "navigation_bar";
+    private static final String KEY_BUTTON_BRIGHTNESS      = "button_brightness";
 
     private static final String KEY_HOME_LONG_PRESS        = "home_key_long_press";
     private static final String KEY_HOME_DOUBLE_TAP        = "home_key_double_tap";
@@ -91,6 +92,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private ListPreference mCameraDoubleTapAction;
 
     private SwitchPreference mNavigationBar;
+    private SwitchPreference mButtonBrightness;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,6 +117,18 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             } else {
                 mNavigationBar = null;
                 removePreference(KEY_NAVIGATION_BAR);
+            }
+        }
+
+        /* Button Brightness */
+        mButtonBrightness = (SwitchPreference) findPreference(KEY_BUTTON_BRIGHTNESS);
+        if (mButtonBrightness != null) {
+            int defaultButtonBrightness = res.getInteger(
+                    com.android.internal.R.integer.config_buttonBrightnessSettingDefault);
+            if (defaultButtonBrightness > 0) {
+                mButtonBrightness.setOnPreferenceChangeListener(this);
+            } else {
+                prefScreen.removePreference(mButtonBrightness);
             }
         }
 
@@ -302,6 +316,8 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             return EMPTY_STRING;
         } else if (preference == mNavigationBar) {
             return Settings.System.NAVIGATION_BAR_ENABLED;
+        } else if (preference == mButtonBrightness) {
+            return Settings.System.BUTTON_BRIGHTNESS_ENABLED;
         } else if (preference == mHomeLongPressAction) {
             return Settings.System.KEY_HOME_LONG_PRESS_ACTION;
         } else if (preference == mHomeDoubleTapAction) {
@@ -346,8 +362,15 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
         final boolean hasAppSwitch = (mDeviceHardwareKeys & KEY_MASK_APP_SWITCH) != 0 || navigationBarEnabled;
         final boolean hasCamera = (mDeviceHardwareKeys & KEY_MASK_CAMERA) != 0;
 
+        final boolean buttonBrightnessEnabled = Settings.System.getIntForUser(resolver,
+                Settings.System.BUTTON_BRIGHTNESS_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
+
         if (mNavigationBar != null) {
             mNavigationBar.setChecked(navigationBarEnabled);
+        }
+
+        if (mButtonBrightness != null) {
+            mButtonBrightness.setChecked(buttonBrightnessEnabled);
         }
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
@@ -369,6 +392,12 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
         final PreferenceCategory cameraCategory =
                 (PreferenceCategory) prefScreen.findPreference(KEY_CATEGORY_CAMERA);
+
+        if (mDeviceHardwareKeys != 0 && mButtonBrightness != null) {
+            mButtonBrightness.setEnabled(!navigationBarEnabled);
+        } else if (mDeviceHardwareKeys == 0 && mButtonBrightness != null) {
+            prefScreen.removePreference(mButtonBrightness);
+        }
 
         if (!hasHome && homeCategory != null) {
             prefScreen.removePreference(homeCategory);
@@ -433,6 +462,8 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             final boolean hasMenu = (deviceHardwareKeys & KEY_MASK_MENU) != 0;
             final boolean hasAssist = (deviceHardwareKeys & KEY_MASK_ASSIST) != 0;
             final boolean hasCamera = (deviceHardwareKeys & KEY_MASK_CAMERA) != 0;
+            int defaultButtonBrightness = Resources.getSystem().getInteger(
+                    com.android.internal.R.integer.config_buttonBrightnessSettingDefault);
 
             // Remove duplicates for "Long press action" and "Double tap action"
             keys.add(KEY_BACK_LONG_PRESS);
@@ -458,6 +489,9 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
             if (deviceHardwareKeys == 0)
                 keys.add(KEY_NAVIGATION_BAR);
+
+            if (defaultButtonBrightness == 0)
+                keys.add(KEY_BUTTON_BRIGHTNESS);
 
             return keys;
         }
