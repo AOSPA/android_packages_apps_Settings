@@ -50,6 +50,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private static final int KEY_MASK_CAMERA = 0x20;
 
     private static final String KEY_NAVIGATION_BAR         = "navigation_bar";
+    private static final String KEY_SWAP_NAVIGATION_KEYS   = "swap_navigation_keys";
     private static final String KEY_BUTTON_BRIGHTNESS      = "button_brightness";
 
     private static final String KEY_HOME_LONG_PRESS        = "home_key_long_press";
@@ -92,6 +93,7 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
     private ListPreference mCameraDoubleTapAction;
 
     private SwitchPreference mNavigationBar;
+    private SwitchPreference mSwapNavigationkeys;
     private SwitchPreference mButtonBrightness;
 
     @Override
@@ -118,6 +120,12 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
                 mNavigationBar = null;
                 removePreference(KEY_NAVIGATION_BAR);
             }
+        }
+
+        /* Swap Navigation Keys */
+        mSwapNavigationkeys = (SwitchPreference) findPreference(KEY_SWAP_NAVIGATION_KEYS);
+        if (mSwapNavigationkeys != null) {
+            mSwapNavigationkeys.setOnPreferenceChangeListener(this);
         }
 
         /* Button Brightness */
@@ -316,6 +324,8 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
             return EMPTY_STRING;
         } else if (preference == mNavigationBar) {
             return Settings.System.NAVIGATION_BAR_ENABLED;
+        } else if (preference == mSwapNavigationkeys) {
+            return Settings.System.SWAP_NAVIGATION_KEYS;
         } else if (preference == mButtonBrightness) {
             return Settings.System.BUTTON_BRIGHTNESS_ENABLED;
         } else if (preference == mHomeLongPressAction) {
@@ -362,11 +372,21 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
         final boolean hasAppSwitch = (mDeviceHardwareKeys & KEY_MASK_APP_SWITCH) != 0 || navigationBarEnabled;
         final boolean hasCamera = (mDeviceHardwareKeys & KEY_MASK_CAMERA) != 0;
 
+        final boolean swapNavigationkeysEnabled = Settings.System.getIntForUser(resolver,
+                Settings.System.SWAP_NAVIGATION_KEYS, 0, UserHandle.USER_CURRENT) != 0;
+
         final boolean buttonBrightnessEnabled = Settings.System.getIntForUser(resolver,
                 Settings.System.BUTTON_BRIGHTNESS_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
 
         if (mNavigationBar != null) {
             mNavigationBar.setChecked(navigationBarEnabled);
+        }
+
+        if (mSwapNavigationkeys != null) {
+            mSwapNavigationkeys.setChecked(swapNavigationkeysEnabled);
+            // Disable when navigation bar is disabled and no hw back and recents available.
+            mSwapNavigationkeys.setEnabled(navigationBarEnabled
+                    || hasBack && hasAppSwitch);
         }
 
         if (mButtonBrightness != null) {
