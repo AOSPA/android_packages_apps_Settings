@@ -17,7 +17,9 @@ package com.android.customization.model.theme;
 
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
 import static com.android.customization.model.ResourceConstants.CONFIG_ICON_MASK;
+import static com.android.customization.model.ResourceConstants.ICON_PREVIEW_DRAWABLE_NAME;
 import static com.android.customization.model.ResourceConstants.SETTINGS_PACKAGE;
+import static com.android.customization.model.ResourceConstants.SYSUI_ICONS_FOR_PREVIEW;
 import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 
 import android.content.Context;
@@ -68,7 +70,6 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     private static final String ICON_LAUNCHER_PREFIX = "theme_overlay_icon_launcher_";
     private static final String ICON_SETTINGS_PREFIX = "theme_overlay_icon_settings_";
     private static final String ICON_SYSUI_PREFIX = "theme_overlay_icon_sysui_";
-    private static final String ICON_PREVIEW_DRAWABLE_NAME = "ic_wifi_signal_3";
     private static final String PREVIEW_COLOR_PREFIX = "theme_preview_color_";
     private static final String PREVIEW_SHAPE_PREFIX = "theme_preview_shape_";
     private static final String WALLPAPER_PREFIX = "theme_wallpaper_";
@@ -80,13 +81,6 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
 
     private static final String ACCENT_COLOR_LIGHT_NAME = "accent_device_default_light";
     private static final String ACCENT_COLOR_DARK_NAME = "accent_device_default_dark";
-    private static final String[] SYSUI_ICONS_FOR_PREVIEW = {
-            "ic_qs_bluetooth_on",
-            "ic_dnd",
-            "ic_signal_flashlight",
-            "ic_qs_auto_rotate",
-            "ic_signal_airplane"
-    };
 
     private List<ThemeBundle> mThemes;
     private Map<String, OverlayInfo> mOverlayInfos;
@@ -177,11 +171,13 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                 if (!TextUtils.isEmpty(iconAndroidOverlayPackage)) {
                     builder.addOverlayPackage(getOverlayCategory(iconAndroidOverlayPackage),
                                 iconAndroidOverlayPackage)
-                            .addIcon(loadIconPreviewDrawable(ICON_PREVIEW_DRAWABLE_NAME,
+                            .addIcon(loadIconPreviewDrawable(
+                                    ICON_PREVIEW_DRAWABLE_NAME,
                                     iconAndroidOverlayPackage));
                 } else {
                     builder.addIcon(mContext.getResources().getDrawable(
-                            Resources.getSystem().getIdentifier(ICON_PREVIEW_DRAWABLE_NAME,
+                            Resources.getSystem().getIdentifier(
+                                    ICON_PREVIEW_DRAWABLE_NAME,
                                     "drawable", ANDROID_PACKAGE), null));
                 }
 
@@ -327,7 +323,8 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         } catch (NameNotFoundException | NotFoundException e) {
             Log.d(TAG, "Didn't find Android icons overlay for default theme, using system default",
                     e);
-            builder.addIcon(system.getDrawable(system.getIdentifier(ICON_PREVIEW_DRAWABLE_NAME,
+            builder.addIcon(system.getDrawable(system.getIdentifier(
+                    ICON_PREVIEW_DRAWABLE_NAME,
                             "drawable", ANDROID_PACKAGE), null));
         }
 

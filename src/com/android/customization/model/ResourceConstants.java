@@ -60,4 +60,12 @@ public interface ResourceConstants {
     String THEME_SETTING = Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES;
     String CONFIG_BODY_FONT_FAMILY = "config_bodyFontFamily";
     String CONFIG_HEADLINE_FONT_FAMILY = "config_headlineFontFamily";
+    String ICON_PREVIEW_DRAWABLE_NAME = "ic_wifi_signal_3";
+    String[] SYSUI_ICONS_FOR_PREVIEW = {
+            "ic_qs_bluetooth_on",
+            "ic_dnd",
+            "ic_signal_flashlight",
+            "ic_qs_auto_rotate",
+            "ic_signal_airplane"
+    };
 }

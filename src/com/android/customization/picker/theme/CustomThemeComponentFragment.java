@@ -39,6 +39,7 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
     private static final String ARG_KEY_POSITION = "CustomThemeComponentFragment.position";
     private static final String ARG_KEY_TOTAL_STEPS = "CustomThemeComponentFragment.steps";
     private static final String ARG_KEY_TITLE_RES_ID = "CustomThemeComponentFragment.title_res";
+    private CustomThemeComponentFragmentHost mHost;
 
     public interface CustomThemeComponentFragmentHost {
         void delete();
@@ -47,6 +48,8 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
                 int position);
 
         CustomThemeManager getCustomThemeManager();
+
+        void setCurrentStep(int step);
     }
 
     public static CustomThemeComponentFragment newInstance(CharSequence toolbarTitle, int position,
@@ -78,14 +81,14 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
         mPosition = getArguments().getInt(ARG_KEY_POSITION);
         mTotalSteps = getArguments().getInt(ARG_KEY_TOTAL_STEPS);
         mTitleResId = getArguments().getInt(ARG_KEY_TITLE_RES_ID);
+        mProvider = mHost.getComponentOptionProvider(mPosition);
+        mCustomThemeManager = mHost.getCustomThemeManager();
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        CustomThemeComponentFragmentHost host = (CustomThemeComponentFragmentHost) context;
-        mProvider = host.getComponentOptionProvider(mPosition);
-        mCustomThemeManager = host.getCustomThemeManager();
+        mHost = (CustomThemeComponentFragmentHost) context;
     }
 
     @Nullable
@@ -105,6 +108,12 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
         setUpOptions();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mHost.setCurrentStep(mPosition);
     }
 
     private void bindPreview() {

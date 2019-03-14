@@ -16,6 +16,7 @@
 package com.android.customization.picker.theme;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
@@ -26,8 +27,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.customization.model.theme.OverlayManagerCompat;
 import com.android.customization.model.theme.custom.CustomThemeManager;
 import com.android.customization.model.theme.custom.FontOptionsProvider;
+import com.android.customization.model.theme.custom.IconOptionsProvider;
 import com.android.customization.model.theme.custom.ThemeComponentOption;
 import com.android.customization.model.theme.custom.ThemeComponentOption.FontOption;
+import com.android.customization.model.theme.custom.ThemeComponentOption.IconOption;
 import com.android.customization.model.theme.custom.ThemeComponentOptionProvider;
 import com.android.customization.picker.theme.CustomThemeComponentFragment.CustomThemeComponentFragmentHost;
 import com.android.wallpaper.R;
@@ -43,6 +46,8 @@ public class CustomThemeActivity extends FragmentActivity implements
 
     private UserEventLogger mUserEventLogger;
     private List<ComponentStep<?>> mSteps;
+    private int mCurrentStep;
+    private TextView mApplyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +55,12 @@ public class CustomThemeActivity extends FragmentActivity implements
         Injector injector = InjectorProvider.getInjector();
         mUserEventLogger = injector.getUserEventLogger(this);
         setContentView(R.layout.activity_custom_theme);
+        mApplyButton = findViewById(R.id.next_button);
+        mApplyButton.setOnClickListener(view -> onNextOrApply());
         initSteps();
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-
         if (fragment == null) {
             // Navigate to the first step
             navigateToStep(0);
@@ -62,21 +68,47 @@ public class CustomThemeActivity extends FragmentActivity implements
     }
 
     private void navigateToStep(int i) {
-        final FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         ComponentStep step = mSteps.get(i);
         Fragment fragment = step.getFragment();
 
-        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.commitNow();
+        // Don't add step 0 to the back stack so that going back from it just finishes the Activity
+        if (i > 0) {
+            fragmentTransaction.addToBackStack("Step " + i);
+        }
+        fragmentTransaction.commit();
+        fragmentManager.executePendingTransactions();
+        updateApplyButtonLabel();
     }
 
     private void initSteps() {
         mSteps = new ArrayList<>();
         OverlayManagerCompat manager = new OverlayManagerCompat(this);
-        mSteps.add(new FontStep(new FontOptionsProvider(this, manager), 0, mSteps.size() + 1));
+        mSteps.add(new FontStep(new FontOptionsProvider(this, manager), 0, 2));
+        mSteps.add(new IconStep(new IconOptionsProvider(this, manager), 1, 2));
+        mCurrentStep = 0;
     }
 
+    private void onNextOrApply() {
+        if (mCurrentStep < mSteps.size() - 1) {
+            // TODO: gather current step's selection
+            navigateToStep(mCurrentStep + 1);
+        }
+        // TODO: handle Apply
+    }
+
+    @Override
+    public void setCurrentStep(int i) {
+        mCurrentStep = i;
+        updateApplyButtonLabel();
+    }
+
+    private void updateApplyButtonLabel() {
+        mApplyButton.setText((mCurrentStep < mSteps.size() -1) ? R.string.custom_theme_next
+                : R.string.apply_btn);
+    }
 
     @Override
     public void delete() {
@@ -137,6 +169,23 @@ public class CustomThemeActivity extends FragmentActivity implements
         protected FontStep(ThemeComponentOptionProvider<FontOption> provider,
                 int position, int totalSteps) {
             super(R.string.font_component_title, provider, position, totalSteps);
+        }
+
+        @Override
+        CustomThemeComponentFragment createFragment() {
+            return CustomThemeComponentFragment.newInstance(
+                    CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
+                    position,
+                    totalSteps,
+                    titleResId);
+        }
+    }
+
+    private class IconStep extends ComponentStep<IconOption> {
+
+        protected IconStep(ThemeComponentOptionProvider<IconOption> provider,
+                int position, int totalSteps) {
+            super(R.string.icon_component_title, provider, position, totalSteps);
         }
 
         @Override
