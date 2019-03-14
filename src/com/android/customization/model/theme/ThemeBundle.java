@@ -83,13 +83,11 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
     public void bindThumbnailTile(View view) {
         Resources res = view.getContext().getResources();
 
-        ((ImageView) view.findViewById(R.id.theme_option_color)).setImageTintList(
-                ColorStateList.valueOf(mPreviewInfo.colorAccentLight));
         ((TextView) view.findViewById(R.id.theme_option_font)).setTypeface(
                 mPreviewInfo.headlineFontFamily);
         if (mPreviewInfo.shapeDrawable != null) {
-            ((ShapeDrawable)mPreviewInfo.shapeDrawable).getPaint().setColor(res.getColor(
-                    R.color.shape_thumbnail_color, null));
+            ((ShapeDrawable) mPreviewInfo.shapeDrawable).getPaint().setColor(
+                    mPreviewInfo.colorAccentLight);
             ((ImageView) view.findViewById(R.id.theme_option_shape)).setImageDrawable(
                     mPreviewInfo.shapeDrawable);
         }
