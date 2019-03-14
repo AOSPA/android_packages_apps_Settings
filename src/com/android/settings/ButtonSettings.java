@@ -24,11 +24,14 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import androidx.preference.Preference;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.SwitchPreference;
 import android.text.TextUtils;
+
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -43,9 +46,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener, Indexable {
     private static final String TAG = "ButtonSettings";
 
+    private static final String KEY_BUTTON_BRIGHTNESS = "button_brightness";
     private static final String EMPTY_STRING = "";
 
     private Handler mHandler;
+
+    private SwitchPreference mButtonBrightness;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,21 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.button_settings);
 
         mHandler = new Handler();
+
+        final Resources res = getActivity().getResources();
+        final PreferenceScreen prefScreen = getPreferenceScreen();
+
+        /* Button Brightness */
+        mButtonBrightness = (SwitchPreference) findPreference(KEY_BUTTON_BRIGHTNESS);
+        if (mButtonBrightness != null) {
+            int defaultButtonBrightness = res.getInteger(
+                    com.android.internal.R.integer.config_buttonBrightnessSettingDefault);
+            if (defaultButtonBrightness > 0) {
+                mButtonBrightness.setOnPreferenceChangeListener(this);
+            } else {
+                prefScreen.removePreference(mButtonBrightness);
+            }
+        }
     }
 
     @Override
@@ -103,6 +124,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private String getSystemPreferenceString(Preference preference) {
         if (preference == null) {
             return EMPTY_STRING;
+        } else if (preference == mButtonBrightness) {
+            return Settings.System.BUTTON_BRIGHTNESS_ENABLED;
         }
 
         return EMPTY_STRING;
@@ -111,6 +134,17 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private void reload() {
         final ContentResolver resolver = getActivity().getContentResolver();
         final Resources res = getActivity().getResources();
+
+        final PreferenceScreen prefScreen = getPreferenceScreen();
+
+        final boolean buttonBrightnessEnabled = Settings.System.getIntForUser(resolver,
+                Settings.System.BUTTON_BRIGHTNESS_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
+
+        if (mButtonBrightness != null) {
+            mButtonBrightness.setChecked(buttonBrightnessEnabled);
+        } else {
+            prefScreen.removePreference(mButtonBrightness);
+        }
     }
 
     @Override
@@ -143,7 +177,14 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
+
+                    int defaultButtonBrightness = Resources.getSystem().getInteger(
+                            com.android.internal.R.integer.config_buttonBrightnessSettingDefault);
+
                     // Add whatever we won´t want to show.
+                    if (defaultButtonBrightness == 0)
+                        keys.add(KEY_BUTTON_BRIGHTNESS);
+
                     return keys;
                 }
             };
