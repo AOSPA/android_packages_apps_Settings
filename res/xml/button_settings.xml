@@ -19,4 +19,10 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/buttons_pref_title">
 
+    <SwitchPreference
+            android:key="button_brightness"
+            android:title="@string/hardware_brightness_keys_title"
+            android:summary="@string/hardware_brightness_keys_summary"
+            android:persistent="false" />
+
 </PreferenceScreen>
