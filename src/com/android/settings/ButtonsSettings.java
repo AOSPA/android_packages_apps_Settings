@@ -364,6 +364,10 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
         final boolean showNavigationBar = res.getBoolean(com.android.internal.R.bool.config_showNavigationBar);
         final boolean navigationBarEnabled = Settings.System.getIntForUser(resolver,
                 Settings.System.NAVIGATION_BAR_ENABLED, showNavigationBar ? 1 : 0, UserHandle.USER_CURRENT) != 0;
+        final boolean swipeUpHomeGestureEnabled = Settings.Secure.getIntForUser(resolver,
+                Settings.Secure.SWIPE_UP_TO_SWITCH_APPS_ENABLED,
+                res.getBoolean(com.android.internal.R.bool.config_swipe_up_gesture_default) ? 1 : 0,
+                UserHandle.USER_CURRENT) != 0;
 
         final boolean hasHome = (mDeviceHardwareKeys & KEY_MASK_HOME) != 0 || navigationBarEnabled;
         final boolean hasMenu = (mDeviceHardwareKeys & KEY_MASK_MENU) != 0;
@@ -391,6 +395,21 @@ public class ButtonsSettings extends SettingsPreferenceFragment implements
 
         if (mButtonBrightness != null) {
             mButtonBrightness.setChecked(buttonBrightnessEnabled);
+        }
+
+        if (mAppSwitchLongPressAction != null) {
+            if (navigationBarEnabled && swipeUpHomeGestureEnabled) {
+                mAppSwitchLongPressAction.setEnabled(false);
+            } else {
+                mAppSwitchLongPressAction.setEnabled(hasAppSwitch);
+            }
+        }
+        if (mAppSwitchDoubleTapAction != null) {
+            if (navigationBarEnabled && swipeUpHomeGestureEnabled) {
+                mAppSwitchDoubleTapAction.setEnabled(false);
+            } else {
+                mAppSwitchDoubleTapAction.setEnabled(hasAppSwitch);
+            }
         }
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
