@@ -56,6 +56,9 @@ public class CustomThemeActivity extends FragmentActivity implements
         CustomThemeComponentFragmentHost {
     public static final String EXTRA_THEME_TITLE = "CustomThemeActivity.ThemeTitle";
     public static final String EXTRA_THEME_PACKAGES = "CustomThemeActivity.ThemePackages";
+    public static final int REQUEST_CODE_CUSTOM_THEME = 1;
+    public static final int RESULT_THEME_DELETED = 10;
+    public static final int RESULT_THEME_APPLIED = 20;
 
     private static final String TAG = "CustomThemeActivity";
 
@@ -103,6 +106,7 @@ public class CustomThemeActivity extends FragmentActivity implements
             // Navigate to the first step
             navigateToStep(0);
         }
+
     }
 
     private void navigateToStep(int i) {
@@ -145,6 +149,7 @@ public class CustomThemeActivity extends FragmentActivity implements
                         public void onSuccess() {
                             Toast.makeText(CustomThemeActivity.this, R.string.applied_theme_msg,
                                     Toast.LENGTH_LONG).show();
+                            setResult(RESULT_THEME_APPLIED);
                             finish();
                         }
 
@@ -186,12 +191,14 @@ public class CustomThemeActivity extends FragmentActivity implements
 
     @Override
     public void delete() {
-
+        mThemeManager.removeCustomTheme(mCustomThemeManager.getOriginalTheme());
+        setResult(RESULT_THEME_DELETED);
+        finish();
     }
 
     @Override
     public void cancel() {
-
+        finish();
     }
 
     @Override

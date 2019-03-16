@@ -66,7 +66,7 @@ public class GridOptionsManagerTest {
 
     @Test
     public void testFetch_backgroundThread() {
-        mManager.fetchOptions(null);
+        mManager.fetchOptions(null, false);
         Robolectric.flushBackgroundThreadScheduler();
         verify(mProvider).fetch(anyBoolean());
     }

@@ -84,7 +84,7 @@ public class ThemeFragment extends ToolbarFragment {
 
     private RecyclerView mOptionsContainer;
     private CheckBox mUseMyWallpaperButton;
-    private OptionSelectorController mOptionsController;
+    private OptionSelectorController<ThemeBundle> mOptionsController;
     private ThemeManager mThemeManager;
     private ThemeBundle mSelectedTheme;
     private ThemePreviewAdapter mAdapter;
@@ -152,6 +152,20 @@ public class ThemeFragment extends ToolbarFragment {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CustomThemeActivity.REQUEST_CODE_CUSTOM_THEME) {
+            if (resultCode == CustomThemeActivity.RESULT_THEME_DELETED) {
+                mSelectedTheme = null;
+                reloadOptions();
+            }
+            if (resultCode == CustomThemeActivity.RESULT_THEME_APPLIED) {
+                getActivity().finish();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     private void onUseMyWallpaperCheckChanged(CompoundButton checkbox, boolean checked) {
         mUseMyWallpaper = checked;
         reloadWallpaper();
@@ -199,7 +213,7 @@ public class ThemeFragment extends ToolbarFragment {
 
     private void setUpOptions(@Nullable Bundle savedInstanceState) {
         mThemeManager.fetchOptions(options -> {
-            mOptionsController = new OptionSelectorController(mOptionsContainer, options);
+            mOptionsController = new OptionSelectorController<>(mOptionsContainer, options);
             mOptionsController.addListener(selected -> {
                 if (selected instanceof CustomTheme && !((CustomTheme) selected).isDefined()) {
                     navigateToCustomTheme(null);
@@ -228,7 +242,27 @@ public class ThemeFragment extends ToolbarFragment {
                 mSelectedTheme = options.get(0);
             }
             mOptionsController.setSelectedOption(mSelectedTheme);
-        });
+        }, false);
+        createAdapter();
+        updateButtonsVisibility();
+    }
+
+    private void reloadOptions() {
+        mThemeManager.fetchOptions(options -> {
+            mOptionsController.resetOptions(options);
+            for (ThemeBundle theme : options) {
+                if (theme.isActive(mThemeManager)) {
+                    mSelectedTheme = theme;
+                    break;
+                }
+            }
+            if (mSelectedTheme == null) {
+                // Select the default theme if there is no matching custom enabled theme
+                // TODO(b/124796742): default to custom if there is no matching theme bundle
+                mSelectedTheme = options.get(0);
+            }
+            mOptionsController.setSelectedOption(mSelectedTheme);
+        }, true);
         createAdapter();
         updateButtonsVisibility();
     }
@@ -240,7 +274,7 @@ public class ThemeFragment extends ToolbarFragment {
             intent.putExtra(CustomThemeActivity.EXTRA_THEME_PACKAGES,
                     themeToEdit.getSerializedPackages());
         }
-        startActivity(intent);
+        startActivityForResult(intent, CustomThemeActivity.REQUEST_CODE_CUSTOM_THEME);
     }
 
     private static abstract class ThemePreviewPage extends PreviewPage {

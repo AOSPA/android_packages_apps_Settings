@@ -109,6 +109,10 @@
         [CHAR LIMIT=30] -->
     <string name="custom_theme_fragment_title">Custom Style</string>
 
+    <!-- Title of a menu option that removes the custom theme being currently edited
+        [CHAR LIMIT=30] -->
+    <string name="custom_theme_delete">Delete</string>
+
     <!-- Title of a page allowing the user to choose a font for a custom theme -->
     <string name="font_component_title">Choose font</string>
 
@@ -124,4 +128,14 @@
     <!-- Text explaining what the current step is in setting a custom theme, eg: "1 of 4".
     [CHAR_LIMIT=40] -->
     <string name="component_step_counter"><xliff:g name="current_step" example="1">%1$d</xliff:g> of <xliff:g name="total_steps" example="4">%2$d</xliff:g></string>
+
+    <!-- Dialog box asking the user to confirm if they want to delete the current custom style
+        [CHAR_LIMIT=NONE] -->
+    <string name="delete_custom_theme_confirmation">Delete Custom style?</string>
+
+    <!-- Button in a dialog box confirming that the current style will be deleted [CHAR_LIMIT=20] -->
+    <string name="delete_custom_theme_button">Delete</string>
+
+    <!-- Generic label for canceling the current action [CHAR_LIMIT=20] -->
+    <string name="cancel">Cancel</string>
 </resources>

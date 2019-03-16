@@ -158,8 +158,8 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     }
 
     @Override
-    public void fetchOptions(OptionsFetchedListener<ThemeBundle> callback) {
-        mProvider.fetch(callback, false);
+    public void fetchOptions(OptionsFetchedListener<ThemeBundle> callback, boolean reload) {
+        mProvider.fetch(callback, reload);
     }
 
     private boolean disableCurrentOverlay(String targetPackage, String category) {
@@ -184,5 +184,9 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     public String getStoredOverlays() {
         return Settings.Secure.getString(mActivity.getContentResolver(),
                 ResourceConstants.THEME_SETTING);
+    }
+
+    public void removeCustomTheme(CustomTheme theme) {
+        mProvider.removeCustomTheme(theme);
     }
 }

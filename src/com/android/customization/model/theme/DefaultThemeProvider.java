@@ -409,6 +409,12 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         mCustomizationPreferences.storeCustomTheme(theme.getSerializedPackages());
     }
 
+    @Override
+    public void removeCustomTheme(CustomTheme theme) {
+        //TODO: add support for multiple custom themes.
+        mCustomizationPreferences.storeCustomTheme("");
+    }
+
     private void addCustomTheme() {
         String serializedTheme = mCustomizationPreferences.getSerializedCustomTheme();
         if (TextUtils.isEmpty(serializedTheme)) {
