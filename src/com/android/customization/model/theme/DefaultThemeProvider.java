@@ -139,12 +139,23 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                         mStubApkResources.getIdentifier(TITLE_PREFIX + themeName,
                                 "string", mStubPackageName)));
 
-                String fontOverlayPackage = getOverlayPackage(FONT_PREFIX, themeName);
+                String shapeOverlayPackage = getOverlayPackage(SHAPE_PREFIX, themeName);
+                if (!TextUtils.isEmpty(shapeOverlayPackage)) {
+                    builder.addOverlayPackage(getOverlayCategory(shapeOverlayPackage),
+                            shapeOverlayPackage)
+                            .setShapePath(loadString(CONFIG_ICON_MASK, shapeOverlayPackage))
+                            .setShapePreview(getDrawableResourceAsset(
+                                    PREVIEW_SHAPE_PREFIX, themeName));
+                } else {
+                    builder.setShapePath(mContext.getResources().getString(
+                            Resources.getSystem().getIdentifier(CONFIG_ICON_MASK, "string",
+                                    ANDROID_PACKAGE)));
+                }
 
+                String fontOverlayPackage = getOverlayPackage(FONT_PREFIX, themeName);
                 addFontOverlay(builder, fontOverlayPackage);
 
                 String colorOverlayPackage = getOverlayPackage(COLOR_PREFIX, themeName);
-
                 if (!TextUtils.isEmpty(colorOverlayPackage)) {
                     builder.addOverlayPackage(getOverlayCategory(colorOverlayPackage),
                                 colorOverlayPackage)
@@ -154,20 +165,6 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                                     colorOverlayPackage))
                             .setColorPreview(getDrawableResourceAsset(
                                     PREVIEW_COLOR_PREFIX, themeName));
-                }
-
-                String shapeOverlayPackage = getOverlayPackage(SHAPE_PREFIX, themeName);
-
-                if (!TextUtils.isEmpty(shapeOverlayPackage)) {
-                    builder.addOverlayPackage(getOverlayCategory(shapeOverlayPackage),
-                                shapeOverlayPackage)
-                            .setShapePath(loadString(CONFIG_ICON_MASK, shapeOverlayPackage))
-                            .setShapePreview(getDrawableResourceAsset(
-                                    PREVIEW_SHAPE_PREFIX, themeName));
-                } else {
-                    builder.setShapePath(mContext.getResources().getString(
-                            Resources.getSystem().getIdentifier(CONFIG_ICON_MASK, "string",
-                                    ANDROID_PACKAGE)));
                 }
 
                 String iconAndroidOverlayPackage = getOverlayPackage(ICON_ANDROID_PREFIX,
