@@ -23,8 +23,12 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.Resources.Theme;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -335,28 +339,69 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
     public static class ShapeOption extends ThemeComponentOption {
 
-        ShapeOption(String packageName) {
+        private final LayerDrawable mShape;
+        private final List<Drawable> mAppIcons;
+        private int[] mShapeIconIds = {
+                R.id.shape_preview_icon_0, R.id.shape_preview_icon_1, R.id.shape_preview_icon_2,
+                R.id.shape_preview_icon_3, R.id.shape_preview_icon_4, R.id.shape_preview_icon_5
+        };
+
+        ShapeOption(String packageName, Drawable shapeDrawable, List<Drawable> appIcons) {
             addOverlayPackage(OVERLAY_CATEGORY_SHAPE, packageName);
+            mAppIcons = appIcons;
+            Drawable background = shapeDrawable.getConstantState().newDrawable();
+            Drawable foreground = shapeDrawable.getConstantState().newDrawable();
+            mShape = new LayerDrawable(new Drawable[]{background, foreground});
+            mShape.setLayerGravity(0, Gravity.CENTER);
+            mShape.setLayerGravity(1, Gravity.CENTER);
         }
 
         @Override
         public void bindThumbnailTile(View view) {
+            ImageView thumb = view.findViewById(R.id.shape_thumbnail);
+            Resources res = view.getResources();
+            Theme theme = view.getContext().getTheme();
+            int borderWidth = res.getDimensionPixelSize(R.dimen.component_shape_border_width);
 
+            Drawable background = mShape.getDrawable(0);
+            background.setTintList(res.getColorStateList(R.color.option_border_color, theme));
+
+            ShapeDrawable foreground = (ShapeDrawable) mShape.getDrawable(1);
+
+            foreground.setIntrinsicHeight(background.getIntrinsicHeight() - borderWidth);
+            foreground.setIntrinsicWidth(background.getIntrinsicWidth() - borderWidth);
+            foreground.setTint(res.getColor(R.color.shape_option_tile_foreground_color, theme));
+
+            thumb.setImageDrawable(mShape);
         }
 
         @Override
         public boolean isActive(CustomizationManager<ThemeComponentOption> manager) {
-            return false;
+            CustomThemeManager customThemeManager = (CustomThemeManager) manager;
+            return Objects.equals(getOverlayPackages().get(OVERLAY_CATEGORY_SHAPE),
+                    customThemeManager.getOverlayPackages().get(OVERLAY_CATEGORY_SHAPE));
         }
 
         @Override
         public int getLayoutResId() {
-            return 0;
+            return R.layout.theme_shape_option;
         }
 
         @Override
         public void bindPreview(ViewGroup container) {
+            TextView header = container.findViewById(R.id.theme_preview_card_header);
+            header.setText(R.string.preview_name_shape);
+            header.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_shapes_24px, 0, 0);
 
+            ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
+            if (cardBody.getChildCount() == 0) {
+                LayoutInflater.from(container.getContext()).inflate(
+                        R.layout.preview_card_shape_content, cardBody, true);
+            }
+            for (int i = 0; i < mShapeIconIds.length && i < mAppIcons.size(); i++) {
+                ImageView iconView = cardBody.findViewById(mShapeIconIds[i]);
+                iconView.setBackground(mAppIcons.get(i));
+            }
         }
     }
 }

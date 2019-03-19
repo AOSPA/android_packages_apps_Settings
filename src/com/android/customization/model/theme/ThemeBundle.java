@@ -40,7 +40,6 @@ import androidx.core.graphics.PathParser;
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
 import com.android.customization.widget.DynamicAdaptiveIconDrawable;
-import com.android.customization.model.ResourceConstants;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
 import com.android.wallpaper.asset.ResourceAsset;

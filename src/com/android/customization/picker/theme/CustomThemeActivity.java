@@ -39,10 +39,12 @@ import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.model.theme.custom.CustomThemeManager;
 import com.android.customization.model.theme.custom.FontOptionsProvider;
 import com.android.customization.model.theme.custom.IconOptionsProvider;
+import com.android.customization.model.theme.custom.ShapeOptionsProvider;
 import com.android.customization.model.theme.custom.ThemeComponentOption;
 import com.android.customization.model.theme.custom.ThemeComponentOption.ColorOption;
 import com.android.customization.model.theme.custom.ThemeComponentOption.FontOption;
 import com.android.customization.model.theme.custom.ThemeComponentOption.IconOption;
+import com.android.customization.model.theme.custom.ThemeComponentOption.ShapeOption;
 import com.android.customization.model.theme.custom.ThemeComponentOptionProvider;
 import com.android.customization.module.CustomizationInjector;
 import com.android.customization.picker.theme.CustomThemeComponentFragment.CustomThemeComponentFragmentHost;
@@ -108,7 +110,6 @@ public class CustomThemeActivity extends FragmentActivity implements
             // Navigate to the first step
             navigateToStep(0);
         }
-
     }
 
     private void navigateToStep(int i) {
@@ -130,10 +131,11 @@ public class CustomThemeActivity extends FragmentActivity implements
     private void initSteps() {
         mSteps = new ArrayList<>();
         OverlayManagerCompat manager = new OverlayManagerCompat(this);
-        mSteps.add(new FontStep(new FontOptionsProvider(this, manager), 0, 3));
-        mSteps.add(new IconStep(new IconOptionsProvider(this, manager), 1, 3));
+        mSteps.add(new FontStep(new FontOptionsProvider(this, manager), 0, 4));
+        mSteps.add(new IconStep(new IconOptionsProvider(this, manager), 1, 4));
         mSteps.add(new ColorStep(new ColorOptionsProvider(this, manager, mCustomThemeManager),
-                2, 3));
+                2, 4));
+        mSteps.add(new ShapeStep(new ShapeOptionsProvider(this, manager), 3, 4));        
         mCurrentStep = 0;
     }
 
@@ -288,6 +290,23 @@ public class CustomThemeActivity extends FragmentActivity implements
         protected ColorStep(ThemeComponentOptionProvider<ColorOption> provider,
                 int position, int totalSteps) {
             super(R.string.color_component_title, provider, position, totalSteps);
+        }
+
+        @Override
+        CustomThemeComponentFragment createFragment() {
+            return CustomThemeComponentFragment.newInstance(
+                    CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
+                    position,
+                    totalSteps,
+                    titleResId);
+        }
+    }
+
+    private class ShapeStep extends ComponentStep<ShapeOption> {
+
+        protected ShapeStep(ThemeComponentOptionProvider<ShapeOption> provider,
+                int position, int totalSteps) {
+            super(R.string.shape_component_title, provider, position, totalSteps);
         }
 
         @Override

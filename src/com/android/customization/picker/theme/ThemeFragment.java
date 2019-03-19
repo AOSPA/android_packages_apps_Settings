@@ -432,7 +432,7 @@ public class ThemeFragment extends ToolbarFragment {
                     }
                 });
             }
-            if (previewInfo.shapeDrawable != null && !previewInfo.shapeAppIcons.isEmpty()) {
+            if (!previewInfo.shapeAppIcons.isEmpty()) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_shape,
                         R.drawable.ic_shapes_24px, R.layout.preview_card_shape_content,
                         previewInfo.resolveAccentColor(res), editClickListener) {

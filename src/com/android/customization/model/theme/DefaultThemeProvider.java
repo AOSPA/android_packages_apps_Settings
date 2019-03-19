@@ -19,12 +19,14 @@ import static com.android.customization.model.ResourceConstants.ACCENT_COLOR_DAR
 import static com.android.customization.model.ResourceConstants.ACCENT_COLOR_LIGHT_NAME;
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
 import static com.android.customization.model.ResourceConstants.CONFIG_ICON_MASK;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
 import static com.android.customization.model.ResourceConstants.ICONS_FOR_PREVIEW;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_LAUNCHER;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SETTINGS;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
 import static com.android.customization.model.ResourceConstants.SETTINGS_PACKAGE;
 import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 
@@ -70,7 +72,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
 
     private static final String TAG = "DefaultThemeProvider";
     // TODO(b/124796742): remove once custom theme picker is ready to merge
-    private static final boolean SHOW_CUSTOM_THEME_OPTION = false;
+    private static final boolean SHOW_CUSTOM_THEME_OPTION = true;
 
     private static final String THEMES_ARRAY = "themes";
     private static final String TITLE_PREFIX = "theme_title_";
@@ -141,37 +143,13 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                                 "string", mStubPackageName)));
 
                 String shapeOverlayPackage = getOverlayPackage(SHAPE_PREFIX, themeName);
-                if (!TextUtils.isEmpty(shapeOverlayPackage)) {
-                    builder.addOverlayPackage(getOverlayCategory(shapeOverlayPackage),
-                                shapeOverlayPackage)
-                            .setShapePath(loadString(CONFIG_ICON_MASK, shapeOverlayPackage));
-                } else {
-                    builder.setShapePath(mContext.getResources().getString(
-                            Resources.getSystem().getIdentifier(CONFIG_ICON_MASK, "string",
-                                    ANDROID_PACKAGE)));
-                }
-                for (String packageName : mShapePreviewIconPackages) {
-                    try {
-                        builder.addShapePreviewIcon(
-                                mContext.getPackageManager().getApplicationIcon(packageName));
-                    } catch (NameNotFoundException e) {
-                        Log.d(TAG, "Couldn't find app " + packageName
-                                + ", won't use it for icon shape preview");
-                    }
-                }
+                addShapeOverlay(builder, shapeOverlayPackage);
 
                 String fontOverlayPackage = getOverlayPackage(FONT_PREFIX, themeName);
                 addFontOverlay(builder, fontOverlayPackage);
 
                 String colorOverlayPackage = getOverlayPackage(COLOR_PREFIX, themeName);
-                if (!TextUtils.isEmpty(colorOverlayPackage)) {
-                    builder.addOverlayPackage(getOverlayCategory(colorOverlayPackage),
-                                colorOverlayPackage)
-                            .setColorAccentLight(loadColor(ACCENT_COLOR_LIGHT_NAME,
-                                    colorOverlayPackage))
-                            .setColorAccentDark(loadColor(ACCENT_COLOR_DARK_NAME,
-                                    colorOverlayPackage));
-                }
+                addColorOverlay(builder, colorOverlayPackage);
 
                 String iconAndroidOverlayPackage = getOverlayPackage(ICON_ANDROID_PREFIX,
                         themeName);
@@ -221,6 +199,42 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
 
         if (SHOW_CUSTOM_THEME_OPTION) {
             addCustomTheme();
+        }
+    }
+
+    private void addColorOverlay(Builder builder, String colorOverlayPackage)
+            throws NameNotFoundException {
+        if (!TextUtils.isEmpty(colorOverlayPackage)) {
+            builder.addOverlayPackage(getOverlayCategory(colorOverlayPackage),
+                        colorOverlayPackage)
+                    .setColorAccentLight(loadColor(ACCENT_COLOR_LIGHT_NAME,
+                            colorOverlayPackage))
+                    .setColorAccentDark(loadColor(ACCENT_COLOR_DARK_NAME,
+                            colorOverlayPackage));
+        } else {
+            addSystemDefaultColor(builder);
+        }
+    }
+
+    private void addShapeOverlay(Builder builder, String shapeOverlayPackage)
+            throws NameNotFoundException {
+        if (!TextUtils.isEmpty(shapeOverlayPackage)) {
+            builder.addOverlayPackage(getOverlayCategory(shapeOverlayPackage),
+                        shapeOverlayPackage)
+                    .setShapePath(loadString(CONFIG_ICON_MASK, shapeOverlayPackage));
+        } else {
+            builder.setShapePath(mContext.getResources().getString(
+                    Resources.getSystem().getIdentifier(CONFIG_ICON_MASK, "string",
+                            ANDROID_PACKAGE)));
+        }
+        for (String packageName : mShapePreviewIconPackages) {
+            try {
+                builder.addShapePreviewIcon(
+                        mContext.getPackageManager().getApplicationIcon(packageName));
+            } catch (NameNotFoundException e) {
+                Log.d(TAG, "Couldn't find app " + packageName
+                        + ", won't use it for icon shape preview");
+            }
         }
     }
 
@@ -461,7 +475,9 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             }
             CustomTheme.Builder builder = new CustomTheme.Builder();
             builder.setTitle(mContext.getString(R.string.custom_theme_title));
+            addShapeOverlay(builder, customPackages.get(OVERLAY_CATEGORY_SHAPE));
             addFontOverlay(builder, customPackages.get(OVERLAY_CATEGORY_FONT));
+            addColorOverlay(builder, customPackages.get(OVERLAY_CATEGORY_COLOR));
             addAndroidIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_ANDROID));
             addSysUiIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_SYSUI));
             addNoPreviewIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_SETTINGS));
