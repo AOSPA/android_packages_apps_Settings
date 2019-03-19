@@ -33,6 +33,16 @@
 
             <include layout="@layout/wifi_dpp_fragment_header"/>
 
+            <ProgressBar
+                android:id="@+id/indeterminate_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="8dp"
+                style="?android:attr/progressBarStyleHorizontal"/>
+
             <com.android.settings.wifi.qrcode.QrPreviewLayout
                 android:layout_width="@dimen/qrcode_preview_size"
                 android:layout_height="@dimen/qrcode_preview_size">
@@ -46,9 +56,14 @@
                     android:layout_height="match_parent"/>
             </com.android.settings.wifi.qrcode.QrPreviewLayout>
 
-            <TextView android:id="@+id/error_message"
+            <TextView
+                android:id="@+id/error_message"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginTop="8dp"
+                android:visibility="invisible"
+                android:textColor="?android:attr/colorError"/>
 
         </LinearLayout>
 

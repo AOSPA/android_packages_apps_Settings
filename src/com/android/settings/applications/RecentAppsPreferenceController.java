@@ -27,26 +27,28 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.PowerManager;
 import android.os.UserHandle;
-import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
-import com.android.settingslib.widget.apppreference.AppPreference;
+import com.android.settingslib.widget.AppEntitiesHeaderController;
+import com.android.settingslib.widget.AppEntityInfo;
+import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,22 +60,25 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * This controller displays a list of recently used apps and a "See all" button. If there is
- * no recently used app, "See all" will be displayed as "App info".
+ * This controller displays up to three recently used apps.
+ * If there is no recently used app, we only show up an "App Info" preference.
  */
-public class RecentAppsPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, Comparator<UsageStats> {
+public class RecentAppsPreferenceController extends BasePreferenceController
+        implements Comparator<UsageStats> {
+
+    @VisibleForTesting
+    static final String KEY_DIVIDER = "recent_apps_divider";
 
     private static final String TAG = "RecentAppsCtrl";
-    private static final String KEY_PREF_CATEGORY = "recent_apps_category";
-    @VisibleForTesting
-    static final String KEY_DIVIDER = "all_app_info_divider";
-    @VisibleForTesting
-    static final String KEY_SEE_ALL = "all_app_info";
-    private static final int SHOW_RECENT_APP_COUNT = 5;
     private static final Set<String> SKIP_SYSTEM_PACKAGES = new ArraySet<>();
 
-    private final Fragment mHost;
+    @VisibleForTesting
+    AppEntitiesHeaderController mAppEntitiesController;
+    @VisibleForTesting
+    LayoutPreference mRecentAppsPreference;
+    @VisibleForTesting
+    Preference mDivider;
+
     private final PackageManager mPm;
     private final UsageStatsManager mUsageStatsManager;
     private final ApplicationsState mApplicationsState;
@@ -81,12 +86,10 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
     private final IconDrawableFactory mIconDrawableFactory;
     private final PowerManager mPowerManager;
 
+    private Fragment mHost;
     private Calendar mCal;
     private List<UsageStats> mStats;
-
-    private PreferenceCategory mCategory;
-    private Preference mSeeAllPref;
-    private Preference mDivider;
+    private List<UsageStats> mRecentApps;
     private boolean mHasRecentApps;
 
     static {
@@ -100,68 +103,64 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
         ));
     }
 
-    public RecentAppsPreferenceController(Context context, Application app, Fragment host) {
-        this(context, app == null ? null : ApplicationsState.getInstance(app), host);
-    }
-
-    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-    RecentAppsPreferenceController(Context context, ApplicationsState appState, Fragment host) {
-        super(context);
-        mIconDrawableFactory = IconDrawableFactory.newInstance(context);
+    public RecentAppsPreferenceController(Context context, String key) {
+        super(context, key);
+        mApplicationsState = ApplicationsState.getInstance(
+                (Application) mContext.getApplicationContext());
         mUserId = UserHandle.myUserId();
-        mPm = context.getPackageManager();
-        mPowerManager = context.getSystemService(PowerManager.class);
+        mPm = mContext.getPackageManager();
+        mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
+        mPowerManager = mContext.getSystemService(PowerManager.class);
+        mUsageStatsManager = mContext.getSystemService(UsageStatsManager.class);
+        mRecentApps = new ArrayList<>();
+        reloadData();
+    }
 
-        mHost = host;
-        mUsageStatsManager =
-                (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
-        mApplicationsState = appState;
+    public void setFragment(Fragment fragment) {
+        mHost = fragment;
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_PREF_CATEGORY;
-    }
-
-    @Override
-    public void updateNonIndexableKeys(List<String> keys) {
-        PreferenceControllerMixin.super.updateNonIndexableKeys(keys);
-        // Don't index category name into search. It's not actionable.
-        keys.add(KEY_PREF_CATEGORY);
-        keys.add(KEY_DIVIDER);
+    public int getAvailabilityStatus() {
+        return mRecentApps.isEmpty() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mCategory = (PreferenceCategory) screen.findPreference(getPreferenceKey());
-        mSeeAllPref = screen.findPreference(KEY_SEE_ALL);
-        mDivider = screen.findPreference(KEY_DIVIDER);
         super.displayPreference(screen);
-        refreshUi(mCategory.getContext());
+
+        mDivider = screen.findPreference(KEY_DIVIDER);
+        mRecentAppsPreference = (LayoutPreference) screen.findPreference(getPreferenceKey());
+        final View view = mRecentAppsPreference.findViewById(R.id.app_entities_header);
+        mAppEntitiesController = AppEntitiesHeaderController.newInstance(mContext, view)
+                .setHeaderTitleRes(R.string.recent_app_category_title)
+                .setHeaderDetailsClickListener((View v) -> {
+                    new SubSettingLauncher(mContext)
+                            .setDestination(ManageApplications.class.getName())
+                            .setArguments(null /* arguments */)
+                            .setTitleRes(R.string.application_info_label)
+                            .setSourceMetricsCategory(SettingsEnums.SETTINGS_APP_NOTIF_CATEGORY)
+                            .launch();
+                });
+
+        refreshUi();
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        refreshUi(mCategory.getContext());
+
+        refreshUi();
         // Show total number of installed apps as See all's summary.
         new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
                 mContext.getPackageManager()) {
             @Override
             protected void onCountComplete(int num) {
-                if (mHasRecentApps) {
-                    mSeeAllPref.setTitle(mContext.getString(R.string.see_all_apps_title, num));
-                } else {
-                    mSeeAllPref.setSummary(mContext.getString(R.string.apps_summary, num));
-                }
+                mAppEntitiesController.setHeaderDetails(
+                        mContext.getString(R.string.see_all_apps_title, num));
+                mAppEntitiesController.apply();
             }
         }.execute();
-
     }
 
     @Override
@@ -170,16 +169,16 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
         return Long.compare(b.getLastTimeUsed(), a.getLastTimeUsed());
     }
 
+    List<UsageStats> getRecentApps() {
+        return mRecentApps;
+    }
+
     @VisibleForTesting
-    void refreshUi(Context prefContext) {
-        reloadData();
-        final List<UsageStats> recentApps = getDisplayableRecentAppList();
-        if (recentApps != null && !recentApps.isEmpty()) {
-            mHasRecentApps = true;
-            displayRecentApps(prefContext, recentApps);
+    void refreshUi() {
+        if (mRecentApps != null && !mRecentApps.isEmpty()) {
+            displayRecentApps();
         } else {
-            mHasRecentApps = false;
-            displayOnlyAppInfo();
+            mDivider.setVisible(false);
         }
     }
 
@@ -192,80 +191,50 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
                 : mUsageStatsManager.queryUsageStats(
                         UsageStatsManager.INTERVAL_BEST, mCal.getTimeInMillis(),
                         System.currentTimeMillis());
+
+        updateDisplayableRecentAppList();
     }
 
-    private void displayOnlyAppInfo() {
-        mCategory.setTitle(null);
-        mDivider.setVisible(false);
-        mSeeAllPref.setTitle(R.string.applications_settings);
-        mSeeAllPref.setIcon(null);
-        int prefCount = mCategory.getPreferenceCount();
-        for (int i = prefCount - 1; i >= 0; i--) {
-            final Preference pref = mCategory.getPreference(i);
-            if (!TextUtils.equals(pref.getKey(), KEY_SEE_ALL)) {
-                mCategory.removePreference(pref);
+    private void displayRecentApps() {
+        int showAppsCount = 0;
+
+        for (UsageStats stat : mRecentApps) {
+            final AppEntityInfo appEntityInfoInfo = createAppEntity(stat);
+            if (appEntityInfoInfo != null) {
+                mAppEntitiesController.setAppEntity(showAppsCount++, appEntityInfoInfo);
+            }
+
+            if (showAppsCount == AppEntitiesHeaderController.MAXIMUM_APPS) {
+                break;
             }
         }
-    }
-
-    private void displayRecentApps(Context prefContext, List<UsageStats> recentApps) {
-        mCategory.setTitle(R.string.recent_app_category_title);
+        mAppEntitiesController.apply();
         mDivider.setVisible(true);
-        mSeeAllPref.setSummary(null);
-        mSeeAllPref.setIcon(R.drawable.ic_chevron_right_24dp);
-
-        // Rebind prefs/avoid adding new prefs if possible. Adding/removing prefs causes jank.
-        // Build a cached preference pool
-        final Map<String, Preference> appPreferences = new ArrayMap<>();
-        int prefCount = mCategory.getPreferenceCount();
-        for (int i = 0; i < prefCount; i++) {
-            final Preference pref = mCategory.getPreference(i);
-            final String key = pref.getKey();
-            if (!TextUtils.equals(key, KEY_SEE_ALL)) {
-                appPreferences.put(key, pref);
-            }
-        }
-        final int recentAppsCount = recentApps.size();
-        for (int i = 0; i < recentAppsCount; i++) {
-            final UsageStats stat = recentApps.get(i);
-            // Bind recent apps to existing prefs if possible, or create a new pref.
-            final String pkgName = stat.getPackageName();
-            final ApplicationsState.AppEntry appEntry =
-                    mApplicationsState.getEntry(pkgName, mUserId);
-            if (appEntry == null) {
-                continue;
-            }
-
-            boolean rebindPref = true;
-            Preference pref = appPreferences.remove(pkgName);
-            if (pref == null) {
-                pref = new AppPreference(prefContext);
-                rebindPref = false;
-            }
-            pref.setKey(pkgName);
-            pref.setTitle(appEntry.label);
-            pref.setIcon(mIconDrawableFactory.getBadgedIcon(appEntry.info));
-            pref.setSummary(StringUtil.formatRelativeTime(mContext,
-                    System.currentTimeMillis() - stat.getLastTimeUsed(), false));
-            pref.setOrder(i);
-            pref.setOnPreferenceClickListener(preference -> {
-                AppInfoBase.startAppInfoFragment(AppInfoDashboardFragment.class,
-                        R.string.application_info_label, pkgName, appEntry.info.uid, mHost,
-                        1001 /*RequestCode*/, SettingsEnums.SETTINGS_APP_NOTIF_CATEGORY);
-                return true;
-            });
-            if (!rebindPref) {
-                mCategory.addPreference(pref);
-            }
-        }
-        // Remove unused prefs from pref cache pool
-        for (Preference unusedPrefs : appPreferences.values()) {
-            mCategory.removePreference(unusedPrefs);
-        }
     }
 
-    private List<UsageStats> getDisplayableRecentAppList() {
-        final List<UsageStats> recentApps = new ArrayList<>();
+    private AppEntityInfo createAppEntity(UsageStats stat) {
+        final String pkgName = stat.getPackageName();
+        final ApplicationsState.AppEntry appEntry =
+                mApplicationsState.getEntry(pkgName, mUserId);
+        if (appEntry == null) {
+            return null;
+        }
+
+        return new AppEntityInfo.Builder()
+                .setIcon(mIconDrawableFactory.getBadgedIcon(appEntry.info))
+                .setTitle(appEntry.label)
+                .setSummary(StringUtil.formatRelativeTime(mContext,
+                        System.currentTimeMillis() - stat.getLastTimeUsed(), false))
+                .setOnClickListener(v ->
+                        AppInfoBase.startAppInfoFragment(AppInfoDashboardFragment.class,
+                                R.string.application_info_label, pkgName, appEntry.info.uid,
+                                mHost, 1001 /*RequestCode*/,
+                                SettingsEnums.SETTINGS_APP_NOTIF_CATEGORY))
+                .build();
+    }
+
+    private void updateDisplayableRecentAppList() {
+        mRecentApps.clear();
         final Map<String, UsageStats> map = new ArrayMap<>();
         final int statCount = mStats.size();
         for (int i = 0; i < statCount; i++) {
@@ -291,13 +260,12 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
             if (appEntry == null) {
                 continue;
             }
-            recentApps.add(stat);
+            mRecentApps.add(stat);
             count++;
-            if (count >= SHOW_RECENT_APP_COUNT) {
+            if (count >= AppEntitiesHeaderController.MAXIMUM_APPS) {
                 break;
             }
         }
-        return recentApps;
     }
 
 

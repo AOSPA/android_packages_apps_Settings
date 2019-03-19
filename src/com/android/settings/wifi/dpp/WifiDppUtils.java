@@ -18,6 +18,7 @@ package com.android.settings.wifi.dpp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
@@ -74,12 +75,14 @@ public class WifiDppUtils {
     public static final String EXTRA_TEST = "test";
 
     /**
-     * Returns whether the user can share the network represented by this preference with QR code.
+     * Default status code for Easy Connect
      */
-    public static boolean isSharingNetworkEnabled(Context context) {
-        return FeatureFlagUtils.isEnabled(context,
-                com.android.settings.core.FeatureFlags.WIFI_SHARING);
-    }
+    public static final int EASY_CONNECT_EVENT_FAILURE_NONE = 0;
+
+    /**
+     * Success status code for Easy Connect.
+     */
+    public static final int EASY_CONNECT_EVENT_SUCCESS = 1;
 
     /**
      * Returns whether the device support WiFi DPP.
@@ -91,6 +94,11 @@ public class WifiDppUtils {
 
     /**
      * Returns an intent to launch QR code scanner for Wi-Fi DPP enrollee.
+     *
+     * After enrollee success, the callee activity will return connecting WifiConfiguration by
+     * putExtra {@code WifiDialogActivity.KEY_WIFI_CONFIGURATION} for
+     * {@code Activity#setResult(int resultCode, Intent data)}. The calling object should check
+     * if it's available before using it.
      *
      * @param ssid The data corresponding to {@code WifiConfiguration} SSID
      * @return Intent for launching QR code scanner
@@ -145,6 +153,17 @@ public class WifiDppUtils {
             default:
                 return WifiQrCode.SECURITY_NO_PASSWORD;
         }
+    }
+
+    static String getSecurityString(WifiConfiguration config) {
+        if (config.allowedKeyManagement.get(KeyMgmt.SAE)) {
+            return WifiQrCode.SECURITY_SAE;
+        }
+        if (config.allowedKeyManagement.get(KeyMgmt.WPA_PSK)) {
+            return WifiQrCode.SECURITY_WPA_PSK;
+        }
+        return (config.wepKeys[0] == null) ?
+                WifiQrCode.SECURITY_NO_PASSWORD : WifiQrCode.SECURITY_WEP;
     }
 
     /**

@@ -52,6 +52,7 @@ import com.android.settingslib.net.NetworkCycleDataForUidLoader;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceChangeListener,
@@ -59,8 +60,10 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
     private static final String TAG = "AppDataUsage";
 
-    public static final String ARG_APP_ITEM = "app_item";
-    public static final String ARG_NETWORK_TEMPLATE = "network_template";
+    static final String ARG_APP_ITEM = "app_item";
+    static final String ARG_NETWORK_TEMPLATE = "network_template";
+    static final String ARG_NETWORK_CYCLES = "network_cycles";
+    static final String ARG_SELECTED_CYCLE = "selected_cycle";
 
     private static final String KEY_TOTAL_USAGE = "total_usage";
     private static final String KEY_FOREGROUND_USAGE = "foreground_usage";
@@ -84,8 +87,10 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     private PreferenceCategory mAppList;
 
     private Drawable mIcon;
-    private CharSequence mLabel;
-    private String mPackageName;
+    @VisibleForTesting
+    CharSequence mLabel;
+    @VisibleForTesting
+    String mPackageName;
     private CycleAdapter mCycleAdapter;
 
     private List<NetworkCycleDataForUid> mUsageData;
@@ -97,6 +102,8 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     private RestrictedSwitchPreference mUnrestrictedData;
     private DataSaverBackend mDataSaverBackend;
     private Context mContext;
+    private ArrayList<Long> mCycles;
+    private long mSelectedCycle;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -108,6 +115,10 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         mAppItem = (args != null) ? (AppItem) args.getParcelable(ARG_APP_ITEM) : null;
         mTemplate = (args != null) ? (NetworkTemplate) args.getParcelable(ARG_NETWORK_TEMPLATE)
                 : null;
+        mCycles = (args != null) ? (ArrayList) args.getSerializable(ARG_NETWORK_CYCLES)
+            : null;
+        mSelectedCycle = (args != null) ? args.getLong(ARG_SELECTED_CYCLE) : 0L;
+
         if (mTemplate == null) {
             mTemplate = DataUsageUtils.getDefaultTemplate(mContext,
                     SubscriptionManager.getDefaultDataSubscriptionId());
@@ -133,29 +144,32 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         mForegroundUsage = findPreference(KEY_FOREGROUND_USAGE);
         mBackgroundUsage = findPreference(KEY_BACKGROUND_USAGE);
 
-        mCycle = (SpinnerPreference) findPreference(KEY_CYCLE);
+        mCycle = findPreference(KEY_CYCLE);
         mCycleAdapter = new CycleAdapter(mContext, mCycle, mCycleListener);
 
+        final UidDetailProvider uidDetailProvider = getUidDetailProvider();
+
         if (mAppItem.key > 0) {
-            if (mPackages.size() != 0) {
-                try {
-                    ApplicationInfo info = mPackageManager.getApplicationInfoAsUser(
-                            mPackages.valueAt(0), 0, UserHandle.getUserId(mAppItem.key));
-                    mIcon = IconDrawableFactory.newInstance(getActivity()).getBadgedIcon(info);
-                    mLabel = info.loadLabel(mPackageManager);
-                    mPackageName = info.packageName;
-                } catch (PackageManager.NameNotFoundException e) {
-                }
-            }
             if (!UserHandle.isApp(mAppItem.key)) {
+                final UidDetail uidDetail = uidDetailProvider.getUidDetail(mAppItem.key, true);
+                mIcon = uidDetail.icon;
+                mLabel = uidDetail.label;
                 removePreference(KEY_UNRESTRICTED_DATA);
                 removePreference(KEY_RESTRICT_BACKGROUND);
             } else {
-                mRestrictBackground = (RestrictedSwitchPreference) findPreference(
-                        KEY_RESTRICT_BACKGROUND);
+                if (mPackages.size() != 0) {
+                    try {
+                        final ApplicationInfo info = mPackageManager.getApplicationInfoAsUser(
+                            mPackages.valueAt(0), 0, UserHandle.getUserId(mAppItem.key));
+                        mIcon = IconDrawableFactory.newInstance(getActivity()).getBadgedIcon(info);
+                        mLabel = info.loadLabel(mPackageManager);
+                        mPackageName = info.packageName;
+                    } catch (PackageManager.NameNotFoundException e) {
+                    }
+                }
+                mRestrictBackground = findPreference(KEY_RESTRICT_BACKGROUND);
                 mRestrictBackground.setOnPreferenceChangeListener(this);
-                mUnrestrictedData = (RestrictedSwitchPreference) findPreference(
-                        KEY_UNRESTRICTED_DATA);
+                mUnrestrictedData = findPreference(KEY_UNRESTRICTED_DATA);
                 mUnrestrictedData.setOnPreferenceChangeListener(this);
             }
             mDataSaverBackend = new DataSaverBackend(mContext);
@@ -164,7 +178,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             mAppSettingsIntent = new Intent(Intent.ACTION_MANAGE_NETWORK_USAGE);
             mAppSettingsIntent.addCategory(Intent.CATEGORY_DEFAULT);
 
-            PackageManager pm = getPackageManager();
+            final PackageManager pm = getPackageManager();
             boolean matchFound = false;
             for (String packageName : mPackages) {
                 mAppSettingsIntent.setPackage(packageName);
@@ -179,7 +193,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             }
 
             if (mPackages.size() > 1) {
-                mAppList = (PreferenceCategory) findPreference(KEY_APP_LIST);
+                mAppList = findPreference(KEY_APP_LIST);
                 LoaderManager.getInstance(this).restartLoader(LOADER_APP_PREF, Bundle.EMPTY,
                         mAppPrefCallbacks);
             } else {
@@ -187,7 +201,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             }
         } else {
             final Context context = getActivity();
-            UidDetail uidDetail = new UidDetailProvider(context).getUidDetail(mAppItem.key, true);
+            final UidDetail uidDetail = uidDetailProvider.getUidDetail(mAppItem.key, true);
             mIcon = uidDetail.icon;
             mLabel = uidDetail.label;
             mPackageName = context.getPackageName();
@@ -257,6 +271,11 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         updatePrefs(getAppRestrictBackground(), getUnrestrictData());
     }
 
+    @VisibleForTesting
+    UidDetailProvider getUidDetailProvider() {
+        return new UidDetailProvider(mContext);
+    }
+
     private void updatePrefs(boolean restrictBackground, boolean unrestrictData) {
         final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfMeteredDataRestricted(
                 mContext, mPackageName, UserHandle.getUserId(mAppItem.key));
@@ -276,7 +295,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     }
 
     private void addUid(int uid) {
-        String[] packages = getPackageManager().getPackagesForUid(uid);
+        String[] packages = mPackageManager.getPackagesForUid(uid);
         if (packages != null) {
             for (int i = 0; i < packages.length; i++) {
                 mPackages.add(packages[i]);
@@ -383,6 +402,9 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                 } else {
                     builder.addUid(mAppItem.key);
                 }
+                if (mCycles != null) {
+                    builder.setCycles(mCycles);
+                }
                 return builder.build();
             }
 
@@ -391,7 +413,23 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                     List<NetworkCycleDataForUid> data) {
                 mUsageData = data;
                 mCycleAdapter.updateCycleList(data);
-                bindData(0 /* position */);
+                if (mSelectedCycle > 0L) {
+                    final int numCycles = data.size();
+                    int position = 0;
+                    for (int i = 0; i < numCycles; i++) {
+                        final NetworkCycleDataForUid cycleData = data.get(i);
+                        if (cycleData.getEndTime() == mSelectedCycle) {
+                            position = i;
+                            break;
+                        }
+                    }
+                    if (position > 0) {
+                        mCycle.setSelection(position);
+                    }
+                    bindData(position);
+                } else {
+                    bindData(0 /* position */);
+                }
             }
 
             @Override

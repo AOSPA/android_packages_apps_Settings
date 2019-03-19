@@ -20,12 +20,23 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="privacy_dashboard_page"
     android:title="@string/privacy_dashboard_title"
-    settings:initialExpandedChildrenCount="3">
+    settings:initialExpandedChildrenCount="4">
 
+    <!-- This preference isn't searchable, and user won't see title in this preference.
+         So, we just set empty text for title. -->
     <com.android.settingslib.widget.BarChartPreference
         android:key="permission_bar_chart"
-        android:title="@string/privacy_dashboard_title"
+        android:title="@string/summary_placeholder"
         settings:controller="com.android.settings.privacy.PermissionBarChartPreferenceController"/>
+
+    <!-- Accessibility usage -->
+    <Preference
+        android:key="privacy_accessibility_usage"
+        android:title="@string/accessibility_usage_title"
+        settings:allowDividerAbove="true"
+        settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController">
+        <intent android:action="android.intent.action.REVIEW_ACCESSIBILITY_SERVICES"/>
+    </Preference>
 
     <!-- App permissions -->
     <Preference

@@ -129,8 +129,6 @@ public class SettingsSliceProvider extends SliceProvider {
     @VisibleForTesting
     Map<Uri, SliceData> mSliceDataCache;
 
-    final Set<Uri> mRegisteredUris = new ArraySet<>();
-
     final Map<Uri, SliceBackgroundWorker> mPinnedWorkers = new ArrayMap<>();
 
     public SettingsSliceProvider() {
@@ -155,7 +153,7 @@ public class SettingsSliceProvider extends SliceProvider {
             if (filter != null) {
                 registerIntentToUri(filter, sliceUri);
             }
-            ThreadUtils.postOnMainThread(() -> startBackgroundWorker(sliceable));
+            ThreadUtils.postOnMainThread(() -> startBackgroundWorker(sliceable, sliceUri));
             return;
         }
 
@@ -173,14 +171,8 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public void onSliceUnpinned(Uri sliceUri) {
-        if (mRegisteredUris.contains(sliceUri)) {
-            Log.d(TAG, "Unregistering uri broadcast relay: " + sliceUri);
-            SliceBroadcastRelay.unregisterReceivers(getContext(), sliceUri);
-            mRegisteredUris.remove(sliceUri);
-        }
-        ThreadUtils.postOnMainThread(() -> {
-            stopBackgroundWorker(sliceUri);
-        });
+        SliceBroadcastRelay.unregisterReceivers(getContext(), sliceUri);
+        ThreadUtils.postOnMainThread(() -> stopBackgroundWorker(sliceUri));
         mSliceDataCache.remove(sliceUri);
     }
 
@@ -334,20 +326,19 @@ public class SettingsSliceProvider extends SliceProvider {
         }
     }
 
-    private void startBackgroundWorker(CustomSliceable sliceable) {
+    private void startBackgroundWorker(Sliceable sliceable, Uri uri) {
         final Class workerClass = sliceable.getBackgroundWorkerClass();
         if (workerClass == null) {
             return;
         }
 
-        final Uri uri = sliceable.getUri();
         if (mPinnedWorkers.containsKey(uri)) {
             return;
         }
 
         Log.d(TAG, "Starting background worker for: " + uri);
         final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(
-                getContext(), sliceable);
+                getContext(), sliceable, uri);
         mPinnedWorkers.put(uri, worker);
         worker.onSlicePinned();
     }
@@ -405,6 +396,8 @@ public class SettingsSliceProvider extends SliceProvider {
             registerIntentToUri(filter, uri);
         }
 
+        ThreadUtils.postOnMainThread(() -> startBackgroundWorker(controller, uri));
+
         final List<Uri> pinnedSlices = getContext().getSystemService(
                 SliceManager.class).getPinnedSlices();
         if (pinnedSlices.contains(uri)) {
@@ -419,9 +412,7 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @VisibleForTesting
     void loadSliceInBackground(Uri uri) {
-        ThreadUtils.postOnBackgroundThread(() -> {
-            loadSlice(uri);
-        });
+        ThreadUtils.postOnBackgroundThread(() -> loadSlice(uri));
     }
 
     /**
@@ -462,8 +453,6 @@ public class SettingsSliceProvider extends SliceProvider {
      * {@param intentFilter} happen.
      */
     void registerIntentToUri(IntentFilter intentFilter, Uri sliceUri) {
-        Log.d(TAG, "Registering Uri for broadcast relay: " + sliceUri);
-        mRegisteredUris.add(sliceUri);
         SliceBroadcastRelay.registerReceiver(getContext(), sliceUri, SliceRelayReceiver.class,
                 intentFilter);
     }

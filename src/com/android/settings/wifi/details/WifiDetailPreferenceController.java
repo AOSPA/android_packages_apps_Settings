@@ -27,6 +27,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
+import android.hardware.biometrics.BiometricPrompt;
+import android.os.CancellationSignal;
+import android.os.Looper;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
 import android.net.LinkAddress;
@@ -171,7 +174,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                     // fall through
                 case WifiManager.NETWORK_STATE_CHANGED_ACTION:
                 case WifiManager.RSSI_CHANGED_ACTION:
-                    updateInfo();
+                    updateLiveNetworkInfo();
                     break;
             }
         }
@@ -306,7 +309,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mSubnetPref = screen.findPreference(KEY_SUBNET_MASK_PREF);
         mDnsPref = screen.findPreference(KEY_DNS_PREF);
 
-        mIpv6Category = (PreferenceCategory) screen.findPreference(KEY_IPV6_CATEGORY);
+        mIpv6Category = screen.findPreference(KEY_IPV6_CATEGORY);
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
 
         if (mAccessPoint.getSecurityString(false).equals("SAE")
@@ -320,7 +323,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     }
 
     private void setupEntityHeader(PreferenceScreen screen) {
-        LayoutPreference headerPref = (LayoutPreference) screen.findPreference(KEY_HEADER);
+        LayoutPreference headerPref = screen.findPreference(KEY_HEADER);
         mEntityHeaderController =
                 EntityHeaderController.newInstance(
                         mFragment.getActivity(), mFragment,
@@ -341,7 +344,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mNetwork = mWifiManager.getCurrentNetwork();
         mLinkProperties = mConnectivityManager.getLinkProperties(mNetwork);
         mNetworkCapabilities = mConnectivityManager.getNetworkCapabilities(mNetwork);
-        updateInfo();
+        updateLiveNetworkInfo();
         mContext.registerReceiver(mReceiver, mFilter);
         mConnectivityManager.registerNetworkCallback(mNetworkRequest, mNetworkCallback,
                 mHandler);
@@ -358,7 +361,27 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
     }
 
-    private void updateInfo() {
+    // TODO(b/124707751): Refactoring the code later, keeping it currently for stability.
+    protected void updateSavedNetworkInfo() {
+        mSignalStrengthPref.setVisible(false);
+        mFrequencyPref.setVisible(false);
+        mTxLinkSpeedPref.setVisible(false);
+        mRxLinkSpeedPref.setVisible(false);
+
+        // MAC Address Pref
+        mMacAddressPref.setSummary(mWifiConfig.getRandomizedMacAddress().toString());
+
+        // TODO(b/124700353): Change header to data usage chart
+        mEntityHeaderController.setSummary(mAccessPoint.getSettingsSummary())
+                .done(mFragment.getActivity(), true /* rebind */);
+
+        updateIpLayerInfo();
+
+        // Update whether the forget button should be displayed.
+        mButtonsPref.setButton1Visible(canForgetNetwork());
+    }
+
+    private void updateLiveNetworkInfo() {
         // No need to fetch LinkProperties and NetworkCapabilities, they are updated by the
         // callbacks. mNetwork doesn't change except in onResume.
         mNetworkInfo = mConnectivityManager.getNetworkInfo(mNetwork);
@@ -510,7 +533,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private static String ipv4PrefixLengthToSubnetMask(int prefixLength) {
         try {
             InetAddress all = InetAddress.getByAddress(
-                    new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255});
+                    new byte[]{(byte) 255, (byte) 255, (byte) 255, (byte) 255});
             return NetworkUtils.getNetworkPart(all, prefixLength).getHostAddress();
         } catch (UnknownHostException e) {
             return null;
@@ -542,8 +565,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
      * Returns whether the user can share the network represented by this preference with QR code.
      */
     private boolean canShareNetwork() {
-        return mAccessPoint.getConfig() != null && FeatureFlagUtils.isEnabled(mContext,
-                FeatureFlags.WIFI_SHARING);
+        return mAccessPoint.getConfig() != null;
     }
 
     /**
@@ -587,20 +609,42 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         if (keyguardManager.isKeyguardSecure()) {
             // Show authentication screen to confirm credentials (pin, pattern or password) for
             // the current user of the device.
+            final String title = mContext.getString(
+                    R.string.lockpassword_confirm_your_pattern_header);
             final String description = String.format(
                     mContext.getString(R.string.wifi_sharing_message),
                     mAccessPoint.getSsidStr());
-            final Intent intent = keyguardManager.createConfirmDeviceCredentialIntent(
-                    mContext.getString(R.string.lockpassword_confirm_your_pattern_header),
-                    description);
-            if (intent != null) {
-                mFragment.startActivityForResult(intent,
-                        WifiNetworkDetailsFragment.REQUEST_CODE_CONFIRM_DEVICE_CREDENTIALS);
+
+            final BiometricPrompt.Builder builder = new BiometricPrompt.Builder(mContext)
+                    .setTitle(title)
+                    .setDescription(description);
+
+            if (keyguardManager.isDeviceSecure()) {
+                builder.setAllowDeviceCredential(true);
             }
+
+            final BiometricPrompt bp = builder.build();
+            final Handler handler = new Handler(Looper.getMainLooper());
+            bp.authenticate(new CancellationSignal(),
+                    runnable -> handler.post(runnable),
+                    mAuthenticationCallback);
         } else {
             launchWifiDppConfiguratorActivity();
         }
     }
+
+    private BiometricPrompt.AuthenticationCallback mAuthenticationCallback =
+            new BiometricPrompt.AuthenticationCallback() {
+        @Override
+        public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+            launchWifiDppConfiguratorActivity();
+        }
+
+        @Override
+        public void onAuthenticationError(int errorCode, CharSequence errString) {
+            //Do nothing
+        }
+    };
 
     /**
      * Sign in to the captive portal found on this wifi network associated with this preference.

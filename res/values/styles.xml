@@ -69,8 +69,6 @@
     </style>
 
     <style name="PreferenceFragmentListSinglePane" parent="@*android:style/PreferenceFragmentList">
-        <item name="android:paddingStart">@dimen/settings_side_margin</item>
-        <item name="android:paddingEnd">@dimen/settings_side_margin</item>
         <item name="android:layout_marginStart">0dp</item>
         <item name="android:layout_marginEnd">0dp</item>
         <item name="android:scrollbarStyle">outsideOverlay</item>
@@ -80,15 +78,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:scrollbarStyle">outsideOverlay</item>
-    </style>
-
-    <style name="TrimmedHorizontalProgressBar"
-           parent="android:Widget.Material.ProgressBar.Horizontal">
-        <item name="android:indeterminateDrawable">
-            @drawable/progress_indeterminate_horizontal_material_trimmed
-        </item>
-        <item name="android:minHeight">3dip</item>
-        <item name="android:maxHeight">3dip</item>
     </style>
 
     <style name="bt_item">
@@ -286,6 +275,7 @@
 
     <style name="TextAppearance.ConditionCardTitle"
            parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textSize">16sp</item>
     </style>
 
@@ -419,6 +409,7 @@
         <item name="android:layout_marginBottom">@dimen/homepage_card_vertical_margin</item>
         <item name="android:layout_marginStart">@dimen/homepage_card_side_margin</item>
         <item name="android:layout_marginEnd">@dimen/homepage_card_side_margin</item>
+        <item name="cardBackgroundColor">@color/contextual_card_background</item>
         <item name="cardCornerRadius">@*android:dimen/config_dialogCornerRadius</item>
         <item name="cardElevation">0dp</item>
         <item name="strokeColor">@color/homepage_card_stroke_color</item>
@@ -448,8 +439,9 @@
 
     <style name="ConditionFullCardBorderlessButton"
            parent="@style/ConditionCardBorderlessButton">
-        <item name="android:minWidth">24dp</item>
-        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:paddingStart">50dp</item>
+        <item name="android:paddingEnd">50dp</item>
     </style>
 
     <style name="ContextualCardDismissalButton"
@@ -460,6 +452,7 @@
 
     <style name="Widget.SliceView.Settings">
         <item name="titleSize">@*android:dimen/text_size_subhead_material</item>
+        <item name="rowStyle">@style/SliceRowStyle.Settings</item>
     </style>
 
     <style name="TextAppearance.DeferredSetupCardTitle">
@@ -482,4 +475,41 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="SliceViewStyle">
+        <!-- 4dp start padding for the start icon -->
+        <item name="android:paddingStart">4dp</item>
+
+        <!-- End margin of content without end items is 24dp.
+             android:paddingEnd = 24 - 16(contentEndPadding) -->
+        <item name="android:paddingEnd">8dp</item>
+
+        <item name="rowStyle">@style/SliceRowStyle</item>
+    </style>
+
+    <style name="SliceRowStyle">
+        <item name="titleItemEndPadding">0dp</item>
+
+        <!-- Padding between content and the start icon is 12dp. -->
+        <item name="contentStartPadding">12dp</item>
+        <!-- Padding between content and end items is 16dp. -->
+        <item name="contentEndPadding">16dp</item>
+
+        <!-- Both side margins of end item are 16dp.
+             endItemEndPadding = 16 - 8(android:paddingEnd) -->
+        <item name="endItemStartPadding">16dp</item>
+        <item name="endItemEndPadding">8dp</item>
+
+        <!-- Both side margins of bottom divider are 12dp.
+             bottomDividerStartPadding = 12 - 4(android:paddingStart)
+             bottomDividerEndPadding = 12 - 8(android:paddingEnd) -->
+        <item name="bottomDividerStartPadding">8dp</item>
+        <item name="bottomDividerEndPadding">4dp</item>
+
+        <item name="actionDividerHeight">32dp</item>
+    </style>
+
+    <style name="SliceRowStyle.Settings">
+        <!-- Padding between content and the start icon is 8dp. -->
+        <item name="contentStartPadding">8dp</item>
+    </style>
 </resources>

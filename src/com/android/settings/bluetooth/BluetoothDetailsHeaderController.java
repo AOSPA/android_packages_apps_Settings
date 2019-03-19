@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
@@ -51,9 +52,14 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
     }
 
     @Override
+    public boolean isAvailable() {
+        return !Utils.getBooleanMetaData(mCachedDevice.getDevice(),
+                BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET);
+    }
+
+    @Override
     protected void init(PreferenceScreen screen) {
-        final LayoutPreference headerPreference =
-                (LayoutPreference) screen.findPreference(KEY_DEVICE_HEADER);
+        final LayoutPreference headerPreference = screen.findPreference(KEY_DEVICE_HEADER);
         mHeaderController = EntityHeaderController.newInstance(mFragment.getActivity(), mFragment,
                 headerPreference.findViewById(R.id.entity_header));
         screen.addPreference(headerPreference);

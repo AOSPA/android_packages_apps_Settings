@@ -56,13 +56,18 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        LayoutPreference pref = (LayoutPreference) screen.findPreference(KEY);
+        LayoutPreference pref = screen.findPreference(KEY);
         mSwitchBar = pref.findViewById(R.id.switch_bar);
 
         if (mSwitchBar != null) {
             mSwitchBar.setSwitchBarText(R.string.zen_mode_use_automatic_rule,
                     R.string.zen_mode_use_automatic_rule);
             try {
+                pref.setOnPreferenceClickListener(preference -> {
+                    mRule.setEnabled(!mRule.isEnabled());
+                    mBackend.updateZenRule(mId, mRule);
+                    return true;
+                });
                 mSwitchBar.addOnSwitchChangeListener(this);
             } catch (IllegalStateException e) {
                 // an exception is thrown if you try to add the listener twice
@@ -70,7 +75,6 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
             mSwitchBar.show();
         }
     }
-
 
     public void onResume(AutomaticZenRule rule, String id) {
         mRule = rule;

@@ -35,13 +35,14 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.LayoutPreference;
 
 public class PreventRingingSwitchPreferenceController extends AbstractPreferenceController
-    implements PreferenceControllerMixin, SwitchBar.OnSwitchChangeListener {
+        implements PreferenceControllerMixin, SwitchBar.OnSwitchChangeListener {
 
     private static final String KEY = "gesture_prevent_ringing_switch";
     private final Context mContext;
     private SettingObserver mSettingObserver;
 
-    @VisibleForTesting SwitchBar mSwitch;
+    @VisibleForTesting
+    SwitchBar mSwitch;
 
     public PreventRingingSwitchPreferenceController(Context context) {
         super(context);
@@ -57,9 +58,20 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            LayoutPreference pref = (LayoutPreference) screen.findPreference(getPreferenceKey());
+            LayoutPreference pref = screen.findPreference(getPreferenceKey());
             if (pref != null) {
                 mSettingObserver = new SettingObserver(pref);
+                pref.setOnPreferenceClickListener(preference -> {
+                    int preventRinging = Settings.Secure.getInt(mContext.getContentResolver(),
+                            Settings.Secure.VOLUME_HUSH_GESTURE,
+                            Settings.Secure.VOLUME_HUSH_VIBRATE);
+                    boolean isChecked = preventRinging != Settings.Secure.VOLUME_HUSH_OFF;
+                    Settings.Secure.putInt(mContext.getContentResolver(),
+                            Settings.Secure.VOLUME_HUSH_GESTURE, isChecked
+                                    ? Settings.Secure.VOLUME_HUSH_OFF
+                                    : Settings.Secure.VOLUME_HUSH_VIBRATE);
+                    return true;
+                });
                 mSwitch = pref.findViewById(R.id.switch_bar);
                 if (mSwitch != null) {
                     mSwitch.addOnSwitchChangeListener(this);
