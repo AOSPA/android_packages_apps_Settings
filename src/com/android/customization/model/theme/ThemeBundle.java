@@ -16,10 +16,11 @@
 package com.android.customization.model.theme;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Path;
 import android.graphics.Typeface;
+import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.PathShape;
@@ -36,6 +37,7 @@ import androidx.core.graphics.PathParser;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
+import com.android.customization.widget.DynamicAdaptiveIconDrawable;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
 import com.android.wallpaper.asset.ResourceAsset;
@@ -166,12 +168,14 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         @Nullable public final ResourceAsset wallpaperAsset;
         @Nullable public final ResourceAsset colorPreviewAsset;
         @Nullable public final ResourceAsset shapePreviewAsset;
+        public final List<Drawable> shapeAppIcons;
 
         private PreviewInfo(Typeface bodyFontFamily, Typeface headlineFontFamily,
                 int colorAccentLight, int colorAccentDark, List<Drawable> icons,
                 Drawable shapeDrawable, @Nullable ResourceAsset wallpaperAsset,
                 @Nullable ResourceAsset colorPreviewAsset,
-                @Nullable ResourceAsset shapePreviewAsset) {
+                @Nullable ResourceAsset shapePreviewAsset,
+                List<Drawable> shapeAppIcons) {
             this.bodyFontFamily = bodyFontFamily;
             this.headlineFontFamily = headlineFontFamily;
             this.colorAccentLight = colorAccentLight;
@@ -181,6 +185,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
             this.wallpaperAsset = wallpaperAsset;
             this.colorPreviewAsset = colorPreviewAsset;
             this.shapePreviewAsset = shapePreviewAsset;
+            this.shapeAppIcons = shapeAppIcons;
         }
 
         /**
@@ -210,6 +215,8 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         private ResourceAsset mShapePreview;
         private WallpaperInfo mWallpaperInfo;
         protected Map<String, String> mPackages = new HashMap<>();
+        private List<Drawable> mAppIcons = new ArrayList<>();
+
 
         public ThemeBundle build() {
             return new ThemeBundle(mTitle, mPackages, mIsDefault, mWallpaperInfo,
@@ -218,16 +225,26 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
 
         protected PreviewInfo createPreviewInfo() {
             ShapeDrawable shapeDrawable = null;
+            List<Drawable> shapeIcons = new ArrayList<>();
             if (!TextUtils.isEmpty(mShapePath)) {
-                PathShape shape = new PathShape(PathParser.createPathFromPathData(mShapePath),
-                        PATH_SIZE, PATH_SIZE);
+                Path path = PathParser.createPathFromPathData(mShapePath);
+                PathShape shape = new PathShape(path, PATH_SIZE, PATH_SIZE);
                 shapeDrawable = new ShapeDrawable(shape);
                 shapeDrawable.setIntrinsicHeight((int) PATH_SIZE);
                 shapeDrawable.setIntrinsicWidth((int) PATH_SIZE);
+                for (Drawable icon : mAppIcons) {
+                    if (icon instanceof AdaptiveIconDrawable) {
+                        AdaptiveIconDrawable adaptiveIcon = (AdaptiveIconDrawable) icon;
+                        shapeIcons.add(new DynamicAdaptiveIconDrawable(adaptiveIcon.getBackground(),
+                                adaptiveIcon.getForeground(), path));
+                    }
+                    // TODO: add iconloader library's legacy treatment helper methods for
+                    //  non-adaptive icons
+                }
             }
             return new PreviewInfo(mBodyFontFamily, mHeadlineFontFamily, mColorAccentLight,
                     mColorAccentDark, mIcons, shapeDrawable, mWallpaperAsset,
-                    mColorPreview, mShapePreview);
+                    mColorPreview, mShapePreview, shapeIcons);
         }
 
         public Builder setTitle(String title) {
@@ -296,6 +313,10 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         public Builder asDefault() {
             mIsDefault = true;
             return this;
+        }
+
+        public void addShapePreviewIcon(Drawable appIcon) {
+            mAppIcons.add(appIcon);
         }
     }
 }

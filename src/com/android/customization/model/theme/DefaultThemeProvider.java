@@ -91,7 +91,8 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
 
     private static final String ACCENT_COLOR_LIGHT_NAME = "accent_device_default_light";
     private static final String ACCENT_COLOR_DARK_NAME = "accent_device_default_dark";
-
+    // List of packages
+    private final String[] mShapePreviewIconPackages;
     private List<ThemeBundle> mThemes;
     private Map<String, OverlayInfo> mOverlayInfos;
     private final CustomizationPreferences mCustomizationPreferences;
@@ -109,6 +110,8 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         om.getOverlayInfosForTarget(SETTINGS_PACKAGE, UserHandle.myUserId()).forEach(addToMap);
         om.getOverlayInfosForTarget(ResourceConstants.getLauncherPackage(context),
                 UserHandle.myUserId()).forEach(addToMap);
+        mShapePreviewIconPackages = context.getResources().getStringArray(
+                R.array.icon_shape_preview_packages);
     }
 
     @Override
@@ -142,7 +145,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                 String shapeOverlayPackage = getOverlayPackage(SHAPE_PREFIX, themeName);
                 if (!TextUtils.isEmpty(shapeOverlayPackage)) {
                     builder.addOverlayPackage(getOverlayCategory(shapeOverlayPackage),
-                            shapeOverlayPackage)
+                                shapeOverlayPackage)
                             .setShapePath(loadString(CONFIG_ICON_MASK, shapeOverlayPackage))
                             .setShapePreview(getDrawableResourceAsset(
                                     PREVIEW_SHAPE_PREFIX, themeName));
@@ -150,6 +153,15 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                     builder.setShapePath(mContext.getResources().getString(
                             Resources.getSystem().getIdentifier(CONFIG_ICON_MASK, "string",
                                     ANDROID_PACKAGE)));
+                }
+                for (String packageName : mShapePreviewIconPackages) {
+                    try {
+                        builder.addShapePreviewIcon(
+                                mContext.getPackageManager().getApplicationIcon(packageName));
+                    } catch (NameNotFoundException e) {
+                        Log.d(TAG, "Couldn't find app " + packageName
+                                + ", won't use it for icon shape preview");
+                    }
                 }
 
                 String fontOverlayPackage = getOverlayPackage(FONT_PREFIX, themeName);
@@ -338,7 +350,15 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                     .setShapePreview(getDrawableResourceAsset(PREVIEW_SHAPE_PREFIX,
                             DEFAULT_THEME_NAME));
         }
-
+        for (String packageName : mShapePreviewIconPackages) {
+            try {
+                builder.addShapePreviewIcon(
+                        mContext.getPackageManager().getApplicationIcon(packageName));
+            } catch (NameNotFoundException e) {
+                Log.d(TAG, "Couldn't find app " + packageName + ", won't use it for icon shape"
+                        + "preview");
+            }
+        }
 
         try {
             String iconAndroidOverlayPackage = getOverlayPackage(ICON_ANDROID_PREFIX,

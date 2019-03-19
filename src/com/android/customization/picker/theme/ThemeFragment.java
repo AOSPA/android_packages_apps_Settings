@@ -306,6 +306,11 @@ public class ThemeFragment extends ToolbarFragment {
             R.id.preview_color_qs_0_icon, R.id.preview_color_qs_1_icon, R.id.preview_color_qs_2_icon
         };
 
+        private int[] mShapeIconIds = {
+                R.id.shape_preview_icon_0, R.id.shape_preview_icon_1, R.id.shape_preview_icon_2,
+                R.id.shape_preview_icon_3, R.id.shape_preview_icon_4, R.id.shape_preview_icon_5
+        };
+
         ThemePreviewAdapter(Activity activity, ThemeBundle theme,
                 @Nullable OnClickListener editClickListener) {
             super(activity, R.layout.theme_preview_card);
@@ -384,20 +389,18 @@ public class ThemeFragment extends ToolbarFragment {
                     }
                 });
             }
-            if (previewInfo.shapePreviewAsset != null) {
+            if (previewInfo.shapeDrawable != null && !previewInfo.shapeAppIcons.isEmpty()) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_shape,
-                        R.drawable.ic_shapes_24px, R.layout.preview_card_static_content,
+                        R.drawable.ic_shapes_24px, R.layout.preview_card_shape_content,
                         previewInfo.resolveAccentColor(res), editClickListener) {
                     @Override
                     protected void bindBody(boolean forceRebind) {
-                        ImageView staticImage = card.findViewById(R.id.preview_static_image);
-                        previewInfo.shapePreviewAsset.loadDrawable(activity,
-                                staticImage, card.getCardBackgroundColor().getDefaultColor());
-
-                        staticImage.getLayoutParams().width = res.getDimensionPixelSize(
-                                R.dimen.shape_preview_image_width);
-                        staticImage.getLayoutParams().height = res.getDimensionPixelSize(
-                                R.dimen.shape_preview_image_height);
+                        for (int i = 0; i < mShapeIconIds.length
+                                && i < previewInfo.shapeAppIcons.size(); i++) {
+                            ImageView iconView = card.findViewById(mShapeIconIds[i]);
+                            iconView.setBackground(
+                                    previewInfo.shapeAppIcons.get(i));
+                        }
                     }
                 });
             }
