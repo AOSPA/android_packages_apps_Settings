@@ -23,6 +23,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +33,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -267,6 +270,15 @@ public class ThemeFragment extends ToolbarFragment {
                 R.id.preview_icon_0, R.id.preview_icon_1, R.id.preview_icon_2, R.id.preview_icon_3,
                 R.id.preview_icon_4, R.id.preview_icon_5
         };
+        private int[] mColorButtonIds = {
+            R.id.preview_check_selected, R.id.preview_radio_selected, R.id.preview_toggle_selected,
+        };
+        private int[] mColorTileIds = {
+            R.id.preview_color_qs_0_bg, R.id.preview_color_qs_1_bg, R.id.preview_color_qs_2_bg
+        };
+        private int[] mColorTileIconIds = {
+            R.id.preview_color_qs_0_icon, R.id.preview_color_qs_1_icon, R.id.preview_color_qs_2_icon
+        };
 
         ThemePreviewAdapter(Activity activity, ThemeBundle theme) {
             super(activity, R.layout.theme_preview_card);
@@ -298,17 +310,50 @@ public class ThemeFragment extends ToolbarFragment {
             }
             if (previewInfo.colorPreviewAsset != null) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_color,
-                        R.drawable.ic_colorize_24px, R.layout.preview_card_static_content,
+                        R.drawable.ic_colorize_24px, R.layout.preview_card_color_content,
                         previewInfo.resolveAccentColor(res)) {
                     @Override
                     protected void bindBody(boolean forceRebind) {
-                        ImageView staticImage = card.findViewById(R.id.preview_static_image);
-                        previewInfo.colorPreviewAsset.loadDrawable(activity,
-                                staticImage, card.getCardBackgroundColor().getDefaultColor());
-                        staticImage.getLayoutParams().width = res.getDimensionPixelSize(
-                                R.dimen.color_preview_image_width);
-                        staticImage.getLayoutParams().height = res.getDimensionPixelSize(
-                                R.dimen.color_preview_image_height);
+                        ColorStateList tintList = new ColorStateList(
+                                new int[][]{
+                                    new int[]{android.R.attr.state_selected},
+                                    new int[]{android.R.attr.state_checked}
+                                },
+                                new int[] {
+                                    accentColor,
+                                    accentColor
+                                }
+                            );
+
+                        for (int i = 0; i < mColorButtonIds.length; i++) {
+                            CompoundButton button = card.findViewById(mColorButtonIds[i]);
+                            button.setButtonTintList(tintList);
+                        }
+
+                        Switch switch1 = card.findViewById(R.id.preview_toggle_selected);
+                        switch1.setThumbTintList(tintList);
+                        switch1.setTrackTintList(tintList);
+
+                        ColorStateList seekbarTintList = ColorStateList.valueOf(accentColor);
+                        SeekBar seekbar = card.findViewById(R.id.preview_seekbar);
+                        seekbar.setThumbTintList(seekbarTintList);
+                        seekbar.setProgressTintList(seekbarTintList);
+                        seekbar.setProgressBackgroundTintList(seekbarTintList);
+                        // Disable seekbar
+                        seekbar.setOnTouchListener((view, motionEvent) -> true);
+
+                        for (int i = 0; i < mColorTileIds.length; i++) {
+                            Drawable icon =
+                                previewInfo.icons.get(i).getConstantState().newDrawable();
+                            Drawable bgShape =
+                                previewInfo.shapeDrawable.getConstantState().newDrawable();
+                            bgShape.setTint(accentColor);
+
+                            ImageView bg = card.findViewById(mColorTileIds[i]);
+                            bg.setImageDrawable(bgShape);
+                            ImageView fg = card.findViewById(mColorTileIconIds[i]);
+                            fg.setImageDrawable(icon);
+                        }
                     }
                 });
             }
