@@ -15,6 +15,8 @@
  */
 package com.android.customization.model.theme;
 
+import static com.android.customization.model.ResourceConstants.PATH_SIZE;
+
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -38,6 +40,7 @@ import androidx.core.graphics.PathParser;
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
 import com.android.customization.widget.DynamicAdaptiveIconDrawable;
+import com.android.customization.model.ResourceConstants;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
 import com.android.wallpaper.asset.ResourceAsset;
@@ -195,7 +198,6 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
     }
 
     public static class Builder {
-        private static final float PATH_SIZE = 100f;
         protected String mTitle;
         private Typeface mBodyFontFamily;
         private Typeface mHeadlineFontFamily;

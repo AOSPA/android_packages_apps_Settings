@@ -15,6 +15,8 @@
  */
 package com.android.customization.model.theme;
 
+import static com.android.customization.model.ResourceConstants.ACCENT_COLOR_DARK_NAME;
+import static com.android.customization.model.ResourceConstants.ACCENT_COLOR_LIGHT_NAME;
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
 import static com.android.customization.model.ResourceConstants.CONFIG_ICON_MASK;
 import static com.android.customization.model.ResourceConstants.ICON_PREVIEW_DRAWABLE_NAME;
@@ -87,8 +89,6 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
 
     private static final String DEFAULT_THEME_NAME= "default";
 
-    private static final String ACCENT_COLOR_LIGHT_NAME = "accent_device_default_light";
-    private static final String ACCENT_COLOR_DARK_NAME = "accent_device_default_dark";
     // List of packages
     private final String[] mShapePreviewIconPackages;
     private List<ThemeBundle> mThemes;

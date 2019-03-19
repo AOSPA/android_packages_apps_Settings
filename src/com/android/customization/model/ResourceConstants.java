@@ -16,6 +16,7 @@
 package com.android.customization.model;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.provider.Settings.Secure;
 
 import com.android.wallpaper.R;
@@ -60,6 +61,11 @@ public interface ResourceConstants {
     String OVERLAY_CATEGORY_ICON_LAUNCHER = "android.theme.customization.icon_pack.launcher";
 
     /**
+     * Global Android theme category (default theme prebundled with the OS)
+     */
+    String OVERLAY_CATEGORY_ANDROID_THEME = "android.theme";
+
+    /**
      * Secure Setting used to store the currently set theme.
      */
     String THEME_SETTING = Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES;
@@ -75,6 +81,10 @@ public interface ResourceConstants {
     };
 
     ArrayList<String> sTargetPackages = new ArrayList<>();
+    String ACCENT_COLOR_LIGHT_NAME = "accent_device_default_light";
+    String ACCENT_COLOR_DARK_NAME = "accent_device_default_dark";
+
+    float PATH_SIZE = 100f;
 
     static String[] getPackagesToOverlay(Context context) {
         if (sTargetPackages.isEmpty()) {
@@ -87,5 +97,12 @@ public interface ResourceConstants {
 
     static String getLauncherPackage(Context context) {
         return context.getString(R.string.launcher_overlayable_package);
+    }
+
+    /**
+     * @return the value CONFIG_ICON_MASK for the given package name using the given Resources
+     */
+    static String getIconMask(Resources res, String packageName) {
+        return res.getString(res.getIdentifier(CONFIG_ICON_MASK, "string", packageName));
     }
 }
