@@ -16,7 +16,13 @@
 package com.android.customization.model.theme;
 
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
-import static com.android.customization.model.ResourceConstants.DEFAULT_TARGET_PACKAGES;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_LAUNCHER;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SETTINGS;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
 import static com.android.customization.model.ResourceConstants.SETTINGS_PACKAGE;
 import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 
@@ -29,6 +35,7 @@ import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.ResourceConstants;
+import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.wallpaper.asset.Asset;
 import com.android.wallpaper.module.WallpaperPersister;
 import com.android.wallpaper.module.WallpaperPersister.SetWallpaperCallback;
@@ -43,12 +50,13 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
 
     private static final Set<String> THEME_CATEGORIES = new HashSet<>();
     static {
-        THEME_CATEGORIES.add(ResourceConstants.OVERLAY_CATEGORY_COLOR);
-        THEME_CATEGORIES.add(ResourceConstants.OVERLAY_CATEGORY_FONT);
-        THEME_CATEGORIES.add(ResourceConstants.OVERLAY_CATEGORY_SHAPE);
-        THEME_CATEGORIES.add(ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID);
-        THEME_CATEGORIES.add(ResourceConstants.OVERLAY_CATEGORY_ICON_SETTINGS);
-        THEME_CATEGORIES.add(ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI);
+        THEME_CATEGORIES.add(OVERLAY_CATEGORY_COLOR);
+        THEME_CATEGORIES.add(OVERLAY_CATEGORY_FONT);
+        THEME_CATEGORIES.add(OVERLAY_CATEGORY_SHAPE);
+        THEME_CATEGORIES.add(OVERLAY_CATEGORY_ICON_ANDROID);
+        THEME_CATEGORIES.add(OVERLAY_CATEGORY_ICON_SETTINGS);
+        THEME_CATEGORIES.add(OVERLAY_CATEGORY_ICON_SYSUI);
+        THEME_CATEGORIES.add(OVERLAY_CATEGORY_ICON_LAUNCHER);
     };
 
 
@@ -116,12 +124,14 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     private void applyOverlays(ThemeBundle theme, Callback callback) {
         boolean allApplied = true;
         if (theme.isDefault()) {
-            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, ResourceConstants.OVERLAY_CATEGORY_COLOR);
-            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, ResourceConstants.OVERLAY_CATEGORY_FONT);
-            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, ResourceConstants.OVERLAY_CATEGORY_SHAPE);
-            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID);
-            allApplied &= disableCurrentOverlay(SYSUI_PACKAGE, ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI);
-            allApplied &= disableCurrentOverlay(SETTINGS_PACKAGE, ResourceConstants.OVERLAY_CATEGORY_ICON_SETTINGS);
+            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_COLOR);
+            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_FONT);
+            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_SHAPE);
+            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_ICON_ANDROID);
+            allApplied &= disableCurrentOverlay(SYSUI_PACKAGE, OVERLAY_CATEGORY_ICON_SYSUI);
+            allApplied &= disableCurrentOverlay(SETTINGS_PACKAGE, OVERLAY_CATEGORY_ICON_SETTINGS);
+            allApplied &= disableCurrentOverlay(ResourceConstants.getLauncherPackage(mActivity),
+                    OVERLAY_CATEGORY_ICON_LAUNCHER);
         } else {
             for (String packageName : theme.getAllPackages()) {
                 if (packageName != null) {
@@ -132,12 +142,19 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
         }
         allApplied &= Settings.Secure.putString(mActivity.getContentResolver(),
                 ResourceConstants.THEME_SETTING, theme.getSerializedPackages());
+        if (theme instanceof CustomTheme) {
+            storeCustomTheme((CustomTheme) theme);
+        }
         mCurrentOverlays = null;
         if (allApplied) {
             callback.onSuccess();
         } else {
             callback.onError(null);
         }
+    }
+
+    private void storeCustomTheme(CustomTheme theme) {
+        mProvider.storeCustomTheme(theme);
     }
 
     @Override
@@ -157,7 +174,7 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     public Map<String, String> getCurrentOverlays() {
         if (mCurrentOverlays == null) {
             mCurrentOverlays = mOverlayManagerCompat.getEnabledOverlaysForTargets(
-                    DEFAULT_TARGET_PACKAGES);
+                    ResourceConstants.getPackagesToOverlay(mActivity));
             mCurrentOverlays.entrySet().removeIf(
                     categoryAndPackage -> !THEME_CATEGORIES.contains(categoryAndPackage.getKey()));
         }

@@ -31,6 +31,7 @@
             android:layout_height="match_parent"
             android:padding="@dimen/preview_card_padding"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/theme_preview_card_header"
                 android:layout_width="wrap_content"
@@ -39,11 +40,26 @@
                 android:layout_marginBottom="8dp"
                 android:drawablePadding="10dp"
                 android:textAppearance="@style/CardTitleTextAppearance"/>
+
             <FrameLayout
                 android:id="@+id/theme_preview_card_body_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="8dp"/>
+                android:layout_marginHorizontal="8dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/edit_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:drawableStart="@drawable/ic_tune_24px"
+                android:drawablePadding="8dp"
+                android:drawableTint="?android:colorAccent"
+                android:gravity="center"
+                android:text="@string/edit_custom_theme_lbl"
+                android:textAppearance="@style/EditLabelTextAppearance"
+                android:visibility="gone"/>
         </LinearLayout>
     </FrameLayout>
 </androidx.cardview.widget.CardView>
