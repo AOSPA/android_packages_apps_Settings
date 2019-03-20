@@ -86,8 +86,9 @@
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault</item>
     </style>
 
-    <style name="ComponentCounterTextAppearance" parent="@android:style/TextAppearance.DeviceDefault.Small">
+    <style name="ComponentCounterTextAppearance" parent="@android:style/TextAppearance.DeviceDefault"/>
 
-
+    <style name="EditLabelTextAppearance" parent="@android:style/TextAppearance.DeviceDefault">
+        <item name="android:textColor">?android:colorAccent</item>
     </style>
 </resources>

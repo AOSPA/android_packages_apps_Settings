@@ -145,6 +145,9 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         @Override
         public boolean isActive(CustomizationManager<ThemeComponentOption> manager) {
             CustomThemeManager customThemeManager = (CustomThemeManager) manager;
+            if (getOverlayPackages().isEmpty()) {
+                return customThemeManager.getOverlayPackages().isEmpty();
+            }
              for (Map.Entry<String, String> overlayEntry : getOverlayPackages().entrySet()) {
                  if(!Objects.equals(overlayEntry.getValue(),
                          customThemeManager.getOverlayPackages().get(overlayEntry.getKey()))) {
