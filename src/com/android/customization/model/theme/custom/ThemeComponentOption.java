@@ -18,7 +18,6 @@ package com.android.customization.model.theme.custom;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
-import static com.android.customization.model.ResourceConstants.SYSUI_ICONS_FOR_PREVIEW;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -183,7 +182,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
                 LayoutInflater.from(container.getContext()).inflate(
                         R.layout.preview_card_icon_content, cardBody, true);
             }
-            for (int i = 0; i < mIconIds.length; i++) {
+            for (int i = 0; i < mIconIds.length && i < mIcons.size(); i++) {
                 ((ImageView) container.findViewById(mIconIds[i])).setImageDrawable(
                         mIcons.get(i));
             }
@@ -198,8 +197,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
          */
         public boolean isValid(Context context) {
             return getOverlayPackages().keySet().size() ==
-                    ResourceConstants.getPackagesToOverlay(context).length
-                && mIcons.size() == SYSUI_ICONS_FOR_PREVIEW.length + 1;
+                    ResourceConstants.getPackagesToOverlay(context).length;
         }
 
         public void setLabel(String label) {

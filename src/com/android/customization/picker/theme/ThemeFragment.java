@@ -375,7 +375,7 @@ public class ThemeFragment extends ToolbarFragment {
                         previewInfo.resolveAccentColor(res), editClickListener) {
                     @Override
                     protected void bindBody(boolean forceRebind) {
-                        for (int i = 0; i < mIconIds.length; i++) {
+                        for (int i = 0; i < mIconIds.length && i < previewInfo.icons.size(); i++) {
                             ((ImageView) card.findViewById(mIconIds[i])).setImageDrawable(
                                     previewInfo.icons.get(i));
                         }
@@ -416,7 +416,8 @@ public class ThemeFragment extends ToolbarFragment {
                         // Disable seekbar
                         seekbar.setOnTouchListener((view, motionEvent) -> true);
 
-                        for (int i = 0; i < mColorTileIds.length; i++) {
+                        for (int i = 0; i < mColorTileIds.length && i < previewInfo.icons.size();
+                                i++) {
                             Drawable icon =
                                 previewInfo.icons.get(i).getConstantState().newDrawable();
                             Drawable bgShape =

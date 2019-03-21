@@ -29,6 +29,7 @@ import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 import android.graphics.Point;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -151,21 +152,26 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     private void applyOverlays(ThemeBundle theme, Callback callback) {
         boolean allApplied = true;
         if (theme.isDefault()) {
+            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_SHAPE);
             allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_COLOR);
             allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_FONT);
-            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_SHAPE);
             allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_ICON_ANDROID);
             allApplied &= disableCurrentOverlay(SYSUI_PACKAGE, OVERLAY_CATEGORY_ICON_SYSUI);
             allApplied &= disableCurrentOverlay(SETTINGS_PACKAGE, OVERLAY_CATEGORY_ICON_SETTINGS);
             allApplied &= disableCurrentOverlay(ResourceConstants.getLauncherPackage(mActivity),
                     OVERLAY_CATEGORY_ICON_LAUNCHER);
         } else {
-            for (String packageName : theme.getAllPackages()) {
-                if (packageName != null) {
-                    allApplied &= mOverlayManagerCompat.setEnabledExclusiveInCategory(packageName,
-                            UserHandle.myUserId());
-                }
-            }
+            allApplied &= applyOverlayOrDefault(theme, ANDROID_PACKAGE, OVERLAY_CATEGORY_SHAPE);
+            allApplied &= applyOverlayOrDefault(theme, ANDROID_PACKAGE, OVERLAY_CATEGORY_COLOR);
+            allApplied &= applyOverlayOrDefault(theme, ANDROID_PACKAGE, OVERLAY_CATEGORY_FONT);
+            allApplied &= applyOverlayOrDefault(theme, ANDROID_PACKAGE,
+                    OVERLAY_CATEGORY_ICON_ANDROID);
+            allApplied &= applyOverlayOrDefault(theme, SYSUI_PACKAGE, OVERLAY_CATEGORY_ICON_SYSUI);
+            allApplied &= applyOverlayOrDefault(theme, SETTINGS_PACKAGE,
+                    OVERLAY_CATEGORY_ICON_SETTINGS);
+            allApplied &= applyOverlayOrDefault(theme,
+                    ResourceConstants.getLauncherPackage(mActivity),
+                    OVERLAY_CATEGORY_ICON_LAUNCHER);
         }
         allApplied &= Settings.Secure.putString(mActivity.getContentResolver(),
                 ResourceConstants.THEME_SETTING, theme.getSerializedPackages());
@@ -196,6 +202,16 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
            return mOverlayManagerCompat.disableOverlay(currentPackageName, UserHandle.myUserId());
         }
         return true;
+    }
+
+    private boolean applyOverlayOrDefault(ThemeBundle theme, String targetPkg, String category) {
+        String themePackage = theme.getPackagesByCategory().get(category);
+        if (!TextUtils.isEmpty(themePackage)) {
+            return mOverlayManagerCompat.setEnabledExclusiveInCategory(themePackage,
+                    UserHandle.myUserId());
+        } else {
+            return disableCurrentOverlay(targetPkg, category);
+        }
     }
 
     public Map<String, String> getCurrentOverlays() {

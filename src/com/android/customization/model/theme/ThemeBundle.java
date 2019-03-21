@@ -52,8 +52,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Represents a Theme component available in the system as a "persona" bundle.
@@ -148,16 +151,32 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         return mIsDefault;
     }
 
-    Collection<String> getAllPackages() {
-        return mPackagesByCategory.values();
+    public Map<String, String> getPackagesByCategory() {
+        return mPackagesByCategory;
     }
 
     public String getSerializedPackages() {
         if (isDefault()) {
             return "";
         }
+        JSONObject json = new JSONObject(mPackagesByCategory);
+        // Remove items with null values to avoid deserialization issues.
+        removeNullValues(json);
+        return json.toString();
+    }
 
-        return new JSONObject(mPackagesByCategory).toString();
+    private void removeNullValues(JSONObject json) {
+        Iterator<String> keys = json.keys();
+        Set<String> keysToRemove = new HashSet<>();
+        while(keys.hasNext()) {
+            String key = keys.next();
+            if (json.isNull(key)) {
+                keysToRemove.add(key);
+            }
+        }
+        for (String key : keysToRemove) {
+            json.remove(key);
+        }
     }
 
 

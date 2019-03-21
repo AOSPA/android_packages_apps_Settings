@@ -23,7 +23,7 @@ import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
 import static com.android.customization.model.ResourceConstants.PATH_SIZE;
-import static com.android.customization.model.ResourceConstants.SYSUI_ICONS_FOR_PREVIEW;
+import static com.android.customization.model.ResourceConstants.ICONS_FOR_PREVIEW;
 import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 import static com.android.customization.model.theme.custom.ThemeComponentOption.ColorOption.COLOR_TILES_ICON_IDS;
 
@@ -77,7 +77,7 @@ public class ColorOptionsProvider extends ThemeComponentOptionProvider<ColorOpti
         if (TextUtils.isEmpty(iconPackage)) {
             iconPackage = SYSUI_PACKAGE;
         }
-        for (String iconName : SYSUI_ICONS_FOR_PREVIEW) {
+        for (String iconName : ICONS_FOR_PREVIEW) {
             try {
                 if (previewIcons.size() == COLOR_TILES_ICON_IDS.length) {
                     break;
