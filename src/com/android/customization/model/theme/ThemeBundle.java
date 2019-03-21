@@ -166,15 +166,11 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         public final List<Drawable> icons;
         public final Drawable shapeDrawable;
         @Nullable public final ResourceAsset wallpaperAsset;
-        @Nullable public final ResourceAsset colorPreviewAsset;
-        @Nullable public final ResourceAsset shapePreviewAsset;
         public final List<Drawable> shapeAppIcons;
 
         private PreviewInfo(Typeface bodyFontFamily, Typeface headlineFontFamily,
                 int colorAccentLight, int colorAccentDark, List<Drawable> icons,
                 Drawable shapeDrawable, @Nullable ResourceAsset wallpaperAsset,
-                @Nullable ResourceAsset colorPreviewAsset,
-                @Nullable ResourceAsset shapePreviewAsset,
                 List<Drawable> shapeAppIcons) {
             this.bodyFontFamily = bodyFontFamily;
             this.headlineFontFamily = headlineFontFamily;
@@ -183,8 +179,6 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
             this.icons = icons;
             this.shapeDrawable = shapeDrawable;
             this.wallpaperAsset = wallpaperAsset;
-            this.colorPreviewAsset = colorPreviewAsset;
-            this.shapePreviewAsset = shapePreviewAsset;
             this.shapeAppIcons = shapeAppIcons;
         }
 
@@ -205,14 +199,12 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         protected String mTitle;
         private Typeface mBodyFontFamily;
         private Typeface mHeadlineFontFamily;
-        @ColorInt private int mColorAccentLight;
-        @ColorInt private int mColorAccentDark;
+        @ColorInt private int mColorAccentLight = -1;
+        @ColorInt private int mColorAccentDark = -1;
         private List<Drawable> mIcons = new ArrayList<>();
         private String mShapePath;
         private boolean mIsDefault;
         private ResourceAsset mWallpaperAsset;
-        private ResourceAsset mColorPreview;
-        private ResourceAsset mShapePreview;
         private WallpaperInfo mWallpaperInfo;
         protected Map<String, String> mPackages = new HashMap<>();
         private List<Drawable> mAppIcons = new ArrayList<>();
@@ -243,8 +235,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
                 }
             }
             return new PreviewInfo(mBodyFontFamily, mHeadlineFontFamily, mColorAccentLight,
-                    mColorAccentDark, mIcons, shapeDrawable, mWallpaperAsset,
-                    mColorPreview, mShapePreview, shapeIcons);
+                    mColorAccentDark, mIcons, shapeDrawable, mWallpaperAsset, shapeIcons);
         }
 
         public Builder setTitle(String title) {
@@ -284,16 +275,6 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
 
         public Builder setShapePath(String path) {
             mShapePath = path;
-            return this;
-        }
-
-        public Builder setColorPreview(ResourceAsset colorPreview) {
-            mColorPreview = colorPreview;
-            return this;
-        }
-
-        public Builder setShapePreview(ResourceAsset shapePreview) {
-            mShapePreview = shapePreview;
             return this;
         }
 
