@@ -15,6 +15,7 @@
  */
 package com.android.customization.model.theme.custom;
 
+import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
 import static com.android.customization.model.ResourceConstants.CONFIG_BODY_FONT_FAMILY;
 import static com.android.customization.model.ResourceConstants.CONFIG_HEADLINE_FONT_FAMILY;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
@@ -27,8 +28,10 @@ import android.content.res.Resources.NotFoundException;
 import android.graphics.Typeface;
 import android.util.Log;
 
+import com.android.customization.model.ResourceConstants;
 import com.android.customization.model.theme.OverlayManagerCompat;
 import com.android.customization.model.theme.custom.ThemeComponentOption.FontOption;
+import com.android.wallpaper.R;
 
 /**
  * Implementation of {@link ThemeComponentOptionProvider} that reads {@link FontOption}s from
@@ -44,6 +47,7 @@ public class FontOptionsProvider extends ThemeComponentOptionProvider<FontOption
 
     @Override
     protected void loadOptions() {
+        addDefault();
         for (String overlayPackage : mOverlayPackages) {
             try {
                 Resources overlayRes = getOverlayResources(overlayPackage);
@@ -61,6 +65,19 @@ public class FontOptionsProvider extends ThemeComponentOptionProvider<FontOption
                         overlayPackage), e);
             }
         }
+    }
+
+    private void addDefault() {
+        Resources system = Resources.getSystem();
+        Typeface headlineFont = Typeface.create(system.getString(system.getIdentifier(
+                ResourceConstants.CONFIG_HEADLINE_FONT_FAMILY,"string", ANDROID_PACKAGE)),
+                Typeface.NORMAL);
+        Typeface bodyFont = Typeface.create(system.getString(system.getIdentifier(
+                ResourceConstants.CONFIG_BODY_FONT_FAMILY,
+                "string", ANDROID_PACKAGE)),
+                Typeface.NORMAL);
+        mOptions.add(new FontOption(null, mContext.getString(R.string.default_theme_title),
+                headlineFont, bodyFont));
     }
 
     private String getFontFamily(String overlayPackage, Resources overlayRes, String configName) {

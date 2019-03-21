@@ -14,7 +14,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -26,13 +26,14 @@
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/custom_theme_nav_height"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
     <FrameLayout
         android:id="@+id/custom_theme_nav"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/custom_theme_nav_height">
+        android:layout_height="@dimen/custom_theme_nav_height"
+        android:layout_marginHorizontal="12dp">
         <Button
             android:id="@+id/next_button"
             style="@style/ActionPrimaryButton"
@@ -41,4 +42,4 @@
             android:layout_gravity="end|center_vertical"
             android:text="@string/custom_theme_next"/>
     </FrameLayout>
-</FrameLayout>
+</LinearLayout>

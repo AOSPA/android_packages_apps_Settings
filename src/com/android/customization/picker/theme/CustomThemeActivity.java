@@ -15,31 +15,90 @@
  */
 package com.android.customization.picker.theme;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.android.customization.model.CustomizationManager.Callback;
+import com.android.customization.model.theme.DefaultThemeProvider;
+import com.android.customization.model.theme.OverlayManagerCompat;
+import com.android.customization.model.theme.ThemeBundle.Builder;
+import com.android.customization.model.theme.ThemeBundleProvider;
+import com.android.customization.model.theme.ThemeManager;
+import com.android.customization.model.theme.custom.CustomTheme;
+import com.android.customization.model.theme.custom.CustomThemeManager;
+import com.android.customization.model.theme.custom.FontOptionsProvider;
+import com.android.customization.model.theme.custom.IconOptionsProvider;
+import com.android.customization.model.theme.custom.ThemeComponentOption;
+import com.android.customization.model.theme.custom.ThemeComponentOption.FontOption;
+import com.android.customization.model.theme.custom.ThemeComponentOption.IconOption;
+import com.android.customization.model.theme.custom.ThemeComponentOptionProvider;
+import com.android.customization.module.CustomizationInjector;
+import com.android.customization.picker.theme.CustomThemeComponentFragment.CustomThemeComponentFragmentHost;
 import com.android.wallpaper.R;
-import com.android.wallpaper.module.Injector;
 import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.module.UserEventLogger;
+import com.android.wallpaper.module.WallpaperSetter;
 
-public class CustomThemeActivity extends FragmentActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class CustomThemeActivity extends FragmentActivity implements
+        CustomThemeComponentFragmentHost {
+    public static final String EXTRA_THEME_TITLE = "CustomThemeActivity.ThemeTitle";
+    public static final String EXTRA_THEME_PACKAGES = "CustomThemeActivity.ThemePackages";
+
+    private static final String TAG = "CustomThemeActivity";
 
     private UserEventLogger mUserEventLogger;
+    private List<ComponentStep<?>> mSteps;
+    private int mCurrentStep;
+    private CustomThemeManager mCustomThemeManager;
+    private ThemeManager mThemeManager;
+    private TextView mApplyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Injector injector = InjectorProvider.getInjector();
+        CustomizationInjector injector = (CustomizationInjector) InjectorProvider.getInjector();
         mUserEventLogger = injector.getUserEventLogger(this);
+        Intent intent = getIntent();
+        Builder themeBuilder = null;
+        if (intent != null && intent.hasExtra(EXTRA_THEME_PACKAGES)
+                && intent.hasExtra(EXTRA_THEME_TITLE)) {
+            ThemeBundleProvider themeProvider =
+                    new DefaultThemeProvider(this, injector.getCustomizationPreferences(this));
+            themeBuilder = themeProvider.parseCustomTheme(
+                    intent.getStringExtra(EXTRA_THEME_PACKAGES));
+            if (themeBuilder != null) {
+                themeBuilder.setTitle(intent.getStringExtra(EXTRA_THEME_TITLE));
+            }
+        }
+        mCustomThemeManager = new CustomThemeManager(themeBuilder == null ? null
+                : (CustomTheme) themeBuilder.build());
+
+        mThemeManager = new ThemeManager(
+                new DefaultThemeProvider(this, injector.getCustomizationPreferences(this)),
+                this,
+                new WallpaperSetter(injector.getWallpaperPersister(this),
+                        injector.getPreferences(this), mUserEventLogger, false),
+                new OverlayManagerCompat(this));
         setContentView(R.layout.activity_custom_theme);
+        mApplyButton = findViewById(R.id.next_button);
+        mApplyButton.setOnClickListener(view -> onNextOrApply());
+        initSteps();
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-
         if (fragment == null) {
             // Navigate to the first step
             navigateToStep(0);
@@ -47,6 +106,169 @@ public class CustomThemeActivity extends FragmentActivity {
     }
 
     private void navigateToStep(int i) {
-        //TODO(santie): implement
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ComponentStep step = mSteps.get(i);
+        Fragment fragment = step.getFragment();
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        // Don't add step 0 to the back stack so that going back from it just finishes the Activity
+        if (i > 0) {
+            fragmentTransaction.addToBackStack("Step " + i);
+        }
+        fragmentTransaction.commit();
+        fragmentManager.executePendingTransactions();
+        updateApplyButtonLabel();
+    }
+
+    private void initSteps() {
+        mSteps = new ArrayList<>();
+        OverlayManagerCompat manager = new OverlayManagerCompat(this);
+        mSteps.add(new FontStep(new FontOptionsProvider(this, manager), 0, 2));
+        mSteps.add(new IconStep(new IconOptionsProvider(this, manager), 1, 2));
+        mCurrentStep = 0;
+    }
+
+    private void onNextOrApply() {
+        mCustomThemeManager.apply(getCurrentStepFragment().getSelectedOption(), new Callback() {
+            @Override
+            public void onSuccess() {
+                if (mCurrentStep < mSteps.size() - 1) {
+                    navigateToStep(mCurrentStep + 1);
+                } else {
+                    // We're on the last step, apply theme and leave
+                    // TODO: Verify that custom theme doesn't collide with existing one
+                    //  (compare overlay packages)
+                    mThemeManager.apply(mCustomThemeManager.buildPartialCustomTheme(
+                            CustomThemeActivity.this), new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            Toast.makeText(CustomThemeActivity.this, R.string.applied_theme_msg,
+                                    Toast.LENGTH_LONG).show();
+                            finish();
+                        }
+
+                        @Override
+                        public void onError(@Nullable Throwable throwable) {
+                            Log.w(TAG, "Error applying custom theme", throwable);
+                            Toast.makeText(CustomThemeActivity.this,
+                                    R.string.apply_theme_error_msg,
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onError(@Nullable Throwable throwable) {
+                Log.w(TAG, "Error applying custom theme component", throwable);
+                Toast.makeText(CustomThemeActivity.this, R.string.apply_theme_error_msg,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private CustomThemeComponentFragment getCurrentStepFragment() {
+        return (CustomThemeComponentFragment)
+                getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+    }
+
+    @Override
+    public void setCurrentStep(int i) {
+        mCurrentStep = i;
+        updateApplyButtonLabel();
+    }
+
+    private void updateApplyButtonLabel() {
+        mApplyButton.setText((mCurrentStep < mSteps.size() -1) ? R.string.custom_theme_next
+                : R.string.apply_btn);
+    }
+
+    @Override
+    public void delete() {
+
+    }
+
+    @Override
+    public void cancel() {
+
+    }
+
+    @Override
+    public ThemeComponentOptionProvider<? extends ThemeComponentOption> getComponentOptionProvider(
+            int position) {
+        return mSteps.get(position).provider;
+    }
+
+    @Override
+    public CustomThemeManager getCustomThemeManager() {
+        return mCustomThemeManager;
+    }
+
+    /**
+     * Represents a step in selecting a custom theme, picking a particular component (eg font,
+     * color, shape, etc).
+     * Each step has a Fragment instance associated that instances of this class will provide.
+     */
+    private static abstract class ComponentStep<T extends ThemeComponentOption> {
+        @StringRes final int titleResId;
+        final ThemeComponentOptionProvider<T> provider;
+        final int totalSteps;
+        final int position;
+        private CustomThemeComponentFragment mFragment;
+
+        protected ComponentStep(@StringRes int titleResId, ThemeComponentOptionProvider<T> provider,
+                int position, int totalSteps) {
+            this.titleResId = titleResId;
+            this.provider = provider;
+            this.position = position;
+            this.totalSteps = totalSteps;
+        }
+
+        CustomThemeComponentFragment getFragment() {
+            if (mFragment == null) {
+                mFragment = createFragment();
+            }
+            return mFragment;
+        }
+
+        /**
+         * @return a newly created fragment that will handle this step's UI.
+         */
+        abstract CustomThemeComponentFragment createFragment();
+    }
+
+    private class FontStep extends ComponentStep<FontOption> {
+
+        protected FontStep(ThemeComponentOptionProvider<FontOption> provider,
+                int position, int totalSteps) {
+            super(R.string.font_component_title, provider, position, totalSteps);
+        }
+
+        @Override
+        CustomThemeComponentFragment createFragment() {
+            return CustomThemeComponentFragment.newInstance(
+                    CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
+                    position,
+                    totalSteps,
+                    titleResId);
+        }
+    }
+
+    private class IconStep extends ComponentStep<IconOption> {
+
+        protected IconStep(ThemeComponentOptionProvider<IconOption> provider,
+                int position, int totalSteps) {
+            super(R.string.icon_component_title, provider, position, totalSteps);
+        }
+
+        @Override
+        CustomThemeComponentFragment createFragment() {
+            return CustomThemeComponentFragment.newInstance(
+                    CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
+                    position,
+                    totalSteps,
+                    titleResId);
+        }
     }
 }

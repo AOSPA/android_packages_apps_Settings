@@ -15,7 +15,13 @@
  */
 package com.android.customization.model;
 
+import android.content.Context;
 import android.provider.Settings.Secure;
+
+import com.android.wallpaper.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Holds common strings used to reference system resources.
@@ -37,8 +43,6 @@ public interface ResourceConstants {
      */
     String SYSUI_PACKAGE = "com.android.systemui";
 
-    String [] DEFAULT_TARGET_PACKAGES = {ANDROID_PACKAGE, SETTINGS_PACKAGE, SYSUI_PACKAGE};
-
     /**
      * Name of the system resource for icon mask
      */
@@ -53,6 +57,7 @@ public interface ResourceConstants {
     String OVERLAY_CATEGORY_ICON_ANDROID = "android.theme.customization.icon_pack.android";
     String OVERLAY_CATEGORY_ICON_SETTINGS = "android.theme.customization.icon_pack.settings";
     String OVERLAY_CATEGORY_ICON_SYSUI = "android.theme.customization.icon_pack.systemui";
+    String OVERLAY_CATEGORY_ICON_LAUNCHER = "android.theme.customization.icon_pack.launcher";
 
     /**
      * Secure Setting used to store the currently set theme.
@@ -60,4 +65,27 @@ public interface ResourceConstants {
     String THEME_SETTING = Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES;
     String CONFIG_BODY_FONT_FAMILY = "config_bodyFontFamily";
     String CONFIG_HEADLINE_FONT_FAMILY = "config_headlineFontFamily";
+    String ICON_PREVIEW_DRAWABLE_NAME = "ic_wifi_signal_3";
+    String[] SYSUI_ICONS_FOR_PREVIEW = {
+            "ic_qs_bluetooth_on",
+            "ic_dnd",
+            "ic_signal_flashlight",
+            "ic_qs_auto_rotate",
+            "ic_signal_airplane"
+    };
+
+    ArrayList<String> sTargetPackages = new ArrayList<>();
+
+    static String[] getPackagesToOverlay(Context context) {
+        if (sTargetPackages.isEmpty()) {
+            sTargetPackages.addAll(Arrays.asList(ANDROID_PACKAGE, SETTINGS_PACKAGE,
+                    SYSUI_PACKAGE));
+            sTargetPackages.add(getLauncherPackage(context));
+        }
+        return sTargetPackages.toArray(new String[0]);
+    }
+
+    static String getLauncherPackage(Context context) {
+        return context.getString(R.string.launcher_overlayable_package);
+    }
 }

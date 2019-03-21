@@ -36,10 +36,12 @@ import java.util.Map;
  */
 public class OverlayManagerCompat {
     private final OverlayManager mOverlayManager;
+    private final String[] mTargetPackages;
     private Map<Integer, Map<String, List<OverlayInfo>>> mOverlayByUser;
 
     public OverlayManagerCompat(Context context) {
         mOverlayManager = context.getSystemService(OverlayManager.class);
+        mTargetPackages = ResourceConstants.getPackagesToOverlay(context);
     }
 
     /**
@@ -108,7 +110,7 @@ public class OverlayManagerCompat {
         }
         if (!mOverlayByUser.containsKey(userId)) {
             Map<String, List<OverlayInfo>> overlaysByTarget = new HashMap<>();
-            for (String target : ResourceConstants.DEFAULT_TARGET_PACKAGES) {
+            for (String target : mTargetPackages) {
                 overlaysByTarget.put(target, getOverlayInfosForTarget(target, userId));
             }
             mOverlayByUser.put(userId, overlaysByTarget);

@@ -38,6 +38,10 @@
         [CHAR LIMIT=20] -->
     <string name="apply_theme_btn">Apply</string>
 
+    <!-- Label telling the user they can tap the card to edit the currently selected custom Theme.
+        [CHAR LIMIT=50] -->
+    <string name="edit_custom_theme_lbl">Tap to edit</string>
+
     <!-- Label for a checkbox to allow the user to use their currently set wallpaper instead of
         the one bundled with selected Theme [CHAR LIMIT=35]-->
     <string name="keep_my_wallpaper">Keep current wallpaper</string>
@@ -97,7 +101,27 @@
         [CHAR LIMIT=20] -->
     <string name="custom_theme_next">Next</string>
 
-    <!-- Title for a system Style/Theme (combination of fonts/colors/icons) that is defined and
+    <!-- Label for a system Style/Theme (combination of fonts/colors/icons) that is defined and
         customized by the user [CHAR LIMIT=15] -->
     <string name="custom_theme_title">Custom</string>
+
+    <!-- Title for a screen that lets the user define their custom system Style/Theme
+        [CHAR LIMIT=30] -->
+    <string name="custom_theme_fragment_title">Custom Style</string>
+
+    <!-- Title of a page allowing the user to choose a font for a custom theme -->
+    <string name="font_component_title">Choose font</string>
+
+    <!-- Title of a page allowing the user to choose an icon set for a custom theme -->
+    <string name="icon_component_title">Choose icons</string>
+
+    <!-- Title of a set of icons that the user can chose for their custom style (eg, "Icons 2") -->
+    <string name="icon_component_label">Icons <xliff:g name="component_number" example="1">%1$d</xliff:g></string>
+
+
+    <string name="font_component_option_thumbnail" translatable="false">A</string>
+
+    <!-- Text explaining what the current step is in setting a custom theme, eg: "1 of 4".
+    [CHAR_LIMIT=40] -->
+    <string name="component_step_counter"><xliff:g name="current_step" example="1">%1$d</xliff:g> of <xliff:g name="total_steps" example="4">%2$d</xliff:g></string>
 </resources>
