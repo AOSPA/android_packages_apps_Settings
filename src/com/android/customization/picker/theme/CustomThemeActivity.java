@@ -15,6 +15,7 @@
  */
 package com.android.customization.picker.theme;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +32,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.model.theme.DefaultThemeProvider;
 import com.android.customization.model.theme.OverlayManagerCompat;
+import com.android.customization.model.theme.ThemeBundle;
 import com.android.customization.model.theme.ThemeBundle.Builder;
 import com.android.customization.model.theme.ThemeBundleProvider;
 import com.android.customization.model.theme.ThemeManager;
@@ -99,6 +101,7 @@ public class CustomThemeActivity extends FragmentActivity implements
                 new WallpaperSetter(injector.getWallpaperPersister(this),
                         injector.getPreferences(this), mUserEventLogger, false),
                 new OverlayManagerCompat(this));
+        mThemeManager.fetchOptions(null, false);
         setContentView(R.layout.activity_custom_theme);
         mApplyButton = findViewById(R.id.next_button);
         mApplyButton.setOnClickListener(view -> onNextOrApply());
@@ -147,26 +150,32 @@ public class CustomThemeActivity extends FragmentActivity implements
                     navigateToStep(mCurrentStep + 1);
                 } else {
                     // We're on the last step, apply theme and leave
-                    // TODO: Verify that custom theme doesn't collide with existing one
-                    //  (compare overlay packages)
-                    mThemeManager.apply(mCustomThemeManager.buildPartialCustomTheme(
-                            CustomThemeActivity.this), new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            Toast.makeText(CustomThemeActivity.this, R.string.applied_theme_msg,
-                                    Toast.LENGTH_LONG).show();
-                            setResult(RESULT_THEME_APPLIED);
-                            finish();
-                        }
+                    CustomTheme themeToApply = mCustomThemeManager.buildPartialCustomTheme(
+                            CustomThemeActivity.this);
 
-                        @Override
-                        public void onError(@Nullable Throwable throwable) {
-                            Log.w(TAG, "Error applying custom theme", throwable);
-                            Toast.makeText(CustomThemeActivity.this,
-                                    R.string.apply_theme_error_msg,
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    });
+                    // If the current theme is equal to the original theme being edited, then
+                    // don't search for an equivalent, let the user apply the same one by keeping
+                    // it null.
+                    ThemeBundle equivalent = (mCustomThemeManager.getOriginalTheme() != null
+                            && mCustomThemeManager.getOriginalTheme().isEquivalent(themeToApply))
+                                ? null : mThemeManager.findThemeByPackages(themeToApply);
+
+                    if (equivalent != null) {
+                        AlertDialog.Builder builder =
+                                new AlertDialog.Builder(CustomThemeActivity.this);
+                        builder.setTitle(getString(R.string.use_style_instead_title,
+                                    equivalent.getTitle()))
+                                .setMessage(getString(R.string.use_style_instead_body,
+                                        equivalent.getTitle()))
+                                .setPositiveButton(getString(R.string.use_style_button,
+                                        equivalent.getTitle()),
+                                        (dialogInterface, i) -> applyTheme(equivalent))
+                                .setNegativeButton(R.string.no_thanks, null)
+                                .create()
+                                .show();
+                    } else {
+                        applyTheme(themeToApply);
+                    }
                 }
             }
 
@@ -174,6 +183,26 @@ public class CustomThemeActivity extends FragmentActivity implements
             public void onError(@Nullable Throwable throwable) {
                 Log.w(TAG, "Error applying custom theme component", throwable);
                 Toast.makeText(CustomThemeActivity.this, R.string.apply_theme_error_msg,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void applyTheme(ThemeBundle themeToApply) {
+        mThemeManager.apply(themeToApply, new Callback() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(CustomThemeActivity.this, R.string.applied_theme_msg,
+                        Toast.LENGTH_LONG).show();
+                setResult(RESULT_THEME_APPLIED);
+                finish();
+            }
+
+            @Override
+            public void onError(@Nullable Throwable throwable) {
+                Log.w(TAG, "Error applying custom theme", throwable);
+                Toast.makeText(CustomThemeActivity.this,
+                        R.string.apply_theme_error_msg,
                         Toast.LENGTH_LONG).show();
             }
         });

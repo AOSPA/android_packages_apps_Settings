@@ -124,6 +124,21 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         return R.layout.theme_option;
     }
 
+    /**
+     * This is similar to #equals() but it only compares this theme's packages with the other, that
+     * is, it will return true if applying this theme has the same effect of applying the given one.
+     */
+    public boolean isEquivalent(ThemeBundle other) {
+        if (other == null) {
+            return false;
+        }
+        if (mIsDefault) {
+            return other.isDefault() || TextUtils.isEmpty(other.getSerializedPackages());
+        }
+        // Map#equals ensures keys and values are compared.
+        return mPackagesByCategory.equals(other.mPackagesByCategory);
+    }
+
     public PreviewInfo getPreviewInfo() {
         return mPreviewInfo;
     }

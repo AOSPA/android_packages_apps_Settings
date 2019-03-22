@@ -544,4 +544,17 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
        OverlayInfo info = mOverlayInfos.get(packageName);
        return info != null ? info.category : null;
     }
+
+    @Override
+    public ThemeBundle findEquivalent(ThemeBundle other) {
+        if (mThemes == null) {
+            return null;
+        }
+        for (ThemeBundle theme : mThemes) {
+            if (theme.isEquivalent(other)) {
+                return theme;
+            }
+        }
+        return null;
+    }
 }

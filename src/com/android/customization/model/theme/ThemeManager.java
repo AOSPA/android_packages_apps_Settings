@@ -232,4 +232,13 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     public void removeCustomTheme(CustomTheme theme) {
         mProvider.removeCustomTheme(theme);
     }
+
+    /**
+     * @return an existing ThemeBundle that matches the same packages as the given one, if one
+     * exists, or {@code null} otherwise.
+     */
+    @Nullable
+    public ThemeBundle findThemeByPackages(ThemeBundle other) {
+        return mProvider.findEquivalent(other);
+    }
 }

@@ -148,4 +148,22 @@
     <!-- Label for a dialog which asks the user the destination (home screen, lock screen, both)
         where to set the theme's bundled image as wallpaper. [CHAR LIMIT=50] -->
     <string name="set_theme_wallpaper_dialog_message">Set style wallpaper</string>
+
+    <!-- Title for a dialog box asking the user to use an existing, equivalent theme (style) instead
+        of their customly defined one. [CHAR_LIMIT=30] -->
+    <string name="use_style_instead_title">Use <xliff:g name="style_name">%1$s</xliff:g> instead?</string>
+
+    <!-- Body for a dialog box asking the user to use an existing, equivalent theme (style) instead
+        of their customly defined one. [CHAR_LIMIT=NONE] -->
+    <string name="use_style_instead_body">The components you chose match the <xliff:g name="style_name">%1$s</xliff:g> style. Do you want to use <xliff:g name="style_name">%1$s</xliff:g> instead?</string>
+
+    <!-- Label for a button in the dialog box that asks the user to use an existing, theme (style)
+        instead of their customly defined one. The button let's the user use the suggested theme
+        [CHAR_LIMIT=15] -->
+    <string name="use_style_button">Use <xliff:g name="style_name">%1$s</xliff:g></string>
+
+    <!-- Label for a button in the dialog box that asks the user to use an existing, theme (style)
+        instead of their customly defined one. The button dismisses the dialog and goes back to the
+        previous screen. [CHAR_LIMIT=15]  -->
+    <string name="no_thanks">No, thanks</string>
 </resources>
