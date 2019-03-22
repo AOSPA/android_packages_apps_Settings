@@ -962,8 +962,7 @@
 
         <activity
             android:name="Settings$ManageApplicationsActivity"
-            android:label="@string/applications_settings"
-            android:parentActivityName="Settings">
+            android:label="@string/applications_settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_SETTINGS" />
                 <action android:name="android.settings.MANAGE_APPLICATIONS_SETTINGS" />
@@ -1336,8 +1335,7 @@
 
         <activity
             android:name="Settings$UsageAccessSettingsActivity"
-            android:label="@string/usage_access_title"
-            android:parentActivityName="Settings">
+            android:label="@string/usage_access_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.USAGE_ACCESS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1388,6 +1386,20 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accessibility.AccessibilitySettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$AccessibilityDetailsSettingsActivity"
+            android:label="@string/accessibility_settings"
+            android:permission="android.permission.OPEN_ACCESSIBILITY_DETAILS_SETTINGS">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ACCESSIBILITY_DETAILS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.AccessibilityDetailsSettingsFragment" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -2088,7 +2100,7 @@
         <activity
             android:name="Settings$PowerUsageSummaryActivity"
             android:label="@string/power_usage_summary_title"
-            android:icon="@drawable/ic_homepage_battery"
+            android:icon="@drawable/ic_settings_battery"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
@@ -3122,8 +3134,12 @@
             <intent-filter>
                 <action android:name="android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_SCANNER"/>
                 <action android:name="android.settings.WIFI_DPP_CONFIGURATOR_QR_CODE_GENERATOR"/>
-                <action android:name="android.settings.PROCESS_WIFI_EASY_CONNECT_QR_CODE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.settings.PROCESS_WIFI_EASY_CONNECT_URI"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="DPP"/>
             </intent-filter>
         </activity>
 

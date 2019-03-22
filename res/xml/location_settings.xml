@@ -21,6 +21,11 @@
     android:title="@string/location_settings_title"
     settings:keywords="@string/keywords_location">
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="apps_dashboard"
+        android:layout="@layout/app_entities_header"
+        android:selectable="false"
+        settings:allowDividerBelow="true"/>
 
     <PreferenceCategory android:key="location_advanced_settings">
 
