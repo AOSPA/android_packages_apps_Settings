@@ -53,7 +53,7 @@ import android.widget.Toast;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
-
+import com.android.ims.ImsManager;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.uicc.UiccController;
@@ -145,6 +145,9 @@ public class ApnSettings extends RestrictedSettingsFragment
     private final static String APN_HIDE_RULE_STRINGS_ARRAY= "apn_hide_rule_strings_array";
     private final static String APN_HIDE_RULE_STRINGS_WITH_ICCIDS_ARRAY = "apn_hide_rule_strings_with_iccids_array";
 
+    private final static String ACTION_VOLTE_ENABLED_STATE_CHANGED
+            = "org.codeaurora.intent.action.ACTION_ENHANCE_4G_SWITCH";
+
     public ApnSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
     }
@@ -176,6 +179,12 @@ public class ApnSettings extends RestrictedSettingsFragment
                     }
                     fillList();
                 }
+            } else if (intent.getAction().equals(ACTION_VOLTE_ENABLED_STATE_CHANGED)) {
+                if (!mRestoreDefaultApnMode) {
+                    fillList();
+                } else {
+                    showDialog(DIALOG_RESTORE_DEFAULTAPN);
+                }
             }
         }
     };
@@ -204,6 +213,9 @@ public class ApnSettings extends RestrictedSettingsFragment
         mIntentFilter = new IntentFilter(
                 TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED);
         mIntentFilter.addAction(TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED);
+        if (Utils.isSupportCTPA(getActivity().getApplicationContext())) {
+            mIntentFilter.addAction(ACTION_VOLTE_ENABLED_STATE_CHANGED);
+        }
 
         setIfOnlyAvailableForAdmins(true);
 
@@ -309,7 +321,11 @@ public class ApnSettings extends RestrictedSettingsFragment
         StringBuilder where = new StringBuilder("NOT (type='ia' AND (apn=\"\" OR apn IS NULL)) AND "
                 + "user_visible!=0");
 
-        if (mHideImsApn) {
+        int phoneId = SubscriptionManager.getPhoneId(subId);
+        Context appContext = getActivity().getApplicationContext();
+        boolean isVoLTEEnabled = ImsManager.getInstance(appContext, phoneId)
+                .isEnhanced4gLteModeSettingEnabledByUser();
+        if (mHideImsApn || (Utils.isSupportCTPA(appContext) && !isVoLTEEnabled)) {
             where.append(" AND NOT (type='ims')");
         }
 
@@ -377,6 +393,9 @@ public class ApnSettings extends RestrictedSettingsFragment
                 }
 
                 boolean selectable = ((type == null) || !type.equals("mms"));
+                if (isVoLTEEnabled && selectable && Utils.isSupportCTPA(appContext)) {
+                    selectable = ((type == null) || !type.equals("ims"));
+                }
                 pref.setSelectable(selectable);
                 if (selectable) {
                     if ((mSelectedKey != null) && mSelectedKey.equals(key)) {

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.os.SystemProperties;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 
 public class HardwareRevisionPreferenceController extends BasePreferenceController {
@@ -41,6 +42,12 @@ public class HardwareRevisionPreferenceController extends BasePreferenceControll
 
     @Override
     public CharSequence getSummary() {
+        if (Utils.isSupportCTPA(mContext)) {
+            String hardwareVersion = Utils.getString(mContext, Utils.KEY_HARDWARE_VERSION);
+            if (null != hardwareVersion && !hardwareVersion.isEmpty()) {
+                return hardwareVersion;
+            }
+        }
         return SystemProperties.get("ro.boot.hardware.revision");
     }
 }
