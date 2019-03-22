@@ -161,9 +161,14 @@ public class ThemeFragment extends ToolbarFragment {
             if (resultCode == CustomThemeActivity.RESULT_THEME_DELETED) {
                 mSelectedTheme = null;
                 reloadOptions();
-            }
-            if (resultCode == CustomThemeActivity.RESULT_THEME_APPLIED) {
+            } else if (resultCode == CustomThemeActivity.RESULT_THEME_APPLIED) {
                 getActivity().finish();
+            } else {
+                if (mSelectedTheme != null) {
+                    mOptionsController.setSelectedOption(mSelectedTheme);
+                } else {
+                    reloadOptions();
+                }
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
