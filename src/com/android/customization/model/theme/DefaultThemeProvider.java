@@ -104,11 +104,12 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
 
         Consumer<OverlayInfo> addToMap = overlayInfo -> mOverlayInfos.put(
                 overlayInfo.packageName, overlayInfo);
-        om.getOverlayInfosForTarget(ANDROID_PACKAGE, UserHandle.myUserId()).forEach(addToMap);
-        om.getOverlayInfosForTarget(SYSUI_PACKAGE, UserHandle.myUserId()).forEach(addToMap);
-        om.getOverlayInfosForTarget(SETTINGS_PACKAGE, UserHandle.myUserId()).forEach(addToMap);
-        om.getOverlayInfosForTarget(ResourceConstants.getLauncherPackage(context),
-                UserHandle.myUserId()).forEach(addToMap);
+
+        UserHandle user = UserHandle.of(UserHandle.myUserId());
+        om.getOverlayInfosForTarget(ANDROID_PACKAGE, user).forEach(addToMap);
+        om.getOverlayInfosForTarget(SYSUI_PACKAGE, user).forEach(addToMap);
+        om.getOverlayInfosForTarget(SETTINGS_PACKAGE, user).forEach(addToMap);
+        om.getOverlayInfosForTarget(ResourceConstants.getLauncherPackage(context),user).forEach(addToMap);
     }
 
     @Override
