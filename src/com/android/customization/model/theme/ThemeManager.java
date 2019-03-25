@@ -26,20 +26,22 @@ import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY
 import static com.android.customization.model.ResourceConstants.SETTINGS_PACKAGE;
 import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 
-import android.app.Activity;
 import android.graphics.Point;
 import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.ResourceConstants;
 import com.android.customization.model.theme.custom.CustomTheme;
+import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
 import com.android.wallpaper.module.WallpaperPersister;
 import com.android.wallpaper.module.WallpaperPersister.SetWallpaperCallback;
 import com.android.wallpaper.module.WallpaperSetter;
+import com.android.wallpaper.picker.SetWallpaperDialogFragment.Listener;
 import com.android.wallpaper.util.WallpaperCropUtils;
 
 import java.util.HashSet;
@@ -64,11 +66,11 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     private final OverlayManagerCompat mOverlayManagerCompat;
 
     private final WallpaperSetter mWallpaperSetter;
-    private final Activity mActivity;
+    private final FragmentActivity mActivity;
 
     private Map<String, String> mCurrentOverlays;
 
-    public ThemeManager(ThemeBundleProvider provider, Activity activity,
+    public ThemeManager(ThemeBundleProvider provider, FragmentActivity activity,
             WallpaperSetter wallpaperSetter, OverlayManagerCompat overlayManagerCompat) {
         mProvider = provider;
         mActivity = activity;
@@ -85,23 +87,48 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     public void apply(ThemeBundle theme, Callback callback) {
         // Set wallpaper
         if (theme.shouldUseThemeWallpaper()) {
-            applyWallpaper(theme, new SetWallpaperCallback() {
-                @Override
-                public void onSuccess() {
-                    applyOverlays(theme, callback);
-                }
+            mWallpaperSetter.requestDestination(mActivity, mActivity.getSupportFragmentManager(),
+                    R.string.set_theme_wallpaper_dialog_message, new Listener() {
+                        @Override
+                        public void onSetHomeScreen() {
+                            applyWallpaper(theme, WallpaperPersister.DEST_HOME_SCREEN,
+                                    createSetWallpaperCallback(theme, callback));
+                        }
 
-                @Override
-                public void onError(@Nullable Throwable throwable) {
-                    callback.onError(throwable);
-                }
-            });
+                        @Override
+                        public void onSetLockScreen() {
+                            applyWallpaper(theme, WallpaperPersister.DEST_LOCK_SCREEN,
+                                    createSetWallpaperCallback(theme, callback));
+                        }
+
+                        @Override
+                        public void onSetBoth() {
+                            applyWallpaper(theme, WallpaperPersister.DEST_BOTH,
+                                    createSetWallpaperCallback(theme, callback));
+                        }
+                    });
+
         } else {
             applyOverlays(theme, callback);
         }
     }
 
-    private void applyWallpaper(ThemeBundle theme, SetWallpaperCallback callback) {
+    private SetWallpaperCallback createSetWallpaperCallback(ThemeBundle theme, Callback callback) {
+        return new SetWallpaperCallback() {
+            @Override
+            public void onSuccess() {
+                applyOverlays(theme, callback);
+            }
+
+            @Override
+            public void onError(@Nullable Throwable throwable) {
+                callback.onError(throwable);
+            }
+        };
+    }
+
+    private void applyWallpaper(ThemeBundle theme, int destination,
+            SetWallpaperCallback callback) {
         Point defaultCropSurfaceSize = WallpaperCropUtils.getDefaultCropSurfaceSize(
                 mActivity.getResources(),
                 mActivity.getWindowManager().getDefaultDisplay());
@@ -116,7 +143,7 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
                     mWallpaperSetter.setCurrentWallpaper(mActivity,
                             theme.getWallpaperInfo(),
                             wallpaperAsset,
-                            WallpaperPersister.DEST_BOTH,
+                            destination,
                             scale, null, callback);
                 });
     }
