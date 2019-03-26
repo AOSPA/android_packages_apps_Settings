@@ -112,23 +112,7 @@ public class ThemeFragment extends ToolbarFragment {
         mPreviewPager = view.findViewById(R.id.theme_preview_pager);
         mOptionsContainer = view.findViewById(R.id.options_container);
         view.findViewById(R.id.apply_button).setOnClickListener(v -> {
-            mThemeManager.apply(mSelectedTheme, new Callback() {
-                @Override
-                public void onSuccess() {
-                    Toast.makeText(getContext(), R.string.applied_theme_msg,
-                            Toast.LENGTH_LONG).show();
-                    getActivity().finish();
-                    getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                }
-
-                @Override
-                public void onError(@Nullable Throwable throwable) {
-                    Log.w(TAG, "Error applying theme", throwable);
-                    Toast.makeText(getContext(), R.string.apply_theme_error_msg,
-                            Toast.LENGTH_LONG).show();
-                }
-            });
-
+            applyTheme();
         });
         mUseMyWallpaperButton = view.findViewById(R.id.use_my_wallpaper);
         mUseMyWallpaperButton.setOnCheckedChangeListener(this::onUseMyWallpaperCheckChanged);
@@ -136,6 +120,25 @@ public class ThemeFragment extends ToolbarFragment {
         setUpOptions(savedInstanceState);
 
         return view;
+    }
+
+    private void applyTheme() {
+        mThemeManager.apply(mSelectedTheme, new Callback() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(getContext(), R.string.applied_theme_msg,
+                        Toast.LENGTH_LONG).show();
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            }
+
+            @Override
+            public void onError(@Nullable Throwable throwable) {
+                Log.w(TAG, "Error applying theme", throwable);
+                Toast.makeText(getContext(), R.string.apply_theme_error_msg,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
