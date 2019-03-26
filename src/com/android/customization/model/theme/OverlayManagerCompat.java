@@ -36,10 +36,12 @@ import java.util.Map;
  */
 public class OverlayManagerCompat {
     private final OverlayManager mOverlayManager;
+    private final String[] mTargetPackages;
     private Map<Integer, Map<String, List<OverlayInfo>>> mOverlayByUser;
 
     public OverlayManagerCompat(Context context) {
         mOverlayManager = context.getSystemService(OverlayManager.class);
+        mTargetPackages = ResourceConstants.getPackagesToOverlay(context);
     }
 
     /**
@@ -47,7 +49,8 @@ public class OverlayManagerCompat {
      * @return true if the operation succeeded
      */
     public boolean setEnabledExclusiveInCategory(String packageName, int userId) {
-        return mOverlayManager.setEnabledExclusiveInCategory(packageName, userId);
+        mOverlayManager.setEnabledExclusiveInCategory(packageName, UserHandle.of(userId));
+        return true;
     }
 
     /**
@@ -55,7 +58,8 @@ public class OverlayManagerCompat {
      * @return true if the operation succeeded
      */
     public boolean disableOverlay(String packageName, int userId) {
-        return mOverlayManager.setEnabled(packageName, false, userId);
+        mOverlayManager.setEnabled(packageName, false, UserHandle.of(userId));
+        return true;
     }
 
     /**
@@ -108,7 +112,7 @@ public class OverlayManagerCompat {
         }
         if (!mOverlayByUser.containsKey(userId)) {
             Map<String, List<OverlayInfo>> overlaysByTarget = new HashMap<>();
-            for (String target : ResourceConstants.DEFAULT_TARGET_PACKAGES) {
+            for (String target : mTargetPackages) {
                 overlaysByTarget.put(target, getOverlayInfosForTarget(target, userId));
             }
             mOverlayByUser.put(userId, overlaysByTarget);
@@ -117,7 +121,7 @@ public class OverlayManagerCompat {
 
 
     private List<OverlayInfo> getOverlayInfosForTarget(String targetPackageName, int userId) {
-        return mOverlayManager.getOverlayInfosForTarget(targetPackageName, userId);
+        return mOverlayManager.getOverlayInfosForTarget(targetPackageName, UserHandle.of(userId));
     }
 
     private void addAllEnabledOverlaysForTarget(Map<String, String> overlays, String target) {

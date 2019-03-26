@@ -17,6 +17,9 @@ package com.android.customization.model.theme.custom;
 
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
+import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.theme.ThemeBundle;
 import com.android.wallpaper.R;
 
@@ -25,7 +28,7 @@ import java.util.Map;
 public class CustomTheme extends ThemeBundle {
 
     public CustomTheme(String title, Map<String, String> overlayPackages,
-            PreviewInfo previewInfo) {
+            @Nullable PreviewInfo previewInfo) {
         super(title, overlayPackages, false, null, previewInfo);
     }
 
@@ -46,7 +49,23 @@ public class CustomTheme extends ThemeBundle {
         return false;
     }
 
+    @Override
+    public boolean isActive(CustomizationManager<ThemeBundle> manager) {
+        return isDefined() && super.isActive(manager);
+    }
+
     public boolean isDefined() {
         return getPreviewInfo() != null;
+    }
+
+    Map<String, String> getPackagesByCategory() {
+        return mPackagesByCategory;
+    }
+
+    public static class Builder extends ThemeBundle.Builder {
+        @Override
+        public CustomTheme build() {
+            return new CustomTheme(mTitle, mPackages, createPreviewInfo());
+        }
     }
 }

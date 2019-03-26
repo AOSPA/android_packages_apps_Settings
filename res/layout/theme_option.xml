@@ -37,37 +37,29 @@
         android:paddingHorizontal="@dimen/option_tile_padding_horizontal"
         android:paddingVertical="@dimen/option_tile_padding_vertical"
         android:background="@drawable/option_border">
-        <TextView
-            android:id="@+id/theme_option_font"
-            android:layout_width="@dimen/theme_option_sample_width"
-            android:layout_height="@dimen/theme_option_sample_height"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:gravity="center"
-            android:textSize="@dimen/theme_option_font_text_size"
-            android:text="@string/theme_font_example"/>
-        <ImageView
-            android:id="@+id/theme_option_shape"
-            android:layout_width="@dimen/theme_option_sample_width"
-            android:layout_height="@dimen/theme_option_sample_height"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:padding="@dimen/theme_option_sample_padding"/>
-        <ImageView
-            android:id="@+id/theme_option_color"
-            android:layout_width="@dimen/theme_option_sample_width"
-            android:layout_height="@dimen/theme_option_sample_height"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:padding="@dimen/theme_option_sample_padding"
-            android:src="@drawable/option_color"/>
         <ImageView
             android:id="@+id/theme_option_icon"
-            android:layout_width="@dimen/theme_option_sample_width"
-            android:layout_height="@dimen/theme_option_sample_height"
-            android:layout_alignParentBottom="true"
+            android:layout_width="@dimen/theme_option_icon_sample_width"
+            android:layout_height="@dimen/theme_option_icon_sample_height"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="@dimen/theme_option_sample_padding"/>
+        <ImageView
+            android:id="@+id/theme_option_shape"
+            android:layout_width="@dimen/theme_option_shape_sample_width"
+            android:layout_height="@dimen/theme_option_shape_sample_height"
             android:layout_alignParentRight="true"
-            android:padding="@dimen/theme_option_sample_padding"/>
+            android:layout_alignBottom="@+id/theme_option_icon"
+            android:layout_marginHorizontal="@dimen/theme_option_sample_padding"/>
+        <TextView
+            android:id="@+id/theme_option_font"
+            android:layout_width="@dimen/theme_option_font_sample_width"
+            android:layout_height="@dimen/theme_option_font_sample_height"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textSize="@dimen/theme_option_font_text_size"
+            android:letterSpacing=".2"
+            android:text="@string/theme_font_example"/>
     </RelativeLayout>
 </LinearLayout>
