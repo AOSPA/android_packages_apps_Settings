@@ -22,6 +22,8 @@ import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
 import android.annotation.Nullable;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AppGlobals;
 import android.app.IActivityManager;
@@ -95,6 +97,7 @@ import android.widget.TabWidget;
 import androidx.annotation.StringRes;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
@@ -104,6 +107,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settingslib.widget.ActionBarShadowController;
 
 import java.net.InetAddress;
 import java.util.Iterator;
@@ -1102,5 +1106,29 @@ public final class Utils extends com.android.settingslib.Utils {
         // SYSTEM_ALERT_WINDOW is disabled on on low ram devices starting from Q
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         return !(am.isLowRamDevice() && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q));
+    }
+
+    /**
+     * Adds a shadow appear/disappear animation to action bar scroll.
+     *
+     * <p/>
+     * This method must be called after {@link Fragment#onCreate(Bundle)}.
+     */
+    public static void setActionBarShadowAnimation(Activity activity, Lifecycle lifecycle,
+            View scrollView) {
+        if (activity == null) {
+            Log.w(TAG, "No activity, cannot style actionbar.");
+            return;
+        }
+        final ActionBar actionBar = activity.getActionBar();
+        if (actionBar == null) {
+            Log.w(TAG, "No actionbar, cannot style actionbar.");
+            return;
+        }
+        actionBar.setElevation(0);
+
+        if (lifecycle != null && scrollView != null) {
+            ActionBarShadowController.attachToView(activity, lifecycle, scrollView);
+        }
     }
 }

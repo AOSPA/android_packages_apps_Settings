@@ -38,7 +38,6 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
-import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -130,8 +129,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
         // Null check is done at the framework
         setSummary(mCachedDevice.getConnectionSummary());
 
-        final Pair<Drawable, String> pair = BluetoothUtils
-                .getBtClassDrawableWithDescription(getContext(), mCachedDevice);
+        final Pair<Drawable, String> pair = Utils
+                .getBtRainbowDrawableWithDescription(getContext(), mCachedDevice);
         if (pair.first != null) {
             setIcon(pair.first);
             contentDescription = pair.second;
@@ -165,6 +164,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
         final ImageView imageView = (ImageView) view.findViewById(android.R.id.icon);
         if (imageView != null) {
             imageView.setContentDescription(contentDescription);
+            imageView.setElevation(
+                    getContext().getResources().getDimension(R.dimen.bt_icon_elevation));
         }
         super.onBindViewHolder(view);
     }
@@ -246,5 +247,4 @@ public final class BluetoothDevicePreference extends GearPreference implements
                     R.string.bluetooth_pairing_error_message);
         }
     }
-
 }
