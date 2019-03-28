@@ -73,11 +73,11 @@ public interface ResourceConstants {
     String CONFIG_HEADLINE_FONT_FAMILY = "config_headlineFontFamily";
     String[] ICONS_FOR_PREVIEW = {
             "ic_wifi_signal_3",
-            "ic_qs_bluetooth_on",
-            "ic_dnd",
-            "ic_signal_flashlight",
+            "ic_qs_bluetooth",
+            "ic_qs_dnd",
+            "ic_qs_flashlight",
             "ic_qs_auto_rotate",
-            "ic_signal_airplane"
+            "ic_qs_airplane"
     };
 
     ArrayList<String> sTargetPackages = new ArrayList<>();
