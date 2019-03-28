@@ -71,8 +71,6 @@ import java.util.function.Consumer;
 public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeBundleProvider {
 
     private static final String TAG = "DefaultThemeProvider";
-    // TODO(b/124796742): remove once custom theme picker is ready to merge
-    private static final boolean SHOW_CUSTOM_THEME_OPTION = true;
 
     private static final String THEMES_ARRAY = "themes";
     private static final String TITLE_PREFIX = "theme_title_";
@@ -197,9 +195,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             }
         }
 
-        if (SHOW_CUSTOM_THEME_OPTION) {
-            addCustomTheme();
-        }
+        addCustomTheme();
     }
 
     private void addColorOverlay(Builder builder, String colorOverlayPackage)
