@@ -16,13 +16,11 @@
 package com.android.customization.model.theme.custom;
 
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
-import static com.android.customization.model.ResourceConstants.ICON_PREVIEW_DRAWABLE_NAME;
+import static com.android.customization.model.ResourceConstants.ICONS_FOR_PREVIEW;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_LAUNCHER;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SETTINGS;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
-import static com.android.customization.model.ResourceConstants.SYSUI_ICONS_FOR_PREVIEW;
-import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -74,7 +72,9 @@ public class IconOptionsProvider extends ThemeComponentOptionProvider<IconOption
             IconOption option = addOrUpdateOption(optionsByPrefix, overlayPackage,
                     OVERLAY_CATEGORY_ICON_ANDROID);
             try{
-                option.addIcon(loadIconPreviewDrawable(ICON_PREVIEW_DRAWABLE_NAME, overlayPackage));
+                for (String iconName : ICONS_FOR_PREVIEW) {
+                    option.addIcon(loadIconPreviewDrawable(iconName, overlayPackage));
+                }
             } catch (NotFoundException | NameNotFoundException e) {
                 Log.w(TAG, String.format("Couldn't load icon overlay details for %s, will skip it",
                         overlayPackage), e);
@@ -82,16 +82,7 @@ public class IconOptionsProvider extends ThemeComponentOptionProvider<IconOption
         }
 
         for (String overlayPackage : mSysUiIconsOverlayPackages) {
-            IconOption option = addOrUpdateOption(optionsByPrefix, overlayPackage,
-                    OVERLAY_CATEGORY_ICON_SYSUI);
-            try{
-                for (String iconName : SYSUI_ICONS_FOR_PREVIEW) {
-                    option.addIcon(loadIconPreviewDrawable(iconName, overlayPackage));
-                }
-            } catch (NotFoundException | NameNotFoundException e) {
-                Log.w(TAG, String.format("Couldn't load icon overlay details for %s, will skip it",
-                        overlayPackage), e);
-            }
+            addOrUpdateOption(optionsByPrefix, overlayPackage,  OVERLAY_CATEGORY_ICON_SYSUI);
         }
 
         for (String overlayPackage : mSettingsIconsOverlayPackages) {
@@ -134,22 +125,16 @@ public class IconOptionsProvider extends ThemeComponentOptionProvider<IconOption
 
     private void addDefault() {
         Resources system = Resources.getSystem();
+        IconOption option = new IconOption();
+        option.setLabel(mContext.getString(R.string.default_theme_title));
         try {
-            IconOption option = new IconOption();
-            option.setLabel(mContext.getString(R.string.default_theme_title));
-
-            option.addIcon(system.getDrawable(system.getIdentifier(ICON_PREVIEW_DRAWABLE_NAME,
-                    "drawable", ANDROID_PACKAGE), null));
-
-            for (String iconName : SYSUI_ICONS_FOR_PREVIEW) {
-                option.addIcon(loadIconPreviewDrawable(iconName, SYSUI_PACKAGE));
+            for (String iconName : ICONS_FOR_PREVIEW) {
+                option.addIcon(loadIconPreviewDrawable(iconName, ANDROID_PACKAGE));
             }
-
-            mOptions.add(option);
         } catch (NameNotFoundException | NotFoundException e) {
             Log.w(TAG, "Didn't find SystemUi package icons, will skip option", e);
         }
-
+        mOptions.add(option);
     }
 
 }

@@ -58,10 +58,6 @@ public class CustomTheme extends ThemeBundle {
         return getPreviewInfo() != null;
     }
 
-    Map<String, String> getPackagesByCategory() {
-        return mPackagesByCategory;
-    }
-
     public static class Builder extends ThemeBundle.Builder {
         @Override
         public CustomTheme build() {
