@@ -244,7 +244,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     private void addSysUiIconOverlay(Builder builder, String iconSysUiOverlayPackage)
             throws NameNotFoundException {
         if (!TextUtils.isEmpty(iconSysUiOverlayPackage)) {
-            addIconOverlay(builder, iconSysUiOverlayPackage, ICONS_FOR_PREVIEW);
+            addIconOverlay(builder, iconSysUiOverlayPackage);
         }
     }
 
