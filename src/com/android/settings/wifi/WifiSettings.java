@@ -67,6 +67,7 @@ import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
+import com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.SearchIndexable;
@@ -178,7 +179,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private PreferenceCategory mConnectedAccessPointPreferenceCategory;
     private PreferenceCategory mAccessPointsPreferenceCategory;
-    private ButtonPreference mAddPreference;
+    @VisibleForTesting
+    AddWifiNetworkPreference mAddWifiNetworkPreference;
     @VisibleForTesting
     Preference mConfigureWifiSettingsPreference;
     @VisibleForTesting
@@ -236,19 +238,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 (PreferenceCategory) findPreference(PREF_KEY_ACCESS_POINTS);
         mConfigureWifiSettingsPreference = findPreference(PREF_KEY_CONFIGURE_WIFI_SETTINGS);
         mSavedNetworksPreference = findPreference(PREF_KEY_SAVED_NETWORKS);
-
-        Context prefContext = getPrefContext();
-        mAddPreference = new ButtonPreference(prefContext);
-        mAddPreference.setIcon(R.drawable.ic_menu_add);
-        mAddPreference.setTitle(R.string.wifi_add_network);
-        mAddPreference.setButtonIcon(R.drawable.ic_scan_24dp);
-        mAddPreference.setButtonOnClickListener((View v) -> {
-            // Launch QR code scanner to join a network.
-            getContext().startActivity(
-                    WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
-        });
+        mAddWifiNetworkPreference = new AddWifiNetworkPreference(getPrefContext());
         mStatusMessagePreference = (LinkablePreference) findPreference(PREF_KEY_STATUS_MESSAGE);
-
         mUserBadgeCache = new AccessPointPreference.UserBadgeCache(getPackageManager());
     }
 
@@ -483,7 +474,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (preference instanceof LongPressAccessPointPreference) {
             mSelectedAccessPoint =
                     ((LongPressAccessPointPreference) preference).getAccessPoint();
-            menu.setHeaderTitle(mSelectedAccessPoint.getSsid());
+            menu.setHeaderTitle(mSelectedAccessPoint.getTitle());
             if (mSelectedAccessPoint.isConnectable()) {
                 menu.add(Menu.NONE, MENU_ID_CONNECT, 0, R.string.wifi_menu_connect);
             }
@@ -588,7 +579,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_CONNECT);
                     break;
             }
-        } else if (preference == mAddPreference) {
+        } else if (preference == mAddWifiNetworkPreference) {
             onAddNetworkPressed();
         } else {
             return super.onPreferenceTreeClick(preference);
@@ -807,8 +798,8 @@ public class WifiSettings extends RestrictedSettingsFragment
             }
         }
         removeCachedPrefs(mAccessPointsPreferenceCategory);
-        mAddPreference.setOrder(index);
-        mAccessPointsPreferenceCategory.addPreference(mAddPreference);
+        mAddWifiNetworkPreference.setOrder(index);
+        mAccessPointsPreferenceCategory.addPreference(mAddWifiNetworkPreference);
         setAdditionalSettingsSummaries();
 
         if (!hasAvailableAccessPoints) {
@@ -967,8 +958,13 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     private void launchNetworkDetailsFragment(ConnectedAccessPointPreference pref) {
+        final AccessPoint accessPoint = pref.getAccessPoint();
+        final Context context = getContext();
+        final CharSequence title = SavedAccessPointsWifiSettings.usingDetailsFragment(context) ?
+                accessPoint.getTitle() : context.getText(R.string.pref_title_network_details);
+
         new SubSettingLauncher(getContext())
-                .setTitleRes(R.string.pref_title_network_details)
+                .setTitleText(title)
                 .setDestination(WifiNetworkDetailsFragment.class.getName())
                 .setArguments(pref.getExtras())
                 .setSourceMetricsCategory(getMetricsCategory())

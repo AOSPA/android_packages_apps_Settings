@@ -34,11 +34,14 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.wifi.AddNetworkFragment;
+import com.android.settings.wifi.savedaccesspoints.SavedNetworkComparator;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
+import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
+import java.util.Collections;
 import java.util.List;
 
 public class WifiNetworkListFragment extends SettingsPreferenceFragment implements
@@ -218,7 +221,7 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
             final WifiNetworkConfig networkConfig = WifiNetworkConfig.getValidConfigOrNull(
                     selectedAccessPoint.getSecurityString(/* concise */ true),
                     wifiConfig.getPrintableSsid(), wifiConfig.preSharedKey, /* hiddenSsid */ false,
-                    wifiConfig.networkId);
+                    wifiConfig.networkId, /* isHotspot */ false);
             if (mOnChooseNetworkListener != null) {
                 mOnChooseNetworkListener.onChooseNetwork(networkConfig);
             }
@@ -232,7 +235,8 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
                                 /* ssid */ WifiNetworkConfig.FAKE_SSID,
                                 /* preSharedKey */ WifiNetworkConfig.FAKE_PASSWORD,
                                 /* hiddenSsid */ true,
-                                /* networkId */ WifiConfiguration.INVALID_NETWORK_ID));
+                                /* networkId */ WifiConfiguration.INVALID_NETWORK_ID,
+                                /* isHotspot*/ false));
             }
         } else {
             return super.onPreferenceTreeClick(preference);
@@ -252,17 +256,6 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
 
         // DPP 1.0 only support SAE and PSK.
         if (!(security == AccessPoint.SECURITY_PSK || security == AccessPoint.SECURITY_SAE)) {
-            return false;
-        }
-
-        // Can only use saved network for DPP configuration. For ephemeral connections networkId
-        // is invalid.
-        if (!accessPoint.isSaved()) {
-            return false;
-        }
-
-        // Ignore access points that are out of range.
-        if (!accessPoint.isReachable()) {
             return false;
         }
 
@@ -289,42 +282,45 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
             return;
         }
 
-        // AccessPoints are sorted by the WifiTracker
-        final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
-
-        mAccessPointsPreferenceCategory.setVisible(true);
-
-        cacheRemoveAllPrefs(mAccessPointsPreferenceCategory);
+        // TODO(b/128942314): Lists reachable AccessPoints on top of the list
+        final List<AccessPoint> savedAccessPoints =
+                WifiSavedConfigUtils.getAllConfigs(getContext(), mWifiManager);
+        Collections.sort(savedAccessPoints, SavedNetworkComparator.INSTANCE);
 
         int index = 0;
-        for (; index < accessPoints.size(); index++) {
-            AccessPoint accessPoint = accessPoints.get(index);
-            // Check if this access point is valid for DPP.
-            if (isValidForDppConfiguration(accessPoint)) {
-                final String key = accessPoint.getKey();
+        mAccessPointsPreferenceCategory.removeAll();
+        for (AccessPoint savedAccessPoint : savedAccessPoints) {
+            if (isValidForDppConfiguration(savedAccessPoint)) {
+                // Replaces with an AccessPoint from scanned result for signal information
+                savedAccessPoint = getScannedAccessPointIfAvailable(savedAccessPoint);
+                final AccessPointPreference preference =
+                        createAccessPointPreference(savedAccessPoint);
 
-                final AccessPointPreference pref = (AccessPointPreference) getCachedPreference(key);
-                if (pref != null) {
-                    pref.setOrder(index);
-                    continue;
-                }
-                final AccessPointPreference preference = createAccessPointPreference(accessPoint);
-                preference.setKey(key);
-                preference.setOrder(index);
+                preference.setOrder(index++);
+                preference.setEnabled(savedAccessPoint.isReachable());
+                savedAccessPoint.setListener(this);
 
-                mAccessPointsPreferenceCategory.addPreference(preference);
-                accessPoint.setListener(this);
                 preference.refresh();
+                mAccessPointsPreferenceCategory.addPreference(preference);
             }
         }
-        removeCachedPrefs(mAccessPointsPreferenceCategory);
         mAddPreference.setOrder(index);
         mAccessPointsPreferenceCategory.addPreference(mAddPreference);
 
         if (mIsTest) {
-            mFakeNetworkPreference.setOrder(index + 1);
             mAccessPointsPreferenceCategory.addPreference(mFakeNetworkPreference);
         }
+    }
+
+    private AccessPoint getScannedAccessPointIfAvailable(AccessPoint savedAccessPoint) {
+        final List<AccessPoint> scannedAccessPoints = mWifiTracker.getAccessPoints();
+        final WifiConfiguration savedWifiConfiguration = savedAccessPoint.getConfig();
+        for (AccessPoint scannedAccessPoint : scannedAccessPoints) {
+            if (scannedAccessPoint.matches(savedWifiConfiguration)) {
+                return scannedAccessPoint;
+            }
+        }
+        return savedAccessPoint;
     }
 
     private AccessPointPreference createAccessPointPreference(AccessPoint accessPoint) {

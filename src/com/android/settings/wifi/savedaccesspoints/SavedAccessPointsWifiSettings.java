@@ -75,6 +75,8 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
                 .getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         use(SavedAccessPointsPreferenceController.class)
                 .setHost(this);
+        use(SubscribedAccessPointsPreferenceController.class)
+                .setHost(this);
     }
 
     @Override
@@ -106,7 +108,6 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
             }
             final Bundle savedState = new Bundle();
             mSelectedAccessPoint.saveWifiState(savedState);
-            savedState.putBoolean(WifiNetworkDetailsFragment.EXTRA_IS_SAVED_NETWORK, true);
 
             new SubSettingLauncher(getContext())
                     .setTitleText(mSelectedAccessPoint.getTitle())
@@ -172,10 +173,15 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
                     Log.e(TAG, "Failed to remove Passpoint configuration for "
                             + mSelectedAccessPoint.getConfigName());
                 }
-                use(SavedAccessPointsPreferenceController.class)
-                        .postRefreshSavedAccessPoints();
+                if (isSubscriptionsFeatureEnabled()) {
+                    use(SubscribedAccessPointsPreferenceController.class)
+                            .postRefreshSubscribedAccessPoints();
+                } else {
+                    use(SavedAccessPointsPreferenceController.class)
+                            .postRefreshSavedAccessPoints();
+                }
             } else {
-                // mForgetListener will call initPreferences upon completion
+                // both onSuccess/onFailure will call postRefreshSavedAccessPoints
                 mWifiManager.forget(mSelectedAccessPoint.getConfig().networkId,
                         use(SavedAccessPointsPreferenceController.class));
             }
@@ -192,10 +198,11 @@ public class SavedAccessPointsWifiSettings extends DashboardFragment
      * Checks if showing WifiNetworkDetailsFragment when clicking saved network item.
      */
     public static boolean usingDetailsFragment(Context context) {
-        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.MOBILE_NETWORK_V2)
-                && FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
-            return false;    // TODO(b/124695272): mark true when UI is ready.
-        }
-        return false;
+        return FeatureFlagUtils.isEnabled(context, FeatureFlags.WIFI_DETAILS_SAVED_SCREEN);
+    }
+
+    boolean isSubscriptionsFeatureEnabled() {
+        return FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.MOBILE_NETWORK_V2)
+                && FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2);
     }
 }
