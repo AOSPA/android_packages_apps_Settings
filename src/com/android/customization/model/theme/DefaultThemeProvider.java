@@ -15,16 +15,19 @@
  */
 package com.android.customization.model.theme;
 
+import static com.android.customization.model.ResourceConstants.ACCENT_COLOR_DARK_NAME;
+import static com.android.customization.model.ResourceConstants.ACCENT_COLOR_LIGHT_NAME;
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
 import static com.android.customization.model.ResourceConstants.CONFIG_ICON_MASK;
-import static com.android.customization.model.ResourceConstants.ICON_PREVIEW_DRAWABLE_NAME;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
+import static com.android.customization.model.ResourceConstants.ICONS_FOR_PREVIEW;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_LAUNCHER;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SETTINGS;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
 import static com.android.customization.model.ResourceConstants.SETTINGS_PACKAGE;
-import static com.android.customization.model.ResourceConstants.SYSUI_ICONS_FOR_PREVIEW;
 import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 
 import android.content.Context;
@@ -68,8 +71,6 @@ import java.util.function.Consumer;
 public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeBundleProvider {
 
     private static final String TAG = "DefaultThemeProvider";
-    // TODO(b/124796742): remove once custom theme picker is ready to merge
-    private static final boolean SHOW_CUSTOM_THEME_OPTION = false;
 
     private static final String THEMES_ARRAY = "themes";
     private static final String TITLE_PREFIX = "theme_title_";
@@ -80,8 +81,6 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     private static final String ICON_LAUNCHER_PREFIX = "theme_overlay_icon_launcher_";
     private static final String ICON_SETTINGS_PREFIX = "theme_overlay_icon_settings_";
     private static final String ICON_SYSUI_PREFIX = "theme_overlay_icon_sysui_";
-    private static final String PREVIEW_COLOR_PREFIX = "theme_preview_color_";
-    private static final String PREVIEW_SHAPE_PREFIX = "theme_preview_shape_";
     private static final String WALLPAPER_PREFIX = "theme_wallpaper_";
     private static final String WALLPAPER_TITLE_PREFIX = "theme_wallpaper_title_";
     private static final String WALLPAPER_ATTRIBUTION_PREFIX = "theme_wallpaper_attribution_";
@@ -89,9 +88,8 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
 
     private static final String DEFAULT_THEME_NAME= "default";
 
-    private static final String ACCENT_COLOR_LIGHT_NAME = "accent_device_default_light";
-    private static final String ACCENT_COLOR_DARK_NAME = "accent_device_default_dark";
-
+    // List of packages
+    private final String[] mShapePreviewIconPackages;
     private List<ThemeBundle> mThemes;
     private Map<String, OverlayInfo> mOverlayInfos;
     private final CustomizationPreferences mCustomizationPreferences;
@@ -110,6 +108,8 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         om.getOverlayInfosForTarget(SYSUI_PACKAGE, user).forEach(addToMap);
         om.getOverlayInfosForTarget(SETTINGS_PACKAGE, user).forEach(addToMap);
         om.getOverlayInfosForTarget(ResourceConstants.getLauncherPackage(context),user).forEach(addToMap);
+        mShapePreviewIconPackages = context.getResources().getStringArray(
+                R.array.icon_shape_preview_packages);
     }
 
     @Override
@@ -141,32 +141,13 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                                 "string", mStubPackageName)));
 
                 String shapeOverlayPackage = getOverlayPackage(SHAPE_PREFIX, themeName);
-                if (!TextUtils.isEmpty(shapeOverlayPackage)) {
-                    builder.addOverlayPackage(getOverlayCategory(shapeOverlayPackage),
-                            shapeOverlayPackage)
-                            .setShapePath(loadString(CONFIG_ICON_MASK, shapeOverlayPackage))
-                            .setShapePreview(getDrawableResourceAsset(
-                                    PREVIEW_SHAPE_PREFIX, themeName));
-                } else {
-                    builder.setShapePath(mContext.getResources().getString(
-                            Resources.getSystem().getIdentifier(CONFIG_ICON_MASK, "string",
-                                    ANDROID_PACKAGE)));
-                }
+                addShapeOverlay(builder, shapeOverlayPackage);
 
                 String fontOverlayPackage = getOverlayPackage(FONT_PREFIX, themeName);
                 addFontOverlay(builder, fontOverlayPackage);
 
                 String colorOverlayPackage = getOverlayPackage(COLOR_PREFIX, themeName);
-                if (!TextUtils.isEmpty(colorOverlayPackage)) {
-                    builder.addOverlayPackage(getOverlayCategory(colorOverlayPackage),
-                                colorOverlayPackage)
-                            .setColorAccentLight(loadColor(ACCENT_COLOR_LIGHT_NAME,
-                                    colorOverlayPackage))
-                            .setColorAccentDark(loadColor(ACCENT_COLOR_DARK_NAME,
-                                    colorOverlayPackage))
-                            .setColorPreview(getDrawableResourceAsset(
-                                    PREVIEW_COLOR_PREFIX, themeName));
-                }
+                addColorOverlay(builder, colorOverlayPackage);
 
                 String iconAndroidOverlayPackage = getOverlayPackage(ICON_ANDROID_PREFIX,
                         themeName);
@@ -214,8 +195,42 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             }
         }
 
-        if (SHOW_CUSTOM_THEME_OPTION) {
-            addCustomTheme();
+        addCustomTheme();
+    }
+
+    private void addColorOverlay(Builder builder, String colorOverlayPackage)
+            throws NameNotFoundException {
+        if (!TextUtils.isEmpty(colorOverlayPackage)) {
+            builder.addOverlayPackage(getOverlayCategory(colorOverlayPackage),
+                        colorOverlayPackage)
+                    .setColorAccentLight(loadColor(ACCENT_COLOR_LIGHT_NAME,
+                            colorOverlayPackage))
+                    .setColorAccentDark(loadColor(ACCENT_COLOR_DARK_NAME,
+                            colorOverlayPackage));
+        } else {
+            addSystemDefaultColor(builder);
+        }
+    }
+
+    private void addShapeOverlay(Builder builder, String shapeOverlayPackage)
+            throws NameNotFoundException {
+        if (!TextUtils.isEmpty(shapeOverlayPackage)) {
+            builder.addOverlayPackage(getOverlayCategory(shapeOverlayPackage),
+                        shapeOverlayPackage)
+                    .setShapePath(loadString(CONFIG_ICON_MASK, shapeOverlayPackage));
+        } else {
+            builder.setShapePath(mContext.getResources().getString(
+                    Resources.getSystem().getIdentifier(CONFIG_ICON_MASK, "string",
+                            ANDROID_PACKAGE)));
+        }
+        for (String packageName : mShapePreviewIconPackages) {
+            try {
+                builder.addShapePreviewIcon(
+                        mContext.getPackageManager().getApplicationIcon(packageName));
+            } catch (NameNotFoundException e) {
+                Log.d(TAG, "Couldn't find app " + packageName
+                        + ", won't use it for icon shape preview");
+            }
         }
     }
 
@@ -229,27 +244,23 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     private void addSysUiIconOverlay(Builder builder, String iconSysUiOverlayPackage)
             throws NameNotFoundException {
         if (!TextUtils.isEmpty(iconSysUiOverlayPackage)) {
-            builder.addOverlayPackage(getOverlayCategory(iconSysUiOverlayPackage),
-                    iconSysUiOverlayPackage);
-            for (String iconName : SYSUI_ICONS_FOR_PREVIEW) {
-                builder.addIcon(loadIconPreviewDrawable(iconName, iconSysUiOverlayPackage));
-            }
+            addIconOverlay(builder, iconSysUiOverlayPackage);
         }
     }
 
     private void addAndroidIconOverlay(Builder builder, String iconAndroidOverlayPackage)
             throws NameNotFoundException {
         if (!TextUtils.isEmpty(iconAndroidOverlayPackage)) {
-            builder.addOverlayPackage(getOverlayCategory(iconAndroidOverlayPackage),
-                        iconAndroidOverlayPackage)
-                    .addIcon(loadIconPreviewDrawable(
-                            ICON_PREVIEW_DRAWABLE_NAME,
-                            iconAndroidOverlayPackage));
+            addIconOverlay(builder, iconAndroidOverlayPackage, ICONS_FOR_PREVIEW);
         } else {
-            builder.addIcon(mContext.getResources().getDrawable(
-                    Resources.getSystem().getIdentifier(
-                            ICON_PREVIEW_DRAWABLE_NAME,
-                            "drawable", ANDROID_PACKAGE), null));
+            addSystemDefaultIcons(builder, ANDROID_PACKAGE, ICONS_FOR_PREVIEW);
+        }
+    }
+    private void addIconOverlay(Builder builder, String packageName, String... previewIcons)
+            throws NameNotFoundException {
+        builder.addOverlayPackage(getOverlayCategory(packageName), packageName);
+        for (String iconName : previewIcons) {
+            builder.addIcon(loadIconPreviewDrawable(iconName, packageName, false));
         }
     }
 
@@ -264,6 +275,8 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                     .setHeadlineFontFamily(loadTypeface(
                             ResourceConstants.CONFIG_HEADLINE_FONT_FAMILY,
                             fontOverlayPackage));
+        } else {
+            addSystemDefaultFont(builder);
         }
     }
 
@@ -274,7 +287,6 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
      */
     private void addDefaultTheme() {
         ThemeBundle.Builder builder = new Builder().asDefault();
-        Resources system = Resources.getSystem();
 
         int titleId = mStubApkResources.getIdentifier(TITLE_PREFIX + DEFAULT_THEME_NAME,
                 "string", mStubPackageName);
@@ -289,20 +301,10 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         try {
             builder.addOverlayPackage(getOverlayCategory(colorOverlayPackage), colorOverlayPackage)
                     .setColorAccentLight(loadColor(ACCENT_COLOR_LIGHT_NAME, colorOverlayPackage))
-                    .setColorAccentDark(loadColor(ACCENT_COLOR_DARK_NAME, colorOverlayPackage))
-                    .setColorPreview(getDrawableResourceAsset(PREVIEW_COLOR_PREFIX,
-                            DEFAULT_THEME_NAME));
+                    .setColorAccentDark(loadColor(ACCENT_COLOR_DARK_NAME, colorOverlayPackage));
         } catch (NameNotFoundException | NotFoundException e) {
             Log.d(TAG, "Didn't find color overlay for default theme, will use system default", e);
-            int colorAccentLight = system.getColor(
-                    system.getIdentifier(ACCENT_COLOR_LIGHT_NAME, "color", ANDROID_PACKAGE), null);
-            builder.setColorAccentLight(colorAccentLight);
-
-            int colorAccentDark = system.getColor(
-                    system.getIdentifier(ACCENT_COLOR_DARK_NAME, "color", ANDROID_PACKAGE), null);
-            builder.setColorAccentDark(colorAccentDark)
-                    .setColorPreview(getDrawableResourceAsset(PREVIEW_COLOR_PREFIX,
-                            DEFAULT_THEME_NAME));
+            addSystemDefaultColor(builder);
         }
 
         String fontOverlayPackage = getOverlayPackage(FONT_PREFIX, DEFAULT_THEME_NAME);
@@ -316,30 +318,26 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                             fontOverlayPackage));
         } catch (NameNotFoundException | NotFoundException e) {
             Log.d(TAG, "Didn't find font overlay for default theme, will use system default", e);
-            String headlineFontFamily = system.getString(system.getIdentifier(
-                    ResourceConstants.CONFIG_HEADLINE_FONT_FAMILY,"string", ANDROID_PACKAGE));
-            String bodyFontFamily = system.getString(system.getIdentifier(
-                    ResourceConstants.CONFIG_BODY_FONT_FAMILY,
-                    "string", ANDROID_PACKAGE));
-            builder.setHeadlineFontFamily(Typeface.create(headlineFontFamily, Typeface.NORMAL))
-                    .setBodyFontFamily(Typeface.create(bodyFontFamily, Typeface.NORMAL));
+            addSystemDefaultFont(builder);
         }
 
         try {
             String shapeOverlayPackage = getOverlayPackage(SHAPE_PREFIX, DEFAULT_THEME_NAME);
             builder.addOverlayPackage(getOverlayCategory(shapeOverlayPackage), shapeOverlayPackage)
-                    .setShapePath(loadString(ICON_PREVIEW_DRAWABLE_NAME, colorOverlayPackage))
-                    .setShapePreview(getDrawableResourceAsset(PREVIEW_SHAPE_PREFIX,
-                            DEFAULT_THEME_NAME));
+                    .setShapePath(loadString(CONFIG_ICON_MASK, shapeOverlayPackage));
         } catch (NameNotFoundException | NotFoundException e) {
             Log.d(TAG, "Didn't find shape overlay for default theme, will use system default", e);
-            String iconMaskPath = system.getString(system.getIdentifier(CONFIG_ICON_MASK,
-                    "string", ANDROID_PACKAGE));
-            builder.setShapePath(iconMaskPath)
-                    .setShapePreview(getDrawableResourceAsset(PREVIEW_SHAPE_PREFIX,
-                            DEFAULT_THEME_NAME));
+            addSystemDefaultShape(builder);
         }
-
+        for (String packageName : mShapePreviewIconPackages) {
+            try {
+                builder.addShapePreviewIcon(
+                        mContext.getPackageManager().getApplicationIcon(packageName));
+            } catch (NameNotFoundException e) {
+                Log.d(TAG, "Couldn't find app " + packageName + ", won't use it for icon shape"
+                        + "preview");
+            }
+        }
 
         try {
             String iconAndroidOverlayPackage = getOverlayPackage(ICON_ANDROID_PREFIX,
@@ -347,13 +345,11 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             builder.addOverlayPackage(getOverlayCategory(iconAndroidOverlayPackage),
                         iconAndroidOverlayPackage)
                     .addIcon(loadIconPreviewDrawable(ICON_ANDROID_PREFIX,
-                            iconAndroidOverlayPackage));
+                            iconAndroidOverlayPackage, false));
         } catch (NameNotFoundException | NotFoundException e) {
             Log.d(TAG, "Didn't find Android icons overlay for default theme, using system default",
                     e);
-            builder.addIcon(system.getDrawable(system.getIdentifier(
-                    ICON_PREVIEW_DRAWABLE_NAME,
-                            "drawable", ANDROID_PACKAGE), null));
+            addSystemDefaultIcons(builder, ANDROID_PACKAGE, ICONS_FOR_PREVIEW);
         }
 
         try {
@@ -363,13 +359,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         } catch (NameNotFoundException | NotFoundException e) {
             Log.d(TAG, "Didn't find SystemUi icons overlay for default theme, using system default",
                     e);
-            try {
-                for (String iconName : SYSUI_ICONS_FOR_PREVIEW) {
-                    builder.addIcon(loadIconPreviewDrawable(iconName, SYSUI_PACKAGE));
-                }
-            } catch (NameNotFoundException | NotFoundException e2) {
-                Log.w(TAG, "Didn't find SystemUi package icons, will skip preview", e);
-            }
+            addSystemDefaultIcons(builder, SYSUI_PACKAGE, ICONS_FOR_PREVIEW);
         }
 
         try {
@@ -399,9 +389,54 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         mThemes.add(builder.build());
     }
 
+    private void addSystemDefaultIcons(Builder builder, String packageName, String... previewIcons) {
+        try {
+            for (String iconName : previewIcons) {
+                builder.addIcon(loadIconPreviewDrawable(iconName, packageName, true));
+            }
+        } catch (NameNotFoundException | NotFoundException e) {
+            Log.w(TAG, "Didn't find android package icons, will skip preview", e);
+        }
+    }
+
+    private void addSystemDefaultShape(Builder builder) {
+        Resources system = Resources.getSystem();
+        String iconMaskPath = system.getString(system.getIdentifier(CONFIG_ICON_MASK,
+                "string", ANDROID_PACKAGE));
+        builder.setShapePath(iconMaskPath);
+    }
+
+    private void addSystemDefaultColor(Builder builder) {
+        Resources system = Resources.getSystem();
+        int colorAccentLight = system.getColor(
+                system.getIdentifier(ACCENT_COLOR_LIGHT_NAME, "color", ANDROID_PACKAGE), null);
+        builder.setColorAccentLight(colorAccentLight);
+
+        int colorAccentDark = system.getColor(
+                system.getIdentifier(ACCENT_COLOR_DARK_NAME, "color", ANDROID_PACKAGE), null);
+        builder.setColorAccentDark(colorAccentDark);
+    }
+
+    private void addSystemDefaultFont(Builder builder) {
+        Resources system = Resources.getSystem();
+        String headlineFontFamily = system.getString(system.getIdentifier(
+                ResourceConstants.CONFIG_HEADLINE_FONT_FAMILY,"string", ANDROID_PACKAGE));
+        String bodyFontFamily = system.getString(system.getIdentifier(
+                ResourceConstants.CONFIG_BODY_FONT_FAMILY,
+                "string", ANDROID_PACKAGE));
+        builder.setHeadlineFontFamily(Typeface.create(headlineFontFamily, Typeface.NORMAL))
+                .setBodyFontFamily(Typeface.create(bodyFontFamily, Typeface.NORMAL));
+    }
+
     @Override
     public void storeCustomTheme(CustomTheme theme) {
         mCustomizationPreferences.storeCustomTheme(theme.getSerializedPackages());
+    }
+
+    @Override
+    public void removeCustomTheme(CustomTheme theme) {
+        //TODO: add support for multiple custom themes.
+        mCustomizationPreferences.storeCustomTheme("");
     }
 
     private void addCustomTheme() {
@@ -436,7 +471,9 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             }
             CustomTheme.Builder builder = new CustomTheme.Builder();
             builder.setTitle(mContext.getString(R.string.custom_theme_title));
+            addShapeOverlay(builder, customPackages.get(OVERLAY_CATEGORY_SHAPE));
             addFontOverlay(builder, customPackages.get(OVERLAY_CATEGORY_FONT));
+            addColorOverlay(builder, customPackages.get(OVERLAY_CATEGORY_COLOR));
             addAndroidIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_ANDROID));
             addSysUiIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_SYSUI));
             addNoPreviewIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_SETTINGS));
@@ -489,17 +526,31 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         return overlayRes.getString(overlayRes.getIdentifier(stringName, "string", packageName));
     }
 
-    private Drawable loadIconPreviewDrawable(String drawableName, String packageName)
-         throws NameNotFoundException, NotFoundException {
+    private Drawable loadIconPreviewDrawable(String drawableName, String packageName,
+            boolean fromSystem) throws NameNotFoundException, NotFoundException {
 
-        Resources overlayRes = mContext.getPackageManager().getResourcesForApplication(packageName);
-        return overlayRes.getDrawable(
-                overlayRes.getIdentifier(drawableName, "drawable", packageName), null);
+        Resources packageRes = mContext.getPackageManager().getResourcesForApplication(packageName);
+        Resources res = fromSystem ? Resources.getSystem() : packageRes;
+        return res.getDrawable(
+                packageRes.getIdentifier(drawableName, "drawable", packageName), null);
     }
 
     @Nullable
     private String getOverlayCategory(String packageName) {
        OverlayInfo info = mOverlayInfos.get(packageName);
        return info != null ? info.category : null;
+    }
+
+    @Override
+    public ThemeBundle findEquivalent(ThemeBundle other) {
+        if (mThemes == null) {
+            return null;
+        }
+        for (ThemeBundle theme : mThemes) {
+            if (theme.isEquivalent(other)) {
+                return theme;
+            }
+        }
+        return null;
     }
 }

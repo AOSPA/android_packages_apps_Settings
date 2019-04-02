@@ -65,5 +65,5 @@ public interface CustomizationManager<T extends CustomizationOption> {
      * Loads the available options for the type of Customization managed by this class, calling the
      * given callback when done.
      */
-    void fetchOptions(OptionsFetchedListener<T> callback);
+    void fetchOptions(OptionsFetchedListener<T> callback, boolean reload);
 }

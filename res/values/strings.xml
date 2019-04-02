@@ -20,7 +20,7 @@
 
     <!-- Title of a section of the customization picker where the user can select a Theme for the
         device. [CHAR LIMIT=15] -->
-    <string name="theme_title">Style</string>
+    <string name="theme_title" translatable="false">Style</string>
 
     <!-- Title of a section of the customization picker where the user can select a Clock face.
         [CHAR LIMIT=15] -->
@@ -109,11 +109,21 @@
         [CHAR LIMIT=30] -->
     <string name="custom_theme_fragment_title">Custom Style</string>
 
+    <!-- Title of a menu option that removes the custom theme being currently edited
+        [CHAR LIMIT=30] -->
+    <string name="custom_theme_delete">Delete</string>
+
     <!-- Title of a page allowing the user to choose a font for a custom theme -->
     <string name="font_component_title">Choose font</string>
 
     <!-- Title of a page allowing the user to choose an icon set for a custom theme -->
     <string name="icon_component_title">Choose icons</string>
+
+    <!-- Title of a page allowing the user to choose a color for a custom theme -->
+    <string name="color_component_title">Choose color</string>
+
+    <!-- Title of a page allowing the user to choose an icon shape for a custom theme -->
+    <string name="shape_component_title">Choose shape</string>
 
     <!-- Title of a set of icons that the user can chose for their custom style (eg, "Icons 2") -->
     <string name="icon_component_label">Icons <xliff:g name="component_number" example="1">%1$d</xliff:g></string>
@@ -124,4 +134,36 @@
     <!-- Text explaining what the current step is in setting a custom theme, eg: "1 of 4".
     [CHAR_LIMIT=40] -->
     <string name="component_step_counter"><xliff:g name="current_step" example="1">%1$d</xliff:g> of <xliff:g name="total_steps" example="4">%2$d</xliff:g></string>
+
+    <!-- Dialog box asking the user to confirm if they want to delete the current custom style
+        [CHAR_LIMIT=NONE] -->
+    <string name="delete_custom_theme_confirmation">Delete Custom style?</string>
+
+    <!-- Button in a dialog box confirming that the current style will be deleted [CHAR_LIMIT=20] -->
+    <string name="delete_custom_theme_button">Delete</string>
+
+    <!-- Generic label for canceling the current action [CHAR_LIMIT=20] -->
+    <string name="cancel">Cancel</string>
+
+    <!-- Label for a dialog which asks the user the destination (home screen, lock screen, both)
+        where to set the theme's bundled image as wallpaper. [CHAR LIMIT=50] -->
+    <string name="set_theme_wallpaper_dialog_message">Set style wallpaper</string>
+
+    <!-- Title for a dialog box asking the user to use an existing, equivalent theme (style) instead
+        of their customly defined one. [CHAR_LIMIT=30] -->
+    <string name="use_style_instead_title">Use <xliff:g name="style_name">%1$s</xliff:g> instead?</string>
+
+    <!-- Body for a dialog box asking the user to use an existing, equivalent theme (style) instead
+        of their customly defined one. [CHAR_LIMIT=NONE] -->
+    <string name="use_style_instead_body">The components you chose match the <xliff:g name="style_name">%1$s</xliff:g> style. Do you want to use <xliff:g name="style_name">%1$s</xliff:g> instead?</string>
+
+    <!-- Label for a button in the dialog box that asks the user to use an existing, theme (style)
+        instead of their customly defined one. The button let's the user use the suggested theme
+        [CHAR_LIMIT=15] -->
+    <string name="use_style_button">Use <xliff:g name="style_name">%1$s</xliff:g></string>
+
+    <!-- Label for a button in the dialog box that asks the user to use an existing, theme (style)
+        instead of their customly defined one. The button dismisses the dialog and goes back to the
+        previous screen. [CHAR_LIMIT=15]  -->
+    <string name="no_thanks">No, thanks</string>
 </resources>

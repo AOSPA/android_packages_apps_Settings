@@ -17,6 +17,7 @@
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -43,11 +44,12 @@
             android:id="@+id/arrow_previous"
             android:layout_width="@dimen/indicator_arrow_touch_area_size"
             android:layout_height="@dimen/indicator_arrow_touch_area_size"
-            android:layout_gravity="center_vertical|start"
+            android:layout_gravity="center_vertical|left"
             android:layout_marginStart="@dimen/indicator_arrow_container_margin_horizontal"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/previous_page_content_description"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:ignore="RtlHardcoded">
 
             <ImageView
                 android:layout_width="@dimen/indicator_arrow_size"
@@ -62,11 +64,12 @@
             android:id="@+id/arrow_next"
             android:layout_width="@dimen/indicator_arrow_touch_area_size"
             android:layout_height="@dimen/indicator_arrow_touch_area_size"
-            android:layout_gravity="center_vertical|end"
+            android:layout_gravity="center_vertical|right"
             android:layout_marginEnd="@dimen/indicator_arrow_container_margin_horizontal"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/next_page_content_description"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:ignore="RtlHardcoded">
 
             <ImageView
                 android:layout_width="@dimen/indicator_arrow_size"

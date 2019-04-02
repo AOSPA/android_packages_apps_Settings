@@ -67,12 +67,12 @@ public class ThemeManagerTest {
     @Mock WallpaperSetter mMockWallpaperSetter;
     private OverlayManagerMocks mMockOmHelper;
     private ThemeManager mThemeManager;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        Activity activity = Robolectric.buildActivity(FragmentActivity.class).get();
+        FragmentActivity activity = Robolectric.buildActivity(FragmentActivity.class).get();
         mActivity = spy(activity);
         mMockOmHelper = new OverlayManagerMocks();
         mMockOmHelper.setUpMock(mMockOm);

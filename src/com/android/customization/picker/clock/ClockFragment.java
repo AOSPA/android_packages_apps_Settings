@@ -57,7 +57,7 @@ public class ClockFragment extends ToolbarFragment {
     }
 
     private RecyclerView mOptionsContainer;
-    private OptionSelectorController mOptionsController;
+    private OptionSelectorController<Clockface> mOptionsController;
     private Clockface mSelectedOption;
     private ClockManager mClockManager;
     private PreviewPager mPreviewPager;
@@ -101,7 +101,7 @@ public class ClockFragment extends ToolbarFragment {
 
     private void setUpOptions() {
         mClockManager.fetchOptions(options -> {
-            mOptionsController = new OptionSelectorController(mOptionsContainer, options);
+            mOptionsController = new OptionSelectorController<>(mOptionsContainer, options);
 
             mOptionsController.addListener(selected -> {
                 mSelectedOption = (Clockface) selected;
@@ -118,7 +118,7 @@ public class ClockFragment extends ToolbarFragment {
                 mSelectedOption = options.get(0);
             }
             createAdapter();
-        });
+        }, false);
     }
 
     private static class ClockfacePreviewPage extends PreviewPage {
