@@ -23,15 +23,18 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.core.text.TextUtilsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import com.android.wallpaper.R;
+
+import java.util.Locale;
 
 /**
  * A Widget consisting of a ViewPager linked to a PageIndicator and previous/next arrows that can be
@@ -71,6 +74,8 @@ public class PreviewPager extends LinearLayout {
                 R.styleable.PreviewPager, defStyleAttr, 0);
 
         mPageStyle = a.getInteger(R.styleable.PreviewPager_card_style, STYLE_PEEKING);
+
+        a.recycle();
 
         mViewPager = findViewById(R.id.preview_viewpager);
         mViewPager.setPageMargin(res.getDimensionPixelOffset(R.dimen.preview_page_gap));
@@ -148,7 +153,16 @@ public class PreviewPager extends LinearLayout {
     public void setAdapter(PagerAdapter adapter) {
         mAdapter = adapter;
         mViewPager.setAdapter(adapter);
-
+        if (ViewCompat.isLayoutDirectionResolved(mViewPager)) {
+            if (ViewCompat.getLayoutDirection(mViewPager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
+                mViewPager.setCurrentItem(mAdapter.getCount() - 1);
+            }
+        } else {
+            if (TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault())
+                    == ViewCompat.LAYOUT_DIRECTION_RTL) {
+                mViewPager.setCurrentItem(mAdapter.getCount() - 1);
+            }
+        }
         mAdapter.registerDataSetObserver(new DataSetObserver() {
             @Override
             public void onChanged() {
@@ -178,7 +192,7 @@ public class PreviewPager extends LinearLayout {
                      int position, float positionOffset, int positionOffsetPixels) {
                  // For certain sizes, positionOffset never makes it to 1, so round it as we don't
                  // need that much precision
-                 float location = (float)Math.round((position + positionOffset) * 100) / 100;
+                 float location = (float) Math.round((position + positionOffset) * 100) / 100;
                  mPageIndicator.setLocation(location);
                  if (mExternalPageListener != null) {
                      mExternalPageListener.onPageScrolled(position, positionOffset,

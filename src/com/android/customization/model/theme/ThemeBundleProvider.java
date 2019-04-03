@@ -41,5 +41,9 @@ public interface ThemeBundleProvider {
 
     void storeCustomTheme(CustomTheme theme);
 
+    void removeCustomTheme(CustomTheme theme);
+
     @Nullable Builder parseCustomTheme(String serializedTheme);
+
+    ThemeBundle findEquivalent(ThemeBundle other);
 }

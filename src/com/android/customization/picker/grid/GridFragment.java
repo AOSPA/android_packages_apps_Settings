@@ -77,7 +77,7 @@ public class GridFragment extends ToolbarFragment {
     private BitmapDrawable mCardBackground;
     private GridPreviewAdapter mAdapter;
     private RecyclerView mOptionsContainer;
-    private OptionSelectorController mOptionsController;
+    private OptionSelectorController<GridOption> mOptionsController;
     private GridOptionsManager mGridManager;
     private GridOption mSelectedOption;
     private PreviewPager mPreviewPager;
@@ -158,7 +158,7 @@ public class GridFragment extends ToolbarFragment {
 
     private void setUpOptions() {
         mGridManager.fetchOptions(options -> {
-            mOptionsController = new OptionSelectorController(mOptionsContainer, options);
+            mOptionsController = new OptionSelectorController<>(mOptionsContainer, options);
 
             mOptionsController.addListener(selected -> {
                 mSelectedOption = (GridOption) selected;
@@ -175,7 +175,7 @@ public class GridFragment extends ToolbarFragment {
                 mSelectedOption = options.get(0);
             }
             createAdapter();
-        });
+        }, false);
     }
 
     private class GridPreviewPage extends PreviewPage {

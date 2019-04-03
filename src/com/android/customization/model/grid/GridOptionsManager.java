@@ -51,7 +51,7 @@ public class GridOptionsManager implements CustomizationManager<GridOption> {
     }
 
     @Override
-    public void fetchOptions(OptionsFetchedListener<GridOption> callback) {
+    public void fetchOptions(OptionsFetchedListener<GridOption> callback, boolean reload) {
         new FetchTask(mProvider, callback).execute();
     }
 

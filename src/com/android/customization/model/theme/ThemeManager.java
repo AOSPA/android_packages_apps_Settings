@@ -26,20 +26,23 @@ import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY
 import static com.android.customization.model.ResourceConstants.SETTINGS_PACKAGE;
 import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 
-import android.app.Activity;
 import android.graphics.Point;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.ResourceConstants;
 import com.android.customization.model.theme.custom.CustomTheme;
+import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
 import com.android.wallpaper.module.WallpaperPersister;
 import com.android.wallpaper.module.WallpaperPersister.SetWallpaperCallback;
 import com.android.wallpaper.module.WallpaperSetter;
+import com.android.wallpaper.picker.SetWallpaperDialogFragment.Listener;
 import com.android.wallpaper.util.WallpaperCropUtils;
 
 import java.util.HashSet;
@@ -64,11 +67,11 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     private final OverlayManagerCompat mOverlayManagerCompat;
 
     private final WallpaperSetter mWallpaperSetter;
-    private final Activity mActivity;
+    private final FragmentActivity mActivity;
 
     private Map<String, String> mCurrentOverlays;
 
-    public ThemeManager(ThemeBundleProvider provider, Activity activity,
+    public ThemeManager(ThemeBundleProvider provider, FragmentActivity activity,
             WallpaperSetter wallpaperSetter, OverlayManagerCompat overlayManagerCompat) {
         mProvider = provider;
         mActivity = activity;
@@ -85,23 +88,48 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     public void apply(ThemeBundle theme, Callback callback) {
         // Set wallpaper
         if (theme.shouldUseThemeWallpaper()) {
-            applyWallpaper(theme, new SetWallpaperCallback() {
-                @Override
-                public void onSuccess() {
-                    applyOverlays(theme, callback);
-                }
+            mWallpaperSetter.requestDestination(mActivity, mActivity.getSupportFragmentManager(),
+                    R.string.set_theme_wallpaper_dialog_message, new Listener() {
+                        @Override
+                        public void onSetHomeScreen() {
+                            applyWallpaper(theme, WallpaperPersister.DEST_HOME_SCREEN,
+                                    createSetWallpaperCallback(theme, callback));
+                        }
 
-                @Override
-                public void onError(@Nullable Throwable throwable) {
-                    callback.onError(throwable);
-                }
-            });
+                        @Override
+                        public void onSetLockScreen() {
+                            applyWallpaper(theme, WallpaperPersister.DEST_LOCK_SCREEN,
+                                    createSetWallpaperCallback(theme, callback));
+                        }
+
+                        @Override
+                        public void onSetBoth() {
+                            applyWallpaper(theme, WallpaperPersister.DEST_BOTH,
+                                    createSetWallpaperCallback(theme, callback));
+                        }
+                    });
+
         } else {
             applyOverlays(theme, callback);
         }
     }
 
-    private void applyWallpaper(ThemeBundle theme, SetWallpaperCallback callback) {
+    private SetWallpaperCallback createSetWallpaperCallback(ThemeBundle theme, Callback callback) {
+        return new SetWallpaperCallback() {
+            @Override
+            public void onSuccess() {
+                applyOverlays(theme, callback);
+            }
+
+            @Override
+            public void onError(@Nullable Throwable throwable) {
+                callback.onError(throwable);
+            }
+        };
+    }
+
+    private void applyWallpaper(ThemeBundle theme, int destination,
+            SetWallpaperCallback callback) {
         Point defaultCropSurfaceSize = WallpaperCropUtils.getDefaultCropSurfaceSize(
                 mActivity.getResources(),
                 mActivity.getWindowManager().getDefaultDisplay());
@@ -116,7 +144,7 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
                     mWallpaperSetter.setCurrentWallpaper(mActivity,
                             theme.getWallpaperInfo(),
                             wallpaperAsset,
-                            WallpaperPersister.DEST_BOTH,
+                            destination,
                             scale, null, callback);
                 });
     }
@@ -124,21 +152,26 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     private void applyOverlays(ThemeBundle theme, Callback callback) {
         boolean allApplied = true;
         if (theme.isDefault()) {
+            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_SHAPE);
             allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_COLOR);
             allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_FONT);
-            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_SHAPE);
             allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_ICON_ANDROID);
             allApplied &= disableCurrentOverlay(SYSUI_PACKAGE, OVERLAY_CATEGORY_ICON_SYSUI);
             allApplied &= disableCurrentOverlay(SETTINGS_PACKAGE, OVERLAY_CATEGORY_ICON_SETTINGS);
             allApplied &= disableCurrentOverlay(ResourceConstants.getLauncherPackage(mActivity),
                     OVERLAY_CATEGORY_ICON_LAUNCHER);
         } else {
-            for (String packageName : theme.getAllPackages()) {
-                if (packageName != null) {
-                    allApplied &= mOverlayManagerCompat.setEnabledExclusiveInCategory(packageName,
-                            UserHandle.myUserId());
-                }
-            }
+            allApplied &= applyOverlayOrDefault(theme, ANDROID_PACKAGE, OVERLAY_CATEGORY_SHAPE);
+            allApplied &= applyOverlayOrDefault(theme, ANDROID_PACKAGE, OVERLAY_CATEGORY_COLOR);
+            allApplied &= applyOverlayOrDefault(theme, ANDROID_PACKAGE, OVERLAY_CATEGORY_FONT);
+            allApplied &= applyOverlayOrDefault(theme, ANDROID_PACKAGE,
+                    OVERLAY_CATEGORY_ICON_ANDROID);
+            allApplied &= applyOverlayOrDefault(theme, SYSUI_PACKAGE, OVERLAY_CATEGORY_ICON_SYSUI);
+            allApplied &= applyOverlayOrDefault(theme, SETTINGS_PACKAGE,
+                    OVERLAY_CATEGORY_ICON_SETTINGS);
+            allApplied &= applyOverlayOrDefault(theme,
+                    ResourceConstants.getLauncherPackage(mActivity),
+                    OVERLAY_CATEGORY_ICON_LAUNCHER);
         }
         allApplied &= Settings.Secure.putString(mActivity.getContentResolver(),
                 ResourceConstants.THEME_SETTING, theme.getSerializedPackages());
@@ -158,8 +191,8 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     }
 
     @Override
-    public void fetchOptions(OptionsFetchedListener<ThemeBundle> callback) {
-        mProvider.fetch(callback, false);
+    public void fetchOptions(OptionsFetchedListener<ThemeBundle> callback, boolean reload) {
+        mProvider.fetch(callback, reload);
     }
 
     private boolean disableCurrentOverlay(String targetPackage, String category) {
@@ -169,6 +202,16 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
            return mOverlayManagerCompat.disableOverlay(currentPackageName, UserHandle.myUserId());
         }
         return true;
+    }
+
+    private boolean applyOverlayOrDefault(ThemeBundle theme, String targetPkg, String category) {
+        String themePackage = theme.getPackagesByCategory().get(category);
+        if (!TextUtils.isEmpty(themePackage)) {
+            return mOverlayManagerCompat.setEnabledExclusiveInCategory(themePackage,
+                    UserHandle.myUserId());
+        } else {
+            return disableCurrentOverlay(targetPkg, category);
+        }
     }
 
     public Map<String, String> getCurrentOverlays() {
@@ -184,5 +227,18 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     public String getStoredOverlays() {
         return Settings.Secure.getString(mActivity.getContentResolver(),
                 ResourceConstants.THEME_SETTING);
+    }
+
+    public void removeCustomTheme(CustomTheme theme) {
+        mProvider.removeCustomTheme(theme);
+    }
+
+    /**
+     * @return an existing ThemeBundle that matches the same packages as the given one, if one
+     * exists, or {@code null} otherwise.
+     */
+    @Nullable
+    public ThemeBundle findThemeByPackages(ThemeBundle other) {
+        return mProvider.findEquivalent(other);
     }
 }
