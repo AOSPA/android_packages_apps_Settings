@@ -19,8 +19,6 @@ package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -39,44 +37,50 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class SpecialCaseSliceManagerTest {
 
-    private Context mContext;
+    private final String FAKE_PARAMETER_KEY = "fake_parameter_key";
+    private final String FAKE_PARAMETER_VALUE = "fake_value";
 
-    private CustomSliceManager mCustomSliceManager;
+    private Context mContext;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mCustomSliceManager = spy(new CustomSliceManager(mContext));
-        mCustomSliceManager.mUriMap.clear();
-        mCustomSliceManager.mUriMap.put(FakeSliceable.URI, FakeSliceable.class);
+        CustomSliceRegistry.sUriToSlice.clear();
+        CustomSliceRegistry.sUriToSlice.put(FakeSliceable.URI, FakeSliceable.class);
     }
 
     @Test
     public void getSliceableFromUri_returnsCorrectObject() {
-        final CustomSliceable sliceable = mCustomSliceManager.getSliceableFromUri(
-                FakeSliceable.URI);
+        final CustomSliceable sliceable = CustomSliceable.createInstance(
+                mContext, CustomSliceRegistry.getSliceClassByUri(FakeSliceable.URI));
 
         assertThat(sliceable).isInstanceOf(FakeSliceable.class);
     }
 
     @Test
-    public void getSliceableFromIntentAction_returnsCorrectObject() {
-        final CustomSliceable sliceable =
-                mCustomSliceManager.getSliceableFromIntentAction(FakeSliceable.URI.toString());
+    public void getSliceableFromUriWithParameter_returnsCorrectObject() {
+        final Uri parameterUri = FakeSliceable.URI
+                .buildUpon()
+                .clearQuery()
+                .appendQueryParameter(FAKE_PARAMETER_KEY, FAKE_PARAMETER_VALUE)
+                .build();
+
+        final CustomSliceable sliceable = CustomSliceable.createInstance(
+                mContext, CustomSliceRegistry.getSliceClassByUri(parameterUri));
 
         assertThat(sliceable).isInstanceOf(FakeSliceable.class);
     }
 
     @Test
     public void isValidUri_validUri_returnsTrue() {
-        final boolean isValidUri = mCustomSliceManager.isValidUri(FakeSliceable.URI);
+        final boolean isValidUri = CustomSliceRegistry.isValidUri(FakeSliceable.URI);
 
         assertThat(isValidUri).isTrue();
     }
 
     @Test
     public void isValidUri_invalidUri_returnsFalse() {
-        final boolean isValidUri = mCustomSliceManager.isValidUri(null);
+        final boolean isValidUri = CustomSliceRegistry.isValidUri(null);
 
         assertThat(isValidUri).isFalse();
     }
@@ -84,14 +88,14 @@ public class SpecialCaseSliceManagerTest {
     @Test
     public void isValidAction_validActions_returnsTrue() {
         final boolean isValidAction =
-                mCustomSliceManager.isValidAction(FakeSliceable.URI.toString());
+                CustomSliceRegistry.isValidAction(FakeSliceable.URI.toString());
 
         assertThat(isValidAction).isTrue();
     }
 
     @Test
     public void isValidAction_invalidAction_returnsFalse() {
-        final boolean isValidAction = mCustomSliceManager.isValidAction("action");
+        final boolean isValidAction = CustomSliceRegistry.isValidAction("action");
 
         assertThat(isValidAction).isFalse();
     }
