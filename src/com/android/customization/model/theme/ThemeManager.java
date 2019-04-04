@@ -196,22 +196,11 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     }
 
     private boolean disableCurrentOverlay(String targetPackage, String category) {
-        String currentPackageName = mOverlayManagerCompat.getEnabledPackageName(targetPackage,
-                category);
-        if (currentPackageName != null) {
-           return mOverlayManagerCompat.disableOverlay(currentPackageName, UserHandle.myUserId());
-        }
         return true;
     }
 
     private boolean applyOverlayOrDefault(ThemeBundle theme, String targetPkg, String category) {
-        String themePackage = theme.getPackagesByCategory().get(category);
-        if (!TextUtils.isEmpty(themePackage)) {
-            return mOverlayManagerCompat.setEnabledExclusiveInCategory(themePackage,
-                    UserHandle.myUserId());
-        } else {
-            return disableCurrentOverlay(targetPkg, category);
-        }
+        return true;
     }
 
     public Map<String, String> getCurrentOverlays() {
