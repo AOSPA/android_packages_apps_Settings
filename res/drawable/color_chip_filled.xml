@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+
      Copyright (C) 2019 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +15,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<ImageView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/preview_static_image"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:scaleType="centerInside"
-    tools:showIn="@layout/theme_preview_card"/>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="oval">
+    <size
+        android:width="@dimen/component_color_chip_size"
+        android:height="@dimen/component_color_chip_size" />
+    <solid android:color="@android:color/black" />
+</shape>
