@@ -15,9 +15,11 @@
  */
 package com.android.customization.picker.theme;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -70,7 +72,7 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
     @StringRes private int mTitleResId;
 
     private RecyclerView mOptionsContainer;
-    private OptionSelectorController mOptionsController;
+    private OptionSelectorController<ThemeComponentOption> mOptionsController;
     private CardView mPreviewCard;
     private TextView mTitle;
     private ThemeComponentOption mSelectedOption;
@@ -97,7 +99,14 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(
                 R.layout.fragment_custom_theme_component, container, /* attachToRoot */ false);
-        setUpToolbar(view);
+        // No original theme means it's a new one, so no toolbar icon for deleting it is needed
+        if (mCustomThemeManager.getOriginalTheme() == null) {
+            setUpToolbar(view);
+        } else {
+            setUpToolbar(view, R.menu.custom_theme_editor_menu);
+        }
+        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_close_24px, null));
+        mToolbar.setNavigationOnClickListener(v -> mHost.cancel());
         mOptionsContainer = view.findViewById(R.id.options_container);
         mPreviewCard = view.findViewById(R.id.component_preview_card);
         mTitle = view.findViewById(R.id.component_options_title);
@@ -114,6 +123,21 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
     public void onResume() {
         super.onResume();
         mHost.setCurrentStep(mPosition);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId() == R.id.custom_theme_delete) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setMessage(R.string.delete_custom_theme_confirmation)
+                    .setPositiveButton(R.string.delete_custom_theme_button,
+                            (dialogInterface, i) -> mHost.delete())
+                    .setNegativeButton(R.string.cancel, null)
+                    .create()
+                    .show();
+            return true;
+        }
+        return super.onMenuItemClick(item);
     }
 
     public ThemeComponentOption getSelectedOption() {

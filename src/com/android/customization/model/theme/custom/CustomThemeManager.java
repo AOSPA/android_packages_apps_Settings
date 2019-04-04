@@ -28,10 +28,14 @@ import java.util.Map;
 public class CustomThemeManager implements CustomizationManager<ThemeComponentOption> {
 
     private final Map<String, String> overlayPackages = new HashMap<>();
+    private final CustomTheme mOriginalTheme;
 
     public CustomThemeManager(@Nullable CustomTheme existingTheme) {
         if (existingTheme != null && existingTheme.isDefined()) {
+            mOriginalTheme = existingTheme;
             overlayPackages.putAll(existingTheme.getPackagesByCategory());
+        } else {
+            mOriginalTheme = null;
         }
     }
 
@@ -53,12 +57,17 @@ public class CustomThemeManager implements CustomizationManager<ThemeComponentOp
     }
 
     public CustomTheme buildPartialCustomTheme(Context context) {
-        return new CustomTheme(context.getString(R.string.custom_theme_title),
+        return new CustomTheme(mOriginalTheme != null
+                ? mOriginalTheme.getTitle() : context.getString(R.string.custom_theme_title),
                 overlayPackages, null);
     }
 
     @Override
-    public void fetchOptions(OptionsFetchedListener<ThemeComponentOption> callback) {
+    public void fetchOptions(OptionsFetchedListener<ThemeComponentOption> callback, boolean reload) {
         //Unused
+    }
+
+    public CustomTheme getOriginalTheme() {
+        return mOriginalTheme;
     }
 }

@@ -49,7 +49,7 @@ public class ClockManager implements CustomizationManager<Clockface> {
     }
 
     @Override
-    public void fetchOptions(OptionsFetchedListener<Clockface> callback) {
+    public void fetchOptions(OptionsFetchedListener<Clockface> callback, boolean reload) {
         mClockProvider.fetch(callback, false);
     }
 

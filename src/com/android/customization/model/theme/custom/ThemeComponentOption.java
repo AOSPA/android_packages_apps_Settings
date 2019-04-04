@@ -18,17 +18,28 @@ package com.android.customization.model.theme.custom;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
-import static com.android.customization.model.ResourceConstants.SYSUI_ICONS_FOR_PREVIEW;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.Resources.Theme;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
@@ -46,6 +57,8 @@ import java.util.Objects;
  * shape, etc).
  * Extending classes correspond to each component's options and provide the structure to bind
  * preview and thumbnails.
+ * // TODO (santie): refactor the logic to bind preview cards to reuse between ThemeFragment and
+ * // here
  */
 public abstract class ThemeComponentOption implements CustomizationOption<ThemeComponentOption> {
 
@@ -173,7 +186,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
                 LayoutInflater.from(container.getContext()).inflate(
                         R.layout.preview_card_icon_content, cardBody, true);
             }
-            for (int i = 0; i < mIconIds.length; i++) {
+            for (int i = 0; i < mIconIds.length && i < mIcons.size(); i++) {
                 ((ImageView) container.findViewById(mIconIds[i])).setImageDrawable(
                         mIcons.get(i));
             }
@@ -188,8 +201,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
          */
         public boolean isValid(Context context) {
             return getOverlayPackages().keySet().size() ==
-                    ResourceConstants.getPackagesToOverlay(context).length
-                && mIcons.size() == SYSUI_ICONS_FOR_PREVIEW.length + 1;
+                    ResourceConstants.getPackagesToOverlay(context).length;
         }
 
         public void setLabel(String label) {
@@ -199,55 +211,197 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
     public static class ColorOption extends ThemeComponentOption {
 
-        ColorOption(String packageName) {
+        /**
+         * Ids of views used to represent quick setting tiles in the color preview screen
+         */
+        private static int[] COLOR_TILE_IDS = {
+                R.id.preview_color_qs_0_bg, R.id.preview_color_qs_1_bg, R.id.preview_color_qs_2_bg
+        };
+        static int[] COLOR_TILES_ICON_IDS = {
+                R.id.preview_color_qs_0_icon, R.id.preview_color_qs_1_icon,
+                R.id.preview_color_qs_2_icon
+        };
+
+        /**
+         * Ids of views used to represent control buttons in the color preview screen
+         */
+        private static int[] COLOR_BUTTON_IDS = {
+                R.id.preview_check_selected, R.id.preview_radio_selected,
+                R.id.preview_toggle_selected,
+        };
+
+        @ColorInt private int mColorAccentLight;
+        @ColorInt private int mColorAccentDark;
+        /**
+         * Icons shown as example of QuickSettings tiles in the color preview screen.
+         */
+        private List<Drawable> mIcons = new ArrayList<>();
+
+        /**
+         * Drawable with the currently selected shape to be used as background of the sample
+         * QuickSetting icons in the color preview screen.
+         */
+        private Drawable mShapeDrawable;
+
+        ColorOption(String packageName, @ColorInt int lightColor,
+                @ColorInt int darkColor) {
             addOverlayPackage(OVERLAY_CATEGORY_COLOR, packageName);
+            mColorAccentLight = lightColor;
+            mColorAccentDark = darkColor;
         }
 
         @Override
         public void bindThumbnailTile(View view) {
+            int color = resolveColor(view.getResources());
+            ((ImageView) view.findViewById(R.id.option_tile)).getDrawable().setTint(color);
+        }
 
+        private int resolveColor(Resources res) {
+            Configuration configuration = res.getConfiguration();
+            return (configuration.uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                    == Configuration.UI_MODE_NIGHT_YES ? mColorAccentDark : mColorAccentLight;
         }
 
         @Override
         public boolean isActive(CustomizationManager<ThemeComponentOption> manager) {
-            return false;
+            CustomThemeManager customThemeManager = (CustomThemeManager) manager;
+            return Objects.equals(getOverlayPackages().get(OVERLAY_CATEGORY_COLOR),
+                    customThemeManager.getOverlayPackages().get(OVERLAY_CATEGORY_COLOR));
         }
 
         @Override
         public int getLayoutResId() {
-            return 0;
+            return R.layout.theme_color_option;
         }
 
         @Override
         public void bindPreview(ViewGroup container) {
+            TextView header = container.findViewById(R.id.theme_preview_card_header);
+            header.setText(R.string.preview_name_color);
+            header.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_colorize_24px, 0, 0);
 
+            ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
+            if (cardBody.getChildCount() == 0) {
+                LayoutInflater.from(container.getContext()).inflate(
+                        R.layout.preview_card_color_content, cardBody, true);
+            }
+            @ColorInt int accentColor = resolveColor(container.getResources());
+            ColorStateList tintList = new ColorStateList(
+                    new int[][]{
+                            new int[]{android.R.attr.state_selected},
+                            new int[]{android.R.attr.state_checked}
+                    },
+                    new int[] {
+                            accentColor,
+                            accentColor
+                    }
+            );
+
+            for (int i = 0; i < COLOR_BUTTON_IDS.length; i++) {
+                CompoundButton button = container.findViewById(COLOR_BUTTON_IDS[i]);
+                button.setButtonTintList(tintList);
+            }
+
+            Switch toggle = container.findViewById(R.id.preview_toggle_selected);
+            toggle.setThumbTintList(tintList);
+            toggle.setTrackTintList(tintList);
+
+            ColorStateList seekbarTintList = ColorStateList.valueOf(accentColor);
+            SeekBar seekbar = container.findViewById(R.id.preview_seekbar);
+            seekbar.setThumbTintList(seekbarTintList);
+            seekbar.setProgressTintList(seekbarTintList);
+            seekbar.setProgressBackgroundTintList(seekbarTintList);
+            // Disable seekbar
+            seekbar.setOnTouchListener((view, motionEvent) -> true);
+            if (!mIcons.isEmpty() && mShapeDrawable != null) {
+                for (int i = 0; i < COLOR_TILE_IDS.length; i++) {
+                    Drawable icon = mIcons.get(i).getConstantState().newDrawable();
+                    //TODO: load and set the shape.
+                    Drawable bgShape = mShapeDrawable.getConstantState().newDrawable();
+                    bgShape.setTint(accentColor);
+
+                    ImageView bg = container.findViewById(COLOR_TILE_IDS[i]);
+                    bg.setImageDrawable(bgShape);
+                    ImageView fg = container.findViewById(COLOR_TILES_ICON_IDS[i]);
+                    fg.setImageDrawable(icon);
+                }
+            }
+        }
+
+        public void setPreviewIcons(List<Drawable> icons) {
+            mIcons.addAll(icons);
+        }
+
+        public void setShapeDrawable(@Nullable Drawable shapeDrawable) {
+            mShapeDrawable = shapeDrawable;
         }
     }
 
     public static class ShapeOption extends ThemeComponentOption {
 
-        ShapeOption(String packageName) {
+        private final LayerDrawable mShape;
+        private final List<Drawable> mAppIcons;
+        private int[] mShapeIconIds = {
+                R.id.shape_preview_icon_0, R.id.shape_preview_icon_1, R.id.shape_preview_icon_2,
+                R.id.shape_preview_icon_3, R.id.shape_preview_icon_4, R.id.shape_preview_icon_5
+        };
+
+        ShapeOption(String packageName, Drawable shapeDrawable, List<Drawable> appIcons) {
             addOverlayPackage(OVERLAY_CATEGORY_SHAPE, packageName);
+            mAppIcons = appIcons;
+            Drawable background = shapeDrawable.getConstantState().newDrawable();
+            Drawable foreground = shapeDrawable.getConstantState().newDrawable();
+            mShape = new LayerDrawable(new Drawable[]{background, foreground});
+            mShape.setLayerGravity(0, Gravity.CENTER);
+            mShape.setLayerGravity(1, Gravity.CENTER);
         }
 
         @Override
         public void bindThumbnailTile(View view) {
+            ImageView thumb = view.findViewById(R.id.shape_thumbnail);
+            Resources res = view.getResources();
+            Theme theme = view.getContext().getTheme();
+            int borderWidth = res.getDimensionPixelSize(R.dimen.component_shape_border_width);
 
+            Drawable background = mShape.getDrawable(0);
+            background.setTintList(res.getColorStateList(R.color.option_border_color, theme));
+
+            ShapeDrawable foreground = (ShapeDrawable) mShape.getDrawable(1);
+
+            foreground.setIntrinsicHeight(background.getIntrinsicHeight() - borderWidth);
+            foreground.setIntrinsicWidth(background.getIntrinsicWidth() - borderWidth);
+            foreground.setTint(res.getColor(R.color.shape_option_tile_foreground_color, theme));
+
+            thumb.setImageDrawable(mShape);
         }
 
         @Override
         public boolean isActive(CustomizationManager<ThemeComponentOption> manager) {
-            return false;
+            CustomThemeManager customThemeManager = (CustomThemeManager) manager;
+            return Objects.equals(getOverlayPackages().get(OVERLAY_CATEGORY_SHAPE),
+                    customThemeManager.getOverlayPackages().get(OVERLAY_CATEGORY_SHAPE));
         }
 
         @Override
         public int getLayoutResId() {
-            return 0;
+            return R.layout.theme_shape_option;
         }
 
         @Override
         public void bindPreview(ViewGroup container) {
+            TextView header = container.findViewById(R.id.theme_preview_card_header);
+            header.setText(R.string.preview_name_shape);
+            header.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_shapes_24px, 0, 0);
 
+            ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
+            if (cardBody.getChildCount() == 0) {
+                LayoutInflater.from(container.getContext()).inflate(
+                        R.layout.preview_card_shape_content, cardBody, true);
+            }
+            for (int i = 0; i < mShapeIconIds.length && i < mAppIcons.size(); i++) {
+                ImageView iconView = cardBody.findViewById(mShapeIconIds[i]);
+                iconView.setBackground(mAppIcons.get(i));
+            }
         }
     }
 }

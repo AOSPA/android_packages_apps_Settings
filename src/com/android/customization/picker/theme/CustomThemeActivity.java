@@ -15,6 +15,7 @@
  */
 package com.android.customization.picker.theme;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,16 +32,21 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.model.theme.DefaultThemeProvider;
 import com.android.customization.model.theme.OverlayManagerCompat;
+import com.android.customization.model.theme.ThemeBundle;
 import com.android.customization.model.theme.ThemeBundle.Builder;
 import com.android.customization.model.theme.ThemeBundleProvider;
 import com.android.customization.model.theme.ThemeManager;
+import com.android.customization.model.theme.custom.ColorOptionsProvider;
 import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.model.theme.custom.CustomThemeManager;
 import com.android.customization.model.theme.custom.FontOptionsProvider;
 import com.android.customization.model.theme.custom.IconOptionsProvider;
+import com.android.customization.model.theme.custom.ShapeOptionsProvider;
 import com.android.customization.model.theme.custom.ThemeComponentOption;
+import com.android.customization.model.theme.custom.ThemeComponentOption.ColorOption;
 import com.android.customization.model.theme.custom.ThemeComponentOption.FontOption;
 import com.android.customization.model.theme.custom.ThemeComponentOption.IconOption;
+import com.android.customization.model.theme.custom.ThemeComponentOption.ShapeOption;
 import com.android.customization.model.theme.custom.ThemeComponentOptionProvider;
 import com.android.customization.module.CustomizationInjector;
 import com.android.customization.picker.theme.CustomThemeComponentFragment.CustomThemeComponentFragmentHost;
@@ -56,6 +62,9 @@ public class CustomThemeActivity extends FragmentActivity implements
         CustomThemeComponentFragmentHost {
     public static final String EXTRA_THEME_TITLE = "CustomThemeActivity.ThemeTitle";
     public static final String EXTRA_THEME_PACKAGES = "CustomThemeActivity.ThemePackages";
+    public static final int REQUEST_CODE_CUSTOM_THEME = 1;
+    public static final int RESULT_THEME_DELETED = 10;
+    public static final int RESULT_THEME_APPLIED = 20;
 
     private static final String TAG = "CustomThemeActivity";
 
@@ -92,6 +101,7 @@ public class CustomThemeActivity extends FragmentActivity implements
                 new WallpaperSetter(injector.getWallpaperPersister(this),
                         injector.getPreferences(this), mUserEventLogger, false),
                 new OverlayManagerCompat(this));
+        mThemeManager.fetchOptions(null, false);
         setContentView(R.layout.activity_custom_theme);
         mApplyButton = findViewById(R.id.next_button);
         mApplyButton.setOnClickListener(view -> onNextOrApply());
@@ -124,8 +134,11 @@ public class CustomThemeActivity extends FragmentActivity implements
     private void initSteps() {
         mSteps = new ArrayList<>();
         OverlayManagerCompat manager = new OverlayManagerCompat(this);
-        mSteps.add(new FontStep(new FontOptionsProvider(this, manager), 0, 2));
-        mSteps.add(new IconStep(new IconOptionsProvider(this, manager), 1, 2));
+        mSteps.add(new FontStep(new FontOptionsProvider(this, manager), 0, 4));
+        mSteps.add(new IconStep(new IconOptionsProvider(this, manager), 1, 4));
+        mSteps.add(new ColorStep(new ColorOptionsProvider(this, manager, mCustomThemeManager),
+                2, 4));
+        mSteps.add(new ShapeStep(new ShapeOptionsProvider(this, manager), 3, 4));        
         mCurrentStep = 0;
     }
 
@@ -137,25 +150,32 @@ public class CustomThemeActivity extends FragmentActivity implements
                     navigateToStep(mCurrentStep + 1);
                 } else {
                     // We're on the last step, apply theme and leave
-                    // TODO: Verify that custom theme doesn't collide with existing one
-                    //  (compare overlay packages)
-                    mThemeManager.apply(mCustomThemeManager.buildPartialCustomTheme(
-                            CustomThemeActivity.this), new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            Toast.makeText(CustomThemeActivity.this, R.string.applied_theme_msg,
-                                    Toast.LENGTH_LONG).show();
-                            finish();
-                        }
+                    CustomTheme themeToApply = mCustomThemeManager.buildPartialCustomTheme(
+                            CustomThemeActivity.this);
 
-                        @Override
-                        public void onError(@Nullable Throwable throwable) {
-                            Log.w(TAG, "Error applying custom theme", throwable);
-                            Toast.makeText(CustomThemeActivity.this,
-                                    R.string.apply_theme_error_msg,
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    });
+                    // If the current theme is equal to the original theme being edited, then
+                    // don't search for an equivalent, let the user apply the same one by keeping
+                    // it null.
+                    ThemeBundle equivalent = (mCustomThemeManager.getOriginalTheme() != null
+                            && mCustomThemeManager.getOriginalTheme().isEquivalent(themeToApply))
+                                ? null : mThemeManager.findThemeByPackages(themeToApply);
+
+                    if (equivalent != null) {
+                        AlertDialog.Builder builder =
+                                new AlertDialog.Builder(CustomThemeActivity.this);
+                        builder.setTitle(getString(R.string.use_style_instead_title,
+                                    equivalent.getTitle()))
+                                .setMessage(getString(R.string.use_style_instead_body,
+                                        equivalent.getTitle()))
+                                .setPositiveButton(getString(R.string.use_style_button,
+                                        equivalent.getTitle()),
+                                        (dialogInterface, i) -> applyTheme(equivalent))
+                                .setNegativeButton(R.string.no_thanks, null)
+                                .create()
+                                .show();
+                    } else {
+                        applyTheme(themeToApply);
+                    }
                 }
             }
 
@@ -163,6 +183,26 @@ public class CustomThemeActivity extends FragmentActivity implements
             public void onError(@Nullable Throwable throwable) {
                 Log.w(TAG, "Error applying custom theme component", throwable);
                 Toast.makeText(CustomThemeActivity.this, R.string.apply_theme_error_msg,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void applyTheme(ThemeBundle themeToApply) {
+        mThemeManager.apply(themeToApply, new Callback() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(CustomThemeActivity.this, R.string.applied_theme_msg,
+                        Toast.LENGTH_LONG).show();
+                setResult(RESULT_THEME_APPLIED);
+                finish();
+            }
+
+            @Override
+            public void onError(@Nullable Throwable throwable) {
+                Log.w(TAG, "Error applying custom theme", throwable);
+                Toast.makeText(CustomThemeActivity.this,
+                        R.string.apply_theme_error_msg,
                         Toast.LENGTH_LONG).show();
             }
         });
@@ -186,12 +226,14 @@ public class CustomThemeActivity extends FragmentActivity implements
 
     @Override
     public void delete() {
-
+        mThemeManager.removeCustomTheme(mCustomThemeManager.getOriginalTheme());
+        setResult(RESULT_THEME_DELETED);
+        finish();
     }
 
     @Override
     public void cancel() {
-
+        finish();
     }
 
     @Override
@@ -260,6 +302,40 @@ public class CustomThemeActivity extends FragmentActivity implements
         protected IconStep(ThemeComponentOptionProvider<IconOption> provider,
                 int position, int totalSteps) {
             super(R.string.icon_component_title, provider, position, totalSteps);
+        }
+
+        @Override
+        CustomThemeComponentFragment createFragment() {
+            return CustomThemeComponentFragment.newInstance(
+                    CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
+                    position,
+                    totalSteps,
+                    titleResId);
+        }
+    }
+
+    private class ColorStep extends ComponentStep<ColorOption> {
+
+        protected ColorStep(ThemeComponentOptionProvider<ColorOption> provider,
+                int position, int totalSteps) {
+            super(R.string.color_component_title, provider, position, totalSteps);
+        }
+
+        @Override
+        CustomThemeComponentFragment createFragment() {
+            return CustomThemeComponentFragment.newInstance(
+                    CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
+                    position,
+                    totalSteps,
+                    titleResId);
+        }
+    }
+
+    private class ShapeStep extends ComponentStep<ShapeOption> {
+
+        protected ShapeStep(ThemeComponentOptionProvider<ShapeOption> provider,
+                int position, int totalSteps) {
+            super(R.string.shape_component_title, provider, position, totalSteps);
         }
 
         @Override
