@@ -137,6 +137,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private NetworkInfo mNetworkInfo;
     private NetworkCapabilities mNetworkCapabilities;
     private int mRssiSignalLevel = -1;
+    private int mWifiGeneration;
+    private boolean mIsReady;
     private String[] mSignalStr;
     private WifiConfiguration mWifiConfig;
     private WifiInfo mWifiInfo;
@@ -507,6 +509,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
     private void refreshRssiViews() {
         int signalLevel = mAccessPoint.getLevel();
+        int wifiGeneration = mAccessPoint.getWifiGeneration();
+        boolean isReady = (mAccessPoint.isVhtMax8SpatialStreamsSupported()
+                          && mAccessPoint.isTwtSupported());
 
         // Disappears signal view if not in range. e.g. for saved networks.
         if (mIsOutOfRange) {
@@ -515,11 +520,15 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             return;
         }
 
-        if (mRssiSignalLevel == signalLevel) {
+        if (mRssiSignalLevel == signalLevel
+            && mWifiGeneration == wifiGeneration
+            && mIsReady == isReady) {
             return;
         }
         mRssiSignalLevel = signalLevel;
-        Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel);
+        mWifiGeneration = wifiGeneration;
+        mIsReady = isReady;
+        Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel, mWifiGeneration, mIsReady);
 
         wifiIcon.setTintList(Utils.getColorAccent(mContext));
         if (mEntityHeaderController != null) {
@@ -823,8 +832,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             mContext = context;
         }
 
-        public Drawable getIcon(int level) {
-            return mContext.getDrawable(Utils.getWifiIconResource(level)).mutate();
+        public Drawable getIcon(int level, int generation, boolean isReady) {
+            return mContext.getDrawable(Utils.getWifiIconResource(level, generation, isReady)).mutate();
         }
     }
 

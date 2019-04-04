@@ -190,7 +190,11 @@ public class WifiSlice implements CustomSliceable {
 
     private IconCompat getAccessPointLevelIcon(AccessPoint accessPoint) {
         final Drawable d = mContext.getDrawable(
-                com.android.settingslib.Utils.getWifiIconResource(accessPoint.getLevel()));
+                com.android.settingslib.Utils.getWifiIconResource(
+                                                  accessPoint.getLevel(),
+                                                  accessPoint.getWifiGeneration(),
+                                                  accessPoint.isTwtSupported()
+                                                  && accessPoint.isVhtMax8SpatialStreamsSupported()));
 
         @ColorInt int color;
         if (accessPoint.isActive()) {
