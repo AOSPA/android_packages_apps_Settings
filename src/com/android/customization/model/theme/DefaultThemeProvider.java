@@ -101,7 +101,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         mOverlayInfos = new HashMap<>();
 
         Consumer<OverlayInfo> addToMap = overlayInfo -> mOverlayInfos.put(
-                overlayInfo.packageName, overlayInfo);
+                overlayInfo.getPackageName(), overlayInfo);
 
         UserHandle user = UserHandle.of(UserHandle.myUserId());
         om.getOverlayInfosForTarget(ANDROID_PACKAGE, user).forEach(addToMap);
@@ -538,7 +538,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     @Nullable
     private String getOverlayCategory(String packageName) {
        OverlayInfo info = mOverlayInfos.get(packageName);
-       return info != null ? info.category : null;
+       return info != null ? info.getCategory() : null;
     }
 
     @Override
