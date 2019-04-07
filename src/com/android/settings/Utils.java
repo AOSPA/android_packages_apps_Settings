@@ -101,6 +101,8 @@ import androidx.preference.PreferenceGroup;
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.core.FeatureFlags;
+import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 import java.net.InetAddress;
@@ -122,6 +124,14 @@ public final class Utils extends com.android.settingslib.Utils {
     public static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
 
     public static final String OS_PKG = "os";
+
+    public static final String KEY_SOFTWARE_VERSION = "ext_meta_software_version";
+    public static final String KEY_MODEL = "ext_model_name_from_meta";
+    public static final String KEY_HARDWARE_VERSION = "ext_hardware_version";
+    public static final String KEY_WIFI_MAC_ADDRESS = "ext_wifi_mac_address";
+    public static final String KEY_DEVICE_NAME = "ext_device_name";
+    public static final String KEY_ROM_TOTAL_SIZE = "ext_rom_total_size";
+    public static final String KEY_RAM_TOTAL_SIZE = "ext_ram_total_size";
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -518,6 +528,9 @@ public final class Utils extends com.android.settingslib.Utils {
      * TODO: See bug 16533525.
      */
     public static boolean showSimCardTile(Context context) {
+        if (FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
+            return false;
+        }
         final TelephonyManager tm =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
@@ -1061,6 +1074,15 @@ public final class Utils extends com.android.settingslib.Utils {
             // Use aosp NetworkSetting to handle the selection intent
         }
         return false;
+    }
+
+    public static boolean isSupportCTPA(Context context) {
+        Context appContext = context.getApplicationContext();
+        return appContext.getResources().getBoolean(R.bool.config_support_CT_PA);
+    }
+
+    public static String getString(Context context, String key) {
+        return Settings.Global.getString(context.getContentResolver(), key);
     }
 
     /** Get {@link Resources} by subscription id if subscription id is valid. */

@@ -1863,7 +1863,7 @@
     <!-- This string asks the user whether or not to allow an app to disable WiFi. [CHAR LIMIT=NONE] -->
     <string name="wifi_ask_disable"><xliff:g id="requester" example="FancyApp">%s</xliff:g> wants to turn off Wi-Fi</string>
 
-    <!-- Debugging developer settings: Enable ART verifier for Debuggable Apps [CHAR LIMIT=40] -->
+    <!-- Debugging developer settings: Enable ART verifier for Debuggable Apps [CHAR LIMIT=67] -->
     <string name="art_verifier_for_debuggable_title">Verify bytecode of debuggable apps</string>
     <!-- Debugging developer settings: Enable ART verifier for Debuggable Apps [CHAR LIMIT=NONE] -->
     <string name="art_verifier_for_debuggable_summary">Allow ART to verify bytecode for debuggable apps</string>
@@ -2111,7 +2111,7 @@
     <string name="wifi_ip_settings">IP settings</string>
     <!-- Label for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
     <string name="wifi_privacy_settings">Privacy</string>
-    <!-- Summary for Wifi MAC randomization option when it is ephemeral network [CHAR LIMIT=25] -->
+    <!-- Summary for Wifi MAC randomization option when it is ephemeral network [CHAR LIMIT=40] -->
     <string name="wifi_privacy_settings_ephemeral_summary">Randomized MAC</string>
     <!-- Title for the fragment to add a device into the wifi network [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_add_device_to_network">Add a device</string>
@@ -4749,7 +4749,7 @@
     <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
     <string name="accessibility_control_timeout_preference_title">Time to take action</string>
     <!-- Descriptive text for accessibility preference to accessibility content timeout. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_content_timeout_preference_summary">Choose how much time you want to read and take action on messages that automatically go away.\n\nSupport for this setting is up to each app.</string>
+    <string name="accessibility_content_timeout_preference_summary">Choose how long to show messages that you need to read, but are visible only temporarily.\n\nNot all apps support this setting.</string>
     <!-- Descriptive text for accessibility preference to accessibility control timeout. [CHAR LIMIT=NONE] -->
     <string name="accessibility_control_timeout_preference_summary">Choose how long to show messages that ask you to take action, but are visible only temporarily.\n\nNot all apps support this setting.</string>
 
@@ -7096,8 +7096,8 @@
     <!-- Search keyword for face settings. -->
     <string name="keywords_face_settings">face</string>
 
-    <!-- Search keyword for fingerprint settings. -->
-    <string name="keywords_fingerprint_settings">fingerprint</string>
+    <!-- Search keyword for fingerprint settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_fingerprint_settings">fingerprint, add fingerprint</string>
 
     <!-- Search keywords for adaptive brightness setting [CHAR LIMIT=NONE]-->
     <string name="keywords_display_auto_brightness">dim screen, touchscreen, battery, smart brightness, dynamic brightness</string>
@@ -10736,4 +10736,12 @@
     <string name="media_output_panel_title">Switch output</string>
     <!-- Summary for represent which device is playing media [CHAR LIMIT=NONE] -->
     <string name="media_output_panel_summary_of_playing_device">Currently playing on <xliff:g id="device_name" example="Bose headphone">%1$s</xliff:g></string>
+
+    <!-- String for about phone -->
+    <string name="ram_total_size">RAM total size</string>
+    <string name="rom_total_size">ROM total size</string>
+    <string name="software_version">Software version</string>
+    <string name="model_hardware_summary">Model&#58;%1$s; Hardware&#58;%2$s</string>
+    <!-- Message for forget passpoint dialog [CHAR LIMIT=none] -->
+    <string name="forget_passpoint_dialog_message">Your subscription with this provider may be cancelled. Recurring subscriptions will not be cancelled. For more information, check with your provider.</string>
 </resources>

@@ -195,4 +195,22 @@
         settings:enableCopying="true"
         settings:controller="com.android.settings.deviceinfo.BuildNumberPreferenceController"/>
 
+    <!-- Software version -->
+    <Preference
+        android:key="software_version"
+        android:order="44"
+        android:title="@string/software_version"
+        android:summary="@string/summary_placeholder"
+        android:selectable="false"
+        settings:enableCopying="true"/>
+
+    <!-- Storage size, including two items: ROM and RAM total size -->
+    <Preference
+        android:key="key_storage_total_size"
+        android:order="45"
+        android:title="@string/ram_total_size"
+        android:summary="@string/summary_placeholder"
+        android:selectable="false"
+        settings:allowDividerAbove="true"
+        settings:enableCopying="true"/>
 </PreferenceScreen>
