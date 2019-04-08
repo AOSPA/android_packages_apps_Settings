@@ -88,6 +88,7 @@
             android:tint="@color/theme_preview_icon_color"
             android:maxHeight="2dp"
             android:progress="1"
+            android:clickable="true"
             android:max="3"/>
     </LinearLayout>
     <LinearLayout
@@ -103,7 +104,7 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:layout_gravity="center"
-            android:clickable="false"/>
+            android:enabled="false"/>
         <RadioButton
             android:id="@+id/preview_radio_selected"
             android:layout_width="wrap_content"
@@ -112,14 +113,14 @@
             android:layout_marginRight="22dp"
             android:checked="true"
             android:layout_gravity="center"
-            android:clickable="false"/>
+            android:enabled="false"/>
         <Switch
             android:id="@+id/preview_toggle_selected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
             android:layout_gravity="center"
-            android:clickable="false"/>
+            android:enabled="false"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -133,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:clickable="false"/>
+            android:enabled="false"/>
         <RadioButton
             android:id="@+id/preview_radio_unselected"
             android:layout_width="wrap_content"
@@ -141,12 +142,12 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="22dp"
             android:layout_gravity="center"
-            android:clickable="false"/>
+            android:enabled="false"/>
         <Switch
             android:id="@+id/preview_toggle_unselected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:clickable="false"/>
+            android:enabled="false"/>
     </LinearLayout>
 </LinearLayout>

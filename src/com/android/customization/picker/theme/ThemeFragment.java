@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -340,6 +341,8 @@ public class ThemeFragment extends ToolbarFragment {
         };
         private int[] mColorButtonIds = {
             R.id.preview_check_selected, R.id.preview_radio_selected, R.id.preview_toggle_selected,
+            R.id.preview_check_unselected, R.id.preview_radio_unselected,
+            R.id.preview_toggle_unselected
         };
         private int[] mColorTileIds = {
             R.id.preview_color_qs_0_bg, R.id.preview_color_qs_1_bg, R.id.preview_color_qs_2_bg
@@ -388,14 +391,17 @@ public class ThemeFragment extends ToolbarFragment {
                         previewInfo.resolveAccentColor(res), editClickListener) {
                     @Override
                     protected void bindBody(boolean forceRebind) {
+                        int controlGreyColor = res.getColor(R.color.control_grey);
                         ColorStateList tintList = new ColorStateList(
                                 new int[][]{
                                     new int[]{android.R.attr.state_selected},
-                                    new int[]{android.R.attr.state_checked}
+                                    new int[]{android.R.attr.state_checked},
+                                    new int[]{-android.R.attr.state_enabled},
                                 },
                                 new int[] {
                                     accentColor,
-                                    accentColor
+                                    accentColor,
+                                    controlGreyColor
                                 }
                             );
 
@@ -404,9 +410,17 @@ public class ThemeFragment extends ToolbarFragment {
                             button.setButtonTintList(tintList);
                         }
 
-                        Switch switch1 = card.findViewById(R.id.preview_toggle_selected);
-                        switch1.setThumbTintList(tintList);
-                        switch1.setTrackTintList(tintList);
+                        Switch enabledSwitch = card.findViewById(R.id.preview_toggle_selected);
+                        enabledSwitch.setThumbTintList(tintList);
+                        enabledSwitch.setTrackTintList(tintList);
+
+                        Switch disabledSwitch = card.findViewById(R.id.preview_toggle_unselected);
+                        disabledSwitch.setThumbTintList(
+                            ColorStateList.valueOf(res.getColor(R.color.switch_thumb_tint)));
+                        disabledSwitch.setTrackTintList(
+                            ColorStateList.valueOf(res.getColor(R.color.switch_track_tint)));
+                        // Change overlay method so our color doesn't get too light/dark
+                        disabledSwitch.setTrackTintMode(PorterDuff.Mode.OVERLAY);
 
                         ColorStateList seekbarTintList = ColorStateList.valueOf(accentColor);
                         SeekBar seekbar = card.findViewById(R.id.preview_seekbar);
