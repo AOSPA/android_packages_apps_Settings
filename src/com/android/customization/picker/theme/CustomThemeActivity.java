@@ -49,6 +49,7 @@ import com.android.customization.model.theme.custom.ThemeComponentOption.IconOpt
 import com.android.customization.model.theme.custom.ThemeComponentOption.ShapeOption;
 import com.android.customization.model.theme.custom.ThemeComponentOptionProvider;
 import com.android.customization.module.CustomizationInjector;
+import com.android.customization.module.ThemesUserEventLogger;
 import com.android.customization.picker.theme.CustomThemeComponentFragment.CustomThemeComponentFragmentHost;
 import com.android.wallpaper.R;
 import com.android.wallpaper.module.InjectorProvider;
@@ -68,7 +69,7 @@ public class CustomThemeActivity extends FragmentActivity implements
 
     private static final String TAG = "CustomThemeActivity";
 
-    private UserEventLogger mUserEventLogger;
+    private ThemesUserEventLogger mUserEventLogger;
     private List<ComponentStep<?>> mSteps;
     private int mCurrentStep;
     private CustomThemeManager mCustomThemeManager;
@@ -79,7 +80,7 @@ public class CustomThemeActivity extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CustomizationInjector injector = (CustomizationInjector) InjectorProvider.getInjector();
-        mUserEventLogger = injector.getUserEventLogger(this);
+        mUserEventLogger = (ThemesUserEventLogger) injector.getUserEventLogger(this);
         Intent intent = getIntent();
         Builder themeBuilder = null;
         if (intent != null && intent.hasExtra(EXTRA_THEME_PACKAGES)
@@ -100,7 +101,8 @@ public class CustomThemeActivity extends FragmentActivity implements
                 this,
                 new WallpaperSetter(injector.getWallpaperPersister(this),
                         injector.getPreferences(this), mUserEventLogger, false),
-                new OverlayManagerCompat(this));
+                new OverlayManagerCompat(this),
+                mUserEventLogger);
         mThemeManager.fetchOptions(null, false);
         setContentView(R.layout.activity_custom_theme);
         mApplyButton = findViewById(R.id.next_button);

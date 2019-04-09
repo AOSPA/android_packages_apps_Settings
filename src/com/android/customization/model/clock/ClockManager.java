@@ -19,6 +19,7 @@ import android.content.Context;
 import android.provider.Settings.Secure;
 
 import com.android.customization.model.CustomizationManager;
+import com.android.customization.module.ThemesUserEventLogger;
 
 public class ClockManager implements CustomizationManager<Clockface> {
 
@@ -26,10 +27,12 @@ public class ClockManager implements CustomizationManager<Clockface> {
     private static final String CLOCK_FACE_SETTING = "lock_screen_custom_clock_face";
     private final ClockProvider mClockProvider;
     private final Context mContext;
+    private final ThemesUserEventLogger mEventLogger;
 
-    public ClockManager(Context context, ClockProvider provider) {
+    public ClockManager(Context context, ClockProvider provider, ThemesUserEventLogger logger) {
         mClockProvider = provider;
         mContext = context;
+        mEventLogger = logger;
     }
 
     @Override
@@ -42,6 +45,7 @@ public class ClockManager implements CustomizationManager<Clockface> {
         boolean stored = Secure.putString(mContext.getContentResolver(),
                 CLOCK_FACE_SETTING, option.getId());
         if (stored) {
+            mEventLogger.logClockApplied(option);
             callback.onSuccess();
         } else {
             callback.onError(null);
