@@ -31,6 +31,7 @@ import android.provider.SearchIndexableResource;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -56,6 +57,7 @@ public class FaceSettings extends DashboardFragment {
     private int mUserId;
     private byte[] mToken;
     private FaceSettingsAttentionPreferenceController mAttentionController;
+    private FaceSettingsRemoveButtonPreferenceController mRemoveController;
 
     private final FaceSettingsRemoveButtonPreferenceController.Listener mRemovalListener = () -> {
         if (getActivity() != null) {
@@ -156,6 +158,9 @@ public class FaceSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        if (!isAvailable(context)) {
+            return null;
+        }
         final List<AbstractPreferenceController> controllers =
                 buildPreferenceControllers(context, getSettingsLifecycle());
         // There's no great way of doing this right now :/
@@ -163,8 +168,9 @@ public class FaceSettings extends DashboardFragment {
             if (controller instanceof FaceSettingsAttentionPreferenceController) {
                 mAttentionController = (FaceSettingsAttentionPreferenceController) controller;
             } else if (controller instanceof FaceSettingsRemoveButtonPreferenceController) {
-                ((FaceSettingsRemoveButtonPreferenceController) controller)
-                        .setListener(mRemovalListener);
+                mRemoveController = (FaceSettingsRemoveButtonPreferenceController) controller;
+                mRemoveController.setListener(mRemovalListener);
+                mRemoveController.setActivity((SettingsActivity) getActivity());
             }
         }
 
@@ -197,7 +203,11 @@ public class FaceSettings extends DashboardFragment {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null /* lifecycle */);
+                    if (isAvailable(context)) {
+                        return buildPreferenceControllers(context, null /* lifecycle */);
+                    } else {
+                        return null;
+                    }
                 }
 
                 @Override

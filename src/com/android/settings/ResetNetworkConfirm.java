@@ -45,6 +45,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
@@ -76,7 +77,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
     private RestoreApnHandler mRestoreApnHandler;
     private RestoreCompleteHandler mRestoreCompleteHandler;
 
-    private View mContentView;
+    @VisibleForTesting View mContentView;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     @VisibleForTesting boolean mEraseEsim;
     @VisibleForTesting EraseEsimAsyncTask mEraseEsimTask;
@@ -175,20 +176,9 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             ImsManager.getInstance(context,
                      SubscriptionManager.getPhoneId(mSubId)).factoryReset();
             esimFactoryReset(context, context.getPackageName());
-            // There has been issues when Sms raw table somehow stores orphan
-            // fragments. They lead to garbled message when new fragments come
-            // in and combied with those stale ones. In case this happens again,
-            // user can reset all network settings which will clean up this table.
-            cleanUpSmsRawTable(context);
             restoreDefaultApn(context);
         }
     };
-
-    private void cleanUpSmsRawTable(Context context) {
-        ContentResolver resolver = context.getContentResolver();
-        Uri uri = Uri.withAppendedPath(Telephony.Sms.CONTENT_URI, "raw/permanentDelete");
-        resolver.delete(uri, null, null);
-    }
 
     @VisibleForTesting
     void esimFactoryReset(Context context, String packageName) {
@@ -287,6 +277,14 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                 .setOnClickListener(mFinalClickListener);
     }
 
+    @VisibleForTesting
+    void setSubtitle() {
+        if (mEraseEsim) {
+            ((TextView) mContentView.findViewById(R.id.reset_network_confirm))
+                    .setText(R.string.reset_network_final_desc_esim);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -304,6 +302,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         }
         mContentView = inflater.inflate(R.layout.reset_network_confirm, null);
         establishFinalConfirmationState();
+        setSubtitle();
         return mContentView;
     }
 

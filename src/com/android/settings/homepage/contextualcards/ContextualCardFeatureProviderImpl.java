@@ -139,7 +139,7 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
         final String action = mContext.getString(R.string.config_settingsintelligence_log_action);
         if (!TextUtils.isEmpty(action)) {
             intent.setAction(action);
-            mContext.sendBroadcastAsUser(intent, UserHandle.ALL);
+            mContext.sendBroadcastAsUser(intent, UserHandle.CURRENT);
         }
     }
 
@@ -165,6 +165,7 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
                 com.android.settings.intelligence.ContextualCardProto.ContextualCard.newBuilder()
                         .setSliceUri(card.getSliceUri().toString())
                         .setCardName(card.getName())
+                        .setCardScore(card.getRankingScore())
                         .build()));
         return builder.build().toByteArray();
     }

@@ -24,10 +24,31 @@ import static com.android.settings.notification.ZenModePreferenceController.ZEN_
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
+import android.util.ArrayMap;
 
+import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.flashlight.FlashlightSlice;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
+import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.DeviceInfoSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSlice;
+import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
+import com.android.settings.homepage.contextualcards.slices.BatteryFixSlice;
+import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice;
+import com.android.settings.homepage.contextualcards.slices.ContextualNotificationChannelSlice;
+import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
+import com.android.settings.homepage.contextualcards.slices.NotificationChannelSlice;
+import com.android.settings.location.LocationSlice;
+import com.android.settings.media.MediaOutputIndicatorSlice;
+import com.android.settings.media.MediaOutputSlice;
+import com.android.settings.network.telephony.MobileDataSlice;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
+import com.android.settings.wifi.slice.ContextualWifiSlice;
+import com.android.settings.wifi.slice.WifiSlice;
 import com.android.settingslib.media.MediaOutputSliceConstants;
+
+import java.util.Map;
 
 /**
  * A registry of custom slice Uris.
@@ -53,15 +74,7 @@ public class CustomSliceRegistry {
             .appendEncodedPath(SettingsSlicesContract.PATH_SETTING_INTENT)
             .appendPath(BatteryTipPreferenceController.PREF_NAME)
             .build();
-    /**
-     * Backing Uri for the Battery info Slice.
-     */
-    public static final Uri BATTERY_INFO_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendEncodedPath(SettingsSlicesContract.PATH_SETTING_INTENT)
-            .appendPath("battery_card")
-            .build();
+
     /**
      * Backing Uri for the Bluetooth Slice.
      */
@@ -80,6 +93,16 @@ public class CustomSliceRegistry {
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("bluetooth_devices")
+            .build();
+
+    /**
+     * Backing Uri for Contextual Notification channel Slice.
+     */
+    public static final Uri CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("contextual_notification_channel")
             .build();
 
     /**
@@ -219,6 +242,17 @@ public class CustomSliceRegistry {
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("media_volume")
             .build();
+
+    /**
+     * Full {@link Uri} for the Remote Media Volume Slice.
+     */
+    public static final Uri VOLUME_REMOTE_MEDIA_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("remote_volume")
+            .build();
+
     /**
      * Full {@link Uri} for the Ringer volume Slice.
      */
@@ -276,4 +310,63 @@ public class CustomSliceRegistry {
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath(MediaOutputSliceConstants.KEY_MEDIA_OUTPUT)
             .build();
+
+    /**
+     * Backing Uri for the Media output indicator Slice.
+     */
+    public static Uri MEDIA_OUTPUT_INDICATOR_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
+            .appendPath("media_output_indicator")
+            .build();
+
+    @VisibleForTesting
+    static final Map<Uri, Class<? extends CustomSliceable>> sUriToSlice;
+
+    static {
+        sUriToSlice = new ArrayMap<>();
+
+        sUriToSlice.put(BATTERY_FIX_SLICE_URI, BatteryFixSlice.class);
+        sUriToSlice.put(BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
+        sUriToSlice.put(CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI,
+                ContextualNotificationChannelSlice.class);
+        sUriToSlice.put(CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
+        sUriToSlice.put(DATA_USAGE_SLICE_URI, DataUsageSlice.class);
+        sUriToSlice.put(DEVICE_INFO_SLICE_URI, DeviceInfoSlice.class);
+        sUriToSlice.put(EMERGENCY_INFO_SLICE_URI, EmergencyInfoSlice.class);
+        sUriToSlice.put(FLASHLIGHT_SLICE_URI, FlashlightSlice.class);
+        sUriToSlice.put(LOCATION_SLICE_URI, LocationSlice.class);
+        sUriToSlice.put(LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
+        sUriToSlice.put(MOBILE_DATA_SLICE_URI, MobileDataSlice.class);
+        sUriToSlice.put(NOTIFICATION_CHANNEL_SLICE_URI, NotificationChannelSlice.class);
+        sUriToSlice.put(STORAGE_SLICE_URI, StorageSlice.class);
+        sUriToSlice.put(WIFI_SLICE_URI, WifiSlice.class);
+        sUriToSlice.put(MEDIA_OUTPUT_SLICE_URI, MediaOutputSlice.class);
+        sUriToSlice.put(MEDIA_OUTPUT_INDICATOR_SLICE_URI, MediaOutputIndicatorSlice.class);
+    }
+
+    public static Class<? extends CustomSliceable> getSliceClassByUri(Uri uri) {
+        return sUriToSlice.get(removeParameterFromUri(uri));
+    }
+
+    public static Uri removeParameterFromUri(Uri uri) {
+        return uri != null ? uri.buildUpon().clearQuery().build() : null;
+    }
+
+    /**
+     * Returns {@code true} if {@param uri} is a valid Slice Uri handled by
+     * {@link CustomSliceRegistry}.
+     */
+    public static boolean isValidUri(Uri uri) {
+        return sUriToSlice.containsKey(removeParameterFromUri(uri));
+    }
+
+    /**
+     * Returns {@code true} if {@param action} is a valid intent action handled by
+     * {@link CustomSliceRegistry}.
+     */
+    public static boolean isValidAction(String action) {
+        return isValidUri(Uri.parse(action));
+    }
 }

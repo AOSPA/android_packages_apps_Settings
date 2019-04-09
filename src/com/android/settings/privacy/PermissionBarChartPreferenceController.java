@@ -167,7 +167,8 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
             barViewInfos[index] = new BarViewInfo(
                     getPermissionGroupIcon(permissionGroupInfo.getName()),
                     permissionGroupInfo.getAppAccessCount(),
-                    R.string.storage_detail_apps);
+                    R.string.storage_detail_apps,
+                    getPermissionGroupLabel(permissionGroupInfo.getName()));
 
             // Set the click listener for each bar view.
             // The listener will navigate user to permission usage app.
@@ -181,10 +182,10 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
         return barViewInfos;
     }
 
-    private Drawable getPermissionGroupIcon(CharSequence permissionGroup) {
+    private Drawable getPermissionGroupIcon(String permissionGroup) {
         Drawable icon = null;
         try {
-            icon = mPackageManager.getPermissionGroupInfo(permissionGroup.toString(), 0)
+            icon = mPackageManager.getPermissionGroupInfo(permissionGroup, 0)
                     .loadIcon(mPackageManager);
             icon.setTintList(Utils.getColorAttr(mContext, android.R.attr.textColorSecondary));
         } catch (PackageManager.NameNotFoundException e) {
@@ -192,6 +193,18 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
         }
 
         return icon;
+    }
+
+    private CharSequence getPermissionGroupLabel(String permissionGroup) {
+        CharSequence label = null;
+        try {
+            label = mPackageManager.getPermissionGroupInfo(permissionGroup, 0)
+                    .loadLabel(mPackageManager);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w(TAG, "Cannot find group label for " + permissionGroup, e);
+        }
+
+        return label;
     }
 
     private boolean areSamePermissionGroups(List<RuntimePermissionUsageInfo> newUsageInfos) {

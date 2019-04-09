@@ -33,7 +33,6 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.widget.MasterCheckBoxPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -137,6 +136,10 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         mControllers.add(new AllowSoundPreferenceController(
                 context, mImportanceListener, mBackend));
         mControllers.add(new ImportancePreferenceController(
+                context, mImportanceListener, mBackend));
+        mControllers.add(new MinImportancePreferenceController(
+                context, mImportanceListener, mBackend));
+        mControllers.add(new HighImportancePreferenceController(
                 context, mImportanceListener, mBackend));
         mControllers.add(new SoundPreferenceController(context, this,
                 mImportanceListener, mBackend));

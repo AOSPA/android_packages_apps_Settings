@@ -264,8 +264,8 @@ public class WifiConfigController implements TextWatcher,
         mMeteredSettingsSpinner = mView.findViewById(R.id.metered_settings);
         mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
         mPrivacySettingsSpinner = mView.findViewById(R.id.privacy_settings);
-        if (FeatureFlagUtils.isEnabled(mContext,
-                com.android.settings.core.FeatureFlags.WIFI_MAC_RANDOMIZATION)) {
+        if (mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_wifi_connected_mac_randomization_supported)) {
             View privacySettingsLayout = mView.findViewById(R.id.privacy_settings_fields);
             privacySettingsLayout.setVisibility(View.VISIBLE);
         }
@@ -290,11 +290,7 @@ public class WifiConfigController implements TextWatcher,
                 mShareThisWifiCheckBox.setVisibility(View.GONE);
             }
 
-            if (!mAccessPoint.isPasspointConfig()) {
-                mConfigUi.setTitle(mAccessPoint.getSsid());
-            } else {
-                mConfigUi.setTitle(mAccessPoint.getConfigName());
-            }
+            mConfigUi.setTitle(mAccessPoint.getTitle());
 
             ViewGroup group = (ViewGroup) mView.findViewById(R.id.info);
 
