@@ -78,6 +78,10 @@
         <item name="android:textSize">@dimen/card_title_text_size</item>
     </style>
 
+    <style name="CoverTitleTextAppearance" parent="CardTitleTextAppearance">
+        <item name="android:textSize">@dimen/card_cover_title_text_size</item>
+    </style>
+
     <style name="FontCardTitleStyle">
         <item name="android:textAlignment">center</item>
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title</item>
