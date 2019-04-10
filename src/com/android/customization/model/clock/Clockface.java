@@ -69,7 +69,7 @@ public class Clockface implements CustomizationOption<Clockface> {
         return mPreview;
     }
 
-    String getId() {
+    public String getId() {
         return mId;
     }
 

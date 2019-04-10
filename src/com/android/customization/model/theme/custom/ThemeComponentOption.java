@@ -24,6 +24,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -227,7 +228,8 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
          */
         private static int[] COLOR_BUTTON_IDS = {
                 R.id.preview_check_selected, R.id.preview_radio_selected,
-                R.id.preview_toggle_selected,
+                R.id.preview_toggle_selected, R.id.preview_check_unselected,
+                R.id.preview_radio_unselected, R.id.preview_toggle_unselected
         };
 
         @ColorInt private int mColorAccentLight;
@@ -285,15 +287,19 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
                 LayoutInflater.from(container.getContext()).inflate(
                         R.layout.preview_card_color_content, cardBody, true);
             }
-            @ColorInt int accentColor = resolveColor(container.getResources());
+            Resources res = container.getResources();
+            @ColorInt int accentColor = resolveColor(res);
+            @ColorInt int controlGreyColor = res.getColor(R.color.control_grey);
             ColorStateList tintList = new ColorStateList(
                     new int[][]{
                             new int[]{android.R.attr.state_selected},
-                            new int[]{android.R.attr.state_checked}
+                            new int[]{android.R.attr.state_checked},
+                            new int[]{-android.R.attr.state_enabled}
                     },
                     new int[] {
                             accentColor,
-                            accentColor
+                            accentColor,
+                            controlGreyColor
                     }
             );
 
@@ -302,9 +308,17 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
                 button.setButtonTintList(tintList);
             }
 
-            Switch toggle = container.findViewById(R.id.preview_toggle_selected);
-            toggle.setThumbTintList(tintList);
-            toggle.setTrackTintList(tintList);
+            Switch enabledSwitch = container.findViewById(R.id.preview_toggle_selected);
+            enabledSwitch.setThumbTintList(tintList);
+            enabledSwitch.setTrackTintList(tintList);
+
+            Switch disabledSwitch = container.findViewById(R.id.preview_toggle_unselected);
+            disabledSwitch.setThumbTintList(
+                ColorStateList.valueOf(res.getColor(R.color.switch_thumb_tint)));
+            disabledSwitch.setTrackTintList(
+                ColorStateList.valueOf(res.getColor(R.color.switch_track_tint)));
+            // Change overlay method so our color doesn't get too light/dark
+            disabledSwitch.setTrackTintMode(PorterDuff.Mode.OVERLAY);
 
             ColorStateList seekbarTintList = ColorStateList.valueOf(accentColor);
             SeekBar seekbar = container.findViewById(R.id.preview_seekbar);
