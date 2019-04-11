@@ -17,6 +17,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/PreviewCard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,6 +32,45 @@
             android:layout_height="match_parent"
             android:padding="@dimen/preview_card_padding"
             android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/theme_preview_top_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+                <TextView
+                    android:id="@+id/theme_preview_clock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:textColor="@color/icon_thumbnail_color"
+                    tools:text="8:10"/>
+                <LinearLayout
+                    android:id="@+id/theme_preview_top_bar_icons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/preview_icon_0"
+                        android:layout_width="@dimen/preview_theme_cover_topbar_icon_size"
+                        android:layout_height="@dimen/preview_theme_cover_topbar_icon_size"
+                        android:tint="@color/icon_thumbnail_color"/>
+                    <ImageView
+                        android:id="@+id/preview_icon_1"
+                        android:layout_width="@dimen/preview_theme_cover_topbar_icon_size"
+                        android:layout_height="@dimen/preview_theme_cover_topbar_icon_size"
+                        android:layout_marginHorizontal="8dp"
+                        android:tint="@color/icon_thumbnail_color"/>
+                    <ImageView
+                        android:id="@+id/preview_icon_2"
+                        android:layout_width="@dimen/preview_theme_cover_topbar_icon_size"
+                        android:layout_height="@dimen/preview_theme_cover_topbar_icon_size"
+                        android:tint="@color/icon_thumbnail_color"/>
+                </LinearLayout>
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/theme_preview_card_header"
@@ -59,7 +99,7 @@
                 android:gravity="center"
                 android:text="@string/edit_custom_theme_lbl"
                 android:textAppearance="@style/EditLabelTextAppearance"
-                android:visibility="gone"/>
+                android:visibility="invisible"/>
         </LinearLayout>
     </FrameLayout>
 </androidx.cardview.widget.CardView>

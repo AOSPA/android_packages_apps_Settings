@@ -50,6 +50,11 @@ public interface ResourceConstants {
     String CONFIG_ICON_MASK = "config_icon_mask";
 
     /**
+     * Name of the system resource for dialog corner radius
+     */
+    String CONFIG_CORNERRADIUS = "config_bottomDialogCornerRadius";
+
+    /**
      * Overlay Categories that theme picker handles.
      */
     String OVERLAY_CATEGORY_COLOR = "android.theme.customization.accent_color";
