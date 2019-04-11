@@ -18,9 +18,10 @@ package com.android.customization.model.theme;
 import static com.android.customization.model.ResourceConstants.ACCENT_COLOR_DARK_NAME;
 import static com.android.customization.model.ResourceConstants.ACCENT_COLOR_LIGHT_NAME;
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
+import static com.android.customization.model.ResourceConstants.CONFIG_CORNERRADIUS;
 import static com.android.customization.model.ResourceConstants.CONFIG_ICON_MASK;
-import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
 import static com.android.customization.model.ResourceConstants.ICONS_FOR_PREVIEW;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_LAUNCHER;
@@ -42,6 +43,7 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Dimension;
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager.OptionsFetchedListener;
@@ -101,7 +103,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         mOverlayInfos = new HashMap<>();
 
         Consumer<OverlayInfo> addToMap = overlayInfo -> mOverlayInfos.put(
-                overlayInfo.packageName, overlayInfo);
+                overlayInfo.getPackageName(), overlayInfo);
 
         UserHandle user = UserHandle.of(UserHandle.myUserId());
         om.getOverlayInfosForTarget(ANDROID_PACKAGE, user).forEach(addToMap);
@@ -217,11 +219,20 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         if (!TextUtils.isEmpty(shapeOverlayPackage)) {
             builder.addOverlayPackage(getOverlayCategory(shapeOverlayPackage),
                         shapeOverlayPackage)
-                    .setShapePath(loadString(CONFIG_ICON_MASK, shapeOverlayPackage));
+                    .setShapePath(loadString(CONFIG_ICON_MASK, shapeOverlayPackage))
+                    .setBottomSheetCornerRadius(loadDimen(CONFIG_CORNERRADIUS, shapeOverlayPackage))
+                    /*.setUseRoundIcon(loadBoolean(CONFIG_USE_ROUNDICON, shapeOverlayPackage))*/;
         } else {
             builder.setShapePath(mContext.getResources().getString(
                     Resources.getSystem().getIdentifier(CONFIG_ICON_MASK, "string",
-                            ANDROID_PACKAGE)));
+                            ANDROID_PACKAGE)))
+                    .setBottomSheetCornerRadius(
+                            mContext.getResources().getDimensionPixelOffset(
+                                    Resources.getSystem().getIdentifier(CONFIG_CORNERRADIUS,
+                                            "dimen", ANDROID_PACKAGE)))
+                    /*.setUseRoundIcon(mContext.getResources().getBoolean(
+                            Resources.getSystem().getIdentifier(CONFIG_USE_ROUNDICON,
+                                    "boolean", ANDROID_PACKAGE)))*/;
         }
         for (String packageName : mShapePreviewIconPackages) {
             try {
@@ -403,7 +414,11 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         Resources system = Resources.getSystem();
         String iconMaskPath = system.getString(system.getIdentifier(CONFIG_ICON_MASK,
                 "string", ANDROID_PACKAGE));
-        builder.setShapePath(iconMaskPath);
+        builder.setShapePath(iconMaskPath)
+                .setBottomSheetCornerRadius(
+                        system.getDimensionPixelOffset(
+                        system.getIdentifier(CONFIG_CORNERRADIUS,
+                                "dimen", ANDROID_PACKAGE)));
     }
 
     private void addSystemDefaultColor(Builder builder) {
@@ -526,6 +541,23 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         return overlayRes.getString(overlayRes.getIdentifier(stringName, "string", packageName));
     }
 
+    @Dimension
+    private int loadDimen(String dimenName, String packageName)
+            throws NameNotFoundException, NotFoundException {
+
+        Resources overlayRes = mContext.getPackageManager().getResourcesForApplication(packageName);
+        return overlayRes.getDimensionPixelOffset(overlayRes.getIdentifier(
+                dimenName, "dimen", packageName));
+    }
+
+    private boolean loadBoolean(String booleanName, String packageName)
+            throws NameNotFoundException, NotFoundException {
+
+        Resources overlayRes = mContext.getPackageManager().getResourcesForApplication(packageName);
+        return overlayRes.getBoolean(overlayRes.getIdentifier(
+                booleanName, "boolean", packageName));
+    }
+
     private Drawable loadIconPreviewDrawable(String drawableName, String packageName,
             boolean fromSystem) throws NameNotFoundException, NotFoundException {
 
@@ -538,7 +570,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     @Nullable
     private String getOverlayCategory(String packageName) {
        OverlayInfo info = mOverlayInfos.get(packageName);
-       return info != null ? info.category : null;
+       return info != null ? info.getCategory() : null;
     }
 
     @Override

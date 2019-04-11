@@ -34,7 +34,7 @@ import com.android.wallpaper.picker.PreviewFragment;
 public class DefaultCustomizationInjector extends BaseWallpaperInjector
         implements CustomizationInjector {
     private CategoryProvider mCategoryProvider;
-    private UserEventLogger mUserEventLogger;
+    private ThemesUserEventLogger mUserEventLogger;
     private WallpaperRotationRefresher mWallpaperRotationRefresher;
     private PerformanceMonitor mPerformanceMonitor;
     private WallpaperPreferences mPrefs;
@@ -62,9 +62,9 @@ public class DefaultCustomizationInjector extends BaseWallpaperInjector
     }
 
     @Override
-    public synchronized UserEventLogger getUserEventLogger(Context context) {
+    public synchronized ThemesUserEventLogger getUserEventLogger(Context context) {
         if (mUserEventLogger == null) {
-            mUserEventLogger = new NoOpUserEventLogger();
+            mUserEventLogger = new StatsLogUserEventLogger();
         }
         return mUserEventLogger;
     }

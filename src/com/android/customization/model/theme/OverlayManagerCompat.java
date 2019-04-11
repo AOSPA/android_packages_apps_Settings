@@ -72,8 +72,8 @@ public class OverlayManagerCompat {
         List<OverlayInfo> overlayInfos = getOverlayInfosForTarget(targetPackageName,
                 UserHandle.myUserId());
         for (OverlayInfo overlayInfo : overlayInfos) {
-            if (category.equals(overlayInfo.category) && overlayInfo.isEnabled()) {
-                return overlayInfo.packageName;
+            if (category.equals(overlayInfo.getCategory()) && overlayInfo.isEnabled()) {
+                return overlayInfo.getPackageName();
             }
         }
         return null;
@@ -98,8 +98,8 @@ public class OverlayManagerCompat {
         for (String target : targetPackages) {
             for (OverlayInfo info
                     : mOverlayByUser.get(userId).getOrDefault(target, Collections.emptyList())) {
-                if (category.equals(info.category)) {
-                    overlays.add(info.packageName);
+                if (category.equals(info.getCategory())) {
+                    overlays.add(info.getPackageName());
                 }
             }
         }
@@ -128,7 +128,7 @@ public class OverlayManagerCompat {
         // Can't use mOverlayByUser map as the enabled state might change
         for (OverlayInfo overlayInfo : getOverlayInfosForTarget(target, UserHandle.myUserId())) {
             if (overlayInfo.isEnabled()) {
-                overlays.put(overlayInfo.category, overlayInfo.packageName);
+                overlays.put(overlayInfo.getCategory(), overlayInfo.getPackageName());
             }
         }
     }

@@ -32,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.Dimension;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -48,7 +49,6 @@ import com.android.wallpaper.model.WallpaperInfo;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -203,17 +203,19 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         public final Drawable shapeDrawable;
         @Nullable public final ResourceAsset wallpaperAsset;
         public final List<Drawable> shapeAppIcons;
+        @Dimension public final int bottomSheeetCornerRadius;
 
         private PreviewInfo(Typeface bodyFontFamily, Typeface headlineFontFamily,
                 int colorAccentLight, int colorAccentDark, List<Drawable> icons,
-                Drawable shapeDrawable, @Nullable ResourceAsset wallpaperAsset,
-                List<Drawable> shapeAppIcons) {
+                Drawable shapeDrawable, @Dimension int cornerRadius,
+                @Nullable ResourceAsset wallpaperAsset, List<Drawable> shapeAppIcons) {
             this.bodyFontFamily = bodyFontFamily;
             this.headlineFontFamily = headlineFontFamily;
             this.colorAccentLight = colorAccentLight;
             this.colorAccentDark = colorAccentDark;
             this.icons = icons;
             this.shapeDrawable = shapeDrawable;
+            this.bottomSheeetCornerRadius = cornerRadius;
             this.wallpaperAsset = wallpaperAsset;
             this.shapeAppIcons = shapeAppIcons;
         }
@@ -239,6 +241,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         private List<Drawable> mIcons = new ArrayList<>();
         private String mShapePath;
         private boolean mIsDefault;
+        @Dimension private int mCornerRadius;
         private ResourceAsset mWallpaperAsset;
         private WallpaperInfo mWallpaperInfo;
         protected Map<String, String> mPackages = new HashMap<>();
@@ -270,7 +273,8 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
                 }
             }
             return new PreviewInfo(mBodyFontFamily, mHeadlineFontFamily, mColorAccentLight,
-                    mColorAccentDark, mIcons, shapeDrawable, mWallpaperAsset, shapeIcons);
+                    mColorAccentDark, mIcons, shapeDrawable, mCornerRadius,
+                    mWallpaperAsset, shapeIcons);
         }
 
         public Builder setTitle(String title) {
@@ -331,8 +335,14 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
             return this;
         }
 
-        public void addShapePreviewIcon(Drawable appIcon) {
+        public Builder addShapePreviewIcon(Drawable appIcon) {
             mAppIcons.add(appIcon);
+            return this;
+        }
+
+        public Builder setBottomSheetCornerRadius(@Dimension int radius) {
+            mCornerRadius = radius;
+            return this;
         }
     }
 }
