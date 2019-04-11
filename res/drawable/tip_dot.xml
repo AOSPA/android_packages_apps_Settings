@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
+
      Copyright (C) 2019 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,13 +15,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<!-- Represents a grid of lines -->
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
-    <path
-        android:fillColor="@color/bottom_nav_item_color"
-        android:pathData="M22,7V5h-3V2h-2v3h-4V2h-2v3H7V2H5v3H2v2h3v4H2v2h3v4H2v2h3v3h2v-3h4v3h2v-3h4v3h2v-3h3v-2h-3v-4h3v-2h-3V7H22zM7,7h4v4H7V7zM7,17v-4h4v4H7zM17,17h-4v-4h4V17zM17,11h-4V7h4V11z"/>
-</vector>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+  <size
+      android:width="@dimen/tip_dot_size"
+      android:height="@dimen/tip_dot_size" />
+  <solid android:color="@color/tip_dot_color" />
+  <stroke
+      android:color="@color/tip_dot_line_color"
+      android:width="@dimen/tip_dot_line_width" />
+</shape>
