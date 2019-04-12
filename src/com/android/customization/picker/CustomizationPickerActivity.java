@@ -44,6 +44,7 @@ import com.android.customization.model.theme.OverlayManagerCompat;
 import com.android.customization.model.theme.ThemeBundle;
 import com.android.customization.model.theme.ThemeManager;
 import com.android.customization.module.CustomizationInjector;
+import com.android.customization.module.ThemesUserEventLogger;
 import com.android.customization.picker.clock.ClockFragment;
 import com.android.customization.picker.clock.ClockFragment.ClockFragmentHost;
 import com.android.customization.picker.grid.GridFragment;
@@ -122,6 +123,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     @Override
     protected void onResume() {
         super.onResume();
+        mUserEventLogger.logResumed();
         // refresh the sections as the preview may have changed
         initSections();
     }
@@ -160,23 +162,27 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         CustomizationInjector injector = (CustomizationInjector) InjectorProvider.getInjector();
         mWallpaperSetter = new WallpaperSetter(injector.getWallpaperPersister(this),
                 injector.getPreferences(this), mUserEventLogger, false);
+        ThemesUserEventLogger eventLogger = (ThemesUserEventLogger) injector.getUserEventLogger(
+                this);
         ThemeManager themeManager = new ThemeManager(
                 new DefaultThemeProvider(this, injector.getCustomizationPreferences(this)),
                 this,
-                mWallpaperSetter, new OverlayManagerCompat(this));
+                mWallpaperSetter, new OverlayManagerCompat(this), eventLogger);
         if (themeManager.isAvailable()) {
             mSections.put(R.id.nav_theme, new ThemeSection(R.id.nav_theme, themeManager));
         }
         //Clock
         //ClockManager clockManager = new ClockManager(this, new ResourcesApkClockProvider(this));
-        ClockManager clockManager = new ClockManager(this, new ContentProviderClockProvider(this));
+        ClockManager clockManager = new ClockManager(this, new ContentProviderClockProvider(this),
+                eventLogger);
         if (clockManager.isAvailable()) {
             mSections.put(R.id.nav_clock, new ClockSection(R.id.nav_clock, clockManager));
         }
         //Grid
         GridOptionsManager gridManager = new GridOptionsManager(
                 new LauncherGridOptionsProvider(this,
-                        getString(R.string.grid_control_metadata_name)));
+                        getString(R.string.grid_control_metadata_name)),
+                eventLogger);
         if (gridManager.isAvailable()) {
             mSections.put(R.id.nav_grid, new GridSection(R.id.nav_grid, gridManager));
         }
@@ -277,6 +283,12 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     public ThemeManager getThemeManager() {
         CustomizationSection section = mSections.get(R.id.nav_theme);
         return section == null ? null : (ThemeManager) section.customizationManager;
+    }
+
+    @Override
+    protected void onStop() {
+        mUserEventLogger.logStopped();
+        super.onStop();
     }
 
     @Override

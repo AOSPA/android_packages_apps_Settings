@@ -37,8 +37,11 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.ResourceConstants;
 import com.android.customization.model.theme.custom.CustomTheme;
+import com.android.customization.module.ThemesUserEventLogger;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
+import com.android.wallpaper.module.Injector;
+import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.module.WallpaperPersister;
 import com.android.wallpaper.module.WallpaperPersister.SetWallpaperCallback;
 import com.android.wallpaper.module.WallpaperSetter;
@@ -68,15 +71,18 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
 
     private final WallpaperSetter mWallpaperSetter;
     private final FragmentActivity mActivity;
+    private final ThemesUserEventLogger mEventLogger;
 
     private Map<String, String> mCurrentOverlays;
 
     public ThemeManager(ThemeBundleProvider provider, FragmentActivity activity,
-            WallpaperSetter wallpaperSetter, OverlayManagerCompat overlayManagerCompat) {
+            WallpaperSetter wallpaperSetter, OverlayManagerCompat overlayManagerCompat,
+            ThemesUserEventLogger logger) {
         mProvider = provider;
         mActivity = activity;
         mOverlayManagerCompat = overlayManagerCompat;
         mWallpaperSetter = wallpaperSetter;
+        mEventLogger = logger;
     }
 
     @Override
@@ -180,6 +186,7 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
         }
         mCurrentOverlays = null;
         if (allApplied) {
+            mEventLogger.logThemeApplied(theme, theme instanceof CustomTheme);
             callback.onSuccess();
         } else {
             callback.onError(null);

@@ -56,6 +56,7 @@ import com.android.customization.model.theme.ThemeBundle;
 import com.android.customization.model.theme.ThemeBundle.PreviewInfo;
 import com.android.customization.model.theme.ThemeManager;
 import com.android.customization.model.theme.custom.CustomTheme;
+import com.android.customization.module.ThemesUserEventLogger;
 import com.android.customization.picker.BasePreviewAdapter;
 import com.android.customization.picker.BasePreviewAdapter.PreviewPage;
 import com.android.customization.widget.OptionSelectorController;
@@ -95,6 +96,7 @@ public class ThemeFragment extends ToolbarFragment {
     private CheckBox mUseMyWallpaperButton;
     private OptionSelectorController<ThemeBundle> mOptionsController;
     private ThemeManager mThemeManager;
+    private ThemesUserEventLogger mEventLogger;
     private ThemeBundle mSelectedTheme;
     private ThemePreviewAdapter mAdapter;
     private PreviewPager mPreviewPager;
@@ -106,6 +108,8 @@ public class ThemeFragment extends ToolbarFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mThemeManager = ((ThemeFragmentHost) context).getThemeManager();
+        mEventLogger = (ThemesUserEventLogger)
+                InjectorProvider.getInjector().getUserEventLogger(context);
     }
 
     @Nullable
@@ -233,6 +237,7 @@ public class ThemeFragment extends ToolbarFragment {
                     if (mUseMyWallpaper || mSelectedTheme instanceof CustomTheme) {
                         mSelectedTheme.setOverrideThemeWallpaper(mCurrentHomeWallpaper);
                     }
+                    mEventLogger.logThemeSelected(mSelectedTheme, selected instanceof CustomTheme);
                     createAdapter();
                     updateButtonsVisibility();
                 }
