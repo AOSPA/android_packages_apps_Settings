@@ -43,6 +43,7 @@ import com.android.customization.model.CustomizationOption;
 import com.android.customization.widget.DynamicAdaptiveIconDrawable;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
+import com.android.wallpaper.asset.BitmapCachingAsset;
 import com.android.wallpaper.asset.ResourceAsset;
 import com.android.wallpaper.model.WallpaperInfo;
 
@@ -70,6 +71,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
     protected final Map<String, String> mPackagesByCategory;
     @Nullable private final WallpaperInfo mWallpaperInfo;
     private WallpaperInfo mOverrideWallpaper;
+    private Asset mOverrideWallpaperAsset;
 
     protected ThemeBundle(String title, Map<String, String> overlayPackages,
             boolean isDefault, @Nullable WallpaperInfo wallpaperInfo,
@@ -145,6 +147,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
 
     public void setOverrideThemeWallpaper(WallpaperInfo homeWallpaper) {
         mOverrideWallpaper = homeWallpaper;
+        mOverrideWallpaperAsset = null;
     }
 
     public boolean shouldUseThemeWallpaper() {
@@ -153,8 +156,16 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
 
     public Asset getWallpaperPreviewAsset(Context context) {
         return mOverrideWallpaper != null ?
-                mOverrideWallpaper.getThumbAsset(context) :
+                getOverrideWallpaperAsset(context) :
                 getPreviewInfo().wallpaperAsset;
+    }
+
+    private Asset getOverrideWallpaperAsset(Context context) {
+        if (mOverrideWallpaperAsset == null) {
+            mOverrideWallpaperAsset = new BitmapCachingAsset(
+                    mOverrideWallpaper.getThumbAsset(context));
+        }
+        return mOverrideWallpaperAsset;
     }
 
     public WallpaperInfo getWallpaperInfo() {
@@ -201,7 +212,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         @ColorInt public final int colorAccentDark;
         public final List<Drawable> icons;
         public final Drawable shapeDrawable;
-        @Nullable public final ResourceAsset wallpaperAsset;
+        @Nullable public final Asset wallpaperAsset;
         public final List<Drawable> shapeAppIcons;
         @Dimension public final int bottomSheeetCornerRadius;
 
@@ -216,7 +227,8 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
             this.icons = icons;
             this.shapeDrawable = shapeDrawable;
             this.bottomSheeetCornerRadius = cornerRadius;
-            this.wallpaperAsset = wallpaperAsset;
+            this.wallpaperAsset = wallpaperAsset == null
+                    ? null : new BitmapCachingAsset(wallpaperAsset);
             this.shapeAppIcons = shapeAppIcons;
         }
 
