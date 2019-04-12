@@ -15,35 +15,31 @@
  */
 package com.android.customization.model.clock;
 
-import android.content.Context;
+import android.content.ContentResolver;
 import android.provider.Settings.Secure;
 
-import com.android.customization.model.CustomizationManager;
 import com.android.customization.module.ThemesUserEventLogger;
 
-public class ClockManager implements CustomizationManager<Clockface> {
+/**
+ * {@link CustomizationManager} for clock faces that implements apply by writing to secure settings.
+ */
+public class ClockManager extends BaseClockManager {
 
     // TODO: use constant from Settings.Secure
-    private static final String CLOCK_FACE_SETTING = "lock_screen_custom_clock_face";
-    private final ClockProvider mClockProvider;
-    private final Context mContext;
+    static final String CLOCK_FACE_SETTING = "lock_screen_custom_clock_face";
+    private final ContentResolver mContentResolver;
     private final ThemesUserEventLogger mEventLogger;
 
-    public ClockManager(Context context, ClockProvider provider, ThemesUserEventLogger logger) {
-        mClockProvider = provider;
-        mContext = context;
+    public ClockManager(ContentResolver resolver, ClockProvider provider,
+            ThemesUserEventLogger logger) {
+        super(provider);
+        mContentResolver = resolver;
         mEventLogger = logger;
     }
 
     @Override
-    public boolean isAvailable() {
-        return mClockProvider.isAvailable();
-    }
-
-    @Override
-    public void apply(Clockface option, Callback callback) {
-        boolean stored = Secure.putString(mContext.getContentResolver(),
-                CLOCK_FACE_SETTING, option.getId());
+    protected void handleApply(Clockface option, Callback callback) {
+        boolean stored = Secure.putString(mContentResolver, CLOCK_FACE_SETTING, option.getId());
         if (stored) {
             mEventLogger.logClockApplied(option);
             callback.onSuccess();
@@ -53,11 +49,7 @@ public class ClockManager implements CustomizationManager<Clockface> {
     }
 
     @Override
-    public void fetchOptions(OptionsFetchedListener<Clockface> callback, boolean reload) {
-        mClockProvider.fetch(callback, false);
-    }
-
-    public String getCurrentClock() {
-        return Secure.getString(mContext.getContentResolver(), CLOCK_FACE_SETTING);
+    protected String lookUpCurrentClock() {
+        return Secure.getString(mContentResolver, CLOCK_FACE_SETTING);
     }
 }
