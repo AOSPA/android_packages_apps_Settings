@@ -734,6 +734,9 @@ public class ThemeFragment extends ToolbarFragment {
             int targetHeight = bottom - top;
             if (targetWidth > 0 && targetHeight > 0) {
                 for (ThemeBundle theme : mOptions) {
+                    if (theme instanceof CustomTheme && !((CustomTheme) theme).isDefined()) {
+                        continue;
+                    }
                     Asset wallpaperAsset = theme.getWallpaperPreviewAsset(view.getContext());
                     if (wallpaperAsset != null) {
                         wallpaperAsset.decodeBitmap(targetWidth, targetHeight, bitmap -> {});
