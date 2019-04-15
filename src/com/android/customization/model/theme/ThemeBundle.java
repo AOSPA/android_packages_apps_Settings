@@ -162,7 +162,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
 
     private Asset getOverrideWallpaperAsset(Context context) {
         if (mOverrideWallpaperAsset == null) {
-            mOverrideWallpaperAsset = new BitmapCachingAsset(
+            mOverrideWallpaperAsset = new BitmapCachingAsset(context,
                     mOverrideWallpaper.getThumbAsset(context));
         }
         return mOverrideWallpaperAsset;
@@ -216,7 +216,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         public final List<Drawable> shapeAppIcons;
         @Dimension public final int bottomSheeetCornerRadius;
 
-        private PreviewInfo(Typeface bodyFontFamily, Typeface headlineFontFamily,
+        private PreviewInfo(Context context, Typeface bodyFontFamily, Typeface headlineFontFamily,
                 int colorAccentLight, int colorAccentDark, List<Drawable> icons,
                 Drawable shapeDrawable, @Dimension int cornerRadius,
                 @Nullable ResourceAsset wallpaperAsset, List<Drawable> shapeAppIcons) {
@@ -228,7 +228,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
             this.shapeDrawable = shapeDrawable;
             this.bottomSheeetCornerRadius = cornerRadius;
             this.wallpaperAsset = wallpaperAsset == null
-                    ? null : new BitmapCachingAsset(wallpaperAsset);
+                    ? null : new BitmapCachingAsset(context, wallpaperAsset);
             this.shapeAppIcons = shapeAppIcons;
         }
 
@@ -260,12 +260,12 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         private List<Drawable> mAppIcons = new ArrayList<>();
 
 
-        public ThemeBundle build() {
+        public ThemeBundle build(Context context) {
             return new ThemeBundle(mTitle, mPackages, mIsDefault, mWallpaperInfo,
-                    createPreviewInfo());
+                    createPreviewInfo(context));
         }
 
-        protected PreviewInfo createPreviewInfo() {
+        protected PreviewInfo createPreviewInfo(Context context) {
             ShapeDrawable shapeDrawable = null;
             List<Drawable> shapeIcons = new ArrayList<>();
             if (!TextUtils.isEmpty(mShapePath)) {
@@ -284,7 +284,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
                     //  non-adaptive icons
                 }
             }
-            return new PreviewInfo(mBodyFontFamily, mHeadlineFontFamily, mColorAccentLight,
+            return new PreviewInfo(context, mBodyFontFamily, mHeadlineFontFamily, mColorAccentLight,
                     mColorAccentDark, mIcons, shapeDrawable, mCornerRadius,
                     mWallpaperAsset, shapeIcons);
         }
