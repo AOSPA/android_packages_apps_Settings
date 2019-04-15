@@ -20,6 +20,7 @@ import static com.android.customization.model.ResourceConstants.ACCENT_COLOR_LIG
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ANDROID_THEME;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
 import static com.android.customization.model.ResourceConstants.PATH_SIZE;
@@ -73,7 +74,7 @@ public class ColorOptionsProvider extends ThemeComponentOptionProvider<ColorOpti
     protected void loadOptions() {
         List<Drawable> previewIcons = new ArrayList<>();
         String iconPackage =
-                mCustomThemeManager.getOverlayPackages().get(OVERLAY_CATEGORY_ICON_SYSUI);
+                mCustomThemeManager.getOverlayPackages().get(OVERLAY_CATEGORY_ICON_ANDROID);
         if (TextUtils.isEmpty(iconPackage)) {
             iconPackage = SYSUI_PACKAGE;
         }
