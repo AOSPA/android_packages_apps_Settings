@@ -134,11 +134,17 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
                     if (msg.arg1 == ARG_RESTART_CAMERA) {
                         mProgressBar.setVisibility(View.INVISIBLE);
+                        mDecorateView.setFocused(false);
                         restartCamera();
                     }
                     break;
 
                 case MESSAGE_SCAN_WIFI_DPP_SUCCESS:
+                    if (mCamera != null) {
+                        mCamera.stop();
+                    }
+
+                    mDecorateView.setFocused(true);
                     mErrorMessage.setVisibility(View.INVISIBLE);
 
                     if (mScanWifiDppSuccessListener == null) {
@@ -153,15 +159,24 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                         mSummary.sendAccessibilityEvent(
                                 AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
                     }
+
+                    WifiDppUtils.triggerVibrationForQrCodeRecognition(getContext());
                     break;
 
                 case MESSAGE_SCAN_ZXING_WIFI_FORMAT_SUCCESS:
+                    if (mCamera != null) {
+                        mCamera.stop();
+                    }
+
+                    mDecorateView.setFocused(true);
                     mErrorMessage.setVisibility(View.INVISIBLE);
 
                     final WifiNetworkConfig wifiNetworkConfig = (WifiNetworkConfig)msg.obj;
                     mWifiConfiguration = wifiNetworkConfig.getWifiConfigurationOrNull();
                     wifiNetworkConfig.connect(getContext(),
                             /* listener */ WifiDppQrCodeScannerFragment.this);
+
+                    WifiDppUtils.triggerVibrationForQrCodeRecognition(getContext());
                     break;
 
                 default:
@@ -408,11 +423,6 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     }
 
     private void handleWifiDpp() {
-        if (mCamera != null) {
-            mCamera.stop();
-        }
-        mDecorateView.setFocused(true);
-
         Message message = mHandler.obtainMessage(MESSAGE_SCAN_WIFI_DPP_SUCCESS);
         message.obj = new WifiQrCode(mWifiQrCode.getQrCode());
 
@@ -420,11 +430,6 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     }
 
     private void handleZxingWifiFormat() {
-        if (mCamera != null) {
-            mCamera.stop();
-        }
-        mDecorateView.setFocused(true);
-
         Message message = mHandler.obtainMessage(MESSAGE_SCAN_ZXING_WIFI_FORMAT_SUCCESS);
         message.obj = new WifiQrCode(mWifiQrCode.getQrCode()).getWifiNetworkConfig();
 

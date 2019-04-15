@@ -27,6 +27,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources.Theme;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -339,6 +340,12 @@ public class SettingsActivity extends SettingsBaseActivity
         if (DEBUG_TIMING) {
             Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
         }
+    }
+
+    @Override
+    protected void onApplyThemeResource(Theme theme, int resid, boolean first) {
+        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
+        super.onApplyThemeResource(theme, resid, first);
     }
 
     @Override
@@ -672,10 +679,14 @@ public class SettingsActivity extends SettingsBaseActivity
                 showDev, isAdmin)
                 || somethingChanged;
 
-        // Enable/disable backup settings depending on whether backup is activated for the user.
-        boolean isBackupActive = new BackupSettingsHelper(this).isBackupServiceActive();
+        // For profiles, we want them to be included in the profile select dialog even if
+        // backup is not activated.
+        // For other users, enable/disable backup settings depending on whether backup is activated
+        // for the user.
+        boolean enableBackupTile = um.isManagedProfile()
+                || new BackupSettingsHelper(this).isBackupServiceActive();
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                UserBackupSettingsActivity.class.getName()), isBackupActive, isAdmin)
+                UserBackupSettingsActivity.class.getName()), enableBackupTile, isAdmin)
                 || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,

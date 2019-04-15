@@ -138,9 +138,9 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
                 .setOnItemClickListener(
                         (parent, view, position, id) -> this.onClick(dialog, position));
 
-        // Don't dismiss dialog when touching outside. User report it is easy to touch outside.
-        // This causes dialog to close. Which is concerned as a bad UX (b/128877712).
-        dialog.setCanceledOnTouchOutside(false);
+        // Don't dismiss dialog when touching outside. User reports it is easy to touch outside.
+        // This causes dialog to close.
+        setCancelable(false);
 
         dialog.setOnShowListener((dialogInterface) -> {
             // Replace NeutralButton onClickListener to avoid closing dialog
@@ -393,9 +393,12 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
 
             final PreferenceImageView imageView = view.findViewById(android.R.id.icon);
             final int level = accessPoint.getLevel();
+            final int generation = accessPoint.getWifiGeneration();
+            final boolean isReady = accessPoint.isTwtSupported()
+                                    && accessPoint.isVhtMax8SpatialStreamsSupported();
             if (imageView != null) {
                 final Drawable drawable = getContext().getDrawable(
-                        Utils.getWifiIconResource(level));
+                        Utils.getWifiIconResource(level, generation, isReady));
                 drawable.setTintList(
                         Utils.getColorAttr(getContext(), android.R.attr.colorControlNormal));
                 imageView.setImageDrawable(drawable);
