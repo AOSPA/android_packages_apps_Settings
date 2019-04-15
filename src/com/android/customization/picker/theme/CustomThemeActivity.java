@@ -53,7 +53,6 @@ import com.android.customization.module.ThemesUserEventLogger;
 import com.android.customization.picker.theme.CustomThemeComponentFragment.CustomThemeComponentFragmentHost;
 import com.android.wallpaper.R;
 import com.android.wallpaper.module.InjectorProvider;
-import com.android.wallpaper.module.UserEventLogger;
 import com.android.wallpaper.module.WallpaperSetter;
 
 import java.util.ArrayList;
@@ -94,7 +93,7 @@ public class CustomThemeActivity extends FragmentActivity implements
             }
         }
         mCustomThemeManager = new CustomThemeManager(themeBuilder == null ? null
-                : (CustomTheme) themeBuilder.build());
+                : (CustomTheme) themeBuilder.build(this));
 
         mThemeManager = new ThemeManager(
                 new DefaultThemeProvider(this, injector.getCustomizationPreferences(this)),
