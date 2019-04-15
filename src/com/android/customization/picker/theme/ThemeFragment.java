@@ -532,6 +532,7 @@ public class ThemeFragment extends ToolbarFragment {
                     title.setTypeface(previewInfo.headlineFontFamily);
                     TextView body = card.findViewById(R.id.font_card_body);
                     body.setTypeface(previewInfo.bodyFontFamily);
+                    card.findViewById(R.id.font_card_divider).setBackgroundColor(accentColor);
                 }
             });
             if (previewInfo.icons.size() >= mIconIds.length) {
