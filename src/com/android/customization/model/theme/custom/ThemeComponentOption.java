@@ -103,6 +103,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         public void bindThumbnailTile(View view) {
             ((TextView) view.findViewById(R.id.thumbnail_text)).setTypeface(
                     mHeadlineFont);
+            view.setContentDescription(mLabel);
         }
 
         @Override
@@ -154,6 +155,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
             icon.setTint(res.getColor(R.color.icon_thumbnail_color, null));
             ((ImageView) view.findViewById(R.id.option_icon)).setImageDrawable(
                     icon);
+            view.setContentDescription(mLabel);
         }
 
         @Override
@@ -245,9 +247,12 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
          */
         private Drawable mShapeDrawable;
 
-        ColorOption(String packageName, @ColorInt int lightColor,
+        private String mLabel;
+
+        ColorOption(String packageName, String label, @ColorInt int lightColor,
                 @ColorInt int darkColor) {
             addOverlayPackage(OVERLAY_CATEGORY_COLOR, packageName);
+            mLabel = label;
             mColorAccentLight = lightColor;
             mColorAccentDark = darkColor;
         }
@@ -256,6 +261,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         public void bindThumbnailTile(View view) {
             int color = resolveColor(view.getResources());
             ((ImageView) view.findViewById(R.id.option_tile)).getDrawable().setTint(color);
+            view.setContentDescription(mLabel);
         }
 
         private int resolveColor(Resources res) {
@@ -355,13 +361,16 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
         private final LayerDrawable mShape;
         private final List<Drawable> mAppIcons;
+        private final String mLabel;
         private int[] mShapeIconIds = {
                 R.id.shape_preview_icon_0, R.id.shape_preview_icon_1, R.id.shape_preview_icon_2,
                 R.id.shape_preview_icon_3, R.id.shape_preview_icon_4, R.id.shape_preview_icon_5
         };
 
-        ShapeOption(String packageName, Drawable shapeDrawable, List<Drawable> appIcons) {
+        ShapeOption(String packageName, String label, Drawable shapeDrawable,
+                List<Drawable> appIcons) {
             addOverlayPackage(OVERLAY_CATEGORY_SHAPE, packageName);
+            mLabel = label;
             mAppIcons = appIcons;
             Drawable background = shapeDrawable.getConstantState().newDrawable();
             Drawable foreground = shapeDrawable.getConstantState().newDrawable();
@@ -387,6 +396,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
             foreground.setTint(res.getColor(R.color.shape_option_tile_foreground_color, theme));
 
             thumb.setImageDrawable(mShape);
+            view.setContentDescription(mLabel);
         }
 
         @Override
