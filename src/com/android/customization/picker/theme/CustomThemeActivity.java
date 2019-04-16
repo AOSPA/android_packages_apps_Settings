@@ -67,6 +67,7 @@ public class CustomThemeActivity extends FragmentActivity implements
     public static final int RESULT_THEME_APPLIED = 20;
 
     private static final String TAG = "CustomThemeActivity";
+    private static final String KEY_STATE_CURRENT_STEP = "CustomThemeActivity.currentStep";
 
     private ThemesUserEventLogger mUserEventLogger;
     private List<ComponentStep<?>> mSteps;
@@ -77,7 +78,6 @@ public class CustomThemeActivity extends FragmentActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         CustomizationInjector injector = (CustomizationInjector) InjectorProvider.getInjector();
         mUserEventLogger = (ThemesUserEventLogger) injector.getUserEventLogger(this);
         Intent intent = getIntent();
@@ -103,10 +103,17 @@ public class CustomThemeActivity extends FragmentActivity implements
                 new OverlayManagerCompat(this),
                 mUserEventLogger);
         mThemeManager.fetchOptions(null, false);
+
+        int currentStep = 0;
+        if (savedInstanceState != null) {
+            currentStep = savedInstanceState.getInt(KEY_STATE_CURRENT_STEP);
+        }
+        initSteps(currentStep);
+
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_theme);
         mApplyButton = findViewById(R.id.next_button);
         mApplyButton.setOnClickListener(view -> onNextOrApply());
-        initSteps();
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
@@ -114,6 +121,12 @@ public class CustomThemeActivity extends FragmentActivity implements
             // Navigate to the first step
             navigateToStep(0);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_STATE_CURRENT_STEP, mCurrentStep);
     }
 
     private void navigateToStep(int i) {
@@ -132,7 +145,7 @@ public class CustomThemeActivity extends FragmentActivity implements
         updateApplyButtonLabel();
     }
 
-    private void initSteps() {
+    private void initSteps(int currentStep) {
         mSteps = new ArrayList<>();
         OverlayManagerCompat manager = new OverlayManagerCompat(this);
         mSteps.add(new FontStep(new FontOptionsProvider(this, manager), 0, 4));
@@ -140,7 +153,7 @@ public class CustomThemeActivity extends FragmentActivity implements
         mSteps.add(new ColorStep(new ColorOptionsProvider(this, manager, mCustomThemeManager),
                 2, 4));
         mSteps.add(new ShapeStep(new ShapeOptionsProvider(this, manager), 3, 4));        
-        mCurrentStep = 0;
+        mCurrentStep = currentStep;
     }
 
     private void onNextOrApply() {
