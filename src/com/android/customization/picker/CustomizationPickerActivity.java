@@ -183,9 +183,8 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
             mSections.put(R.id.nav_theme, new ThemeSection(R.id.nav_theme, themeManager));
         }
         //Clock
-        //ClockManager clockManager = new ClockManager(this, new ResourcesApkClockProvider(this));
-        ClockManager clockManager = new ClockManager(this, new ContentProviderClockProvider(this),
-                eventLogger);
+        ClockManager clockManager = new ClockManager(getContentResolver(),
+                new ContentProviderClockProvider(this), eventLogger);
         if (clockManager.isAvailable()) {
             mSections.put(R.id.nav_clock, new ClockSection(R.id.nav_clock, clockManager));
         }
