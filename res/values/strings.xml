@@ -60,6 +60,9 @@
     <!-- Sample text used to show a preview of a selected font [CHAR LIMIT=3] -->
     <string name="theme_font_example">ABC</string>
 
+    <!-- Content description for previewing a style, describing each of their components. [CHAR_LIMIT=NONE] -->
+    <string name="theme_description">Font: <xliff:g name="font_name">%1$s</xliff:g>, icons: <xliff:g name="icon_name">%2$s</xliff:g>, shape: <xliff:g name="shape_name">%3$s</xliff:g>, color: <xliff:g name="color_name">%4$s</xliff:g> </string>
+
     <!-- Plus sign used to indicate that the user can add a custom theme -->
     <string name="add_custom_theme" translatable="false">+</string>
 
@@ -167,4 +170,7 @@
         instead of their customly defined one. The button dismisses the dialog and goes back to the
         previous screen. [CHAR_LIMIT=16]  -->
     <string name="no_thanks">No, thanks</string>
+
+    <!-- Content description for a screen showing the preview of a clock face. [CHAR_LIMIT=NONE] -->
+    <string name="clock_preview_content_description"><xliff:g name="clock_name">%1$s</xliff:g> clock preview</string>
 </resources>

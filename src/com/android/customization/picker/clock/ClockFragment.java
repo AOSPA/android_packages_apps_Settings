@@ -29,7 +29,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.model.clock.BaseClockManager;
-import com.android.customization.model.clock.ClockManager;
 import com.android.customization.model.clock.Clockface;
 import com.android.customization.module.ThemesUserEventLogger;
 import com.android.customization.picker.BasePreviewAdapter;
@@ -146,6 +145,8 @@ public class ClockFragment extends ToolbarFragment {
                     100 /* transitionDurationMillis */,
                     null /* drawableLoadedListener */,
                     res.getColor(android.R.color.transparent, null) /* placeholderColor */);
+            card.setContentDescription(card.getResources().getString(
+                    R.string.clock_preview_content_description, title));
         }
     }
 

@@ -15,9 +15,14 @@
  */
 package com.android.customization.model.theme;
 
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
 import static com.android.customization.model.ResourceConstants.PATH_SIZE;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Path;
@@ -40,6 +45,7 @@ import androidx.core.graphics.PathParser;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
+import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.widget.DynamicAdaptiveIconDrawable;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
@@ -72,6 +78,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
     @Nullable private final WallpaperInfo mWallpaperInfo;
     private WallpaperInfo mOverrideWallpaper;
     private Asset mOverrideWallpaperAsset;
+    private CharSequence mContentDescription;
 
     protected ThemeBundle(String title, Map<String, String> overlayPackages,
             boolean isDefault, @Nullable WallpaperInfo wallpaperInfo,
@@ -106,6 +113,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
             ((ImageView) view.findViewById(R.id.theme_option_icon)).setImageDrawable(
                     icon);
         }
+        view.setContentDescription(getContentDescription(view.getContext()));
     }
 
     @Override
@@ -204,6 +212,35 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         }
     }
 
+    protected CharSequence getContentDescription(Context context) {
+        if (mContentDescription == null) {
+            CharSequence defaultName = context.getString(R.string.default_theme_title);
+            if (isDefault()) {
+                mContentDescription = defaultName;
+            } else {
+                PackageManager pm = context.getPackageManager();
+                CharSequence fontName = getOverlayName(pm, OVERLAY_CATEGORY_FONT);
+                CharSequence iconName = getOverlayName(pm, OVERLAY_CATEGORY_ICON_ANDROID);
+                CharSequence shapeName = getOverlayName(pm, OVERLAY_CATEGORY_SHAPE);
+                CharSequence colorName = getOverlayName(pm, OVERLAY_CATEGORY_COLOR);
+                mContentDescription = context.getString(R.string.theme_description,
+                        TextUtils.isEmpty(fontName) ? defaultName : fontName,
+                        TextUtils.isEmpty(iconName) ? defaultName : iconName,
+                        TextUtils.isEmpty(shapeName) ? defaultName : shapeName,
+                        TextUtils.isEmpty(colorName) ? defaultName : colorName);
+            }
+        }
+        return mContentDescription;
+    }
+
+    private CharSequence getOverlayName(PackageManager pm, String overlayCategoryFont) {
+        try {
+            return pm.getApplicationInfo(
+                    mPackagesByCategory.get(overlayCategoryFont), 0).loadLabel(pm);
+        } catch (PackageManager.NameNotFoundException e) {
+            return "";
+        }
+    }
 
     public static class PreviewInfo {
         public final Typeface bodyFontFamily;
@@ -258,7 +295,6 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         private WallpaperInfo mWallpaperInfo;
         protected Map<String, String> mPackages = new HashMap<>();
         private List<Drawable> mAppIcons = new ArrayList<>();
-
 
         public ThemeBundle build(Context context) {
             return new ThemeBundle(mTitle, mPackages, mIsDefault, mWallpaperInfo,
