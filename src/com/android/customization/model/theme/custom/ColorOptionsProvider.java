@@ -18,17 +18,17 @@ package com.android.customization.model.theme.custom;
 import static com.android.customization.model.ResourceConstants.ACCENT_COLOR_DARK_NAME;
 import static com.android.customization.model.ResourceConstants.ACCENT_COLOR_LIGHT_NAME;
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
+import static com.android.customization.model.ResourceConstants.ICONS_FOR_PREVIEW;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ANDROID_THEME;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
-import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
 import static com.android.customization.model.ResourceConstants.PATH_SIZE;
-import static com.android.customization.model.ResourceConstants.ICONS_FOR_PREVIEW;
 import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 import static com.android.customization.model.theme.custom.ThemeComponentOption.ColorOption.COLOR_TILES_ICON_IDS;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
@@ -44,6 +44,7 @@ import androidx.core.graphics.PathParser;
 import com.android.customization.model.ResourceConstants;
 import com.android.customization.model.theme.OverlayManagerCompat;
 import com.android.customization.model.theme.custom.ThemeComponentOption.ColorOption;
+import com.android.wallpaper.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,8 +105,9 @@ public class ColorOptionsProvider extends ThemeComponentOptionProvider<ColorOpti
                 int darkColor = overlayRes.getColor(
                         overlayRes.getIdentifier(ACCENT_COLOR_DARK_NAME, "color", overlayPackage),
                         null);
-
-                ColorOption option = new ColorOption(overlayPackage, lightColor, darkColor);
+                PackageManager pm = mContext.getPackageManager();
+                String label = pm.getApplicationInfo(overlayPackage, 0).loadLabel(pm).toString();
+                ColorOption option = new ColorOption(overlayPackage, label, lightColor, darkColor);
                 option.setPreviewIcons(previewIcons);
                 option.setShapeDrawable(shape);
                 mOptions.add(option);
@@ -136,7 +138,8 @@ public class ColorOptionsProvider extends ThemeComponentOptionProvider<ColorOpti
             darkColor = system.getColor(
                     system.getIdentifier(ACCENT_COLOR_DARK_NAME, "color", ANDROID_PACKAGE), null);
         }
-        ColorOption option = new ColorOption(null, lightColor, darkColor);
+        ColorOption option = new ColorOption(null,
+                mContext.getString(R.string.default_theme_title), lightColor, darkColor);
         option.setPreviewIcons(previewIcons);
         option.setShapeDrawable(shape);
         mOptions.add(option);

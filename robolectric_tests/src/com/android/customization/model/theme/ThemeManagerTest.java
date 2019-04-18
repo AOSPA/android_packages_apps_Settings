@@ -44,6 +44,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.customization.model.CustomizationManager.Callback;
+import com.android.customization.module.ThemesUserEventLogger;
 import com.android.customization.testutils.Condition;
 import com.android.customization.testutils.OverlayManagerMocks;
 import com.android.customization.testutils.Wait;
@@ -65,6 +66,7 @@ public class ThemeManagerTest {
 
     @Mock OverlayManagerCompat mMockOm;
     @Mock WallpaperSetter mMockWallpaperSetter;
+    @Mock ThemesUserEventLogger mThemesUserEventLogger;
     private OverlayManagerMocks mMockOmHelper;
     private ThemeManager mThemeManager;
     private FragmentActivity mActivity;
@@ -77,7 +79,8 @@ public class ThemeManagerTest {
         mMockOmHelper = new OverlayManagerMocks();
         mMockOmHelper.setUpMock(mMockOm);
         ThemeBundleProvider provider = mock(ThemeBundleProvider.class);
-        mThemeManager = new ThemeManager(provider, activity, mMockWallpaperSetter, mMockOm);
+        mThemeManager = new ThemeManager(
+                provider, activity, mMockWallpaperSetter, mMockOm, mThemesUserEventLogger);
     }
 
     @After
@@ -100,7 +103,7 @@ public class ThemeManagerTest {
         mMockOmHelper.addOverlay("test.package.name_sysui", SYSUI_PACKAGE,
                 OVERLAY_CATEGORY_ICON_SYSUI, true, 0);
 
-        ThemeBundle defaultTheme = new ThemeBundle.Builder().asDefault().build();
+        ThemeBundle defaultTheme = new ThemeBundle.Builder().asDefault().build(mActivity);
 
         applyThemeAndWaitForCondition(defaultTheme, "Overlays didn't get disabled", () -> {
             verify(mMockOm, times(6)).disableOverlay(anyString(), anyInt());
@@ -128,7 +131,7 @@ public class ThemeManagerTest {
         ThemeBundle theme = new ThemeBundle.Builder()
                 .addOverlayPackage(OVERLAY_CATEGORY_COLOR, bundleColorPackage)
                 .addOverlayPackage(OVERLAY_CATEGORY_FONT, bundleFontPackage)
-                .build();
+                .build(mActivity);
 
         applyThemeAndWaitForCondition(theme, "Overlays didn't get enabled", () -> {
             verify(mMockOm, times(2)).setEnabledExclusiveInCategory(anyString(), anyInt());

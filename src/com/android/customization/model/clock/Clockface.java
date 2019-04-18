@@ -15,8 +15,6 @@
  */
 package com.android.customization.model.clock;
 
-import android.content.Context;
-import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -54,7 +52,7 @@ public class Clockface implements CustomizationOption<Clockface> {
 
     @Override
     public boolean isActive(CustomizationManager<Clockface> manager) {
-        String currentClock = ((ClockManager) manager).getCurrentClock();
+        String currentClock = ((BaseClockManager) manager).getCurrentClock();
         // Empty clock Id is the default system clock
         return (TextUtils.isEmpty(currentClock) && TextUtils.isEmpty(mId))
                 || (mId != null && mId.equals(currentClock));
