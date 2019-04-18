@@ -26,6 +26,9 @@
         <item name="selectableItemBackground">?android:attr/selectableItemBackground</item>
         <item name="dialogPreferredPadding">24dp</item>
         <item name="colorControlHighlight">@color/ripple_material_dark</item>
+
+        <item name="actionButtonStyle">?android:actionButtonStyle</item>
+        <item name="actionMenuTextColor">?android:actionMenuTextColor</item>
     </style>
     <style name="CustomizationTheme.NoActionBar">
         <item name="android:windowActionBar">false</item>
@@ -46,7 +49,9 @@
         <item name="android:textSize">@dimen/bottom_navbar_font_text_size</item>
     </style>
     <style name="RegularToolbarStyle" parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid">
+        <item name="android:background">@color/toolbar_color</item>
         <item name="android:elevation">0dp</item>
+        <item name="android:theme">@style/WallpaperTheme</item>
     </style>
 
     <style name="HeaderTextAppearance" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title"/>
