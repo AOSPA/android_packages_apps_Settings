@@ -300,19 +300,17 @@ public class ThemeFragment extends ToolbarFragment {
         @DrawableRes final int iconSrc;
         @LayoutRes final int contentLayoutRes;
         @ColorInt final int accentColor;
-        protected final OnClickListener editClickListener;
         protected final LayoutInflater inflater;
 
         private ThemePreviewPage(Context context, @StringRes int titleResId,
                 @DrawableRes int iconSrc, @LayoutRes int contentLayoutRes,
-                @ColorInt int accentColor, OnClickListener editClickListener) {
+                @ColorInt int accentColor) {
             super(null);
             this.nameResId = titleResId;
             this.iconSrc = iconSrc;
             this.contentLayoutRes = contentLayoutRes;
             this.accentColor = accentColor;
             this.inflater = LayoutInflater.from(context);
-            this.editClickListener = editClickListener;
         }
 
         @Override
@@ -326,9 +324,6 @@ public class ThemeFragment extends ToolbarFragment {
             ViewGroup body = card.findViewById(R.id.theme_preview_card_body_container);
             inflater.inflate(contentLayoutRes, body, true);
             bindBody(false);
-            card.setOnClickListener(editClickListener);
-            card.findViewById(R.id.edit_label).setVisibility(editClickListener != null
-                    ? View.VISIBLE : View.INVISIBLE);
         }
 
         protected boolean containsWallpaper() {
@@ -343,6 +338,7 @@ public class ThemeFragment extends ToolbarFragment {
         private final Typeface mHeadlineFont;
         private final List<Drawable> mIcons;
         private String mTitle;
+        private OnClickListener mEditClickListener;
         private final ThemePreviewAdapter.WallpaperPreviewLayoutListener mListener;
         private final int mCornerRadius;
 
@@ -350,12 +346,12 @@ public class ThemeFragment extends ToolbarFragment {
                 Typeface headlineFont, int cornerRadius,
                 OnClickListener editClickListener,
                 ThemePreviewAdapter.WallpaperPreviewLayoutListener wallpaperListener) {
-            super(context, 0, 0, R.layout.preview_card_cover_content, accentColor,
-                    editClickListener);
+            super(context, 0, 0, R.layout.preview_card_cover_content, accentColor);
             mTitle = title;
             mHeadlineFont = headlineFont;
             mIcons = icons;
             mCornerRadius = cornerRadius;
+            mEditClickListener = editClickListener;
             mListener = wallpaperListener;
         }
 
@@ -388,8 +384,8 @@ public class ThemeFragment extends ToolbarFragment {
             ViewGroup body = card.findViewById(R.id.theme_preview_card_body_container);
             inflater.inflate(contentLayoutRes, body, true);
             bindBody(false);
-            card.setOnClickListener(editClickListener);
-            card.findViewById(R.id.edit_label).setVisibility(editClickListener != null
+            card.setOnClickListener(mEditClickListener);
+            card.findViewById(R.id.edit_label).setVisibility(mEditClickListener != null
                     ? View.VISIBLE : View.INVISIBLE);
             View qsb = card.findViewById(R.id.theme_qsb);
             if (qsb != null && qsb.getVisibility() == View.VISIBLE) {
@@ -525,7 +521,7 @@ public class ThemeFragment extends ToolbarFragment {
             });
             addPage(new ThemePreviewPage(activity, R.string.preview_name_font, R.drawable.ic_font,
                     R.layout.preview_card_font_content,
-                    previewInfo.resolveAccentColor(res), editClickListener) {
+                    previewInfo.resolveAccentColor(res)) {
                 @Override
                 protected void bindBody(boolean forceRebind) {
                     TextView title = card.findViewById(R.id.font_card_title);
@@ -538,7 +534,7 @@ public class ThemeFragment extends ToolbarFragment {
             if (previewInfo.icons.size() >= mIconIds.length) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_icon,
                         R.drawable.ic_wifi_24px, R.layout.preview_card_icon_content,
-                        previewInfo.resolveAccentColor(res), editClickListener) {
+                        previewInfo.resolveAccentColor(res)) {
                     @Override
                     protected void bindBody(boolean forceRebind) {
                         for (int i = 0; i < mIconIds.length && i < previewInfo.icons.size(); i++) {
@@ -551,7 +547,7 @@ public class ThemeFragment extends ToolbarFragment {
             if (previewInfo.colorAccentDark != -1 && previewInfo.colorAccentLight != -1) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_color,
                         R.drawable.ic_colorize_24px, R.layout.preview_card_color_content,
-                        previewInfo.resolveAccentColor(res), editClickListener) {
+                        previewInfo.resolveAccentColor(res)) {
                     @Override
                     protected void bindBody(boolean forceRebind) {
                         int controlGreyColor = res.getColor(R.color.control_grey);
@@ -612,7 +608,7 @@ public class ThemeFragment extends ToolbarFragment {
             if (!previewInfo.shapeAppIcons.isEmpty()) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_shape,
                         R.drawable.ic_shapes_24px, R.layout.preview_card_shape_content,
-                        previewInfo.resolveAccentColor(res), editClickListener) {
+                        previewInfo.resolveAccentColor(res)) {
                     @Override
                     protected void bindBody(boolean forceRebind) {
                         for (int i = 0; i < mShapeIconIds.length
@@ -627,7 +623,7 @@ public class ThemeFragment extends ToolbarFragment {
             if (previewInfo.wallpaperAsset != null) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_wallpaper,
                         R.drawable.ic_wallpaper_24px, R.layout.preview_card_wallpaper_content,
-                        previewInfo.resolveAccentColor(res), null) {
+                        previewInfo.resolveAccentColor(res)) {
 
                     private final WallpaperPreviewLayoutListener mListener =
                             new WallpaperPreviewLayoutListener(theme, previewInfo, false);
