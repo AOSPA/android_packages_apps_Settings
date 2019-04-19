@@ -36,4 +36,14 @@ public class DefaultCustomizationPreferences extends DefaultWallpaperPreferences
     public void storeCustomTheme(String serializedCustomTheme) {
         mSharedPrefs.edit().putString(KEY_CUSTOM_THEME, serializedCustomTheme).apply();
     }
+
+    @Override
+    public boolean getTabVisited(String id) {
+        return mSharedPrefs.getBoolean(id, false);
+    }
+
+    @Override
+    public void setTabVisited(String id) {
+        mSharedPrefs.edit().putBoolean(id, true).apply();
+    }
 }

@@ -36,6 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.model.grid.GridOption;
 import com.android.customization.model.grid.GridOptionsManager;
+import com.android.customization.module.ThemesUserEventLogger;
 import com.android.customization.picker.BasePreviewAdapter;
 import com.android.customization.picker.BasePreviewAdapter.PreviewPage;
 import com.android.customization.widget.OptionSelectorController;
@@ -81,11 +82,14 @@ public class GridFragment extends ToolbarFragment {
     private GridOptionsManager mGridManager;
     private GridOption mSelectedOption;
     private PreviewPager mPreviewPager;
+    private ThemesUserEventLogger mEventLogger;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mGridManager = ((GridFragmentHost) context).getGridOptionsManager();
+        mEventLogger = (ThemesUserEventLogger)
+                InjectorProvider.getInjector().getUserEventLogger(context);
     }
 
     @Nullable
@@ -162,6 +166,7 @@ public class GridFragment extends ToolbarFragment {
 
             mOptionsController.addListener(selected -> {
                 mSelectedOption = (GridOption) selected;
+                mEventLogger.logGridSelected(mSelectedOption);
                 createAdapter();
             });
             mOptionsController.initOptions(mGridManager);

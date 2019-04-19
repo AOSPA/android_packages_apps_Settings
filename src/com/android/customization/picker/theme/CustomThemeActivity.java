@@ -49,10 +49,10 @@ import com.android.customization.model.theme.custom.ThemeComponentOption.IconOpt
 import com.android.customization.model.theme.custom.ThemeComponentOption.ShapeOption;
 import com.android.customization.model.theme.custom.ThemeComponentOptionProvider;
 import com.android.customization.module.CustomizationInjector;
+import com.android.customization.module.ThemesUserEventLogger;
 import com.android.customization.picker.theme.CustomThemeComponentFragment.CustomThemeComponentFragmentHost;
 import com.android.wallpaper.R;
 import com.android.wallpaper.module.InjectorProvider;
-import com.android.wallpaper.module.UserEventLogger;
 import com.android.wallpaper.module.WallpaperSetter;
 
 import java.util.ArrayList;
@@ -67,8 +67,9 @@ public class CustomThemeActivity extends FragmentActivity implements
     public static final int RESULT_THEME_APPLIED = 20;
 
     private static final String TAG = "CustomThemeActivity";
+    private static final String KEY_STATE_CURRENT_STEP = "CustomThemeActivity.currentStep";
 
-    private UserEventLogger mUserEventLogger;
+    private ThemesUserEventLogger mUserEventLogger;
     private List<ComponentStep<?>> mSteps;
     private int mCurrentStep;
     private CustomThemeManager mCustomThemeManager;
@@ -77,9 +78,8 @@ public class CustomThemeActivity extends FragmentActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         CustomizationInjector injector = (CustomizationInjector) InjectorProvider.getInjector();
-        mUserEventLogger = injector.getUserEventLogger(this);
+        mUserEventLogger = (ThemesUserEventLogger) injector.getUserEventLogger(this);
         Intent intent = getIntent();
         Builder themeBuilder = null;
         if (intent != null && intent.hasExtra(EXTRA_THEME_PACKAGES)
@@ -93,19 +93,27 @@ public class CustomThemeActivity extends FragmentActivity implements
             }
         }
         mCustomThemeManager = new CustomThemeManager(themeBuilder == null ? null
-                : (CustomTheme) themeBuilder.build());
+                : (CustomTheme) themeBuilder.build(this));
 
         mThemeManager = new ThemeManager(
                 new DefaultThemeProvider(this, injector.getCustomizationPreferences(this)),
                 this,
                 new WallpaperSetter(injector.getWallpaperPersister(this),
                         injector.getPreferences(this), mUserEventLogger, false),
-                new OverlayManagerCompat(this));
+                new OverlayManagerCompat(this),
+                mUserEventLogger);
         mThemeManager.fetchOptions(null, false);
+
+        int currentStep = 0;
+        if (savedInstanceState != null) {
+            currentStep = savedInstanceState.getInt(KEY_STATE_CURRENT_STEP);
+        }
+        initSteps(currentStep);
+
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_theme);
         mApplyButton = findViewById(R.id.next_button);
         mApplyButton.setOnClickListener(view -> onNextOrApply());
-        initSteps();
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
@@ -113,6 +121,12 @@ public class CustomThemeActivity extends FragmentActivity implements
             // Navigate to the first step
             navigateToStep(0);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_STATE_CURRENT_STEP, mCurrentStep);
     }
 
     private void navigateToStep(int i) {
@@ -131,7 +145,7 @@ public class CustomThemeActivity extends FragmentActivity implements
         updateApplyButtonLabel();
     }
 
-    private void initSteps() {
+    private void initSteps(int currentStep) {
         mSteps = new ArrayList<>();
         OverlayManagerCompat manager = new OverlayManagerCompat(this);
         mSteps.add(new FontStep(new FontOptionsProvider(this, manager), 0, 4));
@@ -139,7 +153,7 @@ public class CustomThemeActivity extends FragmentActivity implements
         mSteps.add(new ColorStep(new ColorOptionsProvider(this, manager, mCustomThemeManager),
                 2, 4));
         mSteps.add(new ShapeStep(new ShapeOptionsProvider(this, manager), 3, 4));        
-        mCurrentStep = 0;
+        mCurrentStep = currentStep;
     }
 
     private void onNextOrApply() {

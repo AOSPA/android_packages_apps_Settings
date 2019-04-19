@@ -24,4 +24,8 @@ public interface CustomizationPreferences extends WallpaperPreferences {
     String getSerializedCustomTheme();
 
     void storeCustomTheme(String serializedCustomTheme);
+
+    boolean getTabVisited(String id);
+
+    void setTabVisited(String id);
 }
