@@ -13,10 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.customization.model.grid;
+package com.android.customization.model.clock;
 
+import static junit.framework.TestCase.assertTrue;
 import static junit.framework.TestCase.fail;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -24,52 +27,85 @@ import static org.mockito.Mockito.when;
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager.Callback;
-import com.android.customization.module.ThemesUserEventLogger;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
-public class GridOptionsManagerTest {
+public class BaseClockManagerTest {
 
-    @Mock LauncherGridOptionsProvider mProvider;
-    @Mock ThemesUserEventLogger mThemesUserEventLogger;
-    private GridOptionsManager mManager;
+    private static final String CURRENT_CLOCK = "current_clock";
+
+    @Mock ClockProvider mProvider;
+    private TestClockManager mManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mManager = new GridOptionsManager(mProvider, mThemesUserEventLogger);
+        mManager = new TestClockManager(mProvider);
+    }
+
+    @Test
+    public void testIsAvailable() {
+        // GIVEN that the ClockProvider is available
+        when(mProvider.isAvailable()).thenReturn(true);
+        // THEN the BaseClockManager is true
+        assertTrue(mManager.isAvailable());
     }
 
     @Test
     public void testApply() {
-        String gridName = "testName";
-        GridOption grid = new GridOption("testTitle", gridName, false, 2, 2, null, 1, "");
-        when(mProvider.applyGrid(gridName)).thenReturn(1);
+        final String id = "id";
+        Clockface clock = new Clockface.Builder().setId(id).build();
 
-        mManager.apply(grid, new Callback() {
+        mManager.apply(clock, new Callback() {
             @Override
             public void onSuccess() {
                 //Nothing to do here, the test passed
             }
-
             @Override
             public void onError(@Nullable Throwable throwable) {
                 fail("onError was called when grid had been applied successfully");
             }
         });
+
+        assertEquals(id, mManager.getClockId());
     }
 
     @Test
-    public void testFetch_backgroundThread() {
+    public void testFetch() {
         mManager.fetchOptions(null, false);
-        Robolectric.flushBackgroundThreadScheduler();
-        verify(mProvider).fetch(anyBoolean());
+        verify(mProvider).fetch(eq(null), anyBoolean());
+    }
+
+    /**
+     * Testable BaseClockManager that provides basic implementations of abstract methods.
+     */
+    private static final class TestClockManager extends BaseClockManager {
+
+        private String mClockId;
+
+        TestClockManager(ClockProvider provider) {
+            super(provider);
+        }
+
+        String getClockId() {
+            return mClockId;
+        }
+
+        @Override
+        protected void handleApply(Clockface option, Callback callback) {
+            mClockId = option.getId();
+            callback.onSuccess();
+        }
+
+        @Override
+        protected String lookUpCurrentClock() {
+            return CURRENT_CLOCK;
+        }
     }
 }

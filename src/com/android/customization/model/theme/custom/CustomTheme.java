@@ -15,6 +15,7 @@
  */
 package com.android.customization.model.theme.custom;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -60,8 +61,8 @@ public class CustomTheme extends ThemeBundle {
 
     public static class Builder extends ThemeBundle.Builder {
         @Override
-        public CustomTheme build() {
-            return new CustomTheme(mTitle, mPackages, createPreviewInfo());
+        public CustomTheme build(Context context) {
+            return new CustomTheme(mTitle, mPackages, createPreviewInfo(context));
         }
     }
 }

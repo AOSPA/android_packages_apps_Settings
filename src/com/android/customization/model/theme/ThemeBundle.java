@@ -15,9 +15,14 @@
  */
 package com.android.customization.model.theme;
 
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
 import static com.android.customization.model.ResourceConstants.PATH_SIZE;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Path;
@@ -40,9 +45,11 @@ import androidx.core.graphics.PathParser;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
+import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.widget.DynamicAdaptiveIconDrawable;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
+import com.android.wallpaper.asset.BitmapCachingAsset;
 import com.android.wallpaper.asset.ResourceAsset;
 import com.android.wallpaper.model.WallpaperInfo;
 
@@ -70,6 +77,8 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
     protected final Map<String, String> mPackagesByCategory;
     @Nullable private final WallpaperInfo mWallpaperInfo;
     private WallpaperInfo mOverrideWallpaper;
+    private Asset mOverrideWallpaperAsset;
+    private CharSequence mContentDescription;
 
     protected ThemeBundle(String title, Map<String, String> overlayPackages,
             boolean isDefault, @Nullable WallpaperInfo wallpaperInfo,
@@ -104,6 +113,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
             ((ImageView) view.findViewById(R.id.theme_option_icon)).setImageDrawable(
                     icon);
         }
+        view.setContentDescription(getContentDescription(view.getContext()));
     }
 
     @Override
@@ -145,6 +155,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
 
     public void setOverrideThemeWallpaper(WallpaperInfo homeWallpaper) {
         mOverrideWallpaper = homeWallpaper;
+        mOverrideWallpaperAsset = null;
     }
 
     public boolean shouldUseThemeWallpaper() {
@@ -153,8 +164,16 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
 
     public Asset getWallpaperPreviewAsset(Context context) {
         return mOverrideWallpaper != null ?
-                mOverrideWallpaper.getThumbAsset(context) :
+                getOverrideWallpaperAsset(context) :
                 getPreviewInfo().wallpaperAsset;
+    }
+
+    private Asset getOverrideWallpaperAsset(Context context) {
+        if (mOverrideWallpaperAsset == null) {
+            mOverrideWallpaperAsset = new BitmapCachingAsset(context,
+                    mOverrideWallpaper.getThumbAsset(context));
+        }
+        return mOverrideWallpaperAsset;
     }
 
     public WallpaperInfo getWallpaperInfo() {
@@ -193,6 +212,35 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         }
     }
 
+    protected CharSequence getContentDescription(Context context) {
+        if (mContentDescription == null) {
+            CharSequence defaultName = context.getString(R.string.default_theme_title);
+            if (isDefault()) {
+                mContentDescription = defaultName;
+            } else {
+                PackageManager pm = context.getPackageManager();
+                CharSequence fontName = getOverlayName(pm, OVERLAY_CATEGORY_FONT);
+                CharSequence iconName = getOverlayName(pm, OVERLAY_CATEGORY_ICON_ANDROID);
+                CharSequence shapeName = getOverlayName(pm, OVERLAY_CATEGORY_SHAPE);
+                CharSequence colorName = getOverlayName(pm, OVERLAY_CATEGORY_COLOR);
+                mContentDescription = context.getString(R.string.theme_description,
+                        TextUtils.isEmpty(fontName) ? defaultName : fontName,
+                        TextUtils.isEmpty(iconName) ? defaultName : iconName,
+                        TextUtils.isEmpty(shapeName) ? defaultName : shapeName,
+                        TextUtils.isEmpty(colorName) ? defaultName : colorName);
+            }
+        }
+        return mContentDescription;
+    }
+
+    private CharSequence getOverlayName(PackageManager pm, String overlayCategoryFont) {
+        try {
+            return pm.getApplicationInfo(
+                    mPackagesByCategory.get(overlayCategoryFont), 0).loadLabel(pm);
+        } catch (PackageManager.NameNotFoundException e) {
+            return "";
+        }
+    }
 
     public static class PreviewInfo {
         public final Typeface bodyFontFamily;
@@ -201,11 +249,11 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         @ColorInt public final int colorAccentDark;
         public final List<Drawable> icons;
         public final Drawable shapeDrawable;
-        @Nullable public final ResourceAsset wallpaperAsset;
+        @Nullable public final Asset wallpaperAsset;
         public final List<Drawable> shapeAppIcons;
         @Dimension public final int bottomSheeetCornerRadius;
 
-        private PreviewInfo(Typeface bodyFontFamily, Typeface headlineFontFamily,
+        private PreviewInfo(Context context, Typeface bodyFontFamily, Typeface headlineFontFamily,
                 int colorAccentLight, int colorAccentDark, List<Drawable> icons,
                 Drawable shapeDrawable, @Dimension int cornerRadius,
                 @Nullable ResourceAsset wallpaperAsset, List<Drawable> shapeAppIcons) {
@@ -216,7 +264,8 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
             this.icons = icons;
             this.shapeDrawable = shapeDrawable;
             this.bottomSheeetCornerRadius = cornerRadius;
-            this.wallpaperAsset = wallpaperAsset;
+            this.wallpaperAsset = wallpaperAsset == null
+                    ? null : new BitmapCachingAsset(context, wallpaperAsset);
             this.shapeAppIcons = shapeAppIcons;
         }
 
@@ -247,13 +296,12 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         protected Map<String, String> mPackages = new HashMap<>();
         private List<Drawable> mAppIcons = new ArrayList<>();
 
-
-        public ThemeBundle build() {
+        public ThemeBundle build(Context context) {
             return new ThemeBundle(mTitle, mPackages, mIsDefault, mWallpaperInfo,
-                    createPreviewInfo());
+                    createPreviewInfo(context));
         }
 
-        protected PreviewInfo createPreviewInfo() {
+        protected PreviewInfo createPreviewInfo(Context context) {
             ShapeDrawable shapeDrawable = null;
             List<Drawable> shapeIcons = new ArrayList<>();
             if (!TextUtils.isEmpty(mShapePath)) {
@@ -272,7 +320,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
                     //  non-adaptive icons
                 }
             }
-            return new PreviewInfo(mBodyFontFamily, mHeadlineFontFamily, mColorAccentLight,
+            return new PreviewInfo(context, mBodyFontFamily, mHeadlineFontFamily, mColorAccentLight,
                     mColorAccentDark, mIcons, shapeDrawable, mCornerRadius,
                     mWallpaperAsset, shapeIcons);
         }

@@ -28,14 +28,16 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.customization.model.CustomizationManager.Callback;
-import com.android.customization.model.clock.ClockManager;
+import com.android.customization.model.clock.BaseClockManager;
 import com.android.customization.model.clock.Clockface;
+import com.android.customization.module.ThemesUserEventLogger;
 import com.android.customization.picker.BasePreviewAdapter;
 import com.android.customization.picker.BasePreviewAdapter.PreviewPage;
 import com.android.customization.widget.OptionSelectorController;
 import com.android.customization.widget.PreviewPager;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
+import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.picker.ToolbarFragment;
 
 /**
@@ -47,7 +49,7 @@ public class ClockFragment extends ToolbarFragment {
      * Interface to be implemented by an Activity hosting a {@link ClockFragment}
      */
     public interface ClockFragmentHost {
-        ClockManager getClockManager();
+        BaseClockManager getClockManager();
     }
 
     public static ClockFragment newInstance(CharSequence title) {
@@ -59,13 +61,16 @@ public class ClockFragment extends ToolbarFragment {
     private RecyclerView mOptionsContainer;
     private OptionSelectorController<Clockface> mOptionsController;
     private Clockface mSelectedOption;
-    private ClockManager mClockManager;
+    private BaseClockManager mClockManager;
     private PreviewPager mPreviewPager;
+    private ThemesUserEventLogger mEventLogger;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mClockManager = ((ClockFragmentHost) context).getClockManager();
+        mEventLogger = (ThemesUserEventLogger)
+                InjectorProvider.getInjector().getUserEventLogger(context);
     }
 
     @Nullable
@@ -105,6 +110,7 @@ public class ClockFragment extends ToolbarFragment {
 
             mOptionsController.addListener(selected -> {
                 mSelectedOption = (Clockface) selected;
+                mEventLogger.logClockSelected(mSelectedOption);
                 createAdapter();
             });
             mOptionsController.initOptions(mClockManager);
@@ -139,6 +145,8 @@ public class ClockFragment extends ToolbarFragment {
                     100 /* transitionDurationMillis */,
                     null /* drawableLoadedListener */,
                     res.getColor(android.R.color.transparent, null) /* placeholderColor */);
+            card.setContentDescription(card.getResources().getString(
+                    R.string.clock_preview_content_description, title));
         }
     }
 

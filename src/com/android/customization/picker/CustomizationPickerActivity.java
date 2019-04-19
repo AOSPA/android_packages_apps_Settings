@@ -17,9 +17,13 @@ package com.android.customization.picker;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -44,6 +48,8 @@ import com.android.customization.model.theme.OverlayManagerCompat;
 import com.android.customization.model.theme.ThemeBundle;
 import com.android.customization.model.theme.ThemeManager;
 import com.android.customization.module.CustomizationInjector;
+import com.android.customization.module.DefaultCustomizationPreferences;
+import com.android.customization.module.ThemesUserEventLogger;
 import com.android.customization.picker.clock.ClockFragment;
 import com.android.customization.picker.clock.ClockFragment.ClockFragmentHost;
 import com.android.customization.picker.grid.GridFragment;
@@ -80,6 +86,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
     private static final String TAG = "CustomizationPickerActivity";
     private static final String WALLPAPER_FLAVOR_EXTRA = "com.android.launcher3.WALLPAPER_FLAVOR";
+    private static final String WALLPAPER_FOCUS = "focus_wallpaper";
     private static final String WALLPAPER_ONLY = "wallpaper_only";
 
     private WallpaperPickerDelegate mDelegate;
@@ -113,8 +120,13 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
                 // App launch specific logic: log the "app launched" event and set up daily logging.
                 mUserEventLogger.logAppLaunched();
                 DailyLoggingAlarmScheduler.setAlarm(getApplicationContext());
-                // Navigate to the first available section
-                navigateToSection(mBottomNav.getMenu().getItem(0).getItemId());
+
+                // Navigate to the Wallpaper tab if we started directly from launcher, otherwise
+                // start at the Styles tab
+                int section = WALLPAPER_FOCUS.equals(getIntent()
+                    .getStringExtra(WALLPAPER_FLAVOR_EXTRA))
+                    ? mBottomNav.getMenu().size() - 1 : 0;
+                navigateToSection(mBottomNav.getMenu().getItem(section).getItemId());
             }
         }
     }
@@ -122,6 +134,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     @Override
     protected void onResume() {
         super.onResume();
+        mUserEventLogger.logResumed();
         // refresh the sections as the preview may have changed
         initSections();
     }
@@ -160,23 +173,26 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         CustomizationInjector injector = (CustomizationInjector) InjectorProvider.getInjector();
         mWallpaperSetter = new WallpaperSetter(injector.getWallpaperPersister(this),
                 injector.getPreferences(this), mUserEventLogger, false);
+        ThemesUserEventLogger eventLogger = (ThemesUserEventLogger) injector.getUserEventLogger(
+                this);
         ThemeManager themeManager = new ThemeManager(
                 new DefaultThemeProvider(this, injector.getCustomizationPreferences(this)),
                 this,
-                mWallpaperSetter, new OverlayManagerCompat(this));
+                mWallpaperSetter, new OverlayManagerCompat(this), eventLogger);
         if (themeManager.isAvailable()) {
             mSections.put(R.id.nav_theme, new ThemeSection(R.id.nav_theme, themeManager));
         }
         //Clock
-        //ClockManager clockManager = new ClockManager(this, new ResourcesApkClockProvider(this));
-        ClockManager clockManager = new ClockManager(this, new ContentProviderClockProvider(this));
+        ClockManager clockManager = new ClockManager(getContentResolver(),
+                new ContentProviderClockProvider(this), eventLogger);
         if (clockManager.isAvailable()) {
             mSections.put(R.id.nav_clock, new ClockSection(R.id.nav_clock, clockManager));
         }
         //Grid
         GridOptionsManager gridManager = new GridOptionsManager(
                 new LauncherGridOptionsProvider(this,
-                        getString(R.string.grid_control_metadata_name)));
+                        getString(R.string.grid_control_metadata_name)),
+                eventLogger);
         if (gridManager.isAvailable()) {
             mSections.put(R.id.nav_grid, new GridSection(R.id.nav_grid, gridManager));
         }
@@ -186,20 +202,61 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
     private void setUpBottomNavView() {
         mBottomNav = findViewById(R.id.main_bottom_nav);
+        // Clear tint list so it doesn't recolor the indicator dots
+        mBottomNav.setItemIconTintList(null);
         Menu menu = mBottomNav.getMenu();
+        DefaultCustomizationPreferences prefs =
+            new DefaultCustomizationPreferences(getApplicationContext());
         for (int i = menu.size() - 1; i >= 0; i--) {
             MenuItem item = menu.getItem(i);
-            if (!mSections.containsKey(item.getItemId())) {
-                menu.removeItem(item.getItemId());
+            int id = item.getItemId();
+            if (!mSections.containsKey(id)) {
+                menu.removeItem(id);
+            }  else if (!prefs.getTabVisited(getResources().getResourceName(id))) {
+                showTipDot(item);
             }
         }
 
         mBottomNav.setOnNavigationItemSelectedListener(item -> {
-            CustomizationSection section = mSections.get(item.getItemId());
+            int id = item.getItemId();
+            CustomizationSection section = mSections.get(id);
             switchFragment(section);
             section.onVisible();
+            String name = getResources().getResourceName(id);
+            if (!prefs.getTabVisited(name)) {
+                prefs.setTabVisited(name);
+                hideTipDot(item);
+            }
             return true;
         });
+    }
+
+    private void showTipDot(MenuItem item) {
+        Drawable icon = item.getIcon();
+        Drawable dot = getResources().getDrawable(R.drawable.tip_dot);
+        Drawable[] layers = {icon, dot};
+        LayerDrawable iconWithDot = new LayerDrawable(layers);
+
+        // Position dot in the upper-right corner
+        int dotSize = (int) getResources().getDimension(R.dimen.tip_dot_size)
+            + (int) getResources().getDimension(R.dimen.tip_dot_line_width) * 2;
+        int linewidth = (int) getResources().getDimension(R.dimen.tip_dot_line_width);
+        iconWithDot.setLayerGravity(1, Gravity.TOP | Gravity.RIGHT);
+        iconWithDot.setLayerWidth(1, dotSize);
+        iconWithDot.setLayerHeight(1, dotSize);
+        iconWithDot.setLayerInsetTop(1, -linewidth);
+        iconWithDot.setLayerInsetRight(1, -linewidth);
+
+        item.setIcon(iconWithDot);
+    }
+
+    private void hideTipDot(MenuItem item) {
+        Drawable iconWithDot = item.getIcon();
+        if (iconWithDot instanceof LayerDrawable) {
+            LayerDrawable layers = (LayerDrawable) iconWithDot;
+            Drawable icon = layers.getDrawable(0);
+            item.setIcon(icon);
+        }
     }
 
     private void navigateToSection(@IdRes int id) {
@@ -277,6 +334,12 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     public ThemeManager getThemeManager() {
         CustomizationSection section = mSections.get(R.id.nav_theme);
         return section == null ? null : (ThemeManager) section.customizationManager;
+    }
+
+    @Override
+    protected void onStop() {
+        mUserEventLogger.logStopped();
+        super.onStop();
     }
 
     @Override
