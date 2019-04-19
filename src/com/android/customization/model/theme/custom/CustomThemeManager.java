@@ -20,6 +20,7 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager;
+import com.android.customization.model.theme.ThemeManager;
 import com.android.wallpaper.R;
 
 import java.util.HashMap;
@@ -27,16 +28,12 @@ import java.util.Map;
 
 public class CustomThemeManager implements CustomizationManager<ThemeComponentOption> {
 
-    private final Map<String, String> overlayPackages = new HashMap<>();
+    private final Map<String, String> mOverlayPackages = new HashMap<>();
     private final CustomTheme mOriginalTheme;
 
-    public CustomThemeManager(@Nullable CustomTheme existingTheme) {
-        if (existingTheme != null && existingTheme.isDefined()) {
-            mOriginalTheme = existingTheme;
-            overlayPackages.putAll(existingTheme.getPackagesByCategory());
-        } else {
-            mOriginalTheme = null;
-        }
+    private CustomThemeManager(Map<String, String> overlayPackages, @Nullable CustomTheme originalTheme) {
+        mOverlayPackages.putAll(overlayPackages);
+        mOriginalTheme = originalTheme;
     }
 
     @Override
@@ -46,20 +43,20 @@ public class CustomThemeManager implements CustomizationManager<ThemeComponentOp
 
     @Override
     public void apply(ThemeComponentOption option, @Nullable Callback callback) {
-        overlayPackages.putAll(option.getOverlayPackages());
+        mOverlayPackages.putAll(option.getOverlayPackages());
         if (callback != null) {
             callback.onSuccess();
         }
     }
 
     public Map<String, String> getOverlayPackages() {
-        return overlayPackages;
+        return mOverlayPackages;
     }
 
     public CustomTheme buildPartialCustomTheme(Context context) {
         return new CustomTheme(mOriginalTheme != null
                 ? mOriginalTheme.getTitle() : context.getString(R.string.custom_theme_title),
-                overlayPackages, null);
+                mOverlayPackages, null);
     }
 
     @Override
@@ -69,5 +66,14 @@ public class CustomThemeManager implements CustomizationManager<ThemeComponentOp
 
     public CustomTheme getOriginalTheme() {
         return mOriginalTheme;
+    }
+
+    public static CustomThemeManager create(
+            @Nullable CustomTheme customTheme, ThemeManager themeManager) {
+        if (customTheme != null && customTheme.isDefined()) {
+            return new CustomThemeManager(customTheme.getPackagesByCategory(), customTheme);
+        }
+        // Seed the first custom theme with the currently applied theme.
+        return new CustomThemeManager(themeManager.getCurrentOverlays(), null);
     }
 }

@@ -58,6 +58,8 @@
 
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
 
+    <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button.Borderless.Colored"/>
+
     <style name="OptionTitleTextAppearance" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title">
         <item name="android:textColor">@color/option_title_color</item>
         <item name="android:textAlignment">center</item>
@@ -100,7 +102,7 @@
 
     <style name="ComponentCounterTextAppearance" parent="@android:style/TextAppearance.DeviceDefault"/>
 
-    <style name="EditLabelTextAppearance" parent="@android:style/TextAppearance.DeviceDefault">
-        <item name="android:textColor">?android:colorAccent</item>
+    <style name="EditLabelStyle" parent="@style/ActionSecondaryButton">
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault</item>
     </style>
 </resources>

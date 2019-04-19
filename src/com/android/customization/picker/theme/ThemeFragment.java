@@ -384,9 +384,13 @@ public class ThemeFragment extends ToolbarFragment {
             ViewGroup body = card.findViewById(R.id.theme_preview_card_body_container);
             inflater.inflate(contentLayoutRes, body, true);
             bindBody(false);
-            card.setOnClickListener(mEditClickListener);
-            card.findViewById(R.id.edit_label).setVisibility(mEditClickListener != null
+            TextView editLabel = card.findViewById(R.id.edit_label);
+            editLabel.setOnClickListener(mEditClickListener);
+            editLabel.setVisibility(mEditClickListener != null
                     ? View.VISIBLE : View.INVISIBLE);
+            ColorStateList themeAccentColor = ColorStateList.valueOf(accentColor);
+            editLabel.setTextColor(themeAccentColor);
+            editLabel.setCompoundDrawableTintList(themeAccentColor);
             View qsb = card.findViewById(R.id.theme_qsb);
             if (qsb != null && qsb.getVisibility() == View.VISIBLE) {
                 if (qsb.getBackground() instanceof GradientDrawable) {
