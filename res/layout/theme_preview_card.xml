@@ -65,10 +65,9 @@
                 android:layout_gravity="center_horizontal"
                 android:drawableStart="@drawable/ic_tune_24px"
                 android:drawablePadding="8dp"
-                android:drawableTint="?android:colorAccent"
                 android:gravity="center"
                 android:text="@string/edit_custom_theme_lbl"
-                android:textAppearance="@style/EditLabelTextAppearance"
+                style="@style/EditLabelStyle"
                 android:visibility="invisible"/>
         </LinearLayout>
     </FrameLayout>
