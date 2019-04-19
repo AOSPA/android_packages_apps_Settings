@@ -269,16 +269,14 @@ public class CustomThemeActivity extends FragmentActivity implements
     private static abstract class ComponentStep<T extends ThemeComponentOption> {
         @StringRes final int titleResId;
         final ThemeComponentOptionProvider<T> provider;
-        final int totalSteps;
         final int position;
         private CustomThemeComponentFragment mFragment;
 
         protected ComponentStep(@StringRes int titleResId, ThemeComponentOptionProvider<T> provider,
-                int position, int totalSteps) {
+                                int position) {
             this.titleResId = titleResId;
             this.provider = provider;
             this.position = position;
-            this.totalSteps = totalSteps;
         }
 
         CustomThemeComponentFragment getFragment() {
@@ -298,7 +296,7 @@ public class CustomThemeActivity extends FragmentActivity implements
 
         protected FontStep(ThemeComponentOptionProvider<FontOption> provider,
                 int position, int totalSteps) {
-            super(R.string.font_component_title, provider, position, totalSteps);
+            super(R.string.font_component_title, provider, position);
         }
 
         @Override
@@ -306,7 +304,6 @@ public class CustomThemeActivity extends FragmentActivity implements
             return CustomThemeComponentFragment.newInstance(
                     CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
                     position,
-                    totalSteps,
                     titleResId);
         }
     }
@@ -315,7 +312,7 @@ public class CustomThemeActivity extends FragmentActivity implements
 
         protected IconStep(ThemeComponentOptionProvider<IconOption> provider,
                 int position, int totalSteps) {
-            super(R.string.icon_component_title, provider, position, totalSteps);
+            super(R.string.icon_component_title, provider, position);
         }
 
         @Override
@@ -323,7 +320,6 @@ public class CustomThemeActivity extends FragmentActivity implements
             return CustomThemeComponentFragment.newInstance(
                     CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
                     position,
-                    totalSteps,
                     titleResId);
         }
     }
@@ -332,7 +328,7 @@ public class CustomThemeActivity extends FragmentActivity implements
 
         protected ColorStep(ThemeComponentOptionProvider<ColorOption> provider,
                 int position, int totalSteps) {
-            super(R.string.color_component_title, provider, position, totalSteps);
+            super(R.string.color_component_title, provider, position);
         }
 
         @Override
@@ -340,7 +336,6 @@ public class CustomThemeActivity extends FragmentActivity implements
             return CustomThemeComponentFragment.newInstance(
                     CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
                     position,
-                    totalSteps,
                     titleResId);
         }
     }
@@ -349,7 +344,7 @@ public class CustomThemeActivity extends FragmentActivity implements
 
         protected ShapeStep(ThemeComponentOptionProvider<ShapeOption> provider,
                 int position, int totalSteps) {
-            super(R.string.shape_component_title, provider, position, totalSteps);
+            super(R.string.shape_component_title, provider, position);
         }
 
         @Override
@@ -357,7 +352,6 @@ public class CustomThemeActivity extends FragmentActivity implements
             return CustomThemeComponentFragment.newInstance(
                     CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
                     position,
-                    totalSteps,
                     titleResId);
         }
     }
