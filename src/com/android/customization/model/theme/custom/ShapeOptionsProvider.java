@@ -23,6 +23,7 @@ import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY
 import static com.android.customization.model.ResourceConstants.PATH_SIZE;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
@@ -72,7 +73,10 @@ public class ShapeOptionsProvider extends ThemeComponentOptionProvider<ShapeOpti
                 Path path = loadPath(mContext.getPackageManager()
                         .getResourcesForApplication(overlayPackage), overlayPackage);
                 ShapeDrawable shapeDrawable = createShapeDrawable(path);
-                mOptions.add(new ShapeOption(overlayPackage, shapeDrawable, getShapedIcons(path)));
+                PackageManager pm = mContext.getPackageManager();
+                String label = pm.getApplicationInfo(overlayPackage, 0).loadLabel(pm).toString();
+                mOptions.add(new ShapeOption(overlayPackage, label, shapeDrawable,
+                        getShapedIcons(path)));
             } catch (NameNotFoundException | NotFoundException e) {
                 Log.w(TAG, String.format("Couldn't load shape overlay %s, will skip it",
                         overlayPackage), e);
@@ -84,7 +88,8 @@ public class ShapeOptionsProvider extends ThemeComponentOptionProvider<ShapeOpti
         Resources system = Resources.getSystem();
         Path path = loadPath(system, ANDROID_PACKAGE);
         ShapeDrawable shapeDrawable = createShapeDrawable(path);
-        mOptions.add(new ShapeOption(null, shapeDrawable, getShapedIcons(path)));
+        mOptions.add(new ShapeOption(null, mContext.getString(R.string.default_theme_title),
+                shapeDrawable, getShapedIcons(path)));
     }
 
     private ShapeDrawable createShapeDrawable(Path path) {

@@ -13,47 +13,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.customization.model.grid;
+package com.android.customization.model.clock;
 
 import static junit.framework.TestCase.fail;
 
-import static org.mockito.Matchers.anyBoolean;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
+import android.content.ContentResolver;
+import android.provider.Settings.Secure;
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager.Callback;
-import com.android.customization.module.ThemesUserEventLogger;
 
+import com.android.customization.module.ThemesUserEventLogger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class GridOptionsManagerTest {
+public class ClockManagerTest {
 
-    @Mock LauncherGridOptionsProvider mProvider;
-    @Mock ThemesUserEventLogger mThemesUserEventLogger;
-    private GridOptionsManager mManager;
+    private static final String CLOCK_ID = "id";
+
+    @Mock ClockProvider mProvider;
+    @Mock ThemesUserEventLogger mLogger;
+    private ContentResolver mContentResolver;
+    private ClockManager mManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mManager = new GridOptionsManager(mProvider, mThemesUserEventLogger);
+        mContentResolver = RuntimeEnvironment.application.getContentResolver();
+        mManager = new ClockManager(mContentResolver, mProvider, mLogger);
     }
 
     @Test
     public void testApply() {
-        String gridName = "testName";
-        GridOption grid = new GridOption("testTitle", gridName, false, 2, 2, null, 1, "");
-        when(mProvider.applyGrid(gridName)).thenReturn(1);
+        Clockface clock = new Clockface.Builder().setId(CLOCK_ID).build();
 
-        mManager.apply(grid, new Callback() {
+        mManager.apply(clock, new Callback() {
             @Override
             public void onSuccess() {
                 //Nothing to do here, the test passed
@@ -64,12 +67,18 @@ public class GridOptionsManagerTest {
                 fail("onError was called when grid had been applied successfully");
             }
         });
+
+        // THEN the clock id is written to secure settings.
+        assertEquals(CLOCK_ID, Secure.getString(mContentResolver, ClockManager.CLOCK_FACE_SETTING));
+        // AND the event is logged
+        verify(mLogger).logClockApplied(clock);
     }
 
     @Test
-    public void testFetch_backgroundThread() {
-        mManager.fetchOptions(null, false);
-        Robolectric.flushBackgroundThreadScheduler();
-        verify(mProvider).fetch(anyBoolean());
+    public void testGetCurrentClock() {
+        // GIVEN that secure settings contains a clock id
+        Secure.putString(mContentResolver, ClockManager.CLOCK_FACE_SETTING, CLOCK_ID);
+        // THEN the current clock is that id
+        assertEquals(CLOCK_ID, mManager.getCurrentClock());
     }
 }

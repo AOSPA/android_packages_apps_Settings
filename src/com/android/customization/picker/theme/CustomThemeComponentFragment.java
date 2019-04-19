@@ -106,6 +106,7 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
             setUpToolbar(view, R.menu.custom_theme_editor_menu);
         }
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_close_24px, null));
+        mToolbar.setNavigationContentDescription(R.string.cancel);
         mToolbar.setNavigationOnClickListener(v -> mHost.cancel());
         mOptionsContainer = view.findViewById(R.id.options_container);
         mPreviewCard = view.findViewById(R.id.component_preview_card);
