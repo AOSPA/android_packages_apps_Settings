@@ -122,7 +122,8 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
                 LinearLayoutManager.HORIZONTAL, false));
         Resources res = mContainer.getContext().getResources();
         mContainer.addItemDecoration(new HorizontalSpacerItemDecoration(
-                res.getDimensionPixelOffset(R.dimen.option_tile_margin_horizontal)));
+                res.getDimensionPixelOffset(R.dimen.option_tile_margin_horizontal),
+                res.getDimensionPixelOffset(R.dimen.option_tile_margin_horizontal_ends)));
         mContainer.setAdapter(mAdapter);
     }
 
