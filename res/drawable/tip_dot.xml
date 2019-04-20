@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+
      Copyright (C) 2019 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,16 +15,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:layout_marginHorizontal="6dp"
-    android:paddingHorizontal="4dp">
-
-    <ImageView
-        android:id="@+id/option_tile"
-        android:layout_width="@dimen/component_color_chip_size"
-        android:layout_height="@dimen/component_color_chip_size"
-        android:layout_gravity="center"
-        android:src="@drawable/color_chip"/>
-</FrameLayout>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+  <size
+      android:width="@dimen/tip_dot_size"
+      android:height="@dimen/tip_dot_size" />
+  <solid android:color="@color/tip_dot_color" />
+  <stroke
+      android:color="@color/tip_dot_line_color"
+      android:width="@dimen/tip_dot_line_width" />
+</shape>

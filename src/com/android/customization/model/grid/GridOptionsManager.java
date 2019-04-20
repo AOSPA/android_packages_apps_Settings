@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager;
+import com.android.customization.module.ThemesUserEventLogger;
 
 import java.util.List;
 
@@ -30,9 +31,11 @@ import java.util.List;
 public class GridOptionsManager implements CustomizationManager<GridOption> {
 
     private final LauncherGridOptionsProvider mProvider;
+    private final ThemesUserEventLogger mEventLogger;
 
-    public GridOptionsManager(LauncherGridOptionsProvider provider) {
+    public GridOptionsManager(LauncherGridOptionsProvider provider, ThemesUserEventLogger logger) {
         mProvider = provider;
+        mEventLogger = logger;
     }
 
     @Override
@@ -44,6 +47,7 @@ public class GridOptionsManager implements CustomizationManager<GridOption> {
     public void apply(GridOption option, Callback callback) {
         int updated = mProvider.applyGrid(option.name);
         if (updated == 1) {
+            mEventLogger.logGridApplied(option);
             callback.onSuccess();
         } else {
             callback.onError(null);

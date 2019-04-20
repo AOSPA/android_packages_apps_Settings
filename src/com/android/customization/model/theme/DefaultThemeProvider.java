@@ -190,7 +190,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                     // Nothing to do here, if there's no wallpaper we'll just omit wallpaper
                 }
 
-                mThemes.add(builder.build());
+                mThemes.add(builder.build(mContext));
             } catch (NameNotFoundException | NotFoundException e) {
                 Log.w(TAG, String.format("Couldn't load part of theme %s, will skip it", themeName),
                         e);
@@ -397,7 +397,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             // Nothing to do here, if there's no wallpaper we'll just omit wallpaper
         }
 
-        mThemes.add(builder.build());
+        mThemes.add(builder.build(mContext));
     }
 
     private void addSystemDefaultIcons(Builder builder, String packageName, String... previewIcons) {
@@ -464,7 +464,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         ThemeBundle.Builder builder = parseCustomTheme(serializedTheme);
         if (builder != null) {
             builder.setTitle(mContext.getString(R.string.custom_theme_title));
-            mThemes.add(builder.build());
+            mThemes.add(builder.build(mContext));
         } else {
             Log.w(TAG, "Couldn't read stored custom theme, resetting");
             mThemes.add(new CustomTheme(mContext.getString(R.string.custom_theme_title),
