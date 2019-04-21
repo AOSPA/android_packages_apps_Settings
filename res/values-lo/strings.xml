@@ -18,6 +18,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name" msgid="6995669566699638946">"ຮູບແບບ ແລະ ຮູບພື້ນຫຼັງ"</string>
+    <string name="theme_title" msgid="2144932106319405101">"ຮູບແບບ"</string>
     <string name="clock_title" msgid="2126046720254613991">"ໂມງ"</string>
     <string name="grid_title" msgid="2825094404523390773">"ເສັ້ນ"</string>
     <string name="wallpaper_title" msgid="6952635398953194544">"ຮູບພື້ນຫຼັງ"</string>
@@ -29,14 +30,16 @@
     <string name="next_page_content_description" msgid="5290226604542300962">"ຖັດໄປ"</string>
     <string name="previous_page_content_description" msgid="6025726405430262788">"ກ່ອນໜ້າ"</string>
     <string name="theme_font_example" msgid="5196060278649495083">"ABC"</string>
+    <!-- no translation found for theme_description (3697012391785254635) -->
+    <skip />
     <string name="default_theme_title" msgid="2555741736622366797">"ຄ່າເລີ່ມຕົ້ນ"</string>
     <string name="preview_name_font" msgid="4465423899630037038">"ຟອນ"</string>
     <string name="preview_name_icon" msgid="6818927315316316440">"ໄອຄອນ"</string>
     <string name="preview_name_color" msgid="8776203144994416172">"ສີ"</string>
     <string name="preview_name_shape" msgid="5676971146080968721">"ຮູບຊົງ"</string>
     <string name="preview_name_wallpaper" msgid="1738652462949531828">"ຮູບພື້ນຫຼັງ"</string>
-    <string name="font_card_title" msgid="7331657993811241308">"ປັບແຕ່ງອຸປະກອນຂອງທ່ານ"</string>
-    <string name="font_card_body" msgid="5245191135258233681">"ເພີ່ມຮູບແບບຂອງທ່ານໃສ່ທຸກໜ້າຈໍດ້ວຍການອອກແບບແນະນຳ ຫຼື ການອອກແບບທີ່ກຳນົດເອງທີ່ຈະປ່ຽນໜ້າຈໍຫຼັກ, ໄອຄອນ ແລະ ອື່ນໆຂອງໂທລະສັບທ່ານ"</string>
+    <string name="font_card_title" msgid="2343292653502548685">"ABC • abc • 123"</string>
+    <string name="font_card_body" msgid="6790525594503904468">"ເພີ່ມຟອນທີ່ທ່ານມັກໃສ່ທຸກໜ້າຈໍ"</string>
     <string name="grid_title_pattern" msgid="9188866567612607806">"<xliff:g id="ID_1">%1$d</xliff:g>x<xliff:g id="ID_2">%2$d</xliff:g>"</string>
     <string name="applied_theme_msg" msgid="7348498271552054431">"ນຳໃຊ້ຮູບແບບແລ້ວ"</string>
     <string name="apply_theme_error_msg" msgid="791364062636538317">"ເກີດບັນຫາໃນການນຳໃຊ້ຮູບແບບ"</string>
@@ -47,20 +50,16 @@
     <string name="font_component_title" msgid="8800340833695292049">"ເລືອກຟອນ"</string>
     <string name="icon_component_title" msgid="5779787138399083903">"ເລືອກໄອຄອນ"</string>
     <string name="color_component_title" msgid="1194089273921078816">"ເລືອກ​ສີ"</string>
-    <!-- no translation found for shape_component_title (8366847436022025538) -->
-    <skip />
+    <string name="shape_component_title" msgid="8366847436022025538">"ເລືອກຮູບຮ່າງ"</string>
     <string name="icon_component_label" msgid="2625784884001407944">"ໄອຄອນ <xliff:g id="ID_1">%1$d</xliff:g>"</string>
-    <string name="component_step_counter" msgid="1963018522834358123">"<xliff:g id="ID_1">%1$d</xliff:g> ຈາກ <xliff:g id="ID_2">%2$d</xliff:g>"</string>
     <string name="delete_custom_theme_confirmation" msgid="4452137183628769394">"ລຶບຮູບແບບກຳນົດເອງບໍ?"</string>
     <string name="delete_custom_theme_button" msgid="5102462988130208824">"ລຶບ"</string>
     <string name="cancel" msgid="4651030493668562067">"ຍົກເລີກ"</string>
     <string name="set_theme_wallpaper_dialog_message" msgid="2179661027350908003">"ຕັ້ງຮູບພື້ນຫຼັງຮູບແບບ"</string>
-    <!-- no translation found for use_style_instead_title (1578754995763917502) -->
-    <skip />
-    <!-- no translation found for use_style_instead_body (3051937045807471496) -->
-    <skip />
-    <!-- no translation found for use_style_button (1754493078383627019) -->
-    <skip />
-    <!-- no translation found for no_thanks (7286616980115687627) -->
+    <string name="use_style_instead_title" msgid="1578754995763917502">"ໃຊ້ <xliff:g id="ID_1">%1$s</xliff:g> ແທນບໍ?"</string>
+    <string name="use_style_instead_body" msgid="3051937045807471496">"ອົງປະກອບທີ່ທ່ານເລືອກກົງກັບຮູບແບບສີສັນ <xliff:g id="ID_1">%1$s</xliff:g>. ທ່ານຕ້ອງການໃຊ້ <xliff:g id="ID_2">%1$s</xliff:g> ແທນບໍ່?"</string>
+    <string name="use_style_button" msgid="1754493078383627019">"ໃຊ້ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="no_thanks" msgid="7286616980115687627">"ບໍ່, ຂອບໃຈ"</string>
+    <!-- no translation found for clock_preview_content_description (5460561185905717460) -->
     <skip />
 </resources>
