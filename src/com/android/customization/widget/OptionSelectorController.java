@@ -16,6 +16,9 @@
 package com.android.customization.widget;
 
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +61,7 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
     private final Set<OptionSelectedListener> mListeners = new HashSet<>();
     private RecyclerView.Adapter<TileViewHolder> mAdapter;
     private CustomizationOption mSelectedOption;
+    private CustomizationOption mAppliedOption;
 
     public OptionSelectorController(RecyclerView container, List<T> options) {
         mContainer = container;
@@ -80,6 +84,18 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
         updateActivatedStatus(option, true);
         mSelectedOption = option;
         notifyListeners();
+    }
+
+    /**
+     * Mark an option as the one which is currently applied on the device. This will result in a
+     * check being displayed in the lower-right corner of the corresponding ViewHolder.
+     * @param option
+     */
+    public void setAppliedOption(CustomizationOption option) {
+        if (!mOptions.contains(option)) {
+            throw new IllegalArgumentException("Invalid option");
+        }
+        mAppliedOption = option;
     }
 
     private void updateActivatedStatus(CustomizationOption option, boolean isActivated) {
@@ -115,6 +131,7 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
                 CustomizationOption option = mOptions.get(position);
                 if (mSelectedOption == null && option.isActive(manager)) {
                     mSelectedOption = option;
+                    mAppliedOption = option;
                 }
                 if (holder.labelView != null) {
                     holder.labelView.setText(option.getTitle());
@@ -122,6 +139,27 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
                 option.bindThumbnailTile(holder.tileView);
                 holder.itemView.setActivated(option.equals(mSelectedOption));
                 holder.itemView.setOnClickListener(view -> setSelectedOption(option));
+
+                if (option.equals(mAppliedOption)) {
+                    Resources res = mContainer.getContext().getResources();
+                    Drawable checkmark = res.getDrawable(R.drawable.ic_check_circle_filled_24px);
+                    Drawable frame = holder.itemView.getForeground();
+                    Drawable[] layers = {frame, checkmark};
+                    if (frame == null) {
+                        layers = new Drawable[]{checkmark};
+                    }
+                    LayerDrawable checkedFrame = new LayerDrawable(layers);
+
+                    // Position at lower right
+                    int idx = layers.length - 1;
+                    int checkSize = (int) res.getDimension(R.dimen.check_size);
+                    checkedFrame.setLayerGravity(idx, Gravity.BOTTOM | Gravity.RIGHT);
+                    checkedFrame.setLayerWidth(idx, checkSize);
+                    checkedFrame.setLayerHeight(idx, checkSize);
+                    checkedFrame.setLayerInsetBottom(idx, checkSize/2);
+                    checkedFrame.setLayerInsetLeft(idx, checkSize/2);
+                    holder.itemView.setForeground(checkedFrame);
+                }
             }
 
             @Override
