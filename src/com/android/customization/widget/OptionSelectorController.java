@@ -76,9 +76,21 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
         if (!mOptions.contains(option)) {
             throw new IllegalArgumentException("Invalid option");
         }
+        updateActivatedStatus(mSelectedOption, false);
+        updateActivatedStatus(option, true);
         mSelectedOption = option;
-        mAdapter.notifyDataSetChanged();
         notifyListeners();
+    }
+
+    private void updateActivatedStatus(CustomizationOption option, boolean isActivated) {
+        int index = mOptions.indexOf(option);
+        if (index < 0) {
+            return;
+        }
+        RecyclerView.ViewHolder holder = mContainer.findViewHolderForAdapterPosition(index);
+        if (holder != null && holder.itemView != null) {
+            holder.itemView.setActivated(isActivated);
+        }
     }
 
     /**
