@@ -262,6 +262,9 @@ public class ThemeFragment extends ToolbarFragment {
                 // Select the default theme if there is no matching custom enabled theme
                 // TODO(b/124796742): default to custom if there is no matching theme bundle
                 mSelectedTheme = options.get(0);
+            } else {
+                // Only show show checkmark if we found a matching theme
+                mOptionsController.setAppliedOption(mSelectedTheme);
             }
             mOptionsController.setSelectedOption(mSelectedTheme);
         }, false);
@@ -280,6 +283,9 @@ public class ThemeFragment extends ToolbarFragment {
                 // Select the default theme if there is no matching custom enabled theme
                 // TODO(b/124796742): default to custom if there is no matching theme bundle
                 mSelectedTheme = options.get(0);
+            } else {
+                // Only show show checkmark if we found a matching theme
+                mOptionsController.setAppliedOption(mSelectedTheme);
             }
             mOptionsController.setSelectedOption(mSelectedTheme);
         }, true);
