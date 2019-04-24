@@ -16,17 +16,19 @@ import androidx.recyclerview.widget.RecyclerView.State;
 public class HorizontalSpacerItemDecoration extends ItemDecoration {
 
     private final int mOffset;
+    private final int mEndOffset;
 
-    public HorizontalSpacerItemDecoration(@Dimension int offset) {
+    public HorizontalSpacerItemDecoration(@Dimension int offset, @Dimension int endOffset) {
         mOffset = offset;
+        mEndOffset = endOffset;
     }
 
     @Override
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
             @NonNull RecyclerView parent, @NonNull State state) {
         int position = parent.getChildAdapterPosition(view);
-        int left = position == 0 ? 0 : mOffset;
-        int right = (position == parent.getAdapter().getItemCount() - 1) ? 0 : mOffset;
+        int left = position == 0 ? mEndOffset : mOffset;
+        int right = (position == parent.getAdapter().getItemCount() - 1) ? mEndOffset : mOffset;
         outRect.set(left, 0, right, 0);
     }
 }

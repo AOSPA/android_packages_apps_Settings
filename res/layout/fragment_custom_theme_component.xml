@@ -36,21 +36,13 @@
             android:layout_marginTop="@dimen/preview_page_top_margin"
             android:layout_marginBottom="@dimen/component_preview_page_bottom_margin"
             layout="@layout/theme_preview_card"/>
-        <TextView
-            android:id="@+id/component_step_counter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginVertical="10dp"
-            android:textAlignment="center"
-            android:textAppearance="@style/ComponentCounterTextAppearance"/>
     </FrameLayout>
 
     <LinearLayout
         android:id="@+id/options_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:paddingVertical="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -67,7 +59,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/options_container_height"
             android:layout_gravity="center_horizontal"/>
-
 
     </LinearLayout>
 

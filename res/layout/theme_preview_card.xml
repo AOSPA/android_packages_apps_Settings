@@ -32,7 +32,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/preview_card_padding"
+            android:paddingTop="@dimen/preview_card_padding"
+            android:paddingHorizontal="@dimen/preview_card_padding"
             android:orientation="vertical">
 
             <ViewStub
@@ -42,19 +43,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"/>
 
-            <TextView
+              <TextView
                 android:id="@+id/theme_preview_card_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="48dp"
                 android:drawablePadding="10dp"
                 android:textAppearance="@style/CardTitleTextAppearance"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <FrameLayout
                 android:id="@+id/theme_preview_card_body_container"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_weight="1"/>
 
@@ -63,12 +68,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:drawableStart="@drawable/ic_tune_24px"
+                android:drawableStart="@drawable/ic_tune"
                 android:drawablePadding="8dp"
-                android:drawableTint="?android:colorAccent"
                 android:gravity="center"
                 android:text="@string/edit_custom_theme_lbl"
-                android:textAppearance="@style/EditLabelTextAppearance"
+                style="@style/EditLabelStyle"
                 android:visibility="invisible"/>
         </LinearLayout>
     </FrameLayout>
