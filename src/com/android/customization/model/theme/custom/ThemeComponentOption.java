@@ -181,7 +181,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         @Override
         public void bindPreview(ViewGroup container) {
             TextView header = container.findViewById(R.id.theme_preview_card_header);
-            header.setText(mLabel);
+            header.setText(R.string.preview_name_icon);
             header.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_wifi_24px, 0, 0);
 
             ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
@@ -384,7 +384,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
             ImageView thumb = view.findViewById(R.id.shape_thumbnail);
             Resources res = view.getResources();
             Theme theme = view.getContext().getTheme();
-            int borderWidth = res.getDimensionPixelSize(R.dimen.component_shape_border_width);
+            int borderWidth = 2 * res.getDimensionPixelSize(R.dimen.option_border_width);
 
             Drawable background = mShape.getDrawable(0);
             background.setTintList(res.getColorStateList(R.color.option_border_color, theme));
