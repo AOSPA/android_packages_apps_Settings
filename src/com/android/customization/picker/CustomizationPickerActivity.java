@@ -17,7 +17,6 @@ package com.android.customization.picker;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
@@ -56,6 +55,7 @@ import com.android.customization.picker.grid.GridFragment;
 import com.android.customization.picker.grid.GridFragment.GridFragmentHost;
 import com.android.customization.picker.theme.ThemeFragment;
 import com.android.customization.picker.theme.ThemeFragment.ThemeFragmentHost;
+import com.android.customization.widget.NoTintDrawableWrapper;
 import com.android.wallpaper.R;
 import com.android.wallpaper.model.WallpaperInfo;
 import com.android.wallpaper.module.DailyLoggingAlarmScheduler;
@@ -203,8 +203,6 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
     private void setUpBottomNavView() {
         mBottomNav = findViewById(R.id.main_bottom_nav);
-        // Clear tint list so it doesn't recolor the indicator dots
-        mBottomNav.setItemIconTintList(null);
         Menu menu = mBottomNav.getMenu();
         DefaultCustomizationPreferences prefs =
             new DefaultCustomizationPreferences(getApplicationContext());
@@ -234,7 +232,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
     private void showTipDot(MenuItem item) {
         Drawable icon = item.getIcon();
-        Drawable dot = getResources().getDrawable(R.drawable.tip_dot);
+        Drawable dot = new NoTintDrawableWrapper(getResources().getDrawable(R.drawable.tip_dot));
         Drawable[] layers = {icon, dot};
         LayerDrawable iconWithDot = new LayerDrawable(layers);
 
@@ -250,6 +248,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
         item.setIcon(iconWithDot);
     }
+
 
     private void hideTipDot(MenuItem item) {
         Drawable iconWithDot = item.getIcon();

@@ -27,6 +27,7 @@ import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_LAUNCHER;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SETTINGS;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_THEMEPICKER;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
 import static com.android.customization.model.ResourceConstants.SETTINGS_PACKAGE;
 import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
@@ -89,6 +90,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     private static final String SHAPE_PREFIX = "theme_overlay_shape_";
     private static final String ICON_ANDROID_PREFIX = "theme_overlay_icon_android_";
     private static final String ICON_LAUNCHER_PREFIX = "theme_overlay_icon_launcher_";
+    private static final String ICON_THEMEPICKER_PREFIX = "theme_overlay_icon_themepicker_";
     private static final String ICON_SETTINGS_PREFIX = "theme_overlay_icon_settings_";
     private static final String ICON_SYSUI_PREFIX = "theme_overlay_icon_sysui_";
     private static final String WALLPAPER_PREFIX = "theme_wallpaper_";
@@ -117,7 +119,8 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         om.getOverlayInfosForTarget(ANDROID_PACKAGE, user).forEach(addToMap);
         om.getOverlayInfosForTarget(SYSUI_PACKAGE, user).forEach(addToMap);
         om.getOverlayInfosForTarget(SETTINGS_PACKAGE, user).forEach(addToMap);
-        om.getOverlayInfosForTarget(ResourceConstants.getLauncherPackage(context),user).forEach(addToMap);
+        om.getOverlayInfosForTarget(ResourceConstants.getLauncherPackage(context), user).forEach(addToMap);
+        om.getOverlayInfosForTarget(context.getPackageName(), user).forEach(addToMap);
         mShapePreviewIconPackages = context.getResources().getStringArray(
                 R.array.icon_shape_preview_packages);
     }
@@ -170,7 +173,11 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
 
                 String iconLauncherOverlayPackage = getOverlayPackage(ICON_LAUNCHER_PREFIX,
                         themeName);
-                addNoPreviewIconOverlay(builder,iconLauncherOverlayPackage);
+                addNoPreviewIconOverlay(builder, iconLauncherOverlayPackage);
+
+                String iconThemePickerOverlayPackage = getOverlayPackage(ICON_THEMEPICKER_PREFIX,
+                        themeName);
+                addNoPreviewIconOverlay(builder, iconThemePickerOverlayPackage);
 
                 String iconSettingsOverlayPackage = getOverlayPackage(ICON_SETTINGS_PREFIX,
                         themeName);
@@ -512,6 +519,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             addSysUiIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_SYSUI));
             addNoPreviewIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_SETTINGS));
             addNoPreviewIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_LAUNCHER));
+            addNoPreviewIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_THEMEPICKER));
 
             return builder;
         } catch (JSONException | NameNotFoundException | NotFoundException e) {
