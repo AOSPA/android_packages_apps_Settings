@@ -50,6 +50,7 @@ import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
 import com.android.wallpaper.asset.BitmapCachingAsset;
 import com.android.wallpaper.asset.ResourceAsset;
+import com.android.wallpaper.model.LiveWallpaperInfo;
 import com.android.wallpaper.model.WallpaperInfo;
 
 import org.json.JSONObject;
@@ -255,7 +256,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         private PreviewInfo(Context context, Typeface bodyFontFamily, Typeface headlineFontFamily,
                 int colorAccentLight, int colorAccentDark, List<Drawable> icons,
                 Drawable shapeDrawable, @Dimension int cornerRadius,
-                @Nullable ResourceAsset wallpaperAsset, List<Drawable> shapeAppIcons) {
+                @Nullable Asset wallpaperAsset, List<Drawable> shapeAppIcons) {
             this.bodyFontFamily = bodyFontFamily;
             this.headlineFontFamily = headlineFontFamily;
             this.colorAccentLight = colorAccentLight;
@@ -290,7 +291,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         private String mShapePath;
         private boolean mIsDefault;
         @Dimension private int mCornerRadius;
-        private ResourceAsset mWallpaperAsset;
+        private Asset mWallpaperAsset;
         private WallpaperInfo mWallpaperInfo;
         protected Map<String, String> mPackages = new HashMap<>();
         private List<Drawable> mAppIcons = new ArrayList<>();
@@ -372,7 +373,13 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
             return this;
         }
 
-        public Builder setWallpaperAsset(ResourceAsset wallpaperAsset) {
+        public Builder setLiveWallpaperInfo(LiveWallpaperInfo info) {
+            mWallpaperInfo = info;
+            return this;
+        }
+
+
+        public Builder setWallpaperAsset(Asset wallpaperAsset) {
             mWallpaperAsset = wallpaperAsset;
             return this;
         }
