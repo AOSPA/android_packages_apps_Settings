@@ -18,18 +18,22 @@ package com.android.customization.widget;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
+import com.android.customization.model.theme.custom.ThemeComponentOption;
 import com.android.wallpaper.R;
 
 import java.util.HashSet;
@@ -49,6 +53,7 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
      * Interface to be notified when an option is selected by the user.
      */
     public interface OptionSelectedListener {
+
         /**
          * Called when an option has been selected (and marked as such in the UI)
          */
@@ -57,6 +62,8 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
 
     private final RecyclerView mContainer;
     private final List<T> mOptions;
+    private final boolean mUseGrid;
+    private final boolean mShowCheckmark;
 
     private final Set<OptionSelectedListener> mListeners = new HashSet<>();
     private RecyclerView.Adapter<TileViewHolder> mAdapter;
@@ -64,8 +71,15 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
     private CustomizationOption mAppliedOption;
 
     public OptionSelectorController(RecyclerView container, List<T> options) {
+        this(container, options, false, true);
+    }
+
+    public OptionSelectorController(RecyclerView container, List<T> options,
+            boolean useGrid, boolean showCheckmark) {
         mContainer = container;
         mOptions = options;
+        mUseGrid = useGrid;
+        mShowCheckmark = showCheckmark;
     }
 
     public void addListener(OptionSelectedListener listener) {
@@ -140,7 +154,7 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
                 holder.itemView.setActivated(option.equals(mSelectedOption));
                 holder.itemView.setOnClickListener(view -> setSelectedOption(option));
 
-                if (option.equals(mAppliedOption)) {
+                if (mShowCheckmark && option.equals(mAppliedOption)) {
                     Resources res = mContainer.getContext().getResources();
                     Drawable checkmark = res.getDrawable(R.drawable.ic_check_circle_filled_24px);
                     Drawable frame = holder.itemView.getForeground();
@@ -171,10 +185,38 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
         mContainer.setLayoutManager(new LinearLayoutManager(mContainer.getContext(),
                 LinearLayoutManager.HORIZONTAL, false));
         Resources res = mContainer.getContext().getResources();
-        mContainer.addItemDecoration(new HorizontalSpacerItemDecoration(
-                res.getDimensionPixelOffset(R.dimen.option_tile_margin_horizontal),
-                res.getDimensionPixelOffset(R.dimen.option_tile_margin_horizontal_ends)));
         mContainer.setAdapter(mAdapter);
+
+        // Measure RecyclerView to get to the total amount of space used by all options.
+        mContainer.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        DisplayMetrics metrics = new DisplayMetrics();
+        // TODO: retrieve fixed container width for landscape
+        mContainer.getContext().getSystemService(WindowManager.class)
+                .getDefaultDisplay().getMetrics(metrics);
+        int totalWidth = mContainer.getMeasuredWidth();
+
+        if (mUseGrid) {
+            int numColumns = res.getInteger(R.integer.options_grid_num_columns);
+            int widthPerItem = totalWidth / mAdapter.getItemCount();
+            int extraSpace = metrics.widthPixels - widthPerItem * numColumns;
+            int containerSidePadding = extraSpace / (numColumns + 1);
+            mContainer.setLayoutManager(new GridLayoutManager(mContainer.getContext(), numColumns));
+            mContainer.setPaddingRelative(containerSidePadding, 0, containerSidePadding, 0);
+            mContainer.setOverScrollMode(View.OVER_SCROLL_NEVER);
+            return;
+        }
+
+        int extraSpace = metrics.widthPixels - totalWidth;
+        if (extraSpace >= 0) {
+            mContainer.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        }
+        int itemSideMargin =  res.getDimensionPixelOffset(R.dimen.option_tile_margin_horizontal);
+        int defaultTotalPadding = itemSideMargin * (mAdapter.getItemCount() * 2 + 2);
+        if (extraSpace > defaultTotalPadding) {
+            int spaceBetweenItems = extraSpace / (mAdapter.getItemCount() + 1);
+            itemSideMargin = spaceBetweenItems / 2;
+        }
+        mContainer.addItemDecoration(new HorizontalSpacerItemDecoration(itemSideMargin));
     }
 
     public void resetOptions(List<T> options) {
