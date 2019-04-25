@@ -384,7 +384,8 @@ public class ThemeFragment extends ToolbarFragment {
             ViewGroup iconsContainer = card.findViewById(R.id.theme_preview_top_bar_icons);
 
             for (int i = 0; i < iconsContainer.getChildCount() && i < mIcons.size(); i++) {
-                ((ImageView)iconsContainer.getChildAt(i)).setImageDrawable(mIcons.get(i));
+                ((ImageView) iconsContainer.getChildAt(i))
+                        .setImageDrawable(mIcons.get(i).getConstantState().newDrawable().mutate());
             }
 
             ViewGroup body = card.findViewById(R.id.theme_preview_card_body_container);
@@ -503,7 +504,7 @@ public class ThemeFragment extends ToolbarFragment {
                     }
                     for (int i = 0; i < 3 && i < previewInfo.icons.size(); i++) {
                         Drawable icon =
-                                previewInfo.icons.get(i).getConstantState().newDrawable();
+                                previewInfo.icons.get(i).getConstantState().newDrawable().mutate();
                         Drawable bgShape =
                                 previewInfo.shapeDrawable.getConstantState().newDrawable();
                         bgShape.setTint(accentColor);
@@ -548,8 +549,9 @@ public class ThemeFragment extends ToolbarFragment {
                     @Override
                     protected void bindBody(boolean forceRebind) {
                         for (int i = 0; i < mIconIds.length && i < previewInfo.icons.size(); i++) {
-                            ((ImageView) card.findViewById(mIconIds[i])).setImageDrawable(
-                                    previewInfo.icons.get(i));
+                            ((ImageView) card.findViewById(mIconIds[i]))
+                                    .setImageDrawable(previewInfo.icons.get(i)
+                                            .getConstantState().newDrawable().mutate());
                         }
                     }
                 });
@@ -601,10 +603,10 @@ public class ThemeFragment extends ToolbarFragment {
 
                         for (int i = 0; i < mColorTileIds.length && i < previewInfo.icons.size();
                                 i++) {
-                            Drawable icon =
-                                previewInfo.icons.get(i).getConstantState().newDrawable();
+                            Drawable icon = previewInfo.icons.get(i)
+                                    .getConstantState().newDrawable().mutate();
                             Drawable bgShape =
-                                previewInfo.shapeDrawable.getConstantState().newDrawable();
+                                    previewInfo.shapeDrawable.getConstantState().newDrawable();
                             bgShape.setTint(accentColor);
 
                             ImageView bg = card.findViewById(mColorTileIds[i]);
