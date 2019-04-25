@@ -14,16 +14,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:padding="4dp">
-
-    <ImageView
-        android:id="@+id/option_tile"
-        android:layout_width="@dimen/component_color_chip_size"
-        android:layout_height="@dimen/component_color_chip_size"
-        android:layout_gravity="center"
-        android:src="@drawable/color_chip"/>
-</FrameLayout>
+<resources>
+    <integer name="options_grid_num_columns">4</integer>
+</resources>
