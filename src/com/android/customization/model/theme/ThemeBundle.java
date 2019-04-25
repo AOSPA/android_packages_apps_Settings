@@ -45,7 +45,6 @@ import androidx.core.graphics.PathParser;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
-import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.widget.DynamicAdaptiveIconDrawable;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
@@ -108,7 +107,7 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
                     mPreviewInfo.shapeDrawable);
         }
         if (!mPreviewInfo.icons.isEmpty()) {
-            Drawable icon = mPreviewInfo.icons.get(0).mutate();
+            Drawable icon = mPreviewInfo.icons.get(0).getConstantState().newDrawable().mutate();
             icon.setTint(res.getColor(R.color.icon_thumbnail_color, null));
             ((ImageView) view.findViewById(R.id.theme_option_icon)).setImageDrawable(
                     icon);
