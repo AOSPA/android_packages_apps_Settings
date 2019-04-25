@@ -27,9 +27,7 @@ import static com.android.customization.model.ResourceConstants.SETTINGS_PACKAGE
 import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 
 import android.graphics.Point;
-import android.os.UserHandle;
 import android.provider.Settings;
-import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -40,8 +38,6 @@ import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.module.ThemesUserEventLogger;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
-import com.android.wallpaper.module.Injector;
-import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.module.WallpaperPersister;
 import com.android.wallpaper.module.WallpaperPersister.SetWallpaperCallback;
 import com.android.wallpaper.module.WallpaperSetter;
@@ -95,7 +91,8 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
         // Set wallpaper
         if (theme.shouldUseThemeWallpaper()) {
             mWallpaperSetter.requestDestination(mActivity, mActivity.getSupportFragmentManager(),
-                    R.string.set_theme_wallpaper_dialog_message, new Listener() {
+                    R.string.set_theme_wallpaper_dialog_message, theme.getWallpaperInfo(),
+                    new Listener() {
                         @Override
                         public void onSetHomeScreen() {
                             applyWallpaper(theme, WallpaperPersister.DEST_HOME_SCREEN,
@@ -140,19 +137,27 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
                 mActivity.getResources(),
                 mActivity.getWindowManager().getDefaultDisplay());
         Asset wallpaperAsset = theme.getWallpaperInfo().getAsset(mActivity);
-        wallpaperAsset.decodeRawDimensions(mActivity,
-                dimensions -> {
-                    float scale = 1f;
-                    // Calculate scale to fit the screen height
-                    if (dimensions != null && dimensions.y > 0) {
-                        scale = (float) defaultCropSurfaceSize.y / dimensions.y;
-                    }
-                    mWallpaperSetter.setCurrentWallpaper(mActivity,
-                            theme.getWallpaperInfo(),
-                            wallpaperAsset,
-                            destination,
-                            scale, null, callback);
-                });
+        if (wallpaperAsset != null) {
+            wallpaperAsset.decodeRawDimensions(mActivity,
+                    dimensions -> {
+                        float scale = 1f;
+                        // Calculate scale to fit the screen height
+                        if (dimensions != null && dimensions.y > 0) {
+                            scale = (float) defaultCropSurfaceSize.y / dimensions.y;
+                        }
+                        mWallpaperSetter.setCurrentWallpaper(mActivity,
+                                theme.getWallpaperInfo(),
+                                wallpaperAsset,
+                                destination,
+                                scale, null, callback);
+                    });
+        } else {
+            mWallpaperSetter.setCurrentWallpaper(mActivity,
+                    theme.getWallpaperInfo(),
+                    null,
+                    destination,
+                    1f, null, callback);
+        }
     }
 
     private void applyOverlays(ThemeBundle theme, Callback callback) {
