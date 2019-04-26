@@ -29,51 +29,89 @@
         android:layout_height="match_parent"
         android:focusable="true">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="@dimen/preview_card_padding"
             android:paddingHorizontal="@dimen/preview_card_padding"
-            android:orientation="vertical">
+            android:paddingTop="@dimen/preview_card_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
 
             <ViewStub
                 android:id="@+id/theme_preview_top_bar"
-                android:layout="@layout/theme_preview_topbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"/>
+                android:layout="@layout/theme_preview_topbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-              <TextView
+            <TextView
                 android:id="@+id/theme_preview_card_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:drawablePadding="10dp"
-                android:textAppearance="@style/CardTitleTextAppearance"/>
+                android:layout_marginVertical="@dimen/card_header_top_margin"
+                android:drawablePadding="12dp"
+                android:textAppearance="@style/CardTitleTextAppearance"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/theme_preview_top_bar"
+                app:layout_goneMarginTop="@dimen/card_header_top_margin"/>
 
             <Space
-                android:layout_width="match_parent"
+                android:id="@+id/theme_preview_content_spacer"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_max="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/theme_preview_card_header"/>
 
             <FrameLayout
                 android:id="@+id/theme_preview_card_body_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginHorizontal="8dp"
-                android:layout_weight="1"/>
+                android:layout_marginTop="@dimen/preview_theme_content_margin"
+                app:layout_constraintBottom_toTopOf="@+id/guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_max="@dimen/preview_theme_content_max_height"
+                app:layout_constraintHeight_min="@dimen/preview_theme_content_min_height"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/theme_preview_content_spacer">
+
+            </FrameLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="40dp"
+                />
 
             <TextView
                 android:id="@+id/edit_label"
+                style="@style/EditLabelStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:drawableStart="@drawable/ic_tune"
                 android:drawablePadding="8dp"
                 android:gravity="center"
                 android:text="@string/edit_custom_theme_lbl"
-                style="@style/EditLabelStyle"
-                android:visibility="invisible"/>
-        </LinearLayout>
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/theme_preview_card_body_container"
+                app:layout_constraintVertical_bias="0.5"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </androidx.cardview.widget.CardView>
