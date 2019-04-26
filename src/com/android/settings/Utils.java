@@ -138,6 +138,17 @@ public final class Utils extends com.android.settingslib.Utils {
     public static final String KEY_RAM_TOTAL_SIZE = "ext_ram_total_size";
 
     /**
+     * Whether to disable the new device identifier access restrictions.
+     */
+    public static final String PROPERTY_DEVICE_IDENTIFIER_ACCESS_RESTRICTIONS_DISABLED =
+            "device_identifier_access_restrictions_disabled";
+
+    /**
+     * Whether to show the Permissions Hub.
+     */
+    public static final String PROPERTY_PERMISSIONS_HUB_ENABLED = "permissions_hub_enabled";
+
+    /**
      * Finds a matching activity for a preference's intent. If a matching
      * activity is not found, it will remove the preference.
      *

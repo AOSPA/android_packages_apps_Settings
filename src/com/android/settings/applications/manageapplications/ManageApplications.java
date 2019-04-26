@@ -92,7 +92,6 @@ import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
 import com.android.settings.applications.AppStorageSettings;
-import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.applications.InstalledAppCounter;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
@@ -704,12 +703,9 @@ public class ManageApplications extends InstrumentedFragment
                             .setResultListener(this, ADVANCED_SETTINGS)
                             .launch();
                 } else {
-                    new SubSettingLauncher(getContext())
-                            .setDestination(DefaultAppSettings.class.getName())
-                            .setTitleRes(R.string.configure_apps)
-                            .setSourceMetricsCategory(getMetricsCategory())
-                            .setResultListener(this, ADVANCED_SETTINGS)
-                            .launch();
+                    Intent intent = new Intent(
+                            android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS);
+                    startActivityForResult(intent, ADVANCED_SETTINGS);
                 }
                 return true;
             default:
@@ -952,6 +948,7 @@ public class ManageApplications extends InstrumentedFragment
             mContext = manageApplications.getActivity();
             mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
             mAppFilter = appFilter;
+            mBackend = PowerWhitelistBackend.getInstance(mContext);
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
                 mExtraInfoBridge = new AppStateNotificationBridge(mContext, mState, this,
                         manageApplications.mUsageStatsManager,
