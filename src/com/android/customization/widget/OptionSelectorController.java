@@ -23,7 +23,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -71,7 +73,8 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
     private CustomizationOption mAppliedOption;
 
     public OptionSelectorController(RecyclerView container, List<T> options) {
-        this(container, options, false, true);
+        this(container, options, container.getResources().getBoolean(R.bool.use_grid_for_options),
+                true);
     }
 
     public OptionSelectorController(RecyclerView container, List<T> options,
@@ -143,9 +146,11 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
             @Override
             public void onBindViewHolder(@NonNull TileViewHolder holder, int position) {
                 CustomizationOption option = mOptions.get(position);
-                if (mSelectedOption == null && option.isActive(manager)) {
-                    mSelectedOption = option;
+                if (option.isActive(manager)) {
                     mAppliedOption = option;
+                    if (mSelectedOption == null) {
+                        mSelectedOption = option;
+                    }
                 }
                 if (holder.labelView != null) {
                     holder.labelView.setText(option.getTitle());
@@ -170,9 +175,12 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
                     checkedFrame.setLayerGravity(idx, Gravity.BOTTOM | Gravity.RIGHT);
                     checkedFrame.setLayerWidth(idx, checkSize);
                     checkedFrame.setLayerHeight(idx, checkSize);
-                    checkedFrame.setLayerInsetBottom(idx, checkSize/2);
-                    checkedFrame.setLayerInsetLeft(idx, checkSize/2);
+                    checkedFrame.setLayerInsetBottom(idx,
+                            holder.itemView.getPaddingBottom() - (checkSize/3));
+                    checkedFrame.setLayerInsetLeft(idx, checkSize/3);
                     holder.itemView.setForeground(checkedFrame);
+                } else if (mShowCheckmark) {
+                    holder.itemView.setForeground(null);
                 }
             }
 
@@ -189,16 +197,22 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
 
         // Measure RecyclerView to get to the total amount of space used by all options.
         mContainer.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        DisplayMetrics metrics = new DisplayMetrics();
-        // TODO: retrieve fixed container width for landscape
-        mContainer.getContext().getSystemService(WindowManager.class)
-                .getDefaultDisplay().getMetrics(metrics);
+        int fixWidth = res.getDimensionPixelSize(R.dimen.options_container_width);
+        int availableWidth;
+        if (fixWidth == 0) {
+            DisplayMetrics metrics = new DisplayMetrics();
+            mContainer.getContext().getSystemService(WindowManager.class)
+                    .getDefaultDisplay().getMetrics(metrics);
+            availableWidth = metrics.widthPixels;
+        } else {
+            availableWidth = fixWidth;
+        }
         int totalWidth = mContainer.getMeasuredWidth();
 
         if (mUseGrid) {
             int numColumns = res.getInteger(R.integer.options_grid_num_columns);
             int widthPerItem = totalWidth / mAdapter.getItemCount();
-            int extraSpace = metrics.widthPixels - widthPerItem * numColumns;
+            int extraSpace = availableWidth - widthPerItem * numColumns;
             int containerSidePadding = extraSpace / (numColumns + 1);
             mContainer.setLayoutManager(new GridLayoutManager(mContainer.getContext(), numColumns));
             mContainer.setPaddingRelative(containerSidePadding, 0, containerSidePadding, 0);
@@ -206,7 +220,7 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
             return;
         }
 
-        int extraSpace = metrics.widthPixels - totalWidth;
+        int extraSpace = availableWidth - totalWidth;
         if (extraSpace >= 0) {
             mContainer.setOverScrollMode(View.OVER_SCROLL_NEVER);
         }
