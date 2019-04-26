@@ -99,12 +99,13 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         Injector injector = InjectorProvider.getInjector();
         mDelegate = new WallpaperPickerDelegate(this, this, injector);
         mUserEventLogger = injector.getUserEventLogger(this);
-
         initSections();
+
+        // Restore this Activity's state before restoring contained Fragments state.
+        super.onCreate(savedInstanceState);
 
         if (!supportsCustomization()) {
             Log.w(TAG, "Themes not supported, reverting to Wallpaper Picker");
