@@ -27,6 +27,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import com.android.customization.model.ResourceConstants;
@@ -82,6 +83,7 @@ public class LauncherGridOptionsProvider {
      * @param reload whether to reload grid options if they're cached.
      */
     @WorkerThread
+    @Nullable
     List<GridOption> fetch(boolean reload) {
         if (!areGridsAvailable()) {
             return null;
