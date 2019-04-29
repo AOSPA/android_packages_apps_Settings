@@ -17,7 +17,6 @@ package com.android.customization.picker;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
@@ -227,6 +226,10 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
             if (!prefs.getTabVisited(name)) {
                 prefs.setTabVisited(name);
                 hideTipDot(item);
+
+                if (id == R.id.nav_theme) {
+                    getThemeManager().storeEmptyTheme();
+                }
             }
             return true;
         });

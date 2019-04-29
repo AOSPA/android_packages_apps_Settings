@@ -29,6 +29,7 @@ import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 import android.graphics.Point;
 import android.provider.Settings;
 
+import android.text.TextUtils;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
@@ -43,6 +44,7 @@ import com.android.wallpaper.module.WallpaperPersister.SetWallpaperCallback;
 import com.android.wallpaper.module.WallpaperSetter;
 import com.android.wallpaper.picker.SetWallpaperDialogFragment.Listener;
 import com.android.wallpaper.util.WallpaperCropUtils;
+import org.json.JSONObject;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -241,5 +243,18 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     @Nullable
     public ThemeBundle findThemeByPackages(ThemeBundle other) {
         return mProvider.findEquivalent(other);
+    }
+
+    /**
+     * Store empty theme if no theme has been set yet. This will prevent Settings from showing the
+     * suggestion to select a theme
+     */
+    public void storeEmptyTheme() {
+        String themeSetting = Settings.Secure.getString(mActivity.getContentResolver(),
+                ResourceConstants.THEME_SETTING);
+        if (TextUtils.isEmpty(themeSetting)) {
+            Settings.Secure.putString(mActivity.getContentResolver(),
+                    ResourceConstants.THEME_SETTING, new JSONObject().toString());
+        }
     }
 }
