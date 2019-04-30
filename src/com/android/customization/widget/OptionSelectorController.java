@@ -178,6 +178,11 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
                             holder.itemView.getPaddingBottom() - (checkSize/3));
                     checkedFrame.setLayerInsetLeft(idx, checkSize/3);
                     holder.itemView.setForeground(checkedFrame);
+
+                    CharSequence cd = mContainer.getContext().getString(
+                            R.string.option_applied_description, option.getTitle());
+                    holder.labelView.setContentDescription(cd);
+
                 } else if (mShowCheckmark) {
                     holder.itemView.setForeground(null);
                 }
