@@ -151,18 +151,14 @@ public class PreviewPager extends LinearLayout {
      * widget.
      */
     public void setAdapter(PagerAdapter adapter) {
+        int initialPage = 0;
+        if (mViewPager.getAdapter() != null) {
+            initialPage = isRtl() ? mAdapter.getCount() - 1 - mViewPager.getCurrentItem()
+                    : mViewPager.getCurrentItem();
+        }
         mAdapter = adapter;
         mViewPager.setAdapter(adapter);
-        if (ViewCompat.isLayoutDirectionResolved(mViewPager)) {
-            if (ViewCompat.getLayoutDirection(mViewPager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
-                mViewPager.setCurrentItem(mAdapter.getCount() - 1);
-            }
-        } else {
-            if (TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault())
-                    == ViewCompat.LAYOUT_DIRECTION_RTL) {
-                mViewPager.setCurrentItem(mAdapter.getCount() - 1);
-            }
-        }
+        mViewPager.setCurrentItem(isRtl() ? mAdapter.getCount() - 1 - initialPage : initialPage);
         mAdapter.registerDataSetObserver(new DataSetObserver() {
             @Override
             public void onChanged() {
@@ -171,6 +167,14 @@ public class PreviewPager extends LinearLayout {
         });
         initIndicator();
         updateIndicator(mViewPager.getCurrentItem());
+    }
+
+    private boolean isRtl() {
+        if (ViewCompat.isLayoutDirectionResolved(mViewPager)) {
+            return ViewCompat.getLayoutDirection(mViewPager) == ViewCompat.LAYOUT_DIRECTION_RTL;
+        }
+        return TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault())
+                == ViewCompat.LAYOUT_DIRECTION_RTL;
     }
 
     /**

@@ -20,7 +20,7 @@
 
     <!-- Title of a section of the customization picker where the user can select a Theme for the
         device. [CHAR LIMIT=15] -->
-    <string name="theme_title" translatable="false">Style</string>
+    <string name="theme_title">Style</string>
 
     <!-- Title of a section of the customization picker where the user can select a Clock face.
         [CHAR LIMIT=15] -->
@@ -31,7 +31,7 @@
     <string name="grid_title">Grid</string>
 
     <!-- Title of a section of the customization picker where the user can select a Wallpaper.
-        [CHAR LIMIT=15] -->
+        [CHAR LIMIT=19] -->
     <string name="wallpaper_title">Wallpaper</string>
 
     <!-- Label for a button that allows the user to apply the currently selected Theme.
@@ -60,6 +60,9 @@
     <!-- Sample text used to show a preview of a selected font [CHAR LIMIT=3] -->
     <string name="theme_font_example">ABC</string>
 
+    <!-- Content description for previewing a style, describing each of their components. [CHAR_LIMIT=NONE] -->
+    <string name="theme_description">Font: <xliff:g name="font_name">%1$s</xliff:g>, icons: <xliff:g name="icon_name">%2$s</xliff:g>, shape: <xliff:g name="shape_name">%3$s</xliff:g>, color: <xliff:g name="color_name">%4$s</xliff:g> </string>
+
     <!-- Plus sign used to indicate that the user can add a custom theme -->
     <string name="add_custom_theme" translatable="false">+</string>
 
@@ -81,11 +84,12 @@
     <!-- Title of a page that shows the user the preview of a wallpaper associated with a theme [CHAR_LIMIT=20] -->
     <string name="preview_name_wallpaper">Wallpaper</string>
 
-    <!-- Title text for previewing a font [CHAR LIMIT=30] -->
-    <string name="font_card_title">Customize your device</string>
+    <!-- Header sample text used to preview the look of a particular font, we show samples of
+        uppercase and lowercase characters and numbers. [CHAR LIMIT=30] -->
+    <string name="font_card_title">ABC • abc • 123</string>
 
     <!-- Body text for previewing a font [CHAR LIMIT=160] -->
-    <string name="font_card_body">Add your style to every screen with featured or custom designs that change your phone\'s home screen, icons and more</string>
+    <string name="font_card_body">Add your favorite fonts to every screen</string>
 
     <!--Title for a grid option, describing the number of columns and rows, eg: 4x4 [CHAR LIMIT=10] -->
     <string name="grid_title_pattern"><xliff:g name="num_cols" example="1">%1$d</xliff:g>x<xliff:g name="num_rows" example="1">%2$d</xliff:g></string>
@@ -100,6 +104,10 @@
     <!-- Label for a button that takes the user to the next step when configuring a custom theme.
         [CHAR LIMIT=20] -->
     <string name="custom_theme_next">Next</string>
+
+    <!-- Label for a button that takes the user back to the previous step when configuring a custom theme.
+        [CHAR LIMIT=20] -->
+    <string name="custom_theme_previous">Previous</string>
 
     <!-- Label for a system Style/Theme (combination of fonts/colors/icons) that is defined and
         customized by the user [CHAR LIMIT=15] -->
@@ -128,12 +136,7 @@
     <!-- Title of a set of icons that the user can chose for their custom style (eg, "Icons 2") -->
     <string name="icon_component_label">Icons <xliff:g name="component_number" example="1">%1$d</xliff:g></string>
 
-
     <string name="font_component_option_thumbnail" translatable="false">A</string>
-
-    <!-- Text explaining what the current step is in setting a custom theme, eg: "1 of 4".
-    [CHAR_LIMIT=40] -->
-    <string name="component_step_counter"><xliff:g name="current_step" example="1">%1$d</xliff:g> of <xliff:g name="total_steps" example="4">%2$d</xliff:g></string>
 
     <!-- Dialog box asking the user to confirm if they want to delete the current custom style
         [CHAR_LIMIT=NONE] -->
@@ -166,4 +169,7 @@
         instead of their customly defined one. The button dismisses the dialog and goes back to the
         previous screen. [CHAR_LIMIT=16]  -->
     <string name="no_thanks">No, thanks</string>
+
+    <!-- Content description for a screen showing the preview of a clock face. [CHAR_LIMIT=NONE] -->
+    <string name="clock_preview_content_description"><xliff:g name="clock_name">%1$s</xliff:g> clock preview</string>
 </resources>

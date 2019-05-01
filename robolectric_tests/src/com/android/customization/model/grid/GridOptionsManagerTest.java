@@ -24,6 +24,7 @@ import static org.mockito.Mockito.when;
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager.Callback;
+import com.android.customization.module.ThemesUserEventLogger;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,12 +38,13 @@ import org.robolectric.RobolectricTestRunner;
 public class GridOptionsManagerTest {
 
     @Mock LauncherGridOptionsProvider mProvider;
+    @Mock ThemesUserEventLogger mThemesUserEventLogger;
     private GridOptionsManager mManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mManager = new GridOptionsManager(mProvider);
+        mManager = new GridOptionsManager(mProvider, mThemesUserEventLogger);
     }
 
     @Test

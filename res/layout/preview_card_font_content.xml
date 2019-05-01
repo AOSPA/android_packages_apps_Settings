@@ -31,10 +31,15 @@
         android:layout_marginBottom="16dp"
         android:gravity="center_horizontal"
         android:text="@string/font_card_title"/>
+    <View
+        android:id="@+id/font_card_divider"
+        android:layout_width="15dp"
+        android:layout_height="2dp"
+        android:layout_marginVertical="30dp"
+        android:background="?android:colorAccent"/>
     <TextView
         style="@style/FontCardBodyTextStyle"
         android:id="@+id/font_card_body"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/font_card_body"/>

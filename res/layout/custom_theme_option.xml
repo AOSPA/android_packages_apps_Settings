@@ -34,13 +34,11 @@
         android:paddingHorizontal="@dimen/option_tile_padding_horizontal"
         android:paddingVertical="@dimen/option_tile_padding_vertical"
         android:background="@drawable/option_border">
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="@dimen/theme_option_add_size"
-            android:textAlignment="center"
-            android:textColor="?android:colorAccent"
-            android:text="@string/add_custom_theme"/>
+            android:src="@drawable/ic_add_24px"
+            android:tint="?android:attr/colorAccent" />
     </FrameLayout>
 </LinearLayout>

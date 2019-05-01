@@ -39,7 +39,6 @@ import com.android.wallpaper.picker.ToolbarFragment;
 
 public class CustomThemeComponentFragment extends ToolbarFragment {
     private static final String ARG_KEY_POSITION = "CustomThemeComponentFragment.position";
-    private static final String ARG_KEY_TOTAL_STEPS = "CustomThemeComponentFragment.steps";
     private static final String ARG_KEY_TITLE_RES_ID = "CustomThemeComponentFragment.title_res";
     private CustomThemeComponentFragmentHost mHost;
 
@@ -55,11 +54,10 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
     }
 
     public static CustomThemeComponentFragment newInstance(CharSequence toolbarTitle, int position,
-            int totalSteps, int titleResId) {
+            int titleResId) {
         CustomThemeComponentFragment fragment = new CustomThemeComponentFragment();
         Bundle arguments = ToolbarFragment.createArguments(toolbarTitle);
         arguments.putInt(ARG_KEY_POSITION, position);
-        arguments.putInt(ARG_KEY_TOTAL_STEPS, totalSteps);
         arguments.putInt(ARG_KEY_TITLE_RES_ID, titleResId);
         fragment.setArguments(arguments);
         return fragment;
@@ -68,7 +66,6 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
     private ThemeComponentOptionProvider<? extends ThemeComponentOption> mProvider;
     private CustomThemeManager mCustomThemeManager;
     private int mPosition;
-    private int mTotalSteps;
     @StringRes private int mTitleResId;
 
     private RecyclerView mOptionsContainer;
@@ -81,7 +78,6 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPosition = getArguments().getInt(ARG_KEY_POSITION);
-        mTotalSteps = getArguments().getInt(ARG_KEY_TOTAL_STEPS);
         mTitleResId = getArguments().getInt(ARG_KEY_TITLE_RES_ID);
         mProvider = mHost.getComponentOptionProvider(mPosition);
         mCustomThemeManager = mHost.getCustomThemeManager();
@@ -106,14 +102,12 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
             setUpToolbar(view, R.menu.custom_theme_editor_menu);
         }
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_close_24px, null));
+        mToolbar.setNavigationContentDescription(R.string.cancel);
         mToolbar.setNavigationOnClickListener(v -> mHost.cancel());
         mOptionsContainer = view.findViewById(R.id.options_container);
         mPreviewCard = view.findViewById(R.id.component_preview_card);
         mTitle = view.findViewById(R.id.component_options_title);
         mTitle.setText(mTitleResId);
-        TextView stepCounter = view.findViewById(R.id.component_step_counter);
-        stepCounter.setText(getContext().getString(R.string.component_step_counter,
-                mPosition + 1, mTotalSteps));
         setUpOptions();
 
         return view;
