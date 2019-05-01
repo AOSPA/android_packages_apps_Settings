@@ -102,13 +102,15 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
 
+    <protected-broadcast android:name="com.android.settings.DELETE_SIM_PROFILE_RESULT"/>
+
     <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
             android:theme="@style/Theme.Settings"
             android:hardwareAccelerated="true"
             android:requiredForAllUsers="true"
             android:supportsRtl="true"
-            android:allowBackup="false"
+            android:backupAgent="com.android.settings.backup.SettingsBackupHelper"
             android:usesCleartextTraffic="true"
             android:defaultToDeviceProtectedStorage="true"
             android:directBootAware="true"
@@ -183,6 +185,7 @@
             <intent-filter android:priority="1">
                 <action android:name="android.settings.WIRELESS_SETTINGS" />
                 <action android:name="android.settings.AIRPLANE_MODE_SETTINGS" />
+                <action android:name="com.android.settings.sim.SIM_SUB_INFO_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
@@ -433,6 +436,17 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.biometrics.face.FaceSettings" />
+        </activity>
+
+        <activity android:name="Settings$FingerprintSettingsActivity"
+                  android:label="@string/security_settings_fingerprint_preference_title"
+                  android:icon="@drawable/ic_fingerprint_header">
+            <intent-filter>
+                <action android:name="android.settings.FINGERPRINT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.biometrics.fingerprint.FingerprintSettings$FingerprintSettingsFragment" />
         </activity>
 
         <activity android:name=".bluetooth.DevicePickerActivity"
@@ -1306,6 +1320,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.privacy.PrivacyDashboardFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity>
 
         <activity android:name="SetFullBackupPassword"
@@ -1490,8 +1506,7 @@
 
         <activity
             android:name="Settings$TextToSpeechSettingsActivity"
-            android:label="@string/tts_settings"
-            android:parentActivityName="Settings">
+            android:label="@string/tts_settings">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.TTS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1659,6 +1674,7 @@
                        android:resource="@string/suggestion_additional_fingerprints" />
             <meta-data android:name="com.android.settings.summary"
                        android:resource="@string/suggestion_additional_fingerprints_summary" />
+            <meta-data android:name="com.android.settings.icon_tintable" android:value="true" />
         </activity-alias>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
@@ -2651,27 +2667,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity
-            android:name="Settings$SimSettingsActivity"
-            android:label="@string/sim_settings_title"
-            android:icon="@drawable/ic_settings_sim"
-            android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-2"/>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.wireless" />
-            <meta-data android:name="com.android.settings.summary"
-                android:resource="@string/summary_empty"/>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.sim.SimSettings" />
-        </activity>
-
         <activity android:name=".sim.SimPreferenceDialog"
             android:theme="@style/Theme.AlertDialog"
             android:excludeFromRecents="true" />
@@ -3124,7 +3119,7 @@
 
         <activity android:name=".panel.SettingsPanelActivity"
             android:label="@string/settings_panel_title"
-            android:theme="@style/Theme.BottomDialog"
+            android:theme="@style/Theme.Panel"
             android:documentLaunchMode="always"
             android:excludeFromRecents="true"
             android:exported="true">

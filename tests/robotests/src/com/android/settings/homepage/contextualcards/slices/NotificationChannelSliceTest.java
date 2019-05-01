@@ -30,6 +30,7 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
+import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -151,7 +152,8 @@ public class NotificationChannelSliceTest {
         for (int i = 0; i < rowItems.size(); i++) {
             // Assert the summary text is the same as expectation.
             assertThat(getSummaryFromSliceItem(rowItems.get(i))).isEqualTo(
-                    mContext.getString(R.string.notifications_sent_weekly, CHANNEL_COUNT - i));
+                    mContext.getResources().getQuantityString(R.plurals.notifications_sent_weekly,
+                            CHANNEL_COUNT - i, CHANNEL_COUNT - i));
         }
     }
 
@@ -318,6 +320,7 @@ public class NotificationChannelSliceTest {
         applicationInfo.name = APP_LABEL;
         applicationInfo.uid = UID;
         applicationInfo.flags = flags;
+        applicationInfo.packageName = PACKAGE_NAME;
 
         final PackageInfo packageInfo = new PackageInfo();
         packageInfo.packageName = PACKAGE_NAME;
@@ -343,7 +346,7 @@ public class NotificationChannelSliceTest {
         doReturn(buildNotificationChannelGroups(channels)).when(mNotificationBackend).getGroups(
                 any(String.class), any(int.class));
         doReturn(appRow).when(mNotificationBackend).loadAppRow(any(Context.class),
-                any(PackageManager.class), any(PackageInfo.class));
+                any(PackageManager.class), any(RoleManager.class), any(PackageInfo.class));
         doReturn(channelCount).when(mNotificationBackend).getChannelCount(
                 any(String.class), any(int.class));
     }

@@ -17,25 +17,23 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
-import android.database.ContentObserver;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+
+import com.android.settings.network.MobileDataContentObserver;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
  * Preference controller for "Mobile data"
@@ -48,7 +46,7 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     private SwitchPreference mPreference;
     private TelephonyManager mTelephonyManager;
     private SubscriptionManager mSubscriptionManager;
-    private DataContentObserver mDataContentObserver;
+    private MobileDataContentObserver mDataContentObserver;
     private FragmentManager mFragmentManager;
     @VisibleForTesting
     int mDialogType;
@@ -58,14 +56,15 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     public MobileDataPreferenceController(Context context, String key) {
         super(context, key);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
-        mDataContentObserver = new DataContentObserver(new Handler(Looper.getMainLooper()));
+        mDataContentObserver = new MobileDataContentObserver(new Handler(Looper.getMainLooper()));
+        mDataContentObserver.setOnMobileDataChangedListener(() -> updateState(mPreference));
     }
 
     @Override
     public int getAvailabilityStatus(int subId) {
         return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 ? AVAILABLE
-                : CONDITIONALLY_UNAVAILABLE;
+                : DISABLED_DEPENDENT_SETTING;
     }
 
     @Override
@@ -129,14 +128,6 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         return info != null && info.isOpportunistic();
     }
 
-    public static Uri getObservableUri(int subId) {
-        Uri uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA);
-        if (TelephonyManager.getDefault().getSimCount() != 1) {
-            uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA + subId);
-        }
-        return uri;
-    }
-
     public void init(FragmentManager fragmentManager, int subId) {
         mFragmentManager = fragmentManager;
         mSubId = subId;
@@ -150,18 +141,10 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         final int defaultSubId = mSubscriptionManager.getDefaultDataSubscriptionId();
         final boolean needToDisableOthers = mSubscriptionManager
                 .isActiveSubscriptionId(defaultSubId) && defaultSubId != mSubId;
-        if (enableData) {
-            if (isMultiSim && needToDisableOthers) {
-                mDialogType = MobileDataDialogFragment.TYPE_MULTI_SIM_DIALOG;
-                return true;
-            }
-        } else {
-            if (!isMultiSim) {
-                mDialogType = MobileDataDialogFragment.TYPE_DISABLE_DIALOG;
-                return true;
-            }
+        if (enableData && isMultiSim && needToDisableOthers) {
+            mDialogType = MobileDataDialogFragment.TYPE_MULTI_SIM_DIALOG;
+            return true;
         }
-
         return false;
     }
 
@@ -169,31 +152,5 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         final MobileDataDialogFragment dialogFragment = MobileDataDialogFragment.newInstance(type,
                 mSubId);
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
-    }
-
-    /**
-     * Listener that listens mobile data state change.
-     */
-    public class DataContentObserver extends ContentObserver {
-
-        public DataContentObserver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            super.onChange(selfChange);
-            updateState(mPreference);
-        }
-
-        public void register(Context context, int subId) {
-            final Uri uri = getObservableUri(subId);
-            context.getContentResolver().registerContentObserver(uri, false, this);
-
-        }
-
-        public void unRegister(Context context) {
-            context.getContentResolver().unregisterContentObserver(this);
-        }
     }
 }

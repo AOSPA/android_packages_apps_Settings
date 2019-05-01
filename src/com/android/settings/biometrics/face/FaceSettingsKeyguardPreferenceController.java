@@ -20,11 +20,13 @@ import static android.provider.Settings.Secure.FACE_UNLOCK_KEYGUARD_ENABLED;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.hardware.face.FaceManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 
+import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -39,8 +41,11 @@ public class FaceSettingsKeyguardPreferenceController extends FaceSettingsPrefer
     private static final int OFF = 0;
     private static final int DEFAULT = ON;  // face unlock is enabled on keyguard by default
 
+    private FaceManager mFaceManager;
+
     public FaceSettingsKeyguardPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mFaceManager = Utils.getFaceManagerOrNull(context);
     }
 
     public FaceSettingsKeyguardPreferenceController(Context context) {
@@ -75,6 +80,8 @@ public class FaceSettingsKeyguardPreferenceController extends FaceSettingsPrefer
         if (!FaceSettings.isAvailable(mContext)) {
             preference.setEnabled(false);
         } else if (adminDisabled()) {
+            preference.setEnabled(false);
+        } else if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
             preference.setEnabled(false);
         } else {
             preference.setEnabled(true);

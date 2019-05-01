@@ -17,6 +17,9 @@ package com.android.settings.accounts;
 
 import static android.provider.Settings.Secure.CROSS_PROFILE_CALENDAR_ENABLED;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -37,6 +40,7 @@ import android.util.ArraySet;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -80,7 +84,7 @@ public class CrossProfileCalendarPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_noManagedUser_DISABLED() {
+    public void getAvailabilityStatus_noManagedUser_shouldBeDisabled() {
         mController.setManagedUser(null);
 
         assertThat(mController.getAvailabilityStatus())
@@ -88,10 +92,27 @@ public class CrossProfileCalendarPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_hasManagedUser_AVAILABLE() {
-        mController.setManagedUser(mManagedUser);
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(CrossProfileCalendarPreferenceController.AVAILABLE);
+    public void getAvailabilityStatus_noPackageAllowed_shouldBeDisabledForUser() throws Exception {
+        dpm.setProfileOwner(TEST_COMPONENT_NAME);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_FOR_USER);
+    }
+
+    @Test
+    public void getAvailabilityStatus_somePackagesAllowed_shouldBeAvailable() throws Exception {
+        dpm.setProfileOwner(TEST_COMPONENT_NAME);
+        dpm.setCrossProfileCalendarPackages(TEST_COMPONENT_NAME,
+                Collections.singleton(TEST_PACKAGE_NAME));
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_allPackagesAllowed_shouldBeAvailable() throws Exception {
+        dpm.setProfileOwner(TEST_COMPONENT_NAME);
+        dpm.setCrossProfileCalendarPackages(TEST_COMPONENT_NAME, null);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
@@ -114,33 +135,6 @@ public class CrossProfileCalendarPreferenceControllerTest {
 
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isTrue();
-    }
-
-    @Test
-    public void updateState_noPackageAllowed_preferenceShouldBeDisabled() throws Exception {
-        dpm.setProfileOwner(TEST_COMPONENT_NAME);
-
-        mController.updateState(mPreference);
-        verify(mPreference).setDisabledByAdmin(any());
-    }
-
-    @Test
-    public void updateState_somePackagesAllowed_preferenceShouldNotBeDisabled() throws Exception {
-        dpm.setProfileOwner(TEST_COMPONENT_NAME);
-        dpm.setCrossProfileCalendarPackages(TEST_COMPONENT_NAME,
-                Collections.singleton(TEST_PACKAGE_NAME));
-
-        mController.updateState(mPreference);
-        verify(mPreference).setDisabledByAdmin(null);
-    }
-
-    @Test
-    public void updateState_allPackagesAllowed_preferenceShouldNotBeDisabled() throws Exception {
-        dpm.setProfileOwner(TEST_COMPONENT_NAME);
-        dpm.setCrossProfileCalendarPackages(TEST_COMPONENT_NAME, null);
-
-        mController.updateState(mPreference);
-        verify(mPreference).setDisabledByAdmin(null);
     }
 
     @Test

@@ -26,9 +26,9 @@ import com.android.settings.slices.SliceControllerInXmlCodeInspector;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.List;
-import org.robolectric.RobolectricTestRunner;
 
 /**
  * Test suite that scans all classes in app package, and performs different types of code inspection

@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -29,15 +30,20 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.password.ChooseLockSettingsHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 /**
  * Activity which concludes fingerprint enrollment.
  */
 public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
+    private static final String TAG = "FingerprintEnrollFinish";
+    private static final String ACTION_FINGERPRINT_SETTINGS =
+            "android.settings.FINGERPRINT_SETTINGS";
     @VisibleForTesting
     static final int REQUEST_ADD_ANOTHER = 1;
     @VisibleForTesting
@@ -70,6 +76,13 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        updateFingerprintSuggestionEnableState();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
@@ -93,12 +106,17 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     @Override
     protected void onNextButtonClick(View view) {
-        setFingerprintSuggestionEnabled();
+        updateFingerprintSuggestionEnableState();
         setResult(RESULT_FINISHED);
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            postEnroll();
+        } else {
+            launchFingerprintSettings();
+        }
         finish();
     }
 
-    private void setFingerprintSuggestionEnabled() {
+    private void updateFingerprintSuggestionEnableState() {
         final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
         if (fpm != null) {
             int enrolled = fpm.getEnrolledFingerprints(mUserId).size();
@@ -114,7 +132,26 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
                     FINGERPRINT_SUGGESTION_ACTIVITY);
             getPackageManager().setComponentEnabledSetting(
                     componentName, flag, PackageManager.DONT_KILL_APP);
+            Log.d(TAG, FINGERPRINT_SUGGESTION_ACTIVITY + " enabled state = " + (enrolled == 1));
         }
+    }
+
+    private void postEnroll() {
+        final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
+        if (fpm != null) {
+            int result = fpm.postEnroll();
+            if (result < 0) {
+                Log.w(TAG, "postEnroll failed: result = " + result);
+            }
+        }
+    }
+
+    private void launchFingerprintSettings() {
+        final Intent intent = new Intent(ACTION_FINGERPRINT_SETTINGS);
+        intent.setPackage(Utils.SETTINGS_PACKAGE_NAME);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void onAddAnotherButtonClick(View view) {
@@ -123,7 +160,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        setFingerprintSuggestionEnabled();
+        updateFingerprintSuggestionEnableState();
         if (requestCode == REQUEST_ADD_ANOTHER && resultCode != RESULT_CANCELED) {
             setResult(resultCode, data);
             finish();

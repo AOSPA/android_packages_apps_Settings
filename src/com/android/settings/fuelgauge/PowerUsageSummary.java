@@ -19,10 +19,16 @@ package com.android.settings.fuelgauge;
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
 
 import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.BatteryStats;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.SearchIndexableResource;
+import android.provider.Settings;
+import android.provider.Settings.Global;
 import android.text.format.Formatter;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,6 +51,7 @@ import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
@@ -100,6 +107,14 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     @VisibleForTesting
     BatteryTipPreferenceController mBatteryTipPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
+
+    @VisibleForTesting
+    final ContentObserver mSettingsObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            restartBatteryInfoLoader();
+        }
+    };
 
     @VisibleForTesting
     LoaderManager.LoaderCallbacks<BatteryInfo> mBatteryInfoLoaderCallbacks =
@@ -224,6 +239,21 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getContentResolver().registerContentObserver(
+                Global.getUriFor(Global.BATTERY_ESTIMATES_LAST_UPDATE_TIME),
+                false,
+                mSettingsObserver);
+    }
+
+    @Override
+    public void onPause() {
+        getContentResolver().unregisterContentObserver(mSettingsObserver);
+        super.onPause();
+    }
+
+    @Override
     public int getMetricsCategory() {
         return SettingsEnums.FUELGAUGE_POWER_USAGE_SUMMARY_V2;
     }
@@ -313,7 +343,7 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     @VisibleForTesting
     void updateLastFullChargePreference() {
         if (mBatteryInfo != null && mBatteryInfo.averageTimeToDischarge
-                != Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN) {
+                != EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN) {
             mLastFullChargePref.setTitle(R.string.battery_full_charge_last);
             mLastFullChargePref.setSubtitle(
                     StringUtil.formatElapsedTime(getContext(), mBatteryInfo.averageTimeToDischarge,

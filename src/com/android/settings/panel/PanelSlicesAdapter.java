@@ -33,6 +33,7 @@ import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
+
 import com.google.android.setupdesign.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -43,6 +44,12 @@ import java.util.List;
  */
 public class PanelSlicesAdapter
         extends RecyclerView.Adapter<PanelSlicesAdapter.SliceRowViewHolder> {
+
+    /**
+     * Maximum number of slices allowed on the panel view.
+     */
+    @VisibleForTesting
+    static final int MAX_NUM_OF_SLICES = 5;
 
     private final List<LiveData<Slice>> mSliceLiveData;
     private final int mMetricsCategory;
@@ -70,14 +77,21 @@ public class PanelSlicesAdapter
         sliceRowViewHolder.onBind(mSliceLiveData.get(position));
     }
 
+    /**
+     * Return the number of available items in the adapter with max number of slices enforced.
+     */
     @Override
     public int getItemCount() {
-        return mSliceLiveData.size();
+        return Math.min(mSliceLiveData.size(), MAX_NUM_OF_SLICES);
     }
 
+    /**
+     * Return the available data from the adapter. If the number of Slices over the max number
+     * allowed, the list will only have the first MAX_NUM_OF_SLICES of slices.
+     */
     @VisibleForTesting
     List<LiveData<Slice>> getData() {
-        return mSliceLiveData;
+        return mSliceLiveData.subList(0, getItemCount());
     }
 
     /**
@@ -115,7 +129,8 @@ public class PanelSlicesAdapter
                                 .action(0 /* attribution */,
                                         SettingsEnums.ACTION_PANEL_INTERACTION,
                                         mMetricsCategory,
-                                        sliceLiveData.toString() /* log key */,
+                                        sliceLiveData.getValue().getUri().getLastPathSegment()
+                                        /* log key */,
                                         eventInfo.actionType /* value */);
                     })
             );
