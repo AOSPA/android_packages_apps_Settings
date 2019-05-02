@@ -141,6 +141,18 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         mUserEventLogger.logResumed();
         // refresh the sections as the preview may have changed
         initSections();
+        if (mBottomNav == null) {
+            return;
+        }
+        CustomizationSection section = mSections.get(mBottomNav.getSelectedItemId());
+        if (section == null) {
+            return;
+        }
+        // Keep CategoryFragment's design to load category within its fragment
+        if (section instanceof WallpaperSection) {
+            switchFragment(section);
+            section.onVisible();
+        }
     }
 
     @Override
