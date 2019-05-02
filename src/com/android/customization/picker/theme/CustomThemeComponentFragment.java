@@ -17,6 +17,8 @@ package com.android.customization.picker.theme;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -109,8 +111,13 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
             setUpToolbar(view);
         } else {
             setUpToolbar(view, R.menu.custom_theme_editor_menu);
+            mToolbar.getMenu().getItem(0).setIconTintList(
+                    getContext().getColorStateList(R.color.toolbar_icon_color));
         }
-        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_close_24px, null));
+        Drawable closeIcon = getResources().getDrawable(R.drawable.ic_close_24px, null).mutate();
+        closeIcon.setTintList(getResources().getColorStateList(R.color.toolbar_icon_color, null));
+        mToolbar.setNavigationIcon(closeIcon);
+
         mToolbar.setNavigationContentDescription(R.string.cancel);
         mToolbar.setNavigationOnClickListener(v -> mHost.cancel());
         mOptionsContainer = view.findViewById(R.id.options_container);

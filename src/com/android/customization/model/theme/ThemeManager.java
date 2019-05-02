@@ -15,16 +15,14 @@
  */
 package com.android.customization.model.theme;
 
-import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_LAUNCHER;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SETTINGS;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_THEMEPICKER;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
-import static com.android.customization.model.ResourceConstants.SETTINGS_PACKAGE;
-import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 
 import android.graphics.Point;
 import android.provider.Settings;
@@ -59,6 +57,7 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
         THEME_CATEGORIES.add(OVERLAY_CATEGORY_ICON_SETTINGS);
         THEME_CATEGORIES.add(OVERLAY_CATEGORY_ICON_SYSUI);
         THEME_CATEGORIES.add(OVERLAY_CATEGORY_ICON_LAUNCHER);
+        THEME_CATEGORIES.add(OVERLAY_CATEGORY_ICON_THEMEPICKER);
     };
 
 
@@ -161,30 +160,7 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     }
 
     private void applyOverlays(ThemeBundle theme, Callback callback) {
-        boolean allApplied = true;
-        if (theme.isDefault()) {
-            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_SHAPE);
-            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_COLOR);
-            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_FONT);
-            allApplied &= disableCurrentOverlay(ANDROID_PACKAGE, OVERLAY_CATEGORY_ICON_ANDROID);
-            allApplied &= disableCurrentOverlay(SYSUI_PACKAGE, OVERLAY_CATEGORY_ICON_SYSUI);
-            allApplied &= disableCurrentOverlay(SETTINGS_PACKAGE, OVERLAY_CATEGORY_ICON_SETTINGS);
-            allApplied &= disableCurrentOverlay(ResourceConstants.getLauncherPackage(mActivity),
-                    OVERLAY_CATEGORY_ICON_LAUNCHER);
-        } else {
-            allApplied &= applyOverlayOrDefault(theme, ANDROID_PACKAGE, OVERLAY_CATEGORY_SHAPE);
-            allApplied &= applyOverlayOrDefault(theme, ANDROID_PACKAGE, OVERLAY_CATEGORY_COLOR);
-            allApplied &= applyOverlayOrDefault(theme, ANDROID_PACKAGE, OVERLAY_CATEGORY_FONT);
-            allApplied &= applyOverlayOrDefault(theme, ANDROID_PACKAGE,
-                    OVERLAY_CATEGORY_ICON_ANDROID);
-            allApplied &= applyOverlayOrDefault(theme, SYSUI_PACKAGE, OVERLAY_CATEGORY_ICON_SYSUI);
-            allApplied &= applyOverlayOrDefault(theme, SETTINGS_PACKAGE,
-                    OVERLAY_CATEGORY_ICON_SETTINGS);
-            allApplied &= applyOverlayOrDefault(theme,
-                    ResourceConstants.getLauncherPackage(mActivity),
-                    OVERLAY_CATEGORY_ICON_LAUNCHER);
-        }
-        allApplied &= Settings.Secure.putString(mActivity.getContentResolver(),
+        boolean allApplied = Settings.Secure.putString(mActivity.getContentResolver(),
                 ResourceConstants.THEME_SETTING, theme.getSerializedPackages());
         if (theme instanceof CustomTheme) {
             storeCustomTheme((CustomTheme) theme);
@@ -205,14 +181,6 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     @Override
     public void fetchOptions(OptionsFetchedListener<ThemeBundle> callback, boolean reload) {
         mProvider.fetch(callback, reload);
-    }
-
-    private boolean disableCurrentOverlay(String targetPackage, String category) {
-        return true;
-    }
-
-    private boolean applyOverlayOrDefault(ThemeBundle theme, String targetPkg, String category) {
-        return true;
     }
 
     public Map<String, String> getCurrentOverlays() {
