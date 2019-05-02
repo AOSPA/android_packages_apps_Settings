@@ -17,7 +17,6 @@ package com.android.customization.picker;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
@@ -97,12 +96,15 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     private CategoryFragment mWallpaperCategoryFragment;
     private WallpaperSetter mWallpaperSetter;
 
+    private boolean mWallpaperCategoryInitialized;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Injector injector = InjectorProvider.getInjector();
         mDelegate = new WallpaperPickerDelegate(this, this, injector);
         mUserEventLogger = injector.getUserEventLogger(this);
         initSections();
+        mWallpaperCategoryInitialized = false;
 
         // Restore this Activity's state before restoring contained Fragments state.
         super.onCreate(savedInstanceState);
@@ -413,7 +415,10 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
         @Override
         void onVisible() {
-            mDelegate.initialize(mForceCategoryRefresh);
+            if (!mWallpaperCategoryInitialized) {
+                mDelegate.initialize(mForceCategoryRefresh);
+            }
+            mWallpaperCategoryInitialized = true;
         }
     }
 
