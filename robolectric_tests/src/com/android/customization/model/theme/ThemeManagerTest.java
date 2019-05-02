@@ -30,14 +30,10 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 import static org.junit.Assert.assertFalse;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import android.app.Activity;
 import android.provider.Settings;
 
 import androidx.annotation.Nullable;
@@ -45,7 +41,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.module.ThemesUserEventLogger;
-import com.android.customization.testutils.Condition;
 import com.android.customization.testutils.OverlayManagerMocks;
 import com.android.customization.testutils.Wait;
 import com.android.wallpaper.module.WallpaperSetter;
@@ -58,8 +53,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-
-import java.util.Map;
 
 @RunWith(RobolectricTestRunner.class)
 public class ThemeManagerTest {
@@ -102,13 +95,12 @@ public class ThemeManagerTest {
                 OVERLAY_CATEGORY_ICON_SETTINGS, true, 0);
         mMockOmHelper.addOverlay("test.package.name_sysui", SYSUI_PACKAGE,
                 OVERLAY_CATEGORY_ICON_SYSUI, true, 0);
+        mMockOmHelper.addOverlay("test.package.name_themepicker", ,
+                OVERLAY_CATEGORY_ICON_SYSUI, true, 0);
 
         ThemeBundle defaultTheme = new ThemeBundle.Builder().asDefault().build(mActivity);
 
-        applyThemeAndWaitForCondition(defaultTheme, "Overlays didn't get disabled", () -> {
-            verify(mMockOm, times(6)).disableOverlay(anyString(), anyInt());
-            return true;
-        });
+        applyTheme(defaultTheme);
 
         assertEquals("Secure Setting should be emtpy after applying default theme",
                 "",
@@ -133,42 +125,22 @@ public class ThemeManagerTest {
                 .addOverlayPackage(OVERLAY_CATEGORY_FONT, bundleFontPackage)
                 .build(mActivity);
 
-        applyThemeAndWaitForCondition(theme, "Overlays didn't get enabled", () -> {
-            verify(mMockOm, times(2)).setEnabledExclusiveInCategory(anyString(), anyInt());
-            Map<String, String> overlays = mMockOm.getEnabledOverlaysForTargets(ANDROID_PACKAGE);
-            assertEquals(2, overlays.size());
-            assertTrue(bundleColorPackage  + " should be enabled",
-                    overlays.values().contains(bundleColorPackage));
-            assertTrue(bundleFontPackage  + " should be enabled",
-                    overlays.values().contains(bundleFontPackage));
-            assertFalse(otherPackage  + " should not be enabled",
-                    overlays.values().contains(otherPackage));
-            return true;
-        });
+        applyTheme(theme);
 
         assertEquals("Secure Setting was not properly set after applying theme",
                 theme.getSerializedPackages(),
                 Settings.Secure.getString(mActivity.getContentResolver(), THEME_SETTING));
     }
 
-    private void applyThemeAndWaitForCondition(ThemeBundle theme, String message,
-            Condition condition) {
-        boolean[] done = {false, false};
+    private void applyTheme(ThemeBundle theme) {
         mThemeManager.apply(theme, new Callback() {
             @Override
             public void onSuccess() {
-                done[0] = true;
             }
 
             @Override
             public void onError(@Nullable Throwable throwable) {
-                done[0] = true;
-                done[1] = true;
             }
         });
-        // TODO: refactor these tests so we can get rid of the long wait.
-        Wait.atMost(message, () -> done[0] && condition.isTrue(), 1000);
-        // done[1] is only set to true in the onError callback.
-        assertFalse(done[1]);
     }
 }

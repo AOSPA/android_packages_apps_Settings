@@ -630,7 +630,7 @@ public class ThemeFragment extends ToolbarFragment {
             }
             if (previewInfo.wallpaperAsset != null) {
                 addPage(new ThemePreviewPage(activity, R.string.preview_name_wallpaper,
-                        R.drawable.ic_wallpaper_24px, R.layout.preview_card_wallpaper_content,
+                        R.drawable.ic_nav_wallpaper, R.layout.preview_card_wallpaper_content,
                         previewInfo.resolveAccentColor(res)) {
 
                     private final WallpaperPreviewLayoutListener mListener =
