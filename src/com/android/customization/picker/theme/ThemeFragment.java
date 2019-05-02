@@ -32,6 +32,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.View.OnClickListener;
 import android.view.View.OnLayoutChangeListener;
 import android.view.ViewGroup;
@@ -326,6 +327,7 @@ public class ThemeFragment extends ToolbarFragment {
             header.setCompoundDrawablesWithIntrinsicBounds(0, iconSrc, 0, 0);
             header.setCompoundDrawableTintList(ColorStateList.valueOf(accentColor));
             card.findViewById(R.id.theme_preview_top_bar).setVisibility(View.GONE);
+            card.findViewById(R.id.edit_label).setVisibility(View.GONE);
 
             ViewGroup body = card.findViewById(R.id.theme_preview_card_body_container);
             inflater.inflate(contentLayoutRes, body, true);
@@ -389,10 +391,14 @@ public class ThemeFragment extends ToolbarFragment {
             }
 
             ViewGroup body = card.findViewById(R.id.theme_preview_card_body_container);
+
             inflater.inflate(contentLayoutRes, body, true);
+
             bindBody(false);
+
             TextView editLabel = card.findViewById(R.id.edit_label);
             editLabel.setOnClickListener(mEditClickListener);
+            card.setOnClickListener(mEditClickListener);
             editLabel.setVisibility(mEditClickListener != null
                     ? View.VISIBLE : View.INVISIBLE);
             ColorStateList themeAccentColor = ColorStateList.valueOf(accentColor);
@@ -445,9 +451,7 @@ public class ThemeFragment extends ToolbarFragment {
                 R.id.preview_icon_4, R.id.preview_icon_5
         };
         private int[] mColorButtonIds = {
-            R.id.preview_check_selected, R.id.preview_radio_selected, R.id.preview_toggle_selected,
-            R.id.preview_check_unselected, R.id.preview_radio_unselected,
-            R.id.preview_toggle_unselected
+            R.id.preview_check_selected, R.id.preview_radio_selected, R.id.preview_toggle_selected
         };
         private int[] mColorTileIds = {
             R.id.preview_color_qs_0_bg, R.id.preview_color_qs_1_bg, R.id.preview_color_qs_2_bg
@@ -584,14 +588,6 @@ public class ThemeFragment extends ToolbarFragment {
                         Switch enabledSwitch = card.findViewById(R.id.preview_toggle_selected);
                         enabledSwitch.setThumbTintList(tintList);
                         enabledSwitch.setTrackTintList(tintList);
-
-                        Switch disabledSwitch = card.findViewById(R.id.preview_toggle_unselected);
-                        disabledSwitch.setThumbTintList(
-                            ColorStateList.valueOf(res.getColor(R.color.switch_thumb_tint)));
-                        disabledSwitch.setTrackTintList(
-                            ColorStateList.valueOf(res.getColor(R.color.switch_track_tint)));
-                        // Change overlay method so our color doesn't get too light/dark
-                        disabledSwitch.setTrackTintMode(PorterDuff.Mode.OVERLAY);
 
                         ColorStateList seekbarTintList = ColorStateList.valueOf(accentColor);
                         SeekBar seekbar = card.findViewById(R.id.preview_seekbar);

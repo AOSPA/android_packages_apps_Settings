@@ -81,10 +81,13 @@ public class PreviewPager extends LinearLayout {
         mViewPager.setPageMargin(res.getDimensionPixelOffset(R.dimen.preview_page_gap));
         mViewPager.setClipToPadding(false);
         if (mPageStyle == STYLE_PEEKING) {
+            int screenWidth = mViewPager.getResources().getDisplayMetrics().widthPixels;
+            int hMargin = res.getDimensionPixelOffset(R.dimen.preview_page_horizontal_margin);
+            hMargin = Math.max(hMargin, screenWidth/8);
             mViewPager.setPadding(
-                    res.getDimensionPixelOffset(R.dimen.preview_page_horizontal_margin),
+                    hMargin,
                     res.getDimensionPixelOffset(R.dimen.preview_page_top_margin),
-                    res.getDimensionPixelOffset(R.dimen.preview_page_horizontal_margin),
+                    hMargin,
                     res.getDimensionPixelOffset(R.dimen.preview_page_bottom_margin));
         } else if (mPageStyle == STYLE_ASPECT_RATIO) {
             DisplayMetrics dm = res.getDisplayMetrics();
