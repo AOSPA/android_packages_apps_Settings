@@ -95,7 +95,7 @@ public class ThemeManagerTest {
                 OVERLAY_CATEGORY_ICON_SETTINGS, true, 0);
         mMockOmHelper.addOverlay("test.package.name_sysui", SYSUI_PACKAGE,
                 OVERLAY_CATEGORY_ICON_SYSUI, true, 0);
-        mMockOmHelper.addOverlay("test.package.name_themepicker", ,
+        mMockOmHelper.addOverlay("test.package.name_themepicker", mActivity.getPackageName(),
                 OVERLAY_CATEGORY_ICON_SYSUI, true, 0);
 
         ThemeBundle defaultTheme = new ThemeBundle.Builder().asDefault().build(mActivity);
