@@ -39,11 +39,11 @@ public class DefaultCustomizationPreferences extends DefaultWallpaperPreferences
 
     @Override
     public boolean getTabVisited(String id) {
-        return mSharedPrefs.getBoolean(id, false);
+        return mSharedPrefs.getBoolean(KEY_VISITED_PREFIX + id, false);
     }
 
     @Override
     public void setTabVisited(String id) {
-        mSharedPrefs.edit().putBoolean(id, true).apply();
+        mSharedPrefs.edit().putBoolean(KEY_VISITED_PREFIX + id, true).apply();
     }
 }

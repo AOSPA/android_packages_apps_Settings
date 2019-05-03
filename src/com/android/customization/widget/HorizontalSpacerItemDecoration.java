@@ -11,24 +11,22 @@ import androidx.recyclerview.widget.RecyclerView.State;
 
 /**
  * RecyclerView ItemDecorator that adds a horizontal space of the given size between items
- * (except the first and last)
+ * and double that space on the ends.
  */
 public class HorizontalSpacerItemDecoration extends ItemDecoration {
 
     private final int mOffset;
-    private final int mEndOffset;
 
-    public HorizontalSpacerItemDecoration(@Dimension int offset, @Dimension int endOffset) {
+    public HorizontalSpacerItemDecoration(@Dimension int offset) {
         mOffset = offset;
-        mEndOffset = endOffset;
     }
 
     @Override
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
             @NonNull RecyclerView parent, @NonNull State state) {
         int position = parent.getChildAdapterPosition(view);
-        int left = position == 0 ? mEndOffset : mOffset;
-        int right = (position == parent.getAdapter().getItemCount() - 1) ? mEndOffset : mOffset;
+        int left = position == 0 ? mOffset * 2: mOffset;
+        int right = (position == parent.getAdapter().getItemCount() - 1) ? mOffset * 2 : mOffset;
         outRect.set(left, 0, right, 0);
     }
 }

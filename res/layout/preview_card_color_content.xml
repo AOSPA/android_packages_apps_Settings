@@ -16,13 +16,11 @@
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="200dp"
-    android:layout_height="200dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:gravity="center_horizontal|bottom"
-    android:orientation="vertical"
-    tools:showIn="@layout/theme_preview_card">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,56 +29,72 @@
         android:orientation="horizontal">
         <FrameLayout
             android:layout_width="@dimen/preview_theme_icon_size"
-            android:layout_height="@dimen/preview_theme_icon_size">
+            android:layout_height="@dimen/preview_theme_icon_size"
+            android:layout_weight="1">
             <ImageView
                 android:layout_width="@dimen/preview_theme_icon_size"
                 android:layout_height="@dimen/preview_theme_icon_size"
+                android:layout_gravity="center"
                 android:id="@+id/preview_color_qs_0_bg"/>
             <ImageView
                 android:layout_width="@dimen/preview_theme_tile_size"
                 android:layout_height="@dimen/preview_theme_tile_size"
+                android:layout_gravity="center"
                 android:id="@+id/preview_color_qs_0_icon"
-                android:tint="@color/tile_enabled_icon_color"
-                android:layout_gravity="center"/>
+                android:tint="@color/tile_enabled_icon_color"/>
         </FrameLayout>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0" />
         <FrameLayout
             android:layout_width="@dimen/preview_theme_icon_size"
             android:layout_height="@dimen/preview_theme_icon_size"
-            android:layout_marginHorizontal="28dp">
+            android:layout_weight="1">
             <ImageView
                 android:layout_width="@dimen/preview_theme_icon_size"
                 android:layout_height="@dimen/preview_theme_icon_size"
+                android:layout_gravity="center"
                 android:id="@+id/preview_color_qs_1_bg"/>
             <ImageView
                 android:layout_width="@dimen/preview_theme_tile_size"
                 android:layout_height="@dimen/preview_theme_tile_size"
+                android:layout_gravity="center"
                 android:id="@+id/preview_color_qs_1_icon"
-                android:tint="@color/tile_enabled_icon_color"
-                android:layout_gravity="center"/>
+                android:tint="@color/tile_enabled_icon_color"/>
         </FrameLayout>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0" />
         <FrameLayout
             android:layout_width="@dimen/preview_theme_icon_size"
-            android:layout_height="@dimen/preview_theme_icon_size">
+            android:layout_height="@dimen/preview_theme_icon_size"
+            android:layout_weight="1">
             <ImageView
                 android:layout_width="@dimen/preview_theme_icon_size"
                 android:layout_height="@dimen/preview_theme_icon_size"
+                android:layout_gravity="center"
                 android:id="@+id/preview_color_qs_2_bg"
                 android:tint="@color/tile_disabled_background_color"/>
             <ImageView
                 android:layout_width="@dimen/preview_theme_tile_size"
                 android:layout_height="@dimen/preview_theme_tile_size"
+                android:layout_gravity="center"
                 android:id="@+id/preview_color_qs_2_icon"
-                android:color="@color/tile_disabled_icon_color"
-                android:layout_gravity="center"/>
+                android:color="@color/tile_disabled_icon_color"/>
         </FrameLayout>
     </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:orientation="horizontal"
-        android:layout_marginTop="30dp"
-        android:gravity="center|bottom">
+        android:gravity="center">
         <SeekBar
             android:id="@+id/preview_seekbar"
             android:layout_height="wrap_content"
@@ -91,63 +105,63 @@
             android:clickable="true"
             android:max="3"/>
     </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:layout_marginTop="15dp"
         android:gravity="center"
         android:orientation="horizontal">
-        <CheckBox
-            android:id="@+id/preview_check_selected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:layout_gravity="center"
-            android:enabled="false"/>
-        <RadioButton
-            android:id="@+id/preview_radio_selected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="22dp"
-            android:checked="true"
-            android:layout_gravity="center"
-            android:enabled="false"/>
-        <Switch
-            android:id="@+id/preview_toggle_selected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:layout_gravity="center"
-            android:enabled="false"/>
+        <FrameLayout
+            android:layout_width="@dimen/preview_theme_icon_size"
+            android:layout_height="@dimen/preview_theme_icon_size"
+            android:layout_weight="1">
+            <CheckBox
+                android:id="@+id/preview_check_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:enabled="false"/>
+        </FrameLayout>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0" />
+        <FrameLayout
+            android:layout_width="@dimen/preview_theme_icon_size"
+            android:layout_height="@dimen/preview_theme_icon_size"
+            android:layout_weight="1">
+            <RadioButton
+                android:id="@+id/preview_radio_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:enabled="false"/>
+        </FrameLayout>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0" />
+        <FrameLayout
+            android:layout_width="@dimen/preview_theme_icon_size"
+            android:layout_height="@dimen/preview_theme_icon_size"
+            android:layout_weight="1">
+            <Switch
+                android:id="@+id/preview_toggle_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:enabled="false"/>
+        </FrameLayout>
     </LinearLayout>
-    <LinearLayout
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <CheckBox
-            android:id="@+id/preview_check_unselected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:enabled="false"/>
-        <RadioButton
-            android:id="@+id/preview_radio_unselected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="22dp"
-            android:layout_gravity="center"
-            android:enabled="false"/>
-        <Switch
-            android:id="@+id/preview_toggle_unselected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:enabled="false"/>
-    </LinearLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 </LinearLayout>
