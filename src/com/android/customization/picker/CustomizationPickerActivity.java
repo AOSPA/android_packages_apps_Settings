@@ -228,6 +228,10 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
             if (!prefs.getTabVisited(name)) {
                 prefs.setTabVisited(name);
                 hideTipDot(item);
+
+                if (id == R.id.nav_theme) {
+                    getThemeManager().storeEmptyTheme();
+                }
             }
             return true;
         });
