@@ -17,7 +17,6 @@ package com.android.customization.picker.theme;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,7 +28,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.customization.model.theme.custom.CustomThemeManager;
@@ -80,7 +78,7 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
 
     private RecyclerView mOptionsContainer;
     private OptionSelectorController<ThemeComponentOption> mOptionsController;
-    private CardView mPreviewCard;
+    private ViewGroup mPreviewContainer;
     private TextView mTitle;
     private ThemeComponentOption mSelectedOption;
 
@@ -121,7 +119,7 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
         mToolbar.setNavigationContentDescription(R.string.cancel);
         mToolbar.setNavigationOnClickListener(v -> mHost.cancel());
         mOptionsContainer = view.findViewById(R.id.options_container);
-        mPreviewCard = view.findViewById(R.id.component_preview_card);
+        mPreviewContainer = view.findViewById(R.id.component_preview_content);
         mTitle = view.findViewById(R.id.component_options_title);
         mTitle.setText(mTitleResId);
         setUpOptions();
@@ -155,7 +153,7 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
     }
 
     private void bindPreview() {
-        mSelectedOption.bindPreview(mPreviewCard);
+        mSelectedOption.bindPreview(mPreviewContainer);
     }
 
     private void setUpOptions() {

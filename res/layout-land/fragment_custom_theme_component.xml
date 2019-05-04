@@ -32,23 +32,27 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/secondary_color">
+            android:background="?android:colorPrimary">
             <include
-                android:id="@+id/component_preview_card"
+                android:id="@+id/component_preview_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/preview_page_horizontal_margin"
                 android:layout_marginTop="@dimen/preview_page_top_margin"
                 android:layout_marginBottom="@dimen/component_preview_page_bottom_margin"
-                layout="@layout/theme_preview_card"/>
+                layout="@layout/theme_component_preview"/>
         </FrameLayout>
-
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/divider_color"/>
         <LinearLayout
             android:id="@+id/options_section"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:paddingVertical="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="@dimen/custom_theme_nav_height"
             android:orientation="vertical">
 
             <TextView
