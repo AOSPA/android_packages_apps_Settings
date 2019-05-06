@@ -81,20 +81,24 @@ public class PreviewPager extends LinearLayout {
         mViewPager.setPageMargin(res.getDimensionPixelOffset(R.dimen.preview_page_gap));
         mViewPager.setClipToPadding(false);
         if (mPageStyle == STYLE_PEEKING) {
+            int screenWidth = mViewPager.getResources().getDisplayMetrics().widthPixels;
+            int hMargin = res.getDimensionPixelOffset(R.dimen.preview_page_horizontal_margin);
+            hMargin = Math.max(hMargin, screenWidth/8);
             mViewPager.setPadding(
-                    res.getDimensionPixelOffset(R.dimen.preview_page_horizontal_margin),
+                    hMargin,
                     res.getDimensionPixelOffset(R.dimen.preview_page_top_margin),
-                    res.getDimensionPixelOffset(R.dimen.preview_page_horizontal_margin),
+                    hMargin,
                     res.getDimensionPixelOffset(R.dimen.preview_page_bottom_margin));
         } else if (mPageStyle == STYLE_ASPECT_RATIO) {
             DisplayMetrics dm = res.getDisplayMetrics();
-            mScreenAspectRatio = (float) dm.heightPixels / dm.widthPixels;
+            mScreenAspectRatio = dm.heightPixels > dm.widthPixels
+                    ? (float) dm.heightPixels / dm.widthPixels
+                    : (float) dm.widthPixels / dm.heightPixels;
             mViewPager.setPadding(
                     0,
                     res.getDimensionPixelOffset(R.dimen.preview_page_top_margin),
                     0,
                     res.getDimensionPixelOffset(R.dimen.preview_page_bottom_margin));
-
         }
         mPageIndicator = findViewById(R.id.page_indicator);
         mPreviousArrow = findViewById(R.id.arrow_previous);
@@ -113,10 +117,12 @@ public class PreviewPager extends LinearLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if (mPageStyle == STYLE_ASPECT_RATIO && mViewPager.getPaddingStart() == 0) {
+        if (mPageStyle == STYLE_ASPECT_RATIO && mViewPager.getMeasuredWidth() == 0) {
             int availableWidth = MeasureSpec.getSize(widthMeasureSpec);
             int availableHeight = MeasureSpec.getSize(heightMeasureSpec);
-            int indicatorHeight = ((View) mPageIndicator.getParent()).getLayoutParams().height;
+            int indicatorHeight = mPageIndicator.getVisibility() == VISIBLE
+                    ? ((View) mPageIndicator.getParent()).getLayoutParams().height
+                    : 0;
             int pagerHeight = availableHeight - indicatorHeight;
             if (availableWidth > 0) {
                 int absoluteCardWidth = (int) ((pagerHeight - mViewPager.getPaddingBottom()
