@@ -230,8 +230,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
          */
         private static int[] COLOR_BUTTON_IDS = {
                 R.id.preview_check_selected, R.id.preview_radio_selected,
-                R.id.preview_toggle_selected, R.id.preview_check_unselected,
-                R.id.preview_radio_unselected, R.id.preview_toggle_unselected
+                R.id.preview_toggle_selected
         };
 
         @ColorInt private int mColorAccentLight;
@@ -317,14 +316,6 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
             Switch enabledSwitch = container.findViewById(R.id.preview_toggle_selected);
             enabledSwitch.setThumbTintList(tintList);
             enabledSwitch.setTrackTintList(tintList);
-
-            Switch disabledSwitch = container.findViewById(R.id.preview_toggle_unselected);
-            disabledSwitch.setThumbTintList(
-                ColorStateList.valueOf(res.getColor(R.color.switch_thumb_tint)));
-            disabledSwitch.setTrackTintList(
-                ColorStateList.valueOf(res.getColor(R.color.switch_track_tint)));
-            // Change overlay method so our color doesn't get too light/dark
-            disabledSwitch.setTrackTintMode(PorterDuff.Mode.OVERLAY);
 
             ColorStateList seekbarTintList = ColorStateList.valueOf(accentColor);
             SeekBar seekbar = container.findViewById(R.id.preview_seekbar);
