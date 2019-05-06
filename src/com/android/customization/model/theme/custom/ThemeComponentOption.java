@@ -24,7 +24,6 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -121,7 +120,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         @Override
         public void bindPreview(ViewGroup container) {
             TextView header = container.findViewById(R.id.theme_preview_card_header);
-            header.setText(mLabel);
+            header.setText(R.string.preview_name_font);
             header.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_font, 0, 0);
 
             ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
