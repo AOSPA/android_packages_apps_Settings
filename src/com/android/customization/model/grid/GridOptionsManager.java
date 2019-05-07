@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.module.ThemesUserEventLogger;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -77,7 +78,8 @@ public class GridOptionsManager implements CustomizationManager<GridOption> {
         @Override
         protected void onPostExecute(List<GridOption> gridOptions) {
             if (mCallback != null) {
-                mCallback.onOptionsLoaded(gridOptions);
+                mCallback.onOptionsLoaded(gridOptions != null ? gridOptions
+                        : Collections.emptyList());
             }
         }
     }

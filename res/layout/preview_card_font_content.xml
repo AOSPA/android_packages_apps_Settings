@@ -17,7 +17,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center_horizontal"
@@ -28,14 +28,13 @@
         android:id="@+id/font_card_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:gravity="center_horizontal"
         android:text="@string/font_card_title"/>
     <View
         android:id="@+id/font_card_divider"
         android:layout_width="15dp"
         android:layout_height="2dp"
-        android:layout_marginVertical="30dp"
+        android:layout_marginVertical="@dimen/font_preview_divider_gap"
         android:background="?android:colorAccent"/>
     <TextView
         style="@style/FontCardBodyTextStyle"
