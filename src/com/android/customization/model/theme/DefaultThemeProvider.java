@@ -27,19 +27,25 @@ import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_LAUNCHER;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SETTINGS;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_THEMEPICKER;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
 import static com.android.customization.model.ResourceConstants.SETTINGS_PACKAGE;
 import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.om.OverlayInfo;
 import android.content.om.OverlayManager;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
+import android.service.wallpaper.WallpaperService;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -54,12 +60,15 @@ import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.module.CustomizationPreferences;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.ResourceAsset;
+import com.android.wallpaper.model.LiveWallpaperInfo;
 
 import com.bumptech.glide.request.RequestOptions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -81,6 +90,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     private static final String SHAPE_PREFIX = "theme_overlay_shape_";
     private static final String ICON_ANDROID_PREFIX = "theme_overlay_icon_android_";
     private static final String ICON_LAUNCHER_PREFIX = "theme_overlay_icon_launcher_";
+    private static final String ICON_THEMEPICKER_PREFIX = "theme_overlay_icon_themepicker_";
     private static final String ICON_SETTINGS_PREFIX = "theme_overlay_icon_settings_";
     private static final String ICON_SYSUI_PREFIX = "theme_overlay_icon_sysui_";
     private static final String WALLPAPER_PREFIX = "theme_wallpaper_";
@@ -109,7 +119,8 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         om.getOverlayInfosForTarget(ANDROID_PACKAGE, user).forEach(addToMap);
         om.getOverlayInfosForTarget(SYSUI_PACKAGE, user).forEach(addToMap);
         om.getOverlayInfosForTarget(SETTINGS_PACKAGE, user).forEach(addToMap);
-        om.getOverlayInfosForTarget(ResourceConstants.getLauncherPackage(context),user).forEach(addToMap);
+        om.getOverlayInfosForTarget(ResourceConstants.getLauncherPackage(context), user).forEach(addToMap);
+        om.getOverlayInfosForTarget(context.getPackageName(), user).forEach(addToMap);
         mShapePreviewIconPackages = context.getResources().getStringArray(
                 R.array.icon_shape_preview_packages);
     }
@@ -162,33 +173,18 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
 
                 String iconLauncherOverlayPackage = getOverlayPackage(ICON_LAUNCHER_PREFIX,
                         themeName);
-                addNoPreviewIconOverlay(builder,iconLauncherOverlayPackage);
+                addNoPreviewIconOverlay(builder, iconLauncherOverlayPackage);
+
+                String iconThemePickerOverlayPackage = getOverlayPackage(ICON_THEMEPICKER_PREFIX,
+                        themeName);
+                addNoPreviewIconOverlay(builder, iconThemePickerOverlayPackage);
 
                 String iconSettingsOverlayPackage = getOverlayPackage(ICON_SETTINGS_PREFIX,
                         themeName);
 
                 addNoPreviewIconOverlay(builder, iconSettingsOverlayPackage);
 
-                try {
-                    String wallpaperResName = WALLPAPER_PREFIX + themeName;
-                    int wallpaperResId = mStubApkResources.getIdentifier(wallpaperResName,
-                            "drawable", mStubPackageName);
-                    if (wallpaperResId > 0) {
-                        builder.setWallpaperInfo(mStubPackageName, wallpaperResName,
-                                themeName, wallpaperResId,
-                                mStubApkResources.getIdentifier(WALLPAPER_TITLE_PREFIX + themeName,
-                                        "string", mStubPackageName),
-                                mStubApkResources.getIdentifier(
-                                        WALLPAPER_ATTRIBUTION_PREFIX + themeName, "string",
-                                        mStubPackageName),
-                                mStubApkResources.getIdentifier(WALLPAPER_ACTION_PREFIX + themeName,
-                                        "string", mStubPackageName))
-                                .setWallpaperAsset(
-                                        getDrawableResourceAsset(WALLPAPER_PREFIX, themeName));
-                    }
-                } catch (NotFoundException e) {
-                    // Nothing to do here, if there's no wallpaper we'll just omit wallpaper
-                }
+                addWallpaper(themeName, builder);
 
                 mThemes.add(builder.build(mContext));
             } catch (NameNotFoundException | NotFoundException e) {
@@ -198,6 +194,58 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         }
 
         addCustomTheme();
+    }
+
+    private void addWallpaper(String themeName, Builder builder) {
+        try {
+            String wallpaperResName = WALLPAPER_PREFIX + themeName;
+            int wallpaperResId = mStubApkResources.getIdentifier(wallpaperResName,
+                    "drawable", mStubPackageName);
+            if (wallpaperResId > 0) {
+                builder.setWallpaperInfo(mStubPackageName, wallpaperResName,
+                        themeName, wallpaperResId,
+                        mStubApkResources.getIdentifier(WALLPAPER_TITLE_PREFIX + themeName,
+                                "string", mStubPackageName),
+                        mStubApkResources.getIdentifier(
+                                WALLPAPER_ATTRIBUTION_PREFIX + themeName, "string",
+                                mStubPackageName),
+                        mStubApkResources.getIdentifier(WALLPAPER_ACTION_PREFIX + themeName,
+                                "string", mStubPackageName))
+                        .setWallpaperAsset(
+                                getDrawableResourceAsset(WALLPAPER_PREFIX, themeName));
+            } else {
+                // Try to see if it's a live wallpaper reference
+                wallpaperResId = mStubApkResources.getIdentifier(wallpaperResName,
+                        "string", mStubPackageName);
+                if (wallpaperResId > 0) {
+                    String wpComponent = mStubApkResources.getString(wallpaperResId);
+                    String[] componentParts = wpComponent.split("/");
+                    Intent liveWpIntent =  new Intent(WallpaperService.SERVICE_INTERFACE);
+                    liveWpIntent.setComponent(
+                            new ComponentName(componentParts[0],
+                                    componentParts[0] + componentParts[1]));
+                    Context appContext = mContext.getApplicationContext();
+                    PackageManager pm = appContext.getPackageManager();
+                    ResolveInfo resolveInfo =
+                            pm.resolveService(liveWpIntent, PackageManager.GET_META_DATA);
+                    if (resolveInfo != null) {
+                        android.app.WallpaperInfo wallpaperInfo;
+                        try {
+                            wallpaperInfo = new android.app.WallpaperInfo(appContext, resolveInfo);
+                            LiveWallpaperInfo liveInfo = new LiveWallpaperInfo(wallpaperInfo);
+                            builder.setLiveWallpaperInfo(liveInfo)
+                                    .setWallpaperAsset(liveInfo.getThumbAsset(mContext));
+                        } catch (XmlPullParserException e) {
+                            Log.w(TAG, "Skipping wallpaper " + resolveInfo.serviceInfo, e);
+                        } catch (IOException e) {
+                            Log.w(TAG, "Skipping wallpaper " + resolveInfo.serviceInfo, e);
+                        }
+                    }
+                }
+            }
+        } catch (NotFoundException e) {
+            // Nothing to do here, if there's no wallpaper we'll just omit wallpaper
+        }
     }
 
     private void addColorOverlay(Builder builder, String colorOverlayPackage)
@@ -373,29 +421,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             addSystemDefaultIcons(builder, SYSUI_PACKAGE, ICONS_FOR_PREVIEW);
         }
 
-        try {
-            String wallpaperResName = WALLPAPER_PREFIX + DEFAULT_THEME_NAME;
-            int wallpaperResId = mStubApkResources.getIdentifier(wallpaperResName,
-                    "drawable", mStubPackageName);
-            if (wallpaperResId > 0) {
-                builder.setWallpaperInfo(mStubPackageName, wallpaperResName, DEFAULT_THEME_NAME,
-                        mStubApkResources.getIdentifier(
-                                wallpaperResName,
-                                "drawable", mStubPackageName),
-                        mStubApkResources.getIdentifier(WALLPAPER_TITLE_PREFIX + DEFAULT_THEME_NAME,
-                                "string", mStubPackageName),
-                        mStubApkResources.getIdentifier(
-                                WALLPAPER_ATTRIBUTION_PREFIX + DEFAULT_THEME_NAME, "string",
-                                mStubPackageName),
-                        mStubApkResources.getIdentifier(
-                                WALLPAPER_ACTION_PREFIX + DEFAULT_THEME_NAME,
-                                "string", mStubPackageName))
-                        .setWallpaperAsset(
-                                getDrawableResourceAsset(WALLPAPER_PREFIX, DEFAULT_THEME_NAME));
-            }
-        } catch (NotFoundException e) {
-            // Nothing to do here, if there's no wallpaper we'll just omit wallpaper
-        }
+        addWallpaper(DEFAULT_THEME_NAME, builder);
 
         mThemes.add(builder.build(mContext));
     }
@@ -493,6 +519,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             addSysUiIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_SYSUI));
             addNoPreviewIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_SETTINGS));
             addNoPreviewIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_LAUNCHER));
+            addNoPreviewIconOverlay(builder, customPackages.get(OVERLAY_CATEGORY_ICON_THEMEPICKER));
 
             return builder;
         } catch (JSONException | NameNotFoundException | NotFoundException e) {
