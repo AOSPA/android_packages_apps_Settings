@@ -72,7 +72,6 @@ import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wifi.WifiDialog.WifiDialogListener;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.dpp.WifiDppUtils;
-import com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -262,9 +261,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         public void onLost(Network network) {
             final boolean lostCurrentNetwork = network.equals(mNetwork);
             if (lostCurrentNetwork) {
-                // If support detail page for saved network, should update as disconnect but not
-                // exit. Except for ephemeral network which should not show on saved network list.
-                if (SavedAccessPointsWifiSettings.usingDetailsFragment(mContext) && !mIsEphemeral) {
+                // Should update as disconnect but not exit. Except for ephemeral network which
+                // should not show on saved network list.
+                if (!mIsEphemeral) {
                     return;
                 }
 
@@ -354,16 +353,12 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mLifecycle = lifecycle;
         lifecycle.addObserver(this);
 
-        if (SavedAccessPointsWifiSettings.usingDetailsFragment(mContext)) {
-            mWifiTracker = WifiTrackerFactory.create(
-                    mFragment.getActivity(),
-                    mWifiListener,
-                    mLifecycle,
-                    true /*includeSaved*/,
-                    true /*includeScans*/);
-        } else {
-            mWifiTracker = null;
-        }
+        mWifiTracker = WifiTrackerFactory.create(
+                mFragment.getActivity(),
+                mWifiListener,
+                mLifecycle,
+                true /*includeSaved*/,
+                true /*includeScans*/);
         mConnected = mAccessPoint.isActive();
         // When lost the network connection, WifiInfo/NetworkInfo will be clear. So causes we
         // could not check if the AccessPoint is ephemeral. Need to cache it in first.
@@ -412,9 +407,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 .setButton3Enabled(true)
                 .setButton4Text(R.string.share)
                 .setButton4Icon(R.drawable.ic_qrcode_24dp)
-                .setButton4OnClickListener(view -> shareNetwork())
-                .setButton4Visible(
-                        WifiDppUtils.isSupportConfiguratorQrCodeGenerator(mContext, mAccessPoint));
+                .setButton4OnClickListener(view -> shareNetwork());
 
         mSignalStrengthPref = screen.findPreference(KEY_SIGNAL_STRENGTH_PREF);
         mTxLinkSpeedPref = screen.findPreference(KEY_TX_LINK_SPEED);
@@ -555,11 +548,6 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             if (mNetwork == null || mNetworkInfo == null || mWifiInfo == null) {
                 // Once connected, can't get mNetworkInfo immediately, return false and wait for
                 // next time to update UI.
-                if (SavedAccessPointsWifiSettings.usingDetailsFragment(mContext)) {
-                    return false;
-                }
-
-                exitActivity();
                 return false;
             }
 
@@ -576,14 +564,10 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         mIsOutOfRange = true;
 
-        if (mAccessPoint.getConfig() == null) {
-            return;
-        }
-
         for (AccessPoint ap : mWifiTracker.getAccessPoints()) {
-            if (ap.getConfig() != null
-                    && mAccessPoint.matches(ap.getConfig())) {
+            if (mAccessPoint.matches(ap)) {
                 mAccessPoint = ap;
+                mWifiConfig = ap.getConfig();
                 mIsOutOfRange = !mAccessPoint.isReachable();
                 return;
             }
@@ -766,20 +750,24 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mButtonsPref.setButton1Text(
                 mIsEphemeral ? R.string.wifi_disconnect_button_text : R.string.forget);
 
-        mButtonsPref.setButton1Visible(canForgetNetwork());
-        mButtonsPref.setButton2Visible(canSignIntoNetwork());
-        mButtonsPref.setButton3Visible(canConnectNetwork());
-        mButtonsPref.setButton4Visible(canShareNetwork());
-        mButtonsPref.setVisible(canSignIntoNetwork()
-                || canForgetNetwork()
-                || canShareNetwork()
-                || canConnectNetwork());
+        boolean canForgetNetwork = canForgetNetwork();
+        boolean canSignIntoNetwork = canSignIntoNetwork();
+        boolean canConnectNetwork = canConnectNetwork();
+        boolean canShareNetwork = canShareNetwork();
+
+        mButtonsPref.setButton1Visible(canForgetNetwork);
+        mButtonsPref.setButton2Visible(canSignIntoNetwork);
+        mButtonsPref.setButton3Visible(canConnectNetwork);
+        mButtonsPref.setButton4Visible(canShareNetwork);
+        mButtonsPref.setVisible(canForgetNetwork
+                || canSignIntoNetwork
+                || canConnectNetwork
+                || canShareNetwork);
     }
 
     private boolean canConnectNetwork() {
         // Display connect button for disconnected AP even not in the range.
-        return SavedAccessPointsWifiSettings.usingDetailsFragment(mContext)
-                && !mAccessPoint.isActive();
+        return !mAccessPoint.isActive();
     }
 
     private void refreshIpLayerInfo() {
@@ -850,7 +838,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
      * Returns whether the network represented by this preference can be forgotten.
      */
     private boolean canForgetNetwork() {
-        return (mWifiInfo != null && mWifiInfo.isEphemeral()) || canModifyNetwork();
+        return (mWifiInfo != null && mWifiInfo.isEphemeral()) || canModifyNetwork()
+                || mAccessPoint.isPasspoint() || mAccessPoint.isPasspointConfig();
     }
 
     /**
@@ -871,7 +860,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
      * Returns whether the user can share the network represented by this preference with QR code.
      */
     private boolean canShareNetwork() {
-        return mAccessPoint.getConfig() != null;
+        return mAccessPoint.getConfig() != null &&
+                WifiDppUtils.isSupportConfiguratorQrCodeGenerator(mContext, mAccessPoint);
     }
 
     /**
@@ -880,19 +870,23 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private void forgetNetwork() {
         if (mWifiInfo != null && mWifiInfo.isEphemeral()) {
             mWifiManager.disableEphemeralNetwork(mWifiInfo.getSSID());
-        } else if (mWifiConfig != null) {
-            if (mWifiConfig.isPasspoint()) {
-                // Post a dialog to confirm if user really want to forget the passpoint network.
-                if (FeatureFlagPersistent.isEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2)) {
-                    showConfirmForgetDialog();
-                    return;
-                }
-
-                mWifiManager.removePasspointConfiguration(mWifiConfig.FQDN);
-            } else {
-                mWifiManager.forget(mWifiConfig.networkId, null /* action listener */);
+        } else if (mAccessPoint.isPasspoint() || mAccessPoint.isPasspointConfig()) {
+            // Post a dialog to confirm if user really want to forget the passpoint network.
+            if (FeatureFlagPersistent.isEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2)) {
+                showConfirmForgetDialog();
+                return;
             }
+
+            try {
+                mWifiManager.removePasspointConfiguration(mAccessPoint.getPasspointFqdn());
+            } catch (RuntimeException e) {
+                Log.e(TAG, "Failed to remove Passpoint configuration for "
+                        + mAccessPoint.getPasspointFqdn());
+            }
+        } else if (mWifiConfig != null) {
+            mWifiManager.forget(mWifiConfig.networkId, null /* action listener */);
         }
+
         mMetricsFeatureProvider.action(
                 mFragment.getActivity(), SettingsEnums.ACTION_WIFI_FORGET);
         mFragment.getActivity().finish();
@@ -902,7 +896,12 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     protected void showConfirmForgetDialog() {
         final AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setPositiveButton(R.string.forget, ((dialog1, which) -> {
-                    mWifiManager.removePasspointConfiguration(mWifiConfig.FQDN);
+                    try {
+                        mWifiManager.removePasspointConfiguration(mAccessPoint.getPasspointFqdn());
+                    } catch (RuntimeException e) {
+                        Log.e(TAG, "Failed to remove Passpoint configuration for "
+                                + mAccessPoint.getPasspointFqdn());
+                    }
                     mMetricsFeatureProvider.action(
                             mFragment.getActivity(), SettingsEnums.ACTION_WIFI_FORGET);
                     mFragment.getActivity().finish();
@@ -1024,7 +1023,11 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 } else if (state == STATE_CONNECTING) {
                     Log.d(TAG, "connecting...");
                     updateConnectedButton(STATE_CONNECTING);
-                    mWifiManager.connect(mWifiConfig.networkId, mConnectListener);
+                    if (mAccessPoint.isPasspoint()) {
+                        mWifiManager.connect(mWifiConfig, mConnectListener);
+                    } else {
+                        mWifiManager.connect(mWifiConfig.networkId, mConnectListener);
+                    }
                     // start timer for error handling since framework didn't call back if failed
                     startTimer();
                 } else if (state == STATE_ENABLE_WIFI_FAILED) {

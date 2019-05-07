@@ -210,6 +210,8 @@
     <string name="proxy_error_invalid_port" msgid="5988270202074492710">"તમે ટાઇપ કરેલ પોર્ટ માન્ય નથી."</string>
     <string name="proxy_warning_limited_support" msgid="7229337138062837422">"HTTP પ્રોક્સીનો ઉપયોગ બ્રાઉઝર દ્વારા કરવામાં આવે છે પરંતુ અન્ય ઍપ્લિકેશનો દ્વારા કરી શકાતો નથી."</string>
     <string name="proxy_url_title" msgid="7185282894936042359">"PAC URL: "</string>
+    <string name="radio_info_subid" msgid="204582608052503412">"હાલનું subId:"</string>
+    <string name="radio_info_dds" msgid="5471937791273237508">"ડિફૉલ્ટ ડેટા SIMનું SubId:"</string>
     <string name="radio_info_dl_kbps" msgid="6894556071523815984">"DL બૅન્ડવિડ્થ (kbps):"</string>
     <string name="radio_info_ul_kbps" msgid="946464073571185678">"UL બૅન્ડવિડ્થ (kbps):"</string>
     <string name="radio_info_signal_location_label" msgid="3242990404410530456">"સેલ સ્થાન માહિતી (ટાળેલ):"</string>
@@ -232,6 +234,7 @@
     <string name="radio_info_band_mode_label" msgid="8730871744887454509">"રેડિઓ બેન્ડ પસંદ કરો"</string>
     <string name="radio_info_voice_network_type_label" msgid="1443496502370667071">"વૉઇસ નેટવર્ક પ્રકાર:"</string>
     <string name="radio_info_data_network_type_label" msgid="7094323145105149312">"ડેટા નેટવર્કનો પ્રકાર:"</string>
+    <string name="phone_index_label" msgid="1934407597576454430">"ફોનની અનુક્રમણિકા પસંદ કરો"</string>
     <string name="radio_info_set_perferred_label" msgid="3511830813500105512">"પસંદગીનો નેટવર્ક પ્રકાર સેટ કરો:"</string>
     <string name="radio_info_ping_hostname_v4" msgid="7045103377818314709">"હોસ્ટનું નામ પિંગ કરો(www.google.com) IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="1130906124160553954">"હોસ્ટનું નામ પિંગ કરો(www.google.com) IPv6:"</string>
@@ -417,10 +420,8 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"ચહેરાની નોંધણી કરી શકાઈ નથી."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"બધું સેટ થઈ ગયું. સરસ દેખાય છે."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"થઈ ગયું"</string>
-    <!-- no translation found for security_settings_face_settings_use_face_category (4102604281840004724) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_use_face_unlock_phone (5275635645351823301) -->
-    <skip />
+    <string name="security_settings_face_settings_use_face_category" msgid="4102604281840004724">"આ માટે ચહેરાનો ઉપયોગ કરો"</string>
+    <string name="security_settings_face_settings_use_face_unlock_phone" msgid="5275635645351823301">"ડિવાઇસ અનલૉક થાય છે"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"ઍપ્લિકેશન સાઇન ઇન અને ચુકવણીઓ"</string>
     <string name="security_settings_face_settings_require_attention" msgid="1638445716306615123">"અનલૉક કરવા માટે આંખો ખુલ્લી"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="5749808567341263288">"ચહેરા પ્રમાણીકરણનો ઉપયોગ કરતી વખતે, તમારી આંખો ખુલ્લી હોવી જરૂરી છે"</string>
@@ -460,6 +461,8 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"ઉપકરણની સુરક્ષાની સુવિધાઓ ચાલુ કરવામાં નહીં આવે. જો આ ફોન ખોવાઈ કે ચોરાઈ જાય, તો તમે અન્ય લોકોને તેનો ઉપયોગ કરતા અટકાવી નહીં શકો."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"કોઈપણ રીતે છોડો"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"પાછા જાઓ"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="7478349557867790778">"છોડો"</string>
+    <string name="cancel_lock_screen_dialog_button_label" msgid="4525833484240246349">"રદ કરો"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"સેન્સરને સ્પર્શ કરો"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"તે તમારા ફોનના પાછળના ભાગ પર છે. તમારી પ્રથમ આંગળીનો ઉપયોગ કરો."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"ઉપકરણ અને ફિંગરપ્રિન્ટ સેન્સર સ્થાન સાથેનું ચિત્ર"</string>
@@ -475,6 +478,15 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"આને થોડા સમય પછી કરો"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"ફિંગરપ્રિન્ટ સેટ કરવાનું છોડીએ?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"તમે તમારા ફોનને અનલૉક કરવા માટેની એક રીત તરીકે તમારી ફિંગરપ્રિન્ટને ઉપયોગમાં લેવાનું પસંદ કર્યું છે. જો તમે હવે છોડી દો છો, તો તમારે આને પછીથી સેટ કરવું પડશે. સેટઅપમાં માત્ર એક મિનિટ અથવા તેથી વધુ સમય લાગે છે."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="5925427033028514518">"સ્ક્રીન લૉકના વિકલ્પથી તમારા ટૅબ્લેટનું રક્ષણ કરો કે જેથી તે ખોવાઈ અથવા ચોરાઈ જાય તો પણ કોઈ તેનો ઉપયોગ કરી શકે નહીં. ફિંગરપ્રિન્ટનું સેટઅપ કરવા માટે સ્ક્રીન લૉકનો કોઈ અન્ય વિકલ્પ પણ તમે સેટ કરેલો હોવો જોઈએ. રદ કરોને ટૅપ કરો, પછી પિન સેટ કરો અથવા સ્ક્રીન લૉકનો કોઈ અન્ય વિકલ્પ પસંદ કરો."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2524729541954689407">"સ્ક્રીન લૉકના વિકલ્પથી તમારા ડિવાઇસનું રક્ષણ કરો કે જેથી તે ખોવાઈ અથવા ચોરાઈ જાય તો પણ કોઈ તેનો ઉપયોગ કરી શકે નહીં. ફિંગરપ્રિન્ટનું સેટઅપ કરવા માટે સ્ક્રીન લૉકનો કોઈ અન્ય વિકલ્પ પણ તમે સેટ કરેલો હોવો જોઈએ. રદ કરોને ટૅપ કરો, પછી પિન સેટ કરો અથવા સ્ક્રીન લૉકનો કોઈ અન્ય વિકલ્પ પસંદ કરો."</string>
+    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="2941592649076449189">"સ્ક્રીન લૉકના વિકલ્પથી તમારા ફોનનું રક્ષણ કરો કે જેથી તે ખોવાઈ અથવા ચોરાઈ જાય તો પણ કોઈ તેનો ઉપયોગ કરી શકે નહીં. ફિંગરપ્રિન્ટનું સેટઅપ કરવા માટે સ્ક્રીન લૉકનો કોઈ અન્ય વિકલ્પ પણ તમે સેટ કરેલો હોવો જોઈએ. રદ કરોને ટૅપ કરો, પછી પિન સેટ કરો અથવા સ્ક્રીન લૉકનો કોઈ અન્ય વિકલ્પ પસંદ કરો."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2062547634035791832">"સ્ક્રીન લૉકના વિકલ્પથી તમારા ટૅબ્લેટનું રક્ષણ કરો કે જેથી તે ખોવાઈ અથવા ચોરાઈ જાય તો પણ કોઈ તેનો ઉપયોગ કરી શકે નહીં. ચહેરાના પ્રમાણીકરણનું સેટઅપ કરવા માટે સ્ક્રીન લૉકનો કોઈ અન્ય વિકલ્પ પણ તમે સેટ કરેલો હોવો જોઈએ. રદ કરોને ટૅપ કરો, પછી પિન સેટ કરો અથવા સ્ક્રીન લૉકનો કોઈ અન્ય વિકલ્પ પસંદ કરો."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="5844241782080551234">"સ્ક્રીન લૉકના વિકલ્પથી તમારા ડિવાઇસનું રક્ષણ કરો કે જેથી તે ખોવાઈ અથવા ચોરાઈ જાય તો પણ કોઈ તેનો ઉપયોગ કરી શકે નહીં. ચહેરાના પ્રમાણીકરણનું સેટઅપ કરવા માટે સ્ક્રીન લૉકનો કોઈ અન્ય વિકલ્પ પણ તમે સેટ કરેલો હોવો જોઈએ. રદ કરોને ટૅપ કરો, પછી પિન સેટ કરો અથવા સ્ક્રીન લૉકનો કોઈ અન્ય વિકલ્પ પસંદ કરો."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7605324540825242057">"સ્ક્રીન લૉકના વિકલ્પથી તમારા ફોનનું રક્ષણ કરો કે જેથી તે ખોવાઈ અથવા ચોરાઈ જાય તો પણ કોઈ તેનો ઉપયોગ કરી શકે નહીં. ચહેરાના પ્રમાણીકરણનું સેટઅપ કરવા માટે સ્ક્રીન લૉકનો કોઈ અન્ય વિકલ્પ પણ તમે સેટ કરેલો હોવો જોઈએ. રદ કરોને ટૅપ કરો, પછી પિન સેટ કરો અથવા સ્ક્રીન લૉકનો કોઈ અન્ય વિકલ્પ પસંદ કરો."</string>
+    <string name="lock_screen_pin_skip_title" msgid="1197562382655681444">"પિન સેટઅપ કરવાનું છોડીએ?"</string>
+    <string name="lock_screen_password_skip_title" msgid="5016051613576694070">"પાસવર્ડ સેટઅપ કરવાનું છોડીએ?"</string>
+    <string name="lock_screen_pattern_skip_title" msgid="5233245002352020859">"પૅટર્ન સેટઅપ કરવાનું છોડીએ?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"સ્ક્રીન લૉક સેટ કરો"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"થઈ ગયું"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"ઓહ, તે સેન્સર નથી"</string>
@@ -949,7 +961,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="5579154298588011712">"આ ડિવાઇસ સાથે વાઇ-ફાઇ શેર કરી રહ્યાં છીએ…"</string>
     <string name="wifi_dpp_connecting" msgid="7111851118215580428">"કનેક્ટ થઈ રહ્યું છે…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="762408459341741405">"હૉટસ્પૉટ શેર કરો"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="8401802203867904622">"તે તમે છો તે ચકાસો"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="8401802203867904622">"પોતાની ખાતરી કરો"</string>
     <string name="wifi_dpp_wifi_password" msgid="4938294574591503213">"વાઇ-ફાઇનો પાસવર્ડ: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="4120419278831581613">"હૉટસ્પૉટનો પાસવર્ડ: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_add_device" msgid="4072206063308645677">"ડિવાઇસ ઉમેરો"</string>
@@ -970,6 +982,7 @@
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"કૅરિઅર વાઇ-ફાઇ નેટવર્ક"</string>
     <string name="wifi_carrier_content" msgid="4634077285415851933">"<xliff:g id="NAME">%1$s</xliff:g> દ્વારા કનેક્ટ કરો"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"સ્થાન સચોટતા બહેતર બનાવવા માટે અને અન્ય હેતુઓ માટે, વાઇ-ફાઇ બંધ હોય ત્યારે પણ <xliff:g id="APP_NAME">%1$s</xliff:g> નેટવર્ક સ્કેનિંગ ચાલુ કરવા માંગે છે.\n\nસ્કેન કરવા માંગે છે તે બધી ઍપ્લિકેશનો માટે આને મંજૂરી આપીએ?"</string>
+    <string name="wifi_scan_always_turn_on_message_unknown" msgid="6162424298483845679">"સ્થાન સચોટતાને વધુ સારી બનાવવા અને અન્ય હેતુઓ માટે, વાઇ-ફાઇ બંધ હોય ત્યારે પણ અજાણી ઍપ નેટવર્ક સ્કૅન કરવાનું ચાલુ કરવા માગે છે.\n\nસ્કૅન કરવા માગતી હોય તે બધી ઍપને મંજૂરી આપીએ?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"આ બંધ કરવા માટે, ઓવરફ્લો મેનૂમાં વિગતવાર પર જાઓ."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"મંજૂરી આપો"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="4463982053823520710">"નકારો"</string>
@@ -1194,11 +1207,13 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"ઉપલબ્ધ પ્રકાશ માટેનાં તેજ સ્તરને ઑપ્ટિમાઇઝ કરો. જ્યારે આ સુવિધા ચાલુ હોય, ત્યારે પણ તમે તેજને અસ્થાયી રૂપે સમાયોજિત કરી શકો છો."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"તમારી સ્ક્રીનનું બ્રાઇટનેસ તમારા પર્યાવરણ અને પ્રવૃત્તિઓ સાથે આપમેળે ઓછું-વધતું થઈને ગોઠવાશે. તમે સ્લાઇડર મેન્યુઅલી ખસેડીને અડૅપ્ટિવ બ્રાઇટનેસને તમારી પસંદગીઓ જાણવામાં સહાય કરી શકો છો."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"વ્હાઇટ બૅલેન્સ ડિસ્પ્લે"</string>
-    <string name="adaptive_sleep_title" msgid="1831935268159345017">"Screen aware"</string>
+    <!-- no translation found for adaptive_sleep_title (455088457232472047) -->
+    <skip />
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"ચાલુ / જો તમે સ્ક્રીન તરફ જોતા હો, તો તમારી સ્ક્રીન બંધ થશે નહીં"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"બંધ છે"</string>
     <string name="adaptive_sleep_description" msgid="3202004081780217465">"જો તમે સ્ક્રીન તરફ જોતા હો, તો આ સુવિધા તમારી સ્ક્રીનને બંધ થતા અટકાવશે."</string>
-    <string name="adaptive_sleep_privacy" msgid="1532279843861304206">"શું કોઈ સ્ક્રીનની તરફ જોઈ રહ્યું છે કે નહીં તેની ખાતરી કરવા માટે Screen awareની સુવિધા સામેના કૅમેરાનો ઉપયોગ કરે છે. આ સુવિધા ડિવાઇસ પર કામ કરે છે તેમજ છબીઓ ક્યારેય Google પર સ્ટોર કરવામાં અથવા મોકલવામાં આવતી નથી."</string>
+    <!-- no translation found for adaptive_sleep_privacy (5335695648960686765) -->
+    <skip />
     <string name="night_display_title" msgid="2626451512200357686">"રાત્રિ પ્રકાશ"</string>
     <string name="night_display_text" msgid="1837277457033025056">"રાત્રિ પ્રકાશ, તમારી સ્ક્રીન પર પીળાશ પડતી નારંગી રંગછટા કરી દે છે. આ મંદ પ્રકાશમાં તમારી સ્ક્રીન પર જોવાનું અથવા વાંચવાનું સરળ બનાવે છે અને વધુ સહેલાઈથી ઊંઘવામાં તમારી સહાય કરી શકે છે."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"શેડ્યૂલ કરો"</string>
@@ -1224,12 +1239,12 @@
     <string name="night_display_activation_on_custom" msgid="5472029024427933598">"<xliff:g id="ID_1">%1$s</xliff:g> સુધી ચાલુ રાખો"</string>
     <string name="night_display_activation_off_custom" msgid="6169984658293744715">"<xliff:g id="ID_1">%1$s</xliff:g> સુધી બંધ રાખો"</string>
     <string name="night_display_not_currently_on" msgid="6273540991113206401">"રાત્રિ પ્રકાશ હાલમાં ચાલુ નથી"</string>
-    <string name="screen_timeout" msgid="4351334843529712571">"નિષ્ક્રિયતા"</string>
+    <!-- no translation found for screen_timeout (4882669461447531301) -->
+    <skip />
     <string name="screen_timeout_title" msgid="5130038655092628247">"સ્ક્રીન બંધ કરે છે"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"નિષ્ક્રિયતાનાં <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> પછી"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"વૉલપેપર"</string>
-    <!-- no translation found for style_and_wallpaper_settings_title (2399486839820145870) -->
-    <skip />
+    <string name="style_and_wallpaper_settings_title" msgid="3608097576881470764">"શૈલીઓ અને વૉલપેપર"</string>
     <string name="wallpaper_settings_summary_default" msgid="3395741565658711416">"ડિફૉલ્ટ"</string>
     <string name="wallpaper_settings_summary_custom" msgid="515035303981687172">"કસ્ટમ"</string>
     <string name="wallpaper_suggestion_title" msgid="8583988696513822528">"વૉલપેપર બદલો"</string>
@@ -1655,6 +1670,7 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"જ્યારે વાઇ-ફાઇ બંધ હોય ત્યારે પણ ગમે ત્યારે ઍપ અને સેવાઓને વાઇ-ફાઇ નેટવર્ક સ્કૅન કરવાની મંજૂરી આપો. ઉદાહરણ તરીકે, આનો ઉપયોગ સ્થાન આધારિત સુવિધાઓ અને સેવાઓને બહેતર બનાવવા માટે કરી શકાય છે."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"બ્લૂટૂથ સ્કેનિંગ"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"જ્યારે બ્લૂટૂથ બંધ હોય ત્યારે પણ ગમે ત્યારે ઍપ અને સેવાઓને નજીકના ઉપકરણો સ્કૅન કરવાની મંજૂરી આપો. ઉદાહરણ તરીકે, આનો ઉપયોગ સ્થાન આધારિત સુવિધાઓ અને સેવાઓને બહેતર બનાવવા માટે કરી શકાય છે."</string>
+    <string name="managed_profile_location_services" msgid="4723268446874715222">"કાર્ય માટે સ્થાનની સેવાઓ"</string>
     <string name="location_network_based" msgid="9134175479520582215">"વાઇ-ફાઇ અને મોબાઇલ નેટવર્ક સ્થાન"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"એપ્લિકેશન્સને તમારા સ્થાનનો વધુ ઝડપથી અંદાજ મેળવવા માટે Google ની સ્થાન સેવાનો ઉપયોગ કરવા દો. અનામી સ્થાન ડેટા એકત્રિત કરીને Google ને મોકલવામાં આવશે."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"સ્થાન વાઇ-ફાઇ દ્વારા નિર્ધારિત થયું"</string>
@@ -2055,7 +2071,7 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"લૉક સ્ક્રીન પરથી મંજૂરી આપો"</string>
     <string name="accessibility_shortcut_description" msgid="1765853731190717372">"જ્યારે શૉર્ટકટ ચાલુ હોય, ત્યારે ઍક્સેસિબિલિટી સુવિધા શરૂ કરવા માટે તમે બન્ને વૉલ્યૂમ કીને 3 સેકન્ડ સુધી દબાવી રાખી શકો છો."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"ઉચ્ચ કોન્ટ્રાસ્ટ ટેક્સ્ટ"</string>
-    <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"સ્ક્રીન વિસ્તૃતીકરણ સ્વતઃ અપડેટ કરો"</string>
+    <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"સ્ક્રીન વિસ્તૃતીકરણ આપમેળે અપડેટ કરો"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"ઍપ્લિકેશન સંક્રમણો પર સ્ક્રીન વિસ્તૃતીકરણને અપડેટ કરો"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"પાવર બટન કૉલને સમાપ્ત કરે છે"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"મોટું માઉસ પોઇન્ટર"</string>
@@ -2274,9 +2290,9 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="7422137233845959351">"સામાન્ય કરતાં વધુ ઉપયોગમાં લેવાયેલું ટૅબ્લેટ"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="5483320224273724068">"સામાન્ય કરતાં વધુ ઉપયોગમાં લેવાયેલું ઉપકરણ"</string>
     <string name="battery_tip_high_usage_summary" msgid="5343363604280323738">"બૅટરી સામાન્ય કરતાં વહેલી સમાપ્ત થઈ શકે છે"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="1667672353056404287">"તમારો ફોન સામાન્ય કરતાં વધુ ઉપયોગમાં લેવાયો છે. તમારી બૅટરી અપેક્ષા કરતાં વહેલી સમાપ્ત થઈ શકે છે.\n\nછેલ્લે સંપૂર્ણ ચાર્જ થયા પછી સૌથી વધુ બૅટરી વાપરતી ઍપ:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="8927325361508813199">"તમારું ટૅબ્લેટ સામાન્ય કરતાં વધુ ઉપયોગમાં લેવાયું છે. તમારી બૅટરી અપેક્ષા કરતાં વહેલી સમાપ્ત થઈ શકે છે.\n\nછેલ્લે સંપૂર્ણ ચાર્જ થયા પછી સૌથી વધુ બૅટરી વાપરતી ઍપ:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="8785467405537759468">"તમારું ડિવાઇસ સામાન્ય કરતાં વધુ ઉપયોગમાં લેવાયું છે. તમારી બૅટરી અપેક્ષા કરતાં વહેલી સમાપ્ત થઈ શકે છે.\n\nછેલ્લે સંપૂર્ણ ચાર્જ થયા પછી સૌથી વધુ બૅટરી વાપરતી ઍપ:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="797225122502556066">"તમારો ફોન સામાન્ય કરતાં વધુ ઉપયોગમાં લેવાયો છે. તમારી બૅટરી અપેક્ષા કરતાં વહેલી ખલાસ થઈ શકે છે.\n\nબૅટરી વપરાશ અનુસાર ટોચની ઍપ:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="49788591262480482">"તમારું ટૅબ્લેટ સામાન્ય કરતાં વધુ ઉપયોગમાં લેવાયું છે. તમારી બૅટરી અપેક્ષા કરતાં વહેલી ખલાસ થઈ શકે છે.\n\nબૅટરી વપરાશ અનુસાર ટોચની ઍપ:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7959652003221931962">"તમારું ડિવાઇસ સામાન્ય કરતાં વધુ ઉપયોગમાં લેવાયું છે. તમારી બૅટરી અપેક્ષા કરતાં વહેલી ખલાસ થઈ શકે છે.\n\nબૅટરી વપરાશ અનુસાર ટોચની ઍપ:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="2560019187096011163">"બૅકગ્રાઉન્ડમાંની હાઇ પાવર પ્રવૃત્તિનો સમાવેશ થાય છે"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="one">%1$d ઍપને પ્રતિબંધિત કરો</item>
@@ -3031,7 +3047,7 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="3840842725283655533">"બ્લૂટૂથ, ડ્રાઇવિંગ મોડ"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"બ્લૂટૂથ, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"બ્લૂટૂથ"</string>
-    <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"ઍપ્લિકેશનો અને સૂચનાઓ"</string>
+    <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"ઍપ્લિકેશનો અને નોટિફિકેશન"</string>
     <string name="app_and_notification_dashboard_summary" msgid="6513508041918469381">"આસિસ્ટંટ, તાજેતરની ઍપ, ડિફૉલ્ટ ઍપ"</string>
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"કાર્યાલયની પ્રોફાઇલમાં ઍપ માટે નોટિફિકેશન ઍક્સેસ ઉપલબ્ધ નથી."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"એકાઉન્ટ"</string>
@@ -3051,10 +3067,8 @@
     <string name="keywords_draw_overlay" msgid="4130899177619041842">"ચૅટ હેડ"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"ફ્લેશલાઇટ, લાઇટ, ટોર્ચ"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"વાઇફાઇ, વાઇ-ફાઇ, ટૉગલ કરો, નિયંત્રિત કરો"</string>
-    <string name="keywords_more_default_sms_app" msgid="8597706109432491909">"ટેક્સ્ટ સંદેશ, ટેક્સ્ટિંગ, સંદેશા, મેસેજિંગ, ડિફૉલ્ટ"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"સેલ્યુલર, મોબાઇલ, સેલ કૅરિઅર, વાયરલેસ, ડેટા, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="1784064367330122679">"wifi, wi-fi, કૉલ, કૉલિંગ"</string>
-    <string name="keywords_home" msgid="294182527446892659">"લૉન્ચર, ડિફૉલ્ટ, ઍપ"</string>
     <string name="keywords_display" msgid="8910345814565493016">"સ્ક્રીન, ટચસ્ક્રીન"</string>
     <string name="keywords_display_brightness_level" msgid="3138350812626210404">"ધૂંધળી સ્ક્રીન, ટચસ્ક્રીન, બૅટરી, તેજસ્વી"</string>
     <string name="keywords_display_night_display" msgid="2534032823231355074">"ધૂંધળી સ્ક્રીન, રાત, રંગછટા, રાત્રિની શિફ્ટ, બ્રાઇટનેસ, ​​સ્ક્રીનનો રંગ, રંગ, રંગ"</string>
@@ -3078,8 +3092,6 @@
     <string name="keywords_users" msgid="3434190133131387942">"પ્રતિબંધ, પ્રતિબંધિત કરો, પ્રતિબંધિત"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"ટેક્સ્ટ સુધારણા, સુધારો, સાઉન્ડ, વાઇબ્રેટ, સ્વતઃ, ભાષા, હાવભાવ, સૂચવો, સૂચન, થીમ, અપમાનકારક, શબ્દ, પ્રકાર, ઇમોજી, આંતરરાષ્ટ્રીય"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"ફરીથી સેટ કરો, પસંદગીઓ, ડિફોલ્ટ"</string>
-    <string name="keywords_emergency_app" msgid="3143078441279044780">"કટોકટી, આઇસ, ઍપ્લિકેશન, ડિફોલ્ટ"</string>
-    <string name="keywords_default_phone_app" msgid="4213090563141778486">"ફોન, ડાયલર, ડિફૉલ્ટ"</string>
     <string name="keywords_all_apps" msgid="7814015440655563156">"ઍપ્લિકેશનો, ડાઉનલોડ, ઍપ્લિકેશનો, સિસ્ટમ"</string>
     <string name="keywords_app_permissions" msgid="4229936435938011023">"ઍપ્લિકેશનો, પરવાનગીઓ, સુરક્ષા"</string>
     <string name="keywords_default_apps" msgid="223872637509160136">"ઍપ્લિકેશનો, ડિફોલ્ટ"</string>
@@ -3116,9 +3128,7 @@
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"કનેક્ટ કરેલ, ઉપકરણ, હેડફોન, હેડસેટ, સ્પીકર, વાયરલેસ, જોડી, ઇયરબડ, સંગીત, મીડિયા"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"બૅકગ્રાઉન્ડ, સ્ક્રીન, લૉકસ્ક્રીન, થીમ"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"ડિફૉલ્ટ, આસિસ્ટંટ"</string>
-    <string name="keywords_default_browser" msgid="8324486019657636744">"ડિફૉલ્ટ, ડિફૉલ્ટ બ્રાઉઝર"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"ચુકવણી, ડિફૉલ્ટ"</string>
-    <string name="keywords_default_links" msgid="5830406261253835547">"ડિફૉલ્ટ"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"ઇનકમિંગ નોટિફિકેશન"</string>
     <string name="keywords_hotspot_tethering" msgid="1137511742967410918">"usb શેર કરવાની સુવિધા, બ્લૂટૂથ શેર કરવાની સુવિધા, વાઇ-ફાઇ હૉટસ્પૉટ"</string>
     <string name="keywords_touch_vibration" msgid="5983211715076385822">"સંવેદક, વાઇબ્રેટ, સ્ક્રીન, સંવેદિતા"</string>
@@ -3309,10 +3319,8 @@
     <string name="bubbles_app_toggle_title" msgid="9143702245165359360">"બબલ"</string>
     <string name="bubbles_app_toggle_summary" msgid="7714358008428342285">"<xliff:g id="APP_NAME">%1$s</xliff:g>ને કેટલાક નોટિફિકેશન બબલ તરીકે બતાવવાની મંજૂરી આપો"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="8013961655723563787">"બબલ ચાલુ કરો"</string>
-    <!-- no translation found for bubbles_feature_disabled_dialog_text (3616822820657195387) -->
-    <skip />
-    <!-- no translation found for bubbles_feature_disabled_button_approve (5317196831268846883) -->
-    <skip />
+    <string name="bubbles_feature_disabled_dialog_text" msgid="3616822820657195387">"આ ઍપ માટે બબલ ચાલુ કરવા, પહેલાં તમારે તેમને તમારા ડિવાઇસ માટે ચાલુ કરવા જરૂરી છે. અન્ય જે ઍપમાં તમે અગાઉ બબલ ચાલુ કર્યા હોય, તેમના પર આની અસર પડે છે."</string>
+    <string name="bubbles_feature_disabled_button_approve" msgid="5317196831268846883">"ડિવાઇસ માટે ચાલુ કરો"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8176870537170586852">"રદ કરો"</string>
     <string name="swipe_direction_title" msgid="6877543492435053137">"સ્વાઇપ ક્રિયાઓ"</string>
     <string name="swipe_direction_ltr" msgid="3623394320915041215">"છોડી દેવા માટે જમણે, મેનૂ બતાવવા માટે ડાબે સ્વાઇપ કરો"</string>
@@ -3861,8 +3869,7 @@
     <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"આંતરિક સ્ટૉરેજ: <xliff:g id="PERCENTAGE">%1$s</xliff:g> વપરાયો - <xliff:g id="FREE_SPACE">%2$s</xliff:g> ખાલી"</string>
     <string name="display_summary" msgid="6737806235882127328">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> સુધી કોઈ પ્રવૃત્તિ ન થવા પર નિષ્ક્રિય કરો"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"વૉલપેપર, નિષ્ક્રિય થાઓ, ફૉન્ટનું કદ"</string>
-    <!-- no translation found for display_dashboard_summary_with_style (7707201466027514198) -->
-    <skip />
+    <string name="display_dashboard_summary_with_style" msgid="870920274423314524">"શૈલીઓ, વૉલપેપર, સ્ક્રીન સમયસમાપ્તિ, ફોન્ટનું કદ"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="7840559323355210111">"નિષ્ક્રિય થાઓ, ફોન્ટનું કદ"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"10 મિનિટ સુધી કોઈ પ્રવૃત્તિ ન થવા પર નિષ્ક્રિય કરો"</string>
     <string name="memory_summary" msgid="8080825904671961872">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> માંથી સરેરાશ <xliff:g id="USED_MEMORY">%1$s</xliff:g> મેમરીનો ઉપયોગ કર્યો"</string>
@@ -3910,10 +3917,8 @@
     <string name="night_display_suggestion_summary" msgid="228346372178218442">"દરરોજ રાત્રે સ્ક્રીનની રંગછટા આપમેળે ઓછીવધતી કરો"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"રાત્રિ પ્રકાશ ચાલુ છે"</string>
     <string name="condition_night_display_summary" msgid="7150932917610919907">"સ્ક્રીન પર પીળાશ પડતી નારંગી રંગની છટા"</string>
-    <!-- no translation found for condition_grayscale_title (3426050703427823519) -->
-    <skip />
-    <!-- no translation found for condition_grayscale_summary (7652835784223724625) -->
-    <skip />
+    <string name="condition_grayscale_title" msgid="3426050703427823519">"ગ્રેસ્કેલ"</string>
+    <string name="condition_grayscale_summary" msgid="7652835784223724625">"માત્ર ગ્રે રંગમાં બતાવો"</string>
     <string name="homepage_condition_footer_content_description" msgid="2335918927419018030">"સંકુચિત કરો"</string>
     <string name="suggestions_title_v2" msgid="5601181602924147569">"તમારા માટે સૂચવેલ"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"સૂચનો"</string>
@@ -4076,10 +4081,11 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> સાથે કનેક્ટ કરેલું છે"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"બહુવિધ ઉપકરણો સાથે કનેક્ટ કરેલું છે"</string>
     <string name="demo_mode" msgid="2798762752209330277">"સિસ્ટમ UI ડેમો મોડ"</string>
-    <string name="dark_ui_mode" msgid="6446533895402494144">"થીમ"</string>
-    <string name="dark_ui_mode_title" msgid="4890996321641518355">"થીમ પસંદ કરો"</string>
-    <string name="dark_ui_settings_light_summary" msgid="5942589646106576040">"આ સેટિંગ ઍપને પણ લાગુ થાય છે."</string>
+    <!-- no translation found for dark_ui_mode (3888371857083890543) -->
+    <skip />
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"સમર્થિત ઍપમાં પણ બદલાઈને ઘેરી થીમ થશે"</string>
+    <!-- no translation found for dark_ui_settings_dialog_acknowledge (8683868642329596059) -->
+    <skip />
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"ઝપડી સેટિંગ્સ વિકાસકર્તા ટાઇલ"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope ટ્રેસ"</string>
     <string name="sensors_off_quick_settings_title" msgid="1487323753632515801">"સેન્સર બંધ છે"</string>
@@ -4510,9 +4516,10 @@
     <string name="wfc_disclaimer_location_title_text" msgid="6658735446562619865">"સ્થાન"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="3096546236221656018">"તમારા સેવા પ્રદાતા આ સેવા પ્રદાન કરવા માટે તમારા સ્થાનની માહિતી એકત્ર કરી શકે છે.\n\n કૃપા કરીને તમારા સેવા પ્રદાતાની પ્રાઇવસી પૉલિસીની સમીક્ષા કરો."</string>
     <string name="forget_passpoint_dialog_message" msgid="7331876195857622224">"તમે બાકી રહેલા કોઈપણ સમય અથવા ડેટાનો ઍક્સેસ ગુમાવી શકો છો. કાઢી નાખતા પહેલાં તમારા પ્રદાતાનો સંપર્ક કરો."</string>
-    <string name="keywords_content_capture" msgid="5595143627266438971">"કન્ટેન્ટ કૅપ્ચર અને સ્માર્ટ સૂચનોની સુવિધા માટેના કીવર્ડ"</string>
-    <string name="content_capture" msgid="4486543205504396210">"સ્માર્ટ સૂચનો"</string>
-    <string name="content_capture_summary" msgid="2117711786457164446">"Androidને તમારી સ્ક્રીન પર દેખાતી અથવા વીડિયો કે ઑડિયો કન્ટેન્ટમાં સંભળાતી માહિતી સાચવવાની મંજૂરી આપો. તમારી ડિવાઇસ પ્રવૃત્તિના આધારે, Android ઉપયોગી સૂચનો આપે છે."</string>
+    <string name="keywords_content_capture" msgid="859132453327059493">"કન્ટેન્ટ કૅપ્ચર"</string>
+    <string name="content_capture" msgid="6456873729933463600">"કન્ટેન્ટ કૅપ્ચર"</string>
+    <!-- no translation found for content_capture_summary (659506647507221852) -->
+    <skip />
     <string name="capture_system_heap_dump_title" msgid="8043655498113164693">"સિસ્ટમ હીપ ડમ્પ કૅપ્ચર કરો"</string>
     <string name="capturing_system_heap_dump_message" msgid="8680086369500395131">"સિસ્ટમ હીપ ડમ્પ કૅપ્ચર કરી રહ્યાં છીએ"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="6346229989760615103">"સિસ્ટમ હીપ ડમ્પ કૅપ્ચર ન કરી શક્યાં"</string>

@@ -487,6 +487,10 @@
     <string name="proxy_url_title">"PAC URL: "</string>
 
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="radio_info_subid">Current subId:</string>
+    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="radio_info_dds">SubId of default data SIM:</string>
+    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_dl_kbps">DL Bandwidth (kbps):</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_ul_kbps">UL Bandwidth (kbps):</string>
@@ -532,6 +536,8 @@
     <string name="radio_info_voice_network_type_label">Voice Network Type:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_data_network_type_label">Data Network Type:</string>
+    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="phone_index_label">Select phone index</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_set_perferred_label">Set Preferred Network Type:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
@@ -886,9 +892,9 @@
     <string name="security_settings_face_preference_title">Face authentication</string>
     <!-- Button shown which shows accessibility toggles for face enrollment when clicked. [CHAR LIMIT=32] -->
     <string name="security_settings_face_enroll_introduction_accessibility">Use accessibility setup</string>
-    <!-- Message shown for a toggle which when disabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
+    <!-- Message shown for a toggle which when enabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_accessibility_diversity"></string>
-    <!-- Message shown for a toggle which when disabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
+    <!-- Message shown for a toggle which when enabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_accessibility_vision"></string>
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
@@ -1055,12 +1061,12 @@
     <string name="face_lock_screen_setup_skip_dialog_text" product="device">Protect your device with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN or choose another screen lock option.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set face authentication. (default) [CHAR LIMIT=NONE] -->
     <string name="face_lock_screen_setup_skip_dialog_text" product="default">Protect your phone with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face authentication. Tap Cancel, then set a PIN or choose another screen lock option.</string>
-    <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
-    <string name="lock_screen_pin_skip_title">Skip PIN Setup?</string>
-    <!-- Title of dialog shown when the user tries to skip setting up a password, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
-    <string name="lock_screen_password_skip_title">Skip Password Setup?</string>
-    <!-- Title of dialog shown when the user tries to skip setting up a pattern, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
-    <string name="lock_screen_pattern_skip_title">Skip Pattern Setup?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
+    <string name="lock_screen_pin_skip_title">Skip PIN setup?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a password, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
+    <string name="lock_screen_password_skip_title">Skip password setup?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a pattern, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
+    <string name="lock_screen_pattern_skip_title">Skip pattern setup?</string>
 
     <!-- Button text to setup screen lock in onboard dialog [CHAR LIMIT=34] -->
     <string name="security_settings_fingerprint_enroll_setup_screen_lock">Set up screen lock</string>
@@ -2241,6 +2247,8 @@
     <string name="wifi_carrier_content">Connect via <xliff:g id="name">%1$s</xliff:g></string>
 
     <string name="wifi_scan_always_turnon_message">To improve location accuracy and for other purposes, <xliff:g id="app_name">%1$s</xliff:g> wants to turn on network scanning, even when Wi-Fi is off.\n\nAllow this for all apps that want to scan?</string>
+    <!-- Message to inform user, an unknown app want to enable network scanning.  [CHAR LIMIT=200] -->
+    <string name="wifi_scan_always_turn_on_message_unknown">To improve location accuracy and for other purposes, an unknown app wants to turn on network scanning, even when Wi\u2011Fi is off.\n\nAllow this for all apps that want to scan?</string>
     <!-- Message informing the user how to turn off  [CHAR LIMIT=200] -->
     <string name="wifi_scan_always_turnoff_message">To turn this off, go to Advanced in the overflow menu.</string>
     <string name="wifi_scan_always_confirm_allow">Allow</string>
@@ -2787,7 +2795,7 @@
     <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
     <string name="display_white_balance_title">Display white balance</string>
     <!-- Display settings screen, setting option name to enable adaptive sleep [CHAR LIMIT=30] -->
-    <string name="adaptive_sleep_title">Screen aware</string>
+    <string name="adaptive_sleep_title">Screen attention</string>
     <!-- Setting option summary when adaptive sleep is on [CHAR LIMIT=NONE] -->
     <string name="adaptive_sleep_summary_on">On / Screen won’t turn off if you’re looking at it</string>
     <!-- Setting option summary when adaptive sleep is off [CHAR LIMIT=NONE] -->
@@ -2795,7 +2803,7 @@
     <!-- Description about the feature adaptive sleep [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_description">Prevents your screen from turning off if you’re looking at it.</string>
     <!-- Description feature's privacy sensitive details to make sure users understand what feature users, what it saves/sends etc [CHAR LIMIT=NONE]-->
-    <string name="adaptive_sleep_privacy">Screen aware uses the front camera to see if someone is looking at the screen. It works on device, and images are never stored or sent to Google.</string>
+    <string name="adaptive_sleep_privacy">Screen attention uses the front camera to see if someone is looking at the screen. It works on device, and images are never stored or sent to Google.</string>
 
 
     <!-- Night display screen, setting option name to enable night display (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
@@ -2850,7 +2858,7 @@
     <string name="night_display_not_currently_on">Night Light not currently on</string>
 
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
-    <string name="screen_timeout">Sleep</string>
+    <string name="screen_timeout">Screen timeout</string>
     <!-- Sound & display settings screen, setting option name to change screen timeout [CHAR LIMIT=30] -->
     <string name="screen_timeout_title">Screen turns off</string>
     <!-- Sound & display settings screen, setting option summary to change screen timeout -->
@@ -2858,7 +2866,7 @@
     <!-- Wallpaper settings title [CHAR LIMIT=30] -->
     <string name="wallpaper_settings_title">Wallpaper</string>
     <!-- Styles & Wallpapers settings title [CHAR LIMIT=30] -->
-    <string name="style_and_wallpaper_settings_title">Styles &amp; Wallpapers</string>
+    <string name="style_and_wallpaper_settings_title">Styles &amp; wallpapers</string>
     <!-- Wallpaper settings summary when default wallpaper is used [CHAR LIMIT=NONE] -->
     <string name="wallpaper_settings_summary_default">Default</string>
     <!-- Wallpaper settings summary when wallpaper has been updated [CHAR LIMIT=NONE] -->
@@ -3960,8 +3968,12 @@
     <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
     <!-- ConfirmDeviceCredential settings-->
-    <!-- Button text shown on BiometricPrompt (system dialog that asks for biometric authentication) giving the user the option to use an alternate form of authentication (Pin/Pattern/Pass) [CHAR LIMIT=30] -->
-    <string name="confirm_device_credential_use_alternate_method">Use alternate method</string>
+    <!-- Button text shown on BiometricPrompt (system dialog that asks for biometric authentication) giving the user the option to use an alternate form of authentication (Pin) [CHAR LIMIT=30] -->
+    <string name="confirm_device_credential_pin">Use PIN</string>
+    <!-- Button text shown on BiometricPrompt (system dialog that asks for biometric authentication) giving the user the option to use an alternate form of authentication (Pattern) [CHAR LIMIT=30] -->
+    <string name="confirm_device_credential_pattern">Use pattern</string>
+    <!-- Button text shown on BiometricPrompt (system dialog that asks for biometric authentication) giving the user the option to use an alternate form of authentication (Pass) [CHAR LIMIT=30] -->
+    <string name="confirm_device_credential_password">Use password</string>
 
     <!-- Lock Pattern settings -->
     <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=40] -->
@@ -5325,11 +5337,11 @@
     <!-- Summary for the battery high usage tip, which presents battery may run out earlier [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">Battery may run out earlier than usual</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nMost used apps since full charge:</string>
+    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nMost used apps since full charge:</string>
+    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nMost used apps since full charge:</string>
+    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
     <!-- Footer message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message_footer">Includes high-power background activity</string>
     <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
@@ -5688,6 +5700,9 @@
 
     <!-- Battery saver: Title for battery saver schedule screen [CHAR_LIMIT=40] -->
     <string name="battery_saver_schedule_settings_title">Set a schedule</string>
+
+    <!-- Battery saver: Summary text displayed below "Turn on" button for battery saver [CHAR_LIMIT=40] -->
+    <string name="battery_saver_turn_on_summary">Extend battery life</string>
 
     <!-- Battery Saver: Title for sticky battery saver preference [CHAR_LIMIT=60] -->
     <string name="battery_saver_sticky_title_new">Turn off when fully charged</string>
@@ -7428,6 +7443,9 @@
     <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_title">Do Not Disturb</string>
 
+    <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
+    <string name="zen_mode_slice_subtitle">Limit interruptions</string>
+
     <!-- Do not disturb: Title for the Do not Disturb dialog to turn on Do not disturb. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_turn_on_dialog_title">Turn on Do Not Disturb</string>
 
@@ -7825,7 +7843,7 @@
     <string name="notification_pulse_title">Blink light</string>
 
     <!-- Configure Notifications: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=30] -->
-    <string name="lock_screen_notifications_title">On lock screen</string>
+    <string name="lock_screen_notifications_title">Lock screen</string>
 
     <!-- Configure Notifications: Title for the option controlling notifications for work profile. [CHAR LIMIT=30] -->
     <string name="locked_work_profile_notification_title">When work profile is locked</string>
@@ -7836,19 +7854,19 @@
     <string name="lock_screen_notifications_summary_show">Show all notification content</string>
 
     <!-- Configure Notifications: Value for lockscreen notifications: sensitive information will be
-         hidden or redacted from notifications shown on a secure lock screen
+         hidden or redacted from notifications shown on a secure lock screen, but will be shown if the user is unlocked by either smart lock or via biometric unlock mechanism.
          [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_hide">Hide sensitive content</string>
+    <string name="lock_screen_notifications_summary_hide">Show sensitive content only when unlocked</string>
 
     <!-- Configure Notifications: Value for lockscreen notifications: notifications will not appear on a secure lock screen
          [CHAR LIMIT=50] -->
     <string name="lock_screen_notifications_summary_disable">Don\u2019t show notifications at all</string>
 
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Message asking the user how they want their notifications to appear when the device is locked [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_notifications_interstitial_message">When your device is locked, how do you want notifications to show?</string>
+    <string name="lock_screen_notifications_interstitial_message">How do you want the lock screen to display?</string>
 
-    <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Title for the screen asking the user how they want their notifications to appear when the device is locked [CHAR LIMIT=30] -->
-    <string name="lock_screen_notifications_interstitial_title">Notifications</string>
+    <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Title for the screen asking the user how much notification content they want to see on their lock screen [CHAR LIMIT=30] -->
+    <string name="lock_screen_notifications_interstitial_title">Lock screen</string>
 
     <!-- Configure Notifications: Value for lockscreen notifications:  all information will be
          shown in work notifications shown on a secure lock screen
@@ -8152,7 +8170,7 @@
     <string name="app_notification_override_dnd_summary">Let these notifications continue to interrupt when Do Not Disturb is on</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Visibility override option title -->
-    <string name="app_notification_visibility_override_title">On lock screen</string>
+    <string name="app_notification_visibility_override_title">Lock screen</string>
 
     <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when allowed -->
     <string name="app_notification_row_banned">Blocked</string>
@@ -9326,7 +9344,7 @@
     <string name="display_dashboard_summary">Wallpaper, sleep, font size</string>
 
     <!-- Summary for Display settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="display_dashboard_summary_with_style">Styles &amp; Wallpapers, sleep, font size</string>
+    <string name="display_dashboard_summary_with_style">Styles, wallpapers, screen timeout, font size</string>
 
     <!-- Summary for Display settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="display_dashboard_nowallpaper_summary">Sleep, font size</string>
@@ -9896,16 +9914,13 @@
     <string name="demo_mode">System UI demo mode</string>
 
     <!-- [CHAR LIMIT=60] Name of setting that changes the UI to dark -->
-    <string name="dark_ui_mode">Theme</string>
-
-    <!-- [CHAR LIMIT=60] Name of dev option that changes the color of the UI -->
-    <string name="dark_ui_mode_title">Choose Theme</string>
-
-    <!-- [CHAR_LIMIT=NONE] Summary that is shown in the footer when light mode is selected -->
-    <string name="dark_ui_settings_light_summary">This setting also applies to apps</string>
+    <string name="dark_ui_mode">Dark Theme</string>
 
     <!-- [CHAR_LIMIT=NONE] Summary that is shown in the footer when dark mode is selected -->
     <string name="dark_ui_settings_dark_summary">Supported apps will also switch to dark theme</string>
+
+    <!-- [CHAR_LIMIT=40] Positive button text in dark theme notification -->
+    <string name="dark_ui_settings_dialog_acknowledge">Got it</string>
 
     <!-- [CHAR LIMIT=60] Name of dev option to enable extra quick settings tiles -->
     <string name="quick_settings_developer_tiles">Quick settings developer tiles</string>
@@ -11048,12 +11063,12 @@
     <!-- Message for forget passpoint dialog [CHAR LIMIT=none] -->
     <string name="forget_passpoint_dialog_message">You may lose access to any remaining time or data. Check with your provider before removing.</string>
 
-    <!-- Keywords for Content Capture / Smart Suggestions feature [CHAR_LIMIT=none] -->
-    <string name="keywords_content_capture">content capture, smart suggestions</string>
+    <!-- Keywords for Content Capture feature [CHAR_LIMIT=none] -->
+    <string name="keywords_content_capture">content capture</string>
     <!-- Title of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=none]-->
-    <string name="content_capture">Smart Suggestions</string>
-    <!-- Description of the 'Content Capture / Smart Suggestions' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
-    <string name="content_capture_summary">Allow Android to save information seen on your screen or heard in video or audio content. Android makes helpful suggestions based on your device activity.</string>
+    <string name="content_capture">Content Capture</string>
+    <!-- Description of the 'Content Capture' feature toggle in the Settings -> Privacy screen [CHAR LIMIT=NONE]-->
+    <string name="content_capture_summary">Allow apps to send content to the Android system</string>
 
     <!-- Title for the button to initiate a heap dump for the system server. [CHAR LIMIT=NONE] -->
     <string name="capture_system_heap_dump_title">Capture system heap dump</string>
