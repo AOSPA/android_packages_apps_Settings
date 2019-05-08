@@ -192,10 +192,17 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         if (isDefault()) {
             return "";
         }
+        return getJsonPackages().toString();
+    }
+
+    JSONObject getJsonPackages() {
+        if (isDefault()) {
+            return new JSONObject();
+        }
         JSONObject json = new JSONObject(mPackagesByCategory);
         // Remove items with null values to avoid deserialization issues.
         removeNullValues(json);
-        return json.toString();
+        return json;
     }
 
     private void removeNullValues(JSONObject json) {

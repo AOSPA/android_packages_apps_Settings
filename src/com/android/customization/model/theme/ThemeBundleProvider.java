@@ -21,6 +21,7 @@ import com.android.customization.model.CustomizationManager.OptionsFetchedListen
 import com.android.customization.model.theme.ThemeBundle.Builder;
 import com.android.customization.model.theme.custom.CustomTheme;
 
+import org.json.JSONException;
 
 /**
  * Interface for a class that can retrieve Themes from the system.
@@ -43,7 +44,7 @@ public interface ThemeBundleProvider {
 
     void removeCustomTheme(CustomTheme theme);
 
-    @Nullable Builder parseCustomTheme(String serializedTheme);
+    @Nullable Builder parseCustomTheme(String serializedTheme) throws JSONException;
 
     ThemeBundle findEquivalent(ThemeBundle other);
 }
