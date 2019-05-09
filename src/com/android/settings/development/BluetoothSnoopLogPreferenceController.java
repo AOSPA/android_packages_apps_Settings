@@ -102,8 +102,13 @@ public class BluetoothSnoopLogPreferenceController extends DeveloperOptionsPrefe
                 break;
             }
         }
-        listPreference.setValue(mListValues[index]);
-        listPreference.setSummary(mListEntries[index]);
+        if( index < mListValues.length && index < mListEntries.length ) {
+            listPreference.setValue(mListValues[index]);
+            listPreference.setSummary(mListEntries[index]);
+        } else {
+            Log.e(TAG, "missing some entries in xml file"
+             + "\t some options in developer options will not be shown until added in xml file");
+        }
     }
 
     @Override
