@@ -266,6 +266,17 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().popBackStackImmediate()) {
+            return;
+        }
+        if (moveTaskToBack(false)) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
     private void navigateToSection(@IdRes int id) {
         mBottomNav.setSelectedItemId(id);
     }
