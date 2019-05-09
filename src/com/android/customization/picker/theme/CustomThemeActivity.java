@@ -55,6 +55,8 @@ import com.android.wallpaper.R;
 import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.module.WallpaperSetter;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,12 +89,17 @@ public class CustomThemeActivity extends FragmentActivity implements
                 && intent.hasExtra(EXTRA_THEME_TITLE)) {
             ThemeBundleProvider themeProvider =
                     new DefaultThemeProvider(this, injector.getCustomizationPreferences(this));
-            Builder themeBuilder = themeProvider.parseCustomTheme(
-                    intent.getStringExtra(EXTRA_THEME_PACKAGES));
-            if (themeBuilder != null) {
-                themeBuilder.setTitle(intent.getStringExtra(EXTRA_THEME_TITLE));
+            Builder themeBuilder = null;
+            try {
+                themeBuilder = themeProvider.parseCustomTheme(
+                        intent.getStringExtra(EXTRA_THEME_PACKAGES));
+                if (themeBuilder != null) {
+                    themeBuilder.setTitle(intent.getStringExtra(EXTRA_THEME_TITLE));
+                    customTheme = (CustomTheme) themeBuilder.build(this);
+                }
+            } catch (JSONException e) {
+                Log.w(TAG, "Couldn't parse provided custom theme, will override it");
             }
-            customTheme = (CustomTheme) themeBuilder.build(this);
         }
 
         mThemeManager = new ThemeManager(
@@ -166,15 +173,20 @@ public class CustomThemeActivity extends FragmentActivity implements
                 if (mCurrentStep < mSteps.size() - 1) {
                     navigateToStep(mCurrentStep + 1);
                 } else {
+                    CustomTheme originalTheme = mCustomThemeManager.getOriginalTheme();
+
                     // We're on the last step, apply theme and leave
                     CustomTheme themeToApply = mCustomThemeManager.buildPartialCustomTheme(
-                            CustomThemeActivity.this);
+                            originalTheme != null
+                                    ? originalTheme.getTitle()
+                                    : getString(R.string.custom_theme_title,
+                                            0));
 
                     // If the current theme is equal to the original theme being edited, then
                     // don't search for an equivalent, let the user apply the same one by keeping
                     // it null.
-                    ThemeBundle equivalent = (mCustomThemeManager.getOriginalTheme() != null
-                            && mCustomThemeManager.getOriginalTheme().isEquivalent(themeToApply))
+                    ThemeBundle equivalent = (originalTheme != null
+                            && originalTheme.isEquivalent(themeToApply))
                                 ? null : mThemeManager.findThemeByPackages(themeToApply);
 
                     if (equivalent != null) {

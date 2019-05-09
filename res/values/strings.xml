@@ -117,9 +117,10 @@
         [CHAR LIMIT=20] -->
     <string name="custom_theme_previous">Previous</string>
 
-    <!-- Label for a system Style/Theme (combination of fonts/colors/icons) that is defined and
-        customized by the user [CHAR LIMIT=15] -->
-    <string name="custom_theme_title">Custom</string>
+    <!-- Generic label for one system Style/Theme (combination of fonts/colors/icons) that is
+        defined and customized by the user (note there could be more than one so the label includes
+        a number, eg "Custom 1, Custom 2, etc") [CHAR LIMIT=15] -->
+    <string name="custom_theme_title">Custom <xliff:g name="custom_num" example="1">%1$d</xliff:g></string>
 
     <!-- Title for a screen that lets the user define their custom system Style/Theme
         [CHAR LIMIT=30] -->

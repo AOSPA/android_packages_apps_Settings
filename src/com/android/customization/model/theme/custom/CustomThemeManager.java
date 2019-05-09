@@ -31,7 +31,8 @@ public class CustomThemeManager implements CustomizationManager<ThemeComponentOp
     private final Map<String, String> mOverlayPackages = new HashMap<>();
     private final CustomTheme mOriginalTheme;
 
-    private CustomThemeManager(Map<String, String> overlayPackages, @Nullable CustomTheme originalTheme) {
+    private CustomThemeManager(Map<String, String> overlayPackages,
+            @Nullable CustomTheme originalTheme) {
         mOverlayPackages.putAll(overlayPackages);
         mOriginalTheme = originalTheme;
     }
@@ -53,10 +54,8 @@ public class CustomThemeManager implements CustomizationManager<ThemeComponentOp
         return mOverlayPackages;
     }
 
-    public CustomTheme buildPartialCustomTheme(Context context) {
-        return new CustomTheme(mOriginalTheme != null
-                ? mOriginalTheme.getTitle() : context.getString(R.string.custom_theme_title),
-                mOverlayPackages, null);
+    public CustomTheme buildPartialCustomTheme(String title) {
+        return new CustomTheme(title, mOverlayPackages, null);
     }
 
     @Override
