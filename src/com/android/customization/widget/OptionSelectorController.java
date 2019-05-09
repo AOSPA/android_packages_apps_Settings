@@ -111,7 +111,12 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
         if (!mOptions.contains(option)) {
             throw new IllegalArgumentException("Invalid option");
         }
+        CustomizationOption lastAppliedOption = mAppliedOption;
         mAppliedOption = option;
+        mAdapter.notifyItemChanged(mOptions.indexOf(option));
+        if (lastAppliedOption != null) {
+            mAdapter.notifyItemChanged(mOptions.indexOf(lastAppliedOption));
+        }
     }
 
     private void updateActivatedStatus(CustomizationOption option, boolean isActivated) {

@@ -150,7 +150,8 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         @Override
         public void bindThumbnailTile(View view) {
             Resources res = view.getContext().getResources();
-            Drawable icon = mIcons.get(THUMBNAIL_ICON_POSITION).mutate();
+            Drawable icon = mIcons.get(THUMBNAIL_ICON_POSITION)
+                    .getConstantState().newDrawable().mutate();
             icon.setTint(res.getColor(R.color.icon_thumbnail_color, null));
             ((ImageView) view.findViewById(R.id.option_icon)).setImageDrawable(
                     icon);
