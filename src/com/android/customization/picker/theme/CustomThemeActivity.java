@@ -19,6 +19,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -153,7 +154,7 @@ public class CustomThemeActivity extends FragmentActivity implements
         }
         fragmentTransaction.commit();
         fragmentManager.executePendingTransactions();
-        updateApplyButtonLabel();
+        updateNavigationButtonLabels();
     }
 
     private void initSteps(int currentStep) {
@@ -242,10 +243,11 @@ public class CustomThemeActivity extends FragmentActivity implements
     @Override
     public void setCurrentStep(int i) {
         mCurrentStep = i;
-        updateApplyButtonLabel();
+        updateNavigationButtonLabels();
     }
 
-    private void updateApplyButtonLabel() {
+    private void updateNavigationButtonLabels() {
+        mPreviousButton.setVisibility(mCurrentStep == 0 ? View.INVISIBLE : View.VISIBLE);
         mNextButton.setText((mCurrentStep < mSteps.size() -1) ? R.string.custom_theme_next
                 : R.string.apply_btn);
     }
