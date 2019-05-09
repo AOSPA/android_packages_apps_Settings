@@ -62,6 +62,7 @@ import java.util.List;
 
 public class CustomThemeActivity extends FragmentActivity implements
         CustomThemeComponentFragmentHost {
+    public static final String EXTRA_THEME_ID = "CustomThemeActivity.ThemeId";
     public static final String EXTRA_THEME_TITLE = "CustomThemeActivity.ThemeTitle";
     public static final String EXTRA_THEME_PACKAGES = "CustomThemeActivity.ThemePackages";
     public static final int REQUEST_CODE_CUSTOM_THEME = 1;
@@ -86,16 +87,16 @@ public class CustomThemeActivity extends FragmentActivity implements
         Intent intent = getIntent();
         CustomTheme customTheme = null;
         if (intent != null && intent.hasExtra(EXTRA_THEME_PACKAGES)
-                && intent.hasExtra(EXTRA_THEME_TITLE)) {
+                && intent.hasExtra(EXTRA_THEME_TITLE) && intent.hasExtra(EXTRA_THEME_ID)) {
             ThemeBundleProvider themeProvider =
                     new DefaultThemeProvider(this, injector.getCustomizationPreferences(this));
-            Builder themeBuilder = null;
             try {
-                themeBuilder = themeProvider.parseCustomTheme(
+                CustomTheme.Builder themeBuilder = themeProvider.parseCustomTheme(
                         intent.getStringExtra(EXTRA_THEME_PACKAGES));
                 if (themeBuilder != null) {
+                    themeBuilder.setId(intent.getStringExtra(EXTRA_THEME_ID));
                     themeBuilder.setTitle(intent.getStringExtra(EXTRA_THEME_TITLE));
-                    customTheme = (CustomTheme) themeBuilder.build(this);
+                    customTheme = themeBuilder.build(this);
                 }
             } catch (JSONException e) {
                 Log.w(TAG, "Couldn't parse provided custom theme, will override it");
@@ -142,7 +143,7 @@ public class CustomThemeActivity extends FragmentActivity implements
     private void navigateToStep(int i) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         ComponentStep step = mSteps.get(i);
-        Fragment fragment = step.getFragment();
+        Fragment fragment = step.getFragment(mCustomThemeManager.getOriginalTheme().getTitle());
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
@@ -177,16 +178,12 @@ public class CustomThemeActivity extends FragmentActivity implements
 
                     // We're on the last step, apply theme and leave
                     CustomTheme themeToApply = mCustomThemeManager.buildPartialCustomTheme(
-                            originalTheme != null
-                                    ? originalTheme.getTitle()
-                                    : getString(R.string.custom_theme_title,
-                                            0));
+                            originalTheme.getId(), originalTheme.getTitle());
 
                     // If the current theme is equal to the original theme being edited, then
                     // don't search for an equivalent, let the user apply the same one by keeping
                     // it null.
-                    ThemeBundle equivalent = (originalTheme != null
-                            && originalTheme.isEquivalent(themeToApply))
+                    ThemeBundle equivalent = (originalTheme.isEquivalent(themeToApply))
                                 ? null : mThemeManager.findThemeByPackages(themeToApply);
 
                     if (equivalent != null) {
@@ -294,9 +291,9 @@ public class CustomThemeActivity extends FragmentActivity implements
             this.position = position;
         }
 
-        CustomThemeComponentFragment getFragment() {
+        CustomThemeComponentFragment getFragment(String title) {
             if (mFragment == null) {
-                mFragment = createFragment();
+                mFragment = createFragment(title);
             }
             return mFragment;
         }
@@ -304,7 +301,7 @@ public class CustomThemeActivity extends FragmentActivity implements
         /**
          * @return a newly created fragment that will handle this step's UI.
          */
-        abstract CustomThemeComponentFragment createFragment();
+        abstract CustomThemeComponentFragment createFragment(String title);
     }
 
     private class FontStep extends ComponentStep<FontOption> {
@@ -315,9 +312,9 @@ public class CustomThemeActivity extends FragmentActivity implements
         }
 
         @Override
-        CustomThemeComponentFragment createFragment() {
+        CustomThemeComponentFragment createFragment(String title) {
             return CustomThemeComponentFragment.newInstance(
-                    CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
+                    title,
                     position,
                     titleResId);
         }
@@ -331,9 +328,9 @@ public class CustomThemeActivity extends FragmentActivity implements
         }
 
         @Override
-        CustomThemeComponentFragment createFragment() {
+        CustomThemeComponentFragment createFragment(String title) {
             return CustomThemeComponentFragment.newInstance(
-                    CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
+                    title,
                     position,
                     titleResId);
         }
@@ -347,9 +344,9 @@ public class CustomThemeActivity extends FragmentActivity implements
         }
 
         @Override
-        CustomThemeComponentFragment createFragment() {
+        CustomThemeComponentFragment createFragment(String title) {
             return CustomThemeComponentFragment.newInstance(
-                    CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
+                    title,
                     position,
                     titleResId,
                     true);
@@ -364,9 +361,9 @@ public class CustomThemeActivity extends FragmentActivity implements
         }
 
         @Override
-        CustomThemeComponentFragment createFragment() {
+        CustomThemeComponentFragment createFragment(String title) {
             return CustomThemeComponentFragment.newInstance(
-                    CustomThemeActivity.this.getString(R.string.custom_theme_fragment_title),
+                    title,
                     position,
                     titleResId);
         }

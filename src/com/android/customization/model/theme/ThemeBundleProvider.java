@@ -18,7 +18,6 @@ package com.android.customization.model.theme;
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager.OptionsFetchedListener;
-import com.android.customization.model.theme.ThemeBundle.Builder;
 import com.android.customization.model.theme.custom.CustomTheme;
 
 import org.json.JSONException;
@@ -44,7 +43,7 @@ public interface ThemeBundleProvider {
 
     void removeCustomTheme(CustomTheme theme);
 
-    @Nullable Builder parseCustomTheme(String serializedTheme) throws JSONException;
+    @Nullable CustomTheme.Builder parseCustomTheme(String serializedTheme) throws JSONException;
 
     ThemeBundle findEquivalent(ThemeBundle other);
 }

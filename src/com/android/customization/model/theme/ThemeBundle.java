@@ -332,6 +332,10 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
                     mWallpaperAsset, shapeIcons);
         }
 
+        public String getTitle() {
+            return mTitle;
+        }
+
         public Builder setTitle(String title) {
             mTitle = title;
             return this;

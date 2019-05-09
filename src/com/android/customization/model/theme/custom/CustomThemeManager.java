@@ -16,6 +16,7 @@
 package com.android.customization.model.theme.custom;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
@@ -44,7 +45,11 @@ public class CustomThemeManager implements CustomizationManager<ThemeComponentOp
 
     @Override
     public void apply(ThemeComponentOption option, @Nullable Callback callback) {
-        mOverlayPackages.putAll(option.getOverlayPackages());
+        option.getOverlayPackages().forEach((category, packageName) -> {
+            if (!TextUtils.isEmpty(packageName)) {
+                mOverlayPackages.put(category, packageName);
+            }
+        });
         if (callback != null) {
             callback.onSuccess();
         }
@@ -54,8 +59,8 @@ public class CustomThemeManager implements CustomizationManager<ThemeComponentOp
         return mOverlayPackages;
     }
 
-    public CustomTheme buildPartialCustomTheme(String title) {
-        return new CustomTheme(title, mOverlayPackages, null);
+    public CustomTheme buildPartialCustomTheme(String id, String title) {
+        return new CustomTheme(id, title, mOverlayPackages, null);
     }
 
     @Override
@@ -73,6 +78,6 @@ public class CustomThemeManager implements CustomizationManager<ThemeComponentOp
             return new CustomThemeManager(customTheme.getPackagesByCategory(), customTheme);
         }
         // Seed the first custom theme with the currently applied theme.
-        return new CustomThemeManager(themeManager.getCurrentOverlays(), null);
+        return new CustomThemeManager(themeManager.getCurrentOverlays(), customTheme);
     }
 }

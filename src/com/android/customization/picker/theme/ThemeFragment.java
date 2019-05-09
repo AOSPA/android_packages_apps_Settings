@@ -234,7 +234,7 @@ public class ThemeFragment extends ToolbarFragment {
             mOptionsController = new OptionSelectorController<>(mOptionsContainer, options);
             mOptionsController.addListener(selected -> {
                 if (selected instanceof CustomTheme && !((CustomTheme) selected).isDefined()) {
-                    navigateToCustomTheme(null);
+                    navigateToCustomTheme((CustomTheme) selected);
                 } else {
                     mSelectedTheme = (ThemeBundle) selected;
                     if (mUseMyWallpaper || mSelectedTheme instanceof CustomTheme) {
@@ -292,13 +292,12 @@ public class ThemeFragment extends ToolbarFragment {
         }, true);
     }
 
-    private void navigateToCustomTheme(@Nullable CustomTheme themeToEdit) {
+    private void navigateToCustomTheme(CustomTheme themeToEdit) {
         Intent intent = new Intent(getActivity(), CustomThemeActivity.class);
-        if (themeToEdit != null) {
-            intent.putExtra(CustomThemeActivity.EXTRA_THEME_TITLE, themeToEdit.getTitle());
-            intent.putExtra(CustomThemeActivity.EXTRA_THEME_PACKAGES,
-                    themeToEdit.getSerializedPackages());
-        }
+        intent.putExtra(CustomThemeActivity.EXTRA_THEME_TITLE, themeToEdit.getTitle());
+        intent.putExtra(CustomThemeActivity.EXTRA_THEME_ID, themeToEdit.getId());
+        intent.putExtra(CustomThemeActivity.EXTRA_THEME_PACKAGES,
+                themeToEdit.getSerializedPackages());
         startActivityForResult(intent, CustomThemeActivity.REQUEST_CODE_CUSTOM_THEME);
     }
 
