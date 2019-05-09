@@ -125,23 +125,26 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
 
             if (holder instanceof TileViewHolder) {
                 TileViewHolder tileHolder = (TileViewHolder) holder;
-                if (isActivated) {
-                    if (option == mAppliedOption) {
+                if (tileHolder.labelView != null) {
+                    if (isActivated) {
+                        if (option == mAppliedOption) {
+                            CharSequence cd = mContainer.getContext().getString(
+                                    R.string.option_applied_previewed_description,
+                                    option.getTitle());
+                            tileHolder.labelView.setContentDescription(cd);
+                        } else {
+                            CharSequence cd = mContainer.getContext().getString(
+                                    R.string.option_previewed_description, option.getTitle());
+                            tileHolder.labelView.setContentDescription(cd);
+                        }
+                    } else if (option == mAppliedOption) {
                         CharSequence cd = mContainer.getContext().getString(
-                                R.string.option_applied_previewed_description, option.getTitle());
+                                R.string.option_applied_description, option.getTitle());
                         tileHolder.labelView.setContentDescription(cd);
                     } else {
-                        CharSequence cd = mContainer.getContext().getString(
-                                R.string.option_previewed_description, option.getTitle());
-                        tileHolder.labelView.setContentDescription(cd);
+                        // Remove content description
+                        tileHolder.labelView.setContentDescription(null);
                     }
-                } else if (option == mAppliedOption) {
-                    CharSequence cd = mContainer.getContext().getString(
-                            R.string.option_applied_description, option.getTitle());
-                    tileHolder.labelView.setContentDescription(cd);
-                } else {
-                    // Remove content description
-                    tileHolder.labelView.setContentDescription(null);
                 }
             }
         }
