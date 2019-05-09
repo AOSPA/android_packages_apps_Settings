@@ -86,6 +86,8 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     private static final String WALLPAPER_ACTION_PREFIX = "theme_wallpaper_action_";
 
     private static final String DEFAULT_THEME_NAME= "default";
+    private static final String THEME_TITLE_FIELD = "_theme_title";
+    private static final String THEME_ID_FIELD = "_theme_id";
 
     private final OverlayThemeExtractor mOverlayProvider;
     private List<ThemeBundle> mThemes;
@@ -306,23 +308,41 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     }
 
     private void addCustomThemeAndStore(CustomTheme theme) {
-        mThemes.add(theme);
+        if (!mThemes.contains(theme)) {
+            mThemes.add(theme);
+        } else {
+            mThemes.replaceAll(t -> theme.equals(t) ? theme : t);
+        }
         JSONArray themesArray = new JSONArray();
         mThemes.stream()
                 .filter(themeBundle -> themeBundle instanceof CustomTheme
                         && !themeBundle.getPackagesByCategory().isEmpty())
-                .forEachOrdered(themeBundle -> themesArray.put(themeBundle.getJsonPackages()));
+                .forEachOrdered(themeBundle -> addThemeBundleToArray(themesArray, themeBundle));
         mCustomizationPreferences.storeCustomThemes(themesArray.toString());
+    }
+
+    private void addThemeBundleToArray(JSONArray themesArray, ThemeBundle themeBundle) {
+        JSONObject jsonPackages = themeBundle.getJsonPackages();
+        try {
+            jsonPackages.put(THEME_TITLE_FIELD, themeBundle.getTitle());
+            if (themeBundle instanceof CustomTheme) {
+                jsonPackages.put(THEME_ID_FIELD, ((CustomTheme)themeBundle).getId());
+            }
+        } catch (JSONException e) {
+            Log.w("Exception saving theme's title", e);
+        }
+        themesArray.put(jsonPackages);
     }
 
     @Override
     public void removeCustomTheme(CustomTheme theme) {
         JSONArray themesArray = new JSONArray();
         mThemes.stream()
-                .filter(themeBundle -> themeBundle instanceof CustomTheme)
-                .forEachOrdered(themeBundle -> {
-                    if (!themeBundle.equals(theme)) {
-                        themesArray.put(themeBundle.getJsonPackages());
+                .filter(themeBundle -> themeBundle instanceof CustomTheme
+                        && ((CustomTheme) themeBundle).isDefined())
+                .forEachOrdered(customTheme -> {
+                    if (!customTheme.equals(theme)) {
+                        addThemeBundleToArray(themesArray, customTheme);
                     }
                 });
         mCustomizationPreferences.storeCustomThemes(themesArray.toString());
@@ -335,40 +355,43 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             try {
                 JSONArray customThemes = new JSONArray(serializedThemes);
                 for (int i = 0; i < customThemes.length(); i++) {
-                    ThemeBundle.Builder builder = convertJsonToBuilder(
-                            customThemes.getJSONObject(i));
+                    JSONObject jsonTheme = customThemes.getJSONObject(i);
+                    ThemeBundle.Builder builder = convertJsonToBuilder(jsonTheme);
                     if (builder != null) {
-                        builder.setTitle(mContext.getString(R.string.custom_theme_title,
-                                customThemesCount + 1));
+                        if (TextUtils.isEmpty(builder.getTitle())) {
+                            builder.setTitle(mContext.getString(R.string.custom_theme_title,
+                                    customThemesCount + 1));
+                        }
                         mThemes.add(builder.build(mContext));
                     } else {
                         Log.w(TAG, "Couldn't read stored custom theme, resetting");
-                        mThemes.add(new CustomTheme(mContext.getString(R.string.custom_theme_title,
+                        mThemes.add(new CustomTheme(CustomTheme.newId(),
+                                mContext.getString(R.string.custom_theme_title,
                                 customThemesCount + 1), new HashMap<>(), null));
                     }
                     customThemesCount++;
                 }
             } catch (JSONException e) {
                 Log.w(TAG, "Couldn't read stored custom theme, resetting", e);
-                mThemes.add(new CustomTheme(mContext.getString(R.string.custom_theme_title,
+                mThemes.add(new CustomTheme(CustomTheme.newId(), mContext.getString(R.string.custom_theme_title,
                         customThemesCount + 1), new HashMap<>(), null));
             }
         }
 
         // Add an empty one at the end.
-        mThemes.add(new CustomTheme(mContext.getString(R.string.custom_theme_title,
+        mThemes.add(new CustomTheme(CustomTheme.newId(), mContext.getString(R.string.custom_theme_title,
                 customThemesCount + 1), new HashMap<>(), null));
 
     }
 
     @Override
-    public Builder parseCustomTheme(String serializedTheme) throws JSONException {
+    public CustomTheme.Builder parseCustomTheme(String serializedTheme) throws JSONException {
         JSONObject theme = new JSONObject(serializedTheme);
         return convertJsonToBuilder(theme);
     }
 
     @Nullable
-    private Builder convertJsonToBuilder(JSONObject theme) throws JSONException {
+    private CustomTheme.Builder convertJsonToBuilder(JSONObject theme) throws JSONException {
         try {
             Map<String, String> customPackages = new HashMap<>();
             Iterator<String> keysIterator = theme.keys();
@@ -394,7 +417,12 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                     customPackages.get(OVERLAY_CATEGORY_ICON_LAUNCHER));
             mOverlayProvider.addNoPreviewIconOverlay(builder,
                     customPackages.get(OVERLAY_CATEGORY_ICON_THEMEPICKER));
-
+            if (theme.has(THEME_TITLE_FIELD)) {
+                builder.setTitle(theme.getString(THEME_TITLE_FIELD));
+            }
+            if (theme.has(THEME_ID_FIELD)) {
+                builder.setId(theme.getString(THEME_ID_FIELD));
+            }
             return builder;
         } catch (NameNotFoundException | NotFoundException e) {
             Log.i(TAG, "Couldn't parse serialized custom theme", e);
