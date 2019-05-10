@@ -110,18 +110,16 @@ public class DndPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_notConfigurable() {
-        String lockedId = "locked";
+    public void testUpdateState_notBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedChannelId = lockedId;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getId()).thenReturn(lockedId);
+        when(channel.isImportanceLockedByOEM()).thenReturn(true);
         mController.onResume(appRow, channel, null, null);
 
         Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
         mController.updateState(pref);
 
-        assertFalse(pref.isEnabled());
+        assertTrue(pref.isEnabled());
     }
 
     @Test

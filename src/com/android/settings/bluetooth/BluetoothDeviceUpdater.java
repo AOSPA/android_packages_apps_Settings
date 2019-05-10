@@ -109,16 +109,26 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      * Force to update the list of bluetooth devices
      */
     public void forceUpdate() {
+        if (mLocalManager == null) {
+            Log.e(TAG, "forceUpdate() Bluetooth is not supported on this device");
+            return;
+        }
         if (BluetoothAdapter.getDefaultAdapter().isEnabled()) {
             final Collection<CachedBluetoothDevice> cachedDevices =
                     mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
             for (CachedBluetoothDevice cachedBluetoothDevice : cachedDevices) {
                 update(cachedBluetoothDevice);
             }
+        } else {
+          removeAllDevicesFromPreference();
         }
     }
 
     public void removeAllDevicesFromPreference() {
+        if (mLocalManager == null) {
+            Log.e(TAG, "removeAllDevicesFromPreference() BT is not supported on this device");
+            return;
+        }
         final Collection<CachedBluetoothDevice> cachedDevices =
                 mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
         for (CachedBluetoothDevice cachedBluetoothDevice : cachedDevices) {

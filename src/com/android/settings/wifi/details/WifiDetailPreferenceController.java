@@ -147,7 +147,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private static final long TIMEOUT = Duration.ofSeconds(10).toMillis();
 
     // Be static to avoid too much object not be reset.
-    private static CountDownTimer mTimer;
+    @VisibleForTesting
+    static CountDownTimer mTimer;
 
     private AccessPoint mAccessPoint;
     private final ConnectivityManager mConnectivityManager;
@@ -259,20 +260,15 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         @Override
         public void onLost(Network network) {
-            final boolean lostCurrentNetwork = network.equals(mNetwork);
-            if (lostCurrentNetwork) {
-                // Should update as disconnect but not exit. Except for ephemeral network which
-                // should not show on saved network list.
-                if (!mIsEphemeral) {
-                    return;
-                }
-
+            // Ephemeral network not a saved network, leave detail page once disconnected
+            if (mIsEphemeral && network.equals(mNetwork)) {
                 exitActivity();
             }
         }
     };
 
-    private final WifiTracker.WifiListener mWifiListener = new WifiTracker.WifiListener() {
+    @VisibleForTesting
+    final WifiTracker.WifiListener mWifiListener = new WifiTracker.WifiListener() {
         /** Called when the state of Wifi has changed. */
         public void onWifiStateChanged(int state) {
             Log.d(TAG, "onWifiStateChanged(" + state + ")");
@@ -287,16 +283,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         /** Called when the connection state of wifi has changed. */
         public void onConnectedChanged() {
-            updateAccessPointFromScannedList();
-            if (mConnected != mAccessPoint.isActive()) {
-                Log.d(TAG, "Connection state changed!");
-                mConnected = mAccessPoint.isActive();
-                if (mAccessPoint.isActive()) {
-                    updateConnectingState(STATE_CONNECTED);
-                } else {
-                    updateConnectingState(STATE_DISCONNECTED);
-                }
-            }
+            refreshPage();
         }
 
         /**
@@ -464,8 +451,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         if (usingDataUsageHeader(mContext)) {
             mSummaryHeaderController.updateState(mDataUsageSummaryPref);
         } else {
-            mEntityHeaderController.setSummary(mAccessPoint.getSettingsSummary())
-                    .done(mFragment.getActivity(), true /* rebind */);
+            mEntityHeaderController.setSummary(
+                    mAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                            .done(mFragment.getActivity(), true /* rebind */);
         }
     }
 
@@ -526,42 +514,41 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         refreshMacAddress();
     }
 
-    private boolean updateAccessPoint() {
+    @VisibleForTesting
+    boolean updateAccessPoint() {
         boolean changed = false;
-        if (mWifiTracker != null) {
-            // remember mIsOutOfRange as old before updated
-            boolean oldState = mIsOutOfRange;
-            updateAccessPointFromScannedList();
-            // refresh UI if signal level changed for disconnect network.
-            changed = mRssiSignalLevel != mAccessPoint.getLevel();
-            changed |= oldState != mIsOutOfRange;
-        }
+        // remember mIsOutOfRange as old before updated
+        boolean oldState = mIsOutOfRange;
+        updateAccessPointFromScannedList();
 
         if (mAccessPoint.isActive()) {
-            // Sometimes {@link WifiManager#getCurrentNetwork()} return null after connected,
-            // refresh it if needed.
-            if (mNetwork == null) {
-                updateNetworkInfo();
-            }
+            updateNetworkInfo();
             mNetworkInfo = mConnectivityManager.getNetworkInfo(mNetwork);
             mWifiInfo = mWifiManager.getConnectionInfo();
             if (mNetwork == null || mNetworkInfo == null || mWifiInfo == null) {
-                // Once connected, can't get mNetworkInfo immediately, return false and wait for
-                // next time to update UI.
+                // Once connected, can't get mNetwork immediately, return false and wait for
+                // next time to update UI. also reset {@code mIsOutOfRange}
+                mIsOutOfRange = oldState;
                 return false;
             }
-
             changed |= mAccessPoint.update(mWifiConfig, mWifiInfo, mNetworkInfo);
-            // If feature for saved network not enabled, always return true.
-            return mWifiTracker == null || changed;
+        }
+
+        // signal level changed
+        changed |= mRssiSignalLevel != mAccessPoint.getLevel();
+        // In/Out of range changed
+        changed |= oldState != mIsOutOfRange;
+        // connect state changed
+        if (mConnected != mAccessPoint.isActive()) {
+            mConnected = mAccessPoint.isActive();
+            changed = true;
+            updateConnectingState(mAccessPoint.isActive() ? STATE_CONNECTED : STATE_DISCONNECTED);
         }
 
         return changed;
     }
 
     private void updateAccessPointFromScannedList() {
-        if (mWifiTracker == null) return;
-
         mIsOutOfRange = true;
 
         for (AccessPoint ap : mWifiTracker.getAccessPoints()) {
@@ -916,13 +903,19 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     /**
      * Show QR code to share the network represented by this preference.
      */
-    public void launchWifiDppConfiguratorActivity() {
+    private void launchWifiDppConfiguratorActivity() {
         final Intent intent = WifiDppUtils.getConfiguratorQrCodeGeneratorIntentOrNull(mContext,
                 mWifiManager, mAccessPoint);
 
         if (intent == null) {
             Log.e(TAG, "Launch Wi-Fi DPP QR code generator with a wrong Wi-Fi network!");
         } else {
+            mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_SETTINGS_SHARE_WIFI_QR_CODE,
+                    SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR,
+                    /* key */ null,
+                    /* value */ Integer.MIN_VALUE);
+
             mContext.startActivity(intent);
         }
     }
@@ -984,7 +977,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         return FeatureFlagUtils.isEnabled(context, FeatureFlags.WIFI_DETAILS_DATAUSAGE_HEADER);
     }
 
-    private void connectNetwork() {
+    @VisibleForTesting
+    void connectNetwork() {
         final Activity activity = mFragment.getActivity();
         // error handling, connected/saved network should have mWifiConfig.
         if (mWifiConfig == null) {
@@ -1062,7 +1056,6 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                                     mAccessPoint.getTitle()),
                             Toast.LENGTH_SHORT).show();
 
-                    updateNetworkInfo();
                     refreshPage();
                 } else if (state == STATE_NOT_IN_RANGE) {
                     Log.d(TAG, "AP not in range");
@@ -1101,7 +1094,11 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                         .setButton3Enabled(false);
                 break;
             case STATE_CONNECTED:
-                mButtonsPref.setButton3Visible(false);
+                // init button state and set as invisible
+                mButtonsPref.setButton3Text(R.string.wifi_connect)
+                        .setButton3Icon(R.drawable.ic_settings_wireless)
+                        .setButton3Enabled(true)
+                        .setButton3Visible(false);
                 break;
             case STATE_DISCONNECTED:
             case STATE_NOT_IN_RANGE:
@@ -1130,6 +1127,10 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             }
             @Override
             public void onFinish() {
+                if (mFragment == null || mFragment.getActivity() == null) {
+                    Log.d(TAG, "Ignore timeout since activity not exist!");
+                    return;
+                }
                 Log.e(TAG, "Timeout for state:" + mConnectingState);
                 if (mConnectingState == STATE_ENABLE_WIFI) {
                     updateConnectingState(STATE_ENABLE_WIFI_FAILED);

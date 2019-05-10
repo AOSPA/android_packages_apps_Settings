@@ -20,17 +20,18 @@ import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_MIN;
-import static android.app.NotificationManager.IMPORTANCE_NONE;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
-import android.util.ArrayMap;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageButton;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.settingslib.R;
 
@@ -39,14 +40,16 @@ import androidx.preference.PreferenceViewHolder;
 
 public class ImportancePreference extends Preference {
 
-    boolean mIsBlockable = true;
-    boolean mIsConfigurable = true;
-    int mImportance;
-    ImageButton blockButton;
-    ImageButton silenceButton;
-    ImageButton alertButton;
-    ArrayMap<ImageButton, Integer> mImageButtons = new ArrayMap<>();
-    Context mContext;
+    private boolean mIsConfigurable = true;
+    private int mImportance;
+    private boolean mDisplayInStatusBar;
+    private boolean mDisplayOnLockscreen;
+    private View mSilenceButton;
+    private View mAlertButton;
+    private Context mContext;
+    Drawable selectedBackground;
+    Drawable unselectedBackground;
+    private static final int BUTTON_ANIM_TIME_MS = 100;
 
     public ImportancePreference(Context context, AttributeSet attrs,
             int defStyleAttr, int defStyleRes) {
@@ -71,6 +74,8 @@ public class ImportancePreference extends Preference {
 
     private void init(Context context) {
         mContext = context;
+        selectedBackground = mContext.getDrawable(R.drawable.button_border_selected);
+        unselectedBackground = mContext.getDrawable(R.drawable.button_border_unselected);
         setLayoutResource(R.layout.notif_importance_preference);
     }
 
@@ -78,94 +83,88 @@ public class ImportancePreference extends Preference {
         mImportance = importance;
     }
 
-    public void setBlockable(boolean blockable) {
-        mIsBlockable = blockable;
-    }
-
     public void setConfigurable(boolean configurable) {
         mIsConfigurable = configurable;
     }
 
+    public void setDisplayInStatusBar(boolean display) {
+        mDisplayInStatusBar = display;
+    }
+
+    public void setDisplayOnLockscreen(boolean display) {
+        mDisplayOnLockscreen = display;
+    }
+
     @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
+    public void onBindViewHolder(final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+        holder.itemView.setClickable(false);
 
-        View blockView = holder.itemView.findViewById(R.id.block);
-        View alertView = holder.itemView.findViewById(R.id.alert);
-        View silenceView = holder.itemView.findViewById(R.id.silence);
-        if (!mIsBlockable) {
-            blockView.setVisibility(View.GONE);
-            if (mImportance == IMPORTANCE_NONE) {
-                mImportance = IMPORTANCE_LOW;
-                callChangeListener(IMPORTANCE_LOW);
-            }
+        mSilenceButton = holder.findViewById(R.id.silence);
+        mAlertButton = holder.findViewById(R.id.alert);
 
+        if (!mIsConfigurable) {
+            mSilenceButton.setEnabled(false);
+            mAlertButton.setEnabled(false);
         }
-        blockButton = blockView.findViewById(R.id.block_icon);
-        silenceButton = silenceView.findViewById(R.id.silence_icon);
-        alertButton = alertView.findViewById(R.id.alert_icon);
-        mImageButtons.put(blockButton, mContext.getColor(R.color.notification_block_color));
-        mImageButtons.put(silenceButton, mContext.getColor(R.color.notification_silence_color));
-        mImageButtons.put(alertButton, mContext.getColor(R.color.notification_alert_color));
 
         switch (mImportance) {
-            case IMPORTANCE_NONE:
-                colorizeImageButton(blockButton.getId());
-                if (!mIsConfigurable) {
-                    alertView.setVisibility(View.GONE);
-                    silenceView.setVisibility(View.GONE);
-                }
-                break;
             case IMPORTANCE_MIN:
             case IMPORTANCE_LOW:
-                colorizeImageButton(silenceButton.getId());
-                if (!mIsConfigurable) {
-                    alertView.setVisibility(View.GONE);
-                    blockView.setVisibility(View.GONE);
-                }
+                mAlertButton.setBackground(unselectedBackground);
+                mSilenceButton.setBackground(selectedBackground);
                 break;
             case IMPORTANCE_HIGH:
             default:
-                colorizeImageButton(alertButton.getId());
-                if (!mIsConfigurable) {
-                    blockView.setVisibility(View.GONE);
-                    silenceView.setVisibility(View.GONE);
-                }
+                mSilenceButton.setBackground(unselectedBackground);
+                mAlertButton.setBackground(selectedBackground);
                 break;
         }
+        setImportanceSummary((ViewGroup) holder.itemView, mImportance, false);
 
-        blockButton.setOnClickListener(v -> {
-            callChangeListener(IMPORTANCE_NONE);
-            colorizeImageButton(blockButton.getId());
-        });
-        silenceButton.setOnClickListener(v -> {
+        mSilenceButton.setOnClickListener(v -> {
             callChangeListener(IMPORTANCE_LOW);
-            colorizeImageButton(silenceButton.getId());
+            mAlertButton.setBackground(unselectedBackground);
+            mAlertButton.setSelected(false);
+            mSilenceButton.setBackground(selectedBackground);
+            mSilenceButton.setSelected(true);
+            setImportanceSummary((ViewGroup) holder.itemView, IMPORTANCE_LOW, true);
         });
-        alertButton.setOnClickListener(v -> {
+        mAlertButton.setOnClickListener(v -> {
             callChangeListener(IMPORTANCE_DEFAULT);
-            colorizeImageButton(alertButton.getId());
+            mSilenceButton.setBackground(unselectedBackground);
+            mSilenceButton.setSelected(false);
+            mAlertButton.setBackground(selectedBackground);
+            mAlertButton.setSelected(true);
+            setImportanceSummary((ViewGroup) holder.itemView, IMPORTANCE_DEFAULT, true);
         });
     }
 
-    private void colorizeImageButton(int buttonId) {
-        if (mImageButtons != null) {
-            for (int i = 0; i < mImageButtons.size(); i++) {
-                final ImageButton imageButton = mImageButtons.keyAt(i);
-                final int color = mImageButtons.valueAt(i);
-                if (imageButton != null) {
-                    LayerDrawable drawable = (LayerDrawable) imageButton.getDrawable();
-                    Drawable foreground = drawable.findDrawableByLayerId(R.id.fore);
-                    GradientDrawable background =
-                            (GradientDrawable) drawable.findDrawableByLayerId(R.id.back);
-                    if (buttonId == imageButton.getId()) {
-                        foreground.setTint(Color.WHITE);
-                        background.setColor(color);
-                    } else {
-                        foreground.setTint(color);
-                        background.setColor(Color.TRANSPARENT);
-                    }
-                }
+    void setImportanceSummary(ViewGroup parent, int importance, boolean fromUser) {
+        if (fromUser) {
+            AutoTransition transition = new AutoTransition();
+            transition.setDuration(BUTTON_ANIM_TIME_MS);
+            TransitionManager.beginDelayedTransition(parent, transition);
+        }
+        if (importance >= IMPORTANCE_DEFAULT) {
+            parent.findViewById(R.id.silence_summary).setVisibility(GONE);
+            TextView view = parent.findViewById(R.id.alert_summary);
+            view.setText(R.string.notification_channel_summary_default);
+            view.setVisibility(VISIBLE);
+        } else {
+            parent.findViewById(R.id.alert_summary).setVisibility(GONE);
+            TextView view = parent.findViewById(R.id.silence_summary);
+            view.setVisibility(VISIBLE);
+            if (mDisplayInStatusBar) {
+                 if (mDisplayOnLockscreen) {
+                     view.setText(R.string.notification_channel_summary_low_status_lock);
+                 } else {
+                     view.setText(R.string.notification_channel_summary_low_status);
+                 }
+            } else if (mDisplayOnLockscreen) {
+                view.setText(R.string.notification_channel_summary_low_lock);
+            } else {
+                view.setText(R.string.notification_channel_summary_low);
             }
         }
     }
