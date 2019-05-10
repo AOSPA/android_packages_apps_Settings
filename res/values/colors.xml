@@ -23,7 +23,9 @@
 
     <color name="divider_color">#20ffffff</color>
     <color name="title_color">@android:color/holo_blue_light</color>
-    <color name="setup_lock_pattern_view_regular_color_light">@color/lock_pattern_view_regular_color</color>
+    <color name="setup_lock_pattern_view_regular_color_light">
+        @color/lock_pattern_view_regular_color
+    </color>
     <color name="setup_lock_pattern_view_success_color_dark">#ff84ffff</color>
     <color name="setup_lock_pattern_view_success_color_light">@color/sud_color_accent_light</color>
     <color name="setup_lock_pattern_view_error_color_dark">#fff44336</color>
@@ -126,13 +128,12 @@
     <color name="notification_block_color">#ffff0000</color>
     <color name="notification_silence_color">#FF32c1de</color>
     <color name="notification_alert_color">#FFF87B2B</color>
-    <color name="notification_importance_button_unselected">#FFDADCE0</color>
+    <color name="notification_importance_button_unselected">#DADCE0</color>
+    <color name="notification_importance_button_selected">#1967D2</color> <!-- material blue 700 -->
+    <color name="notification_importance_selection_bg">#FFFFFF</color>
 
     <!-- launcher icon color -->
     <color name="icon_launcher_setting_color">@*android:color/accent_device_default_light</color>
-
-    <!-- 80% white for status bar of homepage -->
-    <color name="homepage_status_bar_color">#ccFFFFFF</color>
 
     <!-- QR code scanner colors -->
     <color name="qr_corner_line_color">#ffdadce0</color>

@@ -51,10 +51,7 @@ public class StorageWizardInit extends StorageWizardBase {
         mInternal = requireViewById(R.id.storage_wizard_init_internal);
 
         setBackButtonText(R.string.storage_wizard_init_v2_later);
-
-        // set Next button visibility to View.GONE, or throw exception when clicking it.
-        getNextButton().setVisibility(View.GONE);
-
+        setNextButtonVisibility(View.INVISIBLE);
         if (!mDisk.isAdoptable()) {
             // If not adoptable, we only have one choice
             mInternal.setEnabled(false);

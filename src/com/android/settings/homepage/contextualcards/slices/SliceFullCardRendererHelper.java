@@ -19,7 +19,6 @@ package com.android.settings.homepage.contextualcards.slices;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.slice.Slice;
@@ -74,10 +73,10 @@ class SliceFullCardRendererHelper {
                 });
 
         // Customize slice view for Settings
-        cardHolder.sliceView.showTitleItems(true);
+        cardHolder.sliceView.setShowTitleItems(true);
         if (card.isLargeCard()) {
-            cardHolder.sliceView.showHeaderDivider(true);
-            cardHolder.sliceView.showActionDividers(true);
+            cardHolder.sliceView.setShowHeaderDivider(true);
+            cardHolder.sliceView.setShowActionDividers(true);
         }
     }
 
