@@ -17,6 +17,8 @@ package com.android.customization.picker.theme;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -40,6 +42,7 @@ import com.android.wallpaper.picker.ToolbarFragment;
 public class CustomThemeComponentFragment extends ToolbarFragment {
     private static final String ARG_KEY_POSITION = "CustomThemeComponentFragment.position";
     private static final String ARG_KEY_TITLE_RES_ID = "CustomThemeComponentFragment.title_res";
+    private static final String ARG_USE_GRID_LAYOUT = "CustomThemeComponentFragment.use_grid";;
     private CustomThemeComponentFragmentHost mHost;
 
     public interface CustomThemeComponentFragmentHost {
@@ -55,10 +58,16 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
 
     public static CustomThemeComponentFragment newInstance(CharSequence toolbarTitle, int position,
             int titleResId) {
+        return newInstance(toolbarTitle, position, titleResId, false);
+    }
+
+    public static CustomThemeComponentFragment newInstance(CharSequence toolbarTitle, int position,
+            int titleResId, boolean allowGridLayout) {
         CustomThemeComponentFragment fragment = new CustomThemeComponentFragment();
         Bundle arguments = ToolbarFragment.createArguments(toolbarTitle);
         arguments.putInt(ARG_KEY_POSITION, position);
         arguments.putInt(ARG_KEY_TITLE_RES_ID, titleResId);
+        arguments.putBoolean(ARG_USE_GRID_LAYOUT, allowGridLayout);
         fragment.setArguments(arguments);
         return fragment;
     }
@@ -67,6 +76,7 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
     private CustomThemeManager mCustomThemeManager;
     private int mPosition;
     @StringRes private int mTitleResId;
+    private boolean mUseGridLayout;
 
     private RecyclerView mOptionsContainer;
     private OptionSelectorController<ThemeComponentOption> mOptionsController;
@@ -79,6 +89,7 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
         super.onCreate(savedInstanceState);
         mPosition = getArguments().getInt(ARG_KEY_POSITION);
         mTitleResId = getArguments().getInt(ARG_KEY_TITLE_RES_ID);
+        mUseGridLayout = getArguments().getBoolean(ARG_USE_GRID_LAYOUT);
         mProvider = mHost.getComponentOptionProvider(mPosition);
         mCustomThemeManager = mHost.getCustomThemeManager();
     }
@@ -100,8 +111,13 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
             setUpToolbar(view);
         } else {
             setUpToolbar(view, R.menu.custom_theme_editor_menu);
+            mToolbar.getMenu().getItem(0).setIconTintList(
+                    getContext().getColorStateList(R.color.toolbar_icon_color));
         }
-        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_close_24px, null));
+        Drawable closeIcon = getResources().getDrawable(R.drawable.ic_close_24px, null).mutate();
+        closeIcon.setTintList(getResources().getColorStateList(R.color.toolbar_icon_color, null));
+        mToolbar.setNavigationIcon(closeIcon);
+
         mToolbar.setNavigationContentDescription(R.string.cancel);
         mToolbar.setNavigationOnClickListener(v -> mHost.cancel());
         mOptionsContainer = view.findViewById(R.id.options_container);
@@ -144,7 +160,8 @@ public class CustomThemeComponentFragment extends ToolbarFragment {
 
     private void setUpOptions() {
         mProvider.fetch(options -> {
-            mOptionsController = new OptionSelectorController(mOptionsContainer, options);
+            mOptionsController = new OptionSelectorController(
+                    mOptionsContainer, options, mUseGridLayout, false);
 
             mOptionsController.addListener(selected -> {
                 mSelectedOption = (ThemeComponentOption) selected;

@@ -64,6 +64,7 @@ public interface ResourceConstants {
     String OVERLAY_CATEGORY_ICON_SETTINGS = "android.theme.customization.icon_pack.settings";
     String OVERLAY_CATEGORY_ICON_SYSUI = "android.theme.customization.icon_pack.systemui";
     String OVERLAY_CATEGORY_ICON_LAUNCHER = "android.theme.customization.icon_pack.launcher";
+    String OVERLAY_CATEGORY_ICON_THEMEPICKER = "android.theme.customization.icon_pack.themepicker";
 
     /**
      * Global Android theme category (default theme prebundled with the OS)
@@ -96,6 +97,7 @@ public interface ResourceConstants {
             sTargetPackages.addAll(Arrays.asList(ANDROID_PACKAGE, SETTINGS_PACKAGE,
                     SYSUI_PACKAGE));
             sTargetPackages.add(getLauncherPackage(context));
+            sTargetPackages.add(context.getPackageName());
         }
         return sTargetPackages.toArray(new String[0]);
     }
