@@ -57,7 +57,8 @@ abstract class CustomThemeStepFragment extends ToolbarFragment {
         View view = inflater.inflate(
                 getFragmentLayoutResId(), container, /* attachToRoot */ false);
         // No original theme means it's a new one, so no toolbar icon for deleting it is needed
-        if (mCustomThemeManager.getOriginalTheme() == null) {
+        if (mCustomThemeManager.getOriginalTheme() == null
+                || !mCustomThemeManager.getOriginalTheme().isDefined()) {
             setUpToolbar(view);
         } else {
             setUpToolbar(view, R.menu.custom_theme_editor_menu);

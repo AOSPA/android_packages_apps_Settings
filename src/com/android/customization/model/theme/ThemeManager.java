@@ -164,7 +164,7 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
     private void applyOverlays(ThemeBundle theme, Callback callback) {
         boolean allApplied = Settings.Secure.putString(mActivity.getContentResolver(),
                 ResourceConstants.THEME_SETTING, theme.getSerializedPackages());
-        if (theme instanceof CustomTheme && !((CustomTheme) theme).isDefined()) {
+        if (theme instanceof CustomTheme) {
             storeCustomTheme((CustomTheme) theme);
         }
         mCurrentOverlays = null;

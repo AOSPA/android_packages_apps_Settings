@@ -190,7 +190,7 @@ public class CustomThemeActivity extends FragmentActivity implements
             CustomTheme originalTheme = mCustomThemeManager.getOriginalTheme();
 
             // We're on the last step, apply theme and leave
-            CustomTheme themeToApply = mCustomThemeManager.buildPartialCustomTheme(
+            CustomTheme themeToApply = mCustomThemeManager.buildPartialCustomTheme(this,
                     originalTheme.getId(), fragment.getThemeName());
 
             // If the current theme is equal to the original theme being edited, then
