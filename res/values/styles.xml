@@ -105,4 +105,15 @@
     <style name="EditLabelStyle">
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault</item>
     </style>
+
+    <style name="CustomThemeNameEditText" parent="@android:style/Widget.DeviceDefault.EditText">
+        <item name="android:background">@drawable/edittext_background</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:textColor">@color/edittext_text_color</item>
+        <item name="android:inputType">text</item>
+        <item name="android:maxLength">100</item>
+    </style>
 </resources>
