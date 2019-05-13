@@ -34,6 +34,9 @@ public class CustomTheme extends ThemeBundle {
         return UUID.randomUUID().toString();
     }
 
+    /**
+     * Used to uniquely identify a custom theme since names can change.
+     */
     private final String mId;
 
     public CustomTheme(@NonNull String id, String title, Map<String, String> overlayPackages,

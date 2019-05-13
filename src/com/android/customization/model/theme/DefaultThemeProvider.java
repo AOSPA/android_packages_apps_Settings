@@ -373,14 +373,15 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                 }
             } catch (JSONException e) {
                 Log.w(TAG, "Couldn't read stored custom theme, resetting", e);
-                mThemes.add(new CustomTheme(CustomTheme.newId(), mContext.getString(R.string.custom_theme_title,
-                        customThemesCount + 1), new HashMap<>(), null));
+                mThemes.add(new CustomTheme(CustomTheme.newId(), mContext.getString(
+                        R.string.custom_theme_title, customThemesCount + 1),
+                        new HashMap<>(), null));
             }
         }
 
         // Add an empty one at the end.
-        mThemes.add(new CustomTheme(CustomTheme.newId(), mContext.getString(R.string.custom_theme_title,
-                customThemesCount + 1), new HashMap<>(), null));
+        mThemes.add(new CustomTheme(CustomTheme.newId(), mContext.getString(
+                R.string.custom_theme_title, customThemesCount + 1), new HashMap<>(), null));
 
     }
 
