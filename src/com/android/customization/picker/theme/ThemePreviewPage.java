@@ -2,6 +2,7 @@ package com.android.customization.picker.theme;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLayoutChangeListener;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -73,6 +75,13 @@ abstract class ThemePreviewPage extends PreviewPage {
 
         private final Typeface mHeadlineFont;
         private final List<Drawable> mIcons;
+        private final List<Drawable> mShapeAppIcons;
+        private Drawable mShapeDrawable;
+        private final int[] mColorButtonIds;
+        private final int[] mColorTileIds;
+        private final int[] mColorTileIconIds;
+        private final int[] mShapeIconIds;
+        private final Resources mRes;
         private String mTitle;
         private OnClickListener mEditClickListener;
         private final OnLayoutChangeListener mListener;
@@ -80,22 +89,82 @@ abstract class ThemePreviewPage extends PreviewPage {
 
         public ThemeCoverPage(Context context, String title, int accentColor, List<Drawable> icons,
                 Typeface headlineFont, int cornerRadius,
+                Drawable shapeDrawable,
+                List<Drawable> shapeAppIcons,
                 OnClickListener editClickListener,
-                OnLayoutChangeListener wallpaperListener) {
+                int[] colorButtonIds, int[] colorTileIds, int[] colorTileIconIds,
+                int[] shapeIconIds, OnLayoutChangeListener wallpaperListener) {
             super(context, 0, 0, R.layout.preview_card_cover_content, accentColor);
+            mRes = context.getResources();
             mTitle = title;
             mHeadlineFont = headlineFont;
             mIcons = icons;
             mCornerRadius = cornerRadius;
+            mShapeDrawable = shapeDrawable;
+            mShapeAppIcons = shapeAppIcons;
             mEditClickListener = editClickListener;
+            mColorButtonIds = colorButtonIds;
+            mColorTileIds = colorTileIds;
+            mColorTileIconIds = colorTileIconIds;
+            mShapeIconIds = shapeIconIds;
             mListener = wallpaperListener;
         }
 
         @Override
         protected void bindBody(boolean forceRebind) {
+            if (card == null) {
+                return;
+            }
+
             card.addOnLayoutChangeListener(mListener);
             if (forceRebind) {
                 card.requestLayout();
+            }
+
+            // Color QS icons:
+            int controlGreyColor = mRes.getColor(R.color.control_grey, null);
+            ColorStateList tintList = new ColorStateList(
+                    new int[][]{
+                            new int[]{android.R.attr.state_selected},
+                            new int[]{android.R.attr.state_checked},
+                            new int[]{-android.R.attr.state_enabled},
+                    },
+                    new int[] {
+                            accentColor,
+                            accentColor,
+                            controlGreyColor
+                    }
+            );
+
+            for (int i = 0; i < mColorButtonIds.length; i++) {
+                CompoundButton button = card.findViewById(mColorButtonIds[i]);
+                if (button != null) {
+                    button.setButtonTintList(tintList);
+                }
+            }
+            for (int i = 0; i < 3 && i < mIcons.size(); i++) {
+                Drawable icon =
+                        mIcons.get(i).getConstantState().newDrawable().mutate();
+                Drawable bgShape = mShapeDrawable.getConstantState().newDrawable();
+                bgShape.setTint(accentColor);
+
+                ImageView bg = card.findViewById(mColorTileIds[i]);
+                bg.setImageDrawable(bgShape);
+                ImageView fg = card.findViewById(mColorTileIconIds[i]);
+                fg.setImageDrawable(icon);
+            }
+
+            // Shape preview icons:
+
+            for (int i = 0; i < 3 && i < mShapeAppIcons.size(); i++) {
+                ImageView iconView = card.findViewById(mShapeIconIds[i]);
+                iconView.setBackground(mShapeAppIcons.get(i));
+            }
+
+            Drawable background = card.findViewById(R.id.theme_preview_card_background)
+                    .getBackground();
+            if (background != null) {
+                background.setAlpha(128);
             }
         }
 

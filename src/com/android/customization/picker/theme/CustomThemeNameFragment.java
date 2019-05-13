@@ -15,20 +15,33 @@
  */
 package com.android.customization.picker.theme;
 
+import android.app.WallpaperColors;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLayoutChangeListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
+import androidx.cardview.widget.CardView;
 
-import com.android.customization.model.theme.custom.ThemeComponentOption;
-import com.android.customization.model.theme.custom.ThemeComponentOptionProvider;
-import com.android.customization.widget.OptionSelectorController;
+import com.android.customization.model.theme.ThemeBundle.PreviewInfo;
+import com.android.customization.model.theme.custom.CustomTheme;
+import com.android.customization.picker.theme.ThemePreviewPage.ThemeCoverPage;
 import com.android.wallpaper.R;
+import com.android.wallpaper.asset.Asset;
+import com.android.wallpaper.asset.BitmapCachingAsset;
+import com.android.wallpaper.module.CurrentWallpaperInfoFactory;
+import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.picker.ToolbarFragment;
 
 public class CustomThemeNameFragment extends CustomThemeStepFragment {
@@ -43,7 +56,41 @@ public class CustomThemeNameFragment extends CustomThemeStepFragment {
         return fragment;
     }
 
+
+    private int[] mColorButtonIds = {
+            R.id.preview_check_selected, R.id.preview_radio_selected, R.id.preview_toggle_selected
+    };
+    private int[] mColorTileIds = {
+            R.id.preview_color_qs_0_bg, R.id.preview_color_qs_1_bg, R.id.preview_color_qs_2_bg
+    };
+    private int[] mColorTileIconIds = {
+            R.id.preview_color_qs_0_icon, R.id.preview_color_qs_1_icon, R.id.preview_color_qs_2_icon
+    };
+
+    private int[] mShapeIconIds = {
+            R.id.shape_preview_icon_0, R.id.shape_preview_icon_1, R.id.shape_preview_icon_2,
+            R.id.shape_preview_icon_3, R.id.shape_preview_icon_4, R.id.shape_preview_icon_5
+    };
+
+    private Asset mWallpaperAsset;
+    private ThemeCoverPage mCoverPage;
+
     private EditText mNameEditor;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        CurrentWallpaperInfoFactory currentWallpaperFactory = InjectorProvider.getInjector()
+                .getCurrentWallpaperFactory(getActivity().getApplicationContext());
+        currentWallpaperFactory.createCurrentWallpaperInfos(
+                (homeWallpaper, lockWallpaper, presentationMode) -> {
+                    mWallpaperAsset = new BitmapCachingAsset(getContext(),
+                            homeWallpaper.getThumbAsset(getContext()));
+                    if (mCoverPage != null) {
+                        mCoverPage.bindBody(true);
+                    }
+                }, false);
+    }
 
     @Nullable
     @Override
@@ -54,13 +101,67 @@ public class CustomThemeNameFragment extends CustomThemeStepFragment {
         mTitle.setText(mTitleResId);
         mNameEditor = view.findViewById(R.id.custom_theme_name);
         mNameEditor.setText(mCustomThemeManager.getOriginalTheme().getTitle());
-        bindCover();
+        bindCover(view.findViewById(R.id.component_preview_content));
 
         return view;
     }
 
-    private void bindCover() {
+    private void bindCover(CardView card) {
+        PreviewInfo previewInfo = mCustomThemeManager.buildCustomThemePreviewInfo(getContext());
+        mCoverPage = new ThemeCoverPage(getContext(), getThemeName(),
+                previewInfo.resolveAccentColor(getResources()), previewInfo.icons,
+                previewInfo.headlineFontFamily, previewInfo.bottomSheeetCornerRadius,
+                previewInfo.shapeDrawable, previewInfo.shapeAppIcons, null,
+                mColorButtonIds, mColorTileIds, mColorTileIconIds, mShapeIconIds,
+                new WallpaperLayoutListener());
+        mCoverPage.setCard(card);
+        mCoverPage.bindPreviewContent();
+        mNameEditor.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                ((TextView)card.findViewById(R.id.theme_preview_card_header)).setText(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    private class WallpaperLayoutListener implements OnLayoutChangeListener {
+        @Override
+        public void onLayoutChange(View view, int left, int top, int right,
+                int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+            int targetWidth = right - left;
+            int targetHeight = bottom - top;
+            if (targetWidth > 0 && targetHeight > 0) {
+                if (mWallpaperAsset != null) {
+                    mWallpaperAsset.decodeBitmap(
+                            targetWidth, targetHeight,
+                            bitmap -> setWallpaperBitmap(view, bitmap));
+                }
+                view.removeOnLayoutChangeListener(this);
+            }
+        }
+
+        private void setWallpaperBitmap(View view, Bitmap bitmap) {
+            Resources res = view.getContext().getResources();
+            BitmapDrawable background = new BitmapDrawable(res, bitmap);
+            background.setAlpha(128);
+            view.findViewById(R.id.theme_preview_card_background).setBackground(background);
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mCoverPage = null;
     }
 
     @Override

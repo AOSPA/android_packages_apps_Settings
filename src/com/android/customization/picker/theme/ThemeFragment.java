@@ -324,66 +324,9 @@ public class ThemeFragment extends ToolbarFragment {
             addPage(new ThemeCoverPage(activity, theme.getTitle(),
                     previewInfo.resolveAccentColor(res), previewInfo.icons,
                     previewInfo.headlineFontFamily, previewInfo.bottomSheeetCornerRadius,
-                    editClickListener,
-                    new WallpaperPreviewLayoutListener(theme, previewInfo, true)) {
-
-                @Override
-                protected void bindBody(boolean forceRebind) {
-                    if (card == null) {
-                        return;
-                    }
-                    card.addOnLayoutChangeListener(coverCardLayoutListener);
-                    super.bindBody(forceRebind);
-
-                    // Color QS icons:
-                    int controlGreyColor = res.getColor(R.color.control_grey);
-                    ColorStateList tintList = new ColorStateList(
-                            new int[][]{
-                                    new int[]{android.R.attr.state_selected},
-                                    new int[]{android.R.attr.state_checked},
-                                    new int[]{-android.R.attr.state_enabled},
-                            },
-                            new int[] {
-                                    accentColor,
-                                    accentColor,
-                                    controlGreyColor
-                            }
-                    );
-
-                    for (int i = 0; i < mColorButtonIds.length; i++) {
-                        CompoundButton button = card.findViewById(mColorButtonIds[i]);
-                        if (button != null) {
-                            button.setButtonTintList(tintList);
-                        }
-                    }
-                    for (int i = 0; i < 3 && i < previewInfo.icons.size(); i++) {
-                        Drawable icon =
-                                previewInfo.icons.get(i).getConstantState().newDrawable().mutate();
-                        Drawable bgShape =
-                                previewInfo.shapeDrawable.getConstantState().newDrawable();
-                        bgShape.setTint(accentColor);
-
-                        ImageView bg = card.findViewById(mColorTileIds[i]);
-                        bg.setImageDrawable(bgShape);
-                        ImageView fg = card.findViewById(mColorTileIconIds[i]);
-                        fg.setImageDrawable(icon);
-                    }
-
-                    // Shape preview icons:
-
-                    for (int i = 0; i < 3 && i < previewInfo.shapeAppIcons.size(); i++) {
-                        ImageView iconView = card.findViewById(mShapeIconIds[i]);
-                        iconView.setBackground(
-                                previewInfo.shapeAppIcons.get(i));
-                    }
-
-                    Drawable background = card.findViewById(R.id.theme_preview_card_background)
-                            .getBackground();
-                    if (background != null) {
-                        background.setAlpha(128);
-                    }
-                }
-            });
+                    previewInfo.shapeDrawable, previewInfo.shapeAppIcons, editClickListener,
+                    mColorButtonIds, mColorTileIds, mColorTileIconIds, mShapeIconIds,
+                    new WallpaperPreviewLayoutListener(theme, previewInfo, true)));
             addPage(new ThemePreviewPage(activity, R.string.preview_name_font, R.drawable.ic_font,
                     R.layout.preview_card_font_content,
                     previewInfo.resolveAccentColor(res)) {
