@@ -28,7 +28,6 @@ import android.view.MenuItem;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
-import androidx.core.os.BuildCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -57,6 +56,7 @@ import com.android.customization.picker.theme.ThemeFragment;
 import com.android.customization.picker.theme.ThemeFragment.ThemeFragmentHost;
 import com.android.customization.widget.NoTintDrawableWrapper;
 import com.android.wallpaper.R;
+import com.android.wallpaper.compat.BuildCompat;
 import com.android.wallpaper.model.WallpaperInfo;
 import com.android.wallpaper.module.DailyLoggingAlarmScheduler;
 import com.android.wallpaper.module.FormFactorChecker;
@@ -179,6 +179,9 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         if (!BuildCompat.isAtLeastQ()) {
             return;
         }
+        //if (!BuildCompat.isAtLeastQ()) {
+        //    return;
+        //}
         if (Build.TYPE.equals("user")) {
             return;
         }
