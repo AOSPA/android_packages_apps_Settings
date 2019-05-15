@@ -52,7 +52,7 @@ import java.util.List;
  */
 public class ShapeOptionsProvider extends ThemeComponentOptionProvider<ShapeOption> {
 
-    private static final String TAG = "FontOptionsProvider";
+    private static final String TAG = "ShapeOptionsProvider";
     private final String[] mShapePreviewIconPackages;
     private int mThumbSize;
 
