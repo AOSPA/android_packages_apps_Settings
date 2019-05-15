@@ -28,7 +28,6 @@ import android.view.MenuItem;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
-import androidx.core.os.BuildCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -57,6 +56,7 @@ import com.android.customization.picker.theme.ThemeFragment;
 import com.android.customization.picker.theme.ThemeFragment.ThemeFragmentHost;
 import com.android.customization.widget.NoTintDrawableWrapper;
 import com.android.wallpaper.R;
+import com.android.wallpaper.compat.BuildCompat;
 import com.android.wallpaper.model.WallpaperInfo;
 import com.android.wallpaper.module.DailyLoggingAlarmScheduler;
 import com.android.wallpaper.module.FormFactorChecker;
@@ -141,6 +141,18 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         mUserEventLogger.logResumed();
         // refresh the sections as the preview may have changed
         initSections();
+        if (mBottomNav == null) {
+            return;
+        }
+        CustomizationSection section = mSections.get(mBottomNav.getSelectedItemId());
+        if (section == null) {
+            return;
+        }
+        // Keep CategoryFragment's design to load category within its fragment
+        if (section instanceof WallpaperSection) {
+            switchFragment(section);
+            section.onVisible();
+        }
     }
 
     @Override
@@ -167,6 +179,9 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         if (!BuildCompat.isAtLeastQ()) {
             return;
         }
+        //if (!BuildCompat.isAtLeastQ()) {
+        //    return;
+        //}
         if (Build.TYPE.equals("user")) {
             return;
         }
@@ -264,6 +279,17 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
             Drawable icon = layers.getDrawable(0);
             item.setIcon(icon);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().popBackStackImmediate()) {
+            return;
+        }
+        if (moveTaskToBack(false)) {
+            return;
+        }
+        super.onBackPressed();
     }
 
     private void navigateToSection(@IdRes int id) {

@@ -16,9 +16,8 @@
 package com.android.customization.model.theme.custom;
 
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
+import static com.android.customization.model.ResourceConstants.CONFIG_CORNERRADIUS;
 import static com.android.customization.model.ResourceConstants.CONFIG_ICON_MASK;
-import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
-import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
 import static com.android.customization.model.ResourceConstants.PATH_SIZE;
 
@@ -28,7 +27,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Path;
-import android.graphics.Typeface;
 import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
@@ -36,6 +34,7 @@ import android.graphics.drawable.shapes.PathShape;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Dimension;
 import androidx.core.graphics.PathParser;
 
 import com.android.customization.model.ResourceConstants;
@@ -53,7 +52,7 @@ import java.util.List;
  */
 public class ShapeOptionsProvider extends ThemeComponentOptionProvider<ShapeOption> {
 
-    private static final String TAG = "FontOptionsProvider";
+    private static final String TAG = "ShapeOptionsProvider";
     private final String[] mShapePreviewIconPackages;
     private int mThumbSize;
 
@@ -75,8 +74,8 @@ public class ShapeOptionsProvider extends ThemeComponentOptionProvider<ShapeOpti
                 ShapeDrawable shapeDrawable = createShapeDrawable(path);
                 PackageManager pm = mContext.getPackageManager();
                 String label = pm.getApplicationInfo(overlayPackage, 0).loadLabel(pm).toString();
-                mOptions.add(new ShapeOption(overlayPackage, label, shapeDrawable,
-                        getShapedIcons(path)));
+                mOptions.add(new ShapeOption(overlayPackage, label, path,
+                        loadCornerRadius(overlayPackage), shapeDrawable, getShapedIcons(path)));
             } catch (NameNotFoundException | NotFoundException e) {
                 Log.w(TAG, String.format("Couldn't load shape overlay %s, will skip it",
                         overlayPackage), e);
@@ -88,7 +87,10 @@ public class ShapeOptionsProvider extends ThemeComponentOptionProvider<ShapeOpti
         Resources system = Resources.getSystem();
         Path path = loadPath(system, ANDROID_PACKAGE);
         ShapeDrawable shapeDrawable = createShapeDrawable(path);
-        mOptions.add(new ShapeOption(null, mContext.getString(R.string.default_theme_title),
+        mOptions.add(new ShapeOption(null, mContext.getString(R.string.default_theme_title), path,
+                system.getDimensionPixelOffset(
+                    system.getIdentifier(ResourceConstants.CONFIG_CORNERRADIUS,
+                        "dimen", ResourceConstants.ANDROID_PACKAGE)),
                 shapeDrawable, getShapedIcons(path)));
     }
 
@@ -126,5 +128,16 @@ public class ShapeOptionsProvider extends ThemeComponentOptionProvider<ShapeOpti
             return PathParser.createPathFromPathData(shape);
         }
         return null;
+    }
+
+    @Dimension
+    private int loadCornerRadius(String packageName)
+            throws NameNotFoundException, NotFoundException {
+
+        Resources overlayRes =
+                mContext.getPackageManager().getResourcesForApplication(
+                        packageName);
+        return overlayRes.getDimensionPixelOffset(overlayRes.getIdentifier(
+                CONFIG_CORNERRADIUS, "dimen", packageName));
     }
 }
