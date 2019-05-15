@@ -86,6 +86,7 @@ abstract class ThemePreviewPage extends PreviewPage {
         private OnClickListener mEditClickListener;
         private final OnLayoutChangeListener mListener;
         private final int mCornerRadius;
+        private final ColorStateList mTintList;
 
         public ThemeCoverPage(Context context, String title, int accentColor, List<Drawable> icons,
                 Typeface headlineFont, int cornerRadius,
@@ -108,6 +109,20 @@ abstract class ThemePreviewPage extends PreviewPage {
             mColorTileIconIds = colorTileIconIds;
             mShapeIconIds = shapeIconIds;
             mListener = wallpaperListener;
+            // Color QS icons:
+            int controlGreyColor = mRes.getColor(R.color.control_grey, null);
+            mTintList = new ColorStateList(
+                    new int[][]{
+                            new int[]{android.R.attr.state_selected},
+                            new int[]{android.R.attr.state_checked},
+                            new int[]{-android.R.attr.state_enabled},
+                    },
+                    new int[] {
+                            accentColor,
+                            accentColor,
+                            controlGreyColor
+                    }
+            );
         }
 
         @Override
@@ -121,25 +136,10 @@ abstract class ThemePreviewPage extends PreviewPage {
                 card.requestLayout();
             }
 
-            // Color QS icons:
-            int controlGreyColor = mRes.getColor(R.color.control_grey, null);
-            ColorStateList tintList = new ColorStateList(
-                    new int[][]{
-                            new int[]{android.R.attr.state_selected},
-                            new int[]{android.R.attr.state_checked},
-                            new int[]{-android.R.attr.state_enabled},
-                    },
-                    new int[] {
-                            accentColor,
-                            accentColor,
-                            controlGreyColor
-                    }
-            );
-
             for (int i = 0; i < mColorButtonIds.length; i++) {
                 CompoundButton button = card.findViewById(mColorButtonIds[i]);
                 if (button != null) {
-                    button.setButtonTintList(tintList);
+                    button.setButtonTintList(mTintList);
                 }
             }
             for (int i = 0; i < 3 && i < mIcons.size(); i++) {

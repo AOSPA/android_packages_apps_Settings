@@ -16,7 +16,6 @@
 package com.android.customization.model.theme.custom;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
@@ -24,9 +23,7 @@ import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.theme.ThemeBundle.PreviewInfo;
 import com.android.customization.model.theme.ThemeManager;
 import com.android.customization.model.theme.custom.CustomTheme.Builder;
-import com.android.wallpaper.R;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class CustomThemeManager implements CustomizationManager<ThemeComponentOption> {
@@ -48,11 +45,6 @@ public class CustomThemeManager implements CustomizationManager<ThemeComponentOp
 
     @Override
     public void apply(ThemeComponentOption option, @Nullable Callback callback) {
-//        option.getOverlayPackages().forEach((category, packageName) -> {
-//            if (!TextUtils.isEmpty(packageName)) {
-//                mBuilder.addOverlayPackage(category, packageName);
-//            }
-//        });
         option.buildStep(mBuilder);
         if (callback != null) {
             callback.onSuccess();
