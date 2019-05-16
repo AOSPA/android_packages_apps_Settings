@@ -21,10 +21,5 @@
             <corners android:radius="4dp" />
         </shape>
     </item>
-    <item>
-        <shape android:shape="rectangle">
-            <stroke android:color="@color/option_border_color" android:width="@dimen/option_border_width" />
-            <corners android:radius="4dp" />
-        </shape>
-    </item>
+    <item android:drawable="@drawable/option_border_edge" />
 </ripple>

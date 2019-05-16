@@ -49,7 +49,6 @@ import com.android.customization.widget.DynamicAdaptiveIconDrawable;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
 import com.android.wallpaper.asset.BitmapCachingAsset;
-import com.android.wallpaper.asset.ResourceAsset;
 import com.android.wallpaper.model.LiveWallpaperInfo;
 import com.android.wallpaper.model.WallpaperInfo;
 
@@ -192,10 +191,17 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         if (isDefault()) {
             return "";
         }
+        return getJsonPackages().toString();
+    }
+
+    JSONObject getJsonPackages() {
+        if (isDefault()) {
+            return new JSONObject();
+        }
         JSONObject json = new JSONObject(mPackagesByCategory);
         // Remove items with null values to avoid deserialization issues.
         removeNullValues(json);
-        return json.toString();
+        return json;
     }
 
     private void removeNullValues(JSONObject json) {
@@ -288,7 +294,8 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         @ColorInt private int mColorAccentLight = -1;
         @ColorInt private int mColorAccentDark = -1;
         private List<Drawable> mIcons = new ArrayList<>();
-        private String mShapePath;
+        private String mPathString;
+        private Path mShapePath;
         private boolean mIsDefault;
         @Dimension private int mCornerRadius;
         private Asset mWallpaperAsset;
@@ -301,11 +308,14 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
                     createPreviewInfo(context));
         }
 
-        protected PreviewInfo createPreviewInfo(Context context) {
+        public PreviewInfo createPreviewInfo(Context context) {
             ShapeDrawable shapeDrawable = null;
             List<Drawable> shapeIcons = new ArrayList<>();
-            if (!TextUtils.isEmpty(mShapePath)) {
-                Path path = PathParser.createPathFromPathData(mShapePath);
+            Path path = mShapePath;
+            if (!TextUtils.isEmpty(mPathString)) {
+                path = PathParser.createPathFromPathData(mPathString);
+            }
+            if (path != null) {
                 PathShape shape = new PathShape(path, PATH_SIZE, PATH_SIZE);
                 shapeDrawable = new ShapeDrawable(shape);
                 shapeDrawable.setIntrinsicHeight((int) PATH_SIZE);
@@ -315,6 +325,8 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
                         AdaptiveIconDrawable adaptiveIcon = (AdaptiveIconDrawable) icon;
                         shapeIcons.add(new DynamicAdaptiveIconDrawable(adaptiveIcon.getBackground(),
                                 adaptiveIcon.getForeground(), path));
+                    } else if (icon instanceof DynamicAdaptiveIconDrawable) {
+                        shapeIcons.add(icon);
                     }
                     // TODO: add iconloader library's legacy treatment helper methods for
                     //  non-adaptive icons
@@ -323,6 +335,14 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
             return new PreviewInfo(context, mBodyFontFamily, mHeadlineFontFamily, mColorAccentLight,
                     mColorAccentDark, mIcons, shapeDrawable, mCornerRadius,
                     mWallpaperAsset, shapeIcons);
+        }
+
+        public Map<String, String> getPackages() {
+            return Collections.unmodifiableMap(mPackages);
+        }
+
+        public String getTitle() {
+            return mTitle;
         }
 
         public Builder setTitle(String title) {
@@ -361,6 +381,11 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         }
 
         public Builder setShapePath(String path) {
+            mPathString = path;
+            return this;
+        }
+
+        public Builder setShapePath(Path path) {
             mShapePath = path;
             return this;
         }

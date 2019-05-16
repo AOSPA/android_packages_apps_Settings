@@ -20,19 +20,21 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager;
+import com.android.customization.model.theme.ThemeBundle.PreviewInfo;
 import com.android.customization.model.theme.ThemeManager;
-import com.android.wallpaper.R;
+import com.android.customization.model.theme.custom.CustomTheme.Builder;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class CustomThemeManager implements CustomizationManager<ThemeComponentOption> {
 
-    private final Map<String, String> mOverlayPackages = new HashMap<>();
     private final CustomTheme mOriginalTheme;
+    private final CustomTheme.Builder mBuilder;
 
-    private CustomThemeManager(Map<String, String> overlayPackages, @Nullable CustomTheme originalTheme) {
-        mOverlayPackages.putAll(overlayPackages);
+    private CustomThemeManager(Map<String, String> overlayPackages,
+            @Nullable CustomTheme originalTheme) {
+        mBuilder = new Builder();
+        overlayPackages.forEach(mBuilder::addOverlayPackage);
         mOriginalTheme = originalTheme;
     }
 
@@ -43,20 +45,18 @@ public class CustomThemeManager implements CustomizationManager<ThemeComponentOp
 
     @Override
     public void apply(ThemeComponentOption option, @Nullable Callback callback) {
-        mOverlayPackages.putAll(option.getOverlayPackages());
+        option.buildStep(mBuilder);
         if (callback != null) {
             callback.onSuccess();
         }
     }
 
     public Map<String, String> getOverlayPackages() {
-        return mOverlayPackages;
+        return mBuilder.getPackages();
     }
 
-    public CustomTheme buildPartialCustomTheme(Context context) {
-        return new CustomTheme(mOriginalTheme != null
-                ? mOriginalTheme.getTitle() : context.getString(R.string.custom_theme_title),
-                mOverlayPackages, null);
+    public CustomTheme buildPartialCustomTheme(Context context, String id, String title) {
+        return ((CustomTheme.Builder)mBuilder.setId(id).setTitle(title)).build(context);
     }
 
     @Override
@@ -68,12 +68,17 @@ public class CustomThemeManager implements CustomizationManager<ThemeComponentOp
         return mOriginalTheme;
     }
 
+    public PreviewInfo buildCustomThemePreviewInfo(Context context) {
+        return mBuilder.createPreviewInfo(context);
+    }
+
     public static CustomThemeManager create(
             @Nullable CustomTheme customTheme, ThemeManager themeManager) {
         if (customTheme != null && customTheme.isDefined()) {
             return new CustomThemeManager(customTheme.getPackagesByCategory(), customTheme);
         }
         // Seed the first custom theme with the currently applied theme.
-        return new CustomThemeManager(themeManager.getCurrentOverlays(), null);
+        return new CustomThemeManager(themeManager.getCurrentOverlays(), customTheme);
     }
+
 }
