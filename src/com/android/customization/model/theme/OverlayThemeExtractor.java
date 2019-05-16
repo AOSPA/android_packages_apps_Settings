@@ -40,19 +40,24 @@ class OverlayThemeExtractor {
     OverlayThemeExtractor(Context context) {
         mContext = context;
         OverlayManager om = context.getSystemService(OverlayManager.class);
-        Consumer<OverlayInfo> addToMap = overlayInfo -> mOverlayInfos.put(
-                overlayInfo.getPackageName(), overlayInfo);
+        if (om != null) {
+            Consumer<OverlayInfo> addToMap = overlayInfo -> mOverlayInfos.put(
+                    overlayInfo.getPackageName(), overlayInfo);
 
-        UserHandle user = UserHandle.of(UserHandle.myUserId());
-        om.getOverlayInfosForTarget(ANDROID_PACKAGE, user).forEach(addToMap);
-        om.getOverlayInfosForTarget(SYSUI_PACKAGE, user).forEach(addToMap);
-        om.getOverlayInfosForTarget(SETTINGS_PACKAGE, user).forEach(addToMap);
-        om.getOverlayInfosForTarget(ResourceConstants.getLauncherPackage(context), user)
-                .forEach(addToMap);
-        om.getOverlayInfosForTarget(context.getPackageName(), user).forEach(addToMap);
-
+            UserHandle user = UserHandle.of(UserHandle.myUserId());
+            om.getOverlayInfosForTarget(ANDROID_PACKAGE, user).forEach(addToMap);
+            om.getOverlayInfosForTarget(SYSUI_PACKAGE, user).forEach(addToMap);
+            om.getOverlayInfosForTarget(SETTINGS_PACKAGE, user).forEach(addToMap);
+            om.getOverlayInfosForTarget(ResourceConstants.getLauncherPackage(context), user)
+                    .forEach(addToMap);
+            om.getOverlayInfosForTarget(context.getPackageName(), user).forEach(addToMap);
+        }
         mShapePreviewIconPackages = context.getResources().getStringArray(
                 R.array.icon_shape_preview_packages);
+    }
+
+    boolean isAvailable() {
+        return !mOverlayInfos.isEmpty();
     }
 
     void addColorOverlay(Builder builder, String colorOverlayPackage)
