@@ -37,7 +37,7 @@ public class ContentProviderClockProvider implements ClockProvider {
 
     @Override
     public boolean isAvailable() {
-        return mProviderInfo != null;
+        return mProviderInfo != null && mProviderInfo.isEnabled();
     }
 
     @Override
