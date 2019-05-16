@@ -41,43 +41,11 @@
         android:title="@string/my_device_info_account_preference_title"
         android:summary="@string/summary_placeholder"/>
 
-    <!-- Phone number -->
-    <Preference
-        android:key="phone_number"
-        android:order="3"
-        android:title="@string/status_number"
-        android:summary="@string/summary_placeholder"
-        android:selectable="false"/>
-
     <Preference
         android:key="emergency_info"
         android:order="4"
         android:title="@string/emergency_info_title"
         android:summary="@string/summary_placeholder"/>
-
-    <!-- Legal information -->
-    <Preference
-        android:key="legal_container"
-        android:order="5"
-        android:title="@string/legal_information"
-        android:fragment="com.android.settings.LegalSettings"
-        settings:allowDividerAbove="true"/>
-
-    <!-- Regulatory labels -->
-    <Preference
-        android:key="regulatory_info"
-        android:order="6"
-        android:title="@string/regulatory_labels">
-        <intent android:action="android.settings.SHOW_REGULATORY_INFO"/>
-    </Preference>
-
-    <!-- Safety & regulatory manual -->
-    <Preference
-        android:key="safety_info"
-        android:order="7"
-        android:title="@string/safety_and_regulatory_info">
-        <intent android:action="android.settings.SHOW_SAFETY_AND_REGULATORY_INFO"/>
-    </Preference>
 
     <!-- SIM status -->
     <Preference
@@ -94,14 +62,6 @@
         android:order="21"
         android:title="@string/hardware_info"
         settings:keywords="@string/keywords_model_and_hardware"
-        android:summary="@string/summary_placeholder"/>
-
-    <!-- IMEI -->
-    <Preference
-        android:key="imei_info"
-        android:order="22"
-        android:title="@string/status_imei"
-        settings:keywords="@string/keywords_imei_info"
         android:summary="@string/summary_placeholder"/>
 
     <!-- Android version -->
@@ -136,14 +96,6 @@
         android:title="@string/status_bt_address"
         android:summary="@string/summary_placeholder"
         android:selectable="false"/>
-
-    <!-- Manual -->
-    <Preference
-        android:key="manual"
-        android:order="40"
-        android:title="@string/manual">
-        <intent android:action="android.settings.SHOW_MANUAL"/>
-    </Preference>
 
     <!-- Feedback on the device -->
     <Preference

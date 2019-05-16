@@ -21,13 +21,6 @@
     android:key="device_info_pref_screen"
     android:title="@string/about_settings">
 
-    <!-- Phone number -->
-    <Preference
-        android:key="phone_number"
-        android:order="0"
-        android:title="@string/status_number"
-        android:summary="@string/summary_placeholder"/>
-
     <!-- SIM status -->
     <Preference
         android:key="sim_status"
@@ -42,14 +35,6 @@
         android:order="21"
         android:title="@string/hardware_info"
         settings:keywords="@string/keywords_model_and_hardware"
-        android:summary="@string/summary_placeholder"/>
-
-    <!-- IMEI -->
-    <Preference
-        android:key="imei_info"
-        android:order="22"
-        android:title="@string/status_imei"
-        settings:keywords="@string/keywords_imei_info"
         android:summary="@string/summary_placeholder"/>
 
     <!-- Android version -->
@@ -81,45 +66,6 @@
         android:order="36"
         android:title="@string/status_bt_address"
         android:summary="@string/summary_placeholder"/>
-
-
-    <!-- Legal information -->
-    <Preference
-        android:key="legal_container"
-        android:order="37"
-        android:title="@string/legal_information"
-        android:fragment="com.android.settings.LegalSettings"
-        settings:allowDividerAbove="true"/>
-
-    <!-- Regulatory labels -->
-    <Preference
-        android:key="regulatory_info"
-        android:order="38"
-        android:title="@string/regulatory_labels">
-        <intent android:action="android.settings.SHOW_REGULATORY_INFO"/>
-    </Preference>
-
-    <!-- Safety & regulatory manual -->
-    <Preference
-        android:key="safety_info"
-        android:order="39"
-        android:title="@string/safety_and_regulatory_info">
-        <intent android:action="android.settings.SHOW_SAFETY_AND_REGULATORY_INFO"/>
-    </Preference>
-
-    <!-- Manual -->
-    <Preference
-        android:key="manual"
-        android:order="40"
-        android:title="@string/manual">
-        <intent android:action="android.settings.SHOW_MANUAL"/>
-    </Preference>
-
-    <!-- Feedback on the device -->
-    <Preference
-        android:key="device_feedback"
-        android:order="41"
-        android:title="@string/device_feedback"/>
 
     <!-- Device FCC equipment id -->
     <Preference
