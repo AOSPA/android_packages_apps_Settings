@@ -60,8 +60,14 @@
     <!-- Content description indicating that the selected option is currently applied to the device. [CHAR_LIMIT=NONE] -->
     <string name="option_applied_description"><xliff:g name="style_name">%1$s</xliff:g>, currently applied</string>
 
+    <!-- Content description indicating that the selected option is currently applied and previewed. [CHAR_LIMIT=NONE] -->
+    <string name="option_applied_previewed_description"><xliff:g name="style_name">%1$s</xliff:g>, currently applied and previewed</string>
+
+    <!-- Content description indicating that the selected option is currently being previewed. [CHAR_LIMIT=NONE] -->
+    <string name="option_previewed_description"><xliff:g name="style_name">%1$s</xliff:g>, currently previewed</string>
+
     <!-- Sample text used to show a preview of a selected font [CHAR LIMIT=3] -->
-    <string name="theme_font_example">ABC</string>
+    <string name="theme_font_example" translatable="false">ABC</string>
 
     <!-- Content description for previewing a style, describing each of their components. [CHAR_LIMIT=NONE] -->
     <string name="theme_description">Font: <xliff:g name="font_name">%1$s</xliff:g>, icons: <xliff:g name="icon_name">%2$s</xliff:g>, shape: <xliff:g name="shape_name">%3$s</xliff:g>, color: <xliff:g name="color_name">%4$s</xliff:g> </string>
@@ -99,6 +105,9 @@
     <!-- Message shown when a theme has been applied successfully in the system [CHAR LIMIT=NONE] -->
     <string name="applied_theme_msg">Style applied</string>
 
+    <!-- Message shown when a clock has been applied successfully in the system [CHAR LIMIT=NONE] -->
+    <string name="applied_clock_msg">Clock applied</string>
+
     <!-- Message shown when a theme couldn't be applied in the system because of an error
         [CHAR LIMIT=NONE] -->
     <string name="apply_theme_error_msg">There was a problem applying the style</string>
@@ -111,9 +120,10 @@
         [CHAR LIMIT=20] -->
     <string name="custom_theme_previous">Previous</string>
 
-    <!-- Label for a system Style/Theme (combination of fonts/colors/icons) that is defined and
-        customized by the user [CHAR LIMIT=15] -->
-    <string name="custom_theme_title">Custom</string>
+    <!-- Generic label for one system Style/Theme (combination of fonts/colors/icons) that is
+        defined and customized by the user (note there could be more than one so the label includes
+        a number, eg "Custom 1, Custom 2, etc") [CHAR LIMIT=15] -->
+    <string name="custom_theme_title">Custom <xliff:g name="custom_num" example="1">%1$d</xliff:g></string>
 
     <!-- Title for a screen that lets the user define their custom system Style/Theme
         [CHAR LIMIT=30] -->
@@ -123,22 +133,25 @@
         [CHAR LIMIT=30] -->
     <string name="custom_theme_delete">Delete</string>
 
-    <!-- Title of a page allowing the user to choose a font for a custom theme -->
+    <!-- Title of a page allowing the user to choose a font for a custom theme [CHAR LIMIT=40]-->
     <string name="font_component_title">Choose font</string>
 
-    <!-- Title of a page allowing the user to choose an icon set for a custom theme -->
+    <!-- Title of a page allowing the user to choose an icon set for a custom theme [CHAR LIMIT=40]-->
     <string name="icon_component_title">Choose icons</string>
 
-    <!-- Title of a page allowing the user to choose a color for a custom theme -->
+    <!-- Title of a page allowing the user to choose a color for a custom theme [CHAR LIMIT=40]-->
     <string name="color_component_title">Choose color</string>
 
-    <!-- Title of a page allowing the user to choose an icon shape for a custom theme -->
+    <!-- Title of a page allowing the user to choose an icon shape for a custom theme [CHAR LIMIT=40]-->
     <string name="shape_component_title">Choose shape</string>
+
+    <!-- Title of a page allowing the user to set a name for a custom theme [CHAR LIMIT=40]-->
+    <string name="name_component_title">Name your style</string>
 
     <!-- Title of a set of icons that the user can chose for their custom style (eg, "Icons 2") -->
     <string name="icon_component_label">Icons <xliff:g name="component_number" example="1">%1$d</xliff:g></string>
 
-    <string name="font_component_option_thumbnail" translatable="false">A</string>
+    <string name="font_component_option_thumbnail" translatable="false">Aa</string>
 
     <!-- Dialog box asking the user to confirm if they want to delete the current custom style
         [CHAR_LIMIT=NONE] -->

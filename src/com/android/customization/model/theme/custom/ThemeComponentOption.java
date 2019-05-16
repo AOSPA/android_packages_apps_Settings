@@ -17,6 +17,11 @@ package com.android.customization.model.theme.custom;
 
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_LAUNCHER;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SETTINGS;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_THEMEPICKER;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
 
 import android.content.Context;
@@ -24,11 +29,12 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
-import android.graphics.PorterDuff;
+import android.graphics.Path;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,17 +46,20 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.Dimension;
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
 import com.android.customization.model.ResourceConstants;
+import com.android.customization.model.theme.custom.CustomTheme.Builder;
 import com.android.wallpaper.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 
 /**
@@ -79,6 +88,15 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
     }
 
     public abstract void bindPreview(ViewGroup container);
+
+    public Builder buildStep(Builder builder) {
+        getOverlayPackages().forEach((category, packageName) -> {
+            if (!TextUtils.isEmpty(packageName)) {
+                builder.addOverlayPackage(category, packageName);
+            }
+        });
+        return builder;
+    }
 
     public static class FontOption extends ThemeComponentOption {
 
@@ -121,7 +139,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         @Override
         public void bindPreview(ViewGroup container) {
             TextView header = container.findViewById(R.id.theme_preview_card_header);
-            header.setText(mLabel);
+            header.setText(R.string.preview_name_font);
             header.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_font, 0, 0);
 
             ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
@@ -134,6 +152,12 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
             title.setTypeface(mHeadlineFont);
             TextView bodyText = container.findViewById(R.id.font_card_body);
             bodyText.setTypeface(mBodyFont);
+        }
+
+        @Override
+        public Builder buildStep(Builder builder) {
+            builder.setHeadlineFontFamily(mHeadlineFont).setBodyFontFamily(mBodyFont);
+            return super.buildStep(builder);
         }
     }
 
@@ -151,7 +175,8 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         @Override
         public void bindThumbnailTile(View view) {
             Resources res = view.getContext().getResources();
-            Drawable icon = mIcons.get(THUMBNAIL_ICON_POSITION).mutate();
+            Drawable icon = mIcons.get(THUMBNAIL_ICON_POSITION)
+                    .getConstantState().newDrawable().mutate();
             icon.setTint(res.getColor(R.color.icon_thumbnail_color, null));
             ((ImageView) view.findViewById(R.id.option_icon)).setImageDrawable(
                     icon);
@@ -161,16 +186,21 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         @Override
         public boolean isActive(CustomizationManager<ThemeComponentOption> manager) {
             CustomThemeManager customThemeManager = (CustomThemeManager) manager;
+            Map<String, String> themePackages = customThemeManager.getOverlayPackages();
             if (getOverlayPackages().isEmpty()) {
-                return customThemeManager.getOverlayPackages().isEmpty();
+                return themePackages.get(OVERLAY_CATEGORY_ICON_SYSUI) == null &&
+                        themePackages.get(OVERLAY_CATEGORY_ICON_SETTINGS) == null &&
+                        themePackages.get(OVERLAY_CATEGORY_ICON_ANDROID) == null &&
+                        themePackages.get(OVERLAY_CATEGORY_ICON_LAUNCHER) == null &&
+                        themePackages.get(OVERLAY_CATEGORY_ICON_THEMEPICKER) == null;
             }
-             for (Map.Entry<String, String> overlayEntry : getOverlayPackages().entrySet()) {
-                 if(!Objects.equals(overlayEntry.getValue(),
-                         customThemeManager.getOverlayPackages().get(overlayEntry.getKey()))) {
-                     return false;
-                 }
-             }
-             return true;
+            for (Map.Entry<String, String> overlayEntry : getOverlayPackages().entrySet()) {
+                if(!Objects.equals(overlayEntry.getValue(),
+                        themePackages.get(overlayEntry.getKey()))) {
+                    return false;
+                }
+            }
+            return true;
         }
 
         @Override
@@ -209,6 +239,14 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
         public void setLabel(String label) {
             mLabel = label;
+        }
+
+        @Override
+        public Builder buildStep(Builder builder) {
+            for (Drawable icon : mIcons) {
+                builder.addIcon(icon);
+            }
+            return super.buildStep(builder);
         }
     }
 
@@ -346,6 +384,12 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         public void setShapeDrawable(@Nullable Drawable shapeDrawable) {
             mShapeDrawable = shapeDrawable;
         }
+
+        @Override
+        public Builder buildStep(Builder builder) {
+            builder.setColorAccentDark(mColorAccentDark).setColorAccentLight(mColorAccentLight);
+            return super.buildStep(builder);
+        }
     }
 
     public static class ShapeOption extends ThemeComponentOption {
@@ -353,16 +397,21 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         private final LayerDrawable mShape;
         private final List<Drawable> mAppIcons;
         private final String mLabel;
+        private final Path mPath;
+        private final int mCornerRadius;
         private int[] mShapeIconIds = {
                 R.id.shape_preview_icon_0, R.id.shape_preview_icon_1, R.id.shape_preview_icon_2,
                 R.id.shape_preview_icon_3, R.id.shape_preview_icon_4, R.id.shape_preview_icon_5
         };
 
-        ShapeOption(String packageName, String label, Drawable shapeDrawable,
+        ShapeOption(String packageName, String label, Path path,
+                @Dimension int cornerRadius, Drawable shapeDrawable,
                 List<Drawable> appIcons) {
             addOverlayPackage(OVERLAY_CATEGORY_SHAPE, packageName);
             mLabel = label;
             mAppIcons = appIcons;
+            mPath = path;
+            mCornerRadius = cornerRadius;
             Drawable background = shapeDrawable.getConstantState().newDrawable();
             Drawable foreground = shapeDrawable.getConstantState().newDrawable();
             mShape = new LayerDrawable(new Drawable[]{background, foreground});
@@ -417,6 +466,15 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
                 ImageView iconView = cardBody.findViewById(mShapeIconIds[i]);
                 iconView.setBackground(mAppIcons.get(i));
             }
+        }
+
+        @Override
+        public Builder buildStep(Builder builder) {
+            builder.setShapePath(mPath).setBottomSheetCornerRadius(mCornerRadius);
+            for (Drawable appIcon : mAppIcons) {
+                builder.addShapePreviewIcon(appIcon);
+            }
+            return super.buildStep(builder);
         }
     }
 }
