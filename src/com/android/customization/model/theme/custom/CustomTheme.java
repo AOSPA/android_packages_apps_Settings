@@ -18,6 +18,7 @@ package com.android.customization.model.theme.custom;
 import android.content.Context;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager;
@@ -25,12 +26,41 @@ import com.android.customization.model.theme.ThemeBundle;
 import com.android.wallpaper.R;
 
 import java.util.Map;
+import java.util.UUID;
 
 public class CustomTheme extends ThemeBundle {
 
-    public CustomTheme(String title, Map<String, String> overlayPackages,
+    public static String newId() {
+        return UUID.randomUUID().toString();
+    }
+
+    /**
+     * Used to uniquely identify a custom theme since names can change.
+     */
+    private final String mId;
+
+    public CustomTheme(@NonNull String id, String title, Map<String, String> overlayPackages,
             @Nullable PreviewInfo previewInfo) {
         super(title, overlayPackages, false, null, previewInfo);
+        mId = id;
+    }
+
+    public String getId() {
+        return mId;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof CustomTheme)) {
+            return false;
+        }
+        CustomTheme other = (CustomTheme) obj;
+        return mId.equals(other.mId);
+    }
+
+    @Override
+    public int hashCode() {
+        return mId.hashCode();
     }
 
     @Override
@@ -60,9 +90,16 @@ public class CustomTheme extends ThemeBundle {
     }
 
     public static class Builder extends ThemeBundle.Builder {
+        private String mId;
+
         @Override
         public CustomTheme build(Context context) {
-            return new CustomTheme(mTitle, mPackages, createPreviewInfo(context));
+            return new CustomTheme(mId, mTitle, mPackages, createPreviewInfo(context));
+        }
+
+        public Builder setId(String id) {
+            mId = id;
+            return this;
         }
     }
 }

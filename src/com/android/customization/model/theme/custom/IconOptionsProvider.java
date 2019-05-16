@@ -125,14 +125,14 @@ public class IconOptionsProvider extends ThemeComponentOptionProvider<IconOption
 
     private Drawable loadIconPreviewDrawable(String drawableName, String packageName)
             throws NameNotFoundException, NotFoundException {
-
-        Resources overlayRes = mContext.getPackageManager().getResourcesForApplication(packageName);
-        return overlayRes.getDrawable(
-                overlayRes.getIdentifier(drawableName, "drawable", packageName), null);
+        final Resources resources = ANDROID_PACKAGE.equals(packageName)
+                ? Resources.getSystem()
+                : mContext.getPackageManager().getResourcesForApplication(packageName);
+        return resources.getDrawable(
+                resources.getIdentifier(drawableName, "drawable", packageName), null);
     }
 
     private void addDefault() {
-        Resources system = Resources.getSystem();
         IconOption option = new IconOption();
         option.setLabel(mContext.getString(R.string.default_theme_title));
         try {
