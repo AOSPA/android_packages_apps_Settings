@@ -201,12 +201,12 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
                     // Position at lower right
                     int idx = layers.length - 1;
                     int checkSize = (int) res.getDimension(R.dimen.check_size);
+                    int checkOffset = (int) res.getDimension(R.dimen.check_offset);
                     checkedFrame.setLayerGravity(idx, Gravity.BOTTOM | Gravity.RIGHT);
                     checkedFrame.setLayerWidth(idx, checkSize);
                     checkedFrame.setLayerHeight(idx, checkSize);
-                    checkedFrame.setLayerInsetBottom(idx,
-                            holder.itemView.getPaddingBottom() - (checkSize/3));
-                    checkedFrame.setLayerInsetLeft(idx, checkSize/3);
+                    checkedFrame.setLayerInsetBottom(idx, checkOffset);
+                    checkedFrame.setLayerInsetLeft(idx, checkOffset);
                     holder.itemView.setForeground(checkedFrame);
 
                     // Initialize the currently applied option
