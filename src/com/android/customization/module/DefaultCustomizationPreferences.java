@@ -28,13 +28,13 @@ public class DefaultCustomizationPreferences extends DefaultWallpaperPreferences
 
 
     @Override
-    public String getSerializedCustomTheme() {
+    public String getSerializedCustomThemes() {
         return mSharedPrefs.getString(KEY_CUSTOM_THEME, null);
     }
 
     @Override
-    public void storeCustomTheme(String serializedCustomTheme) {
-        mSharedPrefs.edit().putString(KEY_CUSTOM_THEME, serializedCustomTheme).apply();
+    public void storeCustomThemes(String serializedCustomThemes) {
+        mSharedPrefs.edit().putString(KEY_CUSTOM_THEME, serializedCustomThemes).apply();
     }
 
     @Override

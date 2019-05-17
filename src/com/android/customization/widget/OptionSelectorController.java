@@ -111,7 +111,12 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
         if (!mOptions.contains(option)) {
             throw new IllegalArgumentException("Invalid option");
         }
+        CustomizationOption lastAppliedOption = mAppliedOption;
         mAppliedOption = option;
+        mAdapter.notifyItemChanged(mOptions.indexOf(option));
+        if (lastAppliedOption != null) {
+            mAdapter.notifyItemChanged(mOptions.indexOf(lastAppliedOption));
+        }
     }
 
     private void updateActivatedStatus(CustomizationOption option, boolean isActivated) {
@@ -122,6 +127,31 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
         RecyclerView.ViewHolder holder = mContainer.findViewHolderForAdapterPosition(index);
         if (holder != null && holder.itemView != null) {
             holder.itemView.setActivated(isActivated);
+
+            if (holder instanceof TileViewHolder) {
+                TileViewHolder tileHolder = (TileViewHolder) holder;
+                if (tileHolder.labelView != null) {
+                    if (isActivated) {
+                        if (option == mAppliedOption) {
+                            CharSequence cd = mContainer.getContext().getString(
+                                    R.string.option_applied_previewed_description,
+                                    option.getTitle());
+                            tileHolder.labelView.setContentDescription(cd);
+                        } else {
+                            CharSequence cd = mContainer.getContext().getString(
+                                    R.string.option_previewed_description, option.getTitle());
+                            tileHolder.labelView.setContentDescription(cd);
+                        }
+                    } else if (option == mAppliedOption) {
+                        CharSequence cd = mContainer.getContext().getString(
+                                R.string.option_applied_description, option.getTitle());
+                        tileHolder.labelView.setContentDescription(cd);
+                    } else {
+                        // Remove content description
+                        tileHolder.labelView.setContentDescription(null);
+                    }
+                }
+            }
         }
     }
 
@@ -179,10 +209,10 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
                     checkedFrame.setLayerInsetLeft(idx, checkSize/3);
                     holder.itemView.setForeground(checkedFrame);
 
+                    // Initialize the currently applied option
                     CharSequence cd = mContainer.getContext().getString(
-                            R.string.option_applied_description, option.getTitle());
+                            R.string.option_applied_previewed_description, option.getTitle());
                     holder.labelView.setContentDescription(cd);
-
                 } else if (mShowCheckmark) {
                     holder.itemView.setForeground(null);
                 }
