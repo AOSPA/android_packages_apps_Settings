@@ -24,6 +24,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -321,12 +322,16 @@ public class ThemeFragment extends ToolbarFragment {
             super(activity, R.layout.theme_preview_card);
             final Resources res = activity.getResources();
             final PreviewInfo previewInfo = theme.getPreviewInfo();
+            Drawable coverScrim = theme instanceof CustomTheme
+                    ? res.getDrawable(R.drawable.theme_cover_scrim_custom, activity.getTheme())
+                    : res.getDrawable(R.drawable.theme_cover_scrim, activity.getTheme());
+
             addPage(new ThemeCoverPage(activity, theme.getTitle(),
                     previewInfo.resolveAccentColor(res), previewInfo.icons,
                     previewInfo.headlineFontFamily, previewInfo.bottomSheeetCornerRadius,
                     previewInfo.shapeDrawable, previewInfo.shapeAppIcons, editClickListener,
                     mColorButtonIds, mColorTileIds, mColorTileIconIds, mShapeIconIds,
-                    new WallpaperPreviewLayoutListener(theme, previewInfo, true)));
+                    new WallpaperPreviewLayoutListener(theme, previewInfo, coverScrim)));
             addPage(new ThemePreviewPage(activity, R.string.preview_name_font, R.drawable.ic_font,
                     R.layout.preview_card_font_content,
                     previewInfo.resolveAccentColor(res)) {
@@ -427,7 +432,7 @@ public class ThemeFragment extends ToolbarFragment {
                         previewInfo.resolveAccentColor(res)) {
 
                     private final WallpaperPreviewLayoutListener mListener =
-                            new WallpaperPreviewLayoutListener(theme, previewInfo, false);
+                            new WallpaperPreviewLayoutListener(theme, previewInfo, null);
 
                     @Override
                     protected boolean containsWallpaper() {
@@ -459,13 +464,13 @@ public class ThemeFragment extends ToolbarFragment {
         private static class WallpaperPreviewLayoutListener implements OnLayoutChangeListener {
             private final ThemeBundle mTheme;
             private final PreviewInfo mPreviewInfo;
-            private final boolean mTransparent;
+            private final Drawable mScrim;
 
             public WallpaperPreviewLayoutListener(ThemeBundle theme, PreviewInfo previewInfo,
-                    boolean transparent) {
+                    Drawable scrim) {
                 mTheme = theme;
                 mPreviewInfo = previewInfo;
-                mTransparent = transparent;
+                mScrim = scrim;
             }
 
             @Override
@@ -487,12 +492,12 @@ public class ThemeFragment extends ToolbarFragment {
 
             private void setWallpaperBitmap(View view, Bitmap bitmap) {
                 Resources res = view.getContext().getResources();
-                BitmapDrawable background = new BitmapDrawable(res, bitmap);
-                if (mTransparent) {
-                    background.setAlpha(128);
+                Drawable background = new BitmapDrawable(res, bitmap);
+                if (mScrim != null) {
+                    background = new LayerDrawable(new Drawable[]{background, mScrim});
                 }
                 view.findViewById(R.id.theme_preview_card_background).setBackground(background);
-                if (!mTransparent) {
+                if (mScrim == null) {
                     int colorsHint = WallpaperColors.fromBitmap(bitmap).getColorHints();
                     TextView header = view.findViewById(R.id.theme_preview_card_header);
                     if ((colorsHint & WallpaperColors.HINT_SUPPORTS_DARK_TEXT) == 0) {
