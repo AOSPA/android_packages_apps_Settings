@@ -75,7 +75,7 @@ public class LauncherGridOptionsProvider {
     }
 
     boolean areGridsAvailable() {
-        return mProviderInfo != null && mProviderInfo.isEnabled();
+        return mProviderInfo != null;
     }
 
     /**
