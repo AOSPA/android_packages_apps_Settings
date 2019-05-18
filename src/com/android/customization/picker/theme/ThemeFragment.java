@@ -22,17 +22,12 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.PorterDuff;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.icu.text.DateFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.MeasureSpec;
 import android.view.View.OnClickListener;
 import android.view.View.OnLayoutChangeListener;
 import android.view.ViewGroup;
@@ -44,12 +39,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.customization.model.CustomizationManager.Callback;
@@ -59,7 +50,7 @@ import com.android.customization.model.theme.ThemeManager;
 import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.module.ThemesUserEventLogger;
 import com.android.customization.picker.BasePreviewAdapter;
-import com.android.customization.picker.BasePreviewAdapter.PreviewPage;
+import com.android.customization.picker.theme.ThemePreviewPage.ThemeCoverPage;
 import com.android.customization.widget.OptionSelectorController;
 import com.android.customization.widget.PreviewPager;
 import com.android.wallpaper.R;
@@ -69,10 +60,7 @@ import com.android.wallpaper.module.CurrentWallpaperInfoFactory;
 import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.picker.ToolbarFragment;
 
-import java.text.FieldPosition;
-import java.util.Calendar;
 import java.util.List;
-import java.util.TimeZone;
 
 /**
  * Fragment that contains the main UI for selecting and applying a ThemeBundle.
@@ -234,7 +222,7 @@ public class ThemeFragment extends ToolbarFragment {
             mOptionsController = new OptionSelectorController<>(mOptionsContainer, options);
             mOptionsController.addListener(selected -> {
                 if (selected instanceof CustomTheme && !((CustomTheme) selected).isDefined()) {
-                    navigateToCustomTheme(null);
+                    navigateToCustomTheme((CustomTheme) selected);
                 } else {
                     mSelectedTheme = (ThemeBundle) selected;
                     if (mUseMyWallpaper || mSelectedTheme instanceof CustomTheme) {
@@ -292,151 +280,13 @@ public class ThemeFragment extends ToolbarFragment {
         }, true);
     }
 
-    private void navigateToCustomTheme(@Nullable CustomTheme themeToEdit) {
+    private void navigateToCustomTheme(CustomTheme themeToEdit) {
         Intent intent = new Intent(getActivity(), CustomThemeActivity.class);
-        if (themeToEdit != null) {
-            intent.putExtra(CustomThemeActivity.EXTRA_THEME_TITLE, themeToEdit.getTitle());
-            intent.putExtra(CustomThemeActivity.EXTRA_THEME_PACKAGES,
-                    themeToEdit.getSerializedPackages());
-        }
+        intent.putExtra(CustomThemeActivity.EXTRA_THEME_TITLE, themeToEdit.getTitle());
+        intent.putExtra(CustomThemeActivity.EXTRA_THEME_ID, themeToEdit.getId());
+        intent.putExtra(CustomThemeActivity.EXTRA_THEME_PACKAGES,
+                themeToEdit.getSerializedPackages());
         startActivityForResult(intent, CustomThemeActivity.REQUEST_CODE_CUSTOM_THEME);
-    }
-
-    private static abstract class ThemePreviewPage extends PreviewPage {
-        @StringRes final int nameResId;
-        @DrawableRes final int iconSrc;
-        @LayoutRes final int contentLayoutRes;
-        @ColorInt final int accentColor;
-        protected final LayoutInflater inflater;
-
-        private ThemePreviewPage(Context context, @StringRes int titleResId,
-                @DrawableRes int iconSrc, @LayoutRes int contentLayoutRes,
-                @ColorInt int accentColor) {
-            super(null);
-            this.nameResId = titleResId;
-            this.iconSrc = iconSrc;
-            this.contentLayoutRes = contentLayoutRes;
-            this.accentColor = accentColor;
-            this.inflater = LayoutInflater.from(context);
-        }
-
-        @Override
-        public void bindPreviewContent() {
-            TextView header = card.findViewById(R.id.theme_preview_card_header);
-            header.setText(nameResId);
-            header.setCompoundDrawablesWithIntrinsicBounds(0, iconSrc, 0, 0);
-            header.setCompoundDrawableTintList(ColorStateList.valueOf(accentColor));
-            card.findViewById(R.id.theme_preview_top_bar).setVisibility(View.GONE);
-            card.findViewById(R.id.edit_label).setVisibility(View.GONE);
-
-            ViewGroup body = card.findViewById(R.id.theme_preview_card_body_container);
-            inflater.inflate(contentLayoutRes, body, true);
-            bindBody(false);
-        }
-
-        protected boolean containsWallpaper() {
-            return false;
-        }
-
-        protected abstract void bindBody(boolean forceRebind);
-    }
-
-    private static class ThemeCoverPage extends ThemePreviewPage {
-
-        private final Typeface mHeadlineFont;
-        private final List<Drawable> mIcons;
-        private String mTitle;
-        private OnClickListener mEditClickListener;
-        private final ThemePreviewAdapter.WallpaperPreviewLayoutListener mListener;
-        private final int mCornerRadius;
-
-        private ThemeCoverPage(Context context, String title, int accentColor, List<Drawable> icons,
-                Typeface headlineFont, int cornerRadius,
-                OnClickListener editClickListener,
-                ThemePreviewAdapter.WallpaperPreviewLayoutListener wallpaperListener) {
-            super(context, 0, 0, R.layout.preview_card_cover_content, accentColor);
-            mTitle = title;
-            mHeadlineFont = headlineFont;
-            mIcons = icons;
-            mCornerRadius = cornerRadius;
-            mEditClickListener = editClickListener;
-            mListener = wallpaperListener;
-        }
-
-        @Override
-        protected void bindBody(boolean forceRebind) {
-            card.addOnLayoutChangeListener(mListener);
-            if (forceRebind) {
-                card.requestLayout();
-            }
-        }
-
-        @Override
-        public void bindPreviewContent() {
-            TextView header = card.findViewById(R.id.theme_preview_card_header);
-            header.setText(mTitle);
-            header.setTextAppearance(R.style.CoverTitleTextAppearance);
-            header.setTypeface(mHeadlineFont);
-
-            card.findViewById(R.id.theme_preview_top_bar).setVisibility(View.VISIBLE);
-            TextView clock = card.findViewById(R.id.theme_preview_clock);
-            clock.setText(getFormattedTime());
-            clock.setTypeface(mHeadlineFont);
-
-            ViewGroup iconsContainer = card.findViewById(R.id.theme_preview_top_bar_icons);
-
-            for (int i = 0; i < iconsContainer.getChildCount() && i < mIcons.size(); i++) {
-                ((ImageView) iconsContainer.getChildAt(i))
-                        .setImageDrawable(mIcons.get(i).getConstantState().newDrawable().mutate());
-            }
-
-            ViewGroup body = card.findViewById(R.id.theme_preview_card_body_container);
-
-            inflater.inflate(contentLayoutRes, body, true);
-
-            bindBody(false);
-
-            TextView editLabel = card.findViewById(R.id.edit_label);
-            editLabel.setOnClickListener(mEditClickListener);
-            card.setOnClickListener(mEditClickListener);
-            editLabel.setVisibility(mEditClickListener != null
-                    ? View.VISIBLE : View.INVISIBLE);
-            ColorStateList themeAccentColor = ColorStateList.valueOf(accentColor);
-            editLabel.setTextColor(themeAccentColor);
-            editLabel.setCompoundDrawableTintList(themeAccentColor);
-            View qsb = card.findViewById(R.id.theme_qsb);
-            if (qsb != null && qsb.getVisibility() == View.VISIBLE) {
-                if (qsb.getBackground() instanceof GradientDrawable) {
-                    GradientDrawable bg = (GradientDrawable) qsb.getBackground();
-                    float cornerRadius = useRoundedQSB(mCornerRadius)
-                            ? (float)qsb.getLayoutParams().height / 2 : mCornerRadius;
-                    bg.setCornerRadii(new float[]{
-                            cornerRadius, cornerRadius, cornerRadius, cornerRadius,
-                            cornerRadius, cornerRadius, cornerRadius, cornerRadius});
-                }
-            }
-        }
-
-        private boolean useRoundedQSB(int cornerRadius) {
-            return cornerRadius >=
-                    card.getResources().getDimensionPixelSize(R.dimen.roundCornerThreshold);
-        }
-
-        private String getFormattedTime() {
-            DateFormat df = DateFormat.getTimeInstance(DateFormat.SHORT);
-            StringBuffer time = new StringBuffer();
-            FieldPosition amPmPosition = new FieldPosition(DateFormat.Field.AM_PM);
-            df.format(Calendar.getInstance(TimeZone.getDefault()).getTime(), time, amPmPosition);
-            if (amPmPosition.getBeginIndex() > 0) {
-                time.delete(amPmPosition.getBeginIndex(), amPmPosition.getEndIndex());
-            }
-            return time.toString();
-        }
-
-        @Override
-        protected boolean containsWallpaper() {
-            return true;
-        }
     }
 
     /**
@@ -474,66 +324,9 @@ public class ThemeFragment extends ToolbarFragment {
             addPage(new ThemeCoverPage(activity, theme.getTitle(),
                     previewInfo.resolveAccentColor(res), previewInfo.icons,
                     previewInfo.headlineFontFamily, previewInfo.bottomSheeetCornerRadius,
-                    editClickListener,
-                    new WallpaperPreviewLayoutListener(theme, previewInfo, true)) {
-
-                @Override
-                protected void bindBody(boolean forceRebind) {
-                    if (card == null) {
-                        return;
-                    }
-                    card.addOnLayoutChangeListener(coverCardLayoutListener);
-                    super.bindBody(forceRebind);
-
-                    // Color QS icons:
-                    int controlGreyColor = res.getColor(R.color.control_grey);
-                    ColorStateList tintList = new ColorStateList(
-                            new int[][]{
-                                    new int[]{android.R.attr.state_selected},
-                                    new int[]{android.R.attr.state_checked},
-                                    new int[]{-android.R.attr.state_enabled},
-                            },
-                            new int[] {
-                                    accentColor,
-                                    accentColor,
-                                    controlGreyColor
-                            }
-                    );
-
-                    for (int i = 0; i < mColorButtonIds.length; i++) {
-                        CompoundButton button = card.findViewById(mColorButtonIds[i]);
-                        if (button != null) {
-                            button.setButtonTintList(tintList);
-                        }
-                    }
-                    for (int i = 0; i < 3 && i < previewInfo.icons.size(); i++) {
-                        Drawable icon =
-                                previewInfo.icons.get(i).getConstantState().newDrawable().mutate();
-                        Drawable bgShape =
-                                previewInfo.shapeDrawable.getConstantState().newDrawable();
-                        bgShape.setTint(accentColor);
-
-                        ImageView bg = card.findViewById(mColorTileIds[i]);
-                        bg.setImageDrawable(bgShape);
-                        ImageView fg = card.findViewById(mColorTileIconIds[i]);
-                        fg.setImageDrawable(icon);
-                    }
-
-                    // Shape preview icons:
-
-                    for (int i = 0; i < 3 && i < previewInfo.shapeAppIcons.size(); i++) {
-                        ImageView iconView = card.findViewById(mShapeIconIds[i]);
-                        iconView.setBackground(
-                                previewInfo.shapeAppIcons.get(i));
-                    }
-
-                    Drawable background = card.findViewById(R.id.theme_preview_card_background)
-                            .getBackground();
-                    if (background != null) {
-                        background.setAlpha(128);
-                    }
-                }
-            });
+                    previewInfo.shapeDrawable, previewInfo.shapeAppIcons, editClickListener,
+                    mColorButtonIds, mColorTileIds, mColorTileIconIds, mShapeIconIds,
+                    new WallpaperPreviewLayoutListener(theme, previewInfo, true)));
             addPage(new ThemePreviewPage(activity, R.string.preview_name_font, R.drawable.ic_font,
                     R.layout.preview_card_font_content,
                     previewInfo.resolveAccentColor(res)) {
