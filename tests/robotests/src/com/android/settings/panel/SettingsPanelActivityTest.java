@@ -51,8 +51,8 @@ public class SettingsPanelActivityTest {
     @Before
     public void setUp() {
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mSettingsPanelActivity = Robolectric.buildActivity(FakeSettingsPanelActivity.class)
-                .create().get();
+        mSettingsPanelActivity = spy(
+                Robolectric.buildActivity(FakeSettingsPanelActivity.class).create().get());
         mPanelFeatureProvider = spy(new PanelFeatureProviderImpl());
         mFakeFeatureFactory.panelFeatureProvider = mPanelFeatureProvider;
         mFakePanelContent = new FakePanelContent();
@@ -76,30 +76,15 @@ public class SettingsPanelActivityTest {
     }
 
     @Test
-    public void startMediaOutputSlice_withoutPackageName_bundleShouldNotHaveValue() {
+    public void startMediaOutputSlice_withoutPackageName_bundleShouldHaveValue() {
         final Intent intent = new Intent()
                 .setAction("com.android.settings.panel.action.MEDIA_OUTPUT");
 
         final SettingsPanelActivity activity =
                 Robolectric.buildActivity(SettingsPanelActivity.class, intent).create().get();
 
-        assertThat(activity.mBundle.containsKey(KEY_MEDIA_PACKAGE_NAME)).isFalse();
-        assertThat(activity.mBundle.containsKey(KEY_PANEL_TYPE_ARGUMENT)).isFalse();
-    }
-
-    @Test
-    public void onTouchEvent_outsideAction_logsPanelClosed() {
-        final MotionEvent event = mock(MotionEvent.class);
-        when(event.getAction()).thenReturn(MotionEvent.ACTION_OUTSIDE);
-
-        mSettingsPanelActivity.onTouchEvent(event);
-
-        verify(mFakeFeatureFactory.metricsFeatureProvider).action(
-                0,
-                SettingsEnums.PAGE_HIDE,
-                SettingsEnums.TESTING,
-                PanelLoggingContract.PanelClosedKeys.KEY_CLICKED_OUT,
-                0
-        );
+        assertThat(activity.mBundle.containsKey(KEY_MEDIA_PACKAGE_NAME)).isTrue();
+        assertThat(activity.mBundle.getString(KEY_PANEL_TYPE_ARGUMENT))
+                .isEqualTo("com.android.settings.panel.action.MEDIA_OUTPUT");
     }
 }

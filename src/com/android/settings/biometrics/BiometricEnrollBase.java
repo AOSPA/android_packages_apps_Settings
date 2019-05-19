@@ -21,6 +21,7 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import android.annotation.Nullable;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.res.Resources.Theme;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -75,7 +76,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     public static final int BIOMETRIC_FIND_SENSOR_REQUEST = 2;
     public static final int LEARN_MORE_REQUEST = 3;
     public static final int CONFIRM_REQUEST = 4;
-    public static final int ENROLLING = 5;
+    public static final int ENROLL_REQUEST = 5;
 
     protected boolean mLaunchedConfirmLock;
     protected byte[] mToken;
@@ -97,6 +98,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
         resid = SetupWizardUtils.getTheme(getIntent());
+        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
         super.onApplyThemeResource(theme, resid, first);
     }
 

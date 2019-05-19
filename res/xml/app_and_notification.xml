@@ -20,7 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="apps_and_notification_screen"
     android:title="@string/app_and_notification_dashboard_title"
-    settings:initialExpandedChildrenCount="8">
+    settings:initialExpandedChildrenCount="4">
     <!-- the initial count should include the dynamic tiles -->
 
     <Preference
@@ -28,7 +28,8 @@
         android:title="@string/applications_settings"
         android:order="-999"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:controller="com.android.settings.applications.AllAppsInfoPreferenceController"/>
+        settings:controller="com.android.settings.applications.AllAppsInfoPreferenceController"
+        settings:keywords="@string/keywords_applications_settings"/>
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="recent_open_apps"
@@ -42,12 +43,21 @@
     <!-- Empty category to draw divider -->
     <PreferenceCategory
         android:key="recent_apps_divider"
+        android:layout="@layout/preference_category_no_label"
         android:order="-997"/>
 
     <!-- Notifications (appears before manage_perms), default apps (appears after) -->
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
         android:order="10"/>
+
+    <Preference
+        android:key="default_apps"
+        android:title="@string/app_default_dashboard_title"
+        android:order="11"
+        settings:controller="com.android.settings.applications.DefaultAppsPreferenceController">
+        <intent android:action="android.settings.MANAGE_DEFAULT_APPS_SETTINGS"/>
+    </Preference>
 
     <Preference
         android:key="manage_perms"

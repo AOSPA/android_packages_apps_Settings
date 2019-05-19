@@ -21,17 +21,17 @@
     android:key="adaptive_sleep_detail"
     android:title="@string/adaptive_sleep_title">
 
-    <!-- TODO(111939367): add correct animation -->
     <com.android.settings.widget.VideoPreference
         android:key="adaptive_sleep_video"
         android:title="@string/summary_placeholder"
-        settings:animation="@raw/aab_brightness"
-        settings:preview="@drawable/aab_brightness"
+        settings:animation="@raw/adaptive_sleep"
+        settings:preview="@drawable/adaptive_sleep"
         settings:controller="com.android.settings.widget.VideoPreferenceController"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="adaptive_sleep"
         android:title="@string/adaptive_sleep_title"
+        android:summary="@string/adaptive_sleep_description"
         settings:keywords="@string/keywords_display_adaptive_sleep"
         settings:controller="com.android.settings.display.AdaptiveSleepPreferenceController"
         settings:useAdminDisabledSummary="true"

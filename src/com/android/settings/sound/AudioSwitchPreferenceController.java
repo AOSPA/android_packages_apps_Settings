@@ -17,7 +17,6 @@
 package com.android.settings.sound;
 
 import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
-import static android.media.MediaRouter.ROUTE_TYPE_REMOTE_DISPLAY;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -29,10 +28,8 @@ import android.media.AudioDeviceCallback;
 import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.media.MediaRouter;
-import android.media.MediaRouter.Callback;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
@@ -40,7 +37,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.FeatureFlags;
@@ -63,15 +59,11 @@ import java.util.concurrent.FutureTask;
 /**
  * Abstract class for audio switcher controller to notify subclass
  * updating the current status of switcher entry. Subclasses must overwrite
- * {@link #setActiveBluetoothDevice(BluetoothDevice)} to set the
- * active device for corresponding profile.
  */
 public abstract class AudioSwitchPreferenceController extends BasePreferenceController
-        implements Preference.OnPreferenceChangeListener, BluetoothCallback,
-        LifecycleObserver, OnStart, OnStop {
+        implements BluetoothCallback, LifecycleObserver, OnStart, OnStop {
 
     private static final String TAG = "AudioSwitchPrefCtrl";
-    private static final int INVALID_INDEX = -1;
 
     protected final List<BluetoothDevice> mConnectedDevices;
     protected final AudioManager mAudioManager;
@@ -82,7 +74,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     protected AudioSwitchCallback mAudioSwitchPreferenceCallback;
 
     private final AudioManagerAudioDeviceCallback mAudioManagerAudioDeviceCallback;
-    private final MediaRouterCallback mMediaRouterCallback;
     private final WiredHeadsetBroadcastReceiver mReceiver;
     private final Handler mHandler;
     private LocalBluetoothManager mLocalBluetoothManager;
@@ -98,7 +89,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         mHandler = new Handler(Looper.getMainLooper());
         mAudioManagerAudioDeviceCallback = new AudioManagerAudioDeviceCallback();
         mReceiver = new WiredHeadsetBroadcastReceiver();
-        mMediaRouterCallback = new MediaRouterCallback();
         mConnectedDevices = new ArrayList<>();
         final FutureTask<LocalBluetoothManager> localBtManagerFutureTask = new FutureTask<>(
                 // Avoid StrictMode ThreadPolicy violation
@@ -129,35 +119,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final String address = (String) newValue;
-        if (!(preference instanceof ListPreference)) {
-            return false;
-        }
-
-        final ListPreference listPreference = (ListPreference) preference;
-        if (TextUtils.equals(address, mContext.getText(R.string.media_output_default_summary))) {
-            // Switch to default device which address is device name
-            mSelectedIndex = getDefaultDeviceIndex();
-            setActiveBluetoothDevice(null);
-            listPreference.setSummary(mContext.getText(R.string.media_output_default_summary));
-        } else {
-            // Switch to BT device which address is hardware address
-            final int connectedDeviceIndex = getConnectedDeviceIndex(address);
-            if (connectedDeviceIndex == INVALID_INDEX) {
-                return false;
-            }
-            final BluetoothDevice btDevice = mConnectedDevices.get(connectedDeviceIndex);
-            mSelectedIndex = connectedDeviceIndex;
-            setActiveBluetoothDevice(btDevice);
-            listPreference.setSummary(btDevice.getAliasName());
-        }
-        return true;
-    }
-
-    public abstract void setActiveBluetoothDevice(BluetoothDevice device);
-
-    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(mPreferenceKey);
@@ -182,6 +143,12 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         }
         mLocalBluetoothManager.setForegroundActivity(null);
         unregister();
+    }
+
+    @Override
+    public void onBluetoothStateChanged(int bluetoothState) {
+        // To handle the case that Bluetooth on and no connected devices
+        updateState(mPreference);
     }
 
     @Override
@@ -236,21 +203,15 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     }
 
     /**
-     * get A2dp connected device
+     * get A2dp devices on all states
+     * (STATE_DISCONNECTED, STATE_CONNECTING, STATE_CONNECTED,  STATE_DISCONNECTING)
      */
     protected List<BluetoothDevice> getConnectedA2dpDevices() {
-        final List<BluetoothDevice> connectedDevices = new ArrayList<>();
         final A2dpProfile a2dpProfile = mProfileManager.getA2dpProfile();
         if (a2dpProfile == null) {
-            return connectedDevices;
+            return new ArrayList<>();
         }
-        final List<BluetoothDevice> devices = a2dpProfile.getConnectedDevices();
-        for (BluetoothDevice device : devices) {
-            if (device.isConnected()) {
-                connectedDevices.add(device);
-            }
-        }
-        return connectedDevices;
+        return a2dpProfile.getConnectedDevices();
     }
 
     /**
@@ -306,56 +267,9 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
      */
     public abstract BluetoothDevice findActiveDevice();
 
-    int getDefaultDeviceIndex() {
-        // Default device is after all connected devices.
-        return mConnectedDevices.size();
-    }
-
-    void setupPreferenceEntries(CharSequence[] mediaOutputs, CharSequence[] mediaValues,
-            BluetoothDevice activeDevice) {
-        // default to current device
-        mSelectedIndex = getDefaultDeviceIndex();
-        // default device is after all connected devices.
-        mediaOutputs[mSelectedIndex] = mContext.getText(R.string.media_output_default_summary);
-        // use default device name as address
-        mediaValues[mSelectedIndex] = mContext.getText(R.string.media_output_default_summary);
-        for (int i = 0, size = mConnectedDevices.size(); i < size; i++) {
-            final BluetoothDevice btDevice = mConnectedDevices.get(i);
-            mediaOutputs[i] = btDevice.getAliasName();
-            mediaValues[i] = btDevice.getAddress();
-            if (btDevice.equals(activeDevice)) {
-                // select the active connected device.
-                mSelectedIndex = i;
-            }
-        }
-    }
-
-    void setPreference(CharSequence[] mediaOutputs, CharSequence[] mediaValues,
-            Preference preference) {
-        final ListPreference listPreference = (ListPreference) preference;
-        listPreference.setEntries(mediaOutputs);
-        listPreference.setEntryValues(mediaValues);
-        listPreference.setValueIndex(mSelectedIndex);
-        listPreference.setSummary(mediaOutputs[mSelectedIndex]);
-        mAudioSwitchPreferenceCallback.onPreferenceDataChanged(listPreference);
-    }
-
-    private int getConnectedDeviceIndex(String hardwareAddress) {
-        if (mConnectedDevices != null) {
-            for (int i = 0, size = mConnectedDevices.size(); i < size; i++) {
-                final BluetoothDevice btDevice = mConnectedDevices.get(i);
-                if (TextUtils.equals(btDevice.getAddress(), hardwareAddress)) {
-                    return i;
-                }
-            }
-        }
-        return INVALID_INDEX;
-    }
-
     private void register() {
         mLocalBluetoothManager.getEventManager().registerCallback(this);
         mAudioManager.registerAudioDeviceCallback(mAudioManagerAudioDeviceCallback, mHandler);
-        mMediaRouter.addCallback(ROUTE_TYPE_REMOTE_DISPLAY, mMediaRouterCallback);
 
         // Register for misc other intent broadcasts.
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
@@ -366,7 +280,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
     private void unregister() {
         mLocalBluetoothManager.getEventManager().unregisterCallback(this);
         mAudioManager.unregisterAudioDeviceCallback(mAudioManagerAudioDeviceCallback);
-        mMediaRouter.removeCallback(mMediaRouterCallback);
         mContext.unregisterReceiver(mReceiver);
     }
 
@@ -392,51 +305,6 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
                     AudioManager.STREAM_DEVICES_CHANGED_ACTION.equals(action)) {
                 updateState(mPreference);
             }
-        }
-    }
-
-    /** Callback for cast device events. */
-    private class MediaRouterCallback extends Callback {
-        @Override
-        public void onRouteSelected(MediaRouter router, int type, MediaRouter.RouteInfo info) {
-        }
-
-        @Override
-        public void onRouteUnselected(MediaRouter router, int type, MediaRouter.RouteInfo info) {
-        }
-
-        @Override
-        public void onRouteAdded(MediaRouter router, MediaRouter.RouteInfo info) {
-            if (info != null && !info.isDefault()) {
-                // cast mode
-                updateState(mPreference);
-            }
-        }
-
-        @Override
-        public void onRouteRemoved(MediaRouter router, MediaRouter.RouteInfo info) {
-        }
-
-        @Override
-        public void onRouteChanged(MediaRouter router, MediaRouter.RouteInfo info) {
-            if (info != null && !info.isDefault()) {
-                // cast mode
-                updateState(mPreference);
-            }
-        }
-
-        @Override
-        public void onRouteGrouped(MediaRouter router, MediaRouter.RouteInfo info,
-                MediaRouter.RouteGroup group, int index) {
-        }
-
-        @Override
-        public void onRouteUngrouped(MediaRouter router, MediaRouter.RouteInfo info,
-                MediaRouter.RouteGroup group) {
-        }
-
-        @Override
-        public void onRouteVolumeChanged(MediaRouter router, MediaRouter.RouteInfo info) {
         }
     }
 }

@@ -174,7 +174,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             return;
         }
 
-        mTelephonyManager.listen(mPhoneStateListener,
+        mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId())
+                .listen(mPhoneStateListener,
                 PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
                         | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
                         | PhoneStateListener.LISTEN_SERVICE_STATE);
@@ -197,8 +198,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             return;
         }
 
-        mTelephonyManager.listen(mPhoneStateListener,
-                PhoneStateListener.LISTEN_NONE);
+        mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId())
+                .listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
 
         if (mShowLatestAreaInfo) {
             mContext.unregisterReceiver(mAreaInfoReceiver);
@@ -381,7 +382,11 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private void updateEid() {
-        mDialog.setText(EID_INFO_VALUE_ID, mEuiccManager.getEid());
+        if (mEuiccManager.isEnabled()) {
+            mDialog.setText(EID_INFO_VALUE_ID, mEuiccManager.getEid());
+        } else {
+            mDialog.removeSettingFromScreen(EID_INFO_VALUE_ID);
+        }
     }
 
     private void updateImsRegistrationState() {
@@ -401,17 +406,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private SubscriptionInfo getPhoneSubscriptionInfo(int slotId) {
-        final List<SubscriptionInfo> subscriptionInfoList = SubscriptionManager.from(
-                mContext).getActiveSubscriptionInfoList(true);
-        if (subscriptionInfoList == null) {
-            return null;
-        }
-        for (SubscriptionInfo info : subscriptionInfoList) {
-            if (slotId == info.getSimSlotIndex()) {
-                return info;
-            }
-        }
-        return null;
+        return SubscriptionManager.from(mContext).getActiveSubscriptionInfoForSimSlotIndex(slotId);
     }
 
     @VisibleForTesting
@@ -432,8 +427,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 
     @VisibleForTesting
     PhoneStateListener getPhoneStateListener() {
-        return new PhoneStateListener(
-                mSubscriptionInfo.getSubscriptionId()) {
+        return new PhoneStateListener() {
             @Override
             public void onDataConnectionStateChanged(int state) {
                 updateDataState(state);

@@ -57,6 +57,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -69,6 +70,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
 import com.android.settings.wifi.details.WifiPrivacyPreferenceController;
+import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.wifi.AccessPoint;
@@ -137,6 +139,8 @@ public class WifiConfigController implements TextWatcher,
     @VisibleForTesting
     int mAccessPointSecurity;
     private TextView mPasswordView;
+    private ImageButton mSsidScanButton;
+    private ImageButton mPasswordScanButton;
 
     private String mUnspecifiedCertString;
     private String mMultipleCertSetString;
@@ -255,6 +259,8 @@ public class WifiConfigController implements TextWatcher,
         mDoNotValidateEapServerString =
             mContext.getString(R.string.wifi_do_not_validate_eap_server);
 
+        mSsidScanButton = (ImageButton) mView.findViewById(R.id.ssid_scanner_button);
+        mPasswordScanButton = (ImageButton) mView.findViewById(R.id.password_scanner_button);
         mDialogContainer = mView.findViewById(R.id.dialog_scrollview);
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
         mIpSettingsSpinner.setOnItemSelectedListener(this);
@@ -264,8 +270,8 @@ public class WifiConfigController implements TextWatcher,
         mMeteredSettingsSpinner = mView.findViewById(R.id.metered_settings);
         mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
         mPrivacySettingsSpinner = mView.findViewById(R.id.privacy_settings);
-        if (FeatureFlagUtils.isEnabled(mContext,
-                com.android.settings.core.FeatureFlags.WIFI_MAC_RANDOMIZATION)) {
+        if (mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_wifi_connected_mac_randomization_supported)) {
             View privacySettingsLayout = mView.findViewById(R.id.privacy_settings_fields);
             privacySettingsLayout.setVisibility(View.VISIBLE);
         }
@@ -281,6 +287,7 @@ public class WifiConfigController implements TextWatcher,
         if (mAccessPoint == null) { // new network
             configureSecuritySpinner();
             mConfigUi.setSubmitButton(res.getString(R.string.wifi_save));
+            mPasswordScanButton.setVisibility(View.GONE);
         } else {
 
             if (!mWifiManager.isWifiCoverageExtendFeatureEnabled()
@@ -290,11 +297,7 @@ public class WifiConfigController implements TextWatcher,
                 mShareThisWifiCheckBox.setVisibility(View.GONE);
             }
 
-            if (!mAccessPoint.isPasspointConfig()) {
-                mConfigUi.setTitle(mAccessPoint.getSsid());
-            } else {
-                mConfigUi.setTitle(mAccessPoint.getConfigName());
-            }
+            mConfigUi.setTitle(mAccessPoint.getTitle());
 
             ViewGroup group = (ViewGroup) mView.findViewById(R.id.info);
 
@@ -437,6 +440,11 @@ public class WifiConfigController implements TextWatcher,
                     mConfigUi.setForgetButton(res.getString(R.string.wifi_forget));
                 }
             }
+
+            if (!WifiDppUtils.isSupportEnrolleeQrCodeScanner(mContext, mAccessPointSecurity)) {
+                mPasswordScanButton.setVisibility(View.GONE);
+            }
+            mSsidScanButton.setVisibility(View.GONE);
         }
 
         if (!isSplitSystemUser()) {
@@ -672,7 +680,7 @@ public class WifiConfigController implements TextWatcher,
                     config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.GCMP_256);
                     config.allowedGroupManagementCiphers.set(WifiConfiguration.GroupMgmtCipher
                             .BIP_GMAC_256);
-                    config.allowedSuiteBCiphers.set(WifiConfiguration.SuiteBCipher.ECDHE_RSA);
+                    // allowedSuiteBCiphers will be set according to certificate type
                 }
                 config.enterpriseConfig = new WifiEnterpriseConfig();
                 int eapMethod = mEapMethodSpinner.getSelectedItemPosition();
@@ -1547,6 +1555,12 @@ public class WifiConfigController implements TextWatcher,
             }
 
             showSecurityFields();
+
+            if (WifiDppUtils.isSupportEnrolleeQrCodeScanner(mContext, mAccessPointSecurity)) {
+                mSsidScanButton.setVisibility(View.VISIBLE);
+            } else {
+                mSsidScanButton.setVisibility(View.GONE);
+            }
         } else if (parent == mEapMethodSpinner || parent == mEapCaCertSpinner) {
             showSecurityFields();
         } else if (parent == mPhase2Spinner
@@ -1624,7 +1638,7 @@ public class WifiConfigController implements TextWatcher,
         // Populate the Wi-Fi security spinner with the various supported key management types
         spinnerAdapter.add(mContext.getString(R.string.wifi_security_none));
         mSecurityInPosition[idx++] = AccessPoint.SECURITY_NONE;
-        if (mWifiManager.isOweSupported()) {
+        if (mWifiManager.isEnhancedOpenSupported()) {
             spinnerAdapter.add(mContext.getString(R.string.wifi_security_owe));
             mSecurityInPosition[idx++] = AccessPoint.SECURITY_OWE;
         }

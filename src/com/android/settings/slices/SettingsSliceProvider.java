@@ -18,9 +18,11 @@ package com.android.settings.slices;
 
 import static android.Manifest.permission.READ_SEARCH_INDEXABLES;
 
+import android.app.PendingIntent;
 import android.app.slice.SliceManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.StrictMode;
@@ -28,12 +30,14 @@ import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.ArrayMap;
-import android.util.ArraySet;
 import android.util.KeyValueListParser;
 import android.util.Log;
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.collection.ArraySet;
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
 
@@ -53,7 +57,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * A {@link SliceProvider} for Settings to enabled inline results in system apps.
@@ -118,16 +121,10 @@ public class SettingsSliceProvider extends SliceProvider {
     private static final KeyValueListParser KEY_VALUE_LIST_PARSER = new KeyValueListParser(',');
 
     @VisibleForTesting
-    CustomSliceManager mCustomSliceManager;
-
-    @VisibleForTesting
     SlicesDatabaseAccessor mSlicesDatabaseAccessor;
 
     @VisibleForTesting
     Map<Uri, SliceData> mSliceWeakDataCache;
-
-    @VisibleForTesting
-    Map<Uri, SliceData> mSliceDataCache;
 
     final Map<Uri, SliceBackgroundWorker> mPinnedWorkers = new ArrayMap<>();
 
@@ -138,17 +135,16 @@ public class SettingsSliceProvider extends SliceProvider {
     @Override
     public boolean onCreateSliceProvider() {
         mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(getContext());
-        mSliceDataCache = new ConcurrentHashMap<>();
         mSliceWeakDataCache = new WeakHashMap<>();
-        mCustomSliceManager = FeatureFactory.getFactory(
-                getContext()).getSlicesFeatureProvider().getCustomSliceManager(getContext());
         return true;
     }
 
     @Override
     public void onSlicePinned(Uri sliceUri) {
-        if (mCustomSliceManager.isValidUri(sliceUri)) {
-            final CustomSliceable sliceable = mCustomSliceManager.getSliceableFromUri(sliceUri);
+        if (CustomSliceRegistry.isValidUri(sliceUri)) {
+            final Context context = getContext();
+            final CustomSliceable sliceable = FeatureFactory.getFactory(context)
+                    .getSlicesFeatureProvider().getSliceableFromUri(context, sliceUri);
             final IntentFilter filter = sliceable.getIntentFilter();
             if (filter != null) {
                 registerIntentToUri(filter, sliceUri);
@@ -173,7 +169,6 @@ public class SettingsSliceProvider extends SliceProvider {
     public void onSliceUnpinned(Uri sliceUri) {
         SliceBroadcastRelay.unregisterReceivers(getContext(), sliceUri);
         ThreadUtils.postOnMainThread(() -> stopBackgroundWorker(sliceUri));
-        mSliceDataCache.remove(sliceUri);
     }
 
     @Override
@@ -194,10 +189,11 @@ public class SettingsSliceProvider extends SliceProvider {
 
             // Before adding a slice to {@link CustomSliceManager}, please get approval
             // from the Settings team.
-            if (mCustomSliceManager.isValidUri(sliceUri)) {
-                final CustomSliceable sliceable = mCustomSliceManager.getSliceableFromUri(
-                        sliceUri);
-                return sliceable.getSlice();
+            if (CustomSliceRegistry.isValidUri(sliceUri)) {
+                final Context context = getContext();
+                return FeatureFactory.getFactory(context)
+                        .getSlicesFeatureProvider().getSliceableFromUri(context, sliceUri)
+                        .getSlice();
             }
 
             if (CustomSliceRegistry.WIFI_CALLING_URI.equals(sliceUri)) {
@@ -228,7 +224,7 @@ public class SettingsSliceProvider extends SliceProvider {
             }
 
             // Remove the SliceData from the cache after it has been used to prevent a memory-leak.
-            if (!mSliceDataCache.containsKey(sliceUri)) {
+            if (!getPinnedSlices().contains(sliceUri)) {
                 mSliceWeakDataCache.remove(sliceUri);
             }
             return SliceBuilderUtils.buildSlice(getContext(), cachedSliceData);
@@ -301,6 +297,16 @@ public class SettingsSliceProvider extends SliceProvider {
         descendants.addAll(getSpecialCaseUris(isPlatformUri));
         grantWhitelistedPackagePermissions(getContext(), descendants);
         return descendants;
+    }
+
+    @Nullable
+    @Override
+    public PendingIntent onCreatePermissionRequest(@NonNull Uri sliceUri,
+            @NonNull String callingPackage) {
+        final Intent settingsIntent = new Intent(Settings.ACTION_SETTINGS);
+        final PendingIntent noOpIntent = PendingIntent.getActivity(getContext(),
+                0 /* requestCode */, settingsIntent, 0 /* flags */);
+        return noOpIntent;
     }
 
     @VisibleForTesting
@@ -398,11 +404,6 @@ public class SettingsSliceProvider extends SliceProvider {
 
         ThreadUtils.postOnMainThread(() -> startBackgroundWorker(controller, uri));
 
-        final List<Uri> pinnedSlices = getContext().getSystemService(
-                SliceManager.class).getPinnedSlices();
-        if (pinnedSlices.contains(uri)) {
-            mSliceDataCache.put(uri, sliceData);
-        }
         mSliceWeakDataCache.put(uri, sliceData);
         getContext().getContentResolver().notifyChange(uri, null /* content observer */);
 

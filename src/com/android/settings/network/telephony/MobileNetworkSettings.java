@@ -36,6 +36,7 @@ import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
 import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
@@ -130,10 +131,14 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         super.onAttach(context);
 
         if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
-          use(CallsDefaultSubscriptionController.class).init(getLifecycle());
-          use(SmsDefaultSubscriptionController.class).init(getLifecycle());
-          use(MobileNetworkSwitchController.class).init(getLifecycle(), mSubId);
-          use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
+            use(CallsDefaultSubscriptionController.class).init(getLifecycle());
+            use(SmsDefaultSubscriptionController.class).init(getLifecycle());
+            use(MobileNetworkSwitchController.class).init(getLifecycle(), mSubId);
+            use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
+            use(BillingCyclePreferenceController.class).init(mSubId);
+            use(MmsMessagePreferenceController.class).init(mSubId);
+            use(DisabledSubscriptionController.class).init(getLifecycle(), mSubId);
+            use(DeleteSimProfilePreferenceController.class).init(mSubId, this);
         }
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
         use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
@@ -143,7 +148,9 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
         use(EnabledNetworkModePreferenceController.class).init(mSubId);
         use(DataServiceSetupPreferenceController.class).init(mSubId);
-        use(EuiccPreferenceController.class).init(mSubId);
+        if (!FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
+            use(EuiccPreferenceController.class).init(mSubId);
+        }
         use(WifiCallingPreferenceController.class).init(mSubId);
 
         final OpenNetworkSelectPagePreferenceController openNetworkSelectPagePreferenceController =

@@ -19,20 +19,26 @@ package com.android.settings.biometrics.face;
 import static android.provider.Settings.Secure.FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION;
 
 import android.content.Context;
+import android.hardware.face.FaceManager;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
+
+import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Preference controller giving the user an option to always require confirmation.
  */
-public class FaceSettingsConfirmPreferenceController extends TogglePreferenceController {
+public class FaceSettingsConfirmPreferenceController extends FaceSettingsPreferenceController {
 
-    private static final String KEY = "security_settings_face_require_confirmation";
+    static final String KEY = "security_settings_face_require_confirmation";
 
     private static final int ON = 1;
     private static final int OFF = 0;
     private static final int DEFAULT = OFF;
+
+    private FaceManager mFaceManager;
 
     public FaceSettingsConfirmPreferenceController(Context context) {
         this(context, KEY);
@@ -41,18 +47,31 @@ public class FaceSettingsConfirmPreferenceController extends TogglePreferenceCon
     public FaceSettingsConfirmPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
+        mFaceManager = Utils.getFaceManagerOrNull(context);
     }
 
     @Override
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION, DEFAULT) == ON;
+        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION, DEFAULT, getUserId()) == ON;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.Secure.putInt(mContext.getContentResolver(),
-                FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION, isChecked ? ON : OFF);
+        return Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION, isChecked ? ON : OFF, getUserId());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (!FaceSettings.isAvailable(mContext)) {
+            preference.setEnabled(false);
+        } else if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
+            preference.setEnabled(false);
+        } else {
+            preference.setEnabled(true);
+        }
     }
 
     @Override

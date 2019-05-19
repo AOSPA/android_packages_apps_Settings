@@ -33,7 +33,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.widget.MasterCheckBoxPreference;
+import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -51,7 +51,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     private static String KEY_ADVANCED_CATEGORY = "app_advanced";
     private static String KEY_BADGE = "badge";
     private static String KEY_APP_LINK = "app_link";
-    private static String KEY_BUBBLE = "bubble";
+    private static String KEY_BUBBLE = "bubble_link_pref";
     private static String[] LEGACY_NON_ADVANCED_KEYS = {KEY_BADGE, KEY_APP_LINK, KEY_BUBBLE};
 
     private List<NotificationChannelGroup> mChannelGroupList;
@@ -138,6 +138,10 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 context, mImportanceListener, mBackend));
         mControllers.add(new ImportancePreferenceController(
                 context, mImportanceListener, mBackend));
+        mControllers.add(new MinImportancePreferenceController(
+                context, mImportanceListener, mBackend));
+        mControllers.add(new HighImportancePreferenceController(
+                context, mImportanceListener, mBackend));
         mControllers.add(new SoundPreferenceController(context, this,
                 mImportanceListener, mBackend));
         mControllers.add(new LightsPreferenceController(context, mBackend));
@@ -149,7 +153,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         mControllers.add(new DescriptionPreferenceController(context));
         mControllers.add(new NotificationsOffPreferenceController(context));
         mControllers.add(new DeletedChannelsPreferenceController(context, mBackend));
-        mControllers.add(new BubblePreferenceController(context, mBackend));
+        mControllers.add(new BubbleSummaryPreferenceController(context, mBackend));
         return new ArrayList<>(mControllers);
     }
 
@@ -252,7 +256,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 int childCount = groupGroup.getPreferenceCount();
                 for (int i = 0; i < childCount; i++) {
                     Preference pref = groupGroup.getPreference(i);
-                    if (pref instanceof ChannelSummaryPreference) {
+                    if (pref instanceof MasterSwitchPreference) {
                         toRemove.add(pref);
                     }
                 }

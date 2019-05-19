@@ -45,10 +45,10 @@ import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
@@ -443,7 +443,7 @@ public class ChooseLockPassword extends SettingsActivity {
             mSkipOrClearButton = mixin.getSecondaryButton();
             mNextButton = mixin.getPrimaryButton();
 
-            mMessage = view.findViewById(R.id.message);
+            mMessage = view.findViewById(R.id.sud_layout_description);
             if (mForFingerprint) {
                 mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
             } else if (mForFace) {
@@ -515,7 +515,7 @@ public class ChooseLockPassword extends SettingsActivity {
             }
         }
 
-        private int getStageType() {
+        protected int getStageType() {
             return mForFingerprint ? Stage.TYPE_FINGERPRINT :
                     mForFace ? Stage.TYPE_FACE :
                             Stage.TYPE_NONE;
@@ -1100,12 +1100,11 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         @Override
-        protected Intent saveAndVerifyInBackground() {
+        protected Pair<Boolean, Intent> saveAndVerifyInBackground() {
+            final boolean success = mUtils.saveLockPassword(
+                    mChosenPassword, mCurrentPassword, mRequestedQuality, mUserId);
             Intent result = null;
-            mUtils.saveLockPassword(mChosenPassword, mCurrentPassword, mRequestedQuality,
-                    mUserId);
-
-            if (mHasChallenge) {
+            if (success && mHasChallenge) {
                 byte[] token;
                 try {
                     token = mUtils.verifyPassword(mChosenPassword, mChallenge, mUserId);
@@ -1120,8 +1119,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 result = new Intent();
                 result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
             }
-
-            return result;
+            return Pair.create(success, result);
         }
     }
 }

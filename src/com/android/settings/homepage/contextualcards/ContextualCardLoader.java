@@ -17,23 +17,25 @@
 package com.android.settings.homepage.contextualcards;
 
 import static com.android.settings.slices.CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI;
+import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI;
-import static com.android.settings.slices.CustomSliceRegistry.NOTIFICATION_CHANNEL_SLICE_URI;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.format.DateUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.util.ArrayList;
@@ -48,9 +50,8 @@ import java.util.concurrent.TimeoutException;
 public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>> {
 
     @VisibleForTesting
-    static final int DEFAULT_CARD_COUNT = 4;
+    static final int DEFAULT_CARD_COUNT = 2;
     static final int CARD_CONTENT_LOADER_ID = 1;
-    static final long CARD_CONTENT_LOADER_TIMEOUT_MS = DateUtils.SECOND_IN_MILLIS;
 
     private static final String TAG = "ContextualCardLoader";
     private static final long ELIGIBILITY_CHECKER_TIMEOUT_MS = 250;
@@ -69,7 +70,8 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     @VisibleForTesting
     Uri mNotifyUri;
-    private Context mContext;
+
+    private final Context mContext;
 
     ContextualCardLoader(Context context) {
         super(context);
@@ -139,36 +141,19 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
             }
         }
 
-        try {
-            // The maximum cards are four small cards OR
-            // one large card with two small cards OR
-            // two large cards
-            if (visibleCards.size() <= 2 || getNumberOfLargeCard(visibleCards) == 0) {
-                // four small cards
-                return visibleCards;
-            }
+        if (!CardContentProvider.DELETE_CARD_URI.equals(mNotifyUri)) {
+            final MetricsFeatureProvider metricsFeatureProvider =
+                    FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
 
-            if (visibleCards.size() == DEFAULT_CARD_COUNT) {
-                hiddenCards.add(visibleCards.remove(visibleCards.size() - 1));
-            }
+            metricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_SHOW,
+                    ContextualCardLogUtils.buildCardListLog(visibleCards));
 
-            if (getNumberOfLargeCard(visibleCards) == 1) {
-                // One large card with two small cards
-                return visibleCards;
-            }
-
-            hiddenCards.add(visibleCards.remove(visibleCards.size() - 1));
-
-            // Two large cards
-            return visibleCards;
-        } finally {
-            if (!CardContentProvider.DELETE_CARD_URI.equals(mNotifyUri)) {
-                final ContextualCardFeatureProvider contextualCardFeatureProvider =
-                        FeatureFactory.getFactory(mContext)
-                                .getContextualCardFeatureProvider(mContext);
-                contextualCardFeatureProvider.logContextualCardDisplay(visibleCards, hiddenCards);
-            }
+            metricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_NOT_SHOW,
+                    ContextualCardLogUtils.buildCardListLog(hiddenCards));
         }
+        return visibleCards;
     }
 
     @VisibleForTesting
@@ -188,7 +173,6 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
         // Collect future and eligible cards
         for (Future<ContextualCard> cardFuture : eligibleCards) {
             try {
-                //TODO(b/124492762): Log latency and timeout occurrence.
                 final ContextualCard card = cardFuture.get(ELIGIBILITY_CHECKER_TIMEOUT_MS,
                         TimeUnit.MILLISECONDS);
                 if (card != null) {
@@ -201,16 +185,10 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
         return cards;
     }
 
-    private int getNumberOfLargeCard(List<ContextualCard> cards) {
-        return (int) cards.stream()
-                .filter(card -> isLargeCard(card))
-                .count();
-    }
-
     private boolean isLargeCard(ContextualCard card) {
         return card.getSliceUri().equals(CONTEXTUAL_WIFI_SLICE_URI)
                 || card.getSliceUri().equals(BLUETOOTH_DEVICES_SLICE_URI)
-                || card.getSliceUri().equals(NOTIFICATION_CHANNEL_SLICE_URI);
+                || card.getSliceUri().equals(CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI);
     }
 
     public interface CardContentLoaderListener {

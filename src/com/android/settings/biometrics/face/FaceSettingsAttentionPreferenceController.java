@@ -18,6 +18,9 @@ package com.android.settings.biometrics.face;
 
 import android.content.Context;
 import android.hardware.face.FaceManager;
+import android.hardware.face.FaceManager.GetFeatureCallback;
+import android.hardware.face.FaceManager.SetFeatureCallback;
+import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -29,13 +32,43 @@ import com.android.settings.core.TogglePreferenceController;
  * Preference controller that manages the ability to use face authentication with/without
  * user attention. See {@link FaceManager#setRequireAttention(boolean, byte[])}.
  */
-public class FaceSettingsAttentionPreferenceController extends TogglePreferenceController {
+public class FaceSettingsAttentionPreferenceController extends FaceSettingsPreferenceController {
 
     public static final String KEY = "security_settings_face_require_attention";
 
     private byte[] mToken;
     private FaceManager mFaceManager;
     private SwitchPreference mPreference;
+
+    private final SetFeatureCallback mSetFeatureCallback = new SetFeatureCallback() {
+        @Override
+        public void onCompleted(boolean success, int feature) {
+            if (feature == FaceManager.FEATURE_REQUIRE_ATTENTION) {
+                mPreference.setEnabled(true);
+                if (!success) {
+                    mPreference.setChecked(!mPreference.isChecked());
+                } else {
+                    Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                            Settings.Secure.FACE_UNLOCK_ATTENTION_REQUIRED,
+                            mPreference.isChecked() ? 1 : 0, getUserId());
+                }
+            }
+        }
+    };
+
+    private final GetFeatureCallback mGetFeatureCallback = new GetFeatureCallback() {
+        @Override
+        public void onCompleted(boolean success, int feature, boolean value) {
+            if (feature == FaceManager.FEATURE_REQUIRE_ATTENTION && success) {
+                if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
+                    mPreference.setEnabled(false);
+                } else {
+                    mPreference.setEnabled(true);
+                    mPreference.setChecked(value);
+                }
+            }
+        }
+    };
 
     public FaceSettingsAttentionPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -64,12 +97,22 @@ public class FaceSettingsAttentionPreferenceController extends TogglePreferenceC
         if (!FaceSettings.isAvailable(mContext)) {
             return true;
         }
-        return mFaceManager.getFeature(FaceManager.FEATURE_REQUIRE_ATTENTION);
+        // Set to disabled until we know the true value.
+        mPreference.setEnabled(false);
+        mFaceManager.getFeature(FaceManager.FEATURE_REQUIRE_ATTENTION, mGetFeatureCallback);
+
+        // Ideally returns a cached value.
+        return true;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mFaceManager.setFeature(FaceManager.FEATURE_REQUIRE_ATTENTION, isChecked, mToken);
+        // Optimistically update state and set to disabled until we know it succeeded.
+        mPreference.setEnabled(false);
+        mPreference.setChecked(isChecked);
+
+        mFaceManager.setFeature(FaceManager.FEATURE_REQUIRE_ATTENTION, isChecked, mToken,
+                mSetFeatureCallback);
         return true;
     }
 

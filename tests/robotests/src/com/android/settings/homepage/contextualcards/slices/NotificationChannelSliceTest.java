@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.slice.Slice.HINT_LIST_ITEM;
 import static android.app.slice.SliceItem.FORMAT_SLICE;
@@ -25,11 +26,11 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
+import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -116,7 +117,8 @@ public class NotificationChannelSliceTest {
     public void getSlice_hasSuggestedApp_shouldHaveNotificationChannelTitle() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
-        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */);
+        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */,
+                false /* isChannelBlocked */);
 
         final Slice slice = mNotificationChannelSlice.getSlice();
 
@@ -130,7 +132,8 @@ public class NotificationChannelSliceTest {
     public void getSlice_hasSuggestedApp_shouldSortByNotificationSentCount() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
-        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */);
+        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */,
+                false /* isChannelBlocked */);
 
         final Slice slice = mNotificationChannelSlice.getSlice();
 
@@ -149,7 +152,8 @@ public class NotificationChannelSliceTest {
         for (int i = 0; i < rowItems.size(); i++) {
             // Assert the summary text is the same as expectation.
             assertThat(getSummaryFromSliceItem(rowItems.get(i))).isEqualTo(
-                    mContext.getString(R.string.notifications_sent_weekly, CHANNEL_COUNT - i));
+                    mContext.getResources().getQuantityString(R.plurals.notifications_sent_weekly,
+                            CHANNEL_COUNT - i, CHANNEL_COUNT - i));
         }
     }
 
@@ -157,7 +161,8 @@ public class NotificationChannelSliceTest {
     public void getSlice_noRecentlyInstalledApp_shouldHaveNoSuggestedAppTitle() {
         addMockPackageToPackageManager(false /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
-        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */);
+        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */,
+                false /* isChannelBlocked */);
 
         final Slice slice = mNotificationChannelSlice.getSlice();
 
@@ -169,7 +174,8 @@ public class NotificationChannelSliceTest {
     public void getSlice_noMultiChannelApp_shouldHaveNoSuggestedAppTitle() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
-        mockNotificationBackend(1 /* channelCount */, NOTIFICATION_COUNT, false /* banned */);
+        mockNotificationBackend(1 /* channelCount */, NOTIFICATION_COUNT, false /* banned */,
+                false /* isChannelBlocked */);
 
         final Slice slice = mNotificationChannelSlice.getSlice();
 
@@ -178,10 +184,12 @@ public class NotificationChannelSliceTest {
     }
 
     @Test
+    @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
     public void getSlice_insufficientNotificationSentCount_shouldHaveNoSuggestedAppTitle() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
-        mockNotificationBackend(CHANNEL_COUNT, 1 /* notificationCount */, false /* banned */);
+        mockNotificationBackend(CHANNEL_COUNT, 1 /* notificationCount */, false /* banned */,
+                false /* isChannelBlocked */);
 
         final Slice slice = mNotificationChannelSlice.getSlice();
 
@@ -192,7 +200,8 @@ public class NotificationChannelSliceTest {
     @Test
     public void getSlice_isSystemApp_shouldHaveNoSuggestedAppTitle() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */, ApplicationInfo.FLAG_SYSTEM);
-        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */);
+        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */,
+                false /* isChannelBlocked */);
 
         final Slice slice = mNotificationChannelSlice.getSlice();
 
@@ -204,7 +213,8 @@ public class NotificationChannelSliceTest {
     public void getSlice_isNotificationBanned_shouldHaveNoSuggestedAppTitle() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
-        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, true /* banned */);
+        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, true /* banned */,
+                false /* isChannelBlocked */);
 
         final Slice slice = mNotificationChannelSlice.getSlice();
 
@@ -218,7 +228,7 @@ public class NotificationChannelSliceTest {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
         mockNotificationBackend(NotificationChannelSlice.DEFAULT_EXPANDED_ROW_COUNT * 2,
-                NOTIFICATION_COUNT, false /* banned */);
+                NOTIFICATION_COUNT, false /* banned */, false /* isChannelBlocked */);
 
         final Slice slice = mNotificationChannelSlice.getSlice();
 
@@ -234,7 +244,8 @@ public class NotificationChannelSliceTest {
     public void getSlice_channelCountIsLessThanDefaultRows_subTitleShouldNotHaveTapToManagerAll() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
-        mockNotificationBackend(CHANNEL_COUNT - 1, NOTIFICATION_COUNT, false /* banned */);
+        mockNotificationBackend(CHANNEL_COUNT - 1, NOTIFICATION_COUNT, false /* banned */,
+                false /* isChannelBlocked */);
 
         final Slice slice = mNotificationChannelSlice.getSlice();
 
@@ -249,7 +260,8 @@ public class NotificationChannelSliceTest {
     public void getSlice_channelCountIsEqualToDefaultRows_subTitleShouldNotHaveTapToManagerAll() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
-        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */);
+        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */,
+                false /* isChannelBlocked */);
 
         final Slice slice = mNotificationChannelSlice.getSlice();
 
@@ -263,7 +275,8 @@ public class NotificationChannelSliceTest {
     public void getSlice_channelCountIsMoreThanDefaultRows_subTitleShouldHaveTapToManagerAll() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
-        mockNotificationBackend(CHANNEL_COUNT + 1, NOTIFICATION_COUNT, false /* banned */);
+        mockNotificationBackend(CHANNEL_COUNT + 1, NOTIFICATION_COUNT, false /* banned */,
+                false /* isChannelBlocked */);
 
         final Slice slice = mNotificationChannelSlice.getSlice();
 
@@ -273,11 +286,41 @@ public class NotificationChannelSliceTest {
                         CHANNEL_COUNT + 1));
     }
 
+    @Test
+    @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
+    public void getSlice_isAllDisplayableChannelBlocked_shouldHaveNoSuggestedAppTitle() {
+        addMockPackageToPackageManager(true /* isRecentlyInstalled */,
+                ApplicationInfo.FLAG_INSTALLED);
+        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */,
+                true /* isChannelBlocked */);
+
+        final Slice slice = mNotificationChannelSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.no_suggested_app));
+    }
+
+    @Test
+    @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
+    public void getSlice_isInteractedPackage_shouldHaveNoSuggestedAppTitle() {
+        addMockPackageToPackageManager(true /* isRecentlyInstalled */,
+                ApplicationInfo.FLAG_INSTALLED);
+        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */,
+                false /* isChannelBlocked */);
+        doReturn(true).when(mNotificationChannelSlice).isUserInteracted(any(String.class));
+
+        final Slice slice = mNotificationChannelSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.no_suggested_app));
+    }
+
     private void addMockPackageToPackageManager(boolean isRecentlyInstalled, int flags) {
         final ApplicationInfo applicationInfo = new ApplicationInfo();
         applicationInfo.name = APP_LABEL;
         applicationInfo.uid = UID;
         applicationInfo.flags = flags;
+        applicationInfo.packageName = PACKAGE_NAME;
 
         final PackageInfo packageInfo = new PackageInfo();
         packageInfo.packageName = PACKAGE_NAME;
@@ -294,20 +337,24 @@ public class NotificationChannelSliceTest {
         return System.currentTimeMillis();
     }
 
-    private void mockNotificationBackend(int channelCount, int notificationCount, boolean banned) {
-        final List<NotificationChannel> channels = buildNotificationChannel(channelCount);
+    private void mockNotificationBackend(int channelCount, int notificationCount, boolean banned,
+            boolean isChannelBlocked) {
+        final List<NotificationChannel> channels = buildNotificationChannel(channelCount,
+                isChannelBlocked);
         final AppRow appRow = buildAppRow(channelCount, notificationCount, banned);
 
         doReturn(buildNotificationChannelGroups(channels)).when(mNotificationBackend).getGroups(
                 any(String.class), any(int.class));
         doReturn(appRow).when(mNotificationBackend).loadAppRow(any(Context.class),
-                any(PackageManager.class), any(PackageInfo.class));
+                any(PackageManager.class), any(RoleManager.class), any(PackageInfo.class));
         doReturn(channelCount).when(mNotificationBackend).getChannelCount(
                 any(String.class), any(int.class));
     }
 
     private AppRow buildAppRow(int channelCount, int sentCount, boolean banned) {
         final AppRow appRow = new AppRow();
+        appRow.pkg = PACKAGE_NAME;
+        appRow.uid = UID;
         appRow.banned = banned;
         appRow.channelCount = channelCount;
         appRow.sentByApp = new NotificationsSentState();
@@ -317,11 +364,12 @@ public class NotificationChannelSliceTest {
         return appRow;
     }
 
-    private List<NotificationChannel> buildNotificationChannel(int channelCount) {
+    private List<NotificationChannel> buildNotificationChannel(int channelCount,
+            boolean isChannelBlock) {
         final List<NotificationChannel> channels = new ArrayList<>();
         for (int i = 0; i < channelCount; i++) {
             channels.add(new NotificationChannel(CHANNEL_NAME_PREFIX + i, CHANNEL_NAME_PREFIX + i,
-                    IMPORTANCE_NONE));
+                    isChannelBlock ? IMPORTANCE_NONE : IMPORTANCE_LOW));
         }
 
         return channels;

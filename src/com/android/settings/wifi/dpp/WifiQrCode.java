@@ -64,10 +64,10 @@ public class WifiQrCode {
     public static final String DELIMITER_QR_CODE = ";";
 
     // Ignores password if security is SECURITY_NO_PASSWORD or absent
-    public static final String SECURITY_NO_PASSWORD = "nopass";
+    public static final String SECURITY_NO_PASSWORD = "nopass"; //open network or OWE
     public static final String SECURITY_WEP = "WEP";
     public static final String SECURITY_WPA_PSK = "WPA";
-    public static final String SECURITY_SAE = "WPA3";
+    public static final String SECURITY_SAE = "SAE";
 
     private String mQrCode;
 
@@ -133,7 +133,7 @@ public class WifiQrCode {
         password = removeBackSlash(password);
 
         mWifiNetworkConfig = WifiNetworkConfig.getValidConfigOrNull(security, ssid, password,
-                hiddenSsid, WifiConfiguration.INVALID_NETWORK_ID);
+                hiddenSsid, WifiConfiguration.INVALID_NETWORK_ID, /* isHotspot */ false);
 
         if (mWifiNetworkConfig == null) {
             throw new IllegalArgumentException("Invalid format");

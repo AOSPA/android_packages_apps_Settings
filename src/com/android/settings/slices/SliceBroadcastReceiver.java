@@ -61,11 +61,10 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         final boolean isPlatformSlice = intent.getBooleanExtra(EXTRA_SLICE_PLATFORM_DEFINED,
                 false /* default */);
 
-        final CustomSliceManager mCustomSliceManager = FeatureFactory.getFactory(
-                context).getSlicesFeatureProvider().getCustomSliceManager(context);
-        if (mCustomSliceManager.isValidAction(action)) {
+        if (CustomSliceRegistry.isValidAction(action)) {
             final CustomSliceable sliceable =
-                    mCustomSliceManager.getSliceableFromIntentAction(action);
+                    CustomSliceable.createInstance(context,
+                            CustomSliceRegistry.getSliceClassByUri(Uri.parse(action)));
             sliceable.onNotifyChange(intent);
             return;
         }
@@ -165,11 +164,12 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
         }
 
         final SliderPreferenceController sliderController = (SliderPreferenceController) controller;
-        final int maxSteps = sliderController.getMaxSteps();
-        if (newPosition < 0 || newPosition > maxSteps) {
+        final int minValue = sliderController.getMin();
+        final int maxValue = sliderController.getMax();
+        if (newPosition < minValue || newPosition > maxValue) {
             throw new IllegalArgumentException(
-                    "Invalid position passed to Slider controller. Expected between 0 and "
-                            + maxSteps + " but found " + newPosition);
+                    "Invalid position passed to Slider controller. Expected between " + minValue
+                            + " and " + maxValue + " but found " + newPosition);
         }
 
         sliderController.setSliderPosition(newPosition);

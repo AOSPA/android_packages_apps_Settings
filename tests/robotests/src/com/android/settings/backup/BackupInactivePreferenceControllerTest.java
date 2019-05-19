@@ -20,8 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
-import androidx.preference.Preference;
-
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.After;
@@ -33,12 +31,13 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import static com.android.settings.backup.UserBackupSettingsActivityTest.ShadowBackupSettingsHelper;
+
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowPrivacySettingsUtils.class})
+@Config(shadows = {ShadowPrivacySettingsUtils.class, ShadowBackupSettingsHelper.class})
 public class BackupInactivePreferenceControllerTest {
     private Context mContext;
     private BackupInactivePreferenceController mController;
-    private Preference mPreference;
 
     @Before
     public void setUp() {
@@ -51,27 +50,32 @@ public class BackupInactivePreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowPrivacySettingsUtils.reset();
+        ShadowBackupSettingsHelper.reset();
     }
 
     @Test
-    public void getAvailabilityStatus_isAdmiUser_isnotInvisibleKey_shouldBeAvailable() {
-        ShadowPrivacySettingsUtils.setIsAdminUser(true);
+    public void getAvailabilityStatus_isnotInvisibleKey_backupActive_shouldBeAvailable() {
         ShadowPrivacySettingsUtils.setIsInvisibleKey(false);
+        ShadowBackupSettingsHelper.isBackupServiceActive = true;
+
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_isnotAdmiUser_shouldBeDisabledForUser() {
-        ShadowPrivacySettingsUtils.setIsAdminUser(false);
+    public void getAvailabilityStatus_isnotInvisibleKey_backupNotActive_shouldBeUnsearchable() {
+        ShadowPrivacySettingsUtils.setIsInvisibleKey(false);
+        ShadowBackupSettingsHelper.isBackupServiceActive = false;
+
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
+                .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_isAdmiUser_isInvisibleKey_shouldBeDisabledUnsupported() {
-        ShadowPrivacySettingsUtils.setIsAdminUser(true);
+    public void getAvailabilityStatus_isInvisibleKey_shouldBeDisabledUnsupported() {
         ShadowPrivacySettingsUtils.setIsInvisibleKey(true);
+        ShadowBackupSettingsHelper.isBackupServiceActive = true;
+
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }

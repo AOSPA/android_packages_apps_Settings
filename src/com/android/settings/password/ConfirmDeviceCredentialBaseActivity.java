@@ -19,8 +19,10 @@ package com.android.settings.password;
 import android.app.KeyguardManager;
 import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.IBiometricConfirmDeviceCredentialCallback;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -35,6 +37,7 @@ import com.android.settings.Utils;
 public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
 
     private static final String STATE_IS_KEYGUARD_LOCKED = "STATE_IS_KEYGUARD_LOCKED";
+    private static final String TAG = "ConfirmDeviceCredentialBaseActivity";
 
     enum ConfirmCredentialTheme {
         NORMAL,
@@ -49,6 +52,15 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     private ConfirmCredentialTheme mConfirmCredentialTheme;
     private BiometricManager mBiometricManager;
 
+    // TODO(b/123378871): Remove when moved.
+    private final IBiometricConfirmDeviceCredentialCallback mCancelCallback
+            = new IBiometricConfirmDeviceCredentialCallback.Stub() {
+        @Override
+        public void cancel() {
+            finish();
+        }
+    };
+
     private boolean isInternalActivity() {
         return (this instanceof ConfirmLockPassword.InternalActivity)
                 || (this instanceof ConfirmLockPattern.InternalActivity);
@@ -56,8 +68,15 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
 
     @Override
     protected void onCreate(Bundle savedState) {
-        int credentialOwnerUserId = Utils.getCredentialOwnerUserId(this,
-                Utils.getUserIdFromBundle(this, getIntent().getExtras(), isInternalActivity()));
+        final int credentialOwnerUserId;
+        try {
+            credentialOwnerUserId = Utils.getCredentialOwnerUserId(this,
+                    Utils.getUserIdFromBundle(this, getIntent().getExtras(), isInternalActivity()));
+        } catch (SecurityException e) {
+            Log.e(TAG, "Invalid user Id supplied", e);
+            finish();
+            return;
+        }
         if (UserManager.get(this).isManagedProfile(credentialOwnerUserId)) {
             setTheme(R.style.Theme_ConfirmDeviceCredentialsWork);
             mConfirmCredentialTheme = ConfirmCredentialTheme.WORK;
@@ -72,6 +91,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
         super.onCreate(savedState);
 
         mBiometricManager = getSystemService(BiometricManager.class);
+        mBiometricManager.registerCancellationCallback(mCancelCallback);
 
         if (mConfirmCredentialTheme == ConfirmCredentialTheme.NORMAL) {
             // Prevent the content parent from consuming the window insets because GlifLayout uses

@@ -19,14 +19,12 @@ package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
 import android.app.slice.Slice;
@@ -82,9 +80,6 @@ public class SliceBroadcastReceiverTest {
         mSearchFeatureProvider = new SearchFeatureProviderImpl();
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.searchFeatureProvider = mSearchFeatureProvider;
-        CustomSliceManager manager = new CustomSliceManager(mContext);
-        when(mFakeFeatureFactory.slicesFeatureProvider.getCustomSliceManager(any()))
-                .thenReturn(manager);
     }
 
     @After
@@ -196,8 +191,8 @@ public class SliceBroadcastReceiverTest {
                 .build();
         final ContentResolver resolver = mock(ContentResolver.class);
         doReturn(resolver).when(mContext).getContentResolver();
-        final int position = FakeSliderController.MAX_STEPS - 1;
-        final int oldPosition = FakeSliderController.MAX_STEPS;
+        final int position = FakeSliderController.MAX_VALUE - 1;
+        final int oldPosition = FakeSliderController.MAX_VALUE;
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
         insertSpecialCase(FakeSliderController.class, key);
 
@@ -315,8 +310,8 @@ public class SliceBroadcastReceiverTest {
 
         // Insert Fake Slider into Database
         final String key = "key";
-        final int position = FakeSliderController.MAX_STEPS - 1;
-        final int oldPosition = FakeSliderController.MAX_STEPS;
+        final int position = FakeSliderController.MAX_VALUE - 1;
+        final int oldPosition = FakeSliderController.MAX_VALUE;
         mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
         insertSpecialCase(FakeSliderController.class, key);
 

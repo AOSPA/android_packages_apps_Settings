@@ -18,7 +18,9 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -71,6 +73,8 @@ public class MobileNetworkSwitchControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mSubscriptionManager.setSubscriptionEnabled(eq(mSubId), anyBoolean()))
+                .thenReturn(true);
 
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
@@ -96,10 +100,19 @@ public class MobileNetworkSwitchControllerTest {
     }
 
     @Test
-    public void displayPreference_onlyOneSubscription_switchBarHidden() {
+    public void displayPreference_oneEnabledSubscription_switchBarHidden() {
+        doReturn(true).when(mSubscriptionManager).isSubscriptionEnabled(mSubId);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSubscription));
         mController.displayPreference(mScreen);
         assertThat(mSwitchBar.isShowing()).isFalse();
+    }
+
+    @Test
+    public void displayPreference_oneDisabledSubscription_switchBarNotHidden() {
+        doReturn(false).when(mSubscriptionManager).isSubscriptionEnabled(mSubId);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSubscription));
+        mController.displayPreference(mScreen);
+        assertThat(mSwitchBar.isShowing()).isTrue();
     }
 
     @Test
@@ -126,6 +139,19 @@ public class MobileNetworkSwitchControllerTest {
         assertThat(mSwitchBar.isChecked()).isTrue();
         mSwitchBar.setChecked(false);
         verify(mSubscriptionManager).setSubscriptionEnabled(eq(mSubId), eq(false));
+    }
+
+    @Test
+    public void switchChangeListener_fromEnabledToDisabled_setSubscriptionEnabledFailed() {
+        when(mSubscriptionManager.setSubscriptionEnabled(eq(mSubId), anyBoolean()))
+                .thenReturn(false);
+        when(mSubscriptionManager.isSubscriptionEnabled(mSubId)).thenReturn(true);
+        mController.displayPreference(mScreen);
+        assertThat(mSwitchBar.isShowing()).isTrue();
+        assertThat(mSwitchBar.isChecked()).isTrue();
+        mSwitchBar.setChecked(false);
+        verify(mSubscriptionManager).setSubscriptionEnabled(eq(mSubId), eq(false));
+        assertThat(mSwitchBar.isChecked()).isTrue();
     }
 
     @Test

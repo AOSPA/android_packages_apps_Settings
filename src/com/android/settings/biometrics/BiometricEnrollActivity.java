@@ -16,16 +16,21 @@
 
 package com.android.settings.biometrics;
 
-import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
-
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.face.FaceEnrollIntroduction;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
+import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction;
 import com.android.settings.core.InstrumentedActivity;
+import com.android.settings.password.ChooseLockSettingsHelper;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 /**
  * Trampoline activity launched by the {@code android.settings.BIOMETRIC_ENROLL} action which
@@ -35,23 +40,71 @@ import com.android.settings.core.InstrumentedActivity;
  */
 public class BiometricEnrollActivity extends InstrumentedActivity {
 
+    private static final String TAG = "BiometricEnrollActivity";
+
+    public static final String EXTRA_SKIP_INTRO = "skip_intro";
+
+    public static final class InternalActivity extends BiometricEnrollActivity {}
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final PackageManager pm = getApplicationContext().getPackageManager();
-        final Intent intent = new Intent();
+        Intent intent = null;
 
         // This logic may have to be modified on devices with multiple biometrics.
         if (pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
-            intent.setClassName(SETTINGS_PACKAGE_NAME,
-                    FingerprintEnrollIntroduction.class.getName());
+            // ChooseLockGeneric can request to start fingerprint enroll bypassing the intro screen.
+            if (getIntent().getBooleanExtra(EXTRA_SKIP_INTRO, false)
+                    && this instanceof InternalActivity) {
+                intent = getFingerprintFindSensorIntent();
+            } else {
+                intent = getFingerprintIntroIntent();
+            }
         } else if (pm.hasSystemFeature(PackageManager.FEATURE_FACE)) {
-            intent.setClassName(SETTINGS_PACKAGE_NAME, FaceEnrollIntroduction.class.getName());
+            intent = getFaceIntroIntent();
         }
 
-        startActivity(intent);
+        if (intent != null) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+
+            if (this instanceof InternalActivity) {
+                // Propagate challenge and user Id from ChooseLockGeneric.
+                final byte[] token = getIntent()
+                        .getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                final int userId = getIntent()
+                        .getIntExtra(Intent.EXTRA_USER_ID, UserHandle.USER_NULL);
+
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+                intent.putExtra(Intent.EXTRA_USER_ID, userId);
+            }
+
+            startActivity(intent);
+        }
         finish();
+    }
+
+    private Intent getFingerprintFindSensorIntent() {
+        Intent intent = new Intent(this, FingerprintEnrollFindSensor.class);
+        SetupWizardUtils.copySetupExtras(getIntent(), intent);
+        return intent;
+    }
+
+    private Intent getFingerprintIntroIntent() {
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            Intent intent = new Intent(this, SetupFingerprintEnrollIntroduction.class);
+            WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
+            return intent;
+        } else {
+            return new Intent(this, FingerprintEnrollIntroduction.class);
+        }
+    }
+
+    private Intent getFaceIntroIntent() {
+        Intent intent = new Intent(this, FaceEnrollIntroduction.class);
+        WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
+        return intent;
     }
 
     @Override

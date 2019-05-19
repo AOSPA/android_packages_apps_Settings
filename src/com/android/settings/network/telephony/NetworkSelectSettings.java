@@ -27,7 +27,7 @@ import android.telephony.AccessNetworkConstants;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellIdentity;
 import android.telephony.CellInfo;
-import android.telephony.NetworkRegistrationState;
+import android.telephony.NetworkRegistrationInfo;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -96,11 +96,10 @@ public class NetworkSelectSettings extends DashboardFragment {
                 com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI);
         mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID);
 
-        mConnectedPreferenceCategory =
-                (PreferenceCategory) findPreference(PREF_KEY_CONNECTED_NETWORK_OPERATOR);
-        mPreferenceCategory =
-                (PreferenceCategory) findPreference(PREF_KEY_NETWORK_OPERATORS);
+        mConnectedPreferenceCategory = findPreference(PREF_KEY_CONNECTED_NETWORK_OPERATOR);
+        mPreferenceCategory = findPreference(PREF_KEY_NETWORK_OPERATORS);
         mStatusMessagePreference = new Preference(getContext());
+        mStatusMessagePreference.setSelectable(false);
         mSelectedPreference = null;
         mTelephonyManager = TelephonyManager.from(getContext()).createForSubscriptionId(mSubId);
         mNetworkScanHelper = new NetworkScanHelper(
@@ -132,13 +131,25 @@ public class NetworkSelectSettings extends DashboardFragment {
     @Override
     public void onStart() {
         super.onStart();
-        mForbiddenPlmns = Arrays.asList(mTelephonyManager.getForbiddenPlmns());
+
+        updateForbiddenPlmns();
         setProgressBarVisible(true);
 
         mNetworkScanHelper.startNetworkScan(
                 mUseNewApi
                         ? NetworkScanHelper.NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS
                         : NetworkScanHelper.NETWORK_SCAN_TYPE_WAIT_FOR_ALL_RESULTS);
+    }
+
+    /**
+     * Update forbidden PLMNs from the USIM App
+     */
+    @VisibleForTesting
+    void updateForbiddenPlmns() {
+        final String[] forbiddenPlmns = mTelephonyManager.getForbiddenPlmns();
+        mForbiddenPlmns = forbiddenPlmns != null
+                ? Arrays.asList(forbiddenPlmns)
+                : new ArrayList<>();
     }
 
     @Override
@@ -292,7 +303,7 @@ public class NetworkSelectSettings extends DashboardFragment {
      * Config the connected network operator preference when the page was created. When user get
      * into this page, the device might or might not have data connection.
      * - If the device has data:
-     * 1. use {@code ServiceState#getNetworkRegistrationStates()} to get the currently
+     * 1. use {@code ServiceState#getNetworkRegistrationInfoList()} to get the currently
      * registered cellIdentity, wrap it into a CellInfo;
      * 2. set the signal strength level as strong;
      * 3. use {@link TelephonyManager#getNetworkOperatorName()} to get the title of the
@@ -305,8 +316,9 @@ public class NetworkSelectSettings extends DashboardFragment {
         if (mTelephonyManager.getDataState() == mTelephonyManager.DATA_CONNECTED) {
             // Try to get the network registration states
             ServiceState ss = mTelephonyManager.getServiceState();
-            List<NetworkRegistrationState> networkList =
-                    ss.getNetworkRegistrationStates(AccessNetworkConstants.TransportType.WWAN);
+            List<NetworkRegistrationInfo> networkList =
+                    ss.getNetworkRegistrationInfoListForTransportType(
+                            AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
             if (networkList == null || networkList.size() == 0) {
                 // Remove the connected network operators category
                 mConnectedPreferenceCategory.setVisible(false);

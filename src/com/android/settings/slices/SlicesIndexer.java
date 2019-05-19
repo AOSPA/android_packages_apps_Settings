@@ -84,7 +84,6 @@ class SlicesIndexer implements Runnable {
         } finally {
             database.endTransaction();
         }
-        database.close();
     }
 
     @VisibleForTesting
@@ -111,8 +110,6 @@ class SlicesIndexer implements Runnable {
             values.put(IndexColumns.CONTROLLER, dataRow.getPreferenceController());
             values.put(IndexColumns.PLATFORM_SLICE, dataRow.isPlatformDefined());
             values.put(IndexColumns.SLICE_TYPE, dataRow.getSliceType());
-            values.put(IndexColumns.ALLOW_DYNAMIC_SUMMARY_IN_SLICE,
-                    dataRow.isDynamicSummaryAllowed());
             values.put(IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
                     dataRow.getUnavailableSliceSubtitle());
 

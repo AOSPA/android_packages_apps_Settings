@@ -58,19 +58,16 @@
             android:title="@string/screen_zoom_title"
             settings:searchable="false"/>
 
-        <ListPreference
+        <SwitchPreference
             android:key="dark_ui_mode_accessibility"
             android:title="@string/dark_ui_mode"
-            android:dialogTitle="@string/dark_ui_mode_title"
-            android:entries="@array/dark_ui_mode_entries"
-            android:entryValues="@array/dark_ui_mode_values"
-            settings:searchable="false" />
+            settings:searchable="false"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
             android:key="magnification_preference_screen"
             android:title="@string/accessibility_screen_magnification_title"
-            android:icon="@mipmap/ic_accessibility_magnification" />
+            android:icon="@drawable/ic_accessibility_magnification" />
 
         <SwitchPreference
                 android:key="toggle_large_pointer_icon"
@@ -131,6 +128,12 @@
     <PreferenceCategory
             android:key="audio_and_captions_category"
             android:title="@string/audio_and_captions_category_title">
+
+        <Preference
+            android:key="live_caption"
+            android:title="@string/live_caption_title"
+            android:summary="@string/live_caption_summary"
+            settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
 
         <SwitchPreference
                 android:key="toggle_master_mono"

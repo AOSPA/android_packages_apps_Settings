@@ -42,8 +42,13 @@ public class BluetoothSnoopLogPreferenceController extends DeveloperOptionsPrefe
     @VisibleForTesting
     static final int BTSNOOP_LOG_MODE_FILTERED_INDEX = 1;
     @VisibleForTesting
-    static final int BTSNOOP_LOG_MODE_FULL_INDEX = 2;
+    static final int BTSNOOP_LOG_MODE_SNOOPHEADERSFILTERED_INDEX = 2;
     @VisibleForTesting
+    static final int BTSNOOP_LOG_MODE_MEDIAPKTSFILTERED_INDEX = 3;
+    @VisibleForTesting
+    static final int BTSNOOP_LOG_MODE_FULL_INDEX = 4;
+    @VisibleForTesting
+
     static final String BLUETOOTH_BTSNOOP_LOG_MODE_PROPERTY = "persist.bluetooth.btsnooplogmode";
 
     private final String[] mListValues;
@@ -97,8 +102,13 @@ public class BluetoothSnoopLogPreferenceController extends DeveloperOptionsPrefe
                 break;
             }
         }
-        listPreference.setValue(mListValues[index]);
-        listPreference.setSummary(mListEntries[index]);
+        if( index < mListValues.length && index < mListEntries.length ) {
+            listPreference.setValue(mListValues[index]);
+            listPreference.setSummary(mListEntries[index]);
+        } else {
+            Log.e(TAG, "missing some entries in xml file"
+             + "\t some options in developer options will not be shown until added in xml file");
+        }
     }
 
     @Override

@@ -17,7 +17,6 @@
 
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,7 +38,7 @@
 
             <TextView
                 style="@style/SudDescription.Glif"
-                android:id="@+id/start_message"
+                android:id="@+id/sud_layout_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minLines="3"

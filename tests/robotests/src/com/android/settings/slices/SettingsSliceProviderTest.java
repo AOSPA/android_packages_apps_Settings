@@ -31,10 +31,12 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.PendingIntent;
 import android.app.slice.SliceManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.StrictMode;
@@ -55,7 +57,7 @@ import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.wifi.slice.WifiSlice;
+import com.android.settings.wifi.slice.WifiScanWorker;
 import com.android.settingslib.wifi.WifiTracker;
 
 import org.junit.After;
@@ -133,9 +135,7 @@ public class SettingsSliceProviderTest {
         mProvider = spy(new SettingsSliceProvider());
         ShadowStrictMode.reset();
         mProvider.mSliceWeakDataCache = new HashMap<>();
-        mProvider.mSliceDataCache = new HashMap<>();
         mProvider.mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(mContext);
-        mProvider.mCustomSliceManager = new CustomSliceManager(mContext);
         when(mProvider.getContext()).thenReturn(mContext);
 
         SlicesDatabaseHelper.getInstance(mContext).setIndexedState();
@@ -199,30 +199,6 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
-    public void testLoadSlice_doesNotCacheWithoutPin() {
-        insertSpecialCase(KEY);
-        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
-
-        mProvider.loadSlice(uri);
-        SliceData data = mProvider.mSliceDataCache.get(uri);
-
-        assertThat(data).isNull();
-    }
-
-    @Test
-    public void testLoadSlice_cachesWithPin() {
-        insertSpecialCase(KEY);
-        final Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
-        when(mManager.getPinnedSlices()).thenReturn(Arrays.asList(uri));
-
-        mProvider.loadSlice(uri);
-        SliceData data = mProvider.mSliceDataCache.get(uri);
-
-        assertThat(data.getKey()).isEqualTo(KEY);
-        assertThat(data.getTitle()).isEqualTo(TITLE);
-    }
-
-    @Test
     public void testLoadSlice_cachedEntryRemovedOnBuild() {
         SliceData data = getDummyData();
         mProvider.mSliceWeakDataCache.put(data.getUri(), data);
@@ -275,18 +251,6 @@ public class SettingsSliceProviderTest {
         final Slice slice = mProvider.onBindSlice(blockedUri);
 
         assertThat(slice).isNull();
-    }
-
-    @Test
-    public void testLoadSlice_cachedEntryRemovedOnUnpin() {
-        SliceData data = getDummyData();
-        mProvider.mSliceDataCache.put(data.getUri(), data);
-        mProvider.onSliceUnpinned(data.getUri());
-        insertSpecialCase(data.getKey());
-
-        SliceData cachedData = mProvider.mSliceWeakDataCache.get(data.getUri());
-
-        assertThat(cachedData).isNull();
     }
 
     @Test
@@ -483,6 +447,16 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    public void onCreatePermissionRequest_returnsSettingIntent() {
+        final PendingIntent pendingIntent = mProvider.onCreatePermissionRequest(
+                CustomSliceRegistry.FLASHLIGHT_SLICE_URI, "com.android.whaaaat");
+        PendingIntent settingsPendingIntent =
+                PendingIntent.getActivity(mContext, 0, new Intent(Settings.ACTION_SETTINGS), 0);
+
+        assertThat(pendingIntent).isEqualTo(settingsPendingIntent);
+    }
+
+    @Test
     public void bindSlice_wifiSlice_returnsWifiSlice() {
         final Slice wifiSlice = mProvider.onBindSlice(CustomSliceRegistry.WIFI_SLICE_URI);
 
@@ -512,7 +486,7 @@ public class SettingsSliceProviderTest {
         mProvider.onSlicePinned(uri);
     }
 
-    @Implements(WifiSlice.WifiScanWorker.class)
+    @Implements(WifiScanWorker.class)
     public static class ShadowWifiScanWorker {
         private static WifiTracker mWifiTracker;
 

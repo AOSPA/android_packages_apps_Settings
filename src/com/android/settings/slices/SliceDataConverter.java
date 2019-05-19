@@ -16,7 +16,6 @@
 
 package com.android.settings.slices;
 
-import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_CONTROLLER;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_ICON;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
@@ -79,11 +78,8 @@ class SliceDataConverter {
 
     private Context mContext;
 
-    private List<SliceData> mSliceData;
-
     public SliceDataConverter(Context context) {
         mContext = context;
-        mSliceData = new ArrayList<>();
     }
 
     /**
@@ -97,9 +93,7 @@ class SliceDataConverter {
      * {@link com.android.settings.core.BasePreferenceController}.
      */
     public List<SliceData> getSliceData() {
-        if (!mSliceData.isEmpty()) {
-            return mSliceData;
-        }
+        List<SliceData> sliceData = new ArrayList<>();
 
         final Collection<Class> indexableClasses = FeatureFactory.getFactory(mContext)
                 .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
@@ -118,12 +112,12 @@ class SliceDataConverter {
 
             final List<SliceData> providerSliceData = getSliceDataFromProvider(provider,
                     fragmentName);
-            mSliceData.addAll(providerSliceData);
+            sliceData.addAll(providerSliceData);
         }
 
         final List<SliceData> a11ySliceData = getAccessibilitySliceData();
-        mSliceData.addAll(a11ySliceData);
-        return mSliceData;
+        sliceData.addAll(a11ySliceData);
+        return sliceData;
     }
 
     private List<SliceData> getSliceDataFromProvider(SearchIndexProvider provider,
@@ -189,7 +183,6 @@ class SliceDataConverter {
                             | MetadataFlag.FLAG_NEED_PREF_ICON
                             | MetadataFlag.FLAG_NEED_PREF_SUMMARY
                             | MetadataFlag.FLAG_NEED_PLATFORM_SLICE_FLAG
-                            | MetadataFlag.FLAG_ALLOW_DYNAMIC_SUMMARY_IN_SLICE
                             | MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE);
 
             for (Bundle bundle : metadata) {
@@ -207,8 +200,6 @@ class SliceDataConverter {
                 final int sliceType = SliceBuilderUtils.getSliceType(mContext, controllerClassName,
                         key);
                 final boolean isPlatformSlice = bundle.getBoolean(METADATA_PLATFORM_SLICE_FLAG);
-                final boolean isDynamicSummaryAllowed = bundle.getBoolean(
-                        METADATA_ALLOW_DYNAMIC_SUMMARY_IN_SLICE);
                 final String unavailableSliceSubtitle = bundle.getString(
                         METADATA_UNAVAILABLE_SLICE_SUBTITLE);
 
@@ -222,7 +213,6 @@ class SliceDataConverter {
                         .setFragmentName(fragmentName)
                         .setSliceType(sliceType)
                         .setPlatformDefined(isPlatformSlice)
-                        .setDynamicSummaryAllowed(isDynamicSummaryAllowed)
                         .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
                         .build();
 

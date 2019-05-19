@@ -18,16 +18,17 @@ package com.android.settings.wifi.details;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
+import com.android.settings.wifi.WifiDialog;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
@@ -35,12 +36,14 @@ import com.android.settingslib.core.AbstractPreferenceController;
  * or not
  */
 public class WifiPrivacyPreferenceController extends BasePreferenceController implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, WifiDialog.WifiDialogListener {
 
     private static final String KEY_WIFI_PRIVACY = "privacy";
     private WifiConfiguration mWifiConfiguration;
     private WifiManager mWifiManager;
     private boolean mIsEphemeral = false;
+    private boolean mIsPasspoint = false;
+    private Preference mPreference;
 
     public WifiPrivacyPreferenceController(Context context) {
         super(context, KEY_WIFI_PRIVACY);
@@ -56,10 +59,21 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
         mIsEphemeral = isEphemeral;
     }
 
+    public void setIsPasspoint(boolean isPasspoint) {
+        mIsPasspoint = isPasspoint;
+    }
+
     @Override
     public int getAvailabilityStatus() {
-        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.WIFI_MAC_RANDOMIZATION)
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_wifi_connected_mac_randomization_supported) ?
+                AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -70,7 +84,7 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
         updateSummary(dropDownPreference, randomizationLevel);
 
         // Makes preference not selectable, when this is a ephemeral network.
-        if (mIsEphemeral) {
+        if (mIsEphemeral || mIsPasspoint) {
             preference.setSelectable(false);
             dropDownPreference.setSummary(R.string.wifi_privacy_settings_ephemeral_summary);
         }
@@ -81,9 +95,13 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
         if (mWifiConfiguration != null) {
             mWifiConfiguration.macRandomizationSetting = Integer.parseInt((String) newValue);
             mWifiManager.updateNetwork(mWifiConfiguration);
-            // To activate changing, we need reconnect network. WiFi will auto connect to current
-            // network after disconnect().
-            mWifiManager.disconnect();
+
+            // To activate changing, we need to reconnect network. WiFi will auto connect to
+            // current network after disconnect(). Only needed when this is connected network.
+            final WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
+            if (wifiInfo != null && wifiInfo.getNetworkId() == mWifiConfiguration.networkId) {
+                mWifiManager.disconnect();
+            }
         }
         updateSummary((DropDownPreference) preference, Integer.parseInt((String) newValue));
         return true;
@@ -126,5 +144,20 @@ public class WifiPrivacyPreferenceController extends BasePreferenceController im
         // Translates value here to set RANDOMIZATION_PERSISTENT as first item in UI for better UX.
         final int prefMacRandomized = translateMacRandomizedValueToPrefValue(macRandomized);
         preference.setSummary(preference.getEntries()[prefMacRandomized]);
+    }
+
+    @Override
+    public void onSubmit(WifiDialog dialog) {
+        if (dialog.getController() != null) {
+            final WifiConfiguration newConfig = dialog.getController().getConfig();
+            if (newConfig == null || mWifiConfiguration == null) {
+                return;
+            }
+
+            if (newConfig.macRandomizationSetting != mWifiConfiguration.macRandomizationSetting) {
+                mWifiConfiguration = newConfig;
+                onPreferenceChange(mPreference, String.valueOf(newConfig.macRandomizationSetting));
+            }
+        }
     }
 }

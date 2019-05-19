@@ -26,18 +26,20 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.ArrayMap;
 
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
+import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
+
+import java.util.List;
+import java.util.Map;
+
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-
-import com.android.settings.R;
-import com.android.settings.network.telephony.MobileNetworkActivity;
-import com.android.settingslib.core.AbstractPreferenceController;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * This populates the entries on a page which lists all available mobile subscriptions. Each entry
@@ -47,6 +49,9 @@ import java.util.Map;
 public class MobileNetworkListController extends AbstractPreferenceController implements
         LifecycleObserver, SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
     private static final String TAG = "MobileNetworkListCtlr";
+
+    @VisibleForTesting
+    static final String KEY_ADD_MORE = "add_more";
 
     private SubscriptionManager mSubscriptionManager;
     private SubscriptionsChangeListener mChangeListener;
@@ -76,6 +81,8 @@ public class MobileNetworkListController extends AbstractPreferenceController im
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreferenceScreen = screen;
+        mPreferenceScreen.findPreference(KEY_ADD_MORE).setVisible(
+                MobileNetworkUtils.showEuiccSettings(mContext));
         update();
     }
 
@@ -91,9 +98,9 @@ public class MobileNetworkListController extends AbstractPreferenceController im
         mPreferences = new ArrayMap<>();
 
         final List<SubscriptionInfo> subscriptions = SubscriptionUtil.getAvailableSubscriptions(
-                mSubscriptionManager);
+                mContext);
         for (SubscriptionInfo info : subscriptions) {
-            int subId = info.getSubscriptionId();
+            final int subId = info.getSubscriptionId();
             Preference pref = existingPreferences.remove(subId);
             if (pref == null) {
                 pref = new Preference(mPreferenceScreen.getContext());

@@ -16,7 +16,9 @@
 
 package com.android.settings.privacy;
 
-import static com.android.settingslib.widget.BarChartPreference.MAXIMUM_BAR_VIEWS;
+import static android.Manifest.permission_group.CAMERA;
+import static android.Manifest.permission_group.LOCATION;
+import static android.Manifest.permission_group.MICROPHONE;
 
 import static java.util.concurrent.TimeUnit.DAYS;
 
@@ -47,7 +49,6 @@ import com.android.settingslib.widget.BarChartPreference;
 import com.android.settingslib.widget.BarViewInfo;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -89,8 +90,8 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
     @Override
     public int getAvailabilityStatus() {
         return Boolean.parseBoolean(
-                DeviceConfig.getProperty(DeviceConfig.Privacy.NAMESPACE,
-                        DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED)) ?
+                DeviceConfig.getProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                        com.android.settings.Utils.PROPERTY_PERMISSIONS_HUB_ENABLED)) ?
                 AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
     }
 
@@ -131,8 +132,28 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
 
     @Override
     public void onPermissionUsageResult(@NonNull List<RuntimePermissionUsageInfo> usageInfos) {
-        usageInfos.sort(Comparator.comparingInt(
-                RuntimePermissionUsageInfo::getAppAccessCount).reversed());
+        usageInfos.sort((x, y) -> {
+            int usageDiff = y.getAppAccessCount() - x.getAppAccessCount();
+            if (usageDiff != 0) {
+                return usageDiff;
+            }
+            String xName = x.getName();
+            String yName = y.getName();
+            if (xName.equals(LOCATION)) {
+                return -1;
+            } else if (yName.equals(LOCATION)) {
+                return 1;
+            } else if (xName.equals(MICROPHONE)) {
+                return -1;
+            } else if (yName.equals(MICROPHONE)) {
+                return 1;
+            } else if (xName.equals(CAMERA)) {
+                return -1;
+            } else if (yName.equals(CAMERA)) {
+                return 1;
+            }
+            return x.getName().compareTo(y.getName());
+        });
 
         // If the result is different, we need to update bar views.
         if (!areSamePermissionGroups(usageInfos)) {
@@ -155,25 +176,25 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
             return null;
         }
 
-        // STOPSHIP: Ignore the STORAGE group since it's going away.
-        usageInfos.removeIf(usage -> usage.getName().equals("android.permission-group.STORAGE"));
-
         final BarViewInfo[] barViewInfos = new BarViewInfo[
                 Math.min(BarChartPreference.MAXIMUM_BAR_VIEWS, usageInfos.size())];
 
         for (int index = 0; index < barViewInfos.length; index++) {
             final RuntimePermissionUsageInfo permissionGroupInfo = usageInfos.get(index);
+            final int count = permissionGroupInfo.getAppAccessCount();
+            final CharSequence permLabel = getPermissionGroupLabel(permissionGroupInfo.getName());
 
             barViewInfos[index] = new BarViewInfo(
-                    getPermissionGroupIcon(permissionGroupInfo.getName()),
-                    permissionGroupInfo.getAppAccessCount(),
-                    R.string.storage_detail_apps);
+                    getPermissionGroupIcon(permissionGroupInfo.getName()), count, permLabel,
+                    mContext.getResources().getQuantityString(R.plurals.permission_bar_chart_label,
+                            count, count), permLabel);
 
             // Set the click listener for each bar view.
             // The listener will navigate user to permission usage app.
             barViewInfos[index].setClickListener((View v) -> {
                 final Intent intent = new Intent(Intent.ACTION_REVIEW_PERMISSION_USAGE);
                 intent.putExtra(Intent.EXTRA_PERMISSION_GROUP_NAME, permissionGroupInfo.getName());
+                intent.putExtra(Intent.EXTRA_DURATION_MILLIS, DAYS.toMillis(1));
                 mContext.startActivity(intent);
             });
         }
@@ -181,10 +202,10 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
         return barViewInfos;
     }
 
-    private Drawable getPermissionGroupIcon(CharSequence permissionGroup) {
+    private Drawable getPermissionGroupIcon(String permissionGroup) {
         Drawable icon = null;
         try {
-            icon = mPackageManager.getPermissionGroupInfo(permissionGroup.toString(), 0)
+            icon = mPackageManager.getPermissionGroupInfo(permissionGroup, 0)
                     .loadIcon(mPackageManager);
             icon.setTintList(Utils.getColorAttr(mContext, android.R.attr.textColorSecondary));
         } catch (PackageManager.NameNotFoundException e) {
@@ -192,6 +213,18 @@ public class PermissionBarChartPreferenceController extends BasePreferenceContro
         }
 
         return icon;
+    }
+
+    private CharSequence getPermissionGroupLabel(String permissionGroup) {
+        CharSequence label = null;
+        try {
+            label = mPackageManager.getPermissionGroupInfo(permissionGroup, 0)
+                    .loadLabel(mPackageManager);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w(TAG, "Cannot find group label for " + permissionGroup, e);
+        }
+
+        return label;
     }
 
     private boolean areSamePermissionGroups(List<RuntimePermissionUsageInfo> newUsageInfos) {

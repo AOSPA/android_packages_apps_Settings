@@ -40,7 +40,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;
@@ -54,6 +53,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.widget.SwitchBar;
 
 /**
@@ -70,9 +70,13 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     private static final String BUTTON_WFC_ROAMING_MODE = "wifi_calling_roaming_mode";
     private static final String PREFERENCE_EMERGENCY_ADDRESS = "emergency_address_key";
 
-    private static final int REQUEST_CHECK_WFC_EMERGENCY_ADDRESS = 1;
+    @VisibleForTesting
+    static final int REQUEST_CHECK_WFC_EMERGENCY_ADDRESS = 1;
+    @VisibleForTesting
+    static final int REQUEST_CHECK_WFC_DISCLAIMER = 2;
 
     public static final String EXTRA_LAUNCH_CARRIER_APP = "EXTRA_LAUNCH_CARRIER_APP";
+    public static final String EXTRA_SUB_ID = "EXTRA_SUB_ID";
 
     protected static final String FRAGMENT_BUNDLE_SUBID = "subId";
 
@@ -82,14 +86,15 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     //UI objects
     private SwitchBar mSwitchBar;
     private Switch mSwitch;
-    private ListPreference mButtonWfcMode;
-    private ListPreference mButtonWfcRoamingMode;
+    private ListWithEntrySummaryPreference mButtonWfcMode;
+    private ListWithEntrySummaryPreference mButtonWfcRoamingMode;
     private Preference mUpdateAddress;
     private TextView mEmptyView;
 
     private boolean mValidListener = false;
     private boolean mEditableWfcMode = true;
     private boolean mEditableWfcRoamingMode = true;
+    private boolean mUseWfcHomeModeForRoaming = false;
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private ImsManager mImsManager;
@@ -117,7 +122,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             final CarrierConfigManager configManager = (CarrierConfigManager)
                     activity.getSystemService(Context.CARRIER_CONFIG_SERVICE);
             if (configManager != null) {
-                PersistableBundle b = configManager.getConfigForSubId(mSubId);
+                PersistableBundle b =
+                        configManager.getConfigForSubId(WifiCallingSettingsForSub.this.mSubId);
                 if (b != null) {
                     isWfcModeEditable = b.getBoolean(
                             CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
@@ -140,20 +146,17 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         }
     };
 
+    /*
+     * Launch carrier emergency address managemnent activity
+     */
     private final OnPreferenceClickListener mUpdateAddressListener =
-            new OnPreferenceClickListener() {
-                /*
-                 * Launch carrier emergency address managemnent activity
-                 */
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    Intent carrierAppIntent = getCarrierActivityIntent();
-                    if (carrierAppIntent != null) {
-                        carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_UPDATE);
-                        startActivity(carrierAppIntent);
-                    }
-                    return true;
+            preference -> {
+                Intent carrierAppIntent = getCarrierActivityIntent();
+                if (carrierAppIntent != null) {
+                    carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_UPDATE);
+                    startActivity(carrierAppIntent);
                 }
+                return true;
             };
 
     private final ProvisioningManager.Callback mProvisioningCallback =
@@ -173,11 +176,9 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-
         mEmptyView = getView().findViewById(android.R.id.empty);
         setEmptyView(mEmptyView);
-        final Resources res = SubscriptionManager.getResourcesForSubId(getContext(), mSubId);
+        final Resources res = getResourcesForSubId();
         String emptyViewText = res.getString(R.string.wifi_calling_off_explanation,
                 res.getString(R.string.wifi_calling_off_explanation_2));
         mEmptyView.setText(emptyViewText);
@@ -264,13 +265,13 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         mTelephonyManager = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE))
                 .createForSubscriptionId(mSubId);
 
-        mButtonWfcMode = (ListPreference) findPreference(BUTTON_WFC_MODE);
+        mButtonWfcMode = findPreference(BUTTON_WFC_MODE);
         mButtonWfcMode.setOnPreferenceChangeListener(this);
 
-        mButtonWfcRoamingMode = (ListPreference) findPreference(BUTTON_WFC_ROAMING_MODE);
+        mButtonWfcRoamingMode =  findPreference(BUTTON_WFC_ROAMING_MODE);
         mButtonWfcRoamingMode.setOnPreferenceChangeListener(this);
 
-        mUpdateAddress = (Preference) findPreference(PREFERENCE_EMERGENCY_ADDRESS);
+        mUpdateAddress = findPreference(PREFERENCE_EMERGENCY_ADDRESS);
         mUpdateAddress.setOnPreferenceClickListener(mUpdateAddressListener);
 
         mIntentFilter = new IntentFilter();
@@ -317,6 +318,9 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                         CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
                 mEditableWfcRoamingMode = b.getBoolean(
                         CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL);
+                mUseWfcHomeModeForRoaming = b.getBoolean(
+                        CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL,
+                        false);
                 isWifiOnlySupported = b.getBoolean(
                         CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL, true);
             }
@@ -325,10 +329,14 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         if (!isWifiOnlySupported) {
             mButtonWfcMode.setEntries(R.array.wifi_calling_mode_choices_without_wifi_only);
             mButtonWfcMode.setEntryValues(R.array.wifi_calling_mode_values_without_wifi_only);
+            mButtonWfcMode.setEntrySummaries(R.array.wifi_calling_mode_summaries_without_wifi_only);
+
             mButtonWfcRoamingMode.setEntries(
                     R.array.wifi_calling_mode_choices_v2_without_wifi_only);
             mButtonWfcRoamingMode.setEntryValues(
                     R.array.wifi_calling_mode_values_without_wifi_only);
+            mButtonWfcRoamingMode.setEntrySummaries(
+                    R.array.wifi_calling_mode_summaries_without_wifi_only);
         }
 
 
@@ -414,14 +422,17 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             return;
         }
 
-        // Call address management activity before turning on WFC
-        Intent carrierAppIntent = getCarrierActivityIntent();
-        if (carrierAppIntent != null) {
-            carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_ACTIVATE);
-            startActivityForResult(carrierAppIntent, REQUEST_CHECK_WFC_EMERGENCY_ADDRESS);
-        } else {
-            updateWfcMode(true);
-        }
+        // Launch disclaimer fragment before turning on WFC
+        final Context context = getActivity();
+        final Bundle args = new Bundle();
+        args.putInt(EXTRA_SUB_ID, mSubId);
+        new SubSettingLauncher(context)
+                .setDestination(WifiCallingDisclaimerFragment.class.getName())
+                .setArguments(args)
+                .setTitleRes(R.string.wifi_calling_settings_title)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .setResultListener(this, REQUEST_CHECK_WFC_DISCLAIMER)
+                .launch();
     }
 
     /*
@@ -474,12 +485,30 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         final Context context = getActivity();
 
-        if (requestCode == REQUEST_CHECK_WFC_EMERGENCY_ADDRESS) {
-            Log.d(TAG, "WFC emergency address activity result = " + resultCode);
+        Log.d(TAG, "WFC activity request = " + requestCode + " result = " + resultCode);
 
-            if (resultCode == Activity.RESULT_OK) {
-                updateWfcMode(true);
-            }
+        switch (requestCode) {
+            case REQUEST_CHECK_WFC_EMERGENCY_ADDRESS:
+                if (resultCode == Activity.RESULT_OK) {
+                    updateWfcMode(true);
+                }
+                break;
+            case REQUEST_CHECK_WFC_DISCLAIMER:
+                if (resultCode == Activity.RESULT_OK) {
+                    // Call address management activity before turning on WFC
+                    Intent carrierAppIntent = getCarrierActivityIntent();
+                    if (carrierAppIntent != null) {
+                        carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_ACTIVATE);
+                        startActivityForResult(carrierAppIntent,
+                                REQUEST_CHECK_WFC_EMERGENCY_ADDRESS);
+                    } else {
+                        updateWfcMode(true);
+                    }
+                }
+                break;
+            default:
+                Log.e(TAG, "Unexpected request: " + requestCode);
+                break;
         }
     }
 
@@ -499,7 +528,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                 // Don't show WFC (home) preference if it's not editable.
                 preferenceScreen.removePreference(mButtonWfcMode);
             }
-            if (mEditableWfcRoamingMode) {
+            if (mEditableWfcRoamingMode && !mUseWfcHomeModeForRoaming) {
                 preferenceScreen.addPreference(mButtonWfcRoamingMode);
             } else {
                 // Don't show WFC roaming preference if it's not editable.
@@ -528,10 +557,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                 mImsManager.setWfcMode(buttonMode, false);
                 mButtonWfcMode.setSummary(getWfcModeSummary(buttonMode));
                 mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
-            }
-            if (!mEditableWfcRoamingMode) {
-                int currentWfcRoamingMode = mImsManager.getWfcMode(true);
-                if (buttonMode != currentWfcRoamingMode) {
+
+                if (mUseWfcHomeModeForRoaming) {
                     mImsManager.setWfcMode(buttonMode, true);
                     // mButtonWfcRoamingMode.setSummary is not needed; summary is selected value
                 }
@@ -567,5 +594,10 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             }
         }
         return resId;
+    }
+
+    @VisibleForTesting
+    Resources getResourcesForSubId() {
+        return SubscriptionManager.getResourcesForSubId(getContext(), mSubId, false);
     }
 }

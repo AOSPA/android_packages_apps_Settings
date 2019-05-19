@@ -18,15 +18,13 @@ package com.android.settings.media;
 
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE_URI;
 
-import android.annotation.ColorInt;
 import android.app.PendingIntent;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.UserHandle;
-import android.util.IconDrawableFactory;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -58,90 +56,107 @@ public class MediaOutputSlice implements CustomSliceable {
 
     private MediaDeviceUpdateWorker mWorker;
     private String mPackageName;
-    private IconDrawableFactory mIconDrawableFactory;
 
     public MediaOutputSlice(Context context) {
         mContext = context;
         mPackageName = getUri().getQueryParameter(MEDIA_PACKAGE_NAME);
-        mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
     }
 
     @VisibleForTesting
-    void init(String packageName, MediaDeviceUpdateWorker worker, IconDrawableFactory factory) {
+    void init(String packageName, MediaDeviceUpdateWorker worker) {
         mPackageName = packageName;
         mWorker = worker;
-        mIconDrawableFactory = factory;
     }
 
     @Override
     public Slice getSlice() {
-        final PackageManager pm = mContext.getPackageManager();
+        // Reload theme for switching dark mode on/off
+        mContext.getTheme().applyStyle(R.style.Theme_Settings_Home, true /* force */);
+
+        final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
+                .setAccentColor(COLOR_NOT_TINTED);
+
+        final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (!adapter.isEnabled()) {
+            Log.d(TAG, "getSlice() Bluetooth is off");
+            return listBuilder.build();
+        }
+
+        if (getWorker() == null) {
+            Log.d(TAG, "getSlice() Can not get worker through uri!");
+            return listBuilder.build();
+        }
 
         final List<MediaDevice> devices = getMediaDevices();
-        final CharSequence title = Utils.getApplicationLabel(mContext, mPackageName);
-        final CharSequence summary =
-                mContext.getString(R.string.media_output_panel_summary_of_playing_device,
-                        getConnectedDeviceName());
 
-        final Drawable drawable =
-                Utils.getBadgedIcon(mIconDrawableFactory, pm, mPackageName, UserHandle.myUserId());
-        final IconCompat icon = Utils.createIconWithDrawable(drawable);
-
-        @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
-        final SliceAction primarySliceAction = SliceAction.createDeeplink(getPrimaryAction(), icon,
-                ListBuilder.ICON_IMAGE, title);
-
-        final ListBuilder listBuilder = new ListBuilder(mContext, MEDIA_OUTPUT_SLICE_URI,
-                ListBuilder.INFINITY)
-                .setAccentColor(color)
-                .addRow(new ListBuilder.RowBuilder()
-                        .setTitleItem(icon, ListBuilder.ICON_IMAGE)
-                        .setTitle(title)
-                        .setSubtitle(summary)
-                        .setPrimaryAction(primarySliceAction));
+        final MediaDevice connectedDevice = getWorker().getCurrentConnectedMediaDevice();
+        listBuilder.addRow(getActiveDeviceHeaderRow(connectedDevice));
 
         for (MediaDevice device : devices) {
-            listBuilder.addRow(getMediaDeviceRow(device));
+            if (!TextUtils.equals(connectedDevice.getId(), device.getId())) {
+                listBuilder.addRow(getMediaDeviceRow(device));
+            }
         }
 
         return listBuilder.build();
     }
 
+    private ListBuilder.RowBuilder getActiveDeviceHeaderRow(MediaDevice device) {
+        final String title = device.getName();
+        final IconCompat icon = getDeviceIconCompat(device);
+
+        final PendingIntent broadcastAction =
+                getBroadcastIntent(mContext, device.getId(), device.hashCode());
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(broadcastAction, icon,
+                ListBuilder.ICON_IMAGE, title);
+
+        final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
+                .setTitleItem(icon, ListBuilder.ICON_IMAGE)
+                .setTitle(title)
+                .setSubtitle(device.getSummary())
+                .setPrimaryAction(primarySliceAction);
+
+        return rowBuilder;
+    }
+
+    private IconCompat getDeviceIconCompat(MediaDevice device) {
+        Drawable drawable = device.getIcon();
+        if (drawable == null) {
+            Log.d(TAG, "getDeviceIconCompat() device : " + device.getName() + ", drawable is null");
+            // Use default Bluetooth device icon to handle getIcon() is null case.
+            drawable = mContext.getDrawable(com.android.internal.R.drawable.ic_bt_headphones_a2dp);
+        }
+
+        return Utils.createIconWithDrawable(drawable);
+    }
+
     private MediaDeviceUpdateWorker getWorker() {
         if (mWorker == null) {
             mWorker = (MediaDeviceUpdateWorker) SliceBackgroundWorker.getInstance(getUri());
-            mWorker.setPackageName(mPackageName);
+            if (mWorker != null) {
+                mWorker.setPackageName(mPackageName);
+            }
         }
         return mWorker;
     }
 
     private List<MediaDevice> getMediaDevices() {
-        List<MediaDevice> devices = getWorker().getMediaDevices();
+        final List<MediaDevice> devices = getWorker().getMediaDevices();
         return devices;
-    }
-
-    private String getConnectedDeviceName() {
-        final MediaDevice device = getWorker().getCurrentConnectedMediaDevice();
-        return device != null ? device.getName() : "";
-    }
-
-    private PendingIntent getPrimaryAction() {
-        final PackageManager pm = mContext.getPackageManager();
-        final Intent launchIntent = pm.getLaunchIntentForPackage(mPackageName);
-        final Intent intent = launchIntent;
-        return PendingIntent.getActivity(mContext, 0  /* requestCode */, intent, 0  /* flags */);
     }
 
     private ListBuilder.RowBuilder getMediaDeviceRow(MediaDevice device) {
         final String title = device.getName();
         final PendingIntent broadcastAction =
                 getBroadcastIntent(mContext, device.getId(), device.hashCode());
-        final IconCompat deviceIcon = IconCompat.createWithResource(mContext, device.getIcon());
+        final IconCompat deviceIcon = getDeviceIconCompat(device);
+
         final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
                 .setTitleItem(deviceIcon, ListBuilder.ICON_IMAGE)
                 .setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
                         ListBuilder.ICON_IMAGE, title))
-                .setTitle(title);
+                .setTitle(title)
+                .setSubtitle(device.getSummary());
 
         return rowBuilder;
     }
@@ -150,6 +165,7 @@ public class MediaOutputSlice implements CustomSliceable {
         final Intent intent = new Intent(getUri().toString());
         intent.setClass(context, SliceBroadcastReceiver.class);
         intent.putExtra(MEDIA_DEVICE_ID, id);
+        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         return PendingIntent.getBroadcast(context, requestCode /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
     }

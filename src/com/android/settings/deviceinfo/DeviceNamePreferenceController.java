@@ -29,6 +29,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.bluetooth.BluetoothLengthDeviceNameFilter;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.ValidatedEditTextPreference;
@@ -75,6 +76,9 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     private void initializeDeviceName() {
         mDeviceName = Settings.Global.getString(mContext.getContentResolver(),
                 Settings.Global.DEVICE_NAME);
+        if (Utils.isSupportCTPA(mContext)) {
+            mDeviceName = Utils.getString(mContext, Utils.KEY_DEVICE_NAME);
+        }
         if (mDeviceName == null) {
             mDeviceName = Build.MODEL;
         }
@@ -135,6 +139,10 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     private void setSettingsGlobalDeviceName(String deviceName) {
         Settings.Global.putString(mContext.getContentResolver(), Settings.Global.DEVICE_NAME,
                 deviceName);
+        if (Utils.isSupportCTPA(mContext)) {
+            Settings.Global.putString(mContext.getContentResolver(), Utils.KEY_DEVICE_NAME,
+                    deviceName);
+        }
     }
 
     private void setBluetoothDeviceName(String deviceName) {

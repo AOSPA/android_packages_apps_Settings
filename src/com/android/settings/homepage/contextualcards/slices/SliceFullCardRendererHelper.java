@@ -16,32 +16,28 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.view.View;
+import android.widget.LinearLayout;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.slice.Slice;
-import androidx.slice.SliceItem;
-import androidx.slice.widget.EventInfo;
 import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
+import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUtils;
 import com.android.settings.overlay.FeatureFactory;
-
-import java.util.Set;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Card renderer helper for {@link ContextualCard} built as slice full card.
  */
-class SliceFullCardRendererHelper implements SliceView.OnSliceActionListener {
-    private static final String TAG = "SliceFCRendererHelper";
+class SliceFullCardRendererHelper {
 
     private final Context mContext;
-
-    private Set<ContextualCard> mCardSet;
 
     SliceFullCardRendererHelper(Context context) {
         mContext = context;
@@ -51,40 +47,37 @@ class SliceFullCardRendererHelper implements SliceView.OnSliceActionListener {
         return new SliceViewHolder(view);
     }
 
-    void bindView(RecyclerView.ViewHolder holder, ContextualCard card, Slice slice,
-            Set<ContextualCard> cardSet) {
+    void bindView(RecyclerView.ViewHolder holder, ContextualCard card, Slice slice) {
         final SliceViewHolder cardHolder = (SliceViewHolder) holder;
         cardHolder.sliceView.setScrollable(false);
         cardHolder.sliceView.setTag(card.getSliceUri());
         //TODO(b/114009676): We will soon have a field to decide what slice mode we should set.
         cardHolder.sliceView.setMode(SliceView.MODE_LARGE);
         cardHolder.sliceView.setSlice(slice);
-        mCardSet = cardSet;
         // Set this listener so we can log the interaction users make on the slice
-        cardHolder.sliceView.setOnSliceActionListener(this);
+        cardHolder.sliceView.setOnSliceActionListener(
+                (eventInfo, sliceItem) -> {
+                    final String log = ContextualCardLogUtils.buildCardClickLog(card, eventInfo.rowIndex,
+                            eventInfo.actionType, cardHolder.getAdapterPosition());
+
+                    final MetricsFeatureProvider metricsFeatureProvider =
+                            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+
+                    metricsFeatureProvider.action(mContext,
+                            SettingsEnums.ACTION_CONTEXTUAL_CARD_CLICK, log);
+
+                    final ContextualCardFeatureProvider contextualCardFeatureProvider =
+                            FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(
+                                    mContext);
+
+                    contextualCardFeatureProvider.logNotificationPackage(slice);
+                });
 
         // Customize slice view for Settings
         cardHolder.sliceView.showTitleItems(true);
         if (card.isLargeCard()) {
             cardHolder.sliceView.showHeaderDivider(true);
             cardHolder.sliceView.showActionDividers(true);
-        }
-    }
-
-    @Override
-    public void onSliceAction(@NonNull EventInfo eventInfo, @NonNull SliceItem sliceItem) {
-        // sliceItem.getSlice().getUri() is like
-        // content://android.settings.slices/action/wifi/_gen/0/_gen/0
-        // contextualCard.getSliceUri() is prefix of sliceItem.getSlice().getUri()
-        final ContextualCardFeatureProvider contextualCardFeatureProvider =
-                FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
-        for (ContextualCard card : mCardSet) {
-            if (sliceItem.getSlice().getUri().toString().startsWith(
-                    card.getSliceUri().toString())) {
-                contextualCardFeatureProvider.logContextualCardClick(card, eventInfo.rowIndex,
-                        eventInfo.actionType);
-                break;
-            }
         }
     }
 

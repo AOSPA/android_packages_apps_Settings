@@ -209,7 +209,7 @@
     <item>ICCID</item>
   </string-array>
   <string-array name="app_install_location_entries">
-    <item msgid="8151497958991952759">"内部端末ストレージ"</item>
+    <item msgid="8151497958991952759">"内部デバイスストレージ"</item>
     <item msgid="3738430123799803530">"リムーバブルSDカード"</item>
     <item msgid="4498124044785815005">"システムで判断する"</item>
   </string-array>
@@ -218,7 +218,7 @@
     <item msgid="255608127647030286">"個人"</item>
     <item msgid="4588829735729884491">"メッセージ"</item>
     <item msgid="886742181977884584">"メディア"</item>
-    <item msgid="7924928667052300589">"端末"</item>
+    <item msgid="7924928667052300589">"デバイス"</item>
   </string-array>
   <string-array name="app_ops_summaries">
     <item msgid="4979188868761515915">"おおよその位置情報"</item>
@@ -407,6 +407,10 @@
     <item msgid="8064740940687465039">"証明書とXauth認証付きのIPSec VPN"</item>
     <item msgid="4946199982372391490">"証明書とハイブリッド認証付きのIPSec VPN"</item>
   </string-array>
+  <string-array name="vpn_proxy_settings">
+    <item msgid="4474139132577932676">"なし"</item>
+    <item msgid="2943781954264525815">"手動"</item>
+  </string-array>
   <string-array name="vpn_states">
     <item msgid="8621078286418985762">"切断されました"</item>
     <item msgid="6692305604213080515">"初期化中..."</item>
@@ -461,6 +465,12 @@
     <item msgid="687318592238852312">"30 日以上経過"</item>
     <item msgid="2900554746706302178">"60 日以上経過"</item>
     <item msgid="5692284879054004388">"90 日以上経過"</item>
+  </string-array>
+    <!-- no translation found for swipe_direction_titles:0 (58569659116542716) -->
+    <!-- no translation found for swipe_direction_titles:1 (1878704357761948043) -->
+  <string-array name="swipe_direction_values">
+    <item msgid="8800082277840833437">"1"</item>
+    <item msgid="7485508823396511299">"0"</item>
   </string-array>
   <string-array name="wifi_metered_entries">
     <item msgid="5200910605264415911">"自動的に検出"</item>
@@ -517,18 +527,15 @@
     <item msgid="8753271080005095725">"RUIM / SIM"</item>
     <item msgid="2214656470548320124">"NV"</item>
   </string-array>
-  <string-array name="cdma_subscription_values">
-    <item msgid="3697517500945829780">"0"</item>
-    <item msgid="8113210705878681550">"1"</item>
-  </string-array>
   <string-array name="preferred_network_mode_choices_world_mode">
     <item msgid="1054992858056320116">"グローバル"</item>
     <item msgid="817971827645657949">"LTE / CDMA"</item>
     <item msgid="519208953133334357">"LTE / GSM / UMTS"</item>
   </string-array>
-  <string-array name="preferred_network_mode_values_world_mode">
-    <item msgid="3904215366284600030">"10"</item>
-    <item msgid="4187053702071521357">"8"</item>
-    <item msgid="5461421967189969022">"9"</item>
-  </string-array>
+    <!-- no translation found for enhanced_4g_lte_mode_title_variant:0 (7586074022364606422) -->
+    <!-- no translation found for enhanced_4g_lte_mode_title_variant:1 (5950846260630506903) -->
+    <!-- no translation found for enhanced_4g_lte_mode_title_variant:2 (2795368186689231672) -->
+    <!-- no translation found for enhanced_4g_lte_mode_sumary_variant:0 (3632552041956113517) -->
+    <!-- no translation found for enhanced_4g_lte_mode_sumary_variant:1 (8886675223048911179) -->
+    <!-- no translation found for enhanced_4g_lte_mode_sumary_variant:2 (8669821968941658558) -->
 </resources>

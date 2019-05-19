@@ -40,6 +40,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -62,9 +64,9 @@ import com.google.android.setupdesign.GlifLayout;
 public class MasterClearConfirm extends InstrumentedFragment {
     private final static String TAG = "MasterClearConfirm";
 
-    private View mContentView;
+    @VisibleForTesting View mContentView;
     private boolean mEraseSdCard;
-    private boolean mEraseEsims;
+    @VisibleForTesting boolean mEraseEsims;
 
     /**
      * The user has gone through the multiple confirmation, so now we go ahead
@@ -199,16 +201,25 @@ public class MasterClearConfirm extends InstrumentedFragment {
         setUpActionBarAndTitle();
         establishFinalConfirmationState();
         setAccessibilityTitle();
+        setSubtitle();
         return mContentView;
     }
 
     private void setAccessibilityTitle() {
         CharSequence currentTitle = getActivity().getTitle();
-        TextView confirmationMessage = mContentView.findViewById(R.id.master_clear_confirm);
+        TextView confirmationMessage = mContentView.findViewById(R.id.sud_layout_description);
         if (confirmationMessage != null) {
             String accessibleText = new StringBuilder(currentTitle).append(",").append(
                     confirmationMessage.getText()).toString();
             getActivity().setTitle(Utils.createAccessibleSequence(currentTitle, accessibleText));
+        }
+    }
+
+    @VisibleForTesting
+    void setSubtitle() {
+        if (mEraseEsims) {
+            ((TextView) mContentView.findViewById(R.id.sud_layout_description))
+                .setText(R.string.master_clear_final_desc_esim);
         }
     }
 

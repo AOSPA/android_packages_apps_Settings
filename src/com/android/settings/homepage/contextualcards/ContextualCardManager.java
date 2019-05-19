@@ -22,8 +22,11 @@ import static com.android.settings.intelligence.ContextualCardProto.ContextualCa
 
 import static java.util.stream.Collectors.groupingBy;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.text.format.DateUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.widget.BaseAdapter;
@@ -34,11 +37,15 @@ import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
+import com.android.settings.homepage.contextualcards.conditional.ConditionalCardController;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +69,12 @@ import java.util.stream.Collectors;
 public class ContextualCardManager implements ContextualCardLoader.CardContentLoaderListener,
         ContextualCardUpdateListener, LifecycleObserver, OnSaveInstanceState {
 
-    private static final String KEY_CONTEXTUAL_CARDS = "key_contextual_cards";
+    @VisibleForTesting
+    static final long CARD_CONTENT_LOADER_TIMEOUT_MS = DateUtils.SECOND_IN_MILLIS;
+    @VisibleForTesting
+    static final String KEY_GLOBAL_CARD_LOADER_TIMEOUT = "global_card_loader_timeout_key";
+    @VisibleForTesting
+    static final String KEY_CONTEXTUAL_CARDS = "key_contextual_cards";
 
     private static final String TAG = "ContextualCardManager";
 
@@ -70,18 +82,21 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     private static final int[] SETTINGS_CARDS =
             {ContextualCard.CardType.CONDITIONAL, ContextualCard.CardType.LEGACY_SUGGESTION};
 
-    @VisibleForTesting
-    final List<ContextualCard> mContextualCards;
     private final Context mContext;
-    private final ControllerRendererPool mControllerRendererPool;
     private final Lifecycle mLifecycle;
     private final List<LifecycleObserver> mLifecycleObservers;
+    private ContextualCardUpdateListener mListener;
+
+    @VisibleForTesting
+    final ControllerRendererPool mControllerRendererPool;
+    @VisibleForTesting
+    final List<ContextualCard> mContextualCards;
     @VisibleForTesting
     long mStartTime;
+    @VisibleForTesting
     boolean mIsFirstLaunch;
     @VisibleForTesting
     List<String> mSavedCards;
-    private ContextualCardUpdateListener mListener;
 
     public ContextualCardManager(Context context, Lifecycle lifecycle, Bundle savedInstanceState) {
         mContext = context;
@@ -90,7 +105,6 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         mLifecycleObservers = new ArrayList<>();
         mControllerRendererPool = new ControllerRendererPool();
         mLifecycle.addObserver(this);
-
         if (savedInstanceState == null) {
             mIsFirstLaunch = true;
             mSavedCards = null;
@@ -103,13 +117,13 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         }
     }
 
-    void loadContextualCards(ContextualCardsFragment fragment) {
+    void loadContextualCards(LoaderManager loaderManager) {
         mStartTime = System.currentTimeMillis();
         final CardContentLoaderCallbacks cardContentLoaderCallbacks =
                 new CardContentLoaderCallbacks(mContext);
         cardContentLoaderCallbacks.setListener(this);
         // Use the cached data when navigating back to the first page and upon screen rotation.
-        LoaderManager.getInstance(fragment).initLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
+        loaderManager.initLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
                 cardContentLoaderCallbacks);
     }
 
@@ -119,7 +133,8 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         }
     }
 
-    private void setupController(@ContextualCard.CardType int cardType) {
+    @VisibleForTesting
+    void setupController(@ContextualCard.CardType int cardType) {
         final ContextualCardController controller = mControllerRendererPool.getController(mContext,
                 cardType);
         if (controller == null) {
@@ -189,8 +204,8 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     @Override
     public void onFinishCardLoading(List<ContextualCard> cards) {
         final long loadTime = System.currentTimeMillis() - mStartTime;
-        //TODO(b/123668403): remove the log here once we do the change with FutureTask
         Log.d(TAG, "Total loading time = " + loadTime);
+
         final List<ContextualCard> cardsToKeep = getCardsToKeep(cards);
 
         //navigate back to the homepage, screen rotate or after card dismissal
@@ -200,14 +215,23 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
             return;
         }
 
-        //only log homepage display upon a fresh launch
-        if (loadTime <= ContextualCardLoader.CARD_CONTENT_LOADER_TIMEOUT_MS) {
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+        final long timeoutLimit = getCardLoaderTimeout();
+        if (loadTime <= timeoutLimit) {
             onContextualCardUpdated(cards.stream()
                     .collect(groupingBy(ContextualCard::getCardType)));
+        } else {
+            // log timeout occurrence
+            metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_LOAD_TIMEOUT,
+                    SettingsEnums.SETTINGS_HOMEPAGE,
+                    null /* key */, (int) loadTime /* value */);
         }
+        //only log homepage display upon a fresh launch
         final long totalTime = System.currentTimeMillis() - mStartTime;
-        FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext)
-                .logHomepageDisplay(totalTime);
+        metricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_CONTEXTUAL_HOME_SHOW, (int) totalTime);
 
         mIsFirstLaunch = false;
     }
@@ -219,6 +243,37 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
                 .collect(Collectors.toCollection(ArrayList::new));
 
         outState.putStringArrayList(KEY_CONTEXTUAL_CARDS, cards);
+    }
+
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        // Duplicate a list to avoid java.util.ConcurrentModificationException.
+        final List<ContextualCard> cards = new ArrayList<>(mContextualCards);
+        boolean hasConditionController = false;
+        for (ContextualCard card : cards) {
+            final ContextualCardController controller = getControllerRendererPool()
+                    .getController(mContext, card.getCardType());
+            if (controller instanceof ConditionalCardController) {
+                hasConditionController = true;
+            }
+            if (hasWindowFocus && controller instanceof OnStart) {
+                ((OnStart) controller).onStart();
+            }
+            if (!hasWindowFocus && controller instanceof OnStop) {
+                ((OnStop) controller).onStop();
+            }
+        }
+        // Conditional cards will always be refreshed whether or not there are conditional cards
+        // in the homepage.
+        if (!hasConditionController) {
+            final ContextualCardController controller = getControllerRendererPool()
+                    .getController(mContext, ContextualCard.CardType.CONDITIONAL);
+            if (hasWindowFocus && controller instanceof OnStart) {
+                ((OnStart) controller).onStart();
+            }
+            if (!hasWindowFocus && controller instanceof OnStop) {
+                ((OnStop) controller).onStop();
+            }
+        }
     }
 
     public ControllerRendererPool getControllerRendererPool() {
@@ -237,6 +292,14 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
         final List<ContextualCard> result = getCardsWithDeferredSetupViewType(cards);
         return getCardsWithSuggestionViewType(result);
+    }
+
+    @VisibleForTesting
+    long getCardLoaderTimeout() {
+        // Return the timeout limit if Settings.Global has the KEY_GLOBAL_CARD_LOADER_TIMEOUT key,
+        // else return default timeout.
+        return Settings.Global.getLong(mContext.getContentResolver(),
+                KEY_GLOBAL_CARD_LOADER_TIMEOUT, CARD_CONTENT_LOADER_TIMEOUT_MS);
     }
 
     private List<ContextualCard> getCardsWithSuggestionViewType(List<ContextualCard> cards) {
@@ -274,7 +337,8 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         return result;
     }
 
-    private List<ContextualCard> getCardsToKeep(List<ContextualCard> cards) {
+    @VisibleForTesting
+    List<ContextualCard> getCardsToKeep(List<ContextualCard> cards) {
         if (mSavedCards != null) {
             //screen rotate
             final List<ContextualCard> cardsToKeep = cards.stream()

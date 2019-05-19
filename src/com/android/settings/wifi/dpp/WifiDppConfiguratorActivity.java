@@ -19,6 +19,7 @@ package com.android.settings.wifi.dpp;
 import android.app.ActionBar;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -50,8 +51,8 @@ import java.util.List;
  * {@code WifiDppUtils.EXTRA_WIFI_PRE_SHARED_KEY}
  * {@code WifiDppUtils.EXTRA_WIFI_HIDDEN_SSID}
  *
- * For intent action {@link Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE}, specify Wi-Fi (DPP)
- * QR code in {@code WifiDppUtils.EXTRA_QR_CODE}
+ * For intent action {@link Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_URI}, specify Wi-Fi
+ * Easy Connect bootstrapping information string in Intent's data URI.
  */
 public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
         WifiNetworkConfig.Retriever,
@@ -74,13 +75,14 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
     private static final String KEY_WIFI_PRESHARED_KEY = "key_wifi_preshared_key";
     private static final String KEY_WIFI_HIDDEN_SSID = "key_wifi_hidden_ssid";
     private static final String KEY_WIFI_NETWORK_ID = "key_wifi_network_id";
+    private static final String KEY_IS_HOTSPOT = "key_is_hotspot";
 
     private FragmentManager mFragmentManager;
 
     /** The Wi-Fi network which will be configured */
     private WifiNetworkConfig mWifiNetworkConfig;
 
-    /** The Wi-Fi DPP QR code from intent ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE */
+    /** The Wi-Fi DPP QR code from intent ACTION_PROCESS_WIFI_EASY_CONNECT_URI */
     private WifiQrCode mWifiDppQrCode;
 
     /** Secret extra that allows fake networks to show in UI for testing purposes */
@@ -103,14 +105,15 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
 
             mWifiDppQrCode = WifiQrCode.getValidWifiDppQrCodeOrNull(qrCode);
 
-            String security = savedInstanceState.getString(KEY_WIFI_SECURITY);
-            String ssid = savedInstanceState.getString(KEY_WIFI_SSID);
-            String preSharedKey = savedInstanceState.getString(KEY_WIFI_PRESHARED_KEY);
-            boolean hiddenSsid = savedInstanceState.getBoolean(KEY_WIFI_HIDDEN_SSID);
-            int networkId = savedInstanceState.getInt(KEY_WIFI_NETWORK_ID);
+            final String security = savedInstanceState.getString(KEY_WIFI_SECURITY);
+            final String ssid = savedInstanceState.getString(KEY_WIFI_SSID);
+            final String preSharedKey = savedInstanceState.getString(KEY_WIFI_PRESHARED_KEY);
+            final boolean hiddenSsid = savedInstanceState.getBoolean(KEY_WIFI_HIDDEN_SSID);
+            final int networkId = savedInstanceState.getInt(KEY_WIFI_NETWORK_ID);
+            final boolean isHotspot = savedInstanceState.getBoolean(KEY_IS_HOTSPOT);
 
             mWifiNetworkConfig = WifiNetworkConfig.getValidConfigOrNull(security, ssid,
-                    preSharedKey, hiddenSsid, networkId);
+                    preSharedKey, hiddenSsid, networkId, isHotspot);
         } else {
             handleIntent(getIntent());
         }
@@ -144,10 +147,11 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                     showQrCodeGeneratorFragment();
                 }
                 break;
-            case Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_QR_CODE:
-                String qrCode = intent.getStringExtra(Settings.EXTRA_QR_CODE);
+            case Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_URI:
+                final Uri uri = intent.getData();
+                final String uriString = (uri == null) ? null : uri.toString();
                 mIsTest = intent.getBooleanExtra(WifiDppUtils.EXTRA_TEST, false);
-                mWifiDppQrCode = WifiQrCode.getValidWifiDppQrCodeOrNull(qrCode);
+                mWifiDppQrCode = WifiQrCode.getValidWifiDppQrCodeOrNull(uriString);
                 final boolean isDppSupported = WifiDppUtils.isWifiDppEnabled(this);
                 if (!isDppSupported) {
                     Log.d(TAG, "Device doesn't support Wifi DPP");
@@ -359,6 +363,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
             outState.putString(KEY_WIFI_PRESHARED_KEY, mWifiNetworkConfig.getPreSharedKey());
             outState.putBoolean(KEY_WIFI_HIDDEN_SSID, mWifiNetworkConfig.getHiddenSsid());
             outState.putInt(KEY_WIFI_NETWORK_ID, mWifiNetworkConfig.getNetworkId());
+            outState.putBoolean(KEY_IS_HOTSPOT, mWifiNetworkConfig.isHotspot());
         }
 
         super.onSaveInstanceState(outState);
@@ -391,7 +396,8 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                     wifiConfiguration.getPrintableSsid(),
                     wifiConfiguration.preSharedKey,
                     /* hiddenSsid */ false,
-                    wifiConfiguration.networkId);
+                    wifiConfiguration.networkId,
+                    /* isHotspot */ false);
             }
         }
 

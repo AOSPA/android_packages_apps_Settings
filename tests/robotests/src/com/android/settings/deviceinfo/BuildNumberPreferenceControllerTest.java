@@ -20,7 +20,6 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -35,7 +34,6 @@ import android.provider.Settings;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -62,13 +60,8 @@ import org.robolectric.shadows.ShadowUserManager;
 public class BuildNumberPreferenceControllerTest {
 
     private static final String KEY_BUILD_NUMBER = "build_number";
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private InstrumentedPreferenceFragment mFragment;
-    @Mock(answer = RETURNS_DEEP_STUBS)
-    private PreferenceScreen mScreen;
 
     private ShadowUserManager mShadowUserManager;
 

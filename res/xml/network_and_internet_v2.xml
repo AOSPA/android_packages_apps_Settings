@@ -18,10 +18,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="network_and_internet_screen"
-    android:title="@string/network_dashboard_title">
+    android:title="@string/network_dashboard_title"
+    settings:initialExpandedChildrenCount="5">
 
     <PreferenceCategory
         android:key="multi_network_header"
+        android:title="@string/summary_placeholder"
+        android:layout="@layout/preference_category_no_label"
         settings:allowDividerBelow="true"
         android:order="-40"
         settings:controller="com.android.settings.network.MultiNetworkHeaderController"/>
@@ -50,7 +53,7 @@
         settings:useAdminDisabledSummary="true" />
 
     <com.android.settingslib.RestrictedSwitchPreference
-        android:key="toggle_airplane"
+        android:key="airplane_mode"
         android:title="@string/airplane_mode"
         android:icon="@drawable/ic_airplanemode_active"
         android:disableDependentsState="true"
@@ -79,7 +82,7 @@
         settings:useAdminDisabledSummary="true" />
 
     <com.android.settings.datausage.DataSaverPreference
-        android:key="restrict_background"
+        android:key="restrict_background_parent_entry"
         android:title="@string/data_saver_title"
         android:icon="@drawable/ic_settings_data_usage"
         android:order="10"

@@ -68,8 +68,23 @@
     <dimen name="notification_app_icon_size">64dp</dimen>
     <dimen name="notification_app_icon_badge_size">20dp</dimen>
     <dimen name="notification_app_icon_badge_margin">4dp</dimen>
+    <dimen name="notification_importance_toggle_size">48dp</dimen>
+    <dimen name="notification_importance_toggle_marginTop">28dp</dimen>
+    <dimen name="notification_importance_toggle_marginBottom">28dp</dimen>
+    <dimen name="notification_importance_text_marginTop">20dp</dimen>
+    <dimen name="notification_importance_button_separation">16dp</dimen>
+    <dimen name="notification_importance_button_width">178dp</dimen>
+    <dimen name="notification_importance_button_horiz_padding">36dp</dimen>
+    <dimen name="notification_importance_drawable_padding">8dp</dimen>
+    <dimen name="notification_importance_description_padding">20dp</dimen>
+    <dimen name="notification_importance_description_text">14sp</dimen>
+    <dimen name="notification_importance_button_text">16sp</dimen>
+    <dimen name="notification_importance_button_padding">14dp</dimen>
+
     <dimen name="zen_schedule_rule_checkbox_padding">7dp</dimen>
     <dimen name="zen_schedule_day_margin">17dp</dimen>
+
+    <dimen name="rect_button_radius">8dp</dimen>
 
     <!-- Default text size for caption preview samples. Uses dp rather than sp because captions are not scaled. -->
     <dimen name="caption_preview_text_size">48dp</dimen>
@@ -173,6 +188,7 @@
     <!-- WiFi Preferences -->
     <dimen name="wifi_divider_height">1px</dimen>
     <dimen name="wifi_ap_band_checkbox_padding">16dp</dimen>
+    <dimen name="wifi_detail_page_header_image_size">32dp</dimen>
 
     <!-- Color picker -->
     <dimen name="color_swatch_size">16dp</dimen>
@@ -279,6 +295,15 @@
 
     <dimen name="password_requirement_textsize">14sp</dimen>
 
+    <!-- Visible vertical space we want to show below password edittext field when ime is shown.
+         The unit is sp as it is related to the text size of password requirement item. -->
+    <dimen name="visible_vertical_space_below_password">20sp</dimen>
+
+    <!-- Select dialog -->
+    <dimen name="select_dialog_padding_start">20dp</dimen>
+    <dimen name="select_dialog_item_margin_start">12dp</dimen>
+    <dimen name="select_dialog_summary_padding_bottom">8dp</dimen>
+
     <!-- Padding between the donut and the storage summary. -->
     <dimen name="storage_summary_padding_end">16dp</dimen>
     <!-- Text size of the big number in the donut. -->
@@ -306,14 +331,6 @@
     <dimen name="screen_pinning_padding_start">64dp</dimen>
     <dimen name="screen_pinning_padding_end">64dp</dimen>
 
-    <!-- Suggestion/condition header padding -->
-    <dimen name="suggestion_condition_header_padding_collapsed">10dp</dimen>
-    <dimen name="suggestion_condition_header_padding_expanded">5dp</dimen>
-    <dimen name="condition_header_height">36dp</dimen>
-
-    <!-- Condition cards size and padding -->
-    <dimen name="condition_card_elevation">2dp</dimen>
-
     <!-- Padding for the reset screens -->
     <dimen name="reset_checkbox_padding_end">8dp</dimen>
     <dimen name="reset_checkbox_title_padding_top">12dp</dimen>
@@ -321,41 +338,35 @@
     <dimen name="reset_checkbox_title_text_size">18sp</dimen>
     <dimen name="reset_checkbox_summary_text_size">14sp</dimen>
 
-    <!-- Bottombar size and padding -->
-    <dimen name="homepage_bottomsheet_height">90dp</dimen>
-    <dimen name="homepage_bottombar_height">56dp</dimen>
-    <dimen name="homepage_bottombar_top_margin">34dp</dimen>
-    <dimen name="homepage_bottombar_fab_cradle">68dp</dimen>
-
     <!-- Homepage cards size and padding -->
-    <dimen name="homepage_card_icon_size">24dp</dimen>
-    <dimen name="homepage_card_vertical_margin">8dp</dimen>
-    <dimen name="homepage_card_side_margin">4dp</dimen>
-    <dimen name="homepage_card_padding_start">16dp</dimen>
-    <dimen name="homepage_card_padding_end">16dp</dimen>
-    <dimen name="homepage_full_card_padding_end">12dp</dimen>
-    <dimen name="homepage_half_card_padding_top">12dp</dimen>
-    <dimen name="homepage_half_card_padding_bottom">16dp</dimen>
-    <dimen name="homepage_half_card_title_margin_top">12dp</dimen>
-    <dimen name="homepage_deferred_setup_card_padding_top">16dp</dimen>
-    <dimen name="homepage_deferred_setup_card_padding_bottom">12dp</dimen>
-    <dimen name="homepage_deferred_setup_card_title_margin_top">12dp</dimen>
-    <dimen name="homepage_deferred_setup_card_summary_margin_top">2dp</dimen>
-    <dimen name="homepage_deferred_setup_card_button_margin_top">8dp</dimen>
-    <dimen name="homepage_deferred_setup_card_button_padding_top">8dp</dimen>
-    <dimen name="homepage_deferred_setup_card_button_padding_bottom">8dp</dimen>
-    <dimen name="homepage_deferred_setup_card_button_padding_start">24dp</dimen>
-    <dimen name="homepage_deferred_setup_card_button_padding_end">24dp</dimen>
+    <dimen name="contextual_card_icon_size">24dp</dimen>
+    <dimen name="contextual_card_vertical_margin">8dp</dimen>
+    <dimen name="contextual_card_side_margin">4dp</dimen>
+    <dimen name="contextual_card_icon_padding_start">14dp</dimen>
+    <dimen name="contextual_card_text_padding_start">16dp</dimen>
+    <dimen name="contextual_card_padding_end">16dp</dimen>
+    <dimen name="contextual_card_corner_radius">@*android:dimen/config_dialogCornerRadius</dimen>
+    <dimen name="contextual_full_card_padding_end">12dp</dimen>
+    <dimen name="contextual_half_card_padding_top">12dp</dimen>
+    <dimen name="contextual_half_card_padding_bottom">16dp</dimen>
+    <dimen name="contextual_half_card_title_margin_top">12dp</dimen>
+    <dimen name="contextual_deferred_setup_card_padding_top">16dp</dimen>
+    <dimen name="contextual_deferred_setup_card_padding_bottom">12dp</dimen>
+    <dimen name="contextual_deferred_setup_card_title_margin_top">12dp</dimen>
+    <dimen name="contextual_deferred_setup_card_summary_margin_top">2dp</dimen>
+    <dimen name="contextual_deferred_setup_card_button_margin_top">8dp</dimen>
+    <dimen name="contextual_deferred_setup_card_button_padding_top">8dp</dimen>
+    <dimen name="contextual_deferred_setup_card_button_padding_bottom">8dp</dimen>
+    <dimen name="contextual_deferred_setup_card_button_padding_start">24dp</dimen>
+    <dimen name="contextual_deferred_setup_card_button_padding_end">24dp</dimen>
 
     <!-- Homepage dismissal cards size and padding -->
-    <dimen name="homepage_card_dismissal_margin_top">12dp</dimen>
-    <dimen name="homepage_card_dismissal_side_margin">16dp</dimen>
-    <dimen name="homepage_card_dismissal_button_margin_start">4dp</dimen>
-    <dimen name="homepage_card_dismissal_button_margin_end">6dp</dimen>
+    <dimen name="contextual_card_dismissal_margin_top">12dp</dimen>
+    <dimen name="contextual_card_dismissal_side_margin">16dp</dimen>
+    <dimen name="contextual_card_dismissal_button_margin_start">4dp</dimen>
+    <dimen name="contextual_card_dismissal_button_margin_end">6dp</dimen>
 
     <!-- Horizontal divider size and margin -->
-    <dimen name="horizontal_divider_margin_top">4dp</dimen>
-    <dimen name="horizontal_divider_margin_bottom">8dp</dimen>
     <dimen name="horizontal_divider_height">.75dp</dimen>
 
     <!-- Vertical divider size -->
@@ -365,25 +376,25 @@
     <dimen name="signal_strength_icon_size">24dp</dimen>
 
     <!-- Condition cards size and padding -->
-    <dimen name="homepage_condition_card_title_margin_bottom">2dp</dimen>
-    <dimen name="homepage_condition_half_card_padding_top">12dp</dimen>
-    <dimen name="homepage_condition_half_card_title_margin_top">12dp</dimen>
-    <dimen name="homepage_condition_half_card_summary_margin_bottom">12dp</dimen>
-    <dimen name="homepage_condition_full_card_padding_start">12dp</dimen>
-    <dimen name="homepage_condition_full_card_padding_end">16dp</dimen>
-    <dimen name="homepage_condition_full_card_padding_top">12dp</dimen>
-    <dimen name="homepage_condition_full_card_padding_bottom">12dp</dimen>
-    <dimen name="homepage_condition_header_padding_top">10dp</dimen>
-    <dimen name="homepage_condition_header_padding_bottom">10dp</dimen>
-    <dimen name="homepage_condition_header_icons_margin_start">16dp</dimen>
-    <dimen name="homepage_condition_header_indicator_padding_top">4dp</dimen>
-    <dimen name="homepage_condition_header_indicator_padding_start">16dp</dimen>
-    <dimen name="homepage_condition_header_indicator_padding_end">16dp</dimen>
-    <dimen name="homepage_condition_footer_height">44dp</dimen>
-    <dimen name="homepage_condition_footer_padding_top">10dp</dimen>
-    <dimen name="homepage_condition_footer_padding_end">10dp</dimen>
-    <dimen name="homepage_condition_header_icon_width_height">24dp</dimen>
-    <dimen name="homepage_condition_header_icon_margin_end">24dp</dimen>
+    <dimen name="contextual_condition_card_title_margin_bottom">2dp</dimen>
+    <dimen name="contextual_condition_half_card_padding_top">12dp</dimen>
+    <dimen name="contextual_condition_half_card_title_margin_top">12dp</dimen>
+    <dimen name="contextual_condition_half_card_summary_margin_bottom">12dp</dimen>
+    <dimen name="contextual_condition_full_card_padding_start">24dp</dimen>
+    <dimen name="contextual_condition_full_card_padding_end">16dp</dimen>
+    <dimen name="contextual_condition_full_card_padding_top">12dp</dimen>
+    <dimen name="contextual_condition_full_card_padding_bottom">12dp</dimen>
+    <dimen name="contextual_condition_header_padding_top">10dp</dimen>
+    <dimen name="contextual_condition_header_padding_bottom">10dp</dimen>
+    <dimen name="contextual_condition_header_icons_margin_start">14dp</dimen>
+    <dimen name="contextual_condition_header_indicator_padding_top">4dp</dimen>
+    <dimen name="contextual_condition_header_indicator_padding_start">16dp</dimen>
+    <dimen name="contextual_condition_header_indicator_padding_end">16dp</dimen>
+    <dimen name="contextual_condition_footer_height">48dp</dimen>
+    <dimen name="contextual_condition_footer_padding_top">10dp</dimen>
+    <dimen name="contextual_condition_footer_padding_end">10dp</dimen>
+    <dimen name="contextual_condition_header_icon_width_height">24dp</dimen>
+    <dimen name="contextual_condition_header_icon_margin_end">24dp</dimen>
 
     <!-- QR code picture size -->
     <dimen name="qrcode_size">264dp</dimen>
@@ -392,6 +403,11 @@
     <!-- Wi-Fi DPP fragment icon size -->
     <dimen name="wifi_dpp_fragment_icon_width_height">48dp</dimen>
 
-    <!-- Height for slice preference, which contains 6 items at most -->
-    <dimen name="slice_preference_group_height">360dp</dimen>
+    <!-- Elevation of bluetooth icon -->
+    <dimen name="bt_icon_elevation">4dp</dimen>
+
+    <dimen name="two_target_min_width">80dp</dimen>
+
+    <!-- Maximum height for SliceView, override on slices/view/src/main/res/values/dimens.xml -->
+    <dimen name="abc_slice_large_height">360dp</dimen>
 </resources>

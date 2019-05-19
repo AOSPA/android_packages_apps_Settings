@@ -72,8 +72,6 @@
         <attr name="controller" format="string" />
         <!-- {@code true} when the controller declared represents a slice from {@link android.app.SettingsSliceContract} -->
         <attr name="platform_slice" format="boolean" />
-        <!-- Whether or not dynamic summary text from PreferenceController is allowed when creating slice object, by default it's false. -->
-        <attr name="allowDynamicSummaryInSlice" format="boolean" />
         <!-- customized subtitle if it's an unavailable slice -->
         <attr name="unavailableSliceSubtitle" format="string" />
     </declare-styleable>
@@ -132,6 +130,11 @@
         <attr name="aspectRatio" format="float" />
     </declare-styleable>
 
+    <declare-styleable name="ListWithEntrySummaryPreference">
+        <!-- Summaries of entry -->
+        <attr name="entrySummaries" format="reference" />
+    </declare-styleable>
+
     <!-- For UsageView -->
     <declare-styleable name="UsageView">
         <attr name="android:colorAccent" />
@@ -161,11 +164,12 @@
         <attr name="textOff" format="reference" />
     </declare-styleable>
 
-    <attr name="twoStateButtonPreferenceStyle" format="reference" />
+    <declare-styleable name="TintDrawable">
+        <attr name="android:tint" />
+        <attr name="android:drawable" />
+    </declare-styleable>
 
-    <attr name="batteryGoodColor" format="color" />
-    <attr name="batteryBadColor" format="color" />
-    <attr name="batteryMaybeColor" format="color" />
+    <attr name="twoStateButtonPreferenceStyle" format="reference" />
 
     <attr name="fingerprint_layout_theme" format="reference" />
     <attr name="face_layout_theme" format="reference" />

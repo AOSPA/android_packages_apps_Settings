@@ -25,7 +25,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -36,7 +36,9 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
+import com.google.android.setupdesign.view.IllustrationVideoView;
 
 public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
@@ -45,28 +47,63 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     private FaceManager mFaceManager;
     private FaceEnrollAccessibilityToggle mSwitchDiversity;
 
+    private IllustrationVideoView mIllustrationNormal;
+    private View mIllustrationAccessibility;
+
+    private CompoundButton.OnCheckedChangeListener mSwitchDiversityListener =
+            new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                mIllustrationNormal.stop();
+                mIllustrationNormal.setVisibility(View.INVISIBLE);
+                mIllustrationAccessibility.setVisibility(View.VISIBLE);
+            } else {
+                mIllustrationNormal.setVisibility(View.VISIBLE);
+                mIllustrationNormal.start();
+                mIllustrationAccessibility.setVisibility(View.INVISIBLE);
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mFaceManager = Utils.getFaceManagerOrNull(this);
-        final LinearLayout accessibilityLayout = findViewById(R.id.accessibility_layout);
         final Button accessibilityButton = findViewById(R.id.accessibility_button);
         accessibilityButton.setOnClickListener(view -> {
-            accessibilityButton.setVisibility(View.INVISIBLE);
-            accessibilityLayout.setVisibility(View.VISIBLE);
+            mSwitchDiversity.setChecked(true);
+            accessibilityButton.setVisibility(View.GONE);
+            mSwitchDiversity.setVisibility(View.VISIBLE);
         });
 
         mSwitchDiversity = findViewById(R.id.toggle_diversity);
+        mSwitchDiversity.setListener(mSwitchDiversityListener);
+
+        mIllustrationNormal = findViewById(R.id.illustration_normal);
+        mIllustrationAccessibility = findViewById(R.id.illustration_accessibility);
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
-        mFooterBarMixin.setSecondaryButton(
-                new FooterButton.Builder(this)
-                        .setText(R.string.security_settings_face_enroll_introduction_cancel)
-                        .setListener(this::onCancelButtonClick)
-                        .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SudGlifButton_Secondary)
-                        .build()
-        );
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            mFooterBarMixin.setSecondaryButton(
+                    new FooterButton.Builder(this)
+                            .setText(R.string.skip_label)
+                            .setListener(this::onSkipButtonClick)
+                            .setButtonType(FooterButton.ButtonType.SKIP)
+                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .build()
+            );
+        } else {
+            mFooterBarMixin.setSecondaryButton(
+                    new FooterButton.Builder(this)
+                            .setText(R.string.security_settings_face_enroll_introduction_cancel)
+                            .setListener(this::onCancelButtonClick)
+                            .setButtonType(FooterButton.ButtonType.CANCEL)
+                            .setTheme(R.style.SudGlifButton_Secondary)
+                            .build()
+            );
+        }
 
         mFooterBarMixin.setPrimaryButton(
                 new FooterButton.Builder(this)
@@ -77,6 +114,13 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                         .build()
         );
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSwitchDiversityListener.onCheckedChanged(mSwitchDiversity.getSwitch(),
+                mSwitchDiversity.isChecked());
+     }
 
     @Override
     protected boolean isDisabledByAdmin() {
@@ -101,7 +145,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected int getDescriptionResDisabledByAdmin() {
-        return R.string.security_settings_fingerprint_enroll_introduction_message_unlock_disabled;
+        return R.string.security_settings_face_enroll_introduction_message_unlock_disabled;
     }
 
     @Override
@@ -165,7 +209,8 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         } else {
             intent.setClass(this, FaceEnrollEnrolling.class);
         }
-        intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, mSwitchDiversity.isChecked());
+        intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, !mSwitchDiversity.isChecked());
+        WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
         return intent;
     }
 

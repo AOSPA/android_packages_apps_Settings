@@ -18,23 +18,53 @@ package com.android.settings.display;
 
 import android.app.UiModeManager;
 import android.content.Context;
+import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
+import androidx.fragment.app.Fragment;
 
-import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 
-public class DarkUIPreferenceController extends BasePreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class DarkUIPreferenceController extends TogglePreferenceController {
 
+    public static final String DARK_MODE_PREFS = "dark_mode_prefs";
+    public static final String PREF_DARK_MODE_DIALOG_SEEN = "dark_mode_dialog_seen";
+    public static final int DIALOG_SEEN = 1;
     private UiModeManager mUiModeManager;
+    private Context mContext;
+    private Fragment mFragment;
 
     public DarkUIPreferenceController(Context context, String key) {
         super(context, key);
+        mContext = context;
         mUiModeManager = context.getSystemService(UiModeManager.class);
+    }
+
+    @Override
+    public boolean isChecked() {
+        return mUiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_YES;
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        final boolean dialogSeen =
+                Settings.Secure.getInt(mContext.getContentResolver(),
+                        Settings.Secure.DARK_MODE_DIALOG_SEEN, 0) == DIALOG_SEEN;
+        if (!dialogSeen && isChecked) {
+            showDarkModeDialog();
+            return false;
+        }
+        mUiModeManager.setNightMode(isChecked
+                ? UiModeManager.MODE_NIGHT_YES
+                : UiModeManager.MODE_NIGHT_NO);
+        return true;
+    }
+
+    private void showDarkModeDialog() {
+        final DarkUIInfoDialogFragment frag = new DarkUIInfoDialogFragment();
+        if (mFragment.getFragmentManager() != null) {
+            frag.show(mFragment.getFragmentManager(), getClass().getName());
+        }
     }
 
     @VisibleForTesting
@@ -42,64 +72,12 @@ public class DarkUIPreferenceController extends BasePreferenceController
         mUiModeManager = uiModeManager;
     }
 
+    public void setParentFragment(Fragment fragment) {
+        mFragment = fragment;
+    }
+
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        int value = mUiModeManager.getNightMode();
-        ListPreference preference = screen.findPreference(getPreferenceKey());
-        preference.setValue(modeToString(value));
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        mUiModeManager.setNightMode(modeToInt((String) newValue));
-        refreshSummary(preference);
-        return true;
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        return modeToDescription(mUiModeManager.getNightMode());
-    }
-
-    private String modeToDescription(int mode) {
-        String[] values = mContext.getResources().getStringArray(R.array.dark_ui_mode_entries);
-        switch (mode) {
-            case UiModeManager.MODE_NIGHT_YES:
-                return values[0];
-            case UiModeManager.MODE_NIGHT_NO:
-            case UiModeManager.MODE_NIGHT_AUTO:
-            default:
-                return values[1];
-
-        }
-    }
-
-    private String modeToString(int mode) {
-        switch (mode) {
-            case UiModeManager.MODE_NIGHT_YES:
-                return "yes";
-            case UiModeManager.MODE_NIGHT_NO:
-            case UiModeManager.MODE_NIGHT_AUTO:
-            default:
-                return "no";
-
-        }
-    }
-
-    private int modeToInt(String mode) {
-        switch (mode) {
-            case "yes":
-                return UiModeManager.MODE_NIGHT_YES;
-            case "no":
-            case "auto":
-            default:
-                return UiModeManager.MODE_NIGHT_NO;
-        }
     }
 }

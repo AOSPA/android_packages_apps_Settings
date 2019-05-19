@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +30,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.wifi.qrcode.QrCodeGenerator;
@@ -43,6 +45,7 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     private static final String TAG = "WifiDppQrCodeGeneratorFragment";
 
     private ImageView mQrCodeView;
+    private TextView mPasswordView;
     private String mQrCode;
 
     @Override
@@ -59,6 +62,14 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        // setTitle for Talkback
+        final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
+        if (wifiNetworkConfig.isHotspot()) {
+            getActivity().setTitle(R.string.wifi_dpp_share_hotspot);
+        } else {
+            getActivity().setTitle(R.string.wifi_dpp_share_wifi);
+        }
 
         setHasOptionsMenu(true);
         final ActionBar actionBar = getActivity().getActionBar();
@@ -84,31 +95,12 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
-        MenuItem menuItem;
-        if (wifiNetworkConfig.isSupportWifiDpp(getActivity())) {
-            menuItem = menu.add(0, Menu.FIRST, 0, R.string.next_label);
-            menuItem.setIcon(R.drawable.ic_scan_24dp);
-            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        } else {
-            menuItem = menu.findItem(Menu.FIRST);
-            if (menuItem != null) {
-                menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-            }
+        final MenuItem menuItem = menu.findItem(Menu.FIRST);
+        if (menuItem != null) {
+            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         }
 
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case Menu.FIRST:
-                mListener.onQrCodeGeneratorFragmentAddButtonClicked();
-                return true;
-            default:
-                return super.onOptionsItemSelected(menuItem);
-        }
     }
 
     @Override
@@ -127,9 +119,30 @@ public class WifiDppQrCodeGeneratorFragment extends WifiDppQrCodeBaseFragment {
         setHeaderIconImageResource(R.drawable.ic_qrcode_24dp);
 
         final WifiNetworkConfig wifiNetworkConfig = getWifiNetworkConfigFromHostActivity();
-        mTitle.setText(R.string.wifi_dpp_share_wifi);
-        mSummary.setText(getString(R.string.wifi_dpp_scan_qr_code_with_another_device,
-                wifiNetworkConfig.getSsid()));
+        if (wifiNetworkConfig.isHotspot()) {
+            mTitle.setText(R.string.wifi_dpp_share_hotspot);
+        } else {
+            mTitle.setText(R.string.wifi_dpp_share_wifi);
+        }
+
+        final String password = wifiNetworkConfig.getPreSharedKey();
+        mPasswordView = view.findViewById(R.id.password);
+        if (TextUtils.isEmpty(password)) {
+            mSummary.setText(getString(
+                    R.string.wifi_dpp_scan_open_network_qr_code_with_another_device,
+                    wifiNetworkConfig.getSsid()));
+
+            mPasswordView.setVisibility(View.GONE);
+        } else {
+            mSummary.setText(getString(R.string.wifi_dpp_scan_qr_code_with_another_device,
+                    wifiNetworkConfig.getSsid()));
+
+            if (wifiNetworkConfig.isHotspot()) {
+               mPasswordView.setText(getString(R.string.wifi_dpp_hotspot_password, password));
+            } else {
+                mPasswordView.setText(getString(R.string.wifi_dpp_wifi_password, password));
+            }
+        }
 
         mQrCode = wifiNetworkConfig.getQrCode();
         setQrCode();

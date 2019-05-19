@@ -22,6 +22,8 @@ import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
 import android.annotation.Nullable;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AppGlobals;
 import android.app.IActivityManager;
@@ -95,13 +97,17 @@ import android.widget.TabWidget;
 import androidx.annotation.StringRes;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.core.FeatureFlags;
+import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settingslib.widget.ActionBarShadowController;
 
 import java.net.InetAddress;
 import java.util.Iterator;
@@ -122,6 +128,25 @@ public final class Utils extends com.android.settingslib.Utils {
     public static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
 
     public static final String OS_PKG = "os";
+
+    public static final String KEY_SOFTWARE_VERSION = "ext_meta_software_version";
+    public static final String KEY_MODEL = "ext_model_name_from_meta";
+    public static final String KEY_HARDWARE_VERSION = "ext_hardware_version";
+    public static final String KEY_WIFI_MAC_ADDRESS = "ext_wifi_mac_address";
+    public static final String KEY_DEVICE_NAME = "ext_device_name";
+    public static final String KEY_ROM_TOTAL_SIZE = "ext_rom_total_size";
+    public static final String KEY_RAM_TOTAL_SIZE = "ext_ram_total_size";
+
+    /**
+     * Whether to disable the new device identifier access restrictions.
+     */
+    public static final String PROPERTY_DEVICE_IDENTIFIER_ACCESS_RESTRICTIONS_DISABLED =
+            "device_identifier_access_restrictions_disabled";
+
+    /**
+     * Whether to show the Permissions Hub.
+     */
+    public static final String PROPERTY_PERMISSIONS_HUB_ENABLED = "permissions_hub_enabled";
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -518,6 +543,9 @@ public final class Utils extends com.android.settingslib.Utils {
      * TODO: See bug 16533525.
      */
     public static boolean showSimCardTile(Context context) {
+        if (FeatureFlagPersistent.isEnabled(context, FeatureFlags.NETWORK_INTERNET_V2)) {
+            return false;
+        }
         final TelephonyManager tm =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
@@ -973,7 +1001,10 @@ public final class Utils extends com.android.settingslib.Utils {
         return IconCompat.createWithBitmap(bitmap);
     }
 
-    private static Bitmap createBitmap(Drawable drawable, int width, int height) {
+    /**
+     * Creates a drawable with specified width and height.
+     */
+    public static Bitmap createBitmap(Drawable drawable, int width, int height) {
         final Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(bitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -1063,6 +1094,15 @@ public final class Utils extends com.android.settingslib.Utils {
         return false;
     }
 
+    public static boolean isSupportCTPA(Context context) {
+        Context appContext = context.getApplicationContext();
+        return appContext.getResources().getBoolean(R.bool.config_support_CT_PA);
+    }
+
+    public static String getString(Context context, String key) {
+        return Settings.Global.getString(context.getContentResolver(), key);
+    }
+
     /** Get {@link Resources} by subscription id if subscription id is valid. */
     public static Resources getResourcesForSubId(Context context, int subId) {
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
@@ -1080,5 +1120,29 @@ public final class Utils extends com.android.settingslib.Utils {
         // SYSTEM_ALERT_WINDOW is disabled on on low ram devices starting from Q
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         return !(am.isLowRamDevice() && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q));
+    }
+
+    /**
+     * Adds a shadow appear/disappear animation to action bar scroll.
+     *
+     * <p/>
+     * This method must be called after {@link Fragment#onCreate(Bundle)}.
+     */
+    public static void setActionBarShadowAnimation(Activity activity, Lifecycle lifecycle,
+            View scrollView) {
+        if (activity == null) {
+            Log.w(TAG, "No activity, cannot style actionbar.");
+            return;
+        }
+        final ActionBar actionBar = activity.getActionBar();
+        if (actionBar == null) {
+            Log.w(TAG, "No actionbar, cannot style actionbar.");
+            return;
+        }
+        actionBar.setElevation(0);
+
+        if (lifecycle != null && scrollView != null) {
+            ActionBarShadowController.attachToView(activity, lifecycle, scrollView);
+        }
     }
 }

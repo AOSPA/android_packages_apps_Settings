@@ -22,6 +22,7 @@ import android.util.Log;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.DeviceInfoUtils;
 
@@ -49,6 +50,19 @@ public class HardwareInfoPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
+        if (Utils.isSupportCTPA(mContext)) {
+            String modelName = Utils.getString(mContext, Utils.KEY_MODEL);
+            if (null == modelName || modelName.isEmpty()) {
+                modelName = getDeviceModel();
+            }
+            String hardwareVersion = Utils.getString(mContext, Utils.KEY_HARDWARE_VERSION);
+            if (null == hardwareVersion || hardwareVersion.isEmpty()) {
+                hardwareVersion = mContext.getResources().getString(R.string.device_info_default);
+            }
+            return mContext.getResources().getString(R.string.model_hardware_summary,
+                    modelName, hardwareVersion);
+        }
+
         return mContext.getResources().getString(R.string.model_summary, getDeviceModel());
     }
 

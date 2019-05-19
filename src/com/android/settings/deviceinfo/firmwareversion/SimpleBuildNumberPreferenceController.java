@@ -31,7 +31,7 @@ public class SimpleBuildNumberPreferenceController extends BasePreferenceControl
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override

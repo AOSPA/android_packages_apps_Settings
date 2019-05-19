@@ -27,6 +27,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources.Theme;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -52,6 +53,8 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.backup.BackupSettingsHelper;
+import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
@@ -337,6 +340,12 @@ public class SettingsActivity extends SettingsBaseActivity
         if (DEBUG_TIMING) {
             Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
         }
+    }
+
+    @Override
+    protected void onApplyThemeResource(Theme theme, int resid, boolean first) {
+        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
+        super.onApplyThemeResource(theme, resid, first);
     }
 
     @Override
@@ -644,11 +653,6 @@ public class SettingsActivity extends SettingsBaseActivity
                 isAdmin) || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.SimSettingsActivity.class.getName()),
-                Utils.showSimCardTile(this), isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.PowerUsageSummaryActivity.class.getName()),
                 mBatteryPresent, isAdmin) || somethingChanged;
 
@@ -668,6 +672,10 @@ public class SettingsActivity extends SettingsBaseActivity
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DevelopmentSettingsDashboardActivity.class.getName()),
                 showDev, isAdmin)
+                || somethingChanged;
+
+        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
+                UserBackupSettingsActivity.class.getName()), true, isAdmin)
                 || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,

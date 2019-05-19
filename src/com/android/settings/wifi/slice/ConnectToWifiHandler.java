@@ -17,11 +17,14 @@
 package com.android.settings.wifi.slice;
 
 import android.app.Activity;
+import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.wifi.WifiConnectListener;
 import com.android.settings.wifi.WifiDialogActivity;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settingslib.wifi.AccessPoint;
@@ -35,20 +38,30 @@ public class ConnectToWifiHandler extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final Network network = getIntent().getParcelableExtra(ConnectivityManager.EXTRA_NETWORK);
         final Bundle accessPointState = getIntent().getBundleExtra(
                 WifiDialogActivity.KEY_ACCESS_POINT_STATE);
 
-        if (accessPointState != null) {
+        if (network != null) {
+            WifiScanWorker.clearClickedWifi();
+            final ConnectivityManager cm = getSystemService(ConnectivityManager.class);
+            // start captive portal app to sign in to network
+            cm.startCaptivePortalApp(network);
+        } else if (accessPointState != null) {
             connect(new AccessPoint(this, accessPointState));
         }
+
         finish();
     }
 
     @VisibleForTesting
     void connect(AccessPoint accessPoint) {
+        WifiScanWorker.saveClickedWifi(accessPoint);
+
+        final WifiConnectListener connectListener = new WifiConnectListener(this);
         switch (WifiUtils.getConnectingType(accessPoint)) {
             case WifiUtils.CONNECT_TYPE_OSU_PROVISION:
-                accessPoint.startOsuProvisioning();
+                accessPoint.startOsuProvisioning(connectListener);
                 break;
 
             case WifiUtils.CONNECT_TYPE_OPEN_NETWORK:
@@ -56,7 +69,7 @@ public class ConnectToWifiHandler extends Activity {
 
             case WifiUtils.CONNECT_TYPE_SAVED_NETWORK:
                 final WifiManager wifiManager = getSystemService(WifiManager.class);
-                wifiManager.connect(accessPoint.getConfig(), null /* listener */);
+                wifiManager.connect(accessPoint.getConfig(), connectListener);
                 break;
         }
     }

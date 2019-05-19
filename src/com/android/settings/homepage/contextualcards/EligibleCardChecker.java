@@ -18,6 +18,7 @@ package com.android.settings.homepage.contextualcards;
 
 import static android.app.slice.Slice.HINT_ERROR;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
@@ -25,8 +26,14 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.slice.Slice;
+import androidx.slice.SliceMetadata;
 import androidx.slice.SliceViewManager;
+import androidx.slice.core.SliceAction;
 
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -37,7 +44,9 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
     private static final long LATCH_TIMEOUT_MS = 200;
 
     private final Context mContext;
-    private final ContextualCard mCard;
+
+    @VisibleForTesting
+    ContextualCard mCard;
 
     EligibleCardChecker(Context context, ContextualCard card) {
         mContext = context;
@@ -46,11 +55,39 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
 
     @Override
     public ContextualCard call() throws Exception {
-        return isCardEligibleToDisplay(mCard) ? mCard : null;
+        final long startTime = System.currentTimeMillis();
+        final MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+        ContextualCard result;
+
+        if (isCardEligibleToDisplay(mCard)) {
+            metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_ELIGIBILITY,
+                    SettingsEnums.SETTINGS_HOMEPAGE,
+                    mCard.getTextSliceUri() /* key */, 1 /* true */);
+            result = mCard;
+        } else {
+            metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_CONTEXTUAL_CARD_ELIGIBILITY,
+                    SettingsEnums.SETTINGS_HOMEPAGE,
+                    mCard.getTextSliceUri() /* key */, 0 /* false */);
+            result = null;
+        }
+        // Log individual card loading time
+        metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                SettingsEnums.ACTION_CONTEXTUAL_CARD_LOAD,
+                SettingsEnums.SETTINGS_HOMEPAGE,
+                mCard.getTextSliceUri() /* key */,
+                (int) (System.currentTimeMillis() - startTime) /* value */);
+
+        return result;
     }
 
     @VisibleForTesting
     boolean isCardEligibleToDisplay(ContextualCard card) {
+        if (card.getRankingScore() < 0) {
+            return false;
+        }
         if (card.isCustomCard()) {
             return true;
         }
@@ -61,6 +98,11 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
         }
 
         final Slice slice = bindSlice(uri);
+
+        if (isSliceToggleable(slice)) {
+            mCard = card.mutate().setHasInlineAction(true).build();
+        }
+
         if (slice == null || slice.hasHint(HINT_ERROR)) {
             Log.w(TAG, "Failed to bind slice, not eligible for display " + uri);
             return false;
@@ -100,5 +142,13 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
             manager.unregisterSliceCallback(uri, callback);
         }
         return returnSlice[0];
+    }
+
+    @VisibleForTesting
+    boolean isSliceToggleable(Slice slice) {
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        final List<SliceAction> toggles = metadata.getToggles();
+
+        return !toggles.isEmpty();
     }
 }

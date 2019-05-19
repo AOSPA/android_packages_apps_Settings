@@ -19,7 +19,6 @@ package com.android.settings.slices;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 
 import androidx.slice.Slice;
@@ -92,8 +91,9 @@ public interface CustomSliceable extends Sliceable {
      * @return a {@link PendingIntent} linked to {@link SliceBroadcastReceiver}.
      */
     default PendingIntent getBroadcastIntent(Context context) {
-        final Intent intent = new Intent(getUri().toString());
-        intent.setClass(context, SliceBroadcastReceiver.class);
+        final Intent intent = new Intent(getUri().toString())
+                .setData(getUri())
+                .setClass(context, SliceBroadcastReceiver.class);
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
     }
@@ -106,16 +106,17 @@ public interface CustomSliceable extends Sliceable {
     /**
      * Build an instance of a {@link CustomSliceable} which has a {@link Context}-only constructor.
      */
-    static CustomSliceable createInstance(Context context, Class<CustomSliceable> sliceableClass) {
+    static CustomSliceable createInstance(Context context,
+            Class<? extends CustomSliceable> sliceable) {
         try {
-            final Constructor<CustomSliceable> sliceable =
-                    sliceableClass.getConstructor(Context.class);
-            final Object[] params = new Object[]{context};
-            return sliceable.newInstance(params);
+            final Constructor<? extends CustomSliceable> constructor =
+                    sliceable.getConstructor(Context.class);
+            final Object[] params = new Object[]{context.getApplicationContext()};
+            return constructor.newInstance(params);
         } catch (NoSuchMethodException | InstantiationException |
                 IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
             throw new IllegalStateException(
-                    "Invalid sliceable class: " + sliceableClass, e);
+                    "Invalid sliceable class: " + sliceable, e);
         }
     }
 }

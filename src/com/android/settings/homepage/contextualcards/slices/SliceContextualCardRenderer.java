@@ -16,6 +16,8 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import static android.app.slice.Slice.HINT_ERROR;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
@@ -24,7 +26,6 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ViewFlipper;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.VisibleForTesting;
@@ -50,9 +51,9 @@ import java.util.Set;
  * Card renderer for {@link ContextualCard} built as slice full card or slice half card.
  */
 public class SliceContextualCardRenderer implements ContextualCardRenderer, LifecycleObserver {
-    public static final int VIEW_TYPE_FULL_WIDTH = R.layout.homepage_slice_tile;
-    public static final int VIEW_TYPE_HALF_WIDTH = R.layout.homepage_slice_half_tile;
-    public static final int VIEW_TYPE_DEFERRED_SETUP = R.layout.homepage_slice_deferred_setup_tile;
+    public static final int VIEW_TYPE_FULL_WIDTH = R.layout.contextual_slice_full_tile;
+    public static final int VIEW_TYPE_HALF_WIDTH = R.layout.contextual_slice_half_tile;
+    public static final int VIEW_TYPE_DEFERRED_SETUP = R.layout.contextual_slice_deferred_setup;
 
     private static final String TAG = "SliceCardRenderer";
 
@@ -64,7 +65,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
     private final Context mContext;
     private final LifecycleOwner mLifecycleOwner;
     private final ControllerRendererPool mControllerRendererPool;
-    private final Set<ContextualCard> mCardSet;
     private final SliceDeferredSetupCardRendererHelper mDeferredSetupCardHelper;
     private final SliceFullCardRendererHelper mFullCardHelper;
     private final SliceHalfCardRendererHelper mHalfCardHelper;
@@ -75,7 +75,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
         mLifecycleOwner = lifecycleOwner;
         mSliceLiveDataMap = new ArrayMap<>();
         mControllerRendererPool = controllerRendererPool;
-        mCardSet = new ArraySet<>();
         mFlippedCardSet = new ArraySet<>();
         mLifecycleOwner.getLifecycle().addObserver(this);
         mFullCardHelper = new SliceFullCardRendererHelper(context);
@@ -98,8 +97,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
     @Override
     public void bindView(RecyclerView.ViewHolder holder, ContextualCard card) {
         final Uri uri = card.getSliceUri();
-        //TODO(b/120629936): Take this out once blank card issue is fixed.
-        Log.d(TAG, "bindView - uri = " + uri);
 
         if (!ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
             Log.w(TAG, "Invalid uri, skipping slice: " + uri);
@@ -112,7 +109,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
             sliceLiveData = SliceLiveData.fromUri(mContext, uri);
             mSliceLiveDataMap.put(uri, sliceLiveData);
         }
-        mCardSet.add(card);
 
         sliceLiveData.removeObservers(mLifecycleOwner);
         sliceLiveData.observe(mLifecycleOwner, slice -> {
@@ -121,10 +117,16 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
                 mContext.getContentResolver().notifyChange(CardContentProvider.REFRESH_CARD_URI,
                         null);
                 return;
-            } else {
-                //TODO(b/120629936): Take this out once blank card issue is fixed.
-                Log.d(TAG, "Slice callback - uri = " + slice.getUri());
             }
+
+            if (slice.hasHint(HINT_ERROR)) {
+                Log.w(TAG, "Slice has HINT_ERROR, skipping rendering. uri=" + slice.getUri());
+                mSliceLiveDataMap.get(slice.getUri()).removeObservers(mLifecycleOwner);
+                mContext.getContentResolver().notifyChange(CardContentProvider.REFRESH_CARD_URI,
+                        null);
+                return;
+            }
+
             switch (holder.getItemViewType()) {
                 case VIEW_TYPE_DEFERRED_SETUP:
                     mDeferredSetupCardHelper.bindView(holder, card, slice);
@@ -133,30 +135,28 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
                     mHalfCardHelper.bindView(holder, card, slice);
                     break;
                 default:
-                    mFullCardHelper.bindView(holder, card, slice, mCardSet);
+                    mFullCardHelper.bindView(holder, card, slice);
             }
         });
 
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_DEFERRED_SETUP:
+                // Deferred setup is never dismissible.
+                break;
             case VIEW_TYPE_HALF_WIDTH:
-                initDismissalActions(holder, card, R.id.content);
+                initDismissalActions(holder, card);
                 break;
             default:
-                initDismissalActions(holder, card, R.id.slice_view);
+                initDismissalActions(holder, card);
+        }
+
+        if (card.isPendingDismiss()) {
+            showDismissalView(holder);
+            mFlippedCardSet.add(holder);
         }
     }
 
-    private void initDismissalActions(RecyclerView.ViewHolder holder, ContextualCard card,
-            int initialViewId) {
-        // initialView is the first view in the ViewFlipper.
-        final View initialView = holder.itemView.findViewById(initialViewId);
-        initialView.setOnLongClickListener(v -> {
-            flipCardToDismissalView(holder);
-            mFlippedCardSet.add(holder);
-            return true;
-        });
-
+    private void initDismissalActions(RecyclerView.ViewHolder holder, ContextualCard card) {
         final Button btnKeep = holder.itemView.findViewById(R.id.keep);
         btnKeep.setOnClickListener(v -> {
             mFlippedCardSet.remove(holder);
@@ -179,12 +179,19 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
     }
 
     private void resetCardView(RecyclerView.ViewHolder holder) {
-        final ViewFlipper viewFlipper = holder.itemView.findViewById(R.id.view_flipper);
-        viewFlipper.setDisplayedChild(0 /* whichChild */);
+        holder.itemView.findViewById(R.id.dismissal_view).setVisibility(View.GONE);
+        getInitialView(holder).setVisibility(View.VISIBLE);
     }
 
-    private void flipCardToDismissalView(RecyclerView.ViewHolder holder) {
-        final ViewFlipper viewFlipper = holder.itemView.findViewById(R.id.view_flipper);
-        viewFlipper.showNext();
+    private void showDismissalView(RecyclerView.ViewHolder holder) {
+        holder.itemView.findViewById(R.id.dismissal_view).setVisibility(View.VISIBLE);
+        getInitialView(holder).setVisibility(View.INVISIBLE);
+    }
+
+    private View getInitialView(RecyclerView.ViewHolder viewHolder) {
+        if (viewHolder.getItemViewType() == VIEW_TYPE_HALF_WIDTH) {
+            return ((SliceHalfCardRendererHelper.HalfCardViewHolder) viewHolder).content;
+        }
+        return ((SliceFullCardRendererHelper.SliceViewHolder) viewHolder).sliceView;
     }
 }

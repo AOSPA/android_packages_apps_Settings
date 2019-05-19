@@ -16,20 +16,21 @@
 
 package com.android.settings.network;
 
-import static android.telephony.TelephonyManager.MultiSimVariants.UNKNOWN;
-
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.UserManager;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -43,15 +44,15 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 public class MobileNetworkSummaryController extends AbstractPreferenceController implements
-        SubscriptionsChangeListener.SubscriptionsChangeListenerClient, LifecycleObserver {
+        SubscriptionsChangeListener.SubscriptionsChangeListenerClient, LifecycleObserver,
+        PreferenceControllerMixin {
     private static final String TAG = "MobileNetSummaryCtlr";
 
     private static final String KEY = "mobile_network_list";
 
     private SubscriptionManager mSubscriptionManager;
+    private UserManager mUserManager;
     private SubscriptionsChangeListener mChangeListener;
-    private TelephonyManager mTelephonyMgr;
-    private EuiccManager mEuiccManager;
     private AddPreference mPreference;
 
     /**
@@ -72,10 +73,11 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     public MobileNetworkSummaryController(Context context, Lifecycle lifecycle) {
         super(context);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
-        mTelephonyMgr = mContext.getSystemService(TelephonyManager.class);
-        mEuiccManager = mContext.getSystemService(EuiccManager.class);
-        mChangeListener = new SubscriptionsChangeListener(context, this);
-        lifecycle.addObserver(this);
+        mUserManager = context.getSystemService(UserManager.class);
+        if (lifecycle != null) {
+          mChangeListener = new SubscriptionsChangeListener(context, this);
+          lifecycle.addObserver(this);
+        }
     }
 
     @OnLifecycleEvent(ON_RESUME)
@@ -98,9 +100,9 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     @Override
     public CharSequence getSummary() {
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(
-                mSubscriptionManager);
+                mContext);
         if (subs.isEmpty()) {
-            if (mEuiccManager.isEnabled()) {
+            if (MobileNetworkUtils.showEuiccSettings(mContext)) {
                 return mContext.getResources().getString(
                         R.string.mobile_network_summary_add_a_network);
             }
@@ -116,57 +118,56 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     private void startAddSimFlow() {
         final Intent intent = new Intent(EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION);
+        intent.putExtra(EuiccManager.EXTRA_FORCE_PROVISION, true);
         mContext.startActivity(intent);
-    }
-
-    private boolean shouldShowAddButton() {
-        // The add button should only show up if the device is in multi-sim mode and the eSIM
-        // manager is enabled.
-        return mTelephonyMgr.getMultiSimConfiguration() != UNKNOWN && mEuiccManager.isEnabled();
     }
 
     private void update() {
         if (mPreference == null) {
             return;
         }
-        final boolean showAddButton = shouldShowAddButton();
         refreshSummary(mPreference);
-        if (!showAddButton) {
-            mPreference.setOnAddClickListener(null);
-        } else {
-            mPreference.setAddWidgetEnabled(!mChangeListener.isAirplaneModeOn());
-            mPreference.setOnAddClickListener(p -> {
-                startAddSimFlow();
-            });
-        }
-        final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(
-                mSubscriptionManager);
         mPreference.setOnPreferenceClickListener(null);
+        mPreference.setOnAddClickListener(null);
         mPreference.setFragment(null);
         mPreference.setEnabled(!mChangeListener.isAirplaneModeOn());
+
+        final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(
+                mContext);
+
         if (subs.isEmpty()) {
-            if (showAddButton) {
-                mPreference.setEnabled(false);
-            } else if (mEuiccManager.isEnabled()) {
+            if (MobileNetworkUtils.showEuiccSettings(mContext)) {
                 mPreference.setOnPreferenceClickListener((Preference pref) -> {
                     startAddSimFlow();
                     return true;
                 });
+            } else {
+                mPreference.setEnabled(false);
             }
-        } else if (subs.size() == 1) {
-            mPreference.setOnPreferenceClickListener((Preference pref) -> {
-                final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
-                mContext.startActivity(intent);
-                return true;
-            });
         } else {
-            mPreference.setFragment(MobileNetworkListFragment.class.getCanonicalName());
+            // We have one or more existing subscriptions, so we want the plus button if eSIM is
+            // supported.
+            if (MobileNetworkUtils.showEuiccSettings(mContext)) {
+                mPreference.setAddWidgetEnabled(!mChangeListener.isAirplaneModeOn());
+                mPreference.setOnAddClickListener(p -> startAddSimFlow());
+            }
+
+            if (subs.size() == 1) {
+                mPreference.setOnPreferenceClickListener((Preference pref) -> {
+                    final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
+                    intent.putExtra(Settings.EXTRA_SUB_ID, subs.get(0).getSubscriptionId());
+                    mContext.startActivity(intent);
+                    return true;
+                });
+            } else {
+                mPreference.setFragment(MobileNetworkListFragment.class.getCanonicalName());
+            }
         }
     }
 
     @Override
     public boolean isAvailable() {
-        return !Utils.isWifiOnly(mContext);
+        return !Utils.isWifiOnly(mContext) && mUserManager.isAdminUser();
     }
 
     @Override

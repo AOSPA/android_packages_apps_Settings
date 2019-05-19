@@ -16,6 +16,14 @@
 
 package com.android.settings.privacy;
 
+import static android.Manifest.permission_group.CALENDAR;
+import static android.Manifest.permission_group.CAMERA;
+import static android.Manifest.permission_group.CONTACTS;
+import static android.Manifest.permission_group.LOCATION;
+import static android.Manifest.permission_group.MICROPHONE;
+import static android.Manifest.permission_group.PHONE;
+import static android.Manifest.permission_group.SMS;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
@@ -38,6 +46,7 @@ import android.view.accessibility.AccessibilityManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.Utils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowPermissionControllerManager;
@@ -111,8 +120,9 @@ public class PermissionBarChartPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_permissionHubEnabled_shouldReturnAvailableUnsearchable() {
-        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
-                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED,
+                "true", true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
@@ -172,8 +182,9 @@ public class PermissionBarChartPreferenceControllerTest {
 
     @Test
     public void onStart_usageInfosNotSetAndPermissionHubEnabled_shouldShowProgressBar() {
-        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
-                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED,
+                "true", true);
         mController.displayPreference(mScreen);
 
         mController.onStart();
@@ -184,8 +195,9 @@ public class PermissionBarChartPreferenceControllerTest {
 
     @Test
     public void onStart_usageInfosSetAndPermissionHubEnabled_shouldNotUpdatePrefLoadingState() {
-        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
-                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED,
+                "true", true);
         final RuntimePermissionUsageInfo info1 =
                 new RuntimePermissionUsageInfo("permission 1", 10);
         mController.mOldUsageInfos.add(info1);
@@ -199,8 +211,9 @@ public class PermissionBarChartPreferenceControllerTest {
 
     @Test
     public void onStart_permissionHubDisabled_shouldNotShowProgressBar() {
-        DeviceConfig.setProperty(DeviceConfig.Privacy.NAMESPACE,
-                DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED, "false", false);
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED,
+                "false", true);
 
         mController.onStart();
 
@@ -220,5 +233,28 @@ public class PermissionBarChartPreferenceControllerTest {
 
         verify(mFragment).setLoadingEnabled(false /* enabled */);
         verify(mPreference).updateLoadingState(false /* isLoading */);
+    }
+
+    @Test
+    public void onPermissionUsageResult_shouldBeSorted() {
+        final List<RuntimePermissionUsageInfo> infos = new ArrayList<>();
+        infos.add(new RuntimePermissionUsageInfo(PHONE, 10));
+        infos.add(new RuntimePermissionUsageInfo(LOCATION, 10));
+        infos.add(new RuntimePermissionUsageInfo(CAMERA, 10));
+        infos.add(new RuntimePermissionUsageInfo(SMS, 1));
+        infos.add(new RuntimePermissionUsageInfo(MICROPHONE, 10));
+        infos.add(new RuntimePermissionUsageInfo(CONTACTS, 42));
+        infos.add(new RuntimePermissionUsageInfo(CALENDAR, 10));
+        mController.displayPreference(mScreen);
+
+        mController.onPermissionUsageResult(infos);
+
+        assertThat(infos.get(0).getName()).isEqualTo(CONTACTS);
+        assertThat(infos.get(1).getName()).isEqualTo(LOCATION);
+        assertThat(infos.get(2).getName()).isEqualTo(MICROPHONE);
+        assertThat(infos.get(3).getName()).isEqualTo(CAMERA);
+        assertThat(infos.get(4).getName()).isEqualTo(CALENDAR);
+        assertThat(infos.get(5).getName()).isEqualTo(PHONE);
+        assertThat(infos.get(6).getName()).isEqualTo(SMS);
     }
 }

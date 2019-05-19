@@ -31,6 +31,7 @@ import android.util.Pair;
 import android.util.TypedValue;
 import android.widget.ImageView;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -59,6 +60,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
     private AlertDialog mDisconnectDialog;
     private String contentDescription = null;
     private boolean mHideSecondTarget = false;
+    @VisibleForTesting
+    boolean mNeedNotifyHierarchyChanged = false;
     /* Talk-back descriptions for various BT icons */
     Resources mResources;
 
@@ -81,8 +84,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
         onDeviceAttributesChanged();
     }
 
-    void rebind() {
-        notifyChanged();
+    public void setNeedNotifyHierarchyChanged(boolean needNotifyHierarchyChanged) {
+        mNeedNotifyHierarchyChanged = needNotifyHierarchyChanged;
     }
 
     @Override
@@ -130,8 +133,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
         // Null check is done at the framework
         setSummary(mCachedDevice.getConnectionSummary());
 
-        final Pair<Drawable, String> pair = BluetoothUtils
-                .getBtClassDrawableWithDescription(getContext(), mCachedDevice);
+        final Pair<Drawable, String> pair =
+                BluetoothUtils.getBtRainbowDrawableWithDescription(getContext(), mCachedDevice);
         if (pair.first != null) {
             setIcon(pair.first);
             contentDescription = pair.second;
@@ -145,7 +148,9 @@ public final class BluetoothDevicePreference extends GearPreference implements
         setVisible(mShowDevicesWithoutNames || mCachedDevice.hasHumanReadableName());
 
         // This could affect ordering, so notify that
-        notifyHierarchyChanged();
+        if (mNeedNotifyHierarchyChanged) {
+            notifyHierarchyChanged();
+        }
     }
 
     @Override
@@ -165,6 +170,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
         final ImageView imageView = (ImageView) view.findViewById(android.R.id.icon);
         if (imageView != null) {
             imageView.setContentDescription(contentDescription);
+            imageView.setElevation(
+                    getContext().getResources().getDimension(R.dimen.bt_icon_elevation));
         }
         super.onBindViewHolder(view);
     }
@@ -246,5 +253,4 @@ public final class BluetoothDevicePreference extends GearPreference implements
                     R.string.bluetooth_pairing_error_message);
         }
     }
-
 }

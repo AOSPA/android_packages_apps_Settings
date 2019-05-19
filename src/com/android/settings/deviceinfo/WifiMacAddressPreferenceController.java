@@ -17,11 +17,16 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.deviceinfo.AbstractWifiMacAddressPreferenceController;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 /**
  * Concrete subclass of WIFI MAC address preference controller
@@ -37,5 +42,25 @@ public class WifiMacAddressPreferenceController extends AbstractWifiMacAddressPr
         return mContext.getResources().getBoolean(R.bool.config_show_wifi_mac_address);
     }
 
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        if (Utils.isSupportCTPA(mContext)) {
+            Preference macAddressPreference = screen.findPreference(getPreferenceKey());
+            CharSequence oldValue = macAddressPreference.getSummary();
+            String macAddress = Utils.getString(mContext, Utils.KEY_WIFI_MAC_ADDRESS);
+            String unAvailable = mContext.getString(
+                    com.android.settingslib.R.string.status_unavailable);
+            Log.d(TAG, "displayPreference: macAddress = " + macAddress
+                    + " oldValue = " + oldValue + " unAvailable = " + unAvailable);
+            if (null == macAddress || macAddress.isEmpty()) {
+                macAddress = unAvailable;
+            }
+            if (null != oldValue && (WifiInfo.DEFAULT_MAC_ADDRESS.equals(oldValue) ||
+                    unAvailable.equals(oldValue))) {
+                macAddressPreference.setSummary(macAddress);
+            }
+        }
+    }
     // This space intentionally left blank
 }

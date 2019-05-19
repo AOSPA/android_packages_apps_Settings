@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -26,6 +27,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.provider.DeviceConfig;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,7 +36,9 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.fuelgauge.BatteryMeterView;
+import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.widget.LayoutPreference;
@@ -49,12 +53,13 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowEntityHeaderController.class)
-public class AdvancedBluetoothDetailsHeaderControllerTest{
+@Config(shadows = {ShadowEntityHeaderController.class, ShadowDeviceConfig.class})
+public class AdvancedBluetoothDetailsHeaderControllerTest {
     private static final int BATTERY_LEVEL_MAIN = 30;
     private static final int BATTERY_LEVEL_LEFT = 25;
     private static final int BATTERY_LEVEL_RIGHT = 45;
     private static final String ICON_URI = "content://test.provider/icon.png";
+    private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
 
     private Context mContext;
 
@@ -77,12 +82,14 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
 
         mContext = RuntimeEnvironment.application;
         mController = new AdvancedBluetoothDetailsHeaderController(mContext, "pref_Key");
+        when(mCachedDevice.getDevice()).thenReturn(mBluetoothDevice);
         mController.init(mCachedDevice);
         mLayoutPreference = new LayoutPreference(mContext,
                 LayoutInflater.from(mContext).inflate(R.layout.advanced_bt_entity_header, null));
         mController.mLayoutPreference = mLayoutPreference;
         mController.mBluetoothAdapter = mBluetoothAdapter;
         when(mCachedDevice.getDevice()).thenReturn(mBluetoothDevice);
+        when(mCachedDevice.getAddress()).thenReturn(MAC_ADDRESS);
     }
 
     @Test
@@ -100,14 +107,14 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
     @Test
     public void refresh_connected_updateCorrectInfo() {
         when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_UNTHETHERED_LEFT_BATTERY)).thenReturn(
-                String.valueOf(BATTERY_LEVEL_LEFT));
+                BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_LEFT).getBytes());
         when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_UNTHETHERED_RIGHT_BATTERY)).thenReturn(
-                String.valueOf(BATTERY_LEVEL_RIGHT));
+                BluetoothDevice.METADATA_UNTETHERED_RIGHT_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_RIGHT).getBytes());
         when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_UNTHETHERED_CASE_BATTERY)).thenReturn(
-                String.valueOf(BATTERY_LEVEL_MAIN));
+                BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_MAIN).getBytes());
         when(mCachedDevice.isConnected()).thenReturn(true);
         mController.refresh();
 
@@ -137,18 +144,44 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
     }
 
     @Test
-    public void getAvailabilityStatus_unthetheredHeadset_returnAvailable() {
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
-                .thenReturn("true");
+    public void getAvailabilityStatus_untetheredHeadsetWithConfigOn_returnAvailable() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("true".getBytes());
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_notUnthetheredHeadset_returnUnavailable() {
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET))
-                .thenReturn("false");
+    public void getAvailabilityStatus_untetheredHeadsetWithConfigOff_returnUnavailable() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "false", true);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("true".getBytes());
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_notUntetheredHeadsetWithConfigOn_returnUnavailable() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("false".getBytes());
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_notUntetheredHeadsetWithConfigOff_returnUnavailable() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "false", true);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("false".getBytes());
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
@@ -164,18 +197,65 @@ public class AdvancedBluetoothDetailsHeaderControllerTest{
     }
 
     @Test
-    public void onStart_registerCallback() {
+    public void onStart_isAvailable_registerCallback() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("true".getBytes());
+
         mController.onStart();
 
-        verify(mBluetoothAdapter).registerMetadataListener(mBluetoothDevice,
-                mController.mMetadataListener, mController.mHandler);
+        verify(mBluetoothAdapter).addOnMetadataChangedListener(mBluetoothDevice,
+                mContext.getMainExecutor(), mController.mMetadataListener);
     }
 
     @Test
-    public void onStop_unregisterCallback() {
+    public void onStop_isAvailable_unregisterCallback() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("true".getBytes());
+
         mController.onStop();
 
-        verify(mBluetoothAdapter).unregisterMetadataListener(mBluetoothDevice);
+        verify(mBluetoothAdapter).removeOnMetadataChangedListener(mBluetoothDevice,
+                mController.mMetadataListener);
+    }
+
+    @Test
+    public void onStart_notAvailable_registerCallback() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("false".getBytes());
+
+        mController.onStart();
+
+        verify(mBluetoothAdapter, never()).addOnMetadataChangedListener(mBluetoothDevice,
+                mContext.getMainExecutor(), mController.mMetadataListener);
+    }
+
+    @Test
+    public void onStop_notAvailable_unregisterCallback() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("false".getBytes());
+
+        mController.onStop();
+
+        verify(mBluetoothAdapter, never()).removeOnMetadataChangedListener(mBluetoothDevice,
+                mController.mMetadataListener);
+    }
+
+    @Test
+    public void onDestroy_isAvailable_recycleBitmap() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("true".getBytes());
+        mController.mIconCache.put(ICON_URI, mBitmap);
+
+        mController.onDestroy();
+
+        assertThat(mController.mIconCache).isEmpty();
+        verify(mBitmap).recycle();
     }
 
     private void assertBatteryLevel(LinearLayout linearLayout, int batteryLevel) {

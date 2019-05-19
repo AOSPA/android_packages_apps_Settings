@@ -188,40 +188,29 @@ public class SliceBuilderUtils {
      * @return the summary text for a {@link Slice} built for {@param sliceData}.
      */
     public static CharSequence getSubtitleText(Context context,
-            AbstractPreferenceController controller, SliceData sliceData) {
-        final boolean isDynamicSummaryAllowed = sliceData.isDynamicSummaryAllowed();
-        CharSequence summaryText = controller.getSummary();
+            BasePreferenceController controller, SliceData sliceData) {
 
         // Priority 1 : User prefers showing the dynamic summary in slice view rather than static
         // summary. Note it doesn't require a valid summary - so we can force some slices to have
         // empty summaries (ex: volume).
-        if (isDynamicSummaryAllowed) {
+        if (controller.useDynamicSliceSummary()) {
+            return controller.getSummary();
+        }
+
+        // Priority 2: Show summary from slice data.
+        CharSequence summaryText = sliceData.getSummary();
+        if (isValidSummary(context, summaryText)) {
             return summaryText;
         }
 
-        // Priority 2 : Show screen title.
+        // Priority 3: Show screen title.
         summaryText = sliceData.getScreenTitle();
         if (isValidSummary(context, summaryText) && !TextUtils.equals(summaryText,
                 sliceData.getTitle())) {
             return summaryText;
         }
 
-        // Priority 3 : Show dynamic summary from preference controller.
-        if (controller != null) {
-            summaryText = controller.getSummary();
-
-            if (isValidSummary(context, summaryText)) {
-                return summaryText;
-            }
-        }
-
-        // Priority 4 : Show summary from slice data.
-        summaryText = sliceData.getSummary();
-        if (isValidSummary(context, summaryText)) {
-            return summaryText;
-        }
-
-        // Priority 5 : Show empty text.
+        // Priority 4: Show empty text.
         return "";
     }
 
@@ -326,7 +315,8 @@ public class SliceBuilderUtils {
                         .setTitle(sliceData.getTitle())
                         .setSubtitle(subtitleText)
                         .setPrimaryAction(primaryAction)
-                        .setMax(sliderController.getMaxSteps())
+                        .setMax(sliderController.getMax())
+                        .setMin(sliderController.getMin())
                         .setValue(sliderController.getSliderPosition())
                         .setInputAction(actionIntent))
                 .setKeywords(keywords)
