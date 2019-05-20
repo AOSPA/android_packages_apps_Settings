@@ -65,6 +65,22 @@ public class OverlayManagerWrapper {
         }
     }
 
+    public void reloadAssets(String packageName, int userId) {
+        try {
+            mOverlayManager.reloadAssets(packageName, userId);
+        } catch (RemoteException e) {
+            throw e.rethrowFromSystemServer();
+        }
+    }
+
+    public void reloadAndroidAssets(int userId) {
+        try {
+            mOverlayManager.reloadAndroidAssets(userId);
+        } catch (RemoteException e) {
+            throw e.rethrowFromSystemServer();
+        }
+    }
+
     public boolean setEnabledExclusiveInCategory(String overlay, int userId) {
         if (mOverlayManager == null) {
             return false;
