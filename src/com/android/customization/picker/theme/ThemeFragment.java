@@ -215,7 +215,7 @@ public class ThemeFragment extends ToolbarFragment {
 
     private void updateButtonsVisibility() {
         mUseMyWallpaperButton.setVisibility(mSelectedTheme instanceof CustomTheme
-                ? View.GONE : View.VISIBLE);
+                ? View.INVISIBLE : View.VISIBLE);
     }
 
     private void setUpOptions(@Nullable Bundle savedInstanceState) {
