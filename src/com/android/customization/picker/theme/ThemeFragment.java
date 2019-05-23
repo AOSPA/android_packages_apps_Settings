@@ -307,8 +307,10 @@ public class ThemeFragment extends ToolbarFragment {
         private int[] mColorTileIds = {
             R.id.preview_color_qs_0_bg, R.id.preview_color_qs_1_bg, R.id.preview_color_qs_2_bg
         };
-        private int[] mColorTileIconIds = {
-            R.id.preview_color_qs_0_icon, R.id.preview_color_qs_1_icon, R.id.preview_color_qs_2_icon
+        private int[][] mColorTileIconIds = {
+                new int[]{ R.id.preview_color_qs_0_icon, 0},
+                new int[]{ R.id.preview_color_qs_1_icon, 1},
+                new int[] { R.id.preview_color_qs_2_icon, 3}
         };
 
         private int[] mShapeIconIds = {
@@ -397,7 +399,7 @@ public class ThemeFragment extends ToolbarFragment {
 
                         for (int i = 0; i < mColorTileIds.length && i < previewInfo.icons.size();
                                 i++) {
-                            Drawable icon = previewInfo.icons.get(i)
+                            Drawable icon = previewInfo.icons.get(mColorTileIconIds[i][1])
                                     .getConstantState().newDrawable().mutate();
                             Drawable bgShape =
                                     previewInfo.shapeDrawable.getConstantState().newDrawable();
@@ -405,7 +407,7 @@ public class ThemeFragment extends ToolbarFragment {
 
                             ImageView bg = card.findViewById(mColorTileIds[i]);
                             bg.setImageDrawable(bgShape);
-                            ImageView fg = card.findViewById(mColorTileIconIds[i]);
+                            ImageView fg = card.findViewById(mColorTileIconIds[i][0]);
                             fg.setImageDrawable(icon);
                         }
                     }
