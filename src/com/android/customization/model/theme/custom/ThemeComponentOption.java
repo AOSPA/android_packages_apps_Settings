@@ -47,7 +47,9 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Dimension;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
@@ -138,9 +140,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
         @Override
         public void bindPreview(ViewGroup container) {
-            TextView header = container.findViewById(R.id.theme_preview_card_header);
-            header.setText(R.string.preview_name_font);
-            header.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_font, 0, 0);
+            bindPreviewHeader(container, R.string.preview_name_font, R.drawable.ic_font);
 
             ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
             if (cardBody.getChildCount() == 0) {
@@ -159,6 +159,15 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
             builder.setHeadlineFontFamily(mHeadlineFont).setBodyFontFamily(mBodyFont);
             return super.buildStep(builder);
         }
+    }
+
+    void bindPreviewHeader(ViewGroup container, @StringRes int headerTextResId,
+            @DrawableRes int headerIcon) {
+        TextView header = container.findViewById(R.id.theme_preview_card_header);
+        header.setText(headerTextResId);
+        header.setCompoundDrawablesWithIntrinsicBounds(0, headerIcon, 0, 0);
+        header.setCompoundDrawableTintList(ColorStateList.valueOf(
+                header.getCurrentTextColor()));
     }
 
     public static class IconOption extends ThemeComponentOption {
@@ -210,9 +219,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
         @Override
         public void bindPreview(ViewGroup container) {
-            TextView header = container.findViewById(R.id.theme_preview_card_header);
-            header.setText(R.string.preview_name_icon);
-            header.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_wifi_24px, 0, 0);
+            bindPreviewHeader(container, R.string.preview_name_icon, R.drawable.ic_wifi_24px);
 
             ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
             if (cardBody.getChildCount() == 0) {
@@ -296,11 +303,13 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
         @Override
         public void bindThumbnailTile(View view) {
-            int color = resolveColor(view.getResources());
-            ((ImageView) view.findViewById(R.id.option_tile)).getDrawable().setTint(color);
+            @ColorInt int color = resolveColor(view.getResources());
+            ((ImageView) view.findViewById(R.id.option_tile)).setImageTintList(
+                    ColorStateList.valueOf(color));
             view.setContentDescription(mLabel);
         }
 
+        @ColorInt
         private int resolveColor(Resources res) {
             Configuration configuration = res.getConfiguration();
             return (configuration.uiMode & Configuration.UI_MODE_NIGHT_MASK)
@@ -321,9 +330,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
         @Override
         public void bindPreview(ViewGroup container) {
-            TextView header = container.findViewById(R.id.theme_preview_card_header);
-            header.setText(R.string.preview_name_color);
-            header.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_colorize_24px, 0, 0);
+            bindPreviewHeader(container, R.string.preview_name_color, R.drawable.ic_colorize_24px);
 
             ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
             if (cardBody.getChildCount() == 0) {
@@ -453,9 +460,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
         @Override
         public void bindPreview(ViewGroup container) {
-            TextView header = container.findViewById(R.id.theme_preview_card_header);
-            header.setText(R.string.preview_name_shape);
-            header.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_shapes_24px, 0, 0);
+            bindPreviewHeader(container, R.string.preview_name_shape, R.drawable.ic_shapes_24px);
 
             ViewGroup cardBody = container.findViewById(R.id.theme_preview_card_body_container);
             if (cardBody.getChildCount() == 0) {
