@@ -39,12 +39,7 @@ public class SystemNavigationEdgeToEdgePreferenceController extends
     @VisibleForTesting
     public SystemNavigationEdgeToEdgePreferenceController(Context context,
             IOverlayManager overlayManager, String key) {
-        super(context, overlayManager, key);
-    }
-
-    @Override
-    public boolean isSliceable() {
-        return TextUtils.equals(PREF_KEY_EDGE_TO_EDGE, getPreferenceKey());
+        super(context, overlayManager, key, NAV_BAR_MODE_GESTURAL_OVERLAY);
     }
 
     @Override
