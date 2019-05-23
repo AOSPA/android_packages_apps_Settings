@@ -73,6 +73,12 @@ abstract class ThemePreviewPage extends PreviewPage {
 
     static class ThemeCoverPage extends ThemePreviewPage {
 
+        /**
+         * Maps which icon from ResourceConstants#ICONS_FOR_PREVIEW to use for each icon in the
+         * top bar (fake "status bar") of the cover page.
+         */
+        private static final int [] sTopBarIconToPreviewIcon = new int [] { 0, 6, 2 };
+
         private final Typeface mHeadlineFont;
         private final List<Drawable> mIcons;
         private final List<Drawable> mShapeAppIcons;
@@ -176,9 +182,10 @@ abstract class ThemePreviewPage extends PreviewPage {
 
             ViewGroup iconsContainer = card.findViewById(R.id.theme_preview_top_bar_icons);
 
-            for (int i = 0; i < iconsContainer.getChildCount() && i < mIcons.size(); i++) {
+            for (int i = 0; i < iconsContainer.getChildCount(); i++) {
                 ((ImageView) iconsContainer.getChildAt(i))
-                        .setImageDrawable(mIcons.get(i).getConstantState().newDrawable().mutate());
+                        .setImageDrawable(mIcons.get(sTopBarIconToPreviewIcon[i]).getConstantState()
+                                .newDrawable().mutate());
             }
 
             ViewGroup body = card.findViewById(R.id.theme_preview_card_body_container);
