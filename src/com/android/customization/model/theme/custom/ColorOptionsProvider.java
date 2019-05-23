@@ -77,7 +77,7 @@ public class ColorOptionsProvider extends ThemeComponentOptionProvider<ColorOpti
         String iconPackage =
                 mCustomThemeManager.getOverlayPackages().get(OVERLAY_CATEGORY_ICON_ANDROID);
         if (TextUtils.isEmpty(iconPackage)) {
-            iconPackage = SYSUI_PACKAGE;
+            iconPackage = ANDROID_PACKAGE;
         }
         for (String iconName : ICONS_FOR_PREVIEW) {
             try {
