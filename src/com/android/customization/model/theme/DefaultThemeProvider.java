@@ -111,6 +111,11 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
         }
     }
 
+    @Override
+    public boolean isAvailable() {
+        return mOverlayProvider.isAvailable() && super.isAvailable();
+    }
+
     private void loadAll() {
         addDefaultTheme();
 

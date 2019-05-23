@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+
      Copyright (C) 2019 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,14 +15,18 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:state_activated="true"
-        android:color="?android:colorAccent" />
-    <item
-        android:state_activated="false"
-        android:alpha="0.54"
-        android:color="?android:colorForeground" />
-    <item
-        android:color="?android:colorForeground"/>
-</selector>
+<layer-list
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:drawable="@drawable/theme_cover_scrim"/>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="90"
+                android:centerY="25%"
+                android:startColor="@color/black_67_alpha"
+                android:centerColor="@android:color/transparent"
+                android:endColor="@android:color/transparent"
+                android:type="linear" />
+        </shape>
+    </item>
+</layer-list>
