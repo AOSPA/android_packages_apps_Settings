@@ -63,8 +63,10 @@ public class CustomThemeNameFragment extends CustomThemeStepFragment {
     private int[] mColorTileIds = {
             R.id.preview_color_qs_0_bg, R.id.preview_color_qs_1_bg, R.id.preview_color_qs_2_bg
     };
-    private int[] mColorTileIconIds = {
-            R.id.preview_color_qs_0_icon, R.id.preview_color_qs_1_icon, R.id.preview_color_qs_2_icon
+    private int[][] mColorTileIconIds = {
+            new int[]{ R.id.preview_color_qs_0_icon, 0},
+            new int[]{ R.id.preview_color_qs_1_icon, 1},
+            new int[] { R.id.preview_color_qs_2_icon, 3}
     };
 
     private int[] mShapeIconIds = {

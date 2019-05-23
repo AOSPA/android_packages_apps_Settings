@@ -85,7 +85,7 @@ abstract class ThemePreviewPage extends PreviewPage {
         private Drawable mShapeDrawable;
         private final int[] mColorButtonIds;
         private final int[] mColorTileIds;
-        private final int[] mColorTileIconIds;
+        private final int[][] mColorTileIconIds;
         private final int[] mShapeIconIds;
         private final Resources mRes;
         private String mTitle;
@@ -99,7 +99,7 @@ abstract class ThemePreviewPage extends PreviewPage {
                 Drawable shapeDrawable,
                 List<Drawable> shapeAppIcons,
                 OnClickListener editClickListener,
-                int[] colorButtonIds, int[] colorTileIds, int[] colorTileIconIds,
+                int[] colorButtonIds, int[] colorTileIds, int[][] colorTileIconIds,
                 int[] shapeIconIds, OnLayoutChangeListener wallpaperListener) {
             super(context, 0, 0, R.layout.preview_card_cover_content, accentColor);
             mRes = context.getResources();
@@ -149,14 +149,14 @@ abstract class ThemePreviewPage extends PreviewPage {
                 }
             }
             for (int i = 0; i < 3 && i < mIcons.size(); i++) {
-                Drawable icon =
-                        mIcons.get(i).getConstantState().newDrawable().mutate();
+                Drawable icon = mIcons.get(mColorTileIconIds[i][1]).getConstantState()
+                        .newDrawable().mutate();
                 Drawable bgShape = mShapeDrawable.getConstantState().newDrawable();
                 bgShape.setTint(accentColor);
 
                 ImageView bg = card.findViewById(mColorTileIds[i]);
                 bg.setImageDrawable(bgShape);
-                ImageView fg = card.findViewById(mColorTileIconIds[i]);
+                ImageView fg = card.findViewById(mColorTileIconIds[i][0]);
                 fg.setImageDrawable(icon);
             }
 
