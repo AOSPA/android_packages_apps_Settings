@@ -328,12 +328,15 @@ public class ThemeFragment extends ToolbarFragment {
                     ? res.getDrawable(R.drawable.theme_cover_scrim_custom, activity.getTheme())
                     : res.getDrawable(R.drawable.theme_cover_scrim, activity.getTheme());
 
+            WallpaperPreviewLayoutListener wallpaperListener = new WallpaperPreviewLayoutListener(
+                    theme, previewInfo, coverScrim);
+
             addPage(new ThemeCoverPage(activity, theme.getTitle(),
                     previewInfo.resolveAccentColor(res), previewInfo.icons,
                     previewInfo.headlineFontFamily, previewInfo.bottomSheeetCornerRadius,
                     previewInfo.shapeDrawable, previewInfo.shapeAppIcons, editClickListener,
                     mColorButtonIds, mColorTileIds, mColorTileIconIds, mShapeIconIds,
-                    new WallpaperPreviewLayoutListener(theme, previewInfo, coverScrim)));
+                    wallpaperListener, coverCardLayoutListener));
             addPage(new ThemePreviewPage(activity, R.string.preview_name_font, R.drawable.ic_font,
                     R.layout.preview_card_font_content,
                     previewInfo.resolveAccentColor(res)) {

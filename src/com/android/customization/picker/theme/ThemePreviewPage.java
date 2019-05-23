@@ -90,7 +90,7 @@ abstract class ThemePreviewPage extends PreviewPage {
         private final Resources mRes;
         private String mTitle;
         private OnClickListener mEditClickListener;
-        private final OnLayoutChangeListener mListener;
+        private final OnLayoutChangeListener[] mListeners;
         private final int mCornerRadius;
         private final ColorStateList mTintList;
 
@@ -100,7 +100,7 @@ abstract class ThemePreviewPage extends PreviewPage {
                 List<Drawable> shapeAppIcons,
                 OnClickListener editClickListener,
                 int[] colorButtonIds, int[] colorTileIds, int[][] colorTileIconIds,
-                int[] shapeIconIds, OnLayoutChangeListener wallpaperListener) {
+                int[] shapeIconIds, OnLayoutChangeListener... wallpaperListeners) {
             super(context, 0, 0, R.layout.preview_card_cover_content, accentColor);
             mRes = context.getResources();
             mTitle = title;
@@ -114,7 +114,7 @@ abstract class ThemePreviewPage extends PreviewPage {
             mColorTileIds = colorTileIds;
             mColorTileIconIds = colorTileIconIds;
             mShapeIconIds = shapeIconIds;
-            mListener = wallpaperListener;
+            mListeners = wallpaperListeners;
             // Color QS icons:
             int controlGreyColor = mRes.getColor(R.color.control_grey, null);
             mTintList = new ColorStateList(
@@ -136,8 +136,14 @@ abstract class ThemePreviewPage extends PreviewPage {
             if (card == null) {
                 return;
             }
+            if (mListeners != null) {
+                for (OnLayoutChangeListener listener : mListeners) {
+                    if (listener != null) {
+                        card.addOnLayoutChangeListener(listener);
+                    }
+                }
+            }
 
-            card.addOnLayoutChangeListener(mListener);
             if (forceRebind) {
                 card.requestLayout();
             }
