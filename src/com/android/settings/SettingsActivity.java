@@ -37,7 +37,6 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -53,7 +52,6 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
-import com.android.settings.backup.BackupSettingsHelper;
 import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
@@ -69,6 +67,8 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -172,8 +172,6 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private Button mNextButton;
 
-    private ViewGroup mContent;
-
     // Categories
     private ArrayList<DashboardCategory> mCategories = new ArrayList<>();
 
@@ -251,14 +249,14 @@ public class SettingsActivity extends SettingsBaseActivity
                 intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
 
         // If this is a sub settings, then apply the SubSettings Theme for the ActionBar content
-        // insets
-        if (isSubSettings) {
+        // insets.
+        // If this is in setup flow, don't apply theme. Because light theme needs to be applied
+        // in SettingsBaseActivity#onCreate().
+        if (isSubSettings && !WizardManagerHelper.isAnySetupWizard(getIntent())) {
             setTheme(R.style.Theme_SubSettings);
         }
 
         setContentView(R.layout.settings_main_prefs);
-
-        mContent = findViewById(R.id.main_content);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
 
