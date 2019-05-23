@@ -49,6 +49,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -76,6 +78,9 @@ public class MobileDataSliceTest {
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         doReturn(SUB_ID).when(mSubscriptionInfo).getSubscriptionId();
+        doReturn(new ArrayList<>(Arrays.asList(mSubscriptionInfo)))
+                .when(mSubscriptionManager).getSelectableSubscriptionInfoList();
+
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
@@ -162,6 +167,50 @@ public class MobileDataSliceTest {
         final boolean isMobileDataEnabled = mMobileDataSlice.isMobileDataEnabled();
 
         assertThat(isMobileDataEnabled).isEqualTo(seed);
+    }
+
+    @Test
+    public void isMobileDataAvailable_noSubscriptions_slicePrimaryActionIsEmpty() {
+        doReturn(new ArrayList<>()).when(mSubscriptionManager).getSelectableSubscriptionInfoList();
+        final Slice mobileData = mMobileDataSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, mobileData);
+        assertThat(metadata.getTitle())
+                .isEqualTo(mContext.getString(R.string.mobile_data_settings_title));
+
+        assertThat(metadata.getSubtitle())
+                .isEqualTo(mContext.getString(R.string.sim_cellular_data_unavailable));
+
+        final List<SliceAction> toggles = metadata.getToggles();
+        assertThat(toggles).hasSize(0);
+
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+        final PendingIntent pendingIntent = primaryAction.getAction();
+        final Intent actionIntent = pendingIntent.getIntent();
+
+        assertThat(actionIntent).isNull();
+    }
+
+    @Test
+    public void isMobileDataAvailable_nullSubscriptions_slicePrimaryActionIsEmpty() {
+        doReturn(null).when(mSubscriptionManager).getSelectableSubscriptionInfoList();
+        final Slice mobileData = mMobileDataSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, mobileData);
+        assertThat(metadata.getTitle())
+                .isEqualTo(mContext.getString(R.string.mobile_data_settings_title));
+
+        assertThat(metadata.getSubtitle())
+                .isEqualTo(mContext.getString(R.string.sim_cellular_data_unavailable));
+
+        final List<SliceAction> toggles = metadata.getToggles();
+        assertThat(toggles).hasSize(0);
+
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+        final PendingIntent pendingIntent = primaryAction.getAction();
+        final Intent actionIntent = pendingIntent.getIntent();
+
+        assertThat(actionIntent).isNull();
     }
 
     @Test

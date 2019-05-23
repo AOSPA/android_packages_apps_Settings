@@ -18,6 +18,7 @@ import static java.util.concurrent.TimeUnit.DAYS;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.RelativeDateTimeFormatter;
 import android.provider.DeviceConfig;
 import android.view.View;
 
@@ -26,9 +27,11 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.location.RecentLocationAccesses;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.AppEntitiesHeaderController;
 import com.android.settingslib.widget.AppEntityInfo;
 import com.android.settingslib.widget.LayoutPreference;
@@ -62,8 +65,8 @@ public class RecentLocationAccessPreferenceController extends AbstractPreference
     @Override
     public boolean isAvailable() {
         return Boolean.parseBoolean(
-                DeviceConfig.getProperty(DeviceConfig.Privacy.NAMESPACE,
-                        DeviceConfig.Privacy.PROPERTY_PERMISSIONS_HUB_ENABLED));
+                DeviceConfig.getProperty(DeviceConfig.NAMESPACE_PRIVACY,
+                        Utils.PROPERTY_PERMISSIONS_HUB_ENABLED));
     }
 
     @Override
@@ -100,7 +103,9 @@ public class RecentLocationAccessPreferenceController extends AbstractPreference
                 final AppEntityInfo appEntityInfo = new AppEntityInfo.Builder()
                         .setIcon(access.icon)
                         .setTitle(access.label)
-                        .setSummary(access.contentDescription)
+                        .setSummary(StringUtil.formatRelativeTime(mContext,
+                                System.currentTimeMillis() - access.accessFinishTime, false,
+                                RelativeDateTimeFormatter.Style.SHORT))
                         .setOnClickListener((v) -> {
                             final Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSION);
                             intent.putExtra(Intent.EXTRA_PERMISSION_NAME,

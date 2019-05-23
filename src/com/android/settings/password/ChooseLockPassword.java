@@ -443,7 +443,7 @@ public class ChooseLockPassword extends SettingsActivity {
             mSkipOrClearButton = mixin.getSecondaryButton();
             mNextButton = mixin.getPrimaryButton();
 
-            mMessage = view.findViewById(R.id.message);
+            mMessage = view.findViewById(R.id.sud_layout_description);
             if (mForFingerprint) {
                 mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
             } else if (mForFace) {
@@ -515,7 +515,7 @@ public class ChooseLockPassword extends SettingsActivity {
             }
         }
 
-        private int getStageType() {
+        protected int getStageType() {
             return mForFingerprint ? Stage.TYPE_FINGERPRINT :
                     mForFace ? Stage.TYPE_FACE :
                             Stage.TYPE_NONE;

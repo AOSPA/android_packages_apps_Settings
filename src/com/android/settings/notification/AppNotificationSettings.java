@@ -33,6 +33,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -50,7 +51,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     private static String KEY_ADVANCED_CATEGORY = "app_advanced";
     private static String KEY_BADGE = "badge";
     private static String KEY_APP_LINK = "app_link";
-    private static String KEY_BUBBLE = "bubble";
+    private static String KEY_BUBBLE = "bubble_link_pref";
     private static String[] LEGACY_NON_ADVANCED_KEYS = {KEY_BADGE, KEY_APP_LINK, KEY_BUBBLE};
 
     private List<NotificationChannelGroup> mChannelGroupList;
@@ -255,7 +256,7 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 int childCount = groupGroup.getPreferenceCount();
                 for (int i = 0; i < childCount; i++) {
                     Preference pref = groupGroup.getPreference(i);
-                    if (pref instanceof ChannelSummaryPreference) {
+                    if (pref instanceof MasterSwitchPreference) {
                         toRemove.add(pref);
                     }
                 }

@@ -25,7 +25,6 @@
         android:id="@+id/main_content_scrollable_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:importantForAccessibility="no"
         app:layout_behavior="com.android.settings.widget.FloatingAppBarScrollingViewBehavior">
 
         <LinearLayout
@@ -39,14 +38,15 @@
                 android:id="@+id/contextual_cards_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/homepage_card_side_margin"
-                android:layout_marginEnd="@dimen/homepage_card_side_margin"/>
+                android:layout_marginStart="@dimen/contextual_card_side_margin"
+                android:layout_marginEnd="@dimen/contextual_card_side_margin"/>
 
             <FrameLayout
                 android:id="@+id/main_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"/>
+                android:animateLayoutChanges="true"
+                android:background="?android:attr/windowBackground"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

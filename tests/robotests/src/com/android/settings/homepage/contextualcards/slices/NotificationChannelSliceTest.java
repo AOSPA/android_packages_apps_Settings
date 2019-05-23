@@ -26,11 +26,11 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
+import android.app.role.RoleManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -152,7 +152,8 @@ public class NotificationChannelSliceTest {
         for (int i = 0; i < rowItems.size(); i++) {
             // Assert the summary text is the same as expectation.
             assertThat(getSummaryFromSliceItem(rowItems.get(i))).isEqualTo(
-                    mContext.getString(R.string.notifications_sent_weekly, CHANNEL_COUNT - i));
+                    mContext.getResources().getQuantityString(R.plurals.notifications_sent_weekly,
+                            CHANNEL_COUNT - i, CHANNEL_COUNT - i));
         }
     }
 
@@ -299,11 +300,27 @@ public class NotificationChannelSliceTest {
         assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.no_suggested_app));
     }
 
+    @Test
+    @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
+    public void getSlice_isInteractedPackage_shouldHaveNoSuggestedAppTitle() {
+        addMockPackageToPackageManager(true /* isRecentlyInstalled */,
+                ApplicationInfo.FLAG_INSTALLED);
+        mockNotificationBackend(CHANNEL_COUNT, NOTIFICATION_COUNT, false /* banned */,
+                false /* isChannelBlocked */);
+        doReturn(true).when(mNotificationChannelSlice).isUserInteracted(any(String.class));
+
+        final Slice slice = mNotificationChannelSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.no_suggested_app));
+    }
+
     private void addMockPackageToPackageManager(boolean isRecentlyInstalled, int flags) {
         final ApplicationInfo applicationInfo = new ApplicationInfo();
         applicationInfo.name = APP_LABEL;
         applicationInfo.uid = UID;
         applicationInfo.flags = flags;
+        applicationInfo.packageName = PACKAGE_NAME;
 
         final PackageInfo packageInfo = new PackageInfo();
         packageInfo.packageName = PACKAGE_NAME;
@@ -329,7 +346,7 @@ public class NotificationChannelSliceTest {
         doReturn(buildNotificationChannelGroups(channels)).when(mNotificationBackend).getGroups(
                 any(String.class), any(int.class));
         doReturn(appRow).when(mNotificationBackend).loadAppRow(any(Context.class),
-                any(PackageManager.class), any(PackageInfo.class));
+                any(PackageManager.class), any(RoleManager.class), any(PackageInfo.class));
         doReturn(channelCount).when(mNotificationBackend).getChannelCount(
                 any(String.class), any(int.class));
     }

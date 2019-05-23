@@ -19,24 +19,30 @@ package com.android.settings.biometrics.face;
 import static android.provider.Settings.Secure.FACE_UNLOCK_APP_ENABLED;
 
 import android.content.Context;
+import android.hardware.face.FaceManager;
 import android.provider.Settings;
 
-import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.Utils;
+
+import androidx.preference.Preference;
 
 /**
  * Preference controller for Face settings page controlling the ability to use
  * Face authentication in apps (through BiometricPrompt).
  */
-public class FaceSettingsAppPreferenceController extends TogglePreferenceController {
+public class FaceSettingsAppPreferenceController extends FaceSettingsPreferenceController {
 
-    private static final String KEY = "security_settings_face_app";
+    static final String KEY = "security_settings_face_app";
 
     private static final int ON = 1;
     private static final int OFF = 0;
     private static final int DEFAULT = ON;  // face unlock is enabled for BiometricPrompt by default
 
+    private FaceManager mFaceManager;
+
     public FaceSettingsAppPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mFaceManager = Utils.getFaceManagerOrNull(context);
     }
 
     public FaceSettingsAppPreferenceController(Context context) {
@@ -48,14 +54,26 @@ public class FaceSettingsAppPreferenceController extends TogglePreferenceControl
         if (!FaceSettings.isAvailable(mContext)) {
             return false;
         }
-        return Settings.Secure.getInt(
-                mContext.getContentResolver(), FACE_UNLOCK_APP_ENABLED, DEFAULT) == ON;
+        return Settings.Secure.getIntForUser(
+                mContext.getContentResolver(), FACE_UNLOCK_APP_ENABLED, DEFAULT, getUserId()) == ON;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.Secure.putInt(mContext.getContentResolver(), FACE_UNLOCK_APP_ENABLED,
-                isChecked ? ON : OFF);
+        return Settings.Secure.putIntForUser(mContext.getContentResolver(), FACE_UNLOCK_APP_ENABLED,
+                isChecked ? ON : OFF, getUserId());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (!FaceSettings.isAvailable(mContext)) {
+            preference.setEnabled(false);
+        } else if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
+            preference.setEnabled(false);
+        } else {
+            preference.setEnabled(true);
+        }
     }
 
     @Override

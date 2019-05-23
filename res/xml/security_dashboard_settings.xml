@@ -87,11 +87,17 @@
             android:title="@string/security_settings_fingerprint_preference_title"
             android:summary="@string/summary_placeholder" />
 
+        <Preference
+            android:key="face_settings_profile"
+            android:title="@string/security_settings_face_preference_title"
+            android:summary="@string/summary_placeholder" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
         android:order="40"
-        android:key="security_settings_device_admin_category">
+        android:key="security_settings_device_admin_category"
+        android:layout="@layout/preference_category_no_label">
 
         <Preference
             android:key="manage_device_admin"

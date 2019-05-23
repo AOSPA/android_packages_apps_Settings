@@ -71,13 +71,13 @@ import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
-import com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.AccessPointPreference;
+import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
@@ -100,7 +100,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final String TAG = "WifiSettings";
 
     private static final int MENU_ID_CONNECT = Menu.FIRST + 6;
-    private static final int MENU_ID_FORGET = Menu.FIRST + 7;
+    @VisibleForTesting
+    static final int MENU_ID_FORGET = Menu.FIRST + 7;
     private static final int MENU_ID_MODIFY = Menu.FIRST + 8;
 
     public static final int WIFI_DIALOG_ID = 1;
@@ -459,7 +460,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     ((LongPressAccessPointPreference) preference).getAccessPoint();
             menu.setHeaderTitle(mSelectedAccessPoint.getTitle());
             if (mSelectedAccessPoint.isConnectable()) {
-                menu.add(Menu.NONE, MENU_ID_CONNECT, 0, R.string.wifi_menu_connect);
+                menu.add(Menu.NONE, MENU_ID_CONNECT, 0 /* order */, R.string.wifi_connect);
             }
 
             WifiConfiguration config = mSelectedAccessPoint.getConfig();
@@ -468,14 +469,16 @@ public class WifiSettings extends RestrictedSettingsFragment
                 return;
             }
 
+            // "forget" for normal saved network. And "disconnect" for ephemeral network because it
+            // could only be disconnected and be put in blacklists so it won't be used again.
             if (mSelectedAccessPoint.isSaved() || mSelectedAccessPoint.isEphemeral()) {
-                // Allow forgetting a network if either the network is saved or ephemerally
-                // connected. (In the latter case, "forget" blacklists the network so it won't
-                // be used again, ephemerally).
-                menu.add(Menu.NONE, MENU_ID_FORGET, 0, R.string.wifi_menu_forget);
+                final int stringId = mSelectedAccessPoint.isEphemeral() ?
+                    R.string.wifi_disconnect_button_text : R.string.forget;
+                menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */, stringId);
             }
-            if (mSelectedAccessPoint.isSaved()) {
-                menu.add(Menu.NONE, MENU_ID_MODIFY, 0, R.string.wifi_menu_modify);
+
+            if (mSelectedAccessPoint.isSaved() && !mSelectedAccessPoint.isActive()) {
+                menu.add(Menu.NONE, MENU_ID_MODIFY, 0 /* order */, R.string.wifi_modify);
             }
         }
     }
@@ -783,10 +786,11 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     @NonNull
-    private ConnectedAccessPointPreference createConnectedAccessPointPreference(
-            AccessPoint accessPoint) {
-        return new ConnectedAccessPointPreference(accessPoint, getPrefContext(), mUserBadgeCache,
-                R.drawable.ic_wifi_signal_0, false /* forSavedNetworks */);
+    @VisibleForTesting
+    ConnectedAccessPointPreference createConnectedAccessPointPreference(
+            AccessPoint accessPoint, Context context) {
+        return new ConnectedAccessPointPreference(accessPoint, context, mUserBadgeCache,
+                R.drawable.ic_wifi_signal_0, false /* forSavedNetworks */, this);
     }
 
     /**
@@ -839,7 +843,7 @@ public class WifiSettings extends RestrictedSettingsFragment
      */
     private void addConnectedAccessPointPreference(AccessPoint connectedAp) {
         final ConnectedAccessPointPreference pref =
-                createConnectedAccessPointPreference(connectedAp);
+                createConnectedAccessPointPreference(connectedAp, getPrefContext());
         registerCaptivePortalNetworkCallback(getCurrentWifiNetwork(), pref);
 
         // Launch details page or captive portal on click.
@@ -954,11 +958,38 @@ public class WifiSettings extends RestrictedSettingsFragment
                 isWifiWakeupEnabled()
                         ? R.string.wifi_configure_settings_preference_summary_wakeup_on
                         : R.string.wifi_configure_settings_preference_summary_wakeup_off));
-        final int numSavedNetworks = mWifiTracker.getNumSavedNetworks();
+
+        final List<AccessPoint> savedNetworks =
+                WifiSavedConfigUtils.getAllConfigs(getContext(), mWifiManager);
+        final int numSavedNetworks = (savedNetworks != null) ? savedNetworks.size() : 0;
         mSavedNetworksPreference.setVisible(numSavedNetworks > 0);
-        mSavedNetworksPreference.setSummary(
-                getResources().getQuantityString(R.plurals.wifi_saved_access_points_summary,
-                        numSavedNetworks, numSavedNetworks));
+        if (numSavedNetworks > 0) {
+            mSavedNetworksPreference.setSummary(
+                    getSavedNetworkSettingsSummaryText(savedNetworks, numSavedNetworks));
+        }
+    }
+
+    private String getSavedNetworkSettingsSummaryText(
+            List<AccessPoint> savedNetworks, int numSavedNetworks) {
+        int numSavedPasspointNetworks = 0;
+        for (AccessPoint savedNetwork : savedNetworks) {
+            if (savedNetwork.isPasspointConfig() || savedNetwork.isPasspoint()) {
+                numSavedPasspointNetworks++;
+            }
+        }
+        final int numSavedNormalNetworks = numSavedNetworks - numSavedPasspointNetworks;
+
+        if (numSavedNetworks == numSavedNormalNetworks) {
+            return getResources().getQuantityString(R.plurals.wifi_saved_access_points_summary,
+                    numSavedNormalNetworks, numSavedNormalNetworks);
+        } else if (numSavedNetworks == numSavedPasspointNetworks) {
+            return getResources().getQuantityString(
+                    R.plurals.wifi_saved_passpoint_access_points_summary,
+                    numSavedPasspointNetworks, numSavedPasspointNetworks);
+        } else {
+            return getResources().getQuantityString(R.plurals.wifi_saved_all_access_points_summary,
+                    numSavedNetworks, numSavedNetworks);
+        }
     }
 
     private boolean isWifiWakeupEnabled() {

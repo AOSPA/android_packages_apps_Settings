@@ -27,8 +27,11 @@ import android.content.Intent;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
+
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -51,18 +54,31 @@ import java.util.List;
 public class FaceSettings extends DashboardFragment {
 
     private static final String TAG = "FaceSettings";
-    private static final String KEY_TOKEN = "key_token";
+    private static final String KEY_TOKEN = "hw_auth_token";
 
+    private UserManager mUserManager;
     private FaceManager mFaceManager;
     private int mUserId;
     private byte[] mToken;
     private FaceSettingsAttentionPreferenceController mAttentionController;
     private FaceSettingsRemoveButtonPreferenceController mRemoveController;
+    private FaceSettingsEnrollButtonPreferenceController mEnrollController;
+    private List<AbstractPreferenceController> mControllers;
+
+    private List<Preference> mTogglePreferences;
+    private Preference mRemoveButton;
+    private Preference mEnrollButton;
 
     private final FaceSettingsRemoveButtonPreferenceController.Listener mRemovalListener = () -> {
-        if (getActivity() != null) {
-            getActivity().finish();
+
+        // Disable the toggles until the user re-enrolls
+        for (Preference preference : mTogglePreferences) {
+            preference.setEnabled(false);
         }
+
+        // Hide the "remove" button and show the "set up face authentication" button.
+        mRemoveButton.setVisible(false);
+        mEnrollButton.setVisible(true);
     };
 
     public static boolean isAvailable(Context context) {
@@ -95,9 +111,36 @@ public class FaceSettings extends DashboardFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mToken = getIntent().getByteArrayExtra(KEY_TOKEN);
+        mUserManager = getPrefContext().getSystemService(UserManager.class);
         mFaceManager = getPrefContext().getSystemService(FaceManager.class);
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
+
+        Preference keyguardPref = findPreference(FaceSettingsKeyguardPreferenceController.KEY);
+        Preference appPref = findPreference(FaceSettingsAppPreferenceController.KEY);
+        Preference attentionPref = findPreference(FaceSettingsAttentionPreferenceController.KEY);
+        Preference confirmPref = findPreference(FaceSettingsConfirmPreferenceController.KEY);
+        mTogglePreferences = new ArrayList<>(
+                Arrays.asList(keyguardPref, appPref, attentionPref, confirmPref));
+
+        mRemoveButton = findPreference(FaceSettingsRemoveButtonPreferenceController.KEY);
+        mEnrollButton = findPreference(FaceSettingsEnrollButtonPreferenceController.KEY);
+
+        // There is no better way to do this :/
+        for (AbstractPreferenceController controller : mControllers) {
+            if (controller instanceof  FaceSettingsPreferenceController) {
+                ((FaceSettingsPreferenceController) controller).setUserId(mUserId);
+            } else if (controller instanceof FaceSettingsEnrollButtonPreferenceController) {
+                ((FaceSettingsEnrollButtonPreferenceController) controller).setUserId(mUserId);
+            }
+        }
+        mRemoveController.setUserId(mUserId);
+
+        // Don't show keyguard controller for work profile settings.
+        if (mUserManager.isManagedProfile(mUserId)) {
+            removePreference(FaceSettingsKeyguardPreferenceController.KEY);
+        }
 
         if (savedInstanceState != null) {
             mToken = savedInstanceState.getByteArray(KEY_TOKEN);
@@ -120,7 +163,12 @@ public class FaceSettings extends DashboardFragment {
         super.onResume();
         if (mToken != null) {
             mAttentionController.setToken(mToken);
+            mEnrollController.setToken(mToken);
         }
+
+        final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
+        mEnrollButton.setVisible(!hasEnrolled);
+        mRemoveButton.setVisible(hasEnrolled);
     }
 
     @Override
@@ -128,12 +176,14 @@ public class FaceSettings extends DashboardFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CONFIRM_REQUEST) {
             if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
+                mFaceManager.setActiveUser(mUserId);
                 // The pin/pattern/password was set.
                 if (data != null) {
                     mToken = data.getByteArrayExtra(
                             ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
                     if (mToken != null) {
                         mAttentionController.setToken(mToken);
+                        mEnrollController.setToken(mToken);
                     }
                 }
             }
@@ -161,20 +211,22 @@ public class FaceSettings extends DashboardFragment {
         if (!isAvailable(context)) {
             return null;
         }
-        final List<AbstractPreferenceController> controllers =
-                buildPreferenceControllers(context, getSettingsLifecycle());
+        mControllers = buildPreferenceControllers(context, getSettingsLifecycle());
         // There's no great way of doing this right now :/
-        for (AbstractPreferenceController controller : controllers) {
+        for (AbstractPreferenceController controller : mControllers) {
             if (controller instanceof FaceSettingsAttentionPreferenceController) {
                 mAttentionController = (FaceSettingsAttentionPreferenceController) controller;
             } else if (controller instanceof FaceSettingsRemoveButtonPreferenceController) {
                 mRemoveController = (FaceSettingsRemoveButtonPreferenceController) controller;
                 mRemoveController.setListener(mRemovalListener);
                 mRemoveController.setActivity((SettingsActivity) getActivity());
+            } else if (controller instanceof FaceSettingsEnrollButtonPreferenceController) {
+                mEnrollController = (FaceSettingsEnrollButtonPreferenceController) controller;
+                mEnrollController.setActivity((SettingsActivity) getActivity());
             }
         }
 
-        return controllers;
+        return mControllers;
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
@@ -187,6 +239,7 @@ public class FaceSettings extends DashboardFragment {
         controllers.add(new FaceSettingsRemoveButtonPreferenceController(context));
         controllers.add(new FaceSettingsFooterPreferenceController(context));
         controllers.add(new FaceSettingsConfirmPreferenceController(context));
+        controllers.add(new FaceSettingsEnrollButtonPreferenceController(context));
         return controllers;
     }
 

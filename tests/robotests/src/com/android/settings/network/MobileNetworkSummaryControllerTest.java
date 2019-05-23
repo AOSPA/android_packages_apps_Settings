@@ -31,8 +31,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 
@@ -59,9 +62,13 @@ public class MobileNetworkSummaryControllerTest {
     @Mock
     private Lifecycle mLifecycle;
     @Mock
+    private TelephonyManager mTelephonyManager;
+    @Mock
     private EuiccManager mEuiccManager;
     @Mock
     private PreferenceScreen mPreferenceScreen;
+    @Mock
+    private UserManager mUserManager;
 
     private AddPreference mPreference;
     private Context mContext;
@@ -71,8 +78,12 @@ public class MobileNetworkSummaryControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(Robolectric.setupActivity(Activity.class));
+        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(EuiccManager.class)).thenReturn(mEuiccManager);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mTelephonyManager.getNetworkCountryIso()).thenReturn("");
         when(mEuiccManager.isEnabled()).thenReturn(true);
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.EUICC_PROVISIONED, 1);
 
         mController = new MobileNetworkSummaryController(mContext, mLifecycle);
         mPreference = spy(new AddPreference(mContext, null));
@@ -91,8 +102,21 @@ public class MobileNetworkSummaryControllerTest {
         final ConnectivityManager cm = mock(ConnectivityManager.class);
         when(cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(false);
         when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(cm);
+        when(mUserManager.isAdminUser()).thenReturn(true);
+
         assertThat(mController.isAvailable()).isFalse();
     }
+
+    @Test
+    public void isAvailable_secondaryUser_notAvailable() {
+        final ConnectivityManager cm = mock(ConnectivityManager.class);
+        when(cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(true);
+        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(cm);
+        when(mUserManager.isAdminUser()).thenReturn(false);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
 
     @Test
     public void getSummary_noSubscriptions_correctSummaryAndClickHandler() {
@@ -128,8 +152,11 @@ public class MobileNetworkSummaryControllerTest {
         mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         verify(mContext).startActivity(intentCaptor.capture());
-        assertThat(intentCaptor.getValue().getComponent().getClassName()).isEqualTo(
+        Intent intent = intentCaptor.getValue();
+        assertThat(intent.getComponent().getClassName()).isEqualTo(
                 MobileNetworkActivity.class.getName());
+        assertThat(intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID)).isEqualTo(sub1.getSubscriptionId());
     }
 
     @Test
@@ -274,6 +301,18 @@ public class MobileNetworkSummaryControllerTest {
         final ArgumentCaptor<Boolean> captor = ArgumentCaptor.forClass(Boolean.class);
         verify(mPreference, atLeastOnce()).setAddWidgetEnabled(captor.capture());
         assertThat(captor.getValue()).isFalse();
+    }
+
+    @Test
+    public void onResume_noSubscriptionEsimDisabled_isDisabled() {
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
+        when(mEuiccManager.isEnabled()).thenReturn(false);
+        mController.displayPreference(mPreferenceScreen);
+
+        mController.onResume();
+
+        assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test

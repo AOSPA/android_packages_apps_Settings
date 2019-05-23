@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
+import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
@@ -36,6 +37,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
+import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
@@ -100,16 +102,27 @@ public class ImportancePreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
         mController.onResume(appRow, mock(NotificationChannel.class), null, null);
-        assertTrue(mController.isAvailable());
+        assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void testIsAvailable_evenIfChannelBlocked() {
+    public void testIsAvailable_isGroupBlocked() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
+        NotificationChannelGroup group = mock(NotificationChannelGroup.class);
+        when(group.isBlocked()).thenReturn(true);
+        mController.onResume(appRow, channel, group, null);
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_ifChannelBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
         mController.onResume(appRow, channel, null, null);
-        assertTrue(mController.isAvailable());
+        assertFalse(mController.isAvailable());
     }
 
     @Test
@@ -146,11 +159,9 @@ public class ImportancePreferenceControllerTest {
 
     @Test
     public void testUpdateState_notConfigurable() {
-        String lockedId = "locked";
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedChannelId = lockedId;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getId()).thenReturn(lockedId);
+        when(channel.isImportanceLockedByOEM()).thenReturn(true);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null);
 
@@ -158,6 +169,36 @@ public class ImportancePreferenceControllerTest {
         mController.updateState(pref);
 
         assertFalse(pref.isEnabled());
+    }
+
+    @Test
+    public void testUpdateState_systemButConfigurable() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.systemApp = true;
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.isImportanceLockedByOEM()).thenReturn(false);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
+        mController.onResume(appRow, channel, null, null);
+
+        Preference pref = new ImportancePreference(mContext, null);
+        mController.updateState(pref);
+
+        assertTrue(pref.isEnabled());
+    }
+
+    @Test
+    public void testUpdateState_defaultApp() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.systemApp = true;
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
+        mController.onResume(appRow, channel, null, null);
+
+        Preference pref = new ImportancePreference(mContext, null);
+        mController.updateState(pref);
+
+        assertTrue(pref.isEnabled());
     }
 
     @Test
@@ -170,8 +211,8 @@ public class ImportancePreferenceControllerTest {
         mController.updateState(pref);
 
         verify(pref, times(1)).setConfigurable(anyBoolean());
-        verify(pref, times(1)).setBlockable(anyBoolean());
         verify(pref, times(1)).setImportance(IMPORTANCE_HIGH);
+        verify(pref, times(1)).setDisplayInStatusBar(false);
     }
     
     @Test

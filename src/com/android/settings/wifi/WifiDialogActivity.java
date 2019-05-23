@@ -28,6 +28,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.wifi.AccessPoint;
@@ -59,23 +60,30 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
 
     private WifiDialog mDialog;
 
+    private Intent mIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final Intent intent = getIntent();
-        if (WizardManagerHelper.isSetupWizardIntent(intent)) {
-            setTheme(SetupWizardUtils.getTransparentTheme(intent));
+        mIntent = getIntent();
+        if (WizardManagerHelper.isSetupWizardIntent(mIntent)) {
+            setTheme(SetupWizardUtils.getTransparentTheme(mIntent));
         }
 
         super.onCreate(savedInstanceState);
 
-        final Bundle accessPointState = intent.getBundleExtra(KEY_ACCESS_POINT_STATE);
+        final Bundle accessPointState = mIntent.getBundleExtra(KEY_ACCESS_POINT_STATE);
         AccessPoint accessPoint = null;
         if (accessPointState != null) {
             accessPoint = new AccessPoint(this, accessPointState);
         }
 
-        mDialog = WifiDialog.createModal(
-                this, this, accessPoint, WifiConfigUiBase.MODE_CONNECT);
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            mDialog = WifiDialog.createModal(this, this, accessPoint,
+                    WifiConfigUiBase.MODE_CONNECT, R.style.SuwAlertDialogThemeCompat_Light);
+        } else {
+            mDialog = WifiDialog.createModal(
+                    this, this, accessPoint, WifiConfigUiBase.MODE_CONNECT);
+        }
         mDialog.show();
         mDialog.setOnDismissListener(this);
     }
@@ -169,9 +177,11 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
 
     @Override
     public void onScan(WifiDialog dialog, String ssid) {
+        Intent intent = WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid);
+        WizardManagerHelper.copyWizardManagerExtras(mIntent, intent);
+
         // Launch QR code scanner to join a network.
-        startActivityForResult(WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid),
-                REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
+        startActivityForResult(intent, REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
     }
 
     @Override

@@ -73,19 +73,19 @@ public class DefaultSubscriptionControllerTest {
 
     @After
     public void tearDown() {
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
+        SubscriptionUtil.setActiveSubscriptionsForTesting(null);
     }
 
     @Test
     public void getAvailabilityStatus_onlyOneSubscription_notAvailable() {
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(
                 createMockSub(1, "sub1")));
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
     public void getAvailabilityStatus_twoSubscriptions_isAvailable() {
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(
                 createMockSub(1, "sub1"),
                 createMockSub(2, "sub2")));
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
@@ -95,7 +95,7 @@ public class DefaultSubscriptionControllerTest {
     public void displayPreference_twoSubscriptionsSub1Default_correctListPreferenceValues() {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
 
         mController.displayPreference(mScreen);
@@ -123,7 +123,7 @@ public class DefaultSubscriptionControllerTest {
     public void displayPreference_twoSubscriptionsSub2Default_correctListPreferenceValues() {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         doReturn(sub2.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
 
         mController.displayPreference(mScreen);
@@ -148,10 +148,38 @@ public class DefaultSubscriptionControllerTest {
     }
 
     @Test
+    public void displayPreference_threeSubsOneIsOpportunistic_correctListPreferenceValues() {
+        final SubscriptionInfo sub1 = createMockSub(111, "sub1");
+        final SubscriptionInfo sub2 = createMockSub(222, "sub2");
+        final SubscriptionInfo sub3 = createMockSub(333, "sub3");
+
+        // Mark sub2 as opportunistic; then it should not appear in the list of entries/entryValues.
+        when(sub2.isOpportunistic()).thenReturn(true);
+
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2, sub3));
+        doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
+
+        mController.displayPreference(mScreen);
+
+        final CharSequence[] entries = mListPreference.getEntries();
+        assertThat(entries.length).isEqualTo(3);
+        assertThat(entries[0]).isEqualTo("sub1");
+        assertThat(entries[1]).isEqualTo("sub3");
+        assertThat(entries[2]).isEqualTo(mContext.getString(R.string.calls_and_sms_ask_every_time));
+
+        final CharSequence[] entryValues = mListPreference.getEntryValues();
+        assertThat(entryValues.length).isEqualTo(3);
+        assertThat(entryValues[0]).isEqualTo("111");
+        assertThat(entryValues[1]).isEqualTo("333");
+        assertThat(entryValues[2]).isEqualTo(
+                Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
+    }
+
+    @Test
     public void onPreferenceChange_prefChangedToSub2_callbackCalledCorrectly() {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
 
         mController.displayPreference(mScreen);
@@ -164,7 +192,7 @@ public class DefaultSubscriptionControllerTest {
     public void onPreferenceChange_prefChangedToAlwaysAsk_callbackCalledCorrectly() {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
 
         mController.displayPreference(mScreen);
@@ -179,7 +207,7 @@ public class DefaultSubscriptionControllerTest {
     public void onSubscriptionsChanged_twoSubscriptionsDefaultChanges_selectedEntryGetsUpdated() {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
 
         mController.displayPreference(mScreen);
@@ -196,14 +224,14 @@ public class DefaultSubscriptionControllerTest {
     public void onSubscriptionsChanged_goFromTwoSubscriptionsToOne_prefDisappears() {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
 
         mController.displayPreference(mScreen);
         assertThat(mController.isAvailable()).isTrue();
         assertThat(mListPreference.isVisible()).isTrue();
 
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
         mController.onSubscriptionsChanged();
 
         assertThat(mController.isAvailable()).isFalse();
@@ -214,14 +242,14 @@ public class DefaultSubscriptionControllerTest {
     public void onSubscriptionsChanged_goFromOneSubscriptionToTwo_prefAppears() {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
         doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
 
         mController.displayPreference(mScreen);
         assertThat(mController.isAvailable()).isFalse();
         assertThat(mListPreference.isVisible()).isFalse();
 
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         mController.onSubscriptionsChanged();
 
         assertThat(mController.isAvailable()).isTrue();
@@ -233,13 +261,13 @@ public class DefaultSubscriptionControllerTest {
         final SubscriptionInfo sub1 = createMockSub(111, "sub1");
         final SubscriptionInfo sub2 = createMockSub(222, "sub2");
         final SubscriptionInfo sub3 = createMockSub(333, "sub3");
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         doReturn(sub1.getSubscriptionId()).when(mController).getDefaultSubscriptionId();
 
         mController.displayPreference(mScreen);
         assertThat(mListPreference.getEntries().length).isEqualTo(3);
 
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2, sub3));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2, sub3));
         mController.onSubscriptionsChanged();
 
         assertThat(mController.isAvailable()).isTrue();

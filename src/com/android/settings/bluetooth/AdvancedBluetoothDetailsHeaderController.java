@@ -26,6 +26,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.DeviceConfig;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -38,9 +39,12 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.fuelgauge.BatteryMeterView;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.utils.ThreadUtils;
@@ -54,7 +58,7 @@ import java.util.Map;
  * This class adds a header with device name and status (connected/disconnected, etc.).
  */
 public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceController implements
-        LifecycleObserver, OnStart, OnStop, CachedBluetoothDevice.Callback {
+        LifecycleObserver, OnStart, OnStop, OnDestroy, CachedBluetoothDevice.Callback {
     private static final String TAG = "AdvancedBtHeaderCtrl";
 
     @VisibleForTesting
@@ -62,19 +66,17 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     @VisibleForTesting
     final Map<String, Bitmap> mIconCache;
     private CachedBluetoothDevice mCachedDevice;
-    private BluetoothDevice mBluetoothDevice;
     @VisibleForTesting
     BluetoothAdapter mBluetoothAdapter;
     @VisibleForTesting
     Handler mHandler = new Handler(Looper.getMainLooper());
     @VisibleForTesting
-    final BluetoothAdapter.MetadataListener mMetadataListener =
-            new BluetoothAdapter.MetadataListener() {
+    final BluetoothAdapter.OnMetadataChangedListener mMetadataListener =
+            new BluetoothAdapter.OnMetadataChangedListener() {
                 @Override
-                public void onMetadataChanged(BluetoothDevice device, int key, String value) {
-                    super.onMetadataChanged(device, key, value);
+                public void onMetadataChanged(BluetoothDevice device, int key, byte[] value) {
                     Log.i(TAG, String.format("Metadata updated in Device %s: %d = %s.", device, key,
-                            value));
+                            value == null ? null : new String(value)));
                     refresh();
                 }
             };
@@ -87,9 +89,11 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        final boolean unthetheredHeadset = Utils.getBooleanMetaData(mCachedDevice.getDevice(),
-                BluetoothDevice.METADATA_IS_UNTHETHERED_HEADSET);
-        return unthetheredHeadset ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        final boolean advancedEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, true);
+        final boolean untetheredHeadset = BluetoothUtils.getBooleanMetaData(
+                mCachedDevice.getDevice(), BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET);
+        return advancedEnabled && untetheredHeadset ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -107,8 +111,8 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             return;
         }
         mCachedDevice.registerCallback(this::onDeviceAttributesChanged);
-        mBluetoothAdapter.registerMetadataListener(mCachedDevice.getDevice(), mMetadataListener,
-                mHandler);
+        mBluetoothAdapter.addOnMetadataChangedListener(mCachedDevice.getDevice(),
+                mContext.getMainExecutor(), mMetadataListener);
     }
 
     @Override
@@ -117,8 +121,15 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             return;
         }
         mCachedDevice.unregisterCallback(this::onDeviceAttributesChanged);
-        mBluetoothAdapter.unregisterMetadataListener(mCachedDevice.getDevice());
+        mBluetoothAdapter.removeOnMetadataChangedListener(mCachedDevice.getDevice(),
+                mMetadataListener);
+    }
 
+    @Override
+    public void onDestroy() {
+        if (!isAvailable()) {
+            return;
+        }
         // Destroy icon bitmap associated with this header
         for (Bitmap bitmap : mIconCache.values()) {
             if (bitmap != null) {
@@ -130,7 +141,6 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
 
     public void init(CachedBluetoothDevice cachedBluetoothDevice) {
         mCachedDevice = cachedBluetoothDevice;
-        mBluetoothDevice = mCachedDevice.getDevice();
     }
 
     @VisibleForTesting
@@ -147,21 +157,21 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             }
 
             updateSubLayout(mLayoutPreference.findViewById(R.id.layout_left),
-                    BluetoothDevice.METADATA_UNTHETHERED_LEFT_ICON,
-                    BluetoothDevice.METADATA_UNTHETHERED_LEFT_BATTERY,
-                    BluetoothDevice.METADATA_UNTHETHERED_LEFT_CHARGING,
+                    BluetoothDevice.METADATA_UNTETHERED_LEFT_ICON,
+                    BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY,
+                    BluetoothDevice.METADATA_UNTETHERED_LEFT_CHARGING,
                     R.string.bluetooth_left_name);
 
             updateSubLayout(mLayoutPreference.findViewById(R.id.layout_middle),
-                    BluetoothDevice.METADATA_UNTHETHERED_CASE_ICON,
-                    BluetoothDevice.METADATA_UNTHETHERED_CASE_BATTERY,
-                    BluetoothDevice.METADATA_UNTHETHERED_CASE_CHARGING,
+                    BluetoothDevice.METADATA_UNTETHERED_CASE_ICON,
+                    BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY,
+                    BluetoothDevice.METADATA_UNTETHERED_CASE_CHARGING,
                     R.string.bluetooth_middle_name);
 
             updateSubLayout(mLayoutPreference.findViewById(R.id.layout_right),
-                    BluetoothDevice.METADATA_UNTHETHERED_RIGHT_ICON,
-                    BluetoothDevice.METADATA_UNTHETHERED_RIGHT_BATTERY,
-                    BluetoothDevice.METADATA_UNTHETHERED_RIGHT_CHARGING,
+                    BluetoothDevice.METADATA_UNTETHERED_RIGHT_ICON,
+                    BluetoothDevice.METADATA_UNTETHERED_RIGHT_BATTERY,
+                    BluetoothDevice.METADATA_UNTETHERED_RIGHT_CHARGING,
                     R.string.bluetooth_right_name);
         }
     }
@@ -187,15 +197,15 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             return;
         }
         final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
-        final String iconUri = Utils.getStringMetaData(bluetoothDevice, iconMetaKey);
+        final String iconUri = BluetoothUtils.getStringMetaData(bluetoothDevice, iconMetaKey);
         if (iconUri != null) {
             final ImageView imageView = linearLayout.findViewById(R.id.header_icon);
             updateIcon(imageView, iconUri);
         }
 
-        final int batteryLevel = Utils.getIntMetaData(bluetoothDevice, batteryMetaKey);
-        final boolean charging = Utils.getBooleanMetaData(bluetoothDevice, chargeMetaKey);
-        if (batteryLevel != Utils.META_INT_ERROR) {
+        final int batteryLevel = BluetoothUtils.getIntMetaData(bluetoothDevice, batteryMetaKey);
+        final boolean charging = BluetoothUtils.getBooleanMetaData(bluetoothDevice, chargeMetaKey);
+        if (batteryLevel != BluetoothUtils.META_INT_ERROR) {
             linearLayout.setVisibility(View.VISIBLE);
             final ImageView imageView = linearLayout.findViewById(R.id.bt_battery_icon);
             imageView.setImageDrawable(createBtBatteryIcon(mContext, batteryLevel, charging));
@@ -226,7 +236,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
 
         // Only show bluetooth icon
         final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
-        final String iconUri = Utils.getStringMetaData(bluetoothDevice,
+        final String iconUri = BluetoothUtils.getStringMetaData(bluetoothDevice,
                 BluetoothDevice.METADATA_MAIN_ICON);
         if (iconUri != null) {
             final ImageView imageView = linearLayout.findViewById(R.id.header_icon);

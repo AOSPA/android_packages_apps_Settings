@@ -22,6 +22,7 @@ import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import android.app.NotificationChannel;
 import android.content.Context;
 import android.media.RingtoneManager;
+import android.provider.Settings;
 
 import com.android.settings.core.PreferenceControllerMixin;
 
@@ -47,26 +48,25 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
 
     @Override
     public boolean isAvailable() {
-        if (mAppRow == null) {
+        if (!super.isAvailable()) {
             return false;
         }
         if (mChannel == null) {
             return false;
         }
-        if (isDefaultChannel()) {
-            return false;
-        }
-        return true;
+        return !isDefaultChannel();
     }
 
     @Override
     public void updateState(Preference preference) {
         if (mAppRow!= null && mChannel != null) {
-            preference.setEnabled(mAdmin == null && isChannelConfigurable());
+            preference.setEnabled(mAdmin == null && !mChannel.isImportanceLockedByOEM());
             ImportancePreference pref = (ImportancePreference) preference;
-            pref.setBlockable(isChannelBlockable());
-            pref.setConfigurable(isChannelConfigurable());
+            pref.setConfigurable(!mChannel.isImportanceLockedByOEM());
             pref.setImportance(mChannel.getImportance());
+            pref.setDisplayInStatusBar(mBackend.showSilentInStatusBar(mContext.getPackageName()));
+            pref.setDisplayOnLockscreen(Settings.Secure.getInt(mContext.getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, 0) == 1);
         }
     }
 

@@ -26,6 +26,7 @@ import static org.mockito.Mockito.verify;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,13 +42,13 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.android.controller.ActivityController;
 
 @RunWith(RobolectricTestRunner.class)
 public class PanelFragmentTest {
 
     private Context mContext;
     private PanelFragment mPanelFragment;
+    private FakeSettingsPanelActivity mActivity;
     private FakeFeatureFactory mFakeFeatureFactory;
     private PanelFeatureProvider mPanelFeatureProvider;
     private FakePanelContent mFakePanelContent;
@@ -64,16 +65,12 @@ public class PanelFragmentTest {
         mFakePanelContent = new FakePanelContent();
         doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any(), any());
 
-        ActivityController<FakeSettingsPanelActivity> activityController =
-                Robolectric.buildActivity(FakeSettingsPanelActivity.class);
-        activityController.setup();
+        mActivity = spy(Robolectric.buildActivity(FakeSettingsPanelActivity.class).setup().get());
 
         mPanelFragment =
                 spy((PanelFragment)
-                        activityController
-                                .get()
-                                .getSupportFragmentManager()
-                                .findFragmentById(R.id.main_content));
+                        mActivity.getSupportFragmentManager().findFragmentById(R.id.main_content));
+        doReturn(mActivity).when(mPanelFragment).getActivity();
 
         final Bundle bundle = new Bundle();
         bundle.putString(SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT, FAKE_EXTRA);
@@ -81,12 +78,16 @@ public class PanelFragmentTest {
     }
 
     @Test
-    public void onCreateView_adapterGetsDataset() {
+    public void onCreateView_countdownLatch_setup() {
         mPanelFragment.onCreateView(LayoutInflater.from(mContext),
                 new LinearLayout(mContext), null);
-        PanelSlicesAdapter adapter = mPanelFragment.mAdapter;
+        PanelSlicesLoaderCountdownLatch countdownLatch =
+                mPanelFragment.mPanelSlicesLoaderCountdownLatch;
+        for (Uri sliecUri: mFakePanelContent.getSlices()) {
+            countdownLatch.markSliceLoaded(sliecUri);
+        }
 
-        assertThat(adapter.getData()).containsAllIn(mFakePanelContent.getSlices());
+        assertThat(countdownLatch.isPanelReadyToLoad()).isTrue();
     }
 
     @Test
@@ -100,11 +101,23 @@ public class PanelFragmentTest {
     }
 
     @Test
+    public void onDestroy_logCloseEvent() {
+        mPanelFragment.onDestroyView();
+        verify(mFakeFeatureFactory.metricsFeatureProvider).action(
+                0,
+                SettingsEnums.PAGE_HIDE,
+                mFakePanelContent.getMetricsCategory(),
+                PanelLoggingContract.PanelClosedKeys.KEY_OTHERS,
+                0);
+    }
+
+    @Test
     public void panelSeeMoreClick_logsCloseEvent() {
         final View.OnClickListener listener = mPanelFragment.getSeeMoreListener();
-
         listener.onClick(null);
+        verify(mActivity).finish();
 
+        mPanelFragment.onDestroyView();
         verify(mFakeFeatureFactory.metricsFeatureProvider).action(
                 0,
                 SettingsEnums.PAGE_HIDE,
@@ -117,9 +130,10 @@ public class PanelFragmentTest {
     @Test
     public void panelDoneClick_logsCloseEvent() {
         final View.OnClickListener listener = mPanelFragment.getCloseListener();
-
         listener.onClick(null);
+        verify(mActivity).finish();
 
+        mPanelFragment.onDestroyView();
         verify(mFakeFeatureFactory.metricsFeatureProvider).action(
                 0,
                 SettingsEnums.PAGE_HIDE,

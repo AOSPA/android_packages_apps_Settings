@@ -653,11 +653,6 @@ public class SettingsActivity extends SettingsBaseActivity
                 isAdmin) || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                        Settings.SimSettingsActivity.class.getName()),
-                Utils.showSimCardTile(this), isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.PowerUsageSummaryActivity.class.getName()),
                 mBatteryPresent, isAdmin) || somethingChanged;
 
@@ -679,14 +674,8 @@ public class SettingsActivity extends SettingsBaseActivity
                 showDev, isAdmin)
                 || somethingChanged;
 
-        // For profiles, we want them to be included in the profile select dialog even if
-        // backup is not activated.
-        // For other users, enable/disable backup settings depending on whether backup is activated
-        // for the user.
-        boolean enableBackupTile = um.isManagedProfile()
-                || new BackupSettingsHelper(this).isBackupServiceActive();
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                UserBackupSettingsActivity.class.getName()), enableBackupTile, isAdmin)
+                UserBackupSettingsActivity.class.getName()), true, isAdmin)
                 || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,

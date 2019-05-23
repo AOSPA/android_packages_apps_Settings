@@ -158,25 +158,10 @@ public class LightsPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_notConfigurable() {
-        String lockedId = "locked";
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedChannelId = lockedId;
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getId()).thenReturn(lockedId);
-        mController.onResume(appRow, channel, null, null);
-
-        Preference pref = new RestrictedSwitchPreference(mContext);
-        mController.updateState(pref);
-
-        assertFalse(pref.isEnabled());
-    }
-
-    @Test
-    public void testUpdateState_configurable() {
+    public void testUpdateState_notBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getId()).thenReturn("something");
+        when(channel.isImportanceLockedByOEM()).thenReturn(true);
         mController.onResume(appRow, channel, null, null);
 
         Preference pref = new RestrictedSwitchPreference(mContext);

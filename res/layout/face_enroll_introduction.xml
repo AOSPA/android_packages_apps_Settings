@@ -33,7 +33,7 @@
         android:orientation="vertical">
 
         <com.google.android.setupdesign.view.RichTextView
-            android:id="@+id/description_text"
+            android:id="@+id/sud_layout_description"
             style="@style/SudDescription.Glif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,14 +45,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="48dp">
 
             <com.google.android.setupdesign.view.IllustrationVideoView
                 android:id="@+id/illustration_normal"
@@ -71,11 +67,6 @@
 
         </FrameLayout>
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="2"/>
-
         <!-- Contains the buttons and extra information text at the bottom -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,6 +77,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <Button
                     android:id="@+id/accessibility_button"
                     style="@style/SudGlifButton.Secondary"
@@ -98,7 +90,7 @@
                     android:id="@+id/toggle_diversity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     FaceEnrollAccessibilitySwitch:messageText="@string/security_settings_face_enroll_introduction_accessibility_diversity"/>
 
             </FrameLayout>
@@ -109,7 +101,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp">
+                android:paddingEnd="16dp"
+                android:paddingTop="24dp">
 
                 <ImageView
                     android:layout_width="wrap_content"

@@ -164,11 +164,12 @@
         <attr name="textOff" format="reference" />
     </declare-styleable>
 
-    <attr name="twoStateButtonPreferenceStyle" format="reference" />
+    <declare-styleable name="TintDrawable">
+        <attr name="android:tint" />
+        <attr name="android:drawable" />
+    </declare-styleable>
 
-    <attr name="batteryGoodColor" format="color" />
-    <attr name="batteryBadColor" format="color" />
-    <attr name="batteryMaybeColor" format="color" />
+    <attr name="twoStateButtonPreferenceStyle" format="reference" />
 
     <attr name="fingerprint_layout_theme" format="reference" />
     <attr name="face_layout_theme" format="reference" />

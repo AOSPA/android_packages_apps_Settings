@@ -35,7 +35,9 @@ import static org.mockito.Mockito.when;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -69,6 +71,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.development.featureflags.FeatureFlagPersistent;
+import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
@@ -93,6 +96,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowToast;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -114,6 +118,7 @@ public class WifiDetailPreferenceControllerTest {
     private static final String RANDOMIZED_MAC_ADDRESS = "RANDOMIZED_MAC_ADDRESS";
     private static final String FACTORY_MAC_ADDRESS = "FACTORY_MAC_ADDRESS";
     private static final String SECURITY = "None";
+    private static final String FQDN = "fqdn";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mockScreen;
@@ -287,51 +292,39 @@ public class WifiDetailPreferenceControllerTest {
         when(mockIconInjector.getIcon(anyInt())).thenReturn(new ColorDrawable());
 
         setupMockedPreferenceScreen();
-
-        // Disable saved network detail page feature for this test
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.WIFI_DETAILS_SAVED_SCREEN, false);
-        when(mockAccessPoint.isActive()).thenReturn(true);
-
-        mController = newWifiDetailPreferenceController();
     }
 
     private void setUpForConnectedNetwork() {
-        // Enable saved network detail page feature for this test
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.WIFI_DETAILS_SAVED_SCREEN, true);
         when(mockAccessPoint.isActive()).thenReturn(true);
         ArrayList list = new ArrayList<>();
         list.add(mockAccessPoint);
         when(mockWifiTracker.getAccessPoints()).thenReturn(list);
         WifiTrackerFactory.setTestingWifiTracker(mockWifiTracker);
-        when(mockAccessPoint.matches(any(WifiConfiguration.class))).thenReturn(true);
+        when(mockAccessPoint.matches(any(AccessPoint.class))).thenReturn(true);
         when(mockAccessPoint.isReachable()).thenReturn(true);
 
         mController = newWifiDetailPreferenceController();
     }
 
     private void setUpForDisconnectedNetwork() {
-        // Enable saved network detail page feature for this test
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.WIFI_DETAILS_SAVED_SCREEN, true);
         when(mockAccessPoint.isActive()).thenReturn(false);
         ArrayList list = new ArrayList<>();
         list.add(mockAccessPoint);
         when(mockWifiTracker.getAccessPoints()).thenReturn(list);
         WifiTrackerFactory.setTestingWifiTracker(mockWifiTracker);
-        when(mockAccessPoint.matches(any(WifiConfiguration.class))).thenReturn(true);
+        when(mockAccessPoint.matches(any(AccessPoint.class))).thenReturn(true);
         when(mockAccessPoint.isReachable()).thenReturn(true);
 
         mController = newWifiDetailPreferenceController();
     }
 
     private void setUpForNotInRangeNetwork() {
-        // Enable saved network detail page feature for this test
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.WIFI_DETAILS_SAVED_SCREEN, true);
         when(mockAccessPoint.isActive()).thenReturn(false);
         ArrayList list = new ArrayList<>();
         list.add(mockAccessPoint);
         when(mockWifiTracker.getAccessPoints()).thenReturn(list);
         WifiTrackerFactory.setTestingWifiTracker(mockWifiTracker);
-        when(mockAccessPoint.matches(any(WifiConfiguration.class))).thenReturn(false);
+        when(mockAccessPoint.matches(any(AccessPoint.class))).thenReturn(false);
         when(mockAccessPoint.isReachable()).thenReturn(false);
 
         mController = newWifiDetailPreferenceController();
@@ -395,6 +388,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void isAvailable_shouldAlwaysReturnTrue() {
+        setUpForConnectedNetwork();
         mController.displayPreference(mockScreen);
 
         assertThat(mController.isAvailable()).isTrue();
@@ -402,16 +396,10 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void securityPreference_stringShouldBeSet() {
+        setUpForConnectedNetwork();
         displayAndResume();
 
         verify(mockSecurityPref).setSummary(SECURITY);
-    }
-
-    @Test
-    public void latestWifiInfo_shouldBeFetchedInDisplayPreference() {
-        displayAndResume();
-
-        verify(mockWifiManager, times(1)).getConnectionInfo();
     }
 
     @Test
@@ -439,13 +427,6 @@ public class WifiDetailPreferenceControllerTest {
         displayAndResume();
 
         verify(mockWifiManager, never()).getConnectionInfo();
-    }
-
-    @Test
-    public void latestNetworkInfo_shouldBeFetchedInDisplayPreference() {
-        displayAndResume();
-
-        verify(mockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
     }
 
     @Test
@@ -477,6 +458,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void networkCallback_shouldBeRegisteredOnResume() {
+        setUpForConnectedNetwork();
         displayAndResume();
 
         verify(mockConnectivityManager, times(1)).registerNetworkCallback(
@@ -485,20 +467,12 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void networkCallback_shouldBeUnregisteredOnPause() {
+        setUpForConnectedNetwork();
         displayAndResume();
         mController.onPause();
 
         verify(mockConnectivityManager, times(1))
                 .unregisterNetworkCallback(mCallbackCaptor.getValue());
-    }
-
-    @Test
-    public void entityHeader_shouldHaveIconSet() {
-        Drawable expectedIcon = mockIconInjector.getIcon(LEVEL);
-
-        displayAndResume();
-
-        verify(mockHeaderController).setIcon(expectedIcon);
     }
 
     @Test
@@ -532,6 +506,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void entityHeader_shouldHaveLabelSetToTitle() {
+        setUpForConnectedNetwork();
         String label = "title";
         when(mockAccessPoint.getTitle()).thenReturn(label);
 
@@ -542,8 +517,10 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void entityHeader_shouldHaveSummarySet() {
+        setUpForConnectedNetwork();
         String summary = "summary";
-        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+        when(mockAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                .thenReturn(summary);
 
         displayAndResume();
 
@@ -551,10 +528,12 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void signalStrengthPref_shouldHaveIconSet() {
+    public void entityHeader_shouldConvertSavedAsDisconnected() {
+        setUpForDisconnectedNetwork();
+
         displayAndResume();
 
-        verify(mockSignalStrengthPref).setIcon(any(Drawable.class));
+        verify(mockAccessPoint, times(1)).getSettingsSummary(true /*convertSavedAsDisconnected*/);
     }
 
     @Test
@@ -582,16 +561,6 @@ public class WifiDetailPreferenceControllerTest {
         displayAndResume();
 
         verify(mockSignalStrengthPref, never()).setIcon(any(Drawable.class));
-    }
-
-    @Test
-    public void signalStrengthPref_shouldHaveDetailTextSet() {
-        String expectedStrength =
-                mContext.getResources().getStringArray(R.array.wifi_signal)[LEVEL];
-
-        displayAndResume();
-
-        verify(mockSignalStrengthPref).setSummary(expectedStrength);
     }
 
     @Test
@@ -626,16 +595,8 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void linkSpeedPref_shouldHaveDetailTextSet() {
-        String expectedLinkSpeed = mContext.getString(R.string.tx_link_speed, TX_LINK_SPEED);
-
-        displayAndResume();
-
-        verify(mockTxLinkSpeedPref).setSummary(expectedLinkSpeed);
-    }
-
-    @Test
     public void linkSpeedPref_shouldNotShowIfNotSet() {
+        setUpForConnectedNetwork();
         when(mockWifiInfo.getTxLinkSpeedMbps()).thenReturn(WifiInfo.LINK_SPEED_UNKNOWN);
 
         displayAndResume();
@@ -675,16 +636,8 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void rxLinkSpeedPref_shouldHaveDetailTextSet() {
-        String expectedLinkSpeed = mContext.getString(R.string.rx_link_speed, RX_LINK_SPEED);
-
-        displayAndResume();
-
-        verify(mockRxLinkSpeedPref).setSummary(expectedLinkSpeed);
-    }
-
-    @Test
     public void rxLinkSpeedPref_shouldNotShowIfNotSet() {
+        setUpForConnectedNetwork();
         when(mockWifiInfo.getRxLinkSpeedMbps()).thenReturn(WifiInfo.LINK_SPEED_UNKNOWN);
 
         displayAndResume();
@@ -724,54 +677,38 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void ssidPref_shouldHaveDetailTextSet() {
+    public void ssidPref_shouldHaveDetailTextSetForPasspointR1() {
+        setUpForConnectedNetwork();
         when(mockAccessPoint.isPasspoint()).thenReturn(true);
         when(mockAccessPoint.isOsuProvider()).thenReturn(false);
 
         displayAndResume();
 
         verify(mockSsidPref, times(1)).setSummary(SSID);
-
-        when(mockAccessPoint.isPasspoint()).thenReturn(false);
-        when(mockAccessPoint.isOsuProvider()).thenReturn(true);
-
-        displayAndResume();
-
-        verify(mockSsidPref, times(2)).setSummary(SSID);
+        verify(mockSsidPref, times(1)).setVisible(true);
     }
 
     @Test
-    public void ssidPref_shouldShowIfPasspointOrOsu() {
-        when(mockAccessPoint.isPasspoint()).thenReturn(true);
-        when(mockAccessPoint.isOsuProvider()).thenReturn(false);
-
-        displayAndResume();
-
-        verify(mockSsidPref, times(1)).setVisible(true);
-
+    public void ssidPref_shouldHaveDetailTextSetForPasspointR2() {
+        setUpForConnectedNetwork();
         when(mockAccessPoint.isPasspoint()).thenReturn(false);
         when(mockAccessPoint.isOsuProvider()).thenReturn(true);
 
         displayAndResume();
 
-        verify(mockSsidPref, times(2)).setVisible(true);
+        verify(mockSsidPref, times(1)).setSummary(SSID);
+        verify(mockSsidPref, times(1)).setVisible(true);
     }
 
     @Test
     public void ssidPref_shouldNotShowIfNotPasspoint() {
+        setUpForConnectedNetwork();
         when(mockAccessPoint.isPasspoint()).thenReturn(false);
         when(mockAccessPoint.isOsuProvider()).thenReturn(false);
 
         displayAndResume();
 
         verify(mockSsidPref).setVisible(false);
-    }
-
-    @Test
-    public void macAddressPref_shouldHaveDetailTextSet() {
-        displayAndResume();
-
-        verify(mockMacAddressPref).setSummary(MAC_ADDRESS);
     }
 
     @Test
@@ -811,15 +748,6 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void ipAddressPref_shouldHaveDetailTextSet() {
-        mLinkProperties.addLinkAddress(Constants.IPV4_ADDR);
-
-        displayAndResume();
-
-        verify(mockIpAddressPref).setSummary(Constants.IPV4_ADDR.getAddress().getHostAddress());
-    }
-
-    @Test
     public void ipAddressPref_shouldHaveDetailTextSetForConnectedNetwork() {
         setUpForConnectedNetwork();
         mLinkProperties.addLinkAddress(Constants.IPV4_ADDR);
@@ -837,18 +765,6 @@ public class WifiDetailPreferenceControllerTest {
         displayAndResume();
 
         verify(mockIpAddressPref).setVisible(false);
-    }
-
-    @Test
-    public void gatewayAndSubnet_shouldHaveDetailTextSet() {
-        mLinkProperties.addLinkAddress(Constants.IPV4_ADDR);
-        mLinkProperties.addRoute(Constants.IPV4_DEFAULT);
-        mLinkProperties.addRoute(Constants.IPV4_SUBNET);
-
-        displayAndResume();
-
-        verify(mockSubnetPref).setSummary("255.255.255.128");
-        verify(mockGatewayPref).setSummary("192.0.2.127");
     }
 
     @Test
@@ -872,20 +788,6 @@ public class WifiDetailPreferenceControllerTest {
         displayAndResume();
 
         verify(mockSubnetPref).setVisible(false);
-    }
-
-    @Test
-    public void dnsServersPref_shouldHaveDetailTextSet() throws UnknownHostException {
-        mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[] {8, 8, 4, 4}));
-        mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[] {8, 8, 8, 8}));
-        mLinkProperties.addDnsServer(Constants.IPV6_DNS);
-
-        displayAndResume();
-
-        verify(mockDnsPref).setSummary(
-                "8.8.4.4\n" +
-                        "8.8.8.8\n" +
-                        Constants.IPV6_DNS.getHostAddress());
     }
 
     @Test
@@ -916,20 +818,7 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void noCurrentNetwork_shouldFinishActivity() {
-        // If WifiManager#getCurrentNetwork() returns null, then the network is neither connected
-        // nor connecting and WifiStateMachine has not reached L2ConnectedState.
-        when(mockWifiManager.getCurrentNetwork()).thenReturn(null);
-
-        displayAndResume();
-
-        verify(mockActivity).finish();
-    }
-
-    @Test
     public void noCurrentNetwork_shouldNotFinishActivityForConnectedNetwork() {
-        // For new feature for display detail page for saved network for disconnected network,
-        // mNetwork may be null, do finish activity
         setUpForConnectedNetwork();
         when(mockWifiManager.getCurrentNetwork()).thenReturn(null);
 
@@ -940,6 +829,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void noLinkProperties_allIpDetailsHidden() {
+        setUpForConnectedNetwork();
         when(mockConnectivityManager.getLinkProperties(mockNetwork)).thenReturn(null);
         reset(mockIpv6Category, mockIpAddressPref, mockSubnetPref, mockGatewayPref, mockDnsPref);
 
@@ -1007,6 +897,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void onLinkPropertiesChanged_updatesFields() {
+        setUpForConnectedNetwork();
         displayAndResume();
 
         InOrder inOrder = inOrder(mockIpAddressPref, mockGatewayPref, mockSubnetPref,
@@ -1063,12 +954,14 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void onCapabilitiesChanged_callsRefreshIfNecessary() {
+        setUpForConnectedNetwork();
         NetworkCapabilities nc = makeNetworkCapabilities();
         when(mockConnectivityManager.getNetworkCapabilities(mockNetwork))
                 .thenReturn(new NetworkCapabilities(nc));
 
         String summary = "Connected, no Internet";
-        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+        when(mockAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                .thenReturn(summary);
 
         InOrder inOrder = inOrder(mockHeaderController);
         displayAndResume();
@@ -1077,7 +970,8 @@ public class WifiDetailPreferenceControllerTest {
         // Check that an irrelevant capability update does not update the access point summary, as
         // doing so could cause unnecessary jank...
         summary = "Connected";
-        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+        when(mockAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                .thenReturn(summary);
         updateNetworkCapabilities(nc);
         inOrder.verify(mockHeaderController, never()).setSummary(any(CharSequence.class));
 
@@ -1087,7 +981,8 @@ public class WifiDetailPreferenceControllerTest {
         inOrder.verify(mockHeaderController).setSummary(summary);
 
         summary = "Connected, no Internet";
-        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+        when(mockAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                .thenReturn(summary);
 
         // Another irrelevant update won't cause the UI to refresh...
         updateNetworkCapabilities(nc);
@@ -1100,7 +995,8 @@ public class WifiDetailPreferenceControllerTest {
 
         // UI will be refreshed when device connects to a partial connectivity network.
         summary = "Limited connection";
-        when(mockAccessPoint.getSettingsSummary()).thenReturn(summary);
+        when(mockAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                .thenReturn(summary);
         nc.addCapability(NetworkCapabilities.NET_CAPABILITY_PARTIAL_CONNECTIVITY);
         updateNetworkCapabilities(nc);
         inOrder.verify(mockHeaderController).setSummary(summary);
@@ -1113,10 +1009,11 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void canForgetNetwork_noNetwork() {
+    public void canForgetNetwork_shouldInvisibleIfWithoutConfiguration() {
+        setUpForConnectedNetwork();
         when(mockAccessPoint.getConfig()).thenReturn(null);
-
         mController = newWifiDetailPreferenceController();
+
         displayAndResume();
 
         verify(mockButtonsPref).setButton1Visible(false);
@@ -1124,6 +1021,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void canForgetNetwork_ephemeral() {
+        setUpForConnectedNetwork();
         when(mockWifiInfo.isEphemeral()).thenReturn(true);
         when(mockAccessPoint.getConfig()).thenReturn(null);
 
@@ -1134,6 +1032,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void canForgetNetwork_saved() {
+        setUpForConnectedNetwork();
         displayAndResume();
 
         verify(mockButtonsPref).setButton1Visible(true);
@@ -1141,6 +1040,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void canForgetNetwork_lockedDown() {
+        setUpForConnectedNetwork();
         lockDownNetwork();
 
         displayAndResume();
@@ -1149,7 +1049,8 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void canShareNetwork_noNetwork() {
+    public void canShareNetwork_shouldInvisibleIfWithoutConfiguration() {
+        setUpForConnectedNetwork();
         when(mockAccessPoint.getConfig()).thenReturn(null);
 
         displayAndResume();
@@ -1159,11 +1060,13 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void canModifyNetwork_saved() {
+        setUpForConnectedNetwork();
         assertThat(mController.canModifyNetwork()).isTrue();
     }
 
     @Test
     public void canModifyNetwork_lockedDown() {
+        setUpForConnectedNetwork();
         lockDownNetwork();
 
         assertThat(mController.canModifyNetwork()).isFalse();
@@ -1194,6 +1097,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void forgetNetwork_ephemeral() {
+        setUpForConnectedNetwork();
         String ssid = "ssid";
         when(mockWifiInfo.isEphemeral()).thenReturn(true);
         when(mockWifiInfo.getSSID()).thenReturn(ssid);
@@ -1208,6 +1112,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void forgetNetwork_saved() {
+        setUpForConnectedNetwork();
         mockWifiConfig.networkId = 5;
 
         mController.displayPreference(mockScreen);
@@ -1220,31 +1125,35 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void forgetNetwork_v1_Passpoint() {
+        setUpForConnectedNetwork();
         FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, false);
 
         mockWifiConfig.networkId = 5;
-        when(mockWifiConfig.isPasspoint()).thenReturn(true);
+        when(mockAccessPoint.isPasspoint()).thenReturn(true);
+        when(mockAccessPoint.getPasspointFqdn()).thenReturn(FQDN);
 
         mController.displayPreference(mockScreen);
         mForgetClickListener.getValue().onClick(null);
 
-        verify(mockWifiManager).removePasspointConfiguration(mockWifiConfig.FQDN);
+        verify(mockWifiManager).removePasspointConfiguration(FQDN);
         verify(mockMetricsFeatureProvider)
                 .action(mockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
     }
 
     @Test
     public void forgetNetwork_PasspointV2_shouldShowDialog() {
+        setUpForConnectedNetwork();
         final WifiDetailPreferenceController spyController = spy(mController);
 
         mockWifiConfig.networkId = 5;
-        when(mockWifiConfig.isPasspoint()).thenReturn(true);
+        when(mockAccessPoint.isPasspoint()).thenReturn(true);
+        when(mockAccessPoint.getPasspointFqdn()).thenReturn(FQDN);
         spyController.displayPreference(mockScreen);
         FeatureFlagPersistent.setEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2, true);
 
         mForgetClickListener.getValue().onClick(null);
 
-        verify(mockWifiManager, times(0)).removePasspointConfiguration(mockWifiConfig.FQDN);
+        verify(mockWifiManager, times(0)).removePasspointConfiguration(FQDN);
         verify(mockMetricsFeatureProvider, times(0))
                 .action(mockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
         verify(spyController).showConfirmForgetDialog();
@@ -1252,6 +1161,8 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void networkStateChangedIntent_shouldRefetchInfo() {
+        setUpForConnectedNetwork();
+
         displayAndResume();
 
         verify(mockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
@@ -1266,6 +1177,7 @@ public class WifiDetailPreferenceControllerTest {
     @Test
     public void networkStateChangedIntent_shouldRefetchInfoForConnectedNetwork() {
         setUpForConnectedNetwork();
+
         displayAndResume();
 
         verify(mockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
@@ -1279,6 +1191,8 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void rssiChangedIntent_shouldRefetchInfo() {
+        setUpForConnectedNetwork();
+
         displayAndResume();
 
         verify(mockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
@@ -1305,16 +1219,6 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void networkDisconnectedState_shouldFinishActivity() {
-        displayAndResume();
-
-        when(mockConnectivityManager.getNetworkInfo(any(Network.class))).thenReturn(null);
-        mContext.sendBroadcast(new Intent(WifiManager.NETWORK_STATE_CHANGED_ACTION));
-
-        verify(mockActivity).finish();
-    }
-
-    @Test
     public void networkDisconnectedState_shouldNotFinishActivityForConnectedNetwork() {
         setUpForConnectedNetwork();
 
@@ -1324,15 +1228,6 @@ public class WifiDetailPreferenceControllerTest {
         mContext.sendBroadcast(new Intent(WifiManager.NETWORK_STATE_CHANGED_ACTION));
 
         verify(mockActivity, never()).finish();
-    }
-
-    @Test
-    public void networkOnLost_shouldFinishActivity() {
-        displayAndResume();
-
-        mCallbackCaptor.getValue().onLost(mockNetwork);
-
-        verify(mockActivity).finish();
     }
 
     @Test
@@ -1348,6 +1243,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void ipv6AddressPref_shouldHaveHostAddressTextSet() {
+        setUpForConnectedNetwork();
         mLinkProperties.addLinkAddress(Constants.IPV6_LINKLOCAL);
         mLinkProperties.addLinkAddress(Constants.IPV6_GLOBAL1);
         mLinkProperties.addLinkAddress(Constants.IPV6_GLOBAL2);
@@ -1364,6 +1260,7 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void ipv6AddressPref_shouldNotBeSelectable() {
+        setUpForConnectedNetwork();
         mLinkProperties.addLinkAddress(Constants.IPV6_GLOBAL2);
 
         displayAndResume();
@@ -1373,6 +1270,8 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void captivePortal_shouldShowSignInButton() {
+        setUpForConnectedNetwork();
+
         InOrder inOrder = inOrder(mockButtonsPref);
 
         displayAndResume();
@@ -1394,6 +1293,8 @@ public class WifiDetailPreferenceControllerTest {
 
     @Test
     public void testSignInButton_shouldStartCaptivePortalApp() {
+        setUpForConnectedNetwork();
+
         displayAndResume();
 
         ArgumentCaptor<OnClickListener> captor = ArgumentCaptor.forClass(OnClickListener.class);
@@ -1426,23 +1327,458 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
-    public void testRefreshRssiViews_shouldNotUpdateIfLevelIsSame() {
+    public void testConnectButton_shouldInvisibleForConnectNetwork() {
+        setUpForConnectedNetwork();
+
+        displayAndResume();
+
+        verify(mockButtonsPref, times(1)).setButton3Visible(false);
+    }
+
+    @Test
+    public void testConnectButton_shouldVisibleForDisconnectNetwork() {
+        setUpForDisconnectedNetwork();
+
+        displayAndResume();
+
+        verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        verify(mockButtonsPref, times(1)).setButton3Text(R.string.wifi_connect);
+    }
+
+    private void setUpForToast() {
+        Resources res = mContext.getResources();
+        when(mockActivity.getResources()).thenReturn(res);
+    }
+
+    @Test
+    public void testConnectButton_clickConnect_displayAsSuccess() {
+        setUpForDisconnectedNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(true);
+        InOrder inOrder = inOrder(mockButtonsPref);
+        String label = "title";
+        when(mockAccessPoint.getTitle()).thenReturn(label);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check display button as connecting
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as connected
+        when(mockAccessPoint.isActive()).thenReturn(true);
+        mController.updateAccessPoint();
+
+        // check connect button invisible, be init as default state and toast success message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(false);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_connected_to_message, label));
+    }
+
+    @Test
+    public void testConnectButton_clickConnectButFailed_displayFailMessage() {
+        setUpForDisconnectedNetwork();
+        ArgumentCaptor<WifiManager.ActionListener> connectListenerCaptor =
+                ArgumentCaptor.forClass(WifiManager.ActionListener.class);
+        when(mockWifiManager.isWifiEnabled()).thenReturn(true);
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check display button as connecting
+        verify(mockWifiManager, times(1)).connect(anyInt(), connectListenerCaptor.capture());
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as failed
+        connectListenerCaptor.getValue().onFailure(-1);
+
+        // check connect button visible, be init as default and toast failed message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_failed_connect_message));
+    }
+
+    private void verifyConnectBtnSetUpAsVisible(InOrder inOrder) {
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Text(R.string.wifi_connect);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Icon(R.drawable.ic_settings_wireless);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+    }
+
+    private void verifyConnectBtnSetUpAsConnecting(InOrder inOrder) {
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Text(R.string.wifi_connecting);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Enabled(false);
+    }
+
+    private void verifyConnectBtnBeInitAsDefault(InOrder inOrder) {
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Text(R.string.wifi_connect);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Icon(R.drawable.ic_settings_wireless);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Enabled(true);
+    }
+
+    @Test
+    public void testConnectButton_clickConnectButTimeout_displayFailMessage() {
+        setUpForDisconnectedNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(true);
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check display button as connecting
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as failed
+        mController.mTimer.onFinish();
+
+        // check connect button visible, be init as default and toast failed message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_failed_connect_message));
+    }
+
+    @Test
+    public void testConnectButton_clickConnectButTimeout_displayNotInRangeMessage() {
+        setUpForNotInRangeNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(true);
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check display button as connecting
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as failed
+        mController.mTimer.onFinish();
+
+        // check connect button visible, be init as default and toast failed message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_not_in_range_message));
+    }
+
+    @Test
+    public void testConnectButton_clickConnectWhenWiFiDisabled_displaySuccessMessage() {
+        setUpForDisconnectedNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(false); // wifi disabled
+        InOrder inOrder = inOrder(mockButtonsPref);
+        String label = "title";
+        when(mockAccessPoint.getTitle()).thenReturn(label);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check turn on Wi-Fi, display button as connecting and toast turn on Wi-Fi message
+        verify(mockWifiManager, times(1)).setWifiEnabled(true);
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_turned_on_message));
+
+        // notify Wi-Fi enabled
+        mController.mWifiListener.onWifiStateChanged(WifiManager.WIFI_STATE_ENABLED);
+
+        // check had connect network and icon display as expected
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as connected
+        when(mockAccessPoint.isActive()).thenReturn(true);
+        mController.updateAccessPoint();
+
+        // check connect button invisible, be init as default state and toast success message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(false);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_connected_to_message, label));
+    }
+
+    @Test
+    public void testConnectButton_clickConnectWhenWiFiDisabled_failedToConnectWiFi() {
+        setUpForDisconnectedNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(false); // wifi disabled
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check turn on Wi-Fi, display button as connecting and toast turn on Wi-Fi message
+        verify(mockWifiManager, times(1)).setWifiEnabled(true);
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_turned_on_message));
+
+        // notify Wi-Fi enabled
+        mController.mWifiListener.onWifiStateChanged(WifiManager.WIFI_STATE_ENABLED);
+
+        // check had connect network and icon display as expected
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as failed
+        mController.mTimer.onFinish();
+
+        // check connect button visible, be init as default and toast failed message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_failed_connect_message));
+    }
+
+    @Test
+    public void
+            testConnectButton_clickConnectWhenWiFiDisabled_failedToConnectWifiBecauseNotInRange() {
+        setUpForNotInRangeNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(false); // wifi disabled
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check turn on Wi-Fi, display button as connecting and toast turn on Wi-Fi message
+        verify(mockWifiManager, times(1)).setWifiEnabled(true);
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_turned_on_message));
+
+        // notify Wi-Fi enabled
+        mController.mWifiListener.onWifiStateChanged(WifiManager.WIFI_STATE_ENABLED);
+
+        // check had connect network and icon display as expected
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // update as failed
+        mController.mTimer.onFinish();
+
+        // check connect button visible, be init as default and toast failed message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_not_in_range_message));
+    }
+
+    @Test
+    public void testConnectButton_clickConnectWhenWiFiDisabled_failedToEnableWifi() {
+        setUpForDisconnectedNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(false); // wifi disabled
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check turn on Wi-Fi, display button as connecting and toast turn on Wi-Fi message
+        verify(mockWifiManager, times(1)).setWifiEnabled(true);
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_turned_on_message));
+
+        // notify turn on Wi-Fi failed
+        mController.mTimer.onFinish();
+
+        // check connect button visible, be init as default and toast failed message
+        verifyConnectBtnBeInitAsDefault(inOrder);
+        inOrder.verify(mockButtonsPref, times(1)).setButton3Visible(true);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_failed_connect_message));
+    }
+
+    @Test
+    public void testConnectButton_clickConnectAndBackKey_ignoreTimeoutEvent() {
+        setUpForDisconnectedNetwork();
+        when(mockWifiManager.isWifiEnabled()).thenReturn(true);
+        InOrder inOrder = inOrder(mockButtonsPref);
+        setUpForToast();
+
+        displayAndResume();
+
+        // check connect button exist
+        verifyConnectBtnSetUpAsVisible(inOrder);
+
+        // click connect button
+        mController.connectNetwork();
+
+        // check display button as connecting
+        verify(mockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
+        verifyConnectBtnSetUpAsConnecting(inOrder);
+
+        // leave detail page
+        when(mockFragment.getActivity()).thenReturn(null);
+
+        // timeout happened
+        mController.mTimer.onFinish();
+
+        // check connect button visible, be init as default and toast failed message
+        inOrder.verify(mockButtonsPref, never()).setButton3Text(R.string.wifi_connect);
+        inOrder.verify(mockButtonsPref, never()).setButton3Icon(R.drawable.ic_settings_wireless);
+        inOrder.verify(mockButtonsPref, never()).setButton3Enabled(true);
+        inOrder.verify(mockButtonsPref, never()).setButton3Visible(true);
+        assertThat(ShadowToast.shownToastCount()).isEqualTo(0);
+    }
+
+    @Test
+    public void updateAccessPoint_returnFalseForNothingChanged() {
+        setUpForDisconnectedNetwork();
+
+        displayAndResume();
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isFalse();
+    }
+
+    @Test
+    public void updateAccessPoint_returnTrueForSignalLevelChanged() {
+        setUpForDisconnectedNetwork();
+
+        displayAndResume();
+
+        // Level changed
+        when(mockAccessPoint.getLevel()).thenReturn(LEVEL + 1);
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isTrue();
+    }
+
+    @Test
+    public void updateAccessPoint_returnTrueForChangeAsNotInRange() {
+        setUpForDisconnectedNetwork();
+
+        displayAndResume();
+
+        // change as not in range
+        when(mockAccessPoint.matches(any(AccessPoint.class))).thenReturn(false);
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isTrue();
+    }
+
+    @Test
+    public void updateAccessPoint_returnTrueForChangeAsInRange() {
+        setUpForNotInRangeNetwork();
+
+        displayAndResume();
+
+        // change as in range
+        when(mockAccessPoint.matches(any(AccessPoint.class))).thenReturn(true);
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isTrue();
+    }
+
+    @Test
+    public void updateAccessPoint_returnTrueForChangeAsConnected() {
+        setUpForDisconnectedNetwork();
+
+        displayAndResume();
+
+        // change as connected
+        when(mockAccessPoint.isActive()).thenReturn(true);
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isTrue();
+    }
+
+    @Test
+    public void updateAccessPoint_returnTrueForChangeAsDisconnected() {
+        setUpForConnectedNetwork();
+
+        displayAndResume();
+
+        // change as disconnected
+        when(mockAccessPoint.isActive()).thenReturn(false);
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isTrue();
+    }
+
+    @Test
+    public void updateAccessPoint_returnTrueForAccessPointUpdated() {
+        setUpForConnectedNetwork();
+
+        displayAndResume();
+
+        // change as disconnected
+        when(mockAccessPoint.update(mockWifiConfig, mockWifiInfo, mockNetworkInfo))
+                .thenReturn(true);
+        boolean changed = mController.updateAccessPoint();
+
+        assertThat(changed).isTrue();
+    }
+
+    @Test
+    public void testRefreshRssiViews_shouldNotUpdateIfLevelIsSameForConnectedNetwork() {
+        setUpForConnectedNetwork();
         displayAndResume();
 
         mContext.sendBroadcast(new Intent(WifiManager.RSSI_CHANGED_ACTION));
 
-        verify(mockAccessPoint, times(2)).getLevel();
+        verify(mockAccessPoint, times(3)).getLevel();
         verify(mockIconInjector, times(1)).getIcon(anyInt());
     }
 
     @Test
-    public void testRefreshRssiViews_shouldUpdateOnLevelChange() {
+    public void testRefreshRssiViews_shouldUpdateOnLevelChangeForConnectedNetwork() {
+        setUpForConnectedNetwork();
         displayAndResume();
 
         when(mockAccessPoint.getLevel()).thenReturn(0);
         mContext.sendBroadcast(new Intent(WifiManager.RSSI_CHANGED_ACTION));
 
-        verify(mockAccessPoint, times(2)).getLevel();
+        verify(mockAccessPoint, times(4)).getLevel();
         verify(mockIconInjector, times(2)).getIcon(anyInt());
     }
 
@@ -1456,6 +1792,57 @@ public class WifiDetailPreferenceControllerTest {
         mContext.sendBroadcast(new Intent(WifiManager.RSSI_CHANGED_ACTION));
 
         verify(mockSignalStrengthPref, times(2)).setVisible(false);
+    }
+
+    @Test
+    public void testRedrawIconForHeader_shouldEnlarge() {
+        setUpForConnectedNetwork();
+        ArgumentCaptor<BitmapDrawable> drawableCaptor =
+                ArgumentCaptor.forClass(BitmapDrawable.class);
+        Drawable original = mContext.getDrawable(Utils.getWifiIconResource(LEVEL)).mutate();
+        when(mockIconInjector.getIcon(anyInt())).thenReturn(original);
+
+        displayAndResume();
+
+        verify(mockHeaderController, times(1)).setIcon(drawableCaptor.capture());
+
+        int expectedSize = mContext.getResources().getDimensionPixelSize(
+                R.dimen.wifi_detail_page_header_image_size);
+        BitmapDrawable icon = drawableCaptor.getValue();
+        assertThat(icon.getMinimumWidth()).isEqualTo(expectedSize);
+        assertThat(icon.getMinimumHeight()).isEqualTo(expectedSize);
+    }
+
+    @Test
+    public void testRedrawIconForHeader_shouldEnlargeForDisconnectedNetwork() {
+        setUpForDisconnectedNetwork();
+        ArgumentCaptor<BitmapDrawable> drawableCaptor =
+                ArgumentCaptor.forClass(BitmapDrawable.class);
+        Drawable original = mContext.getDrawable(Utils.getWifiIconResource(LEVEL)).mutate();
+        when(mockIconInjector.getIcon(anyInt())).thenReturn(original);
+
+        displayAndResume();
+
+        verify(mockHeaderController, times(1)).setIcon(drawableCaptor.capture());
+
+        int expectedSize = mContext.getResources().getDimensionPixelSize(
+                R.dimen.wifi_detail_page_header_image_size);
+        BitmapDrawable icon = drawableCaptor.getValue();
+        assertThat(icon.getMinimumWidth()).isEqualTo(expectedSize);
+        assertThat(icon.getMinimumHeight()).isEqualTo(expectedSize);
+    }
+
+    @Test
+    public void testRedrawIconForHeader_shouldNotEnlargeIfNotVectorDrawable() {
+        setUpForConnectedNetwork();
+        ArgumentCaptor<ColorDrawable> drawableCaptor =
+                ArgumentCaptor.forClass(ColorDrawable.class);
+
+        displayAndResume();
+
+        verify(mockHeaderController, times(1)).setIcon(drawableCaptor.capture());
+        ColorDrawable icon = drawableCaptor.getValue();
+        assertThat(icon).isNotNull();
     }
 
     private ActionButtonsPreference createMock() {

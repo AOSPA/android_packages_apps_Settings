@@ -34,7 +34,6 @@ import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountFragment;
 import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
-import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
@@ -55,11 +54,13 @@ import com.android.settings.backup.PrivacySettings;
 import com.android.settings.backup.ToggleBackupSettingFragment;
 import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.biometrics.face.FaceSettings;
+import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
+import com.android.settings.datausage.DataSaverSummary;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
@@ -164,6 +165,7 @@ public class SettingsGateway {
             WifiTetherSettings.class.getName(),
             BackgroundCheckSummary.class.getName(),
             VpnSettings.class.getName(),
+            DataSaverSummary.class.getName(),
             DateTimeSettings.class.getName(),
             LocaleListEditor.class.getName(),
             AvailableVirtualKeyboardFragment.class.getName(),
@@ -202,6 +204,7 @@ public class SettingsGateway {
             AccountSyncSettings.class.getName(),
             AssistGestureSettings.class.getName(),
             FaceSettings.class.getName(),
+            FingerprintSettings.FingerprintSettingsFragment.class.getName(),
             SwipeToNotificationSettings.class.getName(),
             DoubleTapPowerSettings.class.getName(),
             DoubleTapScreenSettings.class.getName(),
@@ -247,7 +250,6 @@ public class SettingsGateway {
             DrawOverlayDetails.class.getName(),
             WriteSettingsDetails.class.getName(),
             ExternalSourcesDetails.class.getName(),
-            DefaultAppSettings.class.getName(),
             WallpaperTypeSettings.class.getName(),
             VrListenerSettings.class.getName(),
             PictureInPictureSettings.class.getName(),
@@ -300,7 +302,6 @@ public class SettingsGateway {
             // Home page > Network & Internet
             Settings.WifiSettingsActivity.class.getName(),
             Settings.DataUsageSummaryActivity.class.getName(),
-            Settings.SimSettingsActivity.class.getName(),
             // Home page > Connected devices
             Settings.BluetoothSettingsActivity.class.getName(),
             Settings.WifiDisplaySettingsActivity.class.getName(),
@@ -308,7 +309,6 @@ public class SettingsGateway {
             // Home page > Apps & Notifications
             Settings.UserSettingsActivity.class.getName(),
             Settings.ConfigureNotificationSettingsActivity.class.getName(),
-            Settings.AdvancedAppsActivity.class.getName(),
             Settings.ManageApplicationsActivity.class.getName(),
             Settings.PaymentSettingsActivity.class.getName(),
             // Home page > Security & screen lock

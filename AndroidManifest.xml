@@ -102,13 +102,15 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
 
+    <protected-broadcast android:name="com.android.settings.DELETE_SIM_PROFILE_RESULT"/>
+
     <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
             android:theme="@style/Theme.Settings"
             android:hardwareAccelerated="true"
             android:requiredForAllUsers="true"
             android:supportsRtl="true"
-            android:allowBackup="false"
+            android:backupAgent="com.android.settings.backup.SettingsBackupHelper"
             android:usesCleartextTraffic="true"
             android:defaultToDeviceProtectedStorage="true"
             android:directBootAware="true"
@@ -136,6 +138,7 @@
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NETWORK_OPERATOR_SETTINGS" />
                 <action android:name="android.settings.DATA_ROAMING_SETTINGS" />
+                <action android:name="android.settings.MMS_MESSAGE_SETTING" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -183,6 +186,7 @@
             <intent-filter android:priority="1">
                 <action android:name="android.settings.WIRELESS_SETTINGS" />
                 <action android:name="android.settings.AIRPLANE_MODE_SETTINGS" />
+                <action android:name="com.android.settings.sim.SIM_SUB_INFO_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
@@ -435,6 +439,17 @@
                 android:value="com.android.settings.biometrics.face.FaceSettings" />
         </activity>
 
+        <activity android:name="Settings$FingerprintSettingsActivity"
+                  android:label="@string/security_settings_fingerprint_preference_title"
+                  android:icon="@drawable/ic_fingerprint_header">
+            <intent-filter>
+                <action android:name="android.settings.FINGERPRINT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.biometrics.fingerprint.FingerprintSettings$FingerprintSettingsFragment" />
+        </activity>
+
         <activity android:name=".bluetooth.DevicePickerActivity"
                 android:label="@string/device_picker"
                 android:configChanges="orientation|keyboardHidden|screenSize"
@@ -531,6 +546,18 @@
                 android:value="com.android.settings.vpn2.VpnSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$DataSaverSummaryActivity"
+            android:label="@string/data_saver_title"
+            android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.DATA_SAVER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.datausage.DataSaverSummary" />
         </activity>
 
         <activity
@@ -1294,6 +1321,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.privacy.PrivacyDashboardFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity>
 
         <activity android:name="SetFullBackupPassword"
@@ -1478,8 +1507,7 @@
 
         <activity
             android:name="Settings$TextToSpeechSettingsActivity"
-            android:label="@string/tts_settings"
-            android:parentActivityName="Settings">
+            android:label="@string/tts_settings">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.TTS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1505,7 +1533,7 @@
         <!-- Lock screen settings -->
         <activity android:name=".password.ConfirmDeviceCredentialActivity"
             android:exported="true"
-            android:taskAffinity=".password.ConfirmDeviceCredentialActivity"
+            android:taskAffinity="com.android.settings.workmode"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter android:priority="1">
                 <action android:name="android.app.action.CONFIRM_DEVICE_CREDENTIAL" />
@@ -1523,7 +1551,7 @@
             android:exported="false"
             android:permission="android.permission.MANAGE_USERS"
             android:resizeableActivity="false"
-            android:taskAffinity=".password.ConfirmDeviceCredentialActivity"
+            android:taskAffinity="com.android.settings.workmode"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter android:priority="1">
                 <action android:name="android.app.action.CONFIRM_DEVICE_CREDENTIAL_WITH_USER" />
@@ -1580,6 +1608,11 @@
             android:exported="false"
             android:screenOrientation="portrait"/>
 
+        <!-- Must not be exported -->
+        <activity android:name=".biometrics.BiometricEnrollActivity$InternalActivity"
+            android:exported="false"
+            android:theme="@style/GlifTheme.Light"/>
+
         <activity android:name=".biometrics.BiometricEnrollActivity"
             android:exported="true"
             android:theme="@style/GlifTheme.Light">
@@ -1620,10 +1653,6 @@
             android:permission="android.permission.MANAGE_FINGERPRINT"
             android:icon="@drawable/ic_suggestion_fingerprint"
             android:theme="@style/GlifTheme.Light">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.FINGERPRINT_ENROLL" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.require_feature"
                 android:value="android.hardware.fingerprint" />
             <meta-data android:name="com.android.settings.title"
@@ -1631,6 +1660,23 @@
             <meta-data android:name="com.android.settings.summary"
                 android:resource="@string/suggestion_additional_fingerprints_summary" />
         </activity>
+
+        <activity-alias android:name=".SetupFingerprintSuggestionActivity"
+            android:enabled="false"
+            android:exported="true"
+            android:targetActivity=".biometrics.fingerprint.FingerprintSuggestionActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.suggested.category.FINGERPRINT_ENROLL" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.require_feature"
+                       android:value="android.hardware.fingerprint" />
+            <meta-data android:name="com.android.settings.title"
+                       android:resource="@string/suggestion_additional_fingerprints" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/suggestion_additional_fingerprints_summary" />
+            <meta-data android:name="com.android.settings.icon_tintable" android:value="true" />
+        </activity-alias>
 
         <!-- Note this must not be exported since it returns the password in the intent -->
         <activity android:name=".password.ConfirmLockPattern$InternalActivity"
@@ -2269,9 +2315,6 @@
             <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-6"/>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.wireless" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.datausage.DataUsageSummary" />
         </activity>
@@ -2612,6 +2655,7 @@
         <receiver android:name=".sim.SimSelectNotification">
             <intent-filter>
                 <action android:name="android.telephony.action.PRIMARY_SUBSCRIPTION_LIST_CHANGED"/>
+                <action android:name="android.settings.ENABLE_MMS_DATA_REQUEST"/>
             </intent-filter>
         </receiver>
 
@@ -2624,27 +2668,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-        <activity
-            android:name="Settings$SimSettingsActivity"
-            android:label="@string/sim_settings_title"
-            android:icon="@drawable/ic_settings_sim"
-            android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-2"/>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.wireless" />
-            <meta-data android:name="com.android.settings.summary"
-                android:resource="@string/summary_empty"/>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.sim.SimSettings" />
-        </activity>
 
         <activity android:name=".sim.SimPreferenceDialog"
             android:theme="@style/Theme.AlertDialog"
@@ -2696,10 +2719,12 @@
             android:excludeFromRecents="true"
             android:exported="false" />
 
-        <activity android:name=".sim.SimDialogActivity"
-                android:theme="@style/Theme.AlertDialog"
-                android:label="@string/sim_settings_title"
-                android:excludeFromRecents="true">
+        <activity
+            android:name=".sim.SimDialogActivity"
+            android:theme="@style/Theme.AlertDialog"
+            android:label="@string/sim_settings_title"
+            android:launchMode="singleTop"
+            android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -2840,36 +2865,13 @@
 
         <activity android:name=".enterprise.ActionDisabledByAdminDialog"
                 android:theme="@style/Transparent"
+                android:taskAffinity="com.android.settings.enterprise"
                 android:excludeFromRecents="true"
                 android:launchMode="singleTop">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.SHOW_ADMIN_SUPPORT_DETAILS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name="Settings$AdvancedAppsActivity"
-            android:exported="true"
-            android:label="@string/app_default_dashboard_title"
-            android:parentActivityName="Settings">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.MANAGE_DEFAULT_APPS_SETTINGS" />
-                <action android:name="android.settings.HOME_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-120"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.apps"/>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.applications.DefaultAppSettings" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/summary_empty"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
         </activity>
 
         <!-- Keep compatibility with old WebView-picker implementation -->
@@ -2925,6 +2927,19 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.deletionhelper.AutomaticStorageManagerSettings" />
+        </activity>
+
+        <!-- Show app-level advanced power usage details (app passed in as extras) -->
+        <activity
+            android:name=".fuelgauge.AdvancedPowerUsageDetailActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.settings.APP_BATTERY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -3106,7 +3121,7 @@
 
         <activity android:name=".panel.SettingsPanelActivity"
             android:label="@string/settings_panel_title"
-            android:theme="@style/Theme.BottomDialog"
+            android:theme="@style/Theme.Panel"
             android:documentLaunchMode="always"
             android:excludeFromRecents="true"
             android:exported="true">

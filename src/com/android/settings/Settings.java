@@ -32,10 +32,12 @@ public class Settings extends SettingsActivity {
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
     public static class FaceSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class FingerprintSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SimSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiTetherSettingsActivity extends SettingsActivity { /* empty */ }
     public static class VpnSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class DataSaverSummaryActivity extends SettingsActivity{ /* empty */ }
     public static class DateTimeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrivateVolumeForgetActivity extends SettingsActivity { /* empty */ }
     public static class PrivateVolumeSettingsActivity extends SettingsActivity { /* empty */ }
@@ -136,7 +138,6 @@ public class Settings extends SettingsActivity {
     public static class ChangeWifiStateActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class AdvancedAppsActivity extends SettingsActivity { /* empty */ }
 
     public static class ManageExternalSourcesActivity extends SettingsActivity {/* empty */ }
     public static class ManageAppExternalSourcesActivity extends SettingsActivity { /* empty */ }

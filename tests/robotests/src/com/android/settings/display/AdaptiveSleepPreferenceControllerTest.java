@@ -20,20 +20,28 @@ import static android.provider.Settings.System.ADAPTIVE_SLEEP;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
 
 import com.android.settings.R;
+import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore("b/130897305")
 public class AdaptiveSleepPreferenceControllerTest {
 
     private static final String PREFERENCE_KEY = "adaptive_sleep";
@@ -42,6 +50,9 @@ public class AdaptiveSleepPreferenceControllerTest {
     private AdaptiveSleepPreferenceController mController;
     private ContentResolver mContentResolver;
 
+    @Mock
+    private PackageManager mPackageManager;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -49,6 +60,10 @@ public class AdaptiveSleepPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mContentResolver = mContext.getContentResolver();
         mController = new AdaptiveSleepPreferenceController(mContext, PREFERENCE_KEY);
+
+
+        when(mPackageManager.checkPermission(any(), any())).thenReturn(
+                PackageManager.PERMISSION_GRANTED);
     }
 
     @Test
@@ -113,5 +128,25 @@ public class AdaptiveSleepPreferenceControllerTest {
         final AdaptiveSleepPreferenceController controller =
                 new AdaptiveSleepPreferenceController(mContext, "any_key");
         assertThat(controller.isSliceable()).isTrue();
+    }
+
+    @Test
+    public void isChecked_returnsFalseWhenNotSufficientPermissions() {
+        when(mPackageManager.checkPermission(any(), any())).thenReturn(
+                PackageManager.PERMISSION_DENIED);
+
+        mController.setChecked(true);
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void isEnabled_returnsFalseWhenNotSufficientPermissions() {
+        when(mPackageManager.checkPermission(any(), any())).thenReturn(
+                PackageManager.PERMISSION_DENIED);
+
+        mController.setChecked(true);
+        final RestrictedPreference mPreference = new RestrictedPreference(mContext);
+        mController.updateState(mPreference);
+        assertThat(mPreference.isEnabled()).isFalse();
     }
 }

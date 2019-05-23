@@ -128,18 +128,26 @@ public class WifiDppUtils {
         return intent;
     }
 
-    private static String getPresharedKey(WifiManager wifiManager, WifiConfiguration config) {
-        String preSharedKey = config.preSharedKey;
+    private static String getPresharedKey(WifiManager wifiManager,
+            WifiConfiguration wifiConfiguration) {
+        final List<WifiConfiguration> privilegedWifiConfiguratios =
+                wifiManager.getPrivilegedConfiguredNetworks();
 
-        final List<WifiConfiguration> wifiConfigs = wifiManager.getPrivilegedConfiguredNetworks();
-        for (WifiConfiguration wifiConfig : wifiConfigs) {
-            if (wifiConfig.networkId == config.networkId) {
-                preSharedKey = wifiConfig.preSharedKey;
-                break;
+        for (WifiConfiguration privilegedWifiConfiguration : privilegedWifiConfiguratios) {
+            if (privilegedWifiConfiguration.networkId == wifiConfiguration.networkId) {
+                // WEP uses a shared key hence the AuthAlgorithm.SHARED is used
+                // to identify it.
+                if (wifiConfiguration.allowedKeyManagement.get(KeyMgmt.NONE)
+                        && wifiConfiguration.allowedAuthAlgorithms.get(
+                        WifiConfiguration.AuthAlgorithm.SHARED)) {
+                    return privilegedWifiConfiguration
+                            .wepKeys[privilegedWifiConfiguration.wepTxKeyIndex];
+                } else {
+                    return privilegedWifiConfiguration.preSharedKey;
+                }
             }
         }
-
-        return preSharedKey;
+        return wifiConfiguration.preSharedKey;
     }
 
     private static String removeFirstAndLastDoubleQuotes(String str) {
@@ -161,6 +169,9 @@ public class WifiDppUtils {
     static String getSecurityString(WifiConfiguration config) {
         if (config.allowedKeyManagement.get(KeyMgmt.SAE)) {
             return WifiQrCode.SECURITY_SAE;
+        }
+        if (config.allowedKeyManagement.get(KeyMgmt.OWE)) {
+            return WifiQrCode.SECURITY_NO_PASSWORD;
         }
         if (config.allowedKeyManagement.get(KeyMgmt.WPA_PSK) ||
                 config.allowedKeyManagement.get(KeyMgmt.WPA2_PSK)) {
@@ -185,7 +196,7 @@ public class WifiDppUtils {
     public static Intent getConfiguratorQrCodeGeneratorIntentOrNull(Context context,
             WifiManager wifiManager, AccessPoint accessPoint) {
         final Intent intent = new Intent(context, WifiDppConfiguratorActivity.class);
-        if (isSupportConfiguratorQrCodeGenerator(accessPoint)) {
+        if (isSupportConfiguratorQrCodeGenerator(context, accessPoint)) {
             intent.setAction(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
         } else {
             return null;
@@ -265,14 +276,11 @@ public class WifiDppUtils {
             WifiConfiguration wifiConfiguration) {
         final String ssid = removeFirstAndLastDoubleQuotes(wifiConfiguration.SSID);
         final String security = getSecurityString(wifiConfiguration);
-        String preSharedKey = wifiConfiguration.preSharedKey;
 
-        if (preSharedKey != null) {
-            // When the value of this key is read, the actual key is not returned, just a "*".
-            // Call privileged system API to obtain actual key.
-            preSharedKey = removeFirstAndLastDoubleQuotes(getPresharedKey(wifiManager,
-                    wifiConfiguration));
-        }
+        // When the value of this key is read, the actual key is not returned, just a "*".
+        // Call privileged system API to obtain actual key.
+        final String preSharedKey = removeFirstAndLastDoubleQuotes(getPresharedKey(wifiManager,
+                wifiConfiguration));
 
         if (!TextUtils.isEmpty(ssid)) {
             intent.putExtra(EXTRA_WIFI_SSID, ssid);
@@ -337,28 +345,36 @@ public class WifiDppUtils {
      */
     public static boolean isSupportConfiguratorQrCodeScanner(Context context,
             AccessPoint accessPoint) {
+        if (accessPoint.isPasspoint()) {
+            return false;
+        }
         return isSupportWifiDpp(context, accessPoint.getSecurity());
     }
 
     /**
      * Checks if QR code generator supports to config other devices with the Wi-Fi network
      *
+     * @param context The context to use for {@code WifiManager}
      * @param accessPoint The {@link AccessPoint} of the Wi-Fi network
      */
-    public static boolean isSupportConfiguratorQrCodeGenerator(AccessPoint accessPoint) {
-        return isSupportZxing(accessPoint.getSecurity());
+    public static boolean isSupportConfiguratorQrCodeGenerator(Context context,
+            AccessPoint accessPoint) {
+        if (accessPoint.isPasspoint()) {
+            return false;
+        }
+        return isSupportZxing(context, accessPoint.getSecurity());
     }
 
     /**
      * Checks if this device supports to be configured by the Wi-Fi network of the security
      *
-     * @param context The context to use for {@link WifiManager#isEasyConnectSupported()}
+     * @param context The context to use for {@code WifiManager}
      * @param accesspointSecurity The security constants defined in {@link AccessPoint}
      */
     public static boolean isSupportEnrolleeQrCodeScanner(Context context,
             int accesspointSecurity) {
         return isSupportWifiDpp(context, accesspointSecurity) ||
-                isSupportZxing(accesspointSecurity);
+                isSupportZxing(context, accesspointSecurity);
     }
 
     private static boolean isSupportHotspotConfiguratorQrCodeGenerator(
@@ -376,19 +392,38 @@ public class WifiDppUtils {
         }
 
         // DPP 1.0 only supports SAE and PSK.
-        if (accesspointSecurity == AccessPoint.SECURITY_SAE ||
-                accesspointSecurity == AccessPoint.SECURITY_PSK) {
-            return true;
+        final WifiManager wifiManager = context.getSystemService(WifiManager.class);
+        switch (accesspointSecurity) {
+            case AccessPoint.SECURITY_SAE:
+                if (wifiManager.isWpa3SaeSupported()) {
+                    return true;
+                }
+                break;
+            case AccessPoint.SECURITY_PSK:
+                return true;
+            default:
         }
         return false;
     }
 
-    // TODO (b/124131581 b/129396816): TO support WPA3 securities (SAE & OWE), change here at first
-    private static boolean isSupportZxing(int accesspointSecurity) {
-        if (accesspointSecurity == AccessPoint.SECURITY_PSK ||
-                accesspointSecurity == AccessPoint.SECURITY_WEP ||
-                accesspointSecurity == AccessPoint.SECURITY_NONE) {
-            return true;
+    private static boolean isSupportZxing(Context context, int accesspointSecurity) {
+        final WifiManager wifiManager = context.getSystemService(WifiManager.class);
+        switch (accesspointSecurity) {
+            case AccessPoint.SECURITY_PSK:
+            case AccessPoint.SECURITY_WEP:
+            case AccessPoint.SECURITY_NONE:
+                return true;
+            case AccessPoint.SECURITY_SAE:
+                if (wifiManager.isWpa3SaeSupported()) {
+                    return true;
+                }
+                break;
+            case AccessPoint.SECURITY_OWE:
+                if (wifiManager.isEnhancedOpenSupported()) {
+                    return true;
+                }
+                break;
+            default:
         }
         return false;
     }

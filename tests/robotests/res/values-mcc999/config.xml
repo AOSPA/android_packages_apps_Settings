@@ -46,7 +46,6 @@
     <bool name="config_show_show_password">false</bool>
     <bool name="config_show_trust_agent_click_intent">false</bool>
     <bool name="config_show_wallpaper_attribution">false</bool>
-    <bool name="config_show_default_home">false</bool>
     <bool name="config_show_assist_and_voice_input">false</bool>
     <bool name="config_show_phone_language">false</bool>
     <bool name="config_show_virtual_keyboard_pref">false</bool>
@@ -79,11 +78,6 @@
         <item>fake_package/fake_service</item>
     </string-array>
 
-    <!-- Settings intelligence interaction log intent action -->
-    <string name="config_settingsintelligence_log_action" translatable="false">
-        aaa.bbb.ccc
-    </string>
-
     <!-- List of packages that should be whitelisted for slice uri access. Do not translate -->
     <string-array name="slice_whitelist_package_names" translatable="false">
         <item>com.android.settings.slice_whitelist_package</item>
@@ -94,4 +88,9 @@
 
     <!-- Grayscale settings intent -->
     <string name="config_grayscale_settings_intent" translate="false">intent:#Intent;action=test.test;end</string>
+
+    <!-- List containing the injected tile keys which are suppressed. -->
+    <string-array name="config_suppress_injected_tile_keys" translatable="false">
+        <item>injected_tile_key</item>
+    </string-array>
 </resources>

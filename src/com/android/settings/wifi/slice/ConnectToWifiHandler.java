@@ -17,6 +17,8 @@
 package com.android.settings.wifi.slice;
 
 import android.app.Activity;
+import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
@@ -36,17 +38,26 @@ public class ConnectToWifiHandler extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final Network network = getIntent().getParcelableExtra(ConnectivityManager.EXTRA_NETWORK);
         final Bundle accessPointState = getIntent().getBundleExtra(
                 WifiDialogActivity.KEY_ACCESS_POINT_STATE);
 
-        if (accessPointState != null) {
+        if (network != null) {
+            WifiScanWorker.clearClickedWifi();
+            final ConnectivityManager cm = getSystemService(ConnectivityManager.class);
+            // start captive portal app to sign in to network
+            cm.startCaptivePortalApp(network);
+        } else if (accessPointState != null) {
             connect(new AccessPoint(this, accessPointState));
         }
+
         finish();
     }
 
     @VisibleForTesting
     void connect(AccessPoint accessPoint) {
+        WifiScanWorker.saveClickedWifi(accessPoint);
+
         final WifiConnectListener connectListener = new WifiConnectListener(this);
         switch (WifiUtils.getConnectingType(accessPoint)) {
             case WifiUtils.CONNECT_TYPE_OSU_PROVISION:

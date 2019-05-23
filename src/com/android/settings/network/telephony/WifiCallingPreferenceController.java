@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Looper;
 import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
@@ -35,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
+import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -95,6 +97,10 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        Intent intent = mPreference.getIntent();
+        if (intent != null) {
+            intent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
+        }
         if (!isAvailable()) {
             // Set category as invisible
             final Preference preferenceCateogry = screen.findPreference(KEY_PREFERENCE_CATEGORY);
@@ -116,6 +122,9 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
             preference.setSummary(null);
             preference.setIntent(intent);
         } else {
+            final String title = SubscriptionManager.getResourcesForSubId(mContext, mSubId)
+                    .getString(R.string.wifi_calling_settings_title);
+            preference.setTitle(title);
             int resId = com.android.internal.R.string.wifi_calling_off_summary;
             if (mImsManager.isWfcEnabledByUser()) {
                 boolean wfcRoamingEnabled = mEditableWfcRoamingMode && !mUseWfcHomeModeForRoaming;

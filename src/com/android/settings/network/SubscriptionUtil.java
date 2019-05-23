@@ -16,8 +16,15 @@
 
 package com.android.settings.network;
 
+import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
+
+import static com.android.internal.util.CollectionUtils.emptyIfNull;
+
+import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
+import android.telephony.UiccSlotInfo;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -27,28 +34,75 @@ import java.util.Iterator;
 import java.util.List;
 
 public class SubscriptionUtil {
-    private static List<SubscriptionInfo> sResultsForTesting;
+    private static final String TAG = "SubscriptionUtil";
+    private static List<SubscriptionInfo> sAvailableResultsForTesting;
+    private static List<SubscriptionInfo> sActiveResultsForTesting;
 
     @VisibleForTesting
     public static void setAvailableSubscriptionsForTesting(List<SubscriptionInfo> results) {
-        sResultsForTesting = results;
+        sAvailableResultsForTesting = results;
     }
 
-    public static List<SubscriptionInfo> getAvailableSubscriptions(SubscriptionManager manager) {
-        if (sResultsForTesting != null) {
-            return sResultsForTesting;
+    @VisibleForTesting
+    public static void setActiveSubscriptionsForTesting(List<SubscriptionInfo> results) {
+        sActiveResultsForTesting = results;
+    }
+
+    public static List<SubscriptionInfo> getActiveSubscriptions(SubscriptionManager manager) {
+        if (sActiveResultsForTesting != null) {
+            return sActiveResultsForTesting;
         }
-        List<SubscriptionInfo> subscriptions = manager.getSelectableSubscriptionInfoList();
+        final List<SubscriptionInfo> subscriptions = manager.getActiveSubscriptionInfoList(true);
         if (subscriptions == null) {
-            subscriptions = new ArrayList<>();
+            return new ArrayList<>();
         }
-        // With some carriers such as Google Fi which provide a sort of virtual service that spans
-        // across multiple underlying networks, we end up with subscription entries for the
-        // underlying networks that need to be hidden from the user in the UI.
-        for (Iterator<SubscriptionInfo> iter = subscriptions.iterator(); iter.hasNext(); ) {
-            SubscriptionInfo info = iter.next();
-            if (TextUtils.isEmpty(info.getMncString())) {
-                iter.remove();
+        return subscriptions;
+    }
+
+    @VisibleForTesting
+    static boolean isInactiveInsertedPSim(UiccSlotInfo slotInfo) {
+        if (slotInfo == null)  {
+            return false;
+        }
+        return !slotInfo.getIsEuicc() && !slotInfo.getIsActive() &&
+                slotInfo.getCardStateInfo() == CARD_STATE_INFO_PRESENT;
+    }
+
+    public static List<SubscriptionInfo> getAvailableSubscriptions(Context context) {
+        if (sAvailableResultsForTesting != null) {
+            return sAvailableResultsForTesting;
+        }
+        final SubscriptionManager subMgr = context.getSystemService(SubscriptionManager.class);
+        final TelephonyManager telMgr = context.getSystemService(TelephonyManager.class);
+
+        List<SubscriptionInfo> subscriptions =
+                new ArrayList<>(emptyIfNull(subMgr.getSelectableSubscriptionInfoList()));
+
+        // Look for inactive but present physical SIMs that are missing from the selectable list.
+        final List<UiccSlotInfo> missing = new ArrayList<>();
+        UiccSlotInfo[] slotsInfo =  telMgr.getUiccSlotsInfo();
+        for (int i = 0; slotsInfo != null && i < slotsInfo.length; i++) {
+            final UiccSlotInfo slotInfo = slotsInfo[i];
+            if (isInactiveInsertedPSim(slotInfo)) {
+                final int index = slotInfo.getLogicalSlotIdx();
+                final String cardId = slotInfo.getCardId();
+
+                final boolean found = subscriptions.stream().anyMatch(info ->
+                        index == info.getSimSlotIndex() && cardId.equals(info.getCardString()));
+                if (!found) {
+                    missing.add(slotInfo);
+                }
+            }
+        }
+        if (!missing.isEmpty()) {
+            for (SubscriptionInfo info : subMgr.getAllSubscriptionInfoList()) {
+                for (UiccSlotInfo slotInfo : missing) {
+                    if (info.getSimSlotIndex() == slotInfo.getLogicalSlotIdx() &&
+                    info.getCardString().equals(slotInfo.getCardId())) {
+                        subscriptions.add(info);
+                        break;
+                    }
+                }
             }
         }
         return subscriptions;
