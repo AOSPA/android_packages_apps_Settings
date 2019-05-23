@@ -265,9 +265,15 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         private static int[] COLOR_TILE_IDS = {
                 R.id.preview_color_qs_0_bg, R.id.preview_color_qs_1_bg, R.id.preview_color_qs_2_bg
         };
-        static int[] COLOR_TILES_ICON_IDS = {
-                R.id.preview_color_qs_0_icon, R.id.preview_color_qs_1_icon,
-                R.id.preview_color_qs_2_icon
+
+        /**
+         * Ids of the views for the foreground of the icon, mapping to the corresponding index of
+         * the actual icon drawable.
+         */
+        static int[][] COLOR_TILES_ICON_IDS = {
+                new int[]{ R.id.preview_color_qs_0_icon, 0},
+                new int[]{ R.id.preview_color_qs_1_icon, 1},
+                new int[] { R.id.preview_color_qs_2_icon, 3}
         };
 
         /**
@@ -371,14 +377,15 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
             seekbar.setOnTouchListener((view, motionEvent) -> true);
             if (!mIcons.isEmpty() && mShapeDrawable != null) {
                 for (int i = 0; i < COLOR_TILE_IDS.length; i++) {
-                    Drawable icon = mIcons.get(i).getConstantState().newDrawable();
+                    Drawable icon = mIcons.get(COLOR_TILES_ICON_IDS[i][1]).getConstantState()
+                            .newDrawable();
                     //TODO: load and set the shape.
                     Drawable bgShape = mShapeDrawable.getConstantState().newDrawable();
                     bgShape.setTint(accentColor);
 
                     ImageView bg = container.findViewById(COLOR_TILE_IDS[i]);
                     bg.setImageDrawable(bgShape);
-                    ImageView fg = container.findViewById(COLOR_TILES_ICON_IDS[i]);
+                    ImageView fg = container.findViewById(COLOR_TILES_ICON_IDS[i][0]);
                     fg.setImageDrawable(icon);
                 }
             }
