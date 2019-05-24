@@ -159,6 +159,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (WALLPAPER_ONLY.equals(intent.getStringExtra(WALLPAPER_FLAVOR_EXTRA))) {
+            Log.d(TAG, "WALLPAPER_ONLY intent, reverting to Wallpaper Picker");
             skipToWallpaperPicker();
         }
     }
@@ -177,15 +178,11 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     private void initSections() {
         mSections.clear();
         if (!BuildCompat.isAtLeastQ()) {
-            return;
-        }
-        //if (!BuildCompat.isAtLeastQ()) {
-        //    return;
-        //}
-        if (Build.TYPE.equals("user")) {
+            Log.d(TAG, "Build version < Q detected");
             return;
         }
         if (WALLPAPER_ONLY.equals(getIntent().getStringExtra(WALLPAPER_FLAVOR_EXTRA))) {
+            Log.d(TAG, "WALLPAPER_ONLY intent");
             return;
         }
         //Theme
@@ -200,12 +197,16 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
                 mWallpaperSetter, new OverlayManagerCompat(this), eventLogger);
         if (themeManager.isAvailable()) {
             mSections.put(R.id.nav_theme, new ThemeSection(R.id.nav_theme, themeManager));
+        } else {
+            Log.d(TAG, "ThemeManager not available, removing Style section");
         }
         //Clock
         ClockManager clockManager = new ClockManager(getContentResolver(),
                 new ContentProviderClockProvider(this), eventLogger);
         if (clockManager.isAvailable()) {
             mSections.put(R.id.nav_clock, new ClockSection(R.id.nav_clock, clockManager));
+        } else {
+            Log.d(TAG, "ClockManager not available, removing Clock section");
         }
         //Grid
         GridOptionsManager gridManager = new GridOptionsManager(
@@ -214,9 +215,10 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
                 eventLogger);
         if (gridManager.isAvailable()) {
             mSections.put(R.id.nav_grid, new GridSection(R.id.nav_grid, gridManager));
+        } else {
+            Log.d(TAG, "GridOptionsManager not available, removing Grid section");
         }
         mSections.put(R.id.nav_wallpaper, new WallpaperSection(R.id.nav_wallpaper));
-        //TODO (santie): add other sections if supported by the device
     }
 
     private void setUpBottomNavView() {
