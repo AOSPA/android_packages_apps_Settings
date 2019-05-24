@@ -17,6 +17,7 @@ package com.android.customization.picker.theme;
 
 import android.app.Activity;
 import android.app.WallpaperColors;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -51,7 +52,9 @@ import com.android.customization.model.theme.ThemeManager;
 import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.module.ThemesUserEventLogger;
 import com.android.customization.picker.BasePreviewAdapter;
+import com.android.customization.picker.TimeTicker;
 import com.android.customization.picker.theme.ThemePreviewPage.ThemeCoverPage;
+import com.android.customization.picker.theme.ThemePreviewPage.TimeContainer;
 import com.android.customization.widget.OptionSelectorController;
 import com.android.customization.widget.PreviewPager;
 import com.android.wallpaper.R;
@@ -94,6 +97,7 @@ public class ThemeFragment extends ToolbarFragment {
     private boolean mUseMyWallpaper;
     private WallpaperInfo mCurrentHomeWallpaper;
     private CurrentWallpaperInfoFactory mCurrentWallpaperFactory;
+    private TimeTicker mTicker;
 
     @Override
     public void onAttach(Context context) {
@@ -120,7 +124,6 @@ public class ThemeFragment extends ToolbarFragment {
         });
         mUseMyWallpaperButton = view.findViewById(R.id.use_my_wallpaper);
         mUseMyWallpaperButton.setOnCheckedChangeListener(this::onUseMyWallpaperCheckChanged);
-
         setUpOptions(savedInstanceState);
 
         return view;
@@ -148,7 +151,23 @@ public class ThemeFragment extends ToolbarFragment {
     @Override
     public void onResume() {
         super.onResume();
+        mTicker = TimeTicker.registerNewReceiver(getContext(), this::updateTime);
         reloadWallpaper();
+        updateTime();
+    }
+
+    private void updateTime() {
+        if (mAdapter != null) {
+            mAdapter.updateTime();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (getContext() != null) {
+            getContext().unregisterReceiver(mTicker);
+        }
     }
 
     @Override
@@ -462,6 +481,14 @@ public class ThemeFragment extends ToolbarFragment {
             for (ThemePreviewPage page : mPages) {
                 if (page.containsWallpaper()) {
                     page.bindBody(true);
+                }
+            }
+        }
+
+        public void updateTime() {
+            for (ThemePreviewPage page : mPages) {
+                if (page instanceof TimeContainer) {
+                    ((TimeContainer)page).updateTime();
                 }
             }
         }

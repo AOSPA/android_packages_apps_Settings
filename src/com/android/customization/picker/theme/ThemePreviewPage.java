@@ -30,6 +30,11 @@ import java.util.List;
 import java.util.TimeZone;
 
 abstract class ThemePreviewPage extends PreviewPage {
+
+    public interface TimeContainer {
+        void updateTime();
+    }
+
     @StringRes
     final int nameResId;
     @DrawableRes
@@ -71,7 +76,7 @@ abstract class ThemePreviewPage extends PreviewPage {
 
     protected abstract void bindBody(boolean forceRebind);
 
-    static class ThemeCoverPage extends ThemePreviewPage {
+    static class ThemeCoverPage extends ThemePreviewPage implements TimeContainer {
 
         /**
          * Maps which icon from ResourceConstants#ICONS_FOR_PREVIEW to use for each icon in the
@@ -216,6 +221,14 @@ abstract class ThemePreviewPage extends PreviewPage {
                             cornerRadius, cornerRadius, cornerRadius, cornerRadius,
                             cornerRadius, cornerRadius, cornerRadius, cornerRadius});
                 }
+            }
+        }
+
+        @Override
+        public void updateTime() {
+            if (card != null) {
+                ((TextView) card.findViewById(R.id.theme_preview_clock)).setText(
+                        getFormattedTime());
             }
         }
 
