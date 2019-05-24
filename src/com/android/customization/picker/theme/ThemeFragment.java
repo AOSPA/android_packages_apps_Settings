@@ -43,9 +43,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.customization.model.CustomizationManager.Callback;
+import com.android.customization.model.CustomizationManager.OptionsFetchedListener;
+import com.android.customization.model.grid.GridOption;
 import com.android.customization.model.theme.ThemeBundle;
 import com.android.customization.model.theme.ThemeBundle.PreviewInfo;
 import com.android.customization.model.theme.ThemeManager;
@@ -94,6 +97,9 @@ public class ThemeFragment extends ToolbarFragment {
     private ThemeBundle mSelectedTheme;
     private ThemePreviewAdapter mAdapter;
     private PreviewPager mPreviewPager;
+    private ContentLoadingProgressBar mLoading;
+    private View mContent;
+    private View mError;
     private boolean mUseMyWallpaper;
     private WallpaperInfo mCurrentHomeWallpaper;
     private CurrentWallpaperInfoFactory mCurrentWallpaperFactory;
@@ -115,6 +121,9 @@ public class ThemeFragment extends ToolbarFragment {
                 R.layout.fragment_theme_picker, container, /* attachToRoot */ false);
         setUpToolbar(view);
 
+        mContent = view.findViewById(R.id.content_section);
+        mLoading = view.findViewById(R.id.loading_indicator);
+        mError = view.findViewById(R.id.error_section);
         mCurrentWallpaperFactory = InjectorProvider.getInjector()
                 .getCurrentWallpaperFactory(getActivity().getApplicationContext());
         mPreviewPager = view.findViewById(R.id.theme_preview_pager);
@@ -237,45 +246,70 @@ public class ThemeFragment extends ToolbarFragment {
                 ? View.INVISIBLE : View.VISIBLE);
     }
 
+    private void hideError() {
+        mContent.setVisibility(View.VISIBLE);
+        mError.setVisibility(View.GONE);
+    }
+
+    private void showError() {
+        mLoading.hide();
+        mContent.setVisibility(View.GONE);
+        mError.setVisibility(View.VISIBLE);
+    }
+
     private void setUpOptions(@Nullable Bundle savedInstanceState) {
-        mThemeManager.fetchOptions(options -> {
-            mOptionsController = new OptionSelectorController<>(mOptionsContainer, options);
-            mOptionsController.addListener(selected -> {
-                if (selected instanceof CustomTheme && !((CustomTheme) selected).isDefined()) {
-                    navigateToCustomTheme((CustomTheme) selected);
-                } else {
-                    mSelectedTheme = (ThemeBundle) selected;
-                    if (mUseMyWallpaper || mSelectedTheme instanceof CustomTheme) {
-                        mSelectedTheme.setOverrideThemeWallpaper(mCurrentHomeWallpaper);
+        hideError();
+        mLoading.show();
+        mThemeManager.fetchOptions(new OptionsFetchedListener<ThemeBundle>() {
+            @Override
+            public void onOptionsLoaded(List<ThemeBundle> options) {
+                mOptionsController = new OptionSelectorController<>(mOptionsContainer, options);
+                mOptionsController.addListener(selected -> {
+                    mLoading.hide();
+                    if (selected instanceof CustomTheme && !((CustomTheme) selected).isDefined()) {
+                        navigateToCustomTheme((CustomTheme) selected);
                     } else {
-                        mSelectedTheme.setOverrideThemeWallpaper(null);
+                        mSelectedTheme = (ThemeBundle) selected;
+                        if (mUseMyWallpaper || mSelectedTheme instanceof CustomTheme) {
+                            mSelectedTheme.setOverrideThemeWallpaper(mCurrentHomeWallpaper);
+                        } else {
+                            mSelectedTheme.setOverrideThemeWallpaper(null);
+                        }
+                        mEventLogger.logThemeSelected(mSelectedTheme,
+                                selected instanceof CustomTheme);
+                        createAdapter(options);
+                        updateButtonsVisibility();
                     }
-                    mEventLogger.logThemeSelected(mSelectedTheme, selected instanceof CustomTheme);
-                    createAdapter(options);
-                    updateButtonsVisibility();
+                });
+                mOptionsController.initOptions(mThemeManager);
+                String previouslySelected = savedInstanceState != null
+                        ? savedInstanceState.getString(KEY_SELECTED_THEME) : null;
+                for (ThemeBundle theme : options) {
+                    if (previouslySelected != null
+                            && previouslySelected.equals(theme.getSerializedPackages())) {
+                        mSelectedTheme = theme;
+                    } else if (theme.isActive(mThemeManager)) {
+                        mSelectedTheme = theme;
+                        break;
+                    }
                 }
-            });
-            mOptionsController.initOptions(mThemeManager);
-            String previouslySelected = savedInstanceState != null
-                    ? savedInstanceState.getString(KEY_SELECTED_THEME) : null;
-            for (ThemeBundle theme : options) {
-                if (previouslySelected != null
-                        && previouslySelected.equals(theme.getSerializedPackages())) {
-                    mSelectedTheme = theme;
-                } else if (theme.isActive(mThemeManager)) {
-                    mSelectedTheme = theme;
-                    break;
+                if (mSelectedTheme == null) {
+                    // Select the default theme if there is no matching custom enabled theme
+                    // TODO(b/124796742): default to custom if there is no matching theme bundle
+                    mSelectedTheme = options.get(0);
+                } else {
+                    // Only show show checkmark if we found a matching theme
+                    mOptionsController.setAppliedOption(mSelectedTheme);
                 }
+                mOptionsController.setSelectedOption(mSelectedTheme);
             }
-            if (mSelectedTheme == null) {
-                // Select the default theme if there is no matching custom enabled theme
-                // TODO(b/124796742): default to custom if there is no matching theme bundle
-                mSelectedTheme = options.get(0);
-            } else {
-                // Only show show checkmark if we found a matching theme
-                mOptionsController.setAppliedOption(mSelectedTheme);
+            @Override
+            public void onError(@Nullable Throwable throwable) {
+                if (throwable != null) {
+                    Log.e(TAG, "Error loading theme bundles", throwable);
+                }
+                showError();
             }
-            mOptionsController.setSelectedOption(mSelectedTheme);
         }, false);
     }
 
