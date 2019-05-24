@@ -19,7 +19,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -191,7 +190,7 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
                 injector.getPreferences(this), mUserEventLogger, false);
         ThemesUserEventLogger eventLogger = (ThemesUserEventLogger) injector.getUserEventLogger(
                 this);
-        ThemeManager themeManager = new ThemeManager(
+        ThemeManager themeManager = injector.getThemeManager(
                 new DefaultThemeProvider(this, injector.getCustomizationPreferences(this)),
                 this,
                 mWallpaperSetter, new OverlayManagerCompat(this), eventLogger);
