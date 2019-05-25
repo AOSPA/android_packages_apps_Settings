@@ -33,6 +33,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.service.wallpaper.WallpaperService;
 import android.text.TextUtils;
@@ -83,6 +84,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     private static final String WALLPAPER_PREFIX = "theme_wallpaper_";
     private static final String WALLPAPER_TITLE_PREFIX = "theme_wallpaper_title_";
     private static final String WALLPAPER_ATTRIBUTION_PREFIX = "theme_wallpaper_attribution_";
+    private static final String WALLPAPER_THUMB_PREFIX = "theme_wallpaper_thumbnail_";
     private static final String WALLPAPER_ACTION_PREFIX = "theme_wallpaper_action_";
 
     private static final String DEFAULT_THEME_NAME= "default";
@@ -181,7 +183,11 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             String wallpaperResName = WALLPAPER_PREFIX + themeName;
             int wallpaperResId = mStubApkResources.getIdentifier(wallpaperResName,
                     "drawable", mStubPackageName);
-            if (wallpaperResId > 0) {
+            // Check in case the theme has a separate thumbnail for the wallpaper
+            String wallpaperThumbnailResName = WALLPAPER_THUMB_PREFIX + themeName;
+            int wallpaperThumbnailResId = mStubApkResources.getIdentifier(wallpaperThumbnailResName,
+                    "drawable", mStubPackageName);
+            if (wallpaperResId != Resources.ID_NULL) {
                 builder.setWallpaperInfo(mStubPackageName, wallpaperResName,
                         themeName, wallpaperResId,
                         mStubApkResources.getIdentifier(WALLPAPER_TITLE_PREFIX + themeName,
@@ -191,13 +197,14 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                                 mStubPackageName),
                         mStubApkResources.getIdentifier(WALLPAPER_ACTION_PREFIX + themeName,
                                 "string", mStubPackageName))
-                        .setWallpaperAsset(
-                                getDrawableResourceAsset(WALLPAPER_PREFIX, themeName));
+                        .setWallpaperAsset(wallpaperThumbnailResId != Resources.ID_NULL ?
+                                getDrawableResourceAsset(WALLPAPER_THUMB_PREFIX, themeName)
+                                : getDrawableResourceAsset(WALLPAPER_PREFIX, themeName));
             } else {
                 // Try to see if it's a live wallpaper reference
                 wallpaperResId = mStubApkResources.getIdentifier(wallpaperResName,
                         "string", mStubPackageName);
-                if (wallpaperResId > 0) {
+                if (wallpaperResId != Resources.ID_NULL) {
                     String wpComponent = mStubApkResources.getString(wallpaperResId);
                     String[] componentParts = wpComponent.split("/");
                     Intent liveWpIntent =  new Intent(WallpaperService.SERVICE_INTERFACE);
@@ -213,8 +220,10 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                         try {
                             wallpaperInfo = new android.app.WallpaperInfo(appContext, resolveInfo);
                             LiveWallpaperInfo liveInfo = new LiveWallpaperInfo(wallpaperInfo);
-                            builder.setLiveWallpaperInfo(liveInfo)
-                                    .setWallpaperAsset(liveInfo.getThumbAsset(mContext));
+                            builder.setLiveWallpaperInfo(liveInfo).setWallpaperAsset(
+                                    wallpaperThumbnailResId != Resources.ID_NULL ?
+                                        getDrawableResourceAsset(WALLPAPER_THUMB_PREFIX, themeName)
+                                        : liveInfo.getThumbAsset(mContext));
                         } catch (XmlPullParserException | IOException e) {
                             Log.w(TAG, "Skipping wallpaper " + resolveInfo.serviceInfo, e);
                         }
