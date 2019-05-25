@@ -44,6 +44,10 @@ public class OverlayManagerCompat {
         mTargetPackages = ResourceConstants.getPackagesToOverlay(context);
     }
 
+    public boolean isAvailable() {
+        return mOverlayManager != null;
+    }
+
     /**
      * Enables the overlay provided by the given package for the given user Id
      * @return true if the operation succeeded

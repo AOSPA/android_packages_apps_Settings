@@ -15,11 +15,12 @@
  */
 package com.android.customization.picker.theme;
 
-import android.app.WallpaperColors;
-import android.content.res.ColorStateList;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -35,7 +36,6 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
 import com.android.customization.model.theme.ThemeBundle.PreviewInfo;
-import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.picker.theme.ThemePreviewPage.ThemeCoverPage;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
@@ -107,13 +107,14 @@ public class CustomThemeNameFragment extends CustomThemeStepFragment {
     }
 
     private void bindCover(CardView card) {
-        PreviewInfo previewInfo = mCustomThemeManager.buildCustomThemePreviewInfo(getContext());
-        mCoverPage = new ThemeCoverPage(getContext(), getThemeName(),
+        Context context = getContext();
+        PreviewInfo previewInfo = mCustomThemeManager.buildCustomThemePreviewInfo(context);
+        mCoverPage = new ThemeCoverPage(context, getThemeName(),
                 previewInfo.resolveAccentColor(getResources()), previewInfo.icons,
                 previewInfo.headlineFontFamily, previewInfo.bottomSheeetCornerRadius,
                 previewInfo.shapeDrawable, previewInfo.shapeAppIcons, null,
                 mColorButtonIds, mColorTileIds, mColorTileIconIds, mShapeIconIds,
-                new WallpaperLayoutListener());
+                new WallpaperLayoutListener(context));
         mCoverPage.setCard(card);
         mCoverPage.bindPreviewContent();
         mNameEditor.addTextChangedListener(new TextWatcher() {
@@ -135,6 +136,12 @@ public class CustomThemeNameFragment extends CustomThemeStepFragment {
     }
 
     private class WallpaperLayoutListener implements OnLayoutChangeListener {
+        private final Drawable mScrim;
+
+        WallpaperLayoutListener(Context context) {
+            mScrim = context.getResources()
+                    .getDrawable(R.drawable.theme_cover_scrim, context.getTheme());
+        }
         @Override
         public void onLayoutChange(View view, int left, int top, int right,
                 int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
@@ -152,8 +159,10 @@ public class CustomThemeNameFragment extends CustomThemeStepFragment {
 
         private void setWallpaperBitmap(View view, Bitmap bitmap) {
             Resources res = view.getContext().getResources();
-            BitmapDrawable background = new BitmapDrawable(res, bitmap);
-            background.setAlpha(128);
+            Drawable background = new BitmapDrawable(res, bitmap);
+            if (mScrim != null) {
+                background = new LayerDrawable(new Drawable[]{background, mScrim});
+            }
             view.findViewById(R.id.theme_preview_card_background).setBackground(background);
         }
     }
