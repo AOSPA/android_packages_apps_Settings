@@ -997,6 +997,11 @@ public class WifiConfigController implements TextWatcher,
         if (mAccessPointSecurity != AccessPoint.SECURITY_EAP &&
                 mAccessPointSecurity != AccessPoint.SECURITY_EAP_SUITE_B) {
             mView.findViewById(R.id.eap).setVisibility(View.GONE);
+            // Make sure password fields are visible when PSK security is selected.
+            // Password fields are not re-enabled in some cases like when security
+            // type is changed from EAP TLS to PSK
+            mView.findViewById(R.id.password_layout).setVisibility(View.VISIBLE);
+            mView.findViewById(R.id.show_password_layout).setVisibility(View.VISIBLE);
             return;
         }
         mView.findViewById(R.id.eap).setVisibility(View.VISIBLE);
@@ -1015,6 +1020,12 @@ public class WifiConfigController implements TextWatcher,
                         android.R.layout.simple_spinner_dropdown_item);
                 mEapMethodSpinner.setAdapter(spinnerAdapter);
             }
+
+            if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
+                mEapMethodSpinner.setSelection(WIFI_EAP_METHOD_TLS);
+                mEapMethodSpinner.setEnabled(false);
+            }
+
             mPhase2Spinner = (Spinner) mView.findViewById(R.id.phase2);
             mPhase2Spinner.setOnItemSelectedListener(this);
             mEapCaCertSpinner = (Spinner) mView.findViewById(R.id.ca_cert);
@@ -1125,6 +1136,12 @@ public class WifiConfigController implements TextWatcher,
                 showEapFieldsByMethod(mEapMethodSpinner.getSelectedItemPosition());
             }
         } else {
+            if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
+                mEapMethodSpinner.setSelection(WIFI_EAP_METHOD_TLS);
+                mEapMethodSpinner.setEnabled(false);
+            } else {
+                mEapMethodSpinner.setEnabled(true);
+            }
             showEapFieldsByMethod(mEapMethodSpinner.getSelectedItemPosition());
         }
     }
