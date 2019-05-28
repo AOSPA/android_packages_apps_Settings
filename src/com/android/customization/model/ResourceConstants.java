@@ -84,7 +84,8 @@ public interface ResourceConstants {
             "ic_qs_flashlight",
             "ic_qs_auto_rotate",
             "ic_qs_airplane",
-            "ic_signal_cellular_3_4_bar"
+            "ic_signal_cellular_3_4_bar",
+            "ic_battery_80_24dp"
     };
 
     ArrayList<String> sTargetPackages = new ArrayList<>();
