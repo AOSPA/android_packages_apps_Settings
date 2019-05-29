@@ -75,17 +75,19 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
     private final boolean mIsDefault;
     protected final Map<String, String> mPackagesByCategory;
     @Nullable private final WallpaperInfo mWallpaperInfo;
+    @Nullable private final String mWallpaperOptions;
     private WallpaperInfo mOverrideWallpaper;
     private Asset mOverrideWallpaperAsset;
     private CharSequence mContentDescription;
 
     protected ThemeBundle(String title, Map<String, String> overlayPackages,
             boolean isDefault, @Nullable WallpaperInfo wallpaperInfo,
-            PreviewInfo previewInfo) {
+            @Nullable String wallpaperOptions, PreviewInfo previewInfo) {
         mTitle = title;
         mIsDefault = isDefault;
         mPreviewInfo = previewInfo;
         mWallpaperInfo = wallpaperInfo;
+        mWallpaperOptions = wallpaperOptions;
         mPackagesByCategory = Collections.unmodifiableMap(overlayPackages);
     }
 
@@ -177,6 +179,11 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
 
     public WallpaperInfo getWallpaperInfo() {
         return mWallpaperInfo;
+    }
+
+    @Nullable
+    public String getWallpaperOptions() {
+        return mWallpaperOptions;
     }
 
     boolean isDefault() {
@@ -300,11 +307,12 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
         @Dimension private int mCornerRadius;
         private Asset mWallpaperAsset;
         private WallpaperInfo mWallpaperInfo;
+        private String mWallpaperOptions;
         protected Map<String, String> mPackages = new HashMap<>();
         private List<Drawable> mAppIcons = new ArrayList<>();
 
         public ThemeBundle build(Context context) {
-            return new ThemeBundle(mTitle, mPackages, mIsDefault, mWallpaperInfo,
+            return new ThemeBundle(mTitle, mPackages, mIsDefault, mWallpaperInfo, mWallpaperOptions,
                     createPreviewInfo(context));
         }
 
@@ -406,6 +414,11 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
 
         public Builder setWallpaperAsset(Asset wallpaperAsset) {
             mWallpaperAsset = wallpaperAsset;
+            return this;
+        }
+
+        public Builder setWallpaperOptions(String wallpaperOptions) {
+            mWallpaperOptions = wallpaperOptions;
             return this;
         }
 

@@ -15,6 +15,8 @@
  */
 package com.android.customization.model.theme;
 
+import static android.content.res.Resources.ID_NULL;
+
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
 import static com.android.customization.model.ResourceConstants.ICONS_FOR_PREVIEW;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
@@ -86,6 +88,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     private static final String WALLPAPER_ATTRIBUTION_PREFIX = "theme_wallpaper_attribution_";
     private static final String WALLPAPER_THUMB_PREFIX = "theme_wallpaper_thumbnail_";
     private static final String WALLPAPER_ACTION_PREFIX = "theme_wallpaper_action_";
+    private static final String WALLPAPER_OPTIONS_PREFIX = "theme_wallpaper_options_";
 
     private static final String DEFAULT_THEME_NAME= "default";
     private static final String THEME_TITLE_FIELD = "_theme_title";
@@ -187,7 +190,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             String wallpaperThumbnailResName = WALLPAPER_THUMB_PREFIX + themeName;
             int wallpaperThumbnailResId = mStubApkResources.getIdentifier(wallpaperThumbnailResName,
                     "drawable", mStubPackageName);
-            if (wallpaperResId != Resources.ID_NULL) {
+            if (wallpaperResId != ID_NULL) {
                 builder.setWallpaperInfo(mStubPackageName, wallpaperResName,
                         themeName, wallpaperResId,
                         mStubApkResources.getIdentifier(WALLPAPER_TITLE_PREFIX + themeName,
@@ -197,20 +200,26 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                                 mStubPackageName),
                         mStubApkResources.getIdentifier(WALLPAPER_ACTION_PREFIX + themeName,
                                 "string", mStubPackageName))
-                        .setWallpaperAsset(wallpaperThumbnailResId != Resources.ID_NULL ?
+                        .setWallpaperAsset(wallpaperThumbnailResId != ID_NULL ?
                                 getDrawableResourceAsset(WALLPAPER_THUMB_PREFIX, themeName)
                                 : getDrawableResourceAsset(WALLPAPER_PREFIX, themeName));
             } else {
                 // Try to see if it's a live wallpaper reference
                 wallpaperResId = mStubApkResources.getIdentifier(wallpaperResName,
                         "string", mStubPackageName);
-                if (wallpaperResId != Resources.ID_NULL) {
+                if (wallpaperResId != ID_NULL) {
                     String wpComponent = mStubApkResources.getString(wallpaperResId);
+
+                    int wallpaperOptionsResId = mStubApkResources.getIdentifier(
+                            WALLPAPER_OPTIONS_PREFIX + themeName, "string", mStubPackageName);
+                    String wallpaperOptions = wallpaperOptionsResId != ID_NULL
+                            ? mStubApkResources.getString(wallpaperOptionsResId) : null;
+
                     String[] componentParts = wpComponent.split("/");
                     Intent liveWpIntent =  new Intent(WallpaperService.SERVICE_INTERFACE);
                     liveWpIntent.setComponent(
-                            new ComponentName(componentParts[0],
-                                    componentParts[0] + componentParts[1]));
+                            new ComponentName(componentParts[0], componentParts[1]));
+
                     Context appContext = mContext.getApplicationContext();
                     PackageManager pm = appContext.getPackageManager();
                     ResolveInfo resolveInfo =
@@ -221,9 +230,10 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
                             wallpaperInfo = new android.app.WallpaperInfo(appContext, resolveInfo);
                             LiveWallpaperInfo liveInfo = new LiveWallpaperInfo(wallpaperInfo);
                             builder.setLiveWallpaperInfo(liveInfo).setWallpaperAsset(
-                                    wallpaperThumbnailResId != Resources.ID_NULL ?
+                                    wallpaperThumbnailResId != ID_NULL ?
                                         getDrawableResourceAsset(WALLPAPER_THUMB_PREFIX, themeName)
-                                        : liveInfo.getThumbAsset(mContext));
+                                        : liveInfo.getThumbAsset(mContext))
+                                    .setWallpaperOptions(wallpaperOptions);
                         } catch (XmlPullParserException | IOException e) {
                             Log.w(TAG, "Skipping wallpaper " + resolveInfo.serviceInfo, e);
                         }
