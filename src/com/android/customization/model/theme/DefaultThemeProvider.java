@@ -94,6 +94,9 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     private static final String THEME_TITLE_FIELD = "_theme_title";
     private static final String THEME_ID_FIELD = "_theme_id";
 
+    // Maximum number of themes allowed (including default, pre-bundled and custom)
+    private static final int MAX_TOTAL_THEMES = 10;
+
     private final OverlayThemeExtractor mOverlayProvider;
     private List<ThemeBundle> mThemes;
     private final CustomizationPreferences mCustomizationPreferences;
@@ -403,9 +406,11 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             }
         }
 
-        // Add an empty one at the end.
-        mThemes.add(new CustomTheme(CustomTheme.newId(), mContext.getString(
-                R.string.custom_theme_title, customThemesCount + 1), new HashMap<>(), null));
+        if (mThemes.size() < MAX_TOTAL_THEMES) {
+            // Add an empty one at the end.
+            mThemes.add(new CustomTheme(CustomTheme.newId(), mContext.getString(
+                    R.string.custom_theme_title, customThemesCount + 1), new HashMap<>(), null));
+        }
 
     }
 
