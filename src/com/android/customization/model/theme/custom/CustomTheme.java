@@ -41,7 +41,7 @@ public class CustomTheme extends ThemeBundle {
 
     public CustomTheme(@NonNull String id, String title, Map<String, String> overlayPackages,
             @Nullable PreviewInfo previewInfo) {
-        super(title, overlayPackages, false, null, previewInfo);
+        super(title, overlayPackages, false, null, null, previewInfo);
         mId = id;
     }
 

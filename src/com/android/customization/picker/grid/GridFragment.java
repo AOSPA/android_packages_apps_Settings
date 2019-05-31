@@ -22,6 +22,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLayoutChangeListener;
@@ -31,9 +32,11 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.customization.model.CustomizationManager.Callback;
+import com.android.customization.model.CustomizationManager.OptionsFetchedListener;
 import com.android.customization.model.grid.GridOption;
 import com.android.customization.model.grid.GridOptionsManager;
 import com.android.customization.module.ThemesUserEventLogger;
@@ -51,12 +54,16 @@ import com.android.wallpaper.picker.ToolbarFragment;
 
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.List;
+
 /**
  * Fragment that contains the UI for selecting and applying a GridOption.
  */
 public class GridFragment extends ToolbarFragment {
 
     private static final int PREVIEW_FADE_DURATION_MS = 100;
+
+    private static final String TAG = "GridFragment";
 
     /**
      * Interface to be implemented by an Activity hosting a {@link GridFragment}
@@ -82,6 +89,9 @@ public class GridFragment extends ToolbarFragment {
     private GridOptionsManager mGridManager;
     private GridOption mSelectedOption;
     private PreviewPager mPreviewPager;
+    private ContentLoadingProgressBar mLoading;
+    private View mContent;
+    private View mError;
     private ThemesUserEventLogger mEventLogger;
 
     @Override
@@ -99,8 +109,11 @@ public class GridFragment extends ToolbarFragment {
         View view = inflater.inflate(
                 R.layout.fragment_grid_picker, container, /* attachToRoot */ false);
         setUpToolbar(view);
+        mContent = view.findViewById(R.id.content_section);
         mPreviewPager = view.findViewById(R.id.grid_preview_pager);
         mOptionsContainer = view.findViewById(R.id.options_container);
+        mLoading = view.findViewById(R.id.loading_indicator);
+        mError = view.findViewById(R.id.error_section);
         final Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         mScreenAspectRatio = (float) dm.heightPixels / dm.widthPixels;
@@ -161,26 +174,51 @@ public class GridFragment extends ToolbarFragment {
     }
 
     private void setUpOptions() {
-        mGridManager.fetchOptions(options -> {
-            mOptionsController = new OptionSelectorController<>(mOptionsContainer, options);
+        hideError();
+        mLoading.show();
+        mGridManager.fetchOptions(new OptionsFetchedListener<GridOption>() {
+            @Override
+            public void onOptionsLoaded(List<GridOption> options) {
+                mLoading.hide();
+                mOptionsController = new OptionSelectorController<>(mOptionsContainer, options);
 
-            mOptionsController.addListener(selected -> {
-                mSelectedOption = (GridOption) selected;
-                mEventLogger.logGridSelected(mSelectedOption);
-                createAdapter();
-            });
-            mOptionsController.initOptions(mGridManager);
-            for (GridOption option : options) {
-                if (option.isActive(mGridManager)) {
-                    mSelectedOption = option;
+                mOptionsController.addListener(selected -> {
+                    mSelectedOption = (GridOption) selected;
+                    mEventLogger.logGridSelected(mSelectedOption);
+                    createAdapter();
+                });
+                mOptionsController.initOptions(mGridManager);
+                for (GridOption option : options) {
+                    if (option.isActive(mGridManager)) {
+                        mSelectedOption = option;
+                    }
                 }
+                // For development only, as there should always be a grid set.
+                if (mSelectedOption == null) {
+                    mSelectedOption = options.get(0);
+                }
+                createAdapter();
             }
-            // For development only, as there should always be a grid set.
-            if (mSelectedOption == null) {
-                mSelectedOption = options.get(0);
+
+            @Override
+            public void onError(@Nullable Throwable throwable) {
+                if (throwable != null) {
+                    Log.e(TAG, "Error loading grid options", throwable);
+                }
+                showError();
             }
-            createAdapter();
         }, false);
+    }
+
+    private void hideError() {
+        mContent.setVisibility(View.VISIBLE);
+        mError.setVisibility(View.GONE);
+    }
+
+    private void showError() {
+        mLoading.hide();
+        mContent.setVisibility(View.GONE);
+        mError.setVisibility(View.VISIBLE);
     }
 
     private class GridPreviewPage extends PreviewPage {
