@@ -117,7 +117,7 @@ public class PreviewPager extends LinearLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if (mPageStyle == STYLE_ASPECT_RATIO && mViewPager.getMeasuredWidth() == 0) {
+        if (mPageStyle == STYLE_ASPECT_RATIO) {
             int availableWidth = MeasureSpec.getSize(widthMeasureSpec);
             int availableHeight = MeasureSpec.getSize(heightMeasureSpec);
             int indicatorHeight = mPageIndicator.getVisibility() == VISIBLE

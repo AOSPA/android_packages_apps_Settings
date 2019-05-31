@@ -36,6 +36,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
 import com.android.customization.model.theme.ThemeBundle.PreviewInfo;
+import com.android.customization.picker.TimeTicker;
 import com.android.customization.picker.theme.ThemePreviewPage.ThemeCoverPage;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
@@ -63,8 +64,10 @@ public class CustomThemeNameFragment extends CustomThemeStepFragment {
     private int[] mColorTileIds = {
             R.id.preview_color_qs_0_bg, R.id.preview_color_qs_1_bg, R.id.preview_color_qs_2_bg
     };
-    private int[] mColorTileIconIds = {
-            R.id.preview_color_qs_0_icon, R.id.preview_color_qs_1_icon, R.id.preview_color_qs_2_icon
+    private int[][] mColorTileIconIds = {
+            new int[]{ R.id.preview_color_qs_0_icon, 0},
+            new int[]{ R.id.preview_color_qs_1_icon, 1},
+            new int[] { R.id.preview_color_qs_2_icon, 3}
     };
 
     private int[] mShapeIconIds = {
@@ -74,7 +77,7 @@ public class CustomThemeNameFragment extends CustomThemeStepFragment {
 
     private Asset mWallpaperAsset;
     private ThemeCoverPage mCoverPage;
-
+    private TimeTicker mTicker;
     private EditText mNameEditor;
 
     @Override
@@ -104,6 +107,27 @@ public class CustomThemeNameFragment extends CustomThemeStepFragment {
         bindCover(view.findViewById(R.id.component_preview_content));
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTicker = TimeTicker.registerNewReceiver(getContext(), this::updateTime);
+        updateTime();
+    }
+
+    private void updateTime() {
+        if (mCoverPage != null) {
+            mCoverPage.updateTime();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (getContext() != null) {
+            getContext().unregisterReceiver(mTicker);
+        }
     }
 
     private void bindCover(CardView card) {
