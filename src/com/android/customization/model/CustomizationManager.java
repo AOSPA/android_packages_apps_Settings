@@ -15,6 +15,9 @@
  */
 package com.android.customization.model;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 
 import java.util.List;
@@ -49,6 +52,15 @@ public interface CustomizationManager<T extends CustomizationOption> {
          * Called when the options have been retrieved.
          */
         void onOptionsLoaded(List<T> options);
+
+        /**
+         * Called if there was an error loading grid options
+         */
+        default void onError(@Nullable Throwable throwable) {
+            if (throwable != null) {
+                Log.e("OptionsFecthedListener", "Error loading options", throwable);
+            }
+        }
     }
 
     /**

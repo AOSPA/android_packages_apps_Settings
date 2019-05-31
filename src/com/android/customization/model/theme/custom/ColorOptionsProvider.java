@@ -81,9 +81,6 @@ public class ColorOptionsProvider extends ThemeComponentOptionProvider<ColorOpti
         }
         for (String iconName : ICONS_FOR_PREVIEW) {
             try {
-                if (previewIcons.size() == COLOR_TILES_ICON_IDS.length) {
-                    break;
-                }
                 previewIcons.add(loadIconPreviewDrawable(iconName, iconPackage));
             } catch (NameNotFoundException | NotFoundException e) {
                 Log.w(TAG, String.format("Couldn't load icon in %s for color preview, will skip it",
