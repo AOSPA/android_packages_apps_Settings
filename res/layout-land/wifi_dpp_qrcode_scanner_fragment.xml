@@ -45,7 +45,8 @@
 
             <FrameLayout
                 android:layout_width="@dimen/qrcode_preview_size"
-                android:layout_height="@dimen/qrcode_preview_size">
+                android:layout_height="@dimen/qrcode_preview_size"
+                android:clipChildren="true">
                 <TextureView
                     android:id="@+id/preview_view"
                     android:layout_width="wrap_content"
@@ -61,6 +62,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
                 android:textAlignment="center"
                 android:textColor="?android:attr/colorError"
                 android:visibility="invisible"/>

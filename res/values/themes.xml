@@ -27,8 +27,11 @@
 
     <style name="Theme.Settings" parent="Theme.SettingsBase">
         <item name="preferenceTheme">@style/PreferenceTheme</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:clipChildren">false</item>
         <item name="android:listPreferredItemHeight">72dip</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
 
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="face_layout_theme">@style/FaceLayoutTheme</item>
@@ -88,6 +91,7 @@
     </style>
 
     <style name="ThemeOverlay.SwitchBar.Settings" parent="@*android:style/ThemeOverlay.DeviceDefault.ActionBar">
+        <item name="android:elevation">1dp</item>
         <item name="switchBarMarginStart">@dimen/switchbar_subsettings_margin_start</item>
         <item name="switchBarMarginEnd">@dimen/switchbar_subsettings_margin_end</item>
         <item name="switchBarBackgroundColor">@color/switchbar_background_color</item>
@@ -117,7 +121,7 @@
 
     <style name="Theme.AlertDialog.Base" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorAccent">@*android:color/accent_device_default_light</item>
-        <item name="android:background">@color/dialog_background</item>
+        <item name="android:colorBackground">@color/dialog_background</item>
     </style>
 
     <style name="Theme.AlertDialog" parent="Theme.AlertDialog.Base">
@@ -231,4 +235,17 @@
         <item name="android:textColorSecondary">@*android:color/secondary_text_light</item>
     </style>
 
+    <!-- Light theme for those pages inherit SubSettings and launched during setup flow -->
+    <style name="LightTheme.SubSettings.SetupWizard" parent="@android:style/Theme.DeviceDefault.Light">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:navigationBarDividerColor">@*android:color/navigation_bar_divider_device_default_settings</item>
+
+        <item name="android:colorPrimary">@android:color/white</item>
+        <item name="android:colorPrimaryDark">@android:color/white</item>
+        <item name="android:colorAccent">@color/material_blue_700</item>
+    </style>
 </resources>
