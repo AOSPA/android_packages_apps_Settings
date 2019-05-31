@@ -160,12 +160,6 @@ abstract class ThemePreviewPage extends PreviewPage {
                 ImageView iconView = card.findViewById(mShapeIconIds[i]);
                 iconView.setBackground(mShapeAppIcons.get(i));
             }
-
-            Drawable background = card.findViewById(R.id.theme_preview_card_background)
-                    .getBackground();
-            if (background != null) {
-                background.setAlpha(128);
-            }
         }
 
         @Override
@@ -198,9 +192,7 @@ abstract class ThemePreviewPage extends PreviewPage {
             card.setOnClickListener(mEditClickListener);
             editLabel.setVisibility(mEditClickListener != null
                     ? View.VISIBLE : View.INVISIBLE);
-            ColorStateList themeAccentColor = ColorStateList.valueOf(accentColor);
-            editLabel.setTextColor(themeAccentColor);
-            editLabel.setCompoundDrawableTintList(themeAccentColor);
+
             View qsb = card.findViewById(R.id.theme_qsb);
             if (qsb != null && qsb.getVisibility() == View.VISIBLE) {
                 if (qsb.getBackground() instanceof GradientDrawable) {

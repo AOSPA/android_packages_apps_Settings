@@ -90,6 +90,7 @@
 
     <style name="CoverTitleTextAppearance" parent="CardTitleTextAppearance">
         <item name="android:textSize">@dimen/card_cover_title_text_size</item>
+        <item name="android:textColor">@color/white_70_alpha</item>
     </style>
 
     <style name="FontCardTitleStyle" parent="HeaderTextAppearance">
@@ -105,6 +106,7 @@
 
     <style name="EditLabelStyle">
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault</item>
+        <item name="android:textColor">@color/material_white_100</item>
     </style>
 
     <style name="CustomThemeNameEditText" parent="@android:style/Widget.DeviceDefault.EditText">
