@@ -67,13 +67,12 @@
         <ImageView
             android:layout_width="@dimen/preview_theme_icon_size"
             android:layout_height="@dimen/preview_theme_icon_size"
-            android:id="@+id/preview_color_qs_2_bg"
-            android:tint="@color/tile_disabled_background_color"/>
+            android:id="@+id/preview_color_qs_2_bg"/>
         <ImageView
             android:layout_width="@dimen/preview_theme_tile_size"
             android:layout_height="@dimen/preview_theme_tile_size"
             android:id="@+id/preview_color_qs_2_icon"
-            android:color="@color/tile_disabled_icon_color"
+            android:tint="@color/tile_enabled_icon_color"
             android:layout_gravity="center"/>
     </FrameLayout>
 
