@@ -70,6 +70,7 @@ import java.util.Set;
  */
 public class ThemeBundle implements CustomizationOption<ThemeBundle> {
 
+    private final static String EMPTY_JSON = "{}";
     private final String mTitle;
     private final PreviewInfo mPreviewInfo;
     private final boolean mIsDefault;
@@ -144,7 +145,8 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
             return false;
         }
         if (mIsDefault) {
-            return other.isDefault() || TextUtils.isEmpty(other.getSerializedPackages());
+            return other.isDefault() || TextUtils.isEmpty(other.getSerializedPackages())
+                    || EMPTY_JSON.equals(other.getSerializedPackages());
         }
         // Map#equals ensures keys and values are compared.
         return mPackagesByCategory.equals(other.mPackagesByCategory);
