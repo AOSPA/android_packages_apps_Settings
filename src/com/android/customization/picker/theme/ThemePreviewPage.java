@@ -78,6 +78,7 @@ abstract class ThemePreviewPage extends PreviewPage {
 
     static class ThemeCoverPage extends ThemePreviewPage implements TimeContainer {
 
+        public static final int COVER_PAGE_WALLPAPER_ALPHA = 0x66;
         /**
          * Maps which icon from ResourceConstants#ICONS_FOR_PREVIEW to use for each icon in the
          * top bar (fake "status bar") of the cover page.
