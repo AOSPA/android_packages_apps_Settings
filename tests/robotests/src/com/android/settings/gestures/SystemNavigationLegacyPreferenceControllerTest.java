@@ -131,6 +131,12 @@ public class SystemNavigationLegacyPreferenceControllerTest {
     }
 
     @Test
+    public void testIsGestureAvailable_noOverlayPackage_shouldReturnFalse() {
+        assertThat(SystemNavigationLegacyPreferenceController.isGestureAvailable(mContext,
+                "com.package.fake")).isFalse();
+    }
+
+    @Test
     public void testIsChecked_defaultIsLegacy_shouldReturnTrue() {
         SettingsShadowResources.overrideResource(R.integer.config_navBarInteractionMode,
                 NAV_BAR_MODE_3BUTTON);
@@ -182,8 +188,8 @@ public class SystemNavigationLegacyPreferenceControllerTest {
     }
 
     @Test
-    public void isSliceableCorrectKey_returnsTrue() {
-        assertThat(mController.isSliceable()).isTrue();
+    public void isSliceable_returnsFalse() {
+        assertThat(mController.isSliceable()).isFalse();
     }
 
     @Test
