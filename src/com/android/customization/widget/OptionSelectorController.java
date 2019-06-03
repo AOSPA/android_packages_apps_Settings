@@ -152,6 +152,9 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
                     }
                 }
             }
+        } else {
+            // Item is not visible, make sure the item is re-bound when it becomes visible
+            mAdapter.notifyItemChanged(index);
         }
     }
 
