@@ -24,6 +24,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.PersistableBundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
@@ -37,6 +41,7 @@ import android.telephony.euicc.EuiccManager;
 import android.telephony.ims.feature.ImsFeature;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -45,7 +50,10 @@ import com.android.ims.ImsManager;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.graph.SignalDrawable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -64,6 +72,10 @@ public class MobileNetworkUtils {
             "esim.enable_esim_system_ui_by_default";
     private static final String LEGACY_ACTION_CONFIGURE_PHONE_ACCOUNT =
             "android.telecom.action.CONNECTION_SERVICE_CONFIGURE";
+
+    // The following constants are used to draw signal icon.
+    public static final int NO_CELL_DATA_TYPE_ICON = 0;
+    public static final Drawable EMPTY_DRAWABLE = new ColorDrawable(Color.TRANSPARENT);
 
     /**
      * Returns if DPC APNs are enforced.
@@ -277,8 +289,7 @@ public class MobileNetworkUtils {
                 return true;
             }
 
-            if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA
-                    && !isTdscdmaSupported(context, telephonyManager)) {
+            if (shouldSpeciallyUpdateGsmCdma(context, subId)) {
                 return true;
             }
         }
@@ -296,16 +307,15 @@ public class MobileNetworkUtils {
         if (isGsmBasicOptions(context, subId)) {
             return true;
         }
-        final int settingsNetworkMode = android.provider.Settings.Global.getInt(
+        final int networkMode = android.provider.Settings.Global.getInt(
                 context.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
                 Phone.PREFERRED_NT_MODE);
         if (isWorldMode(context, subId)) {
-            if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
-                    || settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
+            if (networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
+                    || networkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
                 return true;
-            } else if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA
-                    && !MobileNetworkUtils.isTdscdmaSupported(context, subId)) {
+            } else if (shouldSpeciallyUpdateGsmCdma(context, subId)) {
                 return true;
             }
         }
@@ -362,16 +372,24 @@ public class MobileNetworkUtils {
             return false;
         }
 
+        final int networkMode = android.provider.Settings.Global.getInt(
+                context.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
+                Phone.PREFERRED_NT_MODE);
+        if (networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
+                && isWorldMode(context, subId)) {
+            return false;
+        }
+        if (shouldSpeciallyUpdateGsmCdma(context, subId)) {
+            return false;
+        }
+
         if (isGsmBasicOptions(context, subId)) {
             return true;
         }
 
-        final int settingsNetworkMode = android.provider.Settings.Global.getInt(
-                context.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                Phone.PREFERRED_NT_MODE);
         if (isWorldMode(context, subId)) {
-            if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
+            if (networkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
                 return true;
             }
         }
@@ -413,7 +431,6 @@ public class MobileNetworkUtils {
         }
         return false;
     }
-
 
     /**
      * Return subId that supported by search. If there are more than one, return first one,
@@ -460,5 +477,62 @@ public class MobileNetworkUtils {
                 return callback.getAvailabilityStatus(subIds[0]);
             }
         }
+    }
+
+    /**
+     * This method is migrated from {@link com.android.phone.MobileNetworkSettings} and we should
+     * use it carefully. This code snippet doesn't have very clear meaning however we should
+     * update GSM or CDMA differently based on what it returns.
+     *
+     * 1. For all CDMA settings, make them visible if it return {@code true}
+     * 2. For GSM settings, make them visible if it return {@code true} unless 3
+     * 3. For network select settings, make it invisible if it return {@code true}
+     */
+    @VisibleForTesting
+    static boolean shouldSpeciallyUpdateGsmCdma(Context context, int subId) {
+        final int networkMode = android.provider.Settings.Global.getInt(
+                context.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
+                Phone.PREFERRED_NT_MODE);
+        if (networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM
+                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
+                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA
+                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_WCDMA
+                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
+                || networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA) {
+            if (!isTdscdmaSupported(context, subId) && isWorldMode(context, subId)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static Drawable getSignalStrengthIcon(Context context, int level, int numLevels,
+            int iconType, boolean cutOut) {
+        SignalDrawable signalDrawable = new SignalDrawable(context);
+        signalDrawable.setLevel(
+                SignalDrawable.getState(level, numLevels, cutOut));
+
+        // Make the network type drawable
+        Drawable networkDrawable =
+                iconType == NO_CELL_DATA_TYPE_ICON
+                        ? EMPTY_DRAWABLE
+                        : context
+                                .getResources().getDrawable(iconType, context.getTheme());
+
+        // Overlay the two drawables
+        final Drawable[] layers = {networkDrawable, signalDrawable};
+        final int iconSize =
+                context.getResources().getDimensionPixelSize(R.dimen.signal_strength_icon_size);
+
+        LayerDrawable icons = new LayerDrawable(layers);
+        // Set the network type icon at the top left
+        icons.setLayerGravity(0 /* index of networkDrawable */, Gravity.TOP | Gravity.LEFT);
+        // Set the signal strength icon at the bottom right
+        icons.setLayerGravity(1 /* index of SignalDrawable */, Gravity.BOTTOM | Gravity.RIGHT);
+        icons.setLayerSize(1 /* index of SignalDrawable */, iconSize, iconSize);
+        icons.setTintList(Utils.getColorAttr(context, android.R.attr.colorControlNormal));
+        return icons;
     }
 }
