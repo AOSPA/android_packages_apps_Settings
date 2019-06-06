@@ -20,6 +20,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.StringRes;
+import androidx.constraintlayout.widget.Guideline;
 
 import com.android.customization.picker.BasePreviewAdapter.PreviewPage;
 import com.android.wallpaper.R;
@@ -227,6 +228,12 @@ abstract class ThemePreviewPage extends PreviewPage {
                             cornerRadius, cornerRadius, cornerRadius, cornerRadius,
                             cornerRadius, cornerRadius, cornerRadius, cornerRadius});
                 }
+            }
+
+            Guideline guideline = card.findViewById(R.id.guideline);
+            if (guideline != null) {
+                guideline.setGuidelineEnd(card.getResources().getDimensionPixelOffset(
+                        R.dimen.preview_theme_cover_content_bottom));
             }
         }
 

@@ -26,7 +26,7 @@
     android:maxHeight="@dimen/preview_theme_max_height"
     android:minHeight="@dimen/preview_theme_min_height"
     android:paddingHorizontal="@dimen/preview_card_padding"
-    android:paddingTop="@dimen/preview_card_padding">
+    android:paddingTop="@dimen/preview_card_top_padding">
 
         <ViewStub
             android:id="@+id/theme_preview_top_bar"
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/edit_label"
-            app:layout_constraintGuide_end="@dimen/min_taptarget_height"
+            app:layout_constraintGuide_end="@dimen/preview_theme_content_bottom"
             app:layout_constraintTop_toBottomOf="@+id/theme_preview_card_body_container"/>
 
         <TextView

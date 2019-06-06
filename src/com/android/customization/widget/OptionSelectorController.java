@@ -194,7 +194,7 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
                 if (mShowCheckmark && option.equals(mAppliedOption)) {
                     Resources res = mContainer.getContext().getResources();
                     Drawable checkmark = res.getDrawable(R.drawable.ic_check_circle_filled_24px);
-                    Drawable frame = holder.itemView.getForeground();
+                    Drawable frame = holder.tileView.getForeground();
                     Drawable[] layers = {frame, checkmark};
                     if (frame == null) {
                         layers = new Drawable[]{checkmark};
@@ -204,20 +204,20 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
                     // Position at lower right
                     int idx = layers.length - 1;
                     int checkSize = (int) res.getDimension(R.dimen.check_size);
-                    int checkOffset = (int) res.getDimension(R.dimen.check_offset);
+                    int checkOffset = (int) res.getDimensionPixelOffset(R.dimen.check_offset);
                     checkedFrame.setLayerGravity(idx, Gravity.BOTTOM | Gravity.RIGHT);
                     checkedFrame.setLayerWidth(idx, checkSize);
                     checkedFrame.setLayerHeight(idx, checkSize);
                     checkedFrame.setLayerInsetBottom(idx, checkOffset);
-                    checkedFrame.setLayerInsetLeft(idx, checkOffset);
-                    holder.itemView.setForeground(checkedFrame);
+                    checkedFrame.setLayerInsetRight(idx, checkOffset);
+                    holder.tileView.setForeground(checkedFrame);
 
                     // Initialize the currently applied option
                     CharSequence cd = mContainer.getContext().getString(
                             R.string.option_applied_previewed_description, option.getTitle());
                     holder.labelView.setContentDescription(cd);
                 } else if (mShowCheckmark) {
-                    holder.itemView.setForeground(null);
+                    holder.tileView.setForeground(null);
                 }
             }
 
