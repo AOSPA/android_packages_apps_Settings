@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -345,6 +346,12 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     @Override
     public void doneFetchingCategories() {
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+            @NonNull int[] grantResults) {
+        mDelegate.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
