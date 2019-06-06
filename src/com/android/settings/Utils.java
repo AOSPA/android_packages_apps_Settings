@@ -149,6 +149,11 @@ public final class Utils extends com.android.settingslib.Utils {
     public static final String PROPERTY_PERMISSIONS_HUB_ENABLED = "permissions_hub_enabled";
 
     /**
+     * An int extra specifying a slot ID.
+     */
+    public static final String EXTRA_SLOT_ID = "slot_id";
+
+    /**
      * Finds a matching activity for a preference's intent. If a matching
      * activity is not found, it will remove the preference.
      *
@@ -1090,6 +1095,7 @@ public final class Utils extends com.android.settingslib.Utils {
             }
         } catch (RemoteException e) {
             // Use aosp NetworkSetting to handle the selection intent
+            Log.e(TAG, "Got exception in isNetworkSettingsApkAvailable.", e);
         }
         return false;
     }
