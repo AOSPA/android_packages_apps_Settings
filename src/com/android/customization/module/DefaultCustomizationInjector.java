@@ -88,6 +88,7 @@ public class DefaultCustomizationInjector extends BaseWallpaperInjector
 
     @Override
     public Fragment getPreviewFragment(
+            Context context,
             WallpaperInfo wallpaperInfo,
             int mode,
             boolean testingModeEnabled) {
