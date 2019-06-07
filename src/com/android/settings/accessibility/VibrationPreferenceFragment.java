@@ -128,6 +128,15 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
             // Update vibration intensity setting
             Settings.System.putInt(getContext().getContentResolver(),
                     getVibrationIntensitySetting(), candidate.getIntensity());
+        } else {
+            // We can't play preview effect here for all cases because that causes a data race
+            // (VibratorService may access intensity settings before these settings are updated).
+            // But we can't just play it in intensity settings update observer, because the
+            // intensity settings are not changed if we turn the vibration off, then on.
+            //
+            // In this case we sould play the preview here.
+            // To be refactored in b/132952771
+            playVibrationPreview();
         }
     }
 
