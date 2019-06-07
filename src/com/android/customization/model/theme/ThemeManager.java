@@ -23,7 +23,6 @@ import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_THEMEPICKER;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
-
 import android.graphics.Point;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -37,10 +36,9 @@ import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.module.ThemesUserEventLogger;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
-import com.android.wallpaper.module.WallpaperPersister;
+import com.android.wallpaper.model.LiveWallpaperInfo;
 import com.android.wallpaper.module.WallpaperPersister.SetWallpaperCallback;
 import com.android.wallpaper.module.WallpaperSetter;
-import com.android.wallpaper.picker.SetWallpaperDialogFragment.Listener;
 import com.android.wallpaper.util.WallpaperCropUtils;
 
 import org.json.JSONObject;
@@ -93,26 +91,12 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
         // Set wallpaper
         if (theme.shouldUseThemeWallpaper()) {
             mWallpaperSetter.requestDestination(mActivity, mActivity.getSupportFragmentManager(),
-                    R.string.set_theme_wallpaper_dialog_message, theme.getWallpaperInfo(),
-                    new Listener() {
-                        @Override
-                        public void onSetHomeScreen() {
-                            applyWallpaper(theme, WallpaperPersister.DEST_HOME_SCREEN,
-                                    createSetWallpaperCallback(theme, callback));
-                        }
-
-                        @Override
-                        public void onSetLockScreen() {
-                            applyWallpaper(theme, WallpaperPersister.DEST_LOCK_SCREEN,
-                                    createSetWallpaperCallback(theme, callback));
-                        }
-
-                        @Override
-                        public void onSetBoth() {
-                            applyWallpaper(theme, WallpaperPersister.DEST_BOTH,
-                                    createSetWallpaperCallback(theme, callback));
-                        }
-                    });
+                    R.string.set_theme_wallpaper_dialog_message,
+                    destination -> applyWallpaper(
+                            theme,
+                            destination,
+                            createSetWallpaperCallback(theme, callback)),
+                    theme.getWallpaperInfo() instanceof LiveWallpaperInfo);
 
         } else {
             applyOverlays(theme, callback);
@@ -169,7 +153,7 @@ public class ThemeManager implements CustomizationManager<ThemeBundle> {
 
     private void applyOverlays(ThemeBundle theme, Callback callback) {
         boolean allApplied = Settings.Secure.putString(mActivity.getContentResolver(),
-                ResourceConstants.THEME_SETTING, theme.getSerializedPackages());
+                ResourceConstants.THEME_SETTING, theme.getSerializedPackagesWithTimestamp());
         if (theme instanceof CustomTheme) {
             storeCustomTheme((CustomTheme) theme);
         }

@@ -31,7 +31,9 @@ import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.PathShape;
+import android.icu.text.SimpleDateFormat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -52,14 +54,17 @@ import com.android.wallpaper.asset.BitmapCachingAsset;
 import com.android.wallpaper.model.LiveWallpaperInfo;
 import com.android.wallpaper.model.WallpaperInfo;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -69,6 +74,10 @@ import java.util.Set;
  * abstraction representing a series of overlays to be applied to the system.
  */
 public class ThemeBundle implements CustomizationOption<ThemeBundle> {
+
+    private static final String TAG = "ThemeBundle";
+    private final static String EMPTY_JSON = "{}";
+    private final static String TIMESTAMP_FIELD = "_applied_timestamp";
 
     private final String mTitle;
     private final PreviewInfo mPreviewInfo;
@@ -120,10 +129,10 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
     @Override
     public boolean isActive(CustomizationManager<ThemeBundle> manager) {
         ThemeManager themeManager = (ThemeManager) manager;
-        String serializedOverlays = themeManager.getStoredOverlays();
 
         if (mIsDefault) {
-            return TextUtils.isEmpty(serializedOverlays);
+            String serializedOverlays = themeManager.getStoredOverlays();
+            return TextUtils.isEmpty(serializedOverlays) || EMPTY_JSON.equals(serializedOverlays);
         } else {
             Map<String, String> currentOverlays = themeManager.getCurrentOverlays();
             return mPackagesByCategory.equals(currentOverlays);
@@ -144,7 +153,8 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
             return false;
         }
         if (mIsDefault) {
-            return other.isDefault() || TextUtils.isEmpty(other.getSerializedPackages());
+            return other.isDefault() || TextUtils.isEmpty(other.getSerializedPackages())
+                    || EMPTY_JSON.equals(other.getSerializedPackages());
         }
         // Map#equals ensures keys and values are compared.
         return mPackagesByCategory.equals(other.mPackagesByCategory);
@@ -195,19 +205,27 @@ public class ThemeBundle implements CustomizationOption<ThemeBundle> {
     }
 
     public String getSerializedPackages() {
-        if (isDefault()) {
-            return "";
-        }
-        return getJsonPackages().toString();
+        return getJsonPackages(false).toString();
     }
 
-    JSONObject getJsonPackages() {
+    public String getSerializedPackagesWithTimestamp() {
+        return getJsonPackages(true).toString();
+    }
+
+    JSONObject getJsonPackages(boolean insertTimestamp) {
         if (isDefault()) {
             return new JSONObject();
         }
         JSONObject json = new JSONObject(mPackagesByCategory);
         // Remove items with null values to avoid deserialization issues.
         removeNullValues(json);
+        if (insertTimestamp) {
+            try {
+                json.put(TIMESTAMP_FIELD, System.currentTimeMillis());
+            } catch (JSONException e) {
+                Log.e(TAG, "Couldn't add timestamp to serialized themebundle");
+            }
+        }
         return json;
     }
 
