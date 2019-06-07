@@ -349,7 +349,7 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
     }
 
     private void addThemeBundleToArray(JSONArray themesArray, ThemeBundle themeBundle) {
-        JSONObject jsonPackages = themeBundle.getJsonPackages();
+        JSONObject jsonPackages = themeBundle.getJsonPackages(false);
         try {
             jsonPackages.put(THEME_TITLE_FIELD, themeBundle.getTitle());
             if (themeBundle instanceof CustomTheme) {
