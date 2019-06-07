@@ -34,7 +34,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +60,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Objects;
 
 /**
@@ -92,11 +90,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
     public abstract void bindPreview(ViewGroup container);
 
     public Builder buildStep(Builder builder) {
-        getOverlayPackages().forEach((category, packageName) -> {
-            if (!TextUtils.isEmpty(packageName)) {
-                builder.addOverlayPackage(category, packageName);
-            }
-        });
+        getOverlayPackages().forEach(builder::addOverlayPackage);
         return builder;
     }
 

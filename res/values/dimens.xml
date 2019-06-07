@@ -23,7 +23,7 @@
     <dimen name="tip_dot_line_width">2dp</dimen>
 
     <dimen name="check_size">20dp</dimen>
-    <dimen name="check_offset">4dp</dimen>
+    <dimen name="check_offset">-4dp</dimen>
 
     <dimen name="preview_indicator_width">16dp</dimen>
     <dimen name="preview_indicator_height">8dp</dimen>
@@ -39,7 +39,7 @@
     <dimen name="component_preview_page_bottom_margin">16dp</dimen>
 
     <!-- Dimensions for the customization option tiles -->
-    <dimen name="options_container_height">100dp</dimen>
+    <dimen name="options_container_height">104dp</dimen>
     <dimen name="options_container_width">0dp</dimen>
     <dimen name="option_tile_width">72dp</dimen>
     <dimen name="theme_option_icon_sample_height">18dp</dimen>
@@ -62,6 +62,7 @@
     <dimen name="theme_option_label_margin">4dp</dimen>
 
     <dimen name="preview_card_padding">20dp</dimen>
+    <dimen name="preview_card_top_padding">@dimen/preview_card_padding</dimen>
 
     <dimen name="card_title_text_size">16sp</dimen>
     <dimen name="card_cover_title_text_size">24sp</dimen>
@@ -77,8 +78,11 @@
     <dimen name="preview_theme_icon_size">30dp</dimen>
     <dimen name="preview_theme_tile_size">16dp</dimen>
     <dimen name="preview_theme_shape_size">36dp</dimen>
+    <dimen name="preview_theme_cover_topbar_clock_size">14sp</dimen>
     <dimen name="preview_theme_cover_topbar_icon_size">16dp</dimen>
     <dimen name="preview_theme_cover_content_extra_margin">16dp</dimen>
+    <dimen name="preview_theme_content_bottom">@dimen/min_taptarget_height</dimen>
+    <dimen name="preview_theme_cover_content_bottom">@dimen/preview_theme_content_bottom</dimen>
 
     <dimen name="font_preview_body_width">200dp</dimen>
     <dimen name="font_preview_divider_gap">30dp</dimen>
@@ -100,4 +104,5 @@
     <dimen name="roundCornerThreshold">16dp</dimen>
 
     <dimen name="min_taptarget_height">48dp</dimen>
+
 </resources>

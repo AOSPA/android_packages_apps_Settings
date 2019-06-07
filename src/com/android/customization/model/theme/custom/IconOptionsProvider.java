@@ -86,7 +86,7 @@ public class IconOptionsProvider extends ThemeComponentOptionProvider<IconOption
         }
 
         for (String overlayPackage : mSysUiIconsOverlayPackages) {
-            addOrUpdateOption(optionsByPrefix, overlayPackage,  OVERLAY_CATEGORY_ICON_SYSUI);
+            addOrUpdateOption(optionsByPrefix, overlayPackage, OVERLAY_CATEGORY_ICON_SYSUI);
         }
 
         for (String overlayPackage : mSettingsIconsOverlayPackages) {
@@ -142,6 +142,11 @@ public class IconOptionsProvider extends ThemeComponentOptionProvider<IconOption
         } catch (NameNotFoundException | NotFoundException e) {
             Log.w(TAG, "Didn't find SystemUi package icons, will skip option", e);
         }
+        option.addOverlayPackage(OVERLAY_CATEGORY_ICON_ANDROID, null);
+        option.addOverlayPackage(OVERLAY_CATEGORY_ICON_SYSUI, null);
+        option.addOverlayPackage(OVERLAY_CATEGORY_ICON_SETTINGS, null);
+        option.addOverlayPackage(OVERLAY_CATEGORY_ICON_LAUNCHER, null);
+        option.addOverlayPackage(OVERLAY_CATEGORY_ICON_THEMEPICKER, null);
         mOptions.add(option);
     }
 
