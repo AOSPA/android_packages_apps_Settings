@@ -21,7 +21,13 @@
     android:orientation="vertical"
     android:background="?android:colorPrimary">
     <include layout="@layout/section_header"/>
-    <LinearLayout
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+        android:id="@+id/content_section"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
@@ -62,4 +68,28 @@
 
         </LinearLayout>
     </LinearLayout>
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/loading_indicator"
+            style="@android:style/Widget.DeviceDefault.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:layout_gravity="center_horizontal|top"
+            android:indeterminate="true"/>
+
+        <FrameLayout
+            android:id="@+id/error_section"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/error_message"
+                style="@style/HeaderTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/something_went_wrong"/>
+        </FrameLayout>
+    </FrameLayout>
 </LinearLayout>
