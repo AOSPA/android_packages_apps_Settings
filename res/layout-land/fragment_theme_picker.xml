@@ -22,55 +22,88 @@
     android:background="?android:colorPrimary">
     <include layout="@layout/section_header"/>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <com.android.customization.widget.PreviewPager
-            android:id="@+id/theme_preview_pager"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/secondary_color"/>
-
+        android:layout_height="match_parent">
         <LinearLayout
-            android:id="@+id/options_section"
-            android:layout_width="0dp"
+            android:id="@+id/content_section"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:paddingVertical="10dp"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/options_container"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+            <com.android.customization.widget.PreviewPager
+                android:id="@+id/theme_preview_pager"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/secondary_color"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/divider_color"/>
+            <LinearLayout
+                android:id="@+id/options_section"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingVertical="10dp"
+                android:orientation="vertical">
 
-            <RelativeLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/options_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:paddingHorizontal="10dp">
+                    <CheckBox
+                        android:id="@+id/use_my_wallpaper"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/apply_button"
+                        android:ellipsize="end"
+                        android:paddingLeft="4dp"
+                        android:minHeight="@dimen/min_taptarget_height"
+                        android:text="@string/keep_my_wallpaper"/>
+                    <Button
+                        android:id="@+id/apply_button"
+                        style="@style/ActionPrimaryButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/apply_theme_btn"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/loading_indicator"
+            style="@android:style/Widget.DeviceDefault.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:layout_gravity="center_horizontal|top"
+            android:indeterminate="true"/>
+
+        <FrameLayout
+            android:id="@+id/error_section"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/error_message"
+                style="@style/HeaderTextAppearance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="10dp">
-                <CheckBox
-                    android:id="@+id/use_my_wallpaper"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toStartOf="@+id/apply_button"
-                    android:ellipsize="end"
-                    android:paddingLeft="4dp"
-                    android:minHeight="@dimen/min_taptarget_height"
-                    android:text="@string/keep_my_wallpaper"/>
-                <Button
-                    android:id="@+id/apply_button"
-                    style="@style/ActionPrimaryButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:text="@string/apply_theme_btn"/>
-            </RelativeLayout>
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/something_went_wrong"/>
+        </FrameLayout>
+    </FrameLayout>
 </LinearLayout>
