@@ -88,7 +88,11 @@ public class BasePreviewAdapter<T extends PreviewPage> extends PagerAdapter {
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position,
             @NonNull Object object) {
-        ((T) object).card = null;
+        View card = ((PreviewPage) object).card;
+        ((PreviewPage) object).card = null;
+        if (card.getParent() == container) {
+            container.removeView(card);
+        }
     }
 
     /**
