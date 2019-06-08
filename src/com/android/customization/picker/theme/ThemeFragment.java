@@ -17,7 +17,6 @@ package com.android.customization.picker.theme;
 
 import android.app.Activity;
 import android.app.WallpaperColors;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -48,7 +47,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.model.CustomizationManager.OptionsFetchedListener;
-import com.android.customization.model.grid.GridOption;
 import com.android.customization.model.theme.ThemeBundle;
 import com.android.customization.model.theme.ThemeBundle.PreviewInfo;
 import com.android.customization.model.theme.ThemeManager;
@@ -377,12 +375,13 @@ public class ThemeFragment extends ToolbarFragment {
             super(activity, R.layout.theme_preview_card);
             final Resources res = activity.getResources();
             final PreviewInfo previewInfo = theme.getPreviewInfo();
+
             Drawable coverScrim = theme instanceof CustomTheme
-                    ? res.getDrawable(R.drawable.theme_cover_scrim_custom, activity.getTheme())
-                    : res.getDrawable(R.drawable.theme_cover_scrim, activity.getTheme());
+                    ? res.getDrawable(R.drawable.theme_cover_scrim, activity.getTheme())
+                    : null;
 
             WallpaperPreviewLayoutListener wallpaperListener = new WallpaperPreviewLayoutListener(
-                    theme, previewInfo, coverScrim);
+                    theme, previewInfo, coverScrim, true);
 
             addPage(new ThemeCoverPage(activity, theme.getTitle(),
                     previewInfo.resolveAccentColor(res), previewInfo.icons,
@@ -490,7 +489,7 @@ public class ThemeFragment extends ToolbarFragment {
                         previewInfo.resolveAccentColor(res)) {
 
                     private final WallpaperPreviewLayoutListener mListener =
-                            new WallpaperPreviewLayoutListener(theme, previewInfo, null);
+                            new WallpaperPreviewLayoutListener(theme, previewInfo, null, false);
 
                     @Override
                     protected boolean containsWallpaper() {
@@ -531,12 +530,14 @@ public class ThemeFragment extends ToolbarFragment {
             private final ThemeBundle mTheme;
             private final PreviewInfo mPreviewInfo;
             private final Drawable mScrim;
+            private final boolean mIsTranslucent;
 
             public WallpaperPreviewLayoutListener(ThemeBundle theme, PreviewInfo previewInfo,
-                    Drawable scrim) {
+                    Drawable scrim, boolean translucent) {
                 mTheme = theme;
                 mPreviewInfo = previewInfo;
                 mScrim = scrim;
+                mIsTranslucent = translucent;
             }
 
             @Override
@@ -559,11 +560,14 @@ public class ThemeFragment extends ToolbarFragment {
             private void setWallpaperBitmap(View view, Bitmap bitmap) {
                 Resources res = view.getContext().getResources();
                 Drawable background = new BitmapDrawable(res, bitmap);
+                if (mIsTranslucent) {
+                    background.setAlpha(ThemeCoverPage.COVER_PAGE_WALLPAPER_ALPHA);
+                }
                 if (mScrim != null) {
                     background = new LayerDrawable(new Drawable[]{background, mScrim});
                 }
                 view.findViewById(R.id.theme_preview_card_background).setBackground(background);
-                if (mScrim == null) {
+                if (mScrim == null && !mIsTranslucent) {
                     int colorsHint = WallpaperColors.fromBitmap(bitmap).getColorHints();
                     TextView header = view.findViewById(R.id.theme_preview_card_header);
                     if ((colorsHint & WallpaperColors.HINT_SUPPORTS_DARK_TEXT) == 0) {

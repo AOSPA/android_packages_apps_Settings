@@ -15,17 +15,17 @@
  */
 package com.android.customization.widget;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,7 +35,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
-import com.android.customization.model.theme.custom.ThemeComponentOption;
 import com.android.wallpaper.R;
 
 import java.util.HashSet;
@@ -130,28 +129,24 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
 
             if (holder instanceof TileViewHolder) {
                 TileViewHolder tileHolder = (TileViewHolder) holder;
-                if (tileHolder.labelView != null) {
-                    if (isActivated) {
-                        if (option == mAppliedOption) {
-                            CharSequence cd = mContainer.getContext().getString(
-                                    R.string.option_applied_previewed_description,
-                                    option.getTitle());
-                            tileHolder.labelView.setContentDescription(cd);
-                        } else {
-                            CharSequence cd = mContainer.getContext().getString(
-                                    R.string.option_previewed_description, option.getTitle());
-                            tileHolder.labelView.setContentDescription(cd);
-                        }
-                    } else if (option == mAppliedOption) {
-                        CharSequence cd = mContainer.getContext().getString(
-                                R.string.option_applied_description, option.getTitle());
-                        tileHolder.labelView.setContentDescription(cd);
+                if (isActivated) {
+                    if (option == mAppliedOption && mShowCheckmark) {
+                        tileHolder.setContentDescription(mContainer.getContext(), option,
+                            R.string.option_applied_previewed_description);
                     } else {
-                        // Remove content description
-                        tileHolder.labelView.setContentDescription(null);
+                        tileHolder.setContentDescription(mContainer.getContext(), option,
+                            R.string.option_previewed_description);
                     }
+                } else if (option == mAppliedOption && mShowCheckmark) {
+                    tileHolder.setContentDescription(mContainer.getContext(), option,
+                        R.string.option_applied_description);
+                } else {
+                    tileHolder.resetContentDescription();
                 }
             }
+        } else {
+            // Item is not visible, make sure the item is re-bound when it becomes visible
+            mAdapter.notifyItemChanged(index);
         }
     }
 
@@ -191,7 +186,7 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
                 if (mShowCheckmark && option.equals(mAppliedOption)) {
                     Resources res = mContainer.getContext().getResources();
                     Drawable checkmark = res.getDrawable(R.drawable.ic_check_circle_filled_24px);
-                    Drawable frame = holder.itemView.getForeground();
+                    Drawable frame = holder.tileView.getForeground();
                     Drawable[] layers = {frame, checkmark};
                     if (frame == null) {
                         layers = new Drawable[]{checkmark};
@@ -201,20 +196,23 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
                     // Position at lower right
                     int idx = layers.length - 1;
                     int checkSize = (int) res.getDimension(R.dimen.check_size);
-                    int checkOffset = (int) res.getDimension(R.dimen.check_offset);
+                    int checkOffset = (int) res.getDimensionPixelOffset(R.dimen.check_offset);
                     checkedFrame.setLayerGravity(idx, Gravity.BOTTOM | Gravity.RIGHT);
                     checkedFrame.setLayerWidth(idx, checkSize);
                     checkedFrame.setLayerHeight(idx, checkSize);
                     checkedFrame.setLayerInsetBottom(idx, checkOffset);
-                    checkedFrame.setLayerInsetLeft(idx, checkOffset);
-                    holder.itemView.setForeground(checkedFrame);
+                    checkedFrame.setLayerInsetRight(idx, checkOffset);
+                    holder.tileView.setForeground(checkedFrame);
 
                     // Initialize the currently applied option
-                    CharSequence cd = mContainer.getContext().getString(
-                            R.string.option_applied_previewed_description, option.getTitle());
-                    holder.labelView.setContentDescription(cd);
+                    holder.setContentDescription(mContainer.getContext(), option,
+                        R.string.option_applied_previewed_description);
+                } else if (option.equals(mAppliedOption)) {
+                    // Initialize with "previewed" description if we don't show checkmark
+                    holder.setContentDescription(mContainer.getContext(), option,
+                        R.string.option_previewed_description);
                 } else if (mShowCheckmark) {
-                    holder.itemView.setForeground(null);
+                    holder.tileView.setForeground(null);
                 }
             }
 
@@ -287,11 +285,42 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
     private static class TileViewHolder extends RecyclerView.ViewHolder {
         TextView labelView;
         View tileView;
+        CharSequence title;
 
         TileViewHolder(@NonNull View itemView) {
             super(itemView);
             labelView = itemView.findViewById(R.id.option_label);
             tileView = itemView.findViewById(R.id.option_tile);
+            title = null;
+        }
+
+        /**
+         * Set the content description for this holder using the given string id.
+         * If the option does not have a label, the description will be set on the tile view.
+         * @param context The view's context
+         * @param option The customization option
+         * @param id Resource ID of the string to use for the content description
+         */
+        public void setContentDescription(Context context, CustomizationOption option, int id) {
+            title = option.getTitle();
+            if (TextUtils.isEmpty(title) && tileView != null) {
+                title = tileView.getContentDescription();
+            }
+
+            CharSequence cd = context.getString(id, title);
+            if (labelView != null && !TextUtils.isEmpty(labelView.getText())) {
+                labelView.setContentDescription(cd);
+            } else if (tileView != null) {
+                tileView.setContentDescription(cd);
+            }
+        }
+
+        public void resetContentDescription() {
+            if (labelView != null && !TextUtils.isEmpty(labelView.getText())) {
+                labelView.setContentDescription(title);
+            } else if (tileView != null) {
+                tileView.setContentDescription(title);
+            }
         }
     }
 }

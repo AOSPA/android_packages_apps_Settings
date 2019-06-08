@@ -205,7 +205,11 @@ public class PageIndicator extends ViewGroup {
     }
 
     private void playAnimation(ImageView imageView, int res) {
-        final AnimatedVectorDrawable avd = (AnimatedVectorDrawable) getContext().getDrawable(res);
+        Drawable drawable = getContext().getDrawable(res);
+        if (!(drawable instanceof AnimatedVectorDrawable)) {
+            return;
+        }
+        final AnimatedVectorDrawable avd = (AnimatedVectorDrawable) drawable;
         imageView.setImageDrawable(avd);
         try {
             forceAnimationOnUI(avd);
