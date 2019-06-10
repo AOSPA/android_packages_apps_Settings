@@ -25,14 +25,14 @@ import android.app.UiModeManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Vibrator;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.display.DarkUIPreferenceController;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,14 +40,13 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilitySettingsTest {
     private static final String VIBRATION_PREFERENCE_SCREEN = "vibration_preference_screen";
-    private static final String ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE =
-            "accessibility_content_timeout_preference_fragment";
     private static final String ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE =
             "accessibility_control_timeout_preference_fragment";
     private static final String DARK_UI_MODE_PREFERENCE =
@@ -71,9 +70,9 @@ public class AccessibilitySettingsTest {
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
         final List<String> niks = AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER
-            .getNonIndexableKeys(mContext);
+                .getNonIndexableKeys(mContext);
         final List<String> keys =
-            XmlTestUtils.getKeysFromPreferenceXml(mContext, R.xml.accessibility_settings);
+                XmlTestUtils.getKeysFromPreferenceXml(mContext, R.xml.accessibility_settings);
 
         assertThat(keys).containsAllIn(niks);
     }
@@ -113,12 +112,6 @@ public class AccessibilitySettingsTest {
 
         for (int i = 0; i < testingValues.length; i++) {
             Settings.Secure.putString(mContentResolver,
-                    Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS, testingValues[i]);
-
-            verifyAccessibilityTimeoutSummary(ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE,
-                    exceptedResIds[i]);
-
-            Settings.Secure.putString(mContentResolver,
                     Settings.Secure.ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, testingValues[i]);
 
             verifyAccessibilityTimeoutSummary(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE,
@@ -143,6 +136,32 @@ public class AccessibilitySettingsTest {
             verifyAccessibilityTimeoutSummary(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE,
                     R.string.accessibility_timeout_default);
         }
+    }
+
+    @Test
+    @Config(shadows = {ShadowDeviceConfig.class})
+    public void testIsRampingRingerEnabled_bothFlagsOn_Enabled() {
+        Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 1 /* ON */);
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_TELEPHONY,
+                AccessibilitySettings.RAMPING_RINGER_ENABLED, "true", false /* makeDefault*/);
+      assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isTrue();
+    }
+
+    @Test
+    @Config(shadows = {ShadowDeviceConfig.class})
+    public void testIsRampingRingerEnabled_settingsFlagOff_Disabled() {
+        Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 0 /* OFF */);
+      assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isFalse();
+    }
+
+    @Test
+    @Config(shadows = {ShadowDeviceConfig.class})
+    public void testIsRampingRingerEnabled_deviceConfigFlagOff_Disabled() {
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_TELEPHONY,
+                AccessibilitySettings.RAMPING_RINGER_ENABLED, "false", false /* makeDefault*/);
+      assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isFalse();
     }
 
     private void verifyAccessibilityTimeoutSummary(String preferenceKey, int resId) {

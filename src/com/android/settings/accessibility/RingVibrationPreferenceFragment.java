@@ -46,12 +46,16 @@ public class RingVibrationPreferenceFragment extends VibrationPreferenceFragment
 
     @Override
     protected String getVibrationEnabledSetting() {
-        return Settings.System.VIBRATE_WHEN_RINGING;
+        if (AccessibilitySettings.isRampingRingerEnabled(getContext())) {
+            return Settings.Global.APPLY_RAMPING_RINGER;
+        } else {
+            return Settings.System.VIBRATE_WHEN_RINGING;
+        }
     }
 
     @Override
     protected int getPreviewVibrationAudioAttributesUsage() {
-        return AudioAttributes.USAGE_NOTIFICATION;
+        return AudioAttributes.USAGE_NOTIFICATION_RINGTONE;
     }
 
     @Override

@@ -98,8 +98,7 @@ public class NotificationBackend {
             AppRow row) {
         row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
         List<String> roles = rm.getHeldRolesFromController(app.packageName);
-        if (roles.contains(RoleManager.ROLE_SMS)
-                || roles.contains(RoleManager.ROLE_DIALER)
+        if (roles.contains(RoleManager.ROLE_DIALER)
                 || roles.contains(RoleManager.ROLE_EMERGENCY)) {
             row.systemApp = true;
         }
@@ -309,15 +308,6 @@ public class NotificationBackend {
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return 0;
-        }
-    }
-
-    public List<NotifyingApp> getRecentApps() {
-        try {
-            return sINM.getRecentNotifyingAppsForUser(UserHandle.myUserId()).getList();
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-            return new ArrayList<>();
         }
     }
 

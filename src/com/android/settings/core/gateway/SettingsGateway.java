@@ -83,6 +83,7 @@ import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
+import com.android.settings.gestures.GlobalActionsPanelSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.gestures.SystemNavigationGestureSettings;
@@ -104,7 +105,6 @@ import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.AppBubbleNotificationSettings;
 import com.android.settings.notification.AppNotificationSettings;
-import com.android.settings.notification.BubbleNotificationSettings;
 import com.android.settings.notification.ChannelGroupNotificationSettings;
 import com.android.settings.notification.ChannelNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
@@ -216,7 +216,6 @@ public class SettingsGateway {
             DreamSettings.class.getName(),
             UserSettings.class.getName(),
             NotificationAccessSettings.class.getName(),
-            BubbleNotificationSettings.class.getName(),
             AppBubbleNotificationSettings.class.getName(),
             ZenAccessSettings.class.getName(),
             ZenAccessDetails.class.getName(),
@@ -281,7 +280,8 @@ public class SettingsGateway {
             ToggleBackupSettingFragment.class.getName(),
             PreviouslyConnectedDeviceDashboardFragment.class.getName(),
             BatterySaverScheduleSettings.class.getName(),
-            MobileNetworkListFragment.class.getName()
+            MobileNetworkListFragment.class.getName(),
+            GlobalActionsPanelSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

@@ -32,6 +32,7 @@ import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.net.NetworkPolicyManager;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -49,9 +50,11 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowSubscriptionManager;
+import org.robolectric.shadows.ShadowTelephonyManager;
 
 @Config(shadows = {
         ShadowUtils.class,
@@ -68,6 +71,7 @@ public class DataUsageSummaryTest {
     private NetworkPolicyManager mNetworkPolicyManager;
     @Mock
     private NetworkStatsManager mNetworkStatsManager;
+    private TelephonyManager mTelephonyManager;
     private Context mContext;
     private FragmentActivity mActivity;
     private SummaryLoader.SummaryProvider mSummaryProvider;
@@ -84,7 +88,12 @@ public class DataUsageSummaryTest {
         ShadowUserManager.getShadow().setIsAdminUser(true);
         shadowContext.setSystemService(Context.NETWORK_POLICY_SERVICE, mNetworkPolicyManager);
 
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        final ShadowTelephonyManager shadowTelephonyManager = Shadows.shadowOf(mTelephonyManager);
+        shadowTelephonyManager.setTelephonyManagerForSubscriptionId(
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID, mTelephonyManager);
+        shadowTelephonyManager.setTelephonyManagerForSubscriptionId(1, mTelephonyManager);
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
         doReturn(mNetworkStatsManager).when(mActivity).getSystemService(NetworkStatsManager.class);
 
@@ -181,7 +190,7 @@ public class DataUsageSummaryTest {
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
         ShadowDataUsageUtils.HAS_SIM = false;
         ShadowSubscriptionManager.setDefaultDataSubscriptionId(
-            SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
         doReturn(mContext).when(dataUsageSummary).getContext();

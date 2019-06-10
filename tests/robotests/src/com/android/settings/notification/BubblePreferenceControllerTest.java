@@ -22,6 +22,9 @@ import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
+import static com.android.settings.notification.BubblePreferenceController.SYSTEM_WIDE_OFF;
+import static com.android.settings.notification.BubblePreferenceController.SYSTEM_WIDE_ON;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -75,6 +78,7 @@ public class BubblePreferenceControllerTest {
     private FragmentManager mFragmentManager;
 
     private BubblePreferenceController mController;
+    private BubblePreferenceController mAppPageController;
 
     @Before
     public void setUp() {
@@ -84,7 +88,10 @@ public class BubblePreferenceControllerTest {
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
         when(mFragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
-        mController = spy(new BubblePreferenceController(mContext, mFragmentManager, mBackend));
+        mController = spy(new BubblePreferenceController(mContext, mFragmentManager, mBackend,
+                false /* isAppPage */));
+        mAppPageController = spy(new BubblePreferenceController(mContext, mFragmentManager,
+                mBackend, true /* isAppPage */));
     }
 
     @Test
@@ -96,6 +103,7 @@ public class BubblePreferenceControllerTest {
 
     @Test
     public void testIsAvailable_notIfAppBlocked() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
         mController.onResume(appRow, mock(NotificationChannel.class), null, null);
@@ -104,6 +112,7 @@ public class BubblePreferenceControllerTest {
 
     @Test
     public void testIsAvailable_notIfChannelBlocked() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
@@ -113,6 +122,7 @@ public class BubblePreferenceControllerTest {
 
     @Test
     public void testIsAvailable_channel_notIfAppOff() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.allowBubbles = false;
         NotificationChannel channel = mock(NotificationChannel.class);
@@ -123,12 +133,13 @@ public class BubblePreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_ifOffGlobally_app() {
+    public void testIsNotAvailable_ifOffGlobally_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         mController.onResume(appRow, null, null, null);
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 0);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF);
 
-        assertTrue(mController.isAvailable());
+        assertFalse(mController.isAvailable());
     }
 
     @Test
@@ -137,16 +148,27 @@ public class BubblePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null);
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 0);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF);
 
         assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_app_evenIfOffGlobally() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        mAppPageController.onResume(appRow, null, null, null);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF);
+
+        assertTrue(mAppPageController.isAvailable());
     }
 
     @Test
     public void testIsAvailable_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         mController.onResume(appRow, null, null, null);
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 1);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
 
         assertTrue(mController.isAvailable());
     }
@@ -159,7 +181,7 @@ public class BubblePreferenceControllerTest {
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
         mController.onResume(appRow, channel, null, null);
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 1);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
 
         assertTrue(mController.isAvailable());
     }
@@ -171,7 +193,7 @@ public class BubblePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null);
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 1);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
 
         assertTrue(mController.isAvailable());
     }
@@ -183,7 +205,7 @@ public class BubblePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null);
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 1);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
 
         assertFalse(mController.isAvailable());
     }
@@ -203,6 +225,7 @@ public class BubblePreferenceControllerTest {
 
     @Test
     public void testUpdateState_channelNotBlockable() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
@@ -216,6 +239,7 @@ public class BubblePreferenceControllerTest {
 
     @Test
     public void testUpdateState_channel() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.canBubble()).thenReturn(true);
@@ -235,6 +259,7 @@ public class BubblePreferenceControllerTest {
 
     @Test
     public void testUpdateState_app() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.label = "App!";
         appRow.allowBubbles = true;
@@ -256,7 +281,8 @@ public class BubblePreferenceControllerTest {
 
     @Test
     public void testUpdateState_app_offGlobally() {
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 0);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.label = "App!";
         appRow.allowBubbles = true;
@@ -269,6 +295,7 @@ public class BubblePreferenceControllerTest {
 
     @Test
     public void testOnPreferenceChange_on_channel() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.allowBubbles = true;
         NotificationChannel channel =
@@ -288,6 +315,7 @@ public class BubblePreferenceControllerTest {
 
     @Test
     public void testOnPreferenceChange_off_channel() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.allowBubbles = true;
         NotificationChannel channel =
@@ -307,6 +335,7 @@ public class BubblePreferenceControllerTest {
 
     @Test
     public void testOnPreferenceChange_on_app() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.allowBubbles = false;
         mController.onResume(appRow, null, null, null);
@@ -324,6 +353,7 @@ public class BubblePreferenceControllerTest {
 
     @Test
     public void testOnPreferenceChange_off_app() {
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.allowBubbles = true;
         mController.onResume(appRow, null, null, null);
@@ -341,7 +371,8 @@ public class BubblePreferenceControllerTest {
 
     @Test
     public void testOnPreferenceChange_on_app_offGlobally() {
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, 0);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
+                SYSTEM_WIDE_OFF);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.allowBubbles = false;
         mController.onResume(appRow, null, null, null);

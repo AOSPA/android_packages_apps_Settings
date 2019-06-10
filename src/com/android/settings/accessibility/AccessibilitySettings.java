@@ -36,6 +36,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.Vibrator;
+import android.provider.DeviceConfig;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -132,8 +133,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "vibration_preference_screen";
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
             "daltonizer_preference";
-    private static final String ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE =
-            "accessibility_content_timeout_preference_fragment";
     private static final String ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE =
             "accessibility_control_timeout_preference_fragment";
     private static final String DARK_UI_MODE_PREFERENCE =
@@ -169,6 +168,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     };
     private static final String ANIMATION_ON_VALUE = "1";
     private static final String ANIMATION_OFF_VALUE = "0";
+
+    static final String RAMPING_RINGER_ENABLED = "ramping_ringer_enabled";
 
     private final Map<String, String> mLongPressTimeoutValueToTitleMap = new HashMap<>();
 
@@ -389,6 +390,15 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         return (TextUtils.isEmpty(serviceSummary))
                 ? serviceState
                 : stateSummaryCombo;
+    }
+
+    @VisibleForTesting
+    static boolean isRampingRingerEnabled(final Context context) {
+        return (Settings.Global.getInt(
+                        context.getContentResolver(),
+                        Settings.Global.APPLY_RAMPING_RINGER, 0) == 1)
+                && DeviceConfig.getBoolean(
+                        DeviceConfig.NAMESPACE_TELEPHONY, RAMPING_RINGER_ENABLED, false);
     }
 
     private void handleToggleTextContrastPreferenceClick() {
@@ -660,6 +670,16 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             mServicePreferenceToPreferenceCategoryMap.put(preference, prefCategory);
         }
 
+        // Update the order of all the category according to the order defined in xml file.
+        updateCategoryOrderFromArray(CATEGORY_SCREEN_READER,
+            R.array.config_order_screen_reader_services);
+        updateCategoryOrderFromArray(CATEGORY_AUDIO_AND_CAPTIONS,
+            R.array.config_order_audio_and_caption_services);
+        updateCategoryOrderFromArray(CATEGORY_INTERACTION_CONTROL,
+            R.array.config_order_interaction_control_services);
+        updateCategoryOrderFromArray(CATEGORY_DISPLAY,
+            R.array.config_order_display_services);
+
         // If the user has not installed any additional services, hide the category.
         if (downloadedServicesCategory.getPreferenceCount() == 0) {
             final PreferenceScreen screen = getPreferenceScreen();
@@ -673,6 +693,29 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         for (int i = 0; i < services.length; i++) {
             ComponentName component = ComponentName.unflattenFromString(services[i]);
             mPreBundledServiceComponentToCategoryMap.put(component, category);
+        }
+    }
+
+    /**
+     * Update the order of perferences in the category by matching their preference
+     * key with the string array of preference order which is defined in the xml.
+     *
+     * @param categoryKey The key of the category need to update the order
+     * @param key The key of the string array which defines the order of category
+     */
+    private void updateCategoryOrderFromArray(String categoryKey, int key) {
+        String[] services = getResources().getStringArray(key);
+        PreferenceCategory category = mCategoryToPrefCategoryMap.get(categoryKey);
+        int preferenceCount = category.getPreferenceCount();
+        int serviceLength = services.length;
+        for (int preferenceIndex = 0; preferenceIndex < preferenceCount; preferenceIndex++) {
+            for (int serviceIndex = 0; serviceIndex < serviceLength; serviceIndex++) {
+                if (category.getPreference(preferenceIndex).getKey()
+                        .equals(services[serviceIndex])) {
+                    category.getPreference(preferenceIndex).setOrder(serviceIndex);
+                    break;
+                }
+            }
         }
     }
 
@@ -694,8 +737,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     mToggleInversionPreference.getOrder() + 1);
             mToggleDisableAnimationsPreference.setOrder(
                     mToggleLargePointerIconPreference.getOrder() + 1);
-            findPreference(ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE).setOrder(
-                    mToggleDisableAnimationsPreference.getOrder() + 1);
             mToggleInversionPreference.setSummary(R.string.summary_empty);
             displayCategory.addPreference(mToggleInversionPreference);
             displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
@@ -762,8 +803,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
 
         updateAccessibilityTimeoutSummary(getContentResolver(),
-                findPreference(ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE));
-        updateAccessibilityTimeoutSummary(getContentResolver(),
                 findPreference(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE));
     }
 
@@ -773,14 +812,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         int[] timeoutValues = getResources().getIntArray(
                 R.array.accessibility_timeout_selector_values);
 
-        int timeoutValue = 0;
-        if (pref.getKey().equals(ACCESSIBILITY_CONTENT_TIMEOUT_PREFERENCE)) {
-            timeoutValue = AccessibilityTimeoutController.getSecureAccessibilityTimeoutValue(
-                    resolver, AccessibilityTimeoutController.CONTENT_TIMEOUT_SETTINGS_SECURE);
-        } else if (pref.getKey().equals(ACCESSIBILITY_CONTROL_TIMEOUT_PREFERENCE)) {
-            timeoutValue = AccessibilityTimeoutController.getSecureAccessibilityTimeoutValue(
+        int timeoutValue = AccessibilityTimeoutController.getSecureAccessibilityTimeoutValue(
                     resolver, AccessibilityTimeoutController.CONTROL_TIMEOUT_SETTINGS_SECURE);
-        }
 
         int idx = Ints.indexOf(timeoutValues, timeoutValue);
         pref.setSummary(timeoutSummarys[idx == -1 ? 0 : idx]);
@@ -845,7 +878,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 Settings.System.RING_VIBRATION_INTENSITY,
                 vibrator.getDefaultRingVibrationIntensity());
         if (Settings.System.getInt(context.getContentResolver(),
-                Settings.System.VIBRATE_WHEN_RINGING, 0) == 0) {
+                Settings.System.VIBRATE_WHEN_RINGING, 0) == 0 && !isRampingRingerEnabled(context)) {
             ringIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
         }
         CharSequence ringIntensityString =

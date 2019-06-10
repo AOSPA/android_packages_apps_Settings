@@ -198,4 +198,107 @@ public class MobileNetworkUtilsTest {
         assertThat(MobileNetworkUtils.getSearchableSubscriptionId(mContext))
                 .isEqualTo(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
     }
+
+    @Test
+    public void shouldDisplayNetworkSelectOptions_HideCarrierNetwork_returnFalse() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
+                true);
+
+        assertThat(MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext, SUB_ID_1))
+                .isFalse();
+    }
+
+    @Test
+    public void shouldDisplayNetworkSelectOptions_allCheckPass_returnTrue() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
+                false);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_OPERATOR_SELECTION_EXPAND_BOOL, true);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_CSP_ENABLED_BOOL, false);
+        when(mTelephonyManager.getPhoneType()).thenReturn(PhoneConstants.PHONE_TYPE_GSM);
+
+        assertThat(MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext, SUB_ID_1))
+                .isTrue();
+    }
+
+    @Test
+    public void shouldSpeciallyUpdateGsmCdma_notWorldMode_returnFalse() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, false);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, false);
+
+        assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isFalse();
+    }
+
+    @Test
+    public void shouldSpeciallyUpdateGsmCdma_supportTdscdma_returnFalse() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, true);
+
+        assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isFalse();
+    }
+
+    @Test
+    public void shouldSpeciallyUpdateGsmCdma_ModeLteTdscdmaGsm_returnTrue() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, false);
+
+        Settings.Global.putInt(mContext.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
+                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM);
+        assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
+    }
+
+    @Test
+    public void shouldSpeciallyUpdateGsmCdma_ModeLteTdscdmaGsmWcdma_returnTrue() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, false);
+
+        Settings.Global.putInt(mContext.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
+                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA);
+        assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
+    }
+
+    @Test
+    public void shouldSpeciallyUpdateGsmCdma_ModeLteTdscdma_returnTrue() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, false);
+
+        Settings.Global.putInt(mContext.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
+                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA);
+        assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
+    }
+
+    @Test
+    public void shouldSpeciallyUpdateGsmCdma_ModeLteTdscdmaWcdma_returnTrue() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, false);
+
+        Settings.Global.putInt(mContext.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
+                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_WCDMA);
+        assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
+    }
+
+    @Test
+    public void shouldSpeciallyUpdateGsmCdma_ModeLteTdscdmaCdmaEvdoGsmWcdma_returnTrue() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, false);
+
+        Settings.Global.putInt(mContext.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
+                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
+        assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
+    }
+
+    @Test
+    public void shouldSpeciallyUpdateGsmCdma_ModeLteCdmaEvdoGsmWcdma_returnTrue() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, false);
+
+        Settings.Global.putInt(mContext.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
+                TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
+        assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
+    }
 }

@@ -17,30 +17,21 @@
 package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.app.Activity;
-import android.app.usage.NetworkStats;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.TrafficStats;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-
 import androidx.preference.SwitchPreference;
-
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.net.DataUsageController;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,14 +40,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowTelephonyManager;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class DataUsagePreferenceControllerTest {
     private static final int SUB_ID = 2;
 
-    @Mock
-    private TelephonyManager mTelephonyManager;
     @Mock
     private NetworkStatsManager mNetworkStatsManager;
     private DataUsagePreferenceController mController;
@@ -68,8 +59,13 @@ public class DataUsagePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(Robolectric.setupActivity(Activity.class));
-        doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
-        doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
+
+        final TelephonyManager telephonyManager = mContext.getSystemService(TelephonyManager.class);
+        final ShadowTelephonyManager shadowTelephonyManager = Shadows.shadowOf(telephonyManager);
+        shadowTelephonyManager.setTelephonyManagerForSubscriptionId(SUB_ID, telephonyManager);
+        shadowTelephonyManager.setTelephonyManagerForSubscriptionId(
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID, telephonyManager);
+
         doReturn(mNetworkStatsManager).when(mContext).getSystemService(NetworkStatsManager.class);
 
         mPreference = new SwitchPreference(mContext);
@@ -114,16 +110,24 @@ public class DataUsagePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_noUsageData_shouldDisablePreference() throws Exception {
-        final NetworkStatsManager networkStatsManager = mock(NetworkStatsManager.class);
-        when(networkStatsManager.querySummaryForDevice(anyInt() /* networkType */,
-            anyString() /* subscriberId */, anyLong() /* startTime */, anyLong() /* endTime */))
-            .thenReturn(mock(NetworkStats.Bucket.class));
+    public void updateState_noUsageData_shouldDisablePreference() {
         ReflectionHelpers.setField(
-            mController, "mDataUsageInfo", new DataUsageController.DataUsageInfo());
+                mController, "mDataUsageInfo", new DataUsageController.DataUsageInfo());
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void updateState_shouldUseIECUnit() {
+        final DataUsageController.DataUsageInfo usageInfo = new DataUsageController.DataUsageInfo();
+        usageInfo.usageLevel = TrafficStats.MB_IN_BYTES;
+        ReflectionHelpers.setField(mController, "mDataUsageInfo", usageInfo);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getSummary().toString())
+                .contains("1.00 MB");
     }
 }

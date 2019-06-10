@@ -102,8 +102,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
 
-    <protected-broadcast android:name="com.android.settings.DELETE_SIM_PROFILE_RESULT"/>
-
     <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
             android:theme="@style/Theme.Settings"
@@ -164,7 +162,8 @@
         </receiver>
 
         <activity android:name=".SubSettings"
-                android:parentActivityName="Settings" />
+                android:parentActivityName="Settings"
+                android:theme="@style/Theme.SubSettings"/>
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:label="@string/settings_shortcut">
@@ -847,6 +846,23 @@
             <meta-data android:name="com.android.settings.icon_tintable" android:value="true" />
         </activity>
 
+        <activity android:name=".wallpaper.StyleSuggestionActivity"
+                  android:label="@string/style_suggestion_title"
+                  android:icon="@drawable/ic_theme"
+                  android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.title"
+                       android:resource="@string/style_suggestion_title" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/style_suggestion_summary" />
+            <meta-data android:name="com.android.settings.dismiss"
+                       android:value="3,7,30" />
+            <meta-data android:name="com.android.settings.icon_tintable" android:value="true" />
+        </activity>
+
         <activity
             android:name="Settings$ZenModeScheduleRuleSettingsActivity"
             android:exported="true"
@@ -1362,22 +1378,23 @@
         </activity-alias>
 
         <activity android:name=".applications.specialaccess.deviceadmin.DeviceAdminAdd"
-                android:label="@string/device_admin_add_title"
-                android:clearTaskOnLaunch="true">
+                  android:label="@string/device_admin_add_title"
+                  android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity-alias android:name="SetProfileOwner"
-                        android:label="@string/profile_owner_add_title"
-                        android:targetActivity=".applications.specialaccess.deviceadmin.DeviceAdminAdd">
+        <activity android:name=".applications.specialaccess.deviceadmin.ProfileOwnerAdd"
+                  android:excludeFromRecents="true"
+                  android:theme="@style/Transparent"
+                  android:clearTaskOnLaunch="true">
             <intent-filter android:priority="1000">
                 <action android:name="android.app.action.SET_PROFILE_OWNER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity-alias>
+        </activity>
 
         <activity
             android:name="Settings$UsageAccessSettingsActivity"
@@ -1458,6 +1475,16 @@
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS_FOR_SUW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.AccessibilitySettingsForSetupWizard" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity-alias
+            android:name=".FontSizeSettingsForSetupWizardActivity"
+            android:exported="true"
+            android:targetActivity=".accessibility.AccessibilitySettingsForSetupWizardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.DISPLAY_SETTINGS" />
@@ -1468,9 +1495,7 @@
                 android:value="true" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accessibility.AccessibilitySettingsForSetupWizard" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
-        </activity>
+        </activity-alias>
 
         <activity
             android:name="Settings$AccessibilityDaltonizerSettingsActivity"
@@ -1549,7 +1574,6 @@
         <activity android:name=".password.ConfirmDeviceCredentialActivity$InternalActivity"
             android:exported="false"
             android:permission="android.permission.MANAGE_USERS"
-            android:resizeableActivity="false"
             android:taskAffinity="com.android.settings.workmode"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter android:priority="1">
@@ -1596,6 +1620,10 @@
             android:theme="@style/GlifTheme.Light"/>
 
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".biometrics.face.FaceEnrollEducation"
             android:exported="false"
             android:screenOrientation="portrait"/>
 
@@ -2402,16 +2430,6 @@
                   android:excludeFromRecents="true">
         </activity>
 
-        <activity android:name=".SmsDefaultDialog"
-                  android:label="@string/sms_application_title"
-                  android:excludeFromRecents="true"
-                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert">
-            <intent-filter android:priority="1">
-                <action android:name="android.provider.Telephony.ACTION_CHANGE_DEFAULT" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity
             android:name="Settings$NotificationAccessSettingsActivity"
             android:label="@string/manage_notification_access_title"
@@ -2710,6 +2728,7 @@
             android:label=""
             android:theme="@style/Transparent"
             android:excludeFromRecents="true"
+            android:documentLaunchMode="always"
             android:exported="true"
             android:permission="android.permission.CHANGE_WIFI_STATE"
             android:configChanges="orientation|keyboardHidden|screenSize">
@@ -2733,10 +2752,8 @@
             </intent-filter>
         </activity>
 
-        <activity
+        <receiver
             android:name=".wifi.slice.ConnectToWifiHandler"
-            android:theme="@android:style/Theme.NoDisplay"
-            android:excludeFromRecents="true"
             android:exported="false" />
 
         <activity
@@ -3142,7 +3159,7 @@
         <activity android:name=".panel.SettingsPanelActivity"
             android:label="@string/settings_panel_title"
             android:theme="@style/Theme.Panel"
-            android:documentLaunchMode="always"
+            android:launchMode="singleInstance"
             android:excludeFromRecents="true"
             android:exported="true">
                  <intent-filter>
@@ -3272,6 +3289,17 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleSettings" />
         </activity>
+
+        <activity android:name="Settings$GlobalActionsPanelSettingsActivity"
+            android:label="@string/global_actions_panel_title">
+            <intent-filter>
+                <action android:name="com.android.settings.GLOBAL_ACTIONS_PANEL_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.gestures.GlobalActionsPanelSettings" />
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
