@@ -42,16 +42,20 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.customization.model.CustomizationManager.Callback;
+import com.android.customization.model.CustomizationManager.OptionsFetchedListener;
 import com.android.customization.model.theme.ThemeBundle;
 import com.android.customization.model.theme.ThemeBundle.PreviewInfo;
 import com.android.customization.model.theme.ThemeManager;
 import com.android.customization.model.theme.custom.CustomTheme;
 import com.android.customization.module.ThemesUserEventLogger;
 import com.android.customization.picker.BasePreviewAdapter;
+import com.android.customization.picker.TimeTicker;
 import com.android.customization.picker.theme.ThemePreviewPage.ThemeCoverPage;
+import com.android.customization.picker.theme.ThemePreviewPage.TimeContainer;
 import com.android.customization.widget.OptionSelectorController;
 import com.android.customization.widget.PreviewPager;
 import com.android.wallpaper.R;
@@ -91,9 +95,13 @@ public class ThemeFragment extends ToolbarFragment {
     private ThemeBundle mSelectedTheme;
     private ThemePreviewAdapter mAdapter;
     private PreviewPager mPreviewPager;
+    private ContentLoadingProgressBar mLoading;
+    private View mContent;
+    private View mError;
     private boolean mUseMyWallpaper;
     private WallpaperInfo mCurrentHomeWallpaper;
     private CurrentWallpaperInfoFactory mCurrentWallpaperFactory;
+    private TimeTicker mTicker;
 
     @Override
     public void onAttach(Context context) {
@@ -111,6 +119,9 @@ public class ThemeFragment extends ToolbarFragment {
                 R.layout.fragment_theme_picker, container, /* attachToRoot */ false);
         setUpToolbar(view);
 
+        mContent = view.findViewById(R.id.content_section);
+        mLoading = view.findViewById(R.id.loading_indicator);
+        mError = view.findViewById(R.id.error_section);
         mCurrentWallpaperFactory = InjectorProvider.getInjector()
                 .getCurrentWallpaperFactory(getActivity().getApplicationContext());
         mPreviewPager = view.findViewById(R.id.theme_preview_pager);
@@ -120,7 +131,6 @@ public class ThemeFragment extends ToolbarFragment {
         });
         mUseMyWallpaperButton = view.findViewById(R.id.use_my_wallpaper);
         mUseMyWallpaperButton.setOnCheckedChangeListener(this::onUseMyWallpaperCheckChanged);
-
         setUpOptions(savedInstanceState);
 
         return view;
@@ -148,7 +158,23 @@ public class ThemeFragment extends ToolbarFragment {
     @Override
     public void onResume() {
         super.onResume();
+        mTicker = TimeTicker.registerNewReceiver(getContext(), this::updateTime);
         reloadWallpaper();
+        updateTime();
+    }
+
+    private void updateTime() {
+        if (mAdapter != null) {
+            mAdapter.updateTime();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (getContext() != null) {
+            getContext().unregisterReceiver(mTicker);
+        }
     }
 
     @Override
@@ -215,48 +241,73 @@ public class ThemeFragment extends ToolbarFragment {
 
     private void updateButtonsVisibility() {
         mUseMyWallpaperButton.setVisibility(mSelectedTheme instanceof CustomTheme
-                ? View.GONE : View.VISIBLE);
+                ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    private void hideError() {
+        mContent.setVisibility(View.VISIBLE);
+        mError.setVisibility(View.GONE);
+    }
+
+    private void showError() {
+        mLoading.hide();
+        mContent.setVisibility(View.GONE);
+        mError.setVisibility(View.VISIBLE);
     }
 
     private void setUpOptions(@Nullable Bundle savedInstanceState) {
-        mThemeManager.fetchOptions(options -> {
-            mOptionsController = new OptionSelectorController<>(mOptionsContainer, options);
-            mOptionsController.addListener(selected -> {
-                if (selected instanceof CustomTheme && !((CustomTheme) selected).isDefined()) {
-                    navigateToCustomTheme((CustomTheme) selected);
-                } else {
-                    mSelectedTheme = (ThemeBundle) selected;
-                    if (mUseMyWallpaper || mSelectedTheme instanceof CustomTheme) {
-                        mSelectedTheme.setOverrideThemeWallpaper(mCurrentHomeWallpaper);
+        hideError();
+        mLoading.show();
+        mThemeManager.fetchOptions(new OptionsFetchedListener<ThemeBundle>() {
+            @Override
+            public void onOptionsLoaded(List<ThemeBundle> options) {
+                mOptionsController = new OptionSelectorController<>(mOptionsContainer, options);
+                mOptionsController.addListener(selected -> {
+                    mLoading.hide();
+                    if (selected instanceof CustomTheme && !((CustomTheme) selected).isDefined()) {
+                        navigateToCustomTheme((CustomTheme) selected);
                     } else {
-                        mSelectedTheme.setOverrideThemeWallpaper(null);
+                        mSelectedTheme = (ThemeBundle) selected;
+                        if (mUseMyWallpaper || mSelectedTheme instanceof CustomTheme) {
+                            mSelectedTheme.setOverrideThemeWallpaper(mCurrentHomeWallpaper);
+                        } else {
+                            mSelectedTheme.setOverrideThemeWallpaper(null);
+                        }
+                        mEventLogger.logThemeSelected(mSelectedTheme,
+                                selected instanceof CustomTheme);
+                        createAdapter(options);
+                        updateButtonsVisibility();
                     }
-                    mEventLogger.logThemeSelected(mSelectedTheme, selected instanceof CustomTheme);
-                    createAdapter(options);
-                    updateButtonsVisibility();
+                });
+                mOptionsController.initOptions(mThemeManager);
+                String previouslySelected = savedInstanceState != null
+                        ? savedInstanceState.getString(KEY_SELECTED_THEME) : null;
+                for (ThemeBundle theme : options) {
+                    if (previouslySelected != null
+                            && previouslySelected.equals(theme.getSerializedPackages())) {
+                        mSelectedTheme = theme;
+                    } else if (theme.isActive(mThemeManager)) {
+                        mSelectedTheme = theme;
+                        break;
+                    }
                 }
-            });
-            mOptionsController.initOptions(mThemeManager);
-            String previouslySelected = savedInstanceState != null
-                    ? savedInstanceState.getString(KEY_SELECTED_THEME) : null;
-            for (ThemeBundle theme : options) {
-                if (previouslySelected != null
-                        && previouslySelected.equals(theme.getSerializedPackages())) {
-                    mSelectedTheme = theme;
-                } else if (theme.isActive(mThemeManager)) {
-                    mSelectedTheme = theme;
-                    break;
+                if (mSelectedTheme == null) {
+                    // Select the default theme if there is no matching custom enabled theme
+                    // TODO(b/124796742): default to custom if there is no matching theme bundle
+                    mSelectedTheme = options.get(0);
+                } else {
+                    // Only show show checkmark if we found a matching theme
+                    mOptionsController.setAppliedOption(mSelectedTheme);
                 }
+                mOptionsController.setSelectedOption(mSelectedTheme);
             }
-            if (mSelectedTheme == null) {
-                // Select the default theme if there is no matching custom enabled theme
-                // TODO(b/124796742): default to custom if there is no matching theme bundle
-                mSelectedTheme = options.get(0);
-            } else {
-                // Only show show checkmark if we found a matching theme
-                mOptionsController.setAppliedOption(mSelectedTheme);
+            @Override
+            public void onError(@Nullable Throwable throwable) {
+                if (throwable != null) {
+                    Log.e(TAG, "Error loading theme bundles", throwable);
+                }
+                showError();
             }
-            mOptionsController.setSelectedOption(mSelectedTheme);
         }, false);
     }
 
@@ -307,8 +358,10 @@ public class ThemeFragment extends ToolbarFragment {
         private int[] mColorTileIds = {
             R.id.preview_color_qs_0_bg, R.id.preview_color_qs_1_bg, R.id.preview_color_qs_2_bg
         };
-        private int[] mColorTileIconIds = {
-            R.id.preview_color_qs_0_icon, R.id.preview_color_qs_1_icon, R.id.preview_color_qs_2_icon
+        private int[][] mColorTileIconIds = {
+                new int[]{ R.id.preview_color_qs_0_icon, 0},
+                new int[]{ R.id.preview_color_qs_1_icon, 1},
+                new int[] { R.id.preview_color_qs_2_icon, 3}
         };
 
         private int[] mShapeIconIds = {
@@ -322,16 +375,20 @@ public class ThemeFragment extends ToolbarFragment {
             super(activity, R.layout.theme_preview_card);
             final Resources res = activity.getResources();
             final PreviewInfo previewInfo = theme.getPreviewInfo();
+
             Drawable coverScrim = theme instanceof CustomTheme
-                    ? res.getDrawable(R.drawable.theme_cover_scrim_custom, activity.getTheme())
-                    : res.getDrawable(R.drawable.theme_cover_scrim, activity.getTheme());
+                    ? res.getDrawable(R.drawable.theme_cover_scrim, activity.getTheme())
+                    : null;
+
+            WallpaperPreviewLayoutListener wallpaperListener = new WallpaperPreviewLayoutListener(
+                    theme, previewInfo, coverScrim, true);
 
             addPage(new ThemeCoverPage(activity, theme.getTitle(),
                     previewInfo.resolveAccentColor(res), previewInfo.icons,
                     previewInfo.headlineFontFamily, previewInfo.bottomSheeetCornerRadius,
                     previewInfo.shapeDrawable, previewInfo.shapeAppIcons, editClickListener,
                     mColorButtonIds, mColorTileIds, mColorTileIconIds, mShapeIconIds,
-                    new WallpaperPreviewLayoutListener(theme, previewInfo, coverScrim)));
+                    wallpaperListener, coverCardLayoutListener));
             addPage(new ThemePreviewPage(activity, R.string.preview_name_font, R.drawable.ic_font,
                     R.layout.preview_card_font_content,
                     previewInfo.resolveAccentColor(res)) {
@@ -397,7 +454,7 @@ public class ThemeFragment extends ToolbarFragment {
 
                         for (int i = 0; i < mColorTileIds.length && i < previewInfo.icons.size();
                                 i++) {
-                            Drawable icon = previewInfo.icons.get(i)
+                            Drawable icon = previewInfo.icons.get(mColorTileIconIds[i][1])
                                     .getConstantState().newDrawable().mutate();
                             Drawable bgShape =
                                     previewInfo.shapeDrawable.getConstantState().newDrawable();
@@ -405,7 +462,7 @@ public class ThemeFragment extends ToolbarFragment {
 
                             ImageView bg = card.findViewById(mColorTileIds[i]);
                             bg.setImageDrawable(bgShape);
-                            ImageView fg = card.findViewById(mColorTileIconIds[i]);
+                            ImageView fg = card.findViewById(mColorTileIconIds[i][0]);
                             fg.setImageDrawable(icon);
                         }
                     }
@@ -432,7 +489,7 @@ public class ThemeFragment extends ToolbarFragment {
                         previewInfo.resolveAccentColor(res)) {
 
                     private final WallpaperPreviewLayoutListener mListener =
-                            new WallpaperPreviewLayoutListener(theme, previewInfo, null);
+                            new WallpaperPreviewLayoutListener(theme, previewInfo, null, false);
 
                     @Override
                     protected boolean containsWallpaper() {
@@ -461,16 +518,26 @@ public class ThemeFragment extends ToolbarFragment {
             }
         }
 
+        public void updateTime() {
+            for (ThemePreviewPage page : mPages) {
+                if (page instanceof TimeContainer) {
+                    ((TimeContainer)page).updateTime();
+                }
+            }
+        }
+
         private static class WallpaperPreviewLayoutListener implements OnLayoutChangeListener {
             private final ThemeBundle mTheme;
             private final PreviewInfo mPreviewInfo;
             private final Drawable mScrim;
+            private final boolean mIsTranslucent;
 
             public WallpaperPreviewLayoutListener(ThemeBundle theme, PreviewInfo previewInfo,
-                    Drawable scrim) {
+                    Drawable scrim, boolean translucent) {
                 mTheme = theme;
                 mPreviewInfo = previewInfo;
                 mScrim = scrim;
+                mIsTranslucent = translucent;
             }
 
             @Override
@@ -493,11 +560,14 @@ public class ThemeFragment extends ToolbarFragment {
             private void setWallpaperBitmap(View view, Bitmap bitmap) {
                 Resources res = view.getContext().getResources();
                 Drawable background = new BitmapDrawable(res, bitmap);
+                if (mIsTranslucent) {
+                    background.setAlpha(ThemeCoverPage.COVER_PAGE_WALLPAPER_ALPHA);
+                }
                 if (mScrim != null) {
                     background = new LayerDrawable(new Drawable[]{background, mScrim});
                 }
                 view.findViewById(R.id.theme_preview_card_background).setBackground(background);
-                if (mScrim == null) {
+                if (mScrim == null && !mIsTranslucent) {
                     int colorsHint = WallpaperColors.fromBitmap(bitmap).getColorHints();
                     TextView header = view.findViewById(R.id.theme_preview_card_header);
                     if ((colorsHint & WallpaperColors.HINT_SUPPORTS_DARK_TEXT) == 0) {

@@ -18,16 +18,19 @@ package com.android.customization.module;
 import android.content.Context;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
+import com.android.customization.model.theme.OverlayManagerCompat;
+import com.android.customization.model.theme.ThemeBundleProvider;
+import com.android.customization.model.theme.ThemeManager;
 import com.android.wallpaper.model.CategoryProvider;
 import com.android.wallpaper.model.WallpaperInfo;
 import com.android.wallpaper.module.BaseWallpaperInjector;
 import com.android.wallpaper.module.DefaultCategoryProvider;
 import com.android.wallpaper.module.LoggingOptInStatusProvider;
-import com.android.wallpaper.module.NoOpUserEventLogger;
-import com.android.wallpaper.module.UserEventLogger;
 import com.android.wallpaper.module.WallpaperPreferences;
 import com.android.wallpaper.module.WallpaperRotationRefresher;
+import com.android.wallpaper.module.WallpaperSetter;
 import com.android.wallpaper.monitor.PerformanceMonitor;
 import com.android.wallpaper.picker.PreviewFragment;
 
@@ -85,6 +88,7 @@ public class DefaultCustomizationInjector extends BaseWallpaperInjector
 
     @Override
     public Fragment getPreviewFragment(
+            Context context,
             WallpaperInfo wallpaperInfo,
             int mode,
             boolean testingModeEnabled) {
@@ -107,6 +111,13 @@ public class DefaultCustomizationInjector extends BaseWallpaperInjector
     @Override
     public synchronized LoggingOptInStatusProvider getLoggingOptInStatusProvider(Context context) {
         return null;
+    }
+
+    @Override
+    public ThemeManager getThemeManager(ThemeBundleProvider provider, FragmentActivity activity,
+            WallpaperSetter wallpaperSetter, OverlayManagerCompat overlayManagerCompat,
+            ThemesUserEventLogger logger) {
+        return new ThemeManager(provider, activity, wallpaperSetter, overlayManagerCompat, logger);
     }
 
 }

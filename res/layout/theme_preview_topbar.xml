@@ -20,13 +20,15 @@
     android:id="@+id/theme_preview_top_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:visibility="visible" tools:showIn="@layout/theme_preview_card">
+    tools:visibility="visible"
+    tools:showIn="@layout/theme_preview_card">
     <TextView
         android:id="@+id/theme_preview_clock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start|center_vertical"
         android:textColor="@color/icon_thumbnail_color"
+        android:textSize="@dimen/preview_theme_cover_topbar_clock_size"
         tools:text="8:10"/>
     <LinearLayout
         android:id="@+id/theme_preview_top_bar_icons"

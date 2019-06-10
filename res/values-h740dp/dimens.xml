@@ -15,18 +15,17 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<layer-list
-        xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:drawable="@drawable/theme_cover_scrim"/>
-    <item>
-        <shape android:shape="rectangle">
-            <gradient
-                android:angle="90"
-                android:centerY="25%"
-                android:startColor="@color/black_67_alpha"
-                android:centerColor="@android:color/transparent"
-                android:endColor="@android:color/transparent"
-                android:type="linear" />
-        </shape>
-    </item>
-</layer-list>
+<resources>
+    <dimen name="preview_theme_content_margin">12dp</dimen>
+
+    <dimen name="preview_theme_icon_size">40dp</dimen>
+    <dimen name="preview_theme_tile_size">20dp</dimen>
+    <dimen name="preview_theme_shape_size">52dp</dimen>
+    <dimen name="preview_theme_cover_content_extra_margin">8dp</dimen>
+
+    <dimen name="preview_theme_content_min_height">152dp</dimen>
+
+    <dimen name="theme_preview_header_drawable_padding">12dp</dimen>
+
+    <dimen name="card_header_top_margin">16dp</dimen>
+</resources>

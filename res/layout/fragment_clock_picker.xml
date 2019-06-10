@@ -23,40 +23,89 @@
     android:background="?android:colorPrimary">
     <include layout="@layout/section_header"/>
 
-    <com.android.customization.widget.PreviewPager
-        android:id="@+id/clock_preview_pager"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/secondary_color"
-        app:card_style="screen_aspect_ratio"/>
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/options_section"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
-        android:orientation="vertical">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/options_container"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/content_section"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/options_container_height"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp">
+            <com.android.customization.widget.PreviewPager
+                android:id="@+id/clock_preview_pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/preview_pager_background"
+                app:layout_constrainedHeight="true"
+                app:layout_constraintBottom_toTopOf="@id/options_container"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_max="@dimen/preview_pager_max_height"
+                app:layout_constraintHeight_min="@dimen/preview_pager_min_height"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread_inside"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/options_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/options_container_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toTopOf="@id/placeholder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clock_preview_pager"
+                app:layout_constraintVertical_bias="1.0"/>
+
+            <Space
+                android:id="@+id/placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/min_taptarget_height"
+                app:layout_constraintBottom_toTopOf="@id/apply_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_min="@dimen/min_taptarget_height"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/options_container"
+                app:layout_constraintVertical_bias="1.0"/>
+
             <Button
                 android:id="@+id/apply_button"
                 style="@style/ActionPrimaryButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="@string/apply_btn"/>
-        </RelativeLayout>
+                android:layout_gravity="end"
+                android:layout_marginEnd="10dp"
+                android:layout_marginVertical="10dp"
+                android:layout_weight="1"
+                android:text="@string/apply_theme_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
-
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/loading_indicator"
+            style="@android:style/Widget.DeviceDefault.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:layout_gravity="center_horizontal|top"
+            android:indeterminate="true"/>
+        <FrameLayout
+            android:id="@+id/error_section"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/error_message"
+                style="@style/HeaderTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/something_went_wrong"/>
+        </FrameLayout>
+    </FrameLayout>
 </LinearLayout>
