@@ -61,13 +61,12 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         int title = R.string.roaming_alert_title;
-        int message = R.string.roaming_warning;
         PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         if (carrierConfig != null && carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_CHECK_PRICING_WITH_CARRIER_FOR_DATA_ROAMING_BOOL)) {
-            message = R.string.roaming_check_price_warning;
+            title = R.string.roaming_check_price_warning;
         }
-        builder.setMessage(getResources().getString(message))
+        builder.setMessage(getResources().getString(R.string.roaming_warning))
                 .setTitle(title)
                 .setIconAttribute(android.R.attr.alertDialogIcon)
                 .setPositiveButton(android.R.string.yes, this)

@@ -58,7 +58,10 @@ public class BillingCyclePreferenceController extends BasePreferenceController {
         services.mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
         services.mUserManager = mContext.getSystemService(UserManager.class);
 
-        NetworkTemplate template = DataUsageUtils.getMobileTemplate(mContext, mSubscriptionId);
+        NetworkTemplate mobileAll = NetworkTemplate.buildTemplateMobileAll(
+                services.mTelephonyManager.getSubscriberId(mSubscriptionId));
+        NetworkTemplate template = NetworkTemplate.normalize(mobileAll,
+                services.mTelephonyManager.getMergedSubscriberIds());
 
         preference.setTemplate(template, mSubscriptionId, services);
     }

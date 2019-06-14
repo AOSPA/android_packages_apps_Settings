@@ -110,8 +110,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         setResult(RESULT_FINISHED);
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
             postEnroll();
-        } else if (mFromSettingsSummary) {
-            // Only launch fingerprint settings if enrollment was triggered through settings summary
+        } else {
             launchFingerprintSettings();
         }
         finish();
@@ -151,7 +150,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         final Intent intent = new Intent(ACTION_FINGERPRINT_SETTINGS);
         intent.setPackage(Utils.SETTINGS_PACKAGE_NAME);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
