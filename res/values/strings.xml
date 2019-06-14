@@ -7339,7 +7339,7 @@
     <string name="keywords_assist_gesture_launch">gesture</string>
     <string name="keywords_face_unlock">face, unlock, auth, sign in</string>
     <string name="keywords_imei_info">imei, meid, min, prl version, imei sv</string>
-    <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid</string>
+    <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid, eid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
     <string name="keywords_android_version">android security patch level, baseband version, kernel version</string>
     <!-- Search keywords for dark mode settings [CHAR LIMIT=NONE] -->
@@ -7893,8 +7893,8 @@
     <!-- Configure Notifications: section header for prioritizer settings  [CHAR LIMIT=80] -->
     <string name="smart_notifications_title">Adaptive notifications</string>
 
-    <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
-    <string name="asst_capability_prioritizer_title">Automatic Prioritization</string>
+    <!-- Configure Notifications: setting title [CHAR LIMIT=80 BACKUP_MESSAGE_ID=6691908606916292167] -->
+    <string name="asst_capability_prioritizer_title">Adaptive notification priority</string>
 
     <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
     <string name="asst_capability_prioritizer_summary">Automatically set lower priority notifications to Gentle</string>
@@ -7904,6 +7904,9 @@
 
     <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
     <string name="asst_capabilities_actions_replies_summary">Automatically show suggested actions &amp; replies</string>
+
+    <!-- Configure Notifications: setting title, whether the snooze menu is shown on notifications [CHAR LIMIT=80] -->
+    <string name="snooze_options_title">Allow notification snoozing</string>
 
     <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
     <string name="hide_silent_icons_title">Hide icons from gentle notifications</string>
@@ -8102,10 +8105,10 @@
     <string name="notification_block_title">Block</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title -->
-    <string name="notification_silence_title">Gentle</string>
+    <string name="notification_silence_title">Silent</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title -->
-    <string name="notification_alert_title">Prioritized</string>
+    <string name="notification_alert_title">Alerting</string>
 
     <!-- [CHAR LIMIT=40] Notification importance title. This setting controls how notifications in older apps may alert the user (eg, sound, visual, vibrate). -->
     <string name="allow_interruption">Allow interruptions</string>
@@ -8119,19 +8122,10 @@
     <string name="notification_channel_summary_min">In the pull-down shade, collapse notifications to one line</string>
 
     <!-- [CHAR LIMIT=150] Notification Importance title: low importance level summary -->
-    <string name="notification_channel_summary_low">Helps you focus with notifications only in the pull-down shade. Always silent.</string>
-
-    <!-- [CHAR LIMIT=150] Notification Importance title: low importance level summary -->
-    <string name="notification_channel_summary_low_status">Displays below priority notifications. Always silent.</string>
-
-    <!-- [CHAR LIMIT=150] Notification Importance title: low importance level summary -->
-    <string name="notification_channel_summary_low_lock">Displays below priority notifications. Always silent.</string>
-
-    <!-- [CHAR LIMIT=150] Notification Importance title: low importance level summary -->
-    <string name="notification_channel_summary_low_status_lock">Displays below priority notifications. Always silent.</string>
+    <string name="notification_channel_summary_low">Helps you focus without sound or vibration</string>
 
     <!-- [CHAR LIMIT=150] Notification Importance title: normal importance level summary -->
-    <string name="notification_channel_summary_default">Gets your attention with sound &amp; a status bar icon. Shows on lock screen.</string>
+    <string name="notification_channel_summary_default">Gets your attention with sound or vibration</string>
 
     <!-- [CHAR LIMIT=150] Notification Importance title: high importance level summary -->
     <string name="notification_channel_summary_high">When device is unlocked, show notifications as a banner across the top of the screen</string>
@@ -10210,6 +10204,15 @@
     <!-- Search keywords for System Navigation settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_system_navigation">system navigation, 2 button navigation, 3 button navigation, gesture navigation</string>
 
+    <!-- Message for the alert dialog which says that the current default home app does not support gesture navigation. [CHAR LIMIT=NONE] -->
+    <string name="gesture_not_supported_dialog_message">Not supported by your default home app, <xliff:g id="default_home_app" example="Pixel Launcher">%s</xliff:g></string>
+
+    <!-- Positive button for the alert dialog when gesture nav not supported by launcher [CHAR LIMIT=40] -->
+    <string name="gesture_not_supported_positive_button">Switch default home app</string>
+
+    <!-- Content description for the Information icon [CHAR LIMIT=30] -->
+    <string name="information_label">Information</string>
+
     <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="default">Double-tap to check phone</string>
     <!-- Preference and settings suggestion title text for ambient display double tap (tablet) [CHAR LIMIT=60]-->
@@ -10253,8 +10256,6 @@
     <string name="global_actions_panel_title" translatable="false">Show global actions</string>
     <!-- Short title text for global actions panel [CHAR LIMIT=40] [DO NOT TRANSLATE]-->
     <string name="global_actions_panel_short_title" translatable="false">Global actions</string>
-    <!-- Footer text for global actions panel [CHAR LIMIT=NONE] [DO NOT TRANSLATE]-->
-    <string name="global_actions_panel_footer" translatable="false">The global actions panel can be accessed even when the device is locked.</string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
