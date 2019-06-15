@@ -139,6 +139,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
             use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
             use(BillingCyclePreferenceController.class).init(mSubId);
             use(MmsMessagePreferenceController.class).init(mSubId);
+            use(DataDuringCallsPreferenceController.class).init(getLifecycle(), mSubId);
             use(DisabledSubscriptionController.class).init(getLifecycle(), mSubId);
             use(DeleteSimProfilePreferenceController.class).init(mSubId, this,
                     REQUEST_CODE_DELETE_SUBSCRIPTION);
@@ -282,6 +283,12 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                     sir.xmlResId = R.xml.mobile_network_settings;
                     result.add(sir);
                     return result;
+                }
+
+                /** suppress full page if user is not admin */
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return context.getSystemService(UserManager.class).isAdminUser();
                 }
             };
 }
