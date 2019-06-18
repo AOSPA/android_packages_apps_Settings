@@ -311,6 +311,7 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
             if (labelView != null && !TextUtils.isEmpty(labelView.getText())) {
                 labelView.setContentDescription(cd);
             } else if (tileView != null) {
+                tileView.setAccessibilityPaneTitle(cd);
                 tileView.setContentDescription(cd);
             }
         }
@@ -319,6 +320,7 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
             if (labelView != null && !TextUtils.isEmpty(labelView.getText())) {
                 labelView.setContentDescription(title);
             } else if (tileView != null) {
+                tileView.setAccessibilityPaneTitle(title);
                 tileView.setContentDescription(title);
             }
         }
