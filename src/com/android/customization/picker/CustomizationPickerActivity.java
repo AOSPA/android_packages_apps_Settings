@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -138,7 +139,12 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     @Override
     protected void onResume() {
         super.onResume();
-        mUserEventLogger.logResumed();
+        boolean wallpaperOnly =
+                WALLPAPER_ONLY.equals(getIntent().getStringExtra(WALLPAPER_FLAVOR_EXTRA));
+        boolean provisioned = Settings.Global.getInt(getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 0) != 0;
+
+        mUserEventLogger.logResumed(provisioned, wallpaperOnly);
         // refresh the sections as the preview may have changed
         initSections();
         if (mBottomNav == null) {
