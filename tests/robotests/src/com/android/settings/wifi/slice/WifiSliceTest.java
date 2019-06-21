@@ -238,21 +238,13 @@ public class WifiSliceTest {
         setWorkerResults(createAccessPoint(AP1_NAME, true, true));
         doReturn(makeCaptivePortalNetworkCapabilities()).when(mConnectivityManager)
                 .getNetworkCapabilities(any());
+        final IconCompat expectedIcon = IconCompat.createWithResource(mContext,
+                R.drawable.ic_settings_accent);
 
         final Slice wifiSlice = mWifiSlice.getSlice();
         final List<SliceItem> sliceItems = wifiSlice.getItems();
 
         SliceTester.assertAnySliceItemContainsTitle(sliceItems, AP1_NAME);
-        assertCaptivePortalItems(sliceItems);
-    }
-
-    private void assertCaptivePortalItems(List<SliceItem> sliceItems) {
-        final String expectedSummary = mContext.getString(mContext.getResources()
-                .getIdentifier("network_available_sign_in", "string", "android"));
-        SliceTester.assertAnySliceItemContainsSubtitle(sliceItems, expectedSummary);
-
-        final IconCompat expectedIcon = IconCompat.createWithResource(mContext,
-                R.drawable.ic_settings_accent);
         SliceTester.assertAnySliceItemContainsIcon(sliceItems, expectedIcon);
     }
 

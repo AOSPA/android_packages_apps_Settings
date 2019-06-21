@@ -55,7 +55,6 @@ import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.text.BidiFormatter;
-import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
@@ -152,7 +151,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
     private AccessPoint mAccessPoint;
     private final ConnectivityManager mConnectivityManager;
-    private final Fragment mFragment;
+    private final PreferenceFragmentCompat mFragment;
     private final Handler mHandler;
     private LinkProperties mLinkProperties;
     private Network mNetwork;
@@ -299,7 +298,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             AccessPoint accessPoint,
             ConnectivityManager connectivityManager,
             Context context,
-            Fragment fragment,
+            PreferenceFragmentCompat fragment,
             Handler handler,
             Lifecycle lifecycle,
             WifiManager wifiManager,
@@ -314,7 +313,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             AccessPoint accessPoint,
             ConnectivityManager connectivityManager,
             Context context,
-            Fragment fragment,
+            PreferenceFragmentCompat fragment,
             Handler handler,
             Lifecycle lifecycle,
             WifiManager wifiManager,
@@ -451,9 +450,11 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         if (usingDataUsageHeader(mContext)) {
             mSummaryHeaderController.updateState(mDataUsageSummaryPref);
         } else {
-            mEntityHeaderController.setSummary(
-                    mAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
-                            .done(mFragment.getActivity(), true /* rebind */);
+            mEntityHeaderController
+                    .setSummary(
+                            mAccessPoint.getSettingsSummary(true /*convertSavedAsDisconnected*/))
+                    .setRecyclerView(mFragment.getListView(), mLifecycle)
+                    .done(mFragment.getActivity(), true /* rebind */);
         }
     }
 

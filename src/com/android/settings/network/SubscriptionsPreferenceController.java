@@ -19,13 +19,22 @@ package com.android.settings.network;
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
+import static com.android.settings.network.telephony.MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
+
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.provider.Settings;
+import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.ArraySet;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.collection.ArrayMap;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -35,10 +44,16 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.network.telephony.DataConnectivityListener;
 import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settings.network.telephony.SignalStrengthListener;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.net.SignalStrengthUtil;
 
+import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * This manages a set of Preferences it places into a PreferenceGroup owned by some parent
@@ -46,14 +61,21 @@ import java.util.Map;
  * available if there are 2 or more subscriptions.
  */
 public class SubscriptionsPreferenceController extends AbstractPreferenceController implements
-        LifecycleObserver, SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
+        LifecycleObserver, SubscriptionsChangeListener.SubscriptionsChangeListenerClient,
+        MobileDataEnabledListener.Client, DataConnectivityListener.Client,
+        SignalStrengthListener.Callback {
     private static final String TAG = "SubscriptionsPrefCntrlr";
 
     private UpdateListener mUpdateListener;
     private String mPreferenceGroupKey;
     private PreferenceGroup mPreferenceGroup;
     private SubscriptionManager mManager;
+    private ConnectivityManager mConnectivityManager;
     private SubscriptionsChangeListener mSubscriptionsListener;
+    private MobileDataEnabledListener mDataEnabledListener;
+    private DataConnectivityListener mConnectivityListener;
+    private SignalStrengthListener mSignalStrengthListener;
+
 
     // Map of subscription id to Preference
     private Map<Integer, Preference> mSubscriptionPreferences;
@@ -89,20 +111,30 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mPreferenceGroupKey = preferenceGroupKey;
         mStartOrder = startOrder;
         mManager = context.getSystemService(SubscriptionManager.class);
+        mConnectivityManager = mContext.getSystemService(ConnectivityManager.class);
         mSubscriptionPreferences = new ArrayMap<>();
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
+        mDataEnabledListener = new MobileDataEnabledListener(context, this);
+        mConnectivityListener = new DataConnectivityListener(context, this);
+        mSignalStrengthListener = new SignalStrengthListener(context, this);
         lifecycle.addObserver(this);
     }
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
         mSubscriptionsListener.start();
+        mDataEnabledListener.start(SubscriptionManager.getDefaultDataSubscriptionId());
+        mConnectivityListener.start();
+        mSignalStrengthListener.resume();
         update();
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
         mSubscriptionsListener.stop();
+        mDataEnabledListener.stop();
+        mConnectivityListener.stop();
+        mSignalStrengthListener.pause();
     }
 
     @Override
@@ -121,6 +153,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 mPreferenceGroup.removePreference(pref);
             }
             mSubscriptionPreferences.clear();
+            mSignalStrengthListener.updateSubscriptionIds(Collections.emptySet());
             mUpdateListener.onChildrenUpdated();
             return;
         }
@@ -129,16 +162,20 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mSubscriptionPreferences = new ArrayMap<>();
 
         int order = mStartOrder;
+        final Set<Integer> activeSubIds = new ArraySet<>();
+        final int dataDefaultSubId = SubscriptionManager.getDefaultDataSubscriptionId();
         for (SubscriptionInfo info : SubscriptionUtil.getActiveSubscriptions(mManager)) {
             final int subId = info.getSubscriptionId();
+            activeSubIds.add(subId);
             Preference pref = existingPrefs.remove(subId);
             if (pref == null) {
                 pref = new Preference(mPreferenceGroup.getContext());
                 mPreferenceGroup.addPreference(pref);
             }
             pref.setTitle(info.getDisplayName());
-            pref.setSummary(getSummary(subId));
-            pref.setIcon(R.drawable.ic_network_cell);
+            final boolean isDefaultForData = (subId == dataDefaultSubId);
+            pref.setSummary(getSummary(subId, isDefaultForData));
+            setIcon(pref, subId, isDefaultForData);
             pref.setOrder(order++);
 
             pref.setOnPreferenceClickListener(clickedPref -> {
@@ -150,12 +187,52 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
             mSubscriptionPreferences.put(subId, pref);
         }
+        mSignalStrengthListener.updateSubscriptionIds(activeSubIds);
 
         // Remove any old preferences that no longer map to a subscription.
         for (Preference pref : existingPrefs.values()) {
             mPreferenceGroup.removePreference(pref);
         }
         mUpdateListener.onChildrenUpdated();
+    }
+
+    @VisibleForTesting
+    boolean shouldInflateSignalStrength(int subId) {
+        return SignalStrengthUtil.shouldInflateSignalStrength(mContext, subId);
+    }
+
+    @VisibleForTesting
+    void setIcon(Preference pref, int subId, boolean isDefaultForData) {
+        final TelephonyManager mgr = mContext.getSystemService(
+                TelephonyManager.class).createForSubscriptionId(subId);
+        final SignalStrength strength = mgr.getSignalStrength();
+        int level = (strength == null) ? 0 : strength.getLevel();
+        int numLevels = SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
+        if (shouldInflateSignalStrength(subId)) {
+            level += 1;
+            numLevels += 1;
+        }
+        final boolean showCutOut = !isDefaultForData || !mgr.isDataEnabled();
+        pref.setIcon(getIcon(level, numLevels, showCutOut));
+    }
+
+    @VisibleForTesting
+    Drawable getIcon(int level, int numLevels, boolean cutOut) {
+        return MobileNetworkUtils.getSignalStrengthIcon(mContext, level, numLevels,
+                NO_CELL_DATA_TYPE_ICON, cutOut);
+    }
+
+    private boolean activeNetworkIsCellular() {
+        final Network activeNetwork = mConnectivityManager.getActiveNetwork();
+        if (activeNetwork == null) {
+            return false;
+        }
+        final NetworkCapabilities networkCapabilities = mConnectivityManager.getNetworkCapabilities(
+                activeNetwork);
+        if (networkCapabilities == null) {
+            return false;
+        }
+        return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR);
     }
 
     /**
@@ -169,10 +246,9 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
      *
      * If a subscription isn't the default for anything, we just say it is available.
      */
-    protected String getSummary(int subId) {
+    protected String getSummary(int subId, boolean isDefaultForData) {
         final int callsDefaultSubId = SubscriptionManager.getDefaultVoiceSubscriptionId();
         final int smsDefaultSubId = SubscriptionManager.getDefaultSmsSubscriptionId();
-        final int dataDefaultSubId = SubscriptionManager.getDefaultDataSubscriptionId();
 
         String line1 = null;
         if (subId == callsDefaultSubId && subId == smsDefaultSubId) {
@@ -184,13 +260,13 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         }
 
         String line2 = null;
-        if (subId == dataDefaultSubId) {
+        if (isDefaultForData) {
             final TelephonyManager telMgrForSub = mContext.getSystemService(
                     TelephonyManager.class).createForSubscriptionId(subId);
-            final int dataState = telMgrForSub.getDataState();
-            if (dataState == TelephonyManager.DATA_CONNECTED) {
+            final boolean dataEnabled = telMgrForSub.isDataEnabled();
+            if (dataEnabled && activeNetworkIsCellular()) {
                 line2 = mContext.getString(R.string.mobile_data_active);
-            } else if (!telMgrForSub.isDataEnabled()) {
+            } else if (!dataEnabled) {
                 line2 = mContext.getString(R.string.mobile_data_off);
             } else {
                 line2 = mContext.getString(R.string.default_for_mobile_data);
@@ -231,6 +307,27 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
     @Override
     public void onSubscriptionsChanged() {
+        // See if we need to change which sub id we're using to listen for enabled/disabled changes.
+        int defaultDataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
+        if (defaultDataSubId != mDataEnabledListener.getSubId()) {
+            mDataEnabledListener.stop();
+            mDataEnabledListener.start(defaultDataSubId);
+        }
+        update();
+    }
+
+    @Override
+    public void onMobileDataEnabledChange() {
+        update();
+    }
+
+    @Override
+    public void onDataConnectivityChange() {
+        update();
+    }
+
+    @Override
+    public void onSignalStrengthChanged() {
         update();
     }
 }

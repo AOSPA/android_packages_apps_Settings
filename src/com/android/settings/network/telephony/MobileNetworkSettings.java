@@ -34,6 +34,7 @@ import android.view.MenuItem;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.BillingCyclePreferenceController;
@@ -61,6 +62,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     private static final String LOG_TAG = "NetworkSettings";
     public static final int REQUEST_CODE_EXIT_ECM = 17;
+    public static final int REQUEST_CODE_DELETE_SUBSCRIPTION = 18;
     @VisibleForTesting
     static final String KEY_CLICKED_PREF = "key_clicked_pref";
 
@@ -138,7 +140,8 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
             use(BillingCyclePreferenceController.class).init(mSubId);
             use(MmsMessagePreferenceController.class).init(mSubId);
             use(DisabledSubscriptionController.class).init(getLifecycle(), mSubId);
-            use(DeleteSimProfilePreferenceController.class).init(mSubId, this);
+            use(DeleteSimProfilePreferenceController.class).init(mSubId, this,
+                    REQUEST_CODE_DELETE_SUBSCRIPTION);
         }
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
         use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
@@ -226,6 +229,13 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                 }
                 break;
 
+            case REQUEST_CODE_DELETE_SUBSCRIPTION:
+                final Activity activity = getActivity();
+                if (activity != null && !activity.isFinishing()) {
+                    activity.finish();
+                }
+                break;
+
             default:
                 break;
         }
@@ -261,6 +271,11 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
+                    if (Utils.isNetworkSettingsApkAvailable()) {
+                        Log.i(LOG_TAG, "Vendor network setting app is available, not indexing"
+                                + " MobileNetworkSettings from Settings app.");
+                        return null;
+                    }
                     final ArrayList<SearchIndexableResource> result = new ArrayList<>();
 
                     final SearchIndexableResource sir = new SearchIndexableResource(context);

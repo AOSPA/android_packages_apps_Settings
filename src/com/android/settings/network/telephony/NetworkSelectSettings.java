@@ -29,8 +29,10 @@ import android.telephony.CellIdentity;
 import android.telephony.CellInfo;
 import android.telephony.NetworkRegistrationInfo;
 import android.telephony.ServiceState;
+import android.telephony.SignalStrength;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -230,6 +232,8 @@ public class NetworkSelectSettings extends DashboardFragment {
                     break;
                 case EVENT_NETWORK_SCAN_RESULTS:
                     List<CellInfo> results = aggregateCellInfoList((List<CellInfo>) msg.obj);
+                    Log.d(TAG, "CellInfoList after aggregation: "
+                            + CellInfoUtil.cellInfoListToString(results));
                     mCellInfoList = new ArrayList<>(results);
                     if (mCellInfoList != null && mCellInfoList.size() != 0) {
                         updateAllPreferenceCategory();
@@ -333,7 +337,7 @@ public class NetworkSelectSettings extends DashboardFragment {
                 pref.setSummary(R.string.network_connected);
                 // Update the signal strength icon, since the default signalStrength value would be
                 // zero (it would be quite confusing why the connected network has no signal)
-                pref.setIcon(NetworkOperatorPreference.NUMBER_OF_LEVELS - 1);
+                pref.setIcon(SignalStrength.NUM_SIGNAL_STRENGTH_BINS - 1);
                 mConnectedPreferenceCategory.addPreference(pref);
             } else {
                 // Remove the connected network operators category

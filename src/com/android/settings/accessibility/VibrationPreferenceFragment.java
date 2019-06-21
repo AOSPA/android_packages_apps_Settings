@@ -114,11 +114,20 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
         boolean vibrationEnabled = candidate.getIntensity() != Vibrator.VIBRATION_INTENSITY_OFF;
         if (hasVibrationEnabledSetting()) {
             // Update vibration enabled setting
-            boolean wasEnabled = Settings.System.getInt(getContext().getContentResolver(),
-                    getVibrationEnabledSetting(), 1) == 1;
+            final String vibrationEnabledSetting = getVibrationEnabledSetting();
+            final boolean wasEnabled = TextUtils.equals(
+                        vibrationEnabledSetting, Settings.Global.APPLY_RAMPING_RINGER)
+                    ? true
+                    : (Settings.System.getInt(
+                            getContext().getContentResolver(), vibrationEnabledSetting, 1) == 1);
             if (vibrationEnabled != wasEnabled) {
-                Settings.System.putInt(getContext().getContentResolver(),
-                    getVibrationEnabledSetting(), vibrationEnabled ? 1 : 0);
+                if (vibrationEnabledSetting.equals(Settings.Global.APPLY_RAMPING_RINGER)) {
+                    Settings.Global.putInt(getContext().getContentResolver(),
+                            vibrationEnabledSetting, 0);
+                } else {
+                    Settings.System.putInt(getContext().getContentResolver(),
+                            vibrationEnabledSetting, vibrationEnabled ? 1 : 0);
+                }
             }
         }
         // There are two conditions that need to change the intensity.
@@ -128,6 +137,15 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
             // Update vibration intensity setting
             Settings.System.putInt(getContext().getContentResolver(),
                     getVibrationIntensitySetting(), candidate.getIntensity());
+        } else {
+            // We can't play preview effect here for all cases because that causes a data race
+            // (VibratorService may access intensity settings before these settings are updated).
+            // But we can't just play it in intensity settings update observer, because the
+            // intensity settings are not changed if we turn the vibration off, then on.
+            //
+            // In this case we sould play the preview here.
+            // To be refactored in b/132952771
+            playVibrationPreview();
         }
     }
 
@@ -187,8 +205,12 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
     protected String getDefaultKey() {
         int vibrationIntensity = Settings.System.getInt(getContext().getContentResolver(),
                 getVibrationIntensitySetting(), getDefaultVibrationIntensity());
-        final boolean vibrationEnabled = Settings.System.getInt(getContext().getContentResolver(),
-                getVibrationEnabledSetting(), 1) == 1;
+        final String vibrationEnabledSetting = getVibrationEnabledSetting();
+        final boolean vibrationEnabled = TextUtils.equals(
+                        vibrationEnabledSetting, Settings.Global.APPLY_RAMPING_RINGER)
+                    ? true
+                    : (Settings.System.getInt(
+                            getContext().getContentResolver(), vibrationEnabledSetting, 1) == 1);
         if (!vibrationEnabled) {
             vibrationIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
         }
