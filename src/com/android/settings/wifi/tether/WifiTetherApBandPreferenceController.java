@@ -35,17 +35,20 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     private String[] mBandEntries;
     private String[] mBandSummaries;
     private int mBandIndex;
+    private int mSecurityType;
     private boolean isDualMode;
     private boolean isVendorDualApSupported;
 
     public WifiTetherApBandPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
+        final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
         isDualMode = mWifiManager.isDualModeSupported();
 
         isVendorDualApSupported = context.getResources().getBoolean(
             com.android.internal.R.bool.config_wifi_dual_sap_mode_enabled);
-        updatePreferenceEntries();
+
+        updatePreferenceEntries(config);
     }
 
     @Override
@@ -56,7 +59,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             mBandIndex = 0;
             Log.d(TAG, "Updating band index to 0 because no config");
         } else if (is5GhzBandSupported()) {
-            mBandIndex = validateSelection(config.apBand);
+            mBandIndex = validateSelection(config);
             Log.d(TAG, "Updating band index to " + mBandIndex);
         } else {
             config.apBand = 0;
@@ -70,7 +73,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         preference.setEntryValues(mBandEntries);
 
         if (mBandIndex >= mBandEntries.length) {
-            mBandIndex = tempBandIndex;
+            mBandIndex = tempBandIndex < mBandEntries.length ? tempBandIndex : 0;
         }
 
         if (!is5GhzBandSupported()) {
@@ -104,6 +107,17 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         return true;
     }
 
+    private int validateSelection(WifiConfiguration config) {
+        if (config.apBand ==  WifiConfiguration.AP_BAND_DUAL
+                && config.getAuthType() == WifiConfiguration.KeyMgmt.OWE) {
+            config.apBand = 0;
+            mWifiManager.setWifiApConfiguration(config);
+            Log.d(TAG, "Dual band not supported for OWE security, updating band index to " + mBandIndex);
+        }
+
+        return validateSelection(config.apBand);
+    }
+
     private int validateSelection(int band) {
         // Reset the band to 2.4 GHz if we get a weird config back to avoid a crash.
         final boolean isDualMode = mWifiManager.isDualModeSupported();
@@ -123,6 +137,12 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         return band;
     }
 
+    public void updatePreferenceEntries(WifiConfiguration config) {
+        mSecurityType = (config == null ? WifiConfiguration.KeyMgmt.NONE : config.getAuthType());
+        Log.d(TAG, "updating band preferences.");
+        updatePreferenceEntries();
+     }
+
     @VisibleForTesting
     void updatePreferenceEntries() {
         Resources res = mContext.getResources();
@@ -132,8 +152,8 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         if (isDualMode) {
             entriesRes = R.array.wifi_ap_band_dual_mode;
             summariesRes = R.array.wifi_ap_band_dual_mode_summary;
-        } else if (isVendorDualApSupported) {
-            // change the list option if AP+AP is supproted
+        } else if (isVendorDualApSupported && mSecurityType != WifiConfiguration.KeyMgmt.OWE) {
+            // change the list option if AP+AP is supproted and selected security type is not OWE
             entriesRes = R.array.wifi_ap_band_vendor_config_full;
             summariesRes = R.array.wifi_ap_band_vendor_summary_full;
         }
@@ -151,5 +171,21 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
 
     public int getBandIndex() {
         return mBandIndex;
+    }
+
+    public boolean isVendorDualApSupported() {
+        return isVendorDualApSupported;
+    }
+
+    public boolean isBandEntriesHasDualband() {
+        if (mBandEntries == null)
+            return false;
+
+        for (int i = 0 ; i < mBandEntries.length; i++) {
+            if (Integer.parseInt(mBandEntries[i]) == WifiConfiguration.AP_BAND_DUAL)
+                return true;
+        }
+
+        return false;
     }
 }
