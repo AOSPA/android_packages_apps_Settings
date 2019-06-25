@@ -146,6 +146,8 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
             title.setTypeface(mHeadlineFont);
             TextView bodyText = container.findViewById(R.id.font_card_body);
             bodyText.setTypeface(mBodyFont);
+            container.findViewById(R.id.font_card_divider).setBackgroundColor(
+                    title.getCurrentTextColor());
         }
 
         @Override
