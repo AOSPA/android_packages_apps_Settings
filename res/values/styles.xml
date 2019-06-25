@@ -44,7 +44,7 @@
     <style name="BottomNavStyle">
         <item name="itemIconTint">@color/bottom_nav_item_color</item>
         <item name="itemTextColor">@color/bottom_nav_item_color</item>
-        <item name="itemTextAppearanceActive">@style/BottomNavTextAppearance</item>
+        <item name="itemTextAppearanceActive">@style/BottomNavTextAppearanceActive</item>
         <item name="itemTextAppearanceInactive">@style/BottomNavTextAppearance</item>
         <item name="itemBackground">?android:attr/selectableItemBackgroundBorderless</item>
         <item name="android:background">?android:colorPrimary</item>
@@ -52,6 +52,10 @@
 
     <style name="BottomNavTextAppearance" parent="HeaderTextAppearance">
         <item name="android:textSize">@dimen/bottom_navbar_font_text_size</item>
+    </style>
+
+    <style name="BottomNavTextAppearanceActive" parent="BottomNavTextAppearance">
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- Common components and widgets -->

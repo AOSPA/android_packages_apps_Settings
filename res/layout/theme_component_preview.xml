@@ -23,6 +23,7 @@
     android:id="@+id/theme_preview_card_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="false"
     android:maxHeight="@dimen/preview_theme_max_height"
     android:minHeight="@dimen/preview_theme_min_height"
     android:paddingHorizontal="@dimen/preview_card_padding"
