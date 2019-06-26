@@ -17,6 +17,7 @@ package com.android.customization.model.clock;
 
 import android.content.ContentResolver;
 import android.provider.Settings.Secure;
+import android.text.TextUtils;
 
 import com.android.customization.module.ThemesUserEventLogger;
 
@@ -64,6 +65,9 @@ public class ClockManager extends BaseClockManager {
     @Override
     protected String lookUpCurrentClock() {
         final String value = Secure.getString(mContentResolver, CLOCK_FACE_SETTING);
+        if (TextUtils.isEmpty(value)) {
+            return value;
+        }
         try {
             final JSONObject json = new JSONObject(value);
             return json.getString(CLOCK_FIELD);
