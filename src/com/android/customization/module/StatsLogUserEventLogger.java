@@ -41,7 +41,7 @@ public class StatsLogUserEventLogger extends NoOpUserEventLogger implements Them
     private static final String TAG = "StatsLogUserEventLogger";
 
     @Override
-    public void logResumed() {
+    public void logResumed(boolean provisioned, boolean wallpaper) {
         StatsLogCompat.write(StyleEnums.ONRESUME, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 
