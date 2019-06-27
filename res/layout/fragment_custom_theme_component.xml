@@ -36,7 +36,6 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_max="@dimen/preview_pager_max_height"
-            app:layout_constraintHeight_min="@dimen/preview_pager_min_height"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -47,9 +46,9 @@
                 layout="@layout/theme_component_preview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
                 android:layout_marginHorizontal="@dimen/preview_page_horizontal_margin"
-                android:layout_marginTop="@dimen/preview_page_top_margin"
-                android:layout_marginBottom="@dimen/indicator_container_height"/>
+                android:layout_marginTop="@dimen/preview_page_top_margin"/>
         </FrameLayout>
         <View
             android:id="@+id/divider"
@@ -81,7 +80,9 @@
             android:textSize="@dimen/component_options_title_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline"/>
+            app:layout_constraintTop_toBottomOf="@+id/component_preview_container"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias=".15"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/options_container"
@@ -93,7 +94,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/component_options_title"
-            app:layout_constraintVertical_bias=".2"/>
+            app:layout_constraintVertical_bias=".25"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
