@@ -29,6 +29,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
+import android.content.res.TypedArray;
 import android.graphics.Path;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -49,6 +50,7 @@ import androidx.annotation.Dimension;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.graphics.ColorUtils;
 
 import com.android.customization.model.CustomizationManager;
 import com.android.customization.model.CustomizationOption;
@@ -146,6 +148,8 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
             title.setTypeface(mHeadlineFont);
             TextView bodyText = container.findViewById(R.id.font_card_body);
             bodyText.setTypeface(mBodyFont);
+            container.findViewById(R.id.font_card_divider).setBackgroundColor(
+                    title.getCurrentTextColor());
         }
 
         @Override
@@ -441,7 +445,13 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
             foreground.setIntrinsicHeight(background.getIntrinsicHeight() - borderWidth);
             foreground.setIntrinsicWidth(background.getIntrinsicWidth() - borderWidth);
-            foreground.setTint(res.getColor(R.color.shape_option_tile_foreground_color, theme));
+            TypedArray ta = view.getContext().obtainStyledAttributes(
+                    new int[]{android.R.attr.colorPrimary});
+            int primaryColor = ta.getColor(0, 0);
+            ta.recycle();
+            int foregroundColor = res.getColor(R.color.shape_option_tile_foreground_color, theme);
+
+            foreground.setTint(ColorUtils.blendARGB(primaryColor, foregroundColor, .05f));
 
             thumb.setImageDrawable(mShape);
             view.setContentDescription(mLabel);
