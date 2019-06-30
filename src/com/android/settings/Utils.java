@@ -144,9 +144,9 @@ public final class Utils extends com.android.settingslib.Utils {
             "device_identifier_access_restrictions_disabled";
 
     /**
-     * Whether to show the Permissions Hub.
+     * An int extra specifying a slot ID.
      */
-    public static final String PROPERTY_PERMISSIONS_HUB_ENABLED = "permissions_hub_enabled";
+    public static final String EXTRA_SLOT_ID = "slot_id";
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -1090,6 +1090,7 @@ public final class Utils extends com.android.settingslib.Utils {
             }
         } catch (RemoteException e) {
             // Use aosp NetworkSetting to handle the selection intent
+            Log.e(TAG, "Got exception in isNetworkSettingsApkAvailable.", e);
         }
         return false;
     }

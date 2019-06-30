@@ -1530,6 +1530,11 @@
         </activity>
 
         <activity
+            android:name=".SettingsTutorialDialogWrapperActivity"
+            android:theme="@style/Theme.AlertDialog"
+            android:exported="false"/>
+
+        <activity
             android:name="Settings$TextToSpeechSettingsActivity"
             android:label="@string/tts_settings">
             <intent-filter android:priority="1">
@@ -2536,7 +2541,7 @@
             <intent-filter>
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-160"/>
+            <meta-data android:name="com.android.settings.order" android:value="-440"/>
             <meta-data android:name="com.android.settings.category"
                 android:value="com.android.settings.category.ia.apps"/>
             <meta-data android:name="com.android.settings.summary"

@@ -34,6 +34,7 @@ import android.view.MenuItem;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.BillingCyclePreferenceController;
@@ -138,9 +139,11 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
             use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
             use(BillingCyclePreferenceController.class).init(mSubId);
             use(MmsMessagePreferenceController.class).init(mSubId);
+            use(DataDuringCallsPreferenceController.class).init(getLifecycle(), mSubId);
             use(DisabledSubscriptionController.class).init(getLifecycle(), mSubId);
             use(DeleteSimProfilePreferenceController.class).init(mSubId, this,
                     REQUEST_CODE_DELETE_SUBSCRIPTION);
+            use(DisableSimFooterPreferenceController.class).init(mSubId);
         }
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
         use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
@@ -270,12 +273,23 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
+                    if (Utils.isNetworkSettingsApkAvailable()) {
+                        Log.i(LOG_TAG, "Vendor network setting app is available, not indexing"
+                                + " MobileNetworkSettings from Settings app.");
+                        return null;
+                    }
                     final ArrayList<SearchIndexableResource> result = new ArrayList<>();
 
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.mobile_network_settings;
                     result.add(sir);
                     return result;
+                }
+
+                /** suppress full page if user is not admin */
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return context.getSystemService(UserManager.class).isAdminUser();
                 }
             };
 }

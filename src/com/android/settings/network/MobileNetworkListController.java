@@ -19,15 +19,18 @@ package com.android.settings.network;
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.ArrayMap;
+import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -118,14 +121,30 @@ public class MobileNetworkListController extends AbstractPreferenceController im
                 if (mSubscriptionManager.isActiveSubscriptionId(subId)) {
                     pref.setSummary(R.string.mobile_network_active_sim);
                 } else {
-                    pref.setSummary(R.string.mobile_network_inactive_sim);
+                    pref.setSummary(mContext.getString(R.string.mobile_network_tap_to_activate,
+                            SubscriptionUtil.getDisplayName(info)));
                 }
             }
 
             pref.setOnPreferenceClickListener(clickedPref -> {
-                final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
-                intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
-                mContext.startActivity(intent);
+                if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)) {
+                    mSubscriptionManager.setSubscriptionEnabled(subId, true);
+                } else {
+                    Intent intent;
+                    if (Utils.isNetworkSettingsApkAvailable()) {
+                        intent = new Intent(Intent.ACTION_MAIN);
+                        intent.setComponent(
+                                new ComponentName("com.qualcomm.qti.networksetting",
+                                "com.qualcomm.qti.networksetting.MobileNetworkSettings"));
+                        intent.putExtra(Utils.EXTRA_SLOT_ID, info.getSimSlotIndex());
+                        Log.d(TAG, "slot extra: " + info.getSimSlotIndex()
+                                + "name: " + info.getDisplayName());
+                    } else {
+                        intent = new Intent(mContext, MobileNetworkActivity.class);
+                        intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
+                    }
+                    mContext.startActivity(intent);
+                }
                 return true;
             });
             mPreferences.put(subId, pref);
