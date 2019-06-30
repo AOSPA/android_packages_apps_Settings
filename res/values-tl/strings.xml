@@ -863,7 +863,7 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Awtomatikong i-on ang Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Mag-o-on ulit ang Wi‑Fi kapag malapit sa mga naka-save na network na may mataas na kalidad, gaya ng iyong home network"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="7494539594649967699">"Hindi available dahil naka-off ang lokasyon. I-on ang "<annotation id="link">"lokasyon"</annotation>"."</string>
-    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Hindi available dahil naka-off ang pag-scan para sa Wi‑Fi"</string>
+    <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Hindi available dahil naka-off ang pag-scan ng Wi‑Fi"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Upang magamit, pumili ng provider ng rating ng network"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Iwasan ang mahihinang koneksyon"</string>
     <string name="wifi_poor_network_detection_summary" msgid="7016103106105907127">"Huwag gumamit ng Wi‑Fi network maliban kung mayroon itong magandang koneksyon sa internet"</string>
@@ -1334,7 +1334,7 @@
     <string name="baseband_version" msgid="1848990160763524801">"Bersyon ng baseband"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Bersyon ng Kernel"</string>
     <string name="build_number" msgid="3075795840572241758">"Numero ng build"</string>
-    <string name="module_version" msgid="4826567303427436423">"Mga mainline na bersyon ng module"</string>
+    <string name="module_version" msgid="7329118610303805859">"Pag-update ng system ng Google Play"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"Hindi available"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Katayuan"</string>
@@ -1679,7 +1679,7 @@
     <string name="location_high_battery_use" msgid="517199943258508020">"Mataas na paggamit ng baterya"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Mababang paggamit ng baterya"</string>
     <string name="location_scanning_screen_title" msgid="2297479353298444503">"Pag-scan ng Wi‑Fi at Bluetooth"</string>
-    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Pagsa-scan para sa Wi‑Fi"</string>
+    <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"pag-scan ng Wi‑Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Payagan ang mga app at serbisyo na mag-scan ng mga Wi-Fi network anumang oras, kahit na naka-off ang Wi-Fi. Magagamit ito, halimbawa, para pahusayin ang mga feature at serbisyong batay sa lokasyon."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Pagsa-scan para sa Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Payagan ang mga app at serbisyo na mag-scan ng mga kalapit na device anumang oras, kahit na naka-off ang Bluetooth. Magagamit ito, halimbawa, para pahusayin ang mga feature at serbisyong batay sa lokasyon."</string>
@@ -1710,6 +1710,8 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"Manual para sa kaligtasan at pagkontrol"</string>
     <string name="copyright_title" msgid="865906688917260647">"Copyright"</string>
     <string name="license_title" msgid="1990487604356037871">"Lisensya"</string>
+    <!-- no translation found for module_license_title (258743239066841860) -->
+    <skip />
     <string name="terms_title" msgid="7697580845616764642">"Mga Tuntunin at kondisyon"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"Lisensya ng System WebView"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"Mga Wallpaper"</string>
@@ -2073,13 +2075,22 @@
     <string name="accessibility_captioning_title" msgid="8068289534732163115">"Mga kagustuhan sa caption"</string>
     <string name="accessibility_screen_magnification_title" msgid="6001128808776506021">"Pag-magnify"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3719929521571489913">"Mag-magnify gamit ang triple-tap"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="7141753038957538230">"Mag-magnify gamit ang button"</string>
-    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="2760906043221923793">"Mag-magnify gamit ang button at triple-tap"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="4203215572713684224">"Mag-magnify gamit ang shortcut"</string>
+    <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8416035446297644642">"Mag-magnify gamit ang shortcut at pag-triple tap"</string>
     <string name="accessibility_preference_magnification_summary" msgid="5867883657521404509">"Mag-zoom in sa screen"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Mag-tap nang 3 beses upang mag-zoom"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Mag-tap ng button upang mag-zoom"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Upang mag-zoom"</b>", mabilisang i-tap ang screen nang 3 beses.\n"<ul><li>"I-drag ang 2 o higit pang daliri upang mag-scroll"</li>\n<li>"I-pinch ang 2 o higit pang daliri upang isaayos ang zoom"</li></ul>\n\n<b>"Upang mag-zoom pansamantala"</b>", mabilisang i-tap ang screen nang 3 beses at pumindot nang matagal sa pangatlong pag-tap.\n"<ul><li>"Mag-drag upang gumalaw-galaw sa screen"</li>\n<li>"Iangat ang iyong daliri upang mag-zoom out"</li></ul>\n\n"Hindi ka maaaring mag-zoom in sa keyboard at navigation bar."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Kapag naka-on ang pag-magnify, gamitin ang button na Pagiging Naa-access sa ibaba ng screen upang mabilisang mag-magnify.\n\n"<b>"Upang mag-zoom"</b>", i-tap ang button na Pagiging Naa-access, pagkatapos ay mag-tap saanman sa screen.\n"<ul><li>"I-drag ang 2 o higit pang daliri upang mag-scroll"</li>\n<li>"I-pinch ang 2 o higit pang daliri upang isaayos ang zoom"</li></ul>\n\n<b>"Upang mag-zoom pansamantala"</b>", i-tap ang button na Pagiging Naa-access, pagkatapos ay pumindot nang matagal saanman sa screen.\n"<ul><li>"Mag-drag upang gumalaw-galaw sa screen"</li>\n<li>"Iangat ang daliri upang mag-zoom out"</li></ul>\n\n"Hindi ka maaaring mag-zoom in sa keyboard o navigation bar."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Kapag naka-on ang pag-magnify, makakapag-zoom in ka sa iyong screen.\n\n"<b>"Para mag-zoom"</b>", simulan ang pag-magnify, pagkatapos ay mag-tap kahit saan sa screen.\n"<ul><li>"• Mag-drag ng 2 o higit pang daliri para mag-scroll"</li>\n<li>"• Mag-pinch ng 2 o higit pang daliri para i-adjust ang zoom"</li></ul>\n\n<b>"Para pansamantalang mag-zoom"</b>", simulan ang pag-magnify, pagkatapos ay pumindot nang matagal kahit saan sa screen.\n"<ul><li>"• Mag-drag para mag-navigate sa screen"</li>\n<li>"• Iangat ang daliri para mag-zoom out"</li></ul>\n\n"Hindi ka puwedeng mag-zoom in sa keyboard o navigation bar."</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Gamitin ang button sa accessibility para buksan"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Gumamit ng galaw para buksan"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Gamitin ang bagong galaw sa pagiging accessible"</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Para i-on o i-off ang serbisyong ito, i-tap ang button ng pagiging accessible<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>sa ibaba ng iyong screen.\n\nPara magpalipat-lipat sa mga serbisyo, pindutin nang matagal ang button ng pagiging accessible."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Para i-on o i-off ang serbisyong ito, mag-swipe pataas mula sa ibaba ng screen gamit ang dalawang daliri.\n\nPara magpalipat-lipat sa mga serbisyo, mag-swipe pataas gamit ang dalawang daliri at i-hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Para i-on o i-off ang serbisyong ito, mag-swipe pataas mula sa ibaba ng screen gamit ang tatlong daliri.\n\nPara magpalipat-lipat sa mga serbisyo, mag-swipe pataas gamit ang tatlong daliri at i-hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Para i-on o i-off ang isang serbisyo sa pagiging accessible, mag-swipe pataas mula sa ibaba ng screen gamit ang dalawang daliri.\n\nPara magpalipat-lipat sa mga serbisyo, mag-swipe pataas gamit ang dalawang daliri at i-hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Para i-on o i-off ang isang serbisyo sa pagiging accessible, mag-swipe pataas mula sa ibaba ng screen gamit ang tatlong daliri.\n\nPara magpalipat-lipat sa mga serbisyo, mag-swipe pataas gamit ang tatlong daliri at i-hold."</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Nakatakda sa <xliff:g id="SERVICE">%1$s</xliff:g> ang button na Pagiging Naa-access. Upang gumamit ng pag-magnify, pindutin nang matagal ang button na Pagiging Naa-access, pagkatapos ay piliin ang pag-magnify."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Shortcut gamit ang volume key"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Serbisyo ng shortcut"</string>
@@ -2114,14 +2125,14 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Pag-vibrate kapag may notification"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Pag-vibrate kapag nag-ring"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Feedback sa pagpindot"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Gumamit ng serbisyo"</string>
+    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Gamitin ang serbisyo"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Gumamit ng pagwawasto ng kulay"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Gumamit ng mga caption"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Magpatuloy"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Mga hearing aid"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Walang nakakonektang hearing aid"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"Magdagdag ng mga hearing aid"</string>
-    <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Para ipares ang iyong mga hearing aid, hanapin at i-tap ang iyong device sa susunod na screen."</string>
+    <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Para ipares ang hearing aids mo, hanapin at i-tap ang device mo sa susunod na screen."</string>
     <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Tiyaking nasa mode ng pagpapares ang iyong mga hearing aid."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"Aktibo ang <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
@@ -2196,7 +2207,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Cyan"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Dilaw"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="1374048678465697350">"Bigyan ang <xliff:g id="SERVICE">%1$s</xliff:g> ng ganap na kontrol sa iyong device?"</string>
+    <string name="enable_service_title" msgid="2813477981936919847">"Bigyan ang <xliff:g id="SERVICE">%1$s</xliff:g> ng ganap na kontrol sa iyong device?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"Kailangan ng <xliff:g id="SERVICE">%1$s</xliff:g> na:"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Dahil pinipigilan ng isang app ang kahilingan ng pahintulot, hindi ma-verify ng Mga Setting ang iyong tugon."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Kung io-on mo ang <xliff:g id="SERVICE">%1$s</xliff:g>, hindi gagamitin ng iyong device ang lock ng iyong screen upang pahusayin ang pag-encrypt ng data."</string>
@@ -2208,7 +2219,7 @@
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Naaangkop ang ganap na kontrol sa mga app na tumutulong sa mga pangangailangan mo sa accessibility, pero hindi sa karamihan ng mga app."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Tingnan at kontrolin ang screen"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Mababasa nito ang lahat ng content na nasa screen at makakapagpakita ito ng content sa iba pang app."</string>
-    <string name="accessibility_service_action_perform_title" msgid="5228338448018587344">"Mga pagkilos sa pagtingin at platform"</string>
+    <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Tumingin at magsagawa ng mga pagkilos"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Masusubaybayan nito ang iyong mga pakikipag-ugayan sa isang app o hardware na sensor, at puwede itong makipag-ugnayan sa mga app para sa iyo."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Payagan"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Tanggihan"</string>
@@ -2604,8 +2615,6 @@
     <string name="managed_device_admin_title" msgid="7853955652864478435">"Trabaho"</string>
     <string name="sms_access_restriction_enabled" msgid="7054488078710530278">"Paghigpitan ang access sa SMS at log ng tawag"</string>
     <string name="sms_access_restriction_enabled_summary" msgid="6851339654677842328">"Ang mga default na app sa telepono at pagmemensahe lang ang may mga pahintulot sa SMS at log ng tawag"</string>
-    <string name="device_identifier_access_restrictions_title" msgid="263947581571420743">"I-disable ang mga paghihigpit sa device identifier"</string>
-    <string name="device_identifier_access_restrictions_summary" msgid="1716838570236517731">"I-disable ang mga bagong paghihigpit sa access para sa mga identifier ng device"</string>
     <string name="no_trust_agents" msgid="7450273545568977523">"Walang available na mga trust agent"</string>
     <string name="add_device_admin_msg" msgid="1501847129819382149">"I-activate ang app ng admin ng device?"</string>
     <string name="add_device_admin" msgid="4192055385312215731">"I-activate ang app ng admin ng device na ito"</string>
@@ -3079,7 +3088,8 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="5018708106066758867">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="5250078362483148199">"Bluetooth"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Mga app at notification"</string>
-    <string name="app_and_notification_dashboard_summary" msgid="6513508041918469381">"Assistant, mga kamakailang app, mga default na app"</string>
+    <!-- no translation found for app_and_notification_dashboard_summary (3285151907659820564) -->
+    <skip />
     <string name="notification_settings_work_profile" msgid="3186757479243373003">"Hindi available ang access sa notification para sa mga app sa profile sa trabaho."</string>
     <string name="account_dashboard_title" msgid="5895948991491438911">"Mga Account"</string>
     <string name="account_dashboard_default_summary" msgid="3998347400161811075">"Walang naidagdag na account"</string>
@@ -3137,7 +3147,7 @@
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"galaw"</string>
     <string name="keywords_face_unlock" msgid="254144854349092754">"mukha, i-unlock, auth, mag-sign in"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, bersyon ng prl, imei sv"</string>
-    <string name="keywords_sim_status" msgid="1474422416860990564">"network, status ng mobile network, status ng serbisyo, lakas ng signal, uri ng mobile network, naka-roaming, iccid"</string>
+    <string name="keywords_sim_status" msgid="6682044233620329507">"network, status ng mobile network, status ng serbisyo, lakas ng signal, uri ng mobile network, roaming, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"serial number, bersyon ng hardware"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"antas ng patch ng seguridad ng android, bersyon ng baseband, kernel version"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"tema, maliwanag, madilim, mode"</string>
@@ -3340,10 +3350,11 @@
     <string name="advanced_section_header" msgid="8833934850242546903">"Advanced"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Mga notification sa trabaho"</string>
     <string name="smart_notifications_title" msgid="3702411478231865970">"Mga adaptive na notification"</string>
-    <string name="asst_capability_prioritizer_title" msgid="6691908606916292167">"Awtomatikong Pag-prioritize"</string>
+    <string name="asst_capability_prioritizer_title" msgid="3854208223528908688">"Priyoridad ng adaptive na notification"</string>
     <string name="asst_capability_prioritizer_summary" msgid="7553129095829077229">"Awtomatikong itakda sa Malumanay ang mga notification na may mababang priyoridad"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="8621608733904251499">"Mga iminumungkahing pagkilos at tugon"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="2367828721274129806">"Awtomatikong ipakita ang mga iminumungkahing pagkilos at tugon"</string>
+    <string name="snooze_options_title" msgid="7447722951050463793">"Payagan ang pag-snooze ng notification"</string>
     <string name="hide_silent_icons_title" msgid="3803036978493857276">"Itago ang mga icon mula sa mga malumanay na notification"</string>
     <string name="hide_silent_icons_summary" msgid="8422819235336628802">"Hindi ipinapakita sa status bar ang mga icon mula sa mga malumanay na notification"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Payagan ang notification dots"</string>
@@ -3371,22 +3382,14 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Patay-sinding ilaw"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Lock screen"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kapag naka-lock ang work profile"</string>
-    <!-- no translation found for lock_screen_notifs_title (3812061224136552712) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_all (5848645268278883539) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_alerting (3085615237751195449) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_none (3357167536259901686) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact (3942294440983226225) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_summary (3095153536179931941) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work (6777821963954035608) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_redact_work_summary (2179290697692276201) -->
-    <skip />
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Mga notification sa lockscreen"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Ipakita ang mga nag-aalerto at tahimik na notification"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Mga nag-aalertong notification lang ang ipakita"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Huwag magpakita ng mga notification"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Mga sensitibong notification"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Magpakita ng sensitibong content kapag naka-lock"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Mga sensitibong notification mula sa profile sa trabaho"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Magpakita ng sensitibong content mula sa profile sa trabaho kapag naka-lock"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Ipakita ang lahat ng content ng notification"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Ipakita lang ang sensitibong content kapag naka-unlock"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Huwag magpakita ng mga notification"</string>
@@ -3413,16 +3416,13 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Mataas"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Mag-pop sa screen"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"I-block"</string>
-    <!-- no translation found for notification_silence_title (6986752165900591125) -->
-    <skip />
-    <string name="notification_alert_title" msgid="7426286507434650473">"Naka-prioritize"</string>
+    <string name="notification_silence_title" msgid="6986752165900591125">"Naka-silent"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"Nag-aalerto"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Payagan ang mga pagkaantala"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Hayaan ang app na tumunog, mag-vibrate, at/o mag-pop ng mga notification sa screen"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Sa pull-down shade, i-collapse ang mga notification sa isang linya"</string>
-    <!-- no translation found for notification_channel_summary_low (7050068866167282765) -->
-    <skip />
-    <!-- no translation found for notification_channel_summary_default (5753454293847059695) -->
-    <skip />
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Nakakatulong sa iyong tumuon nang walang tunog o pag-vibrate"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Kinukuha ang iyong atensyon sa pamamagitan ng tunog o pag-vibrate"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Kapag naka-unlock ang device, ipakita ang mga notification bilang banner sa itaas ng screen"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Ipakita ang mga notification"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Mga Adaptive na Notification"</string>
@@ -4194,14 +4194,25 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Mas mabilis na kumuha ng mga selfie"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"System navigation"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"2-button na navigation"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Para magpalipat-lipat sa mga app, mag-swipe pataas sa button ng Home. Mag-swipe ulit pataas para makita ang lahat ng app. Gumagana mula sa anumang screen. Hindi ka na magkakaroon ng button na Overview sa kanan sa ibaba ng iyong screen."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Para magpalipat-lipat sa mga app, mag-swipe pataas sa Home button. Para makita ang lahat ng app, mag-swipe ulit pataas. Para bumalik, i-tap ang button na bumalik."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Subukan ang bagong button ng Home"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"I-on ang bagong galaw para magpalipat-lipat sa mga app"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigation gamit ang galaw"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Para pumunta sa Home, mag-swipe pataas mula sa ibaba ng screen. Para Bumalik, mag-swipe mula sa kaliwa o sa kanang dulo ng screen. Para magpalit ng app, mag-swipe pataas mula sa ibaba ng screen at i-hold bago bitawan."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Para pumunta sa Home, mag-swipe pataas mula sa ibaba ng screen. Para magpalipat-lipat sa mga app, mag-swipe pataas mula sa ibaba, i-hold, pagkatapos ay bitawan. Para bumalik, mag-swipe mula sa kaliwa o kanang dulo."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3-button na navigation"</string>
-    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Classic na Android navigation mode kung saan ang pagpunta sa Home, pagpapalit ng mga app, at Pagbalik ay puwedeng ma-access sa pamamagitan ng mga button."</string>
+    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Bumalik, pumunta sa Home, at magpalipat-lipat sa mga app gamit ang mga button sa ibaba ng iyong screen."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"system navigation, 2 button na navigation, 3 button na navigation, navigation gamit ang galaw"</string>
+    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Hindi sinusuportahan ng iyong default na home app na <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
+    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Lumipat sa default na home app"</string>
+    <string name="information_label" msgid="8133109685432913360">"Impormasyon"</string>
+    <!-- no translation found for low_label (1679136861385616813) -->
+    <skip />
+    <!-- no translation found for high_label (7278863493316447831) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_message (1742132397253621623) -->
+    <skip />
+    <!-- no translation found for back_sensitivity_dialog_title (5403946345652118253) -->
+    <skip />
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Mag-double tap para suriin ang telepono"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Mag-double tap upang suriin ang tablet"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Mag-double tap upang suriin ang device"</string>
@@ -4361,8 +4372,6 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Na-off ang feature na ito dahil pinapabagal nito ang iyong telepono"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Ipatupad ang kumpletong sukat ng GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Sinusubaybayan ang lahat ng constellation at dalas ng GNSS nang walang duty cycling"</string>
-    <string name="allow_background_activity_starts" msgid="4121456477541603005">"Payagang magsimula ng aktibidad sa background"</string>
-    <string name="allow_background_activity_starts_summary" msgid="6837591829176921245">"Pinapayagang magsimula ang lahat ng aktibidad sa background"</string>
     <string name="show_first_crash_dialog" msgid="8889957119867262599">"Palaging ipakita ang dialog ng pag-crash"</string>
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Magpakita ng dialog sa tuwing magka-crash ang isang app"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Pumili ng app na may naka-enable na ANGLE"</string>
@@ -4375,10 +4384,15 @@
     <string name="game_driver_app_preference_title" msgid="5072626013346650374">"Pumili ng Graphics Driver"</string>
     <string name="game_driver_app_preference_default" msgid="7686384740483216333">"Default"</string>
     <string name="game_driver_app_preference_game_driver" msgid="6426312331295324606">"Game Driver"</string>
+    <string name="game_driver_app_preference_prerelease_driver" msgid="1295460693830677733">"Prerelease na Driver"</string>
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Graphics Driver ng System"</string>
+    <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
+    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
+    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Hindi sinusuportahan ang setting sa teleponong ito"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Hindi sinusuportahan ang setting sa tablet na ito"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Hindi sinusuportahan ang setting sa device na ito"</string>
@@ -4489,10 +4503,14 @@
     <string name="mobile_network_inactive_sim" msgid="291768076436646044">"Hindi aktibo / SIM"</string>
     <string name="mobile_network_active_esim" msgid="4914509039134228659">"Aktibo / Na-download na SIM"</string>
     <string name="mobile_network_inactive_esim" msgid="7653631389686307842">"Hindi aktibo / Na-download na SIM"</string>
-    <string name="mobile_network_sim_name" msgid="5081645961314356327">"Pangalan ng SIM"</string>
-    <string name="mobile_network_sim_name_rename" msgid="7626733408098403107">"Palitan ang pangalan"</string>
+    <string name="mobile_network_sim_name" msgid="6026120971523242277">"Pangalan &amp; kulay ng SIM"</string>
+    <string name="mobile_network_sim_name_label" msgid="281403463781467324">"Pangalan"</string>
+    <string name="mobile_network_sim_color_label" msgid="3662112943353180621">"Kulay (ginagamit ng mga compatible app)"</string>
+    <string name="mobile_network_sim_name_rename" msgid="3082357234342116252">"I-save"</string>
     <string name="mobile_network_use_sim_on" msgid="8035448244261570189">"Gumamit ng SIM"</string>
     <string name="mobile_network_use_sim_off" msgid="889073420068380943">"Naka-off"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="1515981880164339357">"Para i-disable ang SIM na ito, alisin ang SIM card"</string>
+    <string name="mobile_network_tap_to_activate" msgid="4573431375941175566">"I-tap para i-activate ang <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="6546784593612512953">"Lumipat sa <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="1621021150667547211">"Isang na-download na SIM lang ang puwedeng maging aktibo sa isang pagkakataon.\n\nHindi makakansela ang iyong serbisyo sa <xliff:g id="CARRIER2">%2$s</xliff:g> kapag lumipat ka sa <xliff:g id="CARRIER1">%1$s</xliff:g>."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8025086398614992834">"Lumipat sa <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4606,4 +4624,11 @@
     <string name="enable_sending_mms_notification_title" msgid="3852773093703966351">"Hindi mapadala ang mensaheng MMS"</string>
     <string name="enable_mms_notification_summary" msgid="7643379825980866408">"I-tap para payagan ang pagmemensahe ng MMS sa <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> kapag naka-off ang mobile data"</string>
     <string name="enable_mms_notification_channel_title" msgid="4402474709766126987">"Mensaheng MMS"</string>
+    <string name="sim_combination_warning_notification_title" msgid="3717178238465948430">"May isyu sa kumbinasyon ng SIM"</string>
+    <string name="dual_cdma_sim_warning_notification_summary" msgid="2602011424635850202">"Puwedeng malimitahan ng paggamit sa <xliff:g id="OPERATOR_NAMES">%1$s</xliff:g> ang functionality. Mag-tap para matuto pa."</string>
+    <string name="dual_cdma_sim_warning_notification_channel_title" msgid="4144088600737896010">"Kumbinasyon ng SIM"</string>
+    <!-- no translation found for work_policy_privacy_settings (2348992644755730215) -->
+    <skip />
+    <!-- no translation found for work_policy_privacy_settings_summary (2236899807429121767) -->
+    <skip />
 </resources>
