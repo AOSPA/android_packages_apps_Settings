@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -568,7 +569,15 @@ public class ThemeFragment extends ToolbarFragment {
                 }
                 view.findViewById(R.id.theme_preview_card_background).setBackground(background);
                 if (mScrim == null && !mIsTranslucent) {
+                    boolean shouldRecycle = false;
+                    if (bitmap.getConfig() == Config.HARDWARE) {
+                        bitmap = bitmap.copy(Config.ARGB_8888, false);
+                        shouldRecycle = true;
+                    }
                     int colorsHint = WallpaperColors.fromBitmap(bitmap).getColorHints();
+                    if (shouldRecycle) {
+                        bitmap.recycle();
+                    }
                     TextView header = view.findViewById(R.id.theme_preview_card_header);
                     if ((colorsHint & WallpaperColors.HINT_SUPPORTS_DARK_TEXT) == 0) {
                         int colorLight = res.getColor(R.color.text_color_light, null);
