@@ -17,6 +17,8 @@ package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemProperties;
@@ -262,6 +264,20 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
             return false;
         }
         final BluetoothDevice device = cachedDevice.getDevice();
-        return device.getBondState() == BluetoothDevice.BOND_BONDED && cachedDevice.isConnected();
+        return device.getBondState() == BluetoothDevice.BOND_BONDED &&
+            (cachedDevice.isConnected() || isGattProfileConnected(cachedDevice));
+    }
+
+    /**
+     * @return {@code true} if any of BluetoothGatt Profile is connected.
+     */
+    public boolean isGattProfileConnected(CachedBluetoothDevice cachedDevice) {
+        BluetoothManager bluetoothManager =
+                (BluetoothManager) mPrefContext.getSystemService(Context.BLUETOOTH_SERVICE);
+        if (bluetoothManager.getConnectionState(cachedDevice.getDevice(),
+                BluetoothProfile.GATT) == BluetoothProfile.STATE_CONNECTED) {
+            return true;
+        }
+        return false;
     }
 }
