@@ -121,25 +121,30 @@ public class MobileNetworkListController extends AbstractPreferenceController im
                 if (mSubscriptionManager.isActiveSubscriptionId(subId)) {
                     pref.setSummary(R.string.mobile_network_active_sim);
                 } else {
-                    pref.setSummary(R.string.mobile_network_inactive_sim);
+                    pref.setSummary(mContext.getString(R.string.mobile_network_tap_to_activate,
+                            SubscriptionUtil.getDisplayName(info)));
                 }
             }
 
             pref.setOnPreferenceClickListener(clickedPref -> {
-                Intent intent;
-                if (Utils.isNetworkSettingsApkAvailable()) {
-                    intent = new Intent(Intent.ACTION_MAIN);
-                    intent.setComponent(
-                            new ComponentName("com.qualcomm.qti.networksetting",
-                            "com.qualcomm.qti.networksetting.MobileNetworkSettings"));
-                    intent.putExtra(Utils.EXTRA_SLOT_ID, info.getSimSlotIndex());
-                    Log.d(TAG, "slot extra: " + info.getSimSlotIndex()
-                            + "name: " + info.getDisplayName());
+                if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)) {
+                    mSubscriptionManager.setSubscriptionEnabled(subId, true);
                 } else {
-                    intent = new Intent(mContext, MobileNetworkActivity.class);
-                    intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
+                    Intent intent;
+                    if (Utils.isNetworkSettingsApkAvailable()) {
+                        intent = new Intent(Intent.ACTION_MAIN);
+                        intent.setComponent(
+                                new ComponentName("com.qualcomm.qti.networksetting",
+                                "com.qualcomm.qti.networksetting.MobileNetworkSettings"));
+                        intent.putExtra(Utils.EXTRA_SLOT_ID, info.getSimSlotIndex());
+                        Log.d(TAG, "slot extra: " + info.getSimSlotIndex()
+                                + "name: " + info.getDisplayName());
+                    } else {
+                        intent = new Intent(mContext, MobileNetworkActivity.class);
+                        intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
+                    }
+                    mContext.startActivity(intent);
                 }
-                mContext.startActivity(intent);
                 return true;
             });
             mPreferences.put(subId, pref);

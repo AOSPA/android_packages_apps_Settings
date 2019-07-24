@@ -36,11 +36,15 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     private String[] mBandSummaries;
     private int mBandIndex;
     private boolean isDualMode;
+    private boolean isVendorDualApSupported;
 
     public WifiTetherApBandPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
         isDualMode = mWifiManager.isDualModeSupported();
+
+        isVendorDualApSupported = context.getResources().getBoolean(
+            com.android.internal.R.bool.config_wifi_dual_sap_mode_enabled);
         updatePreferenceEntries();
     }
 
@@ -128,6 +132,10 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         if (isDualMode) {
             entriesRes = R.array.wifi_ap_band_dual_mode;
             summariesRes = R.array.wifi_ap_band_dual_mode_summary;
+        } else if (isVendorDualApSupported) {
+            // change the list option if AP+AP is supproted
+            entriesRes = R.array.wifi_ap_band_vendor_config_full;
+            summariesRes = R.array.wifi_ap_band_vendor_summary_full;
         }
         mBandEntries = res.getStringArray(entriesRes);
         mBandSummaries = res.getStringArray(summariesRes);
