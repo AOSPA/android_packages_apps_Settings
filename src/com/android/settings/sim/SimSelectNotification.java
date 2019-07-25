@@ -24,6 +24,10 @@ import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELE
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_ALL;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_NONE;
+import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_NAMES;
+import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_WARNING_TYPE;
+import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_WARNING_TYPE_DUAL_CDMA;
+import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_WARNING_TYPE_NONE;
 import static android.telephony.TelephonyManager.EXTRA_SUBSCRIPTION_ID;
 import static android.telephony.data.ApnSetting.TYPE_MMS;
 
@@ -36,13 +40,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settingslib.HelpUtils;
 
 import org.codeaurora.internal.IExtTelephony;
 
@@ -52,6 +59,8 @@ public class SimSelectNotification extends BroadcastReceiver {
     public static final int SIM_SELECT_NOTIFICATION_ID = 1;
     @VisibleForTesting
     public static final int ENABLE_MMS_NOTIFICATION_ID = 2;
+    @VisibleForTesting
+    public static final int SIM_WARNING_NOTIFICATION_ID = 3;
 
     @VisibleForTesting
     public static final String SIM_SELECT_NOTIFICATION_CHANNEL =
@@ -60,6 +69,10 @@ public class SimSelectNotification extends BroadcastReceiver {
     @VisibleForTesting
     public static final String ENABLE_MMS_NOTIFICATION_CHANNEL =
             "enable_mms_notification_channel";
+
+    @VisibleForTesting
+    public static final String SIM_WARNING_NOTIFICATION_CHANNEL =
+            "sim_warning_notification_channel";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -95,6 +108,11 @@ public class SimSelectNotification extends BroadcastReceiver {
             Log.w(TAG, "onEnableMmsDataRequest invalid sub ID " + subId);
             return;
         }
+        final SubscriptionInfo info = subscriptionManager.getActiveSubscriptionInfo(subId);
+        if (info == null) {
+            Log.w(TAG, "onEnableMmsDataRequest null SubscriptionInfo for sub ID " + subId);
+            return;
+        }
 
         // Getting request reason from extra, which will determine the notification title.
         CharSequence notificationTitle = null;
@@ -119,7 +137,7 @@ public class SimSelectNotification extends BroadcastReceiver {
         }
 
         CharSequence notificationSummary = context.getResources().getString(
-                R.string.enable_mms_notification_summary, tm.getSimOperatorName());
+                R.string.enable_mms_notification_summary, SubscriptionUtil.getDisplayName(info));
 
         cancelEnableMmsNotification(context);
 
@@ -127,13 +145,23 @@ public class SimSelectNotification extends BroadcastReceiver {
     }
 
     private void onPrimarySubscriptionListChanged(Context context, Intent intent) {
+        startSimSelectDialogIfNeeded(context, intent);
+        sendSimCombinationWarningIfNeeded(context, intent);
+    }
+
+    private void startSimSelectDialogIfNeeded(Context context, Intent intent) {
+        int dialogType = intent.getIntExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
+                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_NONE);
+
+        if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_NONE) {
+            return;
+        }
+
         // Cancel any previous notifications
         cancelSimSelectNotification(context);
         // Create a notification to tell the user that some defaults are missing
         createSimSelectNotification(context);
 
-        int dialogType = intent.getIntExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
-                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_NONE);
         if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_ALL) {
             int subId = intent.getIntExtra(EXTRA_SUBSCRIPTION_ID,
                     SubscriptionManager.DEFAULT_SUBSCRIPTION_ID);
@@ -141,15 +169,28 @@ public class SimSelectNotification extends BroadcastReceiver {
             // If there is only one subscription, ask if user wants to use if for everything
             Intent newIntent = new Intent(context, SimDialogActivity.class);
             newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            newIntent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, SimDialogActivity.PREFERRED_PICK);
+            newIntent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY,
+                    SimDialogActivity.PREFERRED_PICK);
             newIntent.putExtra(SimDialogActivity.PREFERRED_SIM, slotIndex);
             context.startActivity(newIntent);
         } else if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA) {
-            // If there are mulitple, ensure they pick default data
+            // If there are multiple, ensure they pick default data
             Intent newIntent = new Intent(context, SimDialogActivity.class);
             newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             newIntent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, SimDialogActivity.DATA_PICK);
             context.startActivity(newIntent);
+        }
+    }
+
+    private void sendSimCombinationWarningIfNeeded(Context context, Intent intent) {
+        final int warningType = intent.getIntExtra(EXTRA_SIM_COMBINATION_WARNING_TYPE,
+                EXTRA_SIM_COMBINATION_WARNING_TYPE_NONE);
+
+        if (warningType == EXTRA_SIM_COMBINATION_WARNING_TYPE_DUAL_CDMA) {
+            // Cancel any previous notifications
+            cancelSimCombinationWarningNotification(context);
+            // Create a notification to tell the user that some defaults are missing
+            createSimCombinationWarningNotification(context, intent);
         }
     }
 
@@ -223,5 +264,53 @@ public class SimSelectNotification extends BroadcastReceiver {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(ENABLE_MMS_NOTIFICATION_ID);
+    }
+
+    private void createSimCombinationWarningNotification(Context context, Intent intent){
+        final Resources resources = context.getResources();
+        final String simNames = intent.getStringExtra(EXTRA_SIM_COMBINATION_NAMES);
+
+        if (simNames == null) {
+            return;
+        }
+
+        CharSequence dualCdmaSimWarningSummary = resources.getString(
+                R.string.dual_cdma_sim_warning_notification_summary, simNames);
+
+        NotificationChannel notificationChannel = new NotificationChannel(
+                SIM_WARNING_NOTIFICATION_CHANNEL,
+                resources.getText(R.string.dual_cdma_sim_warning_notification_channel_title),
+                NotificationManager.IMPORTANCE_HIGH);
+
+        Notification.Builder builder =
+                new Notification.Builder(context, SIM_WARNING_NOTIFICATION_CHANNEL)
+                        .setSmallIcon(R.drawable.ic_sim_card_alert_white_48dp)
+                        .setColor(context.getColor(R.color.sim_noitification))
+                        .setContentTitle(resources.getText(
+                                R.string.sim_combination_warning_notification_title))
+                        .setContentText(dualCdmaSimWarningSummary)
+                        .setStyle(new Notification.BigTextStyle().bigText(
+                                dualCdmaSimWarningSummary))
+                        .setAutoCancel(true);
+
+        // Create the pending intent that will lead to the helper page.
+        Intent resultIntent = HelpUtils.getHelpIntent(
+                context,
+                context.getString(R.string.help_uri_sim_combination_warning),
+                context.getClass().getName());
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+        builder.setContentIntent(resultPendingIntent);
+
+        NotificationManager notificationManager =
+                context.getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(notificationChannel);
+        notificationManager.notify(SIM_WARNING_NOTIFICATION_ID, builder.build());
+    }
+
+    public static void cancelSimCombinationWarningNotification(Context context) {
+        NotificationManager notificationManager =
+                context.getSystemService(NotificationManager.class);
+        notificationManager.cancel(SIM_WARNING_NOTIFICATION_ID);
     }
 }
