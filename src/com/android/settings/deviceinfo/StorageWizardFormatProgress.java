@@ -93,21 +93,24 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
                     storage.partitionPrivate(activity.mDisk.getId());
                     publishProgress(40);
 
-                    final VolumeInfo privateVol = activity.findFirstVolume(TYPE_PRIVATE, 25);
+                    final VolumeInfo privateVol = activity.findFirstVolume(TYPE_PRIVATE, 50);
                     final CompletableFuture<PersistableBundle> result = new CompletableFuture<>();
-                    storage.benchmark(privateVol.getId(), new IVoldTaskListener.Stub() {
-                        @Override
-                        public void onStatus(int status, PersistableBundle extras) {
-                            // Map benchmark 0-100% progress onto 40-80%
-                            publishProgress(40 + ((status * 40) / 100));
-                        }
+                    if(null != privateVol) {
+                        storage.benchmark(privateVol.getId(), new IVoldTaskListener.Stub() {
+                            @Override
+                            public void onStatus(int status, PersistableBundle extras) {
+                                // Map benchmark 0-100% progress onto 40-80%
+                                publishProgress(40 + ((status * 40) / 100));
+                            }
 
-                        @Override
-                        public void onFinished(int status, PersistableBundle extras) {
-                            result.complete(extras);
-                        }
-                    });
-                    mPrivateBench = result.get(60, TimeUnit.SECONDS).getLong("run", Long.MAX_VALUE);
+                            @Override
+                            public void onFinished(int status, PersistableBundle extras) {
+                                result.complete(extras);
+                            }
+                        });
+                        mPrivateBench = result.get(60, TimeUnit.SECONDS).getLong("run",
+                                Long.MAX_VALUE);
+                    }
 
                     // If we just adopted the device that had been providing
                     // physical storage, then automatically move storage to the
