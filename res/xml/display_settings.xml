@@ -128,17 +128,34 @@
         android:key="lift_to_wake"
         android:title="@string/lift_to_wake_title" />
 
-    <ListPreference
-        android:key="theme"
-        android:title="@string/color_theme"
-        android:summary="@string/summary_placeholder" />
+    <PreferenceCategory
+        android:key="look_and_feel_category"
+        android:title="@string/look_and_feel_category_preference_title">
 
-    <ListPreference
-        android:key="systemui_theme"
-        android:title="@string/device_theme"
-        android:entries="@array/systemui_theme_entries"
-        android:entryValues="@array/systemui_theme_values"
-        settings:controller="com.android.settings.display.SystemUiThemePreferenceController" />
+        <ListPreference
+            android:key="theme"
+            android:title="@string/color_theme"
+            android:summary="@string/summary_placeholder" />
+
+        <ListPreference
+            android:key="systemui_theme"
+            android:title="@string/device_theme"
+            android:entries="@array/systemui_theme_entries"
+            android:entryValues="@array/systemui_theme_values"
+            settings:controller="com.android.settings.display.SystemUiThemePreferenceController" />
+
+        <SwitchPreference
+            android:key="prefer_black_themes"
+            android:title="@string/prefer_black_themes"
+            android:summary="@string/prefer_black_themes_summary"
+            android:defaultValue="false" />
+
+        <com.pa.support.colorpicker.ColorPickerPreference
+            android:key="theme_accent_color"
+            android:title="@string/theme_accent_color"
+            settings:controller="com.android.settings.display.ThemeAccentColorPreferenceController" />
+
+    </PreferenceCategory>
 
     <Preference
         android:key="vr_display_pref"
