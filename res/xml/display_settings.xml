@@ -140,6 +140,11 @@
         android:entryValues="@array/systemui_theme_values"
         settings:controller="com.android.settings.display.SystemUiThemePreferenceController" />
 
+    <com.pa.support.colorpicker.ColorPickerPreference
+        android:key="theme_accent_color"
+        android:title="@string/theme_accent_color"
+        settings:controller="com.android.settings.display.ThemeAccentColorPreferenceController" />
+
     <Preference
         android:key="vr_display_pref"
         android:title="@string/display_vr_pref_title"
