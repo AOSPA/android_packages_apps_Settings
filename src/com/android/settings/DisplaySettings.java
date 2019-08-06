@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.content.Context;
+import android.content.Intent;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
@@ -32,6 +33,8 @@ import com.android.settings.display.NightDisplayPreferenceController;
 import com.android.settings.display.NightModePreferenceController;
 import com.android.settings.display.ScreenSaverPreferenceController;
 import com.android.settings.display.ShowOperatorNamePreferenceController;
+import com.android.settings.display.ThemeAccentColorPreferenceController;
+import com.android.settings.display.ThemeBlackPreferenceController;
 import com.android.settings.display.ThemePreferenceController;
 import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.display.VrDisplayPreferenceController;
@@ -48,11 +51,12 @@ public class DisplaySettings extends DashboardFragment {
     private static final String TAG = "DisplaySettings";
 
     public static final String KEY_DISPLAY_SIZE = "display_settings_screen_zoom";
-
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_AMBIENT_DISPLAY = "ambient_display";
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness_entry";
     private static final String KEY_NIGHT_DISPLAY = "night_display";
+    private static final String KEY_THEME_ACCENT_COLOR = "theme_accent_color";
+    private static final String KEY_BLACK_THEME = "prefer_black_themes";
 
     @Override
     public int getMetricsCategory() {
@@ -71,7 +75,7 @@ public class DisplaySettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        return buildPreferenceControllers(context, getLifecycle(), this);
     }
 
     @Override
@@ -80,7 +84,7 @@ public class DisplaySettings extends DashboardFragment {
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
-            Context context, Lifecycle lifecycle) {
+            Context context, Lifecycle lifecycle, DisplaySettings fragment) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new CameraGesturePreferenceController(context));
         controllers.add(new LiftToWakePreferenceController(context));
@@ -97,6 +101,9 @@ public class DisplaySettings extends DashboardFragment {
         controllers.add(new ShowOperatorNamePreferenceController(context));
         controllers.add(new WallpaperPreferenceController(context));
         controllers.add(new ThemePreferenceController(context));
+        controllers.add(new ThemeAccentColorPreferenceController(context, KEY_THEME_ACCENT_COLOR,
+                fragment));
+        controllers.add(new ThemeBlackPreferenceController(context, KEY_BLACK_THEME));
         controllers.add(new BrightnessLevelPreferenceController(context, lifecycle));
         controllers.add(new ColorModePreferenceController(context));
         return controllers;
@@ -128,7 +135,17 @@ public class DisplaySettings extends DashboardFragment {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null);
+                    return buildPreferenceControllers(context, null, null);
                 }
             };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        final ThemeAccentColorPreferenceController themeAccentColorPreferenceController =
+                use(ThemeAccentColorPreferenceController.class);
+        if (themeAccentColorPreferenceController.onActivityResult(requestCode, data)) {
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
