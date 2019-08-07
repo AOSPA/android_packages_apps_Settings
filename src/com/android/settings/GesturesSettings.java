@@ -39,6 +39,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
 
     private static final String TAG = "GesturesSettings";
 
+    private static final String KEY_SINGLE_TAP = "single_tap";
     private static final String KEY_DOUBLE_TAP = "double_tap";
     private static final String KEY_DRAW_V = "draw_v";
     private static final String KEY_DRAW_INVERSE_V = "draw_inverse_v";
@@ -59,6 +60,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
     private static final HashMap<String, String> mGesturesSettings = new HashMap();
 
     static {
+        mGesturesKeyCodes.put(KEY_SINGLE_TAP, com.android.internal.R.integer.config_singleTapKeyCode);
         mGesturesKeyCodes.put(KEY_DOUBLE_TAP, com.android.internal.R.integer.config_doubleTapKeyCode);
         mGesturesKeyCodes.put(KEY_DRAW_V, com.android.internal.R.integer.config_drawVKeyCode);
         mGesturesKeyCodes.put(KEY_DRAW_INVERSE_V, com.android.internal.R.integer.config_drawInverseVKeyCode);
@@ -76,6 +78,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
     }
 
     static {
+        mGesturesDefaults.put(KEY_SINGLE_TAP, com.android.internal.R.integer.config_singleTapDefault);
         mGesturesDefaults.put(KEY_DOUBLE_TAP, com.android.internal.R.integer.config_doubleTapDefault);
         mGesturesDefaults.put(KEY_DRAW_V, com.android.internal.R.integer.config_drawVDefault);
         mGesturesDefaults.put(KEY_DRAW_INVERSE_V, com.android.internal.R.integer.config_drawInverseVDefault);
@@ -93,6 +96,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
     }
 
     static {
+        mGesturesSettings.put(KEY_SINGLE_TAP, Settings.System.GESTURE_SINGLE_TAP);
         mGesturesSettings.put(KEY_DOUBLE_TAP, Settings.System.GESTURE_DOUBLE_TAP);
         mGesturesSettings.put(KEY_DRAW_V, Settings.System.GESTURE_DRAW_V);
         mGesturesSettings.put(KEY_DRAW_INVERSE_V, Settings.System.GESTURE_DRAW_INVERSE_V);
