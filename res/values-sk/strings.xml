@@ -420,6 +420,7 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Používajte tvár na odomykanie telefónu, schvaľovanie nákupov a prihlasovanie sa do aplikácií."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Odomykajte telefón a schvaľujte nákupy tvárou.\n\nUpozornenie: Toto zariadenie nemôžete odomykať tvárou. Ďalšie informácie vám poskytne správca organizácie."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Používajte tvár na odomykanie telefónu, schvaľovanie nákupov a prihlasovanie sa do aplikácií"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -443,8 +444,9 @@
     <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Tlačidlo potvrdenia"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Vždy vyžadovať potvrdenie pri overovaní aplikácií"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Odstrániť údaje o tvári"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Nastavte odomknutie tvárou"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Odomknutím tvárou môžete odomykať zariadenie, prihlasovať sa do aplikácií a potvrdzovať platby.\n\nDôležité upozornenie:\nTelefón môžete náhodne odomknúť pohľadom, aj keď ste to nechceli urobiť.\n\nMôže ho odomknúť aj niekto iný, keď telefón namieri na vašu tvár a budete mať otvorené oči.\n\nMôže ho odomknúť aj osoba, ktorá sa na vás veľmi podobá, napríklad vaše dieťa alebo dvojča."</string>
+    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Nastavte Odomknutie tvárou"</string>
+    <!-- no translation found for security_settings_face_settings_footer (1215895541291738756) -->
+    <skip />
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Chcete odstrániť údaje o tvári?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Údaje zaznamenané odomknutím tvárou budú bezpečne a natrvalo odstránené. Po ich odstránení budete na odomykanie telefónu, prihlasovanie do aplikácií a potvrdzovanie platieb potrebovať svoj PIN, vzor alebo heslo."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Odtlačok prsta"</string>
@@ -1709,9 +1711,9 @@
     <string name="location_app_level_permissions" msgid="2777033567595680764">"Povolenie aplikácie"</string>
     <string name="location_app_permission_summary_location_off" msgid="2790918244874943070">"Poloha je vypnutá"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="5336807018727349708">
-      <item quantity="few"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> z(o) <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikácií majú prístup k polohe</item>
+      <item quantity="few"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> z <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikácií majú prístup k polohe</item>
       <item quantity="many"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> of <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> apps have access to location</item>
-      <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> z(o) <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikácií má prístup k polohe</item>
+      <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> z <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikácií má prístup k polohe</item>
       <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> z <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> aplikácií má prístup k polohe</item>
     </plurals>
     <string name="location_category_recent_location_access" msgid="4911449278675337490">"Nedávny prístup k polohe"</string>
@@ -2109,7 +2111,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Zvuk a text na obrazovke"</string>
     <string name="display_category_title" msgid="685461049938269166">"Zobrazenie"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaktívne ovládanie"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Stiahnuté služby"</string>
+    <string name="user_installed_services_category_title" msgid="419853083751790648">"Stiahnuté aplikácie"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimentálne"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Experimentálne funkcie"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
@@ -2164,11 +2166,11 @@
     <string name="accessibility_autoclick_preference_title" msgid="2434062071927416098">"Čas zotrvania"</string>
     <string name="accessibility_autoclick_description" msgid="4908960598910896933">"Ak používate myš, môžete kurzor nastaviť tak, aby automaticky vykonal akciu, keď sa na určitý čas zastaví."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Oneskorenie pred kliknutím"</string>
-    <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"Vibrácie a hmatová odozva"</string>
+    <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"Vibrácie &amp; intenzita hmatu"</string>
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Vibrovanie pri upozornení"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Vibrovanie pri zvonení"</string>
-    <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Odozva pri klepnutí"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Používať službu"</string>
+    <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Dotyková odozva"</string>
+    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"Použiť <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Používať úpravu farieb"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Používať titulky"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Ďalej"</string>
@@ -3469,14 +3471,6 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blikať"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Uzamknutá obrazovka"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Keď je prac. profil zamknutý"</string>
-    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Upozornenia na uzamknutej obrazovke"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Zobrazovať varovné a tiché upozornenia"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Zobrazovať iba varovné upozornenia"</string>
-    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Nezobrazovať upozornenia"</string>
-    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Citlivé upozornenia"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Zobrazovať po uzamknutí citlivý obsah"</string>
-    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Citlivé upozornenia pracovného profilu"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Zobrazovať po uzamknutí citlivý obsah pracovného profilu"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Zobrazovať kompletné upozornenia"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Zobraziť citlivý obsah iba počas odomknutia"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Nezobrazovať upozornenia"</string>
@@ -3503,13 +3497,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Vysoká"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Vyskakovať na obrazovke"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blokovať"</string>
-    <string name="notification_silence_title" msgid="6986752165900591125">"Tiché"</string>
-    <string name="notification_alert_title" msgid="2267584776990348784">"Upozorňovanie"</string>
+    <string name="notification_silence_title" msgid="8575600650015431622">"Nenápadné"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"Prioritné"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Povoliť vyrušenia"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Povoliť aplikácii prehrávať zvuk, vibrovať alebo zobrazovať upozornenia na obrazovke"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Na rozbaľovacom paneli zbaliť upozornenia do jedného riadka"</string>
-    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Pomáha vám sústrediť sa bez zvukov či vibrácií"</string>
-    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Upúta vás zvukom alebo vibráciami"</string>
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Pomáha sústrediť sa zobrazovaním upozornení iba v rozbaľovacom paneli. Vždy potichu."</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Zobrazuje sa pod prioritnými upozorneniami. Vždy potichu."</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Zobrazuje sa pod prioritnými upozorneniami. Vždy potichu."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Zobrazuje sa pod prioritnými upozorneniami. Vždy potichu."</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Upúta zvukom a zobrazením ikony v stavovom riadku. Zobrazuje sa na uzamknutej obrazovke."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Keď je zariadenie odomknuté, zobrazovať upozornenia ako banner v hornej časti obrazovky"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Zobrazovať upozornenia"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Adaptívne upozornenia"</string>
@@ -3865,6 +3862,7 @@
     <string name="default_browser_title" msgid="8101772675085814670">"Prehliadač"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Žiadny predvolený prehliadač"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Telefónna aplikácia"</string>
+    <string name="roles_title" msgid="8739481762225637569">"Roly"</string>
     <string name="default_app" msgid="6864503001385843060">"(Predvolené)"</string>
     <string name="system_app" msgid="9068313769550747372">"(Systémová)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Predvolená systémová)"</string>
@@ -4286,7 +4284,7 @@
     <string name="demo_mode" msgid="2798762752209330277">"Ukážka používateľského rozhrania systému"</string>
     <string name="dark_ui_mode" msgid="6795784845192720944">"Tmavý motív"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Zapnuté / dočasne vypnuté šetričom batérie"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Dočasne zapnuté šetričom batérie"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Dočasne vypnuté šetričom batérie"</string>
     <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Na tmavý motív sa prepnú aj podporované aplikácie"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"Dobre"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Dlaždice rýchlych nastavení pre vývojárov"</string>
@@ -4336,13 +4334,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Rýchlejšie fotenie snímok selfie"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Navigácia v systéme"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Navigácia dvoma tlačidlami"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Aplikácie prepnete potiahnutím prstom nahor po tlačidle plochy. Všetky aplikácie zobrazíte opätovným potiahnutím prstom nahor. Vrátite sa klepnutím na tlačidlo Späť."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Ak chcete prepnúť aplikácie, potiahnite prstom nahor po tlačidle plochy. Opätovným potiahnutím nahor zobrazíte všetky aplikácie. Funguje to na všetkých obrazovkách. V pravom dolnom rohu obrazovky už nebude tlačidlo Prehľad."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Vyskúšajte nové tlačidlo plochy"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Zapnite nové gesto na prepínanie aplikácií"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigácia gestami"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Na plochu prejdete potiahnutím prstom z dolnej časti obrazovky smerom nahor. Aplikácie prepnete potiahnutím prstom nahor, podržaním a následným uvoľnením. Vrátite sa potiahnutím prstom z ľavého alebo pravého okraja obrazovky."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Na plochu prejdete potiahnutím prstom z dolnej časti obrazovky smerom nahor. Späť prejdete potiahnutím prstom z ľavého alebo pravého okraja obrazovky. Ak chcete prepnúť aplikácie, potiahnite prst z dolnej časti obrazovky smerom nahor a pred uvoľnením podržte."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigácia troma tlačidlami"</string>
-    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Prejdenie späť, prejdenie na plochu a prepínanie aplikácií pomocou tlačidiel v dolnej časti obrazovky."</string>
+    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Klasický režim navigácie v Androide, v ktorom môžete prejsť na plochu, prepnúť aplikácie a prejsť späť pomocou tlačidiel."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navigácia v systéme, navigácia dvoma tlačidlami, navigácia troma tlačidlami, navigácia gestami"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Predvolená vstupná aplikácia <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> túto funkciu nepodporuje"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Prepnúť predvolenú vstupnú aplikáciu"</string>

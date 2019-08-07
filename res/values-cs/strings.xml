@@ -420,6 +420,7 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Odemykejte telefon, autorizujte nákupy a přihlašujte se do aplikací."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Odemykejte telefon a schvalujte nákupy pomocí obličeje.\n\nPoznámka: Obličej nelze použít k odemykání tohoto zařízení. Další informace vám poskytne administrátor vaší organizace."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Odemykejte telefon, autorizujte nákupy a přihlašujte se do aplikací."</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -444,7 +445,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Při ověřování v aplikacích vždy vyžadovat potvrzení"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Smazat data obličeje"</string>
     <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Nastavit nové odemknutí obličejem"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Pomocí Odemknutí obličejem můžete odemykat zařízení, přihlašovat se do aplikací a potvrzovat platby.\n\nPřipomínáme:\nTelefon můžete odemknout pohledem, i když zrovna nechcete.\n\nTelefon může odemknout i někdo jiný, když jej namíří na váš obličej a vy budete mít otevřené oči.\n\nTelefon by mohla odemknout i osoba, která je vám hodně podobná, například vaše dítě nebo dvojče."</string>
+    <!-- no translation found for security_settings_face_settings_footer (1215895541291738756) -->
+    <skip />
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Smazat data o obličeji?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Data zaznamenaná pomocí funkce odemknutí obličejem budou trvale a bezpečně smazána. Po odstranění budete z účelem odemknutí telefonu, přihlášení do aplikace nebo potvrzení platby muset zadat PIN, gesto nebo heslo."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Otisk prstu"</string>
@@ -2109,7 +2111,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Zvuk a text na obrazovce"</string>
     <string name="display_category_title" msgid="685461049938269166">"Zobrazení"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaktivní ovládací prvky"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Stažené služby"</string>
+    <string name="user_installed_services_category_title" msgid="419853083751790648">"Stažené aplikace"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimentální"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Příznaky experimentálních funkcí"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
@@ -2168,7 +2170,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Vibrace při oznámení"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Vibrace při vyzvánění"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Odezva klepnutí"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Používat službu"</string>
+    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"Použít <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Používat korekci barev"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Používat titulky"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Pokračovat"</string>
@@ -2764,7 +2766,7 @@
     <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="NUMBER">%1$s</xliff:g> z <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="1562774643280376715">"Vybrat vše"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"Využití dat"</string>
-    <string name="data_usage_app_summary_title" msgid="5571051159374290375">"Mobilní data a Wi‑Fi"</string>
+    <string name="data_usage_app_summary_title" msgid="5571051159374290375">"Mobilní data &amp; Wi‑Fi"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"Účtování dat operátora se může lišit od údajů zařízení."</string>
     <string name="data_usage_app" msgid="4970478397515423303">"Využití aplikací"</string>
     <string name="data_usage_app_info_label" msgid="3409931235687866706">"O APLIKACI"</string>
@@ -3469,14 +3471,6 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blikání kontrolky"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Obrazovka uzamčení"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Když je profil uzamčen"</string>
-    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Oznámení na obrazovce uzamčení"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Zobrazovat upozorňující a tichá oznámení"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Zobrazovat pouze upozorňující oznámení"</string>
-    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Nezobrazovat oznámení"</string>
-    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Citlivá oznámení"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Při uzamknutí zobrazovat citlivý obsah"</string>
-    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Citlivá oznámení v pracovním profilu"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Při uzamknutí zobrazovat citlivý obsah pracovního profilu"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Zobrazit veškerý obsah oznámení"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Zobrazovat citlivý obsah jen během odemknutí"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Oznámení vůbec nezobrazovat"</string>
@@ -3503,13 +3497,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Vysoká"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Vyskočit na obrazovce"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blok"</string>
-    <string name="notification_silence_title" msgid="6986752165900591125">"Ticho"</string>
-    <string name="notification_alert_title" msgid="2267584776990348784">"Upozornění"</string>
+    <string name="notification_silence_title" msgid="8575600650015431622">"Nenápadná"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"Prioritní"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Povolit vyrušení"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Umožněte aplikacím vydávat zvuky, vibrovat nebo zobrazovat oznámení na obrazovce"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"V rozbalovacím panelu sbalit oznámení na jeden řádek"</string>
-    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Pomáhá vám soustředit se vypnutím zvuku a vibrací"</string>
-    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Upozorňuje vás pomocí zvuku a vibrací"</string>
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Budete se moci lépe soustředit, protože oznámení se budou zobrazovat pouze na vysouvacím panelu. Vždy tichý režim."</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Zobrazí oznámení s nižší prioritou. Vždy tichý režim."</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Zobrazí oznámení s nižší prioritou. Vždy tichý režim."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Zobrazí oznámení s nižší prioritou. Vždy tichý režim."</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Upozorní vás pomocí zvuku a ikony na stavovém řádku. Zobrazuje se na obrazovce uzamčení."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Když je zařízení odemčené, zobrazovat oznámení jako banner v horní části obrazovky"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Zobrazit oznámení"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Adaptivní oznámení"</string>
@@ -3865,6 +3862,7 @@
     <string name="default_browser_title" msgid="8101772675085814670">"Prohlížeč"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Žádný výchozí prohlížeč"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Aplikace na telefonování"</string>
+    <string name="roles_title" msgid="8739481762225637569">"Role"</string>
     <string name="default_app" msgid="6864503001385843060">"(Výchozí)"</string>
     <string name="system_app" msgid="9068313769550747372">"(Systém)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Výchozí nastavení systému)"</string>

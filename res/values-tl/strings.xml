@@ -414,6 +414,7 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Gamitin ang iyong mukha para i-unlock ang telepono mo, awtorisahan ang mga pagbili, o mag-sign in sa mga app."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Gamitin ang iyong mukha para i-unlock ang telepono mo o aprubahan ang mga pagbili.\n\nTandaan: Hindi mo maaaring gamitin ang iyong mukha para i-unlock ang device na ito. Para sa higit pang impormasyon, makipag-ugnayan sa admin ng iyong organisasyon."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Gamitin ang iyong mukha para i-unlock ang telepono mo, awtorisahan ang mga pagbili, o mag-sign in sa mga app"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -438,7 +439,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Kapag nag-o-authenticate sa mga app, palaging humiling ng kumpirmasyon"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"I-delete: face data"</string>
     <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Mag-set up ng bagong face unlock"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Gamitin ang Face unlock para i-unlock ang iyong device, mag-sign in sa mga app, at magkumpirma ng mga pagbabayad.\n\nTandaan:\nPuwedeng hindi sinasadyang ma-unlock ang telepono kapag tumingin dito.\n\nPuwedeng ma-unlock ng ibang tao ang telepono mo kung itatapat ito sa iyong mukha habang nakadilat ka.\n\nPuwedeng ma-unlock ng isang taong kamukha mo, halimbawa, ng iyong anak o kapatid, ang telepono mo."</string>
+    <!-- no translation found for security_settings_face_settings_footer (1215895541291738756) -->
+    <skip />
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"I-delete ang data ng mukha?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Permanente at secure na ide-delete ang data na naitala ng face unlock. Pagkatapos nitong maalis, kakailanganin mo ang iyong PIN, pattern, o password para i-unlock ang telepono mo, mag-sign in sa mga app, at kumpirmahin ang mga pagbabayad."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingerprint"</string>
@@ -2065,7 +2067,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio at text sa screen"</string>
     <string name="display_category_title" msgid="685461049938269166">"Display"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Mga kontrol ng pakikipag-ugnayan"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Mga na-download na serbisyo"</string>
+    <string name="user_installed_services_category_title" msgid="419853083751790648">"Mga na-download na app"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Pang-eksperimento"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Mga flag ng feature"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
@@ -2124,7 +2126,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Pag-vibrate kapag may notification"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Pag-vibrate kapag nag-ring"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Feedback sa pagpindot"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Gamitin ang serbisyo"</string>
+    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"Gamitin ang <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Gumamit ng pagwawasto ng kulay"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Gumamit ng mga caption"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Magpatuloy"</string>
@@ -3379,14 +3381,6 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Patay-sinding ilaw"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Lock screen"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kapag naka-lock ang work profile"</string>
-    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Mga notification sa lockscreen"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Ipakita ang mga nag-aalerto at tahimik na notification"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Mga nag-aalertong notification lang ang ipakita"</string>
-    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Huwag magpakita ng mga notification"</string>
-    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Mga sensitibong notification"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Magpakita ng sensitibong content kapag naka-lock"</string>
-    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Mga sensitibong notification mula sa profile sa trabaho"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Magpakita ng sensitibong content mula sa profile sa trabaho kapag naka-lock"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Ipakita ang lahat ng content ng notification"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Ipakita lang ang sensitibong content kapag naka-unlock"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Huwag magpakita ng mga notification"</string>
@@ -3413,13 +3407,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Mataas"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Mag-pop sa screen"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"I-block"</string>
-    <string name="notification_silence_title" msgid="6986752165900591125">"Naka-silent"</string>
-    <string name="notification_alert_title" msgid="2267584776990348784">"Nag-aalerto"</string>
+    <string name="notification_silence_title" msgid="8575600650015431622">"Malumanay"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"Naka-prioritize"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Payagan ang mga pagkaantala"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Hayaan ang app na tumunog, mag-vibrate, at/o mag-pop ng mga notification sa screen"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Sa pull-down shade, i-collapse ang mga notification sa isang linya"</string>
-    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Nakakatulong sa iyong tumuon nang walang tunog o pag-vibrate"</string>
-    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Kinukuha ang iyong atensyon sa pamamagitan ng tunog o pag-vibrate"</string>
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Nakakatulong para hindi ka maabala dahil sa pull-down na shade lang lalabas ang mga notification. Palaging naka-silent."</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Ipinapakita sa ibaba ng mga priyoridad na notification. Palaging naka-silent."</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Ipinapakita sa ibaba ng mga priyoridad na notification. Palaging naka-silent."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Ipinapakita sa ibaba ng mga priyoridad na notification. Palaging naka-silent."</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Kinukuha ang iyong atensyon sa pamamagitan ng tunog at icon sa status bar. Ipinapakita sa lock screen."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Kapag naka-unlock ang device, ipakita ang mga notification bilang banner sa itaas ng screen"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Ipakita ang mga notification"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Mga Adaptive na Notification"</string>
@@ -3745,6 +3742,7 @@
     <string name="default_browser_title" msgid="8101772675085814670">"Browser app"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Walang default na Browser"</string>
     <string name="default_phone_title" msgid="282005908059637350">"App ng telepono"</string>
+    <string name="roles_title" msgid="8739481762225637569">"Mga Tungkulin"</string>
     <string name="default_app" msgid="6864503001385843060">"(Default)"</string>
     <string name="system_app" msgid="9068313769550747372">"(System)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Default ng system)"</string>
@@ -4190,11 +4188,11 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Mas mabilis na kumuha ng mga selfie"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"System navigation"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"2-button na navigation"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Para magpalipat-lipat sa mga app, mag-swipe pataas sa Home button. Para makita ang lahat ng app, mag-swipe ulit pataas. Para bumalik, i-tap ang button na bumalik."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Para magpalipat-lipat sa mga app, mag-swipe pataas sa button ng Home. Mag-swipe muli pataas para makita ang lahat ng app. Gumagana mula sa anumang screen. Hindi ka na magkakaroon ng button na Overview sa kanang bahagi sa ibaba ng iyong screen."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Subukan ang bagong button ng Home"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"I-on ang bagong galaw para magpalipat-lipat sa mga app"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigation gamit ang galaw"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Para pumunta sa Home, mag-swipe pataas mula sa ibaba ng screen. Para magpalipat-lipat sa mga app, mag-swipe pataas mula sa ibaba, i-hold, pagkatapos ay bitawan. Para bumalik, mag-swipe mula sa kaliwa o kanang dulo."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Para pumunta sa Home, mag-swipe pataas mula sa ibaba ng screen. Para Bumalik, mag-swipe mula sa kaliwa o sa kanang dulo ng screen. Para magpalit ng app, magsimulang mag-swipe pataas mula sa ibaba ng screen at i-hold bago bitawan."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3-button na navigation"</string>
     <string name="legacy_navigation_summary" msgid="5631274479304544610">"Bumalik, pumunta sa Home, at magpalipat-lipat sa mga app gamit ang mga button sa ibaba ng iyong screen."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"system navigation, 2 button na navigation, 3 button na navigation, navigation gamit ang galaw"</string>

@@ -414,6 +414,7 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Telefonu kiliddən çıxarmaq, satınalmaları doğrulamaq və ya tətbiqlərə daxil olmaq üçün üzünüzdən istifadə edin."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Telefonu kiliddən çıxarmaq və ya satınalmaları təsdiq etmək üçün üzünüzdən istifadə edin.\n\nQeyd: Bu cihazı kiliddən çıxarmaq üçün üzünüzdən istifadə edə bilməzsiniz. Ətraflı məlumat üçün təşkilat admini ilə əlaqə saxlayın."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Telefonu kiliddən çıxarmaq, satınalmaları doğrulamaq və ya tətbiqlərə daxil olmaq üçün üzünüzdən istifadə edin"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -438,7 +439,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Tətbiqlər üçün doğrulanma zamanı həmişə təsdiq tələb edin"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Üz datasını silin"</string>
     <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Yeni üz kilidi ayarlayın"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Cihazı kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün Üz Kilidindən istifadə edin.\n\nUnutmayın:\nAçmaq istəmədiyiniz vaxt telefona baxmaqla onu kiliddən çıxara bilərsiniz.\n\nTelefon gözləriniz açıq halda üzünüzə tərəf tutularsa, başqası tərəfindən açıla bilər.\n\nTelefonunuz, məsələn, övladınız və ya oxşar bacı/qardaşınız tərəfindən kiliddən çıxarıla bilər."</string>
+    <!-- no translation found for security_settings_face_settings_footer (1215895541291738756) -->
+    <skip />
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Üz datası silinsin?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Üz kilidi ilə qeydə alınmış data həmişəlik və təhlükəsiz şəkildə silinəcək. Silindikdən sonra telefonu kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün PIN, model və ya parol tələb ediləcək."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Barmaq izi"</string>
@@ -2065,7 +2067,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio və ekran mətni"</string>
     <string name="display_category_title" msgid="685461049938269166">"Görüntü"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Qarşılıqlı əlaqə nəzarəti"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Endirilmiş xidmətlər"</string>
+    <string name="user_installed_services_category_title" msgid="419853083751790648">"Endirilmiş tətbiqlər"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Eksperimental"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Eksperimental funksiyalar"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
@@ -2124,7 +2126,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Bildiriş vibrasiyası"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Zəng vibrasiyası"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Toxunuş rəyi"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Xidmətdən istifadə edin"</string>
+    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"<xliff:g id="SERVICE">%1$s</xliff:g> istifadə edin"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Rəng korreksiyasından istifadə edin"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Başlıqlardan istifadə edin"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Davam edin"</string>
@@ -3006,7 +3008,7 @@
     <string name="mms_message_title" msgid="6068098013612041440">"MMS mesajları"</string>
     <string name="mms_message_summary" msgid="8408985719331988420">"Mobil data deaktiv olduqda göndərin &amp; qəbul edin"</string>
     <string name="data_during_calls_title" msgid="4476240693784306761">"Zənglər zamanı data"</string>
-    <string name="data_during_calls_summary" msgid="497978580819604521">"Bu SIM-in yalnız zənglər zamanı mobil data üçün istifadə edilməsinə icazə verin"</string>
+    <string name="data_during_calls_summary" msgid="497978580819604521">"Bu SIM-in yalnız zənglər zamanı mobil data üçün istifadə edilməyinə icazə verin"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"İş SIM-i"</string>
     <string name="user_restrictions_title" msgid="5794473784343434273">"Tətbiq və məzmun girişi"</string>
     <string name="user_rename" msgid="8523499513614655279">"ADI DƏYİŞDİRİN"</string>
@@ -3379,14 +3381,6 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Parıltı işığı"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Ekran kilidi"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"İş profili kilidləndikdə"</string>
-    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Kilid ekranında bildirişlər"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Siqnal və səssiz bildirişləri göstərin"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Yalnız siqnal bildirişlərini göstərin"</string>
-    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Bildirişləri göstərməyin"</string>
-    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Həssas bildirişlər"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Kilidli olduqda həssas kontenti göstərin"</string>
-    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Həssas iş profili bildirişləri"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Kilidli olduqda həssas iş profili kontentini göstərin"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Bütün bildiriş məzmunlarını göstər"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Yalnız kiliddən çıxardıqda həssas kontenti göstərin"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Bildirişləri heç göstərmə"</string>
@@ -3413,13 +3407,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Yüksək"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Ekranda göstərin"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blok edin"</string>
-    <string name="notification_silence_title" msgid="6986752165900591125">"Səssiz"</string>
-    <string name="notification_alert_title" msgid="2267584776990348784">"Siqnal"</string>
+    <string name="notification_silence_title" msgid="8575600650015431622">"Daha az əhəmiyyətli"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"Mühüm"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Kəsintilərə icazə verin"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Tətbiqin ekranda səs çıxarmasına, vibrasiya etməsinə və/və ya bildiriş göstərməsinə icazə verin"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Aşağı açılan siyahıdakı bildirişləri bir sətrə yığcamlaşdırın"</string>
-    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Səs və ya vibrasiya olmadan foksulanmağınıza kömək edir"</string>
-    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Səs və ya vibrasiya ilə diqqətinizi çəkir"</string>
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Bildirişlərə yalnız aşağı açılan menyuda fokuslanmağınıza kömək edir. Həmişə səssiz."</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Mühüm bildirişlərin aşağısında göstərilir. Həmişə səssiz."</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Mühüm bildirişlərin aşağısında göstərilir. Həmişə səssiz."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Mühüm bildirişlərin aşağısında göstərilir. Həmişə səssiz."</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Səs &amp; status paneli ikonası ilə diqqətinizi cəlb edir. Ekran kilidini göstərir."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Cihaz kilidli olduğu zaman bildirişlər ekranının yuxarısında baner ilə göstərilsin"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Bildirişləri göstərin"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Adaptiv bildirişlər"</string>
@@ -3745,6 +3742,7 @@
     <string name="default_browser_title" msgid="8101772675085814670">"Brauzer tətbiqi"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Defolt Brauzer yoxdur"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Telefon tətbiqi"</string>
+    <string name="roles_title" msgid="8739481762225637569">"Rollar"</string>
     <string name="default_app" msgid="6864503001385843060">"(Defolt)"</string>
     <string name="system_app" msgid="9068313769550747372">"(Sistem)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Sistem defoltu)"</string>
@@ -4190,13 +4188,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Cəld selfi çəkin"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Sistem naviqasiyası"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"2 düyməli naviqasiya"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Tətbiqləri dəyişmək üçün \"Əsas səhifə\" düyməsi üzərində yuxarı sürüşdürün. Bütün tətbiqlərə baxmaq üçün yenidən yuxarı sürüşdürün. Geri qayıtmaq üçün \"Geri\" düyməsinə toxunun."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Tətbiqləri dəyişək üçün Əsas Səhifə düyməsini yuxarı sürüşdürün. Bütün tətbiqlərə baxmaq üçün yenidən yuxarı sürüşdürün. Artıq ekranın sağ aşağı hissəsində İcmal düyməsi olmayacaq."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Yeni Əsas Səhifə düyməsini sınayın"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Tətbiqi dəyişmək üçün yeni işarəni aktiv edin"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Jest naviqasiyası"</string>
     <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Əsas səhifəyə keçmək üçün ekranın aşağısından yuxarı doğru sürüşdürün. Tətbiqləri dəyişmək üçün aşağıdan yuxarı sürüşdürüb saxlayın və buraxın. Geri qayıtmaq üçün sol, yaxud sağ küncə sürüşdürün."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"3 düyməli naviqasiya"</string>
-    <string name="legacy_navigation_summary" msgid="5631274479304544610">"\"Geri qayıdın\", \"Əsas səhifə\" və ekranın aşağısındakı düymələrlə tətbiqləri dəyişin."</string>
+    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Klassik Android naviqasiya rejimində Əsas səhifəyə keçmək, tətbiqlər arasında keçid etmək və Geri qayıtmaq düymələr ilə əlçatandır."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"sistem naviqasiyası, 2 düyməli naviqasiya, 3 düyməli naviqasiya, jest naviqasiyası"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Defolt home tətbiqi <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> tərəfindən dəstəklənmir"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Defolt home tətbiqini dəyişin"</string>
@@ -4338,7 +4336,7 @@
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(<xliff:g id="USER">%s</xliff:g> üçün deaktiv edildi)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"Avtodoldurma xidməti"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"avtomatik, doldurmaq, avtomatik doldurmaq"</string>
-    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Bu tətbiqə etibar etdiyinizə əmin olun&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Avtodoldurma&gt;%1$s&lt;/xliff:g&gt;  nəyin avtomatik doldurula biləcəyini müəyyən etmək üçün ekrandakılardan istifadə edir."</string>
+    <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Bu tətbiqə etibar etdiyinizə əmin olun&lt;b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=tətbiq_adı nümunə=Google Avtodoldurma &gt;%%1$s&lt;/xliff:g&gt; nəyin avtomatik doldurula biləcəyini müəyyən etmək üçün ekrandakılardan istifadə edir."</string>
     <string name="debug_autofill_category" msgid="8050326960545979035">"Avtodoldurma"</string>
     <string name="autofill_logging_level_title" msgid="899483289251346778">"Giriş səviyyəsi"</string>
     <string name="autofill_max_partitions" msgid="7590272120101271461">"Hər sessiya üçün maksimum təklif"</string>
