@@ -26,14 +26,9 @@ LOCAL_USE_AAPT2 := true
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_STATIC_ANDROID_LIBRARIES := WallpaperPicker2CommonDepsLib
-
+LOCAL_STATIC_JAVA_LIBRARIES := styleprotosnano
 LOCAL_PROGUARD_ENABLED := disabled
-
-ifneq (,$(wildcard frameworks/base))
-  LOCAL_PRIVATE_PLATFORM_APIS := true
-else
-  LOCAL_SDK_VERSION := system_current
-endif
+LOCAL_SDK_VERSION := system_current
 
 LOCAL_PACKAGE_NAME := ThemePicker
 LOCAL_PRIVILEGED_MODULE := true
@@ -44,7 +39,7 @@ LOCAL_SRC_FILES := $(call all-java-files-under, $(WALLPAPER_PATH)/src) \
     $(call all-java-files-under, src) \
     $(call all-java-files-under, src_override)
 
-LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res 
+LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res
 
 LOCAL_MANIFEST_FILE := AndroidManifest.xml
 

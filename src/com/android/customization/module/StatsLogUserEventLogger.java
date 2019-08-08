@@ -15,12 +15,14 @@
  */
 package com.android.customization.module;
 
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
+import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
+
 import android.stats.style.nano.StyleEnums;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.android.systemui.shared.system.StatsLogCompat;
 import com.android.customization.model.clock.Clockface;
 import com.android.customization.model.grid.GridOption;
 import com.android.customization.model.theme.ThemeBundle;
@@ -29,9 +31,7 @@ import com.android.wallpaper.module.NoOpUserEventLogger;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_COLOR;
-import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_FONT;
-import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_SHAPE;
+
 
 /**
  * StatsLog-backed implementation of {@link ThemesUserEventLogger}.
