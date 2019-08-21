@@ -49,9 +49,8 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     @Override
     public void updateDisplay() {
         final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
-        if (config == null || (TextUtils.isEmpty(config.preSharedKey) &&
-                (config.getAuthType() == WifiConfiguration.KeyMgmt.WPA2_PSK
-                     || config.getAuthType() == WifiConfiguration.KeyMgmt.SAE))) {
+        if (config == null || (config.getAuthType() == WifiConfiguration.KeyMgmt.WPA2_PSK
+                && TextUtils.isEmpty(config.preSharedKey))) {
             mPassword = generateRandomPassword();
         } else {
             mPassword = config.preSharedKey;
@@ -80,8 +79,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
      */
     public String getPasswordValidated(int securityType) {
         // don't actually overwrite unless we get a new config in case it was accidentally toggled.
-        if (securityType == WifiConfiguration.KeyMgmt.NONE
-                || securityType == WifiConfiguration.KeyMgmt.OWE) {
+        if (securityType == WifiConfiguration.KeyMgmt.NONE) {
             return "";
         } else if (!isTextValid(mPassword)) {
             mPassword = generateRandomPassword();
@@ -91,8 +89,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     }
 
     public void updateVisibility(int securityType) {
-        mPreference.setVisible(securityType != WifiConfiguration.KeyMgmt.NONE
-                                   && securityType != WifiConfiguration.KeyMgmt.OWE);
+        mPreference.setVisible(securityType != WifiConfiguration.KeyMgmt.NONE);
     }
 
     @Override
