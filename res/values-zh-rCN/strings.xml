@@ -414,6 +414,7 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"通过您的面孔解锁手机、授权购买交易或登录应用。"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"请使用您的面孔解锁手机或批准购买交易。\n\n注意：您无法使用面孔来解锁此设备。要了解详情，请与贵单位的管理员联系。"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"使用您的面孔解锁手机、授权购买交易或登录应用"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -438,7 +439,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"在针对应用进行身份验证时，一律需要确认"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"删除人脸数据"</string>
     <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"设置新的人脸解锁"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"您可以使用人脸解锁功能来解锁设备、登录应用以及确认付款。\n\n注意：\n目视手机可能会让手机意外解锁。\n\n如果有人在您睁开双眼时将手机对准您的脸，手机会因此解锁。\n\n此外，长相与您相似的人（例如您的子女或同胞兄弟姐妹）也能够解锁您的手机。"</string>
+    <!-- no translation found for security_settings_face_settings_footer (1215895541291738756) -->
+    <skip />
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"要删除人脸数据吗？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"系统将安全地将人脸解锁功能记录的数据永久删除。移除数据后，您将需要使用 PIN 码、图案或密码来解锁手机、登录应用和确认付款。"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"指纹"</string>
@@ -2065,7 +2067,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"音频和屏幕上的文字"</string>
     <string name="display_category_title" msgid="685461049938269166">"显示"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"互动控件"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"已下载的服务"</string>
+    <string name="user_installed_services_category_title" msgid="419853083751790648">"已下载的应用"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"实验性功能"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"功能标记"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
@@ -2123,8 +2125,8 @@
     <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"震动和触感强度"</string>
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"通知振动"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"响铃振动"</string>
-    <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"按触反馈"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"使用服务"</string>
+    <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"触摸反馈"</string>
+    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"使用<xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"使用色彩校正"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"使用字幕"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"继续"</string>
@@ -2164,7 +2166,7 @@
       <item quantity="other">延迟时间很长（<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> 毫秒）</item>
       <item quantity="one">延迟时间很长（<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> 毫秒）</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="4272038147476749536">"响铃：<xliff:g id="SUMMARY_RING">%1$s</xliff:g>，通知：<xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>，按触：<xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
+    <string name="accessibility_vibration_summary" msgid="4272038147476749536">"响铃：<xliff:g id="SUMMARY_RING">%1$s</xliff:g>，通知：<xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>，轻触：<xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
     <string name="accessibility_vibration_summary_off" msgid="1753566394591809629">"将响铃和通知振动设为关闭"</string>
     <string name="accessibility_vibration_summary_low" msgid="7628418309029013867">"将响铃和通知振动设为低"</string>
     <string name="accessibility_vibration_summary_medium" msgid="3422136736880414093">"将响铃和通知振动设为中"</string>
@@ -2217,7 +2219,7 @@
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g>正在请求完全控制此设备。该服务可以读取屏幕内容，并代表有无障碍需求的用户进行操作。这种控制级别不适合大多数应用。"</string>
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"对于能满足您的无障碍功能需求的应用，可授予其完全控制权限；但对大部分应用来说，都不适合授予此权限。"</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"查看和控制屏幕"</string>
-    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"此功能可以读出屏幕上的所有内容，并在其他应用上层显示内容。"</string>
+    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"此功能可以朗读屏幕中的所有内容，并在其他应用上层显示内容。"</string>
     <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"查看及执行操作"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"此功能可以跟踪您与应用或硬件传感器的互动，并代表您与应用互动。"</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"允许"</string>
@@ -3379,14 +3381,6 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"闪烁指示灯"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"锁定屏幕"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"当工作资料遭到锁定时"</string>
-    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"锁定屏幕上的通知"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"显示提醒和无声通知"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"仅显示提醒通知"</string>
-    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"不再显示通知"</string>
-    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"敏感通知"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"锁定时显示敏感内容"</string>
-    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"敏感工作资料通知"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"锁定时显示敏感的工作资料内容"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"显示所有通知内容"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"仅在解锁状态下显示敏感内容"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"完全不显示通知"</string>
@@ -3413,13 +3407,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"高"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"在屏幕上弹出"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"屏蔽"</string>
-    <string name="notification_silence_title" msgid="6986752165900591125">"静音"</string>
-    <string name="notification_alert_title" msgid="2267584776990348784">"提醒"</string>
+    <string name="notification_silence_title" msgid="8575600650015431622">"无声通知"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"已设为优先"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"允许打扰"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"允许应用发出提示音、振动，以及/或在屏幕上弹出通知"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"将下拉通知栏中的通知合拢为一行"</string>
-    <string name="notification_channel_summary_low" msgid="7050068866167282765">"不会发出提示音或振动，可帮助您保持专注"</string>
-    <string name="notification_channel_summary_default" msgid="5753454293847059695">"通过提示音或振动吸引您的注意"</string>
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"只会在下拉通知栏中显示通知，引起您的注意。一律不发出提示音。"</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"显示在优先通知下方。一律不发出提示音。"</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"显示在优先通知下方。一律不发出提示音。"</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"显示在优先通知下方。一律不发出提示音。"</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"通过提示音和状态栏图标吸引您的注意。这类通知会显示在锁定屏幕上。"</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"当设备处于解锁状态时，在屏幕顶端以横幅形式显示通知"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"显示通知"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"自动调节通知"</string>
@@ -3745,6 +3742,7 @@
     <string name="default_browser_title" msgid="8101772675085814670">"浏览器应用"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"没有默认浏览器"</string>
     <string name="default_phone_title" msgid="282005908059637350">"电话应用"</string>
+    <string name="roles_title" msgid="8739481762225637569">"角色"</string>
     <string name="default_app" msgid="6864503001385843060">"（默认）"</string>
     <string name="system_app" msgid="9068313769550747372">"（系统）"</string>
     <string name="system_default_app" msgid="3091113402349739037">"（系统默认）"</string>
@@ -4194,17 +4192,10 @@
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"试用新版主屏幕按钮"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"开启新手势即可切换应用"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"手势导航"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"从屏幕底部向上滑动，可转到主屏幕；从底部向上滑动并按住再松开，可切换应用；从左侧或右侧边缘向另一侧滑动，可返回上一个屏幕。"</string>
+    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"要转到主屏幕，请从屏幕底部向上滑动。要返回，请从屏幕左侧或右侧边缘向另一侧滑动。要切换应用，请先从屏幕底部向上滑动并按住，然后再放开。"</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"“三按钮”导航"</string>
-    <string name="legacy_navigation_summary" msgid="5631274479304544610">"使用屏幕底部的按钮即可轻松返回上一个屏幕、转到主屏幕和切换应用。"</string>
-    <string name="keywords_system_navigation" msgid="5825645072714635357">"系统导航,“双按钮”导航,“三按钮”导航,手势导航"</string>
-    <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"您的默认主屏幕应用<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>不支持手势导航"</string>
-    <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"切换默认主屏幕应用"</string>
-    <string name="information_label" msgid="8133109685432913360">"信息"</string>
-    <string name="low_label" msgid="1679136861385616813">"低"</string>
-    <string name="high_label" msgid="7278863493316447831">"高"</string>
-    <string name="back_sensitivity_dialog_message" msgid="1742132397253621623">\n"较高的敏感度可能会与沿屏幕边缘执行的任何应用手势存在冲突。"</string>
-    <string name="back_sensitivity_dialog_title" msgid="5403946345652118253">"“返回”手势的敏感度"</string>
+    <string name="legacy_navigation_summary" msgid="8824432558082404832">"经典 Android 导航模式，这种模式可让您通过按钮转到主屏幕、切换应用及返回上一个屏幕。"</string>
+    <string name="keywords_system_navigation" msgid="5825645072714635357">"系统导航,“双按钮”导航,“三按钮”导航, 手势导航"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"点按两次即可查看手机"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"点按两次即可查看平板电脑"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"点按两次即可查看设备"</string>

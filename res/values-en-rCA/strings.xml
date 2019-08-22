@@ -414,6 +414,7 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Use your face to unlock your phone, authorise purchases or sign in to apps."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Use your face to unlock your phone or approve purchases.\n\nNote: You can’t use your face to unlock this device. For more information, contact your organisation’s admin."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Use your face to unlock your phone, authorise purchases or sign in to apps"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -438,7 +439,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"When authenticating for apps, always require confirmation"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Delete face data"</string>
     <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Set up new face unlock"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Use Face unlock to unlock your device, sign in to apps and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don’t intend to.\n\nYour phone can be unlocked by someone else if it’s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, for example your child or an identical sibling."</string>
+    <!-- no translation found for security_settings_face_settings_footer (1215895541291738756) -->
+    <skip />
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Delete face data?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Data recorded by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern or password to unlock your phone, sign in to apps and confirm payments."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingerprint"</string>
@@ -2065,7 +2067,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio and on-screen text"</string>
     <string name="display_category_title" msgid="685461049938269166">"Display"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaction controls"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Downloaded services"</string>
+    <string name="user_installed_services_category_title" msgid="419853083751790648">"Downloaded apps"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Feature flags"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
@@ -2124,7 +2126,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Notification vibration"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Ring vibration"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Touch feedback"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Use service"</string>
+    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"Use <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Use colour correction"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Use captions"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Continue"</string>
@@ -3379,14 +3381,6 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blink light"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Lock screen"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"When work profile is locked"</string>
-    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Notifications on lockscreen"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Show alerting and silent notifications"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Show alerting notifications only"</string>
-    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Don’t show notifications"</string>
-    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Sensitive notifications"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Show sensitive content when locked"</string>
-    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Sensitive work profile notifications"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Show sensitive work profile content when locked"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Show all notification content"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Show sensitive content only when unlocked"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Don\'t show notifications at all"</string>
@@ -3413,13 +3407,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"High"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Pop on screen"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Block"</string>
-    <string name="notification_silence_title" msgid="6986752165900591125">"Silent"</string>
-    <string name="notification_alert_title" msgid="2267584776990348784">"Alerting"</string>
+    <string name="notification_silence_title" msgid="8575600650015431622">"Gentle"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"Prioritised"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Allow interruptions"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Let the app make sound, vibrate and/or pop notifications on screen"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"In the pull-down shade, collapse notifications to one line"</string>
-    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Helps you focus without sound or vibration"</string>
-    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Gets your attention with sound or vibration"</string>
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Helps you focus with notifications only in the pull-down shade. Always silent."</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Displays below priority notifications. Always silent."</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Displays below priority notifications. Always silent."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Displays below priority notifications. Always silent."</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Gets your attention with sound and a status bar icon. Shows on lock screen."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"When device is unlocked, show notifications as a banner across the top of the screen"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Show notifications"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Adaptive Notifications"</string>
@@ -3745,6 +3742,7 @@
     <string name="default_browser_title" msgid="8101772675085814670">"Browser app"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"No default Browser"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Phone app"</string>
+    <string name="roles_title" msgid="8739481762225637569">"Roles"</string>
     <string name="default_app" msgid="6864503001385843060">"(Default)"</string>
     <string name="system_app" msgid="9068313769550747372">"(System)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(System default)"</string>

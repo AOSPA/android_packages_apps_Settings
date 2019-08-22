@@ -414,6 +414,7 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Користете го лицето за отклучување на телефонот, за одобрување купувања или за најавување на апликации."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Користете го вашиот лик за да го отклучите телефонот или да ги одобрите купувањата.\n\nЗабелешка: не може да го користите ликот за да го отклучите уредов. За повеќе информации, контактирајте со администраторот на вашата организација."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Користете го лицето за отклучување на телефонот, за одобрување купувања или за најавување на апликации"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -438,7 +439,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"При вршење проверка за апликации, секогаш барај потврда"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Избриши под. за лик"</string>
     <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Поставете ново „Отклучување со лик“"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Користете „Отклучување со лик“ за отклучување на уредот, најавување на апликации и потврдување плаќања.\n\nИмајте предвид:\nПоглед кон телефонот може да го отклучи и кога немате таква намера.\n\nНекој друг може да го отклучи вашиот телефон ако го подигне до вашиот лик кога очите ви се отворени.\n\nТелефонот може да го отклучи некој што наликува на вас, на пример, вашето дете или идентичен близнак."</string>
+    <!-- no translation found for security_settings_face_settings_footer (1215895541291738756) -->
+    <skip />
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Да се избришат податоците за ликот?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Податоците зачувани од „Отклучување со лик“ трајно и безбедно ќе се избришат. После отстранувањето, ќе би треба PIN, шема или лозинка за да го отклучувате телефонот, да се најавувате на апликациите и да ги потврдувате плаќањата."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Отпечаток"</string>
@@ -2065,7 +2067,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Аудио и текст на екранот"</string>
     <string name="display_category_title" msgid="685461049938269166">"Приказ"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Контроли за интеракција"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Преземени услуги"</string>
+    <string name="user_installed_services_category_title" msgid="419853083751790648">"Преземени апликации"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Експериментално"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Ознаки за функции"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
@@ -2114,7 +2116,7 @@
     <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Време за дејство (истек на пристапноста)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Време за преземање дејство"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Изберете колку долго да се прикажуваат пораките што бараат да преземете дејство, но се видливи само привремено.\n\nНе сите апликации ја поддржуваат оваа поставка."</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Должина на допир и задржување"</string>
+    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Допри и задржи подолго"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Инверзија на боја"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="7052959202195368109">"Може да влијае на изведбата"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2434062071927416098">"Тајминг за неактивност"</string>
@@ -2124,7 +2126,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Вибрации при известување"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Вибрации при ѕвонење"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Повратни информации со допир"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Користи ја услугата"</string>
+    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"Користи <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Користи корекција на боите"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Користи титли"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Продолжи"</string>
@@ -3379,14 +3381,6 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Трепкај со сијаличката"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Заклучен екран"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"При заклучен работен профил"</string>
-    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Известувања на заклучен екран"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Прикажувај предупредувачки и тивки известувања"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Прикажувај само предупредувачки известувања"</string>
-    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Не прикажувај известувања"</string>
-    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Чувствителни известувања"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Прикажувај чувствителни содржини кога е заклучен"</string>
-    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Чувствителни известувања на работниот профил"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Прикажувај чувствителни содржини на работниот профил кога е заклучен"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Прикажи ја целата содржина од известувањето"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Прикажувај чувствителни содржини само на отклучен"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Воопшто не прикажувај известувања"</string>
@@ -3413,13 +3407,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Висока"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Појави ги на екранот"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Блокирај"</string>
-    <string name="notification_silence_title" msgid="6986752165900591125">"Тивко"</string>
-    <string name="notification_alert_title" msgid="2267584776990348784">"Предупредувај"</string>
+    <string name="notification_silence_title" msgid="8575600650015431622">"Тивки известувања"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"Приоритетни известувања"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Дозволете прекини"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Дозволете апликацијата да испушта звуци, да вибрира и/или пак, појавни известувања на екранот"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Собери ги известувањата во еден ред во списокот со известувања"</string>
-    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Ви помага да се концентрирате без звук или вибрации"</string>
-    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Ви го привлекува вниманието со звук или вибрации"</string>
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Не го одвлекува вниманието и прикажува известувања само во списокот со известувања. Секогаш безгласно."</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Се прикажува под приоритетните известувања. Секогаш безгласно."</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Се прикажува под приоритетните известувања. Секогаш безгласно."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Се прикажува под приоритетните известувања. Секогаш безгласно."</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Ви го привлекува вниманието со звук и икона во статусната лента. Се прикажува на заклучен екран."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Кога уредот е отклучен, прикажувај ги известувањата како рекламен напис на горниот дел од екранот"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Прикажи известувања"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Приспособливи известувања"</string>
@@ -3745,6 +3742,7 @@
     <string name="default_browser_title" msgid="8101772675085814670">"Прелистувач"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Нема стандарден прелистувач"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Апликација за телефон"</string>
+    <string name="roles_title" msgid="8739481762225637569">"Улоги"</string>
     <string name="default_app" msgid="6864503001385843060">"(Стандардно)"</string>
     <string name="system_app" msgid="9068313769550747372">"(Систем)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Стандардно за системот)"</string>

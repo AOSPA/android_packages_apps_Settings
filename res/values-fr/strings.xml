@@ -414,6 +414,7 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Utilisez votre visage pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Utilisez votre visage pour déverrouiller votre téléphone ou approuver des achats.\n\nRemarque : Vous ne pouvez pas utiliser votre visage pour déverrouiller cet appareil. Pour en savoir plus, contactez l\'administrateur de votre organisation."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Utilisez votre visage pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -438,7 +439,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Toujours demander confirmation lors de l\'authentification pour applis"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Supprimer les données du visage"</string>
     <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Configurer un nouveau visage pour Face Unlock"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Utilisez Face Unlock pour déverrouiller votre appareil, vous connecter à des applications et confirmer des paiements.\n\nÀ savoir :\nSi vous regardez votre téléphone, vous pouvez le déverrouiller sans le vouloir.\n\nUne autre personne peut également déverrouiller votre téléphone en tenant celui-ci devant votre visage quand vous avez les yeux ouverts.\n\nVotre téléphone peut être déverrouillé par quelqu\'un qui vous ressemble beaucoup, comme votre enfant ou votre jumeau/jumelle."</string>
+    <!-- no translation found for security_settings_face_settings_footer (1215895541291738756) -->
+    <skip />
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Supprimer les données du visage ?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Les données enregistrées par Face Unlock seront supprimées de manière sécurisée et définitive. Une fois l\'inscription retirée, vous devrez utiliser votre code, votre motif ou votre mot de passe pour déverrouiller votre téléphone, vous connecter aux applications et confirmer les paiements."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Empreinte digitale"</string>
@@ -1604,7 +1606,7 @@
     <string name="master_clear_desc" product="default" msgid="7647628092266675099">"Cette action effacera toutes les données de la "<b>"mémoire de stockage interne"</b>" de votre téléphone, y compris :\n\n"<li>"Votre compte Google"</li>\n<li>"Les données et paramètres du système et des applications"</li>\n<li>"Les applications téléchargées"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Vous êtes actuellement connecté aux comptes suivants :\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"D\'autres personnes utilisent cet appareil.\n"</string>
-    <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"La musique"</li>\n<li>"Les photos"</li>\n<li>"Les autres données utilisateur"</li></string>
+    <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"La musique"</li>\n<li>"Les photos"</li>\n<li>"Les autres données utilisateur"</li>"."</string>
     <string name="master_clear_desc_also_erases_esim" msgid="6008213558725767177"><li>"Les cartes eSIM"</li></string>
     <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"Cette opération n\'annulera pas votre forfait mobile."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"Pour supprimer la musique, les photos et les autres données utilisateur, vous devez effacer la "<b>"mémoire de stockage USB"</b>"."</string>
@@ -2065,7 +2067,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Audio et texte à l\'écran"</string>
     <string name="display_category_title" msgid="685461049938269166">"Écran"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Commandes d\'interaction"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Services téléchargés"</string>
+    <string name="user_installed_services_category_title" msgid="419853083751790648">"Applications téléchargées"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Paramètres expérimentaux"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Fonctionnalités expérimentales"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
@@ -2080,17 +2082,8 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Appuyer trois fois pour zoomer"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Appuyer sur un bouton pour zoomer"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Pour zoomer"</b>", appuyez trois fois rapidement sur l\'écran.\n"<ul><li>"Pour faire défiler l\'écran, faites glisser deux doigts ou plus sur l\'écran"</li>\n<li>"Pour régler le niveau de zoom, pincez deux doigts ou plus sur l\'écran"</li></ul>\n\n<b>"Pour faire un zoom temporaire"</b>", appuyez trois fois rapidement sur l\'écran en veillant à appuyer de manière prolongée la troisième fois.\n"<ul><li>"Pour vous déplacer sur l\'écran, faites glisser un doigt dessus"</li>\n<li>"Pour faire un zoom arrière, relevez le doigt"</li></ul>\n\n"Il est impossible de faire un zoom avant sur le clavier et la barre de navigation."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Lorsque l\'option \"Agrandissement\" est activée, vous pouvez effectuer un zoom avant sur votre écran.\n\n"<b>"Pour zoomer"</b>", activez l\'option \"Agrandissement\", puis appuyez n\'importe où sur l\'écran.\n"<ul><li>"• Faites glisser deux doigts ou plus pour faire défiler la page."</li>\n<li>"• Pincez l\'écran avec deux doigts ou plus pour ajuster le zoom."</li></ul>\n\n<b>"Pour zoomer de manière temporaire"</b>", activez l\'option \"Agrandissement\", puis appuyez de manière prolongée n\'importe où sur l\'écran.\n"<ul><li>"• Faites glisser votre doigt pour vous déplacer sur l\'écran."</li>\n<li>"• Relevez le doigt pour faire un zoom arrière."</li></ul>\n\n"Vous ne pouvez pas zoomer sur le clavier ni sur la barre de navigation."</string>
-    <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Utiliser le bouton Accessibilité pour ouvrir"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Utiliser un geste pour ouvrir"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Utiliser le nouveau geste d\'accessibilité"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Pour activer ou désactiver ce service, appuyez sur le bouton Accessibilité <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> en bas de l\'écran.\n\nPour changer de service, appuyez de manière prolongée sur le bouton \"Accessibilité\"."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Pour activer ou désactiver ce service, balayez l\'écran de bas en haut avec deux doigts.\n\nPour changer de service, balayez l\'écran vers le haut avec deux doigts et appuyez de manière prolongée."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Pour activer ou désactiver ce service, balayez l\'écran de bas en haut avec trois doigts.\n\nPour changer de service, balayez l\'écran vers le haut avec trois doigts et appuyez de manière prolongée."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Pour activer ou désactiver un service d\'accessibilité, balayez l\'écran de bas en haut avec deux doigts.\n\nPour changer de service, balayez l\'écran vers le haut avec deux doigts et appuyez de manière prolongée."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Pour activer ou désactiver un service d\'accessibilité, balayez l\'écran de bas en haut avec trois doigts.\n\nPour changer de service, balayez l\'écran vers le haut avec trois doigts et appuyez de manière prolongée."</string>
-    <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
-    <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Le bouton Accessibilité est défini sur <xliff:g id="SERVICE">%1$s</xliff:g>. Pour utiliser la loupe, appuyez de manière prolongée sur le bouton Accessibilité, puis sélectionnez la loupe."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="1996584694050087161">"Lorsque la loupe est activée, utilisez le bouton d\'accessibilité situé en bas de l\'écran pour effectuer un agrandissement rapide.\n\n"<b>"Pour zoomer"</b>", appuyez sur le bouton d\'accessibilité, puis n\'importe où sur l\'écran.\n"<ul><li>"Pour faire défiler l\'écran, faites glisser deux doigts ou plus dessus"</li>\n<li>"Pour régler le niveau de zoom, pincez deux doigts ou plus sur l\'écran"</li></ul>\n\n<b>"Pour faire un zoom temporaire"</b>", appuyez sur le bouton d\'accessibilité, puis appuyez de manière prolongée n\'importe où sur l\'écran.\n"<ul><li>"Pour vous déplacer sur l\'écran, faites glisser un doigt dessus"</li>\n<li>"Pour faire un zoom arrière, relevez le doigt"</li></ul>\n\n"Il est impossible de faire un zoom avant sur le clavier ou la barre de navigation."</string>
+    <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Le bouton d\'accessibilité est défini sur <xliff:g id="SERVICE">%1$s</xliff:g>. Pour utiliser la loupe, appuyez de manière prolongée sur le bouton d\'accessibilité, puis sélectionnez la loupe."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Raccourci (volume)"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Service associé au raccourci"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Autoriser depuis écran verrouillage"</string>
@@ -2106,7 +2099,7 @@
     <string name="accessibility_toggle_master_balance_title" msgid="551441665399043471">"Balance audio"</string>
     <string name="accessibility_toggle_master_balance_left_label" msgid="840973259765894310">"Gauche"</string>
     <string name="accessibility_toggle_master_balance_right_label" msgid="7349959407092157385">"Droite"</string>
-    <string name="accessibility_timeout_default" msgid="8316215621219570607">"Par défaut"</string>
+    <string name="accessibility_timeout_default" msgid="8316215621219570607">"Paramètre par défaut"</string>
     <string name="accessibility_timeout_10secs" msgid="1976492627730727871">"10 secondes"</string>
     <string name="accessibility_timeout_30secs" msgid="8055710148052265579">"30 secondes"</string>
     <string name="accessibility_timeout_1min" msgid="6314276027668784112">"1 minute"</string>
@@ -2120,11 +2113,11 @@
     <string name="accessibility_autoclick_preference_title" msgid="2434062071927416098">"Temps d\'interaction"</string>
     <string name="accessibility_autoclick_description" msgid="4908960598910896933">"Si vous utilisez une souris, vous pouvez configurer votre appareil de sorte qu\'un clic s\'effectue automatiquement lorsque le curseur s\'immobilise pendant un certain laps de temps."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Délai précédant le clic"</string>
-    <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"Force du retour tactile et vibrations"</string>
+    <string name="accessibility_vibration_settings_title" msgid="3196059463767462026">"Force des vibrations et du retour haptique"</string>
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Vibreur des notifications"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Vibreur de la sonnerie"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Retour tactile"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Utiliser le service"</string>
+    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"Utiliser <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Corriger les couleurs"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Utiliser les sous-titres"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Continuer"</string>
@@ -2206,7 +2199,7 @@
     <string name="color_cyan" msgid="7033027180641173211">"Cyan"</string>
     <string name="color_yellow" msgid="9112680561610873529">"Jaune"</string>
     <string name="color_magenta" msgid="5059212823607815549">"Magenta"</string>
-    <string name="enable_service_title" msgid="2813477981936919847">"Accorder le contrôle total de votre appareil au service <xliff:g id="SERVICE">%1$s</xliff:g> ?"</string>
+    <string name="enable_service_title" msgid="1374048678465697350">"Accorder à <xliff:g id="SERVICE">%1$s</xliff:g> un contrôle total sur votre appareil ?"</string>
     <string name="capabilities_list_title" msgid="86713361724771971">"<xliff:g id="SERVICE">%1$s</xliff:g> doit pouvoir :"</string>
     <string name="touch_filtered_warning" msgid="8644034725268915030">"Une application masque la demande d\'autorisation. Impossible de valider votre réponse via l\'application Paramètres."</string>
     <string name="enable_service_encryption_warning" msgid="3064686622453974606">"Si vous activez <xliff:g id="SERVICE">%1$s</xliff:g>, votre appareil n\'utilisera pas le verrouillage de l\'écran pour améliorer le chiffrement des données."</string>
@@ -2217,15 +2210,15 @@
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> demande le contrôle total de cet appareil. Le service peut lire l\'écran et agir pour le compte des utilisateurs ayant des besoins en matière d\'accessibilité. Ce niveau de contrôle n\'est pas approprié pour la plupart des applications."</string>
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Le contrôle total convient aux applications qui répondent à vos besoins d\'accessibilité. Il ne convient pas à la plupart des applications."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Afficher et contrôler l\'écran"</string>
-    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Cette fonctionnalité peut lire l\'intégralité du contenu à l\'écran et afficher du contenu par-dessus d\'autres applications."</string>
+    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Cette fonctionnalité peut lire l\'intégralité du contenu à l\'écran et afficher celui-ci par-dessus les autres applications."</string>
     <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Afficher et effectuer des actions"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"Cette fonctionnalité peut effectuer le suivi de vos interactions avec une application ou un capteur matériel, et interagir avec les applications en votre nom."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"Autoriser"</string>
     <string name="accessibility_dialog_button_deny" msgid="4307331121783796869">"Refuser"</string>
     <string name="accessibility_dialog_button_stop" msgid="7861331860214808622">"Arrêter"</string>
     <string name="accessibility_dialog_button_cancel" msgid="5006357240387387028">"Annuler"</string>
-    <string name="disable_service_title" msgid="3624005212728512896">"Arrêter le service <xliff:g id="SERVICE">%1$s</xliff:g> ?"</string>
-    <string name="disable_service_message" msgid="4593387199926310801">"Si vous appuyez sur <xliff:g id="STOP">%1$s</xliff:g>, le service <xliff:g id="SERVICE">%2$s</xliff:g> sera arrêté."</string>
+    <string name="disable_service_title" msgid="3624005212728512896">"Arrêter <xliff:g id="SERVICE">%1$s</xliff:g> ?"</string>
+    <string name="disable_service_message" msgid="4593387199926310801">"Si vous appuyez sur <xliff:g id="STOP">%1$s</xliff:g>, <xliff:g id="SERVICE">%2$s</xliff:g> sera arrêté."</string>
     <string name="accessibility_no_services_installed" msgid="7200948194639038807">"Aucun service installé"</string>
     <string name="accessibility_no_service_selected" msgid="2840969718780083998">"Aucun service sélectionné"</string>
     <string name="accessibility_service_default_description" msgid="1072730037861494125">"Aucune description fournie"</string>
@@ -3379,16 +3372,8 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Clignotement"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Écran de verrouillage"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Profil professionnel verrouillé"</string>
-    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Notifications sur l\'écran de verrouillage"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Afficher les notifications d\'alertes et silencieuses"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Afficher les notifications d\'alerte uniquement"</string>
-    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Ne pas afficher les notifications"</string>
-    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Notifications de contenu sensible"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Afficher les contenus sensibles lorsque l\'écran est verrouillé"</string>
-    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Notifications de contenu sensible du profil professionnel"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Afficher les contenus sensibles du profil professionnel lorsque l\'écran est verrouillé"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Afficher tout le contenu des notifications"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Afficher les contenus sensibles seulement si l\'appareil est déverrouillé"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Aff. contenus sensibles seulement si déverrouillé"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Ne pas afficher les notifications"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="3143593517597479937">"Que souhaitez-vous afficher sur l\'écran de verrouillage ?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="709573564312902481">"Écran de verrouillage"</string>
@@ -3413,13 +3398,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Élevée"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Afficher sur l\'écran"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Bloquer"</string>
-    <string name="notification_silence_title" msgid="6986752165900591125">"Silencieux"</string>
-    <string name="notification_alert_title" msgid="2267584776990348784">"Alertes"</string>
+    <string name="notification_silence_title" msgid="8575600650015431622">"Notifications discrètes"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"Notifications prioritaires"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Autoriser les interruptions"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Autoriser l\'application à émettre des sons, vibrer et/ou afficher des notifications à l\'écran"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Dans le volet déroulant, afficher les notifications sur une seule ligne"</string>
-    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Sans sons ni vibrations, vous aide à vous concentrer"</string>
-    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Attire votre attention à l\'aide de sons ou de vibrations"</string>
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Vous aide à vous concentrer en affichant les notifications seulement dans le volet déroulant. Toujours silencieux."</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"S\'affiche sous les notifications prioritaires. Toujours silencieux."</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"S\'affiche sous les notifications prioritaires. Toujours silencieux."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"S\'affiche sous les notifications prioritaires. Toujours silencieux."</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Attire votre attention à l\'aide d\'un son et d\'une icône dans la barre d\'état. S\'affiche sur l\'écran de verrouillage."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Lorsque l\'appareil est déverrouillé, afficher les notifications dans une bannière en haut de l\'écran"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Afficher les notifications"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Notifications intelligentes"</string>
@@ -3533,7 +3521,7 @@
     <string name="zen_mode_event_rule_reply" msgid="5166322024212403739">"Si la réponse est"</string>
     <string name="zen_mode_event_rule_reply_any_except_no" msgid="8868873496008825961">"\"Oui\", \"Peut-être\" ou \"Pas de réponse\""</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="2769656565454495824">"\"Oui\" ou \"Peut-être\""</string>
-    <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"\"Oui\""</string>
+    <string name="zen_mode_event_rule_reply_yes" msgid="1003598835878784659">"Oui"</string>
     <string name="zen_mode_rule_not_found_text" msgid="8963662446092059836">"Règle introuvable."</string>
     <string name="zen_mode_rule_summary_enabled_combination" msgid="976098744828219297">"Activé - <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_rule_summary_provider_combination" msgid="2101201392041867409">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
@@ -3628,8 +3616,8 @@
     <string name="switch_off_text" msgid="1139356348100829659">"Désactivé"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Épinglage d\'écran"</string>
     <string name="screen_pinning_description" msgid="1110847562111827766">"Si ce paramètre est activé, vous pouvez épingler l\'écran pour qu\'il reste affiché jusqu\'à l\'annulation de cette opération.\n\nPour épingler l\'écran :\n\n1. Assurez-vous que l\'épinglage d\'écran est activé.\n\n2. Appuyez sur \"Aperçu\".\n\n3. Appuyez sur l\'icône d\'épinglage en haut de l\'écran, puis sur \"Épingler\"."</string>
-    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Demander le schéma de déverrouillage avant d\'annuler l\'épinglage"</string>
-    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Demander le code avant d\'annuler l\'épinglage"</string>
+    <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Demander schéma de déverrouillage avant d\'annuler épinglage"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8757588350454795286">"Demander PIN avant d\'annuler l\'épinglage"</string>
     <string name="screen_pinning_unlock_password" msgid="2514079566873826434">"Demander le mot de passe avant d\'annuler l\'épinglage"</string>
     <string name="screen_pinning_unlock_none" msgid="3814188275713871856">"Verrouiller l\'appareil après l\'annulation de l\'épinglage"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Ce profil professionnel est géré par"</string>
@@ -3745,6 +3733,7 @@
     <string name="default_browser_title" msgid="8101772675085814670">"Navigateur"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Aucun navigateur par défaut"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Application de téléphone"</string>
+    <string name="roles_title" msgid="8739481762225637569">"Rôles"</string>
     <string name="default_app" msgid="6864503001385843060">"(Par défaut)"</string>
     <string name="system_app" msgid="9068313769550747372">"(Système)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Paramètres par défaut)"</string>
@@ -4194,9 +4183,9 @@
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Découvrir le nouveau bouton d\'accueil"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Activer le nouveau geste pour changer d\'application"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Navigation par gestes"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"Pour revenir à l\'accueil, balayez l\'écran de bas en haut. Pour changer d\'application, balayez l\'écran de bas en haut, appuyez de manière prolongée, puis relâchez. Pour revenir en arrière, balayez l\'écran de gauche à droite ou de droite à gauche."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="6353878120627132868">"Pour revenir à l\'accueil, balayez l\'écran de bas en haut. Pour revenir en arrière, balayez l\'écran de gauche à droite ou de droite à gauche. Pour changer d\'application, balayez l\'écran de bas en haut et maintenez la pression avant de relâcher."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"Navigation à trois boutons"</string>
-    <string name="legacy_navigation_summary" msgid="5631274479304544610">"Changez d\'application et revenez en arrière ou à l\'accueil avec les boutons situés en bas de l\'écran."</string>
+    <string name="legacy_navigation_summary" msgid="8824432558082404832">"Le mode de navigation classique d\'Android, dans lequel des boutons permettent de revenir à l\'accueil, de changer d\'application et de revenir en arrière."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"navigation système, navigation à deux boutons, navigation à trois boutons, navigation par gestes"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"Non compatible avec votre application d\'écran d\'accueil par défaut (<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>)"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"Modifier appli écran d\'accueil par déf."</string>

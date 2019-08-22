@@ -414,6 +414,7 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Χρησιμοποιήστε το πρόσωπό σας για να ξεκλειδώνετε το τηλέφωνό σας, να εξουσιοδοτείτε αγορές ή να συνδέεστε σε εφαρμογές."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Χρησιμοποιήστε το πρόσωπό σας, για να ξεκλειδώνετε το τηλέφωνό σας ή να εγκρίνετε αγορές.\n\nΣημείωση: Δεν μπορείτε να χρησιμοποιήσετε το πρόσωπό σας για να ξεκλειδώσετε αυτήν τη συσκευή. Για περισσότερες πληροφορίες, επικοινωνήστε με τον διαχειριστή του οργανισμού σας."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Χρησιμοποιήστε το πρόσωπό σας για να ξεκλειδώνετε το τηλέφωνό σας, να εξουσιοδοτείτε αγορές ή να συνδέεστε σε εφαρμογές"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -438,7 +439,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Να απαιτείται πάντα επιβεβαίωση κατά τον έλεγχο ταυτότ. σε εφαρμογές"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Διαγρ. δεδ. προσώπου"</string>
     <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Ρύθμιση νέου ξεκλειδώματος με το πρόσωπο"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Χρησιμοποιήστε το Face Unlock για να ξεκλειδώσετε τη συσκευή σας, να συνδεθείτε σε εφαρμογές και να επιβεβαιώσετε πληρωμές.\n\nΛάβετε υπόψη τα εξής:\nΤο τηλέφωνο μπορεί να ξεκλειδώσει όταν το κοιτάτε ακόμη και αν δεν σκοπεύετε να το ξεκλειδώσετε.\n\nΚάποιο άλλο άτομο μπορεί να ξεκλειδώσει το τηλέφωνό σας εάν το τηλέφωνο βρίσκεται μπροστά στο πρόσωπό σας και έχετε τα μάτια ανοικτά.\n\nΤο τηλέφωνο μπορεί να ξεκλειδωθεί από κάποιο άτομο που σας μοιάζει πολύ, όπως για παράδειγμα, το παιδί σας ή τον δίδυμο αδελφό σας."</string>
+    <!-- no translation found for security_settings_face_settings_footer (1215895541291738756) -->
+    <skip />
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Διαγραφή δεδομένων προσώπου;"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Τα δεδομένα που καταγράφονται από το Face Unlock θα διαγραφούν μόνιμα και με ασφάλεια. Μετά την κατάργηση, θα χρειαστείτε το PIN, το μοτίβο ή τον κωδικό πρόσβασης για να ξεκλειδώσετε το τηλέφωνό σας, να συνδεθείτε σε εφαρμογές και να επιβεβαιώσετε πληρωμές."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Δακτυλικά αποτυπώματα"</string>
@@ -2065,7 +2067,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Ήχος και κείμενο στην οθόνη"</string>
     <string name="display_category_title" msgid="685461049938269166">"Οθόνη"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Στοιχεία ελέγχου αλληλεπίδρασης"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Υπηρεσίες που έχουν ληφθεί"</string>
+    <string name="user_installed_services_category_title" msgid="419853083751790648">"Ληφθείσες εφαρμογές"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Σε πειραματικό στάδιο"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Επισημάνσεις λειτουργιών"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
@@ -2124,7 +2126,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Δόνηση ειδοποίησης"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Δόνηση κλήσης"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Ανάδραση αφής"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Χρήση υπηρεσίας"</string>
+    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"Χρήση <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Χρήση διόρθωσης χρωμάτων"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Χρήση υποτίτλων"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Συνέχεια"</string>
@@ -3379,14 +3381,6 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Φως που αναβοσβήνει"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Οθόνη κλειδώματος"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Με κλειδωμένο προφίλ εργασίας"</string>
-    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Ειδοποιήσεις στη οθόνη κλειδώματος"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Εμφάνιση προειδοποιήσεων και αθόρυβων ειδοποιήσεων"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Εμφάνιση μόνο προειδοποιήσεων"</string>
-    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Να μην εμφανίζονται ειδοποιήσεις"</string>
-    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Ευαίσθητες ειδοποιήσεις"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Εμφάνιση ευαίσθητου περιεχομένου κατά το κλείδωμα"</string>
-    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Ευαίσθητες ειδοποιήσεις προφίλ εργασίας"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Εμφάνιση ευαίσθητου περιεχομένου προφίλ εργασίας κατά το κλείδωμα"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Εμφάνιση όλου του περιεχ. ειδοπ."</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Εμφάνιση ευαίσθητου περιεχ. μόνο στο ξεκλείδωμα"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Να μην εμφανίζονται ειδοποιήσεις"</string>
@@ -3398,7 +3392,7 @@
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Ειδοποιήσεις προφίλ"</string>
     <string name="notifications_title" msgid="8086372779371204971">"Ειδοποιήσεις"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Ειδοπ/σεις εφ/γών"</string>
-    <string name="notification_channel_title" msgid="2260666541030178452">"Κατηγορία ειδοπ."</string>
+    <string name="notification_channel_title" msgid="2260666541030178452">"Κατηγορία ειδοποιήσεων"</string>
     <string name="notification_group_title" msgid="7180506440133859601">"Ομάδα κατηγοριών ειδοποιήσεων"</string>
     <string name="notification_importance_title" msgid="4368578960344731828">"Συμπεριφορά"</string>
     <string name="notification_importance_unspecified" msgid="6622173510486113958">"Να επιτρέπεται ο ήχος"</string>
@@ -3413,13 +3407,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Υψηλή"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Εμφάνιση στην οθόνη"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Αποκλεισμός"</string>
-    <string name="notification_silence_title" msgid="6986752165900591125">"Σίγαση"</string>
-    <string name="notification_alert_title" msgid="2267584776990348784">"Ειδοποίηση"</string>
+    <string name="notification_silence_title" msgid="8575600650015431622">"Διακριτικές"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"Προτεραιότητας"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Να επιτρέπονται οι διακοπές"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Επιτρέψτε στην εφαρμογή να εμφανίζει ειδοποιήσεις με ήχο, δόνηση ή/και αναδυόμενο παράθυρο στην οθόνη"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Στο αναπτυσσόμενο πλαίσιο σκίασης, σύμπτυξη ειδοποιήσεων σε μία γραμμή"</string>
-    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Σας βοηθά να συγκεντρωθείτε χωρίς ήχο και δόνηση"</string>
-    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Τραβά την προσοχή σας με ήχο ή δόνηση"</string>
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Σας βοηθάει να συγκεντρωθείτε με ειδοποιήσεις που εμφανίζονται μόνο στο αναπτυσσόμενο πλαίσιο σκίασης. Πάντα σε σίγαση."</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Εμφανίζεται κάτω από ειδοποιήσεις προτεραιότητας. Πάντα σε σίγαση."</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Εμφανίζεται κάτω από ειδοποιήσεις προτεραιότητας. Πάντα σε σίγαση."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Εμφανίζεται κάτω από ειδοποιήσεις προτεραιότητας. Πάντα σε σίγαση."</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Τραβάει την προσοχή σας με ήχους και ένα εικονίδιο γραμμής κατάστασης. Εμφανίζεται στην οθόνη κλειδώματος."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Όταν η συσκευή είναι ξεκλειδωμένη, οι ειδοποιήσεις εμφανίζονται ως banner επάνω στην οθόνη"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Εμφάνιση ειδοποιήσεων"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Προσαρμοστικές ειδοποιήσεις"</string>
@@ -3745,6 +3742,7 @@
     <string name="default_browser_title" msgid="8101772675085814670">"Εφαρμογή προγρ.περιήγησης"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Κανένα προεπιλεγμένο πρόγραμμα περιήγησης"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Εφαρμογή \"Τηλέφωνο\""</string>
+    <string name="roles_title" msgid="8739481762225637569">"Ρόλοι"</string>
     <string name="default_app" msgid="6864503001385843060">"(Προεπιλογή)"</string>
     <string name="system_app" msgid="9068313769550747372">"(Σύστημα)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Προεπιλογή συστήματος)"</string>
@@ -4190,7 +4188,7 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Ταχύτερη λήψη φωτογραφιών selfie"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"Πλοήγηση συστήματος"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"Πλοήγηση με δύο κουμπιά"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"Για εναλλαγή εφαρμογών, σύρετε προς τα επάνω στο κουμπί αρχικής οθόνης. Για να δείτε όλες τις εφαρμογές, σύρετε ξανά προς τα επάνω. Για επιστροφή, πατήστε το κουμπί επιστροφής."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"Για εναλλαγή μεταξύ των εφαρμογών, σύρετε προς τα επάνω στο κουμπί αρχικής σελίδας. Σύρετε ξανά προς τα επάνω, για να δείτε όλες τις εφαρμογές. Λειτουργεί από οποιαδήποτε οθόνη. Δεν υπάρχει πλέον κουμπί επισκόπησης στην κάτω δεξιά γωνία της οθόνης."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"Δοκιμάστε το νέο κουμπί αρχικής οθόνης"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"Ενεργοποιήστε τη νέα κίνηση για την εναλλαγή εφαρμογών"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"Πλοήγηση με κινήσεις"</string>

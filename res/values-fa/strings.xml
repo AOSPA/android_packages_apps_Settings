@@ -414,6 +414,7 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"برای باز کردن قفل تلفنتان، مجاز کردن خریدها یا ورود به سیستم برنامه‌ها، از چهر‌ه‌تان استفاده کنید."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"از چهره‌تان برای باز کردن قفل تلفن یا تأیید خریدها استفاده کنید.\n\nتوجه: نمی‌توانید از چهره‌تان برای باز کردن قفل این دستگاه استفاده کنید. برای اطلاعات بیشتر، با سرپرست سیستم سازمانتان تماس بگیرید."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"برای باز کردن قفل تلفنتان، مجاز کردن خریدها یا ورود به سیستم برنامه‌ها، از چهر‌ه‌تان استفاده کنید"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -437,8 +438,9 @@
     <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"دکمه تأیید"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"هنگام احراز هویت در برنامه‌ها، همیشه به تأیید نیاز است"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"حذف داده‌های چهره"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"راه‌اندازی «بازگشایی با چهره» جدید"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"از «بازگشایی با چهره» برای باز کردن قفل دستگاه، ورود به سیستم برنامه‌ها و تأیید پرداخت‌ها استفاده کنید.\n\nبه خاطر بسپارید:\nبا نگاه کردن به تلفن (حتی اگر نخواهید)، ممکن است قفل آن باز شود.\n\nافراد دیگر می‌توانند با نگه‌داشتن آن جلوی صورتتان، وقتی چشمانتان باز است، قفلش را باز کنند.\n\nفرد دیگری که شباهت زیادی به شما دارد - مثلاً فرزندتان یا خواهر و برادر دوقلویتان - می‌تواند قفل تلفنتان را باز کند."</string>
+    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"‏راه‌اندازی face unlock جدید"</string>
+    <!-- no translation found for security_settings_face_settings_footer (1215895541291738756) -->
+    <skip />
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"داده‌های چهره حذف شود؟"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"داده‌هایی که «بازگشایی با چهره»‌ ضبط کرده است، به‌طور دائم و ایمن حذف می‌شود. پس از برداشته شدن داده‌ها، برای باز کردن قفل تلفن، ورود به سیستم برنامه‌ها، و تأیید پرداخت‌ها، به پین، الگو، یا گذرواژه نیاز دارید."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"اثر انگشت"</string>
@@ -2065,7 +2067,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"صدا و نوشتار روی صفحه"</string>
     <string name="display_category_title" msgid="685461049938269166">"نمایشگر"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"کنترل‌های تعامل"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"سرویس‌های بارگیری‌شده"</string>
+    <string name="user_installed_services_category_title" msgid="419853083751790648">"برنامه‌های بارگیری‌شده"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"آزمایشی"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"پرچم‌های ویژه"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
@@ -2124,7 +2126,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"لرزش برای اعلان"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"لرزش هنگام زنگ خوردن"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"بازخورد لمسی"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"استفاده از سرویس"</string>
+    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"استفاده از <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"استفاده از تصحیح رنگ"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"استفاده از زیرنویس"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"ادامه"</string>
@@ -2217,7 +2219,7 @@
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> کنترل کامل بر این دستگاه را درخواست می‌کند. این سرویس می‌تواند صفحه را بخواند و ازطرف افرادی که مشکل دسترسی دارند، عمل کند. این سطح کنترل برای اکثر برنامه‌ها مناسب نیست."</string>
     <string name="accessibility_service_warning_description" msgid="5678294638592090340">"کنترل کامل برای بیشتر برنامه‌ها مناسب نیست، به‌جز برنامه‌هایی که به شما در زمینه نیازهای دسترس‌پذیری کمک می‌کند."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"مشاهده و کنترل صفحه"</string>
-    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"می‌تواند همه محتوای صفحه را بخواند و آن را روی بقیه برنامه‌ها نمایش دهد."</string>
+    <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"می‌تواند همه محتوای صفحه را بخواند و محتوا را ازطریق سایر برنامه‌ها نمایش دهد."</string>
     <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"مشاهده و انجام کنش‌ها"</string>
     <string name="accessibility_service_action_perform_description" msgid="2402904134246069476">"این عملکرد می‌تواند با برنامه یا حسگری سخت‌افزاری تعاملاتتان را ردیابی کند و ازطرف شما با برنامه‌ها تعامل داشته باشد."</string>
     <string name="accessibility_dialog_button_allow" msgid="8427955451281232788">"مجاز"</string>
@@ -3379,14 +3381,6 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"نور چشمک‌زن"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"صفحه قفل"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"وقتی نمایه کاری قفل است"</string>
-    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"اعلان‌ها در صفحه قفل"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"نمایش اعلان‌های بی‌صدا و هشدار"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"فقط نمایش اعلان‌های هشدار"</string>
-    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"عدم‌نمایش اعلان‌ها"</string>
-    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"اعلان‌های حساس"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"نمایش محتوای حساس درهنگام صفحه قفل"</string>
-    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"اعلان‌های حساس نمایه کاری"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"نمایش محتوای حساس نمایه کاری درهنگام صفحه قفل"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"نمایش همه محتوای اعلان"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"نمایش محتوای حساس فقط درصورت باز بودن قفل صفحه"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"هرگز اعلان نشان داده نشود"</string>
@@ -3413,13 +3407,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"زیاد"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"صفحه بازشو"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"مسدود کردن"</string>
-    <string name="notification_silence_title" msgid="6986752165900591125">"بی‌صدا"</string>
-    <string name="notification_alert_title" msgid="2267584776990348784">"هشدار دادن"</string>
+    <string name="notification_silence_title" msgid="8575600650015431622">"آرام"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"دراولویت"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"وقفه‌ها مجاز شوند"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"به برنامه اجازه پخش صدا، لرزش و/یا نمایش اعلان‌های بازشو در صفحه‌نمایش داده شود"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"در اعلان‌های پایین‌کش تیره و کوچک در یک سطر"</string>
-    <string name="notification_channel_summary_low" msgid="7050068866167282765">"به شما کمک می‌کند بدون صدا یا لرزش تمرکز کنید"</string>
-    <string name="notification_channel_summary_default" msgid="5753454293847059695">"با صدا و لرزش توجه شما را جلب می‌کند"</string>
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"با فقط نمایش اعلان در کشوی اعلان‌های پایین‌کش، به شما کمک می‌کند تمرکزتان را ازدست ندهید همیشه بی‌صدا."</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"اعلان‌های با اولویت پایین را نشان می‌دهد. همیشه بی‌صدا."</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"اعلان‌های با اولویت پایین را نشان می‌دهد. همیشه بی‌صدا."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"اعلان‌های با اولویت پایین را نشان می‌دهد. همیشه بی‌صدا."</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"با صدا و نماد نوار وضعیت توجه شما را جلب می‌کند. در صفحه قفل نشان داده می‌شود."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"وقتی قفل دستگاه باز می‌شود، اعلان‌ها به‌صورت برنمایی در بالای صفحه‌نمایش نشان داده شود"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"نمایش اعلان‌ها"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"اعلان‌های تطبیقی"</string>
@@ -3745,6 +3742,7 @@
     <string name="default_browser_title" msgid="8101772675085814670">"برنامه مرورگر"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"بدون مرورگر پیش‌فرض"</string>
     <string name="default_phone_title" msgid="282005908059637350">"برنامه تلفن"</string>
+    <string name="roles_title" msgid="8739481762225637569">"نقش‌ها"</string>
     <string name="default_app" msgid="6864503001385843060">"(پیش‌فرض)"</string>
     <string name="system_app" msgid="9068313769550747372">"(سیستم)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(پیش‌فرض سیستم)"</string>
@@ -4190,13 +4188,13 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"سریع‌تر گرفتن خودگرفت"</string>
     <string name="system_navigation_title" msgid="6797710220442338366">"پیمایش سیستمی"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="7381617686249459562">"پیمایش ۲ دکمه‌ای"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="2158312695920408870">"برای جابه‌جایی بین برنامه‌ها، دکمه صفحه اصلی را تند به بالا بکشید. برای دیدن همه برنامه‌ها، دوباره تند به بالا بکشید. برای برگشت، روی دکمه برگشت ضربه بزنید."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="5367798220225997418">"برای تغییر برنامه‌ها انگشتتان را روی دکمه اصلی به بالا تند بکشید. برای دیدن همه برنامه‌ها، انگشتتان را دوباره تند به بالا بکشید. دیگردر سمت چپ پایین صفحه‌نمایشتان، دکمه نمای کلی ندارید."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="1465200107913259595">"دکمه صفحه اصلی جدید را امتحان کنید"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="4825314186907812743">"برای تغییر برنامه‌ها، اشاره جدید را روشن کنید"</string>
     <string name="edge_to_edge_navigation_title" msgid="4889073348091667667">"پیمایش اشاره‌ای"</string>
     <string name="edge_to_edge_navigation_summary" msgid="511639046551586471">"برای رفتن به صفحه اصلی، از پایین صفحه تند به‌طرف بالا بکشید. برای جابه‌جایی بین برنامه‌ها، انگشتتان را از پایین صفحه تند به‌طرف بالا بکشید، نگه‌دارید، سپس رها کنید. برای برگشت، انگشتتان را از لبه سمت راست یا چپ تند بکشید."</string>
     <string name="legacy_navigation_title" msgid="2635061924638361565">"پیمایش ۳ دکمه‌ای"</string>
-    <string name="legacy_navigation_summary" msgid="5631274479304544610">"برگشت، صفحه اصلی، و جابه‌جایی بین برنامه‌ها با دکمه‌های پایین صفحه."</string>
+    <string name="legacy_navigation_summary" msgid="8824432558082404832">"‏حالت پیمایش Classic Android هنگام رفتن به صفحه اصلی، جابه‌جایی بین برنامه‌ها و «برگشت» ازطریق دکمه‌ها قابل‌دسترسی هستند."</string>
     <string name="keywords_system_navigation" msgid="5825645072714635357">"پیمایش سیستمی، پیمایش ۲ دکمه‌ای، پیمایش ۳ دکمه‌ای، پیمایش اشاره‌ای"</string>
     <string name="gesture_not_supported_dialog_message" msgid="4315436164949864999">"برنامه شبکه پیش‌فرض، <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> پشتیبانی نمی‌کند"</string>
     <string name="gesture_not_supported_positive_button" msgid="8233003373902032396">"تغییر برنامه اصلی پیش‌فرض"</string>

@@ -414,6 +414,7 @@
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Használja arcát telefonja feloldásához, vásárlások engedélyezéséhez és alkalmazásokba való bejelentkezéshez."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Használja arcát a telefon feloldásához vagy vásárlások engedélyezéséhez.\n\nMegjegyzés: Nem használhatja arcát az eszköz feloldására. Ha további információra van szüksége, forduljon szervezete rendszergazdájához."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Használja arcát telefonja feloldásához, vásárlások engedélyezéséhez és alkalmazásokba való bejelentkezéshez"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -438,7 +439,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Az alkalmazásokban való hitelesítés során mindig kérjen megerősítést"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Arcadatok törlése"</string>
     <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Arcalapú feloldás új beállítása"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Az arcalapú feloldás segítségével feloldhatja telefonja zárolását, bejelentkezhet alkalmazásokba, illetve megerősíthet fizetéseket.\n\nNe feledje:\nHa a telefonja felé fordul, azzal akkor is feloldhatja az eszköz zárolását, ha nem áll szándékában.\n\nTelefonját más is feloldhatja, ha az Ön arca elé tartja, amikor szemei nyitva vannak.\n\nElőfordulhat, hogy telefonját az Önre nagyon hasonlító személyek is feloldhatják, például gyermeke vagy egypetéjű ikertestvére."</string>
+    <!-- no translation found for security_settings_face_settings_footer (1215895541291738756) -->
+    <skip />
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Törli az arcadatokat?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Az arcalapú feloldás által mentett adatok véglegesen és biztonságosan törlődnek. Az eltávolításuk után PIN-kóddal, mintával vagy jelszóval kell feloldania telefonja zárolását, bejelentkeznie az alkalmazásokba, illetve megerősítenie a fizetési tranzakciókat."</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Ujjlenyomat"</string>
@@ -2065,7 +2067,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Hang és képernyőn megjelenő szöveg"</string>
     <string name="display_category_title" msgid="685461049938269166">"Megjelenítés"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interakcióvezérlők"</string>
-    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Letöltött szolgáltatások"</string>
+    <string name="user_installed_services_category_title" msgid="419853083751790648">"Letöltött alkalmazások"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Kísérleti"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Funkciókapcsolók"</string>
     <string name="talkback_title" msgid="7912059827205988080">"Talkback"</string>
@@ -2124,7 +2126,7 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Értesítések rezgése"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Csengés rezgése"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Visszajelzés az érintésekről"</string>
-    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Szolgáltatás használata"</string>
+    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"<xliff:g id="SERVICE">%1$s</xliff:g> használata"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Színkorrekció használata"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Feliratok használata"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Tovább"</string>
@@ -3006,7 +3008,7 @@
     <string name="mms_message_title" msgid="6068098013612041440">"MMS-üzenetek"</string>
     <string name="mms_message_summary" msgid="8408985719331988420">"Küldés és fogadás mobiladat-kapcsolat nélkül"</string>
     <string name="data_during_calls_title" msgid="4476240693784306761">"Adathasználat hívások közben"</string>
-    <string name="data_during_calls_summary" msgid="497978580819604521">"A SIM-kártya mobiladatának használata kizárólag hívások alatt"</string>
+    <string name="data_during_calls_summary" msgid="497978580819604521">"A SIM-kártya mobiladatának használata kizárólag hívásokkor"</string>
     <string name="work_sim_title" msgid="4843322164662606891">"Munkahelyi SIM-kártya"</string>
     <string name="user_restrictions_title" msgid="5794473784343434273">"Alkalmazások és tartalmak elérése"</string>
     <string name="user_rename" msgid="8523499513614655279">"ÁTNEVEZÉS"</string>
@@ -3379,14 +3381,6 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Villogó fény"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Lezárási képernyő"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Zárolt munkaprofil esetén"</string>
-    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Értesítések a lezárási képernyőn"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Hangjelzéssel járó és néma értesítések megjelenítése"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Csak hangjelzéssel járó értesítések megjelenítése"</string>
-    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Ne jelenjenek meg értesítések"</string>
-    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Bizalmas értesítések"</string>
-    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Bizalmas tartalmak megjelenítése lezárt állapotban"</string>
-    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Munkaprofil bizalmas értesítései"</string>
-    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"A munkaprofil bizalmas tartalmainak megjelenítése lezárt állapotban"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Az összes értesítés jelenjen meg"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Érzékeny tartalmak megjelenítése csak feloldáskor"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Semmilyen értesítés ne jelenjen meg"</string>
@@ -3413,13 +3407,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Magas"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Felugró értesítés a képernyőn"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Tiltás"</string>
-    <string name="notification_silence_title" msgid="6986752165900591125">"Néma"</string>
-    <string name="notification_alert_title" msgid="2267584776990348784">"Értesítések"</string>
+    <string name="notification_silence_title" msgid="8575600650015431622">"Diszkrét"</string>
+    <string name="notification_alert_title" msgid="7426286507434650473">"Prioritásos"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Megszakítások engedélyezése"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Az alkalmazás aktiválhat hangjelzést, rezgést és/vagy értesítéseket jeleníthet meg a képernyőn"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"A lehúzható értesítési felületen egyetlen sorrá csukhatja össze az értesítéseket"</string>
-    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Hangjelzés és rezgés nélkül segít a koncentrálásban"</string>
-    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Figyelemfelkeltő a hangjelzésnek és rezgésnek köszönhetően"</string>
+    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Segítségével a fontos dolgokra koncentrálhat, az értesítések csak a lehúzható értesítési felületen jelennek meg. Mindig némítva van."</string>
+    <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Az elsőbbségi értesítések alatt jelenik meg. Mindig némítva van."</string>
+    <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Az elsőbbségi értesítések alatt jelenik meg. Mindig némítva van."</string>
+    <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Az elsőbbségi értesítések alatt jelenik meg. Mindig némítva van."</string>
+    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Figyelemfelkeltő a hangjelzésnek és az állapotsávon megjelenő ikonnak köszönhetően. Megjelenik a lezárási képernyőn."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Feloldott állapotban az értesítések megjelenítése szalag formájában a képernyő felső részén"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Értesítések mutatása"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Alkalmazkodó értesítések"</string>
@@ -3745,6 +3742,7 @@
     <string name="default_browser_title" msgid="8101772675085814670">"Böngésző"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Nincs alapértelmezett böngésző"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Telefonalkalmazás"</string>
+    <string name="roles_title" msgid="8739481762225637569">"Szerepkörök"</string>
     <string name="default_app" msgid="6864503001385843060">"(Alapértelmezett)"</string>
     <string name="system_app" msgid="9068313769550747372">"(Rendszer)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Alapértelmezett)"</string>
