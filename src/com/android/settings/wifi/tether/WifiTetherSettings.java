@@ -189,7 +189,18 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onTetherConfigUpdated() {
         final WifiConfiguration config = buildNewConfig();
+        boolean bandEntriesChanged = false;
+
         mPasswordPreferenceController.updateVisibility(config.getAuthType());
+
+        if (mApBandPreferenceController.isVendorDualApSupported()
+                && mSecurityPreferenceController.isWpa3Supported()) {
+            if ((config.getAuthType() == WifiConfiguration.KeyMgmt.OWE)
+                    == (mApBandPreferenceController.isBandEntriesHasDualband())) {
+                mApBandPreferenceController.updatePreferenceEntries(config);
+                bandEntriesChanged = true;
+            }
+        }
 
         /**
          * if soft AP is stopped, bring up
@@ -203,6 +214,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             mSwitchBarController.stopTether();
         }
         mWifiManager.setWifiApConfiguration(config);
+
+        if (bandEntriesChanged)
+            mApBandPreferenceController.updateDisplay();
     }
 
     private WifiConfiguration buildNewConfig() {
@@ -214,6 +228,12 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         config.preSharedKey = mPasswordPreferenceController.getPasswordValidated(securityType);
         config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
         config.apBand = mApBandPreferenceController.getBandIndex();
+
+	if (config.getAuthType() == WifiConfiguration.KeyMgmt.OWE
+                && config.apBand == WifiConfiguration.AP_BAND_DUAL) {
+            config.apBand = WifiConfiguration.AP_BAND_2GHZ;
+        }
+
         return config;
     }
 
