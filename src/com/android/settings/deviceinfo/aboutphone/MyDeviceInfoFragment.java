@@ -39,7 +39,6 @@ import com.android.settings.deviceinfo.FccEquipmentIdPreferenceController;
 import com.android.settings.deviceinfo.FeedbackPreferenceController;
 import com.android.settings.deviceinfo.IpAddressPreferenceController;
 import com.android.settings.deviceinfo.ManualPreferenceController;
-import com.android.settings.deviceinfo.PhoneNumberPreferenceController;
 import com.android.settings.deviceinfo.RegulatoryInfoPreferenceController;
 import com.android.settings.deviceinfo.SafetyInfoPreferenceController;
 import com.android.settings.deviceinfo.SoftwareVersionPreferenceController;
@@ -107,7 +106,6 @@ public class MyDeviceInfoFragment extends DashboardFragment
         use(DeviceNamePreferenceController.class).setHost(this /* parent */);
         mBuildNumberPreferenceController = use(BuildNumberPreferenceController.class);
         mBuildNumberPreferenceController.setHost(this /* parent */);
-        use(PhoneNumberPreferenceController.class).init(getSettingsLifecycle());
     }
 
     @Override
