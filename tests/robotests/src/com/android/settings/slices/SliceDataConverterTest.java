@@ -119,11 +119,11 @@ public class SliceDataConverterTest {
         assertThat(fakeSlice.getScreenTitle()).isEqualTo(FAKE_SCREEN_TITLE);
         assertThat(fakeSlice.getKeywords()).isNull();
         assertThat(fakeSlice.getIconResource()).isNotNull();
-        assertThat(fakeSlice.getUri()).isNull();
+        assertThat(fakeSlice.getUri().toSafeString())
+                .isEqualTo("content://com.android.settings.slices/action/key");
         assertThat(fakeSlice.getFragmentClassName()).isEqualTo(FAKE_FRAGMENT_CLASSNAME);
         assertThat(fakeSlice.getPreferenceController()).isEqualTo(FAKE_CONTROLLER_NAME);
         assertThat(fakeSlice.getSliceType()).isEqualTo(SliceData.SliceType.SLIDER);
-        assertThat(fakeSlice.isPlatformDefined()).isTrue(); // from XML
         assertThat(fakeSlice.getUnavailableSliceSubtitle()).isEqualTo(
                 "subtitleOfUnavailableSlice"); // from XML
     }
@@ -135,7 +135,7 @@ public class SliceDataConverterTest {
         assertThat(fakeSlice.getScreenTitle()).isEqualTo(
                 mContext.getString(R.string.accessibility_settings));
         assertThat(fakeSlice.getIconResource()).isEqualTo(FAKE_ICON);
-        assertThat(fakeSlice.getUri()).isNull();
+        assertThat(fakeSlice.getUri()).isNotNull();
         assertThat(fakeSlice.getFragmentClassName()).isEqualTo(ACCESSIBILITY_FRAGMENT);
         assertThat(fakeSlice.getPreferenceController()).isEqualTo(A11Y_CONTROLLER_NAME);
     }

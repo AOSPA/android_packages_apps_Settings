@@ -18,12 +18,10 @@ package com.android.settings.slices;
 
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
-import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_PLATFORM_DEFINED;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -111,17 +109,6 @@ public class SliceBuilderUtils {
     }
 
     /**
-     * @return the {@link SliceData.SliceType} for the {@param controllerClassName} and key.
-     */
-    @SliceData.SliceType
-    public static int getSliceType(Context context, String controllerClassName,
-            String controllerKey) {
-        BasePreferenceController controller = getPreferenceController(context, controllerClassName,
-                controllerKey);
-        return controller.getSliceType();
-    }
-
-    /**
      * Splits the Settings Slice Uri path into its two expected components:
      * - intent/action
      * - key
@@ -170,8 +157,7 @@ public class SliceBuilderUtils {
         final Intent intent = new Intent(action)
                 .setData(data.getUri())
                 .setClass(context, SliceBroadcastReceiver.class)
-                .putExtra(EXTRA_SLICE_KEY, data.getKey())
-                .putExtra(EXTRA_SLICE_PLATFORM_DEFINED, data.isPlatformDefined());
+                .putExtra(EXTRA_SLICE_KEY, data.getKey());
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
     }
@@ -212,17 +198,6 @@ public class SliceBuilderUtils {
 
         // Priority 4: Show empty text.
         return "";
-    }
-
-    public static Uri getUri(String path, boolean isPlatformSlice) {
-        final String authority = isPlatformSlice
-                ? SettingsSlicesContract.AUTHORITY
-                : SettingsSliceProvider.SLICE_AUTHORITY;
-        return new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(authority)
-                .appendPath(path)
-                .build();
     }
 
     public static Intent buildSearchResultPageIntent(Context context, String className, String key,
@@ -350,7 +325,7 @@ public class SliceBuilderUtils {
                 .build();
     }
 
-    private static BasePreferenceController getPreferenceController(Context context,
+    static BasePreferenceController getPreferenceController(Context context,
             String controllerClassName, String controllerKey) {
         try {
             return BasePreferenceController.createInstance(context, controllerClassName);
