@@ -53,8 +53,8 @@ public class StatsLogUserEventLogger extends NoOpUserEventLogger implements Them
 
     @Override
     public void logActionClicked(String collectionId, int actionLabelResId) {
-        WallpaperStatsLog.write(CODE, StyleEnums.WALLPAPER_EXPLORE, 0, 0, 0, 0, 0, collectionId.hashCode(),
-                0, 0, 0);
+        WallpaperStatsLog.write(CODE, StyleEnums.WALLPAPER_EXPLORE, 0, 0, 0, 0, 0,
+                collectionId.hashCode(), 0, 0, 0);
     }
 
     @Override
@@ -76,7 +76,8 @@ public class StatsLogUserEventLogger extends NoOpUserEventLogger implements Them
         WallpaperStatsLog.write(CODE, StyleEnums.WALLPAPER_APPLIED,
                 0, 0, 0, 0, 0,
                 collectionId.hashCode(),
-                0, 0, 0);
+                wallpaperId != null ? wallpaperId.hashCode() : 0,
+                0, 0);
     }
 
     @Nullable
