@@ -34,11 +34,12 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
  */
 public class GestureNavigationBackSensitivityDialog extends InstrumentedDialogFragment {
     private static final String TAG = "GestureNavigationBackSensitivityDialog";
-    private static final String KEY_BACK_SENSITIVITY = "back_sensitivity";
 
+    private static final String KEY_BACK_SENSITIVITY = "back_sensitivity";
+    private static final String KEY_BACK_HEIGHT = "back_height";
     private static final String KEY_HOME_HANDLE_SIZE = "home_handle_width";
 
-    public static void show(SystemNavigationGestureSettings parent, int sensitivity, int length) {
+    public static void show(SystemNavigationGestureSettings parent, int sensitivity, int length, int height) {
         if (!parent.isAdded()) {
             return;
         }
@@ -48,6 +49,7 @@ public class GestureNavigationBackSensitivityDialog extends InstrumentedDialogFr
         final Bundle bundle = new Bundle();
         bundle.putInt(KEY_BACK_SENSITIVITY, sensitivity);
         bundle.putInt(KEY_HOME_HANDLE_SIZE, length);
+        bundle.putInt(KEY_BACK_HEIGHT, height);
         dialog.setArguments(bundle);
         dialog.setTargetFragment(parent, 0);
         dialog.show(parent.getFragmentManager(), TAG);
@@ -66,6 +68,8 @@ public class GestureNavigationBackSensitivityDialog extends InstrumentedDialogFr
         seekBarSensitivity.setProgress(getArguments().getInt(KEY_BACK_SENSITIVITY));
         final SeekBar seekBarHandleSize = view.findViewById(R.id.home_handle_seekbar);
         seekBarHandleSize.setProgress(getArguments().getInt(KEY_HOME_HANDLE_SIZE));
+        final SeekBar seekBarHeight = view.findViewById(R.id.back_height_seekbar);
+        seekBarHeight.setProgress(getArguments().getInt(KEY_BACK_HEIGHT));
         return new AlertDialog.Builder(getContext())
                 .setTitle(R.string.back_options_dialog_title)
                 .setMessage(R.string.back_sensitivity_dialog_message)
@@ -75,6 +79,9 @@ public class GestureNavigationBackSensitivityDialog extends InstrumentedDialogFr
                     getArguments().putInt(KEY_BACK_SENSITIVITY, sensitivity);
                     int length = seekBarHandleSize.getProgress();
                     getArguments().putInt(KEY_HOME_HANDLE_SIZE, length);
+                    int height = seekBarHeight.getProgress();
+                    getArguments().putInt(KEY_BACK_HEIGHT, height);
+                    SystemNavigationGestureSettings.setBackHeight(getActivity(), height);
                     SystemNavigationGestureSettings.setBackSensitivity(getActivity(),
                             getOverlayManager(), sensitivity);
                     SystemNavigationGestureSettings.setHomeHandleSize(getActivity(), length);
