@@ -289,8 +289,7 @@ public class WifiConfigController implements TextWatcher,
             mPasswordScanButton.setVisibility(View.GONE);
         } else {
 
-            if (!mWifiManager.isWifiCoverageExtendFeatureEnabled()
-                 || (mAccessPoint.getSecurity() != AccessPoint.SECURITY_NONE
+            if ((mAccessPoint.getSecurity() != AccessPoint.SECURITY_NONE
                       && mAccessPoint.getSecurity() != AccessPoint.SECURITY_PSK)) {
                 mShareThisWifiCheckBox.setChecked(false);
                 mShareThisWifiCheckBox.setVisibility(View.GONE);

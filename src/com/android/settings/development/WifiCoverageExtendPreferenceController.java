@@ -65,7 +65,7 @@ public class WifiCoverageExtendPreferenceController extends DeveloperOptionsPref
 
     @Override
     public void updateState(Preference preference) {
-        final boolean enabled = mWifiManager.isWifiCoverageExtendFeatureEnabled();
+        final boolean enabled = false;
         ((SwitchPreference) mPreference).setChecked(enabled);
 
     }
