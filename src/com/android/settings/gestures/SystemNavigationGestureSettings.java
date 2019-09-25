@@ -162,7 +162,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
             p.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_SETTING);
             p.setExtraWidgetOnClickListener((v) -> GestureNavigationBackSensitivityDialog
                     .show(this, getBackSensitivity(getContext(), mOverlayManager),
-                    getHomeHandleSize(getContext())));
+                    getHomeHandleSize(getContext()), getBackHeight(getContext())));
         } else if (info.getKey() == KEY_SYSTEM_NAV_3BUTTONS) {
             p.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_SETTING);
             p.setExtraWidgetOnClickListener((v) -> ThreeButtonNavigationInvertDialog
@@ -262,13 +262,28 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
         // 2 means long
         // 1 measns middle
         // 0 means aosp size
-        Settings.System.putInt(context.getContentResolver(),
-                Settings.System.NAVIGATION_HANDLE_WIDTH, length);
+        Settings.System.putIntForUser(context.getContentResolver(),
+                Settings.System.NAVIGATION_HANDLE_WIDTH, length, USER_CURRENT);
     }
 
     static int getHomeHandleSize(Context context) {
-        return Settings.System.getInt(context.getContentResolver(),
-                Settings.System.NAVIGATION_HANDLE_WIDTH, 0);
+        return Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.NAVIGATION_HANDLE_WIDTH, 0, USER_CURRENT);
+    }
+
+    static void setBackHeight(Context context, int height) {
+        // height can be range 0 - 3
+        // 0 means full height
+        // 1 measns half of the screen
+        // 2 means lower third of the screen
+        // 3 means lower sixth of the screen
+        Settings.System.putIntForUser(context.getContentResolver(),
+                Settings.System.BACK_GESTURE_HEIGHT, height, USER_CURRENT);
+    }
+
+    static int getBackHeight(Context context) {
+        return Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.BACK_GESTURE_HEIGHT, 0, USER_CURRENT);
     }
 
     @VisibleForTesting
