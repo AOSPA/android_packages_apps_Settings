@@ -135,8 +135,12 @@ class OverlayThemeExtractor {
     void addIconOverlay(Builder builder, String packageName, String... previewIcons)
             throws NameNotFoundException {
         builder.addOverlayPackage(getOverlayCategory(packageName), packageName);
-        for (String iconName : previewIcons) {
-            builder.addIcon(loadIconPreviewDrawable(iconName, packageName, false));
+        try {
+            for (String iconName : previewIcons) {
+                builder.addIcon(loadIconPreviewDrawable(iconName, packageName, false));
+            }
+        } catch (NameNotFoundException | NotFoundException e) {
+            Log.w(TAG, "Didn't find overlay icons, will skip preview", e);
         }
     }
 
