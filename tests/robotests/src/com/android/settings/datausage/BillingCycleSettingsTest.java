@@ -45,9 +45,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.NetworkPolicyEditor;
-import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.FooterPreferenceMixinCompat;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -56,7 +55,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class BillingCycleSettingsTest {
@@ -142,6 +141,7 @@ public class BillingCycleSettingsTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void onCreate_emptyArguments_shouldSetDefaultNetworkTemplate() {
         final BillingCycleSettings billingCycleSettings = spy(new BillingCycleSettings());
         when(billingCycleSettings.getContext()).thenReturn(mContext);
@@ -159,9 +159,6 @@ public class BillingCycleSettingsTest {
         when(mConnectivityManager.isNetworkSupported(anyInt())).thenReturn(true);
         final SwitchPreference preference = mock(SwitchPreference.class);
         when(billingCycleSettings.findPreference(anyString())).thenReturn(preference);
-        final FooterPreferenceMixinCompat footer = mock(FooterPreferenceMixinCompat.class);
-        ReflectionHelpers.setField(billingCycleSettings, "mFooterPreferenceMixin", footer);
-        when(footer.createFooterPreference()).thenReturn(mock(FooterPreference.class));
 
         billingCycleSettings.onCreate(Bundle.EMPTY);
 

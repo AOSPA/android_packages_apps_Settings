@@ -118,6 +118,7 @@
         <activity android:name=".homepage.SettingsHomepageActivity"
                   android:label="@string/settings_label_launcher"
                   android:theme="@style/Theme.Settings.Home"
+                  android:taskAffinity="com.android.settings.root"
                   android:launchMode="singleTask">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.SETTINGS" />
@@ -142,6 +143,7 @@
         <!-- Alias for launcher activity only, as this belongs to each profile. -->
         <activity-alias android:name="Settings"
                 android:label="@string/settings_label_launcher"
+                android:taskAffinity="com.android.settings.root"
                 android:launchMode="singleTask"
                 android:targetActivity=".homepage.SettingsHomepageActivity">
             <intent-filter>
@@ -160,8 +162,7 @@
         </receiver>
 
         <activity android:name=".SubSettings"
-                android:parentActivityName="Settings"
-                android:theme="@style/Theme.SubSettings"/>
+                android:parentActivityName="Settings"/>
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:label="@string/settings_shortcut">
@@ -263,6 +264,26 @@
                 android:value="com.android.settings.wifi.WifiSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$WifiSettings2Activity"
+            android:label="@string/wifi_settings"
+            android:icon="@drawable/ic_settings_wireless"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.WIFI_SETTINGS2" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.wifi.WifiSettings2" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity>
 
         <activity
@@ -1055,8 +1076,7 @@
 
         <activity
             android:name="Settings$ManageDomainUrlsActivity"
-            android:label="@string/domain_urls_title"
-            android:parentActivityName="Settings">
+            android:label="@string/domain_urls_title">
             <intent-filter>
                 <action android:name="android.settings.MANAGE_DOMAIN_URLS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2621,13 +2641,6 @@
                 android:value="com.android.settings.notification.AppNotificationSettings" />
         </activity>
 
-        <!-- Show channel group-level notification settings (group passed in as extras) -->
-        <activity android:name="Settings$ChannelGroupNotificationSettingsActivity"
-                  android:exported="true">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.notification.ChannelGroupNotificationSettings" />
-        </activity>
-
         <!-- Show channel-level notification settings (channel passed in as extras) -->
         <activity android:name="Settings$ChannelNotificationSettingsActivity"
                   android:label="@string/notification_channel_title"
@@ -2762,12 +2775,12 @@
 
         <activity
             android:name=".wifi.NetworkRequestDialogActivity"
-            android:theme="@style/Transparent"
+            android:theme="@style/Theme.AlertDialog"
             android:excludeFromRecents="true"
             android:launchMode="singleTop"
             android:taskAffinity=".wifi.NetworkRequestDialogActivity"
             android:exported="true"
-            android:permission="android.permission.NETWORK_SETTINGS">
+            android:permission="android.permission.MAINLINE_WIFI_STACK">
             <intent-filter>
                 <action android:name="com.android.settings.wifi.action.NETWORK_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
