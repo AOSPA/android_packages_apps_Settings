@@ -31,9 +31,10 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
-
+import androidx.preference.PreferenceGroup;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
@@ -43,7 +44,6 @@ import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,6 +55,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private static final String TAG = "WifiTetherSettings";
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
     private static final String KEY_WIFI_TETHER_SCREEN = "wifi_tether_settings_screen";
+    private static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 2;
+    private static final int EXPANDED_CHILD_COUNT_DEFAULT = 3;
+
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_NETWORK_NAME = "wifi_tether_network_name";
     @VisibleForTesting
@@ -187,7 +190,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     }
 
     @Override
-    public void onTetherConfigUpdated() {
+    public void onTetherConfigUpdated(AbstractPreferenceController context) {
         final WifiConfiguration config = buildNewConfig();
         boolean bandEntriesChanged = false;
 
@@ -217,6 +220,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
         if (bandEntriesChanged)
             mApBandPreferenceController.updateDisplay();
+        if (context instanceof WifiTetherSecurityPreferenceController) {
+            reConfigInitialExpandedChildCount();
+        }
     }
 
     private WifiConfiguration buildNewConfig() {
@@ -303,8 +309,34 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 if (state == WifiManager.WIFI_AP_STATE_DISABLED
                         && mRestartWifiApAfterConfigChange) {
                     startTether();
+                } else if (state == WifiManager.WIFI_AP_STATE_FAILED) {
+                    int failureCode = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_FAILURE_REASON, 0);
+                    String failureDesc = intent.getStringExtra(WifiManager.EXTRA_WIFI_AP_FAILURE_DESCRIPTION);
+                    if (failureCode == WifiManager.SAP_START_FAILURE_NO_CHANNEL
+                         && failureDesc != null && failureDesc.equals(WifiManager.WIFI_AP_FAILURE_DESC_NO_5GHZ_SUPPORT)) {
+                        Toast.makeText(content, "5Ghz band not supported. band selection disabled", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         }
+    }
+
+    private void reConfigInitialExpandedChildCount() {
+        final PreferenceGroup screen = getPreferenceScreen();
+        if (mSecurityPreferenceController.getSecurityType() == WifiConfiguration.KeyMgmt.NONE) {
+            screen.setInitialExpandedChildrenCount(EXPANDED_CHILD_COUNT_WITH_SECURITY_NON);
+            return;
+        }
+        screen.setInitialExpandedChildrenCount(EXPANDED_CHILD_COUNT_DEFAULT);
+    }
+
+    @Override
+    public int getInitialExpandedChildCount() {
+        if (mSecurityPreferenceController == null) {
+            return EXPANDED_CHILD_COUNT_DEFAULT;
+        }
+
+        return (mSecurityPreferenceController.getSecurityType() == WifiConfiguration.KeyMgmt.NONE) ?
+            EXPANDED_CHILD_COUNT_WITH_SECURITY_NON : EXPANDED_CHILD_COUNT_DEFAULT;
     }
 }

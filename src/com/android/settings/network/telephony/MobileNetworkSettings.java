@@ -120,7 +120,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                 MobileNetworkUtils.getSearchableSubscriptionId(context));
 
         if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2) &&
-            mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return Arrays.asList(
                     new DataUsageSummaryPreferenceController(getActivity(), getSettingsLifecycle(),
                             this, mSubId));
@@ -151,7 +151,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         use(CarrierPreferenceController.class).init(mSubId);
         use(DataUsagePreferenceController.class).init(mSubId);
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
-        use(EnabledNetworkModePreferenceController.class).init(mSubId);
+        use(EnabledNetworkModePreferenceController.class).init(getLifecycle(), mSubId);
         use(DataServiceSetupPreferenceController.class).init(mSubId);
         if (!FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
             use(EuiccPreferenceController.class).init(mSubId);
@@ -281,7 +281,10 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                     final ArrayList<SearchIndexableResource> result = new ArrayList<>();
 
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.mobile_network_settings;
+                    sir.xmlResId = FeatureFlagPersistent.isEnabled(context,
+                            FeatureFlags.NETWORK_INTERNET_V2)
+                            ? R.xml.mobile_network_settings_v2
+                            : R.xml.mobile_network_settings;
                     result.add(sir);
                     return result;
                 }

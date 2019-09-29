@@ -350,18 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Välj efter UTC-förskjutning"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Tid"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Lås automatiskt"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter viloläge"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Omedelbart efter viloläge, utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter viloläge, utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Lås när skärmens tidsgräns har passerats"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter tidsgränsen"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Omedelbart efter tidsgränsen, utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter tidsgränsen, utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Visa ägaruppgifter på den låsta skärmen"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Låsskärmsmeddelande"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Aktivera widgetar"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Inaktiverad av administratören"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Visa låsningsalternativ"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Visa alternativet för strömbrytaren som inaktiverar Smart Lock, upplåsning med fingeravtryck och aviseringar på låsskärmen."</string>
-    <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Enbart förlängd upplåsning för betrodda"</string>
-    <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Om detta aktiveras håller betrodda agenter enheten upplåst längre, men de kan inte längre låsa upp en låst enhet."</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Visa alternativet för strömbrytaren som inaktiverar Smart Lock, upplåsning med biometri och aviseringar på låsskärmen."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Lås skärmen när ingen är betrodd"</string>
     <string name="trust_lost_locks_screen_summary" msgid="693784434582021206">"Om detta aktiveras låses enheten när den sista betrodda agenten slutar att vara betrodd"</string>
     <string name="owner_info_settings_summary" msgid="7472393443779227052">"Inget"</string>
@@ -397,10 +395,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Skärmlås, fingeravtryck"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Skärmlås"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Ansikte har lagts till"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Tryck för att ange ansiktsautentisering"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Ansiktsautentisering"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Så här konfigurerar du Ansiktslås"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Konfigurera ansiktslås"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Konfigurera ansiktslås"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Ansiktslås"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Ansiktslås för jobbet"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Så här konfigurerar du ansiktslås"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Konfigurera ansiktslås"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Autentisera med hjälp av ditt ansikte"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Börja"</string>
@@ -432,17 +431,17 @@
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Använd ansiktslås för att"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Låsa upp telefonen"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Logga in och göra köp i appar"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Obligatoriskt för ansiktslås"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Se på skärmen med öppna ögon"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Kräv att mobilen bara låses upp när du ser på skärmen med ögonen öppna"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Knappen Bekräfta"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Autentisering i appar måste alltid bekräftas"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Krav för ansiktslås"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Du måste ha ögonen öppna"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Du måste ha ögonen öppna för att låsa upp mobilen"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Måste alltid bekräftas"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Ansiktslås i appar måste alltid bekräftas"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Radera ansiktsdata"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Konfigurera ett nytt ansiktslås"</string>
-    <!-- no translation found for security_settings_face_settings_footer (1215895541291738756) -->
-    <skip />
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Konfigurera ansiktslås"</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Med hjälp av ansiktslås kan du låsa upp enheten, logga in i appar och bekräfta betalningar.\n\nTänk på detta:\nOm du tittar på mobilen kan du oavsiktligt låsa upp den.\n\nAndra kan låsa upp din mobil om de håller upp den mot ditt ansikte när dina ögon är öppna.\n\nMobilen kan låsas upp av någon som är mycket lik dig, till exempel ett syskon."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Vill du radera ansiktsdata?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Data som har registrerats av Ansiktslås raderas säkert och permanent. Efter borttagningen låser du upp mobilen, loggar in i appar och bekräftar betalningar med hjälp av pinkoden, det grafiska lösenordet eller lösenordet."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1959642447512807205">"Bilder och biometrisk data som används till ansiktslåset raderas permanent på ett säkert sätt. Efter borttagningen låser du upp mobilen, loggar in i appar och bekräftar betalningar med hjälp av pinkoden, det grafiska lösenordet eller lösenordet."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Lås upp telefonen med Ansiktslås"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingeravtryck"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Hantera fingeravtryck"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Använd avtryck för"</string>
@@ -493,9 +492,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Skydda surfplattan med ett skärmlåsalternativ så att den inte går att använda om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera fingeravtryck. Tryck på Avbryt och ställ sedan in en pinkod, ett lösenord eller grafiskt lösenord."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Skydda enheten med ett skärmlåsalternativ så att den inte går att använda om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera fingeravtryck. Tryck på Avbryt och ställ sedan in en pinkod, ett lösenord eller grafiskt lösenord."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Skydda mobilen med ett skärmlåsalternativ så att den inte går att använda om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera fingeravtryck. Tryck på Avbryt och ställ sedan in en pinkod, ett lösenord eller grafiskt lösenord."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Skydda surfplattan med ett skärmlåsalternativ så att den inte går att använda om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera ansiktsautentisering. Tryck på Avbryt och ställ sedan in en pinkod, ett lösenord eller grafiskt lösenord."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Skydda enheten med ett skärmlåsalternativ så att den inte går att använda om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera ansiktsautentisering. Tryck på Avbryt och ställ sedan in en pinkod, ett lösenord eller grafiskt lösenord."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Skydda mobilen med ett skärmlåsalternativ så att den inte går att använda om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera ansiktsautentisering. Tryck på Avbryt och ställ sedan in en pinkod, ett lösenord eller grafiskt lösenord."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Om du skyddar surfplattan med ett skärmlåsalternativ kan ingen använda den om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera ansiktslås. Återgå genom att trycka på Avbryt."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Om du skyddar enheten med ett skärmlåsalternativ kan ingen använda den om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera ansiktslås. Återgå genom att trycka på Avbryt."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Om du skyddar mobilen med ett skärmlåsalternativ kan ingen använda den om den tappas bort eller blir stulen. Du måste även använda ett skärmlåsalternativ om du vill konfigurera ansiktslås. Återgå genom att trycka på Avbryt."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Vill du hoppa över pinkod?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Vill du hoppa över lösenord?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Vill du hoppa över grafiskt lösenord?"</string>
@@ -596,10 +595,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Fingeravtryck + lösenord"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Fortsätt utan fingeravtryck"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Du kan låsa upp mobilen med hjälp av ditt fingeravtryck. Av säkerhetsskäl krävs ett alternativt skärmlås."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Ansiktsautentisering + Grafiskt lösenord"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Ansiktsautentisering + Pinkod"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Ansiktsautentisering + Lösenord"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Fortsätt utan ansiktsautentisering"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Ansiktslås + grafiskt lösenord"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Ansiktslås + pinkod"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Ansiktslås + lösenord"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Fortsätt utan ansiktslås"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Du kan låsa upp mobilen med hjälp av ditt ansikte. Av säkerhetsskäl krävs ett alternativt skärmlås."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Inaktiverad p.g.a. admin., kryptering eller uppgiftslagring"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Inget"</string>
@@ -956,7 +955,6 @@
     <string name="wifi_dpp_share_wifi" msgid="9065890131734833809">"Dela Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="5854392840857123065">"Anslut till <xliff:g id="SSID">%1$s</xliff:g> och dela lösenordet genom att skanna QR-koden"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="4436318319178361543">"Anslut till <xliff:g id="SSID">%1$s</xliff:g> genom att skanna QR-koden"</string>
-    <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="641893675646330576">"Det gick inte att läsa QR-koden. Centrera om koden och försök igen"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="3372757783382381044">"Försök igen. Om problemet kvarstår kontaktar du enhetens tillverkare"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="2829930473520603740">"Något gick fel"</string>
     <string name="wifi_dpp_failure_timeout" msgid="5228320772245820458">"Kontrollera att enheten är inkopplad, laddad och påslagen"</string>
@@ -979,6 +977,7 @@
     <string name="wifi_dpp_hotspot_password" msgid="4120419278831581613">"Lösenord till surfzon: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_add_device" msgid="4072206063308645677">"Lägg till enhet"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="3887335309163999665">"Lägg till en enhet på nätverket med hjälp av en QR-kod"</string>
+    <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="3700087439867692944">"QR-kodens format är ogiltigt"</string>
     <string name="retry" msgid="6472609612090877557">"Försök igen"</string>
     <string name="wifi_shared" msgid="844142443226926070">"Dela med andra som använder enheten"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(oförändrat)"</string>
@@ -1128,6 +1127,7 @@
     <string name="emergency_address_title" msgid="932729250447887545">"Adress för nödfall"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Används som din plats om du ringer nödsamtal via Wi‑Fi"</string>
     <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Läs mer"</annotation>" om privata DNS-funktioner"</string>
+    <string name="private_dns_mode_on" msgid="5882613439541371003">"På"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="6845711858866828986">"Inställningen hanteras av operatören"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="7492509632478260955">"Aktivera Wi-Fi-samtal"</string>
     <string name="wifi_calling_turn_on" msgid="1171403510313983983">"Aktivera Wi-Fi-samtal"</string>
@@ -1220,11 +1220,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimera ljusstyrka efter tillgängligt ljus. Du kan justera ljusstyrkan tillfälligt om funktionen är aktiverad."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Skärmens ljusstyrka justeras automatiskt efter miljö och aktivitet. Du kan träna Anpassad ljusstyrka med dina egna inställningar genom att flytta reglaget manuellt."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Skärmens vitbalans"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Blickavkänning"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"På/Skärmen stängs inte av om du tittar på den"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Av"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Skärmen hindras från att stängas av när du tittar på den."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kameraåtkomst krävs"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Tryck om du vill hantera behörigheter för tjänster för enhetsanpassning"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Skärmen hindras från att stängas av när du tittar på den"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Den främre kameran används i Blickavkänning för att avgöra om någon tittar på skärmen. Funktionen finns på enheten och bilderna varken lagras eller skickas till Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Låt skärmen vara på så länge du tittar på den"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Nattljus"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Med nattljus blir skärmen gultonad. Då ser du bättre i svagt ljus och det kan bli lite lättare att somna."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Schemalägg"</string>
@@ -1261,7 +1265,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Anpassa skärmen"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Välj bakgrund från"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Anpassa Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Testa olika format, bakgrunder, klockor med mera"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Testa olika format, bakgrunder med mera"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Skärmsläckare"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Vid laddning eller dockning"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Båda"</string>
@@ -1746,9 +1750,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Lösenordet angavs"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN-koden angavs"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Lösenordet har angetts"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Ansiktsautentisering: lösenord krävs"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Ansiktsautentisering: graf. lösen krävs"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Ansiktsautentisering: pinkod krävs"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Ange lösenord för ansiktslås"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Ange grafiskt lösenord för ansiktslås"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Ange pinkod för ansiktslås"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Ange det grafiska lösenordet för enheten om du vill fortsätta"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Ange pinkoden för enheten om du vill fortsätta"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Ange lösenordet för enheten om du vill fortsätta"</string>
@@ -1867,7 +1871,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"App för nödsituationer"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Återställ inställningarna"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Vill du återställa?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Detta återställer alla inställningar för:\n\n "<li>"inaktiverade appar"</li>\n" "<li>"inaktiverade appaviseringar"</li>\n" "<li>"standardappar för åtgärder"</li>\n" "<li>"begränsningar i bakgrundsdata för appar"</li>\n" "<li>"begränsningar för alla behörigheter."</li>\n\n"Ingen appdata kommer att försvinna."</string>
+    <string name="reset_app_preferences_desc" msgid="731757609326016760">"Detta återställer alla inställningar för:\n\n"<li>"Inaktiverade appar"</li>\n<li>"Inaktiverade appmeddelanden"</li>\n<li>"Standardappar för åtgärder"</li>\n<li>"Begränsningar av bakgrundsdata för appar"</li>\n<li>"Alla begränsningar av behörigheter"</li>\n\n"Ingen appdata försvinner."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Återställ appar"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Hantera utrymme"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrera"</string>
@@ -2067,7 +2071,7 @@
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Ljud och text på skärmen"</string>
     <string name="display_category_title" msgid="685461049938269166">"Skärm"</string>
     <string name="interaction_control_category_title" msgid="7836591031872839151">"Interaktionsinställningar"</string>
-    <string name="user_installed_services_category_title" msgid="419853083751790648">"Nedladdade appar"</string>
+    <string name="user_installed_services_category_title" msgid="6426376488922158647">"Nedladdade tjänster"</string>
     <string name="experimental_category_title" msgid="5272318666666893547">"Experimentella"</string>
     <string name="feature_flags_dashboard_title" msgid="778619522682769966">"Funktionsflaggor"</string>
     <string name="talkback_title" msgid="7912059827205988080">"TalkBack"</string>
@@ -2082,7 +2086,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Tryck tre gånger om du vill zooma"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Tryck på en knapp för att zooma"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Zooma"</b>" genom att trycka snabbt tre gånger på skärmen.\n"<ul><li>"Tryck och dra med minst två fingrar om du vill rulla över skärmen"</li>\n<li>"Justera zoomen genom att nypa med minst två fingrar"</li></ul>\n\n<b>"Zooma tillfälligt"</b>" genom att trycka snabbt på skärmen tre gånger och trycka ned fingret på det tredje trycket.\n"<ul><li>"Tryck och dra om du vill flytta runt på skärmen"</li>\n<li>"Lyft fingret när du vill zooma ut"</li></ul>\n\n"Det går inte att zooma in på tangentbordet eller navigeringsfältet."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"När förstoring har aktiverats kan du zooma in på skärmen.\n\n"<b>"Om du vill zooma"</b>" aktiverar du förstoring och trycker var som helst på skärmen.\n"<ul><li>"• Skrolla genom att dra med minst två fingrar."</li>\n<li>"• Justera zoomen genom att nypa med minst två fingrar."</li></ul>\n\n<b>"Om du vill zooma tillfälligt"</b>" aktiverar du förstoring och trycker länge var som helst på skärmen.\n"<ul><li>"• Flytta runt på skärmen genom att dra."</li>\n<li>"• Zooma ut genom att lyfta fingret."</li></ul>\n\n"Det går inte att zooma in på tangentbordet eller navigeringsfältet."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="6700716275347612310">"När förstoring har aktiverats kan du zooma in på skärmen.\n\n"<b>"Om du vill zooma"</b>" aktiverar du förstoring och trycker var som helst på skärmen.\n"<ul><li>"Skrolla genom att dra med minst två fingrar."</li>\n<li>"Justera zoomen genom att nypa med minst två fingrar."</li></ul>\n\n<b>"Om du vill zooma tillfälligt"</b>" aktiverar du förstoring och trycker länge var som helst på skärmen.\n"<ul><li>"Flytta runt på skärmen genom att dra."</li>\n<li>"Zooma ut genom att lyfta fingret."</li></ul>\n\n"Det går inte att zooma in på tangentbordet eller navigeringsfältet."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Öppna med tillgänglighetsknappen"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Öppna med rörelse"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Använd en ny tillgänglighetsrörelse"</string>
@@ -2093,6 +2097,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Aktivera och inaktivera tillgänglighetstjänster genom att svepa uppåt med tre fingrar från skärmens nederkant.\n\nByt mellan tjänster genom att svepa uppåt med tre fingrar och hålla kvar dem."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"<xliff:g id="SERVICE">%1$s</xliff:g> har angetts för tillgänglighetsknappen. Om du vill använda förstoring trycker du länge på tillgänglighetsknappen och väljer förstoring."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Tillgänglighetsrörelsen är inställd på <xliff:g id="SERVICE">%1$s</xliff:g>. Om du vill använda förstoring sveper du uppåt med två fingrar från skärmens nederkant och håller kvar fingret. Välj sedan Förstoring."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Kortkommando för volymknapp"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Tjänst för kortkommando"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Tillåt på låsskärmen"</string>
@@ -2100,7 +2105,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="2567402942683463779">"Text med hög kontrast"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Uppdatera skärmförstoring automatiskt"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Uppdatera skärmförstoring på appövergångar"</string>
-    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Använd av/på-knapp för att avsluta samtal"</string>
+    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Avsluta samtal med av/på-knapp"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Stor muspekarikon"</string>
     <string name="accessibility_disable_animations" msgid="5876035711526394795">"Ta bort animationer"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Monoljud"</string>
@@ -2126,15 +2131,15 @@
     <string name="accessibility_notification_vibration_title" msgid="3009997451790678444">"Vibration för aviseringar"</string>
     <string name="accessibility_ring_vibration_title" msgid="5369395955680650778">"Vibration för ringsignal"</string>
     <string name="accessibility_touch_vibration_title" msgid="3548641513105226156">"Tryckåterkoppling"</string>
-    <string name="accessibility_service_master_switch_title" msgid="4734268584179937960">"Använd <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Använd tjänsten"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Använd färgkorrigering"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Använd textning"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Alla appar har inte stöd för den här inställningen."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Fortsätt"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Hörapparater"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Inga hörapparater har anslutits"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="2947474468412309778">"Lägg till hörapparater"</string>
-    <string name="accessibility_hearingaid_pair_instructions_first_message" msgid="3912093691643131154">"Parkoppla hörapparater genom att hitta och trycka på dem på nästa skärm."</string>
-    <string name="accessibility_hearingaid_pair_instructions_second_message" msgid="5596683393607650243">"Kontrollera att hörapparaterna är i kopplingsläge."</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="3094382949733435414">"Parkoppla dina hörapparater genom att hitta och trycka på dem på nästa skärm. Kontrollera att hörapparaterna är i kopplingsläge."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="3924362383258688984">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> aktiv"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="3160782397139295486">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> hörapparater har sparats</item>
@@ -2217,7 +2222,7 @@
     <string name="enable_service_pin_reason" msgid="7882035264853248228">"Eftersom datakrypteringen påverkas om du aktiverar <xliff:g id="SERVICE">%1$s</xliff:g> måste du bekräfta din pinkod."</string>
     <string name="enable_service_password_reason" msgid="1224075277603097951">"Eftersom datakrypteringen påverkas om du aktiverar <xliff:g id="SERVICE">%1$s</xliff:g> måste du bekräfta ditt lösenord."</string>
     <string name="accessibility_service_warning" msgid="846312597054899472">"<xliff:g id="SERVICE">%1$s</xliff:g> begär fullständig kontroll över den här enheten. Tjänsten kan läsa på skärmen och utföra åtgärder åt användare med behov av tillgänglighet. Den här kontrollnivån är olämplig för de flesta appar."</string>
-    <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Fullständig kontroll lämpar sig för appar med tillgänglighetsfunktioner, men inte för de flesta appar."</string>
+    <string name="accessibility_service_warning_description" msgid="5678294638592090340">"Fullständig kontroll lämpar sig för appar med tillgänglighetsfunktioner, men är inte lämplig för de flesta appar."</string>
     <string name="accessibility_service_screen_control_title" msgid="1262218781398117580">"Visa och styra skärmen"</string>
     <string name="accessibility_service_screen_control_description" msgid="5263900135083661468">"Den kan läsa allt innehåll på skärmen och visa innehåll över andra appar."</string>
     <string name="accessibility_service_action_perform_title" msgid="3591350033271419253">"Visa och vidta åtgärder"</string>
@@ -3104,7 +3109,7 @@
     <string name="keywords_app_default" msgid="5822717006354487071">"Öppna med"</string>
     <string name="keywords_applications_settings" msgid="1268353611121497450">"Appar"</string>
     <string name="keywords_time_zone" msgid="998254736898753085">"tidszon"</string>
-    <string name="keywords_draw_overlay" msgid="4130899177619041842">"Chatthuvud"</string>
+    <string name="keywords_draw_overlay" msgid="1001120206241401007">"Chatthuvud, system, avisering, fönster, dialogruta, skärm, ovanpå andra appar, rita"</string>
     <string name="keywords_flashlight" msgid="6161632177705233710">"Ficklampa, Lampa, Handlampa"</string>
     <string name="keywords_change_wifi_state" msgid="627068244033681010">"wifi, wi-fi, på/av, styra"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"mobiltelefon, mobil, mobiloperatör, trådlös, data, 4g, 3g, 2g, lte"</string>
@@ -3128,7 +3133,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="5426093074031208917">"stör inte, avbryt, avbrott, paus"</string>
     <string name="keywords_app" msgid="6334757056536837791">"RAM"</string>
     <string name="keywords_location" msgid="4132655528196729043">"närliggande, plats, historik, rapportering, GPS"</string>
-    <string name="keywords_accounts" msgid="1957925565953357627">"konto"</string>
+    <string name="keywords_accounts" msgid="4479029747403203867">"konto, lägg till konto, jobbprofil"</string>
     <string name="keywords_users" msgid="3434190133131387942">"begränsning, begränsa, begränsad"</string>
     <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"textkorrigering, korrigera, ljud, vibrera, automatiskt, språk, gest, föreslå, förslag, tema, stötande, ord, skriva, emoji, internationell"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"återställa, inställningar, standardinställningar"</string>
@@ -3166,6 +3171,7 @@
     <string name="keywords_storage_settings" msgid="297283751968446577">"minne, cache, data, radera, rensa, frigör, utrymme"</string>
     <string name="keywords_bluetooth_settings" msgid="6804844062789439858">"ansluten, enhet, hörlurar, headset, högtalare, trådlös, parkoppla, hörsnäckor, musik, media"</string>
     <string name="keywords_wallpaper" msgid="5058364390917429896">"bakgrund, skärm, låsskärm, tema"</string>
+    <string name="keywords_styles" msgid="5828725481814049422">"ikonform, accentfärg, teckensnitt"</string>
     <string name="keywords_assist_input" msgid="5017533309492679287">"standard, assistent"</string>
     <string name="keywords_default_payment_app" msgid="3838565809518896799">"betalning, standard"</string>
     <string name="keywords_ambient_display" msgid="3103487805748659132">"inkommande avisering"</string>
@@ -3175,7 +3181,6 @@
     <string name="keywords_notification_vibration" msgid="31924624421190547">"haptik, vibration, känslighet"</string>
     <string name="keywords_battery_saver_sticky" msgid="5586215686021650278">"batterisparläge, fast position, beständig, strömläge, batteri"</string>
     <string name="keywords_battery_saver_schedule" msgid="7358789228486231944">"rutin, schema, batterisparläge, energisparläge, batteri, automatiskt, procent"</string>
-    <string name="keywords_add_an_account" msgid="6488139919428902434">"jobbprofil"</string>
     <string name="default_sound" msgid="8821684447333687810">"Standardsignal"</string>
     <string name="sound_settings_summary" msgid="4100853606668287965">"Ringvolym på <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="3402435125958012986">"Volym, vibrera, stör ej"</string>
@@ -3380,7 +3385,18 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Visa på aviseringspanelen, i statusfältet och på låsskärmen."</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blinkande ljus"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Låsskärm"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Hoppa över låsskärmen"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Öppna den senast använda skärmen när ansiktslåset låses upp"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Låsskärm, Hoppa över, Kringgå"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"När jobbprofilen är låst"</string>
+    <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Aviseringar på låsskärmen"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Visa aviseringar med och utan ljud"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Visa endast aviseringar med ljud"</string>
+    <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Visa inga aviseringar"</string>
+    <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Känsliga aviseringar"</string>
+    <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Visa känsligt innehåll på låsskärmen"</string>
+    <string name="lock_screen_notifs_redact_work" msgid="6777821963954035608">"Känsliga aviseringar i jobbprofilen"</string>
+    <string name="lock_screen_notifs_redact_work_summary" msgid="2179290697692276201">"Visa känsligt innehåll i jobbprofilen på låsskärmen"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Visa allt aviseringsinnehåll"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="1133085507139112569">"Visa känsligt innehåll endast i upplåst läge"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Visa inga aviseringar alls"</string>
@@ -3407,16 +3423,16 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Hög"</string>
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Visa på skärmen"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Blockera"</string>
-    <string name="notification_silence_title" msgid="8575600650015431622">"Utan avbrott"</string>
-    <string name="notification_alert_title" msgid="7426286507434650473">"Prioriterad"</string>
+    <string name="notification_silence_title" msgid="6986752165900591125">"Tyst"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"Med avisering"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Tillåt avbrott"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Tillåt att appen spelar upp ljud, vibrerar och/eller visar popup-aviseringar på skärmen"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"Komprimera aviseringar på den övre panelen på en rad"</string>
-    <string name="notification_channel_summary_low" msgid="7875385321253491191">"Aviseringar visas bara på aviseringspanelen så att du kan fokusera på det viktigaste. Alltid tyst."</string>
+    <string name="notification_channel_summary_low" msgid="7050068866167282765">"Inga ljud eller vibrationer som stör koncentrationen"</string>
+    <string name="notification_channel_summary_default" msgid="5753454293847059695">"Påkallar uppmärksamhet med ljud eller vibrationer"</string>
     <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Aviseringar med låg prioritet visas. Alltid tyst."</string>
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Aviseringar med låg prioritet visas. Alltid tyst."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Aviseringar med låg prioritet visas. Alltid tyst."</string>
-    <string name="notification_channel_summary_default" msgid="4618537204284469990">"Fångar din uppmärksamhet med ljud och en ikon i statusfältet. Visas på låsskärmen."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"När enheten är olåst visas aviseringar i en banner högst upp på skärmen"</string>
     <string name="notification_switch_label" msgid="6843075654538931025">"Visa aviseringar"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Anpassade aviseringar"</string>
@@ -3742,7 +3758,6 @@
     <string name="default_browser_title" msgid="8101772675085814670">"Webbläsarapp"</string>
     <string name="default_browser_title_none" msgid="2124785489953628553">"Ingen standardwebbläsare"</string>
     <string name="default_phone_title" msgid="282005908059637350">"Telefonapp"</string>
-    <string name="roles_title" msgid="8739481762225637569">"Roller"</string>
     <string name="default_app" msgid="6864503001385843060">"(Standard)"</string>
     <string name="system_app" msgid="9068313769550747372">"(System)"</string>
     <string name="system_default_app" msgid="3091113402349739037">"(Systemstandard)"</string>
@@ -3875,7 +3890,6 @@
     <string name="permit_draw_overlay" msgid="7456536798718633432">"Tillåt visning ovanpå andra appar"</string>
     <string name="allow_overlay_description" msgid="8961670023925421358">"Tillåt att den här appen visas ovanpå andra appar. Detta kan inverka på ett störande sätt på användningen av de andra apparna eller göra så att de verkar se ut eller fungera annorlunda."</string>
     <string name="keywords_vr_listener" msgid="7441221822576384680">"vr virtuell verklighet lyssnare stereo hjälptjänst"</string>
-    <string name="keywords_system_alert_window" msgid="5049498015597864850">"systemvarning dialogruta visa på andra appar"</string>
     <string name="overlay_settings" msgid="6930854109449524280">"Visa ovanpå andra appar"</string>
     <string name="system_alert_window_summary" msgid="602892301318324492">"<xliff:g id="COUNT_0">%1$d</xliff:g> av <xliff:g id="COUNT_1">%2$d</xliff:g> appar får visas ovanpå andra appar"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Appar med behörighet"</string>
@@ -4111,10 +4125,6 @@
     <string name="notification_log_details_none" msgid="184131801230614059">"ingen"</string>
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Det finns inget rankningsobjekt."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Rankningsobjektet innehåller inte den här nyckeln."</string>
-    <string name="theme_customization_category" msgid="1049181544004163283">"Teman"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Accentfärg"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Teckensnitt för rubrik/brödtext"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Ikonform"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Enhetens standardinställning"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Skärmutskärning"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"urklipp av skärm, flärp"</string>
@@ -4177,9 +4187,9 @@
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuellt"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Frigör utrymme nu"</string>
     <string name="gesture_preference_title" msgid="5280023307132819052">"Rörelser"</string>
-    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Styr mobilen med snabba rörelser"</string>
-    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Styr surfplattan med snabba rörelser"</string>
-    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Styr enheten med snabba rörelser"</string>
+    <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Styr mobilen med Quick Gestures"</string>
+    <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Styr surfplattan med Quick Gestures"</string>
+    <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Styr enheten med Quick Gestures"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Hoppa till kameran"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Tryck två gånger på strömbrytaren för att snabbt öppna kameran. Du kan göra det på alla skärmar."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Öppna kameran snabbt"</string>
@@ -4378,11 +4388,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"System för grafikdrivrutin"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Inställningen stöds inte på den här mobilen"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Inställningen stöds inte på den här surfplattan"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Inställningen stöds inte på den här enheten"</string>
@@ -4542,6 +4550,8 @@
     <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Något inträffade. Appen har avbrutit förfrågan om att välja enhet."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Anslutningen har upprättats"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Visa alla"</string>
+    <string name="network_connection_searching_message" msgid="4638576789450817530">"Söker efter enhet …"</string>
+    <string name="network_connection_connecting_message" msgid="3740982406609245654">"Ansluter till enheten …"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> anslutna enheter</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> ansluten enhet</item>

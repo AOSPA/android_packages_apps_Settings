@@ -27,6 +27,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.ServiceSpecificException;
@@ -34,7 +35,9 @@ import android.security.KeyStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -50,7 +53,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowInputMethodManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
@@ -444,5 +449,81 @@ public class WifiConfigControllerTest {
 
         WifiConfiguration config = mController.getConfig();
         assertThat(config.macRandomizationSetting).isEqualTo(WifiConfiguration.RANDOMIZATION_NONE);
+    }
+
+    @Test
+    public void replaceTtsString_whenTargetMatched_shouldSuccess() {
+        final CharSequence[] display = {"PEAP", "AKA1", "AKA2'"};
+        final CharSequence[] target = {"AKA1", "AKA2'"};
+        final CharSequence[] ttsString = {"AKA1_TTS", "AKA2_TTS"};
+
+        final CharSequence[] resultTts = mController.findAndReplaceTargetStrings(display, target,
+            ttsString);
+
+        assertThat(resultTts[0]).isEqualTo("PEAP");
+        assertThat(resultTts[1]).isEqualTo("AKA1_TTS");
+        assertThat(resultTts[2]).isEqualTo("AKA2_TTS");
+    }
+
+    @Test
+    public void replaceTtsString_whenNoTargetStringMatched_originalStringShouldNotChanged() {
+        final CharSequence[] display = {"PEAP", "AKA1", "AKA2"};
+        final CharSequence[] target = {"WEP1", "WEP2'"};
+        final CharSequence[] ttsString = {"WEP1_TTS", "WEP2_TTS"};
+
+        final CharSequence[] resultTts = mController.findAndReplaceTargetStrings(display, target,
+            ttsString);
+
+        assertThat(resultTts[0]).isEqualTo("PEAP");
+        assertThat(resultTts[1]).isEqualTo("AKA1");
+        assertThat(resultTts[2]).isEqualTo("AKA2");
+    }
+
+    @Test
+    public void checktEapMethodTargetAndTtsArraylength_shouldHaveSameCount() {
+        final Resources resources = mContext.getResources();
+        final String[] targetStringArray = resources.getStringArray(
+            R.array.wifi_eap_method_target_strings);
+        final String[] ttsStringArray = resources.getStringArray(
+            R.array.wifi_eap_method_tts_strings);
+
+        assertThat(targetStringArray.length).isEqualTo(ttsStringArray.length);
+    }
+
+    @Test
+    public void selectSecurity_wpa3Eap192bit_eapMethodTls() {
+        final WifiManager wifiManager = mock(WifiManager.class);
+        when(wifiManager.isWpa3SuiteBSupported()).thenReturn(true);
+        mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
+                WifiConfigUiBase.MODE_MODIFY, wifiManager);
+        final Spinner securitySpinner = mView.findViewById(R.id.security);
+        final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
+        int wpa3Eap192bitPosition = -1;
+        final int securityCount = mController.mSecurityInPosition.length;
+        for (int i = 0; i < securityCount; i++) {
+            if (mController.mSecurityInPosition[i] != null &&
+                    mController.mSecurityInPosition[i] == AccessPoint.SECURITY_EAP_SUITE_B) {
+                wpa3Eap192bitPosition = i;
+            }
+        }
+
+        mController.onItemSelected(securitySpinner, /* view */ null, wpa3Eap192bitPosition,
+                /* id */ 0);
+
+        final int selectedItemPosition = eapMethodSpinner.getSelectedItemPosition();
+        assertThat(eapMethodSpinner.getSelectedItem().toString()).isEqualTo("TLS");
+    }
+
+    @Test
+    public void checkImeStatus_whenAdvancedToggled_shouldBeHide() {
+        final InputMethodManager inputMethodManager = mContext
+                .getSystemService(InputMethodManager.class);
+        final ShadowInputMethodManager shadowImm = Shadows.shadowOf(inputMethodManager);
+        final CheckBox advButton = mView.findViewById(R.id.wifi_advanced_togglebox);
+
+        inputMethodManager.showSoftInput(null /* view */, 0 /* flags */);
+        advButton.performClick();
+
+        assertThat(shadowImm.isSoftInputVisible()).isFalse();
     }
 }

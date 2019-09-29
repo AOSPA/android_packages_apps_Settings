@@ -48,6 +48,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.widget.FooterPreference;
 
 import com.google.android.collect.Lists;
 
@@ -187,11 +188,9 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem syncNow = menu.add(0, MENU_SYNC_NOW_ID, 0,
-                getString(R.string.sync_menu_sync_now))
-                .setIcon(R.drawable.ic_menu_refresh_holo_dark);
+                getString(R.string.sync_menu_sync_now));
         MenuItem syncCancel = menu.add(0, MENU_SYNC_CANCEL_ID, 0,
-                getString(R.string.sync_menu_sync_cancel))
-                .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
+                getString(R.string.sync_menu_sync_cancel));
 
         syncNow.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
@@ -209,6 +208,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 mUserHandle.getIdentifier()).isEmpty();
         menu.findItem(MENU_SYNC_NOW_ID).setVisible(!syncActive);
         menu.findItem(MENU_SYNC_CANCEL_ID).setVisible(syncActive);
+
     }
 
     @Override
@@ -458,8 +458,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             syncPref.setChecked(oneTimeSyncMode || syncEnabled);
         }
         if (syncIsFailing) {
-            mFooterPreferenceMixin.createFooterPreference()
-                    .setTitle(R.string.sync_is_failing);
+            getPreferenceScreen().addPreference(new FooterPreference.Builder(
+                    getActivity()).setTitle(R.string.sync_is_failing).build());
         }
     }
 

@@ -106,7 +106,6 @@ import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.AppBubbleNotificationSettings;
 import com.android.settings.notification.AppNotificationSettings;
-import com.android.settings.notification.ChannelGroupNotificationSettings;
 import com.android.settings.notification.ChannelNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationAccessSettings;
@@ -142,6 +141,7 @@ import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.WifiAPITest;
 import com.android.settings.wifi.WifiInfo;
 import com.android.settings.wifi.WifiSettings;
+import com.android.settings.wifi.WifiSettings2;
 import com.android.settings.wifi.calling.WifiCallingDisclaimerFragment;
 import com.android.settings.wifi.calling.WifiCallingSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
@@ -158,6 +158,7 @@ public class SettingsGateway {
             AdvancedConnectedDeviceDashboardFragment.class.getName(),
             CreateShortcut.class.getName(),
             WifiSettings.class.getName(),
+            WifiSettings2.class.getName(),
             ConfigureWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings.class.getName(),
             SimSettings.class.getName(),
@@ -238,7 +239,6 @@ public class SettingsGateway {
             AppNotificationSettings.class.getName(),
             NotificationAssistantPicker.class.getName(),
             ChannelNotificationSettings.class.getName(),
-            ChannelGroupNotificationSettings.class.getName(),
             ApnSettings.class.getName(),
             ApnEditor.class.getName(),
             WifiCallingSettings.class.getName(),
@@ -303,6 +303,7 @@ public class SettingsGateway {
             SupportDashboardActivity.class.getName(),
             // Home page > Network & Internet
             Settings.WifiSettingsActivity.class.getName(),
+            Settings.WifiSettings2Activity.class.getName(),
             Settings.DataUsageSummaryActivity.class.getName(),
             Settings.SimSettingsActivity.class.getName(),
             // Home page > Connected devices
