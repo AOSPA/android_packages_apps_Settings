@@ -20,6 +20,7 @@ import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDIC
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ import com.google.android.setupdesign.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * RecyclerView adapter for Slices in Settings Panels.
@@ -56,9 +58,9 @@ public class PanelSlicesAdapter
     private final PanelFragment mPanelFragment;
 
     public PanelSlicesAdapter(
-            PanelFragment fragment, List<LiveData<Slice>> sliceLiveData, int metricsCategory) {
+            PanelFragment fragment, Map<Uri, LiveData<Slice>> sliceLiveData, int metricsCategory) {
         mPanelFragment = fragment;
-        mSliceLiveData = new ArrayList<>(sliceLiveData);
+        mSliceLiveData = new ArrayList<>(sliceLiveData.values());
         mMetricsCategory = metricsCategory;
     }
 
@@ -109,7 +111,7 @@ public class PanelSlicesAdapter
             super(view);
             sliceView = view.findViewById(R.id.slice_view);
             sliceView.setMode(SliceView.MODE_LARGE);
-            sliceView.showTitleItems(true);
+            sliceView.setShowTitleItems(true);
         }
 
         public void onBind(LiveData<Slice> sliceLiveData) {
@@ -117,7 +119,7 @@ public class PanelSlicesAdapter
 
             // Do not show the divider above media devices switcher slice per request
             final Slice slice = sliceLiveData.getValue();
-            if (slice != null && slice.getUri().equals(MEDIA_OUTPUT_INDICATOR_SLICE_URI)) {
+            if (slice == null || slice.getUri().equals(MEDIA_OUTPUT_INDICATOR_SLICE_URI)) {
                 mDividerAllowedAbove = false;
             }
 
