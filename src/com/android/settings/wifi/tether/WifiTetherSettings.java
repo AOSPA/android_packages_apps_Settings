@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -303,6 +304,13 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 if (state == WifiManager.WIFI_AP_STATE_DISABLED
                         && mRestartWifiApAfterConfigChange) {
                     startTether();
+                } else if (state == WifiManager.WIFI_AP_STATE_FAILED) {
+                    int failureCode = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_FAILURE_REASON, 0);
+                    String failureDesc = intent.getStringExtra(WifiManager.EXTRA_WIFI_AP_FAILURE_DESCRIPTION);
+                    if (failureCode == WifiManager.SAP_START_FAILURE_NO_CHANNEL
+                         && failureDesc != null && failureDesc.equals(WifiManager.WIFI_AP_FAILURE_DESC_NO_5GHZ_SUPPORT)) {
+                        Toast.makeText(content, "5Ghz band not supported. band selection disabled", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         }
