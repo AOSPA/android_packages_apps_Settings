@@ -74,11 +74,10 @@ public class PaymentSettings extends DashboardFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ViewGroup contentRoot = (ViewGroup) getListView().getParent();
+
         View emptyView = getActivity().getLayoutInflater().inflate(
-                R.layout.nfc_payment_empty, contentRoot, false);
-        contentRoot.addView(emptyView);
-        setEmptyView(emptyView);
+                R.layout.nfc_payment_empty, null, false);
+        ((ViewGroup) view.findViewById(android.R.id.list_container)).addView(emptyView);
     }
 
     @Override
@@ -103,14 +102,7 @@ public class PaymentSettings extends DashboardFragment {
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.nfc_payment_settings;
-                    return Arrays.asList(sir);
-                }
+            new BaseSearchIndexProvider(R.xml.nfc_payment_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {

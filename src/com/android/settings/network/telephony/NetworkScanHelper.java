@@ -111,7 +111,7 @@ public class NetworkScanHelper {
     /** The constants below are used in the async network scan. */
     private static final boolean INCREMENTAL_RESULTS = true;
     private static final int SEARCH_PERIODICITY_SEC = 5;
-    private static final int MAX_SEARCH_TIME_SEC = 300;
+    private static final int MAX_SEARCH_TIME_SEC = 254;
     private static final int INCREMENTAL_RESULTS_PERIODICITY_SEC = 3;
 
     private static final NetworkScanRequest NETWORK_SCAN_REQUEST =

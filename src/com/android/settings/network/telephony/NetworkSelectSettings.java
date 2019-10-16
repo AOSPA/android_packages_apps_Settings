@@ -27,6 +27,10 @@ import android.telephony.AccessNetworkConstants;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellIdentity;
 import android.telephony.CellInfo;
+import android.telephony.CellInfoCdma;
+import android.telephony.CellInfoGsm;
+import android.telephony.CellInfoLte;
+import android.telephony.CellInfoWcdma;
 import android.telephony.NetworkRegistrationInfo;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
@@ -160,6 +164,51 @@ public class NetworkSelectSettings extends DashboardFragment {
         stopNetworkQuery();
     }
 
+    /**
+     * Wrap a cell info into an operator info.
+     */
+    private static OperatorInfo getOperatorInfoFromCellInfo(CellInfo cellInfo) {
+        OperatorInfo oi;
+        String plmnWithRat;
+        String ratTech;
+        if (cellInfo instanceof CellInfoLte) {
+            CellInfoLte lte = (CellInfoLte) cellInfo;
+            ratTech = Integer.toString(ServiceState.RIL_RADIO_TECHNOLOGY_LTE);
+            plmnWithRat = lte.getCellIdentity().getMobileNetworkOperator() + "+" + ratTech ;
+            oi = new OperatorInfo(
+                    (String) lte.getCellIdentity().getOperatorAlphaLong(),
+                    (String) lte.getCellIdentity().getOperatorAlphaShort(),
+                    plmnWithRat);
+        } else if (cellInfo instanceof CellInfoWcdma) {
+            CellInfoWcdma wcdma = (CellInfoWcdma) cellInfo;
+            ratTech = Integer.toString(ServiceState.RIL_RADIO_TECHNOLOGY_UMTS);
+            plmnWithRat = wcdma.getCellIdentity().getMobileNetworkOperator() + "+" + ratTech;
+            oi = new OperatorInfo(
+                    (String) wcdma.getCellIdentity().getOperatorAlphaLong(),
+                    (String) wcdma.getCellIdentity().getOperatorAlphaShort(),
+                    plmnWithRat);
+        } else if (cellInfo instanceof CellInfoGsm) {
+            CellInfoGsm gsm = (CellInfoGsm) cellInfo;
+            ratTech = Integer.toString(ServiceState.RIL_RADIO_TECHNOLOGY_GSM);
+            plmnWithRat = gsm.getCellIdentity().getMobileNetworkOperator() + "+" + ratTech;
+            oi = new OperatorInfo(
+                    (String) gsm.getCellIdentity().getOperatorAlphaLong(),
+                    (String) gsm.getCellIdentity().getOperatorAlphaShort(),
+                    plmnWithRat);
+        } else if (cellInfo instanceof CellInfoCdma) {
+            CellInfoCdma cdma = (CellInfoCdma) cellInfo;
+            oi = new OperatorInfo(
+                    (String) cdma.getCellIdentity().getOperatorAlphaLong(),
+                    (String) cdma.getCellIdentity().getOperatorAlphaShort(),
+                    "" /* operator numeric */);
+        } else {
+            Log.e(TAG, "Invalid CellInfo type");
+            oi = new OperatorInfo("", "", "");
+        }
+        return oi;
+    }
+
+
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference != mSelectedPreference) {
@@ -190,7 +239,7 @@ public class NetworkSelectSettings extends DashboardFragment {
             // Disable the screen until network is manually set
             getPreferenceScreen().setEnabled(false);
 
-            final OperatorInfo operatorInfo = CellInfoUtil.getOperatorInfoFromCellInfo(cellInfo);
+            final OperatorInfo operatorInfo = getOperatorInfoFromCellInfo(cellInfo);
             ThreadUtils.postOnBackgroundThread(() -> {
                 Message msg = mHandler.obtainMessage(EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE);
                 msg.obj = mTelephonyManager.setNetworkSelectionModeManual(

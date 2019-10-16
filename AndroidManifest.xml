@@ -79,7 +79,6 @@
     <uses-permission android:name="android.permission.OEM_UNLOCK_STATE" />
     <uses-permission android:name="android.permission.MANAGE_USER_OEM_UNLOCK_STATE" />
     <uses-permission android:name="android.permission.OVERRIDE_WIFI_CONFIG" />
-    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.MANAGE_FINGERPRINT" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC_INTERNAL" />
@@ -1258,8 +1257,7 @@
             android:name="Settings$LocationSettingsActivity"
             android:label="@string/location_settings_title"
             android:icon="@drawable/ic_homepage_location"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="Settings">
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
