@@ -39,9 +39,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LiveData;
-import androidx.slice.Slice;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
 import androidx.slice.widget.SliceLiveData;
 
@@ -50,10 +50,13 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.panel.PanelLoggingContract.PanelClosedKeys;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
 import com.google.android.setupdesign.DividerItemDecoration;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PanelFragment extends Fragment {
 
@@ -84,7 +87,7 @@ public class PanelFragment extends Fragment {
     private MetricsFeatureProvider mMetricsProvider;
     private String mPanelClosedKey;
 
-    private final List<LiveData<Slice>> mSliceLiveData = new ArrayList<>();
+    private final Map<Uri, LiveData<Slice>> mSliceLiveData = new LinkedHashMap<>();
 
     @VisibleForTesting
     PanelSlicesLoaderCountdownLatch mPanelSlicesLoaderCountdownLatch;
@@ -95,14 +98,14 @@ public class PanelFragment extends Fragment {
 
     private final ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener =
             new ViewTreeObserver.OnGlobalLayoutListener() {
-        @Override
-        public void onGlobalLayout() {
-            animateIn();
-            if (mPanelSlices != null) {
-                mPanelSlices.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            }
-        }
-    };
+                @Override
+                public void onGlobalLayout() {
+                    animateIn();
+                    if (mPanelSlices != null) {
+                        mPanelSlices.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                }
+            };
 
     private PanelSlicesAdapter mAdapter;
 
@@ -119,9 +122,9 @@ public class PanelFragment extends Fragment {
      * Animate the old panel out from the screen, then update the panel with new content once the
      * animation is done.
      * <p>
-     *     Takes the entire panel and animates out from behind the navigation bar.
+     * Takes the entire panel and animates out from behind the navigation bar.
      * <p>
-     *     Call createPanelContent() once animation end.
+     * Call createPanelContent() once animation end.
      */
     void updatePanelWithAnimation() {
         final View panelContent = mLayoutView.findViewById(R.id.panel_container);
@@ -208,10 +211,14 @@ public class PanelFragment extends Fragment {
         mPanelSlicesLoaderCountdownLatch = new PanelSlicesLoaderCountdownLatch(sliceUris.size());
 
         for (Uri uri : sliceUris) {
-            final LiveData<Slice> sliceLiveData = SliceLiveData.fromUri(getActivity(), uri);
+            final LiveData<Slice> sliceLiveData = SliceLiveData.fromUri(getActivity(), uri,
+                    (int type, Throwable source)-> {
+                            removeSliceLiveData(uri);
+                            mPanelSlicesLoaderCountdownLatch.markSliceLoaded(uri);
+                    });
 
             // Add slice first to make it in order.  Will remove it later if there's an error.
-            mSliceLiveData.add(sliceLiveData);
+            mSliceLiveData.put(uri, sliceLiveData);
 
             sliceLiveData.observe(getViewLifecycleOwner(), slice -> {
                 // If the Slice has already loaded, do nothing.
@@ -222,8 +229,9 @@ public class PanelFragment extends Fragment {
                 /**
                  * Watching for the {@link Slice} to load.
                  * <p>
-                 *     If the Slice comes back {@code null} or with the Error attribute, remove the
-                 *     Slice data from the list, and mark the Slice as loaded.
+                 *     If the Slice comes back {@code null} or with the Error attribute, if slice
+                 *     uri is not in the whitelist, remove the Slice data from the list, otherwise
+                 *     keep the Slice data.
                  * <p>
                  *     If the Slice has come back fully loaded, then mark the Slice as loaded.  No
                  *     other actions required since we already have the Slice data in the list.
@@ -235,7 +243,7 @@ public class PanelFragment extends Fragment {
                  */
                 final SliceMetadata metadata = SliceMetadata.from(getActivity(), slice);
                 if (slice == null || metadata.isErrorSlice()) {
-                    mSliceLiveData.remove(sliceLiveData);
+                    removeSliceLiveData(uri);
                     mPanelSlicesLoaderCountdownLatch.markSliceLoaded(uri);
                 } else if (metadata.getLoadingState() == SliceMetadata.LOADED_ALL) {
                     mPanelSlicesLoaderCountdownLatch.markSliceLoaded(uri);
@@ -252,12 +260,21 @@ public class PanelFragment extends Fragment {
         }
     }
 
+    private void removeSliceLiveData(Uri uri) {
+        final List<String> whiteList = Arrays.asList(
+                getResources().getStringArray(
+                        R.array.config_panel_keep_observe_uri));
+        if (!whiteList.contains(uri.toString())) {
+            mSliceLiveData.remove(uri);
+        }
+    }
+
     /**
      * When all of the Slices have loaded for the first time, then we can setup the
      * {@link RecyclerView}.
      * <p>
-     *     When the Recyclerview has been laid out, we can begin the animation with the
-     *     {@link mOnGlobalLayoutListener}, which calls {@link #animateIn()}.
+     * When the Recyclerview has been laid out, we can begin the animation with the
+     * {@link mOnGlobalLayoutListener}, which calls {@link #animateIn()}.
      */
     private void loadPanelWhenReady() {
         if (mPanelSlicesLoaderCountdownLatch.isPanelReadyToLoad()) {
@@ -268,19 +285,21 @@ public class PanelFragment extends Fragment {
                     .addOnGlobalLayoutListener(mOnGlobalLayoutListener);
             mPanelSlices.setVisibility(View.VISIBLE);
 
-            DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
+            final DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
             itemDecoration
                     .setDividerCondition(DividerItemDecoration.DIVIDER_CONDITION_BOTH);
-            mPanelSlices.addItemDecoration(itemDecoration);
+            if (mPanelSlices.getItemDecorationCount() == 0) {
+                mPanelSlices.addItemDecoration(itemDecoration);
+            }
         }
     }
 
     /**
      * Animate a Panel onto the screen.
      * <p>
-     *     Takes the entire panel and animates in from behind the navigation bar.
+     * Takes the entire panel and animates in from behind the navigation bar.
      * <p>
-     *     Relies on the Panel being having a fixed height to begin the animation.
+     * Relies on the Panel being having a fixed height to begin the animation.
      */
     private void animateIn() {
         final View panelContent = mLayoutView.findViewById(R.id.panel_container);
@@ -311,7 +330,7 @@ public class PanelFragment extends Fragment {
         animatorSet.setInterpolator(new DecelerateInterpolator());
         animatorSet.playTogether(
                 ObjectAnimator.ofFloat(sheet, View.TRANSLATION_Y, startY, endY),
-                ObjectAnimator.ofFloat(sheet, View.ALPHA, startAlpha,endAlpha));
+                ObjectAnimator.ofFloat(sheet, View.ALPHA, startAlpha, endAlpha));
         return animatorSet;
     }
 

@@ -907,6 +907,10 @@
     <string name="security_settings_face_enroll_introduction_accessibility_vision"></string>
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
+    <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
+    <string name="security_settings_face_enroll_introduction_no_thanks">No thanks</string>
+    <!-- Button text to start enrollment [CHAR LIMIT=30] -->
+    <string name="security_settings_face_enroll_introduction_agree">Agree</string>
     <!-- Introduction title shown in face enrollment to introduce the face unlock feature [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_introduction_title">Unlock with your face</string>
     <!-- Introduction title shown in face enrollment to introduce the face unlock feature, when face unlock is disabled by device admin [CHAR LIMIT=60] -->
@@ -972,7 +976,7 @@
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_remove_dialog_details">The images and biometric data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
+    <string name="security_settings_face_settings_remove_dialog_details">The face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
     <!-- Subtitle shown for contextual setting face enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_context_subtitle">Use face unlock to unlock your phone</string>
 
@@ -2137,6 +2141,8 @@
     <string name="please_select_phase2">Phase 2 authentication</string>
     <!-- Label for the EAP CA certificate of the network -->
     <string name="wifi_eap_ca_cert">CA certificate</string>
+    <!-- Label for the OCSP type of the network. [CHAR LIMIT=32] -->
+    <string name="wifi_eap_ocsp">Online Certificate Status</string>
     <!-- Label for the domain name that the EAP CA certificate(s) can be used to validate. -->
     <string name="wifi_eap_domain">Domain</string>
     <!-- Label for the EAP user certificate of the network -->
@@ -2147,6 +2153,8 @@
     <string name="wifi_eap_anonymous">Anonymous identity</string>
     <!-- Label for the password of the secured network -->
     <string name="wifi_password">Password</string>
+    <!-- Label for the sae password id of the secured network [CHAR LIMIT=32] -->
+    <string name="wifi_sae_password_id">SAE password identifier</string>
     <!-- Label for the check box to show password -->
     <string name="wifi_show_password">Show password</string>
     <!-- Label for the RadioGroup to choose wifi ap band -->
@@ -2656,7 +2664,7 @@
     <!-- Sound settings screen, music effects title [CHAR LIMIT=30]-->
     <string name="musicfx_title">Music effects</string>
     <!-- Sound settings screen, setting option name -->
-    <string name="ring_volume_title">Ring volume</string>
+    <string name="ring_volume_title">Ring &amp; notification volume</string>
     <!-- Sound settings screen, setting option name checkbox -->
     <string name="vibrate_in_silent_title">Vibrate when silent</string>
     <!-- Sound settings screen, setting option name -->
@@ -7450,7 +7458,7 @@
     <!-- Sounds and Notification -->
     <!-- Sound: Dashboard summary indicating the volume of ringtone. example: Ring volume at 20%.
     [CHAR LIMIT=100] -->
-    <string name="sound_settings_summary">Ring volume at <xliff:g id="percentage" example="2%">%1$s</xliff:g></string>
+    <string name="sound_settings_summary">Ring &amp; notification volume at <xliff:g id="percentage" example="2%">%1$s</xliff:g></string>
 
     <!-- Summary for sound settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="sound_dashboard_summary">Volume, vibration, Do Not Disturb</string>
@@ -7462,7 +7470,7 @@
     <string name="sound_settings_summary_silent">Ringer set to silent</string>
 
     <!-- Sound: Dashboard summary example used in Setup Wizard preview screen. [CHAR LIMIT=100] -->
-    <string name="sound_settings_example_summary">Ring volume at 80%</string>
+    <string name="sound_settings_example_summary">Ring &amp; notification volume at 80%</string>
 
     <!-- Sound: Title for the option managing media volume. [CHAR LIMIT=30] -->
     <string name="media_volume_option_title">Media volume</string>
@@ -7477,7 +7485,7 @@
     <string name="alarm_volume_option_title">Alarm volume</string>
 
     <!-- Sound: Title for the option managing ring volume. [CHAR LIMIT=30] -->
-    <string name="ring_volume_option_title">Ring volume</string>
+    <string name="ring_volume_option_title">Ring &amp; notification volume</string>
 
     <!-- Sound: Title for the option managing notification volume. [CHAR LIMIT=30] -->
     <string name="notification_volume_option_title">Notification volume</string>
@@ -9995,14 +10003,7 @@
     <string name="notification_log_details_ashmem">ashmem</string>
     <!-- Notification log debug tool: header: notification alert info -->
     <string name="notification_log_details_alerted">notification alerted</string>
-    <!-- Notification log debug tool: header: notification sound info -->
-    <string name="notification_log_details_sound">sound</string>
-    <!-- Notification log debug tool: header: notification vibration info -->
-    <string name="notification_log_details_vibrate">vibrate</string>
-    <!-- Notification log debug tool: header: notification vibration info -->
-    <string name="notification_log_details_vibrate_pattern">pattern</string>
-    <!-- Notification log debug tool: the word 'default' -->
-    <string name="notification_log_details_default">default</string>
+    <string name="notification_log_channel">channel</string>
     <!-- Notification log debug tool: the word 'none' -->
     <string name="notification_log_details_none">none</string>
     <!-- Notification log debug tool: missing ranking information -->

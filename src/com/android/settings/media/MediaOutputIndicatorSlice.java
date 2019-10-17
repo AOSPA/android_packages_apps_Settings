@@ -24,7 +24,6 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.core.graphics.drawable.IconCompat;
@@ -66,7 +65,9 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
     @Override
     public Slice getSlice() {
         if (!isVisible()) {
-            return null;
+            return new ListBuilder(mContext, MEDIA_OUTPUT_INDICATOR_SLICE_URI, ListBuilder.INFINITY)
+                    .setIsError(true)
+                    .build();
         }
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 com.android.internal.R.drawable.ic_settings_bluetooth);
@@ -115,13 +116,11 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
     private boolean isVisible() {
         // To decide Slice's visibility.
         // Return true if
-        // 1. phone is not in ongoing call mode
+        // 1. AudioMode is not in on-going call
         // 2. Bluetooth device is connected
-        final TelephonyManager telephonyManager =
-                (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-        return telephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE
-                && (!CollectionUtils.isEmpty(getConnectedA2dpDevices())
-                || !CollectionUtils.isEmpty(getConnectedHearingAidDevices()));
+        return (!CollectionUtils.isEmpty(getConnectedA2dpDevices())
+                || !CollectionUtils.isEmpty(getConnectedHearingAidDevices()))
+                && !com.android.settingslib.Utils.isAudioModeOngoingCall(mContext);
     }
 
     private List<BluetoothDevice> getConnectedA2dpDevices() {
