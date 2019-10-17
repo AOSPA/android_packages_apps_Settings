@@ -154,6 +154,11 @@
             settings:keywords="@string/keywords_dark_ui_mode"
             settings:controller="com.android.settings.display.DarkUIPreferenceController"/>
 
+		<SwitchPreference
+            android:key="pa.theme.customization.addons"
+            android:title="@string/dark_ui_addon"
+            settings:keywords="@string/keywords_dark_ui_mode" />
+
         <ListPreference
             android:key="android.theme.customization.accent_color"
             android:title="@string/theme_customization_accent_color_title"/>
