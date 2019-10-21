@@ -116,10 +116,10 @@ public class AvatarViewMixin implements LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
-        if (!mContext.getResources().getBoolean(R.bool.config_show_avatar_in_homepage)) {
+        /*if (!mContext.getResources().getBoolean(R.bool.config_show_avatar_in_homepage)) {
             Log.d(TAG, "Feature disabled by config. Skipping");
             return;
-        }
+        }*/
         if (mActivityManager.isLowRamDevice()) {
             Log.d(TAG, "Feature disabled on low ram device. Skipping");
             return;
@@ -161,11 +161,6 @@ public class AvatarViewMixin implements LifecycleObserver {
         final List<ResolveInfo> providers =
                 mContext.getPackageManager().queryIntentContentProviders(INTENT_GET_ACCOUNT_DATA,
                         PackageManager.MATCH_SYSTEM_ONLY);
-        if (providers.size() == 1) {
-            return providers.get(0).providerInfo.authority;
-        } else {
-            Log.w(TAG, "The size of the provider is " + providers.size());
-            return null;
-        }
+		return providers.get(0).providerInfo.authority;
     }
 }
