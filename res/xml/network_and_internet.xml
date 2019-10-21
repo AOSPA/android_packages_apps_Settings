@@ -44,6 +44,13 @@
         settings:useAdminDisabledSummary="true">
     </com.android.settingslib.RestrictedPreference>
 
+    <com.android.settings.datausage.DataSaverPreference
+        android:key="restrict_background_parent_entry"
+        android:title="@string/data_saver_title"
+        android:icon="@drawable/ic_settings_data_usage"
+        android:order="-10"
+        android:fragment="com.android.settings.datausage.DataSaverSummary"/>
+
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.TetherSettings"
         android:key="tether_settings"
