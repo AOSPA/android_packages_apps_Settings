@@ -116,10 +116,10 @@ public class AvatarViewMixin implements LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
-        if (!mContext.getResources().getBoolean(R.bool.config_show_avatar_in_homepage)) {
+        /*if (!mContext.getResources().getBoolean(R.bool.config_show_avatar_in_homepage)) {
             Log.d(TAG, "Feature disabled by config. Skipping");
             return;
-        }
+        }*/
         if (mActivityManager.isLowRamDevice()) {
             Log.d(TAG, "Feature disabled on low ram device. Skipping");
             return;
