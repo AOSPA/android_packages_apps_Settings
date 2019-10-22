@@ -423,6 +423,9 @@ public class WifiConfigController implements TextWatcher,
                         } else if (frequency >= AccessPoint.LOWER_FREQ_5GHZ
                                 && frequency < AccessPoint.HIGHER_FREQ_5GHZ) {
                             band = res.getString(R.string.wifi_band_5ghz);
+                        } else if (frequency >= AccessPoint.LOWER_FREQ_60GHZ
+                                && frequency < AccessPoint.HIGHER_FREQ_60GHZ) {
+                            band = res.getString(R.string.wifi_band_60ghz);
                         } else {
                             Log.e(TAG, "Unexpected frequency " + frequency);
                         }
