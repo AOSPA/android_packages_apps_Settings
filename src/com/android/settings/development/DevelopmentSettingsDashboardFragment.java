@@ -29,7 +29,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +45,6 @@ import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.development.autofill.AutofillLoggingLevelPreferenceController;
 import com.android.settings.development.autofill.AutofillResetOptionsPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -55,8 +53,9 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -169,7 +168,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         super.onActivityCreated(icicle);
         // Apply page-level restrictions
         setIfOnlyAvailableForAdmins(true);
-        if (isUiRestricted() || !Utils.isDeviceProvisioned(getActivity())) {
+        if (isUiRestricted() || !WizardManagerHelper.isDeviceProvisioned(getActivity())) {
             // Block access to developer options if the user is not the owner, if user policy
             // restricts it, or if the device has not been provisioned
             mIsAvailable = false;
@@ -522,7 +521,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     /**
      * For Search.
      */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.development_settings) {
 
                 @Override

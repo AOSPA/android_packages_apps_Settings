@@ -34,8 +34,9 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
+import com.android.settings.widget.SwitchBar;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -126,6 +127,13 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         updatePreferences();
     }
 
+    @Override
+    protected void updateSwitchBarText(SwitchBar switchBar) {
+        final String switchBarText = getString(R.string.accessibility_service_master_switch_title,
+                getString(R.string.accessibility_global_gesture_preference_title));
+        switchBar.setSwitchBarText(switchBarText, switchBarText);
+    }
+
     private void updatePreferences() {
         ContentResolver cr = getContentResolver();
         Context context = getContext();
@@ -192,7 +200,7 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         return ComponentName.unflattenFromString(componentNameString);
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 // This fragment is for details of the shortcut. Only the shortcut itself needs
                 // to be indexed.

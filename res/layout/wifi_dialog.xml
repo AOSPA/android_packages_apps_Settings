@@ -275,6 +275,18 @@
                             android:prompt="@string/wifi_eap_user_cert" />
                 </LinearLayout>
 
+                <LinearLayout android:id="@+id/no_user_cert_warning"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        style="@style/wifi_item" >
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/wifi_item_warning"
+                            android:text="@string/wifi_no_user_cert_warning" />
+                </LinearLayout>
+
                 <LinearLayout android:id="@+id/l_identity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -374,14 +386,14 @@
                 android:layout_height="wrap_content"
                 style="@style/wifi_item"
                 android:paddingBottom="4dp"
-                android:importantForAccessibility="yes"
-                android:contentDescription="@string/wifi_advanced_toggle_description_collapsed"
+                android:importantForAccessibility="no"
                 android:visibility="gone">
             <CheckBox android:id="@+id/wifi_advanced_togglebox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/wifi_advanced_toggle"
-                    android:importantForAccessibility="noHideDescendants"
+                    android:importantForAccessibility="yes"
+                    android:contentDescription="@string/wifi_advanced_toggle_description"
                     android:text="@string/wifi_show_advanced" />
         </LinearLayout>
 

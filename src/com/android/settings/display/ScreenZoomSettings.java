@@ -26,8 +26,8 @@ import android.view.Display;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.display.DisplayDensityConfiguration;
 import com.android.settingslib.display.DisplayDensityUtils;
 import com.android.settingslib.search.SearchIndexable;
@@ -118,7 +118,7 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment {
     }
 
     /** Index provider used to expose this fragment in search. */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,

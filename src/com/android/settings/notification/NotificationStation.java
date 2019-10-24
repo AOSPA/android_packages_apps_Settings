@@ -79,10 +79,14 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private static class HistoricalNotificationInfo {
         public String key;
         public NotificationChannel channel;
+        // Historical notifications don't have Ranking information. for most fields that's ok
+        // but we need channel id to launch settings.
+        public String channelId;
         public String pkg;
         public Drawable pkgicon;
         public CharSequence pkgname;
         public Drawable icon;
+        public boolean badged;
         public CharSequence title;
         public CharSequence text;
         public int priority;
@@ -268,8 +272,8 @@ public class NotificationStation extends SettingsPreferenceFragment {
         if (needsAdd) {
             mNotificationInfos.addFirst(newInfo);
             getPreferenceScreen().addPreference(new HistoricalNotificationPreference(
-                    getPrefContext(),
-                    mNotificationInfos.peekFirst(), -1 * mNotificationInfos.size()));
+                    getPrefContext(), mNotificationInfos.peekFirst(),
+                    -1 * mNotificationInfos.size()));
         }
     }
 
@@ -338,9 +342,9 @@ public class NotificationStation extends SettingsPreferenceFragment {
         return text == null ? null : String.valueOf(text);
     }
 
-    private static Drawable loadIcon(Context context, StatusBarNotification sbn) {
+    private Drawable loadIcon(HistoricalNotificationInfo info, StatusBarNotification sbn) {
         Drawable draw = sbn.getNotification().getSmallIcon().loadDrawableAsUser(
-                sbn.getPackageContext(context), sbn.getUserId());
+                sbn.getPackageContext(mContext), info.user);
         if (draw == null) {
             return null;
         }
@@ -367,7 +371,6 @@ public class NotificationStation extends SettingsPreferenceFragment {
      * booted), stores the data we need to present them, and sorts them chronologically for display.
      */
     private void loadNotifications() {
-        final int currentUserId = ActivityManager.getCurrentUser();
         try {
             StatusBarNotification[] active = mNoMan.getActiveNotifications(
                     mContext.getPackageName());
@@ -380,9 +383,6 @@ public class NotificationStation extends SettingsPreferenceFragment {
             for (StatusBarNotification[] resultSet
                     : new StatusBarNotification[][] { active, dismissed }) {
                 for (StatusBarNotification sbn : resultSet) {
-                    if (sbn.getUserId() != UserHandle.USER_ALL & sbn.getUserId() != currentUserId) {
-                        continue;
-                    }
                     if (sbn.getNotification().isGroupSummary()) {
                         continue;
                     }
@@ -406,8 +406,10 @@ public class NotificationStation extends SettingsPreferenceFragment {
         final Notification n = sbn.getNotification();
         final HistoricalNotificationInfo info = new HistoricalNotificationInfo();
         info.pkg = sbn.getPackageName();
-        info.user = sbn.getUserId();
-        info.icon = loadIcon(mContext, sbn);
+        info.user = sbn.getUserId() == UserHandle.USER_ALL
+                ? UserHandle.USER_SYSTEM : sbn.getUserId();
+        info.badged = info.user != ActivityManager.getCurrentUser();
+        info.icon = loadIcon(info, sbn);
         if (info.icon == null) {
             info.icon = loadPackageIconDrawable(info.pkg, info.user);
         }
@@ -417,6 +419,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         info.timestamp = sbn.getPostTime();
         info.priority = n.priority;
         info.key = sbn.getKey();
+        info.channelId = sbn.getNotification().getChannelId();
 
         info.active = active;
         info.notificationExtra = generateExtraText(sbn, info);
@@ -645,6 +648,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         private final HistoricalNotificationInfo mInfo;
         private static long sLastExpandedTimestamp; // quick hack to keep things from collapsing
         public ViewGroup mItemView; // hack to update prefs fast;
+        private Context mContext;
 
         public HistoricalNotificationPreference(Context context, HistoricalNotificationInfo info,
                 int order) {
@@ -653,6 +657,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
             setOrder(order);
             setKey(info.key);
             mInfo = info;
+            mContext = context;
         }
 
         @Override
@@ -697,6 +702,12 @@ public class NotificationStation extends SettingsPreferenceFragment {
                 ((ImageView) mItemView.findViewById(R.id.icon)).setImageDrawable(info.icon);
             }
 
+            ImageView profileBadge = mItemView.findViewById(R.id.profile_badge);
+            Drawable profile = mContext.getPackageManager().getUserBadgeForDensity(
+                    UserHandle.of(info.user), -1);
+            profileBadge.setImageDrawable(profile);
+            profileBadge.setVisibility(info.badged ? View.VISIBLE : View.GONE);
+
             ((DateTimeView) mItemView.findViewById(R.id.timestamp)).setTime(mInfo.timestamp);
 
             ((TextView) mItemView.findViewById(R.id.notification_extra))
@@ -717,7 +728,8 @@ public class NotificationStation extends SettingsPreferenceFragment {
         public void performClick() {
             Intent intent =  new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
                     .putExtra(EXTRA_APP_PACKAGE, mInfo.pkg)
-                    .putExtra(EXTRA_CHANNEL_ID, mInfo.channel.getId());
+                    .putExtra(EXTRA_CHANNEL_ID,
+                            mInfo.channel != null ? mInfo.channel.getId() : mInfo.channelId);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(intent);
         }

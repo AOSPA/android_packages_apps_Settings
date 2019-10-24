@@ -29,7 +29,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
+import com.android.settingslib.search.Indexable;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.search.SearchIndexable;
@@ -172,6 +172,13 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
         return false;
     }
 
+    @Override
+    protected void updateSwitchBarText(SwitchBar switchBar) {
+        final String switchBarText = getString(R.string.accessibility_service_master_switch_title,
+                getString(R.string.accessibility_autoclick_preference_title));
+        switchBar.setSwitchBarText(switchBarText, switchBarText);
+    }
+
     /**
      * Converts seek bar preference progress value to autoclick delay associated with it.
      */
@@ -187,6 +194,6 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
         return (delay - MIN_AUTOCLICK_DELAY) / AUTOCLICK_DELAY_STEP;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_autoclick_settings);
 }

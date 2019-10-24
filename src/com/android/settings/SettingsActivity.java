@@ -54,7 +54,6 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
-import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
@@ -282,7 +281,7 @@ public class SettingsActivity extends SettingsBaseActivity
             launchSettingFragment(initialFragmentName, intent);
         }
 
-        final boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
+        final boolean deviceProvisioned = WizardManagerHelper.isDeviceProvisioned(this);
 
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
@@ -602,7 +601,7 @@ public class SettingsActivity extends SettingsBaseActivity
             throw new IllegalArgumentException("Invalid fragment for this activity: "
                     + fragmentName);
         }
-        Fragment f = Fragment.instantiate(this, fragmentName, args);
+        Fragment f = Utils.getTargetFragment(this, fragmentName, args);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_content, f);
         if (titleResId > 0) {
@@ -686,10 +685,6 @@ public class SettingsActivity extends SettingsBaseActivity
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DevelopmentSettingsDashboardActivity.class.getName()),
                 showDev, isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                UserBackupSettingsActivity.class.getName()), true, isAdmin)
                 || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,

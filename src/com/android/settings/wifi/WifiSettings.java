@@ -50,26 +50,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.AccessPointPreference;
@@ -79,10 +81,6 @@ import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 
 /**
  * Two types of UI are provided here.
@@ -1206,7 +1204,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         ((AccessPointPreference) accessPoint.getTag()).onLevelChanged();
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,
@@ -1227,42 +1225,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                     return result;
                 }
             };
-
-    private static class SummaryProvider
-            implements SummaryLoader.SummaryProvider, OnSummaryChangeListener {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-
-        @VisibleForTesting
-        WifiSummaryUpdater mSummaryHelper;
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-            mSummaryHelper = new WifiSummaryUpdater(mContext, this);
-        }
-
-
-        @Override
-        public void setListening(boolean listening) {
-            mSummaryHelper.register(listening);
-        }
-
-        @Override
-        public void onSummaryChanged(String summary) {
-            mSummaryLoader.setSummary(this, summary);
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
 
     private void handleConfigNetworkSubmitEvent(Intent data) {
         final WifiConfiguration wifiConfiguration = data.getParcelableExtra(

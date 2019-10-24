@@ -46,69 +46,6 @@
     <!-- Settings main menu category heading. System (Updates, data, accessibility, about phone). [CHAR LIMIT=40] -->
     <string name="header_category_system">System</string>
 
-    <!-- Data Connection Enable. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="radio_info_data_connection_enable">Enable Data Connection</string>
-    <!-- Data Connection Disable. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="radio_info_data_connection_disable">Disable Data Connection</string>
-
-    <!-- VoLTE provisioning flag on. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="volte_provisioned_switch_string">VoLTE Provisioned</string>
-
-    <!-- Video calling provisioning flag on. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="vt_provisioned_switch_string">Video Calling Provisioned</string>
-
-    <!-- Wifi Calling provisioning flag on. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="wfc_provisioned_switch_string">Wifi Calling Provisioned</string>
-
-    <!-- EAB provisioning flag on. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="eab_provisioned_switch_string">EAB/Presence Provisioned</string>
-
-    <!-- Cbrs enable disable flag. Only shown in diagnostic screen, so precise translation is not needed -->
-    <string name="cbrs_data_switch_string">Cbrs Data</string>
-
-    <!-- Dsds enable/disable flag. Only shown in diagnostic screen, so precise translation is not needed, [CHAR LIMIT=none] -->
-    <string name="dsds_switch_string">Enable DSDS</string>
-
-    <!-- UI debug setting: Enable/Disable DSDS [CHAR LIMIT=none] -->
-    <string name="dsds_dialog_title">Restart Device?</string>
-
-    <!-- UI debug setting: Enable/Disable DSDS [CHAR LIMIT=none] -->
-    <string name="dsds_dialog_message">You need to restart your device to change this setting.</string>
-
-    <!-- UI debug setting: Enable/Disable DSDS [CHAR LIMIT=none] -->
-    <string name="dsds_dialog_confirm">Restart</string>
-
-    <!-- UI debug setting: Enable/Disable DSDS [CHAR LIMIT=none] -->
-    <string name="dsds_dialog_cancel">Cancel</string>
-
-    <!-- Title for controlling on/off for Mobile phone's radio power. Only shown in diagnostic screen, so precise translation is not needed. -->
-    <string name="radio_info_radio_power">Mobile Radio Power</string>
-
-    <!-- Phone Info screen. Menu item label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_menu_viewADN">View SIM Address Book</string>
-    <!-- Phone Info screen. Menu item label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_menu_viewFDN">View Fixed Dialing Numbers</string>
-    <!-- Phone Info screen. Menu item label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_menu_viewSDN">View Service Dialing Numbers</string>
-    <!-- Phone Info screen. Menu item label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_menu_getIMS">IMS Service Status</string>
-
-    <!-- Phone Info screen. IMS Registration Title.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ims_reg_status_title">IMS Status</string>
-
-    <!-- Phone Info screen. IMS Status - Registered.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ims_reg_status_registered">Registered</string>
-    <!-- Phone Info screen. Ims Status - Unregistered.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ims_reg_status_not_registered">Not Registered</string>
-
-    <!-- Phone Info screen. Ims Feature Status label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ims_feature_status_available">Available</string>
-    <!-- Phone Info screen. Ims Feature status label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ims_feature_status_unavailable">Unavailable</string>
-
-    <!-- Phone Info screen. IMS Registration.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ims_reg_status">IMS Registration: <xliff:g id="status" example="registered">%1$s</xliff:g>\u000AVoice over LTE: <xliff:g id="availability" example="available">%2$s</xliff:g>\u000AVoice over WiFi: <xliff:g id="availability" example="available">%3$s</xliff:g>\u000AVideo Calling: <xliff:g id="availability" example="available">%4$s</xliff:g>\u000AUT Interface: <xliff:g id="availability" example="available">%5$s</xliff:g></string>
-
     <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_service_in">In Service</string>
     <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
@@ -124,13 +61,6 @@
     <string name="radioInfo_roaming_not">Not Roaming</string>
 
     <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_phone_idle">Idle</string>
-    <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_phone_ringing">Ringing</string>
-    <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_phone_offhook">Call in Progress</string>
-
-    <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_data_disconnected">Disconnected</string>
     <!-- Phone Info screen. Status label.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_data_connecting">Connecting</string>
@@ -141,18 +71,6 @@
 
     <!-- Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_unknown">Unknown</string>
-    <!-- Phone Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_display_packets">pkts</string>
-    <!-- Phone Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_display_bytes">bytes</string>
-    <!-- Phone Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_display_dbm">dBm</string>
-    <!-- Phone Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_display_asu">asu</string>
-    <!-- Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_lac">LAC</string>
-    <!-- Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radioInfo_cid">CID</string>
 
     <!-- Used for diagnostic info screens, precise translation isn't needed. Unmounts the SD card from the phone, meaning it will become available for an attached computer  [CHAR LIMIT=25] -->
     <string name="sdcard_unmount" product="nosdcard">Unmount USB storage</string>
@@ -411,11 +329,11 @@
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel">Cancel</string>
 
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
-    <string name="connected_device_available_media_title">Available media devices</string>
+    <string name="connected_device_media_device_title">Media devices</string>
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
-    <string name="connected_device_available_call_title">Available call devices</string>
+    <string name="connected_device_call_device_title">Call devices</string>
     <!-- Title for connected device group [CHAR LIMIT=none]-->
-    <string name="connected_device_connected_title">Currently connected</string>
+    <string name="connected_device_other_device_title">Other devices</string>
     <!-- Title for connected device group [CHAR LIMIT=none]-->
     <string name="connected_device_saved_title">Saved devices</string>
     <!-- Title for connected TWS device group [CHAR LIMIT=none]-->
@@ -487,60 +405,6 @@
     <string name="proxy_url_title">"PAC URL: "</string>
 
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_subid">Current subId:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_dds">SubId of default data SIM:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_dl_kbps">DL Bandwidth (kbps):</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ul_kbps">UL Bandwidth (kbps):</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_signal_location_label">Cell Location Info (deprecated):</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_phy_chan_config">LTE Physical Channel Configuration:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_cell_info_refresh_rate">Cell Info Refresh Rate:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_cellinfo_label">All Cell Measurement Info:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_gprs_service_label">Data Service:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_roaming_label">Roaming:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_imei_label">IMEI:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, DO NOT TRANSLATE. -->
-    <string name="radio_info_imsi_label">IMSI:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_call_redirect_label">Call Redirect:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ppp_resets_label">Number of PPP Reset Since Boot:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_current_network_label">Current Network:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ppp_received_label">Data Received:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_gsm_service_label">Voice Service:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_signal_strength_label">Signal Strength:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_call_status_label">Voice Call Status:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_ppp_sent_label">Data Sent:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_message_waiting_label">Message Waiting:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_phone_number_label">Phone Number:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_band_mode_label">Select Radio Band</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_voice_network_type_label">Voice Network Type:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_data_network_type_label">Data Network Type:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="phone_index_label">Select phone index</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_set_perferred_label">Set Preferred Network Type:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_ping_hostname_v4">Ping Hostname(www.google.com) IPv4:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_ping_hostname_v6">Ping Hostname(www.google.com) IPv6:</string>
@@ -548,28 +412,6 @@
     <string name="radio_info_http_client_test">HTTP Client Test:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="ping_test_label">Run Ping Test</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_smsc_label">SMSC:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_smsc_update_label">Update</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_smsc_refresh_label">Refresh</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_toggle_dns_check_label">Toggle DNS Check</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="oem_radio_info_label">OEM-specific Info/Settings</string>
-
-    <!-- Band Mode Selection -->
-    <!-- Band mode screen.  Title of activity. -->
-    <string name="band_mode_title">Set Radio Band Mode</string>
-    <!-- Band mode screen.  Loading message. -->
-    <string name="band_mode_loading">Loading Band List\u2026</string>
-    <!-- Band mode screen. Button caption to set the bandmode. -->
-    <string name="band_mode_set">Set</string>
-    <!-- Band mode screen. Status message when unsuccessful. -->
-    <string name="band_mode_failed">Unsuccessful</string>
-    <!-- Band mode screen. Statusm essage when successful. -->
-    <string name="band_mode_succeeded">Successful</string>
 
     <!-- Instructions after the user changes the mass storage settings -->
     <string name="sdcard_changes_instructions">Changes take effect when USB cable is reconnected.</string>
@@ -656,10 +498,6 @@
     <string name="device_info_label">Device info</string>
     <!-- The title of the activity to adjust display settings -->
     <string name="display_label">Screen</string>
-    <!-- The title of the activity to see phone info -->
-    <string name="phone_info_label" product="tablet">Tablet info</string>
-    <!-- The title of the activity to see phone info -->
-    <string name="phone_info_label" product="default">Phone info</string>
     <!-- The title of the activity to adjust SD card settings [CHAR LIMIT=25] -->
     <string name="sd_card_settings_label" product="nosdcard">USB storage</string>
     <!-- The title of the activity to adjust SD card settings-->
@@ -697,12 +535,6 @@
     <!-- Main Settings screen settings summary text for the "Wireless controls" setting -->
     <string name="radio_controls_summary">Manage Wi\u2011Fi, Bluetooth, airplane mode, mobile networks, &amp; VPNs</string>
 
-    <!-- check box cellular data title [CHAR LIMIT=30] -->
-    <string name="cellular_data_title">Mobile data</string>
-    <!-- check box Calls title [CHAR LIMIT=30] -->
-    <string name="calls_title">Allow calls</string>
-    <!-- check box SMS Messges title [CHAR LIMIT=30] -->
-    <string name="sms_messages_title">SMS messages</string>
     <!-- check box cellular data summary [CHAR LIMIT=85] -->
     <string name="cellular_data_summary">Allow data usage over mobile network</string>
     <!-- check box to allow data usage when roaming [CHAR LIMIT=41] -->
@@ -718,11 +550,11 @@
     <!-- mobile network settings screen, button on dialog box that appears when you are roaming and clear the "Data roaming" check box -->
     <string name="roaming_turn_it_on_button">Turn it on</string>
     <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box -->
-    <string name="roaming_warning">You may incur significant charges.</string>
+    <string name="roaming_warning">Roaming charges may apply.</string>
     <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box. This is for multiuser tablets [CHAR LIMIT=none] -->
-    <string name="roaming_warning_multiuser" product="tablet">When you allow data roaming, you may incur significant roaming charges!\n\nThis setting affects all users on this tablet.</string>
+    <string name="roaming_warning_multiuser" product="tablet">When you allow data roaming, roaming charges may apply.\n\nThis setting affects all users on this tablet.</string>
     <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box. This is for multiuser phones [CHAR LIMIT=none] -->
-    <string name="roaming_warning_multiuser" product="default">When you allow data roaming, you may incur significant roaming charges!\n\nThis setting affects all users on this phone.</string>
+    <string name="roaming_warning_multiuser" product="default">When you allow data roaming, roaming charges may apply.\n\nThis setting affects all users on this phone.</string>
     <!-- mobile network settings screen, title of dialog box that appears when you select the "Data roaming" check box -->
     <string name="roaming_reenable_title">Allow data roaming?</string>
     <!-- mobile network settings screen, setting option name -->
@@ -911,6 +743,8 @@
     <string name="security_settings_face_enroll_introduction_no_thanks">No thanks</string>
     <!-- Button text to start enrollment [CHAR LIMIT=30] -->
     <string name="security_settings_face_enroll_introduction_agree">Agree</string>
+    <!-- Button text to scroll to the end of a scrollview. [CHAR LIMIT=30] -->
+    <string name="security_settings_face_enroll_introduction_more">More</string>
     <!-- Introduction title shown in face enrollment to introduce the face unlock feature [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_introduction_title">Unlock with your face</string>
     <!-- Introduction title shown in face enrollment to introduce the face unlock feature, when face unlock is disabled by device admin [CHAR LIMIT=60] -->
@@ -951,6 +785,18 @@
     <string name="security_settings_face_enroll_finish_title">All set. Looking good.</string>
     <!-- Button text to exit face wizard after everything is done [CHAR LIMIT=15] -->
     <string name="security_settings_face_enroll_done">Done</string>
+    <!-- Settings suggestion title text for re-enrolling a face. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_enroll_should_re_enroll_title">Improve face unlock performance</string>
+    <!-- Settings suggestion subtitle text for re-enrolling a face. [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle">Set up face unlock again</string>
+    <!-- Settings suggestion title text for mandatory re-enrolling of a face. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_enroll_must_re_enroll_title">Set up face unlock again</string>
+    <!-- Settings suggestion subtitle text for mandatory re-enrolling of a face. [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle">Improve security and performance</string>
+    <!-- Settings suggestion alert body title for re-enrolling a face. [CHAR LIMIT=60] -->
+    <string name="security_settings_face_enroll_improve_face_alert_title">Set up face unlock</string>
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body">Delete your current face data to set up face unlock again.\n\nThe face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
     <!-- Title for a category shown for the face settings page. [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_use_face_category">Use face unlock for</string>
     <!-- Text shown on a toggle which allows or disallows the device to use face for unlocking the device. [CHAR LIMIT=20] -->
@@ -1560,9 +1406,6 @@
         <item quantity="other">Must be fewer than <xliff:g id="number" example="17">%d</xliff:g> digits</item>
     </plurals>
 
-    <!-- Error shown when in PIN mode and user enters a non-digit -->
-    <string name="lockpassword_pin_contains_non_digits">Must contain only digits 0-9</string>
-
     <!-- Error shown when in PIN mode and PIN has been used recently. Please keep this string short! -->
     <string name="lockpassword_pin_recently_used">Device admin doesn\'t allow using a recent PIN</string>
 
@@ -1615,6 +1458,11 @@
     <plurals name="lockpassword_password_requires_nonletter">
         <item quantity="one">Must contain at least 1 non-letter character</item>
         <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> non-letter characters</item>
+    </plurals>
+
+    <plurals name="lockpassword_password_requires_nonnumerical">
+        <item quantity="one">Must contain at least 1 non-numerical character</item>
+        <item quantity="other">Must contain at least <xliff:g id="count" example="3">%d</xliff:g> non-numerical characters</item>
     </plurals>
 
     <!-- Error shown when in PASSWORD mode and password has been used recently. Please keep this string short! -->
@@ -1793,7 +1641,7 @@
     <!-- Bluetooth connecting error message [CHAR LIMIT=NONE] -->
     <string name="bluetooth_connect_failed">Couldn\'t connect. Try again.</string>
 
-    <!-- Title of device details screen [CHAR LIMIT=40]-->
+    <!-- Title of device details screen [CHAR LIMIT=28]-->
     <string name="device_details_title">Device details</string>
     <!-- Title of the item to show device MAC address -->
     <string name="bluetooth_device_mac_address">Device\'s Bluetooth address: <xliff:g id="address">%1$s</xliff:g></string>
@@ -2107,10 +1955,12 @@
     <!-- Dialog for Access Points --> <skip />
     <!-- Label to show/hide advanced options [CHAR LIMIT=40] -->
     <string name="wifi_show_advanced">Advanced options</string>
-    <!-- Message for talkback to say when Advanced Options expanded [CHAR LIMIT=NONE] -->
-    <string name="wifi_advanced_toggle_description_expanded">Drop down list Advanced Options. Double-tap to collapse.</string>
-    <!-- Message for talkback to say when Advanced Options is collapsed [CHAR LIMIT=NONE] -->
-    <string name="wifi_advanced_toggle_description_collapsed">Drop down list Advanced Options. Double-tap to expand.</string>
+    <!-- Message for talkback to say when focus on Advanced Options[CHAR LIMIT=NONE] -->
+    <string name="wifi_advanced_toggle_description">Drop down list Advanced Options</string>
+    <!-- Extended message for talkback to say when Advanced Options is expanded. (e.g., Double-tap to collapse) [CHAR LIMIT=NONE] -->
+    <string name="wifi_advanced_toggle_description_expanded">collapse</string>
+    <!-- Extended message for talkback to say when Advanced Options is collapsed. (e.g., Double-tap to expand) [CHAR LIMIT=NONE] -->
+    <string name="wifi_advanced_toggle_description_collapsed">expand</string>
     <!-- Label for the SSID of the network -->
     <string name="wifi_ssid">Network name</string>
     <!-- Hint for a text field to enter the SSID of a hidden wifi network. [CHAR LIMIT=35] -->
@@ -2181,7 +2031,7 @@
     <string name="wifi_ip_settings">IP settings</string>
     <!-- Label for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
     <string name="wifi_privacy_settings">Privacy</string>
-    <!-- Summary for Wifi MAC randomization option when it is ephemeral network [CHAR LIMIT=40] -->
+    <!-- Summary for Wifi MAC randomization option when it is ephemeral network [CHAR LIMIT=50] -->
     <string name="wifi_privacy_settings_ephemeral_summary">Randomized MAC</string>
     <!-- Title for the fragment to add a device into the wifi network [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_add_device_to_network">Add a device</string>
@@ -2268,6 +2118,10 @@
     <!-- Warning message displayed if user does not specify a domain for the CA certificate.
          Only displayed if the user also chooses to use system certificates. -->
     <string name="wifi_no_domain_warning">Must specify a domain.</string>
+    <!-- Warning message displayed if user does not specify a user certification for
+         WPA3-Enterprise 192-bit. Only displayed if the user does not specify user certificate
+         for WPA3-Enterprise 192-bit [CHAR LIMIT=80]-->
+    <string name="wifi_no_user_cert_warning">This option requires a user certificate.</string>
     <!-- Substring of status line when Wi-Fi Protected Setup (WPS) is available and
          string is listed first [CHAR LIMIT=20]-->
     <string name="wifi_wps_available_first_item">WPS available</string>
@@ -2360,8 +2214,10 @@
     <string name="wifi_advanced_titlebar">Advanced Wi\u2011Fi</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's SSID. [CHAR LIMIT=20] -->
     <string name="wifi_advanced_ssid_title">SSID</string>
-    <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's MAC address. -->
-    <string name="wifi_advanced_mac_address_title">MAC address</string>
+    <!-- Wi-Fi settings screen, advanced, title of the item to show the device's Wi-Fi MAC address. [CHAR LIMIT=50] -->
+    <string name="wifi_advanced_device_mac_address_title">Device MAC address</string>
+    <!-- Wi-Fi settings screen, advanced, title of the item to show the randomized Wi-Fi MAC address. [CHAR LIMIT=50] -->
+    <string name="wifi_advanced_randomized_mac_address_title">Randomized MAC address</string>
     <!-- Title of the screen to adjust IP settings -->
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's current IP address. -->
     <string name="wifi_advanced_ip_address_title">IP address</string>
@@ -3127,6 +2983,8 @@
     <string name="storage_settings_summary" product="default">Unmount SD card, view available storage</string>
     <!-- About phone screen, title for IMEI for multi-sim devices -->
     <string name="imei_multi_sim">IMEI (sim slot %1$d)</string>
+    <!-- About phone screen, summary of the MAC address [CHAR LIMIT=80] -->
+    <string name="view_saved_network">To view, choose saved network</string>
     <!-- Do not translate. About phone, status item title -->
     <string name="status_imei">IMEI</string>
     <!-- Do not translate. About phone, status item title -->
@@ -3185,6 +3043,8 @@
     <string name="status_operator">Network</string>
     <!-- About phone, status item title.  The MAC address of the Wi-Fi network adapter. -->
     <string name="status_wifi_mac_address">Wi\u2011Fi MAC address</string>
+    <!-- About phone, status item title.  The device's MAC address of the Wi-Fi network adapter. [CHAR LIMIT=50] -->
+    <string name="status_device_wifi_mac_address">Device Wi\u2011Fi MAC address</string>
     <!-- About phone, status item title.  The bluetooth adapter's hardware address-->
     <string name="status_bt_address">Bluetooth address</string>
     <!-- About phone, status item title.  The hardware serial number. [CHAR LIMIT=30]-->
@@ -4032,14 +3892,6 @@
     <!-- About phone settings screen, Safety Legal dialog title until the link is fully loaded -->
     <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
-    <!-- ConfirmDeviceCredential settings-->
-    <!-- Button text shown on BiometricPrompt (system dialog that asks for biometric authentication) giving the user the option to use an alternate form of authentication (Pin) [CHAR LIMIT=30] -->
-    <string name="confirm_device_credential_pin">Use PIN</string>
-    <!-- Button text shown on BiometricPrompt (system dialog that asks for biometric authentication) giving the user the option to use an alternate form of authentication (Pattern) [CHAR LIMIT=30] -->
-    <string name="confirm_device_credential_pattern">Use pattern</string>
-    <!-- Button text shown on BiometricPrompt (system dialog that asks for biometric authentication) giving the user the option to use an alternate form of authentication (Pass) [CHAR LIMIT=30] -->
-    <string name="confirm_device_credential_password">Use password</string>
-
     <!-- Lock Pattern settings -->
     <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_screen_lock_header">Set screen lock</string>
@@ -4839,7 +4691,7 @@
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
     <string name="interaction_control_category_title">Interaction controls</string>
     <!-- Title for the accessibility preference category of services downloaded by the user. [CHAR LIMIT=50] -->
-    <string name="user_installed_services_category_title">Downloaded services</string>
+    <string name="user_installed_services_category_title">Downloaded apps</string>
     <!-- Title for the accessibility preference category of settings considered to be experimental, meaning they might be changed or removed in the future. [CHAR LIMIT=50] -->
     <string name="experimental_category_title">Experimental</string>
     <!-- Title for feature flags dashboard where developers can turn on experimental features [CHAR LIMIT=50] -->
@@ -4877,7 +4729,7 @@
     <!-- Title for the Accessibility tutorial dialog in gesture navigation settings. [CHAR LIMIT=50] -->
     <string name="accessibility_tutorial_dialog_title_gesture_settings">Use new accessibility gesture</string>
     <!-- Message for the Accessibility tutorial dialog when user enables an accessibility service while using the 3-button nav bar. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_button">To turn this service on or off, tap the accessibility button<xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g>on the bottom of your screen.\n\nTo switch between services, touch &amp; hold the accessibility button.</string>
+    <string name="accessibility_tutorial_dialog_message_button">To turn this service on or off, tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> on the bottom of your screen.\n\nTo switch between services, touch &amp; hold the accessibility button.</string>
     <!-- Message for the Accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is not enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_tutorial_dialog_message_gesture_without_talkback">To turn this service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold.</string>
     <!-- Message for the Accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is enabled. [CHAR LIMIT=NONE] -->
@@ -4963,7 +4815,7 @@
     <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
     <string name="accessibility_touch_vibration_title">Touch feedback</string>
     <!-- Used in the acessibilty service settings to control turning on/off the service entirely -->
-    <string name="accessibility_service_master_switch_title">Use service</string>
+    <string name="accessibility_service_master_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_daltonizer_master_switch_title">Use color correction</string>
     <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->
@@ -7195,8 +7047,6 @@
     <string name="sim_select_card">Select a SIM card</string>
     <!-- Label for a numbered SIM card.  [CHAR LIMIT=40] -->
     <string name="sim_card_number_title">SIM <xliff:g id="card_number">%1$d</xliff:g></string>
-    <!-- Name label of Sim card that is empty.  [CHAR LIMIT=40] -->
-    <string name="sim_slot_empty">SIM empty</string>
     <!-- Name label of Sim Editor.  [CHAR LIMIT=40] -->
     <string name="sim_editor_name">SIM name</string>
     <!-- Hint for SIM name in sim name editor dialog.  [CHAR LIMIT=40] -->
@@ -7242,8 +7092,6 @@
     <!-- Message under title informing the user to touch to go to SIM Cards in Settings.  [CHAR LIMIT=40] -->
     <string name="sim_notification_summary">Tap to set up</string>
 
-    <!-- This is a divider in the SIM cards preferences that is the header of various settings where the user chooses which SIM to use for phone calls, data, and SMS messages [CHAR LIMIT=50] -->
-    <string name="sim_pref_divider">Preferred SIM for</string>
     <!-- When a user chooses this "Ask first" preference for the SIM to use for phone calls, they'll be prompted to choose a SIM every time they initiate a call [CHAR LIMIT=50] -->
     <string name="sim_calls_ask_first_prefs_title">Ask every time</string>
     <!-- When a SIM preference hasn't been selected yet, this string is displayed as the pref summary until the user chooses a SIM subscription from the preference list [CHAR LIMIT=50] -->
@@ -8724,6 +8572,9 @@
     <!-- Generic label for suggestion card's ok button [CHAR LIMIT=20] -->
     <string name="suggestion_button_text">Ok</string>
 
+    <!-- Strings for suggestion card's close button [CHAR LIMIT=20] -->
+    <string name="suggestion_button_close">Close</string>
+
     <!-- [CHAR LIMIT=35] Feedback on the device -->
     <string name="device_feedback">Send feedback about this device</string>
 
@@ -9841,6 +9692,12 @@
     <!-- Optional part of data usage showing the remaining amount [CHAR LIMIT=13] -->
     <string name="data_remaining"><xliff:g name="bytes" example="2 GB">^1</xliff:g> left</string>
 
+    <!-- Brief content description for data usage chart [CHAR LIMIT=NONE] -->
+    <string name="data_usage_chart_brief_content_description">Graph showing data usage between <xliff:g id="start_date" example="August 19">%1$s</xliff:g> and <xliff:g id="end_date" example="September 16">%2$s</xliff:g>.</string>
+
+    <!-- Content description for data usage chart when data is not available [CHAR LIMIT=NONE] -->
+    <string name="data_usage_chart_no_data_content_description">No data in this date range</string>
+
     <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
     <plurals name="billing_cycle_days_left">
         <item quantity="one">%d day left</item>
@@ -10856,6 +10713,8 @@
     <string name="preferred_network_mode_lte_gsm_wcdma_summary">Preferred network mode: GSM/WCDMA/LTE</string>
     <!-- CDMA+LTE/EVDO [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_lte_cdma_evdo_summary">Preferred network mode: CDMA+LTE/EVDO</string>
+    <!-- LTE/CDMA/EvDo/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary">Preferred network mode: LTE/CDMA/EvDo/GSM/WCDMA</string>
     <!-- Global [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_global_summary">Preferred network mode: Global</string>
     <!-- LTE / WCDMA [CHAR LIMIT=NONE] -->
@@ -10884,7 +10743,37 @@
     <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary">Preferred network mode: TDSCDMA/CDMA/EvDo/GSM/WCDMA</string>
     <!-- LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary">Preferred network mode: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA</string>
+    <!-- NR only [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_only_summary">Preferred network mode: NR only</string>
+    <!-- NR / LTE [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_summary">Preferred network mode: NR / LTE</string>
+    <!-- NR/LTE/CDMA/EvDo [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary">Preferred network mode: NR/LTE/CDMA/EvDo</string>
+    <!-- NR/LTE/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary">Preferred network mode: NR/LTE/GSM/WCDMA</string>
+    <!-- NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary">Preferred network mode: NR/LTE/CDMA/EvDo/GSM/WCDMA</string>
+    <!-- NR/LTE/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_wcdma_summary">Preferred network mode: NR/LTE/WCDMA</string>
+    <!-- NR/LTE/TDSCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary">Preferred network mode: NR/LTE/TDSCDMA</string>
+    <!-- NR/LTE/TDSCDMA/GSM [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary">Preferred network mode: NR/LTE/TDSCDMA/GSM</string>
+    <!-- NR/LTE/TDSCDMA/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary">Preferred network mode: NR/LTE/TDSCDMA/WCDMA</string>
+    <!-- NR/LTE/TDSCDMA/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary">Preferred network mode: NR/LTE/TDSCDMA/GSM/WCDMA</string>
+    <!-- NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary">Preferred network mode: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA</string>
 
+    <!-- Text for Network mode recommended [CHAR LIMIT=NONE] -->
+    <string name="network_recommended">\u0020(recommended)</string>
+    <!-- Text for Network 5g [CHAR LIMIT=NONE] -->
+    <string name="network_5G" translatable="false">5G</string>
+    <!-- Text for Network lte [CHAR LIMIT=NONE] -->
+    <string name="network_lte_pure" translatable="false">LTE</string>
+    <!-- Text for Network 4g [CHAR LIMIT=NONE] -->
+    <string name="network_4G_pure" translatable="false">4G</string>
     <!-- Text for Network lte [CHAR LIMIT=NONE] -->
     <string name="network_lte">LTE (recommended)</string>
     <!-- Text for Network 4g [CHAR LIMIT=NONE] -->
@@ -11354,5 +11243,8 @@
     <string name="work_policy_privacy_settings">Your work policy info</string>
     <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
     <string name="work_policy_privacy_settings_summary">Settings managed by your IT admin</string>
+
+    <!-- Developer Settings: Search keywords for the Profile HWUI rendering. [CHAR_LIMIT=NONE] -->
+    <string name="track_frame_time_keywords">GPU</string>
 
 </resources>

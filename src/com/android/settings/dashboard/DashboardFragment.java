@@ -37,12 +37,12 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.search.Indexable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,18 +56,18 @@ import java.util.Set;
  */
 public abstract class DashboardFragment extends SettingsPreferenceFragment
         implements SettingsBaseActivity.CategoryListener, Indexable,
-        SummaryLoader.SummaryConsumer, PreferenceGroup.OnExpandButtonClickListener,
+        PreferenceGroup.OnExpandButtonClickListener,
         BasePreferenceController.UiBlockListener {
     private static final String TAG = "DashboardFragment";
 
     private final Map<Class, List<AbstractPreferenceController>> mPreferenceControllers =
             new ArrayMap<>();
     private final Set<String> mDashboardTilePrefKeys = new ArraySet<>();
+    private final List<AbstractPreferenceController> mControllers = new ArrayList<>();
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private DashboardTilePlaceholderPreferenceController mPlaceholderPreferenceController;
     private boolean mListeningToCategoryChange;
-    private SummaryLoader mSummaryLoader;
     private List<String> mSuppressInjectedTileKeys;
     @VisibleForTesting
     UiBlockerController mBlockerController;
@@ -79,7 +79,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 R.array.config_suppress_injected_tile_keys));
         mDashboardFeatureProvider = FeatureFactory.getFactory(context).
                 getDashboardFeatureProvider(context);
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         // Load preference controllers from code
         final List<AbstractPreferenceController> controllersFromCode =
                 createPreferenceControllers(context);
@@ -93,42 +92,40 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
         // Add unique controllers to list.
         if (controllersFromCode != null) {
-            controllers.addAll(controllersFromCode);
+            mControllers.addAll(controllersFromCode);
         }
-        controllers.addAll(uniqueControllerFromXml);
+        mControllers.addAll(uniqueControllerFromXml);
 
         // And wire up with lifecycle.
         final Lifecycle lifecycle = getSettingsLifecycle();
-        uniqueControllerFromXml
-                .stream()
-                .filter(controller -> controller instanceof LifecycleObserver)
-                .forEach(
-                        controller -> lifecycle.addObserver((LifecycleObserver) controller));
+        uniqueControllerFromXml.forEach(controller -> {
+            if (controller instanceof LifecycleObserver) {
+                lifecycle.addObserver((LifecycleObserver) controller);
+            }
+        });
 
         mPlaceholderPreferenceController =
                 new DashboardTilePlaceholderPreferenceController(context);
-        controllers.add(mPlaceholderPreferenceController);
-        for (AbstractPreferenceController controller : controllers) {
+        mControllers.add(mPlaceholderPreferenceController);
+        for (AbstractPreferenceController controller : mControllers) {
             addPreferenceController(controller);
         }
-
-        checkUiBlocker(controllers);
     }
 
     @VisibleForTesting
     void checkUiBlocker(List<AbstractPreferenceController> controllers) {
         final List<String> keys = new ArrayList<>();
-        controllers
-                .stream()
-                .filter(controller -> controller instanceof BasePreferenceController.UiBlocker)
-                .forEach(controller -> {
-                    ((BasePreferenceController) controller).setUiBlockListener(this);
-                    keys.add(controller.getPreferenceKey());
-                });
+        controllers.forEach(controller -> {
+            if (controller instanceof BasePreferenceController.UiBlocker
+                    && controller.isAvailable()) {
+                ((BasePreferenceController) controller).setUiBlockListener(this);
+                keys.add(controller.getPreferenceKey());
+            }
+        });
 
         if (!keys.isEmpty()) {
             mBlockerController = new UiBlockerController(keys);
-            mBlockerController.start(()->updatePreferenceVisibility(mPreferenceControllers));
+            mBlockerController.start(() -> updatePreferenceVisibility(mPreferenceControllers));
         }
     }
 
@@ -157,6 +154,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        checkUiBlocker(mControllers);
         refreshAllPreferences(getLogTag());
     }
 
@@ -168,28 +166,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         if (category == null) {
             return;
         }
-        if (mSummaryLoader != null) {
-            // SummaryLoader can be null when there is no dynamic tiles.
-            mSummaryLoader.setListening(true);
-        }
         final Activity activity = getActivity();
         if (activity instanceof SettingsBaseActivity) {
             mListeningToCategoryChange = true;
             ((SettingsBaseActivity) activity).addCategoryListener(this);
         }
-    }
-
-    @Override
-    public void notifySummaryChanged(Tile tile) {
-        final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
-        final Preference pref = getPreferenceScreen().findPreference(key);
-        if (pref == null) {
-            Log.d(getLogTag(), String.format(
-                    "Can't find pref by key %s, skipping update summary %s",
-                    key, tile.getDescription()));
-            return;
-        }
-        pref.setSummary(tile.getSummary(pref.getContext()));
     }
 
     @Override
@@ -219,10 +200,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onStop() {
         super.onStop();
-        if (mSummaryLoader != null) {
-            // SummaryLoader can be null when there is no dynamic tiles.
-            mSummaryLoader.setListening(false);
-        }
         if (mListeningToCategoryChange) {
             final Activity activity = getActivity();
             if (activity instanceof SettingsBaseActivity) {
@@ -412,13 +389,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         // Create a list to track which tiles are to be removed.
         final List<String> remove = new ArrayList<>(mDashboardTilePrefKeys);
 
-        // There are dashboard tiles, so we need to install SummaryLoader.
-        if (mSummaryLoader != null) {
-            mSummaryLoader.release();
-        }
-        final Context context = getContext();
-        mSummaryLoader = new SummaryLoader(getActivity(), getCategoryKey());
-        mSummaryLoader.setSummaryConsumer(this);
         // Install dashboard tiles.
         final boolean forceRoundedIcons = shouldForceRoundedIcon();
         for (Tile tile : tiles) {
@@ -455,7 +425,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 screen.removePreference(preference);
             }
         }
-        mSummaryLoader.setListening(true);
     }
 
     @Override

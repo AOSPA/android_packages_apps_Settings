@@ -92,7 +92,6 @@ import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
 import com.android.settings.applications.AppStorageSettings;
-import com.android.settings.applications.InstalledAppCounter;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
@@ -100,7 +99,6 @@ import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
@@ -145,6 +143,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final String EXTRA_STORAGE_TYPE = "storageType";
     public static final String EXTRA_WORK_ONLY = "workProfileOnly";
     public static final String EXTRA_WORK_ID = "workId";
+    public static final String EXTRA_PERSONAL_ONLY = "personalOnly";
 
     private static final String EXTRA_SORT_ORDER = "sortOrder";
     private static final String EXTRA_SHOW_SYSTEM = "showSystem";
@@ -236,6 +235,7 @@ public class ManageApplications extends InstrumentedFragment
     private int mStorageType;
     private boolean mIsWorkOnly;
     private int mWorkUserId;
+    private boolean mIsPersonalOnly;
     private View mEmptyView;
     private int mFilterType;
 
@@ -310,6 +310,7 @@ public class ManageApplications extends InstrumentedFragment
         }
         final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
         mFilter = appFilterRegistry.get(appFilterRegistry.getDefaultFilterType(mListType));
+        mIsPersonalOnly = args != null ? args.getBoolean(EXTRA_PERSONAL_ONLY) : false;
         mIsWorkOnly = args != null ? args.getBoolean(EXTRA_WORK_ONLY) : false;
         mWorkUserId = args != null ? args.getInt(EXTRA_WORK_ID) : NO_USER_SPECIFIED;
         mExpandSearch = activity.getIntent().getBooleanExtra(EXTRA_EXPAND_SEARCH_VIEW, false);
@@ -407,8 +408,22 @@ public class ManageApplications extends InstrumentedFragment
 
         final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
         mFilterAdapter.enableFilter(appFilterRegistry.getDefaultFilterType(mListType));
+
+        AppFilter compositeFilter = getCompositeFilter(mListType, mStorageType, mVolumeUuid);
+        if (mIsWorkOnly) {
+            compositeFilter = new CompoundFilter(compositeFilter, ApplicationsState.FILTER_WORK);
+        }
+        if (mIsPersonalOnly) {
+            compositeFilter = new CompoundFilter(compositeFilter,
+                    ApplicationsState.FILTER_PERSONAL);
+        }
+        if (compositeFilter != null) {
+            mApplications.setCompositeFilter(compositeFilter);
+        }
+
         if (mListType == LIST_TYPE_MAIN) {
-            if (UserManager.get(getActivity()).getUserProfiles().size() > 1) {
+            if (UserManager.get(getActivity()).getUserProfiles().size() > 1 && !mIsWorkOnly
+                    && !mIsPersonalOnly) {
                 mFilterAdapter.enableFilter(FILTER_APPS_PERSONAL);
                 mFilterAdapter.enableFilter(FILTER_APPS_WORK);
             }
@@ -421,15 +436,6 @@ public class ManageApplications extends InstrumentedFragment
         }
         if (mListType == LIST_TYPE_HIGH_POWER) {
             mFilterAdapter.enableFilter(FILTER_APPS_POWER_WHITELIST_ALL);
-        }
-
-        AppFilter compositeFilter = getCompositeFilter(mListType, mStorageType, mVolumeUuid);
-        if (mIsWorkOnly) {
-            final AppFilter workFilter = appFilterRegistry.get(FILTER_APPS_WORK).getFilter();
-            compositeFilter = new CompoundFilter(compositeFilter, workFilter);
-        }
-        if (compositeFilter != null) {
-            mApplications.setCompositeFilter(compositeFilter);
         }
     }
 
@@ -451,9 +457,11 @@ public class ManageApplications extends InstrumentedFragment
             return new CompoundFilter(ApplicationsState.FILTER_MOVIES, filter);
         } else if (listType == LIST_TYPE_PHOTOGRAPHY) {
             return new CompoundFilter(ApplicationsState.FILTER_PHOTOS, filter);
+        } else {
+            final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
+            return appFilterRegistry.get(
+                    appFilterRegistry.getDefaultFilterType(listType)).getFilter();
         }
-
-        return null;
     }
 
     @Override
@@ -510,7 +518,7 @@ public class ManageApplications extends InstrumentedFragment
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
         outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
-        if(mSearchView != null) {
+        if (mSearchView != null) {
             outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
         }
         if (mApplications != null) {
@@ -1168,7 +1176,7 @@ public class ManageApplications extends InstrumentedFragment
                 mSearchFilter = new SearchFilter();
             }
             // If we haven't load apps list completely, don't filter anything.
-            if(mOriginalEntries == null) {
+            if (mOriginalEntries == null) {
                 Log.w(TAG, "Apps haven't loaded completely yet, so nothing can be filtered");
                 return;
             }
@@ -1518,38 +1526,4 @@ public class ManageApplications extends InstrumentedFragment
             }
         }
     }
-
-    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mLoader;
-
-        private SummaryProvider(Context context, SummaryLoader loader) {
-            mContext = context;
-            mLoader = loader;
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                new InstalledAppCounter(mContext, InstalledAppCounter.IGNORE_INSTALL_REASON,
-                        mContext.getPackageManager()) {
-                    @Override
-                    protected void onCountComplete(int num) {
-                        mLoader.setSummary(SummaryProvider.this,
-                                mContext.getString(R.string.apps_summary, num));
-                    }
-                }.execute();
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
 }

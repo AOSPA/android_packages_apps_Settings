@@ -32,7 +32,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.DeviceConfig;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -333,8 +332,6 @@ public class AccessibilitySettings extends DashboardFragment {
 
         List<AccessibilityServiceInfo> installedServices =
                 accessibilityManager.getInstalledAccessibilityServiceList();
-        List<AccessibilityServiceInfo> enabledServiceInfos = accessibilityManager
-                .getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
         Set<ComponentName> enabledServices = AccessibilityUtils.getEnabledServicesFromSettings(
                 getActivity());
         List<String> permittedServices = mDpm.getPermittedAccessibilityServices(
@@ -377,8 +374,7 @@ public class AccessibilitySettings extends DashboardFragment {
                 description = getString(R.string.accessibility_service_default_description);
             }
 
-            if (serviceEnabled && AccessibilityUtils.hasServiceCrashed(
-                    packageName, serviceInfo.name, enabledServiceInfos)) {
+            if (serviceEnabled && info.crashed) {
                 // Update the summaries for services that have crashed.
                 preference.setSummary(R.string.accessibility_summary_state_stopped);
                 description = getString(R.string.accessibility_description_state_stopped);
@@ -506,6 +502,6 @@ public class AccessibilitySettings extends DashboardFragment {
         }
     }
 
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_settings);
 }
