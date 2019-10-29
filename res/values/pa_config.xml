@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2016-2019 Paranoid Android
+<!--
+     Copyright 2019 The ParanoidAndroid Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,15 +16,12 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- Paranoid Android version -->
-    <string name="pa_version">Paranoid Android version</string>
 
-    <string name="reset_all_settings">RESET ALL</string>
-    <string name="reset_selected_settings">RESET SELECTED</string>
-    <string name="reset_settings_title">Feature preferences</string>
-    <string name="reset_settings_summary">Reset Paranoid Android feature preferences</string>
-    <string name="keywords_settings_reset">reset</string>
+    <!-- Whether if device supports dolby audio or not -->
+    <bool name="device_supports_dolby_audio">false</bool>
+    <!-- Path for android:targetPackage -->
+    <config name="dolby_targetPackage">""</config>
+    <!-- Path for android:targetClass -->
+    <config name="dolby_targetClass">""</config>
 
-    <!-- Dolby Audio -->
-    <string name="dolby_audio_title">Dolby Atmos</string>
 </resources>
