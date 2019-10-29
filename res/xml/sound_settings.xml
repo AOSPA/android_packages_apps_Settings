@@ -197,6 +197,14 @@
           android:summary="%s"/>
     </PreferenceCategory>
 
+    <Preference
+      android:key="dolby_atmos"
+      android:title="@string/dolby_atmos_title"
+      <intent
+        android:targetPackage="@string/dolby_targetPackage"
+        android:targetClass="@string/dolby_targetClass" />
+    </Preference>
+
     <com.android.settings.widget.WorkOnlyCategory
         android:key="sound_work_settings_section"
         android:title="@string/sound_work_settings"
