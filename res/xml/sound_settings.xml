@@ -197,6 +197,17 @@
           android:summary="%s"/>
     </PreferenceCategory>
 
+    <PreferenceCategory>
+        <Preference
+          android:key="dolby_atmos"
+          android:title="@string/dolby_atmos_title"
+          android:visibility="gone">
+          <intent
+               android:targetPackage="com.oneplus.sound.tuner"
+               android:targetClass="com.oneplus.sound.tuner.panoramic.DolbyPanoramicSoundActivity" />
+          </Preference>
+    </PreferenceCategory>
+
     <com.android.settings.widget.WorkOnlyCategory
         android:key="sound_work_settings_section"
         android:title="@string/sound_work_settings"
