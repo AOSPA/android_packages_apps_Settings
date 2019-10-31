@@ -15,19 +15,28 @@
      limitations under the License.
 -->
 
-
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/theme_preview_card_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
     android:maxHeight="@dimen/preview_theme_max_height"
-    android:minHeight="@dimen/preview_theme_min_height"
-    android:paddingHorizontal="@dimen/preview_card_padding"
-    android:paddingTop="@dimen/preview_card_top_padding">
+    android:minHeight="@dimen/preview_theme_min_height" >
+
+    <ImageView
+        android:id="@+id/theme_preview_card_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/theme_preview_card_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/preview_card_padding"
+        android:paddingTop="@dimen/preview_card_top_padding"
+        android:clipToPadding="false" >
 
         <ViewStub
             android:id="@+id/theme_preview_top_bar"
@@ -100,4 +109,5 @@
             app:layout_constraintTop_toBottomOf="@+id/guideline"
             app:layout_constraintVertical_bias="0.5"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

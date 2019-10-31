@@ -428,20 +428,18 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
         private final List<Drawable> mAppIcons;
         private final String mLabel;
         private final Path mPath;
-        private final int mCornerRadius;
         private int[] mShapeIconIds = {
                 R.id.shape_preview_icon_0, R.id.shape_preview_icon_1, R.id.shape_preview_icon_2,
                 R.id.shape_preview_icon_3, R.id.shape_preview_icon_4, R.id.shape_preview_icon_5
         };
 
         ShapeOption(String packageName, String label, Path path,
-                @Dimension int cornerRadius, Drawable shapeDrawable,
+                Drawable shapeDrawable,
                 List<Drawable> appIcons) {
             addOverlayPackage(OVERLAY_CATEGORY_SHAPE, packageName);
             mLabel = label;
             mAppIcons = appIcons;
             mPath = path;
-            mCornerRadius = cornerRadius;
             Drawable background = shapeDrawable.getConstantState().newDrawable();
             Drawable foreground = shapeDrawable.getConstantState().newDrawable();
             mShape = new LayerDrawable(new Drawable[]{background, foreground});
@@ -507,7 +505,7 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
 
         @Override
         public Builder buildStep(Builder builder) {
-            builder.setShapePath(mPath).setBottomSheetCornerRadius(mCornerRadius);
+            builder.setShapePath(mPath);
             for (Drawable appIcon : mAppIcons) {
                 builder.addShapePreviewIcon(appIcon);
             }

@@ -77,7 +77,7 @@ public class ShapeOptionsProvider extends ThemeComponentOptionProvider<ShapeOpti
                 PackageManager pm = mContext.getPackageManager();
                 String label = pm.getApplicationInfo(overlayPackage, 0).loadLabel(pm).toString();
                 mOptions.add(new ShapeOption(overlayPackage, label, path,
-                        loadCornerRadius(overlayPackage), shapeDrawable, getShapedIcons(path)));
+                        shapeDrawable, getShapedIcons(path)));
             } catch (NameNotFoundException | NotFoundException e) {
                 Log.w(TAG, String.format("Couldn't load shape overlay %s, will skip it",
                         overlayPackage), e);
@@ -90,9 +90,6 @@ public class ShapeOptionsProvider extends ThemeComponentOptionProvider<ShapeOpti
         Path path = loadPath(system, ANDROID_PACKAGE);
         ShapeDrawable shapeDrawable = createShapeDrawable(path);
         mOptions.add(new ShapeOption(null, mContext.getString(R.string.default_theme_title), path,
-                system.getDimensionPixelOffset(
-                    system.getIdentifier(ResourceConstants.CONFIG_CORNERRADIUS,
-                        "dimen", ResourceConstants.ANDROID_PACKAGE)),
                 shapeDrawable, getShapedIcons(path)));
     }
 
@@ -134,16 +131,5 @@ public class ShapeOptionsProvider extends ThemeComponentOptionProvider<ShapeOpti
             return PathParser.createPathFromPathData(shape);
         }
         return null;
-    }
-
-    @Dimension
-    private int loadCornerRadius(String packageName)
-            throws NameNotFoundException, NotFoundException {
-
-        Resources overlayRes =
-                mContext.getPackageManager().getResourcesForApplication(
-                        packageName);
-        return overlayRes.getDimensionPixelOffset(overlayRes.getIdentifier(
-                CONFIG_CORNERRADIUS, "dimen", packageName));
     }
 }
