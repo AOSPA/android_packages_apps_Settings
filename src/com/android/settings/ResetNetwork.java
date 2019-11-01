@@ -236,7 +236,7 @@ public class ResetNetwork extends InstrumentedFragment {
         }
         ContentResolver resolver = context.getContentResolver();
         return Settings.Global.getInt(resolver, Global.EUICC_PROVISIONED, 0) != 0
-                || Settings.Global.getInt(resolver, Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
+                || Settings.Global.getInt(resolver, Global.DEVELOPMENT_SETTINGS_ENABLED, 1) != 0;
     }
 
     @Override

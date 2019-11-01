@@ -231,7 +231,7 @@ public class MobileNetworkUtils {
         final boolean euiccProvisioned =
                 Settings.Global.getInt(cr, Settings.Global.EUICC_PROVISIONED, 0) != 0;
         final boolean inDeveloperMode =
-                Settings.Global.getInt(cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
+                Settings.Global.getInt(cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1) != 0;
 
         return (inDeveloperMode || euiccProvisioned
                 || (!esimIgnoredDevice && enabledEsimUiByDefault && inEsimSupportedCountries));

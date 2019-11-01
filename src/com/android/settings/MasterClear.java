@@ -383,7 +383,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
         ContentResolver cr = context.getContentResolver();
         return Settings.Global.getInt(cr, Settings.Global.EUICC_PROVISIONED, 0) != 0
                 || Settings.Global.getInt(
-                cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
+                cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1) != 0;
     }
 
     @VisibleForTesting
