@@ -379,10 +379,13 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
             seekbar.setProgressBackgroundTintList(seekbarTintList);
             // Disable seekbar
             seekbar.setOnTouchListener((view, motionEvent) -> true);
+
+            int iconFgColor = res.getColor(R.color.tile_enabled_icon_color, null);
             if (!mIcons.isEmpty() && mShapeDrawable != null) {
                 for (int i = 0; i < COLOR_TILE_IDS.length; i++) {
                     Drawable icon = mIcons.get(COLOR_TILES_ICON_IDS[i][1]).getConstantState()
                             .newDrawable();
+                    icon.setTint(iconFgColor);
                     //TODO: load and set the shape.
                     Drawable bgShape = mShapeDrawable.getConstantState().newDrawable();
                     bgShape.setTint(accentColor);
