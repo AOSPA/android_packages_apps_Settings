@@ -264,18 +264,16 @@ public class DefaultThemeProvider extends ResourcesApkProvider implements ThemeB
             builder.setTitle(mContext.getString(R.string.default_theme_title));
         }
 
-        String colorOverlayPackage = getOverlayPackage(COLOR_PREFIX, DEFAULT_THEME_NAME);
-
         try {
+            String colorOverlayPackage = getOverlayPackage(COLOR_PREFIX, DEFAULT_THEME_NAME);
             mOverlayProvider.addColorOverlay(builder, colorOverlayPackage);
         } catch (NameNotFoundException | NotFoundException e) {
             Log.d(TAG, "Didn't find color overlay for default theme, will use system default");
             mOverlayProvider.addSystemDefaultColor(builder);
         }
 
-        String fontOverlayPackage = getOverlayPackage(FONT_PREFIX, DEFAULT_THEME_NAME);
-
         try {
+            String fontOverlayPackage = getOverlayPackage(FONT_PREFIX, DEFAULT_THEME_NAME);
             mOverlayProvider.addFontOverlay(builder, fontOverlayPackage);
         } catch (NameNotFoundException | NotFoundException e) {
             Log.d(TAG, "Didn't find font overlay for default theme, will use system default");
