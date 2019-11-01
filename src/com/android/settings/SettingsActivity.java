@@ -61,7 +61,6 @@ import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.sim.SimSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -577,25 +576,6 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         Log.d(LOG_TAG, "Switching to fragment " + fragmentName);
-        IExtTelephony extTelephony =
-                IExtTelephony.Stub.asInterface(ServiceManager.getService("extphone"));
-        try {
-            if (fragmentName.equals(SimSettings.class.getName()) && extTelephony != null &&
-                    extTelephony.isVendorApkAvailable("com.qualcomm.qti.simsettings")) {
-                Log.i(LOG_TAG, "switchToFragment, launch simSettings  ");
-                Intent provisioningIntent =
-                        new Intent("com.android.settings.sim.SIM_SUB_INFO_SETTINGS");
-                if (!getPackageManager().queryIntentActivities(provisioningIntent, 0).isEmpty()) {
-                    startActivity(provisioningIntent);
-                }
-                finish();
-                return null;
-            }
-        } catch (RemoteException e) {
-            // could not connect to extphone service, launch the default activity
-            Log.i(LOG_TAG,
-                    "couldn't connect to extphone service, launch the default sim cards activity");
-        }
 
         if (validate && !isValidFragment(fragmentName)) {
             throw new IllegalArgumentException("Invalid fragment for this activity: "
@@ -659,11 +639,6 @@ public class SettingsActivity extends SettingsBaseActivity
                         Settings.ConnectedDeviceDashboardActivity.class.getName()),
                 !UserManager.isDeviceInDemoMode(this) /* enabled */,
                 isAdmin) || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                       Settings.SimSettingsActivity.class.getName()),
-                Utils.showSimCardTile(this), isAdmin)
-                || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.PowerUsageSummaryActivity.class.getName()),
