@@ -33,10 +33,6 @@ import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.Message;
 import android.os.RecoverySystem;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -71,12 +67,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
  * This is the confirmation screen.
  */
 public class ResetNetworkConfirm extends InstrumentedFragment {
-
-    private static final int MSG_RESTORE_APN_START = 1;
-    private static final int MSG_RESTORE_APN_COMPLETE = 2;
-    private HandlerThread mApnThread;
-    private RestoreApnHandler mRestoreApnHandler;
-    private RestoreCompleteHandler mRestoreCompleteHandler;
 
     @VisibleForTesting View mContentView;
     @VisibleForTesting boolean mEraseEsim;
@@ -205,51 +195,6 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         }
     }
 
-    private class RestoreCompleteHandler extends Handler {
-        private Context mContext;
-        public RestoreCompleteHandler(Context context) {
-            super();
-            mContext = context;
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch(msg.what) {
-                case MSG_RESTORE_APN_COMPLETE:
-                    Toast.makeText(mContext, R.string.reset_network_complete_toast,
-                            Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }
-    }
-
-    private class RestoreApnHandler extends Handler {
-        private Context mContext;
-        private Handler mUiHandler;
-
-        public RestoreApnHandler(Looper looper, Context context,
-                                 RestoreCompleteHandler handler) {
-            super(looper);
-            mContext = context;
-            this.mUiHandler = handler;
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch(msg.what) {
-                case MSG_RESTORE_APN_START:
-                    Uri uri = Uri.parse(ApnSettings.RESTORE_CARRIERS_URI);
-                    if (SubscriptionManager.isUsableSubIdValue(mSubId)) {
-                        uri = Uri.withAppendedPath(uri, "subId/" + String.valueOf(mSubId));
-                    }
-                    ContentResolver resolver = mContext.getContentResolver();
-                    resolver.delete(uri, null, null);
-                    mUiHandler.sendEmptyMessage(MSG_RESTORE_APN_COMPLETE);
-                    break;
-            }
-        }
-    }
-
     private ProgressDialog getProgressDialog(Context context) {
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setIndeterminate(true);
@@ -263,23 +208,14 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
      * Restore APN settings to default.
      */
     private void restoreDefaultApn(Context context) {
-        if (mApnThread == null) {
-            mApnThread = new HandlerThread("restore default apn");
-            if (mApnThread == null) {
-                Toast.makeText(context, R.string.reset_default_apn_failed,
-                        Toast.LENGTH_SHORT).show();
-                return;
-            }
-            mApnThread.start();
+        Uri uri = Uri.parse(ApnSettings.RESTORE_CARRIERS_URI);
+
+        if (SubscriptionManager.isUsableSubIdValue(mSubId)) {
+            uri = Uri.withAppendedPath(uri, "subId/" + String.valueOf(mSubId));
         }
-        if (mRestoreCompleteHandler == null) {
-            mRestoreCompleteHandler = new RestoreCompleteHandler(context);
-        }
-        if (mRestoreApnHandler == null) {
-            mRestoreApnHandler = new RestoreApnHandler(
-                    mApnThread.getLooper(), context, mRestoreCompleteHandler);
-        }
-        mRestoreApnHandler.sendEmptyMessage(MSG_RESTORE_APN_START);
+
+        ContentResolver resolver = context.getContentResolver();
+        resolver.delete(uri, null, null);
     }
 
     /**
@@ -344,9 +280,6 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         }
         if (mAlertDialog != null) {
             mAlertDialog.dismiss();
-        }
-        if (mApnThread != null) {
-            mApnThread.quit();
         }
         super.onDestroy();
     }
