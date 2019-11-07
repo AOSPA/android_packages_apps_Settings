@@ -123,6 +123,12 @@
         android:summary="@string/quick_settings_quick_pull_down_summary"
         android:defaultValue="true" />
 
+    <co.aospa.framework.preference.SecureSettingSwitchPreference
+        android:key="advanced_reboot"
+        android:title="@string/global_actions_advanced_reboot_title"
+        android:summary="@string/global_actions_advanced_reboot_summary"
+        android:defaultValue="false" />
+
     <Preference
         android:key="offscreen_gesture"
         android:title="@string/offscreen_gesture_title"
