@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.preference.Preference;
@@ -44,6 +45,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -85,7 +87,7 @@ public class DashboardFragmentTest {
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "injected_tile_key");
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mDashboardCategory = new DashboardCategory("key");
-        mDashboardCategory.addTile(new Tile(mActivityInfo, mDashboardCategory.key));
+        mDashboardCategory.addTile(new ActivityTile(mActivityInfo, mDashboardCategory.key));
         mTestFragment = new TestFragment(RuntimeEnvironment.application);
         when(mFakeFeatureFactory.dashboardFeatureProvider
                 .getTilesForCategory(nullable(String.class)))
@@ -240,14 +242,28 @@ public class DashboardFragmentTest {
     }
 
     @Test
-    public void checkUiBlocker_hasUiBlocker_controllerNotNull() {
+    public void checkUiBlocker_hasUiBlockerAndControllerIsAvailable_controllerNotNull() {
+        final BlockingSlicePrefController controller =
+                new BlockingSlicePrefController(mContext, "pref_key");
+        controller.setSliceUri(Uri.parse("testUri"));
+        mTestFragment.mBlockerController = null;
+        mControllers.add(new TestPreferenceController(mContext));
+        mControllers.add(controller);
+
+        mTestFragment.checkUiBlocker(mControllers);
+
+        assertThat(mTestFragment.mBlockerController).isNotNull();
+    }
+
+    @Test
+    public void checkUiBlocker_hasUiBlockerAndControllerIsNotAvailable_controllerIsNull() {
         mTestFragment.mBlockerController = null;
         mControllers.add(new TestPreferenceController(mContext));
         mControllers.add(new BlockingSlicePrefController(mContext, "pref_key"));
 
         mTestFragment.checkUiBlocker(mControllers);
 
-        assertThat(mTestFragment.mBlockerController).isNotNull();
+        assertThat(mTestFragment.mBlockerController).isNull();
     }
 
     public static class TestPreferenceController extends AbstractPreferenceController

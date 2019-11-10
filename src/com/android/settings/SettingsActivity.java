@@ -54,7 +54,6 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
-import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
@@ -62,7 +61,6 @@ import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.sim.SimSettings;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -282,7 +280,7 @@ public class SettingsActivity extends SettingsBaseActivity
             launchSettingFragment(initialFragmentName, intent);
         }
 
-        final boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
+        final boolean deviceProvisioned = WizardManagerHelper.isDeviceProvisioned(this);
 
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
@@ -578,31 +576,12 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         Log.d(LOG_TAG, "Switching to fragment " + fragmentName);
-        IExtTelephony extTelephony =
-                IExtTelephony.Stub.asInterface(ServiceManager.getService("extphone"));
-        try {
-            if (fragmentName.equals(SimSettings.class.getName()) && extTelephony != null &&
-                    extTelephony.isVendorApkAvailable("com.qualcomm.qti.simsettings")) {
-                Log.i(LOG_TAG, "switchToFragment, launch simSettings  ");
-                Intent provisioningIntent =
-                        new Intent("com.android.settings.sim.SIM_SUB_INFO_SETTINGS");
-                if (!getPackageManager().queryIntentActivities(provisioningIntent, 0).isEmpty()) {
-                    startActivity(provisioningIntent);
-                }
-                finish();
-                return null;
-            }
-        } catch (RemoteException e) {
-            // could not connect to extphone service, launch the default activity
-            Log.i(LOG_TAG,
-                    "couldn't connect to extphone service, launch the default sim cards activity");
-        }
 
         if (validate && !isValidFragment(fragmentName)) {
             throw new IllegalArgumentException("Invalid fragment for this activity: "
                     + fragmentName);
         }
-        Fragment f = Fragment.instantiate(this, fragmentName, args);
+        Fragment f = Utils.getTargetFragment(this, fragmentName, args);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_content, f);
         if (titleResId > 0) {
@@ -662,11 +641,6 @@ public class SettingsActivity extends SettingsBaseActivity
                 isAdmin) || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                       Settings.SimSettingsActivity.class.getName()),
-                Utils.showSimCardTile(this), isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.PowerUsageSummaryActivity.class.getName()),
                 mBatteryPresent, isAdmin) || somethingChanged;
 
@@ -686,10 +660,6 @@ public class SettingsActivity extends SettingsBaseActivity
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
                         Settings.DevelopmentSettingsDashboardActivity.class.getName()),
                 showDev, isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,
-                UserBackupSettingsActivity.class.getName()), true, isAdmin)
                 || somethingChanged;
 
         somethingChanged = setTileEnabled(changedList, new ComponentName(packageName,

@@ -36,6 +36,8 @@ import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -103,7 +105,6 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
         return nonIndexableKeys;
     }
 
-    @Override
     public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllersFromCode =
                 createPreferenceControllers(context);

@@ -43,7 +43,6 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.wifi.tether.WifiTetherPreferenceController;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.search.SearchIndexable;
@@ -462,7 +461,7 @@ public class TetherSettings extends RestrictedSettingsFragment
         }
     };
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(

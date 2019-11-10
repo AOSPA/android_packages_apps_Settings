@@ -49,7 +49,10 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -66,6 +69,7 @@ import android.widget.TextView;
 
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
@@ -83,8 +87,6 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * The class for allowing UIs like {@link WifiDialog} and {@link WifiConfigUiBase} to
@@ -364,6 +366,7 @@ public class WifiConfigController implements TextWatcher,
                         mAccessPoint.isCarrierAp() ? View.GONE : View.VISIBLE);
                 advancedTogglebox.setOnCheckedChangeListener(this);
                 advancedTogglebox.setChecked(showAdvancedFields);
+                setAdvancedOptionAccessibilityString(showAdvancedFields);
                 mView.findViewById(R.id.wifi_advanced_fields)
                         .setVisibility(showAdvancedFields ? View.VISIBLE : View.GONE);
                 if (mAccessPoint.isCarrierAp()) {
@@ -584,6 +587,7 @@ public class WifiConfigController implements TextWatcher,
 
     void showWarningMessagesIfAppropriate() {
         mView.findViewById(R.id.no_ca_cert_warning).setVisibility(View.GONE);
+        mView.findViewById(R.id.no_user_cert_warning).setVisibility(View.GONE);
         mView.findViewById(R.id.no_domain_warning).setVisibility(View.GONE);
         mView.findViewById(R.id.ssid_too_long_warning).setVisibility(View.GONE);
 
@@ -609,6 +613,14 @@ public class WifiConfigController implements TextWatcher,
                 // without restricting the server domain that these certificates can be used to
                 // validate.
                 mView.findViewById(R.id.no_domain_warning).setVisibility(View.VISIBLE);
+            }
+        }
+
+        if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B &&
+                mEapMethodSpinner.getSelectedItemPosition() == WIFI_EAP_METHOD_TLS) {
+            String userCertSelection = (String) mEapUserCertSpinner.getSelectedItem();
+            if (userCertSelection.equals(mUnspecifiedCertString)) {
+                mView.findViewById(R.id.no_user_cert_warning).setVisibility(View.VISIBLE);
             }
         }
     }
@@ -1656,21 +1668,17 @@ public class WifiConfigController implements TextWatcher,
                 ((EditText) mPasswordView).setSelection(pos);
             }
         } else if (view.getId() == R.id.wifi_advanced_togglebox) {
-            final View advancedToggle = mView.findViewById(R.id.wifi_advanced_toggle);
             final int toggleVisibility;
             final int stringID;
             if (isChecked) {
                 toggleVisibility = View.VISIBLE;
-                stringID = R.string.wifi_advanced_toggle_description_expanded;
-
                 // Hide the SoftKeyboard temporary to let user can see most of the expanded items.
                 hideSoftKeyboard(mView.getWindowToken());
             } else {
                 toggleVisibility = View.GONE;
-                stringID = R.string.wifi_advanced_toggle_description_collapsed;
             }
             mView.findViewById(R.id.wifi_advanced_fields).setVisibility(toggleVisibility);
-            advancedToggle.setContentDescription(mContext.getString(stringID));
+            setAdvancedOptionAccessibilityString(isChecked);
         }
     }
 
@@ -1805,6 +1813,8 @@ public class WifiConfigController implements TextWatcher,
         mView.findViewById(R.id.hidden_settings_field).setVisibility(View.VISIBLE);
         ((CheckBox) mView.findViewById(R.id.wifi_advanced_togglebox))
                 .setOnCheckedChangeListener(this);
+        // Set correct accessibility strings.
+        setAdvancedOptionAccessibilityString(false /* showAdvancedFields */);
     }
 
     /**
@@ -1894,5 +1904,27 @@ public class WifiConfigController implements TextWatcher,
         final InputMethodManager inputMethodManager = mContext.getSystemService(
                 InputMethodManager.class);
         inputMethodManager.hideSoftInputFromWindow(windowToken, 0 /* flags */);
+    }
+
+    private void setAdvancedOptionAccessibilityString(boolean showAdvancedFields) {
+        final CheckBox advancedToggleBox = mView.findViewById(R.id.wifi_advanced_togglebox);
+        advancedToggleBox.setAccessibilityDelegate(new AccessibilityDelegate() {
+            @Override
+            public void onInitializeAccessibilityNodeInfo(
+                    View v, AccessibilityNodeInfo info) {
+                super.onInitializeAccessibilityNodeInfo(v, info);
+                // To let TalkBack don't pronounce checked/unchecked.
+                info.setCheckable(false /* checkable */);
+                // To let TalkBack don't pronounce CheckBox.
+                info.setClassName(null /* className */);
+                final CharSequence accessibilityDoubleTapExtend = mContext.getString(
+                        showAdvancedFields ? R.string.wifi_advanced_toggle_description_expanded
+                                : R.string.wifi_advanced_toggle_description_collapsed);
+                // Customize TalkBack's pronunciation which been appended to "Double-tap to".
+                final AccessibilityAction customClick = new AccessibilityAction(
+                        AccessibilityNodeInfo.ACTION_CLICK, accessibilityDoubleTapExtend);
+                info.addAction(customClick);
+            }
+        });
     }
 }

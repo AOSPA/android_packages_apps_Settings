@@ -22,7 +22,7 @@ import android.content.res.Resources;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public class PreviouslyConnectedDeviceDashboardFragment extends DashboardFragmen
     /**
      * For Search.
      */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
         @Override
         public List<SearchIndexableRaw> getRawDataToIndex(

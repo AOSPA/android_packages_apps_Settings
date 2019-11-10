@@ -25,6 +25,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.trust.TrustManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
@@ -51,6 +52,12 @@ import java.util.concurrent.Executor;
  */
 public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     public static final String TAG = ConfirmDeviceCredentialActivity.class.getSimpleName();
+
+    /**
+     * If the intent is sent from {@link com.android.systemui.keyguard.WorkLockActivity} then
+     * check for device policy management flags.
+     */
+    public static final String EXTRA_FROM_WORK_LOCK_ACTIVITY = "from_work_lock_activity";
 
     // The normal flow that apps go through
     private static final int CREDENTIAL_NORMAL = 1;
@@ -90,8 +97,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     private TrustManager mTrustManager;
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private Handler mHandler = new Handler(Looper.getMainLooper());
-    private boolean mIsFallback; // BiometricPrompt fallback
-    private boolean mCCLaunched;
+    private Context mContext;
+    private boolean mFromWorkLockActivity;
 
     private String mTitle;
     private String mDetails;
@@ -108,10 +115,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             if (!mGoingToBackground) {
                 if (errorCode == BiometricPrompt.BIOMETRIC_ERROR_USER_CANCELED
                         || errorCode == BiometricPrompt.BIOMETRIC_ERROR_CANCELED) {
-                    if (mIsFallback) {
-                        mBiometricManager.onConfirmDeviceCredentialError(
-                                errorCode, getStringForError(errorCode));
-                    }
                     finish();
                 } else {
                     // All other errors go to some version of CC
@@ -127,10 +130,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     mUserId);
             ConfirmDeviceCredentialUtils.checkForPendingIntent(
                     ConfirmDeviceCredentialActivity.this);
-
-            if (mIsFallback) {
-                mBiometricManager.onConfirmDeviceCredentialSuccess();
-            }
 
             setResult(Activity.RESULT_OK);
             finish();
@@ -159,6 +158,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         mLockPatternUtils = new LockPatternUtils(this);
 
         Intent intent = getIntent();
+        mContext = this;
+        mFromWorkLockActivity = intent.getBooleanExtra(EXTRA_FROM_WORK_LOCK_ACTIVITY, false);
         mTitle = intent.getStringExtra(KeyguardManager.EXTRA_TITLE);
         mDetails = intent.getStringExtra(KeyguardManager.EXTRA_DESCRIPTION);
         String alternateButton = intent.getStringExtra(
@@ -183,17 +184,11 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
         final LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
 
-        Bundle bpBundle =
-                intent.getBundleExtra(KeyguardManager.EXTRA_BIOMETRIC_PROMPT_BUNDLE);
-        if (bpBundle != null) {
-            mIsFallback = true;
-            mTitle = bpBundle.getString(BiometricPrompt.KEY_TITLE);
-            mDetails = bpBundle.getString(BiometricPrompt.KEY_SUBTITLE);
-        } else {
-            bpBundle = new Bundle();
-            bpBundle.putString(BiometricPrompt.KEY_TITLE, mTitle);
-            bpBundle.putString(BiometricPrompt.KEY_DESCRIPTION, mDetails);
-        }
+        final Bundle bpBundle = new Bundle();
+        mTitle = bpBundle.getString(BiometricPrompt.KEY_TITLE);
+        mDetails = bpBundle.getString(BiometricPrompt.KEY_SUBTITLE);
+        bpBundle.putString(BiometricPrompt.KEY_TITLE, mTitle);
+        bpBundle.putString(BiometricPrompt.KEY_DESCRIPTION, mDetails);
 
         boolean launchedBiometric = false;
         boolean launchedCDC = false;
@@ -206,7 +201,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         } else if (isManagedProfile && isInternalActivity()
                 && !lockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
             mCredentialMode = CREDENTIAL_MANAGED;
-            if (isBiometricAllowed(effectiveUserId, mUserId)) {
+            if (mFromWorkLockActivity && isBiometricAllowed(effectiveUserId, mUserId)) {
                 showBiometricPrompt(bpBundle);
                 launchedBiometric = true;
             } else {
@@ -257,12 +252,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 }
             }
 
-            if (mIsFallback && !mCCLaunched) {
-                mBiometricManager.onConfirmDeviceCredentialError(
-                        BiometricConstants.BIOMETRIC_ERROR_CANCELED,
-                        getString(com.android.internal.R.string.biometric_error_user_canceled));
-            }
-
             finish();
         } else {
             mGoingToBackground = false;
@@ -278,10 +267,36 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 || !mUserManager.isUserUnlocked(mUserId);
     }
 
+    /**
+     * TODO: Pass a list of disabled features to an internal BiometricPrompt API, so we can
+     * potentially show different modalities on multi-auth devices.
+     *
+     * @param effectiveUserId
+     * @return false if their exists one biometric on the device which is not disabled by the
+     * policy manager.
+     */
     private boolean isBiometricDisabledByAdmin(int effectiveUserId) {
         final int disabledFeatures =
-                mDevicePolicyManager.getKeyguardDisabledFeatures(null, effectiveUserId);
-        return (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_BIOMETRICS) != 0;
+            mDevicePolicyManager.getKeyguardDisabledFeatures(null, effectiveUserId);
+
+        final PackageManager pm = mContext.getPackageManager();
+        if (pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)
+            && (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT) == 0) {
+            Log.d(TAG,"Fingerprint enabled & allowed by device policy manager");
+            return false;
+        }
+        if (pm.hasSystemFeature(PackageManager.FEATURE_IRIS)
+            && (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_IRIS) == 0) {
+            Log.d(TAG,"Iris enabled & allowed by device policy manager");
+            return false;
+        }
+        if (pm.hasSystemFeature(PackageManager.FEATURE_FACE)
+            && (disabledFeatures & DevicePolicyManager.KEYGUARD_DISABLE_FACE) == 0) {
+            Log.d(TAG,"Face enabled & allowed by device policy manager");
+            return false;
+        }
+
+        return true;
     }
 
     private boolean isBiometricAllowed(int effectiveUserId, int realUserId) {
@@ -314,7 +329,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
      * Shows ConfirmDeviceCredentials for normal apps.
      */
     private void showConfirmCredentials() {
-        mCCLaunched = true;
         boolean launched = false;
         // The only difference between CREDENTIAL_MANAGED and CREDENTIAL_NORMAL is that for
         // CREDENTIAL_MANAGED, we launch the real confirm credential activity with an explicit

@@ -48,7 +48,6 @@ import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceCon
 import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -272,7 +271,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         return super.onOptionsItemSelected(menuItem);
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,

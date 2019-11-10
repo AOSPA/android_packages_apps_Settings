@@ -591,14 +591,8 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.system" />
-            <meta-data android:name="com.android.settings.order" android:value="-240"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.DateTimeSettings" />
+                android:value="com.android.settings.datetime.DateTimeSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -639,12 +633,6 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-260"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.system"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.language.LanguageAndInputSettings"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2144,34 +2132,8 @@
                 <action android:name="android.settings.CAST_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-6"/>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.device" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wfd.WifiDisplaySettings" />
-        </activity>
-
-        <activity
-            android:name="RadioInfo"
-            android:label="@string/phone_info_label"
-            android:process="com.android.phone">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name="BandMode"
-                  android:label="@string/band_mode_title"
-                  android:process="com.android.phone">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
         </activity>
 
         <activity android:name="Settings$TestingSettingsActivity" android:label="@string/testing">
@@ -2373,16 +2335,12 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.datausage.DataUsageSummary" />
         </activity>
         <activity
             android:name="Settings$MobileDataUsageListActivity"
-            android:label="@string/cellular_data_usage"
-            android:parentActivityName="Settings">
+            android:label="@string/cellular_data_usage">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MOBILE_DATA_USAGE" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2420,11 +2378,13 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.order" android:value="-45"/>
             <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.system" />
+                       android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.summary_uri"
+                       android:value="content://com.android.settings.dashboard.SummaryProvider/user" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.users.UserSettings" />
+                       android:value="com.android.settings.users.UserSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
+                       android:value="true" />
         </activity>
 
         <activity
@@ -2567,14 +2527,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-440"/>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.apps"/>
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.ConfigureNotificationSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2739,10 +2691,6 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.sim.SimSettings" />
         </activity>
-
-        <activity android:name=".sim.SimPreferenceDialog"
-            android:theme="@style/Theme.AlertDialog"
-            android:excludeFromRecents="true" />
 
         <activity
             android:name=".wifi.RequestToggleWiFiActivity"
@@ -2961,9 +2909,8 @@
         </activity-alias>
 
         <provider
-            android:name=".backup.BackupSettingsContentProvider"
-            android:authorities="com.android.settings.backup.BackupSettingsContentProvider"
-	    android:exported="true">
+            android:name=".dashboard.SummaryProvider"
+            android:authorities="com.android.settings.dashboard.SummaryProvider">
         </provider>
 
         <activity android:name=".backup.UserBackupSettingsActivity"
@@ -2982,7 +2929,7 @@
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.summary_uri"
-		       android:value="content://com.android.settings.backup.BackupSettingsContentProvider/summary" />
+		       android:value="content://com.android.settings.dashboard.SummaryProvider/backup" />
             <meta-data android:name="com.android.settings.order" android:value="-60"/>
         </activity>
 
@@ -3080,6 +3027,8 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+                       android:value="true"/>
         </service>
         <service
             android:name=".development.qstile.DevelopmentTiles$GPUProfiling"
@@ -3090,6 +3039,8 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+                       android:value="true"/>
         </service>
         <service
             android:name=".development.qstile.DevelopmentTiles$ForceRTL"
@@ -3100,6 +3051,8 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+                       android:value="true"/>
         </service>
         <service
             android:name=".development.qstile.DevelopmentTiles$AnimationSpeed"
@@ -3110,6 +3063,8 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+                       android:value="true"/>
         </service>
 
         <service
@@ -3121,6 +3076,8 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+                       android:value="true"/>
         </service>
 
         <service
@@ -3132,6 +3089,8 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+                       android:value="true"/>
         </service>
 
         <activity
@@ -3187,6 +3146,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.bluetooth.BluetoothDeviceDetailsFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity>
 
         <activity android:name=".panel.SettingsPanelActivity"
@@ -3298,6 +3259,9 @@
         </activity>
 
         <activity android:name=".homepage.contextualcards.ContextualCardFeedbackDialog"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
+
+        <activity android:name=".homepage.contextualcards.FaceReEnrollDialog"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
 
         <activity

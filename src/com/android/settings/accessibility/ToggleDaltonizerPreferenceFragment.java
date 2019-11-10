@@ -30,7 +30,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
+import com.android.settingslib.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -105,8 +105,9 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
 
     @Override
     protected void updateSwitchBarText(SwitchBar switchBar) {
-        switchBar.setSwitchBarText(R.string.accessibility_daltonizer_master_switch_title,
-                R.string.accessibility_daltonizer_master_switch_title);
+        final String switchBarText = getString(R.string.accessibility_service_master_switch_title,
+                getString(R.string.accessibility_display_daltonizer_preference_title));
+        switchBar.setSwitchBarText(switchBarText, switchBarText);
     }
 
     private void initPreferences() {
@@ -127,7 +128,7 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
         onPreferenceToggled(mPreferenceKey, isChecked);
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_daltonizer_settings);
 
 }

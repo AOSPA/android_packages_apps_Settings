@@ -25,8 +25,8 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.display.WallpaperPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.search.Indexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class WallpaperSuggestionActivity extends StyleSuggestionActivityBase imp
         return manager.getWallpaperId(WallpaperManager.FLAG_SYSTEM) > 0;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 private static final String SUPPORT_SEARCH_INDEX_KEY = "wallpaper_type";
 

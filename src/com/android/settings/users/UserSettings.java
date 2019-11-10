@@ -41,7 +41,6 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.ContactsContract;
-import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
@@ -64,10 +63,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.RestrictedLockUtils;
@@ -76,6 +73,8 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 import com.android.settingslib.search.SearchIndexable;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -227,7 +226,7 @@ public class UserSettings extends SettingsPreferenceFragment
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.user_settings);
         final Activity activity = getActivity();
-        if (!Utils.isDeviceProvisioned(activity)) {
+        if (!WizardManagerHelper.isDeviceProvisioned(activity)) {
             activity.finish();
             return;
         }
@@ -980,7 +979,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUser(Context context) {
         if ((mUserCaps.mCanAddUser || mUserCaps.mDisallowAddUserSetByAdmin)
-                && Utils.isDeviceProvisioned(context) && mUserCaps.mUserSwitcherEnabled) {
+                && WizardManagerHelper.isDeviceProvisioned(context)
+                && mUserCaps.mUserSwitcherEnabled) {
             mAddUser.setVisible(true);
             final boolean moreUsers = mUserManager.canAddMoreUsers();
             mAddUser.setEnabled(moreUsers && !mAddingUser && mUserManager.canSwitchUsers());
@@ -1197,31 +1197,7 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
-    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
-
-        private final Context mContext;
-        private final SummaryLoader mSummaryLoader;
-
-        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
-            mContext = context;
-            mSummaryLoader = summaryLoader;
-        }
-
-        @Override
-        public void setListening(boolean listening) {
-            if (listening) {
-                UserInfo info = mContext.getSystemService(UserManager.class).getUserInfo(
-                        UserHandle.myUserId());
-                mSummaryLoader.setSummary(this, mContext.getString(R.string.users_summary,
-                        info.name));
-            }
-        }
-    }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
-            (activity, summaryLoader) -> new SummaryProvider(activity, summaryLoader);
-
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.user_settings) {
 
                 @Override
