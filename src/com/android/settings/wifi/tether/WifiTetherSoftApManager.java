@@ -1,7 +1,10 @@
 package com.android.settings.wifi.tether;
 
+import android.net.wifi.WifiClient;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
+
+import java.util.List;
 
 /**
  * Wrapper for {@link android.net.wifi.WifiManager.SoftApCallback} to pass the robo test
@@ -18,18 +21,22 @@ public class WifiTetherSoftApManager {
         }
 
         @Override
-        public void onNumClientsChanged(int numClients) {
+        public void onConnectedClientsChanged(List<WifiClient> clients) {
             // Do nothing - we don't care about changing anything here.
         }
 
         @Override
         public void onStaConnected(String Macaddr, int numClients) {
-            mWifiTetherSoftApCallback.onNumClientsChanged(numClients);
+            // TODO(b/144386510): onNumClientsChanged is now onConnectedClientsChanged, and expects
+            // a list of changed clients.
+            //mWifiTetherSoftApCallback.onNumClientsChanged(numClients);
         }
 
         @Override
         public void onStaDisconnected(String Macaddr, int numClients) {
-            mWifiTetherSoftApCallback.onNumClientsChanged(numClients);
+            // TODO(b/144386510): onNumClientsChanged is now onConnectedClientsChanged, and expects
+            // a list of changed clients.
+            //mWifiTetherSoftApCallback.onNumClientsChanged(numClients);
         }
     };
     private Handler mHandler;
@@ -52,6 +59,11 @@ public class WifiTetherSoftApManager {
     public interface WifiTetherSoftApCallback {
         void onStateChanged(int state, int failureReason);
 
-        void onNumClientsChanged(int numClients);
+        /**
+         * Called when the connected clients to soft AP changes.
+         *
+         * @param clients the currently connected clients
+         */
+        void onConnectedClientsChanged(List<WifiClient> clients);
     }
 }
