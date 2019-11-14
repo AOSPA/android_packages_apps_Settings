@@ -35,6 +35,13 @@ LOCAL_PRIVILEGED_MODULE := true
 LOCAL_PRODUCT_MODULE := true
 LOCAL_OVERRIDES_PACKAGES := WallpaperPicker2
 
+ifneq (,$(wildcard frameworks/base))
+  LOCAL_PRIVATE_PLATFORM_APIS := true
+else
+  LOCAL_SDK_VERSION := system_current
+  LOCAL_STATIC_JAVA_LIBRARIES += libSharedWallpaper
+endif
+
 LOCAL_SRC_FILES := $(call all-java-files-under, $(WALLPAPER_PATH)/src) \
     $(call all-java-files-under, src) \
     $(call all-java-files-under, src_override)
