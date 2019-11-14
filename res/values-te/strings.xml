@@ -374,7 +374,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"యాప్‌లలో ముఖంతో అన్‌లాక్ ఉపయోగించేటప్పుడల్లా నిర్ధారణ దశ అవసరమవుతుంది"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"ముఖ డేటాను తొలగించు"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"\"ముఖంతో అన్‌లాక్\"‌ను సెటప్ చేయి"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"మీ పరికరాన్ని అన్‌లాక్ చేయడానికి, యాప్‌లకు సైన్ ఇన్ చేయడానికి, చెల్లింపులను నిర్ధారించడానికి ముఖంతో అన్‌లాక్‌ను ఉపయోగించండి.\n\nఅలాగే, వీటిని గుర్తుంచుకోండి:\nమీరు అనుకోకుండా ఫోన్ వైపు చూసినా కూడా అన్‌లాక్ అయ్యే అవకాశం ఉంది.\n\nమీ కళ్లు మూసి ఉన్నా కూడా, మీ ముఖాన్ని స్క్రీన్ వైపు చూపితే, ఇత‌రులు కూడా మీ ఫోన్‌ను అన్‌లాక్ చేయగలుగుతారు.\n\nమీలాంటి రూపం ఉన్న వ్యక్తులు, ఉదాహ‌ర‌ణ‌కు, మీ క‌వ‌ల తోబుట్టువు మీ ఫోన్‌ను అన్‌లాక్ చేయ‌గ‌లిగే అవకాశం ఉంది."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"మీ పరికరాన్ని అన్‌లాక్ చేయడానికి, యాప్‌లకు సైన్ ఇన్ చేయడానికి, చెల్లింపులను నిర్ధారించడానికి ముఖంతో అన్‌లాక్‌ను ఉపయోగించండి.\n\nఅలాగే, వీటిని గుర్తుంచుకోండి:\nమీరు అనుకోకుండా ఫోన్ వైపు చూసినా కూడా అన్‌లాక్ అయ్యే అవకాశం ఉంది.\n\nమీ కళ్లు తెరిచి ఉన్న‌ప్పుడు, మీ ముఖాన్ని స్క్రీన్ వైపు చూపితే, ఇత‌రులు కూడా మీ ఫోన్‌ను అన్‌లాక్ చేయగలుగుతారు.\n\nమీలాంటి రూపం ఉన్న వ్యక్తులు, ఉదాహ‌ర‌ణ‌కు, మీ క‌వ‌ల తోబుట్టువు మీ ఫోన్‌ను అన్‌లాక్ చేయ‌గ‌లిగే అవకాశం ఉంది."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"ముఖ డేటాను తొలగించాలా?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"ఫేస్ అన్‌లాక్ కోసం ఉపయోగించబడే ముఖానికి సంబంధించిన డేటా శాశ్వతంగా, సురక్షితంగా తొలగించబడుతుంది. తీసివేసిన తర్వాత, మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి, యాప్‌లకు సైన్ ఇన్ చేయడానికి, అలాగే చెల్లింపులను నిర్ధారించడానికి మీకు మీ PIN, ఆకృతి లేదా పాస్‌వర్డ్ అవసరం అవుతాయి."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి ఫేస్ అన్‌లాక్‌ను ఉపయోగించండి"</string>
@@ -2511,8 +2511,7 @@
     <string name="tts_play" msgid="2628469503798633884">"ప్లే చేయి"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"ఆధారాల నిల్వ"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"సర్టిఫికెట్ ఇన్‌స్టాల్ చేయండి"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"నిల్వ నుండి స‌ర్టిఫికెట్‌ల‌ను ఇన్‌స్టాల్ చేయండి"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"SD కార్డు నుండి సర్టిఫికెట్‌లను ఇన్‌స్టాల్ చేయండి"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"ఆధారాలను క్లియర్ చేయండి"</string>
@@ -2532,22 +2531,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"ఆధారాల నిల్వ ఎరేజ్ చేయబడింది."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"ఆధారాల నిల్వను ఎరేజ్ చేయడం సాధ్యపడలేదు."</string>
     <string name="usage_access_title" msgid="332333405495457839">"వినియోగ యాక్సెస్ గల యాప్‌లు"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"CA సర్టిఫికెట్"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"VPN యాప్ యూజర్ సర్టిఫికెట్"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Wi‑Fi సర్టిఫికెట్"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"మీ గోప్యత ప్రమాదంలో ఉంది"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"ఎన్‌క్రిప్షన్ కోసం వెబ్‌సైట్‌లు, యాప్‌లు, VPNలు CA సర్టిఫికెట్‌లను ఉపయోగిస్తున్నాయి. మీకు నమ్మకం ఉన్న సంస్థల నుండి మాత్రమే CA సర్టిఫికెట్‌లను ఇన్‌స్టాల్ చేయండి. \n\n మీరు CA సర్టిఫికెట్‌ను ఇన్‌స్టాల్ చేసినట్లయితే, మీరు సందర్శించిన వెబ్‌సైట్‌లు లేదా మీరు ఉపయోగించిన యాప్‌లలోని పాస్‌వర్డ్‌‌లు, సందేశాలు, లేదా క్రెడిట్ కార్డ్ వివరాల వంటి మీ గోప్యమైన సమాచారం, ఎన్‌క్రిప్ట్ చేసినప్పటికి, సర్టిఫికెట్ యజమాని యాక్సెస్ చేయగలరు."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"ఇన్‌స్టాల్ చేయవద్దు"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"ఏదేమైనా ఇన్‌స్టాల్ చేయి"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"సర్టిఫికెట్ ఇన్‌స్టాల్ చేయబడలేదు"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"అత్యవసర డయలింగ్ సిగ్నల్"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"అత్యవసర కాల్ వచ్చినప్పుడు చేయాల్సిన విధిని సెట్ చేయండి"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"బ్యాకప్"</string>
@@ -2939,7 +2930,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"పరిమితులు"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"పరిమితులను తీసివేయి"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"పిన్‌ను మార్చు"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"నోటిఫికేషన్‌లను చూపు"</string>
     <string name="help_label" msgid="6886837949306318591">"సహాయం &amp; అభిప్రాయం"</string>
     <string name="support_summary" msgid="2705726826263742491">"సహాయక కథనాలు, ఫోన్ &amp; చాట్, ప్రారంభించండి"</string>
     <string name="user_account_title" msgid="1127193807312271167">"కంటెంట్ కోసం ఖాతా"</string>
@@ -3389,7 +3379,8 @@
     <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"తక్కువ ప్రాధాన్యత గల నోటిఫికేషన్‌లను ప్రదర్శిస్తుంది. ఎల్లప్పుడూ నిశ్శబ్దంగా ఉంచుతుంది."</string>
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"తక్కువ ప్రాధాన్యత గల నోటిఫికేషన్‌లను ప్రదర్శిస్తుంది. ఎల్లప్పుడూ నిశ్శబ్దంగా ఉంచుతుంది."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"తక్కువ ప్రాధాన్యత గల నోటిఫికేషన్‌లను ప్రదర్శిస్తుంది. ఎల్లప్పుడూ నిశ్శబ్దంగా ఉంచుతుంది."</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"నోటిఫికేషన్‌లను చూపండి"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"అనుకూల నోటిఫికేషన్‌లు"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="other">రోజుకు~<xliff:g id="NUMBER_1">%d</xliff:g> నోటిఫికేషన్‌లు</item>
@@ -3410,6 +3401,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"అనుకూల నోటిఫికేషన్‌లు"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"ఏమీ లేవు"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"ఇన్‌స్టాల్ చేసిన అనువర్తనాలేవీ నోటిఫికేషన్ ప్రాప్యతను అభ్యర్థించలేదు."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"<xliff:g id="SERVICE">%1$s</xliff:g> కోసం నోటిఫికేషన్ యాక్సెస్ అనుమతించాలా?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> ప‌రిచ‌యాల పేర్లు, మీరు స్వీకరించిన సందేశాల వంటి వ్యక్తిగత సమాచారంతో సహా అన్ని నోటిఫికేషన్‌లను చదవగలదు. అంతే కాదు ఇది నోటిఫికేషన్‌లను సవరించగలదు లేదా తీసివేయగలదు లేదా అవి కలిగి ఉండే చర్య బటన్‌లను యాక్టివేట్ చేయగలదు. \n\nఇది, అంతరాయం కలిగించవద్దు ఎంపికను ఆన్ చేయగల లేదా ఆఫ్ చేయగల సామర్థ్యాన్ని కూడా యాప్‌న‌కు ఇస్తుంది. సంబంధిత సెట్టింగ్‌లను కూడా మారుస్తుంది."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"<xliff:g id="SERVICE">%1$s</xliff:g> కోసం నోటిఫికేషన్ ప్రాప్యతను అనుమతించాలా?"</string>

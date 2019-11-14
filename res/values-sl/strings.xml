@@ -380,7 +380,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Pri odklepanju z obrazom v aplikacijah vedno zahtevaj korak potrditve"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Izbriši obraz"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Nastavite odklepanje z obrazom"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Odklepanje z obrazom omogoča, da odklenete napravo, se prijavite v aplikacije in potrdite plačila.\n\nUpoštevajte:\ntelefon se lahko nenamerno odklene, če ga pogledate.\n\nTelefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom – celo kadar imate oči zaprte.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Odklepanje z obrazom omogoča, da odklenete napravo, se prijavite v aplikacije in potrdite plačila.\n\nUpoštevajte:\nče pogledate proti telefonu, ga boste morda nenamerno odklenili.\n\nTelefon lahko odklene nekdo drug, če ga podrži pred vašim obrazom, ko imate odprte oči.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Želite izbrisati podatke o obrazu?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Podatki o obrazu, ki se uporabljajo za odklepanje z obrazom, bodo trajno in varno izbrisani. Po odstranitvi boste za odklepanje telefona, prijavo v aplikacije in potrjevanje plačil potrebovali kodo PIN, vzorec ali geslo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Za odklepanje telefona uporabite funkcijo odklepanja z obrazom"</string>
@@ -2587,8 +2587,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Predvajaj"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Shramba poverilnic"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Namestitev potrdila"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Namestitev potrdil iz shrambe"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Namesti potrdila s kartice SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Brisanje poverilnic"</string>
@@ -2608,22 +2607,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Shramba poverilnic je izbrisana."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Shrambe pover. ni mogoče izbr."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Apl. z dost. do pod. o uporabi"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"Potrdilo overitelja potrdil"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"Upor. potrdilo za VPN in apl."</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Potrdilo za Wi‑Fi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Vaša zasebnost je ogrožena"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"Spletna mesta, aplikacije in navidezna zasebna omrežja (VPN) uporabljajo potrdila overiteljev potrdil za izvajanje šifriranja. Nameščajte samo potrdila overiteljev potrdil, ki jih izdajo zaupanja vredne organizacije. \n\n Če namestite potrdilo overitelja potrdil, lahko lastnik potrdila dostopa do vaših podatkov, kot so gesla, sporočila ali podrobnosti o kreditni kartici, ki izvirajo z obiskanih spletnih mest in iz uporabljenih aplikacij – tudi če so podatki šifrirani."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Ne namesti"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Kljub temu namesti"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Potrdilo ni nameščeno"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Signal za klice v sili"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Nastavi način delovanja ob klicanju v sili"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Varnostno kopiranje"</string>
@@ -3023,7 +3014,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Omejitve"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Odstranitev omejitev"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Sprememba kode PIN"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Pokaži obvestila"</string>
     <string name="help_label" msgid="6886837949306318591">"Pomoč in povr. inf."</string>
     <string name="support_summary" msgid="2705726826263742491">"Članki s pomočjo, telefon in klepet, prvi koraki"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Račun za vsebino"</string>
@@ -3481,7 +3471,8 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Prikaz pod prednostnimi obvestili. Vedno tiho."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Prikaz pod prednostnimi obvestili. Vedno tiho."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Ko je naprava odklenjena, so obvestila prikazana kot pasica na vrhu zaslona"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Pokaži obvestila"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"Prilagodljiva obvestila"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> obvestilo na dan</item>
@@ -3508,6 +3499,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Prilagodljiva obvestila"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Brez"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Nobena nameščena aplikacija ni zahtevala dostopa do obvestil."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Želite storitvi <xliff:g id="SERVICE">%1$s</xliff:g> dovoliti dostop do obvestil?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> lahko prebere vsa obvestila, vključno z osebnimi podatki, kot so imena stikov in besedilo prejetih sporočil. Prav tako lahko spremeni ali opusti obvestila ali sproži gumbe dejanj v obvestilih. \n\nS tem lahko aplikacija tudi vklopi ali izklopi način »ne moti« in spremeni povezane nastavitve."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Želite storitvi <xliff:g id="SERVICE">%1$s</xliff:g> dovoliti dostop do obvestil?"</string>

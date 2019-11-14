@@ -45,6 +45,8 @@ import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.datausage.DataUsagePreference;
@@ -55,6 +57,7 @@ import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -290,5 +293,15 @@ public class WifiSettingsTest {
         mWifiSettings.onCreateContextMenu(menu, view, null /* info */);
 
         verify(menu).add(anyInt(), eq(WifiSettings.MENU_ID_FORGET), anyInt(), anyInt());
+    }
+
+    @Test
+    @Ignore
+    public void onCreateAdapter_hasStableIdsTrue() {
+        final PreferenceScreen preferenceScreen = mock(PreferenceScreen.class);
+
+        RecyclerView.Adapter adapter = mWifiSettings.onCreateAdapter(preferenceScreen);
+
+        assertThat(adapter.hasStableIds()).isTrue();
     }
 }

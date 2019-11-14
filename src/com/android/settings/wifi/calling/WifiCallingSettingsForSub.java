@@ -30,6 +30,7 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.ims.ImsMmTelManager;
 import android.telephony.ims.ProvisioningManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -98,6 +99,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private ImsManager mImsManager;
+    private ImsMmTelManager mImsMmTelManager;
     private TelephonyManager mTelephonyManager;
 
     private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
@@ -110,8 +112,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
             final SettingsActivity activity = (SettingsActivity) getActivity();
-            boolean isNonTtyOrTtyOnVolteEnabled = mImsManager.isNonTtyOrTtyOnVolteEnabled();
-            boolean isWfcEnabled = mSwitchBar.isChecked()
+            final boolean isNonTtyOrTtyOnVolteEnabled = mImsManager.isNonTtyOrTtyOnVolteEnabled();
+            final boolean isWfcEnabled = mSwitchBar.isChecked()
                     && isNonTtyOrTtyOnVolteEnabled;
             boolean isCallStateIdle =
                     mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE;
@@ -133,12 +135,12 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                 }
             }
 
-            Preference pref = getPreferenceScreen().findPreference(BUTTON_WFC_MODE);
+            final Preference pref = getPreferenceScreen().findPreference(BUTTON_WFC_MODE);
             if (pref != null) {
                 pref.setEnabled(isWfcEnabled && isWfcModeEditable
                         && isCallStateIdle);
             }
-            Preference pref_roam =
+            final Preference pref_roam =
                     getPreferenceScreen().findPreference(BUTTON_WFC_ROAMING_MODE);
             if (pref_roam != null) {
                 pref_roam.setEnabled(isWfcEnabled && isWfcRoamingModeEditable
@@ -152,7 +154,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
      */
     private final OnPreferenceClickListener mUpdateAddressListener =
             preference -> {
-                Intent carrierAppIntent = getCarrierActivityIntent();
+                final Intent carrierAppIntent = getCarrierActivityIntent();
                 if (carrierAppIntent != null) {
                     carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_UPDATE);
                     startActivity(carrierAppIntent);
@@ -180,7 +182,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         mEmptyView = getView().findViewById(android.R.id.empty);
         setEmptyView(mEmptyView);
         final Resources res = getResourcesForSubId();
-        String emptyViewText = res.getString(R.string.wifi_calling_off_explanation,
+        final String emptyViewText = res.getString(R.string.wifi_calling_off_explanation,
                 res.getString(R.string.wifi_calling_off_explanation_2));
         mEmptyView.setText(emptyViewText);
 
@@ -196,17 +198,17 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     }
 
     private void showAlert(Intent intent) {
-        Context context = getActivity();
+        final Context context = getActivity();
 
-        CharSequence title = intent.getCharSequenceExtra(Phone.EXTRA_KEY_ALERT_TITLE);
-        CharSequence message = intent.getCharSequenceExtra(Phone.EXTRA_KEY_ALERT_MESSAGE);
+        final CharSequence title = intent.getCharSequenceExtra(Phone.EXTRA_KEY_ALERT_TITLE);
+        final CharSequence message = intent.getCharSequenceExtra(Phone.EXTRA_KEY_ALERT_MESSAGE);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message)
                 .setTitle(title)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.ok, null);
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.show();
     }
 
@@ -215,7 +217,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
+            final String action = intent.getAction();
             if (action.equals(ImsManager.ACTION_IMS_REGISTRATION_ERROR)) {
                 // If this fragment is active then we are immediately
                 // showing alert on screen. There is no need to add
@@ -246,6 +248,11 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         return ImsManager.getInstance(getActivity(), SubscriptionManager.getPhoneId(mSubId));
     }
 
+    @VisibleForTesting
+    ImsMmTelManager getImsMmTelManager() {
+        return ImsMmTelManager.createForSubscriptionId(mSubId);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -262,6 +269,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         }
 
         mImsManager = getImsManager();
+        mImsMmTelManager = getImsMmTelManager();
 
         mTelephonyManager = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE));
 
@@ -288,12 +296,12 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 
-        View view = inflater.inflate(
+        final View view = inflater.inflate(
                 R.layout.wifi_calling_settings_preferences, container, false);
 
         final ViewGroup prefs_container = view.findViewById(R.id.prefs_container);
         Utils.prepareCustomPreferencesList(container, view, prefs_container, false);
-        View prefs = super.onCreateView(inflater, prefs_container, savedInstanceState);
+        final View prefs = super.onCreateView(inflater, prefs_container, savedInstanceState);
         prefs_container.addView(prefs);
 
         return view;
@@ -307,12 +315,12 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             return;
         }
 
-        CarrierConfigManager configManager = (CarrierConfigManager)
+        final CarrierConfigManager configManager = (CarrierConfigManager)
                 getSystemService(Context.CARRIER_CONFIG_SERVICE);
         boolean isWifiOnlySupported = true;
 
         if (configManager != null) {
-            PersistableBundle b = configManager.getConfigForSubId(mSubId);
+            final PersistableBundle b = configManager.getConfigForSubId(mSubId);
             if (b != null) {
                 mEditableWfcMode = b.getBoolean(
                         CarrierConfigManager.KEY_EDITABLE_WFC_MODE_BOOL);
@@ -341,11 +349,11 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
 
         // NOTE: Buttons will be enabled/disabled in mPhoneStateListener
-        boolean wfcEnabled = mImsManager.isWfcEnabledByUser()
+        final boolean wfcEnabled = mImsManager.isWfcEnabledByUser()
                 && mImsManager.isNonTtyOrTtyOnVolteEnabled();
         mSwitch.setChecked(wfcEnabled);
-        int wfcMode = mImsManager.getWfcMode(false);
-        int wfcRoamingMode = mImsManager.getWfcMode(true);
+        final int wfcMode = mImsMmTelManager.getVoWiFiModeSetting();
+        final int wfcRoamingMode = mImsMmTelManager.getVoWiFiRoamingModeSetting();
         mButtonWfcMode.setValue(Integer.toString(wfcMode));
         mButtonWfcRoamingMode.setValue(Integer.toString(wfcRoamingMode));
         updateButtonWfcMode(wfcEnabled, wfcMode, wfcRoamingMode);
@@ -369,7 +377,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         context.registerReceiver(mIntentReceiver, mIntentFilter);
 
-        Intent intent = getActivity().getIntent();
+        final Intent intent = getActivity().getIntent();
         if (intent.getBooleanExtra(Phone.EXTRA_KEY_ALERT_SHOW, false)) {
             showAlert(intent);
         }
@@ -440,22 +448,22 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
      */
     private Intent getCarrierActivityIntent() {
         // Retrive component name from carrier config
-        CarrierConfigManager configManager =
+        final CarrierConfigManager configManager =
                 getActivity().getSystemService(CarrierConfigManager.class);
         if (configManager == null) return null;
 
-        PersistableBundle bundle = configManager.getConfigForSubId(mSubId);
+        final PersistableBundle bundle = configManager.getConfigForSubId(mSubId);
         if (bundle == null) return null;
 
-        String carrierApp = bundle.getString(
+        final String carrierApp = bundle.getString(
                 CarrierConfigManager.KEY_WFC_EMERGENCY_ADDRESS_CARRIER_APP_STRING);
         if (TextUtils.isEmpty(carrierApp)) return null;
 
-        ComponentName componentName = ComponentName.unflattenFromString(carrierApp);
+        final ComponentName componentName = ComponentName.unflattenFromString(carrierApp);
         if (componentName == null) return null;
 
         // Build and return intent
-        Intent intent = new Intent();
+        final Intent intent = new Intent();
         intent.setComponent(componentName);
         intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, mSubId);
         return intent;
@@ -468,8 +476,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         Log.i(TAG, "updateWfcMode(" + wfcEnabled + ")");
         mImsManager.setWfcSetting(wfcEnabled);
 
-        int wfcMode = mImsManager.getWfcMode(false);
-        int wfcRoamingMode = mImsManager.getWfcMode(true);
+        final int wfcMode = mImsMmTelManager.getVoWiFiModeSetting();
+        final int wfcRoamingMode = mImsMmTelManager.getVoWiFiRoamingModeSetting();
         updateButtonWfcMode(wfcEnabled, wfcMode, wfcRoamingMode);
         if (wfcEnabled) {
             mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), wfcMode);
@@ -495,7 +503,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             case REQUEST_CHECK_WFC_DISCLAIMER:
                 if (resultCode == Activity.RESULT_OK) {
                     // Call address management activity before turning on WFC
-                    Intent carrierAppIntent = getCarrierActivityIntent();
+                    final Intent carrierAppIntent = getCarrierActivityIntent();
                     if (carrierAppIntent != null) {
                         carrierAppIntent.putExtra(EXTRA_LAUNCH_CARRIER_APP, LAUCH_APP_ACTIVATE);
                         startActivityForResult(carrierAppIntent,
@@ -519,7 +527,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         mButtonWfcRoamingMode.setEnabled(wfcEnabled && mEditableWfcRoamingMode);
 
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        boolean updateAddressEnabled = (getCarrierActivityIntent() != null);
+        final boolean updateAddressEnabled = (getCarrierActivityIntent() != null);
         if (wfcEnabled) {
             if (mEditableWfcMode) {
                 preferenceScreen.addPreference(mButtonWfcMode);
@@ -550,24 +558,24 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         if (preference == mButtonWfcMode) {
             Log.d(TAG, "onPreferenceChange mButtonWfcMode " + newValue);
             mButtonWfcMode.setValue((String) newValue);
-            int buttonMode = Integer.valueOf((String) newValue);
-            int currentWfcMode = mImsManager.getWfcMode(false);
+            final int buttonMode = Integer.valueOf((String) newValue);
+            final int currentWfcMode = mImsMmTelManager.getVoWiFiModeSetting();
             if (buttonMode != currentWfcMode) {
-                mImsManager.setWfcMode(buttonMode, false);
+                mImsMmTelManager.setVoWiFiModeSetting(buttonMode);
                 mButtonWfcMode.setSummary(getWfcModeSummary(buttonMode));
                 mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
 
                 if (mUseWfcHomeModeForRoaming) {
-                    mImsManager.setWfcMode(buttonMode, true);
+                    mImsMmTelManager.setVoWiFiRoamingModeSetting(buttonMode);
                     // mButtonWfcRoamingMode.setSummary is not needed; summary is selected value
                 }
             }
         } else if (preference == mButtonWfcRoamingMode) {
             mButtonWfcRoamingMode.setValue((String) newValue);
-            int buttonMode = Integer.valueOf((String) newValue);
-            int currentMode = mImsManager.getWfcMode(true);
+            final int buttonMode = Integer.valueOf((String) newValue);
+            final int currentMode = mImsMmTelManager.getVoWiFiRoamingModeSetting();
             if (buttonMode != currentMode) {
-                mImsManager.setWfcMode(buttonMode, true);
+                mImsMmTelManager.setVoWiFiRoamingModeSetting(buttonMode);
                 // mButtonWfcRoamingMode.setSummary is not needed; summary is just selected value.
                 mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
             }
@@ -579,13 +587,13 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         int resId = com.android.internal.R.string.wifi_calling_off_summary;
         if (mImsManager.isWfcEnabledByUser()) {
             switch (wfcMode) {
-                case ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY:
+                case ImsMmTelManager.WIFI_MODE_WIFI_ONLY:
                     resId = com.android.internal.R.string.wfc_mode_wifi_only_summary;
                     break;
-                case ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED:
+                case ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED:
                     resId = com.android.internal.R.string.wfc_mode_cellular_preferred_summary;
                     break;
-                case ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED:
+                case ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED:
                     resId = com.android.internal.R.string.wfc_mode_wifi_preferred_summary;
                     break;
                 default:

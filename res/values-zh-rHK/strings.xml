@@ -374,7 +374,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"在應用程式內使用「臉孔解鎖」時，每次都要確認"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"刪除臉容資料"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"設定「臉孔解鎖」"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"使用「臉孔解鎖」即可解鎖裝置、登入應用程式及確認付款。\n\n注意事項：\n即使您不想解鎖，看著手機亦會解鎖。\n\n如果其他人將手機舉到您面前，即使您閉上雙眼，手機亦會解鎖。\n\n跟您樣貌很相似的人 (例如您的孿生兄弟姊妹) 能夠解鎖您的手機。"</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"使用「臉孔解鎖」即可解鎖裝置、登入應用程式及確認付款。\n\n注意事項：\n即使您不想解鎖手機，但查看手機仍會解鎖。\n\n在您睜開雙眼時，如果其他人將手機舉到您面前，將可解鎖您的手機。\n\n跟您樣貌很相似的人 (例如您的孿生兄弟姊妹) 能夠解鎖您的手機。"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"是否刪除臉容資料？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"系統會妥善地將「臉孔解鎖」功能使用的臉孔資料永久刪除。資料移除後，您便需要使用 PIN、圖案或密碼來解鎖手機、登入應用程式及確認付款。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"使用臉孔解鎖功能解鎖手機"</string>
@@ -2512,8 +2512,7 @@
     <string name="tts_play" msgid="2628469503798633884">"播放"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"憑證儲存空間"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"安裝憑證"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"從儲存裝置安裝憑證"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"從 SD 記憶卡安裝憑證"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"清除憑證"</string>
@@ -2533,22 +2532,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"憑證儲存空間已清除。"</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"無法清除憑證儲存空間。"</string>
     <string name="usage_access_title" msgid="332333405495457839">"可存取使用狀況的應用程式"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"CA 憑證"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"VPN 及應用程式使用者憑證"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Wi‑Fi 憑證"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"您的私隱存在風險"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"網站、應用程式和 VPN 會使用 CA 憑證作加密用途。請只安裝由您信任的機構發出的 CA 憑證。\n\n如果您安裝 CA 憑證，憑證擁有者便可以從您瀏覽的網站或使用的應用程式存取您的資料 (例如密碼、訊息或信用卡詳情)，即使有關資料已加密亦不例外。"</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"不要安裝"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"繼續安裝"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"未安裝憑證"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"緊急撥號訊號"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"設定撥打緊急電話時的運作方式"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"備份"</string>
@@ -2940,7 +2931,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"限制"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"移除限制"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"更改 PIN 碼"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"顯示通知"</string>
     <string name="help_label" msgid="6886837949306318591">"說明和意見反映"</string>
     <string name="support_summary" msgid="2705726826263742491">"說明文章、電話和即時通訊、開始使用"</string>
     <string name="user_account_title" msgid="1127193807312271167">"內容帳戶"</string>
@@ -3390,7 +3380,8 @@
     <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"顯示不重要的通知。一律靜音。"</string>
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"顯示不重要的通知。一律靜音。"</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"顯示不重要的通知。一律靜音。"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"顯示通知"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"自動調節通知"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="other">~每天 <xliff:g id="NUMBER_1">%d</xliff:g> 個通知</item>
@@ -3411,6 +3402,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"自動調節通知"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"無"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"沒有已安裝的應用程式要求通知存取權。"</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"要允許<xliff:g id="SERVICE">%1$s</xliff:g>存取通知嗎？"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>將能夠讀取所有通知 (包括個人資料，例如聯絡人姓名和訊息內容)，亦能修改或關閉通知，或者觸發通知內的操作按鈕。\n\n此外，該應用程式還能開啟或關閉「請勿騷擾」模式及變更相關設定。"</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"授權 <xliff:g id="SERVICE">%1$s</xliff:g> 存取通知 ？"</string>
@@ -3571,7 +3564,7 @@
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"每天晚上"</string>
     <string name="zen_mode_when_weeknights" msgid="8354070633893273783">"星期一至星期五晚"</string>
     <string name="zen_mode_start_time" msgid="8102602297273744441">"開始時間"</string>
-    <string name="zen_mode_end_time" msgid="8774327885892705505">"完結時間"</string>
+    <string name="zen_mode_end_time" msgid="8774327885892705505">"結束時間"</string>
     <string name="zen_mode_end_time_next_day_summary_format" msgid="4201521691238728701">"翌日<xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="2061973221027570123">"變更為永遠只允許鬧鐘"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="6122003583875424601">

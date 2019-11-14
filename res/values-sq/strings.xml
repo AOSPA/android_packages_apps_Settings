@@ -374,7 +374,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Kërko gjithmonë hapin e konfirmimit kur përdor shkyçjen me fytyrë në aplikacione"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Fshi të dhënat e fytyrës"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Konfiguro shkyçjen me fytyrë"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Përdor \"Shkyçjen me fytyrën\" për të shkyçur pajisjen, për t\'u identifikuar tek aplikacionet dhe për të konfirmuar pagesat.\n\nKi parasysh:\nShikimi te telefoni mund ta shkyçë atë kur nuk planifikon këtë.\n\nTelefoni yt mund të shkyçet nga dikush tjetër nëse ai mbahet te fytyra jote, edhe nëse sytë i ke të mbyllur.\n\nTelefoni yt mund të shkyçet nga dikush që ngjan shumë me ty, p.sh. nga një binjak."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Përdor \"Shkyçjen me fytyrën\" për të shkyçur pajisjen, për t\'u identifikuar tek aplikacionet dhe për të konfirmuar pagesat.\n\nKi parasysh:\nShikimi te telefoni mund ta shkyçë atë kur nuk planifikon këtë.\n\nTelefoni yt mund të shkyçet nga dikush tjetër nëse ai mbahet te fytyra jote kur i ke sytë të hapur.\n\nTelefoni yt mund të shkyçet nga dikush që ngjan shumë me ty, p.sh. nga një binjak."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Do t\'i fshish të dhënat e fytyrës?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Të dhënat e fytyrës që përdoren nga shkyçja me fytyrë do të fshihen përgjithmonë dhe në mënyrë të sigurt. Pas heqjes, do të të duhet kodi PIN, motivi ose fjalëkalimi për ta shkyçur telefonin, për t\'u identifikuar në aplikacione dhe për të konfirmuar pagesat."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Përdor shkyçjen me fytyrë për të shkyçur telefonin tënd"</string>
@@ -2511,8 +2511,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Luaj"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Ruajtja e kredencialeve"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Instalo një certifikatë"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instalo certifikatat nga hapësira ruajtëse"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Instalo certifikatat nga karta SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Pastro kredencialet"</string>
@@ -2532,22 +2531,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Hapësira ruajtëse e kredencialeve është spastruar."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Ruajtja e kred. s\'mund të fshihej."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Aplikacionet me qasje përdorimi"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"Certifikata CA"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"Cert. e përdoruesit të VPN-së dhe apl."</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Certifikata e Wi‑Fi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Privatësia jote është në rrezik"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"Certifikatat CA përdoren nga faqet e internetit, aplikacionet dhe VPN-të për enkriptim Instalo vetëm certifikata CA nga organizatat që u beson. \n\n Nëse instalon një certifikatë CA, zotëruesi i certifikatës mund të qaset tek informacionet e tua, siç janë fjalëkalimet, mesazhet ose të dhënat e kartave të kreditit, nga faqet e internetit që viziton ose aplikacionet që përdor, edhe nëse ato informacione janë të enkriptuara."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Mos e instalo"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Instaloje gjithsesi"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Certifikata nuk u instalua"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Sinjali i telefonimit të urgjencës"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Cakto sjelljen kur kryhet një telefonatë urgjence"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Rezervimi"</string>
@@ -2939,7 +2930,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Kufizimet"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Hiq kufizimet"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Ndrysho kodin PIN"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Shfaq njoftimet"</string>
     <string name="help_label" msgid="6886837949306318591">"Ndihmë dhe komente"</string>
     <string name="support_summary" msgid="2705726826263742491">"Artikuj ndihme, telefoni dhe biseda, fillimi"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Llogaria për përmbajtjen"</string>
@@ -3169,7 +3159,7 @@
     <string name="emergency_tone_alert" msgid="8523447641290736852">"Tonet"</string>
     <string name="emergency_tone_vibrate" msgid="2278872257053690683">"Dridhjet"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"Aktivizo tingujt"</string>
-    <string name="live_caption_title" msgid="2241633148129286971">"Titra automatike"</string>
+    <string name="live_caption_title" msgid="2241633148129286971">"Titra në çast"</string>
     <string name="live_caption_summary" msgid="3365960379606535783">"Media me titra automatike"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Asnjëherë"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="2249085722517252521">
@@ -3389,7 +3379,8 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Shfaqet nën njoftimet me përparësi. Gjithmonë në heshtje."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Shfaqet nën njoftimet me përparësi. Gjithmonë në heshtje."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Kur pajisja është e shkyçur, shfaq njoftimet si një banderolë përgjatë kreut të ekranit"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Shfaq njoftimet"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"Njoftimet me përshtatje"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> njoftime në ditë</item>
@@ -3410,6 +3401,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Njoftimet me përshtatje"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Asnjë"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Asnjë apl. i instaluar nuk ka kërkuar qasje te njoftimet."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Të lejohet qasja e njoftimeve për <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> do të jetë në gjendje të lexojë të gjitha njoftimet, duke përfshirë informacione personale të tilla si emrat e kontakteve dhe tekstin e mesazheve që merr. Ai do të jetë po ashtu në gjendje t\'i modifikojë ose t\'i heqë njoftimet ose të aktivizojë butonat e veprimeve që përmbajnë. \n\nKjo do t\'i japë aplikacionit aftësinë për të aktivizuar ose çaktivizuar \"Mos shqetëso\" dhe për të ndryshuar cilësimet përkatëse."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Të lejohet qasja te njoftimet për <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>

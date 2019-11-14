@@ -380,7 +380,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Naudojant Atrakinimą pagal veidą programose, reikalauti patvirtinimo"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Ištrinti veido duom."</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Nustatyti Atrakinimą pagal veidą"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Naudodami Atrakinimą pagal veidą atrakinkite įrenginį, prisijunkite prie programų ir patvirtinkite mokėjimus.\n\nNepamirškite toliau nurodytų dalykų:\nŽiūrint į telefoną jis gali būt atrakintas, kai to neketinate atlikti.\n\nTelefoną gali atrakinti kitas asmuo, laikydamas jį prieš jus, net kai esate užsimerkę.\n\nTelefoną gali atrakinti į jus labai panašus asmuo, pvz., identiškas dvynys."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Naudodami Atrakinimą pagal veidą atrakinkite įrenginį, prisijunkite prie programų ir patvirtinkite mokėjimus.\n\nNepamirškite toliau nurodytų dalykų:\nŽiūrint į telefoną jis gali būt atrakintas, kai to neketinate atlikti.\n\nTelefoną gali atrakinti kitas asmuo, laikydamas jį prieš jus, kai esate atsimerkę.\n\nTelefoną gali atrakinti į jus labai panašus asmuo, pvz., identiškas dvynys."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Ištrinti veido duomenis?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Atrakinimo pagal veidą funkcijos naudojami veido duomenys bus visam laikui ir saugiai ištrinti. Pašalinus reikės PIN kodo, atrakinimo piešinio arba slaptažodžio norint atrakinti telefoną, prisijungti prie programų ir patvirtinti mokėjimus."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Naudokite Atrakinimą pagal veidą, kad atrakintumėte telefoną"</string>
@@ -2587,8 +2587,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Paleisti"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Prisijungimo duomenų saugykla"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Įdiegti sertifikatą"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Įdiegti sertifikatus iš saugyklos"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Įdiegti sertifikatus iš SD kortelės"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Valyti prisijungimo duomenis"</string>
@@ -2608,22 +2607,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Kredencialų atmintinė ištrinta."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Nepavyko ištr. kreden. atmint."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Progr., gal. pasiekti duom."</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"CA sertifikatas"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"VPN ir progr. naud. sertifik."</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"„Wi‑Fi“ sertifikatas"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Jūsų privatumui iškilo pavojus"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"Šifruojant CA sertifikatus naudoja svetainės, programos ir VPN. CA sertifikatus įdiekite tik iš patikimų organizacijų. \n\n Jei įdiegsite CA sertifikatą, jo savininkas galės pasiekti jūsų informaciją (net jei ta informacija yra šifruota), pvz., slaptažodžius, pranešimus ar išsamią kredito kortelių informaciją, svetainėse, kuriuose lankotės, arba programose, kurias naudojate."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Neįdiegti"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Visada įdiegti"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Sertifikatas neįdiegtas"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Kritinės padėties numerio rinkimo signalas"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Nustatyti elgesį, kai skambinama pagalbos numeriu"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Atsarginė kopija"</string>
@@ -3023,7 +3014,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Apribojimai"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Pašalinti apribojimus"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Keisti PIN kodą"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Rodyti pranešimus"</string>
     <string name="help_label" msgid="6886837949306318591">"Pagalba ir atsiliep."</string>
     <string name="support_summary" msgid="2705726826263742491">"Pagalb. str., palaikym. tel. ir pokalb., darbo pr."</string>
     <string name="user_account_title" msgid="1127193807312271167">"Turiniui skirta paskyra"</string>
@@ -3481,7 +3471,8 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Pateikiami po prioritetiniais pranešimais. Visada nutildyti."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Pateikiami po prioritetiniais pranešimais. Visada nutildyti."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Kai įrenginys atrakintas, pranešimai rodomi kaip reklamjuostė ekrano viršuje"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Rodyti pranešimus"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"Prisitaikantys pranešimai"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="one">~ <xliff:g id="NUMBER_1">%d</xliff:g> pranešimas per dieną</item>
@@ -3508,6 +3499,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Prisitaikantys pranešimai"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Nėra"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Jokios įdiegtos programos nepateikė pranešimo prieigos užklausos."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Leisti paslaugos „<xliff:g id="SERVICE">%1$s</xliff:g>“ prieigą prie pranešimų?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"Paslauga „<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>“ galės skaityti visus pranešimus, įskaitant asmens informaciją, pvz., kontaktų vardus ir gautų pranešimų tekstą. Be to, ji galės atsisakyti pranešimų, keisti juos ar suaktyvinti juose pateiktus veiksmo mygtukus. \n\nPaslauga taip pat galės įjungti ar išjungti režimą „Netrukdyti“ ir keisti susijusius nustatymus."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Leisti <xliff:g id="SERVICE">%1$s</xliff:g> pranešimo prieigą?"</string>

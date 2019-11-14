@@ -39,6 +39,8 @@ import android.provider.Settings;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.datausage.DataUsagePreference;
@@ -48,6 +50,7 @@ import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -235,6 +238,16 @@ public class WifiSettings2Test {
 
         verify(mDataUsagePreference).setVisible(true);
         verify(mDataUsagePreference).setTemplate(any(), eq(0) /*subId*/, eq(null) /*service*/);
+    }
+
+    @Test
+    @Ignore
+    public void onCreateAdapter_hasStableIdsTrue() {
+        final PreferenceScreen preferenceScreen = mock(PreferenceScreen.class);
+
+        RecyclerView.Adapter adapter = mWifiSettings2.onCreateAdapter(preferenceScreen);
+
+        assertThat(adapter.hasStableIds()).isTrue();
     }
 
 // TODO(b/70983952): Add test for context menu

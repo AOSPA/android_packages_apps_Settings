@@ -374,7 +374,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Chiedi sempre conferma se viene usato Sblocco col sorriso nelle app"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Elimina dati viso"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Imposta Sblocco col sorriso"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Usa la funzionalità Sblocco col sorriso per sbloccare il dispositivo, accedere alle app e confermare pagamenti.\n\nTieni presente che:\nSe guardi il telefono puoi sbloccarlo anche quando non hai intenzione di farlo.\n\nIl tuo telefono può essere sbloccato da un\'altra persona se viene rivolto verso il tuo viso, anche se hai gli occhi chiusi.\n\nIl tuo telefono può essere sbloccato da qualcuno che ti assomiglia molto, ad esempio un fratello gemello."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Usa la funzionalità Sblocco col sorriso per sbloccare il dispositivo, accedere alle app e confermare pagamenti.\n\nTieni presente che:\nSe guardi il telefono puoi sbloccarlo anche quando non hai intenzione di farlo.\n\nIl tuo telefono può essere sbloccato da un\'altra persona se viene rivolto verso il tuo viso e hai gli occhi aperti.\n\nIl tuo telefono può essere sbloccato da qualcuno che ti assomiglia molto, ad esempio un gemello."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Rimuovere i dati del viso?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"I dati del viso usati da Sblocco col sorriso verranno eliminati in modo definitivo e sicuro. Dopo la rimozione, ti servirà il PIN, la sequenza o la password per sbloccare il telefono, accedere alle app e confermare i pagamenti."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Usa la funzionalità Sblocco col sorriso per sbloccare il tuo telefono"</string>
@@ -2511,8 +2511,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Riproduci"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Archivio credenziali"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Installare un certificato"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Installa certificati da archivio"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Installa certificati da scheda SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Cancella credenziali"</string>
@@ -2532,22 +2531,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Archivio credenziali cancellato"</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Impossibile cancellare archivio credenz."</string>
     <string name="usage_access_title" msgid="332333405495457839">"App con accesso a dati utilizzo"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"Certificato CA"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"Certif. utente per app e VPN"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Certificato Wi‑Fi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"La tua privacy è a rischio"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"I certificati CA vengono utilizzati da siti web, app e VPN per la crittografia. Installa solo certificati CA da organizzazioni che ritieni affidabili. \n\n Se installi un certificato CA, il proprietario del certificato potrebbe accedere ai tuoi dati, ad esempio password, messaggi o dettagli della carta di credito dai siti web che visiti o dalle app che utilizzi, anche se si tratta di dati criptati."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Non installare"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Installa comunque"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Certificato non installato"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Segnale chiamata di emergenza"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Imposta il comportamento in caso di chiamata di emergenza"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Backup"</string>
@@ -2939,7 +2930,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Limitazioni"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Rimuovi limitazioni"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Cambia PIN"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Mostra notifiche"</string>
     <string name="help_label" msgid="6886837949306318591">"Guida e feedback"</string>
     <string name="support_summary" msgid="2705726826263742491">"Guida, assistenza telefonica e chat, primi passi"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Account per i contenuti"</string>
@@ -3389,7 +3379,8 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Vengono mostrate le notifiche con priorità bassa. Sempre silenziose."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Vengono mostrate le notifiche con priorità bassa. Sempre silenziose."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Quando il dispositivo è sbloccato, mostra le notifiche come banner in cima allo schermo"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Mostra notifiche"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"Notifiche adattative"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> notifiche al giorno</item>
@@ -3410,6 +3401,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Notifiche adattative"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Nessuno"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Nessuna delle app installate ha richiesto l\'accesso alle notifiche."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Consentire l\'accesso alle notifiche a <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> potrà leggere tutte le notifiche, incluse le informazioni personali quali i nomi dei contatti e il testo dei messaggi ricevuti. Potrà inoltre ignorare le notifiche o attivare i pulsanti di azione inclusi. \n\nL\'app potrà anche attivare o disattivare la funzione Non disturbare e modificare le relative impostazioni."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Consentire l\'accesso alle notifiche a <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
