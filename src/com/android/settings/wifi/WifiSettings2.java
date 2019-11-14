@@ -62,11 +62,9 @@ import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
-import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
-import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.wifitrackerlib.WifiEntry;
-import com.android.wifitrackerlib.WifiTracker2;
+import com.android.wifitrackerlib.WifiPickerTracker;
 
 import java.time.Clock;
 import java.time.ZoneOffset;
@@ -78,13 +76,13 @@ import java.util.List;
  */
 @SearchIndexable
 public class WifiSettings2 extends RestrictedSettingsFragment
-        implements Indexable, WifiTracker2.WifiTrackerCallback {
+        implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback {
 
     private static final String TAG = "WifiSettings2";
 
     // Max age of tracked WifiEntries
     private static final long MAX_SCAN_AGE_MILLIS = 15_000;
-    // Interval between initiating WifiTracker2 scans
+    // Interval between initiating WifiPickerTracker scans
     private static final long SCAN_INTERVAL_MILLIS = 10_000;
 
     @VisibleForTesting
@@ -103,7 +101,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
     private static boolean isVerboseLoggingEnabled() {
-        return WifiTracker2.sVerboseLogging || Log.isLoggable(TAG, Log.VERBOSE);
+        return WifiPickerTracker.isVerboseLoggingEnabled();
     }
 
     private final Runnable mUpdateWifiEntryPreferencesRunnable = () -> {
@@ -127,9 +125,11 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     private WifiEnabler mWifiEnabler;
 
-    // Worker thread used for WifiTracker2 work
+    // Worker thread used for WifiPickerTracker work
     private HandlerThread mWorkerThread;
-    private WifiTracker2 mWifiTracker2;
+
+    @VisibleForTesting
+    WifiPickerTracker mWifiPickerTracker;
 
     private WifiDialog mDialog;
 
@@ -218,7 +218,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 return SystemClock.elapsedRealtime();
             }
         };
-        mWifiTracker2 = new WifiTracker2(getSettingsLifecycle(), context,
+        mWifiPickerTracker = new WifiPickerTracker(getSettingsLifecycle(), context,
                 context.getSystemService(WifiManager.class),
                 context.getSystemService(ConnectivityManager.class),
                 context.getSystemService(NetworkScoreManager.class),
@@ -410,7 +410,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         if (mIsRestricted) {
             return;
         }
-        final int wifiState = mWifiTracker2.getWifiState();
+        final int wifiState = mWifiPickerTracker.getWifiState();
 
         if (isVerboseLoggingEnabled()) {
             Log.i(TAG, "onWifiStateChanged called with wifi state: " + wifiState);
@@ -447,14 +447,24 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         updateWifiEntryPreferencesDelayed();
     }
 
+    @Override
+    public void onNumSavedNetworksChanged() {
+        setAdditionalSettingsSummaries();
+    }
+
+    @Override
+    public void onNumSavedSubscriptionsChanged() {
+        setAdditionalSettingsSummaries();
+    }
+
     /**
-     * Updates WifiEntries from {@link WifiManager#getScanResults()}. Adds a delay to have
+     * Updates WifiEntries from {@link WifiPickerTracker#getWifiEntries()}. Adds a delay to have
      * progress bar displayed before starting to modify entries.
      */
     private void updateWifiEntryPreferencesDelayed() {
         // Safeguard from some delayed event handling
         if (getActivity() != null && !mIsRestricted &&
-                mWifiTracker2.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
+                mWifiPickerTracker.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
             final View view = getView();
             final Handler handler = view.getHandler();
             if (handler != null && handler.hasCallbacks(mUpdateWifiEntryPreferencesRunnable)) {
@@ -467,7 +477,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     private void updateWifiEntryPreferences() {
         // in case state has changed
-        if (mWifiTracker2.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
+        if (mWifiPickerTracker.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
             return;
         }
 
@@ -478,7 +488,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
         int index = 0;
         cacheRemoveAllPrefs(mWifiEntryPreferenceCategory);
-        List<WifiEntry> wifiEntries = mWifiTracker2.getWifiEntries();
+        List<WifiEntry> wifiEntries = mWifiPickerTracker.getWifiEntries();
         for (WifiEntry wifiEntry : wifiEntries) {
             hasAvailableWifiEntries = true;
 
@@ -547,36 +557,30 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                         ? R.string.wifi_configure_settings_preference_summary_wakeup_on
                         : R.string.wifi_configure_settings_preference_summary_wakeup_off));
 
-        final List<AccessPoint> savedNetworks =
-                WifiSavedConfigUtils.getAllConfigs(getContext(), mWifiManager);
-        final int numSavedNetworks = (savedNetworks != null) ? savedNetworks.size() : 0;
-        mSavedNetworksPreference.setVisible(numSavedNetworks > 0);
-        if (numSavedNetworks > 0) {
+        final int numSavedNetworks = mWifiPickerTracker.getNumSavedNetworks();
+        final int numSavedSubscriptions = mWifiPickerTracker.getNumSavedSubscriptions();
+        if (numSavedNetworks + numSavedSubscriptions > 0) {
+            mSavedNetworksPreference.setVisible(true);
             mSavedNetworksPreference.setSummary(
-                    getSavedNetworkSettingsSummaryText(savedNetworks, numSavedNetworks));
+                    getSavedNetworkSettingsSummaryText(numSavedNetworks, numSavedSubscriptions));
+        } else {
+            mSavedNetworksPreference.setVisible(false);
         }
     }
 
     private String getSavedNetworkSettingsSummaryText(
-            List<AccessPoint> savedNetworks, int numSavedNetworks) {
-        int numSavedPasspointNetworks = 0;
-        for (AccessPoint savedNetwork : savedNetworks) {
-            if (savedNetwork.isPasspointConfig() || savedNetwork.isPasspoint()) {
-                numSavedPasspointNetworks++;
-            }
-        }
-        final int numSavedNormalNetworks = numSavedNetworks - numSavedPasspointNetworks;
-
-        if (numSavedNetworks == numSavedNormalNetworks) {
+            int numSavedNetworks, int numSavedSubscriptions) {
+        if (numSavedSubscriptions == 0) {
             return getResources().getQuantityString(R.plurals.wifi_saved_access_points_summary,
-                    numSavedNormalNetworks, numSavedNormalNetworks);
-        } else if (numSavedNetworks == numSavedPasspointNetworks) {
+                    numSavedNetworks, numSavedNetworks);
+        } else if (numSavedNetworks == 0) {
             return getResources().getQuantityString(
                     R.plurals.wifi_saved_passpoint_access_points_summary,
-                    numSavedPasspointNetworks, numSavedPasspointNetworks);
+                    numSavedSubscriptions, numSavedSubscriptions);
         } else {
+            final int numTotalEntries = numSavedNetworks + numSavedSubscriptions;
             return getResources().getQuantityString(R.plurals.wifi_saved_all_access_points_summary,
-                    numSavedNetworks, numSavedNetworks);
+                    numTotalEntries, numTotalEntries);
         }
     }
 
