@@ -33,6 +33,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
+import co.aospa.settings.display.DozeOnChargePreferenceController;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController;
@@ -114,6 +116,7 @@ public class LockscreenDashboardFragment extends DashboardFragment
         }
         use(AmbientDisplayNotificationsPreferenceController.class).setConfig(getConfig(context));
         use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
+        use(DozeOnChargePreferenceController.class).setConfig(getConfig(context));
         use(PickupGesturePreferenceController.class).setConfig(getConfig(context));
 
         mControlsContentObserver = new ContentObserver(
@@ -151,6 +154,7 @@ public class LockscreenDashboardFragment extends DashboardFragment
         controllers.add(notificationController);
         mOwnerInfoPreferenceController = new OwnerInfoPreferenceController(context, this);
         controllers.add(mOwnerInfoPreferenceController);
+        controllers.add(new DozeOnChargePreferenceController(context, lifecycle));
 
         return controllers;
     }
@@ -184,6 +188,7 @@ public class LockscreenDashboardFragment extends DashboardFragment
                     controllers.add(new LockScreenNotificationPreferenceController(context));
                     controllers.add(new OwnerInfoPreferenceController(
                             context, null /* fragment */));
+                    controllers.add(new DozeOnChargePreferenceController(context, null /* lifecycle */));
                     return controllers;
                 }
 
