@@ -32,7 +32,7 @@ import com.android.wallpaper.module.WallpaperPreferences;
 import com.android.wallpaper.module.WallpaperRotationRefresher;
 import com.android.wallpaper.module.WallpaperSetter;
 import com.android.wallpaper.monitor.PerformanceMonitor;
-import com.android.wallpaper.picker.ImagePreviewFragment;
+import com.android.wallpaper.picker.PreviewFragment;
 
 public class DefaultCustomizationInjector extends BaseWallpaperInjector
         implements CustomizationInjector {
@@ -92,7 +92,7 @@ public class DefaultCustomizationInjector extends BaseWallpaperInjector
             WallpaperInfo wallpaperInfo,
             int mode,
             boolean testingModeEnabled) {
-        return ImagePreviewFragment.newInstance(wallpaperInfo, mode, testingModeEnabled);
+        return PreviewFragment.newInstance(wallpaperInfo, mode, testingModeEnabled);
     }
 
     @Override
