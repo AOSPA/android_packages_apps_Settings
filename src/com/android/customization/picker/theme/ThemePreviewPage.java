@@ -220,6 +220,8 @@ abstract class ThemePreviewPage extends PreviewPage {
             TextView editLabel = card.findViewById(R.id.edit_label);
             editLabel.setOnClickListener(mEditClickListener);
             card.setOnClickListener(mEditClickListener);
+            card.setClickable(mEditClickListener != null);
+
             editLabel.setVisibility(mEditClickListener != null
                     ? View.VISIBLE : View.INVISIBLE);
 
