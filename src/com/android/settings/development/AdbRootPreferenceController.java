@@ -40,7 +40,7 @@ public class AdbRootPreferenceController extends DeveloperOptionsPreferenceContr
             DevelopmentSettingsDashboardFragment fragment) {
         super(context);
 
-        mADBRootService = new ADBRootService(context);
+        mADBRootService = new ADBRootService();
     }
 
     @Override
