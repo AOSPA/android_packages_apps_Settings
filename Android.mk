@@ -31,7 +31,7 @@ LOCAL_PROGUARD_ENABLED := disabled
 
 LOCAL_PACKAGE_NAME := ThemePicker
 LOCAL_PRIVILEGED_MODULE := true
-LOCAL_PRODUCT_MODULE := true
+LOCAL_SYSTEM_EXT_MODULE := true
 LOCAL_OVERRIDES_PACKAGES := WallpaperPicker2
 
 ifneq (,$(wildcard frameworks/base))
