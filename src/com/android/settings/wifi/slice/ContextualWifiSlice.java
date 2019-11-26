@@ -105,7 +105,7 @@ public class ContextualWifiSlice extends WifiSlice {
                     android.R.attr.colorControlNormal));
         } else {
             // get icon of medium signal strength
-            drawable = mContext.getDrawable(com.android.settingslib.Utils.getWifiIconResource(2));
+            drawable = mContext.getDrawable(com.android.settingslib.Utils.getWifiIconResource(2, mContext));
             if (wifiSliceItem != null
                     && wifiSliceItem.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED) {
                 tint = Utils.getColorAccentDefaultColor(mContext);
