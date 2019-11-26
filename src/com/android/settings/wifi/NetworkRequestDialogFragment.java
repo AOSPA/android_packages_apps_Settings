@@ -332,7 +332,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
             final int level = wifiEntry.getLevel();
             if (imageView != null && level != WifiEntry.WIFI_LEVEL_UNREACHABLE) {
                 final Drawable drawable = getContext().getDrawable(
-                        Utils.getWifiIconResource(level));
+                        Utils.getWifiIconResource(level, getContext()));
                 drawable.setTintList(
                         Utils.getColorAttr(getContext(), android.R.attr.colorControlNormal));
                 imageView.setImageDrawable(drawable);

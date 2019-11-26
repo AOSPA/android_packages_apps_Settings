@@ -389,7 +389,7 @@ public class ProviderModelSlice extends WifiSlice {
                     android.R.attr.colorControlNormal);
             final Drawable drawable = mContext.getDrawable(
                     WifiUtils.getInternetIconResource(
-                            wifiSliceItem.getLevel(), wifiSliceItem.shouldShowXLevelIcon()));
+                            wifiSliceItem.getLevel(), wifiSliceItem.shouldShowXLevelIcon(), mContext));
             drawable.setTint(tint);
             return Utils.createIconWithDrawable(drawable);
         }

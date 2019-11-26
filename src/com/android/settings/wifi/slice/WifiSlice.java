@@ -234,7 +234,7 @@ public class WifiSlice implements CustomSliceable {
 
         final Drawable drawable = mContext.getDrawable(
                 WifiUtils.getInternetIconResource(wifiSliceItem.getLevel(),
-                        wifiSliceItem.shouldShowXLevelIcon()));
+                        wifiSliceItem.shouldShowXLevelIcon(), mContext));
         drawable.setTint(tint);
         return Utils.createIconWithDrawable(drawable);
     }

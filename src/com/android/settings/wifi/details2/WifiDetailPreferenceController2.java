@@ -1045,7 +1045,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         }
 
         public Drawable getIcon(boolean showX, int level) {
-            return mContext.getDrawable(WifiUtils.getInternetIconResource(level, showX)).mutate();
+            return mContext.getDrawable(WifiUtils.getInternetIconResource(level, showX, mContext)).mutate();
         }
     }
 
