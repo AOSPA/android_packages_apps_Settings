@@ -416,7 +416,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     private void updateSingleNetworkSignalIcon(int level) {
         // TODO: Check level of the network to show signal icon.
         final Drawable wifiIcon = mActivity.getDrawable(
-                Utils.getWifiIconResource(level)).mutate();
+                Utils.getWifiIconResource(level, mActivity)).mutate();
         final Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();
         wifiIconDark.setTintList(
                 Utils.getColorAttr(mActivity, android.R.attr.colorControlNormal));
@@ -557,7 +557,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             if (imageView != null) {
                 final Drawable drawable = getContext().getDrawable(
                         com.android.settingslib.Utils.getWifiIconResource(
-                                uiConfigurationItem.mLevel));
+                                uiConfigurationItem.mLevel, getContext()));
                 drawable.setTintList(
                         com.android.settingslib.Utils.getColorAttr(getContext(),
                                 android.R.attr.colorControlNormal));
