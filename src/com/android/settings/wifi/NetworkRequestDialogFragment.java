@@ -401,7 +401,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
                                     && accessPoint.isVhtMax8SpatialStreamsSupported();
             if (imageView != null) {
                 final Drawable drawable = getContext().getDrawable(
-                        Utils.getWifiIconResource(level, generation, isReady));
+                        Utils.getWifiIconResource(level, generation, isReady, getContext()));
                 drawable.setTintList(
                         Utils.getColorAttr(getContext(), android.R.attr.colorControlNormal));
                 imageView.setImageDrawable(drawable);

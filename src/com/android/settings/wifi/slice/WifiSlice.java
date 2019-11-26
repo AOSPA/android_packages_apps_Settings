@@ -203,7 +203,8 @@ public class WifiSlice implements CustomSliceable {
                                                   accessPoint.getLevel(),
                                                   accessPoint.getWifiGeneration(),
                                                   accessPoint.isHe8ssCapableAp()
-                                                  && accessPoint.isVhtMax8SpatialStreamsSupported()));
+                                                  && accessPoint.isVhtMax8SpatialStreamsSupported(),
+                                                  mContext));
 
         final @ColorInt int color;
         if (accessPoint.isActive()) {
