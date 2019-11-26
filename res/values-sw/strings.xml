@@ -374,7 +374,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Iombe uthibitishaji kila wakati unapofungua kwa uso katika programu"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Futa data ya uso"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Weka mipangilio ya kufungua kwa uso"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Tumia kipengele cha kufungua kwa uso ili ufungue kifaa chako, uingie katika akaunti za programu na uthibitishe malipo.\n\nKumbuka:\nKuangalia simu kunaweza kuifungua wakati hujakusudia.\n\nSimu yako inaweza kufunguliwa na mtu mwingine akiiweka mbele ya uso wako, hata ukiwa umefunga macho.\n\nSimu yako inaweza kufunguliwa na mtu mnayefanana, kama vile ndugu mnayefanana sana."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Tumia kipengele cha kufungua kwa uso ili ufungue kifaa chako, uingie katika akaunti za programu na uthibitishe malipo.\n\nKumbuka:\n Kuangalia simu kunaweza kuifungua hata ikiwa huna lengo la kufanya hivyo.\n\n Simu yako inaweza kufunguliwa na mtu mwingine ikiwa imeshikiwa karibu na uso wako na umefungua macho.\n\nSimu yako inaweza kufunguliwa na mtu mnayefanana sana kama vile ndugu mnayelandana."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Je, ungependa kufuta data ya uso?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Data ya uso inayotumiwa na kipengele cha kufungua kwa uso itafutwa kabisa kwa usalama. Baada ya kuondoa, utahitaji PIN, mchoro au nenosiri lako ili kufungua simu yako, kuingia kwenye akaunti za programu na kuthibitisha malipo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Tumia kipengele cha kufungua kwa uso ili ufungue simu yako"</string>
@@ -2511,8 +2511,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Cheza"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Hifadhi ya hati-tambulishi"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Sakinisha cheti"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Sakinisha vyeti kutoka kwenye hifadhi"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Sakinisha vyeti  kutoka kwa kadi ya SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Futa stakabadhi"</string>
@@ -2532,22 +2531,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Hifadhi ya stakabadhi imefutwa"</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Hifadhi ya stakabadhi haikuweza kufutwa."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Zenye idhini ya kufikia maelezo"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"Cheti cha CA"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"Cheti cha mtumiaji wa programu na VPN"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Cheti cha Wi-Fi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Faragha yako iko hatarini"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"Vyeti vya CA hutumiwa na tovuti, programu na VPN kwa usimbaji fiche. Sakinisha vyeti vya CA kwenye mashirika unayoamini pekee. \n\n Ukisakinisha cheti cha CA, mmiliki wa cheti anaweza kufikia maelezo yako, kama vile manenosiri, ujumbe au maelezo ya kadi za mikopo kwenye tovuti unazotembelea au programu unazotumia - hata ikiwa maelezo hayo yamesimbwa kwa njia fiche."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Usisakinishe"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Sakinisha licha ya hayo"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Cheti hakijasakinishwa"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Ishara ya simu ya dharura"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Weka tabia wakati simu ya dharura imepigwa"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Hifadhi nakala"</string>
@@ -2939,7 +2930,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Vikwazo"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Ondoa vikwazo"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Badilisha PIN"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Onyesha arifa"</string>
     <string name="help_label" msgid="6886837949306318591">"Usaidizi na maoni"</string>
     <string name="support_summary" msgid="2705726826263742491">"Makala ya usaidizi, simu na gumzo, kuanza"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Akaunti ya maudhui"</string>
@@ -3389,7 +3379,8 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Huonyeshwa chini ya arifa za kipaumbele. Kimya kila wakati."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Huonyeshwa chini ya arifa za kipaumbele. Kimya kila wakati."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Kifaa kinapofunguliwa, onyesha arifa kama bango katika sehemu ya juu ya skrini"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Onyesha arifa"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"Arifa Zinazojirekebisha"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="other">Takriban arifa <xliff:g id="NUMBER_1">%d</xliff:g> kwa siku</item>
@@ -3410,6 +3401,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Arifa Zinazojirekebisha"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Hamna"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Hakuna programu zilizosakinishwa ambazo zimeomba kufikia arifa."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Je, ungependa kuruhusu ufikiaji wa arifa za <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">".<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> itaweza kusoma arifa zote; zikiwemo taarifa binafsi kama vile majina ya anwani na maandishi ya ujumbe unaopokea. Pia itaweza kubadilisha au kuondoa arifa au kuanzisha vitufe vya vitendo vilivyomo. \n\nHatua hii pia itaipa programu uwezo wa kuwasha au kuzima kipengele cha Usinisumbue na kubadilisha mipangilio inayohusiana nacho."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Je, ungependa kuruhusu ufikiaji wa arifa za <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>

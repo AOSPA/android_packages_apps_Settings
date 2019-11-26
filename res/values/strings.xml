@@ -818,7 +818,7 @@
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up face unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
+    <string name="security_settings_face_settings_footer">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
@@ -6764,9 +6764,6 @@
     <!-- Restrictions screen - menu label to change restrictions pin [CHAR LIMIT=25] -->
     <string name="restriction_menu_change_pin">Change PIN</string>
 
-    <!-- Label for are-notifications-enabled checkbox in app details [CHAR LIMIT=20] -->
-    <string name="app_notifications_switch_label">Show notifications</string>
-
     <!--  Help URLs for some screens. Not specified here. Specified in product overlays --><skip/>
     <!-- Help menu label [CHAR LIMIT=20] -->
     <string name="help_label">Help &amp; feedback</string>
@@ -8034,7 +8031,7 @@
     <string name="notification_channel_summary_high">When device is unlocked, show notifications as a banner across the top of the screen</string>
 
     <!-- [CHAR LIMIT=100] Label for on/off toggle -->
-    <string name="notification_switch_label">Show notifications</string>
+    <string name="notification_switch_label">All <xliff:g id="app_name" example="Android Services">%1$s</xliff:g> notifications</string>
 
     <!-- Default Apps > Default notification assistant -->
     <string name="default_notification_assistant">Adaptive Notifications</string>
@@ -8076,6 +8073,9 @@
 
     <!-- String to show in the list of notification listeners, when none is installed -->
     <string name="no_notification_listeners">No installed apps have requested notification access.</string>
+
+    <!-- Button title that grants 'notification access' permission to an app [CHAR_LIMIT=60]-->
+    <string name="notification_access_detail_switch">Allow notification access</string>
 
     <!-- Title for a warning message about security implications of enabling a notification
       assistant, displayed as a dialog message. [CHAR LIMIT=NONE] -->

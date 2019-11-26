@@ -380,7 +380,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Pri používaní odomknutia tvárou v aplikáciách požadovať potvrdenie"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Odstrániť údaje o tvári"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Nastaviť odomknutie tvárou"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Odomknutím tvárou môžete odomykať zariadenie, prihlasovať sa do aplikácií a potvrdzovať platby.\n\nDôležité upozornenie:\nTelefón môžete náhodne odomknúť pohľadom, aj keď ste to nechceli urobiť.\n\nMôže ho odomknúť aj niekto iný, keď telefón namieri na vašu tvár, a to dokonca aj vtedy, keď budete mať zatvorené oči.\n\nMôže ho odomknúť aj osoba, ktorá sa na vás veľmi podobá, napríklad vaše dvojča."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Odomknutím tvárou môžete odomykať zariadenie, prihlasovať sa do aplikácií a potvrdzovať platby.\n\nDôležité upozornenie:\nTelefón môžete náhodne odomknúť pohľadom, aj keď ste to nechceli urobiť.\n\nMôže ho odomknúť aj niekto iný, keď telefón namieri na vašu tvár a budete mať otvorené oči.\n\nMôže ho odomknúť aj osoba, ktorá sa na vás veľmi podobá, napríklad vaše dvojča."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Chcete odstrániť údaje o tvári?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Údaje o tvári používané na odomknutie tvárou budú natrvalo a bezpečne odstránené. Po ich odstránení budete na odomykanie telefónu, prihlasovanie do aplikácií a potvrdzovanie platieb potrebovať svoj kód PIN, vzor alebo heslo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Odomykajte telefón tvárou"</string>
@@ -2587,8 +2587,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Prehrať"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Úložisko poverení"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Inštalácia certifikátu"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Inštalovať certifikáty z úložiska"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Inštalovať certifikáty z SD karty"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Vymazať poverenia"</string>
@@ -2608,22 +2607,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Úložisko poverení bolo vymazané"</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Úlož. poverení nemožno vymazať"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Prístup k dátam o používaní"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"Certifikát CA"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"Certifikát použív. VPN a apl."</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Certifikát Wi‑Fi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Vaša ochrana súkromia je ohrozená"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"Certifikáty CA využívajú weby, aplikácie a siete VPN na šifrovanie. Inštalujte iba certifikáty CA od organizácií, ktorým dôverujete. \n\n Ak si nainštalujete certifikát CA, vlastník certifikátu by mohol získať prístup k vašim údajom, napríklad k heslám, správam či údajom o kreditnej karte z webov alebo aplikácií, ktoré používate, a to aj vtedy, ak sú príslušné údaje šifrované."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Neinštalovať"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Napriek tomu nainštalovať"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Certifikát nie je nainštalovaný"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Signál núdzového vytáčania"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Nastaviť správanie pri tiesňovom volaní"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Zálohovanie"</string>
@@ -3023,7 +3014,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Obmedzenia"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Odstrániť obmedzenia"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Zmeniť kód PIN"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Zobrazovať upozornenia"</string>
     <string name="help_label" msgid="6886837949306318591">"Pomocník a spät. väzba"</string>
     <string name="support_summary" msgid="2705726826263742491">"Články pomocníka, telefón a čet, začíname"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Účet pre obsah"</string>
@@ -3481,7 +3471,8 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Zobrazuje sa pod prioritnými upozorneniami. Vždy potichu."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Zobrazuje sa pod prioritnými upozorneniami. Vždy potichu."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Keď je zariadenie odomknuté, zobrazovať upozornenia ako banner v hornej časti obrazovky"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Zobrazovať upozornenia"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"Adaptívne upozornenia"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> upozornenia denne</item>
@@ -3508,6 +3499,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Adaptívne upozornenia"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Žiadne"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Prístup k upozorneniam si nevyžiadali žiadne nainštalované aplikácie"</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Povoliť službe <xliff:g id="SERVICE">%1$s</xliff:g> prístup k upozorneniam?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> bude môcť čítať všetky upozornenia vrátane osobných údajov, ako sú mená kontaktov a texty prijatých správ. Bude môcť tiež upraviť alebo zrušiť upozornenia, prípadne v nich spustiť tlačidlá akcie. \n\nAplikácia tým získa aj možnosť vypnúť alebo zapnúť režim bez vyrušení a meniť súvisiace nastavenia."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Povoliť prístup k upozorneniam pre službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>

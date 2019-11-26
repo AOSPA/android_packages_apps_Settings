@@ -30,13 +30,11 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.network.telephony.MobileNetworkUtils;
@@ -55,10 +53,6 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
 
     @VisibleForTesting
     static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
-    @VisibleForTesting
-    static final String MOBILE_NETWORK_PACKAGE = "com.android.phone";
-    @VisibleForTesting
-    static final String MOBILE_NETWORK_CLASS = "com.android.phone.MobileNetworkSettings";
 
     private final boolean mIsSecondaryUser;
     private final TelephonyManager mTelephonyManager;
@@ -207,13 +201,8 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
                         new ComponentName("com.qualcomm.qti.networksetting",
                         "com.qualcomm.qti.networksetting.MobileNetworkSettings"));
                 mContext.startActivity(intent);
-            } else if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.MOBILE_NETWORK_V2)) {
-                final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
-                mContext.startActivity(intent);
             } else {
-                final Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setComponent(
-                        new ComponentName(MOBILE_NETWORK_PACKAGE, MOBILE_NETWORK_CLASS));
+                final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
                 mContext.startActivity(intent);
             }
             return true;

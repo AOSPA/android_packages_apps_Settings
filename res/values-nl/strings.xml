@@ -374,7 +374,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Altijd bevestigingsstap vereisen bij ontgrendelen via gezichtsherkenning in apps"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Gezichtsgegevens verwijderen"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Ontgr. via gezichtsherkenning instellen"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Gebruik \'Ontgrendelen via gezichtsherkenning\' om je apparaat te ontgrendelen, bij apps in te loggen en betalingen te bevestigen.\n\nHoud rekening met het volgende:\nAls je naar de telefoon kijkt, kun je deze onbedoeld ontgrendelen.\n\nJe telefoon kan door iemand anders worden ontgrendeld als de telefoon voor je gezicht wordt gehouden, zelfs als je je ogen dicht hebt.\n\nJe telefoon kan worden ontgrendeld door iemand die veel op je lijkt, zoals een identieke tweelingbroer of -zus."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Gebruik \'Ontgrendelen via gezichtsherkenning\' om je apparaat te ontgrendelen, in te loggen en betalingen te bevestigen.\n\nHoud rekening met het volgende:\nAls je naar de telefoon kijkt, kun je deze onbedoeld ontgrendelen.\n\nJe telefoon kan door iemand anders worden ontgrendeld als de telefoon voor je gezicht wordt gehouden en je je ogen open hebt.\n\nJe telefoon kan worden ontgrendeld door iemand die veel op je lijkt, zoals een identieke tweelingbroer of -zus."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Gezichtsgegevens verwijderen?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"De gezichtsgegevens die worden gebruikt voor ontgrendelen via gezichtsherkenning, worden definitief en op een veilige manier verwijderd. Nadat ze zijn verwijderd, heb je je pincode, patroon of wachtwoord nodig om je telefoon te ontgrendelen, in te loggen bij apps of betalingen te bevestigen."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Gebruik ontgrendelen via gezichtsherkenning om je telefoon te ontgrendelen"</string>
@@ -2511,8 +2511,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Afspelen"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Opslag certificaatgegevens"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Een certificaat installeren"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Certificaten vanuit opslag installeren"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Certificaten installeren vanaf SD-kaart"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Certificaatgegevens wissen"</string>
@@ -2532,22 +2531,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Certificaten gewist."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Kan certificaten niet wissen."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Apps met gebruikstoegang"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"CA-certificaat"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"VPN- en app-gebruikerscertificaat"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Wifi-certificaat"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Je privacy loopt gevaar"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"CA-certificaten worden gebruikt door websites, apps en VPN\'s voor versleuteling. Installeer alleen CA-certificaten van organisaties die je vertrouwt. \n\n Als je een CA-certificaat installeert, krijgt de eigenaar van het certificaat mogelijk toegang tot je gegevens (zoals wachtwoorden, berichten of creditcardgegevens) van websites die je bezoekt of apps die je gebruikt, zelfs als die gegevens zijn versleuteld."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Niet installeren"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Toch installeren"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Certificaat niet geïnstalleerd"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Noodoproepsignaal"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Gedrag bij noodoproepen instellen"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Back-up"</string>
@@ -2939,7 +2930,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Beperkingen"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Beperkingen verwijderen"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Pincode wijzigen"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Meldingen weergeven"</string>
     <string name="help_label" msgid="6886837949306318591">"Hulp en feedback"</string>
     <string name="support_summary" msgid="2705726826263742491">"Help-artikelen, bel- en chatsupport, aan de slag"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Account voor content"</string>
@@ -3389,7 +3379,7 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Wordt weergegeven onder de prioriteitsmeldingen. Altijd stil."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Wordt weergegeven onder de prioriteitsmeldingen. Altijd stil."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Wanneer het apparaat is ontgrendeld, worden meldingen als banner bovenaan het scherm weergegeven"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Meldingen weergeven"</string>
+    <string name="notification_switch_label" msgid="691700255439348600">"Alle meldingen van <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Aanpasbare meldingen"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> meldingen per dag</item>
@@ -3410,6 +3400,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Aanpasbare meldingen"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Geen"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Er zijn geen geïnstalleerde apps die toegang tot meldingen hebben aangevraagd."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Toegang tot meldingen toestaan voor <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> kan alle meldingen lezen, waaronder persoonlijke informatie zoals contactnamen en de tekst van berichten die je ontvangt. De functie kan deze meldingen ook aanpassen of sluiten of actieknoppen die ermee samenhangen activeren. \n\nHierdoor kan de app ook \'Niet storen\' in- of uitschakelen en gerelateerde instellingen wijzigen."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Toegang tot meldingen toestaan voor <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>

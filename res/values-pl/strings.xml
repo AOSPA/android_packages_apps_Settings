@@ -380,7 +380,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Zawsze wymagaj potwierdzenia, gdy używasz rozpoznania twarzy w aplikacjach"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Usuń dane twarzy"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Konfigurowanie rozpoznania twarzy"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Rozpoznanie twarzy umożliwia odblokowywanie urządzenia, logowanie się do aplikacji i zatwierdzanie płatności.\n\nPamiętaj:\nPatrząc na telefon, możesz go mimowolnie odblokować.\n\nInna osoba może odblokować Twój telefon, zbliżając go do Twojej twarzy – nawet wtedy, gdy masz zamknięte oczy.\n\nIstnieje możliwość, że Twój telefon odblokuje ktoś bardzo podobny do Ciebie (np. rodzeństwo)."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Rozpoznanie twarzy umożliwia odblokowanie urządzenia, logowanie do aplikacji i zatwierdzanie płatności.\n\nPamiętaj:\nPatrząc na telefon, możesz go niezamierzenie odblokować.\n\nInna osoba może odblokować Twój telefon, zbliżając go do Twojej twarzy, gdy masz otwarte oczy.\n\nIstnieje możliwość, że Twój telefon odblokuje ktoś bardzo podobny do Ciebie (np. rodzeństwo)."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Usunąć dane twarzy?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Dane twarzy używane przez rozpoznanie twarzy zostaną trwale i bezpiecznie usunięte. Po usunięciu danych do odblokowania telefonu, logowania się w aplikacjach i potwierdzania płatności będziesz potrzebować kodu PIN, wzoru lub hasła."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Używaj skanu twarzy do odblokowywania telefonu"</string>
@@ -1023,8 +1023,7 @@
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Zaawansowane"</string>
     <string name="wifi_advanced_ssid_title" msgid="1552309166043760291">"SSID"</string>
-    <!-- no translation found for wifi_advanced_device_mac_address_title (4486538933329213769) -->
-    <skip />
+    <string name="wifi_advanced_device_mac_address_title" msgid="4486538933329213769">"Adres MAC urządzenia"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="1528136478606735549">"Randomizowany adres MAC"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"Adres IP"</string>
     <string name="wifi_details_title" msgid="8954667664081737098">"Szczegóły sieci"</string>
@@ -1367,8 +1366,7 @@
     <string name="status_roaming" msgid="2638800467430913403">"Roaming"</string>
     <string name="status_operator" msgid="2274875196954742087">"Sieć"</string>
     <string name="status_wifi_mac_address" msgid="2202206684020765378">"Adres MAC karty Wi-Fi"</string>
-    <!-- no translation found for status_device_wifi_mac_address (308853557862261400) -->
-    <skip />
+    <string name="status_device_wifi_mac_address" msgid="308853557862261400">"Adres MAC karty Wi‑Fi urządzenia"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Adres Bluetooth"</string>
     <string name="status_serial_number" msgid="2257111183374628137">"Numer seryjny"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Czas działania"</string>
@@ -2589,8 +2587,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Odtwórz"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Magazyn danych logowania"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Zainstaluj certyfikat"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Zainstaluj certyfikaty z nośnika"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Zainstaluj certyfikaty z karty SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Wyczyść dane o certyfikatach"</string>
@@ -2610,22 +2607,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Wyczyszczono magazyn danych logowania."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Nie można wymazać magazynu."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Aplikacje monitorujące"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"Certyfikat CA"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"Certyfikat użytkownika VPN i aplikacji"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Certyfikat Wi‑Fi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Twoja prywatność jest zagrożona"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"Certyfikaty CA są używane przez witryny, aplikacje i sieci VPN na potrzeby szyfrowania. Instaluj tylko certyfikaty CA organizacji, którym ufasz. \n\n Gdy zainstalujesz certyfikat CA, jego właściciel będzie mógł uzyskać dostęp do Twoich danych, np. haseł, wiadomości czy danych karty, w odwiedzanych witrynach i używanych aplikacjach – nawet jeśli te informacje będą zaszyfrowane."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Nie instaluj"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Zawsze instaluj"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Nie zainstalowano certyfikatu"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Sygnał wybierania numeru alarmowego"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Skonfiguruj sposób działania w przypadku połączenia alarmowego"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Kopia zapasowa"</string>
@@ -3025,7 +3014,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Ograniczenia"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Usuń ograniczenia"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Zmień PIN"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Pokazuj powiadomienia"</string>
     <string name="help_label" msgid="6886837949306318591">"Pomoc i opinie"</string>
     <string name="support_summary" msgid="2705726826263742491">"Artykuły pomocy, telefon i czat, pierwsze kroki"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Konto na materiały"</string>
@@ -3198,7 +3186,7 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"numer seryjny, wersja sprzętu"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"stan aktualizacji zabezpieczeń Androida, wersja pasma podstawowego, wersja jądra"</string>
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"motyw, jasny, ciemny, tryb"</string>
-    <string name="keywords_systemui_theme" msgid="9112852512550404882">"ciemny motyw"</string>
+    <string name="keywords_systemui_theme" msgid="9112852512550404882">"tryb ciemny"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"błąd"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Ekran dostosowany do otoczenia, ekran blokady"</string>
     <string name="keywords_lock_screen_notif" msgid="6716392855813576197">"powiadomienia na ekranie blokady, powiadomienia"</string>
@@ -3483,7 +3471,8 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Wyświetla się pod powiadomieniami priorytetowymi. Zawsze wyciszone."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Wyświetla się pod powiadomieniami priorytetowymi. Zawsze wyciszone."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Gdy urządzenie jest odblokowane, pokazuj powiadomienia jako pasek u góry ekranu"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Pokazuj powiadomienia"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"Powiadomienia adaptacyjne"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> powiadomienia dziennie</item>
@@ -3510,6 +3499,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Powiadomienia adaptacyjne"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Brak"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Żadna z zainstalowanych aplikacji nie prosiła o dostęp do powiadomień."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Zezwolić usłudze <xliff:g id="SERVICE">%1$s</xliff:g> na dostęp do powiadomień?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"Aplikacja <xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> będzie mogła czytać wszystkie powiadomienia, w tym dane osobowe takie jak nazwy kontaktów oraz treść otrzymywanych wiadomości. Będzie też mogła modyfikować lub odrzucać powiadomienia oraz używać zawartych w nich przycisków działań. \n\nDodatkowo aplikacja będzie mogła włączać lub wyłączać tryb Nie przeszkadzać i zmieniać powiązane ustawienia."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Zezwolić usłudze <xliff:g id="SERVICE">%1$s</xliff:g> na dostęp do powiadomień?"</string>
@@ -4251,10 +4242,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Połączono z: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Połączono z wieloma urządzeniami"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Tryb demonstracyjny interfejsu"</string>
-    <string name="dark_ui_mode" msgid="6795784845192720944">"Ciemny motyw"</string>
+    <string name="dark_ui_mode" msgid="6795784845192720944">"Tryb ciemny"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="5141126532745008289">"Wł. / Czasowo wyłączony z powodu oszczędzania baterii"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4619248181769223081">"Czasowo włączony z powodu oszczędzania baterii"</string>
-    <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Obsługiwane aplikacje również zostaną przełączone na ciemny motyw"</string>
+    <string name="dark_ui_settings_dark_summary" msgid="8205234847639399279">"Obsługiwane aplikacje również zostaną przełączone w tryb ciemny"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="8683868642329596059">"OK"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Kafelki szybkich ustawień dla programisty"</string>
     <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Śledzenie Winscope"</string>

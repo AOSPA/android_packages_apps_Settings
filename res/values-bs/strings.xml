@@ -377,7 +377,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Kod otključavanja licem za aplikacije, uvijek tražite potvrdu"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Izbriši podatke o licu"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Postavite otključavanje licem"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Otključavanje licem možete koristiti za otključavanje uređaja, prijavu u aplikacije i potvrđivanje plaćanja.\n\nNapomena:\nTelefon možete otključati čak i kada vam to nije namjera ako pogledate u njega.\n\nVaš telefon je moguće otključati ako ga neko prinese vašem licu čak i dok su vam oči zatvorene.\n\nVaš telefon može otključati osoba koja mnogo liči na vas, kao što je naprimjer identični blizanac."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Otključavanje licem možete koristiti za otključavanje uređaja, prijavu u aplikacije i potvrđivanje plaćanja.\n\nNapomena:\nTelefon možete otključati čak i kada vam to nije namjera ako pogledate u njega.\n\nVaš telefon je moguće otključati ako ga neko prinese vašem licu dok su vam oči otvorene.\n\nVaš telefon može otključati osoba koja mnogo liči na vas, kao što je naprimjer identični blizanac."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Izbrisati podatke o licu?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Podaci o licu koje je koristila funkcija otključavanja licem će se trajno i sigurno izbrisati. Nakon uklanjanja, trebat će vam PIN, uzorak ili lozinka za otključavanje telefona, prijavu u aplikacije i potvrdu plaćanja."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Otključajte telefon pomoću funkcije Otključavanje licem"</string>
@@ -2084,8 +2084,8 @@
     <string name="accessibility_timeout_30secs" msgid="8055710148052265579">"30 sekundi"</string>
     <string name="accessibility_timeout_1min" msgid="6314276027668784112">"1 minuta"</string>
     <string name="accessibility_timeout_2mins" msgid="9062685014853095180">"2 minute"</string>
-    <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Rok za poduzimanje radnje za pristupačnost"</string>
-    <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Rok za poduzimanje radnje"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Vrijeme za poduzimanje radnje za pristupačnost"</string>
+    <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Vrijeme za poduzimanje radnje"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Odaberite koliko dugo želite da se prikazuju poruke koje od vas zahtijevaju da poduzmete radnju, a koje će biti vidljive samo privremeno.\n\nOvu postavku ne podržavaju sve aplikacije."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Odgoda za dodirivanje i držanje"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Inverzija boja"</string>
@@ -2549,8 +2549,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Pokreni"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Pohrana akreditiva"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Instaliranje potvrde"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instaliranje certifikata iz pohrane"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Instaliraj certifikate sa SD kartice"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Brisanje akreditiva"</string>
@@ -2570,22 +2569,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Pohrana akreditiva je izbrisana."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Nije uspjelo bris. memorije vjerodaj."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Apl. s pristupom pod. o korišt."</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"CA certifikat"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"Potvrda za VPN i korisnika aplikacije"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Potvrda za WiFi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Vaša privatnost je izložena riziku"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"Web lokacije, aplikacije i VPN-ovi koriste CA certifikate za šifriranje. Instalirajte CA certifikate samo ako dolaze od organizacija kojima vjerujete. \n\n Ako instalirate CA certifikat, vlasnik tog certifikata može pristupiti vašim podacima, kao što su lozinke, poruke ili detalji kreditne kartice, s web lokacija koje posjetite ili aplikacija koje koristite – čak i ako su ti podaci šifrirani."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Nemoj instalirati"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Ipak instaliraj"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Potvrda nije instalirana"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Signal za hitne pozive"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Postavi ponašanje prilikom upućivanja poziva za hitne situacije"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Izrada sigurnosnih kopija"</string>
@@ -2981,7 +2972,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Ograničenja"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Ukloni ograničenja"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Promijeni PIN"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Prikaži obavještenja"</string>
     <string name="help_label" msgid="6886837949306318591">"Pomoć i pov. inform."</string>
     <string name="support_summary" msgid="2705726826263742491">"Članci za pomoć, telefon i chat, početak"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Račun za sadržaj"</string>
@@ -3435,7 +3425,8 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Prikazuje se ispod prioritetnih obavještenja. Uvijek nečujno."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Prikazuje se ispod prioritetnih obavještenja. Uvijek nečujno."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Kada je uređaj otključan, prikažite obavještenja u vidu banera na vrhu ekrana"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Prikaži obavještenja"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"Prilagodljiva obavještenja"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> obavještenje dnevno</item>
@@ -3459,6 +3450,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Prilagodljiva obavještenja"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Nema"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Nijedna instalirana aplikacija nije zatražila pristup obavještenjima."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Dozvoliti pristup obavještenjima za uslugu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> će moći čitati sva obavještenja, uključujući lične informacije kao što su imena kontakata i tekst primljenih poruka. Takođe će moći izmijeniti ili odbaciti obavještenja ili koristiti dugmad za radnje u obavještenjima. \n\nNa ovaj način će se aplikaciji dati i mogućnost da uključi i isključi način rada Ne ometaj te da promijeni postavke povezane s tom opcijom."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Želite li dozvoliti pristup obavještenjima za uslugu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>

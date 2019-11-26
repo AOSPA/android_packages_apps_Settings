@@ -374,7 +374,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Krev alltid bekreftelsestrinnet når Ansiktslås brukes i apper"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Slett ansiktsdata"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Konfigurer ansiktslås"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Bruk ansiktslås til å låse opp enheten din, logge på apper og bekrefte betalinger.\n\nHusk:\nHvis du ser på telefonen, kan den låses opp, selv om det ikke er meningen.\n\nTelefonen din kan låses opp av noen andre hvis den holdes mot ansiktet ditt, selv om øynene dine er lukket.\n\nTelefonen kan låses opp av noen som ser veldig ut som deg, for eksempel en tvilling."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Bruk Ansiktslås til å låse opp enheten din, logge på apper og bekrefte betalinger.\n\nHusk:\nHvis du ser på telefonen, kan den låses opp, selv om det ikke er meningen.\n\nTelefonen din kan låses opp av noen andre hvis den holdes mot ansiktet ditt mens øynene dine er åpne.\n\nTelefonen kan låses opp av noen som ser veldig ut som deg, for eksempel en tvilling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Vil du slette ansiktsdata?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Ansiktsdataene som brukes av ansiktslåsen, blir permanent slettet på en sikker måte. Etter fjerning trenger du PIN-kode, mønster eller passord for å låse opp telefonen, logge på apper og bekrefte betalinger."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Bruk Ansiktslås til å låse opp telefonen din"</string>
@@ -944,7 +944,7 @@
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"Vil du logge på for å koble til?"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"<xliff:g id="APP_NAME">%1$s</xliff:g> krever at du logger på nettet før du kobler til nettverket."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"KOBLE TIL"</string>
-    <string name="no_internet_access_text" msgid="5926979351959279577">"Dette nettverket har ikke Internett-tilgang. Vil du fortsette å være koblet til nettverket?"</string>
+    <string name="no_internet_access_text" msgid="5926979351959279577">"Dette nettverket har ikke internettilgang. Vil du fortsette å være koblet til nettverket?"</string>
     <string name="partial_connectivity_text" msgid="1287030663891772340">"Noen apper og tjenester fungerer muligens ikke på grunn av begrenset tilkobling. Bruke likevel?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Ikke spør igjen for dette nettverket"</string>
     <string name="lost_internet_access_title" msgid="5779478650636392426">"Wi‑Fi er ikke koblet til Internett"</string>
@@ -2511,8 +2511,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Spill av"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Legitimasjonslager"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Installer et sertifikat"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Installer sertifikater fra lagringsenhet"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Installer sertifikater fra SD-kort"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Tøm legitimasjonslageret"</string>
@@ -2532,22 +2531,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Legitimasjonslageret ble tømt."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Leg.lageret kan ikke slettes."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Apper med brukstilgang"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"CA-sertifikat"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"Brukersertifikat for VPN &amp; app"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Wi‑Fi-sertifikat"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Personvernet ditt er i fare"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"CA-sertifikater brukes av nettsteder, apper og VPN-er for kryptering. Installer bare CA-sertifikater fra organisasjoner du stoler på. \n\n Hvis du installerer et CA-sertifikat, får sertifikateieren tilgang til informasjonen din, for eksempel passord, meldinger eller kredittkortinformasjon, fra nettsteder du besøker, eller apper du bruker – selv om informasjonen er kryptert."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Ikke installer"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Install likevel"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Sertifikatet ble ikke installert"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Ringesignal for nødssituasjoner"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Velg oppførsel når en nødsamtale opprettes"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Sikkerhetskopiering"</string>
@@ -2939,7 +2930,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Begrensninger"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Fjern begrensningene"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Endre PIN-koden"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Vis varsler"</string>
     <string name="help_label" msgid="6886837949306318591">"Hjelp og tilbakemelding"</string>
     <string name="support_summary" msgid="2705726826263742491">"Hjelpeartikler, telefon og chat, kom i gang"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Konto for innhold"</string>
@@ -3389,7 +3379,8 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Vises under prioritetsvarsler. Alltid lydløs."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Vises under prioritetsvarsler. Alltid lydløs."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Når enheten låses opp, vises varsler som et banner over toppen av skjermen"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Vis varsler"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"Varsler som kan tilpasses"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> varsler per dag</item>
@@ -3410,6 +3401,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Varsler som kan tilpasses"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Nei"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Ingen installerte apper har bedt om tilgang til varsler."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Vil du gi tilgang til varsler for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> kan lese alle varsler, inkludert personopplysninger som kontaktnavn og tekstinnholdet i meldinger du mottar. Den kan også endre eller avvise varsler eller utløse handlingsknapper i varslene. \n\nDette gir også appen muligheten til å slå Ikke forstyrr av eller på samt endre tilknyttede innstillinger."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Vil du gi tilgang til varsler for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4327,8 +4320,8 @@
     <string name="disabled_feature_reason_slow_down_phone" msgid="3557117039415422481">"Denne funksjonen er slått av fordi den gjør telefonen din tregere"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Tving fullstendige GNSS-målinger"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Spor alle GNSS-konstellasjoner og -frekvenser uten syklus for oppgaver"</string>
-    <string name="show_first_crash_dialog" msgid="8889957119867262599">"Vis alltid kræsjdialogboksen"</string>
-    <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Vis dialogboksen hver gang en app kræsjer"</string>
+    <string name="show_first_crash_dialog" msgid="8889957119867262599">"Vis alltid krasjdialogboksen"</string>
+    <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Vis dialogboksen hver gang en app krasjer"</string>
     <string name="angle_enabled_app" msgid="1841862539745838255">"Velg en ANGLE-aktivert app"</string>
     <string name="angle_enabled_app_not_set" msgid="864740024581634768">"Du har ikke angitt noen ANGLE-aktivert app"</string>
     <string name="angle_enabled_app_set" msgid="226015765615525056">"ANGLE-aktivert app: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>

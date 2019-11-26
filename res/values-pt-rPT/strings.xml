@@ -374,7 +374,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Ao utilizar Desbl. Através Rosto em apl., solicitar sempre confirmação"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Elim. dados faciais"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Configure o Desbloqueio através do rosto"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Utilize o Desbloqueio através do rosto para desbloquear o dispositivo, iniciar sessão em aplicações e confirmar pagamentos.\n\nTenha em atenção:\nPode desbloquear o telemóvel involuntariamente ao olhar para o mesmo.\n\nAlguém pode desbloquear o telemóvel se o segurar junto ao seu rosto, mesmo com os olhos fechados.\n\nAlguém muito parecido consigo, como um irmão com traços semelhantes, pode desbloquear o telemóvel."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Utilize o Desbloqueio Através do Rosto para desbloquear o dispositivo, iniciar sessão em aplicações e confirmar pagamentos.\n\nTenha em atenção:\nPode desbloquear o telemóvel involuntariamente ao olhar para o mesmo.\n\nAlguém pode desbloquear o telemóvel se o segurar junto ao seu rosto com os olhos abertos.\n\nAlguém muito parecido consigo, como um irmão com traços semelhantes, pode desbloquear o telemóvel."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Eliminar os dados do rosto?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Os dados do rosto utilizados pelo Desbloqueio através do rosto serão eliminados permanentemente e em segurança. Após a remoção, precisará do PIN, do padrão ou da palavra-passe para desbloquear o telemóvel, iniciar sessão nas aplicações e confirmar pagamentos."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Utilize o Desbloqueio Através do Rosto para desbloquear o telemóvel"</string>
@@ -2511,8 +2511,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Reproduzir"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Armazenamento de credenciais"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Instalar um certificado"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instalar certificados a partir do armazenamento"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Instalar certificados a partir do cartão SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Limpar credenciais"</string>
@@ -2532,22 +2531,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Armaz. credenciais apagado."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Não foi possível apagar o armazenamento de credenciais."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Apps com acesso de utilização"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"Certificado da AC"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"Certif. VPN/utiliz. da aplic."</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Certificado de Wi‑Fi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"A sua privacidade está em risco"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"Os certificado da AC (Autoridade de certificação) são utilizados por Websites, aplicações e VPNs para encriptação. Apenas instale certificados da AC (Autoridade de certificação) de entidades em que confia. \n\n Se instalar um certificado da AC (Autoridade de certificação), o proprietário do mesmo pode aceder às suas informações, tais como palavras-passe, mensagens ou detalhes do cartão de crédito, a partir de Websites que visita ou de aplicações que utiliza, mesmo que as informações estejam encriptadas."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Não instalar"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Instalar mesmo assim"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Certificado não instalado."</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Sinal para marcação de emergência"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Definir o comportamento quando é efetuada uma chamada de emergência"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Cópia de segurança"</string>
@@ -2939,7 +2930,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Restrições"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Remover restrições"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Alterar PIN"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Mostrar notificações"</string>
     <string name="help_label" msgid="6886837949306318591">"Ajuda e comentários"</string>
     <string name="support_summary" msgid="2705726826263742491">"Artigos de ajuda, telefone e chat, como começar"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Conta para conteúdo"</string>
@@ -3389,7 +3379,7 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"É apresentada abaixo das notificações prioritárias. Sempre silenciosa."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"É apresentada abaixo das notificações prioritárias. Sempre silenciosa."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Com o dispositivo desbloqueado, as notificações são apresentadas como uma faixa no topo do ecrã."</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Mostrar notificações"</string>
+    <string name="notification_switch_label" msgid="691700255439348600">"Todas as notificações da aplicação <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="8441022088918117445">"Notificações adaptáveis"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> notificações por dia</item>
@@ -3410,6 +3400,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Notificações adaptáveis"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Nenhum"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Nenhuma aplicação instalada solicitou acesso a notificações"</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Pretende permitir o acesso a notificações do <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"O <xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> consegue ler todas as notificações, incluindo informações pessoais como nomes de contactos e o texto das mensagens recebidas. Também consegue modificar ou ignorar notificações, assim como acionar botões de ação que estas contenham. \n\nDeste modo, a aplicação também pode ativar ou desativar o modo Não incomodar e alterar as definições relacionadas."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Pretende permitir o acesso a notificações do <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>

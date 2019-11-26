@@ -374,7 +374,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Vereis bevestigingstap altyd as gesigslot in programme gebruik word"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Vee gesigdata uit"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Stel gesigslot op"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Gebruik gesigslot om jou toestel te ontsluit, by programme aan te meld en betalings te bevestig.\n\nHou in gedagte:\nAs jy na die foon kyk, sal dit dalk ontsluit wanneer jy nie bedoel om dit te doen nie.\n\nIemand anders kan jou foon ontsluit as dit voor jou gesig gehou word, selfs al is jou oë toe.\n\nJou foon kan ontsluit word deur iemand wat baie soos jy lyk, soos \'n identiese broer of suster."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Gebruik gesigslot om jou toestel te ontsluit, by programme aan te meld en betalings te bevestig.\n\nHou in gedagte:\nAs jy na die foon kyk, sal dit dalk ontsluit wanneer jy nie bedoel om dit te doen nie.\n\nIemand anders kan jou foon ontsluit as dit voor jou gesig gehou word terwyl jou oë oop is.\n\nJou foon kan ontsluit word deur iemand wat baie soos jy lyk, byvoorbeeld \'n identiese broer of suster."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Vee gesigdata uit?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Die gesigdata wat deur gesigslot gebruik is, sal permanent en veilig uitgevee word. Nadat dit uitgevee is, sal jy jou PIN, patroon of wagwoord moet hê om jou foon te ontsluit, by programme aan te meld en betalings te bevestig."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Gebruik gesigslot om jou foon te ontsluit"</string>
@@ -2511,8 +2511,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Speel"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Eiebewysberging"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Installeer \'n sertifikaat"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Installeer sertifikate uit berging"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Installeer sertifikate uit SD-kaart"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Vee eiebewyse uit"</string>
@@ -2532,22 +2531,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Eiebewysberging is uitgevee."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Eiebewysberging kon nie uitgevee word nie."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Programme met gebruiktoegang"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"CA-sertifikaat"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"VPN-/programgebruikersertifikaat"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Wi‑Fi-sertifikaat"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Jou privaatheid word bedreig"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"CA-sertifikate word deur webwerwe, programme en VPN\'e vir enkripsie gebruik. Installeer net CA-sertifikate vanaf organisasies wat jy vertrou. \n\n As jy \'n CA-sertifikaat installeer, kan die sertifikaateienaar dalk toegang kry tot jou inligting, soos wagwoorde, boodskappe of kredietkaartbesonderhede, vanaf webwerwe wat jy besoek of programme wat jy gebruik – selfs al is daardie inligting geënkripteer."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Moenie installeer nie"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Installeer nogtans"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Sertifikaat is nie geïnstalleer nie"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Noodoproepsein"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Stel gedrag wanneer \'n noodoproep gemaak word"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Rugsteun"</string>
@@ -2939,7 +2930,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Beperkings"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Verwyder beperkings"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Verander PIN"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Wys kennisgewings"</string>
     <string name="help_label" msgid="6886837949306318591">"Hulp en terugvoer"</string>
     <string name="support_summary" msgid="2705726826263742491">"Hulpartikels, foon en klets, kom aan die gang"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Rekening vir die inhoud"</string>
@@ -3389,7 +3379,8 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Wys prioriteitkennisgewings hieronder. Altyd stil."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Wys prioriteitkennisgewings hieronder. Altyd stil."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Wys kennisgewings as \'n banier boaan die skerm wanneer die toestel ontsluit is"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Wys kennisgewings"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"Aanpasbare kennisgewings"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> kennisgewings per dag</item>
@@ -3410,6 +3401,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Aanpasbare kennisgewings"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Geen"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Geen geïnstalleerde programme het kennisgewingtoegang versoek nie."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Laat kennisgewingtoegang vir <xliff:g id="SERVICE">%1$s</xliff:g> toe?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> sal alle kennisgewings kan lees, insluitend persoonlike inligting soos kontakname en die teks van boodskappe wat jy ontvang. Dit sal ook kennisgewings kan wysig of toemaak, of handelingknoppies wat hulle bevat, kan gebruik. \n\nDit sal die program ook in staat stel om Moenie Steur Nie aan of af te skakel en verwante instellings te verander."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Laat kennisgewingtoegang vir <xliff:g id="SERVICE">%1$s</xliff:g> toe?"</string>

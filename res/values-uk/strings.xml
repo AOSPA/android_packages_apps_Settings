@@ -380,7 +380,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Просити підтвердження під час використання Фейсконтролю в додатках"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Видалити дані про обличчя"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Налаштувати Фейсконтроль"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"З функцією фейсконтролю можна розблоковувати пристрій, входити в додатки й підтверджувати платежі.\n\nЗверніть увагу:\nпоглянувши на телефон, ви можете випадково розблокувати його в недоречний момент.\n\nБудь-хто може розблокувати телефон, якщо піднесе його до вашого обличчя, навіть коли у вас закриті очі.\n\nТелефон може розблокувати людина, схожа на вас, наприклад, ваш близнюк."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Використовуйте Фейсконтроль, щоб розблоковувати пристрій, входити в додатки й підтверджувати платежі.\n\nВажливо\nТелефон можна розблокувати поглядом випадково.\n\nБудь-хто може розблокувати телефон, якщо піднесе його до вашого обличчя, коли у вас відкриті очі.\n\nТелефон може розблокувати людина, схожа на вас, зокрема ваш близнюк."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Видалити дані про обличчя?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Дані про обличчя, потрібні для фейсконтролю, буде остаточно видалено без можливості відновлення. Після цього потрібно буде вводити PIN-код, ключ або пароль, щоб розблоковувати телефон, входити в додатки й підтверджувати платежі."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Розблоковуйте телефон за допомогою фейсконтролю"</string>
@@ -1655,7 +1655,7 @@
     <string name="mobile_no_provisioning_url" msgid="9053814051811634125">"Оператор <xliff:g id="OPERATOR">%1$s</xliff:g> не має веб-сайту про надання послуг"</string>
     <string name="mobile_insert_sim_card" msgid="9052590985784056395">"Вставте SIM-карту та перезапустіть"</string>
     <string name="mobile_connect_to_internet" msgid="1733894125065249639">"Під’єднайтеся до Інтернету"</string>
-    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Останні запити геоданих"</string>
+    <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Останні запити на геодані"</string>
     <string name="location_recent_location_requests_see_all" msgid="9063541547120162593">"Показати всі"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"Служби локації"</string>
     <string name="location_title" msgid="1029961368397484576">"Моє місцезнах."</string>
@@ -2587,8 +2587,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Відтворити"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Сховище облікових даних"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Установіть сертифікат"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Установити сертифікати з носія"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Установлювати сертифікати з карти SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Видалити облікові дані"</string>
@@ -2608,22 +2607,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Сховище облік. даних очищено."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Схов.облік.даних неможл.видал."</string>
     <string name="usage_access_title" msgid="332333405495457839">"Додатки з доступом до даних"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"Сертифікат ЦС"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"VPN і сертифікат користувача"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Сертифікат Wi‑Fi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Ваша конфіденційність під загрозою"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"Сертифікати центру сертифікації (ЦС) використовуються веб-сайтами, додатками й мережами VPN для шифрування. Установлюйте сертифікати ЦС тільки від тих організацій, яким довіряєте. \n\n Якщо ви встановите сертифікат ЦА, то його власник зможе отримувати доступ до вашої інформації (зокрема паролів, повідомлень і даних кредитних карток) з веб-сайтів, які ви відвідуєте, та з додатків, якими користуєтеся, навіть якщо таку інформацію зашифровано."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Не встановлювати"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Усе одно встановити"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Сертифікат не встановлено"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Сигнал екстреного виклику"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Устан. поведінку при розміщ. аварійного виклику"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Резервне копіювання"</string>
@@ -3023,7 +3014,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Обмеження"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Зняти обмеження"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Змінити PIN-код"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Показати сповіщення"</string>
     <string name="help_label" msgid="6886837949306318591">"Довідка й відгуки"</string>
     <string name="support_summary" msgid="2705726826263742491">"Довідкові статті, підтримка телефоном і в чаті, початок роботи"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Обліковий запис для вмісту"</string>
@@ -3481,7 +3471,8 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Показуються під пріоритетними сповіщеннями. Завжди без звуку."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Показуються під пріоритетними сповіщеннями. Завжди без звуку."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Коли пристрій розблоковано, показувати сповіщення як банер угорі екрана"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Показувати сповіщення"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"Адаптивні сповіщення"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщення на день</item>
@@ -3508,6 +3499,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Адаптивні сповіщення"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Немає"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Установлені додатки не запитували доступу до сповіщень."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Надати додатку <xliff:g id="SERVICE">%1$s</xliff:g> доступ до сповіщень?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> зможе переглядати всі сповіщення, зокрема з особистою інформацією, як-от іменами контактів і текстами отриманих повідомлень. Він також зможе змінювати й відхиляти сповіщення та активувати в них командні кнопки. \n\nДодаток зможе вмикати й вимикати режим \"Не турбувати\" та змінювати пов’язані з ним налаштування."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Надати додатку <xliff:g id="SERVICE">%1$s</xliff:g> доступ для сповіщень?"</string>

@@ -323,7 +323,7 @@
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"الهاتف ليس مشفّرًا."</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"تم تشفير الجهاز"</string>
     <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"الجهاز ليس مشفرًا."</string>
-    <string name="lockscreen_settings_title" msgid="1099738951060387656">"عرض شاشة القفل"</string>
+    <string name="lockscreen_settings_title" msgid="1099738951060387656">"عرض شاشة التأمين"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="278055252361575926">"ما يتم عرضه"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"‏تعيين موقعي، إلغاء تأمين الشاشة، تأمين شريحة SIM، تأمين تخزين الاعتماد"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"تعيين موقعي، إلغاء تأمين الشاشة، تأمين تخزين الاعتماد"</string>
@@ -386,7 +386,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"عند استخدام ميزة \"فتح القفل بالوجه\" في التطبيقات، اطلُب دائمًا خطوة التأكيد."</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"حذف بيانات الوجه"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"إعداد ميزة \"فتح القفل بالوجه\""</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"يمكنك استخدام \"فتح القفل بالوجه\" لفتح قفل الجهاز وتسجيل الدخول إلى التطبيقات وتأكيد عمليات الدفع.\n\nملاحظة مهمة:\nقد تفتح الهاتف بدون قصد بمجرّد النظر إليه.\n\nويمكن لشخص آخر فتح قفل هاتفك عند تقريبه من وجهك، حتى وأنت مغلق عينيك.\n\nوكذلك، يمكن لشخص يشبهك كثيرًا، مثل شقيقك التوأم، فتح قفل الهاتف."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"يمكنك استخدام \"فتح القفل بالوجه\" لفتح قفل الجهاز وتسجيل الدخول إلى التطبيقات وتأكيد عمليات الدفع.\n\nملاحظة مهمة:\nقد تفتح الهاتف بدون قصد بمجرّد النظر إليه.\n\nويمكن لشخص آخر فتح قفل هاتفك عند تقريبه من وجهك وأنت فاتح عينيك.\n\nوكذلك، يمكن لشخص يشبهك كثيرًا، مثل شقيقك التوأم، فتح قفل الهاتف."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"هل تريد حذف بيانات الوجه؟"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"سيتم حذف بيانات الوجه التي تستخدمها ميزة \"فتح القفل بالوجه\" نهائيًا وبشكلٍ آمن. وبعد إزالتها، ستحتاج إلى رقم التعريف الشخصي أو النقش أو كلمة المرور لفتح قفل الهاتف وتسجيل الدخول إلى التطبيقات وتأكيد الدفعات."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"استخدام \"فتح القفل بالوجه\" لفتح قفل الهاتف"</string>
@@ -2663,8 +2663,7 @@
     <string name="tts_play" msgid="2628469503798633884">"تشغيل"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"الشبكات الافتراضية الخاصة"</string>
     <string name="credentials_title" msgid="4446234003860769883">"تخزين بيانات الاعتماد"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"تثبيت شهادة"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"تثبيت الشهادات من وحدة تخزين"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"‏تثبيت الشهادات من بطاقة SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"محو بيانات الاعتماد"</string>
@@ -2684,22 +2683,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"تم مسح تخزين بيانات الاعتماد."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"تعذر محو وحدة تخزين بيانات الاعتماد."</string>
     <string name="usage_access_title" msgid="332333405495457839">"تطبيقات مع بيانات الاستخدام"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"‏شهادة CA"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"‏شهادة مستخدم التطبيق وVPN"</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"‏شهادة شبكة Wi‑Fi"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"خصوصيتك معرَّضة للخطر"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"‏المواقع الإلكترونية والتطبيقات والشبكات الافتراضية الخاصة (VPN) تستخدِم شهادات CA للترميز. لا تثبِّت شهادات CA إلا من المؤسسات التي تثق فيها. \n\n إذا ثبَّت شهادة CA، يمكن لمالك الشهادة الوصول إلى معلوماتك، مثلاً كلمات المرور أو الرسائل أو تفاصيل بطاقة الائتمان من المواقع الإلكترونية التي زرتها أو التطبيقات التي تستخدمها حتى إذا تم ترميز هذه المعلومات."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"عدم التثبيت"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"التثبيت على أي حال"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"لم يتم تثبيت الشهادة."</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"إشارة اتصال الطوارئ"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"تعيين السلوك عند إجراء اتصال بالطوارئ"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"الاحتفاظ بنسخة احتياطية"</string>
@@ -3107,7 +3098,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"القيود"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"إزالة القيود"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"‏تغيير رمز PIN"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"إظهار الإشعارات"</string>
     <string name="help_label" msgid="6886837949306318591">"المساعدة والتعليقات"</string>
     <string name="support_summary" msgid="2705726826263742491">"مقالات المساعدة والاتصال الهاتفي والمحادثة والبدء"</string>
     <string name="user_account_title" msgid="1127193807312271167">"حساب المحتوى"</string>
@@ -3573,7 +3563,8 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"يتم عرض هذه الإشعارات أسفل الإشعارات ذات الأولوية. كتم الصوت دائمًا."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"يتم عرض هذه الإشعارات أسفل الإشعارات ذات الأولوية. كتم الصوت دائمًا."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"عند فتح قفل الجهاز، تظهر الإشعارات في صور بانر أعلى الشاشة."</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"عرض الإشعارات"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"الإشعارات التكيّفية"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="zero"><xliff:g id="NUMBER_1">%d</xliff:g> إشعار تقريبًا في اليوم</item>
@@ -3606,6 +3597,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"الإشعارات التكيّفية"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"بلا"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"لم تطلب أي تطبيقات مثبّتة حق الوصول إلى الإشعارات."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"هل تسمح بوصول خدمة <xliff:g id="SERVICE">%1$s</xliff:g> إلى الإشعارات؟"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"سيكون بإمكان \"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>\" قراءة جميع الإشعارات، بما في ذلك المعلومات الشخصية مثل أسماء جهات الاتصال ونصوص الرسائل التي تتلقّاها. وسيتمكّن كذلك من تعديل الإشعارات أو تجاهلها أو تشغيل أزرار الإجراءات التي تحتوي عليها. \n\nوستتيح هذه الميزة أيضًا للتطبيق إمكانية تفعيل خاصية \"عدم الإزعاج\" أو إيقافها وتغيير الإعدادات ذات الصلة."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"هل تسمح بوصول خدمة <xliff:g id="SERVICE">%1$s</xliff:g> إلى الإشعارات؟"</string>

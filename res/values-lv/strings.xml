@@ -377,7 +377,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Autorizējoties ar seju lietotnēs, vienmēr pieprasīt apstiprinājumu"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Dzēst sejas datus"</string>
     <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Iestatīt autorizāciju pēc sejas"</string>
-    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Izmantojot autorizāciju pēc sejas, varat atbloķēt ierīci, pierakstīties lietotnēs un apstiprināt maksājumus.\n\nSvarīga informācija!\nSkatoties uz tālruni, tas var tikt nejauši atbloķēts.\n\nJūsu tālruni var atbloķēt kāds cits, ja tālrunis tiek turēts pret jūsu seju, kad jūsu acis ir aizvērtas.\n\nJūsu tālruni var atbloķēt jums līdzīga persona, piemēram, identiskais dvīnis."</string>
+    <string name="security_settings_face_settings_footer" msgid="6072833685685070967">"Izmantojot autorizāciju pēc sejas, varat atbloķēt ierīci, pierakstīties lietotnēs un apstiprināt maksājumus.\n\nSvarīga informācija!\nSkatīšanās uz ekrānu var to nejauši atbloķēt.\n\nJūsu tālruni var atbloķēt kāds cits, ja to tur jūsu sejas priekšā, kad jūsu acis ir vaļā.\n\nJūsu tālruni var atbloķēt jums līdzīga persona, piemēram, identiska izskata brālis vai māsa."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Vai dzēst sejas datus?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Sejas dati, ar kuriem tiek veikta autorizācija pēc sejas, tiks neatgriezeniski un droši izdzēsti. Pēc noņemšanas jums būs jāizmanto PIN, kombinācija vai parole, lai atbloķētu tālruni, pierakstītos lietotnēs un apstiprinātu maksājumus."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Izmantot tālruņa atbloķēšanai autorizāciju pēc sejas"</string>
@@ -2549,8 +2549,7 @@
     <string name="tts_play" msgid="2628469503798633884">"Atskaņot"</string>
     <string name="vpn_settings_title" msgid="5662579425832406705">"VPN"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Akreditācijas datu krātuve"</string>
-    <!-- no translation found for credentials_install (1114035438930132516) -->
-    <skip />
+    <string name="credentials_install" msgid="1114035438930132516">"Sertifikāta instalēšana"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instalēt sertifikātus no atmiņas"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Instalēt sertifikātus no SD kartes"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Notīrīt akreditācijas datus"</string>
@@ -2570,22 +2569,14 @@
     <string name="credentials_erased" msgid="2907836028586342969">"Akreditācijas datu krātuve ir izdzēsta."</string>
     <string name="credentials_not_erased" msgid="7685932772284216097">"Akred. datus nevarēja izdzēst"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Piekļuve lietojuma datiem"</string>
-    <!-- no translation found for ca_certificate (6476827739385637528) -->
-    <skip />
-    <!-- no translation found for user_certificate (1245239718062428612) -->
-    <skip />
-    <!-- no translation found for wifi_certificate (4599070907834877135) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_title (4478333162133486865) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_description (5440294374808940938) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_dont_install (4537578357155660739) -->
-    <skip />
-    <!-- no translation found for ca_certificate_warning_install_anyway (7493237489439243674) -->
-    <skip />
-    <!-- no translation found for cert_not_installed (6088612710464676185) -->
-    <skip />
+    <string name="ca_certificate" msgid="6476827739385637528">"CA sertifikāts"</string>
+    <string name="user_certificate" msgid="1245239718062428612">"VPN un lietotnes liet. sertif."</string>
+    <string name="wifi_certificate" msgid="4599070907834877135">"Wi‑Fi sertifikāts"</string>
+    <string name="ca_certificate_warning_title" msgid="4478333162133486865">"Jūsu konfidencialitāte ir apdraudēta"</string>
+    <string name="ca_certificate_warning_description" msgid="5440294374808940938">"CA sertifikāti tiek izmantoti vietnēs, lietotnēs un VPN tīklos, lai nodrošinātu šifrēšanu. Instalējiet CA sertifikātus tikai no uzticamām organizācijām. \n\n Ja instalēsiet CA sertifikātu, sertifikāta īpašnieks varēs piekļūt jūsu informācijai, piemēram, parolēm, ziņojumiem vai kredītkartes informācijai, no jūsu apmeklētajām vietnēm vai izmantotajām lietotnēm (pat ja šī informācija ir šifrēta)."</string>
+    <string name="ca_certificate_warning_dont_install" msgid="4537578357155660739">"Neinstalēt"</string>
+    <string name="ca_certificate_warning_install_anyway" msgid="7493237489439243674">"Tik un tā instalēt"</string>
+    <string name="cert_not_installed" msgid="6088612710464676185">"Sertifikāts nav instalēts"</string>
     <string name="emergency_tone_title" msgid="254495218194925271">"Ārkārtas zvana signāls"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Iestatīt uzvedību, kad tiek veikts ārkārtas zvans"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Dublēšana"</string>
@@ -2981,7 +2972,6 @@
     <string name="restriction_settings_title" msgid="4233515503765879736">"Ierobežojumi"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Ierobežojumu atcelšana"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Mainīt PIN"</string>
-    <string name="app_notifications_switch_label" msgid="9124072219553687583">"Rādīt paziņojumus"</string>
     <string name="help_label" msgid="6886837949306318591">"Palīdzība/atsauksmes"</string>
     <string name="support_summary" msgid="2705726826263742491">"Palīdzības raksti, tālruņa zvani un tērzēšana, darba sākšana"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Konts saturam"</string>
@@ -3435,7 +3425,8 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Tiek rādīts zem prioritārajiem paziņojumiem. Vienmēr bez skaņas."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Tiek rādīts zem prioritārajiem paziņojumiem. Vienmēr bez skaņas."</string>
     <string name="notification_channel_summary_high" msgid="7737315941884569891">"Rādīt paziņojumus reklāmkarogā ekrāna augšdaļā, ja ierīce ir atbloķēta"</string>
-    <string name="notification_switch_label" msgid="6843075654538931025">"Rādīt paziņojumus"</string>
+    <!-- no translation found for notification_switch_label (691700255439348600) -->
+    <skip />
     <string name="default_notification_assistant" msgid="8441022088918117445">"Adaptīvie paziņojumi"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="6049014219388148161">
       <item quantity="zero">Ap <xliff:g id="NUMBER_1">%d</xliff:g> paziņojumiem dienā</item>
@@ -3459,6 +3450,8 @@
     <string name="notification_assistant_title" msgid="7531256823396529700">"Adaptīvie paziņojumi"</string>
     <string name="no_notification_assistant" msgid="2818970196806227480">"Nav"</string>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Nevienā instalētajā lietotnē nav pieprasīta piekļuve paziņojumiem."</string>
+    <!-- no translation found for notification_access_detail_switch (7269867911720439737) -->
+    <skip />
     <string name="notification_assistant_security_warning_title" msgid="300600401595343861">"Vai atļaut pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> piekļūt paziņojumiem?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="5829972610310154776">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> varēs lasīt visus paziņojumus, tostarp personīgo informāciju, piemēram, kontaktpersonu vārdu un saņemtās īsziņas. Lietotne varēs arī pārveidot vai noraidīt paziņojumus vai aktivizēt tajos esošās darbību pogas. \n\nLietotne varēs arī ieslēgt vai izslēgt režīmu “Netraucēt” un mainīt saistītos iestatījumus."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Vai atļaut pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> piekļūt paziņojumiem?"</string>
