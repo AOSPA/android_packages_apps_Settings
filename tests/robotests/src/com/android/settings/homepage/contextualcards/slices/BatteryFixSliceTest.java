@@ -40,7 +40,6 @@ import com.android.settings.slices.SliceBackgroundWorker;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -82,14 +81,13 @@ public class BatteryFixSliceTest {
     }
 
     @Test
-    @Ignore
-    public void updateBatteryTipAvailabilityCache_hasImportantTip_shouldReturnTrue() {
+    public void refreshBatteryTips_hasImportantTip_shouldReturnTrue() {
         final List<BatteryTip> tips = new ArrayList<>();
         tips.add(new LowBatteryTip(BatteryTip.StateType.INVISIBLE, false, ""));
         tips.add(new EarlyWarningTip(BatteryTip.StateType.NEW, false));
         ShadowBatteryTipLoader.setBatteryTips(tips);
 
-        BatteryFixSlice.updateBatteryTipAvailabilityCache(mContext);
+        BatteryFixSlice.refreshBatteryTips(mContext);
 
         assertThat(BatteryFixSlice.isBatteryTipAvailableFromCache(mContext)).isTrue();
     }
@@ -101,14 +99,13 @@ public class BatteryFixSliceTest {
         tips.add(new EarlyWarningTip(BatteryTip.StateType.HANDLED, false));
         ShadowBatteryTipLoader.setBatteryTips(tips);
 
-        BatteryFixSlice.updateBatteryTipAvailabilityCache(mContext);
+        BatteryFixSlice.refreshBatteryTips(mContext);
         final Slice slice = mSlice.getSlice();
 
         assertThat(SliceMetadata.from(mContext, slice).isErrorSlice()).isTrue();
     }
 
     @Test
-    @Ignore
     @Config(shadows = {
             BatteryFixSliceTest.ShadowEarlyWarningTip.class,
             BatteryFixSliceTest.ShadowSliceBackgroundWorker.class
@@ -118,7 +115,7 @@ public class BatteryFixSliceTest {
         tips.add(new EarlyWarningTip(BatteryTip.StateType.NEW, false));
         // Create fake cache data
         ShadowBatteryTipLoader.setBatteryTips(tips);
-        BatteryFixSlice.updateBatteryTipAvailabilityCache(mContext);
+        BatteryFixSlice.refreshBatteryTips(mContext);
         // Create fake background worker data
         BatteryFixSlice.BatteryTipWorker batteryTipWorker = mock(
                 BatteryFixSlice.BatteryTipWorker.class);

@@ -50,7 +50,7 @@ public class WifiTetherSoftApManager {
     }
 
     public void registerSoftApCallback() {
-        mWifiManager.registerSoftApCallback(mSoftApCallback, new HandlerExecutor(mHandler));
+        mWifiManager.registerSoftApCallback(new HandlerExecutor(mHandler), mSoftApCallback);
     }
 
     public void unRegisterSoftApCallback() {
