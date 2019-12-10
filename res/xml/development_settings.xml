@@ -258,6 +258,16 @@
             android:summary="@string/wifi_scan_throttling_summary" />
 
         <SwitchPreference
+            android:key="wifi_whitelist_roaming"
+            android:title="@string/wifi_whitelist_roaming"
+            android:summary="@string/wifi_whitelist_roaming_summary" />
+
+        <SwitchPreference
+            android:key="wifi_unsaved_network_linking"
+            android:title="@string/wifi_unsaved_network_linking"
+            android:summary="@string/wifi_unsaved_network_linking_summary" />
+
+        <SwitchPreference
             android:key="mobile_data_always_on"
             android:title="@string/mobile_data_always_on"
             android:summary="@string/mobile_data_always_on_summary" />
