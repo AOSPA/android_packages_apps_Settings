@@ -46,7 +46,7 @@ public class InstallCaCertificateWarning extends Activity {
         final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
         mixin.setSecondaryButton(
                 new FooterButton.Builder(this)
-                        .setText(R.string.ca_certificate_warning_install_anyway)
+                        .setText(R.string.certificate_warning_install_anyway)
                         .setListener(installCaCertificate())
                         .setButtonType(FooterButton.ButtonType.OTHER)
                         .setTheme(R.style.SudGlifButton_Secondary)
@@ -55,7 +55,7 @@ public class InstallCaCertificateWarning extends Activity {
 
         mixin.setPrimaryButton(
                 new FooterButton.Builder(this)
-                        .setText(R.string.ca_certificate_warning_dont_install)
+                        .setText(R.string.certificate_warning_dont_install)
                         .setListener(returnToInstallCertificateFromStorage())
                         .setButtonType(FooterButton.ButtonType.NEXT)
                         .setTheme(R.style.SudGlifButton_Primary)

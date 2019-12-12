@@ -18,7 +18,7 @@ package com.android.settings.wifi.tether;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -53,7 +53,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
 
     @Override
     public void updateDisplay() {
-        final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
+        final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
         int tempBandIndex = mBandIndex;
         if (config == null) {
             mBandIndex = 0;
@@ -62,9 +62,9 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             mBandIndex = validateSelection(config);
             Log.d(TAG, "Updating band index to " + mBandIndex);
         } else {
-            config.apBand = 0;
-            mWifiManager.setWifiApConfiguration(config);
-            mBandIndex = config.apBand;
+            mWifiManager.setSoftApConfiguration(
+                    new SoftApConfiguration.Builder(config).setBand(0).build());
+            mBandIndex = config.getBand();
             Log.d(TAG, "5Ghz not supported, updating band index to " + mBandIndex);
         }
         ListPreference preference =
@@ -81,13 +81,13 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             preference.setSummary(R.string.wifi_ap_choose_2G);
         } else {
             preference.setEnabled(true);
-            preference.setValue(Integer.toString(config.apBand));
+            preference.setValue(Integer.toString(config.getBand()));
             preference.setSummary(getConfigSummary());
         }
     }
 
     String getConfigSummary() {
-        if (mBandIndex == WifiConfiguration.AP_BAND_ANY) {
+        if (mBandIndex == SoftApConfiguration.BAND_ANY) {
            return mContext.getString(R.string.wifi_ap_prefer_5G);
         }
         return mBandSummaries[mBandIndex];
@@ -126,12 +126,12 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         // 1: no dual mode means we can't have AP_BAND_ANY - default to 5GHZ
         // 2: no 5 GHZ support means we can't have AP_BAND_5GHZ - default to 2GHZ
         // 3: With Dual mode support we can't have AP_BAND_5GHZ - default to ANY
-        if (!isDualMode && WifiConfiguration.AP_BAND_ANY == band) {
-            return WifiConfiguration.AP_BAND_5GHZ;
-        } else if (!is5GhzBandSupported() && WifiConfiguration.AP_BAND_5GHZ == band) {
-            return WifiConfiguration.AP_BAND_2GHZ;
-        } else if (isDualMode && WifiConfiguration.AP_BAND_5GHZ == band) {
-            return WifiConfiguration.AP_BAND_ANY;
+        if (!isDualMode && SoftApConfiguration.BAND_ANY == band) {
+            return SoftApConfiguration.BAND_5GHZ;
+        } else if (!is5GhzBandSupported() && SoftApConfiguration.BAND_5GHZ == band) {
+            return SoftApConfiguration.BAND_2GHZ;
+        } else if (isDualMode && SoftApConfiguration.BAND_5GHZ == band) {
+            return SoftApConfiguration.BAND_ANY;
         }
 
         return band;
