@@ -27,13 +27,13 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 
-public class AgpsPreferenceController extends BasePreferenceController {
+public class AgpsPreferenceController extends LocationBasePreferenceController {
     private static final String KEY_ASSISTED_GPS = "assisted_gps";
 
     private CheckBoxPreference mAgpsPreference;
 
-    public AgpsPreferenceController(Context context) {
-        super(context, KEY_ASSISTED_GPS);
+    public AgpsPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
@@ -74,4 +74,7 @@ public class AgpsPreferenceController extends BasePreferenceController {
         }
         return false;
     }
+
+    @Override
+    public void onLocationModeChanged(int mode, boolean restricted) {}
 }

@@ -64,6 +64,11 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
@@ -126,10 +131,12 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
             mTurnOnButton.setVisibility(View.GONE);
             mTurnOffButton.setVisibility(View.VISIBLE);
             mTurnOffButton.setText(buttonText);
+            mTurnOffButton.requestFocus();
         } else {
             mTurnOnButton.setVisibility(View.VISIBLE);
             mTurnOffButton.setVisibility(View.GONE);
             mTurnOnButton.setText(buttonText);
+            mTurnOnButton.requestFocus();
         }
     }
 }
