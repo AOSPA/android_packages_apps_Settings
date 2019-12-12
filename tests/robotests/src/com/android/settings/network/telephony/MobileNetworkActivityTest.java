@@ -116,27 +116,26 @@ public class MobileNetworkActivityTest {
         }
     }
 
-    private ActivityScenario<MobileNetworkActivity> createTargetActivity(Intent activityIntent,
-            boolean isInternetV2) {
+    private ActivityScenario<MobileNetworkActivity> createTargetActivity(Intent activityIntent) {
         return ActivityScenario.launch(activityIntent);
     }
 
     @Test
     @Ignore
-    public void updateBottomNavigationViewV2_oneSubscription_shouldNotCrash() {
+    public void updateBottomNavigationView_oneSubscription_shouldNotCrash() {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1);
 
-        mMobileNetworkActivity = createTargetActivity(mTestIntent, true);
+        mMobileNetworkActivity = createTargetActivity(mTestIntent);
 
         mMobileNetworkActivity.moveToState(State.STARTED);
     }
 
     @Test
     @Ignore
-    public void updateBottomNavigationViewV2_twoSubscription_shouldNotCrash() {
+    public void updateBottomNavigationView_twoSubscription_shouldNotCrash() {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
-        mMobileNetworkActivity = createTargetActivity(mTestIntent, true);
+        mMobileNetworkActivity = createTargetActivity(mTestIntent);
 
         mMobileNetworkActivity.moveToState(State.STARTED);
     }
@@ -147,7 +146,7 @@ public class MobileNetworkActivityTest {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
         mTestIntent.putExtra(Settings.EXTRA_SUB_ID, PREV_SUB_ID);
-        mMobileNetworkActivity = createTargetActivity(mTestIntent, false);
+        mMobileNetworkActivity = createTargetActivity(mTestIntent);
 
         mMobileNetworkActivity.moveToState(State.STARTED);
 
@@ -163,7 +162,7 @@ public class MobileNetworkActivityTest {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
         mTestIntent.putExtra(Settings.EXTRA_SUB_ID, PREV_SUB_ID);
-        mMobileNetworkActivity = createTargetActivity(mTestIntent, true);
+        mMobileNetworkActivity = createTargetActivity(mTestIntent);
 
         mMobileNetworkActivity.moveToState(State.STARTED);
 
@@ -191,7 +190,7 @@ public class MobileNetworkActivityTest {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
         mTestIntent.putExtra(Settings.EXTRA_SUB_ID, PREV_SUB_ID);
-        mMobileNetworkActivity = createTargetActivity(mTestIntent, false);
+        mMobileNetworkActivity = createTargetActivity(mTestIntent);
 
         mMobileNetworkActivity.moveToState(State.STARTED);
 

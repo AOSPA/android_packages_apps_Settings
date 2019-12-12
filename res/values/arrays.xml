@@ -100,6 +100,14 @@
         <item>1800000</item>
     </string-array>
 
+    <!-- Dark theme scheduling preferences  [CHAR LIMIT=NONE] -->
+    <string-array name="dark_ui_scheduler_preference_titles">
+        <!-- 1: None -->
+        <item>@string/dark_ui_auto_mode_never</item>
+        <!-- 2: Auto -->
+        <item>@string/dark_ui_auto_mode_auto</item>
+    </string-array>
+
     <!-- Security settings.  The delay after screen is turned off until device locks.
          These are shown in a list dialog. -->
     <string-array name="lock_after_timeout_entries">
@@ -394,14 +402,12 @@
 
     <!-- Phase 2 options for PEAP -->
     <string-array name="wifi_peap_phase2_entries">
-        <item>None</item>
         <item>MSCHAPV2</item>
         <item>GTC</item>
     </string-array>
 
     <!-- Type of EAP method when EAP SIM, AKA, AKA' are supported -->
     <string-array name="wifi_peap_phase2_entries_with_sim_auth">
-        <item>None</item>
         <item translatable="false">MSCHAPV2</item>
         <item translatable="false">GTC</item>
         <item translatable="false">SIM</item>
@@ -409,9 +415,8 @@
         <item translatable="false">AKA\'</item>
     </string-array>
 
-    <!-- Phase 2 options for rest of EAP methods -->
-    <string-array name="wifi_phase2_entries">
-        <item>None</item>
+    <!-- Phase 2 options for TTLS -->
+    <string-array name="wifi_ttls_phase2_entries">
         <item>PAP</item>
         <item>MSCHAP</item>
         <item>MSCHAPV2</item>

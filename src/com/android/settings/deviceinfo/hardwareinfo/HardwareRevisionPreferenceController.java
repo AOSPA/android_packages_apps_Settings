@@ -47,6 +47,11 @@ public class HardwareRevisionPreferenceController extends BasePreferenceControll
     }
 
     @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public boolean isCopyableSlice() {
         return true;
     }
