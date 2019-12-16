@@ -163,7 +163,13 @@ public abstract class ThemeComponentOption implements CustomizationOption<ThemeC
             @DrawableRes int headerIcon) {
         TextView header = container.findViewById(R.id.theme_preview_card_header);
         header.setText(headerTextResId);
-        header.setCompoundDrawablesWithIntrinsicBounds(0, headerIcon, 0, 0);
+
+        Context context = container.getContext();
+        Drawable icon = context.getResources().getDrawable(headerIcon, context.getTheme());
+        int size = context.getResources().getDimensionPixelSize(R.dimen.card_header_icon_size);
+        icon.setBounds(0, 0, size, size);
+
+        header.setCompoundDrawables(null, icon, null, null);
         header.setCompoundDrawableTintList(ColorStateList.valueOf(
                 header.getCurrentTextColor()));
     }
