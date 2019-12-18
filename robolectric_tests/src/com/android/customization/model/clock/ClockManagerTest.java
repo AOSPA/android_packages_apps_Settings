@@ -22,11 +22,14 @@ import static org.mockito.Mockito.verify;
 
 import android.content.ContentResolver;
 import android.provider.Settings.Secure;
+
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager.Callback;
-
 import com.android.customization.module.ThemesUserEventLogger;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,6 +42,7 @@ import org.robolectric.RuntimeEnvironment;
 public class ClockManagerTest {
 
     private static final String CLOCK_ID = "id";
+    private static final String CLOCK_FIELD = "clock";
 
     @Mock ClockProvider mProvider;
     @Mock ThemesUserEventLogger mLogger;
@@ -53,7 +57,7 @@ public class ClockManagerTest {
     }
 
     @Test
-    public void testApply() {
+    public void testApply() throws JSONException {
         Clockface clock = new Clockface.Builder().setId(CLOCK_ID).build();
 
         mManager.apply(clock, new Callback() {
@@ -69,7 +73,9 @@ public class ClockManagerTest {
         });
 
         // THEN the clock id is written to secure settings.
-        assertEquals(CLOCK_ID, Secure.getString(mContentResolver, ClockManager.CLOCK_FACE_SETTING));
+        JSONObject json =
+                new JSONObject(Secure.getString(mContentResolver, ClockManager.CLOCK_FACE_SETTING));
+        assertEquals(CLOCK_ID, json.getString(CLOCK_FIELD));
         // AND the event is logged
         verify(mLogger).logClockApplied(clock);
     }
