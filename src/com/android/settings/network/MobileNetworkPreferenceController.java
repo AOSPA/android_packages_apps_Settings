@@ -39,6 +39,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settings.Utils;
@@ -69,7 +70,7 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
 
     private BroadcastReceiver mAirplanModeChangedReceiver;
 
-    private String mSummary;
+    private CharSequence mSummary;
 
     public MobileNetworkPreferenceController(Context context) {
         super(context);
@@ -149,7 +150,7 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
                 }
                 mSummary = builder.toString();
             } else {
-                mSummary = mTelephonyManager.getNetworkOperatorName();
+                mSummary = MobileNetworkUtils.getCurrentCarrierNameForDisplay(mContext);
             }
         }
     }
