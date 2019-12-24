@@ -573,7 +573,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         int signalLevel = mAccessPoint.getLevel();
         int wifiGeneration = mAccessPoint.getWifiGeneration();
         boolean isReady = (mAccessPoint.isVhtMax8SpatialStreamsSupported()
-                          && mAccessPoint.isTwtSupported());
+                          && mAccessPoint.isHe8ssCapableAp());
 
         // Disappears signal view if not in range. e.g. for saved networks.
         if (mIsOutOfRange) {
@@ -646,6 +646,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         } else if (frequency >= AccessPoint.LOWER_FREQ_5GHZ
                 && frequency < AccessPoint.HIGHER_FREQ_5GHZ) {
             band = mContext.getResources().getString(R.string.wifi_band_5ghz);
+        } else if (frequency >= AccessPoint.LOWER_FREQ_60GHZ
+                && frequency < AccessPoint.HIGHER_FREQ_60GHZ) {
+            band = mContext.getResources().getString(R.string.wifi_band_60ghz);
         } else {
             Log.e(TAG, "Unexpected frequency " + frequency);
             // Connecting state is unstable, make it disappeared if unexpected
