@@ -32,19 +32,19 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
 
         // Add SAE security type
         if (mWpa3SoftApSupported) {
-            securityValues.add(String.valueOf(WifiConfiguration.KeyMgmt.SAE));
+            securityValues.add(String.valueOf(SoftApConfiguration.SECURITY_TYPE_SAE));
             securityEntries.add(context.getString(R.string.wifi_security_sae));
         }
         // Add WPA2-PSK security type
-        securityValues.add(String.valueOf(WifiConfiguration.KeyMgmt.WPA2_PSK));
+        securityValues.add(String.valueOf(SoftApConfiguration.SECURITY_TYPE_WPA2_PSK));
         securityEntries.add(context.getString(R.string.wifi_security_wpa2));
         // Add OWE security type
         if (mWpa3SoftApSupported && mDualSoftApSupported) {
-            securityValues.add(String.valueOf(WifiConfiguration.KeyMgmt.OWE));
+            securityValues.add(String.valueOf(SoftApConfiguration.SECURITY_TYPE_OWE));
             securityEntries.add(context.getString(R.string.wifi_security_owe));
         }
         // Add open security type
-        securityValues.add(String.valueOf(WifiConfiguration.KeyMgmt.NONE));
+        securityValues.add(String.valueOf(SoftApConfiguration.SECURITY_TYPE_OPEN));
         securityEntries.add(context.getString(R.string.wifi_security_none));
 
         mSecurityEntries = securityEntries.toArray(new String[securityEntries.size()]);

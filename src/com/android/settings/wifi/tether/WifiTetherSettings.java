@@ -198,7 +198,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
         if (mApBandPreferenceController.isVendorDualApSupported()
                 && mSecurityPreferenceController.isWpa3Supported()) {
-            if ((config.getAuthType() == WifiConfiguration.KeyMgmt.OWE)
+            if ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE)
                     == (mApBandPreferenceController.isBandEntriesHasDualband())) {
                 mApBandPreferenceController.updatePreferenceEntries(config);
                 bandEntriesChanged = true;
@@ -228,18 +228,18 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private SoftApConfiguration buildNewConfig() {
         final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         final int securityType = mSecurityPreferenceController.getSecurityType();
+        final int band = mApBandPreferenceController.getBandIndex();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
         if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
             configBuilder.setWpa2Passphrase(
                     mPasswordPreferenceController.getPasswordValidated(securityType));
         }
-        configBuilder.setBand(mApBandPreferenceController.getBandIndex());
-        /* TODO(b/146933418)
-	if (config.getAuthType() == WifiConfiguration.KeyMgmt.OWE
-                && config.apBand == WifiConfiguration.AP_BAND_DUAL) {
-            config.apBand = WifiConfiguration.AP_BAND_2GHZ;
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_OWE
+                && band == SoftApConfiguration.BAND_ANY) {
+            configBuilder.setBand(SoftApConfiguration.BAND_2GHZ);
+        } else {
+            configBuilder.setBand(band);
         }
-        */
         return configBuilder.build();
     }
 

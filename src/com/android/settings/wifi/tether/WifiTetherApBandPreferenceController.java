@@ -42,7 +42,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     public WifiTetherApBandPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
-        final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
+        final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
         isDualMode = mWifiManager.isDualModeSupported();
 
         isVendorDualApSupported = context.getResources().getBoolean(
@@ -107,15 +107,16 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         return true;
     }
 
-    private int validateSelection(WifiConfiguration config) {
-        if (config.apBand ==  WifiConfiguration.AP_BAND_DUAL
-                && config.getAuthType() == WifiConfiguration.KeyMgmt.OWE) {
-            config.apBand = 0;
-            mWifiManager.setWifiApConfiguration(config);
+    private int validateSelection(SoftApConfiguration config) {
+        if (config.getBand() == SoftApConfiguration.BAND_ANY
+                && config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE) {
+            config = new SoftApConfiguration.Builder(config).setBand(
+                SoftApConfiguration.BAND_2GHZ).build();
+            mWifiManager.setSoftApConfiguration(config);
             Log.d(TAG, "Dual band not supported for OWE security, updating band index to " + mBandIndex);
         }
 
-        return validateSelection(config.apBand);
+        return validateSelection(config.getBand());
     }
 
     private int validateSelection(int band) {
@@ -137,8 +138,8 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         return band;
     }
 
-    public void updatePreferenceEntries(WifiConfiguration config) {
-        mSecurityType = (config == null ? WifiConfiguration.KeyMgmt.NONE : config.getAuthType());
+    public void updatePreferenceEntries(SoftApConfiguration config) {
+        mSecurityType = (config == null ? SoftApConfiguration.SECURITY_TYPE_OPEN : config.getSecurityType());
         Log.d(TAG, "updating band preferences.");
         updatePreferenceEntries();
      }
@@ -152,7 +153,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         if (isDualMode) {
             entriesRes = R.array.wifi_ap_band_dual_mode;
             summariesRes = R.array.wifi_ap_band_dual_mode_summary;
-        } else if (isVendorDualApSupported && mSecurityType != WifiConfiguration.KeyMgmt.OWE) {
+        } else if (isVendorDualApSupported && mSecurityType != SoftApConfiguration.SECURITY_TYPE_OWE) {
             // change the list option if AP+AP is supproted and selected security type is not OWE
             entriesRes = R.array.wifi_ap_band_vendor_config_full;
             summariesRes = R.array.wifi_ap_band_vendor_summary_full;
@@ -182,7 +183,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             return false;
 
         for (int i = 0 ; i < mBandEntries.length; i++) {
-            if (Integer.parseInt(mBandEntries[i]) == WifiConfiguration.AP_BAND_DUAL)
+            if (Integer.parseInt(mBandEntries[i]) == SoftApConfiguration.BAND_ANY)
                 return true;
         }
 
