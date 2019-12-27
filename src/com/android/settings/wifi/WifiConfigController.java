@@ -625,7 +625,7 @@ public class WifiConfigController implements TextWatcher,
                 if (mAccessPoint != null && mAccessPoint.isFils384Supported()) {
                     config.allowedKeyManagement.set(KeyMgmt.FILS_SHA384);
                 }
-                if (mAccessPoint != null && mAccessPoint.isSuiteBSupported()) {
+                if (mWPA3Support && mAccessPoint != null && mAccessPoint.isSuiteBSupported()) {
                     config.allowedKeyManagement.set(KeyMgmt.SUITE_B_192);
                     config.requirePMF = true;
 		    config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.GCMP);
