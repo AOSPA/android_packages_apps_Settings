@@ -212,7 +212,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
 
             boolean gesturesEnabled = Settings.System.getInt(
                     mContext.getContentResolver(),
-                    Settings.System.GESTURES_ENABLED, 0) != 0;
+                    Settings.System.GESTURES_ENABLED, 1) != 0;
             mSwitchBar.setChecked(gesturesEnabled);
             GesturesSettings.this.enableGestures(gesturesEnabled, true);
         }
