@@ -16,6 +16,11 @@
 
 package com.android.settings.network.telephony;
 
+
+import android.content.Context;
+import android.content.IntentFilter;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.telephony.AccessNetworkConstants.AccessNetworkType;
 import android.telephony.CellInfo;
 import android.telephony.NetworkScan;
@@ -24,6 +29,8 @@ import android.telephony.RadioAccessSpecifier;
 import android.telephony.TelephonyManager;
 import android.telephony.TelephonyScanManager;
 import android.util.Log;
+
+import org.codeaurora.internal.IExtTelephony;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -69,6 +76,31 @@ public class NetworkScanHelper {
         void onError(int errorCode);
     }
 
+
+    /**
+     * Performs the network scan using {@link TelephonyManager#requestNetworkScan(
+     * NetworkScanRequest, Executor, TelephonyScanManager.NetworkScanCallback)} The network scan
+     * results will be returned to the caller periodically in a small time window until the network
+     * scan is completed. The complete results should be returned in the last called of
+     * {@link NetworkScanCallback#onResults(List)}.
+     *
+     * <p> This is recommended to be used if modem supports the new network scan api
+     * {@link TelephonyManager#requestNetworkScan(
+     * NetworkScanRequest, Executor, TelephonyScanManager.NetworkScanCallback)}
+     */
+    public static final int NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS = 1;
+
+    /**
+     * Performs the network scan using {@link IExtTelephony#performIncrementalScan(int)}
+     * The network scan is triggered using QcRil hooks, and the results will be returned to the
+     * caller periodically in a small time window until the network scan is completed.
+     *
+     * <p> This is recommended to be used if modem does not support the new network scan api
+     * {@link TelephonyManager#requestNetworkScan(
+     * NetworkScanRequest, Executor, TelephonyScanManager.NetworkScanCallback)}.
+     */
+    public static final int NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS_LEGACY = 2;
+
     /** The constants below are used in the async network scan. */
     private static final boolean INCREMENTAL_RESULTS = true;
     private static final int SEARCH_PERIODICITY_SEC = 5;
@@ -110,35 +142,60 @@ public class NetworkScanHelper {
     private final TelephonyManager mTelephonyManager;
     private final TelephonyScanManager.NetworkScanCallback mInternalNetworkScanCallback;
     private final Executor mExecutor;
-
+    private final LegacyIncrementalScanBroadcastReceiver mLegacyIncrScanReceiver;
+    private Context mContext;
     private NetworkScan mNetworkScanRequester;
+    private IExtTelephony mExtTelephony;
+    private IntentFilter filter =
+            new IntentFilter("qualcomm.intent.action.ACTION_INCREMENTAL_NW_SCAN_IND");
 
-    public NetworkScanHelper(TelephonyManager tm, NetworkScanCallback callback, Executor executor) {
+    public NetworkScanHelper(Context context, TelephonyManager tm, NetworkScanCallback callback,
+                             Executor executor) {
+        mContext = context;
         mTelephonyManager = tm;
         mNetworkScanCallback = callback;
         mInternalNetworkScanCallback = new NetworkScanCallbackImpl();
         mExecutor = executor;
+        mLegacyIncrScanReceiver =
+                new LegacyIncrementalScanBroadcastReceiver(mContext, mInternalNetworkScanCallback);
     }
 
     /**
-     * Request a network scan.
+     * Performs a network scan for the given type {@code type}.
+     * {@link #NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS} is recommended if modem supports
+     * {@link TelephonyManager#requestNetworkScan(
+     * NetworkScanRequest, Executor, TelephonyScanManager.NetworkScanCallback)}.
      *
-     * Performs the network scan using {@link TelephonyManager#requestNetworkScan(
-     * NetworkScanRequest, Executor, TelephonyScanManager.NetworkScanCallback)} The network scan
-     * results will be returned to the caller periodically in a small time window until the network
-     * scan is completed. The complete results should be returned in the last called of
-     * {@link NetworkScanCallback#onResults(List)}.
+     * @param type used to tell which network scan API should be used.
      */
-    public void startNetworkScan() {
-        if (mNetworkScanRequester != null) {
-            return;
-        }
-        mNetworkScanRequester = mTelephonyManager.requestNetworkScan(
-                NETWORK_SCAN_REQUEST,
-                mExecutor,
-                mInternalNetworkScanCallback);
-        if (mNetworkScanRequester == null) {
-            onError(NetworkScan.ERROR_RADIO_INTERFACE_ERROR);
+    public void startNetworkScan(int type) {
+        Log.d(TAG, "startNetworkScan: " + type);
+        if (type == NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS) {
+            if (mNetworkScanRequester != null) {
+                return;
+            }
+            mNetworkScanRequester = mTelephonyManager.requestNetworkScan(
+                    NETWORK_SCAN_REQUEST,
+                    mExecutor,
+                    mInternalNetworkScanCallback);
+            if (mNetworkScanRequester == null) {
+                onError(NetworkScan.ERROR_RADIO_INTERFACE_ERROR);
+            }
+        } else if (type == NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS_LEGACY) {
+            mContext.registerReceiver(mLegacyIncrScanReceiver, filter);
+            boolean success = false;
+            mExtTelephony = IExtTelephony.Stub
+                    .asInterface(ServiceManager.getService("extphone"));
+            try {
+                success = mExtTelephony.performIncrementalScan(mTelephonyManager.getSlotIndex());
+            } catch (RemoteException | NullPointerException ex) {
+                Log.e(TAG, "performIncrementalScan Exception: ", ex);
+            }
+
+            Log.d(TAG, "success: " + success);
+            if (!success) {
+                onError(NetworkScan.ERROR_RADIO_INTERFACE_ERROR);
+            }
         }
     }
 
@@ -152,6 +209,18 @@ public class NetworkScanHelper {
         if (mNetworkScanRequester != null) {
             mNetworkScanRequester.stopScan();
             mNetworkScanRequester = null;
+        }
+
+        try {
+            if (mExtTelephony != null) {
+                mExtTelephony.abortIncrementalScan(mTelephonyManager.getSlotIndex());
+                mExtTelephony = null;
+            }
+            mContext.unregisterReceiver(mLegacyIncrScanReceiver);
+        } catch (RemoteException | NullPointerException ex) {
+            Log.e(TAG, "abortIncrementalScan Exception: ", ex);
+        } catch (IllegalArgumentException ex) {
+            Log.e(TAG, "IllegalArgumentException");
         }
     }
 
