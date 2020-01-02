@@ -1065,6 +1065,24 @@ public final class Utils extends com.android.settingslib.Utils {
      }
 
     /**
+     * Checks whether SimSettings apk exists on the device. If yes, returns true, else
+     * returns false.
+     */
+    public static boolean isSimSettingsApkAvailable() {
+        IExtTelephony extTelephony =
+                IExtTelephony.Stub.asInterface(ServiceManager.getService("extphone"));
+        try {
+            if (extTelephony != null &&
+                    extTelephony.isVendorApkAvailable("com.qualcomm.qti.simsettings")) {
+                return true;
+            }
+        } catch (RemoteException e) {
+            Log.e(TAG, "Got exception in isSimSettingsApkAvailable.", e);
+        }
+        return false;
+    }
+
+    /**
      * check whether NetworkSetting apk exist in system, if yes, return true, else
      * return false.
      */
