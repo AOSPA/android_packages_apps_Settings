@@ -25,16 +25,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceGroup;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
@@ -44,8 +44,8 @@ import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -191,14 +191,14 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     @Override
     public void onTetherConfigUpdated(AbstractPreferenceController context) {
-        final WifiConfiguration config = buildNewConfig();
+        final SoftApConfiguration config = buildNewConfig();
         boolean bandEntriesChanged = false;
 
-        mPasswordPreferenceController.updateVisibility(config.getAuthType());
+        mPasswordPreferenceController.updateVisibility(config.getSecurityType());
 
         if (mApBandPreferenceController.isVendorDualApSupported()
                 && mSecurityPreferenceController.isWpa3Supported()) {
-            if ((config.getAuthType() == WifiConfiguration.KeyMgmt.OWE)
+            if ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE)
                     == (mApBandPreferenceController.isBandEntriesHasDualband())) {
                 mApBandPreferenceController.updatePreferenceEntries(config);
                 bandEntriesChanged = true;
@@ -216,7 +216,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             mRestartWifiApAfterConfigChange = true;
             mSwitchBarController.stopTether();
         }
-        mWifiManager.setWifiApConfiguration(config);
+        mWifiManager.setSoftApConfiguration(config);
 
         if (bandEntriesChanged)
             mApBandPreferenceController.updateDisplay();
@@ -225,22 +225,22 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         }
     }
 
-    private WifiConfiguration buildNewConfig() {
-        final WifiConfiguration config = new WifiConfiguration();
+    private SoftApConfiguration buildNewConfig() {
+        final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         final int securityType = mSecurityPreferenceController.getSecurityType();
-
-        config.SSID = mSSIDPreferenceController.getSSID();
-        config.allowedKeyManagement.set(securityType);
-        config.preSharedKey = mPasswordPreferenceController.getPasswordValidated(securityType);
-        config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
-        config.apBand = mApBandPreferenceController.getBandIndex();
-
-	if (config.getAuthType() == WifiConfiguration.KeyMgmt.OWE
-                && config.apBand == WifiConfiguration.AP_BAND_DUAL) {
-            config.apBand = WifiConfiguration.AP_BAND_2GHZ;
+        final int band = mApBandPreferenceController.getBandIndex();
+        configBuilder.setSsid(mSSIDPreferenceController.getSSID());
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
+            configBuilder.setWpa2Passphrase(
+                    mPasswordPreferenceController.getPasswordValidated(securityType));
         }
-
-        return config;
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_OWE
+                && band == SoftApConfiguration.BAND_ANY) {
+            configBuilder.setBand(SoftApConfiguration.BAND_2GHZ);
+        } else {
+            configBuilder.setBand(band);
+        }
+        return configBuilder.build();
     }
 
     private void startTether() {
@@ -316,7 +316,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     private void reConfigInitialExpandedChildCount() {
         final PreferenceGroup screen = getPreferenceScreen();
-        if (mSecurityPreferenceController.getSecurityType() == WifiConfiguration.KeyMgmt.NONE) {
+        if (mSecurityPreferenceController.getSecurityType()
+                == SoftApConfiguration.SECURITY_TYPE_OPEN) {
             screen.setInitialExpandedChildrenCount(EXPANDED_CHILD_COUNT_WITH_SECURITY_NON);
             return;
         }
@@ -329,7 +330,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             return EXPANDED_CHILD_COUNT_DEFAULT;
         }
 
-        return (mSecurityPreferenceController.getSecurityType() == WifiConfiguration.KeyMgmt.NONE) ?
-            EXPANDED_CHILD_COUNT_WITH_SECURITY_NON : EXPANDED_CHILD_COUNT_DEFAULT;
+        return (mSecurityPreferenceController.getSecurityType()
+                == SoftApConfiguration.SECURITY_TYPE_OPEN)
+            ? EXPANDED_CHILD_COUNT_WITH_SECURITY_NON : EXPANDED_CHILD_COUNT_DEFAULT;
     }
 }

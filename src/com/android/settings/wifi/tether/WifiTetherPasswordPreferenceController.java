@@ -17,7 +17,7 @@
 package com.android.settings.wifi.tether;
 
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 import android.text.TextUtils;
 
 import androidx.preference.EditTextPreference;
@@ -48,13 +48,14 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
 
     @Override
     public void updateDisplay() {
-        final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
-        if (config == null || (TextUtils.isEmpty(config.preSharedKey) &&
-                (config.getAuthType() == WifiConfiguration.KeyMgmt.WPA2_PSK
-                     || config.getAuthType() == WifiConfiguration.KeyMgmt.SAE))) {
+        final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
+        if (config == null
+                || ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
+                    || config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_SAE)
+                && TextUtils.isEmpty(config.getWpa2Passphrase()))) {
             mPassword = generateRandomPassword();
         } else {
-            mPassword = config.preSharedKey;
+            mPassword = config.getWpa2Passphrase();
         }
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
         ((ValidatedEditTextPreference) mPreference).setIsPassword(true);
@@ -80,8 +81,8 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
      */
     public String getPasswordValidated(int securityType) {
         // don't actually overwrite unless we get a new config in case it was accidentally toggled.
-        if (securityType == WifiConfiguration.KeyMgmt.NONE
-                || securityType == WifiConfiguration.KeyMgmt.OWE) {
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_OPEN
+                || securityType == SoftApConfiguration.SECURITY_TYPE_OWE) {
             return "";
         } else if (!isTextValid(mPassword)) {
             mPassword = generateRandomPassword();
@@ -91,8 +92,8 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     }
 
     public void updateVisibility(int securityType) {
-        mPreference.setVisible(securityType != WifiConfiguration.KeyMgmt.NONE
-                                   && securityType != WifiConfiguration.KeyMgmt.OWE);
+        mPreference.setVisible(securityType != SoftApConfiguration.SECURITY_TYPE_OPEN
+                                   && securityType != SoftApConfiguration.SECURITY_TYPE_OWE);
     }
 
     @Override

@@ -98,6 +98,7 @@
     <uses-permission android:name="android.permission.MANAGE_SCOPED_ACCESS_DIRECTORY_PERMISSIONS" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+    <uses-permission android:name="android.permission.INSTALL_DYNAMIC_SYSTEM" />
 
     <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
@@ -1342,6 +1343,11 @@
                   android:exported="false">
         </activity>
 
+        <activity android:name=".security.InstallAppSourceCertificateWarning"
+                  android:theme="@style/GlifV3Theme.Light"
+                  android:exported="false">
+        </activity>
+
         <activity
             android:name="Settings$DeviceAdminSettingsActivity"
             android:label="@string/device_admin_settings_title">
@@ -1967,6 +1973,13 @@
 
         <activity android:name=".development.AppPicker"
                   android:label="@string/select_application"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+
+        <activity android:name=".development.DSULoader"
+                  android:label="Select DSU Package"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+        <activity android:name=".development.DSUTermsOfServiceActivity"
+                  android:label="Terms of Service"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
 
         <activity android:name="Settings$WebViewAppPickerActivity"
@@ -2772,6 +2785,19 @@
         </activity>
 
         <activity
+            android:name="Settings$AppDrawOverlaySettingsActivity"
+            android:label="@string/draw_overlay"
+            android:permission="android.permission.INTERNAL_SYSTEM_WINDOW">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MANAGE_APP_OVERLAY_PERMISSION" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.appinfo.DrawOverlayDetails" />
+        </activity>
+
+        <activity
             android:name="Settings$WriteSettingsActivity"
             android:label="@string/write_settings_title">
             <intent-filter android:priority="1">
@@ -3108,6 +3134,7 @@
                   android:theme="@style/Theme.Panel"
                   android:launchMode="singleInstance"
                   android:excludeFromRecents="true"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
                   android:permission="android.permission.CHANGE_WIFI_STATE">
             <intent-filter>
                 <action android:name="android.settings.WIFI_ADD_NETWORKS" />

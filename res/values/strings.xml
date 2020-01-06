@@ -2353,7 +2353,15 @@
     <!-- Summary for saved status when saving single network   [CHAR LIMIT=30] -->
     <string name="wifi_add_app_single_network_saved_summary">Saved</string>
     <!-- Summary for save failed status when saving single network [CHAR LIMIT=50] -->
-    <string name="wifi_add_app_single_network_save_failed_summary">Couldn\u2019t save. Try again.</string>
+    <string name="wifi_add_app_network_save_failed_summary">Couldn\u2019t save. Try again.</string>
+    <!--  Title for the panel of add multiple Wi-Fi networks from APP [CHAR LIMIT=50] -->
+    <string name="wifi_add_app_networks_title">Save networks?</string>
+    <!-- Summary for the panel of add multiple Wi-Fi networks from APP [CHAR LIMIT=NONE] -->
+    <string name="wifi_add_app_networks_summary"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> would like to save these networks to your phone</string>
+    <!-- Summary for the panel of add Wi-Fi networks from APP [CHAR LIMIT=NONE] -->
+    <string name="wifi_add_app_networks_saving_summary">Saving <xliff:g id="number" example="3">%d</xliff:g> networks\u2026</string>
+    <!-- Summary for saved status when saving multiple networks   [CHAR LIMIT=NONE] -->
+    <string name="wifi_add_app_networks_saved_summary">Networks saved</string>
 
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Wi-Fi Testing on the diagnostic screen-->
@@ -4782,6 +4790,24 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback">To turn an accessibility service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold.</string>
     <!-- Button for the Accessibility tutorial dialog to dismiss the dialog when user clicks it. [CHAR LIMIT=10] -->
     <string name="accessibility_tutorial_dialog_button">Got it</string>
+    <!-- Title for software shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_title_software">Accessibility Button</string>
+    <!-- Title for software shortcut in gesture mode in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture">2-finger swipe up from bottom</string>
+    <!-- Summary for software shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_software">Tap the <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> button at the bottom of your screen</string>
+    <!-- Summary for software shortcut in gesture mode in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture">Swipe up with 2 fingers from edge of screen</string>
+    <!-- Title for hardware shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_title_hardware">Hold volume keys</string>
+    <!-- Summary for hardware shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware">Press and hold both volume keys for 1 second</string>
+    <!-- Title for triple tap shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_title_triple_tap">Triple tap screen</string>
+    <!-- Summary for triple tap shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap">Quickly tap screen 3 times (this can slow down your device)</string>
+    <!-- Title for the Accessibility edit shortcut dialog to save the preference when user clicks it. [CHAR LIMIT=10] -->
+    <string name="accessibility_shortcut_edit_dialog_title_advance">Advanced</string>
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_navbar_configuration_warning">The Accessibility button is set to <xliff:g id="service" example="Select to Speak">%1$s</xliff:g>. To use magnification, touch &amp; hold the Accessibility button, then select magnification.</string>
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
@@ -4864,6 +4890,14 @@
     <string name="accessibility_caption_master_switch_title">Use captions</string>
     <!-- Used in the Captions preference to tell users that the setting doesn't support all apps. [CHAR LIMIT=NONE] -->
     <string name="accessibility_caption_preference_summary">Not all apps support this setting.</string>
+    <!-- Summary for accessibility shortcut preference for software shortcut type. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_type_software">Accessibility button</string>
+    <!-- Summary for accessibility shortcut preference for software shortcut type when gesture mode is on. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_type_software_gesture">2-finger swipe up from bottom</string>
+    <!-- Summary for accessibility shortcut preference for hardware shortcut type. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_type_hardware">Hold volume keys</string>
+    <!-- Summary for accessibility shortcut preference for magnification triple tap shortcut type. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_type_triple_tap">Triple tap screen</string>
 
     <!-- Button text for the accessibility dialog continue to the next screen for hearing aid. [CHAR LIMIT=32] -->
     <string name="accessibility_hearingaid_instruction_continue_button">Continue</string>
@@ -5916,6 +5950,8 @@
     <string name="credential_for_vpn_and_apps">Installed for VPN and apps</string>
     <!-- Sub-heading for a user credential installed to be used as part of a Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
     <string name="credential_for_wifi">Installed for Wi-Fi</string>
+    <!-- Sub-heading for a user credential installed to be used by kernel for fs-verity verification [CHAR LIMIT=NONE]. -->
+    <string name="credential_for_fsverity">Installed for app install source verification</string>
     <!-- Description of dialog to reset credential storage [CHAR LIMIT=NONE] -->
     <string name="credentials_reset_hint">Remove all the contents?</string>
     <!-- Toast message [CHAR LIMIT=30] -->
@@ -5930,14 +5966,20 @@
     <string name="user_certificate">VPN &amp; app user certificate</string>
     <!-- Title of Wi-Fi certificate [CHAR LIMIT=30] -->
     <string name="wifi_certificate">Wi\u2011Fi certificate</string>
+    <!-- Title of App Source certificate [CHAR LIMIT=40] -->
+    <string name="app_src_certificate">App Source certificate</string>
     <!-- Title of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
     <string name="ca_certificate_warning_title">Your privacy is at risk</string>
     <!-- Description of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
     <string name="ca_certificate_warning_description">CA certificates are used by websites, apps, and VPNs for encryption. Only install CA certificates from organizations you trust. \n\n If you install a CA certificate, the certificate owner could access your information, such as passwords, messages, or credit card details, from websites you visit or apps you use - even if that information is encrypted.</string>
-    <!-- Label for button to not install a CA certificate [CHAR_LIMIT=50] -->
-    <string name="ca_certificate_warning_dont_install">Don\u2019t install</string>
-    <!-- Label for button to continue installing a CA certificate [CHAR_LIMIT=50] -->
-    <string name="ca_certificate_warning_install_anyway">Install anyways</string>
+    <!-- Label for button to not install a certificate [CHAR_LIMIT=50] -->
+    <string name="certificate_warning_dont_install">Don\u2019t install</string>
+    <!-- Label for button to continue installing a certificate [CHAR_LIMIT=50] -->
+    <string name="certificate_warning_install_anyway">Install anyways</string>
+    <!-- Title of warning shown to the user before they can install an App Source certificate [CHAR LIMIT=60] -->
+    <string name="app_src_certificate_warning_title">Install this certificate at your own risk</string>
+    <!-- Description of warning shown to the user before they can install an App Source certificate [CHAR LIMIT=NONE] -->
+    <string name="app_src_certificate_warning_description">App source certificates verify that apps are safe for your device. Only install certificates from organizations you trust.</string>
     <!-- Toast message that a certificate was not installed -->
     <string name="cert_not_installed">Certificate not installed</string>
 
@@ -6000,11 +6042,6 @@
 
     <!-- Message when there are no available device admin apps to display -->
     <string name="no_device_admins">No device admin apps available</string>
-    <!-- Title for personal device admin apps on the list [CHAR_LIMIT=25] -->
-    <string name="personal_device_admin_title">Personal</string>
-    <!-- Title for managed device admin apps on the list [CHAR_LIMIT=25] -->
-    <string name="managed_device_admin_title">Work</string>
-
 
     <!-- Message when there are no available trust agents to display -->
     <string name="no_trust_agents">No available trust agents</string>
@@ -6563,14 +6600,28 @@
     <string name="one_usercrt">one user certificate</string>
     <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
     <string name="one_cacrt">one CA certificate</string>
-    <!-- Item found in thee PKCS12 keystore being investigated [CHAR LIMIT=NONE]-->
+    <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE]-->
     <string name="n_cacrts">%d CA certificates</string>
+    <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
+    <string name="one_appsrccrt">one App Source certificate</string>
     <!-- Alert dialog when viewing a set of user credentials. -->
     <string name="user_credential_title">Credential details</string>
     <!-- Announcement to confirm a user credential being removed. [CHAR LIMIT=NONE] -->
     <string name="user_credential_removed">Removed credential: <xliff:g id="credential_name" example="signing key">%s</xliff:g></string>
     <!-- Placeholder for the list of installed user credentials (private keys) when the list is empty. [CHAR LIMIT=120] -->
     <string name="user_credential_none_installed">No user credentials installed</string>
+    <!-- Title of alert dialog after an app source certificate is installed. [CHAR LIMIT=50] -->
+    <string name="app_src_cert_reboot_dialog_install_title">Restart to use certificate</string>
+    <!-- Message of alert dialog after an app source certificate is installed. [CHAR LIMIT=NONE] -->
+    <string name="app_src_cert_reboot_dialog_install_message">To use this app source certificate, you need to restart your device</string>
+    <!-- Title of alert dialog after an app source certificate is deleted. [CHAR LIMIT=55] -->
+    <string name="app_src_cert_reboot_dialog_uninstall_title">Restart to finish uninstalling</string>
+    <!-- Message of alert dialog after an app source certificate is deleted. [CHAR LIMIT=NONE] -->
+    <string name="app_src_cert_reboot_dialog_uninstall_message">To uninstall this app source certificate, you need to restart your device</string>
+    <!-- Button to restart the device. [CHAR LIMIT=25] -->
+    <string name="app_src_cert_reboot_dialog_button_restart">Restart</string>
+    <!-- Button to skip restarting the device. [CHAR LIMIT=25] -->
+    <string name="app_src_cert_reboot_dialog_button_not_now">Not now</string>
 
     <!--  Title for spell checker settings -->
     <string name="spellcheckers_settings_title">Spell checker</string>
@@ -7352,6 +7403,9 @@
 
     <!-- List of synonyms for the enhance 4G LTE titles, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_enhance_4g_lte">volte, advanced calling, 4g calling</string>
+
+    <!-- List of synonyms for add language, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_add_language">add language, add a language</string>
 
     <!-- Option title for the default sound, context based on screen -->
     <string name="default_sound">Default sound</string>
@@ -8831,10 +8885,6 @@
     <string name="filter_enabled_apps">Installed apps</string>
     <!-- Label for showing instant apps in list [CHAR LIMIT=40] -->
     <string name="filter_instant_apps">Instant apps</string>
-    <!-- Label for showing personal apps in list [CHAR LIMIT=30] -->
-    <string name="filter_personal_apps">Personal</string>
-    <!-- Label for showing work apps in list [CHAR LIMIT=30] -->
-    <string name="filter_work_apps">Work</string>
 
     <!-- Label for showing apps with blocked notifications in list [CHAR LIMIT=30] -->
     <string name="filter_notif_all_apps">Apps: All</string>
@@ -11326,5 +11376,12 @@
 
     <!-- Developer Settings: Search keywords for the Profile HWUI rendering. [CHAR_LIMIT=NONE] -->
     <string name="track_frame_time_keywords">GPU</string>
+
+    <!-- DSU Loader. Do not translate. -->
+    <string name="dsu_loader_title" translatable="false">DSU Loader</string>
+    <!-- DSU Loader Description. Do not translate. -->
+    <string name="dsu_loader_description" translatable="false">Load a Dyanmic System Update Image</string>
+    <!-- DSU Loader Loading. Do not translate. -->
+    <string name="dsu_loader_loading" translatable="false">Loading...</string>
 
 </resources>

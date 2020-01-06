@@ -68,6 +68,7 @@
             android:selectable="true"
             android:title="@string/managed_profile_location_switch_title"
             settings:controller="com.android.settings.location.LocationForWorkPreferenceController"
+            settings:forWork="true"
             settings:useAdminDisabledSummary="true"/>
 
         <PreferenceCategory
@@ -79,6 +80,7 @@
         <PreferenceCategory
             android:key="location_services_managed_profile"
             android:title="@string/managed_profile_location_services"
+            settings:forWork="true"
             settings:controller="com.android.settings.location.LocationServiceForWorkPreferenceController"/>
 
     </PreferenceCategory>

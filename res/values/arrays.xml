@@ -229,7 +229,7 @@
     <!-- Values for security type for wireless tether -->
     <string-array name="wifi_tether_security_values" translatable="false">
         <!-- Do not translate. -->
-        <item>4</item>
+        <item>1</item>
         <!-- Do not translate. -->
         <item>0</item>
     </string-array>
@@ -1451,6 +1451,12 @@
         <item>@string/enhanced_4g_lte_mode_summary</item>
         <!-- 2: All carriers who want 4G -->
         <item>@string/enhanced_4g_lte_mode_summary_4g_calling</item>
+    </string-array>
+
+    <!-- A whitelist which packages won't show summary in battery usage screen.  [CHAR LIMIT=NONE] -->
+    <string-array name="whitelist_hide_summary_in_battery_usage" translatable="false">
+        <!-- Google -->
+        <item>"com.google.android.googlequicksearchbox"</item>
     </string-array>
 
 </resources>

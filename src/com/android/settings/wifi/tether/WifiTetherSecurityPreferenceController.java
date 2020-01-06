@@ -1,7 +1,7 @@
 package com.android.settings.wifi.tether;
 
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.SoftApConfiguration;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -32,19 +32,19 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
 
         // Add SAE security type
         if (mWpa3SoftApSupported) {
-            securityValues.add(String.valueOf(WifiConfiguration.KeyMgmt.SAE));
+            securityValues.add(String.valueOf(SoftApConfiguration.SECURITY_TYPE_SAE));
             securityEntries.add(context.getString(R.string.wifi_security_sae));
         }
         // Add WPA2-PSK security type
-        securityValues.add(String.valueOf(WifiConfiguration.KeyMgmt.WPA2_PSK));
+        securityValues.add(String.valueOf(SoftApConfiguration.SECURITY_TYPE_WPA2_PSK));
         securityEntries.add(context.getString(R.string.wifi_security_wpa2));
         // Add OWE security type
         if (mWpa3SoftApSupported && mDualSoftApSupported) {
-            securityValues.add(String.valueOf(WifiConfiguration.KeyMgmt.OWE));
+            securityValues.add(String.valueOf(SoftApConfiguration.SECURITY_TYPE_OWE));
             securityEntries.add(context.getString(R.string.wifi_security_owe));
         }
         // Add open security type
-        securityValues.add(String.valueOf(WifiConfiguration.KeyMgmt.NONE));
+        securityValues.add(String.valueOf(SoftApConfiguration.SECURITY_TYPE_OPEN));
         securityEntries.add(context.getString(R.string.wifi_security_none));
 
         mSecurityEntries = securityEntries.toArray(new String[securityEntries.size()]);
@@ -58,18 +58,19 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
 
     @Override
     public void updateDisplay() {
-        final WifiConfiguration config = mWifiManager.getWifiApConfiguration();
+        final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
         if (config == null) {
-            mSecurityValue = WifiConfiguration.KeyMgmt.WPA2_PSK;
-        } else if (config.getAuthType() == WifiConfiguration.KeyMgmt.NONE) {
-            mSecurityValue = WifiConfiguration.KeyMgmt.NONE;
+            mSecurityValue = SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
+        } else if (config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OPEN) {
+            mSecurityValue = SoftApConfiguration.SECURITY_TYPE_OPEN;
         } else if (mWpa3SoftApSupported && mDualSoftApSupported
-                       && config.getAuthType() == WifiConfiguration.KeyMgmt.OWE) {
-            mSecurityValue = WifiConfiguration.KeyMgmt.OWE;
-        } else if (mWpa3SoftApSupported && config.getAuthType() == WifiConfiguration.KeyMgmt.SAE) {
-            mSecurityValue = WifiConfiguration.KeyMgmt.SAE;
+                       && config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE) {
+            mSecurityValue = SoftApConfiguration.SECURITY_TYPE_OWE;
+        } else if (mWpa3SoftApSupported
+                       && config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_SAE) {
+            mSecurityValue = SoftApConfiguration.SECURITY_TYPE_SAE;
         } else {
-            mSecurityValue = WifiConfiguration.KeyMgmt.WPA2_PSK;
+            mSecurityValue = SoftApConfiguration.SECURITY_TYPE_WPA2_PSK;
         }
 
         final ListPreference preference = (ListPreference) mPreference;

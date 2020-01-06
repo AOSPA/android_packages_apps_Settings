@@ -120,6 +120,8 @@ public class MobileNetworkListController extends AbstractPreferenceController im
             } else {
                 if (mSubscriptionManager.isActiveSubscriptionId(subId)) {
                     pref.setSummary(R.string.mobile_network_active_sim);
+                } else if (SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
+                    pref.setSummary(mContext.getString(R.string.mobile_network_inactive_sim));
                 } else {
                     pref.setSummary(mContext.getString(R.string.mobile_network_tap_to_activate,
                             SubscriptionUtil.getDisplayName(info)));
@@ -127,7 +129,8 @@ public class MobileNetworkListController extends AbstractPreferenceController im
             }
 
             pref.setOnPreferenceClickListener(clickedPref -> {
-                if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)) {
+                if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)
+                        && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
                     mSubscriptionManager.setSubscriptionEnabled(subId, true);
                 } else {
                     Intent intent;
