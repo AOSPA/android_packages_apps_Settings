@@ -50,7 +50,7 @@
         <item name="android:background">?android:colorPrimary</item>
     </style>
 
-    <style name="BottomNavTextAppearance" parent="HeaderTextAppearance">
+    <style name="BottomNavTextAppearance" parent="TitleTextAppearance">
         <item name="android:textSize">@dimen/bottom_navbar_font_text_size</item>
     </style>
 
@@ -59,14 +59,14 @@
     </style>
 
     <!-- Common components and widgets -->
-    <style name="HeaderTextAppearance" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title"/>
+    <style name="TitleTextAppearance" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title"/>
 
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
 
     <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button.Borderless.Colored"/>
 
     <!-- Option tiles -->
-    <style name="OptionTitleTextAppearance" parent="HeaderTextAppearance">
+    <style name="OptionTitleTextAppearance" parent="TitleTextAppearance">
         <item name="android:textColor">@color/option_title_color</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">@dimen/theme_option_title_font_text_size</item>
@@ -86,7 +86,7 @@
         <item name="cardBackgroundColor">?android:colorPrimary</item>
     </style>
 
-    <style name="CardTitleTextAppearance" parent="HeaderTextAppearance">
+    <style name="CardTitleTextAppearance" parent="TitleTextAppearance">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/card_title_text_size</item>
     </style>
@@ -96,7 +96,7 @@
         <item name="android:textColor">@color/cover_title_color</item>
     </style>
 
-    <style name="FontCardTitleStyle" parent="HeaderTextAppearance">
+    <style name="FontCardTitleStyle" parent="TitleTextAppearance">
         <item name="android:textAlignment">center</item>
     </style>
 
