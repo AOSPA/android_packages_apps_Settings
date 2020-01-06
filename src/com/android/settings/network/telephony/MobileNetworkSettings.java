@@ -35,7 +35,6 @@ import android.view.MenuItem;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
@@ -100,7 +99,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                 || TextUtils.equals(key, BUTTON_CDMA_SUBSCRIPTION_KEY)) {
             if (mTelephonyManager.getEmergencyCallbackMode()) {
                 startActivityForResult(
-                        new Intent(TelephonyIntents.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
+                        new Intent(TelephonyManager.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
                         REQUEST_CODE_EXIT_ECM);
                 mClickedPrefKey = key;
             }
@@ -184,7 +183,8 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         final Context context = getContext();
 
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mTelephonyManager = TelephonyManager.from(context).createForSubscriptionId(mSubId);
+        mTelephonyManager = context.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubId);
 
         onRestoreInstance(icicle);
     }

@@ -16,14 +16,13 @@
 
 package com.android.settings.accessibility;
 
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,13 +52,15 @@ public class AccessibilityEditDialogUtils {
      */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
-            DialogType.EDIT_SHORTCUT_GENERIC,
-            DialogType.EDIT_SHORTCUT_MAGNIFICATION,
+         DialogType.EDIT_SHORTCUT_GENERIC,
+         DialogType.EDIT_SHORTCUT_MAGNIFICATION,
+         DialogType.EDIT_MAGNIFICATION_MODE,
     })
 
     private @interface DialogType {
         int EDIT_SHORTCUT_GENERIC = 0;
         int EDIT_SHORTCUT_MAGNIFICATION = 1;
+        int EDIT_MAGNIFICATION_MODE = 2;
     }
 
     /**
@@ -91,6 +92,23 @@ public class AccessibilityEditDialogUtils {
             CharSequence dialogTitle, DialogInterface.OnClickListener listener) {
         final AlertDialog alertDialog = createDialog(context,
                 DialogType.EDIT_SHORTCUT_MAGNIFICATION, dialogTitle, listener);
+        alertDialog.show();
+
+        return alertDialog;
+    }
+
+    /**
+     * Method to show the magnification mode dialog in Magnification.
+     *
+     * @param context A valid context
+     * @param dialogTitle The title of magnify mode dialog
+     * @param listener The listener to determine the action of magnify mode dialog
+     * @return A magnification mode dialog in Magnification
+     */
+    public static AlertDialog showMagnificationModeDialog(Context context,
+            CharSequence dialogTitle, DialogInterface.OnClickListener listener) {
+        final AlertDialog alertDialog = createDialog(context,
+                DialogType.EDIT_MAGNIFICATION_MODE, dialogTitle, listener);
         alertDialog.show();
 
         return alertDialog;
@@ -138,6 +156,12 @@ public class AccessibilityEditDialogUtils {
                 initMagnifyShortcut(context, contentView);
                 initAdvancedWidget(contentView);
                 break;
+            case DialogType.EDIT_MAGNIFICATION_MODE:
+                contentView = inflater.inflate(
+                        R.layout.accessibility_edit_magnification_mode, null);
+                initMagnifyFullScreen(context, contentView);
+                initMagnifyWindowScreen(context, contentView);
+                break;
             default:
                 throw new IllegalArgumentException();
         }
@@ -145,12 +169,37 @@ public class AccessibilityEditDialogUtils {
         return contentView;
     }
 
+    private static void initMagnifyFullScreen(Context context, View view) {
+        final View dialogView = view.findViewById(R.id.magnify_full_screen);
+        final String title = context.getString(
+                R.string.accessibility_magnification_area_settings_full_screen);
+        // TODO(b/146019459): Use vector drawable instead of temporal png file to avoid distorted.
+        setupShortcutWidget(dialogView, title, R.drawable.accessibility_magnification_full_screen);
+    }
+
+    private static void initMagnifyWindowScreen(Context context, View view) {
+        final View dialogView = view.findViewById(R.id.magnify_window_screen);
+        final String title = context.getString(
+                R.string.accessibility_magnification_area_settings_window_screen);
+        // TODO(b/146019459): Use vector drawable instead of temporal png file to avoid distorted.
+        setupShortcutWidget(dialogView, title,
+                R.drawable.accessibility_magnification_window_screen);
+    }
+
+    private static void setupShortcutWidget(View view, CharSequence titleText, int imageResId) {
+        setupShortcutWidget(view, titleText, null, imageResId);
+    }
+
     private static void setupShortcutWidget(View view, CharSequence titleText,
             CharSequence summaryText, int imageResId) {
         final CheckBox checkBox = view.findViewById(R.id.checkbox);
         checkBox.setText(titleText);
         final TextView summary = view.findViewById(R.id.summary);
-        summary.setText(summaryText);
+        if (TextUtils.isEmpty(summaryText)) {
+            summary.setVisibility(View.GONE);
+        } else {
+            summary.setText(summaryText);
+        }
         final ImageView image = view.findViewById(R.id.image);
         image.setImageResource(imageResId);
     }
@@ -170,7 +219,8 @@ public class AccessibilityEditDialogUtils {
         final String summary = context.getString(
                 R.string.accessibility_shortcut_edit_dialog_summary_hardware);
         setupShortcutWidget(dialogView, title, summary,
-                R.drawable.illustration_accessibility_button);
+                R.drawable.accessibility_shortcut_type_hardware);
+        // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
     }
 
     private static void initMagnifyShortcut(Context context, View view) {
@@ -180,7 +230,8 @@ public class AccessibilityEditDialogUtils {
         final String summary = context.getString(
                 R.string.accessibility_shortcut_edit_dialog_summary_triple_tap);
         setupShortcutWidget(dialogView, title, summary,
-                R.drawable.illustration_accessibility_button);
+                R.drawable.accessibility_shortcut_type_triple_tap);
+        // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
     }
 
     private static void initAdvancedWidget(View view) {
@@ -192,29 +243,24 @@ public class AccessibilityEditDialogUtils {
         });
     }
 
-    private static boolean isGestureNavigateEnabled(Context context) {
-        return context.getResources().getInteger(
-                com.android.internal.R.integer.config_navBarInteractionMode)
-                == NAV_BAR_MODE_GESTURAL;
-    }
-
     private static CharSequence retrieveTitle(Context context) {
-        return context.getString(isGestureNavigateEnabled(context)
+        return context.getString(AccessibilityUtil.isGestureNavigateEnabled(context)
                 ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture
                 : R.string.accessibility_shortcut_edit_dialog_title_software);
     }
 
     private static CharSequence retrieveSummary(Context context, int lineHeight) {
-        return isGestureNavigateEnabled(context)
+        return AccessibilityUtil.isGestureNavigateEnabled(context)
                 ? context.getString(
                 R.string.accessibility_shortcut_edit_dialog_summary_software_gesture)
                 : getSummaryStringWithIcon(context, lineHeight);
     }
 
     private static int retrieveImageResId(Context context) {
-        return isGestureNavigateEnabled(context)
-                ? R.drawable.illustration_accessibility_button
-                : R.drawable.illustration_accessibility_button;
+        return AccessibilityUtil.isGestureNavigateEnabled(context)
+                ? R.drawable.accessibility_shortcut_type_software_gesture
+                : R.drawable.accessibility_shortcut_type_software;
+        // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
     }
 
     private static SpannableString getSummaryStringWithIcon(Context context, int lineHeight) {

@@ -43,8 +43,18 @@ android_library {
     libs: [
         "telephony-common",
         "ims-common",
+        "app-compat-annotations",
         "telephony-ext",
     ],
+
+    plugins: [
+        "compat-changeid-annotation-processor",
+    ]
+}
+
+platform_compat_config {
+    name: "settings-platform-compat-config",
+    src: ":Settings-core",
 }
 
 android_app {

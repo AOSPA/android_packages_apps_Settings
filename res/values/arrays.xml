@@ -102,9 +102,9 @@
 
     <!-- Dark theme scheduling preferences  [CHAR LIMIT=NONE] -->
     <string-array name="dark_ui_scheduler_preference_titles">
-        <!-- 1: None -->
+        <!-- 0: None -->
         <item>@string/dark_ui_auto_mode_never</item>
-        <!-- 2: Auto -->
+        <!-- 1: Auto -->
         <item>@string/dark_ui_auto_mode_auto</item>
     </string-array>
 
@@ -277,8 +277,8 @@
    <!-- Wi-Fi AP band settings.  Either Auto, 2.4GHz or 5GHz. -->
    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array translatable="false" name="wifi_ap_band_config_full">
-        <item>0</item>
         <item>1</item>
+        <item>2</item>
     </string-array>
 
     <string-array translatable="false" name="wifi_ap_band_summary_full">
@@ -301,8 +301,8 @@
     </string-array>
 
     <string-array translatable="false" name="wifi_ap_band_dual_mode">
-        <item>0</item>
-        <item>-1</item>
+        <item>1</item>
+        <item>3</item>
     </string-array>
 
     <string-array translatable="false" name="wifi_ap_band_dual_mode_summary">
@@ -496,6 +496,7 @@
         <item>1xRTT</item>
         <item>IS95B</item>
         <item>IS95A</item>
+        <item>NR</item>
     </string-array>
 
     <string-array translatable="false" name="bearer_values">
@@ -531,6 +532,8 @@
         <item>5</item>
         <!-- Do not translate. -->
         <item>4</item>
+        <!-- Do not translate. -->
+        <item>20</item>
     </string-array>
 
     <!-- MVNO Info used in APN editor -->
@@ -1031,19 +1034,43 @@
         <item>\?</item>
     </string-array>
 
-    <!-- Display color space adjustment modes for accessibility -->
-    <string-array name="daltonizer_type_entries" translatable="false">
+    <!-- Summary for magnification adjustment modes for accessibility -->
+    <string-array name="magnification_mode_summaries" translatable="false">
+        <item>@string/accessibility_magnification_area_settings_full_screen_summary</item>
+        <item>@string/accessibility_magnification_area_settings_window_screen_summary</item>
+        <item>@string/accessibility_magnification_area_settings_all_summary</item>
+    </string-array>
+
+    <!-- Values for magnification adjustment modes for accessibility -->
+    <integer-array name="magnification_mode_values" translatable="false">
+        <!-- Full screen -->
+        <item>1</item>
+        <!-- Window screen -->
+        <item>2</item>
+        <!-- Full screen and window screen. -->
+        <item>3</item>
+    </integer-array>
+
+    <!-- Summary for color space adjustment modes for accessibility -->
+    <string-array name="daltonizer_mode_summaries" translatable="false">
         <item>@string/daltonizer_mode_deuteranomaly</item>
         <item>@string/daltonizer_mode_protanomaly</item>
         <item>@string/daltonizer_mode_tritanomaly</item>
     </string-array>
 
+    <!-- Keys for color space adjustment modes for accessibility -->
+    <string-array name="daltonizer_mode_keys" translatable="false">
+        <item>daltonizer_mode_deuteranomaly</item>
+        <item>daltonizer_mode_protanomaly</item>
+        <item>daltonizer_mode_tritanomaly</item>
+    </string-array>
+
     <!-- Values for display color space adjustment modes for accessibility -->
-    <string-array name="daltonizer_type_values" translatable="false">
+    <integer-array name="daltonizer_type_values" translatable="false">
         <item>12</item>
         <item>11</item>
         <item>13</item>
-    </string-array>
+    </integer-array>
 
     <!-- Battery saver mode: allowable trigger threshold levels. -->
     <integer-array name="battery_saver_trigger_values" translatable="false" >

@@ -19,9 +19,11 @@ package com.android.settings.wifi;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
@@ -38,9 +40,12 @@ import android.os.Process;
 import android.os.SimpleClock;
 import android.os.SystemClock;
 import android.provider.Settings;
+import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -55,32 +60,49 @@ import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBarController;
+import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
+import com.android.settings.wifi.dpp.WifiDppUtils;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
+import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
+import com.android.wifitrackerlib.WifiEntry.ConnectCallback.ConnectStatus;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import java.time.Clock;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * UI for Wi-Fi settings screen
  */
 @SearchIndexable
 public class WifiSettings2 extends RestrictedSettingsFragment
-        implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback {
+        implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
+        WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener {
 
     private static final String TAG = "WifiSettings2";
+
+    // IDs of context menu
+    static final int MENU_ID_CONNECT = Menu.FIRST + 1;
+    @VisibleForTesting
+    static final int MENU_ID_DISCONNECT = Menu.FIRST + 2;
+    @VisibleForTesting
+    static final int MENU_ID_FORGET = Menu.FIRST + 3;
+    static final int MENU_ID_MODIFY = Menu.FIRST + 4;
 
     // Max age of tracked WifiEntries
     private static final long MAX_SCAN_AGE_MILLIS = 15_000;
@@ -89,18 +111,46 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     @VisibleForTesting
     static final int ADD_NETWORK_REQUEST = 2;
+    static final int CONFIG_NETWORK_REQUEST = 3;
 
     private static final String PREF_KEY_EMPTY_WIFI_LIST = "wifi_empty_list";
     // TODO(b/70983952): Rename these to use WifiEntry instead of AccessPoint.
     private static final String PREF_KEY_CONNECTED_ACCESS_POINTS = "connected_access_point";
     private static final String PREF_KEY_ACCESS_POINTS = "access_points";
-    private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_settings";
+    private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_wifi_settings";
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
     private static final String PREF_KEY_STATUS_MESSAGE = "wifi_status_message";
     @VisibleForTesting
     static final String PREF_KEY_DATA_USAGE = "wifi_data_usage";
 
     private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
+
+    public static final int WIFI_DIALOG_ID = 1;
+
+    // Instance state keys
+    private static final String SAVE_DIALOG_MODE = "dialog_mode";
+    private static final String SAVE_DIALOG_WIFIENTRY_KEY = "wifi_ap_key";
+
+    // Cache at onCreateContextMenu and use at onContextItemSelected. Don't use it in other methods.
+    private WifiEntry mSelectedWifiEntry;
+
+    // Save the dialog details
+    private int mDialogMode;
+    private String mDialogWifiEntryKey;
+    private WifiEntry mDialogWifiEntry;
+
+    // This boolean extra specifies whether to enable the Next button when connected. Used by
+    // account creation outside of setup wizard.
+    private static final String EXTRA_ENABLE_NEXT_ON_CONNECT = "wifi_enable_next_on_connect";
+
+    // Enable the Next button when a Wi-Fi network is connected.
+    private boolean mEnableNextOnConnection;
+
+    // This string extra specifies a network to open the connect dialog on, so the user can enter
+    // network credentials.  This is used by quick settings for secured networks, among other
+    // things.
+    private static final String EXTRA_START_CONNECT_SSID = "wifi_start_connect_ssid";
+    private String mOpenSsid;
 
     private static boolean isVerboseLoggingEnabled() {
         return WifiPickerTracker.isVerboseLoggingEnabled();
@@ -133,7 +183,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     @VisibleForTesting
     WifiPickerTracker mWifiPickerTracker;
 
-    private WifiDialog mDialog;
+    private WifiDialog2 mDialog;
 
     private View mProgressHeader;
 
@@ -272,6 +322,32 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         };
         registerForContextMenu(getListView());
         setHasOptionsMenu(true);
+
+        if (savedInstanceState != null) {
+            mDialogMode = savedInstanceState.getInt(SAVE_DIALOG_MODE);
+            mDialogWifiEntryKey = savedInstanceState.getString(SAVE_DIALOG_WIFIENTRY_KEY);
+
+            if (!TextUtils.isEmpty(mDialogWifiEntryKey)) {
+                List<WifiEntry> wifiEntries = mWifiPickerTracker.getWifiEntries();
+                Optional<WifiEntry> matchedWifiEntry = wifiEntries.stream().filter(wifiEntry ->
+                        TextUtils.equals(wifiEntry.getKey(), mDialogWifiEntryKey)).findAny();
+                if (matchedWifiEntry.isPresent()) {
+                    mDialogWifiEntry = matchedWifiEntry.get();
+                } else {
+                    throw new IllegalStateException("Failed to restore WifiEntry of key: "
+                            + mDialogWifiEntryKey);
+                }
+            }
+        }
+
+        // If we're supposed to enable/disable the Next button based on our current connection
+        // state, start it off in the right state.
+        final Intent intent = getActivity().getIntent();
+        mEnableNextOnConnection = intent.getBooleanExtra(EXTRA_ENABLE_NEXT_ON_CONNECT, false);
+
+        if (intent.hasExtra(EXTRA_START_CONNECT_SSID)) {
+            mOpenSsid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
+        }
     }
 
     @Override
@@ -280,7 +356,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
             mWifiEnabler.teardownSwitchController();
         }
         mWorkerThread.quit();
-        
+
         super.onDestroyView();
     }
 
@@ -327,6 +403,23 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         if (mWifiEnabler != null) {
             mWifiEnabler.resume(activity);
         }
+
+        changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
+
+        // Edit the Wi-Fi network of specified SSID.
+        if (mOpenSsid != null) {
+            Optional<WifiEntry> matchedWifiEntry = mWifiPickerTracker.getWifiEntries().stream()
+                    .filter(wifiEntry -> TextUtils.equals(mOpenSsid, wifiEntry.getSsid()))
+                    .filter(wifiEntry -> wifiEntry.getSecurity() != WifiEntry.SECURITY_NONE
+                            && wifiEntry.getSecurity() != WifiEntry.SECURITY_OWE)
+                    .filter(wifiEntry -> !wifiEntry.isSaved()
+                            || isDisabledByWrongPassword(wifiEntry))
+                    .findFirst();
+            if (matchedWifiEntry.isPresent()) {
+                mOpenSsid = null;
+                launchConfigNewNetworkFragment(matchedWifiEntry.get());
+            }
+        }
     }
 
     @Override
@@ -358,6 +451,16 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 }
             }
             return;
+        } else if (requestCode == CONFIG_NETWORK_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                final WifiConfiguration wifiConfiguration = data.getParcelableExtra(
+                        ConfigureWifiEntryFragment.NETWORK_CONFIG_KEY);
+                if (wifiConfiguration != null) {
+                    mWifiManager.save(wifiConfiguration,
+                            new WifiSaveThenConnectActionListener(wifiConfiguration));
+                }
+            }
+            return;
         }
 
         final boolean formerlyRestricted = mIsRestricted;
@@ -382,16 +485,72 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // If dialog has been shown, save its state.
+        if (mDialog != null) {
+            outState.putInt(SAVE_DIALOG_MODE, mDialogMode);
+            outState.putString(SAVE_DIALOG_WIFIENTRY_KEY, mDialogWifiEntryKey);
+        }
+    }
+
+    @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo info) {
-        // TODO(b/70983952): Add context menu options here. This should be driven by the appropriate
-        // "can do action" APIs from WifiEntry.
+        Preference preference = (Preference) view.getTag();
+        if (!(preference instanceof LongPressWifiEntryPreference)) {
+            // Do nothing.
+            return;
+        }
+
+        // Cache the WifiEntry for onContextItemSelected. Don't use it in other methods.
+        mSelectedWifiEntry = ((LongPressWifiEntryPreference) preference).getWifiEntry();
+
+        menu.setHeaderTitle(mSelectedWifiEntry.getTitle());
+        if (mSelectedWifiEntry.canConnect()) {
+            menu.add(Menu.NONE, MENU_ID_CONNECT, 0 /* order */, R.string.wifi_connect);
+        }
+
+        if (mSelectedWifiEntry.canDisconnect()) {
+            menu.add(Menu.NONE, MENU_ID_DISCONNECT, 0 /* order */,
+                    R.string.wifi_disconnect_button_text);
+        }
+
+        // "forget" for normal saved network. And "disconnect" for ephemeral network because it
+        // could only be disconnected and be put in blacklists so it won't be used again.
+        if (mSelectedWifiEntry.canForget()) {
+            menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */, R.string.forget);
+        }
+
+        WifiConfiguration config = mSelectedWifiEntry.getWifiConfiguration();
+        // Some configs are ineditable
+        if (WifiUtils.isNetworkLockedDown(getActivity(), config)) {
+            return;
+        }
+
+        if (mSelectedWifiEntry.isSaved() && mSelectedWifiEntry.getConnectedState()
+                != WifiEntry.CONNECTED_STATE_CONNECTED) {
+            menu.add(Menu.NONE, MENU_ID_MODIFY, 0 /* order */, R.string.wifi_modify);
+        }
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        // TODO(b/70983952): Add context menu selection logic here. This should simply call the
-        // appropriate WifiEntry action APIs (connect, forget, disconnect, etc).
-        return false;
+        switch (item.getItemId()) {
+            case MENU_ID_CONNECT:
+                connect(mSelectedWifiEntry, true /* editIfNoConfig */, false /* fullScreenEdit */);
+                return true;
+            case MENU_ID_DISCONNECT:
+                mSelectedWifiEntry.disconnect(null /* callback */);
+                return true;
+            case MENU_ID_FORGET:
+                forget(mSelectedWifiEntry);
+                return true;
+            case MENU_ID_MODIFY:
+                showDialog(mSelectedWifiEntry, WifiConfigUiBase2.MODE_MODIFY);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     @Override
@@ -402,18 +561,74 @@ public class WifiSettings2 extends RestrictedSettingsFragment
             return super.onPreferenceTreeClick(preference);
         }
 
-        // TODO(b/70983952) Add WifiEntry click logic. This should be as simple as calling
-        // WifiEntry.connect().
         if (preference instanceof LongPressWifiEntryPreference) {
             final WifiEntry selectedEntry =
                     ((LongPressWifiEntryPreference) preference).getWifiEntry();
-            selectedEntry.connect();
+            connect(selectedEntry, true /* editIfNoConfig */, true /* fullScreenEdit */);
         } else if (preference == mAddWifiNetworkPreference) {
             onAddNetworkPressed();
         } else {
             return super.onPreferenceTreeClick(preference);
         }
         return true;
+    }
+
+    private void showDialog(WifiEntry wifiEntry, int dialogMode) {
+        if (WifiUtils.isNetworkLockedDown(getActivity(), wifiEntry.getWifiConfiguration())
+                && wifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED) {
+            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
+                    RestrictedLockUtilsInternal.getDeviceOwner(getActivity()));
+            return;
+        }
+
+        if (mDialog != null) {
+            removeDialog(WIFI_DIALOG_ID);
+            mDialog = null;
+        }
+
+        // Save the access point and edit mode
+        mDialogWifiEntry = wifiEntry;
+        mDialogWifiEntryKey = wifiEntry.getKey();
+        mDialogMode = dialogMode;
+
+        showDialog(WIFI_DIALOG_ID);
+    }
+
+    @Override
+    public Dialog onCreateDialog(int dialogId) {
+        switch (dialogId) {
+            case WIFI_DIALOG_ID:
+                // modify network
+                mDialog = WifiDialog2
+                        .createModal(getActivity(), this, mDialogWifiEntry, mDialogMode);
+                return mDialog;
+            default:
+                return super.onCreateDialog(dialogId);
+        }
+    }
+
+    @Override
+    public void onDialogShowing() {
+        super.onDialogShowing();
+        setOnDismissListener(this);
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        // We don't keep any dialog object when dialog was dismissed.
+        mDialog = null;
+        mDialogWifiEntry = null;
+        mDialogWifiEntryKey = null;
+    }
+
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        switch (dialogId) {
+            case WIFI_DIALOG_ID:
+                return SettingsEnums.DIALOG_WIFI_AP_EDIT;
+            default:
+                return 0;
+        }
     }
 
     /** Called when the state of Wifi has changed. */
@@ -457,6 +672,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     @Override
     public void onWifiEntriesChanged() {
         updateWifiEntryPreferencesDelayed();
+        changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
     }
 
     @Override
@@ -509,6 +725,14 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 pref.setKey(connectedEntry.getKey());
                 pref.refresh();
                 mConnectedWifiEntryPreferenceCategory.addPreference(pref);
+                pref.setOnPreferenceClickListener(preference -> {
+                    if (connectedEntry.canSignIn()) {
+                        connectedEntry.signIn(null /* callback */);
+                    } else {
+                        launchNetworkDetailsFragment(pref);
+                    }
+                    return true;
+                });
             }
         } else {
             mConnectedWifiEntryPreferenceCategory.removeAll();
@@ -554,7 +778,27 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         setAdditionalSettingsSummaries();
     }
 
-    private LongPressWifiEntryPreference createLongPressWifiEntryPreference(WifiEntry wifiEntry) {
+    private void launchNetworkDetailsFragment(LongPressWifiEntryPreference pref) {
+        final WifiEntry wifiEntry = pref.getWifiEntry();
+        final Context context = getContext();
+        final CharSequence title =
+                FeatureFlagUtils.isEnabled(context, FeatureFlags.WIFI_DETAILS_DATAUSAGE_HEADER)
+                        ? wifiEntry.getTitle()
+                        : context.getText(R.string.pref_title_network_details);
+
+        final Bundle bundle = new Bundle();
+        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY, wifiEntry.getKey());
+
+        new SubSettingLauncher(context)
+                .setTitleText(title)
+                .setDestination(WifiNetworkDetailsFragment2.class.getName())
+                .setArguments(bundle)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
+    }
+
+    @VisibleForTesting
+    LongPressWifiEntryPreference createLongPressWifiEntryPreference(WifiEntry wifiEntry) {
         return new LongPressWifiEntryPreference(getPrefContext(), wifiEntry, this);
     }
 
@@ -685,6 +929,99 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         return R.string.help_url_wifi;
     }
 
+    /**
+     * Renames/replaces "Next" button when appropriate. "Next" button usually exists in
+     * Wi-Fi setup screens, not in usual wifi settings screen.
+     *
+     * @param enabled true when the device is connected to a wifi network.
+     */
+    @VisibleForTesting
+    void changeNextButtonState(boolean enabled) {
+        if (mEnableNextOnConnection && hasNextButton()) {
+            getNextButton().setEnabled(enabled);
+        }
+    }
+
+    @Override
+    public void onForget(WifiDialog2 dialog) {
+        forget(mDialogWifiEntry);
+    }
+
+    @Override
+    public void onSubmit(WifiDialog2 dialog) {
+        final int dialogMode = mDialog.getController().getMode();
+
+        if (dialogMode == WifiConfigUiBase2.MODE_MODIFY) {
+            mWifiManager.save(mDialogWifiEntry.getWifiConfiguration(), mSaveListener);
+        } else if (dialogMode == WifiConfigUiBase2.MODE_CONNECT
+                || (dialogMode == WifiConfigUiBase2.MODE_VIEW && mDialogWifiEntry.canConnect())) {
+            connect(mDialogWifiEntry, false /* editIfNoConfig */, false /* fullScreenEdit*/);
+        }
+    }
+
+    @Override
+    public void onScan(WifiDialog2 dialog, String ssid) {
+        // Launch QR code scanner to join a network.
+        startActivityForResult(WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid),
+                REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
+    }
+
+    private void forget(WifiEntry wifiEntry) {
+        mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_WIFI_FORGET);
+        wifiEntry.forget(null /* callback */);
+    }
+
+    private void connect(WifiEntry wifiEntry, boolean editIfNoConfig, boolean fullScreenEdit) {
+        mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_WIFI_CONNECT,
+                wifiEntry.isSaved());
+
+        // If it's an unsaved secure WifiEntry, it will callback
+        // ConnectCallback#onConnectResult with ConnectCallback#CONNECT_STATUS_FAILURE_NO_CONFIG
+        wifiEntry.connect(new WifiEntryConnectCallback(wifiEntry, editIfNoConfig,
+                fullScreenEdit));
+    }
+
+    private class WifiSaveThenConnectActionListener implements WifiManager.ActionListener {
+        final WifiConfiguration mWifiConfiguration;
+
+        WifiSaveThenConnectActionListener(WifiConfiguration wifiConfiguration) {
+            mWifiConfiguration = wifiConfiguration;
+        }
+
+        @Override
+        public void onSuccess() {
+            mWifiManager.connect(mWifiConfiguration, new WifiConnectActionListener());
+        }
+
+        @Override
+        public void onFailure(int reason) {
+            final Activity activity = getActivity();
+            if (isFisishingOrDestroyed(activity)) {
+                return;
+            }
+
+            Toast.makeText(activity, R.string.wifi_failed_save_message, Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    private class WifiConnectActionListener implements WifiManager.ActionListener {
+        @Override
+        public void onSuccess() {
+            // Do nothing.
+        }
+
+        @Override
+        public void onFailure(int reason) {
+            final Activity activity = getActivity();
+            if (isFisishingOrDestroyed(activity)) {
+                return;
+            }
+
+            Toast.makeText(activity, R.string.wifi_failed_connect_message, Toast.LENGTH_SHORT)
+                    .show();
+        }
+    };
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
@@ -706,4 +1043,71 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                     return result;
                 }
             };
+
+    private class WifiEntryConnectCallback implements ConnectCallback {
+        final WifiEntry mConnectWifiEntry;
+        final boolean mEditIfNoConfig;
+        final boolean mFullScreenEdit;
+
+        WifiEntryConnectCallback(WifiEntry connectWifiEntry, boolean editIfNoConfig,
+                boolean fullScreenEdit) {
+            mConnectWifiEntry = connectWifiEntry;
+            mEditIfNoConfig = editIfNoConfig;
+            mFullScreenEdit = fullScreenEdit;
+        }
+
+        @Override
+        public void onConnectResult(@ConnectStatus int status) {
+            final Activity activity = getActivity();
+            if (isFisishingOrDestroyed(activity)) {
+                return;
+            }
+
+            if (status == ConnectCallback.CONNECT_STATUS_FAILURE_NO_CONFIG) {
+                if (mEditIfNoConfig) {
+                    // Edit an unsaved secure Wi-Fi network.
+                    if (mFullScreenEdit) {
+                        launchConfigNewNetworkFragment(mConnectWifiEntry);
+                    } else {
+                        showDialog(mConnectWifiEntry, WifiConfigUiBase2.MODE_MODIFY);
+                    }
+                }
+            } else if (status == CONNECT_STATUS_FAILURE_UNKNOWN) {
+                Toast.makeText(getContext(), R.string.wifi_failed_connect_message,
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private boolean isFisishingOrDestroyed(Activity activity) {
+        return activity == null || activity.isFinishing() || activity.isDestroyed();
+    }
+
+    private void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
+        final Bundle bundle = new Bundle();
+        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY,
+                wifiEntry.getKey());
+        new SubSettingLauncher(getContext())
+                .setTitleText(wifiEntry.getTitle())
+                .setDestination(ConfigureWifiEntryFragment.class.getName())
+                .setArguments(bundle)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .setResultListener(WifiSettings2.this, CONFIG_NETWORK_REQUEST)
+                .launch();
+    }
+
+    /** Helper method to return whether a WifiEntry is disabled due to a wrong password */
+    private static boolean isDisabledByWrongPassword(WifiEntry wifiEntry) {
+        WifiConfiguration config = wifiEntry.getWifiConfiguration();
+        if (config == null) {
+            return false;
+        }
+        WifiConfiguration.NetworkSelectionStatus networkStatus =
+                config.getNetworkSelectionStatus();
+        if (networkStatus == null || networkStatus.isNetworkEnabled()) {
+            return false;
+        }
+        int reason = networkStatus.getNetworkSelectionDisableReason();
+        return WifiConfiguration.NetworkSelectionStatus.DISABLED_BY_WRONG_PASSWORD == reason;
+    }
 }

@@ -63,8 +63,11 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
  */
 public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
+
     private static final String TAG = "SavedBluetoothDeviceUpdater";
     private static final boolean DBG = false;
+
+    private static final String PREF_KEY = "saved_bt";
 
     public SavedBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
@@ -85,9 +88,15 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
         final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
                 .getBluetoothDevice();
         device.connect(true);
         return true;
+    }
+
+    @Override
+    protected String getPreferenceKey() {
+        return PREF_KEY;
     }
 }

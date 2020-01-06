@@ -37,8 +37,10 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.wifitrackerlib.SavedNetworkTracker;
 
 import java.time.Clock;
@@ -47,13 +49,11 @@ import java.time.ZoneOffset;
 /**
  * UI to manage saved networks/access points.
  */
+@SearchIndexable
 public class SavedAccessPointsWifiSettings2 extends DashboardFragment
         implements SavedNetworkTracker.SavedNetworkTrackerCallback {
 
     private static final String TAG = "SavedAccessPoints2";
-
-    // Key of a Bundle to save/restore the selected WifiEntry
-    static final String KEY_KEY = "key_key";
 
     // Max age of tracked WifiEntries
     private static final long MAX_SCAN_AGE_MILLIS = 15_000;
@@ -139,7 +139,7 @@ public class SavedAccessPointsWifiSettings2 extends DashboardFragment
         }
 
         final Bundle bundle = new Bundle();
-        bundle.putString(KEY_KEY, key);
+        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY, key);
 
         new SubSettingLauncher(getContext())
                 .setTitleText(title)
@@ -167,4 +167,7 @@ public class SavedAccessPointsWifiSettings2 extends DashboardFragment
         use(SubscribedAccessPointsPreferenceController2.class)
                 .displayPreference(screen, mSavedNetworkTracker.getSubscriptionWifiEntries());
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.wifi_display_saved_access_points2);
 }

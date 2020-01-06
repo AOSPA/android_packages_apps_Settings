@@ -52,6 +52,7 @@ public class Settings extends SettingsActivity {
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
     public static class LanguageAndInputSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
+    public static class DarkThemeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySuggestionActivity extends NightDisplaySettingsActivity { /* empty */ }
@@ -130,6 +131,7 @@ public class Settings extends SettingsActivity {
     public static class PhotosStorageActivity extends SettingsActivity {
         /* empty */
     }
+    public static class GestureNavigationSettingsActivity extends SettingsActivity { /* empty */ }
 
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingSettingsActivity extends SettingsActivity { /* empty */ }
@@ -168,6 +170,10 @@ public class Settings extends SettingsActivity {
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
     public static class MobileNetworkListActivity extends SettingsActivity {}
     public static class GlobalActionsPanelSettingsActivity extends SettingsActivity {}
+    /**
+     * Activity for BugReportHandlerPicker.
+     */
+    public static class BugReportHandlerPickerActivity extends SettingsActivity { /* empty */ }
 
     // Top level categories for new IA
     public static class NetworkDashboardActivity extends SettingsActivity {}
