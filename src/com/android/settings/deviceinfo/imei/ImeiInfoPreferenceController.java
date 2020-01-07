@@ -82,15 +82,30 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             final int slot0PhoneType = mTelephonyManager.getCurrentPhoneTypeForSlot(0);
             final int slot1PhoneType = mTelephonyManager.getCurrentPhoneTypeForSlot(1);
             if (PHONE_TYPE_CDMA != slot0PhoneType && PHONE_TYPE_CDMA != slot1PhoneType) {
-                addPreference(screen, 0, imeiPreferenceOrder + phoneCount,
+                addPreferenceNotInList(screen, 0, imeiPreferenceOrder + phoneCount,
                         getPreferenceKey() + phoneCount, true);
             } else if (PHONE_TYPE_CDMA == slot0PhoneType){
-                addPreference(screen, 0, imeiPreferenceOrder + phoneCount,
+                addPreferenceNotInList(screen, 0, imeiPreferenceOrder + phoneCount,
                         getPreferenceKey() + phoneCount, false);
             } else if (PHONE_TYPE_CDMA == slot1PhoneType) {
-                addPreference(screen, 1, imeiPreferenceOrder + phoneCount,
+                addPreferenceNotInList(screen, 1, imeiPreferenceOrder + phoneCount,
                         getPreferenceKey() + phoneCount, false);
             }
+        }
+    }
+
+    private void addPreferenceNotInList(PreferenceScreen screen, int slotNumber, int order,
+                               String key, boolean isCDMAPhone) {
+        final Preference multiSimPreference = createNewPreference(screen.getContext());
+        multiSimPreference.setOrder(order);
+        multiSimPreference.setKey(key);
+        screen.addPreference(multiSimPreference);
+        if (isCDMAPhone) {
+            multiSimPreference.setTitle(getTitleForCdmaPhone(slotNumber));
+            multiSimPreference.setSummary(mTelephonyManager.getMeid(slotNumber));
+        } else {
+            multiSimPreference.setTitle(getTitleForGsmPhone(slotNumber));
+            multiSimPreference.setSummary(mTelephonyManager.getImei(slotNumber));
         }
     }
 
@@ -129,6 +144,12 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     private CharSequence getSummary(int simSlot) {
         final int phoneType = getPhoneType(simSlot);
+        if (Utils.isSupportCTPA(mContext)) {
+            // only can obtain the MEID by slot 0
+            if (PHONE_TYPE_CDMA == phoneType) {
+                simSlot = 0;
+            }
+        }
         return phoneType == PHONE_TYPE_CDMA ? mTelephonyManager.getMeid(simSlot)
                 : mTelephonyManager.getImei(simSlot);
     }
@@ -175,12 +196,6 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     }
 
     private void updatePreference(Preference preference, int simSlot) {
-        if (Utils.isSupportCTPA(mContext)) {
-            int phoneType = mTelephonyManager.getCurrentPhoneTypeForSlot(simSlot);
-            if (PHONE_TYPE_CDMA == phoneType) {
-                simSlot = 0;
-            }
-        }
         preference.setTitle(getTitle(simSlot));
         preference.setSummary(getSummary(simSlot));
     }
@@ -202,6 +217,9 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     }
 
     private int getPhoneType(int slotIndex) {
+        if (Utils.isSupportCTPA(mContext)) {
+            return mTelephonyManager.getCurrentPhoneTypeForSlot(slotIndex);
+        }
         SubscriptionInfo subInfo = SubscriptionManager.from(mContext)
             .getActiveSubscriptionInfoForSimSlotIndex(slotIndex);
         return mTelephonyManager.getCurrentPhoneType(subInfo != null ? subInfo.getSubscriptionId()
