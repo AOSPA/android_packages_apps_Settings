@@ -29,9 +29,11 @@ public class BasebandVersionPreferenceController extends BasePreferenceControlle
 
     @VisibleForTesting
     static final String BASEBAND_PROPERTY = "gsm.version.baseband";
+    private final Context mContext;
 
     public BasebandVersionPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mContext = context;
     }
 
     @Override
@@ -41,6 +43,16 @@ public class BasebandVersionPreferenceController extends BasePreferenceControlle
 
     @Override
     public CharSequence getSummary() {
+        if (Utils.isSupportCTPA(mContext.getApplicationContext())) {
+            String baseBands = SystemProperties.get(BASEBAND_PROPERTY,
+                    mContext.getString(R.string.device_info_default));
+            if (null != baseBands) {
+                String[] baseBandArray = baseBands.split(",");
+                if ((baseBandArray != null) && (baseBandArray.length > 0)) {
+                    return baseBandArray[0];
+                }
+            }
+        }
         return SystemProperties.get(BASEBAND_PROPERTY,
                 mContext.getString(R.string.device_info_default));
     }
