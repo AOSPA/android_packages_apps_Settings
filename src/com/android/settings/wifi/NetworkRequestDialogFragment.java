@@ -340,6 +340,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         // Throws error dialog.
         final NetworkRequestErrorDialogFragment fragment = NetworkRequestErrorDialogFragment
                 .newInstance();
+        fragment.setRejectCallback(mUserSelectionCallback);
         final Bundle bundle = new Bundle();
         bundle.putSerializable(NetworkRequestErrorDialogFragment.DIALOG_TYPE, type);
         fragment.setArguments(bundle);
@@ -396,7 +397,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
             final PreferenceImageView imageView = view.findViewById(android.R.id.icon);
             final int level = accessPoint.getLevel();
             final int generation = accessPoint.getWifiGeneration();
-            final boolean isReady = accessPoint.isTwtSupported()
+            final boolean isReady = accessPoint.isHe8ssCapableAp()
                                     && accessPoint.isVhtMax8SpatialStreamsSupported();
             if (imageView != null) {
                 final Drawable drawable = getContext().getDrawable(

@@ -191,11 +191,14 @@ public class WifiConfigController implements TextWatcher,
     private TextView mSsidView;
 
     private Context mContext;
+
+    @VisibleForTesting
+    Integer mSecurityInPosition[];
+
     private final WifiManager mWifiManager;
     private TelephonyManager mTelephonyManager;
     private SubscriptionManager mSubscriptionManager = null;
     private int selectedSimCardNumber;
-    private Integer mSecurityInPosition[];
 
     public WifiConfigController(WifiConfigUiBase parent, View view, AccessPoint accessPoint,
             int mode) {
@@ -350,7 +353,7 @@ public class WifiConfigController implements TextWatcher,
             if ((!mAccessPoint.isSaved() && !mAccessPoint.isActive()
                     && !mAccessPoint.isPasspointConfig())
                     || mMode != WifiConfigUiBase.MODE_VIEW) {
-                showSecurityFields();
+                showSecurityFields(true /* refreshEapMethods */, true /* refreshCertificates */);
                 showIpConfigFields();
                 showProxyFields();
                 final CheckBox advancedTogglebox =
@@ -423,6 +426,9 @@ public class WifiConfigController implements TextWatcher,
                         } else if (frequency >= AccessPoint.LOWER_FREQ_5GHZ
                                 && frequency < AccessPoint.HIGHER_FREQ_5GHZ) {
                             band = res.getString(R.string.wifi_band_5ghz);
+                        } else if (frequency >= AccessPoint.LOWER_FREQ_60GHZ
+                                && frequency < AccessPoint.HIGHER_FREQ_60GHZ) {
+                            band = res.getString(R.string.wifi_band_60ghz);
                         } else {
                             Log.e(TAG, "Unexpected frequency " + frequency);
                         }
@@ -1003,7 +1009,7 @@ public class WifiConfigController implements TextWatcher,
         return 0;
     }
 
-    private void showSecurityFields() {
+    private void showSecurityFields(boolean refreshEapMethods, boolean refreshCertificates) {
         if (mAccessPointSecurity == AccessPoint.SECURITY_NONE ||
                 mAccessPointSecurity == AccessPoint.SECURITY_OWE ||
                 mAccessPointSecurity == AccessPoint.SECURITY_OWE_TRANSITION ||
@@ -1040,20 +1046,12 @@ public class WifiConfigController implements TextWatcher,
         }
         mView.findViewById(R.id.eap).setVisibility(View.VISIBLE);
 
+        boolean initiateEnterpriseNetworkUi = false;
         if (mEapMethodSpinner == null) {
+            initiateEnterpriseNetworkUi = true;
             getSIMInfo();
             mEapMethodSpinner = (Spinner) mView.findViewById(R.id.method);
             mEapMethodSpinner.setOnItemSelectedListener(this);
-            if (Utils.isWifiOnly(mContext) || !mContext.getResources().getBoolean(
-                    com.android.internal.R.bool.config_eap_sim_based_auth_supported)) {
-                String[] eapMethods = mContext.getResources().getStringArray(
-                        R.array.eap_method_without_sim_auth);
-                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(mContext,
-                        android.R.layout.simple_spinner_item, eapMethods);
-                spinnerAdapter.setDropDownViewResource(
-                        android.R.layout.simple_spinner_dropdown_item);
-                mEapMethodSpinner.setAdapter(spinnerAdapter);
-            }
 
             if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
                 mEapMethodSpinner.setSelection(WIFI_EAP_METHOD_TLS);
@@ -1071,11 +1069,36 @@ public class WifiConfigController implements TextWatcher,
             mSimCardSpinner = (Spinner) mView.findViewById(R.id.sim_card);
             mEapIdentityView = (TextView) mView.findViewById(R.id.identity);
             mEapAnonymousView = (TextView) mView.findViewById(R.id.anonymous);
+        }
 
-            if (mAccessPoint != null && mAccessPoint.isCarrierAp()) {
-                mEapMethodSpinner.setSelection(mAccessPoint.getCarrierApEapType());
+        if (refreshEapMethods) {
+            ArrayAdapter<CharSequence> eapMethodSpinnerAdapter;
+            if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
+                eapMethodSpinnerAdapter = getSpinnerAdapter(R.array.wifi_eap_method);
+                mEapMethodSpinner.setAdapter(eapMethodSpinnerAdapter);
+                // WAP3-Enterprise 192-bit only allows EAP method TLS
+                mEapMethodSpinner.setSelection(Eap.TLS);
+                mEapMethodSpinner.setEnabled(false);
+            } else if (Utils.isWifiOnly(mContext) || !mContext.getResources().getBoolean(
+                    com.android.internal.R.bool.config_eap_sim_based_auth_supported)) {
+                eapMethodSpinnerAdapter = getSpinnerAdapter(
+                        R.array.eap_method_without_sim_auth);
+                mEapMethodSpinner.setAdapter(eapMethodSpinnerAdapter);
+                mEapMethodSpinner.setEnabled(true);
+            } else {
+                eapMethodSpinnerAdapter = getSpinnerAdapter(R.array.wifi_eap_method);
+                mEapMethodSpinner.setAdapter(eapMethodSpinnerAdapter);
+                mEapMethodSpinner.setEnabled(true);
             }
+        }
 
+        if (mAccessPointSecurity != AccessPoint.SECURITY_EAP_SUITE_B
+                && mAccessPoint != null
+                && mAccessPoint.isCarrierAp()) {
+            mEapMethodSpinner.setSelection(mAccessPoint.getCarrierApEapType());
+        }
+
+        if (refreshCertificates) {
             loadCertificates(
                     mEapCaCertSpinner,
                     Credentials.CA_CERTIFICATE,
@@ -1088,87 +1111,84 @@ public class WifiConfigController implements TextWatcher,
                     mDoNotProvideEapUserCertString,
                     false,
                     false);
+        }
 
-            // Modifying an existing network
-            if (mAccessPoint != null && mAccessPoint.isSaved()) {
-                WifiEnterpriseConfig enterpriseConfig = mAccessPoint.getConfig().enterpriseConfig;
-                int eapMethod = enterpriseConfig.getEapMethod();
-                int phase2Method = enterpriseConfig.getPhase2Method();
-                mEapMethodSpinner.setSelection(eapMethod);
-                showEapFieldsByMethod(eapMethod);
-                switch (eapMethod) {
-                    case Eap.PEAP:
-                        switch (phase2Method) {
-                            case Phase2.NONE:
-                                mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_NONE);
-                                break;
-                            case Phase2.MSCHAPV2:
-                                mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_MSCHAPV2);
-                                break;
-                            case Phase2.GTC:
-                                mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_GTC);
-                                break;
-                            case Phase2.SIM:
-                                mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_SIM);
-                                break;
-                            case Phase2.AKA:
-                                mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_AKA);
-                                break;
-                            case Phase2.AKA_PRIME:
-                                mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_AKA_PRIME);
-                                break;
-                            default:
-                                Log.e(TAG, "Invalid phase 2 method " + phase2Method);
-                                break;
-                        }
-                        break;
-                    case Eap.SIM:
-                    case Eap.AKA:
-                    case Eap.AKA_PRIME:
-                        if (enterpriseConfig.getSimNum() != null
-                                && !enterpriseConfig.getSimNum().isEmpty()) {
-                            int mSimNum = Integer.parseInt(enterpriseConfig.getSimNum());
-                            mSimCardSpinner.setSelection(mSimNum - 1);
-                        } else {
-                            mSimCardSpinner.setSelection(0);
-                        }
-                        break;
-                    default:
-                        mPhase2Spinner.setSelection(phase2Method);
-                        break;
-                }
-                if (!TextUtils.isEmpty(enterpriseConfig.getCaPath())) {
-                    setSelection(mEapCaCertSpinner, mUseSystemCertsString);
-                } else {
-                    String[] caCerts = enterpriseConfig.getCaCertificateAliases();
-                    if (caCerts == null) {
-                        setSelection(mEapCaCertSpinner, mDoNotValidateEapServerString);
-                    } else if (caCerts.length == 1) {
-                        setSelection(mEapCaCertSpinner, caCerts[0]);
-                    } else {
-                        // Reload the cert spinner with an extra "multiple certificates added" item.
-                        loadCertificates(
-                                mEapCaCertSpinner,
-                                Credentials.CA_CERTIFICATE,
-                                mDoNotValidateEapServerString,
-                                true,
-                                true);
-                        setSelection(mEapCaCertSpinner, mMultipleCertSetString);
+        // Modifying an existing network
+        if (initiateEnterpriseNetworkUi && mAccessPoint != null && mAccessPoint.isSaved()) {
+            final WifiEnterpriseConfig enterpriseConfig = mAccessPoint.getConfig().enterpriseConfig;
+            final int eapMethod = enterpriseConfig.getEapMethod();
+            final int phase2Method = enterpriseConfig.getPhase2Method();
+            mEapMethodSpinner.setSelection(eapMethod);
+            showEapFieldsByMethod(eapMethod);
+            switch (eapMethod) {
+                case Eap.PEAP:
+                    switch (phase2Method) {
+                        case Phase2.NONE:
+                            mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_NONE);
+                            break;
+                        case Phase2.MSCHAPV2:
+                            mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_MSCHAPV2);
+                            break;
+                        case Phase2.GTC:
+                            mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_GTC);
+                            break;
+                        case Phase2.SIM:
+                            mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_SIM);
+                            break;
+                        case Phase2.AKA:
+                            mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_AKA);
+                            break;
+                        case Phase2.AKA_PRIME:
+                            mPhase2Spinner.setSelection(WIFI_PEAP_PHASE2_AKA_PRIME);
+                            break;
+                        default:
+                            Log.e(TAG, "Invalid phase 2 method " + phase2Method);
+                            break;
                     }
-                }
-                mEapDomainView.setText(enterpriseConfig.getDomainSuffixMatch());
-                String userCert = enterpriseConfig.getClientCertificateAlias();
-                if (TextUtils.isEmpty(userCert)) {
-                    setSelection(mEapUserCertSpinner, mDoNotProvideEapUserCertString);
-                } else {
-                    setSelection(mEapUserCertSpinner, userCert);
-                }
-                mEapIdentityView.setText(enterpriseConfig.getIdentity());
-                mEapAnonymousView.setText(enterpriseConfig.getAnonymousIdentity());
-            } else {
-                mPhase2Spinner = (Spinner) mView.findViewById(R.id.phase2);
-                showEapFieldsByMethod(mEapMethodSpinner.getSelectedItemPosition());
+                    break;
+                case Eap.SIM:
+                case Eap.AKA:
+                case Eap.AKA_PRIME:
+                    if (enterpriseConfig.getSimNum() != null
+                            && !enterpriseConfig.getSimNum().isEmpty()) {
+                        int mSimNum = Integer.parseInt(enterpriseConfig.getSimNum());
+                        mSimCardSpinner.setSelection(mSimNum - 1);
+                    } else {
+                        mSimCardSpinner.setSelection(0);
+                    }
+                    break;
+                default:
+                    mPhase2Spinner.setSelection(phase2Method);
+                    break;
             }
+            if (!TextUtils.isEmpty(enterpriseConfig.getCaPath())) {
+                setSelection(mEapCaCertSpinner, mUseSystemCertsString);
+            } else {
+                final String[] caCerts = enterpriseConfig.getCaCertificateAliases();
+                if (caCerts == null) {
+                    setSelection(mEapCaCertSpinner, mDoNotValidateEapServerString);
+                } else if (caCerts.length == 1) {
+                    setSelection(mEapCaCertSpinner, caCerts[0]);
+                } else {
+                    // Reload the cert spinner with an extra "multiple certificates added" item.
+                    loadCertificates(
+                            mEapCaCertSpinner,
+                            Credentials.CA_CERTIFICATE,
+                            mDoNotValidateEapServerString,
+                            true,
+                            true);
+                    setSelection(mEapCaCertSpinner, mMultipleCertSetString);
+                }
+            }
+            mEapDomainView.setText(enterpriseConfig.getDomainSuffixMatch());
+            final String userCert = enterpriseConfig.getClientCertificateAlias();
+            if (TextUtils.isEmpty(userCert)) {
+                setSelection(mEapUserCertSpinner, mDoNotProvideEapUserCertString);
+            } else {
+                setSelection(mEapUserCertSpinner, userCert);
+            }
+            mEapIdentityView.setText(enterpriseConfig.getIdentity());
+            mEapAnonymousView.setText(enterpriseConfig.getAnonymousIdentity());
         } else {
             if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
                 mEapMethodSpinner.setSelection(WIFI_EAP_METHOD_TLS);
@@ -1498,7 +1518,18 @@ public class WifiConfigController implements TextWatcher,
         } catch (Exception e) {
             Log.e(TAG, "can't get the certificate list from KeyStore");
         }
-        certs.add(noCertificateString);
+
+        if (mAccessPointSecurity != AccessPoint.SECURITY_EAP_SUITE_B) {
+            certs.add(noCertificateString);
+        }
+
+        // If there are only mUnspecifiedCertString and one item to select, only shows the item
+        if (certs.size() == 2) {
+            certs.remove(mUnspecifiedCertString);
+            spinner.setEnabled(false);
+        } else {
+            spinner.setEnabled(true);
+        }
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 context, android.R.layout.simple_spinner_item,
@@ -1605,15 +1636,17 @@ public class WifiConfigController implements TextWatcher,
                 mShareThisWifiCheckBox.setVisibility(View.VISIBLE);
             }
 
-            showSecurityFields();
+            showSecurityFields(true /* refreshEapMethods */, true /* refreshCertificates */);
 
             if (WifiDppUtils.isSupportEnrolleeQrCodeScanner(mContext, mAccessPointSecurity)) {
                 mSsidScanButton.setVisibility(View.VISIBLE);
             } else {
                 mSsidScanButton.setVisibility(View.GONE);
             }
-        } else if (parent == mEapMethodSpinner || parent == mEapCaCertSpinner) {
-            showSecurityFields();
+        } else if (parent == mEapMethodSpinner) {
+            showSecurityFields(false /* refreshEapMethods */, true /* refreshCertificates */);
+        } else if (parent == mEapCaCertSpinner) {
+            showSecurityFields(false /* refreshEapMethods */, false /* refreshCertificates */);
         } else if (parent == mPhase2Spinner
                 && mEapMethodSpinner.getSelectedItemPosition() == WIFI_EAP_METHOD_PEAP) {
             showPeapFields();
@@ -1719,5 +1752,16 @@ public class WifiConfigController implements TextWatcher,
         mView.findViewById(R.id.hidden_settings_field).setVisibility(View.VISIBLE);
         ((CheckBox) mView.findViewById(R.id.wifi_advanced_togglebox))
                 .setOnCheckedChangeListener(this);
+    }
+
+    private ArrayAdapter<CharSequence> getSpinnerAdapter(
+            int contentStringArrayResId) {
+        final String[] eapMethods = mContext.getResources().getStringArray(
+                contentStringArrayResId);
+        final ArrayAdapter<CharSequence> spinnerAdapter = new ArrayAdapter<>(mContext,
+                android.R.layout.simple_spinner_item, eapMethods);
+        spinnerAdapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
+        return spinnerAdapter;
     }
 }
