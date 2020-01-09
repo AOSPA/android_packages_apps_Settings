@@ -18,8 +18,10 @@ package com.android.settings.network.telephony;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
@@ -35,6 +37,8 @@ import android.view.MenuItem;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
+import com.android.internal.telephony.IccCardConstants;
+import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.BillingCyclePreferenceController;
@@ -66,12 +70,45 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     private TelephonyManager mTelephonyManager;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    private int mPhoneId = SubscriptionManager.INVALID_PHONE_INDEX;
 
     private CdmaSystemSelectPreferenceController mCdmaSystemSelectPreferenceController;
     private CdmaSubscriptionPreferenceController mCdmaSubscriptionPreferenceController;
 
     private UserManager mUserManager;
     private String mClickedPrefKey;
+
+    private final BroadcastReceiver mSimStateReceiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (TelephonyIntents.ACTION_SIM_STATE_CHANGED.equals(action)) {
+                String state =  intent.getStringExtra(IccCardConstants.INTENT_KEY_ICC_STATE);
+                Log.d(LOG_TAG, "Received ACTION_SIM_STATE_CHANGED: " + state);
+                setScreenState();
+            }
+        }
+    };
+
+    private void setScreenState() {
+        int simState = mTelephonyManager.getSimState();
+        boolean screenState = simState != TelephonyManager.SIM_STATE_ABSENT;
+        if (PrimaryCardAndSubsidyLockUtils.DBG) {
+            Log.d(LOG_TAG, "isPrimaryCardEnabled(): "
+                    + PrimaryCardAndSubsidyLockUtils.isPrimaryCardEnabled());
+            Log.d(LOG_TAG, "isDetect4gCardEnabled(): "
+                    + PrimaryCardAndSubsidyLockUtils.isDetect4gCardEnabled());
+        }
+        if (screenState
+                && PrimaryCardAndSubsidyLockUtils.isPrimaryCardEnabled()
+                && PrimaryCardAndSubsidyLockUtils.isDetect4gCardEnabled()) {
+            int provStatus =
+                    PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(mPhoneId);
+            screenState = provStatus != PrimaryCardAndSubsidyLockUtils.CARD_NOT_PROVISIONED;
+            Log.d(LOG_TAG, "Provisioning Status: " + provStatus + ", screenState: " + screenState);
+        }
+        Log.d(LOG_TAG, "Setting screen state to: " + screenState);
+        getPreferenceScreen().setEnabled(screenState);
+    }
 
     public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -112,7 +149,8 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
                 MobileNetworkUtils.getSearchableSubscriptionId(context));
-        Log.i(LOG_TAG, "display subId: " + mSubId);
+        mPhoneId = SubscriptionManager.getPhoneId(mSubId);
+        Log.i(LOG_TAG, "display subId: " + mSubId + ", phoneId: " + mPhoneId);
 
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return Arrays.asList(
@@ -142,7 +180,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         use(ApnPreferenceController.class).init(mSubId);
         use(CarrierPreferenceController.class).init(mSubId);
         use(DataUsagePreferenceController.class).init(mSubId);
-        use(PreferredNetworkModePreferenceController.class).init(mSubId);
+        use(PreferredNetworkModePreferenceController.class).init(getLifecycle(), mSubId);
         use(EnabledNetworkModePreferenceController.class).init(getLifecycle(), mSubId);
         use(DataServiceSetupPreferenceController.class).init(mSubId);
 
@@ -186,6 +224,31 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                 .createForSubscriptionId(mSubId);
 
         onRestoreInstance(icicle);
+    }
+
+    @Override
+    public void onResume() {
+        Log.i(LOG_TAG, "onResume:+");
+        super.onResume();
+        Context context = getContext();
+        if (context != null) {
+            context.registerReceiver(mSimStateReceiver,
+                    new IntentFilter(TelephonyIntents.ACTION_SIM_STATE_CHANGED));
+        } else {
+            Log.i(LOG_TAG, "context is null, not registering SimStateReceiver");
+        }
+    }
+
+    @Override
+    public void onPause() {
+        Log.i(LOG_TAG, "onPause:+");
+        super.onPause();
+        Context context = getContext();
+        if (context != null) {
+            context.unregisterReceiver(mSimStateReceiver);
+        } else {
+            Log.i(LOG_TAG, "context already null, not unregistering SimStateReceiver");
+        }
     }
 
     @VisibleForTesting

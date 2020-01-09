@@ -1447,6 +1447,39 @@
         <item>"9"</item>
     </string-array>
 
+    <!-- String arrays for PrimaryCard LW feature -->
+    <string-array name="preferred_network_mode_gsm_wcdma_choices">
+        <item>GSM only</item>
+        <item>WCDMA only</item>
+        <item>GSM/WCDMA preferred</item>
+    </string-array>
+    <string-array name="preferred_network_mode_gsm_wcdma_values" translatable="false">
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"0"</item>
+    </string-array>
+
+    <string-array name="enabled_networks_gsm_wcdma_choices">
+        <item>@string/network_2G_only</item>
+        <item>@string/network_3G_only</item>
+        <item>@string/network_2G_3G_preferred</item>
+    </string-array>
+    <string-array name="enabled_networks_gsm_wcdma_values" translatable="false">
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"0"</item>
+    </string-array>
+
+    <!-- String arrays for Subsidy Lock feature -->
+    <string-array name="enabled_networks_subsidy_locked_choices">
+        <item>LTE Only</item>
+        <item>GSM/WCDMA/LTE</item>
+    </string-array>
+    <string-array name="enabled_networks_subsidy_locked_values" translatable="false">
+        <item>"11"</item>
+        <item>"9"</item>
+    </string-array>
+
     <!-- WiFi calling mode array -->
     <string-array name="wifi_calling_mode_summaries" translatable="false">
          <item>@string/wifi_calling_mode_wifi_preferred_summary</item>
