@@ -15,6 +15,8 @@
  */
 package com.android.customization.picker.theme;
 
+import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
+
 import android.app.Activity;
 import android.app.WallpaperColors;
 import android.content.Context;
@@ -117,8 +119,18 @@ public class ThemeFragment extends ToolbarFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(
-                R.layout.fragment_theme_picker, container, /* attachToRoot */ false);
+        View view;
+        if (ADD_SCALABLE_HEADER) {
+            int orientation = getResources().getConfiguration().orientation;
+            view = inflater.inflate(
+                    orientation == ORIENTATION_LANDSCAPE
+                            ? R.layout.fragment_theme_picker
+                            : R.layout.fragment_theme_scalable_picker,
+                    container, /* attachToRoot */ false);
+        } else {
+            view = inflater.inflate(
+                    R.layout.fragment_theme_picker, container, /* attachToRoot */ false);
+        }
         setUpToolbar(view);
 
         mContent = view.findViewById(R.id.content_section);

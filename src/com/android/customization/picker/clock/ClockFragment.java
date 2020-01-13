@@ -15,6 +15,8 @@
  */
 package com.android.customization.picker.clock;
 
+import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -88,8 +90,18 @@ public class ClockFragment extends ToolbarFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(
-                R.layout.fragment_clock_picker, container, /* attachToRoot */ false);
+        View view;
+        if (ADD_SCALABLE_HEADER) {
+            int orientation = getResources().getConfiguration().orientation;
+            view = inflater.inflate(
+                    orientation == ORIENTATION_LANDSCAPE
+                            ? R.layout.fragment_clock_picker
+                            : R.layout.fragment_clock_scalable_picker,
+                    container, /* attachToRoot */ false);
+        } else {
+            view = inflater.inflate(
+                    R.layout.fragment_clock_picker, container, /* attachToRoot */ false);
+        }
         setUpToolbar(view);
         mContent = view.findViewById(R.id.content_section);
         mPreviewPager = view.findViewById(R.id.clock_preview_pager);
