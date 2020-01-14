@@ -86,6 +86,9 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        VibrationIntensityPreferenceController.setFragmentManager(getFragmentManager());
+
         if (savedInstanceState != null) {
             String selectedPreference = savedInstanceState.getString(SELECTED_PREFERENCE_KEY, null);
             if (!TextUtils.isEmpty(selectedPreference)) {
