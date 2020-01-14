@@ -93,6 +93,19 @@
         android:title="@string/vibrate_when_ringing_title"
         settings:controller="com.android.settings.notification.VibrateWhenRingPreferenceController"
         android:order="-130"/>
+    
+    <Preference
+        android:key="ring_vibration_intensity"
+        android:dependency="vibrate_when_ringing"
+        android:title="@string/vibration_intensity_ringer"
+        android:order="-127"
+        settings:controller="com.android.settings.notification.VibrationIntensityPreferenceController"/>
+    
+    <Preference
+        android:key="notification_vibration_intensity"
+        android:title="@string/vibration_intensity_notification"
+        android:order="-123"
+        settings:controller="com.android.settings.notification.VibrationIntensityPreferenceController"/>
 
     <!-- Interruptions -->
     <com.android.settingslib.RestrictedPreference
