@@ -43,17 +43,14 @@ public class BasebandVersionPreferenceController extends BasePreferenceControlle
 
     @Override
     public CharSequence getSummary() {
-        if (Utils.isSupportCTPA(mContext.getApplicationContext())) {
-            String baseBands = SystemProperties.get(BASEBAND_PROPERTY,
-                    mContext.getString(R.string.device_info_default));
-            if (null != baseBands) {
-                String[] baseBandArray = baseBands.split(",");
-                if ((baseBandArray != null) && (baseBandArray.length > 0)) {
-                    return baseBandArray[0];
-                }
+        String baseBands = SystemProperties.get(BASEBAND_PROPERTY,
+                mContext.getString(R.string.device_info_default));
+        if (null != baseBands) {
+            String[] baseBandArray = baseBands.split(",");
+            if ((baseBandArray != null) && (baseBandArray.length > 0)) {
+                return baseBandArray[0];
             }
         }
-        return SystemProperties.get(BASEBAND_PROPERTY,
-                mContext.getString(R.string.device_info_default));
+        return baseBands;
     }
 }
