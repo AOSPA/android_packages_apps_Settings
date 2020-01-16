@@ -121,6 +121,8 @@ public class ThemeFragment extends ToolbarFragment {
             @Nullable Bundle savedInstanceState) {
         View view;
         if (ADD_SCALABLE_HEADER) {
+            // TODO(b/147780560): Once the temporary flag (ADD_SCALABLE_HEADER) is removed,
+            // we should have a layout with the same name for portrait and landscape.
             int orientation = getResources().getConfiguration().orientation;
             view = inflater.inflate(
                     orientation == ORIENTATION_LANDSCAPE
