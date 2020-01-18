@@ -2623,13 +2623,6 @@
                 android:value="com.android.settings.notification.AppNotificationSettings" />
         </activity>
 
-        <!-- Show channel group-level notification settings (group passed in as extras) -->
-        <activity android:name="Settings$ChannelGroupNotificationSettingsActivity"
-                  android:exported="true">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.notification.ChannelGroupNotificationSettings" />
-        </activity>
-
         <!-- Show channel-level notification settings (channel passed in as extras) -->
         <activity android:name="Settings$ChannelNotificationSettingsActivity"
                   android:label="@string/notification_channel_title"
@@ -2764,7 +2757,7 @@
 
         <activity
             android:name=".wifi.NetworkRequestDialogActivity"
-            android:theme="@style/Transparent"
+            android:theme="@style/Theme.AlertDialog"
             android:excludeFromRecents="true"
             android:launchMode="singleTop"
             android:taskAffinity=".wifi.NetworkRequestDialogActivity"
@@ -3289,6 +3282,9 @@
         </activity>
 
         <activity android:name=".homepage.contextualcards.ContextualCardFeedbackDialog"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
+
+        <activity android:name=".homepage.contextualcards.FaceReEnrollDialog"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
 
         <activity
