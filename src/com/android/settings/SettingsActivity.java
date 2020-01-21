@@ -61,6 +61,7 @@ import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.Utils;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -584,6 +585,19 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         Log.d(LOG_TAG, "Switching to fragment " + fragmentName);
+
+        if (fragmentName.equals("com.android.settings.sim.SimSettings")) {
+            if(Utils.isSimSettingsApkAvailable()) {
+                Log.i(LOG_TAG, "switchToFragment, launch simSettings");
+                Intent provisioningIntent =
+                        new Intent("com.android.settings.sim.SIM_SUB_INFO_SETTINGS");
+                if (!getPackageManager().queryIntentActivities(provisioningIntent, 0).isEmpty()) {
+                    startActivity(provisioningIntent);
+                }
+            }
+            finish();
+            return null;
+        }
 
         if (validate && !isValidFragment(fragmentName)) {
             throw new IllegalArgumentException("Invalid fragment for this activity: "
