@@ -21,6 +21,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import android.content.Context;
+import android.os.Looper;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -71,30 +72,29 @@ public class ProxySubscriptionManager implements LifecycleObserver {
     private static ProxySubscriptionManager sSingleton;
 
     private ProxySubscriptionManager(Context context) {
-        mContext = context;
+        final Looper looper = Looper.getMainLooper();
 
         mActiveSubscriptionsListeners =
                 new ArrayList<OnActiveSubscriptionChangedListener>();
 
-        mSubsciptionsMonitor = new ActiveSubsciptionsListener(context) {
+        mSubscriptionMonitor = new ActiveSubsciptionsListener(looper, context) {
             public void onChanged() {
                 notifyAllListeners();
             }
         };
-        mAirplaneModeMonitor = new GlobalSettingsChangeListener(context,
-                Settings.Global.AIRPLANE_MODE_ON) {
+        mAirplaneModeMonitor = new GlobalSettingsChangeListener(looper,
+                context, Settings.Global.AIRPLANE_MODE_ON) {
             public void onChanged(String field) {
-                mSubsciptionsMonitor.clearCache();
+                mSubscriptionMonitor.clearCache();
                 notifyAllListeners();
             }
         };
 
-        mSubsciptionsMonitor.start();
+        mSubscriptionMonitor.start();
     }
 
     private Lifecycle mLifecycle;
-    private Context mContext;
-    private ActiveSubsciptionsListener mSubsciptionsMonitor;
+    private ActiveSubsciptionsListener mSubscriptionMonitor;
     private GlobalSettingsChangeListener mAirplaneModeMonitor;
 
     private List<OnActiveSubscriptionChangedListener> mActiveSubscriptionsListeners;
@@ -130,17 +130,18 @@ public class ProxySubscriptionManager implements LifecycleObserver {
 
     @OnLifecycleEvent(ON_START)
     void onStart() {
-        mSubsciptionsMonitor.start();
+        mSubscriptionMonitor.start();
     }
 
     @OnLifecycleEvent(ON_STOP)
     void onStop() {
-        mSubsciptionsMonitor.stop();
+        mSubscriptionMonitor.stop();
     }
 
     @OnLifecycleEvent(ON_DESTROY)
     void onDestroy() {
-        mSubsciptionsMonitor.stop();
+        mSubscriptionMonitor.close();
+        mAirplaneModeMonitor.close();
 
         if (mLifecycle != null) {
             mLifecycle.removeObserver(this);
@@ -156,7 +157,7 @@ public class ProxySubscriptionManager implements LifecycleObserver {
      * @return a SubscriptionManager
      */
     public SubscriptionManager get() {
-        return mSubsciptionsMonitor.getSubscriptionManager();
+        return mSubscriptionMonitor.getSubscriptionManager();
     }
 
     /**
@@ -165,7 +166,7 @@ public class ProxySubscriptionManager implements LifecycleObserver {
      * @return max. number of active subscription info(s)
      */
     public int getActiveSubscriptionInfoCountMax() {
-        return mSubsciptionsMonitor.getActiveSubscriptionInfoCountMax();
+        return mSubscriptionMonitor.getActiveSubscriptionInfoCountMax();
     }
 
     /**
@@ -174,7 +175,7 @@ public class ProxySubscriptionManager implements LifecycleObserver {
      * @return A list of active subscription info
      */
     public List<SubscriptionInfo> getActiveSubscriptionsInfo() {
-        return mSubsciptionsMonitor.getActiveSubscriptionsInfo();
+        return mSubscriptionMonitor.getActiveSubscriptionsInfo();
     }
 
     /**
@@ -184,7 +185,7 @@ public class ProxySubscriptionManager implements LifecycleObserver {
      * @return A subscription info which is active list
      */
     public SubscriptionInfo getActiveSubscriptionInfo(int subId) {
-        return mSubsciptionsMonitor.getActiveSubscriptionInfo(subId);
+        return mSubscriptionMonitor.getActiveSubscriptionInfo(subId);
     }
 
     /**
@@ -193,7 +194,7 @@ public class ProxySubscriptionManager implements LifecycleObserver {
      * @return A list of accessible subscription info
      */
     public List<SubscriptionInfo> getAccessibleSubscriptionsInfo() {
-        return mSubsciptionsMonitor.getAccessibleSubscriptionsInfo();
+        return mSubscriptionMonitor.getAccessibleSubscriptionsInfo();
     }
 
     /**
@@ -203,14 +204,14 @@ public class ProxySubscriptionManager implements LifecycleObserver {
      * @return A subscription info which is accessible list
      */
     public SubscriptionInfo getAccessibleSubscriptionInfo(int subId) {
-        return mSubsciptionsMonitor.getAccessibleSubscriptionInfo(subId);
+        return mSubscriptionMonitor.getAccessibleSubscriptionInfo(subId);
     }
 
     /**
      * Clear data cached within proxy
      */
     public void clearCache() {
-        mSubsciptionsMonitor.clearCache();
+        mSubscriptionMonitor.clearCache();
     }
 
     /**
