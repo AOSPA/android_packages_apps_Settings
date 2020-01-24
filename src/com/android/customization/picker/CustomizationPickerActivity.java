@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -86,9 +87,10 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
         CategoryFragmentHost, ThemeFragmentHost, GridFragmentHost, ClockFragmentHost {
 
     private static final String TAG = "CustomizationPickerActivity";
-    private static final String WALLPAPER_FLAVOR_EXTRA = "com.android.launcher3.WALLPAPER_FLAVOR";
-    private static final String WALLPAPER_FOCUS = "focus_wallpaper";
-    private static final String WALLPAPER_ONLY = "wallpaper_only";
+    @VisibleForTesting static final String WALLPAPER_FLAVOR_EXTRA =
+            "com.android.launcher3.WALLPAPER_FLAVOR";
+    @VisibleForTesting static final String WALLPAPER_FOCUS = "focus_wallpaper";
+    @VisibleForTesting static final String WALLPAPER_ONLY = "wallpaper_only";
 
     private WallpaperPickerDelegate mDelegate;
     private UserEventLogger mUserEventLogger;
