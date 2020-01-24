@@ -19,7 +19,9 @@ package com.android.settings.biometrics.face;
 import static android.app.Activity.RESULT_OK;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
+import static com.android.settings.biometrics.BiometricEnrollBase.ENROLL_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
+import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -36,6 +38,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -55,6 +58,11 @@ public class FaceSettings extends DashboardFragment {
     private static final String TAG = "FaceSettings";
     private static final String KEY_TOKEN = "hw_auth_token";
 
+    private static final String PREF_KEY_DELETE_FACE_DATA =
+            "security_settings_face_delete_faces_container";
+    private static final String PREF_KEY_ENROLL_FACE_UNLOCK =
+            "security_settings_face_enroll_faces_container";
+
     private UserManager mUserManager;
     private FaceManager mFaceManager;
     private int mUserId;
@@ -62,11 +70,13 @@ public class FaceSettings extends DashboardFragment {
     private FaceSettingsAttentionPreferenceController mAttentionController;
     private FaceSettingsRemoveButtonPreferenceController mRemoveController;
     private FaceSettingsEnrollButtonPreferenceController mEnrollController;
+    private FaceSettingsLockscreenBypassPreferenceController mLockscreenController;
     private List<AbstractPreferenceController> mControllers;
 
     private List<Preference> mTogglePreferences;
     private Preference mRemoveButton;
     private Preference mEnrollButton;
+    private FaceFeatureProvider mFaceFeatureProvider;
 
     private boolean mConfirmingPassword;
 
@@ -81,6 +91,9 @@ public class FaceSettings extends DashboardFragment {
         mRemoveButton.setVisible(false);
         mEnrollButton.setVisible(true);
     };
+
+    private final FaceSettingsEnrollButtonPreferenceController.Listener mEnrollListener = intent ->
+            startActivityForResult(intent, ENROLL_REQUEST);
 
     public static boolean isAvailable(Context context) {
         FaceManager manager = Utils.getFaceManagerOrNull(context);
@@ -125,6 +138,7 @@ public class FaceSettings extends DashboardFragment {
 
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
+        mFaceFeatureProvider = FeatureFactory.getFactory(getContext()).getFaceFeatureProvider();
 
         if (mUserManager.getUserInfo(mUserId).isManagedProfile()) {
             getActivity().setTitle(getActivity().getResources().getString(
@@ -136,7 +150,7 @@ public class FaceSettings extends DashboardFragment {
         Preference attentionPref = findPreference(FaceSettingsAttentionPreferenceController.KEY);
         Preference confirmPref = findPreference(FaceSettingsConfirmPreferenceController.KEY);
         Preference bypassPref =
-                findPreference(FaceSettingsLockscreenBypassPreferenceController.KEY);
+                findPreference(mLockscreenController.getPreferenceKey());
         mTogglePreferences = new ArrayList<>(
                 Arrays.asList(keyguardPref, appPref, attentionPref, confirmPref, bypassPref));
 
@@ -145,12 +159,10 @@ public class FaceSettings extends DashboardFragment {
 
         // There is no better way to do this :/
         for (AbstractPreferenceController controller : mControllers) {
-            if (controller instanceof  FaceSettingsPreferenceController) {
+            if (controller instanceof FaceSettingsPreferenceController) {
                 ((FaceSettingsPreferenceController) controller).setUserId(mUserId);
             } else if (controller instanceof FaceSettingsEnrollButtonPreferenceController) {
                 ((FaceSettingsEnrollButtonPreferenceController) controller).setUserId(mUserId);
-            } else if (controller instanceof FaceSettingsLockscreenBypassPreferenceController) {
-                ((FaceSettingsLockscreenBypassPreferenceController) controller).setUserId(mUserId);
             }
         }
         mRemoveController.setUserId(mUserId);
@@ -158,12 +170,20 @@ public class FaceSettings extends DashboardFragment {
         // Don't show keyguard controller for work profile settings.
         if (mUserManager.isManagedProfile(mUserId)) {
             removePreference(FaceSettingsKeyguardPreferenceController.KEY);
-            removePreference(FaceSettingsLockscreenBypassPreferenceController.KEY);
+            removePreference(mLockscreenController.getPreferenceKey());
         }
 
         if (savedInstanceState != null) {
             mToken = savedInstanceState.getByteArray(KEY_TOKEN);
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mLockscreenController = use(FaceSettingsLockscreenBypassPreferenceController.class);
+        mLockscreenController.setUserId(mUserId);
     }
 
     @Override
@@ -192,6 +212,10 @@ public class FaceSettings extends DashboardFragment {
         final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
         mEnrollButton.setVisible(!hasEnrolled);
         mRemoveButton.setVisible(hasEnrolled);
+
+        if (!mFaceFeatureProvider.isAttentionSupported(getContext())) {
+            removePreference(FaceSettingsAttentionPreferenceController.KEY);
+        }
     }
 
     @Override
@@ -211,11 +235,16 @@ public class FaceSettings extends DashboardFragment {
                     }
                 }
             }
+        } else if (requestCode == ENROLL_REQUEST) {
+            if (resultCode == RESULT_TIMEOUT) {
+                setResult(resultCode, data);
+                finish();
+            }
         }
 
         if (mToken == null) {
             // Didn't get an authentication, finishing
-            getActivity().finish();
+            finish();
         }
     }
 
@@ -233,7 +262,7 @@ public class FaceSettings extends DashboardFragment {
                 }
                 mToken = null;
             }
-            getActivity().finish();
+            finish();
         }
     }
 
@@ -258,6 +287,7 @@ public class FaceSettings extends DashboardFragment {
                 mRemoveController.setActivity((SettingsActivity) getActivity());
             } else if (controller instanceof FaceSettingsEnrollButtonPreferenceController) {
                 mEnrollController = (FaceSettingsEnrollButtonPreferenceController) controller;
+                mEnrollController.setListener(mEnrollListener);
                 mEnrollController.setActivity((SettingsActivity) getActivity());
             }
         }
@@ -269,7 +299,6 @@ public class FaceSettings extends DashboardFragment {
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new FaceSettingsKeyguardPreferenceController(context));
-        controllers.add(new FaceSettingsLockscreenBypassPreferenceController(context));
         controllers.add(new FaceSettingsAppPreferenceController(context));
         controllers.add(new FaceSettingsAttentionPreferenceController(context));
         controllers.add(new FaceSettingsRemoveButtonPreferenceController(context));
@@ -296,6 +325,15 @@ public class FaceSettings extends DashboardFragment {
                 protected boolean isPageSearchEnabled(Context context) {
                     return isAvailable(context);
                 }
-            };
 
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    final FaceManager faceManager = context.getSystemService(FaceManager.class);
+                    final boolean hasEnrolled = faceManager.hasEnrolledTemplates(
+                            UserHandle.myUserId());
+                    keys.add(hasEnrolled ? PREF_KEY_ENROLL_FACE_UNLOCK : PREF_KEY_DELETE_FACE_DATA);
+                    return keys;
+                }
+            };
 }

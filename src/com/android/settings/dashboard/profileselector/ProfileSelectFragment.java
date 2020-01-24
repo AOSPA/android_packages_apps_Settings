@@ -16,10 +16,13 @@
 
 package com.android.settings.dashboard.profileselector;
 
+import static android.content.Intent.EXTRA_USER_ID;
+
 import android.annotation.IntDef;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +30,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,24 +57,27 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
      * Denotes the profile type.
      */
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({PERSONAL, WORK, ALL})
+    @IntDef({
+            ProfileType.PERSONAL,
+            ProfileType.WORK,
+            ProfileType.ALL
+    })
     public @interface ProfileType {
+        /**
+         * It is personal work profile.
+         */
+        int PERSONAL = 1;
+
+        /**
+         * It is work profile
+         */
+        int WORK = 1 << 1;
+
+        /**
+         * It is personal and work profile
+         */
+        int ALL = PERSONAL | WORK;
     }
-
-    /**
-     * It is personal work profile.
-     */
-    public static final int PERSONAL = 1;
-
-    /**
-     * It is work profile
-     */
-    public static final int WORK = 1 << 1;
-
-    /**
-     * It is personal and work profile
-     */
-    public static final int ALL = PERSONAL | WORK;
 
     /**
      * Used in fragment argument and pass {@link ProfileType} to it
@@ -94,21 +101,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             Bundle savedInstanceState) {
         mContentView = (ViewGroup) super.onCreateView(inflater, container, savedInstanceState);
         final Activity activity = getActivity();
-        final int intentUser = activity.getIntent().getContentUserHint();
-        int selectedTab = 0;
-
-        // Start intent from a specific user eg: adb shell --user 10
-        if (intentUser > 0 && Utils.getManagedProfile(UserManager.get(activity)).getIdentifier()
-                == intentUser) {
-            selectedTab = WORK_TAB;
-        }
-
-        // Set selected tab using fragment argument
-        final int extraTab = getArguments() != null ? getArguments().getInt(
-                SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, -1) : -1;
-        if (extraTab != -1) {
-            selectedTab = extraTab;
-        }
+        final int selectedTab = getTabId(activity, getArguments());
 
         final View tabContainer = mContentView.findViewById(R.id.tab_container);
         final ViewPager viewPager = tabContainer.findViewById(R.id.view_pager);
@@ -150,6 +143,28 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @VisibleForTesting
+    int getTabId(Activity activity, Bundle bundle) {
+        if (bundle != null) {
+            final int extraTab = bundle.getInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB, -1);
+            if (extraTab != -1) {
+                return extraTab;
+            }
+            final int userId = bundle.getInt(EXTRA_USER_ID, UserHandle.SYSTEM.getIdentifier());
+            final boolean isWorkProfile = UserManager.get(activity).isManagedProfile(userId);
+            if (isWorkProfile) {
+                return WORK_TAB;
+            }
+        }
+        // Start intent from a specific user eg: adb shell --user 10
+        final int intentUser = activity.getIntent().getContentUserHint();
+        if (UserManager.get(activity).isManagedProfile(intentUser)) {
+            return WORK_TAB;
+        }
+
+        return PERSONAL_TAB;
     }
 
     static class ViewPagerAdapter extends FragmentStatePagerAdapter {

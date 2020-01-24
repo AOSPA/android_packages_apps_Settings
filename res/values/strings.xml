@@ -492,8 +492,6 @@
     <string name="activity_picker_label">Choose activity</string>
     <!-- Do not translate. -->
     <string name="debug_intent_sender_label">Debug intent sender</string>
-    <!-- The title of the activity to see random device info. -->
-    <string name="device_info_label">Device info</string>
     <!-- The title of the activity to adjust display settings -->
     <string name="display_label">Screen</string>
     <!-- The title of the activity to adjust SD card settings [CHAR LIMIT=25] -->
@@ -817,6 +815,8 @@
     <string name="security_settings_face_settings_enroll">Set up face unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
@@ -1769,7 +1769,8 @@
     <string name="tx_link_speed"><xliff:g id="Transmit link speed" example="150 Mbps">%1$d</xliff:g> Mbps</string>
     <!-- Receive Link speed on Wifi Status screen [CHAR LIMIT=32] -->
     <string name="rx_link_speed"><xliff:g id="Receive link speed" example="54 Mbps">%1$d</xliff:g> Mbps</string>
-
+    <!-- Link speed on Wifi Status screen [CHAR LIMIT=32] -->
+    <string name="link_speed"><xliff:g id="Link speed" example="54 Mbps">%1$d</xliff:g> Mbps</string>
     <!-- This string asks the user whether or not to allow an app to enable WiFi. [CHAR LIMIT=NONE] -->
     <string name="wifi_ask_enable"><xliff:g id="requester" example="FancyApp">%s</xliff:g> wants to turn on Wi-Fi</string>
     <!-- This string asks the user whether or not to allow an app to disable WiFi. [CHAR LIMIT=NONE] -->
@@ -1780,13 +1781,18 @@
     <!-- Debugging developer settings: Enable ART verifier for Debuggable Apps [CHAR LIMIT=NONE] -->
     <string name="art_verifier_for_debuggable_summary">Allow ART to verify bytecode for debuggable apps</string>
 
+    <!-- Debugging developer settings: show refresh rate? [CHAR LIMIT=36] -->
+    <string name="show_refresh_rate">Show refresh rate</string>
+    <!-- Debugging developer settings: show refresh rate summary [CHAR LIMIT=58] -->
+    <string name="show_refresh_rate_summary">Show the current display refresh rate</string>
+
     <!-- NFC settings -->
     <!-- Used in the 1st-level settings screen to turn on NFC -->
     <string name="nfc_quick_toggle_title">NFC</string>
     <!-- Description of NFC in the 1st level settings screen, for a tablet. [CHAR LIMIT=NONE] -->
-    <string name="nfc_quick_toggle_summary" product="tablet">Allow data exchange when the tablet touches another device</string>
+    <string name="nfc_quick_toggle_summary" product="tablet">Allow data exchange when the tablet touches an NFC device</string>
     <!-- Description of NFC in the 1st level settings screen, for a phone. [CHAR LIMIT=NONE] -->
-    <string name="nfc_quick_toggle_summary" product="default">Allow data exchange when the phone touches another device</string>
+    <string name="nfc_quick_toggle_summary" product="default">Allow data exchange when the phone touches an NFC device</string>
     <!-- Dialog title for NFC disclaimer [CHAR_LIMIT=40]-->
     <string name="nfc_disclaimer_title">Turn on NFC</string>
     <!-- Dialog content for NFC disclaimer: telling user NFC can exchange data when device is nearby other devices (for example: payment terminals, badge reader etc). [CHAR_LIMIT=NONE]-->
@@ -1955,8 +1961,6 @@
     <string name="wifi_show_advanced">Advanced options</string>
     <!-- Message for talkback to say when focus on Advanced Options[CHAR LIMIT=NONE] -->
     <string name="wifi_advanced_toggle_description">Drop down list Advanced Options</string>
-    <!-- Extended message for talkback to say when Advanced Options is expanded. (e.g., Double-tap to collapse) [CHAR LIMIT=NONE] -->
-    <string name="wifi_advanced_toggle_description_expanded">collapse</string>
     <!-- Extended message for talkback to say when Advanced Options is collapsed. (e.g., Double-tap to expand) [CHAR LIMIT=NONE] -->
     <string name="wifi_advanced_toggle_description_collapsed">expand</string>
     <!-- Label for the SSID of the network -->
@@ -1977,6 +1981,8 @@
     <string name="tx_wifi_speed">Transmit link speed</string>
     <!-- Label for the receive link speed of the connection. [CHAR LIMIT=32] -->
     <string name="rx_wifi_speed">Receive link speed</string>
+    <!-- Label for the link speed of the connection. [CHAR LIMIT=32] -->
+    <string name="wifi_speed">Link speed</string>
     <!-- Label for the frequency band of the connection -->
     <string name="wifi_frequency">Frequency</string>
     <!-- Label for the IP address of the connection -->
@@ -2057,6 +2063,12 @@
     <string name="wifi_dpp_failure_generic">Make sure the device has been plugged in, charged, and turned on. If the issue continues, contact the device manufacturer</string>
     <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
     <string name="wifi_dpp_failure_not_supported">Adding \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d isn\u2019t supported by this device</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_cannot_find_network">Try moving the device closer to your Wi\u2011Fi access point/router</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_enrollee_authentication">Check the password and try again</string>
+    <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
+    <string name="wifi_dpp_failure_enrollee_rejected_configuration">Contact the device manufacturer</string>
     <!-- Hint for Wi-Fi connection fail [CHAR LIMIT=NONE]  -->
     <string name="wifi_dpp_check_connection_try_again">Check connection and try again</string>
     <!-- Title for the fragment choose network [CHAR LIMIT=50]  -->
@@ -3651,6 +3663,8 @@
 
     <!-- Summary text for a screen containing all device reset options [CHAR LIMIT=None] -->
     <string name="reset_dashboard_summary">Network, apps, or device can be reset</string>
+    <!-- Summary text for a screen device reset option for Apps [CHAR LIMIT=NONE] -->
+    <string name="reset_dashboard_summary_onlyApps">Apps can be reset</string>
 
     <!-- Reset Network -->
     <!-- Button title to reset Wi-Fi settings, Mobile data setting, bluetooth settings -->
@@ -4791,6 +4805,26 @@
     <string name="accessibility_captioning_title">Caption preferences</string>
     <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_title">Magnification</string>
+    <!-- Title for the accessibility preference screen to edit magnification area. [CHAR LIMIT=35] -->
+    <string name="accessibility_magnification_mode_title">Magnification area</string>
+    <!-- Message for the accessibility preference screen to edit magnification area dialog. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_area_settings_message">Choose the magnification area(s) you want to use when magnifying the screen</string>
+    <!-- Summary for the accessibility preference screen to edit full screen. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_area_settings_full_screen_summary">Full screen</string>
+    <!-- Summary for the accessibility preference screen to edit window screen. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_area_settings_window_screen_summary">Part of screen</string>
+    <!-- Summary for the accessibility preference screen to edit entire screen. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_area_settings_all_summary">Full screen &amp; part of screen</string>
+    <!-- Message for the accessibility preference screen to edit entire screen. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_area_settings_full_screen">Magnify entire screen</string>
+    <!-- Message for the accessibility preference screen to edit part of screen. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_area_settings_window_screen">Magnify part of screen</string>
+    <!-- Title for the accessibility preference screen to show move controller. [CHAR LIMIT=35] -->
+    <string name="accessibility_magnification_window_control_switch_title">Show move controller</string>
+    <!-- Summary for the accessibility preference screen to show move controller. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_window_control_switch_summary">Show a joystick-like controller to move the magnification area</string>
+    <!-- Title for the accessibility preference screen to enable screen magnification settings. [CHAR LIMIT=35] -->
+    <string name="accessibility_magnification_service_settings_title">Magnify settings</string>
     <!-- Title for the accessibility preference screen to enable triple-tap gesture screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_gestures_title">Magnify with triple-tap</string>
     <!-- Title for the accessibility preference screen to enable navigation bar screen magnification. [CHAR LIMIT=35] -->
@@ -4825,6 +4859,16 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback">To turn an accessibility service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold.</string>
     <!-- Button for the Accessibility tutorial dialog to dismiss the dialog when user clicks it. [CHAR LIMIT=10] -->
     <string name="accessibility_tutorial_dialog_button">Got it</string>
+    <!-- Title for accessibility shortcut preference for accessibility apps. [CHAR LIMIT=40] -->
+    <string name="accessibility_shortcut_title">Use shortcut to open</string>
+    <!-- Title for accessibility shortcut preference for magnification. [CHAR LIMIT=40] -->
+    <string name="accessibility_magnification_shortcut_title">Use shortcut to magnify</string>
+    <!-- Title for Accessibility edit shortcut dialog. [CHAR LIMIT=40] -->
+    <string name="accessibility_shortcut_edit_dialog_title">Shortcut to open <xliff:g id="service" example="Select to Speak">%1$s</xliff:g></string>
+    <!-- Title for Accessibility edit shortcut dialog in Magnify. [CHAR LIMIT=40] -->
+    <string name="accessibility_shortcut_edit_dialog_title_magnification">Shortcut to magnify</string>
+    <!-- Title for Accessibility edit shortcut dialog in Color correction. [CHAR LIMIT=40] -->
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer">Shortcut to open Color correction</string>
     <!-- Title for software shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_software">Accessibility Button</string>
     <!-- Title for software shortcut in gesture mode in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
@@ -4901,8 +4945,10 @@
     <string name="accessibility_long_press_timeout_preference_title">Touch &amp; hold delay</string>
     <!-- Title for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_preference_title">Color inversion</string>
+    <!-- Used in the accessibility service settings to control turning display color inversion on/off entirely. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_display_inversion_switch_title">Invert colors</string>
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_display_inversion_preference_subtitle">May affect performance</string>
+    <string name="accessibility_display_inversion_preference_subtitle">Turn light screens dark so people who are sensitive to bright light can have a better viewing experience.\n\nNote: dark colors will turn light. Images will also be inverted.</string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_preference_title">Dwell timing</string>
     <!-- Footer text to explain what autoclick does -->
@@ -4917,12 +4963,18 @@
     <string name="accessibility_ring_vibration_title">Ring vibration</string>
     <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
     <string name="accessibility_touch_vibration_title">Touch feedback</string>
-    <!-- Used in the acessibilty service settings to control turning on/off the service entirely -->
+    <!-- Used in the accessibility service settings to control turning on/off the service entirely -->
     <string name="accessibility_service_master_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_daltonizer_master_switch_title">Use color correction</string>
     <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->
-    <string name="accessibility_caption_master_switch_title">Use captions</string>
+    <string name="accessibility_caption_master_switch_title">Show captions</string>
+    <!-- Title for Caption preference settings screen for configuring font style. [CHAR LIMIT=NONE] -->
+    <string name="captioning_caption_appearance_title">Caption appearance</string>
+    <!-- Summary for Captions settings, explaining important settings under it. [CHAR LIMIT=NONE] -->
+    <string name="captioning_caption_appearance_summary">Text size, caption style</string>
+    <!-- Title for Caption preference settings screen for configuring language. [CHAR LIMIT=NONE] -->
+    <string name="captioning_more_options_title">More options</string>
     <!-- Used in the Captions preference to tell users that the setting doesn't support all apps. [CHAR LIMIT=NONE] -->
     <string name="accessibility_caption_preference_summary">Not all apps support this setting.</string>
     <!-- Summary for accessibility shortcut preference for software shortcut type. [CHAR LIMIT=NONE] -->
@@ -4965,6 +5017,18 @@
     <string name="enable_quick_setting">Show in Quick Settings</string>
     <!-- Title for the preference to configure the type of color space correction to apply. [CHAR LIMIT=NONE] -->
     <string name="daltonizer_type">Correction mode</string>
+    <!-- Title shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
+    <string name="daltonizer_mode_deuteranomaly_title">Red-green</string>
+    <!-- Title shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
+    <string name="daltonizer_mode_protanomaly_title">Green-red</string>
+    <!-- Title shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
+    <string name="daltonizer_mode_tritanomaly_title">Blue-yellow</string>
+    <!-- Summary shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
+    <string name="daltonizer_mode_deuteranomaly_summary">Deuteranomaly</string>
+    <!-- Summary shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
+    <string name="daltonizer_mode_protanomaly_summary">Protanomaly</string>
+    <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
+    <string name="daltonizer_mode_tritanomaly_summary">Tritanomaly</string>
 
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay">
@@ -7297,6 +7361,8 @@
     <string name="keywords_wifi">wifi, wi-fi, network connection, internet, wireless, data, wi fi</string>
     <!-- Search keyword for "Open Network Notification" settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_wifi_notify_open_networks">Wi\u2011Fi notification, wifi notification</string>
+    <!-- Search keyword for "Wi-fi data usage" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_wifi_data_usage">data usage</string>
     <!-- Search keyword for "Vibrate on touch" settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_vibrate_on_touch">Stop vibration, tap, keyboard</string>
     <!-- Search keyword for "Time format" settings. [CHAR_LIMIT=NONE]-->
@@ -7922,6 +7988,12 @@
     <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
     <string name="asst_capability_prioritizer_summary">Automatically set lower priority notifications to Gentle</string>
 
+    <!-- Configure Notifications: setting title [CHAR LIMIT=80 BACKUP_MESSAGE_ID=6691908606916292167] -->
+    <string name="asst_capability_ranking_title">Adaptive notification ranking</string>
+
+    <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
+    <string name="asst_capability_ranking_summary">Automatically rank notifications by relevance</string>
+
     <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
     <string name="asst_capabilities_actions_replies_title">Suggested actions and replies</string>
 
@@ -7939,6 +8011,9 @@
 
     <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=5125022693565388760] -->
     <string name="notification_badging_title">Allow notification dots</string>
+
+    <!-- Configure Notifications: Title for the people notification strip option. [CHAR LIMIT=60] -->
+    <string name="notification_people_strip_title">Show strip of recent conversations</string>
 
     <!-- Configure Notifications: Title for the notification bubbles option. [CHAR LIMIT=60] -->
     <string name="notification_bubbles_title">Bubbles</string>
@@ -10243,11 +10318,22 @@
     <!-- Label on the right side of sensitivity adjustment slider [CHAR LIMIT=30] -->
     <string name="high_label">High</string>
 
+    <!-- Label for the slider to set sensitivity of the left edge of the screen [CHAR LIMIT=40] -->
+    <string name="left_edge">Left edge</string>
+    <!-- Label for the slider to set sensitivity of the right edge of the screen [CHAR LIMIT=40] -->
+    <string name="right_edge">Right edge</string>
+
     <!-- Message for the dialog that explains how increasing sensitivity can affect gestures along the edges. [CHAR LIMIT=NONE] -->
-    <string name="back_sensitivity_dialog_message">\nHigher sensitivity may conflict with any app gestures along the edges of the screen.</string>
+    <string name="back_sensitivity_dialog_message">Higher sensitivity may conflict with any app gestures along the edges of the screen.</string>
 
     <!-- Title for the dialog that is shown to adjust the back sensitivity [CHAR LIMIT=60] -->
     <string name="back_sensitivity_dialog_title">Back Sensitivity</string>
+
+    <!-- Title for the screen to show all the gesture navigation settings [CHAR LIMIT=80] -->
+    <string name="gesture_settings_activity_title">Gesture Settings</string>
+
+    <!-- Keywords for the gesture navigation settings. [CHAR LIMIT=NONE] -->
+    <string name="keywords_gesture_navigation_settings">gesture navigation, back sensitivity, back gesture</string>
 
     <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="default">Double-tap to check phone</string>
@@ -11193,9 +11279,6 @@
     <string name="qtifeedback_package">com.qti.smq.Feedback</string>
     <string name="qtifeedback_activity">com.qti.smq.ui.QtiFeedbackActivity</string>
 
-    <!-- Used for EmergencyInfoSlice slice helper class [CHAR LIMIT=NONE]-->
-    <string name="emergency_info_contextual_card_summary">Medical info, emergency contacts</string>
-
     <!-- See more items in contextual homepage [CHAR LIMIT=30]-->
     <string name="see_more">See more</string>
     <!-- See less items in contextual homepage [CHAR LIMIT=30]-->
@@ -11418,5 +11501,32 @@
     <string name="dsu_loader_description" translatable="false">Load a Dyanmic System Update Image</string>
     <!-- DSU Loader Loading. Do not translate. -->
     <string name="dsu_loader_loading" translatable="false">Loading...</string>
+
+    <!-- Name of dev option called "Bug report handler" [CHAR LIMIT=NONE] -->
+    <string name="bug_report_handler_title">Bug report handler</string>
+
+    <!-- Developer Settings: Footer text for bug report handler picker [CHAR LIMIT=NONE] -->
+    <string name="bug_report_handler_picker_footer_text">Determines which app handles the Bug Report shortcut on your device.</string>
+
+    <!-- Subtext of personal profile app for current setting [CHAR LIMIT=NONE] -->
+    <string name="personal_profile_app_subtext">Personal</string>
+
+    <!-- Subtext of work profile app for current setting [CHAR LIMIT=NONE] -->
+    <string name="work_profile_app_subtext">Work</string>
+
+    <!-- Subtext of system default app for current setting [CHAR LIMIT=NONE] -->
+    <string name="system_default_app_subtext">System default</string>
+
+    <!-- Developer settings: text for the bug report handler selection toast shown if an invalid bug report handler was chosen. [CHAR LIMIT=NONE] -->
+    <string name="select_invalid_bug_report_handler_toast_text">This choice is no longer valid. Try again.</string>
+
+    <!-- Title for RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_title"></string>
+    <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_no_visible"></string>
+    <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_visible_during_call"></string>
+    <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_always_visible"></string>
 
 </resources>

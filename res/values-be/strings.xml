@@ -220,7 +220,6 @@
     <string name="action_drag_label_move_bottom" msgid="6266165197792827003">"Перамясціць уніз"</string>
     <string name="action_drag_label_remove" msgid="1034900377796780568">"Выдаліць мову"</string>
     <string name="activity_picker_label" msgid="351250401590691126">"Выберыце дзеянне"</string>
-    <string name="device_info_label" msgid="2935198177248803716">"Звесткі аб прыладзе"</string>
     <string name="display_label" msgid="3056320781191343221">"Экран"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="1850505156136467106">"USB-назапашвальнік"</string>
     <string name="sd_card_settings_label" product="default" msgid="8715502912796241588">"SD-карта"</string>
@@ -379,6 +378,7 @@
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Выдаліць даныя твару"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Наладзьце распазнаванне твару"</string>
     <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Выкарыстоўвайце функцыю распазнавання твару, каб разблакіраваць прыладу, уваходзіць у праграмы і пацвярджаць плацяжы.\n\nМайце на ўвазе:\nГледзячы на тэлефон, вы можаце разблакіраваць яго, нават калі не маеце такога намеру.\n\nВаш тэлефон можа быць разблакіраваны кімсьці яшчэ, хто трымае яго на ўзроўні вашага твару, калі ў вас расплюшчаны вочы.\n\nВаш тэлефон можа быць разблакіраваны кімсьці, хто падобны на вас – напрыклад, гэта можа быць ваш брат ці сястра."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Выкарыстоўвайце функцыю распазнавання твару, каб разблакіраваць прыладу, уваходзіць у праграмы і пацвярджаць плацяжы.\n\nМайце на ўвазе:\nВы можаце ненаўмысна разблакіраваць тэлефон, проста гледзячы на экран.\n\nВаш тэлефон можа быць разблакіраваны кімсьці яшчэ, хто трымае яго на ўзроўні вашага твару, нават калі ў вас заплюшчаны вочы.\n\nВаш тэлефон можа быць разблакіраваны кімсьці, хто падобны на вас – напрыклад, гэта можа быць ваш брат ці сястра."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Выдаліць даныя пра твар?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Даныя твару, якія выкарыстоўваюцца функцыяй распазнавання твару, будуць бяспечна выдалены. Пасля выдалення для разблакіроўкі тэлефона, уваходу ў праграмы і пацвярджэння плацяжоў трэба выкарыстоўваць PIN-код, узор разблакіроўкі ці пароль."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Выкарыстоўвайце функцыю распазнавання твару для разблакіроўкі тэлефона"</string>
@@ -800,13 +800,19 @@
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Націсніце тут, каб увайсці ў сетку"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> мбіт/с"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> мбіт/с"</string>
+    <!-- no translation found for link_speed (931786745741016446) -->
+    <skip />
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> хоча ўключыць Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> хоча адключыць Wi-Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Спраўдзіць байт-код праграм з адладкай"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Дазволіць ART спраўдзіць байт-код праграм з магчымасцю адладкі"</string>
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Паказваць хуткасць"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Паказваць цяперашнюю хуткасць абнаўлення дысплэя"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Дазволіць абмен данымі пры спалучэнні планшэта з іншымі прыладамі"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Дазволіць абмен данымі пры спалучэнні тэлефона з іншымі прыладамі"</string>
+    <!-- no translation found for nfc_quick_toggle_summary (3622326550467939809) -->
+    <skip />
+    <!-- no translation found for nfc_quick_toggle_summary (1460871052409162980) -->
+    <skip />
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Уключыць NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC абменьваецца данымі паміж гэтай прыладай і іншымі прыладамі або аб\'ектамі паблізу, такімі як плацежныя тэрміналы, прылады счытвання правоў доступу і інтэрактыўная рэклама ці цэтлікі."</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"Абараніць NFC"</string>
@@ -884,7 +890,6 @@
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Пошук сетак Wi-Fi уключаны"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Дадатковыя параметры"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Выпадны спіс \"Дадатковыя параметры\""</string>
-    <string name="wifi_advanced_toggle_description_expanded" msgid="1086342300472408106">"згарнуць"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"разгарнуць"</string>
     <string name="wifi_ssid" msgid="2713062130735103151">"Імя сеткі"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Увядзіце SSID"</string>
@@ -895,6 +900,7 @@
     <string name="wifi_status" msgid="5349199188871002778">"Стан"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Хуткасць перадачы даных"</string>
     <string name="rx_wifi_speed" msgid="5167966079215111232">"Хуткасць атрымання даных"</string>
+    <string name="wifi_speed" msgid="6562147734565434513">"Хуткасць злучэння"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Частата"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"IP-адрас"</string>
     <string name="passpoint_label" msgid="6513669696739302866">"Захавана з дапамогай"</string>
@@ -934,6 +940,9 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Пераканайцеся, што прылада падключана, зараджана і ўключана"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Пераканайцеся, што прылада падключана, зараджана і ўключана. Калі памылка застанецца, звярніцеся да вытворцы прылады"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Дадаванне \"<xliff:g id="SSID">%1$s</xliff:g>\" не падтрымліваецца гэтай прыладай"</string>
+    <string name="wifi_dpp_failure_cannot_find_network" msgid="8519567801353014036">"Наблізьце прыладу да пункта доступу/маршрутызатара Wi‑Fi"</string>
+    <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Праверце пароль і паўтарыце спробу"</string>
+    <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Звярніцеся да вытворцы прылады"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Праверце падключэнне і паўтарыце спробу"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Выбраць сетку"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Каб падключыць прыладу, выберыце сетку"</string>
@@ -1087,7 +1096,11 @@
     <string name="wifi_add_app_single_network_summary" msgid="7917964890677843118">"<xliff:g id="APPNAME">%1$s</xliff:g> запытвае дазвол на захаванне сеткі на ваш тэлефон"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"Ідзе захаванне…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"Захавана"</string>
-    <string name="wifi_add_app_single_network_save_failed_summary" msgid="9191107423724341586">"Захаваць не ўдалося. Паўтарыце спробу."</string>
+    <string name="wifi_add_app_network_save_failed_summary" msgid="7821331512722319798">"Захаваць не ўдалося. Паўтарыце спробу."</string>
+    <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"Захаваць сеткі?"</string>
+    <string name="wifi_add_app_networks_summary" msgid="747367503016917096">"<xliff:g id="APPNAME">%1$s</xliff:g> запытвае дазвол на захаванне гэтых сетак на ваш тэлефон"</string>
+    <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"Сеткі (<xliff:g id="NUMBER">%d</xliff:g>) захоўваюцца…"</string>
+    <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"Сеткі захаваны"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"Wi-Fi-тэлефанія"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"Выклікі па Wi‑Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"Званіце па сетцы Wi‑Fi, калі няма сотавай сувязі"</string>
@@ -1598,6 +1611,7 @@
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Скід налад кропкі доступу па змаўчанні завершаны."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Параметры скіду"</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"Налады сеткі, праграмы або прылады могуць быць скінуты"</string>
+    <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Праграмы могуць быць скінуты"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Скінуць налады Wi-Fi, мабільнай перадачы даных і Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Гэта прывядзе да скіду ўсіх налад сеткі, у тым ліку:\n\n"<li>"Wi‑Fi"</li>\n<li>"мабільнай перадачы даных"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Сцерці даныя спампаваных SIM"</string>
@@ -1677,7 +1691,6 @@
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Апошнія запыты геаданых"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Паказаць усе"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"Службы геалакацыі"</string>
-    <string name="location_category_recent_location_work_requests" msgid="2062718254767232304">"Апошнія запыты на вызначэнне месцазнаходжання працоўнай праграмы"</string>
     <string name="location_title" msgid="5819154746934945021">"Маё месцазнаходжанне"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Месца для рабочага профілю"</string>
     <string name="location_app_level_permissions" msgid="8621490207602159375">"Дазвол праграмы"</string>
@@ -2088,6 +2101,16 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Дакранайцеся да элементаў на экране, каб пачуць, як іх чытаюць услых"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Налады субцітраў"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Павелічэнне"</string>
+    <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Вобласць павелічэння"</string>
+    <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Выберыце вобласць павелічэння, якую хочаце выкарыстоўваць падчас павелічэння экрана"</string>
+    <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Поўнаэкранны рэжым"</string>
+    <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Частка экрана"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Поўнаэкранны рэжым і рэжым паказу часткі экрана"</string>
+    <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Павялічыць увесь экран"</string>
+    <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Павялічыць частку экрана"</string>
+    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Паказваць кантролер перамяшчэння"</string>
+    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Паказваць падобны да джойсціка кантролер для перамяшчэння вобласці павелічэння"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"Налады павелічэння"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Павялічваць трайным дотыкам"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Павялічваць спалучэннем клавіш"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Павялічваць спалучэннем клавіш і трайным дотыкам"</string>
@@ -2105,6 +2128,20 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Каб уключыць ці выключыць службу спецыяльных магчымасцей, правядзіце двума пальцамі па экране знізу ўверх.\n\nКаб пераключыцца на другую службу, прагартайце ўверх двума пальцамі, утрымліваючы іх на экране."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Каб уключыць ці выключыць службу спецыяльных магчымасцей, правядзіце трыма пальцамі па экране знізу ўверх.\n\nКаб пераключыцца на другую службу, прагартайце ўверх трыма пальцамі, утрымліваючы іх на экране."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Зразумела"</string>
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Спалучэнне клавіш, каб адкрыць"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Спалучэнне клавіш для павелічэння"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Спалучэнне клавіш, каб адкрыць сэрвіс \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Спалучэнне клавіш, каб павялічыць"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Спалучэнне клавіш для карэкцыі колераў"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Кнопка спецыяльных магчымасцей"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Правесці знізу ўверх двума пальцамі"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Націсніце кнопку \"<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>\", якая знаходзіцца ўнізе экрана"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"Правядзіце двума пальцамі ўверх ад краю экрана"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Утрымліваць клавішы гучнасці націснутымі"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"Націсніце і ўтрымлівайце на працягу секунды абедзве клавішы гучнасці"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"Тройчы націснуць на экран"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2132280626458501422">"Хутка тройчы націсніце на экран (гэта можа запаволіць працу прылады)"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Пашыраныя"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Для кнопкі \"Спецыяльныя магчымасці\" зададзена наступнае: <xliff:g id="SERVICE">%1$s</xliff:g>. Каб павялічваць маштаб з яе дапамогай, краніце і ўтрымлівайце кнопку \"Спецыяльныя магчымасці\", а потым выберыце функцыю павелічэння."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Жэст спецыяльных магчымасцей усталяваны для службы \"<xliff:g id="SERVICE">%1$s</xliff:g>\". Каб выкарыстоўваць функцыю павелічэння, правядзіце двума пальцамі па экране знізу ўверх і затрымайце іх. Пасля выберыце функцыю павелічэння."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"Спалучэнне з клавішамі гучнасці"</string>
@@ -2132,7 +2169,8 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Выберыце, колькі часу паказваць часова бачныя паведамленні з заклікамі да дзеянняў.\n\nНе ўсе праграмы падтрымліваюць такую наладу."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Затрымка пры націсканні і ўтрыманні"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Інверсія колеру"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6737173589782501324">"Можа паўплываць на прадукцыйнасць"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="1306705652558953204">"Інвертаваць колеры"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="3302345676503045665">"Пераключыце экран у цёмны рэжым, які забяспечвае больш зручнае карыстанне прыладай для ўсіх, хто адчувальны да яркага святла.\n\nУвага. Цёмныя колеры стануць светлымі. Відарысы таксама будуць інвертаваны."</string>
     <string name="accessibility_autoclick_preference_title" msgid="6771914155290467570">"Час затрымкі"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"Калі вы карыстаецеся мышшу, можна наладзіць аўтаматычнае націсканне, калі курсор не рухаецца пэўны перыяд часу."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="8631645324295801612">"Затрымка перад націсканнем"</string>
@@ -2142,8 +2180,15 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Тактыльны водгук"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Выкарыстоўваць праграму \"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>\""</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Карыстанне карэкцыяй колераў"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"Карыстанне цітрамі"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Паказваць субцітры"</string>
+    <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Выгляд субцітраў"</string>
+    <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Памер тэксту, стыль субцітраў"</string>
+    <string name="captioning_more_options_title" msgid="3484496882942539652">"Дадатковыя параметры"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"Не ўсе праграмы падтрымліваюць гэту наладу."</string>
+    <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"кнопка спецыяльных магчымасцей"</string>
+    <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Правесці знізу ўверх двума пальцамі"</string>
+    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Утрымліваць клавішы гучнасці націснутымі"</string>
+    <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Тройчы націснуць на экран"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Далей"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Слыхавы апарат"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Няма падключаных слыхавых апаратаў"</string>
@@ -2162,6 +2207,12 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Сэрвіс працуе некарэктна."</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Паказваць у Хуткіх наладах"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Рэжым карэкцыі"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Чырвоны-зялёны"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="2929354940552262472">"Зялёны-чырвоны"</string>
+    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Сіні-жоўты"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Дэйтэранамалія"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Пратанамалія"</string>
+    <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Трытанамалія"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8532203878881473608">
       <item quantity="one">Надзвычай кароткая затрымка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мс)</item>
       <item quantity="few">Надзвычай кароткая затрымка (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> мс)</item>
@@ -2623,6 +2674,7 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Сертыфікаты недаступныя для гэтага карыстальніка"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Усталявана для VPN і праграм"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Усталявана для Wi-Fi"</string>
+    <string name="credential_for_fsverity" msgid="8733384639764901293">"Усталявана для спраўджання крыніцы ўсталёўкі праграмы"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Выдаліце ​​ўсё змесціва?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Захаваныя ўліковыя дадзеныя сціраюцца."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"Нельга ачысц. схов. сертыфік."</string>
@@ -2630,10 +2682,13 @@
     <string name="ca_certificate" msgid="3076484307693855611">"Cертыфікат ЦС"</string>
     <string name="user_certificate" msgid="6897024598058566466">"Сертыфікат карыстальніка VPN і праграм"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Сертыфікат Wi‑Fi"</string>
+    <string name="app_src_certificate" msgid="436410009047766408">"Сертыфікат крыніцы праграмы"</string>
     <string name="ca_certificate_warning_title" msgid="8229107396555793427">"Ваша прыватнасць пад пагрозай"</string>
     <string name="ca_certificate_warning_description" msgid="1592953815964406032">"Сертыфікаты ЦС выкарыстоўваюцца вэб-сайтамі, праграмамі і VPN для шыфравання. Усталёўвайце сертыфікаты ЦС толькі ад арганізацый, якім давяраеце. \n\n Калі вы ўсталюеце сертыфікат ЦС, уладальнік сертыфіката зможа атрымаць доступ да вашай інфармацыі, напрыклад пароляў, паведамленняў ці звестак пра крэдытныя карткі, пра вэб-сайты, якія вы наведвалі, ці праграмы, якімі карысталіся, нават калі такая інфармацыя зашыфравана."</string>
-    <string name="ca_certificate_warning_dont_install" msgid="5330662108111984911">"Не ўсталёўваць"</string>
-    <string name="ca_certificate_warning_install_anyway" msgid="8460064866116466075">"Усталяваць"</string>
+    <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Не ўсталёўваць"</string>
+    <string name="certificate_warning_install_anyway" msgid="6411936058579648212">"Усталяваць"</string>
+    <string name="app_src_certificate_warning_title" msgid="3581334802881767289">"Усталяваць гэты сертыфікат на сваю рызыку"</string>
+    <string name="app_src_certificate_warning_description" msgid="4891599919584400969">"Сертыфікаты крыніц спраўджваюць бяспечнаць праграм для вашай прылады. Усталёўвайце сертыфікаты толькі ад арганізацый, якім давяраеце."</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Сертыфікат не ўсталяваны"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Сігнал набору нумару ў аварыйнай сітуацыі"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Задаць паводзіны на выпадак экстранага выкліку"</string>
@@ -2662,8 +2717,6 @@
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Дэактываваць і выдаліць"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"Праграмы адміністратара прылады"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"Няма даступных праграм адміністратара прылады"</string>
-    <string name="personal_device_admin_title" msgid="3760026556728177389">"Персанальныя"</string>
-    <string name="managed_device_admin_title" msgid="5995937968962501866">"Рабочыя"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Няма даступных давераных агентаў"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"Актываваць праграму адміністратара?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Актываваць гэту праграму адміністратара прылады"</string>
@@ -2909,9 +2962,16 @@
     <string name="one_usercrt" msgid="1865069301105101370">"адзін сертыфікат карыстальніка"</string>
     <string name="one_cacrt" msgid="7467796501404158399">"адзін сертыфікат ЦС"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"Сертыфікаты ЦС: %d"</string>
+    <string name="one_appsrccrt" msgid="8129657605195214337">"адзін сертыфікат крыніцы праграмы"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Падрабязнасці ўліковых даных"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Уліковыя даныя выдалены: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"Уліковыя даныя карыстальніка не ўсталяваны"</string>
+    <string name="app_src_cert_reboot_dialog_install_title" msgid="8054342796523969318">"Перазапусціце, каб выкарыстоўваць сертыфікат"</string>
+    <string name="app_src_cert_reboot_dialog_install_message" msgid="3047145226539355739">"Каб выкарыстоўваць гэты сертыфікат крыніцы праграмы, перазапусціце прыладу"</string>
+    <string name="app_src_cert_reboot_dialog_uninstall_title" msgid="1122954693175643166">"Перазапусціце, каб завяршыць выдаленне"</string>
+    <string name="app_src_cert_reboot_dialog_uninstall_message" msgid="5733844651545039464">"Каб выдаліць гэты сертыфікат крыніцы праграмы, перазапусціце прыладу"</string>
+    <string name="app_src_cert_reboot_dialog_button_restart" msgid="3222022868040265930">"Перазапусціць"</string>
+    <string name="app_src_cert_reboot_dialog_button_not_now" msgid="3582913410301349048">"Не зараз"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"Праверка правапiсу"</string>
     <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"Праверка правапісу для працы"</string>
     <string name="current_backup_pw_prompt" msgid="4962276598546381140">"Увядзіце тут свой бягучы пароль поўнага рэзервовага капіявання"</string>
@@ -3153,6 +3213,8 @@
     <string name="search_results_title" msgid="3360639917793022533">"Налады"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, злучэнне, інтэрнэт, бесправадны, даныя, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Апавяшчэнне Wi‑Fi, Wi-Fi-апавяшчэнне"</string>
+    <!-- no translation found for keywords_wifi_data_usage (4718555409695862085) -->
+    <skip />
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Спыніць вібрацыю, націснуць, клавіятура"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Выкарыстоўваць 24-гадзінны фармат"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Спампаваць"</string>
@@ -3232,6 +3294,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"эканомія зараду, замацаваны, захаваць, эканомія энергіі, акумулятар"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"працэдура, расклад, эканомія зараду, эканомія энергіі, акумулятар, аўтаматычна, працэнт"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, пашыраныя магчымасці выкліку, выклік у 4g"</string>
+    <string name="keywords_add_language" msgid="1882751300359939436">"дадаць мову, дадаць мову"</string>
     <string name="default_sound" msgid="6604374495015245195">"Гук па змаўчанні"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Гучнасць званкоў і апавяшчэнняў: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Гучнасць, вібрацыя, рэжым \"Не турбаваць\""</string>
@@ -3413,12 +3476,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Адаптыўныя апавяшчэнні"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Прыярытэт адаптыўных апавяшчэнняў"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Аўтаматычна пераводзіць апавяшчэнні з нізкім прыярытэтам у ціхі рэжым"</string>
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Адаптыўнае ранжыраванне апавяшчэнняў"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Аўтаматычна ранжыраваць апавяшчэнні паводле адпаведнасці"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Прапанаваныя дзеянні і адказы"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Аўтаматычна паказваць прапанаваныя дзеянні і адказы"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Дазволіць адкладванне апавяшчэнняў"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"У ціхім рэжыме хаваць значкі апавяшчэнняў"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"У ціхім рэжыме значкі апавяшчэнняў не паказваюцца на панэлі стану"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Паказваць значкі апавяшчэнняў"</string>
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Паказваць панэль нядаўніх размоў"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Дыялогі"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Некаторыя апавяшчэнні могуць паказвацца на экране ў выглядзе дыялогаў"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Некаторыя апавяшчэнні і іншае змесціва могуць паказвацца на экране ў выглядзе дыялогаў. Каб адкрыць дыялог, націсніце на яго. Каб закрыць дыялог, перацягніце яго ўніз экрана."</string>
@@ -3806,8 +3872,6 @@
     <string name="filter_all_apps" msgid="6645539744080251371">"Усе праграмы"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Усталяваныя праграмы"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Імгненныя праграмы"</string>
-    <string name="filter_personal_apps" msgid="6381137559116555485">"Персанальныя"</string>
-    <string name="filter_work_apps" msgid="5080158572515936510">"Працоўныя"</string>
     <string name="filter_notif_all_apps" msgid="2764590815789208306">"Праграмы: усе"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Апавяшчэнні адключаны"</string>
     <string name="filter_notif_urgent_channels" msgid="875381675739324318">"Катэгорыі: тэрміновыя"</string>
@@ -4265,7 +4329,7 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Часова ўключана ў рэжыме эканоміі зараду"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Праграмы, якія падтрымліваюцца, таксама пераключацца на цёмную тэму"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Зразумела"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Паспытаць цёмную тэму"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Цёмная тэма"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Дапамагае прадоўжыць час працы акумулятара"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Пліткі хуткіх налад для распрацоўшчыкаў"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Трасіроўка Winscope"</string>
@@ -4327,8 +4391,12 @@
     <string name="information_label" msgid="6939310810756569298">"Інфармацыя"</string>
     <string name="low_label" msgid="6525629096999711220">"Нізкая"</string>
     <string name="high_label" msgid="357503396626018487">"Высокая"</string>
-    <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"Павышаная адчувальнасць можа негатыўна паўплываць на ўспрыманне жэстаў па краях экрана."</string>
+    <string name="left_edge" msgid="1513576842959071849">"Левы край"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Правы край"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Павышаная адчувальнасць можа негатыўна паўплываць на ўспрыманне жэстаў па краях экрана."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Адчувальнасць задняй часткі"</string>
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Налады жэстаў"</string>
+    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"навігацыя жэстамі, адчувальнасць задняй часткі, жэст вяртання"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Двойчы дакрануцца, каб праверыць апавяшчэнні"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Двойчы дакраніцеся, каб праверыць планшэт"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Двойчы дакраніцеся, каб праверыць прыладу"</string>
@@ -4493,8 +4561,8 @@
     <string name="install_type_instant" msgid="7685381859060486009">"Імгненная праграма"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="4905106133215702099">"Выключыць менеджар сховішча?"</string>
     <string name="storage_movies_tv" msgid="7897612625450668593">"Праграмы для фільмаў і ТБ"</string>
-    <string name="carrier_provisioning" msgid="7217868336140325816">"Інфармацыя аператара"</string>
-    <string name="trigger_carrier_provisioning" msgid="3288805742683538597">"Уключыць/выключыць забеспячэнне аператарам"</string>
+    <string name="carrier_provisioning" msgid="7217868336140325816">"Звесткі аб аператары"</string>
+    <string name="trigger_carrier_provisioning" msgid="3288805742683538597">"Запусціць сінхранізацыю з аператарам"</string>
     <string name="zen_suggestion_title" msgid="4555260320474465668">"Абнавіце рэжым \"Не турбаваць\""</string>
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Прыпыніце апавяшчэнні, каб яны не адцягвалі ўвагу"</string>
     <string name="disabled_low_ram_device" msgid="5456316412719852286">"Гэта функцыя недаступная на гэтай прыладзе"</string>
@@ -4691,7 +4759,6 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Несапраўдны рэжым сеткі <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ігнараваць."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Назвы пунктаў доступу"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Недаступна праз аператара \"<xliff:g id="CARRIER">%1$s</xliff:g>\""</string>
-    <string name="emergency_info_contextual_card_summary" msgid="4472575229724567215">"Медыцынская інфармацыя, кантакты для экстранных сітуацый"</string>
     <string name="see_more" msgid="7499355691042812723">"Яшчэ"</string>
     <string name="see_less" msgid="2642392725363552793">"Паказаць менш"</string>
     <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Прылада для выкарыстання з праграмай <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
@@ -4790,4 +4857,14 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Інфармацыя пра вашу працоўную палітыку"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Наладамі кіруе ваш ІТ-адміністратар"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Графічны працэсар"</string>
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Апрацоўшчык справаздачы пра памылкі"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Вызначае, якая праграма апрацоўвае ярлык справаздачы пра памылкі на вашай прыладзе."</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Асабістая"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Працоўны"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"Стандартная сістэмная"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Гэты варыянт больш не даступны. Паўтарыце спробу."</string>
+    <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
+    <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
+    <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
 </resources>

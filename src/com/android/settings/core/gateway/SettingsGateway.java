@@ -56,6 +56,7 @@ import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
+import com.android.settings.bugreporthandler.BugReportHandlerPicker;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment;
@@ -75,6 +76,7 @@ import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings;
 import com.android.settings.deviceinfo.legal.ModuleLicensesDashboard;
 import com.android.settings.display.NightDisplaySettings;
+import com.android.settings.display.darkmode.DarkModeSettingsFragment;
 import com.android.settings.dream.DreamSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
@@ -85,6 +87,7 @@ import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
+import com.android.settings.gestures.GestureNavigationSettingsFragment;
 import com.android.settings.gestures.GlobalActionsPanelSettings;
 import com.android.settings.gestures.PickupGestureSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
@@ -105,14 +108,14 @@ import com.android.settings.network.MobileNetworkListFragment;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
-import com.android.settings.notification.app.AppBubbleNotificationSettings;
-import com.android.settings.notification.app.AppNotificationSettings;
-import com.android.settings.notification.app.ChannelNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationAssistantPicker;
-import com.android.settings.notification.history.NotificationStation;
 import com.android.settings.notification.SoundSettings;
+import com.android.settings.notification.app.AppBubbleNotificationSettings;
+import com.android.settings.notification.app.AppNotificationSettings;
+import com.android.settings.notification.app.ChannelNotificationSettings;
+import com.android.settings.notification.history.NotificationStation;
 import com.android.settings.notification.zen.ZenAccessSettings;
 import com.android.settings.notification.zen.ZenModeAutomationSettings;
 import com.android.settings.notification.zen.ZenModeBlockedEffectsSettings;
@@ -285,7 +288,10 @@ public class SettingsGateway {
             PreviouslyConnectedDeviceDashboardFragment.class.getName(),
             BatterySaverScheduleSettings.class.getName(),
             MobileNetworkListFragment.class.getName(),
-            GlobalActionsPanelSettings.class.getName()
+            GlobalActionsPanelSettings.class.getName(),
+            DarkModeSettingsFragment.class.getName(),
+            BugReportHandlerPicker.class.getName(),
+            GestureNavigationSettingsFragment.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

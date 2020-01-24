@@ -27,7 +27,6 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.provider.Telephony;
 import android.telephony.CarrierConfigManager;
-import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -1060,7 +1059,7 @@ public class ApnEditor extends SettingsPreferenceFragment
                 bearerBitmask = 0;
                 break;
             } else {
-                bearerBitmask |= ServiceState.getBitmaskForTech(Integer.parseInt(bearer));
+                bearerBitmask |= getBitmaskForTech(Integer.parseInt(bearer));
             }
         }
         callUpdate = setIntValueAndCheckIfDiff(values,
@@ -1072,7 +1071,7 @@ public class ApnEditor extends SettingsPreferenceFragment
         int bearerVal;
         if (bearerBitmask == 0 || mBearerInitialVal == 0) {
             bearerVal = 0;
-        } else if (ServiceState.bitmaskHasTech(bearerBitmask, mBearerInitialVal)) {
+        } else if (bitmaskHasTech(bearerBitmask, mBearerInitialVal)) {
             bearerVal = mBearerInitialVal;
         } else {
             // bearer field was being used but bitmask has changed now and does not include the
@@ -1412,5 +1411,21 @@ public class ApnEditor extends SettingsPreferenceFragment
         void setObject(int index, Object value) {
             mData[index] = value;
         }
+    }
+
+    private static int getBitmaskForTech(int radioTech) {
+        if (radioTech >= 1) {
+            return (1 << (radioTech - 1));
+        }
+        return 0;
+    }
+
+    private static boolean bitmaskHasTech(int bearerBitmask, int radioTech) {
+        if (bearerBitmask == 0) {
+            return true;
+        } else if (radioTech >= 1) {
+            return ((bearerBitmask & (1 << (radioTech - 1))) != 0);
+        }
+        return false;
     }
 }
