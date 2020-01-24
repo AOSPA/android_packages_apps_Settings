@@ -23,19 +23,19 @@
          strings. --> <skip />
     <!-- The time zone picker screen has two levels.  The first level allows the user to choose a region. -->
     <string-array name="timezone_filters">
-    <!-- The next level of the time zoner picker should show time zones from the Americas. -->
+        <!-- The next level of the time zoner picker should show time zones from the Americas. -->
         <item>America</item>
-    <!-- The next level of the time zoner picker should show time zones from Europe. -->
+        <!-- The next level of the time zoner picker should show time zones from Europe. -->
         <item>Europe</item>
-    <!-- The next level of the time zoner picker should show time zones from Africa. -->
+        <!-- The next level of the time zoner picker should show time zones from Africa. -->
         <item>Africa</item>
-    <!-- The next level of the time zoner picker should show time zones from Asia. -->
+        <!-- The next level of the time zoner picker should show time zones from Asia. -->
         <item>Asia</item>
-    <!-- The next level of the time zoner picker should show time zones from Australia. -->
+        <!-- The next level of the time zoner picker should show time zones from Australia. -->
         <item>Australia</item>
-    <!-- The next level of the time zoner picker should show time zones from Pacific. -->
+        <!-- The next level of the time zoner picker should show time zones from Pacific. -->
         <item>Pacific</item>
-    <!-- The next level of the time zoner picker should show time zones from ALL regions. -->
+        <!-- The next level of the time zoner picker should show time zones from ALL regions. -->
         <item>All</item>
     </string-array>
 
@@ -106,6 +106,8 @@
         <item>@string/dark_ui_auto_mode_never</item>
         <!-- 1: Auto -->
         <item>@string/dark_ui_auto_mode_auto</item>
+        <!-- 2: Custom -->
+        <item>@string/dark_ui_auto_mode_custom</item>
     </string-array>
 
     <!-- Security settings.  The delay after screen is turned off until device locks.
@@ -274,8 +276,8 @@
         <item>Require all non-trusted certificate statuses</item>
     </string-array>
 
-   <!-- Wi-Fi AP band settings.  Either Auto, 2.4GHz or 5GHz. -->
-   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+    <!-- Wi-Fi AP band settings.  Either Auto, 2.4GHz or 5GHz. -->
+    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array translatable="false" name="wifi_ap_band_config_full">
         <item>1</item>
         <item>2</item>
@@ -315,8 +317,8 @@
         <item>@string/wifi_ap_choose_2G</item>
     </string-array>
 
-   <!-- Wi-Fi WPS setup for p2p connections.  -->
-   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+    <!-- Wi-Fi WPS setup for p2p connections.  -->
+    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_p2p_wps_setup">
         <!-- Push button based configuration involves pushing a button on two connecting devices [CHAR LIMIT=30]-->
         <item>Push button</item>
@@ -334,7 +336,7 @@
         <item>Unsuccessful</item>
         <item>Available</item>
         <item>Out-of-range</item>
-   </string-array>
+    </string-array>
 
 
     <!-- Bluetooth Settings -->
@@ -424,7 +426,7 @@
     </string-array>
 
     <!-- Wi-Fi IP settings. -->
-   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_ip_settings">
         <!-- Use DHCP (Dynamic Host Configuration Protocol) for obtaining IP settings [CHAR LIMIT=25] -->
         <item>DHCP</item>
@@ -718,6 +720,24 @@
         <item>Run in background</item>
         <item>Accessibility volume</item>
     </string-array>
+
+    <!-- Keys for the list of accessibility auto click xml. -->
+    <string-array name="accessibility_autoclick_control_selector_keys" translatable="false">
+        <item>accessibility_control_autoclick_default</item>
+        <item>accessibility_control_autoclick_200ms</item>
+        <item>accessibility_control_autoclick_600ms</item>
+        <item>accessibility_control_autoclick_1sec</item>
+        <item>accessibility_control_autoclick_custom</item>
+    </string-array>
+
+    <!-- Values for the list of accessibility auto click, pairs to Keys . -->
+    <integer-array name="accessibility_autoclick_selector_values" translatable="false">
+        <item>0</item>
+        <item>200</item>
+        <item>600</item>
+        <item>1000</item>
+        <item>2000</item>
+    </integer-array>
 
     <!-- Keys for the list of accessibility timeouts xml. -->
     <string-array name="accessibility_timeout_control_selector_keys" translatable="false">
@@ -1449,9 +1469,9 @@
 
     <!-- WiFi calling mode array -->
     <string-array name="wifi_calling_mode_summaries" translatable="false">
-         <item>@string/wifi_calling_mode_wifi_preferred_summary</item>
-         <item>@string/wifi_calling_mode_cellular_preferred_summary</item>
-         <item>@string/wifi_calling_mode_wifi_only_summary</item>
+        <item>@string/wifi_calling_mode_wifi_preferred_summary</item>
+        <item>@string/wifi_calling_mode_cellular_preferred_summary</item>
+        <item>@string/wifi_calling_mode_wifi_only_summary</item>
     </string-array>
 
     <!-- WiFi calling mode array with ims preferred -->
@@ -1464,8 +1484,8 @@
 
     <!-- WiFi calling mode array without wifi only mode -->
     <string-array name="wifi_calling_mode_summaries_without_wifi_only" translatable="false">
-         <item>@string/wifi_calling_mode_wifi_preferred_summary</item>
-         <item>@string/wifi_calling_mode_cellular_preferred_summary</item>
+        <item>@string/wifi_calling_mode_wifi_preferred_summary</item>
+        <item>@string/wifi_calling_mode_cellular_preferred_summary</item>
     </string-array>
 
     <!-- WiFi calling mode array without wifi only mode with ims preferred -->
@@ -1499,6 +1519,42 @@
     <string-array name="whitelist_hide_summary_in_battery_usage" translatable="false">
         <!-- Google -->
         <item>"com.google.android.googlequicksearchbox"</item>
+    </string-array>
+
+    <!-- Array of titles palette list for accessibility. -->
+    <string-array name="setting_palette_colors" translatable="false" >
+        <item>@string/color_red</item>
+        <item>@string/color_orange</item>
+        <item>@string/color_yellow</item>
+        <item>@string/color_green</item>
+        <item>@string/color_cyan</item>
+        <item>@string/color_blue</item>
+        <item>@string/color_purple</item>
+        <item>@string/color_pink</item>
+    </string-array>
+
+    <!-- Values for palette list view preference. -->
+    <array name="setting_palette_data" translatable="false" >
+        <item>@color/palette_list_color_red</item>
+        <item>@color/palette_list_color_orange</item>
+        <item>@color/palette_list_color_yellow</item>
+        <item>@color/palette_list_color_green</item>
+        <item>@color/palette_list_color_cyan</item>
+        <item>@color/palette_list_color_blue</item>
+        <item>@color/palette_list_color_purple</item>
+        <item>@color/palette_list_color_pink</item>
+    </array>
+
+    <!--String arrays for showing the rtt settings options -->
+    <string-array name="rtt_setting_mode">
+        <!-- 0: Invalid value -->
+        <item></item>
+        <!-- 1:  Not visible -->
+        <item>@string/rtt_settings_no_visible</item>
+        <!-- 2:  Visible during call -->
+        <item>@string/rtt_settings_visible_during_call</item>
+        <!-- 3:  Always visible -->
+        <item>@string/rtt_settings_always_visible</item>
     </string-array>
 
 </resources>

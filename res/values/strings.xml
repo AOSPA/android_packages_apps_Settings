@@ -144,8 +144,6 @@
     <string name="bluetooth_lock_voice_dialing_summary">
       Prevent use of the bluetooth dialer when the screen is locked
     </string>
-    <!-- Bluetooth settings screen, heading above the list of nearby bluetooth devices -->
-    <string name="bluetooth_devices">Bluetooth devices</string>
     <!-- Bluetooth settings screen, title for the current bluetooth name setting -->
     <string name="bluetooth_device_name">Device name</string>
     <!-- Bluetooth settings screen, image description for device details button. This opens the screen to rename, unpair, etc. a single device. -->
@@ -696,7 +694,7 @@
     <!-- In the security screen, the header title for settings related to  Passwords-->
     <string name="security_passwords_title">Privacy</string>
     <!-- Summary for settings preference disabled by administrator [CHAR LIMIT=50] -->
-    <string name="disabled_by_administrator_summary">Disabled by admin</string>
+    <string name="disabled_by_administrator_summary">Not available</string>
     <!-- In the security screen, the header title for security statuses -->
     <string name="security_status_title">Security status</string>
     <!-- Summary for Security settings, explaining a few important settings under it [CHAR LIMIT=NONE] -->
@@ -814,7 +812,7 @@
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up face unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
+    <string name="security_settings_face_settings_footer">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
     <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer_attention_not_supported">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
@@ -2009,8 +2007,6 @@
     <string name="wifi_eap_anonymous">Anonymous identity</string>
     <!-- Label for the password of the secured network -->
     <string name="wifi_password">Password</string>
-    <!-- Label for the sae password id of the secured network [CHAR LIMIT=32] -->
-    <string name="wifi_sae_password_id">SAE password identifier</string>
     <!-- Label for the check box to show password -->
     <string name="wifi_show_password">Show password</string>
     <!-- Label for the RadioGroup to choose wifi ap band -->
@@ -2094,11 +2090,16 @@
     <!-- Title for the fragment to show that the QR code is for sharing Wi-Fi hotspot network [CHAR LIMIT=50] -->
     <string name="wifi_dpp_share_hotspot">Share hotspot</string>
     <!-- Title for Wi-Fi DPP lockscreen title [CHAR LIMIT=50] -->
-    <string name="wifi_dpp_lockscreen_title">Verify it\u0027s you</string>
+    <string name="wifi_dpp_lockscreen_title">Verify that it\u0027s you</string>
     <!-- Hint for Wi-Fi password [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_wifi_password">Wi\u2011Fi password: <xliff:g id="password" example="my password">%1$s</xliff:g></string>
     <!-- Hint for Wi-Fi hotspot password [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_hotspot_password">Hotspot password: <xliff:g id="password" example="my password">%1$s</xliff:g></string>
+    <!-- Label for a Wi-Fi network to specify if the device will auto connect to the Wi-Fi network
+         when signal of the Wi-Fi network is reachable [CHAR LIMIT=50]  -->
+    <string name="wifi_auto_connect_title">Auto\u2011connect</string>
+    <!-- Hint for Wi-Fi Auto-connect [CHAR LIMIT=NONE]  -->
+    <string name="wifi_auto_connect_summary">Allow connection to this network when in range</string>
     <!-- Label for "Use a QR code to add a device to this network" [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_add_device">Add device</string>
     <!-- Hint for "Add device" [CHAR LIMIT=NONE]  -->
@@ -2804,7 +2805,7 @@
     <string name="night_display_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_never">Will never turn on automatically</string>
-    <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
+         <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_twilight">Will turn on automatically at sunset</string>
@@ -2846,9 +2847,11 @@
     <string name="dark_ui_auto_mode_title">Schedule</string>
     <!-- Dark UI screen, setting option value for Dark UI to *never* turn on/off automatically. [CHAR LIMIT=30] -->
     <string name="dark_ui_auto_mode_never">None</string>
-    <!-- Dark UIscreen, setting option value for Dark UI to turn on/off automatically at sunset/sunrise. [CHAR LIMIT=32] -->
+    <!-- Dark UI screen, setting option value for Dark UI to turn on/off automatically at sunset/sunrise. [CHAR LIMIT=32] -->
     <string name="dark_ui_auto_mode_auto">Turns on from sunset to sunrise</string>
-    <!-- Dark UIscreen, setting option name controlling the current activation status. [CHAR LIMIT=30] -->
+    <!-- Dark UI screen, setting option value for Dark theme to turn on/off automatically according to a user defined schedule. [CHAR LIMIT=32] -->
+    <string name="dark_ui_auto_mode_custom">Turns on at custom time</string>
+    <!-- Dark UI screen, setting option name controlling the current activation status. [CHAR LIMIT=30] -->
     <string name="dark_ui_status_title">Status</string>
     <!-- Display settings screen, summary format of Dark UI when off. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
@@ -2856,14 +2859,22 @@
     <string name="dark_ui_summary_off_auto_mode_never">Will never turn on automatically</string>
     <!-- Display settings screen, summary of Dark UI when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_auto">Will turn on automatically at sunset</string>
+        <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary format of Dark UI when on. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on">On / <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_never">Will never turn off automatically</string>
     <!-- Display settings screen, summary of Dark UI when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_auto">Will turn off automatically at sunrise</string>
+    <!-- Display settings screen, summary format of night display when on and will turn off automatically at a user defined time. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on_auto_mode_custom">Will turn off automatically at <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
+    <!-- Display settings screen, activation button action for custom schedule [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_on_custom">Turn on until <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
+    <!-- Display settings screen, deactivation button action for custom schedule [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_off_custom">Turn off until <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
     <!-- Dark theme screen, description of Dark theme feature. [CHAR LIMIT=NONE] -->
-    <string name="dark_ui_text">Dark theme uses true black to help keep your battery alive longer. Dark theme schedules wait to turn on until your screen is off.</string>
+    <string name="dark_ui_text">Dark theme uses a black background to help keep battery alive longer on some screens. Dark theme schedules wait to turn on until your screen is off.</string>
 
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
     <string name="screen_timeout">Screen timeout</string>
@@ -4008,10 +4019,16 @@
     <string name="lockpassword_choose_your_pattern_message">For security, set pattern</string>
     <!-- Header on password confirm screen [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_password_header">Re-enter your password</string>
+    <!-- Header on password confirm screen for the work profile [CHAR LIMIT=40] -->
+    <string name="lockpassword_confirm_your_work_password_header">Enter your work password</string>
     <!-- Header on pattern confirm screen [CHAR LIMIT=30] -->
     <string name="lockpassword_confirm_your_pattern_header">Confirm your pattern</string>
+    <!-- Header on pattern confirm screen for the work profile [CHAR LIMIT=30] -->
+    <string name="lockpassword_confirm_your_work_pattern_header">Enter your work pattern</string>
     <!-- Header on password confirm screen [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_pin_header">Re-enter your PIN</string>
+    <!-- Header on password confirm screen for the work profile [CHAR LIMIT=40] -->
+    <string name="lockpassword_confirm_your_work_pin_header">Enter your work PIN</string>
     <!-- Header on password confirm screen if second password doesn't match the first. [CHAR LIMIT=30] -->
     <string name="lockpassword_confirm_passwords_dont_match">Passwords don\u2019t match</string>
     <!-- Header on pin confirm screen if second pin doesn't match the first. [CHAR LIMIT=30]-->
@@ -4804,9 +4821,11 @@
     <!-- Title for the accessibility preference screen to enable video captioning. [CHAR LIMIT=35] -->
     <string name="accessibility_captioning_title">Caption preferences</string>
     <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
-    <string name="accessibility_screen_magnification_title">Magnification</string>
+    <string name="accessibility_screen_magnification_title">Magnify</string>
     <!-- Title for the accessibility preference screen to edit magnification area. [CHAR LIMIT=35] -->
     <string name="accessibility_magnification_mode_title">Magnification area</string>
+    <!-- Title for the accessibility preference screen to edit magnification enable mode. [CHAR LIMIT=35] -->
+    <string name="accessibility_magnification_enable_mode_title">Magnification enable</string>
     <!-- Message for the accessibility preference screen to edit magnification area dialog. [CHAR LIMIT=none] -->
     <string name="accessibility_magnification_area_settings_message">Choose the magnification area(s) you want to use when magnifying the screen</string>
     <!-- Summary for the accessibility preference screen to edit full screen. [CHAR LIMIT=none] -->
@@ -4819,18 +4838,18 @@
     <string name="accessibility_magnification_area_settings_full_screen">Magnify entire screen</string>
     <!-- Message for the accessibility preference screen to edit part of screen. [CHAR LIMIT=none] -->
     <string name="accessibility_magnification_area_settings_window_screen">Magnify part of screen</string>
-    <!-- Title for the accessibility preference screen to show move controller. [CHAR LIMIT=35] -->
-    <string name="accessibility_magnification_window_control_switch_title">Show move controller</string>
-    <!-- Summary for the accessibility preference screen to show move controller. [CHAR LIMIT=none] -->
-    <string name="accessibility_magnification_window_control_switch_summary">Show a joystick-like controller to move the magnification area</string>
     <!-- Title for the accessibility preference screen to enable screen magnification settings. [CHAR LIMIT=35] -->
-    <string name="accessibility_magnification_service_settings_title">Magnify settings</string>
+    <string name="accessibility_magnification_service_settings_title">Magnification settings</string>
     <!-- Title for the accessibility preference screen to enable triple-tap gesture screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_gestures_title">Magnify with triple-tap</string>
     <!-- Title for the accessibility preference screen to enable navigation bar screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_navbar_title">Magnify with shortcut</string>
     <!-- Summary for the accessibility magnification setting indicating both "Magnify with button" and "Magnify with triple-tap" are enabled [CHAR LIMIT=50] -->
     <string name="accessibility_screen_magnification_state_navbar_gesture">Magnify with shortcut &amp; triple-tap</string>
+    <!-- Title for the footer text to explain what accessibility service does. [CHAR LIMIT=35] -->
+    <string name="accessibility_footer_title">About <xliff:g id="service" example="Select to Speak">%1$s</xliff:g></string>
+    <!-- Title for the footer text to explain what option accessibility service does. [CHAR LIMIT=35] -->
+    <string name="accessibility_screen_option">Options</string>
     <!-- Summary for the accessibility preference to enable screen magnification. [CHAR LIMIT=25] -->
     <string name="accessibility_preference_magnification_summary">Zoom in on screen</string>
     <!-- Short summary for Magnification gesture. Tells the user that this feature allows the user to magnify the screen by tapping 3 times. Appears in accessibility portion of setup wizard -->
@@ -4850,13 +4869,13 @@
     <!-- Message for the Accessibility tutorial dialog when user enables an accessibility service while using the 3-button nav bar. [CHAR LIMIT=NONE] -->
     <string name="accessibility_tutorial_dialog_message_button">To turn this service on or off, tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> on the bottom of your screen.\n\nTo switch between services, touch &amp; hold the accessibility button.</string>
     <!-- Message for the Accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is not enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback">To turn this service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold.</string>
+    <string name="accessibility_tutorial_dialog_message_gesture">To turn this service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold.</string>
     <!-- Message for the Accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback">To turn this service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold.</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback">To turn this service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold.</string>
     <!-- Message for the Accessibility tutorial dialog when user chooses gesture navigation in navigation settings, an accessibility service is using the accessibility button, and touch exploration is disabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback">To turn an accessibility service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold.</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings">To turn an accessibility service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold.</string>
     <!-- Message for the Accessibility tutorial dialog when user chooses gesture navigation in navigation settings, an accessibility service is using the accessibility button, and touch exploration is enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback">To turn an accessibility service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold.</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback">To turn an accessibility service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold.</string>
     <!-- Button for the Accessibility tutorial dialog to dismiss the dialog when user clicks it. [CHAR LIMIT=10] -->
     <string name="accessibility_tutorial_dialog_button">Got it</string>
     <!-- Title for accessibility shortcut preference for accessibility apps. [CHAR LIMIT=40] -->
@@ -4871,12 +4890,16 @@
     <string name="accessibility_shortcut_edit_dialog_title_daltonizer">Shortcut to open Color correction</string>
     <!-- Title for software shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_software">Accessibility Button</string>
-    <!-- Title for software shortcut in gesture mode in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <!-- Title for software shortcut in gesture mode in Accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture">2-finger swipe up from bottom</string>
+    <!-- Title for software shortcut in gesture mode in Accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback">3-finger swipe up from bottom</string>
     <!-- Summary for software shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software">Tap the <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> button at the bottom of your screen</string>
-    <!-- Summary for software shortcut in gesture mode in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <!-- Summary for software shortcut in gesture mode in Accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture">Swipe up with 2 fingers from edge of screen</string>
+    <!-- Summary for software shortcut in gesture mode in Accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback">Swipe up with 3 fingers from edge of screen</string>
     <!-- Title for hardware shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_hardware">Hold volume keys</string>
     <!-- Summary for hardware shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
@@ -4950,11 +4973,25 @@
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_preference_subtitle">Turn light screens dark so people who are sensitive to bright light can have a better viewing experience.\n\nNote: dark colors will turn light. Images will also be inverted.</string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_autoclick_preference_title">Dwell timing</string>
+    <string name="accessibility_autoclick_preference_title">Auto click (dwell timing)</string>
     <!-- Footer text to explain what autoclick does -->
     <string name="accessibility_autoclick_description">If you are using a mouse, you can set the cursor to take action automatically when it stops moving for a certain amount of time.</string>
-    <!-- Title for accessibility preference for configuring amount of time that has to pass after pointer stops moving before click action can be performed (if automatic click after pointer stops moving feature is enabled). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_autoclick_delay_preference_title">Delay before click</string>
+    <!-- Option heading to leave the auto click requirement for accessibility users at its default level. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_default_title">None</string>
+    <!-- Option heading to leave the auto click requirement for accessibility users at its short level. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_short_title">Short</string>
+    <!-- Option summary text for the auto click delay 0.2 seconds radio button. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_short_summary">0.2 seconds</string>
+    <!-- Option heading to leave the auto click requirement for accessibility users at its medium level. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_medium_title">Medium</string>
+    <!-- Option summary text for the auto click delay 0.6 seconds radio button. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_medium_summary">0.6 seconds</string>
+    <!-- Option heading to leave the auto click requirement for accessibility users at its long level. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_long_title">Long</string>
+    <!-- Option summary text for the auto click delay 1 second radio button. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_long_summary">1 second</string>
+    <!-- Option heading to leave the auto click requirement for accessibility users at its custom level. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_custom_title">Custom</string>
     <!-- Title for accessibility preference screen for configuring vibrations. -->
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptic strength</string>
     <!-- Title for accessibility preference for configuring notification vibrations. -->
@@ -4966,7 +5003,7 @@
     <!-- Used in the accessibility service settings to control turning on/off the service entirely -->
     <string name="accessibility_service_master_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
-    <string name="accessibility_daltonizer_master_switch_title">Use color correction</string>
+    <string name="accessibility_daltonizer_master_switch_title">Correct colors</string>
     <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_caption_master_switch_title">Show captions</string>
     <!-- Title for Caption preference settings screen for configuring font style. [CHAR LIMIT=NONE] -->
@@ -6179,6 +6216,11 @@
     <string name="admin_more_details">More details</string>
     <string name="notification_log_title">Notification log</string>
 
+    <string name="notification_history_title">Notification history</string>
+    <string name="notification_history_today">Today</string>
+    <string name="notification_history_snooze">Snoozed</string>
+    <string name="notification_history_dismiss">Recently dismissed</string>
+
     <!-- Category title for phone call's ringtone and vibration settings in the Sound Setting.
          [CHAR LIMIT=40] -->
     <string name="sound_category_call_ringtone_vibrate_title">Call ringtone &amp; vibrate</string>
@@ -6997,6 +7039,8 @@
     <string name="help_uri_apps_photography" translatable="false"></string>
     <!-- Help URI, manage apps wifi access [DO NOT TRANSLATE] -->
     <string name="help_uri_apps_wifi_access" translatable="false"></string>
+    <!-- Help URI, manage apps that have access to all files [DO NOT TRANSLATE] -->
+    <string name="help_uri_manage_external_storage" translatable="false"></string>
     <!-- Help URI, Storage [DO NOT TRANSLATE] -->
     <string name="help_uri_storage" translatable="false"></string>
     <!-- Help URI, Accessibility [DO NOT TRANSLATE] -->
@@ -7271,6 +7315,8 @@
     <string name="color_orange">Orange</string>
     <!-- Purple label.  [CHAR LIMIT=40] -->
     <string name="color_purple">Purple</string>
+    <!-- Pink label.  [CHAR LIMIT=40] -->
+    <string name="color_pink">Pink</string>
     <!-- Message informing the user that no SIM card is inserted  [CHAR LIMIT=60] -->
     <string name="sim_no_inserted_msg">No SIM cards inserted</string>
     <!-- SIM status title  [CHAR LIMIT=40] -->
@@ -7632,6 +7678,9 @@
     <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_title">Do Not Disturb</string>
 
+    <!-- Sound: Summary for the Do not Disturb option and associated settings page. [CHAR LIMIT=240]-->
+    <string name="zen_mode_settings_summary">Only get notified by important people and apps</string>
+
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
     <string name="zen_mode_slice_subtitle">Limit interruptions</string>
 
@@ -7711,7 +7760,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
     <!-- Do not disturb: zen settings screens category title [CHAR LIMIT=100] -->
-    <string name="zen_mode_settings_category">When Do Not Disturb is on</string>
+    <string name="zen_mode_settings_category">Allow interruptions that make sound</string>
 
     <!-- Do not disturb: restrict notifications title [CHAR LIMIT=80] -->
     <string name="zen_mode_restrict_notifications_title">Restrict notifications</string>
@@ -7852,15 +7901,19 @@
         <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> schedules can turn on automatically</item>
     </plurals>
 
-    <!-- Do not disturb settings, category header [CHAR LIMIT=120]-->
-    <string name="zen_category_behavior">Mute device but allow exceptions</string>
-    <!-- Do not disturb settings, exceptions to dnd title [CHAR LIMIT=100]-->
-    <string name="zen_category_exceptions">Exceptions</string>
-    <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
-    <string name="zen_category_schedule">Schedule</string>
+    <!-- Do not disturb settings, main screen, category header [CHAR LIMIT=120]-->
+    <string name="zen_category_behavior">Exceptions when Do Not Disturb is on</string>
+    <!-- Do not disturb settings, main screen, field, dnd breakthrough [CHAR LIMIT=100]-->
+    <string name="zen_category_people">People</string>
+    <!-- Do not disturb settings, main screen, field, dnd breakthrough  [CHAR LIMIT=100]-->
+    <string name="zen_category_apps">Apps</string>
+    <!-- Do not disturb settings, main screen, field, dnd breakthrough  [CHAR LIMIT=100]-->
+    <string name="zen_category_exceptions">Alarms &amp; other interruptions</string>
+    <!-- Do not disturb settings, main screen, field, schedules [CHAR LIMIT=100]-->
+    <string name="zen_category_schedule">Schedules</string>
+    <!-- Do not disturb settings, main screen, field, dnd visuals [CHAR LIMIT=100]-->
+    <string name="zen_category_visuals">Silenced notifications</string>
 
-    <!-- Do not disturb settings, sound and vibrations exceptions title [CHAR LIMIT=100]-->
-    <string name="zen_sound_title">See all exceptions</string>
     <!-- Do not disturb settings, sound and vibrations screen footer [CHAR LIMIT=NONE]-->
     <string name="zen_sound_footer">When Do Not Disturb is on, sound and vibration will be muted, except for the items you allow above.</string>
     <!-- Do not disturb settings, sound and vibrations screen category [CHAR LIMIT=100]-->
@@ -8623,6 +8676,8 @@
         <item quantity="other"><xliff:g id="num_people" example="3">%d</xliff:g> others</item>
     </plurals>
 
+    <string name="zen_mode_conversations_title">Conversations</string>
+
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Allow messages</string>
 
@@ -8663,31 +8718,46 @@
     <string name="zen_mode_from_none_messages">Don\u2019t allow any messages</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow alarms option -->
-    <string name="zen_mode_alarms">Allow alarms</string>
+    <string name="zen_mode_alarms">Alarms</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow alarms summary -->
+    <string name="zen_mode_alarms_summary">From timers, alarms, security systems, and other apps</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option (ie: sound from alarm clock) -->
     <string name="zen_mode_alarms_list">alarms</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow media (sound from video) to bypass dnd -->
-    <string name="zen_mode_media">Play media sounds</string>
+    <string name="zen_mode_media">Media sounds</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow media (sound from video) to bypass dnd  summary-->
+    <string name="zen_mode_media_summary">From videos, games, and other media</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) -->
     <string name="zen_mode_media_list">media</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: allow touch sounds to bypass DND  -->
-    <string name="zen_mode_system">Allow touch sounds</string>
+    <string name="zen_mode_system">Touch sounds</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: allow touch sounds to bypass DND summary  -->
+    <string name="zen_mode_system_summary">From your keyboard and other buttons</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: System sounds (ie: touch sounds) -->
     <string name="zen_mode_system_list">touch sounds</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow reminder notifications/sounds to bypass DND  -->
-    <string name="zen_mode_reminders">Allow reminders</string>
+    <string name="zen_mode_reminders">Reminders</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow reminder notifications/sounds to bypass DND summary  -->
+    <string name="zen_mode_reminders_summary">From tasks and reminders</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Reminders (ie: calendar reminders are allowed to bypass dnd) -->
     <string name="zen_mode_reminders_list">reminders</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow event notifications/sounds to bypass DND -->
-    <string name="zen_mode_events">Allow events</string>
+    <string name="zen_mode_events">Events</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow event notifications/sounds to bypass DND summary -->
+    <string name="zen_mode_events_summary">From upcoming calendar events</string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
@@ -9051,13 +9121,21 @@
     </plurals>
 
     <!-- Explanation that the app that will ALWAYS be launched to open web links to domains that it understands -->
-    <string name="app_link_open_always">Open in this app</string>
+    <string name="app_link_open_always">Allow app to open supported links</string>
 
     <!-- Explanation that the user will be asked whether to launch the app to open web links to domains that it understands -->
     <string name="app_link_open_ask">Ask every time</string>
 
     <!-- Explanation that the app that will NEVER be launched to open web links to domains that it understands -->
-    <string name="app_link_open_never">Don&#8217;t open in this app</string>
+    <string name="app_link_open_never">Don&#8217;t allow app to open links</string>
+
+    <plurals name="app_link_open_always_summary">
+        <item quantity="one">App claims to handle <xliff:g id="count">%d</xliff:g> link</item>
+        <item quantity="other">App claims to handle <xliff:g id="count">%d</xliff:g> links</item>
+    </plurals>
+
+    <!-- Footer of open supported links settings [CHAR LIMIT=NONE] -->
+    <string name="open_supported_links_footer">App claims to handle following links:</string>
 
     <!-- Title for Default Apps settings [CHAR LIMIT=30] -->
     <string name="default_apps_title">Default</string>
@@ -9471,6 +9549,16 @@
     <string name="permit_draw_overlay">Allow display over other apps</string>
     <!-- Description of allowing overlay setting [CHAR LIMIT=NONE] -->
     <string name="allow_overlay_description">Allow this app to display on top of other apps you\u2019re using. It may interfere with your use of those apps or change the way they seem to appear or behave.</string>
+
+    <!-- Manager External Storage settings title [CHAR LIMIT=40] -->
+    <string name="manage_external_storage_title">All files access</string>
+    <!-- Label for a setting which controls whether an app can manage external storage [CHAR LIMIT=45] -->
+    <string name="permit_manage_external_storage">Allow access to manage all files</string>
+    <!-- Description for a setting which controls whether an app can manage external storage
+         [CHAR LIMIT=NONE] -->
+    <string name="allow_manage_external_storage_description">Allow this app to read, modify and delete all files on this device or any connected storage volumes. If granted, app may access files without your explicit knowledge.</string>
+    <!-- Label for showing apps that can manage external storage[CHAR LIMIT=45] -->
+    <string name="filter_manage_external_storage">Can access all files</string>
 
     <!-- Keyword for VR setting -->
     <string name="keywords_vr_listener">vr virtual reality listener stereo helper service</string>
@@ -10790,13 +10878,15 @@
     <!-- Title for App Compatibility Changes dashboard where developers can configure per-app overrides for compatibility changes [CHAR LIMIT=50] -->
     <string name="platform_compat_dashboard_title">App Compatibility Changes</string>
     <!-- Summary for App Compatibility Changes dashboard [CHAR LIMIT=NONE] -->
-    <string name="platform_compat_dashboard_summary">Modify app compatibility change overrides</string>
+    <string name="platform_compat_dashboard_summary">Toggle app compatibility changes</string>
+    <!-- Summary for selected app [DO NOT TRANSLATE] -->
+    <string name="platform_compat_selected_app_summary" translatable="false"><xliff:g id="app_name" example="com.google.android.chrome">%1$s</xliff:g> targetSdkVersion <xliff:g id="number" example="29">%2$d</xliff:g></string>
     <!-- Title for default enabled app compat changes category [CHAR LIMIT=50] -->
     <string name="platform_compat_default_enabled_title">Default enabled changes</string>
     <!-- Title for default disabled app compat changes category [CHAR LIMIT=50] -->
     <string name="platform_compat_default_disabled_title">Default disabled changes</string>
-    <!-- Title for target SDK gated app compat changes category [CHAR LIMIT=50] -->
-    <string name="platform_compat_target_sdk_title">Enabled after SDK <xliff:g id="number" example="29">%d</xliff:g></string>
+    <!-- Title for target SDK gated app compat changes category (do not translate 'targetSdkVersion') [CHAR LIMIT=50] -->
+    <string name="platform_compat_target_sdk_title">Enabled for targetSdkVersion &gt; <xliff:g id="number" example="29">%d</xliff:g></string>
 
     <!-- Slices Strings -->
 
@@ -11300,14 +11390,6 @@
     <string name="network_connection_searching_message">Searching for device\u2026</string>
     <!-- Message for Network connection connecting progress Dialog. Try to connect to wifi ap.[CHAR LIMIT=40] -->
     <string name="network_connection_connecting_message">Connecting to device\u2026</string>
-
-    <!-- Summary for bluetooth devices count in Bluetooth devices slice. [CHAR LIMIT=NONE] -->
-    <plurals name="show_bluetooth_devices">
-        <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> device connected</item>
-        <item quantity="other"><xliff:g id="number_device_count">%1$d</xliff:g> devices connected</item>
-    </plurals>
-    <!-- Title for no bluetooth devices in Bluetooth devices slice. [CHAR LIMIT=NONE] -->
-    <string name="no_bluetooth_devices">No Bluetooth devices</string>
 
     <!-- Title for left bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_left_name">Left</string>

@@ -39,6 +39,7 @@ import androidx.slice.builders.SliceAction;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.network.MobileDataContentObserver;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
@@ -147,8 +148,8 @@ public class MobileDataSlice implements CustomSliceable {
     }
 
     protected static int getDefaultSubscriptionId(SubscriptionManager subscriptionManager) {
-        final SubscriptionInfo defaultSubscription =
-                subscriptionManager.getDefaultDataSubscriptionInfo();
+        final SubscriptionInfo defaultSubscription = subscriptionManager.getActiveSubscriptionInfo(
+                subscriptionManager.getDefaultDataSubscriptionId());
         if (defaultSubscription == null) {
             return SubscriptionManager.INVALID_SUBSCRIPTION_ID; // No default subscription
         }
@@ -157,8 +158,8 @@ public class MobileDataSlice implements CustomSliceable {
     }
 
     private CharSequence getSummary() {
-        final SubscriptionInfo defaultSubscription =
-                mSubscriptionManager.getDefaultDataSubscriptionInfo();
+        final SubscriptionInfo defaultSubscription = mSubscriptionManager.getActiveSubscriptionInfo(
+                mSubscriptionManager.getDefaultDataSubscriptionId());
         if (defaultSubscription == null) {
             return null; // no summary text
         }
@@ -177,7 +178,7 @@ public class MobileDataSlice implements CustomSliceable {
      */
     private boolean isMobileDataAvailable() {
         final List<SubscriptionInfo> subInfoList =
-                mSubscriptionManager.getSelectableSubscriptionInfoList();
+                SubscriptionUtil.getSelectableSubscriptionInfoList(mContext);
 
         return !(subInfoList == null || subInfoList.isEmpty());
     }

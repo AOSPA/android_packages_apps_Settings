@@ -39,6 +39,7 @@
     <uses-permission android:name="android.permission.CLEAR_APP_USER_DATA" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS"/>
@@ -70,7 +71,7 @@
     <uses-permission android:name="android.permission.CONFIGURE_WIFI_DISPLAY" />
     <uses-permission android:name="android.permission.CONFIGURE_DISPLAY_COLOR_MODE" />
     <uses-permission android:name="android.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS" />
-    <uses-permission android:name="android.permission.SET_TIME" />
+    <uses-permission android:name="android.permission.SUGGEST_MANUAL_TIME_AND_ZONE" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.REBOOT" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -1221,6 +1222,15 @@
                 android:value="com.android.settings.notification.history.NotificationStation" />
         </activity>
 
+        <activity
+            android:name=".notification.history.NotificationHistoryActivity"
+            android:label="@string/notification_history_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".notification.zen.ZenModeVoiceActivity"
                 android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
                 android:label="@string/zen_mode_settings_title">
@@ -1416,6 +1426,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity>
 
         <activity
@@ -2813,6 +2825,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity>
 
         <activity
@@ -2837,6 +2851,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity>
 
         <activity
@@ -2860,6 +2876,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity>
 
         <activity android:name="Settings$ManageAppExternalSourcesActivity"
@@ -2882,6 +2900,31 @@
                 <action android:name="android.settings.SHOW_ADMIN_SUPPORT_DETAILS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="Settings$ManageExternalStorageActivity"
+            android:label="@string/manage_external_storage_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MANAGE_ALL_FILES_ACCESS_PERMISSION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$AppManageExternalStorageActivity"
+            android:label="@string/manage_external_storage_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.appinfo.ManageExternalStorageDetails" />
         </activity>
 
         <!-- Keep compatibility with old WebView-picker implementation -->

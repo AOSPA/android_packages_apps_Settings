@@ -57,7 +57,6 @@ public class NetworkOperatorPreference extends Preference {
     private List<String> mForbiddenPlmns;
     private int mLevel = LEVEL_NONE;
     private boolean mShow4GForLTE;
-    private boolean mUseNewApi;
 
     public NetworkOperatorPreference(Context context, CellInfo cellinfo,
             List<String> forbiddenPlmns, boolean show4GForLTE) {
@@ -68,9 +67,7 @@ public class NetworkOperatorPreference extends Preference {
     public NetworkOperatorPreference(Context context, CellIdentity connectedCellId,
             List<String> forbiddenPlmns, boolean show4GForLTE) {
         this(context, forbiddenPlmns, show4GForLTE);
-        mCellInfo = null;
-        mCellId = connectedCellId;
-        refresh();
+        updateCell(null, connectedCellId);
     }
 
     private NetworkOperatorPreference(
@@ -78,16 +75,18 @@ public class NetworkOperatorPreference extends Preference {
         super(context);
         mForbiddenPlmns = forbiddenPlmns;
         mShow4GForLTE = show4GForLTE;
-        mUseNewApi = context.getResources().getBoolean(
-                com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI);
     }
 
     /**
      * Change cell information
      */
     public void updateCell(CellInfo cellinfo) {
+        updateCell(cellinfo, CellInfoUtil.getCellIdentity(cellinfo));
+    }
+
+    private void updateCell(CellInfo cellinfo, CellIdentity cellId) {
         mCellInfo = cellinfo;
-        mCellId = CellInfoUtil.getCellIdentity(cellinfo);
+        mCellId = cellId;
         refresh();
     }
 
@@ -216,7 +215,7 @@ public class NetworkOperatorPreference extends Preference {
     }
 
     private void updateIcon(int level) {
-        if (!mUseNewApi || level < 0 || level >= NUM_SIGNAL_STRENGTH_BINS) {
+        if (level < 0 || level >= NUM_SIGNAL_STRENGTH_BINS) {
             return;
         }
         final Context context = getContext();

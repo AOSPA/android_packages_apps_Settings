@@ -22,6 +22,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.text.BidiFormatter;
@@ -121,29 +122,30 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
             mApplicationsState.ensureIcon(entry);
             for (NotificationChannel channel : mNotificationBackend
                     .getNotificationChannelsBypassingDnd(pkg, entry.info.uid).getList()) {
+                if (!TextUtils.isEmpty(channel.getConversationId())) {
+                    // conversation channels that bypass dnd will be shown on the People page
+                    continue;
+                }
                 Preference pref = new AppPreference(mPrefContext);
                 pref.setKey(pkg + "|" + channel.getId());
                 pref.setTitle(BidiFormatter.getInstance().unicodeWrap(entry.label));
                 pref.setIcon(entry.icon);
                 pref.setSummary(BidiFormatter.getInstance().unicodeWrap(channel.getName()));
 
-                pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        Bundle args = new Bundle();
-                        args.putString(AppInfoBase.ARG_PACKAGE_NAME, entry.info.packageName);
-                        args.putInt(AppInfoBase.ARG_PACKAGE_UID, entry.info.uid);
-                        args.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
-                        new SubSettingLauncher(mContext)
-                                .setDestination(ChannelNotificationSettings.class.getName())
-                                .setArguments(args)
-                                .setTitleRes(R.string.notification_channel_title)
-                                .setResultListener(mHostFragment, 0)
-                                .setSourceMetricsCategory(
-                                        SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APP)
-                                .launch();
-                        return true;
-                    }
+                pref.setOnPreferenceClickListener(preference -> {
+                    Bundle args = new Bundle();
+                    args.putString(AppInfoBase.ARG_PACKAGE_NAME, entry.info.packageName);
+                    args.putInt(AppInfoBase.ARG_PACKAGE_UID, entry.info.uid);
+                    args.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
+                    new SubSettingLauncher(mContext)
+                            .setDestination(ChannelNotificationSettings.class.getName())
+                            .setArguments(args)
+                            .setTitleRes(R.string.notification_channel_title)
+                            .setResultListener(mHostFragment, 0)
+                            .setSourceMetricsCategory(
+                                    SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APP)
+                            .launch();
+                    return true;
                 });
                 channelsBypassingDnd.add(pref);
             }

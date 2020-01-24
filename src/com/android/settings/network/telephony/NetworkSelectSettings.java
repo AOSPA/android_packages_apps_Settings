@@ -89,7 +89,6 @@ public class NetworkSelectSettings extends DashboardFragment {
     private boolean mUseNewApi;
     private long mRequestIdManualNetworkSelect;
     private long mRequestIdManualNetworkScan;
-    private boolean mScreenIsOn;
     private long mWaitingForNumberOfScanResults;
 
     private static final int MIN_NUMBER_OF_SCAN_REQUIRED = 2;
@@ -98,8 +97,6 @@ public class NetworkSelectSettings extends DashboardFragment {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        mUseNewApi = getContext().getResources().getBoolean(
-                com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI);
         mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID);
 
         mPreferenceCategory = findPreference(PREF_KEY_NETWORK_OPERATORS);
@@ -142,7 +139,6 @@ public class NetworkSelectSettings extends DashboardFragment {
         if (isProgressBarVisible()) {
             return;
         }
-        mScreenIsOn = true;
         if (mWaitingForNumberOfScanResults <= 0) {
             startNetworkQuery();
         }
@@ -162,7 +158,6 @@ public class NetworkSelectSettings extends DashboardFragment {
     @Override
     public void onStop() {
         super.onStop();
-        mScreenIsOn = false;
         if (mWaitingForNumberOfScanResults <= 0) {
             stopNetworkQuery();
         }
@@ -245,7 +240,7 @@ public class NetworkSelectSettings extends DashboardFragment {
                         break;
                     }
                     mWaitingForNumberOfScanResults--;
-                    if ((!mScreenIsOn) && (mWaitingForNumberOfScanResults <= 0)) {
+                    if ((mWaitingForNumberOfScanResults <= 0) && (!isResumed())) {
                         stopNetworkQuery();
                     }
 
@@ -475,10 +470,7 @@ public class NetworkSelectSettings extends DashboardFragment {
         if (mNetworkScanHelper != null) {
             mRequestIdManualNetworkScan = getNewRequestId();
             mWaitingForNumberOfScanResults = MIN_NUMBER_OF_SCAN_REQUIRED;
-            mNetworkScanHelper.startNetworkScan(
-                    mUseNewApi
-                            ? NetworkScanHelper.NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS
-                            : NetworkScanHelper.NETWORK_SCAN_TYPE_WAIT_FOR_ALL_RESULTS);
+            mNetworkScanHelper.startNetworkScan();
         }
     }
 

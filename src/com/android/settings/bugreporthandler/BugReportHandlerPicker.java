@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.util.Log;
 import android.util.Pair;
@@ -35,9 +36,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.applications.DefaultAppInfo;
-import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
@@ -46,7 +46,6 @@ import java.util.List;
 /**
  * Picker for BugReportHandler.
  */
-@SearchIndexable
 public class BugReportHandlerPicker extends DefaultAppPickerFragment {
     private static final String TAG = "BugReportHandlerPicker";
 
@@ -73,6 +72,14 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
     @VisibleForTesting
     static String getKey(String handlerApp, int handlerUser) {
         return handlerApp + "#" + handlerUser;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (!DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context)) {
+            getActivity().finish();
+        }
     }
 
     @Override
@@ -169,8 +176,8 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
         if (BugReportHandlerUtil.SHELL_APP_PACKAGE.equals(handlerApp)) {
             return context.getString(R.string.system_default_app_subtext);
         }
-        final UserHandle managedProfile = Utils.getManagedProfile(mUserManager);
-        if (managedProfile != null && managedProfile.getIdentifier() == handlerUser) {
+        final UserInfo userInfo = mUserManager.getUserInfo(handlerUser);
+        if (userInfo != null && userInfo.isManagedProfile()) {
             return context.getString(R.string.work_profile_app_subtext);
         }
         return context.getString(R.string.personal_profile_app_subtext);
@@ -205,7 +212,4 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
             return super.loadLabel();
         }
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.bug_report_handler_settings);
 }

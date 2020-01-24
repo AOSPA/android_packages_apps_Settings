@@ -230,7 +230,7 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
             };
 
     /**
-     * Implementation of MobileDataEnabledListener.Client
+     * Implementation of {@code MobileDataEnabledListener.Client}
     */
     @VisibleForTesting
     public void onMobileDataEnabledChange() {
