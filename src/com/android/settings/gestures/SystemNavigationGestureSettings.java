@@ -162,6 +162,10 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
             p.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_SETTING);
             p.setExtraWidgetOnClickListener((v) -> GestureNavigationBackSensitivityDialog
                     .show(this, getBackSensitivity(getContext(), mOverlayManager)));
+        } else if (info.getKey() == KEY_SYSTEM_NAV_3BUTTONS) {
+            p.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_SETTING);
+            p.setExtraWidgetOnClickListener((v) -> ThreeButtonNavigationInvertDialog
+                    .show(this));
         } else {
             p.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_GONE);
         }
