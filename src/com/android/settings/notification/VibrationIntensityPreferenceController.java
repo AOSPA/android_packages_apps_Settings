@@ -38,9 +38,9 @@ public class VibrationIntensityPreferenceController extends BasePreferenceContro
     private static final String TAG = "VibrationIntensityPreferenceController";
     private static final String RING_VIBRATION_INTENSITY = "ring_vibration_intensity";
     private static final String NOTIFICATION_VIBRATION_INTENSITY = "notification_vibration_intensity";
-    
+
     protected static FragmentManager mFragmentManager;
-    
+
     private Vibrator mVibrator;
     private Preference mPreference;
     private Context mContext;
@@ -141,19 +141,19 @@ public class VibrationIntensityPreferenceController extends BasePreferenceContro
     private void setText() {
         switch(mVibrationIntensity) {
             case 0:
-                mPreference.setSummary("Disabled");
+                mPreference.setSummary(R.string.vibration_intensity_disabled);
                 break;
             case 1:
-                mPreference.setSummary("Light");
+                mPreference.setSummary(R.string.vibration_intensity_light);
                 break;
             case 2:
-                mPreference.setSummary("Medium");
+                mPreference.setSummary(R.string.vibration_intensity_medium);
                 break;
             case 3:
-                mPreference.setSummary("Strong");
+                mPreference.setSummary(R.string.vibration_intensity_strong);
                 break;
             case 4:
-                mPreference.setSummary("Custom");
+                mPreference.setSummary(R.string.vibration_intensity_custom);
                 break;
         }
     }

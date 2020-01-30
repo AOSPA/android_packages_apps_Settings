@@ -62,7 +62,7 @@ public class VibrationIntensityDialog extends InstrumentedDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         int dialogTitle;
-        
+
         mIsRinger = mPreferenceKey.equals(RING_VIBRATION_INTENSITY);
         final ContentResolver mContentResolver = mContext.getContentResolver();
 
@@ -88,7 +88,7 @@ public class VibrationIntensityDialog extends InstrumentedDialogFragment {
         }
 
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            
+
             @Override
             public void onProgressChanged (SeekBar seekBar, int progress, boolean fromUser) {
                 mProgress = progress;
@@ -117,24 +117,24 @@ public class VibrationIntensityDialog extends InstrumentedDialogFragment {
     private void setText(TextView txtView, Preference preference, int status) {
         switch(status) {
             case 0:
-                txtView.setText("Disabled");
-                preference.setSummary("Disabled");
+                txtView.setText(R.string.vibration_intensity_disabled);
+                preference.setSummary(R.string.vibration_intensity_disabled);
                 break;
             case 1:
-                txtView.setText("Light");
-                preference.setSummary("Light");
+                txtView.setText(R.string.vibration_intensity_light);
+                preference.setSummary(R.string.vibration_intensity_light);
                 break;
             case 2:
-                txtView.setText("Medium");
-                preference.setSummary("Medium");
+                txtView.setText(R.string.vibration_intensity_medium);
+                preference.setSummary(R.string.vibration_intensity_medium);
                 break;
             case 3:
-                txtView.setText("Strong");
-                preference.setSummary("Strong");
+                txtView.setText(R.string.vibration_intensity_strong);
+                preference.setSummary(R.string.vibration_intensity_strong);
                 break;
             case 4:
-                txtView.setText("Custom");
-                preference.setSummary("Custom");
+                txtView.setText(R.string.vibration_intensity_custom);
+                preference.setSummary(R.string.vibration_intensity_custom);
                 break;
         }
     }
