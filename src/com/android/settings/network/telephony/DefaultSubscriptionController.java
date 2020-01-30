@@ -24,6 +24,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SubscriptionsChangeListener;
@@ -76,11 +77,19 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
     @Override
     public int getAvailabilityStatus() {
         final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
-        if (subs.size() > 1) {
-            return AVAILABLE;
+        boolean visible;
+
+        // If vendor SimSettings app is present on the device, then the setting for the default
+        // SIM preference for calls/SMS will be handled by that app.
+        if (Utils.isSimSettingsApkAvailable()) {
+            visible = false;
+        } else if (subs.size() > 1) {
+            visible = true;
         } else {
-            return CONDITIONALLY_UNAVAILABLE;
+            visible = false;
         }
+
+        return visible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @OnLifecycleEvent(ON_RESUME)
