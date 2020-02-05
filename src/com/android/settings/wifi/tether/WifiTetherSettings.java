@@ -231,8 +231,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         final int band = mApBandPreferenceController.getBandIndex();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
         if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
-            configBuilder.setWpa2Passphrase(
-                    mPasswordPreferenceController.getPasswordValidated(securityType));
+            configBuilder.setPassphrase(
+                    mPasswordPreferenceController.getPasswordValidated(securityType),
+                    SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
         }
         if (securityType == SoftApConfiguration.SECURITY_TYPE_OWE
                 && band == SoftApConfiguration.BAND_ANY) {

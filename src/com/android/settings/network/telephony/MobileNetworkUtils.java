@@ -50,17 +50,25 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
-import com.android.internal.telephony.Phone;
-import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.CDMA;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.EVDO;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.GSM;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.LTE;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.NR;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.RAF_TD_SCDMA;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.RAF_UNKNOWN;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.WCDMA;
 
 public class MobileNetworkUtils {
 
@@ -99,12 +107,12 @@ public class MobileNetworkUtils {
      * Returns true if Wifi calling is enabled for at least one subscription.
      */
     public static boolean isWifiCallingEnabled(Context context) {
-        final SubscriptionManager subManager = context.getSystemService(SubscriptionManager.class);
-        if (subManager == null) {
-            Log.e(TAG, "isWifiCallingEnabled: couldn't get system service.");
+        final int[] subIds = getActiveSubscriptionIdList(context);
+        if (ArrayUtils.isEmpty(subIds)) {
+            Log.d(TAG, "isWifiCallingEnabled: subIds is empty");
             return false;
         }
-        for (int subId : subManager.getActiveSubscriptionIdList()) {
+        for (int subId : subIds) {
             if (isWifiCallingEnabled(context, subId)) {
                 return true;
             }
@@ -298,7 +306,7 @@ public class MobileNetworkUtils {
                 CarrierConfigManager.class).getConfigForSubId(subId);
 
 
-        if (telephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_CDMA) {
+        if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
             return true;
         } else if (carrierConfig != null
                 && !carrierConfig.getBoolean(
@@ -311,9 +319,9 @@ public class MobileNetworkUtils {
             final int settingsNetworkMode = android.provider.Settings.Global.getInt(
                     context.getContentResolver(),
                     android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                    Phone.PREFERRED_NT_MODE);
-            if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA
-                    || settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO) {
+                    TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+            if (settingsNetworkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA
+                    || settingsNetworkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO) {
                 return true;
             }
 
@@ -338,10 +346,10 @@ public class MobileNetworkUtils {
         final int networkMode = android.provider.Settings.Global.getInt(
                 context.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                Phone.PREFERRED_NT_MODE);
+                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
         if (isWorldMode(context, subId)) {
-            if (networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
-                    || networkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
+            if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO
+                    || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA) {
                 return true;
             } else if (shouldSpeciallyUpdateGsmCdma(context, subId)) {
                 return true;
@@ -357,7 +365,7 @@ public class MobileNetworkUtils {
         final PersistableBundle carrierConfig = context.getSystemService(
                 CarrierConfigManager.class).getConfigForSubId(subId);
 
-        if (telephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_GSM) {
+        if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM) {
             return true;
         } else if (carrierConfig != null
                 && !carrierConfig.getBoolean(
@@ -403,8 +411,8 @@ public class MobileNetworkUtils {
         final int networkMode = android.provider.Settings.Global.getInt(
                 context.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                Phone.PREFERRED_NT_MODE);
-        if (networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
+                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+        if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO
                 && isWorldMode(context, subId)) {
             return false;
         }
@@ -417,7 +425,7 @@ public class MobileNetworkUtils {
         }
 
         if (isWorldMode(context, subId)) {
-            if (networkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
+            if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA) {
                 return true;
             }
         }
@@ -465,9 +473,7 @@ public class MobileNetworkUtils {
      * otherwise return {@link SubscriptionManager#INVALID_SUBSCRIPTION_ID}
      */
     public static int getSearchableSubscriptionId(Context context) {
-        final SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
-        final int subIds[] = subscriptionManager.getActiveSubscriptionIdList();
+        final int[] subIds = getActiveSubscriptionIdList(context);
 
         return subIds.length >= 1 ? subIds[0] : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
@@ -484,14 +490,12 @@ public class MobileNetworkUtils {
      */
     public static int getAvailability(Context context, int defSubId,
             TelephonyAvailabilityCallback callback) {
-        final SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
         if (defSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             // If subId has been set, return the corresponding status
             return callback.getAvailabilityStatus(defSubId);
         } else {
             // Otherwise, search whether there is one subId in device that support this preference
-            final int[] subIds = subscriptionManager.getActiveSubscriptionIdList();
+            final int[] subIds = getActiveSubscriptionIdList(context);
             if (ArrayUtils.isEmpty(subIds)) {
                 return callback.getAvailabilityStatus(
                         SubscriptionManager.INVALID_SUBSCRIPTION_ID);
@@ -521,13 +525,13 @@ public class MobileNetworkUtils {
         final int networkMode = android.provider.Settings.Global.getInt(
                 context.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                Phone.PREFERRED_NT_MODE);
-        if (networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_WCDMA
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA) {
+                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+        if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA) {
             if (!isTdscdmaSupported(context, subId) && isWorldMode(context, subId)) {
                 return true;
             }
@@ -638,5 +642,191 @@ public class MobileNetworkUtils {
         final List<String> unsupportedCountries =
                 Arrays.asList(TextUtils.split(countriesListString.toLowerCase(), ","));
         return unsupportedCountries.contains(country);
+    }
+
+    private static int[] getActiveSubscriptionIdList(Context context) {
+        final SubscriptionManager subscriptionManager = context.getSystemService(
+                SubscriptionManager.class);
+        final List<SubscriptionInfo> subInfoList =
+                subscriptionManager.getActiveSubscriptionInfoList();
+        if (subInfoList == null) {
+            return new int[0];
+        }
+        int[] activeSubIds = new int[subInfoList.size()];
+        int i = 0;
+        for (SubscriptionInfo subInfo : subInfoList) {
+            activeSubIds[i] = subInfo.getSubscriptionId();
+            i++;
+        }
+        return activeSubIds;
+    }
+
+    /**
+     *  Imported from {@link android.telephony.RadioAccessFamily}
+     */
+    public static long getRafFromNetworkType(int type) {
+        switch (type) {
+            case TelephonyManagerConstants.NETWORK_MODE_WCDMA_PREF:
+                return GSM | WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_GSM_ONLY:
+                return GSM;
+            case TelephonyManagerConstants.NETWORK_MODE_WCDMA_ONLY:
+                return WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_GSM_UMTS:
+                return GSM | WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_CDMA_EVDO:
+                return CDMA | EVDO;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO:
+                return LTE | CDMA | EVDO;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA:
+                return LTE | GSM | WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
+                return LTE | CDMA | EVDO | GSM | WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY:
+                return LTE;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_WCDMA:
+                return LTE | WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_CDMA_NO_EVDO:
+                return CDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_EVDO_NO_CDMA:
+                return EVDO;
+            case TelephonyManagerConstants.NETWORK_MODE_GLOBAL:
+                return GSM | WCDMA | CDMA | EVDO;
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_ONLY:
+                return RAF_TD_SCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_WCDMA:
+                return RAF_TD_SCDMA | WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA:
+                return LTE | RAF_TD_SCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM:
+                return RAF_TD_SCDMA | GSM;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM:
+                return LTE | RAF_TD_SCDMA | GSM;
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA:
+                return RAF_TD_SCDMA | GSM | WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA:
+                return LTE | RAF_TD_SCDMA | WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA:
+                return LTE | RAF_TD_SCDMA | GSM | WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
+                return RAF_TD_SCDMA | CDMA | EVDO | GSM | WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
+                return LTE | RAF_TD_SCDMA | CDMA | EVDO | GSM | WCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_ONLY):
+                return NR;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE):
+                return NR | LTE;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO):
+                return NR | LTE | CDMA | EVDO;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA):
+                return NR | LTE | GSM | WCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA):
+                return NR | LTE | CDMA | EVDO | GSM | WCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_WCDMA):
+                return NR | LTE | WCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA):
+                return NR | LTE | RAF_TD_SCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM):
+                return NR | LTE | RAF_TD_SCDMA | GSM;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_WCDMA):
+                return NR | LTE | RAF_TD_SCDMA | WCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA):
+                return NR | LTE | RAF_TD_SCDMA | GSM | WCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA):
+                return NR | LTE | RAF_TD_SCDMA | CDMA | EVDO | GSM | WCDMA;
+            default:
+                return RAF_UNKNOWN;
+        }
+    }
+
+    /**
+     *  Imported from {@link android.telephony.RadioAccessFamily}
+     */
+    public static int getNetworkTypeFromRaf(int raf) {
+        raf = getAdjustedRaf(raf);
+
+        switch (raf) {
+            case (GSM | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_WCDMA_PREF;
+            case GSM:
+                return TelephonyManagerConstants.NETWORK_MODE_GSM_ONLY;
+            case WCDMA:
+                return TelephonyManagerConstants.NETWORK_MODE_WCDMA_ONLY;
+            case (CDMA | EVDO):
+                return TelephonyManagerConstants.NETWORK_MODE_CDMA_EVDO;
+            case (LTE | CDMA | EVDO):
+                return TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO;
+            case (LTE | GSM | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA;
+            case (LTE | CDMA | EVDO | GSM | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA;
+            case LTE:
+                return TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY;
+            case (LTE | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_LTE_WCDMA;
+            case CDMA:
+                return TelephonyManagerConstants.NETWORK_MODE_CDMA_NO_EVDO;
+            case EVDO:
+                return TelephonyManagerConstants.NETWORK_MODE_EVDO_NO_CDMA;
+            case (GSM | WCDMA | CDMA | EVDO):
+                return TelephonyManagerConstants.NETWORK_MODE_GLOBAL;
+            case RAF_TD_SCDMA:
+                return TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_ONLY;
+            case (RAF_TD_SCDMA | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_WCDMA;
+            case (LTE | RAF_TD_SCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA;
+            case (RAF_TD_SCDMA | GSM):
+                return TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM;
+            case (LTE | RAF_TD_SCDMA | GSM):
+                return TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM;
+            case (RAF_TD_SCDMA | GSM | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA;
+            case (LTE | RAF_TD_SCDMA | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA;
+            case (LTE | RAF_TD_SCDMA | GSM | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA;
+            case (RAF_TD_SCDMA | CDMA | EVDO | GSM | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_CDMA_EVDO_GSM_WCDMA;
+            case (LTE | RAF_TD_SCDMA | CDMA | EVDO | GSM | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA;
+            case (NR):
+                return TelephonyManagerConstants.NETWORK_MODE_NR_ONLY;
+            case (NR | LTE):
+                return TelephonyManagerConstants.NETWORK_MODE_NR_LTE;
+            case (NR | LTE | CDMA | EVDO):
+                return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO;
+            case (NR | LTE | GSM | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
+            case (NR | LTE | CDMA | EVDO | GSM | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA;
+            case (NR | LTE | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_WCDMA;
+            case (NR | LTE | RAF_TD_SCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA;
+            case (NR | LTE | RAF_TD_SCDMA | GSM):
+                return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM;
+            case (NR | LTE | RAF_TD_SCDMA | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_WCDMA;
+            case (NR | LTE | RAF_TD_SCDMA | GSM | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA;
+            case (NR | LTE | RAF_TD_SCDMA | CDMA | EVDO | GSM | WCDMA):
+                return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA;
+            default:
+                return TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
+        }
+    }
+
+    /**
+     *  Imported from {@link android.telephony.RadioAccessFamily}
+     */
+    private static int getAdjustedRaf(int raf) {
+        raf = ((GSM & raf) > 0) ? (GSM | raf) : raf;
+        raf = ((WCDMA & raf) > 0) ? (WCDMA | raf) : raf;
+        raf = ((CDMA & raf) > 0) ? (CDMA | raf) : raf;
+        raf = ((EVDO & raf) > 0) ? (EVDO | raf) : raf;
+        raf = ((LTE & raf) > 0) ? (LTE | raf) : raf;
+        raf = ((NR & raf) > 0) ? (NR | raf) : raf;
+        return raf;
     }
 }

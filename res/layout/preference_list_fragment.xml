@@ -52,7 +52,7 @@
         android:visibility="gone" />
 
     <LinearLayout
-        android:theme="@style/Theme.MaterialComponents.DayNight"
+        android:theme="@style/Theme.TabTheme"
         android:id="@+id/tab_container"
         android:clipToPadding="true"
         android:clipChildren="true"
@@ -66,6 +66,7 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layoutDirection="ltr"
             app:tabMaxWidth="0dp"
             app:tabGravity="fill"
             app:tabMode="fixed"

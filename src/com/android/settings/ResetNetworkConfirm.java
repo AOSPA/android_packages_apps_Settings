@@ -47,12 +47,9 @@ import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.ims.ImsManager;
-import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.network.ApnSettings;
-import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -136,8 +133,6 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                 }
             }
 
-            ImsManager.getInstance(mContext,
-                    SubscriptionUtil.getPhoneId(mContext, mSubId)).factoryReset();
             restoreDefaultApn(mContext);
             if (mEraseEsim) {
                 return RecoverySystem.wipeEuiccData(mContext, mPackageName);
@@ -212,7 +207,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
     private void restoreDefaultApn(Context context) {
         Uri uri = Uri.parse(ApnSettings.RESTORE_CARRIERS_URI);
 
-        if (SubscriptionManager.isUsableSubIdValue(mSubId)) {
+        if (SubscriptionManager.isUsableSubscriptionId(mSubId)) {
             uri = Uri.withAppendedPath(uri, "subId/" + String.valueOf(mSubId));
         }
 
@@ -263,7 +258,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            mSubId = args.getInt(PhoneConstants.SUBSCRIPTION_KEY,
+            mSubId = args.getInt(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID);
             mEraseEsim = args.getBoolean(MasterClear.ERASE_ESIMS_EXTRA);
         }

@@ -79,7 +79,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         super.onCreate(icicle);
         Context context = getContext();
 
-        // enable ProxySubscriptionMgr with Lifecycle support for all controllers
+        // Enable ProxySubscriptionMgr with Lifecycle support for all controllers
         // live within this fragment
         mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(context);
         mProxySubscriptionMgr.setLifecycle(getLifecycle());
