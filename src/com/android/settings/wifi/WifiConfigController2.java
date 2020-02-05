@@ -276,7 +276,7 @@ public class WifiConfigController2 implements TextWatcher,
                 mHiddenSettingsSpinner.getSelectedItemPosition() == NOT_HIDDEN_NETWORK
                         ? View.GONE
                         : View.VISIBLE);
-        mSecurityInPosition = new Integer[WifiEntry.SECURITY_MAX_VAL];
+        mSecurityInPosition = new Integer[WifiEntry.NUM_SECURITY_TYPES];
 
         if (mWifiEntry == null) { // new network
             configureSecuritySpinner();
@@ -304,11 +304,12 @@ public class WifiConfigController2 implements TextWatcher,
                 }
                 mPrivacySettingsSpinner.setSelection(prefMacValue);
 
-                if (config.getIpAssignment() == IpAssignment.STATIC) {
+                if (config.getIpConfiguration().getIpAssignment() == IpAssignment.STATIC) {
                     mIpSettingsSpinner.setSelection(STATIC_IP);
                     showAdvancedFields = true;
                     // Display IP address.
-                    StaticIpConfiguration staticConfig = config.getStaticIpConfiguration();
+                    StaticIpConfiguration staticConfig = config.getIpConfiguration()
+                            .getStaticIpConfiguration();
                     if (staticConfig != null && staticConfig.ipAddress != null) {
                         addRow(group, R.string.wifi_ip_address,
                                 staticConfig.ipAddress.getAddress().getHostAddress());
@@ -322,10 +323,11 @@ public class WifiConfigController2 implements TextWatcher,
                     showAdvancedFields = true;
                 }
 
-                if (config.getProxySettings() == ProxySettings.STATIC) {
+                ProxySettings proxySettings = config.getIpConfiguration().getProxySettings();
+                if (proxySettings == ProxySettings.STATIC) {
                     mProxySettingsSpinner.setSelection(PROXY_STATIC);
                     showAdvancedFields = true;
-                } else if (config.getProxySettings() == ProxySettings.PAC) {
+                } else if (proxySettings == ProxySettings.PAC) {
                     mProxySettingsSpinner.setSelection(PROXY_PAC);
                     showAdvancedFields = true;
                 } else {
@@ -411,7 +413,7 @@ public class WifiConfigController2 implements TextWatcher,
                     }
 
                     addRow(group, R.string.wifi_security,
-                            WifiEntryShell.getSecurityString(mWifiEntry, false));
+                            mWifiEntry.getSecurityString(false /* concise */));
                     mView.findViewById(R.id.ip_fields).setVisibility(View.GONE);
                 }
                 if (mWifiEntry.isSaved()
@@ -1328,7 +1330,8 @@ public class WifiConfigController2 implements TextWatcher,
                 mDns2View.addTextChangedListener(this);
             }
             if (config != null) {
-                StaticIpConfiguration staticConfig = config.getStaticIpConfiguration();
+                StaticIpConfiguration staticConfig = config.getIpConfiguration()
+                        .getStaticIpConfiguration();
                 if (staticConfig != null) {
                     if (staticConfig.ipAddress != null) {
                         mIpAddressView.setText(
