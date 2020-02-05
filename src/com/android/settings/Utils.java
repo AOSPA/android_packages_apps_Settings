@@ -864,6 +864,15 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Return whether or not the user should have a SIM Cards option in Settings.
+     */
+    public static boolean showSimCardTile(Context context) {
+        final TelephonyManager tm =
+                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        return tm.getSimCount() > 1;
+    }
+
+    /**
      * Tries to initalize a volume with the given bundle. If it is a valid, private, and readable
      * {@link VolumeInfo}, it is returned. If it is not valid, null is returned.
      */
