@@ -16,6 +16,7 @@
 
 package com.android.settings.development.compat;
 
+import static com.android.internal.compat.OverrideAllowedState.ALLOWED;
 import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_COMPAT_CHANGE_APP;
 
 import android.app.Activity;
@@ -37,14 +38,13 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreference;
 
+import com.android.internal.compat.AndroidBuildClassifier;
 import com.android.internal.compat.CompatibilityChangeConfig;
 import com.android.internal.compat.CompatibilityChangeInfo;
 import com.android.internal.compat.IPlatformCompat;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.development.AppPicker;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,6 @@ import java.util.TreeMap;
 /**
  * Dashboard for Platform Compat preferences.
  */
-@SearchIndexable
 public class PlatformCompatDashboard extends DashboardFragment {
     private static final String TAG = "PlatformCompatDashboard";
     private static final String COMPAT_APP = "compat_app";
@@ -63,6 +62,8 @@ public class PlatformCompatDashboard extends DashboardFragment {
     private IPlatformCompat mPlatformCompat;
 
     private CompatibilityChangeInfo[] mChanges;
+
+    private AndroidBuildClassifier mAndroidBuildClassifier = new AndroidBuildClassifier();
 
     @VisibleForTesting
     String mSelectedApp;
@@ -117,17 +118,21 @@ public class PlatformCompatDashboard extends DashboardFragment {
         if (requestCode == REQUEST_COMPAT_CHANGE_APP) {
             if (resultCode == Activity.RESULT_OK) {
                 mSelectedApp = data.getAction();
-                addPreferences();
+                try {
+                    final ApplicationInfo applicationInfo = getApplicationInfo();
+                    addPreferences(applicationInfo);
+                } catch (PackageManager.NameNotFoundException e) {
+                    startAppPicker();
+                }
             }
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void addPreferences() {
+    private void addPreferences(ApplicationInfo applicationInfo) {
         getPreferenceScreen().removeAll();
-        getPreferenceScreen().addPreference(
-                createAppPreference(getApplicationInfo().loadIcon(getPackageManager())));
+        getPreferenceScreen().addPreference(createAppPreference(applicationInfo));
         // Differentiate compatibility changes into default enabled, default disabled and enabled
         // after target sdk.
         final CompatibilityChangeConfig configMappings = getAppChangeMappings();
@@ -164,7 +169,7 @@ public class PlatformCompatDashboard extends DashboardFragment {
         try {
             final ApplicationInfo applicationInfo = getApplicationInfo();
             return getPlatformCompat().getAppConfig(applicationInfo);
-        } catch (RemoteException e) {
+        } catch (RemoteException | PackageManager.NameNotFoundException e) {
             throw new RuntimeException("Could not get app config!", e);
         }
     }
@@ -183,7 +188,15 @@ public class PlatformCompatDashboard extends DashboardFragment {
                 change.getName() != null ? change.getName() : "Change_" + change.getId();
         item.setSummary(changeName);
         item.setKey(changeName);
-        item.setEnabled(true);
+        boolean shouldEnable = true;
+        try {
+            shouldEnable = getPlatformCompat().getOverrideValidator()
+                           .getOverrideAllowedState(change.getId(), mSelectedApp)
+                           .state == ALLOWED;
+        } catch (RemoteException e) {
+            throw new RuntimeException("Could not check if change can be overridden for app.", e);
+        }
+        item.setEnabled(shouldEnable);
         item.setChecked(currentValue);
         item.setOnPreferenceChangeListener(
                 new CompatChangePreferenceChangeListener(change.getId()));
@@ -195,12 +208,8 @@ public class PlatformCompatDashboard extends DashboardFragment {
      *
      * @return an {@link ApplicationInfo} instance.
      */
-    ApplicationInfo getApplicationInfo() {
-        try {
-            return getPackageManager().getApplicationInfo(mSelectedApp, 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            throw new RuntimeException("Could not get ApplicationInfo for selected app!", e);
-        }
+    ApplicationInfo getApplicationInfo() throws PackageManager.NameNotFoundException {
+        return getPackageManager().getApplicationInfo(mSelectedApp, 0);
     }
 
     /**
@@ -209,13 +218,13 @@ public class PlatformCompatDashboard extends DashboardFragment {
      * <p>The {@link Preference} contains the icon, package name and target SDK for the selected
      * app. Selecting this preference will also re-trigger the app selection dialog.</p>
      */
-    Preference createAppPreference(Drawable icon) {
-        final ApplicationInfo applicationInfo = getApplicationInfo();
-        final Preference appPreference = new Preference(getPreferenceScreen().getContext());
+    Preference createAppPreference(ApplicationInfo applicationInfo) {
+        final Context context = getPreferenceScreen().getContext();
+        final Drawable icon = applicationInfo.loadIcon(context.getPackageManager());
+        final Preference appPreference = new Preference(context);
         appPreference.setIcon(icon);
-        appPreference.setSummary(mSelectedApp
-                + " SDK "
-                + applicationInfo.targetSdkVersion);
+        appPreference.setSummary(getString(R.string.platform_compat_selected_app_summary,
+                                         mSelectedApp, applicationInfo.targetSdkVersion));
         appPreference.setKey(mSelectedApp);
         appPreference.setOnPreferenceClickListener(
                 preference -> {
@@ -246,6 +255,11 @@ public class PlatformCompatDashboard extends DashboardFragment {
 
     private void startAppPicker() {
         final Intent intent = new Intent(getContext(), AppPicker.class);
+        // If build is neither userdebug nor eng, only include debuggable apps
+        final boolean debuggableBuild = mAndroidBuildClassifier.isDebuggableBuild();
+        if (!debuggableBuild) {
+            intent.putExtra(AppPicker.EXTRA_DEBUGGABLE, true /* value */);
+        }
         startActivityForResult(intent, REQUEST_COMPAT_CHANGE_APP);
     }
 
@@ -276,7 +290,4 @@ public class PlatformCompatDashboard extends DashboardFragment {
             return true;
         }
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.platform_compat_settings);
 }

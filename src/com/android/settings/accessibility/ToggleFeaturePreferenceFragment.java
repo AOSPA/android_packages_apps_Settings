@@ -24,10 +24,12 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -38,12 +40,14 @@ import com.android.settings.widget.ToggleSwitch;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 public abstract class ToggleFeaturePreferenceFragment extends SettingsPreferenceFragment {
 
     protected SwitchBar mSwitchBar;
     protected ToggleSwitch mToggleSwitch;
-
+    protected ShortcutPreference mShortcutPreference;
+    protected Preference mSettingsPreference;
     protected String mPreferenceKey;
 
     protected CharSequence mSettingsTitle;
@@ -96,16 +100,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         updateSwitchBarText(mSwitchBar);
 
         PreferenceScreen preferenceScreen = getPreferenceScreen();
-
-        // Show the "Settings" menu as if it were a preference screen
-        if (mSettingsTitle != null && mSettingsIntent != null) {
-            Preference settingsPref = new Preference(preferenceScreen.getContext());
-            settingsPref.setTitle(mSettingsTitle);
-            settingsPref.setIconSpaceReserved(true);
-            settingsPref.setIntent(mSettingsIntent);
-            preferenceScreen.addPreference(settingsPref);
-        }
-
         if (mImageUri != null) {
             final AnimatedImagePreference animatedImagePreference = new AnimatedImagePreference(
                     preferenceScreen.getContext());
@@ -114,25 +108,55 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             preferenceScreen.addPreference(animatedImagePreference);
         }
 
-        if (mStaticDescription != null) {
-            final StaticTextPreference staticTextPreference = new StaticTextPreference(
-                    preferenceScreen.getContext());
-            staticTextPreference.setSummary(mStaticDescription);
-            preferenceScreen.addPreference(staticTextPreference);
+        // Show the "Settings" menu as if it were a preference screen.
+        if (mSettingsTitle != null && mSettingsIntent != null) {
+            mSettingsPreference = new Preference(preferenceScreen.getContext());
+            mSettingsPreference.setTitle(mSettingsTitle);
+            mSettingsPreference.setIconSpaceReserved(true);
+            mSettingsPreference.setIntent(mSettingsIntent);
         }
 
-        if (mHtmlDescription != null) {
-            // For accessibility service, avoid malicious links made by third party developer
-            final List<String> unsupportedTagList = new ArrayList<>();
-            unsupportedTagList.add(ANCHOR_TAG);
+        if (mSettingsPreference != null || mShortcutPreference != null) {
+            final PreferenceCategory category = new PreferenceCategory(getPrefContext());
+            category.setTitle(R.string.accessibility_screen_option);
+            preferenceScreen.addPreference(category);
 
-            final HtmlTextPreference htmlTextPreference = new HtmlTextPreference(
-                    preferenceScreen.getContext());
-            htmlTextPreference.setSummary(mHtmlDescription);
-            htmlTextPreference.setImageGetter(mImageGetter);
-            htmlTextPreference.setUnsupportedTagList(unsupportedTagList);
-            htmlTextPreference.setDividerAllowedAbove(true);
-            preferenceScreen.addPreference(htmlTextPreference);
+            if (mShortcutPreference != null) {
+                category.addPreference(mShortcutPreference);
+            }
+
+            if (mSettingsPreference != null) {
+                category.addPreference(mSettingsPreference);
+            }
+        }
+
+        if (mStaticDescription != null ||  mHtmlDescription != null) {
+            final PreferenceCategory footerCategory = new PreferenceCategory(getPrefContext());
+            updateFooterTitle(footerCategory);
+            preferenceScreen.addPreference(footerCategory);
+
+            if (mStaticDescription != null) {
+                final StaticTextPreference staticTextPreference = new StaticTextPreference(
+                        preferenceScreen.getContext());
+                staticTextPreference.setSummary(mStaticDescription);
+                staticTextPreference.setSelectable(/* selectable= */ false);
+                footerCategory.addPreference(staticTextPreference);
+            }
+
+            if (mHtmlDescription != null) {
+                // For accessibility service, avoid malicious links made by third party developer.
+                final List<String> unsupportedTagList = new ArrayList<>();
+                unsupportedTagList.add(ANCHOR_TAG);
+
+                final HtmlTextPreference htmlTextPreference = new HtmlTextPreference(
+                        preferenceScreen.getContext());
+                htmlTextPreference.setSummary(mHtmlDescription);
+                htmlTextPreference.setImageGetter(mImageGetter);
+                htmlTextPreference.setUnsupportedTagList(unsupportedTagList);
+                htmlTextPreference.setDividerAllowedAbove(true);
+                htmlTextPreference.setSelectable(/* selectable= */ false);
+                footerCategory.addPreference(htmlTextPreference);
+            }
         }
     }
 
@@ -145,14 +169,21 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
         removeActionBarToggleSwitch();
     }
 
     protected void updateSwitchBarText(SwitchBar switchBar) {
-        // Implement this to provide meaningful text in switch bar
+        // Implement this to provide meaningful text in switch bar.
         switchBar.setSwitchBarText(R.string.accessibility_service_master_switch_title,
                 R.string.accessibility_service_master_switch_title);
+    }
+
+    protected void updateFooterTitle(PreferenceCategory category) {
+        // Implement this to provide meaningful text in the footer.
+        if (category != null) {
+            category.setTitle(getString(R.string.accessibility_footer_title,
+                    mComponentName.getPackageName()));
+        }
     }
 
     protected abstract void onPreferenceToggled(String preferenceKey, boolean enabled);
@@ -226,5 +257,50 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mImageGetterCacheView.setImageURI(null);
         mImageGetterCacheView.setImageDrawable(null);
         return drawable;
+    }
+
+    static final class AccessibilityUserShortcutType {
+        private static final char COMPONENT_NAME_SEPARATOR = ':';
+        private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
+                new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
+
+        private String mComponentName;
+        private int mUserShortcutType;
+
+        AccessibilityUserShortcutType(String componentName, int userShortcutType) {
+            this.mComponentName = componentName;
+            this.mUserShortcutType = userShortcutType;
+        }
+
+        AccessibilityUserShortcutType(String flattenedString) {
+            sStringColonSplitter.setString(flattenedString);
+            if (sStringColonSplitter.hasNext()) {
+                this.mComponentName = sStringColonSplitter.next();
+                this.mUserShortcutType = Integer.parseInt(sStringColonSplitter.next());
+            }
+        }
+
+        String getComponentName() {
+            return mComponentName;
+        }
+
+        void setComponentName(String componentName) {
+            this.mComponentName = componentName;
+        }
+
+        int getUserShortcutType() {
+            return mUserShortcutType;
+        }
+
+        void setUserShortcutType(int userShortcutType) {
+            this.mUserShortcutType = userShortcutType;
+        }
+
+        String flattenToString() {
+            final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
+            joiner.add(mComponentName);
+            joiner.add(String.valueOf(mUserShortcutType));
+            return joiner.toString();
+        }
     }
 }

@@ -37,9 +37,8 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.telephony.Phone;
-import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
+import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 /**
  * Preference controller for "Preferred network mode"
@@ -81,8 +80,6 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     @Override
     public int getAvailabilityStatus(int subId) {
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
-        final TelephonyManager telephonyManager = TelephonyManager
-                .from(mContext).createForSubscriptionId(subId);
         boolean visible;
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             visible = false;
@@ -137,12 +134,13 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object object) {
-        final int settingsMode = Integer.parseInt((String) object);
+        final int newPreferredNetworkMode = Integer.parseInt((String) object);
 
-        if (mTelephonyManager.setPreferredNetworkType(mSubId, settingsMode)) {
+        if (mTelephonyManager.setPreferredNetworkTypeBitmask(
+                MobileNetworkUtils.getRafFromNetworkType(newPreferredNetworkMode))) {
             Settings.Global.putInt(mContext.getContentResolver(),
                     Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                    settingsMode);
+                    newPreferredNetworkMode);
             return true;
         }
 
@@ -155,9 +153,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
 
-        final boolean isLteOnCdma =
-                mTelephonyManager.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE;
-        mIsGlobalCdma = isLteOnCdma
+        mIsGlobalCdma = mTelephonyManager.isGlobalModeEnabled()
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
 
         lifecycle.addObserver(this);
@@ -166,67 +162,64 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     private int getPreferredNetworkMode() {
         return Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                Phone.PREFERRED_NT_MODE);
+                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
     }
 
     private int getPreferredNetworkModeSummaryResId(int NetworkMode) {
         switch (NetworkMode) {
-            case TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA:
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA:
                 return R.string.preferred_network_mode_tdscdma_gsm_wcdma_summary;
-            case TelephonyManager.NETWORK_MODE_TDSCDMA_GSM:
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM:
                 return R.string.preferred_network_mode_tdscdma_gsm_summary;
-            case TelephonyManager.NETWORK_MODE_WCDMA_PREF:
+            case TelephonyManagerConstants.NETWORK_MODE_WCDMA_PREF:
                 return R.string.preferred_network_mode_wcdma_perf_summary;
-            case TelephonyManager.NETWORK_MODE_GSM_ONLY:
+            case TelephonyManagerConstants.NETWORK_MODE_GSM_ONLY:
                 return R.string.preferred_network_mode_gsm_only_summary;
-            case TelephonyManager.NETWORK_MODE_TDSCDMA_WCDMA:
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_WCDMA:
                 return R.string.preferred_network_mode_tdscdma_wcdma_summary;
-            case TelephonyManager.NETWORK_MODE_WCDMA_ONLY:
+            case TelephonyManagerConstants.NETWORK_MODE_WCDMA_ONLY:
                 return R.string.preferred_network_mode_wcdma_only_summary;
-            case TelephonyManager.NETWORK_MODE_GSM_UMTS:
+            case TelephonyManagerConstants.NETWORK_MODE_GSM_UMTS:
                 return R.string.preferred_network_mode_gsm_wcdma_summary;
-            case TelephonyManager.NETWORK_MODE_CDMA_EVDO:
-                switch (mTelephonyManager.getLteOnCdmaMode()) {
-                    case PhoneConstants.LTE_ON_CDMA_TRUE:
-                        return R.string.preferred_network_mode_cdma_summary;
-                    default:
-                        return R.string.preferred_network_mode_cdma_evdo_summary;
-                }
-            case TelephonyManager.NETWORK_MODE_CDMA_NO_EVDO:
+            case TelephonyManagerConstants.NETWORK_MODE_CDMA_EVDO:
+                return mTelephonyManager.isGlobalModeEnabled()
+                        ? R.string.preferred_network_mode_cdma_summary
+                        : R.string.preferred_network_mode_cdma_evdo_summary;
+            case TelephonyManagerConstants.NETWORK_MODE_CDMA_NO_EVDO:
                 return R.string.preferred_network_mode_cdma_only_summary;
-            case TelephonyManager.NETWORK_MODE_EVDO_NO_CDMA:
+            case TelephonyManagerConstants.NETWORK_MODE_EVDO_NO_CDMA:
                 return R.string.preferred_network_mode_evdo_only_summary;
-            case TelephonyManager.NETWORK_MODE_LTE_TDSCDMA:
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA:
                 return R.string.preferred_network_mode_lte_tdscdma_summary;
-            case TelephonyManager.NETWORK_MODE_LTE_ONLY:
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY:
                 return R.string.preferred_network_mode_lte_summary;
-            case TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM:
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM:
                 return R.string.preferred_network_mode_lte_tdscdma_gsm_summary;
-            case TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA:
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA:
                 return R.string.preferred_network_mode_lte_tdscdma_gsm_wcdma_summary;
-            case TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA:
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA:
                 return R.string.preferred_network_mode_lte_gsm_wcdma_summary;
-            case TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO:
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO:
                 return R.string.preferred_network_mode_lte_cdma_evdo_summary;
-            case TelephonyManager.NETWORK_MODE_TDSCDMA_ONLY:
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_ONLY:
                 return R.string.preferred_network_mode_tdscdma_summary;
-            case TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
                 return R.string.preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary;
-            case TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
-                if (mTelephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_CDMA
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
+                if (mTelephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA
                         || mIsGlobalCdma
                         || MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
                     return R.string.preferred_network_mode_global_summary;
                 } else {
                     return R.string.preferred_network_mode_lte_summary;
                 }
-            case TelephonyManager.NETWORK_MODE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
                 return R.string.preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary;
-            case TelephonyManager.NETWORK_MODE_GLOBAL:
+            case TelephonyManagerConstants.NETWORK_MODE_GLOBAL:
                 return R.string.preferred_network_mode_cdma_evdo_gsm_wcdma_summary;
-            case TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_WCDMA:
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA:
                 return R.string.preferred_network_mode_lte_tdscdma_wcdma_summary;
-            case TelephonyManager.NETWORK_MODE_LTE_WCDMA:
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_WCDMA:
                 return R.string.preferred_network_mode_lte_wcdma_summary;
             default:
                 return R.string.preferred_network_mode_global_summary;

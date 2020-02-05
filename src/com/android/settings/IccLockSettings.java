@@ -24,17 +24,19 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.PixelFormat;
-import android.os.AsyncResult;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.telephony.SubscriptionInfo;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets.Type;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -49,10 +51,6 @@ import android.widget.Toast;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.telephony.CommandException;
-import com.android.internal.telephony.IccCardConstants.State;
-import com.android.internal.telephony.Phone;
-import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.network.ProxySubscriptionManager;
 
@@ -113,7 +111,6 @@ public class IccLockSettings extends SettingsPreferenceFragment
     private TabWidget mTabWidget;
     private ListView mListView;
 
-    private Phone mPhone;
     private ProxySubscriptionManager mProxySubscriptionMgr;
 
     private EditPinPreference mPinDialog;
@@ -122,24 +119,18 @@ public class IccLockSettings extends SettingsPreferenceFragment
     private Resources mRes;
 
     // For async handler to identify request type
-    private static final int MSG_ENABLE_ICC_PIN_COMPLETE = 100;
-    private static final int MSG_CHANGE_ICC_PIN_COMPLETE = 101;
     private static final int MSG_SIM_STATE_CHANGED = 102;
 
     // @see android.widget.Toast$TN
     private static final long LONG_DURATION_TIMEOUT = 7000;
 
+    private int mSubId;
+    private TelephonyManager mTelephonyManager;
+
     // For replies from IccCard interface
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
-            final AsyncResult ar = (AsyncResult) msg.obj;
             switch (msg.what) {
-                case MSG_ENABLE_ICC_PIN_COMPLETE:
-                    iccLockChanged(ar.exception == null, msg.arg1, ar.exception);
-                    break;
-                case MSG_CHANGE_ICC_PIN_COMPLETE:
-                    iccPinChanged(ar.exception == null, msg.arg1);
-                    break;
                 case MSG_SIM_STATE_CHANGED:
                     updatePreferences();
                     break;
@@ -159,11 +150,12 @@ public class IccLockSettings extends SettingsPreferenceFragment
     };
 
     // For top-level settings screen to query
-    static boolean isIccLockEnabled() {
-        return PhoneFactory.getDefaultPhone().getIccCard().getIccLockEnabled();
+    private boolean isIccLockEnabled() {
+        mTelephonyManager =  mTelephonyManager.createForSubscriptionId(mSubId);
+        return mTelephonyManager.isIccLockEnabled();
     }
 
-    static String getSummary(Context context) {
+    private String getSummary(Context context) {
         final Resources res = context.getResources();
         final String summary = isIccLockEnabled()
                 ? res.getString(R.string.sim_lock_on)
@@ -184,6 +176,8 @@ public class IccLockSettings extends SettingsPreferenceFragment
         // live within this fragment
         mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(getContext());
         mProxySubscriptionMgr.setLifecycle(getLifecycle());
+
+        mTelephonyManager = getContext().getSystemService(TelephonyManager.class);
 
         addPreferencesFromResource(R.xml.sim_lock_settings);
 
@@ -252,15 +246,13 @@ public class IccLockSettings extends SettingsPreferenceFragment
                             : subInfo.getDisplayName())));
             }
             final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(subInfoList, 0);
-
-            mPhone = (sir == null) ? null : PhoneFactory.getPhone(sir.getSimSlotIndex());
+            mSubId = sir.getSubscriptionId();
 
             if (savedInstanceState != null && savedInstanceState.containsKey(CURRENT_TAB)) {
                 mTabHost.setCurrentTabByTag(savedInstanceState.getString(CURRENT_TAB));
             }
             return view;
         } else {
-            mPhone = PhoneFactory.getDefaultPhone();
             return super.onCreateView(inflater, container, savedInstanceState);
         }
     }
@@ -272,26 +264,24 @@ public class IccLockSettings extends SettingsPreferenceFragment
     }
 
     private void updatePreferences() {
-        boolean pinToggleState = false;
-        boolean pinDialogState = false;
 
-        if (mPhone != null) {
-            State cardState = mPhone.getIccCard().getState();
-            if (cardState == State.READY || cardState == State.LOADED) {
-                // if SIM State is NOT READY, it is not possible to interact with UICC app
-                // for enabling/disabling PIN so greyout PIN options.
-                pinToggleState = true;
-                pinDialogState = true;
-            }
-        }
+        final List<SubscriptionInfo> subInfoList =
+                mProxySubscriptionMgr.getActiveSubscriptionsInfo();
+        final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(subInfoList, 0);
+        mSubId = sir.getSubscriptionId();
+
+        int cardState = mTelephonyManager.getSimState();
+        boolean canInteract = cardState == TelephonyManager.SIM_STATE_READY ||
+            cardState == TelephonyManager.SIM_STATE_LOADED;
 
         if (mPinDialog != null) {
-            mPinDialog.setEnabled(pinDialogState);
+            mPinDialog.setEnabled(sir != null && canInteract);
         }
         if (mPinToggle != null) {
-            mPinToggle.setEnabled(pinToggleState);
-            if (mPhone != null) {
-                mPinToggle.setChecked(mPhone.getIccCard().getIccLockEnabled());
+            mPinToggle.setEnabled(sir != null && canInteract);
+
+            if (sir != null) {
+                mPinToggle.setChecked(isIccLockEnabled());
             }
         }
     }
@@ -475,29 +465,52 @@ public class IccLockSettings extends SettingsPreferenceFragment
     private void tryChangeIccLockState() {
         // Try to change icc lock. If it succeeds, toggle the lock state and
         // reset dialog state. Else inject error message and show dialog again.
-        final Message callback = Message.obtain(mHandler, MSG_ENABLE_ICC_PIN_COMPLETE);
-        mPhone.getIccCard().setIccLockEnabled(mToState, mPin, callback);
+        new SetIccLockEnabled(mToState, mPin).execute();
         // Disable the setting till the response is received.
         mPinToggle.setEnabled(false);
     }
 
-    private void iccLockChanged(boolean success, int attemptsRemaining, Throwable exception) {
+    private class SetIccLockEnabled extends AsyncTask<Void, Void, Void> {
+        private final boolean mState;
+        private final String mPassword;
+        private int mAttemptsRemaining;
+
+        private SetIccLockEnabled(boolean state, String pin) {
+            mState = state;
+            mPassword = pin;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            mTelephonyManager =  mTelephonyManager.createForSubscriptionId(mSubId);
+            mAttemptsRemaining = mTelephonyManager.setIccLockEnabled(mState, mPassword);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (mAttemptsRemaining == TelephonyManager.CHANGE_ICC_LOCK_SUCCESS) {
+                iccLockChanged(true, mAttemptsRemaining);
+            } else {
+                iccLockChanged(false, mAttemptsRemaining);
+            }
+        }
+    }
+
+    private void iccLockChanged(boolean success, int attemptsRemaining) {
+        Log.d(TAG, "iccLockChanged: success = " + success);
         if (success) {
             mPinToggle.setChecked(mToState);
         } else {
-            if (exception instanceof CommandException) {
-                final CommandException.Error err =
-                        ((CommandException) exception).getCommandError();
-                if (err == CommandException.Error.PASSWORD_INCORRECT) {
-                    createCustomTextToast(getPinPasswordErrorMessage(attemptsRemaining));
+            if (attemptsRemaining >= 0) {
+                createCustomTextToast(getPinPasswordErrorMessage(attemptsRemaining));
+            } else {
+                if (mToState) {
+                    Toast.makeText(getContext(), mRes.getString(
+                            R.string.sim_pin_enable_failed), Toast.LENGTH_LONG).show();
                 } else {
-                    if (mToState) {
-                        Toast.makeText(getContext(), mRes.getString
-                               (R.string.sim_pin_enable_failed), Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getContext(), mRes.getString
-                               (R.string.sim_pin_disable_failed), Toast.LENGTH_LONG).show();
-                    }
+                    Toast.makeText(getContext(), mRes.getString(
+                            R.string.sim_pin_disable_failed), Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -536,6 +549,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
         params.format = PixelFormat.TRANSLUCENT;
         params.windowAnimations = com.android.internal.R.style.Animation_Toast;
         params.type = WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL;
+        params.setFitWindowInsetsTypes(params.getFitWindowInsetsTypes() & ~Type.statusBars());
         params.setTitle(errorMessage);
         params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
@@ -553,21 +567,46 @@ public class IccLockSettings extends SettingsPreferenceFragment
     }
 
     private void iccPinChanged(boolean success, int attemptsRemaining) {
+        Log.d(TAG, "iccPinChanged: success = " + success);
         if (!success) {
             createCustomTextToast(getPinPasswordErrorMessage(attemptsRemaining));
         } else {
             Toast.makeText(getContext(), mRes.getString(R.string.sim_change_succeeded),
                     Toast.LENGTH_SHORT)
                     .show();
-
         }
         resetDialogState();
     }
 
     private void tryChangePin() {
-        final Message callback = Message.obtain(mHandler, MSG_CHANGE_ICC_PIN_COMPLETE);
-        mPhone.getIccCard().changeIccLockPassword(mOldPin,
-                mNewPin, callback);
+        new ChangeIccLockPassword(mOldPin, mNewPin).execute();
+    }
+
+    private class ChangeIccLockPassword extends AsyncTask<Void, Void, Void> {
+        private final String mOldPwd;
+        private final String mNewPwd;
+        private int mAttemptsRemaining;
+
+        private ChangeIccLockPassword(String oldPin, String newPin) {
+            mOldPwd = oldPin;
+            mNewPwd = newPin;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
+            mAttemptsRemaining = mTelephonyManager.changeIccLockPassword(mOldPwd, mNewPwd);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (mAttemptsRemaining == TelephonyManager.CHANGE_ICC_LOCK_SUCCESS) {
+                iccPinChanged(true, mAttemptsRemaining);
+            } else {
+                iccPinChanged(false, mAttemptsRemaining);
+            }
+        }
     }
 
     private String getPinPasswordErrorMessage(int attemptsRemaining) {
@@ -622,8 +661,6 @@ public class IccLockSettings extends SettingsPreferenceFragment
             final int slotId = Integer.parseInt(tabId);
             final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(
                     mProxySubscriptionMgr.getActiveSubscriptionsInfo(), slotId);
-
-            mPhone = (sir == null) ? null : PhoneFactory.getPhone(sir.getSimSlotIndex());
 
             // The User has changed tab; update the body.
             updatePreferences();

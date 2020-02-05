@@ -319,7 +319,7 @@
     <string name="security_settings_summary" msgid="1627059516127354233">"Задаць Маё месцазнаходжанне, разблакаванне экрана, блакаванне SIM-карты, блакаванне сховішча ўліковых дадзеных"</string>
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"Устанавіць маё месцазнаходжанне, разблакаванне экрана, блакаванне сховішча ўліковых дадзеных"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Прыватнасць"</string>
-    <string name="disabled_by_administrator_summary" msgid="4181894719300350343">"Адключана адміністратарам"</string>
+    <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Недаступна"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Стан бяспекі"</string>
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"Блакіроўка экрана, распазнаванне твару"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"Блакіроўка экрана, адбітак пальца"</string>
@@ -377,7 +377,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Пры распазнаванні твару ў праграмах патрабуецца этап пацвярджэння"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Выдаліць даныя твару"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Наладзьце распазнаванне твару"</string>
-    <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Выкарыстоўвайце функцыю распазнавання твару, каб разблакіраваць прыладу, уваходзіць у праграмы і пацвярджаць плацяжы.\n\nМайце на ўвазе:\nГледзячы на тэлефон, вы можаце разблакіраваць яго, нават калі не маеце такога намеру.\n\nВаш тэлефон можа быць разблакіраваны кімсьці яшчэ, хто трымае яго на ўзроўні вашага твару, калі ў вас расплюшчаны вочы.\n\nВаш тэлефон можа быць разблакіраваны кімсьці, хто падобны на вас – напрыклад, гэта можа быць ваш брат ці сястра."</string>
+    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"Выкарыстоўвайце функцыю распазнавання твару, каб разблакіраваць прыладу, уваходзіць у праграмы і пацвярджаць плацяжы.\n\nМайце на ўвазе:\nГледзячы на тэлефон, вы можаце разблакіраваць яго, нават калі не маеце такога намеру.\n\nВаш тэлефон можа быць разблакіраваны кімсьці яшчэ, хто трымае яго на ўзроўні вашага твару.\n\nВаш тэлефон можа быць разблакіраваны кімсьці, хто падобны на вас – напрыклад, гэта можа быць ваш брат ці сястра."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Выкарыстоўвайце функцыю распазнавання твару, каб разблакіраваць прыладу, уваходзіць у праграмы і пацвярджаць плацяжы.\n\nМайце на ўвазе:\nВы можаце ненаўмысна разблакіраваць тэлефон, проста гледзячы на экран.\n\nВаш тэлефон можа быць разблакіраваны кімсьці яшчэ, хто трымае яго на ўзроўні вашага твару, нават калі ў вас заплюшчаны вочы.\n\nВаш тэлефон можа быць разблакіраваны кімсьці, хто падобны на вас – напрыклад, гэта можа быць ваш брат ці сястра."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Выдаліць даныя пра твар?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Даныя твару, якія выкарыстоўваюцца функцыяй распазнавання твару, будуць бяспечна выдалены. Пасля выдалення для разблакіроўкі тэлефона, уваходу ў праграмы і пацвярджэння плацяжоў трэба выкарыстоўваць PIN-код, узор разблакіроўкі ці пароль."</string>
@@ -800,8 +800,7 @@
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Націсніце тут, каб увайсці ў сетку"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> мбіт/с"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> мбіт/с"</string>
-    <!-- no translation found for link_speed (931786745741016446) -->
-    <skip />
+    <string name="link_speed" msgid="931786745741016446">"<xliff:g id="LINK_SPEED">%1$d</xliff:g> мбіт/с"</string>
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> хоча ўключыць Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> хоча адключыць Wi-Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Спраўдзіць байт-код праграм з адладкай"</string>
@@ -809,10 +808,8 @@
     <string name="show_refresh_rate" msgid="5742688821872354973">"Паказваць хуткасць"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Паказваць цяперашнюю хуткасць абнаўлення дысплэя"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <!-- no translation found for nfc_quick_toggle_summary (3622326550467939809) -->
-    <skip />
-    <!-- no translation found for nfc_quick_toggle_summary (1460871052409162980) -->
-    <skip />
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="3622326550467939809">"Дазволіць абмен данымі пры спалучэнні планшэта з прыладай NFC"</string>
+    <string name="nfc_quick_toggle_summary" product="default" msgid="1460871052409162980">"Дазволіць абмен данымі пры спалучэнні тэлефона з прыладай NFC"</string>
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Уключыць NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC абменьваецца данымі паміж гэтай прыладай і іншымі прыладамі або аб\'ектамі паблізу, такімі як плацежныя тэрміналы, прылады счытвання правоў доступу і інтэрактыўная рэклама ці цэтлікі."</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"Абараніць NFC"</string>
@@ -914,7 +911,6 @@
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Ідэнтыфікатар"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Ананімны ідэнтыфікатар"</string>
     <string name="wifi_password" msgid="1458802324849513755">"Пароль"</string>
-    <string name="wifi_sae_password_id" msgid="129826381089135796">"Ідэнтыфікатар пароля SAE"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Паказваць пароль"</string>
     <string name="wifi_ap_band_config" msgid="1589020070150933055">"Выбраць дыяпазон для пунктаў доступу"</string>
     <string name="wifi_ap_choose_auto" msgid="8944442003151215691">"Аўтаматычна"</string>
@@ -955,9 +951,11 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Wi‑Fi абагульваецца з гэтай прыладай…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Ідзе падключэнне…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Абагульванне хот-спота"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Пацвердзіце, што гэта вы"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Пацвердзіце, што гэта вы"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Пароль Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Пароль хот-спота: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Аўтаматычнае падключэнне"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Дазвольце падключэнне да гэтай сеткі, калі сігнал будзе ў межах дасягальнасці"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Дадаць прыладу"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Каб дадаць прыладу ў гэту сетку, скарыстайце QR-код"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-код мае несапраўдны фармат"</string>
@@ -1269,7 +1267,7 @@
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"Уключана / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Ніколі не выключыцца аўтаматычна"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Выключыцца аўтаматычна на ўсходзе сонца"</string>
-    <string name="dark_ui_text" msgid="3691323174656626778">"У цёмнай тэме выкарыстоўваецца чорны фон, які эканоміць узровень зараду акумулятара. Акрамя таго, вы можаце вызначыць, калі цёмная тэма павінна ўключацца і выключацца."</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"У цёмнай тэме на некаторых экранах выкарыстоўваецца чорны фон, які эканоміць узровень зараду акумулятара. Калі вы будзеце карыстацца тэлефонам у момант запланаванага ўключэння цёмнай тэмы, яна актывуецца пасля выключэння экрана."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Час чакання экрана"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Экран выключаецца"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Пасля бяздзейнасці: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -1761,8 +1759,11 @@
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Задайце PIN-код для выкарыстання адбітка"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"Задайце ўзор разблакіроўкі, каб абараніць прыладу"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Увядзіце пароль яшчэ раз"</string>
+    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Увядзіце пароль працоўнага профілю"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Пацвердзіце ўзор"</string>
+    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Увядзіце ўзор разблакіроўкі"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Увядзіце PIN-код яшчэ раз"</string>
+    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Увядзіце PIN-код працоўнага профілю"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Паролі не супадаюць"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"PIN-коды не супадаюць"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Нарысуйце ўзор разблакіроўкі яшчэ раз"</string>
@@ -2100,20 +2101,21 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Праграма для чытання з экрана прызначана ў першую чаргу для сляпых людзей і людзей са слабым зрокам"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Дакранайцеся да элементаў на экране, каб пачуць, як іх чытаюць услых"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Налады субцітраў"</string>
-    <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Павелічэнне"</string>
+    <string name="accessibility_screen_magnification_title" msgid="7749786933314473224">"Павялічыць"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Вобласць павелічэння"</string>
+    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Уключэнне павелічэння"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Выберыце вобласць павелічэння, якую хочаце выкарыстоўваць падчас павелічэння экрана"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Поўнаэкранны рэжым"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Частка экрана"</string>
     <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Поўнаэкранны рэжым і рэжым паказу часткі экрана"</string>
     <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Павялічыць увесь экран"</string>
     <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Павялічыць частку экрана"</string>
-    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Паказваць кантролер перамяшчэння"</string>
-    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Паказваць падобны да джойсціка кантролер для перамяшчэння вобласці павелічэння"</string>
-    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"Налады павелічэння"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Налады павелічэння"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Павялічваць трайным дотыкам"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Павялічваць спалучэннем клавіш"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Павялічваць спалучэннем клавіш і трайным дотыкам"</string>
+    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"Інфармацыя пра павелічэнне"</string>
+    <string name="accessibility_screen_option" msgid="8465307075278878145">"Параметры"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Павялічыць маштаб экрана"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Тройчы дакраніцеся, каб змяніць маштаб"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Дакраніцеся да кнопкі, каб павялічыць маштаб"</string>
@@ -2171,9 +2173,16 @@
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Інверсія колеру"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="1306705652558953204">"Інвертаваць колеры"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="3302345676503045665">"Пераключыце экран у цёмны рэжым, які забяспечвае больш зручнае карыстанне прыладай для ўсіх, хто адчувальны да яркага святла.\n\nУвага. Цёмныя колеры стануць светлымі. Відарысы таксама будуць інвертаваны."</string>
-    <string name="accessibility_autoclick_preference_title" msgid="6771914155290467570">"Час затрымкі"</string>
+    <string name="accessibility_autoclick_preference_title" msgid="3189216839673212851">"Аўтаматычнае націсканне (час чакання)"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"Калі вы карыстаецеся мышшу, можна наладзіць аўтаматычнае націсканне, калі курсор не рухаецца пэўны перыяд часу."</string>
-    <string name="accessibility_autoclick_delay_preference_title" msgid="8631645324295801612">"Затрымка перад націсканнем"</string>
+    <string name="accessibility_autoclick_default_title" msgid="6255651700052201350">"Няма"</string>
+    <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Кароткі"</string>
+    <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0,2 секунды"</string>
+    <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"Сярэдні"</string>
+    <string name="accessibility_autoclick_medium_summary" msgid="1343390686514222871">"0,6 секунды"</string>
+    <string name="accessibility_autoclick_long_title" msgid="6799311820641687735">"Доўгі"</string>
+    <string name="accessibility_autoclick_long_summary" msgid="3747153151313563637">"1 секунда"</string>
+    <string name="accessibility_autoclick_custom_title" msgid="4597792235546232038">"Карыстальніцкі"</string>
     <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"Моц вібрацыі і тактыльнага водгуку"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Вібрацыя пры апавяшчэнні"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Вібрацыя пры выкліку"</string>
@@ -3171,6 +3180,7 @@
     <string name="sim_card_select_title" msgid="8146523005929848793">"Выбраць SIM-карту"</string>
     <string name="color_orange" msgid="216547825489739010">"Аранжавы"</string>
     <string name="color_purple" msgid="6603701972079904843">"Фіялетавы"</string>
+    <string name="color_pink" msgid="8596872110888626708">"Ружовы"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Няма ўстаўленых SIM-карт"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Статус SIM-карты"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"Стан SIM-карты (слот для SIM-карты %1$d)"</string>
@@ -3213,8 +3223,7 @@
     <string name="search_results_title" msgid="3360639917793022533">"Налады"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, злучэнне, інтэрнэт, бесправадны, даныя, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Апавяшчэнне Wi‑Fi, Wi-Fi-апавяшчэнне"</string>
-    <!-- no translation found for keywords_wifi_data_usage (4718555409695862085) -->
-    <skip />
+    <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"выкарыстанне трафіка"</string>
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Спыніць вібрацыю, націснуць, клавіятура"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Выкарыстоўваць 24-гадзінны фармат"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Спампаваць"</string>
@@ -3338,6 +3347,7 @@
       <item quantity="other">Уключана: <xliff:g id="ON_COUNT">%d</xliff:g></item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не турбаваць"</string>
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Атрымліваць апавяшчэнні толькі ад важных людзей і праграм"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Абмежаванне колькасці непатрэбных апавяшчэнняў"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Уключэнне рэжыму \"Не турбаваць\""</string>
     <string name="zen_mode_behavior_settings_title" msgid="2511039563690605227">"Выключэнні"</string>
@@ -3364,7 +3374,7 @@
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Блакіроўка візуальных апавяшчэнняў"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Дазволіць візуальныя сігналы"</string>
-    <string name="zen_mode_settings_category" msgid="3531156898689133018">"Калі рэжым \"Не турбаваць\" уключаны"</string>
+    <string name="zen_mode_settings_category" msgid="3794956668816783447">"Дазволіць перарыванні з гукам"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="5881948256821375291">"Абмежаваць апавяшчэнні"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Апавяшчэнні без гуку"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Апавяшчэнні будуць паказвацца на экране"</string>
@@ -3429,10 +3439,12 @@
       <item quantity="many"><xliff:g id="ON_COUNT">%d</xliff:g> раскладаў могуць уключацца аўтаматычна</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> раскладу могуць уключацца аўтаматычна</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="4456460102057665854">"Адключыць гук прылады, аднак дазволіць выключэнні з правілаў"</string>
-    <string name="zen_category_exceptions" msgid="6329803391764042865">"Выключэнні"</string>
-    <string name="zen_category_schedule" msgid="6117378495178187519">"Расклад"</string>
-    <string name="zen_sound_title" msgid="7345256674791165630">"Паказаць усе выключэнні з правіла"</string>
+    <string name="zen_category_behavior" msgid="9188445582469977640">"Калі рэжым \"Не турбаваць\" уключаны"</string>
+    <string name="zen_category_people" msgid="8252926021894933047">"Людзі"</string>
+    <string name="zen_category_apps" msgid="1167374545618451925">"Праграмы"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"Будзільнікі і іншыя перарыванні"</string>
+    <string name="zen_category_schedule" msgid="2003707171924226212">"Расклады"</string>
+    <string name="zen_category_visuals" msgid="2875037337125038831">"Апавяшчэнні без гуку"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"Калі ўключаны рэжым \"Не турбаваць\", выключаюцца гук і вібрацыя для ўсіх элементаў, акрамя выбраных вамі вышэй."</string>
     <string name="zen_sound_category_title" msgid="3092475944624375238">"Выключыць гук для ўсяго, акрамя"</string>
     <string name="zen_sound_all_muted" msgid="1134675098348493443">"Без гуку"</string>
@@ -3709,6 +3721,7 @@
       <item quantity="many">Яшчэ <xliff:g id="NUM_PEOPLE">%d</xliff:g></item>
       <item quantity="other">Яшчэ <xliff:g id="NUM_PEOPLE">%d</xliff:g></item>
     </plurals>
+    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Размовы"</string>
     <string name="zen_mode_messages" msgid="7835537207069585861">"Дазволіць паведамленні"</string>
     <string name="zen_mode_messages_footer" msgid="6996375319078720643">"Каб прылада апавяшчала аб дазволеных паведамленнях гукам, праверце, як яна наладжана: на званок, вібрацыю або бязгучны рэжым."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Для раскладу \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" прыём уваходных паведамленняў заблакіраваны. Вы можаце змяніць налады, каб дазволіць сябрам, членам сям\'і і іншым кантактам звязвацца з вамі."</string>
@@ -3722,15 +3735,20 @@
     <string name="zen_mode_from_none" msgid="8456745188276131873">"Ні ад каго"</string>
     <string name="zen_mode_from_none_calls" msgid="419514492513274710">"Не дазваляць выклікаў"</string>
     <string name="zen_mode_from_none_messages" msgid="122458013195428548">"Не дазваляць паведамленні"</string>
-    <string name="zen_mode_alarms" msgid="1111047002365378012">"Дазволіць будзільнікі"</string>
+    <string name="zen_mode_alarms" msgid="5989343060100771099">"Будзільнікі"</string>
+    <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Ад таймераў, будзільнікаў, сістэм бяспекі і іншых праграм"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"будзільнікі"</string>
-    <string name="zen_mode_media" msgid="3470940840136036522">"Прайграваць гукі мультымедыя"</string>
+    <string name="zen_mode_media" msgid="885017672250984735">"Гукі мультымедыя"</string>
+    <string name="zen_mode_media_summary" msgid="3052407079117545815">"Ад відэа, гульняў і іншых мультымедыя"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"мультымедыя"</string>
-    <string name="zen_mode_system" msgid="4996563074066075171">"Дазволіць гукі пры дотыку"</string>
+    <string name="zen_mode_system" msgid="7301665021634204942">"Гукі пры дотыку"</string>
+    <string name="zen_mode_system_summary" msgid="7905531918458452765">"Ад клавіятуры і іншых кнопак"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"гукі пры дотыку"</string>
-    <string name="zen_mode_reminders" msgid="1957379696610030851">"Дазволіць напаміны"</string>
+    <string name="zen_mode_reminders" msgid="1970224691551417906">"Напаміны"</string>
+    <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"Ад задач і напамінаў"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"напаміны"</string>
-    <string name="zen_mode_events" msgid="5695716091022098055">"Дазволіць падзеі"</string>
+    <string name="zen_mode_events" msgid="7455308377739125312">"Падзеі"</string>
+    <string name="zen_mode_events_summary" msgid="3241903481309766428">"Ад падзей календара, якія павінны адбыцца"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Дазволіць праграмам перавызначаць"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Выключэнні з правілаў для праграм"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">
@@ -4048,6 +4066,10 @@
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"Паказваць паверх іншых праграм"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Дазволіць паказ паверх іншых праграм"</string>
     <string name="allow_overlay_description" msgid="2266886438777971131">"Дазволіць гэтай праграме паказвацца паверх іншых праграм, якія вы выкарыстоўваеце. Гэта можа перашкодзіць выкарыстанню гэтых праграм або змяніць спосаб, якім яны могуць паказвацца або працаваць."</string>
+    <string name="manage_external_storage_title" msgid="8024521099838816100">"Доступ да ўсіх файлаў"</string>
+    <string name="permit_manage_external_storage" msgid="6928847280689401761">"Дазволіць доступ да кіравання ўсімі файламі"</string>
+    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Дазвольце гэтай праграме счытваць, змяняць і выдаляць усе файлы на гэтай прыладзе ці ў падключаных сховішчах. З такім дазволам праграма зможа атрымліваць доступ да файлаў без вашага ведама."</string>
+    <string name="filter_manage_external_storage" msgid="6751640571715343804">"Магчымы доступ да ўсіх файлаў"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"vr віртуальная рэальнасць сродак праслухоўвання стэрэа служба-памочнік"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Паказваць паверх іншых праграм"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_0">%1$d</xliff:g> з <xliff:g id="COUNT_1">%2$d</xliff:g> праграм(-ы) дазволена паказвацца паверх іншых праграм"</string>

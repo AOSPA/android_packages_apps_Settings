@@ -19,16 +19,22 @@ package com.android.settings.accessibility;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.content.ComponentName;
 import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
+import android.text.TextUtils;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.StringJoiner;
 
 /** Provides utility methods to accessibility settings only. */
 final class AccessibilityUtil {
@@ -56,8 +62,14 @@ final class AccessibilityUtil {
         int INTUITIVE = 2;
     }
 
+    // TODO(b/147021230): Will move common functions and variables to
+    //  android/internal/accessibility folder
+    private static final char COMPONENT_NAME_SEPARATOR = ':';
+    private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
+            new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
+
     /**
-     * Annotation for different shortcut type UI type.
+     * Annotation for different user shortcut type UI type.
      *
      * {@code DEFAULT} for displaying default value.
      * {@code SOFTWARE} for displaying specifying the accessibility services or features which
@@ -69,14 +81,14 @@ final class AccessibilityUtil {
      */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
-            ShortcutType.DEFAULT,
-            ShortcutType.SOFTWARE,
-            ShortcutType.HARDWARE,
-            ShortcutType.TRIPLETAP,
+            UserShortcutType.DEFAULT,
+            UserShortcutType.SOFTWARE,
+            UserShortcutType.HARDWARE,
+            UserShortcutType.TRIPLETAP,
     })
 
-    /** Denotes the shortcut type. */
-    public @interface ShortcutType {
+    /** Denotes the user shortcut type. */
+    public @interface UserShortcutType {
         int DEFAULT = 0;
         int SOFTWARE = 1; // 1 << 0
         int HARDWARE = 2; // 1 << 1
@@ -128,8 +140,14 @@ final class AccessibilityUtil {
                 == NAV_BAR_MODE_GESTURAL;
     }
 
+    /** Determines if a touch explore is being used. */
+    public static boolean isTouchExploreEnabled(Context context) {
+        final AccessibilityManager am = context.getSystemService(AccessibilityManager.class);
+        return am.isTouchExplorationEnabled();
+    }
+
     /**
-     * Gets the corresponding fragment type of a given accessibility service
+     * Gets the corresponding fragment type of a given accessibility service.
      *
      * @param accessibilityServiceInfo The accessibilityService's info
      * @return int from {@link AccessibilityServiceFragmentType}
@@ -147,5 +165,189 @@ final class AccessibilityUtil {
         return requestA11yButton
                 ? AccessibilityServiceFragmentType.INVISIBLE
                 : AccessibilityServiceFragmentType.INTUITIVE;
+    }
+
+    /**
+     * Opts in component name into multiple {@code shortcutTypes} colon-separated string in
+     * Settings.
+     *
+     * @param context The current context.
+     * @param shortcutTypes  A combination of {@link UserShortcutType}.
+     * @param componentName The component name that need to be opted in Settings.
+     */
+    static void optInAllValuesToSettings(Context context, int shortcutTypes,
+            @NonNull ComponentName componentName) {
+        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
+            optInValueToSettings(context, UserShortcutType.SOFTWARE, componentName);
+        }
+        if (((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE)) {
+            optInValueToSettings(context, UserShortcutType.HARDWARE, componentName);
+        }
+    }
+
+    /**
+     * Opts in component name into {@code shortcutType} colon-separated string in Settings.
+     *
+     * @param context The current context.
+     * @param shortcutType The preferred shortcut type user selected.
+     * @param componentName The component name that need to be opted in Settings.
+     */
+    @VisibleForTesting
+    static void optInValueToSettings(Context context, @UserShortcutType int shortcutType,
+            @NonNull ComponentName componentName) {
+        final String targetKey = convertKeyFromSettings(shortcutType);
+        final String targetString = Settings.Secure.getString(context.getContentResolver(),
+                targetKey);
+
+        if (hasValueInSettings(context, shortcutType, componentName)) {
+            return;
+        }
+
+        final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
+        if (!TextUtils.isEmpty(targetString)) {
+            joiner.add(targetString);
+        }
+        joiner.add(componentName.flattenToString());
+
+        Settings.Secure.putString(context.getContentResolver(), targetKey, joiner.toString());
+    }
+
+    /**
+     * Opts out component name into multiple {@code shortcutTypes} colon-separated string in
+     * Settings.
+     *
+     * @param context The current context.
+     * @param shortcutTypes A combination of {@link UserShortcutType}.
+     * @param componentName The component name that need to be opted out from Settings.
+     */
+    static void optOutAllValuesFromSettings(Context context, int shortcutTypes,
+            @NonNull ComponentName componentName) {
+        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
+            optOutValueFromSettings(context, UserShortcutType.SOFTWARE, componentName);
+        }
+        if (((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE)) {
+            optOutValueFromSettings(context, UserShortcutType.HARDWARE, componentName);
+        }
+    }
+
+    /**
+     * Opts out component name into {@code shortcutType} colon-separated string in Settings.
+     *
+     * @param context The current context.
+     * @param shortcutType The preferred shortcut type user selected.
+     * @param componentName The component name that need to be opted out from Settings.
+     */
+    @VisibleForTesting
+    static void optOutValueFromSettings(Context context, @UserShortcutType int shortcutType,
+            @NonNull ComponentName componentName) {
+        final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
+        final String targetKey = convertKeyFromSettings(shortcutType);
+        final String targetString = Settings.Secure.getString(context.getContentResolver(),
+                targetKey);
+
+        if (TextUtils.isEmpty(targetString)) {
+            return;
+        }
+
+        sStringColonSplitter.setString(targetString);
+        while (sStringColonSplitter.hasNext()) {
+            final String name = sStringColonSplitter.next();
+            if (TextUtils.isEmpty(name) || (componentName.flattenToString()).equals(name)) {
+                continue;
+            }
+            joiner.add(name);
+        }
+
+        Settings.Secure.putString(context.getContentResolver(), targetKey, joiner.toString());
+    }
+
+    /**
+     * Returns if component name existed in one of {@code shortcutTypes} string in Settings.
+     *
+     * @param context The current context.
+     * @param shortcutTypes A combination of {@link UserShortcutType}.
+     * @param componentName The component name that need to be checked existed in Settings.
+     * @return {@code true} if componentName existed in Settings.
+     */
+    static boolean hasValuesInSettings(Context context, int shortcutTypes,
+            @NonNull ComponentName componentName) {
+        boolean exist = false;
+        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
+            exist = hasValueInSettings(context, UserShortcutType.SOFTWARE, componentName);
+        }
+        if (((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE)) {
+            exist |= hasValueInSettings(context, UserShortcutType.HARDWARE, componentName);
+        }
+        return exist;
+    }
+
+    /**
+     * Returns if component name existed in {@code shortcutType} string Settings.
+     *
+     * @param context The current context.
+     * @param shortcutType The preferred shortcut type user selected.
+     * @param componentName The component name that need to be checked existed in Settings.
+     * @return {@code true} if componentName existed in Settings.
+     */
+    @VisibleForTesting
+    static boolean hasValueInSettings(Context context, @UserShortcutType int shortcutType,
+            @NonNull ComponentName componentName) {
+        final String targetKey = convertKeyFromSettings(shortcutType);
+        final String targetString = Settings.Secure.getString(context.getContentResolver(),
+                targetKey);
+
+        if (TextUtils.isEmpty(targetString)) {
+            return false;
+        }
+
+        sStringColonSplitter.setString(targetString);
+
+        while (sStringColonSplitter.hasNext()) {
+            final String name = sStringColonSplitter.next();
+            if ((componentName.flattenToString()).equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the corresponding user shortcut type of a given accessibility service.
+     *
+     * @param context The current context.
+     * @param componentName The component name that need to be checked existed in Settings.
+     * @return The user shortcut type if component name existed in {@code UserShortcutType} string
+     * Settings.
+     */
+    static int getUserShortcutTypesFromSettings(Context context,
+            @NonNull ComponentName componentName) {
+        int shortcutTypes = UserShortcutType.DEFAULT;
+        if (hasValuesInSettings(context, UserShortcutType.SOFTWARE, componentName)) {
+            shortcutTypes |= UserShortcutType.SOFTWARE;
+        }
+        if (hasValuesInSettings(context, UserShortcutType.HARDWARE, componentName)) {
+            shortcutTypes |= UserShortcutType.HARDWARE;
+        }
+        return shortcutTypes;
+    }
+
+    /**
+     * Converts {@link UserShortcutType} to key in Settings.
+     *
+     * @param shortcutType The shortcut type.
+     * @return Mapping key in Settings.
+     */
+    static String convertKeyFromSettings(@UserShortcutType int shortcutType) {
+        switch (shortcutType) {
+            case UserShortcutType.SOFTWARE:
+                return Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT;
+            case UserShortcutType.HARDWARE:
+                return Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
+            case UserShortcutType.TRIPLETAP:
+                return Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED;
+            default:
+                throw new IllegalArgumentException(
+                        "Unsupported userShortcutType " + shortcutType);
+        }
     }
 }

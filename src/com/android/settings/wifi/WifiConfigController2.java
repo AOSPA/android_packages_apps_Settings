@@ -142,7 +142,6 @@ public class WifiConfigController2 implements TextWatcher,
     @VisibleForTesting
     int mWifiEntrySecurity;
     private TextView mPasswordView;
-    private TextView mSaePasswordIdView;
     private ImageButton mSsidScanButton;
 
     private String mUnspecifiedCertString;
@@ -341,7 +340,7 @@ public class WifiConfigController2 implements TextWatcher,
 
             if ((!mWifiEntry.isSaved()
                     && mWifiEntry.getConnectedState() != WifiEntry.CONNECTED_STATE_CONNECTED
-                    && !WifiEntryShell.isPasspoint(mWifiEntry))
+                    && !mWifiEntry.isSubscription())
                     || mMode != WifiConfigUiBase2.MODE_VIEW) {
                 showSecurityFields(/* refreshEapMethods */ true, /* refreshCertificates */ true);
                 showIpConfigFields();
@@ -417,7 +416,7 @@ public class WifiConfigController2 implements TextWatcher,
                 }
                 if (mWifiEntry.isSaved()
                         || mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED
-                        || WifiEntryShell.isPasspoint(mWifiEntry)) {
+                        || mWifiEntry.isSubscription()) {
                     mConfigUi.setForgetButton(res.getString(R.string.wifi_forget));
                 }
             }
@@ -805,11 +804,6 @@ public class WifiConfigController2 implements TextWatcher,
                     String password = mPasswordView.getText().toString();
                     config.preSharedKey = '"' + password + '"';
                 }
-                if (mSaePasswordIdView.length() != 0) {
-                    config.saePasswordId = mSaePasswordIdView.getText().toString();
-                } else {
-                    config.saePasswordId = null;
-                }
                 break;
 
             case WifiEntry.SECURITY_OWE:
@@ -994,23 +988,6 @@ public class WifiConfigController2 implements TextWatcher,
             if (mWifiEntry != null && mWifiEntry.isSaved()) {
                 mPasswordView.setHint(R.string.wifi_unchanged);
             }
-        }
-
-        if (mSaePasswordIdView == null) {
-            mSaePasswordIdView = (TextView) mView.findViewById(R.id.sae_password_id);
-            mSaePasswordIdView.setOnEditorActionListener(this);
-            mSaePasswordIdView.setOnKeyListener(this);
-        }
-
-        if (mWifiEntrySecurity == WifiEntry.SECURITY_SAE) {
-            mView.findViewById(R.id.sae_password_id_layout).setVisibility(View.VISIBLE);
-            if (mWifiEntry != null && mWifiEntry.isSaved()) {
-                if (!TextUtils.isEmpty(mWifiEntry.getWifiConfiguration().saePasswordId)) {
-                    mSaePasswordIdView.setText(mWifiEntry.getWifiConfiguration().saePasswordId);
-                }
-            }
-        } else {
-            setSaePasswordIdInvisible();
         }
 
         if (mWifiEntrySecurity != WifiEntry.SECURITY_EAP
@@ -1320,11 +1297,6 @@ public class WifiConfigController2 implements TextWatcher,
         mPasswordView.setText("");
         mView.findViewById(R.id.password_layout).setVisibility(View.GONE);
         mView.findViewById(R.id.show_password_layout).setVisibility(View.GONE);
-    }
-
-    private void setSaePasswordIdInvisible() {
-        mSaePasswordIdView.setText("");
-        mView.findViewById(R.id.sae_password_id_layout).setVisibility(View.GONE);
     }
 
     private void setEapMethodInvisible() {

@@ -33,8 +33,6 @@ import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 
-import com.android.internal.telephony.OperatorInfo;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -52,7 +50,7 @@ public final class CellInfoUtil {
     /**
      * Returns the title of the network obtained in the manual search.
      *
-     * @param cellId contains the information of the network.
+     * @param cellId contains the identity of the network.
      * @param networkMccMnc contains the MCCMNC string of the network
      * @return Long Name if not null/empty, otherwise Short Name if not null/empty,
      * else MCCMNC string.
@@ -101,34 +99,6 @@ public final class CellInfoUtil {
         return cellId;
     }
 
-    /**
-     * Creates a CellInfo object from OperatorInfo. GsmCellInfo is used here only because
-     * operatorInfo does not contain technology type while CellInfo is an abstract object that
-     * requires to specify technology type. It doesn't matter which CellInfo type to use here, since
-     * we only want to wrap the operator info and PLMN to a CellInfo object.
-     */
-    public static CellInfo convertOperatorInfoToCellInfo(OperatorInfo operatorInfo) {
-        final String operatorNumeric = operatorInfo.getOperatorNumeric();
-        String mcc = null;
-        String mnc = null;
-        if (operatorNumeric != null && operatorNumeric.matches("^[0-9]{5,6}$")) {
-            mcc = operatorNumeric.substring(0, 3);
-            mnc = operatorNumeric.substring(3);
-        }
-        final CellIdentityGsm cig = new CellIdentityGsm(
-                Integer.MAX_VALUE /* lac */,
-                Integer.MAX_VALUE /* cid */,
-                Integer.MAX_VALUE /* arfcn */,
-                Integer.MAX_VALUE /* bsic */,
-                mcc,
-                mnc,
-                operatorInfo.getOperatorAlphaLong(),
-                operatorInfo.getOperatorAlphaShort());
-
-        final CellInfoGsm ci = new CellInfoGsm();
-        ci.setCellIdentity(cig);
-        return ci;
-    }
 
     /** Convert a list of cellInfos to readable string without sensitive info. */
     public static String cellInfoListToString(List<CellInfo> cellInfos) {
