@@ -54,6 +54,7 @@ import com.android.wallpaper.module.CurrentWallpaperInfoFactory;
 import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.picker.ToolbarFragment;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
@@ -131,6 +132,9 @@ public class GridFragment extends ToolbarFragment {
         final Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         mScreenAspectRatio = (float) dm.heightPixels / dm.widthPixels;
+
+        // Clear memory cache whenever grid fragment view is being loaded.
+        Glide.get(getContext()).clearMemory();
         setUpOptions();
         view.findViewById(R.id.apply_button).setOnClickListener(v -> {
             mGridManager.apply(mSelectedOption,  new Callback() {
