@@ -38,6 +38,7 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import java.util.List;
 import java.util.Objects;
@@ -57,6 +58,7 @@ public class NetworkOperatorPreference extends Preference {
     private List<String> mForbiddenPlmns;
     private int mLevel = LEVEL_NONE;
     private boolean mShow4GForLTE;
+    private boolean mIsAdvancedScanSupported;
 
     public NetworkOperatorPreference(Context context, CellInfo cellinfo,
             List<String> forbiddenPlmns, boolean show4GForLTE) {
@@ -75,6 +77,7 @@ public class NetworkOperatorPreference extends Preference {
         super(context);
         mForbiddenPlmns = forbiddenPlmns;
         mShow4GForLTE = show4GForLTE;
+        mIsAdvancedScanSupported = Utils.isAdvancedPlmnScanSupported();
     }
 
     /**
@@ -122,10 +125,8 @@ public class NetworkOperatorPreference extends Preference {
         final CellSignalStrength signalStrength = getCellSignalStrength(mCellInfo);
         final int level = signalStrength != null ? signalStrength.getLevel() : LEVEL_NONE;
         if (DBG) Log.d(TAG, "refresh level: " + String.valueOf(level));
-        if (mLevel != level) {
-            mLevel = level;
-            updateIcon(mLevel);
-        }
+        mLevel = level;
+        updateIcon(mLevel);
     }
 
     /**
@@ -215,7 +216,7 @@ public class NetworkOperatorPreference extends Preference {
     }
 
     private void updateIcon(int level) {
-        if (level < 0 || level >= NUM_SIGNAL_STRENGTH_BINS) {
+        if (!mIsAdvancedScanSupported || level < 0 || level >= NUM_SIGNAL_STRENGTH_BINS) {
             return;
         }
         final Context context = getContext();
