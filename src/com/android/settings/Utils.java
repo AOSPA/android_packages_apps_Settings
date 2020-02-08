@@ -144,11 +144,6 @@ public final class Utils extends com.android.settingslib.Utils {
             "device_identifier_access_restrictions_disabled";
 
     /**
-     * An int extra specifying a slot ID.
-     */
-    public static final String EXTRA_SLOT_ID = "slot_id";
-
-    /**
      * Whether to show the Permissions Hub.
      */
     public static final String PROPERTY_PERMISSIONS_HUB_ENABLED = "permissions_hub_enabled";
@@ -1096,6 +1091,19 @@ public final class Utils extends com.android.settingslib.Utils {
             Log.e(TAG, "Got exception in isNetworkSettingsApkAvailable.", e);
         }
         return false;
+    }
+
+    public static boolean isAdvancedPlmnScanSupported() {
+        boolean propVal = false;
+        IExtTelephony extTelephony = IExtTelephony.Stub
+                .asInterface(ServiceManager.getService("extphone"));
+        try {
+            propVal = extTelephony
+                    .getPropertyValueBool("persist.vendor.radio.enableadvancedscan", true);
+        } catch (RemoteException | NullPointerException ex) {
+            Log.e(TAG, "isAdvancedPlmnScanSupported Exception: ", ex);
+        }
+        return propVal;
     }
 
     public static boolean isSupportCTPA(Context context) {
