@@ -60,8 +60,8 @@ public class StatsLogUserEventLogger extends NoOpUserEventLogger implements Them
 
     @Override
     public void logIndividualWallpaperSelected(String collectionId) {
-        SysUiStatsLog.write(STYLE_UI_CHANGED, StyleEnums.WALLPAPER_SELECT, 0, 0, 0, 0, 0, 0,
-                collectionId.hashCode(), 0, 0);
+        SysUiStatsLog.write(STYLE_UI_CHANGED, StyleEnums.WALLPAPER_SELECT, 0, 0, 0, 0, 0,
+                collectionId.hashCode(), 0, 0, 0);
     }
 
     @Override
