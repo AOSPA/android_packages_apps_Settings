@@ -16,6 +16,10 @@
 
 package com.android.settings.network.ims;
 
+import android.telephony.AccessNetworkConstants;
+import android.telephony.ims.feature.MmTelFeature;
+import android.telephony.ims.stub.ImsRegistrationImplBase;
+
 import androidx.annotation.VisibleForTesting;
 
 /**
@@ -23,8 +27,33 @@ import androidx.annotation.VisibleForTesting;
  */
 abstract class ImsQueryController {
 
+    private volatile int mCapability;
+    private volatile int mTech;
+    private volatile int mTransportType;
+
+    /**
+     * Constructor for query IMS status
+     *
+     * @param capability {@link MmTelFeature.MmTelCapabilities#MmTelCapability}
+     * @param tech {@link ImsRegistrationImplBase#ImsRegistrationTech}
+     * @param transportType {@link AccessNetworkConstants#TransportType}
+     */
+    ImsQueryController(
+            @MmTelFeature.MmTelCapabilities.MmTelCapability int capability,
+            @ImsRegistrationImplBase.ImsRegistrationTech int tech,
+            @AccessNetworkConstants.TransportType int transportType) {
+        mCapability = capability;
+        mTech = tech;
+        mTransportType = transportType;
+    }
+
     @VisibleForTesting
     ImsQuery isTtyOnVolteEnabled(int subId) {
         return new ImsQueryTtyOnVolteStat(subId);
+    }
+
+    @VisibleForTesting
+    ImsQuery isProvisionedOnDevice(int subId) {
+        return new ImsQueryProvisioningStat(subId, mCapability, mTech);
     }
 }

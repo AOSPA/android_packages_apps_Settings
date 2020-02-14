@@ -16,6 +16,8 @@
 
 package com.android.settings.media;
 
+import static android.app.slice.Slice.EXTRA_RANGE_VALUE;
+
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE_URI;
 
 import android.app.PendingIntent;
@@ -49,6 +51,7 @@ public class MediaOutputSlice implements CustomSliceable {
 
     private static final String TAG = "MediaOutputSlice";
     private static final String MEDIA_DEVICE_ID = "media_device_id";
+    private static final int NON_SLIDER_VALUE = -1;
 
     public static final String MEDIA_PACKAGE_NAME = "media_package_name";
 
@@ -86,21 +89,29 @@ public class MediaOutputSlice implements CustomSliceable {
         final MediaDevice topDevice = isTouched ? worker.getTopDevice() : connectedDevice;
 
         if (topDevice != null) {
-            listBuilder.addRow(getActiveDeviceHeaderRow(topDevice));
+            addRow(topDevice, connectedDevice, listBuilder);
             worker.setTopDevice(topDevice);
         }
 
         for (MediaDevice device : devices) {
             if (topDevice == null
                     || !TextUtils.equals(topDevice.getId(), device.getId())) {
-                listBuilder.addRow(getMediaDeviceRow(device));
+                addRow(device, connectedDevice, listBuilder);
             }
         }
 
         return listBuilder.build();
     }
 
-    private ListBuilder.RowBuilder getActiveDeviceHeaderRow(MediaDevice device) {
+    private void addRow(MediaDevice device, MediaDevice connectedDevice, ListBuilder listBuilder) {
+        if (connectedDevice != null && TextUtils.equals(device.getId(), connectedDevice.getId())) {
+            listBuilder.addInputRange(getActiveDeviceHeaderRow(device));
+        } else {
+            listBuilder.addRow(getMediaDeviceRow(device));
+        }
+    }
+
+    private ListBuilder.InputRangeBuilder getActiveDeviceHeaderRow(MediaDevice device) {
         final String title = device.getName();
         final IconCompat icon = getDeviceIconCompat(device);
 
@@ -108,14 +119,23 @@ public class MediaOutputSlice implements CustomSliceable {
                 getBroadcastIntent(mContext, device.getId(), device.hashCode());
         final SliceAction primarySliceAction = SliceAction.createDeeplink(broadcastAction, icon,
                 ListBuilder.ICON_IMAGE, title);
-
-        final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
+        final ListBuilder.InputRangeBuilder builder = new ListBuilder.InputRangeBuilder()
                 .setTitleItem(icon, ListBuilder.ICON_IMAGE)
                 .setTitle(title)
-                .setSubtitle(device.getSummary())
-                .setPrimaryAction(primarySliceAction);
+                .setPrimaryAction(primarySliceAction)
+                .setInputAction(getSliderInputAction(device.hashCode(), device.getId()))
+                .setMax(device.getMaxVolume())
+                .setValue(device.getCurrentVolume());
+        return builder;
+    }
 
-        return rowBuilder;
+    private PendingIntent getSliderInputAction(int requestCode, String id) {
+        final Intent intent = new Intent(getUri().toString())
+                .setData(getUri())
+                .putExtra(MEDIA_DEVICE_ID, id)
+                .setClass(mContext, SliceBroadcastReceiver.class);
+
+        return PendingIntent.getBroadcast(mContext, requestCode, intent, 0);
     }
 
     private IconCompat getDeviceIconCompat(MediaDevice device) {
@@ -152,7 +172,7 @@ public class MediaOutputSlice implements CustomSliceable {
                 .setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
                         ListBuilder.ICON_IMAGE, title))
                 .setTitle(title)
-                .setSubtitle(device.getSummary());
+                .setSubtitle(device.isConnected() ? null : device.getSummary());
 
         return rowBuilder;
     }
@@ -162,7 +182,7 @@ public class MediaOutputSlice implements CustomSliceable {
         intent.setClass(context, SliceBroadcastReceiver.class);
         intent.putExtra(MEDIA_DEVICE_ID, id);
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-        return PendingIntent.getBroadcast(context, requestCode /* requestCode */, intent,
+        return PendingIntent.getBroadcast(context, requestCode, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
@@ -175,11 +195,22 @@ public class MediaOutputSlice implements CustomSliceable {
     public void onNotifyChange(Intent intent) {
         final MediaDeviceUpdateWorker worker = getWorker();
         final String id = intent != null ? intent.getStringExtra(MEDIA_DEVICE_ID) : "";
+        if (TextUtils.isEmpty(id)) {
+            return;
+        }
         final MediaDevice device = worker.getMediaDeviceById(id);
-        if (device != null) {
+        if (device == null) {
+            return;
+        }
+        final int newPosition = intent.getIntExtra(EXTRA_RANGE_VALUE, NON_SLIDER_VALUE);
+        if (newPosition == NON_SLIDER_VALUE) {
+            // Intent for device connection
             Log.d(TAG, "onNotifyChange() device name : " + device.getName());
             worker.setIsTouched(true);
             worker.connectDevice(device);
+        } else {
+            // Intent for volume adjustment
+            worker.adjustVolume(device, newPosition);
         }
     }
 

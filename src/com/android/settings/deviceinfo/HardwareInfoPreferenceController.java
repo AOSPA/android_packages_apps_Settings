@@ -45,7 +45,7 @@ public class HardwareInfoPreferenceController extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_device_model)
-                ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

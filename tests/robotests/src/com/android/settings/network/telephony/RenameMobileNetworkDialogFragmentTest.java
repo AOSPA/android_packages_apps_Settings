@@ -92,6 +92,7 @@ public class RenameMobileNetworkDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void dialog_subscriptionMissing_noCrash() {
         final AlertDialog dialog = startDialog();
         final Button negativeButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);

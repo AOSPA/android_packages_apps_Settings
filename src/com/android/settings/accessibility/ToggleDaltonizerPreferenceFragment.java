@@ -17,6 +17,8 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME;
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -28,16 +30,14 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityUtil.State;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
@@ -47,11 +47,11 @@ import java.util.List;
 
 @SearchIndexable
 public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceFragment
-        implements DaltonizerRadioButtonPreferenceController.OnChangeListener,
-        SwitchBar.OnSwitchChangeListener{
+        implements DaltonizerRadioButtonPreferenceController.OnChangeListener {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
     private static final String CATEGORY_FOOTER_KEY = "daltonizer_footer_category";
+    private static final String CATEGORY_MODE_KEY = "daltonizer_mode_category";
     private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
     private final Handler mHandler = new Handler();
     private SettingsContentObserver mSettingsContentObserver;
@@ -88,9 +88,7 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
-                mSwitchBar.setCheckedInternal(
-                        Settings.Secure.getInt(getContentResolver(), ENABLED, State.OFF)
-                                == State.ON);
+                updateSwitchBarToggleSwitch();
             }
         };
         return super.onCreateView(inflater, container, savedInstanceState);
@@ -101,6 +99,11 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         super.onViewCreated(view, savedInstanceState);
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.setOrderingAsAdded(false);
+
+        final PreferenceCategory modeCategory = preferenceScreen.findPreference(
+                CATEGORY_MODE_KEY);
+        modeCategory.setOrder(Integer.MAX_VALUE - 1);
+
         final PreferenceCategory footerCategory = preferenceScreen.findPreference(
                 CATEGORY_FOOTER_KEY);
         footerCategory.setOrder(Integer.MAX_VALUE);
@@ -109,7 +112,9 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     @Override
     public void onResume() {
         super.onResume();
+        updateSwitchBarToggleSwitch();
         mSettingsContentObserver.register(getContentResolver());
+
         for (AbstractPreferenceController controller :
                 buildPreferenceControllers(getPrefContext(), getSettingsLifecycle())) {
             ((DaltonizerRadioButtonPreferenceController) controller).setOnChangeListener(this);
@@ -145,38 +150,43 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? State.OFF : State.ON);
+        Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? ON : OFF);
     }
 
     @Override
-    protected void onRemoveSwitchBarToggleSwitch() {
-        super.onRemoveSwitchBarToggleSwitch();
-        mSwitchBar.removeOnSwitchChangeListener(this);
+    protected void onRemoveSwitchPreferenceToggleSwitch() {
+        super.onRemoveSwitchPreferenceToggleSwitch();
+        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener(null);
     }
 
     @Override
-    protected void updateSwitchBarText(SwitchBar switchBar) {
-        switchBar.setSwitchBarText(R.string.accessibility_daltonizer_master_switch_title,
-                R.string.accessibility_daltonizer_master_switch_title);
+    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
+        switchPreference.setTitle(R.string.accessibility_daltonizer_master_switch_title);
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        Settings.Secure.putInt(getContentResolver(), ENABLED, isChecked ? State.ON : State.OFF);
-    }
-
-    @Override
-    protected void onInstallSwitchBarToggleSwitch() {
-        super.onInstallSwitchBarToggleSwitch();
-        mSwitchBar.setCheckedInternal(
-                Settings.Secure.getInt(getContentResolver(), ENABLED, State.OFF) == State.ON);
-        mSwitchBar.addOnSwitchChangeListener(this);
+    protected void onInstallSwitchPreferenceToggleSwitch() {
+        super.onInstallSwitchPreferenceToggleSwitch();
+        updateSwitchBarToggleSwitch();
+        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener((preference) -> {
+            boolean checked = ((SwitchPreference) preference).isChecked();
+            onPreferenceToggled(mPreferenceKey, checked);
+            return false;
+        });
     }
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
         super.onSettingsClicked(preference);
         showDialog(DialogEnums.EDIT_SHORTCUT);
+    }
+
+    private void updateSwitchBarToggleSwitch() {
+        final boolean checked = Settings.Secure.getInt(getContentResolver(), ENABLED, OFF) == ON;
+        if (mToggleServiceDividerSwitchPreference.isChecked() == checked) {
+            return;
+        }
+        mToggleServiceDividerSwitchPreference.setChecked(checked);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

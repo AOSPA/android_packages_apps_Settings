@@ -102,6 +102,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
     <uses-permission android:name="android.permission.INSTALL_DYNAMIC_SYSTEM" />
+    <uses-permission android:name="android.permission.BIND_CELL_BROADCAST_SERVICE" />
 
     <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
@@ -382,12 +383,10 @@
                 android:value="true" />
         </activity>
 
-        <!-- Runs in the phone process since it needs access to UiccController -->
         <activity android:name="Settings$ApnSettingsActivity"
                 android:label="@string/apn_settings"
                 android:launchMode="singleTask"
-                android:configChanges="orientation|keyboardHidden|screenSize"
-                android:process="com.android.phone">
+                android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APN_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -491,6 +490,7 @@
             android:icon="@drawable/ic_settings_wireless">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.TETHER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -1226,6 +1226,10 @@
         <activity
             android:name=".notification.history.NotificationHistoryActivity"
             android:label="@string/notification_history_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NOTIFICATION_HISTORY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1445,8 +1449,7 @@
         </activity>
 
         <activity android:name="Settings$IccLockSettingsActivity"
-                android:label="@string/sim_lock_settings"
-                android:process="com.android.phone">
+                android:label="@string/sim_lock_settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2500,6 +2503,28 @@
         </activity>
 
         <activity
+            android:name="Settings$InteractAcrossProfilesSettingsActivity"
+            android:label="@string/interact_across_profiles_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MANAGE_CROSS_PROFILE_ACCESS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings" />
+        </activity>
+
+        <activity android:name="Settings$AppInteractAcrossProfilesSettingsActivity"
+                  android:label="@string/interact_across_profiles_title">
+            <intent-filter>
+                <action android:name="android.settings.MANAGE_CROSS_PROFILE_ACCESS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetails" />
+        </activity>
+
+        <activity
             android:name="Settings$ZenAccessDetailSettingsActivity"
             android:label="@string/manage_zen_access_title"
             android:excludeFromRecents="true">
@@ -3059,7 +3084,7 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
-            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
         </service>
         <service
@@ -3071,7 +3096,7 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
-            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
         </service>
         <service
@@ -3083,7 +3108,7 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
-            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
         </service>
         <service
@@ -3095,7 +3120,7 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
-            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
         </service>
 
@@ -3108,7 +3133,7 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
-            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
         </service>
 
@@ -3121,7 +3146,7 @@
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
-            <meta-data android:name="android.service.quicksettings.BOOLEAN_TILE"
+            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                        android:value="true"/>
         </service>
 

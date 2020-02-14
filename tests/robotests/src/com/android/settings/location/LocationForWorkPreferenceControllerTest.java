@@ -122,7 +122,6 @@ public class LocationForWorkPreferenceControllerTest {
         mController.onLocationModeChanged(Settings.Secure.LOCATION_MODE_BATTERY_SAVING, false);
 
         verify(mPreference).setDisabledByAdmin(any());
-        verify(mPreference).setChecked(false);
     }
 
     @Test
@@ -135,7 +134,7 @@ public class LocationForWorkPreferenceControllerTest {
 
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(false);
-        verify(mPreference).setSummary(R.string.switch_off_text);
+        verify(mPreference).setSummary(R.string.location_app_permission_summary_location_off);
     }
 
     @Test

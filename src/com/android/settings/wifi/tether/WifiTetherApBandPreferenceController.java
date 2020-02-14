@@ -40,14 +40,12 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     private String[] mBandSummaries;
     private int mBandIndex;
     private int mSecurityType;
-    private boolean isDualMode;
     private boolean isVendorDualApSupported;
 
     public WifiTetherApBandPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
         final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
-        isDualMode = mWifiManager.isStaApConcurrencySupported();
 
         isVendorDualApSupported = context.getResources().getBoolean(
             com.android.internal.R.bool.config_wifi_dual_sap_mode_enabled);
@@ -131,16 +129,12 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
 
     private int validateSelection(int band) {
         // unsupported states:
-        // 1: no dual mode means we can't have multiband - default to 5GHZ
+        // 1: BAND_5GHZ only - include 2GHZ since some of countries doesn't support 5G hotspot
         // 2: no 5 GHZ support means we can't have BAND_5GHZ - default to 2GHZ
-        // 3: With Dual mode support we can't have BAND_5GHZ only - include 2GHZ
-        if (!isDualMode
-                && ((band & SoftApConfiguration.BAND_5GHZ) != 0)
-                && ((band & SoftApConfiguration.BAND_2GHZ) != 0)) {
-            return SoftApConfiguration.BAND_5GHZ;
-        } else if (!is5GhzBandSupported() && SoftApConfiguration.BAND_5GHZ == band) {
-            return SoftApConfiguration.BAND_2GHZ;
-        } else if (isDualMode && SoftApConfiguration.BAND_5GHZ == band) {
+        if (SoftApConfiguration.BAND_5GHZ == band) {
+            if (!is5GhzBandSupported()) {
+                return SoftApConfiguration.BAND_2GHZ;
+            }
             return SoftApConfiguration.BAND_5GHZ | SoftApConfiguration.BAND_2GHZ;
         }
 
@@ -156,13 +150,9 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     @VisibleForTesting
     void updatePreferenceEntries() {
         Resources res = mContext.getResources();
-        int entriesRes = R.array.wifi_ap_band_config_full;
-        int summariesRes = R.array.wifi_ap_band_summary_full;
-        // change the list options if this is a dual mode device
-        if (isDualMode) {
-            entriesRes = R.array.wifi_ap_band_dual_mode;
-            summariesRes = R.array.wifi_ap_band_dual_mode_summary;
-        } else if (isVendorDualApSupported && mSecurityType != SoftApConfiguration.SECURITY_TYPE_OWE) {
+        int entriesRes = R.array.wifi_ap_band;
+        int summariesRes = R.array.wifi_ap_band_summary;
+        if (isVendorDualApSupported && mSecurityType != SoftApConfiguration.SECURITY_TYPE_OWE) {
             // change the list option if AP+AP is supproted and selected security type is not OWE
             entriesRes = R.array.wifi_ap_band_vendor_config_full;
             summariesRes = R.array.wifi_ap_band_vendor_summary_full;
