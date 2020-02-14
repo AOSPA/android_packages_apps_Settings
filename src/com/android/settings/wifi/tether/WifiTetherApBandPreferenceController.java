@@ -16,9 +16,12 @@
 
 package com.android.settings.wifi.tether;
 
+import static com.android.settings.AllInOneTetherSettings.DEDUP_POSTFIX;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.wifi.SoftApConfiguration;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -26,6 +29,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 
 public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferenceController {
 
@@ -43,7 +47,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
         final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
-        isDualMode = mWifiManager.isDualModeSupported();
+        isDualMode = mWifiManager.isStaApConcurrencySupported();
 
         isVendorDualApSupported = context.getResources().getBoolean(
             com.android.internal.R.bool.config_wifi_dual_sap_mode_enabled);
@@ -100,7 +104,8 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
 
     @Override
     public String getPreferenceKey() {
-        return PREF_KEY;
+        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE)
+                ? PREF_KEY + DEDUP_POSTFIX : PREF_KEY;
     }
 
     @Override
