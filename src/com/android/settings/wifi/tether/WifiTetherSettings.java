@@ -29,6 +29,7 @@ import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
@@ -277,6 +279,11 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                     // Remove duplicate
                     keys.add(KEY_WIFI_TETHER_SCREEN);
                     return keys;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !FeatureFlagUtils.isEnabled(context, FeatureFlags.TETHER_ALL_IN_ONE);
                 }
 
                 @Override
