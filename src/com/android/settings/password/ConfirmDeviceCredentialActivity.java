@@ -182,6 +182,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         if ((mTitle == null) && isManagedProfile) {
             mTitle = getTitleFromOrganizationName(mUserId);
         }
+
+
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
         final LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
 
@@ -190,6 +192,17 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         bpBundle.putString(BiometricPrompt.KEY_DESCRIPTION, mDetails);
         bpBundle.putBoolean(BiometricPrompt.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS,
                 mCheckDevicePolicyManager);
+
+        final @LockPatternUtils.CredentialType int credentialType = Utils.getCredentialType(
+                mContext, effectiveUserId);
+        if (mTitle == null) {
+            bpBundle.putString(BiometricPrompt.KEY_DEVICE_CREDENTIAL_TITLE,
+                    getTitleFromCredentialType(credentialType, isManagedProfile));
+        }
+        if (mDetails == null) {
+            bpBundle.putString(BiometricPrompt.KEY_DEVICE_CREDENTIAL_DESCRIPTION,
+                    getDetailsFromCredentialType(credentialType, isManagedProfile));
+        }
 
         boolean launchedBiometric = false;
         boolean launchedCDC = false;
@@ -231,6 +244,44 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             setResult(Activity.RESULT_OK);
             finish();
         }
+    }
+
+    private String getTitleFromCredentialType(@LockPatternUtils.CredentialType int credentialType,
+            boolean isManagedProfile) {
+        switch (credentialType) {
+            case LockPatternUtils.CREDENTIAL_TYPE_PIN:
+                return isManagedProfile
+                        ? getString(R.string.lockpassword_confirm_your_work_pin_header)
+                        : getString(R.string.lockpassword_confirm_your_pin_header);
+            case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
+                return isManagedProfile
+                        ? getString(R.string.lockpassword_confirm_your_work_pattern_header)
+                        : getString(R.string.lockpassword_confirm_your_pattern_header);
+            case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
+                return isManagedProfile
+                        ? getString(R.string.lockpassword_confirm_your_work_password_header)
+                        : getString(R.string.lockpassword_confirm_your_password_header);
+        }
+        return null;
+    }
+
+    private String getDetailsFromCredentialType(@LockPatternUtils.CredentialType int credentialType,
+            boolean isManagedProfile) {
+        switch (credentialType) {
+            case LockPatternUtils.CREDENTIAL_TYPE_PIN:
+                return isManagedProfile
+                        ? getString(R.string.lockpassword_confirm_your_pin_generic_profile)
+                        : getString(R.string.lockpassword_confirm_your_pin_generic);
+            case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
+                return isManagedProfile
+                        ? getString(R.string.lockpassword_confirm_your_pattern_generic_profile)
+                        : getString(R.string.lockpassword_confirm_your_pattern_generic);
+            case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
+                return isManagedProfile
+                        ? getString(R.string.lockpassword_confirm_your_password_generic_profile)
+                        : getString(R.string.lockpassword_confirm_your_password_generic);
+        }
+        return null;
     }
 
     @Override

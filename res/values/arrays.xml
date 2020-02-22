@@ -276,16 +276,21 @@
         <item>Require all non-trusted certificate statuses</item>
     </string-array>
 
-    <!-- Wi-Fi AP band settings.  Either Auto, 2.4GHz or 5GHz. -->
+    <!-- Wi-Fi AP band settings.  Either 2.4GHz or 5GHz prefer. -->
     <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
-    <string-array translatable="false" name="wifi_ap_band_config_full">
+    <string-array translatable="false" name="wifi_ap_band">
         <item>1</item>
-        <item>2</item>
+        <item>3</item>
     </string-array>
 
-    <string-array translatable="false" name="wifi_ap_band_summary_full">
+    <string-array translatable="false" name="wifi_ap_band_summary">
         <item>@string/wifi_ap_choose_2G</item>
-        <item>@string/wifi_ap_choose_5G</item>
+        <item>@string/wifi_ap_prefer_5G</item>
+    </string-array>
+
+    <string-array translatable="false" name="wifi_ap_band_config_2G_only">
+        <item>@string/wifi_ap_choose_auto</item>
+        <item>@string/wifi_ap_choose_2G</item>
     </string-array>
 
    <!-- Wi-Fi AP Vendor band settings.  Either 2.4GHz, 5GHz or Both. -->
@@ -300,21 +305,6 @@
         <item>@string/wifi_ap_choose_2G</item>
         <item>@string/wifi_ap_choose_5G</item>
         <item>@string/wifi_ap_choose_vendor_both</item>
-    </string-array>
-
-    <string-array translatable="false" name="wifi_ap_band_dual_mode">
-        <item>1</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array translatable="false" name="wifi_ap_band_dual_mode_summary">
-        <item>@string/wifi_ap_choose_2G</item>
-        <item>@string/wifi_ap_prefer_5G</item>
-    </string-array>
-
-    <string-array translatable="false" name="wifi_ap_band_config_2G_only">
-        <item>@string/wifi_ap_choose_auto</item>
-        <item>@string/wifi_ap_choose_2G</item>
     </string-array>
 
     <!-- Wi-Fi WPS setup for p2p connections.  -->
@@ -1190,6 +1180,19 @@
         <item>zen_mode_from_contacts</item>
         <item>zen_mode_from_starred</item>
         <item>zen_mode_from_none</item>
+    </string-array>
+
+    <string-array name="zen_mode_conversations_entries" translatable="false">
+        <item>@string/zen_mode_from_all_conversations</item>
+        <item>@string/zen_mode_from_important_conversations</item>
+        <item>@string/zen_mode_from_no_conversations</item>
+    </string-array>
+
+    <!-- these values correspond with ZenPolicy.ConversationSenders -->
+    <string-array name="zen_mode_conversations_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 
     <!--String arrays for notification swipe direction -->

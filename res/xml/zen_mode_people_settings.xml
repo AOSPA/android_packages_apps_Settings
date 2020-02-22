@@ -18,7 +18,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="zen_mode_people_settings_page"
     android:title="@string/zen_category_people" >
 
    <PreferenceCategory
@@ -59,6 +58,13 @@
    <PreferenceCategory
        android:title="@string/zen_mode_conversations_title"
        android:key="zen_mode_settings_category_conversations">
+
+      <!-- Conversations -->
+      <ListPreference
+          android:key="zen_mode_conversations"
+          android:title="@string/zen_mode_conversations_title"
+          android:entries="@array/zen_mode_conversations_entries"
+          android:entryValues="@array/zen_mode_conversations_values"/>
    </PreferenceCategory>
 
    <!-- Footer that shows if user is put into alarms only or total silence mode by an app -->

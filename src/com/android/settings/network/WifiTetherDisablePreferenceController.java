@@ -30,7 +30,9 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.TetherUtil;
 
 /**
  * This controller helps to manage the switch state and visibility of wifi tether disable switch
@@ -40,19 +42,13 @@ import com.android.settingslib.core.AbstractPreferenceController;
  *
  * @see BluetoothTetherPreferenceController
  * @see UsbTetherPreferenceController
- * TODO(b/147272749): Extend BasePreferenceController.java instead.
- *
  */
-public final class WifiTetherDisablePreferenceController extends AbstractPreferenceController
+public final class WifiTetherDisablePreferenceController extends BasePreferenceController
         implements LifecycleObserver, Preference.OnPreferenceChangeListener,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String TAG = "WifiTetherDisablePreferenceController";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    public static final String PREF_KEY = "disable_wifi_tethering";
-
-    // This KEY is used for a shared preference value, not for any displayed preferences.
-    public static final String KEY_ENABLE_WIFI_TETHERING = "enable_wifi_tethering";
 
     private final ConnectivityManager mCm;
     private boolean mBluetoothTetherEnabled;
@@ -61,8 +57,8 @@ public final class WifiTetherDisablePreferenceController extends AbstractPrefere
     private Preference mPreference;
     private final SharedPreferences mSharedPreferences;
 
-    public WifiTetherDisablePreferenceController(Context context, Lifecycle lifecycle) {
-        super(context);
+    public WifiTetherDisablePreferenceController(Context context, String prefKey) {
+        super(context, prefKey);
         mSharedPreferences =
                 context.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE);
         mCm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -70,9 +66,6 @@ public final class WifiTetherDisablePreferenceController extends AbstractPrefere
                 TetherEnabler.USB_TETHER_KEY, false);
         mBluetoothTetherEnabled = mSharedPreferences.getBoolean(
                 TetherEnabler.BLUETOOTH_TETHER_KEY, false);
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
@@ -85,36 +78,43 @@ public final class WifiTetherDisablePreferenceController extends AbstractPrefere
         mSharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
     }
 
-    @Override
-    public boolean isAvailable() {
-        final String[] wifiRegexs = mCm.getTetherableWifiRegexs();
-        return wifiRegexs != null && wifiRegexs.length > 0 && shouldShow();
-    }
-
     @VisibleForTesting
     boolean shouldShow() {
         return mBluetoothTetherEnabled || mUSBTetherEnabled;
     }
 
     @Override
-    public String getPreferenceKey() {
-        return PREF_KEY;
+    public int getAvailabilityStatus() {
+        final String[] wifiRegexs = mCm.getTetherableWifiRegexs();
+        if (wifiRegexs == null || wifiRegexs.length == 0 || !shouldShow()
+                || !TetherUtil.isTetherAvailable(mContext)) {
+            return CONDITIONALLY_UNAVAILABLE;
+        } else {
+            return AVAILABLE;
+        }
     }
 
     @Override
     public CharSequence getSummary() {
-        // TODO(b/146818850): Update summary accordingly.
-        return super.getSummary();
+        if (mUSBTetherEnabled && mBluetoothTetherEnabled) {
+            return mContext.getString(R.string.disable_wifi_hotspot_when_usb_and_bluetooth_on);
+        } else if (mUSBTetherEnabled) {
+            return mContext.getString(R.string.disable_wifi_hotspot_when_usb_on);
+        } else if (mBluetoothTetherEnabled) {
+            return mContext.getString(R.string.disable_wifi_hotspot_when_bluetooth_on);
+        }
+        return mContext.getString(R.string.summary_placeholder);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mScreen = screen;
-        mPreference = screen.findPreference(PREF_KEY);
+        mPreference = screen.findPreference(mPreferenceKey);
         if (mPreference != null && mPreference instanceof SwitchPreference) {
             ((SwitchPreference) mPreference)
-                    .setChecked(!mSharedPreferences.getBoolean(KEY_ENABLE_WIFI_TETHERING, true));
+                    .setChecked(!mSharedPreferences.getBoolean(
+                            TetherEnabler.KEY_ENABLE_WIFI_TETHERING, true));
             mPreference.setOnPreferenceChangeListener(this);
         }
         updateState(mPreference);
@@ -123,7 +123,7 @@ public final class WifiTetherDisablePreferenceController extends AbstractPrefere
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        setVisible(mScreen, PREF_KEY, shouldShow());
+        setVisible(mScreen, mPreferenceKey, shouldShow());
     }
 
     @Override
@@ -162,7 +162,7 @@ public final class WifiTetherDisablePreferenceController extends AbstractPrefere
             Log.d(TAG, "check state changing to " + o);
         }
         final SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(KEY_ENABLE_WIFI_TETHERING, enableWifi);
+        editor.putBoolean(TetherEnabler.KEY_ENABLE_WIFI_TETHERING, enableWifi);
         editor.apply();
         return true;
     }

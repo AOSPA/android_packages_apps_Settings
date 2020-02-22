@@ -146,6 +146,30 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return mTopDevice;
     }
 
+    /**
+     * Find the active MediaDevice.
+     *
+     * @param type the media device type.
+     * @return MediaDevice list
+     *
+     */
+    public List<MediaDevice> getActiveMediaDevice(@MediaDevice.MediaDeviceType int type) {
+        return mLocalMediaManager.getActiveMediaDevice(type);
+    }
+
+    /**
+     * Request to set volume.
+     *
+     * @param device for the targeted device.
+     * @param volume for the new value.
+     *
+     */
+    public void adjustVolume(MediaDevice device, int volume) {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            device.requestSetVolume(volume);
+        });
+    }
+
     private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {

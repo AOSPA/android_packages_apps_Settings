@@ -36,6 +36,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.telephony.IccCardConstants;
 import com.android.internal.telephony.TelephonyIntents;
@@ -52,7 +53,9 @@ import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -77,6 +80,8 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     private UserManager mUserManager;
     private String mClickedPrefKey;
+
+    private List<AbstractPreferenceController> mHiddenControllerList;
 
     private final BroadcastReceiver mSimStateReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
@@ -152,12 +157,12 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         mPhoneId = SubscriptionManager.getPhoneId(mSubId);
         Log.i(LOG_TAG, "display subId: " + mSubId + ", phoneId: " + mPhoneId);
 
-        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            return Arrays.asList(
-                    new DataUsageSummaryPreferenceController(getActivity(), getSettingsLifecycle(),
-                            this, mSubId));
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return Arrays.asList();
         }
-        return Arrays.asList();
+        return Arrays.asList(
+                new DataUsageSummaryPreferenceController(getActivity(), getSettingsLifecycle(),
+                        this, mSubId));
     }
 
     @Override
@@ -224,6 +229,50 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                 .createForSubscriptionId(mSubId);
 
         onRestoreInstance(icicle);
+    }
+
+    @Override
+    public void onExpandButtonClick() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        mHiddenControllerList.stream()
+                .filter(controller -> controller.isAvailable())
+                .forEach(controller -> {
+                    final String key = controller.getPreferenceKey();
+                    final Preference preference = screen.findPreference(key);
+                    controller.updateState(preference);
+                });
+        super.onExpandButtonClick();
+    }
+
+    /*
+     * Replace design within {@link DashboardFragment#updatePreferenceStates()}
+     */
+    @Override
+    protected void updatePreferenceStates() {
+        mHiddenControllerList = new ArrayList<AbstractPreferenceController>();
+
+        final PreferenceScreen screen = getPreferenceScreen();
+        final Collection<List<AbstractPreferenceController>> controllerLists =
+                getPreferenceControllers();
+        controllerLists.stream().flatMap(Collection::stream)
+                .forEach(controller -> {
+                    final String key = controller.getPreferenceKey();
+                    if (TextUtils.isEmpty(key)) {
+                        return;
+                    }
+                    final Preference preference = screen.findPreference(key);
+                    if (preference == null) {
+                        return;
+                    }
+                    if (!isPreferenceExpanded(preference)) {
+                        mHiddenControllerList.add(controller);
+                        return;
+                    }
+                    if (!controller.isAvailable()) {
+                        return;
+                    }
+                    controller.updateState(preference);
+                });
     }
 
     @Override
@@ -302,7 +351,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (SubscriptionManager.isValidSubscriptionId(mSubId)) {
             final MenuItem item = menu.add(Menu.NONE, R.id.edit_sim_name, Menu.NONE,
                     R.string.mobile_network_sim_name);
             item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
@@ -313,7 +362,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (SubscriptionManager.isValidSubscriptionId(mSubId)) {
             if (menuItem.getItemId() == R.id.edit_sim_name) {
                 RenameMobileNetworkDialogFragment.newInstance(mSubId).show(
                         getFragmentManager(), RenameMobileNetworkDialogFragment.TAG);
