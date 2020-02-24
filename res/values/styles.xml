@@ -72,20 +72,6 @@
         <item name="android:textSize">@dimen/theme_option_title_font_text_size</item>
     </style>
 
-    <!-- Preview cards -->
-    <style name="PreviewCard" parent="CardView">
-        <item name="cardCornerRadius">?android:dialogCornerRadius</item>
-        <item name="android:clipChildren">true</item>
-        <item name="contentPadding">@dimen/preview_card_padding</item>
-        <item name="cardBackgroundColor">?android:colorPrimary</item>
-    </style>
-
-    <style name="FullContentPreviewCard" parent="PreviewCard">
-        <item name="android:clipChildren">true</item>
-        <item name="contentPadding">0dp</item>
-        <item name="cardBackgroundColor">?android:colorPrimary</item>
-    </style>
-
     <style name="CardTitleTextAppearance" parent="TitleTextAppearance">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/card_title_text_size</item>
