@@ -1377,11 +1377,6 @@
                   android:exported="false">
         </activity>
 
-        <activity android:name=".security.InstallAppSourceCertificateWarning"
-                  android:theme="@style/GlifV3Theme.Light"
-                  android:exported="false">
-        </activity>
-
         <activity
             android:name="Settings$DeviceAdminSettingsActivity"
             android:label="@string/device_admin_settings_title">
@@ -1645,6 +1640,10 @@
         <activity android:name=".password.ConfirmLockPassword"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/GlifTheme.Light"/>
+
+        <activity android:name=".password.ForgotPasswordActivity"
+            android:theme="@style/GlifV3Theme.Light"
+            android:exported="false"/>
 
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
             android:exported="false"
@@ -2161,7 +2160,7 @@
 
         <receiver android:name=".TestingSettingsBroadcastReceiver">
             <intent-filter>
-                 <action android:name="android.provider.Telephony.SECRET_CODE" />
+                 <action android:name="android.telephony.action.SECRET_CODE" />
                  <data android:scheme="android_secret_code" android:host="4636" />
             </intent-filter>
        </receiver>
