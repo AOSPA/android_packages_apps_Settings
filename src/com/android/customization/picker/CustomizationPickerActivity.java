@@ -130,10 +130,9 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
                 // Navigate to the Wallpaper tab if we started directly from launcher, otherwise
                 // start at the Styles tab
-                int section = WALLPAPER_FOCUS.equals(getIntent()
-                    .getStringExtra(WALLPAPER_FLAVOR_EXTRA))
-                    ? mBottomNav.getMenu().size() - 1 : 0;
-                navigateToSection(mBottomNav.getMenu().getItem(section).getItemId());
+                navigateToSection(
+                        WALLPAPER_FOCUS.equals(getIntent().getStringExtra(WALLPAPER_FLAVOR_EXTRA))
+                                ? R.id.nav_wallpaper : R.id.nav_theme);
             }
         }
     }
@@ -306,6 +305,11 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     }
 
     private void navigateToSection(@IdRes int id) {
+        // Navigate to the first section if the targeted section doesn't exist.
+        if (!mSections.containsKey(id)) {
+            id = mBottomNav.getMenu().getItem(0).getItemId();
+        }
+
         mBottomNav.setSelectedItemId(id);
     }
 
