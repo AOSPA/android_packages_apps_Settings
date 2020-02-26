@@ -853,7 +853,7 @@ public class WifiConfigController implements TextWatcher,
 
             case AccessPoint.SECURITY_DPP:
                 config.allowedKeyManagement.set(KeyMgmt.DPP);
-                config.requirePMF = true;
+                config.requirePmf = true;
                 break;
             case AccessPoint.SECURITY_SAE:
                 config.allowedKeyManagement.set(KeyMgmt.SAE);

@@ -372,7 +372,7 @@ public class ApnSettings extends RestrictedSettingsFragment
             ApnPreference.setSelectedKey(mSelectedKey);
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                final String name = cursor.getString(NAME_INDEX);
+                String name = cursor.getString(NAME_INDEX);
                 final String apn = cursor.getString(APN_INDEX);
                 final String key = cursor.getString(ID_INDEX);
                 final String type = cursor.getString(TYPES_INDEX);
