@@ -118,6 +118,13 @@
         android:fragment="com.android.settings.security.LockscreenDashboardFragment"
         settings:controller="com.android.settings.security.screenlock.LockScreenPreferenceController" />
 
+    <!-- Horizon Light Settings -->
+    <Preference
+        android:key="horizon_light_settings"
+        android:title="@string/horizon_light_title"
+        android:summary="@string/horizon_light_summary"
+        android:fragment="com.android.settings.display.HorizonLightSettings" />
+
     <SwitchPreference
         android:key="camera_gesture"
         android:title="@string/camera_gesture_title"
