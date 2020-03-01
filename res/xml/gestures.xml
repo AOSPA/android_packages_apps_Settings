@@ -87,6 +87,11 @@
         android:fragment="com.android.settings.gestures.SwipeToScreenshotGestureSettings"
         settings:controller="com.android.settings.gestures.SwipeToScreenshotPreferenceController" />
 
+    <Preference
+        android:key="media_autopause"
+        android:title="@string/media_autopause"
+        android:fragment="com.android.settings.gestures.MediaAutoPauseSettings" />
+
     <PreferenceCategory
         android:key="quick_gestures"
         android:title="@string/quick_gestures_title" >
