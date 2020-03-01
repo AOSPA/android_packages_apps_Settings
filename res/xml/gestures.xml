@@ -87,6 +87,11 @@
         android:fragment="com.android.settings.gestures.SwipeToScreenshotGestureSettings"
         settings:controller="com.android.settings.gestures.SwipeToScreenshotPreferenceController" />
 
+    <Preference
+        android:key="adaptive_playback_summary"
+        android:title="@string/adaptive_playback"
+        android:fragment="com.android.settings.gestures.AdaptivePlaybackSettings" />
+
     <PreferenceCategory
         android:key="quick_gestures"
         android:title="@string/quick_gestures_title" >
