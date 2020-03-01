@@ -51,4 +51,22 @@
         <item>@string/security_settings_fingerprint_sensor_location_front</item> <!-- FOD -->
     </string-array>
 
+    <!-- Keys for the list of adaptive playback timeouts xml. -->
+    <string-array name="adaptive_playback_timeout_keys" translatable="false">
+        <item>adaptive_playback_timeout_30secs</item>
+        <item>adaptive_playback_timeout_1min</item>
+        <item>adaptive_playback_timeout_2mins</item>
+        <item>adaptive_playback_timeout_5mins</item>
+        <item>adaptive_playback_timeout_10mins</item>
+    </string-array>
+
+    <!-- Values for the list of adaptive playback, pairs to Keys . -->
+    <integer-array name="adaptive_playback_timeout_values" translatable="false">
+        <item>30000</item>
+        <item>60000</item>
+        <item>120000</item>
+        <item>300000</item>
+        <item>600000</item>
+    </integer-array>
+
 </resources>
