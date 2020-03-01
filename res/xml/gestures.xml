@@ -87,6 +87,11 @@
         android:fragment="com.android.settings.gestures.SwipeToScreenshotGestureSettings"
         settings:controller="com.android.settings.gestures.SwipeToScreenshotPreferenceController" />
 
+    <Preference
+        android:key="smart_pause"
+        android:title="@string/smart_pause"
+        android:fragment="com.android.settings.gestures.SmartPauseSettings" />
+
     <PreferenceCategory
         android:key="quick_gestures"
         android:title="@string/quick_gestures_title" >
