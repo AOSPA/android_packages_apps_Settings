@@ -51,6 +51,7 @@ import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.widget.SwitchBar;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class NotificationHistoryActivity extends Activity {
@@ -235,44 +236,72 @@ public class NotificationHistoryActivity extends Activity {
             };
 
     private final NotificationListenerService mListener = new NotificationListenerService() {
+        private RecyclerView mDismissedRv;
+        private RecyclerView mSnoozedRv;
 
         @Override
         public void onListenerConnected() {
-            StatusBarNotification[] snoozed = getSnoozedNotifications();
+            StatusBarNotification[] snoozed = null;
+            StatusBarNotification[] dismissed = null;
+            try {
+                snoozed = getSnoozedNotifications();
+                dismissed = mNm.getHistoricalNotifications(
+                    NotificationHistoryActivity.this.getPackageName(), 6, false);
+            } catch (SecurityException | RemoteException e) {
+                Log.d(TAG, "OnPaused called while trying to retrieve notifications");
+            }
+
+            mSnoozedRv = mSnoozeView.findViewById(R.id.notification_list);
+            LinearLayoutManager lm = new LinearLayoutManager(NotificationHistoryActivity.this);
+            mSnoozedRv.setLayoutManager(lm);
+            mSnoozedRv.setAdapter(
+                    new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm));
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                    mSnoozedRv.getContext(), lm.getOrientation());
+            mSnoozedRv.addItemDecoration(dividerItemDecoration);
+            mSnoozedRv.setNestedScrollingEnabled(false);
+
             if (snoozed == null || snoozed.length == 0) {
                 mSnoozeView.setVisibility(View.GONE);
             } else {
-                RecyclerView rv = mSnoozeView.findViewById(R.id.notification_list);
-                LinearLayoutManager lm = new LinearLayoutManager(NotificationHistoryActivity.this);
-                rv.setLayoutManager(lm);
-                rv.setAdapter(new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm));
-                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                        rv.getContext(), lm.getOrientation());
-                rv.addItemDecoration(dividerItemDecoration);
-                rv.setNestedScrollingEnabled(false);
-
-                ((NotificationSbnAdapter) rv.getAdapter()).onRebuildComplete(
-                        Arrays.asList(snoozed));
+                ((NotificationSbnAdapter) mSnoozedRv.getAdapter()).onRebuildComplete(
+                        new ArrayList<>(Arrays.asList(snoozed)));
             }
 
-            try {
-                StatusBarNotification[] dismissed = mNm.getHistoricalNotifications(
-                        NotificationHistoryActivity.this.getPackageName(), 6, false);
-                RecyclerView rv = mDismissView.findViewById(R.id.notification_list);
-                LinearLayoutManager lm = new LinearLayoutManager(NotificationHistoryActivity.this);
-                rv.setLayoutManager(lm);
-                rv.setAdapter(new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm));
-                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                        rv.getContext(), lm.getOrientation());
-                rv.addItemDecoration(dividerItemDecoration);
-                rv.setNestedScrollingEnabled(false);
+            mDismissedRv = mDismissView.findViewById(R.id.notification_list);
+            LinearLayoutManager dismissLm =
+                new LinearLayoutManager(NotificationHistoryActivity.this);
+            mDismissedRv.setLayoutManager(dismissLm);
+            mDismissedRv.setAdapter(
+                new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm));
+            DividerItemDecoration dismissDivider = new DividerItemDecoration(
+                mDismissedRv.getContext(), dismissLm.getOrientation());
+            mDismissedRv.addItemDecoration(dismissDivider);
+            mDismissedRv.setNestedScrollingEnabled(false);
 
-                ((NotificationSbnAdapter) rv.getAdapter()).onRebuildComplete(
-                        Arrays.asList(dismissed));
-                mDismissView.setVisibility(View.VISIBLE);
-            } catch (Exception e) {
-                Slog.e(TAG, "Cannot load recently dismissed", e);
+            if (dismissed == null || dismissed.length == 0) {
                 mDismissView.setVisibility(View.GONE);
+            } else {
+                mDismissView.setVisibility(View.VISIBLE);
+                ((NotificationSbnAdapter) mDismissedRv.getAdapter()).onRebuildComplete(
+                    new ArrayList<>(Arrays.asList(dismissed)));
+            }
+        }
+
+        @Override
+        public void onNotificationPosted(StatusBarNotification sbn) {
+            // making lint happy
+        }
+
+        @Override
+        public void onNotificationRemoved(StatusBarNotification sbn, RankingMap rankingMap,
+                int reason) {
+            if (reason == REASON_SNOOZED) {
+                ((NotificationSbnAdapter) mSnoozedRv.getAdapter()).addSbn(sbn);
+                mSnoozeView.setVisibility(View.VISIBLE);
+            } else {
+                ((NotificationSbnAdapter) mDismissedRv.getAdapter()).addSbn(sbn);
+                mDismissView.setVisibility(View.VISIBLE);
             }
         }
     };

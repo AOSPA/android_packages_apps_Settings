@@ -144,6 +144,8 @@
     <string name="bluetooth_lock_voice_dialing_summary">
       Prevent use of the bluetooth dialer when the screen is locked
     </string>
+    <!-- Bluetooth settings screen, heading above the list of nearby bluetooth devices. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_devices">Bluetooth devices</string>
     <!-- Bluetooth settings screen, title for the current bluetooth name setting -->
     <string name="bluetooth_device_name">Device name</string>
     <!-- Bluetooth settings screen, image description for device details button. This opens the screen to rename, unpair, etc. a single device. -->
@@ -2037,8 +2039,10 @@
     <string name="wifi_ip_settings">IP settings</string>
     <!-- Label for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
     <string name="wifi_privacy_settings">Privacy</string>
-    <!-- Label for the subscription detail preference. [CHAR LIMIT=32] -->
-    <string name="wifi_subscription_detail">Subscription details</string>
+    <!-- Label for the subscription preference. [CHAR LIMIT=32] -->
+    <string name="wifi_subscription">Subscription</string>
+    <!-- Summary text for the subscription preference. [CHAR LIMIT=NONE] -->
+    <string name="wifi_subscription_summary">View or change subscription</string>
     <!-- Summary for Wifi MAC randomization option when it is ephemeral network [CHAR LIMIT=50] -->
     <string name="wifi_privacy_settings_ephemeral_summary">Randomized MAC</string>
     <!-- Title for the fragment to add a device into the wifi network [CHAR LIMIT=50]  -->
@@ -8556,7 +8560,7 @@
     <string name="interact_across_profiles_summary_1" translatable="false">Connected apps share permissions and can access each other\u2019s data.</string>
 
     <!-- Apps > App Details > Connected personal and work apps > Description. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_summary_2" translatable="false">Only connect apps that you trust with your personal data.Your data may be exposed to your IT admin.</string>
+    <string name="interact_across_profiles_summary_2" translatable="false">Only connect apps that you trust with your personal data. Work apps may expose your data to your IT admin.</string>
 
     <!-- Apps > App Details > Connected personal and work apps > Consent dialog title. [CHAR LIMIT=NONE] -->
     <string name="interact_across_profiles_consent_dialog_title" translatable="false">Trust work %1$s with your personal data?</string>
@@ -11054,6 +11058,7 @@
     <string-array name="graphics_driver_all_apps_preference_values">
         <item>@string/graphics_driver_app_preference_default</item>
         <item>@string/graphics_driver_app_preference_game_driver</item>
+        <item>@string/graphics_driver_app_preference_prerelease_driver</item>
     </string-array>
     <!-- All the values of graphics driver for app preference [CHAR LIMIT=50] -->
     <string-array name="graphics_driver_app_preference_values">
@@ -11490,22 +11495,6 @@
     <!-- Mobile network details page. Label for an option that lets the user delete an eSIM from
          the device. [CHAR LIMIT=60] -->
     <string name="mobile_network_erase_sim">Erase SIM</string>
-    <!-- Title of a confirmation dialog for deleting an eSIM from the device.
-         [CHAR LIMIT=60] -->
-    <string name="mobile_network_erase_sim_dialog_title">Erase this downloaded SIM?</string>
-    <!-- Body text of of a confirmation dialog for deleting an eSIM from the device.
-         [CHAR LIMIT=NONE] -->
-    <string name="mobile_network_erase_sim_dialog_body">
-        Erasing this SIM removes <xliff:g id="carrier" example="Verizon">%1$s</xliff:g> service
-        from this device.\n\nService for <xliff:g id="carrier" example="Verizon">%2$s</xliff:g>
-        won\u2019t be canceled.
-    </string>
-    <!-- OK button on a confirmation dialog for deleting an eSIM from the device.
-         [CHAR LIMIT=30] -->
-    <string name="mobile_network_erase_sim_dialog_ok">Erase</string>
-    <!-- Body text of the progress dialog we show while deleting an eSIM from the device.
-         [CHAR LIMIT=NONE] -->
-    <string name="mobile_network_erase_sim_dialog_progress">Erasing SIM\u2026</string>
 
     <!-- Title of a dialog indicating that an error ocurred when deleting an eSIM from the device
          [CHAR LIMIT=60] -->
@@ -11704,6 +11693,8 @@
     <string name="media_output_panel_title">Switch output</string>
     <!-- Summary for represent which device is playing media [CHAR LIMIT=NONE] -->
     <string name="media_output_panel_summary_of_playing_device">Currently playing on <xliff:g id="device_name" example="Bose headphone">%1$s</xliff:g></string>
+    <!-- Summary for disconnected status [CHAR LIMIT=50] -->
+    <string name="media_output_disconnected_status"><xliff:g id="device_name" example="My device">%1$s</xliff:g> (disconnected)</string>
 
     <!-- Label for the title on wfc disclaimer fragment. [CHAR LIMIT=40] -->
     <string name="wfc_disclaimer_title_text">Important information</string>
