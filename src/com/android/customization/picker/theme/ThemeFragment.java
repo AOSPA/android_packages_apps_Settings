@@ -60,7 +60,6 @@ import com.android.customization.picker.TimeTicker;
 import com.android.customization.picker.theme.ThemePreviewPage.ThemeCoverPage;
 import com.android.customization.picker.theme.ThemePreviewPage.TimeContainer;
 import com.android.customization.widget.OptionSelectorController;
-import com.android.customization.widget.PreviewPager;
 import com.android.wallpaper.R;
 import com.android.wallpaper.asset.Asset;
 import com.android.wallpaper.asset.Asset.CenterCropBitmapTask;
@@ -68,6 +67,7 @@ import com.android.wallpaper.model.WallpaperInfo;
 import com.android.wallpaper.module.CurrentWallpaperInfoFactory;
 import com.android.wallpaper.module.InjectorProvider;
 import com.android.wallpaper.picker.ToolbarFragment;
+import com.android.wallpaper.widget.PreviewPager;
 
 import java.util.List;
 
