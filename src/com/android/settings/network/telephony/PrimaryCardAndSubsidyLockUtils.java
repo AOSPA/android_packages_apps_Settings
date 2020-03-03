@@ -99,7 +99,7 @@ public final class PrimaryCardAndSubsidyLockUtils {
     private static boolean isVendorPropertyEnabled(String propertyName) {
         boolean propVal = false;
         IExtTelephony extTelephony = IExtTelephony.Stub
-                .asInterface(ServiceManager.getService("extphone"));
+                .asInterface(ServiceManager.getService("qti.radio.extphone"));
         try {
             propVal = extTelephony.getPropertyValueBool(propertyName, false);
         } catch (RemoteException | NullPointerException ex) {
@@ -111,7 +111,7 @@ public final class PrimaryCardAndSubsidyLockUtils {
     private static int getVendorPropertyInt(String propertyName) {
         int propVal = -1;
         IExtTelephony extTelephony = IExtTelephony.Stub
-                .asInterface(ServiceManager.getService("extphone"));
+                .asInterface(ServiceManager.getService("qti.radio.extphone"));
         try {
             propVal = extTelephony.getPropertyValueInt(propertyName, -1);
         } catch (RemoteException | NullPointerException ex) {
@@ -123,7 +123,7 @@ public final class PrimaryCardAndSubsidyLockUtils {
     public static int getUiccCardProvisioningStatus(int phoneId) {
         int provStatus = CARD_NOT_PROVISIONED;
         IExtTelephony extTelephony = IExtTelephony.Stub
-                .asInterface(ServiceManager.getService("extphone"));
+                .asInterface(ServiceManager.getService("qti.radio.extphone"));
         try {
             provStatus = extTelephony.getCurrentUiccCardProvisioningStatus(phoneId);
         } catch (RemoteException | NullPointerException ex) {
