@@ -78,7 +78,7 @@ abstract public class NotificationSettings extends DashboardFragment {
     protected boolean mListeningToPackageRemove;
 
     protected List<NotificationPreferenceController> mControllers = new ArrayList<>();
-    protected ImportanceListener mImportanceListener = new ImportanceListener();
+    protected DependentFieldListener mDependentFieldListener = new DependentFieldListener();
 
     protected Intent mIntent;
     protected Bundle mArgs;
@@ -203,7 +203,8 @@ abstract public class NotificationSettings extends DashboardFragment {
         mConversationInfo = mBackend.getConversationInfo(
                 mContext, mPkg, mUid, mChannel.getConversationId());
         if (mConversationInfo != null) {
-            mConversationDrawable = mBackend.getConversationDrawable(mContext, mConversationInfo);
+            mConversationDrawable = mBackend.getConversationDrawable(
+                    mContext, mConversationInfo, mAppRow.pkg, mAppRow.uid);
         }
     }
 
@@ -326,8 +327,8 @@ abstract public class NotificationSettings extends DashboardFragment {
         }
     };
 
-    protected class ImportanceListener {
-        protected void onImportanceChanged() {
+    protected class DependentFieldListener {
+        protected void onFieldValueChanged() {
             final PreferenceScreen screen = getPreferenceScreen();
             for (NotificationPreferenceController controller : mControllers) {
                 controller.displayPreference(screen);

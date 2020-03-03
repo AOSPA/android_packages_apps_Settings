@@ -1761,6 +1761,12 @@
     <string name="wifi_band_60ghz">60 GHz</string>
     <!-- Wifi Sign in text for button [CHAR LIMIT = 40]-->
     <string name="wifi_sign_in_button_text">Sign in</string>
+    <!-- Text for button to go to Wifi venue information webpage when Wifi is a captive portal [CHAR LIMIT=40]-->
+    <string name="wifi_venue_website_button_text">Open site</string>
+    <!-- Text shown in wifi settings indicating how much time is left on an internet access point that has a time limit for the session [CHAR LIMIT=40] -->
+    <string name="wifi_time_remaining"><xliff:g id="Remaining time" example="1 day, 2 hours, 3 minutes">%1$s</xliff:g> left</string>
+    <!-- Text shown in wifi settings indicating at what time the connection will expire on an internet access point that has a time limit for the session [CHAR LIMIT=40] -->
+    <string name="wifi_expiry_time">Expires on <xliff:g id="Expiry time" example="2020/01/02 12:34PM">%1$s</xliff:g></string>
     <!-- Wifi Sign in CTA for wifi settings when captive portal auth is required [CHAR LIMIT = 50] -->
     <string name="wifi_tap_to_sign_in">Tap here to sign in to network</string>
     <!-- Transmit Link speed on Wifi Status screen [CHAR LIMIT=32] -->
@@ -2031,6 +2037,8 @@
     <string name="wifi_ip_settings">IP settings</string>
     <!-- Label for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
     <string name="wifi_privacy_settings">Privacy</string>
+    <!-- Label for the subscription detail preference. [CHAR LIMIT=32] -->
+    <string name="wifi_subscription_detail">Subscription details</string>
     <!-- Summary for Wifi MAC randomization option when it is ephemeral network [CHAR LIMIT=50] -->
     <string name="wifi_privacy_settings_ephemeral_summary">Randomized MAC</string>
     <!-- Title for the fragment to add a device into the wifi network [CHAR LIMIT=50]  -->
@@ -3793,7 +3801,29 @@
     <!-- Tethering controls, footer note displayed when tethering is disabled because Data Saver mode is on [CHAR LIMIT=none]-->
     <string name="tether_settings_disabled_on_data_saver">"Can\u2019t tether or use portable hotspots while Data Saver is on"</string>
 
+    <!-- Tethering setting summary when only Wi-Fi hotspot is on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_hotspot_only">Hotspot only</string>
+    <!-- Tethering setting summary when only USB tethering is on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_usb_tethering_only">USB only</string>
+    <!-- Tethering setting summary when only Bluetooth tethering is on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_bluetooth_tethering_only">Bluetooth only</string>
+    <!-- Tethering setting summary when Wi-Fi hotspot and USB tethering are on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_hotspot_and_usb">Hotspot, USB</string>
+    <!-- Tethering setting summary when Wi-Fi hotspot and Bluetooth tethering are on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_hotspot_and_bluetooth">Hotspot, Bluetooth</string>
+    <!-- Tethering setting summary when USB and Bluetooth tethering are on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_usb_and_bluetooth">USB, Bluetooth</string>
+    <!-- Tethering setting summary when Wi-Fi hotspot and USB and Bluetooth tethering are on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth">Hotspot, USB, Bluetooth</string>
+    <!-- Tethering setting summary when hotspot and tethering are off [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_off">Not sharing internet with other devices</string>
+
+    <!-- Tethering interface options [CHAR LIMIT=NONE]-->
+    <string name="tethering_interface_options">Tethering</string>
+
     <!-- Disable Wifi Hotspot option-->
+    <!-- Don't use Wi-Fi hotspot title [CHAR LIMIT=NONE]-->
+    <string name="disable_wifi_hotspot_title">Don\u2019t use Wi\u2011Fi hotspot</string>
     <!-- Don't use Wi-Fi hotspot summary when USB tethering is chosen [CHAR LIMIT=NONE]-->
     <string name="disable_wifi_hotspot_when_usb_on">Only share internet via USB</string>
     <!-- Don't use Wi-Fi hotspot summary when Bluetooth tethering is chosen [CHAR LIMIT=NONE]-->
@@ -4065,6 +4095,12 @@
     <string name="lockpassword_choose_your_pattern_header_for_face">To use face unlock, set pattern</string>
     <!-- Header on first screen of choose password/PIN as backup for face unlock flow. If this string cannot be translated in under 40 characters, please translate "Set face unlock backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_pin_header_for_face">To use face unlock, set PIN</string>
+    <!-- Text for button that the user should tap when they forgot their work profile password [CHAR LIMIT=40] -->
+    <string name="lockpassword_forgot_password">Forgot your password?</string>
+    <!-- Text for button that the user should tap when they forgot their work profile pattern [CHAR LIMIT=40] -->
+    <string name="lockpassword_forgot_pattern">Forgot your pattern?</string>
+    <!-- Text for button that the user should tap when they forgot their work profile PIN [CHAR LIMIT=40] -->
+    <string name="lockpassword_forgot_pin">Forgot your PIN?</string>
 
     <!-- Message to be used to explain the user that he needs to enter his pattern to continue a
          particular operation. [CHAR LIMIT=70]-->
@@ -4235,6 +4271,11 @@
     <string name="recent_app_category_title">Recently opened apps</string>
     <!-- Preference title for showing all apps on device [CHAR_LIMIT=50]-->
     <string name="see_all_apps_title">See all <xliff:g id="count" example="3">%1$d</xliff:g> apps</string>
+
+    <!-- Title of the dialog that asks the user to contact the IT admin to reset password [CHAR LIMIT=40] -->
+    <string name="forgot_password_title">Contact your IT admin</string>
+    <!-- Content of the dialog that asks the user to contact the IT admin to reset password [CHAR LIMIT=100] -->
+    <string name="forgot_password_text">They can help you reset your PIN, pattern, or password</string>
 
     <!-- Warning that appears below the unknown sources switch in settings -->
     <string name="install_all_warning" product="tablet">
@@ -4873,7 +4914,7 @@
     <!-- Short summary for nav bar Magnification. Tells the user that this feature allows the user to magnify the screen using a button in the nav bar -->
     <string name="accessibility_screen_magnification_navbar_short_summary">Tap a button to zoom</string>
     <!-- Summary for the accessibility preference screen to enable screen magnification gestures. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_summary">Quickly zoom in on the screen to see content more clearly.\n\n<b>To zoom in:</b>\n\t1. Use shortcut to start magnification\n\t2. Tap the screen\n\t3. Drag 2 fingers to move around screen\n\t4. Pinch with 2 fingers to adjust zoom\n\t5. Use shortcut to stop magnification</string>
+    <string name="accessibility_screen_magnification_summary"><![CDATA[Quickly zoom in on the screen to see content more clearly.<br/><br/><b>To zoom in:</b><br/>\t1. Use shortcut to start magnification<br/>\t2. Tap the screen<br/>\t3. Drag 2 fingers to move around screen<br/>\t4. Pinch with 2 fingers to adjust zoom<br/>\t5. Use shortcut to stop magnification<br/><br/><b>To zoom in temporarily:</b><br/>\t1. Use shortcut to start magnification<br/>\t2. Touch & hold anywhere on the screen<br/>\t3. Drag finger to move around screen<br/>\t4. Lift finger to stop magnification]]></string>
     <!-- Summary for the accessibility preference screen to enable screen magnification via the nav bar. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_navbar_summary">When magnification is turned on, you can zoom in on your screen.\n\n<b>To zoom</b>, start magnification, then tap anywhere on the screen.\n<ul><li>Drag 2 or more fingers to scroll</li>\n<li>Pinch 2 or more fingers to adjust zoom</li></ul>\n\n<b>To zoom temporarily</b>, start magnification, then touch &amp; hold anywhere on the screen.\n<ul><li>Drag to move around the screen</li>\n<li>Lift finger to zoom out</li></ul>\n\nYou can’t zoom in on the keyboard or navigation bar.</string>
     <!-- Title for the Accessibility tutorial dialog in Accessibility service with button. [CHAR LIMIT=50] -->
@@ -4983,12 +5024,12 @@
     <!-- Used in the accessibility service settings to control turning display color inversion on/off entirely. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_switch_title">Use color inversion</string>
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_display_inversion_preference_subtitle">Color inversion turns light screens dark. This helps people who are sensitive to bright light see the screen more easily.\n\nNote: Dark colors will turn light. Colors will change in media and images. You can also use Dark theme (Settings > Display).</string>
+    <string name="accessibility_display_inversion_preference_subtitle"><![CDATA[Color inversion turns light screens dark. This helps people who are sensitive to bright light see the screen more easily.<br/><br/>Note: Dark colors will turn light. Colors will change in media and images. You can also use Dark theme (Settings > Display).]]></string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_preference_title">Auto click (dwell timing)</string>
     <!-- Footer text to explain what autoclick does -->
     <string name="accessibility_autoclick_description">If you are using a mouse, you can set the cursor to take action automatically when it stops moving for a certain amount of time.</string>
-    <!-- Option heading to leave the auto click requirement for accessibility users at its default level. [CHAR LIMIT=35] -->
+    <!-- Option heading to leave the auto click requirement for accessibility users at its default level. [CHAR LIMIT=50] -->
     <string name="accessibility_autoclick_default_title">Don\u2019t use auto click (default)</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its short level. [CHAR LIMIT=35] -->
     <string name="accessibility_autoclick_short_title">Short</string>
@@ -5009,7 +5050,7 @@
     <!-- Description for the button that longer auto click time. [CHAR_LIMIT=NONE] -->
     <string name="accessibility_autoclick_longer_desc">Longer</string>
     <!-- Description for the seekbar that adjust auto click time. [CHAR_LIMIT=NONE] -->
-    <string name="accessibility_autoclick_seekbar_desc">auto click time</string>
+    <string name="accessibility_autoclick_seekbar_desc">Auto click time</string>
     <!-- Title for accessibility preference screen for configuring vibrations. -->
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptic strength</string>
     <!-- Title for accessibility preference for configuring notification vibrations. -->
@@ -5020,6 +5061,8 @@
     <string name="accessibility_touch_vibration_title">Touch feedback</string>
     <!-- Used in the accessibility service settings to control turning on/off the service entirely -->
     <string name="accessibility_service_master_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
+    <!-- Used in the accessibility service settings to open the activity. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_master_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_daltonizer_master_switch_title">Use color correction</string>
     <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->
@@ -6107,8 +6150,6 @@
     <string name="credential_for_vpn_and_apps">Installed for VPN and apps</string>
     <!-- Sub-heading for a user credential installed to be used as part of a Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
     <string name="credential_for_wifi">Installed for Wi-Fi</string>
-    <!-- Sub-heading for a user credential installed to be used by kernel for fs-verity verification [CHAR LIMIT=NONE]. -->
-    <string name="credential_for_fsverity">Installed for app install source verification</string>
     <!-- Description of dialog to reset credential storage [CHAR LIMIT=NONE] -->
     <string name="credentials_reset_hint">Remove all the contents?</string>
     <!-- Toast message [CHAR LIMIT=30] -->
@@ -6123,8 +6164,6 @@
     <string name="user_certificate">VPN &amp; app user certificate</string>
     <!-- Title of Wi-Fi certificate [CHAR LIMIT=30] -->
     <string name="wifi_certificate">Wi\u2011Fi certificate</string>
-    <!-- Title of App Source certificate [CHAR LIMIT=40] -->
-    <string name="app_src_certificate">App Source certificate</string>
     <!-- Title of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
     <string name="ca_certificate_warning_title">Your privacy is at risk</string>
     <!-- Description of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
@@ -6133,10 +6172,6 @@
     <string name="certificate_warning_dont_install">Don\u2019t install</string>
     <!-- Label for button to continue installing a certificate [CHAR_LIMIT=50] -->
     <string name="certificate_warning_install_anyway">Install anyways</string>
-    <!-- Title of warning shown to the user before they can install an App Source certificate [CHAR LIMIT=60] -->
-    <string name="app_src_certificate_warning_title">Install this certificate at your own risk</string>
-    <!-- Description of warning shown to the user before they can install an App Source certificate [CHAR LIMIT=NONE] -->
-    <string name="app_src_certificate_warning_description">App source certificates verify that apps are safe for your device. Only install certificates from organizations you trust.</string>
     <!-- Toast message that a certificate was not installed -->
     <string name="cert_not_installed">Certificate not installed</string>
 
@@ -6768,28 +6803,14 @@
     <string name="one_usercrt">one user certificate</string>
     <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
     <string name="one_cacrt">one CA certificate</string>
-    <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE]-->
+    <!-- Item found in thee PKCS12 keystore being investigated [CHAR LIMIT=NONE]-->
     <string name="n_cacrts">%d CA certificates</string>
-    <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
-    <string name="one_appsrccrt">one App Source certificate</string>
     <!-- Alert dialog when viewing a set of user credentials. -->
     <string name="user_credential_title">Credential details</string>
     <!-- Announcement to confirm a user credential being removed. [CHAR LIMIT=NONE] -->
     <string name="user_credential_removed">Removed credential: <xliff:g id="credential_name" example="signing key">%s</xliff:g></string>
     <!-- Placeholder for the list of installed user credentials (private keys) when the list is empty. [CHAR LIMIT=120] -->
     <string name="user_credential_none_installed">No user credentials installed</string>
-    <!-- Title of alert dialog after an app source certificate is installed. [CHAR LIMIT=50] -->
-    <string name="app_src_cert_reboot_dialog_install_title">Restart to use certificate</string>
-    <!-- Message of alert dialog after an app source certificate is installed. [CHAR LIMIT=NONE] -->
-    <string name="app_src_cert_reboot_dialog_install_message">To use this app source certificate, you need to restart your device</string>
-    <!-- Title of alert dialog after an app source certificate is deleted. [CHAR LIMIT=55] -->
-    <string name="app_src_cert_reboot_dialog_uninstall_title">Restart to finish uninstalling</string>
-    <!-- Message of alert dialog after an app source certificate is deleted. [CHAR LIMIT=NONE] -->
-    <string name="app_src_cert_reboot_dialog_uninstall_message">To uninstall this app source certificate, you need to restart your device</string>
-    <!-- Button to restart the device. [CHAR LIMIT=25] -->
-    <string name="app_src_cert_reboot_dialog_button_restart">Restart</string>
-    <!-- Button to skip restarting the device. [CHAR LIMIT=25] -->
-    <string name="app_src_cert_reboot_dialog_button_not_now">Not now</string>
 
     <!--  Title for spell checker settings -->
     <string name="spellcheckers_settings_title">Spell checker</string>
@@ -8311,6 +8332,21 @@
     <!-- [CHAR LIMIT=NONE] Summary for promote_conversation_title on notifications settings page -->
     <string name="promote_conversation_summary">Add to the conversation section</string>
 
+    <!-- [CHAR LIMIT=100] link to page listing all conversations -->
+    <string name="manage_conversations">Manage conversations</string>
+
+    <!-- [CHAR LIMIT=100] preference category title -->
+    <string name="important_conversations">Important conversations</string>
+
+    <!-- [CHAR LIMIT=100] preference category title -->
+    <string name="all_conversations">All conversations</string>
+
+    <!-- [CHAR LIMIT=100] Setting to automatically bubble all notifications from favorite conversations -->
+    <string name="important_bubble">Bubble important conversations</string>
+
+    <!-- [CHAR LIMIT=NONE] description of how notifications from important conversations behave -->
+    <string name="important_conversation_behavior_summary">Important conversations show at the top of the pull-down shade. You can also set them to bubble and interrupt Do Not Disturb.</string>
+
     <!-- Importance title strings for the Importance page. Also the second part of the importance
      summary on the channel page-->
 
@@ -8499,33 +8535,55 @@
 
     <!-- Special access > Title for managing the settings where users opt-in to connect a work app
     to its personal equivalent, allowing cross-profile communication. [CHAR LIMIT=50] -->
-    <string name="interact_across_profiles_title" translatable="false">Connected work and personal apps</string>
+    <string name="interact_across_profiles_title" translatable="false">Connected personal and work apps</string>
 
-    <!-- Special access > Connected work and personal apps > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
+    <!-- Special access > Connected personal and work apps > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
     <string name="interact_across_profiles_empty_text" translatable="false">No connected apps</string>
 
-    <!-- Special access > Connected work and personal apps > Additional keywords to search for. [CHAR LIMIT=NONE] -->
+    <!-- Special access > Connected personal and work apps > Additional keywords to search for. [CHAR LIMIT=NONE] -->
     <string name="interact_across_profiles_keywords" translatable="false">cross profile connected app apps work and personal</string>
 
     <!-- Apps > App Details > Advanced section string title. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_app_detail_title" translatable="false">Connected work and personal apps</string>
+    <string name="interact_across_profiles_app_detail_title" translatable="false">Connected personal and work apps</string>
 
-    <!-- Apps > App Details > Connected work and personal apps > Switch title. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_app_detail_switch" translatable="false">Connect these apps</string>
+    <!-- Apps > App Details > Connected personal and work apps > Switch title. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_switch_enabled" translatable="false">Connected</string>
 
-    <!-- Apps > App Details > Connected work and personal apps > Description. [CHAR LIMIT=NONE] -->
+    <!-- Apps > App Details > Connected personal and work apps > Switch title. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_switch_disabled" translatable="false">Connect these apps</string>
+
+    <!-- Apps > App Details > Connected personal and work apps > Description. [CHAR LIMIT=NONE] -->
     <string name="interact_across_profiles_summary_1" translatable="false">Connected apps share permissions and can access each other\u2019s data.</string>
 
-    <!-- Apps > App Details > Connected work and personal apps > Description. [CHAR LIMIT=NONE] -->
+    <!-- Apps > App Details > Connected personal and work apps > Description. [CHAR LIMIT=NONE] -->
     <string name="interact_across_profiles_summary_2" translatable="false">Only connect apps that you trust with your personal data.Your data may be exposed to your IT admin.</string>
 
-    <!-- TODO(b/148594054): Replace calendar with actual app name -->
-    <!-- Apps > App Details > Connected work and personal apps > Consent dialog title. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_consent_dialog_title" translatable="false">Trust work Calendar with your personal data?</string>
+    <!-- Apps > App Details > Connected personal and work apps > Consent dialog title. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_title" translatable="false">Trust work %1$s with your personal data?</string>
 
-    <!-- TODO(b/148594054): Replace calendar with actual app name -->
-    <!-- Apps > App Details > Connected work and personal apps > Consent dialog description. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_consent_dialog_summary" translatable="false">Calendar may expose your personal data to your IT admin</string>
+    <!-- Apps > App Details > Connected personal and work apps > Consent dialog description. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_summary" translatable="false">%1$s may expose your personal data to your IT admin.</string>
+
+    <!-- Apps > App Details > Connected personal and work apps > Consent dialog App data title. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_app_data_title" translatable="false">App data</string>
+
+    <!-- Apps > App Details > Connected personal and work apps > Consent dialog App data description. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_app_data_summary" translatable="false">It can access data in your personal %1$s app.</string>
+
+    <!-- Apps > App Details > Connected personal and work apps > Consent dialog Permissions title. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_permissions_title" translatable="false">Permissions</string>
+
+    <!-- Apps > App Details > Connected personal and work apps > Consent dialog Permissions description. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_permissions_summary" translatable="false">It can use your personal %1$s app\u2019s permissions, like access to location, storage, or contacts.</string>
+
+    <!-- Summary of preference to manage connected personal and work apps, informing the user that currently no apps are connected -->
+    <string name="interact_across_profiles_number_of_connected_apps_none" translatable="false">No apps connected</string>
+
+    <!-- Summary of preference to manage connected personal and work apps, informing the user how many apps are connected -->
+    <plurals name="interact_across_profiles_number_of_connected_apps" translatable="false">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app connected</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps connected</item>
+    </plurals>
 
     <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_access_title">Do Not Disturb access</string>
@@ -9016,6 +9074,11 @@
     <string name="screen_pinning_unlock_password">Ask for password before unpinning</string>
     <!-- [CHAR LIMIT=60] Unlock setting for screen pinning -->
     <string name="screen_pinning_unlock_none">Lock device when unpinning</string>
+
+    <!-- [CHAR LIMIT=60] turn eSim deletion confirmation on/off  -->
+    <string name="confirm_sim_deletion_title">Confirm SIM deletion</string>
+    <!-- [CHAR LIMIT=NONE] eSim deletion confirmation description  -->
+    <string name="confirm_sim_deletion_description">Verify it\u0027s you before erasing a downloaded SIM</string>
 
     <!-- Opening string on the dialog that prompts the user to confirm that they really want to delete their existing work profile. The administration app icon and name appear after the final colon. [CHAR LIMIT=NONE] -->
     <string name="opening_paragraph_delete_profile_unknown_company">This work profile is managed by:</string>
@@ -10934,8 +10997,6 @@
     <!-- The divider symbol between different parts of the notification header including spaces. not translatable [CHAR LIMIT=3] -->
     <string name="notification_header_divider_symbol_with_spaces" translatable="false">" • "</string>
 
-    <!-- Note displayed when certain features are not available on low ram devices. [CHAR LIMIT=NONE] -->
-    <string name="disabled_low_ram_device">This feature is not available on this device</string>
     <!-- Title of a message for an empty state screen. A user will see this message if they try to use a certain feature, but the feature was turned off so it won't slow down their phone. [CHAR LIMIT=NONE] -->
     <string name="disabled_feature">Feature not available</string>
     <!-- Part of a message for an empty state screen. A user will see this message if they try to use a certain feature, but the feature was turned off so it won't slow down their phone. [CHAR LIMIT=NONE] -->
@@ -10985,8 +11046,8 @@
     <string name="graphics_driver_app_preference_default">Default</string>
     <!-- The game driver value for Game Driver app preference [CHAR LIMIT=50] -->
     <string name="graphics_driver_app_preference_game_driver">Game Driver</string>
-    <!-- The prerelase driver value for Prerelease Driver app preference [CHAR LIMIT=50] -->
-    <string name="graphics_driver_app_preference_prerelease_driver">Prerelease Driver</string>
+    <!-- The prerelase driver value for Developer Driver app preference [CHAR LIMIT=50] -->
+    <string name="graphics_driver_app_preference_prerelease_driver">Developer Driver</string>
     <!-- The system driver value for system graphics driver app preference [CHAR LIMIT=50] -->
     <string name="graphics_driver_app_preference_system">System Graphics Driver</string>
     <!-- All the graphics driver preference values for all apps globally [CHAR LIMIT=50] -->
@@ -10997,6 +11058,7 @@
     <!-- All the values of graphics driver for app preference [CHAR LIMIT=50] -->
     <string-array name="graphics_driver_app_preference_values">
         <item>@string/graphics_driver_app_preference_default</item>
+        <item>@string/graphics_driver_app_preference_prerelease_driver</item>
         <item>@string/graphics_driver_app_preference_game_driver</item>
         <item>@string/graphics_driver_app_preference_system</item>
     </string-array>
@@ -11080,6 +11142,18 @@
 
     <!-- Summary for media output settings when the media stream is being captured by something else. -->
     <string name="media_output_summary_unavailable">Unavailable</string>
+
+    <!-- Title for the media output group dialog with media related devices [CHAR LIMIT=50] -->
+    <string name="media_output_group_panel_title">Add outputs</string>
+
+    <!-- Title for the media output slice with group devices [CHAR LIMIT=50] -->
+    <string name="media_output_group">Group</string>
+
+    <!-- Summary for media output group with only one device which is active [CHAR LIMIT=NONE] -->
+    <string name="media_output_group_panel_single_device_summary">1 device selected</string>
+
+    <!-- Summary for media output group with the active device count [CHAR LIMIT=NONE] -->
+    <string name="media_output_group_panel_multiple_devices_summary"><xliff:g id="count" example="2">%1$d</xliff:g> devices selected</string>
 
     <!-- Title for HFP(hands free profile) output switch button in settings. -->
     <string name="take_call_on_title">Take call on</string>
@@ -11744,4 +11818,6 @@
     <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
     <string name="rtt_settings_always_visible"></string>
 
+    <!-- Button label to stop casting on media device. [CHAR LIMIT=40 -->
+    <string name="media_output_panel_stop_casting_button">Stop casting</string>
 </resources>

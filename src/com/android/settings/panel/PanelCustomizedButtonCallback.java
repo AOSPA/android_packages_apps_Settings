@@ -13,26 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.android.settings.panel;
 
-package com.android.settings.network.ims;
+/**
+ * PanelCustomizedButtonCallback provides a callback interface for {@link PanelFragment} to receive
+ * events from {@link PanelContent}.
+ */
+public interface PanelCustomizedButtonCallback {
 
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-
-@RunWith(RobolectricTestRunner.class)
-public class MockImsQueryResult {
-
-    public static class BooleanResult implements ImsQuery {
-        private boolean mResult;
-
-        public BooleanResult(boolean result) {
-            super();
-            mResult = result;
-        }
-
-        public boolean query() {
-            return mResult;
-        }
-    }
-
+    /**
+     * It will be called when customized button state is changed. For example, custom button
+     * would be hidden for specific behavior.
+     */
+    void onCustomizedButtonStateChanged();
 }
