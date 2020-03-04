@@ -118,12 +118,12 @@
         android:fragment="com.android.settings.security.LockscreenDashboardFragment"
         settings:controller="com.android.settings.security.screenlock.LockScreenPreferenceController" />
 
-    <!-- Horizon Light Settings -->
+    <!-- Pulse Ambient Light Settings -->
     <Preference
-        android:key="horizon_light_settings"
-        android:title="@string/horizon_light_title"
-        android:summary="@string/horizon_light_summary"
-        android:fragment="com.android.settings.display.HorizonLightSettings" />
+        android:key="pulse_ambient_light_settings"
+        android:title="@string/pulse_ambient_light_title"
+        android:summary="@string/pulse_ambient_light_summary"
+        android:fragment="com.android.settings.display.PulseAmbientLightSettings" />
 
     <SwitchPreference
         android:key="camera_gesture"
