@@ -17,11 +17,11 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-    android:key="horizon_light_settings"
-    android:title="@string/horizon_light_title">
+    android:key="pulse_ambient_light_settings"
+    android:title="@string/pulse_ambient_light_title">
 
     <PreferenceCategory
-        android:title="@string/horizon_light_color">
+        android:title="@string/pulse_ambient_light_color">
 
         <com.android.settings.widget.RadioButtonPreference
             android:key="ambient_notification_light_automatic"
