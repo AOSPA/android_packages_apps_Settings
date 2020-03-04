@@ -30,22 +30,22 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settings.widget.SwitchBar;
 
-public class HorizonLightSettings extends SettingsPreferenceFragment
+public class PulseAmbientLightSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceClickListener {
 
-    private static final String TAG = "HorizonLightSettings";
+    private static final String TAG = "PulseAmbientLightSettings";
 
     private static final String COLOR_AUTOMATIC = "ambient_notification_light_automatic";
     private static final String COLOR_ACCENT = "ambient_notification_light_accent";
 
-    private HorizonLightEnabler mHorizonLightEnabler;
+    private PulseAmbientLightEnabler mPulseAmbientLightEnabler;
     private RadioButtonPreference mColorAutomatic;
     private RadioButtonPreference mColorAccent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.horizon_light_settings);
+        addPreferencesFromResource(R.xml.pulse_ambient_light_settings);
         mColorAutomatic = (RadioButtonPreference) findPreference(COLOR_AUTOMATIC);
         mColorAccent = (RadioButtonPreference) findPreference(COLOR_ACCENT);
 
@@ -73,8 +73,8 @@ public class HorizonLightSettings extends SettingsPreferenceFragment
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mHorizonLightEnabler != null) {
-            mHorizonLightEnabler.teardownSwitchBar();
+        if (mPulseAmbientLightEnabler != null) {
+            mPulseAmbientLightEnabler.teardownSwitchBar();
         }
     }
 
@@ -82,22 +82,22 @@ public class HorizonLightSettings extends SettingsPreferenceFragment
     public void onStart() {
         super.onStart();
         SettingsActivity activity = (SettingsActivity) getActivity();
-        mHorizonLightEnabler = new HorizonLightEnabler(activity.getSwitchBar());
+        mPulseAmbientLightEnabler = new PulseAmbientLightEnabler(activity.getSwitchBar());
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mHorizonLightEnabler != null) {
-            mHorizonLightEnabler.resume();
+        if (mPulseAmbientLightEnabler != null) {
+            mPulseAmbientLightEnabler.resume();
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (mHorizonLightEnabler != null) {
-            mHorizonLightEnabler.pause();
+        if (mPulseAmbientLightEnabler != null) {
+            mPulseAmbientLightEnabler.pause();
         }
     }
 
@@ -120,13 +120,13 @@ public class HorizonLightSettings extends SettingsPreferenceFragment
         mColorAccent.setEnabled(enabled);
     }
 
-    private class HorizonLightEnabler implements SwitchBar.OnSwitchChangeListener {
+    private class PulseAmbientLightEnabler implements SwitchBar.OnSwitchChangeListener {
 
         private final Context mContext;
         private final SwitchBar mSwitchBar;
         private boolean mListeningToOnSwitchChange;
 
-        public HorizonLightEnabler(SwitchBar switchBar) {
+        public PulseAmbientLightEnabler(SwitchBar switchBar) {
             mContext = switchBar.getContext();
             mSwitchBar = switchBar;
 
@@ -136,7 +136,7 @@ public class HorizonLightSettings extends SettingsPreferenceFragment
                     mContext.getContentResolver(),
                     Settings.System.AMBIENT_NOTIFICATION_LIGHT, 1, UserHandle.USER_CURRENT) != 0;
             mSwitchBar.setChecked(enabled);
-            HorizonLightSettings.this.updateDependencies(enabled);
+            PulseAmbientLightSettings.this.updateDependencies(enabled);
         }
 
         public void teardownSwitchBar() {
@@ -163,7 +163,7 @@ public class HorizonLightSettings extends SettingsPreferenceFragment
             Settings.System.putIntForUser(
                     mContext.getContentResolver(),
                     Settings.System.AMBIENT_NOTIFICATION_LIGHT, isChecked ? 1 : 0, UserHandle.USER_CURRENT);
-            HorizonLightSettings.this.updateDependencies(isChecked);
+            PulseAmbientLightSettings.this.updateDependencies(isChecked);
         }
 
     }
