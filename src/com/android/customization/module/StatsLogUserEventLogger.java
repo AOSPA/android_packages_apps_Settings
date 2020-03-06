@@ -73,6 +73,25 @@ public class StatsLogUserEventLogger extends NoOpUserEventLogger implements Them
     }
 
     @Override
+    public void logLiveWallpaperInfoSelected(String collectionId, @Nullable String wallpaperId) {
+        SysUiStatsLog.write(STYLE_UI_CHANGED, StyleEnums.LIVE_WALLPAPER_INFO_SELECT,
+                0, 0, 0, 0, 0,
+                collectionId.hashCode(),
+                wallpaperId != null ? wallpaperId.hashCode() : 0,
+                0, 0);
+    }
+
+    @Override
+    public void logLiveWallpaperCustomizeSelected(String collectionId,
+            @Nullable String wallpaperId) {
+        SysUiStatsLog.write(STYLE_UI_CHANGED, StyleEnums.LIVE_WALLPAPER_CUSTOMIZE_SELECT,
+                0, 0, 0, 0, 0,
+                collectionId.hashCode(),
+                wallpaperId != null ? wallpaperId.hashCode() : 0,
+                0, 0);
+    }
+
+    @Override
     public void logWallpaperSet(String collectionId, @Nullable String wallpaperId) {
         SysUiStatsLog.write(STYLE_UI_CHANGED, StyleEnums.WALLPAPER_APPLIED,
                 0, 0, 0, 0, 0,
