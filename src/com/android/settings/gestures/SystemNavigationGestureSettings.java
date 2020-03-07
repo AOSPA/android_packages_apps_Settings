@@ -161,7 +161,8 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
         if (info.getKey() == KEY_SYSTEM_NAV_GESTURAL) {
             p.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_SETTING);
             p.setExtraWidgetOnClickListener((v) -> GestureNavigationBackSensitivityDialog
-                    .show(this, getBackSensitivity(getContext(), mOverlayManager)));
+                    .show(this, getBackSensitivity(getContext(), mOverlayManager),
+                    getHomeHandleSize(getContext())));
         } else if (info.getKey() == KEY_SYSTEM_NAV_3BUTTONS) {
             p.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_SETTING);
             p.setExtraWidgetOnClickListener((v) -> ThreeButtonNavigationInvertDialog
@@ -254,6 +255,20 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
         // If Gesture nav is not selected, read the value from shared preferences.
         return context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
                 .getInt(PREFS_BACK_SENSITIVITY_KEY, BACK_GESTURE_INSET_DEFAULT_OVERLAY);
+    }
+
+    static void setHomeHandleSize(Context context, int length) {
+        // length cant be range 0 - 2
+        // 2 means long
+        // 1 measns middle
+        // 0 means aosp size
+        Settings.System.putInt(context.getContentResolver(),
+                Settings.System.NAVIGATION_HANDLE_WIDTH, length);
+    }
+
+    static int getHomeHandleSize(Context context) {
+        return Settings.System.getInt(context.getContentResolver(),
+                Settings.System.NAVIGATION_HANDLE_WIDTH, 0);
     }
 
     @VisibleForTesting
