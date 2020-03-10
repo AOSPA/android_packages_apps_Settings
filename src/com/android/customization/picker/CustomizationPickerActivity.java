@@ -293,6 +293,9 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
 
     @Override
     public void onBackPressed() {
+        if (mWallpaperCategoryFragment != null && mWallpaperCategoryFragment.popChildFragment()) {
+            return;
+        }
         if (getSupportFragmentManager().popBackStackImmediate()) {
             return;
         }
@@ -330,14 +333,6 @@ public class CustomizationPickerActivity extends FragmentActivity implements Wal
     @Override
     public void showViewOnlyPreview(WallpaperInfo wallpaperInfo) {
         mDelegate.showViewOnlyPreview(wallpaperInfo);
-    }
-
-    /**
-     * Shows the picker activity for the given category.
-     */
-    @Override
-    public void show(String collectionId) {
-        mDelegate.show(collectionId);
     }
 
     @Override
