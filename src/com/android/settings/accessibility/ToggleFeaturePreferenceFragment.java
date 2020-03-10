@@ -16,6 +16,9 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.getScreenHeightPixels;
+import static com.android.settings.accessibility.AccessibilityUtil.getScreenWidthPixels;
+
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -66,7 +69,7 @@ import java.util.stream.Collectors;
  * and dialog management.
  */
 public abstract class ToggleFeaturePreferenceFragment extends SettingsPreferenceFragment
-        implements ShortcutPreference.OnClickListener {
+        implements ShortcutPreference.OnClickCallback {
 
     protected DividerSwitchPreference mToggleServiceDividerSwitchPreference;
     protected ShortcutPreference mShortcutPreference;
@@ -80,7 +83,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected CharSequence mPackageName;
     protected Uri mImageUri;
     protected CharSequence mHtmlDescription;
-    private static final String ANCHOR_TAG = "a";
     private static final String DRAWABLE_FOLDER = "drawable";
     protected static final String KEY_USE_SERVICE_PREFERENCE = "use_service";
     protected static final String KEY_GENERAL_CATEGORY = "general_categories";
@@ -94,9 +96,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
 
-    // For html description of accessibility service, third party developer must follow the rule,
-    // such as <img src="R.drawable.fileName"/>, a11y settings will get third party resources
-    // by this.
+    // For html description of accessibility service, must follow the rule, such as
+    // <img src="R.drawable.fileName"/>, a11y settings will get the resources successfully.
     private static final String IMG_PREFIX = "R.drawable.";
 
     private ImageView mImageGetterCacheView;
@@ -147,10 +148,12 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         if (mImageUri != null) {
+            final int screenHalfHeight = getScreenHeightPixels(getPrefContext()) / /* half */ 2;
             final AnimatedImagePreference animatedImagePreference = new AnimatedImagePreference(
                     getPrefContext());
             animatedImagePreference.setImageUri(mImageUri);
             animatedImagePreference.setSelectable(false);
+            animatedImagePreference.setMaxHeight(screenHalfHeight);
             preferenceScreen.addPreference(animatedImagePreference);
         }
 
@@ -195,14 +198,9 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             introductionCategory.setTitle(title);
             preferenceScreen.addPreference(introductionCategory);
 
-            // For accessibility service, avoid malicious links made by third party developer.
-            final List<String> unsupportedTagList = new ArrayList<>();
-            unsupportedTagList.add(ANCHOR_TAG);
-
             final HtmlTextPreference htmlTextPreference = new HtmlTextPreference(getPrefContext());
             htmlTextPreference.setSummary(mHtmlDescription);
             htmlTextPreference.setImageGetter(mImageGetter);
-            htmlTextPreference.setUnsupportedTagList(unsupportedTagList);
             htmlTextPreference.setSelectable(false);
             introductionCategory.addPreference(htmlTextPreference);
         }
@@ -279,33 +277,38 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
          */
         int ENABLE_WARNING_FROM_TOGGLE = 1002;
 
-
         /** OPEN: Settings > Accessibility > Downloaded toggle service > Shortcut checkbox. */
         int ENABLE_WARNING_FROM_SHORTCUT = 1003;
+
+        /**
+         * OPEN: Settings > Accessibility > Downloaded toggle service > Shortcut checkbox
+         * toggle.
+         */
+        int ENABLE_WARNING_FROM_SHORTCUT_TOGGLE = 1004;
 
         /**
          * OPEN: Settings > Accessibility > Downloaded toggle service > Toggle use service to
          * disable service.
          */
-        int DISABLE_WARNING_FROM_TOGGLE = 1004;
+        int DISABLE_WARNING_FROM_TOGGLE = 1005;
 
         /**
          * OPEN: Settings > Accessibility > Magnification > Toggle user service in button
          * navigation.
          */
-        int ACCESSIBILITY_BUTTON_TUTORIAL = 1005;
+        int ACCESSIBILITY_BUTTON_TUTORIAL = 1006;
 
         /**
          * OPEN: Settings > Accessibility > Magnification > Toggle user service in gesture
          * navigation.
          */
-        int GESTURE_NAVIGATION_TUTORIAL = 1006;
+        int GESTURE_NAVIGATION_TUTORIAL = 1007;
 
         /**
          * OPEN: Settings > Accessibility > Downloaded toggle service > Toggle user service > Show
          * launch tutorial.
          */
-        int LAUNCH_ACCESSIBILITY_TUTORIAL = 1007;
+        int LAUNCH_ACCESSIBILITY_TUTORIAL = 1008;
     }
 
     @Override
@@ -383,14 +386,24 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mImageGetterCacheView.setAdjustViewBounds(true);
         mImageGetterCacheView.setImageURI(imageUri);
 
-        final Drawable drawable = mImageGetterCacheView.getDrawable().mutate();
-        if (drawable != null) {
-            drawable.setBounds(/* left= */0, /* top= */0, drawable.getIntrinsicWidth(),
-                    drawable.getIntrinsicHeight());
+        if (mImageGetterCacheView.getDrawable() == null) {
+            return null;
         }
 
+        final Drawable drawable =
+                mImageGetterCacheView.getDrawable().mutate().getConstantState().newDrawable();
         mImageGetterCacheView.setImageURI(null);
-        mImageGetterCacheView.setImageDrawable(null);
+        final int imageWidth = drawable.getIntrinsicWidth();
+        final int imageHeight = drawable.getIntrinsicHeight();
+        final int screenHalfHeight = getScreenHeightPixels(getPrefContext()) / /* half */ 2;
+        if ((imageWidth > getScreenWidthPixels(getPrefContext()))
+                || (imageHeight > screenHalfHeight)) {
+            return null;
+        }
+
+        drawable.setBounds(/* left= */0, /* top= */0, drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight());
+
         return drawable;
     }
 
@@ -508,7 +521,15 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         SharedPreferenceUtils.setUserShortcutType(context, info);
     }
 
-    private String getShortcutTypeSummary(Context context) {
+    protected CharSequence getShortcutTypeSummary(Context context) {
+        if (!mShortcutPreference.isSettingsEditable()) {
+            return context.getText(R.string.accessibility_shortcut_edit_dialog_title_hardware);
+        }
+
+        if (!mShortcutPreference.isChecked()) {
+            return context.getText(R.string.switch_off_text);
+        }
+
         final int shortcutType = getUserShortcutType(context, UserShortcutType.SOFTWARE);
         int resId = R.string.accessibility_shortcut_edit_summary_software;
         if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
@@ -561,12 +582,13 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
 
         updateUserShortcutType(/* saveChanges= */ true);
-        if (mShortcutPreference.getChecked()) {
+        if (mShortcutPreference.isChecked()) {
             AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), mUserShortcutType,
                     mComponentName);
             AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), ~mUserShortcutType,
                     mComponentName);
         }
+        mShortcutPreference.setChecked(true);
         mShortcutPreference.setSummary(
                 getShortcutTypeSummary(getPrefContext()));
     }
@@ -598,7 +620,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mShortcutPreference = new ShortcutPreference(getPrefContext(), null);
         mShortcutPreference.setPersistent(false);
         mShortcutPreference.setKey(getShortcutPreferenceKey());
-        mShortcutPreference.setOnClickListener(this);
+        mShortcutPreference.setOnClickCallback(this);
 
         final CharSequence title = getString(R.string.accessibility_shortcut_title, mPackageName);
         mShortcutPreference.setTitle(title);
@@ -621,19 +643,20 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     }
 
     @Override
-    public void onCheckboxClicked(ShortcutPreference preference) {
+    public void onToggleClicked(ShortcutPreference preference) {
         if (mComponentName == null) {
             return;
         }
 
         final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
-        if (preference.getChecked()) {
+        if (preference.isChecked()) {
             AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                     mComponentName);
         } else {
             AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), shortcutTypes,
                     mComponentName);
         }
+        mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
 
     @Override
