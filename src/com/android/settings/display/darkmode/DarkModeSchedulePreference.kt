@@ -19,7 +19,7 @@ package com.android.settings.display.darkmode
 import android.content.Context
 import android.location.LocationManager
 import android.os.PowerManager
-import androidx.preference.DropDownPreference
+import androidx.preference.ListPreference
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.accessibility.Flags
@@ -103,11 +103,11 @@ class DarkModeSchedulePreference(
 
     override fun getSummary(context: Context): CharSequence? = "%s"
 
-    override fun createWidget(context: Context) = DropDownPreference(context)
+    override fun createWidget(context: Context) = ListPreference(context)
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
-        preference as DropDownPreference
+        preference as ListPreference
         preference.setValue(scheduleStorage.getString(KEY))
         preference.onPreferenceChangeListener = this
     }
@@ -117,7 +117,7 @@ class DarkModeSchedulePreference(
         else context.getSystemService(PowerManager::class.java)?.isPowerSaveMode == false
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
-        if (newValue == (preference as DropDownPreference).value) {
+        if (newValue == (preference as ListPreference).value) {
             return false
         }
 

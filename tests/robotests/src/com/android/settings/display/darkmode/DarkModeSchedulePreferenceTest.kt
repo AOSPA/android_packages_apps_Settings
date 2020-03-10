@@ -23,7 +23,7 @@ import android.content.res.Configuration
 import android.location.Location
 import android.location.LocationManager
 import android.os.PowerManager
-import androidx.preference.DropDownPreference
+import androidx.preference.ListPreference
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.android.settings.testutils.BedtimeSettingsUtils
@@ -113,7 +113,7 @@ class DarkModeSchedulePreferenceTest {
     fun bind_nightMode_dropDownValueChangedToNone() {
         mockUiModeManager.stub { on { nightMode } doReturn UiModeManager.MODE_NIGHT_YES }
 
-        val widget = preference.createAndBindWidget<DropDownPreference>(context)
+        val widget = preference.createAndBindWidget<ListPreference>(context)
 
         assertThat(widget.value).isEqualTo(context.getString(R.string.dark_ui_auto_mode_never))
     }
@@ -122,7 +122,7 @@ class DarkModeSchedulePreferenceTest {
     fun bind_nightModeAuto_dropDownValueChangedToAuto() {
         mockUiModeManager.stub { on { nightMode } doReturn UiModeManager.MODE_NIGHT_AUTO }
 
-        val widget = preference.createAndBindWidget<DropDownPreference>(context)
+        val widget = preference.createAndBindWidget<ListPreference>(context)
 
         assertThat(widget.value).isEqualTo(context.getString(R.string.dark_ui_auto_mode_auto))
     }
@@ -131,7 +131,7 @@ class DarkModeSchedulePreferenceTest {
     fun bind_nightModeCustom_dropDownValueChangedToCustom() {
         mockUiModeManager.stub { on { nightMode } doReturn UiModeManager.MODE_NIGHT_CUSTOM }
 
-        val widget = preference.createAndBindWidget<DropDownPreference>(context)
+        val widget = preference.createAndBindWidget<ListPreference>(context)
 
         assertThat(widget.value).isEqualTo(context.getString(R.string.dark_ui_auto_mode_custom))
     }
@@ -143,7 +143,7 @@ class DarkModeSchedulePreferenceTest {
             on { nightModeCustomType } doReturn UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME
         }
 
-        val widget = preference.createAndBindWidget<DropDownPreference>(context)
+        val widget = preference.createAndBindWidget<ListPreference>(context)
 
         assertThat(widget.value).isEqualTo(context.getString(R.string.dark_ui_auto_mode_custom))
     }
@@ -159,7 +159,7 @@ class DarkModeSchedulePreferenceTest {
             on { nightModeCustomType } doReturn UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME
         }
 
-        val widget = preference.createAndBindWidget<DropDownPreference>(context)
+        val widget = preference.createAndBindWidget<ListPreference>(context)
 
         assertThat(widget.value).isEqualTo(context.getString(R.string.dark_ui_auto_mode_custom))
     }
@@ -176,7 +176,7 @@ class DarkModeSchedulePreferenceTest {
         }
         bedtimeActivityInfo.enabled = true
 
-        val widget = preference.createAndBindWidget<DropDownPreference>(context)
+        val widget = preference.createAndBindWidget<ListPreference>(context)
 
         assertThat(widget.value)
             .isEqualTo(
@@ -190,7 +190,7 @@ class DarkModeSchedulePreferenceTest {
 
         assertThat(
                 preference.onPreferenceChange(
-                    preference.createAndBindWidget<DropDownPreference>(context),
+                    preference.createAndBindWidget<ListPreference>(context),
                     context.getString(R.string.dark_ui_auto_mode_auto),
                 )
             )
@@ -203,7 +203,7 @@ class DarkModeSchedulePreferenceTest {
         context.resources.configuration.updateFrom(configNightYes)
 
         preference.onPreferenceChange(
-            preference.createAndBindWidget<DropDownPreference>(context),
+            preference.createAndBindWidget<ListPreference>(context),
             context.getString(R.string.dark_ui_auto_mode_never),
         )
 
@@ -216,7 +216,7 @@ class DarkModeSchedulePreferenceTest {
         context.resources.configuration.updateFrom(configNightNo)
 
         preference.onPreferenceChange(
-            preference.createAndBindWidget<DropDownPreference>(context),
+            preference.createAndBindWidget<ListPreference>(context),
             context.getString(R.string.dark_ui_auto_mode_never),
         )
 
@@ -228,7 +228,7 @@ class DarkModeSchedulePreferenceTest {
         mockUiModeManager.stub { on { nightMode } doReturn UiModeManager.MODE_NIGHT_CUSTOM }
 
         preference.onPreferenceChange(
-            preference.createAndBindWidget<DropDownPreference>(context),
+            preference.createAndBindWidget<ListPreference>(context),
             context.getString(R.string.dark_ui_auto_mode_auto),
         )
 
@@ -244,7 +244,7 @@ class DarkModeSchedulePreferenceTest {
         }
 
         preference.onPreferenceChange(
-            preference.createAndBindWidget<DropDownPreference>(context),
+            preference.createAndBindWidget<ListPreference>(context),
             context.getString(R.string.dark_ui_auto_mode_auto),
         )
 
@@ -256,7 +256,7 @@ class DarkModeSchedulePreferenceTest {
         mockUiModeManager.stub { on { nightMode } doReturn UiModeManager.MODE_NIGHT_YES }
 
         preference.onPreferenceChange(
-            preference.createAndBindWidget<DropDownPreference>(context),
+            preference.createAndBindWidget<ListPreference>(context),
             context.getString(R.string.dark_ui_auto_mode_custom),
         )
 
@@ -268,7 +268,7 @@ class DarkModeSchedulePreferenceTest {
         mockUiModeManager.stub { on { nightMode } doReturn UiModeManager.MODE_NIGHT_YES }
 
         preference.onPreferenceChange(
-            preference.createAndBindWidget<DropDownPreference>(context),
+            preference.createAndBindWidget<ListPreference>(context),
             context.getString(R.string.dark_ui_auto_mode_custom_bedtime),
         )
 
