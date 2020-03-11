@@ -48,6 +48,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import com.android.settings.R;
 
 public class DimmableIZatIconPreference {
     private static final String TAG = "DimmableIZatIconPreference";
@@ -127,8 +128,10 @@ public class DimmableIZatIconPreference {
 
     private static class IZatAppPreference extends AppPreference {
         private boolean mChecked;
+        private Context mContext;
         private IZatAppPreference(Context context) {
             super(context);
+            mContext = context;
             Object notifier = Proxy.newProxyInstance(mLoader,
                                                      new Class[] { mNotifierClz },
                                                      new InvocationHandler() {
@@ -153,6 +156,17 @@ public class DimmableIZatIconPreference {
                      InvocationTargetException | ExceptionInInitializerError e) {
                 e.printStackTrace();
             }
+        }
+
+        @Override
+        public CharSequence getSummary() {
+            int resId;
+            if (!isEnabled() || !mChecked) {
+                resId = R.string.notification_toggle_off;
+            } else {
+                resId = R.string.notification_toggle_on;
+            }
+            return mContext.getString(resId);
         }
 
         @Override
