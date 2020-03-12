@@ -49,7 +49,9 @@ public class ParanoidAndroidVersionPreferenceController extends BasePreferenceCo
         String aospaBuildVariant = SystemProperties.get(AOSPA_BUILD_VARIANT_PROP,
               mContext.getResources().getString(R.string.device_info_default));
 
-        if ((aospaBuildVariant.equals("Alpha")) || (aospaBuildVariant.equals("Beta"))) {
+        if (aospaBuildVariant.equals("Release")) {
+            return aospaVersionMajor + " " + aospaVersionCode;
+        } else if ((aospaBuildVariant.equals("Alpha")) || (aospaBuildVariant.equals("Beta"))) {
            return aospaVersionMajor + " " + aospaBuildVariant + " " + aospaVersionCode;
         } else {
            return aospaVersionMajor + " " + aospaVersionCode + " " + aospaBuildVariant;
