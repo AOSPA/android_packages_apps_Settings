@@ -51,8 +51,10 @@ public class ParanoidAndroidVersionPreferenceController extends BasePreferenceCo
 
         if ((paBuildVariant.equals("Alpha")) || (paBuildVariant.equals("Beta"))) {
            return paVersionFlavor + " " + paBuildVariant + " " + paVersionCode;
-        } else {
+        } else if (paBuildVariant != null && !paBuildVariant.isEmpty()) {
            return paVersionFlavor + " " + paVersionCode + " " + paBuildVariant;
+        } else {
+           return paVersionFlavor + " " + paVersionCode;
         }
     }
 }
