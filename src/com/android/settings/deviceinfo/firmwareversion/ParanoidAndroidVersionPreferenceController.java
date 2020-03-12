@@ -49,7 +49,9 @@ public class ParanoidAndroidVersionPreferenceController extends BasePreferenceCo
         String paBuildVariant = SystemProperties.get(PA_BUILD_VARIANT_PROP,
               mContext.getResources().getString(R.string.device_info_default));
 
-        if ((paBuildVariant.equals("Alpha")) || (paBuildVariant.equals("Beta"))) {
+        if (paBuildVariant.equals("Release")) {
+           return paVersionFlavor + " " + paVersionCode;
+        } else if ((paBuildVariant.equals("Alpha")) || (paBuildVariant.equals("Beta"))) {
            return paVersionFlavor + " " + paBuildVariant + " " + paVersionCode;
         } else {
            return paVersionFlavor + " " + paVersionCode + " " + paBuildVariant;
