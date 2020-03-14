@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Paranoid Android
+ * Copyright (C) 2020 Paranoid Android
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
     private static final String TAG = "GesturesSettings";
 
     private static final String KEY_DOUBLE_TAP = "double_tap";
+    private static final String KEY_SINGLE_TAP = "single_tap";
     private static final String KEY_DRAW_V = "draw_v";
     private static final String KEY_DRAW_INVERSE_V = "draw_inverse_v";
     private static final String KEY_DRAW_O = "draw_o";
@@ -60,6 +61,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
 
     static {
         mGesturesKeyCodes.put(KEY_DOUBLE_TAP, com.android.internal.R.integer.config_doubleTapKeyCode);
+        mGesturesKeyCodes.put(KEY_SINGLE_TAP, com.android.internal.R.integer.config_singleTapKeyCode);
         mGesturesKeyCodes.put(KEY_DRAW_V, com.android.internal.R.integer.config_drawVKeyCode);
         mGesturesKeyCodes.put(KEY_DRAW_INVERSE_V, com.android.internal.R.integer.config_drawInverseVKeyCode);
         mGesturesKeyCodes.put(KEY_DRAW_O, com.android.internal.R.integer.config_drawOKeyCode);
@@ -77,6 +79,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
 
     static {
         mGesturesDefaults.put(KEY_DOUBLE_TAP, com.android.internal.R.integer.config_doubleTapDefault);
+        mGesturesDefaults.put(KEY_SINGLE_TAP, com.android.internal.R.integer.config_singleTapDefault);
         mGesturesDefaults.put(KEY_DRAW_V, com.android.internal.R.integer.config_drawVDefault);
         mGesturesDefaults.put(KEY_DRAW_INVERSE_V, com.android.internal.R.integer.config_drawInverseVDefault);
         mGesturesDefaults.put(KEY_DRAW_O, com.android.internal.R.integer.config_drawODefault);
@@ -94,6 +97,7 @@ public class GesturesSettings extends SettingsPreferenceFragment implements
 
     static {
         mGesturesSettings.put(KEY_DOUBLE_TAP, Settings.System.GESTURE_DOUBLE_TAP);
+        mGesturesSettings.put(KEY_SINGLE_TAP, Settings.System.GESTURE_SINGLE_TAP);
         mGesturesSettings.put(KEY_DRAW_V, Settings.System.GESTURE_DRAW_V);
         mGesturesSettings.put(KEY_DRAW_INVERSE_V, Settings.System.GESTURE_DRAW_INVERSE_V);
         mGesturesSettings.put(KEY_DRAW_O, Settings.System.GESTURE_DRAW_O);
