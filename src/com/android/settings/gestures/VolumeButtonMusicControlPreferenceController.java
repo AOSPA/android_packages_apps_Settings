@@ -19,6 +19,7 @@ package com.android.settings.gestures;
 import static android.provider.Settings.System.VOLBTN_MUSIC_CONTROLS;
 
 import android.content.Context;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
@@ -50,12 +51,13 @@ public class VolumeButtonMusicControlPreferenceController extends GesturePrefere
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.System.putInt(mContext.getContentResolver(), VOLBTN_MUSIC_CONTROLS,
-                isChecked ? ON : OFF);
+        return Settings.System.putIntForUser(mContext.getContentResolver(), VOLBTN_MUSIC_CONTROLS,
+                isChecked ? ON : OFF, UserHandle.USER_CURRENT);
     }
 
     @Override
     public boolean isChecked() {
-        return Settings.System.getInt(mContext.getContentResolver(), VOLBTN_MUSIC_CONTROLS, 0) != 0;
+        return Settings.System.getIntForUser(mContext.getContentResolver(), VOLBTN_MUSIC_CONTROLS,
+                1, UserHandle.USER_CURRENT) != 0;
     }
 }
