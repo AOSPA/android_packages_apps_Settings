@@ -7249,6 +7249,19 @@
     <string name="enhanced_4g_lte_mode_summary">Use LTE services to improve voice and other communications (recommended)</string>
     <!-- Enhaced 4G LTE Mode summary for 4g calling.  [CHAR LIMIT=100] -->
     <string name="enhanced_4g_lte_mode_summary_4g_calling">Use 4G services to improve voice and other communications (recommended)</string>
+    <!-- Title of a preference determining whether or not the user has enabled contact discovery,
+         which is a service that uses the phone numbers in your contacts to determine if your
+         contacts support advanced calling features, such as video calling. [CHAR LIMIT=50]-->
+    <string name="contact_discovery_opt_in_title">Contact discovery</string>
+    <!-- Summary of a preference determining whether or not the user has enabled contact discovery.
+         [CHAR LIMIT=100] -->
+    <string name="contact_discovery_opt_in_summary">Allows your carrier to discover which calling features your contacts support.</string>
+    <!-- Title of the dialog shown when the user tries to enable Contact Discovery.
+         [CHAR LIMIT=50] -->
+    <string name="contact_discovery_opt_in_dialog_title">Enable contact discovery?</string>
+    <!-- Text displayed in the dialog shown when the user tries to enable Contact Discovery.
+         [CHAR LIMIT=NONE]-->
+    <string name="contact_discovery_opt_in_dialog_message">Enabling this feature will allow your carrier access to phone numbers in your contacts in order to discover which calling features they support.</string>
     <!-- Preferred network type title.  [CHAR LIMIT=50] -->
     <string name="preferred_network_type_title">Preferred network type</string>
     <!-- Preferred network type summary.  [CHAR LIMIT=100] -->
@@ -11159,6 +11172,9 @@
 
     <!-- Summary for media output group with the active device count [CHAR LIMIT=NONE] -->
     <string name="media_output_group_panel_multiple_devices_summary"><xliff:g id="count" example="2">%1$d</xliff:g> devices selected</string>
+
+    <!-- Summary for media output switching output [CHAR LIMIT=50] -->
+    <string name="media_output_switching">Switching\u2026</string>
 
     <!-- Title for HFP(hands free profile) output switch button in settings. -->
     <string name="take_call_on_title">Take call on</string>
