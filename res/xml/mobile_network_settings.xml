@@ -112,7 +112,6 @@
             android:summary="@string/enhanced_4g_lte_mode_summary_4g_calling"
             settings:keywords="@string/keywords_enhance_4g_lte"
             settings:controller="com.android.settings.network.telephony.Enhanced4gCallingPreferenceController"/>
-
         <SwitchPreference
             android:key="advance_call"
             android:title="@string/enhanced_4g_lte_mode_title_advanced_calling"
@@ -120,6 +119,11 @@
             android:summary="@string/enhanced_4g_lte_mode_summary"
             settings:keywords="@string/keywords_enhance_4g_lte"
             settings:controller="com.android.settings.network.telephony.Enhanced4gAdvancedCallingPreferenceController"/>
+        <SwitchPreference
+            android:key="enabled_5g"
+            android:title="@string/enabled_5g_mode_title"
+            android:persistent="true"
+            settings:controller="com.android.settings.network.telephony.Enabled5GPreferenceController"/>
 
         <SwitchPreference
             android:key="contact_discovery_opt_in"
@@ -177,7 +181,6 @@
                 android:title="@string/video_calling_settings_title"
                 android:persistent="true"
                 settings:controller="com.android.settings.network.telephony.VideoCallingPreferenceController"/>
-
         </PreferenceCategory>
 
         <com.android.settings.network.telephony.cdma.CdmaListPreference
