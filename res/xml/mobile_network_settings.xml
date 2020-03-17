@@ -226,6 +226,15 @@
             settings:allowDividerAbove="true"
             settings:controller="com.android.settings.network.telephony.ApnPreferenceController"/>
 
+        <PreferenceScreen
+            android:key="uplmn_settings_key"
+            android:persistent="false"
+            android:title="@string/uplmn_settings_title"
+            android:summary="@string/uplmn_settings_summary"
+            settings:allowDividerAbove="true"
+            settings:controller="com.android.settings.network.telephony.UserPLMNPreferenceController">
+        </PreferenceScreen>
+
         <Preference
             android:key="carrier_settings_key"
             android:title="@string/carrier_settings_title"
