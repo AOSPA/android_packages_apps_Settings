@@ -25,12 +25,16 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Pair;
+import android.view.SurfaceView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import com.android.customization.model.ResourceConstants;
+import com.android.systemui.shared.system.SurfaceViewRequestUtils;
 import com.android.wallpaper.R;
 
 import com.bumptech.glide.Glide;
@@ -53,10 +57,14 @@ public class LauncherGridOptionsProvider {
     private static final String COL_PREVIEW_COUNT = "preview_count";
     private static final String COL_IS_DEFAULT = "is_default";
 
+    private static final String METHOD_GET_PREVIEW = "get_preview";
+    private static final String METADATA_KEY_PREVIEW_VERSION = "preview_version";
+
     private final Context mContext;
     private final String mGridProviderAuthority;
     private final ProviderInfo mProviderInfo;
     private List<GridOption> mOptions;
+    private String mVersion;
 
     public LauncherGridOptionsProvider(Context context, String authorityMetadataKey) {
         mContext = context;
@@ -78,18 +86,23 @@ public class LauncherGridOptionsProvider {
         return mProviderInfo != null;
     }
 
+    boolean usesSurfaceView() {
+        // If no version code is returned, fall back to V1.
+        return TextUtils.equals(mVersion, "V2");
+    }
+
     /**
      * Retrieve the available grids.
      * @param reload whether to reload grid options if they're cached.
      */
     @WorkerThread
     @Nullable
-    List<GridOption> fetch(boolean reload) {
+    Pair<List<GridOption>, String> fetch(boolean reload) {
         if (!areGridsAvailable()) {
             return null;
         }
         if (mOptions != null && !reload) {
-            return mOptions;
+            return Pair.create(mOptions, mVersion);
         }
         Uri optionsUri = new Uri.Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
@@ -100,6 +113,7 @@ public class LauncherGridOptionsProvider {
         String iconPath = mContext.getResources().getString(Resources.getSystem().getIdentifier(
                 ResourceConstants.CONFIG_ICON_MASK, "string", ResourceConstants.ANDROID_PACKAGE));
         try (Cursor c = resolver.query(optionsUri, null, null, null, null)) {
+            mVersion = c.getExtras().getString(METADATA_KEY_PREVIEW_VERSION);
             mOptions = new ArrayList<>();
             while(c.moveToNext()) {
                 String name = c.getString(c.getColumnIndex(COL_NAME));
@@ -120,8 +134,26 @@ public class LauncherGridOptionsProvider {
             Glide.get(mContext).clearDiskCache();
         } catch (Exception e) {
             mOptions = null;
+            mVersion = null;
         }
-        return mOptions;
+        return Pair.create(mOptions, mVersion);
+    }
+
+    /**
+     * Request rendering of home screen preview via Launcher to Wallpaper using SurfaceView
+     * @param name      the grid option name
+     * @param bundle    surface view request bundle generated from
+     *                  {@link SurfaceViewRequestUtils#createSurfaceBundle(SurfaceView)}.
+     */
+    void renderPreview(String name, Bundle bundle) {
+        Uri preview = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(mProviderInfo.authority)
+                .appendPath(PREVIEW)
+                .appendPath(name)
+                .build();
+        bundle.putString("name", name);
+        mContext.getContentResolver().call(preview, METHOD_GET_PREVIEW, null, bundle);
     }
 
     int applyGrid(String name) {
