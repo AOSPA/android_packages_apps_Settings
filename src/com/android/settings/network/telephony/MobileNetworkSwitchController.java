@@ -20,8 +20,11 @@ import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import android.content.Context;
+import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -43,28 +46,38 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
     private int mSubId;
     private SubscriptionsChangeListener mChangeListener;
     private SubscriptionManager mSubscriptionManager;
+    private TelephonyManager mTelephonyManager;
+    private PhoneStateListener mPhoneStateListener;
+    private SubscriptionInfo mSubInfo = null;
+    private int mPhoneId;
+    private int mCallState;
 
     public MobileNetworkSwitchController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
         mChangeListener = new SubscriptionsChangeListener(context, this);
+        mTelephonyManager = (TelephonyManager) mContext
+                .getSystemService(Context.TELEPHONY_SERVICE);
     }
 
     public void init(Lifecycle lifecycle, int subId) {
         lifecycle.addObserver(this);
         mSubId = subId;
+        mPhoneId = mSubscriptionManager.getSlotIndex(mSubId);
     }
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
         mChangeListener.start();
+        registerPhoneStateListener();
         update();
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
         mChangeListener.stop();
+        unRegisterPhoneStateListener();
     }
 
     @Override
@@ -78,8 +91,12 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         mSwitchBar.addOnSwitchChangeListener((switchView, isChecked) -> {
             // TODO b/135222940: re-evaluate whether to use
             // mSubscriptionManager#isSubscriptionEnabled
-            if (mSubscriptionManager.isActiveSubscriptionId(mSubId) != isChecked
-                    && (!mSubscriptionManager.setSubscriptionEnabled(mSubId, isChecked))) {
+        int uiccStatus = PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(mPhoneId);
+        Log.d(TAG, "displayPreference: mSubId=" + mSubId + ", mSubInfo=" + mSubInfo +
+                 ", uiccStatus=" + uiccStatus);
+            if ((mSubInfo != null &&
+                    (uiccStatus == PrimaryCardAndSubsidyLockUtils.CARD_PROVISIONED) != isChecked) &&
+                    (!mSubscriptionManager.setSubscriptionEnabled(mSubId, isChecked))) {
                 mSwitchBar.setChecked(!isChecked);
             }
         });
@@ -91,22 +108,30 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
             return;
         }
 
-        SubscriptionInfo subInfo = null;
         for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(mContext)) {
             if (info.getSubscriptionId() == mSubId) {
-                subInfo = info;
+                mSubInfo = info;
                 break;
             }
         }
 
+        if (TelephonyManager.CALL_STATE_IDLE != mCallState) {
+            Log.d(TAG, "update: disable switchbar, callstate=" + mCallState);
+            mSwitchBar.setEnabled(false);
+            return;
+        } else {
+            mSwitchBar.setEnabled(true);
+        }
+
         // For eSIM, we always want the toggle. If telephony stack support disabling a pSIM
         // directly, we show the toggle.
-        if (subInfo == null || (!subInfo.isEmbedded() && !SubscriptionUtil.showToggleForPhysicalSim(
-                mSubscriptionManager))) {
+        if (mSubInfo == null) {
             mSwitchBar.hide();
         } else {
             mSwitchBar.show();
-            mSwitchBar.setChecked(mSubscriptionManager.isActiveSubscriptionId(mSubId));
+            int uiccStatus = PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(mPhoneId);
+            mSwitchBar.setChecked(uiccStatus == PrimaryCardAndSubsidyLockUtils.CARD_PROVISIONED);
+
         }
     }
 
@@ -122,5 +147,33 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
     @Override
     public void onSubscriptionsChanged() {
         update();
+    }
+
+    private void registerPhoneStateListener() {
+        TelephonyManager tm = mTelephonyManager.createForSubscriptionId(mSubId);
+        tm.listen(getPhoneStateListener(),
+                    PhoneStateListener.LISTEN_CALL_STATE);
+    }
+
+    private void unRegisterPhoneStateListener() {
+        if (mPhoneStateListener != null) {
+            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+            mPhoneStateListener = null;
+        }
+    }
+
+    private PhoneStateListener getPhoneStateListener() {
+        // Disable Sim selection for Data when voice call is going on as changing the default data
+        // sim causes a modem reset currently and call gets disconnected
+        // ToDo : Add subtext on disabled preference to let user know that default data sim cannot
+        // be changed while call is going on
+        mPhoneStateListener  = new PhoneStateListener() {
+            @Override
+            public void onCallStateChanged(int state, String incomingNumber) {
+                mCallState = state;
+                update();
+            }
+        };
+        return mPhoneStateListener;
     }
 }
