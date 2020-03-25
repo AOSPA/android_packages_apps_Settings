@@ -69,13 +69,6 @@
 
     <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button.Borderless.Colored"/>
 
-    <!-- Option tiles -->
-    <style name="OptionTitleTextAppearance" parent="TitleTextAppearance">
-        <item name="android:textColor">@color/option_title_color</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textSize">@dimen/theme_option_title_font_text_size</item>
-    </style>
-
     <style name="CardTitleTextAppearance" parent="TitleTextAppearance">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/card_title_text_size</item>
