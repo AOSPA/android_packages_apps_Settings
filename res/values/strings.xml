@@ -2785,7 +2785,7 @@
     <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
     <string name="display_white_balance_summary"></string>
     <!-- Display settings screen, setting option name to enable adaptive sleep [CHAR LIMIT=30] -->
-    <string name="adaptive_sleep_title">Screen attention</string>
+    <string name="adaptive_sleep_title">Turn on screen attention</string>
     <!-- Setting option summary when adaptive sleep is on [CHAR LIMIT=NONE] -->
     <string name="adaptive_sleep_summary_on">On / Screen won\u2019t turn off if you\u2019re looking at it</string>
     <!-- Setting option summary when adaptive sleep is off [CHAR LIMIT=NONE] -->
@@ -2799,7 +2799,7 @@
     <!-- Description feature's privacy sensitive details to make sure users understand what feature users, what it saves/sends etc [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_privacy">Screen attention uses the front camera to see if someone is looking at the screen. It works on device, and images are never stored or sent to Google.</string>
     <!-- Description about the contextual adaptive sleep card [CHAR LIMIT=NONE]-->
-    <string name="adaptive_sleep_contextual_slice_summary">Keep screen on when viewing it</string>
+    <string name="adaptive_sleep_contextual_slice_summary">Keep screen on when looking at it</string>
 
     <!-- Night display screen, setting option name to enable night display (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
     <string name="night_display_title">Night Light</string>
@@ -6177,13 +6177,13 @@
     <!-- Title of Wi-Fi certificate [CHAR LIMIT=30] -->
     <string name="wifi_certificate">Wi\u2011Fi certificate</string>
     <!-- Title of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
-    <string name="ca_certificate_warning_title">Your privacy is at risk</string>
+    <string name="ca_certificate_warning_title">Your data won\u2019t be private</string>
     <!-- Description of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
-    <string name="ca_certificate_warning_description">CA certificates are used by websites, apps, and VPNs for encryption. Only install CA certificates from organizations you trust. \n\n If you install a CA certificate, the certificate owner could access your information, such as passwords, messages, or credit card details, from websites you visit or apps you use - even if that information is encrypted.</string>
+    <string name="ca_certificate_warning_description">CA certificates are used by websites, apps, and VPNs for encryption. Only install CA certificates from organizations you trust. \n\n If you install a CA certificate, the certificate owner could access your data, such as passwords or credit card details, from websites you visit or apps you use – even if your data is encrypted.</string>
     <!-- Label for button to not install a certificate [CHAR_LIMIT=50] -->
     <string name="certificate_warning_dont_install">Don\u2019t install</string>
     <!-- Label for button to continue installing a certificate [CHAR_LIMIT=50] -->
-    <string name="certificate_warning_install_anyway">Install anyways</string>
+    <string name="certificate_warning_install_anyway">Install anyway</string>
     <!-- Toast message that a certificate was not installed -->
     <string name="cert_not_installed">Certificate not installed</string>
 
@@ -7264,7 +7264,7 @@
          contacts support advanced calling features, such as video calling. [CHAR LIMIT=50]-->
     <string name="contact_discovery_opt_in_title">Contact discovery</string>
     <!-- Summary of a preference determining whether or not the user has enabled contact discovery.
-         [CHAR LIMIT=100] -->
+         [CHAR LIMIT=110] -->
     <string name="contact_discovery_opt_in_summary">Allows your carrier to discover which calling features your contacts support.</string>
     <!-- Title of the dialog shown when the user tries to enable Contact Discovery.
          [CHAR LIMIT=50] -->
@@ -8491,7 +8491,7 @@
     <string name="notification_assistant_security_warning_summary">
         <xliff:g id="notification_assistant_name" example="Notification Assistant">%1$s</xliff:g> will be able to read all notifications,
         including personal information such as contact names and the text of messages you receive.
-        It will also be able to modify or dismiss notifications or trigger action buttons they contain.
+        This app will also be able to dismiss notifications or take action on buttons in notifications, including answering phone calls.
         \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
     </string>
 
@@ -8504,7 +8504,7 @@
     <string name="notification_listener_security_warning_summary">
         <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to read all notifications,
         including personal information such as contact names and the text of messages you receive.
-        It will also be able to dismiss notifications or trigger action buttons they contain.
+        This app will also be able to dismiss notifications or take action on buttons in notifications, including answering phone calls.
         \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
     </string>
     <string name="notification_listener_disable_warning_summary">
@@ -11655,6 +11655,11 @@
     <string name="hwui_force_dark_title">Override force-dark</string>
     <!-- UI debug setting: Force enable "smart dark" UI rendering feature summary [CHAR LIMIT=NONE] -->
     <string name="hwui_force_dark_summary">Overrides the force-dark feature to be always-on</string>
+
+    <!-- If blurs are supported on SurfaceFlinger. [CHAR LIMIT=60] -->
+    <string name="enable_blurs_on_windows_title">Enable blurs</string>
+    <!-- If blurs are supported on SurfaceFlinger, summary. [CHAR LIMIT=NONE] -->
+    <string name="enable_blurs_on_windows_summary">Enables window blurs at compositor level. Requires device reboot.</string>
 
     <!-- Title for the top level Privacy Settings [CHAR LIMIT=30]-->
     <string name="privacy_dashboard_title">Privacy</string>
