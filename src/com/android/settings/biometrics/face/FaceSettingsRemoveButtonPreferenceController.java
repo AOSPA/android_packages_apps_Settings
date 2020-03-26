@@ -33,6 +33,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.widget.LayoutPreference;
@@ -61,7 +62,6 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
             builder.setTitle(R.string.security_settings_face_settings_remove_dialog_title)
                     .setMessage(R.string.security_settings_face_settings_remove_dialog_details)
                     .setPositiveButton(R.string.delete, mOnClickListener)

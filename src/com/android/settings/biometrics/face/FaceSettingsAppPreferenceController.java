@@ -78,6 +78,10 @@ public class FaceSettingsAppPreferenceController extends FaceSettingsPreferenceC
 
     @Override
     public int getAvailabilityStatus() {
+        if (Utils.isExtFaceServiceAvailable()){
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
         if(mFaceManager == null){
             return AVAILABLE_UNSEARCHABLE;
         }
