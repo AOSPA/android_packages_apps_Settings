@@ -16,9 +16,6 @@
 
 package com.android.settings.notification.zen;
 
-import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CALLS;
-import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
-
 import android.app.Activity;
 import android.app.Application;
 import android.app.settings.SettingsEnums;
@@ -56,16 +53,12 @@ public class ZenModePeopleSettings extends ZenModeSettingsBase implements Indexa
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, Application app, Fragment host, FragmentManager fragmentManager) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModePriorityMessagesPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeStarredContactsPreferenceController(context, lifecycle,
-                PRIORITY_CATEGORY_MESSAGES, "zen_mode_starred_contacts_messages"));
-        controllers.add(new ZenModePriorityCallsPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeStarredContactsPreferenceController(context, lifecycle,
-                PRIORITY_CATEGORY_CALLS, "zen_mode_starred_contacts_callers"));
-        controllers.add(new ZenModeRepeatCallersPreferenceController(context, lifecycle,
-                context.getResources().getInteger(com.android.internal.R.integer
-                        .config_zen_repeat_callers_threshold)));
-        controllers.add(new ZenModePriorityConversationsPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeConversationsPreferenceController(context,
+                "zen_mode_conversations", lifecycle));
+        controllers.add(new ZenModeCallsPreferenceController(context, lifecycle,
+                "zen_mode_people_calls"));
+        controllers.add(new ZenModeMessagesPreferenceController(context, lifecycle,
+                "zen_mode_people_messages"));
         controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle,
                 fragmentManager));
         return controllers;
