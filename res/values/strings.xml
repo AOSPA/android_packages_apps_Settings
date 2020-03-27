@@ -3855,6 +3855,12 @@
     <!-- Bluetooth Tethering settings.  Message for untethering from a bluetooth device [CHAR LIMIT=50]-->
     <string name="bluetooth_untether_blank"><xliff:g id="device_name">%1$s</xliff:g> will be untethered.</string>
 
+    <!-- Ethernet Tethering settings-->
+    <!-- Label for ethernet tether checkbox [CHAR LIMIT=25]-->
+    <string name="ethernet_tether_checkbox_text">Ethernet tethering</string>
+    <!-- Ethernet Tethering subtext [CHAR LIMIT=70]-->
+    <string name="ethernet_tethering_subtext" product="default">Share phone\u2019s internet connection via USB Ethernet</string>
+
     <!-- Tethering footer info [CHAR LIMIT=NONE]-->
     <string name="tethering_footer_info">Use hotspot and tethering to provide internet to other devices through your mobile data connection. Apps can also create a hotspot to share content with nearby devices.</string>
     <!-- Tethering footer info for the device which supports Wi-Fi and Wi-Fi tethering enabled at the same time [CHAR LIMIT=NONE]-->
@@ -4920,52 +4926,74 @@
     <!-- Short summary for nav bar Magnification. Tells the user that this feature allows the user to magnify the screen using a button in the nav bar -->
     <string name="accessibility_screen_magnification_navbar_short_summary">Tap a button to zoom</string>
     <!-- Summary for the accessibility preference screen to enable screen magnification gestures. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_summary"><![CDATA[Quickly zoom in on the screen to see content more clearly.<br/><br/><b>To zoom in:</b><br/>\t1. Use shortcut to start magnification<br/>\t2. Tap the screen<br/>\t3. Drag 2 fingers to move around screen<br/>\t4. Pinch with 2 fingers to adjust zoom<br/>\t5. Use shortcut to stop magnification<br/><br/><b>To zoom in temporarily:</b><br/>\t1. Use shortcut to start magnification<br/>\t2. Touch & hold anywhere on the screen<br/>\t3. Drag finger to move around screen<br/>\t4. Lift finger to stop magnification]]></string>
+    <string name="accessibility_screen_magnification_summary">
+        <![CDATA[Quickly zoom in on the screen to display content more clearly.<br/><br/>
+        <b>To zoom in:</b><br/>
+        1. Use shortcut to start magnification<br/>
+        2. Tap the screen<br/>
+        3. Drag 2 fingers to move around screen<br/>
+        4. Pinch with 2 fingers to adjust zoom<br/>
+        5. Use shortcut to stop magnification<br/><br/>
+        <b>To zoom in temporarily:</b><br/>
+        1. Use shortcut to start magnification<br/>
+        2. Touch & hold anywhere on the screen<br/>
+        3. Drag finger to move around screen<br/>
+        4. Lift finger to stop magnification
+        ]]>
+    </string>
     <!-- Summary for the accessibility preference screen to enable screen magnification via the nav bar. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_navbar_summary">When magnification is turned on, you can zoom in on your screen.\n\n<b>To zoom</b>, start magnification, then tap anywhere on the screen.\n<ul><li>Drag 2 or more fingers to scroll</li>\n<li>Pinch 2 or more fingers to adjust zoom</li></ul>\n\n<b>To zoom temporarily</b>, start magnification, then touch &amp; hold anywhere on the screen.\n<ul><li>Drag to move around the screen</li>\n<li>Lift finger to zoom out</li></ul>\n\nYou can’t zoom in on the keyboard or navigation bar.</string>
-    <!-- Title for the Accessibility tutorial dialog in Accessibility service with button. [CHAR LIMIT=50] -->
+    <!-- Title for the accessibility tutorial dialog in accessibility service with button. [CHAR LIMIT=50] -->
     <string name="accessibility_tutorial_dialog_title_button">Use accessibility button to open</string>
-    <!-- Title for the Accessibility tutorial dialog in Accessibility service with gesture. [CHAR LIMIT=50] -->
+    <!-- Title for the accessibility tutorial dialog in accessibility service with volume keys. [CHAR LIMIT=50] -->
+    <string name="accessibility_tutorial_dialog_title_volume">Hold volume key to open</string>
+    <!-- Title for the accessibility tutorial dialog in accessibility service with triple tap. [CHAR LIMIT=100] -->
+    <string name="accessibility_tutorial_dialog_title_triple">Triple tap screen to open</string>
+    <!-- Title for the accessibility tutorial dialog in accessibility service with gesture. [CHAR LIMIT=50] -->
     <string name="accessibility_tutorial_dialog_title_gesture">Use gesture to open</string>
-    <!-- Title for the Accessibility tutorial dialog in gesture navigation settings. [CHAR LIMIT=50] -->
+    <!-- Title for the accessibility tutorial dialog in gesture navigation settings. [CHAR LIMIT=50] -->
     <string name="accessibility_tutorial_dialog_title_gesture_settings">Use new accessibility gesture</string>
-    <!-- Message for the Accessibility tutorial dialog when user enables an accessibility service while using the 3-button nav bar. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_button">To turn this service on or off, tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> on the bottom of your screen.\n\nTo switch between services, touch &amp; hold the accessibility button.</string>
-    <!-- Message for the Accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is not enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture">To turn this service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold.</string>
-    <!-- Message for the Accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback">To turn this service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold.</string>
-    <!-- Message for the Accessibility tutorial dialog when user chooses gesture navigation in navigation settings, an accessibility service is using the accessibility button, and touch exploration is disabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture_settings">To turn an accessibility service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold.</string>
-    <!-- Message for the Accessibility tutorial dialog when user chooses gesture navigation in navigation settings, an accessibility service is using the accessibility button, and touch exploration is enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback">To turn an accessibility service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold.</string>
-    <!-- Button for the Accessibility tutorial dialog to dismiss the dialog when user clicks it. [CHAR LIMIT=10] -->
+    <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using the 3-button nav bar. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_tutorial_dialog_message_button">To turn this app on or off, tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> on the bottom of your screen.\n\nTo switch between apps, touch &amp; hold the accessibility button.</string>
+    <!-- Instruction for the accessibility tutorial dialog in accessibility service with volume keys. [CHAR LIMIT=100] -->
+    <string name="accessibility_tutorial_dialog_message_volume">To turn this app on or off, press &amp; hold both volume keys for 1 second.</string>
+    <!-- Instruction for the accessibility tutorial dialog in accessibility service with triple tap. [CHAR LIMIT=100] -->
+    <string name="accessibility_tutorial_dialog_message_triple">To start and stop magnification, triple-tap anywhere on your screen.</string>
+    <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is not enabled. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_tutorial_dialog_message_gesture">To turn this app on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between apps, swipe up with two fingers and hold.</string>
+    <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is enabled. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback">To turn this app on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between apps, swipe up with three fingers and hold.</string>
+    <!-- Message for the accessibility tutorial dialog when user chooses gesture navigation in navigation settings, an accessibility service is using the accessibility button, and touch exploration is disabled. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_tutorial_dialog_message_gesture_settings">To turn an accessibility app on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between apps, swipe up with two fingers and hold.</string>
+    <!-- Message for the accessibility tutorial dialog when user chooses gesture navigation in navigation settings, an accessibility service is using the accessibility button, and touch exploration is enabled. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback">To turn an accessibility app on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between apps, swipe up with three fingers and hold.</string>
+    <!-- Button for the accessibility tutorial dialog to dismiss the dialog when user clicks it. [CHAR LIMIT=10] -->
     <string name="accessibility_tutorial_dialog_button">Got it</string>
     <!-- Title for accessibility shortcut preference for accessibility apps. [CHAR LIMIT=40] -->
     <string name="accessibility_shortcut_title"><xliff:g id="service" example="Select to Speak">%1$s</xliff:g> shortcut</string>
-    <!-- Title for software shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <!-- Title for software shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_summary_software">Accessibility Button</string>
-    <!-- Title for software shortcut in gesture mode in Accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
+    <!-- Title for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture">Swipe up with 2 fingers</string>
-    <!-- Title for software shortcut in gesture mode in Accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled. [CHAR LIMIT=NONE] -->
+    <!-- Title for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback">Swipe up with 3 fingers</string>
     <!-- Summary for accessibility shortcut preference for software shortcut type. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_software">Tap accessibility button</string>
-    <!-- Summary for software shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <!-- Summary for software shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software">Tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> at the bottom of your screen</string>
-    <!-- Summary for software shortcut in gesture mode in Accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
+    <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture">Swipe up from the bottom of the screen with 2 fingers</string>
-    <!-- Summary for software shortcut in gesture mode in Accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled [CHAR LIMIT=NONE] -->
+    <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback">Swipe up from the bottom of the screen with 3 fingers</string>
-    <!-- Title for hardware shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <!-- Title for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_hardware">Hold volume keys</string>
-    <!-- Summary for hardware shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <!-- Summary for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_hardware">Press &amp; hold both volume keys for 1 second</string>
-    <!-- Title for triple tap shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <!-- Title for triple tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap">Triple-tap screen</string>
-    <!-- Summary for triple tap shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <!-- Summary for triple tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap">Quickly tap screen 3 times. This shortcut may slow down your device.</string>
-    <!-- Title for the Accessibility edit shortcut dialog to save the preference when user clicks it. [CHAR LIMIT=10] -->
+    <!-- Title for the accessibility edit shortcut dialog to save the preference when user clicks it. [CHAR LIMIT=10] -->
     <string name="accessibility_shortcut_edit_dialog_title_advance">Advanced</string>
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_navbar_configuration_warning">The Accessibility button is set to <xliff:g id="service" example="Select to Speak">%1$s</xliff:g>. To use magnification, touch &amp; hold the Accessibility button, then select magnification.</string>
@@ -5030,7 +5058,16 @@
     <!-- Used in the accessibility service settings to control turning display color inversion on/off entirely. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_switch_title">Use color inversion</string>
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_display_inversion_preference_subtitle"><![CDATA[Color inversion turns light screens dark. This feature may be helpful for people who are sensitive to bright light.<br/><br/>Color inversion also turns dark screens light. Colors will change in media and images.<br/><br/>Note: You can also use Dark theme to display a dark background. Dark theme works with supported apps. Color inversion works on all apps.]]></string>
+    <string name="accessibility_display_inversion_preference_subtitle">
+        <![CDATA[Color inversion turns light screens dark.<br/><br/>
+        Note:
+        <ol>
+            <li>\u00a0Color inversion also turns dark screens light.</li>
+            <li>\u00a0Colors will change in media and images.</li>
+            <li>\u00a0Dark theme can be used to display a dark background. Dark theme works with supported apps. Color inversion works on all apps.</li>
+        </ol>
+        ]]>
+    </string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_preference_title">Autoclick (dwell timing)</string>
     <!-- Footer text to explain what autoclick does -->
@@ -7017,7 +7054,7 @@
     <string name="apps_with_restrictions_settings_button">Expand settings for application</string>
 
     <!-- NFC payment settings --><skip/>
-    <string name="nfc_payment_settings_title">Tap &amp; pay</string>
+    <string name="nfc_payment_settings_title">Contactless payments</string>
     <!-- Caption for button linking to a page explaining how Tap and Pay works-->
     <string name="nfc_payment_how_it_works">How it works</string>
     <!-- String shown when there are no NFC payment applications installed -->
@@ -7271,7 +7308,7 @@
     <string name="contact_discovery_opt_in_dialog_title">Enable contact discovery?</string>
     <!-- Text displayed in the dialog shown when the user tries to enable Contact Discovery.
          [CHAR LIMIT=NONE]-->
-    <string name="contact_discovery_opt_in_dialog_message">Enabling this feature will allow your carrier access to phone numbers in your contacts in order to discover which calling features they support.</string>
+    <string name="contact_discovery_opt_in_dialog_message">All of the phone numbers in your contacts will be periodically sent to your carrier in order to discover which calling features are supported.</string>
     <!-- Preferred network type title.  [CHAR LIMIT=50] -->
     <string name="preferred_network_type_title">Preferred network type</string>
     <!-- Preferred network type summary.  [CHAR LIMIT=100] -->
@@ -8193,6 +8230,24 @@
     <!-- Button to cancel out of the dialog shown when the user has disabled bubbles at the feature level but tries to enable it for an app. [CHAR LIMIT=60] -->
     <string name="bubbles_feature_disabled_button_cancel">Cancel</string>
 
+    <!-- Bubble feature settings: Description for toggle when bubbles are turned on in notification settings [CHAR LIMIT=100] -->
+    <string name="notifications_bubble_setting_on_summary">On / Conversations can appear as floating icons</string>
+    <!-- Bubble feature settings: Title of the toggle to turn bubbles on and off [CHAR LIMIT=100] -->
+    <string name="notifications_bubble_setting_title">Allow apps to show bubbles</string>
+    <!-- Bubble feature settings: Description shown with the toggle to turn bubbles on and off [CHAR LIMIT=NONE]-->
+    <string name="notifications_bubble_setting_description">Some conversations will appear as floating icons on top of other apps</string>
+
+    <!-- Bubble app settings: option allowing all conversations from an app to bubble if the app sends bubbles [CHAR LIMIT=60]-->
+    <string name="bubble_app_setting_all">All conversations can bubble</string>
+    <!-- Bubble app settings: option allowing only user selected conversations from an app to bubble if the app sends bubbles [CHAR LIMIT=60] -->
+    <string name="bubble_app_setting_selected">Selected conversations can bubble</string>
+    <!-- Bubble app settings: option allowing no bubbles from the app [CHAR LIMIT=60] -->
+    <string name="bubble_app_setting_none">Nothing can bubble</string>
+    <!-- Bubble app settings: Title above a list of conversations that have been selected to bubble [CHAR LIMIT=60]-->
+    <string name="bubble_app_setting_selected_conversation_title">Conversations</string>
+    <!-- Bubble app settings: Title above a list of conversations that have been excluded from bubbling [CHAR LIMIT=60] -->
+    <string name="bubble_app_setting_excluded_conversation_title">Excluded</string>
+
     <!-- Configure notifications: title for swipe direction [CHAR LIMIT=60] -->
     <string name="swipe_direction_title">Swipe actions</string>
 
@@ -8558,57 +8613,97 @@
     <!-- Apps > App Details > Picture-in-picture > Description. [CHAR LIMIT=NONE] -->
     <string name="picture_in_picture_app_detail_summary">Allow this app to create a picture-in-picture window while the app is open or after you leave it (for example, to continue watching a video).  This window displays on top of other apps you\'re using.</string>
 
-    <!-- Special access > Title for managing the settings where users opt-in to connect a work app
-    to its personal equivalent, allowing cross-profile communication. [CHAR LIMIT=50] -->
-    <string name="interact_across_profiles_title" translatable="false">Connected personal and work apps</string>
+    <!-- Settings label. This setting shows a user's connected work and personal apps.
+    When a user connects select work and personal apps, they can access work and personal data together. [CHAR LIMIT=50] -->
+    <string name="interact_across_profiles_title">Connected work &amp; personal apps</string>
 
-    <!-- Special access > Connected personal and work apps > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_empty_text" translatable="false">No connected apps</string>
+    <!-- Settings subtext. This text is shown when a user doesn't have any connected apps. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_empty_text">No connected apps</string>
 
-    <!-- Special access > Connected personal and work apps > Additional keywords to search for. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_keywords" translatable="false">cross profile connected app apps work and personal</string>
+    <!-- Search keywords. If a user is searching for the "Connected work & personal apps" feature in Settings,
+    these keywords will surface that feature. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_keywords">cross profile connected app apps work and personal</string>
 
-    <!-- Apps > App Details > Advanced section string title. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_app_detail_title" translatable="false">Connected personal and work apps</string>
+    <!-- Settings header. This setting shows a user's connected work and personal apps.
+    When a user connects select work and personal apps, they can access work and personal data together. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_app_detail_title">Connected work &amp; personal apps</string>
 
-    <!-- Apps > App Details > Connected personal and work apps > Switch title. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_switch_enabled" translatable="false">Connected</string>
+    <!-- Toggle label. This text is shown when a user's work and personal apps are connected. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_switch_enabled">Connected</string>
 
-    <!-- Apps > App Details > Connected personal and work apps > Switch title. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_switch_disabled" translatable="false">Connect these apps</string>
+    <!-- Toggle label. This text is shown when a user can connect specific work and personal apps.
+    The apps they can connect are shown above this toggle. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_switch_disabled">Connect these apps</string>
 
-    <!-- Apps > App Details > Connected personal and work apps > Description. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_summary_1" translatable="false">Connected apps share permissions and can access each other\u2019s data.</string>
+    <!-- Settings text. This text lets a user know that if they connect work and personal apps,
+    they will share permissions and can access each other's data. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_summary_1">Connected apps share permissions and can access each other\u2019s data.</string>
 
-    <!-- Apps > App Details > Connected personal and work apps > Description. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_summary_2" translatable="false">Only connect apps that you trust with your personal data. Work apps may expose your data to your IT admin.</string>
+    <!-- Settings text. This text lets a user know that they should only connect work and personal apps
+    if they trust the work app with their personal data. The work app could potentially show that data
+    to the user's IT admin. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_summary_2">Only connect apps that you trust with your personal data. Work apps may expose your data to your IT admin.</string>
 
-    <!-- Apps > App Details > Connected personal and work apps > Consent dialog title. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_consent_dialog_title" translatable="false">Trust work %1$s with your personal data?</string>
+    <!-- Dialog title. This dialog is shown when a user tries to connect a work app to a personal
+    app (e.g. their work Calendar to their personal Calendar), and it's confirming that they should
+    connect the apps only if they trust the work app with their personal data. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_title">Trust work <xliff:g id="name" example="Calendar">%1$s</xliff:g> with your personal data?</string>
 
-    <!-- Apps > App Details > Connected personal and work apps > Consent dialog description. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_consent_dialog_summary" translatable="false">%1$s may expose your personal data to your IT admin.</string>
+    <!-- Dialog text. This dialog is shown when a user tries to connect a work app to a personal
+    app (e.g. their work Calendar to their personal Calendar), and it's confirming that they should
+    connect the apps only if they trust the work app with their personal data.
+    The placeholder is the app name. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_summary"><xliff:g id="name" example="Calendar">%1$s</xliff:g> may expose your personal data to your IT admin.</string>
 
-    <!-- Apps > App Details > Connected personal and work apps > Consent dialog App data title. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_consent_dialog_app_data_title" translatable="false">App data</string>
+    <!-- Title of a section in a dialog. This section shows the app data that will be
+    accessible when work and personal apps are connected. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_app_data_title">App data</string>
 
-    <!-- Apps > App Details > Connected personal and work apps > Consent dialog App data description. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_consent_dialog_app_data_summary" translatable="false">It can access data in your personal %1$s app.</string>
+    <!-- Dialog text. This text lets the user know that their work app (e.g. Calendar) will be
+    able to access data in their personal app. The placeholder is the app name. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_app_data_summary">This app can access data in your personal <xliff:g id="name" example="Calendar">%1$s</xliff:g> app.</string>
 
-    <!-- Apps > App Details > Connected personal and work apps > Consent dialog Permissions title. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_consent_dialog_permissions_title" translatable="false">Permissions</string>
+    <!-- Title of a section in a dialog. This section shows the permissions that will be accessible
+    when work and personal apps are connected. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_permissions_title">Permissions</string>
 
-    <!-- Apps > App Details > Connected personal and work apps > Consent dialog Permissions description. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_consent_dialog_permissions_summary" translatable="false">It can use your personal %1$s app\u2019s permissions, like access to location, storage, or contacts.</string>
+    <!-- Dialog text. This text lets the user know that their work app (e.g. Calendar) will be able
+    to use permissions in their personal app. The placeholder is the app name. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_permissions_summary">This app can use your personal <xliff:g id="name" example="Calendar">%1$s</xliff:g> app\u2019s permissions, like access to location, storage, or contacts.</string>
 
-    <!-- Summary of preference to manage connected personal and work apps, informing the user that currently no apps are connected -->
-    <string name="interact_across_profiles_number_of_connected_apps_none" translatable="false">No apps connected</string>
+    <!-- Summary of preference to manage connected work and personal apps, informing the user that
+    currently no apps are connected [CHAR LIMIT=NONE]-->
+    <string name="interact_across_profiles_number_of_connected_apps_none">No apps connected</string>
 
-    <!-- Summary of preference to manage connected personal and work apps, informing the user how many apps are connected -->
-    <plurals name="interact_across_profiles_number_of_connected_apps" translatable="false">
+    <!-- Summary of preference to manage connected work and personal apps, informing the user how many apps are connected -->
+    <plurals name="interact_across_profiles_number_of_connected_apps">
         <item quantity="one"><xliff:g id="count">%d</xliff:g> app connected</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> apps connected</item>
     </plurals>
+
+    <!-- Banner title. This banner lets a user know that they need to install an app in their
+    work profile in order to connect it to the corresponding personal app.
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=50]-->
+    <string name="interact_across_profiles_install_work_app_title">Install <xliff:g id="name" example="Calendar">%1$s</xliff:g> in your work profile</string>
+
+    <!-- Banner text. This banner lets a user know that they need to install an app in their
+    work profile in order to connect it to the corresponding personal app.
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
+    <string name="interact_across_profiles_install_work_app_summary">To connect these apps, install the <xliff:g id="name" example="Calendar">%1$s</xliff:g> app in your work profile</string>
+
+    <!-- Banner title. This banner lets a user know that they need to install an app in their
+    personal profile in order to connect it to the corresponding work app.
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=50]-->
+    <string name="interact_across_profiles_install_personal_app_title">Install <xliff:g id="name" example="Calendar">%1$s</xliff:g> in your personal profile</string>
+
+    <!-- Banner text. This banner lets a user know that they need to install an app in their
+    personal profile in order to connect it to the corresponding work app.
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
+    <string name="interact_across_profiles_install_personal_app_summary">To connect these apps, install the <xliff:g id="name" example="Calendar">%1$s</xliff:g> app in your personal profile</string>
+
+    <!-- Button text. This button takes a user to the app store so they can download and
+    install the app they need. [CHAR LIMIT=50]-->
+    <string name="interact_across_profiles_install_app_action">Get the app</string>
 
     <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_access_title">Do Not Disturb access</string>
@@ -9768,7 +9863,7 @@
     <!-- Label for setting which controls whether app can display over other apps [CHAR LIMIT=45] -->
     <string name="permit_draw_overlay">Allow display over other apps</string>
     <!-- Description of allowing overlay setting [CHAR LIMIT=NONE] -->
-    <string name="allow_overlay_description">Allow this app to display on top of other apps you\u2019re using. It may interfere with your use of those apps or change the way they seem to appear or behave.</string>
+    <string name="allow_overlay_description">Allow this app to display on top of other apps you\u2019re using. This app will be able to see where you tap or change what\u2019s displayed on the screen.</string>
 
     <!-- Manager External Storage settings title [CHAR LIMIT=40] -->
     <string name="manage_external_storage_title">All files access</string>
@@ -10496,6 +10591,11 @@
 
     <!-- [CHAR LIMIT=60] Name of dev option to enable extra quick settings tiles -->
     <string name="quick_settings_developer_tiles">Quick settings developer tiles</string>
+
+    <!-- [CHAR LIMIT=50] Setting title to disable the adb authorization timeout feature. -->
+    <string name="adb_authorization_timeout_title">Disable adb authorization timeout</string>
+    <!-- [CHAR LIMIT=NONE] Setting summary explaining the disablement of the automatic adb authorization timeout. -->
+    <string name="adb_authorization_timeout_summary">Disable automatic revocation of adb authorizations for systems that have not reconnected within the default (7 days) or user-configured (minimum 1 day) amount of time.</string>
 
     <!-- [CHAR LIMIT=25] Title of developer tile to toggle winscope trace -->
     <string name="winscope_trace_quick_settings_title">Winscope Trace</string>
@@ -11854,4 +11954,9 @@
 
     <!-- Button label to stop casting on media device. [CHAR LIMIT=40 -->
     <string name="media_output_panel_stop_casting_button">Stop casting</string>
+
+    <!-- Title for the 5G limited VoLTE dialog. [CHAR LIMIT=50] -->
+    <string name="volte_5G_limited_title">Turn off VoLTE?</string>
+    <!-- Content description for the 5G limited VoLTE dialog. [CHAR LIMIT=NONE] -->
+    <string name="volte_5G_limited_text">This also turns off your 5G connection.\nDuring a voice call, you can\u2019t use the internet and some apps may not work.</string>
 </resources>
