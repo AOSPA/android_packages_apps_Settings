@@ -64,7 +64,7 @@ public class DimmableIZatIconPreference {
         if (mLoader == null) {
             try {
                 if (mXtProxyClz == null || mNotifierClz == null) {
-                    mLoader = new DexClassLoader("/system/framework/izat.xt.srv.jar",
+                    mLoader = new DexClassLoader("/system_ext/framework/izat.xt.srv.jar",
                                                  context.getFilesDir().getAbsolutePath(),
                                                  null,
                                                  ClassLoader.getSystemClassLoader());
