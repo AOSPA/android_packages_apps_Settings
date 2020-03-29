@@ -164,6 +164,14 @@
         android:title="@string/sound_audio_category_title">
         <!-- Live Caption -110 and Now Playing -105-->
 
+        <!-- Adaptive Playback -->
+        <Preference
+            android:key="sound_adaptive_playback_summary"
+            android:title="@string/adaptive_playback_screen_title"
+            android:fragment="co.aospa.settings.sound.AdaptivePlaybackSoundSettings"
+            android:order="-113"
+            settings:controller="co.aospa.settings.sound.AdaptivePlaybackParentPreferenceController" />
+
         <!-- Spatial audio -->
         <Preference
             android:key="spatial_audio_summary"
