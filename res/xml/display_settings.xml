@@ -153,6 +153,14 @@
         android:title="@string/device_theme"
         android:summary="@string/summary_placeholder" />
 
+    <ListPreference
+        android:key="screen_off_animation"
+        android:title="@string/screen_off_animation_title"
+        android:entries="@array/screen_off_animation_entries"
+        android:entryValues="@array/screen_off_animation_values"
+        android:persistent="false"
+        android:defaultValue="1" />
+
     <Preference
         android:key="vr_display_pref"
         android:title="@string/display_vr_pref_title"
