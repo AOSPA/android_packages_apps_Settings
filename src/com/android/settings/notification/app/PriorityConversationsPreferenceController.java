@@ -28,14 +28,13 @@ import com.android.settings.notification.NotificationBackend;
 import java.util.Collections;
 import java.util.List;
 
-public class ImportantConversationsPreferenceController extends
+public class PriorityConversationsPreferenceController extends
         ConversationListPreferenceController {
 
     private static final String KEY = "important_conversations";
-    private static final String LIST_KEY = "important_conversations_list";
     private List<ConversationChannelWrapper> mConversations;
 
-    public ImportantConversationsPreferenceController(Context context,
+    public PriorityConversationsPreferenceController(Context context,
             NotificationBackend backend) {
         super(context, backend);
     }
@@ -48,6 +47,11 @@ public class ImportantConversationsPreferenceController extends
     @Override
     public boolean isAvailable() {
         return true;
+    }
+
+    @Override
+    boolean matchesFilter(ConversationChannelWrapper conversation) {
+        return conversation.getNotificationChannel().isImportantConversation();
     }
 
     @Override
@@ -67,7 +71,7 @@ public class ImportantConversationsPreferenceController extends
                 if (mContext == null) {
                     return;
                 }
-                populateList(mConversations, pref, pref.findPreference(LIST_KEY));
+                populateList(mConversations, pref);
             }
         }.execute();
 

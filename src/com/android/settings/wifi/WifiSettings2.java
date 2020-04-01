@@ -22,6 +22,7 @@ import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -69,6 +70,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
+import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
@@ -109,6 +111,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     @VisibleForTesting
     static final int ADD_NETWORK_REQUEST = 2;
     static final int CONFIG_NETWORK_REQUEST = 3;
+    static final int MANAGE_SUBSCRIPTION = 4;
 
     private static final String PREF_KEY_EMPTY_WIFI_LIST = "wifi_empty_list";
     // TODO(b/70983952): Rename these to use WifiEntry instead of AccessPoint.
@@ -428,6 +431,9 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 }
             }
             return;
+        } else if (requestCode == MANAGE_SUBSCRIPTION) {
+            //Do nothing
+            return;
         }
 
         final boolean formerlyRestricted = mIsRestricted;
@@ -668,11 +674,17 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     @Override
     public void onNumSavedNetworksChanged() {
+        if (isFinishingOrDestroyed()) {
+            return;
+        }
         setAdditionalSettingsSummaries();
     }
 
     @Override
     public void onNumSavedSubscriptionsChanged() {
+        if (isFinishingOrDestroyed()) {
+            return;
+        }
         setAdditionalSettingsSummaries();
     }
 
@@ -750,6 +762,12 @@ public class WifiSettings2 extends RestrictedSettingsFragment
             pref.setKey(wifiEntry.getKey());
             pref.setOrder(index++);
             pref.refresh();
+
+            if (wifiEntry.canManageSubscription()) {
+                pref.setOnButtonClickListener(preference -> {
+                    openSubscriptionHelpPage();
+                });
+            }
             mWifiEntryPreferenceCategory.addPreference(pref);
         }
         removeCachedPrefs(mWifiEntryPreferenceCategory);
@@ -981,12 +999,10 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
         @Override
         public void onFailure(int reason) {
-            final Activity activity = getActivity();
-            if (isFisishingOrDestroyed(activity)) {
+            if (isFinishingOrDestroyed()) {
                 return;
             }
-
-            Toast.makeText(activity, R.string.wifi_failed_connect_message, Toast.LENGTH_SHORT)
+            Toast.makeText(getContext(), R.string.wifi_failed_connect_message, Toast.LENGTH_SHORT)
                     .show();
         }
     };
@@ -1008,8 +1024,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
         @Override
         public void onConnectResult(@ConnectStatus int status) {
-            final Activity activity = getActivity();
-            if (isFisishingOrDestroyed(activity)) {
+            if (isFinishingOrDestroyed()) {
                 return;
             }
 
@@ -1027,10 +1042,6 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                         Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    private boolean isFisishingOrDestroyed(Activity activity) {
-        return activity == null || activity.isFinishing() || activity.isDestroyed();
     }
 
     private void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
@@ -1060,5 +1071,25 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         }
         int reason = networkStatus.getNetworkSelectionDisableReason();
         return WifiConfiguration.NetworkSelectionStatus.DISABLED_BY_WRONG_PASSWORD == reason;
+    }
+
+    @VisibleForTesting
+    void openSubscriptionHelpPage() {
+        final Intent intent = getHelpIntent(getContext());
+        if (intent != null) {
+            try {
+                startActivityForResult(intent, MANAGE_SUBSCRIPTION);
+            } catch (ActivityNotFoundException e) {
+                Log.e(TAG, "Activity was not found for intent, " + intent.toString());
+            }
+        }
+    }
+
+    @VisibleForTesting
+    Intent getHelpIntent(Context context) {
+        return HelpUtils.getHelpIntent(
+                context,
+                context.getString(R.string.help_url_manage_wifi_subscription),
+                context.getClass().getName());
     }
 }
