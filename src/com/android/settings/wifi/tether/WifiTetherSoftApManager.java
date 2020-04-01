@@ -23,21 +23,7 @@ public class WifiTetherSoftApManager {
 
         @Override
         public void onConnectedClientsChanged(List<WifiClient> clients) {
-            // Do nothing - we don't care about changing anything here.
-        }
-
-        @Override
-        public void onStaConnected(String Macaddr, int numClients) {
-            // TODO(b/144386510): onNumClientsChanged is now onConnectedClientsChanged, and expects
-            // a list of changed clients.
-            //mWifiTetherSoftApCallback.onNumClientsChanged(numClients);
-        }
-
-        @Override
-        public void onStaDisconnected(String Macaddr, int numClients) {
-            // TODO(b/144386510): onNumClientsChanged is now onConnectedClientsChanged, and expects
-            // a list of changed clients.
-            //mWifiTetherSoftApCallback.onNumClientsChanged(numClients);
+            mWifiTetherSoftApCallback.onConnectedClientsChanged(clients);
         }
     };
     private Handler mHandler;
