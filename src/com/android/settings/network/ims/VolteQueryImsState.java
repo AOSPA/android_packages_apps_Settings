@@ -27,10 +27,6 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.ims.ImsManager;
-import com.android.settings.network.SubscriptionUtil;
-import com.android.settings.network.telephony.MobileNetworkUtils;
-
 /**
  * Controller class for querying Volte status
  */
@@ -60,13 +56,10 @@ public class VolteQueryImsState extends ImsQueryController {
      */
     @VisibleForTesting
     boolean isEnabledByUser(int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return false;
+        }
         return (new ImsQueryEnhanced4gLteModeUserSetting(subId)).query();
-    }
-
-    @VisibleForTesting
-    ImsManager getImsManager(int subId) {
-        return ImsManager.getInstance(mContext,
-                SubscriptionUtil.getPhoneId(mContext, subId));
     }
 
     /**
@@ -75,6 +68,9 @@ public class VolteQueryImsState extends ImsQueryController {
      * @return true when VoLTE has been enabled, otherwise false
      */
     public boolean isVoLteProvisioned() {
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return false;
+        }
         if (!isProvisionedOnDevice(mSubId)) {
             return false;
         }
@@ -92,8 +88,18 @@ public class VolteQueryImsState extends ImsQueryController {
      * @return true when VoLTE can be performed, otherwise false
      */
     public boolean isReadyToVoLte() {
-        return isVoLteProvisioned()
-                && MobileNetworkUtils.isImsServiceStateReady(getImsManager(mSubId));
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return false;
+        }
+        if (!isVoLteProvisioned()) {
+            return false;
+        }
+        try {
+            return isServiceStateReady(mSubId);
+        } catch (InterruptedException | IllegalArgumentException | ImsException exception) {
+            Log.w(LOG_TAG, "fail to get VoLte service status. subId=" + mSubId, exception);
+        }
+        return false;
     }
 
     /**

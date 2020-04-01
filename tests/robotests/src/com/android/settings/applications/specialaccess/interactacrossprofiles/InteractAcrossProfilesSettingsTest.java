@@ -142,7 +142,7 @@ public class InteractAcrossProfilesSettingsTest {
         shadowOf(mAppOpsManager).setMode(
                 appOp, PACKAGE_UID, PERSONAL_CROSS_PROFILE_PACKAGE, AppOpsManager.MODE_ALLOWED);
         shadowOf(mAppOpsManager).setMode(
-                appOp, PACKAGE_UID, PERSONAL_CROSS_PROFILE_PACKAGE, AppOpsManager.MODE_IGNORED);
+                appOp, PACKAGE_UID, PERSONAL_NON_CROSS_PROFILE_PACKAGE, AppOpsManager.MODE_IGNORED);
         shadowOf(mPackageManager).addPermissionInfo(createCrossProfilesPermissionInfo());
 
         int numOfApps = mFragment.getNumberOfEnabledApps(
