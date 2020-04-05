@@ -158,6 +158,8 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment
                     R.string.navbar_gesture_pill_toggle_title));
         gesturePillToggle.setChecked(getPillToggleState(context) == 1 ? true : false);
         gesturePillToggle.setOnPreferenceChangeListener(this);
+        // Adjust Hide Pill pref to match surrounding prefs
+        gesturePillToggle.setIconSpaceReserved(true);
     }
 
     @Override
