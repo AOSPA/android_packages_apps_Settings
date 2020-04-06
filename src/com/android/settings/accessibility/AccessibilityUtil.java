@@ -21,9 +21,11 @@ import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.IntDef;
@@ -71,7 +73,7 @@ final class AccessibilityUtil {
     /**
      * Annotation for different user shortcut type UI type.
      *
-     * {@code DEFAULT} for displaying default value.
+     * {@code EMPTY} for displaying default value.
      * {@code SOFTWARE} for displaying specifying the accessibility services or features which
      * choose accessibility button in the navigation bar as preferred shortcut.
      * {@code HARDWARE} for displaying specifying the accessibility services or features which
@@ -81,7 +83,7 @@ final class AccessibilityUtil {
      */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
-            UserShortcutType.DEFAULT,
+            UserShortcutType.EMPTY,
             UserShortcutType.SOFTWARE,
             UserShortcutType.HARDWARE,
             UserShortcutType.TRIPLETAP,
@@ -89,7 +91,7 @@ final class AccessibilityUtil {
 
     /** Denotes the user shortcut type. */
     public @interface UserShortcutType {
-        int DEFAULT = 0;
+        int EMPTY = 0;
         int SOFTWARE = 1; // 1 << 0
         int HARDWARE = 2; // 1 << 1
         int TRIPLETAP = 4; // 1 << 2
@@ -321,7 +323,7 @@ final class AccessibilityUtil {
      */
     static int getUserShortcutTypesFromSettings(Context context,
             @NonNull ComponentName componentName) {
-        int shortcutTypes = UserShortcutType.DEFAULT;
+        int shortcutTypes = UserShortcutType.EMPTY;
         if (hasValuesInSettings(context, UserShortcutType.SOFTWARE, componentName)) {
             shortcutTypes |= UserShortcutType.SOFTWARE;
         }
@@ -349,5 +351,33 @@ final class AccessibilityUtil {
                 throw new IllegalArgumentException(
                         "Unsupported userShortcutType " + shortcutType);
         }
+    }
+
+    /**
+     * Gets the width of the screen.
+     *
+     * @param context the current context.
+     * @return the width of the screen in terms of pixels.
+     */
+    public static int getScreenWidthPixels(Context context) {
+        final Resources resources = context.getResources();
+        final int screenWidthDp = resources.getConfiguration().screenWidthDp;
+
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, screenWidthDp,
+                resources.getDisplayMetrics()));
+    }
+
+    /**
+     * Gets the height of the screen.
+     *
+     * @param context the current context.
+     * @return the height of the screen in terms of pixels.
+     */
+    public static int getScreenHeightPixels(Context context) {
+        final Resources resources = context.getResources();
+        final int screenHeightDp = resources.getConfiguration().screenHeightDp;
+
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, screenHeightDp,
+                resources.getDisplayMetrics()));
     }
 }

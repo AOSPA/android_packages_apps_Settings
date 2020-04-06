@@ -16,12 +16,18 @@
 
 package com.android.settings.notification.history;
 
-import static android.content.pm.PackageManager.*;
+import static android.app.Notification.COLOR_DEFAULT;
+import static android.content.pm.PackageManager.MATCH_ANY_USER;
+import static android.content.pm.PackageManager.NameNotFoundException;
+import static android.os.UserHandle.USER_ALL;
+import static android.os.UserHandle.USER_CURRENT;
 
+import android.annotation.ColorInt;
 import android.app.Notification;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
@@ -36,6 +42,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.util.ContrastColorUtil;
 import com.android.settings.R;
 
 import java.util.ArrayList;
@@ -51,12 +58,19 @@ public class NotificationSbnAdapter extends
     private Map<Integer, Drawable> mUserBadgeCache;
     private final Context mContext;
     private PackageManager mPm;
+    private @ColorInt int mBackgroundColor;
+    private boolean mInNightMode;
 
     public NotificationSbnAdapter(Context context, PackageManager pm) {
         mContext = context;
         mPm = pm;
         mUserBadgeCache = new HashMap<>();
         mValues = new ArrayList<>();
+        mBackgroundColor = mContext.getColor(
+                com.android.internal.R.color.notification_material_background_color);
+        Configuration currentConfig = mContext.getResources().getConfiguration();
+        mInNightMode = (currentConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                == Configuration.UI_MODE_NIGHT_YES;
         setHasStableIds(true);
     }
 
@@ -77,12 +91,13 @@ public class NotificationSbnAdapter extends
             holder.setTitle(getTitleString(sbn.getNotification()));
             holder.setSummary(getTextString(mContext, sbn.getNotification()));
             holder.setPostedTime(sbn.getPostTime());
-            if (!mUserBadgeCache.containsKey(sbn.getUserId())) {
+            int userId = normalizeUserId(sbn);
+            if (!mUserBadgeCache.containsKey(userId)) {
                 Drawable profile = mContext.getPackageManager().getUserBadgeForDensity(
-                        UserHandle.of(sbn.getUserId()), -1);
-                mUserBadgeCache.put(sbn.getUserId(), profile);
+                        UserHandle.of(userId), -1);
+                mUserBadgeCache.put(userId, profile);
             }
-            holder.setProfileBadge(mUserBadgeCache.get(sbn.getUserId()));
+            holder.setProfileBadge(mUserBadgeCache.get(userId));
         } else {
             Slog.w(TAG, "null entry in list at position " + position);
         }
@@ -102,6 +117,14 @@ public class NotificationSbnAdapter extends
             }
         }
         mValues = notifications;
+        notifyDataSetChanged();
+    }
+
+    public void addSbn(StatusBarNotification sbn) {
+        if (sbn.isGroup() && sbn.getNotification().isGroupSummary()) {
+            return;
+        }
+        mValues.add(0, sbn);
         notifyDataSetChanged();
     }
 
@@ -153,12 +176,29 @@ public class NotificationSbnAdapter extends
 
     private Drawable loadIcon(StatusBarNotification sbn) {
         Drawable draw = sbn.getNotification().getSmallIcon().loadDrawableAsUser(
-                sbn.getPackageContext(mContext), sbn.getUserId());
+                sbn.getPackageContext(mContext), normalizeUserId(sbn));
         if (draw == null) {
             return null;
         }
         draw.mutate();
-        draw.setColorFilter(sbn.getNotification().color, PorterDuff.Mode.SRC_ATOP);
+        draw.setColorFilter(getContrastedColor(sbn.getNotification()), PorterDuff.Mode.SRC_ATOP);
         return draw;
+    }
+
+    private int normalizeUserId(StatusBarNotification sbn) {
+        int userId = sbn.getUserId();
+        if (userId == USER_ALL) {
+            userId = USER_CURRENT;
+        }
+        return userId;
+    }
+
+    private int getContrastedColor(Notification n) {
+        int rawColor = n.color;
+        if (rawColor != COLOR_DEFAULT) {
+            rawColor |= 0xFF000000; // no alpha for custom colors
+        }
+        return ContrastColorUtil.resolveContrastColor(
+                mContext, rawColor, mBackgroundColor, mInNightMode);
     }
 }

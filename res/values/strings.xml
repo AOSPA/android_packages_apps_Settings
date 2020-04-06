@@ -144,6 +144,8 @@
     <string name="bluetooth_lock_voice_dialing_summary">
       Prevent use of the bluetooth dialer when the screen is locked
     </string>
+    <!-- Bluetooth settings screen, heading above the list of nearby bluetooth devices. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_devices">Bluetooth devices</string>
     <!-- Bluetooth settings screen, title for the current bluetooth name setting -->
     <string name="bluetooth_device_name">Device name</string>
     <!-- Bluetooth settings screen, image description for device details button. This opens the screen to rename, unpair, etc. a single device. -->
@@ -2037,8 +2039,10 @@
     <string name="wifi_ip_settings">IP settings</string>
     <!-- Label for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
     <string name="wifi_privacy_settings">Privacy</string>
-    <!-- Label for the subscription detail preference. [CHAR LIMIT=32] -->
-    <string name="wifi_subscription_detail">Subscription details</string>
+    <!-- Label for the subscription preference. [CHAR LIMIT=32] -->
+    <string name="wifi_subscription">Subscription</string>
+    <!-- Summary text for the subscription preference. [CHAR LIMIT=NONE] -->
+    <string name="wifi_subscription_summary">View or change subscription</string>
     <!-- Summary for Wifi MAC randomization option when it is ephemeral network [CHAR LIMIT=50] -->
     <string name="wifi_privacy_settings_ephemeral_summary">Randomized MAC</string>
     <!-- Title for the fragment to add a device into the wifi network [CHAR LIMIT=50]  -->
@@ -3853,6 +3857,8 @@
 
     <!-- Tethering footer info [CHAR LIMIT=NONE]-->
     <string name="tethering_footer_info">Use hotspot and tethering to provide internet to other devices through your mobile data connection. Apps can also create a hotspot to share content with nearby devices.</string>
+    <!-- Tethering footer info for the device which supports Wi-Fi and Wi-Fi tethering enabled at the same time [CHAR LIMIT=NONE]-->
+    <string name="tethering_footer_info_sta_ap_concurrency">Use hotspot and tethering to provide internet to other devices through your Wi\u2011Fi or mobile data connection. Apps can also create a hotspot to share content with nearby devices.</string>
 
     <!-- Tethering help button - calls up a web view with general tethering info -->
     <string name="tethering_help_button_text">Help</string>
@@ -4972,9 +4978,9 @@
     <!-- Label for shortcut settings button. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_settings">Shortcut settings</string>
     <!-- Title for the switch preference that controls whether or not the accessibility shortcut works on the lock screen. [CHAR LIMIT=35] -->
-    <string name="accessibility_shortcut_service_on_lock_screen_title">Allow from lock screen</string>
+    <string name="accessibility_shortcut_service_on_lock_screen_title">Shortcut from lock screen</string>
     <!-- Description of accessibility shortcut. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_description">When the shortcut is on, you can press both volume keys for 3 seconds to start an accessibility feature.</string>
+    <string name="accessibility_shortcut_description">Allow feature shortcut to turn on from the lock screen. Hold both volume keys for 3 seconds.</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
@@ -5024,13 +5030,13 @@
     <!-- Used in the accessibility service settings to control turning display color inversion on/off entirely. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_switch_title">Use color inversion</string>
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_display_inversion_preference_subtitle"><![CDATA[Color inversion turns light screens dark. This helps people who are sensitive to bright light see the screen more easily.<br/><br/>Note: Dark colors will turn light. Colors will change in media and images. You can also use Dark theme (Settings > Display).]]></string>
+    <string name="accessibility_display_inversion_preference_subtitle"><![CDATA[Color inversion turns light screens dark. This feature may be helpful for people who are sensitive to bright light.<br/><br/>Color inversion also turns dark screens light. Colors will change in media and images.<br/><br/>Note: You can also use Dark theme to display a dark background. Dark theme works with supported apps. Color inversion works on all apps.]]></string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_autoclick_preference_title">Auto click (dwell timing)</string>
+    <string name="accessibility_autoclick_preference_title">Autoclick (dwell timing)</string>
     <!-- Footer text to explain what autoclick does -->
-    <string name="accessibility_autoclick_description">If you are using a mouse, you can set the cursor to take action automatically when it stops moving for a certain amount of time.</string>
+    <string name="accessibility_autoclick_description">Autoclick works with a connected mouse. You can set the mouse cursor to click automatically when the cursor stops moving for a certain amount of time.</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its default level. [CHAR LIMIT=50] -->
-    <string name="accessibility_autoclick_default_title">Don\u2019t use auto click (default)</string>
+    <string name="accessibility_autoclick_default_title">Off</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its short level. [CHAR LIMIT=35] -->
     <string name="accessibility_autoclick_short_title">Short</string>
     <!-- Option summary text for the auto click delay 0.2 seconds radio button. [CHAR LIMIT=35] -->
@@ -5065,16 +5071,18 @@
     <string name="accessibility_service_master_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_daltonizer_master_switch_title">Use color correction</string>
-    <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->
+    <!-- Title for Captions settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_caption_master_switch_title">Show captions</string>
+    <!-- Summary for Captions settings screen to control turning on/off the feature entirely [CHAR LIMIT=NONE] -->
+    <string name="accessibility_caption_master_switch_summary">For supported app only</string>
     <!-- Title for Caption preference settings screen for configuring font style. [CHAR LIMIT=NONE] -->
-    <string name="captioning_caption_appearance_title">Caption appearance</string>
+    <string name="captioning_caption_appearance_title">Caption size and style</string>
     <!-- Summary for Captions settings, explaining important settings under it. [CHAR LIMIT=NONE] -->
-    <string name="captioning_caption_appearance_summary">Text size, caption style</string>
+    <string name="captioning_caption_appearance_summary"><xliff:g id="accessibility_font_size" example="Large">%1$s</xliff:g> text size</string>
     <!-- Title for Caption preference settings screen for configuring language. [CHAR LIMIT=NONE] -->
     <string name="captioning_more_options_title">More options</string>
     <!-- Used in the Captions preference to tell users that the setting doesn't support all apps. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_caption_preference_summary">Not all apps support this setting.</string>
+    <string name="accessibility_caption_preference_summary">Not all apps support these caption preferences</string>
     <!-- Summary for accessibility shortcut preference for software shortcut type. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_type_software">Accessibility button</string>
     <!-- Summary for accessibility shortcut preference for software shortcut type when gesture mode is on. [CHAR LIMIT=NONE] -->
@@ -5102,9 +5110,13 @@
         <item quantity="other"><xliff:g id="number_device_count">%1$d</xliff:g> saved hearing aids</item>
     </plurals>
 
-    <!-- Preference's state when enabled. -->
+    <!-- Preference's shortcut when enabled. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_summary_shortcut_enabled">Shortcut on</string>
+    <!-- Preference's shortcut when disabled. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_summary_shortcut_disabled">Off</string>
+    <!-- Preference's state when enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_summary_state_enabled">On</string>
-    <!-- Preference's state when disabled. -->
+    <!-- Preference's state when disabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_summary_state_disabled">Off</string>
     <!-- Accessibility service's preference's state when enabled but not running (like maybe it crashed). -->
     <string name="accessibility_summary_state_stopped">Not working. Tap for info.</string>
@@ -5116,17 +5128,17 @@
     <!-- Title for the preference to configure the type of color space correction to apply. [CHAR LIMIT=NONE] -->
     <string name="daltonizer_type">Correction mode</string>
     <!-- Title shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_deuteranomaly_title">Red-green</string>
+    <string name="daltonizer_mode_deuteranomaly_title">Deuteranomaly</string>
     <!-- Title shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_protanomaly_title">Green-red</string>
+    <string name="daltonizer_mode_protanomaly_title">Protanomaly</string>
     <!-- Title shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_tritanomaly_title">Blue-yellow</string>
+    <string name="daltonizer_mode_tritanomaly_title">Tritanomaly</string>
     <!-- Summary shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_deuteranomaly_summary">Deuteranomaly</string>
+    <string name="daltonizer_mode_deuteranomaly_summary">Red-green</string>
     <!-- Summary shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_protanomaly_summary">Protanomaly</string>
+    <string name="daltonizer_mode_protanomaly_summary">Red-green</string>
     <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_tritanomaly_summary">Tritanomaly</string>
+    <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
 
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay">
@@ -7182,6 +7194,8 @@
     <string name="help_url_magnification" translatable="false"></string>
     <string name="help_url_color_correction" translatable="false"></string>
     <string name="help_url_autoclick" translatable="false"></string>
+    <!-- Help URL, Accessibility caption preferences [DO NOT TRANSLATE] -->
+    <string name="help_url_caption" translatable="false"></string>
     <string name="help_url_system_dashboard" translatable="false"></string>
     <string name="help_url_double_tap_screen" translatable="false"></string>
     <string name="help_url_account_detail" translatable="false"></string>
@@ -7245,6 +7259,19 @@
     <string name="enhanced_4g_lte_mode_summary">Use LTE services to improve voice and other communications (recommended)</string>
     <!-- Enhaced 4G LTE Mode summary for 4g calling.  [CHAR LIMIT=100] -->
     <string name="enhanced_4g_lte_mode_summary_4g_calling">Use 4G services to improve voice and other communications (recommended)</string>
+    <!-- Title of a preference determining whether or not the user has enabled contact discovery,
+         which is a service that uses the phone numbers in your contacts to determine if your
+         contacts support advanced calling features, such as video calling. [CHAR LIMIT=50]-->
+    <string name="contact_discovery_opt_in_title">Contact discovery</string>
+    <!-- Summary of a preference determining whether or not the user has enabled contact discovery.
+         [CHAR LIMIT=100] -->
+    <string name="contact_discovery_opt_in_summary">Allows your carrier to discover which calling features your contacts support.</string>
+    <!-- Title of the dialog shown when the user tries to enable Contact Discovery.
+         [CHAR LIMIT=50] -->
+    <string name="contact_discovery_opt_in_dialog_title">Enable contact discovery?</string>
+    <!-- Text displayed in the dialog shown when the user tries to enable Contact Discovery.
+         [CHAR LIMIT=NONE]-->
+    <string name="contact_discovery_opt_in_dialog_message">Enabling this feature will allow your carrier access to phone numbers in your contacts in order to discover which calling features they support.</string>
     <!-- Preferred network type title.  [CHAR LIMIT=50] -->
     <string name="preferred_network_type_title">Preferred network type</string>
     <!-- Preferred network type summary.  [CHAR LIMIT=100] -->
@@ -7365,8 +7392,6 @@
     <string name="color_orange">Orange</string>
     <!-- Purple label.  [CHAR LIMIT=40] -->
     <string name="color_purple">Purple</string>
-    <!-- Pink label.  [CHAR LIMIT=40] -->
-    <string name="color_pink">Pink</string>
     <!-- Message informing the user that no SIM card is inserted  [CHAR LIMIT=60] -->
     <string name="sim_no_inserted_msg">No SIM cards inserted</string>
     <!-- SIM status title  [CHAR LIMIT=40] -->
@@ -8556,7 +8581,7 @@
     <string name="interact_across_profiles_summary_1" translatable="false">Connected apps share permissions and can access each other\u2019s data.</string>
 
     <!-- Apps > App Details > Connected personal and work apps > Description. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_summary_2" translatable="false">Only connect apps that you trust with your personal data.Your data may be exposed to your IT admin.</string>
+    <string name="interact_across_profiles_summary_2" translatable="false">Only connect apps that you trust with your personal data. Work apps may expose your data to your IT admin.</string>
 
     <!-- Apps > App Details > Connected personal and work apps > Consent dialog title. [CHAR LIMIT=NONE] -->
     <string name="interact_across_profiles_consent_dialog_title" translatable="false">Trust work %1$s with your personal data?</string>
@@ -8945,6 +8970,9 @@
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
     <string name="zen_mode_bypassing_apps_title">App exceptions</string>
+
+    <!-- [CHAR LIMIT=120] Zen mode settings: No apps are bypassing DND -->
+    <string name="zen_mode_bypassing_apps_subtext_none">No apps can override Do Not Disturb</string>
 
     <!-- [CHAR LIMIT=120] Zen mode settings: Allow apps to bypass DND -->
     <plurals name="zen_mode_bypassing_apps_subtext">
@@ -9336,7 +9364,10 @@
     <string name="assist_and_voice_input_title">Assist &amp; voice input</string>
 
     <!-- Title for Default Assist settings [CHAR LIMIT=30] -->
-    <string name="default_assist_title">Assist app</string>
+    <string name="default_assist_title">Digital assistant app</string>
+
+    <!-- Title for Default Assist settings [CHAR LIMIT=30] -->
+    <string name="default_digital_assistant_title">Default digital assistant app</string>
 
     <!-- [CHAR_LIMIT=45] Title of the security warning dialog for setting an assitant -->
     <string name="assistant_security_warning_title">
@@ -11054,6 +11085,7 @@
     <string-array name="graphics_driver_all_apps_preference_values">
         <item>@string/graphics_driver_app_preference_default</item>
         <item>@string/graphics_driver_app_preference_game_driver</item>
+        <item>@string/graphics_driver_app_preference_prerelease_driver</item>
     </string-array>
     <!-- All the values of graphics driver for app preference [CHAR LIMIT=50] -->
     <string-array name="graphics_driver_app_preference_values">
@@ -11154,6 +11186,9 @@
 
     <!-- Summary for media output group with the active device count [CHAR LIMIT=NONE] -->
     <string name="media_output_group_panel_multiple_devices_summary"><xliff:g id="count" example="2">%1$d</xliff:g> devices selected</string>
+
+    <!-- Summary for media output switching output [CHAR LIMIT=50] -->
+    <string name="media_output_switching">Switching\u2026</string>
 
     <!-- Title for HFP(hands free profile) output switch button in settings. -->
     <string name="take_call_on_title">Take call on</string>
@@ -11322,14 +11357,17 @@
     <!-- Text for Network 1x [CHAR LIMIT=NONE] -->
     <string name="network_1x" translatable="false">1x</string>
     <!-- Text for Network global [CHAR LIMIT=NONE] -->
-    <string name="network_global">Global</string>
+    <string name="network_global" translatable="false">Global</string>
+    <!-- Text for Network world mode CDMA LTE [CHAR LIMIT=NONE] -->
+    <string name="network_world_mode_cdma_lte" translatable="false">LTE / CDMA</string>
+    <!-- Text for Network world mode GSM LTE [CHAR LIMIT=NONE] -->
+    <string name="network_world_mode_gsm_lte" translatable="false">LTE / GSM / UMTS</string>
     <!-- Text for Network 3g only [CHAR LIMIT=NONE] -->
     <string name="network_2G_3G_preferred" translatable="false">2G/3G preferred</string>
     <!-- Text for Network 3g only [CHAR LIMIT=NONE] -->
     <string name="network_3G_only" translatable="false">3G only</string>
     <!-- Text for Network 2g only [CHAR LIMIT=NONE] -->
     <string name="network_2G_only" translatable="false">2G only</string>
-
 
     <!-- Available networks screen title/heading [CHAR LIMIT=NONE] -->
     <string name="label_available">Available networks</string>
@@ -11362,6 +11400,9 @@
         Phone will automatically switch to this carrier when in range
     </string>
 
+    <!-- Mobile network settings screen, title of item showing the name of the default subscription
+    that will be used for data. This only appears in multi-SIM mode. [CHAR LIMIT=NONE] -->
+    <string name="data_preference">Data preference</string>
     <!-- Mobile network settings screen, title of item showing the name of the default subscription
      that will be used for calls. This only appears in multi-SIM mode. [CHAR LIMIT=NONE] -->
     <string name="calls_preference">Calls preference</string>
@@ -11490,22 +11531,6 @@
     <!-- Mobile network details page. Label for an option that lets the user delete an eSIM from
          the device. [CHAR LIMIT=60] -->
     <string name="mobile_network_erase_sim">Erase SIM</string>
-    <!-- Title of a confirmation dialog for deleting an eSIM from the device.
-         [CHAR LIMIT=60] -->
-    <string name="mobile_network_erase_sim_dialog_title">Erase this downloaded SIM?</string>
-    <!-- Body text of of a confirmation dialog for deleting an eSIM from the device.
-         [CHAR LIMIT=NONE] -->
-    <string name="mobile_network_erase_sim_dialog_body">
-        Erasing this SIM removes <xliff:g id="carrier" example="Verizon">%1$s</xliff:g> service
-        from this device.\n\nService for <xliff:g id="carrier" example="Verizon">%2$s</xliff:g>
-        won\u2019t be canceled.
-    </string>
-    <!-- OK button on a confirmation dialog for deleting an eSIM from the device.
-         [CHAR LIMIT=30] -->
-    <string name="mobile_network_erase_sim_dialog_ok">Erase</string>
-    <!-- Body text of the progress dialog we show while deleting an eSIM from the device.
-         [CHAR LIMIT=NONE] -->
-    <string name="mobile_network_erase_sim_dialog_progress">Erasing SIM\u2026</string>
 
     <!-- Title of a dialog indicating that an error ocurred when deleting an eSIM from the device
          [CHAR LIMIT=60] -->
@@ -11704,6 +11729,10 @@
     <string name="media_output_panel_title">Switch output</string>
     <!-- Summary for represent which device is playing media [CHAR LIMIT=NONE] -->
     <string name="media_output_panel_summary_of_playing_device">Currently playing on <xliff:g id="device_name" example="Bose headphone">%1$s</xliff:g></string>
+    <!-- Summary for disconnected status [CHAR LIMIT=50] -->
+    <string name="media_output_disconnected_status"><xliff:g id="device_name" example="My device">%1$s</xliff:g> (disconnected)</string>
+    <!-- Summary for switching error state [CHAR LIMIT=40] -->
+    <string name="media_output_switch_error_text">Can\u2019t switch. Tap to try again.</string>
 
     <!-- Label for the title on wfc disclaimer fragment. [CHAR LIMIT=40] -->
     <string name="wfc_disclaimer_title_text">Important information</string>

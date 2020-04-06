@@ -30,6 +30,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources.Theme;
+import android.graphics.drawable.Icon;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -499,7 +500,7 @@ public class SettingsActivity extends SettingsBaseActivity
 
     @Override
     public void setTaskDescription(ActivityManager.TaskDescription taskDescription) {
-        taskDescription.setIcon(R.drawable.ic_launcher_settings);
+        taskDescription.setIcon(Icon.createWithResource(this, R.drawable.ic_launcher_settings));
         super.setTaskDescription(taskDescription);
     }
 

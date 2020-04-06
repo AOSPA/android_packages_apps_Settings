@@ -123,7 +123,8 @@
                   android:label="@string/settings_label_launcher"
                   android:theme="@style/Theme.Settings.Home"
                   android:taskAffinity="com.android.settings.root"
-                  android:launchMode="singleTask">
+                  android:launchMode="singleTask"
+                  android:configChanges="keyboard|keyboardHidden">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -137,6 +138,8 @@
                   android:theme="@style/Theme.Settings.Home"
                   android:launchMode="singleTask">
             <intent-filter android:priority="1">
+                <!-- Displays the MobileNetworkActivity and opt-in dialog for capability discovery. -->
+                <action android:name="android.telephony.ims.action.SHOW_CAPABILITY_DISCOVERY_OPT_IN" />
                 <action android:name="android.settings.NETWORK_OPERATOR_SETTINGS" />
                 <action android:name="android.settings.DATA_ROAMING_SETTINGS" />
                 <action android:name="android.settings.MMS_MESSAGE_SETTING" />
@@ -3247,6 +3250,10 @@
             android:targetActivity=".panel.SettingsPanelActivity">
                 <intent-filter>
                     <action android:name="com.android.settings.panel.action.MEDIA_OUTPUT" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
+                <intent-filter>
+                    <action android:name="com.android.settings.panel.action.MEDIA_OUTPUT_GROUP" />
                     <category android:name="android.intent.category.DEFAULT" />
                 </intent-filter>
         </activity-alias>

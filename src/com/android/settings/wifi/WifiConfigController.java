@@ -28,7 +28,6 @@ import android.net.ProxyInfo;
 import android.net.StaticIpConfiguration;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiEnterpriseConfig.Eap;
@@ -89,6 +88,7 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.stream.Collectors;
 
 /**
  * The class for allowing UIs like {@link WifiDialog} and {@link WifiConfigUiBase} to
@@ -139,6 +139,14 @@ public class WifiConfigController implements TextWatcher,
     public static final int WIFI_TTLS_PHASE2_MSCHAP    = 1;
     public static final int WIFI_TTLS_PHASE2_MSCHAPV2  = 2;
     public static final int WIFI_TTLS_PHASE2_GTC       = 3;
+
+    private static final String UNDESIRED_CERTIFICATE_MACRANDSECRET = "MacRandSecret";
+    private static final String UNDESIRED_CERTIFICATE_MACRANDSAPSECRET = "MacRandSapSecret";
+    @VisibleForTesting
+    static final String[] UNDESIRED_CERTIFICATES = {
+        UNDESIRED_CERTIFICATE_MACRANDSECRET,
+        UNDESIRED_CERTIFICATE_MACRANDSAPSECRET
+    };
 
     /* Phase2 methods supported by PEAP are limited */
     private ArrayAdapter<CharSequence> mPhase2PeapAdapter;
@@ -658,13 +666,11 @@ public class WifiConfigController implements TextWatcher,
 
         switch (mAccessPointSecurity) {
             case AccessPoint.SECURITY_NONE:
-                config.allowedKeyManagement.set(KeyMgmt.NONE);
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OPEN);
                 break;
 
             case AccessPoint.SECURITY_WEP:
-                config.allowedKeyManagement.set(KeyMgmt.NONE);
-                config.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
-                config.allowedAuthAlgorithms.set(AuthAlgorithm.SHARED);
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_WEP);
                 if (mPasswordView.length() != 0) {
                     int length = mPasswordView.length();
                     String password = mPasswordView.getText().toString();
@@ -679,7 +685,7 @@ public class WifiConfigController implements TextWatcher,
                 break;
 
             case AccessPoint.SECURITY_PSK:
-                config.allowedKeyManagement.set(KeyMgmt.WPA_PSK);
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_PSK);
                 if (mPasswordView.length() != 0) {
                     String password = mPasswordView.getText().toString();
                     if (password.matches("[0-9A-Fa-f]{64}")) {
@@ -692,8 +698,6 @@ public class WifiConfigController implements TextWatcher,
 
             case AccessPoint.SECURITY_EAP:
             case AccessPoint.SECURITY_EAP_SUITE_B:
-                config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
-                config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
                 if (mAccessPoint != null && mAccessPoint.isFils256Supported()) {
                     config.allowedKeyManagement.set(KeyMgmt.FILS_SHA256);
                 }
@@ -701,13 +705,10 @@ public class WifiConfigController implements TextWatcher,
                     config.allowedKeyManagement.set(KeyMgmt.FILS_SHA384);
                 }
                 if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
-                    config.allowedKeyManagement.set(KeyMgmt.SUITE_B_192);
-                    config.requirePmf = true;
-                    config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.GCMP_256);
-                    config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.GCMP_256);
-                    config.allowedGroupManagementCiphers.set(WifiConfiguration.GroupMgmtCipher
-                            .BIP_GMAC_256);
                     // allowedSuiteBCiphers will be set according to certificate type
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
+                } else {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
                 }
                 config.enterpriseConfig = new WifiEnterpriseConfig();
                 int eapMethod = mEapMethodSpinner.getSelectedItemPosition();
@@ -856,8 +857,7 @@ public class WifiConfigController implements TextWatcher,
                 config.requirePmf = true;
                 break;
             case AccessPoint.SECURITY_SAE:
-                config.allowedKeyManagement.set(KeyMgmt.SAE);
-                config.requirePmf = true;
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_SAE);
                 if (mPasswordView.length() != 0) {
                     String password = mPasswordView.getText().toString();
                     config.preSharedKey = '"' + password + '"';
@@ -865,8 +865,7 @@ public class WifiConfigController implements TextWatcher,
                 break;
 
             case AccessPoint.SECURITY_OWE:
-                config.allowedKeyManagement.set(KeyMgmt.OWE);
-                config.requirePmf = true;
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OWE);
                 break;
 
             default:
@@ -1535,7 +1534,8 @@ public class WifiConfigController implements TextWatcher,
         return KeyStore.getInstance();
     }
 
-    private void loadCertificates(
+    @VisibleForTesting
+    void loadCertificates(
             Spinner spinner,
             String prefix,
             String noCertificateString,
@@ -1551,12 +1551,25 @@ public class WifiConfigController implements TextWatcher,
         if (showUsePreinstalledCertOption) {
             certs.add(mUseSystemCertsString);
         }
+
+        String[] certificateNames = null;
         try {
-            certs.addAll(
-                Arrays.asList(getKeyStore().list(prefix, android.os.Process.WIFI_UID)));
+            certificateNames = getKeyStore().list(prefix, android.os.Process.WIFI_UID);
         } catch (Exception e) {
             Log.e(TAG, "can't get the certificate list from KeyStore");
         }
+        if (certificateNames != null && certificateNames.length != 0) {
+            certs.addAll(Arrays.stream(certificateNames)
+                    .filter(certificateName -> {
+                        for (String undesired : UNDESIRED_CERTIFICATES) {
+                            if (certificateName.startsWith(undesired)) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }).collect(Collectors.toList()));
+        }
+
         if (mAccessPointSecurity != AccessPoint.SECURITY_EAP_SUITE_B) {
             certs.add(noCertificateString);
         }

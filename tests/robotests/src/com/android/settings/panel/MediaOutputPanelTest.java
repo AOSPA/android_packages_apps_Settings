@@ -66,7 +66,7 @@ public class MediaOutputPanelTest {
     @Mock
     private LocalMediaManager mLocalMediaManager;
     @Mock
-    private PanelCustomizedButtonCallback mCallback;
+    private PanelContentCallback mCallback;
 
     private MediaOutputPanel mPanel;
     private Context mContext;
@@ -235,5 +235,12 @@ public class MediaOutputPanelTest {
 
         assertThat(mPanel.getSubTitle()).isEqualTo(mContext.getText(
                 R.string.media_output_panel_title));
+    }
+
+    @Test
+    public void onClickCustomizedButton_shouldReleaseSession() {
+        mPanel.onClickCustomizedButton();
+
+        verify(mLocalMediaManager).releaseSession();
     }
 }

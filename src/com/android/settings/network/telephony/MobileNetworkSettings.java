@@ -169,6 +169,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
+        use(DataDefaultSubscriptionController.class).init(getLifecycle());
         use(CallsDefaultSubscriptionController.class).init(getLifecycle());
         use(SmsDefaultSubscriptionController.class).init(getLifecycle());
         use(MobileNetworkSwitchController.class).init(getLifecycle(), mSubId);
@@ -216,6 +217,8 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                 .addListener(videoCallingPreferenceController);
         use(Enhanced4gAdvancedCallingPreferenceController.class).init(mSubId)
                 .addListener(videoCallingPreferenceController);
+        use(ContactDiscoveryPreferenceController.class).init(getParentFragmentManager(), mSubId,
+                getLifecycle());
     }
 
     @Override

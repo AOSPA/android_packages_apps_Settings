@@ -20,8 +20,12 @@ import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import android.content.Context;
+import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -39,6 +43,8 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import org.codeaurora.internal.IExtTelephony;
+
 /**
  * This implements common controller functionality for a Preference letting the user see/change
  * what mobile network subscription is used by default for some service controlled by the
@@ -52,11 +58,27 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
     protected SubscriptionsChangeListener mChangeListener;
     protected ListPreference mPreference;
     protected SubscriptionManager mManager;
+    protected TelephonyManager mTelephonyManager;
+
+    //String keys for data preference lookup
+    private static final String LIST_DATA_PREFERENCE_KEY = "data_preference";
+
+    private int mPhoneCount;
+    private PhoneStateListener[] mPhoneStateListener;
+    private int[] mCallState;
+    private ArrayList<SubscriptionInfo> mSelectableSubs;
 
     public DefaultSubscriptionController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mManager = context.getSystemService(SubscriptionManager.class);
         mChangeListener = new SubscriptionsChangeListener(context, this);
+
+        mTelephonyManager = (TelephonyManager) mContext
+                .getSystemService(Context.TELEPHONY_SERVICE);
+        mPhoneCount = mTelephonyManager.getPhoneCount();
+        mPhoneStateListener = new PhoneStateListener[mPhoneCount];
+        mCallState = new int[mPhoneCount];
+        mSelectableSubs = new ArrayList<SubscriptionInfo>();
     }
 
     public void init(Lifecycle lifecycle) {
@@ -76,14 +98,8 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
-        boolean visible;
-
-        // If vendor SimSettings app is present on the device, then the setting for the default
-        // SIM preference for calls/SMS will be handled by that app.
-        if (Utils.isSimSettingsApkAvailable()) {
-            visible = false;
-        } else if (subs.size() > 1) {
+        boolean visible = false;
+        if (mSelectableSubs != null && mSelectableSubs.size() > 1) {
             visible = true;
         } else {
             visible = false;
@@ -95,12 +111,14 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
         mChangeListener.start();
+        registerPhoneStateListener();
         updateEntries();
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
         mChangeListener.stop();
+        unRegisterPhoneStateListener();
     }
 
     @Override
@@ -124,6 +142,13 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
         if (mPreference == null) {
             return;
         }
+
+        updateSubStatus();
+        if (mSelectableSubs.isEmpty()) {
+            Log.d(TAG, "updateEntries: mSelectable subs is empty");
+            return;
+        }
+
         if (!isAvailable()) {
             mPreference.setVisible(false);
             return;
@@ -135,8 +160,6 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
         // getAvailabilityStatus returned CONDITIONALLY_UNAVAILABLE at the time.
         mPreference.setOnPreferenceChangeListener(this);
 
-        final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
-
         // We'll have one entry for each available subscription, plus one for a "ask me every
         // time" entry at the end.
         final ArrayList<CharSequence> displayNames = new ArrayList<>();
@@ -145,7 +168,7 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
         final int serviceDefaultSubId = getDefaultSubscriptionId();
         boolean subIsAvailable = false;
 
-        for (SubscriptionInfo sub : subs) {
+        for (SubscriptionInfo sub : mSelectableSubs) {
             if (sub.isOpportunistic()) {
                 continue;
             }
@@ -156,8 +179,12 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
                 subIsAvailable = true;
             }
         }
-        // Add the extra "Ask every time" value at the end.
-        displayNames.add(mContext.getString(R.string.calls_and_sms_ask_every_time));
+        if (TextUtils.equals(getPreferenceKey(), LIST_DATA_PREFERENCE_KEY)) {
+            mPreference.setEnabled(isCallStateIdle());
+        } else { 
+            // Add the extra "Ask every time" value at the end.
+            displayNames.add(mContext.getString(R.string.calls_and_sms_ask_every_time));
+        }
         subscriptionIds.add(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
 
         mPreference.setEntries(displayNames.toArray(new CharSequence[0]));
@@ -168,6 +195,16 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
         } else {
             mPreference.setValue(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
         }
+    }
+
+    private boolean isCallStateIdle() {
+        boolean callStateIdle = true;
+        for (int i = 0; i < mPhoneCount; i++) {
+            if (TelephonyManager.CALL_STATE_IDLE != mCallState[i]) {
+                callStateIdle = false;
+            }
+        }
+        return callStateIdle;
     }
 
     @Override
@@ -184,9 +221,64 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
 
     @Override
     public void onSubscriptionsChanged() {
+        if (mSelectableSubs != null) mSelectableSubs.clear();
+        updateSubStatus();
+
         if (mPreference != null) {
             updateEntries();
             refreshSummary(mPreference);
+        }
+    }
+
+    private void registerPhoneStateListener() {
+        //To make sure subinfo is added, before registering for call state change
+        updateSubStatus();
+
+        for (int i = 0; i < mSelectableSubs.size(); i++) {
+             int subId = mSelectableSubs.get(i).getSubscriptionId();
+             TelephonyManager tm = mTelephonyManager.createForSubscriptionId(subId);
+             tm.listen(getPhoneStateListener(i),
+                     PhoneStateListener.LISTEN_CALL_STATE);
+        }
+    }
+
+    private void unRegisterPhoneStateListener() {
+        for (int i = 0; i < mPhoneCount; i++) {
+            if (mPhoneStateListener[i] != null) {
+                mTelephonyManager.listen(mPhoneStateListener[i], PhoneStateListener.LISTEN_NONE);
+                mPhoneStateListener[i] = null;
+            }
+        }
+    }
+
+    private PhoneStateListener getPhoneStateListener(int phoneId) {
+        // Disable Sim selection for Data when voice call is going on as changing the default data
+        // sim causes a modem reset currently and call gets disconnected
+        final int i = phoneId;
+        mPhoneStateListener[phoneId]  = new PhoneStateListener() {
+            @Override
+            public void onCallStateChanged(int state, String incomingNumber) {
+                mCallState[i] = state;
+                updateEntries();
+            }
+        };
+        return mPhoneStateListener[phoneId];
+    }
+
+    private void updateSubStatus() {
+        if (!mSelectableSubs.isEmpty()) {
+            return;
+        }
+
+        for (int i = 0; i < mPhoneCount; ++i) {
+            final SubscriptionInfo sir = mManager
+                    .getActiveSubscriptionInfoForSimSlotIndex(i);
+            if (sir != null) {
+                int subStatus = PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(i);
+                if (subStatus == PrimaryCardAndSubsidyLockUtils.CARD_PROVISIONED) {
+                    mSelectableSubs.add(sir);
+                }
+            }
         }
     }
 }

@@ -37,10 +37,15 @@
             android:selectable="false"/>
 
         <ListPreference
+            android:key="data_preference"
+            android:title="@string/data_preference"
+            settings:controller="com.android.settings.network.telephony.DataDefaultSubscriptionController"
+            settings:allowDividerAbove="true"/>
+
+        <ListPreference
             android:key="calls_preference"
             android:title="@string/calls_preference"
-            settings:controller="com.android.settings.network.telephony.CallsDefaultSubscriptionController"
-            settings:allowDividerAbove="true"/>
+            settings:controller="com.android.settings.network.telephony.CallsDefaultSubscriptionController"/>
 
         <ListPreference
             android:key="sms_preference"
@@ -115,6 +120,13 @@
             android:summary="@string/enhanced_4g_lte_mode_summary"
             settings:keywords="@string/keywords_enhance_4g_lte"
             settings:controller="com.android.settings.network.telephony.Enhanced4gAdvancedCallingPreferenceController"/>
+
+        <SwitchPreference
+            android:key="contact_discovery_opt_in"
+            android:title="@string/contact_discovery_opt_in_title"
+            android:persistent="false"
+            android:summary="@string/contact_discovery_opt_in_summary"
+            settings:controller="com.android.settings.network.telephony.ContactDiscoveryPreferenceController"/>
 
         <ListPreference
             android:key="preferred_network_mode_key"

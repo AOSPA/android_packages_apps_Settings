@@ -66,7 +66,7 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
     private final Context mContext;
     private final String mPackageName;
 
-    private PanelCustomizedButtonCallback mCallback;
+    private PanelContentCallback mCallback;
     private boolean mIsCustomizedButtonUsed = true;
 
     @VisibleForTesting
@@ -186,10 +186,11 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
 
     @Override
     public void onClickCustomizedButton() {
+        mLocalMediaManager.releaseSession();
     }
 
     @Override
-    public void registerCallback(PanelCustomizedButtonCallback callback) {
+    public void registerCallback(PanelContentCallback callback) {
         mCallback = callback;
     }
 
@@ -238,5 +239,10 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
     public void onStop() {
         mLocalMediaManager.unregisterCallback(this);
         mLocalMediaManager.stopScan();
+    }
+
+    @Override
+    public int getViewType() {
+        return PanelContent.VIEW_TYPE_SLIDER;
     }
 }

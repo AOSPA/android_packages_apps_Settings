@@ -22,20 +22,25 @@ import android.content.Context;
 
 import com.android.settingslib.applications.ApplicationsState;
 
+import java.util.List;
+
 /**
  * Retrieves information from {@link AppOpsManager} and {@link android.content.pm.PackageManager}
  * regarding {@link AppOpsManager#OP_MANAGE_EXTERNAL_STORAGE} and
  * {@link Manifest.permission#MANAGE_EXTERNAL_STORAGE}.
  */
 public class AppStateManageExternalStorageBridge extends AppStateAppOpsBridge {
-    private static final int APP_OPS_OP_CODE = AppOpsManager.OP_MANAGE_EXTERNAL_STORAGE;
+    private static final String APP_OP_STR = AppOpsManager.OPSTR_MANAGE_EXTERNAL_STORAGE;
     private static final String[] PERMISSIONS = {
             Manifest.permission.MANAGE_EXTERNAL_STORAGE
     };
 
+    private final AppOpsManager mAppOpsManager;
+
     public AppStateManageExternalStorageBridge(Context context, ApplicationsState appState,
             Callback callback) {
-        super(context, appState, callback, APP_OPS_OP_CODE, PERMISSIONS);
+        super(context, appState, callback, AppOpsManager.strOpToOp(APP_OP_STR), PERMISSIONS);
+        mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
     }
 
     @Override
@@ -43,9 +48,28 @@ public class AppStateManageExternalStorageBridge extends AppStateAppOpsBridge {
         app.extraInfo = getManageExternalStoragePermState(pkg, uid);
     }
 
+    @Override
+    protected void loadAllExtraInfo() {
+        super.loadAllExtraInfo();
+        List<ApplicationsState.AppEntry> apps = mAppSession.getAllApps();
+        for (ApplicationsState.AppEntry app : apps) {
+            if (app.extraInfo instanceof PermissionState) {
+                ((PermissionState) app.extraInfo).appOpMode =  mAppOpsManager.unsafeCheckOpNoThrow(
+                        APP_OP_STR, app.info.uid, app.info.packageName);
+            }
+        }
+    }
+
+    @Override
+    public PermissionState getPermissionInfo(String pkg, int uid) {
+        PermissionState ps = super.getPermissionInfo(pkg, uid);
+        ps.appOpMode = mAppOpsManager.unsafeCheckOpNoThrow(APP_OP_STR, uid, pkg);
+        return ps;
+    }
+
     /**
      * Returns the MANAGE_EXTERNAL_STORAGE {@link AppStateAppOpsBridge.PermissionState} object
-     * associated with the given package and user.
+     * associated with the given package and UID.
      */
     public PermissionState getManageExternalStoragePermState(String pkg, int uid) {
         return getPermissionInfo(pkg, uid);

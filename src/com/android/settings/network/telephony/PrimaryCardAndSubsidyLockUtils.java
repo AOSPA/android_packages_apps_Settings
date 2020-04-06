@@ -64,6 +64,8 @@ public final class PrimaryCardAndSubsidyLockUtils {
 
     // UICC provisioning status
     public static final int CARD_NOT_PROVISIONED = 0;
+    public static final int CARD_PROVISIONED = 1;
+    public static final int CARD_INVALID_STATE = -1;
 
     private PrimaryCardAndSubsidyLockUtils() {
     }

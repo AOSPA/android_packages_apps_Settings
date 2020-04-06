@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.preference.PreferenceViewHolder;
 
@@ -37,18 +36,18 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class ShortcutPreferenceTest {
 
-    private static final String CHECKBOX_CLICKED = "checkbox_clicked";
+    private static final String TOGGLE_CLICKED = "toggle_clicked";
     private static final String SETTINGS_CLICKED = "settings_clicked";
 
     private ShortcutPreference mShortcutPreference;
     private PreferenceViewHolder mPreferenceViewHolder;
     private String mResult;
 
-    private ShortcutPreference.OnClickListener mListener =
-            new ShortcutPreference.OnClickListener() {
+    private ShortcutPreference.OnClickCallback mListener =
+            new ShortcutPreference.OnClickCallback() {
                 @Override
-                public void onCheckboxClicked(ShortcutPreference preference) {
-                    mResult = CHECKBOX_CLICKED;
+                public void onToggleClicked(ShortcutPreference preference) {
+                    mResult = TOGGLE_CLICKED;
                 }
 
                 @Override
@@ -69,32 +68,31 @@ public class ShortcutPreferenceTest {
     }
 
     @Test
-    public void clickLinearLayout_checkboxClicked() {
+    public void clickToggle_toggleClicked() {
         mShortcutPreference.onBindViewHolder(mPreferenceViewHolder);
-        mShortcutPreference.setOnClickListener(mListener);
+        mShortcutPreference.setOnClickCallback(mListener);
 
-        LinearLayout mainFrame = mPreferenceViewHolder.itemView.findViewById(R.id.main_frame);
-        mainFrame.performClick();
+        mPreferenceViewHolder.itemView.performClick();
 
-        assertThat(mResult).isEqualTo(CHECKBOX_CLICKED);
-        assertThat(mShortcutPreference.getChecked()).isTrue();
+        assertThat(mResult).isEqualTo(TOGGLE_CLICKED);
+        assertThat(mShortcutPreference.isChecked()).isTrue();
     }
 
     @Test
     public void clickSettings_settingsClicked() {
         mShortcutPreference.onBindViewHolder(mPreferenceViewHolder);
-        mShortcutPreference.setOnClickListener(mListener);
+        mShortcutPreference.setOnClickCallback(mListener);
 
-        View settings = mPreferenceViewHolder.itemView.findViewById(android.R.id.widget_frame);
+        final View settings = mPreferenceViewHolder.itemView.findViewById(R.id.main_frame);
         settings.performClick();
 
         assertThat(mResult).isEqualTo(SETTINGS_CLICKED);
     }
 
     @Test
-    public void setCheckedTrue_getCheckedIsTrue() {
+    public void setCheckedTrue_getToggleIsTrue() {
         mShortcutPreference.setChecked(true);
 
-        assertThat(mShortcutPreference.getChecked()).isEqualTo(true);
+        assertThat(mShortcutPreference.isChecked()).isEqualTo(true);
     }
 }

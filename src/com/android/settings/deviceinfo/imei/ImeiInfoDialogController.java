@@ -105,8 +105,7 @@ public class ImeiInfoDialogController {
 
     private void updateDialogForCdmaPhone() {
         final Resources res = mDialog.getContext().getResources();
-        mDialog.setText(ID_MEID_NUMBER_VALUE,
-                mSubscriptionInfo != null ? getMeid() : "");
+        mDialog.setText(ID_MEID_NUMBER_VALUE, getMeid());
         // MIN needs to read from SIM. So if no SIM, we should not show MIN on UI
         mDialog.setText(ID_MIN_NUMBER_VALUE, mSubscriptionInfo != null
                 ? mTelephonyManager.getCdmaMin(mSubscriptionInfo.getSubscriptionId())
@@ -119,7 +118,8 @@ public class ImeiInfoDialogController {
 
         mDialog.setText(ID_PRL_VERSION_VALUE, getCdmaPrlVersion());
 
-        if (mSubscriptionInfo != null && isCdmaLteEnabled()) {
+        if ((mSubscriptionInfo != null && isCdmaLteEnabled()) ||
+                    (mSubscriptionInfo == null && isSimPresent(mSlotId))) {
             // Show IMEI for LTE device
             mDialog.setText(ID_IMEI_VALUE,
                     getTextAsDigits(mTelephonyManager.getImei(mSlotId)));
@@ -132,13 +132,9 @@ public class ImeiInfoDialogController {
     }
 
     private void updateDialogForGsmPhone() {
-        mDialog.setText(ID_IMEI_VALUE,
-                mSubscriptionInfo != null ?
-                getTextAsDigits(mTelephonyManager.getImei(mSlotId)) : "");
+        mDialog.setText(ID_IMEI_VALUE, getTextAsDigits(mTelephonyManager.getImei(mSlotId)));
         mDialog.setText(ID_IMEI_SV_VALUE,
-                mSubscriptionInfo != null ?
-                getTextAsDigits(mTelephonyManager.
-                        getDeviceSoftwareVersion(mSlotId)) : "");
+                getTextAsDigits(mTelephonyManager.getDeviceSoftwareVersion(mSlotId)));
         // device is not CDMA, do not display CDMA features
         mDialog.removeViewFromScreen(ID_CDMA_SETTINGS);
     }
@@ -151,7 +147,16 @@ public class ImeiInfoDialogController {
 
     @VisibleForTesting
     boolean isCdmaLteEnabled() {
-        return mTelephonyManager.isGlobalModeEnabled();
+        return mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled();
+    }
+
+    boolean isSimPresent(int slotId) {
+        final int simState = mTelephonyManager.getSimState(slotId);
+        if ((simState != TelephonyManager.SIM_STATE_ABSENT) &&
+                (simState != TelephonyManager.SIM_STATE_UNKNOWN)) {
+            return true;
+        }
+        return false;
     }
 
     @VisibleForTesting

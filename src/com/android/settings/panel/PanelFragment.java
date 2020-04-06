@@ -411,13 +411,24 @@ public class PanelFragment extends Fragment {
         };
     }
 
-    class LocalPanelCallback implements PanelCustomizedButtonCallback {
+    int getPanelViewType() {
+        return mPanel.getViewType();
+    }
+
+    class LocalPanelCallback implements PanelContentCallback {
 
         @Override
         public void onCustomizedButtonStateChanged() {
             ThreadUtils.postOnMainThread(() -> {
                 mSeeMoreButton.setVisibility(
                         mPanel.isCustomizedButtonUsed() ? View.VISIBLE : View.GONE);
+            });
+        }
+
+        @Override
+        public void onGroupChanged() {
+            ThreadUtils.postOnMainThread(() -> {
+                mHeaderSubtitle.setText(mPanel.getSubTitle());
             });
         }
     }
