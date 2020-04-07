@@ -16,6 +16,7 @@
 
 package com.android.settings.display;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.text.TextUtils;
@@ -28,19 +29,31 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.LayoutPreference;
 
 public class NightDisplayActivationPreferenceController extends TogglePreferenceController {
 
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private ColorDisplayManager mColorDisplayManager;
     private NightDisplayTimeFormatter mTimeFormatter;
+    private LayoutPreference mPreference;
+
+    // Night light can also be toggled from QS. If night light wasn't toggled by this preference,
+    // don't requestFocus
+    private boolean mButtonTriggered = false;
     private Button mTurnOffButton;
     private Button mTurnOnButton;
 
     private final OnClickListener mListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            mColorDisplayManager.setNightDisplayActivated(!mColorDisplayManager.isNightDisplayActivated());
+            mButtonTriggered = true;
+            mMetricsFeatureProvider.logClickedPreference(mPreference,
+                    SettingsEnums.NIGHT_DISPLAY_SETTINGS);
+            mColorDisplayManager.setNightDisplayActivated(
+                    !mColorDisplayManager.isNightDisplayActivated());
             updateStateInternal();
         }
     };
@@ -50,6 +63,7 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
 
         mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
         mTimeFormatter = new NightDisplayTimeFormatter(context);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -72,10 +86,10 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        final LayoutPreference preference = screen.findPreference(getPreferenceKey());
-        mTurnOnButton = preference.findViewById(R.id.night_display_turn_on_button);
+        mPreference = screen.findPreference(getPreferenceKey());
+        mTurnOnButton = mPreference.findViewById(R.id.night_display_turn_on_button);
         mTurnOnButton.setOnClickListener(mListener);
-        mTurnOffButton = preference.findViewById(R.id.night_display_turn_off_button);
+        mTurnOffButton = mPreference.findViewById(R.id.night_display_turn_off_button);
         mTurnOffButton.setOnClickListener(mListener);
     }
 
@@ -131,12 +145,18 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
             mTurnOnButton.setVisibility(View.GONE);
             mTurnOffButton.setVisibility(View.VISIBLE);
             mTurnOffButton.setText(buttonText);
-            mTurnOffButton.requestFocus();
+            if (mButtonTriggered) {
+                mButtonTriggered = false;
+                mTurnOffButton.requestFocus();
+            }
         } else {
             mTurnOnButton.setVisibility(View.VISIBLE);
             mTurnOffButton.setVisibility(View.GONE);
             mTurnOnButton.setText(buttonText);
-            mTurnOnButton.requestFocus();
+            if (mButtonTriggered) {
+                mButtonTriggered = false;
+                mTurnOnButton.requestFocus();
+            }
         }
     }
 }

@@ -166,7 +166,7 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
     }
 
     @Override
-    public CharSequence getCustomButtonTitle() {
+    public CharSequence getCustomizedButtonTitle() {
         return mContext.getText(R.string.media_output_panel_stop_casting_button);
     }
 
@@ -220,6 +220,7 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
                 if (TextUtils.equals(controller.getPackageName(), mPackageName)) {
                     mMediaController = controller;
                     mMediaController.registerCallback(mCb);
+                    mCallback.onHeaderChanged();
                     break;
                 }
             }
