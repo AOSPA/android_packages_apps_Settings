@@ -21,6 +21,11 @@
     <PreferenceCategory
         android:key="zen_mode_conversations_radio_buttons"
         android:title="@string/zen_mode_conversations_section_title">
-        <!-- TODO: add preference with chat images here (b/151845457) -->
+
+        <!-- Senders image -->
+        <com.android.settingslib.widget.LayoutPreference
+            android:key="zen_mode_conversations_image"
+            android:layout="@layout/zen_mode_senders_overlay_image"
+            android:selectable="false"/>
     </PreferenceCategory>
 </PreferenceScreen>
