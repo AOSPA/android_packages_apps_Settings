@@ -6951,7 +6951,8 @@
     <!-- Summary for add user action, when it's disabled [CHAR LIMIT=100] -->
     <string name="user_add_max_count">You can add up to <xliff:g id="user_count">%1$d</xliff:g> users</string>
 
-        <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
+
+    <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
     <string name="user_cannot_manage_message" product="tablet">Only the tablet\u2019s owner can manage users.</string>
     <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
     <string name="user_cannot_manage_message" product="default">Only the phone\u2019s owner can manage users.</string>
@@ -7046,7 +7047,7 @@
     <!-- If open app supports TapPay, use that app instead of the default -->
     <string name="nfc_payment_favor_open">Except when another payment app is open</string>
     <!-- Header for a dialog asking the user which payment app to use -->
-    <string name="nfc_payment_pay_with">At a Tap &amp; pay terminal, pay with:</string>
+    <string name="nfc_payment_pay_with">At a contactless terminal, pay with:</string>
     <!-- Header for text explaning how to pay at a payment terminal in a store -->
     <string name="nfc_how_it_works_title">Paying at the terminal</string>
     <!-- Content for text explaning how to pay at a payment terminal in a store -->
@@ -7057,9 +7058,21 @@
     <string name="nfc_more_title">More...</string>
     <!-- Label for the dialog that is shown when the user is asked to set a
          preferred payment application -->
-    <string name="nfc_payment_set_default_label">Set as your preference?</string>
-    <string name="nfc_payment_set_default">Always use <xliff:g id="app">%1$s</xliff:g> when you Tap &amp; pay?</string>
-    <string name="nfc_payment_set_default_instead_of">Always use <xliff:g id="app">%1$s</xliff:g> instead of <xliff:g id="app">%2$s</xliff:g> when you Tap &amp; pay?</string>
+    <string name="nfc_payment_set_default_label">Set default payment app</string>
+    <!-- Label for the dialog that is shown when the user is asked to update a
+         preferred payment application [CHAR LIMIT=50] -->
+    <string name="nfc_payment_update_default_label">Update default payment app</string>
+    <string name="nfc_payment_set_default">At a contactless terminal, pay with
+        <xliff:g id="app">%1$s</xliff:g>
+    </string>
+    <string name="nfc_payment_set_default_instead_of">At a contactless terminal, pay with <xliff:g
+        id="app">%1$s</xliff:g>.\n\nThis replaces <xliff:g id="app">%2$s</xliff:g> as your default
+        payment app.
+    </string>
+    <!-- Label of the Set default button of the Set default payment app dialog [CHAR LIMIT=40] -->
+    <string name="nfc_payment_btn_text_set_deault">Set default</string>
+    <!-- Label of the Update button of the Update default payment app dialog [CHAR LIMIT=40] -->
+    <string name="nfc_payment_btn_text_update">Update</string>
     <!-- Restrictions settings --><skip/>
 
     <!-- Restriction settings title [CHAR LIMIT=35] -->
@@ -8137,6 +8150,9 @@
     <!-- Notification history screen; content description describing what happens when you tap on a notification history entry [CHAR LIMIT=NONE] -->
     <string name="notification_history_view_settings">view notification settings</string>
 
+    <!-- Notification history screen; content description describing what happens when you tap on a snoozed or recently dismissed notification [CHAR LIMIT=NONE] -->
+    <string name="notification_history_open_notification">open notification</string>
+
     <!-- Configure Notifications: setting title, whether the snooze menu is shown on notifications [CHAR LIMIT=80] -->
     <string name="snooze_options_title">Allow notification snoozing</string>
 
@@ -8566,6 +8582,12 @@
     When a user connects select work and personal apps, they can access work and personal data together. [CHAR LIMIT=50] -->
     <string name="interact_across_profiles_title">Connected work &amp; personal apps</string>
 
+    <!-- Settings subtext. This text is shown when the work and personal apps are connected. [CHAR LIMIT=45] -->
+    <string name="interact_across_profiles_summary_allowed">Connected</string>
+
+    <!-- Settings subtext. This text is shown when the work and personal apps are not connected. [CHAR LIMIT=45] -->
+    <string name="interact_across_profiles_summary_not_allowed">Not connected</string>
+
     <!-- Settings subtext. This text is shown when a user doesn't have any connected apps. [CHAR LIMIT=NONE] -->
     <string name="interact_across_profiles_empty_text">No connected apps</string>
 
@@ -8632,27 +8654,18 @@
 
     <!-- Banner title. This banner lets a user know that they need to install an app in their
     work profile in order to connect it to the corresponding personal app.
-    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=50]-->
-    <string name="interact_across_profiles_install_work_app_title">Install <xliff:g id="name" example="Calendar">%1$s</xliff:g> in your work profile</string>
-
-    <!-- Banner text. This banner lets a user know that they need to install an app in their
-    work profile in order to connect it to the corresponding personal app.
     The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
-    <string name="interact_across_profiles_install_work_app_summary">To connect these apps, install the <xliff:g id="name" example="Calendar">%1$s</xliff:g> app in your work profile</string>
+    <string name="interact_across_profiles_install_work_app_title">Install work <xliff:g id="name" example="Calendar">%1$s</xliff:g> to connect these apps</string>
 
     <!-- Banner title. This banner lets a user know that they need to install an app in their
     personal profile in order to connect it to the corresponding work app.
-    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=50]-->
-    <string name="interact_across_profiles_install_personal_app_title">Install <xliff:g id="name" example="Calendar">%1$s</xliff:g> in your personal profile</string>
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
+    <string name="interact_across_profiles_install_personal_app_title">Install personal <xliff:g id="name" example="Calendar">%1$s</xliff:g> to connect these apps</string>
 
     <!-- Banner text. This banner lets a user know that they need to install an app in their
-    personal profile in order to connect it to the corresponding work app.
+    work/personal profile in order to connect it to the corresponding personal app.
     The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
-    <string name="interact_across_profiles_install_personal_app_summary">To connect these apps, install the <xliff:g id="name" example="Calendar">%1$s</xliff:g> app in your personal profile</string>
-
-    <!-- Button text. This button takes a user to the app store so they can download and
-    install the app they need. [CHAR LIMIT=50]-->
-    <string name="interact_across_profiles_install_app_action">Get the app</string>
+    <string name="interact_across_profiles_install_app_summary">Tap to get the app</string>
 
     <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_access_title">Do Not Disturb access</string>
@@ -9018,8 +9031,22 @@
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND header -->
     <string name="zen_mode_bypassing_apps_header">Apps that can interrupt</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: Add apps to bypass DND header -->
+    <string name="zen_mode_bypassing_apps_add_header">Select more apps</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: No apps are bypassing DND -->
+    <string name="zen_mode_bypassing_apps_none">No apps selected</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: No apps are bypassing DND -->
     <string name="zen_mode_bypassing_apps_subtext_none">No apps can interrupt</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Preference to add apps that are allowed to bypass DND -->
+    <string name="zen_mode_bypassing_apps_add">Add apps</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Summary indicating all notification channels can
+    bypass DND for this app -->
+    <string name="zen_mode_bypassing_apps_summary_all">All notifications</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Summary indicating all notification channels can
+    bypass DND for this app -->
+    <string name="zen_mode_bypassing_apps_summary_some">Some notifications</string>
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Footer for DND bypassing apps settings -->
+    <string name="zen_mode_bypassing_apps_footer">Selected people can still reach you, even if you don\u2019t allow apps to interrupt</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: Allow apps to bypass DND -->
     <plurals name="zen_mode_bypassing_apps_subtext">
         <item quantity="one"><xliff:g id="app_name" example="Nest">%s</xliff:g> can interrupt</item>
@@ -9034,6 +9061,11 @@
     <string name="zen_mode_bypassing_apps_all_summary">All notifications</string>
     <!-- [CHAR LIMIT=100] Zen mode settings: App that can bypass DND's secondary text describing which notification channels from the app can bypass DND-->
     <string name="zen_mode_bypassing_apps_some_summary">Some notifications</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow notifications from an app to bypass DND header -->
+    <string name="zen_mode_bypassing_app_channels_header">Notifications that can interrupt</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow all notifications from an app to bypass DND
+    toggle title -->
+    <string name="zen_mode_bypassing_app_channels_toggle_all">Allow all notifications</string>
 
     <!-- [CHAR LIMIT=120] Zen mode settings: Summary for sound interruption settings -->
     <plurals name="zen_mode_other_sounds_summary">
@@ -9067,9 +9099,9 @@
     <!-- [CHAR LIMIT=50] Zen mode settings: Repeat callers (ie: repeat callers are allowed to bypass dnd) -->
     <string name="zen_mode_repeat_callers_list">repeat callers</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
-    <string name="zen_mode_calls_summary_one">Allow from <xliff:g id="caller type" example="contacts">%1$s</xliff:g></string>
+    <string name="zen_mode_calls_summary_one"><xliff:g id="caller type" example="contacts">%1$s</xliff:g></string>
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
-    <string name="zen_mode_calls_summary_two">Allow from <xliff:g id="caller type" example="starred contacts">%1$s</xliff:g> and <xliff:g id="callert tpye" example="repeat callers">%2$s</xliff:g></string>
+    <string name="zen_mode_calls_summary_two"><xliff:g id="caller type" example="starred contacts">%1$s</xliff:g> and <xliff:g id="caller type" example="repeat callers">%2$s</xliff:g></string>
     <!-- [CHAR LIMIT=200] Zen mode settings: Repeat callers option summary -->
     <string name="zen_mode_repeat_callers_summary">If the same person calls a second time within a <xliff:g id="minutes">%d</xliff:g> minute period</string>
 
@@ -9254,9 +9286,9 @@
     <!-- Summary for app storage preference -->
     <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal memory">%2$s</xliff:g></string>
     <!-- Summary describing internal storage for applications [CHAR LIMIT=25] -->
-    <string name="storage_type_internal">Internal storage</string>
+    <string name="storage_type_internal">internal storage</string>
     <!-- Summary describing external storage for applications [CHAR LIMIT=25] -->
-    <string name="storage_type_external">External storage</string>
+    <string name="storage_type_external">external storage</string>
 
     <!-- Summary for data usage preference [CHAR LIMIT=15] -->
     <string name="data_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used since <xliff:g id="date" example="Jan 12">%2$s</xliff:g></string>
@@ -10570,9 +10602,6 @@
     <string name="cross_profile_calendar_title">Cross-profile calendar</string>
     <!-- [CHAR LIMIT=NONE] Setting description. If the user turns on this setting, they can see their work events on their personal calendar. -->
     <string name="cross_profile_calendar_summary">Show work events on your personal calendar</string>
-    <!-- [CHAR LIMIT=NONE] The preference summary when cross-profile calendar is restricted. -->
-    <string name="cross_profile_calendar_restricted_summary">Your organization doesn\u2019t allow personal apps to access your work calendar</string>
-
 
     <!-- Time in hours -->
     <plurals name="hours">
