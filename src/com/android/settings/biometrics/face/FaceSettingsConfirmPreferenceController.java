@@ -76,6 +76,9 @@ public class FaceSettingsConfirmPreferenceController extends FaceSettingsPrefere
 
     @Override
     public int getAvailabilityStatus() {
+        if (Utils.isExtFaceServiceAvailable()){
+            return UNSUPPORTED_ON_DEVICE;
+        }
         return AVAILABLE;
     }
 }
