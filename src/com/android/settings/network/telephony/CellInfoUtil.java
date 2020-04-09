@@ -106,79 +106,136 @@ public final class CellInfoUtil {
 
 
     /**
-     * Creates a CellInfo object from OperatorInfo for Legacy Incremental Scan results. GsmCellInfo
-     * is used here only because operatorInfo does not contain technology type while CellInfo is an
-     * abstract object that requires to specify technology type. It doesn't matter which CellInfo
-     * type to use here, since we only want to wrap the operator info and PLMN to a CellInfo object.
+     * Creates a CellInfo object from OperatorInfo for Legacy Incremental Scan results.
      */
     public static CellInfo convertLegacyIncrScanOperatorInfoToCellInfo(OperatorInfo operatorInfo) {
         final String operatorNumeric = operatorInfo.getOperatorNumeric();
         String mcc = null;
         String mnc = null;
-        String rat = null;
-        CellInfo cellInfo;
+        String ran = String.valueOf(AccessNetworkType.UNKNOWN);
+
         if (operatorNumeric != null) {
             if (operatorNumeric.matches("^[0-9]{5,6}$")) {
                 mcc = operatorNumeric.substring(0, 3);
                 mnc = operatorNumeric.substring(3);
             } else if (operatorNumeric.matches("^[0-9]{5,6}[+][0-9]{1,2}$")) {
-                // If the operator numeric contains the RAT, then parse the MCC-MNC accordingly
+                // If the operator numeric contains the RAN, then parse the MCC-MNC accordingly
                 String values[] = operatorNumeric.split("\\+");
                 mcc = values[0].substring(0, 3);
                 mnc = values[0].substring(3);
-                rat = values[1];
+                ran = values[1];
             }
         }
-        final CellIdentityGsm cig = new CellIdentityGsm(
-                Integer.MAX_VALUE /* lac */,
-                Integer.MAX_VALUE /* cid */,
-                Integer.MAX_VALUE /* arfcn */,
-                Integer.MAX_VALUE /* bsic */,
-                mcc,
-                mnc,
-                operatorInfo.getOperatorAlphaLong() + " " + getNetworkClassFromRat(rat),
-                operatorInfo.getOperatorAlphaShort() + " " + getNetworkClassFromRat(rat),
-                Collections.emptyList());
 
-        final CellInfoGsm ci = new CellInfoGsm();
-        ci.setCellIdentity(cig);
+        CellInfoNr cellInfoNr = null;
+        CellInfoLte cellInfoLte = null;
+        CellInfoWcdma cellInfoWcdma = null;
+        CellInfoGsm cellInfoGsm = null;
+        CellInfoGsm cellInfoDefault = null;
+
+        // Convert RadioAccessNetwork(ran) to AccessNetworkType
+        int accessNetworkType = AccessNetworkType.convertRanToAnt(Integer.parseInt(ran));
+
+        switch(accessNetworkType) {
+            case AccessNetworkType.NGRAN:
+                // 5G
+                CellIdentityNr cellIdentityNr = new CellIdentityNr(
+                    Integer.MAX_VALUE /* pci */,
+                    Integer.MAX_VALUE /* tac */,
+                    Integer.MAX_VALUE /* nrArfcn */,
+                    null /* bands */,
+                    mcc,
+                    mnc,
+                    Integer.MAX_VALUE /* nci */,
+                    operatorInfo.getOperatorAlphaLong() + " 5G",
+                    operatorInfo.getOperatorAlphaShort() + " 5G",
+                    Collections.emptyList());
+                cellInfoNr = new CellInfoNr();
+                cellInfoNr.setCellIdentity(cellIdentityNr);
+                break;
+
+            case AccessNetworkType.EUTRAN:
+                // 4G
+                CellIdentityLte cellIdentityLte = new CellIdentityLte(
+                    Integer.MAX_VALUE /* ci */,
+                    Integer.MAX_VALUE /* pci */,
+                    Integer.MAX_VALUE /* tac */,
+                    Integer.MAX_VALUE /* earfcn */,
+                    null /* bands */,
+                    Integer.MAX_VALUE /* bandwidth */,
+                    mcc,
+                    mnc,
+                    operatorInfo.getOperatorAlphaLong() + " 4G",
+                    operatorInfo.getOperatorAlphaShort() + " 4G",
+                    Collections.emptyList(),
+                    null /* csgInfo */);
+                cellInfoLte = new CellInfoLte();
+                cellInfoLte.setCellIdentity(cellIdentityLte);
+                break;
+
+            case AccessNetworkType.UTRAN:
+                CellIdentityWcdma cellIdentityWcdma = new CellIdentityWcdma(
+                    Integer.MAX_VALUE /* lac */,
+                    Integer.MAX_VALUE /* cid */,
+                    Integer.MAX_VALUE /* psc */,
+                    Integer.MAX_VALUE /* uarfcn */,
+                    mcc,
+                    mnc,
+                    operatorInfo.getOperatorAlphaLong() + " 3G",
+                    operatorInfo.getOperatorAlphaShort() + " 3G",
+                    Collections.emptyList(),
+                    null /* csgInfo */);
+                cellInfoWcdma = new CellInfoWcdma();
+                cellInfoWcdma.setCellIdentity(cellIdentityWcdma);
+                break;
+
+            case AccessNetworkType.GERAN:
+                // 2G
+                CellIdentityGsm cellIdentityGsm = new CellIdentityGsm(
+                    Integer.MAX_VALUE /* lac */,
+                    Integer.MAX_VALUE /* cid */,
+                    Integer.MAX_VALUE /* arfcn */,
+                    Integer.MAX_VALUE /* bsic */,
+                    mcc,
+                    mnc,
+                    operatorInfo.getOperatorAlphaLong() + " 2G",
+                    operatorInfo.getOperatorAlphaShort() + " 2G",
+                    Collections.emptyList());
+                cellInfoGsm = new CellInfoGsm();
+                cellInfoGsm.setCellIdentity(cellIdentityGsm);
+                break;
+
+            default:
+                // This is when RAT info is not present with the PLMN.
+                // Do not add any network class to the operator name.
+                CellIdentityGsm cellIdentityDefault = new CellIdentityGsm(
+                    Integer.MAX_VALUE /* lac */,
+                    Integer.MAX_VALUE /* cid */,
+                    Integer.MAX_VALUE /* arfcn */,
+                    Integer.MAX_VALUE /* bsic */,
+                    mcc,
+                    mnc,
+                    operatorInfo.getOperatorAlphaLong(),
+                    operatorInfo.getOperatorAlphaShort(),
+                    Collections.emptyList());
+                cellInfoDefault = new CellInfoGsm();
+                cellInfoDefault.setCellIdentity(cellIdentityDefault);
+                break;
+        }
+
+        CellInfo cellInfo = null;
+        if (cellInfoNr != null) cellInfo = cellInfoNr;
+        else if (cellInfoLte != null) cellInfo = cellInfoLte;
+        else if (cellInfoWcdma != null) cellInfo = cellInfoWcdma;
+        else if (cellInfoGsm != null) cellInfo = cellInfoGsm;
+        else cellInfo = cellInfoDefault;
+
         if (operatorInfo.getState() == OperatorInfo.State.CURRENT) {
             // Unlike the legacy full scan, legacy incremental scanning using qcril hooks
             // sends the results containing the info about the currently registered operator.
-            ci.setRegistered(true);
+            cellInfo.setRegistered(true);
         }
-        return ci;
-    }
-
-    public static String getNetworkClassFromRat(String ratString) {
-        String networkClass = "";
-
-        if (ratString == null) return networkClass;
-
-        int ratInteger = Integer.parseInt(ratString);
-        int accessNetworkType = ServiceState.rilRadioTechnologyToAccessNetworkType(ratInteger);
-
-        switch(accessNetworkType) {
-            case AccessNetworkType.GERAN:
-                networkClass = "2G";
-                break;
-            case AccessNetworkType.UTRAN:
-                networkClass = "3G";
-                break;
-            case AccessNetworkType.EUTRAN:
-                networkClass = "4G";
-
-                // AccessNetworkType.NGRAN has not been defined in Telephony SDK yet.
-                // TODO: Move 5G to NGRAN once it is available in the framework.
-                if (ratInteger == ServiceState.RIL_RADIO_TECHNOLOGY_NR) {
-                    networkClass = "5G";
-                }
-                break;
-            case AccessNetworkType.CDMA2000:
-                networkClass = "CDMA";
-                break;
-        }
-        return networkClass;
+        return cellInfo;
     }
 
     /** Convert a list of cellInfos to readable string without sensitive info. */
