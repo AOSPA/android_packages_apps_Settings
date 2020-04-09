@@ -296,15 +296,15 @@
    <!-- Wi-Fi AP Vendor band settings.  Either 2.4GHz, 5GHz or Both. -->
    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array translatable="false" name="wifi_ap_band_vendor_config_full">
-        <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>8</item>
     </string-array>
 
     <string-array translatable="false" name="wifi_ap_band_vendor_summary_full">
         <item>@string/wifi_ap_choose_2G</item>
         <item>@string/wifi_ap_choose_5G</item>
-        <item>@string/wifi_ap_choose_vendor_both</item>
+        <item>@string/wifi_ap_choose_vendor_dual_band</item>
     </string-array>
 
     <!-- Wi-Fi WPS setup for p2p connections.  -->
