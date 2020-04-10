@@ -197,7 +197,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         mPasswordPreferenceController.updateVisibility(config.getSecurityType());
 
         if (mApBandPreferenceController.isVendorDualApSupported()
-                && mSecurityPreferenceController.isWpa3Supported()) {
+                && mSecurityPreferenceController.isOweSapSupported()) {
             if ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE)
                     == (mApBandPreferenceController.isBandEntriesHasDualband())) {
                 mApBandPreferenceController.updatePreferenceEntries(config);
@@ -230,11 +230,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         final int securityType = mSecurityPreferenceController.getSecurityType();
         final int band = mApBandPreferenceController.getBandIndex();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
-        if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
-            configBuilder.setPassphrase(
-                    mPasswordPreferenceController.getPasswordValidated(securityType),
-                    SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
-        }
+        configBuilder.setPassphrase(mPasswordPreferenceController.getPasswordValidated(securityType),
+                                    securityType);
         if (securityType == SoftApConfiguration.SECURITY_TYPE_OWE
                 && band == SoftApConfiguration.BAND_DUAL) {
             configBuilder.setBand(SoftApConfiguration.BAND_2GHZ);
