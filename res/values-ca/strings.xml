@@ -800,7 +800,8 @@
     <string name="wifi_error" msgid="4903954145386086899">"Error"</string>
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"La banda de 5 GHz no està disponible en aquest país"</string>
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"En mode d\'avió"</string>
-    <string name="wifi_notify_open_networks" msgid="1456448686400730751">"Envia notificació per a xarxes obertes"</string>
+    <!-- no translation found for wifi_notify_open_networks (2610323626246818961) -->
+    <skip />
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Notifica\'m quan hi hagi una xarxa pública d\'alta qualitat"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Activa la Wi‑Fi automàticament"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"La Wi-Fi es tornarà a activar automàticament prop de xarxes d\'alta qualitat desades, com la de casa teva"</string>
@@ -810,7 +811,8 @@
     <string name="wifi_poor_network_detection" msgid="8210035875160288422">"Només connexions estables"</string>
     <string name="wifi_poor_network_detection_summary" msgid="383834617032605347">"No utilitzis una xarxa Wi-Fi tret que tingui una bona connexió a Internet"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4993203473116721772">"Utilitza només les xarxes amb una bona connexió a Internet"</string>
-    <string name="use_open_wifi_automatically_title" msgid="6969255613044224684">"Connecta\'t a xarxes obertes"</string>
+    <!-- no translation found for use_open_wifi_automatically_title (7193846454986712009) -->
+    <skip />
     <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"Connecta\'t automàticament a xarxes públiques d\'alta qualitat"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Per utilitzar aquesta funció, selecciona un proveïdor de valoració de xarxes"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Per utilitzar aquesta funció, selecciona un proveïdor de valoració de xarxes compatible"</string>
@@ -1218,6 +1220,10 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Activa fins a les <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Desactiva fins a les <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Llum nocturna no està activada"</string>
+    <!-- no translation found for twilight_mode_location_off_dialog_message (5723805118454645608) -->
+    <skip />
+    <!-- no translation found for twilight_mode_launch_location (1586574792030648828) -->
+    <skip />
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Activa ara"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Desactiva ara"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Activa fins a l\'alba"</string>
@@ -3036,14 +3042,17 @@
     <string name="nfc_payment_use_default" msgid="788899906312142803">"Utilitza l\'aplicació predeterminada"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Sempre"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Excepte quan hi hagi oberta una altra aplicació de pagament"</string>
-    <string name="nfc_payment_pay_with" msgid="10107565447713526">"En un terminal que tingui la funció Toca i paga, paga amb:"</string>
+    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"En un terminal sense contacte, paga amb:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Pagar a la terminal"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configura una aplicació de pagament. A continuació, apropa la part posterior del telèfon a un terminal amb el símbol de pagament sense contacte."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Entesos"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Més..."</string>
-    <string name="nfc_payment_set_default_label" msgid="9046299254316590677">"Vols establir-ho com a preferència?"</string>
-    <string name="nfc_payment_set_default" msgid="499518459418302061">"Vols fer servir sempre <xliff:g id="APP">%1$s</xliff:g> amb la funció Toca i paga?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="162768672108688747">"Vols fer servir sempre <xliff:g id="APP_0">%1$s</xliff:g> en lloc de <xliff:g id="APP_1">%2$s</xliff:g> amb la funció Toca i paga?"</string>
+    <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Defineix una aplicació de pagament predeterminada"</string>
+    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Actualitza l\'aplicació de pagament predeterminada"</string>
+    <string name="nfc_payment_set_default" msgid="4101484767872365195">"En un terminal sense contacte, paga amb <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"En un terminal sense contacte, paga amb <xliff:g id="APP_0">%1$s</xliff:g>.\n\nAixò substitueix <xliff:g id="APP_1">%2$s</xliff:g> com a aplicació de pagament predeterminada."</string>
+    <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Defineix com a predeterminada"</string>
+    <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Actualitza"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Restriccions"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Suprimeix restriccions"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Canvia el PIN"</string>
@@ -3074,7 +3083,7 @@
     <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Detecció de contactes"</string>
     <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Permet que el teu operador detecti quines funcions de trucada admeten els teus contactes."</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Vols activar la detecció de contactes?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Tots els números de telèfon dels teus contactes s\'enviaran periòdicament al teu operador per detectar quines funcions de trucada s\'admeten."</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Tots els números de telèfon als teus contactes s\'enviaran periòdicament al teu operador per detectar quines funcions de trucada s\'admeten."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Tipus de xarxa preferent"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (opció recomanada)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Missatges MMS"</string>
@@ -3314,6 +3323,8 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloqueja interrupcions visuals"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Permet senyals visuals"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Opcions de visualització de les notificacions amagades"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_category (5870944770935394566) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Notificacions sense so"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Veuràs notificacions a la pantalla"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Quan arribin notificacions, el telèfon no emetrà cap so ni vibrarà."</string>
@@ -3426,6 +3437,7 @@
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"Historial de notificacions desactivat"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Activa l\'historial de notificacions per veure les notificacions recents i posposades"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"mostrar la configuració de notificacions"</string>
+    <string name="notification_history_open_notification" msgid="2655071846911258371">"obre la notificació"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Permet posposar les notificacions"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Amaga les icones de les notificacions discretes"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Les icones de les notificacions discretes no es mostren a la barra d\'estat"</string>
@@ -3569,13 +3581,15 @@
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Permet Pantalla en pantalla"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Permet que aquesta aplicació creï una finestra de pantalla en pantalla mentre l\'aplicació està oberta o després de sortir-ne (per exemple, per seguir veient un vídeo). Aquesta finestra es mostra sobre altres aplicacions que estàs utilitzant."</string>
     <string name="interact_across_profiles_title" msgid="7285906999927669971">"Aplicacions de treball i personals connectades"</string>
+    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Connectades"</string>
+    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"No connectades"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"No hi ha cap aplicació connectada"</string>
-    <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"multiperfil, aplicacions connectades, aplicacions de treball i personals"</string>
+    <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"multiperfil aplicacions connectades aplicacions de treball i personals"</string>
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Aplicacions de treball i personals connectades"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Connectades"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Connecta aquestes aplicacions"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Les aplicacions connectades comparteixen els permisos i les dades entre si."</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Connecta només aquelles aplicacions a les quals confiïs les teves dades personals. És possible que les aplicacions de treball exposin les teves dades a l\'administrador de TI."</string>
+    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Connecta només les aplicacions a les quals confiïs les teves dades personals. És possible que les aplicacions de treball exposin les teves dades a l\'administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Vols confiar les teves dades personals a l\'aplicació <xliff:g id="NAME">%1$s</xliff:g> de treball?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"És possible que <xliff:g id="NAME">%1$s</xliff:g> exposi les teves dades personals a l\'administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Dades de les aplicacions"</string>
@@ -3587,11 +3601,9 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aplicacions connectades</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplicació connectada</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="7761038025614718824">"Instal·la <xliff:g id="NAME">%1$s</xliff:g> al teu perfil de treball"</string>
-    <string name="interact_across_profiles_install_work_app_summary" msgid="7418653807013809609">"Per connectar aquestes aplicacions, instal·la l\'aplicació <xliff:g id="NAME">%1$s</xliff:g> al teu perfil de treball"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5405510221944166674">"Instal·la <xliff:g id="NAME">%1$s</xliff:g> al teu perfil personal"</string>
-    <string name="interact_across_profiles_install_personal_app_summary" msgid="2464091172295014696">"Per connectar aquestes aplicacions, instal·la l\'aplicació <xliff:g id="NAME">%1$s</xliff:g> al teu perfil personal"</string>
-    <string name="interact_across_profiles_install_app_action" msgid="131173339507809328">"Baixa l\'aplicació"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Instal·la l\'aplicació <xliff:g id="NAME">%1$s</xliff:g> al perfil professional per connectar aquestes aplicacions"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Instal·la l\'aplicació <xliff:g id="NAME">%1$s</xliff:g> al perfil personal per connectar aquestes aplicacions"</string>
+    <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Toca per obtenir l\'aplicació"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Accés a No molestis"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permet l\'accés al mode No molestis"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Cap aplicació instal·lada no ha sol·licitat accés a No molestis."</string>
@@ -3847,8 +3859,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Enllaços admesos"</string>
     <string name="app_launch_other_defaults_title" msgid="3296350563585863885">"Altres valors predeterminats"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> utilitzats a <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="8072987826282477558">"Emmagatzematge intern"</string>
-    <string name="storage_type_external" msgid="8258689891893683905">"Emmagatzematge extern"</string>
+    <string name="storage_type_internal" msgid="979243131665635278">"emmagatzematge intern"</string>
+    <string name="storage_type_external" msgid="125078274000280821">"emmagatzematge extern"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> utilitzats des de: <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="2591194906751432725">"Emmagatzematge utilitzat"</string>
     <string name="change" msgid="273206077375322595">"Canvia"</string>
@@ -4344,7 +4356,6 @@
     <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Permet que la teva organització cerqui contactes per identificar els remitents i els contactes"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Calendari multiperfil"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Mostra esdeveniments de feina al calendari personal"</string>
-    <string name="cross_profile_calendar_restricted_summary" msgid="282962670405516067">"La teva organització no permet que les aplicacions personals accedeixin al teu calendari laboral"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
       <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> hores</item>
       <item quantity="one">1 hora</item>
@@ -4859,9 +4870,12 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Atura l\'emissió"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Vols desactivar VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"També es desactivarà la connexió 5G.\nDurant una trucada de veu, no podràs utilitzar Internet i és possible que algunes aplicacions no funcionin."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="6373046128796395865">"Si s\'utilitzen 2 SIM, aquest telèfon no es pot connectar a una xarxa 5G. Més informació"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="315154701631933377">"Si s\'utilitzen 2 SIM, aquesta tauleta no es pot connectar a una xarxa 5G. Més informació"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="729541315259742240">"Si s\'utilitzen 2 SIM, aquest dispositiu no es pot connectar a una xarxa 5G. Més informació"</string>
+    <!-- no translation found for no_5g_in_dsds_text (4190689671789979105) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (4818918108340095381) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (3901515020072229315) -->
+    <skip />
     <string name="gesture_skip_title" msgid="2092825906479683162">"Omet el gest"</string>
     <string name="gesture_silence_title" msgid="8991427657123202574">"Silencia el gest d\'alertes"</string>
     <string name="qtifeedback_settings_title">Comentaris sobre el maquinari</string>
