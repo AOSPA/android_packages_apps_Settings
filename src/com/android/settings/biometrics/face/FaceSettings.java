@@ -88,7 +88,9 @@ public class FaceSettings extends DashboardFragment {
 
     public static boolean isAvailable(Context context) {
         FaceManager manager = Utils.getFaceManagerOrNull(context);
-        return manager != null && manager.isHardwareDetected();
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(context);
+        return manager != null && manager.isHardwareDetected()
+                || psf.isParanoidFaceSenseEnabled();
     }
 
     @Override
@@ -192,7 +194,9 @@ public class FaceSettings extends DashboardFragment {
             mEnrollController.setToken(mToken);
         }
 
-        final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(context);
+        final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId) 
+                || psf.hasEnrolledFaceSenseUsers();
         mEnrollButton.setVisible(!hasEnrolled);
         mRemoveButton.setVisible(hasEnrolled);
 
