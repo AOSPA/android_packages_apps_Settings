@@ -175,7 +175,6 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     @Override
     protected void onStop() {
         super.onStop();
-
         if (!isChangingConfigurations() && !WizardManagerHelper.isAnySetupWizard(getIntent())
                 && !mNextClicked) {
             setResult(RESULT_SKIP);
@@ -206,6 +205,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         }
         mNextClicked = true;
         intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, !mSwitchDiversity.isChecked());
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(getApplicationContext());
+        psf.bind(false);
         startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
     }
 
