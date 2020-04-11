@@ -69,6 +69,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.biometrics.face.ParanoidFaceSenseConnector;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -203,6 +204,9 @@ public class ChooseLockGeneric extends SettingsActivity {
             mIsSetNewPassword = ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(chooseLockAction)
                     || ACTION_SET_NEW_PASSWORD.equals(chooseLockAction);
             mLockPatternUtils.sanitizePassword();
+
+            ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(getContext());
+            pfs.bind(true);
 
             // Defaults to needing to confirm credentials
             final boolean confirmCredentials = getActivity().getIntent()
@@ -878,11 +882,10 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         // TODO: figure out how to eliminate duplicated code. It's a bit hard due to the async-ness
         private void removeAllFaceForUserAndFinish(final int userId, RemovalTracker tracker) {
-            if (mFaceManager != null && mFaceManager.isHardwareDetected()) {
+            ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(getContext());
+            if (mFaceManager != null && mFaceManager.isHardwareDetected() || pfs.isParanoidFaceSenseEnabled()) {
                 if (mFaceManager.hasEnrolledTemplates(userId)) {
-                    mFaceManager.setActiveUser(userId);
-                    Face face = new Face(null, 0, 0);
-                    mFaceManager.remove(face, userId,
+                    FaceManager.RemovalCallback removalCallback =
                             new FaceManager.RemovalCallback() {
                         @Override
                         public void onRemovalError(Face face, int errMsgId, CharSequence err) {
@@ -895,7 +898,14 @@ public class ChooseLockGeneric extends SettingsActivity {
                                 removeManagedProfileFacesAndFinishIfNecessary(userId, tracker);
                             }
                         }
-                    });
+                    };
+                    if (pfs.isParanoidFaceSenseEnabled()) {
+                        pfs.removeFaces();
+                    } else {
+                        mFaceManager.setActiveUser(userId);
+                        Face face = new Face(null, 0, 0);
+                        mFaceManager.remove(face, userId, removalCallback);
+                    }
                 } else {
                     // No faces in this user, we may also want to delete managed profile faces
                     removeManagedProfileFacesAndFinishIfNecessary(userId, tracker);
@@ -933,6 +943,8 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         @Override
         public void onDestroy() {
+            ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(getContext());
+            pfs.bind(false);
             super.onDestroy();
             mLockPatternUtils.sanitizePassword();
         }

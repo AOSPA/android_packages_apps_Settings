@@ -77,6 +77,10 @@ public class FaceSettingsLockscreenBypassPreferenceController
         if (mUserManager.isManagedProfile(UserHandle.myUserId())) {
             return UNSUPPORTED_ON_DEVICE;
         }
+        ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(mContext);
+        if (pfs.hasEnrolledFaces()) {
+            return AVAILABLE;
+        }
 
         if (mFaceManager != null && mFaceManager.isHardwareDetected()) {
             return mFaceManager.hasEnrolledTemplates(getUserId())

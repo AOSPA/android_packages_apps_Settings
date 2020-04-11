@@ -30,6 +30,7 @@ import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.face.ParanoidFaceSenseConnector;
 import com.android.settings.homepage.contextualcards.slices.FaceSetupSlice;
 
 /**
@@ -89,9 +90,16 @@ public class FaceReEnrollDialog extends AlertActivity implements
 
     public void removeFaceAndReEnroll() {
         final int userId = getUserId();
-        if (mFaceManager == null || !mFaceManager.hasEnrolledTemplates(userId)) {
+        ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(getApplicationContext());
+        if (mFaceManager == null || !mFaceManager.hasEnrolledTemplates(userId) || !pfs.hasEnrolledFaces()) {
             finish();
         }
+
+        if (pfs.isParanoidFaceSenseEnabled()) {
+            pfs.removeFaces();
+            finish();
+        }
+            
         mFaceManager.remove(new Face("", 0, 0), userId, new FaceManager.RemovalCallback() {
             @Override
             public void onRemovalError(Face face, int errMsgId, CharSequence errString) {
