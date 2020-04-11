@@ -42,6 +42,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.settings.biometrics.face.ParanoidFaceSenseConnector;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.Indexable;
@@ -134,10 +135,20 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         SearchMenuController.init(this /* host */);
         HelpMenuController.init(this /* host */);
 
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(getContext());
+        psf.bind(true);
+
         if (icicle != null) {
             mPreferenceHighlighted = icicle.getBoolean(SAVE_HIGHLIGHTED_KEY);
         }
         HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(this /* host */);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(getContext());
+        psf.bind(false);
     }
 
     @Override
