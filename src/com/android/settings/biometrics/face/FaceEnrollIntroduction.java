@@ -157,6 +157,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     private boolean maxFacesEnrolled() {
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(getApplicationContext());
+        if (psf.hasEnrolledFaces()) {
+            return psf.getEnrolledFaces() >= max;
+        }
         if (mFaceManager != null) {
             final int max = getResources().getInteger(
                     com.android.internal.R.integer.config_faceMaxTemplatesPerUser);
@@ -170,7 +174,8 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     //TODO: Refactor this to something that conveys it is used for getting a string ID.
     @Override
     protected int checkMaxEnrolled() {
-        if (mFaceManager != null) {
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(getApplicationContext());
+        if (mFaceManager != null || psf.hasEnrolledFaces()) {
             if (maxFacesEnrolled()) {
                 return R.string.face_intro_error_max;
             }

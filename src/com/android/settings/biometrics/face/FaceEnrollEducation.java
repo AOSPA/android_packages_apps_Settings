@@ -167,15 +167,21 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         final int max = getResources().getInteger(
                 com.android.internal.R.integer.config_faceMaxTemplatesPerUser);
         final int numEnrolledFaces = mFaceManager.getEnrolledFaces(mUserId).size();
-        if (numEnrolledFaces >= max) {
-            finish();
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(getApplicationContext());
+        if (psf.hasEnrolledFaces()) {
+            if (psf.getEnrolledFaces() >= max) {
+                finish();
+            }
+        } else {
+            if (numEnrolledFaces >= max) {
+                finish();
+            }
         }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
         if (!isChangingConfigurations() && !WizardManagerHelper.isAnySetupWizard(getIntent())
                 && !mNextClicked) {
             setResult(RESULT_SKIP);
@@ -206,6 +212,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         }
         mNextClicked = true;
         intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, !mSwitchDiversity.isChecked());
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(getApplicationContext());
+        psf.bind(false);
         startActivityForResult(intent, BIOMETRIC_FIND_SENSOR_REQUEST);
     }
 

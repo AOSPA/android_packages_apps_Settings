@@ -19,16 +19,22 @@ package com.android.settings.biometrics.face;
 import android.content.Context;
 import android.hardware.face.FaceManager;
 
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricStatusPreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+
+import com.android.internal.widget.LockPatternUtils;
 
 public class FaceStatusPreferenceController extends BiometricStatusPreferenceController {
 
     public static final String KEY_FACE_SETTINGS = "face_settings";
 
     protected final FaceManager mFaceManager;
+    protected final LockPatternUtils mLockPatternUtils;
 
     public FaceStatusPreferenceController(Context context) {
         this(context, KEY_FACE_SETTINGS);
@@ -37,16 +43,22 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     public FaceStatusPreferenceController(Context context, String key) {
         super(context, key);
         mFaceManager = Utils.getFaceManagerOrNull(context);
+        mLockPatternUtils = FeatureFactory.getFactory(context)
+                .getSecurityFeatureProvider().getLockPatternUtils(context);
     }
 
     @Override
     protected boolean isDeviceSupported() {
-        return mFaceManager != null && mFaceManager.isHardwareDetected();
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(mContext);
+        return mFaceManager != null && mFaceManager.isHardwareDetected()
+                || psf.isParanoidFaceSenseEnabled();
     }
 
     @Override
     protected boolean hasEnrolledBiometrics() {
-        return mFaceManager.hasEnrolledTemplates(getUserId());
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(mContext);
+        return mFaceManager.hasEnrolledTemplates(getUserId()) 
+                || psf.hasEnrolledFaces();
     }
 
     @Override
@@ -71,4 +83,24 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
         return FaceEnrollIntroduction.class.getName();
     }
 
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        updateEnabledState(preference);
+    }
+
+    private void updateEnabledState(Preference preference) {
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(mContext);
+        if (psf.isParanoidFaceSenseEnabled()) {
+            if (psf.isFaceDisabledByAdmin()){
+                preference.setEnabled(false);
+                preference.setSummary(R.string.disabled_by_administrator_summary);
+            }else if (!mLockPatternUtils.isSecure(getUserId())){
+                preference.setEnabled(false);
+                preference.setSummary(R.string.disabled_because_no_backup_security);
+            }else{
+                preference.setEnabled(true);
+            }
+        }
+    }
 }

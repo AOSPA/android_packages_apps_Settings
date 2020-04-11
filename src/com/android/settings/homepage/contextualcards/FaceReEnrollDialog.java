@@ -89,9 +89,16 @@ public class FaceReEnrollDialog extends AlertActivity implements
 
     public void removeFaceAndReEnroll() {
         final int userId = getUserId();
-        if (mFaceManager == null || !mFaceManager.hasEnrolledTemplates(userId)) {
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(getApplicationContext());
+        if (mFaceManager == null || !mFaceManager.hasEnrolledTemplates(userId) || !psf.hasEnrolledFaces()) {
             finish();
         }
+
+        if (psf.isParanoidFaceSenseEnabled()) {
+            psf.removeFaces();
+            finish();
+        }
+            
         mFaceManager.remove(new Face("", 0, 0), userId, new FaceManager.RemovalCallback() {
             @Override
             public void onRemovalError(Face face, int errMsgId, CharSequence errString) {
