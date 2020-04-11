@@ -36,6 +36,7 @@ import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.face.FaceStatusPreferenceController;
+import com.android.settings.biometrics.face.ParanoidFaceSenseConnector;
 import com.android.settings.homepage.contextualcards.FaceReEnrollDialog;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -78,13 +79,14 @@ public class FaceSetupSlice implements CustomSliceable {
     @Override
     public Slice getSlice() {
         mFaceManager = Utils.getFaceManagerOrNull(mContext);
-        if (mFaceManager == null) {
+        ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(mContext);
+        if (mFaceManager == null && !pfs.isParanoidFaceSenseEnabled()) {
             return new ListBuilder(mContext, CustomSliceRegistry.FACE_ENROLL_SLICE_URI,
                     ListBuilder.INFINITY).setIsError(true).build();
         }
 
         final int userId = UserHandle.myUserId();
-        final boolean hasEnrolledTemplates = mFaceManager.hasEnrolledTemplates(userId);
+        final boolean hasEnrolledTemplates = mFaceManager.hasEnrolledTemplates(userId) || pfs.hasEnrolledFaces();
         final int shouldReEnroll = FaceSetupSlice.getReEnrollSetting(mContext, userId);
 
         CharSequence title = "";
@@ -126,8 +128,9 @@ public class FaceSetupSlice implements CustomSliceable {
 
     @Override
     public Intent getIntent() {
+        ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(mContext);
         final boolean hasEnrolledTemplates = mFaceManager.hasEnrolledTemplates(
-                UserHandle.myUserId());
+                UserHandle.myUserId()) || pfs.hasEnrolledFaces();
         if (!hasEnrolledTemplates) {
             return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                     SecuritySettings.class.getName(),

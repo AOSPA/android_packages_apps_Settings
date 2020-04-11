@@ -22,6 +22,7 @@ import android.hardware.fingerprint.FingerprintManager;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.face.ParanoidFaceSenseConnector;
 import com.android.settings.core.BasePreferenceController;
 
 public class TopLevelSecurityEntryPreferenceController extends BasePreferenceController {
@@ -41,7 +42,8 @@ public class TopLevelSecurityEntryPreferenceController extends BasePreferenceCon
                 Utils.getFingerprintManagerOrNull(mContext);
         final FaceManager faceManager =
                 Utils.getFaceManagerOrNull(mContext);
-        if (faceManager != null && faceManager.isHardwareDetected()) {
+        ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(mContext);
+        if (faceManager != null && faceManager.isHardwareDetected() || pfs.isParanoidFaceSenseEnabled()) {
             return mContext.getText(R.string.security_dashboard_summary_face);
         } else if (fpm != null && fpm.isHardwareDetected()) {
             return mContext.getText(R.string.security_dashboard_summary);

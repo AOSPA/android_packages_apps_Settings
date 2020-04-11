@@ -52,6 +52,23 @@ public class SecuritySettings extends DashboardFragment {
     public static final int UNIFY_LOCK_CONFIRM_PROFILE_REQUEST = 129;
     public static final int UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 130;
 
+    private ParanoidFaceSenseConnector mParanoidFaceSenseConnector;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mParanoidFaceSenseConnector = ParanoidFaceSenseConnector.getInstance(context);
+        mParanoidFaceSenseConnector.bind(true);
+    }
+
+    @Override
+    public void onDetach() {
+        if (mParanoidFaceSenseConnector != null) {
+            mParanoidFaceSenseConnector.bind(false);
+        }
+        super.onDetach();
+    }
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SECURITY;

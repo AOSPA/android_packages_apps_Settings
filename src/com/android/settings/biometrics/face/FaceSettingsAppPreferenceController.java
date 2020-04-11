@@ -84,7 +84,8 @@ public class FaceSettingsAppPreferenceController extends FaceSettingsPreferenceC
 
         // By only allowing this preference controller to be searchable when the feature is turned
         // off, it will give preference to the face setup controller.
-        final boolean hasEnrolledUser = mFaceManager.hasEnrolledTemplates(getUserId());
+        ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(mContext);
+        final boolean hasEnrolledUser = mFaceManager.hasEnrolledTemplates(getUserId()) || pfs.hasEnrolledFaces();
         final boolean appUnlockEnabled = Settings.Secure.getIntForUser(
                 mContext.getContentResolver(), FACE_UNLOCK_APP_ENABLED, OFF, getUserId()) == ON;
         if (hasEnrolledUser && !appUnlockEnabled) {

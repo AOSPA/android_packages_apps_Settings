@@ -88,7 +88,9 @@ public class FaceSettings extends DashboardFragment {
 
     public static boolean isAvailable(Context context) {
         FaceManager manager = Utils.getFaceManagerOrNull(context);
-        return manager != null && manager.isHardwareDetected();
+        ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(context);
+        return manager != null && manager.isHardwareDetected()
+                || pfs.isParanoidFaceSenseEnabled();
     }
 
     @Override
@@ -122,6 +124,9 @@ public class FaceSettings extends DashboardFragment {
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
         mFaceFeatureProvider = FeatureFactory.getFactory(getContext()).getFaceFeatureProvider();
+
+        ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(getContext());
+        pfs.bind(true);
 
         if (mUserManager.getUserInfo(mUserId).isManagedProfile()) {
             getActivity().setTitle(getActivity().getResources().getString(
@@ -192,7 +197,9 @@ public class FaceSettings extends DashboardFragment {
             mEnrollController.setToken(mToken);
         }
 
-        final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
+        ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(getContext());
+        final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId) 
+                || pfs.hasEnrolledFaces();
         mEnrollButton.setVisible(!hasEnrolled);
         mRemoveButton.setVisible(hasEnrolled);
 
@@ -242,6 +249,13 @@ public class FaceSettings extends DashboardFragment {
             }
             getActivity().finish();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(getContext());
+        pfs.bind(false);
+        super.onDestroy();
     }
 
     @Override

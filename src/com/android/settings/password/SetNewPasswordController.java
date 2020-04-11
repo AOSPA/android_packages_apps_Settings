@@ -39,6 +39,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.face.ParanoidFaceSenseConnector;
 
 /**
  * Business logic for {@link SetNewPasswordActivity}.
@@ -65,6 +66,7 @@ final class SetNewPasswordController {
     private final FaceManager mFaceManager;
     private final DevicePolicyManager mDevicePolicyManager;
     private final Ui mUi;
+    private static Context mContext;
 
     public static SetNewPasswordController create(Context context, Ui ui, Intent intent,
             IBinder activityToken) {
@@ -72,6 +74,7 @@ final class SetNewPasswordController {
         // ACTION_SET_NEW_PARENT_PROFILE_PASSWORD or the calling user is not allowed to set
         // separate profile challenge, it is the current user to set new password. Otherwise,
         // it is the user who starts this activity setting new password.
+        mContext = context;
         int userId = ActivityManager.getCurrentUser();
         if (ACTION_SET_NEW_PASSWORD.equals(intent.getAction())) {
             final int callingUserId = Utils.getSecureTargetUser(activityToken,
@@ -110,8 +113,15 @@ final class SetNewPasswordController {
      * Dispatches the set new password intent to the correct activity that handles it.
      */
     public void dispatchSetNewPasswordIntent() {
-        final Bundle extras;
+        Bundle extras = null;
         // TODO: handle the case with multiple biometrics, perhaps take an arg for biometric type?
+        if (mContext != null) {
+            ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(mContext);
+            if (pfs.hasEnrolledFaces() && !isFaceDisabledByAdmin()) {
+                extras = getFaceChooseLockExtras();
+            }
+        }
+
         if (mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)
                 && mFaceManager != null
                 && mFaceManager.isHardwareDetected()
