@@ -119,17 +119,22 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         public void onClick(DialogInterface dialog, int which) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 mButton.setEnabled(false);
-                final List<Face> faces = mFaceManager.getEnrolledFaces(mUserId);
-                if (faces.isEmpty()) {
-                    Log.e(TAG, "No faces");
-                    return;
-                }
-                if (faces.size() > 1) {
-                    Log.e(TAG, "Multiple enrollments: " + faces.size());
-                }
+                ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(mContext);
+                if (psf.isParanoidFaceSenseEnabled()) {
+                    psf.removeFaceSenseUsers();
+                } else {
+                    final List<Face> faces = mFaceManager.getEnrolledFaces(mUserId);
+                    if (faces.isEmpty()) {
+                        Log.e(TAG, "No faces");
+                        return;
+                    }
+                    if (faces.size() > 1) {
+                        Log.e(TAG, "Multiple enrollments: " + faces.size());
+                    }
 
-                // Remove the first/only face
-                mFaceManager.remove(faces.get(0), mUserId, mRemovalCallback);
+                    // Remove the first/only face
+                    mFaceManager.remove(faces.get(0), mUserId, mRemovalCallback);
+                }
             } else {
                 mButton.setEnabled(true);
                 mRemoving = false;

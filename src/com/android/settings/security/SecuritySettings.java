@@ -25,6 +25,7 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.biometrics.face.FaceProfileStatusPreferenceController;
 import com.android.settings.biometrics.face.FaceStatusPreferenceController;
+import com.android.settings.biometrics.face.ParanoidFaceSenseConnector;
 import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -51,6 +52,24 @@ public class SecuritySettings extends DashboardFragment {
     public static final int UNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 128;
     public static final int UNIFY_LOCK_CONFIRM_PROFILE_REQUEST = 129;
     public static final int UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 130;
+
+    private ParanoidFaceSenseConnector mParanoidFaceSenseConnector;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (mParanoidFaceSenseConnector == null)
+            mParanoidFaceSenseConnector = new ParanoidFaceSenseConnector(context);
+        }
+        mParanoidFaceSenseConnector.bind(true);
+    }
+
+
+    @Override
+    public void onDetach() {
+        mParanoidFaceSenseConnector.bind(false);
+        super.onDetach();
+    }
 
     @Override
     public int getMetricsCategory() {
