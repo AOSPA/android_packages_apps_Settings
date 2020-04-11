@@ -175,7 +175,6 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     @Override
     protected void onStop() {
         super.onStop();
-
         if (!isChangingConfigurations() && !WizardManagerHelper.isAnySetupWizard(getIntent())
                 && !mNextClicked) {
             setResult(RESULT_SKIP);
