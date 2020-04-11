@@ -33,6 +33,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.biometrics.face.ParanoidFaceSenseConnector;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.SettingsBaseActivity;
@@ -138,11 +139,20 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         // Set ComparisonCallback so we get better animation when list changes.
         getPreferenceManager().setPreferenceComparisonCallback(
                 new PreferenceManager.SimplePreferenceComparisonCallback());
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(getContext());
+        psf.bind(true);
         if (icicle != null) {
             // Upon rotation configuration change we need to update preference states before any
             // editing dialog is recreated (that would happen before onResume is called).
             updatePreferenceStates();
         }
+    }
+
+    Override
+    public void onDestroy() {
+        super.onCreate();
+        ParanoidFaceSenseConnector psf = ParanoidFaceSenseConnector.getInstance(getContext());
+        psf.bind(false);
     }
 
     @Override
