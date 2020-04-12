@@ -25,6 +25,7 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.biometrics.face.FaceProfileStatusPreferenceController;
 import com.android.settings.biometrics.face.FaceStatusPreferenceController;
+import com.android.settings.biometrics.face.ParanoidFaceStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -114,6 +115,7 @@ public class SecuritySettings extends DashboardFragment {
 
         final List<AbstractPreferenceController> securityPreferenceControllers = new ArrayList<>();
         securityPreferenceControllers.add(new FaceStatusPreferenceController(context));
+        securityPreferenceControllers.add(new ParanoidFaceStatusPreferenceController(context));
         securityPreferenceControllers.add(new FingerprintStatusPreferenceController(context));
         securityPreferenceControllers.add(new ChangeScreenLockPreferenceController(context, host));
         controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)

@@ -42,6 +42,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.settings.biometrics.face.ParanoidFaceSenseConnector;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.Indexable;
@@ -584,6 +585,15 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             if (mParentFragment != null && mParentFragment instanceof SettingsPreferenceFragment) {
                 ((SettingsPreferenceFragment) mParentFragment).onDialogShowing();
             }
+            ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(getContext());
+            pfs.bind();
+        }
+
+        @Override
+        public void onStop() {
+            super.onStop();
+            ParanoidFaceSenseConnector pfs = ParanoidFaceSenseConnector.getInstance(getContext());
+            pfs.unbind();
         }
 
         @Override
