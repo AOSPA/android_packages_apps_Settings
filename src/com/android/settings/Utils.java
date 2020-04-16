@@ -1090,7 +1090,7 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     public static boolean isSimSettingsApkAvailable() {
         IExtTelephony extTelephony =
-                IExtTelephony.Stub.asInterface(ServiceManager.getService("extphone"));
+                IExtTelephony.Stub.asInterface(ServiceManager.getService("qti.radio.extphone"));
         try {
             if (extTelephony != null &&
                     extTelephony.isVendorApkAvailable("com.qualcomm.qti.simsettings")) {
@@ -1109,7 +1109,7 @@ public final class Utils extends com.android.settingslib.Utils {
     public static boolean isNetworkSettingsApkAvailable() {
         // check whether the target handler exist in system
         IExtTelephony extTelephony =
-                IExtTelephony.Stub.asInterface(ServiceManager.getService("extphone"));
+                IExtTelephony.Stub.asInterface(ServiceManager.getService("qti.radio.extphone"));
         try {
             if (extTelephony != null &&
                     extTelephony.isVendorApkAvailable("com.qualcomm.qti.networksetting")) {
