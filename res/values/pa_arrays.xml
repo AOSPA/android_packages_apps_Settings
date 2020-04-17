@@ -61,4 +61,11 @@
         <item>@string/security_settings_fingerprint_sensor_location_front</item> <!-- FOD -->
     </string-array>
 
+    <integer-array name="config_availableRefreshRates">
+        <item>0</item> <!-- Adaptive (90/60hz) -->
+        <item>1</item> <!-- Normal (60hz) -->
+        <item>2</item> <!-- High (90hz) -->
+        <!--<item>2</item> -- Super (120hz) -->
+    </integer-array>
+
 </resources>
