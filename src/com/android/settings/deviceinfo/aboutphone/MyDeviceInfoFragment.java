@@ -142,26 +142,9 @@ public class MyDeviceInfoFragment extends DashboardFragment
         }
         final View headerView = headerPreference.findViewById(R.id.entity_header);
         final Activity context = getActivity();
-        final Bundle bundle = getArguments();
-        final EntityHeaderController controller = EntityHeaderController
-                .newInstance(context, this, headerView)
-                .setRecyclerView(getListView(), getSettingsLifecycle())
-                .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
-                        EntityHeaderController.ActionType.ACTION_NONE);
-
-        // TODO: There may be an avatar setting action we can use here.
-        final int iconId = bundle.getInt("icon_id", 0);
-        if (iconId == 0) {
-            final UserManager userManager = (UserManager) getActivity().getSystemService(
-                    Context.USER_SERVICE);
-            final UserInfo info = Utils.getExistingUser(userManager,
-                    android.os.Process.myUserHandle());
-            controller.setLabel(info.name);
-            controller.setIcon(
-                    com.android.settingslib.Utils.getUserIcon(getActivity(), userManager, info));
-        }
-
-        controller.done(context, true /* rebindActions */);
+        getSettingsLifecycle().addObserver(
+                new DeviceInfoHeaderController(context, this, 
+                headerView, getListView(), getSettingsLifecycle()));
     }
 
     @Override
