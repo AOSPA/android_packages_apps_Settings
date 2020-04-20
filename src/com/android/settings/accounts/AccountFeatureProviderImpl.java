@@ -6,11 +6,11 @@ import android.content.Context;
 public class AccountFeatureProviderImpl implements AccountFeatureProvider {
     @Override
     public String getAccountType() {
-        return null;
+        return "com.google";
     }
 
     @Override
     public Account[] getAccounts(Context context) {
-        return new Account[0];
+        return AccountManager.get(context).getAccountsByType("com.google");
     }
 }
