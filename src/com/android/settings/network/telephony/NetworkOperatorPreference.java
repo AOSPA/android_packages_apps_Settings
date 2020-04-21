@@ -243,7 +243,7 @@ public class NetworkOperatorPreference extends Preference {
 
         Log.d(TAG, "AccessNetworkType: " + AccessNetworkType.toString(ant)
                 + " (" + ant + ")"
-                + ", mCellInfo: " + CellInfoUtil.cellInfoToString(mCellInfo));
+                + ", mCellId: " + mCellId.toString());
         return ant;
     }
 }
