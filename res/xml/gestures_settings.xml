@@ -27,6 +27,14 @@
             android:entryValues="@array/gestures_values" />
 
         <ListPreference
+            android:key="single_tap"
+            android:title="@string/gestures_single_tap"
+            android:summary="%s"
+            android:persistent="false"
+            android:entries="@array/gestures_entries_ambient"
+            android:entryValues="@array/gestures_values_ambient" />
+
+        <ListPreference
             android:key="one_finger_swipe_up"
             android:title="@string/gestures_one_finger_swipe_up"
             android:summary="%s"

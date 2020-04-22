@@ -32,13 +32,23 @@
     <string-array name="gestures_values">
         <item>0</item>
         <item>1</item>
-        <item>2</item>
         <item>3</item>
         <item>4</item>
         <item>5</item>
         <item>6</item>
         <item>7</item>
         <item>8</item>
+        <item>9</item>
+    </string-array>
+
+    <string-array name="gestures_entries_ambient">
+        <item>@string/gestures_disabled</item>
+        <item>@string/gestures_pulse_ambient</item>
+    </string-array>
+
+    <string-array name="gestures_values_ambient">
+        <item>0</item>
+        <item>2</item>
     </string-array>
 
     <!-- Fingerprint sensor locations.  Devices should configure their sensor location using
