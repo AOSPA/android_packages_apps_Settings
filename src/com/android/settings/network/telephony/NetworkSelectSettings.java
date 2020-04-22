@@ -146,6 +146,8 @@ public class NetworkSelectSettings extends DashboardFragment {
             return;
         }
         if (mWaitingForNumberOfScanResults <= 0) {
+            // Clear the selected preference whenever the scan starts
+            mSelectedPreference = null;
             startNetworkQuery();
         }
     }
