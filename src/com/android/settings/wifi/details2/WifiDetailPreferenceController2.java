@@ -156,6 +156,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private NetworkInfo mNetworkInfo;
     private NetworkCapabilities mNetworkCapabilities;
     private int mRssiSignalLevel = -1;
+    private int mWifiStandard;
+    private boolean mIsReady;
     private String[] mSignalStr;
     private WifiInfo mWifiInfo;
     private final WifiManager mWifiManager;
@@ -515,6 +517,9 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
     private void refreshRssiViews() {
         int signalLevel = mWifiEntry.getLevel();
+        int wifiStandard = mWifiEntry.getWifiStandard();
+        boolean isReady = mWifiEntry.isVhtMax8SpatialStreamsSupported() &&
+                              mWifiEntry.isHe8ssCapableAp();
 
         // Disappears signal view if not in range. e.g. for saved networks.
         if (signalLevel == WifiEntry.WIFI_LEVEL_UNREACHABLE) {
@@ -523,11 +528,15 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             return;
         }
 
-        if (mRssiSignalLevel == signalLevel) {
+        if (mRssiSignalLevel == signalLevel &&
+            mWifiStandard == wifiStandard &&
+            mIsReady == isReady) {
             return;
         }
         mRssiSignalLevel = signalLevel;
-        Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel);
+        mWifiStandard = wifiStandard;
+        mIsReady = isReady;
+        Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel, mWifiStandard, mIsReady);
 
         if (mEntityHeaderController != null) {
             mEntityHeaderController
@@ -908,6 +917,10 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
         public Drawable getIcon(int level) {
             return mContext.getDrawable(Utils.getWifiIconResource(level)).mutate();
+        }
+
+        public Drawable getIcon(int level, int standard, boolean isReady) {
+            return mContext.getDrawable(Utils.getWifiIconResource(level, standard, isReady)).mutate();
         }
     }
 

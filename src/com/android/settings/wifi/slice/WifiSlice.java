@@ -204,8 +204,8 @@ public class WifiSlice implements CustomSliceable {
         final Drawable d = mContext.getDrawable(
                 com.android.settingslib.Utils.getWifiIconResource(
                                                   accessPoint.getLevel(),
-                                                  accessPoint.getWifiGeneration(),
-                                                  accessPoint.isTwtSupported()
+                                                  accessPoint.getWifiStandard(),
+                                                  accessPoint.isHe8ssCapableAp()
                                                   && accessPoint.isVhtMax8SpatialStreamsSupported()));
 
         final @ColorInt int color;
