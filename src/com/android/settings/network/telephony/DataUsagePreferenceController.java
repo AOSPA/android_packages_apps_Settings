@@ -35,8 +35,6 @@ import com.android.settingslib.net.DataUsageController;
 public class DataUsagePreferenceController extends TelephonyBasePreferenceController {
 
     private NetworkTemplate mTemplate;
-    private DataUsageController.DataUsageInfo mDataUsageInfo;
-    private Intent mIntent;
 
     public DataUsagePreferenceController(Context context, String key) {
         super(context, key);
@@ -44,56 +42,63 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+        return (SubscriptionManager.isValidSubscriptionId(subId))
                 ? AVAILABLE
                 : AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            mContext.startActivity(mIntent);
-            return true;
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return false;
         }
+        final Intent intent = new Intent(Settings.ACTION_MOBILE_DATA_USAGE);
+        intent.putExtra(Settings.EXTRA_NETWORK_TEMPLATE, mTemplate);
+        intent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
 
-        return false;
+        mContext.startActivity(intent);
+        return true;
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             preference.setEnabled(false);
             return;
         }
-        long usageLevel = mDataUsageInfo.usageLevel;
-        if (usageLevel <= 0L) {
-            final DataUsageController controller = new DataUsageController(mContext);
-            usageLevel = controller.getHistoricalUsageLevel(mTemplate);
-        }
-        final boolean enabled = usageLevel > 0L;
-        preference.setEnabled(enabled);
-
-        if (enabled) {
-            preference.setSummary(mContext.getString(R.string.data_usage_template,
-                    DataUsageUtils.formatDataUsage(mContext, mDataUsageInfo.usageLevel),
-                    mDataUsageInfo.period));
+        final CharSequence summary = getDataUsageSummary(mContext, mSubId);
+        if (summary == null) {
+            preference.setEnabled(false);
+        } else {
+            preference.setEnabled(true);
+            preference.setSummary(summary);
         }
     }
 
     public void init(int subId) {
         mSubId = subId;
 
-        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            mTemplate = DataUsageUtils.getDefaultTemplate(mContext, mSubId);
-
-            final DataUsageController controller = new DataUsageController(mContext);
-            controller.setSubscriptionId(mSubId);
-            mDataUsageInfo = controller.getDataUsageInfo(mTemplate);
-
-            mIntent = new Intent(Settings.ACTION_MOBILE_DATA_USAGE);
-            mIntent.putExtra(Settings.EXTRA_NETWORK_TEMPLATE, mTemplate);
-            mIntent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return;
         }
+        mTemplate = DataUsageUtils.getDefaultTemplate(mContext, mSubId);
+    }
+
+    private CharSequence getDataUsageSummary(Context context, int subId) {
+        final DataUsageController controller = new DataUsageController(context);
+        controller.setSubscriptionId(subId);
+
+        final DataUsageController.DataUsageInfo usageInfo = controller.getDataUsageInfo(mTemplate);
+
+        long usageLevel = usageInfo.usageLevel;
+        if (usageLevel <= 0L) {
+            usageLevel = controller.getHistoricalUsageLevel(mTemplate);
+        }
+        if (usageLevel <= 0L) {
+            return null;
+        }
+        return context.getString(R.string.data_usage_template,
+                DataUsageUtils.formatDataUsage(context, usageLevel), usageInfo.period);
     }
 }

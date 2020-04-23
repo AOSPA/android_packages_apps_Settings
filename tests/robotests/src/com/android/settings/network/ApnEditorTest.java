@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -80,11 +81,11 @@ public class ApnEditorTest {
             "" /* MMS port */,
             0 /* Authentication type */,
             "default,supl,ia" /* APN type */,
-            "IPv6" /* APN protocol */,
+            "IP" /* APN protocol */,
             1 /* APN enable/disable */,
             0 /* Bearer */,
             0 /* Bearer BITMASK*/,
-            "IPv4" /* APN roaming protocol */,
+            "IPV6" /* APN roaming protocol */,
             "None" /* MVNO type */,
             "", /* MVNO value */
     };
@@ -99,6 +100,8 @@ public class ApnEditorTest {
 
     @Mock
     private FragmentActivity mActivity;
+    @Mock
+    private ProxySubscriptionManager mProxySubscriptionMgr;
 
     @Captor
     private ArgumentCaptor<Uri> mUriCaptor;
@@ -450,6 +453,8 @@ public class ApnEditorTest {
     @Test
     @Config(shadows = ShadowFragment.class)
     public void onCreate_noAction_shouldFinishAndNoCrash() {
+        ProxySubscriptionManager proxySubscriptionMgr = mock(ProxySubscriptionManager.class);
+        mApnEditorUT.mProxySubscriptionMgr = proxySubscriptionMgr;
         doReturn(new Intent()).when(mActivity).getIntent();
         doNothing().when(mApnEditorUT).addPreferencesFromResource(anyInt());
 
@@ -459,33 +464,25 @@ public class ApnEditorTest {
     }
 
     @Test
-    public void getUserEnteredApnProtocol_emptyApnProtocol_shouldReturnDefaultIPv4v6() {
-        // GIVEN read default APN protocol with IPV4V6
-        mApnEditorUT.mDefaultApnProtocol = "IPV4V6";
+    public void testOnViewStateRestored_customizedValueWithoutDefault_shouldShowCustomized() {
+        mApnEditorUT.mDefaultApnProtocol = "IP";
+        mApnEditorUT.mApnData.mData[ApnEditor.PROTOCOL_INDEX] = null;
+        mApnEditorUT.mProtocol.setEntryValues(new CharSequence[]{"IP", "IPV6", "IPV4V6"});
 
-        // Input empty in TYPE
-        mApnEditorUT.mApnData.mData[ApnEditor.PROTOCOL_INDEX] = "";
-        mApnEditorUT.fillUI(true /* firstTime */);
+        mApnEditorUT.onViewStateRestored(null);
 
-        // THEN APN type should be IPV4V6
-        assertThat(mApnEditorUT.getUserEnteredApnProtocol(
-                mApnEditorUT.mProtocol, mApnEditorUT.mDefaultApnProtocol))
-                .isEqualTo("IPV4V6");
+        assertThat(mApnEditorUT.mProtocol.getSummary()).isEqualTo("IPv4");
     }
 
     @Test
-    public void getUserEnteredApnProtocol_emptyApnProtocol_shouldReturnDefaultIP() {
-        // GIVEN read default APN protocol with IP
+    public void testOnViewStateRestored_customizedValueWithDefault_shouldShowDefault() {
         mApnEditorUT.mDefaultApnProtocol = "IP";
+        mApnEditorUT.mApnData.mData[ApnEditor.PROTOCOL_INDEX] = "IPV6";
+        mApnEditorUT.mProtocol.setEntryValues(new CharSequence[]{"IP", "IPV6", "IPV4V6"});
 
-        // Input empty in TYPE
-        mApnEditorUT.mApnData.mData[ApnEditor.PROTOCOL_INDEX] = "";
-        mApnEditorUT.fillUI(true /* firstTime */);
+        mApnEditorUT.onViewStateRestored(null);
 
-        // THEN APN type should be IPV4V6
-        assertThat(mApnEditorUT.getUserEnteredApnProtocol(
-                mApnEditorUT.mProtocol, mApnEditorUT.mDefaultApnProtocol))
-                .isEqualTo("IP");
+        assertThat(mApnEditorUT.mProtocol.getSummary()).isEqualTo("IPv6");
     }
 
     @Test
@@ -498,7 +495,7 @@ public class ApnEditorTest {
 
         // Input empty in TYPE
         mApnEditorUT.mApnData.mData[ApnEditor.TYPE_INDEX] = "";
-        mApnEditorUT.fillUI(true /* firstTime */);
+        mApnEditorUT.onViewStateRestored(null);
 
         // THEN APN type should be default
         assertThat(mApnEditorUT.getUserEnteredApnType()).isEqualTo("default");
@@ -511,7 +508,7 @@ public class ApnEditorTest {
 
         // Input empty in TYPE
         mApnEditorUT.mApnData.mData[ApnEditor.TYPE_INDEX] = "";
-        mApnEditorUT.fillUI(true /* firstTime */);
+        mApnEditorUT.onViewStateRestored(null);
 
         // THEN APN type should be default
         assertThat(mApnEditorUT.getUserEnteredApnType()).isEqualTo("default");
