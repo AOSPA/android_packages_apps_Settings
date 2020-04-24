@@ -28,7 +28,8 @@ public class GridTileDrawable extends Drawable {
     private final Path mTransformedPath;
     private final Matrix mScaleMatrix;
     private float mCellSize = -1f;
-    private float mSpaceBetweenIcons;
+    private float mMarginTop;
+    private float mMarginLeft;
 
     public GridTileDrawable(int cols, int rows, String path) {
         mCols = cols;
@@ -41,9 +42,15 @@ public class GridTileDrawable extends Drawable {
 
     @Override
     protected void onBoundsChange(Rect bounds) {
+        float spaceBetweenIcons;
+
         super.onBoundsChange(bounds);
-        mCellSize = (float) bounds.height() / mRows;
-        mSpaceBetweenIcons = mCellSize * ((1 - ICON_SCALE) / 2);
+        mCellSize = Math.min((float) bounds.height() / mRows,  (float) bounds.width() / mCols);
+
+        spaceBetweenIcons = mCellSize * ((1 - ICON_SCALE) / 2);
+        mMarginTop = (bounds.height() - mCellSize * mRows) / 2 + spaceBetweenIcons;
+        mMarginLeft = (bounds.width() - mCellSize * mCols) / 2 + spaceBetweenIcons;
+
 
         float scaleFactor = (mCellSize * ICON_SCALE) / PATH_SIZE;
         mScaleMatrix.setScale(scaleFactor, scaleFactor);
@@ -55,8 +62,8 @@ public class GridTileDrawable extends Drawable {
         for (int r = 0; r < mRows; r++) {
             for (int c = 0; c < mCols; c++) {
                 int saveCount = canvas.save();
-                float x = (c * mCellSize) + mSpaceBetweenIcons;
-                float y = (r * mCellSize) + mSpaceBetweenIcons;
+                float x = (c * mCellSize) + mMarginLeft;
+                float y = (r * mCellSize) + mMarginTop;
                 canvas.translate(x, y);
                 canvas.drawPath(mTransformedPath, mPaint);
                 canvas.restoreToCount(saveCount);

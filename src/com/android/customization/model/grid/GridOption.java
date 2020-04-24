@@ -44,7 +44,7 @@ public class GridOption implements CustomizationOption<GridOption> {
             Uri previewImageUri, int previewPagesCount, String iconShapePath) {
         mTitle = title;
         mIsCurrent = isCurrent;
-        mTileDrawable = new GridTileDrawable(rows, cols, iconShapePath);
+        mTileDrawable = new GridTileDrawable(cols, rows, iconShapePath);
         this.name = name;
         this.rows = rows;
         this.cols = cols;
