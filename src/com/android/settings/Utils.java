@@ -67,6 +67,7 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
+import android.os.SystemProperties;
 import android.os.storage.VolumeInfo;
 import android.preference.PreferenceFrameLayout;
 import android.provider.ContactsContract.CommonDataKinds;
@@ -870,9 +871,11 @@ public final class Utils extends com.android.settingslib.Utils {
      * Return whether or not the user should have a SIM Cards option in Settings.
      */
     public static boolean showSimCardTile(Context context) {
+        boolean isPrimaryCardEnabled = SystemProperties.getBoolean(
+                "persist.vendor.radio.primarycard", false);
         final TelephonyManager tm =
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        return tm.getSimCount() > 1;
+        return isPrimaryCardEnabled && (tm.getSimCount() > 1);
     }
 
     /**
