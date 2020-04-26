@@ -669,7 +669,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshButtons() {
-        final boolean canForgetNetwork = mWifiEntry.canForget();
+        final boolean canForgetNetwork = canForgetNetwork();
         final boolean showCaptivePortalButton = updateCaptivePortalButton();
         final boolean canConnectDisconnectNetwork = mWifiEntry.canConnect()
                 || mWifiEntry.canDisconnect();
@@ -793,6 +793,14 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
      */
     public boolean canModifyNetwork() {
         return mWifiEntry.isSaved()
+                && !WifiUtils.isNetworkLockedDown(mContext, mWifiEntry.getWifiConfiguration());
+    }
+
+    /**
+     * Returns whether the network represented by this preference can be forgotten.
+     */
+    public boolean canForgetNetwork() {
+        return mWifiEntry.canForget()
                 && !WifiUtils.isNetworkLockedDown(mContext, mWifiEntry.getWifiConfiguration());
     }
 

@@ -18,11 +18,14 @@ package com.android.settings.notification.history;
 
 import static android.provider.Settings.Secure.NOTIFICATION_HISTORY_ENABLED;
 
+import static androidx.core.view.accessibility.AccessibilityEventCompat.TYPE_VIEW_ACCESSIBILITY_FOCUSED;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.INotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -88,15 +91,15 @@ public class NotificationHistoryActivity extends Activity {
                     ? getString(R.string.condition_expand_hide)
                     : getString(R.string.condition_expand_show));
             expand.setOnClickListener(v -> {
-                    container.setVisibility(container.getVisibility() == View.VISIBLE
-                            ? View.GONE : View.VISIBLE);
-                    expand.setImageResource(container.getVisibility() == View.VISIBLE
-                            ? R.drawable.ic_expand_less
-                            : com.android.internal.R.drawable.ic_expand_more);
-                    expand.setContentDescription(container.getVisibility() == View.VISIBLE
-                            ? getString(R.string.condition_expand_hide)
-                            : getString(R.string.condition_expand_show));
-                    expand.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
+                container.setVisibility(container.getVisibility() == View.VISIBLE
+                        ? View.GONE : View.VISIBLE);
+                expand.setImageResource(container.getVisibility() == View.VISIBLE
+                        ? R.drawable.ic_expand_less
+                        : com.android.internal.R.drawable.ic_expand_more);
+                expand.setContentDescription(container.getVisibility() == View.VISIBLE
+                        ? getString(R.string.condition_expand_hide)
+                        : getString(R.string.condition_expand_show));
+                expand.sendAccessibilityEvent(TYPE_VIEW_ACCESSIBILITY_FOCUSED);
             });
 
             TextView label = viewForPackage.findViewById(R.id.label);
@@ -108,7 +111,7 @@ public class NotificationHistoryActivity extends Activity {
             count.setText(getResources().getQuantityString(R.plurals.notification_history_count,
                     nhp.notifications.size(), nhp.notifications.size()));
 
-            NotificationHistoryRecyclerView rv =
+            final NotificationHistoryRecyclerView rv =
                     viewForPackage.findViewById(R.id.notification_list);
             rv.setAdapter(new NotificationHistoryAdapter(mNm, rv));
             ((NotificationHistoryAdapter) rv.getAdapter()).onRebuildComplete(
@@ -189,6 +192,20 @@ public class NotificationHistoryActivity extends Activity {
             mCountdownFuture.cancel(true);
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        handleBackPressed();
+    }
+
+    private void handleBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 1) {
+            super.onBackPressed();
+        } else {
+            startActivity(new Intent(Settings.ACTION_NOTIFICATION_SETTINGS));
+            finish();
+        }
     }
 
     private void bindSwitch() {
