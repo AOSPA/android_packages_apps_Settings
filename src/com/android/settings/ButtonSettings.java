@@ -51,9 +51,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_SWAP_NAVIGATION_KEYS = "swap_navigation_keys";
     private static final String KEY_BUTTON_BRIGHTNESS = "button_brightness";
+    private static final String KEY_NAVIGATION_BAR = "navigation_bar";
     private static final String EMPTY_STRING = "";
 
     private Handler mHandler;
+    private SwitchPreference mNavigationBar;
 
     private SwitchPreference mSwapNavigationkeys;
     private SwitchPreference mButtonBrightness;
@@ -68,6 +70,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
         final Resources res = getActivity().getResources();
         final PreferenceScreen prefScreen = getPreferenceScreen();
+
+        /* Navigation Bar */
+        mNavigationBar = (SwitchPreference) findPreference(KEY_NAVIGATION_BAR);
+        if (mNavigationBar != null) {
+            mNavigationBar.setOnPreferenceChangeListener(this);
+        }
 
         /* Swap Navigation Keys */
         mSwapNavigationkeys = (SwitchPreference) findPreference(KEY_SWAP_NAVIGATION_KEYS);
@@ -100,6 +108,16 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     }
 
     private boolean handleOnPreferenceTreeClick(Preference preference) {
+        if (preference != null && preference == mNavigationBar) {
+            mNavigationBar.setEnabled(false);
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mNavigationBar.setEnabled(true);
+                }
+            }, 1000);
+            return true;
+        }
         return false;
     }
 
@@ -139,6 +157,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             return Settings.System.SWAP_NAVIGATION_KEYS;
         } else if (preference == mButtonBrightness) {
             return Settings.System.BUTTON_BRIGHTNESS_ENABLED;
+        } else if (preference == mNavigationBar) {
+            return Settings.System.NAVIGATION_BAR_ENABLED;
         }
 
         return EMPTY_STRING;
@@ -153,11 +173,20 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         final boolean hasBack = (KEY_MASK_BACK) != 0;
         final boolean hasAppSwitch = (KEY_MASK_APP_SWITCH) != 0;
 
+        final boolean showNavigationBar = res.getBoolean(com.android.internal.R.bool.config_showNavigationBar);
+
+        final boolean navigationBarEnabled = Settings.System.getIntForUser(resolver,
+                Settings.System.NAVIGATION_BAR_ENABLED, showNavigationBar ? 1 : 0, UserHandle.USER_CURRENT) != 0;
+
         final boolean swapNavigationkeysEnabled = Settings.System.getIntForUser(resolver,
                 Settings.System.SWAP_NAVIGATION_KEYS, 0, UserHandle.USER_CURRENT) != 0;
 
         final boolean buttonBrightnessEnabled = Settings.System.getIntForUser(resolver,
                 Settings.System.BUTTON_BRIGHTNESS_ENABLED, 1, UserHandle.USER_CURRENT) != 0;
+
+        if (mNavigationBar != null) {
+            mNavigationBar.setChecked(navigationBarEnabled);
+        }
 
         if (mSwapNavigationkeys != null) {
             mSwapNavigationkeys.setChecked(swapNavigationkeysEnabled);
