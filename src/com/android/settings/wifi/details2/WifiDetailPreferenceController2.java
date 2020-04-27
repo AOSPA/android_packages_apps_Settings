@@ -448,10 +448,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         if (usingDataUsageHeader(mContext)) {
             mSummaryHeaderController.updateState(mDataUsageSummaryPref);
         } else {
-            String summary = mWifiEntry.getSummary();
-
             mEntityHeaderController
-                    .setSummary(summary)
+                    .setSummary(mWifiEntry.getSummary())
                     .setSecondSummary(getExpiryTimeSummary())
                     .setRecyclerView(mFragment.getListView(), mLifecycle)
                     .done(mFragment.getActivity(), true /* rebind */);
