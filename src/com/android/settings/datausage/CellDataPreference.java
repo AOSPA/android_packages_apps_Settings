@@ -50,15 +50,12 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     public int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     public boolean mChecked;
     public boolean mMultiSimDialog;
-    @VisibleForTesting
-    ProxySubscriptionManager mProxySubscriptionMgr;
     private MobileDataEnabledListener mDataStateListener;
 
     public CellDataPreference(Context context, AttributeSet attrs) {
         super(context, attrs, TypedArrayUtils.getAttr(context,
                 androidx.preference.R.attr.switchPreferenceStyle,
                 android.R.attr.switchPreferenceStyle));
-        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(context);
         mDataStateListener = new MobileDataEnabledListener(context, this);
     }
 
@@ -86,13 +83,15 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     public void onAttached() {
         super.onAttached();
         mDataStateListener.start(mSubId);
-        mProxySubscriptionMgr.addActiveSubscriptionsListener(mOnSubscriptionsChangeListener);
+        getProxySubscriptionManager()
+                .addActiveSubscriptionsListener(mOnSubscriptionsChangeListener);
     }
 
     @Override
     public void onDetached() {
         mDataStateListener.stop();
-        mProxySubscriptionMgr.removeActiveSubscriptionsListener(mOnSubscriptionsChangeListener);
+        getProxySubscriptionManager()
+                .removeActiveSubscriptionsListener(mOnSubscriptionsChangeListener);
         super.onDetached();
     }
 
@@ -102,8 +101,8 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
             throw new IllegalArgumentException("CellDataPreference needs a SubscriptionInfo");
         }
 
-        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(getContext());
-        mProxySubscriptionMgr.addActiveSubscriptionsListener(mOnSubscriptionsChangeListener);
+        getProxySubscriptionManager()
+                .addActiveSubscriptionsListener(mOnSubscriptionsChangeListener);
 
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             mSubId = subId;
@@ -113,6 +112,16 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
         updateChecked();
     }
 
+    @VisibleForTesting
+    ProxySubscriptionManager getProxySubscriptionManager() {
+        return ProxySubscriptionManager.getInstance(getContext());
+    }
+
+    @VisibleForTesting
+    SubscriptionInfo getActiveSubscriptionInfo(int subId) {
+        return getProxySubscriptionManager().getActiveSubscriptionInfo(subId);
+    }
+
     private void updateChecked() {
         setChecked(getContext().getSystemService(TelephonyManager.class).getDataEnabled(mSubId));
     }
@@ -120,7 +129,7 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     private void updateEnabled() {
         // If this subscription is not active, for example, SIM card is taken out, we disable
         // the button.
-        setEnabled(mProxySubscriptionMgr.getActiveSubscriptionInfo(mSubId) != null);
+        setEnabled(getActiveSubscriptionInfo(mSubId) != null);
     }
 
     @Override
@@ -129,9 +138,8 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
         // TODO (b/123905421): Clean up dead code path
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                 .action(context, SettingsEnums.ACTION_CELL_DATA_TOGGLE, !mChecked);
-        final SubscriptionInfo currentSir = mProxySubscriptionMgr.getActiveSubscriptionInfo(
-                mSubId);
-        final SubscriptionInfo nextSir = mProxySubscriptionMgr.getActiveSubscriptionInfo(
+        final SubscriptionInfo currentSir = getActiveSubscriptionInfo(mSubId);
+        final SubscriptionInfo nextSir = getActiveSubscriptionInfo(
                 SubscriptionManager.getDefaultDataSubscriptionId());
         if (mChecked) {
             setMobileDataEnabled(false);
@@ -182,9 +190,8 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     // TODO (b/123905421): Clean up dead code path
     private void showMultiSimDialog(Builder builder,
             DialogInterface.OnClickListener listener) {
-        final SubscriptionInfo currentSir = mProxySubscriptionMgr.getActiveSubscriptionInfo(
-                mSubId);
-        final SubscriptionInfo nextSir = mProxySubscriptionMgr.getActiveSubscriptionInfo(
+        final SubscriptionInfo currentSir = getActiveSubscriptionInfo(mSubId);
+        final SubscriptionInfo nextSir = getActiveSubscriptionInfo(
                 SubscriptionManager.getDefaultDataSubscriptionId());
 
         final String previousName = (nextSir == null)
@@ -201,8 +208,7 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     }
 
     private void disableDataForOtherSubscriptions(int subId) {
-        final SubscriptionInfo subInfo = mProxySubscriptionMgr.getActiveSubscriptionInfo(
-                subId);
+        final SubscriptionInfo subInfo = getActiveSubscriptionInfo(subId);
         if (subInfo != null) {
             getContext().getSystemService(TelephonyManager.class).setDataEnabled(subId, false);
         }
