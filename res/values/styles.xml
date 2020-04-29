@@ -38,6 +38,10 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:fitsSystemWindows">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDisablePreview">true</item>
     </style>
 
     <!-- Bottom nav -->
@@ -64,13 +68,6 @@
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
 
     <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button.Borderless.Colored"/>
-
-    <!-- Option tiles -->
-    <style name="OptionTitleTextAppearance" parent="TitleTextAppearance">
-        <item name="android:textColor">@color/option_title_color</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textSize">@dimen/theme_option_title_font_text_size</item>
-    </style>
 
     <style name="CardTitleTextAppearance" parent="TitleTextAppearance">
         <item name="android:textStyle">bold</item>

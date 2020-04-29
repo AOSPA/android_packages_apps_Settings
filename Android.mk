@@ -26,7 +26,7 @@ LOCAL_USE_AAPT2 := true
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_STATIC_ANDROID_LIBRARIES := WallpaperPicker2CommonDepsLib
-LOCAL_STATIC_JAVA_LIBRARIES := styleprotosnano SystemUI-statsd
+LOCAL_STATIC_JAVA_LIBRARIES := styleprotosnano SystemUI-statsd SystemUISharedLib
 LOCAL_PROGUARD_ENABLED := disabled
 
 LOCAL_PACKAGE_NAME := ThemePicker
