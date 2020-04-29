@@ -169,8 +169,8 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     protected void onStart() {
         getProxySubscriptionManager().setLifecycle(getLifecycle());
         super.onStart();
-        // updateSubscriptions doesn't need to be called, onChanged will always be called after we
-        // register a listener.
+        // call updateSubscriptions when start MobileNetworkActivity
+        updateSubscriptions(getSubscription());
     }
 
     @Override
