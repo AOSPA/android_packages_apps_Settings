@@ -168,6 +168,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
+        use(DataUsageSummaryPreferenceController.class).init(mSubId);
         use(DataDefaultSubscriptionController.class).init(getLifecycle());
         use(CallsDefaultSubscriptionController.class).init(getLifecycle());
         use(SmsDefaultSubscriptionController.class).init(getLifecycle());
