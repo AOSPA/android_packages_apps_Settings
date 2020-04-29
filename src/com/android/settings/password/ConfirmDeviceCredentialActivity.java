@@ -25,6 +25,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.trust.TrustManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
@@ -35,6 +36,7 @@ import android.os.Looper;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -111,6 +113,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     });
 
     private AuthenticationCallback mAuthenticationCallback = new AuthenticationCallback() {
+        @Override
         public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
             if (!mGoingToBackground) {
                 if (errorCode == BiometricPrompt.BIOMETRIC_ERROR_USER_CANCELED
@@ -123,16 +126,33 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             }
         }
 
+        @Override
         public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
             mTrustManager.setDeviceLockedForUser(mUserId, false);
-
+            final boolean isStrongAuth = result.getAuthenticationType()
+                    == BiometricPrompt.AUTHENTICATION_RESULT_TYPE_DEVICE_CREDENTIAL;
             ConfirmDeviceCredentialUtils.reportSuccessfulAttempt(mLockPatternUtils, mUserManager,
-                    mUserId);
+                    mDevicePolicyManager, mUserId, isStrongAuth);
             ConfirmDeviceCredentialUtils.checkForPendingIntent(
                     ConfirmDeviceCredentialActivity.this);
 
             setResult(Activity.RESULT_OK);
             finish();
+        }
+
+        @Override
+        public void onAuthenticationFailed() {
+            mDevicePolicyManager.reportFailedBiometricAttempt(mUserId);
+        }
+
+        @Override
+        public void onSystemEvent(int event) {
+            Log.d(TAG, "SystemEvent: " + event);
+            switch (event) {
+                case BiometricConstants.BIOMETRIC_SYSTEM_EVENT_EARLY_USER_CANCEL:
+                    finish();
+                    break;
+            }
         }
     };
 
@@ -150,6 +170,9 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
 
         mBiometricManager = getSystemService(BiometricManager.class);
         mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
@@ -200,7 +223,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     getTitleFromCredentialType(credentialType, isManagedProfile));
         }
         if (mDetails == null) {
-            bpBundle.putString(BiometricPrompt.KEY_DEVICE_CREDENTIAL_DESCRIPTION,
+            bpBundle.putString(BiometricPrompt.KEY_DEVICE_CREDENTIAL_SUBTITLE,
                     getDetailsFromCredentialType(credentialType, isManagedProfile));
         }
 
@@ -369,14 +392,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             setResult(Activity.RESULT_OK);
         }
         finish();
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        // Finish without animation since the activity is just there so we can launch
-        // BiometricPrompt.
-        overridePendingTransition(R.anim.confirm_credential_biometric_transition_enter, 0);
     }
 
     private boolean isInternalActivity() {

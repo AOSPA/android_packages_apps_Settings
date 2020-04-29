@@ -48,6 +48,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
 
     private static final String LOG_TAG = "PreferredNetworkMode";
     private CarrierConfigManager mCarrierConfigManager;
+    private ContentObserver mPreferredNetworkModeObserver;
     private ContentObserver mSubsidySettingsObserver;
     private TelephonyManager mTelephonyManager;
     private PersistableBundle mPersistableBundle;
@@ -71,6 +72,15 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
                     if (PrimaryCardAndSubsidyLockUtils.DBG) {
                         Log.d(LOG_TAG, "mSubsidySettingsObserver#onChange");
                     }
+                    updateState(mPreference);
+                }
+            }
+        };
+        mPreferredNetworkModeObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
+            @Override
+            public void onChange(boolean selfChange) {
+                if (mPreference != null) {
+                    Log.d(LOG_TAG, "mPreferredNetworkModeObserver#onChange");
                     updateState(mPreference);
                 }
             }
@@ -107,12 +117,18 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
                     Settings.Secure.getUriFor(PrimaryCardAndSubsidyLockUtils.SUBSIDY_STATUS), false,
                     mSubsidySettingsObserver);
         }
+        mContext.getContentResolver().registerContentObserver(
+                Settings.Global.getUriFor(Settings.Global.PREFERRED_NETWORK_MODE + mSubId), true,
+                mPreferredNetworkModeObserver);
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
         if (mSubsidySettingsObserver != null) {
             mContext.getContentResolver().unregisterContentObserver(mSubsidySettingsObserver);
+        }
+        if (mPreferredNetworkModeObserver != null) {
+            mContext.getContentResolver().unregisterContentObserver(mPreferredNetworkModeObserver);
         }
     }
 

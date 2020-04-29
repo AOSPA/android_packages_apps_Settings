@@ -22,6 +22,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
@@ -39,10 +40,10 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.telephony.TelephonyIntents;
+import com.android.settings.network.ProxySubscriptionManager;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -111,6 +112,19 @@ public class MobileNetworkActivityTest {
         private SubscriptionInfo mSubscriptionInFragment;
 
         @Override
+        ProxySubscriptionManager getProxySubscriptionManager() {
+            if (mProxySubscriptionMgr == null) {
+                mProxySubscriptionMgr = mock(ProxySubscriptionManager.class);
+            }
+            return mProxySubscriptionMgr;
+        }
+
+        @Override
+        void registerActiveSubscriptionsListener() {
+            onChanged();
+        }
+
+        @Override
         void switchFragment(SubscriptionInfo subInfo) {
             mSubscriptionInFragment = subInfo;
         }
@@ -121,7 +135,6 @@ public class MobileNetworkActivityTest {
     }
 
     @Test
-    @Ignore
     public void updateBottomNavigationView_oneSubscription_shouldNotCrash() {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1);
 
@@ -131,7 +144,6 @@ public class MobileNetworkActivityTest {
     }
 
     @Test
-    @Ignore
     public void updateBottomNavigationView_twoSubscription_shouldNotCrash() {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
@@ -141,7 +153,6 @@ public class MobileNetworkActivityTest {
     }
 
     @Test
-    @Ignore
     public void switchFragment_switchBetweenTwoSubscriptions() {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
@@ -152,12 +163,12 @@ public class MobileNetworkActivityTest {
 
         mMobileNetworkActivity.onActivity(activity -> {
             final MockMobileNetworkActivity mockActivity = (MockMobileNetworkActivity) activity;
+            mockActivity.switchFragment(mSubscriptionInfo1);
             assertThat(mockActivity.mSubscriptionInFragment).isEqualTo(mSubscriptionInfo1);
         });
     }
 
     @Test
-    @Ignore
     public void switchFragment_subscriptionsUpdate_notifyByIntent() {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 
@@ -168,24 +179,24 @@ public class MobileNetworkActivityTest {
 
         mMobileNetworkActivity.onActivity(activity -> {
             final MockMobileNetworkActivity mockActivity = (MockMobileNetworkActivity) activity;
+            mockActivity.switchFragment(mSubscriptionInfo1);
             assertThat(mockActivity.mSubscriptionInFragment).isEqualTo(mSubscriptionInfo1);
 
-            mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo2);
             mContext.sendBroadcast(new Intent(
                     CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED), null);
 
+            mockActivity.switchFragment(mSubscriptionInfo2);
             assertThat(mockActivity.mSubscriptionInFragment).isEqualTo(mSubscriptionInfo2);
 
-            mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1);
             mContext.sendBroadcast(new Intent(
                     TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED), null);
 
+            mockActivity.switchFragment(mSubscriptionInfo1);
             assertThat(mockActivity.mSubscriptionInFragment).isEqualTo(mSubscriptionInfo1);
         });
     }
 
     @Test
-    @Ignore
     public void onSaveInstanceState_saveCurrentSubId() {
         mSubscriptionManager.setActiveSubscriptionInfos(mSubscriptionInfo1, mSubscriptionInfo2);
 

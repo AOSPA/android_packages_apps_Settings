@@ -70,6 +70,20 @@ public class BiometricFragment extends InstrumentedFragment {
             });
             cleanup();
         }
+
+        @Override
+        public void onAuthenticationFailed() {
+            mClientExecutor.execute(() -> {
+                mClientCallback.onAuthenticationFailed();
+            });
+        }
+
+        @Override
+        public void onSystemEvent(int event) {
+            mClientExecutor.execute(() -> {
+                mClientCallback.onSystemEvent(event);
+            });
+        }
     };
 
     private final DialogInterface.OnClickListener mNegativeButtonListener =
@@ -114,10 +128,6 @@ public class BiometricFragment extends InstrumentedFragment {
         }
     }
 
-    boolean isAuthenticating() {
-        return mAuthenticating;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,7 +147,8 @@ public class BiometricFragment extends InstrumentedFragment {
                 .setConfirmationRequired(mBundle.getBoolean(
                         BiometricPrompt.KEY_REQUIRE_CONFIRMATION, true))
                 .setDisallowBiometricsIfPolicyExists(mBundle.getBoolean(
-                        BiometricPrompt.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, false));
+                        BiometricPrompt.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, false))
+                .setReceiveSystemEvents(true);
 
         mBiometricPrompt = builder.build();
         mCancellationSignal = new CancellationSignal();

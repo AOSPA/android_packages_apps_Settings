@@ -236,7 +236,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                     SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
         }
         if (securityType == SoftApConfiguration.SECURITY_TYPE_OWE
-                && band == SoftApConfiguration.BAND_ANY) {
+                && band == SoftApConfiguration.BAND_DUAL) {
             configBuilder.setBand(SoftApConfiguration.BAND_2GHZ);
         } else {
             configBuilder.setBand(band);

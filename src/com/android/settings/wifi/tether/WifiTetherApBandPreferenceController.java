@@ -56,7 +56,6 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     @Override
     public void updateDisplay() {
         final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
-        int tempBandIndex = mBandIndex;
         if (config == null) {
             mBandIndex = SoftApConfiguration.BAND_2GHZ;
             Log.d(TAG, "Updating band index to BAND_2GHZ because no config");
@@ -75,10 +74,6 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         preference.setEntries(mBandSummaries);
         preference.setEntryValues(mBandEntries);
 
-        if (mBandIndex >= mBandEntries.length) {
-            mBandIndex = tempBandIndex < mBandEntries.length ? tempBandIndex : 0;
-        }
-
         if (!is5GhzBandSupported()) {
             preference.setEnabled(false);
             preference.setSummary(R.string.wifi_ap_choose_2G);
@@ -95,6 +90,8 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
                 return mBandSummaries[0];
             case SoftApConfiguration.BAND_5GHZ:
                 return mBandSummaries[1];
+            case SoftApConfiguration.BAND_DUAL:
+                return mBandSummaries[2];
             default:
                 return mContext.getString(R.string.wifi_ap_prefer_5G);
         }
@@ -116,7 +113,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     }
 
     private int validateSelection(SoftApConfiguration config) {
-        if (config.getBand() == SoftApConfiguration.BAND_ANY
+        if (config.getBand() == SoftApConfiguration.BAND_DUAL
                 && config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE) {
             config = new SoftApConfiguration.Builder(config).setBand(
                 SoftApConfiguration.BAND_2GHZ).build();
@@ -182,7 +179,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             return false;
 
         for (int i = 0 ; i < mBandEntries.length; i++) {
-            if (Integer.parseInt(mBandEntries[i]) == SoftApConfiguration.BAND_ANY)
+            if (Integer.parseInt(mBandEntries[i]) == SoftApConfiguration.BAND_DUAL)
                 return true;
         }
 

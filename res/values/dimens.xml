@@ -56,6 +56,8 @@
 
     <dimen name="captioning_preview_height">200dp</dimen>
 
+    <dimen name="autoclick_preview_height">200dp</dimen>
+
     <dimen name="color_mode_preview_height">320dp</dimen>
 
     <dimen name="ring_progress_bar_thickness">4dp</dimen>
@@ -64,6 +66,8 @@
     <integer name="preferences_left_pane_weight">4</integer>
     <!-- Weight of the right pane in a multi-pane preference layout. So the split is 40:60 -->
     <integer name="preferences_right_pane_weight">6</integer>
+
+    <dimen name="nfc_detection_point_height">300dp</dimen>
 
     <dimen name="notification_app_icon_size">64dp</dimen>
     <dimen name="notification_app_icon_badge_size">20dp</dimen>
@@ -87,6 +91,7 @@
     <dimen name="zen_mode_button_padding_vertical">16dp</dimen>
     <dimen name="zen_schedule_rule_checkbox_padding">7dp</dimen>
     <dimen name="zen_schedule_day_margin">17dp</dimen>
+    <dimen name="zen_conversations_icon_size">56dp</dimen>
 
     <dimen name="rect_button_radius">8dp</dimen>
 
@@ -406,10 +411,16 @@
     <!-- Battery meter icon size of advanced bluetooth device -->
     <dimen name="advanced_bluetooth_battery_meter_width">7.8dp</dimen>
     <dimen name="advanced_bluetooth_battery_meter_height">13dp</dimen>
+    <dimen name="advanced_bluetooth_battery_width">15.5dp</dimen>
+    <dimen name="advanced_bluetooth_battery_height">27.5dp</dimen>
+    <dimen name="advanced_bluetooth_battery_right_margin">-4dp</dimen>
 
     <!-- Developer option bluetooth settings dialog -->
     <dimen name="developer_option_dialog_margin_start">8dp</dimen>
     <dimen name="developer_option_dialog_margin_top">8dp</dimen>
     <dimen name="developer_option_dialog_min_height">48dp</dimen>
     <dimen name="developer_option_dialog_padding_start">16dp</dimen>
+
+    <!-- Developer options shared data screens related dimensions -->
+    <dimen name="list_preferred_item_padding">16dp</dimen>
 </resources>

@@ -20,9 +20,10 @@ import static android.app.Notification.COLOR_DEFAULT;
 import static android.content.pm.PackageManager.MATCH_ANY_USER;
 import static android.content.pm.PackageManager.NameNotFoundException;
 import static android.os.UserHandle.USER_ALL;
-import static android.os.UserHandle.USER_CURRENT;
 
 import android.annotation.ColorInt;
+import android.annotation.UserIdInt;
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -60,6 +61,7 @@ public class NotificationSbnAdapter extends
     private PackageManager mPm;
     private @ColorInt int mBackgroundColor;
     private boolean mInNightMode;
+    private @UserIdInt int mCurrentUser;
 
     public NotificationSbnAdapter(Context context, PackageManager pm) {
         mContext = context;
@@ -71,6 +73,7 @@ public class NotificationSbnAdapter extends
         Configuration currentConfig = mContext.getResources().getConfiguration();
         mInNightMode = (currentConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK)
                 == Configuration.UI_MODE_NIGHT_YES;
+        mCurrentUser = ActivityManager.getCurrentUser();
         setHasStableIds(true);
     }
 
@@ -87,7 +90,7 @@ public class NotificationSbnAdapter extends
         final StatusBarNotification sbn = mValues.get(position);
         if (sbn != null) {
             holder.setIcon(loadIcon(sbn));
-            holder.setPackageName(loadPackageName(sbn.getPackageName()).toString());
+            holder.setPackageLabel(loadPackageLabel(sbn.getPackageName()).toString());
             holder.setTitle(getTitleString(sbn.getNotification()));
             holder.setSummary(getTextString(mContext, sbn.getNotification()));
             holder.setPostedTime(sbn.getPostTime());
@@ -98,6 +101,8 @@ public class NotificationSbnAdapter extends
                 mUserBadgeCache.put(userId, profile);
             }
             holder.setProfileBadge(mUserBadgeCache.get(userId));
+            holder.addOnClick(sbn.getPackageName(), sbn.getUserId(),
+                    sbn.getNotification().contentIntent);
         } else {
             Slog.w(TAG, "null entry in list at position " + position);
         }
@@ -128,7 +133,7 @@ public class NotificationSbnAdapter extends
         notifyDataSetChanged();
     }
 
-    private @NonNull CharSequence loadPackageName(String pkg) {
+    private @NonNull CharSequence loadPackageLabel(String pkg) {
         try {
             ApplicationInfo info = mPm.getApplicationInfo(pkg,
                     MATCH_ANY_USER);
@@ -188,7 +193,7 @@ public class NotificationSbnAdapter extends
     private int normalizeUserId(StatusBarNotification sbn) {
         int userId = sbn.getUserId();
         if (userId == USER_ALL) {
-            userId = USER_CURRENT;
+            userId = mCurrentUser;
         }
         return userId;
     }

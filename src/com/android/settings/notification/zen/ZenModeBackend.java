@@ -16,8 +16,6 @@
 
 package com.android.settings.notification.zen;
 
-import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_ANYONE;
-import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_IMPORTANT;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_OFF;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON;
@@ -289,42 +287,13 @@ public class ZenModeBackend {
 
     protected int getAlarmsTotalSilencePeopleSummary(int category) {
         if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
-            return R.string.zen_mode_from_none_messages;
+            return R.string.zen_mode_from_none;
         } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CALLS){
-            return R.string.zen_mode_from_none_calls;
+            return R.string.zen_mode_from_none;
         } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS) {
             return R.string.zen_mode_from_no_conversations;
         }
         return R.string.zen_mode_from_none;
-    }
-
-    protected int getContactsSummary(int category) {
-        int contactType = -1;
-        if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
-            if (isPriorityCategoryEnabled(category)) {
-                contactType = getPriorityMessageSenders();
-            }
-        } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CALLS) {
-            if (isPriorityCategoryEnabled(category)) {
-                contactType = getPriorityCallSenders();
-            }
-        }
-
-        switch (contactType) {
-            case NotificationManager.Policy.PRIORITY_SENDERS_ANY:
-                return R.string.zen_mode_from_anyone;
-            case NotificationManager.Policy.PRIORITY_SENDERS_CONTACTS:
-                return R.string.zen_mode_from_contacts;
-            case NotificationManager.Policy.PRIORITY_SENDERS_STARRED:
-                return R.string.zen_mode_from_starred;
-            case SOURCE_NONE:
-            default:
-                if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
-                    return R.string.zen_mode_from_none_messages;
-                } else {
-                    return R.string.zen_mode_from_none_calls;
-                }
-        }
     }
 
     protected int getConversationSummary() {
@@ -368,7 +337,7 @@ public class ZenModeBackend {
                 return R.string.zen_mode_from_starred;
             case ZenPolicy.PEOPLE_TYPE_NONE:
             default:
-                return R.string.zen_mode_from_none_messages;
+                return R.string.zen_mode_from_none;
         }
     }
 
@@ -383,20 +352,6 @@ public class ZenModeBackend {
             case ZEN_MODE_FROM_NONE:
             default:
                 return ZenPolicy.PEOPLE_TYPE_NONE;
-        }
-    }
-
-    protected static int getSettingFromPrefKey(String key) {
-        switch (key) {
-            case ZEN_MODE_FROM_ANYONE:
-                return NotificationManager.Policy.PRIORITY_SENDERS_ANY;
-            case ZEN_MODE_FROM_CONTACTS:
-                return NotificationManager.Policy.PRIORITY_SENDERS_CONTACTS;
-            case ZEN_MODE_FROM_STARRED:
-                return NotificationManager.Policy.PRIORITY_SENDERS_STARRED;
-            case ZEN_MODE_FROM_NONE:
-            default:
-                return SOURCE_NONE;
         }
     }
 
@@ -501,7 +456,7 @@ public class ZenModeBackend {
     private List<String> getStarredContacts() {
         Cursor cursor = null;
         try {
-            cursor = queryData();
+            cursor = queryStarredContactsData();
             return getStarredContacts(cursor);
         } finally {
             if (cursor != null) {
@@ -510,7 +465,7 @@ public class ZenModeBackend {
         }
     }
 
-    public String getStarredContactsSummary(Context context) {
+    String getStarredContactsSummary(Context context) {
         List<String> starredContacts = getStarredContacts();
         int numStarredContacts = starredContacts.size();
 
@@ -536,11 +491,22 @@ public class ZenModeBackend {
         return ListFormatter.getInstance().format(displayContacts);
     }
 
-    private Cursor queryData() {
+    String getContactsNumberSummary(Context context) {
+        return context.getResources().getString(R.string.zen_mode_contacts_senders_summary,
+                queryAllContactsData().getCount());
+    }
+
+    private Cursor queryStarredContactsData() {
         return mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
                 new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
                 ContactsContract.Data.STARRED + "=1", null,
                 ContactsContract.Data.TIMES_CONTACTED);
+    }
+
+    private Cursor queryAllContactsData() {
+        return mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
+                new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
+                null, null, null);
     }
 
     @VisibleForTesting

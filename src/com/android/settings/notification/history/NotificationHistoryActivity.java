@@ -70,6 +70,8 @@ public class NotificationHistoryActivity extends Activity {
     private PackageManager mPm;
 
     private HistoryLoader.OnHistoryLoaderListener mOnHistoryLoaderListener = notifications -> {
+        findViewById(R.id.today_list).setVisibility(
+                notifications.isEmpty() ? View.GONE : View.VISIBLE);
         // for each package, new header and recycler view
         for (NotificationHistoryPackage nhp : notifications) {
             View viewForPackage = LayoutInflater.from(this)
@@ -90,6 +92,7 @@ public class NotificationHistoryActivity extends Activity {
                     expand.setContentDescription(container.getVisibility() == View.VISIBLE
                             ? getString(R.string.condition_expand_hide)
                             : getString(R.string.condition_expand_show));
+                    expand.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
             });
 
             TextView label = viewForPackage.findViewById(R.id.label);
@@ -101,14 +104,12 @@ public class NotificationHistoryActivity extends Activity {
             count.setText(getResources().getQuantityString(R.plurals.notification_history_count,
                     nhp.notifications.size(), nhp.notifications.size()));
 
-            RecyclerView rv = viewForPackage.findViewById(R.id.notification_list);
-            LinearLayoutManager lm = new LinearLayoutManager(this);
-            rv.setLayoutManager(lm);
-            rv.setAdapter(new NotificationHistoryAdapter());
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                    rv.getContext(), lm.getOrientation());
-            rv.addItemDecoration(dividerItemDecoration);
-            ((NotificationHistoryAdapter) rv.getAdapter()).onRebuildComplete(nhp.notifications);
+            NotificationHistoryRecyclerView rv =
+                    viewForPackage.findViewById(R.id.notification_list);
+            rv.setAdapter(new NotificationHistoryAdapter(mNm, rv));
+            ((NotificationHistoryAdapter) rv.getAdapter()).onRebuildComplete(
+                    new ArrayList<>(nhp.notifications));
+
             mTodayView.addView(viewForPackage);
         }
     };
@@ -116,6 +117,7 @@ public class NotificationHistoryActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(R.string.notification_history);
         setContentView(R.layout.notification_history);
         mTodayView = findViewById(R.id.apps);
         mSnoozeView = findViewById(R.id.snoozed_list);
@@ -161,8 +163,8 @@ public class NotificationHistoryActivity extends Activity {
     private void bindSwitch() {
         SwitchBar bar = findViewById(R.id.switch_bar);
         if (bar != null) {
-            bar.setSwitchBarText(R.string.notification_history_turn_off,
-                    R.string.notification_history_turn_on);
+            bar.setSwitchBarText(R.string.notification_history_toggle,
+                    R.string.notification_history_toggle);
             bar.show();
             try {
                 bar.addOnSwitchChangeListener(mOnSwitchClickListener);
@@ -182,6 +184,10 @@ public class NotificationHistoryActivity extends Activity {
         } else {
             mHistoryOn.setVisibility(View.GONE);
             mHistoryOff.setVisibility(View.VISIBLE);
+            mHistoryOff.findViewById(R.id.history_off_title).setVisibility(View.VISIBLE);
+            mHistoryOff.findViewById(R.id.history_off_summary).setVisibility(View.VISIBLE);
+            mHistoryOff.findViewById(R.id.history_toggled_on_title).setVisibility(View.GONE);
+            mHistoryOff.findViewById(R.id.history_toggled_on_summary).setVisibility(View.GONE);
             mTodayView.removeAllViews();
         }
     }
@@ -232,7 +238,17 @@ public class NotificationHistoryActivity extends Activity {
                 Settings.Secure.putInt(getContentResolver(),
                         NOTIFICATION_HISTORY_ENABLED,
                         isChecked ? 1 : 0);
-                toggleViews(isChecked);
+                mHistoryOn.setVisibility(View.GONE);
+                mHistoryOff.findViewById(R.id.history_off_title).setVisibility(
+                        isChecked ? View.GONE : View.VISIBLE);
+                mHistoryOff.findViewById(R.id.history_off_summary).setVisibility(
+                        isChecked ? View.GONE : View.VISIBLE);
+                mHistoryOff.findViewById(R.id.history_toggled_on_title).setVisibility(
+                        isChecked ? View.VISIBLE : View.GONE);
+                mHistoryOff.findViewById(R.id.history_toggled_on_summary).setVisibility(
+                        isChecked ? View.VISIBLE : View.GONE);
+                mTodayView.removeAllViews();
+                mHistoryOff.setVisibility(View.VISIBLE);
             };
 
     private final NotificationListenerService mListener = new NotificationListenerService() {
@@ -245,8 +261,9 @@ public class NotificationHistoryActivity extends Activity {
             StatusBarNotification[] dismissed = null;
             try {
                 snoozed = getSnoozedNotifications();
-                dismissed = mNm.getHistoricalNotifications(
-                    NotificationHistoryActivity.this.getPackageName(), 6, false);
+                dismissed = mNm.getHistoricalNotificationsWithAttribution(
+                        NotificationHistoryActivity.this.getPackageName(),
+                        NotificationHistoryActivity.this.getAttributionTag(), 6, false);
             } catch (SecurityException | RemoteException e) {
                 Log.d(TAG, "OnPaused called while trying to retrieve notifications");
             }

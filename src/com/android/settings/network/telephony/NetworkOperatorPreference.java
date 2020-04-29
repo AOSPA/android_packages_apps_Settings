@@ -19,6 +19,7 @@ package com.android.settings.network.telephony;
 import static android.telephony.SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
 
 import android.content.Context;
+import android.telephony.AccessNetworkConstants.AccessNetworkType;
 import android.telephony.CellIdentity;
 import android.telephony.CellIdentityGsm;
 import android.telephony.CellIdentityLte;
@@ -222,5 +223,27 @@ public class NetworkOperatorPreference extends Preference {
         final Context context = getContext();
         setIcon(MobileNetworkUtils.getSignalStrengthIcon(context, level, NUM_SIGNAL_STRENGTH_BINS,
                 getIconIdForCell(mCellInfo), false));
+    }
+
+    public int getAccessNetworkType() {
+        int cellInfoType = mCellId == null ? CellInfo.TYPE_UNKNOWN : mCellId.getType();
+        int ant;
+        switch (cellInfoType) {
+            case CellInfo.TYPE_GSM:     ant = AccessNetworkType.GERAN;
+                                        break;
+            case CellInfo.TYPE_LTE:     ant = AccessNetworkType.EUTRAN;
+                                        break;
+            case CellInfo.TYPE_WCDMA:   // fallthrough
+            case CellInfo.TYPE_TDSCDMA: ant = AccessNetworkType.UTRAN;
+                                        break;
+            case CellInfo.TYPE_NR:      ant = AccessNetworkType.NGRAN;
+                                        break;
+            default:                    ant = AccessNetworkType.UNKNOWN;
+        }
+
+        Log.d(TAG, "AccessNetworkType: " + AccessNetworkType.toString(ant)
+                + " (" + ant + ")"
+                + ", mCellInfo: " + CellInfoUtil.cellInfoToString(mCellInfo));
+        return ant;
     }
 }

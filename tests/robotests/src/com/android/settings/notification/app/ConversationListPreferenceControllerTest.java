@@ -16,45 +16,30 @@
 
 package com.android.settings.notification.app;
 
-import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
-import static android.app.NotificationManager.IMPORTANCE_HIGH;
-import static android.app.NotificationManager.IMPORTANCE_LOW;
-import static android.app.NotificationManager.IMPORTANCE_MIN;
-import static android.app.NotificationManager.IMPORTANCE_NONE;
-import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
-
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationChannel;
-import android.app.NotificationChannelGroup;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.os.Bundle;
-import android.os.UserManager;
 import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
-import android.view.View;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,7 +52,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class ConversationListPreferenceControllerTest {
@@ -95,18 +79,19 @@ public class ConversationListPreferenceControllerTest {
     @Test
     public void testPopulateList_hideIfNoConversations() {
         PreferenceCategory outerContainer = mock(PreferenceCategory.class);
-        PreferenceCategory innerContainer = mock(PreferenceCategory.class);
 
-        mController.populateList(new ArrayList<>(), outerContainer, innerContainer);
+        mController.populateList(new ArrayList<>(), outerContainer);
 
         verify(outerContainer).setVisible(false);
-        verify(innerContainer, never()).addPreference(any());
+        verify(outerContainer, never()).addPreference(any());
     }
 
     @Test
     public void testPopulateList_validConversations() {
-        PreferenceCategory outerContainer = mock(PreferenceCategory.class);
-        PreferenceCategory innerContainer = mock(PreferenceCategory.class);
+        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        PreferenceScreen ps = preferenceManager.createPreferenceScreen(mContext);
+        PreferenceCategory outerContainer = spy(new PreferenceCategory(mContext));
+        ps.addPreference(outerContainer);
 
         ConversationChannelWrapper ccw = new ConversationChannelWrapper();
         ccw.setNotificationChannel(mock(NotificationChannel.class));
@@ -117,10 +102,8 @@ public class ConversationListPreferenceControllerTest {
         ArrayList<ConversationChannelWrapper> list = new ArrayList<>();
         list.add(ccw);
 
-        mController.populateList(list, outerContainer, innerContainer);
-
-        verify(outerContainer).setVisible(true);
-        verify(innerContainer, times(1)).addPreference(any());
+        mController.populateList(list, outerContainer);
+        verify(outerContainer, times(1)).addPreference(any());
     }
 
     @Test
@@ -231,6 +214,11 @@ public class ConversationListPreferenceControllerTest {
 
         private TestPreferenceController(Context context, NotificationBackend backend) {
             super(context, backend);
+        }
+
+        @Override
+        boolean matchesFilter(ConversationChannelWrapper conversation) {
+            return true;
         }
 
         @Override

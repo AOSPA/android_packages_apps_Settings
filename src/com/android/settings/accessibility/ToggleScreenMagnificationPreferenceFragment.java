@@ -71,8 +71,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
     private int mUserShortcutType = UserShortcutType.EMPTY;
-    // Used to restore the edit dialog status.
-    private int mUserShortcutTypeCache = UserShortcutType.EMPTY;
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
     private CheckBox mTripleTapTypeCheckBox;
@@ -246,13 +244,27 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
     }
 
+    private void setDialogTextAreaClickListener(View dialogView, CheckBox checkBox) {
+        final View dialogTextArea = dialogView.findViewById(R.id.container);
+        dialogTextArea.setOnClickListener(v -> {
+            checkBox.toggle();
+            updateUserShortcutType(/* saveChanges= */ false);
+        });
+    }
+
     private void initializeDialogCheckBox(AlertDialog dialog) {
         final View dialogSoftwareView = dialog.findViewById(R.id.software_shortcut);
         mSoftwareTypeCheckBox = dialogSoftwareView.findViewById(R.id.checkbox);
+        setDialogTextAreaClickListener(dialogSoftwareView, mSoftwareTypeCheckBox);
+
         final View dialogHardwareView = dialog.findViewById(R.id.hardware_shortcut);
         mHardwareTypeCheckBox = dialogHardwareView.findViewById(R.id.checkbox);
+        setDialogTextAreaClickListener(dialogHardwareView, mHardwareTypeCheckBox);
+
         final View dialogTripleTapView = dialog.findViewById(R.id.triple_tap_shortcut);
         mTripleTapTypeCheckBox = dialogTripleTapView.findViewById(R.id.checkbox);
+        setDialogTextAreaClickListener(dialogTripleTapView, mTripleTapTypeCheckBox);
+
         final View advancedView = dialog.findViewById(R.id.advanced_shortcut);
         updateAlertDialogCheckState();
 
@@ -269,16 +281,15 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     private void updateAlertDialogCheckState() {
-        updateCheckStatus(mSoftwareTypeCheckBox, UserShortcutType.SOFTWARE);
-        updateCheckStatus(mHardwareTypeCheckBox, UserShortcutType.HARDWARE);
-        updateCheckStatus(mTripleTapTypeCheckBox, UserShortcutType.TRIPLETAP);
+        if (mUserShortcutTypeCache != UserShortcutType.EMPTY) {
+            updateCheckStatus(mSoftwareTypeCheckBox, UserShortcutType.SOFTWARE);
+            updateCheckStatus(mHardwareTypeCheckBox, UserShortcutType.HARDWARE);
+            updateCheckStatus(mTripleTapTypeCheckBox, UserShortcutType.TRIPLETAP);
+        }
     }
 
     private void updateCheckStatus(CheckBox checkBox, @UserShortcutType int type) {
         checkBox.setChecked((mUserShortcutTypeCache & type) == type);
-        checkBox.setOnClickListener(v -> {
-            updateUserShortcutType(/* saveChanges= */ false);
-        });
     }
 
     private void updateUserShortcutType(boolean saveChanges) {
@@ -446,7 +457,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        mUserShortcutTypeCache = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+        // Do not restore shortcut in shortcut chooser dialog when shortcutPreference is turned off.
+        mUserShortcutTypeCache = mShortcutPreference.isChecked()
+                ? getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE)
+                : UserShortcutType.EMPTY;
         showDialog(DialogEnums.MAGNIFICATION_EDIT_SHORTCUT);
     }
 

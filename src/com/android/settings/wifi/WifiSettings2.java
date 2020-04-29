@@ -22,6 +22,7 @@ import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -69,11 +70,13 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
+import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
+import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
 import com.android.wifitrackerlib.WifiPickerTracker;
@@ -109,6 +112,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     @VisibleForTesting
     static final int ADD_NETWORK_REQUEST = 2;
     static final int CONFIG_NETWORK_REQUEST = 3;
+    static final int MANAGE_SUBSCRIPTION = 4;
 
     private static final String PREF_KEY_EMPTY_WIFI_LIST = "wifi_empty_list";
     // TODO(b/70983952): Rename these to use WifiEntry instead of AccessPoint.
@@ -428,6 +432,9 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 }
             }
             return;
+        } else if (requestCode == MANAGE_SUBSCRIPTION) {
+            //Do nothing
+            return;
         }
 
         final boolean formerlyRestricted = mIsRestricted;
@@ -532,7 +539,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
             final WifiEntry selectedEntry =
                     ((LongPressWifiEntryPreference) preference).getWifiEntry();
 
-            if (selectedEntry.isSaved()) {
+            if (selectedEntry.getWifiConfiguration() != null) {
                 if (!selectedEntry.getWifiConfiguration().getNetworkSelectionStatus()
                         .hasEverConnected()) {
                     launchConfigNewNetworkFragment(selectedEntry);
@@ -641,6 +648,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 setOffMessage();
                 setAdditionalSettingsSummaries();
                 setProgressBarVisible(false);
+                mClickedConnect = false;
                 break;
         }
     }
@@ -668,11 +676,17 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     @Override
     public void onNumSavedNetworksChanged() {
+        if (isFinishingOrDestroyed()) {
+            return;
+        }
         setAdditionalSettingsSummaries();
     }
 
     @Override
     public void onNumSavedSubscriptionsChanged() {
+        if (isFinishingOrDestroyed()) {
+            return;
+        }
         setAdditionalSettingsSummaries();
     }
 
@@ -727,6 +741,11 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 pref.setOnGearClickListener(preference -> {
                     launchNetworkDetailsFragment(pref);
                 });
+
+                if (mClickedConnect) {
+                    mClickedConnect = false;
+                    scrollToPreference(mConnectedWifiEntryPreferenceCategory);
+                }
             }
         } else {
             mConnectedWifiEntryPreferenceCategory.removeAll();
@@ -750,6 +769,12 @@ public class WifiSettings2 extends RestrictedSettingsFragment
             pref.setKey(wifiEntry.getKey());
             pref.setOrder(index++);
             pref.refresh();
+
+            if (wifiEntry.getHelpUriString() != null) {
+                pref.setOnButtonClickListener(preference -> {
+                    openSubscriptionHelpPage(wifiEntry);
+                });
+            }
             mWifiEntryPreferenceCategory.addPreference(pref);
         }
         removeCachedPrefs(mWifiEntryPreferenceCategory);
@@ -936,18 +961,30 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     @Override
     public void onForget(WifiDialog2 dialog) {
-        forget(mDialogWifiEntry);
+        forget(dialog.getWifiEntry());
     }
 
     @Override
     public void onSubmit(WifiDialog2 dialog) {
-        final int dialogMode = mDialog.getController().getMode();
+        final int dialogMode = dialog.getMode();
+        final WifiConfiguration config = dialog.getController().getConfig();
+        final WifiEntry wifiEntry = dialog.getWifiEntry();
 
         if (dialogMode == WifiConfigUiBase2.MODE_MODIFY) {
-            mWifiManager.save(mDialogWifiEntry.getWifiConfiguration(), mSaveListener);
+            if (config == null) {
+                Toast.makeText(getContext(), R.string.wifi_failed_save_message,
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                mWifiManager.save(config, mSaveListener);
+            }
         } else if (dialogMode == WifiConfigUiBase2.MODE_CONNECT
-                || (dialogMode == WifiConfigUiBase2.MODE_VIEW && mDialogWifiEntry.canConnect())) {
-            connect(mDialogWifiEntry, false /* editIfNoConfig */, false /* fullScreenEdit*/);
+                || (dialogMode == WifiConfigUiBase2.MODE_VIEW && wifiEntry.canConnect())) {
+            if (config == null) {
+                connect(wifiEntry, false /* editIfNoConfig */,
+                        false /* fullScreenEdit*/);
+            } else {
+                mWifiManager.connect(config, new WifiConnectActionListener());
+            }
         }
     }
 
@@ -963,7 +1000,8 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         wifiEntry.forget(null /* callback */);
     }
 
-    private void connect(WifiEntry wifiEntry, boolean editIfNoConfig, boolean fullScreenEdit) {
+    @VisibleForTesting
+    void connect(WifiEntry wifiEntry, boolean editIfNoConfig, boolean fullScreenEdit) {
         mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_WIFI_CONNECT,
                 wifiEntry.isSaved());
 
@@ -976,23 +1014,36 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     private class WifiConnectActionListener implements WifiManager.ActionListener {
         @Override
         public void onSuccess() {
-            // Do nothing.
+            mClickedConnect = true;
         }
 
         @Override
         public void onFailure(int reason) {
-            final Activity activity = getActivity();
-            if (isFisishingOrDestroyed(activity)) {
+            if (isFinishingOrDestroyed()) {
                 return;
             }
-
-            Toast.makeText(activity, R.string.wifi_failed_connect_message, Toast.LENGTH_SHORT)
+            Toast.makeText(getContext(), R.string.wifi_failed_connect_message, Toast.LENGTH_SHORT)
                     .show();
         }
     };
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.wifi_settings2);
+            new BaseSearchIndexProvider(R.xml.wifi_settings2) {
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+
+                    final WifiManager wifiManager = context.getSystemService(WifiManager.class);
+                    if (WifiSavedConfigUtils.getAllConfigsCount(context, wifiManager) == 0) {
+                        keys.add(PREF_KEY_SAVED_NETWORKS);
+                    }
+
+                    if (!DataUsageUtils.hasWifiRadio(context)) {
+                        keys.add(PREF_KEY_DATA_USAGE);
+                    }
+                    return keys;
+                }
+            };
 
     private class WifiEntryConnectCallback implements ConnectCallback {
         final WifiEntry mConnectWifiEntry;
@@ -1008,18 +1059,19 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
         @Override
         public void onConnectResult(@ConnectStatus int status) {
-            final Activity activity = getActivity();
-            if (isFisishingOrDestroyed(activity)) {
+            if (isFinishingOrDestroyed()) {
                 return;
             }
 
-            if (status == ConnectCallback.CONNECT_STATUS_FAILURE_NO_CONFIG) {
+            if (status == ConnectCallback.CONNECT_STATUS_SUCCESS) {
+                mClickedConnect = true;
+            } else if (status == ConnectCallback.CONNECT_STATUS_FAILURE_NO_CONFIG) {
                 if (mEditIfNoConfig) {
                     // Edit an unsaved secure Wi-Fi network.
                     if (mFullScreenEdit) {
                         launchConfigNewNetworkFragment(mConnectWifiEntry);
                     } else {
-                        showDialog(mConnectWifiEntry, WifiConfigUiBase2.MODE_MODIFY);
+                        showDialog(mConnectWifiEntry, WifiConfigUiBase2.MODE_CONNECT);
                     }
                 }
             } else if (status == CONNECT_STATUS_FAILURE_UNKNOWN) {
@@ -1027,10 +1079,6 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                         Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    private boolean isFisishingOrDestroyed(Activity activity) {
-        return activity == null || activity.isFinishing() || activity.isDestroyed();
     }
 
     private void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
@@ -1060,5 +1108,22 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         }
         int reason = networkStatus.getNetworkSelectionDisableReason();
         return WifiConfiguration.NetworkSelectionStatus.DISABLED_BY_WRONG_PASSWORD == reason;
+    }
+
+    @VisibleForTesting
+    void openSubscriptionHelpPage(WifiEntry wifiEntry) {
+        final Intent intent = getHelpIntent(getContext(), wifiEntry.getHelpUriString());
+        if (intent != null) {
+            try {
+                startActivityForResult(intent, MANAGE_SUBSCRIPTION);
+            } catch (ActivityNotFoundException e) {
+                Log.e(TAG, "Activity was not found for intent, " + intent.toString());
+            }
+        }
+    }
+
+    @VisibleForTesting
+    Intent getHelpIntent(Context context, String helpUrlString) {
+        return HelpUtils.getHelpIntent(context, helpUrlString, context.getClass().getName());
     }
 }

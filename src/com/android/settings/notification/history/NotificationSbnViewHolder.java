@@ -16,19 +16,27 @@
 
 package com.android.settings.notification.history;
 
+import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
+import android.os.UserHandle;
 import android.text.TextUtils;
+import android.util.Slog;
 import android.view.View;
 import android.widget.DateTimeView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.view.AccessibilityDelegateCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 
 public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
+    private static final String TAG = "SbnViewHolder";
 
     private final TextView mPkgName;
     private final ImageView mIcon;
@@ -63,7 +71,7 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
         mIcon.setImageDrawable(icon);
     }
 
-    void setPackageName(String pkg) {
+    void setPackageLabel(String pkg) {
         mPkgName.setText(pkg);
     }
 
@@ -73,5 +81,39 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
 
     void setProfileBadge(Drawable badge) {
         mProfileBadge.setImageDrawable(badge);
+    }
+
+    void addOnClick(String pkg, int userId, PendingIntent pi) {
+        itemView.setOnClickListener(v -> {
+            if (pi != null) {
+                try {
+                    pi.send();
+                } catch (PendingIntent.CanceledException e) {
+                    Slog.e(TAG, "Could not launch", e);
+                }
+            } else {
+                Intent appIntent = itemView.getContext().getPackageManager()
+                        .getLaunchIntentForPackage(pkg);
+                appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try {
+                    itemView.getContext().startActivityAsUser(appIntent, UserHandle.of(userId));
+                } catch (ActivityNotFoundException e) {
+                    Slog.e(TAG, "no launch activity", e);
+                }
+            }
+        });
+        ViewCompat.setAccessibilityDelegate(itemView, new AccessibilityDelegateCompat() {
+            @Override
+            public void onInitializeAccessibilityNodeInfo(View host,
+                    AccessibilityNodeInfoCompat info) {
+                super.onInitializeAccessibilityNodeInfo(host, info);
+                CharSequence description = host.getResources().getText(
+                        R.string.notification_history_open_notification);
+                AccessibilityNodeInfoCompat.AccessibilityActionCompat customClick =
+                        new AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+                                AccessibilityNodeInfoCompat.ACTION_CLICK, description);
+                info.addAction(customClick);
+            }
+        });
     }
 }

@@ -24,6 +24,7 @@ import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toolbar;
 
@@ -53,8 +54,17 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     @VisibleForTesting
     static final int SUB_ID_NULL = Integer.MIN_VALUE;
 
-    private ProxySubscriptionManager mProxySubscriptionMgr;
+    @VisibleForTesting
+    ProxySubscriptionManager mProxySubscriptionMgr;
+
     private int mCurSubscriptionId;
+
+    // This flag forces subscription information fragment to be re-created.
+    // Otherwise, fragment will be kept when subscription id has not been changed.
+    //
+    // Set initial value to true allows subscription information fragment to be re-created when
+    // Activity re-create occur.
+    private boolean mFragmentForceReload = true;
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -68,6 +78,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         }
         int oldSubId = mCurSubscriptionId;
         mCurSubscriptionId = updateSubscriptionIndex;
+        mFragmentForceReload = (mCurSubscriptionId == oldSubId);
         updateSubscriptions(getSubscription());
 
         // If the subscription has changed or the new intent doesnt contain the opt in action,
@@ -102,9 +113,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(this);
-        mProxySubscriptionMgr.setLifecycle(getLifecycle());
-        mProxySubscriptionMgr.addActiveSubscriptionsListener(this);
+        getProxySubscriptionManager().setLifecycle(getLifecycle());
 
         final Intent startIntent = getIntent();
         validate(startIntent);
@@ -117,6 +126,23 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         final SubscriptionInfo subscription = getSubscription();
         updateTitleAndNavigation(subscription);
         maybeShowContactDiscoveryDialog(mCurSubscriptionId);
+
+        // Since onChanged() will take place immediately when addActiveSubscriptionsListener(),
+        // perform registration after mCurSubscriptionId been configured.
+        registerActiveSubscriptionsListener();
+    }
+
+    @VisibleForTesting
+    ProxySubscriptionManager getProxySubscriptionManager() {
+        if (mProxySubscriptionMgr == null) {
+            mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(this);
+        }
+        return mProxySubscriptionMgr;
+    }
+
+    @VisibleForTesting
+    void registerActiveSubscriptionsListener() {
+        getProxySubscriptionManager().addActiveSubscriptionsListener(this);
     }
 
     /**
@@ -125,9 +151,13 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     public void onChanged() {
         SubscriptionInfo info = getSubscription();
         int oldSubIndex = mCurSubscriptionId;
-        int subIndex = info.getSubscriptionId();
         updateSubscriptions(info);
+
         // Remove the dialog if the subscription associated with this activity changes.
+        if (info == null) {
+            return;
+        }
+        int subIndex = info.getSubscriptionId();
         if (subIndex != oldSubIndex) {
             removeContactDiscoveryDialog(oldSubIndex);
         }
@@ -135,7 +165,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
 
     @Override
     protected void onStart() {
-        mProxySubscriptionMgr.setLifecycle(getLifecycle());
+        getProxySubscriptionManager().setLifecycle(getLifecycle());
         super.onStart();
         // updateSubscriptions doesn't need to be called, onChanged will always be called after we
         // register a listener.
@@ -181,6 +211,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         switchFragment(subscription);
 
         mCurSubscriptionId = subscriptionIndex;
+        mFragmentForceReload = false;
     }
 
     /**
@@ -191,17 +222,20 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     @VisibleForTesting
     SubscriptionInfo getSubscription() {
         if (mCurSubscriptionId != SUB_ID_NULL) {
-            final SubscriptionInfo subInfo = SubscriptionUtil.getAvailableSubscription(
-                    this, mProxySubscriptionMgr, mCurSubscriptionId);
-            if (subInfo != null) {
-                return subInfo;
-            }
+            return getSubscriptionForSubId(mCurSubscriptionId);
         }
-        final List<SubscriptionInfo> subInfos = mProxySubscriptionMgr.getActiveSubscriptionsInfo();
+        final List<SubscriptionInfo> subInfos = getProxySubscriptionManager()
+                .getActiveSubscriptionsInfo();
         if (CollectionUtils.isEmpty(subInfos)) {
             return null;
         }
         return subInfos.get(0);
+    }
+
+    @VisibleForTesting
+    SubscriptionInfo getSubscriptionForSubId(int subId) {
+        return SubscriptionUtil.getAvailableSubscription(this,
+                getProxySubscriptionManager(), subId);
     }
 
     @VisibleForTesting
@@ -213,9 +247,18 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         final Bundle bundle = new Bundle();
         bundle.putInt(Settings.EXTRA_SUB_ID, subId);
 
+        final String fragmentTag = buildFragmentTag(subId);
+        if (fragmentManager.findFragmentByTag(fragmentTag) != null) {
+            if (!mFragmentForceReload) {
+                Log.d(TAG, "Keep current fragment: " + fragmentTag);
+                return;
+            }
+            Log.d(TAG, "Construct fragment: " + fragmentTag);
+        }
+
         final Fragment fragment = new MobileNetworkSettings();
         fragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.content_frame, fragment, buildFragmentTag(subId));
+        fragmentTransaction.replace(R.id.content_frame, fragment, fragmentTag);
         fragmentTransaction.commit();
     }
 

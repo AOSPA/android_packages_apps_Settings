@@ -79,13 +79,13 @@ public class ZenModeSettingsTest {
     public void testGetCallsSettingSummary_contacts() {
         Policy policy = new Policy(Policy.PRIORITY_CATEGORY_ALARMS | Policy.PRIORITY_CATEGORY_CALLS,
                 Policy.PRIORITY_SENDERS_CONTACTS, 0, 0);
-        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("Allow from contacts");
+        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("Contacts");
     }
 
     @Test
     public void testGetCallsSettingSummary_repeatCallers() {
         Policy policy = new Policy(Policy.PRIORITY_CATEGORY_REPEAT_CALLERS, 0, 0, 0);
-        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("Allow from repeat callers");
+        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("Repeat callers");
     }
 
     @Test
@@ -94,35 +94,7 @@ public class ZenModeSettingsTest {
                 Policy.PRIORITY_CATEGORY_REPEAT_CALLERS | Policy.PRIORITY_CATEGORY_CALLS,
                 Policy.PRIORITY_SENDERS_STARRED, 0, 0);
         assertThat(mBuilder.getCallsSettingSummary(policy))
-                .isEqualTo("Allow from starred contacts and repeat callers");
-    }
-
-    @Test
-    public void testGetSoundSettingSummary_allOff() {
-        Policy policy = new Policy(0, 0, 0, 0);
-        assertThat(mBuilder.getSoundSettingSummary(policy)).isEqualTo("Muted");
-    }
-
-    @Test
-    public void testGetSoundSettingSummary_allOn() {
-        Policy policy = new Policy(Policy.PRIORITY_CATEGORY_ALARMS | Policy.PRIORITY_CATEGORY_SYSTEM
-                | Policy.PRIORITY_CATEGORY_MEDIA, 0, 0, 0);
-        assertThat(mBuilder.getSoundSettingSummary(policy))
-                .isEqualTo("Muted, but allow alarms, media, and touch sounds");
-    }
-
-    @Test
-    public void testGetSoundSettingSummary_allOffButOne() {
-        Policy policy = new Policy(Policy.PRIORITY_CATEGORY_MEDIA, 0, 0, 0);
-        assertThat(mBuilder.getSoundSettingSummary(policy)).isEqualTo("Muted, but allow media");
-    }
-
-    @Test
-    public void testGetSoundSettingSummary_allOffButTwo() {
-        Policy policy = new Policy(Policy.PRIORITY_CATEGORY_SYSTEM
-                | Policy.PRIORITY_CATEGORY_MEDIA, 0, 0, 0);
-        assertThat(mBuilder.getSoundSettingSummary(policy))
-                .isEqualTo("Muted, but allow media and touch sounds");
+                .isEqualTo("Starred contacts and repeat callers");
     }
 
     @Test

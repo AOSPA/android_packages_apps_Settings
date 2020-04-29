@@ -16,7 +16,6 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -43,6 +42,7 @@
                 android:layout_gravity="center_horizontal"
                 android:contentDescription="@string/notification_history"
                 android:scaleType="fitCenter"
+                android:focusable="false"
                 android:tint="?android:attr/colorControlNormal"
                 android:src="@drawable/ic_history" />
 
@@ -55,6 +55,7 @@
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
                 android:layout_gravity="center_horizontal"
+                android:focusable="true"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/notification_history_off_title_extended" />
 
@@ -68,8 +69,38 @@
                 android:layout_marginTop="16dp"
                 android:layout_gravity="center_horizontal"
                 android:textAlignment="center"
+                android:focusable="true"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/notification_history_summary" />
+                android:text="@string/notification_history_off_summary" />
+
+            <TextView
+                android:id="@+id/history_toggled_on_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/history_image"
+                android:layout_marginTop="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:layout_gravity="center_horizontal"
+                android:focusable="true"
+                android:visibility="gone"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/history_toggled_on_title" />
+
+            <TextView
+                android:id="@+id/history_toggled_on_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/history_off_title"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:focusable="true"
+                android:visibility="gone"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/history_toggled_on_summary" />
         </LinearLayout>
 
         <LinearLayout
@@ -106,11 +137,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clipChildren="true"
-                        settings:fastScrollEnabled="true"
-                        settings:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
-                        settings:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
-                        settings:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
-                        settings:fastScrollVerticalTrackDrawable="@drawable/line_drawable"/>
+                        android:scrollbars="none"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
@@ -141,11 +168,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clipChildren="true"
-                        settings:fastScrollEnabled="true"
-                        settings:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
-                        settings:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
-                        settings:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
-                        settings:fastScrollVerticalTrackDrawable="@drawable/line_drawable"/>
+                        android:scrollbars="none"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>

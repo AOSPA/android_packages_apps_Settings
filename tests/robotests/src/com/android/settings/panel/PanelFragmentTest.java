@@ -23,6 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -30,6 +31,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,6 +43,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -51,7 +54,10 @@ import java.util.Objects;
 @RunWith(RobolectricTestRunner.class)
 public class PanelFragmentTest {
 
+    private static final String TITLE = "title";
+    private static final String TITLE2 = "title2";
     private static final String SUBTITLE = "subtitle";
+    private static final String SUBTITLE2 = "subtitle2";
 
     private Context mContext;
     private PanelFragment mPanelFragment;
@@ -59,6 +65,8 @@ public class PanelFragmentTest {
     private FakeFeatureFactory mFakeFeatureFactory;
     private PanelFeatureProvider mPanelFeatureProvider;
     private FakePanelContent mFakePanelContent;
+    private ArgumentCaptor<PanelContentCallback> mPanelContentCbs = ArgumentCaptor.forClass(
+            PanelContentCallback.class);
 
     private final String FAKE_EXTRA = "fake_extra";
 
@@ -69,9 +77,11 @@ public class PanelFragmentTest {
         mPanelFeatureProvider = spy(new PanelFeatureProviderImpl());
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.panelFeatureProvider = mPanelFeatureProvider;
-        mFakePanelContent = new FakePanelContent();
+        mFakePanelContent = spy(new FakePanelContent());
         doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any());
+    }
 
+    private void initFakeActivity() {
         mActivity = spy(Robolectric.buildActivity(FakeSettingsPanelActivity.class).setup().get());
 
         mPanelFragment =
@@ -86,6 +96,7 @@ public class PanelFragmentTest {
 
     @Test
     public void onCreateView_countdownLatch_setup() {
+        initFakeActivity();
         mPanelFragment.onCreateView(LayoutInflater.from(mContext),
                 new LinearLayout(mContext), null);
         PanelSlicesLoaderCountdownLatch countdownLatch =
@@ -99,6 +110,7 @@ public class PanelFragmentTest {
 
     @Test
     public void onCreate_logsOpenEvent() {
+        initFakeActivity();
         verify(mFakeFeatureFactory.metricsFeatureProvider).action(
                 0,
                 SettingsEnums.PAGE_VISIBLE,
@@ -109,6 +121,7 @@ public class PanelFragmentTest {
 
     @Test
     public void onDestroy_logCloseEvent() {
+        initFakeActivity();
         mPanelFragment.onDestroyView();
         verify(mFakeFeatureFactory.metricsFeatureProvider).action(
                 0,
@@ -120,6 +133,7 @@ public class PanelFragmentTest {
 
     @Test
     public void panelSeeMoreClick_logsCloseEvent() {
+        initFakeActivity();
         final View.OnClickListener listener = mPanelFragment.getSeeMoreListener();
         listener.onClick(null);
         verify(mActivity).finish();
@@ -136,6 +150,7 @@ public class PanelFragmentTest {
 
     @Test
     public void panelDoneClick_logsCloseEvent() {
+        initFakeActivity();
         final View.OnClickListener listener = mPanelFragment.getCloseListener();
         listener.onClick(null);
         verify(mActivity).finish();
@@ -178,10 +193,85 @@ public class PanelFragmentTest {
 
     @Test
     public void notSupportIcon_displayDefaultHeaderLayout() {
-        final View titleView = mPanelFragment.mLayoutView.findViewById(R.id.panel_title);
-        final View panelHeader = mPanelFragment.mLayoutView.findViewById(R.id.panel_header);
+        final ActivityController<FakeSettingsPanelActivity> activityController =
+                Robolectric.buildActivity(FakeSettingsPanelActivity.class);
+        activityController.setup();
+        final PanelFragment panelFragment = (PanelFragment)
+                Objects.requireNonNull(activityController
+                        .get()
+                        .getSupportFragmentManager()
+                        .findFragmentById(R.id.main_content));
+
+        final View titleView = panelFragment.mLayoutView.findViewById(R.id.panel_title);
+        final View panelHeader = panelFragment.mLayoutView.findViewById(R.id.panel_header);
 
         assertThat(panelHeader.getVisibility()).isEqualTo(View.GONE);
         assertThat(titleView.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void onHeaderChanged_updateHeader_verifyTitle() {
+        mFakePanelContent.setIcon(IconCompat.createWithResource(mContext, R.drawable.ic_android));
+        mFakePanelContent.setTitle(TITLE);
+        mFakePanelContent.setSubTitle(SUBTITLE);
+        final ActivityController<FakeSettingsPanelActivity> activityController =
+                Robolectric.buildActivity(FakeSettingsPanelActivity.class);
+        activityController.setup();
+        final PanelFragment panelFragment = (PanelFragment)
+                Objects.requireNonNull(activityController
+                        .get()
+                        .getSupportFragmentManager()
+                        .findFragmentById(R.id.main_content));
+        final TextView headerTitle = panelFragment.mLayoutView.findViewById(R.id.header_title);
+        final TextView headerSubtitle = panelFragment.mLayoutView.findViewById(
+                R.id.header_subtitle);
+
+        assertThat(headerTitle.getText()).isEqualTo(TITLE);
+        assertThat(headerSubtitle.getText()).isEqualTo(SUBTITLE);
+
+        mFakePanelContent.setTitle(TITLE2);
+        mFakePanelContent.setSubTitle(SUBTITLE2);
+        verify(mFakePanelContent).registerCallback(mPanelContentCbs.capture());
+        final PanelContentCallback panelContentCallbacks = mPanelContentCbs.getValue();
+        panelContentCallbacks.onHeaderChanged();
+
+        assertThat(headerTitle.getText()).isEqualTo(TITLE2);
+        assertThat(headerSubtitle.getText()).isEqualTo(SUBTITLE2);
+    }
+
+    @Test
+    public void forceClose_verifyFinish() {
+        initFakeActivity();
+        verify(mFakePanelContent).registerCallback(mPanelContentCbs.capture());
+        final PanelContentCallback panelContentCallbacks = spy(mPanelContentCbs.getValue());
+        when(((PanelFragment.LocalPanelCallback) panelContentCallbacks).getFragmentActivity())
+                .thenReturn(mActivity);
+
+        panelContentCallbacks.forceClose();
+
+        verify(mActivity).finish();
+    }
+
+    @Test
+    public void onCustomizedButtonStateChanged_isCustomized_showCustomizedTitle() {
+        final ActivityController<FakeSettingsPanelActivity> activityController =
+                Robolectric.buildActivity(FakeSettingsPanelActivity.class);
+        activityController.setup();
+        final PanelFragment panelFragment = (PanelFragment)
+                Objects.requireNonNull(activityController
+                        .get()
+                        .getSupportFragmentManager()
+                        .findFragmentById(R.id.main_content));
+
+        final Button seeMoreButton = panelFragment.mLayoutView.findViewById(R.id.see_more);
+
+        mFakePanelContent.setIsCustomizedButtonUsed(true);
+        mFakePanelContent.setCustomizedButtonTitle("test_title");
+        verify(mFakePanelContent).registerCallback(mPanelContentCbs.capture());
+        final PanelContentCallback panelContentCallbacks = mPanelContentCbs.getValue();
+        panelContentCallbacks.onCustomizedButtonStateChanged();
+
+        assertThat(seeMoreButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(seeMoreButton.getText()).isEqualTo("test_title");
     }
 }

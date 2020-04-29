@@ -20,19 +20,19 @@ import android.content.Context;
 import android.telecom.TelecomManager;
 import android.telephony.AccessNetworkConstants;
 import android.telephony.SubscriptionManager;
+import android.telephony.ims.ImsException;
 import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-
-import com.android.ims.ImsManager;
-import com.android.settings.network.SubscriptionUtil;
-import com.android.settings.network.telephony.MobileNetworkUtils;
 
 /**
  * Controller class for querying Wifi calling status
  */
 public class WifiCallingQueryImsState extends ImsQueryController  {
+
+    private static final String LOG_TAG = "WifiCallingQueryImsState";
 
     private Context mContext;
     private int mSubId;
@@ -56,13 +56,27 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
      */
     @VisibleForTesting
     boolean isEnabledByUser(int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return false;
+        }
         return (new ImsQueryWfcUserSetting(subId)).query();
     }
 
-    @VisibleForTesting
-    ImsManager getImsManager(int subId) {
-        return ImsManager.getInstance(mContext,
-                SubscriptionUtil.getPhoneId(mContext, subId));
+    /**
+     * Check whether Wifi Calling is a supported feature on this subscription
+     *
+     * @return true when Wifi Calling is a supported feature, otherwise false
+     */
+    public boolean isWifiCallingSupported() {
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return false;
+        }
+        try {
+            return isEnabledByPlatform(mSubId);
+        } catch (InterruptedException | IllegalArgumentException | ImsException exception) {
+            Log.w(LOG_TAG, "fail to get WFC supporting status. subId=" + mSubId, exception);
+        }
+        return false;
     }
 
     /**
@@ -71,13 +85,7 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
      * @return true when Wifi Calling has been enabled, otherwise false
      */
     public boolean isWifiCallingProvisioned() {
-        final ImsManager imsManager = getImsManager(mSubId);
-        if (imsManager == null) {
-            return false;
-        }
-
-        return imsManager.isWfcEnabledByPlatform()
-                && isProvisionedOnDevice(mSubId);
+        return isWifiCallingSupported() && isProvisionedOnDevice(mSubId);
     }
 
     /**
@@ -86,8 +94,18 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
      * @return true when Wifi Calling can be performed, otherwise false
      */
     public boolean isReadyToWifiCalling() {
-        return isWifiCallingProvisioned()
-                && MobileNetworkUtils.isImsServiceStateReady(getImsManager(mSubId));
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return false;
+        }
+        if (!isWifiCallingProvisioned()) {
+            return false;
+        }
+        try {
+            return isServiceStateReady(mSubId);
+        } catch (InterruptedException | IllegalArgumentException | ImsException exception) {
+            Log.w(LOG_TAG, "fail to get WFC service status. subId=" + mSubId, exception);
+        }
+        return false;
     }
 
     /**

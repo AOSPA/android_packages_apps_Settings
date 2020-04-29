@@ -15,6 +15,9 @@
  */
 package com.android.settings.wifi;
 
+import static com.android.settings.wifi.WifiConfigUiBase2.MODE_CONNECT;
+import static com.android.settings.wifi.WifiConfigUiBase2.MODE_MODIFY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -25,6 +28,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -33,6 +37,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -43,6 +48,7 @@ import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,7 +61,6 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -63,11 +68,13 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowToast;
 
 @RunWith(RobolectricTestRunner.class)
 public class WifiSettings2Test {
 
     private static final int NUM_NETWORKS = 4;
+    private static final String FAKE_URI_STRING = "fakeuri";
 
     @Mock
     private PowerManager mPowerManager;
@@ -79,6 +86,8 @@ public class WifiSettings2Test {
     private WifiSettings2 mWifiSettings2;
     @Mock
     private WifiPickerTracker mMockWifiPickerTracker;
+    @Mock
+    private PreferenceManager mPreferenceManager;
 
     @Before
     public void setUp() {
@@ -87,8 +96,10 @@ public class WifiSettings2Test {
 
         mWifiSettings2 = spy(new WifiSettings2());
         doReturn(mContext).when(mWifiSettings2).getContext();
+        doReturn(mPreferenceManager).when(mWifiSettings2).getPreferenceManager();
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
+        doReturn(mContext).when(mPreferenceManager).getContext();
         mWifiSettings2.mAddWifiNetworkPreference = new AddWifiNetworkPreference(mContext);
         mWifiSettings2.mSavedNetworksPreference = new Preference(mContext);
         mWifiSettings2.mConfigureWifiSettingsPreference = new Preference(mContext);
@@ -98,13 +109,14 @@ public class WifiSettings2Test {
 
     @Test
     public void addNetworkFragmentSendResult_onActivityResult_shouldHandleEvent() {
-        final WifiSettings wifiSettings = spy(new WifiSettings());
+        final WifiSettings2 wifiSettings2 = spy(new WifiSettings2());
         final Intent intent = new Intent();
-        doNothing().when(wifiSettings).handleAddNetworkRequest(anyInt(), any(Intent.class));
+        doNothing().when(wifiSettings2).handleAddNetworkRequest(anyInt(), any(Intent.class));
 
-        wifiSettings.onActivityResult(WifiSettings.ADD_NETWORK_REQUEST, Activity.RESULT_OK, intent);
+        wifiSettings2.onActivityResult(WifiSettings2.ADD_NETWORK_REQUEST, Activity.RESULT_OK,
+                intent);
 
-        verify(wifiSettings).handleAddNetworkRequest(anyInt(), any(Intent.class));
+        verify(wifiSettings2).handleAddNetworkRequest(anyInt(), any(Intent.class));
     }
 
     @Test
@@ -163,7 +175,7 @@ public class WifiSettings2Test {
     public void setAdditionalSettingsSummaries_wifiWakeupEnabled_displayOn() {
         final ContentResolver contentResolver = mContext.getContentResolver();
         when(mWifiManager.isAutoWakeupEnabled()).thenReturn(true);
-        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(false);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
         Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0);
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
 
@@ -200,7 +212,7 @@ public class WifiSettings2Test {
         when(activity.getSystemService(Context.USER_SERVICE))
                 .thenReturn(userManager);
 
-        when(mWifiSettings2.findPreference(WifiSettings.PREF_KEY_DATA_USAGE))
+        when(mWifiSettings2.findPreference(WifiSettings2.PREF_KEY_DATA_USAGE))
                 .thenReturn(mDataUsagePreference);
     }
 
@@ -237,9 +249,7 @@ public class WifiSettings2Test {
         assertThat(adapter.hasStableIds()).isTrue();
     }
 
-    //TODO(b/70983952): Remove @Ignore when WifiEntry API is constructed.
     @Test
-    @Ignore
     public void onCreateContextMenu_shouldHaveForgetAndDisconnectMenuForConnectedWifiEntry() {
         final FragmentActivity activity = mock(FragmentActivity.class);
         when(activity.getApplicationContext()).thenReturn(mContext);
@@ -247,6 +257,7 @@ public class WifiSettings2Test {
 
         final WifiEntry wifiEntry = mock(WifiEntry.class);
         when(wifiEntry.canDisconnect()).thenReturn(true);
+        when(wifiEntry.canForget()).thenReturn(true);
         when(wifiEntry.isSaved()).thenReturn(true);
         when(wifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
 
@@ -267,5 +278,90 @@ public class WifiSettings2Test {
         mWifiSettings2.onWifiEntriesChanged();
 
         verify(mWifiSettings2).changeNextButtonState(anyBoolean());
+    }
+
+    @Test
+    public void openSubscriptionHelpPage_shouldCallStartActivityForResult() {
+        doReturn(new Intent()).when(mWifiSettings2).getHelpIntent(mContext, FAKE_URI_STRING);
+        doNothing().when(mWifiSettings2).startActivityForResult(any(Intent.class), anyInt());
+        final WifiEntry mockWifiEntry = mock(WifiEntry.class);
+        when(mockWifiEntry.getHelpUriString()).thenReturn(FAKE_URI_STRING);
+
+        mWifiSettings2.openSubscriptionHelpPage(mockWifiEntry);
+
+        verify(mWifiSettings2, times(1)).startActivityForResult(any(), anyInt());
+    }
+
+    @Test
+    public void onNumSavedNetworksChanged_isFinishing_ShouldNotCrash() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(activity.isFinishing()).thenReturn(true);
+        when(mWifiSettings2.getActivity()).thenReturn(activity);
+        when(mWifiSettings2.getContext()).thenReturn(null);
+
+        mWifiSettings2.onNumSavedNetworksChanged();
+    }
+
+    @Test
+    public void onNumSavedSubscriptionsChanged_isFinishing_ShouldNotCrash() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(activity.isFinishing()).thenReturn(true);
+        when(mWifiSettings2.getActivity()).thenReturn(activity);
+        when(mWifiSettings2.getContext()).thenReturn(null);
+
+        mWifiSettings2.onNumSavedSubscriptionsChanged();
+    }
+
+    @Test
+    public void onSubmit_modeModifyNoConfig_toastErrorMessage() {
+        WifiDialog2 dialog = createWifiDialog2(MODE_MODIFY, null /* config */);
+
+        mWifiSettings2.onSubmit(dialog);
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_failed_save_message));
+    }
+
+    @Test
+    public void onSubmit_modeModifyHasConfig_saveWifiManager() {
+        final WifiConfiguration config = mock(WifiConfiguration.class);
+        WifiDialog2 dialog = createWifiDialog2(MODE_MODIFY, config);
+
+        mWifiSettings2.onSubmit(dialog);
+
+        verify(mWifiManager).save(eq(config), any());
+    }
+
+    @Test
+    public void onSubmit_modeConnectNoConfig_connectWifiEntry() {
+        WifiDialog2 dialog = createWifiDialog2(MODE_CONNECT, null /* config */);
+        final WifiEntry wifiEntry = dialog.getWifiEntry();
+
+        mWifiSettings2.onAttach(mContext);
+        mWifiSettings2.onSubmit(dialog);
+
+        verify(mWifiSettings2).connect(wifiEntry, false /* editIfNoConfig */,
+                false /* fullScreenEdit*/);
+    }
+
+    @Test
+    public void onSubmit_modeConnectHasConfig_connectWifiManager() {
+        final WifiConfiguration config = mock(WifiConfiguration.class);
+        WifiDialog2 dialog = createWifiDialog2(MODE_CONNECT, config);
+
+        mWifiSettings2.onSubmit(dialog);
+
+        verify(mWifiManager).connect(eq(config), any(WifiManager.ActionListener.class));
+    }
+
+    private WifiDialog2 createWifiDialog2(int mode, WifiConfiguration config) {
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        when(wifiEntry.canConnect()).thenReturn(true);
+        final WifiConfigController2 controller = mock(WifiConfigController2.class);
+        when(controller.getConfig()).thenReturn(config);
+        final WifiDialog2 wifiDialog2 =  spy(WifiDialog2.createModal(mContext, null /* listener */,
+                wifiEntry, mode));
+        when(wifiDialog2.getController()).thenReturn(controller);
+        return wifiDialog2;
     }
 }

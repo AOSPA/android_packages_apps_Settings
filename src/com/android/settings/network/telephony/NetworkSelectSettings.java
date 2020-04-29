@@ -194,11 +194,14 @@ public class NetworkSelectSettings extends DashboardFragment {
             mRequestIdManualNetworkSelect = getNewRequestId();
             mWaitingForNumberOfScanResults = MIN_NUMBER_OF_SCAN_REQUIRED;
             final String operatorNumeric = mSelectedPreference.getOperatorNumeric();
+            final int accessNetworkType = mSelectedPreference.getAccessNetworkType();
             ThreadUtils.postOnBackgroundThread(() -> {
                 final Message msg = mHandler.obtainMessage(
                         EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE);
+                // Send accessNetworkType as a parameter.
+                // This is converted to RadioAccessNetwork in the Telephony Framework.
                 msg.obj = mTelephonyManager.setNetworkSelectionModeManual(
-                        operatorNumeric, true /* persistSelection */);
+                        operatorNumeric, true /* persistSelection */, accessNetworkType);
                 msg.sendToTarget();
             });
         }

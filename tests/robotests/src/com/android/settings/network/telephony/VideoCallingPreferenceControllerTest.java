@@ -27,14 +27,12 @@ import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ProvisioningManager;
-import android.telephony.ims.feature.ImsFeature;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.ims.ImsManager;
+import com.android.settings.network.ims.MockVolteQueryImsState;
 import com.android.settings.network.ims.MockVtQueryImsState;
-import com.android.settings.network.ims.VolteQueryImsState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,8 +49,6 @@ public class VideoCallingPreferenceControllerTest {
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
-    private ImsManager mImsManager;
-    @Mock
     private ProvisioningManager mProvisioningManager;
     @Mock
     private CarrierConfigManager mCarrierConfigManager;
@@ -60,7 +56,7 @@ public class VideoCallingPreferenceControllerTest {
     private PreferenceScreen mPreferenceScreen;
 
     private MockVtQueryImsState mQueryImsState;
-    private VolteQueryImsState mQueryVoLteState;
+    private MockVolteQueryImsState mQueryVoLteState;
 
     private VideoCallingPreferenceController mController;
     private PersistableBundle mCarrierConfig;
@@ -82,12 +78,11 @@ public class VideoCallingPreferenceControllerTest {
                 CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS, true);
         doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
-        mQueryImsState = spy(new MockVtQueryImsState(mContext, SUB_ID));
-        doReturn(true).when(mQueryImsState).isEnabledByUser();
-        doReturn(mImsManager).when(mQueryImsState).getImsManager(anyInt());
+        mQueryImsState = new MockVtQueryImsState(mContext, SUB_ID);
+        mQueryImsState.setIsEnabledByUser(true);
 
-        mQueryVoLteState = spy(new VolteQueryImsState(mContext, SUB_ID));
-        doReturn(true).when(mQueryVoLteState).isEnabledByUser();
+        mQueryVoLteState = new MockVolteQueryImsState(mContext, SUB_ID);
+        mQueryVoLteState.setIsEnabledByUser(true);
 
         mPreference = new SwitchPreference(mContext);
         mController = spy(new VideoCallingPreferenceController(mContext, "wifi_calling"));
@@ -96,9 +91,9 @@ public class VideoCallingPreferenceControllerTest {
         doReturn(mQueryVoLteState).when(mController).queryVoLteState(anyInt());
         mPreference.setKey(mController.getPreferenceKey());
 
-        doReturn(true).when(mImsManager).isVtEnabledByPlatform();
+        mQueryImsState.setIsEnabledByPlatform(true);
         mQueryImsState.setIsProvisionedOnDevice(true);
-        doReturn(ImsFeature.STATE_READY).when(mImsManager).getImsServiceState();
+        mQueryImsState.setServiceStateReady(true);
         doReturn(true).when(mTelephonyManager).isDataEnabled();
 
         mController.mCallState = TelephonyManager.CALL_STATE_IDLE;
@@ -112,7 +107,7 @@ public class VideoCallingPreferenceControllerTest {
     @Test
     public void isVideoCallEnabled_disabledByPlatform_returnFalse() {
         mQueryImsState.setIsProvisionedOnDevice(false);
-        doReturn(false).when(mImsManager).isVtEnabledByPlatform();
+        mQueryImsState.setIsEnabledByPlatform(false);
 
         assertThat(mController.isVideoCallEnabled(SUB_ID)).isFalse();
     }
@@ -128,8 +123,8 @@ public class VideoCallingPreferenceControllerTest {
 
     @Test
     public void updateState_4gLteOff_disabled() {
-        doReturn(false).when(mQueryImsState).isEnabledByUser();
-        doReturn(false).when(mQueryVoLteState).isEnabledByUser();
+        mQueryImsState.setIsEnabledByUser(false);
+        mQueryVoLteState.setIsEnabledByUser(false);
 
         mController.updateState(mPreference);
 
@@ -139,9 +134,9 @@ public class VideoCallingPreferenceControllerTest {
 
     @Test
     public void updateState_4gLteOnWithoutCall_checked() {
-        doReturn(true).when(mQueryImsState).isEnabledByUser();
-        doReturn(true).when(mQueryVoLteState).isEnabledByUser();
-        doReturn(true).when(mImsManager).isNonTtyOrTtyOnVolteEnabled();
+        mQueryImsState.setIsEnabledByUser(true);
+        mQueryVoLteState.setIsEnabledByUser(true);
+        mQueryImsState.setIsTtyOnVolteEnabled(true);
         mController.mCallState = TelephonyManager.CALL_STATE_IDLE;
 
         mController.updateState(mPreference);
@@ -153,7 +148,7 @@ public class VideoCallingPreferenceControllerTest {
 
     @Test
     public void displayPreference_notAvailable_setPreferenceInvisible() {
-        doReturn(false).when(mImsManager).isVtEnabledByPlatform();
+        mQueryImsState.setIsEnabledByPlatform(false);
 
         mController.displayPreference(mPreferenceScreen);
 

@@ -216,7 +216,7 @@ public class PanelFragment extends Fragment {
         mDoneButton.setOnClickListener(getCloseListener());
 
         if (mPanel.isCustomizedButtonUsed()) {
-            final CharSequence customTitle = mPanel.getCustomButtonTitle();
+            final CharSequence customTitle = mPanel.getCustomizedButtonTitle();
             if (TextUtils.isEmpty(customTitle)) {
                 mSeeMoreButton.setVisibility(View.GONE);
             } else {
@@ -422,14 +422,28 @@ public class PanelFragment extends Fragment {
             ThreadUtils.postOnMainThread(() -> {
                 mSeeMoreButton.setVisibility(
                         mPanel.isCustomizedButtonUsed() ? View.VISIBLE : View.GONE);
+                mSeeMoreButton.setText(mPanel.getCustomizedButtonTitle());
             });
         }
 
         @Override
-        public void onGroupChanged() {
+        public void onHeaderChanged() {
             ThreadUtils.postOnMainThread(() -> {
+                mTitleIcon.setImageIcon(mPanel.getIcon().toIcon(getContext()));
+                mHeaderTitle.setText(mPanel.getTitle());
                 mHeaderSubtitle.setText(mPanel.getSubTitle());
             });
+        }
+
+        @Override
+        public void forceClose() {
+            mPanelClosedKey = PanelClosedKeys.KEY_OTHERS;
+            getFragmentActivity().finish();
+        }
+
+        @VisibleForTesting
+        FragmentActivity getFragmentActivity() {
+            return getActivity();
         }
     }
 }

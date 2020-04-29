@@ -22,15 +22,20 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.media.MediaDescription;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
+import android.media.session.PlaybackState;
 import android.net.Uri;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -41,6 +46,7 @@ import com.android.settingslib.media.PhoneMediaDevice;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -53,8 +59,9 @@ import java.util.List;
 public class MediaOutputPanelTest {
 
     private static final String TEST_PACKAGENAME = "com.test.packagename";
+    private static final String TEST_PACKAGENAME2 = "com.test.packagename2";
     private static final String TEST_ARTIST = "test_artist";
-    private static final String TEST_ALBUM = "test_album";
+    private static final String TEST_SONG = "test_song";
 
     @Mock
     private MediaSessionManager mMediaSessionManager;
@@ -62,15 +69,19 @@ public class MediaOutputPanelTest {
     private MediaController mMediaController;
     @Mock
     private MediaMetadata mMediaMetadata;
-
     @Mock
     private LocalMediaManager mLocalMediaManager;
     @Mock
     private PanelContentCallback mCallback;
+    @Mock
+    private PlaybackState mPlaybackState;
 
     private MediaOutputPanel mPanel;
     private Context mContext;
     private List<MediaController> mMediaControllers = new ArrayList<>();
+    private ArgumentCaptor<MediaController.Callback> mControllerCbs =
+            ArgumentCaptor.forClass(MediaController.Callback.class);
+    private MediaDescription mMediaDescription;
 
     @Before
     public void setUp() {
@@ -83,6 +94,11 @@ public class MediaOutputPanelTest {
         when(mMediaSessionManager.getActiveSessions(any())).thenReturn(mMediaControllers);
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(MediaSessionManager.class)).thenReturn(mMediaSessionManager);
+        MediaDescription.Builder builder = new MediaDescription.Builder();
+        builder.setTitle(TEST_SONG);
+        builder.setSubtitle(TEST_ARTIST);
+        mMediaDescription = builder.build();
+        when(mMediaMetadata.getDescription()).thenReturn(mMediaDescription);
 
         mPanel = MediaOutputPanel.create(mContext, TEST_PACKAGENAME);
         mPanel.mLocalMediaManager = mLocalMediaManager;
@@ -112,8 +128,24 @@ public class MediaOutputPanelTest {
     public void onStart_shouldRegisterCallback() {
         mPanel.onStart();
 
+        verify(mMediaController).registerCallback(any());
         verify(mLocalMediaManager).registerCallback(any());
         verify(mLocalMediaManager).startScan();
+    }
+
+    @Test
+    public void onStart_activeSession_verifyOnHeaderChanged() {
+        mPanel.onStart();
+
+        verify(mCallback).onHeaderChanged();
+    }
+
+    @Test
+    public void onStart_noMatchedActiveSession_verifyNeverOnHeaderChanged() {
+        when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGENAME2);
+        mPanel.onStart();
+
+        verify(mCallback, never()).onHeaderChanged();
     }
 
     @Test
@@ -166,11 +198,11 @@ public class MediaOutputPanelTest {
     }
 
     @Test
-    public void getTitle_withMetadata_returnArtistName() {
-        when(mMediaMetadata.getString(MediaMetadata.METADATA_KEY_ARTIST)).thenReturn(TEST_ARTIST);
+    public void getTitle_withMetadata_returnSongName() {
+        mPanel.onStart();
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
-        assertThat(mPanel.getTitle()).isEqualTo(TEST_ARTIST);
+        assertThat(mPanel.getTitle()).isEqualTo(TEST_SONG);
     }
 
     @Test
@@ -179,11 +211,9 @@ public class MediaOutputPanelTest {
 
         assertThat(mPanel.getTitle()).isEqualTo(mContext.getText(R.string.media_volume_title));
     }
-
     @Test
     public void getTitle_noPackageName_returnDefaultString() {
         mPanel = MediaOutputPanel.create(mContext, null);
-        when(mMediaMetadata.getString(MediaMetadata.METADATA_KEY_ARTIST)).thenReturn(TEST_ARTIST);
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
         assertThat(mPanel.getTitle()).isEqualTo(mContext.getText(R.string.media_volume_title));
@@ -200,41 +230,36 @@ public class MediaOutputPanelTest {
     }
 
     @Test
-    public void getSubTitle_withMetadata_returnAlbumName() {
-        when(mMediaMetadata.getString(MediaMetadata.METADATA_KEY_ALBUM)).thenReturn(TEST_ALBUM);
+    public void getSubTitle_withMetadata_returnArtistName() {
+        mPanel.onStart();
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
-        assertThat(mPanel.getSubTitle()).isEqualTo(TEST_ALBUM);
+        assertThat(mPanel.getSubTitle()).isEqualTo(TEST_ARTIST);
     }
 
     @Test
-    public void getSubTitle_noMetadata_returnDefaultString() {
+    public void getSubTitle_noMetadata_returnEmpty() {
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGENAME);
         when(mMediaController.getMetadata()).thenReturn(null);
 
-        assertThat(mPanel.getSubTitle()).isEqualTo(mContext.getText(
-                R.string.media_output_panel_title));
+        assertThat(TextUtils.isEmpty(mPanel.getSubTitle())).isTrue();
     }
 
     @Test
-    public void getSubTitle_noPackageName_returnDefaultString() {
+    public void getSubTitle_noPackageName_returnEmpty() {
         mPanel = MediaOutputPanel.create(mContext, null);
-        when(mMediaMetadata.getString(MediaMetadata.METADATA_KEY_ARTIST)).thenReturn(TEST_ARTIST);
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
-        assertThat(mPanel.getSubTitle()).isEqualTo(mContext.getText(
-                R.string.media_output_panel_title));
+        assertThat(TextUtils.isEmpty(mPanel.getSubTitle())).isTrue();
     }
 
     @Test
-    public void getSubTitle_noController_returnDefaultString() {
+    public void getSubTitle_noController_returnEmpty() {
         mMediaControllers.clear();
         mPanel = MediaOutputPanel.create(mContext, TEST_PACKAGENAME);
-        when(mMediaMetadata.getString(MediaMetadata.METADATA_KEY_ALBUM)).thenReturn(TEST_ALBUM);
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
-        assertThat(mPanel.getSubTitle()).isEqualTo(mContext.getText(
-                R.string.media_output_panel_title));
+        assertThat(TextUtils.isEmpty(mPanel.getSubTitle())).isTrue();
     }
 
     @Test
@@ -242,5 +267,47 @@ public class MediaOutputPanelTest {
         mPanel.onClickCustomizedButton();
 
         verify(mLocalMediaManager).releaseSession();
+    }
+
+    @Test
+    public void onMetadataChanged_verifyCallOnHeaderChanged() {
+        mPanel.onStart();
+        verify(mCallback).onHeaderChanged();
+        verify(mMediaController).registerCallback(mControllerCbs.capture());
+        final MediaController.Callback controllerCallbacks = mControllerCbs.getValue();
+
+        controllerCallbacks.onMetadataChanged(mMediaMetadata);
+
+        verify(mCallback, times(2)).onHeaderChanged();
+    }
+
+    @Test
+    public void onPlaybackStateChanged_stateFromPlayingToStopped_verifyCallForceClose() {
+        mPanel.onStart();
+        verify(mMediaController).registerCallback(mControllerCbs.capture());
+        final MediaController.Callback controllerCallbacks = mControllerCbs.getValue();
+        when(mPlaybackState.getState()).thenReturn(PlaybackState.STATE_PLAYING);
+        controllerCallbacks.onPlaybackStateChanged(mPlaybackState);
+        verify(mCallback, never()).forceClose();
+
+        when(mPlaybackState.getState()).thenReturn(PlaybackState.STATE_STOPPED);
+        controllerCallbacks.onPlaybackStateChanged(mPlaybackState);
+
+        verify(mCallback).forceClose();
+    }
+
+    @Test
+    public void onPlaybackStateChanged_stateFromPlayingToPaused_verifyCallForceClose() {
+        mPanel.onStart();
+        verify(mMediaController).registerCallback(mControllerCbs.capture());
+        final MediaController.Callback controllerCallbacks = mControllerCbs.getValue();
+        when(mPlaybackState.getState()).thenReturn(PlaybackState.STATE_PLAYING);
+        controllerCallbacks.onPlaybackStateChanged(mPlaybackState);
+        verify(mCallback, never()).forceClose();
+
+        when(mPlaybackState.getState()).thenReturn(PlaybackState.STATE_PAUSED);
+        controllerCallbacks.onPlaybackStateChanged(mPlaybackState);
+
+        verify(mCallback).forceClose();
     }
 }

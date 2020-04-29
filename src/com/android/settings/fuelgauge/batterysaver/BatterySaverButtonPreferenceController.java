@@ -22,7 +22,6 @@ import android.net.Uri;
 import android.os.PowerManager;
 import android.provider.SettingsSlicesContract;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.TogglePreferenceController;
@@ -41,7 +40,6 @@ public class BatterySaverButtonPreferenceController extends
         LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
 
     private final BatterySaverReceiver mBatterySaverReceiver;
-
     private final PowerManager mPowerManager;
 
     private TwoStateButtonPreference mPreference;
@@ -99,14 +97,6 @@ public class BatterySaverButtonPreferenceController extends
         // This screen already shows a warning, so we don't need another warning.
         return BatterySaverUtils.setPowerSaveMode(mContext, stateOn,
                 false /* needFirstTimeWarning */);
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        if (mPreference != null) {
-            mPreference.setChecked(isChecked());
-        }
     }
 
     @Override

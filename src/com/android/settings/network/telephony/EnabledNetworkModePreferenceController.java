@@ -232,6 +232,8 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         void setPreferenceEntries() {
+            clearAllEntries();
+
             switch (getEnabledNetworkType()) {
                 case ENABLED_NETWORKS_CDMA_CHOICES:
                     add5gEntry(addNrToLteNetworkType(
@@ -555,6 +557,7 @@ public class EnabledNetworkModePreferenceController extends
                     }
                     break;
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO:
+                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA:
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
                     setSelectedEntry(networkMode);
                     setSummary(mContext.getString(R.string.network_5G)
@@ -697,6 +700,11 @@ public class EnabledNetworkModePreferenceController extends
 
         private String[] getEntries() {
             return mEntries.toArray(new String[0]);
+        }
+
+        private void clearAllEntries() {
+            mEntries.clear();
+            mEntriesValue.clear();
         }
 
         private String[] getEntryValues() {

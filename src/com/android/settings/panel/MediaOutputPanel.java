@@ -33,6 +33,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
+import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
@@ -66,12 +67,11 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
     private final Context mContext;
     private final String mPackageName;
 
-    private PanelContentCallback mCallback;
-    private boolean mIsCustomizedButtonUsed = true;
-
     @VisibleForTesting
     LocalMediaManager mLocalMediaManager;
 
+    private PanelContentCallback mCallback;
+    private boolean mIsCustomizedButtonUsed = true;
     private MediaSessionManager mMediaSessionManager;
     private MediaController mMediaController;
 
@@ -82,20 +82,6 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
     private MediaOutputPanel(Context context, String packageName) {
         mContext = context.getApplicationContext();
         mPackageName = TextUtils.isEmpty(packageName) ? "" : packageName;
-
-        if (!TextUtils.isEmpty(mPackageName)) {
-            mMediaSessionManager = mContext.getSystemService(MediaSessionManager.class);
-            for (MediaController controller : mMediaSessionManager.getActiveSessions(null)) {
-                if (TextUtils.equals(controller.getPackageName(), mPackageName)) {
-                    mMediaController = controller;
-                    break;
-                }
-            }
-        }
-
-        if (mMediaController == null) {
-            Log.e(TAG, "Unable to find " + mPackageName + " media controller");
-        }
     }
 
     @Override
@@ -103,7 +89,7 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
         if (mMediaController != null) {
             final MediaMetadata metadata = mMediaController.getMetadata();
             if (metadata != null) {
-                return metadata.getString(MediaMetadata.METADATA_KEY_ARTIST);
+                return metadata.getDescription().getTitle();
             }
         }
         return mContext.getText(R.string.media_volume_title);
@@ -114,10 +100,10 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
         if (mMediaController != null) {
             final MediaMetadata metadata = mMediaController.getMetadata();
             if (metadata != null) {
-                return metadata.getString(MediaMetadata.METADATA_KEY_ALBUM);
+                return metadata.getDescription().getSubtitle();
             }
         }
-        return mContext.getText(R.string.media_output_panel_title);
+        return null;
     }
 
     @Override
@@ -180,7 +166,7 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
     }
 
     @Override
-    public CharSequence getCustomButtonTitle() {
+    public CharSequence getCustomizedButtonTitle() {
         return mContext.getText(R.string.media_output_panel_stop_casting_button);
     }
 
@@ -228,6 +214,20 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
+        if (!TextUtils.isEmpty(mPackageName)) {
+            mMediaSessionManager = mContext.getSystemService(MediaSessionManager.class);
+            for (MediaController controller : mMediaSessionManager.getActiveSessions(null)) {
+                if (TextUtils.equals(controller.getPackageName(), mPackageName)) {
+                    mMediaController = controller;
+                    mMediaController.registerCallback(mCb);
+                    mCallback.onHeaderChanged();
+                    break;
+                }
+            }
+        }
+        if (mMediaController == null) {
+            Log.d(TAG, "No media controller for " + mPackageName);
+        }
         if (mLocalMediaManager == null) {
             mLocalMediaManager = new LocalMediaManager(mContext, mPackageName, null);
         }
@@ -237,6 +237,9 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
+        if (mMediaController != null) {
+            mMediaController.unregisterCallback(mCb);
+        }
         mLocalMediaManager.unregisterCallback(this);
         mLocalMediaManager.stopScan();
     }
@@ -245,4 +248,22 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
     public int getViewType() {
         return PanelContent.VIEW_TYPE_SLIDER;
     }
+
+    private final MediaController.Callback mCb = new MediaController.Callback() {
+        @Override
+        public void onMetadataChanged(MediaMetadata metadata) {
+            if (mCallback != null) {
+                mCallback.onHeaderChanged();
+            }
+        }
+
+        @Override
+        public void onPlaybackStateChanged(PlaybackState state) {
+            final int playState = state.getState();
+            if (mCallback != null && (playState == PlaybackState.STATE_STOPPED
+                    || playState == PlaybackState.STATE_PAUSED)) {
+                mCallback.forceClose();
+            }
+        }
+    };
 }

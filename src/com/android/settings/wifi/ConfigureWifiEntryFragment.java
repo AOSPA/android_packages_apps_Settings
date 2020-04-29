@@ -71,7 +71,8 @@ public class ConfigureWifiEntryFragment extends InstrumentedFragment implements 
     private Button mSubmitBtn;
     private Button mCancelBtn;
     private WifiEntry mWifiEntry;
-    private NetworkDetailsTracker mNetworkDetailsTracker;
+    @VisibleForTesting
+    NetworkDetailsTracker mNetworkDetailsTracker;
     private HandlerThread mWorkerThread;
 
     @Override
@@ -147,7 +148,7 @@ public class ConfigureWifiEntryFragment extends InstrumentedFragment implements 
 
     @Override
     public void dispatchSubmit() {
-        // Do nothing
+        handleSubmitAction();
     }
 
     @Override

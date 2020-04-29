@@ -14,24 +14,21 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res-auto"
-        android:key="conversation_list">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="conversation_list"
+    android:title="@string/zen_mode_conversations_title">
 
     <PreferenceCategory
-        android:title="@string/important_conversations"
         android:key="important_conversations"
+        android:title="@string/important_conversations"
         android:visibility="gone"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="true" >
         <Preference
             android:key="behavior"
             android:summary="@string/important_conversation_behavior_summary"/>
-        <SwitchPreference
-            android:key="important_bubble"
-            android:title="@string/important_bubble"
-            android:icon="@drawable/ic_create_bubble"
-            settings:controller="com.android.settings.notification.app.ImportantConversationBubblePreferenceController"/>
         <!-- Important conversations added here -->
         <PreferenceCategory
             android:key="important_conversations_list"
@@ -43,8 +40,8 @@
 
     <!--Other conversations added here -->
     <PreferenceCategory
-        android:title="@string/all_conversations"
-        android:key="all_conversations"
+        android:title="@string/other_conversations"
+        android:key="other_conversations"
         settings:allowDividerAbove="true"
         settings:allowDividerBelow="false" />
 

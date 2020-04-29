@@ -17,9 +17,7 @@
 package com.android.settings.network.ims;
 
 import android.content.Context;
-
-import com.android.ims.ImsManager;
-
+import android.telephony.ims.ImsException;
 
 /**
  * Controller class for mock VT status
@@ -27,8 +25,10 @@ import com.android.ims.ImsManager;
 public class MockVtQueryImsState extends VtQueryImsState {
 
     private Boolean mIsTtyOnVolteEnabled;
+    private Boolean mIsEnabledOnPlatform;
     private Boolean mIsProvisionedOnDevice;
     private Boolean mIsEnabledByUser;
+    private Boolean mIsServiceStateReady;
 
     /**
      * Constructor
@@ -38,10 +38,6 @@ public class MockVtQueryImsState extends VtQueryImsState {
      */
     public MockVtQueryImsState(Context context, int subId) {
         super(context, subId);
-    }
-
-    public ImsManager getImsManager(int subId) {
-        return super.getImsManager(subId);
     }
 
     public void setIsTtyOnVolteEnabled(boolean enabled) {
@@ -56,6 +52,19 @@ public class MockVtQueryImsState extends VtQueryImsState {
         return super.isTtyOnVolteEnabled(subId);
     }
 
+    public void setIsEnabledByPlatform(boolean isEnabled) {
+        mIsEnabledOnPlatform = isEnabled;
+    }
+
+    @Override
+    boolean isEnabledByPlatform(int subId) throws InterruptedException, ImsException,
+            IllegalArgumentException {
+        if (mIsEnabledOnPlatform != null) {
+            return mIsEnabledOnPlatform;
+        }
+        return super.isEnabledByPlatform(subId);
+    }
+
     public void setIsProvisionedOnDevice(boolean isProvisioned) {
         mIsProvisionedOnDevice = isProvisioned;
     }
@@ -66,6 +75,19 @@ public class MockVtQueryImsState extends VtQueryImsState {
             return mIsProvisionedOnDevice;
         }
         return super.isProvisionedOnDevice(subId);
+    }
+
+    public void setServiceStateReady(boolean isReady) {
+        mIsServiceStateReady = isReady;
+    }
+
+    @Override
+    boolean isServiceStateReady(int subId) throws InterruptedException, ImsException,
+            IllegalArgumentException {
+        if (mIsServiceStateReady != null) {
+            return mIsServiceStateReady;
+        }
+        return super.isServiceStateReady(subId);
     }
 
     public void setIsEnabledByUser(boolean enabled) {
