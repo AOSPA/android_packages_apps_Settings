@@ -310,7 +310,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
         mHandler.sendEmptyMessageDelayed(MESSAGE_STOP_SCAN_WIFI_LIST, DELAY_TIME_STOP_SCAN_MS);
 
         if (mFilterWifiTracker == null) {
-            mFilterWifiTracker = new FilterWifiTracker(getActivity(), getSettingsLifecycle());
+            mFilterWifiTracker = new FilterWifiTracker(getContext(), getSettingsLifecycle());
         }
         mFilterWifiTracker.onResume();
     }
@@ -479,11 +479,13 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
     private final class FilterWifiTracker {
         private final List<String> mAccessPointKeys;
         private final WifiTracker mWifiTracker;
+        private final Context mContext;
 
         public FilterWifiTracker(Context context, Lifecycle lifecycle) {
             mWifiTracker = WifiTrackerFactory.create(context, mWifiListener,
                     lifecycle, /* includeSaved */ true, /* includeScans */ true);
             mAccessPointKeys = new ArrayList<>();
+            mContext = context;
         }
 
         /**
@@ -492,7 +494,7 @@ public class NetworkRequestDialogFragment extends InstrumentedDialogFragment imp
          */
         public void updateKeys(List<ScanResult> scanResults) {
             for (ScanResult scanResult : scanResults) {
-                final String key = AccessPoint.getKey(scanResult);
+                final String key = AccessPoint.getKey(mContext, scanResult);
                 if (!mAccessPointKeys.contains(key)) {
                     mAccessPointKeys.add(key);
                 }
