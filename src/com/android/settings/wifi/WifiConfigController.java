@@ -702,12 +702,6 @@ public class WifiConfigController implements TextWatcher,
 
             case AccessPoint.SECURITY_EAP:
             case AccessPoint.SECURITY_EAP_SUITE_B:
-                if (mAccessPoint != null && mAccessPoint.isFils256Supported()) {
-                    config.allowedKeyManagement.set(KeyMgmt.FILS_SHA256);
-                }
-                if (mAccessPoint != null && mAccessPoint.isFils384Supported()) {
-                    config.allowedKeyManagement.set(KeyMgmt.FILS_SHA384);
-                }
                 if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
                     // allowedSuiteBCiphers will be set according to certificate type
                     config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
@@ -849,10 +843,6 @@ public class WifiConfigController implements TextWatcher,
                 } else {
                     // clear password
                     config.enterpriseConfig.setPassword(mPasswordView.getText().toString());
-                }
-                if (mAccessPoint != null && (mAccessPoint.isFils256Supported()
-                            || mAccessPoint.isFils384Supported())) {
-                    config.enterpriseConfig.setEapErp("1");
                 }
                 break;
 
