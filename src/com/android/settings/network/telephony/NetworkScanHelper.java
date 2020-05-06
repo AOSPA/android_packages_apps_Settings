@@ -231,10 +231,15 @@ public class NetworkScanHelper {
 
         try {
             if (mExtTelephony != null) {
-                mExtTelephony.abortIncrementalScan(mTelephonyManager.getSlotIndex());
+                int slotIndex = mTelephonyManager.getSlotIndex();
+                if (slotIndex >= 0 && slotIndex < mTelephonyManager.getActiveModemCount()) {
+                    mExtTelephony.abortIncrementalScan(slotIndex);
+                } else {
+                    Log.d(TAG, "slotIndex is invalid, skipping abort");
+                }
                 mExtTelephony = null;
+                mContext.unregisterReceiver(mLegacyIncrScanReceiver);
             }
-            mContext.unregisterReceiver(mLegacyIncrScanReceiver);
         } catch (RemoteException | NullPointerException ex) {
             Log.e(TAG, "abortIncrementalScan Exception: ", ex);
         } catch (IllegalArgumentException ex) {
