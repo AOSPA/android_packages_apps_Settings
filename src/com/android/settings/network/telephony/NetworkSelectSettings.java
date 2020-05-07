@@ -139,6 +139,7 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     @Override
     public void onStart() {
+        Log.d(TAG, "onStart()");
         super.onStart();
 
         updateForbiddenPlmns();
@@ -165,6 +166,7 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     @Override
     public void onStop() {
+        Log.d(TAG, "onStop() mWaitingForNumberOfScanResults: " + mWaitingForNumberOfScanResults);
         super.onStop();
         if (mWaitingForNumberOfScanResults <= 0) {
             stopNetworkQuery();
@@ -229,6 +231,7 @@ public class NetworkSelectSettings extends DashboardFragment {
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            Log.d(TAG, "handleMessage, msg.what: " + msg.what);
             switch (msg.what) {
                 case EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE:
                     setProgressBarVisible(false);
@@ -509,6 +512,7 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     @Override
     public void onDestroy() {
+        Log.d(TAG, "onDestroy()");
         stopNetworkQuery();
         mNetworkScanExecutor.shutdown();
         super.onDestroy();
