@@ -176,6 +176,8 @@
     <string name="bluetooth_empty_list_user_restricted">You don\u2019t have permission to change Bluetooth settings.</string>
     <!-- Title for bluetooth pairing item [CHAR LIMIT=60] -->
     <string name="bluetooth_pairing_pref_title">Pair new device</string>
+    <!-- Keywords for bluetooth pairing item [CHAR LIMIT=30] -->
+    <string name="keywords_add_bt_device">bluetooth</string>
 
     <!-- Bluetooth Visibility message.  This message informs the user that their device is now visible to other bluetooth devices.  [CHAR LIMIT=NONE] -->
     <string name="bluetooth_is_visible_message"><xliff:g id="device_name">%1$s</xliff:g> is visible to nearby devices while Bluetooth settings is open.</string>
@@ -8515,7 +8517,7 @@
     <string name="notification_priority_title">Priority</string>
 
     <!-- [CHAR LIMIT=150] Notification Importance title: important conversation level summary -->
-    <string name="notification_channel_summary_priority">Shows at top of conversation section and appears as a bubble.</string>
+    <string name="notification_channel_summary_priority">Shows at top of conversation section and appears as a bubble</string>
 
     <string name="convo_not_supported_summary"><xliff:g id="app_name" example="Android Services">%1$s</xliff:g> does not support conversation-specific settings.</string>
 
@@ -8535,6 +8537,9 @@
 
     <!-- [CHAR LIMIT=100] Label for on/off toggle -->
     <string name="notification_switch_label">All \"<xliff:g id="app_name" example="Android Services">%1$s</xliff:g>\" notifications</string>
+
+    <!-- [CHAR LIMIT=100] Label for on/off toggle -->
+    <string name="notification_app_switch_label">All <xliff:g id="app_name" example="Android Services">%1$s</xliff:g> notifications</string>
 
     <!-- Default Apps > Default notification assistant -->
     <string name="default_notification_assistant">Adaptive Notifications</string>
@@ -9282,10 +9287,10 @@
         \t\n3.\tTap the app icon at the top of the screen, then tap Pin
     </string>
     <!-- [CHAR LIMIT=none] Screen pinning description -->
-    <string name="screen_pinning_guest_mode_description">
+    <string name="screen_pinning_guest_user_description">
         App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game.
         \n\nWhen an app is pinned, the pinned app may open other apps and personal data may be accessible.
-        \n\nIf you want to securely share your device with someone, try using a guest profile instead.
+        \n\nIf you want to securely share your device with someone, try using a guest user instead.
         \n\nTo use app pinning:
         \t\n1.\tTurn on app pinning
         \t\n2.\tOpen Overview
@@ -11358,7 +11363,7 @@
     <string name="media_output_title">Play media to</string>
 
     <!-- Title with application label for media output settings. [CHAR LIMIT=NONE] -->
-    <string name="media_output_label_title">Play <xliff:g id="label" example="Music Player">%s</xliff:g> to</string>
+    <string name="media_output_label_title">Play <xliff:g id="label" example="Music Player">%s</xliff:g> on</string>
 
     <!-- Summary for media output default settings. (this device) [CHAR LIMIT=30] -->
     <string name="media_output_default_summary">This device</string>
@@ -11810,7 +11815,12 @@
     <string name="see_less">See less</string>
 
     <!-- Title for Network connection request Dialog [CHAR LIMIT=60] -->
-    <string name="network_connection_request_dialog_title">Device to use with <xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g></string>
+    <string name="network_connection_request_dialog_title">Connect to device</string>
+    <!-- Summary for Network connection request Dialog [CHAR LIMIT=NONE] -->
+    <string name="network_connection_request_dialog_summary">
+        <xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g>
+        app wants to use a temporary Wi\u2011Fi network to connect to your device
+    </string>
     <!-- Message for Network connection timeout Dialog [CHAR LIMIT=NONE] -->
     <string name="network_connection_timeout_dialog_message">No devices found. Make sure devices are turned on and available to connect.</string>
     <!-- OK button for Network connection timeout Dialog [CHAR LIMIT=30] -->
@@ -11868,6 +11878,11 @@
     <string name="privacy_dashboard_title">Privacy</string>
     <!-- Summary for the top level Privacy Settings [CHAR LIMIT=NONE]-->
     <string name="privacy_dashboard_summary">Permissions, account activity, personal data</string>
+
+    <!-- UI debug setting: show media player on quick settings title [CHAR LIMIT=60] -->
+    <string name="quick_settings_media_player">Media resumption</string>
+    <!-- UI debug setting: show media player on quick settings summary [CHAR_LIMIT=NONE] -->
+    <string name="quick_settings_media_player_summary">Shows and persists media player in Quick Settings. Requires reboot.</string>
 
     <!-- Label for button in contextual card for users to remove the card [CHAR LIMIT=30] -->
     <string name="contextual_card_dismiss_remove">Remove</string>
@@ -12132,4 +12147,7 @@
     <string name="no_5g_in_dsds_text" product="device">When using 2 SIMs, this device will be limited to 4G. <annotation id="url">Learn more</annotation>.</string>
     <!-- Help URI, 5G limitation in DSDS condition. [DO NOT TRANSLATE] -->
     <string name="help_uri_5g_dsds" translatable="false"></string>
+
+    <!-- Developer settings: app freezer title [CHAR LIMIT=50]-->
+    <string name="cached_apps_freezer">Suspend execution for cached apps</string>
 </resources>
