@@ -72,6 +72,7 @@ public class BillingCyclePreference extends Preference
         setSummary(null);
 
         setIntent(getIntent());
+        updateEnabled();
     }
 
     private void updateEnabled() {
