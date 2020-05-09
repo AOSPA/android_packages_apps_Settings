@@ -61,6 +61,19 @@
         <item>@string/security_settings_fingerprint_sensor_location_front</item> <!-- FOD -->
     </string-array>
 
+    <!-- Screen off animation -->
+    <string-array name="screen_off_animation_entries">
+        <item>@string/screen_off_animation_default</item>
+        <item>@string/screen_off_animation_crt</item>
+        <item>@string/screen_off_animation_scale</item>
+    </string-array>
+
+    <string-array name="screen_off_animation_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
     <!-- Hardware key rebinding -->
     <string-array name="hardware_keys_action_entries" translatable="false">
         <item>@string/hardware_keys_action_nothing</item>
