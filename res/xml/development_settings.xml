@@ -38,6 +38,7 @@
         <Preference
             android:key="bug_report_handler"
             android:title="@string/bug_report_handler_title"
+            android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.bugreporthandler.BugReportHandlerPicker" />
 
         <Preference
@@ -64,6 +65,7 @@
         <ListPreference
             android:key="hdcp_checking"
             android:title="@string/hdcp_checking_title"
+            android:summary="@string/summary_placeholder"
             android:dialogTitle="@string/hdcp_checking_dialog_title"
             android:entries="@array/hdcp_checking_titles"
             android:entryValues="@array/hdcp_checking_values" />
@@ -530,6 +532,11 @@
             android:title="@string/usb_audio_disable_routing"
             android:summary="@string/usb_audio_disable_routing_summary" />
 
+        <SwitchPreference
+            android:key="quick_settings_media_player"
+            android:title="@string/quick_settings_media_player"
+            android:summary="@string/quick_settings_media_player_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -581,6 +588,12 @@
             android:key="show_all_anrs"
             android:title="@string/show_all_anrs"
             android:summary="@string/show_all_anrs_summary" />
+
+        <ListPreference
+            android:key="cached_apps_freezer"
+            android:title="@string/cached_apps_freezer"
+            android:entries="@array/cached_apps_freezer_entries"
+            android:entryValues="@array/cached_apps_freezer_values" />
 
         <SwitchPreference
             android:key="show_notification_channel_warnings"
