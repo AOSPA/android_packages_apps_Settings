@@ -70,31 +70,6 @@ public class EnabledNetworkModePreferenceController extends
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
-        mPreferredNetworkModeObserver = new PreferredNetworkModeContentObserver(
-                new Handler(Looper.getMainLooper()));
-        mPreferredNetworkModeObserver.setPreferredNetworkModeChangedListener(
-                () -> updatePreference());
-        mSubsidySettingsObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
-            @Override
-            public void onChange(boolean selfChange) {
-                if (mPreference != null) {
-                    if (PrimaryCardAndSubsidyLockUtils.DBG) {
-                        Log.d(LOG_TAG, "mSubsidySettingsObserver#onChange");
-                    }
-                    updateState(mPreference);
-                }
-            }
-        };
-
-    }
-
-    private void updatePreference() {
-        if (mPreferenceScreen != null) {
-            displayPreference(mPreferenceScreen);
-        }
-        if (mPreference != null) {
-            updateState(mPreference);
-        }
     }
 
     @Override
@@ -121,6 +96,9 @@ public class EnabledNetworkModePreferenceController extends
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
+        if (mPreferredNetworkModeObserver == null || mSubsidySettingsObserver == null) {
+            return;
+        }
         loadPrimaryCardAndSubsidyLockValues();
         mPreferredNetworkModeObserver.register(mContext, mSubId);
         if (mIsSubsidyLockFeatureEnabled) {
@@ -132,6 +110,9 @@ public class EnabledNetworkModePreferenceController extends
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
+        if (mPreferredNetworkModeObserver == null) {
+            return;
+        }
         mPreferredNetworkModeObserver.unregister(mContext);
         if (mSubsidySettingsObserver != null) {
             mContext.getContentResolver().unregisterContentObserver(mSubsidySettingsObserver);
@@ -181,7 +162,36 @@ public class EnabledNetworkModePreferenceController extends
         mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
         mBuilder = new PreferenceEntriesBuilder(mContext, mSubId);
 
+        if (mPreferredNetworkModeObserver == null) {
+            mPreferredNetworkModeObserver = new PreferredNetworkModeContentObserver(
+                    new Handler(Looper.getMainLooper()));
+            mPreferredNetworkModeObserver.setPreferredNetworkModeChangedListener(
+                    () -> updatePreference());
+        }
+        if (mSubsidySettingsObserver == null) {
+            mSubsidySettingsObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
+                @Override
+                public void onChange(boolean selfChange) {
+                    if (mPreference != null) {
+                        if (PrimaryCardAndSubsidyLockUtils.DBG) {
+                            Log.d(LOG_TAG, "mSubsidySettingsObserver#onChange");
+                        }
+                        updateState(mPreference);
+                    }
+                }
+            };
+        }
+
         lifecycle.addObserver(this);
+    }
+
+    private void updatePreference() {
+        if (mPreferenceScreen != null) {
+            displayPreference(mPreferenceScreen);
+        }
+        if (mPreference != null) {
+            updateState(mPreference);
+        }
     }
 
     private final static class PreferenceEntriesBuilder {
