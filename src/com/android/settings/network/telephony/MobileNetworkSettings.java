@@ -42,6 +42,7 @@ import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
+import com.android.settings.network.ActiveSubsciptionsListener;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController;
@@ -49,6 +50,7 @@ import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenc
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -75,6 +77,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
     private UserManager mUserManager;
     private String mClickedPrefKey;
+
+    private ActiveSubsciptionsListener mActiveSubsciptionsListener;
+    private boolean mActiveSubsciptionsListenerStarting;
+    private int mActiveSubsciptionsListenerCount;
 
     private final BroadcastReceiver mSimStateReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
@@ -242,6 +248,18 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     public void onResume() {
         Log.i(LOG_TAG, "onResume:+");
         super.onResume();
+        if (mActiveSubsciptionsListener == null) {
+            mActiveSubsciptionsListenerStarting = true;
+            mActiveSubsciptionsListener = new ActiveSubsciptionsListener(
+                    getContext().getMainLooper(), getContext(), mSubId) {
+                public void onChanged() {
+                    onSubscriptionDetailChanged();
+                }
+            };
+            mActiveSubsciptionsListenerStarting = false;
+        }
+        mActiveSubsciptionsListener.start();
+
         Context context = getContext();
         if (context != null) {
             context.registerReceiver(mSimStateReceiver,
@@ -249,6 +267,22 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         } else {
             Log.i(LOG_TAG, "context is null, not registering SimStateReceiver");
         }
+    }
+
+    private void onSubscriptionDetailChanged() {
+        if (mActiveSubsciptionsListenerStarting) {
+            Log.d(LOG_TAG, "Callback during onResume()");
+            return;
+        }
+        mActiveSubsciptionsListenerCount++;
+        if (mActiveSubsciptionsListenerCount != 1) {
+            return;
+        }
+
+        ThreadUtils.postOnMainThread(() -> {
+            mActiveSubsciptionsListenerCount = 0;
+            redrawPreferenceControllers();
+        });
     }
 
     @Override
