@@ -16,8 +16,6 @@
 
 package com.android.settings.network;
 
-import static com.android.settings.network.TetherEnabler.USB_TETHER_KEY;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -61,7 +59,7 @@ public class UsbTetherPreferenceControllerTest {
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
                 mConnectivityManager);
         when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{""});
-        mController = new UsbTetherPreferenceController(mContext, USB_TETHER_KEY);
+        mController = new UsbTetherPreferenceController(mContext, "USB");
         mController.setTetherEnabler(mTetherEnabler);
         mSwitchPreference = spy(SwitchPreference.class);
         ReflectionHelpers.setField(mController, "mPreference", mSwitchPreference);
@@ -95,12 +93,15 @@ public class UsbTetherPreferenceControllerTest {
     }
 
     @Test
-    public void display_availableChangedCorrectly() {
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{""});
-        assertThat(mController.isAvailable()).isTrue();
-
+    public void shouldShow_noTetherableUsb() {
         when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.shouldShow()).isFalse();
+    }
+
+    @Test
+    public void shouldEnable_noUsbConnected() {
+        ReflectionHelpers.setField(mController, "mUsbConnected", false);
+        assertThat(mController.shouldEnable()).isFalse();
     }
 
     @Test

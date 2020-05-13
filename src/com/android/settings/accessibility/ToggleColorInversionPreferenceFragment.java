@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME;
+import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logServiceStatus;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
@@ -39,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Settings page for color inversion. */
-@SearchIndexable
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePreferenceFragment {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
@@ -53,6 +54,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
+        logServiceStatus(mComponentName.flattenToString(), enabled);
         Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? ON : OFF);
     }
 
@@ -122,6 +124,12 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     public void onSettingsClicked(ShortcutPreference preference) {
         super.onSettingsClicked(preference);
         showDialog(DialogEnums.EDIT_SHORTCUT);
+    }
+
+    @Override
+    int getUserShortcutTypes() {
+        return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
+                mComponentName);
     }
 
     private void updateSwitchBarToggleSwitch() {

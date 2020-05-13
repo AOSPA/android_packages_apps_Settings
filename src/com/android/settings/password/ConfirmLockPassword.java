@@ -39,6 +39,7 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImeAwareEditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -49,7 +50,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.internal.widget.TextViewInputDisabler;
 import com.android.settings.R;
-import com.android.settings.widget.ImeAwareEditText;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 
@@ -159,6 +159,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         ConfirmDeviceCredentialBaseFragment.HEADER_TEXT);
                 CharSequence detailsMessage = intent.getCharSequenceExtra(
                         ConfirmDeviceCredentialBaseFragment.DETAILS_TEXT);
+                if (TextUtils.isEmpty(headerMessage) && mIsManagedProfile) {
+                    headerMessage = mDevicePolicyManager.getOrganizationNameForUser(mUserId);
+                }
                 if (TextUtils.isEmpty(headerMessage)) {
                     headerMessage = getString(getDefaultHeader());
                 }

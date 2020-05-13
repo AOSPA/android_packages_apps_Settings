@@ -51,6 +51,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.view.inputmethod.EditorInfo;
@@ -93,6 +94,9 @@ import java.util.stream.Collectors;
 /**
  * The class for allowing UIs like {@link WifiDialog} and {@link WifiConfigUiBase} to
  * share the logic for controlling buttons, text fields, etc.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in {@link WifiConfigController2}.
  */
 public class WifiConfigController implements TextWatcher,
         AdapterView.OnItemSelectedListener, OnCheckedChangeListener,
@@ -698,12 +702,6 @@ public class WifiConfigController implements TextWatcher,
 
             case AccessPoint.SECURITY_EAP:
             case AccessPoint.SECURITY_EAP_SUITE_B:
-                if (mAccessPoint != null && mAccessPoint.isFils256Supported()) {
-                    config.allowedKeyManagement.set(KeyMgmt.FILS_SHA256);
-                }
-                if (mAccessPoint != null && mAccessPoint.isFils384Supported()) {
-                    config.allowedKeyManagement.set(KeyMgmt.FILS_SHA384);
-                }
                 if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
                     // allowedSuiteBCiphers will be set according to certificate type
                     config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
@@ -845,10 +843,6 @@ public class WifiConfigController implements TextWatcher,
                 } else {
                     // clear password
                     config.enterpriseConfig.setPassword(mPasswordView.getText().toString());
-                }
-                if (mAccessPoint != null && (mAccessPoint.isFils256Supported()
-                            || mAccessPoint.isFils384Supported())) {
-                    config.enterpriseConfig.setEapErp("1");
                 }
                 break;
 
@@ -1085,6 +1079,8 @@ public class WifiConfigController implements TextWatcher,
             mSimCardSpinner = (Spinner) mView.findViewById(R.id.sim_card);
             mEapIdentityView = (TextView) mView.findViewById(R.id.identity);
             mEapAnonymousView = (TextView) mView.findViewById(R.id.anonymous);
+
+            setAccessibilityDelegateForSecuritySpinners();
         }
 
         if (refreshEapMethods) {
@@ -1228,6 +1224,26 @@ public class WifiConfigController implements TextWatcher,
             }
             showEapFieldsByMethod(mEapMethodSpinner.getSelectedItemPosition());
         }
+    }
+
+    private void setAccessibilityDelegateForSecuritySpinners() {
+        final AccessibilityDelegate selectedEventBlocker = new AccessibilityDelegate() {
+            @Override
+            public void sendAccessibilityEvent(View host, int eventType) {
+                if (eventType == AccessibilityEvent.TYPE_VIEW_SELECTED) {
+                    // Ignore TYPE_VIEW_SELECTED or there will be multiple Spinner selected
+                    // information for WifiController#showSecurityFields.
+                    return;
+                }
+                super.sendAccessibilityEvent(host, eventType);
+            }
+        };
+
+        mEapMethodSpinner.setAccessibilityDelegate(selectedEventBlocker);
+        mPhase2Spinner.setAccessibilityDelegate(selectedEventBlocker);
+        mEapCaCertSpinner.setAccessibilityDelegate(selectedEventBlocker);
+        mEapOcspSpinner.setAccessibilityDelegate(selectedEventBlocker);
+        mEapUserCertSpinner.setAccessibilityDelegate(selectedEventBlocker);
     }
 
     /**
@@ -1694,15 +1710,8 @@ public class WifiConfigController implements TextWatcher,
         } else if (parent == mProxySettingsSpinner) {
             showProxyFields();
         } else if (parent == mHiddenSettingsSpinner) {
-            mHiddenWarningView.setVisibility(
-                    position == NOT_HIDDEN_NETWORK
-                            ? View.GONE
-                            : View.VISIBLE);
-            if (position == HIDDEN_NETWORK) {
-                mDialogContainer.post(() -> {
-                  mDialogContainer.fullScroll(View.FOCUS_DOWN);
-                });
-            }
+            mHiddenWarningView.setVisibility(position == NOT_HIDDEN_NETWORK
+                    ? View.GONE : View.VISIBLE);
         } else {
             showIpConfigFields();
         }

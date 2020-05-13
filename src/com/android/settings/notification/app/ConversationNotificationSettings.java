@@ -92,8 +92,10 @@ public class ConversationNotificationSettings extends NotificationSettings {
         mControllers.add(new BadgePreferenceController(context, mBackend));
         mControllers.add(new NotificationsOffPreferenceController(context));
         mControllers.add(new BubblePreferenceController(context, getChildFragmentManager(),
-                mBackend, false /* isAppPage */));
+                mBackend, false /* isAppPage */, null /* dependentFieldListener */));
         mControllers.add(new ConversationDemotePreferenceController(context, this, mBackend));
+        mControllers.add(new BubbleCategoryPreferenceController(context));
+        mControllers.add(new BubbleLinkPreferenceController(context));
         return new ArrayList<>(mControllers);
     }
 }

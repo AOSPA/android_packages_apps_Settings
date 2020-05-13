@@ -156,6 +156,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private NetworkInfo mNetworkInfo;
     private NetworkCapabilities mNetworkCapabilities;
     private int mRssiSignalLevel = -1;
+    private int mWifiStandard;
+    private boolean mIsReady;
     private String[] mSignalStr;
     private WifiInfo mWifiInfo;
     private final WifiManager mWifiManager;
@@ -446,10 +448,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         if (usingDataUsageHeader(mContext)) {
             mSummaryHeaderController.updateState(mDataUsageSummaryPref);
         } else {
-            String summary = mWifiEntry.getSummary();
-
             mEntityHeaderController
-                    .setSummary(summary)
+                    .setSummary(mWifiEntry.getSummary())
                     .setSecondSummary(getExpiryTimeSummary())
                     .setRecyclerView(mFragment.getListView(), mLifecycle)
                     .done(mFragment.getActivity(), true /* rebind */);
@@ -515,6 +515,9 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
     private void refreshRssiViews() {
         int signalLevel = mWifiEntry.getLevel();
+        int wifiStandard = mWifiEntry.getWifiStandard();
+        boolean isReady = mWifiEntry.isVhtMax8SpatialStreamsSupported() &&
+                              mWifiEntry.isHe8ssCapableAp();
 
         // Disappears signal view if not in range. e.g. for saved networks.
         if (signalLevel == WifiEntry.WIFI_LEVEL_UNREACHABLE) {
@@ -523,11 +526,15 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             return;
         }
 
-        if (mRssiSignalLevel == signalLevel) {
+        if (mRssiSignalLevel == signalLevel &&
+            mWifiStandard == wifiStandard &&
+            mIsReady == isReady) {
             return;
         }
         mRssiSignalLevel = signalLevel;
-        Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel);
+        mWifiStandard = wifiStandard;
+        mIsReady = isReady;
+        Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel, mWifiStandard, mIsReady);
 
         if (mEntityHeaderController != null) {
             mEntityHeaderController
@@ -660,7 +667,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshButtons() {
-        final boolean canForgetNetwork = mWifiEntry.canForget();
+        final boolean canForgetNetwork = canForgetNetwork();
         final boolean showCaptivePortalButton = updateCaptivePortalButton();
         final boolean canConnectDisconnectNetwork = mWifiEntry.canConnect()
                 || mWifiEntry.canDisconnect();
@@ -788,6 +795,14 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     /**
+     * Returns whether the network represented by this preference can be forgotten.
+     */
+    public boolean canForgetNetwork() {
+        return mWifiEntry.canForget()
+                && !WifiUtils.isNetworkLockedDown(mContext, mWifiEntry.getWifiConfiguration());
+    }
+
+    /**
      * Returns whether the user can sign into the network represented by this preference.
      */
     private boolean canSignIntoNetwork() {
@@ -908,6 +923,10 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
         public Drawable getIcon(int level) {
             return mContext.getDrawable(Utils.getWifiIconResource(level)).mutate();
+        }
+
+        public Drawable getIcon(int level, int standard, boolean isReady) {
+            return mContext.getDrawable(Utils.getWifiIconResource(level, standard, isReady)).mutate();
         }
     }
 

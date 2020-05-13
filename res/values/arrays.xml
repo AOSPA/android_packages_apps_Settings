@@ -297,14 +297,27 @@
    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array translatable="false" name="wifi_ap_band_vendor_config_full">
         <item>1</item>
-        <item>2</item>
+        <item>3</item>
         <item>8</item>
     </string-array>
 
     <string-array translatable="false" name="wifi_ap_band_vendor_summary_full">
         <item>@string/wifi_ap_choose_2G</item>
-        <item>@string/wifi_ap_choose_5G</item>
+        <item>@string/wifi_ap_prefer_5G</item>
         <item>@string/wifi_ap_choose_vendor_dual_band</item>
+    </string-array>
+
+   <!-- Wi-Fi AP Vendor band settings for OWE Transition mode.  Either 2.4GHz or 5GHz -->
+   <!-- Note: OWE transition mode SAP doesn't support dual band -->
+   <!-- Note: Adding/removing/moving the items will need wifi settings code change. -->
+    <string-array translatable="false" name="wifi_ap_band_vendor_config_no_dual">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array translatable="false" name="wifi_ap_band_vendor_summary_no_dual">
+        <item>@string/wifi_ap_choose_2G</item>
+        <item>@string/wifi_ap_choose_5G</item>
     </string-array>
 
     <!-- Wi-Fi WPS setup for p2p connections.  -->
@@ -1165,14 +1178,14 @@
         <item>@string/zen_mode_from_anyone</item>
         <item>@string/zen_mode_from_contacts</item>
         <item>@string/zen_mode_from_starred</item>
-        <item>@string/zen_mode_from_none_messages</item>
+        <item>@string/zen_mode_none_messages</item>
     </string-array>
 
     <string-array name="zen_mode_contacts_calls_entries" translatable="false">
         <item>@string/zen_mode_from_anyone</item>
         <item>@string/zen_mode_from_contacts</item>
         <item>@string/zen_mode_from_starred</item>
-        <item>@string/zen_mode_from_none_calls</item>
+        <item>@string/zen_mode_none_calls</item>
     </string-array>
 
     <string-array name="zen_mode_contacts_values" translatable="false">

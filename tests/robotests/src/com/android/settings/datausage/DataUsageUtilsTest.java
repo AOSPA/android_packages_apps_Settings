@@ -76,20 +76,6 @@ public final class DataUsageUtilsTest {
     }
 
     @Test
-    public void hasSim_simStateReady() {
-        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_READY);
-        final boolean hasSim = DataUsageUtils.hasSim(mContext);
-        assertThat(hasSim).isTrue();
-    }
-
-    @Test
-    public void hasSim_simStateMissing() {
-        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
-        final boolean hasSim = DataUsageUtils.hasSim(mContext);
-        assertThat(hasSim).isFalse();
-    }
-
-    @Test
     public void formatDataUsage_useIECUnit() {
         final CharSequence formattedDataUsage = DataUsageUtils.formatDataUsage(
                 mContext, DataUnit.GIBIBYTES.toBytes(1));

@@ -19,13 +19,24 @@ package com.android.settings.network.telephony;
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.telecom.PhoneAccount;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -35,13 +46,6 @@ import com.android.settings.network.SubscriptionsChangeListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import org.codeaurora.internal.IExtTelephony;
 
@@ -58,6 +62,13 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
     protected SubscriptionsChangeListener mChangeListener;
     protected ListPreference mPreference;
     protected SubscriptionManager mManager;
+    protected TelecomManager mTelecomManager;
+
+    private static final String EMERGENCY_ACCOUNT_HANDLE_ID = "E";
+    private static final ComponentName PSTN_CONNECTION_SERVICE_COMPONENT =
+            new ComponentName("com.android.phone",
+                    "com.android.services.telephony.TelephonyConnectionService");
+
     protected TelephonyManager mTelephonyManager;
 
     //String keys for data preference lookup
@@ -71,6 +82,7 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
     public DefaultSubscriptionController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mManager = context.getSystemService(SubscriptionManager.class);
+        mTelecomManager = mContext.getSystemService(TelecomManager.class);
         mChangeListener = new SubscriptionsChangeListener(context, this);
 
         mTelephonyManager = (TelephonyManager) mContext
@@ -130,8 +142,14 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
 
     @Override
     public CharSequence getSummary() {
+        final PhoneAccountHandle handle = getDefaultCallingAccountHandle();
+        if ((handle != null) && (!isCallingAccountBindToSubscription(handle))) {
+            // display VoIP account in summary when configured through settings within dialer
+            return getLabelFromCallingAccount(handle);
+        }
         final SubscriptionInfo info = getDefaultSubscriptionInfo();
         if (info != null) {
+            // display subscription based account
             return info.getDisplayName();
         } else {
             return mContext.getString(R.string.calls_and_sms_ask_every_time);
@@ -195,6 +213,56 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
         } else {
             mPreference.setValue(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
         }
+    }
+
+    /**
+     * Get default calling account
+     *
+     * @return current calling account {@link PhoneAccountHandle}
+     */
+    public PhoneAccountHandle getDefaultCallingAccountHandle() {
+        final PhoneAccountHandle currentSelectPhoneAccount =
+                mTelecomManager.getUserSelectedOutgoingPhoneAccount();
+        if (currentSelectPhoneAccount == null) {
+            return null;
+        }
+        final List<PhoneAccountHandle> accountHandles =
+                mTelecomManager.getCallCapablePhoneAccounts(false);
+        final PhoneAccountHandle emergencyAccountHandle = new PhoneAccountHandle(
+                PSTN_CONNECTION_SERVICE_COMPONENT, EMERGENCY_ACCOUNT_HANDLE_ID);
+        if (currentSelectPhoneAccount.equals(emergencyAccountHandle)) {
+            return null;
+        }
+        for (PhoneAccountHandle handle : accountHandles) {
+            if (currentSelectPhoneAccount.equals(handle)) {
+                return currentSelectPhoneAccount;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Check if calling account bind to subscription
+     *
+     * @param handle {@link PhoneAccountHandle} for specific calling account
+     */
+    public boolean isCallingAccountBindToSubscription(PhoneAccountHandle handle) {
+        return mTelecomManager.getPhoneAccount(handle)
+                .hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION);
+    }
+
+    /**
+     * Get label from calling account
+     *
+     * @param handle to get label from {@link PhoneAccountHandle}
+     * @return label of calling account
+     */
+    public CharSequence getLabelFromCallingAccount(PhoneAccountHandle handle) {
+        CharSequence label = mTelecomManager.getPhoneAccount(handle).getLabel();
+        if (label != null) {
+            label = mContext.getPackageManager().getUserBadgedLabel(label, handle.getUserHandle());
+        }
+        return (label != null) ? label : "";
     }
 
     private boolean isCallStateIdle() {

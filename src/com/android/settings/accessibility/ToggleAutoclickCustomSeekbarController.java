@@ -153,7 +153,7 @@ public class ToggleAutoclickCustomSeekbarController extends BasePreferenceContro
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (KEY_DELAY_MODE.equals(key)) {
-            int delayMillis = getSharedPreferenceForDelayValue();
+            final int delayMillis = getSharedPreferenceForDelayValue();
             updateCustomDelayValue(delayMillis);
         }
     }
@@ -172,10 +172,11 @@ public class ToggleAutoclickCustomSeekbarController extends BasePreferenceContro
     }
 
     private int getSharedPreferenceForDelayValue() {
-        int delayMillis = mSharedPreferences.getInt(KEY_CUSTOM_DELAY_VALUE,
+        final int delayMillis = Settings.Secure.getInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
                 AccessibilityManager.AUTOCLICK_DELAY_DEFAULT);
 
-        return delayMillis;
+        return mSharedPreferences.getInt(KEY_CUSTOM_DELAY_VALUE, delayMillis);
     }
 
     private void putSecureInt(String name, int value) {
@@ -190,21 +191,21 @@ public class ToggleAutoclickCustomSeekbarController extends BasePreferenceContro
     }
 
     private void minusDelayByImageView() {
-        int delayMillis = getSharedPreferenceForDelayValue();
+        final int delayMillis = getSharedPreferenceForDelayValue();
         if (delayMillis > MIN_AUTOCLICK_DELAY_MS) {
             updateCustomDelayValue(delayMillis - AUTOCLICK_DELAY_STEP);
         }
     }
 
     private void plusDelayByImageView() {
-        int delayMillis = getSharedPreferenceForDelayValue();
+        final int delayMillis = getSharedPreferenceForDelayValue();
         if (delayMillis < MAX_AUTOCLICK_DELAY_MS) {
             updateCustomDelayValue(delayMillis + AUTOCLICK_DELAY_STEP);
         }
     }
 
     private CharSequence delayTimeToString(int delayMillis) {
-        final int quantity = (delayMillis == 1000) ? Quantity.ONE : Quantity.OTHER;
+        final int quantity = (delayMillis == 1000) ? Quantity.ONE : Quantity.FEW;
         final float delaySecond = (float) delayMillis / 1000;
         // Only show integer when delay time is 1.
         final String decimalFormat = (delaySecond == 1) ? "%.0f" : "%.1f";

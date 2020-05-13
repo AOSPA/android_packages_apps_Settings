@@ -79,10 +79,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         super.onCreate(icicle);
         Context context = getContext();
 
-        // Enable ProxySubscriptionMgr with Lifecycle support for all controllers
-        // live within this fragment
-        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(context);
-        mProxySubscriptionMgr.setLifecycle(getLifecycle());
+        enableProxySubscriptionManager(context);
 
         boolean hasMobileData = DataUsageUtils.hasMobileData(context);
 
@@ -111,8 +108,8 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
                     addMobileSection(subInfo.getSubscriptionId());
                 }
             }
-            if (DataUsageUtils.hasSim(context) && hasWifiRadio) {
-                // If the device has a SIM installed, the data usage section shows usage for mobile,
+            if (hasActiveSubscription() && hasWifiRadio) {
+                // If the device has active SIM, the data usage section shows usage for mobile,
                 // and the WiFi section is added if there is a WiFi radio - legacy behavior.
                 addWifiSection();
             }
@@ -162,6 +159,21 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     @VisibleForTesting
     void addMobileSection(int subId) {
         addMobileSection(subId, null);
+    }
+
+    @VisibleForTesting
+    void enableProxySubscriptionManager(Context context) {
+        // Enable ProxySubscriptionMgr with Lifecycle support for all controllers
+        // live within this fragment
+        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(context);
+        mProxySubscriptionMgr.setLifecycle(getLifecycle());
+    }
+
+    @VisibleForTesting
+    boolean hasActiveSubscription() {
+        final List<SubscriptionInfo> subInfoList =
+                mProxySubscriptionMgr.getActiveSubscriptionsInfo();
+        return ((subInfoList != null) && (subInfoList.size() > 0));
     }
 
     private void addMobileSection(int subId, SubscriptionInfo subInfo) {

@@ -83,6 +83,9 @@ public class MediaOutputGroupSlice implements CustomSliceable {
         final IconCompat titleIcon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_speaker_group_black_24dp);
         final Bitmap emptyBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+        if (getWorker() == null) {
+            return listBuilder.build();
+        }
         final int maxVolume = getWorker().getSessionVolumeMax();
         final String title = mContext.getString(R.string.media_output_group);
         final SliceAction primaryAction = SliceAction.createDeeplink(
@@ -95,7 +98,8 @@ public class MediaOutputGroupSlice implements CustomSliceable {
                         GROUP_DEVICES.hashCode() + ACTION_MEDIA_SESSION_OPERATION,
                         ACTION_MEDIA_SESSION_OPERATION),
                 IconCompat.createWithBitmap(emptyBitmap), ListBuilder.ICON_IMAGE, "");
-        if (maxVolume > 0) {    // Add InputRange row
+        if (maxVolume > 0 && !getWorker().hasAdjustVolumeUserRestriction()) {
+            // Add InputRange row
             listBuilder.addInputRange(new ListBuilder.InputRangeBuilder()
                     .setTitleItem(titleIcon, ListBuilder.ICON_IMAGE)
                     .addEndItem(endItemAction)
@@ -119,6 +123,7 @@ public class MediaOutputGroupSlice implements CustomSliceable {
     }
 
     private void addRow(ListBuilder listBuilder, List<MediaDevice> mediaDevices, boolean selected) {
+        final boolean adjustVolumeUserRestriction = getWorker().hasAdjustVolumeUserRestriction();
         for (MediaDevice device : mediaDevices) {
             final int maxVolume = device.getMaxVolume();
             final IconCompat titleIcon = Utils.createIconWithDrawable(device.getIcon());
@@ -133,7 +138,8 @@ public class MediaOutputGroupSlice implements CustomSliceable {
                     IconCompat.createWithResource(mContext, R.drawable.ic_check_box_anim),
                     "",
                     selected);
-            if (maxVolume > 0) {    // Add InputRange row
+            if (maxVolume > 0 && selected && !adjustVolumeUserRestriction) {
+                // Add InputRange row
                 final ListBuilder.InputRangeBuilder builder = new ListBuilder.InputRangeBuilder()
                         .setTitleItem(titleIcon, ListBuilder.ICON_IMAGE)
                         .setTitle(title)
@@ -165,7 +171,7 @@ public class MediaOutputGroupSlice implements CustomSliceable {
     }
 
     private IconCompat getDisabledCheckboxIcon() {
-        final Drawable drawable = mContext.getDrawable(R.drawable.ic_check_box_blue_24dp);
+        final Drawable drawable = mContext.getDrawable(R.drawable.ic_check_box_blue_24dp).mutate();
         final Bitmap checkbox = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
                 drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(checkbox);

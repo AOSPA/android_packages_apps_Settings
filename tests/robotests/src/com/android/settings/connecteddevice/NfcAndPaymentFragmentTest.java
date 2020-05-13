@@ -62,7 +62,7 @@ public class NfcAndPaymentFragmentTest {
     }
 
     @Test
-    public void searchIndexProvider_shouldIndexAllItems() {
+    public void searchIndexProvider_shouldIndexValidItems() {
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(NfcAdapter.getDefaultAdapter(mContext)).thenReturn(mNfcAdapter);
         when(mNfcAdapter.isSecureNfcSupported()).thenReturn(true);
@@ -71,6 +71,6 @@ public class NfcAndPaymentFragmentTest {
                 .getNonIndexableKeys(mContext);
 
         assertThat(niks).isNotNull();
-        assertThat(niks).isEmpty();
+        assertThat(niks).containsExactly("nfc_detection_point");
     }
 }

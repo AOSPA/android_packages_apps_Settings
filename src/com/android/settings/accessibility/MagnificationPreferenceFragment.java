@@ -39,12 +39,11 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.List;
 
-@SearchIndexable
+/** Settings fragment containing magnification preference. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public final class MagnificationPreferenceFragment extends DashboardFragment {
-    @VisibleForTesting
-    static final int ON = 1;
-    @VisibleForTesting
-    static final int OFF = 0;
+    @VisibleForTesting static final int ON = 1;
+    @VisibleForTesting static final int OFF = 0;
 
     private static final String TAG = "MagnificationPreferenceFragment";
 
@@ -121,7 +120,7 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
         final AccessibilityManager am = (AccessibilityManager) context.getSystemService(
                 Context.ACCESSIBILITY_SERVICE);
         final String assignedId = Settings.Secure.getString(context.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT);
+                Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         if (!TextUtils.isEmpty(assignedId) && !MAGNIFICATION_COMPONENT_ID.equals(assignedId)) {
             final ComponentName assignedComponentName = ComponentName.unflattenFromString(
                     assignedId);

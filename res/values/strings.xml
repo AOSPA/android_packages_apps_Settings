@@ -24,6 +24,8 @@
     <string name="allow">Allow</string>
     <!-- Strings for Dialog deny button -->
     <string name="deny">Deny</string>
+    <!-- Used in confirmation dialogs as the action that the user will tap to turn on the feature. [CHAR LIMIT=40]-->
+    <string name="confirmation_turn_on">Turn on</string>
 
     <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
     <string name="device_info_default">Unknown</string>
@@ -205,6 +207,11 @@
     <string name="bluetooth_show_received_files">Received files</string>
     <!-- Item in bluetooth settings screen, used to show the list of Files received via Bluetooth [CHAR LIMIT=NONE] -->
     <string name="bluetooth_show_files_received_via_bluetooth">Files received via Bluetooth</string>
+
+    <!-- Title for contextual Bluetooth devices card when Bluetooth is off [CHAR LIMIT=NONE]-->
+    <string name="bluetooth_devices_card_off_title">Bluetooth is off</string>
+    <!-- Description about contextual Bluetooth devices card when Bluetooth is off [CHAR LIMIT=NONE]-->
+    <string name="bluetooth_devices_card_off_summary">Tap to turn it on</string>
 
     <!-- Strings for BluetoothDevicePicker [CHAR LIMIT=40]-->
     <string name="device_picker">Choose Bluetooth device</string>
@@ -2851,10 +2858,10 @@
     <string name="night_display_not_currently_on">Night Light not currently on</string>
 
     <!-- Twilight Mode -->
+    <!-- When location mode is off, twilight scheduling does not function. [CHAR LIMIT=120] -->
+    <string name="twilight_mode_location_off_dialog_message">Device location needed to determine your sunset and sunrise times.</string>
     <!-- When location mode is off, twilight scheduling does not function. [CHAR LIMIT=40] -->
-    <string name="twilight_mode_location_off_dialog_message">Device location needed to determine you sunset to sunrise</string>
-    <!-- When location mode is off, twilight scheduling does not function. [CHAR LIMIT=40] -->
-    <string name="twilight_mode_launch_location">Turn on location</string>
+    <string name="twilight_mode_launch_location">Location settings</string>
 
     <!--    Dark ui screen-->
     <!-- Display settings screen, activation button action for manual mode. [CHAR LIMIT=40] -->
@@ -3819,14 +3826,31 @@
     <string name="tether_settings_summary_usb_tethering_only">USB only</string>
     <!-- Tethering setting summary when only Bluetooth tethering is on [CHAR LIMIT=NONE]-->
     <string name="tether_settings_summary_bluetooth_tethering_only">Bluetooth only</string>
+    <!-- Tethering setting summary when only Ethernet tethering is on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_ethernet_tethering_only">Ethernet only</string>
     <!-- Tethering setting summary when Wi-Fi hotspot and USB tethering are on [CHAR LIMIT=NONE]-->
     <string name="tether_settings_summary_hotspot_and_usb">Hotspot, USB</string>
     <!-- Tethering setting summary when Wi-Fi hotspot and Bluetooth tethering are on [CHAR LIMIT=NONE]-->
     <string name="tether_settings_summary_hotspot_and_bluetooth">Hotspot, Bluetooth</string>
+    <!-- Tethering setting summary when Wi-Fi hotspot and Ethernet tethering are on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_hotspot_and_ethernet">Hotspot, Ethernet</string>
     <!-- Tethering setting summary when USB and Bluetooth tethering are on [CHAR LIMIT=NONE]-->
     <string name="tether_settings_summary_usb_and_bluetooth">USB, Bluetooth</string>
+    <!-- Tethering setting summary when USB and Ethernet tethering are on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_usb_and_ethernet">USB, Ethernet</string>
+    <!-- Tethering setting summary when Bluetooth and Ethernet tethering are on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_bluetooth_and_ethernet">Bluetooth, Ethernet</string>
     <!-- Tethering setting summary when Wi-Fi hotspot and USB and Bluetooth tethering are on [CHAR LIMIT=NONE]-->
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth">Hotspot, USB, Bluetooth</string>
+    <!-- Tethering setting summary when Wi-Fi hotspot and USB and Ethernet tethering are on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet">Hotspot, USB, Ethernet</string>
+    <!-- Tethering setting summary when Wi-Fi hotspot and Bluetooth and Ethernet tethering are on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet">Hotspot, Bluetooth, Ethernet</string>
+    <!-- Tethering setting summary when USB and Bluetooth and Ethernet tethering are on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet">USB, Bluetooth, Ethernet</string>
+    <!-- Tethering setting summary when Wi-Fi hotspot and USB and Bluetooth and Ethernet tethering are on [CHAR LIMIT=NONE]-->
+    <string name="tether_settings_summary_all">Hotspot, USB, Bluetooth, Ethernet</string>
+
     <!-- Tethering setting summary when hotspot and tethering are off [CHAR LIMIT=NONE]-->
     <string name="tether_settings_summary_off">Not sharing internet with other devices</string>
 
@@ -3840,8 +3864,16 @@
     <string name="disable_wifi_hotspot_when_usb_on">Only share internet via USB</string>
     <!-- Don't use Wi-Fi hotspot summary when Bluetooth tethering is chosen [CHAR LIMIT=NONE]-->
     <string name="disable_wifi_hotspot_when_bluetooth_on">Only share internet via Bluetooth</string>
+    <!-- Don't use Wi-Fi hotspot summary when Ethernet tethering is chosen [CHAR LIMIT=NONE]-->
+    <string name="disable_wifi_hotspot_when_ethernet_on">Only share internet via Ethernet</string>
     <!-- Don't use Wi-Fi hotspot summary when USB tethering and Bluetooth tethering are chosen [CHAR LIMIT=NONE]-->
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on">Only share internet via USB and Bluetooth</string>
+    <!-- Don't use Wi-Fi hotspot summary when USB tethering and Ethernet tethering are chosen [CHAR LIMIT=NONE]-->
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on">Only share internet via USB and Ethernet</string>
+    <!-- Don't use Wi-Fi hotspot summary when Bluetooth tethering and Ethernet tethering are chosen [CHAR LIMIT=NONE]-->
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on">Only share internet via Bluetooth and Ethernet</string>
+    <!-- Don't use Wi-Fi hotspot summary when USB, Bluetooth and Ethernet tethering are chosen [CHAR LIMIT=NONE]-->
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on">Only share internet via USB, Bluetooth and Ethernet</string>
 
     <!-- USB Tethering options -->
     <string name="usb_title">USB</string>
@@ -4980,7 +5012,7 @@
     <!-- Title for accessibility shortcut preference for accessibility apps. [CHAR LIMIT=40] -->
     <string name="accessibility_shortcut_title"><xliff:g id="service" example="Select to Speak">%1$s</xliff:g> shortcut</string>
     <!-- Title for software shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_summary_software">Accessibility Button</string>
+    <string name="accessibility_shortcut_edit_summary_software">Accessibility button</string>
     <!-- Title for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture">Swipe up with 2 fingers</string>
     <!-- Title for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled. [CHAR LIMIT=NONE] -->
@@ -5001,7 +5033,7 @@
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap">Triple-tap screen</string>
     <!-- Summary for triple tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap">Quickly tap screen 3 times. This shortcut may slow down your device.</string>
-    <!-- Title for the accessibility edit shortcut dialog to save the preference when user clicks it. [CHAR LIMIT=10] -->
+    <!-- Title for the accessibility edit shortcut dialog to save the preference when user clicks it. [CHAR LIMIT=20] -->
     <string name="accessibility_shortcut_edit_dialog_title_advance">Advanced</string>
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_navbar_configuration_warning">The Accessibility button is set to <xliff:g id="service" example="Select to Speak">%1$s</xliff:g>. To use magnification, touch &amp; hold the Accessibility button, then select magnification.</string>
@@ -5204,7 +5236,8 @@
     <!-- Summary for autoclick seekbar settings preference when user selected custom item. [CHAR LIMIT=35] -->
     <plurals name="accessibilty_autoclick_delay_unit_second">
         <item quantity="one"><xliff:g id="click_delay_label" example="1">%1$s</xliff:g> second</item>
-        <item quantity="other"><xliff:g id="click_delay_label" example="0.6">%1$s</xliff:g> seconds</item>
+        <item quantity="few"><xliff:g id="click_delay_label" example="0.6">%1$s</xliff:g> seconds</item>
+        <item quantity="other"><xliff:g id="click_delay_label">%1$s</xliff:g> seconds</item>
     </plurals>
 
     <!-- Summary for vibration settings preference when notification vibration and haptic feedback intensity are set. [CHAR LIMIT=50] -->
@@ -7284,19 +7317,33 @@
     <string name="enhanced_4g_lte_mode_summary">Use LTE services to improve voice and other communications (recommended)</string>
     <!-- Enhaced 4G LTE Mode summary for 4g calling.  [CHAR LIMIT=100] -->
     <string name="enhanced_4g_lte_mode_summary_4g_calling">Use 4G services to improve voice and other communications (recommended)</string>
-    <!-- Title of a preference determining whether or not the user has enabled contact discovery,
-         which is a service that uses the phone numbers in your contacts to determine if your
+    <!-- Title of a preference determining whether or not the user has allowed the device to share
+         their contacts' phone numbers with their carrier in order to implement contact discovery,
+         which is a service that exchanges contacts with the carrier to determine if your
          contacts support advanced calling features, such as video calling. [CHAR LIMIT=50]-->
-    <string name="contact_discovery_opt_in_title">Contact discovery</string>
-    <!-- Summary of a preference determining whether or not the user has enabled contact discovery.
-         [CHAR LIMIT=110] -->
-    <string name="contact_discovery_opt_in_summary">Allows your carrier to discover which calling features your contacts support.</string>
-    <!-- Title of the dialog shown when the user tries to enable Contact Discovery.
+    <string name="contact_discovery_opt_in_title">Send contacts to carrier</string>
+    <!-- Summary of a preference determining whether or not the user has enabled contact discovery,
+         which is a service that exchanges contacts with the carrier to determine if your contacts
+         support enhanced features, such as video calling and RCS messaging. [CHAR LIMIT=110] -->
+    <string name="contact_discovery_opt_in_summary">Send your contacts\u2019 phone numbers to provide enhanced features</string>
+    <!-- Title of the dialog shown when the user tries to enable Contact Discovery, which is a
+         service that exchanges contacts with the carrier to determine if your contacts support
+         enhanced features, such as video calling and RCS messaging. [CHAR LIMIT=50] -->
+    <string name="contact_discovery_opt_in_dialog_title">Send contacts to <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>?</string>
+    <!-- Title of the dialog shown when the carrier name is not known and the user tries to enable
+         Contact Discovery, which is a service that exchanges contacts with the carrier to determine
+         if your contacts support enhanced features, such as video calling and RCS messaging.
          [CHAR LIMIT=50] -->
-    <string name="contact_discovery_opt_in_dialog_title">Enable contact discovery?</string>
-    <!-- Text displayed in the dialog shown when the user tries to enable Contact Discovery.
-         [CHAR LIMIT=NONE]-->
-    <string name="contact_discovery_opt_in_dialog_message">All of the phone numbers in your contacts will be periodically sent to your carrier in order to discover which calling features are supported.</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined">Send contacts to your carrier?</string>
+    <!-- The text displayed in the dialog shown when the user tries to enable Contact Discovery,
+         which is a service that exchanges contacts with the carrier to determine if your contacts
+         support enhanced features, such as video calling and RCS messaging. [CHAR LIMIT=NONE]-->
+    <string name="contact_discovery_opt_in_dialog_message">Your contacts\u2019 phone numbers will be periodically sent to <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>.<xliff:g id="empty_line" example="  ">\n\n</xliff:g>This info identifies whether your contacts can use certain features, like video calls or some messaging features.</string>
+    <!-- The text displayed in the dialog shown when the mobile carrier's name is not known and the
+         user tries to enable Contact Discovery, which is a service that exchanges contacts with
+         the carrier to determine if your contacts support enhanced features, such as video calling
+         and RCS messaging. [CHAR LIMIT=NONE]-->
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined">Your contacts\u2019 phone numbers will be periodically sent to your carrier.<xliff:g id="empty_line" example="  ">\n\n</xliff:g>This info identifies whether your contacts can use certain features, like video calls or some messaging features.</string>
     <!-- Enabled 5G Mode title.  [CHAR LIMIT=50] -->
     <string name="enabled_5g_mode_title">Enable 5G</string>
     <!-- Preferred network type title.  [CHAR LIMIT=50] -->
@@ -7483,6 +7530,8 @@
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary">Bluetooth</string>
     <!-- Summary for Tap & pay settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary">Unavailable because NFC is off</string>
+    <!-- Summary for Tap & pay settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="nfc_and_payment_settings_no_payment_installed_summary">To use, first install a payment app</string>
     <!-- Title for setting tile leading to Apps & Notification settings [CHAR LIMIT=40]-->
     <string name="app_and_notification_dashboard_title">Apps &amp; notifications</string>
     <!-- Summary for Apps & Notification settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
@@ -7564,11 +7613,13 @@
     <string name="keywords_color_mode">vibrant, RGB, sRGB, color, natural, standard</string>
     <string name="keywords_color_temperature">color, temperature, D65, D73, white, yellow, blue, warm, cool</string>
     <string name="keywords_lockscreen">slide to unlock, password, pattern, PIN</string>
+    <!-- Search keyword for App pinning Settings [CHAR LIMIT=NONE] -->
+    <string name="keywords_app_pinning">screen pinning</string>
     <string name="keywords_profile_challenge">work challenge, work, profile</string>
     <string name="keywords_unification">work profile, managed profile, unify, unification, work, profile</string>
     <string name="keywords_gesture">gestures</string>
-    <!-- Search keywords for Global Actions Panel. [DO NOT TRANSLATE] -->
-    <string name="keywords_global_actions_panel" translatable="false">global actions</string>
+    <string name="keywords_cards_passes">cards, passes</string>
+    <string name="keywords_device_controls">device controls, controls</string>
     <string name="keywords_payment_settings">pay, tap, payments</string>
     <string name="keywords_backup">backup, back up</string>
     <string name="keywords_assist_gesture_launch">gesture</string>
@@ -8000,8 +8051,8 @@
     <!-- Do not disturb settings, main screen, field, schedules [CHAR LIMIT=100]-->
     <string name="zen_category_schedule">Schedules</string>
     <!-- Do not disturb settings, main screen, field, duration setting where user can specify how
-    long dnd will last when toggling dnd on from qs or settings) [CHAR LIMIT=100] -->
-    <string name="zen_category_duration">Set duration for Quick Settings</string>
+    long dnd will last when toggling dnd on from qs) [CHAR LIMIT=100] -->
+    <string name="zen_category_duration">Duration for Quick Settings</string>
 
     <!-- Do not disturb settings, sound and vibrations screen footer [CHAR LIMIT=NONE]-->
     <string name="zen_sound_footer">When Do Not Disturb is on, sound and vibration will be muted, except for the items you allow above.</string>
@@ -8180,8 +8231,12 @@
     <string name="bubbles_feature_education">Some notifications and other content can appear as bubbles on the screen. To open a bubble, tap it. To dismiss it, drag it down the screen.</string>
     <!-- Title for the toggle shown on the app-level bubbles page  [CHAR LIMIT=60] -->
     <string name="bubbles_app_toggle_title">Bubbles</string>
+    <!-- Title on the conversation level screen; links back to the app level setting -->
+    <string name="bubbles_conversation_app_link">All Bubble settings</string>
+    <!-- Title for bubbles option on the conversation level screen -->
+    <string name="bubbles_conversation_toggle_title">Bubble this conversation</string>
     <!-- Summary for bubbles option on the conversation level screen -->
-    <string name="bubbles_conversation_toggle_summary">New messages will appear on screen</string>
+    <string name="bubbles_conversation_toggle_summary">Show floating icon on top of apps</string>
     <!-- Description for the toggle shown on the app-level bubbles page  [CHAR LIMIT=NONE] -->
     <string name="bubbles_app_toggle_summary">Allow <xliff:g id="app_name" example="YouTube">%1$s</xliff:g> to show some notifications as bubbles</string>
     <!-- Title of the dialog shown when the user has disabled bubbles at the feature level but tries to enable it for an app. [CHAR LIMIT=NONE] -->
@@ -8381,14 +8436,31 @@
     <!-- [CHAR LIMIT=100] preference category title -->
     <string name="important_conversations">Priority conversations</string>
 
+    <!-- preference category summary -->
+    <string name="important_conversations_summary_bubbles">Show at top of conversation section and appear as floating bubbles</string>
+
+    <!-- preference category summary -->
+    <string name="important_conversations_summary">Show at top of conversation section</string>
+
     <!-- [CHAR LIMIT=100] preference category title -->
-    <string name="other_conversations">Other conversations</string>
+    <string name="other_conversations">Modified conversations</string>
+
+    <!-- summary for other conversations list -->
+    <string name="other_conversations_summary">Conversations you\u2019ve made changes to</string>
 
     <!-- [CHAR LIMIT=100] Setting to automatically bubble all notifications from favorite conversations -->
-    <string name="important_bubble">Bubble important conversations</string>
+    <string name="important_bubble">Bubble priority conversations</string>
 
     <!-- [CHAR LIMIT=NONE] description of how notifications from important conversations behave -->
-    <string name="important_conversation_behavior_summary">Important conversations show at the top of the pull-down shade. You can also set them to bubble and interrupt Do Not Disturb.</string>
+    <string name="important_conversation_behavior_summary">Priority conversations show at the top of the pull-down shade. You can also set them to bubble and interrupt Do Not Disturb.</string>
+
+    <!-- title for conversation onboarding -->
+    <string name="conversation_onboarding_title">Priority and modified conversations will appear here</string>
+
+    <!-- summary for conversation onboarding -->
+    <string name="conversation_onboarding_summary">Once you mark a conversation as priority, or make any other changes to conversations, they will appear here.
+        \n\nTo change conversation settings:
+        \nSwipe down from the top of the screen to open the pull-down shade, then touch &amp; hold a conversation.</string>
 
     <!-- Importance title strings for the Importance page. Also the second part of the importance
      summary on the channel page-->
@@ -8445,6 +8517,8 @@
     <!-- [CHAR LIMIT=150] Notification Importance title: important conversation level summary -->
     <string name="notification_channel_summary_priority">Shows at top of conversation section and appears as a bubble.</string>
 
+    <string name="convo_not_supported_summary"><xliff:g id="app_name" example="Android Services">%1$s</xliff:g> does not support conversation-specific settings.</string>
+
     <!-- Channel summaries for the app notification page -->
 
     <!-- [CHAR LIMIT=150] Notification Importance title: min importance level summary -->
@@ -8460,7 +8534,7 @@
     <string name="notification_channel_summary_high">When device is unlocked, show notifications as a banner across the top of the screen</string>
 
     <!-- [CHAR LIMIT=100] Label for on/off toggle -->
-    <string name="notification_switch_label">All <xliff:g id="app_name" example="Android Services">%1$s</xliff:g> notifications</string>
+    <string name="notification_switch_label">All \"<xliff:g id="app_name" example="Android Services">%1$s</xliff:g>\" notifications</string>
 
     <!-- Default Apps > Default notification assistant -->
     <string name="default_notification_assistant">Adaptive Notifications</string>
@@ -8924,7 +8998,7 @@
     <!-- [CHAR LIMIT=120] Zen mode settings: Header for conversations settings page -->
     <string name="zen_mode_conversations_section_title">Conversations that can interrupt</string>
     <string name="zen_mode_from_all_conversations">All conversations</string>
-    <string name="zen_mode_from_important_conversations">Important conversations</string>
+    <string name="zen_mode_from_important_conversations">Priority conversations</string>
     <string name="zen_mode_from_no_conversations">None</string>
     <plurals name="zen_mode_conversations_count">
         <item quantity="one">1 conversation</item>
@@ -8945,7 +9019,7 @@
     <!-- [CHAR LIMIT=120] Zen mode settings: Calls settings header -->
     <string name="zen_mode_calls_header">Calls that can interrupt</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Calls screen footer -->
-    <string name="zen_mode_calls_footer">To be sure allowed calls make sound, check whether your device is set to ring, vibrate, or silent.</string>
+    <string name="zen_mode_calls_footer">To make sure allowed calls make sound, check that device is set to ring</string>
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Calls screen footer -->
     <string name="zen_mode_custom_calls_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming calls are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
@@ -8956,24 +9030,34 @@
         <item quantity="one">1 other</item>
         <item quantity="other"><xliff:g id="num_people" example="3">%d</xliff:g> others</item>
     </plurals>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Starred contacts summary when there are no starred contacts -->
+    <string name="zen_mode_starred_contacts_summary_none">None</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Messages</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
     <string name="zen_mode_messages_list">messages</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages to bypass DND title -->
-    <string name="zen_mode_messages_title">SMS, MMS, and messaging apps</string>
+    <string name="zen_mode_messages_title">Messages</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: Messages settings header -->
     <string name="zen_mode_messages_header">Messages that can interrupt</string>
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
-    <string name="zen_mode_messages_footer">To be sure allowed messages make sound, check whether your device is set to ring, vibrate, or silent.</string>
+    <string name="zen_mode_messages_footer">To make sure allowed messages make sound, check that device is set to ring</string>
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Messages screen footer -->
     <string name="zen_mode_custom_messages_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
-    <!-- Zen mode settings: All senders can bypass DND summary [CHAR LIMIT=NONE -->
-    <string name="zen_mode_all_senders_summary">All <xliff:g id="sender_category" example="messages">%s</xliff:g> can reach you</string>
-    <!-- Zen mode settings: Senders in contacts can bypass DND summary summary [CHAR LIMIT=NONE -->
-    <string name="zen_mode_contacts_senders_summary"><xliff:g id="num_contacts" example="120">%d</xliff:g> contacts</string>
+    <!-- Zen mode settings: All messages can bypass DND summary [CHAR LIMIT=NONE -->
+    <string name="zen_mode_all_messages_summary">All messages can reach you</string>
+    <!-- Zen mode settings: All calls can bypass DND summary [CHAR LIMIT=NONE -->
+    <string name="zen_mode_all_calls_summary">All calls can reach you</string>
+
+    <!-- Zen mode settings: There are no contacts on the device [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_contacts_count_none">None</string>
+    <!-- Zen mode settings: Senders in contacts can bypass DND summary summary [CHAR LIMIT=NONE] -->
+    <plurals name="zen_mode_contacts_count">
+        <item quantity="one">1 contact</item>
+        <item quantity="other"><xliff:g id="num_contacts" example="120">%d</xliff:g> contacts</item>
+    </plurals>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From anyone -->
     <string name="zen_mode_from_anyone">Anyone</string>
@@ -8981,8 +9065,6 @@
     <string name="zen_mode_from_contacts">Contacts</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From starred contacts only -->
     <string name="zen_mode_from_starred">Starred contacts</string>
-    <!-- [CHAR LIMIT=40] Zen mode settings: Calls and/or messages from none-->
-    <string name="zen_mode_from_none">None</string>
 
     <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
     <string name="zen_calls_summary_starred_repeat">From starred contacts and repeat callers</string>
@@ -8992,30 +9074,36 @@
     <string name="zen_calls_summary_repeat_only">From repeat callers only</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls option value: No calls allowed -->
-    <string name="zen_mode_from_none_calls">Don\u2019t allow any calls</string>
+    <string name="zen_mode_none_calls">None</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option value: No messages allowed -->
-    <string name="zen_mode_from_none_messages">Don\u2019t allow any messages</string>
+    <string name="zen_mode_none_messages">None</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow alarms option -->
     <string name="zen_mode_alarms">Alarms</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow alarms summary -->
     <string name="zen_mode_alarms_summary">From timers, alarms, security systems, and other apps</string>
-    <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option (ie: sound from alarm clock) -->
+    <!-- [CHAR LIMIT=50] Zen mode settings: Alarms list option (ie: sound from alarm clock) -->
     <string name="zen_mode_alarms_list">alarms</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: Alarms (ie: sound from alarm clock) category in a list of sounds that can bypass DND when alarms is the first or only element in the list. For example "Alarms can interrupt" or "Alarms and media can interrupt" -->
+    <string name="zen_mode_alarms_list_first">Alarms</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow media (sound from video) to bypass dnd -->
     <string name="zen_mode_media">Media sounds</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow media (sound from video) to bypass dnd  summary-->
-    <string name="zen_mode_media_summary">From videos, games, and other media</string>
+    <string name="zen_mode_media_summary">Sounds from videos, games, and other media</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) -->
     <string name="zen_mode_media_list">media</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) category in a list of sounds when media is the first or only element in the list. For example "Media can interrupt" or "Media and touch sounds can interrupt" -->
+    <string name="zen_mode_media_list_first">Media</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: allow touch sounds to bypass DND  -->
     <string name="zen_mode_system">Touch sounds</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: allow touch sounds to bypass DND summary  -->
-    <string name="zen_mode_system_summary">From your keyboard and other buttons</string>
+    <string name="zen_mode_system_summary">Sounds from the keyboard and other buttons</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: System sounds (ie: touch sounds) -->
     <string name="zen_mode_system_list">touch sounds</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: System sounds (ie: touch sounds) category in a list of sounds that can bypass DND when touch sounds is the first or only element in the list. For example "Touch sounds can interrupt" or "Touch sounds and events can interrupt" -->
+    <string name="zen_mode_system_list_first">Touch sounds</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow reminder notifications/sounds to bypass DND  -->
     <string name="zen_mode_reminders">Reminders</string>
@@ -9023,13 +9111,17 @@
     <string name="zen_mode_reminders_summary">From tasks and reminders</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: Reminders (ie: calendar reminders are allowed to bypass dnd) -->
     <string name="zen_mode_reminders_list">reminders</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: Reminders (ie: calendar reminders) category in a list of elements that can bypass DND where reminders is the first or only element in the list. For example, "Reminds can interrupt” or "Reminders and events can interrupt” -->
+    <string name="zen_mode_reminders_list_first">Reminders</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow event notifications/sounds to bypass DND -->
-    <string name="zen_mode_events">Events</string>
+    <string name="zen_mode_events">Calendar events</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow event notifications/sounds to bypass DND summary -->
     <string name="zen_mode_events_summary">From upcoming calendar events</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) -->
     <string name="zen_mode_events_list">events</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) category in a list of sounds when events is the first or only element in the list. For example “Events can interrupt" or “Events and touch sounds can interrupt" -->
+    <string name="zen_mode_events_list_first">Events</string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
@@ -9107,7 +9199,7 @@
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
     <string name="zen_mode_calls_summary_two"><xliff:g id="caller type" example="starred contacts">%1$s</xliff:g> and <xliff:g id="caller type" example="repeat callers">%2$s</xliff:g></string>
     <!-- [CHAR LIMIT=200] Zen mode settings: Repeat callers option summary -->
-    <string name="zen_mode_repeat_callers_summary">If the same person calls a second time within a <xliff:g id="minutes">%d</xliff:g> minute period</string>
+    <string name="zen_mode_repeat_callers_summary">If the same person calls a second time within a <xliff:g id="minutes">%d</xliff:g>-minute period</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings dnd beahvior description: when a user has chosen custom sounds to bypass DND -->
     <string name="zen_mode_behavior_summary_custom">Custom</string>
@@ -9179,9 +9271,34 @@
     <string name="switch_off_text">Off</string>
 
     <!-- [CHAR LIMIT=28] Screen pinning title -->
-    <string name="screen_pinning_title">Screen pinning</string>
-    <!-- [CHAR LIMIT=300] Screen pinning description -->
-    <string name="screen_pinning_description">When this setting is turned on, you can use screen pinning to keep the current screen in view until you unpin.\n\nTo use screen pinning:\n\n1. Make sure screen pinning is turned on\n\n2. Open Overview\n\n3. Tap the app icon at the top of the screen, then tap Pin</string>
+    <string name="screen_pinning_title">App pinning</string>
+    <!-- [CHAR LIMIT=none] Screen pinning description -->
+    <string name="screen_pinning_description">
+        App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game.
+        \n\nWhen an app is pinned, the pinned app may open other apps and personal data may be accessible.
+        \n\nTo use app pinning:
+        \t\n1.\tTurn on app pinning
+        \t\n2.\tOpen Overview
+        \t\n3.\tTap the app icon at the top of the screen, then tap Pin
+    </string>
+    <!-- [CHAR LIMIT=none] Screen pinning description -->
+    <string name="screen_pinning_guest_mode_description">
+        App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game.
+        \n\nWhen an app is pinned, the pinned app may open other apps and personal data may be accessible.
+        \n\nIf you want to securely share your device with someone, try using a guest profile instead.
+        \n\nTo use app pinning:
+        \t\n1.\tTurn on app pinning
+        \t\n2.\tOpen Overview
+        \t\n3.\tTap the app icon at the top of the screen, then tap Pin
+    </string>
+    <!-- [CHAR LIMIT=300] Screen pinning title -->
+    <string name="screen_pinning_dialog_message">
+        When app is pinned:
+        \n\n\u2022\t\tPersonal data may be accessible
+        \n\t\t(such as contacts and email content)
+        \n\u2022\t\tPinned app may open other apps
+        \n\nOnly use app pinning with people you trust.
+    </string>
     <!-- [CHAR LIMIT=60] Unlock setting for screen pinning -->
     <string name="screen_pinning_unlock_pattern">Ask for unlock pattern before unpinning</string>
     <!-- [CHAR LIMIT=60] Unlock setting for screen pinning -->
@@ -10770,13 +10887,6 @@
     <!-- Summary text for ambient display tap [CHAR LIMIT=NONE]-->
     <string name="ambient_display_tap_screen_summary">To check time, notifications, and other info, tap your screen.</string>
 
-    <!-- Summary text for global actions panel [CHAR LIMIT=NONE] [DO NOT TRANSLATE]-->
-    <string name="global_actions_panel_summary" translatable="false">To show the global actions panel, press &amp; hold Power button</string>
-    <!-- Preference and settings suggestion title text for global actions panel [CHAR LIMIT=60] [DO NOT TRANSLATE]-->
-    <string name="global_actions_panel_title" translatable="false">Show global actions</string>
-    <!-- Short title text for global actions panel [CHAR LIMIT=40] [DO NOT TRANSLATE]-->
-    <string name="global_actions_panel_short_title" translatable="false">Global actions</string>
-
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
     <!-- Title text for fingerprint gesture preference screen [CHAR LIMIT=25] -->
@@ -11246,6 +11356,9 @@
 
     <!-- Title for media output settings -->
     <string name="media_output_title">Play media to</string>
+
+    <!-- Title with application label for media output settings. [CHAR LIMIT=NONE] -->
+    <string name="media_output_label_title">Play <xliff:g id="label" example="Music Player">%s</xliff:g> to</string>
 
     <!-- Summary for media output default settings. (this device) [CHAR LIMIT=30] -->
     <string name="media_output_default_summary">This device</string>
@@ -11935,11 +12048,11 @@
     <!-- Developer settings: text for the bug report handler selection toast shown if an invalid bug report handler was chosen. [CHAR LIMIT=NONE] -->
     <string name="select_invalid_bug_report_handler_toast_text">This choice is no longer valid. Try again.</string>
 
-    <!-- Quick controls name sentence case [CHAR LIMIT=40] -->
-    <string name="quick_controls_sentence">Quick controls</string>
+    <!-- Device controls name sentence case [CHAR LIMIT=40] -->
+    <string name="device_controls_sentence">Device controls</string>
 
-    <!-- Quick controls name lower case [CHAR LIMIT=40] -->
-    <string name="quick_controls_lower">quick controls</string>
+    <!-- Device controls name lower case [CHAR LIMIT=40] -->
+    <string name="quick_controls_lower">device controls</string>
 
     <!-- Cards and passes name sentence case [CHAR LIMIT=40] -->
     <string name="cards_passes_sentence">Cards &amp; passes</string>
@@ -11956,29 +12069,44 @@
     <!-- Power menu setting option cards and passes [CHAR LIMIT=NONE] -->
     <string name="power_menu_cards_passes">Show cards &amp; passes</string>
 
-    <!-- Power menu setting option quick controls [CHAR LIMIT=NONE] -->
-    <string name="power_menu_quick_controls">Show quick controls</string>
+    <!-- Power menu setting option device controls [CHAR LIMIT=NONE] -->
+    <string name="power_menu_device_controls">Show device controls</string>
 
-    <!-- Power menu setting option cards, passes, quick controls [CHAR LIMIT=NONE] -->
-    <string name="power_menu_cards_passes_quick_controls">Show cards, passes, and quick controls</string>
+    <!-- Power menu setting option cards, passes, device controls [CHAR LIMIT=NONE] -->
+    <string name="power_menu_cards_passes_device_controls">Show cards, passes, and device controls</string>
+
+    <!-- Power menu setting lock screen category name [CHAR LIMIT=40] -->
+    <string name="power_menu_lock_screen_category">Lock screen</string>
 
     <!-- Power menu setting option none [CHAR LIMIT=NONE] -->
     <string name="power_menu_none">Don\u2019t show any content</string>
 
     <!-- Power menu setting Privacy [CHAR LIMIT=40] -->
-    <string name="power_menu_privacy">Privacy</string>
+    <string name="power_menu_privacy">Sensitive content</string>
 
     <!-- Power menu setting privacy show all [CHAR LIMIT=NONE] -->
     <string name="power_menu_privacy_show">Show cards and controls when locked</string>
 
+    <!-- Power menu setting privacy show controls [CHAR LIMIT=NONE] -->
+    <string name="power_menu_privacy_show_controls">Show controls when locked</string>
+
     <!-- Power menu setting privacy hide all [CHAR LIMIT=NONE] -->
     <string name="power_menu_privacy_hide">Hide cards and controls when locked</string>
 
-    <!-- Quick controls toggle name [CHAR LIMIT=NONE] -->
-    <string name="quick_controls_setting_toggle">Show quick controls</string>
+    <!-- Power menu setting privacy no secure screen lock set [CHAR_LIMIT=NONE] -->
+    <string name="power_menu_privacy_not_secure">To use, first set a screen lock</string>
 
-    <!-- Quick controls toggle subtitle [CHAR LIMIT=NONE] -->
-    <string name="quick_controls_setting_subtitle">To access controls for connected devices, hold the Power button</string>
+    <!-- Device controls toggle name [CHAR LIMIT=60] -->
+    <string name="device_controls_setting_toggle">Show device controls</string>
+
+    <!-- Cards and passes toggle name [CHAR LIMIT=60] -->
+    <string name="cards_passes_setting_toggle">Show cards &amp; passes</string>
+
+    <!-- Device controls toggle subtitle [CHAR LIMIT=NONE] -->
+    <string name="device_controls_setting_subtitle">To access controls for connected devices, hold the Power button</string>
+
+    <!-- Cards and passes toggle subtitle [CHAR LIMIT=NONE] -->
+    <string name="cards_passes_setting_subtitle">To access things like your payment methods and boarding passes, press and hold the Power button.</string>
 
     <!-- Title for RTT setting. [CHAR LIMIT=NONE] -->
     <string name="rtt_settings_title"></string>
@@ -11997,9 +12125,11 @@
     <!-- Content description for the 5G limited VoLTE dialog. [CHAR LIMIT=NONE] -->
     <string name="volte_5G_limited_text">This also turns off your 5G connection.\nDuring a voice call, you can\u2019t use the internet and some apps may not work.</string>
     <!-- Footer to show current limitation of 5G on DSDS mode. [CHAR LIMIT=NONE] -->
-    <string name="no_5g_in_dsds_text" product="default">When using 2 SIMs, this phone will be limited to 4G. Learn more</string>
+    <string name="no_5g_in_dsds_text" product="default">When using 2 SIMs, this phone will be limited to 4G. <annotation id="url">Learn more</annotation>.</string>
     <!-- Footer to show current limitation of 5G on DSDS mode for tablets. [CHAR LIMIT=NONE] -->
-    <string name="no_5g_in_dsds_text" product="tablet">When using 2 SIMs, this tablet will be limited to 4G. Learn more</string>
+    <string name="no_5g_in_dsds_text" product="tablet">When using 2 SIMs, this tablet will be limited to 4G. <annotation id="url">Learn more</annotation>.</string>
     <!-- Footer to show current limitation of 5G on DSDS mode for general devices. [CHAR LIMIT=NONE] -->
-    <string name="no_5g_in_dsds_text" product="device">When using 2 SIMs, this device will be limited to 4G. Learn more</string>
+    <string name="no_5g_in_dsds_text" product="device">When using 2 SIMs, this device will be limited to 4G. <annotation id="url">Learn more</annotation>.</string>
+    <!-- Help URI, 5G limitation in DSDS condition. [DO NOT TRANSLATE] -->
+    <string name="help_uri_5g_dsds" translatable="false"></string>
 </resources>

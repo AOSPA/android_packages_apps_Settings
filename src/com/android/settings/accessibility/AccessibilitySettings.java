@@ -65,10 +65,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Activity with the accessibility settings.
- */
-@SearchIndexable
+/** Activity with the accessibility settings. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class AccessibilitySettings extends DashboardFragment {
 
     private static final String TAG = "AccessibilitySettings";
@@ -107,7 +105,6 @@ public class AccessibilitySettings extends DashboardFragment {
     static final String EXTRA_TITLE_RES = "title_res";
     static final String EXTRA_RESOLVE_INFO = "resolve_info";
     static final String EXTRA_SUMMARY = "summary";
-    static final String EXTRA_SUMMARY_RES = "summary_res";
     static final String EXTRA_SETTINGS_TITLE = "settings_title";
     static final String EXTRA_COMPONENT_NAME = "component_name";
     static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
@@ -195,7 +192,7 @@ public class AccessibilitySettings extends DashboardFragment {
         }
 
         // Observe changes from accessibility selection menu
-        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT);
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
         mSettingsContentObserver = new SettingsContentObserver(mHandler, shortcutFeatureKeys) {
             @Override
@@ -272,7 +269,7 @@ public class AccessibilitySettings extends DashboardFragment {
 
         final CharSequence serviceState;
         final int fragmentType = AccessibilityUtil.getAccessibilityServiceFragmentType(info);
-        if (fragmentType == AccessibilityServiceFragmentType.INVISIBLE) {
+        if (fragmentType == AccessibilityServiceFragmentType.INVISIBLE_TOGGLE) {
             final ComponentName componentName = new ComponentName(
                     info.getResolveInfo().serviceInfo.packageName,
                     info.getResolveInfo().serviceInfo.name);
@@ -310,11 +307,7 @@ public class AccessibilitySettings extends DashboardFragment {
             return context.getText(R.string.accessibility_description_state_stopped);
         }
 
-        final String description = info.loadDescription(context.getPackageManager());
-
-        return TextUtils.isEmpty(description)
-                ? context.getText(R.string.accessibility_service_default_description)
-                : description;
+        return info.loadDescription(context.getPackageManager());
     }
 
     static boolean isRampingRingerEnabled(final Context context) {
@@ -463,7 +456,7 @@ public class AccessibilitySettings extends DashboardFragment {
     }
 
     /**
-     * Update the order of perferences in the category by matching their preference
+     * Update the order of preferences in the category by matching their preference
      * key with the string array of preference order which is defined in the xml.
      *
      * @param categoryKey The key of the category need to update the order
@@ -659,13 +652,16 @@ public class AccessibilitySettings extends DashboardFragment {
         }
 
         private String getAccessibilityServiceFragmentTypeName(AccessibilityServiceInfo info) {
-            switch (AccessibilityUtil.getAccessibilityServiceFragmentType(
-                    info)) {
-                case AccessibilityServiceFragmentType.LEGACY:
-                    return LegacyAccessibilityServicePreferenceFragment.class.getName();
-                case AccessibilityServiceFragmentType.INVISIBLE:
+            // Shorten the name to avoid exceeding 100 characters in one line.
+            final String volumeShortcutToggleAccessibilityServicePreferenceFragment =
+                    VolumeShortcutToggleAccessibilityServicePreferenceFragment.class.getName();
+
+            switch (AccessibilityUtil.getAccessibilityServiceFragmentType(info)) {
+                case AccessibilityServiceFragmentType.VOLUME_SHORTCUT_TOGGLE:
+                    return volumeShortcutToggleAccessibilityServicePreferenceFragment;
+                case AccessibilityServiceFragmentType.INVISIBLE_TOGGLE:
                     return InvisibleToggleAccessibilityServicePreferenceFragment.class.getName();
-                case AccessibilityServiceFragmentType.INTUITIVE:
+                case AccessibilityServiceFragmentType.TOGGLE:
                     return ToggleAccessibilityServicePreferenceFragment.class.getName();
                 default:
                     // impossible status
@@ -711,10 +707,9 @@ public class AccessibilitySettings extends DashboardFragment {
                 CharSequence title, CharSequence summary, int imageRes, String htmlDescription,
                 ComponentName componentName) {
             final Bundle extras = preference.getExtras();
-
             extras.putString(EXTRA_PREFERENCE_KEY, prefKey);
-            extras.putString(EXTRA_TITLE, title.toString());
-            extras.putString(EXTRA_SUMMARY, summary.toString());
+            extras.putCharSequence(EXTRA_TITLE, title);
+            extras.putCharSequence(EXTRA_SUMMARY, summary);
             extras.putParcelable(EXTRA_COMPONENT_NAME, componentName);
             extras.putInt(EXTRA_ANIMATED_IMAGE_RES, imageRes);
             extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);

@@ -100,6 +100,10 @@ import java.util.stream.Collectors;
 /**
  * Controller for logic pertaining to displaying Wifi information for the
  * {@link WifiNetworkDetailsFragment}.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in
+ * {@link com.android.settings.wifi.details2.WifiDetailPreferenceController2}.
  */
 public class WifiDetailPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, WifiDialogListener, LifecycleObserver, OnPause,
@@ -164,7 +168,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     private NetworkInfo mNetworkInfo;
     private NetworkCapabilities mNetworkCapabilities;
     private int mRssiSignalLevel = -1;
-    private int mWifiGeneration;
+    private int mWifiStandard;
     private boolean mIsReady;
     private String[] mSignalStr;
     private WifiConfiguration mWifiConfig;
@@ -686,9 +690,9 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
     private void refreshRssiViews() {
         int signalLevel = mAccessPoint.getLevel();
-        int wifiGeneration = mAccessPoint.getWifiGeneration();
+        int wifiStandard = mAccessPoint.getWifiStandard();
         boolean isReady = (mAccessPoint.isVhtMax8SpatialStreamsSupported()
-                          && mAccessPoint.isTwtSupported());
+                          && mAccessPoint.isHe8ssCapableAp());
 
         // Disappears signal view if not in range. e.g. for saved networks.
         if (mIsOutOfRange) {
@@ -698,14 +702,14 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         }
 
         if (mRssiSignalLevel == signalLevel
-            && mWifiGeneration == wifiGeneration
+            && mWifiStandard == wifiStandard
             && mIsReady == isReady) {
             return;
         }
         mRssiSignalLevel = signalLevel;
-        mWifiGeneration = wifiGeneration;
+        mWifiStandard = wifiStandard;
         mIsReady = isReady;
-        Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel, mWifiGeneration, mIsReady);
+        Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel, mWifiStandard, mIsReady);
 
         if (mEntityHeaderController != null) {
             mEntityHeaderController
@@ -1089,8 +1093,12 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             mContext = context;
         }
 
-        public Drawable getIcon(int level, int generation, boolean isReady) {
-            return mContext.getDrawable(Utils.getWifiIconResource(level, generation, isReady)).mutate();
+        public Drawable getIcon(int level) {
+            return mContext.getDrawable(Utils.getWifiIconResource(level)).mutate();
+        }
+
+        public Drawable getIcon(int level, int standard, boolean isReady) {
+            return mContext.getDrawable(Utils.getWifiIconResource(level, standard, isReady)).mutate();
         }
     }
 

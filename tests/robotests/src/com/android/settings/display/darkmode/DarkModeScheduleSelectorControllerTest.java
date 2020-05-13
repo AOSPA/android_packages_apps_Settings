@@ -102,15 +102,6 @@ public class DarkModeScheduleSelectorControllerTest {
     }
 
     @Test
-    public void nightMode_selectNightMode_locationOff() {
-        when(mLocationManager.isLocationEnabled()).thenReturn(false);
-        mController.onPreferenceChange(mPreference,
-                mContext.getString(R.string.dark_ui_auto_mode_never));
-        assertFalse(mController.onPreferenceChange(mPreference,
-                mContext.getString(R.string.dark_ui_auto_mode_auto)));
-    }
-
-    @Test
     public void nightMode_updateStateNone_dropDownValueChangedToAuto() {
         when(mUiService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_AUTO);
         mController.displayPreference(mScreen);

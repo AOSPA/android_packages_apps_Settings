@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logServiceStatus;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.Dialog;
@@ -99,6 +101,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     public void onPreferenceToggled(String preferenceKey, boolean enabled) {
         ComponentName toggledService = ComponentName.unflattenFromString(preferenceKey);
+        logServiceStatus(toggledService.flattenToString(), enabled);
         AccessibilityUtils.setAccessibilityServiceState(getPrefContext(), toggledService, enabled);
     }
 
@@ -106,7 +109,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     // capabilities. For
     // example, before JellyBean MR2 the user was granting the explore by touch
     // one.
-    private AccessibilityServiceInfo getAccessibilityServiceInfo() {
+    AccessibilityServiceInfo getAccessibilityServiceInfo() {
         final List<AccessibilityServiceInfo> infos = AccessibilityManager.getInstance(
                 getPrefContext()).getInstalledAccessibilityServiceList();
 
@@ -164,16 +167,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                                 this::onDialogButtonFromDisableToggleClicked);
                 break;
             }
-            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL: {
-                if (AccessibilityUtil.isGestureNavigateEnabled(getPrefContext())) {
-                    mDialog = AccessibilityGestureNavigationTutorial
-                            .showGestureNavigationTutorialDialog(getPrefContext());
-                } else {
-                    mDialog = AccessibilityGestureNavigationTutorial
-                            .showAccessibilityButtonTutorialDialog(getPrefContext());
-                }
-                break;
-            }
             default: {
                 mDialog = super.onCreateDialog(dialogId);
             }
@@ -191,12 +184,16 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             case DialogEnums.DISABLE_WARNING_FROM_TOGGLE:
                 return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                return AccessibilityUtil.isGestureNavigateEnabled(getPrefContext())
-                        ? SettingsEnums.DIALOG_TOGGLE_SCREEN_GESTURE_NAVIGATION
-                        : SettingsEnums.DIALOG_TOGGLE_SCREEN_ACCESSIBILITY_BUTTON;
+                return SettingsEnums.DIALOG_ACCESSIBILITY_TUTORIAL;
             default:
                 return super.getDialogMetricsCategory(dialogId);
         }
+    }
+
+    @Override
+    int getUserShortcutTypes() {
+        return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
+                mComponentName);
     }
 
     @Override
@@ -295,7 +292,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public void onToggleClicked(ShortcutPreference preference) {
-        final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
         if (preference.isChecked()) {
             if (!mToggleServiceDividerSwitchPreference.isChecked()) {
                 preference.setChecked(false);
@@ -303,6 +300,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             } else {
                 AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                         mComponentName);
+                showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
             }
         } else {
             AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), shortcutTypes,
@@ -413,8 +411,11 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private void onAllowButtonFromShortcutToggleClicked() {
         mShortcutPreference.setChecked(true);
 
-        final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
         AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes, mComponentName);
+
+        mIsDialogShown.set(false);
+        showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
 
         mDialog.dismiss();
 

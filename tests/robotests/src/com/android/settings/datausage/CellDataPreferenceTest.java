@@ -17,11 +17,14 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -44,6 +47,8 @@ public class CellDataPreferenceTest {
     @Mock
     private ProxySubscriptionManager mProxySubscriptionMgr;
     @Mock
+    private SubscriptionManager mSubscriptionManager;
+    @Mock
     private SubscriptionInfo mSubInfo;
 
     private Context mContext;
@@ -55,8 +60,20 @@ public class CellDataPreferenceTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mPreference = new CellDataPreference(mContext, null);
-        mPreference.mProxySubscriptionMgr = mProxySubscriptionMgr;
+        mPreference = new CellDataPreference(mContext, null) {
+            @Override
+            ProxySubscriptionManager getProxySubscriptionManager() {
+                return mProxySubscriptionMgr;
+            }
+            @Override
+            SubscriptionInfo getActiveSubscriptionInfo(int subId) {
+                return mSubInfo;
+            }
+        };
+        doNothing().when(mSubscriptionManager).setDefaultDataSubId(anyInt());
+        doReturn(mSubscriptionManager).when(mProxySubscriptionMgr).get();
+        doNothing().when(mProxySubscriptionMgr).addActiveSubscriptionsListener(any());
+        doNothing().when(mProxySubscriptionMgr).removeActiveSubscriptionsListener(any());
 
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         final View view = inflater.inflate(mPreference.getLayoutResource(),
@@ -67,14 +84,13 @@ public class CellDataPreferenceTest {
 
     @Test
     public void noActiveSub_shouldDisable() {
-        doReturn(null).when(mProxySubscriptionMgr).getActiveSubscriptionInfo(anyInt());
+        mSubInfo = null;
         mPreference.mOnSubscriptionsChangeListener.onChanged();
         assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test
     public void hasActiveSub_shouldEnable() {
-        doReturn(mSubInfo).when(mProxySubscriptionMgr).getActiveSubscriptionInfo(anyInt());
         mPreference.mOnSubscriptionsChangeListener.onChanged();
         assertThat(mPreference.isEnabled()).isTrue();
     }

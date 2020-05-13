@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
@@ -90,7 +91,8 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (mCallState == null) {
+        if ((mCallState == null) || (preference == null)) {
+            Log.d(TAG, "Skip update under mCallState=" + mCallState);
             return;
         }
         final SwitchPreference switchPreference = (SwitchPreference) preference;
@@ -164,7 +166,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     private class PhoneCallStateListener extends PhoneStateListener {
 
         PhoneCallStateListener() {
-            super();
+            super(Looper.getMainLooper());
         }
 
         private TelephonyManager mTelephonyManager;

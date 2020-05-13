@@ -91,7 +91,9 @@ public class ZenModePrioritySendersPreferenceController
             makeRadioPreference(KEY_ANY,
                     com.android.settings.R.string.zen_mode_from_anyone);
             makeRadioPreference(KEY_NONE,
-                    com.android.settings.R.string.zen_mode_from_none);
+                    mIsMessages
+                            ? com.android.settings.R.string.zen_mode_none_messages
+                            : com.android.settings.R.string.zen_mode_none_calls);
             updateSummaries();
         }
 
@@ -150,10 +152,9 @@ public class ZenModePrioritySendersPreferenceController
             case KEY_CONTACTS:
                 return mBackend.getContactsNumberSummary(mContext);
             case KEY_ANY:
-                return mContext.getResources().getString(R.string.zen_mode_all_senders_summary,
-                        mContext.getResources().getString(mIsMessages
-                                ? R.string.zen_mode_messages_list
-                                : R.string.zen_mode_calls_list));
+                return mContext.getResources().getString(mIsMessages
+                                ? R.string.zen_mode_all_messages_summary
+                                : R.string.zen_mode_all_calls_summary);
             case KEY_NONE:
             default:
                 return null;
@@ -171,6 +172,10 @@ public class ZenModePrioritySendersPreferenceController
     private RadioButtonPreferenceWithExtraWidget makeRadioPreference(String key, int titleId) {
         RadioButtonPreferenceWithExtraWidget pref =
                 new RadioButtonPreferenceWithExtraWidget(mPreferenceCategory.getContext());
+        pref.setKey(key);
+        pref.setTitle(titleId);
+        pref.setOnClickListener(mRadioButtonClickListener);
+
         View.OnClickListener widgetClickListener = getWidgetClickListener(key);
         if (widgetClickListener != null) {
             pref.setExtraWidgetOnClickListener(widgetClickListener);
@@ -179,9 +184,6 @@ public class ZenModePrioritySendersPreferenceController
             pref.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_GONE);
         }
 
-        pref.setKey(key);
-        pref.setTitle(titleId);
-        pref.setOnClickListener(mRadioButtonClickListener);
         mPreferenceCategory.addPreference(pref);
         mRadioButtonPreferences.add(pref);
         return pref;

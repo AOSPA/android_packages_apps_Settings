@@ -247,7 +247,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
         if (componenterList.size() == 0) {
             Log.e(TAG, "onCreateView: no sim info");
-            return null;
+            return super.onCreateView(inflater, container, savedInstanceState);
         }
 
         if (componenterList.size() > 1) {
@@ -298,6 +298,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
         final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(subInfoList, mSlotId);
         mSubId = (sir == null) ? SubscriptionManager.INVALID_SUBSCRIPTION_ID
             : sir.getSubscriptionId();
+        mTelephonyManager =  mTelephonyManager.createForSubscriptionId(mSubId);
 
         int cardState = mTelephonyManager.getSimState();
         boolean canInteract = cardState == TelephonyManager.SIM_STATE_READY ||

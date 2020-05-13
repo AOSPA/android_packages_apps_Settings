@@ -1164,6 +1164,7 @@
                 android:targetActivity=".applications.InstalledAppDetailsTop">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS" />
+                <action android:name="android.intent.action.AUTO_REVOKE_PERMISSIONS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
@@ -2035,6 +2036,8 @@
                 <action android:name="android.settings.BUGREPORT_HANDLER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.bugreporthandler.BugReportHandlerPicker" />
         </activity>
@@ -2296,6 +2299,7 @@
                   android:configChanges="mnc|mcc|keyboard|keyboardHidden|uiMode"
                   android:windowSoftInputMode="adjustResize"
                   android:screenOrientation="nosensor"
+                  android:taskAffinity="com.android.settings.CryptKeeper"
                   android:process=":CryptKeeper">
             <intent-filter android:priority="10">
                 <action android:name="android.intent.action.MAIN" />
@@ -3157,6 +3161,19 @@
                        android:value="true"/>
         </service>
 
+        <service
+            android:name=".development.qstile.DevelopmentTiles$WirelessDebugging"
+            android:label="@string/enable_adb_wireless"
+            android:icon="@drawable/tile_icon_debugging_wireless"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                       android:value="true"/>
+        </service>
+
         <activity
             android:name=".HelpTrampoline"
             android:exported="true"
@@ -3217,6 +3234,7 @@
             android:theme="@style/Theme.Panel"
             android:launchMode="singleInstance"
             android:excludeFromRecents="true"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true">
                  <intent-filter>
                      <action android:name="android.settings.panel.action.INTERNET_CONNECTIVITY" />
@@ -3364,13 +3382,33 @@
         </activity>
 
         <activity android:name="Settings$GlobalActionsPanelSettingsActivity"
-            android:label="@string/global_actions_panel_title">
+            android:label="@string/cards_passes_sentence">
             <intent-filter>
                 <action android:name="com.android.settings.GLOBAL_ACTIONS_PANEL_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.gestures.GlobalActionsPanelSettings" />
+        </activity>
+
+        <activity android:name="Settings$PowerMenuSettingsActivity"
+                  android:label="@string/power_menu_setting_name">
+            <intent-filter>
+                <action android:name="android.settings.ACTION_POWER_MENU_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.gestures.PowerMenuSettings" />
+        </activity>
+
+        <activity android:name="Settings$DeviceControlsSettingsActivity"
+                      android:label="@string/device_controls_sentence">
+            <intent-filter>
+                <action android:name="android.settings.ACTION_DEVICE_CONTROLS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.gestures.DeviceControlsSettings" />
         </activity>
 
         <activity

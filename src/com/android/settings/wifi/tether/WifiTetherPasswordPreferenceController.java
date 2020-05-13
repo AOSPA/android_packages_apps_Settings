@@ -70,7 +70,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
         final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
         if (config == null
                 || ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
-                    || config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_SAE)
+                     || config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION)
                 && TextUtils.isEmpty(config.getPassphrase()))) {
             mPassword = generateRandomPassword();
         } else {

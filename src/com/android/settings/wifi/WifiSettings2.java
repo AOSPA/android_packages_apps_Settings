@@ -491,7 +491,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
         // "forget" for normal saved network. And "disconnect" for ephemeral network because it
         // could only be disconnected and be put in blacklists so it won't be used again.
-        if (mSelectedWifiEntry.canForget()) {
+        if (canForgetNetwork()) {
             menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */, R.string.forget);
         }
 
@@ -505,6 +505,11 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 != WifiEntry.CONNECTED_STATE_CONNECTED) {
             menu.add(Menu.NONE, MENU_ID_MODIFY, 0 /* order */, R.string.wifi_modify);
         }
+    }
+
+    private boolean canForgetNetwork() {
+        return mSelectedWifiEntry.canForget() && !WifiUtils.isNetworkLockedDown(getActivity(),
+                mSelectedWifiEntry.getWifiConfiguration());
     }
 
     @Override
@@ -539,12 +544,9 @@ public class WifiSettings2 extends RestrictedSettingsFragment
             final WifiEntry selectedEntry =
                     ((LongPressWifiEntryPreference) preference).getWifiEntry();
 
-            if (selectedEntry.getWifiConfiguration() != null) {
-                if (!selectedEntry.getWifiConfiguration().getNetworkSelectionStatus()
-                        .hasEverConnected()) {
-                    launchConfigNewNetworkFragment(selectedEntry);
-                    return true;
-                }
+            if (selectedEntry.shouldEditBeforeConnect()) {
+                launchConfigNewNetworkFragment(selectedEntry);
+                return true;
             }
 
             connect(selectedEntry, true /* editIfNoConfig */, true /* fullScreenEdit */);

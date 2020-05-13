@@ -172,7 +172,7 @@ public class TetherSettings extends RestrictedSettingsFragment
                 com.android.internal.R.string.config_ethernet_iface_regex);
 
         final boolean usbAvailable = mUsbRegexs.length != 0;
-        final boolean bluetoothAvailable = mBluetoothRegexs.length != 0;
+        final boolean bluetoothAvailable = adapter != null && mBluetoothRegexs.length != 0;
         final boolean ethernetAvailable = !TextUtils.isEmpty(mEthernetRegex);
 
         if (!usbAvailable || Utils.isMonkeyRunning()) {
@@ -347,7 +347,8 @@ public class TetherSettings extends RestrictedSettingsFragment
         if (intent != null) mTetherChangeReceiver.onReceive(activity, intent);
 
         mEthernetListener = new EthernetListener();
-        mEm.addListener(mEthernetListener);
+        if (mEm != null)
+            mEm.addListener(mEthernetListener);
 
         updateState();
     }
@@ -361,7 +362,8 @@ public class TetherSettings extends RestrictedSettingsFragment
         }
         getActivity().unregisterReceiver(mTetherChangeReceiver);
         mTm.unregisterTetheringEventCallback(mTetheringEventCallback);
-        mEm.removeListener(mEthernetListener);
+        if (mEm != null)
+            mEm.removeListener(mEthernetListener);
         mTetherChangeReceiver = null;
         mStartTetheringCallback = null;
         mTetheringEventCallback = null;
@@ -459,7 +461,7 @@ public class TetherSettings extends RestrictedSettingsFragment
         if (isTethered) {
             mEthernetTether.setEnabled(!mDataSaverEnabled);
             mEthernetTether.setChecked(true);
-        } else if (isAvailable || mEm.isAvailable()) {
+        } else if (isAvailable || (mEm != null && mEm.isAvailable())) {
             mEthernetTether.setEnabled(!mDataSaverEnabled);
             mEthernetTether.setChecked(false);
         } else {
