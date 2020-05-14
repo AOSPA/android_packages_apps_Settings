@@ -131,8 +131,7 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
     public void updateState(Preference preference) {
         super.updateState(preference);
         final SwitchPreference switchPreference = (SwitchPreference) preference;
-        switchPreference.setVisible(true);
-        switchPreference.setEnabled(true);
+        switchPreference.setVisible(isAvailable());
         long preferredNetworkBitMask = MobileNetworkUtils.getRafFromNetworkType(
                 Settings.Global.getInt(mContext.getContentResolver(),
                     Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
