@@ -46,6 +46,12 @@
             android:summary="@string/lockscreen_bypass_summary"
             settings:keywords="@string/keywords_lockscreen_bypass"
             settings:controller="com.android.settings.biometrics.face.FaceSettingsLockscreenBypassPreferenceController" />
+        <SwitchPreference
+            android:key="security_settings_face_assistive_lighting"
+            android:title="@string/security_settings_face_settings_assistive_lighting_title"
+            android:summary="@string/security_settings_face_settings_assistive_lighting_summary"
+            settings:keywords="@string/keywords_face_unlock"
+            settings:controller="com.android.settings.biometrics.face.FaceSettingsAssistiveLightingPreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory
