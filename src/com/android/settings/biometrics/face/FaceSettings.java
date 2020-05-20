@@ -278,6 +278,7 @@ public class FaceSettings extends DashboardFragment {
         controllers.add(new FaceSettingsVideoPreferenceController(context));
         controllers.add(new FaceSettingsKeyguardPreferenceController(context));
         controllers.add(new FaceSettingsAppPreferenceController(context));
+        controllers.add(new FaceSettingsAssistiveLightingPreferenceController(context));
         controllers.add(new FaceSettingsAttentionPreferenceController(context));
         controllers.add(new FaceSettingsRemoveButtonPreferenceController(context));
         controllers.add(new FaceSettingsFooterPreferenceController(context));
