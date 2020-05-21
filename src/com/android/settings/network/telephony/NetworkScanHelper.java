@@ -203,7 +203,7 @@ public class NetworkScanHelper {
             mContext.registerReceiver(mLegacyIncrScanReceiver, filter);
             boolean success = false;
             mExtTelephony = IExtTelephony.Stub
-                    .asInterface(ServiceManager.getService("extphone"));
+                    .asInterface(ServiceManager.getService("qti.radio.extphone"));
             try {
                 success = mExtTelephony.performIncrementalScan(mTelephonyManager.getSlotIndex());
             } catch (RemoteException | NullPointerException ex) {
