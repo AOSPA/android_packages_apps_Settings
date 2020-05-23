@@ -9,6 +9,12 @@
         android:summary="@string/disable_navkeys_summary"
         android:defaultValue="false" />
 
+    <com.android.settings.custom.preference.SystemSettingSwitchPreference
+        android:key="swap_navigation_keys"
+        android:title="@string/button_swap_layout_title"
+        android:summary="@string/button_swap_info"
+        android:defaultValue="false" />
+
     <com.android.settings.custom.buttons.preference.ButtonBacklightBrightness
         android:key="button_backlight"
         android:title="@string/button_backlight_title"
