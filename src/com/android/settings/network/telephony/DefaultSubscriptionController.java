@@ -40,7 +40,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SubscriptionsChangeListener;
 
@@ -54,8 +53,8 @@ import org.codeaurora.internal.IExtTelephony;
  * what mobile network subscription is used by default for some service controlled by the
  * SubscriptionManager. This can be used for services such as Calls or SMS.
  */
-public abstract class DefaultSubscriptionController extends BasePreferenceController implements
-        LifecycleObserver, Preference.OnPreferenceChangeListener,
+public abstract class DefaultSubscriptionController extends TelephonyBasePreferenceController
+        implements LifecycleObserver, Preference.OnPreferenceChangeListener,
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
     private static final String TAG = "DefaultSubController";
 
@@ -109,7 +108,7 @@ public abstract class DefaultSubscriptionController extends BasePreferenceContro
     protected abstract void setDefaultSubscription(int subscriptionId);
 
     @Override
-    public int getAvailabilityStatus() {
+    public int getAvailabilityStatus(int subId) {
         boolean visible = false;
         if (mSelectableSubs != null && mSelectableSubs.size() > 1) {
             visible = true;

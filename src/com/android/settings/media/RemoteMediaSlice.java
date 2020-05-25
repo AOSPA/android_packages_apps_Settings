@@ -24,6 +24,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.RoutingSessionInfo;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
@@ -36,12 +37,12 @@ import androidx.slice.builders.SliceAction;
 
 import com.android.settings.R;
 import com.android.settings.SubSettings;
+import com.android.settings.Utils;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
-import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.media.MediaOutputSliceConstants;
 
 import java.util.List;
@@ -67,7 +68,7 @@ public class RemoteMediaSlice implements CustomSliceable {
         final int newPosition = intent.getIntExtra(EXTRA_RANGE_VALUE, -1);
         final String id = intent.getStringExtra(MEDIA_ID);
         if (!TextUtils.isEmpty(id)) {
-            getWorker().adjustVolume(getWorker().getMediaDeviceById(id), newPosition);
+            getWorker().adjustSessionVolume(id, newPosition);
         }
     }
 
@@ -80,40 +81,38 @@ public class RemoteMediaSlice implements CustomSliceable {
             return listBuilder.build();
         }
         // Only displaying remote devices
-        final List<MediaDevice> mediaDevices = getWorker().getActiveMediaDevice(
-                MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE);
-        if (mediaDevices.isEmpty()) {
+        final List<RoutingSessionInfo> infos = getWorker().getActiveRemoteMediaDevice();
+        if (infos.isEmpty()) {
             Log.d(TAG, "No active remote media device");
             return listBuilder.build();
         }
         final CharSequence castVolume = mContext.getText(R.string.remote_media_volume_option_title);
-        final CharSequence outputTitle = mContext.getText(R.string.media_output_title);
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_volume_remote);
         // To create an empty icon to indent the row
         final IconCompat emptyIcon = createEmptyIcon();
         int requestCode = 0;
-        for (MediaDevice mediaDevice : mediaDevices) {
-            final int maxVolume = mediaDevice.getMaxVolume();
+        for (RoutingSessionInfo info : infos) {
+            final int maxVolume = info.getVolumeMax();
             if (maxVolume <= 0) {
-                Log.d(TAG, "Unable to add Slice. " + mediaDevice.getName() + ": max volume is "
+                Log.d(TAG, "Unable to add Slice. " + info.getName() + ": max volume is "
                         + maxVolume);
                 continue;
             }
-            final String title = castVolume + " (" + mediaDevice.getClientAppLabel() + ")";
+            final CharSequence outputTitle = mContext.getString(R.string.media_output_label_title,
+                    Utils.getApplicationLabel(mContext, info.getClientPackageName()));
             listBuilder.addInputRange(new InputRangeBuilder()
                     .setTitleItem(icon, ListBuilder.ICON_IMAGE)
-                    .setTitle(title)
-                    .setInputAction(getSliderInputAction(requestCode++, mediaDevice.getId()))
-                    .setPrimaryAction(getSoundSettingAction(title, icon, mediaDevice.getId()))
+                    .setTitle(castVolume)
+                    .setInputAction(getSliderInputAction(requestCode++, info.getId()))
+                    .setPrimaryAction(getSoundSettingAction(castVolume, icon, info.getId()))
                     .setMax(maxVolume)
-                    .setValue(mediaDevice.getCurrentVolume()));
+                    .setValue(info.getVolume()));
             listBuilder.addRow(new ListBuilder.RowBuilder()
                     .setTitle(outputTitle)
-                    .setSubtitle(mediaDevice.getName())
+                    .setSubtitle(info.getName())
                     .setTitleItem(emptyIcon, ListBuilder.ICON_IMAGE)
-                    .setPrimaryAction(getMediaOutputSliceAction(
-                            mediaDevice.getClientPackageName())));
+                    .setPrimaryAction(getMediaOutputSliceAction(info.getClientPackageName())));
         }
         return listBuilder.build();
     }
@@ -131,7 +130,8 @@ public class RemoteMediaSlice implements CustomSliceable {
         return PendingIntent.getBroadcast(mContext, requestCode, intent, 0);
     }
 
-    private SliceAction getSoundSettingAction(String actionTitle, IconCompat icon, String id) {
+    private SliceAction getSoundSettingAction(CharSequence actionTitle, IconCompat icon,
+            String id) {
         final Uri contentUri = new Uri.Builder().appendPath(id).build();
         final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 SoundSettings.class.getName(),
@@ -156,7 +156,8 @@ public class RemoteMediaSlice implements CustomSliceable {
                 0 /* requestCode */, intent, 0 /* flags */);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
                 primaryActionIntent, icon, ListBuilder.ICON_IMAGE,
-                mContext.getText(R.string.media_output_title));
+                mContext.getString(R.string.media_output_label_title,
+                        Utils.getApplicationLabel(mContext, packageName)));
         return primarySliceAction;
     }
 

@@ -234,14 +234,13 @@ public class NetworkSelectSettings extends DashboardFragment {
             Log.d(TAG, "handleMessage, msg.what: " + msg.what);
             switch (msg.what) {
                 case EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE:
+                    final boolean isSucceed = (boolean) msg.obj;
                     setProgressBarVisible(false);
                     getPreferenceScreen().setEnabled(true);
 
-                    boolean isSucceed = (boolean) msg.obj;
                     mSelectedPreference.setSummary(isSucceed
                             ? R.string.network_connected
                             : R.string.network_could_not_connect);
-
                     break;
                 case EVENT_NETWORK_SCAN_RESULTS:
                     final List<CellInfo> results = (List<CellInfo>) msg.obj;

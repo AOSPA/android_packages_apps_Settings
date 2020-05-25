@@ -361,6 +361,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         return mPreferenceControllers;
     }
 
+    @Override
+    protected boolean isParalleledControllers() {
+        return true;
+    }
+
     private void registerReceivers() {
         LocalBroadcastManager.getInstance(getContext())
                 .registerReceiver(mEnableAdbReceiver, new IntentFilter(
@@ -492,6 +497,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DebugNonRectClipOperationsPreferenceController(context));
         controllers.add(new ForceDarkPreferenceController(context));
         controllers.add(new EnableBlursPreferenceController(context));
+        controllers.add(new QuickSettingsMediaPlayerPreferenceController(context));
         controllers.add(new ForceMSAAPreferenceController(context));
         controllers.add(new HardwareOverlaysPreferenceController(context));
         controllers.add(new SimulateColorSpacePreferenceController(context));
@@ -500,6 +506,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ProfileGpuRenderingPreferenceController(context));
         controllers.add(new KeepActivitiesPreferenceController(context));
         controllers.add(new BackgroundProcessLimitPreferenceController(context));
+        controllers.add(new CachedAppsFreezerPreferenceController(context));
         controllers.add(new ShowFirstCrashDialogPreferenceController(context));
         controllers.add(new AppsNotRespondingPreferenceController(context));
         controllers.add(new NotificationChannelWarningsPreferenceController(context));
