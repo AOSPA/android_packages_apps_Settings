@@ -24,4 +24,16 @@
          4 = FOD (front)
     -->
     <integer name="config_fingerprintSensorLocation">0</integer>
+
+    <!-- Defines support refresh rates that can be chosen
+         0 = Adaptive (90/60hz)
+         1 = Normal (60hz)
+         2 = High (90hz)
+         3 = Super (120hz)
+    -->
+    <integer-array name="config_availableRefreshRates">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </integer-array>
 </resources>
