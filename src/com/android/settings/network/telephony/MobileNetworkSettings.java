@@ -23,6 +23,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
@@ -52,6 +54,8 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
 
+import org.codeaurora.internal.IExtTelephony;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -63,6 +67,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     public static final int REQUEST_CODE_DELETE_SUBSCRIPTION = 18;
     @VisibleForTesting
     static final String KEY_CLICKED_PREF = "key_clicked_pref";
+
+    // UICC provisioning status
+    public static final int CARD_NOT_PROVISIONED = 0;
+    public static final int CARD_PROVISIONED = 1;
 
     //String keys for preference lookup
     private static final String BUTTON_CDMA_SYSTEM_SELECT_KEY = "cdma_system_select_key";
@@ -96,18 +104,16 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     private void setScreenState() {
         int simState = mTelephonyManager.getSimState();
         boolean screenState = simState != TelephonyManager.SIM_STATE_ABSENT;
-        if (PrimaryCardAndSubsidyLockUtils.DBG) {
-            Log.d(LOG_TAG, "isPrimaryCardEnabled(): "
-                    + PrimaryCardAndSubsidyLockUtils.isPrimaryCardEnabled());
-            Log.d(LOG_TAG, "isDetect4gCardEnabled(): "
-                    + PrimaryCardAndSubsidyLockUtils.isDetect4gCardEnabled());
-        }
-        if (screenState
-                && PrimaryCardAndSubsidyLockUtils.isPrimaryCardEnabled()
-                && PrimaryCardAndSubsidyLockUtils.isDetect4gCardEnabled()) {
-            int provStatus =
-                    PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(mPhoneId);
-            screenState = provStatus != PrimaryCardAndSubsidyLockUtils.CARD_NOT_PROVISIONED;
+        if (screenState) {
+            int provStatus = CARD_NOT_PROVISIONED;
+            IExtTelephony extTelephony = IExtTelephony.Stub
+                    .asInterface(ServiceManager.getService("qti.radio.extphone"));
+            try {
+                provStatus = extTelephony.getCurrentUiccCardProvisioningStatus(mPhoneId);
+            } catch (RemoteException | NullPointerException ex) {
+                Log.e(LOG_TAG, "getUiccCardProvisioningStatus: " + mPhoneId + ", Exception: ", ex);
+            }
+            screenState = provStatus != CARD_NOT_PROVISIONED;
             Log.d(LOG_TAG, "Provisioning Status: " + provStatus + ", screenState: " + screenState);
         }
         Log.d(LOG_TAG, "Setting screen state to: " + screenState);
