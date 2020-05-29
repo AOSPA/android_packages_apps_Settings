@@ -1131,7 +1131,7 @@ public final class Utils extends com.android.settingslib.Utils {
     public static boolean isAdvancedPlmnScanSupported() {
         boolean propVal = false;
         IExtTelephony extTelephony = IExtTelephony.Stub
-                .asInterface(ServiceManager.getService("extphone"));
+                .asInterface(ServiceManager.getService("qti.radio.extphone"));
         try {
             propVal = extTelephony
                     .getPropertyValueBool("persist.vendor.radio.enableadvancedscan", true);
