@@ -1536,4 +1536,31 @@
         <item>@string/rtt_settings_always_visible</item>
     </string-array>
 
+    <!--String arrays for showing user PLMN list -->
+    <string-array name="uplmn_prefer_network_mode_td_choices">
+        <item>GSM</item>
+        <item>TDSCDMA</item>
+        <item>LTE</item>
+        <item>Triple mode</item>
+    </string-array>
+
+    <string-array name="uplmn_prefer_network_mode_w_choices">
+        <item>GSM</item>
+        <item>WCDMA</item>
+        <item>LTE</item>
+        <item>Triple mode</item>
+    </string-array>
+
+    <string-array name="uplmn_prefer_network_mode_values">
+        <item>"0"</item>
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+    </string-array>
+
+    <string-array name="uplmn_cu_mcc_mnc_values">
+        <item>"46001"</item>
+        <item>"46006"</item>
+        <item>"46009"</item>
+    </string-array>
 </resources>
