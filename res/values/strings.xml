@@ -2789,6 +2789,10 @@
     <string name="display_white_balance_title">Display white balance</string>
     <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
     <string name="display_white_balance_summary"></string>
+    <!-- Display settings screen, peak refresh rate settings title [CHAR LIMIT=30] -->
+    <string name="peak_refresh_rate_title">Smooth Display</string>
+    <!-- Display settings screen, peak refresh rate settings summary [CHAR LIMIT=NONE] -->
+    <string name="peak_refresh_rate_summary">Automatically raises the refresh rate from 60 to 90 Hz for some content. Increases battery usage.</string>
     <!-- Display settings screen, setting option name to enable adaptive sleep [CHAR LIMIT=30] -->
     <string name="adaptive_sleep_title">Screen attention</string>
     <!-- Setting option summary when adaptive sleep is on [CHAR LIMIT=NONE] -->
@@ -4732,7 +4736,7 @@
     <!-- Title for the 'virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
     <string name="virtual_keyboard_category">On-screen keyboard</string>
     <!-- Title for the 'available virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
-    <string name="available_virtual_keyboard_category">Available virtual keyboard</string>
+    <string name="available_virtual_keyboard_category">Available On-screen keyboard</string>
     <!-- Title for the button to trigger the 'Manage keyboards' preference sub-screen, where the user can turn on/off installed virtual keyboards.[CHAR LIMIT=35] -->
     <string name="add_virtual_keyboard">Manage on-screen keyboards</string>
     <!-- Title for the 'keyboard assistance' preference category. [CHAR LIMIT=35] -->
@@ -4750,7 +4754,7 @@
     <!-- Title for the 'Work profile keyboards & tools' preference category inside Languages and inputs'. [CHAR LIMIT=50] -->
     <string name="language_and_input_for_work_category_title">Work profile keyboards &amp; tools</string>
     <!-- Title for the 'Virtual keyboards for work' preference. [CHAR LIMIT=45] -->
-    <string name="virtual_keyboards_for_work_title">Virtual keyboard for work</string>
+    <string name="virtual_keyboards_for_work_title">On-screen keyboard for work</string>
 
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
     <string name="default_keyboard_layout">Default</string>
@@ -8345,17 +8349,17 @@
 
 
     <!-- Configure notifications: Title for determining which notifications appear on the lock screen [CHAR LIMIT=60] -->
-    <string name="lock_screen_notifs_title">Notifications on lockscreen</string>
+    <string name="lock_screen_notifs_title">Notifications on lock screen</string>
 
     <!-- Configure notifications: Value for lockscreen notifications: all notifications shown
     regardless of noisiness [CHAR LIMIT=60] -->
-    <string name="lock_screen_notifs_show_all">Show alerting and silent notifications</string>
+    <string name="lock_screen_notifs_show_all">Show conversations, default, and silent</string>
 
     <!-- Configure notifications: Value for lockscreen notifications: show alerting notifications [CHAR LIMIT=60] -->
-    <string name="lock_screen_notifs_show_alerting">Show alerting notifications only</string>
+    <string name="lock_screen_notifs_show_alerting">Hide silent conversations and notifications</string>
 
     <!-- Configure notifications: Value for lockscreen notifications: don't show notifications [CHAR LIMIT=60] -->
-    <string name="lock_screen_notifs_show_none">Don\u2019t show notifications</string>
+    <string name="lock_screen_notifs_show_none">Don\u2019t show any notifications</string>
 
     <!-- Configure notifications: Title for redacting sensitive content on lockscreen [CHAR LIMIT=60] -->
     <string name="lock_screen_notifs_redact">Sensitive notifications</string>
@@ -8439,7 +8443,7 @@
     <string name="conversation_section_switch_title">Conversation section</string>
 
     <!-- [CHAR LIMIT=100] Summary for switch that says whether this app can appear in the conversation notification section-->
-    <string name="conversation_section_switch_summary">Allow <xliff:g id="app">%1$s</xliff:g> to appear in the conversation section</string>
+    <string name="conversation_section_switch_summary">Allow app to use conversation section</string>
 
     <!-- [CHAR LIMIT=NONE] Conversation preference summary, the parent channel this conversation was spawned from (separator) the parent channel group (e.g. an account name)-->
     <string name="notification_conversation_summary" translatable="false">"<xliff:g id="parent_category_name">%1$s</xliff:g> • <xliff:g id="parent_category_group_name">%2$s</xliff:g>"</string>
@@ -8478,7 +8482,7 @@
     <string name="important_conversations_summary">Show at top of conversation section</string>
 
     <!-- [CHAR LIMIT=100] preference category title -->
-    <string name="other_conversations">Modified conversations</string>
+    <string name="other_conversations">Other conversations</string>
 
     <!-- summary for other conversations list -->
     <string name="other_conversations_summary">Conversations you\u2019ve made changes to</string>
@@ -8538,7 +8542,7 @@
     <string name="notification_silence_title">Silent</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance title -->
-    <string name="notification_alert_title">Alerting</string>
+    <string name="notification_alert_title">Default</string>
 
     <!-- [CHAR LIMIT=40] Notification importance title. This setting controls how notifications in older apps may alert the user (eg, sound, visual, vibrate). -->
     <string name="allow_interruption">Allow interruptions</string>
@@ -8550,9 +8554,9 @@
     <string name="notification_priority_title">Priority</string>
 
     <!-- [CHAR LIMIT=150] Notification Importance title: important conversation level summary -->
-    <string name="notification_channel_summary_priority">Shows at top of conversation section and appears as a bubble</string>
+    <string name="notification_channel_summary_priority">Shows at top of conversation section, appears as floating bubble, displays profile picture on lock screen</string>
 
-    <string name="convo_not_supported_summary"><xliff:g id="app_name" example="Android Services">%1$s</xliff:g> does not support conversation-specific settings.</string>
+    <string name="convo_not_supported_summary"><xliff:g id="app_name" example="Android Services">%1$s</xliff:g> doesn\u2019t support most conversation features. You can’t set a conversation as priority, and conversations won’t appear as floating bubbles.</string>
 
     <!-- Channel summaries for the app notification page -->
 
@@ -8560,10 +8564,13 @@
     <string name="notification_channel_summary_min">In the pull-down shade, collapse notifications to one line</string>
 
     <!-- [CHAR LIMIT=150] Notification Importance title: low importance level summary -->
-    <string name="notification_channel_summary_low">Helps you focus without sound or vibration</string>
+    <string name="notification_channel_summary_low">No sound or vibration</string>
+
+    <!-- [CHAR LIMIT=150] Notification Importance title: low importance level summary -->
+    <string name="notification_conversation_summary_low">No sound or vibration and appears lower in conversation section</string>
 
     <!-- [CHAR LIMIT=150] Notification Importance title: normal importance level summary -->
-    <string name="notification_channel_summary_default">Gets your attention with sound or vibration</string>
+    <string name="notification_channel_summary_default">May ring or vibrate based on phone settings</string>
 
     <!-- [CHAR LIMIT=150] Notification Importance title: high importance level summary -->
     <string name="notification_channel_summary_high">When device is unlocked, show notifications as a banner across the top of the screen</string>
@@ -8894,7 +8901,7 @@
     <string name="notification_channel_sound_title">Sound</string>
 
     <!-- [CHAR LIMIT=180] Notification conversation: important -->
-    <string name="notification_conversation_important">Important</string>
+    <string name="notification_conversation_important">Priority</string>
 
     <!-- [CHAR LIMIT=180] Notification conversation: add to home screen -->
     <string name="notification_conversation_add_to_home">Add to home</string>
