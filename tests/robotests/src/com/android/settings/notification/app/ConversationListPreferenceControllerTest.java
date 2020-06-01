@@ -34,6 +34,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -169,12 +170,12 @@ public class ConversationListPreferenceControllerTest {
         ccw.setPkg("pkg");
         ccw.setUid(1);
         ShortcutInfo si = mock(ShortcutInfo.class);
-        when(si.getShortLabel()).thenReturn("conversation name");
+        when(si.getLabel()).thenReturn("conversation name");
         ccw.setShortcutInfo(si);
         ccw.setGroupLabel("group");
         ccw.setParentChannelLabel("parent");
 
-        assertThat(mController.getTitle(ccw).toString()).isEqualTo(si.getShortLabel());
+        assertThat(mController.getTitle(ccw).toString()).isEqualTo(si.getLabel());
     }
 
     @Test
@@ -224,6 +225,11 @@ public class ConversationListPreferenceControllerTest {
         @Override
         public String getPreferenceKey() {
             return "test";
+        }
+
+        @Override
+        Preference getSummaryPreference() {
+            return null;
         }
     }
 }

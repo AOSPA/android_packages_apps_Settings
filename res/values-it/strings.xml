@@ -353,7 +353,7 @@
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Impossibile aggiungere altri volti"</string>
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Registrazione non completata"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
-    <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Raggiunto il tempo limite per la registrazione del volto. Riprova."</string>
+    <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Hai raggiunto il tempo limite per la registrazione del volto. Riprova."</string>
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Registrazione del volto non riuscita."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="5882322568359775393">"Fatto. Tutto OK."</string>
     <string name="security_settings_face_enroll_done" msgid="3048687969498187442">"Fine"</string>
@@ -406,7 +406,7 @@
     <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="7119039592587429936">"Le funzioni di protezione del dispositivo non verranno attivate. Non potrai impedire ad altre persone di utilizzare questo tablet se viene smarrito o rubato."</string>
     <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"Le funzioni di protezione del dispositivo non verranno attivate. Non potrai impedire ad altre persone di utilizzare questo dispositivo se viene smarrito o rubato."</string>
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"Le funzioni di protezione del dispositivo non verranno attivate. Non potrai impedire ad altre persone di utilizzare questo telefono se viene smarrito o rubato."</string>
-    <string name="skip_anyway_button_label" msgid="3442274117023270068">"Ignora comunque"</string>
+    <string name="skip_anyway_button_label" msgid="3442274117023270068">"Salta comunque"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"Torna indietro"</string>
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Ignora"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Annulla"</string>
@@ -417,11 +417,11 @@
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Elimina"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Tocca il sensore"</string>
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Appoggia il dito sul sensore e sollevalo quando senti una vibrazione"</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Appoggia il dito sul sensore e sollevalo quando senti una vibrazione."</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Solleva, quindi tocca di nuovo"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Solleva ripetutamente il dito per aggiungere le varie parti dell\'impronta"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Solleva ripetutamente il dito per aggiungere le varie parti dell\'impronta."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Impronta aggiunta"</string>
-    <string name="security_settings_fingerprint_enroll_finish_message" msgid="8220458039597261933">"Quando vedi questa icona, usa l\'impronta per identificarti o autorizzare gli acquisti"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="8220458039597261933">"Quando vedi questa icona, usa l\'impronta per identificarti o autorizzare gli acquisti."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Più tardi"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Saltare configurazione impronta digitale?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Hai scelto anche l\'utilizzo dell\'impronta tra i vari metodi per sbloccare il telefono. Se salti la configurazione ora, dovrai eseguirla in un secondo momento. Basta un minuto."</string>
@@ -439,7 +439,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ops, questo non è il sensore"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Tocca il sensore sulla parte posteriore del telefono. Utilizza il dito indice."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Registrazione non completata"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Raggiunto tempo limite per la registrazione dell\'impronta. Riprova."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Hai raggiunto il tempo limite per la registrazione dell\'impronta. Riprova."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registrazione dell\'impronta non riuscita. Riprova o utilizza un dito diverso."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Aggiungine un\'altra"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Avanti"</string>
@@ -1187,6 +1187,10 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"La luminosità dello schermo verrà regolata automaticamente in base all\'ambiente e alle attività. Puoi spostare manualmente il dispositivo di scorrimento per far sì che la luminosità adattiva memorizzi le tue preferenze."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Bilanciamento bianco display"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <!-- no translation found for peak_refresh_rate_title (1878771412897140903) -->
+    <skip />
+    <!-- no translation found for peak_refresh_rate_summary (1527087897198455042) -->
+    <skip />
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Schermo vigile"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"On/Lo schermo non si spegne se lo stai guardando"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Off"</string>
@@ -2019,7 +2023,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Lingua"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Tastiere"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Tastiera sullo schermo"</string>
-    <string name="available_virtual_keyboard_category" msgid="2191399236305207950">"Tastiera virtuale disponibile"</string>
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tastiera sullo schermo disponibile"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gestisci tastiere sullo schermo"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Supporto tastiera"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Tastiera fisica"</string>
@@ -2028,7 +2032,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Scorciatoie da tastiera"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Mostra le scorciatoie disponibili"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastiere e strumenti del profilo di lavoro"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="3423496805741863134">"Tastiera virtuale per il lavoro"</string>
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Tastiera sullo schermo per il lavoro"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predefinito"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Velocità del puntatore"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Controller di gioco"</string>
@@ -2103,7 +2107,7 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Flag di funzioni"</string>
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Lo screen reader è rivolto principalmente a utenti non vedenti o con problemi di vista"</string>
-    <string name="select_to_speak_summary" msgid="1995285446766920925">"Tocca gli elementi sullo schermo per la lettura ad alta voce"</string>
+    <string name="select_to_speak_summary" msgid="1995285446766920925">"Tocca gli elementi sullo schermo per ascoltarne la lettura ad alta voce"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferenze sottotitoli"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ingrandimento"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Area di ingrandimento"</string>
@@ -2125,6 +2129,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tocca un pulsante per eseguire lo zoom"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Aumenta velocemente lo zoom dello schermo per mostrare più chiaramente i contenuti.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Per aumentare lo zoom:&lt;/b&gt;&lt;br/&gt; 1. Usa la scorciatoia per avviare la funzionalità Ingrandimento&lt;br/&gt; 2. Tocca lo schermo&lt;br/&gt; 3. Trascina due dita per spostarti nella schermata&lt;br/&gt; 4. Pizzica con due dita per regolare lo zoom&lt;br/&gt; 5. Usa la scorciatoia per interrompere la funzionalità Ingrandimento&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Per aumentare lo zoom temporaneamente:&lt;/b&gt;&lt;br/&gt; 1. Usa la scorciatoia per avviare la funzionalità Ingrandimento&lt;br/&gt; 2. Tocca e tieni premuto un punto qualsiasi della schermata&lt;br/&gt; 3. Trascina il dito per spostarti nella schermata&lt;br/&gt; 4. Solleva il dito per interrompere la funzionalità Ingrandimento"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Quando è attivo l\'ingrandimento, puoi aumentare lo zoom sullo schermo.\n\n"<b>"Per eseguire lo zoom"</b>", avvia l\'ingrandimento, quindi tocca un punto qualsiasi sullo schermo.\n"<ul><li>"Trascina almeno due dita per scorrere"</li>\n<li>"Pizzica con almeno due dita per regolare lo zoom."</li></ul>\n\n<b>"Per ingrandire temporaneamente"</b>", avvia l\'ingrandimento, quindi tocca e tieni premuto un punto qualsiasi sullo schermo.\n"<ul><li>"Trascina per spostarti sullo schermo"</li>\n<li>"Solleva il dito per ridurre lo zoom"</li></ul>\n\n"Non puoi aumentare lo zoom sulla tastiera o nella barra di navigazione."</string>
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Pagina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> di <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Usa il pulsante Accessibilità per aprire"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Tieni premuti i tasti del volume per aprire"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Tocca tre volte lo schermo per aprire"</string>
@@ -3051,7 +3056,7 @@
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"OK"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Altro..."</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Imposta app predefinita per i pagamenti"</string>
-    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Aggiorna app predefinita per i pagamenti"</string>
+    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Aggiorna l\'app predefinita per i pagamenti"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"Se è disponibile un terminale contactless, paga con l\'app <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"Se è disponibile un terminale contactless, paga con l\'app <xliff:g id="APP_0">%1$s</xliff:g>.\n\nQuesta app sostituisce <xliff:g id="APP_1">%2$s</xliff:g> come app predefinita per i pagamenti."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Imposta come predefinita"</string>
@@ -3465,7 +3470,7 @@
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Alcune notifiche e altri contenuti possono essere visualizzati come bolle sullo schermo. Tocca una bolla per aprirla. Per ignorarla, trascinala in fondo allo schermo."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bolle"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Tutte le impostazioni delle bolle"</string>
-    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Usa bolla per questa conversazione"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Mostra conversazione sotto forma di bolle"</string>
     <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Mostra icona mobile sopra le app"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Consenti all\'app <xliff:g id="APP_NAME">%1$s</xliff:g> di mostrare le notifiche come bolle"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Vuoi attivare le bolle per il dispositivo?"</string>
@@ -3525,11 +3530,18 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"Non mostrare mai notifiche"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"Conversazioni"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Conversazione"</string>
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"Sezione delle conversazioni"</string>
+    <string name="conversation_section_switch_summary" msgid="2513479452656556753">"Consenti la visualizzazione dell\'app <xliff:g id="APP">%1$s</xliff:g> nella sezione delle conversazioni"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Non è una conversazione"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Rimuovi dalla sezione delle conversazioni"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Questa è una conversazione"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Aggiungi alla sezione delle conversazioni"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Gestisci le conversazioni"</string>
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Nessuna conversazione prioritaria"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> conversazioni prioritarie</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> conversazione prioritaria</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Conversazioni prioritarie"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Appaiono in cima alla sezione delle conversazioni sotto forma di bolle mobili"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Appaiono in cima alla sezione delle conversazioni"</string>
@@ -3554,10 +3566,10 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Consenti interruzioni"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Consenti all\'app di emettere suoni o vibrazioni e/o mostrare notifiche sullo schermo"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Priorità"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Appare in cima alla sezione delle conversazioni sotto forma di fumetto"</string>
+    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Appare in cima alla sezione delle conversazioni sotto forma di bolla"</string>
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> non supporta impostazioni specifiche per le conversazioni."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Nell\'area a discesa comprime le notifiche su una sola riga"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Favorisce la tua concentrazione grazie all\'assenza di suono o vibrazione"</string>
+    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Ti aiuta a non perdere la concentrazione grazie all\'assenza di suono o vibrazione."</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Richiama la tua attenzione con suono o vibrazione"</string>
     <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Vengono mostrate le notifiche con priorità bassa. Sempre silenziose."</string>
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Vengono mostrate le notifiche con priorità bassa. Sempre silenziose."</string>
