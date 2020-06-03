@@ -283,7 +283,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
     }
 
     @VisibleForTesting
-    static void setCurrentSystemNavigationMode(Context context, IOverlayManager overlayManager,
+    public static void setCurrentSystemNavigationMode(Context context, IOverlayManager overlayManager,
             String key) {
         switch (key) {
             case KEY_SYSTEM_NAV_GESTURAL:
