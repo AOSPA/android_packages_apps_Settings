@@ -299,7 +299,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment {
         }
     }
 
-    private static void setNavBarInteractionMode(IOverlayManager overlayManager,
+    public static void setNavBarInteractionMode(IOverlayManager overlayManager,
             String overlayPackage) {
         try {
             overlayManager.setEnabledExclusiveInCategory(overlayPackage, USER_CURRENT);

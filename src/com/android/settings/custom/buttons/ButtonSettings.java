@@ -21,11 +21,13 @@ package com.android.settings.custom.buttons;
 import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.om.IOverlayManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Log;
@@ -38,11 +40,13 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.gestures.SystemNavigationGestureSettings;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import com.android.settings.custom.buttons.preference.*;
 
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
 import static com.android.internal.util.aospa.hwkeys.DeviceKeysConstants.*;
 
 import com.android.internal.util.aospa.NavbarUtils;
@@ -74,6 +78,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_APPSWITCH = "app_switch_key";
     private static final String CATEGORY_BACKLIGHT = "key_backlight";
 
+    private IOverlayManager mOverlayManager;
     private ListPreference mHomeLongPressAction;
     private ListPreference mHomeDoubleTapAction;
     private ListPreference mMenuPressAction;
@@ -242,6 +247,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         if (!backlight.isButtonSupported()) {
             prefScreen.removePreference(backlight);
         }
+        mOverlayManager = IOverlayManager.Stub.asInterface(
+                ServiceManager.getService(Context.OVERLAY_SERVICE));
     }
 
     @Override
@@ -315,6 +322,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     }
 
     private void writeDisableNavkeysOption(boolean enabled) {
+        if (!enabled) {
+            SystemNavigationGestureSettings.setNavBarInteractionMode(mOverlayManager, NAV_BAR_MODE_3BUTTON_OVERLAY);
+        }
         NavbarUtils.setEnabled(getActivity(), enabled);
     }
 
