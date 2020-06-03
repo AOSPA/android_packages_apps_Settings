@@ -94,7 +94,7 @@ public class SystemNavigationPreferenceController extends BasePreferenceControll
     }
 
     static boolean isSwipeUpEnabled(Context context) {
-        if (isEdgeToEdgeEnabled(context)) {
+        if (isEdgeToEdgeEnabled(context) || !NavbarUtils.isEnabled(context)) {
             return false;
         }
         return NAV_BAR_MODE_2BUTTON == context.getResources().getInteger(
@@ -102,6 +102,9 @@ public class SystemNavigationPreferenceController extends BasePreferenceControll
     }
 
     static boolean isEdgeToEdgeEnabled(Context context) {
+        if (!NavbarUtils.isEnabled(context)){
+            return false;
+        }
         return NAV_BAR_MODE_GESTURAL == context.getResources().getInteger(
                 com.android.internal.R.integer.config_navBarInteractionMode);
     }
