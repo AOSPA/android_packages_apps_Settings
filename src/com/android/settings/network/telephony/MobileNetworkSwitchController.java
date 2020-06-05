@@ -88,7 +88,7 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         mSwitchBar.setSwitchBarText(R.string.mobile_network_use_sim_on,
                 R.string.mobile_network_use_sim_off);
 
-        mSwitchBar.addOnSwitchChangeListener((switchView, isChecked) -> {
+        mSwitchBar.getSwitch().setOnBeforeCheckedChangeListener((toggleSwitch, isChecked) -> {
             // TODO b/135222940: re-evaluate whether to use
             // mSubscriptionManager#isSubscriptionEnabled
         int uiccStatus = PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(mPhoneId);
@@ -97,8 +97,9 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
             if ((mSubInfo != null &&
                     (uiccStatus == PrimaryCardAndSubsidyLockUtils.CARD_PROVISIONED) != isChecked) &&
                     (!mSubscriptionManager.setSubscriptionEnabled(mSubId, isChecked))) {
-                mSwitchBar.setChecked(!isChecked);
+                return true;
             }
+            return false;
         });
         update();
     }
@@ -130,8 +131,7 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         } else {
             mSwitchBar.show();
             int uiccStatus = PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(mPhoneId);
-            mSwitchBar.setChecked(uiccStatus == PrimaryCardAndSubsidyLockUtils.CARD_PROVISIONED);
-
+            mSwitchBar.setCheckedInternal(uiccStatus == PrimaryCardAndSubsidyLockUtils.CARD_PROVISIONED);
         }
     }
 
