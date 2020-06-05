@@ -1187,10 +1187,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"O brillo da pantalla axustarase automaticamente segundo o ambiente e as actividades que leves a cabo. Podes mover o control desprazable de forma manual para que o brillo automático recoñeza as túas preferencias."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Balance de brancos da pantalla"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <!-- no translation found for peak_refresh_rate_title (1878771412897140903) -->
-    <skip />
-    <!-- no translation found for peak_refresh_rate_summary (1527087897198455042) -->
-    <skip />
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Incrementa automaticamente a frecuencia de actualización de 60 a 90 Hz en determinados tipos de contido. Aumenta o uso da batería."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Atención á pantalla"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activado/A pantalla non se apagará se miras para ela"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Opción desactivada"</string>
@@ -3504,10 +3502,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Tras o desbloqueo facial, vai á última pantalla usada"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Pantalla de bloqueo, bloquear pantalla, omitir, saltar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Perfil de traballo bloqueado"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Notificacións na pantalla de bloqueo"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Mostrar notificacións de silencio e alertas"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"Mostrar só notificacións de alertas"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"Non mostrar notificacións"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificacións na pantalla de bloqueo"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversas predeterminadas e silenciadas"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ocultar conversas e notificacións silenciadas"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Non mostrar ningunha notificación"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notificacións sobre contido confidencial"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Mostra contido confidencial na pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notificacións de contido confidencial no perfil de traballo"</string>
@@ -3531,7 +3529,7 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"Conversas"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Conversa"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Sección de conversas"</string>
-    <string name="conversation_section_switch_summary" msgid="2513479452656556753">"Permite que <xliff:g id="APP">%1$s</xliff:g> apareza na sección de conversas"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Permitir que a aplicación use a sección de conversas"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Non é unha conversa"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Quitar da sección de conversas"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Esta é unha conversa"</string>
@@ -3545,7 +3543,7 @@
     <string name="important_conversations" msgid="1233893707189659401">"Conversas prioritarias"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Mostra as conversas prioritarias como burbullas flotantes situadas na parte superior da sección de conversas"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Mostra as conversas prioritarias na parte superior da sección de conversas"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"Conversas modificadas"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"Outras conversas"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversas que modificases"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Mostrar conversas prioritarias nunha burbulla"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"As conversas prioritarias móstranse na parte superior do panel despregable. Tamén podes configuralas para que se inclúan en burbullas e interrompan o modo Non molestar."</string>
@@ -3562,15 +3560,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"Mostrar na pantalla"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Bloquear"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Silenciosas"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"Con alertas"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"Configuración predeterminada"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Permitir interrupcións"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permite que a aplicación emita son, vibre e mostre notificacións na pantalla"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioridade"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Móstrase na parte superior da sección da conversa en forma de burbulla."</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> non admite opcións de configuración específicas para conversas."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Móstrase na parte superior da sección de conversas en forma de burbulla flotante e aparece a imaxe do perfil na pantalla de bloqueo"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"A aplicación <xliff:g id="APP_NAME">%1$s</xliff:g> non é compatible coa maior parte das funcións das conversas. Non poderás marcar as conversas como prioritarias nin tampouco mostralas en forma de burbullas flotantes."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"No panel despregable, contrae as notificacións e móstraas nunha liña"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Axúdache a centrarte sen son nin vibración"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"Chama a túa atención con son ou vibración"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sen son nin vibración"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Non soa nin vibra, e aparece máis abaixo na sección de conversas"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Podería soar ou vibrar en función da configuración do teléfono"</string>
     <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Mostra as notificacións con prioridade baixa. Sempre en silencio."</string>
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Mostra as notificacións con prioridade baixa. Sempre en silencio."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Mostra as notificacións con prioridade baixa. Sempre en silencio."</string>
@@ -3685,7 +3684,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Luz intermitente"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Vibración"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Son"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"Importante"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"Prioridade"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Engadir ao inicio"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Eliminar"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Cambiar nome"</string>
@@ -4117,7 +4116,7 @@
     <string name="app_list_preference_none" msgid="1635406344616653756">"Ningún"</string>
     <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"A desactivación do acceso de uso desta aplicación non impide que o teu administrador realice o seguimento do uso de datos das aplicacións no teu perfil de traballo"</string>
     <string name="accessibility_lock_screen_progress" msgid="4597298121698665401">"Uso de <xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> caracteres"</string>
-    <string name="draw_overlay" msgid="7902083260500573027">"Superpoñer sobre aplicacións"</string>
+    <string name="draw_overlay" msgid="7902083260500573027">"Superpor a aplicacións"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Mostrar sobre outras aplicacións"</string>
     <string name="system_alert_window_apps_title" msgid="1537949185175079866">"Aplicacións"</string>
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"Mostrar sobre outras aplicacións"</string>
@@ -4128,7 +4127,7 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permite que esta aplicación lea, modifique e elimine todos os ficheiros deste dispositivo ou de calquera unidade de almacenamento conectada. Se lle dás permiso, a aplicación poderá acceder aos ficheiros sen que se che notifique explicitamente."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Poden acceder a todos os ficheiros"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"rv realidade virtual axente de escoita estéreo asistente servizo"</string>
-    <string name="overlay_settings" msgid="2030836934139139469">"Superpoñer sobre aplicacións"</string>
+    <string name="overlay_settings" msgid="2030836934139139469">"Superpor a aplicacións"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"Aplicacións con permiso para superpoñerse a outras: <xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"Aplicacións con permiso"</string>
     <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitido"</string>
