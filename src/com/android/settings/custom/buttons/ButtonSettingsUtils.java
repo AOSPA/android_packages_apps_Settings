@@ -16,10 +16,12 @@
 package com.android.settings.custom.buttons;
 
 import android.content.Context;
+import android.os.SystemProperties;
 import com.android.internal.util.aospa.NavbarUtils;
 
 public class ButtonSettingsUtils {
     public static boolean isAvailable(Context context) {
-        return NavbarUtils.canDisable(context);
+        return NavbarUtils.canDisable(context)
+                && SystemProperties.getBoolean("ro.vendor.settings.ui.hardwarekeys.present", true);
     }
 }
