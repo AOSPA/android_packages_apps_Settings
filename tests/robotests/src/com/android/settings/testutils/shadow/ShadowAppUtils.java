@@ -16,27 +16,34 @@
 
 package com.android.settings.testutils.shadow;
 
-import android.service.persistentdata.PersistentDataBlockManager;
+import android.content.Context;
+
+import com.android.settingslib.applications.AppUtils;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.annotation.Resetter;
 
-@Implements(PersistentDataBlockManager.class)
-public class ShadowPersistentDataBlockManager {
-    private static int sDataBlockSize = 0;
+import java.util.HashMap;
+import java.util.Map;
 
-    @Resetter
-    public static void reset() {
-        sDataBlockSize = 0;
-    }
+@Implements(AppUtils.class)
+public class ShadowAppUtils {
+
+    private static Map<String, String> sAppContentDesMap;
 
     @Implementation
-    protected int getDataBlockSize() {
-        return sDataBlockSize;
+    protected static CharSequence getAppContentDescription(Context context, String packageName,
+            int userId) {
+        if (sAppContentDesMap != null) {
+            return sAppContentDesMap.get(packageName);
+        }
+        return null;
     }
 
-    public static void setDataBlockSize(int dataBlockSize) {
-        sDataBlockSize = dataBlockSize;
+    public static void setAppContentDescription(String packageName, String appContentDes) {
+        if (sAppContentDesMap == null) {
+            sAppContentDesMap = new HashMap<>();
+        }
+        sAppContentDesMap.put(packageName, appContentDes);
     }
 }

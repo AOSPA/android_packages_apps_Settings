@@ -17,8 +17,10 @@ package com.android.settings.notification;
 
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_CACHED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY_ANY_LAUNCHER;
 
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
@@ -268,12 +270,38 @@ public class NotificationBackend {
         }
     }
 
-    public boolean hasSentMessage(String pkg, int uid) {
+    public boolean hasSentValidMsg(String pkg, int uid) {
         try {
-            return sINM.hasSentMessage(pkg, uid);
+            return sINM.hasSentValidMsg(pkg, uid);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return false;
+        }
+    }
+
+    public boolean isInInvalidMsgState(String pkg, int uid) {
+        try {
+            return sINM.isInInvalidMsgState(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    public boolean hasUserDemotedInvalidMsgApp(String pkg, int uid) {
+        try {
+            return sINM.hasUserDemotedInvalidMsgApp(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    public void setInvalidMsgAppDemoted(String pkg, int uid, boolean isDemoted) {
+        try {
+             sINM.setInvalidMsgAppDemoted(pkg, uid, isDemoted);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
         }
     }
 
@@ -518,7 +546,8 @@ public class NotificationBackend {
 
         LauncherApps.ShortcutQuery query = new LauncherApps.ShortcutQuery()
                 .setPackage(pkg)
-                .setQueryFlags(FLAG_MATCH_DYNAMIC | FLAG_MATCH_PINNED)
+                .setQueryFlags(FLAG_MATCH_DYNAMIC
+                        | FLAG_MATCH_PINNED_BY_ANY_LAUNCHER | FLAG_MATCH_CACHED)
                 .setShortcutIds(Arrays.asList(id));
         List<ShortcutInfo> shortcuts = la.getShortcuts(
                 query, UserHandle.of(UserHandle.getUserId(uid)));

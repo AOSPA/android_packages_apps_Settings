@@ -81,9 +81,6 @@ public class MediaOutputSlice implements CustomSliceable {
 
     @Override
     public Slice getSlice() {
-        // Reload theme for switching dark mode on/off
-        mContext.getTheme().applyStyle(R.style.Theme_Settings_Home, true /* force */);
-
         final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                 .setAccentColor(COLOR_NOT_TINTED);
         if (!isVisible()) {
@@ -109,7 +106,9 @@ public class MediaOutputSlice implements CustomSliceable {
             final MediaDevice connectedDevice = worker.getCurrentConnectedMediaDevice();
             if (devices.size() == 1) {
                 // Zero state
-                addRow(connectedDevice, connectedDevice, listBuilder);
+                for (MediaDevice device : devices) {
+                    addRow(device, device, listBuilder);
+                }
                 listBuilder.addRow(getPairNewRow());
             } else {
                 final boolean isTouched = worker.getIsTouched();
@@ -290,11 +289,16 @@ public class MediaOutputSlice implements CustomSliceable {
 
         if (device.getDeviceType() == MediaDevice.MediaDeviceType.TYPE_BLUETOOTH_DEVICE
                 && !device.isConnected()) {
-            if (device.getState() == LocalMediaManager.MediaDeviceState.STATE_CONNECTING) {
+            final int state = device.getState();
+            if (state == LocalMediaManager.MediaDeviceState.STATE_CONNECTING
+                    || state == LocalMediaManager.MediaDeviceState.STATE_CONNECTING_FAILED) {
                 rowBuilder.setTitle(deviceName);
                 rowBuilder.setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
                         ListBuilder.ICON_IMAGE, deviceName));
-                rowBuilder.setSubtitle(mContext.getText(R.string.media_output_switching));
+                rowBuilder.setSubtitle(
+                        (state == LocalMediaManager.MediaDeviceState.STATE_CONNECTING)
+                                ? mContext.getText(R.string.media_output_switching)
+                                : mContext.getText(R.string.bluetooth_connect_failed));
             } else {
                 // Append status to title only for the disconnected Bluetooth device.
                 final SpannableString spannableTitle = new SpannableString(
@@ -378,7 +382,7 @@ public class MediaOutputSlice implements CustomSliceable {
 
     @Override
     public Class getBackgroundWorkerClass() {
-        return MediaDeviceUpdateWorker.class;
+        return MediaOutputSliceWorker.class;
     }
 
     private boolean isVisible() {

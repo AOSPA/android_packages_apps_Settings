@@ -38,6 +38,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.network.SubscriptionUtil;
@@ -81,7 +82,6 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     public DefaultSubscriptionController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mManager = context.getSystemService(SubscriptionManager.class);
-        mTelecomManager = mContext.getSystemService(TelecomManager.class);
         mChangeListener = new SubscriptionsChangeListener(context, this);
 
         mTelephonyManager = (TelephonyManager) mContext
@@ -221,12 +221,12 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
      */
     public PhoneAccountHandle getDefaultCallingAccountHandle() {
         final PhoneAccountHandle currentSelectPhoneAccount =
-                mTelecomManager.getUserSelectedOutgoingPhoneAccount();
+                getTelecomManager().getUserSelectedOutgoingPhoneAccount();
         if (currentSelectPhoneAccount == null) {
             return null;
         }
         final List<PhoneAccountHandle> accountHandles =
-                mTelecomManager.getCallCapablePhoneAccounts(false);
+                getTelecomManager().getCallCapablePhoneAccounts(false);
         final PhoneAccountHandle emergencyAccountHandle = new PhoneAccountHandle(
                 PSTN_CONNECTION_SERVICE_COMPONENT, EMERGENCY_ACCOUNT_HANDLE_ID);
         if (currentSelectPhoneAccount.equals(emergencyAccountHandle)) {
@@ -240,14 +240,30 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         return null;
     }
 
+    @VisibleForTesting
+    TelecomManager getTelecomManager() {
+        if (mTelecomManager == null) {
+            mTelecomManager = mContext.getSystemService(TelecomManager.class);
+        }
+        return mTelecomManager;
+    }
+
+    @VisibleForTesting
+    PhoneAccount getPhoneAccount(PhoneAccountHandle handle) {
+        return getTelecomManager().getPhoneAccount(handle);
+    }
+
     /**
      * Check if calling account bind to subscription
      *
      * @param handle {@link PhoneAccountHandle} for specific calling account
      */
     public boolean isCallingAccountBindToSubscription(PhoneAccountHandle handle) {
-        return mTelecomManager.getPhoneAccount(handle)
-                .hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION);
+        final PhoneAccount account = getPhoneAccount(handle);
+        if (account == null) {
+            return false;
+        }
+        return account.hasCapabilities(PhoneAccount.CAPABILITY_SIM_SUBSCRIPTION);
     }
 
     /**
@@ -257,7 +273,11 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
      * @return label of calling account
      */
     public CharSequence getLabelFromCallingAccount(PhoneAccountHandle handle) {
-        CharSequence label = mTelecomManager.getPhoneAccount(handle).getLabel();
+        CharSequence label = null;
+        final PhoneAccount account = getPhoneAccount(handle);
+        if (account != null) {
+            label = account.getLabel();
+        }
         if (label != null) {
             label = mContext.getPackageManager().getUserBadgedLabel(label, handle.getUserHandle());
         }

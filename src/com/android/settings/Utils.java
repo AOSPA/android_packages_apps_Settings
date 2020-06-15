@@ -42,6 +42,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.Resources.NotFoundException;
@@ -121,6 +122,8 @@ import org.codeaurora.internal.IExtTelephony;
 public final class Utils extends com.android.settingslib.Utils {
 
     private static final String TAG = "Settings";
+
+    public static final String FILE_PROVIDER_AUTHORITY = "com.android.settings.files";
 
     /**
      * Set the preference's title to the matching activity's label.
@@ -1130,7 +1133,7 @@ public final class Utils extends com.android.settingslib.Utils {
     public static boolean isAdvancedPlmnScanSupported() {
         boolean propVal = false;
         IExtTelephony extTelephony = IExtTelephony.Stub
-                .asInterface(ServiceManager.getService("extphone"));
+                .asInterface(ServiceManager.getService("qti.radio.extphone"));
         try {
             propVal = extTelephony
                     .getPropertyValueBool("persist.vendor.radio.enableadvancedscan", true);
@@ -1225,5 +1228,14 @@ public final class Utils extends com.android.settingslib.Utils {
         final boolean isSettingsIntelligence = TextUtils.equals(callingPackage,
                 context.getString(R.string.config_settingsintelligence_package_name));
         return isSettingsIntelligence;
+    }
+
+    /**
+     * Returns true if the night mode is enabled.
+     */
+    public static boolean isNightMode(Context context) {
+        final int currentNightMode =
+                context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
     }
 }

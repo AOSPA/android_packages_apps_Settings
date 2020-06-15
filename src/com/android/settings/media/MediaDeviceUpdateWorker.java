@@ -51,8 +51,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         implements LocalMediaManager.DeviceCallback {
 
-    private final Context mContext;
-    private final Collection<MediaDevice> mMediaDevices = new CopyOnWriteArrayList<>();
+    protected final Context mContext;
+    protected final Collection<MediaDevice> mMediaDevices = new CopyOnWriteArrayList<>();
     private final DevicesChangedBroadcastReceiver mReceiver;
     private final String mPackageName;
 
@@ -73,7 +73,8 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     protected void onSlicePinned() {
         mMediaDevices.clear();
         mIsTouched = false;
-        if (mLocalMediaManager == null) {
+        if (mLocalMediaManager == null || !TextUtils.equals(mPackageName,
+                mLocalMediaManager.getPackageName())) {
             mLocalMediaManager = new LocalMediaManager(mContext, mPackageName, null);
         }
 
@@ -127,10 +128,11 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
 
     public void connectDevice(MediaDevice device) {
         ThreadUtils.postOnBackgroundThread(() -> {
-            mLocalMediaManager.connectDevice(device);
-            ThreadUtils.postOnMainThread(() -> {
-                notifySliceChange();
-            });
+            if (mLocalMediaManager.connectDevice(device)) {
+                ThreadUtils.postOnMainThread(() -> {
+                    notifySliceChange();
+                });
+            }
         });
     }
 
@@ -172,6 +174,19 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
 
     List<MediaDevice> getSelectedMediaDevice() {
         return mLocalMediaManager.getSelectedMediaDevice();
+    }
+
+    List<MediaDevice> getDeselectableMediaDevice() {
+        return mLocalMediaManager.getDeselectableMediaDevice();
+    }
+
+    boolean isDeviceIncluded(Collection<MediaDevice> deviceCollection, MediaDevice targetDevice) {
+        for (MediaDevice device : deviceCollection) {
+            if (TextUtils.equals(device.getId(), targetDevice.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     void adjustSessionVolume(String sessionId, int volume) {

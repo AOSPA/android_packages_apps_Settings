@@ -599,7 +599,7 @@
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"หากคุณป้อนรหัสผ่านไม่ถูกต้องในครั้งถัดไป ระบบจะลบโปรไฟล์งานนี้ รวมถึงข้อมูลในโปรไฟล์"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"ใช้ความพยายามหลายครั้งเกินไป ระบบจะลบข้อมูลในอุปกรณ์เครื่องนี้"</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"ใช้ความพยายามหลายครั้งเกินไป ระบบจะลบผู้ใช้รายนี้"</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"ป้อนหลายครั้งเกินไป ระบบจะลบโปรไฟล์งานนี้ รวมถึงข้อมูลในโปรไฟล์"</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"ป้อนไม่ถูกต้องหลายครั้งเกินไป ระบบจะลบโปรไฟล์งานนี้ รวมถึงข้อมูลในโปรไฟล์"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"ปิด"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">ต้องมีอักขระอย่างน้อย <xliff:g id="COUNT_1">%d</xliff:g> ตัว</item>
@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"จำนวนอุปกรณ์เสียงบลูทูธที่เชื่อมต่อสูงสุด"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"เลือกจำนวนสูงสุดสำหรับอุปกรณ์เสียงบลูทูธที่เชื่อมต่อ"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"แคสต์"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"มิเรอร์"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"เปิดใช้การแสดงผลแบบไร้สาย"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"ไม่พบอุปกรณ์ในบริเวณใกล้เคียง"</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"กำลังเชื่อมต่อ"</string>
@@ -967,12 +968,11 @@
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"ไม่ต้องแสดงอีก"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"เชื่อมต่อ"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"เปิด Wi-Fi แล้ว"</string>
-    <!-- no translation found for wifi_connected_to_message (7470435873743756802) -->
-    <skip />
+    <string name="wifi_connected_to_message" msgid="8976048616505112896">"เชื่อมต่อกับ <xliff:g id="NETWORK_NAME">%1$s</xliff:g> แล้ว"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"กำลังเชื่อมต่อ…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"ไม่สามารถเชื่อมต่อกับเครือข่าย"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"เครือข่ายไม่อยู่ในพื้นที่ให้บริการ"</string>
-    <string name="wifi_forget" msgid="3485573280364015620">"ไม่จำ"</string>
+    <string name="wifi_forget" msgid="3485573280364015620">"ลบ"</string>
     <string name="wifi_modify" msgid="5127926476383659412">"แก้ไข"</string>
     <string name="wifi_failed_forget_message" msgid="8272732599235525880">"ไม่สามารถเลิกการจดจำเครือข่าย"</string>
     <string name="wifi_save" msgid="2312643132472226807">"บันทึก"</string>
@@ -1188,6 +1188,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"ความสว่างของหน้าจอจะปรับให้เหมาะสมกับสภาพแวดล้อมและกิจกรรมที่คุณทำโดยอัตโนมัติ คุณเลื่อนแถบเลื่อนด้วยตนเองได้เพื่อช่วยให้การปรับความสว่างอัตโนมัติทราบความสว่างที่คุณต้องการ"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"แสดงไวท์บาลานซ์"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"เพิ่มอัตราการรีเฟรชจาก 60 เป็น 90 Hz โดยอัตโนมัติสำหรับเนื้อหาบางรายการ เพิ่มการใช้งานแบตเตอรี่"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"การจดจ่อที่หน้าจอ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"เปิด/หน้าจอจะไม่ปิดหากคุณกำลังดูอยู่"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"ปิด"</string>
@@ -1434,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"สำรวจ"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"เพิ่มพื้นที่ว่าง"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"จัดการพื้นที่เก็บข้อมูล"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"ล้าง, พื้นที่เก็บข้อมูล"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"การเชื่อมต่อ USB ของคอมพิวเตอร์"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"เชื่อมต่อแบบ"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"อุปกรณ์สื่อ (MTP)"</string>
@@ -1783,7 +1786,7 @@
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"ป้อน PIN ของอุปกรณ์เพื่อดำเนินการต่อ"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"ป้อนรหัสผ่านของอุปกรณ์เพื่อดำเนินการต่อ"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"ใช้รูปแบบของที่ทำงานเพื่อดำเนินการต่อ"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"ป้อน PIN ของที่ทำงานเพื่อดำเนินการต่อ"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"ป้อน PIN ของโปรไฟล์งานเพื่อดำเนินการต่อ"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"ป้อนรหัสผ่านที่ทำงานเพื่อดำเนินการต่อ"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"ใช้รูปแบบของอุปกรณ์เพื่อเพิ่มความปลอดภัย"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"ป้อน PIN ของอุปกรณ์เพื่อเพิ่มความปลอดภัย"</string>
@@ -1845,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"ไม่รู้จักที่มา"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"อนุญาตให้ติดตั้งแอปจากทุกแห่ง"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"แอปที่เปิดล่าสุด"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"ดูทั้ง <xliff:g id="COUNT">%1$d</xliff:g> แอป"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">ดูทั้ง %1$d แอป</item>
+      <item quantity="one">ดูแอปทั้งหมด</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"ติดต่อผู้ดูแลระบบไอทีของคุณ"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"ผู้ดูแลระบบอาจช่วยคุณรีเซ็ต PIN รูปแบบ หรือรหัสผ่านได้"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"แท็บเล็ตและข้อมูลส่วนตัวของคุณมีความเสี่ยงมากขึ้นที่จะถูกโจมตีจากแอปที่ไม่รู้จัก การติดตั้งแอปจากแหล่งที่มานี้แสดงว่าคุณยอมรับว่าจะรับผิดชอบต่อความเสียหายใดๆ ที่มีต่อแท็บเล็ตหรือการสูญเสียข้อมูลที่อาจเกิดจากการใช้งานแอปดังกล่าว"</string>
@@ -2020,7 +2026,8 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"ภาษา"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"แป้นพิมพ์"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"แป้นพิมพ์บนหน้าจอ"</string>
-    <string name="available_virtual_keyboard_category" msgid="2191399236305207950">"แป้นพิมพ์เสมือนที่พร้อมใช้งาน"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"แป้นพิมพ์บนหน้าจอที่พร้อมใช้งาน"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"จัดการแป้นพิมพ์บนหน้าจอ"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"ความช่วยเหลือเกี่ยวกับแป้นพิมพ์"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"แป้นพิมพ์จริง"</string>
@@ -2029,7 +2036,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"แป้นพิมพ์ลัด"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"แสดงแป้นพิมพ์ลัดที่มี"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"แป้นพิมพ์และเครื่องมือของโปรไฟล์งาน"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="3423496805741863134">"แป้นพิมพ์เสมือนสำหรับการทำงาน"</string>
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"แป้นพิมพ์บนหน้าจอสำหรับการทำงาน"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"ค่าเริ่มต้น"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"ความเร็วของตัวชี้"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"อุปกรณ์ควบคุมเกม"</string>
@@ -2093,7 +2100,7 @@
     <string name="accessibility_settings_title" msgid="6739115703615065716">"การตั้งค่าการเข้าถึง"</string>
     <string name="accessibility_settings_summary" msgid="2195085206729325737">"โปรแกรมอ่านหน้าจอ การแสดงผล ส่วนควบคุมการโต้ตอบ"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"การตั้งค่าการมองเห็น"</string>
-    <string name="vision_settings_description" msgid="7614894785054441991">"คุณสามารถปรับแต่งอุปกรณ์นี้ให้ตรงกับความต้องการของคุณ และเปลี่ยนฟีเจอร์การเข้าถึงเหล่านี้ได้ภายหลังในการตั้งค่า"</string>
+    <string name="vision_settings_description" msgid="7614894785054441991">"คุณปรับแต่งอุปกรณ์นี้ให้ตรงกับความต้องการได้ และเปลี่ยนฟีเจอร์การช่วยเหลือพิเศษเหล่านี้ได้ภายหลังในการตั้งค่า"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"เปลี่ยนขนาดแบบอักษร"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"โปรแกรมอ่านหน้าจอ"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"เสียงและข้อความบนหน้าจอ"</string>
@@ -2103,7 +2110,7 @@
     <string name="experimental_category_title" msgid="898904396646344152">"ทดสอบ"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"แฟล็กฟีเจอร์"</string>
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
-    <string name="talkback_summary" msgid="5820927220378864281">"โปรแกรมอ่านหน้าจอที่ใช้สำหรับคนตาบอดหรือผู้มีสายตาบกพร่อง"</string>
+    <string name="talkback_summary" msgid="5820927220378864281">"โปรแกรมอ่านหน้าจอที่ใช้สำหรับคนตาบอดหรือผู้มีสายตาบกพร่องเป็นหลัก"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"แตะรายการบนหน้าจอเพื่อฟังการอ่านออกเสียง"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"ค่ากำหนดคำบรรยายวิดีโอ"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"การขยาย"</string>
@@ -2119,34 +2126,28 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"ขยายด้วยการแตะ 3 ครั้ง"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"ขยายโดยใช้ทางลัด"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"ขยายโดยใช้ทางลัดและการแตะ 3 ครั้ง"</string>
-    <string name="accessibility_introduction_title" msgid="8834950581512452348">"เกี่ยวกับ<xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_introduction_title" msgid="8834950581512452348">"เกี่ยวกับ \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"ตัวเลือก"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"ซูมเข้าบนหน้าจอ"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"แตะ 3 ครั้งเพื่อซูม"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"แตะปุ่มเพื่อซูม"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"ซูมเข้าอย่างรวดเร็วบนหน้าจอเพื่อดูเนื้อหาได้ชัดเจนมากขึ้น&lt;br/&gt;&lt;br/&gt; &lt;b&gt;วิธีซูมเข้า&lt;/b&gt;&lt;br/&gt; 1. ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; 2. แตะหน้าจอ&lt;br/&gt; 3. ใช้ 2 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; 4. บีบ 2 นิ้วเพื่อปรับการซูม&lt;br/&gt; 5. ใช้ทางลัดเพื่อหยุดการขยาย&lt;br/&gt;&lt;br/&gt; &lt;b&gt;วิธีซูมเข้าชั่วคราว&lt;/b&gt;&lt;br/&gt; 1. ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; 2. แตะที่ใดก็ได้บนหน้าจอค้างไว้&lt;br/&gt; 3. ลากนิ้วเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; 4. ยกนิ้วขึ้นเพื่อหยุดการขยาย"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"คุณจะซูมหน้าจอเข้าได้เมื่อเปิดการขยาย\n\n"<b>"วิธีซูมคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอ\n"<ul><li>"ลากนิ้วอย่างน้อย 2 นิ้วเพื่อเลื่อน"</li>\n<li>"บีบนิ้วอย่างน้อย 2 นิ้วเพื่อปรับการซูม"</li></ul>\n\n<b>"วิธีซูมชั่วคราวคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอค้างไว้\n"<ul><li>"ลากเพื่อไปยังส่วนต่างๆ ในหน้าจอ"</li>\n<li>"ยกนิ้วขึ้นเพื่อซูมออก"</li></ul>\n\n"คุณซูมเข้าโดยใช้แป้นพิมพ์หรือแถบนำทางไม่ได้"</string>
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"หน้า <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> จาก <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"ใช้ปุ่มการช่วยเหลือพิเศษเพื่อเปิด"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"กดปุ่มปรับระดับเสียงเพื่อเปิด"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"แตะหน้าจอ 3 ครั้งเพื่อเปิด"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"ใช้ท่าทางสัมผัสเพื่อเปิด"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"ใช้ท่าทางสัมผัสการช่วยเหลือพิเศษแบบใหม่"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"หากต้องการใช้ฟีเจอร์นี้ ให้แตะปุ่มการช่วยเหลือพิเศษ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ที่ด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้แตะปุ่มการช่วยเหลือพิเศษค้างไว้"</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"หากต้องการใช้ฟีเจอร์นี้ ให้กดปุ่มปรับระดับเสียงทั้ง 2 ปุ่มค้างไว้"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"หากต้องการเริ่มหรือหยุดการขยาย ให้แตะ 3 ครั้งที่ใดก็ได้บนหน้าจอ"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"หากต้องการใช้ฟีเจอร์นี้ ให้ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 2 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"หากต้องการใช้ฟีเจอร์นี้ ให้ใช้ 3 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 3 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"หากต้องการใช้ฟีเจอร์การช่วยเหลือพิเศษ ให้ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 2 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"หากต้องการใช้ฟีเจอร์การช่วยเหลือพิเศษ ให้ใช้ 3 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 3 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"รับทราบ"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"ทางลัดของ<xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"ทางลัดของ \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"ปุ่มการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"ใช้ 2 นิ้วเลื่อนขึ้น"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"ใช้ 3 นิ้วเลื่อนขึ้น"</string>
@@ -2155,8 +2156,10 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 2 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"ใช้ 3 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 3 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"กดปุ่มปรับระดับเสียงค้างไว้"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"กดปุ่มปรับระดับเสียงค้างไว้"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"กดปุ่มปรับระดับเสียงทั้ง 2 ปุ่มค้างไว้"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"แตะหน้าจอ 3 ครั้ง"</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"แตะหน้าจอ 3 ครั้ง"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"แตะหน้าจอเร็วๆ 3 ครั้ง ทางลัดนี้อาจทำให้อุปกรณ์ทำงานช้าลง"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"ขั้นสูง"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"ปุ่ม \"การเข้าถึง\" ตั้งค่าเป็น <xliff:g id="SERVICE">%1$s</xliff:g> หากต้องการใช้การขยาย ให้แตะปุ่ม \"การเข้าถึง\" ค้างไว้ แล้วเลือกการขยาย"</string>
@@ -2205,9 +2208,9 @@
     <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"การสั่นและระดับการโต้ตอบการสัมผัส"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"การสั่นเมื่อมีการแจ้งเตือน"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"การสั่นเมื่อมีเสียงเรียกเข้า"</string>
-    <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"การตอบสนองด้วยสัมผัส"</string>
-    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"ใช้ <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"เปิด <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"การตอบสนองการสัมผัส"</string>
+    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"ใช้ \"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"เปิด \"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>\""</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"ใช้การแก้สี"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"แสดงคำบรรยาย"</string>
     <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"สำหรับแอปที่รองรับเท่านั้น"</string>
@@ -2432,7 +2435,7 @@
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
       <item quantity="other">แอป %2$d แอปใช้แบตเตอรี่ในเบื้องหลังเปลือง</item>
-      <item quantity="one">แอป %1$s แอปใช้แบตเตอรี่ในเบื้องหลังเปลือง</item>
+      <item quantity="one">%1$s ใช้แบตเตอรี่ในเบื้องหลังเปลือง</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
       <item quantity="other">แอปเหล่านี้ทำงานในเบื้องหลังไม่ได้</item>
@@ -2724,7 +2727,7 @@
     <string name="notification_log_title" msgid="2812594935014664891">"บันทึกการแจ้งเตือน"</string>
     <string name="notification_history_title" msgid="8821060912502593309">"ประวัติการแจ้งเตือน"</string>
     <string name="notification_history_today" msgid="5828496957208237230">"24 ชั่วโมงที่ผ่านมา"</string>
-    <string name="notification_history_snooze" msgid="3980568893290512257">"เลื่อนการปลุก"</string>
+    <string name="notification_history_snooze" msgid="3980568893290512257">"เลื่อนเวลา"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"ปิดล่าสุด"</string>
     <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
       <item quantity="other">การแจ้งเตือน <xliff:g id="NUMBER_1">%d</xliff:g> รายการ</item>
@@ -3300,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"เสียงแจ้งเตือนเริ่มต้น"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"เสียงปลุกเริ่มต้น"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"สั่นเมื่อมีสายเรียกเข้า"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"การสั่น"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"ไม่ใช้ระบบสั่น"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"สั่นทุกครั้ง"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"สั่นก่อนแล้วจึงค่อยๆ ส่งเสียงเรียกเข้า"</string>
@@ -3457,23 +3461,22 @@
     <string name="notification_history" msgid="8663811361243456201">"ประวัติการแจ้งเตือน"</string>
     <string name="notification_history_toggle" msgid="9093762294928569030">"ใช้ประวัติการแจ้งเตือน"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"ประวัติการแจ้งเตือนปิดอยู่"</string>
-    <string name="notification_history_off_summary" msgid="671359587084797617">"เปิดประวัติการแจ้งเตือนเพื่อดูการแจ้งเตือนล่าสุดและการแจ้งเตือนที่มีการเลื่อนเวลา"</string>
+    <string name="notification_history_off_summary" msgid="671359587084797617">"เปิดประวัติการแจ้งเตือนเพื่อดูการแจ้งเตือนล่าสุดและที่มีการเลื่อนเวลา"</string>
     <string name="history_toggled_on_title" msgid="4518001110492652830">"ไม่มีการแจ้งเตือนล่าสุด"</string>
-    <string name="history_toggled_on_summary" msgid="9034278971358282728">"การแจ้งเตือนล่าสุดและที่เลื่อนออกไปจะปรากฏขึ้นที่นี่"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"การแจ้งเตือนล่าสุดและที่มีการเลื่อนเวลาจะปรากฏขึ้นที่นี่"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"ดูการตั้งค่าการแจ้งเตือน"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"เปิดการแจ้งเตือน"</string>
-    <string name="snooze_options_title" msgid="2109795569568344617">"อนุญาตให้ใช้เลื่อนการแจ้งเตือน"</string>
+    <string name="snooze_options_title" msgid="2109795569568344617">"อนุญาตให้เลื่อนการแจ้งเตือน"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"ซ่อนไอคอนจากการแจ้งเตือนเบาๆ"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"ไอคอนจากการแจ้งเตือนเบาๆ จะไม่แสดงในแถบสถานะ"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"จุดแสดงการแจ้งเตือนบนไอคอนแอป"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"แสดงแถบการสนทนาล่าสุด"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"บับเบิล"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"การแจ้งเตือนบางรายการแสดงเป็นบับเบิลในหน้าจอได้"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"การแจ้งเตือนบางรายการและเนื้อหาอื่นอาจแสดงเป็นลูกโป่งในหน้าจอได้ แตะลูกโป่งเพื่อเปิด ลากลูกโป่งลงไปที่ด้านล่างของหน้าจอเพื่อปิด"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"ลูกโป่ง"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"การตั้งค่าบับเบิลทั้งหมด"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"ทำบับเบิลกับการสนทนานี้"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"แสดงไอคอนแบบลอยตัวที่ด้านบนสุดของแอป"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"แสดงไอคอนแบบลอยที่ด้านบนสุดของแอป"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"อนุญาตให้ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" แสดงการแจ้งเตือนบางรายการเป็นบับเบิล"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"เปิดบับเบิลของอุปกรณ์ไหม"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"การเปิดบับเบิลของแอปนี้จะเปิดบับเบิลของอุปกรณ์ด้วย\n\nการดำเนินการนี้จะส่งผลต่อแอปหรือการสนทนาอื่นๆ ที่ได้รับอนุญาตให้แสดงเป็นบับเบิล"</string>
@@ -3487,6 +3490,8 @@
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"ไม่มีสิ่งใดที่แสดงเป็นบับเบิลได้"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"การสนทนา"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"ทุกการสนทนาจะแสดงเป็นบับเบิลได้ยกเว้น"</string>
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"ปิดบับเบิลสำหรับการสนทนานี้"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"เปิดบับเบิลสำหรับการสนทนานี้"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"การเลื่อน"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"เลื่อนไปทางขวาเพื่อปิด เลื่อนไปทางซ้ายเพื่อแสดงเมนู"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"เลื่อนไปทางซ้ายเพื่อปิด เลื่อนไปทางขวาเพื่อแสดงเมนู"</string>
@@ -3506,10 +3511,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"ไปที่หน้าจอที่ใช้ล่าสุดหลังปลดล็อกด้วยใบหน้า"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"หน้าจอล็อก, ข้าม, เลี่ยง"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"เมื่อโปรไฟล์งานล็อกอยู่"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"การแจ้งเตือนบนหน้าจอล็อก"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"แสดงการแจ้งเตือนที่เป็นคำเตือนและการแจ้งเตือนแบบไม่มีเสียง"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"แสดงการแจ้งเตือนที่เป็นคำเตือนเท่านั้น"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"ไม่ต้องแสดงการแจ้งเตือน"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"การแจ้งเตือนบนหน้าจอล็อก"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"แสดงการสนทนา ค่าเริ่มต้น และการแจ้งเตือนแบบเงียบ"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"ซ่อนการสนทนาและการแจ้งเตือนแบบเงียบ"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"ไม่ต้องแสดงการแจ้งเตือนใดๆ"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"การแจ้งเตือนที่ละเอียดอ่อน"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"แสดงเนื้อหาที่ละเอียดอ่อนเมื่อล็อก"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"การแจ้งเตือนที่ละเอียดอ่อนของโปรไฟล์งาน"</string>
@@ -3532,15 +3537,22 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"ไม่ต้องแสดงการแจ้งเตือน"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"การสนทนา"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"การสนทนา"</string>
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"ส่วนการสนทนา"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"อนุญาตให้แอปใช้ส่วนการสนทนา"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"ไม่ใช่การสนทนา"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"นำออกจากส่วนการสนทนา"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"นี่คือการสนทนา"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"เพิ่มลงในส่วนการสนทนา"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"จัดการการสนทนา"</string>
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"ไม่มีการสนทนาสำคัญ"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> การสนทนาสำคัญ</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> การสนทนาสำคัญ</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"การสนทนาสำคัญ"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"แสดงที่ด้านบนของส่วนการสนทนาและปรากฏเป็นบับเบิลแบบลอย"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"แสดงที่ด้านบนของส่วนการสนทนา"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"การสนทนาที่มีการแก้ไข"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"การสนทนาอื่น"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"การสนทนาที่คุณได้ทำการแก้ไข"</string>
     <string name="important_bubble" msgid="7911698275408390846">"แสดงการสนทนาที่สำคัญเป็นบับเบิล"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"การสนทนาที่สำคัญจะแสดงที่ด้านบนของหน้าต่างแจ้งเตือนแบบดึงลง และคุณยังตั้งค่าให้แสดงเป็นบับเบิลและข้ามโหมดห้ามรบกวนได้ด้วย"</string>
@@ -3557,15 +3569,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"แสดงบนหน้าจอ"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"บล็อก"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"เงียบ"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"การแจ้งเตือน"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"ค่าเริ่มต้น"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"อนุญาตให้มีการขัดจังหวะ"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"อนุญาตให้แอปส่งเสียง สั่น และ/หรือแสดงการแจ้งเตือนบนหน้าจอ"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"สำคัญ"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"แสดงที่ด้านบนของส่วนการสนทนาและปรากฏเป็นบับเบิล"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> ไม่รองรับการตั้งค่าเฉพาะสำหรับการสนทนา"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"แสดงที่ด้านบนของส่วนการสนทนา ปรากฏเป็นบับเบิลแบบลอย แสดงรูปโปรไฟล์บนหน้าจอล็อก"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> ไม่รองรับฟีเจอร์การสนทนาส่วนใหญ่ คุณจะตั้งค่าการสนทนาให้มีลำดับความสำคัญสูงไม่ได้ และการสนทนาจะไม่ปรากฏเป็นบับเบิลแบบลอย"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"ในหน้าต่างแบบเลื่อนลง ให้ยุบการแจ้งเตือนเหลือ 1 บรรทัด"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"ช่วยรักษาสมาธิของคุณด้วยการไม่ส่งเสียงหรือสั่น"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"ดึงความสนใจของคุณด้วยเสียงและการสั่น"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"ไม่มีเสียงหรือการสั่น"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"ไม่มีเสียงหรือการสั่น และปรากฏต่ำลงมาในส่วนการสนทนา"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"อาจส่งเสียงหรือสั่นโดยขึ้นอยู่กับการตั้งค่าโทรศัพท์"</string>
     <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"แสดงใต้การแจ้งเตือนเรื่องสำคัญ ปิดเสียงตลอดเวลา"</string>
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"แสดงใต้การแจ้งเตือนเรื่องสำคัญ ปิดเสียงตลอดเวลา"</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"แสดงใต้การแจ้งเตือนเรื่องสำคัญ ปิดเสียงตลอดเวลา"</string>
@@ -3622,9 +3635,10 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"เชื่อมต่อแล้ว"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"เชื่อมต่อแอปเหล่านี้"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"แอปที่เชื่อมต่อจะแชร์สิทธิ์และเข้าถึงข้อมูลของกันและกันได้"</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"ให้เชื่อมต่อเฉพาะแอปที่คุณไว้ใจให้เข้าถึงข้อมูลส่วนตัวเท่านั้น แอปงานอาจเปิดเผยข้อมูลของคุณต่อผู้ดูแลระบบไอที"</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"โปรดเชื่อมต่อเฉพาะแอปที่เชื่อถือได้ว่าจะไม่แชร์ข้อมูลส่วนตัวกับผู้ดูแลระบบไอที"</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"ยกเลิกการเชื่อมต่อกับแอปได้ทุกเมื่อในการตั้งค่าความเป็นส่วนตัวในอุปกรณ์ของคุณ"</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"ไว้ใจแอปงานชื่อ <xliff:g id="NAME">%1$s</xliff:g> ให้เข้าถึงข้อมูลส่วนตัวใช่ไหม"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"<xliff:g id="NAME">%1$s</xliff:g> อาจเปิดเผยข้อมูลส่วนตัวของคุณต่อผู้ดูแลระบบไอที"</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"โปรดเชื่อมต่อเฉพาะแอปที่เชื่อถือได้ว่าจะไม่แชร์ข้อมูลส่วนตัวกับผู้ดูแลระบบไอที"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"ข้อมูลแอป"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"แอปนี้จะเข้าถึงข้อมูลในแอป <xliff:g id="NAME">%1$s</xliff:g> ส่วนตัวของคุณได้"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"สิทธิ์"</string>
@@ -3634,8 +3648,8 @@
       <item quantity="other">มี <xliff:g id="COUNT_1">%d</xliff:g> แอปที่เชื่อมต่ออยู่</item>
       <item quantity="one">มี <xliff:g id="COUNT_0">%d</xliff:g> แอปที่เชื่อมต่ออยู่</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"ติดตั้ง <xliff:g id="NAME">%1$s</xliff:g> งานเพื่อเชื่อมต่อแอปเหล่านี้"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"ติดตั้ง <xliff:g id="NAME">%1$s</xliff:g> ส่วนตัวเพื่อเชื่อมต่อแอปเหล่านี้"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"หากต้องการเชื่อมต่อแอปเหล่านี้ ให้ติดตั้ง <xliff:g id="NAME">%1$s</xliff:g> ในโปรไฟล์งานของคุณ"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"หากต้องการเชื่อมต่อแอปเหล่านี้ ให้ติดตั้ง <xliff:g id="NAME">%1$s</xliff:g> ในโปรไฟล์ส่วนตัวของคุณ"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"แตะเพื่อติดตั้งแอป"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"การเข้าถึง \"ห้ามรบกวน\""</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"อนุญาตโหมดห้ามรบกวน"</string>
@@ -3680,13 +3694,13 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"ไฟกะพริบ"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"การสั่น"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"เสียง"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"สำคัญ"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"สำคัญ"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"เพิ่มลงในหน้าจอหลัก"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"ลบ"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"เปลี่ยนชื่อ"</string>
-    <string name="zen_mode_rule_name" msgid="7303080427006917702">"ชื่อกำหนดเวลา"</string>
+    <string name="zen_mode_rule_name" msgid="7303080427006917702">"ชื่อกำหนดการ"</string>
     <string name="zen_mode_rule_name_hint" msgid="7029432803855827697">"ระบุชื่อกำหนดการ"</string>
-    <string name="zen_mode_rule_name_warning" msgid="1244435780807634954">"มีการใช้ชื่อกำหนดเวลานี้แล้ว"</string>
+    <string name="zen_mode_rule_name_warning" msgid="1244435780807634954">"มีการใช้ชื่อกำหนดการนี้แล้ว"</string>
     <string name="zen_mode_add_rule" msgid="4217731747959400770">"เพิ่มอีก"</string>
     <string name="zen_mode_add_event_rule" msgid="9179404395950854471">"เพิ่มกำหนดการตามกิจกรรม"</string>
     <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"เพิ่มกำหนดการตามเวลา"</string>
@@ -3718,10 +3732,10 @@
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"ไม่มี"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"ทุกวัน"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"เวลาปลุกจะแทนที่เวลาสิ้นสุดได้"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"กำหนดเวลาจะปิดเมื่อนาฬิกาปลุกดังขึ้น"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"กำหนดการจะปิดเมื่อนาฬิกาปลุกดังขึ้น"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"ลักษณะการทำงานของโหมดห้ามรบกวน"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"ใช้การตั้งค่าเริ่มต้น"</string>
-    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"สร้างการตั้งค่าที่กำหนดเองสำหรับกำหนดเวลานี้"</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"สร้างการตั้งค่าที่กำหนดเองสำหรับกำหนดการนี้"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"สำหรับ \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\""</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3804,7 +3818,7 @@
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> รบกวนได้</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"อีก <xliff:g id="NUMBER">%d</xliff:g> รายการ"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"แอปที่ยกเว้น"</string>
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"แอป"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"การแจ้งเตือนทั้งหมด"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"การแจ้งเตือนบางรายการ"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"การแจ้งเตือนที่รบกวนคุณได้"</string>
@@ -3940,6 +3954,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"ไม่มีการมอบสิทธิ์"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"ไม่มีการขอสิทธิ์"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"ควมคุมสิทธิ์ของแอปในการเข้าถึงข้อมูล"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"แอปทั้งหมด"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"แอปที่ติดตั้ง"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant Apps"</string>
@@ -4025,7 +4040,7 @@
     <string name="high_power_system" msgid="3966701453644915787">"การเพิ่มประสิทธิภาพแบตเตอรี่ไม่พร้อมใช้งาน"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"ไม่ใช้การเพิ่มประสิทธิภาพแบตเตอรี่ อาจทำให้แบตเตอรี่หมดเร็วยิ่งขึ้น"</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"ให้แอปทำงานอยู่เบื้องหลังทุกครั้งไหม"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"การอนุญาตให้ <xliff:g id="APP_NAME">%1$s</xliff:g> ทำงานอยู่เบื้องหลังทุกครั้งอาจลดอายุการใช้งานแบตเตอรี่ \n\nคุณเปลี่ยนการตั้งค่านี้ได้ในภายหลังจากการตั้งค่า &gt; แอปและการแจ้งเตือน"</string>
+    <string name="high_power_prompt_body" msgid="6460557929559616041">"การอนุญาตให้ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" ทำงานอยู่เบื้องหลังทุกครั้งอาจลดอายุการใช้งานแบตเตอรี่ \n\nคุณเปลี่ยนการตั้งค่านี้ได้ในภายหลังจากการตั้งค่า &gt; แอปและการแจ้งเตือน"</string>
     <string name="battery_summary" msgid="2491764359695671207">"ใช้ <xliff:g id="PERCENTAGE">%1$s</xliff:g> ตั้งแต่ชาร์จจนเต็มครั้งล่าสุด"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"การจัดการพลังงาน"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"ไม่มีการใช้แบตเตอรี่ตั้งแต่การชาร์จเต็มครั้งล่าสุด"</string>
@@ -4072,7 +4087,7 @@
     <string name="background_check_pref" msgid="5304564658578987535">"การตรวจสอบพื้นหลัง"</string>
     <string name="background_check_title" msgid="225170874283229686">"การเข้าถึงพื้นหลังอย่างเต็มรูปแบบ"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"ใช้ข้อความจากหน้าจอ"</string>
-    <string name="assist_access_context_summary" msgid="6951814413185646275">"อนุญาตให้แอปผู้ช่วยสามารถเข้าถึงเนื้อหาบนหน้าจอเป็นข้อความ"</string>
+    <string name="assist_access_context_summary" msgid="6951814413185646275">"อนุญาตให้แอปผู้ช่วยสามารถเข้าถึงเนื้อหาบนหน้าจอที่เป็นข้อความ"</string>
     <string name="assist_access_screenshot_title" msgid="4395902231753643633">"ใช้ภาพหน้าจอ"</string>
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"อนุญาตให้แอปผู้ช่วยสามารถเข้าถึงรูปภาพของหน้าจอ"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"กะพริบหน้าจอ"</string>
@@ -4827,8 +4842,6 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"เปิดใช้การเบลอหน้าต่างที่ระดับตัวจัดวางองค์ประกอบ ต้องรีบูตอุปกรณ์"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"ความเป็นส่วนตัว"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"สิทธิ์ กิจกรรมในบัญชี ข้อมูลส่วนตัว"</string>
-    <string name="quick_settings_media_player" msgid="5365779284386769352">"การกลับมาเล่นสื่ออีกครั้ง"</string>
-    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"แสดงและเก็บโปรแกรมเล่นสื่อไว้ในการตั้งค่าด่วน ต้องรีบูต"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"นำออก"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"เก็บไว้"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"นำคำแนะนำนี้ออกไหม"</string>
@@ -4851,14 +4864,6 @@
       <item quantity="other">แอป <xliff:g id="SERVICE_COUNT">%1$d</xliff:g> แอปมีสิทธิ์เข้าถึงอุปกรณ์ได้โดยสมบูรณ์</item>
       <item quantity="one">แอป 1 แอปมีสิทธิ์เข้าถึงอุปกรณ์ได้โดยสมบูรณ์</item>
     </plurals>
-    <string name="manage_app_notification" msgid="8272999309499332742">"จัดการการแจ้งเตือนของ<xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="no_suggested_app" msgid="2482015948111074654">"ไม่มีแอปพลิเคชันแนะนำ"</string>
-    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="6610904178351403728">
-      <item quantity="other">ช่องทางการแจ้งเตือน <xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ช่องทาง</item>
-      <item quantity="one">ช่องทางการแจ้งเตือน <xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> ช่องทาง</item>
-    </plurals>
-    <string name="notification_many_channel_count_summary" msgid="6324166979527102233">"ช่องทางการแจ้งเตือน <xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> ช่องทาง แตะเพื่อจัดการทั้งหมด"</string>
-    <string name="recently_installed_app" msgid="2899861390925377564">"คุณเพิ่งติดตั้งแอปนี้"</string>
     <string name="media_output_panel_title" msgid="5920946795078065159">"เปลี่ยนเอาต์พุต"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"กำลังเล่นใน <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="media_output_disconnected_status" msgid="5567111639832431865">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> (ยกเลิกการเชื่อมต่อแล้ว)"</string>
@@ -4911,11 +4916,12 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"เนื้อหาที่ละเอียดอ่อน"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"แสดงบัตรและตัวควบคุมเมื่อล็อกอยู่"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"แสดงตัวควบคุมเมื่อล็อก"</string>
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"แสดงการ์ดเมื่อล็อก"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"ซ่อนบัตรและตัวควบคุมเมื่อล็อกอยู่"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"หากต้องการใช้ ให้ตั้งค่าการล็อกหน้าจอก่อน"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"แสดงระบบควบคุมอุปกรณ์"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"แสดงบัตรและบัตรผ่าน"</string>
-    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"กดปุ่มเปิด/ปิดค้างไว้เพื่อเข้าถึงการควบคุมอุปกรณ์ที่เชื่อมต่อ"</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"กดปุ่มเปิด/ปิดค้างไว้เพื่อเข้าถึงตัวควบคุมของอุปกรณ์ที่เชื่อมต่อ"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"หากต้องการเข้าถึงข้อมูลอย่างเช่น วิธีการชำระเงินและบอร์ดดิ้งพาส ให้กดปุ่มเปิด/ปิดค้างไว้"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
@@ -4928,6 +4934,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"เมื่อใช้ 2 ซิม แท็บเล็ตนี้จะจำกัดการใช้งานอยู่ที่ 4G "<annotation id="url">"ดูข้อมูลเพิ่มเติม"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"เมื่อใช้ 2 ซิม อุปกรณ์นี้จะจำกัดการใช้งานอยู่ที่ 4G "<annotation id="url">"ดูข้อมูลเพิ่มเติม"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"ระงับการดำเนินการสำหรับแอปที่แคชไว้"</string>
+    <string name="overlay_settings_title" msgid="1032863083496396365">"อนุญาตการซ้อนทับบนหน้าจอในการตั้งค่า"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"อนุญาตแอปที่แสดงเหนือแอปอื่นๆ ได้เพื่อวางซ้อนหน้าจอการตั้งค่า"</string>
     <string name="qtifeedback_settings_title">ความคิดเห็นเกี่ยวกับฮาร์ดแวร์</string>
     <string name="qtifeedback_settings_subtitle">Qualcomm Technologies, Inc การรายงาน</string>
 </resources>

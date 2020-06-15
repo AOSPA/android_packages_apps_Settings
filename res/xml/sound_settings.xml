@@ -45,6 +45,7 @@
         android:title="@string/media_output_title"
         android:dialogTitle="@string/media_output_title"
         android:order="-175"
+        settings:searchable="false"
         settings:controller="com.android.settings.sound.MediaOutputPreferenceController"/>
 
     <!-- Call volume -->
@@ -95,7 +96,8 @@
         android:key="vibrate_for_calls"
         android:title="@string/vibrate_when_ringing_title"
         android:order="-130"
-        settings:controller="com.android.settings.sound.VibrateForCallsPreferenceController"/>
+        settings:controller="com.android.settings.sound.VibrateForCallsPreferenceController"
+        settings:keywords="@string/keywords_vibrate_for_calls"/>
 
     <!-- Interruptions -->
     <com.android.settingslib.RestrictedPreference
@@ -154,6 +156,11 @@
         <SwitchPreference
           android:key="dial_pad_tones"
           android:title="@string/dial_pad_tones_title"/>
+
+        <!-- Call connected tones -->
+        <SwitchPreference
+          android:key="call_connected_tones"
+          android:title="@string/call_connected_tones_title" />
 
         <!-- Screen locking sounds -->
         <SwitchPreference

@@ -46,7 +46,6 @@ public class AppConversationListPreferenceController extends NotificationPrefere
 
     protected List<ConversationChannelWrapper> mConversations = new ArrayList<>();
     protected PreferenceCategory mPreference;
-    private boolean mHasSentMsg;
 
     public AppConversationListPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
@@ -71,7 +70,8 @@ public class AppConversationListPreferenceController extends NotificationPrefere
                 return false;
             }
         }
-        return true;
+        return mBackend.hasSentValidMsg(mAppRow.pkg, mAppRow.uid) || mBackend.isInInvalidMsgState(
+                mAppRow.pkg, mAppRow.uid);
     }
 
     @Override
@@ -88,7 +88,6 @@ public class AppConversationListPreferenceController extends NotificationPrefere
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... unused) {
-                mHasSentMsg = mBackend.hasSentMessage(mAppRow.pkg, mAppRow.uid);
                 ParceledListSlice<ConversationChannelWrapper> list =
                         mBackend.getConversations(mAppRow.pkg, mAppRow.uid);
                 if (list != null) {
@@ -117,24 +116,14 @@ public class AppConversationListPreferenceController extends NotificationPrefere
         return R.string.conversations_category_title;
     }
 
-    private void populateList() {
+    protected void populateList() {
         if (mPreference == null) {
             return;
         }
-        // TODO: if preference has children, compare with newly loaded list
-        mPreference.removeAll();
-        if (mConversations.isEmpty()) {
-            if (mHasSentMsg) {
-                mPreference.setVisible(true);
-                Preference notSupportedPref = new Preference(mContext);
-                notSupportedPref.setSummary(mContext.getString(
-                        R.string.convo_not_supported_summary, mAppRow.label));
-                mPreference.addPreference(notSupportedPref);
-            } else {
-                mPreference.setVisible(false);
-            }
-        } else {
-            mPreference.setVisible(true);
+
+        if (!mConversations.isEmpty()) {
+            // TODO: if preference has children, compare with newly loaded list
+            mPreference.removeAll();
             mPreference.setTitle(getTitleResId());
             populateConversations();
         }
@@ -160,7 +149,7 @@ public class AppConversationListPreferenceController extends NotificationPrefere
         ShortcutInfo si = conversation.getShortcutInfo();
 
         pref.setTitle(si != null
-                ? si.getShortLabel()
+                ? si.getLabel()
                 : conversation.getNotificationChannel().getName());
         pref.setSummary(conversation.getNotificationChannel().getGroup() != null
                 ? mContext.getString(R.string.notification_conversation_summary,

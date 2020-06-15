@@ -103,9 +103,9 @@ public class SharedDataPreferenceControllerTest {
     }
 
     private List<BlobInfo> generateBlobList() {
-        LeaseInfo one = new LeaseInfo("com.google.android.photos",
+        LeaseInfo one = new LeaseInfo("com.google.android.apps.photos",
                 System.currentTimeMillis(), -1, "test description");
-        LeaseInfo two = new LeaseInfo("com.google.android.drive",
+        LeaseInfo two = new LeaseInfo("om.google.android.googlequicksearchbox",
                 System.currentTimeMillis(), -1, "test description 2");
 
         List<LeaseInfo> accessors = new ArrayList<>();
@@ -113,7 +113,8 @@ public class SharedDataPreferenceControllerTest {
         accessors.add(two);
 
         final List<BlobInfo> tmp = new ArrayList<>();
-        tmp.add(new BlobInfo(10, System.currentTimeMillis(), "testing blob 1", accessors));
+        tmp.add(new BlobInfo(10, System.currentTimeMillis(), "testing blob 1", 54 * 1024 * 1024,
+                                accessors));
         return tmp;
     }
 }

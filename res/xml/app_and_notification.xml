@@ -47,6 +47,14 @@
         android:order="-997"/>
 
     <Preference
+        android:key="conversations"
+        android:title="@string/conversations_category_title"
+        android:order="-550"
+        settings:controller="com.android.settings.notification.ConversationListSummaryPreferenceController"
+        android:fragment="com.android.settings.notification.app.ConversationListSettings"
+    />
+
+    <Preference
         android:key="configure_notification_settings"
         android:title="@string/configure_notification_settings"
         android:order="-440"
@@ -69,9 +77,9 @@
     <Preference
         android:key="manage_perms"
         android:title="@string/app_permissions"
+        android:summary="@string/runtime_permissions_summary_control_app_access"
         android:order="12"
-        settings:keywords="@string/keywords_app_permissions"
-        settings:controller="com.android.settings.applications.AppPermissionsPreferenceController">
+        settings:keywords="@string/keywords_app_permissions">
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
     </Preference>
 

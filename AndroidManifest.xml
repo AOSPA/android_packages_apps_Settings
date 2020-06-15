@@ -2010,8 +2010,7 @@
         </activity>
 
         <activity android:name=".development.AppPicker"
-                  android:label="@string/select_application"
-                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
+                  android:label="@string/select_application" />
 
         <activity android:name=".development.DSULoader"
                   android:label="Select DSU Package"
@@ -2575,6 +2574,20 @@
                 android:value="com.android.settings.notification.ConfigureNotificationSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$ConversationListSettingsActivity"
+            android:label="@string/zen_mode_conversations_title"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.CONVERSATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.notification.app.ConversationListSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity>
 
         <activity
@@ -3218,7 +3231,7 @@
 
         <activity android:name="Settings$BluetoothDeviceDetailActivity"
                   android:label="@string/device_details_title"
-                  android:permission="android.permission.BLUETOOTH_PRIVILEGED">
+                  android:permission="android.permission.BLUETOOTH_ADMIN">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.BLUETOOTH_DEVICE_DETAIL_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3429,6 +3442,21 @@
                        android:value="true" />
         </activity>
 
+       <activity android:name=".network.telephony.UserPLMNListActivity"
+           android:label="@string/uplmn_settings_title"
+           android:configChanges="orientation|screenSize|keyboardHidden">
+           <intent-filter>
+               <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".network.telephony.UserPLMNEditorActivity"
+            android:label="@string/uplmn_settings_title"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>

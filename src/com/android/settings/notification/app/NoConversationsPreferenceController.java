@@ -19,13 +19,14 @@ package com.android.settings.notification.app;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.service.notification.ConversationChannelWrapper;
+import android.view.View;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 
+import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settingslib.widget.LayoutPreference;
 
-import java.util.Collections;
 import java.util.List;
 
 public class NoConversationsPreferenceController extends ConversationListPreferenceController {
@@ -50,12 +51,18 @@ public class NoConversationsPreferenceController extends ConversationListPrefere
     }
 
     @Override
+    Preference getSummaryPreference() {
+        return null;
+    }
+
+    @Override
     boolean matchesFilter(ConversationChannelWrapper conversation) {
         return false;
     }
 
     @Override
     public void updateState(Preference preference) {
+        LayoutPreference pref = (LayoutPreference) preference;
         // Load conversations
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -69,6 +76,8 @@ public class NoConversationsPreferenceController extends ConversationListPrefere
                 if (mContext == null) {
                     return;
                 }
+                pref.findViewById(R.id.onboarding).setVisibility(mConversations.size() == 0
+                        ? View.VISIBLE : View.GONE);
                 preference.setVisible(mConversations.size() == 0);
             }
         }.execute();

@@ -28,8 +28,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+import android.icu.text.CaseMap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.Html;
@@ -60,6 +62,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
@@ -96,6 +99,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     private int mUserShortcutTypes = UserShortcutType.EMPTY;
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
+    private SettingsContentObserver mSettingsContentObserver;
 
     // For html description of accessibility service, must follow the rule, such as
     // <img src="R.drawable.fileName"/>, a11y settings will get the resources successfully.
@@ -124,6 +128,17 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                     getPrefContext());
             setPreferenceScreen(preferenceScreen);
         }
+
+        final List<String> shortcutFeatureKeys = new ArrayList<>();
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
+        mSettingsContentObserver = new SettingsContentObserver(new Handler(), shortcutFeatureKeys) {
+            @Override
+            public void onChange(boolean selfChange, Uri uri) {
+                updateShortcutPreferenceData();
+                updateShortcutPreference();
+            }
+        };
     }
 
     @Override
@@ -229,6 +244,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         final AccessibilityManager am = getPrefContext().getSystemService(
                 AccessibilityManager.class);
         am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+        mSettingsContentObserver.register(getContentResolver());
         updateShortcutPreferenceData();
         updateShortcutPreference();
     }
@@ -238,6 +254,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         final AccessibilityManager am = getPrefContext().getSystemService(
                 AccessibilityManager.class);
         am.removeTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+        mSettingsContentObserver.unregister(getContentResolver());
         super.onPause();
     }
 
@@ -566,7 +583,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
         if ((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE) {
             final CharSequence hardwareTitle = context.getText(
-                    R.string.accessibility_shortcut_edit_dialog_title_hardware);
+                    R.string.accessibility_shortcut_hardware_keyword);
             list.add(hardwareTitle);
         }
 
@@ -575,7 +592,9 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             list.add(softwareTitle);
         }
         final String joinStrings = TextUtils.join(/* delimiter= */", ", list);
-        return AccessibilityUtil.capitalize(joinStrings);
+
+        return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
+                null, joinStrings);
     }
 
     protected int getUserShortcutTypes(Context context, @UserShortcutType int defaultValue) {
@@ -618,7 +637,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                 getShortcutTypeSummary(getPrefContext()));
     }
 
-    private void updateShortcutPreferenceData() {
+    protected void updateShortcutPreferenceData() {
         if (mComponentName == null) {
             return;
         }
@@ -651,7 +670,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mShortcutPreference.setTitle(title);
     }
 
-    private void updateShortcutPreference() {
+    protected void updateShortcutPreference() {
         if (mComponentName == null) {
             return;
         }

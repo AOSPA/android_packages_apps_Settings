@@ -32,6 +32,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
@@ -55,6 +56,13 @@ public class AppBubbleListPreferenceController extends AppConversationListPrefer
     }
 
     @Override
+    public void updateState(Preference preference) {
+        // loading convos is async; hide header until we know we have conversations to show
+        preference.setVisible(false);
+        super.updateState(preference);
+    }
+
+    @Override
     public void onResume(NotificationBackend.AppRow appRow,
             @Nullable NotificationChannel channel, @Nullable NotificationChannelGroup group,
             Drawable conversationDrawable,
@@ -72,8 +80,19 @@ public class AppBubbleListPreferenceController extends AppConversationListPrefer
 
     @Override
     public boolean isAvailable() {
-        if (!super.isAvailable()) {
+        // copy rather than inherit super's isAvailable because apps can link to this page
+        // as part of onboarding, before they send a valid conversation notification
+        if (mAppRow == null) {
             return false;
+        }
+        if (mAppRow.banned) {
+            return false;
+        }
+        if (mChannel != null) {
+            if (mBackend.onlyHasDefaultChannel(mAppRow.pkg, mAppRow.uid)
+                    || NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId())) {
+                return false;
+            }
         }
         if (mAppRow.bubblePreference == BUBBLE_PREFERENCE_NONE) {
             return false;
@@ -111,6 +130,7 @@ public class AppBubbleListPreferenceController extends AppConversationListPrefer
     public Preference createConversationPref(final ConversationChannelWrapper conversation) {
         final ConversationPreference pref = new ConversationPreference(mContext);
         populateConversationPreference(conversation, pref);
+        pref.setOnClickBubblesConversation(mAppRow.bubblePreference == BUBBLE_PREFERENCE_ALL);
         pref.setOnClickListener((v) -> {
             conversation.getNotificationChannel().setAllowBubbles(DEFAULT_ALLOW_BUBBLE);
             mBackend.updateChannel(mAppRow.pkg, mAppRow.uid, conversation.getNotificationChannel());
@@ -122,11 +142,21 @@ public class AppBubbleListPreferenceController extends AppConversationListPrefer
         return pref;
     }
 
+    @Override
+    protected void populateList() {
+        super.populateList();
+        if (mPreference == null) {
+            return;
+        }
+        mPreference.setVisible(mPreference.getPreferenceCount() > 0);
+    }
+
     /** Simple preference with a 'x' button at the end. */
     @VisibleForTesting
     public static class ConversationPreference extends Preference implements View.OnClickListener {
 
         View.OnClickListener mOnClickListener;
+        boolean mOnClickBubbles;
 
         ConversationPreference(Context context) {
             super(context);
@@ -137,7 +167,14 @@ public class AppBubbleListPreferenceController extends AppConversationListPrefer
         public void onBindViewHolder(final PreferenceViewHolder holder) {
             super.onBindViewHolder(holder);
             ImageView view =  holder.itemView.findViewById(R.id.button);
+            view.setContentDescription(mOnClickBubbles
+                    ? getContext().getString(R.string.bubble_app_setting_bubble_conversation)
+                    : getContext().getString(R.string.bubble_app_setting_unbubble_conversation));
             view.setOnClickListener(mOnClickListener);
+        }
+
+        public void setOnClickBubblesConversation(boolean enablesBubbles) {
+            mOnClickBubbles = enablesBubbles;
         }
 
         public void setOnClickListener(View.OnClickListener listener) {

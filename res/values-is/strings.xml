@@ -600,7 +600,7 @@
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Of margar rangar tilraunir. Gögnum tækisins verður eytt."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Of margar rangar tilraunir. Þessum notanda verður eytt."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Of margar rangar tilraunir. Þessu vinnusniði og gögnum þess verður eytt."</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Hunsa"</string>
+    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Loka"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="one">Verður að vera að minnsta kosti <xliff:g id="COUNT_1">%d</xliff:g> stafur</item>
       <item quantity="other">Verður að vera að minnsta kosti <xliff:g id="COUNT_1">%d</xliff:g> stafir</item>
@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Hámarksfjöldi tengdra Bluetooth-hljómtækja"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Velja hámarksfjölda tengdra Bluetooth-hljómtækja"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Útsending"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spegla"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Leyfa þráðlausan skjá"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Engin nálæg tæki fundust."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Tengist"</string>
@@ -967,8 +968,7 @@
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Aldrei sýna aftur"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Tengjast"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Kveikt á Wi-Fi"</string>
-    <!-- no translation found for wifi_connected_to_message (7470435873743756802) -->
-    <skip />
+    <string name="wifi_connected_to_message" msgid="8976048616505112896">"Tengt við <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Tengist…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Ekk tókst að tengjast neti"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Ekkert samband við netkerfi"</string>
@@ -1188,6 +1188,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"Birtustigi skjásins verður breytt sjálfkrafa í samræmi við umhverfið og hvað þú ert að gera. Þú getur fært sleðann til að hjálpa aðlögun birtustigs að læra inn á hvernig þú vilt hafa birtuna."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Sýna hvítjöfnun"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Hnökralaus skjár"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Breytir endurnýjunarhraða sjálfkrafa úr 60 í 90 Hz fyrir sumt efni. Eykur rafhlöðunotkun."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Skjáskynjun"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Kveikt / Það slokknar ekki á skjánum ef þú horfir á hann"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Slökkt"</string>
@@ -1434,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Kanna"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Losa geymslupláss"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Hafa umsjón með geymslurými"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"hreinsa, geymsla"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB-tenging tölvu"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Tengja sem"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Margmiðlunartæki (MTP)"</string>
@@ -1779,8 +1782,8 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Gleymt aðgangsorð?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Gleymdirðu mynstrinu?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Gleymdirðu PIN-númerinu?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Teiknaðu mynstrið þitt fyrir tækið til að halda áfram"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Sláðu inn PIN-númerið þitt fyrir tækið til að halda áfram"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Teiknaðu mynstur tækisins til að halda áfram"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Sláðu inn PIN-númer tækisins til að halda áfram"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Sláðu inn aðgangsorðið þitt fyrir tækið til að halda áfram"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"Notaðu vinnumynstrið þitt til að halda áfram"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Sláðu inn PIN-númerið þitt fyrir vinnuna til að halda áfram"</string>
@@ -1845,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"Óþekktur uppruni"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Leyfa forrit frá öllum"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nýlega opnuð forrit"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Sjá öll <xliff:g id="COUNT">%1$d</xliff:g> forritin"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="one">Sjá öll %1$d forrit</item>
+      <item quantity="other">Sjá öll %1$d forrit</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Hafðu samband við kerfisstjóra"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Hann getur hjálpað þér að endurstilla PIN-númerið, mynstrið eða aðgangsorðið"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Spjaldtölvan þín og persónuleg gögn eru berskjaldaðri fyrir árásum forrita af óþekktum uppruna. Þú samþykkir að bera fulla ábyrgð á hverju því tjóni sem verða kann á spjaldtölvunni eða gagnatapi sem leiða kann af uppsetningu forrita frá þessari veitu."</string>
@@ -2020,7 +2026,8 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Tungumál"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Lyklaborð"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Skjályklaborð"</string>
-    <string name="available_virtual_keyboard_category" msgid="2191399236305207950">"Tiltæk sýndarlyklaborð"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tiltækt skjályklaborð"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Stjórna skjályklaborðum"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Lyklaborðsaðstoð"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Vélbúnaðarlyklaborð"</string>
@@ -2029,7 +2036,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Flýtilyklar"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Sýna tiltæka flýtilykla"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Lyklaborð og verkfæri vinnusniðs"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="3423496805741863134">"Sýndarlyklaborð fyrir vinnuna"</string>
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Skjályklaborð fyrir vinnu"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Sjálfgefið"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Hraði bendils"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Leikjafjarstýring"</string>
@@ -2124,39 +2131,35 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Auka aðdrátt á skjá"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Ýtt þrisvar til að auka aðdrátt"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Ýttu á hnapp til að stækka"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Auktu aðdráttinn á skjánum til að efni sjáist betur.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Til að auka aðdrátt:&lt;/b&gt;&lt;br/&gt; 1. Notaðu flýtileið til að hefja stækkun&lt;br/&gt; 2. Ýttu á skjáinn&lt;br/&gt; 3. Dragðu tvo fingur til að færa um skjáinn&lt;br/&gt; 4. Færðu tvo fingur saman til að stilla aðdrátt&lt;br/&gt; 5. Notaðu flýtileið til að hætta stækkun&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Til að auka aðdrátt tímabundið:&lt;/b&gt;&lt;br/&gt; 1. Notaðu flýtileið til að hefja stækkun&lt;br/&gt; 2. Haltu fingri hvar sem er á skjánum&lt;br/&gt; 3. Dragðu fingur til að færa þig til á skjánum&lt;br/&gt; 4. Lyftu fingri til að hætta stækkun"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Auktu aðdráttinn á skjánum til að efni sjáist betur.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Til að auka aðdrátt:&lt;/b&gt;&lt;br/&gt; 1. Notaðu flýtileið til að hefja stækkun&lt;br/&gt; 2. Ýttu á skjáinn&lt;br/&gt; 3. Dragðu tvo fingur til að færa þig til á skjánum&lt;br/&gt; 4. Færðu tvo fingur saman til að stilla aðdrátt&lt;br/&gt; 5. Notaðu flýtileið til að hætta stækkun&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Til að auka aðdrátt tímabundið:&lt;/b&gt;&lt;br/&gt; 1. Notaðu flýtileið til að hefja stækkun&lt;br/&gt; 2. Haltu fingri hvar sem er á skjánum&lt;br/&gt; 3. Dragðu fingur til að færa þig til á skjánum&lt;br/&gt; 4. Lyftu fingri til að hætta stækkun"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Þegar kveikt er á stækkun geturðu aukið aðdráttinn á skjánum.\n\n"<b>"Til að stækka"</b>" skaltu hefja stækkun og ýta svo hvar sem er á skjáinn.\n"<ul><li>"Dragðu með tveimur eða fleiri fingrum til að fletta"</li>\n<li>"Færðu tvo eða fleiri fingur saman til að stilla aðdrátt"</li></ul>\n\n<b>"Til að stækka tímabundið"</b>" skaltu hefja stækkun og halda síðan fingri hvar sem er á skjánum.\n"<ul><li>"Dragðu til að fara um skjáinn"</li>\n<li>"Lyftu fingrinum til að minnka aðdrátt"</li></ul>\n\n"Þú getur ekki stækkað á lyklaborðinu eða yfirlitsstikunni."</string>
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Síða <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> af <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Notaðu aðgengishnappinn til að opna"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Haltu hljóðstyrkstökkunum inni til að opna"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Ýttu þrisvar á skjáinn til að opna"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Nota bendingu til að opna"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Notaðu nýja aðgengisbendingu"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Til að nota þennan eiginleika skaltu ýta á aðgengishnappinn <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> neðst á skjánum.\n\nTil að skipta á milli eiginleika skaltu halda inni aðgengishnappinum."</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Til að nota þennan eiginleika skaltu halda inni báðum hljóðstyrkstökkum."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Til að ræsa og stöðva stækkun skaltu ýta þrisvar einhvers staðar á skjáinn."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Til að nota þennan eiginleika skaltu strjúka upp frá neðri hluta skjásins með tveimur fingrum.\n\nTil að skipta á milli eiginleika skaltu strjúka upp með tveimur fingrum og halda inni."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Til að nota þennan eiginleika skaltu strjúka upp frá neðri hluta skjásins með þremur fingrum.\n\nTil að skipta á milli eiginleika skaltu strjúka upp með þremur fingrum og halda inni."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Til að nota aðgengiseiginleika skaltu strjúka upp frá neðri hluta skjásins með tveimur fingrum.\n\nTil að skipta á milli eiginleika skaltu strjúka upp með tveimur fingrum og halda inni."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Til að nota aðgengiseiginleika skaltu strjúka upp frá neðri hluta skjásins með þremur fingrum.\n\nTil að skipta á milli eiginleika skaltu strjúka upp með þremur fingrum og halda inni."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Ég skil"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Flýtileið fyrir þjónustuna „<xliff:g id="SERVICE">%1$s</xliff:g>“"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Aðgengishnappur"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Strjúktu upp með tveimur fingrum"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Strjúka upp með tveimur fingrum"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Strjúktu upp með þremur fingrum"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Ýttu á aðgengishnappinn"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Ýttu á aðgengishnappinn <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> neðst á skjánum.\n\nTil að skipta á milli eiginleika skaltu halda aðgengishnappinum inni."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Strjúktu upp frá neðri hluta skjásins með tveimur fingrum.\n\nTil að skipta á milli eiginleika skaltu strjúka upp með tveimur fingrum og halda inni."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Strjúktu upp frá neðri hluta skjásins með þremur fingrum.\n\nTil að skipta á milli eiginleika skaltu strjúka upp með þremur fingrum og halda inni."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Halda inni hljóðstyrkstökkum"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"halda inni hljóðstyrkstökkum"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Haltu báðum hljóðstyrkstökkunum inni"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Ýta þrisvar á skjá"</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"ýta þrisvar á skjá"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Ýttu þrisvar sinnum hratt á skjáinn. Þessi flýtileið kann að hægja á tækinu."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Ítarlegt"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Aðgengishnappurinn er stilltur á <xliff:g id="SERVICE">%1$s</xliff:g>. Til að nota stækkun skaltu halda aðgengishnappnum inni og velja stækkun."</string>
@@ -3051,15 +3054,15 @@
     <string name="nfc_payment_use_default" msgid="788899906312142803">"Nota sjálfgefið"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Alltaf"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Nema þegar annað greiðsluforrit er opið"</string>
-    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"Greiða við snertifría stöð með:"</string>
+    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"Greiða í snertifríum posa með:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Borgað við posann"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Settu upp greiðsluforrit. Þá þarftu bara að bera bakhlið símans upp að posa með snjallgreiðslumerki."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Ég skil"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Meira..."</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Velja sjálfgefið greiðsluforrit"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Uppfæra sjálfgefið greiðsluforrit"</string>
-    <string name="nfc_payment_set_default" msgid="4101484767872365195">"Greiða við snertifría stöð með <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"Greiða við snertifría stöð með <xliff:g id="APP_0">%1$s</xliff:g>.\n\nÞetta kemur í stað <xliff:g id="APP_1">%2$s</xliff:g> sem sjálfgefið greiðsluforrit."</string>
+    <string name="nfc_payment_set_default" msgid="4101484767872365195">"Greiða í snertifríum posa með <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"Greiða í snertifríum posa með <xliff:g id="APP_0">%1$s</xliff:g>.\n\nÞetta kemur í stað <xliff:g id="APP_1">%2$s</xliff:g> sem sjálfgefið greiðsluforrit."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Velja sem sjálfgefið"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Uppfæra"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Takmarkanir"</string>
@@ -3300,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Sjálfgefið hljóð tilkynninga"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Sjálfgefið hljóð í vekjara"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Titra við hringingu"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Titringur"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Titra aldrei"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Titra alltaf"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Titra og hækka hringitón smám saman"</string>
@@ -3345,7 +3349,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Leyfa truflanir sem gefa frá sér hljóð"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Útiloka sjónrænt áreiti"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Leyfa sjónræn merki"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Birta valkosti fyrir faldar tilkynningar"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Birtingarvalkostir fyrir faldar tilkynningar"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Þegar kveikt er á „Ónáðið ekki“"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Ekkert hljóð frá tilkynningum"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Þú munt sjá tilkynningar á skjánum þínum"</string>
@@ -3468,7 +3472,6 @@
     <string name="notification_badging_title" msgid="5469616894819568917">"Tilkynningapunktur á forritstákni"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Sýna rönd með nýjustu samtölum"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Blöðrur"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Sumar tilkynningar geta birst sem blöðrur á skjánum"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Sumar tilkynningar og annað efni getur birst sem blöðrur á skjánum. Ýttu á blöðruna til að opna hana. Dragðu blöðruna niður skjáinn til að hunsa hana."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Blöðrur"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Allar blöðrustillingar"</string>
@@ -3487,6 +3490,8 @@
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Ekkert má opna blöðrur"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Samtöl"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Öll samtöl mega opna blöðrur nema"</string>
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Slökkva á blöðrum fyrir þetta samtal"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Kveikja á blöðrum fyrir þetta samtal"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Strokaðgerðir"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"Strjúktu til hægri til að hunsa og til vinstri til að birta valmynd"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"Strjúktu til vinstri til að hunsa og til hægri til að birta valmynd"</string>
@@ -3506,10 +3511,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Eftir andlitsopnun ferðu beint á síðasta skjá"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Læsa skjá, lásskjár, sleppa, sneiða hjá"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Þegar vinnusnið er læst"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Tilkynningar á lásskjá"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Sýna viðvörunartilkynningar og þöglar tilkynningar"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"Sýna aðeins viðvörunartilkynningar"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"Ekki sýna tilkynningar"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Tilkynningar á lásskjá"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Birta sjálfgefin og þögul samtöl"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Fela þögul samtöl og tilkynningar"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Ekki birta neinar tilkynningar"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Tilkynningar með viðkvæmu innihaldi"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Sýna viðkvæmt innihald á lásskjá"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Tilkynningar um vinnusnið með viðkvæmu innihaldi"</string>
@@ -3532,15 +3537,22 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"Aldrei sýna tilkynningar"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"Samtöl"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Samtal"</string>
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"Samtalshluti"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Leyfa forriti að nota samtalshluta"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Ekki samtal"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Fjarlægja úr samtalshlutanum"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Þetta er samtal"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Bæta við samtalshlutann"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Stjórna samtölum"</string>
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Engin forgangssamtöl"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> forgangssamtal</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> forgangssamtöl</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Forgangssamtöl"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Sýna yfir samtalshluta og birta í fljótandi blöðru"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Sýna yfir samtalshluta"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"Breytt samtöl"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"Önnur samtöl"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Samtöl sem þú hefur gert breytingar á"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Forgangssamtöl í blöðrum"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Forgangssamtöl birtast efst á tilkynningasvæðinu. Þú getur einnig stillt þau á að birtast í blöðru og trufla þannig „Ónáðið ekki“."</string>
@@ -3557,15 +3569,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"Opnast á skjánum"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Setja á bannlista"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Hljóðlaust"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"Viðvörun"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"Sjálfgefið"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Leyfa truflanir"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Leyfa forriti að nota hljóð, titra og/eða birta tilkynningar á skjá"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Forgangur"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Sýnt sem blaðra efst í samtalshluta"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> styður ekki stillingar fyrir einstök samtöl."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Birtist efst í samtalshluta, birtist sem fljótandi blaðra, birtir prófílmynd á lásskjánum"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> styður ekki flesta samtalseiginleika. Þú getur ekki sett samtal í forgang og samtöl birtast ekki sem fljótandi blöðrur."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Sameina tilkynningar í einni línu á fellisvæði"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Auðveldar þér að einbeita þér án hljóðs eða titrings"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"Fangar athygli þína með hljóði eða titringi"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Ekkert hljóð eða titringur"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Ekkert hljóð eða titringur og birtist neðar í samtalshluta"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Gæti hringt eða titrað eftir stillingum símans"</string>
     <string name="notification_channel_summary_low_status" msgid="7866565328564018007">"Birtir tilkynningar með lítinn forgang. Alltaf án hljóðs."</string>
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Birtir tilkynningar með lítinn forgang. Alltaf án hljóðs."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Birtir tilkynningar með lítinn forgang. Alltaf án hljóðs."</string>
@@ -3622,11 +3635,12 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Tengt"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Tengja þessi forrit"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Tengd forrit deila heimildum og hafa aðgang að gögnum hvert hjá öðru."</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Þú skalt aðeins tengja forrit sem þú treystir fyrir persónulegum gögnum þínum. Vinnuforrit kunna að sýna kerfisstjóranum þínum gögnin þín."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Tengdu aðeins forrit ef þú treystir því að þau deili ekki persónuupplýsingum með kerfisstjóranum þínum."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Hægt að aftengja forrit hvenær sem er í persónuverndarstillingum tækisins."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Viltu treysta vinnuforritinu <xliff:g id="NAME">%1$s</xliff:g> fyrir persónulegum gögnum þínum?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"<xliff:g id="NAME">%1$s</xliff:g> getur sýnt kerfisstjóranum þínum persónuleg gögn."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Tengdu aðeins forrit ef þú treystir því að þau deili ekki persónuupplýsingum með kerfisstjóranum þínum."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Forritsgögn"</string>
-    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Þetta forrit hefur aðgang að gögnum í <xliff:g id="NAME">%1$s</xliff:g> forritinu til einkanota."</string>
+    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Þetta forrit hefur aðgang að gögnum í einkaforritinu <xliff:g id="NAME">%1$s</xliff:g>."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Heimildir"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Þetta forrit getur notað heimildir forritsins <xliff:g id="NAME">%1$s</xliff:g> til einkanota á borð við aðgang að staðsetningu, geymslu eða tengiliðum."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"Engin forrit tengd"</string>
@@ -3634,8 +3648,8 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> forrit tengt</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> forrit tengd</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Settu upp <xliff:g id="NAME">%1$s</xliff:g> á vinnuprófíl til að tengja þessi forrit"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Settu upp <xliff:g id="NAME">%1$s</xliff:g> á einkaprófíl til að tengja þessi forrit"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Til að tengja þessi forrit skaltu setja <xliff:g id="NAME">%1$s</xliff:g> upp á vinnusniðinu"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Til að tengja þessi forrit skaltu setja <xliff:g id="NAME">%1$s</xliff:g> upp á einkasniðinu"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Ýttu til að sækja forritið"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"„Ónáðið ekki“ aðgangur"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Leyfa aðgang að „Ónáðið ekki“"</string>
@@ -3680,7 +3694,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Blikkandi ljós"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Titringur"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Hljóð"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"Mikilvægt"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"Forgangur"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Bæta við heimaskjá"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Eyða"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Endurnefna"</string>
@@ -3709,7 +3723,7 @@
     <string name="zen_mode_event_rule_calendar_any" msgid="5152139705998281205">"Öll dagatöl"</string>
     <string name="zen_mode_event_rule_reply" msgid="6099405414361340225">"Þar sem svarið er"</string>
     <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"„Já“, „Kannski“ eða „Ekki svarað“"</string>
-    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"„Já“ eða „Kannski“"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"Já eða Kannski"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="7812120982734551236">"Já"</string>
     <string name="zen_mode_rule_not_found_text" msgid="5303667326973891036">"Regla fannst ekki."</string>
     <string name="zen_mode_rule_summary_enabled_combination" msgid="1183604368083885789">"Kveikt / <xliff:g id="MODE">%1$s</xliff:g>"</string>
@@ -3741,7 +3755,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"Símtöl"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"símtöl"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Símtöl sem mega trufla"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Til að tryggja að það heyrist í leyfðum símtölum skaltu athuga hvort tækið er stillt á að hringja"</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Til að tryggja að það heyrist í leyfðum símtölum skaltu athuga hvort tækið sé stillt á að hringja"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Lokað er fyrir móttekin símtöl fyrir „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“. Hægt er að breyta stillingum til að leyfa símtöl frá vinum, fjölskyldumeðlimum eða öðrum tengiliðum."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Stjörnumerktir tengiliðir"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3753,7 +3767,7 @@
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"skilaboð"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Skilaboð"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Skilaboð sem mega trufla"</string>
-    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Til að tryggja að það heyrist í leyfðum skilaboðum skaltu athuga hvort tækið er stillt á að hringja"</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Til að tryggja að það heyrist í leyfðum skilaboðum skaltu athuga hvort tækið sé stillt á að hringja"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Lokað er fyrir móttekin skilaboð fyrir „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“. Hægt er að breyta stillingum til að leyfa símtöl frá vinum, fjölskyldumeðlimum eða öðrum tengiliðum."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Þú færð öll skilaboð"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Þú færð öll símtöl"</string>
@@ -3800,11 +3814,11 @@
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Sumar tilkynningar"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Valið fólk getur áfram náð í þig jafnvel þótt þú leyfir ekki forritum að trufla"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="one"><xliff:g id="APP_NAMES">%s</xliff:g> mega trufla</item>
+      <item quantity="one"><xliff:g id="APP_NAMES">%s</xliff:g> má trufla</item>
       <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> mega trufla</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> í viðbót"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Undantekningar forrita"</string>
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Forrit"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Allar tilkynningar"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Sumar tilkynningar"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Tilkynningar sem mega trufla"</string>
@@ -3816,7 +3830,7 @@
     <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"Ekkert má trufla"</string>
     <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"<xliff:g id="NUMBER">%d</xliff:g> í viðbót"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Enginn má trufla"</string>
-    <string name="zen_mode_people_some" msgid="9101872681298810281">"Sumt fólk getur truflað"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"Sumt fólk má trufla"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Allt fólk má trufla"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Hringt endurtekið"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Leyfa endurtekin símtöl"</string>
@@ -3860,9 +3874,9 @@
     <string name="switch_on_text" msgid="5664542327776075105">"Kveikt"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Slökkt"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Forritsfesting"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"Forritsfesting gerir þér kleift að birta núverandi forrit á skjánum þar til þú losar það. Þú getur til dæmis notað þennan eiginleika til að leyfa vini að spila ákveðinn leik. \n\nÞegar forrit er fest getur festa forritið opnað önnur forrit og persónuupplýsingar gætu verið aðgengilegar. \n\nTil að nota forritsfestingu: 	\n1.	Kveiktu á forritsfestingu 	\n2.	Opnaðu Yfirlit 	\n3.	Ýttu á forritstáknið efst á skjánum og ýttu svo á Festa"</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Forritsfesting gerir þér kleift að birta núverandi forrit á skjánum þar til þú losar það. Þú getur til dæmis notað þennan eiginleika til að leyfa vini að spila ákveðinn leik. \n\nÞegar forrit er fest getur festa forritið opnað önnur forrit og persónuupplýsingar gætu verið aðgengilegar. \n\nEf þú vilt deila tækinu þínu með einhverjum á öruggan hátt skaltu prófa að nota gestanotanda. \n\nTil að nota forritsfestingu: 	\n1.	Kveiktu á forritsfestingu 	\n2.	Opnaðu Yfirlit 	\n3.	Ýttu á forritstáknið efst á skjánum og ýttu svo á Festa"</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Þegar forrit er fest: \n\n•		Geta persónuupplýsingar verið aðgengilegar \n		(til dæmis tengiliðir og innihald tölvupósts) \n•	 Getur fest forrit opnað önnur forrit \n\nNotaðu aðeins forritafestingu með fólki sem þú treystir."</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Forritsfesting gerir þér kleift að láta núverandi forrit vera sýnilegt á skjánum þar til þú losar það. Þú getur til dæmis notað þennan eiginleika til að leyfa vini að spila ákveðinn leik. \n\nÞegar forrit er fest getur festa forritið opnað önnur forrit og persónuupplýsingar gætu verið aðgengilegar. \n\nTil að nota forritsfestingu: 	\n1.	Kveiktu á forritsfestingu 	\n2.	Opnaðu Yfirlit 	\n3.	Ýttu á forritstáknið efst á skjánum og ýttu svo á Festa"</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Forritsfesting gerir þér kleift að láta núverandi forrit vera sýnilegt á skjánum þar til þú losar það. Þú getur til dæmis notað þennan eiginleika til að leyfa vini að spila ákveðinn leik. \n\nÞegar forrit er fest getur festa forritið opnað önnur forrit og persónuupplýsingar gætu verið aðgengilegar. \n\nEf þú vilt deila tækinu þínu með einhverjum á öruggan hátt skaltu prófa að nota gestanotanda. \n\nTil að nota forritsfestingu: 	\n1.	Kveiktu á forritsfestingu 	\n2.	Opnaðu Yfirlit 	\n3.	Ýttu á forritstáknið efst á skjánum og ýttu svo á Festa"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Þegar forrit er fest: \n\n•		Geta persónuupplýsingar verið aðgengilegar \n		(til dæmis tengiliðir og innihald tölvupósts) \n•	 Getur fest forrit opnað önnur forrit \n\nNotaðu aðeins forritsfestingu með fólki sem þú treystir."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Biðja um opnunarmynstur til að losa"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Biðja um PIN-númer til að losa"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Biðja um aðgangsorð til að losa"</string>
@@ -3940,6 +3954,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Engar heimildir veittar"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Engar heimildarbeiðnir"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Stjórnaðu aðgangi forrita að gögnum"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Öll forrit"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Uppsett forrit"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Skyndiforrit"</string>
@@ -4025,7 +4040,7 @@
     <string name="high_power_system" msgid="3966701453644915787">"Rafhlöðusparnaður er ekki í boði"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Ekki nota rafhlöðusparnað. Getur gengið hraðar á hleðslu rafhlöðunnar."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Viltu leyfa forriti að keyra alltaf í bakgrunni?"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"Ef forritinu <xliff:g id="APP_NAME">%1$s</xliff:g> er heimilt að keyra alltaf í bakgrunni gæti það dregið úr endingartíma rafhlöðunnar. \n\nÞú getur breytt þessu síðar í „Stillingar &amp;qt; Forrit og tilkynningar“."</string>
+    <string name="high_power_prompt_body" msgid="6460557929559616041">"Ef forritinu <xliff:g id="APP_NAME">%1$s</xliff:g> er heimilt að keyra alltaf í bakgrunni gæti það dregið úr endingartíma rafhlöðunnar. \n\nÞú getur breytt þessu síðar í „Stillingar &gt; Forrit og tilkynningar“."</string>
     <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> notkun frá síðustu fullu hleðslu"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"Orkustjórnun"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"Engin rafhlöðunotkun frá síðustu fullu hleðslu"</string>
@@ -4827,8 +4842,6 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Kveikir á óskýrleika glugga á samsetningarstigi. Krefst endurræsingar tækisins."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Persónuvernd"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Heimildir, reikningsvirkni, persónuleg gögn"</string>
-    <string name="quick_settings_media_player" msgid="5365779284386769352">"Haldið áfram að spila efni"</string>
-    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Sýnir og festir efnisspilara í flýtistillingum. Krefst endurræstingar."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Fjarlægja"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Halda"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Viltu fjarlægja þessa tillögu?"</string>
@@ -4851,14 +4864,6 @@
       <item quantity="one"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> forrit hefur fullan aðgang að tækinu þínu</item>
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> forrit hafa fullan aðgang að tækinu þínu</item>
     </plurals>
-    <string name="manage_app_notification" msgid="8272999309499332742">"Stjórna tilkynningum fyrir <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="no_suggested_app" msgid="2482015948111074654">"Engar tillögur að forritum"</string>
-    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="6610904178351403728">
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> tilkynningarás.</item>
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> tilkynningarásir.</item>
-    </plurals>
-    <string name="notification_many_channel_count_summary" msgid="6324166979527102233">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> tilkynningarásir. Ýttu til að stjórna öllum."</string>
-    <string name="recently_installed_app" msgid="2899861390925377564">"Þú settir þetta forrit nýlega upp."</string>
     <string name="media_output_panel_title" msgid="5920946795078065159">"Skipta um úttak"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"Í spilun núna í <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="media_output_disconnected_status" msgid="5567111639832431865">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> (aftengt)"</string>
@@ -4911,11 +4916,12 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"Viðkvæmt efni"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Sýna kort og stýringar þegar tækið er læst"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Sýna stýringar á lásskjá"</string>
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"Sýna spjöld á lásskjá"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Fela kort og stýringar þegar tækið er læst"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Stilltu skjálás áður en þú byrjar"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Sýna tækjastjórnun"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Sýna kort og passa"</string>
-    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Haltu aflrofanum inni til að sjá stjórnun fyrir tengd tæki"</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Haltu aflrofanum inni til að sjá stýringar fyrir tengd tæki"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Haltu aflrofanum inni til að fara í greiðslumáta, brottfararspjöld og fleira."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
@@ -4928,6 +4934,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Þegar tvö SIM-kort eru notuð takmarkast þessi spjaldtölva við notkun á 4G. "<annotation id="url">"Frekari upplýsingar"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Þegar tvö SIM-kort eru notuð takmarkast þetta tæki við notkun á 4G. "<annotation id="url">"Frekari upplýsingar"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Stöðva keyrslu forrita í skyndiminni"</string>
+    <string name="overlay_settings_title" msgid="1032863083496396365">"Leyfa yfirlögn yfir stillingar"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Leyfa forrit sem geta birst yfir öðrum forritum að leggjast yfir stillingaskjái"</string>
     <string name="gesture_skip_title" msgid="2092825906479683162">"Sleppa bendingu"</string>
     <string name="gesture_silence_title" msgid="8991427657123202574">"Slökkva á hljóði fyrir tilkynningar"</string>
     <string name="qtifeedback_settings_title">Svörun vélbúnaðar</string>

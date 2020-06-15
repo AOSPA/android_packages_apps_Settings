@@ -20,7 +20,6 @@ import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Slog;
@@ -34,6 +33,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.logging.InstanceId;
+import com.android.internal.logging.UiEventLogger;
 import com.android.settings.R;
 
 public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
@@ -45,6 +46,7 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
     private final TextView mTitle;
     private final TextView mSummary;
     private final ImageView mProfileBadge;
+    private final View mDivider;
 
     NotificationSbnViewHolder(View itemView) {
         super(itemView);
@@ -54,6 +56,7 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
         mTitle = itemView.findViewById(R.id.title);
         mSummary = itemView.findViewById(R.id.text);
         mProfileBadge = itemView.findViewById(R.id.profile_badge);
+        mDivider = itemView.findViewById(R.id.divider);
     }
 
     void setSummary(CharSequence summary) {
@@ -85,13 +88,26 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
         mProfileBadge.setVisibility(badge != null ? View.VISIBLE : View.GONE);
     }
 
-    void addOnClick(String pkg, int userId, PendingIntent pi) {
+    void setDividerVisible(boolean visible) {
+        mDivider.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    void addOnClick(int position, String pkg, int uid, int userId, PendingIntent pi,
+            InstanceId instanceId,
+            boolean isSnoozed, UiEventLogger uiEventLogger) {
         Intent appIntent = itemView.getContext().getPackageManager()
                 .getLaunchIntentForPackage(pkg);
         boolean isPendingIntentValid = pi != null && PendingIntent.getActivity(
                 itemView.getContext(), 0, pi.getIntent(), PendingIntent.FLAG_NO_CREATE) != null;
         if (isPendingIntentValid || appIntent != null) {
             itemView.setOnClickListener(v -> {
+                uiEventLogger.logWithInstanceIdAndPosition(
+                        isSnoozed
+                                ? NotificationHistoryActivity.NotificationHistoryEvent
+                                .NOTIFICATION_HISTORY_SNOOZED_ITEM_CLICK
+                                : NotificationHistoryActivity.NotificationHistoryEvent
+                                .NOTIFICATION_HISTORY_RECENT_ITEM_CLICK,
+                        uid, pkg, instanceId, position);
                 if (pi != null) {
                     try {
                         pi.send();
