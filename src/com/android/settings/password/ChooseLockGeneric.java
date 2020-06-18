@@ -823,6 +823,14 @@ public class ChooseLockGeneric extends SettingsActivity {
         public void onDestroy() {
             super.onDestroy();
             mLockPatternUtils.sanitizePassword();
+            if (mUserPassword != null) {
+                mUserPassword.zeroize();
+            }
+            // Force a garbage collection immediately to remove remnant of user password shards
+            // from memory.
+            System.gc();
+            System.runFinalization();
+            System.gc();
         }
 
         @Override

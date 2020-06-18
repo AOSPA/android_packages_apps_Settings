@@ -16,7 +16,7 @@
 
 package com.android.settings.network.telephony;
 
-
+import android.annotation.IntDef;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.os.RemoteException;
@@ -32,9 +32,13 @@ import android.util.Log;
 
 import org.codeaurora.internal.IExtTelephony;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.Executor;
+import java.util.stream.Collectors;
 
 /**
  * A helper class that builds the common interface and performs the network scan for two different
@@ -77,6 +81,9 @@ public class NetworkScanHelper {
         void onError(int errorCode);
     }
 
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS, NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS_LEGACY})
+    public @interface NetworkQueryType {}
 
     /**
      * Performs the network scan using {@link TelephonyManager#requestNetworkScan(
@@ -178,7 +185,7 @@ public class NetworkScanHelper {
      *
      * @param type used to tell which network scan API should be used.
      */
-    public void startNetworkScan(int type) {
+    public void startNetworkScan(@NetworkQueryType int type) {
         Log.d(TAG, "startNetworkScan: " + type);
         if (type == NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS) {
             if (mNetworkScanRequester != null) {
@@ -210,10 +217,9 @@ public class NetworkScanHelper {
     }
 
     /**
-     * Stops the network scan.
-     *
-     * Use this method to stop an ongoing scan. When user requests a new scan, a {@link NetworkScan}
-     * object will be returned, and the user can stop the scan by calling this method.
+     * The network scan of type {@link #NETWORK_SCAN_TYPE_WAIT_FOR_ALL_RESULTS} can't be stopped,
+     * however, the result of the current network scan won't be returned to the callback after
+     * calling this method.
      */
     public void stopNetworkQuery() {
         if (mNetworkScanRequester != null) {
