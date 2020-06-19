@@ -198,11 +198,11 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         }
         if (TextUtils.equals(getPreferenceKey(), LIST_DATA_PREFERENCE_KEY)) {
             mPreference.setEnabled(isCallStateIdle());
-        } else { 
+        } else {
             // Add the extra "Ask every time" value at the end.
             displayNames.add(mContext.getString(R.string.calls_and_sms_ask_every_time));
+            subscriptionIds.add(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
         }
-        subscriptionIds.add(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
 
         mPreference.setEntries(displayNames.toArray(new CharSequence[0]));
         mPreference.setEntryValues(subscriptionIds.toArray(new CharSequence[0]));
