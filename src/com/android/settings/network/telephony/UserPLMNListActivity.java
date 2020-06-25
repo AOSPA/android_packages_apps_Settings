@@ -187,7 +187,7 @@ public class UserPLMNListActivity extends PreferenceActivity
 
         mExtTelephony
             = IExtTelephony.Stub
-                    .asInterface(ServiceManager.getService("extphone"));
+                    .asInterface(ServiceManager.getService("qti.radio.extphone"));
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
