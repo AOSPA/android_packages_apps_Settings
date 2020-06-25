@@ -40,4 +40,11 @@
         android:order="105"
         settings:allowDividerAbove="true"/>
 
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="user_settings_show_user_icon_when_locked"
+        android:title="@string/show_user_icon_on_lockscreen_menu"
+        android:singleLineTitle="false"
+        android:order="110"
+        settings:allowDividerAbove="true"/>
+
 </PreferenceScreen>

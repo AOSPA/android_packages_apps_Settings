@@ -111,6 +111,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_USER_GUEST = "user_guest";
     private static final String KEY_ADD_USER = "user_add";
     private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
+    private static final String KEY_SHOW_USER_ICON_WHEN_LOCKED = "user_settings_show_user_icon_when_locked";
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
 
@@ -166,6 +167,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private MultiUserSwitchBarController mSwitchBarController;
     private EditUserInfoController mEditUserInfoController = new EditUserInfoController();
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
+    private ShowUserIconWhenLockedPreferenceController mShowUserIconWhenLockedPreferenceController;
     private MultiUserFooterPreferenceController mMultiUserFooterPreferenceController;
 
     // A place to cache the generated default avatar
@@ -233,15 +235,20 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mAddUserWhenLockedPreferenceController = new AddUserWhenLockedPreferenceController(
                 activity, KEY_ADD_USER_WHEN_LOCKED);
+        mShowUserIconWhenLockedPreferenceController = new ShowUserIconWhenLockedPreferenceController(
+                activity, KEY_SHOW_USER_ICON_WHEN_LOCKED);
         mMultiUserFooterPreferenceController = new MultiUserFooterPreferenceController(activity)
                 .setFooterMixin(mFooterPreferenceMixin);
 
         final PreferenceScreen screen = getPreferenceScreen();
         mAddUserWhenLockedPreferenceController.displayPreference(screen);
+        mShowUserIconWhenLockedPreferenceController.displayPreference(screen);
         mMultiUserFooterPreferenceController.displayPreference(screen);
 
         screen.findPreference(mAddUserWhenLockedPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mAddUserWhenLockedPreferenceController);
+        screen.findPreference(mShowUserIconWhenLockedPreferenceController.getPreferenceKey())
+                .setOnPreferenceChangeListener(mShowUserIconWhenLockedPreferenceController);
 
         if (icicle != null) {
             if (icicle.containsKey(SAVE_ADDING_USER)) {
@@ -295,6 +302,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mAddUserWhenLockedPreferenceController.updateState(screen.findPreference(
                 mAddUserWhenLockedPreferenceController.getPreferenceKey()));
+        mShowUserIconWhenLockedPreferenceController.updateState(screen.findPreference(
+                mShowUserIconWhenLockedPreferenceController.getPreferenceKey()));
 
         if (mShouldUpdateUserList) {
             updateUI();
