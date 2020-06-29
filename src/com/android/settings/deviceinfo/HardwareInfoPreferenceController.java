@@ -63,7 +63,7 @@ public class HardwareInfoPreferenceController extends BasePreferenceController {
                     modelName, hardwareVersion);
         }
 
-        return mContext.getResources().getString(R.string.model_summary, getDeviceModel());
+        return getDeviceModel();
     }
 
     public static String getDeviceModel() {
