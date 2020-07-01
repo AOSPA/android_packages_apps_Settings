@@ -19,7 +19,10 @@ package com.android.settings.gestures;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.display.AmbientDisplayConfiguration;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -34,7 +37,17 @@ public class GestureSettings extends DashboardFragment {
 
     private static final String TAG = "GestureSettings";
 
+    private static final String KEY_OFFSCREEN_GESTURE = "offscreen_gesture";
+
     private AmbientDisplayConfiguration mAmbientDisplayConfig;
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        if (!deviceSupportsOffscreenGestures(getContext())) {
+            getPreferenceScreen().removePreference(findPreference(KEY_OFFSCREEN_GESTURE));
+        }
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -64,6 +77,11 @@ public class GestureSettings extends DashboardFragment {
             mAmbientDisplayConfig = new AmbientDisplayConfiguration(context);
         }
         return mAmbientDisplayConfig;
+    }
+
+    private static boolean deviceSupportsOffscreenGestures(Context context) {
+        return context.getResources().
+                getInteger(com.android.internal.R.integer.config_doubleTapKeyCode) == 0;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
