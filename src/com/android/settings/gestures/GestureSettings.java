@@ -19,7 +19,10 @@ package com.android.settings.gestures;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.display.AmbientDisplayConfiguration;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -36,6 +39,16 @@ public class GestureSettings extends DashboardFragment {
 
     private AmbientDisplayConfiguration mAmbientDisplayConfig;
 
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        boolean enableKeyHandler = getContext().getResources().
+                getInteger(com.android.internal.R.bool.config_doubleTapKeyCode) == 0;
+        if (!enableKeyHandler) {
+            PreferenceScreen prefScreen = getPreferenceScreen();
+            prefScreen.removePreference(findPreference("quick_gestures"));
+        }
+    }
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SETTINGS_GESTURES;
