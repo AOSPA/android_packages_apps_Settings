@@ -508,7 +508,9 @@ public class ManageApplications extends InstrumentedFragment
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
         outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
-        outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
+        if (null != mSearchView) {
+            outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
+        }
         outState.putInt(EXTRA_FILTER_TYPE, mFilter.getFilterType());
         if (mApplications != null) {
             mApplications.onSaveInstanceState(outState);
