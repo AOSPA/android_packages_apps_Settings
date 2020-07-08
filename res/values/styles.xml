@@ -533,6 +533,10 @@
         <item name="rowStyle">@style/SliceRow.Slider</item>
     </style>
 
+    <style name="Widget.SliceView.Panel.Slider.LargeIcon">
+        <item name="rowStyle">@style/SliceRow.Slider.LargeIcon</item>
+    </style>
+
     <style name="SliceRow">
         <!-- 2dp start padding for the start icon -->
         <item name="titleItemStartPadding">2dp</item>
@@ -560,20 +564,31 @@
     </style>
 
     <style name="SliceRow.Slider">
-        <!-- 10dp start padding for the start icon -->
-        <item name="titleItemStartPadding">10dp</item>
-
         <!-- Padding between content and the start icon is 0dp -->
         <item name="contentStartPadding">0dp</item>
+        <item name="contentEndPadding">36dp</item>
 
         <!-- 0dp start padding for the end item -->
         <item name="endItemStartPadding">0dp</item>
-        <!-- 24dp end padding for the end item -->
-        <item name="endItemEndPadding">24dp</item>
+        <!-- 8dp end padding for the end item -->
+        <item name="endItemEndPadding">8dp</item>
 
         <!-- Align text with slider -->
         <item name="titleStartPadding">11dp</item>
         <item name="subContentStartPadding">11dp</item>
+
+        <!-- Padding for indeterminate progress bar -->
+        <item name="progressBarStartPadding">12dp</item>
+        <item name="progressBarEndPadding">16dp</item>
+    </style>
+
+    <style name="SliceRow.Slider.LargeIcon">
+        <!-- 10dp start padding for the start icon -->
+        <item name="titleItemStartPadding">10dp</item>
+        <!-- Layout is 48dp and actual icon size is 48-(iconSize/2) -->
+        <item name="iconSize">12dp</item>
+        <!-- RecycleView item animator -->
+        <item name="disableRecyclerViewItemAnimator">true</item>
     </style>
 
     <style name="DisclaimerPositiveButton" parent="@style/SudGlifButton.Primary">

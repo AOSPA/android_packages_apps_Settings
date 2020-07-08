@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,46 +14,54 @@
  * limitations under the License.
  */
 
-package com.android.settings.notification;
+package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-
-import com.android.settings.testutils.shadow.ShadowNotificationBackend;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowNotificationBackend.class)
-public class ConfigureNotificationPreferenceControllerTest {
+public class TelephonyTogglePreferenceControllerTest {
 
-    private ConfigureNotificationPreferenceController mController;
     private Context mContext;
+    private FakeTelephonyToggle mFakeTelephonyToggle;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mController = new ConfigureNotificationPreferenceController(mContext, "key");
+        mFakeTelephonyToggle = new FakeTelephonyToggle(mContext, "key");
     }
 
     @Test
-    public void getSummary_noBlockedApps() {
-        ShadowNotificationBackend.setBlockedAppCount(0);
-
-        assertThat(mController.getSummary().toString()).contains("On");
+    public void isSliceable_byDefault_shouldReturnFalse() {
+        assertThat(mFakeTelephonyToggle.isSliceable()).isFalse();
     }
 
-    @Test
-    public void getSummary_someBlockedApps() {
-        ShadowNotificationBackend.setBlockedAppCount(5);
+    private static class FakeTelephonyToggle extends TelephonyTogglePreferenceController {
 
-        assertThat(mController.getSummary().toString()).contains("Off");
-        assertThat(mController.getSummary().toString()).contains("5");
+        private FakeTelephonyToggle(Context context, String preferenceKey) {
+            super(context, preferenceKey);
+        }
+
+        @Override
+        public boolean isChecked() {
+            return false;
+        }
+
+        @Override
+        public boolean setChecked(boolean isChecked) {
+            return false;
+        }
+
+        @Override
+        public int getAvailabilityStatus(int subId) {
+            return 0;
+        }
     }
 }

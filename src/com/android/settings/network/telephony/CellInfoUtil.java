@@ -104,6 +104,35 @@ public final class CellInfoUtil {
         return cellId;
     }
 
+    /**
+     * Creates a CellInfo object from OperatorInfo. GsmCellInfo is used here only because
+     * operatorInfo does not contain technology type while CellInfo is an abstract object that
+     * requires to specify technology type. It doesn't matter which CellInfo type to use here, since
+     * we only want to wrap the operator info and PLMN to a CellInfo object.
+     */
+    public static CellInfo convertOperatorInfoToCellInfo(OperatorInfo operatorInfo) {
+        final String operatorNumeric = operatorInfo.getOperatorNumeric();
+        String mcc = null;
+        String mnc = null;
+        if (operatorNumeric != null && operatorNumeric.matches("^[0-9]{5,6}$")) {
+            mcc = operatorNumeric.substring(0, 3);
+            mnc = operatorNumeric.substring(3);
+        }
+        final CellIdentityGsm cig = new CellIdentityGsm(
+                Integer.MAX_VALUE /* lac */,
+                Integer.MAX_VALUE /* cid */,
+                Integer.MAX_VALUE /* arfcn */,
+                Integer.MAX_VALUE /* bsic */,
+                mcc,
+                mnc,
+                operatorInfo.getOperatorAlphaLong(),
+                operatorInfo.getOperatorAlphaShort(),
+                Collections.emptyList());
+
+        final CellInfoGsm ci = new CellInfoGsm();
+        ci.setCellIdentity(cig);
+        return ci;
+    }
 
     /**
      * Creates a CellInfo object from OperatorInfo for Legacy Incremental Scan results.

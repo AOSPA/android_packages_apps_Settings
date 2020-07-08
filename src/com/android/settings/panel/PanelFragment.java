@@ -95,6 +95,8 @@ public class PanelFragment extends Fragment {
     private ImageView mTitleIcon;
     private TextView mHeaderTitle;
     private TextView mHeaderSubtitle;
+    private int mMaxHeight;
+    private View mFooterDivider;
 
     private final Map<Uri, LiveData<Slice>> mSliceLiveData = new LinkedHashMap<>();
 
@@ -104,6 +106,18 @@ public class PanelFragment extends Fragment {
     private ViewTreeObserver.OnPreDrawListener mOnPreDrawListener = () -> {
         return false;
     };
+
+    private final ViewTreeObserver.OnGlobalLayoutListener mPanelLayoutListener =
+            new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if (mLayoutView.getHeight() > mMaxHeight) {
+                        final ViewGroup.LayoutParams params = mLayoutView.getLayoutParams();
+                        params.height = mMaxHeight;
+                        mLayoutView.setLayoutParams(params);
+                    }
+                }
+            };
 
     private final ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener =
             new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -123,6 +137,9 @@ public class PanelFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         mLayoutView = inflater.inflate(R.layout.panel_layout, container, false);
+        mLayoutView.getViewTreeObserver()
+                .addOnGlobalLayoutListener(mPanelLayoutListener);
+        mMaxHeight = getResources().getDimensionPixelSize(R.dimen.output_switcher_slice_max_height);
         createPanelContent();
         return mLayoutView;
     }
@@ -159,6 +176,9 @@ public class PanelFragment extends Fragment {
         if (mLayoutView == null) {
             activity.finish();
         }
+        final ViewGroup.LayoutParams params = mLayoutView.getLayoutParams();
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        mLayoutView.setLayoutParams(params);
 
         mPanelSlices = mLayoutView.findViewById(R.id.panel_parent_layout);
         mSeeMoreButton = mLayoutView.findViewById(R.id.see_more);
@@ -168,6 +188,7 @@ public class PanelFragment extends Fragment {
         mTitleIcon = mLayoutView.findViewById(R.id.title_icon);
         mHeaderTitle = mLayoutView.findViewById(R.id.header_title);
         mHeaderSubtitle = mLayoutView.findViewById(R.id.header_subtitle);
+        mFooterDivider = mLayoutView.findViewById(R.id.footer_divider);
 
         // Make the panel layout gone here, to avoid janky animation when updating from old panel.
         // We will make it visible once the panel is ready to load.
@@ -214,8 +235,21 @@ public class PanelFragment extends Fragment {
             mHeaderSubtitle.setText(mPanel.getSubTitle());
             if (mPanel.getHeaderIconIntent() != null) {
                 mTitleIcon.setOnClickListener(getHeaderIconListener());
+                mTitleIcon.setLayoutParams(new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            } else {
+                final int size = getResources().getDimensionPixelSize(
+                        R.dimen.output_switcher_panel_icon_size);
+                mTitleIcon.setLayoutParams(new LinearLayout.LayoutParams(size, size));
             }
         }
+
+        if (mPanel.getViewType() == PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON) {
+            mFooterDivider.setVisibility(View.VISIBLE);
+        } else {
+            mFooterDivider.setVisibility(View.GONE);
+        }
+
         mSeeMoreButton.setOnClickListener(getSeeMoreListener());
         mDoneButton.setOnClickListener(getCloseListener());
 
@@ -378,6 +412,9 @@ public class PanelFragment extends Fragment {
             mPanelClosedKey = PanelClosedKeys.KEY_OTHERS;
         }
 
+        if (mLayoutView != null) {
+            mLayoutView.getViewTreeObserver().removeOnGlobalLayoutListener(mPanelLayoutListener);
+        }
         mMetricsProvider.action(
                 0 /* attribution */,
                 SettingsEnums.PAGE_HIDE,

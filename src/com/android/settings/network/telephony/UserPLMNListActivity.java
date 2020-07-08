@@ -181,12 +181,13 @@ public class UserPLMNListActivity extends PreferenceActivity
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.uplmn_settings);
         mUPLMNListContainer = (PreferenceScreen) findPreference(BUTTON_UPLMN_LIST_KEY);
-        mPhoneId = getIntent().getIntExtra(PhoneConstants.PHONE_KEY,
-                SubscriptionManager.getSlotIndex(SubscriptionManager.getDefaultSubscriptionId()));
+        int subId = getIntent().getIntExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mPhoneId = SubscriptionManager.getPhoneId(subId);
 
         mExtTelephony
             = IExtTelephony.Stub
-                    .asInterface(ServiceManager.getService("extphone"));
+                    .asInterface(ServiceManager.getService("qti.radio.extphone"));
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);

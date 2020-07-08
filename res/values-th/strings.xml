@@ -785,7 +785,7 @@
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"เปิดใช้ NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC จะแลกเปลี่ยนข้อมูลระหว่างอุปกรณ์นี้กับอุปกรณ์อื่นที่อยู่ใกล้ๆ หรืออุปกรณ์เป้าหมาย เช่น เครื่องชำระเงิน เครื่องอ่านการเข้าถึง และโฆษณาหรือป้ายสินค้าเชิงโต้ตอบ"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"ต้องปลดล็อกอุปกรณ์เพื่อใช้งาน NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"อนุญาตการใช้การชำระเงินผ่าน NFC และขนส่งสาธารณะเฉพาะเวลาที่ไม่ได้ล็อกหน้าจอเท่านั้น"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"อนุญาตให้ใช้ขนส่งสาธารณะและการชำระเงินผ่าน NFC เฉพาะเวลาที่ไม่ได้ล็อกหน้าจอเท่านั้น"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"พร้อมที่จะส่งเนื้อหาแอปผ่านทาง NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"ปิด"</string>
@@ -1190,6 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"เพิ่มอัตราการรีเฟรชจาก 60 เป็น 90 Hz โดยอัตโนมัติสำหรับเนื้อหาบางรายการ เพิ่มการใช้งานแบตเตอรี่"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"อัตราการรีเฟรชสูงสุดสำหรับการตอบสนองต่อการแตะและคุณภาพของภาพเคลื่อนไหวที่ดียิ่งขึ้น เพิ่มการใช้งานแบตเตอรี่"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"การจดจ่อที่หน้าจอ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"เปิด/หน้าจอจะไม่ปิดหากคุณกำลังดูอยู่"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"ปิด"</string>
@@ -3084,7 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Call Manager"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"การแจ้งเตือนเหตุฉุกเฉิน"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"การแจ้งเหตุฉุกเฉินแบบไร้สาย"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"ผู้ให้บริการเครือข่าย"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Access point names"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3185,9 +3187,9 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"บลูทูธ, โหมดขับรถ"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"บลูทูธ, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"บลูทูธ"</string>
-    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"บลูทูธ, Android Auto, โหมดขับรถ, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"บลูทูธ Android Auto โหมดขับรถ NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"บลูทูธ, Android Auto, โหมดขับรถ"</string>
-    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"บลูทูธ, Android Auto, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"บลูทูธ Android Auto NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"บลูทูธ, Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"ใช้ไม่ได้เพราะ NFC ปิดอยู่"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"หากต้องการใช้งาน ให้ติดตั้งแอปการชำระเงินก่อนเป็นอันดับแรก"</string>
@@ -3666,6 +3668,8 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"แอปนี้ไม่ได้โพสต์การแจ้งเตือนใดๆ"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"การตั้งค่าเพิ่มเติมในแอป"</string>
+    <!-- no translation found for notification_screen_summary (5984915275134654822) -->
+    <skip />
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"เปิดสำหรับแอปทั้งหมด"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other">ปิดสำหรับ <xliff:g id="COUNT_1">%d</xliff:g> แอป</item>
@@ -4650,6 +4654,10 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"สลับการเปลี่ยนแปลงความเข้ากันได้ของแอป"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"การเปลี่ยนแปลงที่เปิดใช้โดยค่าเริ่มต้น"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"การเปลี่ยนแปลงที่ปิดใช้โดยค่าเริ่มต้น"</string>
+    <!-- no translation found for platform_compat_dialog_title_no_apps (4387656000745989506) -->
+    <skip />
+    <!-- no translation found for platform_compat_dialog_text_no_apps (5715226015751055812) -->
+    <skip />
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"ไม่รองรับการตั้งค่าในโทรศัพท์นี้"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"ไม่รองรับการตั้งค่าในแท็บเล็ตนี้"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"ไม่รองรับการตั้งค่าในอุปกรณ์นี้"</string>
@@ -4822,6 +4830,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"ลองอีกครั้ง"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"เกิดข้อผิดพลาด แอปพลิเคชันยกเลิกคำขอเลือกอุปกรณ์"</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"เชื่อมต่อสำเร็จ"</string>
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"การเชื่อมต่อล้มเหลว"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"แสดงทั้งหมด"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"กำลังค้นหาอุปกรณ์…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"กำลังเชื่อมต่ออุปกรณ์…"</string>
@@ -4936,6 +4945,20 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"ระงับการดำเนินการสำหรับแอปที่แคชไว้"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"อนุญาตการซ้อนทับบนหน้าจอในการตั้งค่า"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"อนุญาตแอปที่แสดงเหนือแอปอื่นๆ ได้เพื่อวางซ้อนหน้าจอการตั้งค่า"</string>
+    <!-- no translation found for media_controls_title (403271085636252597) -->
+    <skip />
+    <!-- no translation found for media_controls_summary (5032071475867165587) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (2333689676163363582) -->
+    <skip />
+    <!-- no translation found for media_controls_hide_player (2751439192580884015) -->
+    <skip />
+    <!-- no translation found for media_controls_show_player (8504571042365814021) -->
+    <skip />
+    <!-- no translation found for media_controls_no_players (3493023121892175946) -->
+    <skip />
+    <!-- no translation found for keywords_media_controls (8345490568291778638) -->
+    <skip />
     <string name="qtifeedback_settings_title">ความคิดเห็นเกี่ยวกับฮาร์ดแวร์</string>
     <string name="qtifeedback_settings_subtitle">Qualcomm Technologies, Inc การรายงาน</string>
 </resources>

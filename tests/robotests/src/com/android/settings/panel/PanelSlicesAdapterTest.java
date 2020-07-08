@@ -17,10 +17,12 @@
 package com.android.settings.panel;
 
 import static com.android.settings.panel.PanelContent.VIEW_TYPE_SLIDER;
+import static com.android.settings.panel.PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON;
 import static com.android.settings.panel.PanelSlicesAdapter.MAX_NUM_OF_SLICES;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_GROUP_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE_URI;
+import static com.android.settings.slices.CustomSliceRegistry.VOLUME_MEDIA_URI;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -142,6 +144,53 @@ public class PanelSlicesAdapterTest {
     }
 
     @Test
+    public void sliderLargeIconPanel_shouldNotAllowDividerBelow() {
+        addTestLiveData(MEDIA_OUTPUT_SLICE_URI);
+        mFakePanelContent.setViewType(PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON);
+
+        final PanelSlicesAdapter adapter =
+                new PanelSlicesAdapter(mPanelFragment, mData, 0 /* metrics category */);
+        final int position = 0;
+        final ViewGroup view = new FrameLayout(mContext);
+        final SliceRowViewHolder viewHolder =
+                adapter.onCreateViewHolder(view, PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON);
+        adapter.onBindViewHolder(viewHolder, position);
+
+        assertThat(viewHolder.isDividerAllowedBelow()).isFalse();
+    }
+
+    @Test
+    public void sliderPanelType_shouldAllowDividerBelow() {
+        addTestLiveData(VOLUME_MEDIA_URI);
+        mFakePanelContent.setViewType(PanelContent.VIEW_TYPE_SLIDER);
+
+        final PanelSlicesAdapter adapter =
+                new PanelSlicesAdapter(mPanelFragment, mData, 0 /* metrics category */);
+        final int position = 0;
+        final ViewGroup view = new FrameLayout(mContext);
+        final SliceRowViewHolder viewHolder =
+                adapter.onCreateViewHolder(view, PanelContent.VIEW_TYPE_SLIDER);
+        adapter.onBindViewHolder(viewHolder, position);
+
+        assertThat(viewHolder.isDividerAllowedBelow()).isTrue();
+    }
+
+    @Test
+    public void defaultPanelType_shouldAllowDividerBelow() {
+        addTestLiveData(VOLUME_MEDIA_URI);
+        mFakePanelContent.setViewType(0 /* viewType */);
+
+        final PanelSlicesAdapter adapter =
+                new PanelSlicesAdapter(mPanelFragment, mData, 0 /* metrics category */);
+        final int position = 0;
+        final ViewGroup view = new FrameLayout(mContext);
+        final SliceRowViewHolder viewHolder = adapter.onCreateViewHolder(view, 0/* viewType */);
+        adapter.onBindViewHolder(viewHolder, position);
+
+        assertThat(viewHolder.isDividerAllowedBelow()).isTrue();
+    }
+
+    @Test
     public void outputSwitcherSlice_shouldAddFirstItemPadding() {
         addTestLiveData(MEDIA_OUTPUT_SLICE_URI);
 
@@ -150,7 +199,7 @@ public class PanelSlicesAdapterTest {
         final int position = 0;
         final ViewGroup view = new FrameLayout(mContext);
         final SliceRowViewHolder viewHolder =
-                adapter.onCreateViewHolder(view, PanelContent.VIEW_TYPE_SLIDER);
+                adapter.onCreateViewHolder(view, PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON);
 
         adapter.onBindViewHolder(viewHolder, position);
 
@@ -168,7 +217,7 @@ public class PanelSlicesAdapterTest {
         final int position = 0;
         final ViewGroup view = new FrameLayout(mContext);
         final SliceRowViewHolder viewHolder =
-                adapter.onCreateViewHolder(view, PanelContent.VIEW_TYPE_SLIDER);
+                adapter.onCreateViewHolder(view, PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON);
 
         adapter.onBindViewHolder(viewHolder, position);
 
@@ -204,6 +253,19 @@ public class PanelSlicesAdapterTest {
 
         verify(sLayoutInflater).inflate(intArgumentCaptor.capture(), eq(view), eq(false));
         assertThat(intArgumentCaptor.getValue()).isEqualTo(R.layout.panel_slice_slider_row);
+    }
+
+    @Test
+    public void onCreateViewHolder_viewTypeSliderLargeIcon_verifyLayout() {
+        final PanelSlicesAdapter adapter = new PanelSlicesAdapter(mPanelFragment, mData, 0);
+        final ViewGroup view = new FrameLayout(mContext);
+        final ArgumentCaptor<Integer> intArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
+
+        adapter.onCreateViewHolder(view, VIEW_TYPE_SLIDER_LARGE_ICON);
+
+        verify(sLayoutInflater).inflate(intArgumentCaptor.capture(), eq(view), eq(false));
+        assertThat(intArgumentCaptor.getValue()).isEqualTo(
+                R.layout.panel_slice_slider_row_large_icon);
     }
 
     @Test

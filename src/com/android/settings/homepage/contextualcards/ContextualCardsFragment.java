@@ -37,6 +37,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.homepage.contextualcards.slices.BluetoothUpdateWorker;
 import com.android.settings.homepage.contextualcards.slices.SwipeDismissalDelegate;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.slice.ContextualWifiScanWorker;
@@ -67,6 +68,7 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
         final Context context = getContext();
         if (savedInstanceState == null) {
             FeatureFactory.getFactory(context).getSlicesFeatureProvider().newUiSession();
+            BluetoothUpdateWorker.initLocalBtManager(getContext());
         }
         mContextualCardManager = new ContextualCardManager(context, getSettingsLifecycle(),
                 savedInstanceState);
@@ -107,6 +109,7 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
         mCardsContainer.setLayoutManager(mLayoutManager);
         mContextualCardsAdapter = new ContextualCardsAdapter(context, this /* lifecycleOwner */,
                 mContextualCardManager);
+        mCardsContainer.setItemAnimator(null);
         mCardsContainer.setAdapter(mContextualCardsAdapter);
         mContextualCardManager.setListener(mContextualCardsAdapter);
         mCardsContainer.setListener(this);

@@ -152,6 +152,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     private final Context mContext;
 
     private boolean mShowLatestAreaInfo;
+    private boolean mIsRegisteredListener = false;
 
     private final BroadcastReceiver mAreaInfoReceiver = new BroadcastReceiver() {
         @Override
@@ -282,11 +283,22 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             mContext.registerReceiver(mAreaInfoReceiver,
                     new IntentFilter(CellBroadcastIntents.ACTION_AREA_INFO_UPDATED));
         }
+
+        mIsRegisteredListener = true;
     }
 
     @Override
     public void onPause() {
         if (mSubscriptionInfo == null) {
+            if (mIsRegisteredListener) {
+                mSubscriptionManager.removeOnSubscriptionsChangedListener(
+                        mOnSubscriptionsChangedListener);
+                mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+                if (mShowLatestAreaInfo) {
+                    mContext.unregisterReceiver(mAreaInfoReceiver);
+                }
+                mIsRegisteredListener = false;
+            }
             return;
         }
 
@@ -525,7 +537,6 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         if (overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA_MMWAVE
                 || overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA) {
             dataNetworkTypeName = "NR NSA";
-            voiceNetworkTypeName = "NR NSA";
         }
 
         boolean show4GForLTE = false;

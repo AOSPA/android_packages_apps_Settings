@@ -75,6 +75,8 @@ public class PanelSlicesAdapter
         View view;
         if (viewType == PanelContent.VIEW_TYPE_SLIDER) {
             view = inflater.inflate(R.layout.panel_slice_slider_row, viewGroup, false);
+        } else if (viewType == PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON) {
+            view = inflater.inflate(R.layout.panel_slice_slider_row_large_icon, viewGroup, false);
         } else {
             view = inflater.inflate(R.layout.panel_slice_row, viewGroup, false);
         }
@@ -173,7 +175,7 @@ public class PanelSlicesAdapter
 
         @Override
         public boolean isDividerAllowedBelow() {
-            return true;
+            return mPanelFragment.getPanelViewType() != PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON;
         }
     }
 }
