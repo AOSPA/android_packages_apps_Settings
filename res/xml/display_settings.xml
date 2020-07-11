@@ -131,6 +131,14 @@
         settings:keywords="@string/keywords_ambient_display_screen"
         settings:controller="com.android.settings.security.screenlock.LockScreenPreferenceController" />
 
+    <!-- Statusbar Icon Manager -->
+    <PreferenceScreen
+        android:key="icon_manager"
+        android:title="@string/icon_manager_title"
+        android:summary="@string/icon_manager_summary">
+        <intent android:action="com.android.settings.action.STATUS_BAR_TUNER" />
+    </PreferenceScreen>
+
     <SwitchPreference
         android:key="camera_gesture"
         android:title="@string/camera_gesture_title"
