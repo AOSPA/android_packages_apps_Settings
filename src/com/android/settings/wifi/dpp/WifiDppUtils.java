@@ -389,6 +389,8 @@ public class WifiDppUtils {
         // it supports PSK and WEP and non security
         // KeyMgmt.NONE is for WEP or non security
         return wifiConfiguration.allowedKeyManagement.get(KeyMgmt.WPA2_PSK) ||
+                wifiConfiguration.allowedKeyManagement.get(KeyMgmt.SAE) ||
+                wifiConfiguration.allowedKeyManagement.get(KeyMgmt.OWE) ||
                 wifiConfiguration.allowedKeyManagement.get(KeyMgmt.NONE);
     }
 
