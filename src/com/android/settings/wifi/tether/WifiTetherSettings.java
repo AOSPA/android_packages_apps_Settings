@@ -195,7 +195,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         mPasswordPreferenceController.updateVisibility(config.getAuthType());
 
         if (mApBandPreferenceController.isVendorDualApSupported()
-                && mSecurityPreferenceController.isWpa3Supported()) {
+                && mSecurityPreferenceController.isWpa3OweSupported()) {
             if ((config.getAuthType() == WifiConfiguration.KeyMgmt.OWE)
                     == (mApBandPreferenceController.isBandEntriesHasDualband())) {
                 mApBandPreferenceController.updatePreferenceEntries(config);
