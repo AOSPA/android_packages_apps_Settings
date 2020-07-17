@@ -153,9 +153,6 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
             // change the list option if AP+AP is supproted and selected security type is not OWE
             entriesRes = R.array.wifi_ap_band_vendor_config_full;
             summariesRes = R.array.wifi_ap_band_vendor_summary_full;
-        } else if (mSecurityType == SoftApConfiguration.SECURITY_TYPE_OWE) {
-            entriesRes = R.array.wifi_ap_band_vendor_config_no_dual;
-            summariesRes = R.array.wifi_ap_band_vendor_summary_no_dual;
         }
         mBandEntries = res.getStringArray(entriesRes);
         mBandSummaries = res.getStringArray(summariesRes);
