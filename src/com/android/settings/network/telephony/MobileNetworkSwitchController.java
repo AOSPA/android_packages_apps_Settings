@@ -20,6 +20,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import android.content.Context;
+import android.sysprop.TelephonyProperties;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -116,8 +117,10 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
             }
         }
 
-        if (TelephonyManager.CALL_STATE_IDLE != mCallState) {
-            Log.d(TAG, "update: disable switchbar, callstate=" + mCallState);
+        boolean isEcbmEnabled = TelephonyProperties.in_ecm_mode().orElse(false);
+        if ((TelephonyManager.CALL_STATE_IDLE != mCallState) || isEcbmEnabled) {
+            Log.d(TAG, "update: disable switchbar, isEcbmEnabled=" + isEcbmEnabled +
+                    ", callstate=" + mCallState);
             mSwitchBar.setEnabled(false);
             return;
         } else {

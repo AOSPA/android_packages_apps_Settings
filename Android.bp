@@ -25,6 +25,7 @@ android_library {
     defaults: [
         "SettingsLibDefaults",
         "SettingsLib-search-defaults",
+        "framework-wifi-vendor-hide-access-defaults",
     ],
 
     srcs: ["src/**/*.java"],
