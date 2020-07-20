@@ -168,13 +168,6 @@
         <intent android:action="android.settings.SHOW_MANUAL"/>
     </Preference>
 
-    <!-- Feedback on the device -->
-    <Preference
-        android:key="device_feedback"
-        android:order="51"
-        android:title="@string/device_feedback"
-        settings:keywords="@string/keywords_device_feedback"/>
-
     <!-- Device FCC equipment id -->
     <Preference
         android:key="fcc_equipment_id"

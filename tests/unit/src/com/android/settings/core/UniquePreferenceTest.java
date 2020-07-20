@@ -73,7 +73,6 @@ public class UniquePreferenceTest {
             "regulatory_info",
             "manual",
             "legal_container",
-            "device_feedback",
             "fcc_equipment_id",
             "sim_status",
             "build_number",
