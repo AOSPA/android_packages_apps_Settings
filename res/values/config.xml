@@ -430,10 +430,6 @@
     <!-- Package name of dialer supports RTT setting-->
     <string name="config_rtt_setting_package_name" translatable="false"></string>
 
-    <!-- Playing tone setting -->
-    <bool name="config_show_connect_tone_ui">false</bool>
-    <integer name="config_default_tone_after_connected">0</integer>
-
     <!-- Reset application package name -->
     <string-array name="config_skip_reset_apps_package_name" translatable="false">
         <item>android</item>
@@ -441,4 +437,8 @@
         <item>com.android.systemui</item>
         <item>com.android.vending</item>
     </string-array>
+    
+        <!-- Playing tone setting -->
+    <bool name="config_show_connect_tone_ui">false</bool>
+    <integer name="config_default_tone_after_connected">0</integer>
 </resources>

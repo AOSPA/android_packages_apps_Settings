@@ -18,6 +18,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
     private int mSecurityValue;
     private boolean mWpa3SoftApSupported;
     private boolean mDualSoftApSupported;
+    private boolean mWpa3SoftApOweAkmSupported;
 
     public WifiTetherSecurityPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
@@ -29,6 +30,8 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
             com.android.internal.R.bool.config_wifi_dual_sap_mode_enabled);
         mWpa3SoftApSupported = context.getResources().getBoolean(
             com.android.internal.R.bool.config_wifi_wap3_sap_mode_enabled);
+        mWpa3SoftApOweAkmSupported = context.getResources().getBoolean(
+            com.android.internal.R.bool.config_wifi_wap3_sap_owe_akm_enabled);
 
         // Add SAE security type
         if (mWpa3SoftApSupported) {
@@ -39,7 +42,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
         securityValues.add(String.valueOf(WifiConfiguration.KeyMgmt.WPA2_PSK));
         securityEntries.add(context.getString(R.string.wifi_security_wpa2));
         // Add OWE security type
-        if (mWpa3SoftApSupported && mDualSoftApSupported) {
+        if (mWpa3SoftApOweAkmSupported && mDualSoftApSupported) {
             securityValues.add(String.valueOf(WifiConfiguration.KeyMgmt.OWE));
             securityEntries.add(context.getString(R.string.wifi_security_owe));
         }
@@ -63,7 +66,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
             mSecurityValue = WifiConfiguration.KeyMgmt.WPA2_PSK;
         } else if (config.getAuthType() == WifiConfiguration.KeyMgmt.NONE) {
             mSecurityValue = WifiConfiguration.KeyMgmt.NONE;
-        } else if (mWpa3SoftApSupported && mDualSoftApSupported
+        } else if (mWpa3SoftApOweAkmSupported && mDualSoftApSupported
                        && config.getAuthType() == WifiConfiguration.KeyMgmt.OWE) {
             mSecurityValue = WifiConfiguration.KeyMgmt.OWE;
         } else if (mWpa3SoftApSupported && config.getAuthType() == WifiConfiguration.KeyMgmt.SAE) {
@@ -98,7 +101,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
         return mSecurityEntries[securityEntryIndex];
     }
 
-    public boolean isWpa3Supported() {
-        return mWpa3SoftApSupported;
+    public boolean isWpa3OweSupported() {
+        return mWpa3SoftApOweAkmSupported;
     }
 }

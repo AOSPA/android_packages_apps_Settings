@@ -1139,17 +1139,6 @@ public class WifiConfigController implements TextWatcher,
                             break;
                     }
                     break;
-                case Eap.SIM:
-                case Eap.AKA:
-                case Eap.AKA_PRIME:
-                    if (enterpriseConfig.getSimNum() != null
-                            && !enterpriseConfig.getSimNum().isEmpty()) {
-                        int mSimNum = Integer.parseInt(enterpriseConfig.getSimNum());
-                        mSimCardSpinner.setSelection(mSimNum - 1);
-                    } else {
-                        mSimCardSpinner.setSelection(0);
-                    }
-                    break;
                 case Eap.TTLS:
                     switch (phase2Method) {
                         case Phase2.PAP:
@@ -1167,6 +1156,17 @@ public class WifiConfigController implements TextWatcher,
                         default:
                             Log.e(TAG, "Invalid phase 2 method " + phase2Method);
                             break;
+                    }
+                    break;
+                case Eap.SIM:
+                case Eap.AKA:
+                case Eap.AKA_PRIME:
+                    if (enterpriseConfig.getSimNum() != null
+                            && !enterpriseConfig.getSimNum().isEmpty()) {
+                        int mSimNum = Integer.parseInt(enterpriseConfig.getSimNum());
+                        mSimCardSpinner.setSelection(mSimNum - 1);
+                    } else {
+                        mSimCardSpinner.setSelection(0);
                     }
                     break;
                 default:
