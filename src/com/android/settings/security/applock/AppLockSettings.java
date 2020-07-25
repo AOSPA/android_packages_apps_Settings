@@ -89,9 +89,9 @@ public class AppLockSettings extends SubSettings {
             implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
         private final String KEY_SHOW_ON_WAKE = "show_only_on_wake";
-        private final String KEY_LOCK_NOTIFICATIONS = "lock_notifications";
         private final String KEY_LOCKED_APPS = "locked_apps";
         private final String KEY_UNLOCKED_APPS = "unlocked_apps";
+        private final String KEY_NOTIFICATION_HELP = "applock_notification_info";
 
         private AppLockManager mAppLockManager;
         private PackageManager mPackageManager;
@@ -103,9 +103,9 @@ public class AppLockSettings extends SubSettings {
         private SearchFilter mSearchFilter;
         private PreferenceScreen mPreferenceScreen;
         private SwitchPreference mShowOnlyOnWake;
-        private SwitchPreference mLockNotifications;
         private Preference mLocked;
         private Preference mUnlocked;
+        private Preference mNotifInfo;
 
         private final TreeMap<String, AppLockInfo> mLockedApps = new TreeMap<>();
         private final TreeMap<String, AppLockInfo> mUnlockedApps = new TreeMap<>();
@@ -167,9 +167,9 @@ public class AppLockSettings extends SubSettings {
             mPreferenceScreen = getPreferenceScreen();
 
             mShowOnlyOnWake = mPreferenceScreen.findPreference(KEY_SHOW_ON_WAKE);
-            mLockNotifications = mPreferenceScreen.findPreference(KEY_LOCK_NOTIFICATIONS);
             mLocked = mPreferenceScreen.findPreference(KEY_LOCKED_APPS);
             mUnlocked = mPreferenceScreen.findPreference(KEY_UNLOCKED_APPS);
+            mNotifInfo = mPreferenceScreen.findPreference(KEY_NOTIFICATION_HELP);
 
             mShowOnlyOnWake.setChecked(Settings.System.getIntForUser(getContext().getContentResolver(),
                     Settings.System.APP_LOCK_SHOW_ONLY_ON_WAKE, 0, UserHandle.USER_CURRENT) != 0);
@@ -180,17 +180,12 @@ public class AppLockSettings extends SubSettings {
                 return true;
             });
 
-            mLockNotifications.setChecked(Settings.System.getIntForUser(getContext().getContentResolver(),
-                    Settings.System.APP_LOCK_HIDE_NOTIFICATIONS, 1, UserHandle.USER_CURRENT) != 0);
-            mLockNotifications.setOnPreferenceChangeListener((preference, checked) -> {
-                Settings.System.putIntForUser(getContext().getContentResolver(),
-                        Settings.System.APP_LOCK_HIDE_NOTIFICATIONS,
-                        (boolean) checked ? 1 : 0, UserHandle.USER_CURRENT);
+            mNotifInfo.setOnPreferenceClickListener((preference) -> {
+                performNotifHintAnimation();
                 return true;
             });
 
-            final AppLockViewModel model =
-                    ViewModelProviders.of(this).get(AppLockViewModel.class);
+            final AppLockViewModel model = ViewModelProviders.of(this).get(AppLockViewModel.class);
             if (!model.getAppList().hasActiveObservers()) {
                 model.getAppList().observeForever(data -> {
                     updateAppsList(data);
@@ -299,6 +294,13 @@ public class AppLockSettings extends SubSettings {
             updateCategoryVisibility(mLockedApps.size(), mUnlockedApps.size());
         }
 
+        private void performNotifHintAnimation() {
+            for (AppLockInfo info : mLockedApps.values()) {
+                AppLockPreference pref = mPreferenceScreen.findPreference(info.getPackageName());
+                pref.startHintAnimation();
+            }
+        }
+
         private void updatePreferencesPostSearch(ArrayList<AppLockInfo> results) {
             int lockedAppsShown = 0;
             for (AppLockInfo info : results) {
@@ -374,7 +376,8 @@ public class AppLockSettings extends SubSettings {
             Drawable icon = info.getIcon();
             String packageName = info.getPackageName();
             boolean locked = info.isAppLocked();
-            AppLockPreference pref = new AppLockPreference(getPrefContext());
+            AppLockPreference pref = new AppLockPreference(getPrefContext(), mAppLockManager,
+                    packageName);
             pref.setTitle(label);
             pref.setIcon(icon);
             pref.setKey(packageName);
@@ -389,8 +392,10 @@ public class AppLockSettings extends SubSettings {
         private void updateCategoryVisibility(int lockedApps, int unlockedApps) {
             if (lockedApps == 0) {
                 mLocked.setVisible(false);
+                mNotifInfo.setVisible(false);
             } else {
                 mLocked.setVisible(true);
+                mNotifInfo.setVisible(true);
             }
             if (unlockedApps == 0) {
                 mUnlocked.setVisible(false);
