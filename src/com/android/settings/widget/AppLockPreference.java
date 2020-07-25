@@ -16,26 +16,115 @@
 
 package com.android.settings.widget;
 
+import android.app.AppLockManager;
 import android.content.Context;
-import android.util.AttributeSet;
+import android.widget.ImageView;
+import android.view.View;
 
 import androidx.preference.CheckBoxPreference;
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 
 public class AppLockPreference extends CheckBoxPreference {
 
-    public AppLockPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    private final AppLockManager mAppLockManager;
+    private final String mPackageName;
 
-        setLayoutResource(R.layout.preference_app);
+    private ImageView mNotificationImage;
+    private View mNotifFrame;
+
+    public AppLockPreference(Context context, AppLockManager am, String pkg) {
+        super(context, null);
+        mAppLockManager = am;
+        mPackageName = pkg;
+
+        setLayoutResource(R.layout.preference_applock);
         setWidgetLayoutResource(R.layout.preference_widget_applock);
 
         setSummaryOn(R.string.applock_locked);
         setSummaryOff(R.string.applock_unlocked);
     }
 
-    public AppLockPreference(Context context) {
-        this(context, null);
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
+
+        mNotificationImage = (ImageView) view.findViewById(R.id.notification_img);
+        mNotifFrame = (View) view.findViewById(R.id.notification_frame);
+        mNotifFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean hide = mAppLockManager.getAppNotificationHide(mPackageName);
+                mAppLockManager.setAppNotificationHide(mPackageName, !hide);
+                mNotificationImage.setImageResource(hide ? R.drawable.ic_audio_notifications
+                        : R.drawable.ic_audio_notifications_off_24dp);
+                String toolTip = getContext().getString(hide ? R.string.applock_show_notif
+                        : R.string.applock_hide_notif);
+                v.setTooltipText(toolTip);
+                v.performLongClick();
+            }
+        });
+        boolean hiding = mAppLockManager.getAppNotificationHide(mPackageName);
+        String toolTip = getContext().getString(hiding ? R.string.applock_hide_notif
+                : R.string.applock_show_notif);
+        mNotifFrame.setTooltipText(toolTip);
+        mNotificationImage.setImageResource(hiding ? R.drawable.ic_audio_notifications_off_24dp
+                : R.drawable.ic_audio_notifications);
+        updateNotifVis();
+    }
+
+    public void startHintAnimation() {
+        mNotifFrame.postOnAnimationDelayed(
+                getSinglePressFor(mNotifFrame), 200);
+    }
+
+    private void updateNotifVis() {
+        if (mNotifFrame != null) {
+            if (isChecked() && mNotifFrame.getVisibility() == View.GONE) {
+                mNotifFrame.setAlpha(0);
+                mNotifFrame.setVisibility(View.VISIBLE);
+                mNotifFrame.animate()
+                    .alpha(1)
+                    .setDuration(300)
+                    .withEndAction(() -> {
+                        if (isChecked()) {
+                            startHintAnimation();
+                        } else {
+                            mNotifFrame.setVisibility(View.GONE);
+                        }
+                    })
+                    .start();
+            } else if (isChecked()) {
+                mNotifFrame.setAlpha(1);
+                mNotifFrame.setVisibility(View.VISIBLE);
+            } else if (!isChecked()) {
+                if (mNotifFrame.getVisibility() == View.VISIBLE && mNotifFrame.getAlpha() == 1) {
+                    mNotifFrame.animate()
+                        .alpha(0)
+                        .setDuration(300)
+                        .withEndAction(() -> {
+                            mNotifFrame.setAlpha(1);
+                            mNotifFrame.setVisibility(isChecked() ? View.VISIBLE : View.GONE);
+                        })
+                        .start();
+                } else {
+                    mNotifFrame.setVisibility(View.GONE);
+                }
+            }
+        }
+    }
+
+    private Runnable getSinglePressFor(View v) {
+        return () -> {
+            v.setPressed(true);
+            v.postOnAnimationDelayed(getSingleUnpressFor(v), 200);
+        };
+    }
+
+    private Runnable getSingleUnpressFor(View v) {
+        return () -> {
+            v.setPressed(false);
+        };
     }
 }
