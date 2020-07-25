@@ -48,7 +48,7 @@ public class LinkedVolumesPreferenceController extends TogglePreferenceControlle
     @Override
     public boolean isChecked() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                 Settings.Secure.VOLUME_LINK_NOTIFICATION, 0) == 1;
+                 Settings.Secure.VOLUME_LINK_NOTIFICATION, 1) == 1;
     }
 
     @Override
