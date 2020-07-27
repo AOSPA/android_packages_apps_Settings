@@ -34,6 +34,13 @@
         android:title="@string/vibrate_on_touch_title"
         android:summary="@string/vibrate_on_touch_summary"/>
 
+    <!-- Fingerprint authentication -->
+    <SwitchPreference
+        android:key="sucess_vib"
+        android:title="@string/sucess_vib_title"
+        android:summary="@string/sucess_vib_summary"
+        settings:controller="com.android.settings.notification.AuthenticationVibrationPreferenceController"/>
+
     <!-- Also vibrate for calls -->
     <SwitchPreference
         android:key="vibrate_when_ringing"
