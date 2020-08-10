@@ -337,6 +337,8 @@ public class WifiDppUtils {
         String security;
         if (softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
             security = WifiQrCode.SECURITY_WPA_PSK;
+        } else if (softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION) {
+            security = WifiQrCode.SECURITY_SAE;
         } else {
             security = WifiQrCode.SECURITY_NO_PASSWORD;
         }
@@ -484,6 +486,8 @@ public class WifiDppUtils {
         // it supports PSK and WEP and non security
         // KeyMgmt.NONE is for WEP or non security
         return softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
+                || softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION
+                || softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE
                 || softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OPEN;
     }
 

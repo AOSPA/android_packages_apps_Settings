@@ -30,6 +30,8 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferenceController {
 
@@ -41,11 +43,13 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     private int mBandIndex;
     private int mSecurityType;
     private boolean isVendorDualApSupported;
+    private final Context mContext;
 
     public WifiTetherApBandPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
         final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
+        mContext = context;
 
         isVendorDualApSupported = context.getResources().getBoolean(
             com.android.internal.R.bool.config_wifi_dual_sap_mode_enabled);
@@ -59,7 +63,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         if (config == null) {
             mBandIndex = SoftApConfiguration.BAND_2GHZ;
             Log.d(TAG, "Updating band index to BAND_2GHZ because no config");
-        } else if (is5GhzBandSupported()) {
+        } else if (is5GhzBandSupported() || is6GhzBandSupported()) {
             mBandIndex = validateSelection(config);
             Log.d(TAG, "Updating band index to " + mBandIndex);
         } else {
@@ -74,7 +78,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         preference.setEntries(mBandSummaries);
         preference.setEntryValues(mBandEntries);
 
-        if (!is5GhzBandSupported()) {
+        if (!is5GhzBandSupported() && !is6GhzBandSupported()) {
             preference.setEnabled(false);
             preference.setSummary(R.string.wifi_ap_choose_2G);
         } else {
@@ -88,10 +92,11 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         switch (mBandIndex) {
             case SoftApConfiguration.BAND_2GHZ:
                 return mBandSummaries[0];
-            case SoftApConfiguration.BAND_5GHZ:
-                return mBandSummaries[1];
+            case SoftApConfiguration.BAND_5GHZ | SoftApConfiguration.BAND_2GHZ:
+            case SoftApConfiguration.BAND_6GHZ | SoftApConfiguration.BAND_2GHZ:
             case SoftApConfiguration.BAND_DUAL:
-                return mBandSummaries[2];
+                final ListPreference preference = (ListPreference) mPreference;
+                return mBandSummaries[preference.findIndexOfValue(String.valueOf(mBandIndex))];
             default:
                 return mContext.getString(R.string.wifi_ap_prefer_5G);
         }
@@ -128,11 +133,14 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         // unsupported states:
         // 1: BAND_5GHZ only - include 2GHZ since some of countries doesn't support 5G hotspot
         // 2: no 5 GHZ support means we can't have BAND_5GHZ - default to 2GHZ
+        // 3: no 6 GHZ support means we can't have AP_BAND_6GHZ - default to 2GHZ
         if (SoftApConfiguration.BAND_5GHZ == band) {
             if (!is5GhzBandSupported()) {
                 return SoftApConfiguration.BAND_2GHZ;
             }
             return SoftApConfiguration.BAND_5GHZ | SoftApConfiguration.BAND_2GHZ;
+        } else if (!is6GhzBandSupported() && SoftApConfiguration.BAND_6GHZ == band) {
+            return SoftApConfiguration.BAND_2GHZ;
         }
 
         return band;
@@ -147,23 +155,42 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     @VisibleForTesting
     void updatePreferenceEntries() {
         Resources res = mContext.getResources();
-        int entriesRes = R.array.wifi_ap_band;
-        int summariesRes = R.array.wifi_ap_band_summary;
-        if (isVendorDualApSupported && mSecurityType != SoftApConfiguration.SECURITY_TYPE_OWE) {
-            // change the list option if AP+AP is supproted and selected security type is not OWE
-            entriesRes = R.array.wifi_ap_band_vendor_config_full;
-            summariesRes = R.array.wifi_ap_band_vendor_summary_full;
-        } else if (mSecurityType == SoftApConfiguration.SECURITY_TYPE_OWE) {
-            entriesRes = R.array.wifi_ap_band_vendor_config_no_dual;
-            summariesRes = R.array.wifi_ap_band_vendor_summary_no_dual;
+        ArrayList<String> bandEntries =  new ArrayList<String>();
+        ArrayList<String> bandSummaries =  new ArrayList<String>();
+        // Add 2GHz band
+        bandEntries.add(String.valueOf(SoftApConfiguration.BAND_2GHZ));
+        bandSummaries.add(mContext.getString(R.string.wifi_ap_choose_2G));
+        // Add 5GHz band
+        if (is5GhzBandSupported()) {
+            bandEntries.add(String.valueOf(SoftApConfiguration.BAND_5GHZ | SoftApConfiguration.BAND_2GHZ));
+            bandSummaries.add(mContext.getString(R.string.wifi_ap_prefer_5G));
         }
-        mBandEntries = res.getStringArray(entriesRes);
-        mBandSummaries = res.getStringArray(summariesRes);
+        // Add 6GHz band
+        if (is6GhzBandSupported()) {
+            bandEntries.add(String.valueOf(SoftApConfiguration.BAND_6GHZ | SoftApConfiguration.BAND_2GHZ));
+            bandSummaries.add(mContext.getString(R.string.wifi_ap_prefer_6G));
+        }
+        // change the list option if AP+AP is supproted and selected security type is not OWE
+        if (isVendorDualApSupported && mSecurityType != SoftApConfiguration.SECURITY_TYPE_OWE &&
+            (is5GhzBandSupported())) {
+            bandEntries.add(String.valueOf(SoftApConfiguration.BAND_DUAL));
+            bandSummaries.add(mContext.getString(R.string.wifi_ap_choose_vendor_dual_band));
+        }
+        mBandEntries = bandEntries.toArray(new String[bandEntries.size()]);
+        mBandSummaries = bandSummaries.toArray(new String[bandSummaries.size()]);
     }
 
     private boolean is5GhzBandSupported() {
         final String countryCode = mWifiManager.getCountryCode();
         if (!mWifiManager.is5GHzBandSupported() || countryCode == null) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean is6GhzBandSupported() {
+        final String countryCode = mWifiManager.getCountryCode();
+        if (!mWifiManager.is6GHzBandSupported() || countryCode == null) {
             return false;
         }
         return true;
