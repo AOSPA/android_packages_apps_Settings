@@ -26,10 +26,12 @@ import android.os.Looper;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
+import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -61,6 +63,9 @@ public class EnabledNetworkModePreferenceController extends
     private TelephonyManager mTelephonyManager;
     private CarrierConfigManager mCarrierConfigManager;
     private PreferenceEntriesBuilder mBuilder;
+    private PhoneCallStateListener mPhoneStateListener;
+    @VisibleForTesting
+    Integer mCallState;
 
     // Local cache for Primary Card and Subsidy Lock related vendor properties. Reading these
     // properties are a costly affair since they involve two IPC calls, an AIDL and another HIDL.
@@ -100,6 +105,10 @@ public class EnabledNetworkModePreferenceController extends
         if (mPreferredNetworkModeObserver == null || mSubsidySettingsObserver == null) {
             return;
         }
+        if (mPhoneStateListener != null) {
+            mPhoneStateListener.register(mContext, mSubId);
+        }
+
         loadPrimaryCardAndSubsidyLockValues();
         mPreferredNetworkModeObserver.register(mContext, mSubId);
         if (mIsSubsidyLockFeatureEnabled) {
@@ -113,6 +122,9 @@ public class EnabledNetworkModePreferenceController extends
     public void onStop() {
         if (mPreferredNetworkModeObserver == null) {
             return;
+        }
+        if (mPhoneStateListener != null) {
+            mPhoneStateListener.unregister();
         }
         mPreferredNetworkModeObserver.unregister(mContext);
         if (mSubsidySettingsObserver != null) {
@@ -139,6 +151,7 @@ public class EnabledNetworkModePreferenceController extends
         listPreference.setEntryValues(mBuilder.getEntryValues());
         listPreference.setValue(Integer.toString(mBuilder.getSelectedEntryValue()));
         listPreference.setSummary(mBuilder.getSummary());
+        listPreference.setEnabled(isCallStateIdle());
     }
 
     @Override
@@ -163,6 +176,9 @@ public class EnabledNetworkModePreferenceController extends
         mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
         mBuilder = new PreferenceEntriesBuilder(mContext, mSubId);
 
+        if (mPhoneStateListener == null) {
+            mPhoneStateListener = new PhoneCallStateListener();
+        }
         if (mPreferredNetworkModeObserver == null) {
             mPreferredNetworkModeObserver = new PreferredNetworkModeContentObserver(
                     new Handler(Looper.getMainLooper()));
@@ -877,6 +893,44 @@ public class EnabledNetworkModePreferenceController extends
             Log.d(LOG_TAG, "mIsPrimaryCardEnabled: " + mIsPrimaryCardEnabled);
             Log.d(LOG_TAG, "mIsPrimaryCardLWEnabled: " + mIsPrimaryCardLWEnabled);
             Log.d(LOG_TAG, "mIsSubsidyLockFeatureEnabled: " + mIsSubsidyLockFeatureEnabled);
+        }
+    }
+
+    private boolean isCallStateIdle() {
+        boolean callStateIdle = true;
+        if (mCallState != null && mCallState != TelephonyManager.CALL_STATE_IDLE) {
+            callStateIdle = false;
+        }
+        Log.d(LOG_TAG, "isCallStateIdle:" + callStateIdle);
+        return callStateIdle;
+    }
+
+    private class PhoneCallStateListener extends PhoneStateListener {
+
+        PhoneCallStateListener() {
+            super(Looper.getMainLooper());
+        }
+
+        private TelephonyManager mTelephonyManager;
+
+        @Override
+        public void onCallStateChanged(int state, String incomingNumber) {
+            mCallState = state;
+            updateState(mPreference);
+        }
+
+        public void register(Context context, int subId) {
+            mTelephonyManager = context.getSystemService(TelephonyManager.class);
+            if (SubscriptionManager.isValidSubscriptionId(subId)) {
+                mTelephonyManager = mTelephonyManager.createForSubscriptionId(subId);
+            }
+            mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
+
+        }
+
+        public void unregister() {
+            mCallState = null;
+            mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
         }
     }
 }

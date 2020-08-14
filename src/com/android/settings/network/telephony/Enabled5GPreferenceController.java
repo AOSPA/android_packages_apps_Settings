@@ -39,9 +39,11 @@ import android.os.Looper;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
+import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -64,9 +66,12 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
     private static final String TAG = "Enable5g";
 
     Preference mPreference;
+    private PhoneCallStateListener mPhoneStateListener;
     private CarrierConfigManager mCarrierConfigManager;
     private PersistableBundle mCarrierConfig;
     private TelephonyManager mTelephonyManager;
+    @VisibleForTesting
+    Integer mCallState;
 
     private ContentObserver mPreferredNetworkModeObserver;
     private ContentObserver mSubsidySettingsObserver;
@@ -95,6 +100,10 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
     }
 
     public Enabled5GPreferenceController init(int subId) {
+        if (mPhoneStateListener == null) {
+            mPhoneStateListener = new PhoneCallStateListener();
+        }
+
         if (SubscriptionManager.isValidSubscriptionId(mSubId) && mSubId == subId) {
             return this;
         }
@@ -136,6 +145,9 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
                 mPreferredNetworkModeObserver);
         mContext.registerReceiver(mDefaultDataChangedReceiver,
                 new IntentFilter(TelephonyIntents.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED));
+        if (mPhoneStateListener != null) {
+            mPhoneStateListener.register(mContext, mSubId);
+        }
     }
 
     @Override
@@ -145,6 +157,9 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
         }
         if (mDefaultDataChangedReceiver != null) {
             mContext.unregisterReceiver(mDefaultDataChangedReceiver);
+        }
+        if (mPhoneStateListener != null) {
+            mPhoneStateListener.unregister();
         }
     }
 
@@ -158,6 +173,7 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
                     Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
                     TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE));
         switchPreference.setChecked(isNrNetworkModeType(preferredNetworkBitMask));
+        switchPreference.setEnabled(isCallStateIdle());
     }
 
     @Override
@@ -208,5 +224,43 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
             return true;
         }
         return false;
+    }
+
+    boolean isCallStateIdle() {
+        boolean callStateIdle = true;
+        if (mCallState != null && mCallState != TelephonyManager.CALL_STATE_IDLE) {
+            callStateIdle = false;
+        }
+        Log.d(TAG, "isCallStateIdle:" + callStateIdle);
+        return callStateIdle;
+    }
+
+    private class PhoneCallStateListener extends PhoneStateListener {
+
+        PhoneCallStateListener() {
+            super(Looper.getMainLooper());
+        }
+
+        private TelephonyManager mTelephonyManager;
+
+        @Override
+        public void onCallStateChanged(int state, String incomingNumber) {
+            mCallState = state;
+            updateState(mPreference);
+        }
+
+        public void register(Context context, int subId) {
+            mTelephonyManager = context.getSystemService(TelephonyManager.class);
+            if (SubscriptionManager.isValidSubscriptionId(subId)) {
+                mTelephonyManager = mTelephonyManager.createForSubscriptionId(subId);
+            }
+            mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
+
+        }
+
+        public void unregister() {
+            mCallState = null;
+            mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
+        }
     }
 }
