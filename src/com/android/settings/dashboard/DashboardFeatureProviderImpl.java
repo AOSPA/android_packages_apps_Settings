@@ -58,6 +58,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.MasterSwitchPreference;
@@ -115,6 +116,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         final StringBuilder sb = new StringBuilder(DASHBOARD_TILE_PREF_KEY_PREFIX);
         final ComponentName component = tile.getIntent().getComponent();
+        if (!Utils.showSimCardTile(mContext) && component.getClassName()
+                .contains("SimSettingsActivity")) {
+            return null;
+        }
         sb.append(component.getClassName());
         return sb.toString();
     }
