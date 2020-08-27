@@ -38,6 +38,12 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     private static final String TAG = "WifiTetherApBandPref";
     private static final String PREF_KEY = "wifi_tether_network_ap_band";
 
+    // Predefined Band 5Ghz / 6Ghz combinations.
+    // 1- 5Ghz/6Ghz prefer (default): prefers 5Ghz/6Ghz, but supports 2Ghz also.
+    // 2- 5Ghz/6Ghz only: strict 5Ghz/6Ghz band.
+    private static final int BAND_5GHZ = SoftApConfiguration.BAND_5GHZ | SoftApConfiguration.BAND_2GHZ;
+    private static final int BAND_6GHZ = SoftApConfiguration.BAND_6GHZ | SoftApConfiguration.BAND_2GHZ;
+
     private String[] mBandEntries;
     private String[] mBandSummaries;
     private int mBandIndex;
@@ -92,8 +98,8 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         switch (mBandIndex) {
             case SoftApConfiguration.BAND_2GHZ:
                 return mBandSummaries[0];
-            case SoftApConfiguration.BAND_5GHZ | SoftApConfiguration.BAND_2GHZ:
-            case SoftApConfiguration.BAND_6GHZ | SoftApConfiguration.BAND_2GHZ:
+            case BAND_5GHZ:
+            case BAND_6GHZ:
             case SoftApConfiguration.BAND_DUAL:
                 final ListPreference preference = (ListPreference) mPreference;
                 return mBandSummaries[preference.findIndexOfValue(String.valueOf(mBandIndex))];
@@ -134,13 +140,16 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         // 1: BAND_5GHZ only - include 2GHZ since some of countries doesn't support 5G hotspot
         // 2: no 5 GHZ support means we can't have BAND_5GHZ - default to 2GHZ
         // 3: no 6 GHZ support means we can't have AP_BAND_6GHZ - default to 2GHZ
-        if (SoftApConfiguration.BAND_5GHZ == band) {
+        if (band == BAND_5GHZ) {
             if (!is5GhzBandSupported()) {
                 return SoftApConfiguration.BAND_2GHZ;
             }
-            return SoftApConfiguration.BAND_5GHZ | SoftApConfiguration.BAND_2GHZ;
-        } else if (!is6GhzBandSupported() && SoftApConfiguration.BAND_6GHZ == band) {
-            return SoftApConfiguration.BAND_2GHZ;
+            // fallthrough to return BAND_5GHZ
+        } else if (band == BAND_6GHZ) {
+            if (!is6GhzBandSupported()) {
+                return SoftApConfiguration.BAND_2GHZ;
+            }
+            // fallthrough to return BAND_6GHZ
         }
 
         return band;
@@ -162,12 +171,12 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         bandSummaries.add(mContext.getString(R.string.wifi_ap_choose_2G));
         // Add 5GHz band
         if (is5GhzBandSupported()) {
-            bandEntries.add(String.valueOf(SoftApConfiguration.BAND_5GHZ | SoftApConfiguration.BAND_2GHZ));
+            bandEntries.add(String.valueOf(BAND_5GHZ));
             bandSummaries.add(mContext.getString(R.string.wifi_ap_prefer_5G));
         }
         // Add 6GHz band
         if (is6GhzBandSupported()) {
-            bandEntries.add(String.valueOf(SoftApConfiguration.BAND_6GHZ | SoftApConfiguration.BAND_2GHZ));
+            bandEntries.add(String.valueOf(BAND_6GHZ));
             bandSummaries.add(mContext.getString(R.string.wifi_ap_prefer_6G));
         }
         // change the list option if AP+AP is supproted and selected security type is not OWE
