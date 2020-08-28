@@ -29,6 +29,7 @@ import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -142,7 +143,13 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
              preference.setEnabled(false);
         } else {
-            if (mTelephonyManager.getServiceState().getRoaming()) {
+            final ServiceState serviceState = mTelephonyManager.getServiceState();
+            if (serviceState == null) {
+                preference.setEnabled(false);
+                return;
+            }
+
+            if (serviceState.getRoaming()) {
                 preference.setEnabled(true);
             } else {
                 preference.setEnabled(!mOnlyAutoSelectInHome);
