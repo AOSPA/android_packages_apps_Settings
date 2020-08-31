@@ -50,6 +50,9 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     private int mSecurityType;
     private boolean isVendorDualApSupported;
     private final Context mContext;
+    private boolean m5GHzSupported;
+    private boolean m6GHzSupported;
+    private String mCountryCode;
 
     public WifiTetherApBandPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
@@ -60,12 +63,14 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         isVendorDualApSupported = context.getResources().getBoolean(
             com.android.internal.R.bool.config_wifi_dual_sap_mode_enabled);
 
+        syncBandSupportAndCountryCode();
         updatePreferenceEntries(config);
     }
 
     @Override
     public void updateDisplay() {
         final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
+        syncBandSupportAndCountryCode();
         if (config == null) {
             mBandIndex = SoftApConfiguration.BAND_2GHZ;
             Log.d(TAG, "Updating band index to BAND_2GHZ because no config");
@@ -116,6 +121,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        syncBandSupportAndCountryCode();
         mBandIndex = validateSelection(Integer.parseInt((String) newValue));
         Log.d(TAG, "Band preference changed, updating band index to " + mBandIndex);
         preference.setSummary(getConfigSummary());
@@ -189,17 +195,22 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         mBandSummaries = bandSummaries.toArray(new String[bandSummaries.size()]);
     }
 
+    // This is used to reduce IPC calls to framework.
+    private void syncBandSupportAndCountryCode() {
+        m5GHzSupported = mWifiManager.is5GHzBandSupported();
+        m6GHzSupported = mWifiManager.is6GHzBandSupported();
+        mCountryCode   = mWifiManager.getCountryCode();
+    }
+
     private boolean is5GhzBandSupported() {
-        final String countryCode = mWifiManager.getCountryCode();
-        if (!mWifiManager.is5GHzBandSupported() || countryCode == null) {
+        if (!m5GHzSupported || mCountryCode == null) {
             return false;
         }
         return true;
     }
 
     private boolean is6GhzBandSupported() {
-        final String countryCode = mWifiManager.getCountryCode();
-        if (!mWifiManager.is6GHzBandSupported() || countryCode == null) {
+        if (!m6GHzSupported || mCountryCode == null) {
             return false;
         }
         return true;
