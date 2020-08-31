@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Usa tu rostro para autenticarte"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Iniciar"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Si el desbloqueo facial de accesibilidad está desactivado, es posible que algunos pasos de la configuración no funcionen correctamente con TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Atrás"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Seguir configurando"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Usar config. de accesibilidad"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -903,7 +906,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Centra el código QR debajo para conectarte a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Escanea un código QR para unirte a la red Wi-Fi"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Compartir Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Escanea este código QR para conectarte a \"<xliff:g id="SSID">%1$s</xliff:g>\" y compartir la contraseña"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Escanea este código QR con otro dispositivo para unirte a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Escanea este código QR para conectarte a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Vuelve a intentarlo. Si el problema persiste, comunícate con el fabricante del dispositivo"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Se produjo un error"</string>
@@ -1329,7 +1332,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Versión de Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"Actualización de seguridad de Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Modelo"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Modelo: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Modelo y hardware"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Versión de hardware"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ID del equipo"</string>
@@ -2117,7 +2119,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferencias de subtítulos"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ampliación"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Área de ampliación"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Habilitar ampliación"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Selecciona las áreas en las que quieres implementar la ampliación de pantalla al usar la función"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Pantalla completa"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Parte de la pantalla"</string>
@@ -3326,11 +3327,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Activar los sonidos"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Subtitulado instantáneo"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Subtitular automáticamente"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Ninguno"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="other">Se establecieron <xliff:g id="ON_COUNT">%d</xliff:g> programas</item>
-      <item quantity="one">Se estableció 1 programa</item>
-    </plurals>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ninguno}=1{Se estableció 1 programa}other{Se establecieron # programas}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"No interrumpir"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Solo recibe notificaciones de las personas y apps que más te interesan"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limitar las interrupciones"</string>
@@ -3398,20 +3395,12 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Solo prioridad"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Activado/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"Desactivado/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"Desactivado"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Activado"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Preguntar siempre"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Hasta que lo desactives"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> horas</item>
-      <item quantity="one">1 hora</item>
-    </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g> minutos"</string>
-    <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> programas se pueden actualizar automáticamente</item>
-      <item quantity="one">1 programa se puede actualizar automáticamente</item>
-    </plurals>
+    <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 hora}other{# horas}}"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 minuto}other{# minutos}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Desactivada}=1{Desactivada/1 programa se puede activar automáticamente}other{Desactivada/# programas se pueden activar automáticamente}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"Pueden suspender la función No interrumpir:"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Personas"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
@@ -3457,6 +3446,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Configurar automáticamente las notificaciones de menor prioridad a silenciosas"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Clasificación de notificaciones adaptables"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Clasificar las notificaciones automáticamente por relevancia"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Comentarios sobre notificaciones adaptables"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Indica los ajustes realizados a las notificaciones y muestra la opción para enviar comentarios al sistema"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Respuestas y acciones sugeridas"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Mostrar automáticamente respuestas y acciones sugeridas"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Visualiza notificaciones recientes y pospuestas"</string>
@@ -3748,11 +3739,7 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Todas las conversaciones"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Conversaciones prioritarias"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ninguna"</string>
-    <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> conversaciones</item>
-      <item quantity="one">1 conversación</item>
-    </plurals>
-    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"Ninguna"</string>
+    <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Ninguna}=1{1 conversación}other{# conversaciones}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Quiénes pueden interrumpir"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Llamadas"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Llamadas"</string>
@@ -3761,11 +3748,7 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"A fin de asegurarte de que el dispositivo suene cuando recibes llamadas permitidas, verifica que esté configurado para emitir un sonido"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Se bloquearán las llamadas entrantes durante \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Puedes ajustar la configuración para permitir que tus amigos, familia y otros contactos se comuniquen contigo."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Contactos destacados"</string>
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
-      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> más</item>
-      <item quantity="one">1 más</item>
-    </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"Ninguno"</string>
+    <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Ninguno}=1{{contact_1}}=2{{contact_1} y {contact_2}}=3{{contact_1}, {contact_2} y {contact_3}}other{{contact_1}, {contact_2} y # más}}"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Mensajes"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"mensajes"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Mensajes"</string>
@@ -3774,11 +3757,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Se bloquearán los mensajes entrantes durante \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Puedes ajustar la configuración para permitir que tus amigos, familiares y otros contactos se comuniquen contigo."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Puedes recibir todos los mensajes"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Puedes recibir todas las llamadas"</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"Ninguno"</string>
-    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
-      <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> contactos</item>
-      <item quantity="one">1 contacto</item>
-    </plurals>
+    <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{Ninguno}=1{1 contacto}other{# contactos}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Cualquier usuario"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Contactos"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Contactos destacados"</string>
@@ -3816,22 +3795,14 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Todas las notificaciones"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Algunas notificaciones"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Las personas seleccionadas podrán comunicarse contigo, incluso si no permites que las apps causen interrupciones"</string>
-    <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> pueden interrumpir</item>
-      <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> puede interrumpir</item>
-    </plurals>
-    <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> más"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Ninguna app puede interrumpir}=1{{app_1} puede interrumpir}=2{{app_1} y {app_2} pueden interrumpir}=3{{app_1}, {app_2} y {app_3} pueden interrumpir}other{{app_1}, {app_2} y # más pueden interrumpir}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Apps"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Todas las notificaciones"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Algunas notificaciones"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notificaciones que pueden interrumpir"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Permitir todas las notificaciones"</string>
-    <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="other"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> pueden interrumpir</item>
-      <item quantity="one"><xliff:g id="SOUND_CATEGORY">%s</xliff:g> puede interrumpir</item>
-    </plurals>
-    <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"Nada puede interrumpir"</string>
-    <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"<xliff:g id="NUMBER">%d</xliff:g> más"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Nada puede interrumpir}=1{{sound_category_1} puede interrumpir}=2{{sound_category_1} y {sound_category_2} pueden interrumpir}=3{{sound_category_1}, {sound_category_2} y {sound_category_3} pueden interrumpir}other{{sound_category_1}, {sound_category_2} y # más pueden interrumpir}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Nada puede interrumpir"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Ninguna persona puede interrumpir"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Algunas personas pueden interrumpir"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Cualquier persona puede interrumpir"</string>
@@ -4473,6 +4444,14 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Presionar la pantalla dos veces para revisar el teléfono"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Presionar dos veces la tablet para revisarla"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Presionar dos veces el dispositivo para revisarlo"</string>
+    <string name="one_handed_title" msgid="1741600445540072513">"Modo de una mano"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Usar el modo de una mano"</string>
+    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Salir del modo cuando se cambia de app"</string>
+    <string name="one_handed_timeout_title" msgid="8851767822595789976">"Tiempo de espera"</string>
+    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 segundos"</string>
+    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 segundos"</string>
+    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 segundos"</string>
+    <string name="keywords_one_handed" msgid="969440592493034101">"accesibilidad"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Para consultar la hora, las notificaciones y otra información, presiona dos veces la pantalla."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Levantar el teléfono para revisarlo"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Levanta la tablet para revisarla"</string>
@@ -4761,6 +4740,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Datos móviles"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Acceder a los datos usando la red móvil"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"El teléfono cambiará a este proveedor automáticamente en cuanto esté dentro del rango"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"No hay ninguna tarjeta SIM disponible"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Preferencia de llamadas"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Preferencia de SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Preguntar siempre"</string>

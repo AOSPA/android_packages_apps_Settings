@@ -585,8 +585,8 @@
     <style name="SliceRow.Slider.LargeIcon">
         <!-- 10dp start padding for the start icon -->
         <item name="titleItemStartPadding">10dp</item>
-        <!-- Layout is 48dp and actual icon size is 48-(iconSize/2) -->
-        <item name="iconSize">12dp</item>
+        <!-- Title icon size -->
+        <item name="iconSize">36dp</item>
         <!-- RecycleView item animator -->
         <item name="disableRecyclerViewItemAnimator">true</item>
     </style>
@@ -618,7 +618,7 @@
 
     <style name="TextAppearance.NotificationImportanceButton">
         <item name="android:textSize">@dimen/notification_importance_button_text</item>
-        <item name="android:fontFamily">@*android:string/config_bodyFontFamilyMedium</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:gravity">center</item>
     </style>
 

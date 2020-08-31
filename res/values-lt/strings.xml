@@ -335,6 +335,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Autentifikavimas naudojant veidą"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Pradėti"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Jei pritaikomumo atrakinimo pagal veidą funkcija išjungta, kai kurie sąrankos veiksmai gali tinkamai neveikti su „TalkBack“."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Grįžti"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Tęsti sąranką"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Naud. pritaikymo neįgal. sąranką"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -937,7 +940,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Centruokite toliau pateiktą QR kodą, kad galėtumėte prisijungti prie „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Prisijunkite prie „Wi‑Fi“ nuskaitydami QR kodą"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"„Wi‑Fi“ bendrinimas"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Nuskaitykite šį QR kodą, kad prisijungtumėte prie „<xliff:g id="SSID">%1$s</xliff:g>” ir galėtumėte bendrinti slaptažodį"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Nuskaitykite šį QR kodą kitu įrenginiu, kad prisijungtumėte prie „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Nuskaitykite šį QR kodą, kad prisijungtumėte prie „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Bandykite dar kartą. Jei problema išlieka, susisiekite su įrenginio gamintoju"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Iškilo problema"</string>
@@ -1371,7 +1374,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"„Android“ versija"</string>
     <string name="security_patch" msgid="4071756145347865382">"„Android“ saugos naujinys"</string>
     <string name="model_info" msgid="8997566254717810904">"Modelis"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Modelis: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Modelis, aparat. įranga"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Aparatinės įrangos versija"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Įrangos ID"</string>
@@ -2165,7 +2167,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Subtitrų nuostatos"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Didinimas"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Didinimo sritis"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Didinimo įgalinimas"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Pasirinkite didinimo sritį (-is), kurią (-ias) norite naudoti, kai didinate ekraną"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Visas ekranas"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Ekrano dalis"</string>
@@ -3414,13 +3415,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Įjungti garsus"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Subtitrai realiuoju laiku"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Taikyti automatinius medijos subtitrus"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Nėra"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="one">Nustatytas <xliff:g id="ON_COUNT">%d</xliff:g> tvarkaraštis</item>
-      <item quantity="few">Nustatyti <xliff:g id="ON_COUNT">%d</xliff:g> tvarkaraščiai</item>
-      <item quantity="many">Nustatyta <xliff:g id="ON_COUNT">%d</xliff:g> tvarkaraščio</item>
-      <item quantity="other">Nustatyta <xliff:g id="ON_COUNT">%d</xliff:g> tvarkaraščių</item>
-    </plurals>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nė vieno}=1{Nustatytas 1 tvarkaraštis}one{Nustatytas # tvarkaraštis}few{Nustatyti # tvarkaraščiai}many{Nustatyta # tvarkaraščio}other{Nustatyta # tvarkaraščių}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Netrukdymo režimas"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Gauti pranešimus tik iš svarbių žmonių ar įvykių"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Pertraukčių apribojimas"</string>
@@ -3488,24 +3483,12 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Tik prioritetiniai"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Įjungta / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"Išjungta / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"Išjungta"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Įjungta"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Klausti kaskart"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Kol išjungsite"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
-      <item quantity="one"><xliff:g id="NUM_HOURS">%d</xliff:g> valanda</item>
-      <item quantity="few"><xliff:g id="NUM_HOURS">%d</xliff:g> valandos</item>
-      <item quantity="many"><xliff:g id="NUM_HOURS">%d</xliff:g> valandos</item>
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> valandų</item>
-    </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g> min."</string>
-    <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> tvarkaraštis gali įsijungti automatiškai</item>
-      <item quantity="few"><xliff:g id="ON_COUNT">%d</xliff:g> tvarkaraščiai gali įsijungti automatiškai</item>
-      <item quantity="many"><xliff:g id="ON_COUNT">%d</xliff:g> tvarkaraščio gali įsijungti automatiškai</item>
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> tvarkaraščių gali įsijungti automatiškai</item>
-    </plurals>
+    <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 valanda}one{# valanda}few{# valandos}many{# valandos}other{# valandų}}"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 minutė}one{# minutė}few{# minutės}many{# minutės}other{# minučių}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Išjungta}=1{Išjungta; 1 tvarkaraštis gali įsijungti automatiškai}one{Išjungta; # tvarkaraštis gali įsijungti automatiškai}few{Išjungta; # tvarkaraščiai gali įsijungti automatiškai}many{Išjungta; # tvarkaraščio gali įsijungti automatiškai}other{Išjungta; # tvarkaraščių gali įsijungti automatiškai}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"Kas gali trikdyti netrukdymo režimu"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Žmonės"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Programos"</string>
@@ -3551,6 +3534,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Žemesnio prioriteto pranešimus automatiškai nustatyti kaip netrikdančius"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Prisitaikantis pranešimų reitingavimas"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Automatiškai reitinguoti pranešimus pagal atitikimą"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Atsiliepimai apie adaptyviuosius pranešimus"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Nurodyti pranešimų koregavimus ir rodyti parinktį teikti atsiliepimus apie sistemą"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Siūlomi veiksmai ir atsakymai"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Automatiškai rodyti siūlomus veiksmus ir atsakymus"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Naujausių ir atidėtų pranešimų rodymas"</string>
@@ -3858,13 +3843,7 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Visi pokalbiai"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Svarbiausi pokalbiai"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Nėra"</string>
-    <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="one"><xliff:g id="CONVERSATIONS">%d</xliff:g> pokalbis</item>
-      <item quantity="few"><xliff:g id="CONVERSATIONS">%d</xliff:g> pokalbiai</item>
-      <item quantity="many"><xliff:g id="CONVERSATIONS">%d</xliff:g> pokalbio</item>
-      <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> pokalbių</item>
-    </plurals>
-    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"Nėra"</string>
+    <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Nė vieno}=1{1 pokalbis}one{# pokalbis}few{# pokalbiai}many{# pokalbio}other{# pokalbių}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Kas gali trikdyti"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Skambučiai"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Skambučiai"</string>
@@ -3873,13 +3852,7 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Kad užtikrintumėte, jog įrenginys skambės priimant leidžiamus skambučius, patikrinkite, ar jame nustatytas skambėjimo režimas"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Veikiant „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“ blokuojami gaunamieji skambučiai. Galite koreguoti nustatymus ir leisti draugams, šeimos nariams ar kitiems kontaktams jus pasiekti."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Žvaigždute pažymėti kontaktai"</string>
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
-      <item quantity="one">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontaktas</item>
-      <item quantity="few">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontaktai</item>
-      <item quantity="many">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontakto</item>
-      <item quantity="other">Dar <xliff:g id="NUM_PEOPLE">%d</xliff:g> kontaktų</item>
-    </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"Nėra"</string>
+    <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Nė vieno}=1{{contact_1}}=2{{contact_1} ir {contact_2}}=3{{contact_1}, {contact_2} ir {contact_3}}one{{contact_1}, {contact_2} ir dar # žmogus}few{{contact_1}, {contact_2} ir dar # žmonės}many{{contact_1}, {contact_2} ir dar # žmogaus}other{{contact_1}, {contact_2} ir dar # žmonių}}"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Pranešimai"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"pranešimai"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Pranešimai"</string>
@@ -3888,13 +3861,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Veikiant „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“ blokuojami gaunami pranešimai. Galite koreguoti nustatymus ir leisti draugams, šeimos nariams ar kitiems kontaktams jus pasiekti."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Visi pranešimai gali jus pasiekti"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Visi skambučiai gali jus pasiekti"</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"Nėra"</string>
-    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
-      <item quantity="one"><xliff:g id="NUM_CONTACTS">%d</xliff:g> kontaktas</item>
-      <item quantity="few"><xliff:g id="NUM_CONTACTS">%d</xliff:g> kontaktai</item>
-      <item quantity="many"><xliff:g id="NUM_CONTACTS">%d</xliff:g> kontakto</item>
-      <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> kontaktų</item>
-    </plurals>
+    <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{Nė vieno}=1{1 kontaktas}one{# kontaktas}few{# kontaktai}many{# kontakto}other{# kontaktų}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Bet kas"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontaktai"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Žvaigždutėmis pažymėti kontaktai"</string>
@@ -3932,26 +3899,14 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Visi pranešimai"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Kai kurie pranešimai"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Pasirinkti žmonės vis tiek gali jus pasiekti, net jei neleidžiate programoms trikdyti"</string>
-    <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="one">„<xliff:g id="APP_NAMES">%s</xliff:g>“ gali trikdyti</item>
-      <item quantity="few">„<xliff:g id="APP_NAMES">%s</xliff:g>“ gali trikdyti</item>
-      <item quantity="many">„<xliff:g id="APP_NAMES">%s</xliff:g>“ gali trikdyti</item>
-      <item quantity="other">„<xliff:g id="APP_NAMES">%s</xliff:g>“ gali trikdyti</item>
-    </plurals>
-    <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"Dar <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Jokios programos negali trikdyti}=1{„{app_1}“ gali trikdyti}=2{„{app_1}“ ir „{app_2}“ gali trikdyti}=3{„{app_1}“, „{app_2}“ ir „{app_3}“ gali trikdyti}one{„{app_1}“, „{app_2}“ ir dar # programa gali trikdyti}few{„{app_1}“, „{app_2}“ ir dar # programos gali trikdyti}many{„{app_1}“, „{app_2}“ ir dar # programos gali trikdyti}other{„{app_1}“, „{app_2}“ ir dar # programų gali trikdyti}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Programos"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Visi pranešimai"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Kai kurie pranešimai"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Pranešimai, kurie gali trikdyti"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Leisti visus pranešimus"</string>
-    <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="one">„<xliff:g id="SOUND_CATEGORIES">%s</xliff:g>“ gali trikdyti</item>
-      <item quantity="few">„<xliff:g id="SOUND_CATEGORIES">%s</xliff:g>“ gali trikdyti</item>
-      <item quantity="many">„<xliff:g id="SOUND_CATEGORIES">%s</xliff:g>“ gali trikdyti</item>
-      <item quantity="other">„<xliff:g id="SOUND_CATEGORIES">%s</xliff:g>“ gali trikdyti</item>
-    </plurals>
-    <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"Niekas negali trikdyti"</string>
-    <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"Dar <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Niekas negali trikdyti}=1{„{sound_category_1}“ gali trikdyti}=2{„{sound_category_1}“ ir „{sound_category_2}“ gali trikdyti}=3{„{sound_category_1}“, „{sound_category_2}“ ir „{sound_category_3}“ gali trikdyti}one{„{sound_category_1}“, „{sound_category_2}“ ir dar # garsas gali trikdyti}few{„{sound_category_1}“, „{sound_category_2}“ ir dar # garsai gali trikdyti}many{„{sound_category_1}“, „{sound_category_2}“ ir dar # garso gali trikdyti}other{„{sound_category_1}“, „{sound_category_2}“ ir dar # garsų gali trikdyti}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Niekas negali trikdyti"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Niekas negali trikdyti"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Kai kurie žmonės gali trikdyti"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Visi žmonės gali trikdyti"</string>
@@ -4635,6 +4590,14 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Telefono tikrinimas dukart palietus"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Planšetinio kompiuterio tikrinimas dukart palietus"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Įrenginio tikrinimas dukart palietus"</string>
+    <string name="one_handed_title" msgid="1741600445540072513">"Vienos rankos režimas"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Naudoti vienos rankos režimą"</string>
+    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Išeiti perjungiant programas"</string>
+    <string name="one_handed_timeout_title" msgid="8851767822595789976">"Skirtasis laikas"</string>
+    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 sek."</string>
+    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 sek."</string>
+    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 sek."</string>
+    <string name="keywords_one_handed" msgid="969440592493034101">"pasiekiamumas"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Norėdami sužinoti laiką, peržiūrėti pranešimus ir kitą informaciją, dukart palieskite ekraną."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Telefono tikrinimas pakėlus"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Planšetinio kompiuterio tikrinimas pakėlus"</string>
@@ -4937,6 +4900,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Mobilieji duomenys"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Prieiga prie duomenų naudojant mobiliojo ryšio tinklą"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Telefone bus automatiškai perjungtos šio operatoriaus paslaugos, kai bus pasiekiamos"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Nepasiekiama jokia SIM kortelė"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Skambučių nuostata"</string>
     <string name="sms_preference" msgid="7742964962568219351">"SMS nuostata"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Klausti kaskart"</string>
