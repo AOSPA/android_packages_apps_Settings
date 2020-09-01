@@ -283,6 +283,16 @@
             android:summary="@string/wifi_coverage_extend_summary" />
 
         <SwitchPreference
+            android:key="softap_ocv"
+            android:title="@string/softap_ocv"
+            android:summary="@string/softap_ocv_summary" />
+
+        <SwitchPreference
+            android:key="softap_beacon_protection"
+            android:title="@string/softap_beacon_protection"
+            android:summary="@string/softap_beacon_protection_summary" />
+
+        <SwitchPreference
             android:key="wifi_verbose_logging"
             android:title="@string/wifi_verbose_logging"
             android:summary="@string/wifi_verbose_logging_summary" />
