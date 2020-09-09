@@ -181,7 +181,10 @@ public class NetworkOperatorPreference extends Preference {
     public OperatorInfo getOperatorInfo() {
         return new OperatorInfo(Objects.toString(mCellId.getOperatorAlphaLong(), ""),
                 Objects.toString(mCellId.getOperatorAlphaShort(), ""),
-                getOperatorNumeric());
+                getOperatorNumeric(),
+                // Send accessNetworkType as a parameter.
+                // This is converted to RadioAccessNetwork in the Telephony Framework.
+                getAccessNetworkType());
     }
 
     private int getIconIdForCell(CellInfo ci) {
