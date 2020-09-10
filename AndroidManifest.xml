@@ -934,6 +934,7 @@
                 android:value="com.android.settings.DisplaySettings" />
         </activity-alias>
             <activity android:name="Settings$SMQQtiFeedbackActivity"
+                android:exported="true"
                 android:label="@string/qtifeedback_settings_title"
                 android:icon="@drawable/ic_settings_qti_feedback"
                 android:enabled="false"
@@ -2841,6 +2842,7 @@
 
         <activity
             android:name="Settings$SimSettingsActivity"
+            android:exported="true"
             android:label="@string/sim_settings_title"
             android:icon="@drawable/ic_settings_sim"
             android:parentActivityName="Settings">
@@ -3622,6 +3624,7 @@
         </activity>
 
        <activity android:name=".network.telephony.UserPLMNListActivity"
+           android:exported="true"
            android:label="@string/uplmn_settings_title"
            android:configChanges="orientation|screenSize|keyboardHidden">
            <intent-filter>
@@ -3630,6 +3633,7 @@
         </activity>
 
         <activity android:name=".network.telephony.UserPLMNEditorActivity"
+            android:exported="true"
             android:label="@string/uplmn_settings_title"
             android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
