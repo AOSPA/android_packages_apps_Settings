@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothCodecStatus;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -30,6 +31,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.A2dpProfile;
+import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
@@ -47,7 +49,7 @@ import java.util.List;
  */
 public class BluetoothDetailsProfilesController extends BluetoothDetailsController
         implements Preference.OnPreferenceClickListener,
-        LocalBluetoothProfileManager.ServiceListener {
+        LocalBluetoothProfileManager.ServiceListener, BluetoothCallback {
     private static final String KEY_PROFILES_GROUP = "bluetooth_profiles";
     private static final String KEY_BOTTOM_PREFERENCE = "bottom_preference";
     private static final int ORDINAL = 99;
@@ -245,12 +247,14 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     public void onPause() {
         super.onPause();
         mProfileManager.removeServiceListener(this);
+        mManager.getEventManager().unregisterCallback(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mProfileManager.addServiceListener(this);
+        mManager.getEventManager().registerCallback(this);
     }
 
     @Override
@@ -261,6 +265,40 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     @Override
     public void onServiceDisconnected() {
         refresh();
+    }
+
+    private void updateA2dpHighQualityAudioPref() {
+        A2dpProfile a2dp = null;
+        for (LocalBluetoothProfile profile : getProfiles()) {
+            if (profile instanceof A2dpProfile) {
+                if (profile.isProfileReady()) {
+                    a2dp = (A2dpProfile)profile;
+                }
+                break;
+            }
+        }
+        if (a2dp == null) {
+            return;
+        }
+
+        BluetoothDevice device = mCachedDevice.getDevice();
+        SwitchPreference highQualityPref = (SwitchPreference) mProfilesContainer.findPreference(
+                HIGH_QUALITY_AUDIO_PREF_TAG);
+        if (highQualityPref != null) {
+            if (a2dp.isEnabled(device) && a2dp.supportsHighQualityAudio(device)) {
+                highQualityPref.setTitle(a2dp.getHighQualityAudioOptionLabel(device));
+                highQualityPref.setChecked(a2dp.isHighQualityAudioEnabled(device));
+            }
+        }
+    }
+
+    @Override
+    public void onA2dpCodecConfigChanged(CachedBluetoothDevice cachedDevice,
+            BluetoothCodecStatus codecStatus) {
+        if (!cachedDevice.equals(mCachedDevice)) {
+            return;
+        }
+        updateA2dpHighQualityAudioPref();
     }
 
     /**
