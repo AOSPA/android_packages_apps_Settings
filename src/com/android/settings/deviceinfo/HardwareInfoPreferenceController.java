@@ -55,15 +55,10 @@ public class HardwareInfoPreferenceController extends BasePreferenceController {
             if (null == modelName || modelName.isEmpty()) {
                 modelName = getDeviceModel();
             }
-            String hardwareVersion = Utils.getString(mContext, Utils.KEY_HARDWARE_VERSION);
-            if (null == hardwareVersion || hardwareVersion.isEmpty()) {
-                hardwareVersion = mContext.getResources().getString(R.string.device_info_default);
-            }
-            return mContext.getResources().getString(R.string.model_hardware_summary,
-                    modelName, hardwareVersion);
+            return modelName;
         }
 
-        return mContext.getResources().getString(R.string.model_summary, getDeviceModel());
+        return getDeviceModel();
     }
 
     public static String getDeviceModel() {
