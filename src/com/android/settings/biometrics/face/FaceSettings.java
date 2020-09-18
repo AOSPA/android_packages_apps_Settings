@@ -205,7 +205,7 @@ public class FaceSettings extends DashboardFragment {
             // Generate challenge in onResume instead of onCreate, since FaceSettings can be
             // created while Keyguard is showing, in which case the resetLockout revokeChallenge
             // will invalidate the too-early created challenge here.
-            final long challenge = mFaceManager.generateChallenge();
+            final long challenge = mFaceManager.generateChallengeBlocking();
             ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
 
             mConfirmingPassword = true;
@@ -235,7 +235,6 @@ public class FaceSettings extends DashboardFragment {
         if (requestCode == CONFIRM_REQUEST) {
             mConfirmingPassword = false;
             if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
-                mFaceManager.setActiveUser(mUserId);
                 // The pin/pattern/password was set.
                 if (data != null) {
                     mToken = data.getByteArrayExtra(
@@ -267,10 +266,7 @@ public class FaceSettings extends DashboardFragment {
                 && !mConfirmingPassword) {
             // Revoke challenge and finish
             if (mToken != null) {
-                final int result = mFaceManager.revokeChallenge();
-                if (result < 0) {
-                    Log.w(TAG, "revokeChallenge failed, result: " + result);
-                }
+                mFaceManager.revokeChallenge();
                 mToken = null;
             }
             finish();

@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Autentisera med hjälp av ditt ansikte"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Börja"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Om ansiktslås för tillgänglighet har inaktiverats fungerar inte vissa konfigureringssteg korrekt med TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Tillbaka"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Fortsätt"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Tillgänglighetskonfiguration"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -903,7 +906,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Anslut till <xliff:g id="SSID">%1$s</xliff:g> genom att centrera QR-koden i fönstret nedan"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Anslut till Wi-Fi genom att skanna QR-koden"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Dela Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Anslut till <xliff:g id="SSID">%1$s</xliff:g> och dela lösenordet genom att skanna QR-koden"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Anslut till <xliff:g id="SSID">%1$s</xliff:g> genom att skanna QR-koden med en annan enhet"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Anslut till <xliff:g id="SSID">%1$s</xliff:g> genom att skanna QR-koden"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Försök igen. Om problemet kvarstår kontaktar du enhetens tillverkare"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Något gick fel"</string>
@@ -1329,7 +1332,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android-version"</string>
     <string name="security_patch" msgid="4071756145347865382">"Säkerhetsuppdatering för Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Modell"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Modell: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Modell och maskinvara"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Maskinvaruversion"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Utrustnings-ID"</string>
@@ -2117,7 +2119,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Inställningar för textning"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Förstoring"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Förstoringsområde"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Magnification enable"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Välj vilket förstoringsområde du vill använda när du förstorar skärmen"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Hela skärmen"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Del av skärmen"</string>
@@ -3326,11 +3327,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Ljud vid uppstart"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Live Caption"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Texta media automatiskt"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Inga"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> scheman har ställts in</item>
-      <item quantity="one">1 schema har ställts in</item>
-    </plurals>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Inga}=1{1 schema har ställts in}other{# scheman har ställts in}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Stör ej"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Få bara aviseringar från viktiga personer och appar"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Begränsa antalet avbrott"</string>
@@ -3398,20 +3395,12 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Endast prioriterade"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"På/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"Av/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"Av"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"På"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Fråga varje gång"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Tills du stänger av"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> timmar</item>
-      <item quantity="one">1 timme</item>
-    </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g> minuter"</string>
-    <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> scheman kan aktiveras automatiskt</item>
-      <item quantity="one">1 schema kan aktiveras automatiskt</item>
-    </plurals>
+    <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 timme}other{# timmar}}"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 minut}other{# minuter}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Av}=1{Av / 1 schema kan aktiveras automatiskt}other{Av / # scheman kan aktiveras automatiskt}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"Vad får avbryta Stör ej"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Personer"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Appar"</string>
@@ -3457,6 +3446,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Ställ automatiskt in aviseringar av lägre prioritet på Utan avbrott"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Smart rankning av aviseringar"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Rangordna automatiskt aviseringar efter relevans"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Feedback om anpassad avisering"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Ange justeringar av aviseringar och visa möjligheten att ge feedback till systemet"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Föreslagna åtgärder och svar"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Visa föreslagna åtgärder och svar automatiskt"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Visa de senaste aviseringarna och uppskjutna aviseringar"</string>
@@ -3748,11 +3739,7 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Alla konversationer"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Prioriterade konversationer"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Inga"</string>
-    <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> konversationer</item>
-      <item quantity="one">1 konversation</item>
-    </plurals>
-    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"Inga"</string>
+    <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Inga}=1{1 konversation}other{# konversationer}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Vem får störa dig"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Samtal"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Samtal"</string>
@@ -3761,11 +3748,7 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Kontrollera att enheten är inställd på att ringa, så att du vet att tillåtna samtal hörs"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Inkommande samtal blockeras med <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>. Du kan anpassa inställningarna så att vänner, familj eller andra kontakter ändå kan nå dig."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Stjärnmärkta kontakter"</string>
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
-      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> till</item>
-      <item quantity="one">1 till</item>
-    </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"Inga"</string>
+    <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Inga}=1{{contact_1}}=2{{contact_1} och {contact_2}}=3{{contact_1}, {contact_2} och {contact_3}}other{{contact_1}, {contact_2} och # andra}}"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Meddelanden"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"meddelanden"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Meddelanden"</string>
@@ -3774,11 +3757,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Inkommande meddelanden blockeras med <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>. Du kan anpassa inställningarna så att vänner, familj eller andra kontakter ändå kan nå dig."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Alla meddelanden kan nå dig"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Alla samtal kan nå dig"</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"Inga"</string>
-    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
-      <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> kontakter</item>
-      <item quantity="one">1 kontakt</item>
-    </plurals>
+    <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{Inga}=1{1 kontakt}other{# kontakter}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Alla"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontakter"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Stjärnmärkta kontakter"</string>
@@ -3816,22 +3795,14 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Alla aviseringar"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Vissa aviseringar"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Utvalda personer kan fortfarande nå dig, även om du inte tillåter att appar stör"</string>
-    <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> får avbryta</item>
-      <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> får avbryta</item>
-    </plurals>
-    <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> till"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Inga appar får avbryta}=1{{app_1} får avbryta}=2{{app_1} och {app_2} får avbryta}=3{{app_1}, {app_2} och {app_3} får avbryta}other{{app_1}, {app_2} och # till får avbryta}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Appar"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Alla aviseringar"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Vissa aviseringar"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Aviseringar som får störa dig"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Tillåt alla aviseringar"</string>
-    <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="other"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> får avbryta</item>
-      <item quantity="one"><xliff:g id="SOUND_CATEGORY">%s</xliff:g> får avbryta</item>
-    </plurals>
-    <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"Inget får avbryta"</string>
-    <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"<xliff:g id="NUMBER">%d</xliff:g> till"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Inget får avbryta}=1{{sound_category_1} får avbryta}=2{{sound_category_1} och {sound_category_2} får avbryta}=3{{sound_category_1}, {sound_category_2} och {sound_category_3} får avbryta}other{{sound_category_1}, {sound_category_2} och # till får avbryta}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Inget får avbryta"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Ingen får avbryta"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Vissa får avbryta"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Alla får avbryta"</string>
@@ -4328,7 +4299,7 @@
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Använd databesparing"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Obegränsad dataanvändning"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"Tillåt obegränsad dataåtkomst med Databesparing på"</string>
-    <string name="home_app" msgid="6056850504746902747">"Standardapp"</string>
+    <string name="home_app" msgid="6056850504746902747">"Startskärmsapp"</string>
     <string name="no_default_home" msgid="3588073707316139318">"Ingen standardapp"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="4098653943835666086">"Säker start"</string>
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="311325321794497404">"Kräv grafiskt lösenord när enheten startar. Du kan inte ta emot samtal, meddelanden, aviseringar eller ställa alarm om inte enheten är påslagen."</string>
@@ -4473,6 +4444,14 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Tryck snabbt två gånger för att kolla telefonen"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Tryck snabbt två gånger för att kolla surfplattan"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Tryck snabbt två gånger för att kolla enheten"</string>
+    <string name="one_handed_title" msgid="1741600445540072513">"Enhandsläge"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Använd enhandsläge"</string>
+    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Avsluta när du byter app"</string>
+    <string name="one_handed_timeout_title" msgid="8851767822595789976">"Tidsgräns"</string>
+    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 sekunder"</string>
+    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 sekunder"</string>
+    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 sekunder"</string>
+    <string name="keywords_one_handed" msgid="969440592493034101">"nåbarhet"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Visa tid, aviseringar och annan information genom att trycka snabbt två gånger på skärmen."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Lyft för att kolla telefonen"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Plocka upp för att kolla surfplattan"</string>
@@ -4761,6 +4740,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Mobildata"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Få åtkomst till data via mobilt nätverk"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Mobilen byter automatiskt till den här operatören när den är inom räckvidd"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Inget SIM-kort tillgängligt"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Angiven för samtal"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Angiven för sms"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Fråga varje gång"</string>

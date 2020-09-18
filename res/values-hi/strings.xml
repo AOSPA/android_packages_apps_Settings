@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"चेहरे का इस्तेमाल कर पुष्टि करें"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"शुरू करें"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"अगर सुलभता सुविधा में मालिक का चेहरा पहचानकर अनलॉक करने की सुविधा बंद है, तो हो सकता है कि सेट अप के कुछ चरण, टॉकबैक के साथ ठीक से काम न करें."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"वापस जाएं"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"सेट अप जारी रखें"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"सुलभता सेटअप का इस्तेमाल करें"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -903,7 +906,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"डिवाइस को “<xliff:g id="SSID">%1$s</xliff:g>” से जोड़ने के लिए QR कोड को नीचे मौजूद कैमरा विंडो के बीच में लाएं"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"QR कोड स्कैन करके वाई-फ़ाई से जुड़ें"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"वाई-फ़ाई शेयर करें"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"“<xliff:g id="SSID">%1$s</xliff:g>” से जुड़ने के लिए इस QR कोड को स्कैन करें और पासवर्ड शेयर करें"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"“<xliff:g id="SSID">%1$s</xliff:g>” से जुड़ने के लिए किसी दूसरे डिवाइस से इस क्यूआर कोड को स्कैन करें"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"“<xliff:g id="SSID">%1$s</xliff:g>” से जुड़ने के लिए इस QR कोड को स्कैन करें"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"फिर से कोशिश करें. अगर समस्या ठीक नहीं होती है, तो डिवाइस बनाने वाली कंपनी से संपर्क करें"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"काेई गड़बड़ी हुई"</string>
@@ -1329,7 +1332,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android वर्शन"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android की सुरक्षा से जुड़ा अपडेट"</string>
     <string name="model_info" msgid="8997566254717810904">"मॉडल"</string>
-    <string name="model_summary" msgid="2246651782442466213">"मॉडल: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"मॉडल और हार्डवेयर"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"हार्डवेयर वर्शन"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"डिवाइस आईडी"</string>
@@ -2117,7 +2119,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"कैप्शन की प्राथमिकताएं"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"बड़ा करना"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"स्क्रीन का बड़ा किया गया हिस्सा"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"स्क्रीन बड़ी करने का मोड चालू करें"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"उस हिस्से को चुनें जिसे आप स्क्रीन पर बड़ा करके देखना चाहते हैं"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"फ़ुल स्क्रीन"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"स्क्रीन का हिस्सा"</string>
@@ -3326,11 +3327,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"चालू होने की ध्वनि"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"लाइव कैप्शन"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"ऑडियो-वीडियो पहचानकर अपने-आप कैप्शन बनना"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"कोई नहीं"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> शेड्यूल सेट किया गया है</item>
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> शेड्यूल सेट किए गए हैं</item>
-    </plurals>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{किसी शेड्यूल का सेट नहीं है}=1{1 शेड्यूल का सेट है}one{# शेड्यूल का सेट है}other{# शेड्यूल के सेट हैं}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"परेशान न करें"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"सिर्फ़ ज़रूरी लोगों और ऐप्लिकेशन की सूचनाएं पाएं"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"रुकावटों को कम करें"</string>
@@ -3398,20 +3395,12 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"सिर्फ़ ज़रूरी"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"चालू है / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"बंद / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"बंद"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"चालू है"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"हर बार पूछें"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"जब तक आप बंद नहीं करते"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
-      <item quantity="one"><xliff:g id="NUM_HOURS">%d</xliff:g> घंटे</item>
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> घंटे</item>
-    </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g> मिनट"</string>
-    <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> शेड्यूल अपने आप चालू हो सकते हैं</item>
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> शेड्यूल अपने आप चालू हो सकते हैं</item>
-    </plurals>
+    <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 घंटा}one{# घंटा}other{# घंटे}}"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 मिनट}one{# मिनट}other{# मिनट}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{बंद है}=1{बंद है / 1 शेड्यूल अपने-आप चालू हो सकता है}one{बंद है / # शेड्यूल अपने-आप चालू हो सकता है}other{बंद है / # शेड्यूल अपने-आप चालू हो सकते हैं}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"\'परेशान न करें\' मोड को कौन बायपास कर सकता है"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"लोग"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"ऐप्लिकेशन"</string>
@@ -3457,6 +3446,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"कम ज़रूरी सूचनाओं को बिना आवाज़ वाली सूचनाओं के तौर पर अपने आप सेट करें"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"ज़रूरत के हिसाब से सूचनाओं को रैंक दें"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"कोई सूचना कितने काम की है, इस हिसाब से उसे अपने-आप रैंक करें"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"ज़रूरत के हिसाब से सूचनाओं के बारे में सुझाव दें या शिकायत करें"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"यह सेटिंग, सूचनाओं की प्राथमिकताओं में किए गए बदलावों के बारे में बताती है और सिस्टम के बारे में राय/सुझाव देने के विकल्प दिखाती है"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"सुझाई गई कार्रवाइयां और जवाब"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"सुझाई गई कार्रवाइयां और जवाब अपने आप दिखाएं"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"हाल ही में मिली और स्नूज़ की गई सूचनाएं दिखाएं"</string>
@@ -3748,11 +3739,7 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"सभी बातचीत"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"अहम बातचीत"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"कोई भी नहीं"</string>
-    <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="one"><xliff:g id="CONVERSATIONS">%d</xliff:g> बातचीत</item>
-      <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> बातचीत</item>
-    </plurals>
-    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"कोई भी नहीं"</string>
+    <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{कोई बातचीत नहीं}=1{1 बातचीत}one{# बातचीत}other{# बातचीत}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"वे कॉल और मैसेज जो \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"कॉल"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"कॉल"</string>
@@ -3761,11 +3748,7 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"जिन कॉल के आने की अनुमति है उनके आने पर आवाज़ आए, यह पक्का करने के लिए देखें कि आपका डिवाइस रिंग करने वाले मोड पर सेट है"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ के लिए आने वाले कॉल ब्लॉक कर दिए गए हैं. आप सेटिंग में बदलाव करके दोस्तों, परिवार के लोगों, या दूसरे संपर्कों को आप तक पहुंचने की मंज़ूरी दे सकते हैं."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"तारे के निशान वाले संपर्क"</string>
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
-      <item quantity="one"><xliff:g id="NUM_PEOPLE">%d</xliff:g> और संपर्क</item>
-      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> और संपर्क</item>
-    </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"कोई नहीं"</string>
+    <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{स्टार के निशान वाला कोई संपर्क नहीं}=1{{contact_1}}=2{{contact_1} और {contact_2}}=3{{contact_1}, {contact_2}, और {contact_3}}one{{contact_1}, {contact_2}, और # अन्य संपर्क}other{{contact_1}, {contact_2}, और # अन्य संपर्क}}"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"मैसेज"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"मैसेज"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"मैसेज"</string>
@@ -3774,11 +3757,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ के लिए आने वाले मैसेज ब्लॉक कर दिए गए हैं. आप सेटिंग में अपने हिसाब से बदलाव करके दोस्तों, परिवार के सदस्यों या दूसरे लोगों को आपसे संपर्क करने की मंज़ूरी दे सकते हैं."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"सभी मैसेज \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"सभी कॉल \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"कोई नहीं"</string>
-    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
-      <item quantity="one"><xliff:g id="NUM_CONTACTS">%d</xliff:g> संपर्क</item>
-      <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> संपर्क</item>
-    </plurals>
+    <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{कोई संपर्क नहीं}=1{1 संपर्क}one{# संपर्क}other{# संपर्क}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"कोई भी"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"संपर्क"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"तारे के निशान वाले संपर्क"</string>
@@ -3816,22 +3795,14 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"सभी सूचनाएं"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"कुछ सूचनाएं"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"अगर आपने ऐप्लिकेशन को \'परेशान न करें\' मोड में डाला है, तब भी चुने हुए लोग आपसे संपर्क कर सकते हैं"</string>
-    <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="one"><xliff:g id="APP_NAMES">%s</xliff:g> \'परेशान न करें\' मोड को बायपास कर सकता है</item>
-      <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> \'परेशान न करें\' मोड को बायपास कर सकते हैं</item>
-    </plurals>
-    <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> और"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{कोई भी ऐप्लिकेशन \'परेशान न करें\' मोड को बायपास नहीं कर सकता}=1{{app_1} \'परेशान न करें\' मोड को बायपास कर सकता है}=2{{app_1} और {app_2} \'परेशान न करें\' मोड को बायपास कर सकते हैं}=3{{app_1}, {app_2}, और {app_3} \'परेशान न करें\' मोड को बायपास कर सकते हैं}one{{app_1}, {app_2}, और # अन्य ऐप्लिकेशन \'परेशान न करें\' मोड को बायपास कर सकते हैं}other{{app_1}, {app_2}, और # अन्य ऐप्लिकेशन \'परेशान न करें\' मोड को बायपास कर सकते हैं}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"ऐप्लिकेशन"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"सभी सूचनाएं"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"कुछ सूचनाएं"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"वे सूचनाएं जो \'परेशान न करें\' मोड को बायपास कर सकती हैं"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"सभी सूचनाओं को, \'परेशान न करें\' मोड बायपास करने की अनुमति दें"</string>
-    <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="one"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> \'परेशान न करें\' मोड को बायपास कर सकती है</item>
-      <item quantity="other"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> \'परेशान न करें\' मोड को बायपास कर सकती हैं</item>
-    </plurals>
-    <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"कोई भी दूसरी आवाज़ \'परेशान न करें\' मोड को बायपास नहीं कर सकती"</string>
-    <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"<xliff:g id="NUMBER">%d</xliff:g> और"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{कोई भी आवाज़ \'परेशान न करें\' मोड को बायपास नहीं कर सकती}=1{{sound_category_1} की आवाज़ \'परेशान न करें\' मोड को बायपास कर सकती है}=2{{sound_category_1} और {sound_category_2} की आवाज़ें \'परेशान न करें\' मोड को बायपास कर सकती हैं}=3{{sound_category_1}, {sound_category_2}, और {sound_category_3} की आवाज़ें \'परेशान न करें\' मोड को बायपास कर सकती हैं}one{{sound_category_1}, {sound_category_2}, और # अन्य आवाज़ \'परेशान न करें\' मोड को बायपास कर सकती है}other{{sound_category_1}, {sound_category_2}, और # अन्य आवाज़ें \'परेशान न करें\' मोड को बायपास कर सकती हैं}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"कोई भी आवाज़ \'परेशान न करें\' मोड को बायपास नहीं कर सकती"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"कोई भी व्यक्ति \'परेशान न करें\' मोड को बायपास नहीं कर सकता"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"कुछ चुने हुए लोग \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"कोई भी व्यक्ति \'परेशान न करें\' मोड को बायपास कर सकता है"</string>
@@ -4473,6 +4444,14 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"फ़ोन देखने के लिए दो बार टैप करें"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"टैबलेट देखने के लिए दो बार छूएं"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"डिवाइस देखने के लिए दो बार छूएं"</string>
+    <string name="one_handed_title" msgid="1741600445540072513">"वन-हैंडेड मोड"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"वन-हैंडेड मोड का इस्तेमाल करें"</string>
+    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"एक ऐप्लिकेशन से दूसरे पर जाते समय बाहर निकलें"</string>
+    <string name="one_handed_timeout_title" msgid="8851767822595789976">"टाइम आउट"</string>
+    <string name="one_handed_timeout_short" msgid="304069319841702995">"चार सेकंड"</string>
+    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"आठ सेकंड"</string>
+    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 सेकंड"</string>
+    <string name="keywords_one_handed" msgid="969440592493034101">"वन-हैंडेड ऐक्सेस"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"समय, सूचनाएं और दूसरी जानकारी देखने के लिए, फ़ोन की स्क्रीन पर दो बार टैप करें."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"फ़ोन चेक करने के लिए उसे उठाएं"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"टैबलेट देखने के लिए लिफ़्ट करें"</string>
@@ -4761,6 +4740,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"मोबाइल डेटा"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"मोबाइल नेटवर्क का इस्तेमाल करके डेटा ऐक्सेस करें"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"नेटवर्क होने पर फ़ोन अपने आप इस कैरियर पर आ जाएगा"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"सिम कार्ड मौजूद नहीं है"</string>
     <string name="calls_preference" msgid="2166481296066890129">"कॉल की प्राथमिकता"</string>
     <string name="sms_preference" msgid="7742964962568219351">"मैसेज (एसएमएस) की प्राथमिकता"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"हर बार पूछें"</string>

@@ -86,9 +86,9 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     static final int RESULT_NETWORK_ALREADY_EXISTS = 2;
 
     // Handler messages for controlling different state and delay showing the status message.
-    private static final int MESSAGE_START_SAVING_NETWORK = 1;
-    private static final int MESSAGE_SHOW_SAVED_AND_CONNECT_NETWORK = 2;
-    private static final int MESSAGE_SHOW_SAVE_FAILED = 3;
+    @VisibleForTesting static final int MESSAGE_START_SAVING_NETWORK = 1;
+    @VisibleForTesting static final int MESSAGE_SHOW_SAVED_AND_CONNECT_NETWORK = 2;
+    @VisibleForTesting static final int MESSAGE_SHOW_SAVE_FAILED = 3;
     private static final int MESSAGE_FINISH = 4;
 
     // Signal level for the initial signal icon.
@@ -137,7 +137,8 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     private WifiManager.ActionListener mSaveListener;
     private WifiManager mWifiManager;
 
-    private final Handler mHandler = new Handler() {
+    @VisibleForTesting
+    final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             showSaveStatusByState(msg.what);
@@ -638,7 +639,8 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     /**
      * Call framework API to save single network.
      */
-    private void saveNetwork(int index) {
+    @VisibleForTesting
+    void saveNetwork(int index) {
         final PasspointConfiguration passpointConfig =
                 mUiToRequestedList.get(index).mWifiNetworkSuggestion.getPasspointConfig();
         if (passpointConfig != null) {
@@ -689,7 +691,8 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
         return SettingsEnums.PANEL_ADD_WIFI_NETWORKS;
     }
 
-    private void showSaveStatusByState(int status) {
+    @VisibleForTesting
+    void showSaveStatusByState(int status) {
         switch (status) {
             case MESSAGE_START_SAVING_NETWORK:
                 if (mIsSingleNetwork) {
@@ -747,21 +750,29 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
 
 
     @VisibleForTesting
-    void updateScanResultsToUi(List<WifiEntry> allEntries) {
+    void updateScanResultsToUi() {
         if (mUiToRequestedList == null) {
             // Nothing need to be updated.
             return;
         }
 
+        List<WifiEntry> reachableWifiEntries = null;
+        if (mWifiPickerTracker.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
+            reachableWifiEntries = mWifiPickerTracker.getWifiEntries();
+            final WifiEntry connectedWifiEntry = mWifiPickerTracker.getConnectedWifiEntry();
+            if (connectedWifiEntry != null) {
+                reachableWifiEntries.add(connectedWifiEntry);
+            }
+        }
+
         // Update the signal level of the UI networks.
         for (UiConfigurationItem uiConfigurationItem : mUiToRequestedList) {
             uiConfigurationItem.mLevel = 0;
-            if (allEntries != null) {
-                final Optional<WifiEntry> matchedWifiEntry = allEntries.stream()
+            if (reachableWifiEntries != null) {
+                final Optional<WifiEntry> matchedWifiEntry = reachableWifiEntries.stream()
                         .filter(wifiEntry -> TextUtils.equals(
                                 uiConfigurationItem.mWifiNetworkSuggestion.getSsid(),
                                 wifiEntry.getSsid()))
-                        .filter(wifiEntry -> !wifiEntry.isSaved())
                         .findFirst();
                 uiConfigurationItem.mLevel =
                         matchedWifiEntry.isPresent() ? matchedWifiEntry.get().getLevel() : 0;
@@ -794,9 +805,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
      */
     @Override
     public void onWifiEntriesChanged() {
-        updateScanResultsToUi(
-                (mWifiPickerTracker.getWifiState() == WifiManager.WIFI_STATE_ENABLED)
-                        ? mWifiPickerTracker.getWifiEntries() : null);
+        updateScanResultsToUi();
     }
 
     @Override

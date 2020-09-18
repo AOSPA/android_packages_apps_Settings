@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"પ્રમાણિત કરવા તમારા ચહેરાનો ઉપયોગ કરો"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"શરૂ કરો"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"જો ઍક્સેસિબિલિટી ફેસ અનલૉકની સુવિધા બંધ કરવામાં આવે, તો ટૉકબૅક વડે સેટઅપના અમુક પગલાં યોગ્ય રીતે કામ કરી શકશે નહીં."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"પાછા ફરો"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"સેટઅપ ચાલુ રાખો"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ઍક્સેસિબિલિટી સેટઅપનો ઉપયોગ કરો"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -903,7 +906,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"“<xliff:g id="SSID">%1$s</xliff:g>” સાથે કનેક્ટ કરવા માટે QR કોડને નીચેની બાજુએ વચ્ચે રાખો"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"QR કોડ સ્કૅન કરીને વાઇ-ફાઇ સાથે જોડાઓ"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"વાઇ-ફાઇ શેર કરો"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"“<xliff:g id="SSID">%1$s</xliff:g>” સાથે કનેક્ટ કરવા માટે આ QR કોડને સ્કૅન કરો અને પાસવર્ડ શેર કરો"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"“<xliff:g id="SSID">%1$s</xliff:g>” સાથે જોડાવા માટે આ QR કોડને બીજા ડિવાઇસ વડે સ્કૅન કરો"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"“<xliff:g id="SSID">%1$s</xliff:g>” સાથે કનેક્ટ કરવા માટે આ QR કોડને સ્કૅન કરો"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"ફરી પ્રયાસ કરો. જો સમસ્યા ચાલુ રહે છે, તો ડિવાઇસ નિર્માતાનો સંપર્ક કરો"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"કંઈક ખોટું થયું હતું"</string>
@@ -1329,7 +1332,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android વર્ઝન"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android માટે સુરક્ષા અપડેટ"</string>
     <string name="model_info" msgid="8997566254717810904">"મોડલ"</string>
-    <string name="model_summary" msgid="2246651782442466213">"મૉડલ: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"મૉડલ અને હાર્ડવેર"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"હાર્ડવેર વર્ઝન"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"સાધન ID"</string>
@@ -2117,7 +2119,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"કૅપ્શનની પસંદગીઓ"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"વિસ્તૃતીકરણ"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"વિસ્તૃતીકરણ ક્ષેત્ર"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"વિસ્તૃતીકરણ ચાલુ"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"સ્ક્રીનનો વિસ્તાર કરો, ત્યારે તમે ઉપયોગ કરવા માગો છો તે વિસ્તૃતીકરણ ક્ષેત્રને પસંદ કરો"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"પૂર્ણ સ્ક્રીન"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"સ્ક્રીનનો ભાગ"</string>
@@ -3326,11 +3327,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"ચાલુ થવા પર વાગનાર ધ્વનિ"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"લાઇવ કૅપ્શન"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"મીડિયામાં કૅપ્શન આપમેળે ઉમેરો"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"કોઈ નહીં"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> શેડ્યૂલ સેટ કરવામાં આવ્યું</item>
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> શેડ્યૂલ સેટ કરવામાં આવ્યા</item>
-    </plurals>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{એકપણ નહીં}=1{એક શેડ્યૂલ સેટ કરવામાં આવ્યું}one{# શેડ્યૂલ સેટ કરવામાં આવ્યું}other{# શેડ્યૂલ સેટ કરવામાં આવ્યા}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"ખલેલ પાડશો નહીં"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"ફક્ત મહત્વપૂર્ણ લોકો અને ઍપ દ્વારા નોટિફિકેશન મેળવો"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"વિક્ષેપો મર્યાદિત કરો"</string>
@@ -3398,20 +3395,12 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"માત્ર પ્રાધાન્યતા"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"ચાલુ કરો / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"બંધ કરો / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"બંધ કરો"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"ચાલુ"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"દર વખતે પૂછો"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"તમે બંધ ન કરો ત્યાં સુધી"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
-      <item quantity="one"><xliff:g id="NUM_HOURS">%d</xliff:g> કલાક</item>
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> કલાક</item>
-    </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g> મિનિટ"</string>
-    <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> શેડ્યૂલ ઑટોમૅટિક રીતે ચાલુ થઈ શકશે</item>
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> શેડ્યૂલ ઑટોમૅટિક રીતે ચાલુ થઈ શકશે</item>
-    </plurals>
+    <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 કલાક}one{# કલાક}other{# કલાક}}"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 મિનિટ}one{# મિનિટ}other{# મિનિટ}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{બંધ}=1{બંધ / 1 શેડ્યૂલ ઑટોમૅટિક રીતે ચાલુ થઈ શકે છે}one{બંધ / # શેડ્યૂલ ઑટોમૅટિક રીતે ચાલુ થઈ શકે છે}other{બંધ / # શેડ્યૂલ ઑટોમૅટિક રીતે ચાલુ થઈ શકે છે}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"\'ખલેલ પાડશો નહીં\' સુવિધામાં શું વિક્ષેપ આવી શકે છે"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"લોકો"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"ઍપ"</string>
@@ -3457,6 +3446,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"ઓછી પ્રાધાન્યતા ધરાવતા નોટિફિકેશનને ઑટોમૅટિક રીતે સામાન્ય નોટિફિકેશન પર સેટ કરો"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"નોટિફિકેશનનું સુવિધાજનક રેંકિંગ"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"ઑટોમૅટિક રીતે નોટિફિકેશનને સુસંગતતા અનુસાર રેંક આપો"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"સુવિધાજનક નોટિફિકેશનનો પ્રતિસાદ"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"નોટિફિકેશનમાં કરવામાં આવેલી ગોઠવણો અને સિસ્ટમને પ્રતિસાદ આપવાનો વિકલ્પ બતાવો"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"સૂચવેલી ક્રિયાઓ અને જવાબો"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"ઑટોમૅટિક રીતે સૂચવેલી ક્રિયાઓ અને જવાબો બતાવો"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"એકદમ નવા અને સ્નૂઝ કરેલા નોટિફિકેશન બતાવો"</string>
@@ -3748,11 +3739,7 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"બધી વાતચીત"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"પ્રાધાન્ય આપ્યું હોય તેવી વાતચીત"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"કોઈ નહીં"</string>
-    <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="one"><xliff:g id="CONVERSATIONS">%d</xliff:g> વાતચીત</item>
-      <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> વાતચીત</item>
-    </plurals>
-    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"કોઈ નહીં"</string>
+    <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{એકપણ નહીં}=1{1 વાતચીત}one{# વાતચીત}other{# વાતચીત}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"વિક્ષેપ ઊભો કરી શકે છે તે"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"કૉલ"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"કૉલ"</string>
@@ -3761,11 +3748,7 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"જે કૉલની મંજૂરી આપી હોય તેમાં સાઉન્ડ આવે તેની ખાતરી કરવા માટે, ડિવાઇસ રિંગ વાગે તેમ સેટ કરેલું હોવાનું ચેક કરો"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ માટે ઇનકમિંગ કૉલને બ્લૉક કરેલા છે. તમારા મિત્રો, પરિવારજનો અથવા અન્ય સંપર્કો તમારો સંપર્ક કરી શકે તે માટે તમે સેટિંગને અનુકૂળ કરી શકો છો."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"સ્ટાર આપેલ સંપર્કો"</string>
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
-      <item quantity="one"><xliff:g id="NUM_PEOPLE">%d</xliff:g> અન્ય</item>
-      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> અન્યો</item>
-    </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"કોઈ નહીં"</string>
+    <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{એકપણ નહીં}=1{{contact_1}}=2{{contact_1} અને {contact_2}}=3{{contact_1}, {contact_2} અને {contact_3}}one{{contact_1}, {contact_2} અને # અન્ય વ્યક્તિ}other{{contact_1}, {contact_2} અને # અન્ય લોકો}}"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Messages"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"સંદેશા"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Messages"</string>
@@ -3774,11 +3757,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ માટે આવનારા સંદેશા બ્લૉક કરેલા છે. તમારા મિત્રો, કુટુંબના સભ્યો અથવા અન્ય સંપર્કો તમારો સંપર્ક કરી શકે તે માટે તમે સેટિંગને ગોઠવી શકો છો."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"બધા સંદેશા તમને પ્રાપ્ત થઈ શકે છે"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"બધા કૉલ તમારા પર આવી શકે છે"</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"કોઈ નહીં"</string>
-    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
-      <item quantity="one"><xliff:g id="NUM_CONTACTS">%d</xliff:g> સંપર્ક</item>
-      <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> સંપર્કો</item>
-    </plurals>
+    <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{એકપણ નહીં}=1{1 સંપર્ક}one{# સંપર્ક}other{# સંપર્કો}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"કોઈપણ"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"સંપર્કો"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"સ્ટાર આપેલ સંપર્કો"</string>
@@ -3816,22 +3795,14 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"બધા નોટિફિકેશન"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"અમુક નોટિફિકેશન"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"તમે ઍપને વિક્ષેપ પાડવાની મંજૂરી ન આપો તો પણ પસંદગીના લોકો તમારો સંપર્ક કરી શકે છે"</string>
-    <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="one"><xliff:g id="APP_NAMES">%s</xliff:g> વિક્ષેપ કરી શકે છે</item>
-      <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> વિક્ષેપ કરી શકે છે</item>
-    </plurals>
-    <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> વધુ"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{કોઈપણ ઍપ \'ખલેલ પાડશો નહીં\' મોડને વિક્ષેપ કરી શકશે નહીં}=1{{app_1} વિક્ષેપ કરી શકે છે}=2{{app_1} અને {app_2} વિક્ષેપ કરી શકે છે}=3{{app_1}, {app_2} અને {app_3} વિક્ષેપ કરી શકે છે}one{{app_1}, {app_2} અને વધુ # વિક્ષેપ કરી શકે છે}other{{app_1}, {app_2} અને વધુ # વિક્ષેપ કરી શકે છે}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"ઍપ"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"બધા નોટિફિકેશન"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"કેટલાંક નોટિફિકેશન"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"વિક્ષેપ ઊભો કરી શકે તેવા નોટિફિકેશન"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"બધા નોટિફિકેશનની મંજૂરી આપો"</string>
-    <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="one"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> વિક્ષેપ કરી શકે છે</item>
-      <item quantity="other"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> વિક્ષેપ કરી શકે છે</item>
-    </plurals>
-    <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"કંઈપણ વિક્ષેપ આવી શકશે નહીં"</string>
-    <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"<xliff:g id="NUMBER">%d</xliff:g> વધુ"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{કોઈપણ સાઉન્ડ \'ખલેલ પાડશો નહીં\' મોડને વિક્ષેપ કરી શકશે નહીં}=1{{sound_category_1} વિક્ષેપ કરી શકે છે}=2{{sound_category_1} અને {sound_category_2} વિક્ષેપ કરી શકે છે}=3{{sound_category_1}, {sound_category_2} અને {sound_category_3} વિક્ષેપ કરી શકે છે}one{{sound_category_1}, {sound_category_2} અને વધુ # વિક્ષેપ કરી શકે છે}other{{sound_category_1}, {sound_category_2} અને વધુ # વિક્ષેપ કરી શકે છે}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"કોઈપણ સાઉન્ડ \'ખલેલ પાડશો નહીં\' મોડને વિક્ષેપ કરી શકશે નહીં"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"કોઈપણ વિક્ષેપ કરી શકશે નહીં"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"અમુક લોકો વિક્ષેપ કરી શકે છે"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"બધા લોકો વિક્ષેપ કરી શકે છે"</string>
@@ -4473,6 +4444,14 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"ફોનને જોવા માટે બે વાર ટૅપ કરો"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ટેબ્લેટને જોવા માટે બે વાર ટૅપ કરો"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"ઉપકરણને જોવા માટે બે વાર ટૅપ કરો"</string>
+    <string name="one_handed_title" msgid="1741600445540072513">"એક-હાથે વાપરો મોડ"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"એક-હાથે વાપરો મોડનો ઉપયોગ કરો"</string>
+    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"ઍપ સ્વિચ કરતી વખતે એક-હાથે વાપરો મોડમાંથી બહાર નીકળો"</string>
+    <string name="one_handed_timeout_title" msgid="8851767822595789976">"સમયસમાપ્તિ"</string>
+    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 સેકન્ડ"</string>
+    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 સેકન્ડ"</string>
+    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 સેકન્ડ"</string>
+    <string name="keywords_one_handed" msgid="969440592493034101">"એક-હાથે વાપરો"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"સમય, નોટિફિકેશન અને અન્ય માહિતી ચેક કરવા માટે, તમારી સ્ક્રીન પર બે વાર ટૅપ કરો."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"ફોનને જોવા માટે ઉઠાવો"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"ટેબ્લેટને જોવા માટે ઉઠાવો"</string>
@@ -4761,6 +4740,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"મોબાઇલ ડેટા"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"મોબાઇલ નેટવર્કનો વપરાશ કરીને ડેટા ઍક્સેસ કરો"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"રેન્જમાં હશે ત્યારે ફોન ઑટોમૅટિક રીતે આ કૅરિઅર પર સ્વિચ કરશે"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"કોઈ સિમ કાર્ડ ઉપલબ્ધ નથી"</string>
     <string name="calls_preference" msgid="2166481296066890129">"કૉલની પસંદગી"</string>
     <string name="sms_preference" msgid="7742964962568219351">"SMS પસંદગી"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"દર વખતે પૂછો"</string>

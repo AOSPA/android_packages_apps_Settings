@@ -100,7 +100,7 @@
     <Preference
         android:key="device_model"
         android:order="31"
-        android:title="@string/hardware_info"
+        android:title="@string/model_info"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFragment"
         settings:enableCopying="true"
@@ -142,7 +142,7 @@
         android:order="45"
         android:title="@string/status_wifi_mac_address"
         android:summary="@string/view_saved_network"
-        android:fragment="com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings"
+        android:fragment="com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2"
         settings:enableCopying="false"/>
 
     <!-- Factory Wi-Fi MAC address -->

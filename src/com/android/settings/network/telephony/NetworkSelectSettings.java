@@ -44,6 +44,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
+import com.android.internal.telephony.OperatorInfo;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
@@ -196,15 +197,12 @@ public class NetworkSelectSettings extends DashboardFragment {
 
             mRequestIdManualNetworkSelect = getNewRequestId();
             mWaitingForNumberOfScanResults = MIN_NUMBER_OF_SCAN_REQUIRED;
-            final String operatorNumeric = mSelectedPreference.getOperatorNumeric();
-            final int accessNetworkType = mSelectedPreference.getAccessNetworkType();
+            final OperatorInfo operator = mSelectedPreference.getOperatorInfo();
             ThreadUtils.postOnBackgroundThread(() -> {
                 final Message msg = mHandler.obtainMessage(
                         EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE);
-                // Send accessNetworkType as a parameter.
-                // This is converted to RadioAccessNetwork in the Telephony Framework.
                 msg.obj = mTelephonyManager.setNetworkSelectionModeManual(
-                        operatorNumeric, true /* persistSelection */, accessNetworkType);
+                        operator, true /* persistSelection */);
                 msg.sendToTarget();
             });
         }

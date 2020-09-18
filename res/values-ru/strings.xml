@@ -335,6 +335,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Используйте распознавание лица для аутентификации"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Начать"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Если упрощенная настройка фейсконтроля отключена, некоторые действия при работе с TalkBack могут выполняться некорректно."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Назад"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Продолжить настройку"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Использовать специальные возможности"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -937,7 +940,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Чтобы подключиться к сети \"<xliff:g id="SSID">%1$s</xliff:g>\", наведите камеру на QR-код ниже."</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Чтобы подключиться к сети Wi‑Fi, отсканируйте QR-код."</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Предоставить доступ к Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Чтобы подключиться к сети \"<xliff:g id="SSID">%1$s</xliff:g>\" и поделиться паролем, отсканируйте этот QR-код."</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Чтобы подключиться к сети <xliff:g id="SSID">%1$s</xliff:g>, отсканируйте этот QR-код на другом устройстве."</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Чтобы подключиться к сети \"<xliff:g id="SSID">%1$s</xliff:g>\", отсканируйте этот QR-код."</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Повторите попытку. Если это не поможет, свяжитесь с производителем устройства."</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Произошла ошибка."</string>
@@ -1371,7 +1374,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Версия Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"Обновление системы безопасности Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Модель"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Модель: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Модель и аппаратное обеспечение"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Версия аппаратного обеспечения"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Идентификатор оборудования"</string>
@@ -2165,7 +2167,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Настройки субтитров"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Увеличение"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Область увеличения"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Включение увеличения"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Выберите область увеличения экрана."</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Весь экран"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Часть экрана"</string>
@@ -3414,13 +3415,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Звуки при включении устройства"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Автоматические субтитры"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Автоматически добавлять субтитры"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Правила не заданы"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="one">Настроено <xliff:g id="ON_COUNT">%d</xliff:g> расписание</item>
-      <item quantity="few">Настроено <xliff:g id="ON_COUNT">%d</xliff:g> расписания</item>
-      <item quantity="many">Настроено <xliff:g id="ON_COUNT">%d</xliff:g> расписаний</item>
-      <item quantity="other">Настроено <xliff:g id="ON_COUNT">%d</xliff:g> расписания</item>
-    </plurals>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Нет настроенных расписаний}=1{Настроено 1 расписание}one{Настроено # расписание}few{Настроено # расписания}many{Настроено # расписаний}other{Настроено # расписания}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не беспокоить"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Получать уведомления только от важных людей и приложений"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Отключение уведомлений"</string>
@@ -3488,24 +3483,12 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Только важные"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>."</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Включено/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"Отключено/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"Отключено"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Включено"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Всегда спрашивать"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Пока вы не отключите"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
-      <item quantity="one"><xliff:g id="NUM_HOURS">%d</xliff:g> час</item>
-      <item quantity="few"><xliff:g id="NUM_HOURS">%d</xliff:g> часа</item>
-      <item quantity="many"><xliff:g id="NUM_HOURS">%d</xliff:g> часов</item>
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> часа</item>
-    </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g> мин."</string>
-    <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="one">Может автоматически включиться <xliff:g id="ON_COUNT">%d</xliff:g> расписание.</item>
-      <item quantity="few">Могут автоматически включиться <xliff:g id="ON_COUNT">%d</xliff:g> расписания.</item>
-      <item quantity="many">Могут автоматически включиться <xliff:g id="ON_COUNT">%d</xliff:g> расписаний.</item>
-      <item quantity="other">Может автоматически включиться <xliff:g id="ON_COUNT">%d</xliff:g> расписания.</item>
-    </plurals>
+    <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 час}one{# час}few{# часа}many{# часов}other{# часа}}"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 минута}one{# минута}few{# минуты}many{# минут}other{# минуты}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Выключено}=1{Выключено/Автоматическое включение по 1 расписанию}one{Выключено/Автоматическое включение по # расписанию}few{Выключено/Автоматическое включение по # расписаниям}many{Выключено/Автоматическое включение по # расписаниям}other{Выключено/Автоматическое включение по # расписания}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"Исключения для режима \"Не беспокоить\""</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Пользователи"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Приложения"</string>
@@ -3551,6 +3534,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Автоматически назначать беззвучный режим для уведомлений с низким приоритетом"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Автоматическая приоритизация"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Автоматически присваивать важность уведомлениям по релевантности"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Отзывы об адаптивных уведомлениях"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Показывает, какой статус назначен уведомлению, и предлагает оставить отзыв"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Рекомендуемые действия и ответы"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Автоматически показывать рекомендуемые действия и ответы"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Показывать недавние и отложенные уведомления"</string>
@@ -3858,13 +3843,7 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Все разговоры"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Важные разговоры"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Нет"</string>
-    <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="one"><xliff:g id="CONVERSATIONS">%d</xliff:g> разговор</item>
-      <item quantity="few"><xliff:g id="CONVERSATIONS">%d</xliff:g> разговора</item>
-      <item quantity="many"><xliff:g id="CONVERSATIONS">%d</xliff:g> разговоров</item>
-      <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> разговора</item>
-    </plurals>
-    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"Нет"</string>
+    <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Ни одного}=1{1 чат}one{# чат}few{# чата}many{# чатов}other{# чата}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Для кого не действует режим \"Не беспокоить\""</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Вызовы"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Вызовы"</string>
@@ -3873,13 +3852,7 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Чтобы не пропустить важные звонки, убедитесь, что на устройстве включен звук."</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Входящие вызовы заблокированы правилом \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Вы можете изменить настройки, чтобы принимать звонки от друзей, членов семьи и других контактов."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Помеченные контакты"</string>
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
-      <item quantity="one">ещё <xliff:g id="NUM_PEOPLE">%d</xliff:g> контакт</item>
-      <item quantity="few">ещё <xliff:g id="NUM_PEOPLE">%d</xliff:g> контакта</item>
-      <item quantity="many">ещё <xliff:g id="NUM_PEOPLE">%d</xliff:g> контактов</item>
-      <item quantity="other">ещё <xliff:g id="NUM_PEOPLE">%d</xliff:g> контакта</item>
-    </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"Нет"</string>
+    <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Контактов нет}=1{{contact_1}}=2{{contact_1} и {contact_2}}=3{{contact_1}, {contact_2} и {contact_3}}one{{contact_1}, {contact_2} и ещё #}few{{contact_1}, {contact_2} и ещё #}many{{contact_1}, {contact_2} и ещё #}other{{contact_1}, {contact_2} и ещё #}}"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Сообщения"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"сообщений"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Сообщения"</string>
@@ -3888,13 +3861,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Когда действует правило \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\", входящие сообщения блокируются. Вы можете изменить настройки, чтобы принимать сообщения от друзей, членов семьи и других контактов."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Режим \"Не беспокоить\" не действует для всех сообщений"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Режим \"Не беспокоить\" не действует для всех вызовов"</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"Нет"</string>
-    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
-      <item quantity="one"><xliff:g id="NUM_CONTACTS">%d</xliff:g> контакт</item>
-      <item quantity="few"><xliff:g id="NUM_CONTACTS">%d</xliff:g> контакта</item>
-      <item quantity="many"><xliff:g id="NUM_CONTACTS">%d</xliff:g> контактов</item>
-      <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> контакта</item>
-    </plurals>
+    <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{Никто}=1{1 контакт}one{# контакт}few{# контакта}many{# контактов}other{# контакта}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Все"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Контакты"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Помеченные контакты"</string>
@@ -3932,26 +3899,14 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Все уведомления"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Некоторые уведомления"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Выбранные пользователи смогут связаться с вами, даже если для приложений действует режим \"Не беспокоить\"."</string>
-    <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="one">Режим \"Не беспокоить\" не действует для следующих приложений: <xliff:g id="APP_NAMES">%s</xliff:g></item>
-      <item quantity="few">Режим \"Не беспокоить\" не действует для следующих приложений: <xliff:g id="APP_NAMES">%s</xliff:g></item>
-      <item quantity="many">Режим \"Не беспокоить\" не действует для следующих приложений: <xliff:g id="APP_NAMES">%s</xliff:g></item>
-      <item quantity="other">Режим \"Не беспокоить\" не действует для следующих приложений: <xliff:g id="APP_NAMES">%s</xliff:g></item>
-    </plurals>
-    <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"ещё <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Режим \"Не беспокоить\" действует для всех приложений}=1{Режим \"Не беспокоить\" не действует для приложения \"{app_1}\"}=2{Режим \"Не беспокоить\" не действует для приложений \"{app_1}\" и \"{app_2}\"}=3{Режим \"Не беспокоить\" не действует для приложений \"{app_1}\", \"{app_2}\" и \"{app_3}\"}one{Режим \"Не беспокоить\" не действует для приложений \"{app_1}\", \"{app_2}\" и ещё #}few{Режим \"Не беспокоить\" не действует для приложений \"{app_1}\", \"{app_2}\" и ещё #}many{Режим \"Не беспокоить\" не действует для приложений \"{app_1}\", \"{app_2}\" и ещё #}other{Режим \"Не беспокоить\" не действует для приложений \"{app_1}\", \"{app_2}\" и ещё #}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Приложения"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Все уведомления"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Некоторые уведомления"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Уведомления, для которых не действует режим \"Не беспокоить\""</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Разрешить все уведомления"</string>
-    <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="one">Режим \"Не беспокоить\" не действует для звуков следующих категорий: <xliff:g id="SOUND_CATEGORIES">%s</xliff:g></item>
-      <item quantity="few">Режим \"Не беспокоить\" не действует для звуков следующих категорий: <xliff:g id="SOUND_CATEGORIES">%s</xliff:g></item>
-      <item quantity="many">Режим \"Не беспокоить\" не действует для звуков следующих категорий: <xliff:g id="SOUND_CATEGORIES">%s</xliff:g></item>
-      <item quantity="other">Режим \"Не беспокоить\" не действует для звуков следующих категорий: <xliff:g id="SOUND_CATEGORIES">%s</xliff:g></item>
-    </plurals>
-    <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"Режим \"Не беспокоить\" действует для всех звуков"</string>
-    <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"ещё <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Все звуки запрещены}=1{Разрешен звук \"{sound_category_1}\"}=2{Разрешены звуки \"{sound_category_1}\" и \"{sound_category_2}\"}=3{Разрешены звуки \"{sound_category_1}\", \"{sound_category_2}\" и \"{sound_category_3}\"}one{Разрешены звуки \"{sound_category_1}\", \"{sound_category_2}\" и ещё #}few{Разрешены звуки \"{sound_category_1}\", \"{sound_category_2}\" и ещё #}many{Разрешены звуки \"{sound_category_1}\", \"{sound_category_2}\" и ещё #}other{Разрешены звуки \"{sound_category_1}\", \"{sound_category_2}\" и ещё #}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Все звуки запрещены"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Режим \"Не беспокоить\" действует для всех звонков и сообщений"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Режим \"Не беспокоить\" не действует для звонков и сообщений от некоторых пользователей"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Режим \"Не беспокоить\" не действует для звонков и сообщений от любых пользователей"</string>
@@ -4635,6 +4590,14 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Дважды нажать, чтобы проверить уведомления"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Дважды нажать, чтобы проверить уведомления"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Дважды нажать, чтобы проверить уведомления"</string>
+    <string name="one_handed_title" msgid="1741600445540072513">"Режим управления одной рукой"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Использовать режим управления одной рукой"</string>
+    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Выходить из режима при переключении между приложениями"</string>
+    <string name="one_handed_timeout_title" msgid="8851767822595789976">"Время ожидания"</string>
+    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 секунды"</string>
+    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 секунд"</string>
+    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 секунд"</string>
+    <string name="keywords_one_handed" msgid="969440592493034101">"управление одной рукой"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Чтобы увидеть время, уведомления и другую информацию, дважды коснитесь экрана"</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Поднять, чтобы проверить телефон"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Просмотр уведомлений в вертикальном положении планшета"</string>
@@ -4937,6 +4900,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Мобильный Интернет"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Доступ к Интернету по мобильной сети"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Телефон автоматически подключится к сети этого оператора, когда вы окажетесь в зоне ее действия."</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Нет SIM-карты"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Настройки звонков"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Настройки SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Всегда спрашивать"</string>
