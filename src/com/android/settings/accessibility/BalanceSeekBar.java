@@ -115,6 +115,7 @@ public class BalanceSeekBar extends SeekBar {
                 res.getDimensionPixelSize(R.dimen.balance_seekbar_center_marker_width),
                 res.getDimensionPixelSize(R.dimen.balance_seekbar_center_marker_height));
         mCenterMarkerPaint = new Paint();
+        // TODO use a more suitable colour?
         mCenterMarkerPaint.setColor(isNightMode(context) ? Color.WHITE : Color.BLACK);
         mCenterMarkerPaint.setStyle(Paint.Style.FILL);
         // Remove the progress colour

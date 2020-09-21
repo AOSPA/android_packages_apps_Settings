@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"استفاده از چهره‌تان برای احراز هویت"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"شروع"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"‏اگر «بازگشایی با چهره» درحالت دسترس‌پذیری خاموش باشد، ممکن است برخی مراحل راه‌اندازی به‌خوبی با TalkBack کار نکنند."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"برگشت"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"ادامه راه‌اندازی"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"استفاده از تنظیمات دسترس‌پذیری"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -903,7 +906,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"‏برای اتصال به «<xliff:g id="SSID">%1$s</xliff:g>»،‌ کد QR را در مرکز پنجره زیر قرار دهید"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"‏با اسکن کردن کد QR، به Wi‑Fi بپیوندید"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"‏استفاده مشترک از Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"‏برای اتصال به «<xliff:g id="SSID">%1$s</xliff:g>»، این کد QR را اسکن کنید و گذرواژه مربوطه را هم‌رسانی کنید"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"‏برای پیوستن به «<xliff:g id="SSID">%1$s</xliff:g>»، این کد QR را با دستگاه دیگری اسکن کنید"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"‏برای اتصال به «<xliff:g id="SSID">%1$s</xliff:g>»، این کد QR را اسکن کنید"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"دوباره امتحان کنید. اگر مشکل همچنان ادامه دارد، با سازنده دستگاه تماس بگیرید"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"مشکلی رخ داده است"</string>
@@ -1329,7 +1332,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"‏نسخهٔ Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"‏به‌روزرسانی امنیتی Android"</string>
     <string name="model_info" msgid="8997566254717810904">"مدل"</string>
-    <string name="model_summary" msgid="2246651782442466213">"‏مدل: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"مدل و سخت‌افزار"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"نسخه سخت‌افزار"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"شناسه دستگاه"</string>
@@ -2117,7 +2119,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"اولویت‌های زیرنویس"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"بزرگ‌نمایی"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"ناحیه بزرگ‌نمایی"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"فعال کردن بزرگ‌نمایی"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"ناحیه(های) بزرگ‌نمایی موردنظر را برای استفاده هنگام بزرگ‌نمایی صفحه‌نمایش انتخاب کنید"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"تمام‌صفحه"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"بخشی از صفحه"</string>
@@ -3326,11 +3327,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"صدای راه‌اندازی"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"زیرنویس زنده"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"رسانه زیرنویس خودکار"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"هیچ‌کدام"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> زمان‌بندی تنظیم شد</item>
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> زمان‌بندی تنظیم شد</item>
-    </plurals>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{هیچ‌کدام}=1{۱ زمان‌بندی تنظیم شد}one{# زمان‌بندی تنظیم شده است}other{# زمان‌بندی تنظیم شده است}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"مزاحم نشوید"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"فقط در ارتباط با افراد و برنامه‌های مهم اعلان دریافت کنید"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"محدود کردن وقفه‌ها"</string>
@@ -3398,20 +3395,12 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"فقط اولویت‌دار"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"روشن / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"خاموش / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"خاموش"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"روشن"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"هربار پرسیده شود"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"تا زمانی‌که آن را خاموش کنید"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
-      <item quantity="one"><xliff:g id="NUM_HOURS">%d</xliff:g> ساعت</item>
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> ساعت</item>
-    </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g> دقیقه"</string>
-    <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> زمان‌بندی می‌تواند به‌طور خودکار روشن شود</item>
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> زمان‌بندی می‌تواند به‌طور خودکار روشن شود</item>
-    </plurals>
+    <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{۱ ساعت}one{# ساعت}other{# ساعت}}"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{۱ دقیقه}one{# دقیقه}other{# دقیقه}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{خاموش}=1{خاموش / ۱ زمان‌بندی می‌تواند به‌طور خودکار روشن شود}one{خاموش / # زمان‌بندی می‌تواند به‌طور خودکار روشن شود}other{خاموش / # زمان‌بندی می‌تواند به‌طور خودکار روشن شود}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"مواردی که می‌توانند در حالت «مزاحم نشوید» وقفه ایجاد کنند"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"افراد"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"برنامه‌ها"</string>
@@ -3457,6 +3446,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"اعلان‌های دارای اولویت پایین‌تر به‌طور خودکار روی آرام تنظیم شود"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"رتبه‌بندی اعلان تطبیقی"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"رتبه‌بندی خودکار اعلان‌ها براساس ارتباط"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"بازخورد اعلان تطبیقی"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"تنظیمات انجام‌شده برای اعلان‌ها را مشخص می‌کند و گزینه مربوط به ارائه بازخورد به سیستم را نمایش می‌دهد"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"پاسخ‌ها و اقدامات پیشنهادی"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"نمایش خودکار اقدامات و پاسخ‌های پیشنهادی"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"نمایش اعلان‌های اخیر و به‌تعویق افتاده"</string>
@@ -3748,11 +3739,7 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"همه مکالمه‌ها"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"مکالمه‌های اولویت‌دار"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"هیچ‌کدام"</string>
-    <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="one"><xliff:g id="CONVERSATIONS">%d</xliff:g> مکالمه</item>
-      <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> مکالمه</item>
-    </plurals>
-    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"هیچ‌کدام"</string>
+    <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{هیچ‌کدام}=1{۱ مکالمه}one{# مکالمه}other{# مکالمه}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"افرادی که می‌توانند وقفه ایجاد کنند"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"تماس‌ها"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"تماس‌ها"</string>
@@ -3761,11 +3748,7 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"برای اطمینان از اینکه تماس‌های مجاز صدا داشته باشند، بررسی کنید دستگاه روی زنگ زدن تنظیم شده باشد"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"تماس‌های ورودی برای «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>» مسدود می‌شود. برای اینکه به دوستان و خانواده و سایر مخاطبین امکان دسترسی به خودتان بدهید، می‌توانید تنظیمات را تغییر دهید."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"مخاطبین ستاره‌دار"</string>
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
-      <item quantity="one"><xliff:g id="NUM_PEOPLE">%d</xliff:g> نفر دیگر</item>
-      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> نفر دیگر</item>
-    </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"موردی وجود ندارد"</string>
+    <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{هیچ‌کدام}=1{{contact_1}}=2{{contact_1} و {contact_2}}=3{{contact_1}، {contact_2} و {contact_3}}one{{contact_1}، {contact_2}، و # نفر دیگر}other{{contact_1}، {contact_2}، و # نفر دیگر}}"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"پیام‌ها"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"پیام‌ها"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"پیام‌ها"</string>
@@ -3774,11 +3757,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"پیام‌های ورودی برای «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>» مسدود شده‌اند. برای اینکه به دوستان و خانواده و سایر مخاطبین امکان دهید به شما دسترسی داشته باشند، می‌توانید تنظیمات را تغییر دهید."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"همه پیام‌ها را می‌توانید دریافت کنید."</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"همه تماس‌ها را می‌توانید دریافت کنید."</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"موردی وجود ندارد"</string>
-    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
-      <item quantity="one"><xliff:g id="NUM_CONTACTS">%d</xliff:g> مخاطب</item>
-      <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> مخاطب</item>
-    </plurals>
+    <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{هیچ‌کدام}=1{۱ مخاطب}one{# مخاطب}other{# مخاطب}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"همه"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"مخاطبین"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"مخاطبین ستاره‌دار"</string>
@@ -3816,22 +3795,14 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"همه اعلان‌ها"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"برخی از اعلان‌ها"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"افراد انتخاب‌شده همچنان می‌توانند با شما ارتباط برقرار کنند، حتی اگر به برنامه‌ها اجازه ایجاد وقفه نداده باشید"</string>
-    <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="one"><xliff:g id="APP_NAMES">%s</xliff:g> می‌تواند وقفه ایجاد کند</item>
-      <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> می‌توانند وقفه ایجاد کند</item>
-    </plurals>
-    <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> برنامه دیگر"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{هیچ برنامه‌ای نمی‌تواند وقفه ایجاد کند}=1{{app_1} می‌تواند وقفه ایجاد کند}=2{{app_1} و {app_2} می‌توانند وقفه ایجاد کنند}=3{{app_1}، {app_2}، و {app_3} می‌توانند وقفه ایجاد کنند}one{{app_1}، {app_2}، و # برنامه دیگر می‌توانند وقفه ایجاد کنند}other{{app_1}، {app_2}، و # برنامه دیگر می‌توانند وقفه ایجاد کنند}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"برنامه‌ها"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"همه اعلان‌ها"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"برخی اعلان‌ها"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"اعلان‌هایی که می‌توانند وقفه ایجاد کنند"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"مجاز بودن همه اعلان‌ها"</string>
-    <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="one"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> می‌تواند وقفه ایجاد کند</item>
-      <item quantity="other"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> می‌توانند وقفه ایجاد کند</item>
-    </plurals>
-    <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"هیچ موردی نمی‌تواند وقفه ایجاد کند"</string>
-    <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"<xliff:g id="NUMBER">%d</xliff:g> صدای دیگر"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{هیچ موردی نمی‌تواند وقفه ایجاد کند}=1{{sound_category_1} می‌تواند وقفه ایجاد کند}=2{{sound_category_1} و {sound_category_2} می‌توانند وقفه ایجاد کنند}=3{{sound_category_1}، {sound_category_2}، و {sound_category_3} می‌توانند وقفه ایجاد کنند}one{{sound_category_1}، {sound_category_2}، و # مورد دیگر می‌توانند وقفه ایجاد کنند}other{{sound_category_1}، {sound_category_2}، و # مورد دیگر می‌توانند وقفه ایجاد کنند}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"هیچ موردی نمی‌تواند وقفه ایجاد کند"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"هیچ فردی نمی‌تواند وقفه ایجاد کند"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"بعضی از افراد می‌توانند وقفه ایجاد کنند"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"همه افراد می‌توانند وقفه ایجاد کنند"</string>
@@ -4473,6 +4444,14 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"دو ضربه برای چک کردن تلفن"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"برای بررسی رایانه لوحی، دو ضربه سریع بزنید"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"برای بررسی دستگاه، دو ضربه سریع بزنید"</string>
+    <string name="one_handed_title" msgid="1741600445540072513">"حالت تک حرکت"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"استفاده از حالت تک حرکت"</string>
+    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"خروج وقتی‌که بین برنامه‌ها جابه‌جا می‌شوید"</string>
+    <string name="one_handed_timeout_title" msgid="8851767822595789976">"درنگ"</string>
+    <string name="one_handed_timeout_short" msgid="304069319841702995">"۴ ثانیه"</string>
+    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"۸ ثانیه"</string>
+    <string name="one_handed_timeout_long" msgid="6537332654662635890">"۱۲ ثانیه"</string>
+    <string name="keywords_one_handed" msgid="969440592493034101">"قابلیت دسترسی"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"برای بررسی زمان، اعلان‌ها و اطلاعات دیگر، روی صفحه‌نمایش دو ضربه سریع بزنید."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"بررسی تلفن با برداشتن"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"برای بررسی رایانه لوحی، آن را بردارید"</string>
@@ -4761,6 +4740,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"داده تلفن همراه"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"دسترسی به داده‌ها با استفاده از شبکه تلفن همراه"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"تلفن، وقتی در محدوده باشد، به‌طور خودکار به این شرکت مخابراتی جابه‌جا می‌شود"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"سیم‌کارت موجود نیست"</string>
     <string name="calls_preference" msgid="2166481296066890129">"تنظیمات ترجیحی تماس‌ها"</string>
     <string name="sms_preference" msgid="7742964962568219351">"اولویت‌ها پیامک"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"هربار پرسیده شود"</string>

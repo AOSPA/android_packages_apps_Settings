@@ -732,6 +732,12 @@
     <string name="security_settings_face_enroll_education_message"></string>
     <!-- Button that takes the user to the enrollment activity [CHAR LIMIT=20] -->
     <string name="security_settings_face_enroll_education_start">Start</string>
+    <!-- Confirmation dialog message shown when users with system accessibility features enabled try to start the non-accessibility version of enrollment [CHAR LIMIT=150] -->
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message">If accessibility face unlock is turned off, some setup steps may not work properly with TalkBack.</string>
+    <!-- Negative button text for users who were shown the accessibility dialog [CHAR LIMIT=10] -->
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative">Go back</string>
+    <!-- Positive button text for users who were shown the accessibility dialog [CHAR LIMIT=20] -->
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive">Continue setup</string>
     <!-- Button shown which shows accessibility toggles for face enrollment when clicked. [CHAR LIMIT=32] -->
     <string name="security_settings_face_enroll_introduction_accessibility">Use accessibility setup</string>
     <!-- Additional details shown when the accessibility toggle is expanded. [CHAR LIMIT=NONE]-->
@@ -1840,7 +1846,7 @@
     <string name="wifi_settings">Wi\u2011Fi</string>
 
     <!-- Used in the Wi-Fi settings screen to control turning on/off Wi-Fi entirely [CHAR LIMIT=30]-->
-    <string name="wifi_settings_master_switch_title">Use Wi\u2011Fi</string>
+    <string name="wifi_settings_primary_switch_title">Use Wi\u2011Fi</string>
     <!-- Title of the Wi-fi settings screen -->
     <string name="wifi_settings_category">Wi\u2011Fi settings</string>
     <!-- Title of the Wi-fi settings entry in the left top level menu -->
@@ -2071,7 +2077,7 @@
     <!-- Title for the fragment to share Wi-Fi [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_share_wifi">Share Wi\u2011Fi</string>
     <!-- Hint for the user to use another device to scan QR code on screen to join Wi-Fi [CHAR LIMIT=NONE] -->
-    <string name="wifi_dpp_scan_qr_code_with_another_device">Scan this QR code to connect to \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d and share the password</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device">Scan this QR code with another device to join \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
     <!-- Hint for the user to use another device to scan QR code on screen to join a open Wi-Fi [CHAR LIMIT=NONE] -->
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device">Scan this QR code to connect to \u201c<xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g>\u201d</string>
     <!-- Hint for Wi-Fi DPP handshake failure [CHAR LIMIT=NONE]  -->
@@ -2124,9 +2130,7 @@
          when signal of the Wi-Fi network is reachable [CHAR LIMIT=50]  -->
     <string name="wifi_auto_connect_title">Auto\u2011connect</string>
     <!-- Hint for Wi-Fi Auto-connect [CHAR LIMIT=NONE]  -->
-    <string name="wifi_auto_connect_summary" product="default">Allow phone to automatically connect near this network</string>
-    <!-- Hint for Wi-Fi Auto-connect [CHAR LIMIT=NONE]  -->
-    <string name="wifi_auto_connect_summary" product="tablet">Allow tablet to automatically connect near this network</string>
+    <string name="wifi_auto_connect_summary">Allow connection to this network when in range</string>
     <!-- Label for "Use a QR code to add a device to this network" [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_add_device">Add device</string>
     <!-- Hint for "Add device" [CHAR LIMIT=NONE]  -->
@@ -2207,6 +2211,8 @@
     <string name="wifi_turned_on_message">Wi\u2011Fi turned on</string>
     <!-- A notification for connected to a Wi-Fi network [CHAR LIMIT=NONE] -->
     <string name="wifi_connected_to_message">Connected to <xliff:g id="network_name" example="MyNetwork">%1$s</xliff:g></string>
+    <!-- A notification for connecting to a Wi-Fi network [CHAR LIMIT=NONE] -->
+    <string name="wifi_connecting_to_message">Connecting to <xliff:g id="network_name" example="MyNetwork">%1$s</xliff:g></string>
     <!-- Button label to connecting progress to a Wi-Fi network [CHAR LIMIT=20] -->
     <string name="wifi_connecting">Connecting\u2026</string>
     <!-- Failured notification for connect -->
@@ -3101,8 +3107,6 @@
     <string name="security_patch">Android security update</string>
     <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
     <string name="model_info">Model</string>
-    <!-- About phone screen, status item summary  [CHAR LIMIT=40] -->
-    <string name="model_summary">Model&#58; %1$s</string>
     <!-- About phone screen, dialog title for showing hardware information such as model, serial number, etc.[CHAR LIMIT=60] -->
     <string name="hardware_info">Model &amp; hardware</string>
     <!-- Label for device's hardware revision value [CHAR LIMIT=40] -->
@@ -4956,8 +4960,6 @@
     <string name="accessibility_screen_magnification_title">Magnification</string>
     <!-- Title for the accessibility preference screen to edit magnification area. [CHAR LIMIT=35] -->
     <string name="accessibility_magnification_mode_title">Magnification area</string>
-    <!-- Title for the accessibility preference screen to edit magnification enable mode. [CHAR LIMIT=35] -->
-    <string name="accessibility_magnification_enable_mode_title">Magnification enable</string>
     <!-- Message for the accessibility preference screen to edit magnification area dialog. [CHAR LIMIT=none] -->
     <string name="accessibility_magnification_area_settings_message">Choose the magnification area(s) you want to use when magnifying the screen</string>
     <!-- Summary for the accessibility preference screen to edit full screen. [CHAR LIMIT=none] -->
@@ -6247,12 +6249,6 @@
     <string name="user_credentials_summary">View and modify stored credentials</string>
     <!-- Title of preference group for advance security settings [CHAR LIMIT=30] -->
     <string name="advanced_security_title">Advanced</string>
-    <!-- Title of preference of what type of credential storage this device has: hardware or software [CHAR LIMIT=30] -->
-    <string name="credential_storage_type">Storage type</string>
-    <!-- Summary text for preference showing what type of credential storage this device has when it is stored in a hardware-backed storage (as opposed to "software only") [CHAR LIMIT=NONE] -->
-    <string name="credential_storage_type_hardware">Hardware-backed</string>
-    <!-- Summary text for preference showing what type of credential storage this device has when it is stored in software only (as opposed to "hardware-backed") [CHAR LIMIT=NONE] -->
-    <string name="credential_storage_type_software">Software only</string>
     <!-- Error message for users that aren't allowed to see or modify credentials [CHAR LIMIT=none] -->
     <string name="credentials_settings_not_available">Credentials are not available for this user</string>
     <!-- Sub-heading for a user credential installed to be used by apps and as part of VPN configurations. [CHAR LIMIT=NONE] -->
@@ -7876,14 +7872,14 @@
     <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
     <string name="live_caption_summary">Automatically caption media</string>
 
-    <!-- Sound: Summary for the Do not Disturb option when there are no automatic rules enabled. [CHAR LIMIT=NONE]-->
-    <string name="zen_mode_settings_summary_off">None</string>
-
-    <!-- Sound: Summary for the Do not Disturb option when at least one automatic rule is enabled. [CHAR LIMIT=NONE]-->
-    <plurals name="zen_mode_settings_summary_on">
-        <item quantity="one">1 schedule set</item>
-        <item quantity="other"><xliff:g id="on_count" example="10">%d</xliff:g> schedules set</item>
-    </plurals>
+    <!-- Sound: Summary for the Do not Disturb option that describes how many automatic rules (schedules) are enabled [CHAR LIMIT=NONE]-->
+    <string name="zen_mode_settings_schedules_summary">
+        {count, plural,
+            =0    {None}
+            =1    {1 schedule set}
+            other {# schedules set}
+        }
+    </string>
 
     <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_title">Do Not Disturb</string>
@@ -8056,12 +8052,6 @@
     <!-- Sound settings screen, summary format of do not disturb when on with extra info. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_sound_summary_on_with_info">On / <xliff:g name="dnd_summary" example="No sound except alarms and media">%1$s</xliff:g></string>
 
-    <!-- Sound settings screen, summary format of do not disturb when off with extra information. [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_sound_summary_off_with_info">Off / <xliff:g name="dnd_summary" example="1 schedule can turn on automatically">%1$s</xliff:g></string>
-
-    <!-- Sound settings screen, summary format of do not disturb when off with no extra information. [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_sound_summary_off">Off</string>
-
     <!-- Sound settings screen, summary format of do not disturb when on with no extra information. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_sound_summary_on">On</string>
 
@@ -8072,19 +8062,29 @@
     <string name="zen_mode_duration_summary_forever">Until you turn off</string>
 
     <!--  Do not disturb: Summary for zen mode duration setting indicating how long dnd will last when dnd is manually toggled on [CHAR LIMIT=NONE] -->
-    <plurals name="zen_mode_duration_summary_time_hours">
-        <item quantity="one">1 hour</item>
-        <item quantity="other"><xliff:g id="num_hours" example="3">%d</xliff:g> hours</item>
-    </plurals>
+    <string name="zen_mode_duration_summary_time_hours">
+        {count, plural,
+            =1    {1 hour}
+            other {# hours}
+        }
+    </string>
 
     <!--  Do not disturb: Summary for zen mode duration setting indicating how long dnd will last when toggled on -->
-    <string name="zen_mode_duration_summary_time_minutes"><xliff:g id="num_minutes" example="5">%d</xliff:g> minutes</string>
+    <string name="zen_mode_duration_summary_time_minutes">
+        {count, plural,
+            =1    {1 minute}
+            other {# minutes}
+        }
+    </string>
 
-    <!-- Summary for the Sound Do not Disturb option when at least one automatic rules is enabled. [CHAR LIMIT=NONE]-->
-    <plurals name="zen_mode_sound_summary_summary_off_info">
-        <item quantity="one">1 schedule can turn on automatically</item>
-        <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> schedules can turn on automatically</item>
-    </plurals>
+    <!-- Summary for the Sound Do not Disturb option when DND isn't currently on. [CHAR LIMIT=NONE]-->
+    <string name="zen_mode_sound_summary_off">
+        {count, plural,
+            =0    {Off}
+            =1    {Off / 1 schedule can turn on automatically}
+            other {Off / # schedules can turn on automatically}
+        }
+    </string>
 
     <!-- Do not disturb settings, main screen, category header [CHAR LIMIT=120]-->
     <string name="zen_category_behavior">What can interrupt Do Not Disturb</string>
@@ -8221,6 +8221,12 @@
     <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
     <string name="asst_capability_ranking_summary">Automatically rank notifications by relevance</string>
 
+    <!-- Configure Notifications: setting title [CHAR LIMIT=80 BACKUP_MESSAGE_ID=6691908606916292167] -->
+    <string name="asst_feedback_indicator_title">Adaptive notification feedback</string>
+
+    <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
+    <string name="asst_feedback_indicator_summary">Indicate adjustments made to notifications and show the option to provide feedback to the system</string>
+
     <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
     <string name="asst_capabilities_actions_replies_title">Suggested actions and replies</string>
 
@@ -8263,7 +8269,7 @@
     <!-- Configure Notifications: setting summary [CHAR LIMIT=NONE] -->
     <string name="hide_silent_icons_summary">Icons from gentle notifications aren\'t shown in the status bar</string>
 
-    <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=5125022693565388760] -->
+    <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=50 BACKUP_MESSAGE_ID=5125022693565388760] -->
     <string name="notification_badging_title">Notification dot on app icon</string>
 
     <!-- Configure Notifications: Title for the people notification strip option. [CHAR LIMIT=60] -->
@@ -8356,7 +8362,7 @@
     <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
     <string name="notification_pulse_title">Blink light</string>
 
-    <!-- Configure Notifications: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=30] -->
+    <!-- Configure Notifications: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=60] -->
     <string name="lock_screen_notifications_title">Notifications on lock screen</string>
 
     <!-- Configure lock screen: Title for the option of unlocking directly to home. [CHAR LIMIT=30] -->
@@ -9077,12 +9083,14 @@
     <string name="zen_mode_from_all_conversations">All conversations</string>
     <string name="zen_mode_from_important_conversations">Priority conversations</string>
     <string name="zen_mode_from_no_conversations">None</string>
-    <plurals name="zen_mode_conversations_count">
-        <item quantity="one">1 conversation</item>
-        <item quantity="other"><xliff:g id="conversations" example="3">%d</xliff:g> conversations</item>
-    </plurals>
-    <!-- [CHAR LIMIT=40] Zen mode settings: No conversations are allowed to bypass DND -->
-    <string name="zen_mode_conversations_count_none">None</string>
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Number of conversations allowed to bypass DND -->
+    <string name="zen_mode_conversations_count">
+        {count, plural,
+            =0    {None}
+            =1    {1 conversation}
+            other {# conversations}
+        }
+    </string>
     <!-- [CHAR LIMIT=120] Zen mode settings: Header for calls and messages section of conversations
     setting page -->
     <string name="zen_mode_people_calls_messages_section_title">Who can interrupt</string>
@@ -9103,12 +9111,15 @@
     <!-- [CHAR LIMIT=50] Zen mode settings: Starred contacts preference title -->
     <string name="zen_mode_starred_contacts_title">Starred contacts</string>
     <!-- Zen mode settings: Starred contacts summary [CHAR LIMIT=NONE] -->
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts">
-        <item quantity="one">1 other</item>
-        <item quantity="other"><xliff:g id="num_people" example="3">%d</xliff:g> others</item>
-    </plurals>
-    <!-- [CHAR LIMIT=40] Zen mode settings: Starred contacts summary when there are no starred contacts -->
-    <string name="zen_mode_starred_contacts_summary_none">None</string>
+    <string name="zen_mode_starred_contacts_summary_contacts">
+        {count, plural, offset:2
+            =0    {None}
+            =1    {{contact_1}}
+            =2    {{contact_1} and {contact_2}}
+            =3    {{contact_1}, {contact_2}, and {contact_3}}
+            other {{contact_1}, {contact_2}, and # others}
+        }
+    </string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Messages</string>
@@ -9127,15 +9138,14 @@
     <string name="zen_mode_all_messages_summary">All messages can reach you</string>
     <!-- Zen mode settings: All calls can bypass DND summary [CHAR LIMIT=NONE -->
     <string name="zen_mode_all_calls_summary">All calls can reach you</string>
-
-    <!-- Zen mode settings: There are no contacts on the device [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_contacts_count_none">None</string>
     <!-- Zen mode settings: Senders in contacts can bypass DND summary summary [CHAR LIMIT=NONE] -->
-    <plurals name="zen_mode_contacts_count">
-        <item quantity="one">1 contact</item>
-        <item quantity="other"><xliff:g id="num_contacts" example="120">%d</xliff:g> contacts</item>
-    </plurals>
-
+    <string name="zen_mode_contacts_count">
+        {count, plural,
+            =0    {None}
+            =1    {1 contact}
+            other {# contacts}
+        }
+    </string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From anyone -->
     <string name="zen_mode_from_anyone">Anyone</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From contacts only -->
@@ -9220,14 +9230,16 @@
     <string name="zen_mode_bypassing_apps_summary_some">Some notifications</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Footer for DND bypassing apps settings -->
     <string name="zen_mode_bypassing_apps_footer">Selected people can still reach you, even if you don\u2019t allow apps to interrupt</string>
-    <!-- [CHAR LIMIT=120] Zen mode settings: Allow apps to bypass DND -->
-    <plurals name="zen_mode_bypassing_apps_subtext">
-        <item quantity="one"><xliff:g id="app_name" example="Nest">%s</xliff:g> can interrupt</item>
-        <item quantity="other"><xliff:g id="app_names" example="Nest and Google Play Store">%s</xliff:g> can interrupt</item>
-    </plurals>
-    <!-- [CHAR LIMIT=30] Zen mode settings: List item in a summary indicating additional apps are
-     allowed to bypass Do Not Disturb. For example, "Nest, Messages, and 2 more can interrupt". -->
-    <string name="zen_mode_apps_bypassing_list_count"><xliff:g id="number" example="2">%d</xliff:g> more</string>
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Lists apps that can bypass DND. For example, "Nest, Messages, and 2 more can interrupt". -->
+    <string name="zen_mode_bypassing_apps_subtext">
+        {count, plural, offset:2
+            =0    {No apps can interrupt}
+            =1    {{app_1} can interrupt}
+            =2    {{app_1} and {app_2} can interrupt}
+            =3    {{app_1}, {app_2}, and {app_3} can interrupt}
+            other {{app_1}, {app_2}, and # more can interrupt}
+        }
+    </string>
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
     <string name="zen_mode_bypassing_apps_title">Apps</string>
     <!-- [CHAR LIMIT=100] Zen mode settings: App that can bypass DND's secondary text describing which notification channels from the app can bypass DND-->
@@ -9240,18 +9252,18 @@
     toggle title -->
     <string name="zen_mode_bypassing_app_channels_toggle_all">Allow all notifications</string>
 
-    <!-- [CHAR LIMIT=120] Zen mode settings: Summary for sound interruption settings -->
-    <plurals name="zen_mode_other_sounds_summary">
-        <item quantity="one"><xliff:g id="sound_category">%s</xliff:g> can interrupt</item>
-        <item quantity="other"><xliff:g id="sound_categories" example="Alarms, media sounds, and 2 more">%s</xliff:g> can interrupt</item>
-    </plurals>
-    <!-- [CHAR LIMIT=120] Zen mode settings: No other sounds are allowed to bypass DND -->
-    <string name="zen_mode_other_sounds_none">Nothing can interrupt</string>
-    <!-- [CHAR LIMIT=30] Zen mode settings: List item in a summary indicating additional sounds
-    are allowed to bypass Do Not Disturb. For example, "Alarms, media sounds, and 2 more can
-    interrupt". -->
-    <string name="zen_mode_other_sounds_list_count"><xliff:g id="number" example="2">%d</xliff:g> more</string>
-
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Summary for sound interruption settings -->
+    <string name="zen_mode_other_sounds_summary">
+        {count, plural, offset:2
+            =0    {Nothing can interrupt}
+            =1    {{sound_category_1} can interrupt}
+            =2    {{sound_category_1} and {sound_category_2} can interrupt}
+            =3    {{sound_category_1}, {sound_category_2}, and {sound_category_3} can interrupt}
+            other {{sound_category_1}, {sound_category_2}, and # more can interrupt}
+        }
+    </string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: No sounds are allowed to bypass DND -->
+    <string name="zen_mode_sounds_none">Nothing can interrupt</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: Summary for people category -->
     <string name="zen_mode_people_none">No one can interrupt</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: Summary for people category -->
@@ -10937,6 +10949,28 @@
     <!-- Preference and settings suggestion title text for ambient display double tap (device) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="device">Double-tap to check device</string>
 
+    <!-- Do not translate. Title text for swiping downwards on the bottom of the screen for notifications [CHAR LIMIT=25]-->
+    <string name="swipe_bottom_to_notifications_title" translatable="false">Swipe for notifications</string>
+    <!-- Do not translate. Summary text for swiping downwards on the bottom of the screen for notifications [CHAR LIMIT=80]-->
+    <string name="swipe_bottom_to_notifications_summary" translatable="false">Swipe down on the bottom of the screen to check the notification</string>
+
+    <!-- Preference and settings suggestion title text for one handed [CHAR LIMIT=60] -->
+    <string name="one_handed_title">One-Handed mode</string>
+    <!-- Preference Switch for enabling one handed [CHAR LIMIT=60] -->
+    <string name="one_handed_mode_enabled">Use one-handed mode</string>
+    <!-- Preference Switch for app taps to exit one handed [CHAR LIMIT=60] -->
+    <string name="one_handed_app_taps_to_exit">Exit when switching apps</string>
+    <!-- Timeout(Never) title for one handed [CHAR LIMIT=60] -->
+    <string name="one_handed_timeout_title">Timeout</string>
+    <!-- Timeout(Short) title for one handed [CHAR LIMIT=60] -->
+    <string name="one_handed_timeout_short">4 seconds</string>
+    <!-- Timeout(Medium) title for one handed [CHAR LIMIT=60] -->
+    <string name="one_handed_timeout_medium">8 seconds</string>
+    <!-- Timeout(Long) title for one handed [CHAR LIMIT=60] -->
+    <string name="one_handed_timeout_long">12 seconds</string>
+    <!-- Search keywords for "One-Handed" settings [CHAR_LIMIT=NONE] -->
+    <string name="keywords_one_handed">reachability</string>
+
     <!-- Summary text for ambient display double tap [CHAR LIMIT=NONE]-->
     <string name="ambient_display_summary">To check time, notifications, and other info, double-tap your screen.</string>
 
@@ -11686,6 +11720,9 @@
     <string name="mobile_data_settings_summary_auto_switch">
         Phone will automatically switch to this carrier when in range
     </string>
+    <!-- Mobile network setting screen, summary of Mobile data switch preference when the network
+         is unavailable, the preference selection will be disabled. [CHAR LIMIT=NONE] -->
+    <string name="mobile_data_settings_summary_unavailable">No SIM card available</string>
 
     <!-- Mobile network settings screen, title of item showing the name of the default subscription
     that will be used for data. This only appears in multi-SIM mode. [CHAR LIMIT=NONE] -->
@@ -11940,7 +11977,7 @@
     <string name="force_desktop_mode">Force desktop mode</string>
     <!-- UI debug setting: force desktop mode summary [CHAR LIMIT=NONE] -->
     <string name="force_desktop_mode_summary">Force experimental desktop mode on secondary displays</string>
-    <!-- UI debug setting: enable non-resizables in freeform [CHAR LIMIT=50] -->
+    <!-- UI debug setting: enable non-resizables in freeform [CHAR LIMIT=60] -->
     <string name="enable_sizecompat_freeform">Enable freeform sizecompat</string>
     <!-- UI debug setting: enable non-resizables in freeform summary [CHAR LIMIT=NONE] -->
     <string name="enable_sizecompat_freeform_summary">Allows sizecompat apps to be in freeform</string>

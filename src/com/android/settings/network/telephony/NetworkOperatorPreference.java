@@ -38,6 +38,7 @@ import android.util.Log;
 
 import androidx.preference.Preference;
 
+import com.android.internal.telephony.OperatorInfo;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -172,6 +173,18 @@ public class NetworkOperatorPreference extends Preference {
      */
     public String getOperatorName() {
         return CellInfoUtil.getNetworkTitle(mCellId, getOperatorNumeric());
+    }
+
+    /**
+     * Operator info of this cell
+     */
+    public OperatorInfo getOperatorInfo() {
+        return new OperatorInfo(Objects.toString(mCellId.getOperatorAlphaLong(), ""),
+                Objects.toString(mCellId.getOperatorAlphaShort(), ""),
+                getOperatorNumeric(),
+                // Send accessNetworkType as a parameter.
+                // This is converted to RadioAccessNetwork in the Telephony Framework.
+                getAccessNetworkType());
     }
 
     private int getIconIdForCell(CellInfo ci) {

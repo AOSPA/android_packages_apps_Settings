@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Brug dit ansigt til godkendelse"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Start"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Hvis hjælpefunktionen Ansigtslås er deaktiveret, vil nogle konfigurationstrin muligvis ikke fungere korrekt via TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Gå tilbage"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Fortsæt konfig."</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Brug avanceret konfiguration"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -903,7 +906,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Centrer QR-koden nedenfor for at oprette forbindelse til \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Opret forbindelse til Wi-Fi-netværket ved at scanne en QR-kode"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Del Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Scan denne QR-kode for at oprette forbindelse til \"<xliff:g id="SSID">%1$s</xliff:g>\" og dele adgangskoden"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Scan denne QR-kode med en anden enhed for at oprette forbindelse til \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Scan denne QR-kode for at oprette forbindelse til \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Prøv igen. Hvis problemet fortsætter, skal du kontakte enhedsproducenten"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Noget gik galt"</string>
@@ -1329,7 +1332,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android-version"</string>
     <string name="security_patch" msgid="4071756145347865382">"Sikkerhedsopdatering til Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Model: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Model og hardware"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Hardwareversion"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Udstyrs-id"</string>
@@ -2117,7 +2119,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Præferencer for undertekster"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Forstørrelse"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Forstørrelsesområde"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Aktivering af forstørrelse"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Vælg de områder, du vil bruge, når du forstørrer skærmen"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Fuld skærm"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"En del af skærmen"</string>
@@ -3326,11 +3327,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Aktivér lyde"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Livetekstning"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Undertekster til medier"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Ingen"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> tidsplan er angivet</item>
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> tidsplaner er angivet</item>
-    </plurals>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ingen}=1{1 tidsplan er angivet}one{# tidsplan er angivet}other{# tidsplaner er angivet}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Forstyr ikke"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Få kun notifikationer om vigtige personer og apps"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Begræns antallet af afbrydelser"</string>
@@ -3398,20 +3395,12 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Kun prioritet"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Til – <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"Fra – <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"Fra"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Til"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Spørg hver gang"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Indtil du deaktiverer"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
-      <item quantity="one"><xliff:g id="NUM_HOURS">%d</xliff:g> time</item>
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> timer</item>
-    </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g> minutter"</string>
-    <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> tidsplan kan starte automatisk</item>
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> tidsplaner kan starte automatisk</item>
-    </plurals>
+    <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 time}one{# time}other{# timer}}"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 minut}one{# minut}other{# minutter}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Deaktiveret}=1{Deaktiveret/1 tidsplan kan starte automatisk}one{Deaktiveret/# tidsplan kan starte automatisk}other{Deaktiveret/# tidsplaner kan starte automatisk}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"Hvad kan afbryde Forstyr ikke"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Personer"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
@@ -3457,6 +3446,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Angiv automatisk notifikationer med lavere prioritet som Diskret"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Automatisk rangering af notifikationer"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Ranger automatisk notifikationer efter relevans"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Feedback om tilpassede notifikationer"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Vis justeringer af notifikationer, og vis en mulighed for at give feedback til systemet"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Foreslåede handlinger og svar"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Vis automatisk foreslåede handlinger og svar"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Vis seneste notifikationer og notifikationer, der er udsat"</string>
@@ -3748,11 +3739,7 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Alle samtaler"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Prioriterede samtaler"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ingen"</string>
-    <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="one"><xliff:g id="CONVERSATIONS">%d</xliff:g> samtale</item>
-      <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> samtaler</item>
-    </plurals>
-    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"Ingen"</string>
+    <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Ingen}=1{1 samtale}one{# samtale}other{# samtaler}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Hvem kan afbryde?"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Opkald"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Opkald"</string>
@@ -3761,11 +3748,7 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Hvis du vil sørge for, at tilladte opkald benytter lyd, skal du tjekke, at enheden er indstillet til at ringe"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Indgående opkald blokeres for \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Du kan ændre indstillingerne, så dine venner, din familie eller andre kontakter kan få fat i dig."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Stjernemarkerede kontakter"</string>
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
-      <item quantity="one"><xliff:g id="NUM_PEOPLE">%d</xliff:g> anden</item>
-      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> andre</item>
-    </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"Ingen"</string>
+    <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Ingen}=1{{contact_1}}=2{{contact_1} og {contact_2}}=3{{contact_1}, {contact_2} og {contact_3}}one{{contact_1}, {contact_2} og # mere}other{{contact_1}, {contact_2} og # andre}}"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Beskeder"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"beskeder"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Beskeder"</string>
@@ -3774,11 +3757,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Indgående beskeder er blokeret for \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Du kan ændre indstillingerne, så dine venner, din familie eller andre kontakter kan få fat i dig."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Du modtager alle beskeder"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Du modtager alle opkald"</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"Ingen"</string>
-    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
-      <item quantity="one"><xliff:g id="NUM_CONTACTS">%d</xliff:g> kontakt</item>
-      <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> kontakter</item>
-    </plurals>
+    <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{Ingen}=1{1 kontakt}one{# kontakt}other{# kontakter}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Alle"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontakter"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Stjernemarkerede kontakter"</string>
@@ -3816,22 +3795,14 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Alle notifikationer"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Nogle notifikationer"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Valgte personer kan stadig kontakte dig, selv hvis du ikke tillader, at apps kan afbryde"</string>
-    <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="one"><xliff:g id="APP_NAMES">%s</xliff:g> kan afbryde</item>
-      <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> kan afbryde</item>
-    </plurals>
-    <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> til"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Ingen apps kan afbryde}=1{{app_1} kan afbryde}=2{{app_1} og {app_2} kan afbryde}=3{{app_1}, {app_2} og {app_3} kan afbryde}one{{app_1}, {app_2} og # mere kan afbryde}other{{app_1}, {app_2} og # andre kan afbryde}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Apps"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Alle notifikationer"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Nogle notifikationer"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notifikationer, der kan afbryde"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Tillad alle notifikationer"</string>
-    <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="one"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> kan afbryde</item>
-      <item quantity="other"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> kan afbryde</item>
-    </plurals>
-    <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"Intet kan afbryde"</string>
-    <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"<xliff:g id="NUMBER">%d</xliff:g> til"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Intet kan afbryde}=1{{sound_category_1} kan afbryde}=2{{sound_category_1} og {sound_category_2} kan afbryde}=3{{sound_category_1}, {sound_category_2} og{sound_category_3} kan afbryde}one{{sound_category_1}, {sound_category_2} og # mere kan afbryde}other{{sound_category_1}, {sound_category_2} og # andre kan afbryde}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Intet kan afbryde"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Ingen kan afbryde"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Nogle personer kan afbryde"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Alle personer kan afbryde"</string>
@@ -4473,6 +4444,14 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Tryk to gange for at tjekke telefonen"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Tryk to gange for at tjekke din tablet"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Tryk to gange for at tjekke enheden"</string>
+    <string name="one_handed_title" msgid="1741600445540072513">"Enhåndstilstand"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Brug enhåndstilstand"</string>
+    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Afslut ved skift mellem apps"</string>
+    <string name="one_handed_timeout_title" msgid="8851767822595789976">"Timeout"</string>
+    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 sekunder"</string>
+    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 sekunder"</string>
+    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 sekunder"</string>
+    <string name="keywords_one_handed" msgid="969440592493034101">"brug med en hånd"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Tryk to gange på skærmen for at se klokkeslæt, notifikationer og andre oplysninger."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Løft for at tjekke telefonen"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Løft for at tjekke din tablet"</string>
@@ -4761,6 +4740,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Mobildata"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Brug data via mobilnetværk"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Telefonen skifter automatisk til dette mobilselskab, når netværket er inden for rækkevidde"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Der er ikke noget tilgængeligt SIM-kort"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Opkaldspræference"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Sms-præference"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Spørg hver gang"</string>

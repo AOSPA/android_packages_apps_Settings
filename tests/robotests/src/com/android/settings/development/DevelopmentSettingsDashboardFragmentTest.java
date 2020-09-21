@@ -41,6 +41,7 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -130,6 +131,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
+    @Ignore
     @Config(shadows = {
             ShadowPictureColorModePreferenceController.class,
             ShadowAdbPreferenceController.class,

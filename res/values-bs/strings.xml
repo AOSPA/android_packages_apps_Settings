@@ -332,6 +332,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Koristite lice za autentifikaciju"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Započni"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Ako je otključavanje licem za pristupačnost isključeno, neki koraci za postavljanje možda neće funkcionirati ispravno s Talkbackom."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Nazad"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Nastavi postavljanje"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Koristi postavku za pristupačnost"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -920,7 +923,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Centrirajte QR kôd ispod da se povežete na mrežu “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Skenirajte QR kôd da se pridružite WiFi mreži"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Dijeli WiFi mrežu"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Skenirajte ovaj QR kôd da se povežete s mrežom “<xliff:g id="SSID">%1$s</xliff:g>” i dijelite lozinku"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Skenirajte ovaj QR kôd pomoću drugog uređaja da se pridružite mreži “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Skenirajte ovaj QR kôd da se povežete s mrežom “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Pokušajte ponovo. Ako se problem ne riješi, kontaktirajte proizvođača uređaja"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Nešto nije uredu"</string>
@@ -1350,7 +1353,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Verzija Androida"</string>
     <string name="security_patch" msgid="4071756145347865382">"Sigurnosno ažuriranje za Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Model: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Model i hardver"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Verzija hardvera"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ID opreme"</string>
@@ -2141,7 +2143,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Postavke titlova"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Uvećavanje"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Područje uvećavanja"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Omogućavanje uvećavanja"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Odabir područja uvećavanja koja želite koristiti prilikom uvećavanja ekrana"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Cijeli ekran"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Dio ekrana"</string>
@@ -3370,12 +3371,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Uključivanje zvukova"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Automatski titlovi"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Automatski titluj medije"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Nema"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="one">Postavljen je <xliff:g id="ON_COUNT">%d</xliff:g> raspored</item>
-      <item quantity="few">Postavljena su <xliff:g id="ON_COUNT">%d</xliff:g> rasporeda</item>
-      <item quantity="other">Postavljeno je <xliff:g id="ON_COUNT">%d</xliff:g> rasporeda</item>
-    </plurals>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nema}=1{Postavljen je 1 raspored}one{Postavljen je # raspored}few{Postavljena su # rasporeda}other{Postavljeno je # rasporeda}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne ometaj"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Primajte obavještenja samo od važnih osoba i aplikacija"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Ograničite ometanja"</string>
@@ -3443,22 +3439,12 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Samo prioriteti"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Uključeno / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"Isključeno / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"Isključeno"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Uključeno"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Pitaj svaki put"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Dok ne isključite"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
-      <item quantity="one"><xliff:g id="NUM_HOURS">%d</xliff:g> sat</item>
-      <item quantity="few"><xliff:g id="NUM_HOURS">%d</xliff:g> sata</item>
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> sati</item>
-    </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g> min"</string>
-    <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> raspored se može automatski uključiti</item>
-      <item quantity="few"><xliff:g id="ON_COUNT">%d</xliff:g> rasporeda se mogu automatski uključiti</item>
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> rasporeda se može automatski uključiti</item>
-    </plurals>
+    <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 sat}one{# sat}few{# sata}other{# sati}}"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 minuta}one{# minuta}few{# minute}other{# minuta}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Isključeno}=1{Isključeno/1 raspored se može automatski uključiti}one{Isključeno/# raspored se može automatski uključiti}few{Isključeno/# rasporeda se mogu automatski uključiti}other{Isključeno/# rasporeda se može automatski uključiti}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"Šta može prekinuti funkciju Ne ometaj"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Osobe"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Aplikacije"</string>
@@ -3504,6 +3490,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Obavještenja niskog prioriteta automatski će se postaviti na Diskretno"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Prilagodljivo rangiranje obavještenja"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Automatski rangira obavještenja prema relevantnosti"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Povratne informacije o prilagodljivim obavještenjima"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Pokazivanje prilagođavanja obavještenja i prikaz opcije za pružanje povratnih informacija sistemu"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Predložene radnje i odgovori"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Automatski se prikazuju predložene radnje i odgovori"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Pregledajte nedavna i odgođena obavještenja"</string>
@@ -3803,12 +3791,7 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Svi razgovori"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Prioritetni razgovori"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Nema"</string>
-    <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="one"><xliff:g id="CONVERSATIONS">%d</xliff:g> razgovor</item>
-      <item quantity="few"><xliff:g id="CONVERSATIONS">%d</xliff:g> razgovora</item>
-      <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> razgovora</item>
-    </plurals>
-    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"Nema"</string>
+    <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Nema}=1{1 razgovor}one{# razgovor}few{# razgovora}other{# razgovora}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Ko vas može prekinuti"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Pozivi"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Pozivi"</string>
@@ -3817,12 +3800,7 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Da se uvjerite da ćete čuti dozvoljene pozive, provjerite je li uređaj postavljen da zvoni"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Dolazni pozivi su blokirani za raspored \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Postavke možete podesiti da omogućite prijateljima, porodici ili drugim kontaktima da vas kontaktiraju."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Kontakti označeni zvjezdicom"</string>
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
-      <item quantity="one">još <xliff:g id="NUM_PEOPLE">%d</xliff:g> osoba</item>
-      <item quantity="few">još <xliff:g id="NUM_PEOPLE">%d</xliff:g> osobe</item>
-      <item quantity="other">još <xliff:g id="NUM_PEOPLE">%d</xliff:g> osoba</item>
-    </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"Ništa"</string>
+    <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Nema}=1{{contact_1}}=2{{contact_1} i {contact_2}}=3{{contact_1}, {contact_2} i {contact_3}}one{{contact_1}, {contact_2} i još # kontakt}few{{contact_1}, {contact_2} i još # kontakta}other{{contact_1}, {contact_2} i još # kontakata}}"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Poruke"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"poruke"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Poruke"</string>
@@ -3831,12 +3809,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Dolazne poruke su blokirane za raspored \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Postavke možete podesiti da prijateljima, porodici ili drugim kontaktima dozvolite da vas kontaktiraju."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Primate sve poruke"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Primate sve pozive"</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"Ništa"</string>
-    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
-      <item quantity="one"><xliff:g id="NUM_CONTACTS">%d</xliff:g> kontakt</item>
-      <item quantity="few"><xliff:g id="NUM_CONTACTS">%d</xliff:g> kontakta</item>
-      <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> kontakata</item>
-    </plurals>
+    <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{Nema}=1{1 kontakt}one{# kontakt}few{# kontakta}other{# kontakata}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Svako"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontakti"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Kontakti označeni zvjezdicom"</string>
@@ -3874,24 +3847,14 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Sva obavještenja"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Neka obavještenja"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Odabrane osobe vas i dalje mogu kontaktirati čak i ako ne dozvolite aplikacijama da vas prekidaju"</string>
-    <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="one">Aplikacije <xliff:g id="APP_NAMES">%s</xliff:g> mogu prekinuti</item>
-      <item quantity="few">Aplikacije <xliff:g id="APP_NAMES">%s</xliff:g> mogu prekinuti</item>
-      <item quantity="other">Aplikacije <xliff:g id="APP_NAMES">%s</xliff:g> mogu prekinuti</item>
-    </plurals>
-    <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"još <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Nijedna aplikacija ne može prekinuti}=1{Aplikacija {app_1} može prekinuti}=2{Aplikacije {app_1} i {app_2} mogu prekinuti}=3{Aplikacije {app_1}, {app_2} i {app_3} mogu prekinuti}one{Aplikacije {app_1}, {app_2} i još # njih mogu prekinuti}few{Aplikacije {app_1}, {app_2} i još # njih mogu prekinuti}other{Aplikacije {app_1}, {app_2} i još # njih mogu prekinuti}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Aplikacije"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Sva obavještenja"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Neka obavještenja"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Obavještenja koja vas mogu prekinuti"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Dozvoli sva obavještenja"</string>
-    <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="one">Zvukovi <xliff:g id="SOUND_CATEGORIES">%s</xliff:g> mogu prekinuti</item>
-      <item quantity="few">Zvukovi <xliff:g id="SOUND_CATEGORIES">%s</xliff:g> mogu prekinuti</item>
-      <item quantity="other">Zvukovi <xliff:g id="SOUND_CATEGORIES">%s</xliff:g> mogu prekinuti</item>
-    </plurals>
-    <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"Ništa ne može prekinuti"</string>
-    <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"još <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Ništa ne može prekinut}=1{Zvuk {sound_category_1} može prekinuti}=2{Zvukovi {sound_category_1} i {sound_category_2} mogu prekinuti}=3{Zvukovi {sound_category_1}, {sound_category_2} i {sound_category_3} mogu prekinuti}one{Zvukovi {sound_category_1}, {sound_category_2} i još # njih mogu prekinuti}few{Zvukovi {sound_category_1}, {sound_category_2} i još # njih mogu prekinuti}other{Zvukovi {sound_category_1}, {sound_category_2} i još # njih mogu prekinuti}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Ništa ne može prekinuti"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Niko ne može prekinuti"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Neke osobe mogu prekinuti"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Sve osobe mogu prekinuti"</string>
@@ -4554,6 +4517,14 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Dodirnite dvaput da provjerite telefon"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Provjera tableta dvostrukim dodirom"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Provjera uređaja dvostrukim dodirom"</string>
+    <string name="one_handed_title" msgid="1741600445540072513">"Način rada jednom rukom"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Koristi način rada jednom rukom"</string>
+    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Izađi pri prebacivanju između aplikacija"</string>
+    <string name="one_handed_timeout_title" msgid="8851767822595789976">"Isteklo vrijeme"</string>
+    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 sekunde"</string>
+    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 sekundi"</string>
+    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 sekundi"</string>
+    <string name="keywords_one_handed" msgid="969440592493034101">"mogućnost dosega"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Dvaput dodirnite ekran da provjerite vrijeme, obavještenja i druge informacije."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Podignite da provjerite telefon"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Podignite za provjeru tableta"</string>
@@ -4604,7 +4575,7 @@
     <string name="enterprise_privacy_exposure_changes_category" msgid="5459989751333816587">"Izmjene koje je izvršio adminstrator vaše organizacije"</string>
     <string name="enterprise_privacy_device_access_category" msgid="140157499478630004">"Vaš pristup ovom uređaju"</string>
     <string name="enterprise_privacy_enterprise_data" msgid="3963070078195245028">"Podaci koji su povezani s vašim računom, kao što su e-pošta ili kalendar"</string>
-    <string name="enterprise_privacy_installed_packages" msgid="6707006112254572820">"Spisak aplikacija na vašem uređaju"</string>
+    <string name="enterprise_privacy_installed_packages" msgid="6707006112254572820">"Lista aplikacija na vašem uređaju"</string>
     <string name="enterprise_privacy_usage_stats" msgid="6328506963853465534">"Utrošeno vrijeme i podaci za svaku aplikaciju"</string>
     <string name="enterprise_privacy_network_logs" msgid="3081744541193695887">"Najskoriji zapis mrežnog saobraćaja"</string>
     <string name="enterprise_privacy_bug_reports" msgid="2635897583413134123">"Najnoviji izvještaj o greškama"</string>
@@ -4849,6 +4820,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Prijenos podataka na mobilnoj mreži"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Pristup prijenosu podataka putem mobilne mreže"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Telefon će se automatski prebaciti na ovog operatera kada bude u dometu"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"Sim kartica nije dostupna"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Postavke za pozive"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Postavke za SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Pitaj svaki put"</string>

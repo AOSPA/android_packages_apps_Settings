@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"얼굴로 인증"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"시작"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"접근성 얼굴인식 잠금해제가 사용 중지되면 음성 안내 지원 사용 시 일부 설정 단계가 제대로 작동하지 않을 수 있습니다."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"뒤로"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"설정 계속"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"접근성 설정 사용"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -903,7 +906,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"\'<xliff:g id="SSID">%1$s</xliff:g>\'에 연결하려면 아래 창의 가운데 부분에 QR 코드를 맞추세요."</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"QR 코드를 스캔하여 Wi‑Fi에 연결하세요."</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Wi‑Fi 공유"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"이 QR 코드를 스캔하여 \'<xliff:g id="SSID">%1$s</xliff:g>\'에 연결하고 비밀번호를 공유하세요."</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"다른 기기로 이 QR 코드를 스캔하여 \'<xliff:g id="SSID">%1$s</xliff:g>\'에 연결"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"이 QR 코드를 스캔하여 \'<xliff:g id="SSID">%1$s</xliff:g>\'에 연결"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"다시 시도해 보세요. 문제가 계속되면 기기 제조업체에 문의하세요."</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"문제 발생"</string>
@@ -1329,7 +1332,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android 버전"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android 보안 업데이트"</string>
     <string name="model_info" msgid="8997566254717810904">"모델"</string>
-    <string name="model_summary" msgid="2246651782442466213">"모델: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"모델 및 하드웨어"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"하드웨어 버전"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"장비 ID"</string>
@@ -2117,7 +2119,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"자막 환경설정"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"확대"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"확대 영역"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"확대 사용 설정"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"화면 확대 시 사용할 확대 영역 선택"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"전체 화면"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"화면 일부"</string>
@@ -3326,11 +3327,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"부팅 소리"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"실시간 자막"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"미디어 자막 자동 생성"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"없음"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="other">예약 <xliff:g id="ON_COUNT">%d</xliff:g>개 설정됨</item>
-      <item quantity="one">예약 1개 설정됨</item>
-    </plurals>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{없음}=1{일정 1개 설정됨}other{일정 #개 설정됨}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"방해 금지 모드"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"중요한 사람과 앱의 알림만 받기"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"방해 요소 제한"</string>
@@ -3398,20 +3395,12 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"중요 알림만 허용"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"켜짐/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"사용 안함/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"사용 안함"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"켜짐"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"항상 확인"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"사용 중지할 때까지"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g>시간</item>
-      <item quantity="one">1시간</item>
-    </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g>분"</string>
-    <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>개의 예약이 자동으로 사용 설정될 수 있습니다.</item>
-      <item quantity="one">1개의 예약이 자동으로 사용 설정될 수 있습니다.</item>
-    </plurals>
+    <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1시간}other{#시간}}"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1분}other{#분}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{꺼짐}=1{꺼짐/일정 1개가 자동으로 사용 설정될 수 있음}other{꺼짐/일정 #개가 자동으로 사용 설정될 수 있음}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"방해 금지 모드 예외 항목"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"사람"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"앱"</string>
@@ -3457,6 +3446,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"우선순위가 낮은 알림을 조용한 알림으로 자동 설정합니다."</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"적응형 알림 순위 지정"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"관련성에 따라 자동으로 알림 순위 지정"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"적응형 알림 의견"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"알림의 수정사항을 표시하며 시스템에 의견을 제공하는 옵션을 보여줍니다."</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"추천 작업 및 답장"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"추천 작업 및 답장을 자동으로 표시합니다."</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"최근 알림 및 일시 중지된 알림 표시"</string>
@@ -3748,11 +3739,7 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"모든 대화"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"우선순위 대화"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"없음"</string>
-    <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="other">대화 <xliff:g id="CONVERSATIONS">%d</xliff:g>개</item>
-      <item quantity="one">대화 1개</item>
-    </plurals>
-    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"없음"</string>
+    <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{없음}=1{대화 1개}other{대화 #개}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"예외 사용자"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"전화"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"전화"</string>
@@ -3761,11 +3748,7 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"허용된 전화를 놓치지 않도록 기기가 벨소리로 설정되어 있는지 확인하세요."</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"예약된 시간(‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\')에 수신 전화가 차단됩니다. 설정을 조정하여 친구, 가족 또는 연락처에 등록된 다른 사용자의 연락을 허용할 수 있습니다."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"별표 표시한 연락처"</string>
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
-      <item quantity="other">외 <xliff:g id="NUM_PEOPLE">%d</xliff:g>명</item>
-      <item quantity="one">외 1명</item>
-    </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"없음"</string>
+    <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{없음}=1{{contact_1}}=2{{contact_1} 및 {contact_2}}=3{{contact_1}, {contact_2} 및 {contact_3}}other{{contact_1}, {contact_2} 외 #명}}"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"메시지"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"메시지"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"메시지"</string>
@@ -3774,11 +3757,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"예약된 시간(‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\')에 수신 메시지가 차단됩니다. 설정을 조정하여 친구, 가족 또는 연락처에 등록된 다른 사용자의 연락을 허용할 수 있습니다."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"모든 메시지 받기"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"모든 전화 받기"</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"없음"</string>
-    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
-      <item quantity="other">연락처 <xliff:g id="NUM_CONTACTS">%d</xliff:g>개</item>
-      <item quantity="one">연락처 1개</item>
-    </plurals>
+    <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{없음}=1{연락처 1개}other{연락처 #개}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"모든 사용자"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"연락처"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"별표표시한 연락처"</string>
@@ -3816,22 +3795,14 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"모든 알림"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"일부 알림"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"선택된 사람은 앱 알림이 사용 중지되어 있어도 나에게 연락할 수 있습니다."</string>
-    <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> 예외</item>
-      <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> 예외</item>
-    </plurals>
-    <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"외 <xliff:g id="NUMBER">%d</xliff:g>개"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{예외 앱 없음}=1{{app_1} 예외}=2{{app_1} 및 {app_2} 예외}=3{{app_1}, {app_2}, {app_3} 예외}other{{app_1}, {app_2} 외 #개 예외}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"앱"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"모든 알림"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"일부 알림"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"예외 알림"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"모든 알림 허용"</string>
-    <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="other"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> 예외</item>
-      <item quantity="one"><xliff:g id="SOUND_CATEGORY">%s</xliff:g> 예외</item>
-    </plurals>
-    <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"예외 소리 없음"</string>
-    <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"외 <xliff:g id="NUMBER">%d</xliff:g>개"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{예외 소리 없음}=1{{sound_category_1} 예외}=2{{sound_category_1} 및 {sound_category_2} 예외}=3{{sound_category_1}, {sound_category_2}, {sound_category_3} 예외}other{{sound_category_1}, {sound_category_2} 외 #가지 예외}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"예외 소리 없음"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"예외 사용자 없음"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"일부 사용자만 예외"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"모든 사람 예외"</string>
@@ -4473,6 +4444,14 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"두 번 탭하여 휴대전화 확인"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"두 번 탭하여 태블릿 확인"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"두 번 탭하여 기기 확인"</string>
+    <string name="one_handed_title" msgid="1741600445540072513">"한 손 사용 모드"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"한 손 사용 모드 사용"</string>
+    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"앱 전환 시 종료"</string>
+    <string name="one_handed_timeout_title" msgid="8851767822595789976">"시간 제한"</string>
+    <string name="one_handed_timeout_short" msgid="304069319841702995">"4초"</string>
+    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8초"</string>
+    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12초"</string>
+    <string name="keywords_one_handed" msgid="969440592493034101">"한 손 사용 가능 여부"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"시간, 알림, 기타 정보를 확인하려면 화면을 두 번 탭하세요."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"들어 올려 휴대전화 확인"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"들어서 태블릿 확인"</string>
@@ -4761,6 +4740,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"모바일 데이터"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"모바일 네트워크를 사용하여 데이터 액세스"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"범위 안에 들어오면 휴대전화가 이 이동통신사로 자동 전환됩니다."</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"사용할 수 있는 SIM 카드가 없음"</string>
     <string name="calls_preference" msgid="2166481296066890129">"통화 환경설정"</string>
     <string name="sms_preference" msgid="7742964962568219351">"SMS 환경설정"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"항상 확인"</string>

@@ -38,6 +38,7 @@ import android.view.accessibility.AccessibilityManager.TouchExplorationStateChan
 import android.widget.CheckBox;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -97,6 +98,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         initShortcutPreference();
+
+        mSettingsPreference = new Preference(getPrefContext());
+        mSettingsPreference.setTitle(R.string.accessibility_menu_item_settings);
+        mSettingsPreference.setFragment(MagnificationSettingsFragment.class.getName());
+        mSettingsPreference.setPersistent(false);
 
         super.onViewCreated(view, savedInstanceState);
     }
@@ -172,11 +178,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final View advancedView = dialog.findViewById(R.id.advanced_shortcut);
         updateAlertDialogCheckState();
 
-        // Window magnification mode doesn't support advancedView.
-        if (isWindowMagnification(getPrefContext())) {
-            advancedView.setVisibility(View.GONE);
-            return;
-        }
         // Shows the triple tap checkbox directly if clicked.
         if (mTripleTapTypeCheckBox.isChecked()) {
             advancedView.setVisibility(View.GONE);

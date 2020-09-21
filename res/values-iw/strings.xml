@@ -335,6 +335,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"שימוש באימות פנים"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"התחלה"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"‏אם הגדרות נגישות של שחרור נעילה על ידי זיהוי פנים מושבתות, ייתכן שחלק משלבי ההגדרה לא יפעלו באופן תקין עם TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"חזרה"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"להמשך הגדרה"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"שימוש בהגדרת הנגישות"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -937,7 +940,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"‏יש להציב במרכז את קוד ה-QR שבהמשך כדי להתחבר אל “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"‏ניתן להצטרף לרשת Wi‑Fi על ידי סריקה של קוד QR"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"‏שיתוף Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"‏כדי להתחבר אל “<xliff:g id="SSID">%1$s</xliff:g>” ולשתף את הסיסמה צריך לסרוק את קוד ה-QR הזה"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"‏יש לסרוק קוד QR זה בעזרת מכשיר אחר כדי להצטרף אל “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"‏כדי להתחבר אל \"<xliff:g id="SSID">%1$s</xliff:g>\" צריך לסרוק את קוד ה-QR הזה"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"יש לנסות שוב. אם הבעיה ממשיכה להופיע, יש לפנות ליצרן המכשיר"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"משהו השתבש"</string>
@@ -1371,7 +1374,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"‏גרסת Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"‏עדכון אבטחה ל-Android"</string>
     <string name="model_info" msgid="8997566254717810904">"דגם"</string>
-    <string name="model_summary" msgid="2246651782442466213">"‏מודל: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"דגם וחומרה"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"גרסת חומרה"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"זיהוי ציוד"</string>
@@ -2165,7 +2167,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"כתוביות"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"הגדלה"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"אזור ההגדלה"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"הפעלת ההגדלה"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"יש לבחור את אזורי ההגדלה שישמשו אותך בזמן הגדלת המסך"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"מסך מלא"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"חלק מהמסך"</string>
@@ -3414,13 +3415,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"הפעלת צלילים"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"כתוביות בזמן אמת"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"הוספת כתוביות אוטומטית למדיה"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"ללא"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="two">הוגדרו <xliff:g id="ON_COUNT">%d</xliff:g> לוחות זמנים</item>
-      <item quantity="many">הוגדרו <xliff:g id="ON_COUNT">%d</xliff:g> לוחות זמנים</item>
-      <item quantity="other">הוגדרו <xliff:g id="ON_COUNT">%d</xliff:g> לוחות זמנים</item>
-      <item quantity="one">הוגדר לוח זמנים אחד</item>
-    </plurals>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{אין}=1{הוגדר לוח זמנים אחד}two{הוגדרו # לוחות זמנים}many{הוגדרו # לוחות זמנים}other{הוגדרו # לוחות זמנים}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"נא לא להפריע"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"שליחת התראה רק מאפליקציות ומאנשים חשובים"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"הגבלת הפרעות"</string>
@@ -3488,24 +3483,12 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"עדיפות בלבד"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"פועל / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"כבוי / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"כבוי"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"פועל"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"יש לשאול בכל פעם"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"עד הכיבוי"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
-      <item quantity="two">שעתיים (<xliff:g id="NUM_HOURS">%d</xliff:g>)</item>
-      <item quantity="many"><xliff:g id="NUM_HOURS">%d</xliff:g> שעות</item>
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> שעות</item>
-      <item quantity="one">שעה</item>
-    </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g> דקות"</string>
-    <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="two">ניתן להפעיל <xliff:g id="ON_COUNT">%d</xliff:g> לוחות זמנים באופן אוטומטי</item>
-      <item quantity="many">ניתן להפעיל <xliff:g id="ON_COUNT">%d</xliff:g> לוחות זמנים באופן אוטומטי</item>
-      <item quantity="other">ניתן להפעיל <xliff:g id="ON_COUNT">%d</xliff:g> לוחות זמנים באופן אוטומטי</item>
-      <item quantity="one">ניתן להפעיל לוח זמנים אחד באופן אוטומטי</item>
-    </plurals>
+    <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{שעה}two{שעתיים}many{# שעות}other{# שעות}}"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{דקה אחת}two{# דקות}many{# דקות}other{# דקות}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{כבוי}=1{כבוי/ניתן להפעיל לוח זמנים אחד באופן אוטומטי}two{כבוי/ניתן להפעיל # לוחות זמנים באופן אוטומטי}many{כבוי/ניתן להפעיל # לוחות זמנים באופן אוטומטי}other{כבוי/ניתן להפעיל # לוחות זמנים באופן אוטומטי}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"מה יכול להפריע לתכונה \'נא לא להפריע\'"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"אנשים"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"אפליקציות"</string>
@@ -3551,6 +3534,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"הגדרה אוטומטית של התראות בעדיפות נמוכה כ\'רמה מתונה\'"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"דירוג מותאם של התראות"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"דירוג אוטומטי של התראות לפי רלוונטיות"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"משוב להתראות מותאמות"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"ציון התאמות שבוצעו בהתראות והצגת האפשרות לספק למערכת משוב"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"הצעות לפעולות ותשובות"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"הצגה אוטומטית של פעולות ותגובות מומלצות"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"הצגת התראות אחרונות והתראות שהועברו למצב נודניק"</string>
@@ -3858,13 +3843,7 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"כל השיחות"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"שיחות בעדיפות גבוהה"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"ללא"</string>
-    <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="two"><xliff:g id="CONVERSATIONS">%d</xliff:g> שיחות</item>
-      <item quantity="many"><xliff:g id="CONVERSATIONS">%d</xliff:g> שיחות</item>
-      <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> שיחות</item>
-      <item quantity="one">שיחה אחת</item>
-    </plurals>
-    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"ללא"</string>
+    <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{אין}=1{שיחה אחת}two{# שיחות}many{# שיחות}other{# שיחות}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"מי יכול להפריע"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"שיחות"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"שיחות"</string>
@@ -3873,13 +3852,7 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"כדי לוודא ששיחות מורשות יישמעו, יש לבדוק אם המכשיר מוגדר לצלצול"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"למשך ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’, שיחות נכנסות ייחסמו. ניתן לשנות את ההגדרות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"אנשי קשר שמסומנים בכוכב"</string>
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
-      <item quantity="two"><xliff:g id="NUM_PEOPLE">%d</xliff:g> נוספים</item>
-      <item quantity="many"><xliff:g id="NUM_PEOPLE">%d</xliff:g> נוספים</item>
-      <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> נוספים</item>
-      <item quantity="one">1 נוסף</item>
-    </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"אף איש קשר שסומן בכוכב"</string>
+    <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{אין}=1{{contact_1}}=2{{contact_1} וגם {contact_2}}=3{{contact_1}, {contact_2} וגם {contact_3}}many{{contact_1}, {contact_2} ו-# אנשים נוספים}other{{contact_1}, {contact_2} ו-# אנשים נוספים}}"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"התראות"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"הודעות"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"הודעות"</string>
@@ -3888,13 +3861,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"למשך ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’, הודעות נכנסות ייחסמו. ניתן לשנות את ההגדרות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"כל ההודעות יכולות להגיע אליך"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"כל השיחות יכולות להגיע אליך"</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"אף איש קשר"</string>
-    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
-      <item quantity="two"><xliff:g id="NUM_CONTACTS">%d</xliff:g> אנשי קשר</item>
-      <item quantity="many"><xliff:g id="NUM_CONTACTS">%d</xliff:g> אנשי קשר</item>
-      <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> אנשי קשר</item>
-      <item quantity="one">איש קשר אחד</item>
-    </plurals>
+    <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{אין}=1{איש קשר אחד}two{# אנשי קשר}many{# אנשי קשר}other{# אנשי קשר}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"כולם"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"אנשי קשר"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"אנשי קשר שמסומנים בכוכב"</string>
@@ -3932,26 +3899,14 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"כל ההתראות"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"חלק מההתראות"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"האנשים הנבחרים יוכלו ליצור איתך קשר, גם אם לא אישרת לאפליקציות להפריע"</string>
-    <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="two"><xliff:g id="APP_NAMES">%s</xliff:g> יכולות להפריע</item>
-      <item quantity="many"><xliff:g id="APP_NAMES">%s</xliff:g> יכולות להפריע</item>
-      <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> יכולות להפריע</item>
-      <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> יכולה להפריע</item>
-    </plurals>
-    <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"עוד <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{אף אפליקציה לא יכולה להפריע}=1{האפליקציה {app_1} יכולה להפריע}=2{האפליקציות {app_1} וגם {app_2} יכולות להפריע}=3{האפליקציות {app_1}, {app_2} וגם {app_3} יכולות להפריע}many{האפליקציות {app_1}, {app_2} ועוד # יכולות להפריע}other{האפליקציות {app_1}, {app_2} ועוד # יכולות להפריע}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"אפליקציות"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"כל ההתראות"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"חלק מההתראות"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"התראות שיכולות להפריע"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"אישור לכל ההתראות"</string>
-    <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="two">הקטגוריות <xliff:g id="SOUND_CATEGORIES">%s</xliff:g> יכולות להפריע</item>
-      <item quantity="many">הקטגוריות <xliff:g id="SOUND_CATEGORIES">%s</xliff:g> יכולות להפריע</item>
-      <item quantity="other">הקטגוריות <xliff:g id="SOUND_CATEGORIES">%s</xliff:g> יכולות להפריע</item>
-      <item quantity="one">הקטגוריה <xliff:g id="SOUND_CATEGORY">%s</xliff:g> יכולה להפריע</item>
-    </plurals>
-    <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"שום דבר לא יכול להפריע"</string>
-    <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"עוד <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{שום דבר לא יכול להפריע}=1{הקטגוריה {sound_category_1} יכולה להפריע}=2{הקטגוריות {sound_category_1} וגם {sound_category_2} יכולות להפריע}=3{הקטגוריות {sound_category_1}, {sound_category_2} וגם {sound_category_3} יכולות להפריע}many{האפליקציות {sound_category_1}, {sound_category_2} ועוד # יכולות להפריע}other{האפליקציות {sound_category_1}, {sound_category_2} ועוד # יכולות להפריע}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"שום דבר לא יכול להפריע"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"אף אחד לא יכול להפריע"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"אנשים מסוימים יכולים להפריע"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"כל אחד יכול להפריע"</string>
@@ -4635,6 +4590,14 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"הקשה כפולה לבדיקת הטלפון"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"הקשה כפולה לבדיקת הטאבלט"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"הקשה כפולה לבדיקת המכשיר"</string>
+    <string name="one_handed_title" msgid="1741600445540072513">"מצב שימוש ביד אחת"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"שימוש במצב שימוש ביד אחת"</string>
+    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"יציאה מהמצב בזמן החלפת אפליקציות"</string>
+    <string name="one_handed_timeout_title" msgid="8851767822595789976">"זמן קצוב לתפוגה"</string>
+    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 שניות"</string>
+    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 שניות"</string>
+    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 שניות"</string>
+    <string name="keywords_one_handed" msgid="969440592493034101">"גישה ביד אחת"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"כדי להתעדכן מה השעה, לבדוק התראות ולהציג מידע נוסף, צריך להקיש פעמיים על המסך."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"הרמה לבדיקת הטלפון"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"הרמה לבדיקת הטאבלט"</string>
@@ -4937,6 +4900,7 @@
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"חבילת גלישה"</string>
     <string name="mobile_data_settings_summary" msgid="7323978798199919063">"שימוש בחבילת הגלישה דרך הרשת הסלולרית"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"הטלפון יעבור באופן אוטומטי לספק הזה כשיהיה בטווח"</string>
+    <string name="mobile_data_settings_summary_unavailable" msgid="3309106501029928951">"‏אין כרטיס SIM זמין"</string>
     <string name="calls_preference" msgid="2166481296066890129">"העדפת שיחות"</string>
     <string name="sms_preference" msgid="7742964962568219351">"‏העדפת SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"הצגת שאלה בכל פעם"</string>
