@@ -296,7 +296,7 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"Bonisa ulwazi lwephrofayela ekukhiyeni isikrini"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"Ama-akhawunti"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Indawo"</string>
-    <string name="location_settings_master_switch_title" msgid="4232810467362584112">"Sebenzisa indawo"</string>
+    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Sebenzisa indawo"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Valiwe"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="one">Vuliwe - <xliff:g id="COUNT_1">%1$d</xliff:g> izinhlelo zokusebenza ezinokufinyelela kundawo</item>
@@ -320,6 +320,24 @@
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"Ukukhiya isikrini, i-face unlock"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"Ukukhiywa kwesikrini, izigxivizo zeminwe"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"Isikrini sivaliwe"</string>
+    <!-- no translation found for multi_biometric_enroll_title (3007607723604088374) -->
+    <skip />
+    <!-- no translation found for multi_biometric_enroll_subtitle (2900786940599073108) -->
+    <skip />
+    <!-- no translation found for multi_biometric_enroll_setup_with (421375792889910150) -->
+    <skip />
+    <!-- no translation found for multi_biometric_enroll_face_unlock_title (7627564065626355692) -->
+    <skip />
+    <!-- no translation found for multi_biometric_enroll_face_unlock_description (7626442550602926682) -->
+    <skip />
+    <!-- no translation found for multi_biometric_enroll_fingerprint_unlock_title (3839935495273854171) -->
+    <skip />
+    <!-- no translation found for multi_biometric_enroll_fingerprint_unlock_description (116938134430420778) -->
+    <skip />
+    <!-- no translation found for multi_biometric_enroll_skip (7301215196571580858) -->
+    <skip />
+    <!-- no translation found for multi_biometric_enroll_next (6220680618102151619) -->
+    <skip />
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Ubuso bungeziwe"</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"Setha i-face unlock"</string>
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"I-Face unlock"</string>
@@ -397,6 +415,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Sebenzisa isigxivizo zomunwe zakho ukuze uvule ifoni yakho noma uvume ukuthenga.\n\nInothi: Awukwazi ukusebenzisa isigxivizo somunwe ukuvula le divayisi. Ngolwazi olubanzi, xhumana nomlawuli wenhlangano yakho."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Sebenzisa izigxivizo zeminwe zakho ukuvula ifoni yakho noma uvume ukuthenga.\n\nInothi: Isigxivizo sakho somunwe singaphepha kancane kunephethini eqinile nomai-PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Khansela"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_no_thanks (6104718999323591180) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Qhubeka"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Yeqa"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Okulandelayo"</string>
@@ -434,6 +454,12 @@
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7387535629289108475">"Ngokuvikela ithebulethi yakho ngenketho yokukhiya isikrini, akekho ozokwazi ukuyisebenzisa uma ilahleka noma intshontshwa. Futhi udinga inketho yokukhiya isikrini ukuze usethe i-face unlock. Ukuze ubuyele emuva, thepha okuthi Khansela."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="4995287019957131123">"Ngokuvikela idivayisi yakho ngenketho yokukhiya isikrini, akekho ozokwazi ukuyisebenzisa uma ingalahleka noma intshontshwe. Futhi udinga inketho yokukhiya isikrini ukuze usethe i-face unlock. Ukuze ubuyele emuva, thepha okuthi Khansela."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7086796722966738156">"Ngokuvikela ifoni yakho ngenketho yokukhiya isikrini, akekho ozokwazi ukuyisebenzisa uma ilahlekile noma intshontshiwe. Futhi udinga inketho yokukhiya isikrini ukuze usethe i-face unlock. Ukuze ubuyele emuva, thepha okuthi Khansela."</string>
+    <!-- no translation found for biometrics_lock_screen_setup_skip_dialog_text (3943278149639587227) -->
+    <skip />
+    <!-- no translation found for biometrics_lock_screen_setup_skip_dialog_text (5424064454068220988) -->
+    <skip />
+    <!-- no translation found for biometrics_lock_screen_setup_skip_dialog_text (5668256546179188638) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Yeqa ukusetha i-PIN?"</string>
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"Yeqa ukusetha iphasiwedi?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"Yeqa ukusetha iphethini?"</string>
@@ -506,8 +532,7 @@
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"Vimbela abanye kusukela ekusebenziseni le thebulethi ngaphandle kwemvume yakho ngokwenza kusebenze izici zokuvikela idivayisi. Khetha ukukhiya isikrini ofuna ukusisebenzisa."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Vimbela abanye kusukela ekusebenziseni le divayisi ngaphandle kwemvume yakho ngokwenza kusebenze izici zokuvikela idivayisi. Khetha ukukhiya isikrini ofuna ukukusebenzisa."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Vimbela abanye kusukela ekusebenziseni le foni ngaphandle kwemvume yakho ngokwenza kusebenze izici zokuvikela idivayisi. Khetha ukukhiya isikrini ofuna ukukusebenzisa."</string>
-    <string name="lock_settings_picker_fingerprint_message" msgid="6414674538453498900">"Khetha indlela yokukhiya isikrini yakho yokwenza isipele"</string>
-    <string name="lock_settings_picker_face_message" msgid="2044129433641084149">"Khetha indlela yokukhiya isikrini yakho yokwenza isipele"</string>
+    <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Setha indlela yakho yokwenza isipele ukukhiya isikrini"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Izinketho zokukhiya isikrini"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Izinketho zokukhiya isikrini"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Isikrini sivaliwe."</string>
@@ -539,6 +564,16 @@
     <string name="face_unlock_set_unlock_password" msgid="8612535943511761549">"I-Face unlock + Iphasiwedi"</string>
     <string name="face_unlock_skip_face" msgid="7117201898540606846">"Qhubeka ngaphandle kwe-face unlock"</string>
     <string name="face_unlock_title" msgid="7344830351598247267">"Ungavula ifoni yakho usebenzisa ubuso bakho. Ngokuvikeleka, le nketho idinga isikrini sokukhiya esenziwe isipele."</string>
+    <!-- no translation found for biometrics_unlock_set_unlock_pattern (8871485472202659) -->
+    <skip />
+    <!-- no translation found for biometrics_unlock_set_unlock_pin (1729940978662427512) -->
+    <skip />
+    <!-- no translation found for biometrics_unlock_set_unlock_password (5368133215008755916) -->
+    <skip />
+    <!-- no translation found for biometrics_unlock_skip_biometrics (8260715582785687329) -->
+    <skip />
+    <!-- no translation found for biometrics_unlock_title (7769374223959937435) -->
+    <skip />
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Kukhutshazwe umlawuli, inqubomgomo yokubethela, noma isitoreji sezitifiketi"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Lutho"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Swayipha"</string>
@@ -622,7 +657,6 @@
       <item quantity="other">Kufanele kube amadijithi angaphansi kuka-<xliff:g id="NUMBER_1">%d</xliff:g></item>
     </plurals>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"Umlawuli wedivayisi akavumeli ukusebenzisa iphinikhodi yakamuva"</string>
-    <string name="lockpassword_pin_blacklisted_by_admin" msgid="115994274880232984">"Ama-PIN avamile avinjelwe umlawuli wakho we-IT. Zama i-PIN ehlukile."</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"Lokhu akukwazi ukufana uhlamvu olungavumelekile"</string>
     <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"Kumele iqukathe okungenani uhlamvu olulodwa"</string>
     <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"Kumele iqukathe okungenani idijithi eyodwa"</string>
@@ -656,7 +690,6 @@
       <item quantity="other">Kumele iqukathe okungenani izinhlamvu ezingasizo izinombolo ezingu-<xliff:g id="COUNT">%d</xliff:g></item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Umlawuli wedivayisi akavumeli ukusebenzisa iphasiwedi yakamuva"</string>
-    <string name="lockpassword_password_blacklisted_by_admin" msgid="8956110268546396737">"Amaphasiwedi avamile avinjelwe umlawuli wakho we-IT. Zama iphasiwedi ehlukile."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"Ukwenyuka, ukwehla, noma uchungechunge olwehlayo lamadijithi alivunyewe"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Qinisekisa"</string>
     <string name="lockpassword_cancel_label" msgid="6711112212489992112">"Khansela"</string>
@@ -798,7 +831,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"I-Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"Vula i-Wi-Fi"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"I-Wi-Fi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"Sebenzisa i-Wi-Fi"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Sebenzisa i-Wi-Fi"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Izilungiselelo ze-Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"I-Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"Hlela, uphathe izindawo zokungena ezingenantambo"</string>
@@ -932,8 +965,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Iphasiwedi ye-Wi‑Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Iphasiwedi ye-hotspot: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Ukuxhumeka okuzenzakalelayo"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Vumela ifoni ukuba ixhume ngokuzenzakalelayo eduze nale nethiwekhi"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Vumela ithebulethi ukuba ixhume ngokuzenzakalelayo eduze nale nethiwekhi"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Vumela ukuxhumeka kule nethiwekhi uma ikubanga"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Engeza idivayisi"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Sebenzisa ikhodi ye-QR ukuze ungeze idivayisi kule nethiwekhi"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Ikhodi ye-QR ayiyona ifomethi evumelekile"</string>
@@ -945,7 +977,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Sebenzisa izitifiketi zesistimu"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Unganikezeli"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Ungaqinisekisi"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Asikho isitifiketi esicacisiwe. Ukuxhumeka kwakho ngeke kube yimfihlo."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Igama lenethiwekhi lide kakhulu."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Kumele icacise isizinda."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Isitifiketi siyadingeka."</string>
@@ -972,6 +1003,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"Xhuma kwi-inthanethi"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"I-Wi-Fi ivuliwe"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Ixhumeke ku-<xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Ixhuma ku-<xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Iyaxhuma…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Yehlulekile ukuxhuma kunethiwekhi"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Inethiwekhi ayikho kubanga"</string>
@@ -1043,7 +1075,7 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"Uhlelo lokusebenza labelana ngokuqukethwe. Ukuze wabelane ngoxhumo lwe-inthanethi, vala i-hotspot, bese uyivule"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"Ayikho iphasiwedi esethiwe"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Igama le-Hotspot"</string>
-    <string name="wifi_hotspot_name_summary_connecting" msgid="6178719924661022928">"Ivula i-<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>..."</string>
+    <string name="wifi_hotspot_name_summary_connecting" msgid="2094754115215428892">"Ivula i-<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"Amanye amadivayisi angaxhuma ku-<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Iphasiwedi ye-Hotspot"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"I-AP Band"</string>
@@ -1193,7 +1225,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Isibonisi esibushelelezi"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Iphakamisa ngokuzenzakalela isilinganiso sokuvuselela kusukela kokungu-60 ukuya kokungu-90 Hz kokunye okuqukethwe. Ikhuphula ukusetshenziswa kwebhethri."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Isibonisi esibushelelezi"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Phoqa inani lokuvuselela elingu-90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Inani lokuvuselela eliphezulu kakhulu lokuphendula kokuthinta okuthuthukisiwe nekhwalithi yokugqwayiza. Ikhuphula ukusetshenziswa kwebhethri."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Ukunaka isikrini"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Kuvuliwe / Isikrini ngeke size sivaleke uma usibhekile"</string>
@@ -1607,31 +1639,29 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Izilungiselelo zenethiwekhi zisethwe kabusha"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Ayikwazi ukusula ama-SIM"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"Ama-SIM alandiwe awakwazi ukusulwa ngenxa yephutha.\n\nQala kabusha idivayisi yakho uphinde uzame futhi."</string>
-    <string name="master_clear_title" msgid="5309249309235959383">"Sula yonke idatha (ukusethwa kabusha kwasekuqaleni)"</string>
-    <string name="master_clear_short_title" msgid="5331449583601739360">"Sula yonke idatha (ukusethwa kabusha kwasekuqaleni)"</string>
-    <string name="master_clear_desc" product="tablet" msgid="3114467865487750525">"Lokhu kuzosusa yonke idatha kusukela "<b>"kusitoreji sangaphakathi"</b>" sethebulethi yakho, okufaka:\n\n"<li>"I-akhawunti yakho ye-Google"</li>\n<li>"Idatha yesistimu neyohlelo lokusebenza neyezilungiselelo"</li>\n<li>"Izinhlelo zokusebenza ezilandiwe"</li></string>
-    <string name="master_clear_desc" product="default" msgid="8447637796694856323">"Lokhu kuzosusa yonke idatha kusukela "<b>"kusitoreji  sangaphakathi"</b>" sefoni yakho, okufaka:\n\n"<li>"I-akhawunti yakho ye-Google"</li>\n<li>"Idatha yesistimu neyohlelo lokusebenza nezilungiselelo"</li>\n<li>"Izinhlelo zokusebenza ezilandiwe"</li></string>
-    <string name="master_clear_accounts" product="default" msgid="142220980039357651">\n"Okwamanje ungene ngemvume kuma-akhawunti alandelayo:\n\n"</string>
-    <string name="master_clear_other_users_present" product="default" msgid="7492338002408466023">\n\n"Kukhona abanye abasebenzisi abakhona kule divayisi.\n"</string>
-    <string name="master_clear_desc_also_erases_external" msgid="4738661805356792736"><li>"Umculo"</li>\n<li>"Izithombe"</li>\n<li>"Enye idatha yomsebenzisi"</li></string>
-    <string name="master_clear_desc_also_erases_esim" msgid="6418163562288667727">"Ama"<li>"eSIM"</li></string>
-    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="3112614935795369143">\n\n"Lokhu ngeke kukhansele uhlelo lwakho lwesevisi yefoni."</string>
-    <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7088655731755912201">\n\n"Ukusula futhi umculo, izithombe, nenye idatha yomsebenzisi, "<b>" indawo yokugcina ye-USB"</b>"idinga ukusulwa."</string>
-    <string name="master_clear_desc_erase_external_storage" product="default" msgid="4145566517710675883">\n\n"Ukusula umculo, izithombe, nenye imininingo yomsebenzisi, "<b>"ikhadi le-SD"</b>"kumele lisuswe."</string>
+    <string name="main_clear_title" msgid="277664302144837723">"Sula yonke idatha (ukusethwa kabusha njengasekuqaleni)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"Sula yonke idatha (ukusethwa kabusha njengasekuqaleni)"</string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Lokhu kuzosusa yonke idatha "<b>"ekusitoreji sangaphakathi"</b>" sethebulethi yakho, kuhlanganise:\n\n"<li>"I-Akhawunti yakho ye-Google"</li>\n<li>"Idatha yesistimu neyohlelo lokusebenza namasethingi"</li>\n<li>"Izinhlelo zokusebenza ezilandiwe"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Lokhu kuzosusa yonke idatha "<b>"ekusitoreji sangaphakathi"</b>" sefoni yakho, kuhlanganise:\n\n"<li>"I-Akhawunti yakho ye-Google"</li>\n<li>"Idatha yesistimu neyohlelo lokusebenza namasethingi"</li>\n<li>"Izinhlelo zokusebenza ezilandiwe"</li></string>
+    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n"Okwamanje ungene ngemvume kuma-akhawunti alandelayo:\n\n"</string>
+    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"Kukhona abanye abasebenzisi abakhona kule divayisi.\n"</string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Umculo"</li>\n<li>"Izithombe"</li>\n<li>"Idatha yomunye umsebenzisi"</li></string>
+    <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729">"Ama-"<li>"eSIM"</li></string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Lokhu ngeke kukhansele uhlelo lwakho lwesevisi yefoni."</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Ukuze usule umculo, izithombe, nedatha yomunye umsebenzisi, "<b>"isitoreji se-USB"</b>"kudingeka sisulwe."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"Ukuze usule umculo, izithombe, nedatha yomunye umsebenzisi, "<b>"ikhadi le-SD"</b>"kudingeka isuswe."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"Susa isitoreji se-USB"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"Sula ikhadi le-SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Sula yonke idatha ekusitoreji se-USB , njengomculo noma izithombe."</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Sula yonke idatha ekhadini le-SD, njengomculo noma izithombe"</string>
-    <string name="master_clear_button_text" product="tablet" msgid="3554085992851027633">"Sula yonke idatha"</string>
-    <string name="master_clear_button_text" product="default" msgid="3554085992851027633">"Sula yonke idatha"</string>
-    <string name="master_clear_final_desc" msgid="5218005891800878932">"Lonke ulwazi lwakho lomuntu siqu nezinhlelo zokusebenza ezilandiwe zizosuswa. Awukwazi ukuhlehlisa lesi senzo."</string>
-    <string name="master_clear_final_desc_esim" msgid="3570139379312933326">"Lonke ulwazi lwakho lomuntu siqu, olufaka izinhlelo zokusebenza ezilandiwe nama-SIM, luzosuswa. Awukwazi ukuhlehlisa lesi senzo."</string>
-    <string name="master_clear_final_button_text" msgid="1721164700940719292">"Sula yonke into"</string>
-    <string name="master_clear_failed" msgid="6458678864313618526">"Akukho ukusetha kabusha okwenziwe ngoba isevisi Yokwesula Isistimu ayitholakali."</string>
-    <string name="master_clear_confirm_title" msgid="632482173088680058">"Sula yonke idatha?"</string>
-    <string name="master_clear_not_available" msgid="3419345724070828273">"Ukusetha kabusha kwasekuqaleni akutholakaleli lo msebenzisi"</string>
-    <string name="master_clear_progress_title" msgid="480032747847804624">"Iyasula"</string>
-    <string name="master_clear_progress_text" msgid="8891964820486632180">"Sicela ulinde..."</string>
+    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"Sula yonke idatha"</string>
+    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"Sula yonke idatha"</string>
+    <string name="main_clear_final_desc" msgid="5800877928569039580">"Lonke ulwazi lwakho lomuntu siqu nezinhlelo zokusebenza ezilandiwe zizosuswa. Awukwazi ukuhlehlisa lesi senzo."</string>
+    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"Lonke ulwazi lwakho lomuntu siqu, kuhlanganise nezinhlelo zokusebenza ezilandiwe nama-SIM, kuzosuswa. Awukwazi ukuhlehlisa lesi senzo."</string>
+    <string name="main_clear_confirm_title" msgid="6577071819657853713">"Sula yonke idatha?"</string>
+    <string name="main_clear_not_available" msgid="3433795327146684827">"Ukusetha kabusha kwasekuqaleni akutholakaleli lo msebenzisi"</string>
+    <string name="main_clear_progress_title" msgid="7239741132015617719">"Iyasula"</string>
+    <string name="main_clear_progress_text" msgid="4636695115176327972">"Sicela ulinde…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"Izilungiselelo zekholi"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"Hlela ivoyisimeyili, ukudlulisa ikholi, ikholi elindile, i-ID yomshayeli"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"Imodemu nge-USB"</string>
@@ -1679,7 +1709,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Ayikwazi ukusebenzisa amadivaysi adlula angu-<xliff:g id="MAXCONNECTION">%1$d</xliff:g>."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ngeke kusebenziswe ifoni njengemodemu"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ukusebenzisa ifoni njengemodemu kwe-ethernet"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Yabelana ngokuxhumeka kwe-inthanethi kwefoni nge-USB Ethernet"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Yabelana ngokuxhumeka kwe-inthanethi kwefoni nge-Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Sebenzisa i-hotspot nefoni njengemodemu ukuze unikeze i-inthanethi kumanye amadivayisi ngokuxhumeka kwakho kwedatha yeselula. Izinhlelo zokusebenza nazo zingadala i-hotspot ukwabelana nokuqukethwe namadivayisi aseduze."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Sebenzisa i-hotspot nokusebenzisa ifoni njengemodemu ukuze unikeze i-inthanethi kumanye amadivayisi nge-Wi-Fi yakho noma ukuxhumeka kwedatha kweselula. Izinhlelo zokusebenza zingaphinda zidale i-hotspot ukuze zabelane ngokuqukethwe namadivayisi aseduze."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Usizo"</string>
@@ -1784,6 +1814,12 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Ukuze usebenzise i-face unlock, setha iphasiwedi"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Ukuze usebenzise i-face unlock, setha iphethini"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Ukuze usebenzise i-face unlock, setha iphinikhodi"</string>
+    <!-- no translation found for lockpassword_choose_your_password_header_for_biometrics (9091792721166354172) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_pattern_header_for_biometrics (4949972592985176347) -->
+    <skip />
+    <!-- no translation found for lockpassword_choose_your_pin_header_for_biometrics (4215367936503271941) -->
+    <skip />
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Ukhohlwe iphasiwedi yakho?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Ukhohlwe iphethini yakho?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Ukhohlwe iphinikhodi yakho?"</string>
@@ -2126,6 +2162,10 @@
     <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Isikrini esigcwele nengxenye yesikrini"</string>
     <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Khulisa sonke isikrini"</string>
     <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Khulisa ingxenye eyesikrini"</string>
+    <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"Ushintshela kunkinobho yokufinyelela?"</string>
+    <string name="accessibility_magnification_switch_shortcut_message" msgid="5291166101273060742">"Ukusebenzisa ukuthepha kathathu ukuze ukhulise ingxenye yesikrini kuzobangela ukuzama nezinye izenzo ukuba zibambezeleke.\n\nIngabe ufuna ukushintshela ekusebenziseni inkinobho yokufinyelela ukuze ukhulise?"</string>
+    <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Shintshela kunkinobho yokufinyelela"</string>
+    <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="5750910789717343646">"Qhubeka uthepha kathathu ukuze ukhulise"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Izilungiselelo zokukhuliswa"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Shintsha ngokuthepha kathathu"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Khulisa ngesinqamuleli"</string>
@@ -2179,11 +2219,11 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Inkinobho yamandla ivala ikholi"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Isikhombi esikhulu segundane"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Susa ukugqwayiza"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"Umsindo we-Mono"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"Hlanganisa iziteshi uma udlala umsindo"</string>
-    <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"Ukubhalansa umsindo"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"Ngakwesokunxele"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="5028519887058073990">"Okungakwesokudla"</string>
+    <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Umsindo we-Mono"</string>
+    <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Hlanganisa iziteshi uma udlala umsindo"</string>
+    <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Ukubhalansa umsindo"</string>
+    <string name="accessibility_toggle_primary_balance_left_label" msgid="6415750010517682014">"Kwesokunxele"</string>
+    <string name="accessibility_toggle_primary_balance_right_label" msgid="2987443495390104935">"Kwesokudla"</string>
     <string name="accessibility_timeout_default" msgid="1033702739376842824">"Okuzenzakalelayo"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"imizuzwana eyi-10"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 amasekhondi"</string>
@@ -2213,11 +2253,11 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Ukudlidliza kwesaziso"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Ukudlidliza kokukhala"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Impendulo yokuthinta"</string>
-    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Sebenzisa i-<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"Vula i-<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Sebenzisa ukulungisa kombala"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Bonisa amagama-ncazo"</string>
-    <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"Okohlelo lokusebenza olusekelwe kuphela"</string>
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Sebenzisa i-<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Vula i-<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Sebenzisa ukulungisa kombala"</string>
+    <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Bonisa amagama-ncazo"</string>
+    <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Okohlelo lokusebenza olusekelwe kuphela"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Usayizi wegama-ngcazo nesitayela"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> usayizi wombhalo"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Ezinye izinketho"</string>
@@ -2247,6 +2287,7 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"I-Deuteranomaly"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"I-Protanomaly"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"I-Tritanomaly"</string>
+    <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"I-grayscale"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Okubomvu-okuluhlaza okotshani"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Okubomvu-okuluhlaza okotshani"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Okuluhlaza okwesibhakabhaka-okuphuzi"</string>
@@ -2376,7 +2417,7 @@
     <string name="background_activity_title" msgid="8214332017349791380">"Ukukhawulelwa okungemuva"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Vumela uhlelo lokusebenza ukuthi lusebenze ngemuva"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"Uhlelo lokusebenza alivunyelwe ukubuyela ngasemuva"</string>
-    <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"Ukusetshenziswa kwangemuva akukwazi ukukhawulelwa"</string>
+    <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"Ukusetshenziswa kwangemuva akukwazi ukukhawulelwa"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Khawulela umsebenzi wasemuva?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Uma ukhawulela umsebenzi wangasemuva wohlelo lokusebenza, lungahle lungasebenzi kahle"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Njengoba lolu hlelo lokusebenza lungasethiwe ukuze kulungiselelwe ibhethri, awukwazi ukulikhawulela.\n\nUkuze ukhawulele uhlelo lokusebenza, qala uvule ukulungiselelwa kwebhethri."</string>
@@ -2593,9 +2634,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Setha ishejuli"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Khulisa impilo yebhethri"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Vala lapho ishajiwe"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"Isilondolozi sebhethri sivalwa uma ifoni yakho iku-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"Isilondolozi sebhethri siyavalwa uma ithebulethi yakho iku-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"Isilondolozi sebhethri siyavalwa uma idivayisi yakho iku-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"Isilondolozi sebhethri sivala lapho ifoni yakho ishaja ngaphezu kuka-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"Isilondolozi sebhethri sivala lapho ithebulethi yakho ishaja ngaphezu kuka-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8707774542183385479">"Isilondolozi sebhethri sivala lapho idivayisi yakho ishaja ngaphezu kuka-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Vula"</string>
@@ -2660,6 +2701,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"Setha kabusha"</string>
     <string name="tts_play" msgid="2945513377250757221">"Dlala"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"I-VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Uxhumo lwe-adaptive"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Kunweba impilo yebhethri kuphinde kuthuthukise ukusebenza kwedivayisi ngokuphatha uxhumo lenethiwekhi yakho ngokuzenzakalelayo"</string>
     <string name="credentials_title" msgid="7535942196886123656">" Isitoreji sokuqinisekisa"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Faka isitifiketi"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Faka izitifiketi kusuka ekugcineni"</string>
@@ -2671,9 +2714,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"Ukuqinisekisa komsebenzisi"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Buka uphinde ulungise ukuqinisekisa okugciniwe"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Ithuthukisiwe"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"Uhlobo lwesitoreji"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"Izingxenyekazi zekhompyutha zisekelwe ngokulondoloza"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"Isofthiwe kuphela"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Izifakazo azitholakaleli lo msebenzisi"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Kufakelwe i-VPN nezinhlelo zokusebenza"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Kufakelwe i-Wi-Fi"</string>
@@ -3062,7 +3102,7 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Ukukhokha kutheminali"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Setha uhlelo lokusebenza lokhukhokha. Bese vele ubambe ingemuva lefoni yakho kuya kunoma iyiphi itheminali enophawu elingenabo oxhumana nabo."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Ngiyitholile"</string>
-    <string name="nfc_more_title" msgid="4202405349433865488">"Okuningi..."</string>
+    <string name="nfc_more_title" msgid="1041094244767216498">"Okuningi…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Setha uhlelo lokusebenza olukhokhelwayo oluzenzakalelayo"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Buyekeza uhlelo lokusebenza olukhokhelwayo oluzenzakalelayo"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"Kutheminali yangaphandle kokuthinta, khokha nge-<xliff:g id="APP">%1$s</xliff:g>"</string>
@@ -3146,7 +3186,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Njalo sebenzisa lokhu kumakholi"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"Khetha i-SIM yedatha"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Khetha i-SIM ye-SMS"</string>
-    <string name="data_switch_started" msgid="6205259094233452188">"Ishintsha i-SIM yedatha, lokhu kungathatha kufikela kuminithi..."</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"Ishintsha i-SIM yedatha, lokhu kungathatha kufikela kuminithi…"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Shaya nge"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Khetha ikhadi le-SIM"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"I-SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3289,6 +3329,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"umzila, ishejuli, isilondolozi sebhethri, isilondolozi samandla, ibhethri, ukuzenzakalela, iphesenti"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"i-volte, ukushaya okuthuthukile, ukushaya kwe-4g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"engeza ulimi, engeza ulimi"</string>
+    <string name="keywords_font_size" msgid="336803136451166298">"usayizi wombhalo"</string>
     <string name="default_sound" msgid="6604374495015245195">"Umsindo owufica ukhona"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Ivolumu yokukhala neyesaziso ku-<xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Ivolomu, ukudlidliza, ungaphazamisi"</string>
@@ -3648,7 +3689,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Ukufinyelela kokungaphazamisi"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Vumela ukungaphazamisi"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Azikho izinhlelo zokusebenza ezifakiwe ezicele ukufinyelela kokungaphazamisi"</string>
-    <string name="loading_notification_apps" msgid="1458413761470945269">"Ilayisha izinhlelo zokusebenza..."</string>
+    <string name="loading_notification_apps" msgid="5139471829295287945">"Ilayisha izinhlelo zokusebenza…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Ngokwesicelo sakho, i-Android ivimbela izaziso zalolu hlelo lokusebenza kusukela ekuveleni kule divayisi"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Ngokwesicelo sakho i-Android ivimbela lesi sigaba sezaziso kusukela ekuveleni kule divayisi"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Ngokwesicelo sakho i-Android ivimbela leli qembu lezaziso kusukela ekuveleni kule divayisi"</string>
@@ -3872,6 +3913,12 @@
     <string name="encryption_interstitial_message_pin_for_face" msgid="8577135499926738241">"Ngokungeziwe ekusebenziseni ubuso bakho ukuze uvule idivayisi yakho, ungaqhubeka uvikele le divayisi ngokufuna i-PIN yakho ngaphambi kokuthi iqale. Ize iqale idivayisi, ayikwazi ukwamukela amakholi, imilayezo, noma izaziso, ezifaka ama-alamu.\n\nLokhu kusiza ukuvikela idatha kumadivayisi alahlekile noma antshontshiwe. Funa i-PIN ukuze uqale idivayisi yakho?"</string>
     <string name="encryption_interstitial_message_pattern_for_face" msgid="5851725964283239644">"Ngokungeziwe ekusebenziseni ubuso bakho ukuze uvule idivayisi yakho, ungaqhubeka uvikele le divayisi ngokufuna iphethini yakho ngaphambi kokuthi iqale. Idivayisi ize iqale, ayikwazi ukwamukela amakholi, imilayezo, noma izaziso ezifaka ama-alamu.\n\nLokhu kusiza ukuvikela idatha kumadivayisi alahlekile noma antshontshiwe. Funa iphethini ukuze uqale idivayisi yakho?"</string>
     <string name="encryption_interstitial_message_password_for_face" msgid="3553329272456428461">"Ngokungeziwe ekusebenziseni ubuso bakho ukuze uvule idivayisi yakho, ungaqhubeka uvikele le divayisi ngokufuna iphasiwedi yakho ngaphambi kokuthi iqale. Kuze kuqale idivayisi, ayikwazi ukwamukela amakholi, imilayezo, noma izaziso ezifaka ama-alamu.\n\nLokhu kusiza ukuvikela idatha kumadivayisi alahlekile noma antshontshiwe. Funa iphasiwedi ukuze uqale idivayisi yakho?"</string>
+    <!-- no translation found for encryption_interstitial_message_pin_for_biometrics (4590004045791674901) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_pattern_for_biometrics (2697768285995352576) -->
+    <skip />
+    <!-- no translation found for encryption_interstitial_message_password_for_biometrics (1895561539964730123) -->
+    <skip />
     <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Yebo"</string>
     <string name="encryption_interstitial_no" msgid="3352331535473118487">"Cha"</string>
     <string name="restricted_true_label" msgid="612852292488747564">"Kuvinjelwe"</string>
@@ -4047,7 +4094,7 @@
     <string name="usb_control_title" msgid="1946791559052157693">"I-USB ilawulwa nge-"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"Idivayisi exhunyiwe"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Le divayisi"</string>
-    <string name="usb_switching" msgid="3713602881103295766">"Iyashintsha..."</string>
+    <string name="usb_switching" msgid="3654709188596609354">"Iyashintsha…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Ayikwazanga ukushintsha"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"Ishaja le divayisi"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"Ishaja idivayisi exhunyiwe"</string>
@@ -4294,7 +4341,7 @@
     <string name="launch_wifi_text" msgid="976421974332512894">"Buka imininingwane"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Iseva yedatha"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Idatha engakhawulelwe"</string>
-    <string name="restrict_background_blacklisted" msgid="7953049316098373715">"Idatha yangemuva ivaliwe"</string>
+    <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Idatha yangemuva ivaliwe"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Vuliwe"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Valiwe"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Sebenzisa iseva yedatha"</string>
@@ -4317,7 +4364,7 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Uma idivayisi ikhiyiwe, vimbela ukuthayipha izimpendulo noma omunye umbhalo kuzaziso."</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Isihloli sokupela esizenzakalelayo"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Khetha isihloli sokupela"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"Sebenzisa isihloli sokupela"</string>
+    <string name="spell_checker_primary_switch_title" msgid="529240542284039243">"Sebenzisa isihloli sokupela"</string>
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"Abangakhethiwe"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(lutho)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4407,7 +4454,7 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Ukuze kusizwe kukhululwe isikhala sesitoreji, isiphathi sesitoreji sisusa izithombe ezenziwe isipele namavidiyo kusukela kudivayisi yakho."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Susa izithombe namavidiyo"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"Isiphathi sesitoreji"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"Sebenzisa isiphathi sesitoreji"</string>
+    <string name="automatic_storage_manager_primary_switch_title" msgid="9131959126462101994">"Sebenzisa isiphathi sesitoreji"</string>
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"Okuzenzakalelayo"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"Okwenziwa ngesandla"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"Khulula isikhala manje"</string>
@@ -4445,6 +4492,8 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Thepha kabili ukuze uhlole ifoni"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Thepha kabili ukuze uhlole ithebulethi"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Thepha kabili ukuze uhlole idivayisi"</string>
+    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Swayiphela izaziso"</string>
+    <string name="swipe_bottom_to_notifications_summary" msgid="8073261995155440308">"Swayiphela phansi kunqenqema oluphansi lwesikrini ukuze ubonise izaziso zakho"</string>
     <string name="one_handed_title" msgid="1741600445540072513">"Imodi yesandla esisodwa"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Sebenzisa imodi yesandla esisodwa"</string>
     <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Phuma uma ushintsha izinhlelo zokusebenza"</string>
@@ -4465,6 +4514,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Thepha ukuze uhlole ithebulethi"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Thepha ukuze uhlole idivayisi"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Ukuze uhlole isikhathi, izaziso, nolunye ulwazi, thepha isikrini sakho."</string>
+    <string name="panic_gesture_screen_title" msgid="2978368688339171290">"Inkinobho yokwesaba"</string>
+    <string name="panic_gesture_screen_summary" msgid="6560595108396726608">"Qala izenzo ze-SOS yesimo esiphuthumayo ngokucindezela inkinobho yamandla ngokushesha izikhathi ezi-5."</string>
+    <string name="panic_gesture_sound_setting_title" msgid="2235527774130891208">"Umsindo wesexwayiso"</string>
+    <string name="panic_gesture_sound_setting_summary" msgid="6997197208264987249">"Isexwayiso ngaphambi kokuqalisa izenzo"</string>
+    <string name="panic_gesture_edit_emergency_contact_setting_title" msgid="7791096427878863017">"Oxhumana nabo esimweni esiphuthumayo"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Swayipha izigxivizo zeminwe ukuze uthole izaziso"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Swayipha izigxivizo zeminwe"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Ukuze uhlole izaziso zakho, swayiphela phansi kunzwa yezigxivizo zeminwe ngemuva kwefoni yakho."</string>
@@ -4619,7 +4673,7 @@
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"Nikela amandla zonke izinhlelo zokusebenza"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Khetha i-Graphics Driver"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Okuzenzekelayo"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Umshayeli wegeyimu"</string>
+    <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"Umshayeli Wegeyimu"</string>
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Isishayeli Sikanjiniyela"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Umshayeli wemifanekiso yesistimu"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
@@ -4688,6 +4742,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Ayikwazanga ukuthola amanethiwekhi. Zama futhi."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(kunqatshelwe)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Alikho ikhadi le-SIM."</string>
+    <string name="sim_card" msgid="6381158752066377709">"I-SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Ayikho i-SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Lutho"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Idinga i-SIM ukuze ixhume"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Idinga i-SIM ye-<xliff:g id="WIRELESS_CARRIER">%s</xliff:g> ukuze ixhume"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Imodi yenethiwekhi ekhethwayo: i-WCDMA ekhethwayo"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Imodi yenethiwekhi ekhethwayo: i-GSM kuphela"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Imodi yenethiwekhi ekhethwayo: i-WCDMA kuphela"</string>
@@ -4924,10 +4983,12 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Vumela ukumbozwa kwesikrini kokuthi Amasethingi"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Vumela izinhlelo zokusebenza ezingabonisa ngaphezulu kwezinye izinhlelo zokusebenza ukumboza izikrini zokuthi Amasethingi"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Imidiya"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"Fihla umdlali lapho iseshini yemidiya isiphelile"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"Umdlali ukuvumela ukuthi uqalise kabusha iseshini kusuka kuphaneli Yamasethingi asheshayo enwetshiwe"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"I-Media player kokuthi Amasethingi asheshayo"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"Bonisa i-media player isikhathi esandisiwe ukuze uqalise kabusha kalula ukudlala"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Fihla umdlali"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Bonisa umdlali"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Abekho abadlali abatholakalayo"</string>
+    <string name="media_controls_apps_title" msgid="9129092193224838008">"Izinhlelo zokusebenza ezivunyelwe"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"imidiya"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"I-Bluetooth izovuleka"</string>
 </resources>

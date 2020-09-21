@@ -279,6 +279,26 @@
         </activity>
 
         <activity
+            android:name="Settings$NetworkProviderSettingsActivity"
+            android:label="@string/network_dashboard_title"
+            android:icon="@drawable/ic_homepage_network"
+            android:exported="true"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NETWORK_PROVIDER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.network.NetworkProviderSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name=".wifi.WifiPickerActivity"
             android:exported="true">
             <intent-filter android:priority="1">
@@ -3468,6 +3488,11 @@
             android:permission="android.permission.MANAGE_SLICE_PERMISSIONS"
             android:exported="true" />
 
+        <receiver
+            android:name=".slices.VolumeSliceRelayReceiver"
+            android:permission="android.permission.MANAGE_SLICE_PERMISSIONS"
+            android:exported="true" />
+
         <!-- Couldn't be triggered from outside of settings. Statsd can trigger it because we send
              PendingIntent to it-->
         <receiver android:name=".fuelgauge.batterytip.AnomalyDetectionReceiver"
@@ -3623,6 +3648,15 @@
                        android:value="com.android.settings.sound.MediaControlsSettings" />
         </activity>
 
+        <receiver
+            android:name=".media.BluetoothPairingReceiver"
+            android:exported="true"
+            android:permission="android.permission.BLUETOOTH_ADMIN">
+            <intent-filter>
+                <action android:name="com.android.settings.action.LAUNCH_BLUETOOTH_PAIRING"/>
+            </intent-filter>/>
+        </receiver>
+
        <activity android:name=".network.telephony.UserPLMNListActivity"
            android:exported="true"
            android:label="@string/uplmn_settings_title"
@@ -3640,6 +3674,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
