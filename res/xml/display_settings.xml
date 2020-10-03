@@ -203,6 +203,13 @@
             android:key="lift_to_wake"
             android:title="@string/lift_to_wake_title"/>
 
+        <Preference
+            android:key="display_cutout_force_fullscreen_settings"
+            android:title="@string/display_cutout_force_fullscreen_title"
+            android:summary="@string/display_cutout_force_fullscreen_summary"
+            android:fragment="com.android.settings.display.DisplayCutoutForceFullscreenSettings"
+            settings:controller="com.android.settings.display.DisplayCutoutForceFullscreenPreferenceController" />
+
         <ListPreference
             android:key="theme"
             android:title="@string/device_theme"
