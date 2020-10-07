@@ -21,6 +21,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.sysprop.TelephonyProperties;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -197,7 +198,8 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             }
         }
         if (TextUtils.equals(getPreferenceKey(), LIST_DATA_PREFERENCE_KEY)) {
-            mPreference.setEnabled(isCallStateIdle());
+            boolean isEcbmEnabled = TelephonyProperties.in_ecm_mode().orElse(false);
+            mPreference.setEnabled(isCallStateIdle() && !isEcbmEnabled);
         } else {
             // Add the extra "Ask every time" value at the end.
             displayNames.add(mContext.getString(R.string.calls_and_sms_ask_every_time));
