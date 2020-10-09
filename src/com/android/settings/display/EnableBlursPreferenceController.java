@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.development;
+package com.android.settings.display;
 
 import android.content.Context;
 import android.os.SystemProperties;
@@ -24,13 +24,12 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-import com.android.settingslib.development.SystemPropPoker;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * Controller that toggles window blurs on SurfaceFlinger on devices that support it.
  */
-public final class EnableBlursPreferenceController extends DeveloperOptionsPreferenceController
+public final class EnableBlursPreferenceController extends AbstractPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     @VisibleForTesting
@@ -72,12 +71,5 @@ public final class EnableBlursPreferenceController extends DeveloperOptionsPrefe
         boolean isEnabled = !SystemProperties.getBoolean(
                 DISABLE_BLURS_SYSPROP, false /* default */);
         ((SwitchPreference) mPreference).setChecked(isEnabled);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        super.onDeveloperOptionsSwitchDisabled();
-        SystemProperties.set(DISABLE_BLURS_SYSPROP, null);
-        updateState(null);
     }
 }
