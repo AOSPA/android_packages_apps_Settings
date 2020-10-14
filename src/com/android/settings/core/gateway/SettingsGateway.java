@@ -19,7 +19,7 @@ package com.android.settings.core.gateway;
 import com.android.settings.AllInOneTetherSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.IccLockSettings;
-import com.android.settings.MasterClear;
+import com.android.settings.MainClear;
 import com.android.settings.Settings;
 import com.android.settings.TestingSettings;
 import com.android.settings.TetherSettings;
@@ -112,6 +112,7 @@ import com.android.settings.network.ApnEditor;
 import com.android.settings.network.ApnSettings;
 import com.android.settings.network.MobileNetworkListFragment;
 import com.android.settings.network.NetworkDashboardFragment;
+import com.android.settings.network.NetworkProviderSettings;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
@@ -273,7 +274,7 @@ public class SettingsGateway {
             TestingSettings.class.getName(),
             WifiAPITest.class.getName(),
             WifiInfo.class.getName(),
-            MasterClear.class.getName(),
+            MainClear.class.getName(),
             ResetDashboardFragment.class.getName(),
             NightDisplaySettings.class.getName(),
             ManageDomainUrls.class.getName(),
@@ -303,7 +304,8 @@ public class SettingsGateway {
             GestureNavigationSettingsFragment.class.getName(),
             InteractAcrossProfilesSettings.class.getName(),
             InteractAcrossProfilesDetails.class.getName(),
-            MediaControlsSettings.class.getName()
+            MediaControlsSettings.class.getName(),
+            NetworkProviderSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
@@ -325,6 +327,7 @@ public class SettingsGateway {
             Settings.WifiSettingsActivity.class.getName(),
             Settings.DataUsageSummaryActivity.class.getName(),
             Settings.SimSettingsActivity.class.getName(),
+            Settings.NetworkProviderSettingsActivity.class.getName(),
             // Home page > Connected devices
             Settings.BluetoothSettingsActivity.class.getName(),
             Settings.WifiDisplaySettingsActivity.class.getName(),

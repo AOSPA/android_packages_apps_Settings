@@ -88,6 +88,9 @@ import java.util.Optional;
 
 /**
  * UI for Wi-Fi settings screen
+ *
+ * TODO(b/167474581): This file will be deprecated at Android S, please merge your WifiSettings
+ * in change in {@link NetworkProviderSettings}.
  */
 @SearchIndexable
 public class WifiSettings extends RestrictedSettingsFragment
@@ -227,6 +230,17 @@ public class WifiSettings extends RestrictedSettingsFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
+            final Intent intent = new Intent("android.settings.NETWORK_PROVIDER_SETTINGS");
+            final Bundle extras = getActivity().getIntent().getExtras();
+            if (extras != null) {
+                intent.putExtras(extras);
+            }
+            getContext().startActivity(intent);
+            finish();
+            return;
+        }
 
         // TODO(b/37429702): Add animations and preference comparator back after initial screen is
         // loaded (ODR).

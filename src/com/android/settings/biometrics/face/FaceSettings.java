@@ -37,6 +37,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -202,16 +203,18 @@ public class FaceSettings extends DashboardFragment {
         super.onResume();
 
         if (mToken == null && !mConfirmingPassword) {
-            // Generate challenge in onResume instead of onCreate, since FaceSettings can be
-            // created while Keyguard is showing, in which case the resetLockout revokeChallenge
-            // will invalidate the too-early created challenge here.
-            final long challenge = mFaceManager.generateChallengeBlocking();
-            ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(getActivity(), this);
+            final boolean launched = builder.setRequestCode(CONFIRM_REQUEST)
+                    .setTitle(getString(R.string.security_settings_face_preference_title))
+                    .setRequestGatekeeperPasswordHandle(true)
+                    .setUserId(mUserId)
+                    .setForegroundOnly(true)
+                    .setReturnCredentials(true)
+                    .show();
 
             mConfirmingPassword = true;
-            if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
-                    getString(R.string.security_settings_face_preference_title),
-                    null, null, challenge, mUserId, true /* foregroundOnly */)) {
+            if (!launched) {
                 Log.e(TAG, "Password not set");
                 finish();
             }
@@ -232,29 +235,29 @@ public class FaceSettings extends DashboardFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (mToken == null && !BiometricUtils.containsGatekeeperPasswordHandle(data)) {
+            Log.e(TAG, "No credential");
+            finish();
+        }
+
         if (requestCode == CONFIRM_REQUEST) {
-            mConfirmingPassword = false;
             if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
                 // The pin/pattern/password was set.
-                if (data != null) {
-                    mToken = data.getByteArrayExtra(
-                            ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
-                    if (mToken != null) {
-                        mAttentionController.setToken(mToken);
-                        mEnrollController.setToken(mToken);
-                    }
-                }
+                mFaceManager.generateChallenge((sensorId, challenge) -> {
+                    mToken = BiometricUtils.requestGatekeeperHat(getPrefContext(), data, mUserId,
+                            challenge);
+                    BiometricUtils.removeGatekeeperPasswordHandle(getPrefContext(), data);
+                    mAttentionController.setToken(mToken);
+                    mEnrollController.setToken(mToken);
+                    mConfirmingPassword = false;
+                });
             }
         } else if (requestCode == ENROLL_REQUEST) {
             if (resultCode == RESULT_TIMEOUT) {
                 setResult(resultCode, data);
                 finish();
             }
-        }
-
-        if (mToken == null) {
-            // Didn't get an authentication, finishing
-            finish();
         }
     }
 

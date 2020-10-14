@@ -120,8 +120,8 @@
         <!--
         <item>com.example.package.first/com.example.class.FirstService</item>
         <item>com.example.package.second/com.example.class.SecondService</item>
-        <item>toggle_master_mono</item>
-        <item>seekbar_master_balance</item>
+        <item>toggle_primary_mono</item>
+        <item>seekbar_primary_balance</item>
         <item>...</item>
         -->
     </string-array>
@@ -152,8 +152,8 @@
         -->
     </string-array>
 
-    <!-- List of packages that should be whitelisted for slice uri access. Do not translate -->
-    <string-array name="slice_whitelist_package_names" translatable="false"/>
+    <!-- List of packages that should be allowlisted for slice uri access. Do not translate -->
+    <string-array name="slice_allowlist_package_names" translatable="false"/>
 
     <!-- Whether or not App & Notification screen should display recently used apps -->
     <bool name="config_display_recent_apps">true</bool>
@@ -463,11 +463,14 @@
     <!-- Whether nfc detection point preview image is available or not. -->
     <bool name="config_nfc_detection_point">false</bool>
 
-    <!-- Whether to show Enhanced Connectivity switch in Developer Options -->
-    <bool name="config_show_enhanced_connectivity">false</bool>
-
     <!-- Whether to show Smooth Display feature in Settings Options -->
     <bool name="config_show_smooth_display">false</bool>
+
+    <!-- Whether to show panic button gesture in Settings -->
+    <bool name="config_show_panic_gesture_settings">true</bool>
+
+    <!-- Whether to show the Preference for Adaptive connectivity -->
+    <bool name="config_show_adaptive_connectivity">false</bool>
 
     <!-- Playing tone setting -->
     <bool name="config_show_connect_tone_ui">false</bool>
