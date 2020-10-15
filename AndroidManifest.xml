@@ -38,7 +38,6 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CLEAR_APP_USER_DATA" />
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
@@ -421,7 +420,7 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.network.ApnSettings" />
+                       android:value="com.android.settings.network.apn.ApnSettings" />
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -509,6 +508,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
+                  android:exported="false"
+                  android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
+                  android:theme="@style/Transparent" />
+
+        <activity android:name=".network.telephony.DeleteEuiccSubscriptionDialogActivity"
+                  android:exported="false"
+                  android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
+                  android:theme="@style/Transparent" />
 
         <activity
             android:name="Settings$TetherSettingsActivity"
@@ -2028,7 +2037,7 @@
                 <data android:mimeType="vnd.android.cursor.dir/telephony-carrier" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.network.ApnEditor" />
+                       android:value="com.android.settings.network.apn.ApnEditor" />
         </activity>
 
         <activity
@@ -2040,6 +2049,7 @@
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>

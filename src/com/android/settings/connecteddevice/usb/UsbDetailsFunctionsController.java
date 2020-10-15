@@ -100,7 +100,11 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             pref = getProfilePreference(UsbBackend.usbFunctionsToString(option), title);
             // Only show supported options
             if (mUsbBackend.areFunctionsSupported(option)) {
-                pref.setChecked(functions == option);
+                if (functions == UsbManager.FUNCTION_ACCESSORY) {
+                    pref.setChecked(UsbManager.FUNCTION_MTP == option);
+                } else {
+                    pref.setChecked(functions == option);
+                }
             } else {
                 mProfilesContainer.removePreference(pref);
             }
@@ -111,7 +115,8 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     public void onRadioButtonClicked(RadioButtonPreference preference) {
         final long function = UsbBackend.usbFunctionsFromString(preference.getKey());
         final long previousFunction = mUsbBackend.getCurrentFunctions();
-        if (function != previousFunction && !Utils.isMonkeyRunning()) {
+        if (function != previousFunction && !Utils.isMonkeyRunning()
+                && !shouldIgnoreClickEvent(function, previousFunction)) {
             mPreviousFunction = previousFunction;
 
             //Update the UI in advance to make it looks smooth
@@ -132,6 +137,11 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
                 mUsbBackend.setCurrentFunctions(function);
             }
         }
+    }
+
+    private boolean shouldIgnoreClickEvent(long function, long previousFunction) {
+        return previousFunction == UsbManager.FUNCTION_ACCESSORY
+                && function == UsbManager.FUNCTION_MTP;
     }
 
     @Override

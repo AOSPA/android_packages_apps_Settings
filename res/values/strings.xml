@@ -2280,6 +2280,8 @@
     <string name="wifi_advanced_device_mac_address_title">Device MAC address</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to show the randomized Wi-Fi MAC address. [CHAR LIMIT=50] -->
     <string name="wifi_advanced_randomized_mac_address_title">Randomized MAC address</string>
+    <!-- Wi-Fi settings screen, advanced, title of the item to show the randomized Wi-Fi MAC address when disconnected. [CHAR LIMIT=50] -->
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title">Randomized MAC address (last used)</string>
     <!-- Title of the screen to adjust IP settings -->
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's current IP address. -->
     <string name="wifi_advanced_ip_address_title">IP address</string>
@@ -2317,9 +2319,9 @@
     <!-- Error message if the network prefix length is not valid [CHAR LIMIT=50]-->
     <string name="wifi_ip_settings_invalid_network_prefix_length">Type a network prefix length between 0 and 32.</string>
     <!-- Label for the DNS (first one) -->
-    <string name="wifi_dns1">DNS 1</string>
+    <string name="wifi_dns1">DNS 1 (unless overridden by Private DNS)</string>
     <!-- Label for the DNS (second one)-->
-    <string name="wifi_dns2">DNS 2</string>
+    <string name="wifi_dns2">DNS 2 (unless overridden by Private DNS)</string>
     <!-- Label for the gateway of the network -->
     <string name="wifi_gateway">Gateway</string>
     <!-- Label for the network prefix of the network [CHAR LIMIT=25]-->
@@ -3015,6 +3017,8 @@
     <string name="doze_always_on_title">Always show time and info</string>
     <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the always-on ambient display feature. -->
     <string name="doze_always_on_summary">Increased battery usage</string>
+    <!-- [CHAR LIMIT=30] Display and accessibility settings screens, setting option name to force bold text. -->
+    <string name="force_bold_text">Bold Text</string>
     <!-- [CHAR LIMIT=30] Sound & display settings screen, setting option name to change font size -->
     <string name="title_font_size">Font size</string>
     <!-- Summary for Font size. Lets the user know that this will make text larger or smaller. Appears in the accessibility portion of setup wizard. [CHAR LIMIT=NONE] -->
@@ -7037,8 +7041,6 @@
     <string name="user_admin">Admin</string>
     <!-- User settings title for current user entry "You" user. [CHAR LIMIT=30] -->
     <string name="user_you">You (<xliff:g id="name" example="Name">%s</xliff:g>)</string>
-    <!-- Title for the preference to enter the nickname of the userto display in the user switcher [CHAR LIMIT=25]-->
-    <string name="user_nickname">Nickname</string>
 
     <!-- Summary for add user action, when it's disabled [CHAR LIMIT=100] -->
     <string name="user_add_max_count">You can add up to <xliff:g id="user_count">%1$d</xliff:g> users</string>
@@ -7477,13 +7479,6 @@
     <string name="wizard_next">Next</string>
     <!-- Wizard finish button label [CHAR LIMIT=25] -->
     <string name="wizard_finish">Finish</string>
-
-    <!-- An option in a photo selection dialog to take a new photo [CHAR LIMIT=50] -->
-    <string name="user_image_take_photo" msgid="7496128293167402354">Take a photo</string>
-    <!-- An option in a photo selection dialog to choose a pre-existing image [CHAR LIMIT=50] -->
-    <string name="user_image_choose_photo" msgid="3746334626214970837">Choose an image</string>
-    <!-- Accessibility message for the photo selector which is a button/popup with the current photo [CHAR LIMIT=50] -->
-    <string name="user_image_photo_selector">Select photo</string>
 
     <!-- Text to display in regulatory info screen (from device overlay). -->
     <string name="regulatory_info_text"></string>
@@ -11064,9 +11059,6 @@
     <!-- Preference summary to enable generating noisy sound before calling emergency services at panic/distress moments[CHAR_LIMIT=NONE]-->
     <string name="panic_gesture_sound_setting_summary">Alert before starting the actions</string>
 
-    <!-- Preference title to let user edit their emergency contact list[CHAR_LIMIT=60]-->
-    <string name="panic_gesture_edit_emergency_contact_setting_title">Emergency contacts</string>
-
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
     <!-- Title text for fingerprint gesture preference screen [CHAR LIMIT=25] -->
@@ -12008,6 +12000,32 @@
     <string name="see_more">See more</string>
     <!-- See less items in contextual homepage [CHAR LIMIT=30]-->
     <string name="see_less">See less</string>
+
+    <!-- Strings for toggling subscriptions dialog activity -->
+    <!-- Title of confirmation dialog asking the user if they want to disable subscription. [CHAR_LIMIT=NONE] -->
+    <string name="privileged_action_disable_sub_dialog_title">Turn off <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>?</string>
+    <!-- Title of confirmation dialog asking the user if they want to disable subscription. [CHAR_LIMIT=NONE] -->
+    <string name="privileged_action_disable_sub_dialog_title_without_carrier">Turn off SIM?</string>
+    <!-- Disabling SIMs progress dialog message [CHAR LIMIT=NONE] -->
+    <string name="privileged_action_disable_sub_dialog_progress">Turning off SIM<xliff:g id="ellipsis" example="...">&#8230;</xliff:g></string>
+    <!-- Title of error messaging indicating the device could not disable the mobile network. [CHAR LIMIT=NONE] -->
+    <string name="privileged_action_disable_fail_title">Can\'t disable carrier</string>
+    <!-- Body text of error message indicating the device could not disable the mobile network, due to an unknown issue. [CHAR LIMIT=NONE] -->
+    <string name="privileged_action_disable_fail_text">Something went wrong and your carrier could not be disabled.</string>
+
+    <!-- Strings for deleting eUICC subscriptions dialog activity -->
+    <!-- Title on confirmation dialog asking the user if they want to erase the downloaded SIM from the device. [CHAR_LIMIT=NONE] -->
+    <string name="erase_sim_dialog_title">Erase this downloaded SIM?</string>
+    <!-- Body text in confirmation dialog indicating what erasing a SIM entails. [CHAR_LIMIT=NONE] -->
+    <string name="erase_sim_dialog_text">Erasing this SIM removes <xliff:g id="carrier_name_a" example="Google Fi">%1$s</xliff:g> service from this device.\n\nService for <xliff:g id="carrier_name_b" example="Google Fi">%1$s</xliff:g> won\'t be canceled.</string>
+    <!-- Button label to erase the eSIM [CHAR_LIMIT=20] -->
+    <string name="erase_sim_confirm_button">Erase</string>
+    <!-- Status message indicating the device is in the process of erasing the SIM. [CHAR_LIMIT=NONE] -->
+    <string name="erasing_sim">Erasing SIM&#8230;</string>
+    <!-- Title of error message indicating the device could not erase the SIM. [CHAR_LIMIT=NONE] -->
+    <string name="erase_sim_fail_title">Can\'t erase SIM</string>
+    <!-- Body text of error message indicating the device could not erase the SIM due to an error. [CHAR_LIMIT=NONE] -->
+    <string name="erase_sim_fail_text">This SIM can\'t be erased due to an error.\n\nRestart your device and try again.</string>
 
     <!-- Title for Network connection request Dialog [CHAR LIMIT=60] -->
     <string name="network_connection_request_dialog_title">Connect to device</string>
