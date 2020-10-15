@@ -25,8 +25,8 @@ import static com.android.settings.applications.manageapplications.AppFilterRegi
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_FREQUENT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_INSTANT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_PERSONAL;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_POWER_WHITELIST;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_POWER_WHITELIST_ALL;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_POWER_ALLOWLIST;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_POWER_ALLOWLIST_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_RECENT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WORK;
 import static com.android.settings.search.actionbar.SearchMenuController.MENU_SEARCH;
@@ -125,7 +125,7 @@ import com.android.settingslib.applications.ApplicationsState.AppFilter;
 import com.android.settingslib.applications.ApplicationsState.CompoundFilter;
 import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
 import com.android.settingslib.applications.StorageStatsSource;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
 
@@ -476,10 +476,10 @@ public class ManageApplications extends InstrumentedFragment
             mFilterAdapter.enableFilter(FILTER_APPS_RECENT);
             mFilterAdapter.enableFilter(FILTER_APPS_FREQUENT);
             mFilterAdapter.enableFilter(FILTER_APPS_BLOCKED);
-            mFilterAdapter.disableFilter(FILTER_APPS_ALL);
+            mFilterAdapter.enableFilter(FILTER_APPS_ALL);
         }
         if (mListType == LIST_TYPE_HIGH_POWER) {
-            mFilterAdapter.enableFilter(FILTER_APPS_POWER_WHITELIST_ALL);
+            mFilterAdapter.enableFilter(FILTER_APPS_POWER_ALLOWLIST_ALL);
         }
 
         setCompositeFilter();
@@ -1011,7 +1011,7 @@ public class ManageApplications extends InstrumentedFragment
         private boolean mHasReceivedBridgeCallback;
         private FileViewHolderController mExtraViewController;
         private SearchFilter mSearchFilter;
-        private PowerWhitelistBackend mBackend;
+        private PowerAllowlistBackend mBackend;
 
         // This is to remember and restore the last scroll position when this
         // fragment is paused. We need this special handling because app entries are added gradually
@@ -1036,7 +1036,7 @@ public class ManageApplications extends InstrumentedFragment
             mContext = manageApplications.getActivity();
             mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
             mAppFilter = appFilter;
-            mBackend = PowerWhitelistBackend.getInstance(mContext);
+            mBackend = PowerAllowlistBackend.getInstance(mContext);
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
                 mExtraInfoBridge = new AppStateNotificationBridge(mContext, mState, this,
                         manageApplications.mUsageStatsManager,
@@ -1089,12 +1089,16 @@ public class ManageApplications extends InstrumentedFragment
             mAppFilter = appFilter;
 
             // Notification filters require resorting the list
-            if (FILTER_APPS_FREQUENT == appFilter.getFilterType()) {
-                rebuild(R.id.sort_order_frequent_notification);
-            } else if (FILTER_APPS_RECENT == appFilter.getFilterType()) {
-                rebuild(R.id.sort_order_recent_notification);
-            } else if (FILTER_APPS_BLOCKED == appFilter.getFilterType()) {
-                rebuild(R.id.sort_order_alpha);
+            if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
+                if (FILTER_APPS_FREQUENT == appFilter.getFilterType()) {
+                    rebuild(R.id.sort_order_frequent_notification);
+                } else if (FILTER_APPS_RECENT == appFilter.getFilterType()) {
+                    rebuild(R.id.sort_order_recent_notification);
+                } else if (FILTER_APPS_BLOCKED == appFilter.getFilterType()) {
+                    rebuild(R.id.sort_order_alpha);
+                } else {
+                    rebuild(R.id.sort_order_alpha);
+                }
             } else {
                 rebuild();
             }
@@ -1288,8 +1292,8 @@ public class ManageApplications extends InstrumentedFragment
                 Log.d(TAG, "onRebuildComplete size=" + entries.size());
             }
             final int filterType = mAppFilter.getFilterType();
-            if (filterType == FILTER_APPS_POWER_WHITELIST ||
-                    filterType == FILTER_APPS_POWER_WHITELIST_ALL) {
+            if (filterType == FILTER_APPS_POWER_ALLOWLIST
+                    || filterType == FILTER_APPS_POWER_ALLOWLIST_ALL) {
                 entries = removeDuplicateIgnoringUser(entries);
             }
             mEntries = entries;
@@ -1447,7 +1451,7 @@ public class ManageApplications extends InstrumentedFragment
             }
             ApplicationsState.AppEntry entry = mEntries.get(position);
 
-            return !mBackend.isSysWhitelisted(entry.info.packageName)
+            return !mBackend.isSysAllowlisted(entry.info.packageName)
                     && !mBackend.isDefaultActiveApp(entry.info.packageName);
         }
 
