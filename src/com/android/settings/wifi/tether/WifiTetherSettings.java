@@ -230,6 +230,10 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         final int securityType = mSecurityPreferenceController.getSecurityType();
         final int band = mApBandPreferenceController.getBandIndex();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
+        //if input a password can't acsii encode, will throw an IllegalArgumentException, that
+        //will stop settings, in order to get a better use experience, do password
+        //acsii encode check in WifiTetherPasswordPerference.onPreferenceChange(), if the
+        //the password can't acsii encode, stop password update, use original password
         configBuilder.setPassphrase(mPasswordPreferenceController.getPasswordValidated(securityType),
                                     securityType);
         if (securityType == SoftApConfiguration.SECURITY_TYPE_OWE
