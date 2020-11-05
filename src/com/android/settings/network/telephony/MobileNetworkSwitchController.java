@@ -50,7 +50,6 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
     private TelephonyManager mTelephonyManager;
     private PhoneStateListener mPhoneStateListener;
     private SubscriptionInfo mSubInfo = null;
-    private int mPhoneId;
     private int mCallState;
 
     public MobileNetworkSwitchController(Context context, String preferenceKey) {
@@ -65,7 +64,6 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
     public void init(Lifecycle lifecycle, int subId) {
         lifecycle.addObserver(this);
         mSubId = subId;
-        mPhoneId = mSubscriptionManager.getSlotIndex(mSubId);
     }
 
     @OnLifecycleEvent(ON_RESUME)
@@ -92,7 +90,8 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         mSwitchBar.getSwitch().setOnBeforeCheckedChangeListener((toggleSwitch, isChecked) -> {
             // TODO b/135222940: re-evaluate whether to use
             // mSubscriptionManager#isSubscriptionEnabled
-        int uiccStatus = PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(mPhoneId);
+        int phoneId = mSubscriptionManager.getSlotIndex(mSubId);
+        int uiccStatus = PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(phoneId);
         Log.d(TAG, "displayPreference: mSubId=" + mSubId + ", mSubInfo=" + mSubInfo +
                  ", uiccStatus=" + uiccStatus);
             if ((mSubInfo != null &&
@@ -139,7 +138,8 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
             mSwitchBar.hide();
         } else {
             mSwitchBar.show();
-            int uiccStatus = PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(mPhoneId);
+            int phoneId = mSubscriptionManager.getSlotIndex(mSubId);
+            int uiccStatus = PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(phoneId);
             mSwitchBar.setCheckedInternal(uiccStatus == PrimaryCardAndSubsidyLockUtils.CARD_PROVISIONED);
         }
     }
