@@ -49,6 +49,8 @@
     <string name="config_wallpaper_picker_class" translatable="false">com.android.settings.Settings$WallpaperSettingsActivity</string>
     <!-- Fully-qualified class name for the styles & wallpaper picker activity. -->
     <string name="config_styles_and_wallpaper_picker_class" translatable="false"></string>
+    <!-- Intent extra for wallpaper picker activity. -->
+    <string name="config_wallpaper_picker_launch_extra" translatable="false">com.android.wallpaper.LAUNCH_SOURCE</string>
 
     <!-- Manufacturer backup settings to launch -->
     <string name="config_backup_settings_intent" translatable="false"></string>
@@ -471,6 +473,9 @@
 
     <!-- Whether to show the Preference for Adaptive connectivity -->
     <bool name="config_show_adaptive_connectivity">false</bool>
+
+    <!-- Authority of advanced device battery prediction -->
+    <string name="config_battery_prediction_authority" translatable="false"></string>
 
     <!-- Playing tone setting -->
     <bool name="config_show_connect_tone_ui">false</bool>
