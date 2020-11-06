@@ -258,8 +258,8 @@
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"Дата и время"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Установить дату и время"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Установка даты, времени, часового пояса и формата"</string>
-    <string name="date_time_auto" msgid="8227898528525208628">"Использовать время сети"</string>
-    <string name="zone_auto_title" msgid="4715775349468228598">"Использовать часовой пояс сети"</string>
+    <string name="date_time_auto" msgid="4239202185055225869">"Настраивать время автоматически"</string>
+    <string name="zone_auto_title" msgid="3993580453604839924">"Настраивать часовой пояс автоматически"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Региональные настройки по умолчанию"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"24-часовой формат"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24-часовой формат"</string>
@@ -327,7 +327,7 @@
     <string name="security_dashboard_summary" msgid="8750183806533140464">"Блокировка экрана, отпечаток пальца"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"Блокировка экрана"</string>
     <string name="multi_biometric_enroll_title" msgid="3007607723604088374">"Разблокировка с помощью фейсконтроля и отпечатков пальцев"</string>
-    <string name="multi_biometric_enroll_subtitle" msgid="2900786940599073108">"Вы также сможете входить в приложения и подтверждать оплату."</string>
+    <string name="multi_biometric_enroll_subtitle" msgid="8357072842904027301">"Вы также сможете входить в приложения и подтверждать оплату."</string>
     <string name="multi_biometric_enroll_setup_with" msgid="421375792889910150">"Выберите способ разблокировки:"</string>
     <string name="multi_biometric_enroll_face_unlock_title" msgid="7627564065626355692">"Фейсконтроль"</string>
     <string name="multi_biometric_enroll_face_unlock_description" msgid="7626442550602926682">"Разблокировать телефон без лишних усилий"</string>
@@ -1053,8 +1053,7 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"MAC-адрес устройства"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Случайный MAC-адрес"</string>
-    <!-- no translation found for wifi_advanced_randomized_mac_address_disconnected_title (2755843130417523727) -->
-    <skip />
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"Случайный MAC-адрес (последний)"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"IP-адрес"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"Сведения о сети"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Маска подсети"</string>
@@ -1340,6 +1339,7 @@
     <string name="doze_summary" msgid="8252867381522942804">"Экран включается при появлении новых уведомлений"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Всегда показывать время и информацию"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Батарея разряжается быстрее"</string>
+    <string name="force_bold_text" msgid="3636373986786504634">"Текст с полужирным шрифтом"</string>
     <string name="title_font_size" msgid="570613010306330622">"Размер шрифта"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"Увеличение или уменьшение размера шрифта"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"Настройки блокировки SIM-карты"</string>
@@ -1778,6 +1778,15 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Поиск Bluetooth-устройств"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Разрешить приложениям и сервисам искать устройства поблизости, даже когда Bluetooth отключен. Это может улучшить работу функций и сервисов, использующих данные о местоположении."</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Геолокация для работы"</string>
+    <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"Определение часового пояса с помощью геолокации"</string>
+    <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"Определение часового пояса с помощью геолокации"</string>
+    <string name="location_time_zone_detection_enabled_description" msgid="1064716900984397624">"Позволяет использовать местоположение устройства для того, чтобы определять текущий часовой пояс. На точность могут влиять другие настройки геолокации (например, поиск сетей Wi‑Fi)."</string>
+    <string name="location_time_zone_detection_on" msgid="5514817179120761597">"Включено"</string>
+    <string name="location_time_zone_detection_off" msgid="192427076195667079">"Отключено"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="8067073548483627695">"Автоматическое определение часовых поясов отключено"</string>
+    <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Определение часового пояса с помощью геолокации отключено."</string>
+    <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Определение часового пояса с помощью геолокации не поддерживается."</string>
+    <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Вы не можете изменить настройки определения часового пояса с помощью геолокации."</string>
     <string name="location_network_based" msgid="5247042890080021887">"По координатам сети"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Разрешить отправлять анонимные геоданные и позволить приложениям определять ваше местоположение с помощью Wi-Fi и мобильных сетей"</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"С помощью Wi-Fi"</string>
@@ -2577,6 +2586,8 @@
       <item quantity="other">%1$d приложения с ограниченным доступом</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Не удается получить данные о заряде батареи"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Не удается получить данные о заряде батареи. "<annotation id="url">"Подробнее…"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Остановить приложение?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Заряд батареи расходуется слишком быстро, так как приложение \"<xliff:g id="APP">%1$s</xliff:g>\" не позволяет телефону перейти в спящий режим.\n\nЧтобы устранить эту проблему, остановите приложение.\n\nЕсли это не поможет, удалите его."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Заряд батареи расходуется слишком быстро, так как приложение \"<xliff:g id="APP">%1$s</xliff:g>\" не позволяет планшету перейти в спящий режим.\n\nЧтобы устранить эту проблему, остановите приложение.\n\nЕсли это не поможет, удалите его."</string>
@@ -3653,8 +3664,11 @@
     <string name="important_conversations" msgid="1233893707189659401">"Важные разговоры"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Показывать в верхней части списка разговоров и в виде всплывающих чатов"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Показывать в верхней части списка разговоров"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Другие разговоры"</string>
+    <string name="other_conversations" msgid="551178916855139870">"Неприоритетные разговоры"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Разговоры, в которые вы вносили изменения:"</string>
+    <string name="recent_conversations" msgid="471678228756995274">"Недавние разговоры"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"Удалить недавние"</string>
+    <string name="clear" msgid="5092178335409471100">"Очистить"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Показывать всплывающие чаты для важных разговоров"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Важные разговоры появляются в верхней части панели уведомлений. Для них можно включить всплывающие чаты, а также разрешить показ сообщений в режиме \"Не беспокоить\"."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Здесь будут появляться важные и измененные разговоры"</string>
@@ -4633,11 +4647,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Нажмите, чтобы проверить планшет"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Нажмите, чтобы проверить устройство"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Чтобы увидеть время, уведомления и другую информацию, коснитесь экрана."</string>
-    <string name="panic_gesture_screen_title" msgid="2978368688339171290">"Кнопка panic"</string>
-    <string name="panic_gesture_screen_summary" msgid="6560595108396726608">"Быстро нажмите пять раз на кнопку питания, чтобы позвонить в экстренные службы"</string>
-    <string name="panic_gesture_sound_setting_title" msgid="2235527774130891208">"Предупреждающий сигнал"</string>
-    <string name="panic_gesture_sound_setting_summary" msgid="6997197208264987249">"Включать предупреждающий сигнал перед звонком в экстренные службы"</string>
-    <string name="panic_gesture_edit_emergency_contact_setting_title" msgid="7791096427878863017">"Контакты для экстренных случаев"</string>
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Экстренный вызов"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Под управлением приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Чтобы позвонить в экстренные службы, нужно пять раз быстро нажать кнопку питания"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"Предупреждающий сигнал"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Включать предупреждающий сигнал перед выполнением экстренного вызова"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Использовать сканер отпечатков для просмотра уведомлений"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Сканер отпечатков"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Чтобы увидеть уведомления, проведите вниз по сканеру отпечатков пальцев на задней панели телефона"</string>
@@ -5001,6 +5015,12 @@
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Отключение SIM-карты<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Произошла ошибка"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Не удалось отключить оператора."</string>
+    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Удалить данные скачанной SIM-карты?"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"Если вы удалите данные этой SIM-карты, оператор \"<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>\" перестанет обслуживать устройство.\n\nЭто не повлияет на тарифный план оператора \"<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>\"."</string>
+    <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Удалить"</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"Удаление данных SIM-карты…"</string>
+    <string name="erase_sim_fail_title" msgid="2024446702985862427">"Не удалось стереть данные SIM-карты"</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"Не удалось стереть данные этой SIM-карты из-за ошибки.\n\nПерезагрузите устройство и повторите попытку."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Подключение к устройству"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"Приложение \"<xliff:g id="APPNAME">%1$s</xliff:g>\" хочет использовать временную сеть Wi‑Fi для подключения к устройству."</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Устройства не найдены. Убедитесь, что они включены и доступны для подключения."</string>
@@ -5134,4 +5154,7 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Нет доступных проигрывателей"</string>
     <string name="media_controls_apps_title" msgid="9129092193224838008">"Разрешенные приложения"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"Медиа"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Будет включен модуль Bluetooth"</string>
+    <string name="bluetooth_setting_on" msgid="4808458394436224124">"Включено"</string>
+    <string name="bluetooth_setting_off" msgid="4965493913199554789">"Отключено"</string>
 </resources>

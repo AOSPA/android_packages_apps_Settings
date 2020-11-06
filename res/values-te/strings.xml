@@ -254,8 +254,8 @@
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"తేదీ &amp; సమయం"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"తేదీ మరియు సమయాన్ని సెట్ చేయండి"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"తేదీ, సమయం, సమయ మండలి &amp; ఆకృతులను సెట్ చేయి"</string>
-    <string name="date_time_auto" msgid="8227898528525208628">"నెట్‌వర్క్-అందించిన సమయాన్ని ఉపయోగిస్తుంది"</string>
-    <string name="zone_auto_title" msgid="4715775349468228598">"నెట్‌వర్క్ అందించిన సమయ మండలిని ఉపయోగిస్తుంది"</string>
+    <string name="date_time_auto" msgid="4239202185055225869">"ఆటోమేటిక్‌గా టైమ్‌ను సెట్ చేయండి"</string>
+    <string name="zone_auto_title" msgid="3993580453604839924">"ఆటోమేటిక్‌గా టైమ్ జోన్‌ను సెట్ చేయండి"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"ఆ భాష‌లో వాడే ఫార్మాట్‌ను ఉప‌యోగించు"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"24‑గంటల ఆకృతి"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24-గంటల ఫార్మాట్‌ను ఉప‌యోగించు"</string>
@@ -321,7 +321,7 @@
     <string name="security_dashboard_summary" msgid="8750183806533140464">"స్క్రీన్ లాక్, వేలిముద్ర"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"స్క్రీన్ లాక్"</string>
     <string name="multi_biometric_enroll_title" msgid="3007607723604088374">"ముఖం అలాగే వేలిముద్రతో ఫోన్‌ను సురక్షితంగా అన్‌లాక్ చేయండి"</string>
-    <string name="multi_biometric_enroll_subtitle" msgid="2900786940599073108">"మీరు యాప్‌లలో కూడా సైన్ ఇన్ చేసి, పేమెంట్‌ను నిర్ధారించవచ్చు"</string>
+    <string name="multi_biometric_enroll_subtitle" msgid="8357072842904027301">"మీరు యాప్‌లలో కూడా సైన్ ఇన్ చేసి, పేమెంట్‌లు నిర్ధారించవచ్చు"</string>
     <string name="multi_biometric_enroll_setup_with" msgid="421375792889910150">"దీనితో అన్‌లాక్ సెటప్ చేయండి:"</string>
     <string name="multi_biometric_enroll_face_unlock_title" msgid="7627564065626355692">"ఫేస్ అన్‌లాక్"</string>
     <string name="multi_biometric_enroll_face_unlock_description" msgid="7626442550602926682">"మీ ఫోన్‌ను అన్‌లాక్ చేయడం సులభతరం చేయండి"</string>
@@ -1013,8 +1013,7 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"డివైజ్ యొక్క MAC చిరునామా"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"ర్యాండ‌మ్‌గా రూపొందించిన MAC అడ్రస్‌"</string>
-    <!-- no translation found for wifi_advanced_randomized_mac_address_disconnected_title (2755843130417523727) -->
-    <skip />
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"యాదృచ్ఛిక MAC అడ్రస్ (చివరిగా ఉపయోగించినది)"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"IP చిరునామా"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"నెట్‌వర్క్ వివరాలు"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"సబ్‌నెట్ మాస్క్"</string>
@@ -1300,6 +1299,7 @@
     <string name="doze_summary" msgid="8252867381522942804">"స్క్రీన్ చీకటిగా ఉన్నప్పుడు, కొన్ని నోటిఫికేషన్‌ల కోసం ఇది ఆన్ అవుతుంది"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"టైమ్, సమాచారం ఎల్లప్పుడూ చూపు"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"బ్యాటరీ వినియోగం పెరుగుతుంది"</string>
+    <string name="force_bold_text" msgid="3636373986786504634">"బోల్డ్ టెక్స్ట్"</string>
     <string name="title_font_size" msgid="570613010306330622">"ఫాంట్ పరిమాణం"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"వచనాన్ని పెద్దదిగా లేదా చిన్నదిగా చేస్తుంది"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"సిమ్ కార్డు లాక్ సెట్టింగ్‌లు"</string>
@@ -1734,6 +1734,15 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"బ్లూటూత్ స్కానింగ్"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"బ్లూటూత్ ఆఫ్‌లో ఉన్నప్పుడు కూడా, ఏ సమయంలోనైనా సమీపంలోని పరికరాలను స్కాన్ చేయడానికి యాప్‌లను, సేవలను అనుమతించండి. ఉదాహరణకు, లొకేషన్ ఆధారిత ఫీచర్‌లు, సేవలను మెరుగుపరచడానికి దీనిని ఉపయోగించవచ్చు."</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"ఆఫీస్ కోసం స్థాన సేవలు"</string>
+    <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"లొకేషన్ టైమ్ జోన్ గుర్తింపు"</string>
+    <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"లొకేషన్ టైమ్ జోన్ గుర్తింపు"</string>
+    <string name="location_time_zone_detection_enabled_description" msgid="1064716900984397624">"ప్రస్తుత టైమ్ జోన్‌ను గుర్తించడానికి పరికరం‌ యొక్క లొకేషన్‌ను ఉపయోగించడానికి అనుమతిస్తుంది. Wi‑Fi స్కానింగ్ వంటి ఇతర లొకేషన్ సెట్టింగ్‌లు టైమ్ జోన్ గుర్తింపు యొక్క ఖచ్చితత్వాన్ని ప్రభావితం చేస్తాయి."</string>
+    <string name="location_time_zone_detection_on" msgid="5514817179120761597">"ఆన్‌లో ఉంది"</string>
+    <string name="location_time_zone_detection_off" msgid="192427076195667079">"ఆఫ్‌లో ఉంది"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="8067073548483627695">"ఆటోమేటిక్ టైమ్ జోన్ గుర్తింపు డిజేబుల్ చేయబడింది"</string>
+    <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"లొకేషన్ టైమ్ జోన్ గుర్తింపు డిజేబుల్ చేయబడింది"</string>
+    <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"లొకేషన్ టైమ్ జోన్ గుర్తింపుకు మద్దతు లేదు"</string>
+    <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"లొకేషన్ టైమ్ జోన్ గుర్తింపు మార్పులు అనుమతించబడవు"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Wi‑Fi &amp; మొబైల్ నెట్‌వర్క్ స్థానం"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"మీ స్థానాన్ని వేగవంతంగా అంచనా వేయడం కోసం Google స్థాన సేవను ఉపయోగించడానికి అనువర్తనాలను అనుమతించండి. అనామక స్థాన డేటా సేకరించబడుతుంది మరియు Googleకు పంపబడుతుంది."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"స్థానం Wi‑Fi ద్వారా గుర్తించబడింది"</string>
@@ -2501,6 +2510,8 @@
       <item quantity="one">%1$d యాప్ పరిమితం చేయబడింది</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"మీ బ్యాటరీ మీటర్‌ను చదవడంలో సమస్య"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"మీ బ్యాటరీ మీటర్‌ను చదవడంలో సమస్య. "<annotation id="url">"మరింత తెలుసుకోవడానికి"</annotation>" ట్యాప్ చేయండి"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"యాప్‌ని ఆపివేయాలా?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"<xliff:g id="APP">%1$s</xliff:g> మీ ఫోన్‌ని మేల్కొల్పి ఉంచుతోంది, కనుక బ్యాటరీని మీ ఫోన్ సాధారణ రీతిలో నిర్వహించడం సాధ్యం కాదు.\n\nఈ సమస్యను పరిష్కరించేందుకు ప్రయత్నించడానికి, మీరు అనువర్తనాన్ని ఆపివేయవచ్చు.\n\nఈ సమస్య కొనసాగితే, బ్యాటరీ పనితీరును మెరుగుపరచడం కోసం మీరు అనువర్తనాన్ని అన్ఇన్‌స్టాల్ చేయాల్సి రావచ్చు."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"<xliff:g id="APP">%1$s</xliff:g> మీ టాబ్లెట్‌ని మేల్కొల్పి ఉంచుతుంది, కనుక బ్యాటరీని మీ టాబ్లెట్ సాధారణ రీతిలో నిర్వహించడం సాధ్యం కాదు.\n\nఈ సమస్యను పరిష్కరించేందుకు ప్రయత్నించడానికి, మీరు అనువర్తనాన్ని ఆపివేయవచ్చు.\n\nఈ సమస్య కొనసాగితే, బ్యాటరీ పనితీరును మెరుగుపరచడం కోసం మీరు అనువర్తనాన్ని అన్ఇన్‌స్టాల్ చేయాల్సి రావచ్చు."</string>
@@ -3563,8 +3574,11 @@
     <string name="important_conversations" msgid="1233893707189659401">"ప్రాధాన్య సంభాషణలు"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"సంభాషణల విభాగంలో ఎగువున చూపబడుతుంది, తేలుతున్న బబుల్స్‌లా కనిపిస్తుంది"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"సంభాషణ విభాగంలో ఎగువున చూపబడుతుంది"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"ఇతర సంభాషణలు"</string>
+    <string name="other_conversations" msgid="551178916855139870">"ప్రాధాన్యత లేని సంభాషణలు"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"మీరు మార్పులు చేసిన సంభాషణలు"</string>
+    <string name="recent_conversations" msgid="471678228756995274">"ఇటీవలి సంభాషణలు"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"ఇటీవలివి క్లియర్"</string>
+    <string name="clear" msgid="5092178335409471100">"క్లియర్ చేయండి"</string>
     <string name="important_bubble" msgid="7911698275408390846">"బబుల్ ప్రముఖ సంభాషణ"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"కిందకు-లాగే షేడ్ ఎగువ భాగంలో ప్రాముఖ్యమైన సంభాషణలు కనిపిస్తాయి. అవి ఒక బబుల్ రూపంలో వచ్చి \'అంతరాయం కలిగించవద్దు\' మోడ్‌ను అధిగమించేలా కూడా మీరు సెట్ చేయవచ్చు."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"ప్రముఖమైన, మార్పులు చేసిన సంభాషణలు ఇక్కడ కనిపిస్తాయి"</string>
@@ -4489,11 +4503,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"టాబ్లెట్‌ను తనిఖీ చేయడానికి నొక్కండి"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"పరికరాన్ని తనిఖీ చేయడానికి నొక్కండి"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"సమయం, నోటిఫికేషన్‌లు మరియు ఇతర సమాచారాన్ని తనిఖీ చేయడానికి నొక్కండి."</string>
-    <string name="panic_gesture_screen_title" msgid="2978368688339171290">"ఎమర్జెన్సీ బటన్"</string>
-    <string name="panic_gesture_screen_summary" msgid="6560595108396726608">"పవర్ బటన్‌ను వెంట వెంటనే 5 సార్లు నొక్కడం ద్వారా ఎమర్జెన్సీ SOS చర్యలను ప్రారంభించండి."</string>
-    <string name="panic_gesture_sound_setting_title" msgid="2235527774130891208">"హెచ్చరిక సౌండ్"</string>
-    <string name="panic_gesture_sound_setting_summary" msgid="6997197208264987249">"చర్యలను ప్రారంభించడానికి ముందు అలర్ట్ చేయండి"</string>
-    <string name="panic_gesture_edit_emergency_contact_setting_title" msgid="7791096427878863017">"ఎమర్జెన్సీ కాంటాక్ట్‌లు"</string>
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"ఎమర్జెన్సీ SOS"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g> ద్వారా మేనేజ్ చేయబడింది"</string>
+    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"పవర్ బటన్‌ను వెంటవెంటనే 5 సార్లు నొక్కడం ద్వారా ఎమర్జెన్సీ SOS చర్యలను ప్రారంభించండి."</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"హెచ్చరిక సౌండ్"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"చర్యలను ప్రారంభించడానికి ముందు అలర్ట్ చేయండి"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"నోటిఫికేషన్‌ల కోసం వేలిముద్రతో స్వైప్ చేయండి"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"వేలిముద్రతో స్వైప్ చేయి"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"మీ నోటిఫికేషన్‌లను తనిఖీ చేయడానికి, మీ ఫోన్ వెనుకవైపు ఉన్న వేలిముద్ర సెన్సార్‌పై కిందికి స్వైప్ చేయండి."</string>
@@ -4841,6 +4855,12 @@
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"సిమ్‌ను ఆఫ్ చేస్తోంది<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"క్యారియర్‌ను డిజేబుల్ చేయడం సాధ్యం కాదు"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"ఏదో తప్పు జరిగింది, మీ క్యారియర్‌ను డిజేబుల్ చేయడం సాధ్యం కాలేదు."</string>
+    <string name="erase_sim_dialog_title" msgid="881253002169177016">"డౌన్‌లోడ్ చేయబడిన ఈ SIMను తొలగించాలా?"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"ఈ SIMను తొలగించడం వలన ఈ పరికరం నుండి <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> సర్వీస్ తీసివేయబడుతోంది.\n\n <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> సర్వీస్ రద్దు చేయబడదు."</string>
+    <string name="erase_sim_confirm_button" msgid="8309115684335320541">"తొలగించు"</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"SIMను తొలగిస్తోంది…"</string>
+    <string name="erase_sim_fail_title" msgid="2024446702985862427">"SIMను తొలగించలేకపోయింది"</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"ఎర్రర్ కారణంగా ఈ SIMను తొలగించడం సాధ్యం కాలేదు.\n\nమీ పరికరాన్ని రీస్టార్ట్ చేసి మళ్లీ ట్రై చేయండి."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"పరికరానికి కనెక్ట్ చేయండి"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"మీ పరికరానికి కనెక్ట్ కావడానికి <xliff:g id="APPNAME">%1$s</xliff:g> యాప్ తాత్కాలిక Wi‑Fi నెట్‌వర్క్‌ను ఉపయోగించాలనుకుంటుంది"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"పరికరాలు ఏవీ కనుగొనబడలేదు. పరికరాలు ఆన్‌లో ఉన్నాయని మరియు కనెక్ట్ చేయడానికి అందుబాటులో ఉన్నాయని నిర్ధారించుకోండి."</string>
@@ -4970,4 +4990,7 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"ప్లేయర్‌లు ఏవీ అందుబాటులో లేవు"</string>
     <string name="media_controls_apps_title" msgid="9129092193224838008">"అనుమతించబడిన యాప్‌లు"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"మీడియా"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"బ్లూటూత్ ఆన్ చేయబడుతుంది"</string>
+    <string name="bluetooth_setting_on" msgid="4808458394436224124">"ఆన్"</string>
+    <string name="bluetooth_setting_off" msgid="4965493913199554789">"ఆఫ్"</string>
 </resources>
