@@ -51,5 +51,10 @@
         android:selectable="false"
         settings:searchable="false"
         settings:allowDividerAbove="true"/>
+
+    <SwitchPreference
+        android:key="immersive_navigation"
+        android:title="@string/immersive_navigation_title"
+        settings:allowDividerAbove="true" />
 </PreferenceScreen>
 
