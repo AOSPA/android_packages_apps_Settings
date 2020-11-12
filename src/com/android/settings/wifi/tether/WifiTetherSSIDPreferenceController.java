@@ -139,6 +139,10 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
         });
     }
 
+    public void setButtonInvisible() {
+        ((WifiTetherSsidPreference) mPreference).setButtonInvisible();
+    }
+
     @VisibleForTesting
     boolean isQrCodeButtonAvailable() {
         return ((WifiTetherSsidPreference) mPreference).isQrCodeButtonAvailable();
