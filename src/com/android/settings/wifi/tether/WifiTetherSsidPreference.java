@@ -39,6 +39,7 @@ public class WifiTetherSsidPreference extends ValidatedEditTextPreference {
 
     private Drawable mShareIconDrawable;
     private View.OnClickListener mClickListener;
+    private ImageButton mShareButton;
     private boolean mVisible;
 
     public WifiTetherSsidPreference(Context context, AttributeSet attrs,
@@ -81,6 +82,7 @@ public class WifiTetherSsidPreference extends ValidatedEditTextPreference {
         final ImageButton shareButton = (ImageButton) holder.findViewById(R.id.button_icon);
         final View dividerView = holder.findViewById(R.id.two_target_divider);
 
+        mShareButton = shareButton;
         if (mVisible) {
             shareButton.setOnClickListener(mClickListener);
             shareButton.setVisibility(View.VISIBLE);
@@ -102,6 +104,12 @@ public class WifiTetherSsidPreference extends ValidatedEditTextPreference {
 
     public void setButtonVisible(boolean visible) {
         mVisible = visible;
+    }
+
+    public void setButtonInvisible() {
+        mVisible = false;
+        if(mShareButton != null)
+            mShareButton.setVisibility(View.GONE);
     }
 
     private Drawable getDrawable(@DrawableRes int iconResId) {
