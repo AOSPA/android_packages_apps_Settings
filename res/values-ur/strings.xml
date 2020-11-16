@@ -27,9 +27,9 @@
       <item quantity="other">اب آپ ایک ڈویلپر بننے سے <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> قدم دور ہیں۔</item>
       <item quantity="one">اب آپ ایک ڈویلپر بننے سے <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> قدم دور ہیں۔</item>
     </plurals>
-    <string name="show_dev_on" msgid="2840850085134853754">"اب آپ ایک ڈیولپر ہیں!"</string>
-    <string name="show_dev_already" msgid="7041756429707644630">"کوئی ضرورت نہیں ہے، آپ پہلے سے ہی ایک ڈیولپر ہیں۔"</string>
-    <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"براہ کرم پہلے ڈیولپر کے اختیارات فعال کریں"</string>
+    <string name="show_dev_on" msgid="2840850085134853754">"اب آپ ایک ڈویلپر ہیں!"</string>
+    <string name="show_dev_already" msgid="7041756429707644630">"کوئی ضرورت نہیں ہے، آپ پہلے سے ہی ایک ڈویلپر ہیں۔"</string>
+    <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"براہ کرم پہلے ڈویلپر کے اختیارات فعال کریں"</string>
     <string name="header_category_wireless_networks" msgid="303445626075235229">"وائرلیس اور نیٹ ورکس"</string>
     <string name="header_category_system" msgid="1665516346845259058">"سسٹم"</string>
     <string name="radioInfo_service_in" msgid="9088637745836646271">"سروس میں"</string>
@@ -254,8 +254,8 @@
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"تاریخ اور وقت"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"تاریخ اور وقت سیٹ کریں"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"تاریخ، وقت، ٹائم زون اور فارمیٹس کو سیٹ کریں"</string>
-    <string name="date_time_auto" msgid="8227898528525208628">"نیٹ ورک کے ذریعے فراہم کردہ وقت استعمال کریں"</string>
-    <string name="zone_auto_title" msgid="4715775349468228598">"نیٹ ورک کی جانب سے فراہم کردہ ٹائم زون استعمال کریں"</string>
+    <string name="date_time_auto" msgid="4239202185055225869">"خودکار طور پر وقت سیٹ کریں"</string>
+    <string name="zone_auto_title" msgid="3993580453604839924">"خودکار طور پر ٹائم زون سیٹ کریں"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"مقامی ڈیفالٹ کا استعمال کریں"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"24 گھنٹے کا فارمیٹ"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24 گھنٹے کا فارمیٹ استعمال کریں"</string>
@@ -321,7 +321,7 @@
     <string name="security_dashboard_summary" msgid="8750183806533140464">"اسکرین لاک، فنگر پرنٹ"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"اسکرین لاک"</string>
     <string name="multi_biometric_enroll_title" msgid="3007607723604088374">"اپنے فون کو اپنے چہرے اور فنگر پرنٹ کے ساتھ محفوظ طریقے سے غیر مقفل کریں"</string>
-    <string name="multi_biometric_enroll_subtitle" msgid="2900786940599073108">"آپ ایپس میں بھی سائن ان اور ادائیگی کی تصدیق کرسکتے ہیں"</string>
+    <string name="multi_biometric_enroll_subtitle" msgid="8357072842904027301">"آپ ایپس میں بھی سائن ان اور ادائیگیوں کی تصدیق کرسکتے ہیں"</string>
     <string name="multi_biometric_enroll_setup_with" msgid="421375792889910150">"اس کے ذریعے غیر مقفل کو سیٹ کریں:"</string>
     <string name="multi_biometric_enroll_face_unlock_title" msgid="7627564065626355692">"چہرے کے ذریعے غیر مقفل کریں"</string>
     <string name="multi_biometric_enroll_face_unlock_description" msgid="7626442550602926682">"اپنا فون غیر مقفل کرنا آسان بنائیں"</string>
@@ -1013,8 +1013,7 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"‏آلہ کا MAC پتہ"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"‏بے ترتیب MAC پتہ"</string>
-    <!-- no translation found for wifi_advanced_randomized_mac_address_disconnected_title (2755843130417523727) -->
-    <skip />
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"‏بے ترتیب MAC پتہ (آخری بار استعمال کیا گيا)"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"‏IP پتہ"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"نیٹ ورک کی تفصیلات"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"سب نیٹ ماسک"</string>
@@ -1300,6 +1299,7 @@
     <string name="doze_summary" msgid="8252867381522942804">"اسکرین گہری ہونے پر، یہ نئی اطلاعات کے لیے آن ہو جاتی ہے"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"ہمیشہ وقت اور معلومات دکھائیں"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"اضافی بیٹری کا استعمال"</string>
+    <string name="force_bold_text" msgid="3636373986786504634">"بولڈ ٹیکسٹ"</string>
     <string name="title_font_size" msgid="570613010306330622">"فونٹ سائز"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"متن کو چھوٹا یا بڑا کریں"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"‏SIM کارڈ لاک کی ترتیبات"</string>
@@ -1734,6 +1734,15 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"بلوٹوتھ اسکیننگ"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"بلوٹوتھ کے آف ہونے پر بھی ایپس اور سروسز کو کسی بھی وقت قریبی آلات اسکین کرنے کی اجازت دیں۔ مثال کے طور، اسے مقام پر مبنی خصوصیات اور سروسز کو بہتر بنانے کے لیے استعمال کیا جا سکتا ہے۔"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"دفتر کے لیے مقام کی سروسز"</string>
+    <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"مقام کے ٹائم زون کی شناخت"</string>
+    <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"مقام کے ٹائم زون کی شناخت"</string>
+    <string name="location_time_zone_detection_enabled_description" msgid="1064716900984397624">"‏موجودہ ٹائم زون کا پتہ لگانے کے لئے آلے کے مقام کو استعمال کرنے کی اجازت دیتا ہے۔ Wi‑Fi اسکیننگ جیسی دیگر مقام کی ترتیبات ٹائم زون کی شناخت کی درستگی کو متاثر کر سکتی ہیں۔"</string>
+    <string name="location_time_zone_detection_on" msgid="5514817179120761597">"آن"</string>
+    <string name="location_time_zone_detection_off" msgid="192427076195667079">"آف"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="8067073548483627695">"خودکار ٹائم زون کی شناخت غیر فعال ہے"</string>
+    <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"مقام کے ٹائم زون کی شناخت غیر فعال ہے"</string>
+    <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"مقام کے ٹائم زون کی شناخت تعاون یافتہ نہیں ہے"</string>
+    <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"مقام کے ٹائم زون کی شناخت کی تبدیلیوں کی اجازت نہیں ہے"</string>
     <string name="location_network_based" msgid="5247042890080021887">"‏Wi‑Fi اور‎ موبائل نیٹ ورک مقام"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"‏اپنے مقام کا تیزی سے اندازہ لگانے کیلئے ایپس کو Google کی مقام کی سروس کا استعمال کرنے دیں۔ گمنام مقام کا ڈیٹا جمع کیا جائے گا اور Google کو بھیجا جائے گا۔"</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"‏Wi‑Fi کے ذریعہ مقام کا تعین کیا گیا"</string>
@@ -2501,6 +2510,8 @@
       <item quantity="one">‏%1$d ایپ پر پابندی لگائی گئی</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"آپ کے بیٹری میٹر کو پڑھنے میں دشواری"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"آپ کے بیٹری میٹر کو پڑھنے میں دشواری۔ "<annotation id="url">"مزید جاننے"</annotation>" کیلئے تھپتھپائیں"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"ایپ بند کریں؟"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"آپ کا فون نارمل طریقے سے بیٹری کا نظم نہیں کر سکتا کیوںکہ <xliff:g id="APP">%1$s</xliff:g> آپ کے فون کو بیدار رکھ رہی ہے۔\n\nاس مسئلے کو حل کرنے کیلئے آپ ایپ کو روک سکتے ہیں۔\n\nاگر یہ سلسلہ جاری رہتا ہے تو آپ کو بیٹری کی کارکردگی کو بہتر بنانے کیلئے ایپ کو اَن انسٹال کرنا پڑ سکتا ہے۔"</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"آپ کا ٹیبلیٹ نارمل طریقے سے بیٹری کا نظم نہیں کر سکتا کیوںکہ <xliff:g id="APP">%1$s</xliff:g> آپ کے ٹیبلیٹ کو بیدار رکھ رہی ہے۔\n\nاس مسئلے کو حل کرنے کیلئے آپ ایپ کو روک سکتے ہیں۔\n\nاگر یہ سلسلہ جاری رہتا ہے تو آپ کو بیٹری کی کارکردگی کو بہتر بنانے کیلئے ایپ کو اَن انسٹال کرنا پڑ سکتا ہے۔"</string>
@@ -2728,7 +2739,7 @@
     <string name="backup_erase_dialog_title" msgid="5892431263348766484"></string>
     <string name="backup_erase_dialog_message" msgid="2250872501409574331">"‏اپنے Wi‑Fi پاس ورڈز، بُک مارکس، دوسری ترتیبات اور ایپ کے ڈیٹا کا بیک اپ لینا بند کریں، ساتھ ہی Google سرورز پر موجود سبھی کاپیاں حذف کریں۔"</string>
     <string name="fullbackup_erase_dialog_message" msgid="2379053988557486162">"‏آلہ کے ڈیٹا (جیسے کہ Wi-Fi پاس ورڈز اور کال کی سرگزشت) اور ایپ ڈیٹا (جیسے کہ ایپس کی جانب سے اسٹور کردہ ترتیبات اور فائلز) کا بیک اپ لینا بند کریں، نیز ریموٹ سرورز پر موجود سبھی کاپیاں مٹائیں؟"</string>
-    <string name="fullbackup_data_summary" msgid="971587401251601473">"‏خودکار طریقے سے دور سے آلہ کے ڈیٹا (جیسے کہ Wi-Fi پاس ورڈز اور کال کی سرگزشت) اور ایپ ڈیٹا (جیسے کہ ایپس کی جانب سے اسٹور کردہ ترتیبات اور فائلز) کا بیک اپ لیں۔\n\nجب آپ خودکار بیک اپ آن کرتے ہیں تو آلہ اور ایپ کا ڈیٹا وقفہ وقفہ پر دور سے محفوظ کیا جاتا ہے۔ ممکنہ طور پر حساس ڈیٹا مثلاً رابطے، پیغامات اور تصاویر سمیت ایپ ڈیٹا کوئی بھی ایسا ڈیٹا ہو سکتا ہے جسے کسی ایپ نے (ڈیولپر ترتیبات کی بنیاد پر) محفوظ کیا ہو۔"</string>
+    <string name="fullbackup_data_summary" msgid="971587401251601473">"‏خودکار طریقے سے دور سے آلہ کے ڈیٹا (جیسے کہ Wi-Fi پاس ورڈز اور کال کی سرگزشت) اور ایپ ڈیٹا (جیسے کہ ایپس کی جانب سے اسٹور کردہ ترتیبات اور فائلز) کا بیک اپ لیں۔\n\nجب آپ خودکار بیک اپ آن کرتے ہیں تو آلہ اور ایپ کا ڈیٹا وقفہ وقفہ پر دور سے محفوظ کیا جاتا ہے۔ ممکنہ طور پر حساس ڈیٹا مثلاً رابطے، پیغامات اور تصاویر سمیت ایپ ڈیٹا کوئی بھی ایسا ڈیٹا ہو سکتا ہے جسے کسی ایپ نے (ڈویلپر ترتیبات کی بنیاد پر) محفوظ کیا ہو۔"</string>
     <string name="device_admin_settings_title" msgid="31392408594557070">"آلہ کے منتظم کی ترتیبات"</string>
     <string name="active_device_admin_msg" msgid="7744106305636543184">"آلہ کے منتظم کی ایپ"</string>
     <string name="remove_device_admin" msgid="3143059558744287259">"آلہ کے منتظم کی یہ ایپ غیر فعال کریں"</string>
@@ -3563,8 +3574,11 @@
     <string name="important_conversations" msgid="1233893707189659401">"ترجیحی گفتگوئیں"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"گفتگو کے سیکشن میں سب سے اوپر دکھائیں اور فلوٹنگ بلبلے کے طور پر ظاہر ہوں"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"گفتگو کے سیکشن میں سب سے اوپر دکھائیں"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"دیگر گفتگوئیں"</string>
+    <string name="other_conversations" msgid="551178916855139870">"غیر ترجیحی گفتگوئیں"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"گفتگوئیں جن میں آپ نے تبدیلیاں کی ہیں"</string>
+    <string name="recent_conversations" msgid="471678228756995274">"حالیہ گفتگوئیں"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"حالیہ کو صاف کریں"</string>
+    <string name="clear" msgid="5092178335409471100">"صاف کریں"</string>
     <string name="important_bubble" msgid="7911698275408390846">"بلبلہ ترجیحی گفتگوئیں"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"ترجیحی گفتگوئیں پُل ڈاؤن شیڈ کے اوپری حصے میں دکھائی دیتی ہیں۔ آپ انہیں بلبلہ اور \'ڈسٹرب نہ کریں\' مداخلت پر بھی سیٹ کر سکتے ہیں۔"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"ترجیحی اور ترمیم شدہ گفتگوئیں یہاں ظاہر ہوں گی"</string>
@@ -4401,7 +4415,7 @@
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"سمجھ آ گئی"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"گہری تھیم آزمائیں"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"بیٹری لائف بڑھانے میں مدد کرتی ہے"</string>
-    <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"فوری ترتیبات کے ڈیولپر ٹائلز"</string>
+    <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"فوری ترتیبات کے ڈویلپر ٹائلز"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"‏adb اجازت دہندگی کے ٹائم آؤٹ کو غیر فعال کریں"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"‏ان سسٹمز کے لیے adb کی اجازت دہندگیوں کی منسوخی کو خود کار طور پر غیر فعال کریں جو ڈیفالٹ (7 دن) یا صارف کے ترتیب کردہ (کم از کم1 دن) وقت کی تعداد کے اندر دوبارہ منسلک نہیں ہوئی۔"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"‏Winscope ٹریس"</string>
@@ -4487,11 +4501,16 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ٹیبلیٹ چیک کرنے کے لیے تھپتھپائیں"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"آلہ چیک کرنے کے لیے تھپتھپائیں"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"وقت، اطلاعات، اور دیگر معلومات چیک کرنے کے لیے اپنی اسکرین کو دو بار تھپتھپائیں۔"</string>
-    <string name="panic_gesture_screen_title" msgid="2978368688339171290">"ڈرانے کا بٹن"</string>
-    <string name="panic_gesture_screen_summary" msgid="6560595108396726608">"‏5 بار پاور بٹن کو تیزی سے دبا کر کے ہنگامی SOS کاروائیوں کو شروع کریں۔"</string>
-    <string name="panic_gesture_sound_setting_title" msgid="2235527774130891208">"وارننگ کی آواز"</string>
-    <string name="panic_gesture_sound_setting_summary" msgid="6997197208264987249">"کارروائیاں شروع کرنے سے پہلے الرٹ"</string>
-    <string name="panic_gesture_edit_emergency_contact_setting_title" msgid="7791096427878863017">"ہنگامی رابطے"</string>
+    <!-- no translation found for emergency_gesture_screen_title (3280543310204360902) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_entrypoint_summary (4730874229911208834) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_screen_summary (1412270517879718683) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_sound_setting_title (9106060038248836408) -->
+    <skip />
+    <!-- no translation found for emergency_gesture_sound_setting_summary (7086534195960716320) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"اطلاعات کیلئے فنگر پرنٹ سوائپ"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"فنگر پرنٹ سوائپ کریں"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"اپنی اطلاعات چیک کرنے کیلئے اپنے فون کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
@@ -4647,7 +4666,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"گرافکس ڈرائیور منتخب کریں"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"ڈیفالٹ"</string>
     <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"گیم ڈرائیور"</string>
-    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"ڈیولپر ڈرائیور"</string>
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"ڈویلپر ڈرائیور"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"سسٹم کا گرافکس ڈرائیور"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
@@ -4839,6 +4858,12 @@
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"‏<xliff:g id="ELLIPSIS">…</xliff:g>SIM کو آف کیا جا رہا ہے"</string>
     <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"کیریئر کو غیر فعال نہیں کیا جا سکتا"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"کچھ غلط ہوگیا اور آپ کے کیریئر کو غیر فعال نہیں کیا سکا۔"</string>
+    <string name="erase_sim_dialog_title" msgid="881253002169177016">"‏ڈاؤن لوڈ کردہ اس SIM کو مٹائیں؟"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"‏اس SIM کو مٹانے سے اس آلہ سے <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> سروس ہٹ جاتی ہے۔\n\n <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> کی سروس منسوخ نہیں ہوگی۔"</string>
+    <string name="erase_sim_confirm_button" msgid="8309115684335320541">"مٹائیں"</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"‏SIM کو مٹایا جا رہا ہے…"</string>
+    <string name="erase_sim_fail_title" msgid="2024446702985862427">"‏SIM کو نہیں مٹا سکتے"</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"‏ایک خرابی کی وجہ سے اس SIM کو مٹایا نہیں جا سکتا ہے۔\n\nاپنا آلہ دوبارہ شروع کریں اور دوبارہ کوشش کریں۔"</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"آلے سے منسلک کریں"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"‏<xliff:g id="APPNAME">%1$s</xliff:g> ایپ آپ کے آلے سے منسلک ہونے کے لیے عارضی Wi-Fi نیٹ ورک استعمال کرنا چاہتی ہے"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"کوئی آلہ نہیں ملا۔ یقینی بنائیں کہ آلات آن ہیں اور منسلک کرنے کے لیے دستیاب ہیں۔"</string>
@@ -4969,4 +4994,6 @@
     <string name="media_controls_apps_title" msgid="9129092193224838008">"اجازت یافتہ ایپس"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"میڈیا"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"بلوٹوتھ آن ہو جائے گا"</string>
+    <string name="bluetooth_setting_on" msgid="4808458394436224124">"آن"</string>
+    <string name="bluetooth_setting_off" msgid="4965493913199554789">"آف"</string>
 </resources>

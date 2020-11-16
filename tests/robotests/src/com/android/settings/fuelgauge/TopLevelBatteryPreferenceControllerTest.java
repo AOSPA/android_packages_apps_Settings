@@ -23,7 +23,12 @@ import static com.android.settings.fuelgauge.TopLevelBatteryPreferenceController
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.util.FeatureFlagUtils;
 
+import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +45,13 @@ public class TopLevelBatteryPreferenceControllerTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mController = new TopLevelBatteryPreferenceController(mContext, "test_key");
+    }
+
+    @After
+    public void tearDown() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
+        }
     }
 
     @Test
@@ -65,5 +77,21 @@ public class TopLevelBatteryPreferenceControllerTest {
         info.discharging = false;
         info.chargeLabel = "5% - charging";
         assertThat(getDashboardLabel(mContext, info)).isEqualTo("5% - charging");
+    }
+
+    @Test
+    public void getSummary_silkyHomeEnabled_shouldBeNull() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
+
+        assertThat(mController.getSummary()).isNull();
+    }
+
+    @Test
+    public void getSummary_batteryNotPresent_shouldShowWarningMessage() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
+        mController.mIsBatteryPresent = false;
+
+        assertThat(mController.getSummary())
+                .isEqualTo(mContext.getString(R.string.battery_missing_message));
     }
 }

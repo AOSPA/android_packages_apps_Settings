@@ -17,12 +17,15 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import android.util.FeatureFlagUtils;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.FeatureFlags;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -30,6 +33,8 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 public class TopLevelBatteryPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
+    @VisibleForTesting
+    boolean mIsBatteryPresent = true;
     private final BatteryBroadcastReceiver mBatteryBroadcastReceiver;
     private Preference mPreference;
     private BatteryInfo mBatteryInfo;
@@ -38,6 +43,9 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
         super(context, preferenceKey);
         mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(mContext);
         mBatteryBroadcastReceiver.setBatteryChangedListener(type -> {
+            if (type == BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_NOT_PRESENT) {
+                mIsBatteryPresent = false;
+            }
             BatteryInfo.getBatteryInfo(mContext, info -> {
                 mBatteryInfo = info;
                 updateState(mPreference);
@@ -69,6 +77,14 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
 
     @Override
     public CharSequence getSummary() {
+        // Remove homepage summaries for silky home.
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
+            return null;
+        }
+        // Display help message if battery is not present.
+        if (!mIsBatteryPresent) {
+            return mContext.getText(R.string.battery_missing_message);
+        }
         return getDashboardLabel(mContext, mBatteryInfo);
     }
 
