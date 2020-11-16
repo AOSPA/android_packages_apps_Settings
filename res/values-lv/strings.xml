@@ -3521,6 +3521,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Automātiski ranžēt paziņojumus pēc atbilstības"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Atsauksmes par adaptīvajiem paziņojumiem"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Norādīt korekcijas, kas veiktas paziņojumiem, un rādīt opciju iesniegt sistēmā atsauksmes"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Svarīguma paziņojumu atiestatīšana"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Atiestatiet svarīguma iestatījumus, ko mainīja lietotājs, un atļaujiet paziņojumu asistentam piešķirt prioritāti."</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Darbību un atbilžu ieteikumi"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Automātiski rādīt ieteicamās darbības un atbildes"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Rādīt jaunākos un atliktos paziņojumus"</string>
@@ -4929,11 +4931,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nav pieejams, ja izveidots savienojums ar operatoru <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Skatīt vairāk"</string>
     <string name="see_less" msgid="2642392725363552793">"Skatīt mazāk"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Vai ieslēgt operatoru <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Vai ieslēgt SIM karti?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Vai pārslēgt uz operatoru <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Vai pārslēgties uz SIM kartes izmantošanu?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Vienlaikus aktīva var būt tikai viena SIM karte.\n\nPārslēdzoties uz operatoru <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, netiks atcelti <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> pakalpojumi."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Vienlaikus aktīva var būt tikai viena lejupielādēta SIM karte.\n\nPārslēdzoties uz operatoru <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, netiks atcelti <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> pakalpojumi."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Vienlaikus var būt aktīva tikai viena SIM karte.\n\nPārslēdzoties netiks atcelti <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> pakalpojumi."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Pārslēgties uz operatoru <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Notiek savienojuma izveide ar tīklu…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Notiek pārslēgšanās uz operatoru <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Nevar pārslēgties uz cita mobilo sakaru operatora tīklu"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Nevar pārslēgties uz cita mobilo sakaru operatora tīklu, jo radās kļūda."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Vai izslēgt pakalpojumu <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Vai izslēgt SIM karti?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Notiek SIM kartes izslēgšana<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Mobilo sakaru operatoru nevar atspējot"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Nevar atspējot mobilo sakaru operatoru"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Radās kļūda, un mobilo sakaru operatoru nevarēja atspējot."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Vai izmantot divas SIM kartes?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Šajā ierīcē vienlaikus var būt aktīvas divas SIM kartes. Lai turpinātu vienlaikus lietot vienu SIM karti, pieskarieties vienumam “Nē, paldies”."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Vai restartēt ierīci?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Lai sāktu darbu, restartējiet savu ierīci. Pēc tam varēsiet pievienot citu SIM karti."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Turpināt"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Restartēt"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Nē, paldies"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Pārslēgt"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Nevar aktivizēt SIM karti"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Izņemiet un atkal ievietojiet SIM karti. Ja problēma nav novērsta, restartējiet savu ierīci."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Mēģiniet atkal ieslēgt SIM karti. Ja problēma nav novērsta, restartējiet savu ierīci."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Vai dzēst šo lejupielādēto SIM karti?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Izdzēšot šo SIM karti, operatora “<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>” pakalpojumi tiek noņemti no šīs ierīces.\n\nOperatora “<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>” pakalpojumi netiks atcelti."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Dzēst"</string>
@@ -5074,4 +5099,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Tiks ieslēgts Bluetooth savienojums."</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Ieslēgta"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Izslēgta"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Internets"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM kartes"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Tīkli, ko var izmantot lidojuma režīmā"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Atrodiet tīklus, ko var izmantot lidojuma režīmā, un izveidojiet savienojumu ar tiem."</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"lidojuma režīms, var izmantot lidojuma režīmu"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Zvani un īsziņas"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi zvani"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Veikt un saņemt zvanus, izmantojot tīklus, ko nenodrošina mobilo sakaru operatori, piemēram, Wi-Fi tīklus"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"Izmantojot Wi-Fi zvanus, varat veikt un saņemt zvanus tīklos, ko nenodrošina mobilo sakaru operatori, piemēram, dažos Wi-Fi tīklos.\n\nZvanīšana ar citu SIM karti ir iespēja izmantot vienas SIM kartes mobilos datus, lai veiktu un saņemtu zvanus ar citu SIM karti."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Zvani"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"Īsziņas"</string>
 </resources>

@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"தொடர்பின் அடிப்படையில் அறிவிப்புக்களைத் தானாக வரிசைப்படுத்தும்"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"சூழலுக்கேற்ற அறிவிப்புக்கான கருத்து"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"அறிவிப்புகளில் செய்யப்பட்ட மாற்றங்களைக் குறிக்கும் மற்றும் சிஸ்டத்திற்குக் கருத்தை வழங்குவதற்கான விருப்பத்தைக் காட்டும்"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"அறிவிப்பு முக்கியத்துவத்தை மீட்டமைத்தல்"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"பயனரால் மாற்றப்பட்ட முக்கிய அமைப்புகளை மீட்டமைத்து முன்னுரிமை அளிக்க அறிவிப்பு உதவிக்கு அனுமதி வழங்கவும்"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"பரிந்துரைக்கப்படும் செயல்களும் பதில்களும்"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"பரிந்துரைக்கப்படும் செயல்கள் &amp; பதில்களைத் தானாகவே காட்டு"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"சமீபத்திய மற்றும் ஒத்திவைத்த அறிவிப்புகளைக் காட்டும்"</string>
@@ -4534,7 +4536,7 @@
     <string name="auto_sync_account_summary" msgid="7580352130028957346">"ஆப்ஸ் தானாகவே டேட்டாவைப் புதுப்பிக்க அனுமதி"</string>
     <string name="account_sync_title" msgid="7036067017433297574">"கணக்கு ஒத்திசைவு"</string>
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"<xliff:g id="ID_2">%2$d</xliff:g> இல் <xliff:g id="ID_1">%1$d</xliff:g>க்கு ஒத்திசைவு இயக்கத்தில் உள்ளது"</string>
-    <string name="account_sync_summary_all_on" msgid="2953682111836599841">"எல்லாவற்றுக்கும் ஒத்திசைவை இயக்கு"</string>
+    <string name="account_sync_summary_all_on" msgid="2953682111836599841">"எல்லாவற்றுக்கும் ஒத்திசைவை இயக்கும்"</string>
     <string name="account_sync_summary_all_off" msgid="6378301874540507884">"எல்லாவற்றுக்கும் ஒத்திசைவை முடக்கு"</string>
     <string name="enterprise_privacy_settings" msgid="786350385374794180">"நிர்வகிக்கப்படும் சாதனத் தகவல்"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5471858290610344646">"உங்கள் நிறுவனம் நிர்வகிக்கும் மாற்றங்களும் அமைப்புகளும்"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> உடன் இணைந்திருக்கும்போது கிடைக்காது"</string>
     <string name="see_more" msgid="7499355691042812723">"மேலும் காட்டு"</string>
     <string name="see_less" msgid="2642392725363552793">"குறைவாகக் காட்டு"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ஐ ஆன் செய்யவா?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"சிம்மை ஆன் செய்யவா?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>க்கு மாற்றவா?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"சிம் கார்டைப் பயன்படுத்தவா?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"ஒரு நேரத்தில் ஒரு சிம் மட்டுமே செயலில் இருக்கும்.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> சேவைக்கு மாற்றுவதனால் <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> சேவை ரத்துசெய்யப்படாது."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"ஒரு நேரத்தில் ஒரு பதிவிறக்கிய சிம் மட்டுமே செயலில் இருக்கும்.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> சேவைக்கு மாற்றுவதனால் <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> சேவை ரத்துசெய்யப்படாது."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"ஒரு நேரத்தில் ஒரு சிம் மட்டுமே செயலில் இருக்கும்.\n\nமாற்றுவதனால் <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> சேவை ரத்துசெய்யப்படாது."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>க்கு மாற்று"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"நெட்வொர்க்குடன் இணைக்கிறது…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>க்கு மாற்றுகிறது"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"மொபைல் நிறுவனத்தை மாற்ற முடியவில்லை"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"பிழை காரணமாக மொபைல் நிறுவனத்தை மாற்ற முடியவில்லை."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ஐ ஆஃப் செய்யவா?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"சிம்மை ஆஃப் செய்யவா?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"சிம்மை ஆஃப் செய்கிறது<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"தொலைத்தொடர்பு நிறுவனத்தை முடக்க முடியவில்லை"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"மொபைல் நிறுவனத்தை முடக்க முடியவில்லை"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"ஏதோ தவறாகிவிட்டதால் தொலைத்தொடர்பு நிறுவனத்தை முடக்க முடியவில்லை."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"2 சிம்களைப் பயன்படுத்தவா?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"இந்த மொபைலில் ஒரே சமயத்தில் 2 சிம்களைப் பயன்படுத்தலாம். ஒரு சமயத்தில் 1 சிம்மை மட்டும் பயன்படுத்த, \"வேண்டாம்\" என்பதைத் தட்டவும்."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"சாதனத்தை மீண்டும் தொடங்கவா?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"இயக்குவதற்கு மொபைலை மீண்டும் தொடங்கவும். பிறகு மற்றொரு சிம்மை நீங்கள் சேர்க்கலாம்."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"தொடர்க"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"மீண்டும் தொடங்கு"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"வேண்டாம்"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"மாற்று"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"சிம்மை இயக்க முடியவில்லை"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"சிம்மை அகற்றிவிட்டு மீண்டும் செருகவும். சிக்கல் தொடரும்பட்சத்தில் சாதனத்தை மீண்டும் தொடங்கவும்."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"சிம்மை மீண்டும் ஆன் செய்து பார்க்கவும். சிக்கல் தொடரும்பட்சத்தில் சாதனத்தை மீண்டும் தொடங்கவும்."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"இந்தப் பதிவிறக்கிய சிம்மை அழிக்கவா?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"சிம்மை அழிப்பது இந்தச் சாதனத்தில் இருந்து <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> சேவையை அகற்றிவிடும்.\n\nஇதனால் <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> சேவை ரத்துசெய்யப்படாது."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"அழி"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"புளூடூத் ஆன் செய்யப்படும்"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"ஆன்"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"ஆஃப்"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"இணையம்"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"சிம்கள்"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"விமானப்-பாதுகாப்பு நெட்வொர்க்குகள்"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"விமானப்-பாதுகாப்பு நெட்வொர்க்குகளைத் தேடி இணைக்கவும்"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"விமானம், விமானப்-பாதுகாப்பு"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"அழைப்புகள் &amp; மெசேஜ்"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"வைஃபை அழைப்பு"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"வைஃபை போன்ற மொபைல் நிறுவனம் அல்லாத நெட்வொர்க்குகளைப் பயன்படுத்தி அழைக்கலாம், அழைப்புகளைப் பெறலாம்"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"சில வைஃபை நெட்வொர்க்குகள் போன்று மொபைல் நிறுவனம் அல்லாத நெட்வொர்க்குகளைப் பயன்படுத்தி அழைக்கவும் அழைப்புகளைப் பெறவும் வைஃபை அழைப்பு அனுமதிக்கும்.\n\nஒரு சிம்மின் மொபைல் டேட்டாவைப் பயன்படுத்தி மற்றொரு சிம்மிலிருந்து அழைக்கவும் அழைப்புகளைப் பெறவும் கிராஸ்-சிம் அழைப்பு அனுமதிக்கும்."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"அழைப்புகள்"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"மெசேஜ்"</string>
 </resources>

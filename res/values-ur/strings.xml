@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"مطابقت کے لحاظ سے خودکار طور پر درجہ کی اطلاعات"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"تغیر پذیر اطلاع کے تاثرات"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"اطلاعات میں کی جانے والی ایڈجسٹمنٹس کی نشاندہی کریں اور سسٹم کو تاثرات فراہم کرنے کا اختیار دکھائیں"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"اطلاع کی اہمیت کو ری سیٹ کریں"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"صارف کی تبدیل کردہ اہمیت کی ترتیبات کو ری سیٹ کریں اور اطلاع کے اسسٹنٹ کو ترجیح دینے کی اجازت دیں"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"تجویز کردہ کارروائیاں اور جوابات"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"تجویز کردہ کارروائیوں اور جوابات کو خودکار طور پر دکھائیں"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"حالیہ اور اسنوز کردہ اطلاعات دکھائیں"</string>
@@ -4501,16 +4503,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ٹیبلیٹ چیک کرنے کے لیے تھپتھپائیں"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"آلہ چیک کرنے کے لیے تھپتھپائیں"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"وقت، اطلاعات، اور دیگر معلومات چیک کرنے کے لیے اپنی اسکرین کو دو بار تھپتھپائیں۔"</string>
-    <!-- no translation found for emergency_gesture_screen_title (3280543310204360902) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_entrypoint_summary (4730874229911208834) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_screen_summary (1412270517879718683) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_title (9106060038248836408) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_summary (7086534195960716320) -->
-    <skip />
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"‏ہنگامی SOS"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g> کے زیر انتظام ہے"</string>
+    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"‏5 بار پاور بٹن کو تیزی سے دبا کر SOS کی ہنگامی کاروائیوں کو شروع کریں۔"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"وارننگ کی آواز"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"کارروائیاں شروع کرنے سے پہلے الرٹ"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"اطلاعات کیلئے فنگر پرنٹ سوائپ"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"فنگر پرنٹ سوائپ کریں"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"اپنی اطلاعات چیک کرنے کیلئے اپنے فون کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
@@ -4853,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> سے منسلک ہونے پر دستیاب نہیں ہے"</string>
     <string name="see_more" msgid="7499355691042812723">"مزید دیکھیں"</string>
     <string name="see_less" msgid="2642392725363552793">"کم دیکھیں"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> آن کریں؟"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"‏SIM آن کریں؟"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> پر سوئچ کریں؟"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"‏SIM کارڈ استعمال کرنے کے لیے سوئچ کریں؟"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"‏ایک وقت میں صرف ایک SIM فعال ہو سکتا ہے۔\n\n <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> پر سوئچ کرنا آپ کے <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> کی سروس کو منسوخ نہیں کرے گا۔"</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"‏ایک وقت میں صرف ایک ڈاؤن لوڈ کردہ SIM فعال ہو سکتا ہے۔\n\n <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> پر سوئچ کرنا آپ کے <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> کی سروس کو منسوخ نہیں کرے گا۔"</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"‏ایک وقت میں صرف ایک SIM فعال ہو سکتا ہے۔\n\nسوئچ کرنے سے آپ کے <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> کی سروس منسوخ نہیں ہوگی۔"</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> پر سوئچ کریں"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"نیٹ ورک سے منسلک ہو رہا ہے…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> پر سوئچ ہو رہا ہے"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"کیریئر کو سوئچ نہیں کیا جا سکتا"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"ایک خرابی کی وجہ سے کیریئر کو سوئچ نہیں کیا جا سکتا۔"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> آف کریں؟"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"‏SIM آف کریں؟"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"‏<xliff:g id="ELLIPSIS">…</xliff:g>SIM کو آف کیا جا رہا ہے"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"کیریئر کو غیر فعال نہیں کیا جا سکتا"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"کیریئر کو غیر فعال نہیں کیا جا سکتا"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"کچھ غلط ہوگیا اور آپ کے کیریئر کو غیر فعال نہیں کیا سکا۔"</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"‏2 SIMs استعمال کریں؟"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"‏اس آلے میں ایک ہی وقت میں 2 فعال SIMs ہو سکتے ہے۔ ایک وقت میں 1 SIM کے استعمال کو جاری رکھنے کے لیے \"نہیں شکریہ\" پر تھپتھپائیں۔"</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"آلہ ری اسٹارٹ کریں؟"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"‏شروع کرنے کے لیے اپنے آلے کو ری اسٹارٹ کریں۔ اس کے بعد آپ دوسرا SIM شامل کر سکتے ہیں۔"</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"جاری رکھیں"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"ری سٹارٹ کریں"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"نہیں شکریہ"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"سوئچ کریں"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"‏SIM کو فعال نہیں کیا جا سکتا"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"‏SIM نکال کر دوبارہ داخل کریں۔ مسئلے کے برقرار رہنے پر اپنا آلہ ری اسٹارٹ کریں۔"</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"‏SIM کو دوبارہ آن کرنے کی کوشش کریں۔ مسئلے کے برقرار رہنے پر اپنا آلہ ری اسٹارٹ کریں۔"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"‏ڈاؤن لوڈ کردہ اس SIM کو مٹائیں؟"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"‏اس SIM کو مٹانے سے اس آلہ سے <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> سروس ہٹ جاتی ہے۔\n\n <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> کی سروس منسوخ نہیں ہوگی۔"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"مٹائیں"</string>
@@ -4996,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"بلوٹوتھ آن ہو جائے گا"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"آن"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"آف"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"انٹرنیٹ"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIMs"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"ہوائی جہاز کیلئے محفوظ نیٹ ورکس"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"ہوائی جہاز کیلئے محفوظ نیٹ ورکس کو تلاش کریں اور ان سے منسلک ہوں"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"ہوائی جہاز، ہوائی جہاز کیلئے محفوظ"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"‏کالز اور SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"‏Wi‑Fi کالنگ"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"‏Wi-Fi جیسے غیر کیریئر نیٹ ورکس پر کالز کریں اور موصول کریں"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"‏Wi-Fi کالنگ آپ کو کچھ Wi-Fi نیٹ ورک جیسے غیر کیریئر نیٹ ورکس پر کالز کرنے اور موصول کرنے کی اجازت دیتی ہے۔\n\nکراس SIM کالنگ آپ کو کسی دوسری SIM سے کال کرنے اور موصول کرنے کیلئے کسی SIM کے موبائل ڈیٹا سے فائدہ اٹھانے کی اجازت دیتی ہے۔"</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"کالز"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

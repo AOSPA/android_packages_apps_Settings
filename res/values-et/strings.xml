@@ -1623,7 +1623,7 @@
     <string name="reset_esim_error_title" msgid="4670073610967959597">"SIM-kaarte ei saa kustutada"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"Allalaaditud SIM-kaarte ei saa vea tõttu kustutada.\n\nTaaskäivitage seade ja proovige uuesti."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Kustuta kõik andmed (tehaseseadetele lähtestamine)"</string>
-    <string name="main_clear_short_title" msgid="4752094765533020696">"Kust. andmed (tehases. läht.)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"Kõigi andmete kustutamine (tehaseseaded)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"See kustutab teie tahvelarvuti "<b>"sisemälust"</b>" kõik andmed, sh järgmised.\n\n"<li>"Teie Google\'i konto"</li>\n<li>"Süsteemi- ja rakenduste andmed ning seaded"</li>\n<li>"Allalaaditud rakendused"</li></string>
     <string name="main_clear_desc" product="default" msgid="6984348811887162647">"See kustutab teie telefoni "<b>"sisemälust"</b>" kõik andmed, sh järgmised.\n\n"<li>"Teie Google\'i konto"</li>\n<li>"Süsteemi- ja rakenduste andmed ning seaded"</li>\n<li>"Allalaaditud rakendused"</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Olete praegu sisse logitud järgmistele kontodele:\n"</string>
@@ -1933,7 +1933,7 @@
     <string name="show_running_services" msgid="8666008279959853318">"Kuva töötavad teenused"</string>
     <string name="show_background_processes" msgid="5682856012453562151">"Kuva vahemällu salvestatud protsessid"</string>
     <string name="default_emergency_app" msgid="1929974800666613803">"Hädaabirakendus"</string>
-    <string name="reset_app_preferences" msgid="8861758340732716573">"Lähtesta rakenduste eelistused"</string>
+    <string name="reset_app_preferences" msgid="8861758340732716573">"Rakenduste eelistuste lähtestamine"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Lähtestada rakenduste eelistused?"</string>
     <string name="reset_app_preferences_desc" msgid="6509978724602405805">"See lähtestab kõik järgmised eelistused.\n\n"<li>"Keelatud rakendused"</li>\n<li>"Keelatud rakenduste märguanded"</li>\n<li>"Toimingute vaikerakendused"</li>\n<li>"Rakenduste taustaandmete piirangud"</li>\n<li>"Mis tahes lubade piirangud"</li>\n\n"Rakenduste andmed säilivad."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Lähtesta rakendused"</string>
@@ -1975,7 +1975,7 @@
     <string name="system_package" msgid="7559476279008519360">"Süsteemivärskendusi ei saa installida välisele kandjale."</string>
     <string name="move_error_device_admin" msgid="1561502976834303626">"Seadme administraatori rakendust ei saa installida välisele andmekandjale"</string>
     <string name="force_stop_dlg_title" msgid="86745852555490146">"Kas peatada sunniviisiliselt?"</string>
-    <string name="force_stop_dlg_text" msgid="1527286468544457368">"Kui sunnite rakenduse peatuma, võib see valesti käituda."</string>
+    <string name="force_stop_dlg_text" msgid="1527286468544457368">"Kui sunnite rakenduse peatuma, võib see toimida valesti."</string>
     <string name="app_install_location_title" msgid="8932938164156303191">"Eelistatud installiasukoht"</string>
     <string name="app_install_location_summary" msgid="4948270795544357021">"Muutke uute rakenduste eelistatud installiasukohta"</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Keela rakendus"</string>
@@ -2408,7 +2408,7 @@
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"Rakendusel ei ole lubatud taustal töötada"</string>
     <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"Taustal kasutamist ei saa piirata"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Kas piirata taustal tegevust?"</string>
-    <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Kui piirate rakenduse tegevust taustal, võib rakendus valesti käituda."</string>
+    <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Kui piirate rakenduse tegevust taustal, võib rakendus toimida valesti."</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Kuna rak. pole aku optimeerimine seadistatud, ei saa te seda piirata.\n\nRak. piiramiseks lülit. esmalt sisse aku optimeerimine."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Ekraani kasutus alates täislaadimisest"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Akukasutus alates täislaadimisest"</string>
@@ -3207,7 +3207,7 @@
       <item quantity="other">Kuva %d peidetud üksust</item>
       <item quantity="one">Kuva %d peidetud üksus</item>
     </plurals>
-    <string name="network_dashboard_title" msgid="788543070557731240">"Võrk ja Internet"</string>
+    <string name="network_dashboard_title" msgid="788543070557731240">"Võrk ja internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="4020746665765996480">"mobiilivõrk"</string>
     <string name="network_dashboard_summary_data_usage" msgid="2531133412846140766">"andmeside kasutus"</string>
     <string name="network_dashboard_summary_hotspot" msgid="3798394197274240682">"kuumkoht"</string>
@@ -3234,7 +3234,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"WiFi märguanne, wifi märguanne"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"andmekasutus"</string>
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Vibreerimise peatamine, puudutus, klaviatuur"</string>
-    <string name="keywords_time_format" msgid="5384803098766166820">"Kasuta 24-tunnist vormingut"</string>
+    <string name="keywords_time_format" msgid="5384803098766166820">"Kasuta 24-tunni vormingut"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Allalaadimine"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Ava rakendusega"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Rakendused"</string>
@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Järjesta märguanded automaatselt asjakohasuse järgi"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Kohanduvate märguannete tagasiside"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Näitab, kuidas on märguandeid kohandatud. Samuti näitab valikut süsteemile tagasiside andmiseks."</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Märguande olulisuse lähtestamine"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Kasutaja muudetud olulisuse seadete lähtestamine ja märguannete assistendil prioriseerimise lubamine"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Soovitatud toimingud ja vastused"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Kuva soovitatud toimingud ja vastused automaatselt"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Kuva hiljutisi ja edasilükatud märguandeid"</string>
@@ -3576,7 +3578,7 @@
     <string name="important_conversations_summary" msgid="3184022761562676418">"Kuva vestluste jaotise kohal"</string>
     <string name="other_conversations" msgid="551178916855139870">"Vähemtähtsad vestlused"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Vestlused, milles olete muudatusi teinud"</string>
-    <string name="recent_conversations" msgid="471678228756995274">"Hiljutised meilivestlused"</string>
+    <string name="recent_conversations" msgid="471678228756995274">"Hiljutised vestlused"</string>
     <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"Kustuta hiljutised"</string>
     <string name="clear" msgid="5092178335409471100">"Kustuta"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Kuva prioriteetsed vestlused mullis"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Pole saadaval, kui on ühendus on loodud operaatoriga <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Kuva rohkem"</string>
     <string name="see_less" msgid="2642392725363552793">"Kuva vähem"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Kas lülitada operaator <xliff:g id="CARRIER_NAME">%1$s</xliff:g> sisse?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Kas lülitada SIM-kaart sisse?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Kas soovite aktiveerida operaatori <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Kas aktiveerida SIM-kaardi kasutamine?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Korraga saab aktiivne olla vaid üks SIM-kaart.\n\nOperaatori <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> aktiveerimisel ei tühistata operaatori <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> teenust."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Korraga saab aktiivne olla vaid üks allalaaditud SIM-kaart.\n\nOperaatori <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> aktiveerimisel ei tühistata operaatori <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> teenust."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Korraga saab aktiivne olla vaid üks SIM-kaart.\n\nAktiveerimine ei tühista operaatori <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> teenust."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Aktiveeri operaator <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Võrguga ühendamine …"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Operaatori <xliff:g id="CARRIER_NAME">%1$s</xliff:g> aktiveerimine"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Operaatorit ei saa vahetada"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Operaatorit ei saa vea tõttu vahetada."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Kas lülitada <xliff:g id="CARRIER_NAME">%1$s</xliff:g> välja?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Kas lülitada SIM-kaart välja?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"SIM-kaardi väljalülitamine <xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Operaatorit ei saa keelata"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Operaatorit ei saa keelata"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Midagi läks valesti ja teie operaatorit ei saanud keelata."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Kas kasutada kahte SIM-kaarti?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Selles seadmes saavad korraga aktiivsed olla kaks SIM-kaarti. Korraga ühe SIM-kaardi kasutamise jätkamiseks puudutage valikut „Tänan, ei”."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Kas soovite seadme taaskäivitada?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Alustamiseks taaskäivitage oma seade. Seejärel lisage veel üks SIM-kaart."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Jätka"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Taaskäivita"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Tänan, ei"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Vaheta"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM-kaarti ei saa aktiveerida"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Eemaldage SIM-kaart ja sisestage uuesti. Kui probleem jätkub, taaskäivitage seade."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Lülitage SIM-kaart uuesti sisse. Kui probleem jätkub, taaskäivitage seade."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Kas soovite allalaaditud SIM-kaardi kustutada?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"SIM-kaardi kustutamisel eemaldatakse seadmest operaatori <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> teenus.\n\nOperaatori <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> teenust ei tühistata."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Kustuta"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth lülitub sisse"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Sees"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Väljas"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-kaardid"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Lennukikindlad võrgud"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Lennukikindlate võrkude leidmine ja nendega ühenduse loomine"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"lennuk, lennukikindel"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Kõned ja SMS-id"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"WiFi-kõned"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Helistamine ja kõnede vastuvõtmine operaatoriväliste võrkude kaudu (nt WiFi-võrgud)"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"WiFi-kõned võimaldavad teil helistada ja kõnesid vastu võtta operaatoriväliste võrkude kaudu (nt mõned WiFi-võrgud).\n\nSIM-kaardi ülene helistamine võimaldab teil teise SIM-kaardi kaudu helistamiseks ja kõnede vastuvõtmiseks kasutada SIM-kaardi mobiilset andmesidet."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Kõned"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

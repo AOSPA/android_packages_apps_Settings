@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Rendit automatikisht njoftimet sipas përshtatshmërisë"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Komentet e njoftimeve me përshtatje"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Trego rregullimet që u bëhen njoftimeve dhe shfaq opsionin për t\'i dhënë komente sistemit"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Rivendos rëndësinë e njoftimeve"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Rivendos cilësimet e rëndësisë që janë ndryshuar nga përdoruesi dhe lejo që asistenti i njoftimeve të caktojë përparësinë"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Veprimet dhe përgjigjet e sugjeruara"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Shfaq automatikisht veprimet dhe përgjigjet e sugjeruara"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Shfaq njoftimet e fundit dhe ato të shtyra"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nuk ofrohet kur është e lidhur me <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Shiko më shumë"</string>
     <string name="see_less" msgid="2642392725363552793">"Shiko më pak"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Të aktivizohet <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Të aktivizohet SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Do të kalosh te <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Dëshiron të kalosh te përdorimi i kartës SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Vetëm një kartë SIM mund të jetë aktive në të njëjtën kohë.\n\nKalimi te <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> nuk do ta anulojë shërbimin e <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Vetëm një kartë SIM e shkarkuar mund të jetë aktive në të njëjtën kohë.\n\nKalimi te <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> nuk do ta anulojë shërbimin e <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Vetëm një kartë SIM mund të jetë aktive në të njëjtën kohë.\n\nKalimi nuk do ta anulojë shërbimin e <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Kalo te <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Po lidhet me rrjetin…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Po kalon te <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Operatori nuk mund të ndërrohet"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Operatori nuk mund të ndërrohet për shkak të një gabimi."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Të çaktivizohet <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Të çaktivizohet karta SIM?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Po çaktivizohet karta SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Operatori celular nuk mund të çaktivizohet"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Operatori celular nuk mund të çaktivizohet"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Ndodhi një gabim dhe operatori celular nuk mund të çaktivizohet."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Dëshiron të përdorësh 2 karta SIM?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Kjo pajisje mund të ketë 2 karta SIM aktive në të njëjtën kohë. Që të vazhdosh të përdorësh 1 kartë SIM në të njëjtën kohë, trokit te \"Jo, faleminderit\"."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Të riniset pajisja?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Për të filluar, rinise pajisjen tënde. Më pas mund të shtosh një kartë tjetër SIM."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Vazhdo"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Rinis"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Jo, faleminderit"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Ndërro"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Karta SIM nuk mund të aktivizohet"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Hiq kartën SIM dhe fute përsëri. Nëse problemi vazhdon, rinise pajisjen."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Provo të aktivizosh kartën SIM përsëri. Nëse problemi vazhdon, rinise pajisjen."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Dëshiron ta pastrosh këtë kartë SIM të shkarkuar?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Spastrimi i kësaj karte SIM e heq shërbimin e <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> nga kjo pajisje.\n\nShërbimi për <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> nuk do të anulohet."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Spastro"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth-i do të aktivizohet"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Aktiv"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Joaktiv"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Interneti"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"Kartat SIM"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Rrjetet e sigurta për në aeroplan"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Gjej dhe lidhu me rrjete të sigurta për në aeroplan"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"aeroplan, të sigurta për në aeroplan"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Telefonatat dhe SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Telefonatë me Wi-Fi"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Dërgo e merr telefonata nga rrjete jo të operatorëve të telefonisë, si p.sh. Wi‑Fi"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"Telefonata me Wi-Fi të mundëson dërgimin dhe marrjen e telefonatave përmes rrjeteve jo nga operatorë telefonie, si p.sh. disa rrjete Wi‑Fi.\n\nTelefonata përmes SIM të ndryshme të mundëson shfrytëzimin e të dhënave celular të një SIM për të dërguar e marrë telefonata nga një SIM tjetër."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Telefonatat"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

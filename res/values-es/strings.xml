@@ -1622,8 +1622,8 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Se han recuperado los ajustes de red"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"No se pueden borrar las SIM"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"No se pueden eliminar las SIM descargadas debido a un error.\n\nReinicia el dispositivo y vuelve a intentarlo."</string>
-    <string name="main_clear_title" msgid="277664302144837723">"Borrar todos los datos"</string>
-    <string name="main_clear_short_title" msgid="4752094765533020696">"Borrar todos los datos"</string>
+    <string name="main_clear_title" msgid="277664302144837723">"Volver al estado de fábrica (borrar todo)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"Volver al estado de fábrica (borrar todo)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" de tu tablet, como:\n\n"<li>"Tu cuenta de Google"</li>\n<li>"Los ajustes y los datos de aplicaciones y del sistema"</li>\n<li>"Las aplicaciones descargadas"</li></string>
     <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" de tu teléfono, como:\n\n"<li>"Tu cuenta de Google"</li>\n<li>"Los ajustes y los datos de aplicaciones y del sistema"</li>\n<li>"Las aplicaciones descargadas"</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Has iniciado sesión en estas cuentas:\n"</string>
@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Clasificar las notificaciones por importancia automáticamente"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Comentarios sobre notificaciones adaptativas"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Indica los ajustes hechos a las notificaciones y muestra la opción para enviar comentarios al sistema"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Restablecer la importancia de las notificaciones"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Revierte los cambios en los ajustes de la importancia del usuario y permite que se priorice el asistente de notificaciones"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Acciones y respuestas sugeridas"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Muestra automáticamente las acciones y las respuestas sugeridas"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Mostrar notificaciones recientes y pospuestas"</string>
@@ -4850,11 +4852,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"No está disponible cuando se está conectado a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Ver más"</string>
     <string name="see_less" msgid="2642392725363552793">"Ver menos"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"¿Activar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"¿Activar tarjeta SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"¿Cambiar a <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"¿Pasar a usar tarjeta SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Solo puede haber una tarjeta SIM activa a la vez.\n\nSi cambias a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, no se cancelará tu servicio de <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Solo puede haber una tarjeta SIM descargada activa a la vez.\n\nSi cambias a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, no se cancelará tu servicio de <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Solo puede haber una tarjeta SIM activa a la vez.\n\nSi cambias, no se cancelará tu servicio de <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Cambiar a <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Conectándose a la red…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Cambiando a <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"No se ha podido cambiar de operador"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"No se ha podido cambiar de operador debido a un error."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"¿Desactivar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"¿Desactivar tarjeta SIM?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Desactivando tarjeta SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"No se ha podido inhabilitar el operador"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"No se ha podido inhabilitar el operador"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Se ha producido un error y no se ha podido inhabilitar tu operador."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"¿Usar 2 tarjetas SIM?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Este dispositivo puede tener 2 tarjetas SIM activas a la vez. Para seguir usando solo una, toca No, gracias."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"¿Reiniciar el dispositivo?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Para empezar, reinicia tu dispositivo. A continuación, podrás añadir otra tarjeta SIM."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Continuar"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Reiniciar"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"No, gracias"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Cambiar"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"No se ha podido activar la tarjeta SIM"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Extrae la tarjeta SIM e insértala de nuevo. Si el problema continúa, reinicia el dispositivo."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Prueba a activar la tarjeta SIM de nuevo. Si el problema continúa, reinicia el dispositivo."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"¿Borrar esta SIM descargada?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Si borras esta SIM, el servicio de <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> dejará de estar disponible en este dispositivo.\n\nNo se cancelará el servicio de <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Borrar"</string>
@@ -4993,4 +5018,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Se activará el Bluetooth"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Activado"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Desactivado"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIMs"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Redes seguras para modo avión"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Busca y conéctate a redes seguras para modo avión"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"modo avión, seguro para modo avión"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Llamadas y SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Llamada por Wi-Fi"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Llamar o recibir llamadas de redes que no pertenecen a ningún operador, como las redes Wi-Fi"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"Llamada por Wi-Fi le permite llamar y recibir llamadas por redes que no pertenecen a ningún operador, como algunas redes Wi‑Fi.\n\nLas llamadas entre SIM distintas le permiten aprovechar los datos móviles de una tarjeta SIM para llamar y recibir llamadas de otra SIM."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Llamadas"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

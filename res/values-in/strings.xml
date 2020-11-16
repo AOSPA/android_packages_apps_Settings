@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Otomatis mengurutkan notifikasi menurut relevansi"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Masukan notifikasi adaptif"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Menunjukkan penyesuaian yang dilakukan pada notifikasi dan menampilkan opsi untuk memberikan masukan ke sistem"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Mereset tingkat kepentingan notifikasi"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Reset setelan penting yang diubah pengguna dan izinkan asisten notifikasi diprioritaskan"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Saran tindakan dan balasan"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Otomatis tampilkan saran tindakan &amp; balasan"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Tampilkan notifikasi baru-baru ini dan yang ditunda"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Tidak tersedia saat terhubung ke <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Lihat lainnya"</string>
     <string name="see_less" msgid="2642392725363552793">"Lihat lebih sedikit"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Aktifkan <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Aktifkan SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Beralih ke <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Beralih menggunakan kartu SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Hanya satu SIM yang dapat diaktifkan pada satu waktu.\n\nBeralih ke <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> tidak akan membatalkan layanan <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> Anda."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Hanya satu SIM hasil download yang dapat diaktifkan pada satu waktu.\n\nBeralih ke <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> tidak akan membatalkan layanan <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> Anda."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Hanya satu SIM yang dapat diaktifkan pada satu waktu.\n\nPengalihan tidak akan membatalkan layanan <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Beralih ke <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Menghubungkan ke jaringan…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Mengalihkan ke <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Tidak dapat mengalihkan operator"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Operator tidak dapat dialihkan karena error."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Nonaktifkan <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Nonaktifkan SIM?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Menonaktifkan SIM <xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Tidak dapat menonaktifkan operator"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Tidak dapat menonaktifkan operator"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Terjadi error dan operator Anda tidak dapat dinonaktifkan."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Gunakan 2 SIM?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Perangkat ini dapat memiliki 2 SIM aktif sekaligus. Untuk terus menggunakan 1 SIM dalam satu waktu, ketuk \"Lain kali\"."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Mulai ulang perangkat?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Untuk memulai, mulai ulang perangkat. Lalu, Anda dapat menambahkan SIM lain."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Lanjutkan"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Mulai ulang"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Lain kali"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Alihkan"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Tidak dapat mengaktifkan SIM"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Keluarkan SIM, lalu masukkan lagi. Jika masalah berlanjut, mulai ulang perangkat."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Coba aktifkan SIM lagi. Jika masalah berlanjut, mulai ulang perangkat."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Hapus SIM yang didownload ini?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Menghapus SIM ini akan menghapus layanan <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> dari perangkat ini.\n\nLayanan untuk <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> tidak akan dibatalkan."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Hapus"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth akan diaktifkan"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Aktif"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Nonaktif"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Jaringan aman di pesawat"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Temukan dan hubungkan ke jaringan aman di pesawat"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"pesawat, aman di pesawat"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Panggilan Telepon dan SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Panggilan Wi-Fi"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Melakukan dan menerima panggilan dari jaringan non-operator seperti Wi-Fi"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"Dengan panggilan Wi-Fi, Anda dapat melakukan dan menerima panggilan dari jaringan non-operator seperti jaringan Wi-Fi tertentu.\n\nDengan panggilan lintas-SIM, Anda dapat menggunakan data seluler SIM untuk melakukan dan menerima panggilan dari SIM lain."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Panggilan Telepon"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Rangskik kennisgewings outomaties volgens relevantheid"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Aanpasbare kennisgewingterugvoer"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Dui verstellings aan wat aan kennisgewings gemaak is en wys die opsie om terugvoer aan die stelsel te verskaf"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Stel kennisgewingbelangrikheid terug"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Stel belangrikheidinstellings terug wat gebruiker verander het, en laat kennisgewingassistent toe om te prioritiseer"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Voorgestelde handelinge en antwoorde"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Wys voorgestelde handelinge en antwoorde outomaties"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Wys onlangse en gesluimerde kennisgewings"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Onbeskikbaar wanneer gekoppel aan <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Sien meer"</string>
     <string name="see_less" msgid="2642392725363552793">"Sien minder"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Skakel <xliff:g id="CARRIER_NAME">%1$s</xliff:g> aan?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Skakel SIM aan?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Skakel oor na <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Skakel oor om SIM-kaart te gebruik?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Net een SIM kan op \'n slag aktief wees.\n\nAs jy na <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> toe oorskakel, sal dit nie jou <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-diens kanselleer nie."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Net een afgelaaide SIM kan op \'n slag aktief wees.\n\nAs jy na <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> toe oorskakel, sal dit nie jou <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-diens kanselleer nie."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Net een SIM kan op \'n slag aktief wees.\n\nAs jy oorskakel, sal dit nie jou <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-diens kanselleer nie."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Skakel oor na <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Koppel tans aan netwerk …"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Skakel tans oor na <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Kan nie na \'n ander diensverskaffer toe oorskakel nie"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Kan weens \'n fout nie na \'n ander diensverskaffer toe oorskakel nie."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Skakel <xliff:g id="CARRIER_NAME">%1$s</xliff:g> af?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Skakel SIM af?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Skakel tans SIM af <xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Kan nie diensverskaffer deaktiveer nie"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Kan nie diensverskaffer deaktiveer nie"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Iets was fout en jou diensverskaffer kon nie gedeaktiveer word nie."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Gebruik 2 SIM-kaarte?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Hierdie toestel kan 2 SIM-kaarte op dieselfde tyd aktief hê. Tik op \"Nee, dankie\" om aan te hou om 1 SIM op \'n slag te gebruik."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Herbegin toestel?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Herbegin jou toestel om te begin. Dan kan jy nog \'n SIM byvoeg."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Gaan voort"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Herbegin"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Nee, dankie"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Skakel oor"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Kan nie SIM aktiveer nie"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Verwyder die SIM en voeg dit weer in. Herbegin jou toestel as die probleem voortduur."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Probeer weer om die SIM aan te skakel. Herbegin jou toestel as die probleem voortduur."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Vee hierdie afgelaaide SIM uit?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"As jy hierdie SIM uitvee, word <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-diens van hierdie toestel verwyder.\n\nDiens vir <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> sal nie gekanselleer word nie."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Vee uit"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth sal aanskakel"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Aan"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Af"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM\'s"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Vliegtuigveilige netwerke"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Soek en koppel aan vliegtuigveilige netwerke"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"vliegtuig, vliegtuigveilig"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Oproepe en SMS\'e"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑fi-oproepe"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Maak en ontvang oproepe oor niediensverskaffer-netwerke soos wi-fi"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"Met Wi-fi-oproepe kan jy oproepe oor niediensverskaffer-netwerke soos sommige wi-fi-netwerke maak en ontvang.\n\nMet Kruis-SIM-oproepe kan jy die mobiele data van \'n SIM gebruik om oproepe van \'n ander SIM af maak en ontvang."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Oproepe"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

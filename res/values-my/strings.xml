@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"သက်ဆိုင်ရာအလိုက် အလိုလို သတ်မှတ်ထားသော အဆင့်သတ်မှတ်မှု အကြောင်းကြားချက်"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"အလိုက်သင့် အကြောင်းကြားချက်ဆိုင်ရာ အကြံပြုချက်"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"အကြောင်းကြားချက်များအပေါ်တွင် ပြုလုပ်ထားသော ပြင်ဆင်ချက်များကို ညွှန်ပြပြီး စနစ်သို့ အကြံပြုချက်ပေးသည့် ရွေးစရာကို ပြသသည်"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"အကြောင်းကြားချက် အရေးပါမှုကို ပြင်ဆင်သတ်မှတ်ခြင်း"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"အသုံးပြုသူက ပြောင်းလဲလိုက်သည့် အရေးကြီးသော ဆက်တင်များကို ပြင်ဆင်သတ်မှတ်ပြီး အကြောင်းကြားချက် အထောက်အကူကို ဦးစားပေးရန် ခွင့်ပြုသည်"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"အကြံပြုထားသော လုပ်ဆောင်ချက်နှင့် ပြန်ကြားချက်များ"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"အကြံပြုထားသော လုပ်ဆောင်ချက်များနှင့် ပြန်ကြားချက်များကို အလိုအလျောက်ပြသပါ"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"လတ်တလောနှင့် မှေးထားသည့် အကြောင်းကြားချက်များကို ပြရန်"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> တွင် ချိတ်ဆက်ထားသည့်အခါ မရနိုင်ပါ"</string>
     <string name="see_more" msgid="7499355691042812723">"ပိုပြရန်"</string>
     <string name="see_less" msgid="2642392725363552793">"လျှော့ ကြည့်ရန်"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ကို ဖွင့်မလား။"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"ဆင်းမ်ကို ဖွင့်မလား။"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> သို့ ပြောင်းမလား။"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"ဆင်းမ်ကတ်အသုံးပြုခြင်းသို့ ပြောင်းမလား။"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"တစ်ကြိမ်တွင် ဆင်းမ်တစ်ကတ်သာ အသုံးပြုနိုင်ပါသည်။\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> သို့ပြောင်းခြင်းက သင့် <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> ဝန်ဆောင်မှုကို ပယ်ဖျက်မည်မဟုတ်ပါ။"</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"တစ်ကြိမ်တွင် ဒေါင်းလုဒ်လုပ်ထားသော ဆင်းမ်တစ်ကတ်သာ အသုံးပြုနိုင်ပါသည်။\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> သို့ပြောင်းခြင်းက သင့် <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> ဝန်ဆောင်မှုကို ပယ်ဖျက်မည်မဟုတ်ပါ။"</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"တစ်ကြိမ်တွင် ဆင်းမ်တစ်ကတ်သာ အသုံးပြုနိုင်ပါသည်။\n\nပြောင်းခြင်းက သင့် <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> ဝန်ဆောင်မှုကို ပယ်ဖျက်မည်မဟုတ်ပါ။"</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> သို့ ပြောင်းရန်"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"ကွန်ရက်သို့ ချိတ်ဆက်နေသည်…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> သို့ ပြောင်းနေသည်"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"ဝန်ဆောင်မှုပေးသူကို ပြောင်း၍မရပါ"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"အမှားအယွင်းတစ်ခုကြောင့် ဝန်ဆောင်မှုပေးသူကို ပြောင်း၍မရပါ။"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ပိတ်မလား။"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"\'ဆင်းမ်ကဒ်\' ပိတ်မလား။"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"\'ဆင်းမ်ကဒ်\' ပိတ်နေသည်<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"ဝန်ဆောင်မှုပေးသူကို ပိတ်မရပါ"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"ဝန်ဆောင်မှုပေးသူကို ပိတ်၍မရပါ"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"တစ်ခုခုမှားယွင်းသွားပါ၍ သင့်ဝန်ဆောင်မှုပေးသူကို ပိတ်မရခဲ့ပါ။"</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"ဆင်းမ် ၂ ကတ် သုံးမလား။"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"ဤစက်တွင် ဆင်းမ် ၂ ကတ် တစ်ပြိုင်နက် စတင်နိုင်သည်။ တစ်ကြိမ်တွင် ဆင်းမ် ၁ ကတ်ဖြင့် ဆက်သုံးရန် \"မလိုတော့ပါ\" ကိုတို့ပါ။"</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"စက်ကို ပြန်စမလား။"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"စတင်ရန်အတွက် သင့်စက်ကို ပြန်စပါ။ ထို့နောက် နောက်ဆင်းမ်ကို ထည့်နိုင်ပါသည်။"</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"ရှေ့ဆက်ရန်"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"ပြန်စရန်"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"မလိုပါ"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"ပြောင်းရန်"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"ဆင်းမ်ကို ဖွင့်၍မရပါ"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"ဆင်းမ်ကို ဖယ်ရှားပြီး ပြန်ထည့်ကြည့်ပါ။ ပြဿနာရှိနေသေးပါက သင့်စက်ကို ပြန်လည်စတင်ပါ။"</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"ဆင်းမ်ကို ပြန်ဖွင့်ကြည့်ပါ။ ပြဿနာရှိနေသေးပါက သင့်စက်ကို ပြန်လည်စတင်ပါ။"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"ဒေါင်းလုဒ်လုပ်ထားသော ဤဆင်းမ်ကို ဖျက်လိုသလား။"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"ဤဆင်းမ်ကို ဖျက်ခြင်းဖြင့် ဤစက်ပစ္စည်းမှ <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> ဝန်ဆောင်မှုကို ဖယ်ရှားပါမည်။\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> အတွက် ဝန်ဆောင်မှုကို ပယ်ဖျက်မည်မဟုတ်ပါ။"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"ဖျက်ရန်"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ဘလူးတုသ် ပွင့်ပါမည်"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"ဖွင့်ထားသည်"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"ပိတ်ထားသည်"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"အင်တာနက်"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"ဆင်းမ်များ"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"လေယာဉ်ပျံမုဒ်တွင် လုံခြုံသော ကွန်ရက်များ"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"လေယာဉ်ပျံမုဒ်တွင် လုံခြုံသောကွန်ရက်များကို ရှာဖွေပြီး ချိတ်ဆက်သည်"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"လေယာဉ်ပျံ၊ လေယာဉ်ပျံမုဒ်တွင် လုံခြုံခြင်း"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"ခေါ်ဆိုမှုများနှင့် SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi ခေါ်ဆိုမှု"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Wi-Fi ကဲ့သို့သော ဖုန်းဝန်ဆောင်မှုပေးသူမှမဟုတ်သည့် ကွန်ရက်များတွင် ဖုန်းခေါ်ဆိုခြင်းနှင့် လက်ခံခြင်းများကို ပြုလုပ်ပါ"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"Wi-Fi ခေါ်ဆိုမှုက Wi-Fi ကွန်ရက်အချို့ကဲ့သို့သော ဖုန်းဝန်ဆောင်မှုပေးသူမှမဟုတ်သည့် ကွန်ရက်များတွင် ဖုန်းခေါ်ဆိုခြင်းနှင့် လက်ခံခြင်းများကို ပြုလုပ်ရန်ခွင့်ပြုသည်။\n\nCross-SIM ခေါ်ဆိုမှုက နောက်ဆင်းမ်တစ်ခုမှ ဖုန်းခေါ်ဆိုခြင်းနှင့် လက်ခံခြင်းများကို ပြုလုပ်ရန်အတွက် ဆင်းမ်တစ်ခု၏ မိုဘိုင်းဒေတာကို တွန်းအားပေးရန် ခွင့်ပြုသည်။"</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"ခေါ်ဆိုမှုများ"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

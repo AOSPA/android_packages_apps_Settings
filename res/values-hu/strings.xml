@@ -1496,7 +1496,7 @@
     <string name="storage_detail_system" msgid="3797439069473271732">"Rendszer"</string>
     <string name="storage_detail_explore" msgid="13782374784415466">"<xliff:g id="NAME">^1</xliff:g> felfedezése"</string>
     <string name="storage_detail_dialog_other" msgid="3359851869961609901">"Az Egyéb kategóriába tartoznak az alkalmazások által mentett megosztott fájlok, az internetről, illetve Bluetooth-kapcsolaton keresztül letöltött fájlok, az androidos fájlok stb. \n\nA(z) <xliff:g id="NAME">^1</xliff:g> látható tartalmainak megtekintéséhez koppintson a Felfedezés lehetőségre."</string>
-    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"A rendszer tartalmaz <xliff:g id="VERSION">%s</xliff:g> verziójú Android futtatásához használt fájlokat"</string>
+    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"A rendszer az Android <xliff:g id="VERSION">%s</xliff:g>. verziójának futtatásához használt fájlokat tartalmaz"</string>
     <string name="storage_detail_dialog_user" msgid="1691219071007313226">"Lehetséges, hogy <xliff:g id="USER_0">^1</xliff:g> felhasználó fotókat, zenét, alkalmazásokat vagy más adatokat mentett, amihez <xliff:g id="SIZE">^2</xliff:g> tárhelyet használt fel.\n\nA részleteket megtekintheti, ha átvált a következő felhasználóra: <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"<xliff:g id="NAME">^1</xliff:g> – beállítás"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Használat hordozható tárolóként"</string>
@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Értesítések automatikus rangsorolása relevancia szerint"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Visszajelzés adaptív értesítésekről"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Az értesítések módosításainak jelzése, valamint a rendszernek küldhető visszajelzési lehetőség megjelenítése"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Fontossági beállítások visszaállítása"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"A felhasználó által módosított fontossági beállítások visszaállítása és a priorizálás engedélyezése az értesítési segéd számára."</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Javasolt műveletek és válaszok"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Javasolt műveletek és válaszok automatikus megjelenítése"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Legutóbbi és elhalasztott értesítések megjelenítése"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nem hozzáférhető, amikor a következőhöz csatlakozik: <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Továbbiak"</string>
     <string name="see_less" msgid="2642392725363552793">"Kevesebb megjelenítése"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Bekapcsolja a következőt: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Bekapcsolja a SIM-et?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Vált a(z) <xliff:g id="CARRIER_NAME">%1$s</xliff:g> szolgáltatóra?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Átvált SIM-kártya használatára?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Egyszerre csak egy SIM-kártya lehet aktív.\n\nA(z) <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> szolgáltatóra történő váltással nem mondja le a(z) <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> szolgáltatását."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Egyszerre csak egy letöltött SIM lehet aktív.\n\nA(z) <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> szolgáltatóra történő váltással nem mondja le a(z) <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> szolgáltatását."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Egyszerre csak egy SIM-kártya lehet aktív.\n\nA váltással nem mondja le a(z) <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> szolgáltatását."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Váltás erre: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Csatlakozás hálózathoz…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"A következőre történő váltás folyamatban van: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Nem lehet szolgáltatót váltani"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Hiba történt, ezért nem lehet szolgáltatót váltani."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Kikapcsolja a következőt: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Kikapcsolja a SIM-et?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"SIM kikapcsolása<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Nem sikerült a szolgáltató letiltása"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Nem sikerült a szolgáltató letiltása"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Hiba történt, ezért nem sikerült a szolgáltató letiltása."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Kettő SIM-kártyát szeretne használni?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Ezen az eszközön egyszerre két SIM-kártya is aktív lehet. Ha továbbra is csak egy SIM-kártyát szeretne használni, koppintson a „Köszönöm, nem” gombra."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Újraindítja az eszközt?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Kezdő lépésként indítsa újra az eszközt. Ezt követően újabb SIM-kártyát adhat hozzá."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Tovább"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Újraindítás"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Köszönöm, nem"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Váltás"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Nem sikerült a SIM aktiválása"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Távolítsa el a SIM-kártyát, majd helyezze be újra. Ha a probléma továbbra is fennáll, indítsa újra az eszközt."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Próbálkozzon meg újra a SIM bekapcsolásával. Ha a probléma továbbra is fennáll, indítsa újra az eszközt."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Törli ezt a letöltött SIM-et?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"A SIM törlésével eltávolítja a(z) <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> szolgáltatását erről az eszközről.\n\nA(z) <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> szolgáltatását nem mondja le."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Törlés"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"A Bluetooth bekapcsol"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Be"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Ki"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-kártyák"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Repülőgépen használható hálózatok"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Repülőgépen használható hálózatok keresése és csatlakozás hozzájuk"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"repülőgép, repülőgépen használható"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Hívások és SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi-hívás"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Hívások indítása és fogadása nem szolgáltatói hálózaton (pl. Wi-Fi)"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"A Wi-Fi-hívás funkció segítségével hívásokat indíthat és fogadhat nem szolgáltatói hálózatokon, így például bizonyos Wi-Fi-hálózatokon.\n\nA SIM-kártyákon átívelő hívás segítségével az egyik SIM-kártya adatforgalmát felhasználva indíthat és fogadhat hívásokat a másik SIM-kártyán."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Hívások"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

@@ -1979,7 +1979,7 @@
     <string name="app_install_location_title" msgid="8932938164156303191">"Lokasi pemasangan pilihan"</string>
     <string name="app_install_location_summary" msgid="4948270795544357021">"Tukar lokasi pemasangan pilihan untuk aplikasi baru"</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Lumpuhkan apl"</string>
-    <string name="app_disable_dlg_text" msgid="2449382902751908916">"Jika anda melumpuhkan apl ini, Android dan apl lain mungkin tidak berfungsi seperti yang dimaksudkan lagi. Jangan lupa, anda tidak boleh memadamkan apl ini kerana apl diprapasang pada peranti anda. Dengan melumpuhkan apl, anda mematikan dan menyembunyikan apl ini pada peranti anda."</string>
+    <string name="app_disable_dlg_text" msgid="2449382902751908916">"Jika anda melumpuhkan apl ini, Android dan apl lain mungkin tidak berfungsi seperti yang sepatutnya. Jangan lupa, anda tidak boleh memadamkan apl ini kerana apl diprapasang pada peranti anda. Dengan melumpuhkan apl, anda mematikan dan menyembunyikan apl ini pada peranti anda."</string>
     <string name="app_disable_notifications_dlg_title" msgid="6686569904059411780">"Matikan pemberitahuan"</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Gedung"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Butiran apl"</string>
@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Atur kedudukan pemberitahuan secara automatik mengikut kaitan"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Maklum balas pemberitahuan mudah suai"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Tunjukkan pelarasan yang dibuat pada pemberitahuan dan tunjukkan pilihan untuk memberikan maklum balas kepada sistem"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Tetapkan semula kepentingan pemberitahuan"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Pengguna yang ditetapkan semula telah mengubah tetapan kepentingan dan membenarkan pembantu pemberitahuan untuk melakukan keutamaan."</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Tindakan dan balasan yang dicadangkan"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Tunjukkan tindakan &amp; balasan yang dicadangkan secara automatik"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Tunjukkan pemberitahuan baru-baru ini dan pemberitahuan yang ditunda"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Tidak tersedia apabila disambungkan ke <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Lihat lagi"</string>
     <string name="see_less" msgid="2642392725363552793">"Lihat kurang"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Hidupkan <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Hidupkan SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Tukar kepada <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Tukar kepada penggunaan kad SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Hanya satu SIM yang boleh aktif pada satu-satu masa.\n\nBertukar kepada <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> tidak akan membatalkan perkhidmatan <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> anda."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Hanya satu SIM yang dimuat turun boleh aktif pada satu-satu masa.\n\nBertukar kepada <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> tidak akan membatalkan perkhidmatan <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> anda."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Hanya satu SIM yang boleh aktif pada satu-satu masa.\n\nPenukaran tidak akan membatalkan perkhidmatan <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> anda."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Tukar kepada <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Menyambung kepada rangkaian…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Bertukar kepada <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Tidak dapat menukar pembawa"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Pembawa tidak dapat ditukar disebabkan ralat."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Matikan <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Matikan SIM?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Mematikan SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Tidak dapat melumpuhkan pembawa"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Tidak dapat melumpuhkan pembawa"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Kesilapan telah berlaku dan pembawa anda tidak dapat dilumpuhkan."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Gunakan 2 SIM?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Peranti ini boleh mempunyai 2 SIM aktif serentak. Untuk terus menggunakan 1 SIM pada satu-satu masa, ketik \"Tidak perlu\"."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Mulakan semula peranti?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Untuk bermula, mulakan semula peranti anda. Kemudian, anda boleh menambahkan SIM lain."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Teruskan"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Mulakan semula"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Tidak perlu"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Tukar"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Tidak dapat mengaktifkan SIM"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Keluarkan SIM dan masukkan kad itu kembali. Jika masalah berlanjutan, mulakan semula peranti anda."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Cuba hidupkan SIM sekali lagi. Jika masalah berlanjutan, mulakan semula peranti anda."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Padamkan SIM yang dimuat turun ini?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Pemadaman SIM ini akan mengalih keluar perkhidmatan <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> daripada peranti ini.\n\nPerkhidmatan <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> tidak akan dibatalkan."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Padam"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth akan dihidupkan"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Hidup"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Mati"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Rangkaian selamat pesawat"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Cari dan sambung ke rangkaian selamat pesawat"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"pesawat, selamat pesawat"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Panggilan &amp; SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Panggilan Wi-Fi"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Buat dan terima panggilan melalui rangkaian bukan pembawa seperti Wi-Fi"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"Panggilan Wi-Fi membolehkan anda membuat dan menerima panggilan melalui rangkaian bukan pembawa seperti sesetengah rangkaian Wi-Fi.\n\nPanggilan silang SIM membolehkan anda memanfaatkan data mudah alih SIM untuk membuat dan menerima panggilan daripada SIM lain."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Panggilan"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

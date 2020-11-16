@@ -3521,6 +3521,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Poziționați automat notificările după relevanță"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Feedback pentru notificările adaptabile"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Indicați ajustările notificărilor și afișați opțiunea de a oferi feedback pentru sistem"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Resetați importanța notificărilor"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Resetați setările de importanță schimbate de utilizator și permiteți-i asistentului de notificări să stabilească priorități"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Acțiuni și răspunsuri sugerate"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Afișați automat acțiunile și răspunsurile sugerate"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Afișați notificările recente și pe cele amânate"</string>
@@ -4929,11 +4931,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponibil când este conectat la <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Vedeți mai multe"</string>
     <string name="see_less" msgid="2642392725363552793">"Afișați mai puține"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Activați <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Activați SIM-ul?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Treceți la <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Folosiți cardul SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Doar un SIM poate fi activ odată.\n\nCând comutați la <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> nu anulați serviciul <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Doar un SIM descărcat poate fi activ odată.\n\nCând comutați la <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> nu anulați serviciul <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Doar un SIM poate fi activ odată.\n\nCând comutați, nu anulați serviciul <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Treceți la <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Se conectează la rețea…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Se trece la <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Nu puteți schimba operatorul"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Nu puteți schimba operatorul din cauza unei erori."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Dezactivați <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Dezactivați SIM?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Se dezactivează cardul SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Nu se poate dezactiva operatorul"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Nu se poate dezactiva operatorul"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"A apărut o eroare și operatorul dvs. nu a putut fi dezactivat."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Folosiți două carduri SIM?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Acest dispozitiv poate avea două carduri SIM active simultan. Pentru a folosi în continuare câte un card SIM odată, atingeți „Nu, mulțumesc”."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Reporniți dispozitivul?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Pentru a începe, reporniți dispozitivul. Apoi puteți adăuga un alt SIM."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Continuați"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Reporniți"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Nu, mulțumesc"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Schimbați"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Nu se poate activa SIM-ul"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Scoateți SIM-ul și introduceți-l din nou. Dacă problema persistă, reporniți dispozitivul."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Încercați din nou să activați SIM-ul. Dacă problema persistă, reporniți dispozitivul."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Ștergeți acest SIM descărcat?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Dacă ștergeți acest SIM, veți elimina serviciul <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> de pe acest dispozitiv.\n\nServiciile <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> nu vor fi anulate."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Ștergeți"</string>
@@ -5074,4 +5099,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth se va activa"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Activat"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Dezactivat"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"Carduri SIM"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Rețele sigure pentru avioane"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Găsiți rețele sigure pentru avioane și conectați-vă la ele"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"avion, sigure pentru avion"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Apeluri și SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Apelare prin Wi‑Fi"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Inițiați și primiți apeluri prin rețele diferite de cele de operator, cum ar Wi-Fi"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"Cu ajutorul apelării prin Wi-Fi, puteți să inițiați și să primiți apeluri prin rețele diferite de cele de operator, cum ar fi rețelele Wi‑Fi.\n\nApelurile pe mai multe carduri SIM vă ajută să profitați de datele mobile ale unui card SIM pentru a iniția și a primi apeluri de pe alt card SIM."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Apeluri"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

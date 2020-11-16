@@ -3329,7 +3329,7 @@
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Alarmvolum"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Ringe- og varselvolum"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Varselvolum"</string>
-    <string name="ringtone_title" msgid="3271453110387368088">"Telefonringelyd"</string>
+    <string name="ringtone_title" msgid="3271453110387368088">"Ringetone"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Standard varsellyd"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Lyd fra app"</string>
     <string name="notification_sound_default" msgid="8630353701915294299">"Standard varsellyd"</string>
@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Ranger varsler automatisk etter relevans"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Tilbakemelding om tilpasset varsel"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Vis justeringer av varsler og alternativet for å gi tilbakemelding til systemet"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Tilbakestill viktighet for varsler"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Tilbakestill viktighetsinnstillinger som er endret av brukeren, og tillat at varselassistenten angir prioritet"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Foreslåtte handlinger og svar"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Vis foreslåtte handlinger og svar automatisk"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Vis nylige og slumrede varsler"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Utilgjengelig når du er koblet til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Se flere"</string>
     <string name="see_less" msgid="2642392725363552793">"Se mindre"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Vil du slå på <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Vil du slå på SIM-kortet?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Vil du bytte til <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Vil du bytte til å bruke SIM-kort?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Bare ett SIM-kort kan være aktivt om gangen.\n\nSelv om du bytter til <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, blir ikke <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-abonnementet ditt sagt opp."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Bare ett nedlastet SIM-kort kan være aktivt om gangen.\n\nSelv om du bytter til <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, blir ikke <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-abonnementet ditt sagt opp."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Bare ett SIM-kort kan være aktivt om gangen.\n\nSelv om du bytter, blir ikke <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-abonnementet ditt sagt opp."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Bytt til <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Kobler til nettverket …"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Bytter til <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Kan ikke bytte operatør"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Operatøren kan ikke byttes, på grunn av en feil."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Vil du slå av <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Vil du slå av SIM-kortet?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Slår av SIM-kort <xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Kan ikke slå av operatøren"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Kan ikke slå av operatøren"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Noe gikk galt, og enheten kunne ikke slå av operatøren."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Vil du bruke to SIM-kort?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Denne enheten kan ha to SIM-kort aktive samtidig. For å fortsette å bruke ett SIM-kort om gangen, trykk på «Nei takk»"</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Vil du starte enheten på nytt?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Start enheten på nytt for å komme i gang. Deretter kan du legge til et annet SIM-kort."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Fortsett"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Start på nytt"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Nei takk"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Bytt"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Kan ikke aktivere SIM-kortet"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Fjern SIM-kortet og sett det inn igjen. Start enheten på nytt hvis problemet vedvarer."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Prøv å slå på SIM-kortet igjen. Start enheten på nytt hvis problemet vedvarer."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Vil du slette dette nedlastede SIM-kortet?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Hvis du tømmer dette SIM-kortet, fjernes <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-tjenesten fra denne enheten.\n\nTjenesten for <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> blir ikke kansellert."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Slett"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth slås på"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"På"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Av"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Internett"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-kort"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Nettverk som er trygge på fly"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Finn og koble til nettverk som er trygge på fly"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"fly, trygg på fly"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Anrop og SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi-anrop"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Ring og motta anrop via nettverk utenfor operatøren, for eksempel Wi‑Fi"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"Med Wi-Fi-anrop kan du ringe og motta anrop via nettverk utenfor operatøren, for eksempel noen Wi-Fi-nettverk.\n\nMed ringing mellom SIM-kort kan du bruke mobildata på ett SIM-kort til å ringe og motta anrop fra et annet SIM-kort."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Anrop"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

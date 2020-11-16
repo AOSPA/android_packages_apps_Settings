@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"প্ৰাসংগিকতা অনুযায়ী জাননীসমূহ স্বয়ংক্ৰিয়ভাৱে ক্ৰমত সজাওক"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"অভিযোজিত জাননীৰ মতামত"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"জাননীসমূহত ঘটোৱা সালসলনিসমূহ দৰ্শায় আৰু ছিষ্টেমটোক মতামত জনাবলৈ বিকল্পসমূহ দেখুৱায়"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"জাননীৰ গুৰুত্ব ৰিছেট কৰক"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"ব্যৱহাৰকাৰীয়ে সলনি কৰা গুৰুত্বৰ ছেটিং ৰিছেট কৰক আৰু জাননী সহায়কক অগ্ৰাধিকাৰ নিৰ্ধাৰণ কৰিবলৈ অনুমতি দিয়ক"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"পৰামর্শ হিচাপে পোৱা কার্য আৰু প্ৰত্যুত্তৰসমূহ"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"পৰামর্শ হিচাপে পোৱা কার্য &amp; প্ৰত্যুত্তৰসমূহ স্বয়ংক্ৰিয়ভাৱে দেখুৱাওক"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"শেহতীয়া আৰু স্নুজ কৰা জাননীসমূহ দেখুৱাওক"</string>
@@ -4129,7 +4131,7 @@
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"<xliff:g id="APP">%1$s</xliff:g>ৰ অসুবিধা নিদিবলৈ থকা প্ৰৱেশৰ অনুমতি প্ৰত্যাহাৰ কৰিবনে?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"এই এপে সৃষ্টি কৰা সকলো অসুবিধা নিদিব নিয়ম আঁতৰোৱা হ\'ব।"</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"অপ্টিমাইজ নকৰিব"</string>
-    <string name="ignore_optimizations_off" msgid="9186557038453586295">"অপ্টিমাইজ"</string>
+    <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimize"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"আপোনাৰ বেটাৰি খৰকৈ শেষ কৰিব পাৰে। এপটোক নেপথ্যত বেটাৰি ব্যৱহাৰ কৰাত আৰু বাধা দিয়া নহ’ব।"</string>
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"বেটাৰিৰ অৱস্থা উন্নত কৰাৰ বাবে পৰামৰ্শ দিয়া হৈছে"</string>
     <string name="ignore_optimizations_title" msgid="3464172726254542889">"<xliff:g id="APP">%s</xliff:g>-ক বেটাৰি অপ্টিমাইজেশ্বন অবজ্ঞা কৰিবলৈ অনুমতি দিবনে?"</string>
@@ -4501,16 +4503,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"টেবলেটটো পৰীক্ষা কৰিবলৈ টিপক"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"ডিভাইচটো পৰীক্ষা কৰিবলৈ টিপক"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"সময়, জাননী আৰু অন্য তথ্য চাবলৈ আপোনাৰ স্ক্ৰীণত টিপক।"</string>
-    <!-- no translation found for emergency_gesture_screen_title (3280543310204360902) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_entrypoint_summary (4730874229911208834) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_screen_summary (1412270517879718683) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_title (9106060038248836408) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_summary (7086534195960716320) -->
-    <skip />
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"জৰুৰীকালীন SOS"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g>এ পৰিচালনা কৰা"</string>
+    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"পাৱাৰ বুটামটো ক্ষিপ্ৰতাৰে ৫ বাৰ টিপি জৰুৰীকালীন SOS কাৰ্যবিলাক আৰম্ভ কৰক।"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"সকীয়নিৰ ধ্বনি"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"কাৰ্যবিলাক আৰম্ভ কৰাৰ পূৰ্বে সতৰ্ক কৰি দিয়ক"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"জাননীৰ বাবে ফিংগাৰপ্ৰিণ্ট ছোৱাইপ কৰক"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"ফিংগাৰপ্ৰিণ্ট ছোৱাইপ কৰক"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"জাননীবিলাক চাবলৈ আপোনাৰ ফ\'নটোৰ পিছফালে থকা ফিংগাৰপ্ৰিণ্ট ছেন্সৰত ওপৰৰ পৰা তললৈ আঙুলি বুলাওক।"</string>
@@ -4853,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>ৰ সৈতে সংযোগ কৰিলে উপলব্ধ নহয়"</string>
     <string name="see_more" msgid="7499355691042812723">"অধিক চাওক"</string>
     <string name="see_less" msgid="2642392725363552793">"কমকৈ চাওক"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> অন কৰিবনে?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"ছিম অন কৰিবনে?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>লৈ সলনি কৰিবনে?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"ছিম কাৰ্ড ব্যৱহাৰলৈ সলনি কৰিবনে?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"এবাৰত কেৱল এখন ছিমহে সক্ৰিয় হৈ থাকিব পাৰে। \n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>লৈ সলনি কৰিলে আপোনাৰ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> সেৱা বাতিল নহয়।"</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"এটা সময়ত ডাউনল’ড কৰা এখন ছিমহে সক্ৰিয় কৰিব পাৰি। \n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>লৈ সলনি কৰিলে আপোনাৰ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> সেৱা বাতিল নহয়।"</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"এবাৰত কেৱল এখন ছিমহে সক্ৰিয় হৈ থাকিব পাৰে। \n\nসলনি কৰিলে আপোনাৰ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> সেৱা বাতিল নহয়।"</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>লৈ সলনি কৰক"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"নেটৱৰ্কৰ সৈতে সংযোগ কৰি থকা হৈছে…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>লৈ সলনি কৰি থকা হৈছে"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"বাহক সলনি কৰিব নোৱাৰি"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"কিবা এটা আসোঁৱাহ থকাৰ কাৰণে বাহক সলনি কৰিব নোৱাৰি।"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> অফ কৰিবনে?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"ছিম অফ কৰিবনে?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"ছিম অফ কৰি থকা হৈছে<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"বাহকক অক্ষম কৰিব নোৱাৰি"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"বাহকক অক্ষম কৰিব নোৱাৰি"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"কিবা ভুল হ’ল আৰু সেয়ে আপোনাৰ বাহকক অক্ষম কৰিব পৰা নগ’ল।"</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"২ খন ছিম ব্যৱহাৰ কৰিবনে?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"এই ডিভাইচটোত এবাৰত ২ খন ছিম সক্ৰিয় হৈ থাকিব পাৰে। এবাৰত ১ খন ছিম ব্যৱহাৰ কৰাটো অব্যাহত ৰাখিবলৈ \"নালাগে ধন্যবাদ\"ত টিপক।"</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"ডিভাইচটো ৰিষ্টাৰ্ট কৰিবনে?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"আৰম্ভ কৰিবলৈ আপোনাৰ ডিভাইচটো ৰিষ্টাৰ্ট কৰক। তাৰ পাছত আপুনি অন্য এখন ছিম যোগ কৰিব পাৰে।"</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"অব্যাহত ৰাখক"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"ৰিষ্টাৰ্ট কৰক"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"নালাগে, ধন্যবাদ"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"সলনি কৰক"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"ছিমখন সক্ৰিয় কৰিব নোৱাৰি"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"ছিমখন আঁতৰাওক আৰু পুনৰ ভৰাওক। সমস্যাটো অব্যাহত থাকিলে আপোনাৰ ডিভাইচটো ৰিষ্টাৰ্ট কৰক।"</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"ছিমখন পুনৰ অন কৰিবলৈ চেষ্টা কৰক। সমস্যাটো অব্যাহত থাকিলে আপোনাৰ ডিভাইচটো ৰিষ্টাৰ্ট কৰক।"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"এই ডাউনল’ড কৰা ছিমখন মচিবনে?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"এই ছিমখন আঁতৰালে এই ডিভাইচটোৰ পৰা <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> সেৱা আঁতৰোৱা হ’ব।\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>ৰ সেৱা বাতিল কৰা নহয়।"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"মচক"</string>
@@ -4996,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ব্লুটুথ অন কৰা হ’ব"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"অন আছে"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"অফ আছে"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"ইণ্টাৰনেট"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"ছিম"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"এয়াৰপ্লেন-সুৰক্ষিত নেটৱৰ্ক"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"এয়াৰপ্লেন-সুৰক্ষিত নেটৱৰ্ক বিচাৰক আৰু তাৰ সৈতে সংযোগ কৰক"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"এয়াৰপ্লেন, এয়াৰপ্লেন-সুৰক্ষিত"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"কল আৰু এছএমএছ"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"ৱাই-ফাই কলিং"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"ৱাই-ফাই নেটৱৰ্কৰ দৰে বাহক নোহোৱা নেটৱৰ্কৰ জৰিয়তে কল কৰক আৰু লাভ কৰক"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"ৱাই-ফাই কলিঙৰ সুবিধাটোৱে আপোনাক কিছুমান ৱাই-ফাই নেটৱৰ্কৰ দৰে বাহক নোহোৱা নেটৱৰ্কৰ জৰিয়তে কল কৰিবলৈ আৰু লাভ কৰিবলৈ অনুমতি দিয়ে।\n\nক্ৰছ-ছিম কলিঙৰ সুবিধাটোৱে আপোনাক অন্য ছিমৰ পৰা কল কৰিবলৈ আৰু লাভ কৰিবলৈ এখন ছিমৰ ম’বাইল ডেটাৰ লাভ আদায় কৰিবলৈ অনুমতি দিয়ে।"</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"কল"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"এছএমএছ"</string>
 </resources>
