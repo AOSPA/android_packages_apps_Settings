@@ -40,6 +40,12 @@
         settings:controller="com.android.settings.gestures.SwipeToScreenshotPreferenceController" />
 
     <Preference
+        android:key="gesture_aux_button"
+        android:title="@string/aux_button_title"
+        android:fragment="com.android.settings.gestures.AuxButtonGestureSettings"
+        settings:controller="com.android.settings.gestures.AuxButtonGestureSettingsPreferenceController" />
+
+    <Preference
         android:key="gesture_double_tap_power_input_summary"
         android:title="@string/double_tap_power_for_camera_title"
         android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"
