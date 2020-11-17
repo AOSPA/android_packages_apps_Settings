@@ -254,8 +254,8 @@
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"Data i hora"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Estableix la data i l\'hora"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Defineix la data, l\'hora, la zona horària i els formats"</string>
-    <string name="date_time_auto" msgid="8227898528525208628">"Utilitza l\'hora proporcionada per la xarxa"</string>
-    <string name="zone_auto_title" msgid="4715775349468228598">"Utilitza la zona horària proporcionada per la xarxa"</string>
+    <string name="date_time_auto" msgid="4239202185055225869">"Defineix l\'hora automàticament"</string>
+    <string name="zone_auto_title" msgid="3993580453604839924">"Defineix la zona horària automàticament"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Utilitza la configuració regional predeterminada"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"Format de 24 hores"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Format de 24 hores"</string>
@@ -321,7 +321,7 @@
     <string name="security_dashboard_summary" msgid="8750183806533140464">"Bloqueig de pantalla, empremta digital"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"Bloqueig de pantalla"</string>
     <string name="multi_biometric_enroll_title" msgid="3007607723604088374">"Desbloqueja el telèfon amb la cara i l\'empremta digital"</string>
-    <string name="multi_biometric_enroll_subtitle" msgid="2900786940599073108">"També pots iniciar la sessió en apps i confirmar el pagament"</string>
+    <string name="multi_biometric_enroll_subtitle" msgid="8357072842904027301">"També pots iniciar la sessió en apps i confirmar pagaments"</string>
     <string name="multi_biometric_enroll_setup_with" msgid="421375792889910150">"Configura el desbloqueig amb:"</string>
     <string name="multi_biometric_enroll_face_unlock_title" msgid="7627564065626355692">"Desbloqueig facial"</string>
     <string name="multi_biometric_enroll_face_unlock_description" msgid="7626442550602926682">"Desbloqueja el telèfon fàcilment"</string>
@@ -1013,8 +1013,7 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"Adreça MAC del dispositiu"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Adreça MAC aleatòria"</string>
-    <!-- no translation found for wifi_advanced_randomized_mac_address_disconnected_title (2755843130417523727) -->
-    <skip />
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"Adreça MAC aleatòria (darrer ús)"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"Adreça IP"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"Detalls de la xarxa"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Màscara de la subxarxa"</string>
@@ -1300,6 +1299,7 @@
     <string name="doze_summary" msgid="8252867381522942804">"Quan la pantalla està fosca, s\'activa per a notificacions noves"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Mostra sempre hora i detalls"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Augmenta l\'ús de la bateria"</string>
+    <string name="force_bold_text" msgid="3636373986786504634">"Posa el text en negreta"</string>
     <string name="title_font_size" msgid="570613010306330622">"Mida de la lletra"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"Amplia o redueix el text"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"Config. de bloqueig de SIM"</string>
@@ -1734,6 +1734,15 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Cerca de dispositius Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Permet que les aplicacions i els serveis cerquin dispositius propers en qualsevol moment, fins i tot quan el Bluetooth estigui desactivat. Aquesta opció es pot utilitzar, per exemple, per millorar les funcions i els serveis basats en la ubicació."</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Serveis d\'ubicació per a la feina"</string>
+    <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"Detecció de la zona horària de la ubicació"</string>
+    <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"Detecció de la zona horària de la ubicació"</string>
+    <string name="location_time_zone_detection_enabled_description" msgid="1064716900984397624">"Permet utilitzar la ubicació del dispositiu per detectar la zona horària actual. Altres opcions de configuració de la ubicació, com ara la cerca de xarxes Wi‑Fi, poden afectar la precisió de la detecció de la zona horària."</string>
+    <string name="location_time_zone_detection_on" msgid="5514817179120761597">"Activada"</string>
+    <string name="location_time_zone_detection_off" msgid="192427076195667079">"Desactivada"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="8067073548483627695">"La detecció automàtica de la zona horària està desactivada"</string>
+    <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"La detecció de la zona horària de la ubicació està desactivada"</string>
+    <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"No s\'admet la detecció de la zona horària de la ubicació"</string>
+    <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"No es permeten canvis en la detecció de la zona horària de la ubicació"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Ubicació p. Wi-Fi i xarxa mòb."</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Permet que les aplicacions utilitzin el servei d\'ubicació de Google per calcular la teva ubicació més ràpidament. Es recopilaran dades d\'ubicació anònimes i s\'enviaran a Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"Ubicació determinada per Wi-Fi"</string>
@@ -2501,6 +2510,8 @@
       <item quantity="one">S\'ha restringit %1$d aplicació</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small><font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Hi ha hagut un problema en llegir el mesurador de la bateria"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Hi ha hagut un problema en llegir el mesurador de la bateria. Toca per "<annotation id="url">"obtenir més informació"</annotation>"."</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Vols aturar l\'aplicació?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"El telèfon no pot gestionar el consum de la bateria amb normalitat perquè <xliff:g id="APP">%1$s</xliff:g> el manté actiu.\n\nPer solucionar el problema, pots aturar l\'aplicació.\n\nSi el problema persisteix, pot ser que hagis de desinstal·lar l\'aplicació per millorar el rendiment de la bateria."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"La tauleta no pot gestionar el consum de la bateria amb normalitat perquè <xliff:g id="APP">%1$s</xliff:g> la manté activa.\n\nPer solucionar el problema, pots aturar l\'aplicació.\n\nSi el problema persisteix, pot ser que hagis de desinstal·lar l\'aplicació per millorar el rendiment de la bateria."</string>
@@ -3056,12 +3067,12 @@
     <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Vols suprimir el convidat?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Totes les aplicacions i les dades d\'aquesta sessió se suprimiran."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Suprimeix"</string>
-    <string name="user_enable_calling" msgid="264875360626905535">"Activa les trucades"</string>
-    <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activa les trucades i els SMS"</string>
+    <string name="user_enable_calling" msgid="264875360626905535">"Activa les trucades telefòniques"</string>
+    <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activa les trucades telefòniques i els SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Suprimeix l\'usuari"</string>
-    <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Vols activar les trucades?"</string>
+    <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Vols activar les trucades telefòniques?"</string>
     <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"L\'historial de trucades es compartirà amb aquest usuari."</string>
-    <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Vols activar les trucades i els SMS?"</string>
+    <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Vols activar les trucades telefòniques i els SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"L\'historial de trucades i d\'SMS es compartirà amb aquest usuari."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Informació d\'emergència"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informació i contactes de: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -3563,8 +3574,11 @@
     <string name="important_conversations" msgid="1233893707189659401">"Converses prioritàries"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Mostra a la part superior de la secció de converses i com a bombolles flotants"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Mostra a la part superior de la secció de converses"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Altres converses"</string>
+    <string name="other_conversations" msgid="551178916855139870">"Converses no prioritàries"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Converses en què has fet canvis"</string>
+    <string name="recent_conversations" msgid="471678228756995274">"Converses recents"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"Esborra les recents"</string>
+    <string name="clear" msgid="5092178335409471100">"Esborra"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Mostra les converses prioritàries com a bombolles"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Les converses prioritàries es mostren a la part superior de l\'àrea desplegable. També pots definir que es mostrin com a bombolles i interrompin el mode No molestis."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Les converses que hagis marcat com a prioritàries o en què hagis fet canvis es mostraran aquí"</string>
@@ -3618,9 +3632,9 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Cap aplicació instal·lada no ha sol·licitat accés a les notificacions."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Permet l\'accés a les notificacions"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Vols que <xliff:g id="SERVICE">%1$s</xliff:g> tingui accés a les notificacions?"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="7362924206925040510">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> podrà llegir totes les notificacions, inclosa la informació personal, com ara els noms dels contactes i el text dels missatges que rebis. Aquesta aplicació també podrà ignorar les notificacions o fer accions amb els botons de les notificacions, com ara contestar a trucades. \n\nL\'aplicació també podrà activar i desactivar el mode No molestis i canviar la configuració que hi estigui relacionada."</string>
+    <string name="notification_assistant_security_warning_summary" msgid="7362924206925040510">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> podrà llegir totes les notificacions, inclosa la informació personal, com ara els noms dels contactes i el text dels missatges que rebis. Aquesta aplicació també podrà ignorar les notificacions o fer accions amb els botons de les notificacions, com ara contestar a trucades telefòniques. \n\nL\'aplicació també podrà activar i desactivar el mode No molestis i canviar la configuració que hi estigui relacionada."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Vols que <xliff:g id="SERVICE">%1$s</xliff:g> tingui accés a les notificacions?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrà llegir totes les notificacions, inclosa la informació personal, com ara els noms dels contactes i el text dels missatges que rebis. Aquesta aplicació també podrà ignorar les notificacions o fer accions amb els botons de les notificacions, com ara contestar a trucades. \n\nL\'aplicació també podrà activar i desactivar el mode No molestis i canviar la configuració que hi estigui relacionada."</string>
+    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrà llegir totes les notificacions, inclosa la informació personal, com ara els noms dels contactes i el text dels missatges que rebis. Aquesta aplicació també podrà ignorar les notificacions o fer accions amb els botons de les notificacions, com ara contestar a trucades telefòniques. \n\nL\'aplicació també podrà activar i desactivar el mode No molestis i canviar la configuració que hi estigui relacionada."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Si desactives l\'accés a les notificacions per a <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, és possible que també es desactivi l\'accés al mode No molestis."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desactiva"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancel·la"</string>
@@ -4487,11 +4501,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Toca per consultar la tauleta"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Toca per consultar el dispositiu"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Per veure l\'hora, les notificacions i altres dades, toca la pantalla."</string>
-    <string name="panic_gesture_screen_title" msgid="2978368688339171290">"Botó del pànic"</string>
-    <string name="panic_gesture_screen_summary" msgid="6560595108396726608">"Per iniciar les accions d\'emergència, prem el botó d\'engegada 5 vegades ràpidament."</string>
-    <string name="panic_gesture_sound_setting_title" msgid="2235527774130891208">"So d\'advertiment"</string>
-    <string name="panic_gesture_sound_setting_summary" msgid="6997197208264987249">"Mostra una alerta abans d\'iniciar les accions"</string>
-    <string name="panic_gesture_edit_emergency_contact_setting_title" msgid="7791096427878863017">"Contactes d\'emergència"</string>
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Accions d\'emergència"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Gestionat per <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Inicia les accions d\'emergència prement el botó d\'engegada 5 vegades ràpidament."</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"So d\'advertiment"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Mostra una alerta abans d\'iniciar les accions"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Fes lliscar l\'empremta digital per veure notificacions"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Fes lliscar l\'empremta"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Per consultar les notificacions, llisca cap avall al sensor d\'empremtes dactilars de la part posterior del telèfon."</string>
@@ -4839,6 +4853,12 @@
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"S\'està desactivant la SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"No es pot desactivar l\'operador"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"S\'ha produït un error i no s\'ha pogut desactivar l\'operador."</string>
+    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Vols esborrar la SIM que has baixat?"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"Si esborres aquesta targeta SIM, el servei <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> se suprimirà del dispositiu.\n\nEl servei <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> no es cancel·larà."</string>
+    <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Esborra"</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"S\'està esborrant la SIM…"</string>
+    <string name="erase_sim_fail_title" msgid="2024446702985862427">"No es pot esborrar la SIM"</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"No s\'ha pogut esborrar la targeta SIM a causa d\'un error.\n\nReinicia el dispositiu i torna-ho a provar."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Connexió al dispositiu"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"L\'aplicació <xliff:g id="APPNAME">%1$s</xliff:g> vol fer servir una xarxa Wi‑Fi temporal per connectar-se al teu dispositiu"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"No s\'ha trobat cap dispositiu. Comprova que els dispositius estiguin activats i disponibles per connectar-s\'hi."</string>
@@ -4968,4 +4988,7 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"No hi ha cap reproductor disponible"</string>
     <string name="media_controls_apps_title" msgid="9129092193224838008">"Aplicacions permeses"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"multimèdia"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"S\'activarà el Bluetooth"</string>
+    <string name="bluetooth_setting_on" msgid="4808458394436224124">"Activat"</string>
+    <string name="bluetooth_setting_off" msgid="4965493913199554789">"Desactivat"</string>
 </resources>

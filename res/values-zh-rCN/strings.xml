@@ -254,8 +254,8 @@
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"日期和时间"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"设置日期和时间"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"设置日期、时间、时区和格式"</string>
-    <string name="date_time_auto" msgid="8227898528525208628">"使用网络提供的时间"</string>
-    <string name="zone_auto_title" msgid="4715775349468228598">"使用网络提供的时区"</string>
+    <string name="date_time_auto" msgid="4239202185055225869">"自动设置时间"</string>
+    <string name="zone_auto_title" msgid="3993580453604839924">"自动设置时区"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"使用默认语言区域"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"24 小时制"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"使用 24 小时制"</string>
@@ -321,7 +321,7 @@
     <string name="security_dashboard_summary" msgid="8750183806533140464">"屏幕锁定、指纹"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"屏幕锁定"</string>
     <string name="multi_biometric_enroll_title" msgid="3007607723604088374">"使用您的面孔和指纹安全地解锁手机"</string>
-    <string name="multi_biometric_enroll_subtitle" msgid="2900786940599073108">"您还可以登录应用和确认付款"</string>
+    <string name="multi_biometric_enroll_subtitle" msgid="8357072842904027301">"您还可以登录应用和确认付款"</string>
     <string name="multi_biometric_enroll_setup_with" msgid="421375792889910150">"设置解锁方式："</string>
     <string name="multi_biometric_enroll_face_unlock_title" msgid="7627564065626355692">"人脸解锁"</string>
     <string name="multi_biometric_enroll_face_unlock_description" msgid="7626442550602926682">"轻松解锁手机"</string>
@@ -1013,8 +1013,7 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"设备 MAC 地址"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"随机生成的 MAC 地址"</string>
-    <!-- no translation found for wifi_advanced_randomized_mac_address_disconnected_title (2755843130417523727) -->
-    <skip />
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"随机生成的 MAC 地址（上次使用）"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"IP 地址"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"网络详情"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"子网掩码"</string>
@@ -1300,6 +1299,7 @@
     <string name="doze_summary" msgid="8252867381522942804">"收到新通知时，变暗的屏幕会自动亮起"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"始终显示时间和信息"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"这会增加耗电量"</string>
+    <string name="force_bold_text" msgid="3636373986786504634">"粗体文字"</string>
     <string name="title_font_size" msgid="570613010306330622">"字体大小"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"放大或缩小文字"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"SIM 卡锁定设置"</string>
@@ -1734,6 +1734,15 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"蓝牙扫描"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"允许应用和服务随时扫描附近的设备（即使蓝牙已关闭）。这可用于改进基于位置的功能和服务。"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"工作用位置信息服务"</string>
+    <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"位置信息时区检测"</string>
+    <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"位置信息时区检测"</string>
+    <string name="location_time_zone_detection_enabled_description" msgid="1064716900984397624">"允许使用设备的位置信息检测当前时区。WLAN 扫描等其他位置信息设置可能会影响时区检测的准确性。"</string>
+    <string name="location_time_zone_detection_on" msgid="5514817179120761597">"开启"</string>
+    <string name="location_time_zone_detection_off" msgid="192427076195667079">"关闭"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="8067073548483627695">"已停用自动检测时区的功能"</string>
+    <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"位置信息时区检测已停用"</string>
+    <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"不支持位置信息时区检测"</string>
+    <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"不允许更改位置信息时区检测"</string>
     <string name="location_network_based" msgid="5247042890080021887">"WLAN和移动网络位置信息"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"允许应用使用Google位置信息服务更快地大致了解您所在的位置。系统将收集匿名位置数据并将其发送给Google。"</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"通过WLAN确定位置"</string>
@@ -2501,6 +2510,8 @@
       <item quantity="one">%1$d 个应用受到限制</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"读取电池计量器时出现问题"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"读取电池计量器时出现问题。点按即可"<annotation id="url">"了解详情"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"要停止该应用吗？"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"由于<xliff:g id="APP">%1$s</xliff:g>一直让手机保持唤醒状态，因此您的手机无法正常管理电池。\n\n要尝试解决此问题，您可以停止该应用。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"由于<xliff:g id="APP">%1$s</xliff:g>一直让平板电脑保持唤醒状态，因此您的平板电脑无法正常管理电池。\n\n要尝试解决此问题，您可以停止该应用。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
@@ -3566,8 +3577,11 @@
     <string name="important_conversations" msgid="1233893707189659401">"优先对话"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"以悬浮对话泡形式显示在对话部分顶部"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"显示在对话部分顶部"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"其他对话"</string>
+    <string name="other_conversations" msgid="551178916855139870">"非优先对话"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"您已更改的对话"</string>
+    <string name="recent_conversations" msgid="471678228756995274">"近期对话"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"清除最近的项目"</string>
+    <string name="clear" msgid="5092178335409471100">"清除"</string>
     <string name="important_bubble" msgid="7911698275408390846">"以对话泡形式显示优先对话"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"优先对话会显示在下拉通知栏顶部。您也可将优先对话设置为以对话泡形式显示，并允许系统在“勿扰”模式下显示此类对话泡。"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"优先对话和经过修改的对话会显示在这里"</string>
@@ -4490,11 +4504,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"点按即可查看平板电脑相关信息"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"点按即可查看设备相关信息"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"要查看时间、通知和其他信息，请点按您的屏幕。"</string>
-    <string name="panic_gesture_screen_title" msgid="2978368688339171290">"紧急按钮"</string>
-    <string name="panic_gesture_screen_summary" msgid="6560595108396726608">"快速按电源按钮 5 次即可启动紧急 SOS 操作。"</string>
-    <string name="panic_gesture_sound_setting_title" msgid="2235527774130891208">"警报声"</string>
-    <string name="panic_gesture_sound_setting_summary" msgid="6997197208264987249">"在触发操作前发出警报声"</string>
-    <string name="panic_gesture_edit_emergency_contact_setting_title" msgid="7791096427878863017">"紧急情况联系人"</string>
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"紧急求救"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"由<xliff:g id="APP_NAME">%1$s</xliff:g>管理"</string>
+    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"快速按电源按钮 5 次即可启动紧急求救操作。"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"警报声"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"在触发操作前发出警报声"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"滑动指纹即可查看通知"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"滑动指纹"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"要查看通知，请在手机背面的指纹传感器上向下滑动手指。"</string>
@@ -4855,6 +4869,12 @@
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"正在停用 SIM 卡<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"无法停用运营商"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"出了点问题，无法停用您的运营商。"</string>
+    <string name="erase_sim_dialog_title" msgid="881253002169177016">"要清空这个已下载的 SIM 卡吗？"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"清空此 SIM 卡将从此设备中移除<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>服务。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>的服务不会因此被取消。"</string>
+    <string name="erase_sim_confirm_button" msgid="8309115684335320541">"清空"</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"正在清空 SIM 卡…"</string>
+    <string name="erase_sim_fail_title" msgid="2024446702985862427">"无法清空 SIM 卡"</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"发生错误，因此无法清空此 SIM 卡。\n\n请重启设备，然后重试。"</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"连接到设备"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"“<xliff:g id="APPNAME">%1$s</xliff:g>”应用要使用临时 WLAN 网络连接到您的设备"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"找不到设备。请确保设备已开启并可连接到网络。"</string>
@@ -4984,4 +5004,7 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"没有可用的播放器"</string>
     <string name="media_controls_apps_title" msgid="9129092193224838008">"允许的应用"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"媒体"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"蓝牙将开启"</string>
+    <string name="bluetooth_setting_on" msgid="4808458394436224124">"开启"</string>
+    <string name="bluetooth_setting_off" msgid="4965493913199554789">"关闭"</string>
 </resources>

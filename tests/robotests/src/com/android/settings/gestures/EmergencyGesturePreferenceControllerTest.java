@@ -16,13 +16,17 @@
 
 package com.android.settings.gestures;
 
-import static com.android.settings.gestures.PanicGesturePreferenceController.OFF;
-import static com.android.settings.gestures.PanicGesturePreferenceController.ON;
+import static com.android.settings.gestures.EmergencyGesturePreferenceController.ACTION_EMERGENCY_GESTURE_SETTINGS;
+import static com.android.settings.gestures.EmergencyGesturePreferenceController.OFF;
+import static com.android.settings.gestures.EmergencyGesturePreferenceController.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ResolveInfo;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -35,23 +39,31 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
-public class PanicGesturePreferenceControllerTest {
+public class EmergencyGesturePreferenceControllerTest {
 
+    private static final String TEST_PKG_NAME = "test_pkg";
+    private static final String TEST_CLASS_NAME = "name";
+    private static final Intent SETTING_INTENT = new Intent(ACTION_EMERGENCY_GESTURE_SETTINGS)
+            .setPackage(TEST_PKG_NAME);
 
     private Context mContext;
     private ContentResolver mContentResolver;
-    private PanicGesturePreferenceController mController;
-    private static final String PREF_KEY = "gesture_panic_button";
+    private ShadowPackageManager mPackageManager;
+    private EmergencyGesturePreferenceController mController;
+    private static final String PREF_KEY = "gesture_emergency_button";
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
         mContentResolver = mContext.getContentResolver();
-        mController = new PanicGesturePreferenceController(mContext, PREF_KEY);
+        mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
+        mController = new EmergencyGesturePreferenceController(mContext, PREF_KEY);
     }
 
     @After
@@ -60,18 +72,40 @@ public class PanicGesturePreferenceControllerTest {
     }
 
     @Test
+    public void constructor_hasCustomPackageConfig_shouldSetIntent() {
+        final ResolveInfo info = new ResolveInfo();
+        info.activityInfo = new ActivityInfo();
+        info.activityInfo.packageName = TEST_PKG_NAME;
+        info.activityInfo.name = TEST_CLASS_NAME;
+
+        mPackageManager.addResolveInfoForIntent(SETTING_INTENT, info);
+
+        SettingsShadowResources.overrideResource(
+                R.bool.config_show_emergency_gesture_settings,
+                Boolean.TRUE);
+
+        SettingsShadowResources.overrideResource(
+                R.string.emergency_gesture_settings_package,
+                TEST_PKG_NAME);
+
+        mController = new EmergencyGesturePreferenceController(mContext, PREF_KEY);
+
+        assertThat(mController.mIntent).isNotNull();
+    }
+
+    @Test
     public void isAvailable_configIsTrue_shouldReturnTrue() {
         SettingsShadowResources.overrideResource(
-                R.bool.config_show_panic_gesture_settings,
+                R.bool.config_show_emergency_gesture_settings,
                 Boolean.TRUE);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void isAvailable_configIsTrue_shouldReturnFalse() {
+    public void isAvailable_configIsFalse_shouldReturnFalse() {
         SettingsShadowResources.overrideResource(
-                R.bool.config_show_panic_gesture_settings,
+                R.bool.config_show_emergency_gesture_settings,
                 Boolean.FALSE);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -80,8 +114,8 @@ public class PanicGesturePreferenceControllerTest {
     @Test
     public void isChecked_configIsNotSet_shouldReturnTrue() {
         // Set the setting to be enabled.
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.PANIC_GESTURE_ENABLED, ON);
-        mController = new PanicGesturePreferenceController(mContext, PREF_KEY);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.EMERGENCY_GESTURE_ENABLED, ON);
+        mController = new EmergencyGesturePreferenceController(mContext, PREF_KEY);
 
         assertThat(mController.isChecked()).isTrue();
     }
@@ -89,16 +123,16 @@ public class PanicGesturePreferenceControllerTest {
     @Test
     public void isChecked_configIsSet_shouldReturnFalse() {
         // Set the setting to be disabled.
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.PANIC_GESTURE_ENABLED, OFF);
-        mController = new PanicGesturePreferenceController(mContext, PREF_KEY);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.EMERGENCY_GESTURE_ENABLED, OFF);
+        mController = new EmergencyGesturePreferenceController(mContext, PREF_KEY);
 
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void isSliceableCorrectKey_returnsTrue() {
-        final PanicGesturePreferenceController controller =
-                new PanicGesturePreferenceController(mContext, PREF_KEY);
+        final EmergencyGesturePreferenceController controller =
+                new EmergencyGesturePreferenceController(mContext, PREF_KEY);
         assertThat(controller.isSliceable()).isTrue();
     }
 

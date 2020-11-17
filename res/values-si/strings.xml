@@ -254,8 +254,8 @@
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"දිනය සහ වේලාව"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"දිනය සහ වේලාව සකසන්න"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"දිනය, වේලාව, වේලා කලාපය, සහ ආකෘති සකසන්න"</string>
-    <string name="date_time_auto" msgid="8227898528525208628">"ජාලය සැපයූ වේලාව භාවිත කරන්න"</string>
-    <string name="zone_auto_title" msgid="4715775349468228598">"ජාලය සැපයූ වේලා කලාපය භාවිත කරන්න"</string>
+    <string name="date_time_auto" msgid="4239202185055225869">"ස්වයංක්‍රියව වේලාව සකසන්න"</string>
+    <string name="zone_auto_title" msgid="3993580453604839924">"ස්වයංක්‍රියව වේලා කලාපය සකසන්න"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"පෙදෙසි පෙරනිමි භාවිත කරන්න"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"පැය 24 ආකාරය"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"පැය 24 ආකාරය භාවිත කරන්න"</string>
@@ -321,7 +321,7 @@
     <string name="security_dashboard_summary" msgid="8750183806533140464">"තිර අගුල, ඇඟිලි සලකුණ"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"තිර අගුල"</string>
     <string name="multi_biometric_enroll_title" msgid="3007607723604088374">"ඔබගේ මුහුණ සහ ඇඟිලි සලකුණු සමඟ දුරකථනය ආරක්ෂිතව අගුලු හරින්න"</string>
-    <string name="multi_biometric_enroll_subtitle" msgid="2900786940599073108">"ඔබට යෙදුම්වලට පිරීමට සහ ගෙවීම තහවුරු කිරීමටද හැකිය"</string>
+    <string name="multi_biometric_enroll_subtitle" msgid="8357072842904027301">"ඔබට යෙදුම්වලට පිරීමට සහ ගෙවීම් තහවුරු කිරීමටද හැකිය"</string>
     <string name="multi_biometric_enroll_setup_with" msgid="421375792889910150">"මේ සමග අගුලු හැරීම පිහිටුවන්න:"</string>
     <string name="multi_biometric_enroll_face_unlock_title" msgid="7627564065626355692">"මුහුණෙන් අගුලු හැරීම"</string>
     <string name="multi_biometric_enroll_face_unlock_description" msgid="7626442550602926682">"ඔබගේ දුරකථනය අගුලු හැරීම ඉතා පහසු කරන්න"</string>
@@ -1013,8 +1013,7 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"උපාංග MAC ලිපිනය"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"සසම්භාවී MAC ලිපිනය"</string>
-    <!-- no translation found for wifi_advanced_randomized_mac_address_disconnected_title (2755843130417523727) -->
-    <skip />
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"සසම්භාවීකරණය කළ MAC ලිපිනය (අවසන් වරට භාවිත කළ)"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"IP ලිපිනය"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"ජාල විස්තර"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"සබ්නෙට් මාස්ක්"</string>
@@ -1300,6 +1299,7 @@
     <string name="doze_summary" msgid="8252867381522942804">"තිරය අඳුරු විට, එය නව දැනුම් දීම් සඳහා ක්‍රියාත්මක වේ"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"සැමවිට වේලාව සහ තතු පෙන්වන්න"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"වැඩි බැටරි භාවිතය"</string>
+    <string name="force_bold_text" msgid="3636373986786504634">"තද අකුරු"</string>
     <string name="title_font_size" msgid="570613010306330622">"අකුරු ප්‍රමාණය"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"පෙළ වඩාත් විශාල හෝ කුඩා කරන්න"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"SIM කාඩ් පතෙහි අඟුළු සැකසුම්"</string>
@@ -1734,6 +1734,15 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"බ්ලූටූත් පරිලෝකනය"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"බ්ලූටූත් ක්‍රියාවිරහිත විට පවා, ඕනෑම අවස්ථාවක අවට උපාංග සඳහා ස්කෑන් කිරීමට යෙදුම් සහ සේවාවලට ඉඩ දෙන්න. උදාහරණයක් ලෙස, ස්ථානය-පදනම් වූ විශේෂාංග සහ සේවා වැඩි දියුණු කිරීම සඳහා මෙය භාවිත කළ හැකිය."</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"වැඩ සඳහා ස්ථානීය සේවා"</string>
+    <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"ස්ථාන වේලා කලාපය අනාවරණය කර ගැනීම"</string>
+    <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"ස්ථාන වේලා කලාපය අනාවරණය කර ගැනීම"</string>
+    <string name="location_time_zone_detection_enabled_description" msgid="1064716900984397624">"වත්මන් වේලා කලාපය අනාවරණය කර ගැනීමට උපාංගයේ ස්ථානය භාවිත කිරීමට ඉඩ දෙයි. Wi‑Fi ස්කෑන් කිරීම වැනි වෙනත් ස්ථාන සැකසීම් වේලා කලාපය අනාවරණය කර ගැනීමේ නිරවද්‍යතාවට බලපෑ හැකිය."</string>
+    <string name="location_time_zone_detection_on" msgid="5514817179120761597">"ක්‍රියාත්මකයි"</string>
+    <string name="location_time_zone_detection_off" msgid="192427076195667079">"ක්‍රියාවිරහිතයි"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="8067073548483627695">"ස්වයංක්‍රිය වේලා කලාපය අනාවරණය කර ගැනීම අබලයි"</string>
+    <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"ස්ථාන වේලා කලාපය අනාවරණය කර ගැනීම අබලයි"</string>
+    <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"ස්ථාන වේලා කලාපය අනාවරණය කර ගැනීම සහාය නොදක්වයි"</string>
+    <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"ස්ථාන වේලා කලාපය අනාවරණය කර ගැනීමේ වෙනස් කිරීම් ඉඩ නොදේ"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Wi-Fi සහ ජංගම ජාල ස්ථාන"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"ඔබගේ ස්ථානය ඉක්මනින් තීරණය කිරීමට යෙදුම් හට Google හි ස්ථාන සේවා භාවිතා කිරීමට ඉඩ දෙන්න. නිර්නාමික ස්ථාන දත්ත එකතු කර Google වෙත යැවෙනු ඇත."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"Wi‑Fi මඟින් ස්ථානය හඳුනාගන්නා ලදි"</string>
@@ -2501,6 +2510,8 @@
       <item quantity="other">යෙදුම් %1$dක් සීමා කර ඇත</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"ඔබගේ බැටරි මනුව කියවීමේ දෝෂයකි"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"ඔබගේ බැටරි මනුව කියවීමේ දෝෂයකි. "<annotation id="url">"තව දැන ගැනීමට"</annotation>" තට්ටු කරන්න"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"යෙදුම නවත්වන්නද?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"<xliff:g id="APP">%1$s</xliff:g> ඔබේ දුරකථනය අවදියෙන් තබා ගන්නා නිසා ඔබේ දුරකථනයට සාමාන්‍ය පරිදි බැටරිය කළමනාකරණය කළ නොහැකිය.\n\nමෙම ගැටලුව විසඳීමට උත්සාහ කිරීමට, ඔබට යෙදුම නැවැත්විය හැකිය.\n\nමෙය දිගටම සිදු වන්නේ නම්, බැටරි කාර්ය සාධනය වැඩි දියුණු කිරීමට ඔබ යෙදුම අස්ථාපනය කිරීම අවශ්‍ය විය හැකිය."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"<xliff:g id="APP">%1$s</xliff:g> ඔබේ ටැබ්ලටය අවදියෙන් තබා ගන්නා නිසා ඔබේ ටැබ්ලටයට සාමාන්‍ය පරිදි බැටරිය කළමනාකරණය කළ නොහැකිය.\n\nමෙම ගැටලුව විසඳීමට උත්සාහ කිරීමට, ඔබට යෙදුම නැවැත්විය හැකිය.\n\nමෙය දිගටම සිදු වන්නේ නම්, බැටරි කාර්ය සාධනය වැඩි දියුණු කිරීමට ඔබ යෙදුම අස්ථාපනය කිරීම අවශ්‍ය විය හැකිය."</string>
@@ -3563,8 +3574,11 @@
     <string name="important_conversations" msgid="1233893707189659401">"ප්‍රමුඛතා සංවාද"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"සංවාද කොටසේ ඉහළම පෙන්වන අතර පාවෙන බුබුලු ලෙස දිස් වේ."</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"සංවාද කොටසේ ඉහළ දී පෙන්වන්න"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"වෙනත් සංවාද"</string>
+    <string name="other_conversations" msgid="551178916855139870">"ප්‍රමුඛතා නොවන සංවාද"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"ඔබ වෙනස් කිරීම් කර ඇති සංවාද"</string>
+    <string name="recent_conversations" msgid="471678228756995274">"මෑත සංවාද"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"මෑත ඒවා හිස් කරන්න"</string>
+    <string name="clear" msgid="5092178335409471100">"හිස් කරන්න"</string>
     <string name="important_bubble" msgid="7911698275408390846">"ප්‍රමුඛතා සංවාද බුබුලු දමන්න"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"ප්‍රමුඛතා සංවාද පහළට-ඇදීමේ වැස්ම ඉහළින් පෙන්වයි. ඔබට ඒවා බුබුලු නැගීමට සැකසීමට සහ බාධා නොකරන්න බාධා කිරීමටද හැකිය."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"ප්‍රමුඛතා සහ වෙනස් කළ සංවාද මෙහි දිස් වනු ඇත"</string>
@@ -4487,11 +4501,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ටැබ්ලටය පරීක්‍ෂා කිරීමට තට්ටු කරන්න"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"උපාංගය පරීක්‍ෂා කිරීමට තට්ටු කරන්න"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"වේලාව, දැනුම්දීම් සහ වෙනත් තොරතුරු පරීක්‍ෂා කිරීමට, ඔබේ තිරයට දෙවරක් තට්ටු කරන්න."</string>
-    <string name="panic_gesture_screen_title" msgid="2978368688339171290">"ව්‍යාකූල බොත්තම"</string>
-    <string name="panic_gesture_screen_summary" msgid="6560595108396726608">"බල බොත්තම 5 වතාවක් ඉක්මනින් එබීමෙන් හදිසි SOS ක්‍රියා ආරම්භ කරන්න."</string>
-    <string name="panic_gesture_sound_setting_title" msgid="2235527774130891208">"ඇඟවීමේ ශබ්දය"</string>
-    <string name="panic_gesture_sound_setting_summary" msgid="6997197208264987249">"ක්‍රියා ආරම්භ කිරීමට පෙර ඇඟවීම"</string>
-    <string name="panic_gesture_edit_emergency_contact_setting_title" msgid="7791096427878863017">"හදිසි සම්බන්ධතා"</string>
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"හදිසි SOS"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g> මගින් කළමනාකරණය කෙරේ"</string>
+    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"බල බොත්තම 5 වතාවක් ඉක්මනින් එබීමෙන් හදිසි SOS ක්‍රියා ආරම්භ කරන්න."</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"අනතුරු ඇඟවීමේ ශබ්දය"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"ක්‍රියා ආරම්භ කිරීමට පෙර ඇඟවීම"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"දැනුම්දීම් සඳහා ඇඟිලි සලකුණ ස්වයිප් කරන්න"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"ඇඟිලි සලකුණ ස්වයිප් කරන්න"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"ඔබේ දැනුම්දීම් පරීක්ෂා කිරීමට, ඔබේ දුරකථනයේ පිටුපස පැත්තේ ඇති ඇඟිලි සලකුණු සංවේදකය මත පහළට ස්වයිප් කරන්න."</string>
@@ -4839,6 +4853,12 @@
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"SIM ක්‍රියාවිරහිත කරමින්<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"වාහකය අබල කළ නොහැකිය"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"යම් දෙයක් වැරදී ගිය අතර ඔබේ වාහකය අබල කළ නොහැකි විය."</string>
+    <string name="erase_sim_dialog_title" msgid="881253002169177016">"මෙම බාගත් SIM මකන්නද?"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"මෙම SIM මැකීමෙන් මෙම උපාංගයෙන් <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> සේවාව ඉවත් කරයි.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> සඳහා වන සේවාව අවලංගු නොකෙරේ."</string>
+    <string name="erase_sim_confirm_button" msgid="8309115684335320541">"මකන්න"</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"SIM මකමින්…"</string>
+    <string name="erase_sim_fail_title" msgid="2024446702985862427">"SIM මැකිය නොහැක"</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"දෝෂයක් හේතුවෙන් මෙම SIM මැකිය නොහැක.\n\nඔබේ උපාංගය යළි අරඹා නැවත උත්සාහ කරන්න."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"උපාංගයට සම්බන්ධ වන්න"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"<xliff:g id="APPNAME">%1$s</xliff:g> යෙදුමට ඔබේ උපාංගයට සම්බන්ධ වීමට තාවකාලික Wi‑Fi ජාලයක් භාවිත කිරීමට අවශ්‍යය"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"උපාංග කිසිවක් හමු නොවිය. උපාංග සක්‍රීය කර තිබෙන අතර සම්බන්ධ කිරීමට ලද හැකි බව තහවුරු කර ගන්න."</string>
@@ -4968,4 +4988,7 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"ලබා ගත හැකි වාදක නැත"</string>
     <string name="media_controls_apps_title" msgid="9129092193224838008">"ඉඩ දුන් යෙදුම්"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"මාධ්‍ය"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"බ්ලූටූත් ක්‍රියාත්මක වනු ඇත"</string>
+    <string name="bluetooth_setting_on" msgid="4808458394436224124">"ක්‍රියාත්මකයි"</string>
+    <string name="bluetooth_setting_off" msgid="4965493913199554789">"ක්‍රියාවිරහිතයි"</string>
 </resources>

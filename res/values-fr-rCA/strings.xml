@@ -254,8 +254,8 @@
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"Date et heure"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Régler la date et l\'heure"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Configurer la date, l\'heure, le fuseau horaire et les formats"</string>
-    <string name="date_time_auto" msgid="8227898528525208628">"Utiliser la date et l\'heure fournies par le réseau"</string>
-    <string name="zone_auto_title" msgid="4715775349468228598">"Utiliser le fuseau horaire fourni par le réseau"</string>
+    <string name="date_time_auto" msgid="4239202185055225869">"Définir l\'heure automatiquement"</string>
+    <string name="zone_auto_title" msgid="3993580453604839924">"Définir le fuseau horaire automatiquement"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Utiliser les paramètres régionaux par défaut"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"Format 24 heures"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Utiliser le format 24 h"</string>
@@ -321,7 +321,7 @@
     <string name="security_dashboard_summary" msgid="8750183806533140464">"Verrouillage de l\'écran, empreintes digitales"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"Verrouillage de l\'écran"</string>
     <string name="multi_biometric_enroll_title" msgid="3007607723604088374">"Déverr. votre tél. avec votre visage et votre empr. digitale"</string>
-    <string name="multi_biometric_enroll_subtitle" msgid="2900786940599073108">"Connectez-vous à des applications et confirmez vos paiements"</string>
+    <string name="multi_biometric_enroll_subtitle" msgid="8357072842904027301">"Connectez-vous à des applications et confirmez vos paiements"</string>
     <string name="multi_biometric_enroll_setup_with" msgid="421375792889910150">"Configurer le déverrouillage avec :"</string>
     <string name="multi_biometric_enroll_face_unlock_title" msgid="7627564065626355692">"Déverrouill. par reconn. faciale"</string>
     <string name="multi_biometric_enroll_face_unlock_description" msgid="7626442550602926682">"Simplifiez le déverrouillage du téléphone"</string>
@@ -1013,8 +1013,7 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"Adresse MAC de l\'appareil"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"Adresse MAC aléatoire"</string>
-    <!-- no translation found for wifi_advanced_randomized_mac_address_disconnected_title (2755843130417523727) -->
-    <skip />
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"Adresse MAC aléatoire (dernière utilisée)"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"Adresse IP"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"Infos sur le réseau"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Masque de sous-réseau"</string>
@@ -1300,6 +1299,7 @@
     <string name="doze_summary" msgid="8252867381522942804">"Lorsque l\'écran est sombre, il s\'allume en cas de nouvelles notifications"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Toujours affich. heure et données"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Utilisation accrue de la pile"</string>
+    <string name="force_bold_text" msgid="3636373986786504634">"Mettre le texte en gras"</string>
     <string name="title_font_size" msgid="570613010306330622">"Taille de police"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"Agrandissez ou réduisez le texte"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"Paramètres de verrouillage SIM"</string>
@@ -1734,6 +1734,15 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Recherche d\'appareils Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Autoriser les applications et les services à rechercher les appareils à proximité en tout temps, même lorsque le Bluetooth est désactivé. Cette autorisation peut permettre, par exemple, d\'améliorer les fonctionnalités et les services basés sur la localisation."</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Services de localisation pour le travail"</string>
+    <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"Détection du fuseau horaire basée sur la position"</string>
+    <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"Détection du fuseau horaire basée sur la position"</string>
+    <string name="location_time_zone_detection_enabled_description" msgid="1064716900984397624">"Permet d\'utiliser la position de l\'appareil pour détecter le fuseau horaire actuel. D\'autres paramètres de localisation, comme la recherche de réseaux Wi-Fi, peuvent avoir un impact sur la précision de la détection du fuseau horaire."</string>
+    <string name="location_time_zone_detection_on" msgid="5514817179120761597">"Activée"</string>
+    <string name="location_time_zone_detection_off" msgid="192427076195667079">"Désactivée"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="8067073548483627695">"La détection automatique de fuseau horaire est désactivée"</string>
+    <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"La détection du fuseau horaire basée sur la position est désactivée"</string>
+    <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"La détection du fuseau horaire basée sur la position n\'est pas prise en charge"</string>
+    <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Les modifications de la détection du fuseau horaire basée sur la position ne sont pas autorisées"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Localis. via Wi-Fi et réseau mob."</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Autoriser applis à utiliser localisation Google pour estimer position plus rapidement. Infos localisation anonymes envoyées à Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"Position déterminée par le Wi-Fi"</string>
@@ -2213,7 +2222,7 @@
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Temps pour réagir"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Choisissez la durée d\'affichage des messages vous demandant d\'agir, mais qui ne sont visibles que temporairement.\n\nCe ne sont pas toutes les applications qui prennent en charge ce paramètre."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Délai de pression"</string>
-    <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversion des couleurs"</string>
+    <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"l\'inversion des couleurs"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utiliser l\'inversion des couleurs"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"L\'inversion des couleurs assombrit les écrans lumineux.&lt;br/&gt;&lt;br/&gt; Remarque : &lt;ol&gt; &lt;li&amp;gtL\'inversion des couleurs éclaircit aussi les écrans sombres.&lt;/li&gt; &lt;li&gt;Les couleurs changeront dans les éléments multimédias et les images.&lt;/li&gt; &lt;li&gt;Le thème sombre peut être utilisé pour afficher un arrière-plan sombre. Le thème sombre fonctionne avec les applications prises en charge. L\'inversion des couleurs fonctionne avec toutes les applications.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automatique (temps d\'arrêt)"</string>
@@ -2501,6 +2510,8 @@
       <item quantity="other">%1$d applications restreintes</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"Un problème est survenu lors de la lecture du niveau de charge de la pile"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"Un problème est survenu lors de la lecture du niveau de charge de la pile. Touchez pour "<annotation id="url">"en savoir plus"</annotation></string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Arrêter l\'application?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Votre téléphone n\'arrive pas à gérer sa pile normalement, car l\'application <xliff:g id="APP">%1$s</xliff:g> le maintient activé.\n\nPour y remédier, vous pouvez arrêter l\'application.\n\nSi le problème persiste, vous devrez peut-être désinstaller l\'application pour améliorer les performances de la pile."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Votre tablette n\'arrive pas à gérer sa pile normalement, car l\'application <xliff:g id="APP">%1$s</xliff:g> la maintient activée.\n\nPour y remédier, vous pouvez arrêter l\'application.\n\nSi le problème persiste, vous devrez peut-être désinstaller l\'application pour améliorer les performances de la pile."</string>
@@ -3563,8 +3574,11 @@
     <string name="important_conversations" msgid="1233893707189659401">"Conversations prioritaires"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Afficher dans le haut de la section des conversations comme bulles flottantes"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Afficher dans le haut de la section des conversations"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Autres conversations"</string>
+    <string name="other_conversations" msgid="551178916855139870">"Conversations non prioritaires"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversations auxquelles vous avez apporté des modifications"</string>
+    <string name="recent_conversations" msgid="471678228756995274">"Conversations récentes"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"Eff. celles récentes"</string>
+    <string name="clear" msgid="5092178335409471100">"Effacer"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Afficher les conversations prioritaires en bulles"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Les conversations prioritaires s\'affichent dans le haut du volet déroulant. Vous pouvez aussi les configurer pour qu\'elles s\'affichent dans des bulles et interrompent le mode Ne pas déranger."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Les conversations prioritaires et modifiées s\'afficheront ici"</string>
@@ -4487,11 +4501,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Toucher pour vérifier la tablette"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Toucher pour vérifier l\'appareil"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Pour vérifier l\'heure, vos notifications et d\'autres renseignements, touchez l\'écran."</string>
-    <string name="panic_gesture_screen_title" msgid="2978368688339171290">"Bouton de panique"</string>
-    <string name="panic_gesture_screen_summary" msgid="6560595108396726608">"Démarrez les actions de SOS d\'urgence en appuyant rapidement cinq fois sur l\'interrupteur."</string>
-    <string name="panic_gesture_sound_setting_title" msgid="2235527774130891208">"Son d\'avertissement"</string>
-    <string name="panic_gesture_sound_setting_summary" msgid="6997197208264987249">"Émettre une alerte avant de démarrer les actions"</string>
-    <string name="panic_gesture_edit_emergency_contact_setting_title" msgid="7791096427878863017">"Contacts d\'urgence"</string>
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Alerte SOS"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Gestion effectuée par <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Démarrez les actions de SOS d\'urgence en appuyant rapidement cinq fois sur l\'interrupteur."</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"Son d\'avertissement"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Émettre une alerte avant de démarrer les actions"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Balayer le lecteur d\'empreintes pour voir les notifications"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Balayer empreinte digit."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Pour consulter vos notifications, passer votre doigt de haut en bas sur le capteur d\'empreintes digitales à l\'arrière du téléphone."</string>
@@ -4839,6 +4853,12 @@
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Désactivation de la carte SIM en cours<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Impossible de désactiver le fournisseur de services"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Une erreur s\'est produite et le fournisseur de services n\'a pas pu être désactivé."</string>
+    <string name="erase_sim_dialog_title" msgid="881253002169177016">"Effacer ce module SIM téléchargé?"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"Si vous effacez ce module SIM, le service de <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> sera retiré de cet appareil.\n\nLe service de <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> ne sera pas annulé."</string>
+    <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Effacer"</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"Effacement du module SIM en cours…"</string>
+    <string name="erase_sim_fail_title" msgid="2024446702985862427">"Impossible d\'effacer le module SIM"</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"Ce module SIM ne peut pas être effacé en raison d\'une erreur.\n\nRedémarrez votre appareil et réessayez."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Se connecter à l’appareil"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"L\'application <xliff:g id="APPNAME">%1$s</xliff:g> souhaite utiliser un réseau Wi‑Fi temporaire pour se connecter à votre appareil"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Aucun appareil trouvé. Assurez-vous que l\'appareil est allumé et prêt à se connecter."</string>
@@ -4968,4 +4988,7 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"Aucun lecteur n\'a été trouvé"</string>
     <string name="media_controls_apps_title" msgid="9129092193224838008">"Applications autorisées"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"commandes multimédias"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Le Bluetooth sera activé."</string>
+    <string name="bluetooth_setting_on" msgid="4808458394436224124">"Activé"</string>
+    <string name="bluetooth_setting_off" msgid="4965493913199554789">"Désactivé"</string>
 </resources>

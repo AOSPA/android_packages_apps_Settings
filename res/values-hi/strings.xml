@@ -254,8 +254,8 @@
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"तारीख और समय"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"तारीख और समय सेट करें"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"तारीख, समय, समय क्षेत्र और प्रारूप सेट करें"</string>
-    <string name="date_time_auto" msgid="8227898528525208628">"नेटवर्क का दिया हुआ समय इस्तेमाल करें"</string>
-    <string name="zone_auto_title" msgid="4715775349468228598">"नेटवर्क का दिया समय क्षेत्र इस्तेमाल करें"</string>
+    <string name="date_time_auto" msgid="4239202185055225869">"समय अपने-आप सेट हो जाए"</string>
+    <string name="zone_auto_title" msgid="3993580453604839924">"समय क्षेत्र अपने-आप सेट हो जाए"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"डिफ़ॉल्ट जगह का इस्तेमाल करें"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"24‑घंटा प्रारूप"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24-घंटे वाले फ़ॉर्मैट का उपयोग करें"</string>
@@ -321,7 +321,7 @@
     <string name="security_dashboard_summary" msgid="8750183806533140464">"स्क्रीन लॉक, फ़िंगरप्रिंट"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"स्क्रीन लॉक"</string>
     <string name="multi_biometric_enroll_title" msgid="3007607723604088374">"फ़िंगरप्रिंट और चेहरा पहचानने की सुविधा से, सुरक्षित तरीके से फ़ोन को अनलॉक करें"</string>
-    <string name="multi_biometric_enroll_subtitle" msgid="2900786940599073108">"आप ऐप में साइन इन और पैसे चुकाने की पुष्टि भी कर सकते हैं"</string>
+    <string name="multi_biometric_enroll_subtitle" msgid="8357072842904027301">"आप ऐप में साइन इन और पैसे चुकाने की पुष्टि भी कर सकते हैं"</string>
     <string name="multi_biometric_enroll_setup_with" msgid="421375792889910150">"इनसे अनलॉक करने की सुविधा सेट करें:"</string>
     <string name="multi_biometric_enroll_face_unlock_title" msgid="7627564065626355692">"मालिक का चेहरा पहचानकर अनलॉक"</string>
     <string name="multi_biometric_enroll_face_unlock_description" msgid="7626442550602926682">"अपने फ़ोन को अनलॉक करना आसान बनाएं"</string>
@@ -1013,8 +1013,7 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"एसएसआईडी"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"डिवाइस का MAC पता"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"अनियमित चुना गया MAC पता"</string>
-    <!-- no translation found for wifi_advanced_randomized_mac_address_disconnected_title (2755843130417523727) -->
-    <skip />
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"बिना किसी तय नियम के चुना गया मैक पता (पिछली बार इस्तेमाल किया गया)"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"आईपी पता"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"नेटवर्क के बारे में जानकारी"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"सबनेट मास्क"</string>
@@ -1300,6 +1299,7 @@
     <string name="doze_summary" msgid="8252867381522942804">"जब स्क्रीन गहरे रंग की हो, तब यह नई सूचनाओं के लिए चालू हो जाती है"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"समय और जानकारी हमेशा दिखाएं"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"बढ़ा हुआ बैटरी खर्च"</string>
+    <string name="force_bold_text" msgid="3636373986786504634">"टेक्स्ट को बोल्ड करें"</string>
     <string name="title_font_size" msgid="570613010306330622">"फ़ॉन्ट साइज़"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"टेक्स्ट को बड़ा या छोटा करें"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"सिम कार्ड लॉक सेटिंग"</string>
@@ -1734,6 +1734,15 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"ब्‍लूटूथ स्‍कैन करना"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"ऐप्लिकेशन और सेवाओं को किसी भी समय आस-पास के डिवाइस स्कैन करने की मंज़ूरी दें, भले ही ब्लूटूथ बंद हो. इसका इस्तेमाल करके, जगह की जानकारी जैसी सुविधाओं और सेवाओं में सुधार किया जा सकता है."</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"दफ़्तर के लिए, जगह की जानकारी से जुड़ी सेवाएं."</string>
+    <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"जगह के समय क्षेत्र की पहचान करने की सुविधा"</string>
+    <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"जगह के समय क्षेत्र की पहचान करने की सुविधा"</string>
+    <string name="location_time_zone_detection_enabled_description" msgid="1064716900984397624">"मौजूदा समय क्षेत्र की पहचान करने के लिए, डिवाइस की जगह की जानकारी का इस्तेमाल करने देता है. जगह की जानकारी की दूसरी सेटिंग, समय क्षेत्र की सटीक पहचान करने पर असर डाल सकती है. जैसे कि वाई-फ़ाई स्कैन करना."</string>
+    <string name="location_time_zone_detection_on" msgid="5514817179120761597">"चालू है"</string>
+    <string name="location_time_zone_detection_off" msgid="192427076195667079">"बंद है"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="8067073548483627695">"समय क्षेत्र की अपने-आप पहचान करने की सुविधा बंद है"</string>
+    <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"जगह के समय क्षेत्र की पहचान करने की सुविधा बंद है"</string>
+    <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"जगह के समय क्षेत्र की पहचान करने की सुविधा काम नहीं कर रही"</string>
+    <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"जगह के समय क्षेत्र की पहचान करने की सुविधा में, बदलाव करने की अनुमति नहीं है"</string>
     <string name="location_network_based" msgid="5247042890080021887">"वाई-फ़ाई और मोबाइल नेटवर्क जगह"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"आपकी जगह का तेज़ी से अनुमान लगाने के लिए, ऐप को Google की जगह की जानकारी का इस्तेमाल करने दें. अनजान जगह का डेटा इकट्ठा करके Google को भेजा जाएगा."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"यह जगह वाई-फ़ाई ने तय की है"</string>
@@ -2501,6 +2510,8 @@
       <item quantity="other">%1$d ऐप्लिकेशन पर रोक लगाई गई</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"आपके डिवाइस के बैटरी मीटर की रीडिंग लेने में समस्या आ रही है"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"आपके डिवाइस के बैटरी मीटर की रीडिंग लेने में समस्या आ रही है. इस बारे में "<annotation id="url">"ज़्यादा जानने के लिए"</annotation>"टैप करें"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"ऐप्लिकेशन रोकना चाहते हैं?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"आपका फ़ोन बैटरी को सामान्य सामान्य तौर पर प्रबंधित नहीं कर पा रहा है क्योंकि <xliff:g id="APP">%1$s</xliff:g> उसे चालू रख रहा है.\n\nइस समस्या को ठीक करने के लिए, आप ऐप्लिकेशन को रोक सकते हैं.\n\nअगर ऐसा बार-बार हो रहा है, तो बैटरी का प्रदर्शन बेहतर करने के लिए आपको ऐप अनइंस्टॉल करना पड़ सकता है."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"आपका टैबलेट बैटरी को सामान्य सामान्य तौर पर प्रबंधित नहीं कर पा रहा है क्योंकि <xliff:g id="APP">%1$s</xliff:g> उसे चालू रख रहा है.\n\nइस समस्या को ठीक करने के लिए, आप ऐप को रोक सकते हैं.\n\nअगर ऐसा बार-बार हो रहा है, तो बैटरी का प्रदर्शन बेहतर करने के लिए आपको ऐप अनइंस्टॉल करना पड़ सकता है."</string>
@@ -3563,8 +3574,11 @@
     <string name="important_conversations" msgid="1233893707189659401">"अहम बातचीत"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"बातचीत सेक्शन में सबसे ऊपर और फ्लोटिंग बबल्स के तौर पर दिखाएं"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"बातचीत सेक्शन में सबसे ऊपर दिखाएं"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"अन्य बातचीत"</string>
+    <string name="other_conversations" msgid="551178916855139870">"अन्य बातचीत"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"आपने जिन बातचीत में बदलाव किए हैं"</string>
+    <string name="recent_conversations" msgid="471678228756995274">"हाल ही में की गई बातचीत"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"हाल की बातचीत मिटाएं"</string>
+    <string name="clear" msgid="5092178335409471100">"मिटाएं"</string>
     <string name="important_bubble" msgid="7911698275408390846">"अहम बातचीत को बबल करें"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"अहम बातचीत, पुल-डाउन शेड में सबसे ऊपर दिखती हैं. आप इन्हें बबल पर भी सेट कर सकते हैं और \'परेशान न करें\' मोड को रोक सकते हैं."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"यहां ऐसी बातचीत दिखेंगी जो ज़रूरी हैं और जिनमें बदलाव किए गए हैं"</string>
@@ -4487,11 +4501,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"टैबलेट की स्क्रीन पर टैप करके देखें कि सूचना मिली है या नहीं"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"डिवाइस की स्क्रीन पर टैप करके देखें कि सूचना मिली है या नहीं"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"समय, सूचनाएं, और दूसरी जानकारी देखने के लिए फ़ोन की स्क्रीन पर टैप करें."</string>
-    <string name="panic_gesture_screen_title" msgid="2978368688339171290">"खतरे के अलार्म वाला बटन"</string>
-    <string name="panic_gesture_screen_summary" msgid="6560595108396726608">"आपातकालीन स्थिति में जगह की जानकारी शेयर करने के लिए, पावर बटन को पांच बार तेज़ी से दबाएं."</string>
-    <string name="panic_gesture_sound_setting_title" msgid="2235527774130891208">"चेतावनी की आवाज़"</string>
-    <string name="panic_gesture_sound_setting_summary" msgid="6997197208264987249">"आपातकालीन सेवाओं को कॉल करने से पहले चेतावनी जारी करें"</string>
-    <string name="panic_gesture_edit_emergency_contact_setting_title" msgid="7791096427878863017">"आपातकालीन संपर्क"</string>
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"आपातकालीन एसओएस चेतावनी"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g> प्रबंधित करता है"</string>
+    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"आपातकालीन सेवाओं को कॉल करने के लिए, पावर बटन को पांच बार तेज़ी से दबाएं."</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"चेतावनी की आवाज़"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"आपातकालीन सेवाओं को कॉल करने से पहले चेतावनी जारी करें"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"सूचनाओं के लिए फ़िंगरप्रिंट स्वाइप करें"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"फ़िंगरप्रिंट स्वाइप करें"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"अपनी सूचनाएं देखने के लिए, अपने फ़ोन के पीछे फ़िंगरप्रिंट सेंसर पर नीचे की तरफ़ स्वाइप करें."</string>
@@ -4839,6 +4853,12 @@
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"सिम बंद किया जा रहा है<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी का नेटवर्क बंद नहीं किया जा सकता"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"कोई गड़बड़ी हुई, जिसकी वजह से आपकी मोबाइल और इंटरनेट सेवा देने वाली कंपनी का नेटवर्क बंद नहीं किया जा सका."</string>
+    <string name="erase_sim_dialog_title" msgid="881253002169177016">"क्या आप डाउनलोड किए गए इस सिम को हमेशा के लिए मिटाना चाहते हैं?"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"इस सिम को डिवाइस से हमेशा के लिए मिटाने पर, <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> की सेवा हट जाती है.\n\nहालांकि, <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> की सेवा नहीं हटेगी."</string>
+    <string name="erase_sim_confirm_button" msgid="8309115684335320541">"हमेशा के लिए मिटाएं"</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"सिम को हमेशा के लिए मिटाया जा रहा है…"</string>
+    <string name="erase_sim_fail_title" msgid="2024446702985862427">"सिम हमेशा के लिए नहीं मिटाया जा सका"</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"किसी गड़बड़ी की वजह से, इस सिम को हमेशा के लिए नहीं मिटाया जा सका.\n\nडिवाइस को रीस्टार्ट करें और फिर से कोशिश करें."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"डिवाइस से कनेक्ट करें"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"आपके डिवाइस से कनेक्ट होने के लिए, <xliff:g id="APPNAME">%1$s</xliff:g> ऐप्लिकेशन को किसी वाई-फ़ाई नेटवर्क से कुछ समय के लिए जुड़ना होगा"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"कोई डिवाइस नहीं मिला देख लें कि डिवाइस चालू हों और कनेक्ट किए जा सकते हों."</string>
@@ -4968,4 +4988,7 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"कोई मीडिया प्लेयर उपलब्ध नहीं है"</string>
     <string name="media_controls_apps_title" msgid="9129092193224838008">"इन ऐप्लिकेशन को इस्तेमाल करने की अनुमति है"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"मीडिया"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ब्लूटूथ चालू हो जाएगा"</string>
+    <string name="bluetooth_setting_on" msgid="4808458394436224124">"चालू है"</string>
+    <string name="bluetooth_setting_off" msgid="4965493913199554789">"बंद है"</string>
 </resources>

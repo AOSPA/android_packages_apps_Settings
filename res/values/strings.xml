@@ -573,11 +573,10 @@
     <string name="date_and_time_settings_title_setup_wizard">Set date and time</string>
     <!-- Main Settings screen setting option summary text for the item to go into the date and time settings. -->
     <string name="date_and_time_settings_summary">Set date, time, time zone, &amp; formats</string>
-    <!-- Date & time setting screen setting check box title if the date and time should be determined automatically [CHAR LIMIT=100] -->
-    <string name="date_time_auto">Use network-provided time</string>
-    <!-- Date & time setting screen setting option text when Automatic time zone check box is selected (that is, when date and time should be determined automatically)
-        [CHAR LIMIT=100]  -->
-    <string name="zone_auto_title">Use network-provided time zone</string>
+    <!-- Date & time setting screen setting switch title: whether the system clock (UTC time) should be determined automatically [CHAR LIMIT=100] -->
+    <string name="date_time_auto">Set time automatically</string>
+    <!-- Date & time setting screen setting switch title: whether the time zone should be determined automatically [CHAR LIMIT=100]  -->
+    <string name="zone_auto_title">Set time zone automatically</string>
     <!-- Date & time setting screen setting option summary text for the automatic 24 hour setting checkbox [CHAR LIMIT=100] -->
     <string name="date_time_24hour_auto">Use locale default</string>
     <!-- Date & time setting screen setting check box title [CHAR LIMIT=30] -->
@@ -717,7 +716,7 @@
     <!-- Introduction title shown in biometric enrollment screen for devices that have both fingerprint and face. [CHAR LIMIT=60] -->
     <string name="multi_biometric_enroll_title">Unlock your phone securely with your face and fingerprint</string>
     <!-- Introduction subtitle shown in the biometric enrollment screen. [CHAR LIMIT=60] -->
-    <string name="multi_biometric_enroll_subtitle">You can also sign in to apps and confirm payment</string>
+    <string name="multi_biometric_enroll_subtitle">You can also sign in to apps and confirm payments</string>
     <!-- Section description preceding the biometric sensors available for the user to select for enrollment. [CHAR LIMIT=40] -->
     <string name="multi_biometric_enroll_setup_with">Set up unlock with:</string>
     <!-- Title for a preference containing a checkbox which if selected will allow the user to proceed to set up face unlock. [CHAR LIMIT=32] -->
@@ -2280,7 +2279,7 @@
     <string name="wifi_advanced_device_mac_address_title">Device MAC address</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to show the randomized Wi-Fi MAC address. [CHAR LIMIT=50] -->
     <string name="wifi_advanced_randomized_mac_address_title">Randomized MAC address</string>
-    <!-- Wi-Fi settings screen, advanced, title of the item to show the randomized Wi-Fi MAC address when disconnected. [CHAR LIMIT=50] -->
+    <!-- Wi-Fi settings screen, advanced, title of the item to show the randomized Wi-Fi MAC address when disconnected. [CHAR LIMIT=69] -->
     <string name="wifi_advanced_randomized_mac_address_disconnected_title">Randomized MAC address (last used)</string>
     <!-- Title of the screen to adjust IP settings -->
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's current IP address. -->
@@ -4050,6 +4049,32 @@
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for location services for managed profile -->
     <string name="managed_profile_location_services">Location services for work</string>
 
+    <!-- [CHAR LIMIT=60] Location settings screen, screen title -->
+    <string name="location_time_zone_detection_screen_title">Location time zone detection</string>
+    <!-- [CHAR LIMIT=50] Location settings screen, title for the setting that control whether the
+         device can use its location for time zone detection. -->
+    <string name="location_time_zone_detection_enabled_title">Location time zone detection</string>
+    <!-- [CHAR LIMIT=NONE] Preference description text for location time zone detection -->
+    <string name="location_time_zone_detection_enabled_description">Allows the device\u2019s location to be used to detect the current time zone. Other location settings such as Wi\u2011Fi scanning can affect the accuracy of time zone detection.</string>
+
+    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is on -->
+    <string name="location_time_zone_detection_on">On</string>
+    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is off -->
+    <string name="location_time_zone_detection_off">Off</string>
+    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
+         applicable due to other settings like the "automatic time zone detection enabled" setting
+         being set to "off". -->
+    <string name="location_time_zone_detection_auto_is_off">Automatic time zone detection is disabled</string>
+    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
+         applicable for the user for unspecified reasons. More specific messages are used when there
+         is a clear reason. -->
+    <string name="location_time_zone_detection_not_applicable">Location time zone detection is disabled</string>
+    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not supported -->
+    <string name="location_time_zone_detection_not_supported">Location time zone detection is not supported</string>
+    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
+         allowed for the user, e.g. because of device policy -->
+    <string name="location_time_zone_detection_not_allowed">Location time zone detection changes are not allowed</string>
+
     <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for Google location service (cell ID, wifi, etc.) -->
     <string name="location_network_based">Wi\u2011Fi &amp; mobile network location</string>
     <!-- [CHAR LIMIT=130] Security & location settings screen, setting summary for Google location service check box-->
@@ -5287,6 +5312,18 @@
     <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
     <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
 
+    <!-- TODO(b/170970602): remove translatable=false when RBC has official name and strings -->
+    <!-- Title for the accessibility preference to configure Reduce Bright Colors feature. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_title" translatable="false">Reduce Bright Colors</string>
+    <!-- Used in the accessibility service settings to control switching Reduce Bright Colors on/off. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_switch_title" translatable="false">Use Reduce Bright Colors</string>
+    <!-- Subtitle that describes Reduce Bright Colors. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_subtitle" translatable="false">Reduce Bright Colors reduces screen brightness.</string>
+    <!-- Title for setting the brightness intensity of the display using Reduce Bright Colors. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_intensity_preference_title" translatable="false">Intensity</string>
+    <!-- Title for setting whether the Reduce Bright Colors activation state persists across reboots. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_persist_preference_title" translatable="false">Keeps feature on after a restart</string>
+
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay">
         <item quantity="one">Short (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
@@ -5825,6 +5862,11 @@
 
     <!-- Title to display the battery percentage. [CHAR LIMIT=24] -->
     <string name="battery_header_title_alternate"><xliff:g id="number" example="88">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="%">%</xliff:g></font></small></string>
+
+    <!-- Summary for top level battery tile if battery is not present. [CHAR LIMIT=NONE] -->
+    <string name="battery_missing_message">Problem reading your battery meter</string>
+    <!-- Summary to battery page if battery is not present. [CHAR LIMIT=NONE] -->
+    <string name="battery_missing_help_message">Problem reading your battery meter. Tap to <annotation id="url">learn more</annotation></string>
 
     <!-- Title for force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_title">Stop app?</string>
@@ -7338,6 +7380,8 @@
     <string name="help_uri_sim_combination_warning" translatable="false"></string>
     <!-- url for the NFC and payment settings page -->
     <string name="help_uri_nfc_and_payment_settings" translatable="false"></string>
+    <!-- url for battery page if battery is not present -->
+    <string name="help_url_battery_missing" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -8266,6 +8310,12 @@
     <string name="asst_feedback_indicator_summary">Indicate adjustments made to notifications and show the option to provide feedback to the system</string>
 
     <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
+    <string name="asst_importance_reset_title">Reset notification importance</string>
+
+    <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
+    <string name="asst_importance_reset_summary">Reset user changed importance settings and allow notification assistant to prioritize</string>
+
+    <!-- Configure Notifications: setting title [CHAR LIMIT=80] -->
     <string name="asst_capabilities_actions_replies_title">Suggested actions and replies</string>
 
     <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
@@ -8550,10 +8600,19 @@
     <string name="important_conversations_summary">Show at top of conversation section</string>
 
     <!-- [CHAR LIMIT=100] preference category title -->
-    <string name="other_conversations">Other conversations</string>
+    <string name="other_conversations">Non-priority conversations</string>
 
     <!-- summary for other conversations list -->
     <string name="other_conversations_summary">Conversations you\u2019ve made changes to</string>
+
+    <!-- [CHAR LIMIT=100] preference category title -->
+    <string name="recent_conversations">Recent conversations</string>
+
+    <!-- [CHAR LIMIT=20] button title -->
+    <string name="conversation_settings_clear_recents">Clear recents</string>
+
+    <!-- a11y string -->
+    <string name="clear">Clear</string>
 
     <!-- [CHAR LIMIT=100] Setting to automatically bubble all notifications from favorite conversations -->
     <string name="important_bubble">Bubble priority conversations</string>
@@ -11048,16 +11107,19 @@
     <string name="ambient_display_tap_screen_summary">To check time, notifications, and other info, tap your screen.</string>
 
     <!-- Preference title to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
-    <string name="panic_gesture_screen_title">Panic button</string>
+    <string name="emergency_gesture_screen_title">Emergency SOS</string>
+
+    <!-- Preference title to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
+    <string name="emergency_gesture_entrypoint_summary">Managed by <xliff:g id="app_name" example="Emergency Info">%1$s</xliff:g></string>
 
     <!-- Preference summary to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=NONE]-->
-    <string name="panic_gesture_screen_summary">Start the emergency SOS actions by pressing the power button quickly 5 times.</string>
+    <string name="emergency_gesture_screen_summary">Start the emergency SOS actions by pressing the power button quickly 5 times.</string>
 
     <!-- Preference title to enable generating noisy sound before calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
-    <string name="panic_gesture_sound_setting_title">Warning sound</string>
+    <string name="emergency_gesture_sound_setting_title">Warning sound</string>
 
     <!-- Preference summary to enable generating noisy sound before calling emergency services at panic/distress moments[CHAR_LIMIT=NONE]-->
-    <string name="panic_gesture_sound_setting_summary">Alert before starting the actions</string>
+    <string name="emergency_gesture_sound_setting_summary">Alert before starting the actions</string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
@@ -11478,7 +11540,7 @@
     <!-- Title for default disabled app compat changes category [CHAR LIMIT=50] -->
     <string name="platform_compat_default_disabled_title">Default disabled changes</string>
     <!-- Title for target SDK gated app compat changes category (do not translate 'targetSdkVersion') [CHAR LIMIT=50] -->
-    <string name="platform_compat_target_sdk_title">Enabled for targetSdkVersion &gt; <xliff:g id="number" example="29">%d</xliff:g></string>
+    <string name="platform_compat_target_sdk_title">Enabled for targetSdkVersion &gt;= <xliff:g id="number" example="29">%d</xliff:g></string>
     <!-- Title for the dialog shown when no debuggable apps are available [CHAR LIMIT=30] -->
     <string name="platform_compat_dialog_title_no_apps">No apps available</string>
     <!-- Explanatory text shown when no debuggable apps are available [CHAR LIMIT=NONE] -->
@@ -12387,4 +12449,32 @@
 
     <!-- Summary for see all preference when bluetooth is disable [CHAR LIMIT=none]-->
     <string name="connected_device_see_all_summary">Bluetooth will turn on</string>
+
+    <!-- Switch text for bluetooth feature being on [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_setting_on">On</string>
+    <!-- Switch text for bluetooth feature being off [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_setting_off">Off</string>
+
+    <!-- Provider Model: Internet controls settings screen, item title to go into the networks settings -->
+    <string name="provider_internet_settings">Internet</string>
+    <!-- Provider Model: SIMs controls settings screen, item title to go into the SIMs settings -->
+    <string name="provider_network_settings_title">SIMs</string>
+    <!-- Provider Model: Airplane-safe networks controls settings screen -->
+    <string name="airplane_safe_networks">Airplane-safe networks</string>
+    <!-- Provider Model: Summary for airplane-safe networks -->
+    <string name="airplane_safe_networks_summary">Find and connect to airplane\u2011safe networks</string>
+    <!-- Provider Model: List of synonyms for the airplane-safe networks, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_airplane_safe_networks">airplane, airplane-safe</string>
+    <!-- Provider Model: Calls and SMS controllers settings screen, item title to go into the Calls and SMS settings -->
+    <string name="calls_and_sms">Calls &amp; SMS</string>
+    <!-- Provider Model: Name for call settings category [CHAR LIMIT=NONE] -->
+    <string name="calls_and_sms_category">Wi\u2011Fi Calling</string>
+    <!-- Provider Model: Summary for calling preference -->
+    <string name="calls_sms_wfc_summary">Make and receive calls over non-carrier networks like Wi\u2011Fi</string>
+    <!-- Provider Model: Label for footnote on calling preference -->
+    <string name="calls_sms_footnote">Wi-Fi calling allows you to make and receive calls over non-carrier networks such as some Wi\u2011Fi networks.\n\nCross-SIM calling allows you to leverage the mobile data of a SIM to make and receive calls from another SIM.</string>
+    <!-- Provider Model: Calls preference title -->
+    <string name="calls_preference_title">Calls</string>
+    <!-- Provider Model: SMS preference title -->
+    <string name="sms_preference_title">SMS</string>
 </resources>

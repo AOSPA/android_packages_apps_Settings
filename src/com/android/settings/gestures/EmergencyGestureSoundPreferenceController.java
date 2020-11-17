@@ -27,22 +27,22 @@ import com.android.settings.core.TogglePreferenceController;
 /**
  * Preference controller for emergency sos gesture setting
  */
-public class PanicGestureSoundPreferenceController extends TogglePreferenceController {
+public class EmergencyGestureSoundPreferenceController extends TogglePreferenceController {
 
     @VisibleForTesting
     static final int ON = 1;
     @VisibleForTesting
     static final int OFF = 0;
 
-    private static final String SECURE_KEY = Settings.Secure.PANIC_SOUND_ENABLED;
+    private static final String SECURE_KEY = Settings.Secure.EMERGENCY_GESTURE_SOUND_ENABLED;
 
-    public PanicGestureSoundPreferenceController(Context context, String key) {
+    public EmergencyGestureSoundPreferenceController(Context context, String key) {
         super(context, key);
     }
 
     private static boolean isGestureAvailable(Context context) {
         return context.getResources()
-                .getBoolean(R.bool.config_show_panic_gesture_settings);
+                .getBoolean(R.bool.config_show_emergency_gesture_settings);
     }
 
     @Override

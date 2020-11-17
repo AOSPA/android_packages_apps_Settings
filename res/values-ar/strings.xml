@@ -262,8 +262,8 @@
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"التاريخ والوقت"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"تعيين التاريخ والوقت"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"تعيين التاريخ والوقت والمنطقة الزمنية والتنسيقات"</string>
-    <string name="date_time_auto" msgid="8227898528525208628">"استخدام وقت الشبكة"</string>
-    <string name="zone_auto_title" msgid="4715775349468228598">"استخدام المنطقة الزمنية للشبكة"</string>
+    <string name="date_time_auto" msgid="4239202185055225869">"ضبط الوقت تلقائيًا"</string>
+    <string name="zone_auto_title" msgid="3993580453604839924">"ضبط المنطقة الزمنية تلقائيًا"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"استخدام التنسيق التلقائي المحلي"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"تنسيق ٢٤ ساعة"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"استخدام تنسيق ٢٤ ساعة"</string>
@@ -333,7 +333,7 @@
     <string name="security_dashboard_summary" msgid="8750183806533140464">"قفل الشاشة، بصمة الإصبع"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"قفل الشاشة"</string>
     <string name="multi_biometric_enroll_title" msgid="3007607723604088374">"فتح قفل هاتفك بأمان باستخدام وجهك وبصمة إصبعك"</string>
-    <string name="multi_biometric_enroll_subtitle" msgid="2900786940599073108">"يمكنك أيضًا تسجيل الدخول إلى التطبيقات وتأكيد الدفع"</string>
+    <string name="multi_biometric_enroll_subtitle" msgid="8357072842904027301">"يمكنك أيضًا تسجيل الدخول إلى التطبيقات وتأكيد الدفعات"</string>
     <string name="multi_biometric_enroll_setup_with" msgid="421375792889910150">"إعداد فتح القفل باستخدام:"</string>
     <string name="multi_biometric_enroll_face_unlock_title" msgid="7627564065626355692">"فتح القفل بالوجه"</string>
     <string name="multi_biometric_enroll_face_unlock_description" msgid="7626442550602926682">"تسهيل عملية فتح قفل الهاتف"</string>
@@ -1093,8 +1093,7 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"‏عنوان MAC للجهاز"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"‏عنوان MAC العشوائي"</string>
-    <!-- no translation found for wifi_advanced_randomized_mac_address_disconnected_title (2755843130417523727) -->
-    <skip />
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"‏عنوان MAC عشوائي (آخر استخدام)"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"‏عنوان IP"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"تفاصيل الشبكة"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"قناع الشبكة الفرعية"</string>
@@ -1380,6 +1379,7 @@
     <string name="doze_summary" msgid="8252867381522942804">"عندما تكون الشاشة داكنة، ستُضاء لعرض الإشعارات الجديدة."</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"إظهار الوقت والمعلومات دائمًا"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"يزيد استخدام البطارية"</string>
+    <string name="force_bold_text" msgid="3636373986786504634">"نص غامق"</string>
     <string name="title_font_size" msgid="570613010306330622">"حجم الخط"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"يمكنك تكبير النص أو تصغيره."</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"‏إعدادات قفل شريحة SIM"</string>
@@ -1822,6 +1822,15 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"البحث عن بلوتوث"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"يمكنك السماح للتطبيقات والخدمات بالبحث عن الأجهزة المجاورة في أي وقت، حتى في حال إيقاف البلوتوث. ويمكن استخدام هذه البيانات مثلاً لتحسين الميزات والخدمات المستندة إلى الموقع الجغرافي."</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"خدمات الموقع الجغرافي للعمل"</string>
+    <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"رصد المنطقة الزمنية للموقع الجغرافي"</string>
+    <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"رصد المنطقة الزمنية للموقع الجغرافي"</string>
+    <string name="location_time_zone_detection_enabled_description" msgid="1064716900984397624">"‏تسمح الميزة باستخدام الموقع الجغرافي للجهاز لرصد المنطقة الزمنية الحالية. يمكن أن تتأثر دقة رصد المنطقة الزمنية بإعدادات الموقع الجغرافي الأخرى، مثلاً \"البحث عن شبكات Wi-Fi\"."</string>
+    <string name="location_time_zone_detection_on" msgid="5514817179120761597">"الميزة مفعّلة"</string>
+    <string name="location_time_zone_detection_off" msgid="192427076195667079">"الميزة غير مفعّلة"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="8067073548483627695">"تم إيقاف الرصد التلقائي للمنطقة الزمنية"</string>
+    <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"تم إيقاف ميزة رصد المنطقة الزمنية للموقع الجغرافي"</string>
+    <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"ميزة رصد المنطقة الزمنية للموقع الجغرافي غير متاحة."</string>
+    <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"غير مسموح بتغييرات رصد المنطقة الزمنية للموقع الجغرافي."</string>
     <string name="location_network_based" msgid="5247042890080021887">"‏شبكة Wi-Fi وموقع شبكة الجوّال"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"‏دع التطبيقات تستخدم خدمة الموقع من Google لتقييم موقعك بشكل أسرع. سيتم جمع بيانات الموقع غير محددة الهوية وإرسالها إلى Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"‏الموقع الذي تم تحديده بواسطة Wi-Fi"</string>
@@ -2653,6 +2662,8 @@
       <item quantity="one">‏تم تقييد تطبيق واحد (%1$d)</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"حدثت مشكلة أثناء قراءة مقياس مستوى شحن البطارية."</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"حدثت مشكلة أثناء قراءة مقياس مستوى شحن البطارية. انقر "<annotation id="url">"لمعرفة مزيد من المعلومات"</annotation>"."</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"هل تريد إيقاف التطبيق؟"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"لا يستطيع هاتفك إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP">%1$s</xliff:g> يبقي هاتفك نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف التطبيق.\n\nإذا استمر حدوث هذا الأمر، يمكنك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"لا يستطيع جهازك اللوحي إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP">%1$s</xliff:g> يبقي جهازك اللوحي نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف التطبيق.\n\nإذا استمر حدوث هذا الأمر، يمكنك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
@@ -3743,8 +3754,11 @@
     <string name="important_conversations" msgid="1233893707189659401">"المحادثات ذات الأولوية"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"تظهر في أعلى قسم المحادثات في شكل فقاعات عائمة."</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"تظهر في أعلى قسم المحادثات."</string>
-    <string name="other_conversations" msgid="7218658664423361043">"المحادثات الأخرى"</string>
+    <string name="other_conversations" msgid="551178916855139870">"المحادثات غير ذات الأولوية"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"المحادثات التي أجريت تغييرات عليها"</string>
+    <string name="recent_conversations" msgid="471678228756995274">"المحادثات الأخيرة"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"محو العناصر الحديثة"</string>
+    <string name="clear" msgid="5092178335409471100">"محو"</string>
     <string name="important_bubble" msgid="7911698275408390846">"تظهر المحادثات ذات الأولوية كفقاعات"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"تظهر المحادثات ذات الأولوية في أعلى مركز الإشعارات المنسدل. يمكنك أيضًا ضبطها لتظهر كفقاعات ولا تتقيّد بميزة \"عدم الإزعاج\"."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"ستظهر هنا المحادثات ذات الأولوية والمُعدَّلة."</string>
@@ -3765,7 +3779,7 @@
     <string name="allow_interruption_summary" msgid="9044131663518112543">"السماح للتطبيق بإصدار صوت و/أو اهتزاز و/أو عرض إشعارات منبثقة على الشاشة"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"الأولوية"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"تظهر في أعلى قسم المحادثات وتظهر كفقاعة عائمة وتعرض صورة الملف الشخصي على شاشة القفل"</string>
-    <string name="convo_not_supported_summary" msgid="4285471045268268048">"لا يدعم تطبيق <xliff:g id="APP_NAME">%1$s</xliff:g> معظم ميزات المحادثات. لا يمكنك ضبط محادثة كأولوية ولن تظهر المحادثات كفقاعات عائمة."</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"لا يدعم تطبيق \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" معظم ميزات المحادثات. لا يمكنك ضبط محادثة كأولوية ولن تظهر المحادثات كفقاعات عائمة."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"في الظل المنسدل، يمكنك تصغير الإشعارات إلى سطر واحد."</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"بدون صوت أو اهتزاز"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"بدون صوت أو اهتزاز وتظهر في موضع أسفل في قسم المحادثات"</string>
@@ -3775,7 +3789,7 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"يتم عرض هذه الإشعارات أسفل الإشعارات ذات الأولوية. كتم الصوت دائمًا."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"يتم عرض هذه الإشعارات أسفل الإشعارات ذات الأولوية. كتم الصوت دائمًا."</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"جميع إشعارات \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
-    <string name="notification_app_switch_label" msgid="4422902423925084193">"جميع إشعارات <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"جميع إشعارات \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"الإشعارات التكيّفية"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="zero"><xliff:g id="NUMBER_1">%d</xliff:g> إشعار تقريبًا في اليوم</item>
@@ -4779,11 +4793,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"النقر لفحص الجهاز اللوحي"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"النقر لفحص الجهاز"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"للاطّلاع على الوقت والإشعارات والمعلومات الأخرى، انقر على شاشتك."</string>
-    <string name="panic_gesture_screen_title" msgid="2978368688339171290">"زر الطوارئ"</string>
-    <string name="panic_gesture_screen_summary" msgid="6560595108396726608">"يمكنك بدء إجراءات حالات الطوارئ عن طريق الضغط بسرعة على زر التشغيل 5 مرات."</string>
-    <string name="panic_gesture_sound_setting_title" msgid="2235527774130891208">"صوت تحذير"</string>
-    <string name="panic_gesture_sound_setting_summary" msgid="6997197208264987249">"التنبيه قبل بدء الإجراءات"</string>
-    <string name="panic_gesture_edit_emergency_contact_setting_title" msgid="7791096427878863017">"جهات الاتصال في حالات الطوارئ"</string>
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"‏تنبيه SOS في حالة طوارئ"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"تحت إدارة <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"يمكنك بدء إجراءات حالات الطوارئ عن طريق الضغط بسرعة على زر التشغيل 5 مرات."</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"صوت تحذير"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"التنبيه قبل بدء الإجراءات"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"تمرير بصمة الإصبع لعرض الإشعارات"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"تمرير بصمة الإصبع"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"للاطّلاع على الإشعارات، مرِّر إصبعك للأسفل على زر استشعار بصمات الإصبع في الجزء الخلفي لهاتفك."</string>
@@ -5163,6 +5177,12 @@
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"‏جارٍ إيقاف شريحة SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"يتعذّر إيقاف مشغِّل شبكة الجوّال"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"حدث خطأ ما أدى إلى تعذُّر إيقاف مشغِّل شبكة الجوّال."</string>
+    <string name="erase_sim_dialog_title" msgid="881253002169177016">"‏هل تريد محو بيانات شريحة SIM هذه التي تم تنزيلها؟"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"‏سيؤدي محو بيانات شريحة SIM هذه إلى إزالة خدمة <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> من هذا الجهاز.\n\nولن يتم إلغاء خدمة <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>."</string>
+    <string name="erase_sim_confirm_button" msgid="8309115684335320541">"محو البيانات"</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"‏جارٍ محو بيانات شريحة SIM…"</string>
+    <string name="erase_sim_fail_title" msgid="2024446702985862427">"‏يتعذّر محو بيانات شريحة SIM."</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"‏يتعذّر محو بيانات شريحة SIM هذه بسبب حدوث خطأ.\n\nيمكنك إعادة تشغيل الجهاز والمحاولة مرة أخرى."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"الاتصال بالجهاز"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"‏يريد تطبيق <xliff:g id="APPNAME">%1$s</xliff:g> استخدام شبكة Wi‑Fi مؤقتة للاتصال بجهازك."</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"لم يتمّ العثور على أيّ أجهزة. تأكَّد من تشغيل الأجهزة وتوفّرها للاتصال."</string>
@@ -5300,4 +5320,7 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"ما مِن مشغِّلات متاحة"</string>
     <string name="media_controls_apps_title" msgid="9129092193224838008">"التطبيقات المسموح بها"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"الوسائط"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"سيتم تفعيل البلوتوث."</string>
+    <string name="bluetooth_setting_on" msgid="4808458394436224124">"مفعّلة"</string>
+    <string name="bluetooth_setting_off" msgid="4965493913199554789">"غير مفعّلة"</string>
 </resources>

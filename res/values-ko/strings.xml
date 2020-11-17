@@ -254,8 +254,8 @@
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"날짜 및 시간"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"날짜 및 시간 설정"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"날짜, 시간, 표준시간대 및 형식 설정"</string>
-    <string name="date_time_auto" msgid="8227898528525208628">"네트워크 시간 사용"</string>
-    <string name="zone_auto_title" msgid="4715775349468228598">"네트워크 시간대 사용"</string>
+    <string name="date_time_auto" msgid="4239202185055225869">"자동으로 시간 설정"</string>
+    <string name="zone_auto_title" msgid="3993580453604839924">"자동으로 시간대 설정"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"언어 기본값 사용"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"24시간 형식"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24시간 형식 사용"</string>
@@ -321,7 +321,7 @@
     <string name="security_dashboard_summary" msgid="8750183806533140464">"화면 잠금, 지문"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"화면 잠금"</string>
     <string name="multi_biometric_enroll_title" msgid="3007607723604088374">"얼굴과 지문으로 안전하게 휴대전화를 잠금 해제하세요"</string>
-    <string name="multi_biometric_enroll_subtitle" msgid="2900786940599073108">"앱에 로그인하여 결제를 확인하는 방법도 있습니다."</string>
+    <string name="multi_biometric_enroll_subtitle" msgid="8357072842904027301">"앱에 로그인하여 결제를 확인하는 방법도 있습니다."</string>
     <string name="multi_biometric_enroll_setup_with" msgid="421375792889910150">"설정할 잠금 해제 수단:"</string>
     <string name="multi_biometric_enroll_face_unlock_title" msgid="7627564065626355692">"얼굴인식 잠금해제"</string>
     <string name="multi_biometric_enroll_face_unlock_description" msgid="7626442550602926682">"더욱 간편하게 휴대전화를 잠금 해제하세요"</string>
@@ -1013,8 +1013,7 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"기기 MAC 주소"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"무작위 MAC 주소"</string>
-    <!-- no translation found for wifi_advanced_randomized_mac_address_disconnected_title (2755843130417523727) -->
-    <skip />
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"무작위 MAC 주소(마지막으로 사용됨)"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"IP 주소"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"네트워크 세부정보"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"서브넷 마스크"</string>
@@ -1300,6 +1299,7 @@
     <string name="doze_summary" msgid="8252867381522942804">"화면을 어둡게 설정한 경우 새 알림이 오면 절전 모드 자동 해제 기능을 사용 설정합니다."</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"시간 및 정보 항상 표시"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"배터리 사용량 증가"</string>
+    <string name="force_bold_text" msgid="3636373986786504634">"텍스트 굵게 표시"</string>
     <string name="title_font_size" msgid="570613010306330622">"글꼴 크기"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"텍스트를 확대 또는 축소"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"SIM 카드 잠금 설정"</string>
@@ -1734,6 +1734,15 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"블루투스 검색"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"블루투스가 꺼져 있을 때도 항상 앱과 서비스에서 주변 기기를 검색하도록 허용합니다. 이 설정은 위치 기반 기능 및 서비스 개선 등에 사용될 수 있습니다."</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"업무용 위치 서비스"</string>
+    <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"위치 시간대 감지"</string>
+    <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"위치 시간대 감지"</string>
+    <string name="location_time_zone_detection_enabled_description" msgid="1064716900984397624">"현재 시간대를 감지하기 위하여 기기 위치를 사용할 수 있도록 허용합니다. Wi-Fi 검색과 같은 다른 위치 설정이 시간대 감지의 정확도에 영향을 줄 수 있습니다."</string>
+    <string name="location_time_zone_detection_on" msgid="5514817179120761597">"사용"</string>
+    <string name="location_time_zone_detection_off" msgid="192427076195667079">"사용 안함"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="8067073548483627695">"시간대 자동 감지가 사용 중지됩니다."</string>
+    <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"위치 시간대 감지가 사용 중지됩니다."</string>
+    <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"위치 시간대 감지가 지원되지 않습니다."</string>
+    <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"위치 시간대 감지 변경이 허용되지 않습니다."</string>
     <string name="location_network_based" msgid="5247042890080021887">"Wi-Fi 및 모바일 네트워크 위치"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"사용자의 위치를 빠르게 파악하도록 앱에서 Google의 위치 서비스를 사용합니다. 익명의 위치 정보가 수집되어 Google로 전송됩니다."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"Wi-Fi에서 측정된 위치"</string>
@@ -2501,6 +2510,8 @@
       <item quantity="one">앱 %1$d개가 제한됨</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"배터리 수준을 읽는 중에 문제가 발생함"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"배터리 수준을 읽는 중에 문제가 발생했습니다. 탭하여 "<annotation id="url">"자세히 알아보세요"</annotation>"."</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"앱을 종료하시겠습니까?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"<xliff:g id="APP">%1$s</xliff:g>에서 휴대전화를 작동 상태로 유지하고 있어 휴대전화에서 배터리를 정상적으로 관리할 수 없습니다.\n\n문제를 해결하려면 앱을 종료하세요.\n\n문제가 계속되는 경우 앱을 제거하고 배터리 성능을 개선해야 할 수도 있습니다."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"<xliff:g id="APP">%1$s</xliff:g>에서 태블릿을 작동 상태로 유지하고 있어 태블릿에서 배터리를 정상적으로 관리할 수 없습니다.\n\n문제를 해결하려면 앱을 종료하세요.\n\n문제가 계속되는 경우 앱을 제거하고 배터리 성능을 개선해야 할 수도 있습니다."</string>
@@ -3563,8 +3574,11 @@
     <string name="important_conversations" msgid="1233893707189659401">"우선순위 대화"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"대화 섹션 상단에 플로팅 대화창으로 표시"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"대화 섹션의 상단에 표시"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"기타 대화"</string>
+    <string name="other_conversations" msgid="551178916855139870">"우선순위가 아닌 대화"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"변경한 대화"</string>
+    <string name="recent_conversations" msgid="471678228756995274">"최근 대화"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"최근 항목 삭제"</string>
+    <string name="clear" msgid="5092178335409471100">"삭제"</string>
     <string name="important_bubble" msgid="7911698275408390846">"우선순위 대화를 버블로 설정"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"우선순위 대화는 풀다운 창 상단에 표시됩니다. 버블로 설정하여 방해 금지 모드를 무시하도록 할 수도 있습니다."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"우선순위 대화 및 수정된 대화가 여기에 표시됩니다"</string>
@@ -4487,11 +4501,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"탭하여 태블릿 확인"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"탭하여 기기 확인"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"시간, 알림, 기타 정보를 확인하려면 화면을 탭하세요."</string>
-    <string name="panic_gesture_screen_title" msgid="2978368688339171290">"긴급 버튼"</string>
-    <string name="panic_gesture_screen_summary" msgid="6560595108396726608">"전원 버튼을 빠르게 5회 누르면 긴급 SOS 기능이 실행됩니다."</string>
-    <string name="panic_gesture_sound_setting_title" msgid="2235527774130891208">"알림 사운드"</string>
-    <string name="panic_gesture_sound_setting_summary" msgid="6997197208264987249">"긴급 SOS 기능 실행 전에 알립니다."</string>
-    <string name="panic_gesture_edit_emergency_contact_setting_title" msgid="7791096427878863017">"비상 연락처"</string>
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"응급 SOS"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"관리자: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"전원 버튼을 빠르게 5회 누르면 긴급 SOS 기능이 실행됩니다."</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"경고음"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"긴급 SOS 기능 실행 전에 알립니다."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"지문을 스와이프하여 알림 보기"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"지문 스와이프"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"알림을 확인하려면 휴대전화 뒷면의 지문 센서에서 아래로 스와이프합니다."</string>
@@ -4839,6 +4853,12 @@
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"SIM을 사용 중지하는 중<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"이동통신사를 사용 중지할 수 없음"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"문제가 발생하여 이동통신사를 사용 중지하지 못했습니다."</string>
+    <string name="erase_sim_dialog_title" msgid="881253002169177016">"다운로드한 SIM을 삭제하시겠습니까?"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"이 SIM을 삭제하면 기기에서 <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> 서비스가 삭제됩니다.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> 서비스는 취소되지 않습니다."</string>
+    <string name="erase_sim_confirm_button" msgid="8309115684335320541">"삭제"</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"SIM 삭제 중…"</string>
+    <string name="erase_sim_fail_title" msgid="2024446702985862427">"SIM을 삭제할 수 없음"</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"오류로 인해 SIM을 삭제할 수 없습니다.\n\n기기를 다시 시작하고 다시 시도해 보세요."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"기기에 연결"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"<xliff:g id="APPNAME">%1$s</xliff:g> 앱에서 임시 Wi‑Fi 네트워크를 사용하여 기기에 연결하려고 합니다."</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"기기가 없습니다. 기기가 켜져 있으며 연결 가능한지 확인하세요."</string>
@@ -4968,4 +4988,7 @@
     <string name="media_controls_no_players" msgid="3493023121892175946">"사용 가능한 플레이어가 없습니다."</string>
     <string name="media_controls_apps_title" msgid="9129092193224838008">"허용되는 앱"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"미디어"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"블루투스를 사용 설정함"</string>
+    <string name="bluetooth_setting_on" msgid="4808458394436224124">"사용"</string>
+    <string name="bluetooth_setting_off" msgid="4965493913199554789">"사용 안함"</string>
 </resources>
