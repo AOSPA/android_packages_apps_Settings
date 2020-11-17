@@ -23,8 +23,7 @@
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
     android:gravity="center_vertical"
-    android:minHeight="?android:attr/listPreferredItemHeightSmall"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
+    android:minHeight="?android:attr/listPreferredItemHeightSmall">
 
     <LinearLayout
         android:id="@android:id/widget_frame"
@@ -59,7 +58,8 @@
         android:layout_weight="1"
         android:orientation="vertical"
         android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
 
         <TextView android:id="@android:id/title"
                   android:layout_width="wrap_content"
@@ -87,8 +87,8 @@
             android:id="@+id/radio_extra_widget_divider"
             android:layout_width="@dimen/vertical_divider_width"
             android:layout_height="match_parent"
-            android:layout_marginTop="36dp"
-            android:layout_marginBottom="36dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginStart="8dp"
             android:background="?android:attr/dividerVertical" />
         <ImageView
