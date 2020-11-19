@@ -98,6 +98,15 @@
             settings:isPreferenceVisible="@bool/config_show_sim_info"
             settings:controller="com.android.settings.deviceinfo.simstatus.SimStatusPreferenceController"/>
 
+        <Preference
+            android:title="@string/radio_info_title"
+            android:key="radio_info_settings"
+            android:order="20">
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="com.android.phone"
+                    android:targetClass="com.android.phone.settings.RadioInfo" />
+         </Preference>
+
         <!-- Battery information -->
         <Preference
             android:key="battery_info"
