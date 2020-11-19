@@ -106,6 +106,15 @@
             android:fragment="com.android.settings.deviceinfo.batteryinfo.BatteryInfoFragment"
             settings:keywords="@string/keywords_battery_info"
             settings:controller="com.android.settings.deviceinfo.batteryinfo.BatteryInfoPreferenceController"/>
+
+        <Preference
+            android:title="@string/radio_info_title"
+            android:key="radio_info_settings"
+            android:order="44">
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="com.android.phone"
+                    android:targetClass="com.android.phone.settings.RadioInfo" />
+        </Preference>
     </PreferenceCategory>
 
     <PreferenceCategory
