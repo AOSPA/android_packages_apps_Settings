@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Sailkatu jakinarazpenak automatikoki garrantziaren arabera"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Jakinarazpen doigarriei buruzko iritzia"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Adierazi jakinarazpenetan egindako doikuntzak eta erakutsi sistemara iritzia bidaltzeko aukera"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Berrezarri jakinarazpenen garrantzia"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Berrezarri erabiltzaileak aldatutako garrantzi-ezarpenak eta eman lehentasunak ezartzeko baimena jakinarazpenen laguntzaileari"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Ekintza eta erantzun iradokiak"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Erakutsi automatikoki ekintza eta erantzun iradokiak"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Erakutsi azken jakinarazpenak eta atzeratutakoak"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Ez dago erabilgarri <xliff:g id="CARRIER">%1$s</xliff:g> operadorera konektatuta egoteagatik"</string>
     <string name="see_more" msgid="7499355691042812723">"Ikusi gehiago"</string>
     <string name="see_less" msgid="2642392725363552793">"Ikusi gutxiago"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> aktibatu nahi duzu?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"SIM txartela aktibatu nahi duzu?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> operadorera aldatu nahi duzu?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"SIM txartela erabiltzen hasi nahi duzu?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"SIM txartel bakarra aktiba daiteke aldiko.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> operadorera aldatuta ere ez da bertan behera utziko <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> zerbitzua."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Deskargatutako SIM txartel bakarra aktiba daiteke aldiko.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> operadorera aldatuta ere ez da bertan behera utziko <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> zerbitzua."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"SIM txartel bakarra aktiba daiteke aldiko.\n\n Aldatuta ere, ez da utziko bertan behera <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> zerbitzua."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Aldatu <xliff:g id="CARRIER_NAME">%1$s</xliff:g> operadorera"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Sarera konektatzen…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> operadorera aldatzen"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Ezin da aldatu operadorea"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Errore bat gertatu da eta ezin da aldatu operadorea."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> desaktibatu nahi duzu?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"SIM txartela desaktibatu nahi duzu?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"SIM txartela desaktibatzen<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Ezin da desgaitu operadorea"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Ezin da desgaitu operadorea"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Arazoren bat izan da, eta ezin izan da desgaitu operadorea."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Bi SIM txartel erabili nahi dituzu?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Gailu honek bi SIM txartel izan ditzake aktibo aldi berean. SIM txartel bakarra erabili nahi baduzu, sakatu \"Ez, eskerrik asko\"."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Gailua berrabiarazi nahi duzu?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Hasteko, berrabiarazi gailua. Gero, beste SIM txartel bat gehitu ahalko duzu."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Egin aurrera"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Berrabiarazi"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Ez"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Aldatu"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Ezin da aktibatu SIM txartela"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Kendu SIM txartela eta sar ezazu berriro. Arazoak badirau, berrabiarazi gailua."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Saiatu berriro SIM txartela aktibatzen. Arazoak badirau, berrabiarazi gailua."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Deskargatutako SIM txartel honetako eduki guztia ezabatu?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"SIM txartel honetako eduki guztia ezabatuz gero, <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> operadorearen zerbitzua kenduko da gailu honetatik.\n\nEz da utziko bertan behera <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> operadorearen zerbitzua."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Ezabatu eduki guztia"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth bidezko konexioa aktibatuko da"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Aktibatuta"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Desaktibatuta"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM txartelak"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Hegaldietarako seguruak diren sareak"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Aurkitu hegaldietarako seguruak diren sareak eta konektatu haietara"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"hegaldia, hegaldietarako segurua"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Deiak eta SMSak"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi bidezko deiak"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Egin eta jaso deiak wifia eta operadore batenak ez diren antzeko sareen bitartez"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"Wifi bidezko deiekin, deiak egin eta jaso ahalko dituzu operadore batenak ez diren sareen bitartez (adibidez, zenbait wifi-sare).\n\nDatu-konexioa partekatzeko aukerari esker, SIM txartel batetik bestera bidal ditzakezu datuak, datuak jasotzen dituen SIM txartelean deiak egin eta jasotzeko."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Deiak"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMSa"</string>
 </resources>

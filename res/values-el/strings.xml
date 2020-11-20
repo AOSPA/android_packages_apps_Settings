@@ -1935,7 +1935,7 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"Εφαρμογή έκτακτης ανάγκης"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Επαναφορά προτιμήσεων εφαρμογών"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Επαναφ. προτιμ. εφαρμ;"</string>
-    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Με αυτήν την ενέργεια, θα γίνει επαναφορά όλων των προτιμήσεων για:\n\n"<li>"Απενεργοποιημένες εφαρμογές"</li>\n<li>"Απενεργοποιημένες ειδοποιήσεις εφαρμογών"</li>\n<li>"Προεπιλεγμένες εφαρμογές για ενέργειες"</li>\n<li>"Περιορισμούς δεδομένων παρασκηνίου για εφαρμογές"</li>\n<li>"Τυχόν περιορισμούς αδειών"</li>\n\n"Δεν θα χάσετε τυχόν δεδομένα εφαρμογών."</string>
+    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Με αυτήν την ενέργεια, θα γίνει επαναφορά όλων των προτιμήσεων για:\n\n"<li>"απενεργοποιημένες εφαρμογές"</li>\n<li>"απενεργοποιημένες ειδοποιήσεις εφαρμογών"</li>\n<li>"προεπιλεγμένες εφαρμογές για ενέργειες"</li>\n<li>"περιορισμούς δεδομένων παρασκηνίου για εφαρμογές"</li>\n<li>"τυχόν περιορισμούς αδειών"</li>\n\n"Δεν θα χάσετε τυχόν δεδομένα εφαρμογών."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Επαναφορά εφαρμογών"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Διαχείριση χώρου"</string>
     <string name="filter" msgid="9039576690686251462">"Φίλτρο"</string>
@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Αυτόματη ταξινόμηση ειδοποιήσεων κατά συνάφεια"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Σχόλια προσαρμοστικών ειδοποιήσεων"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Να υποδεικνύονται προσαρμογές που πραγματοποιούνται σε ειδοποιήσεις και να εμφανίζεται η επιλογή παροχής σχολίων στο σύστημα."</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Επαναφορά σημασίας ειδοποίησης"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Επαναφέρετε τις ρυθμίσεις σημασίας που άλλαξαν από τον χρήστη και επιτρέψτε στον βοηθό ειδοποιήσεων να ορίζει την προτεραιότητα."</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Προτεινόμενες ενέργειες και απαντήσεις"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Αυτόματη εμφάνιση προτεινόμενων ενεργειών και απαντήσεων"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Εμφάνιση πρόσφατων ειδοποιήσεων και ειδοποιήσεων που έχουν αναβληθεί"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Δεν διατίθεται κατά τη σύνδεση σε <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Δείτε περισσότερα"</string>
     <string name="see_less" msgid="2642392725363552793">"Εμφάνιση λιγότερων"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Ενεργοποίηση <xliff:g id="CARRIER_NAME">%1$s</xliff:g>;"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Ενεργοποίηση κάρτας SIM;"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Εναλλαγή σε <xliff:g id="CARRIER_NAME">%1$s</xliff:g>;"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Εναλλαγή στη χρήση κάρτας SIM;"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Μόνο μία SIM μπορεί να είναι ενεργή κάθε φορά.\n\nΗ εναλλαγή στο δίκτυο <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> δεν θα ακυρώσει την υπηρεσία <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Μόνο μία ληφθείσα SIM μπορεί να είναι ενεργή κάθε φορά.\n\nΗ εναλλαγή στο δίκτυο <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> δεν θα ακυρώσει την υπηρεσία <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Μόνο μία SIM μπορεί να είναι ενεργή κάθε φορά.\n\nΗ εναλλαγή δεν θα ακυρώσει την υπηρεσία <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Εναλλαγή σε <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Σύνδεση στο δίκτυο…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Εναλλαγή σε <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Δεν είναι δυνατή η εναλλαγή εταιρείας κινητής τηλεφωνίας"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Δεν είναι δυνατή η εναλλαγή εταιρείας κινητής τηλεφωνίας λόγω ενός σφάλματος."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Απενεργοποίηση <xliff:g id="CARRIER_NAME">%1$s</xliff:g>;"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Απενεργοποίηση SIM;"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Απενεργοποίηση SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Δεν είναι δυνατή η απενεργοποίηση της εταιρείας κινητής τηλεφωνίας"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Δεν είναι δυνατή η απενεργοποίηση της εταιρείας κινητής τηλεφωνίας"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Παρουσιάστηκε κάποιο πρόβλημα και δεν ήταν δυνατή η απενεργοποίηση της εταιρείας κινητής τηλεφωνίας σας."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Χρήση 2 SIM;"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Αυτή η συσκευή μπορεί να έχει 2 ενεργές SIM ταυτόχρονα. Για να συνεχίσετε χρησιμοποιώντας 1 SIM τη φορά, πατήστε Όχι, ευχαριστώ."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Επανεκκίνηση συσκευής;"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Για να ξεκινήσετε, επανεκκινήστε τη συσκευή σας. Στη συνέχεια, μπορείτε να προσθέσετε μια άλλη SIM."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Συνέχεια"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Επανεκκίνηση"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Όχι, ευχαριστώ"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Εναλλαγή"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Δεν είναι δυνατή η ενεργοποίηση της SIM"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Αφαιρέστε τη SIM και τοποθετήστε τη ξανά. Εάν το πρόβλημα δεν επιλυθεί, επανεκκινήστε τη συσκευή σας."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Δοκιμάστε να ενεργοποιήσετε ξανά τη SIM. Εάν το πρόβλημα δεν επιλυθεί, επανεκκινήστε τη συσκευή σας."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Διαγραφή αυτής της SIM της οποίας έγινε λήψη;"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Η διαγραφή αυτής της SIM καταργεί την υπηρεσία <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> από αυτήν τη συσκευή.\n\nΗ υπηρεσία για <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> δεν θα ακυρωθεί."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Διαγραφή"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Το Bluetooth θα ενεργοποιηθεί."</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Ενεργή"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Ανενεργή"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Διαδίκτυο"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"Κάρτες SIM"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Ασφαλή δίκτυα πτήσης"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Βρείτε και συνδεθείτε σε ασφαλή δίκτυα πτήσης"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"πτήση, ασφαλή για την πτήση"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Κλήσεις και SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Κλήση Wi-Fi"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Πραγματοποίηση και λήψη κλήσεων μέσω δικτύων που δεν ανήκουν στην εταιρεία κινητής τηλεφωνίας, όπως Wi‑Fi."</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"Η Κλήση Wi-Fi σας επιτρέπει να πραγματοποιήσετε και να λάβετε κλήσεις μέσω δικτύων που δεν ανήκουν στην εταιρεία κινητής τηλεφωνίας, όπως ορισμένα δίκτυα Wi‑Fi.\n\nΗ κλήση με πολλές SIM σας επιτρέπει να αξιοποιήσετε τα δεδομένα κινητής τηλεφωνίας μιας SIM για να πραγματοποιείτε και να λαμβάνετε κλήσεις από άλλη SIM."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Κλήσεις"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

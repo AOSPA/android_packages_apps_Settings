@@ -3480,6 +3480,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"按相关性自动排列通知"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"自适应通知反馈"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"显示对通知所做的调整以及用于向系统提供反馈的选项"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"重置通知的重要性级别"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"重置用户更改的重要性级别设置，允许通知助手排定优先级"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"建议的操作和回复"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"自动显示建议的操作和回复"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"显示近期通知和延后的通知"</string>
@@ -3580,7 +3582,7 @@
     <string name="other_conversations" msgid="551178916855139870">"非优先对话"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"您已更改的对话"</string>
     <string name="recent_conversations" msgid="471678228756995274">"近期对话"</string>
-    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"清除最近的项目"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"清除近期项"</string>
     <string name="clear" msgid="5092178335409471100">"清除"</string>
     <string name="important_bubble" msgid="7911698275408390846">"以对话泡形式显示优先对话"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"优先对话会显示在下拉通知栏顶部。您也可将优先对话设置为以对话泡形式显示，并允许系统在“勿扰”模式下显示此类对话泡。"</string>
@@ -4864,11 +4866,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"连接到<xliff:g id="CARRIER">%1$s</xliff:g>时无法使用"</string>
     <string name="see_more" msgid="7499355691042812723">"查看更多"</string>
     <string name="see_less" msgid="2642392725363552793">"隐藏部分"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"要启用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>吗？"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"要启用 SIM 卡吗？"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"要切换到<xliff:g id="CARRIER_NAME">%1$s</xliff:g>吗？"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"要切换为使用 SIM 卡吗？"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"一次只能启用一个 SIM 卡。\n\n切换到<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>不会取消<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>服务。"</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"一次只能启用一个已下载的 SIM 卡。\n\n切换到<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>不会取消<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>服务。"</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"一次只能启用一个 SIM 卡。\n\n进行切换并不会取消<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>服务。"</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"切换到<xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"正在连接到网络…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"正在切换到<xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"无法切换运营商"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"发生错误，因此无法切换运营商。"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"要停用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>吗？"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"要停用 SIM 卡吗？"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"正在停用 SIM 卡<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"无法停用运营商"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"无法停用运营商"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"出了点问题，无法停用您的运营商。"</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"要使用 2 个 SIM 卡吗？"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"此设备可以同时激活 2 个 SIM 卡。如要继续一次只使用 1 个 SIM 卡，请点按“不用了”。"</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"要重启设备吗？"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"如要开始使用，请重启您的设备。重启后即可添加其他 SIM 卡。"</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"继续"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"重启"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"不用了"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"切换"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"无法激活 SIM 卡"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"请取出 SIM 卡，然后重新插入。如果问题仍然存在，请重启您的设备。"</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"请尝试重新启用 SIM 卡。如果问题仍然存在，请重启您的设备。"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"要清空这个已下载的 SIM 卡吗？"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"清空此 SIM 卡将从此设备中移除<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>服务。\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>的服务不会因此被取消。"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"清空"</string>
@@ -5007,4 +5032,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"蓝牙将开启"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"开启"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"关闭"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"互联网"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM 卡"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"可在飞机上安全使用的网络"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"查找并连接到可在飞机上安全使用的网络"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"飞机，可在飞机上安全使用"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"通话和短信"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"WLAN 通话"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"通过 WLAN 等非运营商网络接打电话"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"WLAN 通话功能支持您通过非运营商网络（例如某些 WLAN 网络）接打电话。\n\n跨 SIM 卡通话功能支持您利用一张 SIM 卡的移动数据流量，通过另一张 SIM 卡的号码接打电话。"</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"通话"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"短信"</string>
 </resources>

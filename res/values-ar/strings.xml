@@ -3653,6 +3653,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"ترتيب الإشعارات تلقائيًا حسب مدى الصلة بالموضوع"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"تعليقات عن الإشعارات التكيُّفية"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"الإشارة إلى التعديلات التي تم إجراؤها على الإشعارات وإظهار خيار لتقديم تعليقات إلى النظام"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"إعادة ضبط أهمية الإشعارات"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"إعادة ضبط إعدادات الأهمية التي غيّرها المستخدم والسماح لمساعد الإشعارات بمنح الأولوية"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"الإجراءات والردود المقترَحة"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"عرض الإجراءات والردود المقترحة تلقائيًا"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"عرض الإشعارات الحديثة والمؤجلة"</string>
@@ -3757,7 +3759,7 @@
     <string name="other_conversations" msgid="551178916855139870">"المحادثات غير ذات الأولوية"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"المحادثات التي أجريت تغييرات عليها"</string>
     <string name="recent_conversations" msgid="471678228756995274">"المحادثات الأخيرة"</string>
-    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"محو العناصر الحديثة"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"محو المحادثات الحديثة"</string>
     <string name="clear" msgid="5092178335409471100">"محو"</string>
     <string name="important_bubble" msgid="7911698275408390846">"تظهر المحادثات ذات الأولوية كفقاعات"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"تظهر المحادثات ذات الأولوية في أعلى مركز الإشعارات المنسدل. يمكنك أيضًا ضبطها لتظهر كفقاعات ولا تتقيّد بميزة \"عدم الإزعاج\"."</string>
@@ -3974,7 +3976,7 @@
     <string name="summary_divider_text" msgid="8836285171484563986">"، "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="6022314482293187463">"<xliff:g id="START">%1$s</xliff:g> إلى <xliff:g id="END">%2$s</xliff:g>"</string>
-    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"محادثات"</string>
+    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"المحادثات"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"المحادثات التي يمكنها مقاطعة عمل الميزة"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"كل المحادثات"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"المحادثات ذات الأولوية"</string>
@@ -5172,11 +5174,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"عدم التوفُّر عند الربط بمشغّل شبكة الجوّال <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"عرض المزيد"</string>
     <string name="see_less" msgid="2642392725363552793">"عرض عناصر أقل"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"هل تريد تفعيل <xliff:g id="CARRIER_NAME">%1$s</xliff:g>؟"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"‏هل تريد تفعيل شريحة SIM؟"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"هل تريد التبديل إلى <xliff:g id="CARRIER_NAME">%1$s</xliff:g>؟"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"‏هل تريد التبديل إلى استخدام شريحة SIM؟"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"‏لا يمكن تفعيل أكثر من شريحة SIM واحدة في آنٍ واحد.\n\nلن يؤدي التبديل إلى <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> إلى إلغاء خدمة <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"‏لا يمكن تفعيل أكثر من شريحة SIM واحدة تم تنزيلها في آنٍ واحد.\n\nلن يؤدي التبديل إلى <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> إلى إلغاء خدمة <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"‏لا يمكن تفعيل أكثر من شريحة SIM واحدة في آنٍ واحد.\n\nلن يؤدي التبديل إلى إلغاء خدمة <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"التبديل إلى <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"جارٍ الاتصال بالشبكة…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"جارٍ التبديل إلى <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"يتعذَّر تبديل مشغِّل شبكة الجوّال"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"يتعذَّر تبديل مشغِّل شبكة الجوّال بسبب حدوث خطأ."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"هل تريد إيقاف <xliff:g id="CARRIER_NAME">%1$s</xliff:g>؟"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"‏هل تريد إيقاف شريحة SIM؟"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"‏جارٍ إيقاف شريحة SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"يتعذّر إيقاف مشغِّل شبكة الجوّال"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"يتعذّر إيقاف مشغِّل شبكة الجوّال"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"حدث خطأ ما أدى إلى تعذُّر إيقاف مشغِّل شبكة الجوّال."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"‏هل تريد استخدام شريحتَي SIM؟"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"‏يمكن تفعيل شريحتَي SIM على هذا الجهاز في وقتٍ واحد. لمتابعة استخدام شريحة SIM واحدة في كل مرة، انقر على \"لا، شكرًا\"."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"هل تريد إعادة تشغيل الجهاز؟"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"‏للبدء، أعِد تشغيل جهازك. ويمكنك بعد ذلك إضافة شريحة SIM أخرى."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"متابعة"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"إعادة التشغيل"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"لا، شكرًا"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"تبديل"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"‏يتعذّر تفعيل شريحة SIM"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"‏يجب إزالة شريحة SIM ثم إدخالها مرة أخرى. إذا استمرت المشكلة، عليك إعادة تشغيل الجهاز."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"‏حاوِل تفعيل شريحة SIM مرة أخرى. إذا استمرت المشكلة، عليك إعادة تشغيل الجهاز."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"‏هل تريد محو بيانات شريحة SIM هذه التي تم تنزيلها؟"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"‏سيؤدي محو بيانات شريحة SIM هذه إلى إزالة خدمة <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> من هذا الجهاز.\n\nولن يتم إلغاء خدمة <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"محو البيانات"</string>
@@ -5323,4 +5348,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"سيتم تفعيل البلوتوث."</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"مفعّلة"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"غير مفعّلة"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"الإنترنت"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"‏شرائح SIM"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"الشبكات الآمنة في وضع الطيران"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"العثور على الشبكات الآمنة في وضع الطيران والاتصال بها"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"وضع الطيران، آمنة في وضع الطيران"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"‏المكالمات والرسائل القصيرة SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"‏الاتصال عبر Wi-Fi"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"‏يمكنك إجراء مكالمات وتلقّيها عبر شبكات غير تابعة لمشغّلي شبكات الجوّال، مثل عبر شبكة Wi-Fi."</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"‏يسمح لك الاتصال عبر Wi-Fi بإجراء مكالمات وتلقّيها عبر الشبكات غير التابعة لمشغّلي شبكات الجوّال، مثل بعض شبكات Wi‑Fi.\n\nيسمح لك الاتصال عبر شريحة SIM بالاستفادة من بيانات الجوّال لشريحة SIM لإجراء مكالمات وتلقّيها من شريحة SIM أخرى."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"المكالمات"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

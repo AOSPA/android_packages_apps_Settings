@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Posiziona automaticamente le notifiche in base alla pertinenza"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Feedback relativo alle notifiche adattive"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Indica le modifiche apportate alle notifiche e mostra la possibilità di fornire feedback al sistema"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Reimposta importanza notifiche"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Reimposta le impostazioni relative all\'importanza modificate dall\'utente e consenti all\'assistente notifiche di assegnare la priorità"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Azioni e risposte consigliate"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Mostra automaticamente azioni e risposte consigliate"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Mostra notifiche recenti e posticipate"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Non disponibile se è attiva la connessione a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Altro"</string>
     <string name="see_less" msgid="2642392725363552793">"Comprimi"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Vuoi attivare <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Vuoi attivare la SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Vuoi passare a <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Vuoi passare alla scheda SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"È possibile attivare una sola SIM alla volta.\n\nIl passaggio a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> non annullerà il servizio di <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"È possibile attivare una sola SIM scaricata alla volta.\n\nIl passaggio a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> non annullerà il servizio di <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"È possibile attivare una sola SIM alla volta.\n\nIl passaggio non annullerà il servizio di <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Passa a <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Connessione alla rete…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Passaggio a <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Impossibile passare a un altro operatore"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Impossibile passare a un altro operatore a causa di un errore."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Vuoi disattivare <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Vuoi disattivare la SIM?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Disattivazione SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Impossibile disattivare l\'operatore"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Impossibile disattivare l\'operatore"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Si è verificato un problema; impossibile disattivare l\'operatore."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Vuoi usare due SIM?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Questo dispositivo può avere due SIM attive alla volta. Per continuare a utilizzare una sola SIM alla volta, tocca \"No grazie\"."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Vuoi riavviare il dispositivo?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Per iniziare, riavvia il dispositivo. Dopodiché puoi aggiungere un\'altra SIM."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Continua"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Riavvia"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"No grazie"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Cambia"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Impossibile attivare la SIM"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Rimuovi la SIM e inseriscila di nuovo. Se il problema persiste, riavvia il dispositivo."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Riprova ad attivare la SIM. Se il problema persiste, riavvia il dispositivo."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Resettare questa SIM scaricata?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Se resetti questa SIM, il servizio di <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> verrà rimosso da questo dispositivo.\n\nIl servizio di <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> non verrà annullato."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Resetta"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Verrà attivato il Bluetooth"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"On"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Off"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Reti utilizzabili in aereo"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Cerca e collegati a reti utilizzabili in aereo"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"aereo, utilizzabile in aereo"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Chiamate e SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Chiamate Wi‑Fi"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Effettua e ricevi chiamate tramite reti non dell\'operatore, ad esempio Wi‑Fi"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"Le chiamate Wi-Fi consentono di effettuare e ricevere chiamate tramite reti non dell\'operatore, ad esempio alcune reti Wi‑Fi.\n\nLe chiamate tramite SIM ti consentono di utilizzare i dati mobili di una SIM per effettuare e ricevere chiamate da e verso un\'altra SIM."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Chiamate"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

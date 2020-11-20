@@ -2813,7 +2813,7 @@
     <string name="really_remove_account_title" msgid="253097435885652310">"นำบัญชีออกหรือไม่"</string>
     <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"การนำบัญชีนี้ออกจะเป็นการลบข้อความ รายชื่อติดต่อ และข้อมูลอื่นๆ ทั้งหมดของบัญชีออกจากแท็บเล็ต"</string>
     <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"การนำบัญชีนี้ออกจะลบข้อความ รายชื่อติดต่อ และข้อมูลอื่นๆ ทั้งหมดของบัญชีออกจากโทรศัพท์"</string>
-    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"การนำบัญชีนี้ออกจะเป็นการลบข้อความ รายชื่อติดต่อ และข้อมูลอื่นๆ ทั้งหมดออกจากอุปกรณ์!"</string>
+    <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"การนำบัญชีนี้ออกจะเป็นการลบข้อความ รายชื่อติดต่อ และข้อมูลอื่นๆ ทั้งหมดออกจากอุปกรณ์"</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"ผู้ดูแลระบบไม่อนุญาตให้ทำการเปลี่ยนแปลงนี้"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"ซิงค์ด้วยตนเองไม่ได้"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"รายการนี้ปิดการซิงค์อยู่ หากต้องการเปลี่ยนการตั้งค่า ให้เปิดอินเทอร์เน็ตที่ใช้งานอยู่เบื้องหลังและการซิงค์อัตโนมัติชั่วคราว"</string>
@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"จัดอันดับการแจ้งเตือนตามความเกี่ยวข้องโดยอัตโนมัติ"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"ความคิดเห็นเกี่ยวกับการแจ้งเตือนแบบปรับอัตโนมัติ"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"ระบุการปรับเปลี่ยนที่เกิดขึ้นกับการแจ้งเตือนและแสดงตัวเลือกในการแสดงความคิดเห็นให้กับระบบ"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"รีเซ็ตความสำคัญในการแจ้งเตือน"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"รีเซ็ตการตั้งค่าความสำคัญที่ผู้ใช้เปลี่ยน และอนุญาตให้ผู้ช่วยการแจ้งเตือนจัดลำดับความสำคัญ"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"การดำเนินการและการตอบที่แนะนำ"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"แสดงการดำเนินการและการตอบที่แนะนำโดยอัตโนมัติ"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"แสดงการแจ้งเตือนล่าสุดและการแจ้งเตือนที่มีการเลื่อนเวลา"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"ใช้ไม่ได้เมื่อเชื่อมต่อกับ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"ดูเพิ่ม"</string>
     <string name="see_less" msgid="2642392725363552793">"ดูน้อยลง"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"ต้องการเปิด <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ใช่ไหม"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"ต้องการเปิดซิมใช่ไหม"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"เปลี่ยนเป็น <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ใช่ไหม"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"เปลี่ยนไปใช้ซิมการ์ดใช่ไหม"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"ใช้งานซิมได้ทีละ 1 อันเท่านั้น\n\nการเปลี่ยนเป็น <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> จะไม่ยกเลิกบริการของ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"ใช้งานซิมที่ดาวน์โหลดมาได้ทีละ 1 อันเท่านั้น\n\nการเปลี่ยนเป็น <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> จะไม่ยกเลิกบริการของ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"ใช้งานซิมได้ทีละ 1 อันเท่านั้น\n\nการเปลี่ยนจะไม่ยกเลิกบริการของ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"เปลี่ยนเป็น <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"กำลังเชื่อมต่อกับเครือข่าย…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"กำลังเปลี่ยนเป็น <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"เปลี่ยนผู้ให้บริการไม่ได้"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"เปลี่ยนผู้ให้บริการไม่ได้เนื่องจากมีข้อผิดพลาด"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"ต้องการปิด <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ใช่ไหม"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"ปิดซิมใช่ไหม"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"กำลังปิดซิม<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"ปิดใช้ผู้ให้บริการไม่ได้"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"ปิดใช้ผู้ให้บริการไม่ได้"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"เกิดข้อผิดพลาดที่ทำให้ปิดใช้ผู้ให้บริการไม่ได้"</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"ใช้ 2 ซิมไหม"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"อุปกรณ์นี้ใช้ 2 ซิมพร้อมกันได้ หากต้องการใช้ครั้งละ 1 ซิมต่อไป ให้แตะ \"ไม่เป็นไร\""</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"รีสตาร์ทอุปกรณ์ไหม"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"รีสตาร์ทอุปกรณ์เพื่อเริ่มต้นใช้งาน จากนั้นคุณจะเพิ่มซิมได้"</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"ดำเนินการต่อ"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"รีสตาร์ท"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"ไม่เป็นไร"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"เปลี่ยน"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"เปิดใช้งานซิมไม่ได้"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"ถอดซิมออกแล้วใส่กลับเข้าไปอีกครั้ง หากยังพบปัญหาอยู่ ให้รีสตาร์ทอุปกรณ์"</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"ลองเปิดใช้ซิมอีกครั้ง หากยังพบปัญหาอยู่ ให้รีสตาร์ทอุปกรณ์"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"ลบซิมที่ดาวน์โหลดมานี้ใช่ไหม"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"การลบซิมนี้จะนำบริการ <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> ออกจากอุปกรณ์นี้\n\nแต่จะไม่ยกเลิกบริการของ <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"ลบ"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"บลูทูธจะเปิด"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"เปิด"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"ปิด"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"อินเทอร์เน็ต"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"ซิม"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"เครือข่ายที่ใช้บนเครื่องบินได้อย่างปลอดภัย"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"ค้นหาและเชื่อมต่อเครือข่ายที่ใช้บนเครื่องบินได้อย่างปลอดภัย"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"เครื่องบิน, ใช้บนเครื่องบินได้อย่างปลอดภัย"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"การโทรและ SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"การโทรผ่าน Wi‑Fi"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"โทรออกและรับสายผ่านเครือข่ายที่ไม่ได้เป็นของผู้ให้บริการ เช่น Wi‑Fi"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"การโทรผ่าน Wi-Fi ให้คุณโทรออกและรับสายผ่านเครือข่ายที่ไม่ได้เป็นของผู้ให้บริการ เช่น เครือข่าย Wi-Fi บางเครือข่ายได้\n\nการโทรข้ามซิมให้คุณใช้ประโยชน์จากอินเทอร์เน็ตมือถือของซิมหนึ่งเพื่อโทรออกและรับสายจากอีกซิมหนึ่งได้"</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"การโทร"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

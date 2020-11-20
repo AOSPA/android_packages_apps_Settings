@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Bildirimleri alaka düzeyine göre otomatik olarak sırala"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Uyarlamalı bildirimlerle ilgili geri bildirim"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Bildirimlerde yapılan düzenlemeleri belirtin ve sisteme geri bildirim sağlama seçeneğini gösterin"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Bildirimlerin önemini sıfırla"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Kullanıcı tarafından değiştirilen önem ayarlarını sıfırlar ve bildirim yardımcısının öncelik belirlemesine izin verir"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Önerilen işlemler ve yanıtlar"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Önerilen işlemleri ve yanıtları otomatik olarak göster"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Son ve ertelenen bildirimleri göster"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> operatörüne bağlıyken kullanılamaz"</string>
     <string name="see_more" msgid="7499355691042812723">"Daha fazla"</string>
     <string name="see_less" msgid="2642392725363552793">"Daha az göster"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> etkinleştirilsin mi?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"SIM açılsın mı?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> operatörüne geçilsin mi?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"SIM kart kullanmaya geçilsin mi?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Aynı anda yalnızca indirilmiş tek bir SIM etkin olabilir.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> operatörüne geçtiğinizde <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> hizmetiniz iptal edilmez."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Aynı anda yalnızca bir indirilmiş SIM etkin olabilir.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> operatörüne geçtiğinizde <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> hizmetiniz iptal edilmez."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Aynı anda yalnızca tek bir SIM etkin olabilir.\n\nGeçiş yaptığınızda <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> hizmetiniz iptal edilmez."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> operatörüne geç"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Ağa bağlanıyor…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> operatörüne geçiliyor"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Operatöre geçiş yapılamıyor"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Bir hata nedeniyle operatöre geçiş yapılamıyor."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> kapatılsın mı?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"SIM kapatılsın mı?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"SIM kapatılıyor<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Operatör devre dışı bırakılamıyor"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Operatör devre dışı bırakılamıyor"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Bir hata oluştu ve operatörünüz devre dışı bırakılamadı."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"2 SIM kullanılsın mı?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Bu cihazda aynı anda 2 SIM etkin durumda olabilir. Tek seferde 1 SIM kullanmaya devam etmek için \"Hayır, teşekkürler\" seçeneğine dokunun."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Cihaz yeniden başlatılsın mı?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Öncelikle cihazınızı yeniden başlatın. Daha sonra başka bir SIM ekleyebilirsiniz."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Devam"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Yeniden başlat"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Hayır, teşekkürler"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Geçilsin"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM etkinleştirilemiyor"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM\'i çıkarıp tekrar yerleştirmeyi deneyin. Sorun devam ederse cihazınızı yeniden başlatın."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"SIM\'i tekrar açmayı deneyin. Sorun devam ederse cihazınızı yeniden başlatın."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"İndirilen bu SIM silinsin mi?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Bu SIM silindiğinde, <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> hizmeti bu cihazdan kaldırılır.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> hizmeti iptal edilmez."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Sil"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth açılacak"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Aç"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Kapalı"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"İnternet"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM\'ler"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Uçakta kullanımı güvenli ağlar"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Uçakta kullanımı güvenli ağları bulup bağlanın"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"uçak, uçakta kullanımı güvenli"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Aramalar ve SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Kablosuz Çağrı"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Bazı kablosuz ağlar gibi operatör olmayan ağlar üzerinden arama yapın ve alın"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"Kablosuz çağrı, bazı kablosuz ağlar gibi operatör olmayan ağlar üzerinden arama yapmanıza ve almanıza olanak tanır.\n\nSIM\'ler arası çağrı, bir SIM\'den arama yapmak ve almak için başka bir SIM\'in mobil verisinden yararlanmanıza olanak tanır."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Çağrılar"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

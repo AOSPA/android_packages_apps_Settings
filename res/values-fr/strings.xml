@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Classer automatiquement les notifications par pertinence"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Commentaires sur les notifications intelligentes"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Indiquer les ajustements apportés aux notifications et afficher l\'option pour fournir des commentaires au système"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Réinitialiser les paramètres d\'importance des notifications"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"Réinitialiser les paramètres d\'importance modifiés par l\'utilisateur et autoriser l\'assistant de notifications à les hiérarchiser"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Actions et réponses suggérées"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Afficher automatiquement les actions et réponses suggérées"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Afficher les notifications récentes et répétées"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponible lorsque connecté à <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Voir plus"</string>
     <string name="see_less" msgid="2642392725363552793">"Moins de détails"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Activer <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Activer la carte SIM ?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Passer à <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Passer à l\'utilisation de la carte SIM ?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Vous ne pouvez activer qu\'une seule carte SIM à la fois.\n\nLe passage à <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> n\'entraînera pas la résiliation de votre service <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Vous ne pouvez activer qu\'une seule carte SIM téléchargée à la fois.\n\nLe passage à <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> n\'entraînera pas la résiliation de votre service <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Vous ne pouvez activer qu\'une seule carte SIM à la fois.\n\nCe changement n\'entraînera pas la résiliation de votre service <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Passer à <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Connexion au réseau…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Passage à <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Impossible de changer d\'opérateur"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Impossible de changer d\'opérateur en raison d\'une erreur."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Désactiver <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"Désactiver la carte SIM ?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"Désactivation de la carte SIM<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"Impossible de désactiver l\'opérateur"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Impossible de désactiver l\'opérateur"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Un problème a empêché l\'appareil de désactiver votre opérateur."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Utiliser deux cartes SIM ?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Cet appareil peut posséder deux cartes SIM actives en même temps. Pour continuer à utiliser une seule carte SIM à la fois, appuyez sur \"Non, merci\"."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"Redémarrer l\'appareil ?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"Pour commencer, redémarrez votre appareil. Vous pouvez ensuite ajouter une autre carte SIM."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"Continuer"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"Redémarrer"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Non, merci"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"Changer"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Impossible d\'activer la carte SIM"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Retirez la carte SIM et insérez-la de nouveau. Si le problème persiste, redémarrez l\'appareil."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Essayez à nouveau d\'activer la carte SIM. Si le problème persiste, redémarrez l\'appareil."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Effacer cette carte SIM téléchargée ?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"L\'effacement de cette carte SIM va supprimer le service <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> de cet appareil.\n\nLe service pour <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> ne sera pas annulé."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Effacer"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Le Bluetooth sera activé"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Activé"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Désactivé"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"Cartes SIM"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"Réseaux acceptés dans les avions"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"Rechercher les réseaux acceptés dans les avions et s\'y connecter"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"avion, accepté dans les avions"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"Appels et SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Appels Wi‑Fi"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Passer et recevoir des appels sur des réseaux non gérés par des opérateurs, comme le Wi‑Fi"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"La fonctionnalité Appels Wi-Fi vous permet de passer et de recevoir des appels sur des réseaux non gérés par des opérateurs, comme certains réseaux Wi‑Fi.\n\nAvec les appels par cartes SIM croisées, vous pouvez utiliser les données mobiles d\'une carte SIM pour passer et recevoir des appels via une autre carte SIM."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"Appels"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

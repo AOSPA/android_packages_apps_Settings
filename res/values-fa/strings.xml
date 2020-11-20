@@ -1841,7 +1841,7 @@
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"وقتی الگو را کشیدید، انگشتتان را بردارید"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"حداقل <xliff:g id="NUMBER">%d</xliff:g> نقطه را به یکدیگر متصل کنید. دوباره امتحان کنید."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"الگو ضبط شد"</string>
-    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"برای تأیید دوباره الگو را بکشید"</string>
+    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"برای تأیید، دوباره الگو را بکشید"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"الگوی جدید بازگشایی قفلتان"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"تأیید"</string>
     <string name="lockpattern_restart_button_text" msgid="255339375151895998">"کشیدن مجدد"</string>
@@ -2259,7 +2259,7 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"سمعک‌ها"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"هیچ سمعکی متصل نشده است"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"افزودن سمعک‌ها"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"برای مرتبط‌سازی سمعکتان، دستگاهتان را در صفحه بعدی پیدا کنید و روی آن ضربه بزنید. مطمئن شوید سمعکتان در حالت مرتبط‌سازی باشد."</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"برای مرتبط‌سازی سمعکتان، دستگاهتان را در صفحه بعد پیدا کنید و روی آن ضربه بزنید. مطمئن شوید سمعکتان در حالت مرتبط‌سازی باشد."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> فعال"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> سمعک ذخیره‌شده</item>
@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"رتبه‌بندی خودکار اعلان‌ها براساس ارتباط"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"بازخورد اعلان تطبیقی"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"تنظیمات انجام‌شده برای اعلان‌ها را مشخص می‌کند و گزینه مربوط به ارائه بازخورد به سیستم را نمایش می‌دهد"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"بازنشاندن اهمیت اعلان"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"بازنشاندن تنظیمات اهمیت تغییریافته توسط کاربر و مجاز کردن دستیار اعلان برای اولویت‌بندی"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"پاسخ‌ها و اقدامات پیشنهادی"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"نمایش خودکار اقدامات و پاسخ‌های پیشنهادی"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"نمایش اعلان‌های اخیر و به‌تعویق افتاده"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"هنگام اتصال به <xliff:g id="CARRIER">%1$s</xliff:g>، دردسترس نیست"</string>
     <string name="see_more" msgid="7499355691042812723">"موارد بیشتر"</string>
     <string name="see_less" msgid="2642392725363552793">"مشاهده موارد کمتر"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> روشن شود؟"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"سیم‌کارت روشن شود؟"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"به <xliff:g id="CARRIER_NAME">%1$s</xliff:g> می‌روید؟"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"برای استفاده از سیم‌کارت، شرکت مخابراتی‌تان را عوض می‌کنید؟"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"هربار فقط یک سیم‌کارت را می‌توان فعال کرد.\n\nبا رفتن به <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>، سرویس <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> شما را لغو نخواهد کرد."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"هربار فقط یک سیم‌کارت بارگیری‌شده می‌تواند فعال شود.\n\nبا رفتن به <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>، سرویس <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> شما لغو نخواهد شد."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"هربار فقط یک سیم‌کارت را می‌توان فعال کرد.\n\nعوض کردن شرکت مخابراتی، باعث لغو سرویس <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> شما نخواهد شد."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"رفتن به <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"درحال اتصال به شبکه…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"درحال رفتن به <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"شرکت مخابراتی عوض نشد"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"به‌دلیل بروز خطا، این شرکت مخابراتی عوض نشد."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> خاموش شود؟"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"سیم‌کارت خاموش شود؟"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"خاموش کردن سیم‌کارت<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"شرکت مخابراتی غیرفعال نشد"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"شرکت مخابراتی غیرفعال نشد"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"مشکلی پیش آمد و شرکت مخابراتی‌تان غیرفعال نشد."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"از ۲ سیم‌کارت استفاده می‌کنید؟"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"این دستگاه می‌تواند هم‌زمان ۲ سیم‌کارت فعال داشته باشد. برای ادامه استفاده از ۱ سیم‌کارت در هربار، روی «نه متشکرم» ضربه بزنید."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"دستگاه بازراه‌اندازی شود؟"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"برای شروع به کار، دستگاهتان را بازراه‌اندازی کنید. سپس می‌توانید سیم‌کارت دیگری اضافه کنید."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"ادامه"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"بازراه‌اندازی"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"نه متشکرم"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"عوض کردن"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"سیم‌کارت فعال نشد"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"سیم‌کارت را خارج کنید و دوباره در دستگاه بگذارید. اگر مشکل ادامه داشت، دستگاهتان را بازراه‌اندازی کنید."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"سیم‌کارت را دوباره روشن کنید. اگر مشکل ادامه داشت، دستگاهتان را بازراه‌اندازی کنید."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"این سیم‌کارت بارگیری‌شده پاک‌سازی شود؟"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"با پاک‌سازی این سیم‌کارت، سرویس <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> از این دستگاه برداشته می‌شود.\n\nسرویس مربوط به <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> لغو نمی‌شود."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"پاک‌سازی"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"بلوتوث روشن می‌شود"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"روشن"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"خاموش"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"اینترنت"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"سیم‌کارت‌ها"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"شبکه‌های ایمن در هواپیما"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"پیدا کردن و متصل شدن به شبکه‌های ایمن در هواپیما"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"هواپیما، ایمن در هواپیما"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"تماس و پیامک"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"‏تماس ازطریق WiFi"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"‏برقراری و دریافت تماس ازطریق شبکه‌های غیرمخابراتی مثل Wi-Fi"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"‏«تماس ازطریق Wi-Fi» امکان برقراری و دریافت تماس ازطریق شبکه‌های غیرمخابراتی (مثل برخی از شبکه‌های Wi-Fi) را به شما می‌دهد.\n\nتماس بین سیم‌کارت به شما اجازه می‌دهد از داده تلفن همراه یک سیم‌کارت برای برقراری و دریافت تماس از سیم‌کارت دیگری بهره ببرید."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"تماس"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"پیامک"</string>
 </resources>

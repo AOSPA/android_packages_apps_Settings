@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"প্রাসঙ্গিকতার ভিত্তিতে অটোমেটিক র‌্যাঙ্কিংয়ের বিজ্ঞপ্তি"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"অ্যাডাপ্টিভ বিজ্ঞপ্তির মতামত"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"বিজ্ঞপ্তি দেখানোর ক্ষেত্রে করা পরিবর্তনগুলি জানায় এবং সিস্টেমে মতামত জানানোর বিকল্প দেখায়"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"বিজ্ঞপ্তির গুরুত্ব রিসেট করুন"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"ব্যবহারকারীর পরিবর্তন করা গুরুত্বপূর্ণ সেটিংস রিসেট করুন এবং সেই সঙ্গে প্রাধান্য দেওয়ার জন্য বিজ্ঞপ্তি অ্যাসিস্ট্যান্টকে অনুমতি দিন"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"সাজেস্ট করা অ্যাকশন ও উত্তর"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"সাজেস্ট করা অ্যাকশন ও উত্তর অটোমেটিক দেখানো হয়"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"সাম্প্রতিক এবং স্নুজ করা বিজ্ঞপ্তি দেখুন"</string>
@@ -4501,16 +4503,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ট্যাবলেট যাচাই করতে ট্যাপ করুন"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"ডিভাইস যাচাই করতে ট্যাপ করুন"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"সময়, বিজ্ঞপ্তি এবং অন্যান্য তথ্য দেখতে আপনার স্ক্রিনে ট্যাপ করুন।"</string>
-    <!-- no translation found for emergency_gesture_screen_title (3280543310204360902) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_entrypoint_summary (4730874229911208834) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_screen_summary (1412270517879718683) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_title (9106060038248836408) -->
-    <skip />
-    <!-- no translation found for emergency_gesture_sound_setting_summary (7086534195960716320) -->
-    <skip />
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"ইমার্জেন্সি SOS"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g>-এর ম্যানেজ করা"</string>
+    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"পাওয়ার বোতাম ৫ বার দ্রুত প্রেস করে জরুরি SOS অ্যাকশন চালু করুন।"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"সতর্কতামূলক আওয়াজ"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"অ্যাকশন শুরু করার আগে সতর্কতা সম্পর্কিত বিজ্ঞপ্তি চালু করুন"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"বিজ্ঞপ্তির জন্য আঙ্গুলের ছাপ সোয়াইপ করা"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"আঙ্গুলের ছাপ সোয়াইপ করুন"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"আপনার বিজ্ঞপ্তিগুলি চেক করতে, আপনার ফোনের পিছনে আঙ্গুলের ছাপ নেওয়ার সেন্সরে নিচের দিকে সোয়াইপ করুন৷"</string>
@@ -4853,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>-এ কনেক্ট থাকলে উপলভ্য থাকে না"</string>
     <string name="see_more" msgid="7499355691042812723">"আরও দেখুন"</string>
     <string name="see_less" msgid="2642392725363552793">"কম দেখুন"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> চালু করতে চান?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"সিম চালু করবেন?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-এ পাল্টাতে চান?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"সিম কার্ডে পাল্টাতে চান?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"যেকোনও সময় শুধুমাত্র একটি সিম কাজ করবে।.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-এ পাল্টালে <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-এর পরিষেবা বাতিল হয়ে যাবে না।"</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"যেকোনও সময় শুধুমাত্র একটি ডাউনলোড করা সিম কাজ করবে।\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> পাল্টালে <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-এর পরিষেবা বাতিল হয়ে যাবে না।"</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"যেকোনও সময় শুধুমাত্র একটি সিম কাজ করবে।.\n\nপাল্টালে <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-এর পরিষেবা বাতিল করা হবে না।"</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-এ পাল্টান"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"নেটওয়ার্কে কানেক্ট করা হচ্ছে…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-এ পাল্টানো হচ্ছে"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"পরিষেবা প্রদানকারী পাল্টানো যাচ্ছে না"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"একটি সমস্যার কারণে পরিষেবা প্রদানকারী পাল্টানো যাবে না।"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> পরিষেবা বন্ধ করতে চান?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"সিম বন্ধ করতে চান?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"সিম বন্ধ করা হচ্ছে<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"পরিষেবা প্রদানকারীকে বন্ধ করা যাবে না"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"পরিষেবা প্রদানকারীকে বন্ধ করা যাচ্ছে না"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"কোনও সমস্যা হয়েছে এবং আপনার পরিষেবা প্রদানকারীর পরিষেবা বন্ধ করা যায়নি।"</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"২টি সিম ব্যবহার করতে চান?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"এই ডিভাইসে একসাথে ২টি সিম চালু থাকতে পারে। একবারে ১টি সিম ব্যবহার করা চালিয়ে যেতে \"না থাক\" বিকল্পে ট্যাপ করুন।"</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"ডিভাইস রিস্টার্ট করতে চান?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"শুরু করতে, আপনার ডিভাইস রিস্টার্ট করুন। তারপরে, আপনি আরেকটি সিম যোগ করতে পারবেন।"</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"চালিয়ে যান"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"রিস্টার্ট করুন"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"না থাক"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"পাল্টান"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"সিম চালু করা যাচ্ছে না"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"সিম কার্ডটি বের করে আবার ইনসার্ট করুন। এতেও সমস্যা ঠিক না হলে, ডিভাইস রিস্টার্ট করুন।"</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"সিমটি আবার চালু করার চেষ্টা করুন। এতেও সমস্যা ঠিক না হলে, ডিভাইস রিস্টার্ট করুন।"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"এই ডাউনলোড করা সিম মুছে ফেলতে চান?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"এই সিম মুছে দিলে এই ডিভাইসে <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> পরিষেবা আর পাওয়া যাবে না।\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> পরিষেবা কিন্তু বাতিল হবে না।"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"মুছুন"</string>
@@ -4996,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth চালু হবে"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"চালু আছে"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"বন্ধ আছে"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"ইন্টারনেট"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"সিম"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"বিমান-সুরক্ষা নেটওয়ার্ক"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"বিমান-সুরক্ষা নেটওয়ার্ক খুঁজে সেই পরিষেবাতে কানেক্ট করুন"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"বিমান, বিমান-সুরক্ষা"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"কল ও এসএমএস"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"ওয়াই-ফাই কলিং"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"ওয়াই-ফাই নেটওয়ার্কের মতো পরিষেবা প্রদানকারী নয় এমন নেটওয়ার্ক ব্যবহার করে কল করুন এবং কল রিসিভ করুন"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"ওয়াই-ফাই কলিংয়ের সাহায্যে ওয়াই-ফাই নেটওয়ার্কের মতো কিছু পরিষেবা প্রদানকারী নয় এমন নেটওয়ার্ক ব্যবহার করে কল করতে এবং কল রিসিভ করতে পারবেন।\n\nক্রস-সিম কলিংয়ের সাহায্যে অন্য সিম থেকে কল করতে এবং তাতে কল রিসিভ করতে অন্য সিমের মোবাইল ডেটা ব্যবহার করতে পারবেন।"</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"কল"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"এসএমএস"</string>
 </resources>

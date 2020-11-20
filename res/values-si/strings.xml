@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"අදාළත්වය අනුව ස්වයංක්‍රියව දැනුම් දීම් ශ්‍රේණිගත කරන්න"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"අනුවර්තී දැනුම් දීම් ප්‍රතිපෝෂණය"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"දැනුම් දීම් වෙත කළ ගැළපීම් දක්වා පද්ධතිය වෙත ප්‍රතිපෝෂණ ලබා දීමට විකල්පය පෙන්වන්න"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"දැනුම්දීම් වැදගත්කම යළි සකසන්න"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"පරිශීලක වෙනස් කළ වැදගත් සැකසීම් යළි සකසන්න සහ ප්‍රමුඛතාව සැකසීමට දැනුම්දීම් සහායකට ඉඩ දෙන්න"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"යෝජිත ක්‍රියා සහ පිළිතුරු"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"යෝජිත ක්‍රියා සහ පිළිතුරු ස්වයංක්‍රීයව පෙන්වන්න"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"මෑත සහ මඳක් නිද්‍රාවට පත් කළ දැනුම් දීම් පෙන්වන්න"</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> වෙත සම්බන්ධ වූ විට නොමැත"</string>
     <string name="see_more" msgid="7499355691042812723">"තව බලන්න"</string>
     <string name="see_less" msgid="2642392725363552793">"අඩුවෙන් බලන්න"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ක්‍රියාත්මක කරන්නද?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"SIM ක්‍රියාත්මක කරන්නද?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> වෙත මාරු වන්නද?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"SIM කාඩ්පත භාවිතයට මාරු වන්නද?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"වරකට SIM එකක් පමණක් සක්‍රිය කළ හැකිය.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> වෙත මාරු වීම ඔබේ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> සේවය අවලංගු නොකරනු ඇත."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"වරකට බාගත් SIM එකක් පමණක් සක්‍රිය විය හැකිය.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> වෙත මාරු වීම ඔබේ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> සේවය අවසන් නොකරනු ඇත."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"වරකට SIM එකක් පමණක් සක්‍රිය කළ හැකිය.\n\nමාරු වීම ඔබේ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> සේවය අවලංගු නොකරනු ඇත."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> වෙත මාරු වන්න"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"ජාලයට සම්බන්ධ වෙමින්…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> වෙත මාරු වෙමින්"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"වාහකය මාරු කළ නොහැකිය"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"දෝෂයක් හේතුවෙන් වාහකය මාරු කළ නොහැකිය."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ක්‍රියාවිරහිත කරන්නද?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"SIM ක්‍රියාවිරහිත කරන්නද?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"SIM ක්‍රියාවිරහිත කරමින්<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"වාහකය අබල කළ නොහැකිය"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"වාහකය අබල කළ නොහැකිය"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"යම් දෙයක් වැරදී ගිය අතර ඔබේ වාහකය අබල කළ නොහැකි විය."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"SIM 2ක් භාවිත කරන්නද?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"මෙම උපාංගයට එකවර SIM 2ක් ක්‍රියාත්මකව තිබිය හැකිය. දිගටම වරකට 1 SIM එකක් භාවිත කිරීමට, \"එපා, ස්තුතියි\" තට්ටු කරන්න."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"උපාංගය යළි අරඹන්නද?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"ආරම්භ කිරීමට, ඔබේ උපාංගය යළි අරඹන්න. පසුව ඔබට වෙනත් SIM එකක් එක් කළ හැකිය."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"ඉදිරියට යන්න"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"යළි අරඹන්න"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"එපා, ස්තුතියි"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"මාරු වන්න"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM එක සක්‍රිය කිරීමට නොහැකිය"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM එක ඉවත් කර එය නැවත ඇතුළු කරන්න. ප්‍රශ්නය දිගටම පැවතුණහොත්, ඔබේ උපාංගය යළි ආරම්භ කරන්න."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"නැවත SIM එක ක්‍රියාත්මක කිරීමට උත්සාහ කරන්න. ප්‍රශ්නය දිගටම පැවතුණහොත්, ඔබේ උපාංගය යළි ආරම්භ කරන්න."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"මෙම බාගත් SIM මකන්නද?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"මෙම SIM මැකීමෙන් මෙම උපාංගයෙන් <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> සේවාව ඉවත් කරයි.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> සඳහා වන සේවාව අවලංගු නොකෙරේ."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"මකන්න"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"බ්ලූටූත් ක්‍රියාත්මක වනු ඇත"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"ක්‍රියාත්මකයි"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"ක්‍රියාවිරහිතයි"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"අන්තර්ජාලය"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"ගුවන් යානා ආරක්ෂිත ජාල"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"ගුවන් යානා ආරක්ෂිත ජාල සොයන්න සහ සම්බන්ධ වන්න"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"ගුවන් යානා, ගුවන් යානා ආරක්ෂිත"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"ඇමතුම් &amp; SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi ඇමතීම"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Wi‑Fi වැනි වාහක නොවන ජාල හරහා ඇමතුම් සිදු කරන්න සහ ලබන්න"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"සමහර Wi-Fi ජාල වැනි වාහක නොවන ජාල හරහා ඇමතුම් ලබා ගැනීමට සහ ලැබීමට Wi-Fi ඇමතීම ඔබට ඉඩ දෙයි.\n\nහරස් SIM ඇමතුම් ඔබට SIM එකක ජංගම දත්ත වෙනත් SIM එකකින් ඇමතුම් සිදු කිරීමට සහ ලැබීමට ඉඩ දෙයි."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"ඇමතුම්"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

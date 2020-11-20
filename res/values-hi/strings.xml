@@ -3477,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"कोई सूचना कितने काम की है, इस हिसाब से उसे अपने-आप रैंक करें"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"ज़रूरत के हिसाब से सूचनाओं के बारे में सुझाव दें या शिकायत करें"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"यह सेटिंग, सूचनाओं की प्राथमिकताओं में किए गए बदलावों के बारे में बताती है और सिस्टम के बारे में राय/सुझाव देने के विकल्प दिखाती है"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"सूचना की प्राथमिकताएं रीसेट करें"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"उपयोगकर्ता की ओर से बदली गई प्राथमिकताएं सेटिंग को रीसेट करें. साथ ही, सूचना सहायक को प्राथमिकता तय करने की अनुमति दें"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"सुझाई गई कार्रवाइयां और जवाब"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"सुझाई गई कार्रवाइयां और जवाब अपने-आप दिखाएं"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"हाल ही में मिली और स्नूज़ की गई सूचनाएं दिखाएं"</string>
@@ -4505,7 +4507,7 @@
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g> प्रबंधित करता है"</string>
     <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"आपातकालीन सेवाओं को कॉल करने के लिए, पावर बटन को पांच बार तेज़ी से दबाएं."</string>
     <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"चेतावनी की आवाज़"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"आपातकालीन सेवाओं को कॉल करने से पहले चेतावनी जारी करें"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"आपातकालीन सेवाओं को कॉल करने से पहले आवाज़ वाली चेतावनी जारी करें"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"सूचनाओं के लिए फ़िंगरप्रिंट स्वाइप करें"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"फ़िंगरप्रिंट स्वाइप करें"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"अपनी सूचनाएं देखने के लिए, अपने फ़ोन के पीछे फ़िंगरप्रिंट सेंसर पर नीचे की तरफ़ स्वाइप करें."</string>
@@ -4848,11 +4850,34 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> से कनेक्ट होने पर उपलब्ध नहीं है"</string>
     <string name="see_more" msgid="7499355691042812723">"ज़्यादा देखें"</string>
     <string name="see_less" msgid="2642392725363552793">"कम देखें"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"क्या आप <xliff:g id="CARRIER_NAME">%1$s</xliff:g> चालू करना चाहते हैं?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"क्या आप सिम चालू करना चाहते हैं?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"क्या आप <xliff:g id="CARRIER_NAME">%1$s</xliff:g> का इस्तेमाल करना चाहते हैं?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"क्या आप इस्तेमाल करने के लिए सिम कार्ड पर जाना चाहते हैं?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"एक समय में सिर्फ़ एक सिम इस्तेमाल किया जा सकता है.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> पर जाने से आपके <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> की सेवा रद्द नहीं की जाएगी."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"एक समय में, डाउनलोड किया गया सिर्फ़ एक सिम इस्तेमाल किया जा सकता है.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> पर जाने से आपके <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> की सेवा रद्द नहीं की जाएगी."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"एक समय में सिर्फ़ एक सिम इस्तेमाल किया जा सकता है.\n\nएक से दूसरे सिम पर जाने से, आपको मिल रही <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> की सेवा रद्द नहीं की जाएगी."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> पर जाएं"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"नेटवर्क से कनेक्ट किया जा रहा है…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> पर ले जाया जा रहा है"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी को बदला नहीं जा सकता"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"किसी गड़बड़ी की वजह से, मोबाइल और इंटरनेट सेवा देने वाली कंपनी को बदला नहीं जा सकता."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"क्या आप <xliff:g id="CARRIER_NAME">%1$s</xliff:g> को बंद करना चाहते हैं?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"क्या आप सिम बंद करना चाहते हैं?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"सिम बंद किया जा रहा है<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
-    <string name="privileged_action_disable_fail_title" msgid="3959790932910391006">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी का नेटवर्क बंद नहीं किया जा सकता"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी का नेटवर्क बंद नहीं किया जा सकता"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"कोई गड़बड़ी हुई, जिसकी वजह से आपकी मोबाइल और इंटरनेट सेवा देने वाली कंपनी का नेटवर्क बंद नहीं किया जा सका."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"क्या आप दो सिम इस्तेमाल करना चाहते हैं?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"इस डिवाइस में एक साथ दाे सिम चालू रह सकते हैं. अगर आप एक बार में एक सिम इस्तेमाल करना चाहते हैं, तो \"रहने दें\" पर टैप करें."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"क्या आप डिवाइस को रीस्टार्ट करना चाहते हैं?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"शुरू करने के लिए, अपने डिवाइस को रीस्टार्ट करें. इसके बाद, आप दूसरा सिम जोड़ सकते हैं."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"जारी रखें"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"रीस्टार्ट करें"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"रहने दें"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"दूसरे नेटवर्क पर जाएं"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"सिम चालू नहीं किया जा सका"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"सिम निकालकर फिर से लगाएं. अगर तब भी समस्या ठीक नहीं होती, तो डिवाइस को रीस्टार्ट करें."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"सिम दोबारा चालू करने की कोशिश करें. अगर तब भी समस्या ठीक नहीं होती, तो डिवाइस को रीस्टार्ट करें."</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"क्या आप डाउनलोड किए गए इस सिम को हमेशा के लिए मिटाना चाहते हैं?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"इस सिम को डिवाइस से हमेशा के लिए मिटाने पर, <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> की सेवा हट जाती है.\n\nहालांकि, <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> की सेवा नहीं हटेगी."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"हमेशा के लिए मिटाएं"</string>
@@ -4991,4 +5016,15 @@
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"ब्लूटूथ चालू हो जाएगा"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"चालू है"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"बंद है"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"इंटरनेट"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"सिम"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"हवाई जहाज़ सुरक्षित नेटवर्क"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"हवाई जहाज़ सुरक्षित नेटवर्क ढूंढें और उससे जुड़ें"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"हवाई जहाज़, हवाई जहाज़ सुरक्षित नेटवर्क"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"कॉल और मैसेज (एसएमएस)"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"वाई-फ़ाई कॉलिंग"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"ऐसे नेटवर्क से कॉल करें और उन पर कॉल पाएं जो सिम का इस्तेमाल नहीं करते, जैसे वाई-फ़ाई नेटवर्क"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"वाई-फ़ाई कॉलिंग आपको ऐसे नेटवर्क से कॉल करने और उन पर कॉल पाने की सुविधा देती है जो सिम का इस्तेमाल नहीं करते, जैसे कुछ वाई-फ़ाई नेटवर्क.\n\nक्रॉस-सिम कॉलिंग की मदद से, आप एक सिम के मोबाइल डेटा का इस्तेमाल करके, दूसरे सिम वाले नंबर से कॉल कर सकते हैं और उस पर कॉल पा सकते हैं."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"कॉल"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"मैसेज (एसएमएस)"</string>
 </resources>
