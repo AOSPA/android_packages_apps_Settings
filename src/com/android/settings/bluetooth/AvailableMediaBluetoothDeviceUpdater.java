@@ -93,6 +93,19 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
                 Log.d(TAG, "isFilterMatched() device : " +
                         cachedDevice.getName() + ", isFilterMatched : " + isFilterMatched);
             }
+            if (isFilterMatched) {
+                if (isGroupDevice(cachedDevice)) {
+                    isFilterMatched = false;
+                    if (DBG) {
+                        Log.d(TAG, "It is GroupDevice ignore showing ");
+                    }
+                } else if (isPrivateAddr(cachedDevice)) {
+                    isFilterMatched = false;
+                    if (DBG) {
+                        Log.d(TAG, "It is isPrivateAddr ignore showing ");
+                    }
+                }
+            }
         }
         return isFilterMatched;
     }
