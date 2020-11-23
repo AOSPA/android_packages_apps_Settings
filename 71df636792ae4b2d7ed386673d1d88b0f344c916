@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1c480c5_a9f28d74",
+        "filename": "src/com/android/settings/gestures/AdaptivePlaybackGesturePreferenceController.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-11-23T16:57:33Z",
+      "side": 1,
+      "message": "what\u0027s the point of all the VisibleForTesting annotations if there are no tests for this class? Either write the tests (see the preference controllers here as reference: https://github.com/AOSPA/android_packages_apps_Settings/tree/ruby/tests/robotests/src/com/android/settings/development) or get rid of the annotations and make everything private",
+      "revId": "71df636792ae4b2d7ed386673d1d88b0f344c916",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad",
+      "unresolved": true
+    }
+  ]
+}
