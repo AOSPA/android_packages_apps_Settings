@@ -214,6 +214,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             Log.d("TetheringSettings",
                     "Wifi AP config changed while enabled, stop and restart");
             mRestartWifiApAfterConfigChange = true;
+            mSSIDPreferenceController.setButtonInvisible();
             mSwitchBarController.stopTether();
         }
         mWifiManager.setSoftApConfiguration(config);
