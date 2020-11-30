@@ -191,6 +191,12 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         final ArrayList<CharSequence> displayNames = new ArrayList<>();
         final ArrayList<CharSequence> subscriptionIds = new ArrayList<>();
 
+        if (Utils.isProviderModelEnabled(mContext) && mSelectableSubs.size() == 1) {
+            mPreference.setEnabled(false);
+            mPreference.setSummary(mSelectableSubs.get(0).getDisplayName());
+            return;
+        }
+
         final int serviceDefaultSubId = getDefaultSubscriptionId();
         boolean subIsAvailable = false;
 
