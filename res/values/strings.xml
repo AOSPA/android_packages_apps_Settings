@@ -846,9 +846,11 @@
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up face unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
+    <string name="security_settings_face_settings_top_intro">Use face unlock to unlock your device, sign in to apps, and confirm payments.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer">Keep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
     <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer_attention_not_supported">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported">Keep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
@@ -5764,6 +5766,10 @@
     <string name="battery_tip_high_usage_title" product="device">Device used more than usual</string>
     <!-- Summary for the battery high usage tip, which presents battery may run out earlier [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">Battery may run out earlier than usual</string>
+    <!-- Title for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_limited_temporarily_title">Battery limited temporarily</string>
+    <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_limited_temporarily_summary">Helps preserve battery health. Tap to learn more.</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
@@ -6365,6 +6371,17 @@
     <string name="certificate_warning_install_anyway">Install anyway</string>
     <!-- Toast message that a certificate was not installed -->
     <string name="cert_not_installed">Certificate not installed</string>
+
+    <!-- Title of screen shown to the user when an app requests to manage the user's KeyChain credentials [CHAR LIMIT=NONE] -->
+    <string name="request_manage_credentials_title">Allow <xliff:g id="app_name" example="Ping">%s</xliff:g> to install certificates on this device?</string>
+    <!-- Description of screen shown to the user when an app requests to manage the user's KeyChain credentials [CHAR LIMIT=NONE] -->
+    <string name="request_manage_credentials_description">These certificates will identify you to the apps and URLs below</string>
+    <!-- Label for button to not allow an app to manage the user's KeyChain credentials [CHAR_LIMIT=50] -->
+    <string name="request_manage_credentials_dont_allow">Don\u2019t allow</string>
+    <!-- Label for button to allow an app to manage the user's KeyChain credentials [CHAR_LIMIT=50] -->
+    <string name="request_manage_credentials_allow">Allow</string>
+    <!-- Label for floating action button to scroll to the end of the authentication policy list [CHAR LIMIT=30] -->
+    <string name="request_manage_credentials_more">Show more</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency dialing signal</string>
@@ -9461,10 +9478,11 @@
 
     <!-- [CHAR LIMIT=28] Screen pinning title -->
     <string name="screen_pinning_title">App pinning</string>
+    <!-- [CHAR LIMIT=none] Screen pinning introduction -->
+    <string name="app_pinning_intro">App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game.</string>
     <!-- [CHAR LIMIT=none] Screen pinning description -->
     <string name="screen_pinning_description">
-        App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game.
-        \n\nWhen an app is pinned, the pinned app may open other apps and personal data may be accessible.
+        When an app is pinned, the pinned app may open other apps and personal data may be accessible.
         \n\nTo use app pinning:
         \t\n1.\tTurn on app pinning
         \t\n2.\tOpen Overview
@@ -9472,8 +9490,7 @@
     </string>
     <!-- [CHAR LIMIT=none] Screen pinning description -->
     <string name="screen_pinning_guest_user_description">
-        App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game.
-        \n\nWhen an app is pinned, the pinned app may open other apps and personal data may be accessible.
+        When an app is pinned, the pinned app may open other apps and personal data may be accessible.
         \n\nIf you want to securely share your device with someone, try using a guest user instead.
         \n\nTo use app pinning:
         \t\n1.\tTurn on app pinning
@@ -11119,16 +11136,35 @@
     <string name="emergency_gesture_screen_title">Emergency SOS</string>
 
     <!-- Preference title to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
+    <string name="emergency_gesture_switchbar_title">Use emergency SOS</string>
+
+    <!-- Preference summary to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
     <string name="emergency_gesture_entrypoint_summary">Managed by <xliff:g id="app_name" example="Emergency Info">%1$s</xliff:g></string>
 
     <!-- Preference summary to enable feature for calling emergency services at panic/distress moments[CHAR_LIMIT=NONE]-->
     <string name="emergency_gesture_screen_summary">Start the actions below by pressing the power button quickly 5 times or more</string>
 
     <!-- Preference title to enable generating noisy sound before calling emergency services at panic/distress moments[CHAR_LIMIT=60]-->
-    <string name="emergency_gesture_sound_setting_title">Countdown alarm</string>
+    <string name="emergency_gesture_sound_setting_title">Play countdown alarm</string>
 
     <!-- Preference summary to enable generating noisy sound before calling emergency services at panic/distress moments[CHAR_LIMIT=NONE]-->
-    <string name="emergency_gesture_sound_setting_summary">Play a loud sound before calling</string>
+    <string name="emergency_gesture_sound_setting_summary">Play a loud sound before notifying for help</string>
+
+    <!-- Preference title listing a phone number to call during emergency gesture [CHAR_LIMIT=60]-->
+    <string name="emergency_gesture_call_for_help_title">Call for help</string>
+
+    <!-- Preference title listing a phone number to call during emergency gesture [CHAR_LIMIT=NONE]-->
+    <string name="emergency_gesture_call_for_help_dialog_title">Number to call for help</string>
+
+    <!-- Preference summary listing a phone number to call during emergency gesture, and clicking the perference will show a dialog to change this number [CHAR_LIMIT=NONE]-->
+    <string name="emergency_gesture_call_for_help_summary"><xliff:g id="phone_number" example="911">%1$s</xliff:g>. Tap to change</string>
+
+    <!-- Notes explaining limitations for emergency gesture number override [CHAR_LIMIT=NONE]-->
+    <string name="emergency_gesture_number_override_notes">
+        If you enter a non-emergency number:\n
+        • Your device must be unlocked to use emergency SOS\n
+        • Your call may not be answered
+    </string>
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
@@ -12323,6 +12359,15 @@
     <!-- Summary for Wi-Fi calling to explain this feature [CHAR LIMIT=NONE] -->
     <string name="wifi_calling_summary">Use Wi\u2011Fi for calls to improve quality</string>
 
+    <!-- Mobile network settings screen, title of Cross SIM calling setting.  [CHAR LIMIT=NONE] -->
+    <string name="cross_sim_calling_settings_title">Cross SIM calling</string>
+
+    <!-- Cross SIM calling summary.  [CHAR LIMIT=100] -->
+    <string name="cross_sim_calling_setting_summary">Allow another SIM calls and SMSs over this SIM.</string>
+
+    <!-- List of synonyms for the cross SIM calling titles, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_cross_sim_calling">cross sim calling</string>
+
     <!-- Title for enable MMS notification when trying to receive MMS.  [CHAR LIMIT=40] -->
     <string name="enable_receiving_mms_notification_title">Incoming MMS message</string>
     <!-- Title for enable MMS notification when trying to send MMS.  [CHAR LIMIT=40] -->
@@ -12525,14 +12570,26 @@
     <!-- Provider Model: Name for call settings category [CHAR LIMIT=NONE] -->
     <string name="calls_and_sms_category">Wi\u2011Fi Calling</string>
     <!-- Provider Model: Summary for calling preference -->
-    <string name="calls_sms_wfc_summary">Make and receive calls over non-carrier networks like Wi\u2011Fi</string>
+    <string name="calls_sms_wfc_summary">Make and receive calls over non\u2011carrier networks like Wi\u2011Fi</string>
     <!-- Provider Model: Label for footnote on calling preference -->
-    <string name="calls_sms_footnote">Wi-Fi calling allows you to make and receive calls over non-carrier networks such as some Wi\u2011Fi networks.\n\nCross-SIM calling allows you to leverage the mobile data of a SIM to make and receive calls from another SIM.</string>
+    <string name="calls_sms_footnote">Wi\u2011Fi calling allows you to make and receive calls over non\u2011carrier networks such as some Wi\u2011Fi networks.</string>
     <!-- Provider Model: Calls preference title -->
     <string name="calls_preference_title">Calls</string>
     <!-- Provider Model: SMS preference title -->
     <string name="sms_preference_title">SMS</string>
+    <!-- Network & internet preferences title [CHAR LIMIT=NONE] -->
+    <string name="network_and_internet_preferences_title">Preferences</string>
+    <!-- Network & internet preferences summary [CHAR LIMIT=NONE] -->
+    <string name="network_and_internet_preferences_summary">Connect to public networks</string>
+    <!-- Search keywords for "Internet" settings [CHAR_LIMIT=NONE] -->
+    <string name="keywords_internet">network connection, internet, wireless, data, wifi, wi-fi, wi fi, cellular, mobile, cell carrier, 4g, 3g, 2g, lte</string>
 
     <!-- Summary for preference when Bedtime mode is on [CHAR LIMIT=NONE] -->
     <string name="aware_summary_when_bedtime_on">Unavailable because bedtime mode is on</string>
+
+    <!-- Toast message to inform reset notification importance is completed [CHAR LIMIT=NONE] -->
+    <string name="reset_importance_completed">Reset notification importance completed.</string>
+
+    <!-- Title for setting tile leading to Apps settings [CHAR LIMIT=40]-->
+    <string name="apps_dashboard_title">Apps</string>
 </resources>

@@ -17,33 +17,35 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="calls_and_sms_screen"
+    android:key="provider_model_calls_and_sms_screen"
     android:title="@string/calls_and_sms">
 
     <ListPreference
-        android:key="calls_preference"
+        android:key="provider_model_calls_preference"
         android:title="@string/calls_preference_title"
         settings:controller="com.android.settings.network.telephony.CallsDefaultSubscriptionController"
         android:order="10"
+        android:icon="@drawable/ic_phone"
         />
 
     <ListPreference
-        android:key="sms_preference"
+        android:key="provider_model_sms_preference"
         android:title="@string/sms_preference_title"
         settings:controller="com.android.settings.network.telephony.SmsDefaultSubscriptionController"
         android:order="15"
+        android:icon="@drawable/ic_sms"
         />
 
     <PreferenceCategory
         android:key="provider_model_calling_category"
         android:title="@string/calls_and_sms_category"
         android:order="20"
-        settings:controller="com.android.settings.network.telephony.CallingPreferenceCategoryController"
+        settings:controller="com.android.settings.network.telephony.NetworkProviderWifiCallingPreferenceController"
         settings:allowDividerAbove="true"
         />
 
     <com.android.settingslib.widget.FooterPreference
-        android:key="calls_sms_footer"
+        android:key="provider_model_calls_sms_footer"
         android:title="@string/calls_sms_footnote"
         android:selectable="false"
         settings:searchable="false"
