@@ -20,12 +20,15 @@
     android:title="@string/dark_ui_mode"
     settings:keywords="@string/keywords_dark_ui_mode">
 
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settingslib.widget.BannerMessagePreference
         android:key="dark_ui_location_off"
-        android:selectable="false"
-        android:layout="@layout/twilight_mode_location_off"
-        settings:allowDividerBelow="true"
+        android:title="@string/twilight_mode_location_off_dialog_message"
         settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="dark_ui_top_intro"
+        android:title="@string/dark_ui_text"
+        settings:searchable="false"/>
 
     <DropDownPreference
         android:key="dark_ui_auto_mode"
@@ -54,12 +57,5 @@
         android:layout="@layout/dark_ui_activation_button"
         settings:allowDividerBelow="true"
         settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"/>
-
-    <com.android.settingslib.widget.FooterPreference
-            android:key="dark_ui_footer"
-            android:title="@string/dark_ui_text"
-            android:selectable="false"
-            settings:searchable="false"
-            settings:allowDividerAbove="true"/>
 
 </PreferenceScreen>
