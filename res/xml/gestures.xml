@@ -34,6 +34,12 @@
         settings:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
 
     <Preference
+        android:key="quick_settings_quick_pull_down_summary"
+        android:title="@string/quick_settings_quick_pull_down_title"
+        android:fragment="com.android.settings.gestures.QuickSettingsQuickPullDownSettings"
+        settings:controller="com.android.settings.gestures.QuickSettingsQuickPullDownPreferenceController" />
+
+    <Preference
         android:key="swipe_to_screenshot_summary"
         android:title="@string/swipe_to_screenshot_title"
         android:fragment="com.android.settings.gestures.SwipeToScreenshotGestureSettings"
