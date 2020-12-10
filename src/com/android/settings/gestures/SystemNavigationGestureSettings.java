@@ -212,7 +212,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         OverlayInfo info = null;
 
         boolean hasImmersiveNavigation = Settings.Secure.getInt(context.getContentResolver(),
-                Settings.Secure.IMMERSIVE_NAVIGATION, 1) == 1;
+                Settings.Secure.IMMERSIVE_NAVIGATION, 0) == 1;
         try {
             info = overlayManager.getOverlayInfo(hasImmersiveNavigation ? NAV_MODE_IMMERSIVE_OVERLAY :
                                                  NAV_BAR_MODE_GESTURAL_OVERLAY, USER_CURRENT);
