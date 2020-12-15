@@ -3696,6 +3696,14 @@
             </intent-filter>/>
         </receiver>
 
+        <receiver
+            android:name=".sim.receivers.SimSlotChangeReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.telephony.action.SIM_SLOT_STATUS_CHANGED" />
+            </intent-filter>
+        </receiver>
+
        <activity android:name=".network.telephony.UserPLMNListActivity"
            android:exported="true"
            android:label="@string/uplmn_settings_title"
