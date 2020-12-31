@@ -38,6 +38,7 @@ import android.util.Log;
 
 import androidx.preference.Preference;
 
+import com.android.internal.telephony.OperatorInfo;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -172,6 +173,15 @@ public class NetworkOperatorPreference extends Preference {
      */
     public String getOperatorName() {
         return CellInfoUtil.getNetworkTitle(mCellId, getOperatorNumeric());
+    }
+
+    /**
+     * Operator info of this cell
+     */
+    public OperatorInfo getOperatorInfo() {
+        return new OperatorInfo(Objects.toString(mCellId.getOperatorAlphaLong(), ""),
+                Objects.toString(mCellId.getOperatorAlphaShort(), ""),
+                getOperatorNumeric());
     }
 
     private int getIconIdForCell(CellInfo ci) {
