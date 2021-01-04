@@ -18,6 +18,8 @@ package com.android.settings.network;
 import static android.os.UserHandle.myUserId;
 import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
 
+import static androidx.lifecycle.Lifecycle.Event;
+
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -32,6 +34,8 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -42,14 +46,11 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settings.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
-import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.List;
 
 public class MobileNetworkPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
+        implements PreferenceControllerMixin, LifecycleObserver {
 
     @VisibleForTesting
     static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
@@ -106,7 +107,7 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
         return KEY_MOBILE_NETWORK_SETTINGS;
     }
 
-    @Override
+    @OnLifecycleEvent(Event.ON_START)
     public void onStart() {
         if (mSubscriptionManager != null)
             mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangeListener);
@@ -168,7 +169,7 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
         }
     };
 
-    @Override
+    @OnLifecycleEvent(Event.ON_STOP)
     public void onStop() {
         if (mPhoneStateListener != null) {
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);

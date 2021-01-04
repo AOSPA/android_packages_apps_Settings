@@ -31,6 +31,7 @@ import static com.android.settings.network.telephony.TelephonyConstants.Telephon
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO;
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
 
+import android.annotation.Nullable;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +42,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.os.SystemProperties;
@@ -48,6 +52,7 @@ import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -68,6 +73,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
@@ -201,8 +207,7 @@ public class MobileNetworkUtils {
         return bundle.getBoolean(CarrierConfigManager.KEY_USE_RCS_PRESENCE_BOOL, false /*default*/);
     }
 
-    @VisibleForTesting
-    static Intent buildPhoneAccountConfigureIntent(
+    public static Intent buildPhoneAccountConfigureIntent(
             Context context, PhoneAccountHandle accountHandle) {
         Intent intent = buildConfigureIntent(
                 context, accountHandle, TelecomManager.ACTION_CONFIGURE_PHONE_ACCOUNT);
@@ -279,7 +284,8 @@ public class MobileNetworkUtils {
                 String.format("showEuiccSettings: esimIgnoredDevice: %b, enabledEsimUiByDefault: "
                         + "%b, euiccProvisioned: %b, inDeveloperMode: %b.",
                 esimIgnoredDevice, enabledEsimUiByDefault, euiccProvisioned, inDeveloperMode));
-        return (inDeveloperMode || euiccProvisioned
+        return (euiccProvisioned
+                || (!esimIgnoredDevice && inDeveloperMode)
                 || (!esimIgnoredDevice && enabledEsimUiByDefault
                         && isCurrentCountrySupported(context)));
     }
@@ -475,8 +481,9 @@ public class MobileNetworkUtils {
         if (carrierConfig.getBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL)) {
             return true;
         }
-
-        final String operatorNumeric = telephonyManager.getServiceState().getOperatorNumeric();
+        final ServiceState serviceState = telephonyManager.getServiceState();
+        final String operatorNumeric =
+                (serviceState != null) ? serviceState.getOperatorNumeric() : null;
         final String[] numericArray = carrierConfig.getStringArray(
                 CarrierConfigManager.KEY_SUPPORT_TDSCDMA_ROAMING_NETWORKS_STRING_ARRAY);
         if (numericArray == null || operatorNumeric == null) {
@@ -850,5 +857,46 @@ public class MobileNetworkUtils {
         raf = ((LTE & raf) > 0) ? (LTE | raf) : raf;
         raf = ((NR & raf) > 0) ? (NR | raf) : raf;
         return raf;
+    }
+
+    /**
+     * Copied from SubscriptionsPreferenceController#activeNetworkIsCellular()
+     */
+    public static boolean activeNetworkIsCellular(Context context) {
+        final ConnectivityManager connectivityManager =
+                context.getSystemService(ConnectivityManager.class);
+        final Network activeNetwork = connectivityManager.getActiveNetwork();
+        if (activeNetwork == null) {
+            return false;
+        }
+        final NetworkCapabilities networkCapabilities =
+                connectivityManager.getNetworkCapabilities(activeNetwork);
+        if (networkCapabilities == null) {
+            return false;
+        }
+        return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR);
+    }
+
+    /**
+     * Copied from WifiCallingPreferenceController#isWifiCallingEnabled()
+     */
+    public static boolean isWifiCallingEnabled(Context context, int subId,
+            @Nullable WifiCallingQueryImsState queryImsState,
+            @Nullable PhoneAccountHandle phoneAccountHandle) {
+        if (phoneAccountHandle == null){
+            phoneAccountHandle = context.getSystemService(TelecomManager.class)
+                    .getSimCallManagerForSubscription(subId);
+        }
+        boolean isWifiCallingEnabled;
+        if (phoneAccountHandle != null) {
+            final Intent intent = buildPhoneAccountConfigureIntent(context, phoneAccountHandle);
+            isWifiCallingEnabled = intent != null;
+        } else {
+            if (queryImsState == null) {
+                queryImsState = new WifiCallingQueryImsState(context, subId);
+            }
+            isWifiCallingEnabled = queryImsState.isReadyToWifiCalling();
+        }
+        return isWifiCallingEnabled;
     }
 }

@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.Manifest;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -194,6 +195,6 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
             intent.setClassName(mLaunchPackage, mLaunchClass);
         }
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-        getActivity().sendBroadcast(intent);
+        getActivity().sendBroadcast(intent, Manifest.permission.BLUETOOTH_ADMIN);
     }
 }

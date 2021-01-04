@@ -86,6 +86,11 @@
             android:title="@string/accessibility_disable_animations"
             settings:controller="com.android.settings.accessibility.DisableAnimationsPreferenceController"/>
 
+        <SwitchPreference
+            android:key="toggle_force_bold_text"
+            android:persistent="false"
+            android:title="@string/force_bold_text"
+            settings:controller="com.android.settings.accessibility.ForceBoldTextPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -113,7 +118,7 @@
             settings:controller="com.android.settings.accessibility.LockScreenRotationPreferenceController"/>
 
         <ListPreference
-            android:entries="@array/long_press_timeout_selector_titles"
+            android:entries="@array/long_press_timeout_selector_list_titles"
             android:entryValues="@array/long_press_timeout_selector_values"
             android:key="select_long_press_timeout_preference"
             android:persistent="false"
@@ -158,16 +163,16 @@
             settings:controller="com.android.settings.accessibility.LiveCaptionPreferenceController"/>
 
         <SwitchPreference
-            android:key="toggle_master_mono"
+            android:key="toggle_primary_mono"
             android:persistent="false"
-            android:summary="@string/accessibility_toggle_master_mono_summary"
-            android:title="@string/accessibility_toggle_master_mono_title"
-            settings:controller="com.android.settings.accessibility.MasterMonoPreferenceController"/>
+            android:summary="@string/accessibility_toggle_primary_mono_summary"
+            android:title="@string/accessibility_toggle_primary_mono_title"
+            settings:controller="com.android.settings.accessibility.PrimaryMonoPreferenceController"/>
 
         <com.android.settings.accessibility.BalanceSeekBarPreference
-            android:key="seekbar_master_balance"
+            android:key="seekbar_primary_balance"
             android:persistent="false"
-            android:title="@string/accessibility_toggle_master_balance_title"/>
+            android:title="@string/accessibility_toggle_primary_balance_title"/>
 
         <Preference
             android:key="hearing_aid_preference"
@@ -225,6 +230,14 @@
             android:title="@string/accessibility_shortcut_service_on_lock_screen_title"
             android:summary="@string/accessibility_shortcut_description"
             settings:controller="com.android.settings.accessibility.AccessibilityShortcutPreferenceController"/>
+
+        <!--TODO(b/170973645): Get icon-->
+        <Preference
+            android:fragment="com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment"
+            android:key="reduce_bright_colors_preference"
+            android:persistent="false"
+            android:title="@string/reduce_bright_colors_preference_title"
+            settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"/>
 
     </PreferenceCategory>
 

@@ -20,12 +20,15 @@ import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -36,12 +39,28 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
 import com.google.android.setupdesign.template.RequireScrollMixin;
 
+import java.util.List;
+
 public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
-    private static final String TAG = "FaceIntro";
+    private static final String TAG = "FaceEnrollIntroduction";
 
     private FaceManager mFaceManager;
     private FaceFeatureProvider mFaceFeatureProvider;
+
+    @Override
+    protected void onCancelButtonClick(View view) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+            super.onCancelButtonClick(view);
+        }
+    }
+
+    @Override
+    protected void onSkipButtonClick(View view) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+            super.onSkipButtonClick(view);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,25 +71,14 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                 .getFaceFeatureProvider();
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
-        if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
-            mFooterBarMixin.setSecondaryButton(
-                    new FooterButton.Builder(this)
-                            .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
-                            .setListener(this::onSkipButtonClick)
-                            .setButtonType(FooterButton.ButtonType.SKIP)
-                            .setTheme(R.style.SudGlifButton_Secondary)
-                            .build()
-            );
-        } else {
-            mFooterBarMixin.setSecondaryButton(
-                    new FooterButton.Builder(this)
-                            .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
-                            .setListener(this::onCancelButtonClick)
-                            .setButtonType(FooterButton.ButtonType.CANCEL)
-                            .setTheme(R.style.SudGlifButton_Secondary)
-                            .build()
-            );
-        }
+        mFooterBarMixin.setSecondaryButton(
+                new FooterButton.Builder(this)
+                        .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
+                        .setListener(this::onSkipButtonClick)
+                        .setButtonType(FooterButton.ButtonType.SKIP)
+                        .setTheme(R.style.SudGlifButton_Secondary)
+                        .build()
+        );
 
         FooterButton.Builder nextButtonBuilder = new FooterButton.Builder(this)
                 .setText(R.string.security_settings_face_enroll_introduction_agree)
@@ -86,9 +94,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                     RequireScrollMixin.class);
             requireScrollMixin.requireScrollWithButton(this, agreeButton,
                     R.string.security_settings_face_enroll_introduction_more,
-                    button -> {
-                        onNextButtonClick(button);
-                    });
+                    this::onNextButtonClick);
         }
 
         final TextView footer2 = findViewById(R.id.face_enroll_introduction_footer_part_2);
@@ -97,6 +103,21 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                         ? R.string.security_settings_face_enroll_introduction_footer_part_2
                         : R.string.security_settings_face_settings_footer_attention_not_supported;
         footer2.setText(footer2TextResource);
+
+        // This path is an entry point for SetNewPasswordController, e.g.
+        // adb shell am start -a android.app.action.SET_NEW_PASSWORD
+        if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
+            mFooterBarMixin.getPrimaryButton().setEnabled(false);
+            // We either block on generateChallenge, or need to gray out the "next" button until
+            // the challenge is ready. Let's just do this for now.
+            mFaceManager.generateChallenge((sensorId, challenge) -> {
+                mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
+                if (BiometricUtils.isMultiBiometricEnrollmentFlow(this)) {
+                    BiometricUtils.removeGatekeeperPasswordHandle(this, getIntent());
+                }
+                mFooterBarMixin.getPrimaryButton().setEnabled(true);
+            });
+        }
     }
 
     @Override
@@ -148,8 +169,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     private boolean maxFacesEnrolled() {
         if (mFaceManager != null) {
-            final int max = getResources().getInteger(
-                    com.android.internal.R.integer.config_faceMaxTemplatesPerUser);
+            final List<FaceSensorPropertiesInternal> props =
+                    mFaceManager.getSensorPropertiesInternal();
+            // This will need to be updated for devices with multiple face sensors.
+            final int max = props.get(0).maxEnrollmentsPerUser;
             final int numEnrolledFaces = mFaceManager.getEnrolledFaces(mUserId).size();
             return numEnrolledFaces >= max;
         } else {
@@ -171,12 +194,13 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected long getChallenge() {
+    protected void getChallenge(GenerateChallengeCallback callback) {
         mFaceManager = Utils.getFaceManagerOrNull(this);
         if (mFaceManager == null) {
-            return 0;
+            callback.onChallengeGenerated(0, 0L);
+            return;
         }
-        return mFaceManager.generateChallengeBlocking();
+        mFaceManager.generateChallenge(callback::onChallengeGenerated);
     }
 
     @Override

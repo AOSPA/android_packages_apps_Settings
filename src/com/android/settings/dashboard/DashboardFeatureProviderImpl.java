@@ -47,6 +47,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
@@ -58,12 +59,14 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.ActivityTile;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
@@ -253,11 +256,19 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             final Map<String, IContentProvider> providerMap = new ArrayMap<>();
             final String titleFromUri = TileUtils.getTextFromUri(
                     mContext, uri, providerMap, META_DATA_PREFERENCE_TITLE);
-            ThreadUtils.postOnMainThread(() -> preference.setTitle(titleFromUri));
+            if (!TextUtils.equals(titleFromUri, preference.getTitle())) {
+                ThreadUtils.postOnMainThread(() -> preference.setTitle(titleFromUri));
+            }
         });
     }
 
     private DynamicDataObserver bindSummaryAndGetObserver(Preference preference, Tile tile) {
+        // Skip binding homepage tile summaries for silky home.
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)
+                && TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
+            return null;
+        }
+
         final CharSequence summary = tile.getSummary(mContext);
         if (summary != null) {
             preference.setSummary(summary);
@@ -282,7 +293,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             final Map<String, IContentProvider> providerMap = new ArrayMap<>();
             final String summaryFromUri = TileUtils.getTextFromUri(
                     mContext, uri, providerMap, META_DATA_PREFERENCE_SUMMARY);
-            ThreadUtils.postOnMainThread(() -> preference.setSummary(summaryFromUri));
+            if (!TextUtils.equals(summaryFromUri, preference.getSummary())) {
+                ThreadUtils.postOnMainThread(() -> preference.setSummary(summaryFromUri));
+            }
         });
     }
 
@@ -358,18 +371,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     @VisibleForTesting
     void bindIcon(Preference preference, Tile tile, boolean forceRoundedIcon) {
-        // Use preference context instead here when get icon from Tile, as we are using the context
-        // to get the style to tint the icon. Using mContext here won't get the correct style.
-        final Icon tileIcon = tile.getIcon(preference.getContext());
-        if (tileIcon != null) {
-            Drawable iconDrawable = tileIcon.loadDrawable(preference.getContext());
-            if (forceRoundedIcon
-                    && !TextUtils.equals(mContext.getPackageName(), tile.getPackageName())) {
-                iconDrawable = new AdaptiveIcon(mContext, iconDrawable);
-                ((AdaptiveIcon) iconDrawable).setBackgroundColor(mContext, tile);
-            }
-            preference.setIcon(iconDrawable);
-        } else if (tile.getMetaData() != null
+        // Icon provided by the content provider overrides any static icon.
+        if (tile.getMetaData() != null
                 && tile.getMetaData().containsKey(META_DATA_PREFERENCE_ICON_URI)) {
             ThreadUtils.postOnBackgroundThread(() -> {
                 final Intent intent = tile.getIntent();
@@ -389,11 +392,30 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     return;
                 }
                 final Icon icon = Icon.createWithResource(iconInfo.first, iconInfo.second);
-                ThreadUtils.postOnMainThread(() ->
-                        preference.setIcon(icon.loadDrawable(preference.getContext()))
-                );
+                ThreadUtils.postOnMainThread(() -> {
+                    setPreferenceIcon(preference, tile, forceRoundedIcon, iconInfo.first, icon);
+                });
             });
+            return;
         }
+
+        // Use preference context instead here when get icon from Tile, as we are using the context
+        // to get the style to tint the icon. Using mContext here won't get the correct style.
+        final Icon tileIcon = tile.getIcon(preference.getContext());
+        if (tileIcon == null) {
+            return;
+        }
+        setPreferenceIcon(preference, tile, forceRoundedIcon, tile.getPackageName(), tileIcon);
+    }
+
+    private void setPreferenceIcon(Preference preference, Tile tile, boolean forceRoundedIcon,
+            String iconPackage, Icon icon) {
+        Drawable iconDrawable = icon.loadDrawable(preference.getContext());
+        if (forceRoundedIcon && !TextUtils.equals(mContext.getPackageName(), iconPackage)) {
+            iconDrawable = new AdaptiveIcon(mContext, iconDrawable);
+            ((AdaptiveIcon) iconDrawable).setBackgroundColor(mContext, tile);
+        }
+        preference.setIcon(iconDrawable);
     }
 
     private void launchIntentOrSelectProfile(FragmentActivity activity, Tile tile, Intent intent,
@@ -403,26 +425,41 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             return;
         }
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
+        mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
 
         if (tile.userHandle == null || tile.isPrimaryProfileOnly()) {
-            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             activity.startActivityForResult(intent, 0);
         } else if (tile.userHandle.size() == 1) {
-            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             activity.startActivityForResultAsUser(intent, 0, tile.userHandle.get(0));
         } else {
-            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             final UserHandle userHandle = intent.getParcelableExtra(EXTRA_USER);
             if (userHandle != null && tile.userHandle.contains(userHandle)) {
                 activity.startActivityForResultAsUser(intent, 0, userHandle);
-            } else {
-                ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
-                        sourceMetricCategory);
+                return;
             }
+
+            final List<UserHandle> resolvableUsers = getResolvableUsers(intent, tile);
+            if (resolvableUsers.size() == 1) {
+                activity.startActivityForResultAsUser(intent, 0, resolvableUsers.get(0));
+                return;
+            }
+
+            ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
+                    sourceMetricCategory);
         }
     }
 
     private boolean isIntentResolvable(Intent intent) {
         return mPackageManager.resolveActivity(intent, 0) != null;
+    }
+
+    private List<UserHandle> getResolvableUsers(Intent intent, Tile tile) {
+        final ArrayList<UserHandle> eligibleUsers = new ArrayList<>();
+        for (UserHandle user : tile.userHandle) {
+            if (mPackageManager.resolveActivityAsUser(intent, 0, user.getIdentifier()) != null) {
+                eligibleUsers.add(user);
+            }
+        }
+        return eligibleUsers;
     }
 }

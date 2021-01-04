@@ -23,7 +23,6 @@ import static android.os.UserManager.SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.notNull;
@@ -399,7 +398,7 @@ public class UserSettingsTest {
         ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
         verify(mFragment.mUserListCategory).addPreference(captor.capture());
         UserPreference adminPref = captor.getValue();
-        assertThat(adminPref).isSameAs(mMePreference);
+        assertThat(adminPref).isSameInstanceAs(mMePreference);
     }
 
     @Test
@@ -418,7 +417,7 @@ public class UserSettingsTest {
         assertThat(guestPref.getKey()).isEqualTo(KEY_USER_GUEST);
         assertThat(guestPref.isEnabled()).isEqualTo(true);
         assertThat(guestPref.isSelectable()).isEqualTo(true);
-        assertThat(guestPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+        assertThat(guestPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
     @Test
@@ -437,7 +436,7 @@ public class UserSettingsTest {
         assertThat(userPref.getKey()).isEqualTo("id=" + INACTIVE_SECONDARY_USER_ID);
         assertThat(userPref.isEnabled()).isEqualTo(true);
         assertThat(userPref.isSelectable()).isEqualTo(true);
-        assertThat(userPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
     @Test
@@ -457,7 +456,7 @@ public class UserSettingsTest {
         assertThat(userPref.getSummary()).isEqualTo("Restricted profile");
         assertThat(userPref.isEnabled()).isEqualTo(true);
         assertThat(userPref.isSelectable()).isEqualTo(true);
-        assertThat(userPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
     @Test
@@ -494,7 +493,7 @@ public class UserSettingsTest {
         assertThat(userPref.getSummary()).isEqualTo("Not set up - Restricted profile");
         assertThat(userPref.isEnabled()).isEqualTo(true);
         assertThat(userPref.isSelectable()).isEqualTo(true);
-        assertThat(userPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
     @Test
@@ -519,7 +518,7 @@ public class UserSettingsTest {
         assertThat(userPref.getSummary()).isEqualTo("Not set up");
         assertThat(userPref.isEnabled()).isEqualTo(false);
         assertThat(userPref.isSelectable()).isEqualTo(true);
-        assertThat(userPref.getOnPreferenceClickListener()).isSameAs(mFragment);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
     @Test
@@ -575,7 +574,7 @@ public class UserSettingsTest {
 
         verify(mUserManager, never()).getUserIcon(anyInt());
         // updateUserList should be called only once
-        verify(mUserManager).getUsers(true);
+        verify(mUserManager).getAliveUsers();
     }
 
     @Test
@@ -592,7 +591,7 @@ public class UserSettingsTest {
 
         verify(mUserManager).getUserIcon(ACTIVE_USER_ID);
         // updateUserList should be called another time after loading the icons
-        verify(mUserManager, times(2)).getUsers(true);
+        verify(mUserManager, times(2)).getAliveUsers();
     }
 
     @Test
@@ -672,7 +671,7 @@ public class UserSettingsTest {
     private void givenUsers(UserInfo... userInfo) {
         List<UserInfo> users = Arrays.asList(userInfo);
         doReturn(users).when(mUserManager).getUsers();
-        doReturn(users).when(mUserManager).getUsers(anyBoolean());
+        doReturn(users).when(mUserManager).getAliveUsers();
     }
 
     private static void removeFlag(UserInfo userInfo, int flag) {

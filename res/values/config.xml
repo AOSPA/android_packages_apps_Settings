@@ -49,6 +49,8 @@
     <string name="config_wallpaper_picker_class" translatable="false">com.android.settings.Settings$WallpaperSettingsActivity</string>
     <!-- Fully-qualified class name for the styles & wallpaper picker activity. -->
     <string name="config_styles_and_wallpaper_picker_class" translatable="false"></string>
+    <!-- Intent extra for wallpaper picker activity. -->
+    <string name="config_wallpaper_picker_launch_extra" translatable="false">com.android.wallpaper.LAUNCH_SOURCE</string>
 
     <!-- Manufacturer backup settings to launch -->
     <string name="config_backup_settings_intent" translatable="false"></string>
@@ -120,8 +122,8 @@
         <!--
         <item>com.example.package.first/com.example.class.FirstService</item>
         <item>com.example.package.second/com.example.class.SecondService</item>
-        <item>toggle_master_mono</item>
-        <item>seekbar_master_balance</item>
+        <item>toggle_primary_mono</item>
+        <item>seekbar_primary_balance</item>
         <item>...</item>
         -->
     </string-array>
@@ -152,8 +154,8 @@
         -->
     </string-array>
 
-    <!-- List of packages that should be whitelisted for slice uri access. Do not translate -->
-    <string-array name="slice_whitelist_package_names" translatable="false"/>
+    <!-- List of packages that should be allowlisted for slice uri access. Do not translate -->
+    <string-array name="slice_allowlist_package_names" translatable="false"/>
 
     <!-- Whether or not App & Notification screen should display recently used apps -->
     <bool name="config_display_recent_apps">true</bool>
@@ -463,11 +465,20 @@
     <!-- Whether nfc detection point preview image is available or not. -->
     <bool name="config_nfc_detection_point">false</bool>
 
-    <!-- Whether to show Enhanced Connectivity switch in Developer Options -->
-    <bool name="config_show_enhanced_connectivity">false</bool>
-
     <!-- Whether to show Smooth Display feature in Settings Options -->
     <bool name="config_show_smooth_display">false</bool>
+
+    <!-- Whether to show emergency gesture in Settings -->
+    <bool name="config_show_emergency_gesture_settings">true</bool>
+
+    <!-- Optional package name if another 1p app wants to take over the emergency gesture settings UI -->
+    <string name="emergency_gesture_settings_package"></string>
+
+    <!-- Whether to show the Preference for Adaptive connectivity -->
+    <bool name="config_show_adaptive_connectivity">false</bool>
+
+    <!-- Authority of advanced device battery prediction -->
+    <string name="config_battery_prediction_authority" translatable="false"></string>
 
     <!-- Playing tone setting -->
     <bool name="config_show_connect_tone_ui">false</bool>

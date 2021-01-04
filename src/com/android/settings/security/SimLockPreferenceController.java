@@ -108,8 +108,10 @@ public class SimLockPreferenceController extends BasePreferenceController {
                     .createForSubscriptionId(subInfo.getSubscriptionId());
             final PersistableBundle bundle = mCarrierConfigManager.getConfigForSubId(
                     subInfo.getSubscriptionId());
+            final int simState = mTelephonyManager.getSimState(subInfo.getSimSlotIndex());
             if (telephonyManager.hasIccCard() && bundle != null
-                    && !bundle.getBoolean(CarrierConfigManager.KEY_HIDE_SIM_LOCK_SETTINGS_BOOL)) {
+                    && !bundle.getBoolean(CarrierConfigManager.KEY_HIDE_SIM_LOCK_SETTINGS_BOOL)
+                    && (simState != TelephonyManager.SIM_STATE_NOT_READY)) {
                 // one or more sims show sim lock setting UI.
                 return false;
             }

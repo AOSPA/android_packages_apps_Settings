@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logAccessibilityServiceEnabled;
+import static com.android.settings.accessibility.PreferredShortcuts.retrieveUserShortcutType;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
@@ -200,7 +201,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
         final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
         final String switchBarText = (info == null) ? "" :
-                getString(R.string.accessibility_service_master_switch_title,
+                getString(R.string.accessibility_service_primary_switch_title,
                         info.getResolveInfo().loadLabel(getPackageManager()));
         switchPreference.setTitle(switchBarText);
     }
@@ -292,7 +293,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public void onToggleClicked(ShortcutPreference preference) {
-        final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
+                mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         if (preference.isChecked()) {
             if (!mToggleServiceDividerSwitchPreference.isChecked()) {
                 preference.setChecked(false);
@@ -311,7 +313,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        super.onSettingsClicked(preference);
         final boolean isServiceOnOrShortcutAdded = mShortcutPreference.isChecked()
                 || mToggleServiceDividerSwitchPreference.isChecked();
         showPopupDialog(isServiceOnOrShortcutAdded ? DialogEnums.EDIT_SHORTCUT
@@ -411,7 +412,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private void onAllowButtonFromShortcutToggleClicked() {
         mShortcutPreference.setChecked(true);
 
-        final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
+                mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes, mComponentName);
 
         mIsDialogShown.set(false);

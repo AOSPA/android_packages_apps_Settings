@@ -29,6 +29,7 @@ import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -52,6 +53,7 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -137,10 +139,19 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     public void updateState(Preference preference) {
         super.updateState(preference);
         preference.setSummary(null);
-
         final int phoneType = mTelephonyManager.getPhoneType();
         if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
              preference.setEnabled(false);
+             return;
+        }
+        final ServiceState serviceState = mTelephonyManager.getServiceState();
+        if (serviceState == null) {
+            preference.setEnabled(false);
+            return;
+        }
+
+        if (serviceState.getRoaming()) {
+            preference.setEnabled(true);
         } else {
             if (mTelephonyManager.getServiceState().getRoaming()) {
                 preference.setEnabled(true);
@@ -158,27 +169,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     @Override
     public boolean setChecked(boolean isChecked) {
         if (isChecked) {
-            final long startMillis = SystemClock.elapsedRealtime();
-            showAutoSelectProgressBar();
-            mSwitchPreference.setEnabled(false);
-            ThreadUtils.postOnBackgroundThread(() -> {
-                // set network selection mode in background
-                mTelephonyManager.setNetworkSelectionModeAutomatic();
-                final int mode = mTelephonyManager.getNetworkSelectionMode();
-
-                //Update UI in UI thread
-                final long durationMillis = SystemClock.elapsedRealtime() - startMillis;
-                mUiHandler.postDelayed(() -> {
-                            mSwitchPreference.setEnabled(true);
-                            mSwitchPreference.setChecked(
-                                    mode == TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
-                            for (OnNetworkSelectModeListener lsn : mListeners) {
-                                lsn.onNetworkSelectModeChanged();
-                            }
-                            dismissProgressBar();
-                        },
-                        Math.max(MINIMUM_DIALOG_TIME_MILLIS - durationMillis, 0));
-            });
+            setAutomaticSelectionMode();
             return false;
         } else {
             final Bundle bundle = new Bundle();
@@ -191,6 +182,30 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
                     .launch();
             return false;
         }
+    }
+
+    @VisibleForTesting
+    Future setAutomaticSelectionMode() {
+        final long startMillis = SystemClock.elapsedRealtime();
+        showAutoSelectProgressBar();
+        mSwitchPreference.setEnabled(false);
+        return ThreadUtils.postOnBackgroundThread(() -> {
+            // set network selection mode in background
+            mTelephonyManager.setNetworkSelectionModeAutomatic();
+            final int mode = mTelephonyManager.getNetworkSelectionMode();
+
+            //Update UI in UI thread
+            final long durationMillis = SystemClock.elapsedRealtime() - startMillis;
+            mUiHandler.postDelayed(() -> {
+                mSwitchPreference.setEnabled(true);
+                mSwitchPreference.setChecked(
+                        mode == TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
+                for (OnNetworkSelectModeListener lsn : mListeners) {
+                    lsn.onNetworkSelectModeChanged();
+                }
+                dismissProgressBar();
+            }, Math.max(MINIMUM_DIALOG_TIME_MILLIS - durationMillis, 0));
+        });
     }
 
     public AutoSelectPreferenceController init(Lifecycle lifecycle, int subId) {

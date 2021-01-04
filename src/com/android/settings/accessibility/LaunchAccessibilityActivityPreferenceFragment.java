@@ -98,12 +98,6 @@ public class LaunchAccessibilityActivityPreferenceFragment extends
     }
 
     @Override
-    public void onSettingsClicked(ShortcutPreference preference) {
-        super.onSettingsClicked(preference);
-        showDialog(DialogEnums.EDIT_SHORTCUT);
-    }
-
-    @Override
     int getUserShortcutTypes() {
         return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
                 mComponentName);
@@ -120,7 +114,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends
     protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
         final AccessibilityShortcutInfo info = getAccessibilityShortcutInfo();
         final String switchBarText = (info == null) ? EMPTY_STRING : getString(
-                R.string.accessibility_service_master_open_title,
+                R.string.accessibility_service_primary_open_title,
                 info.getActivityInfo().loadLabel(getPackageManager()));
 
         switchPreference.setTitle(switchBarText);

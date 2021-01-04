@@ -31,7 +31,6 @@ import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -42,8 +41,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupEncryptionInterstitial;
 import com.android.settings.SetupWizardUtils;
-import com.android.settings.biometrics.BiometricEnrollActivity;
-import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollFindSensor;
 import com.android.settings.utils.SettingsDividerItemDecoration;
 
 import com.google.android.setupdesign.GlifPreferenceLayout;
@@ -72,8 +69,8 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
 
     @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        super.onApplyThemeResource(theme, resid, first);
+        final int new_resid = SetupWizardUtils.getTheme(this, getIntent());
+        super.onApplyThemeResource(theme, new_resid, first);
     }
 
     @Override
@@ -200,8 +197,9 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
                                 .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false),
                         /* isPatternMode= */ false,
                         /* isAlphaMode= */ false,
-                        /* isFingerprintSupported= */ false,
-                        /* isFaceSupported= */ false
+                        /* forFingerprint= */ false,
+                        /* forFace= */ false,
+                        /* forBiometrics= */ false
                 );
                 dialog.show(getFragmentManager());
                 return true;
@@ -242,7 +240,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         }
 
         private boolean isForBiometric() {
-            return mForFingerprint || mForFace;
+            return mForFingerprint || mForFace || mForBiometrics;
         }
     }
 

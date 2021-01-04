@@ -254,8 +254,8 @@
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"දිනය සහ වේලාව"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"දිනය සහ වේලාව සකසන්න"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"දිනය, වේලාව, වේලා කලාපය, සහ ආකෘති සකසන්න"</string>
-    <string name="date_time_auto" msgid="8227898528525208628">"ජාලය සැපයූ වේලාව භාවිත කරන්න"</string>
-    <string name="zone_auto_title" msgid="4715775349468228598">"ජාලය සැපයූ වේලා කලාපය භාවිත කරන්න"</string>
+    <string name="date_time_auto" msgid="4239202185055225869">"ස්වයංක්‍රියව වේලාව සකසන්න"</string>
+    <string name="zone_auto_title" msgid="3993580453604839924">"ස්වයංක්‍රියව වේලා කලාපය සකසන්න"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"පෙදෙසි පෙරනිමි භාවිත කරන්න"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"පැය 24 ආකාරය"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"පැය 24 ආකාරය භාවිත කරන්න"</string>
@@ -296,7 +296,7 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"අගුළු තිරයෙහි පැතිකඩේ තොරතුරු පෙන්වන්න"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"ගිණුම්"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"ස්ථානය"</string>
-    <string name="location_settings_master_switch_title" msgid="4232810467362584112">"ස්ථානය භාවිත කරන්න"</string>
+    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"ස්ථානය භාවිත කරන්න"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"ක්‍රියාවිරහිතයි"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="one">ක්‍රියාත්මකයි - යෙදුම් <xliff:g id="COUNT_1">%1$d</xliff:g>කට ස්ථානයට ප්‍රවේශය ඇත</item>
@@ -320,6 +320,15 @@
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"තිර අගුල, මුහුණු අගුලු හැරීම"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"තිර අගුල, ඇඟිලි සලකුණ"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"තිර අගුල"</string>
+    <string name="multi_biometric_enroll_title" msgid="3007607723604088374">"ඔබගේ මුහුණ සහ ඇඟිලි සලකුණු සමඟ දුරකථනය ආරක්ෂිතව අගුලු හරින්න"</string>
+    <string name="multi_biometric_enroll_subtitle" msgid="8357072842904027301">"ඔබට යෙදුම්වලට පිරීමට සහ ගෙවීම් තහවුරු කිරීමටද හැකිය"</string>
+    <string name="multi_biometric_enroll_setup_with" msgid="421375792889910150">"මේ සමග අගුලු හැරීම පිහිටුවන්න:"</string>
+    <string name="multi_biometric_enroll_face_unlock_title" msgid="7627564065626355692">"මුහුණෙන් අගුලු හැරීම"</string>
+    <string name="multi_biometric_enroll_face_unlock_description" msgid="7626442550602926682">"ඔබගේ දුරකථනය අගුලු හැරීම ඉතා පහසු කරන්න"</string>
+    <string name="multi_biometric_enroll_fingerprint_unlock_title" msgid="3839935495273854171">"ඇඟිලි සලකුණ"</string>
+    <string name="multi_biometric_enroll_fingerprint_unlock_description" msgid="116938134430420778">"සාක්කුවේ දුරකථනය අගුලු හැර කාලය ඉතිරි ක."</string>
+    <string name="multi_biometric_enroll_skip" msgid="7301215196571580858">"මඟ හරින්න"</string>
+    <string name="multi_biometric_enroll_next" msgid="6220680618102151619">"ඊළඟ"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"මුහුණ එකතු කරන ලදි"</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"මුහුණු අඟුලු ඇරීම සකසන්න"</string>
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"මුහුණු අඟුලු ඇරීම"</string>
@@ -397,6 +406,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"ඔබේ දුරකථනය අගුලු හැරීමට, හෝ මිලදී ගැනීම් අනුමත කිරීමට ඔබේ ඇඟිලි සලකුණ භාවිත කරන්න.\n\nසටහන: ඔබට ඔබේ ඇඟිලි සලකුණ මෙම උපාංගය අගුලු හැරීමට භාවිත කළ නොහැකිය. තව තොරතුරු සඳහා, ඔබේ සංවිධානයෙහි පරිපාලක අමතන්න."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"ඔබේ දුරකථනය අගුලු හැරීමට, හෝ මිලදී ගැනීම් අනුමත කිරීමට ඔබේ ඇඟිලි සලකුණ භාවිත කරන්න.\n\nසටහන: ඔබේ ඇඟිලි සලකුණ ප්‍රබල රටාවකට හෝ PIN අංකයකට වඩා ආරක්ෂාකාරී බව අඩු විය හැකිය."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"අවලංගු කරන්න"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"එපා, ස්තුතියි"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"දිගටම කර ගෙන යන්න"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"මඟ හරින්න"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"ඊළඟ"</string>
@@ -434,6 +444,9 @@
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7387535629289108475">"තිර අඟුලු විකල්පයක් සමඟ ආරක්‍ෂා කිරීමෙන්, ඔබේ ටැබ්ලටය අහිමි වූ හෝ සොරකම් කරනු ලැබූ විට කිසිවෙකුට එය භාවිත කළ නොහැක. ඔබට මුහුණු අඟුලු ඇරීම සැකසීමට තිර අඟුලු විකල්පයකුත් අවශ්‍යයි. ආපසු යාමට, අවලංගු කරන්න තට්ටු කරන්න."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="4995287019957131123">"තිර අඟුලු විකල්පයක් සමඟ ආරක්‍ෂා කිරීමෙන්, ඔබේ උපාංගය අහිමි වූ හෝ සොරකම් කරනු ලැබූ විට කිසිවෙකුට එය භාවිත කළ නොහැක. ඔබට මුහුණු අඟුලු ඇරීම සැකසීමට තිර අඟුලු විකල්පයකුත් අවශ්‍යයි. ආපසු යාමට, අවලංගු කරන්න තට්ටු කරන්න."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7086796722966738156">"තිර අඟුලු විකල්පයක් සමඟ ආරක්‍ෂා කිරීමෙන්, ඔබේ දුරකථනය අහිමි වූ හෝ සොරකම් කරනු ලැබූ විට කිසිවෙකුට එය භාවිත කළ නොහැක. ඔබට මුහුණු අඟුලු ඇරීම සැකසීමට තිර අඟුලු විකල්පයකුත් අවශ්‍යයි. ආපසු යාමට, අවලංගු කරන්න තට්ටු කරන්න."</string>
+    <string name="biometrics_lock_screen_setup_skip_dialog_text" product="tablet" msgid="3943278149639587227">"ඔබගේ ටැබ්ලටය තිර අගුලු විකල්පයක් සමග ආරක්ෂා කිරීමෙන්, එය නැති වූ විට හෝ සොරකම් කරනු ලැබූ විට කිසිවෙකුට භාවිත කළ නොහැකි වනු ඇත. ජෛවමිතික පිහිටුවීමට ඔබට තිර අගුලු විකල්පයක්ද අවශ්‍ය වේ. ආපසු යාමට, අවලංගු කරන්න තට්ටු කරන්න."</string>
+    <string name="biometrics_lock_screen_setup_skip_dialog_text" product="device" msgid="5424064454068220988">"තිර අගුලු විකල්පයක් සමග ආරක්ෂා කිරීමෙන්, ඔබේ උපාංගය නැති වූ විට හෝ සොරකම් කරනු ලැබූ විට කිසිවෙකුට භාවිත කළ නොහැකි වනු ඇත. ජෛවමිතික පිහිටුවීමට ඔබට තිර අගුලු විකල්පයක්ද අවශ්‍ය වේ. ආපසු යාමට, අවලංගු කරන්න තට්ටු කරන්න."</string>
+    <string name="biometrics_lock_screen_setup_skip_dialog_text" product="default" msgid="5668256546179188638">"ඔබගේ දුරකථනය තිර අගුලු විකල්පයක් සමග ආරක්ෂා කිරීමෙන්, එය නැති වූ විට හෝ සොරකම් කරනු ලැබූ විට කිසිවෙකුට භාවිත කළ නොහැකි වනු ඇත. ජෛවමිතික පිහිටුවීමට ඔබට තිර අගුලු විකල්පයක්ද අවශ්‍ය වේ. ආපසු යාමට, අවලංගු කරන්න තට්ටු කරන්න."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"රහස් අංකය සැකසීම මඟ හරින්නේද?"</string>
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"මුරපදය සැකසීම මඟ හරින්නේද?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"රටාව සැකසීම මඟ හරින්නේද?"</string>
@@ -506,8 +519,7 @@
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"උපාංග ආරක්ෂණ විශේෂාංග සක්‍රිය කිරීමෙන්, ඔබගේ අවසරය නොමැතිව වෙනත් අය මෙම ටැබ්ලට උපාංගය භාවිත කිරීම වළක්වන්න. ඔබට භාවිත කිරීමට අවශ්‍ය තිර අගුල තෝරන්න."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"උපාංග ආරක්ෂණ විශේෂාංග සක්‍රිය කිරීමෙන්, ඔබගේ අවසරය නොමැතිව වෙනත් අය මෙම උපාංගය භාවිත කිරීම වළක්වන්න. ඔබට භාවිත කිරීමට අවශ්‍ය තිර අගුල තෝරන්න."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"උපාංග ආරක්ෂණ විශේෂාංග සක්‍රිය කිරීමෙන්, ඔබගේ අවසරය නොමැතිව වෙනත් අය මෙම දුරකථනය භාවිත කිරීම වළක්වන්න. ඔබට භාවිත කිරීමට අවශ්‍ය තිර අගුල තෝරන්න."</string>
-    <string name="lock_settings_picker_fingerprint_message" msgid="6414674538453498900">"ඔබේ උපස්ථ කිර අගුලු ක්‍රමය තෝරන්න"</string>
-    <string name="lock_settings_picker_face_message" msgid="2044129433641084149">"ඔබේ උපස්ථ කිර අගුලු ක්‍රමය තෝරන්න"</string>
+    <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"ඔබේ උපස්ථ තිර අගුලු ක්‍රමය තෝරන්න"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"තිරයේ අගුලු විකල්ප"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"තිර අගුලු විකල්ප"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"තිර අගුල"</string>
@@ -539,6 +551,11 @@
     <string name="face_unlock_set_unlock_password" msgid="8612535943511761549">"මුහුණු අඟුලු ඇරීම + මුරපදය"</string>
     <string name="face_unlock_skip_face" msgid="7117201898540606846">"මුහුණු අඟුලු ඇරීම නොමැතිව ඉදිරියට යන්න"</string>
     <string name="face_unlock_title" msgid="7344830351598247267">"ඔබට ඔබගේ මුහුණ භාවිතයෙන් ඔබගේ දුරකථනය අගුලු හැරීමට හැකිය. ආරක්ෂාව සඳහා, මෙම විකල්පයට උපස්ථ තිර අගුලක් අවශ්‍යය."</string>
+    <string name="biometrics_unlock_set_unlock_pattern" msgid="8871485472202659">"ජෛවමිතික + රටාව"</string>
+    <string name="biometrics_unlock_set_unlock_pin" msgid="1729940978662427512">"ජෛවමිතික + PIN"</string>
+    <string name="biometrics_unlock_set_unlock_password" msgid="5368133215008755916">"ජෛවමිතික + මුරපදය"</string>
+    <string name="biometrics_unlock_skip_biometrics" msgid="8260715582785687329">"ජෛවමිතික රහිතව ඉදිරියට යන්න"</string>
+    <string name="biometrics_unlock_title" msgid="7769374223959937435">"ඔබට ඔබගේ ජෛවමිතික භාවිතයෙන් ඔබගේ දුරකථනය අගුලු හැරීමට හැකිය. ආරක්ෂාව සඳහා, මෙම විකල්පයට උපස්ථ තිර අගුලක් අවශ්‍යය."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"පරිපාලකයා, සංකේතන ප්‍රතිපත්තිය, හෝ අක්තපත්‍ර ආචයනය මඟින් අබල කර ඇත"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"කිසිවක් නැත"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"ස්වයිප් කරන්න"</string>
@@ -622,7 +639,6 @@
       <item quantity="other">ඉලක්කම් <xliff:g id="NUMBER_1">%d</xliff:g>කට වඩා අඩු විය යුතුය</item>
     </plurals>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"උපාංග පරිපාලක මෑත PIN එකක් භාවිතා කිරීමට අවසර නොදේ"</string>
-    <string name="lockpassword_pin_blacklisted_by_admin" msgid="115994274880232984">"ඔබගේ IT පරිපාලක විසින් සුලබ PIN අවහිර කරනු ලැබේ. වෙනත් PIN එකක් උත්සාහ කරන්න."</string>
     <string name="lockpassword_illegal_character" msgid="3434031212215886433">"මෙහි වලංගු නොවන අනුලකුණක් ඇතුළත් විය නොහැකිය"</string>
     <string name="lockpassword_password_requires_alpha" msgid="721084100957669018">"අඩු තරමින් එක් අකුරක් තිබිය යුතුය"</string>
     <string name="lockpassword_password_requires_digit" msgid="312518567592683795">"අඩු තරමින් එක් ඉලක්කමක් තිබිය යුතුය"</string>
@@ -656,7 +672,6 @@
       <item quantity="other">අඩු තරමින් සංඛ්‍යාත්මක-නොවන අනුලකුණු <xliff:g id="COUNT">%d</xliff:g>ක් අඩංගු විය යුතුය</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"උපාංග පරිපාලක මෑත මුරපදයක් භාවිතා කිරීමට අවසර නොදේ."</string>
-    <string name="lockpassword_password_blacklisted_by_admin" msgid="8956110268546396737">"ඔබගේ IT පරිපාලක විසින් සුලබ මුරපද අවහිර කරනු ලැබේ. වෙනත් මුරපදයක් උත්සාහ කරන්න."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"ආරෝහණ, අවරෝහණ හෝ ප්‍රනරාවර්ත අනුක්‍රමයේ අංක වෙත අවසර නැත"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"තහවුරු කරන්න"</string>
     <string name="lockpassword_cancel_label" msgid="6711112212489992112">"අවලංගු කරන්න"</string>
@@ -798,7 +813,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"Wi-Fi සක්‍රිය කරන්න"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"Wi-Fi භාවිත කරන්න"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Wi-Fi භාවිත කරන්න"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi-Fi සැකසුම්"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"රැහැන් රහිත ප්‍රවේශ තැන් සකසන්න සහ කළමනාකරණය කරන්න"</string>
@@ -932,8 +947,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi මුරපදය: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"හොට්ස්පොට් මුරපදය: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"ස්වයං‑සම්බන්ධ වීම"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"දුරකථනයට මෙම ජාලය අසල ස්වයංක්‍රියව සම්බන්ධ වීමට ඉඩ දෙන්න"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"ටැබ්ලට් පරිගණකයට මෙම ජාලය අසල ස්වයංක්‍රියව සම්බන්ධ වීමට ඉඩ දෙන්න"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"පරාසය තුළ සිටින විට මෙම ජාලයට සම්බන්ධතාව ඉඩ දෙන්න"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"උපාංගය එක් කරන්න"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"මෙම ජාලයට උපාංගයක් එක් කිරීමට QR කේතයක් භාවිතා කරන්න"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR කේතය වලංගු ආකෘතියක් නොවේ"</string>
@@ -945,7 +959,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"පද්ධති සහතික භාවිත කරන්න"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"නොසපයන්න"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"වලංගු නොකරන්න"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"සහතිකයක් දක්වා නැත. ඔබේ සබැඳුම පුද්ගලික නොවනු ඇත."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"ජාල නම දිග වැඩියි."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"වසමක් නියම කළ යුතුය."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"සහතිකය අවශ්‍යයි."</string>
@@ -972,6 +985,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"සම්බන්ධ කරන්න"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wifi සක්‍රීයයි"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> වෙත සබැඳිණි"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> වෙත සබැඳෙමින්"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"සබැඳෙමින්…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"ජාලය වෙත සම්බන්ධ වීම අසාර්ථක විය"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"ජාලය පරාසය තුළ නැත"</string>
@@ -999,6 +1013,7 @@
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"උපාංග MAC ලිපිනය"</string>
     <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"සසම්භාවී MAC ලිපිනය"</string>
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"සසම්භාවීකරණය කළ MAC ලිපිනය (අවසන් වරට භාවිත කළ)"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"IP ලිපිනය"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"ජාල විස්තර"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"සබ්නෙට් මාස්ක්"</string>
@@ -1016,8 +1031,8 @@
     <string name="wifi_ip_settings_invalid_gateway" msgid="1174931247370931239">"වලංගු වාහල ලිපිනයක් ටයිප් කරන්න."</string>
     <string name="wifi_ip_settings_invalid_dns" msgid="1757402215999845975">"වලංගු DNS ලිපිනයක් ටයිප් කරන්න."</string>
     <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="5980808986926987299">"0 ත් 32 අතර දිගින් යුත් ජාල උපසර්ගයක් ටයිප් කරන්න."</string>
-    <string name="wifi_dns1" msgid="6462967242512284778">"DNS 1"</string>
-    <string name="wifi_dns2" msgid="8494337355389723965">"DNS 2"</string>
+    <string name="wifi_dns1" msgid="6764769531843748514">"DNS 1 (පුද්ගලික DNS මගින් ප්‍රතික්ෂේප කරන්නේ නම් මිස)"</string>
+    <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (පුද්ගලික DNS මගින් ප්‍රතික්ෂේප කරන්නේ නම් මිස)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"වාහල"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"ජාල උපසර්ගයේ දිග"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
@@ -1043,7 +1058,7 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"යෙදුම අන්තර්ගතය බෙදා ගනිමින් සිටී. අන්තර්ජාල සබැඳුමක් බෙදා ගැනීමට, හොට්ස්පොට් ක්‍රියාවිරහිත කර, අනතුරුව ක්‍රියාත්මක කරන්න"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"මුරපදයක් සකසා නැත"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"හොට්ස්පොට් නම"</string>
-    <string name="wifi_hotspot_name_summary_connecting" msgid="6178719924661022928">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> ක්‍රියාත්මක කරමින්..."</string>
+    <string name="wifi_hotspot_name_summary_connecting" msgid="2094754115215428892">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> ක්‍රියාත්මක කරමින්…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"වෙනත් උපාංගවලට <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> වෙත සම්බන්ධ විය හැකිය"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"හොට්ස්පොට් මුරපදය"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP කලාපය"</string>
@@ -1193,7 +1208,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"සුමට සංදර්ශකය"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"සමහර අන්තර්ගත සඳහා නැවුම් කිරීමේ අනුපාතය හර්ට්ස් 60 සිට 90 දක්වා ස්වයංක්‍රියව ඉහළ නංවයි. බැටරි භාවිතය වැඩි කරයි."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"සුමට සංදර්ශකය"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"90 Hz යළි නැවුම් කිරීමේ අනුපාතය බල කරන්න"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"වැඩි දියුණු කළ ස්පර්ශ ප්‍රතිචාර සඳහා ඉහළම යළි නැවුම් කිරීමේ අනුපාතය සහ සජීවිකරණ ගුණාත්මකභාවය. බැටරි භාවිතය වැඩි කරයි."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"තිර අවධානය"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"සක්‍රීයයි / ඔබ එය දිහා බලා සිටින්නේ නම් තිරය අක්‍රිය නොවේ"</string>
@@ -1284,6 +1299,7 @@
     <string name="doze_summary" msgid="8252867381522942804">"තිරය අඳුරු විට, එය නව දැනුම් දීම් සඳහා ක්‍රියාත්මක වේ"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"සැමවිට වේලාව සහ තතු පෙන්වන්න"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"වැඩි බැටරි භාවිතය"</string>
+    <string name="force_bold_text" msgid="3636373986786504634">"තද අකුරු"</string>
     <string name="title_font_size" msgid="570613010306330622">"අකුරු ප්‍රමාණය"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"පෙළ වඩාත් විශාල හෝ කුඩා කරන්න"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"SIM කාඩ් පතෙහි අඟුළු සැකසුම්"</string>
@@ -1606,31 +1622,29 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"ජාල සැකසීම් යළි පිහිටුවන ලදි"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"SIM මැකිය නොහැක"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"දෝෂයක් හේතුවෙන් බාගත් SIM මැකිය නොහැක.\n\nඔබේ උපාංගය යළි අරඹා නැවත උත්සාහ කරන්න."</string>
-    <string name="master_clear_title" msgid="5309249309235959383">"සියලු දත්ත මකන්න (කර්මාන්තශාලා යළි සැකසීම)"</string>
-    <string name="master_clear_short_title" msgid="5331449583601739360">"සියලු දත්ත මකන්න (කර්මාන්තශාලා යළි සැකසීම)"</string>
-    <string name="master_clear_desc" product="tablet" msgid="3114467865487750525">\n\n<li>"ඔබේ Google ගිණුම"</li>\n<li>"පද්ධති සහ යෙදුම් දත්ත සහ සැකසීම්"</li>\n<li>"බාගත් යෙදුම්"</li>" ඇතුළුව මෙය ඔබේ ටැබ්ලටයේ "<b>"අභ්‍යන්තර ආචයනයෙන්"</b>" සියලුම දත්ත මකා දමයි"</string>
-    <string name="master_clear_desc" product="default" msgid="8447637796694856323">\n\n<li>"ඔබේ Google ගිණුම"</li>\n<li>"පද්ධති සහ යෙදුම් දත්ත සහ සැකසීම්"</li>\n<li>"බාගත් යෙදුම්"</li>" ඇතුළුව මෙය ඔබේ දුරකථනයේ "<b>"අභ්‍යන්තර ආචයනයෙන්"</b>" සියලුම දත්ත මකා දමයි"</string>
-    <string name="master_clear_accounts" product="default" msgid="142220980039357651">\n\n"ඔබ දැනට පහත ගිණුම් වෙත පුරනය වී සිටියි:\n"</string>
-    <string name="master_clear_other_users_present" product="default" msgid="7492338002408466023">\n\n"මෙම උපාංගයේ වෙනත් පරිශීලකයින් සිටි.\n"</string>
-    <string name="master_clear_desc_also_erases_external" msgid="4738661805356792736"><li>"සංගීතය"</li>\n<li>"ඡායාරූප"</li>\n<li>"වෙනත් පරිශීලක දත්ත"</li></string>
-    <string name="master_clear_desc_also_erases_esim" msgid="6418163562288667727"><li>"eSIMs"</li></string>
-    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="3112614935795369143">\n\n"මෙය ඔබගේ ජංගම සේවා සැලසුම අවලංගු නොකරනු ඇත."</string>
-    <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7088655731755912201">\n\n"සංගීත, පින්තූර, සහ වෙනත් පරිශීලක දත්ත මැකීමට, "<b>"USB ආචයනය"</b>" මැකීමට අවශ්‍යය."</string>
-    <string name="master_clear_desc_erase_external_storage" product="default" msgid="4145566517710675883">\n\n"සංගීතය, පින්තූර, සහ වෙනත් පරිශීලක දත්ත ඉවත් කිරීමට, "<b>"SD කාඩ් පත"</b>" මැකිය යුතුවේ."</string>
+    <string name="main_clear_title" msgid="277664302144837723">"සියලු දත්ත මකන්න (කර්මාන්තශාලා යළි සැකසීම)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"සියලු දත්ත මකන්න (කර්මාන්තශාලා යළි සැකසීම)"</string>
+    <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"මෙය ඔබගේ ටැබ්ලටයේ "<b>"අභ්‍යන්තර ගබඩාව"</b>" වෙතින්, පහත දේවල් ඇතුළුව සියලු දත්ත මකනු ඇත:\n\n"<li>"ඔබගේ Google ගිණුම"</li>\n<li>"පද්ධති සහ යෙදුම් දත්ත සහ සැකසීම්"</li>\n<li>"බාගත් යෙදුම්"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"මෙය ඔබගේ දුරකථනයේ "<b>"අභ්‍යන්තර ගබඩාව"</b>" වෙතින්, පහත දේවල් ඇතුළුව සියලු දත්ත මකනු ඇත:\n\n"<li>"ඔබගේ Google ගිණුම"</li>\n<li>"පද්ධති සහ යෙදුම් දත්ත සහ සැකසීම්"</li>\n<li>"බාගත් යෙදුම්"</li></string>
+    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"ඔබ දැනට පහත ගිණුම් වෙත පුරා සිටියි:\n"</string>
+    <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"මෙම උපාංගයේ වෙනත් පරිශීලකයින් සිටි.\n"</string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"සංගීතය"</li>\n<li>"ඡායාරූප"</li>\n<li>"වෙනත් පරිශීලක දත්ත"</li></string>
+    <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM"</li></string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"මෙය ඔබගේ ජංගම සේවා සැලසුම අවලංගු නොකරනු ඇත."</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"සංගීතය, පින්තූර, සහ වෙනත් පරිශීලක දත්ත මැකීමට, "<b>"USB ගබඩාව"</b>" මැකීමට අවශ්‍යය."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default" msgid="1498514970618215728">\n\n"සංගීතය, පින්තූර, සහ වෙනත් පරිශීලක දත්ත ඉවත් කිරීමට, "<b>"SD කාඩ් පත"</b>" මැකීමට අවශ්‍යය."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"USB ආචයනය මකන්න"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"SD කාඩ් පත මකන්න"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"සංගීත හෝ ජායාරුප ආදී අභ්‍යන්තර USB ආචයනයේ සියලු දත්ත මකන්න"</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"සංගීත හෝ ඡායාරූප ආදී SD කාඩ් පතේ සියලු දත්ත මකන්න"</string>
-    <string name="master_clear_button_text" product="tablet" msgid="3554085992851027633">"සියලු දත්ත මකන්න"</string>
-    <string name="master_clear_button_text" product="default" msgid="3554085992851027633">"සියලු දත්ත මකන්න"</string>
-    <string name="master_clear_final_desc" msgid="5218005891800878932">"ඔබේ පුද්ගලික තොරතුරු සහ බාගත් යෙදුම් සියල්ල මකනු ලැබේ. ඔබට මෙම ක්‍රියාව අස් කළ නොහැක."</string>
-    <string name="master_clear_final_desc_esim" msgid="3570139379312933326">"බාගත් යෙදුම් සහ SIM ඇතුළුව ඔබේ පුද්ගලික තොරතුරු මකනු ලැබේ. ඔබට මෙම ක්‍රියාව අස් කළ නොහැක."</string>
-    <string name="master_clear_final_button_text" msgid="1721164700940719292">"සියලු දේම මකන්න"</string>
-    <string name="master_clear_failed" msgid="6458678864313618526">"පද්ධති ඉවත් කෙරුම් සේවාව නොමැති නිසා නැවත සැකසුමක් සිදු නොකෙරුණි"</string>
-    <string name="master_clear_confirm_title" msgid="632482173088680058">"සියලු දත්ත මකන්නද?"</string>
-    <string name="master_clear_not_available" msgid="3419345724070828273">"මෙම පරිශීලකයා වෙතට කර්මාන්තශාලා යළි පිහිටුවීම නොමැත"</string>
-    <string name="master_clear_progress_title" msgid="480032747847804624">"මකමින්"</string>
-    <string name="master_clear_progress_text" msgid="8891964820486632180">"කරුණාකර රැඳී සිටින්න..."</string>
+    <string name="main_clear_button_text" product="tablet" msgid="6246087475569640671">"සියලු දත්ත මකන්න"</string>
+    <string name="main_clear_button_text" product="default" msgid="6246087475569640671">"සියලු දත්ත මකන්න"</string>
+    <string name="main_clear_final_desc" msgid="5800877928569039580">"ඔබේ පුද්ගලික තොරතුරු සහ බාගත් යෙදුම් සියල්ල මකනු ලැබේ. ඔබට මෙම ක්‍රියාව පසුගමනය කළ නොහැකිය."</string>
+    <string name="main_clear_final_desc_esim" msgid="440406836793824969">"බාගත් යෙදුම් &amp; SIM ඇතුළුව ඔබේ සියලු පුද්ගලික තොරතුරු මකනු ලැබේ. ඔබට මෙම ක්‍රියාව පසුගමනය කළ නොහැකිය."</string>
+    <string name="main_clear_confirm_title" msgid="6577071819657853713">"සියලු දත්ත මකන්නද?"</string>
+    <string name="main_clear_not_available" msgid="3433795327146684827">"මෙම පරිශීලකයා සඳහා කර්මාන්තශාලා යළි සැකසීම ලබා ගත නොහැකිය"</string>
+    <string name="main_clear_progress_title" msgid="7239741132015617719">"මකමින්"</string>
+    <string name="main_clear_progress_text" msgid="4636695115176327972">"කරුණාකර රැඳී සිටින්න…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"ඇමතුම් සැකසීම්"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"කටහඬ තැපැල්, ඇමතුම් ඉදිරියට ගෙන යෑම, ඇමතුම් රැඳීම්, ඇමතුම්කරුගේ ID සකසන්න"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"USB ටෙදරින්"</string>
@@ -1678,7 +1692,7 @@
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"උපාංග <xliff:g id="MAXCONNECTION">%1$d</xliff:g> කට වඩා ටෙදර් කළ නොහැක."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ටෙදර් නොකරනු ඇත."</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ඊතර්නෙට් ටෙදරින්"</string>
-    <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"USB ඊතර්නෙට් හරහා දුරකථනයේ අන්තර්ජාල සබැඳුම බෙදා ගන්න"</string>
+    <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ඊතර්නෙට් හරහා දුරකථනයේ අන්තර්ජාල සබැඳුම බෙදා ගන්න"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"ඔබගේ ජංගම දත්ත සබැඳුම හරහා වෙනත් උපාංග සඳහා අන්තර්ජාලය සැපයීමට හොට්ස්පොට් හා ටෙදරින් භාවිත කරන්න. යෙදුම් අවට උපාංග සමග අන්තර්ගතය බෙදා ගැනීමට හොට්ස්පොට් එකක්ද සෑදිය හැකිය."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"ඔබේ Wi-Fi හෝ ජංගම දත්ත සම්බන්ධතාව හරහා අනෙක් උපාංගවලට අන්තර්ජාලය ලබා දීමට හොට්ස්පොට් සහ ටෙදරින් භාවිත කරන්න. අවට උපාංග සමඟ අන්තර්ගත බෙදා ගැනීමට හොට්ස්පොට් එකක් තැනීමට ද යෙදුම්වලට හැකිය."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"උදවු"</string>
@@ -1720,6 +1734,15 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"බ්ලූටූත් පරිලෝකනය"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"බ්ලූටූත් ක්‍රියාවිරහිත විට පවා, ඕනෑම අවස්ථාවක අවට උපාංග සඳහා ස්කෑන් කිරීමට යෙදුම් සහ සේවාවලට ඉඩ දෙන්න. උදාහරණයක් ලෙස, ස්ථානය-පදනම් වූ විශේෂාංග සහ සේවා වැඩි දියුණු කිරීම සඳහා මෙය භාවිත කළ හැකිය."</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"වැඩ සඳහා ස්ථානීය සේවා"</string>
+    <string name="location_time_zone_detection_screen_title" msgid="8396625087466311625">"ස්ථාන වේලා කලාපය අනාවරණය කර ගැනීම"</string>
+    <string name="location_time_zone_detection_enabled_title" msgid="1195178875042989835">"ස්ථාන වේලා කලාපය අනාවරණය කර ගැනීම"</string>
+    <string name="location_time_zone_detection_enabled_description" msgid="1064716900984397624">"වත්මන් වේලා කලාපය අනාවරණය කර ගැනීමට උපාංගයේ ස්ථානය භාවිත කිරීමට ඉඩ දෙයි. Wi‑Fi ස්කෑන් කිරීම වැනි වෙනත් ස්ථාන සැකසීම් වේලා කලාපය අනාවරණය කර ගැනීමේ නිරවද්‍යතාවට බලපෑ හැකිය."</string>
+    <string name="location_time_zone_detection_on" msgid="5514817179120761597">"ක්‍රියාත්මකයි"</string>
+    <string name="location_time_zone_detection_off" msgid="192427076195667079">"ක්‍රියාවිරහිතයි"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="8067073548483627695">"ස්වයංක්‍රිය වේලා කලාපය අනාවරණය කර ගැනීම අබලයි"</string>
+    <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"ස්ථාන වේලා කලාපය අනාවරණය කර ගැනීම අබලයි"</string>
+    <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"ස්ථාන වේලා කලාපය අනාවරණය කර ගැනීම සහාය නොදක්වයි"</string>
+    <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"ස්ථාන වේලා කලාපය අනාවරණය කර ගැනීමේ වෙනස් කිරීම් ඉඩ නොදේ"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Wi-Fi සහ ජංගම ජාල ස්ථාන"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"ඔබගේ ස්ථානය ඉක්මනින් තීරණය කිරීමට යෙදුම් හට Google හි ස්ථාන සේවා භාවිතා කිරීමට ඉඩ දෙන්න. නිර්නාමික ස්ථාන දත්ත එකතු කර Google වෙත යැවෙනු ඇත."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"Wi‑Fi මඟින් ස්ථානය හඳුනාගන්නා ලදි"</string>
@@ -1783,6 +1806,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"මුහුණු අඟුලු ඇරීම භාවිත කිරීමට, මුරපදය සකසන්න"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"මුහුණු අඟුලු ඇරීම භාවිත කිරීමට, රටාව සකසන්න"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"මුහුණු අඟුලු ඇරීම භාවිත කිරීමට, රහස් අංකයක් සකසන්න"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="9091792721166354172">"ජෛවමිතික භාවිත කිරීමට, මුරපදයක් සකසන්න"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4949972592985176347">"ජෛවමිතික භාවිත කිරීමට, රටාවක් සකසන්න"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="4215367936503271941">"ජෛවමිතික භාවිත කිරීමට, PIN අංකයක් සකසන්න"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"ඔබේ මුරපදය අමතකද?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"ඔබේ රටාව අමතකද?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"ඔබේ PIN අමතකද?"</string>
@@ -2125,6 +2151,10 @@
     <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"පූර්ණ තිරය &amp; තිරයේ කොටස"</string>
     <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"සම්පූර්ණ තිරය විශාලනය කරන්න"</string>
     <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"තිරයේ කොටස විශාලනය කරන්න"</string>
+    <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"ප්‍රවේශ්‍යතා බොත්තමට මාරු වන්නද?"</string>
+    <string name="accessibility_magnification_switch_shortcut_message" msgid="5291166101273060742">"තිරයේ කොටසක් විශාලනය කිරීම සඳහා තුන්වරක් තට්ටු කිරීම භාවිතා කිරීම ටයිප් කිරීම සහ වෙනත් ක්‍රියා ප්‍රමාද වීමට හේතු වේ.\n\nවිශාලනය කිරීම සඳහා ප්‍රවේශ්‍යතා බොත්තම භාවිතා කිරීමට මාරු වීමට ඔබට අවශ්‍යද?"</string>
+    <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"ප්‍රවේශ්‍යතා බොත්තමට මාරු වන්න"</string>
+    <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="5750910789717343646">"විශාලනය කිරීමට තුන්වරක් තට්ටු කිරීම තබා ගන්න"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"විශාලන සැකසීම්"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"තට්ටු-තුනක් සමඟ විශාලනය කරන්න"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"කෙටිමඟ සමඟ විශාලන කරන්න"</string>
@@ -2178,11 +2208,11 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"බල බොත්තම ඇමතුම අවසන් කරයි"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"විශාල මූසික දර්ශකය"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"සජීවීකරණ ඉවත් කරන්න"</string>
-    <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"ඒකල ශ්‍රව්‍යය"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"ශ්‍රව්‍ය ධාවනය කරන විට නාලිකා ඒකාබද්ධ කරන්න"</string>
-    <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"ශ්‍රව්‍ය තුලනය"</string>
-    <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"වම"</string>
-    <string name="accessibility_toggle_master_balance_right_label" msgid="5028519887058073990">"දකුණ"</string>
+    <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"ඒකල ශ්‍රව්‍යය"</string>
+    <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"ශ්‍රව්‍ය ධාවනය කරන විට නාලිකා ඒකාබද්ධ කරන්න"</string>
+    <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"ශ්‍රව්‍ය තුලනය"</string>
+    <string name="accessibility_toggle_primary_balance_left_label" msgid="6415750010517682014">"වම"</string>
+    <string name="accessibility_toggle_primary_balance_right_label" msgid="2987443495390104935">"දකුණ"</string>
     <string name="accessibility_timeout_default" msgid="1033702739376842824">"පෙරනිමි"</string>
     <string name="accessibility_timeout_10secs" msgid="5072577454521239794">"තත්පර 10"</string>
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"තත්පර 30"</string>
@@ -2212,11 +2242,11 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"දැනුම්දීම් කම්පනය"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"නාද කම්පනය"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"ප්‍රතිපෝෂණය ස්පර්ශ කරන්න"</string>
-    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> භාවිත කරන්න"</string>
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> විවෘත කරන්න"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"වර්ණ නිවැරදි කිරීම භාවිත කරන්න"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"සිරස්තල පෙන්වන්න"</string>
-    <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"සහාය දක්වන යෙදුම සඳහා පමණයි"</string>
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> භාවිත කරන්න"</string>
+    <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> විවෘත කරන්න"</string>
+    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"වර්ණ නිවැරදි කිරීම භාවිත කරන්න"</string>
+    <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"සිරස්තල පෙන්වන්න"</string>
+    <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"සහාය දක්වන යෙදුම සඳහා පමණයි"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"සිරස්තල තරම සහ විලාසය"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> පෙළ තරම"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"තව විකල්ප"</string>
@@ -2246,6 +2276,7 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"වර්ණ අන්ධතාව"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"වර්ණ දුර්වලතාව"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"වර්ණ අන්ධතාව"</string>
+    <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Grayscale"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"රතු-කොළ"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"රතු-කොළ"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"නිල්-කහ"</string>
@@ -2375,7 +2406,7 @@
     <string name="background_activity_title" msgid="8214332017349791380">"පසුබිම සීමා කිරීම"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"පසුබිමේ ධාවනය කිරීමට යෙදුමට අවසර දෙන්න"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"යෙදුම වෙත පසුබිමේ ධාවනය කිරීමට අවසර නැත"</string>
-    <string name="background_activity_summary_whitelisted" msgid="6808917852577742965">"පසුබිම් භාවිතය සීමා කළ නොහැකිය"</string>
+    <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"පසුබිම් භාවිතය සීමා කළ නොහැකිය"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"පසුබිම් ක්‍රියාකාරිත්වය සීමා කරන්නද?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"ඔබ යෙදුමක පසුබිම් ක්‍රියාකාරිත්වය සීමා කළහොත්, එය වැරදි ලෙස ක්‍රියා කරනු ඇත"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"මෙම යෙදුම බැටරිය ප්‍රශස්ත කිරීමට සකසා නැති නිසා, ඔබට එය සීමා කළ නොහැකිය. \n\nයෙදුම සීමා කිරීම සඳහා, පළමුව බැටරි ප්‍රශස්තකරණය ක්‍රියාත්මක කරන්න."</string>
@@ -2479,6 +2510,8 @@
       <item quantity="other">යෙදුම් %1$dක් සීමා කර ඇත</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
+    <string name="battery_missing_message" msgid="5202575301365811053">"ඔබගේ බැටරි මනුව කියවීමේ දෝෂයකි"</string>
+    <string name="battery_missing_help_message" msgid="4583322687535428926">"ඔබගේ බැටරි මනුව කියවීමේ දෝෂයකි. "<annotation id="url">"තව දැන ගැනීමට"</annotation>" තට්ටු කරන්න"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"යෙදුම නවත්වන්නද?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"<xliff:g id="APP">%1$s</xliff:g> ඔබේ දුරකථනය අවදියෙන් තබා ගන්නා නිසා ඔබේ දුරකථනයට සාමාන්‍ය පරිදි බැටරිය කළමනාකරණය කළ නොහැකිය.\n\nමෙම ගැටලුව විසඳීමට උත්සාහ කිරීමට, ඔබට යෙදුම නැවැත්විය හැකිය.\n\nමෙය දිගටම සිදු වන්නේ නම්, බැටරි කාර්ය සාධනය වැඩි දියුණු කිරීමට ඔබ යෙදුම අස්ථාපනය කිරීම අවශ්‍ය විය හැකිය."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"<xliff:g id="APP">%1$s</xliff:g> ඔබේ ටැබ්ලටය අවදියෙන් තබා ගන්නා නිසා ඔබේ ටැබ්ලටයට සාමාන්‍ය පරිදි බැටරිය කළමනාකරණය කළ නොහැකිය.\n\nමෙම ගැටලුව විසඳීමට උත්සාහ කිරීමට, ඔබට යෙදුම නැවැත්විය හැකිය.\n\nමෙය දිගටම සිදු වන්නේ නම්, බැටරි කාර්ය සාධනය වැඩි දියුණු කිරීමට ඔබ යෙදුම අස්ථාපනය කිරීම අවශ්‍ය විය හැකිය."</string>
@@ -2592,9 +2625,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"කාලසටහනක් සකසන්න"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"බැටරි ආයු කාලය දීර්ඝ කරන්න"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"ආරෝපණය වූ විට ක්‍රියාවිරහිත කරන්න"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"ඔබේ දුරකථනය <xliff:g id="PERCENT">%1$s</xliff:g> හි තිබෙන විට බැටරි සුරැකුම අක්‍රිය වෙයි"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"ඔබේ ටැබ්ලටය <xliff:g id="PERCENT">%1$s</xliff:g> හි තිබෙන විට බැටරි සුරැකුම අක්‍රිය වෙයි"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"ඔබේ උපාංගය <xliff:g id="PERCENT">%1$s</xliff:g> හි තිබෙන විට බැටරි සුරැකුම අක්‍රිය වෙයි"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"ඔබේ දුරකථනය <xliff:g id="PERCENT">%1$s</xliff:g>ට වඩා වැඩියෙන් ආරෝපණය වූ විට බැටරි සුරැකුම ක්‍රියාවිරහිත වෙයි"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"ඔබේ ටැබ්ලටය <xliff:g id="PERCENT">%1$s</xliff:g>ට වඩා වැඩියෙන් ආරෝපණය වූ විට බැටරි සුරැකුම ක්‍රියාවිරහිත වෙයි"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8707774542183385479">"ඔබේ උපාංගය <xliff:g id="PERCENT">%1$s</xliff:g>ට වඩා වැඩියෙන් ආරෝපණය වූ විට බැටරි සුරැකුම ක්‍රියාවිරහිත වෙයි"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ක්‍රියාත්මක කරන්න"</string>
@@ -2659,6 +2692,8 @@
     <string name="tts_reset" msgid="9047681050813970031">"යළි පිහිටුවන්න"</string>
     <string name="tts_play" msgid="2945513377250757221">"ධාවනය කරන්න"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"අනුවර්තී සබැඳුම් හැකියාව"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ඔබගේ ජාල සම්බන්ධතා ස්වයංක්‍රීයව කළමනාකරණය කිරීමෙන් බැටරි ආයු කාලය දිගු කරන අතර උපාංගයේ ක්‍රියාකාරිත්වය වැඩි දියුණු කරයි"</string>
     <string name="credentials_title" msgid="7535942196886123656">"අක්තපත්‍ර ආචයනය"</string>
     <string name="credentials_install" msgid="3933218407598415827">"සහතිකයක් ස්ථාපනය කරන්න"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"සහතික ආචයනයෙන් ස්ථාපනය කරන්න"</string>
@@ -2670,9 +2705,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"පරිශීලක අක්තපත්‍ර"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"ගබඩා කළ අක්තපත්‍ර බලන්න සහ විකරණය කරන්න"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"උසස්"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"ආචයන වර්ගය"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"දෘඩාංග රක්ෂිත"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"මෘදුකාංග පමණි"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"මෙම පරිශීලකයාට අක්තපත්‍ර නොතිබේ"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN සහ යෙදුම් සඳහා ස්ථාපිත"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Wi-Fi සඳහා ස්ථාපිත"</string>
@@ -3011,7 +3043,6 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"සකස් කර නොමැත - වැඩකරන පැතිකඩ"</string>
     <string name="user_admin" msgid="4024553191395768119">"පරිපාලක"</string>
     <string name="user_you" msgid="3070562015202859996">"ඔබ (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_nickname" msgid="3763630194459958977">"අපනාමය"</string>
     <string name="user_add_max_count" msgid="5739771048517070983">"ඔබට පරිශීලකයන් <xliff:g id="USER_COUNT">%1$d</xliff:g> ක් දක්වා එක් කළ හැකිය"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"ටැබ්ලටයේ හිමිකරුට පමණක් පරිශීලකයින් කළමනාකරණය කළ හැක."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"දුරකථනයේ හිමිකරුට පමණක් පරිශීලකයින් කළමනාකරණය කළ හැක."</string>
@@ -3061,7 +3092,7 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"පර්යන්තයේදී ගෙවීම"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"ගෙවීම් යෙදුමක් පිහිටුවන්න. අනතුරුව ඔබේ දුරකථනයේ පසුපස contactless සංකේතය සහිත ඕනෑම ටර්මිනලයකට අල්ලන්න."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"තේරුණා"</string>
-    <string name="nfc_more_title" msgid="4202405349433865488">"තව..."</string>
+    <string name="nfc_more_title" msgid="1041094244767216498">"තව…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"පෙරනිමි ගෙවීම් යෙදුම සකසන්න"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"පෙරනිමි ගෙවීම් යෙදුම යාවත්කාලීන කරන්න"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"සම්බන්ධතාවක් නැති පර්යන්තයකදී, <xliff:g id="APP">%1$s</xliff:g> සමගින් ගෙවන්න"</string>
@@ -3131,9 +3162,6 @@
     <string name="wizard_back" msgid="8257697435061870191">"ආපසු"</string>
     <string name="wizard_next" msgid="3884832431439072471">"මීලඟ"</string>
     <string name="wizard_finish" msgid="4220258401946825946">"අවසන් කරන්න"</string>
-    <string name="user_image_take_photo" msgid="2601691481533190924">"ඡායාරූපයක් ගන්න"</string>
-    <string name="user_image_choose_photo" msgid="5904586923236027350">"රූපයක් තෝරන්න"</string>
-    <string name="user_image_photo_selector" msgid="7727851029781491727">"ඡායාරූපය තෝරන්න"</string>
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_setup_wizard_title" msgid="3945520353564138219">"SIM කාඩ් පත්"</string>
     <string name="sim_settings_title" msgid="8392862852842113531">"SIM කාඩ් පත්"</string>
@@ -3145,7 +3173,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"ඇමතුම් සඳහා මෙම එක සැමවිටම භාවිතා කරන්න"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"දත්ත සඳහා SIM එක තෝරන්න"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"කෙටිපණිවුඩ සඳහා SIM තෝරන්න"</string>
-    <string name="data_switch_started" msgid="6205259094233452188">"දත්ත SIM මාරු කරමින්, මෙය මිනිත්තුවක් දක්වා ගත හැකිය..."</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"දත්ත SIM මාරු කරමින්, මෙය මිනිත්තුවක් දක්වා ගත හැකිය…"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"සමඟ අමතන්න"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"SIM කාඩ් පත තෝරන්න"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3288,6 +3316,7 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"චර්යානුගත, කාල සටහන, බැටරි සුරැකුම, බල සුරැකුම, බැටරිය, ස්වයංක්‍රීය, ප්‍රතිශතය"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, උසස් ඇමතුම්, 4g ඇමතුම්"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"භාෂාව එක් කරන්න, භාෂාවක් එක් කරන්න"</string>
+    <string name="keywords_font_size" msgid="336803136451166298">"පෙළ තරම"</string>
     <string name="default_sound" msgid="6604374495015245195">"සුපුරුදු හඬ"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"නාද සහ දැනුම්දීම හඬ පරිමාව <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"හඬ පරිමාව, කම්පනය, බාධා නොකරන්න"</string>
@@ -3448,6 +3477,8 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"අදාළත්වය අනුව ස්වයංක්‍රියව දැනුම් දීම් ශ්‍රේණිගත කරන්න"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"අනුවර්තී දැනුම් දීම් ප්‍රතිපෝෂණය"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"දැනුම් දීම් වෙත කළ ගැළපීම් දක්වා පද්ධතිය වෙත ප්‍රතිපෝෂණ ලබා දීමට විකල්පය පෙන්වන්න"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"දැනුම්දීම් වැදගත්කම යළි සකසන්න"</string>
+    <string name="asst_importance_reset_summary" msgid="684794589254282667">"පරිශීලක වෙනස් කළ වැදගත් සැකසීම් යළි සකසන්න සහ ප්‍රමුඛතාව සැකසීමට දැනුම්දීම් සහායකට ඉඩ දෙන්න"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"යෝජිත ක්‍රියා සහ පිළිතුරු"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"යෝජිත ක්‍රියා සහ පිළිතුරු ස්වයංක්‍රීයව පෙන්වන්න"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"මෑත සහ මඳක් නිද්‍රාවට පත් කළ දැනුම් දීම් පෙන්වන්න"</string>
@@ -3545,8 +3576,11 @@
     <string name="important_conversations" msgid="1233893707189659401">"ප්‍රමුඛතා සංවාද"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"සංවාද කොටසේ ඉහළම පෙන්වන අතර පාවෙන බුබුලු ලෙස දිස් වේ."</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"සංවාද කොටසේ ඉහළ දී පෙන්වන්න"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"වෙනත් සංවාද"</string>
+    <string name="other_conversations" msgid="551178916855139870">"ප්‍රමුඛතා නොවන සංවාද"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"ඔබ වෙනස් කිරීම් කර ඇති සංවාද"</string>
+    <string name="recent_conversations" msgid="471678228756995274">"මෑත සංවාද"</string>
+    <string name="conversation_settings_clear_recents" msgid="7502738708058226585">"මෑත ඒවා හිස් කරන්න"</string>
+    <string name="clear" msgid="5092178335409471100">"හිස් කරන්න"</string>
     <string name="important_bubble" msgid="7911698275408390846">"ප්‍රමුඛතා සංවාද බුබුලු දමන්න"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"ප්‍රමුඛතා සංවාද පහළට-ඇදීමේ වැස්ම ඉහළින් පෙන්වයි. ඔබට ඒවා බුබුලු නැගීමට සැකසීමට සහ බාධා නොකරන්න බාධා කිරීමටද හැකිය."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"ප්‍රමුඛතා සහ වෙනස් කළ සංවාද මෙහි දිස් වනු ඇත"</string>
@@ -3647,7 +3681,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"ප්‍රවේශය බාධා නොකරන්න"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\'බාධා නොකරන්න\' හට ඉඩ දෙන්න"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"ස්ථාපිත යෙදුම් කිසිවක් ප්‍රවේශය බාධා නොකරන්න ඉල්ලා නැත"</string>
-    <string name="loading_notification_apps" msgid="1458413761470945269">"යෙදුම් පූරණය වේ..."</string>
+    <string name="loading_notification_apps" msgid="5139471829295287945">"යෙදුම් පූරණය කරමින්…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"ඔබගේ ඉල්ලීම මත, Android මෙම යෙදුමෙහි දැනුම්දීම් මෙම උපාංගය මත දිස් වීම අවහිර කරමින් ඇත"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"ඔබගේ ඉල්ලීම මත, Android මෙම දැනුම්දීම් ප්‍රවර්ගය මෙම උපාංගය මත දිස් වීම අවහිර කරමින් ඇත"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"ඔබගේ ඉල්ලීම මත, Android මෙම දැනුම්දීම් සමූහය මෙම උපාංගය මත දිස් වීම අවහිර කරමින් ඇත"</string>
@@ -3871,6 +3905,9 @@
     <string name="encryption_interstitial_message_pin_for_face" msgid="8577135499926738241">"ඔබේ උපාංගය අගුලු හැරීමට ඔබේ මුහුණ භාවිත කිරීමට අමතරව, උපාංගය ආරම්භ වීමට පෙර ඔබගේ PIN අවශ්‍ය වීම මඟින් ඔබට එය තව දුරටත් ආරක්ෂා කළ හැකිය. උපාංගය ආරම්භ වන තෙක්, එයට එලාම ඇතුළත්ව ඇමතුම්, පණිවිඩ හෝ දැනුම්දීම් ලබා ගත නොහැකිය.\n\nනැතිවූ හෝ සොරකම් කළ උපාංගවල දත්ත ආරක්ෂා කිරීමට මෙය උදවු කරයි. ඔබගේ උපාංගය පණ ගැන්වීමට PIN එක අවශ්‍යද?"</string>
     <string name="encryption_interstitial_message_pattern_for_face" msgid="5851725964283239644">"ඔබේ උපාංගය අගුලු හැරීමට ඔබේ මුහුණ භාවිත කිරීමට අමතරව, උපාංගය ආරම්භ වීමට පෙර ඔබගේ රටාව අවශ්‍ය වීම මඟින් ඔබට එය තව දුරටත් ආරක්ෂා කළ හැකිය. උපාංගය ආරම්භ වන තෙක්, එයට එලාම ඇතුළත්ව ඇමතුම්, පණිවිඩ හෝ දැනුම්දීම් ලබා ගත නොහැකිය.\n\nනැතිවූ හෝ සොරකම් කළ උපාංගවල දත්ත ආරක්ෂා කිරීමට මෙය උදවු කරයි. ඔබගේ උපාංගය පණ ගැන්වීමට රටාවක් අවශ්‍යද?"</string>
     <string name="encryption_interstitial_message_password_for_face" msgid="3553329272456428461">"ඔබේ උපාංගය අගුලු හැරීමට ඔබේ මුහුණ භාවිත කිරීමට අමතරව, උපාංගය ආරම්භ වීමට පෙර ඔබගේ මුරපදය අවශ්‍ය වීම මඟින් ඔබට එය තව දුරටත් ආරක්ෂා කළ හැකිය. උපාංගය ආරම්භ වන තෙක්, එයට එලාම ඇතුළත්ව ඇමතුම්, පණිවිඩ හෝ දැනුම්දීම් ලබා ගත නොහැකිය.\n\nනැතිවූ හෝ සොරකම් කළ උපාංගවල දත්ත ආරක්ෂා කිරීමට මෙය උදවු කරයි. ඔබගේ උපාංගය පණ ගැන්වීමට මුරපදය එක අවශ්‍යද?"</string>
+    <string name="encryption_interstitial_message_pin_for_biometrics" msgid="4590004045791674901">"ඔබේ උපාංගය අගුලු හැරීමට ඔබේ ජෛවමිතික භාවිත කිරීමට අමතරව, උපාංගය ආරම්භ වීමට පෙර ඔබගේ PIN ඉල්ලා සිටීම මඟින් ඔබට එය තවදුරටත් ආරක්ෂා කළ හැකිය. උපාංගය ආරම්භ වන තෙක්, එයට එලාම ඇතුළුව ඇමතුම්, පණිවිඩ හෝ දැනුම්දීම් ලබාගත නොහැකිය.\n\nනැතිවූ හෝ සොරකම් කළ උපාංගවල දත්ත ආරක්ෂා කිරීමට මෙය උදව් කරයි. ඔබගේ උපාංගය ආරම්භ කිරීමට PIN අවශ්‍යද?"</string>
+    <string name="encryption_interstitial_message_pattern_for_biometrics" msgid="2697768285995352576">"ඔබේ උපාංගය අගුලු හැරීමට ඔබේ ජෛවමිතික භාවිත කිරීමට අමතරව, උපාංගය ආරම්භ වීමට පෙර ඔබගේ රටාව ඉල්ලා සිටීම මඟින් ඔබට එය තවදුරටත් ආරක්ෂා කළ හැකිය. උපාංගය ආරම්භ වන තෙක්, එයට එලාම ඇතුළුව ඇමතුම්, පණිවිඩ හෝ දැනුම්දීම් ලබාගත නොහැකිය.\n\nනැතිවූ හෝ සොරකම් කළ උපාංගවල දත්ත ආරක්ෂා කිරීමට මෙය උදව් කරයි. ඔබගේ උපාංගය ආරම්භ කිරීමට රටාව අවශ්‍යද?"</string>
+    <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"ඔබේ උපාංගය අගුලු හැරීමට ඔබේ ජෛවමිතික භාවිත කිරීමට අමතරව, උපාංගය ආරම්භ වීමට පෙර ඔබගේ මුරපදය ඉල්ලා සිටීම මඟින් ඔබට එය තවදුරටත් ආරක්ෂා කළ හැකිය. උපාංගය ආරම්භ වන තෙක්, එයට එලාම ඇතුළුව ඇමතුම්, පණිවිඩ හෝ දැනුම්දීම් ලබාගත නොහැකිය.\n\nනැතිවූ හෝ සොරකම් කළ උපාංගවල දත්ත ආරක්ෂා කිරීමට මෙය උදව් කරයි. ඔබගේ උපාංගය ආරම්භ කිරීමට මුරපදය අවශ්‍යද?"</string>
     <string name="encryption_interstitial_yes" msgid="1948016725089728181">"ඔව්"</string>
     <string name="encryption_interstitial_no" msgid="3352331535473118487">"නැත"</string>
     <string name="restricted_true_label" msgid="612852292488747564">"සීමා කළ"</string>
@@ -4046,7 +4083,7 @@
     <string name="usb_control_title" msgid="1946791559052157693">"USB පාලනය වන්නේ"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"සම්බන්ධ කළ උපාංගය"</string>
     <string name="usb_control_device" msgid="527916783743021577">"මෙම උපාංගය"</string>
-    <string name="usb_switching" msgid="3713602881103295766">"මාරු කරමින්..."</string>
+    <string name="usb_switching" msgid="3654709188596609354">"මාරු කරමින්…"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"මාරු කළ නොහැකි විය"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"මෙම උපාංගය ආරෝපණය කරමින්"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"සම්බන්ධිත උපාංගය ආරෝපණය කරමින්"</string>
@@ -4293,7 +4330,7 @@
     <string name="launch_wifi_text" msgid="976421974332512894">"විස්තර බලන්න"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"දත්ත සුරැකුම"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"සීමා නොකළ දත්ත"</string>
-    <string name="restrict_background_blacklisted" msgid="7953049316098373715">"පසුබිම් දත්ත ක්‍රියාවිරහිතයි"</string>
+    <string name="restrict_background_blocklisted" msgid="2308345280442438232">"පසුබිම් දත්ත ක්‍රියාවිරහිතයි"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"ක්‍රියාත්මකයි"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"ක්‍රියාවිරහිතයි"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"දත්ත සුරැකුම භාවිත කරන්න"</string>
@@ -4316,7 +4353,7 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"උපාංගය අගුලු දමා ඇති නම්, දැනුම්දීම් තුළ පිළිතුරු හෝ වෙනත් පෙළ ටයිප් කිරීම වළක්වන්න"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"පෙරනිමි අක්ෂර වින්‍යාස පරීක්ෂක"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"අක්ෂර වින්‍යාස පරීක්ෂක තෝරන්න"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"අක්ෂර වින්‍යාස පරීක්ෂාව භාවිත කරන්න"</string>
+    <string name="spell_checker_primary_switch_title" msgid="529240542284039243">"අක්ෂර වින්‍යාස පරීක්ෂාව භාවිත කරන්න"</string>
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"තෝරා නොමැත"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(කිසිවක් නැත)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4406,7 +4443,7 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"ගබඩා ඉඩ නිදහස් කර ගැනීමට උදවු වීමට, ගබඩා කළමනාකරු ඔබේ උපාංගය වෙතින් උපස්ථ කළ ඡායාරූප සහ වීඩියෝ ඉවත් කරයි."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"ඡායාරූප සහ වීඩියෝ ඉවත් කරන්න"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"ගබඩා කළමනාකරු"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"ගබඩා කළමනාකරු භාවිත කරන්න"</string>
+    <string name="automatic_storage_manager_primary_switch_title" msgid="9131959126462101994">"ගබඩා කළමනාකරු භාවිත කරන්න"</string>
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"ස්වයංක්‍රිය"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"අත්පොත"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"දැන් ඉඩ නිදහස් කර ගන්න"</string>
@@ -4444,6 +4481,8 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"දුරකථනය පරීක්ෂා කිරීමට දෙවරක් තට්ටු කරන්න"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ටැබ්ලට් පරිගණකය පරීක්ෂා කිරීමට දෙවරක් තට්ටු කරන්න"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"උපාංගය පරීක්ෂා කිරීමට දෙවරක් තට්ටු කරන්න"</string>
+    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"දැනුම්දීම්වලට ස්වයිප් කර."</string>
+    <string name="swipe_bottom_to_notifications_summary" msgid="8073261995155440308">"ඔබගේ දැනුම්දීම් පෙන්වීමට තිරයේ පහළ දාරයෙහි සිට පහළට ස්වයිප් කරන්න"</string>
     <string name="one_handed_title" msgid="1741600445540072513">"තනි අත් ප්‍රකාරය"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"තනි අත් ප්‍රකාරය භාවිත කරන්න"</string>
     <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"යෙදුම් මාරු කරන විට පිටවන්න"</string>
@@ -4464,6 +4503,11 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ටැබ්ලටය පරීක්‍ෂා කිරීමට තට්ටු කරන්න"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"උපාංගය පරීක්‍ෂා කිරීමට තට්ටු කරන්න"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"වේලාව, දැනුම්දීම් සහ වෙනත් තොරතුරු පරීක්‍ෂා කිරීමට, ඔබේ තිරයට දෙවරක් තට්ටු කරන්න."</string>
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"හදිසි SOS"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g> මගින් කළමනාකරණය කෙරේ"</string>
+    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"බල බොත්තම 5 වතාවක් ඉක්මනින් එබීමෙන් හදිසි SOS ක්‍රියා ආරම්භ කරන්න."</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"අනතුරු ඇඟවීමේ ශබ්දය"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"ක්‍රියා ආරම්භ කිරීමට පෙර ඇඟවීම"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"දැනුම්දීම් සඳහා ඇඟිලි සලකුණ ස්වයිප් කරන්න"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"ඇඟිලි සලකුණ ස්වයිප් කරන්න"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"ඔබේ දැනුම්දීම් පරීක්ෂා කිරීමට, ඔබේ දුරකථනයේ පිටුපස පැත්තේ ඇති ඇඟිලි සලකුණු සංවේදකය මත පහළට ස්වයිප් කරන්න."</string>
@@ -4618,7 +4662,7 @@
     <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"සියලුම යෙදුම් සඳහා සබල කරන්න"</string>
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"ග්‍රැෆික් ධාවකය තෝරන්න"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"පෙරනිමි"</string>
-    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"ක්‍රීඩා ධාවකය"</string>
+    <string name="graphics_driver_app_preference_production_driver" msgid="1515874802568434915">"ක්‍රීඩා ධාවකය"</string>
     <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"සංවර්ධක ධාවකය"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"පද්ධති ග්‍රැෆික් ධාවකය"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
@@ -4687,6 +4731,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"ජාල සොයා ගත නොහැකි විය. නැවත උත්සාහ කරන්න."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(තහනම්)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"SIM කාඩ්පතක් නැත"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"SIM නැත"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"කිසිවක් නැත"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"සබැඳි වීමට SIM අවශ්‍යයි"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"සබැඳි වීමට <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> SIM අවශ්‍යයි"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"ප්‍රිය ජාල ආකාරය: WCDMA කැමතියි"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"ප්‍රිය ජාල ආකාරය: GSM පමණි"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"ප්‍රිය ජාල ආකාරය: WCDMA පමණි"</string>
@@ -4801,6 +4850,40 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> වෙත සම්බන්ධ වූ විට නොමැත"</string>
     <string name="see_more" msgid="7499355691042812723">"තව බලන්න"</string>
     <string name="see_less" msgid="2642392725363552793">"අඩුවෙන් බලන්න"</string>
+    <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ක්‍රියාත්මක කරන්නද?"</string>
+    <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"SIM ක්‍රියාත්මක කරන්නද?"</string>
+    <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> වෙත මාරු වන්නද?"</string>
+    <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"SIM කාඩ්පත භාවිතයට මාරු වන්නද?"</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"වරකට SIM එකක් පමණක් සක්‍රිය කළ හැකිය.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> වෙත මාරු වීම ඔබේ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> සේවය අවලංගු නොකරනු ඇත."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"වරකට බාගත් SIM එකක් පමණක් සක්‍රිය විය හැකිය.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> වෙත මාරු වීම ඔබේ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> සේවය අවසන් නොකරනු ඇත."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"වරකට SIM එකක් පමණක් සක්‍රිය කළ හැකිය.\n\nමාරු වීම ඔබේ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> සේවය අවලංගු නොකරනු ඇත."</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> වෙත මාරු වන්න"</string>
+    <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"ජාලයට සම්බන්ධ වෙමින්…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> වෙත මාරු වෙමින්"</string>
+    <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"වාහකය මාරු කළ නොහැකිය"</string>
+    <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"දෝෂයක් හේතුවෙන් වාහකය මාරු කළ නොහැකිය."</string>
+    <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ක්‍රියාවිරහිත කරන්නද?"</string>
+    <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"SIM ක්‍රියාවිරහිත කරන්නද?"</string>
+    <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"SIM ක්‍රියාවිරහිත කරමින්<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"වාහකය අබල කළ නොහැකිය"</string>
+    <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"යම් දෙයක් වැරදී ගිය අතර ඔබේ වාහකය අබල කළ නොහැකි විය."</string>
+    <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"SIM 2ක් භාවිත කරන්නද?"</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"මෙම උපාංගයට එකවර SIM 2ක් ක්‍රියාත්මකව තිබිය හැකිය. දිගටම වරකට 1 SIM එකක් භාවිත කිරීමට, \"එපා, ස්තුතියි\" තට්ටු කරන්න."</string>
+    <string name="sim_action_restart_title" msgid="7054617569121993825">"උපාංගය යළි අරඹන්නද?"</string>
+    <string name="sim_action_restart_text" msgid="8019300474703571013">"ආරම්භ කිරීමට, ඔබේ උපාංගය යළි අරඹන්න. පසුව ඔබට වෙනත් SIM එකක් එක් කළ හැකිය."</string>
+    <string name="sim_action_continue" msgid="1688813133152389943">"ඉදිරියට යන්න"</string>
+    <string name="sim_action_reboot" msgid="3508948833333441538">"යළි අරඹන්න"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"එපා, ස්තුතියි"</string>
+    <string name="sim_switch_button" msgid="1405772571706095387">"මාරු වන්න"</string>
+    <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM එක සක්‍රිය කිරීමට නොහැකිය"</string>
+    <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM එක ඉවත් කර එය නැවත ඇතුළු කරන්න. ප්‍රශ්නය දිගටම පැවතුණහොත්, ඔබේ උපාංගය යළි ආරම්භ කරන්න."</string>
+    <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"නැවත SIM එක ක්‍රියාත්මක කිරීමට උත්සාහ කරන්න. ප්‍රශ්නය දිගටම පැවතුණහොත්, ඔබේ උපාංගය යළි ආරම්භ කරන්න."</string>
+    <string name="erase_sim_dialog_title" msgid="881253002169177016">"මෙම බාගත් SIM මකන්නද?"</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"මෙම SIM මැකීමෙන් මෙම උපාංගයෙන් <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> සේවාව ඉවත් කරයි.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> සඳහා වන සේවාව අවලංගු නොකෙරේ."</string>
+    <string name="erase_sim_confirm_button" msgid="8309115684335320541">"මකන්න"</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"SIM මකමින්…"</string>
+    <string name="erase_sim_fail_title" msgid="2024446702985862427">"SIM මැකිය නොහැක"</string>
+    <string name="erase_sim_fail_text" msgid="7870804401227483131">"දෝෂයක් හේතුවෙන් මෙම SIM මැකිය නොහැක.\n\nඔබේ උපාංගය යළි අරඹා නැවත උත්සාහ කරන්න."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"උපාංගයට සම්බන්ධ වන්න"</string>
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"<xliff:g id="APPNAME">%1$s</xliff:g> යෙදුමට ඔබේ උපාංගයට සම්බන්ධ වීමට තාවකාලික Wi‑Fi ජාලයක් භාවිත කිරීමට අවශ්‍යය"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"උපාංග කිසිවක් හමු නොවිය. උපාංග සක්‍රීය කර තිබෙන අතර සම්බන්ධ කිරීමට ලද හැකි බව තහවුරු කර ගන්න."</string>
@@ -4923,14 +5006,25 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"සැකසීම්වලට තිර උඩැතිරි ඉඩ දෙන්න"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"වෙනත් යෙදුම් ඉහළින් සංදර්ශනය කළ හැකි යෙදුම්වලට සැකසීම් තිර වසාලීමට ඉඩ දෙන්න"</string>
     <string name="media_controls_title" msgid="403271085636252597">"මාධ්‍ය"</string>
-    <string name="media_controls_summary" msgid="5032071475867165587">"මාධ්‍ය සැසිය අවසන් කර ඇති විට වාදකය සඟවන්න"</string>
-    <string name="media_controls_resume_description" msgid="2333689676163363582">"විදැහූ ඉක්මන් සැකසීම් පුවරුවෙන් සැසියක් නැවත පටන් ගැනීමට වාදකය ඔබට ඉඩ දෙයි."</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"ඉක්මන් සැකසීම් තුළ මාධ්‍ය වාදකය"</string>
+    <string name="media_controls_resume_description" msgid="7702723104730495227">"පහසුවෙන් පසුධාවනය ආරම්භ කිරීම සඳහා දිගු කාලයක් සඳහා මාධ්‍ය වාදකය පෙන්වන්න"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"වාදකය සඟවන්න"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"වාදකය පෙන්වන්න"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"ලබා ගත හැකි වාදක නැත"</string>
+    <string name="media_controls_apps_title" msgid="9129092193224838008">"ඉඩ දුන් යෙදුම්"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"මාධ්‍ය"</string>
-    <string name="gesture_skip_title" msgid="2092825906479683162">"අභිනය මඟ හරින්න"</string>
-    <string name="gesture_silence_title" msgid="8991427657123202574">"ඇඟවීම් අභිනය නිහඬ කරන්න"</string>
-    <string name="qtifeedback_settings_title">දෘඩාංග ප්‍රතිපෝෂණය</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies, Inc වාර්තාකරණය</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"බ්ලූටූත් ක්‍රියාත්මක වනු ඇත"</string>
+    <string name="bluetooth_setting_on" msgid="4808458394436224124">"ක්‍රියාත්මකයි"</string>
+    <string name="bluetooth_setting_off" msgid="4965493913199554789">"ක්‍රියාවිරහිතයි"</string>
+    <string name="provider_internet_settings" msgid="3831259474776313323">"අන්තර්ජාලය"</string>
+    <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM"</string>
+    <string name="airplane_safe_networks" msgid="8689587134664565669">"ගුවන් යානා ආරක්ෂිත ජාල"</string>
+    <string name="airplane_safe_networks_summary" msgid="8352420324632195912">"ගුවන් යානා ආරක්ෂිත ජාල සොයන්න සහ සම්බන්ධ වන්න"</string>
+    <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"ගුවන් යානා, ගුවන් යානා ආරක්ෂිත"</string>
+    <string name="calls_and_sms" msgid="1931855083959003306">"ඇමතුම් &amp; SMS"</string>
+    <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi-Fi ඇමතීම"</string>
+    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Wi‑Fi වැනි වාහක නොවන ජාල හරහා ඇමතුම් සිදු කරන්න සහ ලබන්න"</string>
+    <string name="calls_sms_footnote" msgid="148659606229186084">"සමහර Wi-Fi ජාල වැනි වාහක නොවන ජාල හරහා ඇමතුම් ලබා ගැනීමට සහ ලැබීමට Wi-Fi ඇමතීම ඔබට ඉඩ දෙයි.\n\nහරස් SIM ඇමතුම් ඔබට SIM එකක ජංගම දත්ත වෙනත් SIM එකකින් ඇමතුම් සිදු කිරීමට සහ ලැබීමට ඉඩ දෙයි."</string>
+    <string name="calls_preference_title" msgid="7536882032182563800">"ඇමතුම්"</string>
+    <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
 </resources>

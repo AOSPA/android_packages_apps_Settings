@@ -21,6 +21,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.sysprop.TelephonyProperties;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
@@ -107,6 +108,10 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     /** Called to change the default subscription for the service. */
     protected abstract void setDefaultSubscription(int subscriptionId);
 
+    protected boolean isAskEverytimeSupported() {
+        return true;
+    }
+
     @Override
     public int getAvailabilityStatus(int subId) {
         boolean visible = false;
@@ -151,7 +156,11 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             // display subscription based account
             return info.getDisplayName();
         } else {
-            return mContext.getString(R.string.calls_and_sms_ask_every_time);
+            if (isAskEverytimeSupported()) {
+                return mContext.getString(R.string.calls_and_sms_ask_every_time);
+            } else {
+                return "";
+            }
         }
     }
 
@@ -197,11 +206,14 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             }
         }
         if (TextUtils.equals(getPreferenceKey(), LIST_DATA_PREFERENCE_KEY)) {
-            mPreference.setEnabled(isCallStateIdle());
+            boolean isEcbmEnabled = TelephonyProperties.in_ecm_mode().orElse(false);
+            mPreference.setEnabled(isCallStateIdle() && !isEcbmEnabled);
         } else {
-            // Add the extra "Ask every time" value at the end.
-            displayNames.add(mContext.getString(R.string.calls_and_sms_ask_every_time));
-            subscriptionIds.add(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
+            if (isAskEverytimeSupported()) {
+                // Add the extra "Ask every time" value at the end.
+                displayNames.add(mContext.getString(R.string.calls_and_sms_ask_every_time));
+                subscriptionIds.add(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
+            }
         }
 
         mPreference.setEntries(displayNames.toArray(new CharSequence[0]));

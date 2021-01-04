@@ -106,10 +106,15 @@ public class MediaOutputSlice implements CustomSliceable {
             final MediaDevice connectedDevice = worker.getCurrentConnectedMediaDevice();
             if (devices.size() == 1) {
                 // Zero state
-                for (MediaDevice device : devices) {
-                    addRow(device, device, listBuilder);
+                final MediaDevice device = devices.iterator().next();
+                addRow(device, device, listBuilder);
+                // Add "pair new" only when local output device exists
+                final int type = device.getDeviceType();
+                if (type == MediaDevice.MediaDeviceType.TYPE_PHONE_DEVICE
+                        || type == MediaDevice.MediaDeviceType.TYPE_3POINT5_MM_AUDIO_DEVICE
+                        || type == MediaDevice.MediaDeviceType.TYPE_USB_C_AUDIO_DEVICE) {
+                    listBuilder.addRow(getPairNewRow());
                 }
-                listBuilder.addRow(getPairNewRow());
             } else {
                 final boolean isTouched = worker.getIsTouched();
                 // Fix the last top device when user press device to transfer.
@@ -142,7 +147,8 @@ public class MediaOutputSlice implements CustomSliceable {
                 .setSourceMetricsCategory(SettingsEnums.PANEL_MEDIA_OUTPUT)
                 .toIntent();
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
-                PendingIntent.getActivity(mContext, 0 /* requestCode */, intent, 0 /* flags */),
+                PendingIntent.getActivity(mContext, 0 /* requestCode */, intent,
+                        PendingIntent.FLAG_IMMUTABLE),
                 IconCompat.createWithResource(mContext, R.drawable.ic_add_24dp/*ic_add_blue_24dp*/),
                 ListBuilder.ICON_IMAGE,
                 mContext.getText(R.string.bluetooth_pairing_pref_title));
@@ -243,7 +249,8 @@ public class MediaOutputSlice implements CustomSliceable {
                 .putExtra(MEDIA_DEVICE_ID, id)
                 .setClass(mContext, SliceBroadcastReceiver.class);
 
-        return PendingIntent.getBroadcast(mContext, requestCode, intent, 0);
+        return PendingIntent.getBroadcast(mContext, requestCode, intent,
+                PendingIntent.FLAG_IMMUTABLE);
     }
 
     private SliceAction getEndItemSliceAction() {
@@ -252,9 +259,12 @@ public class MediaOutputSlice implements CustomSliceable {
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
                         getWorker().getPackageName());
-
+        final int requestCode = TextUtils.isEmpty(getWorker().getPackageName())
+                ? 0
+                : getWorker().getPackageName().hashCode();
         return SliceAction.createDeeplink(
-                PendingIntent.getActivity(mContext, 0 /* requestCode */, intent, 0 /* flags */),
+                PendingIntent.getActivity(mContext, requestCode, intent,
+                        PendingIntent.FLAG_IMMUTABLE),
                 IconCompat.createWithResource(mContext, R.drawable.ic_add_blue_24dp),
                 ListBuilder.ICON_IMAGE,
                 mContext.getText(R.string.add));
@@ -343,7 +353,7 @@ public class MediaOutputSlice implements CustomSliceable {
         intent.putExtra(MEDIA_DEVICE_ID, id);
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         return PendingIntent.getBroadcast(context, requestCode, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     @Override

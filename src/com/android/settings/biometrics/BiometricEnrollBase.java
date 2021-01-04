@@ -57,6 +57,9 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
      * starting the next activity. However, this leads to broken 'Back'
      * behavior. So, now an activity does not finish itself until it gets this
      * result.
+     *
+     * This must be the same as
+     * {@link com.android.settings.password.ChooseLockPattern#RESULT_FINISHED}
      */
     public static final int RESULT_FINISHED = RESULT_FIRST_USER;
 
@@ -78,6 +81,11 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     public static final int LEARN_MORE_REQUEST = 3;
     public static final int CONFIRM_REQUEST = 4;
     public static final int ENROLL_REQUEST = 5;
+    /**
+     * Request code when starting another biometric enrollment from within a biometric flow. For
+     * example, when starting fingerprint enroll after face enroll.
+     */
+    public static final int ENROLL_NEXT_BIOMETRIC_REQUEST = 6;
 
     protected boolean mLaunchedConfirmLock;
     protected byte[] mToken;
@@ -88,7 +96,13 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mToken = getIntent().getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+        // Don't need to retrieve the HAT if it already exists. In some cases, the extras do not
+        // contain EXTRA_KEY_CHALLENGE_TOKEN but contain EXTRA_KEY_GK_PW, in which case enrollment
+        // classes may request a HAT to be created (as opposed to being passed in)
+        if (mToken == null) {
+            mToken = getIntent().getByteArrayExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+        }
         mFromSettingsSummary = getIntent().getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false);
         if (savedInstanceState != null && mToken == null) {
             mLaunchedConfirmLock = savedInstanceState.getBoolean(EXTRA_KEY_LAUNCHED_CONFIRM);
@@ -102,9 +116,9 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
 
     @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
+        final int new_resid = SetupWizardUtils.getTheme(this, getIntent());
         theme.applyStyle(R.style.SetupWizardPartnerResource, true);
-        super.onApplyThemeResource(theme, resid, first);
+        super.onApplyThemeResource(theme, new_resid, first);
     }
 
     @Override
@@ -180,19 +194,20 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         return intent;
     }
 
-    protected void launchConfirmLock(int titleResId, long challenge) {
-        ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
-        boolean launchedConfirmationActivity;
-        if (mUserId == UserHandle.USER_NULL) {
-            launchedConfirmationActivity = helper.launchConfirmationActivity(CONFIRM_REQUEST,
-                    getString(titleResId),
-                    null, null, challenge, true /* foregroundOnly */);
-        } else {
-            launchedConfirmationActivity = helper.launchConfirmationActivity(CONFIRM_REQUEST,
-                    getString(titleResId),
-                    null, null, challenge, mUserId, true /* foregroundOnly */);
+    protected void launchConfirmLock(int titleResId) {
+        final ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(this);
+        builder.setRequestCode(CONFIRM_REQUEST)
+                .setTitle(getString(titleResId))
+                .setRequestGatekeeperPasswordHandle(true)
+                .setForegroundOnly(true)
+                .setReturnCredentials(true);
+
+        if (mUserId != UserHandle.USER_NULL) {
+            builder.setUserId(mUserId);
         }
-        if (!launchedConfirmationActivity) {
+
+        final boolean launched = builder.show();
+        if (!launched) {
             // This shouldn't happen, as we should only end up at this step if a lock thingy is
             // already set.
             finish();

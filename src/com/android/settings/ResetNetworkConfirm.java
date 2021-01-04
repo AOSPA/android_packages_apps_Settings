@@ -49,7 +49,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
-import com.android.settings.network.ApnSettings;
+import com.android.settings.network.apn.ApnSettings;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -197,7 +197,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(false);
         progressDialog.setMessage(
-                context.getString(R.string.master_clear_progress_text));
+                context.getString(R.string.main_clear_progress_text));
         return progressDialog;
     }
 
@@ -260,7 +260,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         if (args != null) {
             mSubId = args.getInt(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-            mEraseEsim = args.getBoolean(MasterClear.ERASE_ESIMS_EXTRA);
+            mEraseEsim = args.getBoolean(MainClear.ERASE_ESIMS_EXTRA);
         }
 
         mActivity = getActivity();

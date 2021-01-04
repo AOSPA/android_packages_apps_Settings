@@ -21,6 +21,7 @@ import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 
 import static com.android.internal.util.CollectionUtils.emptyIfNull;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.os.ParcelUuid;
 import android.telephony.SubscriptionInfo;
@@ -30,10 +31,15 @@ import android.telephony.UiccSlotInfo;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
+import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class SubscriptionUtil {
     private static final String TAG = "SubscriptionUtil";
@@ -278,6 +284,38 @@ public class SubscriptionUtil {
         }
     }
 
+    /** Starts a dialog activity to handle SIM enabling/disabling. */
+    public static void startToggleSubscriptionDialogActivity(
+            Context context, int subId, boolean enable) {
+        context.startActivity(ToggleSubscriptionDialogActivity.getIntent(context, subId, enable));
+    }
+
+    /** Starts a dialog activity to handle eSIM deletion. */
+    public static void startDeleteEuiccSubscriptionDialogActivity(Context context, int subId) {
+        context.startActivity(DeleteEuiccSubscriptionDialogActivity.getIntent(context, subId));
+    }
+
+    /**
+     * Finds and returns a subscription with a specific subscription ID.
+     * @param subscriptionManager The ProxySubscriptionManager for accessing subscription
+     *                            information
+     * @param subId The id of subscription to be returned
+     * @return the {@code SubscriptionInfo} whose ID is {@code subId}. It returns null if the
+     * {@code subId} is {@code SubscriptionManager.INVALID_SUBSCRIPTION_ID} or no such
+     * {@code SubscriptionInfo} is found.
+     */
+    @Nullable
+    public static SubscriptionInfo getSubById(SubscriptionManager subscriptionManager, int subId) {
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return null;
+        }
+        return subscriptionManager
+                .getAllSubscriptionInfoList()
+                .stream()
+                .filter(subInfo -> subInfo.getSubscriptionId() == subId)
+                .findFirst()
+                .get();
+    }
 
     /**
      * Whether a subscription is visible to API caller. If it's a bundled opportunistic
@@ -301,5 +339,34 @@ public class SubscriptionUtil {
         boolean hasCarrierPrivilegePermission = telephonyManager.hasCarrierPrivileges()
                 || subscriptionManager.canManageSubscription(info);
         return hasCarrierPrivilegePermission;
+    }
+
+    /**
+     * Finds all the available subscriptions having the same group uuid as {@code subscriptionInfo}.
+     * @param subscriptionManager The SubscriptionManager for accessing subscription information
+     * @param subId The id of subscription
+     * @return a list of {@code SubscriptionInfo} which have the same group UUID.
+     */
+    public static List<SubscriptionInfo> findAllSubscriptionsInGroup(
+            SubscriptionManager subscriptionManager, int subId) {
+
+        SubscriptionInfo subscription = getSubById(subscriptionManager, subId);
+        if (subscription == null) {
+            return Collections.emptyList();
+        }
+        ParcelUuid groupUuid = subscription.getGroupUuid();
+        List<SubscriptionInfo> availableSubscriptions =
+                subscriptionManager.getAvailableSubscriptionInfoList();
+
+        if (availableSubscriptions == null
+                || availableSubscriptions.isEmpty()
+                || groupUuid == null) {
+            return Collections.singletonList(subscription);
+        }
+
+        return availableSubscriptions
+                .stream()
+                .filter(sub -> sub.isEmbedded() && groupUuid.equals(sub.getGroupUuid()))
+                .collect(Collectors.toList());
     }
 }

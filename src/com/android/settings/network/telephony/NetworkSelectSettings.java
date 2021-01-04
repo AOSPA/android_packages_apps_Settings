@@ -234,12 +234,13 @@ public class NetworkSelectSettings extends DashboardFragment {
                     final boolean isSucceed = (boolean) msg.obj;
                     setProgressBarVisible(false);
                     getPreferenceScreen().setEnabled(true);
+
                     if (mSelectedPreference != null) {
                         mSelectedPreference.setSummary(isSucceed
                                 ? R.string.network_connected
                                 : R.string.network_could_not_connect);
                     } else {
-                        Log.d(TAG, "No preference to update!");
+                        Log.e(TAG, "No preference to update!");
                     }
                     break;
                 case EVENT_NETWORK_SCAN_RESULTS:
@@ -416,6 +417,9 @@ public class NetworkSelectSettings extends DashboardFragment {
         if (mTelephonyManager.getDataState() == mTelephonyManager.DATA_CONNECTED) {
             // Try to get the network registration states
             final ServiceState ss = mTelephonyManager.getServiceState();
+            if (ss == null) {
+                return;
+            }
             final List<NetworkRegistrationInfo> networkList =
                     ss.getNetworkRegistrationInfoListForTransportType(
                             AccessNetworkConstants.TRANSPORT_TYPE_WWAN);

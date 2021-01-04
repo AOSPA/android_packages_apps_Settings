@@ -38,7 +38,6 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CLEAR_APP_USER_DATA" />
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
@@ -104,7 +103,9 @@
     <uses-permission android:name="android.permission.INSTALL_DYNAMIC_SYSTEM" />
     <uses-permission android:name="android.permission.BIND_CELL_BROADCAST_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    
+    <uses-permission android:name="android.permission.READ_DREAM_STATE" />
+    <uses-permission android:name="android.permission.READ_DREAM_SUPPRESSION" />
+
     <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
             android:theme="@style/Theme.Settings"
@@ -279,6 +280,26 @@
         </activity>
 
         <activity
+            android:name="Settings$NetworkProviderSettingsActivity"
+            android:label="@string/network_dashboard_title"
+            android:icon="@drawable/ic_homepage_network"
+            android:exported="true"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NETWORK_PROVIDER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.network.NetworkProviderSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name=".wifi.WifiPickerActivity"
             android:exported="true">
             <intent-filter android:priority="1">
@@ -401,7 +422,7 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.network.ApnSettings" />
+                       android:value="com.android.settings.network.apn.ApnSettings" />
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -489,6 +510,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
+                  android:exported="false"
+                  android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
+                  android:theme="@style/Transparent" />
+
+        <activity android:name=".network.telephony.DeleteEuiccSubscriptionDialogActivity"
+                  android:exported="false"
+                  android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
+                  android:theme="@style/Transparent" />
 
         <activity
             android:name="Settings$TetherSettingsActivity"
@@ -1598,6 +1629,24 @@
         </activity>
 
         <activity
+            android:name="Settings$ReduceBrightColorsSettingsActivity"
+            android:exported="true"
+            android:label="@string/reduce_bright_colors_preference_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REDUCE_BRIGHT_COLORS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
             android:name="Settings$CaptioningSettingsActivity"
             android:exported="true"
             android:label="@string/accessibility_captioning_title">
@@ -2008,7 +2057,7 @@
                 <data android:mimeType="vnd.android.cursor.dir/telephony-carrier" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.network.ApnEditor" />
+                       android:value="com.android.settings.network.apn.ApnEditor" />
         </activity>
 
         <activity
@@ -2020,6 +2069,7 @@
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
@@ -3468,6 +3518,11 @@
             android:permission="android.permission.MANAGE_SLICE_PERMISSIONS"
             android:exported="true" />
 
+        <receiver
+            android:name=".slices.VolumeSliceRelayReceiver"
+            android:permission="android.permission.MANAGE_SLICE_PERMISSIONS"
+            android:exported="true" />
+
         <!-- Couldn't be triggered from outside of settings. Statsd can trigger it because we send
              PendingIntent to it-->
         <receiver android:name=".fuelgauge.batterytip.AnomalyDetectionReceiver"
@@ -3623,6 +3678,15 @@
                        android:value="com.android.settings.sound.MediaControlsSettings" />
         </activity>
 
+        <receiver
+            android:name=".media.BluetoothPairingReceiver"
+            android:exported="true"
+            android:permission="android.permission.BLUETOOTH_ADMIN">
+            <intent-filter>
+                <action android:name="com.android.settings.action.LAUNCH_BLUETOOTH_PAIRING"/>
+            </intent-filter>/>
+        </receiver>
+
        <activity android:name=".network.telephony.UserPLMNListActivity"
            android:exported="true"
            android:label="@string/uplmn_settings_title"
@@ -3640,6 +3704,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>

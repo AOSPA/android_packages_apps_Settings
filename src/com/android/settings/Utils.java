@@ -88,6 +88,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -280,6 +281,15 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static boolean isBatteryPresent(Intent batteryChangedIntent) {
         return batteryChangedIntent.getBooleanExtra(BatteryManager.EXTRA_PRESENT, true);
+    }
+
+    /**
+     * Return true if battery is present.
+     */
+    public static boolean isBatteryPresent(Context context) {
+        Intent batteryBroadcast = context.registerReceiver(null /* receiver */,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return isBatteryPresent(batteryBroadcast);
     }
 
     public static String getBatteryPercentage(Intent batteryChangedIntent) {
@@ -540,7 +550,7 @@ public final class Utils extends com.android.settingslib.Utils {
      * @return UserInfo of the user or null for non-existent user.
      */
     public static UserInfo getExistingUser(UserManager userManager, UserHandle checkUser) {
-        final List<UserInfo> users = userManager.getUsers(true /* excludeDying */);
+        final List<UserInfo> users = userManager.getAliveUsers();
         final int checkUserId = checkUser.getIdentifier();
         for (UserInfo user : users) {
             if (user.id == checkUserId) {
@@ -649,7 +659,7 @@ public final class Utils extends com.android.settingslib.Utils {
      *
      * @param isInternal indicating if the caller is "internal" to the system,
      *            meaning we're willing to trust extras like
-     *            {@link ChooseLockSettingsHelper#EXTRA_ALLOW_ANY_USER}.
+     *            {@link ChooseLockSettingsHelper#EXTRA_KEY_ALLOW_ANY_USER}.
      * @throws SecurityException if the given userId does not belong to the
      *             current user group.
      */
@@ -658,7 +668,7 @@ public final class Utils extends com.android.settingslib.Utils {
             return getCredentialOwnerUserId(context);
         }
         final boolean allowAnyUser = isInternal
-                && bundle.getBoolean(ChooseLockSettingsHelper.EXTRA_ALLOW_ANY_USER, false);
+                && bundle.getBoolean(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, false);
         final int userId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
         if (userId == LockPatternUtils.USER_FRP) {
             return allowAnyUser ? userId : enforceSystemUser(context, userId);
@@ -1262,4 +1272,9 @@ public final class Utils extends com.android.settingslib.Utils {
         drawable.draw(canvas);
         return roundedBitmap;
     }
+
+    public static boolean isProviderModelEnabled(Context context) {
+        return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
+    }
+
 }

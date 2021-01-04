@@ -92,8 +92,11 @@ public class ResetNetwork extends InstrumentedFragment {
      */
     private boolean runKeyguardConfirmation(int request) {
         Resources res = getActivity().getResources();
-        return new ChooseLockSettingsHelper(getActivity(), this).launchConfirmationActivity(
-                request, res.getText(R.string.reset_network_title));
+        final ChooseLockSettingsHelper.Builder builder =
+                new ChooseLockSettingsHelper.Builder(getActivity(), this);
+        return builder.setRequestCode(request)
+                .setTitle(res.getText(R.string.reset_network_title))
+                .show();
     }
 
     @Override
@@ -122,7 +125,7 @@ public class ResetNetwork extends InstrumentedFragment {
             args.putInt(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,
                     subscription.getSubscriptionId());
         }
-        args.putBoolean(MasterClear.ERASE_ESIMS_EXTRA,
+        args.putBoolean(MainClear.ERASE_ESIMS_EXTRA,
                 mEsimContainer.getVisibility() == View.VISIBLE && mEsimCheckbox.isChecked());
         new SubSettingLauncher(getContext())
                 .setDestination(ResetNetworkConfirm.class.getName())

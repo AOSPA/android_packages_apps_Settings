@@ -17,12 +17,17 @@
 package com.android.settings.biometrics.fingerprint;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.KeyguardManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.biometrics.SensorProperties;
+import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorProperties;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.view.View;
 import android.widget.Button;
 
@@ -53,6 +58,8 @@ import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowActivity.IntentForResult;
 import org.robolectric.shadows.ShadowKeyguardManager;
 
+import java.util.ArrayList;
+
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
     ShadowFingerprintManager.class,
@@ -68,6 +75,16 @@ public class SetupFingerprintEnrollIntroductionTest {
     public void setUp() {
         Shadows.shadowOf(application.getPackageManager())
             .setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true);
+
+        final FingerprintSensorPropertiesInternal prop = new FingerprintSensorPropertiesInternal(
+                0 /* sensorId */,
+                SensorProperties.STRENGTH_STRONG,
+                5 /* maxEnrollmentsPerUser */,
+                FingerprintSensorProperties.TYPE_REAR,
+                true /* resetLockoutRequiresHardwareAuthToken */);
+        final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
+        props.add(prop);
+        ShadowFingerprintManager.setSensorProperties(props);
 
         FakeFeatureFactory.setupForTest();
 
@@ -90,12 +107,12 @@ public class SetupFingerprintEnrollIntroductionTest {
                 mController.get().findViewById(R.id.setup_wizard_layout);
         final Button skipButton =
                 layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
-        assertThat(skipButton.getVisibility()).named("Skip visible").isEqualTo(View.VISIBLE);
+        assertWithMessage("Skip visible").that(skipButton.getVisibility()).isEqualTo(View.VISIBLE);
         skipButton.performClick();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(mController.get());
-        assertThat(mController.get().isFinishing()).named("Is finishing").isTrue();
-        assertThat(shadowActivity.getResultCode()).named("Result code")
+        assertWithMessage("Is finishing").that(mController.get().isFinishing()).isTrue();
+        assertWithMessage("Result code").that(shadowActivity.getResultCode())
             .isEqualTo(SetupSkipDialog.RESULT_SKIP);
     }
 
@@ -109,12 +126,12 @@ public class SetupFingerprintEnrollIntroductionTest {
                 mController.get().findViewById(R.id.setup_wizard_layout);
         final Button skipButton =
                 layout.getMixin(FooterBarMixin.class).getSecondaryButtonView();
-        assertThat(skipButton.getVisibility()).named("Skip visible").isEqualTo(View.VISIBLE);
+        assertWithMessage("Skip visible").that(skipButton.getVisibility()).isEqualTo(View.VISIBLE);
         skipButton.performClick();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(mController.get());
-        assertThat(mController.get().isFinishing()).named("Is finishing").isTrue();
-        assertThat(shadowActivity.getResultCode()).named("Result code")
+        assertWithMessage("Is finishing").that(mController.get().isFinishing()).isTrue();
+        assertWithMessage("Result code").that(shadowActivity.getResultCode())
             .isEqualTo(BiometricEnrollBase.RESULT_SKIP);
     }
 

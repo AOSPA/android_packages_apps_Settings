@@ -24,9 +24,6 @@ import static com.android.settings.network.telephony.MobileNetworkUtils.NO_CELL_
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkCapabilities;
 import android.provider.Settings;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
@@ -52,6 +49,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.net.SignalStrengthUtil;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -70,7 +68,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     private String mPreferenceGroupKey;
     private PreferenceGroup mPreferenceGroup;
     private SubscriptionManager mManager;
-    private ConnectivityManager mConnectivityManager;
     private SubscriptionsChangeListener mSubscriptionsListener;
     private MobileDataEnabledListener mDataEnabledListener;
     private DataConnectivityListener mConnectivityListener;
@@ -111,7 +108,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mPreferenceGroupKey = preferenceGroupKey;
         mStartOrder = startOrder;
         mManager = context.getSystemService(SubscriptionManager.class);
-        mConnectivityManager = mContext.getSystemService(ConnectivityManager.class);
         mSubscriptionPreferences = new ArrayMap<>();
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
         mDataEnabledListener = new MobileDataEnabledListener(context, this);
@@ -166,6 +162,12 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         final int dataDefaultSubId = SubscriptionManager.getDefaultDataSubscriptionId();
         for (SubscriptionInfo info : SubscriptionUtil.getActiveSubscriptions(mManager)) {
             final int subId = info.getSubscriptionId();
+            // Avoid from showing subscription(SIM)s which has been marked as hidden
+            // For example, only one subscription will be shown when there're multiple
+            // subscriptions with same group UUID.
+            if (!isSubscriptionCanBeDisplayed(mContext, subId)) {
+                continue;
+            }
             activeSubIds.add(subId);
             Preference pref = existingPrefs.remove(subId);
             if (pref == null) {
@@ -222,19 +224,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 NO_CELL_DATA_TYPE_ICON, cutOut);
     }
 
-    private boolean activeNetworkIsCellular() {
-        final Network activeNetwork = mConnectivityManager.getActiveNetwork();
-        if (activeNetwork == null) {
-            return false;
-        }
-        final NetworkCapabilities networkCapabilities = mConnectivityManager.getNetworkCapabilities(
-                activeNetwork);
-        if (networkCapabilities == null) {
-            return false;
-        }
-        return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR);
-    }
-
     /**
      * The summary can have either 1 or 2 lines depending on which services (calls, SMS, data) this
      * subscription is the default for.
@@ -264,7 +253,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             final TelephonyManager telMgrForSub = mContext.getSystemService(
                     TelephonyManager.class).createForSubscriptionId(subId);
             final boolean dataEnabled = telMgrForSub.isDataEnabled();
-            if (dataEnabled && activeNetworkIsCellular()) {
+            if (dataEnabled && MobileNetworkUtils.activeNetworkIsCellular(mContext)) {
                 line2 = mContext.getString(R.string.mobile_data_active);
             } else if (!dataEnabled) {
                 line2 = mContext.getString(R.string.mobile_data_off);
@@ -292,7 +281,17 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         if (mSubscriptionsListener.isAirplaneModeOn()) {
             return false;
         }
-        return SubscriptionUtil.getActiveSubscriptions(mManager).size() >= 2;
+        List<SubscriptionInfo> subInfoList = SubscriptionUtil.getActiveSubscriptions(mManager);
+        if (subInfoList == null) {
+            return false;
+        }
+        return subInfoList.stream()
+                // Avoid from showing subscription(SIM)s which has been marked as hidden
+                // For example, only one subscription will be shown when there're multiple
+                // subscriptions with same group UUID.
+                .filter(subInfo ->
+                        isSubscriptionCanBeDisplayed(mContext, subInfo.getSubscriptionId()))
+                .count() >= 2;
     }
 
     @Override
@@ -329,5 +328,11 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     @Override
     public void onSignalStrengthChanged() {
         update();
+    }
+
+    @VisibleForTesting
+    boolean isSubscriptionCanBeDisplayed(Context context, int subId) {
+        return (SubscriptionUtil.getAvailableSubscription(context,
+                ProxySubscriptionManager.getInstance(context), subId) != null);
     }
 }

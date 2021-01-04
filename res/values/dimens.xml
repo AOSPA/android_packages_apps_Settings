@@ -51,9 +51,6 @@
     <dimen name="pager_tabs_title_padding">16dp</dimen>
     <dimen name="pager_tabs_selected_indicator_height">3dp</dimen>
 
-    <!-- Minimum width for the popup for updating a user's photo. -->
-    <dimen name="update_user_photo_popup_min_width">300dip</dimen>
-
     <dimen name="captioning_preview_height">200dp</dimen>
 
     <dimen name="autoclick_preview_height">200dp</dimen>
@@ -126,18 +123,13 @@
     <dimen name="switchbar_subsettings_margin_start">72dp</dimen>
     <dimen name="switchbar_subsettings_margin_end">16dp</dimen>
 
-    <dimen name="search_bar_margin">16dp</dimen>
-
+    <dimen name="search_bar_margin">24dp</dimen>
     <dimen name="search_bar_height">48dp</dimen>
-    <dimen name="search_bar_corner_radius">2dp</dimen>
     <dimen name="search_bar_text_size">16dp</dimen>
     <dimen name="search_bar_card_elevation">2dp</dimen>
     <dimen name="search_bar_content_inset">64dp</dimen>
-    <dimen name="search_bar_avatar_end_padding">16dp</dimen>
-    <!-- 32dp (avatar size) + 16 dp (search_bar_avatar_end_padding) -->
-    <dimen name="search_bar_avatar_width">48dp</dimen>
-    <!-- (search_bar_height 48dp - avatar size 32dp) / 2  -->
-    <dimen name="search_bar_avatar_top_bottom_padding">8dp</dimen>
+    <dimen name="avatar_length">@dimen/search_bar_height</dimen>
+
 
     <!-- Dimensions for Wifi Assistant Card -->
     <dimen name="wifi_assistant_padding_top_bottom">16dp</dimen>
@@ -326,8 +318,8 @@
     <!-- Margin for the reset screens -->
     <dimen name="reset_network_margin_start">72dp</dimen>
     <dimen name="reset_network_margin_end">12dp</dimen>
-    <dimen name="reset_master_clear_margin_start">32dp</dimen>
-    <dimen name="reset_master_clear_margin_end">12dp</dimen>
+    <dimen name="reset_main_clear_margin_start">32dp</dimen>
+    <dimen name="reset_main_clear_margin_end">12dp</dimen>
 
     <!-- Padding for the reset screens -->
     <dimen name="reset_checkbox_padding_end">8dp</dimen>

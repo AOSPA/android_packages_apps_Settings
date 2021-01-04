@@ -121,7 +121,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
 
     @Override
     public boolean isTextValid(String value) {
-        return WifiUtils.isHotspotPasswordValid(value);
+        return WifiUtils.isHotspotWpa2PasswordValid(value);
     }
 
     private static String generateRandomPassword() {
