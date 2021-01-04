@@ -81,6 +81,7 @@ public final class BluetoothDevicePreference extends GearPreference implements
     boolean mNeedNotifyHierarchyChanged = false;
     /* Talk-back descriptions for various BT icons */
     Resources mResources;
+    private final boolean mHideSummary;
 
     public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice,
             boolean showDeviceWithoutNames, @SortType int type) {
@@ -100,6 +101,27 @@ public final class BluetoothDevicePreference extends GearPreference implements
         mCurrentTime = System.currentTimeMillis();
         mType = type;
 
+        mHideSummary = false;
+        onDeviceAttributesChanged();
+    }
+
+    public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice,
+            boolean showDeviceWithoutNames, @SortType int type, boolean hideSummary) {
+        super(context, null);
+        mResources = getContext().getResources();
+        mUserManager = context.getSystemService(UserManager.class);
+        mShowDevicesWithoutNames = showDeviceWithoutNames;
+        if (sDimAlpha == Integer.MIN_VALUE) {
+            TypedValue outValue = new TypedValue();
+            context.getTheme().resolveAttribute(android.R.attr.disabledAlpha, outValue, true);
+            sDimAlpha = (int) (outValue.getFloat() * 255);
+        }
+
+        mCachedDevice = cachedDevice;
+        mCachedDevice.registerCallback(this);
+        mCurrentTime = System.currentTimeMillis();
+        mType = type;
+        mHideSummary = hideSummary;
         onDeviceAttributesChanged();
     }
 
@@ -150,7 +172,9 @@ public final class BluetoothDevicePreference extends GearPreference implements
          */
         setTitle(mCachedDevice.getName());
         // Null check is done at the framework
-        setSummary(mCachedDevice.getConnectionSummary());
+        if (!mHideSummary) {
+            setSummary(mCachedDevice.getConnectionSummary());
+        }
 
         final Pair<Drawable, String> pair =
                 BluetoothUtils.getBtRainbowDrawableWithDescription(getContext(), mCachedDevice);
@@ -160,7 +184,11 @@ public final class BluetoothDevicePreference extends GearPreference implements
         }
 
         // Used to gray out the item
-        setEnabled(!mCachedDevice.isBusy());
+        if (mHideSummary) {
+            setEnabled(true);
+        } else {
+            setEnabled(!mCachedDevice.isBusy());
+        }
 
         // Device is only visible in the UI if it has a valid name besides MAC address or when user
         // allows showing devices without user-friendly name in developer settings
