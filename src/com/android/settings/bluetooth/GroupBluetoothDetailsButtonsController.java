@@ -86,7 +86,7 @@ public class GroupBluetoothDetailsButtonsController extends GroupBluetoothDetail
         }
         mGroupOptions = ((GroupOptionsPreference)
                 screen.findPreference(getPreferenceKey()));
-        mGroupOptions.setTextViewText(mContext.getString(R.string.set_id)
+        mGroupOptions.setTextViewText(mContext.getString(R.string.group_id)
                 + mGroupUtils.getGroupTitle(mGroupId));
         mGroupOptions.setForgetButtonText(R.string.forget_group);
         mGroupOptions.setForgetButtonOnClickListener((View) -> onForgetButtonPressed());
