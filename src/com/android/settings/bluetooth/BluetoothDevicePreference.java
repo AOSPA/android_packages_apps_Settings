@@ -92,6 +92,8 @@ public final class BluetoothDevicePreference extends GearPreference {
         }
     }
 
+    private final boolean mHideSummary;
+
     public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice,
             boolean showDeviceWithoutNames, @SortType int type) {
         super(context, null);
@@ -110,7 +112,28 @@ public final class BluetoothDevicePreference extends GearPreference {
         mCachedDevice.registerCallback(mCallback);
         mCurrentTime = System.currentTimeMillis();
         mType = type;
+        onPreferenceAttributesChanged();
+        mHideSummary = false;
+    }
 
+    public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice,
+            boolean showDeviceWithoutNames, @SortType int type, boolean hideSummary) {
+        super(context, null);
+        mResources = getContext().getResources();
+        mUserManager = context.getSystemService(UserManager.class);
+        mShowDevicesWithoutNames = showDeviceWithoutNames;
+        if (sDimAlpha == Integer.MIN_VALUE) {
+            TypedValue outValue = new TypedValue();
+            context.getTheme().resolveAttribute(android.R.attr.disabledAlpha, outValue, true);
+            sDimAlpha = (int) (outValue.getFloat() * 255);
+        }
+
+        mCachedDevice = cachedDevice;
+        mCallback = new BluetoothDevicePreferenceCallback();
+        mCachedDevice.registerCallback(mCallback);
+        mCurrentTime = System.currentTimeMillis();
+        mType = type;
+        mHideSummary = hideSummary;
         onPreferenceAttributesChanged();
     }
 
@@ -195,10 +218,16 @@ public final class BluetoothDevicePreference extends GearPreference {
          */
         setTitle(mCachedDevice.getName());
         // Null check is done at the framework
-        setSummary(mCachedDevice.getConnectionSummary());
+        if (!mHideSummary) {
+            setSummary(mCachedDevice.getConnectionSummary());
+        }
 
         // Used to gray out the item
-        setEnabled(!mCachedDevice.isBusy());
+        if (mHideSummary) {
+            setEnabled(true);
+        } else {
+            setEnabled(!mCachedDevice.isBusy());
+        }
 
         // Device is only visible in the UI if it has a valid name besides MAC address or when user
         // allows showing devices without user-friendly name in developer settings
