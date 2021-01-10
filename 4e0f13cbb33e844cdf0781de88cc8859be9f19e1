@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "137b25e2_9cc77f5f",
+        "filename": "src/com/android/settings/notification/AuthenticationVibrationPreferenceController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000465
+      },
+      "writtenOn": "2021-01-10T13:53:29Z",
+      "side": 1,
+      "message": "If you import it static, you either can use it directly in is/setChecked or remove this",
+      "revId": "4e0f13cbb33e844cdf0781de88cc8859be9f19e1",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc0c5ce1_f15225b3",
+        "filename": "src/com/android/settings/notification/AuthenticationVibrationPreferenceController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000465
+      },
+      "writtenOn": "2021-01-10T13:53:29Z",
+      "side": 1,
+      "message": "Byebye to those 2 imports",
+      "revId": "4e0f13cbb33e844cdf0781de88cc8859be9f19e1",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b92f9d2_58a89177",
+        "filename": "src/com/android/settings/notification/AuthenticationVibrationPreferenceController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000465
+      },
+      "writtenOn": "2021-01-10T13:53:29Z",
+      "side": 1,
+      "message": "You porbably can kill this",
+      "revId": "4e0f13cbb33e844cdf0781de88cc8859be9f19e1",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "805317b8_2f166d86",
+        "filename": "src/com/android/settings/notification/AuthenticationVibrationPreferenceController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000465
+      },
+      "writtenOn": "2021-01-10T13:53:29Z",
+      "side": 1,
+      "message": "As this is only overridden to assign mPreference, you can nuke the whole function",
+      "revId": "4e0f13cbb33e844cdf0781de88cc8859be9f19e1",
+      "serverId": "3162e3d8-d894-470e-abd9-724f7b0effad"
+    }
+  ]
+}
