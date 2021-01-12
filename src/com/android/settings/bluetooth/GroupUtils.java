@@ -103,7 +103,7 @@ public class GroupUtils {
      * Get group id associated with this device
      */
     int getGroupId(CachedBluetoothDevice device) {
-        int groupId = device.getSetId();
+        int groupId = device.getGroupId();
         if (groupId == -1) {
             loge(" groupId is -1");
         }
