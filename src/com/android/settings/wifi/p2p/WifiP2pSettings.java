@@ -69,7 +69,7 @@ public class WifiP2pSettings extends DashboardFragment
         implements PersistentGroupInfoListener, PeerListListener, DeviceInfoListener {
 
     private static final String TAG = "WifiP2pSettings";
-    private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
+    private static final boolean DBG = false;
     @VisibleForTesting static final int MENU_ID_SEARCH = Menu.FIRST;
     @VisibleForTesting static final int MENU_ID_RENAME = Menu.FIRST + 1;
 
