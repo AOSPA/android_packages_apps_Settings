@@ -88,6 +88,9 @@ android_app {
     optimize: {
         proguard_flags_files: ["proguard.flags"],
     },
+    libs: [
+        "telephony-ext",
+    ],
 }
 
 android_library_import {
