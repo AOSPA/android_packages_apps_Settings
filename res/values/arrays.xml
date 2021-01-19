@@ -345,6 +345,20 @@
         <item>5</item>
     </string-array>
 
+    <!-- Bluetooth broadcast pin: Titles for Pin configuration -->
+    <string-array translatable="false" name="bluetooth_broadcast_pin_config_titles">
+        <item>Unencrypted (no security)</item>
+        <item>4 digit pin (low security)</item>
+        <item>16 digit pin (high security)</item>
+    </string-array>
+
+    <!-- Bluetooth broadcast pin: Values for Pin configuration -->
+    <string-array translatable="false" name="bluetooth_broadcast_pin_config_values">
+        <item>0</item>
+        <item>4</item>
+        <item>16</item>
+    </string-array>
+
     <!-- Match this with drawable.wifi_signal. --> <skip />
     <!-- Wi-Fi settings. The signal strength a Wi-Fi network has. -->
     <string-array name="wifi_signal">
