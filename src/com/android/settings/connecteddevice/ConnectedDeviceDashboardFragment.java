@@ -62,10 +62,15 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
+import android.util.Log;
+
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "ConnectedDeviceFrag";
+    private static final String TAG_GROUP = "Group";
+
+    public static final boolean DBG_GROUP = Log.isLoggable(TAG_GROUP, Log.DEBUG);
 
     @VisibleForTesting
     static final String KEY_CONNECTED_DEVICES = "connected_device_list";
@@ -106,6 +111,8 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         use(ConnectedDeviceGroupController.class).init(this);
         use(SavedTwsDeviceGroupController.class).init(this);
         use(PreviouslyConnectedDevicePreferenceController.class).init(this);
+        use(GroupConnectedBluetoothDevicesController.class).init(this);
+        use(GroupPreviouslyConnectedDevicePreferenceController.class).init(this);
         use(SlicePreferenceController.class).setSliceUri(nearbyEnabled
                 ? Uri.parse(getString(R.string.config_nearby_devices_slice_uri))
                 : null);
