@@ -1022,8 +1022,7 @@
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 చిరునామాలు"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"సేవ్ చేసిన నెట్‌వర్క్‌లు"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"సభ్యత్వాలు"</string>
-    <!-- no translation found for wifi_saved_access_points_tab (2075914709522121708) -->
-    <skip />
+    <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"ఇతర నెట్‌వర్క్‌లు"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"IP సెట్టింగ్‌లు"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"ఈ వినియోగదారుకి Wi‑Fi అధునాతన సెట్టింగ్‌లు అందుబాటులో లేవు"</string>
     <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"సేవ్ చేయి"</string>
@@ -1597,7 +1596,7 @@
     <string name="menu_delete" msgid="9199740901584348273">"APNను తొలగించు"</string>
     <string name="menu_new" msgid="6571230342655509006">"కొత్త APN"</string>
     <string name="menu_save" msgid="6611465355127483100">"సేవ్ చేయి"</string>
-    <string name="menu_cancel" msgid="4526003389139913077">"విస్మరించు"</string>
+    <string name="menu_cancel" msgid="1197826697950745335">"రద్దు చేయి"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
     <string name="error_name_empty" msgid="1258275899283079142">"పేరు ఫీల్డ్ ఖాళీగా ఉండకూడదు."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"APN ఖాళీగా ఉండకూడదు."</string>
@@ -1612,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"యాప్‌లను రీసెట్ చేయవచ్చు"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Wi-Fi, మొబైల్ డేటా &amp; బ్లూటూత్‌లను రీసెట్ చేయండి"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"ఇది అన్ని నెట్‌వర్క్ సెట్టింగ్‌లను రీసెట్ చేస్తుంది, వీటితో సహా:\n\n"<li>"Wi‑Fi"</li>\n<li>"మొబైల్ డేటా"</li>\n<li>"బ్లూటూత్"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"తొలగించు"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"డౌన్‌లోడ్ చేసిన SIMలు తొలగించు"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"భర్తీ చేయాల్సిన SIMలను డౌన్‌లోడ్ చేయడానికి, మీ క్యారియర్‌ను సంప్రదించండి. ఇది మొబైల్ సేవా ప్లాన్‌లు వేటినీ రద్దు చేయదు."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"ఇది ఏవిధమైన మొబైల్ సర్వీస్ ప్లాన్‌లను రద్దు చేయదు. రీప్లేస్‌మెంట్ SIMలను డౌన్‌లోడ్ చేయడానికి మీ క్యారియర్‌ను సంప్రదించండి."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"సెట్టింగ్‌లను రీసెట్ చేయి"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"అన్ని నెట్‌వర్క్ సెట్టింగ్‌లను రీసెట్ చేయాలా? మీరు ఈ చర్యను తిరిగి రద్దు చేయలేరు."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"అన్ని నెట్‌వర్క్ సెట్టింగ్‌లను రీసెట్ చేసి, డౌన్‌లోడ్ చేసిన SIMలను తొలగించాలా? మీరు ఈ చర్యను తిరిగి ఉపసంహరించలేరు."</string>
@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"టాబ్లెట్ సాధారణం కంటే ఎక్కువగా వినియోగించింది"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"పరికరం సాధారణం కంటే ఎక్కువగా వినియోగించింది"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"బ్యాటరీ సాధారణం కంటే తక్కువ సమయం రావచ్చు"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"బ్యాటరీ తాత్కాలికంగా పరిమితం చేయబడింది"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"బ్యాటరీ స్థితిని కాపాడటానికి సహాయపడుతుంది. మరింత తెలుసుకోవడానికి ట్యాప్ చేయండి."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"బ్యాటరీ జీవితకాలాన్ని ఆప్టిమైజ్ చేయడం కోసం"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"బ్యాటరీ తాత్కాలికంగా పరిమితం చేయబడింది. మరింత తెలుసుకోవడానికి ట్యాప్ చేయండి."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"మీ ఫోన్ సాధారణం కంటే అధికంగా వినియోగించబడింది. కనుక, మీ బ్యాటరీ, అంచ‌నా వేసిన దాని కంటే తక్కువ సమయంలోనే ఖాళీ అవ్వొచ్చు.\n\nబ్యాటరీని అధికంగా వినియోగిస్తోన్న ప్రధాన యాప్‌లు:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"మీ టాబ్లెట్ సాధారణం కంటే అధికంగా వినియోగించబడింది. కనుక, మీ బ్యాటరీ, అంచ‌నా వేసిన దాని కంటే తక్కువ సమయంలోనే ఖాళీ అవ్వొచ్చు.\n\nబ్యాటరీని అధికంగా వినియోగిస్తోన్న ప్రధాన యాప్‌లు:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"మీ పరికరం సాధారణం కంటే అధికంగా వినియోగించబడింది. కనుక, మీ బ్యాటరీ, అంచ‌నా వేసిన దాని కంటే తక్కువ సమయంలోనే ఖాళీ అవ్వొచ్చు.\n\nబ్యాటరీని అధికంగా వినియోగిస్తోన్న ప్రధాన యాప్‌లు:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"ఇన్‌స్టాల్ చేయవద్దు"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"ఏదేమైనా ఇన్‌స్టాల్ చేయి"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"సర్టిఫికెట్ ఇన్‌స్టాల్ చేయబడలేదు"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"ఈ పరికరంలో సర్టిఫికెట్‌లను ఇన్‌స్టాల్ చేయడానికి <xliff:g id="APP_NAME">%s</xliff:g>ని అనుమతించాలా?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"ఈ సర్టిఫికెట్‌ల ద్వారా, మీ గుర్తింపు ఆధారాలు దిగువున ఉన్న యాప్‌లు, URLలకు తెలియజేయబడతాయి"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"అనుమతించవద్దు"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"అనుమతించు"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"మరిన్ని చూపించు"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"సర్టిఫికెట్ మేనేజ్‌మెంట్ యాప్"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"ఏదీ లేదు"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"ఈ యాప్ ద్వారా ఇన్‌స్టాల్ చేయబడిన సర్టిఫికెట్‌లు మీ గుర్తింపును దిగువున ఉన్న యాప్‌లకు, URLలకు తెలియజేస్తాయి"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"తీసివేయి"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"అత్యవసర డయలింగ్ సిగ్నల్"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"అత్యవసర కాల్ వచ్చినప్పుడు చేయాల్సిన విధిని సెట్ చేయండి"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"బ్యాకప్"</string>
@@ -4647,6 +4656,11 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"కనిపించగల గరిష్ఠ డేటాసమితులు"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"డిఫాల్ట్ విలువలకు రీసెట్ చేయి"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"స్వీయ పూరింపు డెవలపర్ ఎంపికలు రీసెట్ చేయబడ్డాయి"</string>
+    <string name="location_category" msgid="3496759112306219062">"లొకేషన్"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"స్టేటస్ బార్ లొకేషన్ సూచీ"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"నెట్‌వర్క్, కనెక్టివిటీతో పాటు లొకేషన్‌లు అన్నింటినీ చూపిస్తుంది"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"శక్తివంతమైన GNSS కొలతలు"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"డ్యూటీ సైక్లింగ్ లేకుండా అన్ని GNSS నక్షత్రరాశులను మరియు ఫ్రీక్వెన్సీలను ట్రాక్ చేయండి"</string>
     <string name="device_theme" msgid="5027604586494772471">"పరికర రూపం"</string>
     <string name="default_theme" msgid="4815428567082263639">"డిఫాల్ట్"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"నెట్‌వర్క్ పేరు"</string>
@@ -4663,8 +4677,6 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"ఇతర వ్యాపకాలపై దృష్టి మరలకుండా ఉండడానికి నోటిఫికేషన్‌లను పాజ్ చేయండి"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"ఫీచర్ అందుబాటులో లేదు"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"మీ ఫోన్ పనితీరును నెమ్మ‌దించేలా చేస్తున్నందున ఈ ఫీచర్ ఆఫ్ చేయబడింది"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"శక్తివంతమైన GNSS కొలతలు"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"డ్యూటీ సైక్లింగ్ లేకుండా అన్ని GNSS నక్షత్రరాశులను మరియు ఫ్రీక్వెన్సీలను ట్రాక్ చేయండి"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"ఎల్లప్పుడూ క్రాష్ డైలాగ్‌ని చూపు"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"యాప్ క్రాష్ అయిన ప్రతిసారి డైలాగ్‌ని చూపు"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"కోణం ప్రారంభించబడిన యాప్‌ను ఎంచుకోండి"</string>
@@ -4732,7 +4744,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"ఆన్ చేయి (మ్యూట్)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"ఆఫ్"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"నెట్‌వర్క్ వివరాలు"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"మీ ఫోన్‌లోని యాప్‌లకు మీ పరికరం పేరు కనిపిస్తుంది. మీరు బ్లూటూత్ పరికరాలకు కనెక్ట్ చేసినప్పుడు లేదా Wi-Fi హాట్‌స్పాట్‌ని సెటప్ చేసినప్పుడు ఇతర వ్యక్తులకు కూడా ఇది కనిపించవచ్చు."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"మీ పరికరంలోని పేరు మీ ఫోన్‌లోని యాప్‌లకు కనిపిస్తుంది. మీరు బ్లూటూత్ పరికరాలకు కనెక్ట్ చేసినప్పుడు, Wi-Fi నెట్‌వర్క్‌కు కనెక్ట్ చేసినప్పుడు లేదా Wi-Fi హాట్‌స్పాట్‌ను సెటప్ చేసినప్పుడు ఇతర వ్యక్తులకు కూడా ఇది కనిపించవచ్చు."</string>
     <string name="devices_title" msgid="649715719278562515">"పరికరాలు"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"అన్ని సెట్టింగ్‌లు"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"సూచనలు"</string>
@@ -4892,6 +4904,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIMను యాక్టివేట్ చేయడం సాధ్యం కాదు"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIMను తీసివేసి, తిరిగి ఇన్‌సర్ట్ చేయండి. సమస్య ఇంకా కొనసాగితే, మీ పరికరాన్ని రీస్టార్ట్ చేయండి."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"SIMను తిరిగి ఆన్ చేయడానికి ట్రై చేయండి. సమస్య ఇంకా కొనసాగితే, మీ పరికరాన్ని రీస్టార్ట్ చేయండి."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"నెట్‌వర్క్ యాక్టివేషన్"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> యాక్టివ్‌గా ఉంది"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"SIM సెట్టింగ్‌లను అప్‌డేట్ చేయడానికి ట్యాప్ చేయండి"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM కార్డ్"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"డౌన్‌లోడ్ చేయబడిన ఈ SIMను తొలగించాలా?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"ఈ SIMను తొలగించడం వలన ఈ పరికరం నుండి <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> సర్వీస్ తీసివేయబడుతోంది.\n\n <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> సర్వీస్ రద్దు చేయబడదు."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"తొలగించు"</string>
@@ -5044,10 +5060,23 @@
     <string name="calls_sms_footnote" msgid="7002461875954024216">"క్యారియర్ కాని కొన్ని Wi-Fi నెట్‌వర్క్‌ల వంటి వాటి ద్వారా కాల్‌లను చేయడానికి, స్వీకరించడానికి Wi-Fi కాలింగ్ మిమ్మల్ని అనుమతిస్తుంది."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"కాల్స్"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"ప్రాధాన్యతనిస్తుంది"</string>
+    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"కాల్స్‌కు ప్రాధాన్యతనిస్తుంది"</string>
+    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"SMSకు ప్రాధాన్యతనిస్తుంది"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"అందుబాటులో లేదు"</string>
+    <string name="calls_sms_no_sim" msgid="2336377399761819718">"సిమ్ లేదు"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"ప్రాధాన్యతలు"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"పబ్లిక్ నెట్‌వర్క్‌లకు కనెక్ట్ అవ్వండి"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"నెట్‌వర్క్ కనెక్షన్, ఇంటర్‌నెట్, వైర్‌లెస్, డేటా, Wi-Fi, Wi-Fi, Wi-Fi, సెల్యూలార్, మొబైల్, సెల్ క్యారియర్, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"విమానం‑సురక్షిత నెట్‌వర్క్‌లను చూడండి"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"విమానం మోడ్‌ను ఆఫ్ చేయండి"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"బెడ్ టైమ్ మోడ్ ఆన్‌లో ఉండడం వల్ల అందుబాటులో లేదు"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"రీసెట్ నోటిఫికేషన్ ప్రాముఖ్యత పూర్తయింది."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"యాప్‌లు"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"విశ్వసనీయం కానటువంటి పరికరం మీ మెసేజ్‌లను యాక్సెస్ చేయాలని కోరుకుంటోంది. వివరాల కోసం ట్యాప్ చేయండి."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"మెసేజ్‌లకు యాక్సెస్‌ను అనుమతించాలా?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"విశ్వసనీయం కానటువంటి బ్లూటూత్ పరికరం, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], మీ మెసేజ్‌లను యాక్సెస్ చేయాలనుకుంటోంది.\n\nమీరు ఇంతకు ముందెన్నడూ [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]కు కనెక్ట్ కాలేదు."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"విశ్వసనీయం కాని పరికరం మీ కాంటాక్ట్‌లు, కాల్ లాగ్‌ను యాక్సెస్ చేయాలనుకుంటోంది. వివరాల కోసం ట్యాప్ చేయండి."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"కాంటాక్ట్‌లకు, కాల్ లాగ్‌కు యాక్సెస్‌ను అనుమతించాలా?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"విశ్వసనీయం కానటువంటి బ్లూటూత్ పరికరం, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], మీ కాంటాక్ట్‌లను, కాల్ లాగ్‌ను యాక్సెస్ చేయాలనుకుంటోంది. ఇది ఇన్‌కమింగ్, అవుట్‌గోయింగ్ కాల్‌ల డేటాతో కూడి ఉంటుంది.\n\nమీరు ఇంతకు ముందెన్నడూ [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]కు కనెక్ట్ కాలేదు."</string>
 </resources>

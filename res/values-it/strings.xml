@@ -1022,8 +1022,7 @@
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Indirizzi IPv6"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Reti salvate"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Iscrizioni"</string>
-    <!-- no translation found for wifi_saved_access_points_tab (2075914709522121708) -->
-    <skip />
+    <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Altre reti"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"Impostazioni IP"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"Le impostazioni Wi‑Fi avanzate non sono disponibili per questo utente"</string>
     <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"Salva"</string>
@@ -1597,7 +1596,7 @@
     <string name="menu_delete" msgid="9199740901584348273">"Elimina APN"</string>
     <string name="menu_new" msgid="6571230342655509006">"Nuovo APN"</string>
     <string name="menu_save" msgid="6611465355127483100">"Salva"</string>
-    <string name="menu_cancel" msgid="4526003389139913077">"Ignora"</string>
+    <string name="menu_cancel" msgid="1197826697950745335">"Annulla"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
     <string name="error_name_empty" msgid="1258275899283079142">"Il campo Nome non può essere vuoto."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"Il campo APN non può essere vuoto."</string>
@@ -1612,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Le app possono essere reimpostate"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Reimposta Wi-Fi, dati mobili e Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Verranno reimpostate tutte le impostazioni di rete, tra cui:\n\n"<li>"Wi‑Fi"</li>\n<li>"Dati mobili"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Resetta"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Cancella SIM scaricate"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Per scaricare le SIM sostitutive, contatta il tuo operatore. Ciò non annullerà alcun piano di servizio mobile."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Gli eventuali piani di servizio mobile non verranno annullati. Per scaricare SIM sostitutive, contatta il tuo operatore."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Reimposta"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Ripristinare tutte le impostazioni della rete? Questa azione non può essere annullata."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Reimpostare tutte le impostazioni di rete e resettare tutte le SIM scaricate? Questa azione non può essere annullata."</string>
@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet utilizzato più del solito"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Dispositivo usato più del solito"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"La batteria potrebbe esaurirsi prima del solito"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Batteria momentaneamente limitata"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Consente di preservare l\'integrità della batteria. Tocca per scoprire di più."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Ottimizzazione per integrità batteria"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Batteria momentaneamente limitata. Tocca per scoprire di più."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Hai utilizzato il telefono più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nApp con il maggior consumo di batteria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Hai utilizzato il tablet più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nApp con il maggiore consumo di batteria:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Hai utilizzato il dispositivo più del solito. La batteria potrebbe esaurirsi prima del previsto.\n\nApp con il maggiore consumo di batteria:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Non installare"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Installa comunque"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Certificato non installato"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"Vuoi consentire all\'app <xliff:g id="APP_NAME">%s</xliff:g> di installare certificati su questo dispositivo?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Questi certificati consentiranno la tua identificazione per le app e gli URL indicati di seguito"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Non consentire"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Consenti"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Mostra altro"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"App di gestione certificati"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Nessuna"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"I certificati installati da questa app consentono la tua identificazione per le app e gli URL indicati di seguito"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Rimuovi"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Segnale chiamata di emergenza"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Imposta il comportamento in caso di chiamata di emergenza"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Backup"</string>
@@ -4645,6 +4654,11 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Set di dati visibili massimi"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Reimposta i valori predefiniti"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Le opzioni di compilazione automatica per gli sviluppatori sono state reimpostate"</string>
+    <string name="location_category" msgid="3496759112306219062">"Posizione"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Indicatore di posizione nella barra di stato"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Mostra per tutte le posizioni, incluse quelle rilevate tramite rete e connettività"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Forza esecuzione completa delle misurazioni GNSS"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Monitora tutte le costellazioni e le frequenze GNSS senza ciclo di lavoro utile"</string>
     <string name="device_theme" msgid="5027604586494772471">"Tema del dispositivo"</string>
     <string name="default_theme" msgid="4815428567082263639">"Valore predefinito"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Nome della rete"</string>
@@ -4661,8 +4675,6 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Metti in pausa le notifiche per mantenere la concentrazione"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Funzionalità non disponibile"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Questa funzionalità è stata disattivata perché rallenta il telefono"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Forza esecuzione completa delle misurazioni GNSS"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Monitora tutte le costellazioni e le frequenze GNSS senza ciclo di lavoro utile"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"Mostra sempre finestra di dialogo di arresti anomali"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Mostra finestra di dialogo a ogni arresto anomalo delle app"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"Seleziona le app che supportano ANGLE"</string>
@@ -4730,7 +4742,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Su (audio disattivato)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Non attivo"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Dettagli rete"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Il nome del tuo dispositivo è visibile alle app installate sul telefono. Potrebbe essere visibile anche ad altre persone se ti connetti a dispositivi Bluetooth o configuri un hotspot Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Il nome del tuo dispositivo è visibile alle app installate sul telefono. Potrebbe essere visibile anche ad altre persone quando ti connetti a dispositivi Bluetooth, a una rete Wi-Fi o configuri un hotspot Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Dispositivi"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Tutte le impostazioni"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Suggerimenti"</string>
@@ -4890,6 +4902,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Impossibile attivare la SIM"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Rimuovi la SIM e inseriscila di nuovo. Se il problema persiste, riavvia il dispositivo."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Riprova ad attivare la SIM. Se il problema persiste, riavvia il dispositivo."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Attivazione della rete"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"L\'operatore <xliff:g id="CARRIER_NAME">%1$s</xliff:g> è attivo"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Tocca per aggiornare le impostazioni della SIM"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"Scheda SIM"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Resettare questa SIM scaricata?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Se resetti questa SIM, il servizio di <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> verrà rimosso da questo dispositivo.\n\nIl servizio di <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> non verrà annullato."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Resetta"</string>
@@ -5042,10 +5058,23 @@
     <string name="calls_sms_footnote" msgid="7002461875954024216">"La funzionalità Chiamate Wi-Fi consente di effettuare e ricevere chiamate tramite reti non dell\'operatore, come alcune reti Wi-Fi."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Chiamate"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"Preferiti"</string>
+    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"Chiamate preferite"</string>
+    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"SMS preferiti"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"Non disponibili"</string>
+    <string name="calls_sms_no_sim" msgid="2336377399761819718">"Nessuna SIM rilevata"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Preferenze"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Connetti a reti pubbliche"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"connessione rete, internet, wireless, dati, wifi, wi-fi, wi fi, cellulare, dispositivo mobile, operatore cellulare, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Visualizza reti utilizzabili in aereo"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Disattiva la modalità aereo"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Non disponibili perché la modalità Riposo è attiva"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Reimpostazione dell\'importanza delle notifiche completata."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"App"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Un dispositivo non attendibile richiede l\'accesso ai tuoi messaggi. Tocca per conoscere i dettagli."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Vuoi consentire l\'accesso ai messaggi?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Un dispositivo Bluetooth non attendibile, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], richiede l\'accesso ai tuoi messaggi.\n\nNon hai mai effettuato la connessione al dispositivo [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Un dispositivo non attendibile richiede l\'accesso ai tuoi contatti e al tuo registro chiamate. Tocca per conoscere i dettagli."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Vuoi consentire l\'accesso a contatti e registro chiamate?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Un dispositivo Bluetooth non attendibile, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], richiede l\'accesso ai tuoi contatti e al tuo registro chiamate, inclusi i dati relativi a chiamate in arrivo e in uscita.\n\nNon hai mai effettuato la connessione al dispositivo [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
 </resources>

@@ -147,7 +147,7 @@ public class WifiSlice implements CustomSliceable {
         return builder;
     }
 
-    private ListBuilder.RowBuilder getWifiSliceItemRow(WifiSliceItem wifiSliceItem) {
+    protected ListBuilder.RowBuilder getWifiSliceItemRow(WifiSliceItem wifiSliceItem) {
         final CharSequence title = wifiSliceItem.getTitle();
         final IconCompat levelIcon = getWifiSliceItemLevelIcon(wifiSliceItem);
         final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
@@ -236,7 +236,7 @@ public class WifiSlice implements CustomSliceable {
             CharSequence title) {
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         final PendingIntent pi = PendingIntent.getBroadcast(mContext, requestCode, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         return SliceAction.create(pi, icon, ListBuilder.ICON_IMAGE, title);
     }
 

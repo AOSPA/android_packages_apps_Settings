@@ -16,6 +16,8 @@
 
 package com.android.settings.panel;
 
+import static com.android.settings.network.NetworkProviderSettings.ACTION_NETWORK_PROVIDER_SETTINGS;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +25,7 @@ import android.net.Uri;
 import android.provider.Settings;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.network.AirplaneModePreferenceController;
 import com.android.settings.slices.CustomSliceRegistry;
 
@@ -50,21 +53,28 @@ public class InternetConnectivityPanel implements PanelContent {
 
     @Override
     public CharSequence getTitle() {
-        return mContext.getText(R.string.internet_connectivity_panel_title);
+        return mContext.getText(Utils.isProviderModelEnabled(mContext)
+                ? R.string.provider_internet_settings : R.string.internet_connectivity_panel_title);
     }
 
     @Override
     public List<Uri> getSlices() {
         final List<Uri> uris = new ArrayList<>();
-        uris.add(CustomSliceRegistry.WIFI_SLICE_URI);
-        uris.add(CustomSliceRegistry.MOBILE_DATA_SLICE_URI);
-        uris.add(AirplaneModePreferenceController.SLICE_URI);
+        if (Utils.isProviderModelEnabled(mContext)) {
+            uris.add(CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI);
+            uris.add(CustomSliceRegistry.AIRPLANE_SAFE_NETWORKS_SLICE_URI);
+        } else {
+            uris.add(CustomSliceRegistry.WIFI_SLICE_URI);
+            uris.add(CustomSliceRegistry.MOBILE_DATA_SLICE_URI);
+            uris.add(AirplaneModePreferenceController.SLICE_URI);
+        }
         return uris;
     }
 
     @Override
     public Intent getSeeMoreIntent() {
-        return new Intent(Settings.ACTION_WIRELESS_SETTINGS)
+        return new Intent(Utils.isProviderModelEnabled(mContext)
+                ? ACTION_NETWORK_PROVIDER_SETTINGS : Settings.ACTION_WIRELESS_SETTINGS)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
