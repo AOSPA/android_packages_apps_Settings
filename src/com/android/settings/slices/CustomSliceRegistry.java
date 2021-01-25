@@ -37,10 +37,10 @@ import com.android.settings.homepage.contextualcards.slices.DarkThemeSlice;
 import com.android.settings.homepage.contextualcards.slices.FaceSetupSlice;
 import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.location.LocationSlice;
-import com.android.settings.media.MediaOutputGroupSlice;
 import com.android.settings.media.MediaOutputIndicatorSlice;
-import com.android.settings.media.MediaOutputSlice;
 import com.android.settings.media.RemoteMediaSlice;
+import com.android.settings.network.AirplaneSafeNetworksSlice;
+import com.android.settings.network.ProviderModelSlice;
 import com.android.settings.network.telephony.MobileDataSlice;
 import com.android.settings.notification.zen.ZenModeButtonPreferenceController;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
@@ -168,6 +168,17 @@ public class CustomSliceRegistry {
             .appendEncodedPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("mobile_data")
             .build();
+
+    /**
+     * Full {@link Uri} for the Provider Model Slice.
+     */
+    public static final Uri PROVIDER_MODEL_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendEncodedPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("provider_model")
+            .build();
+
     /**
      * Full {@link Uri} for the Alarm volume Slice.
      */
@@ -177,6 +188,7 @@ public class CustomSliceRegistry {
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("alarm_volume")
             .build();
+
     /**
      * Full {@link Uri} for the Call Volume Slice.
      */
@@ -255,26 +267,6 @@ public class CustomSliceRegistry {
             .build();
 
     /**
-     * Backing Uri for the Media output Slice.
-     */
-    public static Uri MEDIA_OUTPUT_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(MediaOutputSliceConstants.KEY_MEDIA_OUTPUT)
-            .build();
-
-    /**
-     * Backing Uri for the Media output group Slice.
-     */
-    public static Uri MEDIA_OUTPUT_GROUP_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(MediaOutputSliceConstants.KEY_MEDIA_OUTPUT_GROUP)
-            .build();
-
-    /**
      * Backing Uri for the Media output indicator Slice.
      */
     public static Uri MEDIA_OUTPUT_INDICATOR_SLICE_URI = new Uri.Builder()
@@ -314,6 +306,16 @@ public class CustomSliceRegistry {
             .appendPath("always_on_display")
             .build();
 
+    /**
+     * Backing Uri for the Always On Slice.
+     */
+    public static final Uri AIRPLANE_SAFE_NETWORKS_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("airplane_safe_networks")
+            .build();
+
     @VisibleForTesting
     static final Map<Uri, Class<? extends CustomSliceable>> sUriToSlice;
 
@@ -329,13 +331,13 @@ public class CustomSliceRegistry {
         sUriToSlice.put(LOCATION_SLICE_URI, LocationSlice.class);
         sUriToSlice.put(LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
         sUriToSlice.put(MEDIA_OUTPUT_INDICATOR_SLICE_URI, MediaOutputIndicatorSlice.class);
-        sUriToSlice.put(MEDIA_OUTPUT_SLICE_URI, MediaOutputSlice.class);
         sUriToSlice.put(MOBILE_DATA_SLICE_URI, MobileDataSlice.class);
+        sUriToSlice.put(PROVIDER_MODEL_SLICE_URI, ProviderModelSlice.class);
         sUriToSlice.put(WIFI_SLICE_URI, WifiSlice.class);
         sUriToSlice.put(DARK_THEME_SLICE_URI, DarkThemeSlice.class);
         sUriToSlice.put(REMOTE_MEDIA_SLICE_URI, RemoteMediaSlice.class);
-        sUriToSlice.put(MEDIA_OUTPUT_GROUP_SLICE_URI, MediaOutputGroupSlice.class);
         sUriToSlice.put(ALWAYS_ON_SLICE_URI, AlwaysOnDisplaySlice.class);
+        sUriToSlice.put(AIRPLANE_SAFE_NETWORKS_SLICE_URI, AirplaneSafeNetworksSlice.class);
     }
 
     public static Class<? extends CustomSliceable> getSliceClassByUri(Uri uri) {

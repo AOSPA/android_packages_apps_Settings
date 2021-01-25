@@ -1022,8 +1022,7 @@
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Địa chỉ IPv6"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Mạng đã lưu"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Gói đăng ký"</string>
-    <!-- no translation found for wifi_saved_access_points_tab (2075914709522121708) -->
-    <skip />
+    <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Các mạng khác"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"Cài đặt IP"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"Cài đặt nâng cao Wi‑Fi không khả dụng cho người dùng này"</string>
     <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"Lưu"</string>
@@ -1597,7 +1596,7 @@
     <string name="menu_delete" msgid="9199740901584348273">"Xóa APN"</string>
     <string name="menu_new" msgid="6571230342655509006">"APN mới"</string>
     <string name="menu_save" msgid="6611465355127483100">"Lưu"</string>
-    <string name="menu_cancel" msgid="4526003389139913077">"Hủy"</string>
+    <string name="menu_cancel" msgid="1197826697950745335">"Hủy"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
     <string name="error_name_empty" msgid="1258275899283079142">"Không được để trống trường Tên."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"APN không được để trống."</string>
@@ -1612,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Có thể đặt lại các ứng dụng"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Đặt lại Wi-Fi, di động và Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Thao tác này sẽ đặt lại tất cả các tùy chọn cài đặt mạng, bao gồm:\n\n"<li>"Wi‑Fi"</li>\n<li>"Dữ liệu di động"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Xóa"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Xóa SIM đã tải xuống"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Nếu bạn muốn tải SIM thay thế xuống, hãy liên hệ với nhà mạng. Thao tác này sẽ không hủy bất kỳ gói dịch vụ di động nào."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Thao tác này sẽ không hủy gói dịch vụ di động nào. Để tải SIM thay thế xuống, hãy liên hệ với nhà mạng của bạn."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Đặt lại các tùy chọn cài đặt"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Bạn muốn đặt lại tất cả tùy chọn cài đặt mạng? Bạn không thể hủy hành động này."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Bạn muốn đặt lại tất cả tùy chọn cài đặt mạng và xóa các SIM đã tải xuống? Bạn không thể hủy hành động này sau khi đã thực hiện."</string>
@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Máy tính bảng được sử dụng nhiều hơn thường lệ"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Thiết bị được sử dụng nhiều hơn thường lệ"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Pin có thể hết sớm hơn thường lệ"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Thời lượng pin bị hạn chế tạm thời"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Giúp duy trì độ bền của pin. Nhấn để tìm hiểu thêm."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Tối ưu hóa để cải thiện độ bền của pin"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Thời lượng pin bị hạn chế tạm thời. Nhấn để tìm hiểu thêm."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Bạn sử dụng điện thoại nhiều hơn mức bình thường. Pin điện thoại có thể hết sớm hơn dự kiến.\n\nCác ứng dụng dùng nhiều pin nhất:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Bạn dùng máy tính bảng nhiều hơn mức bình thường. Pin của bạn có thể hết sớm hơn dự kiến.\n\nCác ứng dụng dùng nhiều pin nhất:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Bạn dùng thiết bị nhiều hơn mức bình thường. Pin của bạn có thể hết sớm hơn dự kiến.\n\nCác ứng dụng dùng nhiều pin nhất:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Không cài đặt"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Vẫn cài đặt"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Chưa cài đặt chứng chỉ"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"Cho phép <xliff:g id="APP_NAME">%s</xliff:g> cài đặt chứng chỉ trên thiết bị này?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Những chứng chỉ này sẽ giúp các ứng dụng và URL dưới đây xác định danh tính của bạn"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Không cho phép"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Cho phép"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Hiển thị thêm"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Ứng dụng quản lý chứng chỉ"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Không"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"Những chứng chỉ do ứng dụng này cài đặt sẽ giúp các ứng dụng và URL dưới đây xác định danh tính của bạn"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Xóa"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Tín hiệu quay số khẩn cấp"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Đặt chế độ khi cuộc gọi khẩn cấp được thực hiện"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Sao lưu"</string>
@@ -4645,6 +4654,11 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Số tập dữ liệu hiển thị tối đa"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Đặt lại về giá trị mặc định"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Đã đặt lại tùy chọn tự động điền dành cho nhà phát triển"</string>
+    <string name="location_category" msgid="3496759112306219062">"Vị trí"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Chỉ báo vị trí trên thanh trạng thái"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Hiển thị cho tất cả vị trí, bao gồm cả mạng và khả năng kết nối"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Thực thi số đo GNSS đầy đủ"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Theo dõi tất cả chòm sao và tần suất GNSS mà không có chu kỳ làm việc"</string>
     <string name="device_theme" msgid="5027604586494772471">"Giao diện thiết bị"</string>
     <string name="default_theme" msgid="4815428567082263639">"Mặc định"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Tên mạng"</string>
@@ -4661,8 +4675,6 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Tạm dừng thông báo để tập trung"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Tính năng không hoạt động"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Tính năng này đã bị tắt vì sẽ khiến điện thoại chạy chậm"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Thực thi số đo GNSS đầy đủ"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Theo dõi tất cả chòm sao và tần suất GNSS mà không có chu kỳ làm việc"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"Luôn hiển thị hộp thoại sự cố"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Hiển thị hộp thoại mỗi khi ứng dụng gặp sự cố"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"Chọn ứng dụng hỗ trợ ANGLE"</string>
@@ -4730,7 +4742,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Bật (tắt tiếng)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Tắt"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Chi tiết mạng"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Tên thiết bị của bạn sẽ hiển thị với các ứng dụng trên điện thoại. Những người khác cũng có thể thấy tên thiết bị này khi bạn kết nối với thiết bị Bluetooth hoặc thiết lập điểm phát sóng Wi-Fi."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Tên thiết bị của bạn sẽ hiển thị với các ứng dụng trên điện thoại. Những người khác cũng có thể thấy tên thiết bị này khi bạn kết nối với thiết bị Bluetooth, mạng Wi-Fi hoặc thiết lập một điểm phát sóng Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Thiết bị"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Tất cả tùy chọn cài đặt"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Đề xuất"</string>
@@ -4890,6 +4902,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Không thể kích hoạt SIM"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Hãy tháo SIM rồi lắp lại. Nếu vấn đề vẫn xảy ra, vui lòng khởi động lại thiết bị."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"Hãy thử bật lại SIM. Nếu vấn đề vẫn xảy ra, vui lòng khởi động lại thiết bị."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Kích hoạt mạng"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> đang hoạt động"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"Nhấn để cập nhật tùy chọn cài đặt SIM"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"Thẻ SIM"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Xóa SIM đã tải xuống này?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Khi bạn xóa SIM, dịch vụ <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> sẽ bị xóa khỏi thiết bị này.\n\nDịch vụ của <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> sẽ không bị hủy."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Xóa"</string>
@@ -5042,10 +5058,23 @@
     <string name="calls_sms_footnote" msgid="7002461875954024216">"Với tính năng gọi qua Wi‑Fi, bạn có thể gọi và nhận cuộc gọi qua các mạng không phải do nhà mạng cung cấp, chẳng hạn như một số mạng Wi‑Fi."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Cuộc gọi"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"Tin nhắn SMS"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"ưu tiên"</string>
+    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"ưu tiên cuộc gọi"</string>
+    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"ưu tiên SMS"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"không có sẵn"</string>
+    <string name="calls_sms_no_sim" msgid="2336377399761819718">"Không có SIM"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Lựa chọn ưu tiên"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Kết nối với mạng công cộng"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"kết nối mạng, Internet, không dây, dữ liệu, wifi, wi-fi, wi fi, di động, nhà mạng di động, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Xem các mạng an toàn với máy bay"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Tắt Chế độ trên máy bay"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Không dùng được vì chế độ giờ đi ngủ đang bật"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Đã hoàn tất việc đặt lại mức độ quan trọng của thông báo."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Ứng dụng"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Thiết bị không tin cậy muốn truy cập vào tin nhắn của bạn. Hãy nhấn để biết thông tin chi tiết."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Cho phép truy cập vào tin nhắn?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Một thiết bị Bluetooth không tin cậy [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] muốn truy cập vào tin nhắn của bạn.\n\nBạn chưa từng kết nối với [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Thiết bị không tin cậy muốn truy cập vào danh bạ và nhật ký cuộc gọi của bạn. Hãy nhấn để biết thông tin chi tiết."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Cho phép truy cập vào danh bạ và nhật ký cuộc gọi?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Một thiết bị Bluetooth không tin cậy [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] muốn truy cập vào danh bạ và nhật ký cuộc gọi của bạn. Trong đó có cả dữ liệu về cuộc gọi đi và cuộc gọi đến.\n\nBạn chưa từng kết nối với [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]."</string>
 </resources>

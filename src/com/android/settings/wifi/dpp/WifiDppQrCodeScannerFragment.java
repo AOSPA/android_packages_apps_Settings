@@ -238,9 +238,6 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             // Add connected WifiEntry to prevent fail toast to users when it's connected.
             wifiEntries.add(connectedWifiEntry);
         }
-        // hidden network visibility is known at later stage (next scan)
-        if (wifiConfiguration.hiddenSSID)
-            return true;
 
         for (WifiEntry wifiEntry : wifiEntries) {
             if (!TextUtils.equals(wifiEntry.getSsid(), sanitizeSsid(wifiConfiguration.SSID))) {

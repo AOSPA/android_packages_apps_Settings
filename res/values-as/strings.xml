@@ -1022,8 +1022,7 @@
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 ঠিকনাবোৰ"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"ছেভ কৰি ৰখা নেটৱৰ্কসমূহ"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"গ্ৰাহকভুক্তি"</string>
-    <!-- no translation found for wifi_saved_access_points_tab (2075914709522121708) -->
-    <skip />
+    <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"অন্য নেটৱৰ্ক"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"আইপি ছেটিংসমূহ"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"এই ব্যৱহাৰকাৰীৰ বাবে ৱাই-ফাইৰ উচ্চখাপৰ ছেটিংসমূহ উপলব্ধ নহয়"</string>
     <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"ছেভ কৰক"</string>
@@ -1597,7 +1596,7 @@
     <string name="menu_delete" msgid="9199740901584348273">"এপিএন মচক"</string>
     <string name="menu_new" msgid="6571230342655509006">"নতুন এপিএন"</string>
     <string name="menu_save" msgid="6611465355127483100">"ছেভ কৰক"</string>
-    <string name="menu_cancel" msgid="4526003389139913077">"অগ্ৰাহ্য কৰক"</string>
+    <string name="menu_cancel" msgid="1197826697950745335">"বাতিল কৰক"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
     <string name="error_name_empty" msgid="1258275899283079142">"নামৰ ঠাইখন খালী থাকিব নোৱাৰে"</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"এপিএন খালী থাকিব নোৱাৰে।"</string>
@@ -1612,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"এপ্‌সমূহ ৰিছেট কৰিব পাৰি"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"ৱাই-ফাই, ম’বাইল আৰু ব্লুটুথ ৰিছেট কৰক"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"ইয়ে :\n\n"<li>"ৱাই-ফাই"</li>\n<li>"ম\'বাইল ডেটা"</li>\n<li>"ব্লুটুথ"</li>"কে আদি কৰি সকলো নেটৱৰ্ক ছেটিং ৰিছেট কৰিব"</string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"মচক"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"ডাউনল’ড কৰা ছিমবোৰ মচক"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"বিকল্প ছিম ডাউনল’ড কৰিবলৈ আপোনাৰ বাহকৰ সৈতে যোগাযোগ কৰক। ই কোনো ম’বাইল সেৱাৰ আঁচনি বাতিল নকৰে।"</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"ই কোনো ম’বাইল সেৱাৰ আঁচনি বাতিল নকৰে। সলনি কৰা ছিম ডাউনল’ড কৰিবলৈ আপোনাৰ বাহকৰ সৈতে যোগাযোগ কৰক।"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"ছেটিংসমূহ ৰিছেট কৰক"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"সকলো নেটৱৰ্কৰ ছেটিংসমূহ ৰিছেট কৰিবনে? আপুনি এই কাৰ্যটো আনডু কৰিব নোৱাৰিব।"</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"সকলো নেটৱৰ্ক ছেটিং ৰিছেট কৰিবনে আৰু সকলো ডাউনল’ড কৰা ছিম মচিবনে? আপুনি এই কাৰ্য আনডু কৰিব নোৱাৰিব।"</string>
@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"টেবলেট সামান্য অৱস্থাতকৈ বেছি ব্যৱহাৰ কৰা হ’ল"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"ডিভাইচ সামান্য অৱস্থাতকৈ বেছি ব্যৱহাৰ কৰা হ’ল"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"বেটাৰি আনদিনাতকৈ আগতেই শেষ হ’ব পাৰে"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"বেটাৰী সাময়িকভাৱে সীমিত কৰা হৈছে"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"বেটাৰীৰ অৱস্থা ভালে ৰখাত সহায় কৰে। অধিক জানিবলৈ টিপক।"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"বেটাৰীৰ অৱস্থা অপ্টিমাইজ কৰি থকা হৈছে"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"বেটাৰী সাময়িকভাৱে সীমিত কৰা হৈছে। অধিক জানিবলৈ টিপক।"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"আপোনাৰ ফ’নটো স্বাভাৱিকতকৈ বেছি ব্যৱহাৰ কৰা হৈছে। আপোনাৰ বেটাৰি আশা কৰাতকৈ আগতেই শেষ হ’ব পাৰে।\n\nআটাইতকৈ বেছি বেটাৰি ব্যৱহাৰ কৰা এপ্‌সমূহ:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"আপোনাৰ টেবলেটটো স্বাভাৱিকতকৈ বেছি ব্যৱহাৰ কৰা হৈছে। আপোনাৰ বেটাৰি আশা কৰাতকৈ আগতেই শেষ হ’ব পাৰে।\n\nআটাইতকৈ বেছি বেটাৰি ব্যৱহাৰ কৰা এপ্‌সমূহ:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"আপোনাৰ ডিভাইচটো স্বাভাৱিকতকৈ বেছি ব্যৱহাৰ কৰা হৈছে। আপোনাৰ বেটাৰি আশা কৰাতকৈ আগতেই শেষ হ’ব পাৰে।\n\nআটাইতকৈ বেছি বেটাৰি ব্যৱহাৰ কৰা এপ্‌সমূহ:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"ইনষ্টল নকৰিব"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"যিহ’লেও ইনষ্টল কৰক"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"প্ৰমাণপত্ৰ ইনষ্টল নহ’ল"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"<xliff:g id="APP_NAME">%s</xliff:g>ক এই ডিভাইচটোত প্ৰমাণপত্ৰসমূহ ইনষ্টল কৰিবলৈ দিবনে?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"এই প্ৰমাণপত্ৰসমূহে তলৰ এপ্‌ আৰু URLসমূহৰ সৈতে আপোনাৰ পৰিচয় কৰাব"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"অনুমতি নিদিব"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"অনুমতি দিয়ক"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"অধিক দেখুৱাওক"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"প্ৰমাণপত্ৰ পৰিচালনা এপ্‌"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"একো নাই"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"এই এপ্‌টোৱে ইনষ্টল কৰা প্ৰমাণপত্ৰই তলৰ এপ্‌ আৰু URLসমূহৰ সৈতে আপোনাৰ পৰিচয় কৰাব"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"আঁতৰাওক"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"জৰুৰীকালীন অৱস্থাত ডায়েল কৰা ছিগনেল"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"জৰুৰীকালীন কল কৰোতে কৰিবলগীয়া আচৰণ ছেট কৰক"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"বেকআপ"</string>
@@ -3886,12 +3895,9 @@
     <string name="switch_on_text" msgid="5664542327776075105">"অন কৰক"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"অফ কৰক"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"এপ্ পিন কৰা"</string>
-    <!-- no translation found for app_pinning_intro (6409063008733004245) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (7289730998890213708) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_user_description (5826264265872938958) -->
-    <skip />
+    <string name="app_pinning_intro" msgid="6409063008733004245">"এপ্‌ পিন কৰা সুবিধাটোৱে আপোনাক আপুনি বৰ্তমানৰ এপ্‌টো আনপিন নকৰা পৰ্যন্ত সেইটোক দেখা পোৱা কৰি ৰাখিবলৈ দিয়ে। কোনো বিশ্বাসী বন্ধুক এটা নিৰ্দিষ্ট গে’ম খেলিবলৈ দিয়াৰ দৰে কাৰ্যৰ বাবে এই সুবিধাটো ব্যৱহাৰ কৰিব পাৰি।"</string>
+    <string name="screen_pinning_description" msgid="7289730998890213708">"কোনো এটা এপ্‌ পিন কৰি ৰখাৰ সময়ত, পিন কৰি ৰখা এপ্‌টোৱে হয়তো অন্য এপ্‌সমূহ খুলিব পাৰে আৰু ব্যক্তিগত ডেটা এক্সেছ কৰিব পাৰে। \n\nএপ্‌ পিন কৰা সুবিধাটো ব্যৱহাৰ কৰিবলৈ: 	\n১)	এপ্‌ পিন কৰা সুবিধাটো অন কৰক 	\n২)	ৰূপৰেখা খোলক 	\n৩)	স্ক্ৰীনখনৰ একেবাৰে ওপৰত থকা এপৰ চিহ্নটোত টিপক, তাৰ পাছত পিন কৰকত টিপক"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"কোনো এটা এপ্‌ পিন কৰি ৰখাৰ সময়ত, পিন কৰি ৰখা এপ্‌টোৱে হয়তো অন্য এপ্‌সমূহ খুলিব পাৰে আৰু ব্যক্তিগত ডেটা এক্সেছ কৰিব পাৰে। \n\nযদি আপুনি নিজৰ ডিভাইচটো কাৰোবাৰ সৈতে সুৰক্ষিতভাৱে শ্বেয়াৰ কৰিব বিচাৰে, তেন্তে ইয়াৰ পৰিৱৰ্তে এটা অতিথি প্ৰ’ফাইল ব্যৱহাৰ কৰি চাওক। \n\nএপ্‌ পিন কৰা সুবিধাটো ব্যৱহাৰ কৰিবলৈ: 	\n১)	এপ্‌ পিন কৰা সুবিধাটো অন কৰক 	\n২)	ৰূপৰেখা খোলক 	\n৩)	স্ক্ৰীনখনৰ একেবাৰে ওপৰত থকা এপৰ চিহ্নটোত টিপক, তাৰ পাছত পিন কৰকত টিপক"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"কোনো এটা এপ্ পিন কৰি ৰখাৰ সময়ত: \n\n•		ব্যক্তিগত ডেটা এক্সেছ কৰিব পৰা যাব পাৰে \n		(যেনে সম্পর্কসমূহ আৰু ইমেইলৰ সমল) \n•	 পিন কৰি ৰখা এপ্‌টোৱে হয়তো অন্য এপ্‌সমূহ খুলিব পাৰে \n\nআপুনি বিশ্বাস কৰা লোকসকলৰ সৈতেহে এপ্ পিন কৰা সুবিধাটো ব্যৱহাৰ কৰক।"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"আনপিন কৰাৰ পূৰ্বে আনলক আৰ্হি দিবলৈ কওক"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"আনপিন কৰোতে পাছৱৰ্ড বিচাৰক"</string>
@@ -4514,8 +4520,7 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"ডিভাইচটো পৰীক্ষা কৰিবলৈ টিপক"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"সময়, জাননী আৰু অন্য তথ্য চাবলৈ আপোনাৰ স্ক্ৰীণত টিপক।"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"জৰুৰীকালীন SOS"</string>
-    <!-- no translation found for emergency_gesture_switchbar_title (7494629420708117232) -->
-    <skip />
+    <string name="emergency_gesture_switchbar_title" msgid="7494629420708117232">"জৰুৰীকালীন SOS ব্যৱহাৰ কৰক"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g>এ পৰিচালনা কৰা"</string>
     <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"পাৱাৰ বুটামটো ক্ষিপ্ৰতাৰে ৫ অথবা তাতকৈ অধিক বাৰ টিপি তলত দিয়া কাৰ্যবিলাক আৰম্ভ কৰক"</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"কাউণ্টডাউন এলাৰ্ম প্লে’ কৰক"</string>
@@ -4649,6 +4654,11 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"দেখিব পৰা অধিকতম ডেটাছেট"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"ডিফ’ল্ট মানলৈ ৰিছেট কৰক"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"বিকাশকৰ্তাৰ স্বয়ংপূৰ্তি হোৱা বিকল্পসমূহ ৰিছেট কৰা হৈছে"</string>
+    <string name="location_category" msgid="3496759112306219062">"অৱস্থান"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"স্থিতি দণ্ডত অৱস্থানৰ সূচক"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"নেটৱৰ্ক আৰু সংযোগকে ধৰি আটাইবোৰ অৱস্থানৰ বাবে দেখুৱাওক"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"সম্পূৰ্ণ জিএনএছএছ পৰিমাপ প্ৰয়োগ কৰক"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"কোনো উপযোগীতা অনুপাতৰ সহায় নোলোৱাকৈ GNSS কনষ্টেলেশ্বন আৰু ফ্ৰিকুৱেন্সী নিৰীক্ষণ কৰক"</string>
     <string name="device_theme" msgid="5027604586494772471">"ডিভাইচৰ থিম"</string>
     <string name="default_theme" msgid="4815428567082263639">"ডিফ\'ল্ট"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"নেটৱৰ্কৰ নাম"</string>
@@ -4665,8 +4675,6 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"মনোযোগ বৰ্তাই ৰাখিবলৈ জাননী বন্ধ কৰক"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"সুবিধাসমূহ উপলব্ধ নহয়"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"এই সুবিধাটোৱে আপোনাৰ ফ\'নটোৰ কার্যকলাপ লেহেমীয়া কৰে বাবে ইয়াক অফ কৰা হৈছে"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"সম্পূৰ্ণ জিএনএছএছ পৰিমাপ প্ৰয়োগ কৰক"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"কোনো উপযোগীতা অনুপাতৰ সহায় নোলোৱাকৈ GNSS কনষ্টেলেশ্বন আৰু ফ্ৰিকুৱেন্সী নিৰীক্ষণ কৰক"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"সদায় ক্ৰেশ্ব ডায়ল\'গ দেখুৱাওক"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"কোনো এপ্ ক্ৰেশ্ব হ\'লে প্ৰতিবাৰতে ডায়ল\'গ দেখুৱাওক"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"ANGLE সক্ষম কৰি ৰখা এপ্লিকেশ্বন বাছনি কৰক"</string>
@@ -4734,7 +4742,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"অন আছে (মিউট)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"অফ আছে"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"নেটৱৰ্কৰ সবিশেষ"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"আপোনাৰ ডিভাইচটোৰ নাম আপোনাৰ ফ\'নটোত থকা এপসমূহৰ বাবে দৃশ্যমান। আপুনি ব্লুটুথ ডিভাইচৰ সৈতে সংযোগ কৰোঁতে বা ৱাই-ফাই হটস্পট  ছেট আপ কৰোঁতেও নামটো অইনে দেখা পাব পাৰে।"</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"আপোনাৰ ডিভাইচটোৰ নাম আপোনাৰ ফ’নটোত থকা এপ্‌সমূহৰ বাবে দৃশ্যমান। আপুনি ব্লুটুথ ডিভাইচৰ সৈতে সংযোগ কৰোঁতে, ৱাই-ফাই নেটৱৰ্কৰ সৈতে সংযোগ কৰোঁতে অথবা ৱাই-ফাই হটস্পট ছেট আপ কৰোঁতেও এইটো অন্য লোকে দেখা পাব পাৰে।"</string>
     <string name="devices_title" msgid="649715719278562515">"ডিভাইচসমূহ"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"সকলো ছেটিং"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"পৰামৰ্শ"</string>
@@ -4894,6 +4902,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"ছিমখন সক্ৰিয় কৰিব নোৱাৰি"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"ছিমখন আঁতৰাওক আৰু পুনৰ ভৰাওক। সমস্যাটো অব্যাহত থাকিলে আপোনাৰ ডিভাইচটো ৰিষ্টাৰ্ট কৰক।"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"ছিমখন পুনৰ অন কৰিবলৈ চেষ্টা কৰক। সমস্যাটো অব্যাহত থাকিলে আপোনাৰ ডিভাইচটো ৰিষ্টাৰ্ট কৰক।"</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"নেটৱৰ্ক সক্ৰিয়কৰণ"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> সক্ৰিয় হৈ আছে"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"ছিমৰ ছেটিং আপডে’ট কৰিবলৈ টিপক"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"ছিম কাৰ্ড"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"এই ডাউনল’ড কৰা ছিমখন মচিবনে?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"এই ছিমখন আঁতৰালে এই ডিভাইচটোৰ পৰা <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> সেৱা আঁতৰোৱা হ’ব।\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>ৰ সেৱা বাতিল কৰা নহয়।"</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"মচক"</string>
@@ -4971,12 +4983,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"জৰুৰীকালীন কল"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"আপোনাৰ বাহকত ৱাই-ফাই কলিং ব্যৱহাৰ কৰি জৰুৰীকালীন কল কৰাৰ সুবিধা নাই।\nজৰুৰীকালীন কল কৰিবলৈ ডিভাইচটোৱে স্বয়ংক্ৰিয়ভাৱে চেলুলাৰ নেটৱৰ্কলৈ সলনি কৰে।\nকেৱল চেলুলাৰ নেটৱৰ্ক থকা ঠাইৰ পৰাহে জৰুৰীকালীন কল কৰিব পৰা যায়।"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"মান উন্নত কৰিবলৈ কল কৰোঁতে ৱাই-ফাই ব্যৱহাৰ কৰক"</string>
-    <!-- no translation found for cross_sim_calling_settings_title (1179406214047299816) -->
-    <skip />
-    <!-- no translation found for cross_sim_calling_setting_summary (7960473304104701519) -->
-    <skip />
-    <!-- no translation found for keywords_cross_sim_calling (1702104511020507778) -->
-    <skip />
+    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"ক্ৰছ-ছিম কলিং"</string>
+    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"এইখন ছিমৰ জৰিয়তে অন্য ছিমৰ পৰা কল কৰাৰ আৰু এছএমএছ পঠিওৱাৰ অনুমতি দিয়ক।"</string>
+    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"ক্ৰছ-ছিম কলিং"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"অন্তৰ্গামী এমএমএছ বার্তা"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"এমএমএছ বার্তা পঠিয়াব নোৱাৰি"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"ম’বাইল ডেটা অফ হৈ থকাৰ সময়তো <xliff:g id="OPERATOR_NAME">%1$s</xliff:g>ত এমএমএছ বার্তা পঠিওৱাৰ অনুমতি দিবলৈ টিপক"</string>
@@ -5049,10 +5058,23 @@
     <string name="calls_sms_footnote" msgid="7002461875954024216">"ৱাই-ফাই কলিঙৰ সুবিধাটোৱে আপোনাক কিছুমান ৱাই-ফাই নেটৱৰ্কৰ দৰে বাহক বহিৰ্ভূত নেটৱৰ্কৰ জৰিয়তে কল কৰিবলৈ আৰু লাভ কৰিবলৈ সুবিধা দিয়ে।"</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"কল"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"এছএমএছ"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"অগ্ৰাধিকাৰ দিয়া"</string>
+    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"কলক অগ্ৰাধিকাৰ দিয়া হৈছে"</string>
+    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"এছএমএছক অগ্ৰাধিকাৰ দিয়া হৈছে"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"উপলব্ধ নহয়"</string>
+    <string name="calls_sms_no_sim" msgid="2336377399761819718">"ছিম নাই"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"অগ্ৰাধিকাৰ"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"ৰাজহুৱা নেটৱৰ্কসমূহৰ সৈতে সংযোগ কৰক"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"নেটৱৰ্ক সংযোগ, ইণ্টাৰনেট, বেতাঁৰ, ডেটা, ৱাইফাই, ৱাই-ফাই, ৱাই ফাই, চেলুলাৰ, ম’বাইল, চেল কেৰিয়াৰ, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"এয়াৰপ্লেন-সুৰক্ষিত নেটৱৰ্ক চাওক"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"এয়াৰপ্লেন ম’ডটো অফ কৰক"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"শোৱাৰ সময়ৰ ম’ড অন হৈ থকাৰ বাবে উপলব্ধ নহয়"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"জাননীৰ গুৰুত্ব ৰিছেট কৰাটো সম্পূৰ্ণ হৈছে।"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"এপ্‌"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"অবিশ্বস্ত ডিভাইচে আপোনাৰ বাৰ্তাসমূহ এক্সেছ কৰিব বিচাৰিছে। সবিশেষ জানিবলৈ টিপক।"</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"বাৰ্তাৰ এক্সেছ দিবনে?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"এটা অবিশ্বস্ত ব্লুটুথ ডিভাইচ, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>]এ, আপোনাৰ বাৰ্তাসমূহ এক্সেছ কৰিব বিচাৰিছে।\n\nআপুনি আগতে [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]ৰ সৈতে সংযোগ কৰা নাই।"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"অবিশ্বস্ত ডিভাইচে আপোনাৰ সম্পৰ্কসূচী আৰু কল লগ এক্সেছ কৰিব বিচাৰিছে। সবিশেষ জানিবলৈ টিপক।"</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"সম্পৰ্কসূচী আৰু কল লগ এক্সেছ কৰিবলৈ দিবনে?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"এটা অবিশ্বস্ত ব্লুটুথ ডিভাইচ, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>]এ, আপোনাৰ সম্পৰ্কসূচী আৰু কল লগ এক্সেছ কৰিব বিচাৰিছে। ইয়াত অন্তৰ্গামী আৰু বহিৰ্গামী কল সম্পৰ্কীয় ডেটা অন্তৰ্ভুক্ত।\n\nআপুনি আগতে [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>]ৰ সৈতে সংযোগ কৰা নাই।"</string>
 </resources>

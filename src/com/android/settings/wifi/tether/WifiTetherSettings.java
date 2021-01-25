@@ -18,7 +18,6 @@ package com.android.settings.wifi.tether;
 
 import static android.net.ConnectivityManager.ACTION_TETHER_STATE_CHANGED;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
-import static android.net.wifi.WifiManager.WIFI_COUNTRY_CODE_CHANGED_ACTION;
 
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
@@ -31,7 +30,6 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceGroup;
@@ -84,7 +82,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     static {
         TETHER_STATE_CHANGE_FILTER = new IntentFilter(ACTION_TETHER_STATE_CHANGED);
         TETHER_STATE_CHANGE_FILTER.addAction(WIFI_AP_STATE_CHANGED_ACTION);
-        TETHER_STATE_CHANGE_FILTER.addAction(WIFI_COUNTRY_CODE_CHANGED_ACTION);
     }
 
     public WifiTetherSettings() {
@@ -195,18 +192,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onTetherConfigUpdated(AbstractPreferenceController context) {
         final SoftApConfiguration config = buildNewConfig();
-        boolean bandEntriesChanged = false;
-
         mPasswordPreferenceController.updateVisibility(config.getSecurityType());
-
-        if (mApBandPreferenceController.isVendorDualApSupported()
-                && mSecurityPreferenceController.isOweSapSupported()) {
-            if ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE)
-                    == (mApBandPreferenceController.isBandEntriesHasDualband())) {
-                mApBandPreferenceController.updatePreferenceEntries(config);
-                bandEntriesChanged = true;
-            }
-        }
 
         /**
          * if soft AP is stopped, bring up
@@ -221,8 +207,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         }
         mWifiManager.setSoftApConfiguration(config);
 
-        if (bandEntriesChanged)
-            mApBandPreferenceController.updateDisplay();
         if (context instanceof WifiTetherSecurityPreferenceController) {
             reConfigInitialExpandedChildCount();
         }
@@ -231,16 +215,13 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private SoftApConfiguration buildNewConfig() {
         final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         final int securityType = mSecurityPreferenceController.getSecurityType();
-        final int band = mApBandPreferenceController.getBandIndex();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
-        configBuilder.setPassphrase(mPasswordPreferenceController.getPasswordValidated(securityType),
-                                    securityType);
-        if (securityType == SoftApConfiguration.SECURITY_TYPE_OWE
-                && band == SoftApConfiguration.BAND_DUAL) {
-            configBuilder.setBand(SoftApConfiguration.BAND_2GHZ);
-        } else {
-            configBuilder.setBand(band);
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
+            configBuilder.setPassphrase(
+                    mPasswordPreferenceController.getPasswordValidated(securityType),
+                    SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
         }
+        configBuilder.setBand(mApBandPreferenceController.getBandIndex());
         return configBuilder.build();
     }
 
@@ -308,13 +289,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 if (state == WifiManager.WIFI_AP_STATE_DISABLED
                         && mRestartWifiApAfterConfigChange) {
                     startTether();
-                } else if (state == WifiManager.WIFI_AP_STATE_FAILED) {
-                    int failureCode = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_FAILURE_REASON, 0);
-                    String failureDesc = intent.getStringExtra(WifiManager.EXTRA_WIFI_AP_FAILURE_DESCRIPTION);
-                    if (failureCode == WifiManager.SAP_START_FAILURE_NO_CHANNEL
-                         && failureDesc != null && failureDesc.equals(WifiManager.WIFI_AP_FAILURE_DESC_NO_5GHZ_SUPPORT)) {
-                        Toast.makeText(content, "5Ghz band not supported. band selection disabled", Toast.LENGTH_LONG).show();
-                    }
                 }
             }
         }

@@ -1022,8 +1022,7 @@
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 ලිපින"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"සුරකින ලද ජාල"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"දායකත්ව"</string>
-    <!-- no translation found for wifi_saved_access_points_tab (2075914709522121708) -->
-    <skip />
+    <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"වෙනත් ජාල"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"IP සැකසීම්"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"මෙම පරිශීලකයා සඳහා Wi‑Fi උසස් සැකසීම් නැත"</string>
     <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"සුරකින්න"</string>
@@ -1597,7 +1596,7 @@
     <string name="menu_delete" msgid="9199740901584348273">"APN මකන්න"</string>
     <string name="menu_new" msgid="6571230342655509006">"නව APN"</string>
     <string name="menu_save" msgid="6611465355127483100">"සුරකින්න"</string>
-    <string name="menu_cancel" msgid="4526003389139913077">"ඉවත ලන්න"</string>
+    <string name="menu_cancel" msgid="1197826697950745335">"අවලංගු කරන්න"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
     <string name="error_name_empty" msgid="1258275899283079142">"නම ක්ෂේත්‍රය හිස් විය නොහැක."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"APN හිස් විය නොහැක."</string>
@@ -1612,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"යෙදුම් යළි සැකසිය නොහැකිය"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Wi-Fi, ජංගම, බ්ලූටූත් යළි සකසන්න"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"මෙය, පහත ඒවා ඇතුළුව සියලු ජාල සැකසීම් යළි සකසනු ඇත:\n\n"<li>"Wi‑Fi"</li>\n<li>"ජංගම දත්ත"</li>\n<li>"බ්ලූටූත්"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"මකන්න"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"බාගත් SIM පත් මකන්න"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"ප්‍රතිස්ථාපන SIM පත් බාගැනීමට, ඔබේ වාහකයා සම්බන්ධ කර ගන්න. මෙය ජංගම සේවා සැලසුම් කිසිවක් අවලංගු නොකරයි."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"මෙය ජංගම සේවා සැලසුම් කිසිවක් අවලංගු නොකරනු ඇත. ප්‍රතිස්ථාපන SIM බාගැනීමට, ඔබගේ වාහකය අමතන්න."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"සැකසීම් යළි පිහිටුවන ලදි"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"සියලු ජාල සැකසීම් යළි සකසන්නේද? ඔබට මෙම ක්‍රියාව අස් කළ නොහැක."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"සියලු ජාල සැකසීම් යළි සකසන අතර බාගත් SIM මකන්නේද? ඔබට මෙම ක්‍රියාව අස් කළ නොහැක."</string>
@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"ටැබ්ලට් උපාංගය සාමාන්‍යයට වඩා වැඩියෙන් භාවිත කර ඇත"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"උපාංගය සාමාන්‍යයට වඩා වැඩියෙන් භාවිත කර ඇත"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"බැටරිය සාමාන්‍යයට වඩා කලින් අවසන් විය හැක"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"බැටරිය තාවකාලිකව සීමිතයි"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"බැටරි සෞඛ්‍යය රැක ගැනීමට උදව් වේ. තව දැන ගැනීමට තට්ටු කරන්න."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"බැටරි සෞඛ්‍යය සඳහා ප්‍රශස්ත කරමින්"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"බැටරිය තාවකාලිකව සීමිතයි. තව දැන ගැනීමට තට්ටු කරන්න."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"ඔබේ දුරකථනය සාමාන්‍යයට වඩා වැඩිපුර භාවිත කර ඇත. ඔබගේ බැටරිය බලාපොරොත්තු වූවාට වඩා ඉක්මනින් අවසන් විය හැක.\n\nබැටරි භාවිතයට අනුව ඉහළම යෙදුම්:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"ඔබේ ටැබ්ලටය සාමාන්‍යයට වඩා වැඩිපුර භාවිත කර ඇත. ඔබගේ බැටරිය බලාපොරොත්තු වූවාට වඩා ඉක්මනින් අවසන් විය හැක.\n\nබැටරි භාවිතයට අනුව ඉහළම යෙදුම්:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"ඔබේ උපාංගය සාමාන්‍යයට වඩා වැඩිපුර භාවිත කර ඇත. ඔබගේ බැටරිය බලාපොරොත්තු වූවාට වඩා ඉක්මනින් අවසන් විය හැක.\n\nබැටරි භාවිතයට අනුව ඉහළම යෙදුම්:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"ස්ථාපනය නොකරන්න"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"කෙසේ වෙතත් ස්ථාපනය කරන්න"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"සහතිකය ස්ථාපනය කර නැත"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"<xliff:g id="APP_NAME">%s</xliff:g> හට මෙම උපාංගයේ සහතික ස්ථාපනය කිරීමට ඉඩ දෙන්නද?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"මෙම සහතික ඔබව පහත යෙදුම් සහ URL වෙත හඳුනා ගනු ඇත"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"ඉඩ දෙන්න එපා"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"ඉඩ දෙන්න"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"තව පෙන්වන්න"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"සහතික කළමනාකරණ යෙදුම"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"කිසිවක් නැත"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"මෙම යෙදුම මඟින් ස්ථාපනය කර ඇති සහතික පහත යෙදුම් සහ URL සඳහා ඔබව හඳුනා ගනී"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"ඉවත් කරන්න"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"හදිසි අවස්ථා ඩයල් කිරීමේ සංඥාව"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"හදිසි ඇමතුමක් ලැබුණ විට හැසිරීම සකසන්න"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"උපස්ථය"</string>
@@ -4645,6 +4654,11 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"උපරිම දෘශ්‍යමාන දත්ත කට්ටල"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"පෙරනිමි අගයන්ට යළි සකසන්න"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"ස්වයං පිරවුම් සංවර්ධක විකල්ප යළි සකසා ඇත"</string>
+    <string name="location_category" msgid="3496759112306219062">"ස්ථානය"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"තත්ත්ව තීරු ස්ථාන දර්ශකය"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"ජාලය සහ සබැඳුම් හැකියාව ඇතුළුව, සියලු ස්ථාන සඳහා පෙන්වන්න"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"සම්පූර්ණ GNSS මිනුම් බලාත්මක කරන්න"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"කාර්ය චක්‍රය රහිත සියලු GNSS සබැඳි තාරකා ගෝල සහ සංඛ්‍යාත"</string>
     <string name="device_theme" msgid="5027604586494772471">"උපාංග තේමාව"</string>
     <string name="default_theme" msgid="4815428567082263639">"පෙරනිමි"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"ජාල නම"</string>
@@ -4661,8 +4675,6 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"අවධානය යොමු කිරීම සඳහා දැනුම්දීම් විරාම කරන්න"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"විශේෂාංගය නොලැබේ"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"මෙම විශේෂාංගය ඔබේ දුරකථනය මන්දගාමී කරන බැවින් මෙය අක්‍රිය කර ඇත"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"සම්පූර්ණ GNSS මිනුම් බලාත්මක කරන්න"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"කාර්ය චක්‍රය රහිත සියලු GNSS සබැඳි තාරකා ගෝල සහ සංඛ්‍යාත"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"බිඳ වැටීම් සංවාදය සැම විට පෙන්වන්න"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"යෙදුමක් බිඳ වැටෙන සෑම විටම සංවාදය පෙන්වන්න"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"ANGLE සබල යෙදුමක් තෝරන්න"</string>
@@ -4730,7 +4742,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"ක්‍රියාත්මකයි (නිහඬ)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"ක්‍රියාවිරහිතයි"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"ජාල විස්තර"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"ඔබගේ උපාංගයේ නම ඔබගේ දුරකථනයේ යෙදුම්වලට දෘශ්‍යමානය. ඔබ බ්ලූටූත්වලට සම්බන්ධ වූ විට හෝ Wi-Fi හොට්ස්පොට් එකක් පිහිට වූ විට වෙනත් පුද්ගලයන්ද එය දැකිය හැකිය."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"ඔබගේ උපාංගයේ නම ඔබගේ දුරකථනයේ යෙදුම්වලට දෘශ්‍යමානය. ඔබ බ්ලූටූත්වලට සම්බන්ධ වූ විට හෝ Wi-Fi හොට්ස්පොට් එකක් පිහිටු වූ විට වෙනත් පුද්ගලයන්ද එය දැකිය හැකිය."</string>
     <string name="devices_title" msgid="649715719278562515">"උපාංග"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"සියලු සැකසීම්"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"යෝජනා"</string>
@@ -4890,6 +4902,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM එක සක්‍රිය කිරීමට නොහැකිය"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM එක ඉවත් කර එය නැවත ඇතුළු කරන්න. ප්‍රශ්නය දිගටම පැවතුණහොත්, ඔබේ උපාංගය යළි ආරම්භ කරන්න."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"නැවත SIM එක ක්‍රියාත්මක කිරීමට උත්සාහ කරන්න. ප්‍රශ්නය දිගටම පැවතුණහොත්, ඔබේ උපාංගය යළි ආරම්භ කරන්න."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"ජාල සක්‍රිය කිරීම"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> සක්‍රියයි"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"SIM සැකසීම් යාවත්කාලීන කිරීමට තට්ටු කරන්න"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM කාඩ්පත"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"මෙම බාගත් SIM මකන්නද?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"මෙම SIM මැකීමෙන් මෙම උපාංගයෙන් <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> සේවාව ඉවත් කරයි.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> සඳහා වන සේවාව අවලංගු නොකෙරේ."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"මකන්න"</string>
@@ -5042,10 +5058,23 @@
     <string name="calls_sms_footnote" msgid="7002461875954024216">"සමහර Wi-Fi ජාල වැනි වාහක නොවන ජාල හරහා ඇමතුම් ලබා ගැනීමට සහ ලැබීමට Wi-Fi ඇමතීම ඔබට ඉඩ දෙයි."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"ඇමතුම්"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"වඩා කැමති"</string>
+    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"වඩා කැමති ඇමතුම්"</string>
+    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"වඩා කැමති SMS"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"ලබා ගත නොහැකිය"</string>
+    <string name="calls_sms_no_sim" msgid="2336377399761819718">"SIM නැත"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"මනාප"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"පොදු ජාලයකට සම්බන්ධ වන්න"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"ජාල සම්බන්ධතාව, අන්තර්ජාලය, රැහැන් රහිත, දත්ත, wifi, wi-fi, wi fi, සෙලියුලර්, ජංගම, සෙල් වාහක, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"ගුවන් යානා-ආරක්ෂිත ජාල බලන්න"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"ගුවන් යානා ප්‍රකාරය ක්‍රියාවිරහිත කරන්න"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"නිද්‍රා කාල ප්‍රකාරය ක්‍රියාත්මක නිසා ලබා ගත නොහැකිය"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"දැනුම්දීම්වල වැදගත්කම යළි සැකසීම සම්පූර්ණ කරන ලදි."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"යෙදුම්"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"විශ්වාසදායී නොවන උපාංගයකට ඔබගේ පණිවිඩ වෙත ප්‍රවේශ විමට අවශ්‍යයි. විස්තර සඳහා තට්ටු කරන්න."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"පණිවිඩවලට ප්‍රවේශ වීමට ඉඩ දෙන්නද?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"විශ්වාසදායී නොවන බ්ලූටූත් උපාංගයකට, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], ඔබගේ පණිවිඩවලට ප්‍රවේශ වීමට අවශ්‍යයි.\n\nඔබ මීට පෙර [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] වෙත සබැඳී නැත."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"විශ්වාසදායී නොවන බ්ලූටූත් උපාංගයකට, ඔබගේ සම්බන්ධතාවලට සහ ඇමතුම් ලොගයට ප්‍රවේශ වීමට අවශ්‍යයි. විස්තර සඳහා තට්ටු කරන්න."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"සම්බන්ධතා සහ ඇමතුම් ලොගය වෙත ප්‍රවේශය ඉඩ දෙන්නද?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"විශ්වාසදායී නොවන බ්ලූටූත් උපාංගයකට, [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>], ඔබගේ සම්බන්ධතාවලට සහ ඇමතුම් ලොගයට ප්‍රවේශ වීමට අවශ්‍යයි. පැමිණෙන සහ පිටතට යන ඇමතුම් පිළිබඳ දත්ත මෙයට ඇතුළත් වේ.\n\nඔබ මීට පෙර [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] වෙත සබැඳී නැත."</string>
 </resources>

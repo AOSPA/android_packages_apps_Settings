@@ -1022,8 +1022,7 @@
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 ünvanları"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Saxlanmış şəbəkələr"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Abunəliklər"</string>
-    <!-- no translation found for wifi_saved_access_points_tab (2075914709522121708) -->
-    <skip />
+    <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"Digər şəbəkələr"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"IP ayarları"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"Təkmilləşmiş Wi‑Fi ayarları bu istifadəçi üçün əlçatmazdır"</string>
     <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"Yadda saxlayın"</string>
@@ -1597,7 +1596,7 @@
     <string name="menu_delete" msgid="9199740901584348273">"APN silin"</string>
     <string name="menu_new" msgid="6571230342655509006">"Yeni APN"</string>
     <string name="menu_save" msgid="6611465355127483100">"Yadda saxla"</string>
-    <string name="menu_cancel" msgid="4526003389139913077">"Kənarlaşdır"</string>
+    <string name="menu_cancel" msgid="1197826697950745335">"Ləğv edin"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
     <string name="error_name_empty" msgid="1258275899283079142">"Ad sahəsi boş ola bilməz."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"APN boş ola bilməz."</string>
@@ -1612,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Tətbiqlər sıfırlana bilər"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Wi-Fi, mobil və Bluetooth\'u sıfırlayın"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Bununla bütün şəbəkə ayarları sıfırlanacaq, bura daxildir:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobil data"</li>\n<li>"Bluetooth"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"Silin"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Endirilən SIM-ləri silin"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"Yedək SIM-i endirmək üçün operatorla əlaqə saxlayın. Bu, hər hansı mobil xidmət planını ləğv etməyəcək."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"Bununla hər hansı mobil xidmət planı ləğv edilməyəcək. Əvəzedici SIM\'ləri endirmək üçün operatorunuzla əlaqə saxlayın."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Ayarları sıfırlayın"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Bütün şəbəkə ayarları sıfırlansın? Bu əməliyyatı geri qaytara bilməzsiniz."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Bütün şəbəkə ayarları sıfırlanıb, endirilən SIM-lər silinsin? Bu əməliyyatı geri qaytara bilməzsiniz."</string>
@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Planşet hədindən çox istifadə etdi"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Cihaz həddindən çox istifadə etdi"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Batareya həmişə olduğundan daha tez bitə bilər"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Batareya müvəqqəti məhdudlaşdırılıb"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Batareyanın vəziyyətini qorumağa yardım edir. Ətraflı məlumat üçün toxunun."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Enerjiyə qənaət üçün optimallaşdırma"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"Batareya müvəqqəti məhdudlaşdırılıb. Ətraflı məlumat üçün toxunun."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefon həddindən artıq çox işlədilib. Batareya gözləniləndən tez bitə bilər.\n\nƏn çox batareya işlədən tətbiqlər:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Planşet həddindən artıq çox işlədilib. Batareya gözləniləndən tez bitə bilər.\n\nƏn çox batareya işlədən tətbiqlər:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Cihaz həddindən artıq çox işlədilib. Batareya gözləniləndən tez bitə bilər.\n\nƏn çox batareya işlədən tətbiqlər:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Quraşdırmayın"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"İstənilən halda quraşdırın"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Sertifikat quraşdırılmadı"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"<xliff:g id="APP_NAME">%s</xliff:g> tətbiqinə bu cihazda sertifikatları quraşdırmaq üçün icazə verilsin?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Bu sertifikatlar aşağıdakı tətbiqlər və URL\'lar üçün kimliyinizi doğrulayacaq"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"İcazə verməyin"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"İcazə verin"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"Daha çoxunu göstərin"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Sertifikat idarəetmə tətbiqi"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"Yoxdur"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"Bu tətbiq tərəfindən quraşdırılan sertifikatlar aşağıdakı tətbiqlər və URL\'lar üçün kimliyinizi doğrulayır"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"Silin"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Təcili zəng siqnalı"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Təcili zəng olduqda davranış təyin et"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"Yedək"</string>
@@ -4645,6 +4654,11 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Maksimum görünən datasetlər"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Defolt dəyərlərə sıfırlayın"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Avto doldurma developer seçimləri sıfırlanıb"</string>
+    <string name="location_category" msgid="3496759112306219062">"Məkan"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"Status bölməsi məkan göstəricisi"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Şəbəkə və bağlantı daxil olmaqla bütün məkanlar üçün göstərin"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Tam GNSS ölçülərini icra edin"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"İş sistemi olmadan bütün GNSS qruplaşmaları və tezliklərini izləyin"</string>
     <string name="device_theme" msgid="5027604586494772471">"Cihaz teması"</string>
     <string name="default_theme" msgid="4815428567082263639">"Defolt"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Şəbəkə adı"</string>
@@ -4661,8 +4675,6 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Foksulanmağa davam etmək üçün bildirişləri dayandırın"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Funksiya əlçatan deyil"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Bu funksiya telefonu yavaşlatdığı üçün deaktiv edilib"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Tam GNSS ölçülərini icra edin"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"İş sistemi olmadan bütün GNSS qruplaşmaları və tezliklərini izləyin"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"Xəta dialoqunu həmişə göstərin"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Tətbiqdə xəta baş verdiyi zaman dialoqu göstərin"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"ANGLE aktiv olan tətbiq seçin"</string>
@@ -4730,7 +4742,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Aktiv (səssiz)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"Deaktiv"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Şəbəkə bilgisi"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"Cihazın adı telefondakı tətbiqlərdə görünəcək. Bluetooth cihazlarına qoşulduqda və ya Wi-Fi hotspotu ayarladıqda digərləri də onu görə bilər."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Cihazın adı telefondakı tətbiqlərdə görünəcək. Bluetooth cihazlarına qoşulduqda və ya Wi-Fi hotspotu ayarladıqda digərləri də onu görə bilər."</string>
     <string name="devices_title" msgid="649715719278562515">"Cihazlar"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"Bütün Ayarlar"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"Təkliflər"</string>
@@ -4890,6 +4902,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM-i aktiv etmək mümkün deyil"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM-i çıxarıb yenidən taxın. Problem həll olmasa, cihazı yenidən başladın."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"SIM-i yenidən aktiv etməyə çalışın. Problem həll olmasa, cihazı yenidən başladın."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"Şəbəkənin aktiv edilməsi"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> aktivdir"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"SIM ayarlarını yeniləmək üçün toxunun"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM kart"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Endirilən SIM silinsin?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Bu SIM silindikdə <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> xidməti bu cihazdan silinəcək.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> üçün xidmət ləğv edilməyəcək."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Silin"</string>
@@ -5042,10 +5058,23 @@
     <string name="calls_sms_footnote" msgid="7002461875954024216">"Wi-Fi zəngi bəzi Wi‑Fi şəbəkələri kimi operator olmayan şəbəkələr üzərindən zəng etmək və qəbul etməyinizə imkan verir."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Zənglər"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"tərcih edilənlər"</string>
+    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"tərcih edilən zənglər"</string>
+    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"SMS tərcih edilir"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"əlçatmazdır"</string>
+    <string name="calls_sms_no_sim" msgid="2336377399761819718">"SIM yoxdur"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Tərcihlər"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"İctimai şəbəkələrə qoşulun"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"şəbəkə bağlantısı, internet, simsiz, data, wifi, wi-fi, wi fi, mobil şəbəkə, mobil, mobil operator, 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"Təyyarə üçün güvənli şəbəkələrə baxın"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"Təyyarə Rejimini deaktiv edin"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Yuxu vaxtı rejimi aktiv olduğuna görə əlçatan deyil"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Bildiriş əhəmiyyətinin sıfırlanması tamamlandı."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Tətbiqlər"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Güvənsiz cihaz mesajlarınıza giriş etmək istəyir. Detallar üçün toxunun."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Mesajlara girişə icazə verilsin?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"Güvənsiz Bluetooth cihazı [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] mesajlarınıza giriş etmək istəyir.\n\nDaha öncə [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] cihazına qoşulmamısınız."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Güvənsiz cihaz kontaktlarınıza və zəng siyahınıza giriş etmək istəyir. Detallar üçün toxunun."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Kontaktlara və zəng siyahısına girişə icazə verilsin?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"Güvənsiz Bluetooth cihazı [<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] kontaktlarınıza və zəng siyahınıza giriş etmək istəyir. Gələn və gedən zənglər barədə data buna daxildir.\n\nDaha öncə [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] cihazına qoşulmamısınız."</string>
 </resources>

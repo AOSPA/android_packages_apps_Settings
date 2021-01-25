@@ -2301,8 +2301,8 @@
     <string name="wifi_saved_access_points_label">Saved networks</string>
     <!-- Tab title for showing subscribed WiFi access points. [CHAR LIMIT=20] -->
     <string name="wifi_subscribed_access_points_tab">Subscriptions</string>
-    <!-- Tab title for showing saved WiFi access points. -->
-    <string name="wifi_saved_access_points_tab">@string/wifi_access_points</string>
+    <!-- Tab title for showing saved other networks. -->
+    <string name="wifi_saved_other_networks_tab">Other networks</string>
     <!-- Wifi Advanced settings.  Used as a label under the shortcut icon that goes to Wifi advanced settings. [CHAR LIMIT=20] -->
     <string name="wifi_advanced_settings_label">IP settings</string>
     <!-- Error message for users that aren't allowed to see or modify WiFi advanced settings [CHAR LIMIT=NONE] -->
@@ -3730,7 +3730,7 @@
     <!-- Edit access point screen menu option to save the user's changes for this APN to the persistent storage -->
     <string name="menu_save">Save</string>
     <!-- Edit access point screen menu option to discard the user's changes for this APN -->
-    <string name="menu_cancel">Discard</string>
+    <string name="menu_cancel">Cancel</string>
     <!-- APN error dialog title -->
     <string name="error_title"></string>
     <!-- APN error dialog messages: -->
@@ -3765,10 +3765,13 @@
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset network settings [CHAR LIMIT=NONE] -->
     <string name="reset_network_desc">This will reset all network settings, including:\n\n<li>Wi\u2011Fi</li>\n<li>Mobile data</li>\n<li>Bluetooth</li>"</string>
 
-    <!-- SD card & phone storage settings screen, title for the checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=50] -->
+    <!-- Erase Euicc -->
+    <!-- Confirmation button of dialog to confirm resetting user's app preferences [CHAR LIMIT=NONE] -->
+    <string name="erase_euicc_data_button">Erase</string>
+    <!-- Erase Euicc dialog and SD card & phone storage settings screen, title for the menu option and checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=50] -->
     <string name="reset_esim_title">Erase downloaded SIMs</string>
-    <!-- SD card & phone storage settings screen, message for the checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=NONE] -->
-    <string name="reset_esim_desc">To download replacement SIMs, contact your carrier. This won\u2019t cancel any mobile service plans.</string>
+    <!-- Erase Euicc dialog and SD card & phone storage settings screen, message for the checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=NONE] -->
+    <string name="reset_esim_desc">This won’t cancel any mobile service plans. To download replacement SIMs, contact your carrier.</string>
 
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset network settings -->
     <string name="reset_network_button_text">Reset settings</string>
@@ -5767,7 +5770,7 @@
     <!-- Summary for the battery high usage tip, which presents battery may run out earlier [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">Battery may run out earlier than usual</string>
     <!-- Title for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_limited_temporarily_title">Preserving battery health</string>
+    <string name="battery_tip_limited_temporarily_title">Optimizing for battery health</string>
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_summary">Battery limited temporarily. Tap to learn more.</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
@@ -11455,6 +11458,19 @@
     <!-- Toast message shown when autofill_reset_developer_options has been performed. [CHAR_LIMIT=none] -->
     <string name="autofill_reset_developer_options_complete">Autofill developer options have been reset</string>
 
+    <!-- Developer options location category strings -->
+    <!-- Title for privacy category [CHAR LIMIT=30]-->
+    <string name="location_category">Location</string>
+    <!-- [CHAR LIMIT=130] Title for location indicator settings -->
+    <string name="location_indicator_settings_title">Status bar location indicator</string>
+    <!-- [CHAR LIMIT=130] Description for location indicator settings -->
+    <string name="location_indicator_settings_description">Show for all locations, including network and connectivity</string>
+
+    <!-- Location setting: preference title - enforce full raw GNSS satellite measurements [CHAR LIMIT=60] -->
+    <string name="enable_gnss_raw_meas_full_tracking">Force full GNSS measurements</string>
+    <!-- Location setting: preference summary - describes the behavior of forcing full raw GNSS satellite measurements [CHAR LIMIT=NONE] -->
+    <string name="enable_gnss_raw_meas_full_tracking_summary">Track all GNSS constellations and frequencies with no duty cycling</string>
+
     <!-- Name of setting for switching device theme [CHAR LIMIT=60] -->
     <string name="device_theme">Device theme</string>
     <!-- Name of default device theme [CHAR LIMIT=60] -->
@@ -11521,11 +11537,6 @@
     <string name="disabled_feature">Feature not available</string>
     <!-- Part of a message for an empty state screen. A user will see this message if they try to use a certain feature, but the feature was turned off so it won't slow down their phone. [CHAR LIMIT=NONE] -->
     <string name="disabled_feature_reason_slow_down_phone">This feature has been turned off because it slows down your phone</string>
-
-    <!-- UI debug setting: preference title - enforce full raw GNSS satellite measurements [CHAR LIMIT=60] -->
-    <string name="enable_gnss_raw_meas_full_tracking">Force full GNSS measurements</string>
-    <!-- UI debug setting: preference summary - describes the behavior of forcing full raw GNSS satellite measurements [CHAR LIMIT=NONE] -->
-    <string name="enable_gnss_raw_meas_full_tracking_summary">Track all GNSS constellations and frequencies with no duty cycling</string>
 
     <!-- apn names for carriers -->
     <string name="APN_NAME_CMNET">CMNET</string>
@@ -11724,7 +11735,7 @@
     <string name="pref_title_network_details">Network details</string>
 
     <!--  Warning text about the visibility of device name. [CHAR LIMIT=NONE] -->
-    <string name="about_phone_device_name_warning">Your device name is visible to apps on your phone. It may also be seen by other people when you connect to Bluetooth devices or set up a Wi-Fi hotspot.</string>
+    <string name="about_phone_device_name_warning">Your device name is visible to apps on your phone. It may also be seen by other people when you connect to Bluetooth devices, connect to a Wi-Fi network or set up a Wi-Fi hotspot.</string>
 
     <!-- Title for Connected device shortcut [CHAR LIMIT=30] -->
     <string name="devices_title">Devices</string>
@@ -12176,6 +12187,17 @@
     <!-- Body text of DSDS activation failure dialog. Users could toggle the selected SIM again or reboot to recover. [CHAR LIMIT=NONE] -->
     <string name="dsds_activation_failure_body_msg2">Try turning on the SIM again. If the problem continues, restart your device.</string>
 
+    <!--  Strings for SIM push notifications  -->
+    <!-- Category name of the notifications related to SIM setup. [CHAR LIMIT=NONE] -->
+    <string name="sim_setup_channel_id">Network activation</string>
+    <!--  The title of post DSDS reboot notification. The title includes carrier's name. [CHAR LIMIT=NONE] -->
+    <string name="post_dsds_reboot_notification_title_with_carrier"><xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> is active</string>
+    <!--  The body text of post DSDS reboot notification. [CHAR LIMIT=NONE] -->
+    <string name="post_dsds_reboot_notification_text">Tap to update SIM settings</string>
+
+    <!-- Button label of the removable sim card. [CHAR LIMIT=NONE] -->
+    <string name="sim_card_label">SIM card</string>
+
     <!-- Strings for deleting eUICC subscriptions dialog activity -->
     <!-- Title on confirmation dialog asking the user if they want to erase the downloaded SIM from the device. [CHAR_LIMIT=NONE] -->
     <string name="erase_sim_dialog_title">Erase this downloaded SIM?</string>
@@ -12587,12 +12609,35 @@
     <string name="calls_preference_title">Calls</string>
     <!-- Provider Model: SMS preference title -->
     <string name="sms_preference_title">SMS</string>
+    <!-- Provider Model: Preferred status in summary for Calls & SMS -->
+    <string name="calls_sms_preferred">preferred</string>
+    <!-- Provider Model: Calls Preferred status in summary for Calls & SMS -->
+    <string name="calls_sms_calls_preferred">calls preferred</string>
+    <!-- Provider Model: SMS Preferred status in summary for Calls & SMS -->
+    <string name="calls_sms_sms_preferred">SMS preferred</string>
+    <!-- Provider Model: Unavailable status in summary for Calls & SMS -->
+    <string name="calls_sms_unavailable">unavailable</string>
+    <!-- Provider Model: No SIM status in summary for Calls & SMS -->
+    <string name="calls_sms_no_sim">No SIM</string>
     <!-- Network & internet preferences title [CHAR LIMIT=NONE] -->
     <string name="network_and_internet_preferences_title">Preferences</string>
     <!-- Network & internet preferences summary [CHAR LIMIT=NONE] -->
     <string name="network_and_internet_preferences_summary">Connect to public networks</string>
     <!-- Search keywords for "Internet" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_internet">network connection, internet, wireless, data, wifi, wi-fi, wi fi, cellular, mobile, cell carrier, 4g, 3g, 2g, lte</string>
+    <!-- Label text to view airplane-safe networks. [CHAR LIMIT=40] -->
+    <string name="view_airplane_safe_networks">View airplane-safe networks</string>
+    <!-- Label text to turn off airplane mode. [CHAR LIMIT=40] -->
+    <string name="turn_off_airplane_mode">Turn off Airplane Mode</string>
+
+    <!-- Provider Model: Summary indicating that a SIM has an active mobile data connection [CHAR LIMIT=50] -->
+    <string name="mobile_data_connection_active">Active, <xliff:g id="network_data_rat" example="LTE">%1$s</xliff:g></string>
+    <!-- Provider Model: Summary indicating that a SIM has an active mobile data connection [CHAR LIMIT=50] -->
+    <string name="mobile_data_off_summary">Internet off</string>
+    <!-- Provider Model: Summary indicating that non-carrier network unavailable [CHAR LIMIT=50] -->
+    <string name="non_carrier_network_unavailable">Non\u2011carrier networks unavailable</string>
+    <!-- Provider Model: Summary indicating that non-carrier and carrier network unavailable [CHAR LIMIT=50] -->
+    <string name="all_network_unavailable">Networks unavailable</string>
 
     <!-- Summary for preference when Bedtime mode is on [CHAR LIMIT=NONE] -->
     <string name="aware_summary_when_bedtime_on">Unavailable because bedtime mode is on</string>
@@ -12602,4 +12647,17 @@
 
     <!-- Title for setting tile leading to Apps settings [CHAR LIMIT=40]-->
     <string name="apps_dashboard_title">Apps</string>
+
+    <!-- Bluetooth message permission alert for notification content [CHAR LIMIT=none] -->
+    <string name="bluetooth_message_access_notification_content">Untrusted device wants to access your messages. Tap for details.</string>
+    <!-- Bluetooth message permission alert for dialog title [CHAR LIMIT=none] -->
+    <string name="bluetooth_message_access_dialog_title">Allow access to messages?</string>
+    <!-- Bluetooth message permission alert for dialog content [CHAR LIMIT=none] -->
+    <string name="bluetooth_message_access_dialog_content">An untrusted Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your messages.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+    <!-- Bluetooth phonebook permission alert for notification content [CHAR LIMIT=none] -->
+    <string name="bluetooth_phonebook_access_notification_content">Untrusted device wants to access your contacts and call log. Tap for details.</string>
+    <!-- Bluetooth phonebook permission alert for dialog title [CHAR LIMIT=none] -->
+    <string name="bluetooth_phonebook_access_dialog_title">Allow access to contacts and call log?</string>
+    <!-- Bluetooth phonebook permission alert for dialog content [CHAR LIMIT=none] -->
+    <string name="bluetooth_phonebook_access_dialog_content">An untrusted Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your contacts and call log. This includes data about incoming and outgoing calls.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
 </resources>

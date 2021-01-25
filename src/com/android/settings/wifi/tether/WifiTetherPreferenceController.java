@@ -131,15 +131,8 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
                     public void onConnectedClientsChanged(List<WifiClient> clients) {
                         if (mPreference != null
                                 && mSoftApState == WifiManager.WIFI_AP_STATE_ENABLED) {
-                            String extendWifiSummary;
-                            if (mWifiManager.isExtendingWifi()) {
-                                extendWifiSummary = "Extending Wifi-Coverage: ";
-                            } else {
-                                extendWifiSummary = "";
-                            }
-
                             // Only show the number of clients when state is on
-                            mPreference.setSummary(extendWifiSummary + mContext.getResources().getQuantityString(
+                            mPreference.setSummary(mContext.getResources().getQuantityString(
                                     R.plurals.wifi_tether_connected_summary, clients.size(),
                                     clients.size()));
                         }
