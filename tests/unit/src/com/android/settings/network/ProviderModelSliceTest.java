@@ -57,6 +57,7 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -356,6 +357,7 @@ public class ProviderModelSliceTest {
         }
     }
 
+    @Ignore
     @Test
     public void doCarrierNetworkAction_toggleActionSetDataEnabled_setCarrierNetworkEnabledTrue() {
         mMockProviderModelSlice.doCarrierNetworkAction(true /* isToggleAction */,
@@ -364,6 +366,7 @@ public class ProviderModelSliceTest {
         verify(mMockNetworkProviderWorker).setCarrierNetworkEnabled(true);
     }
 
+    @Ignore
     @Test
     public void doCarrierNetworkAction_toggleActionSetDataDisabled_setCarrierNetworkEnabledFalse() {
         mMockProviderModelSlice.doCarrierNetworkAction(true /* isToggleAction */,
@@ -372,6 +375,7 @@ public class ProviderModelSliceTest {
         verify(mMockNetworkProviderWorker).setCarrierNetworkEnabled(false);
     }
 
+    @Ignore
     @Test
     public void doCarrierNetworkAction_primaryActionAndDataEnabled_connectCarrierNetwork() {
         mMockProviderModelSlice.doCarrierNetworkAction(false /* isToggleAction */,
