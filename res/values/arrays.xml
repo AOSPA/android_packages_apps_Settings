@@ -223,6 +223,10 @@
     <!-- Security types for wireless tether -->
     <string-array name="wifi_tether_security">
         <!-- Do not translate. -->
+        <item>@string/wifi_security_sae</item>
+        <!-- Do not translate. -->
+        <item>@string/wifi_security_psk_sae</item>
+        <!-- Do not translate. -->
         <item>@string/wifi_security_wpa2</item>
         <!-- Do not translate. -->
         <item>@string/wifi_security_none</item>
@@ -230,6 +234,10 @@
 
     <!-- Values for security type for wireless tether -->
     <string-array name="wifi_tether_security_values" translatable="false">
+        <!-- Do not translate. -->
+        <item>3</item>
+        <!-- Do not translate. -->
+        <item>2</item>
         <!-- Do not translate. -->
         <item>1</item>
         <!-- Do not translate. -->
@@ -1582,6 +1590,23 @@
         <item>4</item>
         <item>8</item>
         <item>12</item>
+    </string-array>
+
+    <!-- Array of titles list for notification listener notification types. [DO NOT TRANSLATE] -->
+    <string-array name="notif_types_titles" translatable="false">
+        <item>@string/notif_type_ongoing</item>
+        <item>@string/notif_type_conversation</item>
+        <item>@string/notif_type_alerting</item>
+        <item>@string/notif_type_silent</item>
+    </string-array>
+
+    <!-- Values of list for notification listener notification types. Values need to match
+    android.service.notification.NotificationListenerService. [DO NOT TRANSLATE] -->
+    <string-array name="notif_types_values" translatable="false">
+        <item>8</item>
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
     </string-array>
     <!--String arrays for showing user PLMN list -->
     <string-array name="uplmn_prefer_network_mode_td_choices">

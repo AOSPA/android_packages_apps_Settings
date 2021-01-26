@@ -32,7 +32,7 @@ import android.graphics.drawable.Drawable;
 import androidx.preference.PreferenceViewHolder;
 import com.android.settingslib.location.InjectedSetting;
 import android.util.Log;
-import com.android.settingslib.widget.apppreference.AppPreference;
+import com.android.settingslib.widget.AppPreference;
 import com.android.settings.widget.RestrictedAppPreference;
 import dalvik.system.DexClassLoader;
 import java.lang.ClassNotFoundException;
