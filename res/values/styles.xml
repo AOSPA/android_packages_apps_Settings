@@ -787,4 +787,11 @@
            parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
     </style>
+
+    <style name="GroupOptionsButton" parent="android:Widget.DeviceDefault.Button">
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
+    </style>
 </resources>
