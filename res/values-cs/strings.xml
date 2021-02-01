@@ -391,8 +391,9 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Při použití odemknutí obličejem v aplikacích vždy vyžadovat potvrzení"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Smazat data obličeje"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Nastavit odemknutí obličejem"</string>
-    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"Pomocí odemknutí obličejem můžete odemykat zařízení, přihlašovat se do aplikací a potvrzovat platby.\n\nPřipomínáme:\nTelefon můžete odemknout pohledem, i když zrovna nechcete.\n\nTelefon může odemknout i někdo jiný, když ho namíří na váš obličej.\n\nTelefon může odemknout i osoba, která je vám hodně podobná, například vaše dvojče."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Pomocí odemknutí obličejem můžete odemykat zařízení, přihlašovat se do aplikací a potvrzovat platby.\n\nPřipomínáme:\nTelefon můžete odemknout pohledem, i když zrovna nechcete.\n\nTelefon může odemknout i někdo jiný, když ho namíří na váš obličej (i když budete mít zavřené oči).\n\nTelefon by mohla odemknout i osoba, která je vám hodně podobná, například vaše dvojče."</string>
+    <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"Pomocí funkce odemknutí obličejem můžete odemykat zařízení, přihlašovat se k aplikacím a potvrzovat platby."</string>
+    <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"Důležité poznámky:\nTelefon můžete odemknout pohledem, i když zrovna nechcete.\n\nTelefon může odemknout i někdo jiný, když ho namíří na váš obličej.\n\nTelefon bude moci odemknout někdo, kdo je vám hodně podobný, například vaše identické dvojče."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"Důležité poznámky:\nTelefon můžete odemknout pohledem, i když zrovna nechcete.\n\nTelefon může odemknout někdo jiný, když ho namíří na váš obličej (i když budete mít zavřené oči).\n\nTelefon bude moci odemknout někdo, kdo je vám hodně podobný, například vaše identické dvojče."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Smazat data o obličeji?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Údaje o obličeji používané k odemknutí obličejem budou trvale a bezpečně smazány. Po odstranění budete k odemknutí telefonu, přihlášení do aplikace nebo potvrzení platby muset zadat PIN, gesto nebo heslo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Odemykejte telefon pomocí obličeje"</string>
@@ -2517,6 +2518,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet byl využíván víc než obvykle"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Zařízení bylo využíváno víc než obvykle"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterie se možná vybije dříve než obvykle"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Baterie dočasně omezena"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Pomáhá udržet stav baterie. Klepnutím zobrazíte další informace."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefon byl využíván víc než obvykle. Baterie se možná vybije dříve, než bylo očekáváno.\n\nAplikace, které nejvíce spotřebovávají baterii:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablet byl využíván víc než obvykle. Baterie se možná vybije dříve, než bylo očekáváno.\n\nAplikace, které nejvíce spotřebovávají baterii:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Zařízení bylo využíváno víc než obvykle. Baterie se možná vybije dříve, než bylo očekáváno.\n\nAplikace, které nejvíce spotřebovávají baterii:"</string>
@@ -3887,6 +3890,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"V plánu <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g> jsou blokovány příchozí hovory. Nastavení můžete upravit, aby se s vámi mohli spojit kamarádi, členové rodiny nebo jiné vybrané kontakty."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Kontakty označené hvězdičkou"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Nikdo}=1{{contact_1}}=2{{contact_1} a {contact_2}}=3{{contact_1}, {contact_2} a {contact_3}}few{{contact_1}, {contact_2} a # další}many{{contact_1}, {contact_2} a # dalšího}other{{contact_1}, {contact_2} a # dalších}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Bez jména)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Zprávy"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"zprávy"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Zprávy"</string>
@@ -3990,8 +3994,9 @@
     <string name="switch_on_text" msgid="5664542327776075105">"Zapnuto"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Vypnuto"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Připnutí aplikace"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"Připnutí aplikace vám umožňuje nechat aktuální obrazovku zobrazenou, dokud ji neodepnete. Tuto funkci lze použít, například když chcete nechat důvěryhodného přítele hrát konkrétní hru. \n\nKdyž je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nPoužití připnutí aplikace: 	\n1.	Zapněte připnutí aplikace 	\n2.	Otevřete Přehled 	\n3.	Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Připnutí aplikace vám umožňuje nechat aktuální obrazovku zobrazenou, dokud ji neodepnete. Tuto funkci lze použít, například když chcete nechat důvěryhodného přítele hrát konkrétní hru. \n\nKdyž je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nChcete-li s někým bezpečně sdílet zařízení, zkuste namísto toho použít režim hosta. \n\nPoužití připnutí aplikace: 	\n1.	Zapněte připnutí aplikace 	\n2.	Otevřete Přehled 	\n3.	Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"Připnutí aplikace vám umožňuje nechat aktuální obrazovku zobrazenou, dokud ji neodepnete. Tuto funkci lze použít, například když chcete nechat důvěryhodného přítele hrát konkrétní hru."</string>
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Když je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nPoužití připnutí aplikace: 	\n1.	Zapněte připnutí aplikace 	\n2.	Otevřete Přehled 	\n3.	Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Když je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nChcete-li s někým bezpečně sdílet zařízení, zkuste místo toho použít režim hosta. \n\nPoužití připnutí aplikace: 	\n1.	Zapněte připnutí aplikace 	\n2.	Otevřete Přehled 	\n3.	Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Když je aplikace připnutá: \n\n• Může mít přístup k soukromým datům \n (například kontaktům a obsahu e-mailů) \n• Připnutá aplikace může otevírat další aplikace \n\nPřipnutí aplikace používejte pouze s lidmi, kterým důvěřujete."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Před uvolněním požádat o bezpečnostní gesto"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Před uvolněním požádat o PIN"</string>
@@ -4409,6 +4414,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Využití mobilních dat"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Využití dat aplikací"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Využití dat přes Wi-Fi"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Využití dat mimo operátora"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Využití dat přes ethernet"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -4429,6 +4435,7 @@
       <item quantity="one">1 omezení</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Operátor může data počítat jinak než zařízení"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Vyloučí data využitá sítěmi operátora"</string>
     <string name="data_used_template" msgid="8229342096562327646">"Využito <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Nastavit upozornění na data"</string>
     <string name="data_warning" msgid="2925054658166062884">"Upozornění na data"</string>
@@ -4650,10 +4657,15 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Kontrola zařízení klepnutím"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Chcete-li zobrazit čas, oznámení a další informace, klepněte na obrazovku."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Nouzové SOS"</string>
+    <string name="emergency_gesture_switchbar_title" msgid="7494629420708117232">"Použití nouzového SOS"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Spravováno aplikací <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Nouzové SOS akce spustíte, když pětkrát za sebou rychle stisknete vypínač."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"Zvuk upozornění"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Upozornění před zahájením akce"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Níže uvedené akce spustíte, když pětkrát za sebou rychle stisknete vypínač"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Přehrát upozornění na odpočet"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="9215504009890604179">"Přehrát hlasitý zvuk před zavoláním pomoci"</string>
+    <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"Zavolat pomoc"</string>
+    <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"Číslo k zavolání pomoci"</string>
+    <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>. Klepnutím změníte"</string>
+    <string name="emergency_gesture_number_override_notes" msgid="7270300987756837957">"Pokud nezadáte číslo tísňového volání:\n • Zařízení bude muset být odemčené, abyste mohli použít nouzové SOS\n • Je možné, že hovor nikdo nepřijme"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Sejmout otisk prstu pro zobrazení oznámení"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Sejmout otisk prstu"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Chcete-li zkontrolovat oznámení, přejeďte prstem dolů po snímači otisků prstů na zadní straně telefonu."</string>
@@ -5121,6 +5133,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Tísňová volání"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Tísňová volání pomocí funkce volání přes Wi-Fi váš operátor nepodporuje.\nZařízení se automaticky přepne na mobilní síť, aby mohlo provést tísňové volání.\nTísňová volání lze uskutečnit jen v oblastech s mobilním signálem."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Používat k volání připojení Wi-Fi s cílem zvýšit kvalitu"</string>
+    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"Volání napříč SIM kartami"</string>
+    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"Povolit pro tuto SIM kartu hovory a SMS z jiné SIM karty."</string>
+    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"volání napříč SIM kartami"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Příchozí zpráva MMS"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Zprávu MMS se nepodařilo odeslat"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Klepnutím povolíte zprávy MMS u operátora <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> při vypnutých mobilních datech"</string>
@@ -5189,8 +5204,14 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"letadlo, bezpečné v letadle"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Volání a SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Volání přes Wi‑Fi"</string>
-    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Uskutečňujte a přijímejte hovory přes sítě nespravované operátory, např. přes Wi-Fi"</string>
-    <string name="calls_sms_footnote" msgid="148659606229186084">"Volání přes Wi-Fi umožňuje uskutečňovat a přijímat hovory ze sítí nespravované operátory, jako jsou některé sítě Wi-Fi.\n\nVolání napříč SIM kartami také umožňuje uskutečňovat a přijímat hovory s využitím mobilních dat z jiné SIM karty."</string>
+    <string name="calls_sms_wfc_summary" msgid="4930471357980272294">"Uskutečňujte a přijímejte hovory přes sítě nespravované operátory, např. přes Wi-Fi"</string>
+    <string name="calls_sms_footnote" msgid="7002461875954024216">"Volání přes Wi-Fi umožňuje uskutečňovat a přijímat hovory ze sítí nespravované operátory, jako jsou některé sítě Wi-Fi."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Volání"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Předvolby"</string>
+    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Připojovat k veřejným sítím"</string>
+    <string name="keywords_internet" msgid="7674082764898690310">"připojení k síti, internet, bezdrátové, data, wifi, wi-fi, wi fi, mobilní síť, mobilní operátor, 4g, 3g, 2g, lte"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupné, protože je zapnutý režim večerky"</string>
+    <string name="reset_importance_completed" msgid="3595536767426097205">"Reset důležitosti oznámení byl dokončen."</string>
+    <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikace"</string>
 </resources>

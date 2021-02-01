@@ -54,6 +54,71 @@
         settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>
 
     <PreferenceCategory
+        android:key="group_connected_device_list"
+        settings:controller="com.android.settings.connecteddevice.GroupConnectedBluetoothDevicesController"
+        android:layout="@layout/preference_category_no_label"/>
+
+    <com.android.settings.widget.GroupPreferenceCategory
+         android:key="group_one"
+         android:layout="@layout/preference_category_no_label"
+         settings:allowDividerAbove="true"
+         settings:allowDividerBelow="true"/>
+
+     <com.android.settings.widget.GroupPreferenceCategory
+         android:key="group_two"
+         android:layout="@layout/preference_category_no_label"
+         settings:allowDividerAbove="true"
+         settings:allowDividerBelow="true"/>
+
+     <com.android.settings.widget.GroupPreferenceCategory
+         android:key="group_three"
+         android:layout="@layout/preference_category_no_label"
+         settings:allowDividerAbove="true"
+         settings:allowDividerBelow="true"/>
+
+     <com.android.settings.widget.GroupPreferenceCategory
+         android:key="group_four"
+         android:layout="@layout/preference_category_no_label"
+         settings:allowDividerAbove="true"
+         settings:allowDividerBelow="true"/>
+
+     <com.android.settings.widget.GroupPreferenceCategory
+         android:key="group_five"
+         android:layout="@layout/preference_category_no_label"
+         settings:allowDividerAbove="true"
+         settings:allowDividerBelow="true"/>
+
+    <com.android.settings.widget.GroupPreferenceCategory
+         android:key="group_six"
+         android:layout="@layout/preference_category_no_label"
+         settings:allowDividerAbove="true"
+         settings:allowDividerBelow="true"/>
+
+    <com.android.settings.widget.GroupPreferenceCategory
+         android:key="group_seven"
+         android:layout="@layout/preference_category_no_label"
+         settings:allowDividerAbove="true"
+         settings:allowDividerBelow="true"/>
+
+    <com.android.settings.widget.GroupPreferenceCategory
+         android:key="group_eight"
+         android:layout="@layout/preference_category_no_label"
+         settings:allowDividerAbove="true"
+         settings:allowDividerBelow="true"/>
+
+    <com.android.settings.widget.GroupPreferenceCategory
+         android:key="group_nine"
+         android:layout="@layout/preference_category_no_label"
+         settings:allowDividerAbove="true"
+         settings:allowDividerBelow="true"/>
+
+    <com.android.settings.widget.GroupPreferenceCategory
+         android:key="group_remaining"
+         android:layout="@layout/preference_category_no_label"
+         settings:allowDividerAbove="true"
+         settings:allowDividerBelow="true"/>
+
+    <PreferenceCategory
         android:key="previously_connected_devices"
         android:title="@string/connected_device_previously_connected_title"
         settings:controller="com.android.settings.connecteddevice.PreviouslyConnectedDevicePreferenceController">
@@ -65,6 +130,20 @@
             android:order="10"
             settings:searchable="false"
             android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="group_previously_connected_devices"
+        android:title="@string/group_previously_connected_screen_title"
+        settings:controller="com.android.settings.connecteddevice.GroupPreviouslyConnectedDevicePreferenceController">
+
+        <Preference
+            android:key="group_previously_connected_devices_see_all"
+            android:title="@string/previous_connected_see_all"
+            android:icon="@drawable/ic_chevron_right_24dp"
+            android:order="100"
+            settings:searchable="false"
+            android:fragment="com.android.settings.connecteddevice.GroupPreviouslyConnectedDeviceDashboardFragment"/>
     </PreferenceCategory>
 
     <Preference

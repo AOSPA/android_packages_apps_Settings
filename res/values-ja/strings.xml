@@ -385,8 +385,9 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"アプリで顔認証を使用する場合、常に確認手順を要求します"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"顔認証データを削除"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"顔認証を設定"</string>
-    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"顔認証を使用して、デバイスのロック解除、アプリへのログイン、お支払いの承認を行えます。\n\n注:\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\nスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人であればスマートフォンのロックを解除できる可能性があります。"</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"顔認証を使用して、デバイスのロック解除、アプリへのログイン、お支払いの承認ができます。\n\n注:\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\n目を閉じているときでもスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人であればスマートフォンのロックを解除できる可能性があります。"</string>
+    <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"顔認証を使用して、デバイスのロック解除、アプリへのログイン、お支払いの承認を行えます。"</string>
+    <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"注:\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\nスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人であればスマートフォンのロックを解除できる可能性があります。"</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"注:\nスマートフォンに無意識に顔を向けても、ロックが解除されることがあります。\n\n目を閉じているときでもスマートフォンを顔に近づけられた場合、他のユーザーによってスマートフォンのロックが解除されることがあります。\n\n双子など、あなたによく似た人であればスマートフォンのロックを解除できる可能性があります。"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"顔認証データを削除しますか？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"顔認証によって使用された顔認証データは安全かつ完全に削除されます。削除後に、スマートフォンのロック解除、アプリへのログイン、お支払いの承認を行うには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"顔認証を使用して、スマートフォンのロックを解除します"</string>
@@ -2455,6 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"タブレットの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"デバイスの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"電池が通常より早くなくなる可能性があります"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"電池の使用が一時的に制限されています"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"電池の状態維持に役立ちます。タップして詳細をご確認ください。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"スマートフォンの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"タブレットの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"デバイスの電池使用量が通常より多いため、予想より早く電池がなくなる可能性があります。\n\n電池を多く使用しているアプリ:"</string>
@@ -2692,7 +2695,7 @@
     <string name="tts_reset" msgid="9047681050813970031">"リセット"</string>
     <string name="tts_play" msgid="2945513377250757221">"再生"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
-    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"アダプティブ接続"</string>
+    <string name="adaptive_connectivity_title" msgid="7464959640138428192">"接続の自動調整"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ネットワーク接続を自動的に管理することで、電池が長持ちし、デバイスのパフォーマンスが改善します"</string>
     <string name="credentials_title" msgid="7535942196886123656">"認証情報ストレージ"</string>
     <string name="credentials_install" msgid="3933218407598415827">"証明書のインストール"</string>
@@ -3783,6 +3786,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」の間、着信がブロックされます。設定を調整することで、友だち、家族などの連絡先からの着信のブロックを解除できます。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"スター付きの連絡先"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{なし}=1{{contact_1}}=2{{contact_1} さんと {contact_2} さん}=3{{contact_1} さん、{contact_2} さん、{contact_3} さん}other{{contact_1} さん、{contact_2} さん、他 # 人}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"（名前なし）"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"メッセージ"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"メッセージ"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"メッセージ"</string>
@@ -3882,8 +3886,9 @@
     <string name="switch_on_text" msgid="5664542327776075105">"ON"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"OFF"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"アプリ固定"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"アプリ固定機能を使用すると、固定を解除するまで現在のアプリを表示したままにすることができます。たとえば、この機能を使用して、信頼できる友だちが特定のゲームをプレイすることを許可できます。\n\nアプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスされたりする可能性があります。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	[概要] を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"アプリ固定機能を使用すると、固定を解除するまで現在のアプリを表示したままにすることができます。たとえば、この機能を使用して、信頼できる友だちが特定のゲームをプレイすることを許可できます。\n\nアプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスされたりする可能性があります。\n\nデバイスを他のユーザーと安全に共有するには、代わりにゲストユーザーを使用してみてください。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	[概要] を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"アプリ固定機能を使用すると、固定を解除するまで現在のアプリを表示したままにすることができます。たとえば、この機能を使用して、信頼できる友だちに特定のゲームをプレイすることを許可できます。"</string>
+    <string name="screen_pinning_description" msgid="7289730998890213708">"アプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスしたりする可能性があります。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	[概要] を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"アプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスしたりする可能性があります。\n\nデバイスを他のユーザーと安全に共有するには、代わりにゲストユーザーを使用してみてください。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	[概要] を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"アプリが固定されている場合: \n\n•	 個人データにアクセスされる可能性があります（連絡先、メールの内容など） \n•	 固定されたアプリが他のアプリを開く可能性があります \n\nアプリ固定機能は、信頼できる人とのみ使用してください。\n"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"画面固定の解除前にロック解除パターンを要求"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"画面固定の解除前にPINを要求"</string>
@@ -4277,6 +4282,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"モバイルデータ使用量"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"アプリのデータ使用量"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Wi-Fi データ使用量"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"携帯通信会社以外のデータ使用量"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"イーサネット データ使用量"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"イーサネット"</string>
@@ -4295,6 +4301,7 @@
       <item quantity="one">1 個の制限</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"デバイスで記録されるデータ使用量と携帯通信会社のデータ使用量は異なる場合があります"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"携帯通信会社のネットワークで使用したデータ使用量は除外しています"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> 使用"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"データ使用量を警告"</string>
     <string name="data_warning" msgid="2925054658166062884">"警告するデータ使用量"</string>
@@ -4504,10 +4511,15 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"デバイスをタップしてチェックする"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"時刻、通知などの情報を確認するには、画面をタップします。"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"SOS 緊急通報"</string>
+    <string name="emergency_gesture_switchbar_title" msgid="7494629420708117232">"SOS 緊急通報の使用"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g>によって管理されています"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"電源ボタンを 5 回すばやく押すと、SOS 緊急アクションが実行されます。"</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"警告音"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"アクション実行前のアラート"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"電源ボタンを 5 回以上すばやく押すと、下記の緊急時対応が開始されます"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"カウントダウン アラームを鳴らす"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="9215504009890604179">"支援を求める前に大きな音が鳴ります"</string>
+    <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"支援を求める"</string>
+    <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"緊急通報用の電話番号"</string>
+    <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>。タップで変更"</string>
+    <string name="emergency_gesture_number_override_notes" msgid="7270300987756837957">"緊急通報番号以外の番号を入力した場合:\n • SOS 緊急通報を使用するには、デバイスのロックを解除する必要があります\n • 電話をかけても応答がない可能性があります"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"指紋センサーをスワイプして通知を表示"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"指紋センサーのスワイプ"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"スマートフォンの背面にある指紋認証センサーを下にスワイプして、通知を確認できます。"</string>
@@ -4955,6 +4967,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"緊急通報"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"お使いの携帯通信会社は、Wi‑Fi 通話による緊急通報には対応していません。\n緊急通報できるようデバイスはモバイル ネットワークに自動的に切り替わります。\n緊急通報が可能なのは、通信エリア内の地域のみです。"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"通話に Wi-Fi を使用して品質を改善する"</string>
+    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"Cross-SIM 通話"</string>
+    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"この SIM での通話と SMS を別の SIM に許可する"</string>
+    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"Cross-SIM 通話"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"MMS メッセージの受信"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"MMS メッセージを送信できません"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"モバイルデータが OFF のときに <xliff:g id="OPERATOR_NAME">%1$s</xliff:g> で MMS メッセージを送受信できるようにするには、タップします"</string>
@@ -5023,8 +5038,14 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"機内、機内で利用できる"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"通話と SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Wi‑Fi 通話"</string>
-    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"携帯通信会社以外のネットワーク（Wi-Fi など）を利用して通話の発信と着信を行う"</string>
-    <string name="calls_sms_footnote" msgid="148659606229186084">"Wi-Fi 通話では、携帯通信会社以外のネットワーク（一部の Wi-Fi ネットワークなど）を利用して通話の発信と着信を行えます。\n\nCross-SIM 通話では、SIM のモバイルデータを利用して別の SIM から通話の発信と着信を行えます。"</string>
+    <string name="calls_sms_wfc_summary" msgid="4930471357980272294">"携帯通信会社以外のネットワーク（Wi-Fi など）を利用して通話の発信と着信を行います"</string>
+    <string name="calls_sms_footnote" msgid="7002461875954024216">"Wi-Fi 通話では、携帯通信会社以外のネットワーク（一部の Wi-Fi ネットワークなど）を利用して通話の発信と着信を行えます。"</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"通話"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"SMS"</string>
+    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"設定"</string>
+    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"パブリック ネットワークに接続する"</string>
+    <string name="keywords_internet" msgid="7674082764898690310">"ネットワーク接続, インターネット, ワイヤレス, データ, wifi, Wi-Fi, ワイファイ, 携帯, モバイル, 携帯通信会社, 4G, 3G, 2G, LTE"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"おやすみ時間モードが ON のため利用できません"</string>
+    <string name="reset_importance_completed" msgid="3595536767426097205">"通知の重要度をリセットしました。"</string>
+    <string name="apps_dashboard_title" msgid="3269953499954393706">"アプリ"</string>
 </resources>

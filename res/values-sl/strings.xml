@@ -391,8 +391,9 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Pri odklepanju z obrazom v aplikacijah vedno zahtevaj potrditev"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Izbriši obraz"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Nastavite odklepanje z obrazom"</string>
-    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"Odklepanje z obrazom omogoča, da odklenete napravo, se prijavite v aplikacije in potrdite plačila.\n\nUpoštevajte:\nČe pogledate proti telefonu, ga boste morda nenamerno odklenili.\n\nVaš telefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Odklepanje z obrazom omogoča, da odklenete napravo, se prijavite v aplikacije in potrdite plačila.\n\nUpoštevajte:\ntelefon se lahko nenamerno odklene, če ga pogledate.\n\nTelefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom – celo kadar imate oči zaprte.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
+    <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"Odklepanje z obrazom uporabite za odklepanje naprave, prijavo v aplikacije in potrjevanje plačil."</string>
+    <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"Upoštevajte:\nČe pogledate proti telefonu, ga boste morda nenamerno odklenili.\n\nVaš telefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"Upoštevajte:\nČe pogledate proti telefonu, ga boste morda nenamerno odklenili.\n\nTelefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom – celo kadar imate oči zaprte.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Želite izbrisati podatke o obrazu?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Podatki o obrazu, ki se uporabljajo za odklepanje z obrazom, bodo trajno in varno izbrisani. Po odstranitvi boste za odklepanje telefona, prijavo v aplikacije in potrjevanje plačil potrebovali kodo PIN, vzorec ali geslo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Za odklepanje telefona uporabite obraz"</string>
@@ -2517,6 +2518,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablični računalnik uporabljate več kot običajno"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Napravo uporabljate več kot običajno"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterija se bo morda izpraznila prej kot običajno"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"Baterija je začasno omejena"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"Pomaga ohraniti zmogljivost baterije. Za več informacij se dotaknite."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefon ste uporabljali več kot običajno. Baterija se bo morda izpraznila prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije baterije:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablični računalnik ste uporabljali več kot običajno. Baterija se bo morda izpraznila prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije baterije:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Napravo ste uporabljali več kot običajno. Baterija se bo morda izpraznila prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije baterije:"</string>
@@ -2675,7 +2678,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"Razčlenitev od zadnje napolnjenosti akumulatorja"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Zadnja polna napolnjenost"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Polno napolnjena naprava deluje približno"</string>
-    <string name="battery_footer_summary" msgid="9125397752380281832">"Podatki o porabi baterije so približni in se lahko spremenijo glede na uporabo naprave"</string>
+    <string name="battery_footer_summary" msgid="9125397752380281832">"Podatki o porabi baterije so približni in se lahko spremenijo glede na uporabo naprave."</string>
     <string name="battery_detail_foreground" msgid="3312280147931093967">"Med aktivno uporabo"</string>
     <string name="battery_detail_background" msgid="3333915023706228000">"Med izvajanjem v ozadju"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Poraba baterije"</string>
@@ -3887,6 +3890,7 @@
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Dohodni klici za »<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>« so blokirani. Nastavitve lahko prilagodite tako, da boste dosegljivi za prijatelje, družinske člane ali druge stike."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Stiki z zvezdico"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Noben}=1{{contact_1}}=2{{contact_1} in {contact_2}}=3{{contact_1}, {contact_2} in {contact_3}}one{{contact_1}, {contact_2} in še # drug}two{{contact_1}, {contact_2} in še # druga}few{{contact_1}, {contact_2} in še # drugi}other{{contact_1}, {contact_2} in še # drugih}}"</string>
+    <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(Ni imena)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Sporočila"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"sporočila"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Sporočila"</string>
@@ -3990,8 +3994,9 @@
     <string name="switch_on_text" msgid="5664542327776075105">"Vklopljeno"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Izklopljeno"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Pripenjanje aplikacije"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"Pripenjanje aplikacije omogoča, da trenutna aplikacija ostane vidna, dokler je ne odpnete. To funkcijo lahko na primer uporabite, če želite prijatelju, ki mu zaupate, dovoliti igranje določene igre. \n\nKo je aplikacija pripeta, lahko ta odpre druge aplikacije, prav tako pa so lahko dostopni osebni podatki. \n\nČe želite uporabiti pripenjanje aplikacije: 	\n1.	Vklopite pripenjanje aplikacije. 	\n2.	Odprite »Pregled«. 	\n3.	Dotaknite se ikone aplikacije na vrhu zaslona, nato pa se dotaknite »Pripni«."</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Pripenjanje aplikacije omogoča, da trenutna aplikacija ostane vidna, dokler je ne odpnete. To funkcijo lahko na primer uporabite, če želite prijatelju, ki mu zaupate, dovoliti igranje določene igre. \n\nKo je aplikacija pripeta, lahko ta odpre druge aplikacije, prav tako pa so lahko dostopni osebni podatki. \n\nČe želite varno deliti svojo napravo z drugimi, namesto tega uporabite gosta. \n\nČe želite uporabiti pripenjanje aplikacije: 	\n1.	Vklopite pripenjanje aplikacije. 	\n2.	Odprite »Pregled«. 	\n3.	Dotaknite se ikone aplikacije na vrhu zaslona, nato pa se dotaknite »Pripni«."</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"Pripenjanje aplikacije omogoča, da trenutna aplikacija ostane vidna, dokler je ne odpnete. To funkcijo lahko na primer uporabite, če želite prijatelju, ki mu zaupate, dovoliti igranje določene igre."</string>
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Ko je aplikacija pripeta, lahko ta odpre druge aplikacije, prav tako pa so lahko dostopni osebni podatki. \n\nČe želite uporabiti pripenjanje aplikacije, storite to: 	\n1.	Vklopite pripenjanje aplikacije. 	\n2.	Odprite »Pregled«. 	\n3.	Dotaknite se ikone aplikacije na vrhu zaslona, nato pa se dotaknite »Pripni«."</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Ko je aplikacija pripeta, lahko ta odpre druge aplikacije, prav tako pa so lahko dostopni osebni podatki. \n\nČe želite varno deliti svojo napravo z drugimi, namesto tega uporabite gosta. \n\nČe želite uporabiti pripenjanje aplikacije, storite to: 	\n1.	Vklopite pripenjanje aplikacije. 	\n2.	Odprite »Pregled«. 	\n3.	Dotaknite se ikone aplikacije na vrhu zaslona, nato pa se dotaknite »Pripni«."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Ko je aplikacija pripeta: \n\n• Dostopni so lahko osebni podatki \n (na primer stiki in vsebina e-poštnih sporočil). \n• Pripeta aplikacija lahko odpre druge aplikacije. \n\nPripenjanje aplikacij uporabite le za osebe, ki jim zaupate."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Pred odpenjanjem vprašaj za vzorec za odklepanje"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Zahtevaj PIN pred odpenjanjem"</string>
@@ -4409,6 +4414,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Prenos mobilnih podatkov"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Prenos podatkov aplikacij"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Preneseni podatki (Wi-Fi)"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Prenesena količina podatkov zunaj omrežij operaterjev"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Preneseni podatki (ethernet)"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -4429,6 +4435,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> omejitev</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Operaterjeve meritve prenosa podatkov so morda drugačne kot v napravi"</string>
+    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"Ne vključuje podatkov, prenesenih v omrežjih operaterjev"</string>
     <string name="data_used_template" msgid="8229342096562327646">"Preneseno: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Nastavi opozorilo za prenos podatkov"</string>
     <string name="data_warning" msgid="2925054658166062884">"Opozorilo za prenos podatkov"</string>
@@ -4650,10 +4657,15 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Dotik za preverjanje naprave"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Če želite preveriti uro, obvestila in druge informacije, se dotaknite zaslona."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Nujni primer"</string>
+    <string name="emergency_gesture_switchbar_title" msgid="7494629420708117232">"Klicanje na pomoč v nujnem primeru"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Upravlja <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="emergency_gesture_screen_summary" msgid="1412270517879718683">"Zaženite dejanja za nujne primere tako, da petkrat hitro pritisnete gumb za vklop."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="9106060038248836408">"Opozorilni zvok"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="7086534195960716320">"Sproži zvočno opozorilo pred ukrepanjem"</string>
+    <string name="emergency_gesture_screen_summary" msgid="458991229689082120">"Spodnja dejanja zaženete tako, da najmanj petkrat hitro pritisnete gumb za vklop."</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Predvajanje alarma z odštevanjem"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="9215504009890604179">"Predvajanje glasnega zvoka pred obveščanjem, da potrebujete pomoč"</string>
+    <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"Klic za pomoč"</string>
+    <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"Številka za klic za pomoč"</string>
+    <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>. Dotaknite se, da spremenite"</string>
+    <string name="emergency_gesture_number_override_notes" msgid="7270300987756837957">"Če vnesete številko, ki ni za klic v sili:\n • naprava mora biti odklenjena, če želite uporabiti klic za pomoč v nujnem primeru;\n • na vaš klic morda nihče ne bo odgovoril."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Poteg s prstom po tipalu prstnih odtisov za prikaz obvestil"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Poteg po prstnem tipalu"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Če želite preveriti obvestila, povlecite navzdol po tipalu prstnih odtisov na hrbtni strani telefona."</string>
@@ -5121,6 +5133,9 @@
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Klici v sili"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Vaš operater ne podpira klicev v sili, opravljenih s funkcijo Klicanje prek Wi-Fi-ja.\nNaprava samodejno preklopi na mobilno omrežje, da opravi klic v sili.\nKlici v sili so mogoči samo na območjih, ki so pokrita z mobilnim signalom."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Uporabljajte omrežje Wi‑Fi za izboljšanje kakovosti klicev"</string>
+    <string name="cross_sim_calling_settings_title" msgid="1179406214047299816">"Klicanje ne glede na kartico SIM"</string>
+    <string name="cross_sim_calling_setting_summary" msgid="7960473304104701519">"Dovoli klice prek druge kartice SIM in sporočila SMS prek te kartice SIM."</string>
+    <string name="keywords_cross_sim_calling" msgid="1702104511020507778">"klicanje, klici, kartica SIM, ne glede na"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"Dohodno sporočilo MMS"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"Sporočila MMS ni mogoče poslati"</string>
     <string name="enable_mms_notification_summary" msgid="6432752438276672500">"Dotaknite se za uporabo sporočil MMS v omrežju <xliff:g id="OPERATOR_NAME">%1$s</xliff:g>, ko je prenos podatkov v mobilnem omrežju izklopljen"</string>
@@ -5189,8 +5204,14 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"letalo, varno za uporabo v letalu"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Klici in sporočila SMS"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"Klicanje prek Wi‑Fi-ja"</string>
-    <string name="calls_sms_wfc_summary" msgid="7604492006688628039">"Opravljanje in prejemanje klicev v omrežjih, ki niso operaterjeva, na primer v omrežjih Wi‑Fi"</string>
-    <string name="calls_sms_footnote" msgid="148659606229186084">"Klicanje prek Wi-Fi-ja omogoča opravljanje in prejemanje klicev v omrežjih, ki niso operaterjeva, na primer v nekaterih omrežjih Wi-Fi.\n\nKlicanje ne glede na kartico SIM omogoča, da prenos podatkov v mobilnem omrežju v sklopu ene kartice SIM uporabljate za opravljanje in prejemanje klicev prek druge kartice SIM."</string>
+    <string name="calls_sms_wfc_summary" msgid="4930471357980272294">"Opravljanje in prejemanje klicev v omrežjih, ki niso operaterjeva, na primer v omrežjih Wi‑Fi"</string>
+    <string name="calls_sms_footnote" msgid="7002461875954024216">"Klicanje prek Wi-Fi-ja omogoča opravljanje in prejemanje klicev v omrežjih, ki niso operaterjeva, na primer v nekaterih omrežjih Wi-Fi."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Klici"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"Sporočila SMS"</string>
+    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"Nastavitve"</string>
+    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Povezovanje z javnimi omrežji"</string>
+    <string name="keywords_internet" msgid="7674082764898690310">"omrežna povezava, internet, brezžično, podatki, wifi, wi-fi, wi fi, mobilno omrežje, mobilno, mobilni operater, 4g, 3g, 2g, lte"</string>
+    <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ni na voljo, ker je vklopljen način za spanje"</string>
+    <string name="reset_importance_completed" msgid="3595536767426097205">"Ponastavitev pomembnosti obvestil je dokončana."</string>
+    <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikacije"</string>
 </resources>

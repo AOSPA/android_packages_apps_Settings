@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.fuelgauge.batterytip.actions.BatteryDefenderAction;
 import com.android.settings.fuelgauge.batterytip.actions.BatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.actions.OpenBatterySaverAction;
@@ -111,6 +112,8 @@ public class BatteryTipUtils {
                 }
             case BatteryTip.TipType.REMOVE_APP_RESTRICTION:
                 return new UnrestrictAppAction(settingsActivity, (UnrestrictAppTip) batteryTip);
+            case BatteryTip.TipType.BATTERY_DEFENDER:
+                return new BatteryDefenderAction(settingsActivity);
             default:
                 return null;
         }
@@ -124,7 +127,7 @@ public class BatteryTipUtils {
             throws StatsManager.StatsUnavailableException {
         final Intent extraIntent = new Intent(context, AnomalyDetectionReceiver.class);
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE,
-                extraIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                extraIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
         statsManager.setBroadcastSubscriber(pendingIntent,
                 StatsManagerConfig.ANOMALY_CONFIG_KEY, StatsManagerConfig.SUBSCRIBER_ID);
     }
