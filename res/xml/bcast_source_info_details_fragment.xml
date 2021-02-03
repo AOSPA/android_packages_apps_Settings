@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2017 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/source_info_details_title">
+
+    <PreferenceCategory
+        android:key="broadcast_source_details_category">
+
+     <Preference
+         android:key="broadcast_si_sourceId"
+         android:title="@string/bcast_source_info_sid"
+         android:summary="00"
+         />
+
+     <Preference
+         android:key="broadcast_si_source_address"
+         android:title="@string/bcast_source_address"
+         android:summary="00:00:00:00:00:00"
+         />
+
+     <Preference
+         android:key="broadcast_si_metadata_state"
+         android:title="@string/bcast_metadata_sync_state"
+         android:summary="NONE"
+         />
+<!--
+     <Preference
+         android:key="broadcast_si_audio_state"
+         android:title="@string/bcast_audio_sync_state"
+         android:summary="NONE"
+         />
+-->
+
+     <MultiSelectListPreference
+         android:title="@string/bcast_audio_sync_state"
+         android:key="broadcast_si_audio_state"
+         android:persistent="false"
+         android:entries="@array/bcast_channel_selection"
+         android:entryValues="@array/bcast_channel_selection"
+         style="@style/SettingsMultiSelectListPreference"
+    />
+
+     <Preference
+         android:key="broadcast_si_encryption_state"
+         android:title="@string/bcast_source_enc_status"
+         android:summary="No encryption key"
+         />
+
+     <Preference
+         android:key="broadcast_si_metadata"
+         android:title="@string/bcast_source_metadata"
+         android:summary="Music"
+         />
+<!--
+     <SwitchPreference
+         android:key="broadcast_si_enable_metadata_sync"
+         android:title="@string/bcast_enable_metadata_sync"
+         android:defaultValue="false"
+         settings:allowDividerAbove="true"/>
+-->
+     <SwitchPreference
+            android:key="broadcast_si_enable_audio_sync"
+            android:title="@string/bcast_enable_audio_sync"
+            android:defaultValue="false"   />
+
+     <EditTextPreference
+       android:key="update_broadcast_code"
+       android:title="@string/bcast_update_code_title"
+       android:summary="@string/bcast_update_code_summary"
+       android:inputType="text"
+       android:ems="16"
+       android:defaultValue="" />
+
+     <com.android.settingslib.widget.ActionButtonsPreference
+            android:key="bcast_si_update_button"
+            android:title="@string/bcast_info_update"
+            settings:allowDividerBelow="true"/>
+
+    </PreferenceCategory>
+ </PreferenceScreen>
