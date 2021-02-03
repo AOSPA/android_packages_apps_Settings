@@ -126,6 +126,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         use(BlockingSlicePrefController.class).setSliceUri(sliceEnabled
                 ? featureProvider.getBluetoothDeviceSettingsUri(mCachedDevice.getDevice())
                 : null);
+
+        use(BADeviceVolumeController.class).init(this, mManager, mCachedDevice);
     }
 
     @Override
