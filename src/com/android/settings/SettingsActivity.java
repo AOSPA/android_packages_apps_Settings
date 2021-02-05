@@ -38,8 +38,10 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -55,6 +57,7 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
@@ -64,12 +67,13 @@ import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.Utils;
 import com.android.settings.wfd.WifiDisplaySettings;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
 
+import com.google.android.material.transition.platform.MaterialSharedAxis;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
@@ -178,7 +182,7 @@ public class SettingsActivity extends SettingsBaseActivity
         }
     };
 
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchBar mMainSwitch;
 
     private Button mNextButton;
 
@@ -187,8 +191,8 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
 
-    public SwitchBar getSwitchBar() {
-        return mSwitchBar;
+    public SettingsMainSwitchBar getSwitchBar() {
+        return mMainSwitch;
     }
 
     @Override
@@ -235,6 +239,20 @@ public class SettingsActivity extends SettingsBaseActivity
 
     @Override
     protected void onCreate(Bundle savedState) {
+        if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SILKY_HOME)) {
+            // Enable Activity transitions
+            getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+            final MaterialSharedAxis enterTransition = new MaterialSharedAxis(
+                    MaterialSharedAxis.X, /* forward */true);
+            enterTransition.addTarget(R.id.content_parent);
+            getWindow().setEnterTransition(enterTransition);
+
+            final MaterialSharedAxis returnTransition = new MaterialSharedAxis(
+                    MaterialSharedAxis.X, /* forward */false);
+            returnTransition.addTarget(R.id.content_parent);
+            getWindow().setReturnTransition(returnTransition);
+        }
+
         super.onCreate(savedState);
         Log.d(LOG_TAG, "Starting onCreate");
         long startTime = System.currentTimeMillis();
@@ -298,9 +316,9 @@ public class SettingsActivity extends SettingsBaseActivity
             actionBar.setHomeButtonEnabled(!isInSetupWizard);
             actionBar.setDisplayShowTitleEnabled(true);
         }
-        mSwitchBar = findViewById(R.id.switch_bar);
-        if (mSwitchBar != null) {
-            mSwitchBar.setMetricsTag(getMetricsTag());
+        mMainSwitch = findViewById(R.id.switch_bar);
+        if (mMainSwitch != null) {
+            mMainSwitch.setMetricsTag(getMetricsTag());
         }
 
         // see if we should show Back/Next buttons

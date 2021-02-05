@@ -35,6 +35,7 @@ import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountFragment;
 import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
+import com.android.settings.applications.AppDashboardFragment;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
@@ -291,6 +292,7 @@ public class SettingsGateway {
             ConnectedDeviceDashboardFragment.class.getName(),
             UsbDetailsFragment.class.getName(),
             AppAndNotificationDashboardFragment.class.getName(),
+            AppDashboardFragment.class.getName(),
             WifiCallingDisclaimerFragment.class.getName(),
             AccountDashboardFragment.class.getName(),
             EnterprisePrivacySettings.class.getName(),
@@ -321,6 +323,7 @@ public class SettingsGateway {
             Settings.NetworkDashboardActivity.class.getName(),
             Settings.ConnectedDeviceDashboardActivity.class.getName(),
             Settings.AppAndNotificationDashboardActivity.class.getName(),
+            Settings.AppDashboardActivity.class.getName(),
             Settings.DisplaySettingsActivity.class.getName(),
             Settings.SoundSettingsActivity.class.getName(),
             Settings.StorageDashboardActivity.class.getName(),
