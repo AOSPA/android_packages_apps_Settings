@@ -162,6 +162,11 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
             Log.d(TAG, "Unable to get current codec config. Codec status is null");
             return null;
         }
+        if (codecStatus.getCodecConfig().getCodecType() >=
+            BluetoothCodecConfig.SOURCE_CODEC_TYPE_MAX) {
+            Log.d(TAG,"Invalid codec type");
+            return null;
+        }
         return codecStatus.getCodecConfig();
     }
 
