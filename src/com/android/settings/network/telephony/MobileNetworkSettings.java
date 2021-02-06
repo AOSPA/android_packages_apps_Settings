@@ -50,6 +50,7 @@ import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceCon
 import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
@@ -193,6 +194,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         use(DisableSimFooterPreferenceController.class).init(mSubId);
         use(NrDisabledInDsdsFooterPreferenceController.class).init(mSubId);
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
+        use(MobileDataPreferenceController.class).setWifiPickerTrackerHelper(
+                new WifiPickerTrackerHelper(getSettingsLifecycle(), context,
+                        null /* WifiPickerTrackerCallback */));
         use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
         use(ApnPreferenceController.class).init(mSubId);
         use(UserPLMNPreferenceController.class).init(mSubId);
@@ -220,8 +224,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
         final VideoCallingPreferenceController videoCallingPreferenceController =
                 use(VideoCallingPreferenceController.class).init(mSubId);
-        final CrossSimCallingPreferenceController crossSimCallingPreferenceController =
-                use(CrossSimCallingPreferenceController.class).init(mSubId);
+        final BackupCallingPreferenceController crossSimCallingPreferenceController =
+                use(BackupCallingPreferenceController.class).init(mSubId);
         use(Enabled5GPreferenceController.class).init(mSubId);
         use(CallingPreferenceCategoryController.class).setChildren(
                 Arrays.asList(wifiCallingPreferenceController, videoCallingPreferenceController,

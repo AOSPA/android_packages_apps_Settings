@@ -890,7 +890,9 @@
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabed by device admin [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled">Use your fingerprint</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_enroll_introduction_message">Just touch the fingerprint sensor to unlock your phone, authorize purchases, or sign in to apps. Be careful whose fingerprints you add. Even one added print can do any of these things.\n\nNote: Your fingerprint may be less secure than a strong pattern or PIN.</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message">Just touch the fingerprint sensor to unlock your phone, authorize purchases, or sign in to apps. Be careful whose fingerprints you add. Even one added print can do any of these things.</string>
+    <!-- Introduction detail message shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_bottom_message">Your fingerprint may be less secure than a strong pattern or PIN.</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog, when fingerprint unlock is disabled by device admin [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled">Use your fingerprint to unlock your phone or approve purchases.\n\nNote: You can\u2019t use your fingerprint to unlock this device. For more information, contact your organization\u2019s admin.</string>
     <!-- Introduction detail message shown in fingerprint enrollment screen in setup wizard. [CHAR LIMIT=NONE]-->
@@ -935,6 +937,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_title">Touch the sensor</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
     <string name="security_settings_fingerprint_enroll_find_sensor_message">It\u2019s on the back of your phone. Use your index finger.</string>
+    <!-- Message shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=NONE]-->
+    <string name="security_settings_udfps_enroll_find_sensor_message">It\u2019s on the screen. Look for the fingerprint with a glowing circle.</string>
     <!-- Content description of graphic that shows where the fingerprint of the device is [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description">Illustration with device and fingerprint sensor location</string>
     <!-- Label text shown in fingerprint dialog for renaming a fingerprint template [CHAR LIMIT=22] -->
@@ -2880,16 +2884,12 @@
     <string name="night_display_status_title">Status</string>
     <!-- Night display screen, setting the color temperature of the display. [CHAR LIMIT=30] -->
     <string name="night_display_temperature_title">Intensity</string>
-    <!-- Display settings screen, summary format of night display when off. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_never">Will never turn on automatically</string>
          <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_twilight">Will turn on automatically at sunset</string>
-    <!-- Display settings screen, summary format of night display when on. [CHAR LIMIT=NONE] -->
-    <string name="night_display_summary_on">On / <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_on_auto_mode_never">Will never turn off automatically</string>
     <!-- Display settings screen, summary format of night display when on and will turn off automatically at a user defined time. [CHAR LIMIT=NONE] -->
@@ -2938,16 +2938,12 @@
     <string name="dark_ui_auto_mode_custom">Turns on at custom time</string>
     <!-- Dark UI screen, setting option name controlling the current activation status. [CHAR LIMIT=30] -->
     <string name="dark_ui_status_title">Status</string>
-    <!-- Display settings screen, summary format of Dark UI when off. [CHAR LIMIT=NONE] -->
-    <string name="dark_ui_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_never">Will never turn on automatically</string>
     <!-- Display settings screen, summary of Dark UI when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_auto">Will turn on automatically at sunset</string>
         <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
-    <!-- Display settings screen, summary format of Dark UI when on. [CHAR LIMIT=NONE] -->
-    <string name="dark_ui_summary_on">On / <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_never">Will never turn off automatically</string>
     <!-- Display settings screen, summary of Dark UI when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
@@ -5008,8 +5004,14 @@
     <string name="audio_and_captions_category_title">Audio &amp; on-screen text</string>
     <!-- Title for the accessibility preference category of display services and settings. [CHAR LIMIT=50] -->
     <string name="display_category_title">Display</string>
+    <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
+    <string name="accessibility_text_and_display_title">Text and display</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
     <string name="interaction_control_category_title">Interaction controls</string>
+    <!-- Title for the accessibility tap assistance page. [CHAR LIMIT=50] -->
+    <string name="accessibility_tap_assistance_title">Tap assistance</string>
+    <!-- Title for the accessibility system controls page. [CHAR LIMIT=50] -->
+    <string name="accessibility_system_controls_title">System controls</string>
     <!-- Title for the accessibility preference category of services downloaded by the user. [CHAR LIMIT=50] -->
     <string name="user_installed_services_category_title">Downloaded apps</string>
     <!-- Title for the accessibility preference category of settings considered to be experimental, meaning they might be changed or removed in the future. [CHAR LIMIT=50] -->
@@ -5172,7 +5174,7 @@
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Title for the accessibility preference for primary mono. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_primary_mono_title">Mono audio</string>
-    <!-- Summary for the accessibility preference for primary mono. [CHAR LIMIT=50] -->
+    <!-- Summary for the accessibility preference for primary mono. [CHAR LIMIT=60] -->
     <string name="accessibility_toggle_primary_mono_summary">Combine channels when playing audio</string>
     <!-- Title for the accessibility preference for primary balance. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_primary_balance_title">Audio balance</string>
@@ -5293,6 +5295,8 @@
         <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> saved hearing aid</item>
         <item quantity="other"><xliff:g id="number_device_count">%1$d</xliff:g> saved hearing aids</item>
     </plurals>
+    <!-- Title for the accessibility audio adjustment page. [CHAR LIMIT=50] -->
+    <string name="accessibility_audio_adjustment_title">Audio adjustment</string>
 
     <!-- Preference's shortcut when enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_summary_shortcut_enabled">Shortcut on</string>
@@ -7167,13 +7171,15 @@
     <!-- Title for Guest user [CHAR LIMIT=35] -->
     <string name="user_guest">Guest</string>
     <!-- Label for item to exit guest mode [CHAR LIMIT=35] -->
-    <string name="user_exit_guest_title">Remove guest</string>
+    <string name="user_clear_guest_menu">Clear guest data</string>
+    <!-- Label for item to exit guest mode [CHAR LIMIT=35] -->
+    <string name="user_exit_guest_menu">End guest session</string>
     <!-- Title of dialog to user to confirm exiting guest. [CHAR LIMIT=50] -->
-    <string name="user_exit_guest_confirm_title">Remove guest?</string>
+    <string name="user_exit_guest_confirm_title">End guest session?</string>
     <!-- Message to user to confirm exiting guest. [CHAR LIMIT=none] -->
     <string name="user_exit_guest_confirm_message">All apps and data in this session will be deleted.</string>
     <!-- Label for button in confirmation dialog when exiting guest session [CHAR LIMIT=35] -->
-    <string name="user_exit_guest_dialog_remove">Remove</string>
+    <string name="user_exit_guest_dialog_remove">End session</string>
 
     <!-- Title of preference to enable calling[CHAR LIMIT=40] -->
     <string name="user_enable_calling">Turn on phone calls</string>
@@ -8647,8 +8653,8 @@
     <!-- [CHAR LIMIT=100] preference category title -->
     <string name="recent_conversations">Recent conversations</string>
 
-    <!-- [CHAR LIMIT=20] button title -->
-    <string name="conversation_settings_clear_recents">Clear recents</string>
+    <!-- [CHAR LIMIT=40] button title -->
+    <string name="conversation_settings_clear_recents">Clear all of the recent ones</string>
 
     <!-- a11y string -->
     <string name="clear">Clear</string>
@@ -8821,6 +8827,11 @@
     </string>
     <string name="notification_listener_disable_warning_confirm">Turn off</string>
     <string name="notification_listener_disable_warning_cancel">Cancel</string>
+    <string name="notification_listener_type_title">Allowed notification types</string>
+    <string name="notif_type_ongoing">Important ongoing notifications</string>
+    <string name="notif_type_conversation">Conversation notifications</string>
+    <string name="notif_type_alerting">Alerting notifications</string>
+    <string name="notif_type_silent">Silent notifications</string>
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>
@@ -10927,7 +10938,7 @@
     <string name="dark_ui_mode">Dark theme</string>
 
     <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is still on-->
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on">On / Temporarily disabled due to Battery Saver</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on">Temporarily disabled due to Battery Saver</string>
 
     <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is off-->
     <string name="dark_ui_mode_disabled_summary_dark_theme_off">Temporarily turned on due to Battery Saver</string>
@@ -11050,6 +11061,9 @@
     <string name="swipe_up_to_switch_apps_suggestion_title">Try the new Home button</string>
     <!-- Summary for settings suggestion for swipe up to switch apps [CHAR LIMIT=60] -->
     <string name="swipe_up_to_switch_apps_suggestion_summary">Turn on the new gesture to switch apps</string>
+
+    <!-- Preference title for "Safety & emergency" settings page [CHAR LIMIT=60]-->
+    <string name="emergency_settings_preference_title">Safety &amp; emergency</string>
 
     <!-- Title text for edge to edge navigation [CHAR LIMIT=60] -->
     <string name="edge_to_edge_navigation_title">Gesture navigation</string>
@@ -11734,11 +11748,9 @@
     <!-- Option for prevent ringing setting -->
     <string name="prevent_ringing_option_none">Do nothing</string>
     <!-- Summary for prevent ringing setting -->
-    <string name="prevent_ringing_option_vibrate_summary">On (vibrate)</string>
+    <string name="prevent_ringing_option_vibrate_summary">Vibrate</string>
     <!-- Summary for prevent ringing setting -->
-    <string name="prevent_ringing_option_mute_summary">On (mute)</string>
-    <!-- Summary for prevent ringing setting -->
-    <string name="prevent_ringing_option_none_summary">Off</string>
+    <string name="prevent_ringing_option_mute_summary">Mute</string>
 
     <!-- Title for detail page of wifi network [CHAR LIMIT=30] -->
     <string name="pref_title_network_details">Network details</string>
@@ -12400,14 +12412,14 @@
     <!-- Summary for Wi-Fi calling to explain this feature [CHAR LIMIT=NONE] -->
     <string name="wifi_calling_summary">Use Wi\u2011Fi for calls to improve quality</string>
 
-    <!-- Mobile network settings screen, title of Cross SIM calling setting.  [CHAR LIMIT=NONE] -->
-    <string name="cross_sim_calling_settings_title">Cross SIM calling</string>
+    <!-- Mobile network settings screen, title of Backup calling setting.  [CHAR LIMIT=NONE] -->
+    <string name="backup_calling_settings_title">Backup calling</string>
 
-    <!-- Cross SIM calling summary.  [CHAR LIMIT=100] -->
-    <string name="cross_sim_calling_setting_summary">Allow another SIM calls and SMSs over this SIM.</string>
+    <!-- Backup calling summary.  [CHAR LIMIT=100] -->
+    <string name="backup_calling_setting_summary">If <xliff:g id="backup_calling_operator_text" example="Google Fi">%1$s</xliff:g> is unavailable, use your mobile data SIM to make and receive <xliff:g id="backup_calling_carrier_text" example="Google Fi">%1$s</xliff:g> calls.</string>
 
     <!-- List of synonyms for the cross SIM calling titles, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_cross_sim_calling">cross sim calling</string>
+    <string name="keywords_backup_calling">backup calling</string>
 
     <!-- Title for enable MMS notification when trying to receive MMS.  [CHAR LIMIT=40] -->
     <string name="enable_receiving_mms_notification_title">Incoming MMS message</string>
@@ -12600,10 +12612,10 @@
     <string name="provider_internet_settings">Internet</string>
     <!-- Provider Model: SIMs controls settings screen, item title to go into the SIMs settings -->
     <string name="provider_network_settings_title">SIMs</string>
-    <!-- Provider Model: Airplane-safe networks controls settings screen -->
-    <string name="airplane_safe_networks">Airplane-safe networks</string>
-    <!-- Provider Model: Summary for airplane-safe networks -->
-    <string name="airplane_safe_networks_summary">Find and connect to airplane\u2011safe networks</string>
+    <!-- Provider Model: Airplane mode networks controls settings screen -->
+    <string name="airplane_safe_networks">Show airplane mode networks</string>
+    <!-- Provider Model: Summary for showing airplane mode networks-->
+    <string name="airplane_safe_networks_summary">Find and connect to networks in airplane mode.</string>
     <!-- Provider Model: List of synonyms for the airplane-safe networks, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_airplane_safe_networks">airplane, airplane-safe</string>
     <!-- Provider Model: Calls and SMS controllers settings screen, item title to go into the Calls and SMS settings -->
@@ -12635,18 +12647,35 @@
     <!-- Search keywords for "Internet" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_internet">network connection, internet, wireless, data, wifi, wi-fi, wi fi, cellular, mobile, cell carrier, 4g, 3g, 2g, lte</string>
     <!-- Label text to view airplane-safe networks. [CHAR LIMIT=40] -->
-    <string name="view_airplane_safe_networks">View airplane-safe networks</string>
+    <string name="view_airplane_safe_networks">View airplane mode networks</string>
+    <!-- Text of message for viewing the networks that are available in airplane mode. [CHAR LIMIT=60] -->
+    <string name="viewing_airplane_mode_networks">Viewing airplane mode networks</string>
     <!-- Label text to turn off airplane mode. [CHAR LIMIT=40] -->
-    <string name="turn_off_airplane_mode">Turn off Airplane Mode</string>
+    <string name="turn_off_airplane_mode">Turn off airplane mode</string>
+    <!-- Title for interrupting the voice call alert. [CHAR_LIMIT=NONE] -->
+    <string name="reset_your_internet_title">Reset your internet?</string>
+    <!-- Description for interrupting the voice call alert. [CHAR_LIMIT=NONE] -->
+    <string name="reset_internet_text" product="default">This will end your phone call</string>
+    <!-- Description for interrupting the voice call alert. [CHAR_LIMIT=NONE] -->
+    <string name="reset_internet_text" product="tablet">This will end your phone call</string>
+    <!-- Description to wait device resetting internet networks. [CHAR_LIMIT=NONE] -->
+    <string name="resetting_internet_text">Resetting your internet\u2026</string>
+    <!-- Menu option for data connectivity recovery for all requested technologies. [CHAR_LIMIT=NONE] -->
+    <string name="fix_connectivity">Fix connectivity</string>
 
-    <!-- Provider Model: Summary indicating that a SIM has an active mobile data connection [CHAR LIMIT=50] -->
-    <string name="mobile_data_connection_active">Active, <xliff:g id="network_data_rat" example="LTE">%1$s</xliff:g></string>
-    <!-- Provider Model: Summary indicating that a SIM has an active mobile data connection [CHAR LIMIT=50] -->
-    <string name="mobile_data_off_summary">Internet off</string>
-    <!-- Provider Model: Summary indicating that non-carrier network unavailable [CHAR LIMIT=50] -->
-    <string name="non_carrier_network_unavailable">Non\u2011carrier networks unavailable</string>
-    <!-- Provider Model: Summary indicating that non-carrier and carrier network unavailable [CHAR LIMIT=50] -->
-    <string name="all_network_unavailable">Networks unavailable</string>
+    <!-- Summary text separator for preferences including a short description
+         (eg. "Connected / 5G"). [CHAR LIMIT=50] -->
+    <string name="preference_summary_default_combination"><xliff:g id="state" example="Connected">%1$s</xliff:g> / <xliff:g id="networkMode" example="LTE">%2$s</xliff:g></string>
+    <!-- Provider Model:
+         Summary indicating that a SIM has an active mobile data connection [CHAR LIMIT=50] -->
+    <string name="mobile_data_connection_active">Connected</string>
+    <!-- Provider Model:
+         Summary indicating that a SIM has no mobile data connection [CHAR LIMIT=50] -->
+    <string name="mobile_data_off_summary">Internet won\u0027t auto\u2011connect</string>
+    <!-- Provider Model: Summary indicating that no other networks available [CHAR LIMIT=50] -->
+    <string name="non_carrier_network_unavailable">No other networks available</string>
+    <!-- Provider Model: Summary indicating that no networks available [CHAR LIMIT=50] -->
+    <string name="all_network_unavailable">No networks available</string>
 
     <!-- Summary for preference when Bedtime mode is on [CHAR LIMIT=NONE] -->
     <string name="aware_summary_when_bedtime_on">Unavailable because bedtime mode is on</string>
@@ -12669,4 +12698,41 @@
     <string name="bluetooth_phonebook_access_dialog_title">Allow access to contacts and call log?</string>
     <!-- Bluetooth phonebook permission alert for dialog content [CHAR LIMIT=none] -->
     <string name="bluetooth_phonebook_access_dialog_content">An untrusted Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your contacts and call log. This includes data about incoming and outgoing calls.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+
+    <!-- Brightness category name in Display Settings [CHAR LIMIT=none] -->
+    <string name="category_name_brightness">Brightness</string>
+    <!-- Lock screen category name in Display Settings [CHAR LIMIT=none] -->
+    <string name="category_name_lock_display">Lock Display</string>
+    <!-- Visibility category name in Display Settings [CHAR LIMIT=none] -->
+    <string name="category_name_visibility">Visibility</string>
+    <!-- Color category name in Display Settings [CHAR LIMIT=none] -->
+    <string name="category_name_color">Color</string>
+    <!-- Others category name [CHAR LIMIT=none] -->
+    <string name="category_name_others">Others</string>
+    <!-- General category name [CHAR LIMIT=none] -->
+    <string name="category_name_general">General</string>
+
+    <!-- Do not translate. Title for prevent ringing main switch. [CHAR LIMIT=50] -->
+    <string name="prevent_ringing_main_switch_title" translatable="false">Use prevent ringing</string>
+    <!-- Do not translate. Title for use wifi hotspot main switch [CHAR LIMIT=50]-->
+    <string name="use_wifi_hotsopt_main_switch_title" translatable="false">Use Wi\u2011Fi hotspot</string>
+    <!-- Do not translate. Title for bluetooth main switch. [CHAR LIMIT=50] -->
+    <string name="bluetooth_main_switch_title" translatable="false">Use bluetooth</string>
+    <!-- Do not translate. Title for app pinning main switch. [CHAR LIMIT=50] -->
+    <string name="app_pinning_main_switch_title" translatable="false">Use app pinning</string>
+    <!-- Do not translate. Title for developer options main switch. [CHAR LIMIT=50] -->
+    <string name="developer_options_main_switch_title" translatable="false">Use developer options</string>
+    <!-- Do not translate. Title for default print service main switch. [CHAR LIMIT=50] -->
+    <string name="default_print_service_main_switch_title" translatable="false">Use default print service</string>
+    <!-- Do not translate. Title for multiple users main switch. [CHAR LIMIT=50] -->
+    <string name="multiple_users_main_switch_title" translatable="false">Use multiple users</string>
+    <!-- Do not translate. Title for wireless debugging main switch. [CHAR LIMIT=50] -->
+    <string name="wireless_debugging_main_switch_title" translatable="false">Use wireless debugging</string>
+    <!-- Do not translate. Title for graphics driver main switch. [CHAR LIMIT=50] -->
+    <string name="graphics_driver_main_switch_title" translatable="false">Use graphics driver preferences</string>
+    <!-- Do not translate. Title for battery saver main switch preferences. [CHAR LIMIT=50] -->
+    <string name="battery_saver_main_switch_title" translatable="false">Use battery saver</string>
+
+    <!-- Default preference title for showing all apps on device [CHAR_LIMIT=50]-->
+    <string name="default_see_all_apps_title">See all apps</string>
 </resources>
