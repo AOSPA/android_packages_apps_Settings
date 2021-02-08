@@ -22,8 +22,6 @@ import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
@@ -38,7 +36,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.network.PreferredNetworkModeContentObserver;
+import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.network.telephony.Enhanced4gBasePreferenceController;
 import com.android.settings.network.telephony.MobileNetworkUtils;
@@ -59,16 +57,16 @@ public class OpenNetworkSelectPagePreferenceController extends
     private TelephonyManager mTelephonyManager;
     private Preference mPreference;
     private PreferenceScreen mPreferenceScreen;
-    private PreferredNetworkModeContentObserver mPreferredNetworkModeObserver;
+    private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
     private SubscriptionsChangeListener mSubscriptionsListener;
 
     public OpenNetworkSelectPagePreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        mPreferredNetworkModeObserver = new PreferredNetworkModeContentObserver(
-                new Handler(Looper.getMainLooper()));
-        mPreferredNetworkModeObserver.setPreferredNetworkModeChangedListener(
+        mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
+                context.getMainExecutor());
+        mAllowedNetworkTypesListener.setAllowedNetworkTypesChangedListener(
                 () -> updatePreference());
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
 
@@ -97,13 +95,13 @@ public class OpenNetworkSelectPagePreferenceController extends
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
-        mPreferredNetworkModeObserver.register(mContext, mSubId);
+        mAllowedNetworkTypesListener.register(mContext, mSubId);
         mSubscriptionsListener.start();
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
-        mPreferredNetworkModeObserver.unregister(mContext);
+        mAllowedNetworkTypesListener.unregister(mContext, mSubId);
         mSubscriptionsListener.stop();
     }
 

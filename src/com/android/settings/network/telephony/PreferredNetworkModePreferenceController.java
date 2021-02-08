@@ -165,17 +165,13 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     public boolean onPreferenceChange(Preference preference, Object object) {
         final int newPreferredNetworkMode = Integer.parseInt((String) object);
 
-        if (mTelephonyManager.setPreferredNetworkTypeBitmask(
-                MobileNetworkUtils.getRafFromNetworkType(newPreferredNetworkMode))) {
-            Settings.Global.putInt(mContext.getContentResolver(),
-                    Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                    newPreferredNetworkMode);
+        mTelephonyManager.setAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER,
+                MobileNetworkUtils.getRafFromNetworkType(newPreferredNetworkMode));
+
             final ListPreference listPreference = (ListPreference) preference;
             listPreference.setSummary(getPreferredNetworkModeSummaryResId(newPreferredNetworkMode));
             return true;
-        }
-
-        return false;
     }
 
     public void init(Lifecycle lifecycle, int subId) {
@@ -194,9 +190,9 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     }
 
     private int getPreferredNetworkMode() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+        return MobileNetworkUtils.getNetworkTypeFromRaf(
+                (int) mTelephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
     }
 
     private int getPreferredNetworkModeSummaryResId(int NetworkMode) {

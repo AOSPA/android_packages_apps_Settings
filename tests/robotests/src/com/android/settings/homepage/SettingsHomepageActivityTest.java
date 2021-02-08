@@ -26,12 +26,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.os.Build;
-import android.view.View;
+import android.util.FeatureFlagUtils;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.HideNonSystemOverlayMixin;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSliceTest;
 
@@ -42,6 +43,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
@@ -52,32 +54,7 @@ public class SettingsHomepageActivityTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-    }
-
-    @Test
-    public void setDefaultHomepageContainerPaddingTop_shouldSetSearchBoxHeight() {
-        final SettingsHomepageActivity activity = Robolectric.buildActivity(
-                SettingsHomepageActivity.class).create().get();
-        final View view = activity.findViewById(R.id.homepage_container);
-
-        activity.setDefaultHomepageContainerPaddingTop();
-
-        final int actualPaddingTop = view.getPaddingTop();
-        assertThat(actualPaddingTop).isEqualTo(activity.getSearchBoxHeight());
-    }
-
-    @Test
-    public void setHomepageContainerTopOffset_shouldBeSetPaddingTop() {
-        final SettingsHomepageActivity activity = Robolectric.buildActivity(
-                SettingsHomepageActivity.class).create().get();
-        final View view = activity.findViewById(R.id.homepage_container);
-        final int offset = activity.getResources().getDimensionPixelSize(
-                R.dimen.suggestion_height);
-
-        activity.setHomepageContainerTopOffset(offset);
-
-        final int actualPaddingTop = view.getPaddingTop();
-        assertThat(actualPaddingTop).isEqualTo(activity.getSearchBoxHeight() + offset);
+        FeatureFlagUtils.setEnabled(RuntimeEnvironment.application, FeatureFlags.SILKY_HOME, false);
     }
 
     @Test

@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.app;
 
+import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
@@ -71,16 +72,16 @@ public class BlockPreferenceController extends NotificationPreferenceController
             bar.setDisabledByAdmin(mAdmin);
 
             if (mChannel != null && !isChannelBlockable()) {
-                bar.setEnabled(false);
+                bar.setSwitchBarEnabled(false);
             }
 
             if (mChannelGroup != null && !isChannelGroupBlockable()) {
-                bar.setEnabled(false);
+                bar.setSwitchBarEnabled(false);
             }
 
             if (mChannel == null && mAppRow.systemApp
                     && (!mAppRow.banned || mAppRow.lockedImportance)) {
-                bar.setEnabled(false);
+                bar.setSwitchBarEnabled(false);
             }
 
             if (mChannel != null) {
@@ -107,7 +108,7 @@ public class BlockPreferenceController extends NotificationPreferenceController
                         ? IMPORTANCE_NONE
                         : isDefaultChannel()
                                 ? IMPORTANCE_UNSPECIFIED
-                                : mChannel.getOriginalImportance();
+                                : Math.max(mChannel.getOriginalImportance(), IMPORTANCE_LOW);
                 mChannel.setImportance(importance);
                 saveChannel();
             }
