@@ -68,7 +68,7 @@ public abstract class GroupBluetoothGroupDeviceUpdater extends GroupBluetoothDev
         final BluetoothDevice device = cachedDevice.getDevice();
         if (!mPreferenceMap.containsKey(device)) {
             BluetoothDevicePreference btPreference = new BluetoothDevicePreference(mPrefContext,
-                cachedDevice, true /* showDeviceWithoutNames */, type);
+                cachedDevice, true /* showDeviceWithoutNames */, type, true);
             btPreference.setOnGearClickListener(mDeviceProfilesListener);
             mPreferenceMap.put(device, btPreference);
             mDevicePreferenceCallback.onDeviceAdded(btPreference);
