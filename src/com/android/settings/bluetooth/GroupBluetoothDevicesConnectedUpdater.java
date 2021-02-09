@@ -32,6 +32,9 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
+import androidx.preference.Preference;
+
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.media.AudioManager;
@@ -41,7 +44,8 @@ import android.util.Log;
  * Controller to maintain connected ( not active)  Group devices
 */
 
-public class GroupBluetoothDevicesConnectedUpdater extends GroupBluetoothGroupDeviceUpdater {
+public class GroupBluetoothDevicesConnectedUpdater extends GroupBluetoothDeviceUpdater
+        implements Preference.OnPreferenceClickListener {
 
     private static final String TAG = "GroupBluetoothDevicesConnectedUpdater";
     private static final String PREF_KEY = "group_devices_connected";
@@ -116,5 +120,16 @@ public class GroupBluetoothDevicesConnectedUpdater extends GroupBluetoothGroupDe
     @Override
     protected String getPreferenceKey() {
         return PREF_KEY;
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        if (DBG) {
+            Log.d(TAG, "onPreferenceClick " + preference);
+        }
+        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
+        final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
+                .getBluetoothDevice();
+        return device.setActive();
     }
 }

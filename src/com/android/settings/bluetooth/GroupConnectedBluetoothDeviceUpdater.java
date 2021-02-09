@@ -49,7 +49,8 @@ import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 /**
  * Controller to maintain connected devices based on group
  */
-public class GroupConnectedBluetoothDeviceUpdater extends GroupBluetoothDeviceUpdater {
+public class GroupConnectedBluetoothDeviceUpdater extends GroupBluetoothDeviceUpdater
+        implements Preference.OnPreferenceClickListener {
 
     private static final String TAG = "GroupConnectedBluetoothDeviceUpdater";
     private static final String PREF_KEY = "connected_group_bt";
@@ -131,8 +132,23 @@ public class GroupConnectedBluetoothDeviceUpdater extends GroupBluetoothDeviceUp
                             true /* showDeviceWithoutNames */,
                             type, true /*hide summary */);
             btPreference.setOnGearClickListener(mDeviceProfilesListener);
+            if (this instanceof Preference.OnPreferenceClickListener) {
+                btPreference.setOnPreferenceClickListener(
+                    (Preference.OnPreferenceClickListener)this);
+            }
             mPreferenceMap.put(device, btPreference);
             mDevicePreferenceCallback.onDeviceAdded(btPreference);
         }
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        if (DBG) {
+            Log.d(TAG, " onPreferenceClick " + preference);
+        }
+        mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
+        final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
+                .getBluetoothDevice();
+        return device.setActive();
     }
 }
