@@ -1156,19 +1156,6 @@ public final class Utils extends com.android.settingslib.Utils {
             return false;
         }
         return true;
-     }
-
-    public static boolean isAdvancedPlmnScanSupported() {
-        boolean propVal = false;
-        IExtTelephony extTelephony = IExtTelephony.Stub
-                .asInterface(ServiceManager.getService("qti.radio.extphone"));
-        try {
-            propVal = extTelephony
-                    .getPropertyValueBool("persist.vendor.radio.enableadvancedscan", true);
-        } catch (RemoteException | NullPointerException ex) {
-            Log.e(TAG, "isAdvancedPlmnScanSupported Exception: ", ex);
-        }
-        return propVal;
     }
 
     public static boolean isSupportCTPA(Context context) {

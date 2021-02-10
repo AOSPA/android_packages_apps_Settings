@@ -109,8 +109,7 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
         mIsNrRadioSupported =
                 checkSupportedRadioBitmask(mTelephonyManager.getSupportedRadioAccessFamily(),
                 TelephonyManager.NETWORK_TYPE_BITMASK_NR);
-        mIsDualNrSupported =
-                PrimaryCardAndSubsidyLockUtils.isDual5gSupported(mTelephonyManager);
+        mIsDualNrSupported = TelephonyUtils.isDual5gSupported(mTelephonyManager);
         if (mAllowedNetworkTypesListener == null) {
             mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
                     mContext.getMainExecutor());

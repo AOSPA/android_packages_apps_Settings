@@ -31,6 +31,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.MobilePlanPreferenceController.MobilePlanPreferenceHost;
+import com.android.settings.network.telephony.TelephonyUtils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.WifiPrimarySwitchPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -103,6 +104,8 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, MetricsFeatureProvider metricsFeatureProvider, Fragment fragment,
             MobilePlanPreferenceHost mobilePlanHost) {
+        // Connect to ExtTelephonyService
+        TelephonyUtils.connectExtTelephonyService(context);
         final MobilePlanPreferenceController mobilePlanPreferenceController =
                 new MobilePlanPreferenceController(context, mobilePlanHost);
         final WifiPrimarySwitchPreferenceController wifiPreferenceController =

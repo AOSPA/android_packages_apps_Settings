@@ -79,7 +79,8 @@ public class NetworkOperatorPreference extends Preference {
         super(context);
         mForbiddenPlmns = forbiddenPlmns;
         mShow4GForLTE = show4GForLTE;
-        mIsAdvancedScanSupported = Utils.isAdvancedPlmnScanSupported();
+        mIsAdvancedScanSupported = TelephonyUtils.isAdvancedPlmnScanSupported(context);
+        Log.d(TAG, "mIsAdvancedScanSupported: " + mIsAdvancedScanSupported);
     }
 
     /**

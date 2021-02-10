@@ -38,106 +38,69 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.qti.extphone.ExtTelephonyManager;
+import com.qti.extphone.ServiceCallback;
+
 import org.codeaurora.internal.IExtTelephony;
+
 
 /**
  * Add static utility functions to get information about Primary Card and Subsidy Lock features.
  */
-public final class PrimaryCardAndSubsidyLockUtils {
+public final class TelephonyUtils {
 
-    private static final String TAG = "PrimaryCardAndSubsidyLockUtils";
+    private static final String TAG = "TelephonyUtils";
 
     // Flag to control debug logging for primary card and subsidy lock features
     public static boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
 
-    // Primary card and subsidy lock related system properties
-    private static final String PROPERTY_PRIMARY_CARD   = "persist.vendor.radio.primarycard";
-    private static final String PROPERTY_DETECT_4G_CARD = "persist.vendor.radio.detect4gcard";
-    private static final String PROPERTY_L_W_ENABLED    = "persist.vendor.radio.lw_enabled";
-    private static final String PROPERTY_SUBSIDY_LOCK   = "ro.vendor.radio.subsidylock";
+    private static final String PROPERTY_ADVANCED_SCAN  = "persist.vendor.radio.enableadvancedscan";
 
     // Modem version prefix tag
     private static final String MODEM_VERSION_PREFIX_HI_TAG = "MPSS.HI."; // Himalaya
     private static final String MODEM_VERSION_PREFIX_DE_TAG = "MPSS.DE."; // Denali
-
-    // Settings database configurations
-    public static final String CONFIG_CURRENT_PRIMARY_SUB = "config_current_primary_sub";
-    public static final String SUBSIDY_STATUS = "subsidy_status";
-
-    // Subsidy lock resticted states
-    private static final int SUBSIDYLOCK_UNLOCKED = 103;
-    private static final int PERMANENTLY_UNLOCKED = 100;
 
     // UICC provisioning status
     public static final int CARD_NOT_PROVISIONED = 0;
     public static final int CARD_PROVISIONED = 1;
     public static final int CARD_INVALID_STATE = -1;
 
-    private PrimaryCardAndSubsidyLockUtils() {
+    private static ExtTelephonyManager mExtTelephonyManager;
+    private static boolean mIsServiceBound;
+
+    private TelephonyUtils() {
     }
 
-    public static boolean isPrimaryCardEnabled() {
-        return isVendorPropertyEnabled(PROPERTY_PRIMARY_CARD);
-    }
-
-    public static boolean isDetect4gCardEnabled() {
-        return isVendorPropertyEnabled(PROPERTY_DETECT_4G_CARD);
-    }
-
-    public static boolean isPrimaryCardLWEnabled() {
-        return isVendorPropertyEnabled(PROPERTY_L_W_ENABLED);
-    }
-
-    public static boolean isSubsidyLockFeatureEnabled() {
-        return (getVendorPropertyInt(PROPERTY_SUBSIDY_LOCK) == 1);
-    }
-
-    public static boolean isSubsidyUnlocked(Context context) {
-        return getSubsidyStatus(context) == SUBSIDYLOCK_UNLOCKED;
-    }
-
-    public static boolean isSubsidyPermanentlyUnlocked(Context context) {
-        return getSubsidyStatus(context) == SUBSIDYLOCK_UNLOCKED;
-    }
-
-    private static int getSubsidyStatus(Context context) {
-        return Settings.Secure.getInt(context.getContentResolver(), SUBSIDY_STATUS, -1);
-    }
-
-    private static boolean isVendorPropertyEnabled(String propertyName) {
+    public static boolean isAdvancedPlmnScanSupported(Context context) {
         boolean propVal = false;
-        IExtTelephony extTelephony = IExtTelephony.Stub
-                .asInterface(ServiceManager.getService("qti.radio.extphone"));
-        try {
-            propVal = extTelephony.getPropertyValueBool(propertyName, false);
-        } catch (RemoteException | NullPointerException ex) {
-            Log.e(TAG, "isVendorPropertyEnabled: " + propertyName + ", Exception: ", ex);
+        if (mIsServiceBound) {
+            try {
+                propVal = mExtTelephonyManager.getPropertyValueBool(PROPERTY_ADVANCED_SCAN, false);
+            } catch (NullPointerException ex) {
+                Log.e(TAG, "isAdvancedPlmnScanSupported: , Exception: ", ex);
+            }
+        } else {
+            Log.e(TAG, "isAdvancedPlmnScanSupported: ExtTelephony Service not connected!");
         }
         return propVal;
     }
 
-    private static int getVendorPropertyInt(String propertyName) {
-        int propVal = -1;
-        IExtTelephony extTelephony = IExtTelephony.Stub
-                .asInterface(ServiceManager.getService("qti.radio.extphone"));
-        try {
-            propVal = extTelephony.getPropertyValueInt(propertyName, -1);
-        } catch (RemoteException | NullPointerException ex) {
-            Log.e(TAG, "getVendorPropertyInt: " + propertyName + ", Exception: ", ex);
+    public static boolean performIncrementalScan(Context context, int slotId) {
+        boolean success = false;
+        if (mIsServiceBound) {
+            success = mExtTelephonyManager.performIncrementalScan(slotId);
+        } else {
+            Log.e(TAG, "performIncrementalScan: ExtTelephony Service not connected!");
         }
-        return propVal;
+        return success;
     }
 
-    public static int getUiccCardProvisioningStatus(int phoneId) {
-        int provStatus = CARD_NOT_PROVISIONED;
-        IExtTelephony extTelephony = IExtTelephony.Stub
-                .asInterface(ServiceManager.getService("qti.radio.extphone"));
-        try {
-            provStatus = extTelephony.getCurrentUiccCardProvisioningStatus(phoneId);
-        } catch (RemoteException | NullPointerException ex) {
-            Log.e(TAG, "getUiccCardProvisioningStatus: " + phoneId + ", Exception: ", ex);
+    public static void abortIncrementalScan(Context context, int slotId) {
+        if (mIsServiceBound) {
+            mExtTelephonyManager.abortIncrementalScan(slotId);
+        } else {
+            Log.e(TAG, "abortIncrementalScan: ExtTelephony Service not connected!");
         }
-        return provStatus;
     }
 
     /*
@@ -183,4 +146,30 @@ public final class PrimaryCardAndSubsidyLockUtils {
         }
         return false;
     }
+
+    public static void connectExtTelephonyService(Context context) {
+        if (!mIsServiceBound) {
+            Log.d(TAG, "Connect to ExtTelephonyService...");
+            mExtTelephonyManager = ExtTelephonyManager.getInstance(context);
+            mExtTelephonyManager.connectService(mServiceCallback);
+        }
+    }
+
+    public static boolean isServiceConnected() {
+        return mIsServiceBound;
+    }
+
+    private static ServiceCallback mServiceCallback = new ServiceCallback() {
+        @Override
+        public void onConnected() {
+            Log.d(TAG, "ExtTelephony Service connected");
+            mIsServiceBound = true;
+        }
+
+        @Override
+        public void onDisconnected() {
+            Log.d(TAG, "ExtTelephony Service disconnected...");
+            mIsServiceBound = false;
+        }
+    };
 }

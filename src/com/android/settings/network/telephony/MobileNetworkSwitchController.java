@@ -105,12 +105,9 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         mSwitchBar.setOnBeforeCheckedChangeListener((toggleSwitch, isChecked) -> {
             // TODO b/135222940: re-evaluate whether to use
             // mSubscriptionManager#isSubscriptionEnabled
-        int phoneId = mSubscriptionManager.getSlotIndex(mSubId);
-        int uiccStatus = PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(phoneId);
-        Log.d(TAG, "displayPreference: mSubId=" + mSubId + ", mSubInfo=" + mSubInfo +
-                 ", uiccStatus=" + uiccStatus);
-            if ((mSubInfo != null &&
-                    (uiccStatus == PrimaryCardAndSubsidyLockUtils.CARD_PROVISIONED) != isChecked)) {
+            int phoneId = mSubscriptionManager.getSlotIndex(mSubId);
+            Log.d(TAG, "displayPreference: mSubId=" + mSubId + ", mSubInfo=" + mSubInfo);
+            if ((mSubInfo != null && (mSubInfo.areUiccApplicationsEnabled() != isChecked))) {
                 SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, mSubId, isChecked);
                 return true;
             }
@@ -153,9 +150,9 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
             mSwitchBar.hide();
         } else {
             mSwitchBar.show();
-            int phoneId = mSubscriptionManager.getSlotIndex(mSubId);
-            int uiccStatus = PrimaryCardAndSubsidyLockUtils.getUiccCardProvisioningStatus(phoneId);
-            mSwitchBar.setCheckedInternal(uiccStatus == PrimaryCardAndSubsidyLockUtils.CARD_PROVISIONED);
+            Log.d(TAG, "update(): mSubId=" + mSubId +
+                    ", areUiccApplicationsEnabled=" + mSubInfo.areUiccApplicationsEnabled());
+            mSwitchBar.setCheckedInternal(mSubInfo.areUiccApplicationsEnabled());
         }
     }
 
