@@ -45,7 +45,8 @@ android_library {
         "framework-wifi-vendor-hide-access-defaults",
     ],
 
-    srcs: ["src/**/*.java"],
+    srcs: ["src/**/*.java",
+          ":settings-bluetooth-lea-srcs",],
 
     static_libs: [
         "androidx-constraintlayout_constraintlayout",
