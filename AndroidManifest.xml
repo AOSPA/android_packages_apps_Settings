@@ -2772,6 +2772,19 @@
         </activity>
 
         <activity
+            android:name="Settings$PremiumSmsAccessActivity"
+            android:label="@string/premium_sms_access"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.PREMIUM_SMS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess" />
+        </activity>
+
+        <activity
             android:name="Settings$SoundSettingsActivity"
             android:label="@string/sound_settings"
             android:icon="@drawable/ic_homepage_sound"
@@ -3498,21 +3511,6 @@
             </intent-filter>
         </activity>
 
-        <activity-alias
-            android:name="MediaOutputSlice"
-            android:label="@string/media_output_panel_title"
-            android:exported="true"
-            android:targetActivity=".panel.SettingsPanelActivity">
-                <intent-filter>
-                    <action android:name="com.android.settings.panel.action.MEDIA_OUTPUT" />
-                    <category android:name="android.intent.category.DEFAULT" />
-                </intent-filter>
-                <intent-filter>
-                    <action android:name="com.android.settings.panel.action.MEDIA_OUTPUT_GROUP" />
-                    <category android:name="android.intent.category.DEFAULT" />
-                </intent-filter>
-        </activity-alias>
-
         <provider android:name=".slices.SettingsSliceProvider"
                   android:authorities="com.android.settings.slices;android.settings.slices"
                   android:exported="true"
@@ -3703,6 +3701,17 @@
                 <action android:name="android.telephony.action.SIM_SLOT_STATUS_CHANGED" />
             </intent-filter>
         </receiver>
+
+        <receiver
+            android:name=".sim.receivers.SimCompleteBootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".sim.SimNotificationService"
+                 android:permission="android.permission.BIND_JOB_SERVICE" />
 
        <activity android:name=".network.telephony.UserPLMNListActivity"
            android:exported="true"

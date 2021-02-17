@@ -334,12 +334,9 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
 
             final PreferenceImageView imageView = view.findViewById(android.R.id.icon);
             final int level = wifiEntry.getLevel();
-            final int standard = wifiEntry.getWifiStandard();
-            final boolean isReady = wifiEntry.isHe8ssCapableAp()
-                                    && wifiEntry.isVhtMax8SpatialStreamsSupported();
             if (imageView != null) {
                 final Drawable drawable = getContext().getDrawable(
-                        Utils.getWifiIconResource(level, standard, isReady));
+                        Utils.getWifiIconResource(level));
                 drawable.setTintList(
                         Utils.getColorAttr(getContext(), android.R.attr.colorControlNormal));
                 imageView.setImageDrawable(drawable);

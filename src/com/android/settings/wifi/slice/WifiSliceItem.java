@@ -37,10 +37,6 @@ public class WifiSliceItem {
     private final boolean mShouldEditBeforeConnect;
     private final String mSummary;
 
-    private final int mWifiStandard;
-    private final boolean mIsHe8ssCapableAp;
-    private final boolean mIsVhtMax8SpatialStreamsSupported;
-
     // These values must be kept within [WifiEntry.WIFI_LEVEL_MIN, WifiEntry.WIFI_LEVEL_MAX]
     private static final int[] WIFI_CONNECTION_STRENGTH = {
             R.string.accessibility_no_wifi,
@@ -59,10 +55,6 @@ public class WifiSliceItem {
         mLevel = wifiEntry.getLevel();
         mShouldEditBeforeConnect = wifiEntry.shouldEditBeforeConnect();
         mSummary = wifiEntry.getSummary(false /* concise */);
-
-        mWifiStandard = wifiEntry.getWifiStandard();
-        mIsHe8ssCapableAp = wifiEntry.isHe8ssCapableAp();
-        mIsVhtMax8SpatialStreamsSupported = wifiEntry.isVhtMax8SpatialStreamsSupported();
     }
 
     @Override
@@ -139,17 +131,5 @@ public class WifiSliceItem {
         return TextUtils.concat(contentDescription, ",", mSecurity == WifiEntry.SECURITY_NONE
                 ? mContext.getString(R.string.accessibility_wifi_security_type_none)
                 : mContext.getString(R.string.accessibility_wifi_security_type_secured));
-    }
-
-    public int getWifiStandard() {
-        return mWifiStandard;
-    }
-
-    public boolean isHe8ssCapableAp() {
-        return mIsHe8ssCapableAp;
-    }
-
-    public boolean isVhtMax8SpatialStreamsSupported() {
-        return mIsVhtMax8SpatialStreamsSupported;
     }
 }

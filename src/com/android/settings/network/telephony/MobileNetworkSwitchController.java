@@ -108,8 +108,8 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         Log.d(TAG, "displayPreference: mSubId=" + mSubId + ", mSubInfo=" + mSubInfo +
                  ", uiccStatus=" + uiccStatus);
             if ((mSubInfo != null &&
-                    (uiccStatus == PrimaryCardAndSubsidyLockUtils.CARD_PROVISIONED) != isChecked) &&
-                    (!mSubscriptionManager.setSubscriptionEnabled(mSubId, isChecked))) {
+                    (uiccStatus == PrimaryCardAndSubsidyLockUtils.CARD_PROVISIONED) != isChecked)) {
+                SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, mSubId, isChecked);
                 return true;
             }
             return false;

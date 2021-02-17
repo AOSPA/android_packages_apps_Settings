@@ -1022,8 +1022,7 @@
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 முகவரிகள்"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"சேமித்த நெட்வொர்க்குகள்"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"சந்தா செலுத்தியவை"</string>
-    <!-- no translation found for wifi_saved_access_points_tab (2075914709522121708) -->
-    <skip />
+    <string name="wifi_saved_other_networks_tab" msgid="7942647415716557293">"பிற நெட்வொர்க்குகள்"</string>
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"IP அமைப்பு"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"இந்தப் பயனருக்கு வைஃபை மேம்பட்ட அமைப்புகள் இல்லை"</string>
     <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"சேமி"</string>
@@ -1597,7 +1596,7 @@
     <string name="menu_delete" msgid="9199740901584348273">"APN ஐ நீக்கு"</string>
     <string name="menu_new" msgid="6571230342655509006">"புதிய APN"</string>
     <string name="menu_save" msgid="6611465355127483100">"சேமி"</string>
-    <string name="menu_cancel" msgid="4526003389139913077">"நிராகரி"</string>
+    <string name="menu_cancel" msgid="1197826697950745335">"ரத்துசெய்"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
     <string name="error_name_empty" msgid="1258275899283079142">"பெயர் புலம் வெறுமையாக இருக்கக்கூடாது."</string>
     <string name="error_apn_empty" msgid="7657491065443746915">"APN வெறுமையாக இருக்கக்கூடாது."</string>
@@ -1612,8 +1611,9 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"ஆப்ஸை ரீசெட் செய்யலாம்"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"வைஃபை, மொபைல் &amp; புளூடூத்தை மீட்டமை"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"பின்வருபவை உட்பட, எல்லா நெட்வொர்க் அமைப்புகளையும் இது மீட்டமைக்கும்:\n\n"<li>"வைஃபை"</li>\n<li>"மொபைல் தரவு"</li>\n<li>"புளூடூத்"</li></string>
+    <string name="erase_euicc_data_button" msgid="728078969563311737">"அழி"</string>
     <string name="reset_esim_title" msgid="6152167073280852849">"பதிவிறக்கிய சிம்களை அழி"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"மாற்று சிம்களைப் பதிவிறக்க மொபைல் நிறுவனத்தைத் தொடர்புகொள்ளவும். இதனால் உங்கள் மொபைல் திட்டங்கள் எவையும் ரத்துசெய்யப்படாது."</string>
+    <string name="reset_esim_desc" msgid="3662444090563399131">"மொபைல் சேவைத் திட்டங்கள் எவையும் இதனால் ரத்துசெய்யப்படாது. மாற்று சிம்களைப் பதிவிறக்க, உங்கள் மொபைல் நிறுவனத்தைத் தொடர்புகொள்ளவும்."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"அமைப்புகளை மீட்டமை"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"அனைத்து நெட்வொர்க் அமைப்புகளையும் மீட்டமைக்கவா? இதைச் செயல்தவிர்க்க இயலாது."</string>
     <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"அனைத்து நெட்வொர்க் அமைப்புகளையும் மீட்டமைத்து, பதிவிறக்கிய சிம்களை அழிக்கவா? இதைச் செயல்தவிர்க்க இயலாது."</string>
@@ -2456,8 +2456,8 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"டேப்லெட் வழக்கத்தைவிட அதிகமாகப் பயன்படுத்தப்பட்டுள்ளது"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"சாதனம் வழக்கத்தைவிட அதிகமாகப் பயன்படுத்தப்பட்டுள்ளது"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"பேட்டரி வழக்கத்தைவிட வேகமாகத் தீர்ந்துவிடக்கூடும்"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="8826010086459178383">"பேட்டரி சார்ஜ் செய்வது தற்காலிகமாகக் கட்டுப்படுத்தப்பட்டுள்ளது"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4476296841600798068">"பேட்டரியின் ஆயுளைப் பாதுகாக்க உதவும். மேலும் அறிய தட்டவும்."</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"பேட்டரியின் ஆயுளை மேம்படுத்துகிறது"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"பேட்டரி சார்ஜ் செய்வது தற்காலிகமாகக் கட்டுப்படுத்தப்பட்டுள்ளது. மேலும் அறிய தட்டவும்."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"உங்கள் சாதனம் வழக்கத்தைவிட அதிகமாகப் பயன்படுத்தப்பட்டுள்ளது. எதிர்பார்த்ததைவிட வேகமாக பேட்டரி தீர்ந்துவிடக்கூடும்.\n\nஅதிகளவு பேட்டரியைப் பயன்படுத்திய ஆப்ஸ்:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"உங்கள் டேப்லெட்டை வழக்கத்தைவிட அதிகமாகப் பயன்படுத்தியுள்ளீர்கள். எதிர்பார்த்ததைவிட வேகமாக பேட்டரி தீர்ந்துவிடக்கூடும்.\n\nஅதிகளவு பேட்டரியைப் பயன்படுத்திய ஆப்ஸ்:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"உங்கள் சாதனம் வழக்கத்தைவிட அதிகமாகப் பயன்படுத்தப்பட்டுள்ளது. எதிர்பார்த்ததைவிட வேகமாக பேட்டரி தீர்ந்துவிடக்கூடும்.\n\nஅதிகளவு பேட்டரியைப் பயன்படுத்திய ஆப்ஸ்:"</string>
@@ -2723,6 +2723,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"நிறுவ வேண்டாம்"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"பரவாயில்லை, நிறுவு"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"சான்றிதழ் நிறுவப்படவில்லை"</string>
+    <string name="request_manage_credentials_title" msgid="4524504926699928916">"இந்தச் சாதனத்தில் சான்றிதழ்களை நிறுவ <xliff:g id="APP_NAME">%s</xliff:g> ஆப்ஸை அனுமதிக்கவா?"</string>
+    <string name="request_manage_credentials_description" msgid="4969609158022551952">"இந்தச் சான்றிதழ்கள் கீழே உள்ள ஆப்ஸுக்கும் URLகளுக்கும் உங்களை அடையாளப்படுத்தும்"</string>
+    <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"அனுமதிக்க வேண்டாம்"</string>
+    <string name="request_manage_credentials_allow" msgid="4910940118408348245">"அனுமதி"</string>
+    <string name="request_manage_credentials_more" msgid="6101210283534101582">"மேலும் காட்டு"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Certificate management ஆப்ஸ்"</string>
+    <string name="no_certificate_management_app" msgid="3025739370424406717">"ஏதுமில்லை"</string>
+    <string name="certificate_management_app_description" msgid="7257420502179110164">"இந்த ஆப்ஸால் நிறுவப்பட்ட சான்றிதழ்கள் பின்வரும் ஆப்ஸுக்கும் URLகளுக்கும் உங்களை அடையாளப்படுத்தும்"</string>
+    <string name="remove_credential_management_app" msgid="6879631067380232928">"அகற்று"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"அவசரகால டயலிங் சிக்னல்"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"அவசர அழைப்பு இயக்கப்பட்டிருக்கும்போது நடத்தையை அமை"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"காப்புப்பிரதி"</string>
@@ -4645,6 +4654,11 @@
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"அதிகபட்சத் தெரியக்கூடிய தரவுத் தொகுப்புகள்"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"இயல்புநிலை மதிப்புகளுக்கு மீட்டமை"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"தன்னிரப்பி டெவெலப்பர் விருப்பங்கள் மீட்டமைக்கப்பட்டன"</string>
+    <string name="location_category" msgid="3496759112306219062">"இருப்பிடம்"</string>
+    <string name="location_indicator_settings_title" msgid="6655916258720093451">"நிலைப் பட்டியின் இருப்பிட இண்டிக்கேட்டர்"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"நெட்வொர்க், இணைப்புநிலை உட்பட அனைத்து இருப்பிடங்களுக்கும் காட்டும்"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"முழுமையான GNSS அளவீடுகளை அமலாக்கு"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"பணி சுழற்சியை முடக்கி, GNSS வழிசெலுத்துதல்கள் மற்றும் அதிர்வெண்கள் அனைத்தையும் கண்காணித்தல்."</string>
     <string name="device_theme" msgid="5027604586494772471">"சாதனத்தின் தீம்"</string>
     <string name="default_theme" msgid="4815428567082263639">"இயல்பு"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"நெட்வொர்க் பெயர்"</string>
@@ -4661,8 +4675,6 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"கவனம் சிதறாமல் இருக்க, அறிவிப்புகளை இடைநிறுத்தவும்"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"அம்சம் இல்லை"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"மொபைலின் வேகத்தைப் பாதிப்பதால் இந்த அம்சம் ஆஃப் செய்யப்பட்டுள்ளது"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"முழுமையான GNSS அளவீடுகளை அமலாக்கு"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"பணி சுழற்சியை முடக்கி, GNSS வழிசெலுத்துதல்கள் மற்றும் அதிர்வெண்கள் அனைத்தையும் கண்காணித்தல்."</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"சிதைவு அறிவிப்பை எப்போதும் காட்டு"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"ஆப்ஸ் செயலிழக்கும் போதெல்லாம் சிதைவு அறிவிப்பைக் காட்டும்"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"ANGLE இயக்கப்பட்ட ஆப்ஸைத் தேர்வுசெய்க"</string>
@@ -4730,7 +4742,7 @@
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"ஆன் (ஒலி முடக்கம்)"</string>
     <string name="prevent_ringing_option_none_summary" msgid="7004926708584574224">"ஆஃப்"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"நெட்வொர்க் விவரங்கள்"</string>
-    <string name="about_phone_device_name_warning" msgid="764557372426153827">"உங்களது மொபைலில் உள்ள ஆப்ஸிற்கு, உங்கள் சாதனத்தின் பெயர் தெரியும். புளூடூத் சாதனங்களுடன் இணைக்கும்போது அல்லது வைஃபை ஹாட்ஸ்பாட்டை அமைக்கும்போது, அப்பெயர் பிறருக்குக் காட்டப்படலாம்."</string>
+    <string name="about_phone_device_name_warning" msgid="1938930553285875166">"உங்கள் மொபைலில் உள்ள ஆப்ஸால் உங்கள் சாதனத்தின் பெயரைப் பார்க்க முடியும். புளூடூத் சாதனங்கள், வைஃபை நெட்வொர்க் ஆகியவற்றுடன் இணைக்கும்போதோ வைஃபை ஹாட்ஸ்பாட்டை அமைக்கும்போதோ அப்பெயர் பிறருக்கும் காட்டப்படக்கூடும்."</string>
     <string name="devices_title" msgid="649715719278562515">"சாதனங்கள்"</string>
     <string name="homepage_all_settings" msgid="1877827279189801035">"அனைத்து அமைப்புகளும்"</string>
     <string name="homepage_personal_settings" msgid="8312279476519359656">"பரிந்துரைகள்"</string>
@@ -4890,6 +4902,10 @@
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"சிம்மை இயக்க முடியவில்லை"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"சிம்மை அகற்றிவிட்டு மீண்டும் செருகவும். சிக்கல் தொடரும்பட்சத்தில் சாதனத்தை மீண்டும் தொடங்கவும்."</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"சிம்மை மீண்டும் ஆன் செய்து பார்க்கவும். சிக்கல் தொடரும்பட்சத்தில் சாதனத்தை மீண்டும் தொடங்கவும்."</string>
+    <string name="sim_setup_channel_id" msgid="8797972565087458515">"மொபைல் நெட்வொர்க்கை இயக்குதல்"</string>
+    <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> செயல்பாட்டில் உள்ளது"</string>
+    <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"SIM அமைப்புகளை மாற்ற தட்டவும்"</string>
+    <string name="sim_card_label" msgid="5632157635124050923">"SIM கார்டு"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"இந்தப் பதிவிறக்கிய சிம்மை அழிக்கவா?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"சிம்மை அழிப்பது இந்தச் சாதனத்தில் இருந்து <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> சேவையை அகற்றிவிடும்.\n\nஇதனால் <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> சேவை ரத்துசெய்யப்படாது."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"அழி"</string>
@@ -5042,10 +5058,23 @@
     <string name="calls_sms_footnote" msgid="7002461875954024216">"வைஃபை அழைப்பு அம்சம் மூலம் சில வைஃபை நெட்வொர்க்குகள் போன்ற மொபைல் நிறுவனம் அல்லாத நெட்வொர்க்குகளைப் பயன்படுத்தி அழைக்கலாம் அழைப்புகளைப் பெறலாம்."</string>
     <string name="calls_preference_title" msgid="7536882032182563800">"அழைப்புகள்"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"மெசேஜ்"</string>
+    <string name="calls_sms_preferred" msgid="6016477652522583496">"விருப்பம்"</string>
+    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"அழைப்புகளை மேற்கொள்ளலாம்"</string>
+    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"மெசேஜ் அனுப்பலாம்"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"அழைப்புகள்/மெசேஜ் செய்ய முடியாது"</string>
+    <string name="calls_sms_no_sim" msgid="2336377399761819718">"சிம் இல்லை"</string>
     <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"விருப்பத்தேர்வுகள்"</string>
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"பொது நெட்வொர்க்குகளுடன் இணைக்கலாம்"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"நெட்வொர்க் இணைப்பு, இணையம், வயர்லெஸ், டேட்டா, வைஃபை, வை-ஃபை, வை ஃபை, செல்லுலார், மொபைல், செல் கேரியர், 4g, 3g, 2g, lte"</string>
+    <string name="view_airplane_safe_networks" msgid="7390511371040078514">"விமான-பாதுகாப்பு நெட்வொர்க்குகளை காட்டு"</string>
+    <string name="turn_off_airplane_mode" msgid="1334192337050190071">"விமானப் பயன்முறையை ஆஃப் செய்"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"உறக்கநேரப் பயன்முறை ஆன் செய்யப்பட்டுள்ளதால் கிடைக்காது"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"அறிவிப்பு முக்கியத்துவம் மீட்டமைக்கப்பட்டது."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"ஆப்ஸ்"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"நம்பகமற்ற சாதனம் ஒன்று உங்கள் மெசேஜ்களை அணுக விரும்புகிறது. விவரங்களைப் பார்க்க தட்டவும்."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"மெசேஜ்களை அணுக அனுமதிக்கவா?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="6004506637437582983">"[<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] எனும் நம்பகமற்ற புளூடூத் சாதனம் ஒன்று உங்கள் மெசேஜ்களை அணுக விரும்புகிறது.\n\nநீங்கள் இதற்குமுன் [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] சாதனத்துடன் இணைத்ததில்லை."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"நம்பகமற்ற சாதனம் ஒன்று உங்கள் தொடர்புகளையும் அழைப்புப் பதிவையும் அணுக விரும்புகிறது. விவரங்களைப் பார்க்க தட்டவும்."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"தொடர்புகளையும் அழைப்புப் பதிவையும் அணுக அனுமதிக்கவா?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="2235876209172857819">"[<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>] எனும் நம்பகமற்ற புளூடூத் சாதனம் ஒன்று உங்கள் தொடர்புகளையும் அழைப்புப் பதிவையும் அணுக விரும்புகிறது. உள்வரும், வெளிச்செல்லும் அழைப்புகளைப் பற்றிய தரவும் இதில் அடங்கும்.\n\nநீங்கள் இதற்குமுன் [<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>] சாதனத்துடன் இணைத்ததில்லை."</string>
 </resources>

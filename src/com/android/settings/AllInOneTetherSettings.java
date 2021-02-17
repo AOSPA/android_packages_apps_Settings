@@ -355,18 +355,7 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onTetherConfigUpdated(AbstractPreferenceController controller) {
         final SoftApConfiguration config = buildNewConfig();
-        boolean bandEntriesChanged = false;
         mPasswordPreferenceController.updateVisibility(config.getSecurityType());
-
-        if (mApBandPreferenceController.isVendorDualApSupported()
-                && mSecurityPreferenceController.isOweSapSupported()) {
-            if ((config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OWE)
-                    == (mApBandPreferenceController.isBandEntriesHasDualband())) {
-                mApBandPreferenceController.updatePreferenceEntries(config);
-                bandEntriesChanged = true;
-            }
-        }
-
         mWifiManager.setSoftApConfiguration(config);
 
         if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED) {
@@ -376,24 +365,18 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
             mRestartWifiApAfterConfigChange = true;
             mTetherEnabler.stopTethering(TETHERING_WIFI);
         }
-
-        if (bandEntriesChanged)
-            mApBandPreferenceController.updateDisplay();
     }
 
     private SoftApConfiguration buildNewConfig() {
         final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         final int securityType = mSecurityPreferenceController.getSecurityType();
-        final int band = mApBandPreferenceController.getBandIndex();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
-        configBuilder.setPassphrase(mPasswordPreferenceController.getPasswordValidated(securityType),
-                                    securityType);
-        if (securityType == SoftApConfiguration.SECURITY_TYPE_OWE
-                && band == SoftApConfiguration.BAND_DUAL) {
-            configBuilder.setBand(SoftApConfiguration.BAND_2GHZ);
-        } else {
-            configBuilder.setBand(band);
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
+            configBuilder.setPassphrase(
+                    mPasswordPreferenceController.getPasswordValidated(securityType),
+                    SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
         }
+        configBuilder.setBand(mApBandPreferenceController.getBandIndex());
         return configBuilder.build();
     }
 
