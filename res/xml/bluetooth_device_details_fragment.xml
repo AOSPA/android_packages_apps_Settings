@@ -53,4 +53,12 @@
         settings:searchable="false"
         settings:controller="com.android.settings.bluetooth.BluetoothDetailsMacAddressController"/>
 
+    <com.android.settings.bluetooth.BADeviceVolumePreference
+        android:key="ba_device_volume"
+        android:icon="@drawable/ic_volume_media_bt"
+        android:title="@string/bcast_sink_volume_title"
+        settings:allowDividerBelow="true"
+        settings:allowDividerAbove="true"
+        settings:controller="com.android.settings.bluetooth.BADeviceVolumeController"/>
+
 </PreferenceScreen>

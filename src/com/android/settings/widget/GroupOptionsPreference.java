@@ -51,6 +51,7 @@ import com.android.settings.R;
 public class GroupOptionsPreference extends Preference {
 
     private static final String TAG = "GroupOptionsPreference";
+    private final ButtonInfo mBtnAddSrcGroup = new ButtonInfo();
     private final ButtonInfo mBtnConnect = new ButtonInfo();
     private final ButtonInfo mBtnForget = new ButtonInfo();
     private final ButtonInfo mBtnDisconnect = new ButtonInfo();
@@ -86,6 +87,7 @@ public class GroupOptionsPreference extends Preference {
         super.onBindViewHolder(holder);
         holder.setDividerAllowedAbove(true);
         holder.setDividerAllowedBelow(true);
+        mBtnAddSrcGroup.mButton = (Button) holder.findViewById(R.id.id_btn_group_add_source);
         mBtnConnect.mButton = (Button) holder.findViewById(R.id.id_btn_connect);
         mBtnForget.mButton = (Button) holder.findViewById(R.id.id_btn_forget);
         mBtnDisconnect.mButton = (Button) holder.findViewById(R.id.id_btn_disconnect);
@@ -94,6 +96,7 @@ public class GroupOptionsPreference extends Preference {
         mTvGroupId.mTextView = (TextView)holder.findViewById(R.id.id_tv_groupid);
         mTvStatus.mTextView =(TextView)holder.findViewById(R.id.id_tv_status);
         mProgressScan.mProgress = (ProgressBar)holder.findViewById(R.id.id_progress_group_scan);
+        mBtnAddSrcGroup.setUpButton();
         mBtnConnect.setUpButton();
         mBtnForget.setUpButton();
         mBtnDisconnect.setUpButton();
@@ -102,6 +105,40 @@ public class GroupOptionsPreference extends Preference {
         mTvGroupId.setUpTextView();
         mTvStatus.setUpTextView();
         mProgressScan.setUpProgress();
+    }
+
+    public GroupOptionsPreference setAddSourceGroupButtonVisible(boolean isVisible) {
+        if (isVisible != mBtnAddSrcGroup.mIsVisible) {
+            mBtnAddSrcGroup.mIsVisible = isVisible;
+            notifyChanged();
+        }
+        return this;
+    }
+
+    public GroupOptionsPreference setAddSourceGroupButtonText(@StringRes int textResId) {
+        final String newText = getContext().getString(textResId);
+        if (!TextUtils.equals(newText, mBtnAddSrcGroup.mText)) {
+            mBtnAddSrcGroup.mText = newText;
+            notifyChanged();
+        }
+        return this;
+    }
+
+    public GroupOptionsPreference setAddSourceGroupButtonEnabled(boolean isEnabled) {
+        if (isEnabled != mBtnAddSrcGroup.mIsEnabled) {
+            mBtnAddSrcGroup.mIsEnabled = isEnabled;
+            notifyChanged();
+        }
+        return this;
+    }
+
+    public GroupOptionsPreference setAddSourceGroupButtonOnClickListener(
+        View.OnClickListener listener) {
+        if (listener != mBtnAddSrcGroup.mListener) {
+            mBtnAddSrcGroup.mListener = listener;
+            notifyChanged();
+        }
+        return this;
     }
 
     public GroupOptionsPreference setConnectButtonVisible(boolean isVisible) {
