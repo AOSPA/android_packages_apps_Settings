@@ -175,7 +175,7 @@ public class ProviderModelSliceHelper {
     }
 
     protected boolean isDataSimActive() {
-        return MobileNetworkUtils.activeNetworkIsCellular(mContext);
+        return isNoCarrierData() ? false : MobileNetworkUtils.activeNetworkIsCellular(mContext);
     }
 
     protected boolean isNoCarrierData() {
@@ -261,7 +261,8 @@ public class ProviderModelSliceHelper {
         final SubscriptionInfo defaultSubscription = mSubscriptionManager.getActiveSubscriptionInfo(
                 mSubscriptionManager.getDefaultDataSubscriptionId());
         if (defaultSubscription != null) {
-            title = defaultSubscription.getDisplayName().toString();
+            title = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                    defaultSubscription, mContext).toString();
         }
         return title;
     }

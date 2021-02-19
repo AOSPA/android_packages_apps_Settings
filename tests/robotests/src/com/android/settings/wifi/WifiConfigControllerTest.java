@@ -49,6 +49,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -625,8 +626,11 @@ public class WifiConfigControllerTest {
         when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_EAP);
         final SubscriptionInfo subscriptionInfo = mock(SubscriptionInfo.class);
         final int carrierId = 6;
+        when(subscriptionInfo.getSubscriptionId()).thenReturn(carrierId);
+        when(subscriptionInfo.getDisplayName()).thenReturn("FAKE-CARRIER");
         when(subscriptionInfo.getCarrierId()).thenReturn(carrierId);
         when(subscriptionInfo.getCarrierName()).thenReturn("FAKE-CARRIER");
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(subscriptionInfo));
         mShadowSubscriptionManager.setActiveSubscriptionInfoList(Arrays.asList(subscriptionInfo));
         mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
                 WifiConfigUiBase.MODE_CONNECT);
