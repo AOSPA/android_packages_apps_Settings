@@ -45,6 +45,7 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.data.ApnSetting;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -415,7 +416,8 @@ public class ApnSettings extends RestrictedSettingsFragment
                     pref.setSummary(apn);
                 }
 
-                boolean selectable = ((type == null) || !type.equals("mms"));
+                boolean selectable =
+                        ((type == null) || type.contains(ApnSetting.TYPE_DEFAULT_STRING));
                 if (isVoLTEEnabled && selectable && Utils.isSupportCTPA(appContext)) {
                     selectable = ((type == null) || !type.equals("ims"));
                 }

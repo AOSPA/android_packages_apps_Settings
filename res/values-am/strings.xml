@@ -52,6 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"በማያ ገጽ ላይ ያለውን ጽሑፍ ያሳንሱ ወይም ያተልቁ።"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"አነስ አድርግ"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"ተለቅ አድርግ"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"ራስ-አዙር ይጠቀሙ"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"መልክ ላይ የተመሰረተው ራስ-አዙር በማያ ገጹ ላይ የሆነ ሰው እያየ መሆኑን እና እንዴት እያየ እንደሆነ ለመመልከት የፊት ካሜራውን ይጠቀማል። ተኝተው እያሉ ለማንበብ ይፈቅዳል እንዲሁም ምስሎች በጭራሽ አይከማቹም ወይም ወደ Google አይላኩም።&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Lየበለጠ ለመረዳትlt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"የናሙና ጽሑፍ"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"አስደናቂው የኦዝ ምትሃተኛ"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"ምዕራፍ 11፦ ኦዝ፣ አስደናቂዋ የኤምራልድ ከተማ"</string>
@@ -1172,6 +1174,10 @@
     <string name="search_settings" msgid="7573686516434589771">"ፍለጋ"</string>
     <string name="display_settings" msgid="7197750639709493852">"አሳይ"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"ማያ በራስ ሰር አሽከርክር"</string>
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"አጥፋ"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"አብራ"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"በርቷል - መልክ ላይ የተመሠረተ"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"መልክ ማወቅ አንቃ"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"ቀለማት"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ተፈጥሯዊ"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"ተጨምሯል"</string>
@@ -2132,9 +2138,11 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"ይህን መሣሪያ ከእርስዎ ፍላጎቶች ጋር እንዲጣጣም ማበጀት ይችላሉ። እነዚህ የተደራሽነት ባህሪያት በኋላ ላይ በቅንብሮች ውስጥ ሊቀየሩ ይችላሉ።"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"የቅርጸ-ቁምፊ መጠን ይቀይሩ"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"የማያ ገጽ አንባቢዎች"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"ኦዲዮ እና የማያ ገጽ ላይ ጽሑፍ"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"መግለጫ ጽሑፎች"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"ኦዲዮ"</string>
     <string name="display_category_title" msgid="6638191682294461408">"አሳይ"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"ጽሁፍ እና ማሳያ"</string>
+    <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"ማያ ገጹን ወደ ጥቁር ይቀይሩ"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"የመስተጋብር መቆጣጠሪያዎች"</string>
     <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"እርዳታ መታ ያድርጉ"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"የስርዓት መቆጣጠሪያዎች"</string>
@@ -2274,6 +2282,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"አጥፋ"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"እየሰራ አይደለም። ለመረጃ መታ ያድርጉ።"</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"ይህ አገልግሎት በአግባቡ እየሰራ አይደለም።"</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"የተደራሽነት አቋራጮች"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"በፈጣን ቅንብሮች ውስጥ አሳይ"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"የእርማት ሁነታ"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"ዲውተራኖማሊ"</string>
@@ -2283,6 +2292,15 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"ቀይ-አረንጓዴ"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"ቀይ-አረንጓዴ"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"ሰማያዊ-ቢጫ"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="5249275952895378507">"ብሩህነትን ይቀንሱ"</string>
+    <string name="reduce_bright_colors_preference_summary" product="default" msgid="3824406431092247331">"ከስልክዎ አነስተኛ ብሩህነት የበለጠ ማያ ጨለማ ያድርጉ"</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="867454382618040359">"ከጡባዊዎ አነስተኛ ብሩህነት የበለጠ ማያ ጨለማ ያድርጉ"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="7098993556258805657">"ለማንበብ የበለጠ ምቾት እንዲኖርዎ ማያ ገጽዎን የበለጠ ጥቁር ያድርጉት።&lt;br/&gt;&lt;br/&gt; ይህ ጠቃሚ ሊሆን የሚችለው፦ &lt;ol&gt; &lt;li&gt; የስልክዎ ነባሪ ዝቅተኛ ብሩህነት አሁንም በጣም ብሩህ ሲሆን&lt;/li&gt; &lt;li&gt; ስልክዎን በጨለማ ሁኔታዎች ውስጥ ይጠቀማሉ፣ ለምሳሌ ማታ ወይም በጨለማ ክፍል ውስጥ ከመተኛትዎ በፊት&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"ለማንበብ የበለጠ ምቾት እንዲኖርዎ ማያ ገጽዎን የበለጠ ጨለማ ያድርጉት&lt;br/&gt;&lt;br/&gt; ይህ ጠቃሚ ሊሆን የሚችለው፦ &lt;ol&gt; &lt;li&gt; የጡባዊዎ ነባሪ ዝቅተኛ ብሩህነት አሁንም በጣም ብሩህ ሲሆን&lt;/li&gt; &lt;li&gt; ጡባዊዎን በጨለማ ሁኔታዎች ውስጥ ለምሳሌ ማታ ወይም በጨለማ ክፍል ውስጥ ከመተኛቱ በፊት ሲጠቀሙ ነው&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"ክብደት"</string>
+    <string name="reduce_bright_colors_intensity_preference_start_label" msgid="109739628110493358">"በትንሹ የጠቆረ"</string>
+    <string name="reduce_bright_colors_intensity_preference_end_label" msgid="8686269714092663507">"በጣም የጠቆረ"</string>
+    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"መሣሪያው እንደገና ከጀመረ በኋላ ይቀጥሉ"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="one">አጭር (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ሰከንዶች)</item>
       <item quantity="other">አጭር (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ሰከንዶች)</item>
@@ -2436,8 +2454,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi-Fi በጊዜ"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"የባትሪ አጠቃቀም"</string>
     <string name="history_details_title" msgid="8628584613889559355">"የታሪክ ዝርዝሮች"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"የባትሪ አጠቃቀምን ይመልከቱ"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"የባትሪ አጠቃቀም"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"ዝርዝሮችን ተጠቀም"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"የኃይል አጠቃቀም አስተካክል"</string>
@@ -3079,11 +3096,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"ተጠቃሚን ሰርዝ"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"ሰርዝ"</string>
     <string name="user_guest" msgid="4545590092001460388">"እንግዳ"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"የእንግዳ ውሂብን አጽዳ"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"የእንግዳ ክፍለ-ጊዜ ጨርስ"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"የእንግዳ ክፍለ-ጊዜ ይብቃ?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"እንግዳ አስወግድ"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"እንግዳ ይወገድ?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"በዚህ ክፍለ-ጊዜ ውስጥ ያሉ ሁሉም መተግበሪያዎች እና ውሂብ ይሰረዛሉ።"</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"ክፍለ-ጊዜን አብቃ"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"አስወግድ"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"የስልክ ጥሪዎችን አብራ"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"ስልክ ጥሪዎችን እና ኤስኤምኤስን አብራ"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ተጠቃሚን ሰርዝ"</string>
@@ -3662,6 +3678,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"የውይይት ማሳወቂያዎች"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"የማንቂያ ማሳወቂያዎች"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"ጸጥ ያሉ ማሳወቂያዎች"</string>
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"ከዚህ አዳማጭ ጋር በድልድይ ያልተገናኙ መተግበሪያዎች"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"ሁሉም መተግበሪያዎች በድልድይ ተገናኝተዋል"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="one">%d መተግበሪያዎች በድልድይ አልተገናኙም</item>
+      <item quantity="other">%d መተግበሪያዎች በድልድይ አልተገናኙም</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"በድልድይ የተገናኙ መተግበሪያዎች"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"የምናባዊ ዕውነታ አጋዥ አገልግሎቶች"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ምንም የተጫኑ መተግበሪያዎች እንደ የምናባዊ ዕውነታ አጋዥ አገልግሎቶች ሆነው እንዲሄዱ አልጠየቁም።"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"ለ<xliff:g id="SERVICE">%1$s</xliff:g> የምናባዊ ዕውነታ መዳረሻ ይፈቀድለት?"</string>
@@ -4095,6 +4118,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"ፋይልን ማስተላለፍ"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"ወደ ሌላ መሣሪያ ፋይሎችን ያስተላልፉ"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"ወደ ውጭ የተላከ ሚዲያን ኮድ ቀይር  አድርግ"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"MTP የማይደገፍ ከሆነ ፎቶዎችን ወይም ፋይሎችን ማዛወር (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"ዩኤስቢን እንደ ሞደም መሰካት"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4102,8 +4126,8 @@
     <string name="usb_use" msgid="6783183432648438528">"ዩኤስቢ ተጠቀም ለ"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"ነባሪ የዩኤስቢ ውቅረት"</string>
     <string name="usb_default_info" msgid="167172599497085266">"ሌላ መሣሪያ ሲገናኝ እና የእርስዎ ስልክ ሲከፈት እነዚህ ቅንብሮች ተፈጻሚ ይሆናሉ። ከሚታመኑ መሣሪያዎች ጋር ብቻ ይገናኙ።"</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"የኃይል አማራጮች"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"የፋይል ማስተላለፊያ አማራጮች"</string>
     <string name="usb_pref" msgid="8521832005703261700">"ዩ ኤስ ቢ"</string>
     <string name="usb_preference" msgid="5084550082591493765">"የዩኤስቢ ምርጫዎች"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"ዩኤስቢ በሚከተለው ቁጥጥር ይደረግበታል፦"</string>
@@ -4322,7 +4346,8 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> ገደቦች</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"የአገልግሎት አቅራቢ ውሂብ የሂሳብ አከፋፈል ከመሳሪያ የሂሳብ አከፋፈል የተለየ ሊሆን ይችላል"</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"የአገልግሎት አቅራቢ አውታረ መረቦች የሚጠቀሙበትን ውሂብ አያካትትም"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> ጥቅም ላይ ውሏል"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"የውሂብ ማስጠንቀቂያ አዘጋጅ"</string>
     <string name="data_warning" msgid="2925054658166062884">"የውሂብ ማስጠንቀቂያ"</string>
@@ -4915,8 +4940,24 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"ሲሙን ያስወጡትና እንደገና ያስገቡት። ችግሩ ከቀጠለ መሣሪያዎን ዳግም ያስነሱት።"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"ሲሙን እንደገና ለማብራት ይሞክሩ። ችግሩ ከቀጠለ መሣሪያዎን ዳግም ያስነሱት።"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"አውታረ መረብን ማግበር"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ገቢር ነው"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"የሲም ቅንብሮችን ለማዘመን መታ ያድርጉ"</string>
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"ወደ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ተቀይሯል"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"ወደ ሌላ አገልግሎት አቅራቢ ተቀይሯል"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"የእርስዎ የተንቀሳቃሽ ስልክ አውታረ መረብ ተቀይሯል"</string>
+    <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"የእርስዎን ሌላ ሲም ያቀናብሩ"</string>
+    <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"የእርስዎን ገቢር ሲም ይምረጡ ወይም በአንድ ጊዜ 2 ሲሞችን ይጠቀሙ"</string>
+    <string name="choose_sim_title" msgid="4804689675237716286">"የሚጠቀሙበትን ቁጥር ይምረጡ"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"<xliff:g id="NUMBER">%1$d</xliff:g> ቁጥሮች በዚህ መሣሪያ ላይ ይገኛሉ፣ ነገር ግን በአንድ ጊዜ አንዱን ብቻ ነው መጠቀም የሚቻለው"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"በማግበር ላይ<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"አሁን ማግበር አልተቻለም"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"ያልታወቀ ቁጥር"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>ን ይጠቀሙ?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ለተንቀሳቃሽ ስልክ ውሂብ፣ ጥሪዎች እና ኤስኤምኤስ ስራ ላይ ይውላል።"</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"ምንም ገቢር ሲሞች የሉም"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"የተንቀሳቃሽ ስልክ ውሂብን፣ የስልክ ጥሪ ባህሪያትን እና ኤስኤምኤስን ለመጠቀም ወደ የእርስዎ አውታረ መረብ ቅንብሮች ይሂዱ።"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"ሲም ካርድ"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"ይህ የወረደ ሲም ይደምሰስ?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"ይህን ሲም መደምሰስ የ<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> አገልግሎቱን ከዚህ መሣሪያ ያስወግደዋል።\n\nለ<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> የሆነ አገልግሎት አይሰረዝም።"</string>
@@ -4943,10 +4984,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"በአይሮፕላን ሁነታ ወቅት የማይገኝ"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"የዴስክቶፕ ሁነታን አስገድድ"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"በሁለተኛ ማሳያዎች ላይ የሙከራ ዴስክቶፕ ሁነታን አስገድድ"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"በብዝሃ-መስኮት ውስጥ መጠን መቀየር የማይቻለውን አንቃ"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"መጠን መቀየር የማይቻሉትን መተግበሪያዎች በብዝሃ-መስኮት ውስጥ እንዲሆኑ ይፈቅዳል"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"አስገዳጅ ጨለማን ሻር"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"አስገዳጅ ጨለማ ባህሪን ሁልጊዜ እንዲበራ የተቀመጠውን ደንብ ይሽራል"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"ድብዘዛዎችን አንቃ"</string>
@@ -4998,7 +5037,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"በየWi‑Fi ጥሪ ማድረጊያ በኩል የሚደረጉ የድንገተኛ አደጋ የስልክ ጥሪዎች በአገልግሎት አቅራቢው የሚደገፉ አይደሉም።\nየድንገተኛ አደጋ ጥሪን ለማድረግ መሣሪያው በራስሰር ወደ ተንቀሳቃሽ ስልክ አውታረ መረብ ይቀይራል።\nየድንገተኛ አደጋ የስልክ ጥሪዎችን ማድረግ የተንቀሳቃሽ ስልክ ሽፋን ባለባቸው አካባቢዎች ላይ ብቻ የሚቻል ነው።"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"ጥራትን ለማሻሻል Wi‑Fiን ለጥሪዎች ይጠቀሙ"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"ምትኬ ጥሪ"</string>
-    <string name="backup_calling_setting_summary" msgid="451295393447465830">"<xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> የማይገኝ ከሆነ፣ <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> ጥሪዎችን ለማድረግ እና ለመቀበል የሞባይል ውሂብዎን ሲም ይጠቀሙ።"</string>
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"<xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> የማይገኝ ወይም በማንዣበብ ላይ ከሆነ ለ<xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> ጥሪዎች የተንቀሳቃሽ ስልክ ውሂብ ሲምዎን ይጠቀሙ።"</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"ምትኬ ጥሪ"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"ገቢ የኤምኤምኤስ መልዕክት"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"የኤምኤምኤስ መልዕክት መላክ አይቻልም"</string>
@@ -5068,23 +5107,24 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"አውሮፕላን፣ የአውሮፕላን ድህንነቱ የተጠበቀ"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"ጥሪዎች እና ኤስኤምኤስ"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"የWi-Fi ጥሪ ማድረጊያ"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"ጥሪዎችን በWi-Fi ያድርጉ እና ይቀበሉ"</string>
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"በWi-Fi ጥሪ ማድረጊያ አማካኝነት ጥሪዎችን የሚደረጉት እና የሚቀበሉት ጥሪ አቅራቢ ባልሆኑ የWi‑Fi አውታረ መረቦች ላይ ነው። "<annotation id="url">"የበለጠ ለመረዳት"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"ጥሪዎች"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"ኤስኤምኤስ"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"የተመረጡ"</string>
-    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"ጥሪዎች ተመርጠዋል"</string>
-    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"ኤስኤምኤስ ተመርጧል"</string>
+    <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"ለጥሪዎች ተመራጭ"</string>
+    <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"ለኤስኤምኤስ ተመራጭ"</string>
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"አይገኝም"</string>
+    <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"ለጊዜው አይገኝም"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"SIM የለም"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"ምርጫዎች"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"ከይፋዊ አውታረ መረቦች ጋር አገናኝ"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"የአውታረ መረብ ግንኙነት በይነመረብ፣ ገመድ-አልባ፣ ውሂብ፣ wifi፣ wi-fi፣ wi fi፣ ተንቀሳቃሽ ስልክ፣ ሞባይል፣ የተንቀሳቃሽ ስልክ አገልግሎት አቅራቢ፣ 4ጂ፣ 3ጂ፣ 2ጂ፣ lte፣ ኤልቲኢ"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"የአውሮፕላን ሁነታ አውታረመረቦችን ይመልከቱ"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"የአውሮፕላን ሁነታ አውታረመረቦችን መመልከት"</string>
-    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"የአውሮፕላን ሁነታን ያጥፉ"</string>
+    <string name="turn_on_networks" msgid="7786747178388835577">"አውታረመረቦችን ያብሩ"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"አውታረ መረቦችን ያጥፉ"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"በይነመረብዎን ዳግም ያስጀምሩ?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"ይህ የስልክ ጥሪዎን ይጨርሳል"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"ይህ የስልክ ጥሪዎን ይጨርሳል"</string>
@@ -5092,8 +5132,7 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"ግንኙነትን ያስተካክሉ"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"የአውሮፕላን ሁነታ አውታረ መረቦች ይገኛሉ"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"አውታረ መረቦችን ለመቀየር፣ የኢተርኔት ግንኙነት ያቋርጡ"</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"የአውሮፕላን ሁነታ አውታረ መረቦች"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"ተገናኝቷል"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"በይነመረብ በራስ-ሰር አይገናኝም"</string>
@@ -5115,28 +5154,18 @@
     <string name="category_name_others" msgid="2366006298768550310">"ሌሎች"</string>
     <string name="category_name_general" msgid="7737273712848115886">"ጠቅላላ"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"ሁሉንም መተግበሪያዎች ይመልከቱ"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"ብልህ ማስተላለፍ"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"ዘመናዊ ማስተላለፍ ነቅቷል"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"ዘመናዊ ማስተላለፍ ተሰናክሏል"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"የጥሪ ቅንብሮች"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"ቅንብሮችን በማዘመን ላይ…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"የጥሪ ቅንብሮች ስህተት"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"የአውታረ መረብ ወይም የሲም ካርድ ስህተት።"</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"ሲም ገብር አልሆነም።"</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"የስልክ ቁጥሮች ያስገቡ"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"የስልክ ቁጥር ያስገቡ"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"የስልክ ቁጥር ይቀራል።"</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"እሺ"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
     <skip />
 </resources>
