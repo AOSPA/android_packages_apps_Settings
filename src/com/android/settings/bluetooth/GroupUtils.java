@@ -42,15 +42,22 @@ import com.android.settings.widget.GroupPreferenceCategory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.DeviceGroupClientProfile;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfile;
+import com.android.settings.R;
 
+import com.android.settings.core.SubSettingLauncher;
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.DeviceGroup;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
+import android.os.Bundle;
 
 /**
  * GroupUtils is a helper class that contains various Group UI specific
@@ -72,6 +79,11 @@ public class GroupUtils {
     private static final String PROPERTY_GROUP = "persist.vendor.service.bt.adv_audio_mask";
     private boolean mIsGroupEnabled = false;
 
+    protected LocalBluetoothProfileManager mProfileManager;
+    private LocalBluetoothManager mLocalBluetoothManager;
+    private  LocalBluetoothProfile mBCProfile = null;
+    private static final String KEY_DEVICE_ADDRESS = "device_address";
+    private static final String KEY_GROUP_OP = "group_op";
     /*
      * Returns whether if the device is group device.
      */
@@ -130,6 +142,13 @@ public class GroupUtils {
         mCtx = ctx;
         mCacheDeviceNamanger = Utils.getLocalBtManager(mCtx).getCachedDeviceManager();
         isGroupEnabled();
+        mLocalBluetoothManager = Utils.getLocalBtManager(mCtx);
+        if (mLocalBluetoothManager == null) {
+            Log.e(TAG, "Bluetooth is not supported on this device");
+            return;
+        }
+        mProfileManager = mLocalBluetoothManager.getProfileManager();
+        mBCProfile = mProfileManager.getBCProfile();
     }
 
     private int getGroupId(Preference preference) {
@@ -385,6 +404,57 @@ public class GroupUtils {
             Log.d(TAG, "getCahcedDevice " + groupId + " list " + list + " " + list.size());
         }
         return list;
+    }
+
+    public BluetoothDevice getAnyBCConnectedDevice (int groupId) {
+        BluetoothDevice bcMemberDevice = null;
+
+        mDeviceGroup = mGroupClientProfile.getGroup(groupId);
+        if (mDeviceGroup == null) {
+            Log.e(TAG, "getAnyBCConnectedDevice: dGrp is null");
+            return null;
+        }
+        if (mBCProfile == null) {
+             Log.e(TAG, "getAnyBCConnectedDevice: BCProfile is null");
+             return null;
+        }
+        List<BluetoothDevice> setMembers = mDeviceGroup.getDeviceGroupMembers();
+        for (BluetoothDevice dev : setMembers) {
+            if (mBCProfile.getConnectionStatus(dev) == BluetoothProfile.STATE_CONNECTED) {
+               bcMemberDevice = dev;
+               break;
+            }
+        }
+        return bcMemberDevice;
+     }
+     void launchAddSourceGroup(int groupId) {
+          Class<?> SADetail = null;
+          try {
+            SADetail = Class.forName("com.android.settings.bluetooth.BluetoothSADetail");
+          } catch (ClassNotFoundException ex) {
+            Log.e(TAG, "no SADetail exists");
+            SADetail = null;
+          }
+          if (SADetail != null) {
+              BluetoothDevice bcMemberDevice = getAnyBCConnectedDevice(groupId);
+              final Bundle args = new Bundle();
+              if (bcMemberDevice == null) {
+                  //do nothing
+                  return;
+              }
+              args.putString(KEY_DEVICE_ADDRESS,
+                     bcMemberDevice.getAddress());
+              args.putShort(KEY_GROUP_OP,
+                     (short)1);
+
+              new SubSettingLauncher(mCtx)
+                    .setDestination("com.android.settings.bluetooth.BluetoothSADetail")
+                    .setArguments(args)
+                    .setTitleRes(R.string.bluetooth_search_broadcasters)
+                    .setSourceMetricsCategory(SettingsEnums.BLUETOOTH_DEVICE_PICKER)
+                     .launch();
+          }
+          return;
     }
 
     boolean connectGroup(int groupId) {

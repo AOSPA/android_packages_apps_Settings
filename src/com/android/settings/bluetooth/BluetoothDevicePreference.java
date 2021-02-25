@@ -20,6 +20,7 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -203,7 +204,15 @@ public final class BluetoothDevicePreference extends GearPreference {
          * changed before proceeding. It will also call notifyChanged() if
          * any preference info has changed from the previous value.
          */
-        setTitle(mCachedDevice.getName());
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter != null &&
+                mCachedDevice.getAddress().equals(adapter.getAddress())) {
+            //for ba related things, using the same preference
+            //for showing the local device
+            setTitle(adapter.getName()+"(self)");
+        } else {
+            setTitle(mCachedDevice.getName());
+        }
         // Null check is done at the framework
         if (!mHideSummary) {
             setSummary(mCachedDevice.getConnectionSummary());

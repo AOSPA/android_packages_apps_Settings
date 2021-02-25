@@ -104,6 +104,23 @@ public class GroupBluetoothDetailsButtonsController extends GroupBluetoothDetail
         mGroupOptions.setRefreshButtonOnClickListener((View) -> onRefreshButtonPressed());
         mGroupOptions.setRefreshButtonVisible(false);
         mIsUpdate = true;
+
+        BluetoothDevice bcMemberDevice = mGroupUtils.getAnyBCConnectedDevice(mGroupId);
+        boolean enableASButton = false;
+        if (bcMemberDevice != null) {
+            enableASButton = true;
+        }
+        mGroupOptions.setAddSourceGroupButtonText(R.string.add_source_group);
+        mGroupOptions.setAddSourceGroupButtonEnabled(enableASButton);
+        mGroupOptions.setAddSourceGroupButtonVisible(enableASButton);
+        if (enableASButton) {
+            mGroupOptions.setAddSourceGroupButtonOnClickListener((View) ->
+            onAddSourceGroupButtonPressed());
+        }
+    }
+
+    private void onAddSourceGroupButtonPressed() {
+        mGroupUtils.launchAddSourceGroup(mGroupId);
     }
 
     @Override
