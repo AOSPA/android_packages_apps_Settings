@@ -33,6 +33,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.network.MobileDataContentObserver;
+import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -54,6 +55,8 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
     int mDialogType;
     @VisibleForTesting
     boolean mNeedDialog;
+
+    private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
     public MobileDataPreferenceController(Context context, String key) {
         super(context, key);
@@ -108,6 +111,9 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         if (!mNeedDialog) {
             // Update data directly if we don't need dialog
             MobileNetworkUtils.setMobileDataEnabled(mContext, mSubId, isChecked, false);
+            if (mWifiPickerTrackerHelper != null) {
+                mWifiPickerTrackerHelper.setCarrierNetworkEnabled(isChecked);
+            }
             return true;
         }
 
@@ -148,6 +154,10 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
+    }
+
+    public void setWifiPickerTrackerHelper(WifiPickerTrackerHelper helper) {
+        mWifiPickerTrackerHelper = helper;
     }
 
     @VisibleForTesting
