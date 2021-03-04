@@ -53,6 +53,14 @@
         settings:searchable="false"
         settings:controller="com.android.settings.bluetooth.BluetoothDetailsMacAddressController"/>
 
+    <com.android.settingslib.widget.ActionButtonsPreference
+        android:key="sync_helper_buttons"
+        settings:allowDividerBelow="true"/>
+    <PreferenceCategory
+        android:key="added_sources"
+        android:title="@string/added_sources_dashboard_title">
+    </PreferenceCategory>
+
     <com.android.settings.bluetooth.BADeviceVolumePreference
         android:key="ba_device_volume"
         android:icon="@drawable/ic_volume_media_bt"

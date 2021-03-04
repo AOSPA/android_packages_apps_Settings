@@ -24,6 +24,16 @@
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController"/>
 
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="bluetooth_screen_broadcast_enable"
+        android:title="@string/bluetooth_broadcast"
+        android:summary="@string/summary_placeholder"/>
+
+    <com.android.settingslib.RestrictedPreference
+        android:key="bluetooth_screen_broadcast_pin_configure"
+        android:title="@string/bluetooth_broadcast_pin_configure"
+        android:summary="@string/summary_placeholder"/>
+
     <com.android.settingslib.RestrictedPreference
         android:key="bluetooth_screen_add_bt_devices"
         android:title="@string/bluetooth_pairing_pref_title"
