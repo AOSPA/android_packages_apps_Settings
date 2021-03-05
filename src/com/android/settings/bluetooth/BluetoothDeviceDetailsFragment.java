@@ -23,6 +23,7 @@ import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.provider.DeviceConfig;
 import android.util.Log;
 import android.view.Menu;
@@ -30,9 +31,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.SettingsUIDeviceConfig;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.BlockingSlicePrefController;
@@ -41,12 +45,20 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment {
     public static final String KEY_DEVICE_ADDRESS = "device_address";
     private static final String TAG = "BTDeviceDetailsFrg";
+    private static final String BLUETOOTH_ADV_AUDIO_MASK_PROP
+                                                  = "persist.vendor.service.bt.adv_audio_mask";
+    private static final String BLUETOOTH_BROADCAST_UI_PROP = "persist.bluetooth.broadcast_ui";
+    private static final int BA_MASK = 0x02;
+    private static boolean mBAEnabled = false;
+    private static boolean mBAPropertyChecked = false;
 
     @VisibleForTesting
     static int EDIT_DEVICE_NAME_ITEM_ID = Menu.FIRST;
@@ -178,20 +190,70 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     }
 
     @Override
+    protected void displayResourceTilesToScreen(PreferenceScreen screen) {
+        if (mBAEnabled == false) {
+           screen.removePreference(screen.findPreference("sync_helper_buttons"));
+           screen.removePreference(screen.findPreference("added_sources"));
+        }
+        super.displayResourceTilesToScreen(screen);
+    }
+
+    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
 
-        if (mCachedDevice != null) {
-            Lifecycle lifecycle = getSettingsLifecycle();
-            controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
-                    lifecycle, mManager));
-            controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,
-                    lifecycle));
-            controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
-                    mCachedDevice, lifecycle));
-            controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
-                    lifecycle));
+        if (mCachedDevice == null) return controllers;
+
+        Lifecycle lifecycle = getSettingsLifecycle();
+        controllers.add(new BluetoothDetailsHeaderController(context, this, mCachedDevice,
+                lifecycle, mManager));
+        controllers.add(new BluetoothDetailsButtonsController(context, this, mCachedDevice,
+                lifecycle));
+        controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
+                mCachedDevice, lifecycle));
+        controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
+                lifecycle));
+        if (mBAPropertyChecked == false) {
+            int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
+            mBAEnabled = (((advAudioMask & BA_MASK) == BA_MASK) &&
+                SystemProperties.getBoolean(BLUETOOTH_BROADCAST_UI_PROP, false));
+            mBAPropertyChecked = true;
         }
-        return controllers;
+        if (mBAEnabled == false) {
+            return controllers;
+        }
+
+        Log.d(TAG, "createPreferenceControllers for BA");
+
+        try {
+            if (mCachedDevice.isBASeeker()) {
+                Class<?> classAddSourceController = Class.forName(
+                    "com.android.settings.bluetooth.BluetoothDetailsAddSourceButtonController");
+                Class<?> classBADeviceController = Class.forName(
+                    "com.android.settings.bluetooth.BADevicePreferenceController");
+                Constructor ctorAddSource = classAddSourceController
+                    .getDeclaredConstructor(new Class[] {Context.class,
+                PreferenceFragmentCompat.class, CachedBluetoothDevice.class, Lifecycle.class});
+                Constructor ctorBADevice = classBADeviceController
+                    .getDeclaredConstructor(new Class[] {Context.class, Lifecycle.class,
+                    String.class});
+                Object objAddSourceController = ctorAddSource.newInstance(context, this,
+                    mCachedDevice, lifecycle);
+                Object objBADeviceController = ctorBADevice.newInstance(context, lifecycle,
+                    "added_sources");
+                objBADeviceController.getClass()
+                    .getMethod("init", DashboardFragment.class, CachedBluetoothDevice.class)
+                    .invoke(objBADeviceController, this, mCachedDevice);
+            controllers.add((AbstractPreferenceController) objAddSourceController);
+            controllers.add((AbstractPreferenceController) objBADeviceController);
+          }
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException |
+            InvocationTargetException | InstantiationException | IllegalArgumentException |
+            ExceptionInInitializerError e) {
+            e.printStackTrace();
+            mBAEnabled = false;
+        } finally {
+            return controllers;
+        }
     }
 }
