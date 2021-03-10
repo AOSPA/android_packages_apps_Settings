@@ -52,6 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"স্ক্ৰীণৰ আখৰ সৰু বা ডাঙৰ কৰক।"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"সৰু কৰক"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"ডাঙৰ কৰক"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"স্বয়ং-ঘূৰ্ণনৰ সুবিধা ব্যৱহাৰ কৰক"</string>
+    <string name="smart_rotate_text_headline" msgid="9147653205505671866">"মুখাৱয়ব ভিত্তিক স্বয়ং-ঘূৰ্ণনৰ সুবিধাই কোনোবাই স্ক্ৰীনখনলৈ চাই আছে নেকি আৰু কেনেকৈ চাই আছে জানিবলৈ সন্মুখৰ কেমেৰা ব্যৱহাৰ কৰে। ই বিছনাত পৰি থাকোঁতে পঢ়াৰ সুবিধা দিয়ে আৰু প্ৰতিচ্ছবিসমূহ কেতিয়াও ষ্ট’ৰ কৰা নহয় অথবা Googleলৈ পঠিওৱা নহয়।&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;অধিক জানক&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"পাঠৰ নমুনা"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"অষ্ট্ৰেলিয়াৰ বিস্ময়কৰ যাদুকৰ"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"অধ্যায় ১১: অষ্ট্ৰেলিয়াৰ বিস্ময়কৰ পান্নাৰ মহানগৰ"</string>
@@ -1172,6 +1174,10 @@
     <string name="search_settings" msgid="7573686516434589771">"Search"</string>
     <string name="display_settings" msgid="7197750639709493852">"ডিছপ্লে’"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"স্বয়ং-ঘূৰ্ণন স্ক্ৰীণ"</string>
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"অফ কৰা আছে"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"অন কৰা আছে"</string>
+    <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"অন আছে - মুখাৱয়ব ভিত্তিক"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"মুখাৱয়ব চিনাক্তকৰণ সক্ষম কৰক"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"ৰংবোৰ"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"প্ৰাকৃতিক"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"বৃদ্ধি কৰা হ’ল"</string>
@@ -2132,9 +2138,11 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"আপুনি আপোনাৰ প্ৰয়োজনীতাসমূহৰ সৈতে মিলাকৈ এই ডিভাইচটো কাষ্টমাইজ কৰিব পাৰে। এই সাধ্য সুবিধাসমূহ পিছত ছেটিংসমূহ-লৈ গৈ সলনি কৰিব পাৰিব।"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"ফণ্টৰ আকাৰ সলনি কৰক"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"স্ক্ৰীণ ৰিডাৰ"</string>
-    <string name="audio_and_captions_category_title" msgid="5049122378290004050">"অডিঅ\' আৰু স্ক্ৰীণত প্ৰদৰ্শিত পাঠ"</string>
+    <string name="captions_category_title" msgid="574490148949400274">"কেপশ্বন"</string>
+    <string name="audio_category_title" msgid="5283853679967605826">"অডিঅ’"</string>
     <string name="display_category_title" msgid="6638191682294461408">"ডিছপ্লে’"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"পাঠ আৰু ডিছপ্লে’"</string>
+    <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"স্ক্ৰীনখন গাঢ় কৰক"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"ভাব-বিনিময় নিয়ন্ত্ৰণ"</string>
     <string name="accessibility_tap_assistance_title" msgid="1459944158978398532">"সহায়ত টিপক"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"ছিষ্টেমৰ নিয়ন্ত্ৰণ"</string>
@@ -2274,6 +2282,7 @@
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"অফ হৈ আছে"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"কাম কৰি থকা নাই। তথ্য়ৰ বাবে টিপক।"</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"এই সেৱাএ ভালকৈ কাম কৰা নাই।"</string>
+    <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"সাধ্য সুবিধাৰ শ্বৰ্টকাট"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"দ্ৰুত ছেটিংসমূত দেখুৱাওক"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"শুধৰণী ম\'ড"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"ডিউটাৰএন’মেলী"</string>
@@ -2283,6 +2292,15 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"ৰঙা-সেউজীয়া"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"ৰঙা-সেউজীয়া"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"নীলা-হালধীয়া"</string>
+    <string name="reduce_bright_colors_preference_title" msgid="5249275952895378507">"উজ্জ্বলতা কমাওক"</string>
+    <string name="reduce_bright_colors_preference_summary" product="default" msgid="3824406431092247331">"আপোনাৰ ফ’নটোৰ ন্যূনতম উজ্জ্বলতাতকৈ স্ক্ৰীনখন গাঢ় কৰি তোলে"</string>
+    <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="867454382618040359">"আপোনাৰ টেবলেটটোৰ ন্যূনতম উজ্জ্বলতাতকৈ স্ক্ৰীনখন গাঢ় কৰি তোলে"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="7098993556258805657">"আপোনাৰ স্ক্ৰীনখন গাঢ় কৰি তোলে যাতে পঢ়িবলৈ আৰু সুবিধাজনক হয়।&lt;br/&gt;&lt;br/&gt; এইটো এই ক্ষেত্ৰসমূহত সহায়ক হ’ব পাৰে: &lt;ol&gt; &lt;li&gt; আপোনাৰ ফ’নটোৰ ডিফ’ল্ট ন্যূনতম উজ্জ্বলতা তথাপি যদি বেছি উজ্জ্বল হয়&lt;/li&gt; &lt;li&gt; আপুনি নিজৰ ফ’নটো কোনো অন্ধকাৰ স্থানত ব্যৱহাৰ কৰি থাকিলে যেনে, ৰাতি অথবা শোৱাৰ আগতে এটা অন্ধকাৰ কোঠাত ব্যৱহাৰ কৰি থাকোঁতে&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"আপোনাৰ স্ক্ৰীনখন গাঢ় কৰি তোলে যাতে পঢ়িবলৈ আৰু সুবিধাজনক হয়।&lt;br/&gt;&lt;br/&gt; এইটো এই ক্ষেত্ৰসমূহত সহায়ক হ’ব পাৰে: &lt;ol&gt; &lt;li&gt; আপোনাৰ টেবলেটটোৰ ডিফ’ল্ট ন্যূনতম উজ্জ্বলতা তথাপি যদি বেছি উজ্জ্বল হয়&lt;/li&gt; &lt;li&gt; আপুনি নিজৰ টেবলেটটো কোনো অন্ধকাৰ স্থানত ব্যৱহাৰ কৰি থাকিলে যেনে, ৰাতি অথবা শোৱাৰ আগতে এটা অন্ধকাৰ কোঠাত ব্যৱহাৰ কৰি থাকোঁতে&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"তীব্ৰতা"</string>
+    <string name="reduce_bright_colors_intensity_preference_start_label" msgid="109739628110493358">"সামান্যৰূপে গাঢ়"</string>
+    <string name="reduce_bright_colors_intensity_preference_end_label" msgid="8686269714092663507">"আটাইতকৈ গাঢ়"</string>
+    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"ডিভাইচ ৰিষ্টাৰ্ট হোৱাৰ পাছতো অন কৰি ৰাখক"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="one">চুটি (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ছেকেণ্ড)</item>
       <item quantity="other">চুটি (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ছেকেণ্ড)</item>
@@ -2436,8 +2454,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"ৱাই-ফাই অন হৈ থকা সময়"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"বেটাৰিৰ ব্যৱহাৰ"</string>
     <string name="history_details_title" msgid="8628584613889559355">"ইতিহাসৰ বিৱৰণ"</string>
-    <!-- no translation found for advanced_battery_preference_title (6518802648205311326) -->
-    <skip />
+    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"বেটাৰীৰ ব্যৱহাৰ চাওক"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"বেটাৰিৰ ব্যৱহাৰ"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"ব্যৱহাৰৰ বিৱৰণ"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"পাৱাৰৰ ব্যৱহাৰ খাপ খুৱাওক"</string>
@@ -3079,11 +3096,10 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"ব্যৱহাৰকাৰীক মচক"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"মচক"</string>
     <string name="user_guest" msgid="4545590092001460388">"অতিথি"</string>
-    <string name="user_clear_guest_menu" msgid="4864362688187480452">"অতিথিৰ ডেটা মচক"</string>
-    <string name="user_exit_guest_menu" msgid="5064400453222497734">"অতিথিৰ ছেশ্বন সমাপ্ত কৰক"</string>
-    <string name="user_exit_guest_confirm_title" msgid="7526978959527761497">"অতিথিৰ ছেশ্বন সমাপ্ত কৰিবনে?"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"অতিথি আঁতৰাওক"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"অতিথি আঁতৰাবনে?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"এই ছেছনৰ সকলো এপ্ আৰু ডেটা মচা হ\'ব।"</string>
-    <string name="user_exit_guest_dialog_remove" msgid="8095094235815676847">"ছেশ্বন সমাপ্ত কৰক"</string>
+    <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"আঁতৰাওক"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"ফ\'ন কল অন কৰক"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"ফ\'ন কল আৰু এছএমএছ অন কৰক"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ব্যৱহাৰকাৰীজন মচক"</string>
@@ -3662,6 +3678,13 @@
     <string name="notif_type_conversation" msgid="3014259738224129504">"বাৰ্তালাপৰ জাননী"</string>
     <string name="notif_type_alerting" msgid="2300039323822104165">"সতৰ্কতামূলক জাননী"</string>
     <string name="notif_type_silent" msgid="2514763073653979199">"নীৰৱ জাননী"</string>
+    <string name="notif_listener_excluded_title" msgid="639103158747320529">"এই শ্ৰোতাগৰাকীৰ বাবে ব্ৰিজ নকৰা এপ্‌সমূহ"</string>
+    <string name="notif_listener_excluded_summary_zero" msgid="5152444145866958400">"আটাইবোৰ এপ্‌ ব্ৰিজ কৰা হৈছে"</string>
+    <plurals name="notif_listener_excluded_summary_nonzero" formatted="false" msgid="3218891004546748617">
+      <item quantity="one">%d টা এপ্‌ ব্ৰিজ কৰা হোৱা নাই</item>
+      <item quantity="other">%d টা এপ্‌ ব্ৰিজ কৰা হোৱা নাই</item>
+    </plurals>
+    <string name="notif_listener_excluded_app_title" msgid="8102477888511595023">"ব্ৰিজ কৰা এপ্‌"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"ভিআৰ সহায়ক সেৱা"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ইনষ্টল কৰি থোৱা কোনো এপে ভিআৰ সহায়ক সেৱা হিচাপে চলাবলৈ অনুৰোধ কৰা নাই।"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR সেৱাক <xliff:g id="SERVICE">%1$s</xliff:g>ত প্ৰৱেশৰ অনুমতি দিয়ে নে?"</string>
@@ -4095,6 +4118,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"ফাইল স্থানান্তৰণৰ বাবে"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"অইন এটা ডিভাইচলৈ ফাইল স্থানান্তৰ কৰক"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"পিটিপি"</string>
+    <string name="usb_transcode_files" msgid="5999760694155541693">"ৰপ্তানি কৰা মিডিয়া ট্ৰেন্সক’ড কৰিবলৈ"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"যদি এমটিপি সমৰ্থন নকৰে, তেন্তে ফট\' বা ফাইল স্থানান্তৰ কৰক (পিটিপি)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"ইউএছবি টেডাৰিঙৰ বাবে"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"এমআইডিআই"</string>
@@ -4102,8 +4126,8 @@
     <string name="usb_use" msgid="6783183432648438528">"ইয়াৰ বাবে ইউএছবি ব্যৱহাৰ কৰক"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"ইউএছবিৰ ডিফ\'ল্ট কনফিগাৰেশ্বন"</string>
     <string name="usb_default_info" msgid="167172599497085266">"অন্য ডিভাইচ সংযোগ হ\'লে আৰু আপোনাৰ ফ\'ন আনলক কৰা থাকিলে, এই ছেটিংসমূহ প্ৰযোজ্য হ\'ব৷ মাত্ৰ বিশ্বাসী ডিভাইচসমূহৰ সৈতেহে সংযোগ কৰক৷"</string>
-    <!-- no translation found for usb_power_title (5602112548385798646) -->
-    <skip />
+    <string name="usb_power_title" msgid="5602112548385798646">"পাৱাৰৰ বিকল্প"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"ফাইল স্থানান্তৰণ সম্পৰ্কীয় বিকল্প"</string>
     <string name="usb_pref" msgid="8521832005703261700">"ইউএছবি"</string>
     <string name="usb_preference" msgid="5084550082591493765">"ইউএছবিৰ অগ্ৰাধিকাৰসমূহ"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"নিম্ন বস্তুয়ে ইউএছবিক নিয়ন্ত্ৰিত কৰে"</string>
@@ -4322,7 +4346,8 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g>টা সীমাবদ্ধতা</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"বাহকৰ ডেটা গণনা কাৰ্য ডিভাইচৰ গণনাতকৈ পৃথক হ’ব পাৰে"</string>
-    <string name="non_carrier_data_usage_warning" msgid="7361998122602474430">"বাহকৰ নেটৱৰ্কসমূহে ব্যৱহাৰ কৰা ডেটা বহিৰ্ভূত কৰে"</string>
+    <!-- no translation found for non_carrier_data_usage_warning (4707184871368847697) -->
+    <skip />
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> খৰচ কৰা হৈছে"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"ডেটা ব্যৱহাৰৰ সকীয়নি ছেট কৰক"</string>
     <string name="data_warning" msgid="2925054658166062884">"ডেটা সকিয়নী"</string>
@@ -4915,8 +4940,24 @@
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"ছিমখন আঁতৰাওক আৰু পুনৰ ভৰাওক। সমস্যাটো অব্যাহত থাকিলে আপোনাৰ ডিভাইচটো ৰিষ্টাৰ্ট কৰক।"</string>
     <string name="dsds_activation_failure_body_msg2" msgid="73044349546544410">"ছিমখন পুনৰ অন কৰিবলৈ চেষ্টা কৰক। সমস্যাটো অব্যাহত থাকিলে আপোনাৰ ডিভাইচটো ৰিষ্টাৰ্ট কৰক।"</string>
     <string name="sim_setup_channel_id" msgid="8797972565087458515">"নেটৱৰ্ক সক্ৰিয়কৰণ"</string>
+    <!-- no translation found for sim_switch_channel_id (4927038626791837861) -->
+    <skip />
     <string name="post_dsds_reboot_notification_title_with_carrier" msgid="3308827462185135307">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> সক্ৰিয় হৈ আছে"</string>
     <string name="post_dsds_reboot_notification_text" msgid="7533428378211541410">"ছিমৰ ছেটিং আপডে’ট কৰিবলৈ টিপক"</string>
+    <string name="switch_to_removable_notification" msgid="7640342063449806296">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>লৈ সলনি কৰা হ’ল"</string>
+    <string name="switch_to_removable_notification_no_carrier_name" msgid="7384856964036215338">"অন্য বাহকলৈ সলনি কৰা হ’ল"</string>
+    <string name="network_changed_notification_text" msgid="2407908598496951243">"আপোনাৰ ম’বাইল নেটৱৰ্ক সলনি হৈছে"</string>
+    <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"আপোনাৰ আনখন ছিম ছেট আপ কৰক"</string>
+    <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"আপোনাৰ সক্ৰিয় ছিমখন বাছনি কৰক অথবা একেলগে ২ খন ছিম ব্যৱহাৰ কৰক"</string>
+    <string name="choose_sim_title" msgid="4804689675237716286">"ব্যৱহাৰ কৰিবলৈ এটা নম্বৰ বাছনি কৰক"</string>
+    <string name="choose_sim_text" msgid="8056651794100746697">"এই ডিভাইচটোত <xliff:g id="NUMBER">%1$d</xliff:g>টা নম্বৰ আছে, কিন্তু এবাৰত এটাহে ব্যৱহাৰ কৰিব পাৰি"</string>
+    <string name="choose_sim_activating" msgid="9035902671985449448">"সক্ৰিয় কৰি থকা হৈছে<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
+    <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"এই মুহূৰ্তত সক্ৰিয় কৰিব পৰা নগ’ল"</string>
+    <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"অজ্ঞাত নম্বৰ"</string>
+    <string name="switch_sim_dialog_title" msgid="5407316878973237773">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ব্যৱহাৰ কৰিবনে?"</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"ম’বাইল ডেটা, কল আৰু এছএমএছৰ বাবে <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ব্যৱহাৰ কৰা হ’ব।"</string>
+    <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"কোনো সক্ৰিয় ছিম উপলব্ধ নহয়"</string>
+    <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"পাছত ম’বাইল ডেটা, কলৰ সুবিধা আৰু এছএমএছ ব্যৱহাৰ কৰিবলৈ আপোনাৰ নেটৱৰ্ক ছেটিঙলৈ যাওক"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"ছিম কাৰ্ড"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"এই ডাউনল’ড কৰা ছিমখন মচিবনে?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"এই ছিমখন আঁতৰালে এই ডিভাইচটোৰ পৰা <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> সেৱা আঁতৰোৱা হ’ব।\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>ৰ সেৱা বাতিল কৰা নহয়।"</string>
@@ -4943,10 +4984,8 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"এয়াৰপ্লেইন ম’ড অন থাকিলে উপলব্ধ নহয়"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"বলপূৰ্বক ডেস্কটপ ম’ড"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"দ্বিতীয় ডিছপ্লে’ত পৰীক্ষামূলক ডেস্কটপ ম’ড বলপূৰ্বকভাৱে প্ৰয়োগ কৰক"</string>
-    <!-- no translation found for enable_non_resizable_multi_window (6832903754625404477) -->
-    <skip />
-    <!-- no translation found for enable_non_resizable_multi_window_summary (3275763753261901999) -->
-    <skip />
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"একাধিক ৱিণ্ড’ত আকাৰ সলনি কৰিব নোৱৰা সুবিধাটো সক্ষম কৰক"</string>
+    <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"আকাৰ সলনি কৰিব নোৱৰা এপক একাধিক ৱিণ্ড’ত থকাৰ অনুমতি দিয়ে"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"বলপূর্বকভাৱে গাঢ় ৰঙৰ থীম ব্যৱহাৰ কৰা সুবিধাটো অ\'ভাৰৰাইড কৰক"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"বলপূর্বকভাৱে গাঢ় ৰঙৰ থীম ব্যৱহাৰ কৰা সুবিধাটো সদায় অন হৈ থাকিবলৈ অ\'ভাৰৰাইড কৰে"</string>
     <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"ধূসৰতা সক্ষম কৰক"</string>
@@ -4998,7 +5037,7 @@
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"আপোনাৰ বাহকত ৱাই-ফাই কলিং ব্যৱহাৰ কৰি জৰুৰীকালীন কল কৰাৰ সুবিধা নাই।\nজৰুৰীকালীন কল কৰিবলৈ ডিভাইচটোৱে স্বয়ংক্ৰিয়ভাৱে চেলুলাৰ নেটৱৰ্কলৈ সলনি কৰে।\nকেৱল চেলুলাৰ নেটৱৰ্ক থকা ঠাইৰ পৰাহে জৰুৰীকালীন কল কৰিব পৰা যায়।"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"মান উন্নত কৰিবলৈ কল কৰোঁতে ৱাই-ফাই ব্যৱহাৰ কৰক"</string>
     <string name="backup_calling_settings_title" msgid="519714752900364326">"বেকআপ কলিং"</string>
-    <string name="backup_calling_setting_summary" msgid="451295393447465830">"যদি <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> উপলব্ধ নহয়, তেন্তে <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> কল কৰিবলৈ আৰু গ্ৰহণ কৰিবলৈ আপোনাৰ ম’বাইল ডেটা ছিম ব্যৱহাৰ কৰক।"</string>
+    <string name="backup_calling_setting_summary" msgid="599493254305348733">"যদি <xliff:g id="BACKUP_CALLING_OPERATOR_TEXT">%1$s</xliff:g> উপলব্ধ নহয় অথবা ৰ’মিঙত আছে, তেন্তে <xliff:g id="BACKUP_CALLING_CARRIER_TEXT">%1$s</xliff:g> কলৰ বাবে আপোনাৰ ম’বাইল ডেটা ছিম ব্যৱহাৰ কৰক।"</string>
     <string name="keywords_backup_calling" msgid="8592800915478816800">"বেকআপ কলিং"</string>
     <string name="enable_receiving_mms_notification_title" msgid="6465218559386990248">"অন্তৰ্গামী এমএমএছ বার্তা"</string>
     <string name="enable_sending_mms_notification_title" msgid="7120641300854953375">"এমএমএছ বার্তা পঠিয়াব নোৱাৰি"</string>
@@ -5068,23 +5107,24 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"এয়াৰপ্লেন, এয়াৰপ্লেন-সুৰক্ষিত"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"কল আৰু এছএমএছ"</string>
     <string name="calls_and_sms_category" msgid="2021321997884906046">"ৱাই-ফাই কলিং"</string>
-    <!-- no translation found for calls_sms_wfc_summary (3940529919408667336) -->
-    <skip />
-    <!-- no translation found for calls_sms_footnote (8051604228144899434) -->
-    <skip />
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"ৱাই-ফাই নেটৱৰ্কৰ জৰিয়তে কল কৰক আৰু গ্ৰহণ কৰক"</string>
+    <string name="calls_sms_footnote" msgid="1003530944232362815">"ৱাই-ফাই কলিঙৰ সহায়ত বাহক বহিৰ্ভূত ৱাই-ফাই নেটৱৰ্কৰ জৰিয়তে কল কৰা আৰু গ্ৰহণ কৰা হয়। "<annotation id="url">"অধিক জানক"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"কল"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"এছএমএছ"</string>
     <string name="calls_sms_preferred" msgid="6016477652522583496">"অগ্ৰাধিকাৰ দিয়া"</string>
-    <string name="calls_sms_calls_preferred" msgid="252913858812799809">"কলক অগ্ৰাধিকাৰ দিয়া হৈছে"</string>
-    <string name="calls_sms_sms_preferred" msgid="5826706870873784062">"এছএমএছক অগ্ৰাধিকাৰ দিয়া হৈছে"</string>
+    <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"কলৰ বাবে অগ্ৰাধিকাৰপ্ৰাপ্ত"</string>
+    <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"এছএমএছৰ বাবে অগ্ৰাধিকাৰপ্ৰাপ্ত"</string>
     <string name="calls_sms_unavailable" msgid="4055729705246556529">"উপলব্ধ নহয়"</string>
+    <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"সাময়িকভাৱে উপলব্ধ নহয়"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"ছিম নাই"</string>
-    <string name="network_and_internet_preferences_title" msgid="8038469368705591439">"অগ্ৰাধিকাৰ"</string>
+    <!-- no translation found for network_and_internet_preferences_title (8635896466814033405) -->
+    <skip />
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"ৰাজহুৱা নেটৱৰ্কসমূহৰ সৈতে সংযোগ কৰক"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"নেটৱৰ্ক সংযোগ, ইণ্টাৰনেট, বেতাঁৰ, ডেটা, ৱাইফাই, ৱাই-ফাই, ৱাই ফাই, চেলুলাৰ, ম’বাইল, চেল কেৰিয়াৰ, 4g, 3g, 2g, lte"</string>
     <string name="view_airplane_safe_networks" msgid="9170023210981508906">"এয়াৰপ্লেন ম’ডৰ নেটৱৰ্ক চাওক"</string>
     <string name="viewing_airplane_mode_networks" msgid="4548508852659577531">"এয়াৰপ্লে’ন ম’ডত উপলব্ধ নেটৱৰ্কসমূহ চাই থকা হৈছে"</string>
-    <string name="turn_off_airplane_mode" msgid="7141986366534514443">"এয়াৰপ্লে’ন ম’ডটো অফ কৰক"</string>
+    <string name="turn_on_networks" msgid="7786747178388835577">"নেটৱৰ্ক অন কৰক"</string>
+    <string name="turn_off_networks" msgid="886012600238121672">"নেটৱৰ্ক অফ কৰক"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"আপোনাৰ ইণ্টাৰনেট ৰিছেট কৰিবনে?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"এইটোৱে আপোনাৰ ফ’ন কলটোৰ অন্ত পেলাব"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"এইটোৱে আপোনাৰ ফ’ন কলটোৰ অন্ত পেলাব"</string>
@@ -5092,8 +5132,7 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"সংযোগ ঠিক কৰক"</string>
     <string name="airplane_mode_network_available" msgid="1059499681300395240">"এয়াৰপ্লেন ম’ডৰ নেটৱৰ্ক উপলব্ধ"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"নেটৱৰ্ক সলনি কৰিবলৈ ইথাৰনেটৰ পৰা সংযোগ বিচ্ছিন্ন কৰক"</string>
-    <!-- no translation found for cannot_switch_networks_while_connected (3867944849171754777) -->
-    <skip />
+    <string name="airplane_mode_network_panel_title" msgid="6385046104863403604">"এয়াৰপ্লেন ম’ডত উপলব্ধ নেটৱৰ্ক"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"সংযোজিত হৈ আছে"</string>
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"ইণ্টাৰনেট স্বয়ংক্ৰিয়ভাৱে সংযুক্ত নহ’ব"</string>
@@ -5115,28 +5154,18 @@
     <string name="category_name_others" msgid="2366006298768550310">"অন্যান্য"</string>
     <string name="category_name_general" msgid="7737273712848115886">"সাধাৰণ"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"আটাইবোৰ এপ্‌ চাওক"</string>
-    <!-- no translation found for smart_forwarding_title (8368634861971949799) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_enabled (3341062878373185604) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_summary_disabled (5033880700091914809) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_title (962226849074401228) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_ongoing_text (2189209372407117114) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_title (1859891191023516080) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_text (5370431503707373653) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_failed_not_activated_text (997396203001257904) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_title (5105463748849841763) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_input_mdn_dialog_title (7542216086697868415) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_mdn_text (2907314684242542226) -->
-    <skip />
-    <!-- no translation found for smart_forwarding_missing_alert_dialog_text (7870419247987316112) -->
+    <string name="smart_forwarding_title" msgid="8368634861971949799">"স্মাৰ্ট ফৰৱাৰ্ডিং"</string>
+    <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"স্মাৰ্ট ফৰৱাৰ্ডিঙৰ সুবিধাটো সক্ষম কৰা আছে"</string>
+    <string name="smart_forwarding_summary_disabled" msgid="5033880700091914809">"স্মাৰ্ট ফৰৱাৰ্ডিঙৰ সুবিধাটো অক্ষম কৰা আছে"</string>
+    <string name="smart_forwarding_ongoing_title" msgid="962226849074401228">"কলৰ ছেটিং"</string>
+    <string name="smart_forwarding_ongoing_text" msgid="2189209372407117114">"ছেটিং আপডে’ট কৰি থকা হৈছে…"</string>
+    <string name="smart_forwarding_failed_title" msgid="1859891191023516080">"কলৰ ছেটিঙত আসোঁৱাহ হৈছে"</string>
+    <string name="smart_forwarding_failed_text" msgid="5370431503707373653">"নেটৱৰ্ক অথবা ছিম কাৰ্ডৰ আসোঁৱাহ হৈছে।"</string>
+    <string name="smart_forwarding_failed_not_activated_text" msgid="997396203001257904">"ছিম সক্ৰিয় কৰা হোৱা নাই।"</string>
+    <string name="smart_forwarding_input_mdn_title" msgid="5105463748849841763">"ফ’ন নম্বৰসমূহ দিয়ক"</string>
+    <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"ফ’ন নম্বৰটো দিয়ক"</string>
+    <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"ফ’ন নম্বৰটো নাই।"</string>
+    <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ঠিক আছে"</string>
+    <!-- no translation found for enable_2g_title (8184757884636162942) -->
     <skip />
 </resources>
