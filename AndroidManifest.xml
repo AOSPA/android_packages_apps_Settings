@@ -104,7 +104,9 @@
     <uses-permission android:name="android.permission.INSTALL_DYNAMIC_SYSTEM" />
     <uses-permission android:name="android.permission.BIND_CELL_BROADCAST_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    
+    <uses-permission android:name="android.permission.READ_DREAM_STATE" />
+    <uses-permission android:name="android.permission.READ_DREAM_SUPPRESSION" />
+
     <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
             android:theme="@style/Theme.Settings"
@@ -3460,21 +3462,15 @@
                        android:value="com.android.settings.sound.MediaControlsSettings" />
         </activity>
 
-       <activity android:name=".network.telephony.UserPLMNListActivity"
-           android:label="@string/uplmn_settings_title"
-           android:configChanges="orientation|screenSize|keyboardHidden">
-           <intent-filter>
-               <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".network.telephony.UserPLMNEditorActivity"
-            android:label="@string/uplmn_settings_title"
-            android:configChanges="orientation|screenSize|keyboardHidden">
+        <receiver
+            android:name=".media.BluetoothPairingReceiver"
+            android:exported="true"
+            android:permission="android.permission.BLUETOOTH_ADMIN">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+                <action android:name="com.android.settings.action.LAUNCH_BLUETOOTH_PAIRING"/>
+            </intent-filter>/>
+        </receiver>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
