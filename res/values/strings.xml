@@ -97,6 +97,15 @@
     <!-- Description for the button that makes interface elements larger. [CHAR_LIMIT=NONE] -->
     <string name="font_size_make_larger_desc">Make larger</string>
 
+    <!-- Auto rotate switchbar title. [CHAR_LIMIT=NONE] -->
+    <string name="auto_rotate_settings_primary_switch_title">Use Auto-Rotate</string>
+
+    <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
+    <string name="smart_rotate_text_headline">
+        Face based Autorotate uses the front camera to see if and how someone is looking at the screen. It allows
+        for reading while lying down and images are never stored or sent to Google.&lt;br>&lt;br>
+       &lt;a href="<xliff:g example="http://www.google.com" id="url">http://support.google.com/mobile?p=telephony_rtt</xliff:g>">Learn more&lt;/a>
+    </string>
     <string name="font_size_preview_text_headline">Sample text</string>
     <string name="font_size_preview_text_title"
             translation_description="Title text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
@@ -2762,6 +2771,14 @@
     <string name="display_settings">Display</string>
     <!-- Sound & display settings screen, accelerometer-based rotation check box label -->
     <string name="accelerometer_title">Auto-rotate screen</string>
+    <!-- Sound & display settings screen, locked rotation check box label [CHAR LIMIT=30] -->
+    <string name="auto_rotate_option_off">Off</string>
+    <!-- Sound & display settings screen, accelerometer-based rotation check box label [CHAR LIMIT=30] -->
+    <string name="auto_rotate_option_on">On</string>
+    <!-- Sound & display settings screen, face-based rotation check box label [CHAR LIMIT=30] -->
+    <string name="auto_rotate_option_face_based">On - Face-based</string>
+    <!-- SmartAutoRotatePreferenceFragment settings screen, face-based rotation switch label [CHAR LIMIT=30] -->
+    <string name="auto_rotate_switch_face_based">Enable Face Detection</string>
     <!-- Display settings screen, Color mode settings title [CHAR LIMIT=30] -->
     <string name="color_mode_title">Colors</string>
     <!-- Display settings screen, Color mode option for "natural(sRGB) color"  [CHAR LIMIT=45] -->
@@ -5000,12 +5017,16 @@
     <string name="vision_settings_suggestion_title">Change font size</string>
     <!-- Title for the accessibility preference category of screen reader services and settings. [CHAR LIMIT=50] -->
     <string name="screen_reader_category_title">Screen readers</string>
+    <!-- Title for the accessibility preference category of caption services and settings. [CHAR LIMIT=50] -->
+    <string name="captions_category_title">Captions</string>
     <!-- Title for the accessibility preference category of audio services and settings. [CHAR LIMIT=50] -->
-    <string name="audio_and_captions_category_title">Audio &amp; on-screen text</string>
+    <string name="audio_category_title">Audio</string>
     <!-- Title for the accessibility preference category of display services and settings. [CHAR LIMIT=50] -->
     <string name="display_category_title">Display</string>
     <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
     <string name="accessibility_text_and_display_title">Text and display</string>
+    <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
+    <string name="accessibility_turn_screen_darker_title">Turn screen darker</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
     <string name="interaction_control_category_title">Interaction controls</string>
     <!-- Title for the accessibility tap assistance page. [CHAR LIMIT=50] -->
@@ -5332,17 +5353,40 @@
     <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
     <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
 
-    <!-- TODO(b/170970602): remove translatable=false when RBC has official name and strings -->
-    <!-- Title for the accessibility preference to configure Reduce Bright Colors feature. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_preference_title" translatable="false">Reduce Bright Colors</string>
-    <!-- Used in the accessibility service settings to control switching Reduce Bright Colors on/off. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_switch_title" translatable="false">Use Reduce Bright Colors</string>
-    <!-- Subtitle that describes Reduce Bright Colors. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_preference_subtitle" translatable="false">Reduce Bright Colors reduces screen brightness.</string>
-    <!-- Title for setting the brightness intensity of the display using Reduce Bright Colors. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_intensity_preference_title" translatable="false">Intensity</string>
-    <!-- Title for setting whether the Reduce Bright Colors activation state persists across reboots. [CHAR LIMIT=NONE] -->
-    <string name="reduce_bright_colors_persist_preference_title" translatable="false">Keeps feature on after a restart</string>
+    <!-- Title for the accessibility preference and switch of the Reduce Brightness feature. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_title">Reduce Brightness</string>
+    <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_summary" product="default">Make screen darker than your phone\u2019s minimum brightness</string>
+    <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_summary" product="tablet">Make screen darker than your tablet\u2019s minimum brightness</string>
+    <!-- Subtitle that describes Reduce Brightness. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_subtitle" product="default">
+        <![CDATA[Make your screen darker so it\u2019s more comfortable to read.<br/><br/>
+        This can be helpful when:
+        <ol>
+            <li>\u00a0Your phone\u2019s default minimum brightness is still too bright</li>
+            <li>\u00a0You\u2019re using your phone in dark situations, like at night or in a dark room before bed</li>
+        </ol>
+        ]]>
+    </string>
+    <!-- Subtitle that describes Reduce Brightness. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet">
+        <![CDATA[Make your screen darker so it\u2019s more comfortable to read.<br/><br/>
+        This can be helpful when:
+        <ol>
+            <li>\u00a0Your tablet\u2019s default minimum brightness is still too bright</li>
+            <li>\u00a0You\u2019re using your tablet in dark situations, like at night or in a dark room before bed</li>
+        </ol>
+        ]]>
+    </string>
+    <!-- Title for setting the brightness intensity of the display using Reduce Brightness. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_intensity_preference_title">Intensity</string>
+    <!-- Start label for setting the brightness intensity of the display using Reduce Brightness. [CHAR LIMIT=50] -->
+    <string name="reduce_bright_colors_intensity_preference_start_label">Slightly darker</string>
+    <!-- End label for setting the brightness intensity of the display using Reduce Brightness. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_intensity_preference_end_label">Darkest</string>
+    <!-- Title for setting whether the Reduce Brightness activation state persists across reboots. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_persist_preference_title">Keep on after device restarts</string>
 
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay">
@@ -7175,15 +7219,13 @@
     <!-- Title for Guest user [CHAR LIMIT=35] -->
     <string name="user_guest">Guest</string>
     <!-- Label for item to exit guest mode [CHAR LIMIT=35] -->
-    <string name="user_clear_guest_menu">Clear guest data</string>
-    <!-- Label for item to exit guest mode [CHAR LIMIT=35] -->
-    <string name="user_exit_guest_menu">End guest session</string>
+    <string name="user_exit_guest_title">Remove guest</string>
     <!-- Title of dialog to user to confirm exiting guest. [CHAR LIMIT=50] -->
-    <string name="user_exit_guest_confirm_title">End guest session?</string>
+    <string name="user_exit_guest_confirm_title">Remove guest?</string>
     <!-- Message to user to confirm exiting guest. [CHAR LIMIT=none] -->
     <string name="user_exit_guest_confirm_message">All apps and data in this session will be deleted.</string>
     <!-- Label for button in confirmation dialog when exiting guest session [CHAR LIMIT=35] -->
-    <string name="user_exit_guest_dialog_remove">End session</string>
+    <string name="user_exit_guest_dialog_remove">Remove</string>
 
     <!-- Title of preference to enable calling[CHAR LIMIT=40] -->
     <string name="user_enable_calling">Turn on phone calls</string>
@@ -8325,6 +8367,9 @@
     <!-- Configure Notifications Settings title. [CHAR LIMIT=30] -->
     <string name="configure_notification_settings">Notifications</string>
 
+    <!-- notification header - settings for conversation type notifications -->
+    <string name="conversation_notifs_category">Conversation</string>
+
     <!-- notification header - apps that have recently sent notifications -->
     <string name="recent_notifications">Recently sent</string>
 
@@ -8332,7 +8377,7 @@
     <string name="recent_notifications_see_all_title">See all from last 7 days</string>
 
     <!-- Configure Notifications: Advanced section header [CHAR LIMIT=30] -->
-    <string name="advanced_section_header">Advanced</string>
+    <string name="advanced_section_header">General</string>
 
     <!-- Configure Notifications: Work profile section header [CHAR LIMIT=30] -->
     <string name="profile_section_header">Work notifications</string>
@@ -8499,8 +8544,8 @@
     <!-- Configure Notifications: Title for the pulse notification light option. [CHAR LIMIT=30] -->
     <string name="notification_pulse_title">Blink light</string>
 
-    <!-- Configure Notifications: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=60] -->
-    <string name="lock_screen_notifications_title">Notifications on lock screen</string>
+    <!-- Configure Notifications: Title for the option controlling privacy options for notifications. [CHAR LIMIT=60] -->
+    <string name="lock_screen_notifications_title">Privacy</string>
 
     <!-- Configure lock screen: Title for the option of unlocking directly to home. [CHAR LIMIT=30] -->
     <string name="lockscreen_bypass_title">Skip lock screen</string>
@@ -8836,6 +8881,22 @@
     <string name="notif_type_conversation">Conversation notifications</string>
     <string name="notif_type_alerting">Alerting notifications</string>
     <string name="notif_type_silent">Silent notifications</string>
+
+    <!-- Per notification listener, launches a list of apps whose notifications this listener cannot see -->
+    <string name="notif_listener_excluded_title">Apps that are not bridged to this listener</string>
+
+    <!-- Per notification listener, when the listener can see notifications from all apps -->
+    <string name="notif_listener_excluded_summary_zero">All apps are bridged</string>
+
+    <!-- Per notification listener, a summary of how many apps this listener cannot see
+     notifications from -->
+    <plurals name="notif_listener_excluded_summary_nonzero">
+        <item quantity="one">%d app is not bridged</item>
+        <item quantity="other">%d apps are not bridged</item>
+    </plurals>
+
+    <!-- Per notification listener, a list of apps whose notifications this listener cannot see -->
+    <string name="notif_listener_excluded_app_title">Bridged apps</string>
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>
@@ -10641,7 +10702,7 @@
     <string name="operator_warning">Carrier data accounting may differ from device accounting</string>
 
     <!-- A summary shown on data usage screens to indicate data tracking excluded from carrier networks [CHAR LIMIT=NONE] -->
-    <string name="non_carrier_data_usage_warning">Excludes data that is used by carrier networks</string>
+    <string name="non_carrier_data_usage_warning">Excludes data used by carrier networks</string>
 
     <!-- Format string describing how much data has been used [CHAR LIMIT=20] -->
     <string name="data_used_template"><xliff:g name="amount" example="1 GB">%1$s</xliff:g> used</string>
@@ -12226,6 +12287,8 @@
     <!--  Strings for SIM push notifications  -->
     <!-- Category name of the notifications related to SIM setup. [CHAR LIMIT=NONE] -->
     <string name="sim_setup_channel_id">Network activation</string>
+    <!-- Title on a push notification indicating that the user's device is in the middle of switching between mobile networks. [CHAR LIMIT=NONE] -->
+    <string name="sim_switch_channel_id">Carrier switching</string>
     <!--  The title of post DSDS reboot notification. The title includes carrier's name. [CHAR LIMIT=NONE] -->
     <string name="post_dsds_reboot_notification_title_with_carrier"><xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g> is active</string>
     <!--  The body text of post DSDS reboot notification. [CHAR LIMIT=NONE] -->
@@ -12679,17 +12742,19 @@
     <!-- Provider Model: SMS preference title -->
     <string name="sms_preference_title">SMS</string>
     <!-- Provider Model: Preferred status in summary for Calls & SMS -->
-    <string name="calls_sms_preferred">Preferred for calls &amp; SMS</string>
+    <string name="calls_sms_preferred">preferred</string>
     <!-- Provider Model: Calls Preferred status in summary for Calls & SMS -->
-    <string name="calls_sms_calls_preferred">Preferred for calls</string>
+    <string name="calls_sms_calls_preferred">preferred for calls</string>
     <!-- Provider Model: SMS Preferred status in summary for Calls & SMS -->
-    <string name="calls_sms_sms_preferred">Preferred for SMS</string>
+    <string name="calls_sms_sms_preferred">preferred for SMS</string>
     <!-- Provider Model: Unavailable status in summary for Calls & SMS -->
-    <string name="calls_sms_unavailable">Temporarily unavailable</string>
+    <string name="calls_sms_unavailable">unavailable</string>
+    <!-- Provider Model: Temporarily unavailable status in summary for Calls & SMS -->
+    <string name="calls_sms_temp_unavailable">Temporarily unavailable</string>
     <!-- Provider Model: No SIM status in summary for Calls & SMS -->
     <string name="calls_sms_no_sim">No SIM</string>
     <!-- Network & internet preferences title [CHAR LIMIT=NONE] -->
-    <string name="network_and_internet_preferences_title">Preferences</string>
+    <string name="network_and_internet_preferences_title">Network preferences</string>
     <!-- Network & internet preferences summary [CHAR LIMIT=NONE] -->
     <string name="network_and_internet_preferences_summary">Connect to public networks</string>
     <!-- Search keywords for "Internet" settings [CHAR_LIMIT=NONE] -->
@@ -12716,8 +12781,6 @@
     <string name="airplane_mode_network_available">Airplane mode networks available</string>
     <!-- Summary for warning to disconnect ethernet first then switch to other networks. [CHAR LIMIT=60] -->
     <string name="to_switch_networks_disconnect_ethernet">To switch networks, disconnect ethernet</string>
-    <!-- Summary for cannot switch networks to Wi-Fi nor mobile data networks while connected to an ethernet network. [CHAR LIMIT=60] -->
-    <string name="cannot_switch_networks_while_connected">Cannot switch networks while connected</string>
     <!-- Title for airplane mode network panel. [CHAR LIMIT=60] -->
     <string name="airplane_mode_network_panel_title">Airplane mode networks</string>
 
@@ -12830,4 +12893,7 @@
     <string name="smart_forwarding_missing_mdn_text">Phone number is missing.</string>
     <!-- Alert Dialog text when user didn't input the phone number [CHAR LIMIT=50]-->
     <string name="smart_forwarding_missing_alert_dialog_text">OK</string>
+
+    <!-- Enable 2G: Title for if user wants to enable 2G [CHAR LIMIT=40] -->
+    <string name="enable_2g_title">Allow 2G</string>
 </resources>

@@ -17,7 +17,6 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -28,7 +27,6 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.display.DarkUIPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -42,15 +40,10 @@ public class TextAndDisplayFragment extends DashboardFragment {
 
     // Preferences
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN = "daltonizer_preference";
-    private static final String TOGGLE_INVERSION_PREFERENCE = "toggle_inversion_preference";
-    private static final String DISPLAY_REDUCE_BRIGHT_COLORS_PREFERENCE_SCREEN =
-            "reduce_bright_colors_preference";
     private static final String TOGGLE_DISABLE_ANIMATIONS = "toggle_disable_animations";
     private static final String TOGGLE_LARGE_POINTER_ICON = "toggle_large_pointer_icon";
 
     private Preference mDisplayDaltonizerPreferenceScreen;
-    private Preference mToggleInversionPreference;
-    private Preference mReduceBrightColorsPreference;
     private SwitchPreference mToggleDisableAnimationsPreference;
     private SwitchPreference mToggleLargePointerIconPreference;
 
@@ -68,12 +61,6 @@ public class TextAndDisplayFragment extends DashboardFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        use(DarkUIPreferenceController.class).setParentFragment(this);
-    }
-
-    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.accessibility_text_and_display;
     }
@@ -86,13 +73,6 @@ public class TextAndDisplayFragment extends DashboardFragment {
     private void initializeAllPreferences() {
         // Display color adjustments.
         mDisplayDaltonizerPreferenceScreen = findPreference(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
-
-        // Display inversion.
-        mToggleInversionPreference = findPreference(TOGGLE_INVERSION_PREFERENCE);
-
-        // Reduce brightness.
-        mReduceBrightColorsPreference =
-                findPreference(DISPLAY_REDUCE_BRIGHT_COLORS_PREFERENCE_SCREEN);
 
         // Disable animation.
         mToggleDisableAnimationsPreference = findPreference(TOGGLE_DISABLE_ANIMATIONS);
@@ -110,22 +90,14 @@ public class TextAndDisplayFragment extends DashboardFragment {
         if (ColorDisplayManager.isColorTransformAccelerated(getContext())) {
             mDisplayDaltonizerPreferenceScreen.setSummary(AccessibilityUtil.getSummary(
                     getContext(), Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED));
-            mToggleInversionPreference.setSummary(AccessibilityUtil.getSummary(
-                    getContext(), Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED));
-            mReduceBrightColorsPreference.setSummary(AccessibilityUtil.getSummary(
-                    getContext(), Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED));
             getPreferenceScreen().removePreference(experimentalCategory);
         } else {
             // Move following preferences to experimental category if device don't supports HWC
             // hardware-accelerated color transform.
             getPreferenceScreen().removePreference(mDisplayDaltonizerPreferenceScreen);
-            getPreferenceScreen().removePreference(mToggleInversionPreference);
-            getPreferenceScreen().removePreference(mReduceBrightColorsPreference);
             getPreferenceScreen().removePreference(mToggleDisableAnimationsPreference);
             getPreferenceScreen().removePreference(mToggleLargePointerIconPreference);
             experimentalCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
-            experimentalCategory.addPreference(mToggleInversionPreference);
-            experimentalCategory.addPreference(mReduceBrightColorsPreference);
             experimentalCategory.addPreference(mToggleDisableAnimationsPreference);
             experimentalCategory.addPreference(mToggleLargePointerIconPreference);
         }
