@@ -23,6 +23,7 @@ import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -39,6 +40,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.Before;
@@ -77,6 +79,7 @@ public class ScreenTimeoutSettingsTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest();
         mContext = spy(getApplicationContext());
         mSettings = spy(new ScreenTimeoutSettings());
         mContentResolver = mContext.getContentResolver();
@@ -138,6 +141,7 @@ public class ScreenTimeoutSettingsTest {
     public void updateCandidates_enforcedAdmin_showDisabledByAdminPreference() {
         mSettings.mAdmin = new RestrictedLockUtils.EnforcedAdmin();
         mSettings.mDisableOptionsPreference = mDisableOptionsPreference;
+        doNothing().when(mSettings).setupDisabledFooterPreference();
 
         mSettings.updateCandidates();
 

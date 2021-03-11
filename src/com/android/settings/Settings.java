@@ -98,6 +98,7 @@ public class Settings extends SettingsActivity {
     public static class DisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySuggestionActivity extends NightDisplaySettingsActivity { /* empty */ }
+    public static class SmartAutoRotateSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MyDeviceInfoActivity extends SettingsActivity { /* empty */ }
     public static class ModuleLicensesActivity extends SettingsActivity { /* empty */ }
     public static class ApplicationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -124,7 +125,30 @@ public class Settings extends SettingsActivity {
     public static class ScanningSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrivacyDashboardActivity extends SettingsActivity { /* empty */ }
     public static class PrivacySettingsActivity extends SettingsActivity { /* empty */ }
-    public static class FactoryResetActivity extends SettingsActivity { /* empty */ }
+    public static class FactoryResetActivity extends SettingsActivity {
+        @Override
+        protected void onCreate(Bundle savedState) {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            super.onCreate(savedState);
+        }
+
+        @Override
+        protected boolean isToolbarEnabled() {
+            return false;
+        }
+    }
+    public static class FactoryResetConfirmActivity extends SettingsActivity {
+        @Override
+        protected void onCreate(Bundle savedState) {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            super.onCreate(savedState);
+        }
+
+        @Override
+        protected boolean isToolbarEnabled() {
+            return false;
+        }
+    }
     public static class RunningServicesActivity extends SettingsActivity { /* empty */ }
     public static class BatterySaverSettingsActivity extends SettingsActivity { /* empty */ }
     public static class BatterySaverScheduleSettingsActivity extends SettingsActivity { /* empty */ }
@@ -205,6 +229,10 @@ public class Settings extends SettingsActivity {
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeletionHelperActivity extends SettingsActivity { /* empty */ }
 
+    /** Actviity to manage apps with {@link android.Manifest.permission#SCHEDULE_EXACT_ALARM} */
+    public static class AlarmsAndRemindersActivity extends SettingsActivity {/* empty */ }
+    /** App specific version of {@link AlarmsAndRemindersActivity} */
+    public static class AlarmsAndRemindersAppActivity extends SettingsActivity {/* empty */ }
 
     public static class ApnEditorActivity extends SettingsActivity { /* empty */ }
     public static class ChooseAccountActivity extends SettingsActivity { /* empty */ }

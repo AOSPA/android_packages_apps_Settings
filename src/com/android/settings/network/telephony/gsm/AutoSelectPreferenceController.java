@@ -86,7 +86,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         mUiHandler = new Handler(Looper.getMainLooper());
         mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
                 new HandlerExecutor(mUiHandler));
-        mAllowedNetworkTypesListener.setAllowedNetworkTypesChangedListener(
+        mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
                 () -> updatePreference());
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
     }
