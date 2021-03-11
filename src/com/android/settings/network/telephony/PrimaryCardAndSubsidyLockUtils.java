@@ -34,6 +34,8 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import org.codeaurora.internal.IExtTelephony;
@@ -53,6 +55,10 @@ public final class PrimaryCardAndSubsidyLockUtils {
     private static final String PROPERTY_DETECT_4G_CARD = "persist.vendor.radio.detect4gcard";
     private static final String PROPERTY_L_W_ENABLED    = "persist.vendor.radio.lw_enabled";
     private static final String PROPERTY_SUBSIDY_LOCK   = "ro.vendor.radio.subsidylock";
+
+    // Modem version prefix tag
+    private static final String MODEM_VERSION_PREFIX_HI_TAG = "MPSS.HI."; // Himalaya
+    private static final String MODEM_VERSION_PREFIX_DE_TAG = "MPSS.DE."; // Denali
 
     // Settings database configurations
     public static final String CONFIG_CURRENT_PRIMARY_SUB = "config_current_primary_sub";
@@ -132,5 +138,49 @@ public final class PrimaryCardAndSubsidyLockUtils {
             Log.e(TAG, "getUiccCardProvisioningStatus: " + phoneId + ", Exception: ", ex);
         }
         return provStatus;
+    }
+
+    /*
+     * As many products come from different modem version, it is hard to maintain one
+     * carrier config along with vendor product SKU. But MPSS version code is stable
+     * very much, it is a good way rather than config's approach.
+     */
+    public static boolean isDual5gSupported(TelephonyManager telephonyManager) {
+        if (telephonyManager == null) {
+            Log.e(TAG, "telephonyManager is null");
+            return false;
+        }
+        final String version = telephonyManager.getBasebandVersion();
+        Log.d(TAG, "Base band version = " + version);
+        if (!TextUtils.isEmpty(version)) {
+            String[] tokens = version.split("-");
+            if (tokens != null) {
+                for (String token : tokens) {
+                    if (token != null && token.startsWith(MODEM_VERSION_PREFIX_HI_TAG)) {
+                        String verCode =
+                                token.substring(MODEM_VERSION_PREFIX_HI_TAG.length(),
+                                token.length());
+                        Log.d(TAG, "verCode = " + verCode);
+                        if (verCode != null && verCode.length() > 2) {
+                            String[] subCode = verCode.split("\\.");
+                            try {
+                                int major = Integer.parseInt(subCode[0]);
+                                int minor = Integer.parseInt(subCode[1]);
+                                Log.d(TAG, "Ver major = " + major + " minor = " + minor);
+                                if (major >= 4 && minor >= 3) {
+                                    return true;
+                                }
+                            } catch (NumberFormatException e) {
+                                Log.e(TAG, "Fail to parse version");
+                                return false;
+                            }
+                        }
+                    } else if (token != null && token.startsWith(MODEM_VERSION_PREFIX_DE_TAG)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
