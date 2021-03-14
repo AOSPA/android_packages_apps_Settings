@@ -337,7 +337,6 @@ public class SettingsGateway {
             // Home page > Network & Internet
             Settings.WifiSettingsActivity.class.getName(),
             Settings.DataUsageSummaryActivity.class.getName(),
-            Settings.SimSettingsActivity.class.getName(),
             Settings.NetworkProviderSettingsActivity.class.getName(),
             // Home page > Connected devices
             Settings.BluetoothSettingsActivity.class.getName(),

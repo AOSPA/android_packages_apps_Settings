@@ -2915,28 +2915,6 @@
             android:exported="false"/>
 
         <activity
-            android:name="Settings$SimSettingsActivity"
-            android:exported="true"
-            android:label="@string/sim_settings_title"
-            android:icon="@drawable/ic_settings_sim"
-            android:parentActivityName="Settings">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.order" android:value="-2"/>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.wireless" />
-            <meta-data android:name="com.android.settings.summary"
-                android:resource="@string/summary_empty"/>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.sim.SimSettings" />
-        </activity>
-
-        <activity
             android:name=".wifi.RequestToggleWiFiActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert"
             android:excludeFromRecents="true"

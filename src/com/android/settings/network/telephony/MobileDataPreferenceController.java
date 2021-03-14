@@ -31,7 +31,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -167,9 +166,10 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
         final int defaultSubId = mSubscriptionManager.getDefaultDataSubscriptionId();
         boolean needToDisableOthers = mSubscriptionManager
                 .isActiveSubscriptionId(defaultSubId) && defaultSubId != mSubId;
-        if (Utils.isSimSettingsApkAvailable()) {
-            // If vendor SimSettings app is present on the device, then DDS will be controlled
-            // by that app, and there is no need to disable mobile data for other subscriptions.
+        if (mContext.getResources().getBoolean(
+                 com.android.internal.R.bool.config_voice_data_sms_auto_fallback)) {
+            // Mobile data of both subscriptions can be enabled
+            // simultaneously. DDS setting will be controlled by the config.
             needToDisableOthers = false;
         }
         if (enableData && isMultiSim && needToDisableOthers) {
