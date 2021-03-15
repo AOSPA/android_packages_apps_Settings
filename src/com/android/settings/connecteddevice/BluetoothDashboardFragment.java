@@ -19,6 +19,11 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 
+import android.os.SystemProperties;
+import android.util.Log;
+import android.view.View;
+import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController;
@@ -28,8 +33,13 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.MainSwitchBarController;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Dedicated screen for allowing the user to toggle bluetooth which displays relevant information to
@@ -40,6 +50,12 @@ public class BluetoothDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "BluetoothDashboardFrag";
     private static final String KEY_BLUETOOTH_SCREEN_FOOTER = "bluetooth_screen_footer";
+    private static final String BLUETOOTH_ADV_AUDIO_MASK_PROP
+                                                  = "persist.vendor.service.bt.adv_audio_mask";
+    private static final String BLUETOOTH_BROADCAST_UI_PROP = "persist.bluetooth.broadcast_ui";
+    private static final int BROADCAST_MASK = 0x04;
+    private static boolean mBroadcastEnabled = false;
+    private static boolean mBroadcastPropertyChecked = false;
 
     private FooterPreference mFooterPreference;
     private SettingsMainSwitchBar mSwitchBar;
@@ -75,6 +91,59 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         use(BluetoothDeviceRenamePreferenceController.class).setFragment(this);
+    }
+
+    @Override
+    protected void displayResourceTilesToScreen(PreferenceScreen screen) {
+        if (mBroadcastEnabled == false) {
+           screen.removePreference(screen.findPreference("bluetooth_screen_broadcast_enable"));
+           screen.removePreference(
+               screen.findPreference("bluetooth_screen_broadcast_pin_configure"));
+        }
+        super.displayResourceTilesToScreen(screen);
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
+        if (mBroadcastPropertyChecked == false) {
+            int advAudioMask = SystemProperties.getInt(BLUETOOTH_ADV_AUDIO_MASK_PROP, 0);
+            mBroadcastEnabled = (((advAudioMask & BROADCAST_MASK) == BROADCAST_MASK) &&
+                SystemProperties.getBoolean(BLUETOOTH_BROADCAST_UI_PROP, false));
+            mBroadcastPropertyChecked = true;
+        }
+
+        if (mBroadcastEnabled == false) {
+            return controllers;
+        }
+
+        Log.d (TAG, "createPreferenceControllers for Broadcast");
+
+        try {
+            Class<?> classBroadcastPinController =
+                Class.forName("com.android.settings.bluetooth.BluetoothBroadcastPinController");
+            Class<?> classBroadcastEnableController =
+                Class.forName("com.android.settings.bluetooth.BluetoothBroadcastEnableController");
+            Constructor ctorPin, ctorEnable;
+            ctorPin = classBroadcastPinController
+                          .getDeclaredConstructor(new Class[] {Context.class});
+            ctorEnable = classBroadcastEnableController
+                .getDeclaredConstructor(new Class[] {Context.class, String.class});
+            Object objBroadcastPinController = ctorPin.newInstance(context);
+            Object objBroadcastEnableController = ctorEnable
+                .newInstance(context, new String("bluetooth_screen_broadcast_enable"));
+            objBroadcastPinController.getClass().getMethod("setFragment", Fragment.class)
+                .invoke(objBroadcastPinController, (Fragment) this);
+            controllers.add((AbstractPreferenceController) objBroadcastPinController);
+            controllers.add((AbstractPreferenceController) objBroadcastEnableController);
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException |
+                 InvocationTargetException | InstantiationException | IllegalArgumentException |
+                 ExceptionInInitializerError e) {
+            mBroadcastEnabled = false;
+            e.printStackTrace();
+        } finally {
+            return controllers;
+        }
     }
 
     @Override

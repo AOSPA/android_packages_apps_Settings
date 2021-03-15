@@ -19,6 +19,7 @@ package com.android.settings.sim.receivers;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Looper;
 import android.provider.Settings;
@@ -29,6 +30,13 @@ import android.telephony.UiccSlotInfo;
 import android.util.Log;
 
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.UiccSlotUtil;
+import com.android.settings.network.UiccSlotsException;
+import com.android.settings.sim.ChooseSimActivity;
+import com.android.settings.sim.DsdsDialogActivity;
+import com.android.settings.sim.SimActivationNotifier;
+import com.android.settings.sim.SimNotificationService;
+import com.android.settings.sim.SwitchToEsimConfirmDialogActivity;
 
 import com.google.common.collect.ImmutableList;
 
@@ -42,7 +50,13 @@ public class SimSlotChangeHandler {
     private static final String TAG = "SimSlotChangeHandler";
 
     private static final String EUICC_PREFS = "euicc_prefs";
+    // Shared preference keys
     private static final String KEY_REMOVABLE_SLOT_STATE = "removable_slot_state";
+    private static final String KEY_SUW_PSIM_ACTION = "suw_psim_action";
+    // User's last removable SIM insertion / removal action during SUW.
+    private static final int LAST_USER_ACTION_IN_SUW_NONE = 0;
+    private static final int LAST_USER_ACTION_IN_SUW_INSERT = 1;
+    private static final int LAST_USER_ACTION_IN_SUW_REMOVE = 2;
 
     private static volatile SimSlotChangeHandler sSlotChangeHandler;
 
@@ -99,6 +113,47 @@ public class SimSlotChangeHandler {
         Log.i(TAG, "Do nothing on slot status changes.");
     }
 
+    void onSuwFinish(Context context) {
+        init(context);
+
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            throw new IllegalStateException("Cannot be called from main thread.");
+        }
+
+        if (mTelMgr.getActiveModemCount() > 1) {
+            Log.i(TAG, "The device is already in DSDS mode. Do nothing.");
+            return;
+        }
+
+        UiccSlotInfo removableSlotInfo = getRemovableUiccSlotInfo();
+        if (removableSlotInfo == null) {
+            Log.e(TAG, "Unable to find the removable slot. Do nothing.");
+            return;
+        }
+
+        boolean embeddedSimExist = getGroupedEmbeddedSubscriptions().size() != 0;
+        int removableSlotAction = getSuwRemovableSlotAction(mContext);
+        setSuwRemovableSlotAction(mContext, LAST_USER_ACTION_IN_SUW_NONE);
+
+        if (embeddedSimExist
+                && removableSlotInfo.getCardStateInfo() == UiccSlotInfo.CARD_STATE_INFO_PRESENT) {
+            if (mTelMgr.isMultiSimSupported() == TelephonyManager.MULTISIM_ALLOWED) {
+                Log.i(TAG, "DSDS condition satisfied. Show notification.");
+                SimNotificationService.scheduleSimNotification(
+                        mContext, SimActivationNotifier.NotificationType.ENABLE_DSDS);
+            } else if (removableSlotAction == LAST_USER_ACTION_IN_SUW_INSERT) {
+                Log.i(
+                        TAG,
+                        "Both removable SIM and eSIM are present. DSDS condition doesn't"
+                            + " satisfied. User inserted pSIM during SUW. Show choose SIM"
+                            + " screen.");
+                startChooseSimActivity(true);
+            }
+        } else if (removableSlotAction == LAST_USER_ACTION_IN_SUW_REMOVE) {
+            handleSimRemove(removableSlotInfo);
+        }
+    }
+
     private void init(Context context) {
         mSubMgr =
                 (SubscriptionManager)
@@ -108,11 +163,11 @@ public class SimSlotChangeHandler {
     }
 
     private void handleSimInsert(UiccSlotInfo removableSlotInfo) {
-        Log.i(TAG, "Detect SIM inserted.");
+        Log.i(TAG, "Handle SIM inserted.");
 
         if (!isSuwFinished(mContext)) {
-            // TODO(b/170508680): Store the action and handle it after SUW is finished.
             Log.i(TAG, "Still in SUW. Handle SIM insertion after SUW is finished");
+            setSuwRemovableSlotAction(mContext, LAST_USER_ACTION_IN_SUW_INSERT);
             return;
         }
 
@@ -121,14 +176,13 @@ public class SimSlotChangeHandler {
             return;
         }
 
-        if (!hasActiveEsimSubscription()) {
-            if (mTelMgr.isMultiSimEnabled()) {
+        if (hasActiveEsimSubscription()) {
+            if (mTelMgr.isMultiSimSupported() == TelephonyManager.MULTISIM_ALLOWED) {
                 Log.i(TAG, "Enabled profile exists. DSDS condition satisfied.");
-                // TODO(b/170508680): Display DSDS dialog to ask users whether to enable DSDS.
+                startDsdsDialogActivity();
             } else {
                 Log.i(TAG, "Enabled profile exists. DSDS condition not satisfied.");
-                // TODO(b/170508680): Display Choose a number to use screen for subscription
-                //  selection.
+                startChooseSimActivity(true);
             }
             return;
         }
@@ -137,15 +191,23 @@ public class SimSlotChangeHandler {
                 TAG,
                 "No enabled eSIM profile. Ready to switch to removable slot and show"
                         + " notification.");
-        // TODO(b/170508680): Switch the slot to the removebale slot and show the notification.
+        try {
+            UiccSlotUtil.switchToRemovableSlot(
+                    UiccSlotUtil.INVALID_PHYSICAL_SLOT_ID, mContext.getApplicationContext());
+        } catch (UiccSlotsException e) {
+            Log.e(TAG, "Failed to switch to removable slot.");
+            return;
+        }
+        SimNotificationService.scheduleSimNotification(
+                mContext, SimActivationNotifier.NotificationType.SWITCH_TO_REMOVABLE_SLOT);
     }
 
     private void handleSimRemove(UiccSlotInfo removableSlotInfo) {
-        Log.i(TAG, "Detect SIM removed.");
+        Log.i(TAG, "Handle SIM removed.");
 
         if (!isSuwFinished(mContext)) {
-            // TODO(b/170508680): Store the action and handle it after SUW is finished.
             Log.i(TAG, "Still in SUW. Handle SIM removal after SUW is finished");
+            setSuwRemovableSlotAction(mContext, LAST_USER_ACTION_IN_SUW_REMOVE);
             return;
         }
 
@@ -160,14 +222,14 @@ public class SimSlotChangeHandler {
         // profile.
         if (groupedEmbeddedSubscriptions.size() == 1) {
             Log.i(TAG, "Only 1 eSIM profile found. Ask user's consent to switch.");
-            // TODO(b/170508680): Display a dialog to ask users to switch.
+            startSwitchSlotConfirmDialogActivity(groupedEmbeddedSubscriptions.get(0));
             return;
         }
 
         // If there are more than 1 eSIM profiles installed, we show a screen to let users to choose
         // the number they want to use.
         Log.i(TAG, "Multiple eSIM profiles found. Ask user which subscription to use.");
-        // TODO(b/170508680): Display a dialog to ask user which SIM to switch.
+        startChooseSimActivity(false);
     }
 
     private int getLastRemovableSimSlotState(Context context) {
@@ -178,6 +240,16 @@ public class SimSlotChangeHandler {
     private void setRemovableSimSlotState(Context context, int state) {
         final SharedPreferences prefs = context.getSharedPreferences(EUICC_PREFS, MODE_PRIVATE);
         prefs.edit().putInt(KEY_REMOVABLE_SLOT_STATE, state).apply();
+    }
+
+    private int getSuwRemovableSlotAction(Context context) {
+        final SharedPreferences prefs = context.getSharedPreferences(EUICC_PREFS, MODE_PRIVATE);
+        return prefs.getInt(KEY_SUW_PSIM_ACTION, LAST_USER_ACTION_IN_SUW_NONE);
+    }
+
+    private void setSuwRemovableSlotAction(Context context, int action) {
+        final SharedPreferences prefs = context.getSharedPreferences(EUICC_PREFS, MODE_PRIVATE);
+        prefs.edit().putInt(KEY_SUW_PSIM_ACTION, action).apply();
     }
 
     @Nullable
@@ -223,6 +295,26 @@ public class SimSlotChangeHandler {
                 groupedSubscriptions.stream()
                         .filter(sub -> sub.isEmbedded())
                         .collect(Collectors.toList()));
+    }
+
+    private void startChooseSimActivity(boolean psimInserted) {
+        Intent intent = ChooseSimActivity.getIntent(mContext);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(ChooseSimActivity.KEY_HAS_PSIM, psimInserted);
+        mContext.startActivity(intent);
+    }
+
+    private void startSwitchSlotConfirmDialogActivity(SubscriptionInfo subscriptionInfo) {
+        Intent intent = new Intent(mContext, SwitchToEsimConfirmDialogActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(SwitchToEsimConfirmDialogActivity.KEY_SUB_TO_ENABLE, subscriptionInfo);
+        mContext.startActivity(intent);
+    }
+
+    private void startDsdsDialogActivity() {
+        Intent intent = new Intent(mContext, DsdsDialogActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
     }
 
     private SimSlotChangeHandler() {}

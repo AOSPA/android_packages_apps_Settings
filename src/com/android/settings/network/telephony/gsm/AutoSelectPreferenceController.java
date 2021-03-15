@@ -24,6 +24,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerExecutor;
 import android.os.Looper;
 import android.os.PersistableBundle;
 import android.os.SystemClock;
@@ -43,7 +44,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.network.PreferredNetworkModeContentObserver;
+import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.network.telephony.Enhanced4gBasePreferenceController;
 import com.android.settings.network.telephony.MobileNetworkUtils;
@@ -67,7 +68,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
     private final Handler mUiHandler;
     private PreferenceScreen mPreferenceScreen;
-    private PreferredNetworkModeContentObserver mPreferredNetworkModeObserver;
+    private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
     private TelephonyManager mTelephonyManager;
     private boolean mOnlyAutoSelectInHome;
     private List<OnNetworkSelectModeListener> mListeners;
@@ -83,8 +84,9 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mListeners = new ArrayList<>();
         mUiHandler = new Handler(Looper.getMainLooper());
-        mPreferredNetworkModeObserver = new PreferredNetworkModeContentObserver(mUiHandler);
-        mPreferredNetworkModeObserver.setPreferredNetworkModeChangedListener(
+        mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
+                new HandlerExecutor(mUiHandler));
+        mAllowedNetworkTypesListener.setAllowedNetworkTypesChangedListener(
                 () -> updatePreference());
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
     }
@@ -105,13 +107,13 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
-        mPreferredNetworkModeObserver.register(mContext, mSubId);
+        mAllowedNetworkTypesListener.register(mContext, mSubId);
         mSubscriptionsListener.start();
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
-        mPreferredNetworkModeObserver.unregister(mContext);
+        mAllowedNetworkTypesListener.unregister(mContext, mSubId);
         mSubscriptionsListener.stop();
     }
 

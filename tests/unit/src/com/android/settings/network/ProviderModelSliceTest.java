@@ -16,8 +16,6 @@
 
 package com.android.settings.network;
 
-import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -25,6 +23,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -132,7 +131,8 @@ public class ProviderModelSliceTest {
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         mMockNetworkProviderWorker = spy(new MockNetworkProviderWorker(mContext,
                 PROVIDER_MODEL_SLICE_URI));
-        mMockProviderModelSlice = new MockProviderModelSlice(mContext, mMockNetworkProviderWorker);
+        mMockProviderModelSlice = spy(new MockProviderModelSlice(
+                mContext, mMockNetworkProviderWorker));
         mListBuilder = spy(new ListBuilder(mContext, PROVIDER_MODEL_SLICE_URI,
                 ListBuilder.INFINITY).setAccentColor(-1));
         when(mProviderModelSliceHelper.createListBuilder(PROVIDER_MODEL_SLICE_URI)).thenReturn(
@@ -263,6 +263,30 @@ public class ProviderModelSliceTest {
     }
 
     @Test
+    @UiThreadTest
+    public void getSlice_connectedEthernet_getOneEthernetAndOneCarrierAndTwoWiFi() {
+        mWifiList.clear();
+        mockWifiItemCondition(mMockWifiSliceItem1, "wifi1", "wifi1",
+                WifiEntry.CONNECTED_STATE_DISCONNECTED, "wifi1_key", true);
+        mWifiList.add(mMockWifiSliceItem1);
+        mockWifiItemCondition(mMockWifiSliceItem2, "wifi2", "wifi2",
+                WifiEntry.CONNECTED_STATE_DISCONNECTED, "wifi2_key", true);
+        mWifiList.add(mMockWifiSliceItem2);
+        mMockNetworkProviderWorker.updateSelfResults(mWifiList);
+        when(mProviderModelSliceHelper.isAirplaneModeEnabled()).thenReturn(false);
+        when(mProviderModelSliceHelper.hasCarrier()).thenReturn(true);
+        when(mProviderModelSliceHelper.isDataSimActive()).thenReturn(true);
+        when(mMockNetworkProviderWorker.isEthernetConnected()).thenReturn(true);
+
+        final Slice slice = mMockProviderModelSlice.getSlice();
+
+        assertThat(slice).isNotNull();
+        assertThat(mMockProviderModelSlice.hasCreateEthernetRow()).isTrue();
+        verify(mListBuilder, times(1)).addRow(mMockCarrierRowBuild);
+        verify(mListBuilder, times(4)).addRow(any(ListBuilder.RowBuilder.class));
+    }
+
+    @Test
     public void providerModelSlice_hasCorrectUri() {
         assertThat(mMockProviderModelSlice.getUri()).isEqualTo(PROVIDER_MODEL_SLICE_URI);
     }
@@ -333,6 +357,7 @@ public class ProviderModelSliceTest {
 
     public class MockProviderModelSlice extends ProviderModelSlice {
         private MockNetworkProviderWorker mNetworkProviderWorker;
+        private boolean mHasCreateEthernetRow;
 
         MockProviderModelSlice(Context context, MockNetworkProviderWorker networkProviderWorker) {
             super(context);
@@ -348,35 +373,47 @@ public class ProviderModelSliceTest {
         NetworkProviderWorker getWorker() {
             return mNetworkProviderWorker;
         }
+
+        @Override
+        ListBuilder.RowBuilder createEthernetRow() {
+            mHasCreateEthernetRow = true;
+            return super.createEthernetRow();
+        }
+
+        public boolean hasCreateEthernetRow() {
+            return mHasCreateEthernetRow;
+        }
     }
 
     @Test
-    public void onNotifyChange_intentToggleActionOn_shouldSetCarrierNetworkEnabledTrue() {
-        Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
-        intent.putExtra(EXTRA_TOGGLE_STATE, true);
-
-        mMockProviderModelSlice.onNotifyChange(intent);
+    public void doCarrierNetworkAction_toggleActionSetDataEnabled_setCarrierNetworkEnabledTrue() {
+        mMockProviderModelSlice.doCarrierNetworkAction(true /* isToggleAction */,
+                true /* isDataEnabled */);
 
         verify(mMockNetworkProviderWorker).setCarrierNetworkEnabled(true);
     }
 
     @Test
-    public void onNotifyChange_intentToggleActionOff_shouldSetCarrierNetworkEnabledFalse() {
-        Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
-        intent.putExtra(EXTRA_TOGGLE_STATE, false);
-
-        mMockProviderModelSlice.onNotifyChange(intent);
+    public void doCarrierNetworkAction_toggleActionSetDataDisabled_setCarrierNetworkEnabledFalse() {
+        mMockProviderModelSlice.doCarrierNetworkAction(true /* isToggleAction */,
+                false /* isDataEnabled */);
 
         verify(mMockNetworkProviderWorker).setCarrierNetworkEnabled(false);
     }
 
     @Test
-    public void onNotifyChange_intentPrimaryAction_shouldConnectCarrierNetwork() {
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
-        Intent intent = mMockProviderModelSlice.getBroadcastIntent(mContext).getIntent();
-
-        mMockProviderModelSlice.onNotifyChange(intent);
+    public void doCarrierNetworkAction_primaryActionAndDataEnabled_connectCarrierNetwork() {
+        mMockProviderModelSlice.doCarrierNetworkAction(false /* isToggleAction */,
+                true /* isDataEnabled */);
 
         verify(mMockNetworkProviderWorker).connectCarrierNetwork();
+    }
+
+    @Test
+    public void doCarrierNetworkAction_primaryActionAndDataDisabled_notConnectCarrierNetwork() {
+        mMockProviderModelSlice.doCarrierNetworkAction(false /* isToggleAction */,
+                false /* isDataEnabled */);
+
+        verify(mMockNetworkProviderWorker, never()).connectCarrierNetwork();
     }
 }

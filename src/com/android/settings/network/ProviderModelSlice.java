@@ -24,8 +24,8 @@ import static com.android.settings.slices.CustomSliceRegistry.PROVIDER_MODEL_SLI
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
 
@@ -35,6 +35,7 @@ import androidx.slice.builders.ListBuilder;
 
 import com.android.settings.R;
 import com.android.settings.SubSettings;
+import com.android.settings.Utils;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.NetworkProviderWorker;
 import com.android.settings.slices.CustomSliceable;
@@ -85,9 +86,6 @@ public class ProviderModelSlice extends WifiSlice {
         final ListBuilder listBuilder = mHelper.createListBuilder(getUri());
         if (mHelper.isAirplaneModeEnabled() && !mWifiManager.isWifiEnabled()) {
             log("Airplane mode is enabled.");
-            listBuilder.setHeader(mHelper.createHeader(Settings.ACTION_AIRPLANE_MODE_SETTINGS));
-            listBuilder.addGridRow(mHelper.createMessageGridRow(R.string.condition_airplane_title,
-                    Settings.ACTION_AIRPLANE_MODE_SETTINGS));
             return listBuilder.build();
         }
 
@@ -105,12 +103,18 @@ public class ProviderModelSlice extends WifiSlice {
         final boolean hasCarrier = mHelper.hasCarrier();
         log("hasCarrier: " + hasCarrier);
 
-        // First section:  Add a Wi-Fi item which state is connected.
-        final WifiSliceItem connectedWifiItem = mHelper.getConnectedWifiItem(wifiList);
-        if (connectedWifiItem != null) {
-            log("get Wi-Fi item witch is connected");
-            listBuilder.addRow(getWifiSliceItemRow(connectedWifiItem));
+        // First section:  Add a Ethernet or Wi-Fi item which state is connected.
+        if (isEthernetConnected()) {
+            log("get Ethernet item which is connected");
+            listBuilder.addRow(createEthernetRow());
             maxListSize--;
+        } else {
+            final WifiSliceItem connectedWifiItem = mHelper.getConnectedWifiItem(wifiList);
+            if (connectedWifiItem != null) {
+                log("get Wi-Fi item which is connected");
+                listBuilder.addRow(getWifiSliceItemRow(connectedWifiItem));
+                maxListSize--;
+            }
         }
 
         // Second section:  Add a carrier item.
@@ -123,8 +127,9 @@ public class ProviderModelSlice extends WifiSlice {
         }
 
         // Third section:  Add the Wi-Fi items which are not connected.
-        if (wifiList != null) {
-            log("get Wi-Fi items which are not connected");
+        if (wifiList != null && wifiList.size() > 0) {
+            log("get Wi-Fi items which are not connected. Wi-Fi items : " + wifiList.size());
+
             final List<WifiSliceItem> disconnectedWifiList = wifiList.stream()
                     .filter(wifiSliceItem -> wifiSliceItem.getConnectedState()
                             != WifiEntry.CONNECTED_STATE_CONNECTED)
@@ -141,8 +146,8 @@ public class ProviderModelSlice extends WifiSlice {
         // 2) show all_network_unavailable:
         //    - while no wifi item + no carrier
         //    - while no wifi item + no data capability
-        if (worker == null || wifiList == null) {
-            log("wifiList is null");
+        if (worker == null || wifiList == null || wifiList.size() == 0) {
+            log("no wifi item");
             int resId = R.string.non_carrier_network_unavailable;
             if (!hasCarrier || !mHelper.isDataSimActive()) {
                 log("No carrier item or no carrier data.");
@@ -173,8 +178,9 @@ public class ProviderModelSlice extends WifiSlice {
         }
         final int defaultSubId = subscriptionManager.getDefaultDataSubscriptionId();
         log("defaultSubId:" + defaultSubId);
-        if (!SubscriptionManager.isUsableSubscriptionId(defaultSubId)) {
-            return; // No subscription - do nothing.
+
+        if (!defaultSubscriptionIsUsable(defaultSubId)) {
+            return;
         }
 
         boolean isToggleAction = intent.hasExtra(EXTRA_TOGGLE_STATE);
@@ -185,10 +191,14 @@ public class ProviderModelSlice extends WifiSlice {
             MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId, newState,
                     false /* disableOtherSubscriptions */);
         }
-        doCarrierNetworkAction(isToggleAction, newState);
+
+        final boolean isDataEnabled =
+                isToggleAction ? newState : MobileNetworkUtils.isMobileDataEnabled(mContext);
+        doCarrierNetworkAction(isToggleAction, isDataEnabled);
     }
 
-    private void doCarrierNetworkAction(boolean isToggleAction, boolean isDataEnabled) {
+    @VisibleForTesting
+    void doCarrierNetworkAction(boolean isToggleAction, boolean isDataEnabled) {
         final NetworkProviderWorker worker = getWorker();
         if (worker == null) {
             return;
@@ -199,7 +209,7 @@ public class ProviderModelSlice extends WifiSlice {
             return;
         }
 
-        if (MobileNetworkUtils.isMobileDataEnabled(mContext)) {
+        if (isDataEnabled) {
             worker.connectCarrierNetwork();
         }
     }
@@ -227,5 +237,34 @@ public class ProviderModelSlice extends WifiSlice {
     @VisibleForTesting
     NetworkProviderWorker getWorker() {
         return SliceBackgroundWorker.getInstance(getUri());
+    }
+
+    private boolean isEthernetConnected() {
+        final NetworkProviderWorker worker = getWorker();
+        if (worker == null) {
+            return false;
+        }
+        return worker.isEthernetConnected();
+    }
+
+    @VisibleForTesting
+    ListBuilder.RowBuilder createEthernetRow() {
+        final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder();
+        final Drawable drawable = mContext.getDrawable(R.drawable.ic_settings_ethernet);
+        if (drawable != null) {
+            drawable.setTintList(Utils.getColorAttr(mContext, android.R.attr.colorAccent));
+            rowBuilder.setTitleItem(Utils.createIconWithDrawable(drawable), ListBuilder.ICON_IMAGE);
+        }
+        return rowBuilder
+                .setTitle(mContext.getText(R.string.ethernet))
+                .setSubtitle(mContext.getText(R.string.cannot_switch_networks_while_connected));
+    }
+
+    /**
+     * Wrap the subscriptionManager call for test mocking.
+     */
+    @VisibleForTesting
+    protected boolean defaultSubscriptionIsUsable(int defaultSubId) {
+        return SubscriptionManager.isUsableSubscriptionId(defaultSubId);
     }
 }

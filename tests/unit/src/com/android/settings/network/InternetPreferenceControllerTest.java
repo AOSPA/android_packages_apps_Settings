@@ -16,6 +16,8 @@
 
 package com.android.settings.network;
 
+import static com.android.settings.network.InternetUpdater.INTERNET_WIFI;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -34,54 +36,57 @@ import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
+import android.telephony.SubscriptionManager;
 
+import androidx.lifecycle.Lifecycle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 @RunWith(AndroidJUnit4.class)
 public class InternetPreferenceControllerTest {
 
     private static final String TEST_SUMMARY = "test summary";
 
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Mock
+    private ConnectivityManager mConnectivityManager;
+
     private Context mContext;
     private InternetPreferenceController mController;
     private PreferenceScreen mScreen;
     private Preference mPreference;
 
-    @Mock
-    private ConnectivityManager mConnectivityManager;
-
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         when(mContext.getSystemService(NetworkScoreManager.class))
-            .thenReturn(mock(NetworkScoreManager.class));
+                .thenReturn(mock(NetworkScoreManager.class));
         final WifiManager wifiManager = mock(WifiManager.class);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(wifiManager);
         when(wifiManager.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
 
-        mController = new InternetPreferenceController(mContext);
+        mController = new InternetPreferenceController(mContext, mock(Lifecycle.class));
+        mController.sIconMap.put(INTERNET_WIFI, 0);
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
         mScreen = preferenceManager.createPreferenceScreen(mContext);
         mPreference = new Preference(mContext);
-        mPreference.setKey(InternetPreferenceController.KEY_INTERNET_SETTINGS);
+        mPreference.setKey(InternetPreferenceController.KEY);
         mScreen.addPreference(mPreference);
     }
 
@@ -113,10 +118,20 @@ public class InternetPreferenceControllerTest {
 
     @Test
     public void onSummaryChanged_shouldUpdatePreferenceSummary() {
+        mController.onInternetTypeChanged(INTERNET_WIFI);
         mController.displayPreference(mScreen);
 
         mController.onSummaryChanged(TEST_SUMMARY);
 
         assertThat(mPreference.getSummary()).isEqualTo(TEST_SUMMARY);
+    }
+
+    @Test
+    public void updateCellularSummary_getNullSubscriptionInfo_shouldNotCrash() {
+        final SubscriptionManager subscriptionManager = mock(SubscriptionManager.class);
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(subscriptionManager);
+        when(subscriptionManager.getDefaultDataSubscriptionInfo()).thenReturn(null);
+
+        mController.updateCellularSummary();
     }
 }

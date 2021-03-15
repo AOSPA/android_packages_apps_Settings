@@ -177,10 +177,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                     showRebootConfirmDialog();
                     return;
                 }
-                Log.i(
-                        TAG,
-                        "Enabling DSDS without rebooting. "
-                                + getString(R.string.sim_action_enabling_sim_without_carrier_name));
+                Log.i(TAG, "Enabling DSDS without rebooting.");
                 showProgressDialog(
                         getString(R.string.sim_action_enabling_sim_without_carrier_name));
                 mEnableMultiSimSidecar.run(NUM_OF_SIMS_FOR_DSDS);
@@ -201,7 +198,8 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                     showProgressDialog(
                             getString(
                                     R.string.sim_action_switch_sub_dialog_progress,
-                                    mSubInfo.getDisplayName()));
+                                    SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                                            mSubInfo, this)));
                     mSwitchToEuiccSubscriptionSidecar.run(mSubInfo.getSubscriptionId());
                     return;
                 }
@@ -271,7 +269,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
             case SidecarFragment.State.ERROR:
                 mEnableMultiSimSidecar.reset();
                 Log.i(TAG, "Failed to switch to DSDS without rebooting.");
-                ProgressDialogFragment.dismiss(getFragmentManager());
+                dismissProgressDialog();
                 showErrorDialog(
                         getString(R.string.dsds_activation_failure_title),
                         getString(R.string.dsds_activation_failure_body_msg2));
@@ -289,7 +287,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
 
         Log.i(TAG, "DSDS enabled, start to enable pSIM profile.");
         handleTogglePsimAction();
-        ProgressDialogFragment.dismiss(getFragmentManager());
+        dismissProgressDialog();
         finish();
     }
 
@@ -345,13 +343,14 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
 
     /* Displays the SIM toggling confirmation dialog. */
     private void showDisableSimConfirmDialog() {
+        final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                mSubInfo, this);
         String title =
-                mSubInfo == null || TextUtils.isEmpty(mSubInfo.getDisplayName())
+                mSubInfo == null || TextUtils.isEmpty(displayName)
                         ? getString(
                                 R.string.privileged_action_disable_sub_dialog_title_without_carrier)
                         : getString(
-                                R.string.privileged_action_disable_sub_dialog_title,
-                                mSubInfo.getDisplayName());
+                                R.string.privileged_action_disable_sub_dialog_title, displayName);
 
         ConfirmDialogFragment.show(
                 this,
@@ -402,40 +401,48 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     private String getSwitchDialogPosBtnText() {
         return mIsEsimOperation
                 ? getString(
-                        R.string.sim_action_switch_sub_dialog_confirm, mSubInfo.getDisplayName())
+                        R.string.sim_action_switch_sub_dialog_confirm,
+                        SubscriptionUtil.getUniqueSubscriptionDisplayName(mSubInfo, this))
                 : getString(R.string.sim_switch_button);
     }
 
     private String getEnableSubscriptionTitle() {
-        if (mSubInfo == null || TextUtils.isEmpty(mSubInfo.getDisplayName())) {
+        final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                mSubInfo, this);
+        if (mSubInfo == null || TextUtils.isEmpty(displayName)) {
             return getString(R.string.sim_action_enable_sub_dialog_title_without_carrier_name);
         }
-        return getString(R.string.sim_action_enable_sub_dialog_title, mSubInfo.getDisplayName());
+        return getString(R.string.sim_action_enable_sub_dialog_title, displayName);
     }
 
     private String getSwitchSubscriptionTitle() {
         if (mIsEsimOperation) {
             return getString(
-                    R.string.sim_action_switch_sub_dialog_title, mSubInfo.getDisplayName());
+                    R.string.sim_action_switch_sub_dialog_title,
+                    SubscriptionUtil.getUniqueSubscriptionDisplayName(mSubInfo, this));
         }
         return getString(R.string.sim_action_switch_psim_dialog_title);
     }
 
     private String getSwitchDialogBodyMsg(SubscriptionInfo activeSub, boolean betweenEsim) {
+        final CharSequence subInfoName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                mSubInfo, this);
+        final CharSequence activeSubName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                activeSub, this);
         if (betweenEsim && mIsEsimOperation) {
             return getString(
                     R.string.sim_action_switch_sub_dialog_text_downloaded,
-                    mSubInfo.getDisplayName(),
-                    activeSub.getDisplayName());
+                    subInfoName,
+                    activeSubName);
         } else if (mIsEsimOperation) {
             return getString(
                     R.string.sim_action_switch_sub_dialog_text,
-                    mSubInfo.getDisplayName(),
-                    activeSub.getDisplayName());
+                    subInfoName,
+                    activeSubName);
         } else {
             return getString(
                     R.string.sim_action_switch_sub_dialog_text_single_sim,
-                    activeSub.getDisplayName());
+                    activeSubName);
         }
     }
 

@@ -27,7 +27,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toolbar;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -43,20 +42,15 @@ import com.android.settings.overlay.FeatureFactory;
 public class SettingsHomepageActivity extends FragmentActivity {
 
     private static final String TAG = "SettingsHomepageActivity";
-    private int mSearchBoxHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.settings_homepage_container);
-        final View root = findViewById(R.id.settings_homepage_container);
-        root.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
 
         final View appBar = findViewById(R.id.app_bar_container);
         appBar.setMinimumHeight(getSearchBoxHeight());
-        setDefaultHomepageContainerPaddingTop();
+        initHomepageContainer();
 
         final Toolbar toolbar = findViewById(R.id.search_action_bar);
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
@@ -89,8 +83,6 @@ public class SettingsHomepageActivity extends FragmentActivity {
 
         try {
             showFragment(fragment.newInstance(), R.id.contextual_suggestion_content);
-            setHomepageContainerTopOffset(getResources()
-                    .getDimensionPixelSize(R.dimen.suggestion_height));
         } catch (IllegalAccessException | InstantiationException e) {
             Log.w(TAG, "Cannot show fragment", e);
         }
@@ -109,33 +101,19 @@ public class SettingsHomepageActivity extends FragmentActivity {
         fragmentTransaction.commit();
     }
 
-    @VisibleForTesting
-    void setHomepageContainerTopOffset(int offset) {
+    private void initHomepageContainer() {
         final View view = findViewById(R.id.homepage_container);
-        final int paddingTop = getSearchBoxHeight() + offset;
-        view.setPadding(0 /* left */, paddingTop, 0 /* right */, 0 /* bottom */);
-
         // Prevent inner RecyclerView gets focus and invokes scrolling.
         view.setFocusableInTouchMode(true);
         view.requestFocus();
     }
 
-    @VisibleForTesting
-    void setDefaultHomepageContainerPaddingTop() {
-        setHomepageContainerTopOffset(0);
-    }
-
-    @VisibleForTesting
-    int getSearchBoxHeight() {
-        if (mSearchBoxHeight != 0) {
-            return mSearchBoxHeight;
-        }
-
+    private int getSearchBoxHeight() {
         final int searchBarHeight = getResources().getDimensionPixelSize(R.dimen.search_bar_height);
-        final int searchBarMargin = getResources().getDimensionPixelSize(R.dimen.search_bar_margin);
-
-        // The height of search box is the height of search bar(48dp) + top/bottom margins(24dp)
-        mSearchBoxHeight = searchBarHeight + searchBarMargin * 2;
-        return mSearchBoxHeight;
+        final int searchBarMarginTop = getResources().getDimensionPixelSize(
+                R.dimen.search_bar_margin);
+        final int searchBarMarginBottom = getResources().getDimensionPixelSize(
+                R.dimen.search_bar_margin_bottom);
+        return searchBarHeight + searchBarMarginTop + searchBarMarginBottom;
     }
 }
