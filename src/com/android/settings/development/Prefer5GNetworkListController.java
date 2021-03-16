@@ -242,6 +242,9 @@ public class Prefer5GNetworkListController extends AbstractPreferenceController 
 
                 mPreferences.put(subId, pref);
                 mPreferenceList.add(pref);
+            } else {
+                Log.d(TAG, "sub info is null, add null preference for slot: " + slotId);
+                mPreferenceList.add(slotId, null);
             }
         }
         for (Preference pref : existingPreferences.values()) {
