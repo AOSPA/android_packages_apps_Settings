@@ -60,21 +60,26 @@ import com.android.settings.network.telephony.MobileNetworkUtils;
 /**
  * Preference controller for "Enabled 5G Switch"
 */
-
 public class Enabled5GPreferenceController extends TelephonyTogglePreferenceController
          implements LifecycleObserver, OnStart, OnStop {
     private static final String TAG = "Enable5g";
 
     Preference mPreference;
     private PhoneCallStateListener mPhoneStateListener;
-    private CarrierConfigManager mCarrierConfigManager;
-    private PersistableBundle mCarrierConfig;
     private TelephonyManager mTelephonyManager;
     @VisibleForTesting
     Integer mCallState;
 
     private ContentObserver mPreferredNetworkModeObserver;
     private ContentObserver mSubsidySettingsObserver;
+    /*
+     * Indicates whether this SUB has NR capability or not.
+     */
+    private boolean mIsNrRadioSupported = false;
+    /*
+     * Indicates whether NR can be registered on both SUBs at the same time.
+     */
+    private boolean mIsDualNrSupported = false;
 
     private final BroadcastReceiver mDefaultDataChangedReceiver = new BroadcastReceiver() {
         @Override
@@ -96,7 +101,6 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
                 }
             }
         };
-        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
     }
 
     public Enabled5GPreferenceController init(int subId) {
@@ -108,27 +112,33 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
             return this;
         }
         mSubId = subId;
-        mCarrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
             .createForSubscriptionId(mSubId);
+        mIsNrRadioSupported =
+                checkSupportedRadioBitmask(mTelephonyManager.getSupportedRadioAccessFamily(),
+                TelephonyManager.NETWORK_TYPE_BITMASK_NR);
+        mIsDualNrSupported =
+                PrimaryCardAndSubsidyLockUtils.isDual5gSupported(mTelephonyManager);
         return this;
     }
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        init(subId);
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final PersistableBundle carrierConfig = getCarrierConfigForSubId(subId);
         if (carrierConfig == null || mTelephonyManager == null) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         int defaultDdsSubId = SubscriptionManager.getDefaultDataSubscriptionId();
-        final boolean isDds = defaultDdsSubId == subId;
-        final boolean is5gEnabledByCarrier = (mTelephonyManager.getAllowedNetworkTypes()
-                & TelephonyManager.NETWORK_TYPE_BITMASK_NR) > 0;
+        final boolean isSingleNrSupportedOnly =
+                !mIsDualNrSupported && (defaultDdsSubId == subId);
+        final boolean isNrAllowed =
+                checkSupportedRadioBitmask(mTelephonyManager.getAllowedNetworkTypes(),
+                TelephonyManager.NETWORK_TYPE_BITMASK_NR);
         final boolean isVisible = SubscriptionManager.isValidSubscriptionId(subId)
-            && !carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENABLED_5G_BOOL)
-            && is5gEnabledByCarrier
-            && isDds;
+                && !carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENABLED_5G_BOOL)
+                && mIsNrRadioSupported
+                && isNrAllowed
+                && (mIsDualNrSupported || isSingleNrSupportedOnly);
         return isVisible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
@@ -194,9 +204,6 @@ public class Enabled5GPreferenceController extends TelephonyTogglePreferenceCont
             newNetworkBitMask = MobileNetworkUtils
                 .getRafFromNetworkType(TelephonyManager.NETWORK_MODE_LTE_ONLY);
         }
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                MobileNetworkUtils.getNetworkTypeFromRaf((int)newNetworkBitMask));
         if (mTelephonyManager.setPreferredNetworkTypeBitmask(newNetworkBitMask)) {
             Log.d(TAG, "setPreferredNetworkTypeBitmask");
             return true;
