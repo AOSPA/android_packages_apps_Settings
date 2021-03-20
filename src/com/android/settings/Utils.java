@@ -896,17 +896,6 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Return whether or not the user should have a SIM Cards option in Settings.
-     */
-    public static boolean showSimCardTile(Context context) {
-        boolean isPrimaryCardEnabled = SystemProperties.getBoolean(
-                "persist.vendor.radio.primarycard", false);
-        final TelephonyManager tm =
-                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        return isPrimaryCardEnabled && (tm.getSimCount() > 1);
-    }
-
-    /**
      * Tries to initalize a volume with the given bundle. If it is a valid, private, and readable
      * {@link VolumeInfo}, it is returned. If it is not valid, null is returned.
      */
@@ -1114,24 +1103,6 @@ public final class Utils extends com.android.settingslib.Utils {
         }
         return true;
      }
-
-    /**
-     * Checks whether SimSettings apk exists on the device. If yes, returns true, else
-     * returns false.
-     */
-    public static boolean isSimSettingsApkAvailable() {
-        IExtTelephony extTelephony =
-                IExtTelephony.Stub.asInterface(ServiceManager.getService("qti.radio.extphone"));
-        try {
-            if (extTelephony != null &&
-                    extTelephony.isVendorApkAvailable("com.qualcomm.qti.simsettings")) {
-                return true;
-            }
-        } catch (RemoteException e) {
-            Log.e(TAG, "Got exception in isSimSettingsApkAvailable.", e);
-        }
-        return false;
-    }
 
     /**
      * check whether NetworkSetting apk exist in system, if yes, return true, else
