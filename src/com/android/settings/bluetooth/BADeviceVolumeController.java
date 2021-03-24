@@ -44,6 +44,12 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.bluetooth.HeadsetProfile;
+import android.bluetooth.BluetoothHeadset;
+import java.lang.Class;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  * Class for preference controller that handles BADeviceVolumePreference
@@ -59,6 +65,8 @@ public class BADeviceVolumeController extends
     public static final String BLUETOOTH_VCP_FOR_BROADCAST_PROP =
             "persist.vendor.service.bt.vcpForBroadcast";
     private static final String KEY_BA_DEVICE_VOLUME = "ba_device_volume";
+    private static final String VCACHED_DEVICE_CLASS =
+            "com.android.settingslib.bluetooth.VendorCachedBluetoothDevice";
 
     protected BADeviceVolumePreference mPreference;
     private CachedBluetoothDevice mCachedDevice;
@@ -66,6 +74,9 @@ public class BADeviceVolumeController extends
     private LocalBluetoothManager mLocalBluetoothManager;
     private VcpProfile mVcpProfile = null;
     private boolean mIsVcpForBroadcastSupported = false;
+    private HeadsetProfile mHeadsetProfile;
+    private Class<?> mVCachedDeviceClass = null;
+    private Object mVendorCachedDevice = null;
     @VisibleForTesting
     AudioManager mAudioManager;
 
@@ -133,11 +144,28 @@ public class BADeviceVolumeController extends
     public void init(DashboardFragment fragment, LocalBluetoothManager manager,
             CachedBluetoothDevice device) {
         Log.d(TAG, "Init");
-        mCachedDevice = device;
-        mLocalBluetoothManager = manager;
-        mProfileManager = mLocalBluetoothManager.getProfileManager();
-        mVcpProfile = mProfileManager.getVcpProfile();
-        mAudioManager = mContext.getSystemService(AudioManager.class);
+        if (mIsVcpForBroadcastSupported) {
+            mCachedDevice = device;
+            mLocalBluetoothManager = manager;
+            mProfileManager = mLocalBluetoothManager.getProfileManager();
+            mVcpProfile = mProfileManager.getVcpProfile();
+            mAudioManager = mContext.getSystemService(AudioManager.class);
+
+            try {
+                mVCachedDeviceClass = Class.forName(VCACHED_DEVICE_CLASS);
+                Class[] arg = new Class[2];
+                arg[0] = CachedBluetoothDevice.class;
+                arg[1] = LocalBluetoothProfileManager.class;
+                Method getVendorCachedBluetoothDevice = mVCachedDeviceClass.getDeclaredMethod(
+                                        "getVendorCachedBluetoothDevice", arg);
+                mVendorCachedDevice = (Object)getVendorCachedBluetoothDevice.invoke(
+                                        null, mCachedDevice, mProfileManager);
+            } catch (ClassNotFoundException | NoSuchMethodException
+                     | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            mHeadsetProfile = mProfileManager.getHeadsetProfile();
+        }
     }
 
     protected void refresh() {
@@ -146,12 +174,22 @@ public class BADeviceVolumeController extends
             Log.d(TAG, "VCP for broadcast is not supported");
             return;
         }
-
+        boolean showSlider = enableSlider();
         BluetoothDevice device = mCachedDevice.getDevice();
+        int audioState = mHeadsetProfile.getAudioState(device);
+        boolean inCall = (audioState == BluetoothHeadset.STATE_AUDIO_CONNECTING ||
+                          audioState == BluetoothHeadset.STATE_AUDIO_CONNECTED);
+        Log.d(TAG,"VCP refresh showSlider: " + showSlider + " inCall: " + inCall);
         if ((mVcpProfile.getConnectionStatus(device) == BluetoothProfile.STATE_CONNECTED) &&
                 ((mVcpProfile.getConnectionMode(device) & BluetoothVcp.MODE_BROADCAST) != 0)) {
              Log.d(TAG, "VCP is connected for broadcast ");
              mPreference.setVisible(true);
+             if (!showSlider || inCall) {
+                 mPreference.setProgress(0);
+                 mPreference.setEnabled(false);
+                 return;
+             }
+             mPreference.setEnabled(true);
              int position = mVcpProfile.getAbsoluteVolume(device);
 
              if (position != -1) {
@@ -215,6 +253,25 @@ public class BADeviceVolumeController extends
             return mAudioManager.getStreamMinVolume(AudioManager.STREAM_MUSIC);
         }
         return 0;
+    }
+    private boolean enableSlider() {
+        if (mVCachedDeviceClass == null || mVendorCachedDevice == null) {
+            Log.d(TAG,"enableSlider: false");
+            return false;
+        }
+
+        try {
+            Method isBroadcastAudioSynced =
+                    mVCachedDeviceClass.getDeclaredMethod("isBroadcastAudioSynced");
+            Boolean ret = (Boolean)isBroadcastAudioSynced.invoke(mVendorCachedDevice);
+            Log.d(TAG,"enableSlider: " + ret);
+            return ret;
+        } catch(IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            Log.i(TAG, "Exception" + e);
+        }
+
+        Log.d(TAG,"enableSlider: false");
+        return false;
     }
 }
 
